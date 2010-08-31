@@ -1,0 +1,2 @@
+= Social Stream
+Social Stream is a plugin for Ruby on Rails. It provides your application with support of social networking features and activity streams.
