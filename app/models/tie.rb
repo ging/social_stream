@@ -57,7 +57,7 @@ class Tie < ActiveRecord::Base
   end
 
   # Ties between sender and receiver with a relation weaker or equal to this
-  def weaker_set
+  def weak_set
     relation_set(relation.weaker_or_equal)
   end
 
@@ -72,14 +72,14 @@ class Tie < ActiveRecord::Base
                      :relation_id => relations)
   end
 
-  after_create :complete_weaker_set
+  after_create :complete_weak_set
 
   def permissions(user, action, object)
     self.class.sender_permissions(user, action, object).
       where(permissions_tie.
-            or(permissions_weaker_set).
+            or(permissions_weak_set).
             or(permissions_group_set).
-            or(permissions_weaker_group_set))
+            or(permissions_weak_group_set))
   end
 
   def permission?(user, action, object)
@@ -93,11 +93,11 @@ class Tie < ActiveRecord::Base
       Permission.arel_table[:parameter].eq('tie'))
   end
 
-  def permissions_weaker_set
+  def permissions_weak_set
     self.class.arel_table[:sender_id].eq(sender_id).and(
       self.class.arel_table[:receiver_id].eq(receiver_id)).and(
       self.class.arel_table[:relation_id].in(relation.stronger_or_equal)).and(
-      Permission.arel_table[:parameter].eq('weaker_set'))
+      Permission.arel_table[:parameter].eq('weak_set'))
   end
 
   def permissions_group_set
@@ -106,15 +106,15 @@ class Tie < ActiveRecord::Base
       Permission.arel_table[:parameter].eq('group_set'))
   end
 
-  def permissions_weaker_group_set
+  def permissions_weak_group_set
     self.class.arel_table[:receiver_id].eq(receiver_id).and(
       self.class.arel_table[:relation_id].in(relation.stronger_or_equal)).and(
-      Permission.arel_table[:parameter].eq('weaker_group_set'))
+      Permission.arel_table[:parameter].eq('weak_group_set'))
   end
 
   private
 
-  def complete_weaker_set
+  def complete_weak_set
     relation.weaker.each do |r|
       if relation_set(r).blank?
         relation_set.create! :relation => r

@@ -18,6 +18,8 @@ module ActiveRecord
       before_update :create_update_activity
 
       validates_presence_of :_activity_tie
+
+      ::ActivityObject.subtype(self)
     end
 
     module InstanceMethods

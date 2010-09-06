@@ -11,6 +11,8 @@ module ActiveRecord
 
       delegate :name, :name=, :email, :email=, :ties,
                :to => :actor!
+
+      ::Actor.subtype(self)
     end
 
     module InstanceMethods
