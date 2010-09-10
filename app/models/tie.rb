@@ -45,7 +45,7 @@ class Tie < ActiveRecord::Base
     when :nil
       set
     when String
-      set.where(:relation_id => relation.class[r])
+      set.where(:relation_id => relation.class[relation.mode, r])
     else
       set.where(:relation_id => r)
     end

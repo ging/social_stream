@@ -1,0 +1,9 @@
+Description:
+    Initial migration and configuration
+
+Example:
+    rails generate social_stream:install
+
+    This will create:
+        config/initializers/social_stream.rb
+        db/migrate/social_stream.rb migration
