@@ -9,14 +9,13 @@ class Relation < ActiveRecord::Base
 
   has_ancestry
 
-  # FIXME: This model can be preloaded before table exists. ancestry bug?
-  if table_exists?
-    scope :strongest, roots.first
-  end
-
   class << self
     def [] mode, name
       find_by_mode_and_name mode, name
+    end
+
+    def strongest
+      roots.first
     end
   end
 
