@@ -7,7 +7,7 @@ require 'rspec/core'
 require 'rspec/core/rake_task'
 
 Rspec::Core::RakeTask.new(:spec) do |t|
-  t.spec_opts = ["--color"]
+  t.rspec_opts = ["--color"]
 end
 
 task :default => :spec
