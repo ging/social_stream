@@ -1,3 +1,4 @@
+# An actor is a social entity. This includes individuals, but also groups, departments, organizations even nations or states. Actors are linked by ties.
 class Actor < ActiveRecord::Base
   include ActiveRecord::Supertype
 

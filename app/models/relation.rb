@@ -1,3 +1,8 @@
+# A Relation defines a type of Tie. Relations are affective (friendship, liking, 
+# respect), formal or biological (authority, kinship), transfer of material 
+# resources (transactions, lending and borrowing), messages or conversations, 
+# physical connection and affiliation to same organizations.
+#
 class Relation < ActiveRecord::Base
   has_many :relation_permissions
   has_many :permissions, :through => :relation_permissions

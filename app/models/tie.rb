@@ -1,3 +1,15 @@
+# A link between two actors in a relation.
+#
+# The first Actor is the sender of the Tie. The second Actor is the receiver of the Tie.
+#
+# == Ties and Activities
+# Activities are attached to ties. 
+# * The sender actor is the author of the Activity. It is the user that uploads 
+#   a resource to the website or the social entity that originates the activity.
+# * The receiver is the target of the Activity. The wall-profile of an actor is
+#   composed by the resources assigned to the ties in which the actor is the receiver.
+# * The Relation sets up the mode in which the Activity is shared. It sets the rules,
+#    or permissions, by which actors have access to the Activity.
 class Tie < ActiveRecord::Base
   validates_presence_of :sender_id, :receiver_id, :relation_id
 
@@ -11,21 +23,13 @@ class Tie < ActiveRecord::Base
 
   has_many :activities
 
-  scope :sender, lambda { |a|
-    actor = ( a.is_a?(Actor) ?
-              a :
-              a.actor )
-    where(:sender_id => actor.id)
+  scope :sent_by, lambda { |a|
+    where(:sender_id => Actor(a))
   }
 
-  scope :receiver, lambda { |a|
-    actor = ( a.is_a?(Actor) ?
-              a :
-              a.actor )
-    where(:receiver_id => actor.id)
+  scope :received_by, lambda { |a|
+    where(:receiver_id => Actor(a))
   }
-
-  scope :with_permissions, includes(:relation => :permissions)
 
   def sender_subject
     sender.try(:subject)
@@ -56,60 +60,65 @@ class Tie < ActiveRecord::Base
     relation_set(r).first
   end
 
-  # Ties between sender and receiver with a relation weaker or equal to this
-  def weak_set
-    relation_set(relation.weaker_or_equal)
-  end
-
-  # Ties between sender and receiver with a relation stronger or equal to this
-  def stronger_set
-    relation_set(relation.stronger_or_equal)
-  end
-
-  # Ties with the same receiver
-  def group_set(relations = relation)
-    self.class.where(:receiver_id => receiver_id,
-                     :relation_id => relations)
-  end
-
   after_create :complete_weak_set
 
+  # Access Control
+
+  scope :with_permissions, lambda { |action, object|
+    includes(:relation => :permissions).
+      where('permissions.action' => action).
+      where('permissions.object' => object)
+  }
+
+  scope :parameterized, lambda { |tie|
+    where(tie_conditions(tie).
+          or(weak_set_conditions(tie)).
+          or(group_set_conditions(tie)).
+          or(weak_group_set_conditions(tie)))
+  }
+
+  scope :access_set, lambda { |tie, action, object|
+    with_permissions(action, object).
+      parameterized(tie)
+  }
+
+
   def permissions(user, action, object)
-    self.class.sender_permissions(user, action, object).
-      where(permissions_tie.
-            or(permissions_weak_set).
-            or(permissions_group_set).
-            or(permissions_weak_group_set))
+    self.class.
+      sent_by(user).
+      access_set(self, action, object)
   end
 
   def permission?(user, action, object)
     permissions(user, action, object).any?
   end
 
-  def permissions_tie
-    self.class.arel_table[:sender_id].eq(sender_id).and(
-      self.class.arel_table[:receiver_id].eq(receiver_id)).and(
-      self.class.arel_table[:relation_id].eq(relation_id)).and(
-      Permission.arel_table[:parameter].eq('tie'))
-  end
+  class << self
+    def tie_conditions(t)
+      arel_table[:sender_id].eq(t.sender_id).and(
+        arel_table[:receiver_id].eq(t.receiver_id)).and(
+        arel_table[:relation_id].eq(t.relation_id)).and(
+        Permission.arel_table[:parameter].eq('tie'))
+    end
 
-  def permissions_weak_set
-    self.class.arel_table[:sender_id].eq(sender_id).and(
-      self.class.arel_table[:receiver_id].eq(receiver_id)).and(
-      self.class.arel_table[:relation_id].in(relation.stronger_or_equal)).and(
-      Permission.arel_table[:parameter].eq('weak_set'))
-  end
+    def weak_set_conditions(t)
+      arel_table[:sender_id].eq(t.sender_id).and(
+        arel_table[:receiver_id].eq(t.receiver_id)).and(
+        arel_table[:relation_id].in(t.relation.stronger_or_equal)).and(
+        Permission.arel_table[:parameter].eq('weak_set'))
+    end
 
-  def permissions_group_set
-    self.class.arel_table[:receiver_id].eq(receiver_id).and(
-      self.class.arel_table[:relation_id].eq(relation_id)).and(
-      Permission.arel_table[:parameter].eq('group_set'))
-  end
+    def group_set_conditions(t)
+      arel_table[:receiver_id].eq(t.receiver_id).and(
+        arel_table[:relation_id].eq(t.relation_id)).and(
+        Permission.arel_table[:parameter].eq('group_set'))
+    end
 
-  def permissions_weak_group_set
-    self.class.arel_table[:receiver_id].eq(receiver_id).and(
-      self.class.arel_table[:relation_id].in(relation.stronger_or_equal)).and(
-      Permission.arel_table[:parameter].eq('weak_group_set'))
+    def weak_group_set_conditions(t)
+      arel_table[:receiver_id].eq(t.receiver_id).and(
+        arel_table[:relation_id].in(t.relation.stronger_or_equal)).and(
+        Permission.arel_table[:parameter].eq('weak_group_set'))
+    end
   end
 
   private
@@ -123,6 +132,10 @@ class Tie < ActiveRecord::Base
   end
 
   class << self
+    def Actor(a)
+      a.is_a?(Actor) ? a : a.actor
+    end
+
     def tie_ids_query(actor)
       c = arel_table
       d = c.alias
@@ -134,15 +147,6 @@ class Tie < ActiveRecord::Base
         project(c[:id]).
         to_sql
       "SELECT ties.id FROM ties INNER JOIN ties ties_2 ON ((ties_2.sender_id = #{ actor.id } AND ties_2.receiver_id = ties.receiver_id) AND (ties_2.relation_id = ties.relation_id OR ties.relation_id = #{ Relation['Public'].id }))"
-
-    end
-
-    # Ties with sender including permissions matching action and object
-    def sender_permissions(sender, action, object)
-      with_permissions.
-        sender(sender).
-        where('permissions.action' => action).
-        where('permissions.object' => object)
     end
   end
 end
