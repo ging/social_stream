@@ -9,7 +9,7 @@ module ActiveRecord
                  :validate => true,
                  :autosave => true
 
-      delegate :name, :name=, :email, :email=, :ties,
+      delegate :name, :name=, :email, :email=, :permalink, :permalink=, :ties, :disabled, :disabled=,
                :to => :actor!
 
       ::Actor.subtype(self)

@@ -70,7 +70,8 @@ class CreateSocialStream < ActiveRecord::Migration
       t.string   "name",       :limit => 45
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.string   "mode"
+      t.string   "sender_type"
+      t.string   "receiver_type"
       t.string   "ancestry"
     end
 

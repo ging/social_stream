@@ -49,7 +49,7 @@ class Tie < ActiveRecord::Base
     when :nil
       set
     when String
-      set.where(:relation_id => relation.class[relation.mode, r])
+      set.where(:relation_id => relation.mode.find_by_name(r))
     else
       set.where(:relation_id => r)
     end
@@ -146,7 +146,7 @@ class Tie < ActiveRecord::Base
         and((c[:relation_id].eq(d[:relation_id]).or(c[:relation_id].eq(0))))).
         project(c[:id]).
         to_sql
-      "SELECT ties.id FROM ties INNER JOIN ties ties_2 ON ((ties_2.sender_id = #{ actor.id } AND ties_2.receiver_id = ties.receiver_id) AND (ties_2.relation_id = ties.relation_id OR ties.relation_id = #{ Relation['Public'].id }))"
+      "SELECT ties.id FROM ties INNER JOIN ties ties_2 ON ((ties_2.sender_id = #{ actor.id } AND ties_2.receiver_id = ties.receiver_id) AND (ties_2.relation_id = ties.relation_id OR ties.relation_id = #{ Relation.mode('User', 'User').find_by_name('Public').id }))"
     end
   end
 end
