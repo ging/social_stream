@@ -14,6 +14,7 @@ class Activity < ActiveRecord::Base
 
   belongs_to :tie,
              :include => [ :sender ]
+
   has_one :author,
           :through => :tie,
           :source => :sender
@@ -38,6 +39,7 @@ class Activity < ActiveRecord::Base
   class << self
     def wall(ties_query)
       select( "DISTINCT activities.*").
+        where("activities.parent_id" => nil).
         where("activities.tie_id IN (#{ ties_query })").
         order("created_at desc")
     end
