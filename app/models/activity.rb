@@ -15,25 +15,40 @@ class Activity < ActiveRecord::Base
   belongs_to :tie,
              :include => [ :sender ]
 
-  has_one :author,
-          :through => :tie,
-          :source => :sender
-  has_one :wall,
-          :through => :tie,
-          :source => :receiver
+  has_one :sender,
+          :through => :tie
+  has_one :receiver,
+          :through => :tie
   has_one :relation,
           :through => :tie
 
+  # The name of the verb of this activity
   def verb
     activity_verb.name
   end
 
+  # Set the name of the verb of this activity
   def verb=(name)
     self.activity_verb = ActivityVerb[name]
   end
 
+  # The comments about this activity
   def comments
     children.includes(:activity_objects).where('activity_objects.object_type' => "Comment")
+  end
+
+  # The 'like' qualifications emmited to this activities
+  def likes
+    children.joins(:activity_verb).where('activity_verbs.name' => "like")
+  end
+
+  def liked_by(user) #:nodoc:
+    likes.includes(:tie) & Tie.sent_by(user)
+  end
+
+  # Does user like this activity?
+  def liked_by?(user)
+    liked_by(user).any?
   end
 
   class << self

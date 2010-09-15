@@ -65,6 +65,21 @@ end
 describe Activity do
   include ActivityTestHelper
 
+  describe "with like subactivity" do
+    before do
+      @like_activity = Factory(:like_activity)
+      @activity = @like_activity.parent
+    end
+
+    it "should recognize the user who likes it" do
+      assert @activity.liked_by?(@like_activity.sender)
+    end
+
+    it "should not recognize the user who does not like it" do
+      assert ! @activity.liked_by?(Factory(:user))
+    end
+  end
+
   describe "belonging to friend tie" do
     before do
       create_activity_assigned_to(Factory(:friend_tie))
