@@ -10,7 +10,7 @@ class Activity < ActiveRecord::Base
            :dependent => :destroy
 
   belongs_to :activity_verb
-  has_many :activity_object_activities
+  has_many :activity_object_activities, :dependent => :destroy
   has_many :activity_objects, :through => :activity_object_activities
 
   belongs_to :tie,
@@ -49,7 +49,7 @@ class Activity < ActiveRecord::Base
 
   # Does user like this activity?
   def liked_by?(user)
-    liked_by(user).any?
+    liked_by(user).present?
   end
 
   class << self
