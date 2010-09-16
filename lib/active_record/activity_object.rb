@@ -8,8 +8,10 @@ module ActiveRecord
       attr_accessor :_activity_tie_id
       attr_accessor :_activity_parent_id
 
-      belongs_to :activity_object
+      belongs_to :activity_object, :dependent => :destroy
       has_many   :activity_object_activities, :through => :activity_object
+
+      delegate :post_activity, :to => :activity_object
 
       alias_method_chain :create_activity_object, :type
       before_create :create_activity_object
