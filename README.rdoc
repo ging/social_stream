@@ -1,2 +1,46 @@
 = Social Stream
-Social Stream is a plugin for Ruby on Rails. It provides your application with support of social networking features and activity streams.
+Social Stream is a plugin for Ruby on Rails. It provides your application with social networking
+features and activity streams.
+
+== Social networking
+Social networks are the new paradigm on web application design. Social networking platforms stand 
+among the most popular websites, while many content oriented applications support social networking
+features in order to improve engagement, enhance user awareness and stimulate communities around
+the website.
+
+SocialStream is based in {Social Network Analysis}[http://en.wikipedia.org/wiki/Social_network] 
+concepts and methods, including social entities (actors), ties and relations. It provides a
+new tie-based access control model.
+
+== Activity Streams
+{Activity Streams}[http://activitystrea.ms/] is a format for syndicating social activities around the web. It has already been adopted by some of the major social networking platforms.
+
+Social stream provides a database schema based on the {Activity Streams specification}[http://activitystrea.ms/head/activity-schema.html], leading your application towards a well-known compatible data model design.
+
+= Installation
+
+SocialStream requires Rails 3. Install it with:
+
+  rails plugin install http://github.com/atd/social_stream.git
+
+And run:
+
+  rails generate social_stream:install
+
+This will generate a migration providing the SocialStream database schema and create a configuration
+file for SocialStream.
+
+== Actors and ActivityObjects
+
+SocialStream relies in other authentication solutions like
+Authlogic[http://github.com/binarylogic/authlogic] or Devise[http://github.com/plataformatec/devise].
+
+You must include an <tt>actor_id</tt> column in the migration. Then add your model to
+<tt>config/initializers/social_stream.rb</tt>
+
+You must do the same with ActivityObjects, like posts, comments or photos. Don't forget to add
+a <tt>activity_object_id</tt> column in the migration and add them to the initializer.
+
+= Discussion
+
+SocialStream is in an early stage of development. Feel free to add an issue or send a message.
