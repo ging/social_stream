@@ -1,4 +1,4 @@
-class SocialStream::InstallGenerator < Rails::Generators::Base
+class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
   include Rails::Generators::Migration
 
   source_root File.expand_path('../templates', __FILE__)

@@ -22,8 +22,7 @@ application towards a well-known compatible data model design.
 
 = Installation
 
-{Social Stream}[http://github.com/atd/social_stream] requires Rails 3. Install it in
-a Rails application with:
+It requires Rails 3. Install it in a Rails application with:
 
   rails plugin install http://github.com/atd/social_stream.git
 
@@ -31,8 +30,8 @@ And run:
 
   rails generate social_stream:install
 
-This will generate a migration providing the Social Stream database schema and create a configuration
-file for SocialStream.
+This will generate a migration providing the database schema and create a configuration
+file for Social Stream.
 
 == Actors and Activity Objects
 
@@ -52,5 +51,5 @@ a <tt>activity_object_id</tt> column in the migration and add them to the initia
 
 = Discussion
 
-{Social Stream}[http://github.com/atd/social_stream] is at an early stage of development.
+It is at an early stage of development.
 Feel free to add an issue or send a message at github[http://github.com/atd/social_stream].
