@@ -1,5 +1,5 @@
 class ActivityObject < ActiveRecord::Base
-  include ActiveRecord::Supertype
+  include SocialStream::Models::Supertype
 
   has_many :activity_object_activities, :dependent => :destroy
   has_many :activities, :through => :activity_object_activities

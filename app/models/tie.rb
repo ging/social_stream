@@ -15,10 +15,10 @@ class Tie < ActiveRecord::Base
 
   belongs_to :sender,
              :class_name => "Actor",
-             :include => [ :user, :space ]
+             :include => SocialStream.actors
   belongs_to :receiver,
              :class_name => "Actor",
-             :include => [ :user, :space ]
+             :include => SocialStream.actors
   belongs_to :relation
 
   has_many :activities
