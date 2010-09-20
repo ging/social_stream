@@ -22,7 +22,15 @@ application towards a well-known compatible data model design.
 
 = Installation
 
-It requires Rails 3. Install it in a Rails application with:
+It requires Rails 3. A gem for strength hierarchies in relations is required. Add to your Gemfile:
+
+  gem 'atd-ancestry', :require => 'ancestry'
+
+and
+
+  bundle update
+
+Then install the plugin with:
 
   rails plugin install http://github.com/atd/social_stream.git
 
