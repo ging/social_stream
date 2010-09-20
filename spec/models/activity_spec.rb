@@ -133,7 +133,7 @@ describe Activity do
   
   describe "belonging to fof tie from a friend" do
     before do
-      create_activity_assigned_to(Factory(:friend_tie).related('FriendOfFriend'))
+      create_activity_assigned_to(Factory(:friend_tie).related('friend_of_friend'))
     end
     
     describe "accessed by a friend" do
@@ -195,7 +195,7 @@ describe Activity do
  
   describe "belonging to public tie" do
     before do
-      create_activity_assigned_to(Factory(:friend_tie).related('Public'))
+      create_activity_assigned_to(Factory(:friend_tie).related('public'))
     end
     
     describe "accessed by a friend" do
@@ -307,7 +307,7 @@ describe Activity do
   
   describe "belonging to user tie from an admin" do
     before do
-      create_activity_assigned_to(Factory(:admin_tie).related('User'))
+      create_activity_assigned_to(Factory(:admin_tie).related('user'))
     end
     
     describe "accessed by a admin" do
@@ -358,7 +358,7 @@ describe Activity do
 
   describe "belonging to follower tie" do
     before do
-      create_activity_assigned_to(Factory(:user_tie).related('Follower'))
+      create_activity_assigned_to(Factory(:user_tie).related('follower'))
     end
     
     describe "accessed by an admin" do

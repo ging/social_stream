@@ -7,6 +7,10 @@ class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
     copy_file 'initializer.rb', 'config/initializers/social_stream.rb'
   end
 
+  def create_config_file
+    copy_file 'seeds.yml', 'db/seeds/social_stream.yml'
+  end
+
   # TODO: hook_for :orm
   require 'rails/generators/active_record'
 

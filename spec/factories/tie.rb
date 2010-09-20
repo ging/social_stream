@@ -7,15 +7,15 @@ end
 # UserToUser ties
 
 Factory.define :friend_tie, :parent => :tie do |t|
-  t.relation { |r| Relation.mode('User', 'User').find_by_name('Friend') }
+  t.relation { |r| Relation.mode('User', 'User').find_by_name('friend') }
 end
 
 Factory.define :fof_tie, :parent => :tie do |t|
-  t.relation { |r| Relation.mode('User', 'User').find_by_name('FriendOfFriend') }
+  t.relation { |r| Relation.mode('User', 'User').find_by_name('friend_of_friend') }
 end
 
 Factory.define :public_tie, :parent => :tie do |t|
-  t.relation { |r| Relation.mode('User', 'User').find_by_name('Public') }
+  t.relation { |r| Relation.mode('User', 'User').find_by_name('public') }
 end
 
 # UserToSpace ties
@@ -25,14 +25,14 @@ Factory.define :u2s_tie, :parent => :tie do |t|
 end
 
 Factory.define :admin_tie, :parent => :u2s_tie do |t|
-  t.relation { |r| Relation.mode('User', 'Space').find_by_name('Admin') }
+  t.relation { |r| Relation.mode('User', 'Space').find_by_name('admin') }
 end
 
 Factory.define :user_tie, :parent => :u2s_tie do |t|
-  t.relation { |r| Relation.mode('User', 'Space').find_by_name('User') }
+  t.relation { |r| Relation.mode('User', 'Space').find_by_name('user') }
 end
 
 Factory.define :follower_tie, :parent => :u2s_tie do |t|
-  t.relation { |r| Relation.mode('User', 'Space').find_by_name('Follower') }
+  t.relation { |r| Relation.mode('User', 'Space').find_by_name('follower') }
 end
 
