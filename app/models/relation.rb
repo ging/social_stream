@@ -3,10 +3,22 @@
 # resources (transactions, lending and borrowing), messages or conversations, 
 # physical connection and affiliation to same organizations.
 #
+# == Strength hierarchies
 # Relations are arranged in strength hierarchies, denoting that some ties between
 # two actors are stronger than others.
+# When a strong tie is established, ties with weaker relations are establised as well
+#
+# == Inverse relations
+# A Relation can have its inverse. When a tie is established, an inverse tie will be
+# established if an inverse relation exists. An example is a relation of friendship,
+# whose inverse relation is itself. When A is friend of B, the inverse tie B is friend of A
+# is establised as well.
+#
 #
 class Relation < ActiveRecord::Base
+  belongs_to  :inverse,
+              :class_name => "Relation"
+
   has_many :relation_permissions
   has_many :permissions, :through => :relation_permissions
 

@@ -74,6 +74,7 @@ class CreateSocialStream < ActiveRecord::Migration
       t.string   "sender_type"
       t.string   "receiver_type"
       t.string   "ancestry"
+      t.integer  "inverse_id"
     end
 
     add_index "relations", ["ancestry"]

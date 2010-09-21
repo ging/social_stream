@@ -3,6 +3,7 @@ relations:
     sender_type: User
     receiver_type: User
     name: friend
+    inverse: user-friend
     permissions:
       - [ create,  resources, weak_set ]
       - [ read,    resources, group_set ]
@@ -13,6 +14,7 @@ relations:
     receiver_type: User
     name: friend_of_friend
     parent: user-friend
+    inverse: user-fof
     permissions:
       - [ read, resources, group_set ]
   user-public:
@@ -20,6 +22,7 @@ relations:
     receiver_type: User
     name: public
     parent: user-fof
+    inverse: user-public
     permissions:
       - [ read, resources, group_set ]
 
