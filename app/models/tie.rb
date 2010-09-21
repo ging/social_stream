@@ -19,6 +19,9 @@ class Tie < ActiveRecord::Base
   attr_accessor :_without_inverse
   attr_protected :_without_inverse
 
+  # Facilitates relation assigment along with find_relation callback
+  attr_accessor :relation_name
+
   validates_presence_of :sender_id, :receiver_id, :relation_id
 
   belongs_to :sender,
@@ -52,6 +55,8 @@ class Tie < ActiveRecord::Base
   def receiver_subject
     receiver.try(:subject)
   end
+
+  before_validation :find_relation
 
   # The set of ties between sender and receiver
   #
@@ -137,6 +142,18 @@ class Tie < ActiveRecord::Base
 
   private
 
+  # Before validation callback
+  # Infers relation from its name and the type of the actors
+  def find_relation
+    if relation_name.present?
+      self.relation = Relation.mode(sender_subject.class.to_s,
+                                    receiver_subject.class.to_s).
+                                    find_by_name(relation_name)
+    end
+  end
+
+  # After create callback
+  # Creates ties with a weaker relations in the strength hierarchy of this tie
   def complete_weak_set
     relation.weaker.each do |r|
       if relation_set(r).blank?
@@ -147,6 +164,8 @@ class Tie < ActiveRecord::Base
     end
   end
 
+  # After create callback
+  # Creates a the inverse of this tie
   def create_inverse
     if !_without_inverse &&
        relation.inverse.present? &&
