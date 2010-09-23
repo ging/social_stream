@@ -1,13 +1,5 @@
 class Activity < ActiveRecord::Base
-
-  belongs_to :parent,
-             :class_name => "Activity",
-             :foreign_key => :parent_id
-
-  has_many :children,
-           :class_name => "Activity",
-           :foreign_key => :parent_id,
-           :dependent => :destroy
+  has_ancestry
 
   belongs_to :activity_verb
   has_many :activity_object_activities, :dependent => :destroy
@@ -55,7 +47,7 @@ class Activity < ActiveRecord::Base
   class << self
     def wall(ties_query)
       select( "DISTINCT activities.*").
-        where("activities.parent_id" => nil).
+        roots.
         where("activities.tie_id IN (#{ ties_query })").
         order("created_at desc")
     end

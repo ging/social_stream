@@ -2,10 +2,10 @@ class CreateSocialStream < ActiveRecord::Migration
   def self.up
     create_table "activities", :force => true do |t|
       t.integer  "activity_verb_id"
+      t.integer  "tie_id"
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.integer  "parent_id"
-      t.integer  "tie_id"
+      t.string   "ancestry"
     end
 
     add_index "activities", ["activity_verb_id"], :name => "fk_activity_verb"
