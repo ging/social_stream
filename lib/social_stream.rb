@@ -1,5 +1,3 @@
-require 'action_controller/subactivity'
-
 module SocialStream
   mattr_accessor :actors
   @@actors = []
