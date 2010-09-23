@@ -22,4 +22,10 @@ class Actor < ActiveRecord::Base
   def ties
     Tie.sent_or_received_by(self)
   end
+
+  # The set of activities in the wall of this actor
+  # TODO: authorization
+  def wall
+    Activity.wall ties
+  end
 end

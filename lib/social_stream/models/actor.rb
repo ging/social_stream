@@ -16,6 +16,7 @@ module SocialStream
                  :permalink, :permalink=,
                  :disabled, :disabled=,
                  :ties, :sent_ties, :received_ties,
+                 :wall,
                  :to => :actor!
       end
 
