@@ -1,4 +1,20 @@
+# Activities follow the {Activity Streams}[http://activitystrea.ms/] standard.
+#
+# == Activities and Ties
+# Every activity is attached to a Tie, which defines the sender, the receiver and
+# the relation in which the activity is transferred
+#
+# == Wall
+# The Activity.wall(ties) scope provides all the activities attached to a set of ties
+#
 class Activity < ActiveRecord::Base
+  scope :wall, lambda { |ties|
+    select("DISTINCT activities.*").
+      roots.
+      where(:tie_id => ties).
+      order("created_at desc")
+  }
+
   has_ancestry
 
   belongs_to :activity_verb
@@ -44,12 +60,4 @@ class Activity < ActiveRecord::Base
     liked_by(user).present?
   end
 
-  class << self
-    def wall(ties_query)
-      select( "DISTINCT activities.*").
-        roots.
-        where("activities.tie_id IN (#{ ties_query })").
-        order("created_at desc")
-    end
-  end
 end

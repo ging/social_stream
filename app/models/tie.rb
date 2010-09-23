@@ -14,6 +14,14 @@
 # == Inverse ties
 # Relations can have its inverse. When a tie is establised, an inverse tie is establised
 # as well.
+#
+# == Scopes
+# There are several scopes defined:
+# * sent_by(actor), ties whose sender is actor
+# * received_by(actor), ties whose receiver is actor
+# * sent_or_received_by(actor), the union of the former
+# * inverse(tie), the inverse of tie
+#
 class Tie < ActiveRecord::Base
   # Avoids loops at create_inverse after save callback
   attr_accessor :_without_inverse
@@ -40,6 +48,12 @@ class Tie < ActiveRecord::Base
 
   scope :received_by, lambda { |a|
     where(:receiver_id => Actor_id(a))
+  }
+
+  scope :sent_or_received_by, lambda { |a|
+    where(arel_table[:sender_id].eq(Actor_id(a)).
+          or(arel_table[:receiver_id].eq(Actor_id(a))))
+
   }
 
   scope :inverse, lambda { |t|
@@ -186,19 +200,6 @@ class Tie < ActiveRecord::Base
       else
         a.actor.id
       end
-    end
-
-    def tie_ids_query(actor)
-      c = arel_table
-      d = c.alias
-
-      c.join(d).
-        on(d[:sender_id].eq(actor.id).
-        and(c[:receiver_id].eq(d[:receiver_id])).
-        and((c[:relation_id].eq(d[:relation_id]).or(c[:relation_id].eq(0))))).
-        project(c[:id]).
-        to_sql
-      "SELECT ties.id FROM ties INNER JOIN ties ties_2 ON ((ties_2.sender_id = #{ actor.id } AND ties_2.receiver_id = ties.receiver_id) AND (ties_2.relation_id = ties.relation_id OR ties.relation_id = #{ Relation.mode('User', 'User').find_by_name('Public').id }))"
     end
   end
 end
