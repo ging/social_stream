@@ -4,6 +4,8 @@ class ActivityVerb < ActiveRecord::Base
 
   validates_uniqueness_of :name
 
+  has_many :activities
+
   class << self
     def [] name
       find_by_name(name)

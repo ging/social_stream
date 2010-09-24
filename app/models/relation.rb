@@ -16,13 +16,14 @@
 #
 #
 class Relation < ActiveRecord::Base
+  has_ancestry
+
   belongs_to  :inverse,
               :class_name => "Relation"
 
-  has_many :relation_permissions
+  has_many :relation_permissions, :dependent => :destroy
   has_many :permissions, :through => :relation_permissions
 
-  has_ancestry
 
   scope :mode, lambda { |st, rt|
     where(:sender_type => st, :receiver_type => rt)

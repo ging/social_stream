@@ -8,18 +8,9 @@
 # The Activity.wall(ties) scope provides all the activities attached to a set of ties
 #
 class Activity < ActiveRecord::Base
-  scope :wall, lambda { |ties|
-    select("DISTINCT activities.*").
-      roots.
-      where(:tie_id => ties).
-      order("created_at desc")
-  }
-
   has_ancestry
 
   belongs_to :activity_verb
-  has_many :activity_object_activities, :dependent => :destroy
-  has_many :activity_objects, :through => :activity_object_activities
 
   belongs_to :tie,
              :include => [ :sender ]
@@ -30,6 +21,22 @@ class Activity < ActiveRecord::Base
           :through => :tie
   has_one :relation,
           :through => :tie
+
+  delegate :sender_subject,
+           :receiver_subject,
+           :to => :tie
+
+  has_many :activity_object_activities,
+           :dependent => :destroy
+  has_many :activity_objects,
+           :through => :activity_object_activities
+
+  scope :wall, lambda { |ties|
+    select("DISTINCT activities.*").
+      roots.
+      where(:tie_id => ties).
+      order("created_at desc")
+  }
 
   # The name of the verb of this activity
   def verb
@@ -58,6 +65,11 @@ class Activity < ActiveRecord::Base
   # Does user like this activity?
   def liked_by?(user)
     liked_by(user).present?
+  end
+
+  # The first object of this activity
+  def direct_object
+    activity_objects.first.try(:object)
   end
 
 end
