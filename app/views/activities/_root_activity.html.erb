@@ -1,0 +1,45 @@
+<%= div_for root_activity do %>
+  <div class="actor_logo">
+    <%= link_to image_tag(root_activity.sender_subject.logo,
+                          :size => "50x50",
+                          :alt => root_activity.sender_subject.name),
+                 root_activity.sender_subject %>
+  </div>
+
+  <div class="activity_content">
+    <div class="actor_name">
+      <%= link_to(root_activity.sender_subject.name, root_activity.sender_subject) %>
+    </div>
+
+    <div class="activity_objects">
+      <%= render root_activity.activity_objects %>
+    </div>
+
+    <%= render :partial => 'activities/activity_options',
+               :locals => { :activity => root_activity } %>
+
+    <div class="activity_comments" id="comments_<%= dom_id(root_activity) %>">
+      <%= render root_activity.comments %>
+    </div>
+
+    <div class="activity_new_comment">
+       <%= form_for Comment.new(:text => t('comment.write'),
+                                :_activity_tie_id => current_tie.id,
+                                :_activity_parent_id => root_activity.id),
+                    :remote => true do |f| %>
+         <%= f.hidden_field :_activity_tie_id %>
+         <%= f.hidden_field :_activity_parent_id %>
+         <%= f.text_field :text,   :class =>"input_new_comments" %>
+         <div class="activities_comment_btn">
+           <div class="activities_security"></div>
+           <%= image_submit_tag "buttons/btn_share.png" %>
+         </div>
+       <% end %>
+    </div>
+  </div>			
+  <div class="space_comments"></div>
+  </div>
+  <div class="space_activities">
+  <div class="space_sub"></div>
+  </div>
+<% end %>

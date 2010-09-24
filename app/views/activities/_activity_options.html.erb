@@ -1,0 +1,9 @@
+<div class="activity_options">
+  <span class="post_time_ago"><%= t('time.ago', :time => time_ago_in_words(activity.created_at)) %></span>
+
+  <ul class="activity_options">
+    <li><div class="verb_comment"><%= link_to t('activity.tocomment'), "", :class => "to_comment" %> </div></li>
+    <li><div class="verb_like" id="like_<%= dom_id(activity) %>"> <%= like_activity(activity)%></div></li>
+    <li><div class="verb_delete"><%= link_to t('activity.delete'), activity.direct_object , :confirm => t('activity.confirm'), :method => :delete,  :remote => true %> </div></li>
+  </ul>
+</div>

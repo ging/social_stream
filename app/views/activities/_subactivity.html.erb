@@ -1,0 +1,23 @@
+<%= div_for subactivity, :class => "subactivity" do %>
+  <div class="actor_logo">
+    <%= link_to image_tag(subactivity.sender_subject.logo,
+                          :size => "30x30",
+                          :alt => subactivity.sender_subject.name),
+                 subactivity.sender_subject %>
+  </div>
+
+  <div class="activity_content">
+    <div class="actor_name-activity_objects">
+      <%= link_to(subactivity.sender_subject.name, subactivity.sender_subject) %>
+      <span class="subactivity_objects">
+        <%= render subactivity.activity_objects %>
+      </span>
+    </div>
+
+    <%= render :partial => 'activities/activity_options',
+               :locals => { :activity => subactivity } %>
+
+    <div class="space_comments">
+    </div>
+  </div>
+<% end %>
