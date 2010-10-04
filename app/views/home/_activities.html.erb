@@ -1,0 +1,19 @@
+<%= content_for :head, stylesheet_link_tag("activities", :media => "screen, projection") %>
+<%= content_for :javascript do %>
+  <%= render :partial => 'activities/jquery' %>
+<% end -%>
+
+<div id="wrapper_activities">
+  <div id="wrapper_activities_header">
+      <div id="activities_title" class="content_size">
+        <%= image_tag("buttons/btn_activities.png") %> <%=t('activity.other')%>
+      </div>
+
+    <%= render :partial => 'activities/new' %>
+  </div>
+  <div id="wall">
+  <% if current_user.wall.any? %>
+    <%= render current_user.wall  %>
+  <% end %>
+  </div>
+</div>

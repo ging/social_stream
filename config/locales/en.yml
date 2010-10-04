@@ -1,0 +1,17 @@
+en:
+  activity:
+    one: "Activity"
+    other: "Activities"
+    input: "What do you do?"
+    confirm_delete: "Delete activity?"
+    delete: "Delete"
+    to_comment: "Comment"
+  comment:
+    input: "Write a comment..."
+  home:
+    one: "Home"
+  location:
+    message: "You are here > %{location}"
+  time:
+    ago: "%{time} ago"
+
