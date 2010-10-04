@@ -8,7 +8,7 @@ among the most popular websites, while many content oriented applications are su
 networking features in order to improve engagement, enhance user awareness and stimulate communities
 around the website.
 
-{Social Stream}[http://github.com/atd/social_stream] is based in
+{Social Stream}[http://github.com/ging/social_stream] is based in
 {Social Network Analysis}[http://en.wikipedia.org/wiki/Social_network] concepts and methods,
 including social entities (actors), ties and relations.
 It also provides a new tie-based access control model.
@@ -16,7 +16,7 @@ It also provides a new tie-based access control model.
 == Activity Streams
 {Activity Streams}[http://activitystrea.ms/] is a format for syndicating social activities around the web. It has already been adopted by some of the major social networking platforms.
 
-{Social Stream}[http://github.com/atd/social_stream] provides a database schema based on the
+{Social Stream}[http://github.com/ging/social_stream] provides a database schema based on the
 {Activity Streams specification}[http://activitystrea.ms/head/activity-schema.html], leading your
 application towards a well-known compatible data model design.
 
@@ -32,7 +32,7 @@ and
 
 Then install the plugin with:
 
-  rails plugin install http://github.com/atd/social_stream.git
+  rails plugin install http://github.com/ging/social_stream.git
 
 And run:
 
@@ -47,7 +47,7 @@ This will generate the following:
 
 == Actors and Activity Objects
 
-{Social Stream}[http://github.com/atd/social_stream] relies in other authentication solutions like
+{Social Stream}[http://github.com/ging/social_stream] relies in other authentication solutions like
 Authlogic[http://github.com/binarylogic/authlogic] or Devise[http://github.com/plataformatec/devise].
 
 You must include an <tt>actor_id</tt> column in the user's migration. Then add user to
@@ -58,10 +58,10 @@ a <tt>activity_object_id</tt> column in the migration and add them to the initia
 
 = Documentation
 
-{Social Stream documentation}[http://rdoc.info/github/atd/social_stream/frames] is available at
+{Social Stream documentation}[http://rdoc.info/github/ging/social_stream/frames] is available at
 {rdoc.info}[http://rdoc.info/]
 
 = Discussion
 
 It is at an early stage of development.
-Feel free to add an issue or send a message at github[http://github.com/atd/social_stream].
+Feel free to add an issue or send a message at github[http://github.com/ging/social_stream].
