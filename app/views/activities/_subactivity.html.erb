@@ -1,5 +1,5 @@
 <%= div_for subactivity, :class => "subactivity" do %>
-  <div class="actor_logo">
+  <div class="actor_logo_subactivity">
     <%= link_to image_tag(subactivity.sender_subject.logo,
                           :size => "30x30",
                           :alt => subactivity.sender_subject.name),
@@ -17,7 +17,7 @@
     <%= render :partial => 'activities/activity_options',
                :locals => { :activity => subactivity } %>
 
-    <div class="space_comments">
-    </div>
   </div>
 <% end %>
+<div class="space_comments">
+</div>
