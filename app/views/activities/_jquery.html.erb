@@ -17,6 +17,8 @@ $("#input_activities").blur(function(){
 //javascript for comments
 $(".input_new_comments").val("<%= t('comment.input') %>");
 $(".activities_comment_btn").hide();
+
+//usa livequery para usar el javascript luego de una accion con  AJAX
 $(".input_new_comments").livequery("click",function(){
 	if(this.value == "<%= t('comment.input') %>"){
 		$(this).val("");
@@ -27,9 +29,12 @@ $(".input_new_comments").livequery("click",function(){
 $(".input_new_comments").livequery("blur",function(){
 	if(this.value == ""){
 		$(".activities_comment_btn").hide();
+    $(this).val("<%= t('comment.input') %>");
 	}
 });
-$(".comment").click(function(){
+
+
+$(".input_new_comments").click(function(){
 	if(this.value == "<%= t('comment.input') %>"){
 		$(this).val("");
 	}
@@ -39,13 +44,11 @@ $(".comment").click(function(){
 
 
 //javascript for tocomment option
-$(".tocomment").livequery("click", function(){
-//  $(this).parents(".content_post").children(".content_sub_post").children(".coment_field").children(".new_comment").children(".input_new_comments").click();
-  $(this).parents(".content_post").find(".input_new_comments").click();
+$(".to_comment").livequery("click", function(){
+  $(this).parents(".activity_content").find(".input_new_comments").click();
 	return false;
 });
-$(".tocomment").livequery("blur", function(){
-  //$(this).parents(".content_post").children(".content_sub_post").children(".coment_field").children(".new_comment").children(".input_new_comments").blur();
-  $(this).parents(".content_post").find(".input_new_comments").blur();
+$(".to_comment").livequery("blur", function(){
+  $(this).parents(".activity_content").find(".input_new_comments").blur();
 	return false;
 });
