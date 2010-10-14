@@ -1,0 +1,33 @@
+<% if actor.ties.pending.any? %>
+<div class="middle_box">
+  <div class="middle_box_header">
+    <%= image_tag('notifications.png', :class => "middle_box_picture_icon") %>
+    <div class="middle_box_text_header"><%= t 'tie.pending.other' %></div>
+    <div class="title_righ">
+      <a href="#"><%= t 'tie.pending.see_all' %></a>
+    </div>
+  </div>
+  <% actor.ties.pending.each do |tie| %>
+    <div class="middle_box_content">
+      <div class="actor_logo">
+        <%= link_to(image_tag(tie.sender_subject.logo, :size => "55x40"),
+                    tie.sender_subject.name) %>
+      </div>
+      <div class="middle_box_description">
+        <div class="middle_box_link">
+          <%= link_to(tie.sender_subject.name, tie.sender_subject) %>
+        </div>
+        <div class="middle_box_brief">
+          18 contacts in common
+        </div>
+        <%= link_to t('new', :scope => tie.relation.granted.name),
+                    new_tie_path("tie[sender_id]" => current_user.actor.id,
+                                 "tie[receiver_id]" => tie.sender.id,
+                                 "tie[relation_name]" => tie.relation.granted.name),
+                                 :remote => true %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<% end -%>
+

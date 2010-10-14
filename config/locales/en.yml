@@ -14,6 +14,10 @@ en:
     one: "Home"
   location:
     message: "You are here > %{location}"
+  tie:
+    pending:
+      other: Pending requests
+      see_all: See all
   time:
     ago: "%{time} ago"
   days: Days
