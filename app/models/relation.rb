@@ -14,20 +14,30 @@
 # whose inverse relation is itself. When A is friend of B, the inverse tie B is friend of A
 # is establised as well.
 #
+# == Granted relations
+# There are cases when relations need previous invitation or request to be granted.
+# This is the case of friendship requests. When A wants to become friend of B, A
+# sends a friendship_request to B. A is granting the friend relation with B, that is,
+# friendship_request grants friend relation.
 #
 class Relation < ActiveRecord::Base
   has_ancestry
 
-  belongs_to  :inverse,
-              :class_name => "Relation"
+  scope :mode, lambda { |st, rt|
+    where(:sender_type => st, :receiver_type => rt)
+  }
+
+  belongs_to :inverse,
+             :class_name => "Relation"
+  belongs_to :granted,
+             :class_name => "Relation"
+
+  scope :request, where('relations.granted_id IS NOT NULL')
 
   has_many :relation_permissions, :dependent => :destroy
   has_many :permissions, :through => :relation_permissions
 
-
-  scope :mode, lambda { |st, rt|
-    where(:sender_type => st, :receiver_type => rt)
-  }
+  has_many :ties, :dependent => :destroy
 
   class << self
     # A relation in the top of a strength hierarchy

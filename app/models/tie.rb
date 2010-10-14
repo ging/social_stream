@@ -72,6 +72,8 @@ class Tie < ActiveRecord::Base
 
   before_validation :find_relation
 
+  scope :pending, includes(:relation) & Relation.request
+
   # The set of ties between sender and receiver
   #
   def relation_set(r = :nil)

@@ -43,13 +43,13 @@ module SocialStream
         end
       end
 
-      # Parent and inverse relations must be set after creation
+      # Parent, inverse and granted relations must be set after creation
       rs.each_pair do |name, r|
-        relations[name].parent  = relations[r['parent']]
-        relations[name].inverse = relations[r['inverse']]
+        %w( parent inverse granted ).each do |s|
+          relations[name].__send__("#{ s }=", relations[r[s]]) # relations[name].parent = relations[r['parent']]
+        end
         relations[name].save!
       end
     end
-
   end
 end
