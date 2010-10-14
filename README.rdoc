@@ -39,11 +39,11 @@ And run:
   rails generate social_stream:install
 
 This will generate the following:
-  * A migration providing the database schema
-  * An initializer configuration file for Social Stream.
-  * A database seeds file for defining Social Stream relations. You must add:
-      SocialStream.seed!
-    to your db/seeds.rb
+* A migration providing the database schema
+* An initializer configuration file for Social Stream.
+* A database seeds file for defining Social Stream relations. You must add:
+    SocialStream.seed!
+  to your db/seeds.rb
 
 == Actors and Activity Objects
 
