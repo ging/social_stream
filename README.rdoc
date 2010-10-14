@@ -25,6 +25,7 @@ application towards a well-known compatible data model design.
 It requires Rails 3. A gem for strength hierarchies in relations is required. Add to your Gemfile:
 
   gem 'atd-ancestry', :require => 'ancestry'
+  gem 'devise'
 
 and
 
@@ -47,8 +48,7 @@ This will generate the following:
 
 == Actors and Activity Objects
 
-{Social Stream}[http://github.com/ging/social_stream] relies in other authentication solutions like
-Authlogic[http://github.com/binarylogic/authlogic] or Devise[http://github.com/plataformatec/devise].
+{Social Stream}[http://github.com/ging/social_stream] relies in Devise[http://github.com/plataformatec/devise].
 
 You must include an <tt>actor_id</tt> column in the user's migration. Then add user to
 <tt>config/initializers/social_stream.rb</tt>
