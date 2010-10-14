@@ -33,7 +33,6 @@ $(".input_new_comments").livequery("blur",function(){
 	}
 });
 
-
 $(".input_new_comments").click(function(){
 	if(this.value == "<%= t('comment.input') %>"){
 		$(this).val("");
@@ -41,7 +40,6 @@ $(".input_new_comments").click(function(){
 	$(".activities_comment_btn").hide();
 	$(this).parent(".new_comment").children(".activities_comment_btn").show();
 });
-
 
 //javascript for tocomment option
 $(".to_comment").livequery("click", function(){

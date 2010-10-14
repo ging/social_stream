@@ -6,6 +6,8 @@ en:
     confirm_delete: "Delete activity?"
     delete: "Delete"
     to_comment: "Comment"
+    like: I like
+    unlike: Already I do not like    
   comment:
     input: "Write a comment..."
   home:
@@ -14,4 +16,10 @@ en:
     message: "You are here > %{location}"
   time:
     ago: "%{time} ago"
-
+  days: Days
+  delete:
+    confirm: Delete %{element}}?
+  socialstream: "SocialStream"
+  ask:
+    add_friend: "¿Add %{name} as friend?"
+  all_rights_reserved: All rights reserved
