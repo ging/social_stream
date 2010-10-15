@@ -22,20 +22,15 @@ application towards a well-known compatible data model design.
 
 = Installation
 
-It requires Rails 3. A gem for strength hierarchies in relations is required. Add to your Gemfile:
+Add to your Gemfile:
 
-  gem 'atd-ancestry', :require => 'ancestry'
-  gem 'devise'
+  gem 'social_stream'
 
-and
+and run:
 
   bundle update
 
-Then install the plugin with:
-
-  rails plugin install http://github.com/ging/social_stream.git
-
-And run:
+Then, execute:
 
   rails generate social_stream:install
 
@@ -45,6 +40,7 @@ This will generate the following:
 * A database seeds file for defining Social Stream relations. You must add:
     SocialStream.seed!
   to your db/seeds.rb
+* A devise:install generation for authentication support
 
 == Actors and Activity Objects
 

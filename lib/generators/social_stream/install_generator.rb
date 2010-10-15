@@ -22,4 +22,5 @@ class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
     migration_template 'migration.rb', 'db/migrate/create_social_stream.rb'
   end
 
+  hook_for :authentication
 end
