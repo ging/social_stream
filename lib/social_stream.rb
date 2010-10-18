@@ -1,7 +1,7 @@
-require 'social_stream/seed'
-
 # Provides your Rails application with social network and activity stream support
 module SocialStream
+  autoload :Seed, 'social_stream/seed'
+
   module Models
     autoload :Supertype, 'social_stream/models/supertype'
     autoload :Actor, 'social_stream/models/actor'
@@ -20,7 +20,28 @@ module SocialStream
     end
 
     def seed!
-      Seed.new("#{ ::Rails.root }/db/seeds/social_stream.yml")
+      Seed.new(File.join(::Rails.root, 'db', 'seeds', 'social_stream.yml'))
+    end
+
+    # Load models for rewrite in application
+    #
+    # Use this method when you want to reopen some model in SocialStream in order
+    # to add or modify functionality
+    #
+    # Example, in app/models/user.rb
+    #   SocialStream.require_model('user')
+    #
+    #   class User
+    #     some_new_functionality
+    #   end
+    #
+    # Maybe Rails provides some method to do this, in this case, please tell!!
+    def require_model(m)
+      path = $:.find{ |f| f =~ Regexp.new(File.join('social_stream', 'app', 'models')) }
+
+      raise "Can't find social_stream path" if path.blank?
+
+      require_dependency File.join(path, m)
     end
   end
 end

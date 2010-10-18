@@ -3,8 +3,7 @@ SocialStream.setup do |config|
   #
   # Remember you must add an "actor_id" foreign key column to your migration!
   #
-  # Example: config.actors = [ :user ]
-  config.actors = []
+  config.actors = [:user ]
 
   # Contents managed by actors
   #
