@@ -16,7 +16,7 @@ module SocialStream
                  :permalink, :permalink=,
                  :disabled, :disabled=,
                  :ties, :sent_ties, :received_ties,
-                 :contacts, :suggestion,
+                 :sender_subjects, :receiver_subjects, :suggestion,
                  :wall,
                  :to => :actor!
 
@@ -47,6 +47,10 @@ module SocialStream
 
         def with_received_ties
           joins(:actor => :received_ties)
+        end
+
+        def with_sent_ties
+          joins(:actor => :sent_ties)
         end
       end
     end
