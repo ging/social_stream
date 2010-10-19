@@ -9,7 +9,11 @@ module SocialStream
   end
 
   mattr_accessor :actors
-  @@actors = []
+  @@actors = [ :user ]
+
+  mattr_accessor :devise_modules
+  @@devise_modules = [ :database_authenticatable, :registerable, :recoverable,
+                       :rememberable, :trackable ]
 
   mattr_accessor :activity_objects
   @@activity_objects = []
