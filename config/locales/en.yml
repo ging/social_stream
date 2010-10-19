@@ -1,4 +1,6 @@
 en:
+  add:
+    as_friend: "Add as friend"
   activity:
     one: "Activity"
     other: "Activities"
@@ -10,10 +12,12 @@ en:
     unlike: Already I do not like    
   comment:
     input: "Write a comment..."
+  follow: "Follow"
   home:
     one: "Home"
   location:
     message: "You are here > %{location}"
+  message: "Message"
   tie:
     pending:
       other: Pending requests
@@ -25,5 +29,7 @@ en:
     confirm: Delete %{element}}?
   socialstream: "SocialStream"
   ask:
-    add_friend: "¿Add %{name} as friend?"
+    add_friend: "¿Do you want to add %{name} as friend?"
+    add_follow: "¿Do you want to follow to %{name}?"
+    confirm: "yes"
   all_rights_reserved: All rights reserved
