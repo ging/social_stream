@@ -76,6 +76,7 @@ class CreateSocialStream < ActiveRecord::Migration
       t.string   "ancestry"
       t.integer  "inverse_id"
       t.integer  "granted_id"
+      t.boolean  "default", :default => false
     end
 
     add_index "relations", ["ancestry"]
@@ -105,6 +106,25 @@ class CreateSocialStream < ActiveRecord::Migration
     add_index "ties", ["receiver_id"], :name => "fk_tie_receiver"
     add_index "ties", ["relation_id"], :name => "fk_tie_relation"
     add_index "ties", ["sender_id"], :name => "fk_tie_sender"
+
+    create_table "users", :force => true do |t|
+      t.database_authenticatable :null => false
+      t.recoverable
+      t.rememberable
+      t.trackable
+
+      # t.confirmable
+      # t.lockable :lock_strategy => :failed_attempts, :unlock_strategy => :both
+      # t.token_authenticatable
+
+      t.timestamps
+      t.integer  "actor_id"
+    end
+
+    add_index "users", ["actor_id"], :name => "fk_users_actors"
+    add_index "users", :reset_password_token, :unique => true
+    # add_index :users, :confirmation_token, :unique => true
+    # add_index :users, :unlock_token,       :unique => true
   end
 
   def self.down
