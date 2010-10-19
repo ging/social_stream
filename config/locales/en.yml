@@ -21,7 +21,11 @@ en:
   tie:
     pending:
       other: Pending requests
-      see_all: See all
+      all: "All"
+    suggestion:
+      one: Suggestion
+      other: Suggestions
+      all: All
   time:
     ago: "%{time} ago"
   days: Days
