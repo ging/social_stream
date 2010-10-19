@@ -20,17 +20,17 @@
 # * sent_by(actor), ties whose sender is actor
 # * received_by(actor), ties whose receiver is actor
 # * sent_or_received_by(actor), the union of the former
+# * related_by(relation), ties with this relation. Accepts relation, relation_name, integer, array
+# * pending, ties whose relation grant other relations, like friendship requests.
 # * inverse(tie), the inverse of tie
 #
 class Tie < ActiveRecord::Base
-  # Avoids loops at create_inverse after save callback
-  attr_accessor :_without_inverse
-  attr_protected :_without_inverse
-
   # Facilitates relation assigment along with find_relation callback
   attr_accessor :relation_name
 
-  validates_presence_of :sender_id, :receiver_id, :relation_id
+  # Avoids loops at create_inverse after save callback
+  attr_accessor :_without_inverse
+  attr_protected :_without_inverse
 
   belongs_to :sender,
              :class_name => "Actor",
@@ -38,6 +38,7 @@ class Tie < ActiveRecord::Base
   belongs_to :receiver,
              :class_name => "Actor",
              :include => SocialStream.actors
+
   belongs_to :relation
 
   has_many :activities
@@ -56,11 +57,23 @@ class Tie < ActiveRecord::Base
 
   }
 
+  scope :related_by, lambda { |r|
+    where(:relation_id => Relation(r))
+  }
+
+  scope :pending, includes(:relation) & Relation.request
+
   scope :inverse, lambda { |t|
     sent_by(t.receiver).
       received_by(t.sender).
       where(:relation_id => t.relation.inverse_id)
   }
+
+  validates_presence_of :sender_id, :receiver_id, :relation_id
+
+  before_validation :find_relation
+
+  after_create :complete_weak_set, :create_inverse
 
   def sender_subject
     sender.try(:subject)
@@ -70,32 +83,27 @@ class Tie < ActiveRecord::Base
     receiver.try(:subject)
   end
 
-  before_validation :find_relation
-
-  scope :pending, includes(:relation) & Relation.request
-
   # The set of ties between sender and receiver
   #
-  def relation_set(r = :nil)
+  # Options::
+  # * relations: Only ties with relations
+  def relation_set(options = {})
     set = self.class.where(:sender_id => sender_id,
                            :receiver_id => receiver_id)
 
-    case r
-    when :nil
-      set
-    when String
-      set.where(:relation_id => relation.mode.find_by_name(r))
-    else
-      set.where(:relation_id => r)
+    if options.key?(:relations)
+      set = 
+        set.related_by self.class.Relation(options[:relations],
+                                           :mode => relation.mode)
     end
+
+    set
   end
 
   # The tie with relation r inside this relation_set
   def related(r)
-    relation_set(r).first
+    relation_set(:relations => r).first
   end
-
-  after_create :complete_weak_set, :create_inverse
 
   # Access Control
 
@@ -172,7 +180,7 @@ class Tie < ActiveRecord::Base
   # Creates ties with a weaker relations in the strength hierarchy of this tie
   def complete_weak_set
     relation.weaker.each do |r|
-      if relation_set(r).blank?
+      if relation_set(:relations => r).blank?
         t = relation_set.build :relation => r
         t._without_inverse = true
         t.save!
@@ -201,6 +209,32 @@ class Tie < ActiveRecord::Base
         a.id
       else
         a.actor.id
+      end
+    end
+
+    # Normalize a relation for ActiveRecord query from relation_name, id or Array
+    #
+    # Options::
+    # mode:: Relation mode
+    def Relation(r, options = {})
+      case r
+      when Relation
+        r
+      when String
+        case options[:mode]
+        when Array
+          Relation.mode(*options[:mode]).find_by_name(r)
+        when ActiveRecord::Relation
+          options[:mode].find_by_name(r)
+        else
+          raise "Must provide a mode when looking up relations from name: #{ options[:mode] }"
+        end
+      when Integer
+        r
+      when Array
+        r.map{ |e| Relation(e, options) }
+      else
+        raise "Unable to normalize relation #{ r.inspect }"
       end
     end
   end

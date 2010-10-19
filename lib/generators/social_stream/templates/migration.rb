@@ -76,6 +76,7 @@ class CreateSocialStream < ActiveRecord::Migration
       t.string   "ancestry"
       t.integer  "inverse_id"
       t.integer  "granted_id"
+      t.boolean  "default", :default => false
     end
 
     add_index "relations", ["ancestry"]

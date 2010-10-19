@@ -24,6 +24,8 @@ module SocialStream
           find_or_create_by_sender_type_and_receiver_type_and_name(r['sender_type'],
                                                                    r['receiver_type'],
                                                                    r['name'])
+        relations[name].update_attribute(:default, r['default'])
+
         # FIXME: optimize
         relations[name].relation_permissions.destroy_all
 
