@@ -9,6 +9,7 @@ if RUBY_VERSION < '1.9'
 end
 
 gem 'atd-ancestry', :require => 'ancestry'
+gem 'devise'
 gem 'cancan'
 
 gem "rspec-rails", ">= 2.0.0.beta"
