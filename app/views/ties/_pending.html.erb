@@ -1,4 +1,4 @@
-<% if actor.ties.pending.any? %>
+<% if current_user.received_ties.pending.any? %>
 <div class="middle_box">
   <div class="middle_box_header">
     <%= image_tag('notifications.png', :class => "middle_box_picture_icon") %>
@@ -7,7 +7,7 @@
       <a href="#"><%= t 'tie.pending.all' %></a>
     </div>
   </div>
-  <% actor.ties.pending.each do |tie| %>
+  <% current_user.received_ties.pending.each do |tie| %>
     <div class="middle_box_content">
       <div class="actor_logo">
         <%= link_to(image_tag(tie.sender_subject.logo, :size => "55x40"),
