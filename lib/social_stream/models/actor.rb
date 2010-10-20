@@ -20,6 +20,10 @@ module SocialStream
                  :wall,
                  :to => :actor!
 
+
+        scope :with_sent_ties,     joins(:actor => :sent_ties)
+        scope :with_received_ties, joins(:actor => :received_ties)
+
         after_create :initialize_default_ties
       end
 
@@ -43,14 +47,6 @@ module SocialStream
         # Relations defined for this actor model.
         def relations(to = to_s)
           Relation.mode(to_s, to)
-        end
-
-        def with_received_ties
-          joins(:actor => :received_ties)
-        end
-
-        def with_sent_ties
-          joins(:actor => :sent_ties)
         end
       end
     end
