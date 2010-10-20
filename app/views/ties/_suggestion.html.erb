@@ -1,18 +1,18 @@
-
-  <% if (subject = current_user.suggested_user).present? %>
-  <div id="suggestion_<%=dom_id(subject)%>" class="suggestion">
+<% if (subject = current_user.suggestion).present? %>
+  <div id="suggestion_<%= dom_id(subject) %>" class="suggestion">
     <div class="suggestion_actor_logo">
-      <%= link_to(image_tag(subject.logo, :size =>"30x30"),subject) %>
+      <%= link_to(image_tag(subject.logo, :size =>"30x30"), subject) %>
     </div>
     <div class="suggestion_content">
         <div class="suggestion_name">
-          <%= link_to( subject.name, subject) %>
+          <%= link_to(subject.name, subject) %>
         </div>
         <div class="suggestion_brief">
             <%= suggestion_brief(subject) %>
         </div>
         <div class="suggestion_link">
-          <%= suggestion_link(subject) %>
+          <%= suggestion_link(subject, :user  => 'friend_request',
+                                       :space => 'follower') %>
         </div>
     </div>
   </div>

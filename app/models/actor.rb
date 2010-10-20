@@ -81,9 +81,18 @@ class Actor < ActiveRecord::Base
 
   # This is an scaffold for a recomendations engine
   #
-  # By now, it returns another actor without any current relation
-  def suggestion(type = subject.class)
-    candidates = type.to_s.classify.constantize.all - receiver_subjects(type)
+  # By now, it returns another subject without any current relation
+  #
+  # Options::
+  # * type: the class of the recommended subject
+  def suggestion(options = {})
+    type = options[:type]
+
+    type = type.present? ?
+      type.to_s.classify.constantize :
+      random_receiving_subject_type
+    
+    candidates = type.all - receiver_subjects(type)
 
     candidates[rand(candidates.size)]
   end
@@ -92,6 +101,13 @@ class Actor < ActiveRecord::Base
   # TODO: authorization
   def wall
     Activity.wall ties
+  end
+
+  private
+
+  def random_receiving_subject_type
+    type_candidates = subject.class.receiving_subject_classes
+    type_candidates[rand(type_candidates.size)]
   end
 end
 

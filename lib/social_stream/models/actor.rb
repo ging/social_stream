@@ -2,7 +2,7 @@ require 'active_support/concern'
 
 module SocialStream
   module Models
-    # Additional features for models that are actors
+    # Additional features for models that are subtypes of actors
     module Actor
       extend ActiveSupport::Concern
 
@@ -47,6 +47,14 @@ module SocialStream
         # Relations defined for this actor model.
         def relations(to = to_s)
           Relation.mode(to_s, to)
+        end
+
+        # Actor subtypes that may receive a tie from an instance of this class
+        def receiving_subject_classes
+          Relation.select("DISTINCT #{ Relation.quoted_table_name }.receiver_type").
+            where(:sender_type => to_s).
+            map(&:receiver_type).
+            map(&:constantize)
         end
       end
     end

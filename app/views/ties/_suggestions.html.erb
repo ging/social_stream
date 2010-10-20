@@ -1,0 +1,12 @@
+<div class="suggestions_header">
+    <%= image_tag('notifications.png', :class => "suggestion_icon") %>
+    <div class="suggestion_text_header">
+        <%=t('tie.suggestion.one') %>
+    </div>
+</div>
+<div class="suggestions">
+  <% 2.times do %>
+    <%= render :partial => 'ties/suggestion' %>      
+  <% end %>
+</div>
+
