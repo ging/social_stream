@@ -28,13 +28,20 @@ class Actor < ActiveRecord::Base
   #
   # Options::
   # * relations: Restrict the relations of considered ties
+  # * include_self: False by default, don't include this actor as subject even they
+  # have ties with themselves.
   def sender_subjects(subject_type, options = {})
+    # FIXME: DRY!
     subject_class = subject_type.to_s.classify.constantize
 
     cs = subject_class.
            select("DISTINCT #{ subject_class.quoted_table_name }.*").
            with_sent_ties &
            Tie.received_by(self)
+
+    if options[:include_self].blank?
+      cs = cs.where("#{ self.class.quoted_table_name }.id != ?", self.id)
+    end
 
     if options[:relations].present?
       cs &=
@@ -49,13 +56,20 @@ class Actor < ActiveRecord::Base
   #
   # Options::
   # * relations: Restrict the relations of considered ties
+  # * include_self: False by default, don't include this actor as subject even they
+  # have ties with themselves.
   def receiver_subjects(subject_type, options = {})
+    # FIXME: DRY!
     subject_class = subject_type.to_s.classify.constantize
 
     cs = subject_class.
            select("DISTINCT #{ subject_class.quoted_table_name }.*").
            with_received_ties &
            Tie.sent_by(self)
+
+    if options[:include_self].blank?
+      cs = cs.where("#{ self.class.quoted_table_name }.id != ?", self.id)
+    end
 
     if options[:relations].present?
       cs &=
