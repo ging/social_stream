@@ -32,6 +32,7 @@ spec = Gem::Specification.new do |s|
   s.files =  FileList["[A-Z]*", "{app,config,lib}/**/*"]
   s.add_dependency('atd-ancestry', '~> 1.3.0')
   s.add_dependency('devise', '~> 1.1.3')
+  s.add_dependency('inherited_resources', '~> 1.1.2')
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|

@@ -56,6 +56,15 @@ class CreateSocialStream < ActiveRecord::Migration
       t.datetime "updated_at"
     end
 
+    create_table "posts", :force => true do |t|
+      t.integer  "activity_object_id"
+      t.datetime "created_at"
+      t.datetime "updated_at"
+      t.text     "text"
+    end
+
+    add_index "posts", ["activity_object_id"], :name => "fk_post_object"
+
     create_table "relation_permissions", :force => true do |t|
       t.integer  "relation_id"
       t.integer  "permission_id"

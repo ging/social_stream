@@ -1,6 +1,8 @@
 # Load Devise constant
 require 'ancestry'
 require 'devise'
+require 'inherited_resources'
+
 require 'social_stream/rails/common'
 File.expand_path(__FILE__) =~ /#{ File.join('vendor', 'plugins') }/ ?
   require('social_stream/rails/railtie') :

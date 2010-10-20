@@ -6,9 +6,13 @@ class ActivityVerb < ActiveRecord::Base
 
   has_many :activities
 
+  scope :verb_name, lambda{ |n|
+    where(:name => n)
+  }
+
   class << self
     def [] name
-      find_by_name(name)
+      verb_name(name).first
     end
   end
 end

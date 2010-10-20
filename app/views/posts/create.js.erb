@@ -1,0 +1,5 @@
+//set a new value to input field with javascript
+$("#input_activities").val("<%= t('activity.input') %>");
+//Display the new post
+$("#wall").prepend("<%= escape_javascript(render @post.post_activity) %>");
+$("#activities_share_btn").hide();
