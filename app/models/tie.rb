@@ -43,6 +43,8 @@ class Tie < ActiveRecord::Base
 
   has_many :activities
 
+  scope :recent, order("#{ quoted_table_name }.created_at DESC")
+
   scope :sent_by, lambda { |a|
     where(:sender_id => Actor_id(a))
   }
