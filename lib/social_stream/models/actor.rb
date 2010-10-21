@@ -25,7 +25,7 @@ module SocialStream
         scope :with_sent_ties,     joins(:actor => :sent_ties)
         scope :with_received_ties, joins(:actor => :received_ties)
 
-        after_create :initialize_default_ties
+        after_create :initialize_reflexive_ties
       end
 
       module InstanceMethods
@@ -35,8 +35,8 @@ module SocialStream
 
         private
 
-        def initialize_default_ties
-          self.class.relations.where(:default => true).each do |r|
+        def initialize_reflexive_ties
+          self.class.relations.reflexive.each do |r|
             Tie.create! :sender => self.actor,
                         :receiver => self.actor,
                         :relation => r

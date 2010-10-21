@@ -94,7 +94,7 @@ class CreateSocialStream < ActiveRecord::Migration
       t.string   "ancestry"
       t.integer  "inverse_id"
       t.integer  "granted_id"
-      t.boolean  "default", :default => false
+      t.boolean  "reflexive", :default => false
     end
 
     add_index "relations", ["ancestry"]
@@ -147,5 +147,19 @@ class CreateSocialStream < ActiveRecord::Migration
   end
 
   def self.down
+    drop_table :activities
+    drop_table :activity_object_activities
+    drop_table :activity_objects
+    drop_table :activity_verbs
+    drop_table :actors
+    drop_table :comments
+    drop_table :permissions
+    drop_table :posts
+    drop_table :_relation_permissions
+    drop_table :relations
+    drop_table :tags
+    drop_table :tags_activity_objects
+    drop_table :ties
+    drop_table :users
   end
 end

@@ -2,28 +2,33 @@
 #
 # Define your relations and add SocialStream.seed! to db/seeds.rb
 #
-# Example
-# relations:
-#   user-friend:
-#     sender_type: User
-#     receiver_type: User
-#     name: friend
-#     permissions:
-#       - [ create,  resources, weak_set ]
-#       - [ read,    resources, group_set ]
-#       - [ update,  resources, weak_set ]
-#       - [ destroy, resources, weak_set ]
-#   user-fof:
-#     sender_type: User
-#     receiver_type: User
-#     name: friend_of_friend
-#     parent: user-friend
-#     permissions:
-#       - [ read, resources, group_set ]
-#   user-public:
-#     sender_type: User
-#     receiver_type: User
-#     name: public
-#     parent: user-fof
-#     permissions:
-#       - [ read, resources, group_set ]
+relations:
+  user-friend:
+    sender_type: User
+    receiver_type: User
+    name: friend
+    # Friendship is a reciprocal relation
+    inverse: user-friend
+    # It is set for users by default
+    reflexive: true
+    permissions:
+      - [ create,  resources, weak_set ]
+      - [ read,    resources, group_set ]
+      - [ update,  resources, weak_set ]
+      - [ destroy, resources, weak_set ]
+  user-public:
+    sender_type: User
+    receiver_type: User
+    name: public
+    # This relation is weaker than user-friend
+    parent: user-friend
+    # This relation is also reciprocal
+    inverse: user-public
+    permissions:
+      - [ read, resources, group_set ]
+  user-friend-request:
+    sender_type: User
+    receiver_type: User
+    name: friendship_request
+    # This relation is the request for user-friend
+    granted: user-friend

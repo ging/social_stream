@@ -8,6 +8,11 @@
 # two actors are stronger than others.
 # When a strong tie is established, ties with weaker relations are establised as well
 #
+# == Reflexive relations
+# Some relations are set by default for actors with theirselves. This sets some ties
+# for posting in self wall at several visibility levels: only for friends, public and
+# so on
+#
 # == Inverse relations
 # A Relation can have its inverse. When a tie is established, an inverse tie will be
 # established if an inverse relation exists. An example is a relation of friendship,
@@ -37,6 +42,7 @@ class Relation < ActiveRecord::Base
   belongs_to :granted,
              :class_name => "Relation"
 
+  scope :reflexive, where(:reflexive => true)
   scope :request, where('relations.granted_id IS NOT NULL')
   scope :active, where(:granted_id => nil)
 
