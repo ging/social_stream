@@ -48,6 +48,15 @@ class CreateSocialStream < ActiveRecord::Migration
     add_index "actors", ["email"], :name => "index_actors_on_email"
     add_index "actors", ["permalink"], :name => "index_actors_on_permalink", :unique => true
 
+    create_table "comments", :force => true do |t|
+      t.integer  "activity_object_id"
+      t.text     "text"
+      t.datetime "updated_at"
+      t.datetime "created_at"
+    end
+
+    add_index "comments", ["activity_object_id"], :name => "fk_commets_activity_object"
+
     create_table "permissions", :force => true do |t|
       t.string   "action"
       t.string   "object"

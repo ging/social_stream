@@ -18,25 +18,12 @@
     <%= render :partial => 'activities/activity_options',
                :locals => { :activity => root_activity } %>
 
-    <div class="activity_comments" id="comments_<%= dom_id(root_activity) %>">
-      <%= render root_activity.comments %>
-    </div>
+    <%= render :partial => 'activities/comments',
+               :locals => { :activity => root_activity } %>
 
-    <div class="activity_new_comment">
-       <%= form_for Comment.new(:text => t('comment.input'),
-                                :_activity_tie_id =>
-                                  current_user.active_ties_to(root_activity.receiver).first.id,
-                                :_activity_parent_id => root_activity.id),
-                    :remote => true do |f| %>
-         <%= f.hidden_field :_activity_tie_id %>
-         <%= f.hidden_field :_activity_parent_id %>
-         <%= f.text_field :text,   :class =>"input_new_comments" %>
-         <div class="activities_comment_btn">
-           <div class="activities_security"></div>
-           <%= image_submit_tag "buttons/btn_share.png" %>
-         </div>
-       <% end %>
-    </div>
+    <%= render :partial => 'comments/new',
+               :locals => { :activity => root_activity } %>
+
   </div>			
   <div class="space_comments"></div>
   <div class="space_activities">

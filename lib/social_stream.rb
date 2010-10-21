@@ -16,7 +16,7 @@ module SocialStream
                        :rememberable, :trackable ]
 
   mattr_accessor :activity_objects
-  @@activity_objects = [ :post ]
+  @@activity_objects = [ :post, :comment ]
 
   class << self
     def setup

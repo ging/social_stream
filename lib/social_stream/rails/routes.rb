@@ -12,6 +12,8 @@ module ActionDispatch::Routing
       resources :activities do
         resource :like
       end
+      resources :posts
+      resources :comments
     end
   end
 end
