@@ -26,8 +26,8 @@ end
 spec = Gem::Specification.new do |s|
   s.name = "social_stream"
   s.version = SocialStream::VERSION.dup
-  s.summary = "Social networking features and activity streams."
-  s.description = "Ruby on Rails plug-in supporting social networking features and activity streams."
+  s.summary = "Social networking features and activity streams for Ruby on Rails."
+  s.description = "Ruby on Rails engine supporting social networking features and activity streams."
   s.authors = ['Antonio Tapiador', 'Diego Carrera']
   s.files =  FileList["[A-Z]*", "{app,config,lib}/**/*"]
   s.add_dependency('atd-ancestry', '~> 1.3.0')
