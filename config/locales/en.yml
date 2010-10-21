@@ -10,11 +10,14 @@ en:
     unlike: Already I do not like    
   comment:
     input: "Write a comment..."
+    confirm_delete: "Delete comment?"
   home:
     one: "Home"
   location:
     message: "You are here > %{location}"
   message: "Message"
+  post:
+    confirm_delete: "Delete post?"
   tie:
     pending:
       other: Pending requests
