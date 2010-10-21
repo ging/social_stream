@@ -4,7 +4,7 @@
     <% if activity.is_root? %>
     <li><div class="verb_comment"> · <%= link_to t('activity.to_comment'), "#", :class => "to_comment" %> </div></li>
     <% end %>
-    <li><div class="verb_like" id="like_<%= dom_id(activity) %>"> · <%= like_activity(activity)%></div></li>
+    <li><div class="verb_like" id="like_<%= dom_id(activity) %>"> · <%= link_like(activity)%></div></li>
     <li><div class="verb_delete"> · <%= link_to t('activity.delete'), activity.direct_object , :confirm => t('confirm_delete', :scope => activity.direct_object.class.to_s.underscore), :method => :delete,  :remote => true %> </div></li>
   </ul>
 </div>
