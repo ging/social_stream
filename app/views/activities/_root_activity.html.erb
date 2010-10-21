@@ -24,7 +24,8 @@
 
     <div class="activity_new_comment">
        <%= form_for Comment.new(:text => t('comment.input'),
-                                :_activity_tie_id => current_tie.id,
+                                :_activity_tie_id =>
+                                  current_user.active_ties_to(root_activity.receiver).first.id,
                                 :_activity_parent_id => root_activity.id),
                     :remote => true do |f| %>
          <%= f.hidden_field :_activity_tie_id %>

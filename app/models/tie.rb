@@ -64,6 +64,7 @@ class Tie < ActiveRecord::Base
   }
 
   scope :pending, includes(:relation) & Relation.request
+  scope :active, includes(:relation) & Relation.active
 
   scope :inverse, lambda { |t|
     sent_by(t.receiver).

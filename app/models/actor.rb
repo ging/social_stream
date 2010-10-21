@@ -97,6 +97,11 @@ class Actor < ActiveRecord::Base
     candidates[rand(candidates.size)]
   end
 
+  # All the ties this actor has with subject that support activities
+  def active_ties_to(subject)
+    sent_ties.received_by(subject).active
+  end
+
   # The set of activities in the wall of this actor
   # TODO: authorization
   def wall
