@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
     v.validates_length_of       :password, :within => Devise.password_length, :allow_blank => true
   end
 
+  def recent_groups
+    receiver_subjects(:group, :relations => 'follower') & Tie.recent
+  end
+
   protected
   
   # From devise

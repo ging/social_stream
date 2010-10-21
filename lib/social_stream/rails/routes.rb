@@ -5,6 +5,7 @@ module ActionDispatch::Routing
     def social_stream
       devise_for :users
       resources :users
+      resources :groups
 
       match 'home' => 'home#index', :as => :home
 

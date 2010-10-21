@@ -3,6 +3,7 @@
 # Define your relations and add SocialStream.seed! to db/seeds.rb
 #
 relations:
+  # User to User
   user-friend:
     sender_type: User
     receiver_type: User
@@ -32,3 +33,32 @@ relations:
     name: friendship_request
     # This relation is the request for user-friend
     granted: user-friend
+
+  # User to Group
+  user-group-member:
+    sender_type: User
+    receiver_type: Group
+    name: member
+    inverse: group-user-member
+  user-group-follower:
+    sender_type: User
+    receiver_type: Group
+    name: follower
+    parent: user-group-member
+  user-group-public:
+    sender_type: User
+    receiver_type: Group
+    name: public
+    parent: user-group-follower
+
+  # Group to User
+  group-user-member:
+    sender_type: Group
+    receiver_type: User
+    name: member
+    inverse: user-group-member
+    permissions:
+      - [ create,  resources, weak_set ]
+      - [ read,    resources, group_set ]
+      - [ update,  resources, weak_group_set ]
+      - [ destroy, resources, weak_group_set ]

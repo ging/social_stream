@@ -57,6 +57,14 @@ class CreateSocialStream < ActiveRecord::Migration
 
     add_index "comments", ["activity_object_id"], :name => "fk_commets_activity_object"
 
+    create_table "group", :force => true do |t|
+      t.integer  "actor_id"
+      t.datetime "created_at"
+      t.datetime "updated_at"
+    end
+
+    add_index "group", ["actor_id"], :name => "fk_groups_actors"
+
     create_table "permissions", :force => true do |t|
       t.string   "action"
       t.string   "object"
@@ -153,6 +161,7 @@ class CreateSocialStream < ActiveRecord::Migration
     drop_table :activity_verbs
     drop_table :actors
     drop_table :comments
+    drop_table :group
     drop_table :permissions
     drop_table :posts
     drop_table :_relation_permissions
