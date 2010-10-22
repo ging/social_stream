@@ -24,6 +24,8 @@ en:
     one: Friend
     other: Friends
     my: "My Friends"
+  group:
+    other: "Groups"
   home:
     one: "Home"
   location:
