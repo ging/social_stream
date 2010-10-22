@@ -25,8 +25,18 @@ module SocialStream
       end
 
       module InstanceMethods
+        # All the activities with this object
         def activities
-          activity_object_activities.includes(:activity).map(&:activity).uniq
+          Activity.
+            includes(:activity_objects => self.class.to_s.underscore).
+            where("#{ self.class.quoted_table_name }.id" => self.id)
+        end
+
+        # The activity in which this object was posted
+        #
+        # FIXME: Currently it only supports direct objects
+        def post_activity
+          (activities.includes(:activity_verb) & ActivityVerb.verb_name('post')).first
         end
 
         # Create corresponding ActivityObject including this class type

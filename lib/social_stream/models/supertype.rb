@@ -24,7 +24,7 @@ module SocialStream #:nodoc:
               s = s.to_s.classify.constantize
               s.__send__(:include, features) unless s.ancestors.include?(features)
             rescue
-              puts "Warning: could not load #{ s }"
+              puts "Warning: could not load #{ s.to_s.classify }"
             end
           end
         end

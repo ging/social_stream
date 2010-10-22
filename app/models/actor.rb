@@ -28,13 +28,20 @@ class Actor < ActiveRecord::Base
   #
   # Options::
   # * relations: Restrict the relations of considered ties
+  # * include_self: False by default, don't include this actor as subject even they
+  # have ties with themselves.
   def sender_subjects(subject_type, options = {})
+    # FIXME: DRY!
     subject_class = subject_type.to_s.classify.constantize
 
     cs = subject_class.
            select("DISTINCT #{ subject_class.quoted_table_name }.*").
            with_sent_ties &
            Tie.received_by(self)
+
+    if options[:include_self].blank?
+      cs = cs.where("#{ self.class.quoted_table_name }.id != ?", self.id)
+    end
 
     if options[:relations].present?
       cs &=
@@ -49,13 +56,20 @@ class Actor < ActiveRecord::Base
   #
   # Options::
   # * relations: Restrict the relations of considered ties
+  # * include_self: False by default, don't include this actor as subject even they
+  # have ties with themselves.
   def receiver_subjects(subject_type, options = {})
+    # FIXME: DRY!
     subject_class = subject_type.to_s.classify.constantize
 
     cs = subject_class.
            select("DISTINCT #{ subject_class.quoted_table_name }.*").
            with_received_ties &
            Tie.sent_by(self)
+
+    if options[:include_self].blank?
+      cs = cs.where("#{ self.class.quoted_table_name }.id != ?", self.id)
+    end
 
     if options[:relations].present?
       cs &=
@@ -67,17 +81,38 @@ class Actor < ActiveRecord::Base
 
   # This is an scaffold for a recomendations engine
   #
-  # By now, it returns another actor without any current relation
-  def suggestion(type = subject.class)
-    candidates = type.to_s.classify.constantize.all - receiver_subjects(type)
+  # By now, it returns another subject without any current relation
+  #
+  # Options::
+  # * type: the class of the recommended subject
+  def suggestion(options = {})
+    type = options[:type]
+
+    type = type.present? ?
+      type.to_s.classify.constantize :
+      random_receiving_subject_type
+    
+    candidates = type.all - receiver_subjects(type)
 
     candidates[rand(candidates.size)]
+  end
+
+  # All the ties this actor has with subject that support activities
+  def active_ties_to(subject)
+    sent_ties.received_by(subject).active
   end
 
   # The set of activities in the wall of this actor
   # TODO: authorization
   def wall
     Activity.wall ties
+  end
+
+  private
+
+  def random_receiving_subject_type
+    type_candidates = subject.class.receiving_subject_classes
+    type_candidates[rand(type_candidates.size)]
   end
 end
 

@@ -1,0 +1,4 @@
+//Display the new comment
+$("#comments_activity_<%= @comment.post_activity.parent.id %>").append("<%= escape_javascript(render @comment.post_activity) %>");
+$(".input_new_comments").val("<%= t('comment.input') %>");
+$(".activities_comment_btn").hide();

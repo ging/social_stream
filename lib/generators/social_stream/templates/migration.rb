@@ -48,6 +48,23 @@ class CreateSocialStream < ActiveRecord::Migration
     add_index "actors", ["email"], :name => "index_actors_on_email"
     add_index "actors", ["permalink"], :name => "index_actors_on_permalink", :unique => true
 
+    create_table "comments", :force => true do |t|
+      t.integer  "activity_object_id"
+      t.text     "text"
+      t.datetime "updated_at"
+      t.datetime "created_at"
+    end
+
+    add_index "comments", ["activity_object_id"], :name => "fk_commets_activity_object"
+
+    create_table "group", :force => true do |t|
+      t.integer  "actor_id"
+      t.datetime "created_at"
+      t.datetime "updated_at"
+    end
+
+    add_index "group", ["actor_id"], :name => "fk_groups_actors"
+
     create_table "permissions", :force => true do |t|
       t.string   "action"
       t.string   "object"
@@ -55,6 +72,15 @@ class CreateSocialStream < ActiveRecord::Migration
       t.datetime "created_at"
       t.datetime "updated_at"
     end
+
+    create_table "posts", :force => true do |t|
+      t.integer  "activity_object_id"
+      t.datetime "created_at"
+      t.datetime "updated_at"
+      t.text     "text"
+    end
+
+    add_index "posts", ["activity_object_id"], :name => "fk_post_object"
 
     create_table "relation_permissions", :force => true do |t|
       t.integer  "relation_id"
@@ -76,7 +102,7 @@ class CreateSocialStream < ActiveRecord::Migration
       t.string   "ancestry"
       t.integer  "inverse_id"
       t.integer  "granted_id"
-      t.boolean  "default", :default => false
+      t.boolean  "reflexive", :default => false
     end
 
     add_index "relations", ["ancestry"]
@@ -101,6 +127,7 @@ class CreateSocialStream < ActiveRecord::Migration
       t.integer  "relation_id"
       t.datetime "created_at"
       t.datetime "updated_at"
+      t.text     "message"
     end
 
     add_index "ties", ["receiver_id"], :name => "fk_tie_receiver"
@@ -128,5 +155,20 @@ class CreateSocialStream < ActiveRecord::Migration
   end
 
   def self.down
+    drop_table :activities
+    drop_table :activity_object_activities
+    drop_table :activity_objects
+    drop_table :activity_verbs
+    drop_table :actors
+    drop_table :comments
+    drop_table :group
+    drop_table :permissions
+    drop_table :posts
+    drop_table :_relation_permissions
+    drop_table :relations
+    drop_table :tags
+    drop_table :tags_activity_objects
+    drop_table :ties
+    drop_table :users
   end
 end

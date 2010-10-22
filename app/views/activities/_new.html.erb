@@ -1,6 +1,6 @@
 <div id="activities_header" class="content_size">
   <%= form_for Post.new(:text => t('activity.input'),
-                        :_activity_tie_id => current_tie.id),
+                        :_activity_tie_id => current_user.active_ties_to(receiver).first.id),
                         :remote => true  do |f| %>
     <%= f.hidden_field :_activity_tie_id %>
     <%= f.text_field :text, :id => "input_activities", :size => 85 %>

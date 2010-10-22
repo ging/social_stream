@@ -5,6 +5,7 @@ module ActionDispatch::Routing
     def social_stream
       devise_for :users
       resources :users
+      resources :groups
 
       match 'home' => 'home#index', :as => :home
 
@@ -12,6 +13,8 @@ module ActionDispatch::Routing
       resources :activities do
         resource :like
       end
+      resources :posts
+      resources :comments
     end
   end
 end

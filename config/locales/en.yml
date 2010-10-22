@@ -1,6 +1,4 @@
 en:
-  add:
-    as_friend: "Add as friend"
   activity:
     one: "Activity"
     other: "Activities"
@@ -11,8 +9,13 @@ en:
     like: I like
     unlike: Already I do not like
     last: Last Activities
+  all_rights_reserved: All rights reserved
   comment:
     input: "Write a comment..."
+    confirm_delete: "Delete comment?"
+  days: Days
+  delete:
+    confirm: Delete %{element}}?
   follow: "Follow"
   follower:
     one: Follower
@@ -28,6 +31,8 @@ en:
   message: "Message"
   menu:
     options: "Menu Options"
+  post:
+    confirm_delete: "Delete post?"
   tie:
     pending:
       other: Pending requests
@@ -35,15 +40,14 @@ en:
     suggestion:
       one: Suggestion
       other: Suggestions
+      friend_request:
+        new: "+ Add as friend"
+        confirm_new: "Do you want to add %{name} as friend?"
+      follower:
+        new: "+ Follow"
+        confirm_new: "Do you want to follow %{name}?"
       all: All
   time:
     ago: "%{time} ago"
-  days: Days
-  delete:
-    confirm: Delete %{element}}?
   socialstream: "SocialStream"
-  ask:
-    add_friend: "¿Do you want to add %{name} as friend?"
-    add_follow: "¿Do you want to follow to %{name}?"
-    confirm: "yes"
-  all_rights_reserved: All rights reserved
+

@@ -20,6 +20,7 @@ module SocialStream
 
             # https://rails.lighthouseapp.com/projects/8994/tickets/1905-apphelpers-within-plugin-not-being-mixed-in
               ApplicationController.helper ActivitiesHelper
+              ApplicationController.helper TiesHelper
             end
 
             initializer "social_stream.inflections" do
