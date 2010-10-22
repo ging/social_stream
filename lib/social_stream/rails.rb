@@ -1,6 +1,10 @@
-# Load Devise constant
+# Permalinks:
+require 'stringex'
+# Hierchical relationships in Relation and Activity:
 require 'ancestry'
+# User authentication:
 require 'devise'
+# REST controllers:
 require 'inherited_resources'
 
 require 'social_stream/rails/common'
