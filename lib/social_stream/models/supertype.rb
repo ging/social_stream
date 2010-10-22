@@ -20,12 +20,8 @@ module SocialStream #:nodoc:
           features = "SocialStream::Models::#{ to_s }".constantize
 
           subtypes.each do |s|
-            begin
-              s = s.to_s.classify.constantize
-              s.__send__(:include, features) unless s.ancestors.include?(features)
-            rescue
-              puts "Warning: could not load #{ s.to_s.classify }"
-            end
+            s = s.to_s.classify.constantize
+            s.__send__(:include, features) unless s.ancestors.include?(features)
           end
         end
       end 
