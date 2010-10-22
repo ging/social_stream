@@ -9,15 +9,25 @@ en:
     delete: "Delete"
     to_comment: "Comment"
     like: I like
-    unlike: Already I do not like    
+    unlike: Already I do not like
+    last: Last Activities
   comment:
     input: "Write a comment..."
   follow: "Follow"
+  follower:
+    one: Follower
+    other: Followers
+  friend:
+    one: Friend
+    other: Friends
+    my: "My Friends"
   home:
     one: "Home"
   location:
     message: "You are here > %{location}"
   message: "Message"
+  menu:
+    options: "Menu Options"
   tie:
     pending:
       other: Pending requests
