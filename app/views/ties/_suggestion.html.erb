@@ -10,7 +10,7 @@
         <div class="suggestion_brief">
             <%= suggestion_brief(subject) %>
         </div>
-        <div class="suggestion_link" id="tie_relation_<%=dom_id(subject)%>">
+        <div class="suggestion_link" id="tie_relation_<%= dom_id(subject)%>">
           <%= suggestion_link(subject, :user  => 'friend_request',
                                        :group => 'follower') %>
         </div>
