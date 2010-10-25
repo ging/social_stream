@@ -13,8 +13,7 @@ module SocialStream
 
         delegate :name, :name=,
                  :email, :email=,
-                 :permalink, :permalink=,
-                 :disabled, :disabled=,
+                 :permalink,
                  :ties, :sent_ties, :received_ties,
                  :active_ties_to,
                  :sender_subjects, :receiver_subjects, :suggestion,
@@ -31,6 +30,10 @@ module SocialStream
       module InstanceMethods
         def actor!
           actor || build_actor
+        end
+
+        def to_param
+          permalink
         end
 
         private
@@ -56,6 +59,15 @@ module SocialStream
             where(:sender_type => to_s).
             map(&:receiver_type).
             map(&:constantize)
+        end
+
+        def find_by_permalink(perm)
+          joins(:actor).where('actors.permalink' => perm).first
+        end
+
+        def find_by_permalink!(perm)
+          find_by_permalink(perm) ||
+            raise(ActiveRecord::RecordNotFound)
         end
       end
     end

@@ -22,9 +22,5 @@ class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
     migration_template 'migration.rb', 'db/migrate/create_social_stream.rb'
   end
 
-  def add_social_stream_routes
-    route "social_stream"
-  end
-
   hook_for :authentication
 end

@@ -12,6 +12,7 @@ gem 'atd-ancestry', :require => 'ancestry'
 gem 'devise'
 gem 'inherited_resources'
 gem 'cancan'
+gem 'stringex'
 
 gem "rspec-rails", ">= 2.0.0.beta"
 gem "factory_girl"

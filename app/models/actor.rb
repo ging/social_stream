@@ -2,6 +2,8 @@
 class Actor < ActiveRecord::Base
   include SocialStream::Models::Supertype
 
+  acts_as_url :name, :url_attribute => :permalink
+
   has_many :sent_ties,
            :class_name => "Tie",
            :foreign_key => 'sender_id',

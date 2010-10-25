@@ -1,3 +1,5 @@
+require 'devise/orm/active_record'
+
 class User < ActiveRecord::Base
   devise *SocialStream.devise_modules
 
