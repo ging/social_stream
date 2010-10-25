@@ -41,6 +41,10 @@ class CreateSocialStream < ActiveRecord::Migration
       t.datetime "created_at"
       t.datetime "updated_at"
       t.integer  "activity_object_id"
+      t.string   "logo_file_name"
+      t.string   "logo_content_type"
+      t.integer  "logo_file_size"
+      t.datetime "logo_updated_at"
     end
 
     add_index "actors", ["activity_object_id"], :name => "fk_actors_activity_object"
@@ -56,13 +60,13 @@ class CreateSocialStream < ActiveRecord::Migration
 
     add_index "comments", ["activity_object_id"], :name => "fk_commets_activity_object"
 
-    create_table "group", :force => true do |t|
+    create_table "groups", :force => true do |t|
       t.integer  "actor_id"
       t.datetime "created_at"
       t.datetime "updated_at"
     end
 
-    add_index "group", ["actor_id"], :name => "fk_groups_actors"
+    add_index "groups", ["actor_id"], :name => "fk_groups_actors"
 
     create_table "permissions", :force => true do |t|
       t.string   "action"

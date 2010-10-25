@@ -4,6 +4,10 @@ class Actor < ActiveRecord::Base
 
   acts_as_url :name, :url_attribute => :permalink
 
+  has_attached_file :logo,
+                    :styles => { :small => "30x30" },
+                    :default_url => '/images/default_logo.png'
+
   has_many :sent_ties,
            :class_name => "Tie",
            :foreign_key => 'sender_id',

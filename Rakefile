@@ -34,6 +34,7 @@ spec = Gem::Specification.new do |s|
   s.add_dependency('devise', '~> 1.1.3')
   s.add_dependency('inherited_resources', '~> 1.1.2')
   s.add_dependency('stringex', '~> 1.2.0')
+  s.add_dependency('paperclip', '~> 2.3.4')
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|

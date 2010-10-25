@@ -2,10 +2,12 @@
 require 'stringex'
 # Hierchical relationships in Relation and Activity:
 require 'ancestry'
-# User authentication:
+# User authentication
 require 'devise'
-# REST controllers:
+# REST controllers
 require 'inherited_resources'
+# Logo attachments
+require 'paperclip'
 
 require 'social_stream/rails/common'
 File.expand_path(__FILE__) =~ /#{ File.join('vendor', 'plugins') }/ ?
