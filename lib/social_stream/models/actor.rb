@@ -30,7 +30,7 @@ module SocialStream
 
       module InstanceMethods
         def actor!
-          actor || build_actor
+          actor || build_actor(:subject_type => self.class.to_s)
         end
 
         def to_param

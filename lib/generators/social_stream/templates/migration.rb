@@ -38,6 +38,7 @@ class CreateSocialStream < ActiveRecord::Migration
       t.string   "name",      :limit => 45
       t.string   "email",     :default => "", :null => false
       t.string   "permalink", :limit => 45
+      t.string   "subject_type", :limit => 45
       t.datetime "created_at"
       t.datetime "updated_at"
       t.integer  "activity_object_id"

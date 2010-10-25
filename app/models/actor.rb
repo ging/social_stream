@@ -2,11 +2,13 @@
 class Actor < ActiveRecord::Base
   include SocialStream::Models::Supertype
 
+  validates_presence_of :name, :subject_type
+
   acts_as_url :name, :url_attribute => :permalink
 
   has_attached_file :logo,
                     :styles => { :small => "30x30" },
-                    :default_url => '/images/default_logo.png'
+                    :default_url => "/:attachment/:style/:subtype_class.png"
 
   has_many :sent_ties,
            :class_name => "Tie",
