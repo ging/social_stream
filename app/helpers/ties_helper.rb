@@ -9,7 +9,7 @@ module TiesHelper
     raise "Relation not provided for #{ subject.class.to_s.underscore }" if relation.blank?
 
     if relation=='follower'
-      link_to t("tie.suggestion.#{ relation }."),
+      link_to t("tie.suggestion.#{ relation }.new"),
               new_tie_path("tie[sender_id]" => current_user.actor.id,
                            "tie[receiver_id]" => subject.actor.id,
                            "tie[relation_name]" => relation),
