@@ -8,11 +8,23 @@ module TiesHelper
 
     raise "Relation not provided for #{ subject.class.to_s.underscore }" if relation.blank?
 
-    link_to t("tie.suggestion.#{ relation }.new"),
-            new_tie_path("tie[sender_id]" => current_user.actor.id,
-                         "tie[receiver_id]" => subject.actor.id,
-                         "tie[relation_name]" => relation),
-            :class => 'boxy',
-            :title => t("tie.suggestion.#{ relation }.confirm_new", :name => subject.name)
+    if relation=='follower'
+      link_to t("tie.suggestion.#{ relation }.new"),
+              new_tie_path("tie[sender_id]" => current_user.actor.id,
+                           "tie[receiver_id]" => subject.actor.id,
+                           "tie[relation_name]" => relation),
+              :class => 'boxy',
+              :title => t("tie.suggestion.#{ relation }.confirm_new", :name => subject.name)
+    else
+      link_to t("tie.suggestion.#{ relation }.new"),
+              new_tie_path("tie[sender_id]" => current_user.actor.id,
+                           "tie[receiver_id]" => subject.actor.id,
+                           "tie[relation_name]" => relation),
+              :class => 'boxy',
+              :title => t("tie.suggestion.#{ relation }.confirm_new", :name => subject.name)
+
+
+    end
+
   end
 end

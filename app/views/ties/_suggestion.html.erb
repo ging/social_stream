@@ -10,11 +10,14 @@
         <div class="suggestion_brief">
             <%= suggestion_brief(subject) %>
         </div>
-        <div class="suggestion_link">
+        <div class="suggestion_link" id="tie_relation_<%=dom_id(subject)%>">
           <%= suggestion_link(subject, :user  => 'friend_request',
                                        :group => 'follower') %>
         </div>
     </div>
+    <div class="suggestion_close"><%=link_to('X','#')%></div>
   </div>
-  <% end %>
+  <div class="space_center">
+  </div>  
+<% end %>
 
