@@ -9,15 +9,9 @@ module TiesHelper
     raise "Relation not provided for #{ subject.class.to_s.underscore }" if relation.blank?
 
     if relation=='follower'
-        form_for Tie.new(:sender_id => current_user.actor.id,
-                         :receiver_id => subject.actor.id,
-                         :relation_name => relation ),
-                      :remote => true do |f|
-             f.hidden_field :receiver_id
-             f.hidden_field :sender_id
-             f.hidden_field :relation_name
-             f.submit t('follow'), :class => "follow_btn"
-        end
+      render :partial => 'ties/form_follower',
+                         :locals => { :subject => subject, :relation => relation }
+
     else
       link_to t("tie.suggestion.#{ relation }.new"),
               new_tie_path("tie[sender_id]" => current_user.actor.id,
