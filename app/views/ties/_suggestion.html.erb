@@ -1,5 +1,5 @@
 <% if (subject = current_user.suggestion).present? %>
-  <div id="suggestion_<%= dom_id(subject) %>" class="suggestion">
+  <div id="suggestion_<%=dom_id(subject)%>" class="suggestion">
     <div class="suggestion_actor_logo">
       <%= link_to(image_tag(subject.logo.url, :size =>"30x30"), subject) %>
     </div>

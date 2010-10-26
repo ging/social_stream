@@ -40,6 +40,7 @@ class TiesController < ApplicationController
   def create
     @tie = Tie.new(params[:tie])
 
+    
     respond_to do |format|
       if @tie.save
         format.html { redirect_to(@tie, :notice => 'Tie was successfully created.') }

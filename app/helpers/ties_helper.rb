@@ -18,10 +18,6 @@ module TiesHelper
              f.hidden_field :relation_name
              f.submit t('follow'), :class => "follow_btn"
         end
-
-
-
-
     else
       link_to t("tie.suggestion.#{ relation }.new"),
               new_tie_path("tie[sender_id]" => current_user.actor.id,
