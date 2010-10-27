@@ -1,0 +1,21 @@
+<div id="tie_<%=dom_id(tie.receiver_subject)%>" class="tie">
+  <div class="tie_actor_logo">
+    <%= link_to(image_tag(tie.receiver_subject.logo.url, :size =>"30x30"),
+                tie.receiver_subject) %>
+  </div>
+  <div class="tie_content">
+    <div class="tie_name">
+      <%= link_to(tie.receiver_subject.name, tie.receiver_subject) %>
+    </div>
+    <div class="tie_brief">
+      <%= tie_brief(tie.receiver_subject) %>
+    </div>
+    <div class="tie_link" id="tie_<%= dom_id(tie.receiver_subject)%>">
+      <%= tie_link(tie) %>
+    </div>
+  </div>
+  <div class="tie_close"><%=link_to('X','#')%></div>
+  <div class="space_center">
+  </div>  
+</div>
+

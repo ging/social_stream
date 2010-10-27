@@ -20,12 +20,18 @@ en:
   follower:
     one: Follower
     other: Followers
+    new: "+ Follow"
+    confirm_new: "Do you want to follow %{name}?"
+    submit: "Follow"
   friend:
     one: Friend
     other: Friends
     my: "My Friends"
     add: Add as Friend
-    new: "Accept as friend"
+    submit: "Accept as friend"
+  friend_request:
+    new: "+ Add as friend"
+    confirm_new: "Do you want to add %{name} as friend?"
   group:
     other: "Groups"
     all: All Groups
@@ -49,12 +55,6 @@ en:
     suggestion:
       one: Suggestion
       other: Suggestions
-      friend_request:
-        new: "+ Add as friend"
-        confirm_new: "Do you want to add %{name} as friend?"
-      follower:
-        new: "+ Follow"
-        confirm_new: "Do you want to follow %{name}?"
       all: All
   time:
     ago: "%{time} ago"

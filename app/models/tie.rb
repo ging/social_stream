@@ -26,7 +26,7 @@
 #
 class Tie < ActiveRecord::Base
   # Facilitates relation assigment along with find_relation callback
-  attr_accessor :relation_name
+  attr_writer :relation_name
 
   # Avoids loops at create_inverse after save callback
   attr_accessor :_without_inverse
@@ -77,6 +77,15 @@ class Tie < ActiveRecord::Base
   before_validation :find_relation
 
   after_create :complete_weak_set, :create_inverse
+
+  def relation_name
+    @relation_name || relation.try(:name)
+  end
+
+  def relation!
+    relation ||
+      find_relation
+  end
 
   def sender_subject
     sender.try(:subject)
@@ -172,7 +181,7 @@ class Tie < ActiveRecord::Base
   # Before validation callback
   # Infers relation from its name and the type of the actors
   def find_relation
-    if relation_name.present?
+    if relation_name.present? && relation_name != relation.try(:name)
       self.relation = Relation.mode(sender_subject.class.to_s,
                                     receiver_subject.class.to_s).
                                     find_by_name(relation_name)

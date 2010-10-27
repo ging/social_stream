@@ -51,9 +51,6 @@ $(".to_comment").livequery("blur", function(){
 	return false;
 });
 
-$(".boxy").boxy();
-
-
 $(".suggestion_close").livequery("click",function(){
   $(this).parents(".suggestion").replaceWith("<%= escape_javascript( render(:partial => "ties/suggestion"))%>");
 });

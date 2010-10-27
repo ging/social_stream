@@ -1,0 +1,6 @@
+<%= form_for(tie, :remote => true) do |f| %>
+  <%= f.hidden_field :receiver_id %>
+  <%= f.hidden_field :sender_id %>
+  <%= f.hidden_field :relation_name %>
+  <%= f.submit t('submit', :scope => tie.relation.name), :class => "follow_btn"%>
+<% end %>

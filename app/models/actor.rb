@@ -15,10 +15,18 @@ class Actor < ActiveRecord::Base
            :foreign_key => 'sender_id',
            :dependent => :destroy
 
+  has_many :senders,
+           :through => :received_ties,
+           :uniq => true
+
   has_many :received_ties,
            :class_name => "Tie",
            :foreign_key => 'receiver_id',
            :dependent => :destroy
+
+  has_many :receivers,
+           :through => :sent_ties,
+           :uniq => true
 
   # The subject instance for this actor
   def subject
@@ -89,20 +97,39 @@ class Actor < ActiveRecord::Base
 
   # This is an scaffold for a recomendations engine
   #
-  # By now, it returns another subject without any current relation
+  SuggestedRelations = {
+    'User'  => 'friend_request',
+    'Group' => 'follower'
+  }
+
+  # Make n suggestions
+  # TODO: make more
+  def suggestions(n)
+    n.times.map{ |m| suggestion }
+  end
+
+  # By now, it returns a tie suggesting a relation from SuggestedRelations
+  # to another subject without any current relation
   #
   # Options::
   # * type: the class of the recommended subject
+  #
+  # @return [Tie]
   def suggestion(options = {})
-    type = options[:type]
+    type = options[:type].present? ?
+      options[:type].to_s.classify :
+      SuggestedRelations.keys[rand(SuggestedRelations.size)]
 
-    type = type.present? ?
-      type.to_s.classify.constantize :
-      random_receiving_subject_type
+    type_class = type.constantize
     
-    candidates = type.all - receiver_subjects(type)
+    # Candidates are all the instance of "type" minus all the subjects
+    # that are receiving any tie from this actor
+    candidates = type_class.all - receiver_subjects(type)
 
-    candidates[rand(candidates.size)]
+    candidate = candidates[rand(candidates.size)]
+
+    sent_ties.build :receiver_id => candidate.actor_id,
+                    :relation => Relation.mode(subject_type, type).find_by_name(SuggestedRelations[type])
   end
 
   # All the ties this actor has with subject that support activities
@@ -110,17 +137,21 @@ class Actor < ActiveRecord::Base
     sent_ties.received_by(subject).active
   end
 
+  def pending_ties
+    #TODO: optimize by SQL
+    @pending_ties ||=
+      received_ties.pending.
+        select{ |t| ! receivers.include?(t.sender) }.
+        map{ |u| Tie.new :sender_id => u.receiver_id,
+                         :receiver_id => u.sender_id,
+                         :relation_id => u.relation.granted_id
+        }
+  end
+
   # The set of activities in the wall of this actor
   # TODO: authorization
   def wall
     Activity.wall ties
-  end
-
-  private
-
-  def random_receiving_subject_type
-    type_candidates = subject.class.receiving_subject_classes
-    type_candidates[rand(type_candidates.size)]
   end
 end
 

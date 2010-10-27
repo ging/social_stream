@@ -1,0 +1,14 @@
+<% if @tie.new_record? %>
+    $("#tie_<%=dom_id(@tie.receiver_subject)%>").html(<%= @tie.errors.to_xml %>);
+<% else %>
+  <% if @tie.receiver_subject.is_a?(Group) && ! @tie.relation.granted  #group follower %>
+    $("#groups_list").prepend("<%= escape_javascript(render @tie.receiver_subject) %>");
+  <% end %>
+  var old_tie = $("#tie_<%= dom_id(@tie.receiver_subject) %>");
+  if (old_tie.parent().hasClass('suggestions')) {
+    //replace with new suggestion
+    old_tie.replaceWith("<%= escape_javascript(render(@tie.sender.suggestion))%>");
+    } else {
+    old_tie.hide();
+  }
+<% end %>

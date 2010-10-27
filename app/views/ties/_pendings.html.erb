@@ -1,4 +1,4 @@
-<% if current_user.received_ties.pending.any? %>
+<% if current_user.pending_ties.any? %>
 <div class="middle_box">
   <div class="middle_box_header">
     <%= image_tag('notifications.png', :class => "middle_box_picture_icon") %>
@@ -8,8 +8,7 @@
     </div>
   </div>
 
-  
-
+  <%= render current_user.pending_ties %>
 
 </div>
 <% end -%>

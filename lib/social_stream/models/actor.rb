@@ -17,7 +17,9 @@ module SocialStream
                  :logo,
                  :ties, :sent_ties, :received_ties,
                  :active_ties_to,
-                 :sender_subjects, :receiver_subjects, :suggestion,
+                 :pending_ties,
+                 :sender_subjects, :receiver_subjects,
+                 :suggestions, :suggestion,
                  :wall,
                  :to => :actor!
 

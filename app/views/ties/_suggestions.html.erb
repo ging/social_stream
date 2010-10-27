@@ -5,8 +5,6 @@
     </div>
 </div>
 <div class="suggestions">
-  <% 2.times do %>
-    <%= render :partial => 'ties/suggestion' %>      
-  <% end %>
+  <%= render current_user.suggestions(2) %>
 </div>
 
