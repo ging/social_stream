@@ -1,9 +1,9 @@
 <% content_for :middle do %>
-	<%= render :partial => "spaces/middle_spaces_home" %>
+	<%= render :partial => "groups/middle_group_home" %>
 <% end %>
 
 <% content_for :right do %>
-	<%= render :partial => "spaces/right_spaces_home" %>
+	<%= render :partial => "groups/right_group_home" %>
 <% end %>
 
 
@@ -17,7 +17,8 @@
 </div>
 
 <div id="wrapper_activities">
-	
+  	
+  <%= render :partial => "home/groups" %>
   <%= render :partial => "home/activities" %>
 <!--
     <div id="create_space">

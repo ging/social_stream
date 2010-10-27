@@ -28,6 +28,11 @@ en:
     new: "Accept as friend"
   group:
     other: "Groups"
+    all: All Groups
+    be_fan: Be Fan
+    by: By Groups
+    my: My Groups
+    one: Group
   home:
     one: "Home"
   location:
