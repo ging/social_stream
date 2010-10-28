@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :users
-  resources :groups
 
   match 'home' => 'home#index', :as => :home
+  match 'home' => 'home#index', :as => :user_root # devise after_sign_in_path_for
+
+  resources :groups
 
   resources :ties
   resources :activities do
