@@ -18,21 +18,21 @@ Factory.define :public_tie, :parent => :tie do |t|
   t.relation { |r| Relation.mode('User', 'User').find_by_name('public') }
 end
 
-# UserToSpace ties
-Factory.define :u2s_tie, :parent => :tie do |t|
-  t.receiver { |r| Factory(:space).actor }
-  t.relation { |r| Relation.mode('User', 'Space').strongest }
+# UserToGroup ties
+Factory.define :u2g_tie, :parent => :tie do |t|
+  t.receiver { |r| Factory(:group).actor }
+  t.relation { |r| Relation.mode('User', 'Group').strongest }
 end
 
-Factory.define :admin_tie, :parent => :u2s_tie do |t|
-  t.relation { |r| Relation.mode('User', 'Space').find_by_name('admin') }
+Factory.define :admin_tie, :parent => :u2g_tie do |t|
+  t.relation { |r| Relation.mode('User', 'Group').find_by_name('admin') }
 end
 
-Factory.define :user_tie, :parent => :u2s_tie do |t|
-  t.relation { |r| Relation.mode('User', 'Space').find_by_name('user') }
+Factory.define :user_tie, :parent => :u2g_tie do |t|
+  t.relation { |r| Relation.mode('User', 'Group').find_by_name('user') }
 end
 
-Factory.define :follower_tie, :parent => :u2s_tie do |t|
-  t.relation { |r| Relation.mode('User', 'Space').find_by_name('follower') }
+Factory.define :follower_tie, :parent => :u2g_tie do |t|
+  t.relation { |r| Relation.mode('User', 'Group').find_by_name('follower') }
 end
 

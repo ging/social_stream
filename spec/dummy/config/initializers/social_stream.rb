@@ -1,5 +1,5 @@
 SocialStream.setup do |config|
-  config.actors = [ :user, :space ]
+  config.actors = [ :user, :group ]
 
-  config.activity_objects = [ :post ]
+  config.activity_objects = [ :post, :comment ]
 end

@@ -26,29 +26,29 @@ relations:
     permissions:
       - [ read, resources, group_set ]
 
-  user-space-admin:
+  user-group-admin:
     sender_type: User
-    receiver_type: Space
+    receiver_type: Group
     name: admin
     permissions:
       - [ create,  resources, weak_set ]
       - [ read,    resources, group_set ]
       - [ update,  resources, weak_group_set ]
       - [ destroy, resources, weak_group_set ]
-  user-space-user:
+  user-group-user:
     sender_type: User
-    receiver_type: Space
+    receiver_type: Group
     name: user
-    parent: user-space-admin
+    parent: user-group-admin
     permissions:
       - [ create,  resources, weak_set ]
       - [ read,    resources, group_set ]
       - [ update,  resources, weak_group_set ]
       - [ destroy, resources, weak_group_set ]
-  user-space-follower:
+  user-group-follower:
     sender_type: User
-    receiver_type: Space
+    receiver_type: Group
     name: follower
-    parent: user-space-user
+    parent: user-group-user
     permissions:
       - [ read,    resources, group_set ]
