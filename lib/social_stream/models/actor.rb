@@ -20,7 +20,7 @@ module SocialStream
                  :pending_ties,
                  :sender_subjects, :receiver_subjects,
                  :suggestions, :suggestion,
-                 :wall,
+                 :wall, :wall_profile,
                  :to => :actor!
 
 

@@ -1,0 +1,9 @@
+<div id="bookmark">
+  <%=image_tag("buttons/btn_bookmark.png")%><%= link_to "Follow",
+                                ties_path("tie[sender_id]" => current_user.actor.id,
+                                          "tie[receiver_id]" => @group,
+                                          "tie[relation_name]" => "follower"),
+                                :method => :post,
+                                :remote => true %>
+</div>
+

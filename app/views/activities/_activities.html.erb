@@ -9,11 +9,11 @@
       <%= image_tag("buttons/btn_activities.png") %> <%=t('activity.other')%>
     </div>
 
-    <%= render :partial => 'activities/new', :locals => { :receiver => current_user } %>
+    <%= render :partial => 'activities/new', :locals => { :receiver => owner } %>
   </div>
   <div id="wall">
-  <% if current_user.wall.any? %>
-    <%= render current_user.wall  %>
+  <% if activities.any? %>
+    <%= render activities  %>
   <% end %>
   </div>
 </div>

@@ -1,5 +1,17 @@
+<% content_for :middle do %>
+  <%= render :partial => 'middle' %>
+<% end %>
+
+<% content_for :right do %>
+  <%= render :partial => "right" %>
+<% end %>
+
 <%= render :partial => 'home/location' %>
 
-<%= render :partial => "home/groups" %>
-<%= render :partial => "home/activities" %>
-
+<br class="clearfloat" />
+<div class="space_center">
+</div>
+<%= render :partial => "groups" %>
+<%= render :partial => "activities/activities",
+           :locals => { :activities => current_user.wall,
+                        :owner => current_user } %>

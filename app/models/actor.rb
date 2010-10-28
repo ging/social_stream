@@ -148,9 +148,18 @@ class Actor < ActiveRecord::Base
         }
   end
 
-  # The set of activities in the wall of this actor
-  # TODO: authorization
+  # The set of activities in the wall of this actor, includes all the activities
+  # from the ties the actor has access to
+  #
+  # TODO: ties, authorization
   def wall
+    Activity.wall ties
+  end
+
+  # The set of activities in the wall profile of this actor, includes the activities
+  # from the ties of this actor
+  # TODO: authorization
+  def wall_profile
     Activity.wall ties
   end
 end

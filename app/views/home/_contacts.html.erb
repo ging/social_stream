@@ -1,0 +1,17 @@
+<div class="contacts_header">
+    <%=image_tag("buttons/btn_friend.png", :class => "contacts_icon")%>
+    <div class="contacts_text_header">
+      <%=current_user.friends.count%> <%=t('user.friends')%>
+    </div>
+</div>
+<div class ="contacts">
+    <div class="contact">
+      <%current_user.friends.all.each do |friend|%>
+          <%=link_to((image_tag (friend.logo.url, :alt => friend.name , :size => "40x40")) , friend)%>
+      <%end%>
+    </div>
+</div>
+<div class="contacts_footer">
+  <%=link_to((image_tag("buttons/btn_next.png", :alt => "next")) , users_path) %>
+</div>
+
