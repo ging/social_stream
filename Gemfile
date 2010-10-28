@@ -8,11 +8,9 @@ if RUBY_VERSION < '1.9'
   gem "ruby-debug", ">= 0.10.3"
 end
 
-gem 'atd-ancestry', :require => 'ancestry'
-gem 'devise'
-gem 'inherited_resources'
+gemspec
+
 gem 'cancan'
-gem 'stringex'
 
 gem "rspec-rails", ">= 2.0.0.beta"
 gem "factory_girl"
