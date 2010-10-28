@@ -11,6 +11,14 @@ class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
     copy_file 'seeds.yml', 'db/seeds/social_stream.yml'
   end
 
+  def create_seed_code
+    seed_code = "\nSocialStream.seed!"
+
+    in_root do
+      append_file 'db/seeds.rb', seed_code
+    end
+  end
+
   # TODO: hook_for :orm
   require 'rails/generators/active_record'
 

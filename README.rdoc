@@ -37,9 +37,8 @@ Then, execute:
 This will generate the following:
 * A migration providing the database schema
 * An initializer configuration file for Social Stream.
-* A database seeds file for defining Social Stream relations. You must add:
-    SocialStream.seed!
-  to your db/seeds.rb
+* A database seeds file for defining Social Stream relations, along with an entry
+in db/seeds.rb to load it.
 * A devise:install generation for authentication support
 
 == Actors and Activity Objects
