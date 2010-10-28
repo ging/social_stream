@@ -1,3 +1,9 @@
+<% content_for :javascript do %>
+  $(".suggestions .tie_close").livequery("click",function(){
+    $(this).parents(".tie").replaceWith("<%= escape_javascript(render(current_user.suggestion))%>");
+  });
+<% end %>
+
 <div class="suggestions_header">
     <%= image_tag('notifications.png', :class => "suggestion_icon") %>
     <div class="suggestion_text_header">
