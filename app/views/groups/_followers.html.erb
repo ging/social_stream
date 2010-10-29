@@ -1,6 +1,6 @@
 		<div id="follower">
 				<div id="title_follower">
-                                  <%=image_tag("buttons/btn_follower.png", :alt => "Follower")%><%=@group.followers.count%> <%=t('follower', :count => @group.followers.count)%>
+                                  <%=image_tag("btn/btn_follower.png", :alt => "Follower")%><%=@group.followers.count%> <%=t('follower', :count => @group.followers.count)%>
 				</div>
 				<div class="follower_line">
           <% @group.followers.all.each do |follower| %>
@@ -8,7 +8,7 @@
           <%end%>
 				</div>
 				<div class="future_footer">
-					<%=link_to((image_tag("buttons/btn_next.png", :alt => "next")) , group_path)%>
+					<%=link_to((image_tag("btn/btn_next.png", :alt => "next")) , group_path)%>
 				</div>
 		</div>
 

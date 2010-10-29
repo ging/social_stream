@@ -9,10 +9,10 @@ en:
     like: I like
     unlike: Already I do not like
     last: Last Activities
-  all_rights_reserved: All rights reserved
   comment:
     input: "Write a comment..."
     confirm_delete: "Delete comment?"
+  copyright: "2010 Copyright - All rights reserved"
   days: Days
   delete:
     confirm: Delete %{element}}?

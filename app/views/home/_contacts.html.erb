@@ -1,5 +1,5 @@
 <div class="contacts_header">
-    <%=image_tag("buttons/btn_friend.png", :class => "contacts_icon")%>
+    <%=image_tag("btn/btn_friend.png", :class => "contacts_icon")%>
     <div class="contacts_text_header">
       <%=current_user.friends.count%> <%=t('user.friends')%>
     </div>
@@ -12,6 +12,6 @@
     </div>
 </div>
 <div class="contacts_footer">
-  <%=link_to((image_tag("buttons/btn_next.png", :alt => "next")) , users_path) %>
+  <%=link_to((image_tag("btn/btn_next.png", :alt => "next")) , users_path) %>
 </div>
 
