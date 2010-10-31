@@ -1,7 +1,7 @@
 <%= div_for activity do %>
   <div class="actor_logo">
     <%= link_to image_tag(activity.sender_subject.logo.url,
-                          :size => "50x50",
+                          :size => "35x35",
                           :alt => activity.sender_subject.name),
                  activity.sender_subject %>
   </div>
@@ -26,7 +26,13 @@
 
   </div>			
   <div class="space_comments"></div>
+
+
   <div class="space_activities">
-  <div class="space_sub"></div>
+    <% if activity.activity_objects.count > 1 %>
+      <div class="space_sub"></div>
+    <%else %>
+      <div class="space_center"></div>
+    <%end%>
   </div>
 <% end %>

@@ -14,10 +14,10 @@
            <%= f.hidden_field :sender_id %>
            <%= f.hidden_field :relation_name %>
            <% if @tie.relation!.granted %>
-             <%= f.text_area :message,   :class =>"input_new_suggestions" %>
+             <%= f.text_area :message,   :class =>"input_new_tie" %>
            <% end %>
            <div class="ties_btn">
-             <%= submit_tag t('new', :scope => @tie.relation_name), :class => "follow_btn" %>
+             <%= submit_tag t('send', :scope => @tie.relation_name), :class => "tie_btn" %>
            </div>
          <% end %>
         </div>

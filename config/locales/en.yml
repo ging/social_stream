@@ -22,7 +22,7 @@ en:
     other: Followers
     new: "+ Follow"
     confirm_new: "Do you want to follow %{name}?"
-    submit: "Follow"
+    submit: "+ Follow"
   friend:
     one: Friend
     other: Friends
@@ -31,6 +31,7 @@ en:
     submit: "Accept as friend"
   friend_request:
     new: "+ Add as friend"
+    send: "Send Request"
     confirm_new: "Do you want to add %{name} as friend?"
   group:
     other: "Groups"

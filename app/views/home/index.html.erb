@@ -11,7 +11,9 @@
 <br class="clearfloat" />
 <div class="space_center">
 </div>
-<%= render :partial => "groups" %>
+<div id="my_groups">
+  <%= render :partial => "groups/groups" %>
+</div>
 <%= render :partial => "activities/activities",
            :locals => { :activities => current_user.wall,
                         :owner => current_user } %>

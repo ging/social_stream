@@ -24,6 +24,6 @@ module TiesHelper
   end
 
   def link_follow_state
-      link_to("unfollow", home_path)
+      link_to("Unfollow", home_path)
   end
 end

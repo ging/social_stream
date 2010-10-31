@@ -5,12 +5,12 @@
   </div>
   <div class="tie_content">
     <div class="tie_name">
-      <%= link_to(tie.receiver_subject.name, tie.receiver_subject) %>
+      <%= link_to(tie.receiver_subject.name, tie.receiver_subject, :class => "tie_link") %>
     </div>
     <div class="tie_brief">
       <%= tie_brief(tie.receiver_subject) %>
     </div>
-    <div class="tie_link" id="tie_<%= dom_id(tie.receiver_subject)%>">
+    <div class="tie_link" id="tie_link<%= dom_id(tie.receiver_subject)%>">
       <%= tie_link(tie) %>
     </div>
   </div>
