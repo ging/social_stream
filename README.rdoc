@@ -35,6 +35,7 @@ Then, execute:
   rails generate social_stream:install
 
 This will generate the following:
+* A jquery:install generation for jQuery support
 * A devise:install generation for authentication support
 * An initializer configuration file for Social Stream.
 * A database seeds file for defining Social Stream relations, along with an entry

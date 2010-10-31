@@ -1,3 +1,5 @@
+# jQuery
+require 'jquery-rails'
 # Permalinks:
 require 'stringex'
 # Hierchical relationships in Relation and Activity:

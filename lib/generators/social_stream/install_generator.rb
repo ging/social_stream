@@ -1,6 +1,7 @@
 class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
   include Rails::Generators::Migration
 
+  hook_for :javascript
   hook_for :authentication
 
   source_root File.expand_path('../templates', __FILE__)
