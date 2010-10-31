@@ -1,0 +1,68 @@
+body {
+	color: #2A3890;
+	background: #ffffff;
+}
+
+.p {
+	margin: 0px;
+	padding: 0px;
+	font-size: inherit;
+	font-family: inherit;
+	font-weight: inherit;
+	text-align: inherit;
+	color: inherit;
+	line-height: inherit;
+	vertical-align: top;
+}
+
+p {
+	padding-top: 0px;
+	margin-top: 0px;
+}
+
+img {
+	border: 0px;
+}
+
+div {
+	margin: 0px;
+	padding: 0px;
+	font-family: Helvetica;
+	font-size: 11px;
+}
+
+.AbsWrap {
+	width: 100%;
+	position: relative;
+}
+
+.rowWrap {
+	width: 100%;
+}
+
+a:link,a:visited {
+	COLOR: inherit;
+	text-decoration: inherit;
+}
+
+a.link:hover {
+	text-decoration: underline;
+}
+
+/************* wrapper ******************/
+* {
+	margin: 0;
+	padding: 0;
+	font-family: Helvetica;
+}
+
+#wrapper {
+	background-color: #f5f5f5;
+	margin: 0px auto;
+	width: 100%;
+}
+
+.clearfloat {
+	clear: both;
+	height: 0px;
+}

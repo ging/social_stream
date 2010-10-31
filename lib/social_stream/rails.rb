@@ -10,6 +10,8 @@ require 'inherited_resources'
 require 'paperclip'
 # Paperclip extensions for SocialStream
 require 'paperclip/ext'
+# Assets
+require 'asset_bundler'
 
 require 'social_stream/rails/common'
 File.expand_path(__FILE__) =~ /#{ File.join('vendor', 'plugins') }/ ?
