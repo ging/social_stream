@@ -8,8 +8,7 @@ require 'devise'
 require 'inherited_resources'
 # Logo attachments
 require 'paperclip'
-# Paperclip extensions for SocialStream
-require 'paperclip/ext'
+require 'paperclip/social_stream'
 # Assets
 require 'asset_bundler'
 
