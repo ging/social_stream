@@ -8,7 +8,7 @@ class Actor < ActiveRecord::Base
 
   has_attached_file :logo,
                     :styles => { :small => "30x30" },
-                    :default_url => "/:attachment/:style/:subtype_class.png"
+                    :default_url => "/images/:attachment/:style/:subtype_class.png"
 
   has_many :sent_ties,
            :class_name => "Tie",
