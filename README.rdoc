@@ -35,21 +35,30 @@ Then, execute:
   rails generate social_stream:install
 
 This will generate the following:
-* A migration providing the database schema
+* A devise:install generation for authentication support
 * An initializer configuration file for Social Stream.
 * A database seeds file for defining Social Stream relations, along with an entry
 in db/seeds.rb to load it.
-* A devise:install generation for authentication support
+* A new application layout
+* A migration providing the database schema
+
+Do not forget to migrate and seed your database
+
+  rake db:migrate
+  rake db:seed
 
 == Actors and Activity Objects
 
-{Social Stream}[http://github.com/ging/social_stream] relies in Devise[http://github.com/plataformatec/devise].
+{Social Stream}[http://github.com/ging/social_stream] relies in Devise[http://github.com/plataformatec/devise]. You have authenticated users support in your application.
 
-You must include an <tt>actor_id</tt> column in the user's migration. Then add user to
-<tt>config/initializers/social_stream.rb</tt>
+Besides, there is another kind of actor: groups. If you want other type of actors
+(like organizations or social events) you must include an <tt>actor_id</tt> column in
+the migration. Then add it to <tt>config/initializers/social_stream.rb</tt>
 
-You must do the same with Activity Objects, like posts, comments or photos. Don't forget to add
-a <tt>activity_object_id</tt> column in the migration and add them to the initializer.
+There is also support for two types of basic activity objects: posts and comments.
+If you create other types, like photos, bookmarks or videos, you must do the same: 
+add a <tt>activity_object_id</tt> column in the migration and include it in the
+initializer.
 
 = Documentation
 
