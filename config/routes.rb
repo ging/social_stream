@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   end
   resources :posts
   resources :comments
+
+  root :to => "frontpage#index"
 end
