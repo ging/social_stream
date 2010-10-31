@@ -1,0 +1,87 @@
+<%= content_for :search do %>
+<%end %>
+<div class="left column span-11 borde">
+    <div id="left_espacio">
+    </div>
+    <div id="left_contenido">
+        <div id="vcc_title">
+            <%= t('frontpage.main_title') %>
+            <span id="text_bottom_title">
+                <br/>
+                <%= t('frontpage.stats', :users => User.count, :groups => Group.count) %>
+            </span>
+        </div>
+        <br/>
+        <div id="share">
+            <span><%=image_tag("../images/frontpage/share.gif") %></span>
+            <span>
+                <ul class="purple">
+                </li>
+                <li><%=image_tag("../images/frontpage/purple_sq.png") %><%= t('frontpage.share.sentence2') %>
+                </img>
+            </li>
+            <li>
+            <%=image_tag("../images/frontpage/purple_sq.png") %><%= t('frontpage.share.sentence3') %>
+            </img>
+        </li>
+        </ul>
+    </span>
+</div>
+<div id="meet" class="no_float_left">
+    <span><%=image_tag("../images/frontpage/meet.gif") %></span>
+    <span class="no_float">
+        <ul class="green">
+        <li><%=image_tag("../images/frontpage/green_sq.png") %><%= t('frontpage.meet.sentence2') %>
+        </img>
+    </li>
+</ul>
+</span>
+</div>
+<div id="collaborate" class="no_float_left">
+    <span><%=image_tag("../images/frontpage/collaborate.gif") %></span>
+    <span>
+        <ul class="yellow">
+            <li>
+            <%=image_tag("../images/frontpage/yellow_sq.png") %><%= t('frontpage.collaborate.sentence1') %>
+            </img>
+        </li>
+    <li>
+    <%=image_tag("../images/frontpage/yellow_sq.png") %><%= t('frontpage.collaborate.sentence3') %>
+    </img>
+</li>
+</ul>
+</span>
+</div>
+<br/>
+<div id="join_form" class="no_float_left">
+    <%= link_to image_tag("/images/frontpage/join.gif", :alt=>"register"), new_user_registration_path, :class => "register_link" %>
+</div>
+</div>
+</div>
+<div class="right column span-12 borde">
+    <div id="caracteristics">
+
+        <ul>
+            <li class="participants">
+                <%= t('frontpage.elements.participants') %>
+            </li>
+            <li class="organizers">
+                <%= t('frontpage.elements.organizers') %>
+            </li>
+            <li class="spaces">
+                <%= t('frontpage.elements.groups') %>
+            </li>
+            <li class="comments">
+                <%= t('frontpage.elements.comments') %>
+            </li>
+            <li class="tags">
+                <%= t('frontpage.elements.tags') %>
+            </li>
+            <li class="networks">
+                <%= t('frontpage.elements.networks') %>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="espacio_body_bottom">
+</div>
