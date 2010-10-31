@@ -12,6 +12,7 @@ module SocialStream
         def included(base)
           base.class_eval do
             config.generators.authentication :devise
+            config.generators.javascript :jquery
 
             config.to_prepare do
               %w( actor activity_object ).each do |supertype|

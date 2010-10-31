@@ -1,3 +1,5 @@
+# jQuery
+require 'jquery-rails'
 # Permalinks:
 require 'stringex'
 # Hierchical relationships in Relation and Activity:
@@ -8,8 +10,7 @@ require 'devise'
 require 'inherited_resources'
 # Logo attachments
 require 'paperclip'
-# Paperclip extensions for SocialStream
-require 'paperclip/ext'
+require 'paperclip/social_stream'
 
 require 'social_stream/rails/common'
 File.expand_path(__FILE__) =~ /#{ File.join('vendor', 'plugins') }/ ?

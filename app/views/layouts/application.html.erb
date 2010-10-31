@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <title><%= yield(:title) || t('socialstream') %></title>
+
+        <%= stylesheet_link_tag "base", :media => "screen, projection" %>
+        <%= stylesheet_link_tag "header", :media => "screen, projection" %>
+        <%= stylesheet_link_tag "index", :media => "screen, projection" %>
+        <%= stylesheet_link_tag "activities", :media => "screen, projection" %>
+        <%= stylesheet_link_tag "right", :media => "screen, projection" %>
+        <%= stylesheet_link_tag "home", :media => "screen, projection" %>
+        <%= stylesheet_link_tag "browse", :media => "screen, projection" %>
+	      <%= stylesheet_link_tag "social_stream", :media => "screen, projection" %>
+        <%= stylesheet_link_tag "boxy", :media => "screen, projection" %>
+        <%= stylesheet_link_tag "middle", :media => "screen, projection" %>
+        <%= stylesheet_link_tag "menu", :media => "screen, projection" %>  
+
+        <!--[if IE]>
+            <%= stylesheet_link_tag "ie", :media => "screen, projection" %>
+        <![endif]-->
+        <script type="text/javascript">
+            if (navigator.userAgent.indexOf('Mac') != -1) {
+                document.write("<link href='/stylesheets/mac.css' media='screen, projection' rel='stylesheet' type='text/css' />");
+            }
+        </script>
+        <%= javascript_include_tag :defaults %>
+       
+        <%= javascript_include_tag 'hoverIntent', 'superfish', 'main',
+                                   'jquery-ui-personalized-1.5.2.packed' , 'jquery.livequery',
+                                   'jquery.boxy', 'menu'%>
+
+
+        <% if protect_against_forgery? %>
+          <%= csrf_meta_tag %>
+        <% end %>				
+
+        <script type="text/javascript" charset="utf-8">
+          $(document).ready(function() {
+            <%= yield :javascript %>
+          })
+        </script>
+
+        <%= yield :head %>
+    </head>
+    <body>
+        <div id="wrapper">
+            <%= render :partial => "layouts/header" %>
+            <div id="wrapper_body">
+                <div id="content">
+                	<%= yield %>
+                </div>
+                <div id="middle">
+                  <div id="middleContent">
+                    <div class="space_center">
+                    </div>
+                    <div class="space_center">
+                    </div>
+                    <div class="space_center">
+                    </div>
+                      <%=  yield :middle %>
+                  </div>
+                </div>
+                <div id="right">
+                  <div id="rightContent">
+                    <div class="space_center">
+                    </div>
+                    <div class="space_center">
+                    </div>
+                    <div class="space_center">
+                    </div>
+                      <%= yield :right %>
+                  </div>
+                </div>
+                <br class="clearfloat" />
+            </div>
+            <%= render :partial => "layouts/footer" %>
+        </div>
+
+    </body>
+</html>

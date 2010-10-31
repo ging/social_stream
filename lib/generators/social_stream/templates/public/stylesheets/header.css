@@ -1,0 +1,107 @@
+/*******************************header *************************************/
+#headerFront {
+	width: 100%;
+	padding: 0;
+	background: #1F4A75;
+}
+
+#menu_top {
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.banner_top {
+	width: 960px;
+	height: 27px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 3px;
+	position: relative;
+}
+
+#headerFront {
+	width: 100%;
+	padding: 2px 0px 0px 0px;
+	background: #1F4A75;
+	height: 27px;
+}
+
+#logo_vcc {
+	padding: 0px 0px 0px 4px;
+}
+
+#logo_txt {
+	color: #fff;
+	display: inline;
+	vertical-align: top;
+	padding-top: 2px;
+}
+
+#space_logo {
+	width: 60%;
+	display: inline;
+}
+
+#header_left {
+	left: 0px;
+	float: left;
+	padding-left: 5px;
+}
+
+#header_right {
+	float: right;
+	right: 0px;
+	padding-right: 10px;
+}
+
+.btn_config {
+	vertical-align: top;
+	padding-bottom: 0px;
+	padding-left: 6px;
+	display: inline;
+}
+
+.txt_config {
+	color: #fff;
+	vertical-align: top;
+	display: inline;
+	padding-top: 2px;
+	border-right: thin solid;
+	padding-right: 3px;
+}
+
+.txt_config2 {
+	color: #fff;
+	vertical-align: top;
+	display: inline;
+	padding-top: 2px;
+	padding-right: 3px;
+}
+
+#txt_find {
+	color: #fff;
+	vertical-align: top;
+	display: inline;
+	padding-top: 2px;
+	padding-right: 3px;
+}
+
+#find_form {
+	color: #fff;
+	vertical-align: top;
+	display: inline-block;
+	padding-top: 2px;
+	padding-right: 3px;
+}
+
+#input_find {
+	border-color: #0656a4;
+	padding: 0px;
+	border: 1px inset;
+}
+
+.btn_menu {
+	vertical-align: middle;
+	display: inline;
+}

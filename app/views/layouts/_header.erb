@@ -1,0 +1,36 @@
+<div id="headerFront">
+    <div class="banner_top">
+        <div id="header_left">
+            <a href="index.htm"></a>
+            <div id="logo_txt">
+                <%= link_to(t('socialstream') , root_path)%>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <% if user_signed_in? %>
+              <%=image_tag("btn/btn_home.png",:class=>"btn_config",:alt=>"Home") %>
+              <div class="txt_config">
+                                  <%= link_to t('home.my'),home_path  %>
+              </div>			
+              <%=image_tag("btn/btn_profile.png",:class=>"btn_config",:alt=>"Profile") %>
+              <div class="txt_config">
+                                  <%=link_to(t('profile.my'),current_user)%>
+              </div>
+                          <%=image_tag("btn/btn_browse.png",:class=>"btn_config",:alt=>"Browse") %>
+              <div class="txt_config2">
+                                  <%=link_to(t('browse'),users_path) %>  &nbsp;
+              </div>
+          </div>
+          <div id="header_right">
+              <%=image_tag("btn/btn_config.png",:class=>"btn_config",:alt=>"Configuration") %>
+              <div class="txt_config">
+                  <%= t('account') %>
+                  
+              </div>
+              <%=image_tag("btn/btn_exit.png",:class=>"btn_config",:alt=>"Exit") %>
+              <div class="txt_config2">
+                <%= link_to t('logout')+" ("+current_user.name+")", destroy_user_session_path %>
+              </div>
+            <% end %>
+        </div>
+    </div>
+    <br class="clearfloat" />
+</div>

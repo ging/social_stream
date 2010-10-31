@@ -30,7 +30,7 @@ relations:
   user-friend-request:
     sender_type: User
     receiver_type: User
-    name: friendship_request
+    name: friend_request
     # This relation is the request for user-friend
     granted: user-friend
 
