@@ -1,6 +1,8 @@
 class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
   include Rails::Generators::Migration
 
+  hook_for :authentication
+
   source_root File.expand_path('../templates', __FILE__)
 
   def create_initializer_file
@@ -9,6 +11,12 @@ class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
 
   def create_config_file
     copy_file 'seeds.yml', 'db/seeds/social_stream.yml'
+  end
+
+  def create_application_layout
+    copy_file File.join(File.dirname(__FILE__), '../../../',
+                        'app/views/layouts/application.html.erb'),
+              'app/views/layouts/application.html.erb'
   end
 
   def create_seed_code
@@ -30,5 +38,4 @@ class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
     migration_template 'migration.rb', 'db/migrate/create_social_stream.rb'
   end
 
-  hook_for :authentication
 end
