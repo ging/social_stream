@@ -11,8 +11,6 @@ require 'inherited_resources'
 # Logo attachments
 require 'paperclip'
 require 'paperclip/social_stream'
-# Assets
-require 'asset_bundler'
 
 require 'social_stream/rails/common'
 File.expand_path(__FILE__) =~ /#{ File.join('vendor', 'plugins') }/ ?

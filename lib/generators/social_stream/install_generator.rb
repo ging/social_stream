@@ -14,6 +14,10 @@ class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
     copy_file 'seeds.yml', 'db/seeds/social_stream.yml'
   end
 
+  def copy_public
+    directory "public"
+  end
+
   def create_application_layout
     copy_file File.join(File.dirname(__FILE__), '../../../',
                         'app/views/layouts/application.html.erb'),

@@ -8,7 +8,6 @@ Gem::Specification.new do |s|
   s.authors = ['Antonio Tapiador', 'Diego Carrera']
   s.files = `git ls-files`.split("\n")
   s.add_dependency('atd-ancestry')
-  s.add_dependency('atd-asset_bundler')
   s.add_dependency('devise', '~> 1.1.3')
   s.add_dependency('inherited_resources', '~> 1.1.2')
   s.add_dependency('stringex', '~> 1.2.0')
