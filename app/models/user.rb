@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
     receiver_subjects(:group, :relations => 'follower') & Tie.recent
   end
 
+  def friends
+    receiver_subjects(:user, :relations => 'friend')
+  end
+
   protected
   
   # From devise

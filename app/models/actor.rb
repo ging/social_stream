@@ -128,7 +128,7 @@ class Actor < ActiveRecord::Base
 
     candidate = candidates[rand(candidates.size)]
 
-    sent_ties.build :receiver_id => candidate.actor_id,
+    sent_ties.build :receiver_id => candidate.try(:actor_id),
                     :relation => Relation.mode(subject_type, type).find_by_name(SuggestedRelations[type])
   end
 
