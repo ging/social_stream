@@ -116,20 +116,26 @@ class Actor < ActiveRecord::Base
   #
   # @return [Tie]
   def suggestion(options = {})
-    type = options[:type].present? ?
-      options[:type].to_s.classify :
-      SuggestedRelations.keys[rand(SuggestedRelations.size)]
+    candidates_types = options[:type].present? ?
+      Array(options[:type].to_s.classify) :
+      SuggestedRelations.keys
 
-    type_class = type.constantize
+    candidates_classes = candidates_types.map(&:constantize)
     
     # Candidates are all the instance of "type" minus all the subjects
     # that are receiving any tie from this actor
-    candidates = type_class.all - receiver_subjects(type)
+    candidates = candidates_classes.inject([]) do |cs, klass|
+      cs += klass.all - receiver_subjects(klass)
+      cs -= Array(subject) if subject.is_a?(klass)
+      cs
+    end
 
     candidate = candidates[rand(candidates.size)]
 
-    sent_ties.build :receiver_id => candidate.try(:actor_id),
-                    :relation => Relation.mode(subject_type, type).find_by_name(SuggestedRelations[type])
+    return nil unless candidate.present?
+
+    sent_ties.build :receiver_id => candidate,
+                    :relation => Relation.mode(subject_type, candidate.class).find_by_name(SuggestedRelations[candidate.class.to_s])
   end
 
   # All the ties this actor has with subject that support activities

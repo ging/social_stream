@@ -1,4 +1,4 @@
-<% if current_user.suggestion.receiver_id.present? %>
+<% if current_user.suggestion.present? %>
   <% content_for :javascript do %>
     $(".suggestions .tie_close").livequery("click",function(){
       $(this).parents(".tie").replaceWith("<%= escape_javascript(render(current_user.suggestion))%>");
