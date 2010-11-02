@@ -4,13 +4,14 @@
 
 .group{
   display:inline-block;
+  width:50px;
 }
 
 #groups_list {
 	width: 100%;
-	border-bottom: thin solid #D4E4Ea;
 	padding-bottom: 5px;
 	text-align: center;
+  display: inline-block;
 }
 
 #group_todos {
@@ -24,6 +25,28 @@
 	padding-left: 5px;
 	font-weight: bold;
 }
+
+.group_title a{
+  display:block;
+  font-size:9px;
+  text-decoration:none;
+  text-align:center;
+}
+
+.group_title a:hover{
+  display:block;
+  text-decoration:underline;
+}
+
+.group_content{
+  display:block;
+  text-align:center;
+}
+
+.btn_group{
+  vertical-align:top;
+}
+
 
 #my_conferences {
 	background-color: #deeff8;

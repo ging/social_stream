@@ -27,7 +27,6 @@
 	padding-top: 5px;
 }
 
-
 #input_activities {
 	border-color: #0656a4;
 	color: #2A3890;
@@ -56,7 +55,7 @@
 }
 
 .actor_logo {
-	width: 55px;
+	width: 38px;
 	padding: 8px 0px 8px 5px;
 	display: inline-block;
 	vertical-align: top;
@@ -66,7 +65,7 @@
 	padding: 8px 0px 0px 0px;
 	display: inline-block;
 	color: #000;
-	width: 85%;
+	width: 90%;
 }
 
 

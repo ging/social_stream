@@ -26,19 +26,31 @@
 }
 
 .follow_btn{
-  color: #fff;
-  background-color: #1F4A75;
-  padding: 2px 2px 2px 2px;
-  border:1px solid #BDC7D8;
+  color: #2A3890;
   font-size: 11px;
   cursor: pointer;
+  text-decoration:underline;
+  background:none;
+  border:0;
+
+}
+.follow_btn button{
+  overflow: visible;
 }
 
+.tie_btn{
+  color:#fff; 
+  background:#1F4A75;
+  padding: 2px 0px 2px 0px;
+  font-size: 11px;
+}
 
 .ties_btn{
-    text-align: right;
-    padding: 2px 0px 2px 10px;
-    vertical-align: middle;
+  text-align: right;
+  padding: 2px 0px 2px 0px;
+  vertical-align: middle;
+  text-decoration:underline;
+
 }
 
 
@@ -89,6 +101,13 @@
 
 }
 
+.tie_link a{
+  text-decoration:none;
+}
+
+.tie_link a:hover{
+  text-decoration:underline;
+}
 
 
 
