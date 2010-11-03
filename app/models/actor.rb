@@ -134,7 +134,7 @@ class Actor < ActiveRecord::Base
 
     return nil unless candidate.present?
 
-    sent_ties.build :receiver_id => candidate.id,
+    sent_ties.build :receiver_id => candidate.actor.id,
                     :relation => Relation.mode(subject_type, candidate.class).find_by_name(SuggestedRelations[candidate.class.to_s])
   end
 
