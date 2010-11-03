@@ -9,6 +9,7 @@ en:
     like: I like
     unlike: Already I do not like
     last: Last Activities
+  browse: "Browse"
   comment:
     input: "Write a comment..."
     confirm_delete: "Delete comment?"
@@ -23,6 +24,7 @@ en:
     new: "+ Follow"
     confirm_new: "Do you want to follow %{name}?"
     submit: "+ Follow"
+  forgot_password?: "Forgot you password?"
   friend:
     one: Friend
     other: Friends
@@ -33,6 +35,24 @@ en:
     new: "+ Add as friend"
     send: "Send Request"
     confirm_new: "Do you want to add %{name} as friend?"
+  frontpage:
+    collaborate:
+      sentence1: "Organize your projects and activities"
+      sentence2: "Create your own groups"
+    elements:
+      comments: "Comments"
+      networks: "Social Networks"
+      organizers: "Organizers"
+      participants: "Participants"
+      groups: "Groups"
+      tags: "Tags"
+    main_title: "SocialStream a core for building social network applications."
+    meet:
+      sentence1: "Meet interesting people and groups"
+    share:
+      sentence1: "Your contacts and relations"
+      sentence2: "Posts, comments and activities"
+    stats: "%{users} users and %{groups} groups registered"
   group:
     other: "Groups"
     all: All Groups
@@ -49,6 +69,9 @@ en:
     options: "Menu Options"
   post:
     confirm_delete: "Delete post?"
+  sign_in: "Sign in"
+  sign_up: "Sign up"
+  socialstream: "SocialStream"
   tie:
     pending:
       other: Pending requests
@@ -59,5 +82,4 @@ en:
       all: All
   time:
     ago: "%{time} ago"
-  socialstream: "SocialStream"
 
