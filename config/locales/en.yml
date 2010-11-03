@@ -1,4 +1,6 @@
 en:
+  account:
+    one: "Account"
   activity:
     one: "Activity"
     other: "Activities"
@@ -60,8 +62,9 @@ en:
     by: By Groups
     my: My Groups
     one: Group
-  home:
-    one: "Home"
+  home: "Home"
+  inbox:
+    one: "Inbox"
   location:
     message: "You are here > %{location}"
   message: "Message"
@@ -69,8 +72,11 @@ en:
     options: "Menu Options"
   post:
     confirm_delete: "Delete post?"
+  profile:
+    one: "Profile"
   sign_in: "Sign in"
   sign_up: "Sign up"
+  sign_out_user: "Sign out (%{user})"
   socialstream: "SocialStream"
   tie:
     pending:

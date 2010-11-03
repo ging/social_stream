@@ -11,21 +11,19 @@ namespace :db do
     task :create => :environment do
 
       # Create demo user if not present
-      if User.find_by_name('demo').blank?
-        u = User.create! :full_name => 'demo',
-                         :email => 'demo@dit.upm.es',
-                         :password => 'demo',
-                         :password_confirmation => 'demo'
-        u.confirm!
+      if User.find_by_name('demostration').blank?
+        u = User.create! :name => 'demostration',
+                         :email => 'demostration@test.com',
+                         :password => 'demostration',
+                         :password_confirmation => 'demostration'
       end
 
       puts "* Create Users"
       20.times do
-        u = User.create :full_name => Forgery::Name.full_name,
+        u = User.create :name => Forgery::Name.full_name,
                         :email => Forgery::Internet.email_address,
-                        :password => 'test',
-                        :password_confirmation => 'test'
-        u.confirm!
+                        :password => 'demostration',
+                        :password_confirmation => 'demostration'
       end
 
       available_users = User.all
