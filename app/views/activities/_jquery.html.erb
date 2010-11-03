@@ -1,5 +1,5 @@
 //javascript for main activities input
-$("#activities_share_btn").hide();
+
 title = "<%= t('activity.input') %>";
 $("#input_activities").click(function(){
   if(this.value == title){
@@ -7,12 +7,9 @@ $("#input_activities").click(function(){
     $("#activities_share_btn").show();
   }
 });
-$("#input_activities").blur(function(){
-  if(this.value == ""){
-    this.value= title;
-    $("#activities_share_btn").hide();
-  }
-});
+
+
+
 
 //javascript for comments
 $(".input_new_comments").val("<%= t('comment.input') %>");
@@ -101,3 +98,12 @@ $('#left_scroll img').livequery("click",function(){
 
 
 });
+
+
+
+
+$("#security").dropdownchecklist( { closeRadioOnClick: true } );
+$("#security_image").parent().width(28);
+$("#security_image").parent().parent().width(28);
+
+
