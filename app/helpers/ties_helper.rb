@@ -1,6 +1,6 @@
 module TiesHelper
   def tie_brief(tie)
-    "18 contacts in common"
+    "N contacts in common"
   end
 
   def tie_link(tie)
