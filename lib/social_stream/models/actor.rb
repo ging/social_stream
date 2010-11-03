@@ -24,6 +24,10 @@ module SocialStream
                  :to => :actor!
 
 
+        validates_presence_of :name
+
+        scope :alphabetic, includes(:actor).order('actors.name')
+
         scope :with_sent_ties,     joins(:actor => :sent_ties)
         scope :with_received_ties, joins(:actor => :received_ties)
 
