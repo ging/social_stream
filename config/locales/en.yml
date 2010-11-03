@@ -56,12 +56,15 @@ en:
       sentence2: "Posts, comments and activities"
     stats: "%{users} users and %{groups} groups registered"
   group:
+    all: "All Groups"
+    by: "By Groups"
+    my: "My Groups"
+    one: "Group"
     other: "Groups"
-    all: All Groups
-    be_fan: Be Fan
-    by: By Groups
-    my: My Groups
-    one: Group
+    popular:
+      most: "Most popular"
+    voted:
+      most: "Most voted"
   home: "Home"
   inbox:
     one: "Inbox"
@@ -88,4 +91,8 @@ en:
       all: All
   time:
     ago: "%{time} ago"
+  user:
+    by: "By Users"
+    one: "User"
+    other: "Users"
 
