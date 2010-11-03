@@ -37,9 +37,8 @@ Then, execute:
 This will generate the following:
 * A jquery:install generation for jQuery support
 * A devise:install generation for authentication support
-* An initializer configuration file for Social Stream.
-* A database seeds file for defining Social Stream relations, along with an entry
-in db/seeds.rb to load it.
+* An initializer file with configuration for Social Stream.
+* A database seeds file for defining custom Social Stream relations, along with an entry in db/seeds.rb to load it.
 * A new application layout
 * A migration providing the database schema
 
@@ -50,21 +49,21 @@ Do not forget to migrate and seed your database
 
 == Actors and Activity Objects
 
-{Social Stream}[http://github.com/ging/social_stream] relies in Devise[http://github.com/plataformatec/devise]. You have authenticated users support in your application.
+{Social Stream}[http://github.com/ging/social_stream] relies in Devise[http://github.com/plataformatec/devise].
+You have authenticated users support in your application by default.
 
-Besides, there is another kind of actor: groups. If you want other type of actors
+Besides, there is another kind of actor: groups. If you want other type of actor
 (like organizations or social events) you must include an <tt>actor_id</tt> column in
-the migration. Then add it to <tt>config/initializers/social_stream.rb</tt>
+the new actor migration. Then add it to <tt>config/initializers/social_stream.rb</tt>
 
 There is also support for two types of basic activity objects: posts and comments.
-If you create other types, like photos, bookmarks or videos, you must do the same: 
+You can create other types, like photos, bookmarks or videos, but you must do the same: 
 add a <tt>activity_object_id</tt> column in the migration and include it in the
 initializer.
 
 = Documentation
 
-{Social Stream documentation}[http://rdoc.info/github/ging/social_stream/frames] is available at
-{rdoc.info}[http://rdoc.info/]
+{Social Stream documentation is available at rdoc.info}[http://rdoc.info/github/ging/social_stream/frames]}
 
 = Discussion
 

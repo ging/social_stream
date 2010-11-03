@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
-  validates_presence_of :name, :email
+  validates_presence_of :email
   validates_format_of :email, :with => Devise.email_regexp, :allow_blank => true
   # TODO: uniqueness of email, which is in actor
 

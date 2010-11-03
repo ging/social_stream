@@ -1,0 +1,109 @@
+<% content_for :middle do %>
+	<%= render :partial => "groups/middle_index" %>
+<% end %>
+
+<% content_for :right do %>
+	<%= render :partial => "groups/right_index" %>
+<% end %>
+
+
+<div id="map_location" class="content_size">
+		Your are here ><img src="images/btn/btn_browse.png" class="btn_config"%> <%=t('browse')%>: <span id="name_group"><%= t('group.other')%></span>
+</div>
+<div id="by_options" class="content_size"><%=link_to ( t('user.by'),users_path )%> </div>
+<br class="clearfloat" />
+<div class="space_center">
+</div>
+
+
+<div class="space_center">
+</div>
+
+<div id="my_conferences">
+		<div id="tabconference_browse" class="widget content_size">
+				<ul class="tabconference_browse">
+					<li>
+							<a href="#spaces"> <%= t('group.other')%> (<%=Group.count%>) </a>
+					</li>
+						<li>
+								<a href="#most_popular"> <%= t('group.popular.most')%></a>
+						</li>
+						<li>
+								<a href="#most_voted"> <%= t('group.voted.most')%> </a>
+						</li>
+				</ul>
+				<div id="spaces" class="tabconference_browse">
+						<div class="space_center">
+						</div>
+						<div class="letters" class="content_size">
+								<a href="#">A</a>
+								<a href="#">B</a>
+								<a href="#">C</a>
+								<a href="#">D</a>
+								<a href="#">E</a>
+								<a href="#">F</a>
+								<a href="#">G</a>
+								<a href="#">H</a>
+								<a href="#">I</a>
+								<a href="#">J</a>
+								<a href="#">K</a>
+								<a href="#">L</a>
+								<a href="#">M</a>
+								<a href="#">N</a>
+								<a href="#">O</a>
+								<a href="#">P</a>
+								<a href="#">Q</a>
+								<a href="#">R</a>
+								<a href="#">S</a>
+								<a href="#">T</a>
+								<a href="#">U</a>
+								<a href="#">V</a>
+								<a href="#">W</a>
+								<a href="#">X</a>
+								<a href="#">Y</a>
+								<a href="#">Z</a>
+						</div>
+						<div class="space_center" class="content_size">
+
+						</div>
+					  	<%= render :partial => "groups/index"%>
+						<div class="space_center">
+						</div>
+						<div class="letters" class="content_size">
+								<a href="#">First</a>
+								<a href="#"><<</a>
+								<a href="#">1</a>
+								<a href="#">2</a>
+								<a href="#">3</a>
+								4 <a href="#">5</a>
+								<a href="#">6</a>
+								... <a href="#">>></a>
+								<a href="#">Last</a>
+						</div>
+						<div class="space_center">
+						</div>
+				</div>
+		
+		<div id="most_popular" class="tabconference_browse">
+				<div class="space_center">
+				</div>
+
+				<div class="space_center">
+						Most popular groups
+				</div>
+		</div>
+		<div id="most_voted" class="tabconference_browse">
+				<div class="space_center">
+				</div>
+				
+				<div class="space_center">
+						Most voted groups
+				</div>
+		</div>
+</div>
+</div>	
+
+ 
+<br class="clearfloat" />
+<div class="space_center">
+</div>
