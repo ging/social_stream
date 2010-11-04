@@ -1,6 +1,6 @@
-= Social Stream
-Social Stream is a plugin for Ruby on Rails. It provides your application with social networking
-features and activity streams.
+= Social Stream: building social network applications
+Social Stream is an engine for Ruby on Rails. It provides your application with
+a core of social networking features and activity streams.
 
 == Social networking
 Social networks are a new paradigm on web application design. Social networking platforms stand 
@@ -10,15 +10,20 @@ around the website.
 
 {Social Stream}[http://github.com/ging/social_stream] is based in
 {Social Network Analysis}[http://en.wikipedia.org/wiki/Social_network] concepts and methods,
-including social entities (actors), ties and relations.
-It also provides a new tie-based access control model.
+including social entities (actors), ties and relations. Social Stream is so flexible that you can
+define custom actors (groups, organizations, institutions, social events) and relationships
+(friends, collegues, members, administrators, contributors, attendants, speakers).
+
+It also provides a new tie-based access control model, which grants rights at the relation level,
+allowing you to share activities with friends, administrators, members or everybody.
 
 == Activity Streams
 {Activity Streams}[http://activitystrea.ms/] is a format for syndicating social activities around the web. It has already been adopted by some of the major social networking platforms.
 
 {Social Stream}[http://github.com/ging/social_stream] provides a database schema based on the
 {Activity Streams specification}[http://activitystrea.ms/head/activity-schema.html], leading your
-application towards a well-known compatible data model design.
+application towards a well-known compatible data model design. It is extensible so you can
+add your own activities easily.
 
 = Installation
 
@@ -30,7 +35,7 @@ and run:
 
   bundle update
 
-Then, execute:
+Then:
 
   rails generate social_stream:install
 
@@ -38,7 +43,7 @@ This will generate the following:
 * A jquery:install generation for jQuery support
 * A devise:install generation for authentication support
 * An initializer file with configuration for Social Stream.
-* A database seeds file for defining custom Social Stream relations, along with an entry in db/seeds.rb to load it.
+* A database seeds file for defining custom Social Stream relations, along with an entry in db/seeds.rb to load it. You can define your own relations at <tt>db/seeds/social_stream.yml</tt>
 * A new application layout
 * A migration providing the database schema
 
