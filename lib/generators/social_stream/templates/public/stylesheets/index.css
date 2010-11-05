@@ -159,27 +159,8 @@
 	float: right;
 }
 
-/*middle buuton hidden effect*/
-#wideViewMiddle,#wideViewRight {
-	background: transparent url(../images/buttons.png) no-repeat scroll 0px
-		0px;
-}
 
-#wideViewMiddle:hover,#wideViewRight:hover {
-	background-position: -30px 0px;
-}
 
-#wideViewMiddle.wide,#wideViewRight.wide {
-	background-position: 0px -20px;
-}
-
-#wideViewMiddle.wide:hover,#wideViewRight.wide:hover {
-	background-position: -30px -20px;
-}
-
-#middleContent { /*border-right: thin solid #D4E4EA;*/
-	
-}
 
 /********************************ONLINE CONFERENCE DIV*******************/
 #online_conference {

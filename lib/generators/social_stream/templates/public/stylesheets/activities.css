@@ -41,6 +41,11 @@
 	vertical-align: middle;
 }
 
+#securities{
+  display:inline-block;
+  text-align:left;
+}
+
 /******************* WALL - ACTIVITY ***************/
 .activity {
 	text-align:left;
