@@ -60,7 +60,7 @@ namespace :db do
         users = available_users.dup - Array(u)
         user_relations = %w( Friend ).map{ |r| Relation.mode('User', 'User').find_by_name(r) }
 
-        Forgery::Basic.number.times do
+        Forgery::Basic.number(:at_most => users.size).times do
           user = users.delete_at((rand * users.size).to_i)
           u.ties.create :receiver => user.actor,
                         :relation => user_relations.random
@@ -68,7 +68,7 @@ namespace :db do
         groups = available_groups.dup
         group_relations = Relation.mode('User', 'Group')
 
-        Forgery::Basic.number.times do
+        Forgery::Basic.number(:at_most => groups.size).times do
           group = groups.delete_at((rand * groups.size).to_i)
           u.ties.create :receiver => group.actor,
                         :relation => group_relations.random
