@@ -1,6 +1,6 @@
 <%= div_for activity, :class => "subactivity" do %>
   <div class="actor_logo_subactivity">
-    <%= link_to image_tag(activity.sender_subject.logo.url,
+    <%= link_to image_tag(activity.sender_subject.logo.url(),
                           :size => "30x30",
                           :alt => activity.sender_subject.name),
                  activity.sender_subject %>
