@@ -1,6 +1,6 @@
 <div id="tie_<%=dom_id(tie.receiver_subject)%>" class="tie">
   <div class="tie_actor_logo">
-    <%= link_to(image_tag(tie.receiver_subject.logo.url, :size =>"30x30"),
+    <%= link_to(image_tag(tie.receiver_subject.logo.url(:tie), :size =>"30x30"),
                 tie.receiver_subject) %>
   </div>
   <div class="tie_content">
