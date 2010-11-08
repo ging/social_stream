@@ -1,3 +1,5 @@
+# Database foreign keys
+require 'foreigner'
 # jQuery
 require 'jquery-rails'
 # Permalinks:
