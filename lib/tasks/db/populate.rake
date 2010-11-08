@@ -10,36 +10,55 @@ namespace :db do
     desc "Create populate data"
     task :create => :environment do
 
-      # Create demo user if not present
-      if User.find_by_name('demostration').blank?
-        u = User.create! :name => 'demostration',
-                         :email => 'demostration@test.com',
-                         :password => 'demostration',
-                         :password_confirmation => 'demostration'
+      LOGOS_PATH = File.join(Rails.root, 'lib', 'logos')
+
+      def set_logos(klass)
+        klass.all.each do |i|
+          logo = Dir[File.join(LOGOS_PATH, klass.to_s.tableize, "#{ i.id }.*")].first
+
+          if File.exist?(logo)
+            i.logo = File.new(logo)
+            i.logo.reprocess!
+            i.save!
+          end
+        end
       end
 
-      puts "* Create Users"
-      20.times do
-        u = User.create :name => Forgery::Name.full_name,
-                        :email => Forgery::Internet.email_address,
-                        :password => 'demostration',
-                        :password_confirmation => 'demostration'
+      # = Users
+
+      # Create demo user if not present
+      if User.find_by_name('demostration').blank?
+        User.create! :name => 'demostration',
+                     :email => 'demostration@test.com',
+                     :password => 'demostration',
+                     :password_confirmation => 'demostration'
       end
+
+      9.times do
+        User.create! :name => Forgery::Name.full_name,
+                     :email => Forgery::Internet.email_address,
+                     :password => 'demostration',
+                     :password_confirmation => 'demostration'
+      end
+
+      set_logos(User)
 
       available_users = User.all
 
-      puts "* Create Groups"
-      20.times do
+      # = Groups
+      10.times do
         Group.create :name  => Forgery::Name.company_name,
                      :email => Forgery::Internet.email_address
       end
 
+      set_logos(Group)
+
       available_groups = Group.all
 
-      puts "* Create Ties"
-      User.all.each do |u|
+      # = Ties
+      available_users.each do |u|
         users = available_users.dup - Array(u)
-        user_relations = %w( Friend FriendOfFriend ).map{ |r| Relation.mode('User', 'User').find_by_name(r) }
+        user_relations = %w( Friend ).map{ |r| Relation.mode('User', 'User').find_by_name(r) }
 
         Forgery::Basic.number.times do
           user = users.delete_at((rand * users.size).to_i)

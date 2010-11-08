@@ -14,7 +14,7 @@ module SocialStream
         delegate :name, :name=,
                  :email, :email=,
                  :permalink,
-                 :logo,
+                 :logo, :logo=,
                  :ties, :sent_ties, :received_ties,
                  :active_ties_to,
                  :pending_ties,
