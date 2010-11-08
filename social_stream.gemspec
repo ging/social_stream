@@ -13,5 +13,5 @@ Gem::Specification.new do |s|
   s.add_dependency('inherited_resources', '~> 1.1.2')
   s.add_dependency('stringex', '~> 1.2.0')
   s.add_dependency('paperclip', '~> 2.3.4')
-  s.add_dependency('jquery-rails', '~> 0.2.4')
+  s.add_dependency('jquery-rails', '~> 0.2.5')
 end
