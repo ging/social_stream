@@ -77,6 +77,8 @@ en:
     confirm_delete: "Delete post?"
   profile:
     one: "Profile"
+  public:
+    other: "Everybody"
   sign_in: "Sign in"
   sign_up: "Sign up"
   sign_out_user: "Sign out (%{user})"
