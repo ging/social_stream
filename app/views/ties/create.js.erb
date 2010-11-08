@@ -8,7 +8,7 @@
       if ($('#carousel_ul').length) { // element found
         $("#carousel_ul").prepend("<%= escape_javascript(render @tie.receiver_subject) %>");
       }else{ // no element found
-        $("#my_groups").html("<%= escape_javascript(render "groups/groups" )%>");
+        $("#my_groups").html("<%= escape_javascript(render 'users/groups' )%>");
       }
       $("#group_count").html("<%=current_user.recent_groups.count%>");
       link_tie.replaceWith("<%= escape_javascript(link_follow_state) %>");
