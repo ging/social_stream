@@ -8,8 +8,8 @@ class CreateSocialStream < ActiveRecord::Migration
       t.string   "ancestry"
     end
 
-    add_index "activities", ["activity_verb_id"], :name => "fk_activity_verb"
-    add_index "activities", ["tie_id"], :name => "fk_activities_tie"
+    add_index "activities", "activity_verb_id"
+    add_index "activities", "tie_id"
 
     create_table "activity_object_activities", :force => true do |t|
       t.integer  "activity_id"
@@ -19,8 +19,8 @@ class CreateSocialStream < ActiveRecord::Migration
       t.string   "type",               :limit => 45
     end
 
-    add_index "activity_object_activities", ["activity_id"], :name => "fk_activity_object_activities_1"
-    add_index "activity_object_activities", ["activity_object_id"], :name => "fk_activity_object_activities_2"
+    add_index "activity_object_activities", "activity_id"
+    add_index "activity_object_activities", "activity_object_id"
 
     create_table "activity_objects", :force => true do |t|
       t.datetime "created_at"
@@ -48,9 +48,9 @@ class CreateSocialStream < ActiveRecord::Migration
       t.datetime "logo_updated_at"
     end
 
-    add_index "actors", ["activity_object_id"], :name => "fk_actors_activity_object"
-    add_index "actors", ["email"], :name => "index_actors_on_email"
-    add_index "actors", ["permalink"], :name => "index_actors_on_permalink", :unique => true
+    add_index "actors", "activity_object_id"
+    add_index "actors", "email"
+    add_index "actors", "permalink", :unique => true
 
     create_table "comments", :force => true do |t|
       t.integer  "activity_object_id"
@@ -59,7 +59,7 @@ class CreateSocialStream < ActiveRecord::Migration
       t.datetime "created_at"
     end
 
-    add_index "comments", ["activity_object_id"], :name => "fk_commets_activity_object"
+    add_index "comments", "activity_object_id"
 
     create_table "groups", :force => true do |t|
       t.integer  "actor_id"
@@ -67,7 +67,7 @@ class CreateSocialStream < ActiveRecord::Migration
       t.datetime "updated_at"
     end
 
-    add_index "groups", ["actor_id"], :name => "fk_groups_actors"
+    add_index "groups", "actor_id"
 
     create_table "permissions", :force => true do |t|
       t.string   "action"
@@ -84,7 +84,29 @@ class CreateSocialStream < ActiveRecord::Migration
       t.text     "text"
     end
 
-    add_index "posts", ["activity_object_id"], :name => "fk_post_object"
+    add_index "posts", "activity_object_id"
+
+    create_table "profiles", :force => true do |t|
+      t.integer  "user_id"
+      t.datetime "created_at"
+      t.datetime "updated_at"
+      t.string   "organization", :limit => 45
+      t.string   "phone",        :limit => 45
+      t.string   "mobile",       :limit => 45
+      t.string   "fax",          :limit => 45
+      t.string   "address"
+      t.string   "city"
+      t.string   "zipcode",      :limit => 45
+      t.string   "province",     :limit => 45
+      t.string   "country",      :limit => 45
+      t.integer  "prefix_key"
+      t.string   "description"
+      t.string   "url"
+      t.string   "skype",        :limit => 45
+      t.string   "im",           :limit => 45
+    end
+
+    add_index "profiles", "user_id"
 
     create_table "relation_permissions", :force => true do |t|
       t.integer  "relation_id"
@@ -94,8 +116,8 @@ class CreateSocialStream < ActiveRecord::Migration
       t.integer  "relation_id"
     end
 
-    add_index "relation_permissions", ["relation_id"], :name => "fk_relation_permissions_relation"
-    add_index "relation_permissions", ["permission_id"], :name => "fk_relation_permissions_permission"
+    add_index "relation_permissions", "relation_id"
+    add_index "relation_permissions", "permission_id"
 
     create_table "relations", :force => true do |t|
       t.string   "name",       :limit => 45
@@ -109,7 +131,7 @@ class CreateSocialStream < ActiveRecord::Migration
       t.boolean  "reflexive", :default => false
     end
 
-    add_index "relations", ["ancestry"]
+    add_index "relations", "ancestry"
 
     create_table "tags", :force => true do |t|
       t.string   "name",       :limit => 45
@@ -122,8 +144,8 @@ class CreateSocialStream < ActiveRecord::Migration
       t.integer "activity_object_id"
     end
 
-    add_index "tags_activity_objects", ["activity_object_id"], :name => "fk_tags_activity_objects_2"
-    add_index "tags_activity_objects", ["tag_id"], :name => "fk_tags_activity_objects_1"
+    add_index "tags_activity_objects", "activity_object_id"
+    add_index "tags_activity_objects", "tag_id"
 
     create_table "ties", :force => true do |t|
       t.integer  "sender_id"
@@ -134,9 +156,9 @@ class CreateSocialStream < ActiveRecord::Migration
       t.text     "message"
     end
 
-    add_index "ties", ["receiver_id"], :name => "fk_tie_receiver"
-    add_index "ties", ["relation_id"], :name => "fk_tie_relation"
-    add_index "ties", ["sender_id"], :name => "fk_tie_sender"
+    add_index "ties", "receiver_id"
+    add_index "ties", "relation_id"
+    add_index "ties", "sender_id"
 
     create_table "users", :force => true do |t|
       t.database_authenticatable :null => false
@@ -152,10 +174,38 @@ class CreateSocialStream < ActiveRecord::Migration
       t.integer  "actor_id"
     end
 
-    add_index "users", ["actor_id"], :name => "fk_users_actors"
+    add_index "users", "actor_id"
     add_index "users", :reset_password_token, :unique => true
     # add_index :users, :confirmation_token, :unique => true
     # add_index :users, :unlock_token,       :unique => true
+
+    add_foreign_key "activities", "activity_verbs", :name => "index_activities_on_activity_verb_id"
+    add_foreign_key "activities", "ties", :name => "index_activities_on_tie_id"
+
+    add_foreign_key "activity_object_activities", "activities", :name => "index_activity_object_activities_on_activity_id"
+    add_foreign_key "activity_object_activities", "activity_objects", :name => "activity_object_activities_on_activity_object_id"
+
+    add_foreign_key "actors", "activity_objects", :name => "actors_on_activity_object_id"
+
+    add_foreign_key "comments", "activity_objects", :name => "comments_on_activity_object_id"
+
+    add_foreign_key "groups", "actors", :name => "groups_on_actor_id"
+
+    add_foreign_key "posts", "activity_objects", :name => "posts_on_activity_object_id"
+
+    add_foreign_key "profiles", "users", :name => "profiles_on_user_id"
+
+    add_foreign_key "relation_permissions", "relations", :name => "relation_permissions_on_relation_id"
+    add_foreign_key "relation_permissions", "permissions", :name => "relation_permissions_on_permission_id"
+
+    add_foreign_key "tags_activity_objects", "activity_objects", :name => "tags_activity_objects_on_activity_object_id"
+    add_foreign_key "tags_activity_objects", "tags", :name => "tags_activity_objects_on_tag_id"
+
+    add_foreign_key "ties", "actors", :name => "ties_on_receiver_id", :column => "receiver_id"
+    add_foreign_key "ties", "actors", :name => "ties_on_relation_id", :column => "sender_id"
+    add_foreign_key "ties", "relations", :name => "ties_on_sender_id"
+
+    add_foreign_key "users", "actors", :name => "users_on_actor_id"
   end
 
   def self.down
