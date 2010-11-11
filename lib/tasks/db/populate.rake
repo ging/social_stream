@@ -62,16 +62,17 @@ namespace :db do
 
         Forgery::Basic.number(:at_most => users.size).times do
           user = users.delete_at((rand * users.size).to_i)
-          u.ties.create :receiver => user.actor,
-                        :relation => user_relations.random
+          u.sent_ties.create :receiver => user.actor,
+                             :relation => user_relations.random
         end
+
         groups = available_groups.dup
-        group_relations = Relation.mode('User', 'Group')
+        group_relations = Relation.mode('User', 'Group').all
 
         Forgery::Basic.number(:at_most => groups.size).times do
           group = groups.delete_at((rand * groups.size).to_i)
-          u.ties.create :receiver => group.actor,
-                        :relation => group_relations.random
+          u.sent_ties.create :receiver => group.actor,
+                             :relation => group_relations.random
         end
       end
     end
