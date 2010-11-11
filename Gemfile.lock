@@ -8,6 +8,7 @@ PATH
       foreigner (~> 0.9.1)
       inherited_resources (~> 1.1.2)
       jquery-rails (~> 0.2.5)
+      nested_set (~> 1.5.3)
       paperclip (~> 2.3.4)
       stringex (~> 1.2.0)
 
@@ -84,6 +85,9 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
+    nested_set (1.5.3)
+      activerecord (>= 3.0.0)
+      railties (>= 3.0.0)
     nokogiri (1.4.3.1)
     paperclip (2.3.5)
       activerecord
@@ -153,6 +157,7 @@ DEPENDENCIES
   foreigner (~> 0.9.1)
   inherited_resources (~> 1.1.2)
   jquery-rails (~> 0.2.5)
+  nested_set (~> 1.5.3)
   paperclip (~> 2.3.4)
   rails (~> 3.0.1)
   rspec-rails (~> 2.0.0)

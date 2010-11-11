@@ -125,13 +125,15 @@ class CreateSocialStream < ActiveRecord::Migration
       t.datetime "updated_at"
       t.string   "sender_type"
       t.string   "receiver_type"
-      t.string   "ancestry"
+      t.integer  "parent_id"
+      t.integer  "lft"
+      t.integer  "rgt"
       t.integer  "inverse_id"
       t.integer  "granted_id"
       t.boolean  "reflexive", :default => false
     end
 
-    add_index "relations", "ancestry"
+    add_index "relations", "parent_id"
 
     create_table "tags", :force => true do |t|
       t.string   "name",       :limit => 45
