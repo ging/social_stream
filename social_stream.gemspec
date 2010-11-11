@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.description = "Ruby on Rails engine supporting social networking features and activity streams."
   s.authors = ['Antonio Tapiador', 'Diego Carrera']
   s.files = `git ls-files`.split("\n")
-  s.add_runtime_dependency('atd-ancestry')
+  s.add_runtime_dependency('atd-ancestry', '1.3.0')
   s.add_runtime_dependency('nested_set', '~> 1.5.3')
   s.add_runtime_dependency('foreigner', '~> 0.9.1')
   s.add_runtime_dependency('devise', '~> 1.1.3')
@@ -24,4 +24,5 @@ Gem::Specification.new do |s|
   end
   s.add_development_dependency('rspec-rails', '~> 2.0.0')
   s.add_development_dependency('factory_girl', '~> 1.3.2')
+  s.add_development_dependency('forgery', '~> 0.3.6')
 end
