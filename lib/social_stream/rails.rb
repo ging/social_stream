@@ -4,7 +4,9 @@ require 'foreigner'
 require 'jquery-rails'
 # Permalinks:
 require 'stringex'
-# Hierchical relationships in Relation and Activity:
+# Hierarchical relationships in Relation:
+require 'nested_set'
+# Hierarchical relationships in Activity:
 require 'ancestry'
 # User authentication
 require 'devise'

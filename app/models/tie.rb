@@ -159,7 +159,7 @@ class Tie < ActiveRecord::Base
     def weak_set_conditions(t)
       arel_table[:sender_id].eq(t.sender_id).and(
         arel_table[:receiver_id].eq(t.receiver_id)).and(
-        arel_table[:relation_id].in(t.relation.stronger_or_equal)).and(
+        arel_table[:relation_id].in(t.relation.stronger_or_equal.all)).and(
         Permission.arel_table[:parameter].eq('weak_set'))
     end
 
@@ -171,7 +171,7 @@ class Tie < ActiveRecord::Base
 
     def weak_group_set_conditions(t)
       arel_table[:receiver_id].eq(t.receiver_id).and(
-        arel_table[:relation_id].in(t.relation.stronger_or_equal)).and(
+        arel_table[:relation_id].in(t.relation.stronger_or_equal.all)).and(
         Permission.arel_table[:parameter].eq('weak_group_set'))
     end
   end

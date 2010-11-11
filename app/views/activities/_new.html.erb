@@ -1,6 +1,6 @@
 <% if current_user.active_ties_to(receiver).any? %>
   <% content_for :javascript do %>
-    $("#post_activity_tie_id").dropdownchecklist( { closeRadioOnClick: true } );
+    $("#security").dropdownchecklist( { closeRadioOnClick: true } );
     $("#security_image").parent().width(28);
     $("#security_image").parent().parent().width(28);
   <% end %>
@@ -13,14 +13,7 @@
       <%= f.text_field :text, :id => "input_activities", :size => 85 %>
       <div id="activities_share_btn">
         <div id="securities">
-          <select id="post_activity_tie_id" >
-	            <option>Aries</option>
-	            <option>Taurus</option>
-	            <option>Gemini</option>
-	            <option>Cancer</option>
-	            <option>Leo	Leo</option>
-	        </select>
-          <%= f.select :_activity_tie_id, current_user.active_ties_to(receiver).map{ |t| [ t(t.relation_name, :count => :other), t.id ] }%>
+          <%= f.select :_activity_tie_id, current_user.active_ties_to(receiver).map{ |t| [ t(t.relation_name, :count => :other), t.id ] }, {}, :id => 'security' %>
         </div>
         <%= image_submit_tag "btn/btn_share.png" %>
       </div>
