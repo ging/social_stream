@@ -1,9 +1,18 @@
 <% if current_user.suggestion.present? %>
   <% content_for :javascript do %>
+
+    $.get("<%=suggestion_ties_path%>", function(data) {
+    $(this).parents(".tie").replaceWith(data);
+    });
+
     $(".suggestions .tie_close").livequery("click",function(){
-      $(this).parents(".tie").replaceWith("<%= escape_javascript(render(current_user.suggestion))%>");
+
+
+      
+
     });
   <% end %>
+
 
 
 <div class="tie_header">

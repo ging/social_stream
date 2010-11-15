@@ -1,6 +1,6 @@
   <div id="logo">
     <b><%= link_to(current_user.name, current_user)%></b><br/>
-    <%= link_to(image_tag(current_user.logo.url , :size => "94x65", :alt => current_user.name ), current_user ) %>
+    <%= link_to(image_tag(current_user.logo.url(:profile) ,  :alt => current_user.name ), current_user ) %>
   </div>
   <div class="space_center">
   </div>

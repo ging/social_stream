@@ -27,7 +27,7 @@ namespace :db do
       # = Users
 
       # Create demo user if not present
-      if User.find_by_name('demostration').blank?
+      if User.find_by_name('demo').blank?
         User.create! :name => 'demostration',
                      :email => 'demostration@test.com',
                      :password => 'demostration',

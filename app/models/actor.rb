@@ -9,7 +9,7 @@ class Actor < ActiveRecord::Base
   has_attached_file :logo,
                     :styles => { :tie => "30x30>",
                                  :actor => '35x35>',
-                                 :profile => '94x65' },
+                                 :profile => '94x94' },
                     :default_url => "/images/:attachment/:style/:subtype_class.png"
 
   has_many :sent_ties,
