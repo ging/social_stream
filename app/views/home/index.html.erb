@@ -15,5 +15,5 @@
   <%= render :partial => "users/groups" %>
 </div>
 <%= render :partial => "activities/activities",
-           :locals => { :activities => current_user.wall,
+           :locals => { :activities => current_user.wall.paginate,
                         :owner => current_user } %>

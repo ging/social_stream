@@ -25,11 +25,7 @@
 # sends a friendship_request to B. A is granting the friend relation with B, that is,
 # friendship_request grants friend relation.
 #
-# == Active relations
-# Those relations whose ties support activities. The default scope define active
-# relations as those that do not grant other relations, those that are not invitations
-# or requests.
-#
+
 class Relation < ActiveRecord::Base
   acts_as_nested_set
 
@@ -44,7 +40,6 @@ class Relation < ActiveRecord::Base
 
   scope :reflexive, where(:reflexive => true)
   scope :request, where('relations.granted_id IS NOT NULL')
-  scope :active, where(:granted_id => nil)
 
   has_many :relation_permissions, :dependent => :destroy
   has_many :permissions, :through => :relation_permissions

@@ -1,54 +1,64 @@
+# Seed configuration for Social Stream
+#
+# Define the relations and permissions supported by your application
+#
 relations:
   user-friend:
     sender_type: User
     receiver_type: User
     name: friend
     inverse: user-friend
+    reflexive: true
     permissions:
-      - [ create,  resources, weak_set ]
-      - [ read,    resources, group_set ]
-      - [ update,  resources, weak_set ]
-      - [ destroy, resources, weak_set ]
-  user-fof:
-    sender_type: User
-    receiver_type: User
-    name: friend_of_friend
-    parent: user-friend
-    inverse: user-fof
-    permissions:
-      - [ read, resources, group_set ]
+      - [ create,  activity, inverse_weak_set ]
+      - [ read,    activity, inverse_group_set ]
+      - [ update,  activity, inverse_weak_set ]
+      - [ destroy, activity, inverse_weak_set ]
   user-public:
     sender_type: User
     receiver_type: User
     name: public
-    parent: user-fof
+    parent: user-friend
     inverse: user-public
     permissions:
-      - [ read, resources, group_set ]
+      - [ read,    activity, inverse_group_set ]
+  user-friend-request:
+    sender_type: User
+    receiver_type: User
+    name: friend_request
+    granted: user-friend
 
-  user-group-admin:
+  user-group-member:
     sender_type: User
     receiver_type: Group
-    name: admin
-    permissions:
-      - [ create,  resources, weak_set ]
-      - [ read,    resources, group_set ]
-      - [ update,  resources, weak_group_set ]
-      - [ destroy, resources, weak_group_set ]
-  user-group-user:
-    sender_type: User
-    receiver_type: Group
-    name: user
-    parent: user-group-admin
-    permissions:
-      - [ create,  resources, weak_set ]
-      - [ read,    resources, group_set ]
-      - [ update,  resources, weak_group_set ]
-      - [ destroy, resources, weak_group_set ]
+    name: member
+    inverse: group-user-member
   user-group-follower:
     sender_type: User
     receiver_type: Group
     name: follower
-    parent: user-group-user
+  user-group-public:
+    sender_type: User
+    receiver_type: Group
+    name: public
+    parent: user-group-member
+    inverse: group-user-public
+
+  group-user-member:
+    sender_type: Group
+    receiver_type: User
+    name: member
+    inverse: user-group-member
     permissions:
-      - [ read,    resources, group_set ]
+      - [ create,  activity, inverse_weak_set ]
+      - [ read,    activity, inverse_group_set ]
+      - [ update,  activity, inverse_weak_group_set ]
+      - [ destroy, activity, inverse_weak_group_set ]
+  group-user-public:
+    sender_type: Group
+    receiver_type: User
+    name: public
+    parent: group-user-member
+    inverse: user-group-public
+    permissions:
+      - [ read,    activity, inverse_group_set ]

@@ -75,6 +75,24 @@ namespace :db do
                              :relation => group_relations.random
         end
       end
+
+      # = Posts
+
+      Tie.all.each do |t|
+        # Only Post from users
+        next if t.relation.sender_type == "Group"
+
+        updated = Time.at(rand(Time.now))
+
+        p = Post.create :text =>
+                      "This post should be for #{ I18n.t('other', :scope => t.relation.name) } of #{ t.receiver.name }.\n#{ Forgery::LoremIpsum.paragraph(:random => true) }",
+                        :created_at => Time.at(rand(updated)),
+                        :updated_at => updated,
+                        :_activity_tie_id => t.id
+
+        p.post_activity.update_attributes(:created_at => p.created_at,
+                                          :updated_at => p.updated_at)
+      end
     end
   end
 end
