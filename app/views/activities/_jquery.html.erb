@@ -1,5 +1,4 @@
 //javascript for main activities input
-
 title = "<%= t('activity.input') %>";
 $("#input_activities").click(function(){
   if(this.value == title){
@@ -7,8 +6,6 @@ $("#input_activities").click(function(){
     $("#activities_share_btn").show();
   }
 });
-
-
 
 
 //javascript for comments
@@ -41,6 +38,7 @@ $(".input_new_comments").click(function(){
 //javascript for tocomment option
 $(".to_comment").livequery("click", function(){
   $(this).parents(".activity_content").find(".input_new_comments").click();
+  $(this).parents(".activity_content").find(".input_new_comments").focus();
 	return false;
 });
 $(".to_comment").livequery("blur", function(){

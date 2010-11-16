@@ -1,7 +1,7 @@
 <div class="contacts_header">
     <%=image_tag("btn/btn_friend.png", :class => "contacts_icon")%>
     <div class="contacts_text_header">
-      <%= current_user.friends.count %> <%= t('friend', :count => current_user.friends.count) %>
+      <%= current_user.friends.count %> <%=t('friend', :count => current_user.friends.count) %>
     </div>
 </div>
 <div class ="contacts">

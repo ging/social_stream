@@ -56,11 +56,12 @@ en:
       sentence2: "Posts, comments and activities"
     stats: "%{users} users and %{groups} groups registered"
   group:
+    one: "Group"
+    other: "Groups"
     all: "All Groups"
     by: "By Groups"
     my: "My Groups"
-    one: "Group"
-    other: "Groups"
+    last: "Last Groups"
     popular:
       most: "Most popular"
     voted:

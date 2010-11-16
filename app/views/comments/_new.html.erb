@@ -1,17 +1,18 @@
-<div class="activity_new_comment">
-  <% if current_user.active_ties_to(activity.receiver).any? %>
-   <%= form_for Comment.new(:text => t('comment.input'),
-                            :_activity_tie_id =>
-                              current_user.active_ties_to(activity.receiver).first.id,
-                            :_activity_parent_id => activity.id),
-                :remote => true do |f| %>
-     <%= f.hidden_field :_activity_tie_id %>
-     <%= f.hidden_field :_activity_parent_id %>
-     <%= f.text_field :text,   :class =>"input_new_comments" %>
-     <div class="activities_comment_btn">
-       <div class="activities_security"></div>
-       <%= image_submit_tag "btn/btn_share.png" %>
-     </div>
-   <% end %>
+<% if current_user.active_ties_to(activity.receiver).any? %>
+  <div class="activity_new_comment">
+ <%= form_for Comment.new(:text => t('comment.input'),
+                          :_activity_tie_id =>
+                            current_user.active_ties_to(activity.receiver).first.id,
+                          :_activity_parent_id => activity.id),
+              :remote => true do |f| %>
+   <%= f.hidden_field :_activity_tie_id %>
+   <%= f.hidden_field :_activity_parent_id %>
+   <%= f.text_field :text,   :class =>"input_new_comments" %>
+   <div class="activities_comment_btn">
+     <div class="activities_security"></div>
+     <%= image_submit_tag "btn/btn_share.png" %>
+   </div>
  <% end %>
-</div>
+    </div>
+<% end %>
+
