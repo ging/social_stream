@@ -1,6 +1,4 @@
 <div id="logo">
-  <%=link_to(image_tag(@user.logo.url, :size => "120x196"), @user) %>
-  <br/>
-  <%= @user.name %>
-  <br/>
+  <b><%= @user.name %></b><br/>
+  <%=image_tag(@user.logo.url(:profile)) %>
 </div>
