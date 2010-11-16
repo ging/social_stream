@@ -5,5 +5,6 @@ class TiesController < InheritedResources::Base
 
   def suggestion
     @tie = current_user.suggestion
+    render :layout  => false
   end
 end

@@ -60,7 +60,7 @@
 }
 .tie_header {
 	vertical-align: middle;
-	background: transparent url(../images/btn/title_background.png) scroll 0px;
+	background: transparent url(../images/title_background.png) scroll 0px;
 	padding-left: 10px;
 	display: block;
 }

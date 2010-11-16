@@ -1,14 +1,11 @@
 <% if current_user.suggestion.present? %>
   <% content_for :javascript do %>
 
-    $.get("<%=suggestion_ties_path%>", function(data) {
-    $(this).parents(".tie").replaceWith(data);
-    });
-
     $(".suggestions .tie_close").livequery("click",function(){
-
-
-      
+    temp = $(this);
+    $.get("<%=suggestion_ties_path%>", function(data) {
+    temp.parents(".tie").replaceWith(data);
+    });
 
     });
   <% end %>
