@@ -64,7 +64,6 @@ class Tie < ActiveRecord::Base
   }
 
   scope :pending, includes(:relation) & Relation.request
-  scope :active, includes(:relation) & Relation.active
 
   scope :inverse, lambda { |t|
     sent_by(t.receiver).
@@ -117,63 +116,56 @@ class Tie < ActiveRecord::Base
     relation_set(:relations => r).first
   end
 
-  # Access Control
+  # The inverse tie
+  def inverse
+    Tie.inverse(self).first
+  end
 
+  # Access Control
+  
   scope :with_permissions, lambda { |action, object|
-    includes(:relation => :permissions).
+    joins(:relation => :permissions).
       where('permissions.action' => action).
       where('permissions.object' => object)
   }
 
-  scope :parameterized, lambda { |tie|
-    where(tie_conditions(tie).
-          or(weak_set_conditions(tie)).
-          or(group_set_conditions(tie)).
-          or(weak_group_set_conditions(tie)))
-  }
-
+  # Given a given permission (action, object), the access_set are the set of ties that grant that permission.
   scope :access_set, lambda { |tie, action, object|
     with_permissions(action, object).
-      parameterized(tie)
+      where(Permission.parameter_conditions(tie))
   }
 
+  scope :allowed_set, lambda { |action, object|
+    query = 
+      select("DISTINCT ties.*").
+        from("ties INNER JOIN relations ON relations.id = ties.relation_id, ties as ties_as INNER JOIN relations AS relations_as ON relations_as.id = ties_as.relation_id INNER JOIN relation_permissions ON relations_as.id = relation_permissions.relation_id INNER JOIN permissions ON permissions.id = relation_permissions.permission_id, relations as relations_inverse").
+        where("permissions.action = ?", action).
+        where("permissions.object = ?", object)
+
+    conds = Permission.parameter_conditions
+    # FIXME: Patch to support public activities
+    if action == 'read' && object == 'activity'
+      conds = sanitize_sql([ "( #{ conds } ) OR relations.name = ?", "public" ])
+    end
+
+    query.where(conds)
+  }
+
+  scope :allowed, lambda { |actor, action, object|
+    allowed_set(action, object).
+      where("ties_as.receiver_id" => Actor_id(actor))
+  }
+
+  def access_set(action, object)
+    self.class.access_set(self, action, object)
+  end
 
   def permissions(user, action, object)
-    self.class.
-      sent_by(user).
-      access_set(self, action, object)
+    access_set(action, object).received_by(user)
   end
 
   def permission?(user, action, object)
     permissions(user, action, object).any?
-  end
-
-  class << self
-    def tie_conditions(t)
-      arel_table[:sender_id].eq(t.sender_id).and(
-        arel_table[:receiver_id].eq(t.receiver_id)).and(
-        arel_table[:relation_id].eq(t.relation_id)).and(
-        Permission.arel_table[:parameter].eq('tie'))
-    end
-
-    def weak_set_conditions(t)
-      arel_table[:sender_id].eq(t.sender_id).and(
-        arel_table[:receiver_id].eq(t.receiver_id)).and(
-        arel_table[:relation_id].in(t.relation.stronger_or_equal.all)).and(
-        Permission.arel_table[:parameter].eq('weak_set'))
-    end
-
-    def group_set_conditions(t)
-      arel_table[:receiver_id].eq(t.receiver_id).and(
-        arel_table[:relation_id].eq(t.relation_id)).and(
-        Permission.arel_table[:parameter].eq('group_set'))
-    end
-
-    def weak_group_set_conditions(t)
-      arel_table[:receiver_id].eq(t.receiver_id).and(
-        arel_table[:relation_id].in(t.relation.stronger_or_equal.all)).and(
-        Permission.arel_table[:parameter].eq('weak_group_set'))
-    end
   end
 
   private

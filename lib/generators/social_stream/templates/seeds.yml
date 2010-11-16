@@ -1,40 +1,33 @@
 # Seed configuration for Social Stream
 #
-# Define your relations and add SocialStream.seed! to db/seeds.rb
+# Define the relations and permissions supported by your application
 #
 relations:
-  # User to User
   user-friend:
     sender_type: User
     receiver_type: User
     name: friend
-    # Friendship is a reciprocal relation
     inverse: user-friend
-    # It is set for users by default
     reflexive: true
     permissions:
-      - [ create,  resources, weak_set ]
-      - [ read,    resources, group_set ]
-      - [ update,  resources, weak_set ]
-      - [ destroy, resources, weak_set ]
+      - [ create,  activity, inverse_weak_set ]
+      - [ read,    activity, inverse_group_set ]
+      - [ update,  activity, inverse_weak_set ]
+      - [ destroy, activity, inverse_weak_set ]
   user-public:
     sender_type: User
     receiver_type: User
     name: public
-    # This relation is weaker than user-friend
     parent: user-friend
-    # This relation is also reciprocal
     inverse: user-public
     permissions:
-      - [ read, resources, group_set ]
+      - [ read,    activity, inverse_group_set ]
   user-friend-request:
     sender_type: User
     receiver_type: User
     name: friend_request
-    # This relation is the request for user-friend
     granted: user-friend
 
-  # User to Group
   user-group-member:
     sender_type: User
     receiver_type: Group
@@ -44,21 +37,28 @@ relations:
     sender_type: User
     receiver_type: Group
     name: follower
-    parent: user-group-member
   user-group-public:
     sender_type: User
     receiver_type: Group
     name: public
-    parent: user-group-follower
+    parent: user-group-member
+    inverse: group-user-public
 
-  # Group to User
   group-user-member:
     sender_type: Group
     receiver_type: User
     name: member
     inverse: user-group-member
     permissions:
-      - [ create,  resources, weak_set ]
-      - [ read,    resources, group_set ]
-      - [ update,  resources, weak_group_set ]
-      - [ destroy, resources, weak_group_set ]
+      - [ create,  activity, inverse_weak_set ]
+      - [ read,    activity, inverse_group_set ]
+      - [ update,  activity, inverse_weak_group_set ]
+      - [ destroy, activity, inverse_weak_group_set ]
+  group-user-public:
+    sender_type: Group
+    receiver_type: User
+    name: public
+    parent: group-user-member
+    inverse: user-group-public
+    permissions:
+      - [ read,    activity, inverse_group_set ]

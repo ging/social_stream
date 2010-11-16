@@ -142,7 +142,7 @@ class Actor < ActiveRecord::Base
 
   # All the ties this actor has with subject that support activities
   def active_ties_to(subject)
-    sent_ties.received_by(subject).active
+    sent_ties.received_by(subject).allowed(self, 'create', 'activity')
   end
 
   def pending_ties
@@ -159,16 +159,15 @@ class Actor < ActiveRecord::Base
   # The set of activities in the wall of this actor, includes all the activities
   # from the ties the actor has access to
   #
-  # TODO: ties, authorization
   def wall
-    Activity.wall ties
+    Activity.wall Tie.allowed(self, 'read', 'activity')
   end
 
   # The set of activities in the wall profile of this actor, includes the activities
-  # from the ties of this actor
-  # TODO: authorization
-  def wall_profile
-    Activity.wall ties
+  # from the ties of this actor that can be read by user
+  #
+  def wall_profile(user)
+    Activity.wall ties.allowed(user, 'read', 'activity')
   end
 end
 
