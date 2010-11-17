@@ -17,6 +17,8 @@ require 'inherited_resources'
 # Logo attachments
 require 'paperclip'
 require 'paperclip/social_stream'
+# Pagination
+require 'will_paginate'
 
 require 'social_stream/rails/common'
 File.expand_path(__FILE__) =~ /#{ File.join('vendor', 'plugins') }/ ?
