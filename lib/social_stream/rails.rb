@@ -10,6 +10,8 @@ require 'nested_set'
 require 'ancestry'
 # User authentication
 require 'devise'
+# Authorization
+require 'cancan'
 # REST controllers
 require 'inherited_resources'
 # Logo attachments
