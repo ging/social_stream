@@ -58,7 +58,7 @@ namespace :db do
       # = Ties
       available_users.each do |u|
         users = available_users.dup - Array(u)
-        user_relations = %w( Friend ).map{ |r| Relation.mode('User', 'User').find_by_name(r) }
+        user_relations = %w( friend ).map{ |r| Relation.mode('User', 'User').find_by_name(r) }
 
         Forgery::Basic.number(:at_most => users.size).times do
           user = users.delete_at((rand * users.size).to_i)
