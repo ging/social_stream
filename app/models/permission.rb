@@ -30,13 +30,13 @@ class Permission < ActiveRecord::Base
         # The same sender and receiver, but a stronger or equal relation
         as[:sender_id].eq(t.sender_id).and(
           as[:receiver_id].eq(t.receiver_id)).and(
-          as[:relation_id].in(t.relation.stronger_or_equal.all))
+          as[:relation_id].in(t.relation.stronger_or_equal.map(&:id)))
       },
       'inverse_weak_set' => lambda { |as, t|
         # Senders and receivers interchanged, with a stronger or equal relation of the inverse
         as[:sender_id].eq(t.receiver_id).and(
           as[:receiver_id].eq(t.sender_id)).and(
-          as[:relation_id].in(t.relation.inverse.try(:stronger_or_equal).try(:all)))
+          as[:relation_id].in(Array(t.relation.inverse.try(:stronger_or_equal)).map(&:id)))
       },
       'group_set' => lambda { |as, t|
         # The same receiver and relation
@@ -46,17 +46,17 @@ class Permission < ActiveRecord::Base
       'inverse_group_set' => lambda { |as, t|
         # Senders to the common receiver in the same relation
         as[:sender_id].eq(t.receiver_id).and(
-          as[:relation_id].eq(t.relation.inverse))
+          as[:relation_id].eq(t.relation.inverse_id))
       },
       'weak_group_set' => lambda { |as, t|
         # The same receiver with stronger or equal relations
         as[:receiver_id].eq(t.receiver_id).and(
-          as[:relation_id].in(t.relation.stronger_or_equal.all))
+          as[:relation_id].in(t.relation.stronger_or_equal.map(&:id)))
       },
       'inverse_weak_group_set' => lambda { |as, t|
         # Senders to the common receiver with stronger or equal relations
         as[:sender_id].eq(t.receiver_id).and(
-          as[:relation_id].in(t.relation.inverse.try(:stronger_or_equal).try(:all)))
+          as[:relation_id].in(Array(t.relation.inverse.try(:stronger_or_equal)).map(&:id)))
       }
     }
   }
