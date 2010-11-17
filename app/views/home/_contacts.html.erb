@@ -7,7 +7,7 @@
 <div class ="contacts">
     <div class="contact">
       <%current_user.friends.all.each do |friend|%>
-          <%=link_to((image_tag (friend.logo.url, :alt => friend.name , :size => "40x40")) , friend)%>
+        <%= link_to((image_tag(friend.logo.url, :title => friend.name , :size => "40x40")) , friend)%>
       <%end%>
     </div>
 </div>
