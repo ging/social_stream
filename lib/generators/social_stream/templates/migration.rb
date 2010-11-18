@@ -163,7 +163,9 @@ class CreateSocialStream < ActiveRecord::Migration
     add_index "ties", "sender_id"
 
     create_table "users", :force => true do |t|
-      t.database_authenticatable :null => false
+      t.string :encrypted_password, :null => false, :default => "", :limit => 128
+      t.string :password_salt
+
       t.recoverable
       t.rememberable
       t.trackable
