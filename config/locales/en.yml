@@ -58,10 +58,11 @@ en:
   group:
     one: "Group"
     other: "Groups"
-    all: "All Groups"
-    by: "By Groups"
-    my: "My Groups"
-    last: "Last Groups"
+    all: "All groups"
+    by: "By groups"    
+    last: "Last groups"
+    my: "My groups"
+    new: "New group"
     popular:
       most: "Most popular"
     voted:
