@@ -86,6 +86,17 @@ class CreateSocialStream < ActiveRecord::Migration
 
     add_index "posts", "activity_object_id"
 
+    create_table "private_messages", :force => true do |t|
+      t.integer  "sender_id"
+      t.integer  "receiver_id"
+      t.datetime "created_at"
+      t.datetime "updated_at"
+      t.text     "text"
+    end
+
+    add_index "private_messages", "sender_id"
+    add_index "private_messages", "receiver_id"
+
     create_table "profiles", :force => true do |t|
       t.integer  "user_id"
       t.datetime "created_at"
@@ -222,7 +233,9 @@ class CreateSocialStream < ActiveRecord::Migration
     drop_table :group
     drop_table :permissions
     drop_table :posts
-    drop_table :_relation_permissions
+    drop_table :private_messages
+    drop_table :profiles
+    drop_table :relation_permissions
     drop_table :relations
     drop_table :tags
     drop_table :tags_activity_objects
