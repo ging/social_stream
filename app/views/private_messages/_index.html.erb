@@ -1,0 +1,24 @@
+<% content_for :middle do %>
+  <%= render :partial => 'home/middle' %>
+<% end %>
+
+<% content_for :right do %>
+  <%= render :partial => "home/right" %>
+<% end %>
+
+<%= render :partial => 'location' %>
+
+<br class="clearfloat" />
+<div class="space_center">
+</div>
+
+<div id="new_message" ><%= link_to 'New Message', new_private_message_path %></div>
+<div class="space_center">
+</div>
+<div class="space_center">
+</div>
+
+
+<div id="messages">  
+  <%= render :partial => 'messages' %>
+</div>

@@ -1,0 +1,17 @@
+<%= div_for (private_message) do %>
+  <div class="actor_logo">
+    <%= link_to image_tag(private_message.text,
+                          :alt => private_message.text),
+                 private_message %>
+  </div>
+  <div class="activity_content_message">
+    <div class="actor_name_message">
+      <%= link_to(private_message.text, private_message) %>
+    </div>
+    <div class="option_msg">
+      <div class="edit_message"><%= link_to ( image_tag('btn/btn_edit.png', :class=>"btn_config"), edit_private_message_path(private_message)) %></div>
+      <div class="detele_message"><%= link_to ( image_tag('btn/btn_delete.png', :class=>"btn_config"), private_message, :confirm => 'Are you sure?', :method => :delete) %></div>
+    </div>
+  </div>
+
+<% end %>
