@@ -1,8 +1,8 @@
 <ul class="menu noaccordion">
   <li>
-    <%= link_to( image_tag("btn/btn_inbox.png", :class => "menu_icon")+t('inbox.one'), current_user) %>
+    <%= link_to( image_tag("btn/btn_inbox.png", :class => "menu_icon")+t('inbox.one'), private_messages_path, :remote => true) %>
   </li>
   <li>
-    <%= link_to( image_tag("btn/btn_group.png", :class => "menu_icon")+t('group.new'), current_user) %>
+    <%= link_to( image_tag("btn/btn_group.png", :class => "menu_icon")+t('group.new'), private_messages_path, :remote => true) %>
   </li>
 </ul>
