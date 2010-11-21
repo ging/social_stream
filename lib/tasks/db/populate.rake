@@ -78,7 +78,7 @@ namespace :db do
 
       # = Posts
 
-      Tie.all.each do |t|
+      SocialStream::Populate.power_law(Tie.all) do |t|
         # Only Post from users
         next if t.relation.sender_type == "Group"
 
