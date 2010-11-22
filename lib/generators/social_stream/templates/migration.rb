@@ -112,7 +112,8 @@ class CreateSocialStream < ActiveRecord::Migration
       t.string   "country",      :limit => 45
       t.integer  "prefix_key"
       t.string   "description"
-      t.string   "url"
+      t.string   "experience"
+      t.string   "website"
       t.string   "skype",        :limit => 45
       t.string   "im",           :limit => 45
     end

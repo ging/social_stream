@@ -1,0 +1,80 @@
+/*Profile*/
+
+.contact_link{
+  color: #4A58E0;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.contact_link :hover{
+	color: #009933;
+}
+.title_section {
+  display: inline-block;
+  padding-bottom: 2px;
+	font-size: 12px;
+	font-weight: bold;
+}
+.title_righ{
+	color: #6C6D6F;
+}
+
+.info_left{
+	float: left;
+}
+
+.space_profile {
+  padding-right: 4px;
+  padding-top: 9px;
+  text-align: center;
+}
+
+/*Edit*/
+.editField{
+	padding-top: 5px;
+}
+.section_highlight{
+	border-left: none;
+	border-bottom: thin solid #D4E4EA;
+	border-top: thin solid #D4E4EA;
+	border-right: thin solid #D4E4EA;
+}
+.section_normal{
+	border-left: thin solid #D4E4EA;
+  background-color: #EEF;
+}
+
+.sectionEdit{
+  border-bottom-color: #E1EEF5;
+  border-bottom-style: solid;
+  /*text-decoration: underline;*/
+  font-weight: bold;
+  font-size: 14px;
+}
+#user_profile_attributes_description, #user_profile_attributes_experience{
+	width: 95% ;
+	max-width: 95% ;
+}
+
+
+/*Datepicker*/
+.ui-widget-header {
+  color: #2A3890;
+  font-weight: bold;
+	background: #E1EEF5;
+  border: solid #D4E4EA;
+	border-width: 2px;
+}
+.ui-widget-content {
+  color: #2A3890;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+  background: #E1EEF5;
+  border: solid #D4E4EA;
+  border-width: 2px;
+  color: #2A3890;
+  font-weight: normal;
+}
+#ui-datepicker-div{
+	font-size: 12px;
+}
