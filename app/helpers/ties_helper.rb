@@ -1,6 +1,6 @@
 module TiesHelper
   def tie_brief(tie)
-    "18 contacts in common"
+    "N contacts in common"
   end
 
   def tie_link(tie)
@@ -24,6 +24,6 @@ module TiesHelper
   end
 
   def link_follow_state
-      link_to("unfollow", home_path)
+      link_to("Unfollow", home_path)
   end
 end

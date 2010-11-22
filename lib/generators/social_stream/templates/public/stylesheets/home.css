@@ -1,0 +1,121 @@
+#my_groups {
+	width: 100%;
+}
+
+.group{
+  display:inline-block;
+  width:50px;
+}
+
+#groups_list {
+	width: 100%;
+	padding-bottom: 5px;
+	text-align: center;
+  display: inline-block;
+}
+
+#group_todos {
+	float: right;
+	padding-right: 15px;
+	padding-top: 5px;
+}
+
+#groups_title {
+	width: 100%;
+	padding-left: 5px;
+	font-weight: bold;
+}
+
+.group_title a{
+  display:block;
+  font-size:9px;
+  text-decoration:none;
+  text-align:center;
+}
+
+.group_title a:hover{
+  display:block;
+  text-decoration:underline;
+}
+
+.group_content{
+  display:block;
+  text-align:center;
+}
+
+.btn_group{
+  vertical-align:top;
+}
+
+
+#my_conferences {
+	background-color: #deeff8;
+	/*border-bottom: thin solid #D4E4Ea;*/
+	border-top: thin solid #D4E4Ea;
+}
+
+#tabconferences {
+	background-color: #deeff8;
+}
+
+.tabconference {
+	margin-top: 2px;
+	/*border-top: thin solid #D4E4EA;*/
+	padding: 2px 0px 2px 0px;
+}
+
+.tabconference fondo {
+	background-color: #fff;
+}
+
+.tabconference li {
+	display: inline;
+	list-style: none;
+	padding-right: 2px;
+}
+
+.tabconference li a {
+	text-decoration: none;
+	padding: 4px 3px;
+	outline: none;
+}
+
+.tabconference ul {
+	background: #deeff8;
+}
+
+.tabconference li a:hover,.tabconference li.ui-tabs-nav a,.tabconference li.ui-tabs-selected a,.tabconference li a:active
+	{
+	background: #fff;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#title-conferences,#title-top-conferences {
+	text-align: center;
+}
+
+.middle {
+	vertical-align: top;
+}
+
+.conferencex {
+	font-size: 13px;
+	display: inline-block;
+	padding-top: 5px;
+	vertical-align: inherit;
+}
+
+.conference_content {
+	color: #6C6D6F;
+	font-size: 11px;
+}
+
+.title_conference {
+	
+}
+
+#conference_next {
+	float: right;
+	padding-bottom: 60px;
+}

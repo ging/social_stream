@@ -1,0 +1,120 @@
+.wrap_post{
+	padding: 5px;
+}
+.post_browse{
+	width:49%;
+	display:inline-block;
+}
+.post_browse_title{
+	font-weight:bold;
+}
+.post_picture{
+	display:inline-block;
+	vertical-align:top;
+}
+.post_browse_content{
+	display:inline-block;
+	width: 80%;
+}
+
+.post_browse_content_people{
+  display:inline-block;
+}
+
+
+#title-categories{
+  background-color: #deeff8;
+	padding: 3px;
+		
+}
+#content-categories{
+	padding: 5px;
+	text-align:center;
+}
+.item-category{
+	display: inline;
+}
+
+#letters{
+	text-align:center;
+}
+
+
+#tabconferences_browse {
+	
+}
+
+.tabconference_browse {
+	margin-top: 2px;
+	/*border-top: thin solid #D4E4EA;*/
+	padding: 2px 0px 2px 0px;
+}
+
+.tabconference_browse fondo {
+	
+	background-color: #deeff8;
+}
+
+.tabconference_browse li {
+	display: inline;
+	list-style: none;
+	padding-right: 2px;
+}
+
+.tabconference_browse li a {
+	background-color: #deeff8;
+	text-decoration: none;
+	padding: 4px 3px;
+	outline: none;
+}
+
+.tabconference_browse ul {
+	background: #deeff8;
+}
+
+.tabconference_browse li a:hover,
+.tabconference_browse li.ui-tabs-nav a,
+.tabconference_browse li.ui-tabs-selected a,
+.tabconference_browse li a:active
+	{
+	background-color: #deeff8;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#title-conferences, #title-top-conferences {
+	text-align: center;
+}
+
+.middle {
+	vertical-align: top;
+}
+
+.conferencex {
+	font-size: 13px;
+	display: inline-block;
+	padding-top: 5px;
+	vertical-align: inherit;
+}
+
+.conference_content {
+	color: #6C6D6F;
+	font-size: 11px;
+}
+
+.conference_right {
+
+  display: inline-block;
+  padding-top: 5px;
+  vertical-align: inherit;
+	text-align:center;
+	width:100%;
+}
+.right_title{
+	font-size:13px;
+	font-weight:bold;
+	text-align: center;
+	padding-top: 5px;
+}
+
+

@@ -1,15 +1,24 @@
+# Database foreign keys
+require 'foreigner'
+# jQuery
+require 'jquery-rails'
 # Permalinks:
 require 'stringex'
-# Hierchical relationships in Relation and Activity:
+# Hierarchical relationships in Relation:
+require 'nested_set'
+# Hierarchical relationships in Activity:
 require 'ancestry'
 # User authentication
 require 'devise'
+# Authorization
+require 'cancan'
 # REST controllers
 require 'inherited_resources'
 # Logo attachments
 require 'paperclip'
-# Paperclip extensions for SocialStream
-require 'paperclip/ext'
+require 'paperclip/social_stream'
+# Pagination
+require 'will_paginate'
 
 require 'social_stream/rails/common'
 File.expand_path(__FILE__) =~ /#{ File.join('vendor', 'plugins') }/ ?

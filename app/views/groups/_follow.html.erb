@@ -1,5 +1,5 @@
 <div id="bookmark">
-  <%=image_tag("btn/btn_bookmark.png")%><%= link_to "Follow",
+  <%=image_tag("btn/btn_bookmark.png", :class=>"btn_config")%> <%= link_to "Follow "+@group.name,
                                 ties_path("tie[sender_id]" => current_user.actor.id,
                                           "tie[receiver_id]" => @group,
                                           "tie[relation_name]" => "follower"),

@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :profile_attributes
   
   
-  validates_presence_of :name, :email
+  validates_presence_of :email
+
   validates_format_of :email, :with => Devise.email_regexp, :allow_blank => true
   # TODO: uniqueness of email, which is in actor
   
@@ -22,6 +23,7 @@ class User < ActiveRecord::Base
   def recent_groups
     receiver_subjects(:group, :relations => 'follower') & Tie.recent
   end
+
   
    
   def age
@@ -31,6 +33,11 @@ class User < ActiveRecord::Base
   
   after_create :create_profile
   
+
+  def friends
+    receiver_subjects(:user, :relations => 'friend')
+  end
+
   protected
   
   # From devise

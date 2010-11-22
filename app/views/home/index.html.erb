@@ -6,12 +6,14 @@
   <%= render :partial => "right" %>
 <% end %>
 
-<%= render :partial => 'home/location' %>
+<%= render :partial => 'location' %>
 
 <br class="clearfloat" />
 <div class="space_center">
 </div>
-<%= render :partial => "groups" %>
+<div id="my_groups">
+  <%= render :partial => "groups" %>
+</div>
 <%= render :partial => "activities/activities",
-           :locals => { :activities => current_user.wall,
+           :locals => { :activities => current_user.wall.paginate,
                         :owner => current_user } %>

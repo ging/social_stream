@@ -7,10 +7,17 @@ Rails.application.routes.draw do
 
   resources :groups
 
-  resources :ties
+  resources :ties do
+    collection do
+      get 'suggestion'
+    end
+  end
   resources :activities do
     resource :like
   end
   resources :posts
   resources :comments
+  resources :private_messages
+
+  root :to => "frontpage#index"
 end

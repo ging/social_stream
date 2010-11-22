@@ -1,16 +1,26 @@
-<% content_for :javascript do %>
-  $(".suggestions .tie_close").livequery("click",function(){
-    $(this).parents(".tie").replaceWith("<%= escape_javascript(render(current_user.suggestion))%>");
-  });
-<% end %>
+<% if current_user.suggestion.present? %>
+  <% content_for :javascript do %>
 
-<div class="suggestions_header">
-    <%= image_tag('btn/notifications.png', :class => "suggestion_icon") %>
-    <div class="suggestion_text_header">
-        <%=t('tie.suggestion.one') %>
-    </div>
+    $(".suggestions .tie_close").livequery("click",function(){
+    temp = $(this);
+    $.get("<%=suggestion_ties_path%>", function(data) {
+    temp.parents(".tie").replaceWith(data);
+    });
+
+    });
+  <% end %>
+
+
+
+<div class="tie_header">
+  <%= image_tag('btn/notifications.png', :class => "tie_icon") %>
+  <div class="tie_text_header">
+      <%=t('tie.suggestion.one') %>
+  </div>
 </div>
 <div class="suggestions">
-  <%= render current_user.suggestions(2) %>
+  <% if (sgs = current_user.suggestions(2)).present? %>
+    <%= render sgs %>
+  <%end%> 
 </div>
-
+<%end%>

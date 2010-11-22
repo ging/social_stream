@@ -1,0 +1,14 @@
+<% content_for :middle do %>
+  <%= render :partial => 'home/middle' %>
+<% end %>
+
+<% content_for :right do %>
+  <%= render :partial => "home/right" %>
+<% end %>
+
+
+<h1>New private_message</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', private_messages_path %>

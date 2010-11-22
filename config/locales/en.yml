@@ -1,4 +1,6 @@
 en:
+  account:
+    one: "Account"
   activity:
     one: "Activity"
     other: "Activities"
@@ -9,6 +11,7 @@ en:
     like: I like
     unlike: Already I do not like
     last: Last Activities
+  browse: "Browse"
   comment:
     input: "Write a comment..."
     confirm_delete: "Delete comment?"
@@ -22,7 +25,8 @@ en:
     other: Followers
     new: "+ Follow"
     confirm_new: "Do you want to follow %{name}?"
-    submit: "Follow"
+    submit: "+ Follow"
+  forgot_password?: "Forgot you password?"
   friend:
     one: Friend
     other: Friends
@@ -31,16 +35,41 @@ en:
     submit: "Accept as friend"
   friend_request:
     new: "+ Add as friend"
+    send: "Send Request"
     confirm_new: "Do you want to add %{name} as friend?"
+  frontpage:
+    collaborate:
+      sentence1: "Organize your projects and activities"
+      sentence2: "Create your own groups"
+    elements:
+      comments: "Comments"
+      networks: "Social Networks"
+      organizers: "Organizers"
+      participants: "Participants"
+      groups: "Groups"
+      tags: "Tags"
+    main_title: "SocialStream a core for building social network applications."
+    meet:
+      sentence1: "Meet interesting people and groups"
+    share:
+      sentence1: "Your contacts and relations"
+      sentence2: "Posts, comments and activities"
+    stats: "%{users} users and %{groups} groups registered"
   group:
+    one: "Group"
     other: "Groups"
-    all: All Groups
-    be_fan: Be Fan
-    by: By Groups
-    my: My Groups
-    one: Group
-  home:
-    one: "Home"
+    all: "All groups"
+    by: "By groups"    
+    last: "Last groups"
+    my: "My groups"
+    new: "New group"
+    popular:
+      most: "Most popular"
+    voted:
+      most: "Most voted"
+  home: "Home"
+  inbox:
+    one: "Inbox"
   location:
     message: "You are here > %{location}"
   message: "Message"
@@ -48,6 +77,14 @@ en:
     options: "Menu Options"
   post:
     confirm_delete: "Delete post?"
+  profile:
+    one: "Profile"
+  public:
+    other: "Everybody"
+  sign_in: "Sign in"
+  sign_up: "Sign up"
+  sign_out_user: "Sign out (%{user})"
+  socialstream: "SocialStream"
   tie:
     pending:
       other: Pending requests
@@ -58,5 +95,8 @@ en:
       all: All
   time:
     ago: "%{time} ago"
-  socialstream: "SocialStream"
+  user:
+    by: "By Users"
+    one: "User"
+    other: "Users"
 

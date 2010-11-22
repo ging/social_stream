@@ -7,7 +7,7 @@
 <% end %>
 
 
-<%= render :partial => 'home/location' %>
+<%= render :partial => 'location' %>
 
 <br class="clearfloat" />
 <div class="space_center">
@@ -17,5 +17,5 @@
 </div>
 
 <%= render :partial => "activities/activities",
-           :locals => { :activities => @group.wall_profile,
+           :locals => { :activities => @group.wall_profile(current_user).paginate,
                         :owner => @group } %>

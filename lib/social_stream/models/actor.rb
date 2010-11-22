@@ -14,7 +14,7 @@ module SocialStream
         delegate :name, :name=,
                  :email, :email=,
                  :permalink,
-                 :logo,
+                 :logo, :logo=,
                  :ties, :sent_ties, :received_ties,
                  :active_ties_to,
                  :pending_ties,
@@ -23,6 +23,10 @@ module SocialStream
                  :wall, :wall_profile,
                  :to => :actor!
 
+
+        validates_presence_of :name
+
+        scope :alphabetic, includes(:actor).order('actors.name')
 
         scope :with_sent_ties,     joins(:actor => :sent_ties)
         scope :with_received_ties, joins(:actor => :received_ties)

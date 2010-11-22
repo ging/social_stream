@@ -25,13 +25,9 @@
 # sends a friendship_request to B. A is granting the friend relation with B, that is,
 # friendship_request grants friend relation.
 #
-# == Active relations
-# Those relations whose ties support activities. The default scope define active
-# relations as those that do not grant other relations, those that are not invitations
-# or requests.
-#
+
 class Relation < ActiveRecord::Base
-  has_ancestry
+  acts_as_nested_set
 
   scope :mode, lambda { |st, rt|
     where(:sender_type => st, :receiver_type => rt)
@@ -44,7 +40,6 @@ class Relation < ActiveRecord::Base
 
   scope :reflexive, where(:reflexive => true)
   scope :request, where('relations.granted_id IS NOT NULL')
-  scope :active, where(:granted_id => nil)
 
   has_many :relation_permissions, :dependent => :destroy
   has_many :permissions, :through => :relation_permissions
@@ -54,7 +49,7 @@ class Relation < ActiveRecord::Base
   class << self
     # A relation in the top of a strength hierarchy
     def strongest
-      roots.first
+      root
     end
   end
 
@@ -65,7 +60,7 @@ class Relation < ActiveRecord::Base
 
   # Relations below or at the same level of this relation
   def weaker_or_equal
-    Array(self) + descendants
+    self_and_descendants
   end
 
   # Other relations above in the same hierarchy that this relation
@@ -75,7 +70,7 @@ class Relation < ActiveRecord::Base
 
   # Relations above or at the same level of this relation
   def stronger_or_equal
-    ancestors + Array(self)
+    self_and_ancestors
   end
 
   # Relation class scoped in the same mode that this relation

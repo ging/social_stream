@@ -1,21 +1,16 @@
   <div id="logo">
     <b><%= link_to(current_user.name, current_user)%></b><br/>
-    <%= link_to(image_tag(current_user.logo.url , :size => "94x65", :alt => current_user.name ), current_user ) %>
+    <%= link_to(image_tag(current_user.logo.url(:profile) ,  :alt => current_user.name ), current_user ) %>
   </div>
   <div class="space_center">
   </div>
   <div class="menu_header"><b><%=t('menu.options')%></b>
   </div>
   <div id="menu_lateral">
-    <%= render :partial => "options" %>
+    <%= render :partial => "home/options" %>
   </div>
   <div class="space_center">
   </div>
-  <div class="space_center">
-  </div>
-  <% if current_user.friends.count>0 %>
-    <%= render :partial => "contacts" %>
-  <%end%>
   <div class="space_center">
   </div>
   <div class="space_center">

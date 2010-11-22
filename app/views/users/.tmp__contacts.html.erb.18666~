@@ -1,0 +1,38 @@
+<<<<<<< HEAD
+		<div class="future_conference" id="contacts">
+				<div class="future_header">
+						<div class="title_section">
+							<%= image_tag("btn/btn_follower.png", :alt =>"follower") %>2.520 Contacts
+						</div>
+						<div class="title_righ">
+								<a href="#">Ver Todas</a>
+						</div>
+				</div>
+				<div class="post_future_conference">
+						<div class="future_content_center">
+							<%=link_to ( (image_tag ( "albums/1.png", :alt => @user.name , :size => "40x40")) , @user) %>
+							<%=link_to ( (image_tag ( "albums/2.png", :alt => @user.name , :size => "40x40")) , @user) %>
+							<%=link_to ( (image_tag ( "albums/3.png", :alt => @user.name , :size => "40x40")) , @user) %>
+							<%=link_to ( (image_tag ( "albums/4.png", :alt => @user.name , :size => "40x40")) , @user) %>
+						</div>
+				</div>
+		</div>
+=======
+<div class="contacts_header">
+    <%=image_tag("btn/btn_friend.png", :class => "contacts_icon")%>
+    <div class="contacts_text_header">
+      <%= @user.friends.count %> <%= t('friend', :count => @user.friends.count) %>
+    </div>
+</div>
+<div class ="contacts">
+    <div class="contact">
+      <%@user.friends.all.each do |friend|%>
+          <%=link_to((image_tag (friend.logo.url, :alt => friend.name , :size => "40x40")) , friend)%>
+      <%end%>
+    </div>
+</div>
+<div class="contacts_footer">
+  <%=link_to((image_tag("btn/btn_next.png", :alt => "next")) , users_path) %>
+</div>
+>>>>>>> bb9eb705b65c784edf0b1070db65b6b13daf8656
+

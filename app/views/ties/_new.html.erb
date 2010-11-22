@@ -1,7 +1,7 @@
 <div class="dialog_add_tie" id="new_tie">
     <div class="content_add_user" >
       <div class="tie_logo">
-        <%= link_to image_tag(@tie.receiver_subject.logo.url,
+        <%= link_to image_tag(@tie.receiver_subject.logo.url(tie),
                               :size => "100x100",
                               :alt => @tie.receiver_subject.name),
                      @tie.receiver_subject %>
@@ -14,10 +14,10 @@
            <%= f.hidden_field :sender_id %>
            <%= f.hidden_field :relation_name %>
            <% if @tie.relation!.granted %>
-             <%= f.text_area :message,   :class =>"input_new_suggestions" %>
+             <%= f.text_area :message,   :class =>"input_new_tie" %>
            <% end %>
            <div class="ties_btn">
-             <%= submit_tag t('new', :scope => @tie.relation_name), :class => "follow_btn" %>
+             <%= submit_tag t('send', :scope => @tie.relation_name), :class => "tie_btn" %>
            </div>
          <% end %>
         </div>

@@ -7,8 +7,10 @@ class Actor < ActiveRecord::Base
   acts_as_url :name, :url_attribute => :permalink
 
   has_attached_file :logo,
-                    :styles => { :small => "30x30" },
-                    :default_url => "/:attachment/:style/:subtype_class.png"
+                    :styles => { :tie => "30x30>",
+                                 :actor => '35x35>',
+                                 :profile => '94x94' },
+                    :default_url => "/images/:attachment/:style/:subtype_class.png"
 
   has_many :sent_ties,
            :class_name => "Tie",
@@ -116,25 +118,31 @@ class Actor < ActiveRecord::Base
   #
   # @return [Tie]
   def suggestion(options = {})
-    type = options[:type].present? ?
-      options[:type].to_s.classify :
-      SuggestedRelations.keys[rand(SuggestedRelations.size)]
+    candidates_types = options[:type].present? ?
+      Array(options[:type].to_s.classify) :
+      SuggestedRelations.keys
 
-    type_class = type.constantize
+    candidates_classes = candidates_types.map(&:constantize)
     
     # Candidates are all the instance of "type" minus all the subjects
     # that are receiving any tie from this actor
-    candidates = type_class.all - receiver_subjects(type)
+    candidates = candidates_classes.inject([]) do |cs, klass|
+      cs += klass.all - receiver_subjects(klass)
+      cs -= Array(subject) if subject.is_a?(klass)
+      cs
+    end
 
     candidate = candidates[rand(candidates.size)]
 
-    sent_ties.build :receiver_id => candidate.actor_id,
-                    :relation => Relation.mode(subject_type, type).find_by_name(SuggestedRelations[type])
+    return nil unless candidate.present?
+
+    sent_ties.build :receiver_id => candidate.actor.id,
+                    :relation => Relation.mode(subject_type, candidate.class).find_by_name(SuggestedRelations[candidate.class.to_s])
   end
 
   # All the ties this actor has with subject that support activities
   def active_ties_to(subject)
-    sent_ties.received_by(subject).active
+    sent_ties.received_by(subject).allowed(self, 'create', 'activity')
   end
 
   def pending_ties
@@ -151,16 +159,15 @@ class Actor < ActiveRecord::Base
   # The set of activities in the wall of this actor, includes all the activities
   # from the ties the actor has access to
   #
-  # TODO: ties, authorization
   def wall
-    Activity.wall ties
+    Activity.wall Tie.allowed(self, 'read', 'activity')
   end
 
   # The set of activities in the wall profile of this actor, includes the activities
-  # from the ties of this actor
-  # TODO: authorization
-  def wall_profile
-    Activity.wall ties
+  # from the ties of this actor that can be read by user
+  #
+  def wall_profile(user)
+    Activity.wall ties.allowed(user, 'read', 'activity')
   end
 end
 

@@ -26,5 +26,118 @@ describe Tie do
                                                                    @relation.inverse).present?
     end
   end
+
+  describe "friend" do
+    before do
+      @tie = Factory(:friend)
+    end
+
+    describe ", sender" do
+      before do
+        @s = @tie.sender
+      end
+
+      it "creates activity" do
+        Tie.allowed(@s, 'create', 'activity').should include(@tie)
+        Tie.allowed(@s, 'create', 'activity').should include(@tie.related('public'))
+        Tie.allowed(@s, 'create', 'activity').should_not include(@tie.inverse)
+        Tie.allowed(@s, 'create', 'activity').should_not include(@tie.inverse.related('public'))
+      end
+
+      it "reads activity" do
+        Tie.allowed(@s, 'read', 'activity').should include(@tie)
+        Tie.allowed(@s, 'read', 'activity').should include(@tie.related('public'))
+        Tie.allowed(@s, 'read', 'activity').should include(@tie.inverse)
+        Tie.allowed(@s, 'read', 'activity').should include(@tie.inverse.related('public'))
+      end
+    end
+
+    describe ", friend" do
+      before do
+        @s = @tie.receiver
+      end
+
+      it "creates activity" do
+        Tie.allowed(@s, 'create', 'activity').should include(@tie.inverse)
+        Tie.allowed(@s, 'create', 'activity').should include(@tie.inverse.related('public'))
+        Tie.allowed(@s, 'create', 'activity').should_not include(@tie)
+        Tie.allowed(@s, 'create', 'activity').should_not include(@tie.related('public'))
+      end
+
+      it "reads activity" do
+        Tie.allowed(@s, 'read', 'activity').should include(@tie)
+        Tie.allowed(@s, 'read', 'activity').should include(@tie.related('public'))
+        Tie.allowed(@s, 'read', 'activity').should include(@tie.inverse)
+        Tie.allowed(@s, 'read', 'activity').should include(@tie.inverse.related('public'))
+      end
+    end
+
+    describe ", friend request" do
+      before do
+        @s = Factory(:friend_request, :receiver => @tie.receiver).sender
+      end
+
+      it "creates activity" do
+        Tie.allowed(@s, 'create', 'activity').should_not include(@tie)
+        Tie.allowed(@s, 'create', 'activity').should_not include(@tie.related('public'))
+        Tie.allowed(@s, 'create', 'activity').should_not include(@tie.inverse)
+        Tie.allowed(@s, 'create', 'activity').should_not include(@tie.inverse.related('public'))
+      end
+
+      it "reads activity" do
+        Tie.allowed(@s, 'read', 'activity').should_not include(@tie)
+#        Tie.allowed(@s, 'read', 'activity').should_not include(@tie.related('public'))
+        Tie.allowed(@s, 'read', 'activity').should_not include(@tie.inverse)
+#        Tie.allowed(@s, 'read', 'activity').should_not include(@tie.inverse.related('public'))
+      end
+
+    end
+
+    describe ", alien" do
+      before do
+        @s = Factory(:user)
+      end
+
+      it "creates activity" do
+        Tie.allowed(@s, 'create', 'activity').should_not include(@tie)
+        Tie.allowed(@s, 'create', 'activity').should_not include(@tie.related('public'))
+        Tie.allowed(@s, 'create', 'activity').should_not include(@tie.inverse)
+        Tie.allowed(@s, 'create', 'activity').should_not include(@tie.inverse.related('public'))
+      end
+      
+      it "reads activity" do
+        Tie.allowed(@s, 'read', 'activity').should_not include(@tie)
+        Tie.allowed(@s, 'read', 'activity').should_not include(@tie.inverse)
+      end
+    end
+  end
+
+  describe "member" do
+    before do
+      @tie = Factory(:member)
+    end
+
+    describe ", sender" do
+      before do
+        @s = @tie.sender
+      end
+
+      it "updates activity" do
+        Tie.allowed(@s, 'update', 'activity').should include(@tie)
+        Tie.allowed(@s, 'update', 'activity').should include(@tie.related('public'))
+      end
+    end
+
+    describe ", member" do
+      before do
+        @s = Factory(:member, :receiver => @tie.receiver).sender
+      end
+
+      it "updates activity" do
+        Tie.allowed(@s, 'update', 'activity').should include(@tie)
+        Tie.allowed(@s, 'update', 'activity').should include(@tie.related('public'))
+      end
+    end
+  end
 end
 

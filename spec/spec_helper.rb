@@ -32,6 +32,7 @@ ActiveRecord::Migrator.migrate File.expand_path("../dummy/db/migrate/", __FILE__
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 # Load Factories
+require 'factory_girl'
 Dir["#{File.dirname(__FILE__)}/factories/*.rb"].each {|f| require f}
 
 Rspec.configure do |config|
