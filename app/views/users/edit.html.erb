@@ -1,0 +1,164 @@
+        <% content_for :right do %>
+        <%= render :partial => 'right_show' %>
+        <% end %>
+				
+				<% content_for :middle do %>
+        <%= render :partial => 'middle_show' %>
+        <% end %>
+				
+				
+        <%= form_for(@user) do |f| %>
+        <% if @user.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@user.errors.count, "error") %>prohibited this user from being saved:</h2>
+            <ul>
+                <% @user.errors.full_messages.each do |msg| %>
+                <li>
+                    <%= msg %>
+                </li>
+                <% end %>
+            </ul>
+        </div>
+        <% end %>
+				<script type="text/javascript">
+              $(function() {
+                  $("#content").css('border-right', 'none');
+									$("#content").css('border-bottom', 'none');
+									$("#contact_info").addClass('section_normal');
+                  $("#experience_info").addClass('section_normal');
+									$("#personal_info").addClass('section_normal');
+									$("#contacts").addClass('section_normal');
+									$(".space_profile").addClass('section_normal');
+              });
+        </script>
+        <div class="field">
+            <% if !params[:section].present? or params[:section].eql?("about_me") %>
+            <div class="sectionEdit">
+                Personal information
+            </div>
+            <br/>
+            <%= f.label :full_name %>
+            <br/>
+            <%= f.text_field :full_name %>
+            <br/>
+						<script type="text/javascript">
+
+							$(function() {
+                 $( "#user_birthday" ).datepicker({ yearRange: '1900:<%= Time.now.utc.to_date.year%>', 
+								                                    changeYear: true, maxDate: '+0d', defaultDate: '-30y'});
+									
+									$("#personal_info").removeClass('section_normal');
+									$("#personal_info").addClass('section_highlight');
+              });
+
+					  </script>
+						
+						<div class="editField">
+              <%= f.label :birthday %>
+              <br/>
+						</div>
+            <%= f.text_field :birthday %>
+            <br/>
+						
+            <%= f.fields_for :profile do |profile_form| %>
+						<div class="editField">
+              <%= profile_form.label :organization %>
+              <br/>
+						</div>
+            <%= profile_form.text_field :organization %>
+            <br/>
+						<div class="editField">
+              <%= profile_form.label :city %>
+              <br/>
+						</div>
+            <%= profile_form.text_field :city %>
+            <br/>
+						<div class="editField">
+              <%= profile_form.label :country %>
+              <br/>
+						</div>
+            <%= profile_form.text_field :country %>
+            <br/>
+						<div class="editField">
+              <%= profile_form.label "About me" %>
+              <br/>
+						</div>
+            <%= profile_form.text_area :description, :rows =>6 %>
+            <br/>
+            <br/>
+            <% end %>
+						<% end %>
+            <% if !params[:section].present? or params[:section].eql?("contact_info") %>
+						<script type="text/javascript">
+
+              $(function() {
+
+                  $("#contact_info").removeClass('section_normal');
+                  $("#contact_info").addClass('section_highlight');
+              });
+
+            </script>
+            <div class="sectionEdit">
+                My contact information
+            </div>
+						<%= f.fields_for :profile do |profile_form| %>
+            <br/>
+						<div class="editField">
+              <%= profile_form.label :phone %>
+              <br/>
+						</div>
+            <%= profile_form.text_field :phone %>
+            <br/>
+						<div class="editField">
+              <%= profile_form.label :mobile %>
+              <br/>
+						</div>
+            <%= profile_form.text_field :mobile %>
+            <br/>
+						<div class="editField">
+              <%= profile_form.label :fax %>
+              <br/>
+						</div>
+            <%= profile_form.text_field :fax %>
+            <br/>
+						<div class="editField">
+              <%= profile_form.label :address %>
+              <br/>
+						</div>
+            <%= profile_form.text_field :address %>
+            <br/>
+						<div class="editField">
+              <%= profile_form.label :website %>
+              <br/>
+						</div>
+            <%= profile_form.text_field :website %>
+            <br/>
+            <br/>
+            <% end %>
+						<% end %>
+            <% if !params[:section].present? or params[:section].eql?("my_experience") %>
+						<script type="text/javascript">
+
+              $(function() {
+
+                  $("#experience_info").removeClass('section_normal');
+                  $("#experience_info").addClass('section_highlight');
+              });
+
+            </script>
+	            <div class="sectionEdit">
+	                My experience
+	            </div>
+							<%= f.fields_for :profile do |profile_form| %>
+	            <br/>
+	            <%= profile_form.text_area :experience, :rows =>6 %>
+	            <br/>
+	            <br/>
+	            <% end %>
+            <% end %>
+        </div>
+        <div class="actions">
+            <%= f.submit "Update" %>&nbsp;<button onclick="window.location.href='<%= user_url(@user) %>';">Cancel</button>
+        </div>
+				<br/>
+        <% end %>

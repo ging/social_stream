@@ -1,19 +1,26 @@
-		<div class="future_conference">
+ 
+		
+
+		  <div class="future_conference" id="personal_info" >
 				<div class="future_header">
-						<div class="future_text_header">
+					   
+						<br/><br/>
+						<div class="title_section">
 								Personal Information
 						</div>
 						<div class="title_righ">
-								<a href="#">Edit</a>
+								
+								<%= link_to "Edit", :controller => :users, :action => :edit, :section => :about_me %>
+								
 						</div>
 				</div>
-				<div class="post_future_conference">
+				<div class="post_future_conference"  >
 						<div class="info_post">
 								<div class="info_left">
-										Work:
+										Organization:
 								</div>
 								<div class="info_right">
-										CSI-ESPOL
+										<%=h @user.profile.organization %>
 								</div>
 						</div>
 						<div class="info_post">
@@ -21,7 +28,7 @@
 										BirthDay:
 								</div>
 								<div class="info_right">
-										July 13, 1982 
+										<%=h @user.birthday.to_s(:long) %>
 								</div>
 						</div>
 						<div class="info_post">
@@ -29,15 +36,7 @@
 										Age:
 								</div>
 								<div class="info_right">
-										22 years old
-								</div>
-						</div>
-						<div class="info_post">
-								<div class="info_left">
-										Place of Birth:
-								</div>
-								<div class="info_right">
-										Guayaquil, Ecuador
+										<%=h @user.age %>
 								</div>
 						</div>
 						<div class="info_post">
@@ -45,18 +44,28 @@
 										Actual City:
 								</div>
 								<div class="info_right">
-										Panamá, Panamá
+										<%=h @user.profile.city %>, 
+										<%=h @user.profile.country %>
 								</div>
 						</div>
+						<div class="info_post">
+                <div class="info_left">
+                    About me:
+                </div>
+                <div class="info_right">
+                    <%=h @user.profile.description %>
+                </div>
+            </div>
 				</div>
-		</div>
-		<div class="future_conference">
+		  </div>
+
+		  <div class="future_conference" id="contact_info">
 				<div class="future_header">
-						<div class="future_text_header">
+						<div class="title_section">
 								Contact Information
 						</div>
 						<div class="title_righ">
-								<a href="#">Edit</a>
+								<%= link_to "Edit", :controller => :users, :action => :edit, :section => :contact_info %>
 						</div>
 				</div>
 				<div class="post_future_conference">
@@ -65,57 +74,35 @@
 										<div>
 												Website
 										</div>
-										<div class="keynote_future">
-												<a href="#">http://www.blog.espol.edu.ec/arigar</a>
-										</div>
-								</div>
-								<div class="info_post">
-										<div>
-												Linkedinf
-										</div>
-										<div class="keynote_future">
-												<a href="#">http://www.linkedin.com/arigar</a>
+										<div class="contact_link">
+												<a href="<%=h @user.profile.website %>"><%=h @user.profile.website %></a>
 										</div>
 								</div>
 						</div>
 				</div>
-		</div>
-		<div class="future_conference">
+		  </div>
+
+		  <div class="future_conference" id="experience_info">
 				<div class="future_header">
-						<div class="future_text_header">
-								Experiencia
+						<div class="title_section">
+								Experience
 						</div>
 						<div class="title_righ">
-								<a href="#">Edit</a>
+								<%= link_to "Edit", :controller => :users, :action => :edit, :section => :my_experience %>
 						</div>
 				</div>
 				<div class="post_future_conference">
 						<div class="future_content">
 								<div class="info_post">
-										<div class="info_left">
-												Actual:
-										</div>
+										
 										<div class="info_right">
-												Diseñadora Gráfica del Centro de Servicios Informáticos, CSI-ESPOL
+												<%=h @user.profile.experience %>
 										</div>
 								</div>
-								<div class="info_post">
-										<div class="info_left">
-												Actual:
-										</div>
-										<div class="info_right">
-												Asesora de diseño del Grupo romero y Asociados S.A.
-										</div>
-								</div>
-								<div class="info_post">
-										<div class="info_left">
-												Anterior:
-										</div>
-										<div class="info_right">
-												Diseñadora del Departamente de Investigación y Multimedios EDCOM-ESPOL
-										</div>
-								</div>
+								
 						</div>
 				</div>
-		</div>
+		 </div>
+
+
 
