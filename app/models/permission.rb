@@ -1,7 +1,26 @@
+# SocialStream provides a sophisticated and powerful system of permissions based on the relations
+# and ties of the social network.
+#
+# Permissions are composed by action, objective and parameterized. Action and objective are classical
+# in content management systems, e.g. "create" "activity", "update" "tie", "read" "post"
+#
+# parameterized is a novel feature. It supports applying the permission to certain set of ties.
+# This set of ties changes with the formation of ties in your website.
+#
+# Permissions is assigned to relations, and through relations, to ties. 
+# When a sender establishes a tie with a receiver, she grants to the receiver the permissions assigned
+# to relation of the tie she has just established. For example, when Alice establishes a "friend" tie
+# to Bob, she is granting him the permissions associated with "friend" relation.
+#
+# One of this permissions can be "read" "activity" "inverse_group_set". This way, Bob will have access
+# to read the activities attached to ties inside the "inverse_group_set", which are the ties from all
+# the "friends" of Alice to Alice herself.
+#
 class Permission < ActiveRecord::Base
   has_many :relation_permissions, :dependent => :destroy
   has_many :relations, :through => :relation_permissions
 
+  # The SQL and ARel conditions for permission queries
   ParameterConditions = {
     :table => {
       'tie' =>
