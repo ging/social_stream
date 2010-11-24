@@ -121,8 +121,34 @@ class Tie < ActiveRecord::Base
     Tie.inverse(self).first
   end
 
-  # Access Control
-  
+  # = Access Control
+  #
+  # Access control enforcement in ties come from the permissions assigned to other ties through relations.
+  # The access_set is the set of ties that grant some permission on a particular tie.
+  #
+  # Enforcing access control on activities and ties are a matter of finding its access set.
+  # There are two approaches for this, checking the permissions on particular tie or finding all the ties
+  # granted some permission.
+  #
+  # == Particular tie
+  # ------------------        ------------------
+  # | particular tie |--------|   access_set   |
+  # |       t        |        |      ties      |
+  # ------------------        ------------------
+  #
+  # Because t is given, the scopes are applied to the ties table
+  # We get the set of ties that allow permission on t
+  #
+  # == Finding ties
+  # ------------------  join  ------------------
+  # |  finding ties  |--------|   access_set   |
+  # |      ties      |        |     ties_as    |
+  # ------------------        ------------------
+  #
+  # Because we want to find ties, an additional join table (ties_as) is needed for applying access set conditions
+  # We get the set of ties that are allowed to certain condition
+  #
+
   scope :with_permissions, lambda { |action, object|
     joins(:relation => :permissions).
       where('permissions.action' => action).
