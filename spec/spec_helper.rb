@@ -17,7 +17,7 @@ Capybara.default_driver   = :rack_test
 Capybara.default_selector = :css
 
 # FIXME orm
-#ActiveRecord::Migration.verbose = false
+ActiveRecord::Migration.verbose = false
 
 # Base migration
 #require 'lib/generators/social_stream/templates/migration'
