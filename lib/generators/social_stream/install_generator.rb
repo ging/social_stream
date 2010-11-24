@@ -18,6 +18,10 @@ class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
     directory "public"
   end
 
+  def remove_public_index
+    remove_file 'public/index.html'
+  end
+
   def create_application_layout
     copy_file File.join(File.dirname(__FILE__), '../../../',
                         'app/views/layouts/application.html.erb'),
