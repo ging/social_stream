@@ -27,18 +27,18 @@ namespace :db do
       # = Users
 
       # Create demo user if not present
-      if User.find_by_name('demo').blank?
-        User.create! :name => 'demostration',
-                     :email => 'demostration@test.com',
-                     :password => 'demostration',
-                     :password_confirmation => 'demostration'
+      if User.find_by_name('demonstration').blank?
+        User.create! :name => 'demonstration',
+                     :email => 'demonstration@social-stream.dit.upm.es',
+                     :password => 'demonstration',
+                     :password_confirmation => 'demonstration'
       end
 
       9.times do
         User.create! :name => Forgery::Name.full_name,
                      :email => Forgery::Internet.email_address,
-                     :password => 'demostration',
-                     :password_confirmation => 'demostration'
+                     :password => 'demonstration',
+                     :password_confirmation => 'demonstration'
       end
 
       set_logos(User)
