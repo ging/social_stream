@@ -20,10 +20,9 @@ require 'paperclip/social_stream'
 # Pagination
 require 'will_paginate'
 
-require 'social_stream/rails/common'
-File.expand_path(__FILE__) =~ /#{ File.join('vendor', 'plugins') }/ ?
-  require('social_stream/rails/railtie') :
-  require('social_stream/rails/engine')
+File.expand_path(__FILE__) =~ /^#{ Gem.path }/ ?
+  require('social_stream/rails/engine') :
+  require('social_stream/rails/railtie')
 
 module SocialStream
   module Rails #:nodoc:

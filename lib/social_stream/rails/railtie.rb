@@ -1,3 +1,5 @@
+require 'social_stream/rails/common'
+
 module SocialStream
   module Rails
     class Railtie < ::Rails::Railtie #:nodoc:
