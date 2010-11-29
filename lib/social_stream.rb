@@ -1,7 +1,8 @@
 # Provides your Rails application with social network and activity stream support
 module SocialStream
-  autoload :Ability, 'social_stream/ability'
-  autoload :Seed, 'social_stream/seed'
+  autoload :Ability,  'social_stream/ability'
+  autoload :Populate, 'social_stream/populate'
+  autoload :Seed,     'social_stream/seed'
 
   module Models
     autoload :Supertype, 'social_stream/models/supertype'

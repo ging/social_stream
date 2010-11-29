@@ -189,6 +189,8 @@ class CreateSocialStream < ActiveRecord::Migration
 
       t.timestamps
       t.integer  "actor_id"
+      # FIXME: move to profile
+      t.date "birthday"
     end
 
     add_index "users", "actor_id"
