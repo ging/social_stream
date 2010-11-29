@@ -99,6 +99,7 @@ class CreateSocialStream < ActiveRecord::Migration
 
     create_table "profiles", :force => true do |t|
       t.integer  "user_id"
+      t.date     "birthday"
       t.datetime "created_at"
       t.datetime "updated_at"
       t.string   "organization", :limit => 45

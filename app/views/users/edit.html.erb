@@ -6,8 +6,9 @@
         <%= render :partial => 'middle_show' %>
         <% end %>
 				
+       
 				
-        <%= form_for(@user) do |f| %>
+        <%= form_for(@user, :remote => true) do |f| %>
         <% if @user.errors.any? %>
         <div id="error_explanation">
             <h2><%= pluralize(@user.errors.count, "error") %>prohibited this user from being saved:</h2>
@@ -29,7 +30,10 @@
 									$("#personal_info").addClass('section_normal');
 									$("#contacts").addClass('section_normal');
 									$(".space_profile").addClass('section_normal');
-              });
+									
+                  $("#edit_user_1").validate();
+                
+              }); 
         </script>
         <div class="field">
             <% if !params[:section].present? or params[:section].eql?("about_me") %>
@@ -37,30 +41,31 @@
                 Personal information
             </div>
             <br/>
-            <%= f.label :full_name %>
+            <%= f.label :name %>
             <br/>
-            <%= f.text_field :full_name %>
+            <%= f.text_field :name, :class => "required" %>
             <br/>
 						<script type="text/javascript">
 
 							$(function() {
-                 $( "#user_birthday" ).datepicker({ yearRange: '1900:<%= Time.now.utc.to_date.year%>', 
+                  $( "#user_profile_attributes_birthday" ).datepicker({ yearRange: '1900:<%= Time.now.utc.to_date.year%>', 
 								                                    changeYear: true, maxDate: '+0d', defaultDate: '-30y'});
 									
 									$("#personal_info").removeClass('section_normal');
 									$("#personal_info").addClass('section_highlight');
-              });
+									
+							});
 
 					  </script>
-						
+						<%= f.fields_for :profile do |profile_form| %>
 						<div class="editField">
-              <%= f.label :birthday %>
+              <%= profile_form.label :birthday %>
               <br/>
 						</div>
-            <%= f.text_field :birthday %>
+            <%= profile_form.text_field :birthday , :class => "date" %>
             <br/>
 						
-            <%= f.fields_for :profile do |profile_form| %>
+            
 						<div class="editField">
               <%= profile_form.label :organization %>
               <br/>
@@ -83,7 +88,7 @@
               <%= profile_form.label "About me" %>
               <br/>
 						</div>
-            <%= profile_form.text_area :description, :rows =>6 %>
+            <%= profile_form.text_area :description, :rows =>6, :maxlength => 400 %>
             <br/>
             <br/>
             <% end %>
@@ -107,19 +112,19 @@
               <%= profile_form.label :phone %>
               <br/>
 						</div>
-            <%= profile_form.text_field :phone %>
+            <%= profile_form.text_field :phone, :class => "digits" %>
             <br/>
 						<div class="editField">
               <%= profile_form.label :mobile %>
               <br/>
 						</div>
-            <%= profile_form.text_field :mobile %>
+            <%= profile_form.text_field :mobile, :class => "digits" %>
             <br/>
 						<div class="editField">
               <%= profile_form.label :fax %>
               <br/>
 						</div>
-            <%= profile_form.text_field :fax %>
+            <%= profile_form.text_field :fax, :class => "digits" %>
             <br/>
 						<div class="editField">
               <%= profile_form.label :address %>
@@ -131,7 +136,7 @@
               <%= profile_form.label :website %>
               <br/>
 						</div>
-            <%= profile_form.text_field :website %>
+            <%= profile_form.text_field :website, :class => "url" %>
             <br/>
             <br/>
             <% end %>
@@ -151,7 +156,7 @@
 	            </div>
 							<%= f.fields_for :profile do |profile_form| %>
 	            <br/>
-	            <%= profile_form.text_area :experience, :rows =>6 %>
+	            <%= profile_form.text_area :experience, :rows =>6, :maxlength => 500 %>
 	            <br/>
 	            <br/>
 	            <% end %>
