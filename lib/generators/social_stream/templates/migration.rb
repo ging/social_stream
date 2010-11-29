@@ -2,14 +2,12 @@ class CreateSocialStream < ActiveRecord::Migration
   def self.up
     create_table "activities", :force => true do |t|
       t.integer  "activity_verb_id"
-      t.integer  "tie_id"
       t.datetime "created_at"
       t.datetime "updated_at"
       t.string   "ancestry"
     end
 
     add_index "activities", "activity_verb_id"
-    add_index "activities", "tie_id"
 
     create_table "activity_object_activities", :force => true do |t|
       t.integer  "activity_id"
@@ -162,6 +160,17 @@ class CreateSocialStream < ActiveRecord::Migration
     add_index "tags_activity_objects", "activity_object_id"
     add_index "tags_activity_objects", "tag_id"
 
+    create_table "tie_activities", :force => true do |t|
+      t.integer "tie_id"
+      t.integer "activity_id"
+      t.boolean "read"
+      t.boolean "deleted"
+      t.boolean "original", :default => true
+    end
+
+    add_index "tie_activities", "tie_id"
+    add_index "tie_activities", "activity_id"
+
     create_table "ties", :force => true do |t|
       t.integer  "sender_id"
       t.integer  "receiver_id"
@@ -199,7 +208,6 @@ class CreateSocialStream < ActiveRecord::Migration
     # add_index :users, :unlock_token,       :unique => true
 
     add_foreign_key "activities", "activity_verbs", :name => "index_activities_on_activity_verb_id"
-    add_foreign_key "activities", "ties", :name => "index_activities_on_tie_id"
 
     add_foreign_key "activity_object_activities", "activities", :name => "index_activity_object_activities_on_activity_id"
     add_foreign_key "activity_object_activities", "activity_objects", :name => "activity_object_activities_on_activity_object_id"
@@ -219,6 +227,9 @@ class CreateSocialStream < ActiveRecord::Migration
 
     add_foreign_key "tags_activity_objects", "activity_objects", :name => "tags_activity_objects_on_activity_object_id"
     add_foreign_key "tags_activity_objects", "tags", :name => "tags_activity_objects_on_tag_id"
+
+    add_foreign_key "tie_activities", "ties",       :name => "tie_activities_on_tie_id"
+    add_foreign_key "tie_activities", "activities", :name => "tie_activities_on_activity_id"
 
     add_foreign_key "ties", "actors", :name => "ties_on_receiver_id", :column => "receiver_id"
     add_foreign_key "ties", "actors", :name => "ties_on_relation_id", :column => "sender_id"

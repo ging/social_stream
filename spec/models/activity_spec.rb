@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 module ActivityTestHelper
   def create_activity_assigned_to(tie)
     @tie = tie
-    @activity = Factory(:activity, :tie => tie)
+    @activity = Factory(:activity, :_tie => tie)
   end
 
   def create_ability_accessed_by(tie_type)

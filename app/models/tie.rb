@@ -41,7 +41,8 @@ class Tie < ActiveRecord::Base
 
   belongs_to :relation
 
-  has_many :activities
+  has_many :tie_activities, :dependent => :destroy
+  has_many :activities, :through => :tie_activities
 
   scope :recent, order("#{ quoted_table_name }.created_at DESC")
 
@@ -68,7 +69,7 @@ class Tie < ActiveRecord::Base
   scope :inverse, lambda { |t|
     sent_by(t.receiver).
       received_by(t.sender).
-      where(:relation_id => t.relation.inverse_id)
+      where(:relation_id => t.relation.inverse.try(:id))
   }
 
   validates_presence_of :sender_id, :receiver_id, :relation_id
@@ -119,6 +120,10 @@ class Tie < ActiveRecord::Base
   # The inverse tie
   def inverse
     Tie.inverse(self).first
+  end
+
+  def activity_receivers
+    Array(inverse)
   end
 
   # = Access Control
