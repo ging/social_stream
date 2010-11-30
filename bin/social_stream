@@ -35,9 +35,8 @@ echo 'Done'
 
 #Gems
 echo 'Installing Initial Gems'
-sudo gem install rails
+sudo gem install rails 
 sudo gem install bundler 
-sudo gem install 'social_stream'
 echo 'Done'
 
 #Social Stream 
@@ -46,13 +45,13 @@ export PATH=$PATH:/var/lib/gems/1.8/bin
 echo 'Creating rails project'
 rails new $1 
 cd $1
+echo 'gem "social_stream"' >> Gemfile
 echo 'Updating bundle'
 bundle update
 echo 'Setting up the application'
-rails generate social_stream:install
+rails generate social_stream:install -y
 rake db:migrate
 rake db:seed
-rm public/index.html
 echo 'Done'
 
 echo 'Instalation complete. Run "rails server" in the application folder to start the server'
