@@ -28,7 +28,7 @@
 										BirthDay:
 								</div>
 								<div class="info_right">
-										<%=h @user.birthday.to_s() %>
+										<%=h @user.profile.birthday.to_s() %>
 								</div>
 						</div>
 						<div class="info_post">
@@ -78,6 +78,14 @@
 												<a href="<%=h @user.profile.website %>"><%=h @user.profile.website %></a>
 										</div>
 								</div>
+								<div class="info_post">
+                    <div>
+                        E-mail
+                    </div>
+                    <div class="contact_link">
+                        <%=h @user.email %>
+                    </div>
+                </div>
 						</div>
 				</div>
 		  </div>

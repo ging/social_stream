@@ -1,0 +1,20 @@
+
+<% if @user.valid? %>
+
+
+  if ($("#notice").length == 0){
+	  
+    $("#content").prepend('<div id="notice"></div>');
+		
+  }  
+  $("#notice").html("<h2>Form Submitted!</h2>");
+
+  $("#middleContent").replaceWith("<%= escape_javascript(render(:partial => 'middle_show'))%>");
+	
+<% else %>
+
+  $("#flash_error").html("<h2>Fail!</h2>"); 
+
+<% end %>
+
+

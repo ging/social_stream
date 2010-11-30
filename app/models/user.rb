@@ -26,9 +26,9 @@ class User < ActiveRecord::Base
   
    
   def age
-    return nil if self.birthday.blank? 
+    return nil if profile.birthday.blank? 
     now = Time.now.utc.to_date
-    now.year - self.birthday.year - (self.birthday.to_date.change(:year => now.year) > now ? 1 : 0)
+    now.year - profile.birthday.year - (profile.birthday.to_date.change(:year => now.year) > now ? 1 : 0)
   end
   
   after_create :create_profile

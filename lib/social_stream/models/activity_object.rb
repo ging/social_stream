@@ -60,7 +60,7 @@ module SocialStream
 
         def create_activity(verb)
           activity_object.activities.create! :verb      => verb,
-                                             :tie       => _activity_tie,
+                                             :_tie      => _activity_tie,
                                              :parent_id => _activity_parent_id
         end
       end

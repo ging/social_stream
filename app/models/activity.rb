@@ -12,18 +12,16 @@ class Activity < ActiveRecord::Base
 
   belongs_to :activity_verb
 
-  belongs_to :tie,
-             :include => [ :sender ]
+  has_many :tie_activities, :dependent => :destroy
+  has_many :ties, :through => :tie_activities
 
-  has_one :sender,
-          :through => :tie
-  has_one :receiver,
-          :through => :tie
-  has_one :relation,
-          :through => :tie
+  has_one :tie,
+          :through => :tie_activities,
+          :conditions => { 'tie_activities.original' => true },
+          :include => [ :sender ]
 
-  delegate :sender_subject,
-           :receiver_subject,
+  delegate :sender, :receiver, :relation,
+           :sender_subject, :receiver_subject,
            :to => :tie
 
   has_many :activity_object_activities,
@@ -34,9 +32,14 @@ class Activity < ActiveRecord::Base
   scope :wall, lambda { |ties|
     select("DISTINCT activities.*").
       roots.
-      where(:tie_id => ties).
+      joins(:tie_activities).
+      where('tie_activities.tie_id' => ties).
       order("created_at desc")
   }
+
+  # After an activity is created, it is associated to ties
+  attr_accessor :_tie
+  after_create :assign_to_ties
 
   # The name of the verb of this activity
   def verb
@@ -59,7 +62,7 @@ class Activity < ActiveRecord::Base
   end
 
   def liked_by(user) #:nodoc:
-    likes.includes(:tie) & Tie.sent_by(user)
+    likes.joins(:ties).where('tie_activities.original' => true) & Tie.sent_by(user)
   end
 
   # Does user like this activity?
@@ -72,4 +75,13 @@ class Activity < ActiveRecord::Base
     activity_objects.first.try(:object)
   end
 
+  private
+
+  def assign_to_ties
+    original = tie_activities.create!(:tie => _tie)
+    _tie.activity_receivers.each do |t|
+      tie_activities.create!(:tie => t,
+                             :original => false)
+    end
+  end
 end

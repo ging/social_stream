@@ -4,11 +4,11 @@ class LikesController < ApplicationController
 
   # POST /activities/1/like.js
   def create
-    @like = activity!.children.new :verb => "like"
+    @like = activity!.children.new :verb => "like",
+                                   :_tie => tie!
 		
     respond_to do |format|
       if @like.save
-        tie!.activities << @like
         format.js
       else
         format.js
