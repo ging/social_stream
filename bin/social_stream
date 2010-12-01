@@ -21,8 +21,8 @@ echo 'Done'
 
 #Rubygems
 RUBY_GEMS_VERSION='1.3.7'
-RUBY_GEMS_PACKAGE='rubygems-$RUBY_GEMS_VERSION.tgz'
-RUBY_GEMS_DOWNLOAD='http://rubyforge.org/frs/download.php/70696/$RUBY_GEMS_PACKAGE'
+RUBY_GEMS_PACKAGE="rubygems-"${RUBY_GEMS_VERSION}".tgz"
+RUBY_GEMS_DOWNLOAD="http://rubyforge.org/frs/download.php/70696/"${RUBY_GEMS_PACKAGE}
 
 echo 'Installing Rubygems $RUBY_GEMS_VERSION'
 
