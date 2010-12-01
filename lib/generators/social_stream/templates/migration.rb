@@ -239,13 +239,43 @@ class CreateSocialStream < ActiveRecord::Migration
   end
 
   def self.down
+    remove_foreign_key "activities", :name => "index_activities_on_activity_verb_id"
+
+    remove_foreign_key "activity_object_activities", :name => "index_activity_object_activities_on_activity_id"
+    remove_foreign_key "activity_object_activities", :name => "activity_object_activities_on_activity_object_id"
+
+    remove_foreign_key "actors", :name => "actors_on_activity_object_id"
+
+    remove_foreign_key "comments", :name => "comments_on_activity_object_id"
+
+    remove_foreign_key "groups", :name => "groups_on_actor_id"
+
+    remove_foreign_key "posts", :name => "posts_on_activity_object_id"
+
+    remove_foreign_key "profiles", :name => "profiles_on_user_id"
+
+    remove_foreign_key "relation_permissions", :name => "relation_permissions_on_relation_id"
+    remove_foreign_key "relation_permissions", :name => "relation_permissions_on_permission_id"
+
+    remove_foreign_key "tags_activity_objects", :name => "tags_activity_objects_on_activity_object_id"
+    remove_foreign_key "tags_activity_objects", :name => "tags_activity_objects_on_tag_id"
+
+    remove_foreign_key "tie_activities", :name => "tie_activities_on_tie_id"
+    remove_foreign_key "tie_activities", :name => "tie_activities_on_activity_id"
+
+    remove_foreign_key "ties", :name => "ties_on_receiver_id", :column => "receiver_id"
+    remove_foreign_key "ties", :name => "ties_on_relation_id", :column => "sender_id"
+    remove_foreign_key "ties", :name => "ties_on_sender_id"
+
+    remove_foreign_key "users", :name => "users_on_actor_id"
+
     drop_table :activities
     drop_table :activity_object_activities
     drop_table :activity_objects
     drop_table :activity_verbs
     drop_table :actors
     drop_table :comments
-    drop_table :group
+    drop_table :groups
     drop_table :permissions
     drop_table :posts
     drop_table :private_messages
