@@ -2,7 +2,8 @@ require 'devise/orm/active_record'
 
 class User < ActiveRecord::Base
   devise *SocialStream.devise_modules
-  has_one :profile
+
+  has_one :profile, :dependent => :destroy
   accepts_nested_attributes_for :profile
   
   # Setup accessible (or protected) attributes for your model
