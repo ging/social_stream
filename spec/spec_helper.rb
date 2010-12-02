@@ -19,14 +19,8 @@ Capybara.default_selector = :css
 # FIXME orm
 ActiveRecord::Migration.verbose = false
 
-# Base migration
-#require 'lib/generators/social_stream/templates/migration'
-#CreateSocialStream.up
-
 # Run any available migration
 ActiveRecord::Migrator.migrate File.expand_path("../dummy/db/migrate/", __FILE__)
-
-#require File.expand_path("../dummy/db/seeds", __FILE__)
 
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
