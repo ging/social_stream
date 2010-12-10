@@ -20,7 +20,8 @@ require 'paperclip/social_stream'
 # Pagination
 require 'will_paginate'
 
-File.expand_path(__FILE__) =~ /^#{ Gem.path }/ ?
+# FIXME: deprecate plugin
+Gem.path.map{ |p| File.expand_path(__FILE__) =~ /^#{ p }/ }.compact.present? ?
   require('social_stream/rails/engine') :
   require('social_stream/rails/railtie')
 
