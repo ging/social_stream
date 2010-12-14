@@ -20,12 +20,25 @@ require 'paperclip/social_stream'
 # Pagination
 require 'will_paginate'
 
-# FIXME: deprecate plugin
-Gem.path.map{ |p| File.expand_path(__FILE__) =~ /^#{ p }/ }.compact.present? ?
-  require('social_stream/rails/engine') :
-  require('social_stream/rails/railtie')
-
 module SocialStream
-  module Rails #:nodoc:
+  class Engine < ::Rails::Engine #:nodoc:
+    config.app_generators.authentication :devise
+    config.app_generators.javascript :jquery
+
+    config.to_prepare do
+      %w( actor activity_object ).each do |supertype|
+        supertype.classify.constantize.load_subtype_features
+      end
+
+      # https://rails.lighthouseapp.com/projects/8994/tickets/1905-apphelpers-within-plugin-not-being-mixed-in
+      ApplicationController.helper ActivitiesHelper
+      ApplicationController.helper TiesHelper
+    end
+
+    initializer "social_stream.inflections" do
+      ActiveSupport::Inflector.inflections do |inflect|
+        inflect.singular /^([Tt]ie)s$/, '\1'
+      end
+    end
   end
 end
