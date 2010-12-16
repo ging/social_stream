@@ -140,7 +140,6 @@ class CreateSocialStream < ActiveRecord::Migration
       t.integer  "lft"
       t.integer  "rgt"
       t.integer  "inverse_id"
-      t.integer  "granted_id"
       t.boolean  "reflexive", :default => false
     end
 

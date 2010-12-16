@@ -21,11 +21,6 @@ relations:
     inverse: user-public
     permissions:
       - [ read,    activity, star_set ]
-  user-friend-request:
-    sender_type: User
-    receiver_type: User
-    name: friend_request
-    granted: user-friend
 
   user-group-member:
     sender_type: User
