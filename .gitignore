@@ -1,3 +1,4 @@
 .bundle
 pkg/*gem
 **.tmp_*
+Gemfile.lock
