@@ -140,9 +140,9 @@ class Actor < ActiveRecord::Base
                     :relation => Relation.mode(subject_type, candidate.class).find_by_name(SuggestedRelations[candidate.class.to_s])
   end
 
-  # All the ties this actor has with subject that support activities
-  def active_ties_to(subject)
-    sent_ties.received_by(subject).allowed(self, 'create', 'activity')
+  # All the ties this actor has with subject that support permission
+  def sent_ties_allowing(subject, action, objective)
+    sent_ties.allowing(subject, action, objective)
   end
 
   def pending_ties
@@ -160,14 +160,14 @@ class Actor < ActiveRecord::Base
   # from the ties the actor has access to
   #
   def wall
-    Activity.wall Tie.allowed(self, 'read', 'activity')
+    Activity.wall Tie.allowing(self, 'read', 'activity')
   end
 
   # The set of activities in the wall profile of this actor, includes the activities
   # from the ties of this actor that can be read by user
   #
   def wall_profile(user)
-    Activity.wall ties.allowed(user, 'read', 'activity')
+    Activity.wall ties.allowing(user, 'read', 'activity')
   end
 end
 

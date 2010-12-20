@@ -7,13 +7,12 @@ relations:
     sender_type: User
     receiver_type: User
     name: friend
-    inverse: user-friend
     reflexive: true
     permissions:
-      - [ create,  activity, inverse_weak_set ]
-      - [ read,    activity, inverse_group_set ]
-      - [ update,  activity, inverse_weak_set ]
-      - [ destroy, activity, inverse_weak_set ]
+      - [ create,  activity, weak_set ]
+      - [ read,    activity, star_set ]
+      - [ update,  activity, weak_set ]
+      - [ destroy, activity, weak_set ]
   user-public:
     sender_type: User
     receiver_type: User
@@ -21,7 +20,7 @@ relations:
     parent: user-friend
     inverse: user-public
     permissions:
-      - [ read,    activity, inverse_group_set ]
+      - [ read,    activity, star_set ]
   user-friend-request:
     sender_type: User
     receiver_type: User
@@ -50,10 +49,10 @@ relations:
     name: member
     inverse: user-group-member
     permissions:
-      - [ create,  activity, inverse_weak_set ]
-      - [ read,    activity, inverse_group_set ]
-      - [ update,  activity, inverse_weak_group_set ]
-      - [ destroy, activity, inverse_weak_group_set ]
+      - [ create,  activity, weak_set ]
+      - [ read,    activity, star_set ]
+      - [ update,  activity, weak_star_set ]
+      - [ destroy, activity, weak_star_set ]
   group-user-public:
     sender_type: Group
     receiver_type: User
@@ -61,4 +60,4 @@ relations:
     parent: group-user-member
     inverse: user-group-public
     permissions:
-      - [ read,    activity, inverse_group_set ]
+      - [ read,    activity, star_set ]

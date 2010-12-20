@@ -79,13 +79,10 @@ namespace :db do
       # = Posts
 
       SocialStream::Populate.power_law(Tie.all) do |t|
-        # Only Post from users
-        next if t.relation.sender_type == "Group"
-
         updated = Time.at(rand(Time.now))
 
         p = Post.create :text =>
-                      "This post should be for #{ I18n.t('other', :scope => t.relation.name) } of #{ t.receiver.name }.\n#{ Forgery::LoremIpsum.paragraph(:random => true) }",
+                      "This post should be for #{ I18n.t('other', :scope => t.relation.name) } of #{ t.sender.name }.\n#{ Forgery::LoremIpsum.paragraph(:random => true) }",
                         :created_at => Time.at(rand(updated)),
                         :updated_at => updated,
                         :_activity_tie_id => t.id

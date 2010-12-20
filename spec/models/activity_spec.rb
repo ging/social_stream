@@ -7,13 +7,13 @@ module ActivityTestHelper
   end
 
   def create_ability_accessed_by(tie_type)
-    t = Factory(tie_type, :receiver => @tie.receiver)
-    u = t.sender_subject
+    t = Factory(tie_type, :sender => @tie.sender)
+    u = t.receiver_subject
     @ability = Ability.new(u)
   end
 
-  def create_ability_accessed_by_sender
-    u = @tie.sender_subject
+  def create_ability_accessed_by_receiver
+    u = @tie.receiver_subject
     @ability = Ability.new(u)
   end
 
@@ -96,7 +96,7 @@ describe Activity do
 
     describe "accessed by sender" do
       before do
-        create_ability_accessed_by_sender
+        create_ability_accessed_by_receiver
       end
 
       it_should_behave_like "Allows Creating"
@@ -147,7 +147,7 @@ describe Activity do
 
     describe "accessed by the sender" do
       before do
-        create_ability_accessed_by_sender
+        create_ability_accessed_by_receiver
       end
 
       it_should_behave_like "Allows Creating"
@@ -199,7 +199,7 @@ describe Activity do
 
     describe "accessed by the sender" do
       before do
-        create_ability_accessed_by_sender
+        create_ability_accessed_by_receiver
       end
 
       it_should_behave_like "Allows Creating"
@@ -246,7 +246,7 @@ describe Activity do
 
     before do
       create_activity_assigned_to(Factory(:public))
-      create_ability_accessed_by_sender
+      create_ability_accessed_by_receiver
     end
     
     it_should_behave_like "Denies Creating"
@@ -259,7 +259,7 @@ describe Activity do
 
     describe "accessed by same member" do
       before do
-        create_ability_accessed_by_sender
+        create_ability_accessed_by_receiver
       end
 
       it_should_behave_like "Allows Creating"
@@ -310,7 +310,7 @@ describe Activity do
 
     describe "accessed by sender" do
       before do
-        create_ability_accessed_by_sender
+        create_ability_accessed_by_receiver
       end
 
       it_should_behave_like "Allows Creating"

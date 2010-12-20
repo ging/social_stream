@@ -1,4 +1,4 @@
-<% if current_user.active_ties_to(receiver).any? %>
+<% if receiver.sent_ties_allowing(current_user, 'create', 'activity').any? %>
   <% content_for :javascript do %>
     $("#security").dropdownchecklist( { closeRadioOnClick: true } );
     $("#security_image").parent().width(28);
@@ -7,13 +7,13 @@
 
   <div id="activities_header" class="content_size">
     <%= form_for Post.new(:text => t('activity.input'),
-                          :_activity_tie_id => current_user.active_ties_to(receiver).first.id),
+                          :_activity_tie_id => receiver.sent_ties_allowing(current_user, 'create', 'activity').first.id),
                           :remote => true  do |f| %>
       <%= f.hidden_field :_activity_tie_id %>
       <%= f.text_field :text, :id => "input_activities", :size => 85 %>
       <div id="activities_share_btn">
         <div id="securities">
-          <%= f.select :_activity_tie_id, current_user.active_ties_to(receiver).map{ |t| [ t(t.relation_name, :count => :other), t.id ] }, {}, :id => 'security' %>
+          <%= f.select :_activity_tie_id, receiver.sent_ties_allowing(current_user, 'create', 'activity').map{ |t| [ t(t.relation_name, :count => :other), t.id ] }, {}, :id => 'security' %>
         </div>
         <%= image_submit_tag "btn/btn_share.png" %>
       </div>

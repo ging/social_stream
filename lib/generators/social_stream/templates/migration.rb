@@ -70,7 +70,7 @@ class CreateSocialStream < ActiveRecord::Migration
     create_table "permissions", :force => true do |t|
       t.string   "action"
       t.string   "object"
-      t.string   "parameter"
+      t.string   "function"
       t.datetime "created_at"
       t.datetime "updated_at"
     end

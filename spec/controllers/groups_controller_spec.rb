@@ -34,8 +34,9 @@ describe GroupsController do
       assert_response :success
     end
 
-    it "should render member group" do
-      @group = Factory(:member, :sender => @user.actor).receiver_subject
+    it "should render contact group" do
+      pending
+      @group = Factory(:follower, :receiver => @user.actor).sender_subject
       get :show, :id => @group.to_param
 
       assert_response :success

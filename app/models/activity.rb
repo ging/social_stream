@@ -17,12 +17,9 @@ class Activity < ActiveRecord::Base
 
   has_one :tie,
           :through => :tie_activities,
-          :conditions => { 'tie_activities.original' => true },
-          :include => [ :sender ]
+          :conditions => { 'tie_activities.original' => true }
 
-  delegate :sender, :receiver, :relation,
-           :sender_subject, :receiver_subject,
-           :to => :tie
+  delegate :relation, :to => :tie
 
   has_many :activity_object_activities,
            :dependent => :destroy
@@ -51,6 +48,34 @@ class Activity < ActiveRecord::Base
     self.activity_verb = ActivityVerb[name]
   end
 
+  # The author of the activity is the receiver of the tie
+  #
+  # This method provides the actor. Use sender_subject for the subject (user, group, etc..)
+  def sender
+    tie.receiver
+  end
+
+  # The author of the activity is the receiver of the tie
+  #
+  # This method provides the subject (user, group, etc...). Use sender for the actor.
+  def sender_subject
+    tie.receiver_subject
+  end
+
+  # The wall where the activity is shown belongs to the sender of the tie
+  #
+  # This method provides the actor. Use sender_subject for the subject (user, group, etc..)
+  def receiver
+    tie.sender
+  end
+
+  # The wall where the activity is shown belongs to the sender of the tie
+  #
+  # This method provides the subject (user, group, etc...). Use sender for the actor.
+  def receiver_subject
+    tie.sender_subject
+  end
+
   # The comments about this activity
   def comments
     children.includes(:activity_objects).where('activity_objects.object_type' => "Comment")
@@ -62,7 +87,7 @@ class Activity < ActiveRecord::Base
   end
 
   def liked_by(user) #:nodoc:
-    likes.joins(:ties).where('tie_activities.original' => true) & Tie.sent_by(user)
+    likes.joins(:ties).where('tie_activities.original' => true) & Tie.received_by(user)
   end
 
   # Does user like this activity?
@@ -77,6 +102,7 @@ class Activity < ActiveRecord::Base
 
   private
 
+  # Assign to ties of followers
   def assign_to_ties
     original = tie_activities.create!(:tie => _tie)
     _tie.activity_receivers.each do |t|

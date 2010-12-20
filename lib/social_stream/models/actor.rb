@@ -16,7 +16,7 @@ module SocialStream
                  :permalink,
                  :logo, :logo=,
                  :ties, :sent_ties, :received_ties,
-                 :active_ties_to,
+                 :sent_ties_allowing,
                  :pending_ties,
                  :sender_subjects, :receiver_subjects,
                  :suggestions, :suggestion,

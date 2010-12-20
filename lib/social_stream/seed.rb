@@ -32,7 +32,7 @@ module SocialStream
         if (ps = r['permissions']).present?
           ps.each do |p| 
             relations[name].permissions << 
-              Permission.find_or_create_by_action_and_object_and_parameter(*p)
+              Permission.find_or_create_by_action_and_object_and_function(*p)
           end 
         end
       end

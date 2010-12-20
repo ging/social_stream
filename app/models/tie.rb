@@ -4,13 +4,18 @@
 #
 # == Ties and Activities
 # Activities are attached to ties. 
-# * The sender actor is the author of the Activity. It is the user that uploads 
+# * The sender of the tie is the target of the Activity. The wall-profile of an actor is
+#   composed by the resources assigned to the ties in which the actor is the sender.
+# * The receiver actor of the tie is the author of the Activity. It is the user that uploads 
 #   a resource to the website or the social entity that originates the activity.
-# * The receiver is the target of the Activity. The wall-profile of an actor is
-#   composed by the resources assigned to the ties in which the actor is the receiver.
 # * The Relation sets up the mode in which the Activity is shared. It sets the rules,
 #    or permissions, by which actors have access to the Activity.
-# 
+#
+# == Authorization
+# When an actor establishes a tie with other, she is granting a set of permissions to them
+# (posting to her wall, reading her posts, etc..) The set of permissions granted are
+# associated with the relation of the tie.
+#
 # == Inverse ties
 # Relations can have its inverse. When a tie is establised, an inverse tie is establised
 # as well.
@@ -151,7 +156,7 @@ class Tie < ActiveRecord::Base
   # ------------------        ------------------
   #
   # Because we want to find ties, an additional join table (ties_as) is needed for applying access set conditions
-  # We get the set of ties that are allowed to certain condition
+  # We get the set of ties that are allowing certain permission
   #
 
   scope :with_permissions, lambda { |action, object|
@@ -166,10 +171,10 @@ class Tie < ActiveRecord::Base
       where(Permission.parameter_conditions(tie))
   }
 
-  scope :allowed_set, lambda { |action, object|
+  scope :allowing_set, lambda { |action, object|
     query = 
       select("DISTINCT ties.*").
-        from("ties INNER JOIN relations ON relations.id = ties.relation_id, ties as ties_as INNER JOIN relations AS relations_as ON relations_as.id = ties_as.relation_id INNER JOIN relation_permissions ON relations_as.id = relation_permissions.relation_id INNER JOIN permissions ON permissions.id = relation_permissions.permission_id, relations as relations_inverse").
+        from("ties INNER JOIN relations ON relations.id = ties.relation_id, ties as ties_as INNER JOIN relations AS relations_as ON relations_as.id = ties_as.relation_id INNER JOIN relation_permissions ON relations_as.id = relation_permissions.relation_id INNER JOIN permissions ON permissions.id = relation_permissions.permission_id").
         where("permissions.action = ?", action).
         where("permissions.object = ?", object)
 
@@ -182,8 +187,8 @@ class Tie < ActiveRecord::Base
     query.where(conds)
   }
 
-  scope :allowed, lambda { |actor, action, object|
-    allowed_set(action, object).
+  scope :allowing, lambda { |actor, action, object|
+    allowing_set(action, object).
       where("ties_as.receiver_id" => Actor_id(actor))
   }
 
@@ -191,12 +196,12 @@ class Tie < ActiveRecord::Base
     self.class.access_set(self, action, object)
   end
 
-  def permissions(user, action, object)
+  def allowing(user, action, object)
     access_set(action, object).received_by(user)
   end
 
-  def permission?(user, action, object)
-    permissions(user, action, object).any?
+  def allow?(user, action, object)
+    allowing(user, action, object).any?
   end
 
   private
