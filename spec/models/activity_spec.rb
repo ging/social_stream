@@ -116,10 +116,11 @@ describe Activity do
       it_should_behave_like "Denies Destroying"
     end
 
-    describe "accessed by friend request" do
+    describe "accessed by acquaintance" do
       before do
-        create_ability_accessed_by :friend_request
+        create_ability_accessed_by :acquaintance
       end
+
 
       it_should_behave_like "Denies Creating"
       it_should_behave_like "Denies Reading"
@@ -139,9 +140,10 @@ describe Activity do
     end
   end
   
-  describe "belonging to friend reflexive tie" do
+  describe "belonging to friend self tie" do
     before do
-      tie = Factory(:user).ties.where(:relation_id => Relation.mode('User', 'User').find_by_name('friend')).first
+      user = Factory(:user)
+      tie = user.ties.where(:relation_id => user.relation('friend')).first
       create_activity_assigned_to(tie)
     end
 
@@ -167,9 +169,9 @@ describe Activity do
       it_should_behave_like "Denies Destroying"
     end
 
-    describe "accessed by friend request" do
+    describe "accessed by acquaintance" do
       before do
-        create_ability_accessed_by :friend_request
+        create_ability_accessed_by :acquaintance
       end
 
       it_should_behave_like "Denies Creating"
@@ -193,7 +195,8 @@ describe Activity do
   describe "belonging to public tie" do
 
     before do
-      tie = Factory(:user).ties.where(:relation_id => Relation.mode('User', 'User').find_by_name('public')).first
+      user = Factory(:user)
+      tie = user.ties.where(:relation_id => user.relation('public')).first
       create_activity_assigned_to(tie)
     end
 
@@ -219,9 +222,9 @@ describe Activity do
       it_should_behave_like "Denies Destroying"
     end
 
-    describe "accessed by friend request" do
+    describe "accessed by acquaintance" do
       before do
-        create_ability_accessed_by :friend_request
+        create_ability_accessed_by :acquaintance
       end
 
       it_should_behave_like "Denies Creating"
@@ -279,9 +282,9 @@ describe Activity do
       it_should_behave_like "Allows Destroying"
     end
 
-    describe "accessed by follower" do
+    describe "accessed by partner" do
       before do
-        create_ability_accessed_by :follower
+        create_ability_accessed_by :partner
       end
 
       it_should_behave_like "Denies Creating"
@@ -302,7 +305,7 @@ describe Activity do
     end
   end
   
-  describe "belonging to public tie from an admin" do
+  describe "belonging to public tie from a member" do
 
     before do
       create_activity_assigned_to(Factory(:member).related('public'))
@@ -331,9 +334,9 @@ describe Activity do
     end
 
    
-    describe "accessed by follower" do
+    describe "accessed by partner" do
       before do
-        create_ability_accessed_by :follower
+        create_ability_accessed_by :partner
       end
 
       it_should_behave_like "Denies Creating"

@@ -1,7 +1,10 @@
 <div class="space_center">
 </div>
-<%= render :partial => "ties/suggestions" %>
-<div class="space_center">
-</div>
-<%= render :partial => 'ties/pendings' %>
+
+<% if user_signed_in? %>
+  <%= render :partial => "ties/suggestions" %>
+  <div class="space_center">
+  </div>
+  <%= render :partial => 'ties/pendings' %>
+<% end %>
 

@@ -16,26 +16,19 @@
 # (posting to her wall, reading her posts, etc..) The set of permissions granted are
 # associated with the relation of the tie.
 #
-# == Inverse ties
-# Relations can have its inverse. When a tie is establised, an inverse tie is establised
-# as well.
-#
 # == Scopes
 # There are several scopes defined:
 # * sent_by(actor), ties whose sender is actor
 # * received_by(actor), ties whose receiver is actor
 # * sent_or_received_by(actor), the union of the former
 # * related_by(relation), ties with this relation. Accepts relation, relation_name, integer, array
-# * pending, ties whose relation grant other relations, like friendship requests.
-# * inverse(tie), the inverse of tie
+# * replied, ties having at least another tie in the other way, a tie from a to b is replied if there is a tie from b to a
 #
 class Tie < ActiveRecord::Base
+  attr_accessor :message
+
   # Facilitates relation assigment along with find_relation callback
   attr_writer :relation_name
-
-  # Avoids loops at create_inverse after save callback
-  attr_accessor :_without_inverse
-  attr_protected :_without_inverse
 
   belongs_to :sender,
              :class_name => "Actor",
@@ -52,36 +45,34 @@ class Tie < ActiveRecord::Base
   scope :recent, order("#{ quoted_table_name }.created_at DESC")
 
   scope :sent_by, lambda { |a|
-    where(:sender_id => Actor_id(a))
+    where(:sender_id => Actor.normalize_id(a))
   }
 
   scope :received_by, lambda { |a|
-    where(:receiver_id => Actor_id(a))
+    where(:receiver_id => Actor.normalize_id(a))
   }
 
   scope :sent_or_received_by, lambda { |a|
-    where(arel_table[:sender_id].eq(Actor_id(a)).
-          or(arel_table[:receiver_id].eq(Actor_id(a))))
+    where(arel_table[:sender_id].eq(Actor.normalize_id(a)).
+          or(arel_table[:receiver_id].eq(Actor.normalize_id(a))))
 
   }
 
   scope :related_by, lambda { |r|
-    where(:relation_id => Relation(r))
+    where(:relation_id => Relation.normalize_id(r))
   }
 
-  scope :pending, includes(:relation) & Relation.request
-
-  scope :inverse, lambda { |t|
-    sent_by(t.receiver).
-      received_by(t.sender).
-      where(:relation_id => t.relation.inverse.try(:id))
+  scope :replied, lambda {
+    select("DISTINCT ties.*").
+      from("ties, ties as ties_2").
+      where("ties.sender_id = ties_2.receiver_id AND ties.receiver_id = ties_2.sender_id")
   }
 
   validates_presence_of :sender_id, :receiver_id, :relation_id
 
   before_validation :find_relation
 
-  after_create :complete_weak_set, :create_inverse
+  after_create :complete_weak_set
 
   def relation_name
     @relation_name || relation.try(:name)
@@ -100,6 +91,11 @@ class Tie < ActiveRecord::Base
     receiver.try(:subject)
   end
 
+  # Does this tie have the same sender and receiver?
+  def reflexive?
+    sender_id == receiver_id
+  end
+
   # The set of ties between sender and receiver
   #
   # Options::
@@ -110,8 +106,8 @@ class Tie < ActiveRecord::Base
 
     if options.key?(:relations)
       set = 
-        set.related_by self.class.Relation(options[:relations],
-                                           :mode => relation.mode)
+        set.related_by Relation.normalize_id(options[:relations],
+                                             :sender => sender)
     end
 
     set
@@ -122,13 +118,9 @@ class Tie < ActiveRecord::Base
     relation_set(:relations => r).first
   end
 
-  # The inverse tie
-  def inverse
-    Tie.inverse(self).first
-  end
-
   def activity_receivers
-    Array(inverse)
+    # TODO
+    Array.new
   end
 
   # = Access Control
@@ -189,7 +181,7 @@ class Tie < ActiveRecord::Base
 
   scope :allowing, lambda { |actor, action, object|
     allowing_set(action, object).
-      where("ties_as.receiver_id" => Actor_id(actor))
+      where("ties_as.receiver_id" => Actor.normalize_id(actor))
   }
 
   def access_set(action, object)
@@ -200,7 +192,7 @@ class Tie < ActiveRecord::Base
     access_set(action, object).received_by(user)
   end
 
-  def allow?(user, action, object)
+  def allows?(user, action, object)
     allowing(user, action, object).any?
   end
 
@@ -209,72 +201,22 @@ class Tie < ActiveRecord::Base
   # Before validation callback
   # Infers relation from its name and the type of the actors
   def find_relation
-    if relation_name.present? && relation_name != relation.try(:name)
-      self.relation = Relation.mode(sender_subject.class.to_s,
-                                    receiver_subject.class.to_s).
-                                    find_by_name(relation_name)
+    if relation_name.present? &&
+      relation_name != relation.try(:name) &&
+      sender.present?
+      self.relation = sender.relation(relation_name)
     end
   end
 
   # After create callback
   # Creates ties with a weaker relations in the strength hierarchy of this tie
   def complete_weak_set
+    return if reflexive?
+
     relation.weaker.each do |r|
       if relation_set(:relations => r).blank?
         t = relation_set.build :relation => r
-        t._without_inverse = true
         t.save!
-      end
-    end
-  end
-
-  # After create callback
-  # Creates a the inverse of this tie
-  def create_inverse
-    if !_without_inverse &&
-       relation.inverse.present? &&
-       Tie.inverse(self).blank?
-      t = Tie.inverse(self).build
-      t._without_inverse = true
-      t.save!
-    end
-  end
-
-  class << self
-    def Actor_id(a)
-      case a
-      when Integer
-        a
-      when Actor
-        a.id
-      else
-        a.actor.id
-      end
-    end
-
-    # Normalize a relation for ActiveRecord query from relation_name, id or Array
-    #
-    # Options::
-    # mode:: Relation mode
-    def Relation(r, options = {})
-      case r
-      when Relation
-        r
-      when String
-        case options[:mode]
-        when Array
-          Relation.mode(*options[:mode]).find_by_name(r)
-        when ActiveRecord::Relation
-          options[:mode].find_by_name(r)
-        else
-          raise "Must provide a mode when looking up relations from name: #{ options[:mode] }"
-        end
-      when Integer
-        r
-      when Array
-        r.map{ |e| Relation(e, options) }
-      else
-        raise "Unable to normalize relation #{ r.inspect }"
       end
     end
   end

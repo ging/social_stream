@@ -1,10 +1,15 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Tie do
-  it "should find the relation by its name" do
+  it "should create from relation name" do
     relation = Relation.first
     sender = Factory(relation.sender_type.underscore)
-    receiver = Factory(relation.receiver_type.underscore)
+
+    receiver_type = relation.receiver_type.present? ?
+                      relation.receiver_type :
+                      relation.sender_type
+                   
+    receiver = Factory(receiver_type.underscore)
 
     tie = Factory(:tie, :sender_id => sender.actor.id,
                         :receiver_id => receiver.actor.id,
@@ -12,18 +17,11 @@ describe Tie do
     tie.should be_valid
   end
 
-  describe "with a relation with inverse" do
-    before do
-      @relation = Relation.where("inverse_id IS NOT NULL").first
-    end
+  it "should create pending" do
+    tie = Factory(:friend)
 
-    it "should have its inverse tie" do
-      @tie = Factory(:tie, :relation => @relation)
-
-      assert Tie.find_by_sender_id_and_receiver_id_and_relation_id(@tie.receiver_id,
-                                                                   @tie.sender_id,
-                                                                   @relation.inverse).present?
-    end
+    assert tie.receiver.pending_ties.present?
+    assert tie.receiver.pending_ties.first.relation_set.blank?
   end
 
   describe "friend" do
@@ -63,9 +61,9 @@ describe Tie do
       end
     end
 
-    describe ", friend request" do
+    describe ", acquaintance" do
       before do
-        @s = Factory(:friend_request, :receiver => @tie.receiver).sender
+        @s = Factory(:acquaintance, :receiver => @tie.receiver).sender
       end
 
       it "creates activity" do
@@ -91,7 +89,7 @@ describe Tie do
       
       it "reads activity" do
         Tie.allowing(@s, 'read', 'activity').should_not include(@tie)
-        Tie.allowing(@s, 'read', 'activity').should_not include(@tie.inverse)
+        Tie.allowing(@s, 'read', 'activity').should     include(@tie.related('public'))
       end
     end
   end

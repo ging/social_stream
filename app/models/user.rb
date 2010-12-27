@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   end
   
   def recent_groups
-    receiver_subjects(:group, :relations => 'follower') & Tie.recent
+    receiver_subjects(:subject_type => :group) & Tie.recent
   end
 
   
@@ -34,11 +34,6 @@ class User < ActiveRecord::Base
   
   after_create :create_profile
   
-
-  def friends
-    receiver_subjects(:user, :relations => 'friend')
-  end
-
   protected
   
   # From devise

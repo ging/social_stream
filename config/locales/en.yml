@@ -19,9 +19,9 @@ en:
     one: "Contact"
     other: "Contacts"
     new:
-      link: "+ Contact"
+      link: "+ Add contact"
       title: "Add %{name} as contact"
-      submit: "+ Contact"
+      submit: "+ Add contact"
   copyright: "2010 Copyright - All rights reserved"
   days: Days
   delete:
@@ -38,7 +38,7 @@ en:
       participants: "Participants"
       groups: "Groups"
       tags: "Tags"
-    main_title: "SocialStream a core for building social network applications."
+    main_title: "SocialStream is a core for building social network websites."
     meet:
       sentence1: "Meet interesting people and groups"
     share:
@@ -62,7 +62,8 @@ en:
     one: "Inbox"
   location:
     message: "You are here > %{location}"
-  message: "Message"
+  message:
+    one: "Message"
   menu:
     options: "Menu Options"
   post:

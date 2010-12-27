@@ -12,7 +12,9 @@
 <div class="space_center">
 </div>
 
-<%= render :partial => "users/groups" %>
+<%= render :partial => "users/groups",
+           :locals  => { :user => @user } %>
+
 <%= render :partial => "activities/activities",
-           :locals => { :activities => @user.wall_profile(current_user).paginate,
-                        :owner => @user } %>
+           :locals  => { :activities => @user.profile_wall(current_user).paginate,
+                         :owner => @user } %>

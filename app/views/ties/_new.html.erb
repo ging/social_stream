@@ -7,17 +7,16 @@
                      @tie.receiver_subject %>
       </div>
       <div class="activity_add_ties">
-        <div><%= t('message')+":" %><br />
+        <div><%= t('message.one')+":" %><br />
          <%= form_for @tie,
                       :remote => true do |f| %>
            <%= f.hidden_field :receiver_id %>
            <%= f.hidden_field :sender_id %>
            <%= f.hidden_field :relation_name %>
-           <% if @tie.relation!.granted %>
-             <%= f.text_area :message,   :class =>"input_new_tie" %>
-           <% end %>
+           <%= f.text_area :message,   :class =>"input_new_tie" %>
+
            <div class="ties_btn">
-             <%= submit_tag t('send', :scope => @tie.relation_name), :class => "tie_btn" %>
+             <%= submit_tag t('contact.new.submit'), :class => "tie_btn" %>
            </div>
          <% end %>
         </div>

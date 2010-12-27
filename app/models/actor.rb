@@ -17,18 +17,34 @@ class Actor < ActiveRecord::Base
            :foreign_key => 'sender_id',
            :dependent => :destroy
 
-  has_many :senders,
-           :through => :received_ties,
-           :uniq => true
-
   has_many :received_ties,
            :class_name => "Tie",
            :foreign_key => 'receiver_id',
            :dependent => :destroy
 
+  has_many :senders,
+           :through => :received_ties,
+           :uniq => true
+
   has_many :receivers,
            :through => :sent_ties,
            :uniq => true
+
+  after_create :initialize_ties
+
+  class << self
+    # Get actor's id from an object, if possible
+    def normalize_id(a)
+      case a
+      when Integer
+        a
+      when Actor
+        a.id
+      else
+        a.actor.id
+      end
+    end
+  end
 
   # The subject instance for this actor
   def subject
@@ -41,16 +57,28 @@ class Actor < ActiveRecord::Base
     Tie.sent_or_received_by(self)
   end
 
-  # All the subject actors of class subject_type that send at least one tie
-  # to this actor
+  # Relations defined and managed by this actor
+  def relations
+    Relation.includes(:ties) & Tie.sent_by(self)
+  end
+
+  # A given relation defined and managed by this actor
+  def relation(name)
+    relations.find_by_name(name)
+  end
+
+  # All the subject actors that send at least one tie to this actor
   #
   # Options::
+  # * subject_type: The class of the subjects. Defaults to actor's own subject type
   # * relations: Restrict the relations of considered ties
   # * include_self: False by default, don't include this actor as subject even they
   # have ties with themselves.
-  def sender_subjects(subject_type, options = {})
+  def sender_subjects(options = {})
     # FIXME: DRY!
-    subject_class = subject_type.to_s.classify.constantize
+    options[:subject_type] ||= subject_type
+
+    subject_class = options[:subject_type].to_s.classify.constantize
 
     cs = subject_class.
            select("DISTINCT #{ subject_class.quoted_table_name }.*").
@@ -63,22 +91,24 @@ class Actor < ActiveRecord::Base
 
     if options[:relations].present?
       cs &=
-        Tie.related_by(Tie.Relation(options[:relations], :mode => [ subject_class, self.subject.class ]))
+        Tie.related_by(Tie.Relation(options[:relations]))
     end
 
     cs
   end
 
-  # All the subject actors of class subject_type that receive at least one tie
-  # from this actor
+  # All the subject actors that receive at least one tie from this actor
   #
   # Options::
+  # * subject_type: The class of the subjects. Defaults to actor's own subject type
   # * relations: Restrict the relations of considered ties
   # * include_self: False by default, don't include this actor as subject even they
   # have ties with themselves.
-  def receiver_subjects(subject_type, options = {})
+  def receiver_subjects(options = {})
     # FIXME: DRY!
-    subject_class = subject_type.to_s.classify.constantize
+    options[:subject_type] ||= subject_type
+
+    subject_class = options[:subject_type].to_s.classify.constantize
 
     cs = subject_class.
            select("DISTINCT #{ subject_class.quoted_table_name }.*").
@@ -91,18 +121,16 @@ class Actor < ActiveRecord::Base
 
     if options[:relations].present?
       cs &=
-        Tie.related_by(Tie.Relation(options[:relations], :mode => [ subject.class, subject_class ]))
+        Tie.related_by(Tie.Relation(options[:relations], :sender => sender))
     end
 
     cs
   end
 
+  alias :contacts :receiver_subjects
+
   # This is an scaffold for a recomendations engine
   #
-  SuggestedRelations = {
-    'User'  => 'friend_request',
-    'Group' => 'follower'
-  }
 
   # Make n suggestions
   # TODO: make more
@@ -118,16 +146,17 @@ class Actor < ActiveRecord::Base
   #
   # @return [Tie]
   def suggestion(options = {})
-    candidates_types = options[:type].present? ?
-      Array(options[:type].to_s.classify) :
-      SuggestedRelations.keys
+    candidates_types =
+      options[:type].present? ?
+        Array(options[:type]) :
+        SocialStream.actors
 
-    candidates_classes = candidates_types.map(&:constantize)
+    candidates_classes = candidates_types.map{ |t| t.to_s.classify.constantize }
     
     # Candidates are all the instance of "type" minus all the subjects
     # that are receiving any tie from this actor
     candidates = candidates_classes.inject([]) do |cs, klass|
-      cs += klass.all - receiver_subjects(klass)
+      cs += klass.all - receiver_subjects(:subject_type => klass)
       cs -= Array(subject) if subject.is_a?(klass)
       cs
     end
@@ -136,38 +165,56 @@ class Actor < ActiveRecord::Base
 
     return nil unless candidate.present?
 
-    sent_ties.build :receiver_id => candidate.actor.id,
-                    :relation => Relation.mode(subject_type, candidate.class).find_by_name(SuggestedRelations[candidate.class.to_s])
+    # Building ties with sent_ties catches them and excludes them from pending ties.
+    # An useful side effect for excluding this ones from pending, but can be weird!
+    # Maybe we must use:
+    # Tie.sent_by(self).build :receiver_id => candidate.actor.id
+    sent_ties.build :receiver_id => candidate.actor.id
+  end
+
+  # Set of ties sent by this actor received by a
+  def ties_to(a)
+    sent_ties.received_by(a)
   end
 
   # All the ties this actor has with subject that support permission
   def sent_ties_allowing(subject, action, objective)
+    return [] if subject.blank?
+
     sent_ties.allowing(subject, action, objective)
   end
 
   def pending_ties
-    #TODO: optimize by SQL
     @pending_ties ||=
-      received_ties.pending.
-        select{ |t| ! receivers.include?(t.sender) }.
-        map{ |u| Tie.new :sender_id => u.receiver_id,
-                         :receiver_id => u.sender_id,
-                         :relation_id => u.relation.granted_id
-        }
+      received_ties.where('ties.sender_id NOT IN (?)', sent_ties.map(&:receiver_id).uniq).map(&:sender_id).uniq.
+        map{ |i| Tie.new :sender => self,
+                         :receiver_id => i }
   end
 
   # The set of activities in the wall of this actor, includes all the activities
   # from the ties the actor has access to
   #
-  def wall
-    Activity.wall Tie.allowing(self, 'read', 'activity')
+  def home_wall
+    Activity.home_wall ties
   end
 
   # The set of activities in the wall profile of this actor, includes the activities
   # from the ties of this actor that can be read by user
   #
-  def wall_profile(user)
-    Activity.wall ties.allowing(user, 'read', 'activity')
+  def profile_wall(user)
+    # FIXME: show public activities
+    return [] if user.blank?
+
+    Activity.profile_wall ties.allowing(user, 'read', 'activity')
+  end
+
+  private
+
+  def initialize_ties
+    ::SocialStream::Relations.create(subject_type).each do |r|
+      sent_ties.create! :receiver => self,
+                        :relation => r
+    end
   end
 end
 

@@ -139,8 +139,6 @@ class CreateSocialStream < ActiveRecord::Migration
       t.integer  "parent_id"
       t.integer  "lft"
       t.integer  "rgt"
-      t.integer  "inverse_id"
-      t.boolean  "reflexive", :default => false
     end
 
     add_index "relations", "parent_id"
@@ -163,7 +161,6 @@ class CreateSocialStream < ActiveRecord::Migration
       t.integer "tie_id"
       t.integer "activity_id"
       t.boolean "read"
-      t.boolean "deleted"
       t.boolean "original", :default => true
     end
 
@@ -176,7 +173,6 @@ class CreateSocialStream < ActiveRecord::Migration
       t.integer  "relation_id"
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.text     "message"
     end
 
     add_index "ties", "receiver_id"
@@ -197,8 +193,6 @@ class CreateSocialStream < ActiveRecord::Migration
 
       t.timestamps
       t.integer  "actor_id"
-      # FIXME: move to profile
-      t.date "birthday"
     end
 
     add_index "users", "actor_id"

@@ -1,0 +1,20 @@
+<% if actor.contacts.present? %>
+
+  <div class="contacts_header">
+      <%=image_tag("btn/btn_friend.png", :class => "contacts_icon")%>
+      <div class="contacts_text_header">
+        <%= actor.contacts.count %> <%= t('contact', :count => actor.contacts.count) %>
+      </div>
+  </div>
+  <div class ="contacts">
+      <div class="contact">
+        <% actor.contacts.all.each do |contact| %>
+            <%= link_to(image_tag(contact.logo.url, :alt => contact.name , :size => "40x40"), contact) %>
+        <% end %>
+      </div>
+  </div>
+  <div class="contacts_footer">
+    <%=link_to(image_tag("btn/btn_next.png", :alt => "next"), '#') %>
+  </div>
+
+<% end %>

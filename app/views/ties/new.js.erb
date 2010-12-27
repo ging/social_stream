@@ -1,2 +1,2 @@
 new Boxy("<%= escape_javascript(render(:partial => "ties/new")) %>",
-         { title: "<%= escape_javascript(t('confirm_new', :name => @tie.receiver_subject.name , :scope => @tie.relation_name)) %>" });
+         { title: "<%= escape_javascript(t('contact.new.title', :name => @tie.receiver_subject.name )) %>" });

@@ -12,7 +12,11 @@ class ActivityVerb < ActiveRecord::Base
 
   class << self
     def [] name
-      verb_name(name).first
+      if Available.include?(name)
+        find_or_create_by_name name
+      else
+        raise "ActivityVerb not available: #{ name }"
+      end
     end
   end
 end

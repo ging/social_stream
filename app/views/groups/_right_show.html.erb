@@ -1,6 +1,8 @@
-<%= render :partial => 'follow' %>
+<%= ties_to(@group) %>
+
 <%= render :partial => 'logo' %>
 <%= render :partial => 'tabs' %>
 <div class="space_center"> 
 </div> 
-<%= render :partial => 'followers' %>
+
+<%= render :partial => 'actors/contacts', :locals => { :actor => @group } %>

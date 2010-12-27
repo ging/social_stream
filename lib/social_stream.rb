@@ -1,8 +1,8 @@
 # Provides your Rails application with social network and activity stream support
 module SocialStream
-  autoload :Ability,  'social_stream/ability'
-  autoload :Populate, 'social_stream/populate'
-  autoload :Seed,     'social_stream/seed'
+  autoload :Ability,   'social_stream/ability'
+  autoload :Populate,  'social_stream/populate'
+  autoload :Relations, 'social_stream/relations'
 
   module Models
     autoload :Supertype, 'social_stream/models/supertype'
@@ -23,10 +23,6 @@ module SocialStream
   class << self
     def setup
       yield self
-    end
-
-    def seed!
-      Seed.new(File.join(::Rails.root, 'db', 'seeds', 'social_stream.yml'))
     end
 
     # Load models for rewrite in application

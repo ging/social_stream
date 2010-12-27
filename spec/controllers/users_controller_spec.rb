@@ -11,8 +11,6 @@ describe UsersController do
     end
 
     it "should render show" do
-      pending
-
       get :show, :id => Factory(:user).to_param
 
       assert_response :success

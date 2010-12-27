@@ -10,8 +10,8 @@ class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
     copy_file 'initializer.rb', 'config/initializers/social_stream.rb'
   end
 
-  def create_config_file
-    copy_file 'seeds.yml', 'db/seeds/social_stream.yml'
+  def create_config_relations_file
+    copy_file 'relations.yml', 'config/relations.yml'
   end
 
   def copy_public
@@ -26,14 +26,6 @@ class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
     copy_file File.join(File.dirname(__FILE__), '../../../',
                         'app/views/layouts/application.html.erb'),
               'app/views/layouts/application.html.erb'
-  end
-
-  def create_seed_code
-    seed_code = "\nSocialStream.seed!"
-
-    in_root do
-      append_file 'db/seeds.rb', seed_code
-    end
   end
 
   # TODO: hook_for :orm

@@ -13,4 +13,7 @@ describe Actor do
     a.permalink.should_not == b.permalink
   end
 
+  it "should generate relations" do
+    assert Factory(:actor).relations.present?
+  end
 end

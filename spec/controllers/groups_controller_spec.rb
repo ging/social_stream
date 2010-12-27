@@ -5,16 +5,12 @@ describe GroupsController do
 
   describe "when Anonymous" do
     it "should render index" do
-      pending
-
       get :index
 
       assert_response :success
     end
 
     it "should render show" do
-      pending
-
       get :show, :id => Factory(:group).to_param
 
       assert_response :success
@@ -35,8 +31,7 @@ describe GroupsController do
     end
 
     it "should render contact group" do
-      pending
-      @group = Factory(:follower, :receiver => @user.actor).sender_subject
+      @group = Factory(:member, :receiver => @user.actor).sender_subject
       get :show, :id => @group.to_param
 
       assert_response :success

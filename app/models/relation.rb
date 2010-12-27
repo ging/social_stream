@@ -8,18 +8,6 @@
 # two actors are stronger than others.
 # When a strong tie is established, ties with weaker relations are establised as well
 #
-# == Reflexive relations
-# Some relations are set by default for actors with theirselves. This sets some ties
-# for posting in self wall at several visibility levels: only for friends, public and
-# so on
-#
-# == Inverse relations
-# A Relation can have its inverse. When a tie is established, an inverse tie will be
-# established if an inverse relation exists. An example is a relation of friendship,
-# whose inverse relation is itself. When A is friend of B, the inverse tie B is friend of A
-# is establised as well.
-#
-
 class Relation < ActiveRecord::Base
   acts_as_nested_set
 
@@ -27,17 +15,46 @@ class Relation < ActiveRecord::Base
     where(:sender_type => st, :receiver_type => rt)
   }
 
-  belongs_to :inverse,
-             :class_name => "Relation"
-
-  scope :reflexive, where(:reflexive => true)
-
   has_many :relation_permissions, :dependent => :destroy
   has_many :permissions, :through => :relation_permissions
 
   has_many :ties, :dependent => :destroy
 
   class << self
+    # Get relation from object, if possible
+    #
+    # Options::
+    # sender:: The sender of the tie
+    def normalize(r, options = {})
+      case r
+      when Relation
+        r
+      when String
+        if options[:sender]
+          options[:sender].relation(r)
+        else
+          raise "Must provide a sender when looking up relations from name: #{ options[:sender] }"
+        end
+      when Integer
+        Relation.find r
+      when Array
+        r.map{ |e| Relation.normalize(e, options) }
+      else
+        raise "Unable to normalize relation #{ r.inspect }"
+      end
+    end
+
+    def normalize_id(r, options = {})
+      case r
+      when Integer
+        r
+      when Array
+        r.map{ |e| Relation.normalize_id(e, options) }
+      else
+        normalize(r, options).id
+      end
+    end
+
     # A relation in the top of a strength hierarchy
     def strongest
       root

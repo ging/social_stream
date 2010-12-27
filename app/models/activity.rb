@@ -26,11 +26,20 @@ class Activity < ActiveRecord::Base
   has_many :activity_objects,
            :through => :activity_object_activities
 
-  scope :wall, lambda { |ties|
+  scope :home_wall, lambda { |ties|
     select("DISTINCT activities.*").
       roots.
       joins(:tie_activities).
       where('tie_activities.tie_id' => ties).
+      order("created_at desc")
+  }
+
+  scope :profile_wall, lambda { |ties|
+    select("DISTINCT activities.*").
+      roots.
+      joins(:tie_activities).
+      where('tie_activities.tie_id' => ties).
+      where('tie_activities.original' => true).
       order("created_at desc")
   }
 
