@@ -1,10 +1,10 @@
-<%= form_for(@private_message) do |f| %>
-  <% if @private_message.errors.any? %>
+<%= form_for(@message) do |f| %>
+  <% if @message.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@private_message.errors.count, "error") %> prohibited this private_message from being saved:</h2>
+      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
 
       <ul>
-      <% @private_message.errors.full_messages.each do |msg| %>
+      <% @message.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>

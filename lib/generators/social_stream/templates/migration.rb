@@ -67,6 +67,15 @@ class CreateSocialStream < ActiveRecord::Migration
 
     add_index "groups", "actor_id"
 
+    create_table "messages", :force => true do |t|
+      t.integer  "activity_object_id"
+      t.datetime "created_at"
+      t.datetime "updated_at"
+      t.text     "text"
+    end
+
+    add_index "messages", "activity_object_id"
+
     create_table "permissions", :force => true do |t|
       t.string   "action"
       t.string   "object"
@@ -83,17 +92,6 @@ class CreateSocialStream < ActiveRecord::Migration
     end
 
     add_index "posts", "activity_object_id"
-
-    create_table "private_messages", :force => true do |t|
-      t.integer  "sender_id"
-      t.integer  "receiver_id"
-      t.datetime "created_at"
-      t.datetime "updated_at"
-      t.text     "text"
-    end
-
-    add_index "private_messages", "sender_id"
-    add_index "private_messages", "receiver_id"
 
     create_table "profiles", :force => true do |t|
       t.integer  "user_id"
@@ -211,6 +209,8 @@ class CreateSocialStream < ActiveRecord::Migration
 
     add_foreign_key "groups", "actors", :name => "groups_on_actor_id"
 
+    add_foreign_key "messages", "activity_objects", :name => "messages_on_activity_object_id"
+
     add_foreign_key "posts", "activity_objects", :name => "posts_on_activity_object_id"
 
     add_foreign_key "profiles", "users", :name => "profiles_on_user_id"
@@ -243,6 +243,8 @@ class CreateSocialStream < ActiveRecord::Migration
 
     remove_foreign_key "groups", :name => "groups_on_actor_id"
 
+    remove_foreign_key "messages", :name => "messages_on_activity_object_id"
+
     remove_foreign_key "posts", :name => "posts_on_activity_object_id"
 
     remove_foreign_key "profiles", :name => "profiles_on_user_id"
@@ -269,9 +271,9 @@ class CreateSocialStream < ActiveRecord::Migration
     drop_table :actors
     drop_table :comments
     drop_table :groups
+    drop_table :messages
     drop_table :permissions
     drop_table :posts
-    drop_table :private_messages
     drop_table :profiles
     drop_table :relation_permissions
     drop_table :relations

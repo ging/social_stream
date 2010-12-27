@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   end
   resources :posts
   resources :comments
-  resources :private_messages
+  resources :messages
 
   root :to => "frontpage#index"
 end
