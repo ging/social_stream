@@ -38,6 +38,8 @@ class Actor < ActiveRecord::Base
       case a
       when Integer
         a
+      when Array
+        a.map{ |e| normalize_id(e) }
       when Actor
         a.id
       else
