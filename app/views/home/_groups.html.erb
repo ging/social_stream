@@ -1,9 +1,10 @@
-<% if current_user.recent_groups.any? %>
+<% if (groups = current_user.recent_groups.all).any? %>
   <div id="groups_title" class="content_size">
-      <%=t('group.last') %> (<span id="group_count"><%=current_user.recent_groups.count%></span>)
+      <%=t('group.last') %> (<span id="group_count"><%= groups.count %></span>)
   </div>
+
   <div id="groups_list" class="content_size">
-  <% if (current_user.recent_groups.count) > 10 %>
+  <% if (groups.count) > 10 %>
     <div id='carousel_container'>
       <div id='left_scroll'><%=image_tag("btn/group_left.png")%></div>
       <div id='carousel_inner'>
@@ -12,8 +13,9 @@
      <div class="space_center"></div>
     <%end%>
 
-          <%= render current_user.recent_groups %>
-    <% if (current_user.recent_groups.count) > 10 %>
+    <%= render groups %>
+
+    <% if (groups.count) > 10 %>
         </ul>
      </div>
      <div id='right_scroll'><%=image_tag("btn/group_right.png")%></div>
