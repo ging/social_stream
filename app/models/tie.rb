@@ -32,10 +32,10 @@ class Tie < ActiveRecord::Base
 
   belongs_to :sender,
              :class_name => "Actor",
-             :include => SocialStream.actors
+             :include => SocialStream.subjects
   belongs_to :receiver,
              :class_name => "Actor",
-             :include => SocialStream.actors
+             :include => SocialStream.subjects
 
   belongs_to :relation
 

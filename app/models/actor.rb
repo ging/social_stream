@@ -1,5 +1,6 @@
 # An actor is a social entity. This includes individuals, but also groups, departments, organizations even nations or states. Actors are linked by ties.
 class Actor < ActiveRecord::Base
+  @subtypes_name = :subject
   include SocialStream::Models::Supertype
 
   validates_presence_of :name, :subject_type
@@ -151,7 +152,7 @@ class Actor < ActiveRecord::Base
     candidates_types =
       options[:type].present? ?
         Array(options[:type]) :
-        SocialStream.actors
+        self.class.subtypes
 
     candidates_classes = candidates_types.map{ |t| t.to_s.classify.constantize }
     

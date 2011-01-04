@@ -3,7 +3,7 @@ require 'active_support/concern'
 module SocialStream
   module Models
     # Additional features for models that are Activity Objects
-    module ActivityObject
+    module Object
       extend ActiveSupport::Concern
 
       included do

@@ -6,19 +6,19 @@ module SocialStream
 
   module Models
     autoload :Supertype, 'social_stream/models/supertype'
-    autoload :Actor, 'social_stream/models/actor'
-    autoload :ActivityObject, 'social_stream/models/activity_object'
+    autoload :Subject,   'social_stream/models/subject'
+    autoload :Object,    'social_stream/models/object'
   end
 
-  mattr_accessor :actors
-  @@actors = [ :user, :group ]
+  mattr_accessor :subjects
+  @@subjects = [ :user, :group ]
 
   mattr_accessor :devise_modules
   @@devise_modules = [ :database_authenticatable, :registerable, :recoverable,
                        :rememberable, :trackable ]
 
-  mattr_accessor :activity_objects
-  @@activity_objects = [ :post, :comment ]
+  mattr_accessor :objects
+  @@objects = [ :post, :comment ]
 
   class << self
     def setup

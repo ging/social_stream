@@ -2,8 +2,8 @@ require 'active_support/concern'
 
 module SocialStream
   module Models
-    # Additional features for models that are subtypes of actors
-    module Actor
+    # Additional features for models that are subtypes of actors, like User or Group
+    module Subject
       extend ActiveSupport::Concern
 
       included do
