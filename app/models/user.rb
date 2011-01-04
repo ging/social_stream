@@ -20,19 +20,19 @@ class User < ActiveRecord::Base
     v.validates_length_of       :password, :within => Devise.password_length, :allow_blank => true
   end
   
-  def recent_groups
-    receiver_subjects(:subject_type => :group) & Tie.recent
-  end
+  after_create :create_profile
 
-  
-   
   def age
     return nil if profile.birthday.blank? 
     now = Time.now.utc.to_date
     now.year - profile.birthday.year - (profile.birthday.to_date.change(:year => now.year) > now ? 1 : 0)
   end
-  
-  after_create :create_profile
+
+  def recent_groups
+    subjects(:subject_type => :group, :direction => :receivers) do |q|
+      q & Tie.recent
+    end
+  end
   
   protected
   

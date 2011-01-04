@@ -1,4 +1,4 @@
-<% if (cs = subject.contacts.all).present? %>
+<% if (cs = subject.subjects(:direction => :receivers)).present? %>
 
   <div class="contacts_header">
       <%=image_tag("btn/btn_friend.png", :class => "contacts_icon")%>
