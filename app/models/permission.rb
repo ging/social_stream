@@ -19,6 +19,8 @@ class Permission < ActiveRecord::Base
   has_many :relation_permissions, :dependent => :destroy
   has_many :relations, :through => :relation_permissions
 
+  scope :represent, where(:action => 'represent')
+
   # The SQL and ARel conditions for permission queries
   ParameterConditions = {
     :table => {

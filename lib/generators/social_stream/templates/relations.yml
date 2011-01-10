@@ -25,6 +25,7 @@ group:
   member:
     name: member
     permissions:
+      - [ represent ]
       - [ create,  activity, weak_set ]
       - [ read,    activity, star_set ]
       - [ update,  activity, weak_star_set ]

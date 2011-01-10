@@ -33,6 +33,13 @@ class User < ActiveRecord::Base
       q & Tie.recent
     end
   end
+
+  # Subjects this user can acts as
+  def represented
+    subjects(:direction => :senders) do |q|
+      q & joins(:ties => :permissions) & Permission.represent
+    end
+  end
   
   protected
   
