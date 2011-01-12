@@ -1,4 +1,4 @@
-  <% current_user.received_ties.pending.each do |tie| %>
+  <% current_subject.received_ties.pending.each do |tie| %>
     <div class="middle_box_content">
       <div class="actor_logo">
         <%= link_to(image_tag(tie.sender_subject.logo.url, :size => "55x40"),
@@ -12,7 +12,7 @@
           18 contacts in common
         </div>
         <%= link_to t('new', :scope => tie.relation.granted.name),
-                    new_tie_path("tie[sender_id]" => current_user.actor.id,
+                    new_tie_path("tie[sender_id]" => current_subject.actor.id,
                                  "tie[receiver_id]" => tie.sender.id,
                                  "tie[relation_name]" => tie.relation.granted.name),
                                  :remote => true %>

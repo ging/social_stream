@@ -40,5 +40,11 @@ module SocialStream
         inflect.singular /^([Tt]ie)s$/, '\1'
       end
     end
+
+    initializer "social_stream.controller_helpers" do
+      ActiveSupport.on_load(:action_controller) do
+        include SocialStream::Controllers::Helpers
+      end
+    end
   end
 end

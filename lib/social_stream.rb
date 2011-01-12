@@ -4,6 +4,10 @@ module SocialStream
   autoload :Populate,  'social_stream/populate'
   autoload :Relations, 'social_stream/relations'
 
+  module Controllers
+    autoload :Helpers, 'social_stream/controllers/helpers'
+  end
+
   module Models
     autoload :Supertype, 'social_stream/models/supertype'
     autoload :Subject,   'social_stream/models/subject'

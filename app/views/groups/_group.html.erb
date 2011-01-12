@@ -1,4 +1,4 @@
-<% if (current_user.recent_groups.count)>10 %>
+<% if (current_subject.recent_groups.count)>10 %>
   <li>
 <% end %>
   <%= div_for group do %>
@@ -9,6 +9,6 @@
       <%=link_to(group.name, group)%>
     </div>
   <% end %>
-<% if (current_user.recent_groups.count)>10 %>
+<% if (current_subject.recent_groups.count)>10 %>
   </li>
 <% end %>

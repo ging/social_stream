@@ -4,7 +4,7 @@ class TiesController < InheritedResources::Base
   before_filter :authenticate_user!, :only => :suggestion
 
   def suggestion
-    @tie = current_user.suggestion
+    @tie = current_subject.suggestion
     render :layout  => false
   end
 end

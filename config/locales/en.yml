@@ -72,6 +72,9 @@ en:
     one: "Profile"
   public:
     other: "Everybody"
+  representation:
+    act_as: "Act as"
+    change: "Change"
   sign_in: "Sign in"
   sign_up: "Sign up"
   sign_out_user: "Sign out (%{user})"

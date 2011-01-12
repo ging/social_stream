@@ -1,4 +1,4 @@
-<% if current_user.suggestion.present? %>
+<% if current_subject.suggestion.present? %>
   <% content_for :javascript do %>
 
     $(".suggestions .tie_close").livequery("click",function(){
@@ -19,7 +19,7 @@
   </div>
 </div>
 <div class="suggestions">
-  <% if (sgs = current_user.suggestions(2)).present? %>
+  <% if (sgs = current_subject.suggestions(2)).present? %>
     <%= render sgs %>
   <%end%> 
 </div>

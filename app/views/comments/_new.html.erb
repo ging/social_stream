@@ -1,8 +1,8 @@
-<% if activity.receiver.sent_ties_allowing(current_user, 'create', 'activity').any? %>
+<% if activity.receiver.sent_ties_allowing(current_subject, 'create', 'activity').any? %>
   <div class="activity_new_comment">
  <%= form_for Comment.new(:text => t('comment.input'),
                           :_activity_tie_id =>
-                            activity.receiver.sent_ties_allowing(current_user, 'create', 'activity').first.id,
+                            activity.receiver.sent_ties_allowing(current_subject, 'create', 'activity').first.id,
                           :_activity_parent_id => activity.id),
               :remote => true do |f| %>
    <%= f.hidden_field :_activity_tie_id %>

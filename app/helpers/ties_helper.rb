@@ -7,10 +7,10 @@ module TiesHelper
   # to create a new tie to actor
   def ties_to(a)
     if user_signed_in?
-      if current_user.ties_to(a).present?
-        current_user.ties_to(a).first.relation_name
+      if current_subject.ties_to(a).present?
+        current_subject.ties_to(a).first.relation_name
       else
-        new_tie_link(current_user.sent_ties.build :receiver_id => Actor.normalize_id(a))
+        new_tie_link(current_subject.sent_ties.build :receiver_id => Actor.normalize_id(a))
       end
     else
       link_to t("contact.new.link"), new_user_session_path

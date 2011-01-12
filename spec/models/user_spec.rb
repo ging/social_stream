@@ -16,7 +16,7 @@ describe User do
 
     tie = Factory(:partner, :receiver => user.actor)
 
-    assert user.represented.should_not include(tie.sender_subject)
+    assert ! user.represented.include?(tie.sender_subject)
   end
 end
 

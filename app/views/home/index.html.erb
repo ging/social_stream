@@ -11,9 +11,13 @@
 <br class="clearfloat" />
 <div class="space_center">
 </div>
+
+<% if current_subject.respond_to?(:recent_groups) %>
 <div id="my_groups">
   <%= render :partial => "groups" %>
 </div>
+<% end %>
+
 <%= render :partial => "activities/activities",
-           :locals => { :activities => current_user.home_wall.paginate,
-                        :owner => current_user } %>
+           :locals => { :activities => current_subject.home_wall.paginate,
+                        :owner => current_subject } %>

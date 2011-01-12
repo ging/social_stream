@@ -17,7 +17,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    if (@like = activity!.liked_by(current_user).first)
+    if (@like = activity!.liked_by(current_subject).first)
       @like.destroy
     end
 
@@ -37,7 +37,7 @@ class LikesController < ApplicationController
   end
 
   def tie
-    @tie ||= current_user.sent_ties(:receiver => activity!.receiver,
+    @tie ||= current_subject.sent_ties(:receiver => activity!.receiver,
                                     :relation => activity!.relation).first
   end
 

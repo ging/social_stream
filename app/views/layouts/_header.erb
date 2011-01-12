@@ -12,7 +12,7 @@
               </div>			
               <%=image_tag("btn/btn_profile.png",:class=>"btn_config") %>
               <div class="txt_config">
-                <%= link_to(t('profile.one'), current_user)%>
+                <%= link_to(t('profile.one'), current_subject)%>
               </div>
                 <%=image_tag("btn/btn_browse.png",:class=>"btn_config") %>
               <div class="txt_config2">
@@ -24,6 +24,9 @@
               <div class="txt_config">
                 <%= t('account.one') %>
               </div>
+
+              <%= render :partial => 'layouts/representation' %>
+
               <%=image_tag("btn/btn_exit.png",:class=>"btn_config") %>
               <div class="txt_config2">
                 <%= link_to t('sign_out_user', :user => current_user.name), destroy_user_session_path %>

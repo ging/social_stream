@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   # Subjects this user can acts as
   def represented
     subjects(:direction => :senders) do |q|
-      q & joins(:ties => :permissions) & Permission.represent
+      q.joins(:sent_ties => { :relation => :permissions }) & Permission.represent
     end
   end
   
