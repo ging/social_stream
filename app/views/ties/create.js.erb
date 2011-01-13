@@ -3,7 +3,7 @@
 <% else %>
   var old_tie = $("#tie_<%= dom_id(@tie.receiver_subject) %>");
   var link_tie = $("#tie_link<%= dom_id(@tie.receiver_subject) %>");
-  <% if @tie.receiver_subject.is_a?(Group) && ! @tie.relation.granted  #group follower %>
+  <% if @tie.receiver_subject.is_a?(Group) #group tie %>
       // add to group list
       if ($('#carousel_ul').length) { // element found
         $("#carousel_ul").prepend("<%= escape_javascript(render @tie.receiver_subject) %>");
@@ -20,8 +20,7 @@
       } else {
       old_tie.hide();
     }
-    <% if @tie.relation.granted # There was boxy dialog %>
-      $(".boxy-inner .close").click();
-    <% end %>
+
+    $(".boxy-inner .close").click();
   <% end %>
 <% end %>
