@@ -12,8 +12,9 @@
                       :remote => true do |f| %>
            <%= f.hidden_field :receiver_id %>
            <%= f.hidden_field :sender_id %>
-           <%= f.hidden_field :relation_name %>
            <%= f.text_area :message,   :class =>"input_new_tie" %>
+
+           <%= f.select :relation_name, @tie.sender.relations.map{ |r| [ r.name, r.name ] } %>
 
            <div class="ties_btn">
              <%= submit_tag t('contact.new.submit'), :class => "tie_btn" %>
