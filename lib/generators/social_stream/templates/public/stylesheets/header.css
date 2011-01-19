@@ -105,3 +105,7 @@
 	vertical-align: middle;
 	display: inline;
 }
+
+#new_representation {
+	display: inline;
+}

@@ -1,11 +1,20 @@
 <%= link_to(image_tag(current_user.logo.url(:tie)), current_user) %>
+
 <div class="txt_config">
   <%= link_to(current_user.name, current_user) %>
+
+  <%= t('representation.action') %>
+
+  <%= form_for(Representation.new(current_subject), :url => representation_path) do |f| %>
+    <%= f.select :subject_dom_id, current_user.represented.unshift(current_user).map{ |s| [ s.name, dom_id(s) ] } %>
+    <%= f.submit t('representation.change') %>
+  <% end %>
 </div>
 
-<%= t('representation.act_as') %>
-
-<%= form_for(Representation.new(current_subject), :url => representation_path) do |f| %>
-  <%= f.select :subject_dom_id, current_user.represented.unshift(current_user).map{ |s| [ s.name, dom_id(s) ] } %>
-  <%= f.submit t('representation.change') %>
-<% end %>
+<%-# this should be in content_for(:javascript), but the partial is rendered after yield(:javascript) -%>
+<script type="text/javascript" charset="utf-8">
+  $("#representation_submit").hide();
+  $("#representation_subject_dom_id").change(function() {
+    $(this).closest("form").submit();
+  });
+</script>
