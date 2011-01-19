@@ -3,11 +3,8 @@ require 'devise/orm/active_record'
 class User < ActiveRecord::Base
   devise *SocialStream.devise_modules
 
-  has_one :profile, :dependent => :destroy
-  accepts_nested_attributes_for :profile
-  
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :profile_attributes, :birthday
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :profile_attributes
   
   validates_presence_of :email
 
@@ -20,8 +17,6 @@ class User < ActiveRecord::Base
     v.validates_length_of       :password, :within => Devise.password_length, :allow_blank => true
   end
   
-  after_create :create_profile
-
   def age
     return nil if profile.birthday.blank? 
     now = Time.now.utc.to_date
@@ -103,6 +98,4 @@ class User < ActiveRecord::Base
       record
     end
   end
-  
- 
 end

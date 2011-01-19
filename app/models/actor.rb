@@ -13,6 +13,8 @@ class Actor < ActiveRecord::Base
                                  :profile => '94x94' },
                     :default_url => "/images/:attachment/:style/:subtype_class.png"
 
+  has_one :profile, :dependent => :destroy
+
   has_many :sent_ties,
            :class_name => "Tie",
            :foreign_key => 'sender_id',
@@ -32,6 +34,8 @@ class Actor < ActiveRecord::Base
            :uniq => true
 
   after_create :initialize_ties
+
+  after_create :create_profile
 
   class << self
     # Get actor's id from an object, if possible

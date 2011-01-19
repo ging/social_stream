@@ -94,7 +94,7 @@ class CreateSocialStream < ActiveRecord::Migration
     add_index "posts", "activity_object_id"
 
     create_table "profiles", :force => true do |t|
-      t.integer  "user_id"
+      t.integer  "actor_id"
       t.date     "birthday"
       t.datetime "created_at"
       t.datetime "updated_at"
@@ -115,7 +115,7 @@ class CreateSocialStream < ActiveRecord::Migration
       t.string   "im",           :limit => 45
     end
 
-    add_index "profiles", "user_id"
+    add_index "profiles", "actor_id"
 
     create_table "relation_permissions", :force => true do |t|
       t.integer  "relation_id"
@@ -213,7 +213,7 @@ class CreateSocialStream < ActiveRecord::Migration
 
     add_foreign_key "posts", "activity_objects", :name => "posts_on_activity_object_id"
 
-    add_foreign_key "profiles", "users", :name => "profiles_on_user_id"
+    add_foreign_key "profiles", "actors", :name => "profiles_on_actor_id"
 
     add_foreign_key "relation_permissions", "relations", :name => "relation_permissions_on_relation_id"
     add_foreign_key "relation_permissions", "permissions", :name => "relation_permissions_on_permission_id"
@@ -247,7 +247,7 @@ class CreateSocialStream < ActiveRecord::Migration
 
     remove_foreign_key "posts", :name => "posts_on_activity_object_id"
 
-    remove_foreign_key "profiles", :name => "profiles_on_user_id"
+    remove_foreign_key "profiles", :name => "profiles_on_actor_id"
 
     remove_foreign_key "relation_permissions", :name => "relation_permissions_on_relation_id"
     remove_foreign_key "relation_permissions", :name => "relation_permissions_on_permission_id"

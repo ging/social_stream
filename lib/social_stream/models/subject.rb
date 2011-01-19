@@ -25,6 +25,9 @@ module SocialStream
                  :home_wall, :profile_wall,
                  :to => :actor!
 
+        has_one :profile, :through => :actor
+
+        accepts_nested_attributes_for :profile
 
         validates_presence_of :name
 
