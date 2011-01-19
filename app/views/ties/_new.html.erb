@@ -14,7 +14,7 @@
            <%= f.hidden_field :sender_id %>
            <%= f.text_area :message,   :class =>"input_new_tie" %>
 
-           <%= f.select :relation_name, @tie.sender.relations.map{ |r| [ r.name, r.name ] } %>
+           <%= f.select :relation_name, @tie.sender.relations.sort.map{ |r| [ r.name, r.name ] } %>
 
            <div class="ties_btn">
              <%= submit_tag t('contact.new.submit'), :class => "tie_btn" %>
