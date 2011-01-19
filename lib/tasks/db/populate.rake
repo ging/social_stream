@@ -46,13 +46,19 @@ namespace :db do
       set_logos(User)
 
       # = Groups
+      available_actors = Actor.all
+
       10.times do
+        founder = available_actors[rand(available_actors.size)]
+
         Group.create :name  => Forgery::Name.company_name,
-                     :email => Forgery::Internet.email_address
+                     :email => Forgery::Internet.email_address,
+                     :_founder => founder.permalink
       end
 
       set_logos(Group)
 
+      # Reload actors to include groups
       available_actors = Actor.all
 
       # = Ties
