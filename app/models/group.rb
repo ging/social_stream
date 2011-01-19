@@ -10,7 +10,10 @@ class Group < ActiveRecord::Base
   private
 
   def create_founder
-    sent_ties.create! :receiver => Actor.find_by_permalink!(_founder),
+    founder =
+      Actor.find_by_permalink(_founder) || raise("Cannot create group without founder")
+
+    sent_ties.create! :receiver => founder,
                       :relation => relations.sort.first
   end
 end
