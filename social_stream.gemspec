@@ -5,7 +5,8 @@ Gem::Specification.new do |s|
   s.version = SocialStream::VERSION.dup
   s.summary = "Social networking features and activity streams for Ruby on Rails."
   s.description = "Ruby on Rails engine supporting social networking features and activity streams."
-  s.authors = ['Antonio Tapiador', 'Diego Carrera']
+  s.authors = ["Grupo Internet de Nueva Generación, Universidad Politécnica de Madrid"]
+  s.homepage = "http://social-stream.dit.upm.es/"
   s.files = `git ls-files`.split("\n")
   s.add_runtime_dependency('atd-ancestry', '1.3.0')
   s.add_runtime_dependency('nested_set', '~> 1.5.3')
