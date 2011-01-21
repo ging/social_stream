@@ -53,7 +53,12 @@
 	float: right;
 	right: 0px;
 	padding-right: 10px;
+  display: inline-block;
 }
+#representation {
+  display: inline;
+}
+
 
 .btn_config {
 	vertical-align: top;
@@ -107,5 +112,5 @@
 }
 
 #new_representation {
-	display: inline;
+	display: inline-block;
 }
