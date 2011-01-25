@@ -17,16 +17,20 @@ describe Tie do
     tie.should be_valid
   end
 
-  it "should create pending" do
-    tie = Factory(:friend)
-
-    assert tie.receiver.pending_ties.present?
-    assert tie.receiver.pending_ties.first.relation_set.blank?
-  end
 
   describe "friend" do
     before do
       @tie = Factory(:friend)
+    end
+
+    it "should create pending" do
+
+      assert @tie.receiver.pending_ties.present?
+      assert @tie.receiver.pending_ties.first.relation_set.blank?
+    end
+
+    it "should be following" do
+      assert Tie.following(@tie.receiver_id).include?(@tie)
     end
 
     describe ", receiver" do

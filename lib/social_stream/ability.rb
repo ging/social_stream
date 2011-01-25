@@ -10,9 +10,7 @@ module SocialStream
       end
 
       can :read, Activity do |a|
-        # This condition would not be neccesary if every actor had a public tie with others
-        a.tie.relation.name == 'public' ||
-          a.tie.allows?(user, 'read', 'activity')
+        a.tie.allows?(user, 'read', 'activity')
       end
 
       can :update, Activity do |a|

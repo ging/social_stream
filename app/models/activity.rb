@@ -114,9 +114,14 @@ class Activity < ActiveRecord::Base
   # Assign to ties of followers
   def assign_to_ties
     original = tie_activities.create!(:tie => _tie)
-    _tie.activity_receivers.each do |t|
-      tie_activities.create!(:tie => t,
-                             :original => false)
+
+    # All the ties following the activities attached to this tie, allowed to read
+    # this activity
+    Tie.following([_tie.sender_id, _tie.receiver_id]).each do |t|
+      if _tie.allows?(t.sender_id, 'read', 'activity')
+        tie_activities.create!(:tie => t,
+                               :original => false)
+      end
     end
   end
 end

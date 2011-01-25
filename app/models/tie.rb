@@ -68,6 +68,11 @@ class Tie < ActiveRecord::Base
       where("ties.sender_id = ties_2.receiver_id AND ties.receiver_id = ties_2.sender_id")
   }
 
+  scope :following, lambda { |a|
+    where(:receiver_id => Actor.normalize_id(a)).
+      joins(:relation => :permissions) & Permission.follow
+  }
+
   validates_presence_of :sender_id, :receiver_id, :relation_id
 
   before_validation :find_relation
@@ -116,11 +121,6 @@ class Tie < ActiveRecord::Base
   # The tie with relation r inside this relation_set
   def related(r)
     relation_set(:relations => r).first
-  end
-
-  def activity_receivers
-    # TODO
-    Array.new
   end
 
   # = Access Control
@@ -184,15 +184,21 @@ class Tie < ActiveRecord::Base
       where("ties_as.receiver_id" => Actor.normalize_id(actor))
   }
 
+  # The set of ties that permit this tie allow to allow action on object
   def access_set(action, object)
     self.class.access_set(self, action, object)
   end
 
+  # The set of ties allowing user to perform action on object
   def allowing(user, action, object)
     access_set(action, object).received_by(user)
   end
 
+  # Does this tie allows user to perform action on object?
   def allows?(user, action, object)
+    # FIXME: Patch to support public activities
+    return true if relation.name == 'public' && action == 'read' && object == 'activity'
+
     allowing(user, action, object).any?
   end
 
