@@ -17,5 +17,5 @@
 </div>
 
 <%= render :partial => "activities/activities",
-           :locals => { :activities => @group.profile_wall(current_subject).paginate,
+           :locals => { :activities => @group.profile_wall(current_subject),
                         :owner => @group } %>

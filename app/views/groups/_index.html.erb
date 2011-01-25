@@ -1,6 +1,8 @@
+<% groups = Group.alphabetic.paginate(:page => params[:page]) %>
+
 <% cont=0; %>
 
-<% Group.alphabetic.all.each do |group| %>
+<% groups.each do |group| %>
 
 	<% if (cont%2) == 0
 			cont+=1; %>
@@ -31,3 +33,4 @@
 		</div>
 <% end %>
 
+<%= will_paginate(groups) %>

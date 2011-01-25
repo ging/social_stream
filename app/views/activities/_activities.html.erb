@@ -12,8 +12,9 @@
   </div>
   
   <div id="wall">
-  <% if activities.any? %>
+    <% activities = activities.paginate(:page => params[:page]) %>
+    <%- # should be activities.paginate(:page => params[:page], :count => { :select => 'activity.id', :distinct => true }) but it is not working in Rails 3.0.3 -%>
     <%= render activities  %>
-  <% end %>
+    <%= will_paginate activities %>
   </div>
 </div>
