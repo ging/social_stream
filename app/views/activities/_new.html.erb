@@ -16,7 +16,7 @@
       <%= f.text_field :text, :id => "input_activities", :size => 85 %>
       <div id="activities_share_btn">
         <div id="securities">
-          <%= f.select :_activity_tie_id, receiver.sent_ties_allowing(current_subject, 'create', 'activity').map{ |t| [ t.relation_name, t.id ] }, {}, :id => 'security' %>
+          <%= f.select :_activity_tie_id, receiver.sent_ties_allowing(current_subject, 'create', 'activity').sort{ |t, u| t.relation <=> u.relation }.map{ |t| [ t.relation_name, t.id ] }, {}, :id => 'security' %>
         </div>
         <%= image_submit_tag "btn/btn_share.png" %>
       </div>
