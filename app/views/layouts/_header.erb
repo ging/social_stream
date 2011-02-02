@@ -1,9 +1,8 @@
 <div id="headerFront">
     <div class="banner_top">
         <div id="header_left">
-          <a href="index.htm"></a>
           <div id="logo_txt">
-              <%= link_to(t('socialstream') , root_path)%>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <%= link_to(image_tag('header-logo.png', :alt => t('socialstream')), root_path) %>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </div>
           <% if user_signed_in? %>
             <%=image_tag("btn/btn_home.png",:class=>"btn_config") %>
