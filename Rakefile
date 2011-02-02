@@ -4,7 +4,6 @@ require 'rake/rdoctask'
 
 require 'rubygems'
 
-require 'rspec/core'
 require 'rspec/core/rake_task'
 
 require 'bundler'
@@ -12,9 +11,7 @@ require 'bundler'
 require File.join(File.dirname(__FILE__), 'lib', 'social_stream', 'version')
 
 
-Rspec::Core::RakeTask.new(:spec) do |t|
-  t.rspec_opts = ["--color"]
-end
+RSpec::Core::RakeTask.new(:spec)
 
 task :default => :spec
 

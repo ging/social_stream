@@ -2,7 +2,6 @@
 ENV["RAILS_ENV"] = "test"
 
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
-require "rails/test_help"
 require "rspec/rails"
 
 ActionMailer::Base.delivery_method = :test
@@ -29,12 +28,7 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 require 'factory_girl'
 Dir["#{File.dirname(__FILE__)}/factories/*.rb"].each {|f| require f}
 
-Rspec.configure do |config|
-  # Remove this line if you don't want Rspec's should and should_not
-  # methods or matchers
-  require 'rspec/expectations'
-  config.include Rspec::Matchers
-
+RSpec.configure do |config|
   # == Mock Framework
   config.mock_with :rspec
 end
