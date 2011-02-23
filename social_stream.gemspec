@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('atd-ancestry', '1.3.0')
   s.add_runtime_dependency('nested_set', '~> 1.5.3')
   s.add_runtime_dependency('foreigner', '~> 0.9.1')
-  s.add_runtime_dependency('devise', '~> 1.1.3')
+  s.add_runtime_dependency('devise', '~> 1.1.7')
   s.add_runtime_dependency('inherited_resources', '~> 1.1.2')
   s.add_runtime_dependency('stringex', '~> 1.2.0')
   s.add_runtime_dependency('paperclip', '~> 2.3.4')
