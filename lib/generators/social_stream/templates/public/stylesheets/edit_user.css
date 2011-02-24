@@ -30,8 +30,20 @@
 }
 
 /*Edit*/
+.confirmed{
+	color: #009933;
+  padding-left: 5%;
+}
 .editField{
 	padding-top: 5px;
+}
+.error{
+  color: #A2042B;
+	font-weight: bold;
+}
+.error_explanation{
+  color: #A2042B;
+	padding-left: 5%;
 }
 .section_highlight{
 	border-left: none;
