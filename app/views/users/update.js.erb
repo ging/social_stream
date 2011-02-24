@@ -1,19 +1,22 @@
 
-<% if @user.valid? %>
-
-
   if ($("#notice").length == 0){
-	  
-    $("#content").prepend('<div id="notice"></div>');
-		
-  }  
-  $("#notice").html("<h2>Form Submitted!</h2>");
 
+    $("#content").prepend('<div id="notice"></div>');
+    
+  } 
+	
+<% if @user.valid? %>
+ 	
+  $("#notice").html("<h2>Form Submitted!</h2><br/>");
+	$("#notice").removeClass('error_explanation');
+  $("#notice").addClass('confirmed');
   $("#middleContent").replaceWith("<%= escape_javascript(render(:partial => 'middle_show'))%>");
 	
 <% else %>
-
-  $("#flash_error").html("<h2>Fail!</h2>"); 
+  $("#notice").html("<h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>"
+	 +"<ul><% @user.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></ul><br/>");
+	$("#notice").removeClass('confirmed');
+	$("#notice").addClass('error_explanation'); 
 
 <% end %>
 

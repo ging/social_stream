@@ -3,8 +3,6 @@
 
 		  <div class="future_conference" id="personal_info" >
 				<div class="future_header">
-					   
-						<br/><br/>
 						<div class="title_section">
 								Personal Information
 						</div>
@@ -15,6 +13,7 @@
 						</div>
 				</div>
 				<div class="post_future_conference"  >
+					<% if @user.profile.organization? %>
 						<div class="info_post">
 								<div class="info_left">
 										Organization:
@@ -23,12 +22,14 @@
 										<%=h @user.profile.organization %>
 								</div>
 						</div>
+					<%end%>
+					<% if @user.profile.birthday? %>
 						<div class="info_post">
 								<div class="info_left">
 										BirthDay:
 								</div>
 								<div class="info_right">
-										<%=h @user.profile.birthday.to_s() %>
+									<%=h I18n.l @user.profile.birthday, :format => :long %>
 								</div>
 						</div>
 						<div class="info_post">
@@ -39,15 +40,21 @@
 										<%=h @user.age %>
 								</div>
 						</div>
+					<%end%>
+					<% if @user.profile.city? %>
 						<div class="info_post">
 								<div class="info_left">
 										Actual City:
 								</div>
 								<div class="info_right">
-										<%=h @user.profile.city %>, 
-										<%=h @user.profile.country %>
+										<%=h @user.profile.city %>
+										<% if @user.profile.country? %>
+										  , <%=@user.profile.country%>
+										<%end%>
 								</div>
 						</div>
+					<%end%>
+					<% if @user.profile.description? %>
 						<div class="info_post">
                 <div class="info_left">
                     About me:
@@ -56,6 +63,7 @@
                     <%=h @user.profile.description %>
                 </div>
             </div>
+					<%end%>
 				</div>
 		  </div>
 
@@ -70,19 +78,62 @@
 				</div>
 				<div class="post_future_conference">
 						<div class="future_content">
+							<% if @user.profile.phone? %>
+							   <div class="info_post">
+                    <div class="info_left">
+                        Phone
+                    </div>
+                    <div class="info_right">
+                        <%=h @user.profile.phone %>
+                    </div>
+                </div>
+							<%end%>
+							<% if @user.profile.mobile? %>
 								<div class="info_post">
-										<div>
+                    <div class="info_left">
+                        Mobile
+                    </div>
+                    <div class="info_right">
+                        <%=h @user.profile.mobile %>
+                    </div>
+                </div>
+							<%end%>
+							<% if @user.profile.fax? %>
+								<div class="info_post">
+                    <div class="info_left">
+                        Fax
+                    </div>
+                    <div class="info_right">
+                        <%=h @user.profile.fax %>
+                    </div>
+                </div>
+							<%end%>
+							<% if @user.profile.address? %>
+								<div class="info_post">
+                    <div class="info_left">
+                        Address
+                    </div>
+                    <div class="info_right">
+                        <%=h @user.profile.address %>
+                    </div>
+                </div>
+							<%end%>
+							<% if @user.profile.website? %>
+								<div class="info_post">
+										<div class="info_left">
 												Website
 										</div>
 										<div class="contact_link">
 												<a href="<%=h @user.profile.website %>"><%=h @user.profile.website %></a>
 										</div>
 								</div>
+							<%end%>
+							
 								<div class="info_post">
-                    <div>
+                    <div class="info_left">
                         E-mail
                     </div>
-                    <div class="contact_link">
+                    <div class="info_right">
                         <%=h @user.email %>
                     </div>
                 </div>

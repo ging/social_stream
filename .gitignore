@@ -3,3 +3,5 @@ pkg/*gem
 **.tmp_*
 Gemfile.lock
 .idea
+.loadpath
+.project

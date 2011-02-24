@@ -11,7 +11,7 @@
         <%= form_for(@user, :remote => true) do |f| %>
         <% if @user.errors.any? %>
         <div id="error_explanation">
-            <h2><%= pluralize(@user.errors.count, "error") %>prohibited this user from being saved:</h2>
+            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
             <ul>
                 <% @user.errors.full_messages.each do |msg| %>
                 <li>
@@ -47,6 +47,7 @@
             <%= f.text_field :name, :class => "required" %>
 
             <br/>
+
 						<script type="text/javascript">
 
 							$(function() {
@@ -60,20 +61,22 @@
 
 					  </script>
 						<%= f.fields_for :profile do |profile_form| %>
+						
+						<div class="editField">
+              <%= profile_form.label :organization %>
+              <br/>
+            </div>
+            <%= profile_form.text_field :organization %>
+            <br/>
 						<div class="editField">
               <%= profile_form.label :birthday %>
               <br/>
 						</div>
-            <%= profile_form.text_field :birthday , :class => "date" %>
+            <%= profile_form.text_field( :birthday , :class => "date") %>
             <br/>
 						
             
-						<div class="editField">
-              <%= profile_form.label :organization %>
-              <br/>
-						</div>
-            <%= profile_form.text_field :organization %>
-            <br/>
+						
 						<div class="editField">
               <%= profile_form.label :city %>
               <br/>
@@ -114,19 +117,19 @@
               <%= profile_form.label :phone %>
               <br/>
 						</div>
-            <%= profile_form.text_field :phone, :class => "digits" %>
+            <%= profile_form.text_field :phone, :class => "phone" %>
             <br/>
 						<div class="editField">
               <%= profile_form.label :mobile %>
               <br/>
 						</div>
-            <%= profile_form.text_field :mobile, :class => "digits" %>
+            <%= profile_form.text_field :mobile, :class => "phone" %>
             <br/>
 						<div class="editField">
               <%= profile_form.label :fax %>
               <br/>
 						</div>
-            <%= profile_form.text_field :fax, :class => "digits" %>
+            <%= profile_form.text_field :fax, :class => "phone" %>
             <br/>
 						<div class="editField">
               <%= profile_form.label :address %>
