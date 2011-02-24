@@ -4,3 +4,5 @@ pkg/*gem
 Gemfile.lock
 .idea
 nbproject
+.loadpath
+.project
