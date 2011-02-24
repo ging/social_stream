@@ -3,3 +3,4 @@ pkg/*gem
 **.tmp_*
 Gemfile.lock
 .idea
+nbproject

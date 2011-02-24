@@ -53,6 +53,7 @@ en:
     last: "Last groups"
     my: "My groups"
     new: "New group"
+    cloud: "Group tag cloud"
     popular:
       most: "Most popular"
     voted:
@@ -93,4 +94,5 @@ en:
     by: "By Users"
     one: "User"
     other: "Users"
+    all: "All users"
 
