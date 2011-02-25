@@ -12,6 +12,25 @@
   $("#notice").addClass('confirmed');
   $("#middleContent").replaceWith("<%= escape_javascript(render(:partial => 'middle_show'))%>");
 	
+  $("#contact_info").addClass('section_normal');
+  $("#experience_info").addClass('section_normal');
+	$("#personal_info").addClass('section_normal');
+	
+  <% if !params[:section].present? or params[:section].eql?("about_me") %>	                  
+		$("#personal_info").removeClass('section_normal');
+		$("#personal_info").addClass('section_highlight');
+	<%end%>
+	
+	<% if !params[:section].present? or params[:section].eql?("contact_info") %>
+		$("#contact_info").removeClass('section_normal');
+		$("#contact_info").addClass('section_highlight');
+	<%end%>
+
+	<% if !params[:section].present? or params[:section].eql?("my_experience") %>
+		$("#experience_info").removeClass('section_normal');
+		$("#experience_info").addClass('section_highlight');
+	<%end%>
+	
 <% else %>
   $("#notice").html("<h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>"
 	 +"<ul><% @user.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></ul><br/>");
