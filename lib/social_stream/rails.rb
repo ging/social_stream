@@ -19,6 +19,8 @@ require 'paperclip'
 require 'paperclip/social_stream'
 # Pagination
 require 'will_paginate'
+# Oauth
+require 'omniauth/oauth'
 
 module SocialStream
   class Engine < ::Rails::Engine #:nodoc:

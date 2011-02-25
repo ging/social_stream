@@ -19,7 +19,7 @@ module SocialStream
 
   mattr_accessor :devise_modules
   @@devise_modules = [ :database_authenticatable, :registerable, :recoverable,
-                       :rememberable, :trackable ]
+                       :rememberable, :trackable, :omniauthable ]
 
   mattr_accessor :objects
   @@objects = [ :post, :comment ]
