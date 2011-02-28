@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  get "contacts/index"
   root :to => "frontpage#index"
 
   match 'home' => 'home#index', :as => :home
