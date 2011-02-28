@@ -28,4 +28,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rspec-rails', '~> 2.4.1')
   s.add_development_dependency('factory_girl', '~> 1.3.2')
   s.add_development_dependency('forgery', '~> 0.3.6')
+  s.add_development_dependency('ci_reporter', '~> 1.6.4')
 end
