@@ -19,13 +19,13 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('jquery-rails', '~> 0.2.5')
   s.add_runtime_dependency('cancan', '~> 1.5.1')
   s.add_runtime_dependency('will_paginate', '~> 3.0.pre2')
-  s.add_development_dependency('rails', '~> 3.0.4')
+  s.add_development_dependency('rails', '~> 3.0.5')
   s.add_development_dependency('capybara', '~> 0.3.9')
   s.add_development_dependency('sqlite3-ruby')
   if RUBY_VERSION < '1.9'
     s.add_development_dependency('ruby-debug', '~> 0.10.3')
   end
-  s.add_development_dependency('rspec-rails', '~> 2.4.1')
+  s.add_development_dependency('rspec-rails', '~> 2.5.0')
   s.add_development_dependency('factory_girl', '~> 1.3.2')
   s.add_development_dependency('forgery', '~> 0.3.6')
   s.add_development_dependency('ci_reporter', '~> 1.6.4')

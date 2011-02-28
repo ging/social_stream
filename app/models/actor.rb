@@ -66,7 +66,7 @@ class Actor < ActiveRecord::Base
 
   # Relations defined and managed by this actor
   def relations
-    Relation.includes(:ties) & Tie.sent_by(self)
+    Relation.includes(:ties).merge(Tie.sent_by(self))
   end
 
   # A given relation defined and managed by this actor
@@ -93,9 +93,9 @@ class Actor < ActiveRecord::Base
 
     case options[:direction]
     when :senders
-      as = as.joins(:sent_ties) & Tie.received_by(self)
+      as = as.joins(:sent_ties).merge(Tie.received_by(self))
     when :receivers
-      as = as.joins(:received_ties) & Tie.sent_by(self)
+      as = as.joins(:received_ties).merge(Tie.sent_by(self))
     else
       raise "actors in both directions is not supported yet"
     end
