@@ -28,8 +28,7 @@
 									$("#contact_info").addClass('section_normal');
                   $("#experience_info").addClass('section_normal');
 									$("#personal_info").addClass('section_normal');
-									$("#contacts").addClass('section_normal');
-									$(".space_profile").addClass('section_normal');
+									
 									
                   $("#edit_user_1").validate();
                 
@@ -50,7 +49,7 @@
 
 						<script type="text/javascript">
 
-							$(function() {
+							$(function () {
                   $( "#user_profile_attributes_birthday" ).datepicker({ yearRange: '1900:<%= Time.now.utc.to_date.year%>', 
 								                                    changeYear: true, maxDate: '+0d', defaultDate: '-30y'});
 									
@@ -167,6 +166,9 @@
 	            <% end %>
             <% end %>
         </div>
+				<% if params[:section].present? %>
+				<%= hidden_field_tag("section", params[:section]) %>
+				<% end %>
         <div class="actions">
             <%= f.submit "Update" %>&nbsp;<button onclick="window.location.href='<%= user_url(@user) %>';">Cancel</button>
         </div>

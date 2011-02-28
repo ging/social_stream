@@ -32,7 +32,8 @@ module SocialStream
         validates_presence_of :name
 
         scope :alphabetic, includes(:actor).order('actors.name')
-
+        scope :search, lambda{|param|
+                              joins(:actor).where('actors.name like ?',param)}
         scope :with_sent_ties,     joins(:actor => :sent_ties)
         scope :with_received_ties, joins(:actor => :received_ties)
       end

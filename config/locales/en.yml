@@ -57,6 +57,7 @@ en:
       name: "Name"
       description: "Description"
       participants: "Participants"
+    cloud: "Group tag cloud"
     popular:
       most: "Most popular"
     voted:
@@ -97,4 +98,5 @@ en:
     by: "By Users"
     one: "User"
     other: "Users"
+    all: "All users"
 

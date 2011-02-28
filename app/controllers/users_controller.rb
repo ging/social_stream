@@ -1,4 +1,15 @@
 class UsersController < ApplicationController
+  def index
+    if params[:search]
+      @users = User.search("%"+params[:search]+"%").paginate(:per_page => 10, :page => params[:page])
+    else
+      if params[:letter] && params[:letter]!="undefined"
+        @users = User.search(params[:letter]+"%").paginate(:per_page => 10, :page => params[:page])
+      else
+        @users = User.alphabetic.paginate(:per_page => 10, :page => params[:page])
+      end
+    end
+  end
 
   def show
     @user = User.find_by_permalink!(params[:id])

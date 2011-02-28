@@ -1,8 +1,6 @@
-<% users = User.alphabetic.paginate(:page => params[:page]) %>
 
 <% cont=0; %>
-
-<% users.each do |user| %>
+<% @users.each do |user| %>
 
 	<% if (cont%2) == 0
 			cont+=1; %>
@@ -30,4 +28,4 @@
 		</div>
 <% end %>
 
-<%= will_paginate(users) %>
+<%= will_paginate @users %>
