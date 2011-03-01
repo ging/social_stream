@@ -9,10 +9,15 @@ class Group < ActiveRecord::Base
   after_create :create_founder
   after_create :create_participants
   
-  
+  def recent_groups
+    subjects(:subject_type => :group, :direction => :receivers) do |q|
+      q.merge(Tie.recent)
+    end
+  end
+ 
   private
 
-  #Creates the ties betwbeen the group and the founder
+  #Creates the ties between the group and the founder
   def create_founder
     founder =
       Actor.find_by_permalink(_founder) || raise("Cannot create group without founder")
@@ -28,11 +33,10 @@ class Group < ActiveRecord::Base
     
      @_participants.each do |participant|
       
-      participantActor = Actor.find_by_id(participant.to_i)
-      sent_ties.create! :receiver => participantActor,
+      participant_actor = Actor.find_by_id(participant.to_i)
+
+      sent_ties.create! :receiver => participant_actor,
                         :relation => relations.sort.first
      end
-    
   end
-  
 end
