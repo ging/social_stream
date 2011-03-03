@@ -70,7 +70,7 @@ class Tie < ActiveRecord::Base
 
   scope :following, lambda { |a|
     where(:receiver_id => Actor.normalize_id(a)).
-      joins(:relation => :permissions) & Permission.follow
+      joins(:relation => :permissions).merge(Permission.follow)
   }
 
   validates_presence_of :sender_id, :receiver_id, :relation_id

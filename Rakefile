@@ -6,6 +6,8 @@ require 'rubygems'
 
 require 'rspec/core/rake_task'
 
+require 'ci/reporter/rake/rspec'
+
 require 'bundler'
 
 require File.join(File.dirname(__FILE__), 'lib', 'social_stream', 'version')

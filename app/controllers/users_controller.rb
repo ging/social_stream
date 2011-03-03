@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
   def index
     if params[:search]
-      @users = User.find_by_sql("SELECT * FROM users,actors WHERE users.actor_id=actors.id AND actors.name LIKE '%"+params[:search]+"%'").paginate(:per_page => 10, :page => params[:page])
+      @users = User.search("%"+params[:search]+"%").paginate(:per_page => 10, :page => params[:page])
     else
       if params[:letter] && params[:letter]!="undefined"
-        @users = User.find_by_sql("SELECT * FROM users,actors WHERE users.actor_id=actors.id AND actors.name LIKE '"+params[:letter]+"%'").paginate(:per_page => 10, :page => params[:page])
+        @users = User.search(params[:letter]+"%").paginate(:per_page => 10, :page => params[:page])
       else
         @users = User.alphabetic.paginate(:per_page => 10, :page => params[:page])
       end

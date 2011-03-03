@@ -25,14 +25,15 @@ class User < ActiveRecord::Base
 
   def recent_groups
     subjects(:subject_type => :group, :direction => :receivers) do |q|
-      q & Tie.recent
+      q.select("ties.created_at").
+        merge(Tie.recent)
     end
   end
 
   # Subjects this user can acts as
   def represented
     subjects(:direction => :senders) do |q|
-      q.joins(:sent_ties => { :relation => :permissions }) & Permission.represent
+      q.joins(:sent_ties => { :relation => :permissions }).merge(Permission.represent)
     end
   end
   
@@ -96,6 +97,16 @@ class User < ActiveRecord::Base
       end
       
       record
+    end
+
+    def find_for_facebook_oauth(access_token,signed_in_resource=nil)
+      data = access_token['extra']['user_hash']
+      print data
+      if user = User.find_by_email(data["email"])
+        user
+      else
+        User.create!(:name => data["name"], :email => data["email"], :password => Devise.friendly_token[0,20])
+      end
     end
   end
 end

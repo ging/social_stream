@@ -15,11 +15,30 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.label t('group.new.name') %><br />
+    <%= f.text_field :name, :size=> 71 %>
   </div>
-
+  <div class="field">
+    <%= f.label t('group.new.description') %><br />
+    <%= f.text_area :description, :rows =>6, :cols=> 53 %>
+  </div>
+  <div class="field">
+    <%= f.label t('group.new.participants') %><br />
+    <%= f.select :_participants, "" %>
+  </div>
+  <br>
   <div class="actions">
     <%= f.submit %>
   </div>
+<% end %>
+<br><br>
+<% content_for :javascript do %>
+	$("#group__participants").fcbkcomplete({
+		json_url: "../contacts/index.json",
+		cache: true,
+		filter_case: true,
+		filter_hide: true,
+		newel: false,
+		height: 6
+	});
 <% end %>

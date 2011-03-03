@@ -6,6 +6,13 @@ class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
 
   source_root File.expand_path('../templates', __FILE__)
 
+  def outh_for_devise_config
+    inject_into_file "config/initializers/devise.rb",
+                     "\n  config.omniauth :twitter, \"wgTxO0fTpjTeSnjKC9ZHA\", \"JepulVWwLcuAnGfWjwCu47yEP0TcJJfKtvISPBsilI\"
+                      \n  config.omniauth :facebook, \"129571360447856\",\"eef39dce5e20e76f77495c59623bdb38\"",
+                     :after => "  # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'"
+  end
+
   def create_initializer_file
     copy_file 'initializer.rb', 'config/initializers/social_stream.rb'
   end

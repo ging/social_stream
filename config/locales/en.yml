@@ -52,7 +52,11 @@ en:
     by: "By groups"    
     last: "Last groups"
     my: "My groups"
-    new: "New group"
+    new:
+      action: "New group"
+      name: "Name"
+      description: "Description"
+      participants: "Participants"
     cloud: "Group tag cloud"
     popular:
       most: "Most popular"

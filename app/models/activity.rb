@@ -96,7 +96,7 @@ class Activity < ActiveRecord::Base
   end
 
   def liked_by(user) #:nodoc:
-    likes.joins(:ties).where('tie_activities.original' => true) & Tie.received_by(user)
+    likes.joins(:ties).where('tie_activities.original' => true).merge(Tie.received_by(user))
   end
 
   # Does user like this activity?
