@@ -22,38 +22,28 @@
         </div>
         <% end %>
 				<script type="text/javascript">
-              $(function() {
-                  $("#content").css('border-right', 'none');
+              $(function() {         
 									$("#content").css('border-bottom', 'none');
-									$("#contact_info").addClass('section_normal');
-                  $("#experience_info").addClass('section_normal');
-									$("#personal_info").addClass('section_normal');
-									
-									
-                  $("#edit_user_1").validate();
-                
+                  $("#edit_user_1").validate();              
               }); 
         </script>
         <div class="field">
             <% if !params[:section].present? or params[:section].eql?("about_me") %>
-            <div class="sectionEdit">
+            <div class="section_edit">
                 Personal information
             </div>
-            <br/>
-            <%= f.label :name %>
-            <br/>
-
-            <%= f.text_field :name, :class => "required" %>
-
-            <br/>
+            <div class="edit_field">
+            	<div class="edit_label">
+	             <%= f.label :name %>
+							</div>
+	             <%= f.text_field :name, :class => "required edit_text"  %>
+            </div>
 
 						<script type="text/javascript">
 
 							$(function () {
                   $( "#user_profile_attributes_birthday" ).datepicker({ yearRange: '1900:<%= Time.now.utc.to_date.year%>', 
 								                                    changeYear: true, maxDate: '+0d', defaultDate: '-30y'});
-									
-									$("#personal_info").removeClass('section_normal');
 									$("#personal_info").addClass('section_highlight');
 									
 							});
@@ -61,108 +51,100 @@
 					  </script>
 						<%= f.fields_for :profile do |profile_form| %>
 						
-						<div class="editField">
-              <%= profile_form.label :organization %>
-              <br/>
+						<div class="edit_field">
+							<div class="edit_label">
+                <%= profile_form.label :organization %>
+							</div>
+              <%= profile_form.text_field :organization, :class => "edit_text" %>	
             </div>
-            <%= profile_form.text_field :organization %>
-            <br/>
-						<div class="editField">
-              <%= profile_form.label :birthday %>
-              <br/>
-						</div>
-            <%= profile_form.text_field( :birthday , :class => "date") %>
-            <br/>
 						
-            
+						<div class="edit_field">
+							<div class="edit_label">
+                <%= profile_form.label :birthday %>
+						  </div>
+              <%= profile_form.text_field( :birthday , :class => "date edit_text") %>
+						</div>
+						        
 						
-						<div class="editField">
-              <%= profile_form.label :city %>
-              <br/>
-						</div>
-            <%= profile_form.text_field :city %>
-            <br/>
-						<div class="editField">
-              <%= profile_form.label :country %>
-              <br/>
-						</div>
-            <%= profile_form.text_field :country %>
-            <br/>
-						<div class="editField">
+						<div class="edit_field">
+							<div class="edit_label">
+                <%= profile_form.label :city %>
+							</div>
+						  <%= profile_form.text_field :city, :class => "edit_text" %>
+            </div>
+						<div class="edit_field">
+							<div class="edit_label">
+                <%= profile_form.label :country %>
+							</div>					
+              <%= profile_form.text_field :country, :class => "edit_text" %>
+            </div>
+						<div class="edit_field">
               <%= profile_form.label "About me" %>
-              <br/>
+						  <%= profile_form.text_area :description, :rows =>6, :maxlength => 400, :class => "edit_text" %>
 						</div>
-            <%= profile_form.text_area :description, :rows =>6, :maxlength => 400 %>
-            <br/>
-            <br/>
+            
             <% end %>
 						<% end %>
             <% if !params[:section].present? or params[:section].eql?("contact_info") %>
 						<script type="text/javascript">
 
               $(function() {
-
-                  $("#contact_info").removeClass('section_normal');
                   $("#contact_info").addClass('section_highlight');
               });
 
             </script>
-            <div class="sectionEdit">
-                My contact information
+            <div class="section_edit">
+                Contact information
             </div>
 						<%= f.fields_for :profile do |profile_form| %>
-            <br/>
-						<div class="editField">
-              <%= profile_form.label :phone %>
-              <br/>
-						</div>
-            <%= profile_form.text_field :phone, :class => "phone" %>
-            <br/>
-						<div class="editField">
-              <%= profile_form.label :mobile %>
-              <br/>
-						</div>
-            <%= profile_form.text_field :mobile, :class => "phone" %>
-            <br/>
-						<div class="editField">
-              <%= profile_form.label :fax %>
-              <br/>
-						</div>
-            <%= profile_form.text_field :fax, :class => "phone" %>
-            <br/>
-						<div class="editField">
-              <%= profile_form.label :address %>
-              <br/>
-						</div>
-            <%= profile_form.text_field :address %>
-            <br/>
-						<div class="editField">
-              <%= profile_form.label :website %>
-              <br/>
-						</div>
-            <%= profile_form.text_field :website, :class => "url" %>
-            <br/>
-            <br/>
+						<div class="edit_field">
+							<div class="edit_label">
+                <%= profile_form.label :phone %>
+							</div>					
+              <%= profile_form.text_field :phone, :class => "phone edit_text" %>
+            </div>
+						<div class="edit_field">
+							<div class="edit_label">
+                <%= profile_form.label :mobile %>
+							</div>
+              <%= profile_form.text_field :mobile, :class => "phone edit_text" %>
+            </div>
+						<div class="edit_field">
+							<div class="edit_label">
+                <%= profile_form.label :fax %>
+							</div>
+              <%= profile_form.text_field :fax, :class => "phone edit_text" %>
+            </div>
+						<div class="edit_field">
+							<div class="edit_label">
+                <%= profile_form.label :address %>
+							</div>					
+              <%= profile_form.text_field :address, :class => "edit_text" %>
+            </div>
+						<div class="edit_field">
+							<div class="edit_label">
+                <%= profile_form.label :website %>
+							</div>					
+              <%= profile_form.text_field :website, :class => "url edit_text" %>
+            </div>
+
             <% end %>
 						<% end %>
             <% if !params[:section].present? or params[:section].eql?("my_experience") %>
 						<script type="text/javascript">
 
               $(function() {
-
-                  $("#experience_info").removeClass('section_normal');
                   $("#experience_info").addClass('section_highlight');
               });
 
             </script>
-	            <div class="sectionEdit">
-	                My experience
+	            <div class="section_edit">
+	                Experience
 	            </div>
-							<%= f.fields_for :profile do |profile_form| %>
-	            <br/>
-	            <%= profile_form.text_area :experience, :rows =>6, :maxlength => 500 %>
-	            <br/>
-	            <br/>
+							<div class="edit_field">
+								<%= f.fields_for :profile do |profile_form| %>
+		            <%= profile_form.text_area :experience, :rows =>6, :maxlength => 500, :class => "edit_text" %>
+							</div>
 	            <% end %>
             <% end %>
         </div>
@@ -170,7 +152,7 @@
 				<%= hidden_field_tag("section", params[:section]) %>
 				<% end %>
         <div class="actions">
-            <%= f.submit "Update" %>&nbsp;<button onclick="window.location.href='<%= user_url(@user) %>';">Cancel</button>
+            <%= f.submit "Update", :class => "button" %>&nbsp;<button onclick="window.location.href='<%= user_url(@user) %>';">Cancel</button>
         </div>
 				<br/>
         <% end %>

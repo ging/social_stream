@@ -2,7 +2,6 @@
 
 .contact_link{
   color: #4A58E0;
-  text-align: center;
   text-decoration: underline;
 }
 
@@ -19,52 +18,66 @@
 	color: #6C6D6F;
 }
 
-.info_left{
-	float: left;
-}
-
-#personal_info {
-  padding-right: 4px;
-  padding-top: 30px;
-}
-
 /*Edit*/
+button, .button{
+	margin-top:10px;
+	margin-left: 10px;
+	padding: 3px 3px 3px 3px;
+	color:#FFFFFF;
+	background-color: #1F4A75;
+}
 .confirmed{
 	color: #009933;
   padding-left: 5%;
 }
-.editField{
+
+.edit_field{
 	padding-top: 5px;
+	display: table;
+	margin-left: 10px;
+}
+.edit_label{
+  width: 75px;
+	display:table-cell;
+}
+
+.edit_text {
+  border-color: #0656a4;
+  padding: 2px 5px 2px 0px;
+  border:1px solid #BDC7D8;
+	font-size: 12px;
+	width: 200px;
 }
 .error{
   color: #A2042B;
 	font-weight: bold;
 }
+
 .error_explanation{
   color: #A2042B;
 	padding-left: 5%;
 }
+
 .section_highlight{
 	border-left: none;
 	border-bottom: thin solid #D4E4EA;
 	border-top: thin solid #D4E4EA;
 	border-right: thin solid #D4E4EA;
-}
-.section_normal{
-	border-left: thin solid #D4E4EA;
-  background-color: #EEF;
+	background-color: #EEF;
 }
 
-.sectionEdit{
+.section_edit{
   border-bottom-color: #E1EEF5;
   border-bottom-style: solid;
-  /*text-decoration: underline;*/
   font-weight: bold;
   font-size: 14px;
+	margin-bottom: 1%;
 }
 #user_profile_attributes_description, #user_profile_attributes_experience{
-	width: 95% ;
-	max-width: 95% ;
+	width: 275px;
+	max-width: 350px ;
+	display:block;
+	margin-top: 5px;
 }
 
 
