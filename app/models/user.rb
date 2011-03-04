@@ -99,9 +99,8 @@ class User < ActiveRecord::Base
       record
     end
 
-    def find_for_facebook_oauth(access_token,signed_in_resource=nil)
+    def find_or_create_for_facebook_oauth(access_token,signed_in_resource=nil)
       data = access_token['extra']['user_hash']
-      print data
       if user = User.find_by_email(data["email"])
         user
       else

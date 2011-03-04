@@ -1,1 +1,43 @@
-../../../lib/generators/social_stream/templates/relations.yml
+# Relations for Social Stream
+#
+# Define the relations and permissions supported by your application
+#
+user:
+  friend:
+    name: friend
+    permissions:
+      - [ follow ]
+      - [ create,  activity, weak_set ]
+      - [ read,    activity, star_set ]
+      - [ update,  activity, weak_set ]
+      - [ destroy, activity, weak_set ]
+  acquaintance:
+    name: acquaintance
+    parent: friend
+    permissions:
+      - [ read,    activity, star_set ]
+  public:
+    name: public
+    parent: acquaintance
+    permissions:
+      - [ read,    activity, star_set ]
+
+group:
+  member:
+    name: member
+    permissions:
+      - [ represent ]
+      - [ create,  activity, weak_set ]
+      - [ read,    activity, star_set ]
+      - [ update,  activity, weak_star_set ]
+      - [ destroy, activity, weak_star_set ]
+  partner:
+    name: partner
+    parent: member
+    permissions:
+      - [ read,    activity, star_set ]
+  public:
+    name: public
+    parent: partner
+    permissions:
+      - [ read,    activity, star_set ]
