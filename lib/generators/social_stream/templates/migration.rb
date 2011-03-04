@@ -199,6 +199,15 @@ class CreateSocialStream < ActiveRecord::Migration
     # add_index :users, :confirmation_token, :unique => true
     # add_index :users, :unlock_token,       :unique => true
 
+    create_table :authentications do |t|
+          t.integer :user_id
+          t.string :provider
+          t.string :uid
+          t.timestamps
+    end
+    
+    add_index "authentications", "user_id"
+    
     add_foreign_key "activities", "activity_verbs", :name => "index_activities_on_activity_verb_id"
 
     add_foreign_key "activity_object_activities", "activities", :name => "index_activity_object_activities_on_activity_id"
@@ -231,6 +240,7 @@ class CreateSocialStream < ActiveRecord::Migration
 
     add_foreign_key "users", "actors", :name => "users_on_actor_id"
   end
+  
 
   def self.down
     remove_foreign_key "activities", :name => "index_activities_on_activity_verb_id"
@@ -282,5 +292,6 @@ class CreateSocialStream < ActiveRecord::Migration
     drop_table :tags_activity_objects
     drop_table :ties
     drop_table :users
+    drop_table :authentications
   end
 end
