@@ -208,6 +208,7 @@ class CreateSocialStream < ActiveRecord::Migration
     
     add_index "authentications", "user_id"
     
+    add_foreign_key "authentications", "users", :name => "index_authentications_on_user_id"
     add_foreign_key "activities", "activity_verbs", :name => "index_activities_on_activity_verb_id"
 
     add_foreign_key "activity_object_activities", "activities", :name => "index_activity_object_activities_on_activity_id"
