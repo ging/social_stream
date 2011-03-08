@@ -30,7 +30,7 @@
 						<div class="letters" class="content_size">
 						<ul class="tabconference_browse">
 							<li>
-								<a href="/users"><%= t('user.all')%> (<%=User.count%>) </a>
+                                                        <%= link_to t('user.all_n', :count => User.count), users_path %>
 							</li>
 						</ul>
                                                     <% for char in 'A'..'Z' %>

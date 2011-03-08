@@ -50,6 +50,15 @@ class CreateSocialStream < ActiveRecord::Migration
     add_index "actors", "email"
     add_index "actors", "permalink", :unique => true
 
+    create_table :authentications do |t|
+          t.integer :user_id
+          t.string :provider
+          t.string :uid
+          t.timestamps
+    end
+    
+    add_index "authentications", "user_id"
+
     create_table "comments", :force => true do |t|
       t.integer  "activity_object_id"
       t.text     "text"
@@ -199,22 +208,14 @@ class CreateSocialStream < ActiveRecord::Migration
     # add_index :users, :confirmation_token, :unique => true
     # add_index :users, :unlock_token,       :unique => true
 
-    create_table :authentications do |t|
-          t.integer :user_id
-          t.string :provider
-          t.string :uid
-          t.timestamps
-    end
-    
-    add_index "authentications", "user_id"
-    
-    add_foreign_key "authentications", "users", :name => "index_authentications_on_user_id"
     add_foreign_key "activities", "activity_verbs", :name => "index_activities_on_activity_verb_id"
 
     add_foreign_key "activity_object_activities", "activities", :name => "index_activity_object_activities_on_activity_id"
     add_foreign_key "activity_object_activities", "activity_objects", :name => "activity_object_activities_on_activity_object_id"
 
     add_foreign_key "actors", "activity_objects", :name => "actors_on_activity_object_id"
+
+    add_foreign_key "authentications", "users", :name => "authentications_on_user_id"
 
     add_foreign_key "comments", "activity_objects", :name => "comments_on_activity_object_id"
 
@@ -251,6 +252,8 @@ class CreateSocialStream < ActiveRecord::Migration
 
     remove_foreign_key "actors", :name => "actors_on_activity_object_id"
 
+    remove_foreign_key "authentications", :name => "authentications_on_user_id"
+
     remove_foreign_key "comments", :name => "comments_on_activity_object_id"
 
     remove_foreign_key "groups", :name => "groups_on_actor_id"
@@ -281,6 +284,7 @@ class CreateSocialStream < ActiveRecord::Migration
     drop_table :activity_objects
     drop_table :activity_verbs
     drop_table :actors
+    drop_table :authentications
     drop_table :comments
     drop_table :groups
     drop_table :messages
