@@ -50,11 +50,11 @@ class CreateSocialStream < ActiveRecord::Migration
     add_index "actors", "email"
     add_index "actors", "permalink", :unique => true
 
-    create_table :authentications do |t|
-          t.integer :user_id
-          t.string :provider
-          t.string :uid
-          t.timestamps
+    create_table :authentications, :force => true do |t|
+      t.integer :user_id
+      t.string :provider
+      t.string :uid
+      t.timestamps
     end
     
     add_index "authentications", "user_id"
