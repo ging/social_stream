@@ -1,0 +1,76 @@
+#!/bin/bash
+#Social_stream_heroku complete install
+#Arguments:
+#$1 --> Name of the folder to create the social_stream project
+EXPECTED_ARGS=1
+
+if [ $# -ne $EXPECTED_ARGS ]
+then
+  echo "Usage: `basename $0` path/to/your/application"
+  exit 1 
+fi
+
+
+#Linux packages
+echo 'Installing Linux packages'
+PACKAGES_COMMON='ruby ruby-dev rdoc irb libopenssl-ruby wget make curl aspell-es aspell-en libxml2-dev libxslt-dev libmagickcore-dev libmagickwand-dev libsqlite3-dev libmysqlclient-dev mysql-server rake git-core'
+PACKAGES_PRODUCTION='awstats logrotate nfs-common'
+sudo apt-get install $PACKAGES_COMMON
+sudo apt-get install $PACKAGES_PRODUCTION
+echo 'Done'
+
+#Rubygems
+RUBY_GEMS_VERSION='1.3.7'
+RUBY_GEMS_PACKAGE="rubygems-"${RUBY_GEMS_VERSION}".tgz"
+RUBY_GEMS_DOWNLOAD="http://rubyforge.org/frs/download.php/70696/"${RUBY_GEMS_PACKAGE}
+
+echo 'Installing Rubygems $RUBY_GEMS_VERSION'
+
+cd /tmp && wget $RUBY_GEMS_DOWNLOAD
+cd /tmp && tar zxf $RUBY_GEMS_PACKAGE
+cd /tmp/rubygems-$RUBY_GEMS_VERSION && sudo /usr/bin/ruby setup.rb
+
+sudo ln -s /usr/bin/gem1.8 /usr/bin/gem
+echo 'Done'
+
+#Gems
+echo 'Installing Initial Gems'
+sudo gem install rails 
+sudo gem install bundler 
+sudo gem install heroku
+echo 'Done'
+
+#Social Stream 
+echo 'Creating and Setting up your Social Stream basic application'
+export PATH=$PATH:/var/lib/gems/1.8/bin
+echo 'Creating rails project'
+rails new $1 
+cd $1
+echo 'gem "social_stream"' >> Gemfile
+echo 'Updating bundle'
+bundle update
+echo 'Setting up the application'
+rails generate social_stream:install -y
+rake db:migrate
+rake db:seed
+echo 'Done'
+
+#Git repository
+echo 'Setting up your git repository'
+git init
+git add .
+git commit -m 'first commit'
+echo 'Done'
+
+#Heroku deployment
+echo '[!] Starting deploy to heroku, you will be asked your heroku username and password'
+echo '[!] If you do not have one visit http://www.heroku.com'
+echo '[!] You will also need properly configured SSH keys visit: '
+echo '[!] http://help.github.com/linux-key-setup/'
+read -p '[!] When both things are ready PRESS ANY KEY TO CONTINUE...'
+heroku create
+git push heroku master
+heroku rake db:migrate
+echo 'Done'
+
+echo 'Instalation & deployment are now complete. Visit https://api.heroku.com/myapps'
