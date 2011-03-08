@@ -297,6 +297,5 @@ class CreateSocialStream < ActiveRecord::Migration
     drop_table :tags_activity_objects
     drop_table :ties
     drop_table :users
-    drop_table :authentications
   end
 end
