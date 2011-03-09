@@ -1,0 +1,80 @@
+/*********************************header *************************************/
+#headerFront {
+	width: 100%;
+	padding: 0;
+	background: #1F4A75;
+  padding: 2px 0px 0px 0px;
+}
+
+.banner_top {
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 3px;
+  padding-bottom: 3px;
+	position: relative;
+}
+
+#logo{
+  background: transparent url(/images/logo.png);
+  width:218px;
+  height:50px;
+  float:left;
+  vertical-align:top;
+}
+
+.div_login {
+	color:#FFF;
+	width:65%;
+	display:inline-block;
+	text-align: right;
+	vertical-align: top;
+	padding-top: 5px;
+	font-weight:normal;
+	margin-top:3px;
+  float:right;
+}
+
+.div_login #username{
+	height:10px;
+}
+
+.div_login, .input_username{
+	position:relative;
+	padding: 0px;
+	border: 0px;
+
+}
+
+.div_login #login_button{
+	width:61px;
+	height:18px;
+
+}
+.div_login a.login{
+	background-color:#497FC1;
+	padding-right:2px;
+	padding-left:2px;
+	color:white;
+}
+
+.div_login .subtexto{
+	padding-top: 5px;
+	height:12px;
+	font-size: 11px;
+}
+
+#headerFront .div_login a{
+	color:#FFFFFF;
+	padding-right: 7px;
+}
+
+#headerFront .div_login a:hover{text-decoration:underline;}
+
+.div_login .a_border{
+	border-right:thin solid;
+	padding-right:7px;
+	text-decoration:underline;
+}
+
+

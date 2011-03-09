@@ -1,6 +1,8 @@
-body {
-	color: #2A3890;
-	background: #ffffff;
+* {
+	margin: 0;
+	padding: 0;
+	font-family: Arial;
+  font-size:12px;
 }
 
 .p {
@@ -41,7 +43,7 @@ div {
 }
 
 a:link,a:visited {
-	COLOR: inherit;
+	color: inherit;
 	text-decoration: inherit;
 }
 
@@ -49,11 +51,16 @@ a.link:hover {
 	text-decoration: underline;
 }
 
-/************* wrapper ******************/
-* {
-	margin: 0;
-	padding: 0;
-	font-family: Helvetica;
+.clearfloat {
+	clear: both;
+	height: 0px;
+}
+
+/****Main Structure ***************************/
+body{
+  font-size:75%;
+  color:#2A3890;
+  background-color:#ffffff;
 }
 
 #wrapper {
@@ -62,7 +69,24 @@ a.link:hover {
 	width: 100%;
 }
 
-.clearfloat {
-	clear: both;
-	height: 0px;
+#wrapper_body{
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
 }
+
+
+
+/**** Buttons  ***************************/
+input.other_blue{
+	background:#497FC1;
+	border:0px;
+	cursor:pointer;
+  font-size:95%;
+  line-height:135%;
+  margin-right:4px;
+	color:white;
+	padding:1px;
+}
+
+

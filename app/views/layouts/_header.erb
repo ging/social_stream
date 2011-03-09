@@ -1,42 +1,42 @@
 <div id="headerFront">
-    <div class="banner_top">
-        <div id="header_left">
-          <div id="logo_txt">
-            <%= link_to(image_tag('header-logo.png', :alt => t('socialstream')), root_path) %>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </div>
-          <% if user_signed_in? %>
-            <%=image_tag("btn/btn_home.png",:class=>"btn_config") %>
-            <div class="txt_config">
-              <%= link_to t('home'), home_path %>
-            </div>
-            <%=image_tag("btn/btn_profile.png",:class=>"btn_config") %>
-            <div class="txt_config">
-              <%= link_to(t('profile.one'), current_subject)%>
-            </div>
-              <%=image_tag("btn/btn_browse.png",:class=>"btn_config") %>
-            <div class="txt_config2">
-              <%=link_to(t('browse'),users_path) %>  &nbsp;
-            </div>
-          <% end %>
+  <div class="banner_top">
+    <div id="header_left">
+      <div id="logo_txt">
+        <%= link_to(image_tag('header-logo.png', :alt => t('socialstream')), root_path) %>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <% if user_signed_in? %>
+        <%=image_tag("btn/btn_home.png",:class=>"btn_config") %>
+        <div class="txt_config">
+          <%= link_to t('home'), home_path %>
         </div>
-
-        <div id="header_right">
-          <% if user_signed_in? %>
-
-          <%=image_tag("btn/btn_config.png",:class=>"btn_config") %>
-          <div class="txt_config">
-            <%= link_to t('account.one'), '#' %>
-          </div>
-
-          <div id="representation">
-            <%= render :partial => 'layouts/representation' %>
-          </div>
-          <%=image_tag("btn/btn_exit.png",:class=>"btn_config") %>
-          <div class="txt_config2">
-            <%= link_to t('sign_out'), destroy_user_session_path %>
-          </div>
-          <% end %>
+        <%=image_tag("btn/btn_profile.png",:class=>"btn_config") %>
+        <div class="txt_config">
+          <%= link_to(t('profile.one'), current_subject)%>
         </div>
+          <%=image_tag("btn/btn_browse.png",:class=>"btn_config") %>
+        <div class="txt_config2">
+          <%=link_to(t('browse'),users_path) %>  &nbsp;
+        </div>
+      <% end %>
     </div>
-    <br class="clearfloat" />
+
+    <div id="header_right">
+      <% if user_signed_in? %>
+
+      <%=image_tag("btn/btn_config.png",:class=>"btn_config") %>
+      <div class="txt_config">
+        <%= link_to t('account.one'), '#' %>
+      </div>
+
+      <div id="representation">
+        <%= render :partial => 'layouts/representation' %>
+      </div>
+      <%=image_tag("btn/btn_exit.png",:class=>"btn_config") %>
+      <div class="txt_config2">
+        <%= link_to t('sign_out'), destroy_user_session_path %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <br class="clearfloat" />
 </div>

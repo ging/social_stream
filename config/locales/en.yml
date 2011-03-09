@@ -26,9 +26,11 @@ en:
   days: Days
   delete:
     confirm: Delete %{element}}?
-  forgot_password?: "Forgot you password?"
+  forgot_password: "Forgot you password?"
+  explorar: "Explorar"
   frontpage:
     collaborate:
+      default: "Collaborate"
       sentence1: "Organize your projects and activities"
       sentence2: "Create your own groups"
     elements:
@@ -40,11 +42,14 @@ en:
       tags: "Tags"
     main_title: "SocialStream is a core for building social network websites."
     meet:
+      default: "Meet"
       sentence1: "Meet interesting people and groups"
     share:
+      default: "Share"
       sentence1: "Your contacts and relations"
       sentence2: "Posts, comments and activities"
     stats: "%{users} users and %{groups} groups registered"
+  find: "Buscar"
   group:
     one: "Group"
     other: "Groups"
@@ -62,6 +67,7 @@ en:
       most: "Most popular"
     voted:
       most: "Most voted"
+  help: "Help"
   home: "Home"
   inbox:
     one: "Inbox"
