@@ -7,3 +7,4 @@ nbproject
 .loadpath
 .project
 .DS_Store
+.yardoc/*

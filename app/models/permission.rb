@@ -1,19 +1,81 @@
-# SocialStream provides a sophisticated and powerful system of permissions based on the relations
-# and ties of the social network.
+# SocialStream provides a sophisticated and powerful system of permissions based on the {Relation relations}
+# of the social network.
 #
-# Permissions are composed by action, objective and function. Action and objective are classical
-# in content management systems, e.g. "create" "activity", "update" "tie", "read" "post"
+# = Permissions and Relations
 #
-# function is a novel feature. It supports applying the permission to certain set of ties.
-# This set of ties changes along with the formation of ties in your website.
+# Permissions are assigned to {Relation Relations}, and through relations, to {Tie Ties}. 
+# When a sender establishes a {Tie} with a receiver, she is granting to the receiver
+# the permissions assigned to {Relation} of the {Tie} she has just established.
 #
-# Permissions are assigned to relations, and through relations, to ties. 
-# When a sender establishes a tie with a receiver, she is granting to the receiver the permissions assigned
-# to relation of the tie she has just established. For example, when Alice establishes a "friend" tie
-# to Bob, she is granting him the permissions associated with "friend" relation.
+# For example, when _Alice_ establishes a _friend_ tie to _Bob_, she is granting
+# him the permissions associated with her _friend_ relation.
 #
-# One of this permissions can be "read" "activity" "star_set". This way, Bob will have access
-# to read the activities attached to ties inside the "star_set", which are the ties from Alice to her "friends"
+# = Permissions description
+#
+# Permissions are composed by *action*, *objective* and *function*. Action and objective
+# are typical in content management systems, e.g. <tt>create activity</tt>,
+# <tt>update tie</tt>, <tt>read post</tt>
+#
+# == Actions
+#
+# Current available actions are:
+#
+# +create+:: add a new instance of something (activity, tie, post, etc)
+# +read+::   view something
+# +update+::  modify something
+# +destroy+:: delete something
+# +follow+::  get activity updates from the receiver of the tie
+# +represent+:: give the receiver rights to act as if he were us.
+#
+# == Objectives
+#
+# +activity+:: all the objects in a wall: posts, comments
+#
+# Other objectives currently not implemented could be +tie+, +post+, +comment+ or +message+
+#
+# == Functions
+#
+# Function is a novel feature. It supports applying the permission to other related ties.
+# It is required because the set of ties changes along with the establish of contacts
+# in the website, besides {SocialStream::Models::Subject subjects} can describe and
+# customize their own relations and permissions.
+#
+# Available functions are:
+#
+# +tie+:: apply the permission to the established tie only.
+#
+#         Example: if the _friend_ relation has the permission
+#         <tt>create activity tie</tt>, the _friend_ can create activities
+#         attached to this tie only.
+#
+# +weak_ties+:: apply the permission to all the related ties with a relation weaker
+#               or equal than this. When a subject establishes a strong ties,
+#               their related ties are established at the same time.
+#
+#               Example: if the _member_ relation of a group has the permission
+#               <tt>create activity weak_ties</tt>, its members
+#               can also create activities attached to the weaker ties of
+#               _acquaintance_ and _public_.
+#               This means than a group _member_ can create activities at different
+#               levels of strength hierarchy, and therefore, with different levels of
+#               access.
+#
+# +star_ties+:: the permission applies to all the ties at the same level of strength,
+#               that is, ties with the same sender and the same relation but
+#               different receivers.
+#
+#               Example: the _public_ relation has the permission
+#               <tt>read activity star_ties</tt>. If _Alice_ has a _public_ tie with
+#               _Bob_, she is granting him access to activities attached to other ties
+#               from _Alice_ to the rest of her _public_ contacts.
+#
+# +weak_star_ties+:: apply the permission to weak and star ties. This is the union of
+#                    the former.
+#            
+#                    Example: group's _admin relation has the permission
+#                    <tt>destroy activity weak_star_ties</tt>
+#                    This means that _admins_ can destroy activities from other
+#                    _members_, _acquaintances_ and _public_.
 #
 class Permission < ActiveRecord::Base
   has_many :relation_permissions, :dependent => :destroy
@@ -28,11 +90,11 @@ class Permission < ActiveRecord::Base
     :table => {
       'tie' =>
         "ties_as.sender_id = ties.sender_id AND ties_as.receiver_id = ties.receiver_id AND ties_as.relation_id = ties.relation_id",
-      'weak_set' =>
+      'weak_ties' =>
         "ties_as.sender_id = ties.sender_id AND ties_as.receiver_id = ties.receiver_id AND relations.lft BETWEEN relations_as.lft AND relations_as.rgt",
-      'star_set' =>
+      'star_ties' =>
         "ties_as.sender_id = ties.sender_id AND ties_as.relation_id = ties.relation_id",
-      'weak_star_set' =>
+      'weak_star_ties' =>
         "ties_as.sender_id = ties.sender_id AND relations.lft BETWEEN relations_as.lft AND relations_as.rgt"
     },
     :arel => {
@@ -42,18 +104,18 @@ class Permission < ActiveRecord::Base
           as[:receiver_id].eq(t.receiver_id)).and(
           as[:relation_id].eq(t.relation_id))
       },
-      'weak_set' => lambda { |as, t|
+      'weak_ties' => lambda { |as, t|
         # The same sender and receiver, but a stronger or equal relation
         as[:sender_id].eq(t.sender_id).and(
           as[:receiver_id].eq(t.receiver_id)).and(
           as[:relation_id].in(t.relation.stronger_or_equal.map(&:id)))
       },
-      'star_set' => lambda { |as, t|
+      'star_ties' => lambda { |as, t|
         # The same receiver and relation
         as[:sender_id].eq(t.sender_id).and(
           as[:relation_id].eq(t.relation_id))
       },
-      'weak_star_set' => lambda { |as, t|
+      'weak_star_ties' => lambda { |as, t|
         # The same receiver with stronger or equal relations
         as[:sender_id].eq(t.sender_id).and(
           as[:relation_id].in(t.relation.stronger_or_equal.map(&:id)))
@@ -62,6 +124,7 @@ class Permission < ActiveRecord::Base
   }
 
   class << self
+    # Builds SQL conditions based on {ParameterConditions}
     def parameter_conditions(tie = nil)
       if tie.present?
         ParameterConditions[:arel].inject([]) { |conditions, h|

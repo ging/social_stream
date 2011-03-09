@@ -40,7 +40,7 @@ describe Tie do
 
       it "creates activity" do
         Tie.allowing(@s, 'create', 'activity').should include(@tie)
-        Tie.allowing(@s, 'create', 'activity').should include(@tie.related('public'))
+        Tie.allowing(@s, 'create', 'activity').should_not include(@tie.related('public'))
       end
 
       it "reads activity" do
