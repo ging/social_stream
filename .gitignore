@@ -6,3 +6,5 @@ Gemfile.lock
 nbproject
 .loadpath
 .project
+.DS_Store
+.yardoc/*

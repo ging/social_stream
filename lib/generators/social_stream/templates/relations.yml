@@ -1,43 +1,48 @@
-# Relations for Social Stream
+# Default relations for Social Stream
 #
-# Define the relations and permissions supported by your application
+# Define the default relations and permissions supported by your application
+# Though subjects can customize their own relations, these are the defaults
+# to start up 
+#
+# Detailed information on permissions is available at:
+# http://rdoc.info/gems/social_stream/Permission
 #
 user:
   friend:
     name: friend
     permissions:
-      - [ follow ]
-      - [ create,  activity, weak_set ]
-      - [ read,    activity, star_set ]
-      - [ update,  activity, weak_set ]
-      - [ destroy, activity, weak_set ]
+      - [ follow ]                       # follow the activities of the friend
+      - [ create,  activity, tie ]       # let the friend create activities to the same tie
+      - [ read,    activity, star_ties ] # friend can read activities from the other friends
+      - [ update,  activity, tie ]       # update activities to the same tie
+      - [ destroy, activity, tie ]       # destroy activities to the same tie
   acquaintance:
     name: acquaintance
-    parent: friend
+    parent: friend # friend relation is stronger than acquaintance
     permissions:
-      - [ read,    activity, star_set ]
+      - [ read,    activity, star_ties ]
   public:
     name: public
-    parent: acquaintance
+    parent: acquaintance # acquaintance is stronger than public
     permissions:
-      - [ read,    activity, star_set ]
+      - [ read,    activity, star_ties ]
 
 group:
   member:
     name: member
     permissions:
-      - [ represent ]
-      - [ create,  activity, weak_set ]
-      - [ read,    activity, star_set ]
-      - [ update,  activity, weak_star_set ]
-      - [ destroy, activity, weak_star_set ]
+      - [ represent ]                         # let the member act as the group
+      - [ create,  activity, weak_ties ]      # let them member create activities at the level of member, partner and public
+      - [ read,    activity, star_ties ]      # read activities from other members
+      - [ update,  activity, weak_star_ties ] # update and destroy activities to members,
+      - [ destroy, activity, weak_star_ties ] # acquaintance and public
   partner:
     name: partner
-    parent: member
+    parent: member # member is stronger than partner
     permissions:
-      - [ read,    activity, star_set ]
+      - [ read,    activity, star_ties ]
   public:
     name: public
-    parent: partner
+    parent: partner # partner is stronger than public
     permissions:
-      - [ read,    activity, star_set ]
+      - [ read,    activity, star_ties ]

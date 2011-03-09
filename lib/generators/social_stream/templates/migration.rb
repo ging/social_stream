@@ -50,6 +50,15 @@ class CreateSocialStream < ActiveRecord::Migration
     add_index "actors", "email"
     add_index "actors", "permalink", :unique => true
 
+    create_table :authentications, :force => true do |t|
+      t.integer :user_id
+      t.string :provider
+      t.string :uid
+      t.timestamps
+    end
+    
+    add_index "authentications", "user_id"
+
     create_table "comments", :force => true do |t|
       t.integer  "activity_object_id"
       t.text     "text"
@@ -206,6 +215,8 @@ class CreateSocialStream < ActiveRecord::Migration
 
     add_foreign_key "actors", "activity_objects", :name => "actors_on_activity_object_id"
 
+    add_foreign_key "authentications", "users", :name => "authentications_on_user_id"
+
     add_foreign_key "comments", "activity_objects", :name => "comments_on_activity_object_id"
 
     add_foreign_key "groups", "actors", :name => "groups_on_actor_id"
@@ -231,6 +242,7 @@ class CreateSocialStream < ActiveRecord::Migration
 
     add_foreign_key "users", "actors", :name => "users_on_actor_id"
   end
+  
 
   def self.down
     remove_foreign_key "activities", :name => "index_activities_on_activity_verb_id"
@@ -239,6 +251,8 @@ class CreateSocialStream < ActiveRecord::Migration
     remove_foreign_key "activity_object_activities", :name => "activity_object_activities_on_activity_object_id"
 
     remove_foreign_key "actors", :name => "actors_on_activity_object_id"
+
+    remove_foreign_key "authentications", :name => "authentications_on_user_id"
 
     remove_foreign_key "comments", :name => "comments_on_activity_object_id"
 
@@ -270,6 +284,7 @@ class CreateSocialStream < ActiveRecord::Migration
     drop_table :activity_objects
     drop_table :activity_verbs
     drop_table :actors
+    drop_table :authentications
     drop_table :comments
     drop_table :groups
     drop_table :messages
