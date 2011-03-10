@@ -6,7 +6,8 @@
     <%= stylesheet_link_tag "default/base", "default/header","default/index","default/home", "default/carousel",
                             "default/sidebar", "default/toolbar","default/activities", 'default/ui.dropdownchecklist',
                             "default/menu","default/footer", :media => "screen, projection" %>
-    <%= javascript_include_tag 'jquery', 'jquery.livequery', 'menu', 'ui.dropdownchecklist' %>
+    <%= javascript_include_tag 'jquery.min', 'jquery-ui.min','rails', 'jquery.livequery', 'menu', 'ui.dropdownchecklist'
+                               %>
     <% if protect_against_forgery? %>
       <%= csrf_meta_tag %>
     <% end %>

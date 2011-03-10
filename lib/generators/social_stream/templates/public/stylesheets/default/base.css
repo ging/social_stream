@@ -55,7 +55,7 @@ a.link:hover {
 	height: 0px;
 }
 
-/****Main Structure ***************************/
+/******* Main Structure ***************************/
 body{
   font-size:75%;
   color:#2A3890;
@@ -70,14 +70,14 @@ body{
 
 #wrapper_body{
 	width: 960px;
-  height:520px;
 	margin-left: auto;
 	margin-right: auto;
+  padding-bottom: 20px;
+  background-color:#fff;
 }
 
+/************ Buttons  ***************************/
 
-
-/**** Buttons  ***************************/
 input.other_blue{
 	background:#497FC1;
 	border:0px;
@@ -189,8 +189,6 @@ input.other_blue{
   width:50%;
 }
 
-
-/***************ERRORS ******/
 .field_with_errors {
   padding: 2px;
   background-color: red;
@@ -216,7 +214,6 @@ input.other_blue{
   margin-bottom: 0px;
   background-color: #c00;
   color:#fff;
-  /*color: #fff;*/
 }
 
 #error_explanation ul li {

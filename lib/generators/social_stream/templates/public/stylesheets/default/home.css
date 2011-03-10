@@ -11,8 +11,9 @@
 
 #representation {
   display: inline;
+  padding-left:3px;
+  padding-right:3px;
 }
-
 
 .btn_config {
 	vertical-align: top;

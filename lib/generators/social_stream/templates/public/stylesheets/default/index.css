@@ -39,6 +39,10 @@
 	border-right: thin solid #D4E4EA;*/
 }
 
+#sidebarContent{
+  padding-left:3px;
+}
+
 #toolbar {
 	width: 160px;
 	border-color: #000;
