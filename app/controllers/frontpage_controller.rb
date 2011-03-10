@@ -1,6 +1,5 @@
 class FrontpageController < ApplicationController
   before_filter :redirect_user_to_home, :only => :index
-  include SimpleCaptcha::ControllerHelpers
 
   def index
     respond_to do |format|
