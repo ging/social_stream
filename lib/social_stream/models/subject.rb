@@ -2,7 +2,15 @@ require 'active_support/concern'
 
 module SocialStream
   module Models
-    # Additional features for models that are subtypes of actors, like User or Group
+    # {Subject Subjects} are subtypes of {Actor}. {SocialStream} provides two
+    # {Subject Subjects}, {User} and {Group}
+    #
+    # Each {Subject} is defined in +config/initializers/social_stream.rb+
+    #
+    # This module provides additional features for models that are subjects,
+    # extending them. Including the module in each {Subject} model is not required!
+    # After declared in +config/initializers/social_stream.rb+, {SocialStream} is
+    # responsible for adding subject features to each model.
     module Subject
       extend ActiveSupport::Concern
 
@@ -36,6 +44,7 @@ module SocialStream
                               joins(:actor).where('actors.name like ?',param)}
         scope :with_sent_ties,     joins(:actor => :sent_ties)
         scope :with_received_ties, joins(:actor => :received_ties)
+        scope :distinct_initials, joins(:actor).select('DISTINCT SUBSTR(actors.name,1,1) as initial')
       end
 
       module InstanceMethods

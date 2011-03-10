@@ -205,10 +205,10 @@ describe Activity do
         create_ability_accessed_by_receiver
       end
 
-      it_should_behave_like "Allows Creating"
+      it_should_behave_like "Denies Creating"
       it_should_behave_like "Allows Reading"
-      it_should_behave_like "Allows Updating"
-      it_should_behave_like "Allows Destroying"
+      it_should_behave_like "Denies Updating"
+      it_should_behave_like "Denies Destroying"
     end
     
     describe "accessed by a friend" do

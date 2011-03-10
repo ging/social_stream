@@ -1,5 +1,5 @@
 #!/bin/bash
-#Social_stream complete install
+#Social_stream_heroku complete install
 #Arguments:
 #$1 --> Name of the folder to create the social_stream project
 EXPECTED_ARGS=1
@@ -13,7 +13,7 @@ fi
 
 #Linux packages
 echo 'Installing Linux packages'
-PACKAGES_COMMON='ruby ruby-dev rdoc irb libopenssl-ruby wget make curl aspell-es aspell-en libxml2-dev libxslt-dev libmagickcore-dev libmagickwand-dev libsqlite3-dev libmysqlclient-dev mysql-server rake'
+PACKAGES_COMMON='ruby ruby-dev rdoc irb libopenssl-ruby wget make curl aspell-es aspell-en libxml2-dev libxslt-dev libmagickcore-dev libmagickwand-dev libsqlite3-dev libmysqlclient-dev mysql-server rake git-core'
 PACKAGES_PRODUCTION='awstats logrotate nfs-common'
 sudo apt-get install $PACKAGES_COMMON
 sudo apt-get install $PACKAGES_PRODUCTION
@@ -37,6 +37,7 @@ echo 'Done'
 echo 'Installing Initial Gems'
 sudo gem install rails 
 sudo gem install bundler 
+sudo gem install heroku
 echo 'Done'
 
 #Social Stream 
@@ -54,4 +55,22 @@ rake db:migrate
 rake db:seed
 echo 'Done'
 
-echo 'Instalation complete. Run "rails server" in the application folder to start the server'
+#Git repository
+echo 'Setting up your git repository'
+git init
+git add .
+git commit -m 'first commit'
+echo 'Done'
+
+#Heroku deployment
+echo '[!] Starting deploy to heroku, you will be asked your heroku username and password'
+echo '[!] If you do not have one visit http://www.heroku.com'
+echo '[!] You will also need properly configured SSH keys visit: '
+echo '[!] http://help.github.com/linux-key-setup/'
+read -p '[!] When both things are ready PRESS ANY KEY TO CONTINUE...'
+heroku create
+git push heroku master
+heroku rake db:migrate
+echo 'Done'
+
+echo 'Instalation & deployment are now complete. Visit https://api.heroku.com/myapps'

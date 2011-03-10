@@ -22,7 +22,7 @@ div#wordcloud span {
 }
 div#wordcloud span.w10 {
   font-size: 44px;
-  color: #0cf;
+  color: #1F4A75;
 }
 div#wordcloud span.w9 {
   font-size: 40px;
@@ -34,7 +34,7 @@ div#wordcloud span.w8 {
 }
 div#wordcloud span.w7 {
   font-size: 30px;
-  color: #39d;
+  color: #0cf;
 }
 div#wordcloud span.w6 {
   font-size: 24px;

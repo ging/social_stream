@@ -1,12 +1,30 @@
-# A Relation defines a type of Tie. Relations are affective (friendship, liking, 
+# A relation defines a type of {Tie tie}. Relations are affective (friendship, liking, 
 # respect), formal or biological (authority, kinship), transfer of material 
 # resources (transactions, lending and borrowing), messages or conversations, 
 # physical connection and affiliation to same organizations.
 #
-# == Strength hierarchies
+# = Default relations
+#
+# When a new {SocialStream::Models::Subject subject} is created, a initial set
+# of relations is created for him. Afterwards, the {SocialStream::Models::Subject subject}
+# can customize them and adapt them to his own preferences.
+#
+# Default relations are defined at config/relations.yml
+#
+# = Strength hierarchies
+#
 # Relations are arranged in strength hierarchies, denoting that some ties between
-# two actors are stronger than others.
+# two actors are stronger than others. For example, a "friend" relation is stronger than 
+# an "acquaintance" relation.
+#
 # When a strong tie is established, ties with weaker relations are establised as well
+#
+# = Permissions
+#
+# {SocialStream::Models::Subject Subjects} assign {Permission permissions} to relations.
+# This way, when establishing {Tie ties}, they are granting permissions to their contacts.
+#
+# See the documentation of {Permission} for more details on permission definition.
 #
 class Relation < ActiveRecord::Base
   acts_as_nested_set

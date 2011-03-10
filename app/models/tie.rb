@@ -1,28 +1,46 @@
-# A link between two actors in a relation.
+# A tie is a link between two {Actor actors} with a {Relation relation}.
 #
-# The first Actor is the sender of the Tie. The second Actor is the receiver of the Tie.
+# The first {Actor actor} is the sender of the {Tie tie}. The second {Actor actor}
+# is the receiver of the {Tie tie}.
 #
-# == Ties and Activities
-# Activities are attached to ties. 
-# * The sender of the tie is the target of the Activity. The wall-profile of an actor is
-#   composed by the resources assigned to the ties in which the actor is the sender.
-# * The receiver actor of the tie is the author of the Activity. It is the user that uploads 
-#   a resource to the website or the social entity that originates the activity.
-# * The Relation sets up the mode in which the Activity is shared. It sets the rules,
-#    or permissions, by which actors have access to the Activity.
+# = {Tie Ties} and {Activity activities}
+# {Activity Activities} are attached to {Tie ties}. 
+# * The sender of the tie is the target of the {Activity}.
+#   The wall-profile of an {Actor} is composed by the resources assigned to
+#   the {Tie Ties} in which the {Actor} is the sender.
+# * The receiver {Actor} of the {Tie} is the author of the {Activity}.
+#   It is the user that uploads a resource to the website or the social entity that
+#   originates the {Activity}.
+# * The {Relation} sets up the mode in which the {Activity} is shared.
+#   It sets the rules, or {Permission Permissions}, by which {Actor} have access
+#   to the {Activity}.
 #
-# == Authorization
-# When an actor establishes a tie with other, she is granting a set of permissions to them
-# (posting to her wall, reading her posts, etc..) The set of permissions granted are
-# associated with the relation of the tie.
+# = Tie strengh
 #
-# == Scopes
+# Because each {Tie} belongs to a {Relation} and {Relation Relations} have strength
+# hierarchies, {Tie Ties} also have them. A {Tie} is stronger than other if its
+# {Relation} is stronger than the other's. For example, if _Alice_ has a _friend_ {Tie}
+# with _Bob_, and an _acquaintance_ {Tie} with _Charlie_, given that _friend_ {Relation}
+# is stronger than _acquaintance_, the {Tie} with _Bob_ is stronger than the {Tie} with
+# _Charlie_.
+#
+# = Authorization
+# When an {Actor} establishes a {Tie} with other, she is granting a set of
+# {Permission Permissions} to them (posting to her wall, reading her posts, etc..)
+# The set of {Permission Permissions} granted are associated with the {Relation} of
+# the {Tie}.
+#
+# Usually, stronger ties (and relations) have more permissions than weaker ones.
+#
+# = Scopes
 # There are several scopes defined:
-# * sent_by(actor), ties whose sender is actor
-# * received_by(actor), ties whose receiver is actor
-# * sent_or_received_by(actor), the union of the former
-# * related_by(relation), ties with this relation. Accepts relation, relation_name, integer, array
-# * replied, ties having at least another tie in the other way, a tie from a to b is replied if there is a tie from b to a
+# sent_by(actor):: ties whose sender is actor
+# received_by(actor):: ties whose receiver is actor
+# sent_or_received_by(actor):: the union of the former
+# related_by(relation):: ties with this relation. Accepts relation, relation_name,
+#                        integer, array
+# replied:: ties having at least another tie in the other way, a tie from a to b
+#           is replied if there is a tie from b to a
 #
 class Tie < ActiveRecord::Base
   attr_accessor :message
