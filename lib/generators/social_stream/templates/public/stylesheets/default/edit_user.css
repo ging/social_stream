@@ -20,8 +20,7 @@
 
 /*Edit*/
 button, .button{
-	margin-top:10px;
-	margin-left: 10px;
+	margin: 10px 0 10px 10px;
 	padding: 3px 3px 3px 3px;
 	color:#FFFFFF;
 	background-color: #1F4A75;
@@ -35,27 +34,38 @@ button, .button{
 	padding-top: 5px;
 	display: table;
 	margin-left: 10px;
+	width:100%;
 }
 .edit_label{
   width: 75px;
 	display:table-cell;
+	vertical-align: middle;
 }
 
-.edit_text {
-  border-color: #0656a4;
-  padding: 2px 5px 2px 0px;
-  border:1px solid #BDC7D8;
+.edit_text, .holder{
+  padding: 2px 5px 2px 0px !important;
+  border:1px solid #BDC7D8 !important;
 	font-size: 12px;
-	width: 200px;
+	width: 93% !important;
+	margin-right: 7% !important;
+
 }
+
 .error{
   color: #A2042B;
 	font-weight: bold;
 }
 
-.error_explanation{
+#error_explanation{
   color: #A2042B;
 	padding-left: 5%;
+}
+
+.search_suggestion, #group__participants_feed{
+	width: 200px;
+	border:1px solid #BDC7D8;
+	background-color: #E1EEF5;
+	padding: 1px 5px 1px 0px;
 }
 
 .section_highlight{
@@ -73,11 +83,12 @@ button, .button{
   font-size: 14px;
 	margin-bottom: 1%;
 }
-#user_profile_attributes_description, #user_profile_attributes_experience{
-	width: 275px;
-	max-width: 350px ;
+#user_profile_attributes_description, #user_profile_attributes_experience, #group_description{
 	display:block;
 	margin-top: 5px;
+	resize: none;
+	max-height: 70px; 
+	width: 94%;
 }
 
 

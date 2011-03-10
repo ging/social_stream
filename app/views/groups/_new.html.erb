@@ -1,3 +1,23 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag "fcbkComplete.css", :media => "screen, projection" %>
+  <%= stylesheet_link_tag "edit_user", :media => "screen, projection" %>          
+	<%= javascript_include_tag 'jquery.validate' %>
+<% end %>   
+
+<% content_for :javascript do %>
+	$(function() {         
+		$(".new_group").validate();              
+	}); 
+	 $("#group__participants").fcbkcomplete({
+    json_url: "../contacts/index.json",
+    cache: true,
+    filter_case: true,
+    filter_hide: true,
+    newel: false,
+    height: 6
+  });
+<% end %> 
+				
 <%= form_for @group do |f| %>
   <% f.object._founder = current_subject.permalink %>
   <%= f.hidden_field :_founder %>
@@ -14,31 +34,27 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label t('group.new.name') %><br />
-    <%= f.text_field :name, :size=> 71 %>
+  <div class="edit_field">
+  	<div class="edit_label">
+      <%= f.label t('group.new.name') %>
+		</div>
+    <%= f.text_field :name, :size=> 71, :class => "required edit_text" %>
   </div>
-  <div class="field">
-    <%= f.label t('group.new.description') %><br />
-    <%= f.text_area :description, :rows =>6, :cols=> 53 %>
+
+  <div class="edit_field">
+  	<div class="edit_label">
+      <%= f.label t('group.new.participants') %>
+		</div>
+    <%= f.select :_participants, "", :class => "edit_text" %>
   </div>
-  <div class="field">
-    <%= f.label t('group.new.participants') %><br />
-    <%= f.select :_participants, "" %>
+	<div class="edit_field">
+    <%= f.label t('group.new.description') %>
+    <%= f.text_area :description, :rows =>6, :cols=> 53, :class => "edit_text" %>
   </div>
-  <br>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "button" %>
   </div>
 <% end %>
-<br><br>
-<% content_for :javascript do %>
-	$("#group__participants").fcbkcomplete({
-		json_url: "../contacts/index.json",
-		cache: true,
-		filter_case: true,
-		filter_hide: true,
-		newel: false,
-		height: 6
-	});
-<% end %>
+
+

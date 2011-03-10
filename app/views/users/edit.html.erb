@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <% content_for :toolbar do %>
 <%= render :partial => 'toolbar_show' %>
@@ -70,44 +71,137 @@
       </div>
       <%= profile_form.text_field( :birthday , :class => "date edit_text") %>
     </div>
+				<% content_for :javascript do %>
+              $(function() {         
+									$("#content").css('border-bottom', 'none');
+                  $(".edit_user").validate();              
+              }); 
+				<% end %> 
 
+        <div class="field">
+            <% if !params[:section].present? or params[:section].eql?("about_me") %>
+            <div class="section_edit">
+                Personal information
+            </div>
+            <div class="edit_field">
+            	<div class="edit_label">
+	             <%= f.label :name %>
+							</div>
+	             <%= f.text_field :name,  :class => "required edit_text"  %>
+            </div>
 
-    <div class="edit_field">
-      <div class="edit_label">
-        <%= profile_form.label :city %>
-      </div>
-      <%= profile_form.text_field :city, :class => "edit_text" %>
-    </div>
-    <div class="edit_field">
-      <div class="edit_label">
-        <%= profile_form.label :country %>
-      </div>
-      <%= profile_form.text_field :country, :class => "edit_text" %>
-    </div>
-    <div class="edit_field">
-      <%= profile_form.label "About me" %>
-      <%= profile_form.text_area :description, :rows =>6, :maxlength => 400, :class => "edit_text" %>
-    </div>
+						<% content_for :javascript do %>
+							$(function () {
+                  $( "#user_profile_attributes_birthday" ).datepicker({ yearRange: '1900:<%= Time.now.utc.to_date.year%>', 
+								                                    changeYear: true, maxDate: '+0d', defaultDate: '-30y'});
+									$("#personal_info").addClass('section_highlight');
+									
+							});
+            <% end %>
 
-    <% end %>
-    <% end %>
-    <% if !params[:section].present? or params[:section].eql?("contact_info") %>
+						<%= f.fields_for :profile do |profile_form| %>
+						
+						<div class="edit_field">
+							<div class="edit_label">
+                <%= profile_form.label :organization %>
+							</div>
+              <%= profile_form.text_field :organization , :class => "edit_text" %>	
+            </div>
+						
+						<div class="edit_field">
+							<div class="edit_label">
+                <%= profile_form.label :birthday %>
+						  </div>
+              <%= profile_form.text_field( :birthday , :class => "date edit_text") %>
+						</div>
+						        
+						
+						<div class="edit_field">
+							<div class="edit_label">
+                <%= profile_form.label :city %>
+							</div>
+						  <%= profile_form.text_field :city,  :class => "edit_text" %>
+            </div>
+						<div class="edit_field">
+							<div class="edit_label">
+                <%= profile_form.label :country %>
+							</div>					
+              <%= profile_form.text_field :country,  :class => "edit_text" %>
+            </div>
+						<div class="edit_field">
+              <%= profile_form.label "About me" %>
+						  <%= profile_form.text_area :description, :maxlength => 400, :class => "edit_text" %>
+						</div>
+            
+            <% end %>
+						<% end %>
+            <% if !params[:section].present? or params[:section].eql?("contact_info") %>
 
-      <% content_for :javascript do %>
+							<% content_for :javascript do %>
+	
+	              $(function() {
+	                  $("#contact_info").addClass('section_highlight');
+	              });
+	
+	            <% end %>
 
-        $(function() {
-            $("#contact_info").addClass('section_highlight');
-        });
+	            <div class="section_edit">
+	                Contact information
+	            </div>
+							<%= f.fields_for :profile do |profile_form| %>
+							<div class="edit_field">
+								<div class="edit_label">
+	                <%= profile_form.label :phone %>
+								</div>					
+	              <%= profile_form.text_field :phone, :class => "phone edit_text" %>
+	            </div>
+							<div class="edit_field">
+								<div class="edit_label">
+	                <%= profile_form.label :mobile %>
+								</div>
+	              <%= profile_form.text_field :mobile, :class => "phone edit_text" %>
+	            </div>
+							<div class="edit_field">
+								<div class="edit_label">
+	                <%= profile_form.label :fax %>
+								</div>
+	              <%= profile_form.text_field :fax, :class => "phone edit_text" %>
+	            </div>
+							<div class="edit_field">
+								<div class="edit_label">
+	                <%= profile_form.label :address %>
+								</div>					
+	              <%= profile_form.text_field :address, :class => "edit_text" %>
+	            </div>
+							<div class="edit_field">
+								<div class="edit_label">
+	                <%= profile_form.label :website %>
+								</div>					
+	              <%= profile_form.text_field :website, :class => "url edit_text" %>
+	            </div>
+	
+	            <% end %>
+							<% end %>
+            <% if !params[:section].present? or params[:section].eql?("my_experience") %>
 
-      <% end %>
+							<% content_for :javascript do %>
+	
+	              $(function() {
+	                  $("#experience_info").addClass('section_highlight');
+	              });
+	
+	            <% end %>
 
-      <div class="section_edit">
-          Contact information
-      </div>
-      <%= f.fields_for :profile do |profile_form| %>
-      <div class="edit_field">
-        <div class="edit_label">
-          <%= profile_form.label :phone %>
+	            <div class="section_edit">
+	                Experience
+	            </div>
+							<div class="edit_field">
+								<%= f.fields_for :profile do |profile_form| %>
+		            <%= profile_form.text_area :experience, :maxlength => 500, :class => "edit_text" %>
+							</div>
+	            <% end %>
+            <% end %>
+>>>>>>> b66dc0400b7a7e622c03712d58edc0ae5357f8b0
         </div>
         <%= profile_form.text_field :phone, :class => "phone edit_text" %>
       </div>
@@ -115,6 +209,7 @@
         <div class="edit_label">
           <%= profile_form.label :mobile %>
         </div>
+<<<<<<< HEAD
         <%= profile_form.text_field :mobile, :class => "phone edit_text" %>
       </div>
       <div class="edit_field">
@@ -166,3 +261,7 @@
 </div>
 <br/>
 <% end %>
+=======
+				
+        <% end %>
+>>>>>>> b66dc0400b7a7e622c03712d58edc0ae5357f8b0

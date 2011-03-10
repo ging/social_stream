@@ -44,6 +44,7 @@ module SocialStream
                               joins(:actor).where('actors.name like ?',param)}
         scope :with_sent_ties,     joins(:actor => :sent_ties)
         scope :with_received_ties, joins(:actor => :received_ties)
+        scope :distinct_initials, joins(:actor).select('DISTINCT SUBSTR(actors.name,1,1) as initial')
       end
 
       module InstanceMethods
