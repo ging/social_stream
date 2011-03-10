@@ -1,11 +1,11 @@
 <% content_for :headers do  -%>
-  <%= stylesheet_link_tag 'default/carousel', 'default/smoothness/jquery-ui-1.8.4.custom',
-                          'default/ui.dropdownchecklist', 'default/' %>
+  <%= stylesheet_link_tag 'default/smoothness/jquery-ui-1.8.4.custom',
+                           'default/browse', 'default/sidebar'  %>
 <% end -%>
-
+<% javascript_include_tag 'jqcloud-0.1.3.min','ajax.paginate' %>
 
 <% content_for :sidebar do %>
-	<%= render :partial => "groups/middle_index" %>
+	<%= render :partial => "groups/sidebar_index" %>
 <% end %>
 
 <% content_for :toolbar do %>

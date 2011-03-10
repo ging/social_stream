@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title><%= yield(:title) || t('socialstream') %></title>
-    <%= stylesheet_link_tag "default/frontpage", "default/header", "default/base",
+    <%= stylesheet_link_tag "default/header","default/frontpage", "default/base",
                             "default/footer",:media => "screen, projection" %>
     <%= javascript_include_tag 'jquery', 'jquery.livequery' %>
     <link rel="shortcut icon" href="/images/icons/favicon.ico" />
@@ -19,11 +19,11 @@
   </head>
   <body>
     <div id="wrapper">
-      <%= render :partial => "header" %>
+      <%= render :partial => "frontpage/header" %>
       <div id="wrapper_body">
         <%= yield %>
       </div>
-      <%= render :partial => "sponsor" %>
+      <%= render :partial => "frontpage/sponsor" %>
       <%= render :partial => "layouts/footer" %>
     </div>
   </body>

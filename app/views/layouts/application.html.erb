@@ -3,9 +3,10 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title><%= yield(:title) || t('socialstream') %></title>
-    <%= stylesheet_link_tag "default/base", "default/header","default/index","default/home",
-                            "default/sidebar", "default/menubar", :media => "screen, projection" %>
-    <%= javascript_include_tag 'jquery', 'jquery.livequery','jquery.boxy', 'menu','ui.dropdownchecklist','jquery.form', 'jquery.fcbkcomplete.min', 'jquery.ba-url' %>
+    <%= stylesheet_link_tag "default/base", "default/header","default/index","default/home", "default/carousel",
+                            "default/sidebar", "default/toolbar","default/activities", 'default/ui.dropdownchecklist',
+                            "default/menu","default/footer", :media => "screen, projection" %>
+    <%= javascript_include_tag 'jquery', 'jquery.livequery', 'menu', 'ui.dropdownchecklist' %>
     <% if protect_against_forgery? %>
       <%= csrf_meta_tag %>
     <% end %>

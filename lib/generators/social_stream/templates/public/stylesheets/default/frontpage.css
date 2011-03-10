@@ -1,5 +1,4 @@
 /********************** BÚSQUEDA *****************/
-
 .banner_busqueda {
 	width:960px;
 	height:61px;
@@ -183,7 +182,6 @@ span.find{
 }
 #caracteristics ul li{
 	font-size:13px;
-	font-family: Helvetica;
 	line-height:18px;
 	padding:7px 0 8px 30px;
 }
@@ -193,3 +191,20 @@ li.spaces{background: transparent url("/images/frontpage/right_people.gif") no-r
 li.comments{background: transparent url("/images/frontpage/right_comments.gif") no-repeat left center;}
 li.tags{background: transparent url("/images/frontpage/right_tags.gif") no-repeat left center;}
 li.networks{background: transparent url("/images/frontpage/right_social.gif") no-repeat left center;}
+
+
+#welcome{
+  margin-top:50px;
+  margin-left:300px;
+  width:330px;
+  padding:20px;
+  border: thin solid #2A3890;
+  position: absolute;
+  text-align:center;
+
+
+}
+
+#login{
+  padding-top: 5px;
+}

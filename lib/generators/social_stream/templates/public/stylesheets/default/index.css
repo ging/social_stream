@@ -1,12 +1,4 @@
 /**********************************  body *******************************/
-#wrapper_body {
-	width: 960px;
-	display: table;
-	margin-left: auto;
-	margin-right: auto;
-	background-color: #fff;
-	border-top: thin solid #D4E4EA;
-}
 
 #others_conferences {
 	position: fixed;
@@ -27,40 +19,18 @@
 	border-bottom: thin solid #D4E4EA;
 }
 
-/********************************* EFFECT EXPAND BODY  TO SIDE *******************/
-	/* Caso Default, size of middle Middle=1, Right=1*/
 #content {
 	width: 560px;
 	border-right: thin solid #D4E4EA;
 	border-bottom: thin solid #D4E4EA;
-	vertical-align: top;
-	display: table-cell;
-	padding-top: 10px;
-	font-size: 14px;
-}
-
-#content_full {
-	width: 694px;
-	border-right: thin solid #D4E4EA;
-	border-bottom: thin solid #D4E4EA;
-	vertical-align: top;
-	display: table-cell;
-	padding-top: 10px;
-	font-size: 14px;
-}
-
-#right_full {
-	width: 255px;
-	border-color: #000;
-	vertical-align: top;
-	display: table-cell;
-	padding: 5px 5px 5px 0px;
   border-left: thin solid #D4E4EA;
-  border-bottom: thin solid #D4E4EA;
-
+	vertical-align: top;
+	display: table-cell;
+	padding-top: 10px;
+	font-size: 14px;
 }
 
-#middle {
+#sidebar {
 	width: 220px;
 	display: table-cell;
 	vertical-align: top;
@@ -69,7 +39,7 @@
 	border-right: thin solid #D4E4EA;*/
 }
 
-#right {
+#toolbar {
 	width: 160px;
 	border-color: #000;
 	vertical-align: top;
@@ -78,80 +48,11 @@
 	
 }
 
-#rightContent{
-	border-left: thin solid #D4E4EA;
-  border-bottom: thin solid #D4E4EA;
+#toolbarContent{
+/*	border-left: thin solid #D4E4EA;
+  border-bottom: thin solid #D4E4EA;*/
 }
 
-#hiddenMiddle {
-	width: 30px;
-	height: 300px;
-}
-
-#hiddenRight {
-	width: 30px;
-	height: 300px;
-}
-
-/* Caso A - Change size of middle Middle=0, Right=1*/
-#content.wideA {
-	width: 794px;
-}
-
-#middle.wideA {
-	width: 30px;
-	border-color: #000;
-}
-
-#rigth.wideA {
-	width: 136px;
-	border-color: #000;
-}
-
-#chat.wideA {
-	width: 60%;
-	height: 221px;
-	display: inline-block;
-	padding: 0px;
-	vertical-align: top;
-}
-
-/* Caso B - Change size of middle Middle=0, Right=0*/
-#content.wideB {
-	width: 896px;
-}
-
-#middle.wideB {
-	width: 20px;
-	border-color: #000;
-}
-
-#right.wideB {
-	width: 20px;
-	border-left-width: thin;
-	border-color: #000;
-}
-
-#chat.wideB {
-	width: 64%;
-	height: 221px;
-	display: inline-block;
-	padding: 0px;
-	vertical-align: top;
-}
-
-/* Caso C - Change size of middle Middle=1, Right=0*/
-#content.wideC {
-	width: 674px;
-}
-
-#middle.wideC {
-	width: 256px;
-}
-
-#right.wideC {
-	width: 30px;
-}
 
 /* Change view sprites */
 .toolbox {
@@ -430,7 +331,7 @@
 	text-align: center;
 }
 
-#logo {
+#logo_index {
 	text-align: center;
 }
 
@@ -445,8 +346,6 @@
 .photo_line {
 	text-align: center;
 }
-
-
 
 #logo_UE {
 	margin-left: 0px;

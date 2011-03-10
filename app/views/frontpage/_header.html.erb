@@ -1,6 +1,6 @@
 <div id="headerFront">
   <div class="banner_top">
-    <div id="logo"></div>
+    <div id="logo"><%= link_to(image_tag('/images/logo.png', :alt => t('socialstream')), '/'); %></div>
     <div class="div_login">
       <%= form_for User.new, :as => :user, :url => user_session_path do |f| -%>
         <span><%= f.label :email %></span>
@@ -10,7 +10,7 @@
         <%= f.submit t(:sign_in), :class => 'other_blue'%>
       <% end -%>
       <div class="subtexto">
-          <%= link_to t('sign_up'), new_user_registration_path, :class => "register_link" %>
+          <%= link_to t('sign_in'), new_user_registration_path, :class => "register_link" %>
           <span>|</span>
           <%= link_to t('forgot_password'), new_user_password_path, :class => "register_link" %>
       </div>
