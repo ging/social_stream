@@ -37,8 +37,8 @@
 						<div class="space_center">
 						</div>
                                                 <div class="letters" class="content_size">
-                                                    <% for char in 'A'..'Z' %>
-                                                      <%= link_to char,{:letter => char,:page => 1},:class => "user_letter_link" %>
+                                                    <% for g in Group.distinct_initials %>
+                                                      <%= link_to g.initial,{:letter => g.initial,:page => 1},:class => "user_letter_link" %>
                                                     <% end %>
 						</div>
 						<div class="space_center" class="content_size">

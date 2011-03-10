@@ -33,8 +33,8 @@
                                                         <%= link_to t('user.all_n', :count => User.count), users_path %>
 							</li>
 						</ul>
-                                                    <% for char in 'A'..'Z' %>
-                                                      <%= link_to char,{:letter => char,:page => 1},:class => "user_letter_link" %>
+                                                    <% for u in User.distinct_initials %>
+                                                      <%= link_to u.initial,{:letter => u.initial,:page => 1},:class => "user_letter_link" %>
                                                     <% end %>
 						</div>
 						<div class="space_center" class="content_size">
