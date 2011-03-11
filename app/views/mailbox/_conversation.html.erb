@@ -1,0 +1,16 @@
+<%= div_for (conversation) do %>
+  <div class="actor_logo">
+    <%= link_to image_tag(conversation.last_sender.logo.url(:actor),
+                          :alt => conversation.subject),
+                 "" %>
+  </div>
+  <div class="activity_content_message">
+    <div class="actor_name_message">
+      <%= link_to(conversation.subject, :action => :show, :id => conversation.id) %>
+    </div>
+    <div class="option_msg">
+      <div class="detele_message"><%= link_to ( image_tag('btn/btn_delete.png', :class=>"btn_config"), "", :confirm => 'Are you sure?', :method => :delete) %></div>
+    </div>
+  </div>
+
+<% end %>

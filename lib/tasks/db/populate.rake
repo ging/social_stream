@@ -87,6 +87,25 @@ namespace :db do
         p.post_activity.update_attributes(:created_at => p.created_at,
                                           :updated_at => p.updated_at)
       end
+      
+       # = Mailboxer
+      available_actors = Actor.all
+      
+      available_actors.each do |a|
+        actors = available_actors.dup - Array(a)
+        if (demo = User.find_by_name('demo'))
+          mail = a.send_message(demo, "Hello, #{demo.name}. How do you do?", "How about getting in touch?")
+          mail = demo.reply_to_sender(mail, "Pretty well #{a.name}, thanks. Have your children grown up?")
+          a.reply_to_sender(mail, "You can bet on that!")
+        end
+        
+        Forgery::Basic.number(:at_most => actors.size).times do
+          actor = actors.delete_at((rand * actors.size).to_i)
+          mail = a.send_message(actor, "Hello, #{actor.name}. How do you do?", "How about getting in touch?")
+          mail = actor.reply_to_sender(mail, "Pretty well #{a.name}, thanks. Have your children grown up?")
+          a.reply_to_sender(mail, "You can bet on that!")
+        end
+      end
     end
   end
 end

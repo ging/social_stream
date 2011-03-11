@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resource :representation
 
   resources :groups
+  
+  resources :mailbox, :controller => :mailbox
 
   resources :ties do
     collection do
@@ -25,5 +27,4 @@ Rails.application.routes.draw do
 
   resources :posts
   resources :comments
-  resources :messages
 end
