@@ -1,11 +1,18 @@
 /**********************************  body *******************************/
 
-#others_conferences {
-	position: fixed;
-	display: inline-block;
-	float: right;
-	text-align: right;
+#map_location {
+	padding-left: 4px;
+	display: inline;
 }
+.content_size {
+	font-size: 13px;
+}
+
+.name_group {
+	font-size: 13px;
+	font-weight: bold;
+}
+
 
 .space_center {
 	padding-top: 9px;
@@ -53,8 +60,6 @@
 }
 
 #toolbarContent{
-/*	border-left: thin solid #D4E4EA;
-  border-bottom: thin solid #D4E4EA;*/
 }
 
 

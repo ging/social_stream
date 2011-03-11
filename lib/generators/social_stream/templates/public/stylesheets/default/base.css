@@ -1,80 +1,25 @@
-* {
-	margin: 0;
-	padding: 0;
-	font-family: Arial;
-}
+/*************basic css********************/
 
-.p {
-	margin: 0px;
-	padding: 0px;
-	font-size: inherit;
-	font-family: inherit;
-	font-weight: inherit;
-	text-align: inherit;
-	color: inherit;
-	line-height: inherit;
-	vertical-align: top;
-}
+* {	margin: 0;	padding: 0;	font-family: Arial; }
+.p {	margin: 0px;	padding: 0px;	font-size: inherit;	font-family: inherit;	font-weight: inherit;
+      text-align: inherit;	color: inherit;	line-height: inherit;	vertical-align: top;}
+p {	padding-top: 0px;	margin-top: 0px;}
+img {	border: 0px;}
+div {	margin: 0px;	padding: 0px;	font-family: Helvetica;	font-size: 11px;}
+.AbsWrap {	width: 100%;	position: relative;}
+.rowWrap {	width: 100%;}
+a:link,a:visited {	color: inherit;	text-decoration: inherit;}
+a.link:hover {	text-decoration: underline;}
+.clearfloat {	clear: both;	height: 0px;}
 
-p {
-	padding-top: 0px;
-	margin-top: 0px;
-}
-
-img {
-	border: 0px;
-}
-
-div {
-	margin: 0px;
-	padding: 0px;
-	font-family: Helvetica;
-	font-size: 11px;
-}
-
-.AbsWrap {
-	width: 100%;
-	position: relative;
-}
-
-.rowWrap {
-	width: 100%;
-}
-
-a:link,a:visited {
-	color: inherit;
-	text-decoration: inherit;
-}
-
-a.link:hover {
-	text-decoration: underline;
-}
-
-.clearfloat {
-	clear: both;
-	height: 0px;
-}
 
 /******* Main Structure ***************************/
-body{
-  font-size:75%;
-  color:#2A3890;
-  background-color:#ffffff;
-}
+body{  font-size:75%;  color:#2A3890;  background-color:#ffffff;}
+#wrapper {	background-color: #f5f5f5;	margin: 0px auto;	width: 100%;}
+#wrapper_body{	width: 960px;	margin-left: auto;	margin-right: auto;  padding-bottom: 20px;  background-color:#fff;}
 
-#wrapper {
-	background-color: #f5f5f5;
-	margin: 0px auto;
-	width: 100%;
-}
 
-#wrapper_body{
-	width: 960px;
-	margin-left: auto;
-	margin-right: auto;
-  padding-bottom: 20px;
-  background-color:#fff;
-}
+
 
 /************ Buttons  ***************************/
 
@@ -220,4 +165,16 @@ input.other_blue{
   font-size: 12px;
   list-style: square;
   margin-left:10px;
+}
+
+
+
+
+
+.tie_link a{
+  text-decoration:none;
+}
+
+.tie_link a:hover{
+  text-decoration:underline;
 }
