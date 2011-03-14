@@ -1,5 +1,4 @@
-/*************basic css********************/
-
+/*************Basic ********************/
 * {	margin: 0;	padding: 0;	font-family: Arial; }
 .p {	margin: 0px;	padding: 0px;	font-size: inherit;	font-family: inherit;	font-weight: inherit;
       text-align: inherit;	color: inherit;	line-height: inherit;	vertical-align: top;}
@@ -16,165 +15,60 @@ a.link:hover {	text-decoration: underline;}
 /******* Main Structure ***************************/
 body{  font-size:75%;  color:#2A3890;  background-color:#ffffff;}
 #wrapper {	background-color: #f5f5f5;	margin: 0px auto;	width: 100%;}
-#wrapper_body{	width: 960px;	margin-left: auto;	margin-right: auto;  padding-bottom: 20px;  background-color:#fff;}
+#wrapper_body{	width: 960px;	margin-left: auto;	margin-right: auto;  padding-bottom: 20px;}
+
+
+/*********** Errors *********************/
+#notice {  padding:2px;  color:red; font-weight:bold; font-size:13px;  display:block; text-align:center;}
+
+#error_explanation {  width: 80%;  border: 2px solid red;  padding: 7px;  padding-bottom: 0;
+  margin-bottom: 20px;  background-color: #f0f0f0;  color:#fff;}
+#error_explanation h2 {  text-align: left;  font-weight: bold;  padding: 5px 5px 5px 15px;
+  font-size: 12px;  margin: -7px;  margin-bottom: 0px;  background-color: #c00; color:#fff;}
+#error_explanation ul li {  font-size: 12px;  list-style: square;  margin-left:10px;}
 
 
 
+/********* Menu header ************/
+.menu_list ul{list-style-type:none;}
+.menu_list li{display: inline;padding-right: 2px; padding-left: 2px; }
 
-/************ Buttons  ***************************/
 
-input.other_blue{
-	background:#497FC1;
-	border:0px;
-	cursor:pointer;
-  font-size:95%;
-  line-height:135%;
-  margin-right:4px;
-	color:white;
-	padding:1px;
-}
+/************Forms **************/
+input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:95%;  line-height:135%;
+  margin-right:4px;	color:white;	padding:1px;}
 
+
+/************ Forms - Buttons  ***************************/
 .myButton{
-  background-image: -webkit-gradient(
-      linear,
-      left bottom,
-      left top,
-      color-stop(0.01, rgb(116,191,67)),
-      color-stop(0.51, rgb(117,189,68)),
-      color-stop(0.76, rgb(195,222,171))
-  );
-  background-image: -moz-linear-gradient(
-      center bottom,
-      rgb(116,191,67) 1%,
-      rgb(117,189,68) 51%,
-      rgb(195,222,171) 76%
-  );
-  border-radius: 0.2em;
-  color: #fff;
-  width: 88px;
-  height: 26px;
-  border: none;
-}
+  background-image: -webkit-gradient(linear,left bottom,left top, color-stop(0.01, rgb(116,191,67)),
+      color-stop(0.51, rgb(117,189,68)),color-stop(0.76, rgb(195,222,171)));
+  background-image: -moz-linear-gradient(center bottom,rgb(116,191,67) 1%,rgb(117,189,68) 51%,
+      rgb(195,222,171) 76%);
+  border-radius: 0.2em;  color: #fff; width: 88px;  height: 26px;  border: none;}
 
-.myButton span {
-  display: block;
-  line-height: 14px;
-  padding: 5px 0 5px 18px;
-}
-
-.myButton:active {
-  background-position: bottom right;
-  color: #000;
-  outline: none;
-
-}
-
-.myButton:active span {
-  background-position: bottom left;
-  padding: 6px 0 4px 18px;
-}
-
-.myButtonLarge{
-  background-image: -webkit-gradient(
-      linear,
-      left bottom,
-      left top,
-      color-stop(0.01, rgb(116,191,67)),
-      color-stop(0.51, rgb(117,189,68)),
-      color-stop(0.76, rgb(195,222,171))
-  );
-  background-image: -moz-linear-gradient(
-      center bottom,
-      rgb(116,191,67) 1%,
-      rgb(117,189,68) 51%,
-      rgb(195,222,171) 76%
-  );
-  border-radius: 0.2em;
-  color: #fff;
-  width: 200px;
-  height: 26px;
-  border: none;
-}
-
-.myButtonLarge span {
-  display: block;
-  line-height: 14px;
-  padding: 5px 0 5px 18px;
-}
-
-.myButtonLarge:active {
-  background-position: bottom right;
-  color: #000;
-  outline: none;
-}
-
-.myButtonLarge:active span {
-  background-position: bottom left;
-  padding: 6px 0 4px 18px;
-}
-
-.field_x{
-  border: thin solid #005C84;
-  width: 130px;
-}
-
-.line{
-  display:block;
-  margin:10px 2px 10px 10px;
-}
-
-.label_div{
-  display:inline-block;
-  width:50%;
-}
-
-.field_div{
-  display:inline;
-  padding: 0px;
-  width:50%;
-}
-
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: inline-block;
-}
-
-#error_explanation {
-  width: 80%;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 0;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
-  color:#fff;
-}
-
-#error_explanation h2 {
-  text-align: left;
-  font-weight: bold;
-  padding: 5px 5px 5px 15px;
-  font-size: 12px;
-  margin: -7px;
-  margin-bottom: 0px;
-  background-color: #c00;
-  color:#fff;
-}
-
-#error_explanation ul li {
-  font-size: 12px;
-  list-style: square;
-  margin-left:10px;
-}
+.myButton span {  display: block;  line-height: 14px;  padding: 5px 0 5px 18px;}
+.myButton:active {  background-position: bottom right;  color: #000;  outline: none;}
+.myButton:active span {  background-position: bottom left;  padding: 6px 0 4px 18px;}
+.myButtonLarge{  background-image: -webkit-gradient(linear,left bottom,left top,
+          color-stop(0.01, rgb(116,191,67)),color-stop(0.51, rgb(117,189,68)),
+          color-stop(0.76, rgb(195,222,171))  );
+          background-image: -moz-linear-gradient(center bottom,rgb(116,191,67) 1%,
+          rgb(117,189,68) 51%,rgb(195,222,171) 76%);
+          border-radius: 0.2em;color: #fff; width: 200px; height: 26px; border: none;}
+.myButtonLarge span {  display: block;  line-height: 14px;  padding: 5px 0 5px 18px;}
+.myButtonLarge:active {  background-position: bottom right;  color: #000;  outline: none;}
+.myButtonLarge:active span {  background-position: bottom left;  padding: 6px 0 4px 18px;}
 
 
+.field_x{  border: thin solid #005C84;  width: 130px;}
+.line{  display:block;  margin:10px 2px 10px 10px;}
+.label_div{  display:inline-block;  width:50%;}
+.field_div{  display:inline;  padding: 0px;  width:50%;}
 
 
+/********* links **********/
+.tie_link a{  text-decoration:none;}
+.tie_link a:hover{  text-decoration:underline;}
 
-.tie_link a{
-  text-decoration:none;
-}
 
-.tie_link a:hover{
-  text-decoration:underline;
-}

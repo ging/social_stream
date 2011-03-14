@@ -1,31 +1,19 @@
-
-<% cont=0; %>
 <% @users.each do |user| %>
-
-	<% if (cont%2) == 0
-			cont+=1; %>
-	  	<div class="wrap_post">
-	<% end %>
-
-			<div class="post_browse">
-			<div class="post_picture"><%= link_to (image_tag(user.logo.url , :size => "50x50", :alt => user.name )),user  %></div>
-			<div class="post_browse_content_people content_size">
-				<div class="post_browse_title content_size" ><%=link_to(user.name, user)%></div>
-                                <div class="content_size">
-                                  <%= ties_to(user) %>
-                                </div>
-			</div>
-			</div>
-
-	<% if ((cont%2) == 0) 	%>
-			</div>
-	<% end %>
-
+  <div class="block_label">
+    <div class="block_logo">
+      <%= link_to (image_tag(user.logo.url , :size => "50x50", :alt => user.name )),user  %>
+    </div>
+    <div class="sub-block_content">
+      <div class="block_name" >
+        <%=link_to(user.name, user)%>
+      </div>
+      <div class="block_link">
+        <%= ties_to(user) %>
+      </div>
+    </div>
+  </div>
 <% end %>
 
-
-<% if ((cont%2) != 0) 	%>
-		</div>
-<% end %>
-
-<%= will_paginate @users %>
+<div class="block_row">
+  <%= will_paginate @users %>
+</div>

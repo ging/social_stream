@@ -15,14 +15,14 @@
 <%= form_for(@user, :remote => true) do |f| %>
 <% if @user.errors.any? %>
 <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-    <ul>
-        <% @user.errors.full_messages.each do |msg| %>
-        <li>
-            <%= msg %>
-        </li>
-        <% end %>
-    </ul>
+  <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+  <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+    <li>
+        <%= msg %>
+    </li>
+    <% end %>
+  </ul>
 </div>
 <% end %>
 
@@ -69,12 +69,12 @@
       </div>
       <%= profile_form.text_field( :birthday , :class => "date edit_text") %>
     </div>
-				<% content_for :javascript do %>
-              $(function() {         
-									$("#content").css('border-bottom', 'none');
-                  $(".edit_user").validate();              
-              }); 
-				<% end %> 
+    <% content_for :javascript do %>
+          $(function() {
+              $("#content").css('border-bottom', 'none');
+              $(".edit_user").validate();
+          });
+    <% end %>
 
         <div class="field">
             <% if !params[:section].present? or params[:section].eql?("about_me") %>

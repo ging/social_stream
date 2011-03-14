@@ -1,5 +1,5 @@
-#sponsor-wrapper{ text-align:right; vertical-align:middle; padding-bottom: 5px;}
-#sponsor{width:960px;margin:0 auto;color:#666;}
+#sponsor-wrapper{ text-align:right; vertical-align:middle;}
+#sponsor{width:960px;margin:0 auto;color:#666; }
 
 #footer{width: 960px;margin-left: auto;margin-right: auto;padding: 0;position: relative; text-align:center;
 	clear:left;font-size:0.9166em;line-height:1.6363;color:#666;padding:0.75em 0;}
@@ -15,43 +15,10 @@
 #footer_right{ font-size: 10px; line-height: 1.1em;}
 
 
-#footerFront {
-	width: 100%;
-	padding: 0;
-	background: #E1EEF5;
-}
-
-.banner_footer {
-	width: 960px;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 0;
-	position: relative;
-}
-
-.banner_footer #footer_content {
-	text-align: center;
-	color: #ccc;
-}
-
-.banner_footer {
-	width: 960px;
-	color: #0656a4;
-	margin-left: auto;
-	margin-right: auto;
-	padding-top: 2px;
-	position: relative;
-}
-
-.banner_footer .a_border {
-	border-right: thin solid;
-	color: #0656a4;
-	padding: 0px 7px;
-	text-decoration: underline;
-}
-
-.banner_footer a {
-	color: #0656a4;
-	padding: 0px 7px;
-	text-decoration: underline;
-}
+#footerFront {	width: 100%;	padding: 0;	background: #E1EEF5;}
+.banner_footer { width: 960px;	margin-left: auto;	margin-right: auto;	padding: 0;	position: relative;}
+.banner_footer #footer_content {	text-align: center;	color: #ccc;}
+.banner_footer {	width: 960px;	color: #0656a4;	margin-left: auto;	margin-right: auto;	padding-top: 2px;
+	position: relative;}
+.banner_footer .a_border {	border-right: thin solid;	color: #0656a4;	padding: 0px 7px;	text-decoration: underline;}
+.banner_footer a {	color: #0656a4;	padding: 0px 7px;	text-decoration: underline;}

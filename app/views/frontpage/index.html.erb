@@ -1,7 +1,7 @@
 <div class="banner_busqueda">
   <div id="espacio_busqueda">
     <% flash.each do |name, msg| %>
-      <div class="<%= name %>"><%= msg %></div>
+      <div id="<%= name %>"><%= msg %></div>
     <% end %>
   </div>
   <%= render :partial => "search" %>

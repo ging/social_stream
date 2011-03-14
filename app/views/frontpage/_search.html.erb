@@ -1,17 +1,17 @@
-<div class="div_busqueda">
-    <ul class="menu1">
-      <li>
-        <%=link_to t('explorar'), '#'%>
-      </li>
-      <li> | </li>
-      <li>
-        <%=link_to t('help'),'#'%>
-      </li>
-    </ul>
-    <div id="form_busqueda">
-    <%= form_tag('#') do -%>
-        <%= text_field_tag 'name' %>
-        <%= submit_tag (t('find'), :class => 'other_blue')  %>
-    <% end %>
-    </div>
+<div class="div_busqueda menu_list">
+  <ul>
+    <li>
+      <%=link_to t('explorar'), '#'%>
+    </li>
+    <li> | </li>
+    <li>
+      <%=link_to t('help'),'#'%>
+    </li>
+  </ul>
+  <div id="form_busqueda">
+  <%=form_tag('#') do -%>
+      <%=text_field_tag'name' %>
+      <%=submit_tag(t('find'), :class => 'other_blue')  %>
+  <% end %>
+  </div>
 </div>
