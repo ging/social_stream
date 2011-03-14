@@ -13,13 +13,18 @@ module SocialStream
     # responsible for adding subject features to each model.
     module Subject
       extend ActiveSupport::Concern
-
+      
       included do
         belongs_to :actor,
                    :validate => true,
                    :autosave => true
-
-        delegate :name, :name=,
+        
+        delegate :mailbox, :send_message,
+        :reply, :reply_to_sender,
+        :reply_to_all, :reply_to_conversation,
+        :read_mail, :unread_mail,
+        :read_converation,
+        :name, :name=,
                  :email, :email=,
                  :permalink,
                  :logo, :logo=,
@@ -32,40 +37,40 @@ module SocialStream
                  :suggestions, :suggestion,
                  :home_wall, :profile_wall,
                  :to => :actor!
-
+        
         has_one :profile, :through => :actor
-
+        
         accepts_nested_attributes_for :profile
-
+        
         validates_presence_of :name
-
+        
         scope :alphabetic, includes(:actor).order('actors.name')
         scope :search, lambda{|param|
-                              joins(:actor).where('actors.name like ?',param)}
+          joins(:actor).where('actors.name like ?',param)}
         scope :with_sent_ties,     joins(:actor => :sent_ties)
         scope :with_received_ties, joins(:actor => :received_ties)
         scope :distinct_initials, joins(:actor).select('DISTINCT SUBSTR(actors.name,1,1) as initial')
       end
-
+      
       module InstanceMethods
         def actor!
           actor || build_actor(:subject_type => self.class.to_s)
         end
-
+        
         def to_param
           permalink
         end
       end
-
+      
       module ClassMethods
         def find_by_permalink(perm)
           joins(:actor).where('actors.permalink' => perm).first
         end
-
+        
         def find_by_permalink!(perm)
           find_by_permalink(perm) ||
-            raise(ActiveRecord::RecordNotFound)
-        end
+          raise(ActiveRecord::RecordNotFound)
+        end 
       end
     end
   end

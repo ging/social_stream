@@ -230,29 +230,6 @@ class CreateSocialStream < ActiveRecord::Migration
     add_foreign_key "ties", "relations", :name => "ties_on_sender_id"
     
     add_foreign_key "users", "actors", :name => "users_on_actor_id"
-    
-    #Mailboxer
-    create_table :mailboxer_conversations, :force => true do |t|
-      t.column :subject, :string, :default => ""
-      t.column :created_at, :datetime, :null => false
-    end    
-    create_table :mailboxer_mails, :force => true do |t|
-      t.references :receiver, :polymorphic => true
-      t.column :mailboxer_message_id, :integer, :null => false
-      t.column :read, :boolean, :default => false
-      t.column :trashed, :boolean, :default => false
-      t.column :mailbox_type, :string, :limit => 25
-      t.column :created_at, :datetime, :null => false
-    end    
-    create_table :mailboxer_messages, :force => true do |t|
-      t.column :body, :text
-      t.column :subject, :string, :default => ""
-      t.column :headers, :text
-      t.references :sender, :polymorphic => true
-      t.column :mailboxer_conversation_id, :integer
-      t.column :sent, :boolean, :default => false
-      t.column :created_at, :datetime, :null => false
-    end    
   end
   
   
@@ -306,10 +283,6 @@ class CreateSocialStream < ActiveRecord::Migration
     drop_table :tags_activity_objects
     drop_table :ties
     drop_table :users
-    
-    #Mailboxer
-    drop_table :mailboxer_mails
-    drop_table :mailboxer_conversations
-    drop_table :mailboxer_messages
+
   end
 end
