@@ -8,6 +8,8 @@ require 'stringex'
 require 'nested_set'
 # Hierarchical relationships in Activity:
 require 'ancestry'
+# Messages
+require 'mailboxer'
 # User authentication
 require 'devise'
 # Authorization
