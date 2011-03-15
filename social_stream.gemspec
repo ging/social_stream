@@ -32,4 +32,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('forgery', '~> 0.3.6')
   s.add_development_dependency('ci_reporter', '~> 1.6.4')
   s.add_development_dependency('nifty-generators','~> 0.4.5')
+  
+  #mailboxer  
+  s.add_runtime_dependency('mailboxer','~> 0.0.4')
 end

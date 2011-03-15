@@ -1,0 +1,23 @@
+<% content_for :sidebar do %>
+  <%= render :partial => 'home/sidebar' %>
+<% end %>
+
+<% content_for :toolbar do %>
+  <%= render :partial => "home/toolbar" %>
+<% end %>
+
+<%= render :partial => 'location' %>
+
+<br class="clearfloat" />
+<div class="space_center">
+</div>
+
+<div id="new_message" ><%= link_to 'Back', :action=>:index %></div>
+<div class="space_center">
+</div>
+<div class="space_center">
+</div>
+<div id="conversation">  
+<% content_for :head, stylesheet_link_tag("message", :media => "screen, projection") %>
+  <%= render :partial => 'conversation_complete', :locals =>{:conversation => @conversation} %>
+</div>

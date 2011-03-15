@@ -1,51 +1,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title><%= yield :title %></title>
-        <%= stylesheet_link_tag "frontpage", :media => "screen, projection" %>
-        <%= javascript_include_tag 'jquery', 'jquery.livequery' %>
-        <script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {
-				<%= yield :javascript%>
-			});
-			
-        </script>		
-		<%= yield :headers %>
-    </head>
-    <body>
-        <div id="site">
-            <%= render :partial => "header" %>
-            <div id="home">
-                <div id="header">
-                    <div class="banner_busqueda">
-                        <div id="espacio_busqueda">
-                            <% flash.each do |name, msg| %>
-                            <div id="<%= name %>">
-                                <%= msg %>
-                            </div>
-                            <% end %>
-                        </div>
-                        <div class="div_busqueda">
-                            <div id="subtexto_busqueda">
-                                <%=link_to t("browse"), groups_path,:class => "show_all_link" %>
-                            </div>
-                            <%= yield :search %>
-                        </div>
-                        <br class="clearfloat" />
-                    </div>
-                </div>
-                <div id="content">
-                    <%= yield %>
-                </div>
-            </div>
-            <div id="sponsor-wrapper">
-                <%= render :partial => "sponsor" %>
-            </div>
-            <div id="footer-wrapper">
-                <%= render :partial => "layouts/footer" %>
-            </div>
-        </div>
-
-    </body>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title><%= yield(:title) || t('socialstream') %></title>
+    <%= stylesheet_link_tag "default/header","default/frontpage", "default/base",
+                            "default/footer",:media => "screen, projection" %>
+    <%= javascript_include_tag 'jquery', 'jquery.livequery' %>
+    <link rel="shortcut icon" href="/images/icons/favicon.ico" />
+    <% if protect_against_forgery? %>
+      <%= csrf_meta_tag %>
+    <% end %>
+    <script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+      <%= yield :javascript%>
+    });
+    </script>
+    <%= yield :headers %>
+  </head>
+  <body>
+    <div id="wrapper">
+      <%= render :partial => "frontpage/header" %>
+      <div id="wrapper_body">
+        <%= yield %>
+      </div>
+      <%= render :partial => "frontpage/sponsor" %>
+      <%= render :partial => "layouts/footer" %>
+    </div>
+  </body>
 </html>

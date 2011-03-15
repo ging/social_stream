@@ -1,58 +1,47 @@
-<% content_for :head, stylesheet_link_tag("users") %>
-
-
-<% content_for :middle do %>
-	<%= render :partial => "users/middle_index" %>
+<% content_for :headers do %>
+  <%= javascript_include_tag 'ajax.paginate' %>
 <% end %>
 
-<% content_for :right do %>
-	<%= render :partial => "users/right_index" %>
+<% content_for :toolbar do %>
+	<%= render :partial => "users/toolbar_index" %>
 <% end %>
 
+<% content_for :sidebar do %>
+	<%= render :partial => "users/sidebar_index" %>
+<% end %>
 
 <div id="map_location" class="content_size">
   Your are here ><img src="images/btn/btn_browse.png" class="btn_config" /> <%= t('browse') %>: <span id="name_group"><%= t('user.other')%></span>
 </div>
-<div id="by_options" class="content_size"><%=link_to(t('group.by'),groups_path)%></div>
-<br class="clearfloat" />
-<div class="space_center">
-</div>
+
+<div id="by_options" class="block_label_right content_size"><%=link_to(t('group.by'),groups_path)%></div>
+
+<div class="space_center"></div>
 
 <div id="my_conferences">
-		<div id="tabconference_browse" class="widget content_size">
-
-				<div id="contacts" class="tabconference_browse">
-						<div class="space_center">
-						</div>
-                                                <div class="search_field_wrapper"><input type="text" value="Search by name" id="search_field" class="search_input" /><%= image_tag("btn/search.png",:size=>"20x20",:id=>"search_button") %></div>
-                                                <div class="space_center">
-						</div>
-						<div class="letters" class="content_size">
-						<ul class="tabconference_browse">
-							<li>
-                                                        <%= link_to t('user.all_n', :count => User.count), users_path %>
-							</li>
-						</ul>
-                                                    <% for u in User.distinct_initials %>
-                                                      <%= link_to u.initial,{:letter => u.initial,:page => 1},:class => "user_letter_link" %>
-                                                    <% end %>
-						</div>
-						<div class="space_center" class="content_size">
-
-						</div>
-                                  <div id="list_users_ajax">
-                                                  <%= render :partial => "users/index"%>
-                                  </div>
-						<div class="space_center">
-						</div>
-				</div>
-
-
-</div>
+  <div id="contacts">
+    <div class="search_field_wrapper">
+      <input type="text" value="Search by name" id="search_field" class="search_input" />
+      <%= image_tag("btn/search.png",:size=>"20x20",:id=>"search_button") %>
+    </div>
+    <div class="space_center"></div>
+    <div class="block_row" >
+      <div class="block_center">
+        <%= link_to t('user.all_n', :count => User.count), users_path %> -
+        <% for u in User.distinct_initials %>
+          <%= link_to u.initial,{:letter => u.initial,:page => 1},:class => "user_letter_link" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="space_center"></div>
+    <div id="list_users_ajax" class="block_tab_content">
+      <%= render :partial => "users/index"%>
+    </div>
+    <div class="space_center"></div>
+  </div>
 </div>
 
- 
-<br class="clearfloat" />
-<div class="space_center">
-</div>
-<%= javascript_include_tag "ajax.paginate" %>
+
+<div class="space_center"></div>
+
+

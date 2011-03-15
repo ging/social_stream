@@ -1,0 +1,15 @@
+div#wordcloud {  color: #09f;  overflow: hidden;  position: relative;  width: 200px;  height: 200px; }
+div#wordcloud a {  color: inherit;  text-decoration: none;}
+div#wordcloud a:hover {  color: #0df;}
+div#wordcloud a:hover {  color: #0cf;}
+div#wordcloud span {  padding: 0;}
+div#wordcloud span.w10 {font-size: 44px; color: #1F4A75;}
+div#wordcloud span.w9 { font-size: 40px; color: #0cf; }
+div#wordcloud span.w8 { font-size: 34px; color: #0cf; }
+div#wordcloud span.w7 { font-size: 30px; color: #0cf; }
+div#wordcloud span.w6 { font-size: 24px; color: #90c5f0;}
+div#wordcloud span.w5 { font-size: 20px; color: #90a0dd;}
+div#wordcloud span.w4 { font-size: 14px; color: #90c5f0;}
+div#wordcloud span.w3 { font-size: 10px; color: #a0ddff;}
+div#wordcloud span.w2 { font-size: 4px;  color: #99ccee;}
+div#wordcloud span.w1 { font-size: 1px;  color: #aab5f0;}

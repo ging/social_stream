@@ -12,6 +12,8 @@
 class Actor < ActiveRecord::Base
   @subtypes_name = :subject
   include SocialStream::Models::Supertype
+  
+  acts_as_messageable
 
   validates_presence_of :name, :subject_type
 

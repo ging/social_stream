@@ -1,0 +1,181 @@
+/******** MAIN Structure home *********/
+#content {
+	width: 560px;
+	border-right: thin solid #D4E4EA;
+	border-bottom: thin solid #D4E4EA;
+  border-left: thin solid #D4E4EA;
+	vertical-align: top;
+	display: table-cell;
+	padding-top: 10px;
+	font-size: 14px;
+}
+#sidebar {width: 220px;	display: table-cell;vertical-align: top;}
+#sidebarContent{  padding-left:3px; padding-right:3px;}
+#toolbar {	width: 160px;	border-color: #000;	vertical-align: top;	display: table-cell;padding: 5px 5px 5px 5px;}
+#toolbarContent{}
+#wrapper_body{background-color:#fff}
+#sponsor{background-color:#fff}
+
+/********* HOME ******/
+#map_location {padding-left: 4px;	display: inline-block; }
+.content_size {font-size: 13px;}
+.space_center {	padding-top: 9px;	padding-right: 4px;	text-align: center;}
+.space_center_border {	padding-top: 8px;	padding-right: 4px;	border-bottom: thin solid #D4E4EA;}
+#logo_index { text-align: center;}
+
+/************** BLOCK DIV *****************/
+.block_div{}
+.block_header{vertical-align: middle;	background: transparent url(/images/title_background.png) scroll 0px;
+	padding-left: 10px;	display: block;  height:20px;}
+.block_header_icon{ margin-top: 2px;  width:14px;  height:14px; }
+.block_header_icon_right {	float: right;	padding-right: 5px;	padding-top: 3px;}
+.block_header_text {	margin-bottom: 3px;	display: inline-block;}
+.block_content{ padding: 5px 4px 5px 4px;}
+.block_row {	display: block;}
+.block_logo{ 	display: inline-block; vertical-align:top;}
+.sub-block_content{	display: inline-block;  padding-left:3px; width:70%; text-align:left;}
+.block_brief {	color: #6C6D6F;}
+.block_close {  float:right;  vertical-align:top;}
+.block_title{ display:inline-block; }
+.block_label{  display:inline-block;  width:49%;}
+.block_field{  display:inline;  padding: 0px;  width:50%;}
+.block_center{ text-align:center;}
+
+
+
+/************** tabs div ***********/
+.block_tab{}
+
+
+
+
+/*****************MENU****************/
+ul.menu, ul.menu ul {list-style-type:none;  margin: 0;  padding: 0;  width: 15em;}
+ul.menu a {  display: block;  text-decoration: none;  vertical-align:middle;}
+.menu_icon{	vertical-align: top;	padding-bottom: 0px;	padding-right: 3px;  padding-left: 3px;	display: inline;}
+ul.menu li { margin-top: 1px;  border-bottom: thin solid #D4E4EA;}
+ul.menu li a, ul.menu ul.menu li a {  background: #fff;  color: #2A3890;  padding: 0.3em;}
+ul.menu li a:hover, ul.menu ul.menu li a:hover {  background: #DEEFF8;  color: #2A3890;  text-decoration:none;}
+ul.menu li ul li a, ul.menu ul.menu li ul li a {  background: #fff;  color: #2A3890;  padding-left: 20px;
+}
+/*color para el submenu*/
+ul.menu li ul li a:hover, ul.menu ul.menu li ul li a:hover {  background: #DEEFF8;  border-left: 5px #2A3890 solid;
+  padding-left: 15px;  text-decoration:none;}
+ul.menu ul.menu li a:hover {    border-left: 0;    padding-left: 0.5em;}
+ul.menu ul.menu {    border-left: 5px #1F4A75 solid;}
+ul.menu a.active, ul.menu ul.menu li a.active, ul.menu a.active:hover, ul.menu ul.menu li a.active:hover {
+    text-decoration: none;    background: #DEEFF8;    border: #2A3890 1px solid;    color: #2A3890;}
+div.panel {    border: 1px #2A3890 solid;    padding: 5px;    margin-top: 0px;}
+ul.menu div.panel a, ul.menu div.panel li a:hover  {    display :inline;    color: #DEEFF8;    background: none;
+    margin: 0; padding: 0;    border: none;    font-weight: bold;}
+ul.menu div.panel a:hover {    color: #2A3890;    text-decoration: underline;}
+.menu_header{  border-bottom: thin solid #D4E4EA;  width:14.5em;  padding-left:3px;  padding-right:3px;}
+
+
+/************GROUPS HOME*****/
+#my_groups {	width: 100%;}
+.group{  display:inline-block;  width:50px;}
+#groups_list {	width: 100%;	padding-bottom: 5px;	text-align: center;  display: inline-block;}
+#groups_title {	width: 100%;	padding-left: 5px;	font-weight: bold;}
+.group_title a{  display:block;  font-size:9px;  text-decoration:none;  text-align:center;}
+.group_title a:hover{  display:block;  text-decoration:underline;}
+.group_content{  display:block;  text-align:center;}
+.btn_group{  vertical-align:top;}
+
+
+
+.browse_letter{	text-align:center;}
+.block_tab_content{ padding:5px; text-align:center;}
+.block_tab li { display: inline; list-style: none;	padding-right: 2px;}
+.block_tab li a {	background-color: #deeff8;	text-decoration: none;	padding: 4px 3px;	outline: none;}
+.block_tab ul {	background: #deeff8;}
+.block_tab li a:hover,
+.block_tab li.ui-tabs-nav a,
+.block_tab li.ui-tabs-selected a,
+.block_tab li a:active	{	background-color: #deeff8;	font-weight: bold;	text-decoration: none;}
+.block_tab_browse{
+	width:49%;
+	display:inline-block;
+}
+
+
+.post_browse_title{
+	font-weight:bold;
+}
+.post_picture{
+	display:inline-block;
+	vertical-align:top;
+}
+.post_browse_content{
+	display:inline-block;
+	width: 80%;
+}
+
+.post_browse_content_people{
+  display:inline-block;
+}
+
+
+#title-categories{
+  background-color: #deeff8;
+	padding: 3px;
+
+}
+#content-categories{
+	padding: 5px;
+	text-align:center;
+}
+.item-category{
+	display: inline;
+}
+
+
+
+.tabconference_browse {
+	margin-top: 2px;
+	/*border-top: thin solid #D4E4EA;*/
+	padding: 2px 0px 2px 0px;
+}
+
+.tabconference_browse fondo {
+	background-color: #deeff8;
+}
+
+
+
+#title-conferences, #title-top-conferences {
+	text-align: center;
+}
+
+.middle {
+	vertical-align: top;
+}
+
+.conferencex {
+	font-size: 13px;
+	display: inline-block;
+	padding-top: 5px;
+	vertical-align: inherit;
+}
+
+.conference_content {
+	color: #6C6D6F;
+	font-size: 11px;
+}
+
+.conference_right {
+
+  display: inline-block;
+  padding-top: 5px;
+  vertical-align: inherit;
+	text-align:center;
+	width:100%;
+}
+.right_title{
+	font-size:13px;
+	font-weight:bold;
+	text-align: center;
+	padding-top: 5px;
+}
+
+

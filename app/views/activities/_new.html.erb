@@ -1,5 +1,6 @@
 <% if receiver.sent_ties_allowing(current_subject, 'create', 'activity').any? %>
   <% content_for :javascript do %>
+
     securityImage = "<%= escape_javascript(image_tag('btn/btn_security.png', :id => 'security_image', :alt => 'security')) %>";
     downImage = "<%= escape_javascript(image_tag('btn/btn_down.png')) %>";
 

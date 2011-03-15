@@ -1,0 +1,14 @@
+<% content_for :sidebar do %>
+  <%= render :partial => 'home/sidebar' %>
+<% end %>
+
+<% content_for :toolbar do %>
+  <%= render :partial => "home/toolbar" %>
+<% end %>
+
+
+<h1>New message</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', messages_path %>

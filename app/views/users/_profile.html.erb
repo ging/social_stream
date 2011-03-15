@@ -1,170 +1,157 @@
-			<% content_for :head do %>
-          <%= stylesheet_link_tag "edit_user", :media => "screen, projection" %>          
-        <% end %>				
-      <div class="space_center"></div>
-			<div class="space_center"></div>
-			<div class="space_center"></div>
-		  <div class="future_conference" id="personal_info" >
-				<div class="future_header">
-						<div class="title_section">
-								Personal Information
-						</div>
-						<div class="title_righ">
-								
-								<%= link_to "Edit", :controller => :users, :action => :edit, :section => :about_me %>
-								
-						</div>
-				</div>
-				<div class="post_future_conference"  >
-					<% if @user.profile.organization? %>
-						<div class="info_post">
-								<div class="info_left">
-										Organization:
-								</div>
-								<div class="info_right">
-										<%=h @user.profile.organization %>
-								</div>
-						</div>
-					<%end%>
-					<% if @user.profile.birthday? %>
-						<div class="info_post">
-								<div class="info_left">
-										BirthDay:
-								</div>
-								<div class="info_right">
-									<%=h I18n.l @user.profile.birthday, :format => :long %>
-								</div>
-						</div>
-						<div class="info_post">
-								<div class="info_left">
-										Age:
-								</div>
-								<div class="info_right">
-										<%=h @user.age %>
-								</div>
-						</div>
-					<%end%>
-					<% if @user.profile.city? %>
-						<div class="info_post">
-								<div class="info_left">
-										Actual City:
-								</div>
-								<div class="info_right">
-										<%=h @user.profile.city %>
-										<% if @user.profile.country? %>
-										  , <%=@user.profile.country%>
-										<%end%>
-								</div>
-						</div>
-					<%end%>
-					<% if @user.profile.description? %>
-						<div class="info_post">
-                <div class="info_left">
-                    About me:
-                </div>
-                <div class="info_right">
-                    <%=h @user.profile.description %>
-                </div>
-            </div>
-					<%end%>
-				</div>
-		  </div>
+<div class="space_center"></div>
 
-		  <div class="future_conference" id="contact_info">
-				<div class="future_header">
-						<div class="title_section">
-								Contact Information
-						</div>
-						<div class="title_righ">
-								<%= link_to "Edit", :controller => :users, :action => :edit, :section => :contact_info %>
-						</div>
-				</div>
-				<div class="post_future_conference">
-						<div class="future_content">
-							<% if @user.profile.phone? %>
-							   <div class="info_post">
-                    <div class="info_left">
-                        Phone
-                    </div>
-                    <div class="info_right">
-                        <%=h @user.profile.phone %>
-                    </div>
-                </div>
-							<%end%>
-							<% if @user.profile.mobile? %>
-								<div class="info_post">
-                    <div class="info_left">
-                        Mobile
-                    </div>
-                    <div class="info_right">
-                        <%=h @user.profile.mobile %>
-                    </div>
-                </div>
-							<%end%>
-							<% if @user.profile.fax? %>
-								<div class="info_post">
-                    <div class="info_left">
-                        Fax
-                    </div>
-                    <div class="info_right">
-                        <%=h @user.profile.fax %>
-                    </div>
-                </div>
-							<%end%>
-							<% if @user.profile.address? %>
-								<div class="info_post">
-                    <div class="info_left">
-                        Address
-                    </div>
-                    <div class="info_right">
-                        <%=h @user.profile.address %>
-                    </div>
-                </div>
-							<%end%>
-							<% if @user.profile.website? %>
-								<div class="info_post">
-										<div class="info_left">
-												Website
-										</div>
-										<div class="contact_link">
-												<a href="<%=h @user.profile.website %>"><%=h @user.profile.website %></a>
-										</div>
-								</div>
-							<%end%>
-							
-								<div class="info_post">
-                    <div class="info_left">
-                        E-mail
-                    </div>
-                    <div class="info_center">
-                        <%=h @user.email %>
-                    </div>
-                </div>
-						</div>
-				</div>
-		  </div>
+<div class="block_div" id="personal_info" >
+  <div class="block_header">
+    <div class="block_header_text">
+      Personal Information
+    </div>
+    <div class="block_header_icon_right">
+      <%= link_to (image_tag('/images/btn/edit.png')), :controller => :users, :action => :edit, :section => :about_me %>
+    </div>
+  </div>
+  <div class="block_content"  >
+    <% if @user.profile.organization? %>
+      <div class="block_row">
+        <div class="block_label">
+          Organization:
+        </div>
+        <div class="block_field">
+            <%=h @user.profile.organization %>
+        </div>
+      </div>
+    <%end%>
+    <% if @user.profile.birthday? %>
+      <div class="block_row">
+        <div class="block_label">
+            BirthDay:
+        </div>
+        <div class="block_field">
+          <%=h I18n.l @user.profile.birthday, :format => :long %>
+        </div>
+      </div>
+      <div class="block_row">
+        <div class="block_label">
+            Age:
+        </div>
+        <div class="block_field">
+            <%=h @user.age %>
+        </div>
+      </div>
+    <%end%>
+    <% if @user.profile.city? %>
+      <div class="block_row">
+        <div class="block_label">
+            Actual City:
+        </div>
+        <div class="block_field">
+          <%=h @user.profile.city %>
+          <% if @user.profile.country? %>
+            , <%=@user.profile.country%>
+          <%end%>
+        </div>
+      </div>
+    <%end%>
+    <% if @user.profile.description? %>
+      <div class="block_row">
+        <div class="block_label">
+            About me:
+        </div>
+        <div class="block_field">
+            <%=h @user.profile.description %>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>
 
-		  <div class="future_conference" id="experience_info">
-				<div class="future_header">
-						<div class="title_section">
-								Experience
-						</div>
-						<div class="title_righ">
-								<%= link_to "Edit", :controller => :users, :action => :edit, :section => :my_experience %>
-						</div>
-				</div>
-				<div class="post_future_conference">
-						<div class="future_content">
-								<div class="info_post">
-										
-										<div class="info_center">
-												<%=h @user.profile.experience %>
-										</div>
-								</div>
-								
-						</div>
-				</div>
-		 </div>
+<div class="block_div" id="contact_info">
+  <div class="block_header">
+    <div class="block_header_text">
+      Contact Information
+    </div>
+    <div class="block_header_icon_right">
+      <%= link_to (image_tag('/images/btn/edit.png')), :controller => :users, :action => :edit, :section => :contact_info %>
+    </div>
+  </div>
+  <div class="block_content">
+      <% if @user.profile.phone? %>
+        <div class="block_row">
+          <div class="block_label">
+            Phone
+          </div>
+          <div class="block_field">
+            <%=h @user.profile.phone %>
+          </div>
+        </div>
+      <%end%>
+      <% if @user.profile.mobile? %>
+        <div class="block_row">
+          <div class="block_label">
+            Mobile
+          </div>
+          <div class="block_field">
+            <%=h @user.profile.mobile %>
+          </div>
+        </div>
+      <%end%>
+      <% if @user.profile.fax? %>
+        <div class="block_row">
+          <div class="block_label">
+            Fax
+          </div>
+          <div class="block_field">
+            <%=h @user.profile.fax %>
+          </div>
+        </div>
+      <%end%>
+      <% if @user.profile.address? %>
+        <div class="block_row">
+          <div class="block_label">
+            Address
+          </div>
+          <div class="block_field">
+            <%=h @user.profile.address %>
+          </div>
+        </div>
+      <%end%>
+      <% if @user.profile.website? %>
+        <div class="block_row">
+          <div class="block_label">
+            Website
+          </div>
+          <div class="block_field">
+            <a href="<%=h @user.profile.website %>"><%=h @user.profile.website %></a>
+          </div>
+        </div>
+      <%end%>
+
+      <div class="block_row">
+        <div class="block_label">
+          E-mail:
+        </div>
+        <div class="block_field">
+          <%=h @user.email %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block_div" id="experience_info">
+    <div class="block_header">
+      <div class="block_header_text">
+        Experience
+      </div>
+      <div class="block_header_icon_right">
+        <%= link_to (image_tag('/images/btn/edit.png')), :controller => :users, :action => :edit, :section => :my_experience %>
+      </div>
+    </div>
+    <div class="block_content">
+      <div class="block_row">
+        <%=h @user.profile.experience %>
+      </div>
+    </div>
+  </div>
 
 
 
+</div>

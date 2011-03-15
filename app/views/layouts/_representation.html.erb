@@ -1,6 +1,6 @@
 <%= link_to(image_tag(current_user.logo.url(:tie), :width => 20, :height => 20), current_user) %>
 
-<div class="txt_config">
+<li class="pipe">
   <%= link_to(current_user.name, current_user) %>
 
   <%= t('representation.action') %>
@@ -9,7 +9,7 @@
     <%= f.select :subject_dom_id, current_user.represented.unshift(current_user).map{ |s| [ s.name, dom_id(s) ] } %>
     <%= f.submit t('representation.change') %>
   <% end %>
-</div>
+</li>
 
 <%-# this should be in content_for(:javascript), but the partial is rendered after yield(:javascript) -%>
 <script type="text/javascript" charset="utf-8">
