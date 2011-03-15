@@ -194,6 +194,17 @@ class Actor < ActiveRecord::Base
     sent_ties.allowing(subject, action, objective)
   end
 
+  # The ties that allow attaching an activity to them. This method is used for caching
+  def active_ties
+    @active_ties ||= {}
+  end
+
+  # The ties that allow subject creating activities for this actor
+  def active_ties_for(subject)
+    active_ties[subject] ||=
+      sent_ties_allowing(subject, 'create', 'activity')
+  end
+
   def pending_ties
     @pending_ties ||=
       received_ties.where('ties.sender_id NOT IN (?)', sent_ties.map(&:receiver_id).uniq).map(&:sender_id).uniq.
