@@ -1,14 +1,19 @@
 class Group < ActiveRecord::Base
   attr_accessor :_founder
   attr_accessor :_participants
-  attr_accessor :profile_attributes
+
+  delegate :description, :description=, :to => :profile!
+
+  after_create :create_founder
+  after_create :create_participants
+
+  def profile!
+    actor!.profile || actor!.build_profile
+  end
 
   def followers
     subjects(:subject_type => :user, :direction => :senders)
   end
-
-  after_create :create_founder
-  after_create :create_participants
   
   def recent_groups
     subjects(:subject_type => :group, :direction => :receivers) do |q|
