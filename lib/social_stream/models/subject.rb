@@ -54,7 +54,7 @@ module SocialStream
 
         # {Actor} handles some methods
         def respond_to? *args
-          super || actor!.respond_to?(*args)
+          super || actor!.respond_to?(args.first)
         end
       end
       
