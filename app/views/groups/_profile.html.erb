@@ -1,0 +1,44 @@
+      <% content_for :head do %>
+          <%= stylesheet_link_tag "edit_user", :media => "screen, projection" %>          
+        <% end %>       
+      <div class="space_center"></div>
+      <div class="space_center"></div>
+      <div class="space_center"></div>
+      <div class="future_conference" id="personal_info" >
+        <div class="future_header">
+            <div class="title_section">
+                Group Information
+            </div>
+            <div class="title_righ">
+                <%= link_to "Edit", :controller => :groups, :action => :edit %>
+            </div>
+        </div>
+        <div class="post_future_conference"  >
+          <% if @group.profile.description? %>
+            <div class="info_post">
+            	   <div class="info_left">
+                    Description:
+                </div>
+                <div class="info_right">
+                    <%=h @group.profile.description %>
+                </div>
+            </div>
+          <%end%>
+					<div class="info_post">
+                <div class="info_left">
+                    Group created at:
+                </div>
+                <div class="info_right">
+                    <%=h h I18n.l @group.created_at, :format => :long %>
+                </div>
+          </div>
+					<div class="info_post">
+                <div class="info_left">
+                    Group updated at:
+                </div>
+                <div class="info_right">
+                    <%=h I18n.l @group.updated_at, :format => :long %>
+                </div>
+          </div>
+        </div>
+      </div>

@@ -19,6 +19,25 @@ module SocialStream
                    :validate => true,
                    :autosave => true
         
+        delegate :mailbox, :send_message,
+        :reply, :reply_to_sender,
+        :reply_to_all, :reply_to_conversation,
+        :read_mail, :unread_mail,
+        :read_converation,
+        :name, :name=,
+                 :email, :email=,
+                 :permalink,
+                 :logo, :logo=,
+                 :ties, :sent_ties, :received_ties,
+                 :ties_to,
+                 :sent_ties_allowing,
+                 :pending_ties,
+                 :relation, :relations,
+                 :actors, :subjects,
+                 :suggestions, :suggestion,
+                 :home_wall, :profile_wall,
+                 :to => :actor!
+        
         has_one :profile, :through => :actor
         
         accepts_nested_attributes_for :profile
@@ -26,9 +45,8 @@ module SocialStream
         validates_presence_of :name
         
         scope :alphabetic, includes(:actor).order('actors.name')
-        scope :search, lambda{ |param|
-          joins(:actor).where('actors.name like ?', param)
-        }
+        scope :search, lambda{|param|
+          joins(:actor).where('actors.name like ?',param)}
         scope :with_sent_ties,     joins(:actor => :sent_ties)
         scope :with_received_ties, joins(:actor => :received_ties)
         scope :distinct_initials, joins(:actor).select('DISTINCT SUBSTR(actors.name,1,1) as initial')
@@ -41,20 +59,6 @@ module SocialStream
         
         def to_param
           permalink
-        end
-
-        # Delegate missing methods to {Actor}, if they are defined there
-        def method_missing(method, *args, &block)
-          if actor!.respond_to? method
-            actor!.__send__ method, *args, &block
-          else
-            super
-          end
-        end
-
-        # {Actor} handles some methods
-        def respond_to? *args
-          super || actor!.respond_to?(args.first)
         end
       end
       

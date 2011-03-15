@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   match 'home' => 'home#index', :as => :home
   match 'home' => 'home#index', :as => :user_root # devise after_sign_in_path_for
 
-  devise_for :users, :controllers => {:omniauth_callbacks => 'omniauth_callbacks'}
   resources :users
 
   resource :representation

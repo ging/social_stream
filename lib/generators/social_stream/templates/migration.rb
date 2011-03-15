@@ -72,7 +72,6 @@ class CreateSocialStream < ActiveRecord::Migration
       t.integer  "actor_id"
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.string    "description"
     end
     
     add_index "groups", "actor_id"

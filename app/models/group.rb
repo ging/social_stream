@@ -1,6 +1,7 @@
 class Group < ActiveRecord::Base
   attr_accessor :_founder
   attr_accessor :_participants
+  attr_accessor :profile_attributes
 
   def followers
     subjects(:subject_type => :user, :direction => :senders)

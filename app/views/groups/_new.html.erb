@@ -47,8 +47,12 @@
     <%= f.select :_participants, "", :class => "edit_text" %>
   </div>
 	<div class="edit_field">
-    <%= f.label t('group.new.description') %>
-    <%= f.text_area :description, :rows =>6, :cols=> 53, :class => "edit_text" %>
+		<%= f.fields_for :profile do |profile_form| %>
+		  <div class="edit_label">
+			   <%= profile_form.label "Description" %>				 
+			</div>
+	    <%= profile_form.text_area :description, :rows =>6, :cols=> 53, :class => "edit_text" %>
+		<% end %>
   </div>
 
   <div class="actions">
