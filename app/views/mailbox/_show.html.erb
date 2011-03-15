@@ -14,10 +14,10 @@
 
 <div id="new_message" ><%= link_to 'Back', :action=>:index %></div>
 <div class="space_center">
+</div><div class="space_center">
 </div>
-<div class="space_center">
-</div>
-<div id="conversation">  
-<% content_for :headers, stylesheet_link_tag("message", :media => "screen, projection") %>
-  <%= render :partial => 'conversation_complete', :locals =>{:conversation => @conversation} %>
+
+<h1><%= params[:id].capitalize %></h1>
+<div id="conversations">  
+  <%= render :partial => 'conversations' %>
 </div>
