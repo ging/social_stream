@@ -10,6 +10,17 @@ class GroupsController < InheritedResources::Base
       end
     end
   end
+  
+  def edit
+    @group = Group.find_by_permalink!(params[:id])
+
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.xml  { render :xml => @group }
+    end
+  end
+
+  
   protected
 
   # Overwrite resource method to support permalink

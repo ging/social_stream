@@ -1,15 +1,1 @@
-<% content_for :head do %>
-  <%= stylesheet_link_tag "jquery-ui.css", :media => "screen, projection" %>
-  <%= stylesheet_link_tag "edit_user", :media => "screen, projection" %>
-<% end %>
-				
-<div class="space_center">
-</div>
-
-<% if user_signed_in? %>
-  <%= render :partial => "ties/suggestions" %>
-  <div class="space_center">
-  </div>
-  <%= render :partial => 'ties/pendings' %>
-<% end %>
-
+<%= render :partial => 'profile' %>
