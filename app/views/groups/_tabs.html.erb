@@ -1,13 +1,18 @@
+<% content_for :headers do %>
+  <%= javascript_include_tag 'superfish', 'main', 'jquery-ui-personalized-1.5.2.packed' %>
+<% end %>
+
+
 <div id="tabright" class="widget">
-    <ul class="tabinfo fondo">
+    <ul class="block_tab fondo">
         <li>
             <a href="#info">Information</a>
         </li>
         <li>
-          <a href="#info"><%=(image_tag("btn/btn_tag.png", :alt => "tags"))+t('tags')%></a>
+            <a href="#tag"><img src="/images/btn/btn_tag.png" alt="Tags" />Tags</a>
         </li>
     </ul>
-    <div id="info" class="tabinfo">
+    <div id="info" class="block_tab">
         Place:
         <br/>
         Avendia Complutense 30
@@ -24,9 +29,10 @@
         <br/>
     </div>
     <!--/popular-->
-    <div id="tag" class="tabinfo">
+    <div id="tag" class="block_tab">
         tag1, tag2, tag3, tag4, tag5
         tag6, tag7, tag8, tag9, tag10
     </div>
 </div>
+
 

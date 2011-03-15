@@ -1,4 +1,12 @@
+<% cont=0; %>
+
 <% @users.each do |user| %>
+
+  <% if (cont%2) == 0 %>
+    <% cont+=1; %>
+     <div class="block_row">
+  <% end %>
+
   <div class="block_label">
     <div class="block_logo">
       <%= link_to (image_tag(user.logo.url , :size => "50x50", :alt => user.name )),user  %>
@@ -12,6 +20,12 @@
       </div>
     </div>
   </div>
+<% end %>
+
+<% if ((cont%2) != 0) 	%>
+  <div class="block_label">
+  </div>
+		</div>
 <% end %>
 
 <div class="block_row">

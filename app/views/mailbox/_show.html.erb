@@ -18,6 +18,6 @@
 <div class="space_center">
 </div>
 <div id="conversation">  
-<% content_for :head, stylesheet_link_tag("message", :media => "screen, projection") %>
+<% content_for :headers, stylesheet_link_tag("message", :media => "screen, projection") %>
   <%= render :partial => 'conversation_complete', :locals =>{:conversation => @conversation} %>
 </div>
