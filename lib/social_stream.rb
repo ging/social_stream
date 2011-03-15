@@ -3,6 +3,7 @@ module SocialStream
   autoload :Ability,   'social_stream/ability'
   autoload :Populate,  'social_stream/populate'
   autoload :Relations, 'social_stream/relations'
+  autoload :TestHelpers, 'social_stream/test_helpers'
 
   module Controllers
     autoload :Helpers, 'social_stream/controllers/helpers'
