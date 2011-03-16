@@ -31,7 +31,7 @@ module SocialStream
         }
         scope :with_sent_ties,     joins(:actor => :sent_ties)
         scope :with_received_ties, joins(:actor => :received_ties)
-        scope :distinct_initials, joins(:actor).select('DISTINCT SUBSTR(actors.name,1,1) as initial')
+        scope :distinct_initials, joins(:actor).select('DISTINCT SUBSTR(actors.name,1,1) as initial').order("initial ASC")
       end
       
       module InstanceMethods
