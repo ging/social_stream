@@ -9,6 +9,11 @@ class Mailbox::ConversationController < ApplicationController
       return
     end    
     @mails = @conversation.mails(@actor)
+    messages = Array.new
+    @mails.each do |mail|
+      messages << mail.message
+    end
+    @messages = messages.uniq
   end
 
   def new

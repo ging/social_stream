@@ -113,21 +113,21 @@ namespace :db do
       posts_end = Time.now 
       puts '   -> ' +  (posts_end - posts_start).round(4).to_s + 's'
       
-      # = Mailboxer
-      available_actors = Actor.all
-      
       puts 'Mailboxer population'
       mailboxer_start = Time.now
       
+      # = Mailboxer
+      available_actors = Actor.all
+          
       available_actors.each do |a|
         actors = available_actors.dup - Array(a)
         
-        mult_recp = actors
-        if (demo = User.find_by_name('demo')) and !mult_recp.include? demo
-          mult_recp << demo
+        mult_recp = actors.uniq
+        if (demo = User.find_by_name('demo')) and !mult_recp.include? Actor.normalize(demo)
+          mult_recp << Actor.normalize(demo)
         end
         actor = mult_recp[(rand * mult_recp.size).to_i]
-        mult_recp = mult_recp.uniq-Array(actor)
+        mult_recp.delete(actor)
         mail = actor.send_message(mult_recp, "Hello all, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))       
         actor = mult_recp[(rand * mult_recp.size).to_i]
         mail = actor.reply_to_all(mail, "Well, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")

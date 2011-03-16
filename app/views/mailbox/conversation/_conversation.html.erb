@@ -1,10 +1,9 @@
 <%= div_for (conversation) do %>
-  <div class="activity_content_message">
-    <div class="actor_name_message">
-      <h2><%= conversation.subject %></h2>
-    </div>
 
-  </div>
+  <h2><%= conversation.subject %></h2>
+  <hr>
+  <% conversation.get_recipients.each do |recp| %><%= image_tag(recp.logo.url(:tie), :alt => recp.name) %><% end %><br>
+	
   <% @mails.each do |mail| %>
   	<hr><br>
 	<% message= mail.mailboxer_message %>
