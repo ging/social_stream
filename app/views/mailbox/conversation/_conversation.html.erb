@@ -2,22 +2,16 @@
 
   <h2><%= conversation.subject %></h2>
   <hr>
-  <% conversation.get_recipients.each do |recp| %><%= image_tag(recp.logo.url(:tie), :alt => recp.name) %><% end %><br>
+  <% conversation.get_recipients.each do |recp| %>
+ 	 <%= link_to image_tag(recp.logo.url(:tie), :title=>recp.name, :alt => recp.name), recp.subject %>
+  <% end %><br>
 	
   <% @mails.each do |mail| %>
   	<hr><br>
 	<% message= mail.mailboxer_message %>
-	<%= image_tag(message.sender.logo.url(:tie)) %><br>
+	<%= link_to image_tag(message.sender.logo.url(:tie),:alt => message.sender.name,:title =>message.sender.name), message.sender.subject %><br>
 	<b><%= message.sender.name %></b> on <%= message.created_at %> said:<br>
-	<%= message.body %><br><br>
-	Debug:<br>	
-	<blockquote>
-		Message.Id: <%= message.id %><br>
-		Mail.Id: <%= mail.id %><br>
-		Mail.MailboxType: <%= mail.mailbox_type%>
-	</blockquote>
-	<br><br>
-	
+	<b><i><%= message.body %></i></b><br><br>
   <% end %>
 
 <% end %>
