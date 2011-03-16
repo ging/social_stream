@@ -32,6 +32,12 @@ module SocialStream
         scope :with_sent_ties,     joins(:actor => :sent_ties)
         scope :with_received_ties, joins(:actor => :received_ties)
         scope :distinct_initials, joins(:actor).select('DISTINCT SUBSTR(actors.name,1,1) as initial').order("initial ASC")
+        scope :popular, lambda { 
+          joins(:actor => :received_ties).
+            select("DISTINCT #{ table_name }.*, COUNT(#{ table_name}.id) AS popularity").
+            group("#{ table_name }.id").
+            order("popularity DESC")
+        }
       end
       
       module InstanceMethods
