@@ -47,6 +47,7 @@
     <%= f.select :_participants, "", :class => "edit_text" %>
   </div>
 	<div class="edit_field">
+
 		<%= f.fields_for :profile do |profile_form| %>
 		  <div class="edit_label">
 			   <%= profile_form.label "Description" %>				 

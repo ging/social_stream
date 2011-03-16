@@ -2,43 +2,141 @@
           <%= stylesheet_link_tag "edit_user", :media => "screen, projection" %>          
         <% end %>       
       <div class="space_center"></div>
-      <div class="space_center"></div>
-      <div class="space_center"></div>
-      <div class="future_conference" id="personal_info" >
-        <div class="future_header">
-            <div class="title_section">
+
+      <div class="block_div" id="personal_info" >
+        <div class="block_header">
+            <div class="block_header_text">
                 Group Information
             </div>
-            <div class="title_righ">
-                <%= link_to "Edit", :controller => :groups, :action => :edit %>
+            <div class="block_header_icon_right">
+                <%= link_to (image_tag('/images/btn/edit.png')), :controller => :groups, :action => :edit, :section => :about_us %>
             </div>
         </div>
-        <div class="post_future_conference"  >
+				<div class="block_content">
+        
+        	<% if @group.profile.organization? %>
+			      <div class="block_row">
+			        <div class="block_label">
+			          Organization:
+			        </div>
+			        <div class="block_field">
+			            <%=h @group.profile.organization %>
+			        </div>
+			      </div>
+          <%end%>
+					<% if @group.profile.city? %>
+            <div class="block_row">
+              <div class="block_label">
+              City:
+              </div>
+	            <div class="block_field">
+	              <%=h @group.profile.city %>
+	              <% if @group.profile.country? %>
+	                , <%=@group.profile.country%>
+	              <%end%>
+			        </div>
+		        </div>
+          <%end%>
           <% if @group.profile.description? %>
-            <div class="info_post">
-            	   <div class="info_left">
+            <div class="block_row">
+            	   <div class="block_label">
                     Description:
                 </div>
-                <div class="info_right">
+                <div class="block_field">
                     <%=h @group.profile.description %>
                 </div>
             </div>
           <%end%>
-					<div class="info_post">
-                <div class="info_left">
+					<div class="block_row">
+                <div class="block_label">
                     Group created at:
                 </div>
-                <div class="info_right">
+                <div class="block_field">
                     <%=h h I18n.l @group.created_at, :format => :long %>
                 </div>
           </div>
-					<div class="info_post">
-                <div class="info_left">
+					<div class="block_row">
+                <div class="block_label">
                     Group updated at:
                 </div>
-                <div class="info_right">
+                <div class="block_field">
                     <%=h I18n.l @group.updated_at, :format => :long %>
                 </div>
           </div>
-        </div>
+				</div>
+			</div>
+			
+					<div class="block_div" id="contact_info">
+					  <div class="block_header">
+					    <div class="block_header_text">
+					      Contact Information
+					    </div>
+					    <div class="block_header_icon_right">
+					      <%= link_to (image_tag('/images/btn/edit.png')), :controller => :groups, :action => :edit, :section => :contact_info %>
+					    </div>
+					  </div>
+					  <div class="block_content">
+					   <% if @group.profile.phone? %>
+					     <div class="block_row">
+					       <div class="block_label">
+					         Phone
+					       </div>
+					       <div class="block_field">
+					         <%=h @group.profile.phone %>
+					       </div>
+              </div>
+            <%end%>
+			      <% if @group.profile.mobile? %>
+			        <div class="block_row">
+			          <div class="block_label">
+			            Mobile
+			          </div>
+			          <div class="block_field">
+			            <%=h @group.profile.mobile %>
+			          </div>
+			        </div>
+			      <%end%>
+			      <% if @group.profile.fax? %>
+			        <div class="block_row">
+			          <div class="block_label">
+			            Fax
+			          </div>
+			          <div class="block_field">
+			            <%=h @group.profile.fax %>
+			          </div>
+			        </div>
+			      <%end%>
+			      <% if @group.profile.address? %>
+			        <div class="block_row">
+			          <div class="block_label">
+			            Address
+			          </div>
+			          <div class="block_field">
+			            <%=h @group.profile.address %>
+			          </div>
+			        </div>
+			      <%end%>
+			      <% if @group.profile.website? %>
+			        <div class="block_row">
+			          <div class="block_label">
+			            Website
+			          </div>
+			          <div class="block_field">
+			            <a href="<%=h @group.profile.website %>"><%=h @group.profile.website %></a>
+			          </div>
+			        </div>
+			      <%end%>
+			      <% if @group.email.present? %>
+				      <div class="block_row">
+				        <div class="block_label">
+				          E-mail:
+				        </div>
+				        <div class="block_field">
+				          <%=h @group.email %>
+				        </div>
+				      </div>
+						<%end%>
+          </div>
+				
       </div>
+    </div>

@@ -1,5 +1,5 @@
 
-
+<% puts "llego al js" %>
 
   if ($("#notice").length == 0){
 
@@ -7,7 +7,7 @@
     
   } 
 	
-<% if @user.valid? %>
+<% if @group.valid? %>
  	
   $("#notice").html("<h2>Form Submitted!</h2><br/>");
 	$("#notice").removeClass('error_explanation');
@@ -15,10 +15,9 @@
   $("#sidebarContent").replaceWith("<%= escape_javascript(render(:partial => 'sidebar_show'))%>");
 	
   $("#contact_info").addClass('section_normal');
-  $("#experience_info").addClass('section_normal');
 	$("#personal_info").addClass('section_normal');
 	
-  <% if !params[:section].present? or params[:section].eql?("about_me") %>	                  
+  <% if !params[:section].present? or params[:section].eql?("about_us") %>	                  
 		$("#personal_info").removeClass('section_normal');
 		$("#personal_info").addClass('section_highlight');
 	<%end%>
@@ -28,14 +27,10 @@
 		$("#contact_info").addClass('section_highlight');
 	<%end%>
 
-	<% if !params[:section].present? or params[:section].eql?("my_experience") %>
-		$("#experience_info").removeClass('section_normal');
-		$("#experience_info").addClass('section_highlight');
-	<%end%>
 	
 <% else %>
-  $("#notice").html("<h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>"
-	 +"<ul><% @user.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></ul><br/>");
+  $("#notice").html("<h2><%= pluralize(@group.errors.count, "error") %> prohibited this user from being saved:</h2>"
+	 +"<ul><% @group.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></ul><br/>");
 	$("#notice").removeClass('confirmed');
 	$("#notice").addClass('error_explanation'); 
 

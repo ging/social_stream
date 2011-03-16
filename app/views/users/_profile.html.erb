@@ -126,10 +126,12 @@
       <%end%>
 
       <div class="block_row">
+        <div class="block_label">
           E-mail:
-      </div>
-      <div class="block_row">
-        <%=h @user.email %>
+        </div>
+        <div class="block_field">
+          <%=h @user.email %>
+        </div>
       </div>
     </div>
   </div>
@@ -150,6 +152,18 @@
     </div>
   </div>
 
-
+<% if @user.authentication_token %>
+<div class="block_div" id="developer_info">
+    <div class="block_header">
+      <div class="block_header_text">
+        ApiKey: <%= @user.authentication_token %>
+      </div>
+      <div class="block_header_icon_right">
+		<%= link_to (image_tag('/images/btn/edit.png')), :controller => :api, 
+														 :action => :create_key %>
+      </div>
+    </div>
+  </div>
+<% end %>
 
 </div>

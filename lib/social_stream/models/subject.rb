@@ -62,7 +62,7 @@ module SocialStream
       
       module ClassMethods
         def find_by_permalink(perm)
-          joins(:actor).where('actors.permalink' => perm).first
+          includes(:actor).where('actors.permalink' => perm).first
         end
         
         def find_by_permalink!(perm)

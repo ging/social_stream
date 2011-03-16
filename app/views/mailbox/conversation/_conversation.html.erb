@@ -1,0 +1,17 @@
+<%= div_for (conversation) do %>
+
+  <h2><%= conversation.subject %></h2>
+  <hr>
+  <% conversation.get_recipients.each do |recp| %>
+ 	 <%= link_to image_tag(recp.logo.url(:tie), :title=>recp.name, :alt => recp.name), recp.subject %>
+  <% end %><br>
+	
+  <% @mails.each do |mail| %>
+  	<hr><br>
+	<% message= mail.mailboxer_message %>
+	<%= link_to image_tag(message.sender.logo.url(:tie),:alt => message.sender.name,:title =>message.sender.name), message.sender.subject %><br>
+	<b><%= message.sender.name %></b> on <%= message.created_at %> said:<br>
+	<b><i><%= message.body %></i></b><br><br>
+  <% end %>
+
+<% end %>

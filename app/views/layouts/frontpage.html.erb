@@ -3,8 +3,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title><%= yield(:title) || t('socialstream') %></title>
-    <%= stylesheet_link_tag "default/header","default/frontpage", "default/base",
-                            "default/footer",:media => "screen, projection" %>
+    <%= stylesheet_link_tag "header","frontpage", "base", "footer",
+                            :media => "screen, projection" %>
     <%= javascript_include_tag 'jquery', 'jquery.livequery' %>
     <link rel="shortcut icon" href="/images/icons/favicon.ico" />
     <% if protect_against_forgery? %>
