@@ -42,6 +42,14 @@ describe GroupsController do
 
       assert_response :success
     end
+
+    it "should update contact group" do
+      @group = Factory(:member, :receiver => @user.actor).sender_subject
+      put :update, :id => @group.to_param,
+                   "group" => { "profile_attributes" => { "organization" => "Social Stream" } }
+
+      response.should redirect_to(@group)
+    end
   end
 end
 
