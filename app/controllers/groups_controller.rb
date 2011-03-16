@@ -1,4 +1,7 @@
 class GroupsController < InheritedResources::Base
+  
+  respond_to :html, :xml, :js
+  
   def index
     if params[:search]
       @groups = Group.search("%"+params[:search]+"%").paginate(:per_page => 10, :page => params[:page])
@@ -10,15 +13,7 @@ class GroupsController < InheritedResources::Base
       end
     end
   end
-  
-  def edit
-    @group = Group.find_by_permalink!(params[:id])
 
-    respond_to do |format|
-      format.html # edit.html.erb
-      format.xml  { render :xml => @group }
-    end
-  end
 
   
   protected
