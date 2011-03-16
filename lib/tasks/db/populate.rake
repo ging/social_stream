@@ -1,21 +1,21 @@
 namespace :db do
   desc 'Populate database with fake data for development'
   task :populate => [ 'db:seed', 'db:populate:create' ]
-
+  
   namespace :populate do
-
+    
     desc "Reload populate data"
     task :reload => [ 'db:reset', :create ]
-
+    
     desc "Create populate data"
     task :create => :environment do
-
+      
       LOGOS_PATH = File.join(Rails.root, 'lib', 'logos')
-
+      
       def set_logos(klass)
         klass.all.each do |i|
           logo = Dir[File.join(LOGOS_PATH, klass.to_s.tableize, "#{ i.id }.*")].first
-
+          
           if logo.present? && File.exists?(logo)
             i.logo = File.new(logo)
             i.logo.reprocess!
@@ -23,9 +23,9 @@ namespace :db do
           end
         end
       end
-
+      
       # = Users
-
+      
       # Create demo user if not present
       if User.find_by_name('demo').blank?
         User.create! :name => 'Demo',
@@ -33,77 +33,92 @@ namespace :db do
                      :password => 'demonstration',
                      :password_confirmation => 'demonstration'
       end
-
+      
       require 'forgery'
-
+      
       9.times do
         User.create! :name => Forgery::Name.full_name,
                      :email => Forgery::Internet.email_address,
                      :password => 'demonstration',
                      :password_confirmation => 'demonstration'
       end
-
+      
       set_logos(User)
-
+      
       # = Groups
       available_actors = Actor.all
-
+      
       10.times do
         founder = available_actors[rand(available_actors.size)]
-
+        
         Group.create :name  => Forgery::Name.company_name,
                      :email => Forgery::Internet.email_address,
-                     :_founder => founder.permalink
+        :_founder => founder.permalink
       end
-
+      
       set_logos(Group)
-
+      
       # Reload actors to include groups
       available_actors = Actor.all
-
+      
       # = Ties
       available_actors.each do |a|
         actors = available_actors.dup - Array(a)
         relations = a.relations
-
+        
         Forgery::Basic.number(:at_most => actors.size).times do
           actor = actors.delete_at((rand * actors.size).to_i)
           a.sent_ties.create :receiver => actor,
                              :relation => relations.random
         end
       end
-
+      
       # = Posts
-
+      
       SocialStream::Populate.power_law(Tie.all) do |t|
         updated = Time.at(rand(Time.now))
-
+        
         p = Post.create :text =>
                       "This post should be for #{ t.relation.name } of #{ t.sender.name }.\n#{ Forgery::LoremIpsum.paragraph(:random => true) }",
                         :created_at => Time.at(rand(updated)),
                         :updated_at => updated,
-                        :_activity_tie_id => t.id
-
+        :_activity_tie_id => t.id
+        
         p.post_activity.update_attributes(:created_at => p.created_at,
                                           :updated_at => p.updated_at)
       end
       
-       # = Mailboxer
+      # = Mailboxer
       available_actors = Actor.all
       
       available_actors.each do |a|
         actors = available_actors.dup - Array(a)
         if (demo = User.find_by_name('demo'))
-          mail = a.send_message(demo, "Hello, #{demo.name}. How do you do?", "How about getting in touch?")
-          mail = demo.reply_to_sender(mail, "Pretty well #{a.name}, thanks. Have your children grown up?")
-          a.reply_to_sender(mail, "You can bet on that!")
-        end
-        
+          next if Actor.normalize(demo)==Actor.normalize(a) 
+          mail = a.send_message(demo, "Hello, #{demo.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))
+          if rand > 0.5
+            mail = demo.reply_to_sender(mail, "Pretty well #{a.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+            if rand > 0.5
+              a.reply_to_sender(mail, "Ok #{demo.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+            end
+          end
+          if rand > 0.75
+            mail.conversation.move_to_trash(demo)
+          end
+        end        
         Forgery::Basic.number(:at_most => actors.size).times do
           actor = actors.delete_at((rand * actors.size).to_i)
-          mail = a.send_message(actor, "Hello, #{actor.name}. How do you do?", "How about getting in touch?")
-          mail = actor.reply_to_sender(mail, "Pretty well #{a.name}, thanks. Have your children grown up?")
-          a.reply_to_sender(mail, "You can bet on that!")
+          next if Actor.normalize(actor)==Actor.normalize(a) 
+          mail = a.send_message(actor, "Hello, #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))
+          if rand > 0.5
+            mail = actor.reply_to_sender(mail, "Pretty well #{a.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+            if rand > 0.5
+              a.reply_to_sender(mail, "Ok #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+            end
+          end
+          if rand > 0.75
+            mail.conversation.move_to_trash(actor)
+          end
         end
       end
     end

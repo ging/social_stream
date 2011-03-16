@@ -23,6 +23,8 @@ require 'paperclip/social_stream'
 require 'will_paginate'
 # Oauth
 require 'omniauth/oauth'
+# CSS themes
+require 'rails_css_themes'
 
 module SocialStream
   class Engine < ::Rails::Engine #:nodoc:

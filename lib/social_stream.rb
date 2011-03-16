@@ -3,6 +3,7 @@ module SocialStream
   autoload :Ability,   'social_stream/ability'
   autoload :Populate,  'social_stream/populate'
   autoload :Relations, 'social_stream/relations'
+  autoload :TestHelpers, 'social_stream/test_helpers'
 
   module Controllers
     autoload :Helpers, 'social_stream/controllers/helpers'
@@ -19,7 +20,7 @@ module SocialStream
 
   mattr_accessor :devise_modules
   @@devise_modules = [ :database_authenticatable, :registerable, :recoverable,
-                       :rememberable, :trackable, :omniauthable ]
+                       :rememberable, :trackable, :omniauthable, :token_authenticatable]
 
   mattr_accessor :objects
   @@objects = [ :post, :comment ]

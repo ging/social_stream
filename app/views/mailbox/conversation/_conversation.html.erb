@@ -6,15 +6,17 @@
   </div>
   <div class="activity_content_message">
     <div class="actor_name_message">
-      <%= conversation.subject %>
+      <h2><%= conversation.subject %></h2>
     </div>
 
   </div>
-  
   <% @mails.each do |mail| %>
-  	<% message= mail.mailboxer_message %>
+  	<hr>
+  	<p><% message= mail.mailboxer_message %>
 	<b><%= message.sender.name %></b><br>
 	<%= message.body %><br>
+	</p>
+	
   <% end %>
 
 <% end %>
