@@ -11,7 +11,7 @@ describe UsersController do
     end
 
     it "should render show" do
-      get :show, :id => Factory(:user).to_param
+      get :show, :id => Factory(:friend, :receiver => Factory(:group).actor).sender_subject.to_param
 
       assert_response :success
     end
@@ -19,7 +19,7 @@ describe UsersController do
 
   describe "when authenticated" do
     before do
-      @user = Factory(:user)
+      @user = Factory(:friend, :receiver => Factory(:group).actor).sender_subject
 
       sign_in @user
     end

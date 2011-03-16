@@ -1,6 +1,4 @@
-<% if (current_subject.recent_groups.count)>10 %>
-  <li>
-<% end %>
+<li>
   <%= div_for group do %>
     <div class="group_content">
       <%=link_to(image_tag(group.logo.url(:actor), :class => 'btn_group', :alt => group.name, :title => group.name), group) %>
@@ -9,6 +7,4 @@
       <%=link_to(group.name, group)%>
     </div>
   <% end %>
-<% if (current_subject.recent_groups.count)>10 %>
-  </li>
-<% end %>
+</li>

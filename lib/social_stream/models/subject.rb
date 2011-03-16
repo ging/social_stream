@@ -11,6 +11,15 @@ module SocialStream
     # extending them. Including the module in each {Subject} model is not required!
     # After declared in +config/initializers/social_stream.rb+, {SocialStream} is
     # responsible for adding subject features to each model.
+    #
+    # = Scopes
+    # There are several scopes available for subjects 
+    #
+    # alphabetic:: sort subjects by name
+    # search:: simple search by name
+    # distinct_initials:: get only the first letter of the name
+    # popular:: sort by most incoming {Tie ties}
+    #
     module Subject
       extend ActiveSupport::Concern
       
@@ -31,7 +40,13 @@ module SocialStream
         }
         scope :with_sent_ties,     joins(:actor => :sent_ties)
         scope :with_received_ties, joins(:actor => :received_ties)
-        scope :distinct_initials, joins(:actor).select('DISTINCT SUBSTR(actors.name,1,1) as initial')
+        scope :distinct_initials, joins(:actor).select('DISTINCT SUBSTR(actors.name,1,1) as initial').order("initial ASC")
+        scope :popular, lambda { 
+          joins(:actor => :received_ties).
+            select("DISTINCT #{ table_name }.*, COUNT(#{ table_name}.id) AS popularity").
+            group("#{ table_name }.id").
+            order("popularity DESC")
+        }
       end
       
       module InstanceMethods
