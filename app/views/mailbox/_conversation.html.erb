@@ -1,7 +1,9 @@
 <%= div_for (conversation) do %>
-<%= link_to image_tag(conversation.last_sender.logo.url(:actor),
-:alt => conversation.subject),
-"" %>
-<%= link_to(conversation.subject, mailbox_conversation_path(conversation.id)) %>
-<%= link_to ( image_tag('btn/btn_delete.png', :class=>"btn_config"), "", :confirm => 'Are you sure?', :method => :delete) %>
+<h3><%= link_to(conversation.subject, mailbox_conversation_path(conversation.id)) %></h3>
+<br>
+<b>From:</b><br>
+<%= image_tag(conversation.last_sender.logo.url(:actor), :alt => conversation.last_sender.name)%><br>
+<b>To:</b><br>
+<% conversation.get_recipients.each do |recp| %><%next if Actor.normalize(conversation.last_sender)==Actor.normalize(recp)%><%= image_tag(recp.logo.url(:tie), :alt => recp.name) %><% end %><br>
+<% link_to ( image_tag('btn/btn_delete.png', :class=>"btn_config"), "", :confirm => 'Are you sure?', :method => :delete) %>
 <% end %>

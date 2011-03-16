@@ -1,9 +1,4 @@
 <%= div_for (conversation) do %>
-  <div class="actor_logo">
-    <%= link_to image_tag(conversation.last_sender.logo.url(:actor),
-                          :alt => conversation.subject),
-                 "" %>
-  </div>
   <div class="activity_content_message">
     <div class="actor_name_message">
       <h2><%= conversation.subject %></h2>
@@ -11,11 +6,18 @@
 
   </div>
   <% @mails.each do |mail| %>
-  	<hr>
-  	<p><% message= mail.mailboxer_message %>
-	<b><%= message.sender.name %></b><br>
-	<%= message.body %><br>
-	</p>
+  	<hr><br>
+	<% message= mail.mailboxer_message %>
+	<%= image_tag(message.sender.logo.url(:tie)) %><br>
+	<b><%= message.sender.name %></b> on <%= message.created_at %> said:<br>
+	<%= message.body %><br><br>
+	Debug:<br>	
+	<blockquote>
+		Message.Id: <%= message.id %><br>
+		Mail.Id: <%= mail.id %><br>
+		Mail.MailboxType: <%= mail.mailbox_type%>
+	</blockquote>
+	<br><br>
 	
   <% end %>
 

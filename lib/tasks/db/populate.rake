@@ -24,6 +24,9 @@ namespace :db do
         end
       end
       
+      puts 'User population'
+      users_start = Time.now
+      
       # = Users
       
       # Create demo user if not present
@@ -45,6 +48,12 @@ namespace :db do
       
       set_logos(User)
       
+      users_end = Time.now 
+      puts '   -> ' + (users_end - users_start).round(4).to_s + 's'
+      
+      puts 'Groups population'
+      groups_start = Time.now
+      
       # = Groups
       available_actors = Actor.all
       
@@ -58,8 +67,15 @@ namespace :db do
       
       set_logos(Group)
       
+      groups_end = Time.now 
+      puts '   -> ' +  (groups_end - groups_start).round(4).to_s + 's'
+      
+      
+      puts 'Ties population'
+      ties_start = Time.now
+      
       # Reload actors to include groups
-      available_actors = Actor.all
+      available_actors = Actor.all      
       
       # = Ties
       available_actors.each do |a|
@@ -73,7 +89,13 @@ namespace :db do
         end
       end
       
+      ties_end = Time.now
+      puts '   -> ' +  (ties_end - ties_start).round(4).to_s + 's'
+      
       # = Posts
+      
+      puts 'Post population'
+      posts_start = Time.now
       
       SocialStream::Populate.power_law(Tie.all) do |t|
         updated = Time.at(rand(Time.now))
@@ -88,11 +110,35 @@ namespace :db do
                                           :updated_at => p.updated_at)
       end
       
+      posts_end = Time.now 
+      puts '   -> ' +  (posts_end - posts_start).round(4).to_s + 's'
+      
       # = Mailboxer
       available_actors = Actor.all
       
+      puts 'Mailboxer population'
+      mailboxer_start = Time.now
+      
       available_actors.each do |a|
         actors = available_actors.dup - Array(a)
+        
+        mult_recp = actors
+        if (demo = User.find_by_name('demo')) and !mult_recp.include? demo
+          mult_recp << demo
+        end
+        actor = mult_recp[(rand * mult_recp.size).to_i]
+        mult_recp = mult_recp.uniq-Array(actor)
+        mail = actor.send_message(mult_recp, "Hello all, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))       
+        actor = mult_recp[(rand * mult_recp.size).to_i]
+        mail = actor.reply_to_all(mail, "Well, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+        actor = mult_recp[(rand * mult_recp.size).to_i]
+        mail = actor.reply_to_all(mail, "Ok, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+        actor = mult_recp[(rand * mult_recp.size).to_i]
+        mail = actor.reply_to_all(mail, "Pretty well, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+        actor = mult_recp[(rand * mult_recp.size).to_i]
+        actor.reply_to_all(mail, "Finally, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")      
+        
+        
         if (demo = User.find_by_name('demo'))
           next if Actor.normalize(demo)==Actor.normalize(a) 
           mail = a.send_message(demo, "Hello, #{demo.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))
@@ -105,7 +151,8 @@ namespace :db do
           if rand > 0.75
             mail.conversation.move_to_trash(demo)
           end
-        end        
+        end            
+        
         Forgery::Basic.number(:at_most => actors.size).times do
           actor = actors.delete_at((rand * actors.size).to_i)
           next if Actor.normalize(actor)==Actor.normalize(a) 
@@ -118,9 +165,13 @@ namespace :db do
           end
           if rand > 0.75
             mail.conversation.move_to_trash(actor)
-          end
+          end          
         end
       end
+      
+      mailboxer_end = Time.now
+      puts '   -> ' +  (mailboxer_end - mailboxer_start).round(4).to_s + 's'
+      
     end
   end
 end

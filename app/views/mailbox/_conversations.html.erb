@@ -1,5 +1,7 @@
 <% content_for :headers, stylesheet_link_tag("message", :media => "screen, projection") %>
+<hr>
 <% @conversations.each do |conversation| %>
   <%= render :partial => 'conversation', :object => conversation %>
+  <hr>
 <% end %>
 <%= will_paginate @conversations %>
