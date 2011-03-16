@@ -2,7 +2,7 @@ xml.instruct!
 	xml.user do
 		xml.uid @user.id
 		xml.name @user.name
-		xml.permalink @user.permalink
+		xml.slug @user.slug
 		xml.email @user.email
 		xml.userSince @user.created_at
 		xml.birthday @user.profile.birthday
@@ -14,14 +14,14 @@ xml.instruct!
 			@user.actors(:subject_type => 'user', :direction => :senders).each do |u|
 				xml.contact do
 					xml.uid u.id
-					xml.permalink u.permalink
+					xml.slug u.slug
 				end
 			end
 			
 			@user.actors(:subject_type => 'group', :direction => :senders).each do |g|
 				xml.group do
 					xml.gid g.id
-					xml.permalink g.permalink
+					xml.slug g.slug
 				end
 			end
 		end

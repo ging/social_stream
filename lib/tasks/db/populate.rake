@@ -62,7 +62,7 @@ namespace :db do
         
         Group.create :name  => Forgery::Name.company_name,
                      :email => Forgery::Internet.email_address,
-        :_founder => founder.permalink
+        :_founder => founder.slug
       end
       
       set_logos(Group)

@@ -18,7 +18,7 @@
 <% end %> 
 				
 <%= form_for @group do |f| %>
-  <% f.object._founder = current_subject.permalink %>
+  <% f.object._founder = current_subject.slug %>
   <%= f.hidden_field :_founder %>
 
   <% if @group.errors.any? %>

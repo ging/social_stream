@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
   end
   
   class << self
-    %w( email permalink name ).each do |a|
+    %w( email slug name ).each do |a|
       eval <<-EOS
     def find_by_#{ a }(#{ a })             # def find_by_email(email)
       find :first,                         #   find(:first,
@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
         if login =~ /@/
           find_by_email(login)
         else
-          find_by_permalink(login)
+          find_by_slug(login)
         end
       else
         super

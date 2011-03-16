@@ -1,16 +1,16 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Actor do
-  it "should generate permalink" do
-    assert Factory(:actor).permalink.present?
+  it "should generate slug" do
+    assert Factory(:actor).slug.present?
   end
 
-  it "should generate different permalink" do
+  it "should generate different slug" do
     a = Factory(:actor)
     b = Factory(:actor, :name => a.name)
 
     a.name.should == b.name
-    a.permalink.should_not == b.permalink
+    a.slug.should_not == b.slug
   end
 
   it "should generate relations" do

@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by_permalink!(params[:id])
+    @user = User.find_by_slug!(params[:id])
     
     respond_to do |format|
       format.html # show.html.erb
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 	end
 
   def edit
-    @user = User.find_by_permalink!(params[:id])
+    @user = User.find_by_slug!(params[:id])
 
     respond_to do |format|
       format.html # edit.html.erb
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   
   def update
     
-    @user = User.find_by_permalink!(params[:id])
+    @user = User.find_by_slug!(params[:id])
 
     respond_to do |format|
       if @user.update_attributes(params[:user])

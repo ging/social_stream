@@ -33,10 +33,10 @@ class CreateSocialStream < ActiveRecord::Migration
     end
     
     create_table "actors", :force => true do |t|
-      t.string   "name",      :limit => 45
+      t.string   "name"
       t.string   "email",     :default => "", :null => false
-      t.string   "permalink", :limit => 45
-      t.string   "subject_type", :limit => 45
+      t.string   "slug"
+      t.string   "subject_type"
       t.datetime "created_at"
       t.datetime "updated_at"
       t.integer  "activity_object_id"
@@ -48,7 +48,7 @@ class CreateSocialStream < ActiveRecord::Migration
     
     add_index "actors", "activity_object_id"
     add_index "actors", "email"
-    add_index "actors", "permalink", :unique => true
+    add_index "actors", "slug", :unique => true
     
     create_table :authentications, :force => true do |t|
       t.integer :user_id

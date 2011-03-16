@@ -13,11 +13,10 @@ class Actor < ActiveRecord::Base
   @subtypes_name = :subject
   include SocialStream::Models::Supertype
   
-  acts_as_messageable
-  
   validates_presence_of :name, :subject_type
   
-  acts_as_url :name, :url_attribute => :permalink
+  acts_as_messageable
+  acts_as_url :name, :url_attribute => :slug
   
   has_attached_file :logo,
                     :styles => { :tie => "30x30>",

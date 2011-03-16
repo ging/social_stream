@@ -1,10 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe User do
-  it "should find by permalink" do
+  it "should find by slug" do
     user = Factory(:user)
 
-    assert user.should == User.find_by_permalink(user.permalink)
+    assert user.should == User.find_by_slug(user.slug)
   end
 
   it "should represent" do

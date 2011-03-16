@@ -27,7 +27,7 @@ class Group < ActiveRecord::Base
   #Creates the ties between the group and the founder
   def create_founder
     founder =
-      Actor.find_by_permalink(_founder) || raise("Cannot create group without founder")
+      Actor.find_by_slug(_founder) || raise("Cannot create group without founder")
 
     sent_ties.create! :receiver => founder,
                       :relation => relations.sort.first
