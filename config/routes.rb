@@ -1,4 +1,4 @@
-Rails.application.routes.draw do |map|
+Rails.application.routes.draw do
   get "contacts/index"
   root :to => "frontpage#index"
   
@@ -6,9 +6,9 @@ Rails.application.routes.draw do |map|
   match 'home' => 'home#index', :as => :user_root # devise after_sign_in_path_for
   
   ##API###
-  map.connect 'api/keygen', :controller => :api, :action => :create_key
-  map.connect 'api/user/:id', :controller => :api, :action => :users
-  map.connect 'api/me', :controller => :api, :action => :users
+  match 'api/keygen' => 'api#create_key', :as => :api_keygen
+  match 'api/user/:id' => 'api#users'
+  match 'api/me' => 'api#users'
   ##/API##
   
   resources :users
@@ -21,7 +21,6 @@ Rails.application.routes.draw do |map|
     resources :conversation, :controller => :conversation 
   end
   resources :mailbox, :controller => :mailbox 
-  #namespace :mailbox do resources :conversations end
   
   resources :ties do
     collection do
