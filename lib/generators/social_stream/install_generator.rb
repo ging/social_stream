@@ -6,16 +6,22 @@ class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
 
   source_root File.expand_path('../templates', __FILE__)
 
-  def outh_for_devise_config
+  def devise_initializer_config
     inject_into_file "config/initializers/devise.rb",
                      "\n  config.omniauth :linked_in, \"ekxfXU8nueVSMQ9fc5KJAryBkyztUlCBYMW3DoQPzbE79WhivvzhQloRNHCHgPeB\", \"WYiHFT-KKFgjd45W3-pEAficmXRHmN6_6DGwj1C_ZILJlSO1gBvv6VNYXU9tybGY\"
                       \n  config.omniauth :facebook, \"129571360447856\",\"eef39dce5e20e76f77495c59623bdb38\"
-                      \n  #config.omniauth :twitter, \"wgTxO0fTpjTeSnjKC9ZHA\",\"JepulVWwLcuAnGfWjwCu47yEP0TcJJfKtvISPBsilI\"",
+                      \n  #config.omniauth :twitter, \"wgTxO0fTpjTeSnjKC9ZHA\",\"JepulVWwLcuAnGfWjwCu47yEP0TcJJfKtvISPBsilI\"
+                      \n  config.token_authentication_key = :auth_token
+                      \n  config.stateless_token = true",
                       :after => "  # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'"
   end
 
   def create_devise_route
     route "devise_for :users, :controllers => {:omniauth_callbacks => 'omniauth_callbacks'}"
+  end
+  
+  def create_api_route
+    route "map.connect 'api/', :controller => 'API'"
   end
 
   def create_initializer_file
