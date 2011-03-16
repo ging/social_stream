@@ -11,6 +11,15 @@ module SocialStream
     # extending them. Including the module in each {Subject} model is not required!
     # After declared in +config/initializers/social_stream.rb+, {SocialStream} is
     # responsible for adding subject features to each model.
+    #
+    # = Scopes
+    # There are several scopes available for subjects 
+    #
+    # alphabetic:: sort subjects by name
+    # search:: simple search by name
+    # distinct_initials:: get only the first letter of the name
+    # popular:: sort by most incoming {Tie ties}
+    #
     module Subject
       extend ActiveSupport::Concern
       
