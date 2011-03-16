@@ -1,4 +1,4 @@
-<% content_for :headers, stylesheet_link_tag("default/carousel") %>
+<% content_for :headers, stylesheet_link_tag("carousel") %>
 
 <% if user.recent_groups.any? %>
   <div id="groups_title" class="content_size">
@@ -11,7 +11,7 @@
       <div id='carousel_inner'>
         <ul id='carousel_ul'>
     <% else %>
-     <div class="space_center"></div>
+     <div class="block_space_center"></div>
     <%end%>
           <%= render user.recent_groups %>
     <% if (user.recent_groups.count) > 10 %>

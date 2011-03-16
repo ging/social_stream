@@ -16,7 +16,7 @@
 
 <div id="by_options" class="block_label_right content_size"><%=link_to(t('group.by'),groups_path)%></div>
 
-<div class="space_center"></div>
+<div class="block_space_center"></div>
 
 <div id="my_conferences">
   <div id="contacts">
@@ -24,7 +24,7 @@
       <input type="text" value="Search by name" id="search_field" class="search_input" />
       <%= image_tag("btn/search.png",:size=>"20x20",:id=>"search_button") %>
     </div>
-    <div class="space_center"></div>
+    <div class="block_space_center"></div>
     <div class="block_row" >
       <div class="block_center">
         <%= link_to t('user.all_n', :count => User.count), users_path %> -
@@ -33,15 +33,15 @@
         <% end %>
       </div>
     </div>
-    <div class="space_center"></div>
+    <div class="block_space_center"></div>
     <div id="list_users_ajax" class="block_tab_content">
       <%= render :partial => "users/index"%>
     </div>
-    <div class="space_center"></div>
+    <div class="block_space_center"></div>
   </div>
 </div>
 
 
-<div class="space_center"></div>
+<div class="block_space_center"></div>
 
 

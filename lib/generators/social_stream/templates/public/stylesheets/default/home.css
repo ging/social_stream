@@ -19,7 +19,7 @@
 /********* HOME ******/
 #map_location {padding-left: 4px;	display: inline-block; }
 .content_size {font-size: 13px;}
-.space_center {	padding-top: 9px;	padding-right: 4px;	text-align: center;}
+.block_space_center {	padding-top: 9px;	padding-right: 4px;	text-align: center;}
 .space_center_border {	padding-top: 8px;	padding-right: 4px;	border-bottom: thin solid #D4E4EA;}
 #logo_index { text-align: center;}
 
@@ -37,19 +37,24 @@
 .block_brief {	color: #6C6D6F;}
 .block_close {  float:right;  vertical-align:top;}
 .block_title{ display:inline-block; }
-.block_label{  display:inline-block;  width:49%;}
-.block_field{  display:inline;  padding: 0px;  width:50%;}
+
+/********SPACES*******/
 .block_center{ text-align:center;}
 
 /******FORMS *****/
 .block_input{border-color: #0656a4;	color: #2A3890;	padding: 5px 5px 5px 5px;  border:1px solid #BDC7D8;}
+.block_row_form{ display:block; padding-top:2px; padding-bottom:4px; }
+.block_label{  display:inline-block;  width:49%;}
+.block_field{  display:inline;  padding: 0px;  width:50%;}
+.block_form_label{display:inline-block;  width:30%;}
+.block_form_field{  display:inline;  padding: 0px;  width:69%;}
 
 
 /************** tabs div ***********/
 .block_tab{}
 
 /**********************/
-.block_row_form{ display:block; padding-top:2px; padding-bottom:4px; }
+
 
 
 
@@ -98,10 +103,6 @@ ul.menu div.panel a:hover {    color: #2A3890;    text-decoration: underline;}
 .block_tab li a:active	{	background-color: #deeff8;	font-weight: bold;	text-decoration: none;}
 .block_tab_browse{	width:49%;	display:inline-block;}
 .ui-tabs-hide {	display: none;}
-
-
-
-
 
 
 

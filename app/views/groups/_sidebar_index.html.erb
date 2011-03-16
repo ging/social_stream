@@ -1,6 +1,6 @@
-<% content_for :headers, stylesheet_link_tag("default/jqcloud") %>
+<% content_for :headers, stylesheet_link_tag("jqcloud") %>
 
-<div class="space_center"></div>
+<div class="block_space_center"></div>
 
 <div class="block_div">
   <div class="block_header">
@@ -13,9 +13,9 @@
 </div>
 
 <% if user_signed_in? %>
-<div class="space_center"></div>
+<div class="block_space_center"></div>
 <%= render :partial => "ties/suggestions" %>
-<div class="space_center"></div>
+<div class="block_space_center"></div>
 <%= render :partial => 'ties/pendings' %>
 
 
