@@ -48,6 +48,8 @@
 /************** tabs div ***********/
 .block_tab{}
 
+/**********************/
+.block_row_form{ display:block; padding-top:2px; padding-bottom:4px; }
 
 
 
@@ -85,7 +87,6 @@ ul.menu div.panel a:hover {    color: #2A3890;    text-decoration: underline;}
 .btn_group{  vertical-align:top;}
 
 
-
 .browse_letter{	text-align:center;}
 .block_tab_content{ padding:5px; text-align:center;}
 .block_tab li { display: inline; list-style: none;	padding-right: 2px;}
@@ -95,11 +96,13 @@ ul.menu div.panel a:hover {    color: #2A3890;    text-decoration: underline;}
 .block_tab li.ui-tabs-nav a,
 .block_tab li.ui-tabs-selected a,
 .block_tab li a:active	{	background-color: #deeff8;	font-weight: bold;	text-decoration: none;}
-.block_tab_browse{
-	width:49%;
-	display:inline-block;
-}
+.block_tab_browse{	width:49%;	display:inline-block;}
 .ui-tabs-hide {	display: none;}
+
+
+
+
+
 
 
 

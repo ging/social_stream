@@ -63,7 +63,6 @@ en:
       send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
       unlocked: 'Your account was successfully unlocked. You are now signed in.'
   forgot_password: "Forgot you password?"
-  explorar: "Explorar"
   frontpage:
     collaborate:
       default: "Collaborate"
@@ -85,7 +84,7 @@ en:
       sentence1: "Your contacts and relations"
       sentence2: "Posts, comments and activities"
     stats: "%{users} users and %{groups} groups registered"
-  find: "Buscar"
+  find: "Find"
   group:
     one: "Group"
     other: "Groups"
@@ -114,7 +113,7 @@ en:
   menu:
     options: "Menu Options"
   password:
-    forgot: "¿Ha olvidado la contraseña?"
+    forgot: "¿Do you forgot your password?"
   post:
     confirm_delete: "Delete post?"
   profile:
