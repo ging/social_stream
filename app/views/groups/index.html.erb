@@ -14,11 +14,11 @@
 </div>
 <div id="by_options"><%= link_to(t('user.by'), users_path) %></div>
 
-<div class="block_space_center"></div>
+<div class="space_center"></div>
 
-<div id="my_conferences">
-  <div id="block_tab" class="widget content_size">
-    <ul class="block_tab">
+<div id="my_conferences" class="block">
+  <div id="tab" class="widget content_size">
+    <ul class="tab">
       <li>
           <a href="/groups">All <%= t('group.other')%> (<%=Group.count%>) </a>
       </li>
@@ -29,30 +29,30 @@
           <a href="#most_voted"> <%= t('group.voted.most')%> </a>
       </li>
     </ul>
-    <div id="spaces" class="block_tab">
-      <div class="block_space_center"></div>
-      <div class="block_row">
+    <div id="spaces" class="tab">
+      <div class="space_center"></div>
+      <div class="row">
         <input type="text" value="Search by name" id="search_field" class="search_input" />
         <%= image_tag("btn/search.png",:size=>"20x20",:id=>"search_button") %>
       </div>
-      <div class="block_space_center"></div>
-      <div class="block_row">
-        <div class="block_center">
+      <div class="space_center"></div>
+      <div class="row">
+        <div class="center">
           <% for g in Group.distinct_initials %>
             <%= link_to g.initial,{:letter => g.initial,:page => 1},:class => "user_letter_link" %>
           <% end %>
         </div>
       </div>
-      <div class="block_space_center"></div>
-      <div id="list_users_ajax" class="block_tab_content">
+      <div class="space_center"></div>
+      <div id="list_users_ajax" class="tab_content">
         <%= render :partial => "groups/index"%>
       </div>
-      <div class="block_space_center"></div>
+      <div class="space_center"></div>
     </div>
   </div>
 </div>	
 
  
 <br class="clearfloat" />
-<div class="block_space_center">
+<div class="space_center">
 </div>

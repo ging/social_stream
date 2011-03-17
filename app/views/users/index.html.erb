@@ -12,34 +12,34 @@
   Your are here ><img src="images/btn/btn_browse.png" class="btn_config" /> <%= t('browse') %>: <span id="name_group"><%= t('user.other')%></span>
 </div>
 
-<div id="by_options" class="block_label_right content_size"><%=link_to(t('group.by'),groups_path)%></div>
+<div id="by_options" class="label_right content_size"><%=link_to(t('group.by'),groups_path)%></div>
 
-<div class="block_space_center"></div>
+<div class="space_center"></div>
 
 <div id="my_conferences">
-  <div id="contacts">
+  <div id="contacts" class="block">
     <div class="search_field_wrapper">
       <input type="text" value="Search by name" id="search_field" class="search_input" />
       <%= image_tag("btn/search.png",:size=>"20x20",:id=>"search_button") %>
     </div>
-    <div class="block_space_center"></div>
-    <div class="block_row" >
-      <div class="block_center">
+    <div class="space_center"></div>
+    <div class="row" >
+      <div class="center">
         <%= link_to t('user.all_n', :count => User.count), users_path %> -
         <% for u in User.distinct_initials %>
           <%= link_to u.initial,{:letter => u.initial,:page => 1},:class => "user_letter_link" %>
         <% end %>
       </div>
     </div>
-    <div class="block_space_center"></div>
-    <div id="list_users_ajax" class="block_tab_content">
+    <div class="space_center"></div>
+    <div id="list_users_ajax" class="tab_content block">
       <%= render :partial => "users/index"%>
     </div>
-    <div class="block_space_center"></div>
+    <div class="space_center"></div>
   </div>
 </div>
 
 
-<div class="block_space_center"></div>
+<div class="space_center"></div>
 
 

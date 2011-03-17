@@ -1,15 +1,17 @@
+<% content_for :headers, stylesheet_link_tag("menu", :media => "screen, projection") %>
+
 <%= render :partial => 'logo' %>
 
-<div class="block_space_center">
+<div class="block space_center">
 </div>
 <%= render :partial => 'menu' %>
-<div class="block_space_center">
+<div class="block space_center">
 </div>
 
 <%= render :partial => 'subjects/contacts', :locals => { :subject => @user } %>
 
-<div class="block_space_center">
+<div class="block space_center">
 </div>
-<div class="block_space_center">
+<div class="block space_center">
 </div>
 

@@ -6,12 +6,12 @@
     <%= devise_error_messages! %>
     <%= f.hidden_field :reset_password_token %>
     <div class="line">
-      <div class="label_div"><%= f.label t('password.default') %></div>
-      <div class="field_div"><%= f.password_field :password, :class =>"field_x" %></div>
+      <div class="label"><%= f.label t('password.default') %></div>
+      <div class="field"><%= f.password_field :password, :class =>"field_x" %></div>
     </div>
     <div class="line">
-      <div class="label_div"><%= f.label t('password.confirmation') %></div>
-      <div class="field_div"><%= f.password_field :password_confirmation, :class =>"field_x" %></div>
+      <div class="label"><%= f.label t('password.confirmation') %></div>
+      <div class="field"><%= f.password_field :password_confirmation, :class =>"field_x" %></div>
     </div>
     <div class="space_height"></div>
     <div class="btn_login">

@@ -1,9 +1,13 @@
-/*********************************header *************************************/
+/******************header structure ******/
 #headerFront {	width: 100%;	padding: 0;	background: #1F4A75;  padding: 2px 0px 0px 0px;}
 #header_left {	left: 0px;	float: left;	padding-left: 5px;}
 #header_right {	float: right;	right: 0px;	padding-right: 10px;  display: inline-block;}
 .banner_top {	width: 960px;	margin-left: auto;	margin-right: auto;	margin-top: 3px;  padding-bottom: 3px;
 	position: relative;}
+
+/********** content ************/
+#headerFront .div_login a{	color:#FFFFFF;	padding-right: 7px;}
+#headerFront .div_login a:hover{text-decoration:underline;}
 #logo{  width:218px;  height:50px;  float:left;  vertical-align:top;}
 #logo_txt {color: #fff;	display: inline;	vertical-align: top;	padding-top: 2px;}
 .div_login {	color:#FFF;	width:65%;	display:inline-block;	text-align: right;	vertical-align: top;
@@ -13,12 +17,9 @@
 .div_login #login_button{	width:61px;	height:18px;}
 .div_login a.login{	background-color:#497FC1;	padding-right:2px;	padding-left:2px;	color:white;}
 .div_login .subtexto{	padding-top: 5px;	height:12px;	font-size: 11px;}
-#headerFront .div_login a{	color:#FFFFFF;	padding-right: 7px;}
-#headerFront .div_login a:hover{text-decoration:underline;}
 .div_login .a_border{	border-right:thin solid;	padding-right:7px;	text-decoration:underline;}
-#representation {  display: inline;  padding-left:3px;  padding-right:3px;}
 #new_representation {	display: inline-block;}
-
+#representation {  display: inline;  padding-left:3px;  padding-right:3px;}
 .txt_config {color: #fff;	vertical-align: top;	display: inline;	padding-top: 2px;	border-right: thin solid;
 	padding-right: 3px;}
 .txt_config2 {color: #fff;	vertical-align: top;	display: inline;	padding-top: 2px;	padding-right: 3px;}

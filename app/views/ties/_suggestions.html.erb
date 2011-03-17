@@ -10,14 +10,14 @@
     });
   <% end %>
 
-  <div class="block_div">
-    <div class="block_header">
-      <%= image_tag('btn/notifications.png', :class => "block_header_icon") %>
-      <div class="block_header_text">
+  <div class="block">
+    <div class="header">
+      <%= image_tag('btn/notifications.png', :class => "header_icon") %>
+      <div class="header_text">
         <%=t('tie.suggestion.one') %>
       </div>
     </div>
-    <div class="block_content">
+    <div class="content">
       <% if (sgs = current_subject.suggestions(2)).present? %>
         <%= render sgs %>
       <%end%>

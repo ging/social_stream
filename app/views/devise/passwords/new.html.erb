@@ -1,13 +1,13 @@
 <div id="welcome">
-  <div id="login">
+  <div id="login" class="block">
     <h2><%= t('password.forgot') %></h2>
-    <div class="espacio"></div>
-    <div class="espacio"></div>
+    <div class="space_center"></div>
+    <div class="space_center"></div>
     <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
       <%= devise_error_messages! %>
-      <div class="space_height"><%=t('devise.passwords.field')  %></div>
-      <div class="field_div"><%= f.text_field :email %></div>
-      <div class="space_height"></div>
+      <div class="form_row"><%=t('devise.passwords.field')  %></div>
+      <div class="form_row"><%= f.text_field :email %></div>
+      <div class="space_center"></div>
       <div class="btn_login">
         <%= f.submit t('action.send'), :class =>"myButton" %>
       </div>

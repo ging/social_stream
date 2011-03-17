@@ -1,15 +1,15 @@
 <% if (cs = subject.subjects(:direction => :receivers)).present? %>
 
-  <div class="block_div">
-    <div class="block_header">
-      <%=image_tag("btn/btn_friend.png", :class => "block_header_icon")%>
-      <div class="block_header_text">
+  <div class="block">
+    <div class="header">
+      <%=image_tag("btn/btn_friend.png", :class => "header_icon")%>
+      <div class="header_text">
         <%= cs.count %> <%= t('contact', :count => cs.count) %>
       </div>
     </div>
   </div>
-  <div class ="block_content">
-      <div class="contact block_space_center">
+  <div class ="content">
+      <div class="contact space_center">
         <% cs.each do |contact| %>
             <%= link_to(image_tag(contact.logo.url, :alt => contact.name , :size => "40x40"), contact) %>
         <% end %>

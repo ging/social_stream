@@ -1,21 +1,21 @@
 <% content_for :headers, stylesheet_link_tag("jqcloud") %>
 
-<div class="block_space_center"></div>
+<div class="space_center"></div>
 
-<div class="block_div">
-  <div class="block_header">
-    <%= image_tag('btn/btn_tag.png', :class => "block_icon", :size => "15x15") %>
-    <div class="block_header_text">
+<div class="block">
+  <div class="header">
+    <%= image_tag('btn/btn_tag.png', :class => "icon", :size => "15x15") %>
+    <div class="header_text">
       <%= t 'group.cloud' %>
     </div>
   </div>
-  <div id="wordcloud" class="block_content"></div>
+  <div id="wordcloud" class="content"></div>
 </div>
 
 <% if user_signed_in? %>
-<div class="block_space_center"></div>
+<div class="space_center"></div>
 <%= render :partial => "ties/suggestions" %>
-<div class="block_space_center"></div>
+<div class="space_center"></div>
 <%= render :partial => 'ties/pendings' %>
 
 

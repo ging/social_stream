@@ -1,10 +1,10 @@
 <% if current_subject.pending_ties.any? %>
-<div class="block_div">
-  <div class="block_header">
-    <%= image_tag('btn/btn_notifications.png', :class => "block_header_icon") %>
-    <div class="block_header_text"><%= t 'tie.pending.other' %></div>
+<div class="block">
+  <div class="header">
+    <%= image_tag('btn/btn_notifications.png', :class => "header_icon") %>
+    <div class="header_text"><%= t 'tie.pending.other' %></div>
   </div>
-  <div class="block_content">
+  <div class="content">
     <%= render current_subject.pending_ties %>
   </div>
 </div>

@@ -1,21 +1,21 @@
-<div id="tie_<%=dom_id(tie.receiver_subject)%>" class="block_row">
-  <div class="block_logo">
+<div id="tie_<%=dom_id(tie.receiver_subject)%>" class="row">
+  <div class="logo">
     <%= link_to(image_tag(tie.receiver_subject.logo.url(:tie)),
                 tie.receiver_subject) %>
   </div>
-  <div class="sub-block_content">
-    <div class="block_name">
+  <div class="sub-block">
+    <div class="name">
       <%= link_to(tie.receiver_subject.name, tie.receiver_subject, :class => "tie_link") %>
     </div>
-    <div class="block_brief">
+    <div class="brief">
       <%= tie_brief(tie.receiver_subject) %>
     </div>
-    <div class="block_link" id="tie_link<%= dom_id(tie.receiver_subject)%>">
+    <div class="link" id="tie_link<%= dom_id(tie.receiver_subject)%>">
       <%= new_tie_link(tie) %>
     </div>
   </div>
-  <div class="block_close"><%=link_to('X','#')%></div>
-  <div class="block_space_center">
+  <div class="close"><%=link_to('X','#')%></div>
+  <div class="space_center">
   </div>  
 </div>
 

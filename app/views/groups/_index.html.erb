@@ -2,17 +2,17 @@
 <% @groups.each do |group| %>
 	<% if (cont%2) == 0 %>
 	  <% cont+=1; %>
- 	  <div class="block_row">
+ 	  <div class="row">
 	<% end %>
-    <div class="block_label">
-      <div class="block_logo">
+    <div class="label">
+      <div class="logo">
         <%= link_to (image_tag(group.logo.url , :size => "50x50", :alt => group.name )), group  %>
       </div>
-      <div class="sub-block_content">
-        <div class="block_name" >
+      <div class="sub-block">
+        <div class="name" >
           <%= link_to group.name, group %>
         </div>
-        <div class="block_link">
+        <div class="link">
           <%= ties_to(group) %>
         </div>
       </div>
@@ -22,10 +22,10 @@
 	<% end %>
 <% end %>
 <% if ((cont%2) != 0) 	%>
-  <div class="block_label">
+  <div class="label">
   </div>
 		</div>
 <% end %>
-<div class="block_row">
+<div class="row">
   <%= will_paginate @groups %>
 </div>

@@ -27,7 +27,6 @@ body{  font-size:75%;  color:#2A3890;  background-color:#ffffff;}
 #error_explanation ul li {  font-size: 12px;  list-style: square;  margin-left:10px;}
 
 
-
 /********* Menu header ************/
 .menu_list ul{list-style-type:none;}
 .menu_list li{display: inline;padding-right: 2px; padding-left: 2px; }
@@ -64,8 +63,6 @@ input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:95%
 
 .field_x{  border: thin solid #005C84;  width: 130px;}
 .line{  display:block;  margin:10px 2px 10px 10px;}
-.label_div{  display:inline-block;  width:50%;}
-.field_div{  display:inline;  padding: 0px;  width:50%;}
 
 
 /********* links **********/
@@ -73,3 +70,48 @@ input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:95%
 .tie_link a:hover{  text-decoration:underline;}
 
 
+/*************SPACES*************/
+.space_center {	padding-top: 9px;	padding-right: 4px;	text-align: center;}
+
+
+/******** DIVS FORMS *******/
+.block .field{  display:inline;  padding: 0px;  width:50%;}
+.block .form_tag{border-color: #0656a4;	color: #2A3890;	padding: 5px 5px 5px 5px;  border:1px solid #BDC7D8; width:90%;}
+.block .form_tag_long{border-color: #0656a4;	color: #2A3890;	padding: 5px 5px 5px 5px;  border:1px solid #BDC7D8; width:91%;}
+.block .form_label{display:inline-block;  width:25%; font-weight:bold;}
+.block .form_field{  display:inline-block;  padding: 0px;  width:73%;}
+.block .form_row {	display: block; padding:5px; padding-left:20px;}
+.block .label{  display:inline-block;  width:49%; }
+
+
+/************** BLOCK DIV *********/
+.block .brief {	color: #6C6D6F;}
+.block .center{ text-align:center;}
+.block .close {  float:right;  vertical-align:top;}
+.block .content{ padding: 5px 4px 5px 4px;}
+.block .header{vertical-align: middle;	background: transparent url(/images/title_background.png) scroll 0px;
+	padding-left: 10px;	display: block;  height:20px; font-weight:bold;}
+.block .header_icon{ margin-top: 2px;  width:14px;  height:14px; }
+.block .header_icon_right {	float: right;	padding-right: 5px;	padding-top: 3px;}
+.block .header_text {	margin-bottom: 3px;	display: inline-block;}
+.block .logo{ 	display: inline-block; vertical-align:top;}
+.block .right{padding-right:20px; float:right;}
+.block .row {	display: block;}
+.block .title{ display:inline-block; }
+.block .sub-block{	display: inline-block;  padding-left:3px; width:70%; text-align:left;}
+
+
+
+/******BLOCK TAB CONTENT ********/
+.block .tab { 	margin-top: 2px;	background: #fff;	/*border-top: thin solid #D4E4EA;*/
+	padding: 2px 0px 2px 0px;}
+.block .tab_content{ padding:5px; text-align:center;}
+.block .tab li { display: inline; list-style: none;	padding-right: 2px;}
+.block .tab li a {	background-color: #deeff8;	text-decoration: none;	padding: 4px 3px;	outline: none;}
+.block .tab ul {	background: #deeff8;}
+.block .tab li a:hover,
+.block .tab li.ui-tabs-nav a,
+.block .tab li.ui-tabs-selected a,
+.block .tab li a:active	{	background-color: #deeff8;	font-weight: bold;	text-decoration: none;}
+.block .tab_browse{	width:49%;	display:inline-block;}
+.ui-tabs-hide {	display: none;}
