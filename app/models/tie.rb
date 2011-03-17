@@ -34,6 +34,8 @@
 #
 # = Scopes
 # There are several scopes defined:
+#
+# original:: ties created by actors. It excludes ties created in the weaker set.
 # sent_by(actor):: ties whose sender is actor
 # received_by(actor):: ties whose receiver is actor
 # sent_or_received_by(actor):: the union of the former
@@ -59,6 +61,8 @@ class Tie < ActiveRecord::Base
 
   has_many :tie_activities, :dependent => :destroy
   has_many :activities, :through => :tie_activities
+
+  scope :original, where(:original => true)
 
   scope :recent, order("#{ quoted_table_name }.created_at DESC")
 
@@ -233,13 +237,14 @@ class Tie < ActiveRecord::Base
   end
 
   # After create callback
-  # Creates ties with a weaker relations in the strength hierarchy of this tie
+  # Creates ties with weaker relations in the strength hierarchy of this tie
   def complete_weak_set
     return if reflexive?
 
     relation.weaker.each do |r|
       if relation_set(:relations => r).blank?
-        t = relation_set.build :relation => r
+        t = relation_set.build :relation => r,
+                               :original => false
         t.save!
       end
     end
