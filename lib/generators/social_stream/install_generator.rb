@@ -19,10 +19,6 @@ class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
   def create_devise_route
     route "devise_for :users, :controllers => {:omniauth_callbacks => 'omniauth_callbacks'}"
   end
-  
-  def create_api_route
-    route "map.connect 'api/', :controller => 'API'"
-  end
 
   def create_initializer_file
     copy_file 'initializer.rb', 'config/initializers/social_stream.rb'
