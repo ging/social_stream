@@ -26,7 +26,7 @@
 /************** BLOCK DIV *****************/
 .block_div{}
 .block_header{vertical-align: middle;	background: transparent url(/images/title_background.png) scroll 0px;
-	padding-left: 10px;	display: block;  height:20px;}
+	padding-left: 10px;	display: block;  height:20px; font-weight:bold;}
 .block_header_icon{ margin-top: 2px;  width:14px;  height:14px; }
 .block_header_icon_right {	float: right;	padding-right: 5px;	padding-top: 3px;}
 .block_header_text {	margin-bottom: 3px;	display: inline-block;}
@@ -45,9 +45,9 @@
 /******FORMS *****/
 .block_form_tag{border-color: #0656a4;	color: #2A3890;	padding: 5px 5px 5px 5px;  border:1px solid #BDC7D8; width:90%;}
 .block_form_tag_long{border-color: #0656a4;	color: #2A3890;	padding: 5px 5px 5px 5px;  border:1px solid #BDC7D8; width:91%;}
-.block_label{  display:inline-block;  width:49%;}
+.block_label{  display:inline-block;  width:49%; }
 .block_field{  display:inline;  padding: 0px;  width:50%;}
-.block_form_label{display:inline-block;  width:25%;}
+.block_form_label{display:inline-block;  width:25%; font-weight:bold;}
 .block_form_field{  display:inline-block;  padding: 0px;  width:73%;}
 .block_form_row {	display: block; padding:5px; padding-left:20px;}
 

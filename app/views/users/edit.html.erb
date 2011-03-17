@@ -43,7 +43,7 @@
          <%= f.label :name %>
         </div>
         <div class="block_form_field">
-         <%= f.text_field :name,  :class => "block_form_tag"  %>
+         <%= f.text_field :name,   :class => "block_form_tag"  %>
         </div>
       </div>
     </div>
@@ -95,11 +95,11 @@
       </div>
     </div>
 
-    <div class="block_form_row">
-      <%= profile_form.label "About me" %>
+    <div class="block_form_row block_form_label">
+      <%= profile_form.label t('edit.aboutme') %>
     </div>
     <div class="block_form_row">
-      <%= profile_form.text_area :description, :maxlength => 300, :class => "block_form_tag_long" %>
+      <%= profile_form.text_area :description, :maxlength => 200, :rows => 10, :class => "block_form_tag_long" %>
     </div>
 
     <% end %>
@@ -123,7 +123,7 @@
           <%= profile_form.label :phone %>
         </div>
         <div class="block_form_field">
-          <%= profile_form.text_field :phone, :class => "phone block_form_tag" %>
+          <%= profile_form.text_field :phone, :class => "block_form_tag" %>
         </div>
       </div>
       <div class="block_form_row">
@@ -131,7 +131,7 @@
           <%= profile_form.label :mobile %>
         </div>
         <div class="block_form_field">
-          <%= profile_form.text_field :mobile, :class => "phone block_form_tag" %>
+          <%= profile_form.text_field :mobile, :class => "block_form_tag" %>
         </div>
       </div>
       <div class="block_form_row">
@@ -139,7 +139,7 @@
           <%= profile_form.label :fax %>
         </div>
         <div class="block_form_field">
-          <%= profile_form.text_field :fax, :class => "phone block_form_tag" %>
+          <%= profile_form.text_field :fax, :class => "block_form_tag" %>
         </div>
       </div>
       <div class="block_form_row">
@@ -155,7 +155,7 @@
           <%= profile_form.label :website %>
         </div>
         <div class="block_form_field">
-          <%= profile_form.text_field :website, :class => "url block_form_tag" %>
+          <%= profile_form.text_field :website, :class => "block_form_tag" %>
         </div>
       </div>
 
@@ -174,9 +174,9 @@
       <div class="block_form_row">
           <h2><%=t('edit.experience')%></h2>
       </div>
-      <div class="block_form_row block_center">
+      <div class="block_row block_center">
         <%= f.fields_for :profile do |profile_form| %>
-        <%= profile_form.text_area :experience, :maxlength => 500, :class => "block_form_tag" %>
+        <%= profile_form.text_area :experience, :maxlength => 500, :rows => 10, :class => "block_form_tag_long" %>
       </div>
       <% end %>
     <% end %>

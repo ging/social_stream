@@ -63,19 +63,19 @@ en:
       send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
       unlocked: 'Your account was successfully unlocked. You are now signed in.'
   edit:
-    personal_info: "Personal information"
-    contact: "Contact information"
-    experience: "Experience"
-    organization: "Organization"
-    birthday: "BirthDay"
-    actualcity: "Actual City"
     aboutme: "About me"
-    phone: "Phone"
-    mobile: "Mobile"
-    fax: "Fax"
+    actualcity: "Actual City"
     address: "Address"
-    website: "Website"
+    birthday: "BirthDay"
+    contact: "Contact information"
     email: "E-mail"
+    experience: "Experience"
+    fax: "Fax"
+    mobile: "Mobile"
+    organization: "Organization"
+    personal_info: "Personal information"
+    phone: "Phone"
+    website: "Website"
   forgot_password: "Forgot you password?"
   frontpage:
     collaborate:
