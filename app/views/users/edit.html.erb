@@ -35,15 +35,15 @@
 <div class="block_div">
     <% if !params[:section].present? or params[:section].eql?("about_me") %>
     <div class="block_row">
-      <div class="block_row">
-          Personal information
+      <div class="block_form_row">
+          <h2><%=t('edit.personal_info')%></h2>
       </div>
-      <div class="block_row">
-        <div class="block_label">
+      <div class="block_form_row">
+        <div class="block_form_label">
          <%= f.label :name %>
         </div>
-        <div class="block_field">
-         <%= f.text_field :name,  :class => "block_input"  %>
+        <div class="block_form_field">
+         <%= f.text_field :name,  :class => "block_form_tag"  %>
         </div>
       </div>
     </div>
@@ -59,47 +59,47 @@
 
     <%= f.fields_for :profile do |profile_form| %>
 
-    <div class="block_row">
-      <div class="block_label">
+    <div class="block_form_row">
+      <div class="block_form_label">
         <%= profile_form.label :organization %>
       </div>
-      <div class="block_field">
-        <%= profile_form.text_field :organization , :class => "edit_text" %>
+      <div class="block_form_field">
+        <%= profile_form.text_field :organization , :class => "block_form_tag" %>
       </div>
     </div>
 
-    <div class="block_row">
-      <div class="block_label">
+    <div class="block_form_row">
+      <div class="block_form_label">
         <%= profile_form.label :birthday %>
       </div>
-      <div class="block_field">
-        <%= profile_form.text_field( :birthday , :class => "date edit_text") %>
+      <div class="block_form_field">
+        <%= profile_form.text_field( :birthday , :class => "date block_form_tag") %>
       </div>
     </div>
 
-    <div class="block_row">
-      <div class="block_label">
+    <div class="block_form_row">
+      <div class="block_form_label">
         <%= profile_form.label :city %>
       </div>
-      <div class="block_field">
-        <%= profile_form.text_field :city,  :class => "edit_text" %>
+      <div class="block_form_field">
+        <%= profile_form.text_field :city,  :class => "block_form_tag" %>
       </div>
     </div>
 
-    <div class="block_row">
-      <div class="block_label">
+    <div class="block_form_row">
+      <div class="block_form_label">
         <%= profile_form.label :country %>
       </div>
-      <div class="block_field">
-        <%= profile_form.text_field :country,  :class => "edit_text" %>
+      <div class="block_form_field">
+        <%= profile_form.text_field :country,  :class => "block_form_tag" %>
       </div>
     </div>
 
-    <div class="block_row">
+    <div class="block_form_row">
       <%= profile_form.label "About me" %>
     </div>
-    <div class="block_row">
-      <%= profile_form.text_area :description, :maxlength => 400, :class => "edit_text" %>
+    <div class="block_form_row">
+      <%= profile_form.text_area :description, :maxlength => 300, :class => "block_form_tag_long" %>
     </div>
 
     <% end %>
@@ -114,48 +114,48 @@
 
       <% end %>
 
-      <div class="block_row">
-          Contact information
+      <div class="block_form_row">
+          <h2><%=t('edit.contact')%></h2>
       </div>
       <%= f.fields_for :profile do |profile_form| %>
-      <div class="block_row">
-        <div class="block_label">
+      <div class="block_form_row">
+        <div class="block_form_label">
           <%= profile_form.label :phone %>
         </div>
-        <div class="block_field">
-          <%= profile_form.text_field :phone, :class => "phone edit_text" %>
+        <div class="block_form_field">
+          <%= profile_form.text_field :phone, :class => "phone block_form_tag" %>
         </div>
       </div>
-      <div class="block_row">
-        <div class="block_label">
+      <div class="block_form_row">
+        <div class="block_form_label">
           <%= profile_form.label :mobile %>
         </div>
-        <div class="block_field">
-          <%= profile_form.text_field :mobile, :class => "phone edit_text" %>
+        <div class="block_form_field">
+          <%= profile_form.text_field :mobile, :class => "phone block_form_tag" %>
         </div>
       </div>
-      <div class="block_row">
-        <div class="block_label">
+      <div class="block_form_row">
+        <div class="block_form_label">
           <%= profile_form.label :fax %>
         </div>
-        <div class="block_field">
-          <%= profile_form.text_field :fax, :class => "phone edit_text" %>
+        <div class="block_form_field">
+          <%= profile_form.text_field :fax, :class => "phone block_form_tag" %>
         </div>
       </div>
-      <div class="block_row">
-        <div class="block_label">
+      <div class="block_form_row">
+        <div class="block_form_label">
           <%= profile_form.label :address %>
         </div>
-        <div class="block_field">
-          <%= profile_form.text_field :address, :class => "edit_text" %>
+        <div class="block_form_field">
+          <%= profile_form.text_field :address, :class => "block_form_tag" %>
         </div>
       </div>
-      <div class="block_row">
-        <div class="block_label">
+      <div class="block_form_row">
+        <div class="block_form_label">
           <%= profile_form.label :website %>
         </div>
-        <div class="block_field">
-          <%= profile_form.text_field :website, :class => "url edit_text" %>
+        <div class="block_form_field">
+          <%= profile_form.text_field :website, :class => "url block_form_tag" %>
         </div>
       </div>
 
@@ -171,12 +171,12 @@
 
       <% end %>
 
-      <div class="block_row">
-          Experience
+      <div class="block_form_row">
+          <h2><%=t('edit.experience')%></h2>
       </div>
-      <div class="block_row">
+      <div class="block_form_row block_center">
         <%= f.fields_for :profile do |profile_form| %>
-        <%= profile_form.text_area :experience, :maxlength => 500, :class => "edit_text" %>
+        <%= profile_form.text_area :experience, :maxlength => 500, :class => "block_form_tag" %>
       </div>
       <% end %>
     <% end %>
@@ -184,7 +184,7 @@
 <% if params[:section].present? %>
 <%= hidden_field_tag("section", params[:section]) %>
 <% end %>
-<div class="actions">
+<div class="block_form_row block_center">
   <%= f.submit "Update", :class => "button" %>&nbsp;
   <button class="button" onclick="window.location.href='<%= user_url(@user) %>';">Cancel</button>
 </div>

@@ -3,7 +3,7 @@
 <div class="block_div" id="personal_info" >
   <div class="block_header">
     <div class="block_header_text">
-      Personal Information
+      <%=t('edit.personal_info')%>
     </div>
     <div class="block_header_icon_right">
       <%= link_to (image_tag('/images/btn/edit.png')), :controller => :users, :action => :edit, :section => :about_me %>
@@ -12,8 +12,8 @@
   <div class="block_content"  >
     <% if @user.profile.organization? %>
       <div class="block_row">
-        <div class="block_form_label">
-          Organization:
+        <div class="block_label">
+          <%=t('edit.organization')%>:
         </div>
         <div class="block_field">
             <%=h @user.profile.organization %>
@@ -23,7 +23,7 @@
     <% if @user.profile.birthday? %>
       <div class="block_row">
         <div class="block_label">
-            BirthDay:
+          <%=t('edit.birthday')%>:
         </div>
         <div class="block_field">
           <%=h I18n.l @user.profile.birthday, :format => :long %>
@@ -41,7 +41,7 @@
     <% if @user.profile.city? %>
       <div class="block_row">
         <div class="block_label">
-            Actual City:
+          <%=t('edit.actualcity')%>:
         </div>
         <div class="block_field">
           <%=h @user.profile.city %>
@@ -54,7 +54,7 @@
     <% if @user.profile.description? %>
       <div class="block_row">
         <div class="block_label">
-            About me:
+          <%=t('edit.aboutme')%>:
         </div>
         <div class="block_field">
             <%=h @user.profile.description %>
@@ -67,7 +67,7 @@
 <div class="block_div" id="contact_info">
   <div class="block_header">
     <div class="block_header_text">
-      Contact Information
+      <%=t('edit.contact')%>
     </div>
     <div class="block_header_icon_right">
       <%= link_to (image_tag('/images/btn/edit.png')), :controller => :users, :action => :edit, :section => :contact_info %>
@@ -77,7 +77,7 @@
       <% if @user.profile.phone? %>
         <div class="block_row">
           <div class="block_label">
-            Phone
+            <%=t('edit.phone')%>
           </div>
           <div class="block_field">
             <%=h @user.profile.phone %>
@@ -87,7 +87,7 @@
       <% if @user.profile.mobile? %>
         <div class="block_row">
           <div class="block_label">
-            Mobile
+            <%=t('edit.mobile')%>
           </div>
           <div class="block_field">
             <%=h @user.profile.mobile %>
@@ -97,7 +97,7 @@
       <% if @user.profile.fax? %>
         <div class="block_row">
           <div class="block_label">
-            Fax
+            <%=t('edit.fax')%>
           </div>
           <div class="block_field">
             <%=h @user.profile.fax %>
@@ -107,7 +107,7 @@
       <% if @user.profile.address? %>
         <div class="block_row">
           <div class="block_label">
-            Address
+            <%=t('edit.address')%>
           </div>
           <div class="block_field">
             <%=h @user.profile.address %>
@@ -117,7 +117,7 @@
       <% if @user.profile.website? %>
         <div class="block_row">
           <div class="block_label">
-            Website
+            <%=t('edit.website')%>
           </div>
           <div class="block_field">
             <a href="<%=h @user.profile.website %>"><%=h @user.profile.website %></a>
@@ -126,10 +126,10 @@
       <%end%>
 
       <div class="block_row">
-        <div class="block_label">
-          E-mail:
+        <div class="block_row">
+          <%=t('edit.email')%>:
         </div>
-        <div class="block_field">
+        <div class="block_row">
           <%=h @user.email %>
         </div>
       </div>
@@ -139,7 +139,7 @@
   <div class="block_div" id="experience_info">
     <div class="block_header">
       <div class="block_header_text">
-        Experience
+        <%=t('edit.experience')%>
       </div>
       <div class="block_header_icon_right">
         <%= link_to (image_tag('/images/btn/edit.png')), :controller => :users, :action => :edit, :section => :my_experience %>
