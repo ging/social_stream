@@ -1,5 +1,7 @@
 class Mailbox::ConversationController < ApplicationController
-
+  
+  before_filter :get_mailbox
+  
 
   def show
     @actor = Actor.normalize(current_subject)
@@ -65,5 +67,11 @@ class Mailbox::ConversationController < ApplicationController
       format.html { redirect_to(mailbox_conversations_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  
+  def get_mailbox    
+    @mailbox = current_subject.mailbox
   end
 end

@@ -35,5 +35,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency('nifty-generators','~> 0.4.5')
   
   #mailboxer  
-  s.add_runtime_dependency('mailboxer','~> 0.0.5')
+  s.add_runtime_dependency('mailboxer','~> 0.0.6')
 end

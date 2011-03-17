@@ -122,6 +122,11 @@ en:
     one: "Inbox"
   location:
     message: "You are here > %{location}"
+  mailbox:
+    mailbox: "Mailbox"
+    inbox: "Inbox"
+    sentbox: "Sentbox"
+    trash: "Trash"
   message:
     one: "Message"
   menu:

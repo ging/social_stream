@@ -1,0 +1,23 @@
+<ul class="menu noaccordion">
+    <li>
+        <%= link_to( image_tag("btn/btn_inbox.png", :class => "menu_icon")+t('mailbox.mailbox'), mailbox_index_path, :remote => true) %>
+    </li>
+    <li>
+        <blockquote>
+            <ul>
+                <li>
+                    <%= link_to( image_tag("btn/btn_inbox.png", :class => "menu_icon")+t('mailbox.inbox')+" (" + @mailbox.inbox(:unread => true).count.to_s + ")", mailbox_path(:id => :inbox), :remote => true) %>
+                </li>
+                <li>
+                    <%= link_to( image_tag("btn/btn_inbox.png", :class => "menu_icon")+t('mailbox.sentbox'), mailbox_path(:id => :sentbox), :remote => true) %>
+                </li>
+                <li>
+                    <%= link_to( image_tag("btn/btn_inbox.png", :class => "menu_icon")+t('mailbox.trash'), mailbox_path(:id => :trash), :remote => true) %>
+                </li>
+            </ul>
+        </blockquote>
+    </li>
+    <li>
+        <%= link_to( image_tag("btn/btn_group.png", :class => "menu_icon")+t('group.new.action'), new_group_path, :remote => true) %>
+    </li>
+</ul>
