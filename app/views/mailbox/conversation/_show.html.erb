@@ -2,15 +2,15 @@
 <%#= render :partial => 'home/sidebar' %>
 <% end %>
 <% content_for :toolbar do %>
-<%= render :partial => "home/toolbar" %>
+<%= render :partial => "mailbox/toolbar" %>
 <% end %>
 <%= render :partial => 'location' %>
 <br class="clearfloat" />
 <div class="block_space_center">
 </div>
 <div id="new_message">
-	<% if session[:mailbox_id].present? %>
-    <%= link_to 'Back', mailbox_path(:id => session[:mailbox_id]) %>
+	<% if params[:box].present? %>
+    <%= link_to 'Back', mailbox_path(:id => params[:box]) %>
 	<% else %>
     <%= link_to 'Back', mailbox_index_path %>
 	<% end %>

@@ -1,7 +1,8 @@
 class MailboxController < ApplicationController
   
+  before_filter :get_mailbox
+  
   def index
-    @mailbox = current_subject.mailbox 
   end
   
   def new
@@ -15,10 +16,7 @@ class MailboxController < ApplicationController
       redirect_to :action => :index
       return
     end
-    @mailbox = current_subject.mailbox
-    
-    session[:mailbox_id]=params[:id]
-    
+        
     if params[:id].eql?"inbox"
       @conversations = @mailbox.inbox.paginate(:per_page => 8, :page => params[:page])      
     elsif params[:id].eql?"sentbox"
@@ -26,6 +24,12 @@ class MailboxController < ApplicationController
     else
       @conversations = @mailbox.trash.paginate(:per_page => 8, :page => params[:page])      
     end
+  end
+  
+  private
+  
+  def get_mailbox    
+    @mailbox = current_subject.mailbox
   end
   
 end
