@@ -2,9 +2,7 @@
   <%= javascript_include_tag 'ajax.paginate' %>
 <% end %>
 
-<% content_for :toolbar do %>
-	<%= render :partial => "users/toolbar_index" %>
-<% end %>
+<% toolbar_menu if user_signed_in? %>
 
 <% content_for :sidebar do %>
 	<%= render :partial => "users/sidebar_index" %>
