@@ -1,129 +1,136 @@
-        <% content_for :toolbar do %>
-        <%= render :partial => 'toolbar_show' %>
+<% content_for :toolbar do %>
+<%= render :partial => 'toolbar_show' %>
+<% end %>
+<% content_for :sidebar do %>
+<%= render :partial => 'sidebar_show' %>
+<% end %>
+<% content_for :headers do %>
+<%= stylesheet_link_tag "edit_user", :media => "screen, projection" %>
+<%= javascript_include_tag 'jquery.validate' %>
+<% end %>
+<%= form_for(@group, :remote => true) do |f| %>
+<% if @group.errors.any? %>
+<div id="error_explanation">
+    <h2><%= pluralize(@group.errors.count, "error") %>prohibited this group from being saved:</h2>
+    <ul>
+        <% @group.errors.full_messages.each do |msg| %>
+        <li>
+            <%= msg %>
+        </li>
         <% end %>
-        
-        <% content_for :sidebar do %>
-        <%= render :partial => 'sidebar_show' %>
-        <% end %>
-        
-        <% content_for :head do %> 
-          <%= stylesheet_link_tag "edit_user", :media => "screen, projection" %>          
-          <%= javascript_include_tag 'jquery.validate' %>
-        <% end %>
-        
-        <%= form_for(@group, :remote => true) do |f| %>
-	        <% if @group.errors.any? %>
-		        <div id="error_explanation">
-		            <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
-		            <ul>
-		                <% @group.errors.full_messages.each do |msg| %>
-		                <li>
-		                    <%= msg %>
-		                </li>
-		                <% end %>
-		            </ul>
-		        </div>
-	        <% end %>
-
-	        <% content_for :javascript do %>
-	              $(function() {
-								    $("#content").css('border-bottom', 'none');         
-	                  $(".edit_group").validate();              
-	              }); 
-	        <% end %> 
-
-          <div class="field">
-        	  <% if !params[:section].present? or params[:section].eql?("about_us") %>
-		            <div class="section_edit">
-		                Group information
-		            </div>
-		            <div class="edit_field">
-		              <div class="edit_label">
-		               <%= f.label :name %>
-		              </div>
-		               <%= f.text_field :name,  :class => "required edit_text"  %>
-		            </div>
-	
-	              <%= f.fields_for :profile do |profile_form| %>
-	            
-		            <div class="edit_field">
-		              <div class="edit_label">
-		                <%= profile_form.label :organization %>
-		              </div>
-		              <%= profile_form.text_field :organization , :class => "edit_text" %>  
-		            </div>
-		            <div class="edit_field">
-		              <div class="edit_label">
-		                <%= profile_form.label :city %>
-		              </div>
-		              <%= profile_form.text_field :city,  :class => "edit_text" %>
-		            </div>
-		            <div class="edit_field">
-		              <div class="edit_label">
-		                <%= profile_form.label :country %>
-		              </div>          
-		              <%= profile_form.text_field :country,  :class => "edit_text" %>
-		            </div>
-		            <div class="edit_field">
-		              <%= profile_form.label :description %>
-		              <%= profile_form.text_area :description, :maxlength => 400, :class => "edit_text" %>
-		            </div>
-	            <% end %>
-						<% end %>
-						
-						<% if !params[:section].present? or params[:section].eql?("contact_info") %>
-						
-						  <% content_for :javascript do %>
-  
-                $(function() {
-                    $("#contact_info").addClass('section_highlight');
-                });
-  
-              <% end %>
-							
-              <div class="section_edit">
-                  Contact information
-              </div>
-							
-							<%= f.fields_for :profile do |profile_form| %>
-	              <div class="edit_field">
-	                <div class="edit_label">
-	                  <%= profile_form.label :phone %>
-	                </div>          
-	                <%= profile_form.text_field :phone, :class => "phone edit_text" %>
-	              </div>
-	              <div class="edit_field">
-	                <div class="edit_label">
-	                  <%= profile_form.label :mobile %>
-	                </div>
-	                <%= profile_form.text_field :mobile, :class => "phone edit_text" %>
-	              </div>
-	              <div class="edit_field">
-	                <div class="edit_label">
-	                  <%= profile_form.label :fax %>
-	                </div>
-	                <%= profile_form.text_field :fax, :class => "phone edit_text" %>
-	              </div>
-	              <div class="edit_field">
-	                <div class="edit_label">
-	                  <%= profile_form.label :address %>
-	                </div>          
-	                <%= profile_form.text_field :address, :class => "edit_text" %>
-	              </div>
-	              <div class="edit_field">
-	                <div class="edit_label">
-	                  <%= profile_form.label :website %>
-	                </div>          
-	                <%= profile_form.text_field :website, :class => "url edit_text" %>
-	              </div>
-							<% end %>
-              
-            <% end %>
+    </ul>
+</div>
+<% end %>
+<% content_for :javascript do %>
+$(function() { 
+$("#content").css('border-bottom', 'none'); 
+$(".edit_group").validate();  
+}); 
+<% end %>
+<div class="block_div">
+    <% if !params[:section].present? or params[:section].eql?("about_us") %>
+    <div class="block_form_row">
+      <h2><%=t('edit.group_info')%></h2>
+    </div>
+    <div class="block_form_row">
+        <div class="block_form_label">
+            <%= f.label :name %>
         </div>
-
-        <div class="actions">
-            <%= f.submit "Update", :class => "button" %>&nbsp;<button onclick="window.location.href='<%= group_url(@group) %>';">Cancel</button>
+				<div class="block_form_field">
+          <%= f.text_field :name,  :class => "required block_form_tag" %>
+				</div>
+    </div>
+    <%= f.fields_for :profile do |profile_form| %>
+    <div class="block_form_row">
+        <div class="block_form_label">
+            <%= profile_form.label :organization %>
         </div>
-        
-        <% end %>
-				
+				<div class="block_form_field">
+          <%= profile_form.text_field :organization , :class => "block_form_tag" %>
+				</div>
+    </div>
+    <div class="block_form_row">
+        <div class="block_form_label">
+            <%= profile_form.label :city %>
+        </div>
+				<div class="block_form_field">
+          <%= profile_form.text_field :city,  :class => "block_form_tag" %>
+				</div>
+    </div>
+    <div class="block_form_row">
+        <div class="block_form_label">
+            <%= profile_form.label :country %>
+        </div>
+				<div class="block_form_field">
+          <%= profile_form.text_field :country,  :class => "block_form_tag" %>
+				</div>
+    </div>
+    <div class="block_form_row">
+        <%= profile_form.label :description %>
+		</div>
+		<div class="block_form_row">
+        <%= profile_form.text_area :description, :maxlength => 400, :class => "block_form_tag" %>
+		</div>
+    
+    <% end %>
+    <% end %>
+    <% if !params[:section].present? or params[:section].eql?("contact_info") %>
+    <% content_for :javascript do %>
+    $(function() {
+    $("#contact_info").addClass('section_highlight');
+    });
+    <% end %>
+    <div class="block_form_row">
+      <h2><%=t('edit.contact')%></h2>
+    </div>
+    <%= f.fields_for :profile do |profile_form| %>
+    <div class="block_form_row">
+        <div class="block_form_label">
+            <%= profile_form.label :phone %>
+        </div>
+				<div class="block_form_field">
+          <%= profile_form.text_field :phone, :class => "phone block_form_tag" %>
+				</div>
+    </div>
+    <div class="block_form_row">
+        <div class="block_form_label">
+            <%= profile_form.label :mobile %>
+        </div>
+				<div class="block_form_field">
+          <%= profile_form.text_field :mobile, :class => "phone block_form_tag" %>
+				</div>
+    </div>
+    <div class="block_form_row">
+        <div class="block_form_label">
+            <%= profile_form.label :fax %>
+        </div>
+				<div class="block_form_field">
+          <%= profile_form.text_field :fax, :class => "phone block_form_tag" %>
+				</div>
+    </div>
+    <div class="block_form_row">
+        <div class="block_form_label">
+            <%= profile_form.label :address %>
+        </div>
+				<div class="block_form_field">
+          <%= profile_form.text_field :address, :class => "block_form_tag" %>
+				</div>
+    </div>
+    <div class="block_form_row">
+        <div class="block_form_label">
+            <%= profile_form.label :website %>
+        </div>
+				<div class="block_form_field">
+          <%= profile_form.text_field :website, :class => "url block_form_tag" %>
+				</div>
+    </div>
+    <% end %>
+    <% end %>
+</div>
+<div class="block_form_row block_center">
+    <%= f.submit "Update", :class => "button" %>&nbsp;
+    <button class="button" onclick="window.location.href='<%= group_url(@group) %>';">
+        Cancel
+    </button>
+</div>
+<% end %>

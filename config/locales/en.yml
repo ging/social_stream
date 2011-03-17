@@ -64,6 +64,7 @@ en:
       unlocked: 'Your account was successfully unlocked. You are now signed in.'
   edit:
     personal_info: "Personal information"
+    group_info: "Group information"
     contact: "Contact information"
     experience: "Experience"
     organization: "Organization"
