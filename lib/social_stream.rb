@@ -22,12 +22,16 @@ module SocialStream
   @@devise_modules = [ :database_authenticatable, :registerable, :recoverable,
                        :rememberable, :trackable, :omniauthable, :token_authenticatable]
 
-  mattr_accessor :objects
+  mattr_writer :objects
   @@objects = [ :post, :comment ]
 
   class << self
     def setup
       yield self
+    end
+
+    def objects
+      @@objects | [ :actor ]
     end
 
     # Load models for rewrite in application

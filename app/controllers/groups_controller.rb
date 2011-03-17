@@ -18,9 +18,9 @@ class GroupsController < InheritedResources::Base
   
   protected
 
-  # Overwrite resource method to support permalink
+  # Overwrite resource method to support slug
   # See InheritedResources::BaseHelpers#resource
   def resource
-    @group ||= end_of_association_chain.find_by_permalink!(params[:id])
+    @group ||= end_of_association_chain.find_by_slug!(params[:id])
   end
 end

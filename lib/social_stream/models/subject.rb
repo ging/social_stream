@@ -55,7 +55,7 @@ module SocialStream
         end
         
         def to_param
-          permalink
+          slug
         end
 
         # Delegate missing methods to {Actor}, if they are defined there
@@ -76,13 +76,13 @@ module SocialStream
       end
       
       module ClassMethods
-        def find_by_permalink(perm)
-          includes(:actor).where('actors.permalink' => perm).first
+        def find_by_slug(perm)
+          includes(:actor).where('actors.slug' => perm).first
         end
         
-        def find_by_permalink!(perm)
-          find_by_permalink(perm) ||
-          raise(ActiveRecord::RecordNotFound)
+        def find_by_slug!(perm)
+          find_by_slug(perm) ||
+            raise(ActiveRecord::RecordNotFound)
         end 
       end
     end

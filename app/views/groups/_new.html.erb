@@ -18,11 +18,11 @@
 <% end %> 
 				
 <%= form_for @group do |f| %>
-  <% f.object._founder = current_subject.permalink %>
+  <% f.object._founder = current_subject.slug %>
   <%= f.hidden_field :_founder %>
 
   <% if @group.errors.any? %>
-    <div id="error_explanation">
+    <div id="notice">
       <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
 
       <ul>
@@ -32,33 +32,36 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="edit_field">
-  	<div class="edit_label">
+<div class="block_div">
+  <div class="block_form_row">
+  	<div class="block_form_label">
       <%= f.label t('group.new.name') %>
 		</div>
-    <%= f.text_field :name, :size=> 71, :class => "required edit_text" %>
+		<div class="block_form_field">
+      <%= f.text_field :name, :class => "required block_form_tag" %>
+		</div>
   </div>
 
-  <div class="edit_field">
-  	<div class="edit_label">
+  <div class="block_form_row">
+  	<div class="block_form_label">
       <%= f.label t('group.new.participants') %>
 		</div>
-    <%= f.select :_participants, "", :class => "edit_text" %>
+		<div class="block_form_field">
+      <%= f.select :_participants, "", :class => "block_form_tag" %>
+		</div>
   </div>
-	<div class="edit_field">
-
-		<%= f.fields_for :profile do |profile_form| %>
-		  <div class="edit_label">
-			   <%= profile_form.label "Description" %>				 
-			</div>
-	    <%= profile_form.text_area :description, :rows =>6, :cols=> 53, :class => "edit_text" %>
-		<% end %>
-  </div>
+	<div class="block_form_row">
+		<%= f.label :description %>
+	</div>
+	<div class="block_form_row">
+	  <%= f.text_area :description, :rows =>6, :cols=> 53, :class => "block_form_tag" %>
+	</div>
+ 
 
   <div class="actions">
     <%= f.submit :class => "button" %>
   </div>
+</div>
 <% end %>
 
 

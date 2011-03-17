@@ -18,10 +18,12 @@ module SocialStream
         alias_method_chain :create_activity_object, :type
         before_create :create_activity_object
 
-        before_create :create_post_activity
-        before_update :create_update_activity
+        unless self == Actor
+          before_create :create_post_activity
+          before_update :create_update_activity
 
-        validates_presence_of :_activity_tie
+          validates_presence_of :_activity_tie
+        end
       end
 
       module InstanceMethods

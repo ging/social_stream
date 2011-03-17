@@ -152,7 +152,7 @@
     </div>
   </div>
 
-<% if @user.authentication_token %>
+<% if (@user.to_param==current_user.to_param and @user.authentication_token) %>
 <div class="block_div" id="developer_info">
     <div class="block_header">
       <div class="block_header_text">
