@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   match 'api/keygen' => 'api#create_key', :as => :api_keygen
   match 'api/user/:id' => 'api#users'
   match 'api/me' => 'api#users'
+  match 'api/me/home/' => 'api#activity_atom_feed', :format => 'atom', :as => :api_my_home
+  match 'api/user/:id/home' => 'api#activity_atom_feed', :format => 'atom'
   ##/API##
   
   resources :users
