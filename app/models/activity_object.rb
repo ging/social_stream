@@ -1,3 +1,13 @@
+# The {ActivityObject} is any object that receives actions. Examples are
+# creating post, liking a comment, contacting a user. 
+#
+# = ActivityObject subtypes
+# All post, comment and user are {SocialStream::Models::Object objects}.
+# Social Stream privides 3 {ActivityObject} subtypes, {Post}, {Comment} and
+# {Actor}. The application developer can define as many {ActivityObject} subtypes
+# as required.
+# Objects are added to +config/initializers/social_stream.rb+
+#
 class ActivityObject < ActiveRecord::Base
   @subtypes_name = :object
   include SocialStream::Models::Supertype
