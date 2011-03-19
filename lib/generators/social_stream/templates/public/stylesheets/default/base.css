@@ -46,10 +46,20 @@ input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:1.0
   background-image: -moz-linear-gradient(center bottom,rgb(116,191,67) 1%,rgb(117,189,68) 51%,
       rgb(195,222,171) 76%);
   border-radius: 0.2em;  color: #fff; width: 88px;  height: 26px;  border: none;}
-
 .myButton span {  display: block;  line-height: 14px;  padding: 5px 0 5px 18px;}
 .myButton:active {  background-position: bottom right;  color: #000;  outline: none;}
 .myButton:active span {  background-position: bottom left;  padding: 6px 0 4px 18px;}
+
+.myButtonBlue{
+  background-image: -webkit-gradient( linear, left bottom, left top,
+      color-stop(0.16, rgb(0,122,193)), color-stop(0.58, rgb(56,148,209)), color-stop(0.79, rgb(168,222,249)) );
+  background-image: -moz-linear-gradient(center bottom,
+      rgb(0,122,193) 16%, rgb(56,148,209) 58%, rgb(168,222,249) 79%);
+  border-radius: 0.2em;  color: #fff; width: 60px;  height: 22px;  border: none;}
+.myButtonBlue span {  display: block;  line-height: 14px;  padding: 3px 0 3px 10px;}
+.myButtonBlue:active {  background-position: bottom right;  color: #000;  outline: none;}
+.myButtonBlue:active span {  background-position: bottom left;  padding: 3px 0 2px 18px;}
+
 .myButtonLarge{  background-image: -webkit-gradient(linear,left bottom,left top,
           color-stop(0.01, rgb(116,191,67)),color-stop(0.51, rgb(117,189,68)),
           color-stop(0.76, rgb(195,222,171))  );

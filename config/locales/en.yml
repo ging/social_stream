@@ -144,6 +144,7 @@ en:
   representation:
     action: "representing"
     change: "Change"
+  share: "Share"
   sign_in: "Sign in"
   sign_out: "Sign out"
   socialstream: "SocialStream"

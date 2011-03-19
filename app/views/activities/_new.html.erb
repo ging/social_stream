@@ -1,7 +1,7 @@
 <% if receiver.active_ties_for(current_subject).any? %>
   <% content_for :javascript do %>
 
-    securityImage = "<%= escape_javascript(image_tag('btn/btn_security.png', :id => 'security_image', :alt => 'security')) %>";
+    securityImage = "<%= escape_javascript(image_tag('/btn/btn_security.png', :id => 'security_image', :alt => 'security')) %>";
     downImage = "<%= escape_javascript(image_tag('btn/btn_down.png')) %>";
 
     $("#security").dropdownchecklist( { closeRadioOnClick: true } );
@@ -23,8 +23,7 @@
         <% else %>
           <%= f.hidden_field :_activity_tie_id %>
         <% end %>
-
-        <%= image_submit_tag "btn/btn_share.png" %>
+        <%= f.submit t('share'), :class =>"myButtonBlue" %>
       </div>
     <% end -%>
   </div>
