@@ -22,7 +22,7 @@
       <%= render :partial => "layouts/header" %>
       <div id="wrapper_body">
         <div id="toolbar">
-          <div id="toolbarContent">
+          <div id="toolbarContent" class="block">
             <div class="space_center">
             </div>
               <%= yield :toolbar %>
@@ -34,7 +34,6 @@
             <%= msg %>
             </div>
           <% end %>
-
           <%= yield %>
         </div>
         <div id="sidebar">
@@ -42,7 +41,7 @@
               <%=  yield :sidebar %>
           </div>
         </div>
-        <br class="clearfloat" />
+        <div class="space_center white"></div>
       </div>
       <%= render :partial => "layouts/footer" %>
     </div>

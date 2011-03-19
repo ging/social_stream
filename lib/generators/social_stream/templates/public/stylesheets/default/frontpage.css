@@ -17,7 +17,7 @@ span.find{  padding-right:5px;}
 #login{  padding-top: 5px;}
 #welcome{  margin-top:50px;  margin-left:300px;  width:330px;  padding:20px;  border: thin solid #2A3890;
   position: absolute;  text-align:center;}
-#wrapper_left{  vertical-align:top;  width:49%;  display:inline-block;  height:448px;  padding-left: 20px;}
+#wrapper_left{  vertical-align:top;  width:49%;  display:inline-block;    padding-left: 20px;}
 #wrapper_right{ vertical-align:top;  width:48%;  display:inline-block;}
 
 

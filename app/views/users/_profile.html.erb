@@ -1,5 +1,4 @@
 <div class="space_center"></div>
-
 <div class="block" id="personal_info" >
   <div class="header">
     <div class="header_text">
@@ -9,61 +8,64 @@
       <%= link_to (image_tag('/images/btn/edit.png')), :controller => :users, :action => :edit, :section => :about_me %>
     </div>
   </div>
-  <div class="sub-block"  >
-    <% if @user.profile.organization? %>
-      <div class="row">
-        <div class="label">
-          <%=t('edit.organization')%>:
+  <div class="content">
+    <div class="sub-block"  >
+      <% if @user.profile.organization? %>
+        <div class="row">
+          <div class="label">
+            <%=t('edit.organization')%>:
+          </div>
+          <div class="field">
+              <%=h @user.profile.organization %>
+          </div>
         </div>
-        <div class="field">
-            <%=h @user.profile.organization %>
-        </div>
-      </div>
-    <%end%>
-    <% if @user.profile.birthday? %>
-      <div class="row">
-        <div class="label">
-          <%=t('edit.birthday')%>:
-        </div>
-        <div class="field">
-          <%=h I18n.l @user.profile.birthday, :format => :long %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="label">
-            Age:
-        </div>
-        <div class="field">
-            <%=h @user.age %>
-        </div>
-      </div>
-    <%end%>
-    <% if @user.profile.city? %>
-      <div class="row">
-        <div class="label">
-          <%=t('edit.actualcity')%>:
-        </div>
-        <div class="field">
-          <%=h @user.profile.city %>
-          <% if @user.profile.country? %>
-            , <%=@user.profile.country%>
-          <%end%>
-        </div>
-      </div>
-    <%end%>
-    <% if @user.profile.description? %>
-      <div class="row">
-        <div class="label">
-          <%=t('edit.aboutme')%>:
+      <%end%>
+      <% if @user.profile.birthday? %>
+        <div class="row">
+          <div class="label">
+            <%=t('edit.birthday')%>:
+          </div>
+          <div class="field">
+            <%=h I18n.l @user.profile.birthday, :format => :long %>
+          </div>
         </div>
         <div class="row">
-            <%=h @user.profile.description %>
+          <div class="label">
+              Age:
+          </div>
+          <div class="field">
+              <%=h @user.age %>
+          </div>
         </div>
-      </div>
-    <%end%>
+      <%end%>
+      <% if @user.profile.city? %>
+        <div class="row">
+          <div class="label">
+            <%=t('edit.actualcity')%>:
+          </div>
+          <div class="field">
+            <%=h @user.profile.city %>
+            <% if @user.profile.country? %>
+              , <%=@user.profile.country%>
+            <%end%>
+          </div>
+        </div>
+      <%end%>
+      <% if @user.profile.description? %>
+        <div class="row">
+          <div class="label">
+            <%=t('edit.aboutme')%>:
+          </div>
+          <div class="row">
+              <%=h @user.profile.description %>
+          </div>
+        </div>
+      <%end%>
+    </div>
   </div>
 </div>
 
+<div class="space_center"></div>
 <div class="block" id="contact_info">
   <div class="header">
     <div class="header_text">
@@ -74,96 +76,96 @@
     </div>
   </div>
   <div class="content">
-      <% if @user.profile.phone? %>
-        <div class="row">
-          <div class="label">
-            <%=t('edit.phone')%>
-          </div>
-          <div class="field">
-            <%=h @user.profile.phone %>
-          </div>
-        </div>
-      <%end%>
-      <% if @user.profile.mobile? %>
-        <div class="row">
-          <div class="label">
-            <%=t('edit.mobile')%>
-          </div>
-          <div class="field">
-            <%=h @user.profile.mobile %>
-          </div>
-        </div>
-      <%end%>
-      <% if @user.profile.fax? %>
-        <div class="row">
-          <div class="label">
-            <%=t('edit.fax')%>
-          </div>
-          <div class="field">
-            <%=h @user.profile.fax %>
-          </div>
-        </div>
-      <%end%>
-      <% if @user.profile.address? %>
-        <div class="row">
-          <div class="label">
-            <%=t('edit.address')%>
-          </div>
-          <div class="field">
-            <%=h @user.profile.address %>
-          </div>
-        </div>
-      <%end%>
-      <% if @user.profile.website? %>
-        <div class="row">
-          <div class="label">
-            <%=t('edit.website')%>
-          </div>
-          <div class="field">
-            <a href="<%=h @user.profile.website %>"><%=h @user.profile.website %></a>
-          </div>
-        </div>
-      <%end%>
-
+    <% if @user.profile.phone? %>
       <div class="row">
         <div class="label">
-          <%=t('edit.email')%>:
+          <%=t('edit.phone')%>
         </div>
-        <div class="row">
-          <%=h @user.email %>
+        <div class="field">
+          <%=h @user.profile.phone %>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="block" id="experience_info">
-    <div class="header">
-      <div class="header_text">
-        <%=t('edit.experience')%>
-      </div>
-      <div class="header_icon_right">
-        <%= link_to (image_tag('/images/btn/edit.png')), :controller => :users, :action => :edit, :section => :my_experience %>
-      </div>
-    </div>
-    <div class="content">
+    <%end%>
+    <% if @user.profile.mobile? %>
       <div class="row">
-        <%=h @user.profile.experience %>
+        <div class="label">
+          <%=t('edit.mobile')%>
+        </div>
+        <div class="field">
+          <%=h @user.profile.mobile %>
+        </div>
+      </div>
+    <%end%>
+    <% if @user.profile.fax? %>
+      <div class="row">
+        <div class="label">
+          <%=t('edit.fax')%>
+        </div>
+        <div class="field">
+          <%=h @user.profile.fax %>
+        </div>
+      </div>
+    <%end%>
+    <% if @user.profile.address? %>
+      <div class="row">
+        <div class="label">
+          <%=t('edit.address')%>
+        </div>
+        <div class="field">
+          <%=h @user.profile.address %>
+        </div>
+      </div>
+    <%end%>
+    <% if @user.profile.website? %>
+      <div class="row">
+        <div class="label">
+          <%=t('edit.website')%>
+        </div>
+        <div class="field">
+          <a href="<%=h @user.profile.website %>"><%=h @user.profile.website %></a>
+        </div>
+      </div>
+    <%end%>
+
+    <div class="row">
+      <div class="label">
+        <%=t('edit.email')%>:
+      </div>
+      <div class="row">
+        <%=h @user.email %>
       </div>
     </div>
   </div>
+</div>
 
+<div class="space_center"></div>
+<div class="block" id="experience_info">
+  <div class="header">
+    <div class="header_text">
+      <%=t('edit.experience')%>
+    </div>
+    <div class="header_icon_right">
+      <%= link_to (image_tag('/images/btn/edit.png')), :controller => :users, :action => :edit, :section => :my_experience %>
+    </div>
+  </div>
+  <div class="content">
+    <div class="row">
+      <%=h @user.profile.experience %>
+    </div>
+  </div>
+</div>
+
+<div class="space_center"></div>
 <% if (@user.to_param==current_user.to_param and @user.authentication_token) %>
 <div class="block" id="developer_info">
-    <div class="header">
-      <div class="header_text">
-        ApiKey: <%= @user.authentication_token %>
-      </div>
-      <div class="header_icon_right">
-		<%= link_to (image_tag('/images/btn/edit.png')), :controller => :api, 
-														 :action => :create_key %>
-      </div>
+  <div class="header">
+    <div class="header_text">
+      ApiKey: <%= @user.authentication_token %>
+    </div>
+    <div class="header_icon_right">
+  <%= link_to (image_tag('/images/btn/edit.png')), :controller => :api,
+                           :action => :create_key %>
     </div>
   </div>
-<% end %>
-
 </div>
+<% end %>

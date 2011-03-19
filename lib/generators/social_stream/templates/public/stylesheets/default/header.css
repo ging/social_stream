@@ -39,5 +39,6 @@ li.btn_menu_exit{background: transparent url("/images/btn/btn_exit.png") no-repe
 #menu_home ul li.pipe{padding:0px 3px 0px 3px; margin:0px;}
 .menu_white{display:inline-block; color:#fff;}
 .white_link{padding-top:3px;  vertical-align:top;  display:inline-block;}
+.black{color:#000; font-weight:bold;}
 
 

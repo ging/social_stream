@@ -1,8 +1,12 @@
-<%= ties_to(@group) %>
+<% content_for :headers, stylesheet_link_tag("menu", :media => "screen, projection") %>
+
+<div class="center"><%= ties_to(@group) %></div>
 
 <%= render :partial => 'logo' %>
+<div class="space_center"></div>
+<%= render :partial => 'menu/group' %>
+<div class="space_center"></div>
 <%= render :partial => 'tabs' %>
-<div class="space_center">
-</div>
+<div class="space_center"></div>
 
 <%= render :partial => 'subjects/contacts', :locals => { :subject => @group } %>
