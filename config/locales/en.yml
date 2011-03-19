@@ -76,6 +76,7 @@ en:
     organization: "Organization"
     personal_info: "Personal information"
     phone: "Phone"
+    profile: "Edit profile"
     website: "Website"
   forgot_password: "Forgot you password?"
   frontpage:
@@ -124,7 +125,7 @@ en:
   location:
     message: "You are here > %{location}"
   mailbox:
-    mailbox: "Mailbox"
+    mailbox: "Message"
     inbox: "Inbox"
     sentbox: "Sentbox"
     trash: "Trash"
@@ -147,6 +148,11 @@ en:
   sign_out: "Sign out"
   socialstream: "SocialStream"
   tie:
+    add:
+      bookmark: "Bookmark"
+      contact: "Add Contact"
+      follow: "Follow"
+      partner: "Add Partner"
     pending:
       other: Pending requests
       all: "All"
@@ -154,6 +160,7 @@ en:
       one: Suggestion
       other: Suggestions
       all: All
+    options: "Tie options"
   time:
     ago: "%{time} ago"
   user:
