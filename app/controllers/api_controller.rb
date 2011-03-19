@@ -1,6 +1,6 @@
 class ApiController < ApplicationController
   
-  before_filter :authenticate_user!, :only => [:create_key, :users]
+  before_filter :authenticate_user!, :only => [:create_key, :users, :activity_atom_feed]
   
   def create_key
     current_user.reset_authentication_token!
@@ -17,6 +17,23 @@ class ApiController < ApplicationController
     end
         
     redirect_to :controller => :users, :action => :show, :format => params[:format], :id => params[:id], :auth_token => params[:auth_token]
+  end
+  
+  def activity_atom_feed
+    if !params[:page]
+      params[:page] = 1
+    end
+    
+    @user = current_user
+    if params[:id] != nil
+      @user = User.find_by_slug!(params[:id])
+    end
+    
+    @page = params[:page]
+    @activities = current_user.home_wall.paginate(:page => params[:page], :per_page => 10)
+    respond_to do |format|
+      format.atom
+    end
   end
   
 end

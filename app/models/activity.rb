@@ -26,6 +26,8 @@ class Activity < ActiveRecord::Base
   has_many :activity_objects,
            :through => :activity_object_activities
 
+  after_create :like_direct_object
+
   scope :home_wall, lambda { |ties|
     select("DISTINCT activities.*").
       roots.
@@ -104,9 +106,21 @@ class Activity < ActiveRecord::Base
     liked_by(user).present?
   end
 
+  # Build a new children activity where subject like this
+  def new_like(subject)
+    children.new :verb => "like",
+                 :_tie => subject.sent_ties(:receiver => receiver,
+                                            :relation => relation).first
+  end
+
+  # The first activity object of this activity
+  def direct_activity_object
+    activity_objects.first
+  end
+
   # The first object of this activity
   def direct_object
-    activity_objects.first.try(:object)
+    direct_activity_object.try(:object)
   end
 
   private
@@ -123,5 +137,14 @@ class Activity < ActiveRecord::Base
                                :original => false)
       end
     end
+  end
+
+  # Link like activities with parent direct object
+  def like_direct_object
+    return unless verb == "like"
+
+    return if parent.direct_object.blank?
+
+    activity_objects << parent.direct_activity_object
   end
 end

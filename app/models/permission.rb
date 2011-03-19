@@ -8,13 +8,14 @@
 # the permissions assigned to {Relation} of the {Tie} she has just established.
 #
 # For example, when _Alice_ establishes a _friend_ tie to _Bob_, she is granting
-# him the permissions associated with her _friend_ relation.
+# him the permissions associated with her _friend_ relation. Alice's _friend_ relation may
+# have different permissions from Bob's _friend_ relation.
 #
 # = Permissions description
 #
 # Permissions are composed by *action*, *objective* and *function*. Action and objective
 # are typical in content management systems, e.g. <tt>create activity</tt>,
-# <tt>update tie</tt>, <tt>read post</tt>
+# <tt>update tie</tt>, <tt>read post</tt>. *function* is a new parameter for social networks
 #
 # == Actions
 #
@@ -24,8 +25,8 @@
 # +read+::   view something
 # +update+::  modify something
 # +destroy+:: delete something
-# +follow+::  get activity updates from the receiver of the tie
-# +represent+:: give the receiver rights to act as if he were us.
+# +follow+::  subscribe to activity updates from the receiver of the tie
+# +represent+:: give the receiver rights to act as if he were me.
 #
 # == Objectives
 #
@@ -46,7 +47,8 @@
 #
 #         Example: if the _friend_ relation has the permission
 #         <tt>create activity tie</tt>, the _friend_ can create activities
-#         attached to this tie only.
+#         attached to this tie only. _Bob_ can create activities only at _Alice_'s
+#         _friend_ level.
 #
 # +weak_ties+:: apply the permission to all the related ties with a relation weaker
 #               or equal than this. When a subject establishes a strong ties,

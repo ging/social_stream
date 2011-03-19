@@ -14,7 +14,7 @@ class CreateSocialStream < ActiveRecord::Migration
       t.integer  "activity_object_id"
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.string   "type",               :limit => 45
+      t.string   "object_type"
     end
     
     add_index "activity_object_activities", "activity_id"
