@@ -17,7 +17,7 @@
 </div>
 <div class="space_center">
 </div>
-<h1>This is your Mailbox</h1>
+<h1>Messages</h1>
 <%= @mailbox.conversations.count.to_s %> conversations in total
 <p><h3><%= link_to "Inbox", :action => :show, :id => "inbox" %></h3><%= "(" + @mailbox.inbox.count.to_s + " " + @mailbox.inbox[0].class.to_s + ")"%></p>
 <p><h3><%= link_to "Sentbox", :action => :show, :id => "sentbox" %></h3><%= "(" + @mailbox.sentbox.count.to_s + " " + @mailbox.sentbox[0].class.to_s + ")"%></p>
