@@ -1,4 +1,19 @@
-<%= form_for :logo, @logo,:url => logos_path, :html => { :multipart => true } do |f| %>
+
+<% content_for :javascript do %>
+
+
+$('#new_logo_form')
+    .live("ajax:complete", function(evt, data, status, xhr){
+
+      // Insert response partial into page below the form.
+      $('#prueba').append(xhr.responseText);
+
+    });
+
+<%end%>
+
+
+<%= form_for :logo, @logo,:url => logos_path, :html => { :multipart => true, :id=>'new_logo_form' }, :remote => false do |f| %>
   <% if @logo.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@logo.errors.count, "error") %> prohibited this logo from being saved:</h2>
@@ -14,4 +29,5 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+  <div id= "prueba"></div>
 <% end %>
