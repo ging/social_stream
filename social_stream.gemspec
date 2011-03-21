@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('stringex', '~> 1.2.0')
   s.add_runtime_dependency('paperclip', '~> 2.3.4')
   s.add_runtime_dependency('jquery-rails', '~> 0.2.5')
-  s.add_runtime_dependency('cancan', '~> 1.5.1')
+  s.add_runtime_dependency('cancan', '~> 1.6.2')
   s.add_runtime_dependency('will_paginate', '~> 3.0.pre2')
   s.add_runtime_dependency('omniauth','~> 0.2.0.beta5')	
   s.add_runtime_dependency('oauth-plugin','~> 0.4.0.pre1')	
