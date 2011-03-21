@@ -1,6 +1,11 @@
 <%= div_for (conversation) do %>
   <h2><%= conversation.subject %></h2>
   <hr>
+  Actions: <%= link_to ( image_tag('btn/btn_delete.png', :atl => "Delete", :title => "Delete"), 
+			mailbox_conversation_path(conversation, :location => 'conversation'), 
+			:confirm => 'Do you want to move "' + conversation.subject + '" to trash?', 
+			:method => :delete, :remote => true) %>
+  <hr>
   <% conversation.get_recipients.each do |recp| %>
  	 <%= link_to image_tag(recp.logo.url(:tie), :title=>recp.name, :alt => recp.name), recp.subject %>
   <% end %><br>

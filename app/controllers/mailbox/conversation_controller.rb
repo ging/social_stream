@@ -64,6 +64,10 @@ class Mailbox::ConversationController < ApplicationController
       return
     end 
     
+    if params[:untrash].present?
+    	@conversation.untrash(@actor)
+    end
+    
     if params[:reply_all].present?
       if params[:body].present?
         last_mail = @conversation.mails(@actor).last
@@ -76,6 +80,26 @@ class Mailbox::ConversationController < ApplicationController
   end
   
   def destroy
+  	@actor = Actor.normalize(current_subject)
+    @conversation = MailboxerConversation.find_by_id(params[:id])
+    if @conversation.nil? or !@conversation.is_participant?(@actor)
+      redirect_to mailbox_index_path
+      return
+    end 
+    
+    @conversation.move_to_trash(@actor)
+    
+    if params[:location].present?
+    	case params[:location]
+    	when 'conversation'
+    		redirect_to mailbox_path(:id => :trash)    		
+    	else
+    		redirect_to mailbox_path(:id => params[:location])
+    	end   	
+    	
+  	return
+    end
+    redirect_to mailbox_index_path
   end
   
   private
