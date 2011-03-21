@@ -1,0 +1,17 @@
+<%= form_for :logo, @logo,:url => logos_path, :html => { :multipart => true } do |f| %>
+  <% if @logo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@logo.errors.count, "error") %> prohibited this logo from being saved:</h2>
+
+      <ul>
+      <% @logo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.file_field :logo %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

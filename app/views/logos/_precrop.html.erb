@@ -1,0 +1,55 @@
+Crop your image:
+
+
+<% my_file_name = File.basename(@logo.logo.queued_for_write[:original].path) %>
+<div style="width:100px;height:100px;overflow:hidden;margin-left:5px;"> 
+		<%= image_tag "tmp/#{my_file_name}",:id=>"preview" %>
+</div>
+<div id="precropDiv">
+	<%= image_tag "tmp/#{my_file_name}",:id=>"cropImage" %>
+</div>
+
+
+
+<% content_for :javascript do %>
+        jQuery('#cropImage').Jcrop({
+            bgColor:     'clear',
+            bgOpacity:   .6,
+            setSelect:   [ 0, 0, 200, 200 ],
+            aspectRatio: 1 ,
+            onChange: update_crop,
+            onSelect: update_crop
+        });
+
+	//var api = $(function(){ $('#cropImage').Jcrop(); });
+	// var api = $.Jcrop('#cropImage',{ bgColor: 'clear' });
+	//api.setSelect([ 100,100,200,200 ]);
+
+function update_crop(coords) {
+  var rx = 100/coords.w;
+  var ry = 100/coords.h;
+  $('#preview').css({
+    width: Math.round(rx * 1280) + 'px',
+    height: Math.round(ry * 800) + 'px',
+    marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+    marginTop: '-' + Math.round(ry * coords.y) + 'px'
+  });
+  var ratio = 1280 / 800;
+  $("#crop_x").val(Math.round(coords.x * ratio));
+  $("#crop_y").val(Math.round(coords.y * ratio));
+  $("#crop_w").val(Math.round(coords.w * ratio));
+  $("#crop_h").val(Math.round(coords.h * ratio));
+}
+<% end %>
+
+<%# debugger %>
+
+<%= form_for :logo, @logo,:url => logos_path, :html => { :multipart => true } do |f| %>
+
+  <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
+    <%= f.text_field attribute, :id => attribute %>
+  <% end %>
+  <p><%= f.submit "Crop" %></p>
+<% end %>
+
+<% #debugger %>

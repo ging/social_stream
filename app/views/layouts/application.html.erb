@@ -5,7 +5,7 @@
     <title><%= yield(:title) || t('socialstream') %></title>
     <%= stylesheet_link_tag "base", "header","home","footer",
                              :media => "screen, projection" %>
-    <%= javascript_include_tag 'jquery.min', 'jquery-ui.min','rails', 'jquery.livequery', 'menu', 'ui.dropdownchecklist'%>
+    <%= javascript_include_tag 'jquery.min', 'jquery-ui.min','rails', 'jquery.livequery', 'menu', 'jquery.fcbkcomplete.min','ui.dropdownchecklist'%>
     <link rel="shortcut icon" href="/images/icons/favicon.ico" />
     <% if protect_against_forgery? %>
       <%= csrf_meta_tag %>

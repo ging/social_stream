@@ -18,7 +18,8 @@ Rails.application.routes.draw do
   resource :representation
   
   resources :groups
-  
+  resources :logos
+    
   namespace :mailbox do 
     resources :conversation, :controller => :conversation 
   end

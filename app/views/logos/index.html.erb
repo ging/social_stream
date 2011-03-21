@@ -1,0 +1,27 @@
+<h1>Listing logos</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @logos.each do |logo| %>
+  <tr>
+  	<% #debugger %>
+	<td><%= image_tag logo.logo.url(:profile) %></image_tag></td>
+	<td><%= image_tag logo.logo.url(:tie) %></image_tag></td>
+	<td><%= image_tag logo.logo.url() %></image_tag></td>
+	<td><%= image_tag logo.logo.url(:actor) %></image_tag></td>
+
+    <td><%= link_to 'Show', logo %></td>
+    <td><%= link_to 'Edit', edit_logo_path(logo) %></td>
+    <td><%= link_to 'Destroy', logo, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Logo', new_logo_path %>

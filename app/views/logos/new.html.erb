@@ -1,0 +1,16 @@
+<% content_for :headers do %>
+	<%= javascript_include_tag 'jquery.Jcrop.min' %>
+	<%= stylesheet_link_tag "jquery.Jcrop", :media => "screen, projection" %>
+    <%= stylesheet_link_tag "logos", :media => "screen, projection" %>
+<%end%>
+<h1>New logo</h1>
+<% #debugger %>
+<% if @logo.logo.errors['precrop'].blank? || !@logo.logo.errors['croped'].blank? %>
+	<%= render :partial => 'form' %>
+<% else %>
+	<% #debugger %>
+	<%= render :partial => 'precrop', :layout => false %>
+	<% #debugger %>
+<% end %>
+
+<%= link_to 'Back', logos_path %>
