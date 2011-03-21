@@ -15,6 +15,14 @@ test:
   pool: 5
   timeout: 5000
 
+test_pg:
+  adapter: postgresql
+  encoding: unicode
+  database: social_stream_test
+  pool: 5
+  username: social_stream
+  password:
+
 production:
   adapter: sqlite3
   database: db/production.sqlite3
