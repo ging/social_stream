@@ -37,4 +37,5 @@ Gem::Specification.new do |s|
   #mailboxer  
   s.add_runtime_dependency('mailboxer','~> 0.0.7')
   s.add_runtime_dependency('rmagick','~> 2.13.1')
+
 end
