@@ -7,4 +7,15 @@ class TiesController < InheritedResources::Base
     @tie = current_subject.suggestion
     render :layout  => false
   end
+  
+  def create 
+      super do |format|
+        debugger
+        format.html { redirect_to resource.receiver_subject }
+      end
+  end
+
+  
+  
+  
 end

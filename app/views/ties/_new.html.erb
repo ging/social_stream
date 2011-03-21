@@ -8,8 +8,9 @@
       </div>
       <div class="activity_add_ties">
         <div><%= t('message.one')+":" %><br />
-         <%= form_for @tie,
-                      :remote => true do |f| %>
+  
+			<%= form_for @tie do |f| %>
+		  
            <%= f.hidden_field :receiver_id %>
            <%= f.hidden_field :sender_id %>
            <%= f.text_area :message,   :class =>"input_new_tie" %>

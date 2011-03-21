@@ -23,7 +23,7 @@ module TiesHelper
                          "tie[receiver_id]" => tie.receiver.id),
             :title => t("contact.new.title",
                         :name => tie.receiver_subject.name),
-            :remote => true
+                        :remote => true
   end
 
   def link_follow_state

@@ -100,6 +100,7 @@ class Tie < ActiveRecord::Base
   before_validation :find_relation
 
   after_create :complete_weak_set
+  after_create :create_activity_after_add_contact
 
   def relation_name
     @relation_name || relation.try(:name)
@@ -249,4 +250,11 @@ class Tie < ActiveRecord::Base
       end
     end
   end
+  
+  
+  def create_activity_after_add_contact
+    
+  end
+  
+  
 end
