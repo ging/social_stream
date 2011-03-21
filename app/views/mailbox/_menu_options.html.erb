@@ -4,7 +4,7 @@
 <li>
 	<ul>
 		<li>
-			<%= link_to( image_tag("btn/btn_inbox.png", :class => "menu_icon")+ "New message", new_mailbox_conversation_path, :remote => true) %>
+			<%= link_to( image_tag("btn/btn_inbox.png", :class => "menu_icon")+ "New message", new_mailbox_conversation_path, :remote=> true ) %>
 		</li>
 		<li>
 			<%= link_to( image_tag("btn/btn_inbox.png", :class => "menu_icon")+t('mailbox.inbox')+" (" + @mailbox.inbox(:unread => true).count.to_s + ")", mailbox_path(:id => :inbox), :remote => true) %>
