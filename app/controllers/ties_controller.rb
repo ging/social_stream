@@ -10,7 +10,6 @@ class TiesController < InheritedResources::Base
   
   def create 
       super do |format|
-        debugger
         format.html { redirect_to resource.receiver_subject }
       end
   end

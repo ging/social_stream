@@ -1,0 +1,19 @@
+
+
+<br class="clearfloat" />
+<div class="space_center">
+</div>
+<div id="new_message">
+	<% if params[:box].present? %>
+    <%= link_to 'Back', mailbox_path(:id => params[:box]) %>
+	<% else %>
+    <%= link_to 'Back', mailbox_index_path %>
+	<% end %>
+</div>
+<div class="space_center">
+</div>
+<div class="space_center">
+</div>
+<div id="conversation">
+    <%= render :partial => 'form' %>
+</div>

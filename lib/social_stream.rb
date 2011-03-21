@@ -15,6 +15,10 @@ module SocialStream
     autoload :Object,    'social_stream/models/object'
   end
 
+  module TestHelpers
+    autoload :Controllers, 'social_stream/test_helpers/controllers'
+  end
+
   mattr_accessor :subjects
   @@subjects = [ :user, :group ]
 

@@ -25,6 +25,35 @@ class Mailbox::ConversationController < ApplicationController
   end
   
   def create
+  	@conversation = MailboxerConversation.new
+  	if params[:subject].blank?
+  		@conversation.errors.add("subject", "can't be empty")
+  	end
+  	if params[:body].blank?
+  		@conversation.errors.add("body", "can't be empty")  		
+  	end
+  	if params[:_recipients].nil? or params[:_recipients]==[]
+  		@conversation.errors.add("recipients", "can't be empty")  		
+  	end
+  	if @conversation.errors.any? 
+  		render :action => :new
+  		return  		
+  	end
+  	@actor = current_subject
+  	@recipients = Array.new
+  	params[:_recipients].each do |recp_id|
+  		recp = Actor.find_by_id(recp_id)
+  		next if recp.nil?
+  		@recipients << recp
+  	end
+  	
+  	if (mail = @actor.send_message(@recipients, params[:body], params[:subject]))  	
+	  	@conversation = mail.conversation  	
+	  	redirect_to mailbox_conversation_path(@conversation)
+  	else
+  		render :action => :new
+  	end
+  	
   end
   
   def update    

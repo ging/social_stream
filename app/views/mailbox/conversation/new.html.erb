@@ -1,5 +1,10 @@
-<h1>New mailbox_conversation</h1>
+<% content_for :sidebar do %>
+<%#= render :partial => 'home/sidebar' %>
+<% end %>
 
-<%= render 'form' %>
+<% toolbar_menu(:mailbox) do %>
+  <%= render :partial => 'mailbox/menu_options' %>
+<% end %>
 
-<%= link_to 'Back', mailbox_conversations_path %>
+<%= render :partial => 'mailbox/location' %>
+<%= render :partial => 'new' %>

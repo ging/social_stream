@@ -20,11 +20,16 @@
   <hr><br>
   Write your answer:<br>
   <% form_tag mailbox_conversation_path(conversation.id), :method => :put do %>
-	<p>
-	    <%= text_area_tag :body, nil,:cols => "90" %>
-	</p>
-	<p>
-	    <%= submit_tag "Reply all", :name => :reply_all %>
-	</p>
+<div class="block">
+	<div class="form_row">
+		<%= label_tag :body %>
+	</div>
+	<div class="form_row">
+		<%= text_area_tag :body, nil,:rows =>6, :cols=> 53, :class => "required form_tag" %>
+	</div>
+	<div class="actions center">
+		<%= submit_tag "Reply", :name => :reply_all,:class => "button" %>
+	</div>
+	</div>
   <% end %>
 <% end %>

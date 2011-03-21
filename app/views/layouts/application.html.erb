@@ -5,17 +5,20 @@
     <title><%= yield(:title) || t('socialstream') %></title>
     <%= stylesheet_link_tag "base", "header","home","footer",
                              :media => "screen, projection" %>
-    <%= javascript_include_tag 'jquery.min', 'jquery-ui.min','rails', 'jquery.livequery', 'menu', 'jquery.fcbkcomplete.min','ui.dropdownchecklist'%>
+    <%= javascript_include_tag 'jquery.min', 'jquery-ui.min','rails', 'jquery.livequery', 'menu', 'ui.dropdownchecklist'%>
+
+    <%= yield :headers %>
+
     <link rel="shortcut icon" href="/images/icons/favicon.ico" />
     <% if protect_against_forgery? %>
       <%= csrf_meta_tag %>
     <% end %>
+
     <script type="text/javascript" charset="utf-8">
       $(document).ready(function() {
         <%= yield :javascript %>
       })
     </script>
-    <%= yield :headers %>
   </head>
   <body>
     <div id="wrapper">

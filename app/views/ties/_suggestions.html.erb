@@ -19,7 +19,7 @@
     </div>
     <div class="content">
       <% if (sgs = current_subject.suggestions(2)).present? %>
-        <%= render sgs %>
+        <%= render :partial => '/ties/tie', :collection => sgs %>
       <%end%>
     </div>
   </div>
