@@ -24,7 +24,6 @@ class Logo < ActiveRecord::Base
    end
    
    def image_dimensions(name)
-   	
    	images_path = File.join(RAILS_ROOT, "public", "images")
     tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
    	file_path = File.join(tmp_path,name)
@@ -47,22 +46,6 @@ class Logo < ActiveRecord::Base
      crop_args = [x,y,width,height]
      img_orig = img_orig.crop(*crop_args)
      img_orig.write(path)
-  end
- 
-  def prueba(hash)
-     #puts hash[:profile].path
-     
-     hash.each_value do |aFile|
-       #debugger
-       puts aFile.path
-       #puts aFile[1].path
-     end
-     puts "\n\n\n"
-     
-     #puts hash.class
-  end
- 
- 
-     
+  end   
 end
 

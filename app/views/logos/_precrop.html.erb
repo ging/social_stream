@@ -38,8 +38,6 @@ function update_crop(coords) {
 }
 <% end %>
 
-<% debugger %>
-
 <%= form_for :logo, @logo,:url => logos_path, :html => { :multipart => true } do |f| %>
 
   <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
@@ -48,4 +46,3 @@ function update_crop(coords) {
   <p><%= f.submit "Crop" %></p>
 <% end %>
 
-<% #debugger %>
