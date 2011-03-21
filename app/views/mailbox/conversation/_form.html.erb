@@ -5,7 +5,7 @@
 
 <% content_for :javascript do %>
 	$("#_recipients").fcbkcomplete({
-		json_url: "../contacts/index.json",
+		json_url: "../../contacts/index.json",
 		cache: true,
 		filter_case: true,
 		filter_hide: true,
@@ -16,6 +16,18 @@
 <h1>New Message</h1>
 <hr>
 <% form_tag mailbox_conversation_index_path, :method => :post do %>
+<% if @conversation and @conversation.errors.any? %>
+<div id="notice">
+	<h2><%= pluralize(@conversation.errors.count, "error") %> prohibited this message from being sent:</h2>
+	<ul>
+		<% @conversation.errors.full_messages.each do |msg| %>
+		<li>
+			<%= msg %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
 <div class="block">
 	  <div class="form_row">
       <%= label_tag :recipients %>
