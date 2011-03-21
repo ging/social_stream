@@ -10,10 +10,13 @@
 <% end %>
 
 <div id="map_location" class="content_size">
-  Your are here ><img src="images/btn/btn_browse.png" class="btn_config"> <%=t('browse')%>: <span id="name_group"><%= t('group.all')%></span>
+  Your are here ><img src="images/btn/btn_browse.png" class="btn_config"> <%=t('browse')%>: <span id="name_group"><b><%= t('group.all')%></b></span>, <%= link_to(t('user.by'), users_path) %>
 </div>
-<div id="by_options"><%= link_to(t('user.by'), users_path) %></div>
 
+
+<div class="space_center"></div>
+<div class="space_center"></div>
+<div class="space_center"></div>
 <div class="space_center"></div>
 
 <div id="my_conferences" class="block">

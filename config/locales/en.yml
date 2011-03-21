@@ -133,8 +133,10 @@ en:
     one: "Message"
   menu:
     options: "Menu Options"
+    information: "Information"
+    wall: "Wall"
   password:
-    forgot: "¿Do you forgot your password?"
+    forgot: "Do you forgot your password?"
   post:
     confirm_delete: "Delete post?"
   profile:
