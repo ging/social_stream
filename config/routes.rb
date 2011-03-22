@@ -13,11 +13,14 @@ Rails.application.routes.draw do
   match 'api/user/:id/home' => 'api#activity_atom_feed', :format => 'atom'
   ##/API##
   
-  resources :users
+  SocialStream.subjects.each do |actor|
+    resources actor.to_s.pluralize do
+      resource :profile
+    end
+  end
   
   resource :representation
   
-  resources :groups
   resources :logos
     
   namespace :mailbox do 
@@ -36,6 +39,7 @@ Rails.application.routes.draw do
   end
   
   
-  resources :posts
-  resources :comments
+  (SocialStream.objects - [ :actor ]).each do |object|
+    resources object.to_s.pluralize
+  end
 end

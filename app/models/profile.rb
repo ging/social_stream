@@ -29,10 +29,17 @@ class Profile < ActiveRecord::Base
     end
   end
   
+  # The subject of this profile
+  def subject
+    actor.try(:subject)
+  end
   
+  private
+
   def validate_birthday
     errors.add(:birthday, "is invalid. Please, use \"month/day/year\" format and make sure you choose a valid date" ) if (@birthday_formatted_invalid) || (birthday.present? && !birthday.blank? && birthday > Date.today)
   end
+
   
   
 end
