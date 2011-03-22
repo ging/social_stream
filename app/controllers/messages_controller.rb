@@ -23,6 +23,7 @@ class MessagesController < ApplicationController
 		if @box.eql? 'trash'
 		@receipts = @conversation.receipts(@actor).trash
 		else
+		@conversation.mark_as_read(@actor)
 		@receipts = @conversation.receipts(@actor).not_trash
 		end
 
@@ -96,6 +97,7 @@ class MessagesController < ApplicationController
 		if @box.eql? 'trash'
 		@receipts = @conversation.receipts(@actor).trash
 		else
+		@conversation.mark_as_read(@actor)
 		@receipts = @conversation.receipts(@actor).not_trash
 		end
 		render :action => :show

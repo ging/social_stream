@@ -1,6 +1,6 @@
 <% content_for :headers do %>
 <%= stylesheet_link_tag "fcbkComplete.css", :media => "screen, projection" %>
-<%= javascript_include_tag 'jquery.fcbkcomplete.min','jquery.validate' %>
+<%= javascript_include_tag 'jquery.fcbkcomplete.min','jquery.validate','ckeditor/ckeditor.js' %>
 <% end %>
 
 <% content_for :javascript do %>
@@ -11,7 +11,9 @@
 		filter_hide: true,
 		newel: false,
 		height: 6
-	});
+	});	
+	
+	CKEDITOR.replace( 'body' );
 <% end %>
 <h1>New Message</h1>
 <hr>

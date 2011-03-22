@@ -1,3 +1,11 @@
+<% content_for :headers do %>
+<%= javascript_include_tag 'ckeditor/ckeditor.js' %>
+<% end %>
+
+<% content_for :javascript do %>
+	CKEDITOR.replace( 'body' );
+<% end %>
+
 <%= div_for (conversation) do %>
   <h2><%= conversation.subject %></h2>
   <hr>
@@ -15,26 +23,28 @@
 	<% message= receipt.message %>
 	<%= link_to image_tag(message.sender.logo.url(:tie),:alt => message.sender.name,:title =>message.sender.name), message.sender.subject %><br>
 	<b><%= message.sender.name %></b> on <%= message.created_at %> said:<br>
-	<b><i><%= message.body %></i></b><br><br>
+	<b><i><%= raw (message.body) %></i></b><br><br>
 	<!--Debug:<br>
 	Message.Id: <%= message.id %><br>
 	Receipt.Id: <%= receipt.id %><br>
 	Receipt.Type: <%= receipt.mailbox_type %><br>
 	Message.Sender: <%= message.sender.class.to_s %>/<%= message.sender.id.to_s %><br><br>-->
   <% end %>
-  <hr><br>
-  Write your answer:<br>
-  <% form_tag message_path(conversation.id), :method => :put do %>
-<div class="block">
-	<div class="form_row">
-		<%= label_tag :body %>
-	</div>
-	<div class="form_row">
-		<%= text_area_tag :body, nil,:rows =>6, :cols=> 53, :class => "required form_tag" %>
-	</div>
-	<div class="actions center">
-		<%= submit_tag "Reply", :name => :reply_all,:class => "button" %>
-	</div>
-	</div>
-  <% end %>
+  <% unless @box.eql?'trash' %>
+	  <hr><br>
+	  Write your answer:<br>
+	  <% form_tag message_path(conversation.id), :method => :put do %>
+		<div class="block">
+			<div class="form_row">
+				<%= label_tag :body %>
+			</div>
+			<div class="form_row">
+				<%= text_area_tag :body, nil,:rows =>6, :cols=> 53, :class => "required form_tag" %>
+			</div>
+			<div class="actions center">
+				<%= submit_tag "Reply", :name => :reply_all,:class => "button" %>
+			</div>
+		</div>
+	  <% end %>
+  <%end %>
 <% end %>
