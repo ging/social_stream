@@ -1,17 +1,34 @@
 require 'RMagick'
 
 class Logo < ActiveRecord::Base
- has_attached_file :logo,
-                        :styles => { :tie => "30x30>",
-                                     :actor => '35x35>',
-                                     :profile => '94x94' },
-                        :default_url => "/images/:attachment/:style/:subtype_class.png"
+ 	has_attached_file :logo,
+                      :styles => { :tie => "30x30>",
+                                   :actor => '35x35>',
+                                   :profile => '94x94' },
+                      :default_url => "/images/:attachment/:style/:subtype_class.png"
+	
 	before_post_process :process_precrop
-	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :name
 	validates_attachment_presence :logo
+	before_validation :mylog
+	after_validation :mylog
+	
+	def mylog
+		
+		images_path = File.join(RAILS_ROOT, "public", "images")
+    	tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
+   		#file_path = File.join(tmp_path,@name)
+   		#@logo = Logo.new :logo => File.open(file_path)
+		
+		#debugger
+		puts ""
+	end
 
    def process_precrop
-      logo.errors['precrop'] = "You have to make precrop"
+   	debugger
+      if @name.blank?
+      	 #logo.errors['precrop'] = "You have to make precrop"
+      end
 	
       images_path = File.join(RAILS_ROOT, "public", "images")
       tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))

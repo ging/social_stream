@@ -43,6 +43,8 @@ function update_crop(coords) {
   <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
     <%= f.text_field attribute, :id => attribute %>
   <% end %>
+	<%= f.hidden_field :name, :value => my_file_name %>
+	<%= f.file_field :logo %>
   <p><%= f.submit "Crop" %></p>
 <% end %>
 
