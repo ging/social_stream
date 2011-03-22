@@ -7,8 +7,9 @@
 <% end %>
 
 <% content_for :headers do %>
-  <%= stylesheet_link_tag "jquery-ui.css", :media => "screen, projection" %>
-  <%= javascript_include_tag 'jquery-ui.min','jquery.validate' %>
+  <%= stylesheet_link_tag "jquery-ui", :media => "screen, projection" %>
+  <%= javascript_include_tag 'jquery.validate' %>
+
 <% end %>
 
 <%= form_for(@user, :remote => true) do |f| %>
