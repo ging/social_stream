@@ -1,4 +1,4 @@
-/*************Basic ********************/
+/*************Basic SECTION ********************/
 * {	margin: 0;	padding: 0;	font-family: Arial; }
 html, body {height: 100%;}
 .p {	margin: 0px;	padding: 0px;	font-size: inherit;	font-family: inherit;	font-weight: inherit;
@@ -13,47 +13,25 @@ a:hover {	text-decoration: underline;}
 .clearfloat {	clear: both;	height: 0px;}
 
 
-/******* Main Structure ***************************/
+/******* Main Structure SECTION***************************/
 body{font-size:1.0em;  color:#2A3890;  background-color:#ffffff; }
 #wrapper { 	background-color: #f5f5f5;	width: 100%; margin: 0px auto;	  }
 #wrapper_body{min-height: 552px;	width: 960px; margin:0px auto;	margin-left: auto;	margin-right: auto;
 margin-top: auto; margin-bottom:auto;}
 
-* html #wrapper_body,  {height: 100%;}
-/*********** Errors *********************/
-/*
-#notice {  padding:2px;  color:red; font-weight:bold; font-size:1.3em;  display:block; text-align:center;}
-#error_explanation {  width: 80%;  border: 2px solid red;  padding: 7px;  padding-bottom: 0;
-  margin-bottom: 20px;  background-color: #f0f0f0;  color:#fff;}
-#error_explanation h2 {  text-align: left;  font-weight: bold;  padding: 5px 5px 5px 15px;
-  font-size: 1.6em;  margin: -7px;  margin-bottom: 0px;  background-color: #c00; color:#fff;}
-#error_explanation ul li {  font-size: 12px;  list-style: square;  margin-left:10px;}
-*/
 
+ /*********** Errors SECTION *********************/
 #notice {  padding:2px;  color:#1F4A75; font-weight:bold; font-size:1.3em;  display:block; text-align:center;}
 .error, .notice, .success {padding:.8em;margin-bottom:1em;}
 .error{padding:.8em;margin-bottom:1em;color:red;}
-/*
-.error, .notice, .success {padding:.8em;margin-bottom:1em;border:2px solid #ddd;}
-.error {background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;}
-.notice {background:#FFF6BF;color:#514721;border-color:#FFD324;}
-.success {background:#E6EFC2;color:#264409;border-color:#C6D880;}
-.error a {color:#8a1f11;}
-.notice a {color:#514721;}
-.success a {color:#264409;}
-*/
-
-/********* Menu header ************/
-.menu_list ul{list-style-type:none;}
-.menu_list li{display: inline;padding-right: 2px; padding-left: 2px; }
 
 
-/************Forms **************/
+/************Forms SECTION **************/
 input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:1.0em;  line-height:135%;
   margin-right:4px;	color:white;	padding:1px;}
 
 
-/************ Forms - Buttons  ***************************/
+/************ Forms - Buttons  SECTION ***************************/
 .myButton{ cursor:pointer;
   background-image: -webkit-gradient(linear,left bottom,left top, color-stop(0.01, rgb(116,191,67)),
       color-stop(0.51, rgb(117,189,68)),color-stop(0.76, rgb(195,222,171)));
@@ -88,30 +66,8 @@ input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:1.0
 .button{margin: 10px 0 10px 10px;padding: 3px 3px 3px 3px;color:#FFFFFF;background-color: #1F4A75;}
 
 
-.field_x{  border: thin solid #005C84;  width: 130px;}
-.line{  display:block;  margin:10px 2px 10px 10px;}
 
-
-/********* links **********/
-.tie_link a{  text-decoration:none;}
-.tie_link a:hover{  text-decoration:underline;}
-
-
-/*************SPACES*************/
-.space_center {	padding-top: 9px;	padding-right: 4px;	text-align: center;}
-
-
-/******** DIVS FORMS *******/
-.block .field{  display:inline;  padding: 0px;  width:50%;}
-.block .form_tag{border-color: #0656a4;	color: #2A3890;	padding: 5px 5px 5px 5px;  border:1px solid #BDC7D8; width:90%;}
-.block .form_tag_long{border-color: #0656a4;	color: #2A3890;	padding: 5px 5px 5px 5px;  border:1px solid #BDC7D8; width:91%;}
-.block .form_label{display:inline-block;  width:25%; font-weight:bold; vertical-align:top; padding-top:3px;}
-.block .form_field{  display:inline-block;  padding: 0px;  width:73%;}
-.block .form_row {	display: block; padding:5px; padding-left:20px; }
-.block .label{  display:inline-block;  width:49%; }
-
-
-/************** BLOCK DIV *********/
+/************** BLOCK DIV SECTION *********/
 .block .brief {	color: #6C6D6F;}
 .block .center{ text-align:center;}
 .block .close {  float:right;  vertical-align:top;}
@@ -127,9 +83,7 @@ input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:1.0
 .block .title{ display:inline-block; }
 .block .sub-block{	display: inline-block;  padding-left:3px; width:70%; text-align:left;}
 
-
-
-/******BLOCK TAB CONTENT ********/
+/******BLOCK TAB CONTENT  SECTION********/
 .block .tab { 	margin-top: 2px;	background: #fff;	/*border-top: thin solid #D4E4EA;*/
 	padding: 2px 0px 2px 0px;}
 .block .tab_content{ padding:5px; text-align:center;}
@@ -144,7 +98,31 @@ input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:1.0
 .ui-tabs-hide {	display: none;}
 
 
+/******** FORMS  SECTION *******/
+.block .field{  display:inline;  padding: 0px;  width:50%;}
+.block .form_tag{border-color: #0656a4;	color: #2A3890;	padding: 5px 5px 5px 5px;  border:1px solid #BDC7D8; width:90%;}
+.block .form_tag_long{border-color: #0656a4;	color: #2A3890;	padding: 5px 5px 5px 5px;  border:1px solid #BDC7D8; width:91%;}
+.block .form_label{display:inline-block;  width:25%; font-weight:bold; vertical-align:top; padding-top:3px;}
+.block .form_field{  display:inline-block;  padding: 0px;  width:73%;}
+.block .form_row {	display: block; padding:5px; padding-left:20px; }
+.block .label{  display:inline-block;  width:49%; }
 
-/*************MENU ICON**********/
+/********* Links SECTION **********/
+.tie_link a{  text-decoration:none;}
+.tie_link a:hover{  text-decoration:underline;}
+
+
+/********* Menu header SECTION ************/
+.menu_list ul{list-style-type:none;}
+.menu_list li{display: inline;padding-right: 2px; padding-left: 2px; }
+.field_x{  border: thin solid #005C84;  width: 130px;}
+.line{  display:block;  margin:10px 2px 10px 10px;}
+
+/*************MENU ICON SECTION**********/
 .menu_header{  border-bottom: thin solid #D4E4EA;  width:14.5em;  padding-left:3px;  padding-right:3px;}
 .menu_icon{	vertical-align: middle; padding-bottom: 3px;	padding-right: 3px;  padding-left: 3px;	display: inline-block;}
+
+
+
+/*************SPACES SECTION *************/
+.space_center {	padding-top: 9px;	padding-right: 4px;	text-align: center;}
