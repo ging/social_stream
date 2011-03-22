@@ -20,7 +20,12 @@ class MessagesController < ApplicationController
 			redirect_to mailbox_index_path
 		return
 		end
-		@receipts = @conversation.receipts(@actor)
+		if @box.eql? 'trash'
+		@receipts = @conversation.receipts(@actor).trash
+		else
+		@receipts = @conversation.receipts(@actor).not_trash
+		end
+
 	end
 
 	# GET /messages/new
@@ -78,7 +83,7 @@ class MessagesController < ApplicationController
 		end
 
 		if params[:untrash].present?
-			@conversation.untrash(@actor)
+		@conversation.untrash(@actor)
 		end
 
 		if params[:reply_all].present?
@@ -88,7 +93,11 @@ class MessagesController < ApplicationController
 			end
 		end
 
-		@receipts = @conversation.receipts(@actor)
+		if @box.eql? 'trash'
+		@receipts = @conversation.receipts(@actor).trash
+		else
+		@receipts = @conversation.receipts(@actor).not_trash
+		end
 		render :action => :show
 	end
 
