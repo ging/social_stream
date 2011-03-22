@@ -28,6 +28,9 @@
       <%= link_to t('confirmation.not_received.long'), new_confirmation_path(resource_name) %><br />
     <% end -%>
   </div>
+    <div class="form_row center">
+      <%= render :partial => "devise/shared/links" %>
+    </div>
   </div>
 </div>
 

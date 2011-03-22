@@ -146,6 +146,12 @@ en:
   representation:
     action: "representing"
     change: "Change"
+  service:
+    one: "Service"
+    other: "Services"
+  products:
+    one: "Product"
+    other: "Products"
   share: "Share"
   sign_in: "Sign in"
   sign_out: "Sign out"

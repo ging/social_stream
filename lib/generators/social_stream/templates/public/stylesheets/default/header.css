@@ -1,11 +1,11 @@
-/******************header structure ******/
+/****************** HEADER STRUCTURE ******/
 #headerFront {	width: 100%;	padding: 0;	background: #1F4A75;  padding: 2px 0px 0px 0px;}
 #header_left {	left: 0px;	float: left;	padding-left: 5px;}
 #header_right {	float: right;	right: 0px;	padding-right: 10px;  display: inline-block;}
 .banner_top {	width: 960px;	margin-left: auto;	margin-right: auto;	margin-top: 3px;  padding-bottom: 3px;
 	position: relative;}
 
-/********** content ************/
+/********** CONTENT ************/
 #headerFront .div_login a{	color:#FFFFFF;	padding-right: 2px; }
 #headerFront .div_login a:hover{text-decoration:underline; }
 #logo{  width:218px;  height:50px;  float:left;  vertical-align:top; }
