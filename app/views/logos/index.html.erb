@@ -12,7 +12,7 @@
   	<% #debugger %>
 	<td><%= image_tag logo.logo.url(:profile) %></image_tag></td>
 	<td><%= image_tag logo.logo.url(:tie) %></image_tag></td>
-	<td><%= image_tag logo.logo.url() %></image_tag></td>
+	<td><% image_tag logo.logo.url() %></image_tag></td>
 	<td><%= image_tag logo.logo.url(:actor) %></image_tag></td>
 
     <td><%= link_to 'Show', logo %></td>

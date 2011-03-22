@@ -24,7 +24,8 @@ def create
     if @logo.new_record?
       render :new
     else
-      redirect_to @logo
+      #redirect_to @logo
+      redirect_to logos_path
     end
     
     

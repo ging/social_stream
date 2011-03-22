@@ -31,7 +31,7 @@ function update_crop(coords) {
     marginLeft: '-' + Math.round(rx * coords.x) + 'px',
     marginTop: '-' + Math.round(ry * coords.y) + 'px'
   });
-  var ratio = <%= precrop_dimensions[:width] %> / <%= precrop_dimensions[:height] %>;
+  var ratio = 1;//<% precrop_dimensions[:width] %> / <%= precrop_dimensions[:height] %>
   $("#crop_x").val(Math.round(coords.x * ratio));
   $("#crop_y").val(Math.round(coords.y * ratio));
   $("#crop_w").val(Math.round(coords.w * ratio));
