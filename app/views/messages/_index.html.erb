@@ -1,4 +1,4 @@
-
+<%= render :partial => 'location' %>
 
 <br class="clearfloat" />
 <div class="space_center">
@@ -9,7 +9,7 @@
 </div><div class="space_center">
 </div>
 
-<h1><%= params[:id].capitalize %></h1>
+<h1><%= @box.capitalize %></h1>
 <div id="conversations">  
   <%= render :partial => 'conversations' %>
 </div>

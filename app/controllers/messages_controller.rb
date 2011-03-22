@@ -1,0 +1,134 @@
+class MessagesController < ApplicationController
+
+	before_filter :get_mailbox, :get_box
+	def index
+		if @box.eql?"inbox"
+			@conversations = @mailbox.inbox.paginate(:per_page => 8, :page => params[:page])
+		elsif @box.eql?"sentbox"
+			@conversations = @mailbox.sentbox.paginate(:per_page => 8, :page => params[:page])
+		else
+			@conversations = @mailbox.trash.paginate(:per_page => 8, :page => params[:page])
+		end
+	end
+
+	# GET /messages/1
+	# GET /messages/1.xml
+	def show
+		@actor = Actor.normalize(current_subject)
+		@conversation = Conversation.find_by_id(params[:id])
+		if @conversation.nil? or !@conversation.is_participant?(@actor)
+			redirect_to mailbox_index_path
+		return
+		end
+		@receipts = @conversation.receipts(@actor)
+	end
+
+	# GET /messages/new
+	# GET /messages/new.xml
+	def new
+
+	end
+
+	# GET /messages/1/edit
+	def edit
+
+	end
+
+	# POST /messages
+	# POST /messages.xml
+	def create
+		@conversation = Conversation.new
+		if params[:subject].blank?
+			@conversation.errors.add("subject", "can't be empty")
+		end
+		if params[:body].blank?
+			@conversation.errors.add("body", "can't be empty")
+		end
+		if params[:_recipients].nil? or params[:_recipients]==[]
+			@conversation.errors.add("recipients", "can't be empty")
+		end
+		if @conversation.errors.any?
+			render :action => :new
+		return
+		end
+		@actor = current_subject
+		@recipients = Array.new
+		params[:_recipients].each do |recp_id|
+			recp = Actor.find_by_id(recp_id)
+			next if recp.nil?
+			@recipients << recp
+		end
+
+		if (mail = @actor.send_message(@recipients, params[:body], params[:subject]))
+			@conversation = mail.conversation
+			redirect_to message_path(@conversation, :box => @box)
+		else
+			render :action => :new
+		end
+	end
+
+	# PUT /messages/1
+	# PUT /messages/1.xml
+	def update
+		@actor = Actor.normalize(current_subject)
+		@conversation = Conversation.find_by_id(params[:id])
+		if @conversation.nil? or !@conversation.is_participant?(@actor)
+			redirect_to messages_path(:box => @box)
+		return
+		end
+
+		if params[:untrash].present?
+			@conversation.untrash(@actor)
+		end
+
+		if params[:reply_all].present?
+			if params[:body].present?
+				last_receipt = @conversation.receipts(@actor).last
+				@actor.reply_to_all(last_receipt, params[:body])
+			end
+		end
+
+		@receipts = @conversation.receipts(@actor)
+		render :action => :show
+	end
+
+	# DELETE /messages/1
+	# DELETE /messages/1.xml
+	def destroy
+		@actor = Actor.normalize(current_subject)
+		@conversation = Conversation.find_by_id(params[:id])
+		if @conversation.nil? or !@conversation.is_participant?(@actor)
+			redirect_to messages_path(:box => @box)
+		return
+		end
+
+		@conversation.move_to_trash(@actor)
+
+		if params[:location].present?
+			case params[:location]
+			when 'conversation'
+				redirect_to messages_path(:box => :trash)
+			else
+			redirect_to messages_path(:box => @box)
+			end
+
+		return
+		end
+		redirect_to messages_path(:box => @box)
+	end
+
+	private
+
+	def get_mailbox
+		@mailbox = current_subject.mailbox
+	end
+
+	def get_box
+		if params[:box].blank? or !["inbox","sentbox","trash"].include?params[:box]
+			@box = "inbox"
+		return
+		end
+		@box = params[:box]
+	end
+
+end

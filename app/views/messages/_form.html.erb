@@ -1,6 +1,6 @@
 <% content_for :headers do %>
-  <%= stylesheet_link_tag "fcbkComplete.css", :media => "screen, projection" %>
-  <%= javascript_include_tag 'jquery.fcbkcomplete.min','jquery.validate' %>
+<%= stylesheet_link_tag "fcbkComplete.css", :media => "screen, projection" %>
+<%= javascript_include_tag 'jquery.fcbkcomplete.min','jquery.validate' %>
 <% end %>
 
 <% content_for :javascript do %>
@@ -15,7 +15,7 @@
 <% end %>
 <h1>New Message</h1>
 <hr>
-<%= form_tag mailbox_conversation_index_path, :method => :post do %>
+<%= form_tag messages_path, :method => :post do %>
 <% if @conversation and @conversation.errors.any? %>
 <div id="notice">
 	<h2><%= pluralize(@conversation.errors.count, "error") %> prohibited this message from being sent:</h2>
