@@ -4,9 +4,10 @@
 
 <%= render :partial => 'logo' %>
 <div class="space_center"></div>
-<%= render :partial => 'menu/group' %>
+<%= render :partial => 'menu/group',:locals => { :subject => @group } %>
 <div class="space_center"></div>
 <%= render :partial => 'tabs' %>
 <div class="space_center"></div>
 
 <%= render :partial => 'subjects/contacts', :locals => { :subject => @group } %>
+
