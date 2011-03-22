@@ -65,7 +65,7 @@ $(".edit_group").validate();
           <%= profile_form.text_field :country,  :class => "form_tag" %>
 				</div>
     </div>
-    <div class="form_row">
+    <div class="form_row form_label">
         <%= profile_form.label :description %>
 		</div>
 		<div class="form_row">
@@ -127,7 +127,7 @@ $(".edit_group").validate();
     <% end %>
     <% end %>
 </div>
-<div class="form_row center">
+<div class="form_row space_center">
     <%= f.submit "Update", :class => "button" %>&nbsp;
     <button class="button" onclick="window.location.href='<%= group_url(@group) %>';">
         Cancel

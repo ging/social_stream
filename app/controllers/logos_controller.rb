@@ -14,8 +14,24 @@ class LogosController < InheritedResources::Base
  
   end
 =end
-  
+begin  
+def create
+    @logo = Logo.create(params[:logo])
+    #debugger
+    #{:original=>#<File:/var/folders/EZ/EZmst6HwE0ipKa3hozX2Zk+++TI/-Tmp-/stream20110322-5217-ft6j6l-0.jpg>}
 
-  
+    
+    if @logo.new_record?
+      render :new
+    else
+      #redirect_to @logo
+      redirect_to logos_path
+    end
+    
+    
+    
+    
+  end
+end  
   
 end

@@ -76,6 +76,12 @@ class Actor < ActiveRecord::Base
         end
       end
     end
+
+    def find_by_webfinger!(link)
+      link =~ /(acct:)?(.*)@/
+
+      find_by_slug! $2
+    end
   end
   
   

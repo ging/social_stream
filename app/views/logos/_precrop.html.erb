@@ -2,6 +2,7 @@ Crop your image:
 
 
 <% my_file_name = File.basename(@logo.logo.queued_for_write[:original].path) %>
+<%# my_file_name = params[:name] %>
 <div style="width:100px;height:100px;overflow:hidden;margin-left:5px;"> 
 		<%= image_tag "tmp/#{my_file_name}",:id=>"preview" %>
 </div>
@@ -30,7 +31,7 @@ function update_crop(coords) {
     marginLeft: '-' + Math.round(rx * coords.x) + 'px',
     marginTop: '-' + Math.round(ry * coords.y) + 'px'
   });
-  var ratio = <%= precrop_dimensions[:width] %> / <%= precrop_dimensions[:height] %>;
+  var ratio = 1;//<% precrop_dimensions[:width] %> / <%= precrop_dimensions[:height] %>
   $("#crop_x").val(Math.round(coords.x * ratio));
   $("#crop_y").val(Math.round(coords.y * ratio));
   $("#crop_w").val(Math.round(coords.w * ratio));
@@ -41,8 +42,10 @@ function update_crop(coords) {
 <%= form_for :logo, @logo,:url => logos_path, :html => { :multipart => true } do |f| %>
 
   <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
-    <%= f.text_field attribute, :id => attribute %>
+    <%= f.hidden_field attribute, :id => attribute %>
   <% end %>
+	<%= f.hidden_field :name, :value => my_file_name %>
+	
   <p><%= f.submit "Crop" %></p>
 <% end %>
 

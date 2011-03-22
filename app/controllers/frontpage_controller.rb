@@ -6,6 +6,11 @@ class FrontpageController < ApplicationController
       format.html # index.html.erb
     end
   end
+
+  # Webfinger protocol
+  # http://code.google.com/p/webfinger/
+  def host_meta
+  end
   
 
   private

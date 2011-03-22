@@ -13,11 +13,18 @@ Rails.application.routes.draw do
   match 'api/user/:id/home' => 'api#activity_atom_feed', :format => 'atom'
   ##/API##
   
+  # Webfinger
+  match '.well-known/host-meta',:to => 'frontpage#host_meta'
+  
+  # Social Stream subjects configured in config/initializers/social_stream.rb
   SocialStream.subjects.each do |actor|
     resources actor.to_s.pluralize do
       resource :profile
     end
   end
+
+  # Find subjects by slug
+  match 'subjects/lrdd/:id' => 'subjects#lrdd', :as => 'subject_lrdd'
   
   resource :representation
   
@@ -39,6 +46,7 @@ Rails.application.routes.draw do
   end
   
   
+  # Social Stream objects configured in config/initializers/social_stream.rb
   (SocialStream.objects - [ :actor ]).each do |object|
     resources object.to_s.pluralize
   end

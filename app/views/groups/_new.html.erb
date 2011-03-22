@@ -43,12 +43,15 @@ height: 6
 		</div>
 	</div>
 	<div class="form_row">
-		<%= f.label t('group.new.participants') %>
+		<div class="form_label">
+		  <%= f.label t('group.new.participants') %>
+		</div>
+		<div class="form_field">
+			<%= f.select :_participants, [], :class => "form_tag" %>
+		</div>
 	</div>
-	<div class="form_row">
-		<%= f.select :_participants, [], :class => "form_tag" %>
-	</div>
-	<div class="form_row">
+	<div class="form_row form_label">
+
 		<%= f.label :description %>
 	</div>
 	<div class="form_row">

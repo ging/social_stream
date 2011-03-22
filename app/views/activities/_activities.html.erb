@@ -1,6 +1,13 @@
-<% content_for :headers, stylesheet_link_tag("activities", :media => "screen, projection") %>
+<% content_for :headers do %>
+  <%= stylesheet_link_tag "activities", :media => "screen, projection" %>
+	<%= stylesheet_link_tag "jquery-ui", :media => "screen, projection" %>
+<% end %>
+
 <% content_for :javascript do %>
   <%= render :partial => 'activities/jquery' %>
+	$(document).ready(function() {
+    $("#tabs").tabs();
+  });
 <% end -%>
 
 <div id="wrapper_activities">
@@ -10,11 +17,28 @@
     </div>
     <%= render :partial => 'activities/new', :locals => { :receiver => owner } %>
   </div>
-  
-  <div id="wall">
-    <% activities = activities.paginate(:page => params[:page]) %>
-    <%- # should be activities.paginate(:page => params[:page], :count => { :select => 'activity.id', :distinct => true }) but it is not working in Rails 3.0.3 -%>
-    <%= render activities  %>
-    <%= will_paginate activities %>
-  </div>
+	<div id="tabs">
+		<ul>
+        <li><a href="#fragment-1"><span>Group</span></a></li>
+        <li><a href="#fragment-2"><span>Followers</span></a></li>
+        <li><a href="#fragment-3"><span>Partners</span></a></li>
+    </ul>
+		<div id="fragment-1">
+      <div id="wall">
+	      <% activities = activities.paginate(:page => params[:page]) %>
+	      <%- # should be activities.paginate(:page => params[:page], :count => { :select => 'activity.id', :distinct => true }) but it is not working in Rails 3.0.3 -%>
+	      <%= render activities  %>
+	      <%= will_paginate activities %>
+      </div>
+    </div>
+    <div id="fragment-2">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+    </div>
+    <div id="fragment-3">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+    </div>
+	</div>
 </div>
