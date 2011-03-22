@@ -7,11 +7,11 @@ class Logo < ActiveRecord::Base
                                    :profile => '94x94' },
                       :default_url => "/images/:attachment/:style/:subtype_class.png"
 	
-	before_post_process :process_precrop
+#	before_post_process :process_precrop
 	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :name
-	validates_attachment_presence :logo
-	before_validation :mylog
-	after_validation :mylog
+#	validates_attachment_presence :logo
+#	before_validation :mylog
+#	after_validation :mylog
 	
 	def mylog
 		
