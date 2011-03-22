@@ -11,9 +11,9 @@ en:
     confirm_delete: "Delete activity?"
     delete: "Delete"
     to_comment: "Comment"
-    like: I like
-    unlike: Already I do not like
-    last: Last Activities
+    like: "I like"
+    unlike: "Already I do not like"
+    last: "Last Activities"
   browse: "Browse"
   comment:
     input: "Write a comment..."
@@ -50,15 +50,15 @@ en:
         subject: 'Unlock Instructions'
     registrations:
       signed_up: 'You have signed up successfully. If enabled, a confirmation was sent to your e-mail.'
-      updated: 'You updated your account successfully.'
+      updated: 'You updated your account successfully'
       destroyed: 'Bye! Your account was successfully cancelled. We hope to see you again soon.'
     passwords:
       send_instructions: 'You will receive an email with instructions about how to reset your password in a few minutes.'
       updated: 'Your password was changed successfully. You are now signed in.'
       field: 'Please, enter same email when you create account'
     sessions:
-      signed_in: 'Signed in successfully.'
-      signed_out: 'Signed out successfully.'
+      signed_in: 'Signed in successfully'
+      signed_out: 'Signed out successfully'
     unlocks:
       send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
       unlocked: 'Your account was successfully unlocked. You are now signed in.'
@@ -149,6 +149,7 @@ en:
   share: "Share"
   sign_in: "Sign in"
   sign_out: "Sign out"
+  sign_up: "Sign up"
   socialstream: "SocialStream"
   tie:
     add:
@@ -157,12 +158,12 @@ en:
       follow: "Follow"
       partner: "Add Partner"
     pending:
-      other: Pending requests
+      other: "Pending requests"
       all: "All"
     suggestion:
-      one: Suggestion
-      other: Suggestions
-      all: All
+      one: "Suggestion"
+      other: "Suggestions"
+      all: "All"
     options: "Tie options"
   time:
     ago: "%{time} ago"

@@ -34,7 +34,7 @@
         <div id="content">
           <% flash.each do |name, msg| %>
             <div id="<%= name %>">
-            <%= msg %>
+            &laquo; <%= msg %> &raquo;
             </div>
           <% end %>
           <%= yield %>

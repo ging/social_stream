@@ -21,13 +21,27 @@ margin-top: auto; margin-bottom:auto;}
 
 * html #wrapper_body,  {height: 100%;}
 /*********** Errors *********************/
+/*
 #notice {  padding:2px;  color:red; font-weight:bold; font-size:1.3em;  display:block; text-align:center;}
 #error_explanation {  width: 80%;  border: 2px solid red;  padding: 7px;  padding-bottom: 0;
   margin-bottom: 20px;  background-color: #f0f0f0;  color:#fff;}
 #error_explanation h2 {  text-align: left;  font-weight: bold;  padding: 5px 5px 5px 15px;
   font-size: 1.6em;  margin: -7px;  margin-bottom: 0px;  background-color: #c00; color:#fff;}
 #error_explanation ul li {  font-size: 12px;  list-style: square;  margin-left:10px;}
+*/
 
+#notice {  padding:2px;  color:#1F4A75; font-weight:bold; font-size:1.3em;  display:block; text-align:center;}
+.error, .notice, .success {padding:.8em;margin-bottom:1em;}
+.error{padding:.8em;margin-bottom:1em;color:red;}
+/*
+.error, .notice, .success {padding:.8em;margin-bottom:1em;border:2px solid #ddd;}
+.error {background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;}
+.notice {background:#FFF6BF;color:#514721;border-color:#FFD324;}
+.success {background:#E6EFC2;color:#264409;border-color:#C6D880;}
+.error a {color:#8a1f11;}
+.notice a {color:#514721;}
+.success a {color:#264409;}
+*/
 
 /********* Menu header ************/
 .menu_list ul{list-style-type:none;}
@@ -91,9 +105,9 @@ input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:1.0
 .block .field{  display:inline;  padding: 0px;  width:50%;}
 .block .form_tag{border-color: #0656a4;	color: #2A3890;	padding: 5px 5px 5px 5px;  border:1px solid #BDC7D8; width:90%;}
 .block .form_tag_long{border-color: #0656a4;	color: #2A3890;	padding: 5px 5px 5px 5px;  border:1px solid #BDC7D8; width:91%;}
-.block .form_label{display:inline-block;  width:25%; font-weight:bold;}
+.block .form_label{display:inline-block;  width:25%; font-weight:bold; vertical-align:top; padding-top:3px;}
 .block .form_field{  display:inline-block;  padding: 0px;  width:73%;}
-.block .form_row {	display: block; padding:5px; padding-left:20px;}
+.block .form_row {	display: block; padding:5px; padding-left:20px; }
 .block .label{  display:inline-block;  width:49%; }
 
 
@@ -128,3 +142,9 @@ input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:1.0
 .block .tab li a:active	{	background-color: #deeff8;	font-weight: bold;	text-decoration: none;}
 .block .tab_browse{	width:49%;	display:inline-block;}
 .ui-tabs-hide {	display: none;}
+
+
+
+/*************MENU ICON**********/
+.menu_header{  border-bottom: thin solid #D4E4EA;  width:14.5em;  padding-left:3px;  padding-right:3px;}
+.menu_icon{	vertical-align: middle; padding-bottom: 3px;	padding-right: 3px;  padding-left: 3px;	display: inline-block;}
