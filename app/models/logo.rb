@@ -25,12 +25,13 @@ class Logo < ActiveRecord::Base
     	tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
     	precrop_path = File.join(tmp_path,@name)
     	#debugger
-    	#make_precrop(path,x,y,width,height)
+    	
     	make_precrop(precrop_path,@crop_x.to_i,@crop_y.to_i,@crop_w.to_i,@crop_h.to_i)
 		@logo = Logo.new :logo => File.open(precrop_path), :name => @name
-		#debugger
+		
 		self.logo = @logo.logo
 		
+		FileUtils.remove_file(precrop_path)
 		
 		
 	end
@@ -62,7 +63,7 @@ class Logo < ActiveRecord::Base
       images_path = File.join(RAILS_ROOT, "public", "images")
       tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
       
-      resize_image(logo.queued_for_write[:original].path,600,600)
+      resize_image(logo.queued_for_write[:original].path,500,500)
  
       my_file_name = File.basename(logo.queued_for_write[:original].path)
       FileUtils.cp(logo.queued_for_write[:original].path,tmp_path)
