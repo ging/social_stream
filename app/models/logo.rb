@@ -7,11 +7,36 @@ class Logo < ActiveRecord::Base
                                    :profile => '94x94' },
                       :default_url => "/images/:attachment/:style/:subtype_class.png"
 	
-#	before_post_process :process_precrop
+	before_post_process :process_precrop
+#	before_post_process :copy_temp_file
 	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :name
 #	validates_attachment_presence :logo
-#	before_validation :mylog
+	
+	after_validation :precrop_done
 #	after_validation :mylog
+	
+	def precrop_done
+		#en este metodo el precrop estará hecho ya y tendremos que crear el nuevo logo sin los errores
+		puts "+++++++++++++" + @name.to_s + "************"
+		puts "-------------" + @logo.to_s + "************"
+	return if @name.blank?
+	
+		images_path = File.join(RAILS_ROOT, "public", "images")
+    	tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
+    	precrop_path = File.join(tmp_path,@name)
+		@logo = Logo.new :logo => File.open(precrop_path), :name => @name
+		debugger
+		self.logo = @logo.logo
+		
+		
+		
+	end
+	
+	
+	def copy_temp_file
+	  images_path = File.join(RAILS_ROOT, "public", "images")
+      tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
+	end
 	
 	def mylog
 		
@@ -20,15 +45,16 @@ class Logo < ActiveRecord::Base
    		#file_path = File.join(tmp_path,@name)
    		#@logo = Logo.new :logo => File.open(file_path)
 		
-		#debugger
+		debugger
 		puts ""
 	end
 
    def process_precrop
-   	debugger
-      if @name.blank?
-      	 #logo.errors['precrop'] = "You have to make precrop"
-      end
+   	#debugger
+      #puts "+++++++++++++" + @name.to_s + "************"
+	return if !@name.blank?
+      	logo.errors['precrop'] = "You have to make precrop"
+
 	
       images_path = File.join(RAILS_ROOT, "public", "images")
       tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))

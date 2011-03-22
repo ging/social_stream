@@ -2,6 +2,7 @@ Crop your image:
 
 
 <% my_file_name = File.basename(@logo.logo.queued_for_write[:original].path) %>
+<%# my_file_name = params[:name] %>
 <div style="width:100px;height:100px;overflow:hidden;margin-left:5px;"> 
 		<%= image_tag "tmp/#{my_file_name}",:id=>"preview" %>
 </div>
