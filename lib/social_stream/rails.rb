@@ -48,6 +48,10 @@ module SocialStream
       end
     end
 
+    initializer "social_stream.mime_types" do
+      Mime::Type.register 'application/xrd+xml', :xrd
+    end
+
     initializer "social_stream.controller_helpers" do
       ActiveSupport.on_load(:action_controller) do
         include SocialStream::Controllers::Helpers
