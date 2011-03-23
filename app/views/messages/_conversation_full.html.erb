@@ -13,33 +13,26 @@
 <% end %>
 
 <%= div_for (conversation) do %>
-  <h2><%= conversation.subject %></h2>
-  <hr>
+  <%= conversation.subject %>
+  <br>
   Actions: <% unless @box.eql?'trash' %><%= link_to ( image_tag('btn/btn_delete.png', :atl => "Delete", :title => "Delete"), 
 			message_path(conversation, :location => 'conversation'), 
 			:confirm => 'Do you want to move "' + conversation.subject + '" to trash?', 
 			:method => :delete, :remote => true) %><% end %>
-  <hr>
+  <br>
   <% conversation.get_recipients.each do |recp| %>
  	 <%= link_to image_tag(recp.logo.url(:tie), :title=>recp.name, :alt => recp.name), recp.subject %>
   <% end %><br>
 	
   <% @receipts.each do |receipt| %>  	
-  	<hr><br>
 	<% message= receipt.message %>
 	<%= div_for (message) do%>
 		<%= link_to image_tag(message.sender.logo.url(:tie),:alt => message.sender.name,:title =>message.sender.name), message.sender.subject %><br>
-		<b><%= message.sender.name %></b> on <%= message.created_at %> said:<br>
-		<b><i><%= raw (message.body) %></i></b><br><br>
-		<!--Debug:<br>
-		Message.Id: <%= message.id %><br>
-		Receipt.Id: <%= receipt.id %><br>
-		Receipt.Type: <%= receipt.mailbox_type %><br>
-		Message.Sender: <%= message.sender.class.to_s %>/<%= message.sender.id.to_s %><br><br>-->
+		<%= message.sender.name %> on <%= message.created_at %> said:<br>
+		<%= raw (message.body) %>
   	<% end %>
   <% end %>
   <% unless @box.eql?'trash' %>
-	  <hr><br>
 	  Write your answer:<br>
 	  <% form_tag message_path(conversation.id), :method => :put do %>
 		<div class="block">
