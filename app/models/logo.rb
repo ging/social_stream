@@ -10,15 +10,21 @@ class Logo < ActiveRecord::Base
 	before_post_process :process_precrop
 #	before_post_process :copy_temp_file
 	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :name
-#	validates_attachment_presence :logo
+	validates_attachment_presence :logo, :if => :uploading_file?
+	
 	
 	after_validation :precrop_done
 #	after_validation :mylog
 	
+	
+  def uploading_file?
+    return @name.blank?
+  end
+	
 	def precrop_done
 		#en este metodo el precrop estará hecho ya y tendremos que crear el nuevo logo sin los errores
-		puts "+++++++++++++" + @name.to_s + "************"
-		puts "-------------" + @logo.to_s + "************"
+	#	puts "+++++++++++++" + @name.to_s + "************"
+	#	puts "-------------" + @logo.to_s + "************"
 	return if @name.blank?
 	
 		images_path = File.join(RAILS_ROOT, "public", "images")
@@ -56,8 +62,10 @@ class Logo < ActiveRecord::Base
    def process_precrop
    	#debugger
       #puts "+++++++++++++" + @name.to_s + "************"
+      puts "--------------------------------------------------"
+
 	return if !@name.blank?
-      	logo.errors['precrop'] = "You have to make precrop"
+      logo.errors['precrop'] = "You have to make precrop"
 
 	
       images_path = File.join(RAILS_ROOT, "public", "images")
