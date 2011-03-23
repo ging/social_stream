@@ -4,6 +4,7 @@
 <% end %>
 
 <% content_for :javascript do %>
+
 	var recipients = $("#_recipients").fcbkcomplete({
 		json_url: "../../contacts/index.json",
 		cache: true,
@@ -12,18 +13,40 @@
 		newel: false,
 		height: 6
 	});	
+
 	
+	$('#body').ckeditor(
+	 function(){
+	  $('#cke_top_body').click( updateTextArea);
+	 }
+	);
+	
+	var editor = $('#body').ckeditorGet();
+	
+  editor.on("instanceReady", function(){	   
+    this.document.on("keyup", updateTextArea);
+    this.document.on("paste", updateTextArea);
+		this.document.on("mousedown", updateTextArea);
+  });
+
+  var updateTextArea = function (){ 
+			editor.updateElement();	
+			$("#body").trigger('keyup');       
+  }
+	
+
 	<% unless @recipient.nil? %>
 		$("#_recipients").trigger("addItem",[{"title": "<%= @recipient.name %>", "value": "<%= @recipient.id %>"}]);
 	<% end %>
-	
-	$('#body').ckeditor();
-	
-	
+
+  $(".new_message").validate();
+
 <% end %>
+
+
 <h1>New Message</h1>
 <hr>
-<%= form_tag messages_path, :method => :post do %>
+<%= form_tag messages_path, :method => :post , :class => "new_message" do %>
 <% if @conversation and @conversation.errors.any? %>
 <div id="notice">
 	<h2><%= pluralize(@conversation.errors.count, "error") %> prohibited this message from being sent:</h2>
@@ -41,8 +64,8 @@
       <%= label_tag :recipients %>
 		</div>
 	  <div class="form_row">
-	  	
-      <%= select_tag :_recipients, "", :class => "form_tag" %>
+      <%= select_tag :_recipients, "", :class => "required form_tag" %>
+
   </div>
 	<div class="form_row">
 		<%= label_tag :subject %>
@@ -53,11 +76,11 @@
 	<div class="form_row">
 		<%= label_tag :body %>
 	</div>
-	<div class="form_row">
-		<%= text_area_tag :body, nil,:rows =>6, :cols=> 53, :class => "required form_tag" %>
+	<div class="form_row" id="ck_editor" >
+		<%= text_area_tag :body, nil,:rows =>6, :cols=> 53, :class => "required form_tag", :maxlength => 5000 %>
 	</div>
 	<div class="actions center">
-		<%= submit_tag "Send Message", :name => :send_message,:class => "button" %>
+		<%= submit_tag "Send Message", :name => :send_message, :class => "button" %>
 	</div>
 </div>
 <% end %>
