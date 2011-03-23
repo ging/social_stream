@@ -67,7 +67,7 @@ class MessagesController < ApplicationController
 
 		if (mail = @actor.send_message(@recipients, params[:body], params[:subject]))
 			@conversation = mail.conversation
-			redirect_to message_path(@conversation, :box => @box)
+			redirect_to message_path(@conversation, :box => :sentbox)
 		else
 			render :action => :new
 		end

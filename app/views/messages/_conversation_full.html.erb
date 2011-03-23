@@ -1,9 +1,15 @@
 <% content_for :headers do %>
-<%= javascript_include_tag 'ckeditor/ckeditor.js' %>
+<%= javascript_include_tag 'ckeditor/ckeditor.js','ckeditor/adapters/jquery.js','jquery.scrollTo.min.jsjquery.scrollTo.min.js' %>
 <% end %>
 
 <% content_for :javascript do %>
-	CKEDITOR.replace( 'body' );
+	<% unless @box.eql?'trash' %>
+		$('#body').ckeditor(
+			function() {$.scrollTo('#message_<%= conversation.last_message.id %>');}
+		);
+	<% else %>
+		$.scrollTo('#message_<%= conversation.last_message.id %>');
+	<% end %>
 <% end %>
 
 <%= div_for (conversation) do %>
@@ -21,14 +27,16 @@
   <% @receipts.each do |receipt| %>  	
   	<hr><br>
 	<% message= receipt.message %>
-	<%= link_to image_tag(message.sender.logo.url(:tie),:alt => message.sender.name,:title =>message.sender.name), message.sender.subject %><br>
-	<b><%= message.sender.name %></b> on <%= message.created_at %> said:<br>
-	<b><i><%= raw (message.body) %></i></b><br><br>
-	<!--Debug:<br>
-	Message.Id: <%= message.id %><br>
-	Receipt.Id: <%= receipt.id %><br>
-	Receipt.Type: <%= receipt.mailbox_type %><br>
-	Message.Sender: <%= message.sender.class.to_s %>/<%= message.sender.id.to_s %><br><br>-->
+	<%= div_for (message) do%>
+		<%= link_to image_tag(message.sender.logo.url(:tie),:alt => message.sender.name,:title =>message.sender.name), message.sender.subject %><br>
+		<b><%= message.sender.name %></b> on <%= message.created_at %> said:<br>
+		<b><i><%= raw (message.body) %></i></b><br><br>
+		<!--Debug:<br>
+		Message.Id: <%= message.id %><br>
+		Receipt.Id: <%= receipt.id %><br>
+		Receipt.Type: <%= receipt.mailbox_type %><br>
+		Message.Sender: <%= message.sender.class.to_s %>/<%= message.sender.id.to_s %><br><br>-->
+  	<% end %>
   <% end %>
   <% unless @box.eql?'trash' %>
 	  <hr><br>
