@@ -18,7 +18,8 @@
 	$('#body').ckeditor(
 	 function(){
 	  $('#cke_top_body').click( updateTextArea);
-	 }
+	 },
+	 		{ width:493 }
 	);
 	
 	var editor = $('#body').ckeditorGet();
@@ -44,8 +45,7 @@
 <% end %>
 
 
-<h1>New Message</h1>
-<hr>
+<h2>New Message</h2>
 <%= form_tag messages_path, :method => :post , :class => "new_message" do %>
 <% if @conversation and @conversation.errors.any? %>
 <div id="notice">

@@ -124,6 +124,10 @@ en:
     one: "Inbox"
   location:
     message: "You are here > %{location}"
+  menu:
+    options: "Menu Options"
+    information: "Information"
+    wall: "Wall"
   message:
     inbox: "Inbox"
     new: "New Message"
@@ -131,10 +135,6 @@ en:
     other: "Messages"
     sentbox: "Sentbox"
     trash: "Trash"
-  menu:
-    options: "Menu Options"
-    information: "Information"
-    wall: "Wall"
   password:
     forgot: "Do you forgot your password?"
   post:

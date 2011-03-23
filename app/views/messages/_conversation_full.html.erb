@@ -5,7 +5,9 @@
 <% content_for :javascript do %>
 	<% unless @box.eql?'trash' %>
 		$('#body').ckeditor(
-			function() {$.scrollTo('#message_<%= conversation.last_message.id %>');}
+			function() {$.scrollTo('#message_<%= conversation.last_message.id %>');},
+	 		{ width:493 }
+	
 		);
 	<% else %>
 		$.scrollTo('#message_<%= conversation.last_message.id %>');
