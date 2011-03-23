@@ -32,7 +32,9 @@ class MessagesController < ApplicationController
 	# GET /messages/new
 	# GET /messages/new.xml
 	def new
-
+		if params[:slug].present?
+			@recipient = Actor.find_by_slug(params[:slug])
+		end
 	end
 
 	# GET /messages/1/edit
