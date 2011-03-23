@@ -22,7 +22,7 @@
 #map_location {padding-left: 4px;	display: inline-block; }
 .content_size {font-size: 13px;}
 .space_center_border {	padding-top: 8px;	padding-right: 4px;	border-bottom: thin solid #D4E4EA;}
-
+.title_bold{font-size:14px; font-weight:bold;}
 /********GROUPS HOME************/
 .browse_letter{	text-align:center;}
 .btn_group{  vertical-align:top;}
