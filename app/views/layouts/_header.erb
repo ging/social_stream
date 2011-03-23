@@ -1,5 +1,5 @@
 <div id="headerFront">
-  <div class="banner_top">
+  <div class="banner_top banner_top_height">
     <div id="header_left">
       <div id="logo_txt">
         <%= link_to(image_tag('header-logo.png', :alt => t('socialstream')), root_path) %>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -18,7 +18,7 @@
     </div>
     <div id="header_right">
       <% if user_signed_in? %>
-        <div class="menu_list menu_white" id="menu_home">
+        <div class="menu_list menu_white" id="menu_account">
           <ul>
             <li class="btn_menu_config"><%= link_to t('account.one'), '#' %></li>
             <li class="pipe">|</li>
@@ -30,5 +30,4 @@
       <% end %>
     </div>
   </div>
-  <br class="clearfloat" />
 </div>
