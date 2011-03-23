@@ -20,10 +20,6 @@ class ApiController < ApplicationController
   end
   
   def activity_atom_feed
-    if !params[:page]
-      params[:page] = 1
-    end
-    
     @user = current_user
     if params[:id] != nil
       @user = User.find_by_slug!(params[:id])
