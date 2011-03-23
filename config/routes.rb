@@ -29,11 +29,8 @@ Rails.application.routes.draw do
   resource :representation
   
   resources :logos
-    
-  namespace :mailbox do 
-    resources :conversation, :controller => :conversation 
-  end
-  resources :mailbox, :controller => :mailbox 
+
+  resources :messages
   
   resources :ties do
     collection do

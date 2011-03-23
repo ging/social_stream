@@ -1,0 +1,9 @@
+
+<hr>
+<% @conversations.each do |conversation| %>
+<br>
+  <%= render :partial => 'conversation', :object => conversation %>
+  <br>
+  <hr>
+<% end %>
+<%= will_paginate @conversations %>

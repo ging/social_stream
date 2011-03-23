@@ -1,0 +1,15 @@
+<%= render :partial => 'location' %>
+
+<br class="clearfloat" />
+<div class="space_center">
+</div>
+
+<div id="new_message" ><%= link_to 'Back', :action=>:index %></div>
+<div class="space_center">
+</div><div class="space_center">
+</div>
+
+<h1><%= @box.capitalize %></h1>
+<div id="conversations">  
+  <%= render :partial => 'conversations' %>
+</div>

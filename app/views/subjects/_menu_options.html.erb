@@ -1,7 +1,7 @@
 <ul class="menu noaccordion">
 <%= content_for?(:menu_mailbox) ? content_for(:menu_mailbox) : capture do %>
   <li>
-    <%= link_to( image_tag("btn/btn_inbox.png", :class => "menu_icon")+t('mailbox.mailbox'), mailbox_index_path) %>
+    <%= link_to( image_tag("btn/btn_inbox.png", :class => "menu_icon")+t('message.other'), messages_path) %>
   </li>
 <% end %>
   <li>

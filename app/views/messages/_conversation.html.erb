@@ -1,0 +1,23 @@
+<%= div_for (conversation) do %>
+<h3>
+	<%= link_to(conversation.subject, message_path(conversation.id,:box => @box)) %>
+	<% unless @box.eql?'trash' %>
+		<%= link_to ( image_tag('btn/btn_delete.png', :atl => "Delete", :title => "Delete"), 
+			message_path(conversation, :location => @box), 
+			:confirm => 'Do you want to move "' + conversation.subject + '" to trash?', 
+			:method => :delete, :remote => true) %>
+    <% end %>
+</h3>
+<%= conversation.updated_at %>
+<br>
+<b>From:</b><br>
+<%= link_to image_tag(conversation.last_sender.logo.url(:actor), 
+:title => conversation.last_sender.name, :alt => conversation.last_sender.name),
+conversation.last_sender.subject
+ %><br>
+<b>To:</b><br>
+<% conversation.get_recipients.each do |recp| %>
+	<%next if Actor.normalize(conversation.last_sender)==Actor.normalize(recp)%>
+	<%= link_to image_tag(recp.logo.url(:tie), :atl => recp.name, :title => recp.name), recp.subject %>
+<% end %><br>
+<% end %>
