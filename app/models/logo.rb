@@ -10,21 +10,22 @@ class Logo < ActiveRecord::Base
 	before_post_process :process_precrop
 #	before_post_process :copy_temp_file
 	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :name
-#	validates_attachment_presence :logo
-	
+	validates_attachment_presence :logo, :if => :uploading_file?
+		
 	after_validation :precrop_done
 #	after_validation :mylog
 	
-	def precrop_done
-		#en este metodo el precrop estará hecho ya y tendremos que crear el nuevo logo sin los errores
-		puts "+++++++++++++" + @name.to_s + "************"
-		puts "-------------" + @logo.to_s + "************"
-	return if @name.blank?
 	
+  	def uploading_file?
+    	return @name.blank?
+  	end
+	
+	def precrop_done
+		return if @name.blank?
+		
 		images_path = File.join(RAILS_ROOT, "public", "images")
     	tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
     	precrop_path = File.join(tmp_path,@name)
-    	#debugger
     	
     	make_precrop(precrop_path,@crop_x.to_i,@crop_y.to_i,@crop_w.to_i,@crop_h.to_i)
 		@logo = Logo.new :logo => File.open(precrop_path), :name => @name
@@ -32,37 +33,26 @@ class Logo < ActiveRecord::Base
 		self.logo = @logo.logo
 		
 		FileUtils.remove_file(precrop_path)
-		
-		
 	end
-	
 	
 	def copy_temp_file
 	  images_path = File.join(RAILS_ROOT, "public", "images")
       tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
 	end
-	
-	def mylog
-		
-		images_path = File.join(RAILS_ROOT, "public", "images")
-    	tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
-   		#file_path = File.join(tmp_path,@name)
-   		#@logo = Logo.new :logo => File.open(file_path)
-		
-		debugger
-		puts ""
-	end
 
    def process_precrop
-   	#debugger
-      #puts "+++++++++++++" + @name.to_s + "************"
+   	
+  	if @name.blank? && (  logo.content_type.present? && !logo.content_type.start_with?("image/"))
+		logo.errors['invalidType'] = "The file you uploaded isn't valid"
+		return false
+	end
+   	
 	return if !@name.blank?
-      	logo.errors['precrop'] = "You have to make precrop"
-
+      logo.errors['precrop'] = "You have to make precrop"
 	
       images_path = File.join(RAILS_ROOT, "public", "images")
       tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
-      
+            
       resize_image(logo.queued_for_write[:original].path,500,500)
  
       my_file_name = File.basename(logo.queued_for_write[:original].path)
