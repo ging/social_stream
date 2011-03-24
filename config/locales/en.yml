@@ -158,6 +158,8 @@ en:
   sign_up: "Sign up"
   socialstream: "SocialStream"
   tie:
+    activity:
+      add_contact: %{active} add %{pasive} as a contact
     add:
       bookmark: "Bookmark"
       contact: "Add Contact"

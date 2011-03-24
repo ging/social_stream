@@ -254,15 +254,21 @@ class Tie < ActiveRecord::Base
   
   
   def create_activity_after_add_contact
-    
+    if self.original
+      p = Post.create :text =>
+                      (I18n.t "tie.activity.add_contact", :active=>self.sender.name , :pasive=>self.receiver.name),
+                       :_activity_tie_id => self.id
+    end   
   end
   
   
   # Values of "receiver.subject_type": "User", "Group"
   def send_message
-    if((message!=nil)&&(message!="")&&(receiver.subject_type=="User"))
-      sender.send_message(receiver, get_private_message(message))
-    end  
+    if self.original
+      if((message!=nil)&&(message!="")&&(receiver.subject_type=="User"))
+        sender.send_message(receiver, get_private_message(message))
+      end 
+    end
   end
   
   

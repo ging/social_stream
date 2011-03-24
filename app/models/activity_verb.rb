@@ -1,6 +1,6 @@
 class ActivityVerb < ActiveRecord::Base
   # Activity Strems verbs
-  Available = %w( post update like )
+  Available = %w( post update like make_friend)
 
   validates_uniqueness_of :name
 
