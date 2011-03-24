@@ -166,6 +166,8 @@ en:
     pending:
       other: "Pending requests"
       all: "All"
+    private_messages:
+        add_contact: %{name} add you as a contact
     suggestion:
       one: "Suggestion"
       other: "Suggestions"

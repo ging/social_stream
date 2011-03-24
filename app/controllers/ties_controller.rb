@@ -8,13 +8,10 @@ class TiesController < InheritedResources::Base
     render :layout  => false
   end
   
-  def create 
+  def create
       super do |format|
         format.html { redirect_to resource.receiver_subject }
       end
   end
-
-  
-  
   
 end

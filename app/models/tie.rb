@@ -101,6 +101,7 @@ class Tie < ActiveRecord::Base
 
   after_create :complete_weak_set
   after_create :create_activity_after_add_contact
+  after_create :send_message
 
   def relation_name
     @relation_name || relation.try(:name)
@@ -254,6 +255,19 @@ class Tie < ActiveRecord::Base
   
   def create_activity_after_add_contact
     
+  end
+  
+  
+  # Values of "receiver.subject_type": "User", "Group"
+  def send_message
+    if((message!=nil)&&(message!="")&&(receiver.subject_type=="User"))
+      sender.send_message(receiver, get_private_message(message))
+    end  
+  end
+  
+  
+  def get_private_message(message)
+    return (I18n.t "tie.private_messages.add_contact", :name=>sender.name) + ".\n" + message
   end
   
   
