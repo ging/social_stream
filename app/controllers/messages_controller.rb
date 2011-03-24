@@ -3,11 +3,11 @@ class MessagesController < ApplicationController
 	before_filter :get_mailbox, :get_box
 	def index
 		if @box.eql?"inbox"
-			@conversations = @mailbox.inbox.paginate(:per_page => 8, :page => params[:page])
+			@conversations = @mailbox.inbox.paginate(:per_page => 9, :page => params[:page])
 		elsif @box.eql?"sentbox"
-			@conversations = @mailbox.sentbox.paginate(:per_page => 8, :page => params[:page])
+			@conversations = @mailbox.sentbox.paginate(:per_page => 9, :page => params[:page])
 		else
-			@conversations = @mailbox.trash.paginate(:per_page => 8, :page => params[:page])
+			@conversations = @mailbox.trash.paginate(:per_page => 9, :page => params[:page])
 		end
 	end
 

@@ -1,4 +1,4 @@
 <% @conversations.each do |conversation| %>
-	<%= render :partial => 'conversation', :object => conversation %>
+	<%= render :partial => 'conversation', :object => conversation, :locals => {:active => cycle("active","inactive")} %>
 <% end %>
 <%= will_paginate @conversations %>

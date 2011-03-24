@@ -1,19 +1,20 @@
-<%= div_for (conversation) do %>
-
-<%= link_to image_tag(conversation.last_sender.logo.url(:actor),
-:title => conversation.last_sender.name, :alt => conversation.last_sender.name),
-conversation.last_sender.subject
-%>
-
+<%= div_for (conversation, :class => active) do %>
+<div class="photo">
+	<%= link_to image_tag(conversation.last_sender.logo.url(:actor),
+	:title => conversation.last_sender.name, :alt => conversation.last_sender.name),
+	conversation.last_sender.subject %>
+</div>
 <%= link_to(conversation.subject, message_path(conversation.id,:box => @box)) %>
 <% unless @box.eql?'trash' %>
-<%= link_to ( image_tag('btn/btn_delete.png', :atl => "Delete", :title => "Delete"),
-message_path(conversation, :location => @box),
-:confirm => 'Do you want to move "' + conversation.subject + '" to trash?',
-:method => :delete, :remote => true) %>
+	<div class="action">
+		<%= link_to ( image_tag('btn/btn_delete.png', :atl => "Delete", :title => "Delete"),
+		message_path(conversation, :location => @box),
+		:confirm => 'Do you want to move "' + conversation.subject + '" to trash?',
+		:method => :delete, :remote => true) %>
+	</div>
 <% end %>
-<br>
 <%= conversation.updated_at %>
 <br>
 <%= truncate(conversation.last_message.body, :length => 50) %>
+<div class="clearfloat"></div>
 <% end %>

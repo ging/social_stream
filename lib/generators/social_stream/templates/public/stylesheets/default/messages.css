@@ -1,0 +1,27 @@
+/******************** Common ***********************/
+.pagination{
+	padding: 5px 5px 5px 5px;
+	text-align: center;
+}
+/******************* Message ***********************/
+
+/***************** Conversation ********************/
+.conversation {
+	color: #2A3890;
+	padding: 5px 5px 5px 5px;
+	width:549px;
+}
+
+.active{
+	border:1px solid #E0EEF5;
+	background-color: #E0EEF5;
+}
+
+.conversation .photo{
+	float:left;
+	padding: 5px 5px 5px 0px;
+}
+
+.conversation .action{
+	float:right;
+}
