@@ -32,8 +32,9 @@ class MessagesController < ApplicationController
 	# GET /messages/new
 	# GET /messages/new.xml
 	def new
-		if params[:slug].present?
-			@recipient = Actor.find_by_slug(params[:slug])
+		if params[:receiver].present?
+			@recipient = Actor.find_by_slug(params[:receiver])
+			@recipient = nil if Actor.normalize(@recipient)==Actor.normalize(current_subject)
 		end
 	end
 
@@ -121,11 +122,11 @@ class MessagesController < ApplicationController
 			case params[:location]
 			when 'conversation'
 				redirect_to messages_path(:box => :trash)
+				return
 			else
 			redirect_to messages_path(:box => @box)
+			return
 			end
-
-		return
 		end
 		redirect_to messages_path(:box => @box)
 	end

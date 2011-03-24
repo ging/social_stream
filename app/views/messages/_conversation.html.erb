@@ -1,4 +1,4 @@
-<%= div_for (conversation, :class => active) do %>
+<%= div_for(conversation, :class => active) do %>
 <div class="actor_photo">
 	<%= link_to image_tag(conversation.last_sender.logo.url(:actor),
 	:title => conversation.last_sender.name, :alt => conversation.last_sender.name),
@@ -24,8 +24,8 @@
 
 	<% unless @box.eql?'trash' %>
 		<div class="action">
-			<%= link_to ( image_tag('btn/btn_delete.png', :atl => "Delete", :title => "Delete"),
-			message_path(conversation, :location => @box),
+			<%= link_to(image_tag('btn/btn_delete.png', :atl => "Delete", :title => "Delete"),
+			message_path(conversation, :location => @box, :box => @box),
 			:confirm => 'Do you want to move "' + conversation.subject + '" to trash?',
 			:method => :delete, :remote => true) %>
 		</div>
