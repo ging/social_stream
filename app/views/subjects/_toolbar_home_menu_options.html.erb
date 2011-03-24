@@ -1,0 +1,28 @@
+<ul class="menu noaccordion">
+
+<%= menu_options[:messages] || capture do %>
+  <li>
+    <%= link_to( image_tag("btn/btn_inbox.png", :class => "menu_icon")+t('message.other'), messages_path) %>
+  </li>
+<% end %>
+
+<%= menu_options[:contacts] || capture do %>
+  <li>
+    <%= link_to( image_tag("btn/btn_friend.png", :class => "menu_icon")+t('contact.other'), '#') %>
+  </li>
+  <li>
+    <ul>
+    <% current_subject.relations.sort.each do |r| %>
+      <li>
+      <%= link_to image_tag("btn/btn_friend.png", :class => "menu_icon") + r.name , '#' %>
+      </li>
+    <% end %>
+    </ul>
+  </li>
+<% end %>
+
+<%= menu_options[:subjects] || capture do %>
+  <%= render :partial => 'subjects/toolbar_home_menu_options_subjects' %>
+<% end %>
+
+</ul>

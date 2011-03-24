@@ -1,0 +1,28 @@
+<ul class="menu noaccordion">
+<%= menu_options[:like] || capture do %>
+  <li>
+    <%= link_to( image_tag("btn/btn_bookmark.png", :class => "menu_icon")+t('tie.add.bookmark'), '#') %>
+  </li>
+<% end %>
+<%= menu_options[:contacts] || capture do %>
+  <!-- TODO: create helper -->
+  <% if user_signed_in? %>
+    <% if current_subject.ties_to(subject).present? %>
+  <li >
+    <%= link_to(image_tag("btn/btn_friend.png", :class => "menu_icon")+t('tie.edit.contact'), '#') %>
+  </li>
+    <% else %>
+  <li >
+    <%= link_to(image_tag("btn/btn_friend.png", :class => "menu_icon")+t('tie.add.contact'), '#') %>
+  </li>
+  <li>
+    <ul>
+      <li>
+        <%= link_to(image_tag("btn/twitter-follow-icon.png", :size => "19x19", :class => "menu_icon")+t('tie.add.follow'), '#') %>
+      </li>
+    </ul>
+  </li>
+    <% end %>
+  <% end %>
+<% end %>
+</ul>

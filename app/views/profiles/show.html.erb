@@ -4,10 +4,7 @@
   <%= render :partial => 'users/sidebar_show' %>
 <% end %>
 
-<% content_for :toolbar do %>
-  <%= render :partial => 'users/toolbar_show', :locals => { :subject => @profile.subject } %>
-<% end %>
-
+<% toolbar :profile => @profile.subject %>
 
 <div class="space_center"></div>
 <div class="block" id="personal_info" >

@@ -53,7 +53,9 @@ class Actor < ActiveRecord::Base
     # Get actor's id from an object, if possible
     def normalize_id(a)
       case a
-        when Array
+      when Integer
+        a
+      when Array
         a.map{ |e| normalize_id(e) }
       else
         Actor.normalize(a).id
@@ -62,11 +64,11 @@ class Actor < ActiveRecord::Base
     # Get actor from object, if possible
     def normalize(a)
       case a
-        when Actor
+      when Actor
         a
-        when Integer
+      when Integer
         Actor.find a
-        when Array
+      when Array
         a.map{ |e| Actor.normalize(e) }
       else
         begin

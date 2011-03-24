@@ -2,9 +2,7 @@
   <%= render :partial => 'sidebar_show' %>
 <% end %>
 
-<% content_for :toolbar do %>
-  <%= render :partial => 'toolbar_show' %>
-<% end %>
+<% toolbar :profile => @user %>
 
 <%= render :partial => 'location' %>
 
