@@ -1,5 +1,5 @@
 /******************** Common ***********************/
-.pagination{
+.pagination {
 	padding: 5px 5px 5px 5px;
 	text-align: center;
 }
@@ -11,17 +11,34 @@
 	padding: 5px 5px 5px 5px;
 	width:549px;
 }
-
-.active{
+.conversation .content_left{
+	float:left;
+	width:25%;
+}
+.conversation .content_right{
+	float:left;
+	width:60%;
+}
+.active {
 	border:1px solid #E0EEF5;
 	background-color: #E0EEF5;
 }
-
-.conversation .photo{
+.conversation .actor_photo {
 	float:left;
-	padding: 5px 5px 5px 0px;
+	padding: 0px 5px 0px 0px;
 }
-
-.conversation .action{
+.conversation .action {
 	float:right;
+}
+.conversation .actor_name {
+	//border:1px solid #000000;
+}
+.conversation .subject {
+	//border:1px solid #000000;
+}
+.conversation .date {
+	//border:1px solid #000000;
+}
+.conversation .briefing {
+	//border:1px solid #000000;
 }
