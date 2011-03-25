@@ -1,4 +1,4 @@
-      <% content_for :head do %>
+      <% content_for :headers do %>
           <%= stylesheet_link_tag "edit_user", :media => "screen, projection" %>          
         <% end %>       
       <div class="space_center"></div>
@@ -9,7 +9,7 @@
                 Group Information
             </div>
             <div class="header_icon_right">
-                <%= link_to (image_tag('/images/btn/edit.png')), :controller => :groups, :action => :edit, :section => :about_us %>
+                <%= link_to (image_tag('/images/btn/edit.png')), :controller => :groups, :action => :edit, :id => @profile.subject, :section => :about_us %>
             </div>
         </div>
 				<div class="content">
@@ -72,7 +72,7 @@
 					      Contact Information
 					    </div>
 					    <div class="header_icon_right">
-					      <%= link_to (image_tag('/images/btn/edit.png')), :controller => :groups, :action => :edit, :section => :contact_info %>
+					      <%= link_to (image_tag('/images/btn/edit.png')), :controller => :groups, :action => :edit, :id => @profile.subject, :section => :contact_info %>
 					    </div>
 					  </div>
 					  <div class="content">

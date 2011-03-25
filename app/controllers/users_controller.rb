@@ -34,7 +34,6 @@ class UsersController < ApplicationController
   end
   
   def update
-    
     @user = User.find_by_slug!(params[:id])
 
     respond_to do |format|

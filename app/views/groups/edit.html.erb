@@ -1,12 +1,12 @@
-<% toolbar :option => :groups %>
+<% toolbar :profile => @group %>
 
-<% content_for :sidebar do %>
-<%= render :partial => 'sidebar_show' %>
-<% end %>
+
+
 <% content_for :headers do %>
 <%= stylesheet_link_tag "edit_user", :media => "screen, projection" %>
 <%= javascript_include_tag 'jquery.validate' %>
 <% end %>
+
 <%= form_for(@group, :remote => true) do |f| %>
 <% if @group.errors.any? %>
 <div id="error_explanation">
