@@ -19,13 +19,10 @@ class Actor < ActiveRecord::Base
   acts_as_messageable
   acts_as_url :name, :url_attribute => :slug
   
-  has_attached_file :logo,
-                    :styles => { :tie => "30x30>",
-                                 :actor => '35x35>',
-                                 :profile => '94x94' },
-                    :default_url => "/images/:attachment/:style/:subtype_class.png"
-  
   has_one :profile, :dependent => :destroy
+  has_one :logo,
+  		  :validate => true,
+  		  :autosave => true
   
   has_many :sent_ties,
            :class_name => "Tie",
@@ -62,6 +59,8 @@ class Actor < ActiveRecord::Base
   after_create :initialize_ties
   
   after_create :create_profile
+  
+  #delegate :url, :to => :logo
   
   class << self
     # Get actor's id from an object, if possible
@@ -266,6 +265,10 @@ class Actor < ActiveRecord::Base
     Activity.profile_wall ties.allowing(user, 'read', 'activity')
   end
   
+  def logo!
+    logo || build_logo()
+  end
+  
   private
   
   def initialize_ties
@@ -274,4 +277,5 @@ class Actor < ActiveRecord::Base
                         :relation => r
     end
   end
+  
 end

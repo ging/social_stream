@@ -17,9 +17,18 @@ namespace :db do
           logo = Dir[File.join(LOGOS_PATH, klass.to_s.tableize, "#{ i.id }.*")].first
           
           if logo.present? && File.exists?(logo)
-            i.logo = File.new(logo)
-            i.logo.reprocess!
+=begin
+            i.logo!.logo = File.new(logo)
+            i.logo!.logo.name = "default.png"
+            i.logo!.logo.reprocess!
             i.save!
+=end
+            Logo.copy_to_temp_file(logo)
+            dimensions = Logo.get_image_dimensions(logo)
+            l = Logo.new(:actor => i.actor,:logo => File.open(logo), :name => File.basename(logo), :crop_x => 0, :crop_y => 0, :crop_w => dimensions[:width], :crop_h => dimensions[:height] )
+            #l.logo = File.new(logo)
+            #l.logo.reprocess!
+            l.save(false)
           end
         end
       end

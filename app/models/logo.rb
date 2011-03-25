@@ -15,6 +15,9 @@ class Logo < ActiveRecord::Base
 	after_validation :precrop_done
 #	after_validation :mylog
 	
+	belongs_to :actor
+	
+	delegate :url, :to => :logo
 	
   	def uploading_file?
     	return @name.blank?
@@ -34,6 +37,23 @@ class Logo < ActiveRecord::Base
 		
 		FileUtils.remove_file(precrop_path)
 	end
+	
+	def self.copy_to_temp_file(path)
+		images_path = File.join(RAILS_ROOT, "public", "images")
+		tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
+		FileUtils.cp(path,tmp_path)
+	end	
+	
+	
+	def self.get_image_dimensions(name)
+   	
+   	img_orig = Magick::Image.read(name).first
+   	dimensions = {}
+   	dimensions[:width] =  img_orig.columns
+   	dimensions[:height] = img_orig.rows
+   	dimensions
+   end
+	
 	
 	def copy_temp_file
 	  images_path = File.join(RAILS_ROOT, "public", "images")
