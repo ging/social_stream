@@ -44,6 +44,20 @@ class Actor < ActiveRecord::Base
   has_many :receivers,
            :through => :sent_ties,
            :uniq => true
+
+  scope :alphabetic, order('actors.name')
+
+  scope :letter, lambda { |param|
+    param.present? ?
+      alphabetic.where('actors.name LIKE ?', "#{ param }%") :
+      alphabetic
+  }
+
+  scope :search, lambda { |param|
+    param.present? ?
+      alphabetic.where('actors.name LIKE ?', "%#{ param }%") :
+      alphabetic
+  }
   
   after_create :initialize_ties
   

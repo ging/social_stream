@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('foreigner', '~> 0.9.1')
   s.add_runtime_dependency('devise', '~> 1.2.rc')
   s.add_runtime_dependency('inherited_resources', '~> 1.1.2')
+  s.add_runtime_dependency('has_scope', '~> 0.5.0')
   s.add_runtime_dependency('stringex', '~> 1.2.0')
   s.add_runtime_dependency('paperclip', '~> 2.3.4')
   s.add_runtime_dependency('jquery-rails', '~> 0.2.5')
