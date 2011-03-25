@@ -1,4 +1,7 @@
-<% content_for :headers, stylesheet_link_tag("menu", :media => "screen, projection") %>
+<% content_for :headers do %>
+  <%= stylesheet_link_tag "menu", :media => "screen, projection" %>
+  <%= javascript_include_tag 'menu' %>
+<% end %>
 
 <div id="menu_lateral">
   <%= render :partial => "subjects/toolbar_home_menu_options" %>

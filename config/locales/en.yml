@@ -135,6 +135,7 @@ en:
     other: "Messages"
     sentbox: "Sentbox"
     trash: "Trash"
+    send: "Send a message"
   password:
     forgot: "Do you forgot your password?"
   post:
@@ -162,9 +163,12 @@ en:
       add_contact: %{active} add %{pasive} as a contact
     add:
       bookmark: "Bookmark"
-      contact: "Add Contact"
+      contact: "Add contact as"
       follow: "Follow"
+      like: "Like"
       partner: "Add Partner"
+    category:
+     new: "New category"
     pending:
       other: "Pending requests"
       all: "All"

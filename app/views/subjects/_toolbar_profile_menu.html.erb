@@ -1,13 +1,12 @@
-<% content_for :headers, stylesheet_link_tag("menu", :media => "screen, projection") %>
-
-<div id="menu_lateral_tie">
-  <%= render :partial => "subjects/toolbar_profile_menu_tie_options", :locals => { :subject => subject } %>
-</div>
-<div class="space_center">
-</div>
+<% content_for :headers do %>
+  <%= stylesheet_link_tag "menu", :media => "screen, projection" %>
+  <%= javascript_include_tag 'menu' %>
+<% end %>
 
 <div id="menu_lateral">
-  <%= render :partial => "subjects/toolbar_profile_menu_basic_options", :locals => { :subject => subject } %>
+  <ul class="menu">
+    <%= render :partial => "subjects/toolbar_profile_menu_tie_options", :locals => { :subject => subject } %>
+    <%= render :partial => "subjects/toolbar_profile_menu_basic_options", :locals => { :subject => subject } %>
+  </ul>
 </div>
-<div class="space_center">
-</div>
+<div class="space_center"></div>

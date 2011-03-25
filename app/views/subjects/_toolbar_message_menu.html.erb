@@ -1,0 +1,17 @@
+<li>
+  <%= link_to( image_tag("btn/btn_inbox.png", :class => "menu_icon")+t('message.other'), '#') %>
+  <ul>
+    <li>
+      <%= link_to( image_tag("btn/btn_inbox.png", :class => "menu_icon")+ t('message.new'), new_message_path) %>
+    </li>
+    <li>
+      <%= link_to( image_tag("btn/btn_inbox.png", :class => "menu_icon")+t('message.inbox')+" (X)", messages_path, :remote => true) %>
+    </li>
+    <li>
+      <%= link_to( image_tag("btn/btn_inbox.png", :class => "menu_icon")+t('message.sentbox'), messages_path(:box => :sentbox), :remote => true) %>
+    </li>
+    <li>
+      <%= link_to( image_tag("btn/btn_inbox.png", :class => "menu_icon")+t('message.trash'), messages_path(:box => :trash), :remote => true) %>
+    </li>
+  </ul>
+</li>
