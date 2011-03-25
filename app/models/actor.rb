@@ -60,8 +60,6 @@ class Actor < ActiveRecord::Base
   
   after_create :create_profile
   
-  #delegate :url, :to => :logo
-  
   class << self
     # Get actor's id from an object, if possible
     def normalize_id(a)

@@ -23,14 +23,12 @@ class Logo < ActiveRecord::Base
 	
 	def precrop_done
 		return if @name.blank?
-		
-#		images_path = File.join(RAILS_ROOT, "public", "images")
-#    	tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
+
     	precrop_path = File.join(Logo.images_tmp_path,@name)
     	
     	make_precrop(precrop_path,@crop_x.to_i,@crop_y.to_i,@crop_w.to_i,@crop_h.to_i)
 		@logo = Logo.new :logo => File.open(precrop_path), :name => @name
-		
+				
 		self.logo = @logo.logo
 		
 		FileUtils.remove_file(precrop_path)
@@ -54,11 +52,6 @@ class Logo < ActiveRecord::Base
    		dimensions
    end
 	
-	def copy_temp_file
-	  images_path = File.join(RAILS_ROOT, "public", "images")
-      tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
-	end
-
    def process_precrop
    	
   	if @name.blank? && (  logo.content_type.present? && !logo.content_type.start_with?("image/"))
@@ -68,30 +61,10 @@ class Logo < ActiveRecord::Base
    	
 	return if !@name.blank?
       logo.errors['precrop'] = "You have to make precrop"
-	
-      #images_path = File.join(RAILS_ROOT, "public", "images")
-      #tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
-            
       resize_image(logo.queued_for_write[:original].path,500,500)
- 
-      #my_file_name = File.basename(logo.queued_for_write[:original].path)
-      #FileUtils.cp(logo.queued_for_write[:original].path,Logo.images_tmp_path)
-      Logo.copy_to_temp_file(logo.queued_for_write[:original].path)
-      #temp_file = File.open(logo.queued_for_write[:original].path, "w+")   
+      Logo.copy_to_temp_file(logo.queued_for_write[:original].path)   
    end
-   
-   def image_dimensions(name)
-   	images_path = File.join(RAILS_ROOT, "public", "images")
-    tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
-   	file_path = File.join(tmp_path,name)
-   	
-   	img_orig = Magick::Image.read(file_path).first
-   	dimensions = {}
-   	dimensions[:width] =  img_orig.columns
-   	dimensions[:height] = img_orig.rows
-   	dimensions
-   end
-   
+      
    def resize_image(path,width,height)
 	img_orig = Magick::Image.read(path).first
    	img_orig = img_orig.resize_to_fit(width, height)
