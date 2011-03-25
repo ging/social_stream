@@ -5,7 +5,8 @@ class Logo < ActiveRecord::Base
                       :styles => { :tie => "30x30>",
                                    :actor => '35x35>',
                                    :profile => '94x94' },
-                      :default_url => "/images/:attachment/:style/:subtype_class.png"
+                      #:default_url => "/images/:attachment/:style/:subtype_class.png"
+                      :default_url => "/images/logos/:style/group.png"
 	
 	before_post_process :process_precrop
 	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :name

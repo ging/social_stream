@@ -266,6 +266,7 @@ class Actor < ActiveRecord::Base
   def logo!
     logo || build_logo()
   end
+
   
   private
   
