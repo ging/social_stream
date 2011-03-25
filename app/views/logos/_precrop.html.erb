@@ -10,7 +10,8 @@ Crop your image:
 	<%= image_tag "tmp/#{my_file_name}",:id=>"cropImage" %>
 </div>
 
-<% precrop_dimensions = @logo.image_dimensions(my_file_name) %>
+<% #precrop_dimensions = @logo.image_dimensions(my_file_name) %>
+<% precrop_dimensions = Logo.get_image_dimensions(File.join(Logo.images_tmp_path,my_file_name)) %>
 
 <% content_for :javascript do %>
         jQuery('#cropImage').Jcrop({

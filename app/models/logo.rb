@@ -8,12 +8,10 @@ class Logo < ActiveRecord::Base
                       :default_url => "/images/:attachment/:style/:subtype_class.png"
 	
 	before_post_process :process_precrop
-#	before_post_process :copy_temp_file
 	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :name
 	validates_attachment_presence :logo, :if => :uploading_file?
 		
 	after_validation :precrop_done
-#	after_validation :mylog
 	
 	belongs_to :actor
 	
@@ -26,9 +24,9 @@ class Logo < ActiveRecord::Base
 	def precrop_done
 		return if @name.blank?
 		
-		images_path = File.join(RAILS_ROOT, "public", "images")
-    	tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
-    	precrop_path = File.join(tmp_path,@name)
+#		images_path = File.join(RAILS_ROOT, "public", "images")
+#    	tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
+    	precrop_path = File.join(Logo.images_tmp_path,@name)
     	
     	make_precrop(precrop_path,@crop_x.to_i,@crop_y.to_i,@crop_w.to_i,@crop_h.to_i)
 		@logo = Logo.new :logo => File.open(precrop_path), :name => @name
@@ -38,22 +36,23 @@ class Logo < ActiveRecord::Base
 		FileUtils.remove_file(precrop_path)
 	end
 	
-	def self.copy_to_temp_file(path)
+	def self.images_tmp_path
 		images_path = File.join(RAILS_ROOT, "public", "images")
-		tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
-		FileUtils.cp(path,tmp_path)
+		tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))		
+	end
+	
+	def self.copy_to_temp_file(path)
+		FileUtils.cp(path,Logo.images_tmp_path)
 	end	
 	
 	
 	def self.get_image_dimensions(name)
-   	
-   	img_orig = Magick::Image.read(name).first
-   	dimensions = {}
-   	dimensions[:width] =  img_orig.columns
-   	dimensions[:height] = img_orig.rows
-   	dimensions
+   		img_orig = Magick::Image.read(name).first
+   		dimensions = {}
+   		dimensions[:width] =  img_orig.columns
+   		dimensions[:height] = img_orig.rows
+   		dimensions
    end
-	
 	
 	def copy_temp_file
 	  images_path = File.join(RAILS_ROOT, "public", "images")
@@ -70,14 +69,15 @@ class Logo < ActiveRecord::Base
 	return if !@name.blank?
       logo.errors['precrop'] = "You have to make precrop"
 	
-      images_path = File.join(RAILS_ROOT, "public", "images")
-      tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
+      #images_path = File.join(RAILS_ROOT, "public", "images")
+      #tmp_path = FileUtils.mkdir_p(File.join(images_path, "tmp"))
             
       resize_image(logo.queued_for_write[:original].path,500,500)
  
-      my_file_name = File.basename(logo.queued_for_write[:original].path)
-      FileUtils.cp(logo.queued_for_write[:original].path,tmp_path)
-      temp_file = File.open(logo.queued_for_write[:original].path, "w+")   
+      #my_file_name = File.basename(logo.queued_for_write[:original].path)
+      #FileUtils.cp(logo.queued_for_write[:original].path,Logo.images_tmp_path)
+      Logo.copy_to_temp_file(logo.queued_for_write[:original].path)
+      #temp_file = File.open(logo.queued_for_write[:original].path, "w+")   
    end
    
    def image_dimensions(name)
@@ -100,6 +100,12 @@ class Logo < ActiveRecord::Base
    
    def make_precrop(path,x,y,width,height)
      img_orig = Magick::Image.read(path).first
+     dimensions = Logo.get_image_dimensions(path)
+     
+	if (width == 0) || (height == 0)
+		return
+	end     
+ 
      crop_args = [x,y,width,height]
      img_orig = img_orig.crop(*crop_args)
      img_orig.write(path)
