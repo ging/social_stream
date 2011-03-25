@@ -30,6 +30,7 @@ module SocialStream
   class Engine < ::Rails::Engine #:nodoc:
     config.app_generators.authentication :devise
     config.app_generators.javascript :jquery
+    config.app_generators.messages :mailboxer
 
     config.to_prepare do
       %w( actor activity_object ).each do |supertype|
