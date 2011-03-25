@@ -34,10 +34,16 @@ module SocialStream
         
         validates_presence_of :name
         
-        scope :alphabetic, includes(:actor).order('actors.name')
-        scope :search, lambda{ |param|
-          joins(:actor).where('actors.name like ?', param)
+        scope :alphabetic, joins(:actor).merge(Actor.alphabetic)
+
+        scope :letter, lambda{ |param|
+          joins(:actor).merge(Actor.letter(param))
         }
+
+        scope :search, lambda{ |param|
+          joins(:actor).merge(Actor.search(param))
+        }
+
         scope :with_sent_ties,     joins(:actor => :sent_ties)
         scope :with_received_ties, joins(:actor => :received_ties)
         scope :distinct_initials, joins(:actor).select('DISTINCT SUBSTR(actors.name,1,1) as initial').order("initial ASC")

@@ -16,6 +16,8 @@ require 'devise'
 require 'cancan'
 # REST controllers
 require 'inherited_resources'
+# Scopes in controllers
+require 'has_scope'
 # Logo attachments
 require 'paperclip'
 require 'paperclip/social_stream'

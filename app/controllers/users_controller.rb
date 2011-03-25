@@ -9,6 +9,10 @@ class UsersController < ApplicationController
         @users = User.alphabetic.paginate(:per_page => 10, :page => params[:page])
       end
     end
+
+    respond_to do |format|
+      format.html { render :layout => (user_signed_in? ? 'application' : 'frontpage') }
+    end
   end
 
   def show

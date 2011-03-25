@@ -1,21 +1,15 @@
 class GroupsController < InheritedResources::Base
+  has_scope :letter
+  has_scope :search
   
   respond_to :html, :xml, :js
   
   def index
-    if params[:search]
-      @groups = Group.search("%"+params[:search]+"%").paginate(:per_page => 10, :page => params[:page])
-    else
-      if params[:letter] && params[:letter]!="undefined"
-        @groups = Group.search(params[:letter]+"%").paginate(:per_page => 10, :page => params[:page])
-      else
-        @groups = Group.alphabetic.paginate(:per_page => 10, :page => params[:page])
-      end
+    index! do |format|
+      format.html { render :layout => (user_signed_in? ? 'application' : 'frontpage') }
     end
   end
 
-
-  
   protected
 
   # Overwrite resource method to support slug
