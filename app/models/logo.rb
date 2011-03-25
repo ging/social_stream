@@ -9,7 +9,7 @@ class Logo < ActiveRecord::Base
                       :default_url => "/images/logos/:style/group.png"
 	
 	before_post_process :process_precrop
-	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :name
+	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :name,:updating_logo
 	validates_attachment_presence :logo, :if => :uploading_file?
 		
 	after_validation :precrop_done
@@ -23,7 +23,7 @@ class Logo < ActiveRecord::Base
   	end
 	
 	def precrop_done
-		return if @name.blank?
+		return if @name.blank? || !@updating_logo.blank?
 
     	precrop_path = File.join(Logo.images_tmp_path,@name)
     	
@@ -59,7 +59,7 @@ class Logo < ActiveRecord::Base
 		logo.errors['invalidType'] = "The file you uploaded isn't valid"
 		return false
 	end
-   	
+   	  	
 	return if !@name.blank?
       logo.errors['precrop'] = "You have to make precrop"
       resize_image(logo.queued_for_write[:original].path,500,500)

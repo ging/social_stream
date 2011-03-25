@@ -1,18 +1,18 @@
-Crop your image:
-
-
 <% my_file_name = File.basename(@logo.logo.queued_for_write[:original].path) %>
 
-<div style="width:100px;height:100px;overflow:hidden;margin-left:5px;"> 
-		<%= image_tag "tmp/#{my_file_name}",:id=>"preview" %>
-</div>
-<div id="precropDiv">
+
+<div id="precropDiv" class = "block title content" style="width:500px;display:inline-block;padding: 5px 4px 5px 4px;">
 	<%= image_tag "tmp/#{my_file_name}",:id=>"cropImage" %>
 </div>
+<div  class = "block logo" style = "vertical-align:top;display:inline-block;padding: 5px 4px 5px 4px;" >Preview:</br>
+<div style="width:100px;height:100px;overflow:hidden;margin-left:5px;" >
+		<%= image_tag "tmp/#{my_file_name}",:id=>"preview" %>
+</div></div>
 
 <% precrop_dimensions = Logo.get_image_dimensions(File.join(Logo.images_tmp_path,my_file_name)) %>
 
 <% content_for :javascript do %>
+	$("#sidebar").remove();
         jQuery('#cropImage').Jcrop({
             bgColor:     'clear',
             bgOpacity:   .6,
@@ -45,7 +45,6 @@ function update_crop(coords) {
     <%= f.hidden_field attribute, :id => attribute %>
   <% end %>
 	<%= f.hidden_field :name, :value => my_file_name %>
-	
+	<br>
   <p><%= f.submit "Crop" %></p>
 <% end %>
-

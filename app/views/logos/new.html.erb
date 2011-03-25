@@ -3,18 +3,20 @@
 	<%= stylesheet_link_tag "jquery.Jcrop", :media => "screen, projection" %>
     <%= stylesheet_link_tag "logos", :media => "screen, projection" %>
 <%end%>
-<h1>Create a new logo</h1>
+
 <% if current_subject.blank? %>
 LOGUEATE
 <% else %>
-
+<div id="content_logo">
 <% if !@logo.logo.errors['precrop'].blank? %>
+	<h1>Crop the uploaded image</h1>
 	<%= render :partial => 'precrop' %>
 <% else %>
+	<h1><% t('logoA.crop_image') %>Create a new logo</h1>
 	<%= render :partial => 'form' %>
 <% end %>
-
-<%= link_to 'Back', logos_path %>
+</div>
+<% link_to 'Back', logos_path %>
 
 
 <% end %>
