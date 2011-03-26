@@ -20,10 +20,13 @@ class Actor < ActiveRecord::Base
   acts_as_url :name, :url_attribute => :slug
   
   has_one :profile, :dependent => :destroy
-  has_one :logo,
+ # has_one :logo,
+ # 		  :validate => true,
+ # 		  :autosave => true
+  has_one :avatar,
   		  :validate => true,
   		  :autosave => true
-  
+  		  
   has_many :sent_ties,
            :class_name => "Tie",
            :foreign_key => 'sender_id',
@@ -262,11 +265,22 @@ class Actor < ActiveRecord::Base
     
     Activity.profile_wall ties.allowing(user, 'read', 'activity')
   end
-  
+  def logo
+  	#debugger
+  	if avatar.blank?
+  		build_avatar().logo
+  	else
+  		avatar.logo	
+  	end
+  	
+  end
   def logo!
     logo || build_logo()
   end
 
+  def avatar!
+    avatar || build_avatar()
+  end
   
   private
   

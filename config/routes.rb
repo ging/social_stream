@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resource :representation
   
   resources :logos
+  resources :avatars
 
   resources :messages
   

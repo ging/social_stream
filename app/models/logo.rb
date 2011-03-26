@@ -54,7 +54,7 @@ class Logo < ActiveRecord::Base
    end
 	
    def process_precrop
-   	
+
   	if @name.blank? && (  logo.content_type.present? && !logo.content_type.start_with?("image/"))
 		logo.errors['invalidType'] = "The file you uploaded isn't valid"
 		return false
