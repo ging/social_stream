@@ -17,15 +17,15 @@ class MessagesController < ApplicationController
 		@conversation = Conversation.find_by_id(params[:id])
 		if @conversation.nil? or !@conversation.is_participant?(@actor)
 			redirect_to messages_path(:box => @box)
-		return
+			return
 		end
 		if @box.eql? 'trash'
 		@receipts = @conversation.receipts(@actor).trash
 		else
 		@receipts = @conversation.receipts(@actor).not_trash
-		render :action => :show
-		@conversation.mark_as_read(@actor)
 		end
+		render :action => :show
+		@receipts.mark_as_read
 
 	end
 
@@ -99,10 +99,11 @@ class MessagesController < ApplicationController
 		if @box.eql? 'trash'
 		@receipts = @conversation.receipts(@actor).trash
 		else
-		@conversation.mark_as_read(@actor)
 		@receipts = @conversation.receipts(@actor).not_trash
 		end
 		render :action => :show
+		@receipts.mark_as_read
+
 	end
 
 	# DELETE /messages/1

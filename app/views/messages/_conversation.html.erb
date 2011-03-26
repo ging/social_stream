@@ -19,7 +19,7 @@
 	<%= link_to(truncate(conversation.subject, :length => 55), message_path(conversation.id,:box => @box) ) %>
 	</div>
 	<div class="briefing">
-	<%= truncate(conversation.last_message.body, :length => 50) %>
+	<%=  raw(truncate(strip_tags(conversation.last_message.body), :length => 50)) %>
 	</div>
 <div class="clearfloat"></div>
 </div>
