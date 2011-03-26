@@ -1,1 +1,7 @@
 $("#content").html("<%=escape_javascript(render :partial => 'index') %>");
+
+$('.pagination a').attr('data-remote', 'true');
+	  
+
+$("head").append($("<%= escape_javascript(stylesheet_link_tag "messages.css", :media => "screen, projection") %>"));
+

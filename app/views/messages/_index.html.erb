@@ -4,13 +4,17 @@
 
 <%= render :partial => 'location' %>
 
+<% content_for :javascript do %>
+  $('.pagination a').attr('data-remote', 'true');
+<% end %>
+
 <br class="clearfloat" />
 <div class="space_center">
 </div>
-
 <div class="space_center"></div>
 
+
 <h2><%= t('message.' + @box) %></h2>
-<div id="conversations">  
+<div class="conversations">  
   <%= render :partial => 'conversations' %>
 </div>

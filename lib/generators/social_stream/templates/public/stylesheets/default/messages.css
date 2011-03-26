@@ -4,41 +4,115 @@
 	text-align: center;
 }
 /******************* Message ***********************/
-
-/***************** Conversation ********************/
-.conversation {
-	color: #2A3890;
-	padding: 5px 5px 5px 5px;
+.message{
 	width:549px;
+	padding: 5px 5px 5px 5px;
 }
-.conversation .content_left{
+.message .container{
+	float:left;
+	width:509px;
+}
+.message .header{
+	padding: 5px 5px 5px 5px;
+	background-color: #E0EEF5;
+	height:40px;
+}
+.message .body{
+	padding: 5px 5px 5px 5px;
+	border: 1px solid #E0EEF5;
+}
+.message .content_left {
 	float:left;
 	width:25%;
 }
-.conversation .content_right{
+.message .content_right {
 	float:left;
-	width:60%;
+	width:75%;
 }
-.active {
-	border:1px solid #E0EEF5;
-	background-color: #E0EEF5;
-}
-.conversation .actor_photo {
+.message .sender_photo {
 	float:left;
 	padding: 0px 5px 0px 0px;
 }
-.conversation .action {
+.message .sender_name {
+}
+.message .subject {
+}
+.message .date {
+}
+.conversation_full .messages .unread .header{
+	color: #FFF;
+	background-color: #708EE5;
+}
+.conversation_full .messages .unread .body{
+	border: 1px solid #708EE5;
+}
+.conversation_full .messages .unread .subject{
+	font-weight: bold;
+}
+/*************** Full Conversation *****************/
+.conversation_full {
+}
+.conversation_full .title {
+	float:left;
+	padding: 5px 5px 5px 5px;
+}
+.conversation_full .action {
+	float:right;
+	padding: 5px 5px 5px 5px;
+}
+.conversation_full .participants {
+	border-top:1px solid #E0EEF5;
+	border-bottom:1px solid #E0EEF5;
+	padding: 5px 5px 3px 5px;
+}
+/***************** Conversations *******************/
+.conversations {
+	border-top:1px solid #E0EEF5;
+	border-bottom:1px solid #E0EEF5;
+}
+.conversations .unread {
+	background-color: #E0EEF5;
+}
+.conversations .conversation {
+	color: #2A3890;
+	padding: 5px 5px 5px 5px;
+	width:549px;
+	height:40px;
+	border-bottom:1px solid #E0EEF5;
+}
+.conversations .conversation .content_left {
+	float:left;
+	width:25%;
+}
+.conversations .conversation .content_right {
+	float:left;
+	width:60%;
+}
+.conversations .conversation .sender_photo {
+	float:left;
+	padding: 0px 5px 0px 0px;
+}
+.conversations .conversation .action {
 	float:right;
 }
-.conversation .actor_name {
-	//border:1px solid #000000;
+.conversations .conversation .sender_name {
 }
-.conversation .subject {
-	//border:1px solid #000000;
+.conversations .conversation .subject {
 }
-.conversation .date {
-	//border:1px solid #000000;
+.conversations .unread .subject {
+	font-weight: bold;
 }
-.conversation .briefing {
-	//border:1px solid #000000;
+.conversations .conversation .date {
+}
+.conversations .conversation .briefing {
+	color: #2A48A0;
+}
+.conversations .conversation .notification {
+	float:left;
+	width:5px;
+	height:100%;
+	margin: 0px 5px 0px 0px;
+}
+.conversations .unread .notification {
+	background-color: #2A3890;
 }

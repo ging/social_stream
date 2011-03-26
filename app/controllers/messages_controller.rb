@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
 
-	before_filter :get_mailbox, :get_box
+	before_filter :get_mailbox, :get_box, :get_actor
 	def index
 		if @box.eql?"inbox"
 			@conversations = @mailbox.inbox.paginate(:per_page => 9, :page => params[:page])
@@ -14,17 +14,17 @@ class MessagesController < ApplicationController
 	# GET /messages/1
 	# GET /messages/1.xml
 	def show
-		@actor = Actor.normalize(current_subject)
 		@conversation = Conversation.find_by_id(params[:id])
 		if @conversation.nil? or !@conversation.is_participant?(@actor)
-			redirect_to mailbox_index_path
+			redirect_to messages_path(:box => @box)
 		return
 		end
 		if @box.eql? 'trash'
 		@receipts = @conversation.receipts(@actor).trash
 		else
-		@conversation.mark_as_read(@actor)
 		@receipts = @conversation.receipts(@actor).not_trash
+		render :action => :show
+		@conversation.mark_as_read(@actor)
 		end
 
 	end
@@ -79,7 +79,6 @@ class MessagesController < ApplicationController
 	# PUT /messages/1
 	# PUT /messages/1.xml
 	def update
-		@actor = Actor.normalize(current_subject)
 		@conversation = Conversation.find_by_id(params[:id])
 		if @conversation.nil? or !@conversation.is_participant?(@actor)
 			redirect_to messages_path(:box => @box)
@@ -109,7 +108,6 @@ class MessagesController < ApplicationController
 	# DELETE /messages/1
 	# DELETE /messages/1.xml
 	def destroy
-		@actor = Actor.normalize(current_subject)
 		@conversation = Conversation.find_by_id(params[:id])
 		if @conversation.nil? or !@conversation.is_participant?(@actor)
 			redirect_to messages_path(:box => @box)
@@ -135,6 +133,10 @@ class MessagesController < ApplicationController
 
 	def get_mailbox
 		@mailbox = current_subject.mailbox
+	end
+	
+	def get_actor
+		@actor = Actor.normalize(current_subject)
 	end
 
 	def get_box

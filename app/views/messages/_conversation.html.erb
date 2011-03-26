@@ -1,20 +1,22 @@
-<%= div_for(conversation, :class => active) do %>
-<div class="actor_photo">
+<%= div_for(conversation, :class => read_class) do %>
+<div class="notification">
+	</div>
+<div class="sender_photo">
 	<%= link_to image_tag(conversation.last_sender.logo.url(:actor),
 	:title => conversation.last_sender.name, :alt => conversation.last_sender.name),
 	conversation.last_sender.subject %>
 </div>
 <div class="content_left">
-	<div class="actor_name">
+	<div class="sender_name">
 	<%= link_to conversation.last_sender.name, conversation.last_sender.subject %>
 	</div>
 	<div class="date">
-	<%= conversation.updated_at %>
+		<%= t('time.ago', :time => time_ago_in_words(conversation.updated_at)) %>
 	</div>
 </div>
 <div class="content_right">
 	<div class="subject">
-	<%= link_to(conversation.subject, message_path(conversation.id,:box => @box)) %>
+	<%= link_to(truncate(conversation.subject, :length => 55), message_path(conversation.id,:box => @box) ) %>
 	</div>
 	<div class="briefing">
 	<%= truncate(conversation.last_message.body, :length => 50) %>
