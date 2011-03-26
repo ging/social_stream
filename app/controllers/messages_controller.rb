@@ -123,11 +123,11 @@ class MessagesController < ApplicationController
 				redirect_to messages_path(:box => :trash)
 				return
 			else
-			redirect_to messages_path(:box => @box)
+			redirect_to messages_path(:box => @box,:page => params[:page])
 			return
 			end
 		end
-		redirect_to messages_path(:box => @box)
+		redirect_to messages_path(:box => @box,:page => params[:page])
 	end
 
 	private
