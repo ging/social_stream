@@ -266,13 +266,11 @@ class Actor < ActiveRecord::Base
     Activity.profile_wall ties.allowing(user, 'read', 'activity')
   end
   def logo
-  	#debugger
   	if avatar.blank?
   		build_avatar().logo
   	else
   		avatar.logo	
   	end
-  	
   end
   def logo!
     logo || build_logo()
