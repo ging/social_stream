@@ -6,9 +6,8 @@
     <th></th>
     <th></th>
   </tr>
-<% #debugger %>
-<% @avatar = Avatar.find(:all) %>
-<% @avatar.each do |avatar| %>
+
+<% @avatars.each do |avatar| %>
   <tr>
   	<% #debugger %>
 	<td><%= image_tag avatar.logo.url(:profile) %></image_tag></td>
