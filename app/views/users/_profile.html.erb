@@ -157,6 +157,21 @@
     </div>
   </div>
 </div>
+<div class="space_center"></div>
+<div class="block" id="logo_info">
+  <div class="header">
+    <div class="header_text">
+      Edit your logo
+    </div>
+    <div class="header_icon_right">
+      <%= link_to (image_tag('/images/btn/edit.png')),  :controller => "logos" , :action => "new" %>
+    </div>
+  </div>
+  <div class="content">
+    <div class="row">
+    </div>
+  </div>
+</div>
 
 <div class="space_center"></div>
 <% if (@profile.to_param==current_user.to_param and @profile.authentication_token) %>
