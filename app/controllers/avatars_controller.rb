@@ -22,7 +22,7 @@ def create
     if @avatar.new_record?
       render :new
     else
-     # debugger
+      #debugger
       @avatar.updating_logo = true
       #@avatar.actor_id = current_subject.actor_id
       @avatar.actor_id = Actor.normalize(current_subject).id
@@ -31,7 +31,7 @@ def create
       end
       @avatar.save     
       #redirect_to avatars_path
-      redirect_to user_profile_path(current_subject)
+      redirect_to [current_subject, :profile]
     end    
   end
   

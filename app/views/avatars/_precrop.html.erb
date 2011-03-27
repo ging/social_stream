@@ -9,8 +9,6 @@
 		<%= image_tag "tmp/#{my_file_name}",:id=>"preview" %>
 </div></div>
 
-<% precrop_dimensions = Avatar.get_image_dimensions(File.join(Avatar.images_tmp_path,my_file_name)) %>
-
 <% content_for :javascript do %>
 	$("#sidebar").remove();
         jQuery('#cropImage').Jcrop({
@@ -35,19 +33,19 @@ function update_crop(coords) {
   
   
   $('#preview').css({
-    width: Math.round(rx * <%= precrop_dimensions[:width] %>) + 'px',
-    height: Math.round(ry * <%= precrop_dimensions[:height] %>) + 'px',
+    width: Math.round(rx * $("#cropImage").width()) + 'px',
+    height: Math.round(ry * $("#cropImage").height()) + 'px',
     marginLeft: '-' + Math.round(rx * coords.x) + 'px',
     marginTop: '-' + Math.round(ry * coords.y) + 'px'
   });
-  var ratio = 1;//<% precrop_dimensions[:width] %> / <%= precrop_dimensions[:height] %>
+  var ratio = 1;
   $("#crop_x").val(Math.round(coords.x * ratio));
   $("#crop_y").val(Math.round(coords.y * ratio));
   $("#crop_w").val(Math.round(coords.w * ratio));
   $("#crop_h").val(Math.round(coords.h * ratio));
 }
 <% end %>
-<% #debugger %>
+
 <%= form_for :logo, @avatar,:url => avatars_path, :html => { :multipart => true } do |f| %>
 
   <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
