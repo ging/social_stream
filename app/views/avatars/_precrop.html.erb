@@ -26,6 +26,14 @@ function update_crop(coords) {
   var rx = 100/coords.w;
   var ry = 100/coords.h;
   
+  if((coords.w == 0) || (coords.h == 0)){
+  	rx = 100/$("#cropImage").width();
+  	ry = 100/$("#cropImage").height();
+  	coords.x = 0;
+  	coords.y = 0;
+  }
+  
+  
   $('#preview').css({
     width: Math.round(rx * <%= precrop_dimensions[:width] %>) + 'px',
     height: Math.round(ry * <%= precrop_dimensions[:height] %>) + 'px',
@@ -39,7 +47,7 @@ function update_crop(coords) {
   $("#crop_h").val(Math.round(coords.h * ratio));
 }
 <% end %>
-
+<% #debugger %>
 <%= form_for :logo, @avatar,:url => avatars_path, :html => { :multipart => true } do |f| %>
 
   <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>

@@ -24,12 +24,14 @@ def create
     else
      # debugger
       @avatar.updating_logo = true
-      @avatar.actor_id = current_subject.actor_id
+      #@avatar.actor_id = current_subject.actor_id
+      @avatar.actor_id = Actor.normalize(current_subject).id
       if !current_subject.avatar.nil?
       	current_subject.avatar.destroy
       end
       @avatar.save     
-      redirect_to avatars_path
+      #redirect_to avatars_path
+      redirect_to user_profile_path(current_subject)
     end    
   end
   
