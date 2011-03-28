@@ -1,6 +1,6 @@
 class ApiController < ApplicationController
   
-  before_filter :authenticate_user!, :only => [:create_key, :users, :activity_atom_feed]
+  before_filter :authenticate_user!, :only => [:create_key, :users]#, :activity_atom_feed]
   
   def create_key
     current_user.reset_authentication_token!

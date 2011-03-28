@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   
   # PubSubHubBub
   match 'pshb/callback' => 'pshb#callback', :as => :pshb_callback
+  # Test
+  match 'pshb/test_s' => 'pshb#pshb_subscription_request'
+  match 'pshb/test_p' => 'pshb#pshb_publish'
    
   # Webfinger
   match '.well-known/host-meta',:to => 'frontpage#host_meta'
