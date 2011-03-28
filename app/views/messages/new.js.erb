@@ -1,3 +1,38 @@
-$("#content").html("<%=escape_javascript(render :partial => 'new') %>");
+$("#content").html("<%= escape_javascript(render :partial => 'new') %>");
 
 $("head").append($("<%= escape_javascript(stylesheet_link_tag "messages.css", :media => "screen, projection") %>"));
+$("head").append($("<%= escape_javascript(stylesheet_link_tag "fcbkComplete.css", :media => "screen, projection") %>"));
+
+$("head").append($("<%= escape_javascript(javascript_include_tag 'jquery.fcbkcomplete.min','jquery.validate','ckeditor/ckeditor.js','ckeditor/adapters/jquery.js') %>"));
+
+var recipients = $("#_recipients").fcbkcomplete({
+	json_url: "../../contacts/index.json",
+	cache: true,
+	filter_case: true,
+	filter_hide: true,
+	newel: false,
+	height: 6
+});
+
+
+$('#body').ckeditor(
+);
+
+var editor = $('#body').ckeditorGet();
+
+editor.on("instanceReady", function(){
+	this.document.on("keyup", updateTextArea);
+	this.document.on("paste", updateTextArea);
+	this.document.on("mousedown", updateTextArea);
+});
+
+var updateTextArea = function (){
+	editor.updateElement();
+	$("#body").trigger('keyup');
+}
+
+<% unless @recipient.nil? %>
+	$("#_recipients").trigger("addItem",[{"title": "<%= @recipient.name %>", "value": "<%= @recipient.id %>"}]);
+<% end %>
+
+$(".new_message").validate();
