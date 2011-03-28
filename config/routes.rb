@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get "contacts/index"
   root :to => "frontpage#index"
   
   match 'home' => 'home#index', :as => :home
@@ -28,6 +27,8 @@ Rails.application.routes.draw do
       resource :profile
     end
   end
+
+  match 'contacts' => 'contacts#index', :as => 'contacts'
 
   # Find subjects by slug
   match 'subjects/lrdd/:id' => 'subjects#lrdd', :as => 'subject_lrdd'

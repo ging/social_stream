@@ -81,7 +81,9 @@ class Tie < ActiveRecord::Base
   }
 
   scope :related_by, lambda { |r|
-    where(:relation_id => Relation.normalize_id(r))
+    if r.present?
+      where(:relation_id => Relation.normalize_id(r))
+    end
   }
 
   scope :replied, lambda {
