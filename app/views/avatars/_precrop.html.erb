@@ -4,10 +4,12 @@
 <div id="precropDiv" class = "block title content" style="width:500px;display:inline-block;padding: 5px 4px 5px 4px;">
 	<%= image_tag "tmp/#{my_file_name}",:id=>"cropImage" %>
 </div>
-<div  class = "block logo" style = "vertical-align:top;display:inline-block;padding: 5px 4px 5px 4px;" >Preview:</br>
-<div style="width:100px;height:100px;overflow:hidden;margin-left:5px;" >
+
+<div  class = "block logo" style = "vertical-align:top;display:inline-block;padding: 5px 4px 5px 4px;" ><%= t('avatar.preview') %></br>
+  <div style="width:100px;height:100px;overflow:hidden;margin-left:5px;" >
 		<%= image_tag "tmp/#{my_file_name}",:id=>"preview" %>
-</div></div>
+  </div>
+</div>
 
 <% content_for :javascript do %>
 	$("#sidebar").remove();
@@ -53,5 +55,5 @@ function update_crop(coords) {
   <% end %>
 	<%= f.hidden_field :name, :value => my_file_name %>
 	<br>
-  <p><%= f.submit "Crop" %></p>
+  <p><%= f.submit t('avatar.crop_submit') %></p>
 <% end %>

@@ -21,7 +21,6 @@ class Actor < ActiveRecord::Base
   
   has_one :profile, :dependent => :destroy
 
-  #has_one :avatar,
   has_many :avatars,
   		  :validate => true,
   		  :autosave => true

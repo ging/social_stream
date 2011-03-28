@@ -14,6 +14,16 @@ en:
     like: "I like"
     unlike: "Already I do not like"
     last: "Last Activities"
+  avatar:
+    crop_image: "Crop the uploaded image"
+    crop_submit: "Crop"
+    destroy: "Delete"
+    destroy_sure: "Are you sure you wan't to delete the selected avatar?"
+    list: "You have this avatars"
+    new: "Create a new avatar"
+    new_short: "New avatar"
+    preview: "Preview"
+    upload: "Upload"
   browse: "Browse"
   comment:
     input: "Write a comment..."

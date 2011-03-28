@@ -1,4 +1,4 @@
-<h1>Listing logos</h1>
+<h1><%= t('avatar.list') %></h1>
 
 <table>
   <tr>
@@ -9,19 +9,18 @@
 
 <% current_subject.avatars.each do |avatar| %>
   <tr>
-  	<% #debugger %>
 	<td><%= image_tag avatar.logo.url(:profile) %></image_tag></td>
 	<td><%= image_tag avatar.logo.url(:tie) %></image_tag></td>
 	<td><% image_tag avatar.logo.url() %></image_tag></td>
 	<td><%= image_tag avatar.logo.url(:actor) %></image_tag></td>
 
-    <td><% link_to 'Show', avatar %></td>
-    <td><% link_to 'Edit', edit_avatar_path(avatar) %></td>
-    <td><%= link_to 'Destroy', avatar, :confirm => 'Are you sure?', :method => :delete %></td>
+   <td><% link_to 'Show', avatar %></td>
+   <td><% link_to 'Edit', edit_avatar_path(avatar) %></td>
+   <td><%= link_to t('avatar.destroy'), avatar, :confirm => t('avatar.destroy_sure'), :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Logo', new_avatar_path %>
+<%= link_to t('avatar.new_short'), new_avatar_path %>

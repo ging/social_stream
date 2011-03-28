@@ -6,10 +6,10 @@
 <% toolbar :profile => current_subject %>
 <div id="content_logo">
 <% if !@avatar.logo.errors['precrop'].blank? %>
-	<h1>Crop the uploaded image</h1>
+	<h1><%= t('avatar.crop_image') %></h1>
 	<%= render :partial => 'precrop' %>
 <% else %>
-	<h1><% t('logoA.crop_image') %>Create a new avatar</h1>
+	<h1><%= t('avatar.new') %></h1>
 	<%= render :partial => 'form' %>
 <% end %>
 </div>
