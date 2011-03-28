@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html { render :layout => (user_signed_in? ? 'application' : 'frontpage') }
+      format.js
     end
   end
 

@@ -8,15 +8,15 @@
 LOGUEATE
 <% else %>
 <div id="content_logo">
-<% if !@logo.logo.errors['precrop'].blank? %>
+<% if !@avatar.logo.errors['precrop'].blank? %>
 	<h1>Crop the uploaded image</h1>
 	<%= render :partial => 'precrop' %>
 <% else %>
-	<h1><% t('logoA.crop_image') %>Create a new logo</h1>
+	<h1><% t('logoA.crop_image') %>Create a new avatar</h1>
 	<%= render :partial => 'form' %>
 <% end %>
 </div>
-<% link_to 'Back', logos_path %>
+<% link_to 'Back', avatars_path %>
 
 
 <% end %>

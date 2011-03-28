@@ -40,10 +40,6 @@ class CreateSocialStream < ActiveRecord::Migration
       t.datetime "created_at"
       t.datetime "updated_at"
       t.integer  "activity_object_id"
-      t.string   "logo_file_name"
-      t.string   "logo_content_type"
-      t.integer  "logo_file_size"
-      t.datetime "logo_updated_at"
     end
     
     add_index "actors", "activity_object_id"
@@ -85,12 +81,25 @@ class CreateSocialStream < ActiveRecord::Migration
     end
     
     create_table "logos", :force => true do |t|
+        t.integer  "actor_id"
         t.string   "logo_file_name"
         t.string   "logo_content_type"
         t.integer  "logo_file_size"
         t.datetime "logo_updated_at"
     end
     
+    add_index "logos", "actor_id"
+    
+    create_table "avatars", :force => true do |t|
+        t.integer  "actor_id"
+        t.string   "logo_file_name"
+        t.string   "logo_content_type"
+        t.integer  "logo_file_size"
+        t.datetime "logo_updated_at"
+    end
+    
+    add_index "avatars", "actor_id"
+      
     create_table "posts", :force => true do |t|
       t.integer  "activity_object_id"
       t.datetime "created_at"

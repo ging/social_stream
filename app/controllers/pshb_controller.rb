@@ -16,4 +16,35 @@ class PshbController < ApplicationController
       # and delete permissions/remote actor if necessary
     end  
   end
+  
+  require "net/http"
+  require "uri"
+  
+  def pshb_subscription_request#(topic,hub,mode)
+    t = Thread.new do
+      #test
+      hub = 'http://localhost:4567/' # last '/' is mandatory!
+      topic = 'http://localhost:3000/api/user/demo/home'
+      mode = 'subscribe'
+      #
+      uri = URI.parse(hub)   
+      response = Net::HTTP::post_form(uri,{ 'hub.callback' => pshb_callback_url, 
+                                            'hub.mode'     => mode,
+                                            'hub.topic'    => topic,
+                                            'hub.verify'   => 'sync'})                                            
+      #TO-DO: process 4XX response.status                                      
+    end                                                                                
+  end
+  
+  def pshb_publish#(topic,hub)
+      #test params
+      hub = 'http://localhost:4567/' # last '/' is mandatory!
+      topic = 'http://localhost:3000/api/user/demo/home'
+      #
+      uri = URI.parse(hub)
+      response = Net::HTTP::post_form(uri,{ 'hub.mode' => 'publish',
+                                            'hub.url'  => topic})
+      #TO-DO: process 4XX response.status                                      
+  end  
+  
 end
