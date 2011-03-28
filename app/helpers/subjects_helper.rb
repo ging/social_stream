@@ -29,13 +29,25 @@ module SubjectsHelper
       menu_options[options[:option]] = capture(&block)
     end
 
-    content_for(:toolbar) do
+    content = capture do
       if options[:profile]
         render :partial => 'subjects/toolbar_profile', :locals => { :subject => options[:profile] }
       else
         render :partial => 'subjects/toolbar_home'
       end
     end
+
+    case request.format
+    when Mime::JS
+      <<-EOJ
+      $('#toolbar').html("#{ escape_javascript(content) }");
+      EOJ
+    else
+      content_for(:toolbar) do
+        content
+      end
+    end
+    
   end
 
   # Cache menu options for toolbar

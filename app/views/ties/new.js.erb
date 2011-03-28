@@ -3,6 +3,8 @@ if(!show_add_contact){
 	var show_add_contact = true;
 }
 
+<%= toolbar(:profile => @tie.receiver_subject).html_safe %>
+
 $('#content').html("<%= escape_javascript(render(:partial => "ties/new")) %>");
 
 $('#close_add_contact').click(function() {

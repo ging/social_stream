@@ -1,29 +1,3 @@
-<% content_for :headers do %>
-<%= javascript_include_tag 'ckeditor/ckeditor.js','ckeditor/adapters/jquery.js','jquery.scrollTo.min.js', 'jquery.validate' %>
-<% end %>
-
-<% content_for :javascript do %>
-$('.cont_conversation').validate();
-<% unless @box.eql?'trash' %>
-$('#body').ckeditor(
-function(){$('#cke_top_body').click( updateTextArea);$.scrollTo('#message_<%= conversation.last_message.id %>',1500,{axis:'y'});},
-{ width:525 }
-);
-var editor = $('#body').ckeditorGet();
-editor.on("instanceReady", function(){
-this.document.on("keyup", updateTextArea);
-this.document.on("paste", updateTextArea);
-this.document.on("mousedown", updateTextArea);
-});
-
-var updateTextArea = function (){
-editor.updateElement();
-$("#body").trigger('keyup');
-}
-<% else %>
-$.scrollTo('#message_<%= conversation.last_message.id %>',1500);
-<% end %>
-<% end %>
 <div class="title">
 	<h2><%= conversation.subject %></h2>
 </div>
@@ -49,7 +23,7 @@ $.scrollTo('#message_<%= conversation.last_message.id %>',1500);
 
 	<% unless @box.eql?'trash' %>
 	<br>
-	<% form_tag message_path(conversation.id), :method => :put, :class => "cont_conversation" do %>
+	<%= form_tag message_path(conversation.id), :method => :put, :class => "cont_conversation" do %>
 	<div class="block">
 		<div class="form_row">
 			Write your answer:
