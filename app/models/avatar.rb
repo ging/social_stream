@@ -1,12 +1,13 @@
 require 'RMagick'
 
-class Logo < ActiveRecord::Base
+class Avatar < ActiveRecord::Base
  	has_attached_file :logo,
                       :styles => { :tie => "30x30>",
                                    :actor => '35x35>',
                                    :profile => '94x94' },
                       #:default_url => "/images/:attachment/:style/:subtype_class.png"
-                      :default_url => "/images/logos/:style/group.png"
+                      #:default_url => "/images/logos/:style/group.png"
+                      :default_url => "/images/logos/:style/:subtype_class.png"
 	
 	before_post_process :process_precrop
 	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :name,:updating_logo
@@ -16,21 +17,24 @@ class Logo < ActiveRecord::Base
 	
 	belongs_to :actor
 	
-	delegate :url, :to => :logo
+	#scope :active, where(:active => true)
+	
+	#delegate :url, :to => :logo
 	
   	def uploading_file?
+  		#debugger
     	return @name.blank?
   	end
 	
 	def precrop_done
 		return if @name.blank? || !@updating_logo.blank?
 
-    	precrop_path = File.join(Logo.images_tmp_path,@name)
+    	precrop_path = File.join(Avatar.images_tmp_path,@name)
     	
     	make_precrop(precrop_path,@crop_x.to_i,@crop_y.to_i,@crop_w.to_i,@crop_h.to_i)
-		@logo = Logo.new :logo => File.open(precrop_path), :name => @name
+		@avatar = Avatar.new :logo => File.open(precrop_path), :name => @name
 				
-		self.logo = @logo.logo
+		self.logo = @avatar.logo
 		
 		FileUtils.remove_file(precrop_path)
 	end
@@ -41,7 +45,7 @@ class Logo < ActiveRecord::Base
 	end
 	
 	def self.copy_to_temp_file(path)
-		FileUtils.cp(path,Logo.images_tmp_path)
+		FileUtils.cp(path,Avatar.images_tmp_path)
 	end	
 	
 	
@@ -54,7 +58,7 @@ class Logo < ActiveRecord::Base
    end
 	
    def process_precrop
-
+   	
   	if @name.blank? && (  logo.content_type.present? && !logo.content_type.start_with?("image/"))
 		logo.errors['invalidType'] = "The file you uploaded isn't valid"
 		return false
@@ -63,7 +67,7 @@ class Logo < ActiveRecord::Base
 	return if !@name.blank?
       logo.errors['precrop'] = "You have to make precrop"
       resize_image(logo.queued_for_write[:original].path,500,500)
-      Logo.copy_to_temp_file(logo.queued_for_write[:original].path)   
+      Avatar.copy_to_temp_file(logo.queued_for_write[:original].path)   
    end
       
    def resize_image(path,width,height)
@@ -74,7 +78,7 @@ class Logo < ActiveRecord::Base
    
    def make_precrop(path,x,y,width,height)
      img_orig = Magick::Image.read(path).first
-     dimensions = Logo.get_image_dimensions(path)
+     dimensions = Avatar.get_image_dimensions(path)
      
 	if (width == 0) || (height == 0)
 		return

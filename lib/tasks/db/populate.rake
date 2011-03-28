@@ -15,11 +15,20 @@ namespace :db do
       def set_logos(klass)
         klass.all.each do |i|
           logo = Dir[File.join(LOGOS_PATH, klass.to_s.tableize, "#{ i.id }.*")].first
-          
+          avatar = Dir[File.join(LOGOS_PATH, klass.to_s.tableize, "#{ i.id }.*")].first
+=begin          
           if logo.present? && File.exists?(logo)
-            i.logo = File.new(logo)
-            i.logo.reprocess!
-            i.save!
+            Logo.copy_to_temp_file(logo)
+            dimensions = Logo.get_image_dimensions(logo)
+            l = Logo.new(:actor => i.actor,:logo => File.open(logo), :name => File.basename(logo), :crop_x => 0, :crop_y => 0, :crop_w => dimensions[:width], :crop_h => dimensions[:height] )
+            l.save(false)
+          end
+=end          
+          if avatar.present? && File.exists?(avatar)
+            Avatar.copy_to_temp_file(avatar)
+            dimensions = Avatar.get_image_dimensions(avatar)
+            l = Avatar.new(:actor => i.actor,:logo => File.open(avatar), :name => File.basename(avatar), :crop_x => 0, :crop_y => 0, :crop_w => dimensions[:width], :crop_h => dimensions[:height] )
+            l.save(false)
           end
         end
       end

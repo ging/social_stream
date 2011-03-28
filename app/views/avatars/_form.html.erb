@@ -1,0 +1,33 @@
+
+<% content_for :javascript do %>
+
+
+$('#new_logoA_form')
+    .bind("ajax:complete", function(evt, data, status, xhr){
+
+      // Insert response partial into page below the form.
+      $('#prueba').append(xhr.responseText);
+
+    });
+
+<%end%>
+
+<div class= "block content" style="padding: 5px 4px 5px 4px;">
+<%= form_for :logo, @avatar,:url => avatars_path, :html => { :multipart => true, :id=>'new_logo_form' }, :remote => false do |f| %>
+  <% if @avatar.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@avatar.errors.count, "error") %> prohibited this logo from being saved:</h2>
+
+      <ul>
+      <% @avatar.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.file_field :logo %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  <div id= "prueba"></div>
+<% end %>

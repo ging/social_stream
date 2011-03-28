@@ -1,4 +1,4 @@
-<% my_file_name = File.basename(@logo.logo.queued_for_write[:original].path) %>
+<% my_file_name = File.basename(@avatar.logo.queued_for_write[:original].path) %>
 
 
 <div id="precropDiv" class = "block title content" style="width:500px;display:inline-block;padding: 5px 4px 5px 4px;">
@@ -8,8 +8,6 @@
 <div style="width:100px;height:100px;overflow:hidden;margin-left:5px;" >
 		<%= image_tag "tmp/#{my_file_name}",:id=>"preview" %>
 </div></div>
-
-<% precrop_dimensions = Logo.get_image_dimensions(File.join(Logo.images_tmp_path,my_file_name)) %>
 
 <% content_for :javascript do %>
 	$("#sidebar").remove();
@@ -25,13 +23,22 @@
 function update_crop(coords) {
   var rx = 100/coords.w;
   var ry = 100/coords.h;
+  
+  if((coords.w == 0) || (coords.h == 0)){
+  	rx = 100/$("#cropImage").width();
+  	ry = 100/$("#cropImage").height();
+  	coords.x = 0;
+  	coords.y = 0;
+  }
+  
+  
   $('#preview').css({
-    width: Math.round(rx * <%= precrop_dimensions[:width] %>) + 'px',
-    height: Math.round(ry * <%= precrop_dimensions[:height] %>) + 'px',
+    width: Math.round(rx * $("#cropImage").width()) + 'px',
+    height: Math.round(ry * $("#cropImage").height()) + 'px',
     marginLeft: '-' + Math.round(rx * coords.x) + 'px',
     marginTop: '-' + Math.round(ry * coords.y) + 'px'
   });
-  var ratio = 1;//<% precrop_dimensions[:width] %> / <%= precrop_dimensions[:height] %>
+  var ratio = 1;
   $("#crop_x").val(Math.round(coords.x * ratio));
   $("#crop_y").val(Math.round(coords.y * ratio));
   $("#crop_w").val(Math.round(coords.w * ratio));
@@ -39,7 +46,7 @@ function update_crop(coords) {
 }
 <% end %>
 
-<%= form_for :logo, @logo,:url => logos_path, :html => { :multipart => true } do |f| %>
+<%= form_for :logo, @avatar,:url => avatars_path, :html => { :multipart => true } do |f| %>
 
   <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
     <%= f.hidden_field attribute, :id => attribute %>
