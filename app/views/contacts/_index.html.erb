@@ -1,0 +1,33 @@
+<% cont=0; %>
+
+<% @contacts.each do |contact| %>
+
+  <% if (cont%2) == 0 %>
+    <% cont+=1; %>
+     <div class="row">
+  <% end %>
+
+  <div class="label">
+    <div class="logo">
+      <%= link_to image_tag(contact.logo.url , :size => "50x50", :alt => contact.name), contact %>
+    </div>
+    <div class="sub-block">
+      <div class="name black" >
+        <%=link_to(contact.name, contact)%>
+      </div>
+      <div class="link">
+        <%= ties_to(contact) %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% if ((cont%2) != 0) 	%>
+  <div class="label">
+  </div>
+		</div>
+<% end %>
+
+<div class="row">
+  <%= will_paginate @contacts %>
+</div>

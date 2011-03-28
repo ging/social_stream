@@ -8,7 +8,7 @@ $(function() {
 $(".new_group").validate();
 });
 $("#group__participants").fcbkcomplete({
-json_url: "../contacts/index.json",
+  json_url: "<%= contacts_path(:format => :json) %>",
 cache: true,
 filter_case: true,
 filter_hide: true,

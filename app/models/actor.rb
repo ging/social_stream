@@ -56,7 +56,17 @@ class Actor < ActiveRecord::Base
       where('actors.name LIKE ?', "%#{ param }%")
     end
   }
-  
+
+  scope :distinct_initials, select('DISTINCT SUBSTR(actors.name,1,1) as initial').order("initial ASC")
+
+  scope :contacted_to, lambda { |a|
+    joins(:sent_ties).merge(Tie.received_by(a))
+  }
+
+  scope :contacted_from, lambda { |a|
+    joins(:received_ties).merge(Tie.sent_by(a))
+  }
+ 
   after_create :initialize_ties
   
   after_create :create_profile
@@ -140,9 +150,9 @@ class Actor < ActiveRecord::Base
     
     case options[:direction]
       when :sent
-      as = as.joins(:received_ties).merge(Tie.sent_by(self))
+        as = as.contacted_from(self)
       when :received
-      as = as.joins(:sent_ties).merge(Tie.received_by(self))
+        as = as.contacted_to(self)
     else
       raise "contact actors in both directions are not supported yet"
     end
@@ -152,7 +162,7 @@ class Actor < ActiveRecord::Base
     end
     
     if options[:relations].present?
-      as &= Tie.related_by(options[:relations])
+      as = as.merge(Tie.related_by(options[:relations]))
     end
     
     as

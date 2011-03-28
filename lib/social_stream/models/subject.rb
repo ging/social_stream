@@ -44,9 +44,8 @@ module SocialStream
           joins(:actor).merge(Actor.search(param))
         }
 
-        scope :with_sent_ties,     joins(:actor => :sent_ties)
-        scope :with_received_ties, joins(:actor => :received_ties)
-        scope :distinct_initials, joins(:actor).select('DISTINCT SUBSTR(actors.name,1,1) as initial').order("initial ASC")
+        scope :distinct_initials, joins(:actor).merge(Actor.distinct_initials)
+
         scope :popular, lambda { 
           joins(:actor => :received_ties).
             select("DISTINCT #{ table_name }.*, COUNT(#{ table_name}.id) AS popularity").
