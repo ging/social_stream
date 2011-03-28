@@ -255,6 +255,9 @@ class Tie < ActiveRecord::Base
   
   def create_activity_after_add_contact
     if self.original
+#      debugger
+#      a = Activity.create :activity_verb => ActivityVerb["make_friend"] , :_activity_tie_id => self.id
+      
       p = Post.create :text =>
                       (I18n.t "tie.activity.add_contact", :active=>self.sender.name , :pasive=>self.receiver.name),
                        :_activity_tie_id => self.id
@@ -266,14 +269,9 @@ class Tie < ActiveRecord::Base
   def send_message
     if self.original
       if((message!=nil)&&(message!="")&&(receiver.subject_type=="User"))
-        sender.send_message(receiver, get_private_message(message))
+        sender.send_message(receiver, message,(I18n.t "tie.private_messages.add_contact", :name=>sender.name))
       end 
     end
-  end
-  
-  
-  def get_private_message(message)
-    return (I18n.t "tie.private_messages.add_contact", :name=>sender.name) + ".\n" + message
   end
   
   

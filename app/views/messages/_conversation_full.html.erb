@@ -6,7 +6,7 @@
 $('.cont_conversation').validate();
 <% unless @box.eql?'trash' %>
 $('#body').ckeditor(
-function(){$('#cke_top_body').click( updateTextArea);$.scrollTo('#message_<%= conversation.last_message.id %>',1500);},
+function(){$('#cke_top_body').click( updateTextArea);$.scrollTo('#message_<%= conversation.last_message.id %>',1500,{axis:'y'});},
 { width:525 }
 );
 var editor = $('#body').ckeditorGet();
