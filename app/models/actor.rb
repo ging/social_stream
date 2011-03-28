@@ -264,20 +264,13 @@ class Actor < ActiveRecord::Base
     
     Activity.profile_wall ties.allowing(user, 'read', 'activity')
   end
+
   def logo
-  	if avatars.blank?
-  		build_avatar().logo
-  	else
-  		avatars.active.first.logo
-  		#avatar.logo	
-  	end
-  end
-  def logo!
-    logo || build_logo()
+    avatar!.logo
   end
 
   def avatar!
-    avatar || build_avatar()
+    avatars.active.first || avatars.build
   end
   
   private

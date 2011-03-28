@@ -54,7 +54,18 @@ class CreateSocialStream < ActiveRecord::Migration
     end
     
     add_index "authentications", "user_id"
+
+    create_table "avatars", :force => true do |t|
+      t.integer  "actor_id"
+      t.string   "logo_file_name"
+      t.string   "logo_content_type"
+      t.integer  "logo_file_size"
+      t.datetime "logo_updated_at"
+      t.boolean  "active", :default => true
+    end
     
+    add_index "avatars", "actor_id"
+   
     create_table "comments", :force => true do |t|
       t.integer  "activity_object_id"
       t.text     "text"
@@ -80,26 +91,6 @@ class CreateSocialStream < ActiveRecord::Migration
       t.datetime "updated_at"
     end
     
-    create_table "logos", :force => true do |t|
-        t.integer  "actor_id"
-        t.string   "logo_file_name"
-        t.string   "logo_content_type"
-        t.integer  "logo_file_size"
-        t.datetime "logo_updated_at"
-    end
-    
-    add_index "logos", "actor_id"
-    
-    create_table "avatars", :force => true do |t|
-        t.integer  "actor_id"
-        t.string   "logo_file_name"
-        t.string   "logo_content_type"
-        t.integer  "logo_file_size"
-        t.datetime "logo_updated_at"
-        t.boolean  "active"
-    end
-    
-    add_index "avatars", "actor_id"
       
     create_table "posts", :force => true do |t|
       t.integer  "activity_object_id"
@@ -224,6 +215,8 @@ class CreateSocialStream < ActiveRecord::Migration
     add_foreign_key "actors", "activity_objects", :name => "actors_on_activity_object_id"
     
     add_foreign_key "authentications", "users", :name => "authentications_on_user_id"
+
+    add_foreign_key "avatars", "actors", :name => "avatars_on_actor_id"
     
     add_foreign_key "comments", "activity_objects", :name => "comments_on_activity_object_id"
     
@@ -259,6 +252,8 @@ class CreateSocialStream < ActiveRecord::Migration
     remove_foreign_key "actors", :name => "actors_on_activity_object_id"
     
     remove_foreign_key "authentications", :name => "authentications_on_user_id"
+
+    remove_foreign_key "avatars", :name => "avatars_on_actor_id"
     
     remove_foreign_key "comments", :name => "comments_on_activity_object_id"
     
@@ -289,6 +284,7 @@ class CreateSocialStream < ActiveRecord::Migration
     drop_table :activity_verbs
     drop_table :actors
     drop_table :authentications
+    drop_table :avatars
     drop_table :comments
     drop_table :groups
     drop_table :permissions
