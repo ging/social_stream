@@ -22,15 +22,15 @@ def create
     if @avatar.new_record?
       render :new
     else
-      #debugger
       @avatar.updating_logo = true
-      #@avatar.actor_id = current_subject.actor_id
       @avatar.actor_id = Actor.normalize(current_subject).id
-      if !current_subject.avatar.nil?
-      	current_subject.avatar.destroy
+      if !current_subject.avatars.nil?
+      	actual_logo = current_subject.avatars.active.first
+      	actual_logo.active = false
+      	actual_logo.save
       end
-      @avatar.save     
-      #redirect_to avatars_path
+      @avatar.active = true
+      @avatar.save
       redirect_to [current_subject, :profile]
     end    
   end

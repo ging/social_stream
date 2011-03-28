@@ -1,6 +1,5 @@
 <% cont=0; %>
-<% groups = @groups.paginate(:per_page => 10, :page => params[:page]) %>
-<% groups.each do |group| %>
+<% @groups.each do |group| %>
 	<% if (cont%2) == 0 %>
 	  <% cont+=1; %>
  	  <div class="row">
@@ -28,5 +27,5 @@
 		</div>
 <% end %>
 <div class="row">
-  <%= will_paginate groups %>
+  <%= will_paginate @groups %>
 </div>

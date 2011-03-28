@@ -20,10 +20,9 @@ class Actor < ActiveRecord::Base
   acts_as_url :name, :url_attribute => :slug
   
   has_one :profile, :dependent => :destroy
- # has_one :logo,
- # 		  :validate => true,
- # 		  :autosave => true
-  has_one :avatar,
+
+  #has_one :avatar,
+  has_many :avatars,
   		  :validate => true,
   		  :autosave => true
   		  
@@ -48,15 +47,15 @@ class Actor < ActiveRecord::Base
   scope :alphabetic, order('actors.name')
 
   scope :letter, lambda { |param|
-    param.present? ?
-      alphabetic.where('actors.name LIKE ?', "#{ param }%") :
-      alphabetic
+    if param.present?
+      where('actors.name LIKE ?', "#{ param }%")
+    end
   }
 
   scope :search, lambda { |param|
-    param.present? ?
-      alphabetic.where('actors.name LIKE ?', "%#{ param }%") :
-      alphabetic
+    if param.present?
+      where('actors.name LIKE ?', "%#{ param }%")
+    end
   }
   
   after_create :initialize_ties
@@ -266,11 +265,11 @@ class Actor < ActiveRecord::Base
     Activity.profile_wall ties.allowing(user, 'read', 'activity')
   end
   def logo
-  	if avatar.blank?
+  	if avatars.blank?
   		build_avatar().logo
   	else
-  		#avatars.active.first.logo
-  		avatar.logo	
+  		avatars.active.first.logo
+  		#avatar.logo	
   	end
   end
   def logo!

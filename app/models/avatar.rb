@@ -17,12 +17,9 @@ class Avatar < ActiveRecord::Base
 	
 	belongs_to :actor
 	
-	#scope :active, where(:active => true)
-	
-	#delegate :url, :to => :logo
+	scope :active, where(:active => true)
 	
   	def uploading_file?
-  		#debugger
     	return @name.blank?
   	end
 	
@@ -33,6 +30,7 @@ class Avatar < ActiveRecord::Base
     	
     	make_precrop(precrop_path,@crop_x.to_i,@crop_y.to_i,@crop_w.to_i,@crop_h.to_i)
 		@avatar = Avatar.new :logo => File.open(precrop_path), :name => @name
+		
 				
 		self.logo = @avatar.logo
 		

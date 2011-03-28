@@ -96,6 +96,7 @@ class CreateSocialStream < ActiveRecord::Migration
         t.string   "logo_content_type"
         t.integer  "logo_file_size"
         t.datetime "logo_updated_at"
+        t.boolean  "active"
     end
     
     add_index "avatars", "actor_id"
