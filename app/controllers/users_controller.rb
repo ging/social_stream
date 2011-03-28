@@ -1,55 +1,27 @@
-class UsersController < ApplicationController
-  def index
-    if params[:search]
-      @users = User.search("%"+params[:search]+"%").paginate(:per_page => 10, :page => params[:page])
-    else
-      if params[:letter] && params[:letter]!="undefined"
-        @users = User.search(params[:letter]+"%").paginate(:per_page => 10, :page => params[:page])
-      else
-        @users = User.alphabetic.paginate(:per_page => 10, :page => params[:page])
-      end
-    end
-
-    respond_to do |format|
-      format.html { render :layout => (user_signed_in? ? 'application' : 'frontpage') }
-      format.js
-    end
-  end
-
-  def show
-    @user = User.find_by_slug!(params[:id])
-    
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  # { render :xml => @user }
-    end
-	end
-
-  def edit
-    @user = User.find_by_slug!(params[:id])
-
-    respond_to do |format|
-      format.html # edit.html.erb
-      format.xml  { render :xml => @user }
-    end
-  end
+class UsersController < InheritedResources::Base
+  respond_to :html, :xml, :js
   
-  def update
-    @user = User.find_by_slug!(params[:id])
+  def index
+    @users = User.alphabetic.
+                  letter(params[:letter]).
+                  search(params[:search]).
+                  paginate(:per_page => 10, :page => params[:page])
 
-    respond_to do |format|
-      if @user.update_attributes(params[:user])
-        #format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
-        #format.html { render :action => "edit", :notice => 'User was successfully updated.' }
-        format.html { render :partial => "right_show", :notice => 'User was successfully updated.' }
-        format.xml  { head :ok }
-        format.js 
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-        format.js
-      end
+    index! do |format|
+      format.html { render :layout => (user_signed_in? ? 'application' : 'frontpage') }
     end
   end
 
+  # Supported through devise
+  def new; end; def create; end
+  # Not supported yet
+  def destroy; end
+
+  protected
+
+  # Overwrite resource method to support slug
+  # See InheritedResources::BaseHelpers#resource
+  def resource
+    @user ||= end_of_association_chain.find_by_slug!(params[:id])
+  end
 end

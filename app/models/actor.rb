@@ -47,15 +47,15 @@ class Actor < ActiveRecord::Base
   scope :alphabetic, order('actors.name')
 
   scope :letter, lambda { |param|
-    param.present? ?
-      alphabetic.where('actors.name LIKE ?', "#{ param }%") :
-      alphabetic
+    if param.present?
+      where('actors.name LIKE ?', "#{ param }%")
+    end
   }
 
   scope :search, lambda { |param|
-    param.present? ?
-      alphabetic.where('actors.name LIKE ?', "%#{ param }%") :
-      alphabetic
+    if param.present?
+      where('actors.name LIKE ?', "%#{ param }%")
+    end
   }
   
   after_create :initialize_ties

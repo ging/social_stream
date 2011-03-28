@@ -1,10 +1,12 @@
 class GroupsController < InheritedResources::Base
-  has_scope :letter
-  has_scope :search
-  
   respond_to :html, :xml, :js
   
   def index
+    @groups = Group.alphabetic.
+                    letter(params[:letter]).
+                    search(params[:search]).
+                    paginate(:per_page => 10, :page => params[:page])
+
     index! do |format|
       format.html { render :layout => (user_signed_in? ? 'application' : 'frontpage') }
     end
