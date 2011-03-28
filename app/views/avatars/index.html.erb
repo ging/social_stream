@@ -7,7 +7,7 @@
     <th></th>
   </tr>
 
-<% @avatars.each do |avatar| %>
+<% current_subject.avatars.each do |avatar| %>
   <tr>
   	<% #debugger %>
 	<td><%= image_tag avatar.logo.url(:profile) %></image_tag></td>
@@ -15,8 +15,8 @@
 	<td><% image_tag avatar.logo.url() %></image_tag></td>
 	<td><%= image_tag avatar.logo.url(:actor) %></image_tag></td>
 
-    <td><%= link_to 'Show', avatar %></td>
-    <td><%= link_to 'Edit', edit_avatar_path(avatar) %></td>
+    <td><% link_to 'Show', avatar %></td>
+    <td><% link_to 'Edit', edit_avatar_path(avatar) %></td>
     <td><%= link_to 'Destroy', avatar, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>

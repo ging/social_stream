@@ -1,19 +1,6 @@
 class AvatarsController < InheritedResources::Base
-=begin  
-  def new
-#    if params[:logo_logo].present?
- #    render :template => "logos/_precrop", :layout => false
-  #  end
-    debugger
-    if params[:logo_logo]
-      
-    end
-     respond_to do |format|
-      format.html #new.html.erb
-     end
- 
-  end
-=end
+
+before_filter :authenticate_user!
 
 def create
     @avatar = Avatar.create(params[:logo])
@@ -23,7 +10,7 @@ def create
       render :new
     else
       @avatar.updating_logo = true
-      @avatar.actor_id = Actor.normalize(current_subject).id
+      @avatar.actor_id = current_subject.actor.id
       if !current_subject.avatars.nil?
       	actual_logo = current_subject.avatars.active.first
       	actual_logo.active = false
