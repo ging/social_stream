@@ -269,6 +269,7 @@ class Actor < ActiveRecord::Base
   	if avatar.blank?
   		build_avatar().logo
   	else
+  		#avatars.active.first.logo
   		avatar.logo	
   	end
   end

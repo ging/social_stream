@@ -17,6 +17,8 @@ class Avatar < ActiveRecord::Base
 	
 	belongs_to :actor
 	
+	#scope :active, where(:active => true)
+	
 	#delegate :url, :to => :logo
 	
   	def uploading_file?
