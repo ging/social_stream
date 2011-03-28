@@ -3,10 +3,7 @@
 	<%= stylesheet_link_tag "jquery.Jcrop", :media => "screen, projection" %>
     <%= stylesheet_link_tag "logos", :media => "screen, projection" %>
 <%end%>
-
-<% if current_subject.blank? %>
-LOGUEATE
-<% else %>
+<% toolbar :profile => current_subject %>
 <div id="content_logo">
 <% if !@avatar.logo.errors['precrop'].blank? %>
 	<h1>Crop the uploaded image</h1>
@@ -17,6 +14,3 @@ LOGUEATE
 <% end %>
 </div>
 <% link_to 'Back', avatars_path %>
-
-
-<% end %>

@@ -122,16 +122,16 @@ class Actor < ActiveRecord::Base
     relations.find_by_name(name)
   end
   
-  # All the actors this one has relation with
+  # All the {Actor actors} this one has relation with
   #
   # Options:
-  # * subject_type: Filter by the class of the subjects.
-  # * direction: senders or receivers
+  # * type: Filter by the class of the contacts.
+  # * direction: sent or received
   # * relations: Restrict the relations of considered ties
   # * include_self: False by default, don't include this actor as subject even they have ties with themselves.
   #
-  def actors(options = {})
-    subject_types   = Array(options[:subject_type] || self.class.subtypes)
+  def contact_actors(options = {})
+    subject_types   = Array(options[:type] || self.class.subtypes)
     subject_classes = subject_types.map{ |s| s.to_s.classify }
     
     as = Actor.select("DISTINCT actors.*").
@@ -140,12 +140,12 @@ class Actor < ActiveRecord::Base
     
     
     case options[:direction]
-      when :senders
-      as = as.joins(:sent_ties).merge(Tie.received_by(self))
-      when :receivers
+      when :sent
       as = as.joins(:received_ties).merge(Tie.sent_by(self))
+      when :received
+      as = as.joins(:sent_ties).merge(Tie.received_by(self))
     else
-      raise "actors in both directions is not supported yet"
+      raise "contact actors in both directions are not supported yet"
     end
     
     if options[:include_self].blank?
@@ -159,14 +159,14 @@ class Actor < ActiveRecord::Base
     as
   end
   
-  # All the subject actors that send or receive at least one tie to this actor
+  # All the {SocialStream::Models::Subject subjects} that send or receive at least one {Tie} to this {Actor}
   #
-  # When passing a block, it will be evaluated for the actors query, allowing to add 
+  # When passing a block, it will be evaluated for building the actors query, allowing to add 
   # options before the mapping to subjects
   #
-  # See actors for options
-  def subjects(options = {})
-    as = actors(options)
+  # See #contact_actors for options
+  def contacts(options = {})
+    as = contact_actors(options)
     
     if block_given?
       as = yield(as)
@@ -202,7 +202,7 @@ class Actor < ActiveRecord::Base
     # Candidates are all the instance of "type" minus all the subjects
     # that are receiving any tie from this actor
     candidates = candidates_classes.inject([]) do |cs, klass|
-      cs += klass.all - subjects(:subject_type => klass, :direction => :receivers)
+      cs += klass.all - contacts(:type => klass, :direction => :sent)
       cs -= Array(subject) if subject.is_a?(klass)
       cs
     end
@@ -264,20 +264,13 @@ class Actor < ActiveRecord::Base
     
     Activity.profile_wall ties.allowing(user, 'read', 'activity')
   end
+
   def logo
-  	if avatars.blank?
-  		build_avatar().logo
-  	else
-  		avatars.active.first.logo
-  		#avatar.logo	
-  	end
-  end
-  def logo!
-    logo || build_logo()
+    avatar!.logo
   end
 
   def avatar!
-    avatar || build_avatar()
+    avatars.active.first || avatars.build
   end
   
   private

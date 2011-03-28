@@ -12,11 +12,11 @@ class Group < ActiveRecord::Base
   end
 
   def followers
-    subjects(:subject_type => :user, :direction => :senders)
+    contacts(:subject_type => :user, :direction => :received)
   end
   
   def recent_groups
-    subjects(:subject_type => :group, :direction => :receivers) do |q|
+    contacts(:type => :group, :direction => :sent) do |q|
       q.select("ties.created_at").
         merge(Tie.recent)
     end

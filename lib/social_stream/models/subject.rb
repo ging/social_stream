@@ -68,11 +68,7 @@ module SocialStream
         def method_missing(method, *args, &block)
           super
         rescue NameError => subject_error 
-          begin
-            actor!.__send__ method, *args, &block
-          rescue NameError
-            raise subject_error
-          end
+          actor!.__send__ method, *args, &block
         end
 
         # {Actor} handles some methods

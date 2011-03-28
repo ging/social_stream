@@ -1,28 +1,12 @@
 class ContactsController < ApplicationController
+  before_filter :authenticate_user!
   
   def index
-    
-    
-    return if current_subject.blank?
-    
-    myContacts = Array.new
-    mySubjects = current_subject.subjects(:direction => :receivers)
-    
-    return if mySubjects.blank?
-    
-    #Fill the array with actor name/actorId of all the actors which has a tie with current_subject
-    mySubjects.each do |aSubject|
-      aSubjectD = {}
-      aSubjectD['key'] = aSubject.name
-      aSubjectD['value'] = aSubject.actor_id.to_s
-      myContacts << aSubjectD
-    end
-    
+    @contacts = current_subject.contacts(:direction => :sent)
+
     respond_to do |format|
       format.html #index.html.erb
-      format.json { render :text => myContacts.to_json }
+      format.json { render :text => @contacts.map{ |c| { 'key' => c.name, 'value' => c.actor_id.to_s } }.to_json }
     end
-    
   end
-
 end
