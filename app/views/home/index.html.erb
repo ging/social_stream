@@ -17,5 +17,5 @@
 <% end %>
 
 <%= render :partial => "activities/activities",
-           :locals => { :activities => current_subject.home_wall,
+           :locals => { :activities => current_subject.wall(:home),
                         :owner => current_subject } %>

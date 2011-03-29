@@ -257,23 +257,31 @@ class Actor < ActiveRecord::Base
                          :receiver_id => i }
   end
   
-  # The set of activities in the wall of this actor, includes all the activities
-  # from the ties the actor has access to
+  # The set of {Activity activities} in the wall of this {Actor}.
   #
-  def home_wall
-    Activity.home_wall ties
+  # There are two types of walls:
+  # home:: includes all the {Activity activities} from this {Actor} and their followed {Actor actors}
+  #             See {Permission permissions} for more information on the following support
+  # profile:: The set of activities in the wall profile of this {Actor}, it includes only the
+  #           activities from the ties of this actor that can be read by the subject
+  #
+  # Options:
+  # :for:: the subject that is accessing the wall
+  #             
+  def wall(type, options = {})
+    case type
+    when :home
+      Activity.wall :home, ties
+    when :profile
+      # FIXME: show public activities
+      return [] if options[:for].blank?
+
+      Activity.wall :profile, ties.allowing(options[:for], 'read', 'activity')
+    else
+      raise "Wall type not supported: #{ type }"
+    end
   end
   
-  # The set of activities in the wall profile of this actor, includes the activities
-  # from the ties of this actor that can be read by user
-  #
-  def profile_wall(user)
-    # FIXME: show public activities
-    return [] if user.blank?
-    
-    Activity.profile_wall ties.allowing(user, 'read', 'activity')
-  end
-
   def logo
     avatar!.logo
   end

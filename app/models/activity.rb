@@ -5,7 +5,9 @@
 # the relation in which the activity is transferred
 #
 # == Wall
-# The Activity.wall(ties) scope provides all the activities attached to a set of ties
+# The Activity.wall(type, ties) scope provides all the activities attached to a set of ties
+# 
+# There are two types of wall, :home and :profile. Check {Actor#wall} for more information
 #
 class Activity < ActiveRecord::Base
   has_ancestry
@@ -28,21 +30,19 @@ class Activity < ActiveRecord::Base
 
   after_create :like_direct_object
 
-  scope :home_wall, lambda { |ties|
-    select("DISTINCT activities.*").
-      roots.
-      joins(:tie_activities).
-      where('tie_activities.tie_id' => ties).
-      order("created_at desc")
-  }
+  scope :wall, lambda { |type, ties|
+    q = select("DISTINCT activities.*").
+          roots.
+          joins(:tie_activities).
+          where('tie_activities.tie_id' => ties).
+          order("created_at desc")
 
-  scope :profile_wall, lambda { |ties|
-    select("DISTINCT activities.*").
-      roots.
-      joins(:tie_activities).
-      where('tie_activities.tie_id' => ties).
-      where('tie_activities.original' => true).
-      order("created_at desc")
+    # Profile wall is composed by original TieActivities. Not original are copies for followers
+    if type == :profile
+      q = q.where('tie_activities.original' => true)
+    end
+
+    q
   }
 
   # After an activity is created, it is associated to ties
