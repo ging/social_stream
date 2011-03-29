@@ -16,7 +16,7 @@
             <%=t('edit.organization')%>:
           </div>
           <div class="field">
-              <%=h @profile.organization %>
+            <%=h @profile.organization %>
           </div>
         </div>
       <%end%>
@@ -184,7 +184,7 @@
       ApiKey: <%= @profile.authentication_token %>
     </div>
     <div class="header_icon_right">
-  <%= link_to (image_tag('/images/btn/edit.png')), :controller => :api,
+      <%= link_to (image_tag('/images/btn/edit.png')), :controller => :api,
                            :action => :create_key %>
     </div>
   </div>

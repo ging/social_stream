@@ -26,7 +26,7 @@ class ApiController < ApplicationController
     end
     
     @page = params[:page]
-    @activities = current_user.home_wall.paginate(:page => params[:page], :per_page => 10)
+    @activities = current_user.wall(:home).paginate(:page => params[:page], :per_page => 10)
     respond_to do |format|
       format.atom
     end

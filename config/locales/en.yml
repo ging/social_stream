@@ -142,6 +142,8 @@ en:
     one: "Inbox"
   location:
     message: "You are here > %{location}"
+    base: "You are here"
+    separator: " > "
   menu:
     options: "Menu Options"
     information: "Information"

@@ -14,5 +14,5 @@
            :locals  => { :user => @user } %>
 
 <%= render :partial => "activities/activities",
-           :locals  => { :activities => @user.profile_wall(current_subject),
+                         :locals  => { :activities => @user.wall(:profile, :for => current_subject),
                          :owner => @user } %>
