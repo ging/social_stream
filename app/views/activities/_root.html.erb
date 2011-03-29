@@ -1,4 +1,5 @@
 <%= div_for activity do %>
+
   <div class="actor_logo">
     <%= link_to image_tag(activity.sender_subject.logo.url(:actor),
                           :alt => activity.sender_subject.name),
@@ -6,8 +7,9 @@
   </div>
 
   <div class="activity_content">
+  	
     <div class="actor_name">
-      <%= link_to(activity.sender_subject.name, activity.sender_subject) %>
+      <%= link_to(activity.title, activity.sender_subject) %>
     </div>
 
     <div class="activity_objects">

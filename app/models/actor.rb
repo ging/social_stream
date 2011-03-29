@@ -232,6 +232,10 @@ class Actor < ActiveRecord::Base
     sent_ties.received_by(a)
   end
   
+  def ties_to?(a)
+    ties_to(a).present?
+  end
+  
   # All the ties this actor has with subject that support permission
   def sent_ties_allowing(subject, action, objective)
     return [] if subject.blank?
