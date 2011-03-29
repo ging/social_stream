@@ -157,22 +157,25 @@
     </div>
   </div>
 </div>
-<div class="space_center"></div>
-<div class="block" id="avatar_info">
-  <div class="header">
-    <div class="header_text">
-      Edit your avatar
+<% if (!@profile.blank?) && (!current_subject.blank?)%>
+  <% if (@profile.actor == current_subject.actor) %>
+  <div class="space_center"></div>
+  <div class="block" id="avatar_info">
+    <div class="header">
+      <div class="header_text">
+        <%= t('avatar.profile_change')%>
+      </div>
+      <div class="header_icon_right">
+        <%= link_to (image_tag('/images/btn/edit.png')),  :controller => "avatars" , :action => "index" %>
+      </div>
     </div>
-    <div class="header_icon_right">
-      <%= link_to (image_tag('/images/btn/edit.png')),  :controller => "avatars" , :action => "new" %>
+    <div class="content">
+      <div class="row">
+      </div>
     </div>
   </div>
-  <div class="content">
-    <div class="row">
-    </div>
-  </div>
-</div>
-
+  <% end %>
+<% end %>
 <div class="space_center"></div>
 <% if (@profile.to_param==current_user.to_param and @profile.authentication_token) %>
 <div class="block" id="developer_info">

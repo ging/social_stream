@@ -6,9 +6,9 @@
 </div>
 <div id="new_message">
 	<% if @box.present? %>
-    <%= link_to 'Back', messages_path(:box => @box, :page => params[:page]), :remote => true %>
+    <%= link_to 'Back', conversations_path(:box => @box, :page => params[:page]), :remote => true %>
 	<% else %>
-    <%= link_to 'Back', messages_path(:page => params[:page]), :remote => true %>
+    <%= link_to 'Back', conversations_path(:page => params[:page]), :remote => true %>
 	<% end %>
 </div>
 <div class="space_center">

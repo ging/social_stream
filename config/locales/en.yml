@@ -19,10 +19,17 @@ en:
     crop_submit: "Crop"
     destroy: "Delete"
     destroy_sure: "Are you sure you wan't to delete the selected avatar?"
+    error:
+      no_file: "You have to select a file"
+      no_image_file: "The file you uploaded isn't valid, it must be an image file"
     list: "You have this avatars"
     new: "Create a new avatar"
     new_short: "New avatar"
+    no_avatars: "You haven't any avatar, plesase create a new one."
     preview: "Preview"
+    profile_change: "Change your avatar"
+    set_default: "Set as default"
+    set_default_sure: "Are you sure you wan't to set this avatar as default?"
     upload: "Upload"
   browse: "Browse"
   comment:

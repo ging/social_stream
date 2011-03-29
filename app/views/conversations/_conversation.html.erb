@@ -16,7 +16,7 @@
 </div>
 <div class="content_right">
 	<div class="subject">
-		<%= link_to(truncate(conversation.subject, :length => 55), message_path(conversation.id,:box => @box,:page => params[:page])) %>
+		<%= link_to(truncate(conversation.subject, :length => 55), conversation_path(conversation.id,:box => @box,:page => params[:page])) %>
 	</div>
 	<div class="briefing">
 		<%= raw(truncate(strip_tags(conversation.last_message.body), :length => 50)) %>
@@ -27,7 +27,7 @@
 <% unless @box.eql?'trash' %>
 <div class="action">
 	<%= link_to(image_tag('btn/btn_delete.png', :atl => "Delete", :title => "Delete"),
-	message_path(conversation, :location => @box, :box => @box, :page => params[:page]),
+	conversation_path(conversation, :location => @box, :box => @box, :page => params[:page]),
 	:confirm => 'Do you want to move "' + conversation.subject + '" to trash?',
 	:method => :delete, :remote => true) %>
 </div>

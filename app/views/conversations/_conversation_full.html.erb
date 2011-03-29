@@ -3,14 +3,14 @@
 </div>
 <div class="action">
 	<% unless @box.eql?'trash' %><%= link_to ( image_tag('btn/btn_delete.png', :atl => "Delete", :title => "Delete"),
-	message_path(conversation, :location => 'conversation', :box => @box),
+	conversation_path(conversation, :location => 'conversation', :box => @box),
 	:confirm => 'Do you want to move "' + conversation.subject + '" to trash?',
 	:method => :delete, :remote => true) %><% end %>
 </div>
 <div class="clearfloat">
 </div>
 <div class="participants">
-	<% conversation.get_recipients.each do |recp| %>
+	<% conversation.recipients.each do |recp| %>
 	<%= link_to image_tag(recp.logo.url(:tie), :title=>recp.name, :alt => recp.name), recp.subject %>
 	<% end %>
 </div>
@@ -23,7 +23,7 @@
 
 	<% unless @box.eql?'trash' %>
 	<br>
-	<%= form_tag message_path(conversation.id), :method => :put, :class => "cont_conversation" do %>
+	<%= form_tag conversation_path(conversation.id), :method => :put, :class => "cont_conversation" do %>
 	<div class="block">
 		<div class="form_row">
 			Write your answer:

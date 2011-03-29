@@ -10,16 +10,24 @@
   </tr>
 
 <% current_subject.avatars.each do |avatar| %>
-  <tr>
-	<td><%= image_tag avatar.logo.url(:profile) %></image_tag></td>
-	<td><%= image_tag avatar.logo.url(:tie) %></image_tag></td>
-	<td><% image_tag avatar.logo.url() %></image_tag></td>
-	<td><%= image_tag avatar.logo.url(:actor) %></image_tag></td>
-
-   <td><% link_to 'Show', avatar %></td>
-   <td><% link_to 'Edit', edit_avatar_path(avatar) %></td>
-   <td><%= link_to t('avatar.destroy'), avatar, :confirm => t('avatar.destroy_sure'), :method => :delete %></td>
+<% unless avatar.id.blank? %>
+  <tr>  
+  	<td><%= image_tag avatar.logo.url(:profile) %></image_tag></td>
+  	<td><%= image_tag avatar.logo.url(:tie) %></image_tag></td>
+  	<td><%= image_tag avatar.logo.url(:actor) %></image_tag></td>
+  
+    
+    <td><%= link_to t('avatar.set_default'), avatar, :confirm => t('avatar.set_default_sure'), :method => :put %></td>
+    <td><%= link_to t('avatar.destroy'), avatar, :confirm => t('avatar.destroy_sure'), :method => :delete %></td>
   </tr>
+  <%else%>
+    <tr>
+      <td>
+        <%= t('avatar.no_avatars') %>
+      </td>
+    </tr>
+  
+  <% end %>
 <% end %>
 </table>
 

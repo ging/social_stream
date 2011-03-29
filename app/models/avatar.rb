@@ -9,7 +9,7 @@ class Avatar < ActiveRecord::Base
 	
 	before_post_process :process_precrop
 	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :name,:updating_logo
-	validates_attachment_presence :logo, :if => :uploading_file?
+	validates_attachment_presence :logo, :if => :uploading_file?, :message => I18n.t('avatar.error.no_file')
 		
 	after_validation :precrop_done
 	
@@ -56,7 +56,7 @@ class Avatar < ActiveRecord::Base
    def process_precrop
    	
   	if @name.blank? && (  logo.content_type.present? && !logo.content_type.start_with?("image/"))
-		logo.errors['invalidType'] = "The file you uploaded isn't valid"
+		logo.errors['invalidType'] = I18n.t('avatar.error.no_image_file')
 		return false
 	end
    	  	

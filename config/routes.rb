@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   resources :avatars
 
   resources :messages
+  resources :conversations
   
   resources :ties do
     collection do
