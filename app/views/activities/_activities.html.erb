@@ -6,7 +6,7 @@
 <% content_for :javascript do %>
   <%= render :partial => 'activities/jquery' %>
 	$(document).ready(function() {
-    	$("#tabs").tabs();
+    $("#tabs").tabs();
   });
 <% end -%>
 
@@ -22,10 +22,10 @@
  
 		<div id="tabs" class="block">
 			<ul class="activity_tabs">
-		        <li><a href="#fragment-1"><span><%=h owner.name %></span></a></li>
-		        <li><a href="#fragment-2"><span>Followers</span></a></li>
-		        <li><a href="#fragment-3"><span>Partners</span></a></li>
-	    	</ul>
+        <li><a href="#fragment-1" ><span><%=h owner.name %></span></a></li>
+        <li><a href="<%= activities_path(:wall => true, :section =>"followers")%>" title="fragment-2"><span>Followers</span></a></li>
+        <li><a href="<%= activities_path(:wall => true, :section =>"partners")%>" title="fragment-2"><span>Partners</span></a></li>
+	    </ul>
 			<div id="fragment-1">
 	      <div id="wall">
 		      <% activities = activities.paginate(:page => params[:page]) %>
@@ -34,22 +34,14 @@
 		      <%= will_paginate activities %>
 	      </div>
 	    </div>
-	    <div id="fragment-2">
-	        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-	        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-	    </div>
-	    <div id="fragment-3">
-	        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-	        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-	        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-	    </div>
+			<div id="fragment-2"></div>
 		</div>
 	<%else%>
 		<div id="wall">
 			<% activities = activities.paginate(:page => params[:page]) %>
-		    <%- # should be activities.paginate(:page => params[:page], :count => { :select => 'activity.id', :distinct => true }) but it is not working in Rails 3.0.3 -%>
-		    <%= render activities  %>
-		    <%= will_paginate activities %>
-	      </div>
+      <%- # should be activities.paginate(:page => params[:page], :count => { :select => 'activity.id', :distinct => true }) but it is not working in Rails 3.0.3 -%>
+      <%= render activities  %>
+      <%= will_paginate activities %>
+    </div>
 	<%end%>
 </div>
