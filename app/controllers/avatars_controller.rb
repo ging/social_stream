@@ -8,9 +8,12 @@ class AvatarsController < InheritedResources::Base
       new_logo = Avatar.find(params[:id])
 
       if (new_logo.actor == current_subject.actor)
+        
         actual_logo = current_subject.avatars.active.first
-        actual_logo.active = false
-        actual_logo.save
+        if !actual_logo.blank?
+          actual_logo.active = false
+          actual_logo.save
+        end
   
         new_logo.active = true
         new_logo.save
