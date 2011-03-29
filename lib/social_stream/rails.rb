@@ -43,6 +43,7 @@ module SocialStream
       ApplicationController.helper ActivitiesHelper
       ApplicationController.helper SubjectsHelper
       ApplicationController.helper TiesHelper
+      ApplicationController.helper LocationHelper
     end
 
     initializer "social_stream.inflections" do
