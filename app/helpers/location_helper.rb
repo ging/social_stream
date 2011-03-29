@@ -1,13 +1,13 @@
 module LocationHelper
-	
 	def location(*stack)
-		location_div = '<div id="map_location" class="content_size">' + t('location.base')
-
+		location_body = t('location.base')
 		stack.collect {|level|
-			location_div << t('location.separator') + level
+			location_body << t('location.separator') + level
 		}
-		location_div <<'</div>'
-		return raw location_div
+
+		location_div = capture do
+			render :partial => "location/location", :locals=>{:location_body => location_body}
+		end
 	end
 
 end
