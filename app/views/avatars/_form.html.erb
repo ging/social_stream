@@ -5,9 +5,9 @@
   <div id="error_explanation">
     <h2><%= pluralize(@avatar.errors.count, "error") %> prohibited this logo from being saved:</h2>
     <ul>
-      <% @avatar.errors.full_messages.each do |msg| %>
+      <% @avatar.errors.each do |msg| %><!--.full_messages -->
       <li>
-        <%= msg %>
+        <%= msg[1] %>
       </li>
       <% end %>
     </ul>
