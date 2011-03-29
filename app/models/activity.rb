@@ -123,6 +123,16 @@ class Activity < ActiveRecord::Base
     direct_activity_object.try(:object)
   end
 
+  def title
+    if activity_verb == ActivityVerb["start_following"]
+      return (I18n.t "activity.verb.start_following", :active=>tie.sender.name , :pasive=>tie.receiver.name)
+    elsif activity_verb == ActivityVerb["make_friend"]
+      return (I18n.t "activity.verb.make_friend", :active=>tie.sender.name , :pasive=>tie.receiver.name)
+    elsif activity_verb == ActivityVerb["post"]
+      return tie.sender_subject.name
+    end
+  end
+
   private
 
   # Assign to ties of followers

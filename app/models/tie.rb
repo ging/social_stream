@@ -254,24 +254,26 @@ class Tie < ActiveRecord::Base
     end
   end
   
-  
+   
   def create_activity_after_add_contact
     if self.original
-#      debugger
-#      a = Activity.create :activity_verb => ActivityVerb["make_friend"] , :_activity_tie_id => self.id
-      
-      p = Post.create :text =>
-                      (I18n.t "tie.activity.add_contact", :active=>self.sender.name , :pasive=>self.receiver.name),
-                       :_activity_tie_id => self.id
-    end   
+      if isBidirectional
+         a = Activity.create :_tie => self, :activity_verb => ActivityVerb["make_friend"]
+      else
+        a = Activity.create :_tie => self, :activity_verb => ActivityVerb["start_following"]
+      end
+    end    
   end
   
+  def isBidirectional
+    return self.receiver.ties_to?(self.sender)
+  end
   
   # Values of "receiver.subject_type": "User", "Group"
   def send_message
     if self.original
       if((message!=nil)&&(message!="")&&(receiver.subject_type=="User"))
-        sender.send_message(receiver, message,(I18n.t "tie.private_messages.add_contact", :name=>sender.name))
+        sender.send_message(receiver, message,(I18n.t "activity.verb.start_following_message", :name=>sender.name))
       end 
     end
   end

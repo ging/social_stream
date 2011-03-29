@@ -89,6 +89,30 @@ describe Activity do
     end
   end
 
+  describe "wall" do
+    before do
+      @activity = Factory(:activity)
+    end
+
+    describe "type home" do
+      it "should include activity" do
+        @activity.sender.wall(:home).should include(@activity)
+        @activity.receiver.wall(:home).should include(@activity)
+      end
+    end
+
+    describe "type profile" do
+      it "should include activity" do
+        @activity.sender.wall(:profile, :for => @activity.sender).should include(@activity)
+        @activity.sender.wall(:profile, :for => @activity.receiver).should include(@activity)
+        @activity.sender.wall(:profile,
+                              :for => @activity.receiver,
+                              :relation => @activity.tie.relation).should include(@activity)
+
+      end
+    end
+  end
+
   describe "belonging to friend" do
     before do
       create_activity_assigned_to(Factory(:friend))

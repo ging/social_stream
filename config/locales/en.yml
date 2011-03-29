@@ -5,15 +5,20 @@ en:
   account:
     one: "Account"
   activity:
-    one: "Activity"
-    other: "Activities"
-    input: "What do you do?"
     confirm_delete: "Delete activity?"
     delete: "Delete"
-    to_comment: "Comment"
-    like: "I like"
-    unlike: "Already I do not like"
+    input: "What do you do?"
     last: "Last Activities"
+    like: "I like"
+    one: "Activity"
+    other: "Activities"
+    to_comment: "Comment"
+    unlike: "Already I do not like"
+    verb:
+        start_following: %{active} add %{pasive} as a contact.
+        start_following_message: %{name} add you as a contact.
+        make_friend: %{active} add %{pasive} are now friends.
+        make_friend_message:  %{name} are now your friend.
   avatar:
     crop_image: "Crop the uploaded image"
     crop_submit: "Crop"
@@ -179,8 +184,6 @@ en:
   sign_up: "Sign up"
   socialstream: "SocialStream"
   tie:
-    activity:
-      add_contact: %{active} add %{pasive} as a contact
     add:
       bookmark: "Bookmark"
       contact: "Add contact as"
@@ -192,8 +195,6 @@ en:
     pending:
       other: "Pending requests"
       all: "All"
-    private_messages:
-        add_contact: %{name} add you as a contact
     suggestion:
       one: "Suggestion"
       other: "Suggestions"

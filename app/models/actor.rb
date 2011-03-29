@@ -232,6 +232,10 @@ class Actor < ActiveRecord::Base
     sent_ties.received_by(a)
   end
   
+  def ties_to?(a)
+    ties_to(a).present?
+  end
+  
   # All the ties this actor has with subject that support permission
   def sent_ties_allowing(subject, action, objective)
     return [] if subject.blank?
@@ -267,19 +271,24 @@ class Actor < ActiveRecord::Base
   #
   # Options:
   # :for:: the subject that is accessing the wall
+  # :relation:: show only activities that are attached at this relation level. For example,
+  #             the wall for members of the group.
   #             
   def wall(type, options = {})
-    case type
-    when :home
-      Activity.wall :home, ties
-    when :profile
+    ts = ties
+
+    if type == :profile
       # FIXME: show public activities
       return [] if options[:for].blank?
 
-      Activity.wall :profile, ties.allowing(options[:for], 'read', 'activity')
-    else
-      raise "Wall type not supported: #{ type }"
+      ts = ts.allowing(options[:for], 'read', 'activity')
     end
+
+    if options[:relation].present?
+      ts = ts.related_by(Relation.normalize(options[:relation], :sender => self))
+    end
+
+    Activity.wall type, ts
   end
   
   def logo
