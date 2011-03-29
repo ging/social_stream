@@ -1,0 +1,37 @@
+<%= div_for(conversation, :class => read_class) do %>
+<div class="notification">
+</div>
+<div class="sender_photo">
+	<%= link_to image_tag(conversation.last_sender.logo.url(:actor),
+	:title => conversation.last_sender.name, :alt => conversation.last_sender.name),
+	conversation.last_sender.subject %>
+</div>
+<div class="content_left">
+	<div class="sender_name">
+		<%= link_to conversation.last_sender.name, conversation.last_sender.subject %>
+	</div>
+	<div class="date">
+		<%= t('time.ago', :time => time_ago_in_words(conversation.updated_at)) %>
+	</div>
+</div>
+<div class="content_right">
+	<div class="subject">
+		<%= link_to(truncate(conversation.subject, :length => 55), conversation_path(conversation.id,:box => @box,:page => params[:page])) %>
+	</div>
+	<div class="briefing">
+		<%= raw(truncate(strip_tags(conversation.last_message.body), :length => 50)) %>
+	</div>
+	<div class="clearfloat">
+	</div>
+</div>
+<% unless @box.eql?'trash' %>
+<div class="action">
+	<%= link_to(image_tag('btn/btn_delete.png', :atl => "Delete", :title => "Delete"),
+	conversation_path(conversation, :location => @box, :box => @box, :page => params[:page]),
+	:confirm => 'Do you want to move "' + conversation.subject + '" to trash?',
+	:method => :delete, :remote => true) %>
+</div>
+<% end %>
+<div class="clearfloat">
+</div>
+<% end %>

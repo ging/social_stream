@@ -1,0 +1,31 @@
+<%= div_for(message, :class => read_class) do%>
+<div class="sender_photo">
+	<%= link_to image_tag(message.sender.logo.url(:actor),
+	:title => message.sender.name, :alt => message.sender.name),
+	message.sender.subject %>
+</div>
+<div class="container">
+	<div class="header">
+		<div class="content_left">
+			<div class="sender_name">
+				<%= link_to message.sender.name, message.sender.subject %>
+			</div>
+			<div class="date">
+				<%= t('time.ago', :time => time_ago_in_words(message.updated_at)) %>
+			</div>
+		</div>
+		<div class="content_right">
+			<div class="subject">
+				<%= truncate(message.subject, :length => 70) %>
+			</div>
+		</div>
+		<div class="clearfloat">
+		</div>
+	</div>
+	<div class="body">
+		<%= raw(message.body) %>
+	</div>
+</div>
+<div class="clearfloat">
+</div>
+<% end %>

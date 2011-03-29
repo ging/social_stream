@@ -1,0 +1,18 @@
+
+
+<%= render :partial => 'location' %>
+<br class="clearfloat" />
+<div class="space_center">
+</div>
+<div id="new_message">
+	<% if @box.present? %>
+    <%= link_to 'Back', conversations_path(:box => @box, :page => params[:page]), :remote => true %>
+	<% else %>
+    <%= link_to 'Back', conversations_path(:page => params[:page]), :remote => true %>
+	<% end %>
+</div>
+<div class="space_center">
+</div>
+<div class="conversation_full">  
+ <%= render :partial => 'conversation_full', :locals =>{:conversation => @conversation} %>
+</div>
