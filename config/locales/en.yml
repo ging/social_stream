@@ -27,6 +27,7 @@ en:
     new_short: "New avatar"
     no_avatars: "You haven't any avatar, plesase create a new one."
     preview: "Preview"
+    profile_change: "Change your avatar"
     set_default: "Set as default"
     set_default_sure: "Are you sure you wan't to set this avatar as default?"
     upload: "Upload"
