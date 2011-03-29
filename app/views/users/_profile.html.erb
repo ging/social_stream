@@ -157,7 +157,8 @@
     </div>
   </div>
 </div>
-<% if @profile.actor == current_subject.actor%>
+<% if (!@profile.blank?) && (!current_subject.blank?)%>
+  <% if (@profile.actor == current_subject.actor) %>
   <div class="space_center"></div>
   <div class="block" id="avatar_info">
     <div class="header">
@@ -173,6 +174,7 @@
       </div>
     </div>
   </div>
+  <% end %>
 <% end %>
 <div class="space_center"></div>
 <% if (@profile.to_param==current_user.to_param and @profile.authentication_token) %>
