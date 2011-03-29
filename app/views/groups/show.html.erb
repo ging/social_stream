@@ -13,6 +13,4 @@
 <div class="space_center">
 </div>
 
-<%= render :partial => "activities/activities",
-           :locals => { :activities => @group.wall(:profile, :for => current_subject),
-                        :owner => @group } %>
+<%= render :partial => 'activities/walls', :locals => { :owner => @group } %>

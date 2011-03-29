@@ -1,8 +1,9 @@
-class ActivitiesController < ApplicationController
+class ActivitiesController < InheritedResources::Base
+  belongs_to_subjects
+
   def index
-    if params[:wall].present?
-      render :partial => 'wall', :section => params[:section] 
-      return
+    index! do
+      format.html { render(:partial => 'wall') if params[:wall].present? }
     end
   end
 end

@@ -8,6 +8,26 @@ module SocialStream
         helper_method :current_subject
       end
 
+      module ClassMethods
+        # Add to controllers that have nested subjects. Examples are:
+        #
+        #   class ProfilesController < InheritedResources::Base
+        #     belongs_to_subjects(:singleton => true) # provides /users/demo/profile
+        #   end
+        #
+        #   class ActivitiesController < InheritedResources::Base
+        #     belongs_to_subjects # provides /users/demo/activities
+        #   end
+        #
+        def belongs_to_subjects(options = {})
+          opts = { :polymorphic => true, :finder => :find_by_slug! }.update(options)
+
+          args = SocialStream.subjects + [ opts ]
+
+          belongs_to *args
+        end
+      end
+
       module InstanceMethods
         # Current subject represented by the user. Defaults to the own user
         def current_subject

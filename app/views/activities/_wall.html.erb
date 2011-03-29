@@ -1,7 +1,6 @@
-<% if params[:section].eql?("followers")%>
-  <h1>Followers</h1>
-<%elsif params[:section].eql?("partners")%>
-  <h1>Partners</h1>
-<%else%>
-  <h1>Other thing</h1>
-<%end%>
+<%= render :partial => "activities/activities",
+           :locals  => { :owner      => parent,
+                         :activities => parent.wall(:profile,
+                                                    :for      => current_subject,
+                                                    :relation => (params[:section].present? ? params[:section].to_i : nil)) } %>
+
