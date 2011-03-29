@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   SocialStream.subjects.each do |actor|
     resources actor.to_s.pluralize do
       resource :profile
+      resources :activities
     end
   end
 

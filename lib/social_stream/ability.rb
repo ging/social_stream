@@ -3,6 +3,7 @@ module SocialStream
     include CanCan::Ability
 
     def initialize(user)
+      # Activity Objects
       (SocialStream.objects - [ :actor ]).map{ |obj|
         obj.to_s.classify.constantize
       }.each do |klass|

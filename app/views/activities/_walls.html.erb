@@ -1,0 +1,21 @@
+<% content_for :javascript do %>
+  $("#tabs").tabs();
+<% end %>
+
+<div id="tabs" class="block">
+  <ul class="activity_tabs">
+    <li><%= link_to "<span>#{ h owner.name }</span>".html_safe, "#fragment-1" %></li>
+
+    <% owner.relations.sort.each do |r| %>
+      <li><%= link_to "<span>#{ h r.name }</span>".html_safe,
+                      polymorphic_path([ owner, Activity.new ], :section => r.id, :title => 'fragment-2') %></li>
+    <% end %>
+  </ul>
+
+  <div id="fragment-1">
+    <%= render :partial => 'activities/wall', :locals => { :parent => owner } %>
+  </div>
+  <div id="fragment-2"></div>
+</div>
+
+
