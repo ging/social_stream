@@ -13,6 +13,7 @@
 <%= render :partial => "users/groups",
            :locals  => { :user => @user } %>
 
-<%= render :partial => "activities/activities",
-                         :locals  => { :activities => @user.wall(:profile, :for => current_subject),
+<%= render :partial => "activities/index",
+           :locals  => { :activities => @user.wall(:profile, :for => current_subject).
+                                              paginate(:page => params[:page]),
                          :owner => @user } %>
