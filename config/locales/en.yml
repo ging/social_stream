@@ -193,7 +193,9 @@ en:
       like: "Like"
       partner: "Add Partner"
     category:
-     new: "New category"
+      new: "New category"
+    edit:
+      contact: "Contact: %{type}"
     pending:
       other: "Pending requests"
       all: "All"
