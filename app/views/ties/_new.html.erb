@@ -1,11 +1,5 @@
 <div class="dialog_add_tie" id="new_tie">
     <div class="content_add_user" >
-      <div class="tie_logo">
-        <%= link_to image_tag(@tie.receiver_subject.logo.url(:profile),
-                              :size => "100x100",
-                              :alt => @tie.receiver_subject.name),
-                     @tie.receiver_subject %>
-      </div>
       <div class="activity_add_ties">
         <div><%= t('message.one')+":" %><br />
   
