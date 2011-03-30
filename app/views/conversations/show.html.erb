@@ -10,7 +10,7 @@
 <% end %>
 
 <% content_for :javascript do %>
-//$('.cont_conversation').validate(); //***************************************************************************** UNCOMMENT
+$('.cont_conversation').validate();
 <% unless @box.eql?'trash' %>
 $('#body').ckeditor(
 	function(){

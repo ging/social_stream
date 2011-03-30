@@ -18,7 +18,7 @@
 	<% @receipts.each do |receipt| %>
 	<% message = receipt.message %>
 	<% read_class = message.is_unread?(@actor) ? 'unread' : '' %>
-	<%= render :partial => 'message', :object => message, :locals => {:read_class => read_class} %>
+	<%= render :partial => "messages/message",:object => message, :locals => {:read_class => read_class} %>
 	<% end %>
 
 	<% unless @box.eql?'trash' %>
