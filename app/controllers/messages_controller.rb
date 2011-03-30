@@ -32,14 +32,16 @@ class MessagesController < ApplicationController
 	def create
 		@actor = current_subject
 		@recipients = Array.new
-		params[:_recipients].each do |recp_id|
-			recp = Actor.find_by_id(recp_id)
-			next if recp.nil?
-			@recipients << recp
+		if params[:_recipients].present?
+			params[:_recipients].each do |recp_id|
+				recp = Actor.find_by_id(recp_id)
+				next if recp.nil?
+				@recipients << recp
+			end
 		end
-
-		if (mail = @actor.send_message(@recipients, params[:body], params[:subject]))
-			@conversation = mail.conversation
+		@receipt = @actor.send_message(@recipients, params[:body], params[:subject])
+		if (@receipt.errors.blank?)
+			@conversation = @receipt.conversation
 			redirect_to conversation_path(@conversation, :box => :sentbox)
 		else
 			render :action => :new

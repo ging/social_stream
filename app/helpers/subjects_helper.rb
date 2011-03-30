@@ -1,4 +1,9 @@
 module SubjectsHelper
+  # Return a link to this subject with the name
+  def link_name(subject, options = {})
+    link_to subject.name, subject, options
+  end
+
   # Define the toolbar content for your view. There are two typical cases, depending on the value of
   # options[:profile]
   # * If present, render the profile menu for the {SocialStream::Models::Subject subject}

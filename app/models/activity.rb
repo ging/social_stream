@@ -10,6 +10,12 @@
 # There are two types of wall, :home and :profile. Check {Actor#wall} for more information
 #
 class Activity < ActiveRecord::Base
+  # The direction of the sender and receiver subjects compared with the attached tie
+  SUBJECT_DIRECTIONS = {
+    :direct  => %w(follow make-friend),
+    :inverse => %w(like post update)
+  }
+
   has_ancestry
 
   belongs_to :activity_verb
@@ -59,32 +65,36 @@ class Activity < ActiveRecord::Base
     self.activity_verb = ActivityVerb[name]
   end
 
-  # The author of the activity is the receiver of the tie
+  # The {Actor} author of this activity
   #
-  # This method provides the actor. Use sender_subject for the subject (user, group, etc..)
+  # This method provides the {Actor}. Use {#sender_subject} for the {SocialStream::Models::Subject Subject}
+  # ({User}, {Group}, etc..)
   def sender
-    tie.receiver
+    direct? ? tie.sender : tie.receiver
   end
 
-  # The author of the activity is the receiver of the tie
+  # The {SocialStream::Models::Subject Subject} author of this activity
   #
-  # This method provides the subject (user, group, etc...). Use sender for the actor.
+  # This method provides the {SocialStream::Models::Subject Subject} ({User}, {Group}, etc...).
+  # Use {#sender} for the {Actor}.
   def sender_subject
-    tie.receiver_subject
+    direct? ? tie.sender_subject : tie.receiver_subject
   end
 
-  # The wall where the activity is shown belongs to the sender of the tie
+  # The wall where the activity is shown belongs to receiver
   #
-  # This method provides the actor. Use sender_subject for the subject (user, group, etc..)
+  # This method provides the {Actor}. Use {#receiver_subject} for the {SocialStream::Models::Subject Subject}
+  # ({User}, {Group}, etc..)
   def receiver
-    tie.sender
+    direct? ? tie.receiver : tie.sender
   end
 
-  # The wall where the activity is shown belongs to the sender of the tie
+  # The wall where the activity is shown belongs to the receiver
   #
-  # This method provides the subject (user, group, etc...). Use sender for the actor.
+  # This method provides the {SocialStream::Models::Subject Subject} ({User}, {Group}, etc...).
+  # Use {#receiver} for the {Actor}.
   def receiver_subject
-    tie.sender_subject
+    direct? ? tie.receiver_subject : tie.sender_subject
   end
 
   # The comments about this activity
@@ -123,14 +133,16 @@ class Activity < ActiveRecord::Base
     direct_activity_object.try(:object)
   end
 
-  def title
-    if activity_verb == ActivityVerb["start_following"]
-      return (I18n.t "activity.verb.start_following", :active=>tie.sender.name , :pasive=>tie.receiver.name)
-    elsif activity_verb == ActivityVerb["make_friend"]
-      return (I18n.t "activity.verb.make_friend", :active=>tie.sender.name , :pasive=>tie.receiver.name)
-    elsif activity_verb == ActivityVerb["post"]
-      return tie.sender_subject.name
-    end
+  # The title for this activity in the stream
+  def title view
+    case verb
+    when "follow", "make-friend"
+      I18n.t "activity.verb.#{ verb }.title",
+             :subject => view.link_name(sender_subject),
+             :contact => view.link_name(receiver_subject)
+    when "post"
+      view.link_name sender_subject
+    end.html_safe
   end
 
   private
@@ -156,5 +168,23 @@ class Activity < ActiveRecord::Base
     return if parent.direct_object.blank?
 
     activity_objects << parent.direct_activity_object
+  end
+
+  private
+
+  # The {#sender} and the {#receiver} of the {Activity} depends on its {ActivityVerb}
+  #
+  # Contact activities such as make-friend or follow are direct. They have the same sender
+  # and receiver as their tie. On the other hand, post activities are inverse. The sender of
+  # the activity is the receiver of the tie and the receiver of the activity is the sender of
+  # the tie
+  def direct?
+    if SUBJECT_DIRECTIONS[:direct].include?(verb)
+      true
+    elsif SUBJECT_DIRECTIONS[:inverse].include?(verb)
+      false
+    else
+      raise "Unknown direction for verb #{ verb }"
+    end
   end
 end

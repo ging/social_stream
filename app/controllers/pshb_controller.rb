@@ -15,6 +15,8 @@ class PshbController < ApplicationController
       # requested unsubscription by someone in this node
       # and delete permissions/remote actor if necessary
     end  
+
+    logger.debug request.body.read
   end
   
   require "net/http"
@@ -23,8 +25,8 @@ class PshbController < ApplicationController
   def pshb_subscription_request#(topic,hub,mode)
     t = Thread.new do
       #test
-      hub = 'http://localhost:4567/' # last '/' is mandatory!
-      topic = 'http://localhost:3000/api/user/demo/home'
+      hub = 'http://138.4.7.113:4567/' # last '/' is mandatory!
+      topic = 'http://138.4.7.69:3000/api/user/demo/home.atom'
       mode = 'subscribe'
       #
       uri = URI.parse(hub)   
@@ -32,19 +34,22 @@ class PshbController < ApplicationController
                                             'hub.mode'     => mode,
                                             'hub.topic'    => topic,
                                             'hub.verify'   => 'sync'})                                            
+	puts response.body
       #TO-DO: process 4XX response.status                                      
     end                                                                                
   end
   
   def pshb_publish#(topic,hub)
+    t = Thread.new do
       #test params
-      hub = 'http://localhost:4567/' # last '/' is mandatory!
-      topic = 'http://localhost:3000/api/user/demo/home'
+      hub = 'http://138.4.7.113:4567/' # last '/' is mandatory!
+      topic = 'http://138.4.7.69:3000/api/user/demo/home.atom'
       #
       uri = URI.parse(hub)
       response = Net::HTTP::post_form(uri,{ 'hub.mode' => 'publish',
                                             'hub.url'  => topic})
       #TO-DO: process 4XX response.status                                      
+    end
   end  
   
 end

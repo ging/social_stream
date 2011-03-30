@@ -15,10 +15,12 @@ en:
     to_comment: "Comment"
     unlike: "Already I do not like"
     verb:
-        start_following: %{active} add %{pasive} as a contact.
-        start_following_message: %{name} add you as a contact.
-        make_friend: %{active} add %{pasive} are now friends.
-        make_friend_message:  %{name} are now your friend.
+        follow:
+          title: "%{subject} added %{contact} as contact."
+          message: "%{name} added you as contact."
+        make-friend:
+          title: "%{subject} and %{contact} are now connected."
+          message: "%{name} also added you as contact."
   avatar:
     crop_image: "Crop the uploaded image"
     crop_submit: "Crop"
@@ -191,7 +193,9 @@ en:
       like: "Like"
       partner: "Add Partner"
     category:
-     new: "New category"
+      new: "New category"
+    edit:
+      contact: "Contact: %{type}"
     pending:
       other: "Pending requests"
       all: "All"

@@ -102,7 +102,7 @@ class Tie < ActiveRecord::Base
   before_validation :find_relation
 
   after_create :complete_weak_set
-  after_create :create_activity_after_add_contact
+  after_create :create_activity
   after_create :send_message
 
   def relation_name
@@ -127,6 +127,11 @@ class Tie < ActiveRecord::Base
     sender_id == receiver_id
   end
 
+  # Is there any tie from receiver to sender?
+  def replied?
+    receiver.ties_to?(sender)
+  end
+ 
   # The set of ties between sender and receiver
   #
   # Options::
@@ -254,29 +259,20 @@ class Tie < ActiveRecord::Base
     end
   end
   
-   
-  def create_activity_after_add_contact
-    if self.original
-      if isBidirectional
-         a = Activity.create :_tie => self, :activity_verb => ActivityVerb["make_friend"]
-      else
-        a = Activity.create :_tie => self, :activity_verb => ActivityVerb["start_following"]
-      end
-    end    
+  def create_activity
+    return if ! original? || reflexive?
+
+    Activity.create! :_tie => self, :activity_verb => ActivityVerb[contact_verb]
   end
-  
-  def isBidirectional
-    return self.receiver.ties_to?(self.sender)
-  end
-  
-  # Values of "receiver.subject_type": "User", "Group"
+ 
+  # Send a message to the receiver of the tie
   def send_message
-    if self.original
-      if((message!=nil)&&(message!="")&&(receiver.subject_type=="User"))
-        sender.send_message(receiver, message,(I18n.t "activity.verb.start_following_message", :name=>sender.name))
-      end 
+    if original? && message.present?
+      sender.send_message(receiver, message, I18n.t("activity.verb.#{ contact_verb }.message", :name => sender.name))
     end
   end
-  
-  
+
+  def contact_verb
+    replied? ? "make-friend" : "follow"
+  end
 end

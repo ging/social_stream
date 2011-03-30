@@ -16,9 +16,7 @@
   </div>
 
   <div id="wall">
-    <% activities = activities.paginate(:page => params[:page]) %>
-      <%- # should be activities.paginate(:page => params[:page], :count => { :select => 'activity.id', :distinct => true }) but it is not working in Rails 3.0.3 -%>
-      <%= render activities  %>
-      <%= will_paginate activities %>
+    <%= render activities  %>
+    <%= will_paginate activities %>
   </div>
 </div>
