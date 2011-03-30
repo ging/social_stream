@@ -1,10 +1,10 @@
 <h2>New Message</h2>
 <%= form_tag messages_path, :method => :post , :class => "new_message" do %>
-<% if @conversation and @conversation.errors.any? %>
-<div id="notice">
-	<h2><%= pluralize(@conversation.errors.count, "error") %> prohibited this message from being sent:</h2>
+<% if @receipt and @receipt.errors.any? %>
+<div id="error">
+	<h2><%= pluralize(@receipt.errors.count, "error") %> prohibited this message from being sent:</h2>
 	<ul>
-		<% @conversation.errors.full_messages.each do |msg| %>
+		<% @receipt.errors.full_messages.each do |msg| %>
 		<li>
 			<%= msg %>
 		</li>

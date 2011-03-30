@@ -15,7 +15,7 @@ class ConversationsController < ApplicationController
 		@conversation = Conversation.find_by_id(params[:id])
 		if @conversation.nil? or !@conversation.is_participant?(@actor)
 			redirect_to conversations_path(:box => @box)
-			return
+		return
 		end
 		if @box.eql? 'trash'
 		@receipts = @conversation.receipts(@actor).trash
@@ -50,10 +50,8 @@ class ConversationsController < ApplicationController
 		end
 
 		if params[:reply_all].present?
-			if params[:body].present?
-				last_receipt = @conversation.receipts(@actor).last
-				@actor.reply_to_all(last_receipt, params[:body])
-			end
+			last_receipt = @conversation.receipts(@actor).last
+			@receipt = @actor.reply_to_all(last_receipt, params[:body])
 		end
 
 		if @box.eql? 'trash'
@@ -93,7 +91,7 @@ class ConversationsController < ApplicationController
 	def get_mailbox
 		@mailbox = current_subject.mailbox
 	end
-	
+
 	def get_actor
 		@actor = Actor.normalize(current_subject)
 	end
