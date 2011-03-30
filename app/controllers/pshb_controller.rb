@@ -23,8 +23,8 @@ class PshbController < ApplicationController
   def pshb_subscription_request#(topic,hub,mode)
     t = Thread.new do
       #test
-      hub = 'http://localhost:4567/' # last '/' is mandatory!
-      topic = 'http://localhost:3000/api/user/demo/home'
+      hub = 'http://192.168.211.1:4567/' # last '/' is mandatory!
+      topic = 'http://192.168.211.166:3000/api/user/demo/home'
       mode = 'subscribe'
       #
       uri = URI.parse(hub)   
@@ -38,8 +38,8 @@ class PshbController < ApplicationController
   
   def pshb_publish#(topic,hub)
       #test params
-      hub = 'http://localhost:4567/' # last '/' is mandatory!
-      topic = 'http://localhost:3000/api/user/demo/home'
+      hub = 'http://192.168.211.1:4567/' # last '/' is mandatory!
+      topic = 'http://192.168.211.166:3000/api/user/demo/home'
       #
       uri = URI.parse(hub)
       response = Net::HTTP::post_form(uri,{ 'hub.mode' => 'publish',
