@@ -2,7 +2,10 @@
 <%= stylesheet_link_tag "messages.css", :media => "screen, projection" %>
 <% end %>
 
-<%= render :partial => 'location' %>
+<%= location(
+	link_to(image_tag("btn/message_" + @box + ".png", :class => "menu_icon")+t('message.' + @box), conversations_path(:box => @box),:remote => true)
+) %>
+
 
 <% content_for :javascript do %>
   $('.pagination a').attr('data-remote', 'true');

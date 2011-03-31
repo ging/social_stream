@@ -20,16 +20,18 @@ body{font-size:1.0em;  color:#2A3890;  background-color:#ffffff; }
 margin-top: auto; margin-bottom:auto;}
 
 
- /*********** Errors SECTION *********************/
-#notice {  padding:2px;  color:#1F4A75; font-weight:bold; font-size:1.3em;  display:block; text-align:center;}
+ /*********** Notices SECTION *********************/
 .error, .notice, .success {padding:.8em;margin-bottom:1em;}
-.error{padding:.8em;margin-bottom:1em;color:red;}
-
+.notice {color:#1F4A75; font-weight:bold; font-size:1.3em; display:block; text-align:center;}
+.error{color:red;}
+.success {color: #088A08}
 
 /************Forms SECTION **************/
 input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:1.0em;  line-height:135%;
   margin-right:4px;	color:white;	padding:1px;}
-
+textarea.new_tie_text_area{ width:100%; height: 100px; color: #2A3890;}
+.colum_field_title{ text-align: center; }
+.select_relations select{ font-size: 12px; color: white; background-color:#1F4A75;} 
 
 /************ Forms - Buttons  SECTION ***************************/
 .myButton{ cursor:pointer;
@@ -82,6 +84,7 @@ input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:1.0
 .block .row {	display: block;}
 .block .title{ display:inline-block; }
 .block .sub-block{	display: inline-block;  padding-left:3px; width:70%; text-align:left;}
+.block .close_add_contact {  float:right;  vertical-align:top; margin-right: 1%;  }
 
 /******BLOCK TAB CONTENT  SECTION********/
 .block .tab { 	margin-top: 2px;	background: #fff;	/*border-top: thin solid #D4E4EA;*/
@@ -106,6 +109,12 @@ input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:1.0
 .block .form_field{  display:inline-block;  padding: 0px;  width:73%;}
 .block .form_row {	display: block; padding:5px; padding-left:20px; }
 .block .label{  display:inline-block;  width:49%; }
+.block .two_columns_container {	margin-top: 5px; }
+.block .form_column_left {	display: block; padding:5px; padding-left:20px; float: left; width:60%; }
+.block .form_column_right {	display: block; padding:5px; padding-left:20px; float:right; width:30%; }
+.block .form_bottom { display: block; padding:5px; padding-left:20px; clear:both; text-align: center; }
+.block .select_relations{ padding-top:20px; text-align: center; }
+
 
 /********* Links SECTION **********/
 .tie_link a{  text-decoration:none;}

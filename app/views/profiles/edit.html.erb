@@ -1,0 +1,168 @@
+<% toolbar :profile => current_subject %>
+
+<% content_for :sidebar do %>
+  <%= render :partial => "#{ current_subject.class.to_s.tableize }/sidebar_index" %>
+<% end %>
+
+<% content_for :headers do %>
+  <%= stylesheet_link_tag "jquery-ui", :media => "screen, projection" %>
+  <%= javascript_include_tag 'jquery.validate' %>
+<% end %>
+
+<% content_for :javascript do %>
+  $(function() {
+	   $(".edit_profile").validate();
+  });
+<% end %>
+
+<%= form_for(@profile, :url => [current_subject, :profile], :remote => true) do |f| %>
+
+<div class="block">
+  <% if !params[:section].present? or params[:section].eql?("about_me") %>
+		<% content_for :javascript do %>
+	    $(function () {
+	        $( "#profile_birthday" ).datepicker({ yearRange: '1900:<%= Time.now.utc.to_date.year%>',
+	                                          changeYear: true, maxDate: '+0d', defaultDate: '-30y'});
+	        $("#personal_info").addClass('section_highlight');
+	
+	    });
+	  <% end %>
+    <div class="row">
+	    <div class="form_row">
+	        <h2><%=t('profile.' + current_subject.class.to_s.downcase + '.info')%></h2>
+	    </div>
+	
+		  <%= f.fields_for :actor do |actor_form| %>
+		    <div class="form_row">
+		      <div class="form_label">
+		       <%= f.label t('actor.name') %>
+		      </div>
+		      <div class="form_field">
+		       <%= actor_form.text_field :name, :class => "required form_tag"  %>
+		      </div>
+		    </div>
+      <%end%>
+
+    </div>
+		
+	  <div class="form_row">
+	    <div class="form_label">
+	      <%= f.label t('profile.organization')%>
+	    </div>
+	    <div class="form_field">
+	      <%= f.text_field :organization , :class => "form_tag" %>
+	    </div>
+	  </div>
+
+	  <div class="form_row">
+	    <div class="form_label">
+	      <%= f.label t('profile.' + current_subject.class.to_s.downcase + '.birthday')%>
+	    </div>
+	    <div class="form_field">
+	      <%= f.text_field( :birthday , :class => "date form_tag") %>
+	    </div>
+	  </div>
+
+	  <div class="form_row">
+	    <div class="form_label">
+	      <%= f.label t('profile.actualcity')%>
+	    </div>
+	    <div class="form_field">
+	      <%= f.text_field :city,  :class => "form_tag" %>
+	    </div>
+	  </div>
+
+	  <div class="form_row">
+	    <div class="form_label">
+	      <%= f.label t('profile.country') %>
+	    </div>
+	    <div class="form_field">
+	      <%= f.text_field :country,  :class => "form_tag" %>
+	    </div>
+	  </div>
+
+	  <div class="form_row form_label">
+	    <%= f.label t('profile.' + current_subject.class.to_s.downcase + '.about') %>
+	  </div>
+	  <div class="form_row">
+	    <%= f.text_area :description, :maxlength => 200, :rows => 10, :class => "form_tag_long" %>
+	  </div>
+  <% end %>
+  <% if !params[:section].present? or params[:section].eql?("contact_info") %>
+
+    <% content_for :javascript do %>
+      $(function() {
+          $("#contact_info").addClass('section_highlight');
+      });
+    <% end %>
+
+    <div class="form_row">
+        <h2><%=t('profile.contact')%></h2>
+    </div>
+
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label t('profile.phone')%>
+      </div>
+      <div class="form_field">
+        <%= f.text_field :phone, :class => "phone form_tag" %>
+      </div>
+    </div>
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label t('profile.mobile') %>
+      </div>
+      <div class="form_field">
+        <%= f.text_field :mobile, :class => "phone form_tag" %>
+      </div>
+    </div>
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label t('profile.fax') %>
+      </div>
+      <div class="form_field">
+        <%= f.text_field :fax, :class => "phone form_tag" %>
+      </div>
+    </div>
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label t('profile.address') %>
+      </div>
+      <div class="form_field">
+        <%= f.text_field :address, :class => "form_tag" %>
+      </div>
+    </div>
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label t('profile.website')%>
+      </div>
+      <div class="form_field">
+        <%= f.text_field :website, :class => "url form_tag" %>
+      </div>
+    </div>
+  <% end %>
+  <% if !params[:section].present? or params[:section].eql?("my_experience") %>
+    <% content_for :javascript do %>
+      $(function() {
+          $("#experience_info").addClass('section_highlight');
+      });
+    <% end %>
+    <div class="form_row">
+        <h2><%=t('profile.' + current_subject.class.to_s.downcase + '.experience')%></h2>
+    </div>
+    <div class="row center">
+      <%= f.text_area :experience, :maxlength => 500, :rows => 10, :class => "form_tag_long" %>
+    </div>
+  <% end %>
+
+  <% if params[:section].present? %>
+  <%= hidden_field_tag("section", params[:section]) %>
+  <% end %>
+  <div class="form_row space_center">
+    <%= f.submit "Update", :class => "button" %>&nbsp;
+    <button class="button" onclick="window.location.href='<%= polymorphic_path(current_subject) %>';">Cancel</button>
+  </div>
+
+<% end %>
+</div>
+

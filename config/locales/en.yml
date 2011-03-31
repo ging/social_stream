@@ -1,4 +1,6 @@
 en:
+  actor:
+    name: "Name"
   action:
     send: "Send"
     accept: "Accept"
@@ -29,7 +31,7 @@ en:
     error:
       no_file: "You have to select a file"
       no_image_file: "The file you uploaded isn't valid, it must be an image file"
-    list: "You have this avatars"
+    list: "You have these avatars"
     new: "Create a new avatar"
     new_short: "New avatar"
     no_avatars: "You haven't any avatar, plesase create a new one."
@@ -49,7 +51,7 @@ en:
     new:
       link: "+ Add contact"
       title: "Add %{name} as contact"
-      submit: "+ Add contact"
+      submit: "Add Contact"
   copyright: "2010 Copyright - All rights reserved"
   days: Days
   delete:
@@ -88,21 +90,21 @@ en:
       send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
       unlocked: 'Your account was successfully unlocked. You are now signed in.'
   edit:
-    aboutme: "About me"
-    actualcity: "Actual City"
-    address: "Address"
-    birthday: "BirthDay"
-    contact: "Contact information"
-    email: "E-mail"
-    experience: "Experience"
-    fax: "Fax"
-    group_info: "Group information"
-    mobile: "Mobile"
-    organization: "Organization"
-    personal_info: "Personal information"
-    phone: "Phone"
+    aboutme: "About me --NOTE: use profile.<class>.about"
+    actualcity: "Actual City --NOTE: use profile.actualcity"
+    address: "Address --NOTE: use profile.address"
+    birthday: "BirthDay --NOTE: use profile.<class>.birthday"
+    contact: "Contact information --NOTE: use profile.contact"
+    email: "E-mail --NOTE: use profile.email"
+    experience: "Experience --NOTE: use profile.experience"
+    fax: "Fax --NOTE: use profile.fax"
+    group_info: "Group information --NOTE: use profile.<class>.info"
+    mobile: "Mobile --NOTE: use profile.mobile"
+    organization: "Organization --NOTE: use profile.organization"
+    personal_info: "Personal information --NOTE: use profile.<class>.info"
+    phone: "Phone --NOTE: use profile.phone"
     profile: "Edit profile"
-    website: "Website"
+    website: "Website --NOTE: use profile.website"
   forgot_password: "Forgot you password?"
   frontpage:
     collaborate:
@@ -169,6 +171,28 @@ en:
     confirm_delete: "Delete post?"
   profile:
     one: "Profile"
+    age: "Age"
+    group:
+      about: "About us"
+      birthday: "Anniversary"
+      experience: "Area of expertise"
+      info: "Group information"
+    user:
+      about: "About me"
+      birthday: "Birthday"
+      experience: "Experience"
+      info: "Personal information"
+    actualcity: "Actual City"
+    address: "Address"
+    contact: "Contact information"
+    country: "Country"
+    email: "E-mail"
+    fax: "Fax"
+    mobile: "Mobile"
+    organization: "Organization"
+    phone: "Phone"
+    profile: "Edit profile"
+    website: "Website"      
   public:
     other: "Everybody"
   representation:
@@ -196,6 +220,8 @@ en:
       new: "New category"
     edit:
       contact: "Contact: %{type}"
+    new:
+      title: "Add New Contact"
     pending:
       other: "Pending requests"
       all: "All"

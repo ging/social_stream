@@ -1,19 +1,16 @@
 
-
-
-  if ($("#notice").length == 0){
-
-    $("#content").prepend('<div id="notice"></div>');
-    
+  if ($("#profile_notice").length == 0){
+    $("#content").prepend('<div id="profile_notice" class="notice"></div>');  
   } 
 	
-<% if @user.valid? %>
+<% if @profile.valid? %>
 
-  $("#notice").html("<h2>Form Submitted!</h2><br/>");
-	$("#notice").removeClass('error_explanation');
-  $("#notice").addClass('confirmed');
-  $("#sidebarContent").replaceWith("<%= escape_javascript(render(:partial => 'sidebar_show'))%>");
+  $("#profile_notice").html("<h2>Form Submitted!</h2><br/>");
+	$("#profile_notice").removeClass('error');
+  $("#profile_notice").addClass('success');
 	
+  /*$("#sidebarContent").replaceWith("<%#= escape_javascript(render(:partial => 'sidebar_show'))%>");*/
+
   $("#contact_info").addClass('section_normal');
   $("#experience_info").addClass('section_normal');
 	$("#personal_info").addClass('section_normal');
@@ -34,10 +31,10 @@
 	<%end%>
 	
 <% else %>
-  $("#notice").html("<h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>"
-	 +"<ul><% @user.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></ul><br/>");
-	$("#notice").removeClass('confirmed');
-	$("#notice").addClass('error_explanation'); 
+  $("#profile_notice").html("<h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>"
+	 +"<ul><% @profile.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></ul><br/>");
+	$("#profile_notice").removeClass('success');
+	$("#profile_notice").addClass('error'); 
 
 <% end %>
 
