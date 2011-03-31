@@ -16,11 +16,11 @@
   	<td style="margin-left: 5px;">
   	<% if avatar.active%>
   	  <%= image_tag avatar.logo.url(:profile), :style => "border: 7px solid #e0eef5" %></image_tag>
-  	   <td><%= link_to t('avatar.destroy'), avatar, :confirm => t('avatar.destroy_sure'), :method => :delete %></td>
+  	   <td><%= link_to image_tag("btn/close.png", :class => "menu_icon"), avatar, :confirm => t('avatar.destroy_sure'), :method => :delete %></td>
   	  <td></td>
     <% else %>
       <%= image_tag avatar.logo.url(:profile), :style => "margin: 7px" %></image_tag>
-       <td><%= link_to t('avatar.destroy'), avatar, :confirm => t('avatar.destroy_sure'), :method => :delete %></td>
+       <td><%= link_to image_tag("btn/close.png"), avatar, :confirm => t('avatar.destroy_sure'), :method => :delete %></td>
       <td><%= link_to t('avatar.set_default'), avatar, :confirm => t('avatar.set_default_sure'), :method => :put %></td>
     <% end %>
     </td>
