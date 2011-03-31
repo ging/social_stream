@@ -25,7 +25,7 @@
 	<br>
 	<%= form_tag conversation_path(conversation.id), :method => :put, :class => "cont_conversation" do %>
 	<% if @receipt and @receipt.errors.any? %>
-		<div id="error">
+		<div class="error">
 			<h2><%= pluralize(@receipt.errors.count, "error") %> prohibited this message from being sent:</h2>
 			<ul>
 				<% @receipt.errors.full_messages.each do |msg| %>

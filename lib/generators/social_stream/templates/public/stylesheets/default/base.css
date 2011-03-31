@@ -20,11 +20,11 @@ body{font-size:1.0em;  color:#2A3890;  background-color:#ffffff; }
 margin-top: auto; margin-bottom:auto;}
 
 
- /*********** Errors SECTION *********************/
-#notice {  padding:2px;  color:#1F4A75; font-weight:bold; font-size:1.3em;  display:block; text-align:center;}
+ /*********** Notices SECTION *********************/
 .error, .notice, .success {padding:.8em;margin-bottom:1em;}
-.error{padding:.8em;margin-bottom:1em;color:red;}
-
+.notice {color:#1F4A75; font-weight:bold; font-size:1.3em; display:block; text-align:center;}
+.error{color:red;}
+.success {color: #088A08}
 
 /************Forms SECTION **************/
 input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:1.0em;  line-height:135%;

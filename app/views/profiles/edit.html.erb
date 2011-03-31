@@ -1,11 +1,7 @@
 <% toolbar :profile => current_subject %>
 
 <% content_for :sidebar do %>
-  <% if current_subject.class.eql?(User)%>
-	  <%= render :partial => 'users/sidebar_index' %>
-	<% elsif current_subject.class.eql?(Group)%>
-	  <%= render :partial => 'groups/sidebar_index' %>
-	<% end %>
+  <%= render :partial => "#{ current_subject.class.to_s.tableize }/sidebar_index" %>
 <% end %>
 
 <% content_for :headers do %>
@@ -15,7 +11,7 @@
 
 <% content_for :javascript do %>
   $(function() {
-    $(".edit_profile").validate();
+	   $(".edit_profile").validate();
   });
 <% end %>
 
@@ -164,11 +160,7 @@
   <% end %>
   <div class="form_row space_center">
     <%= f.submit "Update", :class => "button" %>&nbsp;
-		<% if current_subject.class.eql?(User)%>
-      <button class="button" onclick="window.location.href='<%= user_url(@user) %>';">Cancel</button>
-		<% elsif current_subject.class.eql?(Group)%>
-      <button class="button" onclick="window.location.href='<%= group_url(@group) %>';">Cancel</button>
-    <% end %>
+    <button class="button" onclick="window.location.href='<%= polymorphic_path(current_subject) %>';">Cancel</button>
   </div>
 
 <% end %>
