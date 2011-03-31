@@ -27,7 +27,7 @@ class Avatar < ActiveRecord::Base
     	precrop_path = File.join(Avatar.images_tmp_path,@name)
     	
     	make_precrop(precrop_path,@crop_x.to_i,@crop_y.to_i,@crop_w.to_i,@crop_h.to_i)
-		@avatar = Avatar.new :logo => File.open(precrop_path), :name => @name
+	   	@avatar = Avatar.new :logo => File.open(precrop_path), :name => @name
 		
 				
 		self.logo = @avatar.logo
@@ -67,7 +67,7 @@ class Avatar < ActiveRecord::Base
    end
       
    def resize_image(path,width,height)
-	img_orig = Magick::Image.read(path).first
+	  img_orig = Magick::Image.read(path).first
    	img_orig = img_orig.resize_to_fit(width, height)
    	img_orig.write(path)
    end
@@ -76,12 +76,14 @@ class Avatar < ActiveRecord::Base
      img_orig = Magick::Image.read(path).first
      dimensions = Avatar.get_image_dimensions(path)
      
-	if (width == 0) || (height == 0)
-		return
-	end     
+	   unless (width == 0) || (height == 0)
+		  crop_args = [x,y,width,height]
+      img_orig = img_orig.crop(*crop_args)
+	   end     
  
-     crop_args = [x,y,width,height]
-     img_orig = img_orig.crop(*crop_args)
+     img_orig = img_orig.resize_to_fill(500,500)
+     
+     
      img_orig.write(path)
   end   
 end

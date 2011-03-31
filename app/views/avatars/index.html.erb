@@ -10,16 +10,22 @@
   </tr>
 
 <% current_subject.avatars.each do |avatar| %>
-<% unless avatar.id.blank? %>
+<% unless avatar.id.blank? && (current_subject.avatars.size == 1) %>
+  <% unless avatar.id.blank? %>
   <tr>  
-  	<td><%= image_tag avatar.logo.url(:profile) %></image_tag></td>
-  	<td><%= image_tag avatar.logo.url(:tie) %></image_tag></td>
-  	<td><%= image_tag avatar.logo.url(:actor) %></image_tag></td>
-  
-    
-    <td><%= link_to t('avatar.set_default'), avatar, :confirm => t('avatar.set_default_sure'), :method => :put %></td>
-    <td><%= link_to t('avatar.destroy'), avatar, :confirm => t('avatar.destroy_sure'), :method => :delete %></td>
-  </tr>
+  	<td style="margin-left: 5px;">
+  	<% if avatar.active%>
+  	  <%= image_tag avatar.logo.url(:profile), :style => "border: 7px solid #e0eef5" %></image_tag>
+  	   <td><%= link_to t('avatar.destroy'), avatar, :confirm => t('avatar.destroy_sure'), :method => :delete %></td>
+  	  <td></td>
+    <% else %>
+      <%= image_tag avatar.logo.url(:profile), :style => "margin: 7px" %></image_tag>
+       <td><%= link_to t('avatar.destroy'), avatar, :confirm => t('avatar.destroy_sure'), :method => :delete %></td>
+      <td><%= link_to t('avatar.set_default'), avatar, :confirm => t('avatar.set_default_sure'), :method => :put %></td>
+    <% end %>
+    </td>
+   </tr>
+  <%end%>
   <%else%>
     <tr>
       <td>

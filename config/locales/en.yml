@@ -31,7 +31,7 @@ en:
     error:
       no_file: "You have to select a file"
       no_image_file: "The file you uploaded isn't valid, it must be an image file"
-    list: "You have this avatars"
+    list: "You have these avatars"
     new: "Create a new avatar"
     new_short: "New avatar"
     no_avatars: "You haven't any avatar, plesase create a new one."
