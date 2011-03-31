@@ -51,7 +51,7 @@ en:
     new:
       link: "+ Add contact"
       title: "Add %{name} as contact"
-      submit: "+ Add contact"
+      submit: "Add Contact"
   copyright: "2010 Copyright - All rights reserved"
   days: Days
   delete:

@@ -2,6 +2,10 @@
     <div class="content_add_user" >
       <div class="activity_add_ties">
   
+  	  <%= location(
+		image_tag("btn/btn_friend.png", :class => "menu_icon")+t('tie.new.title')
+	  ) %>
+  
 	  	<%= form_for @tie do |f| %>  
            	<%= f.hidden_field :receiver_id %>
            	<%= f.hidden_field :sender_id %>
