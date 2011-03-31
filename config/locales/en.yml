@@ -220,6 +220,8 @@ en:
       new: "New category"
     edit:
       contact: "Contact: %{type}"
+    new:
+      title: "Add New Contact"
     pending:
       other: "Pending requests"
       all: "All"
