@@ -1,6 +1,8 @@
 class Profile < ActiveRecord::Base
   belongs_to :actor
   
+  accepts_nested_attributes_for :actor
+  
   validates_presence_of :actor_id
   
   validates_format_of :mobile, :phone, :fax,
@@ -27,6 +29,12 @@ class Profile < ActiveRecord::Base
         @birthday_formatted_invalid = true
       end
     end
+  end
+  
+  def age
+    return nil if self.birthday.blank? 
+    now = Time.now.utc.to_date
+    now.year - self.birthday.year - (self.birthday.to_date.change(:year => now.year) > now ? 1 : 0)
   end
   
   # The subject of this profile

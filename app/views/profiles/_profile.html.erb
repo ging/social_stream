@@ -2,10 +2,10 @@
 <div class="block" id="personal_info" >
   <div class="header">
     <div class="header_text">
-      <%=t('edit.personal_info')%>
+      <%=t('profile.' + current_subject.class.to_s.downcase + '.info')%>
     </div>
     <div class="header_icon_right">
-      <%= link_to (image_tag('/images/btn/edit.png')),  :controller => "users" , :action => "edit" , :id => @profile.subject, :section => "about_me"%>
+      <%= link_to (image_tag('/images/btn/edit.png')),  :controller => :profiles , :action => :edit, :section => "about_me"%>
     </div>
   </div>
   <div class="content">
@@ -13,7 +13,7 @@
       <% if @profile.organization? %>
         <div class="row">
           <div class="label">
-            <%=t('edit.organization')%>:
+            <%=t('profile.organization')%>:
           </div>
           <div class="field">
             <%=h @profile.organization %>
@@ -23,25 +23,27 @@
       <% if @profile.birthday? %>
         <div class="row">
           <div class="label">
-            <%=t('edit.birthday')%>:
+            <%=t('profile.' + current_subject.class.to_s.downcase + '.birthday')%>:
           </div>
           <div class="field">
             <%=h I18n.l @profile.birthday, :format => :long %>
           </div>
         </div>
-        <div class="row">
-          <div class="label">
-              Age:
-          </div>
-          <div class="field">
-              <%=h @profile.subject.age %>
-          </div>
-        </div>
+				<% if current_subject.class.eql?(User) %>
+	        <div class="row">
+	          <div class="label">
+	              <%=t('profile.age')%>:
+	          </div>
+	          <div class="field">
+	              <%=h @profile.age %>
+	          </div>
+	        </div>
+				<%end%>
       <%end%>
       <% if @profile.city? %>
         <div class="row">
           <div class="label">
-            <%=t('edit.actualcity')%>:
+            <%=t('profile.actualcity')%>:
           </div>
           <div class="field">
             <%=h @profile.city %>
@@ -54,7 +56,7 @@
       <% if @profile.description? %>
         <div class="row">
           <div class="label">
-            <%=t('edit.aboutme')%>:
+            <%=t('profile.' + current_subject.class.to_s.downcase + '.about')%>:
           </div>
           <div class="row">
               <%=h @profile.description %>
@@ -70,10 +72,10 @@
 <div class="block" id="contact_info">
   <div class="header">
     <div class="header_text">
-      <%=t('edit.contact')%>
+      <%=t('profile.contact')%>
     </div>
     <div class="header_icon_right">
-      <%= link_to (image_tag('/images/btn/edit.png')),  :controller => "users" , :action => "edit" , :id => @profile.subject, :section => "contact_info"%>
+      <%= link_to (image_tag('/images/btn/edit.png')), :controller => :profiles , :action => :edit, :section => "contact_info"%>
     </div>
   </div>
   <div class="content">
@@ -81,7 +83,7 @@
       <% if @profile.phone? %>
         <div class="row">
           <div class="label">
-            <%=t('edit.phone')%>
+            <%=t('profile.phone')%>
           </div>
           <div class="field">
             <%=h @profile.phone %>
@@ -91,7 +93,7 @@
       <% if @profile.mobile? %>
         <div class="row">
           <div class="label">
-            <%=t('edit.mobile')%>
+            <%=t('profile.mobile')%>
           </div>
           <div class="field">
             <%=h @profile.mobile %>
@@ -101,7 +103,7 @@
       <% if @profile.fax? %>
         <div class="row">
           <div class="label">
-            <%=t('edit.fax')%>
+            <%=t('profile.fax')%>
           </div>
           <div class="field">
             <%=h @profile.fax %>
@@ -111,7 +113,7 @@
       <% if @profile.address? %>
         <div class="row">
           <div class="label">
-            <%=t('edit.address')%>
+            <%=t('profile.address')%>
           </div>
           <div class="field">
             <%=h @profile.address %>
@@ -121,7 +123,7 @@
       <% if @profile.website? %>
         <div class="row">
           <div class="label">
-            <%=t('edit.website')%>
+            <%=t('profile.website')%>
           </div>
           <div class="field">
             <a href="<%=h @profile.website %>"><%=h @profile.website %></a>
@@ -131,7 +133,7 @@
 
       <div class="row">
         <div class="label">
-          <%=t('edit.email')%>:
+          <%=t('profile.email')%>:
         </div>
         <div class="field">
           <%=h @profile.subject.email %>
@@ -145,10 +147,10 @@
 <div class="block" id="experience_info">
   <div class="header">
     <div class="header_text">
-      <%=t('edit.experience')%>
+      <%=t('profile.' + current_subject.class.to_s.downcase + '.experience')%>
     </div>
     <div class="header_icon_right">
-      <%= link_to (image_tag('/images/btn/edit.png')),  :controller => "users" , :action => "edit" , :id => @profile.subject, :section => "my_experience"%>
+      <%= link_to (image_tag('/images/btn/edit.png')),  :controller => :profiles , :action => :edit, :section => "my_experience"%>
     </div>
   </div>
   <div class="content">

@@ -30,9 +30,9 @@ module SocialStream
         
         has_one :profile, :through => :actor
         
-        accepts_nested_attributes_for :profile
-        
         validates_presence_of :name
+        
+        accepts_nested_attributes_for :profile
         
         scope :alphabetic, joins(:actor).merge(Actor.alphabetic)
 
