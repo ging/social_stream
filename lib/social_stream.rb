@@ -52,7 +52,7 @@ module SocialStream
     #
     # Maybe Rails provides some method to do this, in this case, please tell!!
     def require_model(m)
-      path = $:.find{ |f| f =~ Regexp.new(File.join('social_stream', 'app', 'models')) }
+      path = $:.find{ |f| f =~ Regexp.new(File.join('social_stream.*', 'app', 'models')) }
 
       raise "Can't find social_stream path" if path.blank?
 
