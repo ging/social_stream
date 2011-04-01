@@ -4,6 +4,8 @@ $("head").append($("<%= escape_javascript(stylesheet_link_tag "messages.css", :m
 
 $("head").append($("<%= escape_javascript(javascript_include_tag 'ckeditor/ckeditor.js','ckeditor/adapters/jquery.js','jquery.scrollTo.min.js', 'jquery.validate')  %>"));
 
+<%= toolbar :option => :messages %>
+
 $('.cont_conversation').validate();
 <% unless @box.eql?'trash' %>
 	$('#body').ckeditor(

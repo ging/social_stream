@@ -1,5 +1,5 @@
 <li>
-  <%= link_to( image_tag("btn/new.png", :class => "menu_icon")+t('message.other'), '#') %>
+  <%= link_to( image_tag("btn/new.png", :class => "menu_icon")+t('message.other'), '#', :id => "messages_menu") %>
   <ul>
     <li>
       <%= link_to( image_tag("btn/message_new.png", :class => "menu_icon")+ t('message.new'), new_message_path) %>

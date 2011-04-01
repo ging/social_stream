@@ -1,6 +1,10 @@
 class MessagesController < ApplicationController
 
 	before_filter :get_mailbox, :get_box, :get_actor
+	
+	def index
+		redirect_to conversations_path(:box => @box)
+	end
 	# GET /messages/1
 	# GET /messages/1.xml
 	def show

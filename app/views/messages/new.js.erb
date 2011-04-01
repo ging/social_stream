@@ -5,6 +5,9 @@ $("head").append($("<%= escape_javascript(stylesheet_link_tag "fcbkComplete.css"
 
 $("head").append($("<%= escape_javascript(javascript_include_tag 'jquery.fcbkcomplete.min','jquery.validate','ckeditor/ckeditor.js','ckeditor/adapters/jquery.js') %>"));
 
+<%= toolbar :option => :messages %>
+
+
 var recipients = $("#_recipients").fcbkcomplete({
         json_url: "<%= contacts_path(:format => :json) %>",
 	cache: true,

@@ -12,12 +12,6 @@ Rails.application.routes.draw do
   match 'api/user/:id/home' => 'api#activity_atom_feed', :format => 'atom'
   ##/API##
   
-  # PubSubHubBub
-  match 'pshb/callback' => 'pshb#callback', :as => :pshb_callback
-  # Test
-  match 'pshb/test_s' => 'pshb#pshb_subscription_request'
-  match 'pshb/test_p' => 'pshb#pshb_publish'
-   
   # Webfinger
   match '.well-known/host-meta',:to => 'frontpage#host_meta'
   
