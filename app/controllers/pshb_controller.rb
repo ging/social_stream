@@ -19,37 +19,23 @@ class PshbController < ApplicationController
     logger.debug request.body.read
   end
   
-  require "net/http"
-  require "uri"
+  #require "net/http"
+  #require "uri"
   
-  def pshb_subscription_request#(topic,hub,mode)
-    t = Thread.new do
-      #test
-      hub = 'http://138.4.7.113:4567/' # last '/' is mandatory!
-      topic = 'http://138.4.7.69:3000/api/user/demo/home.atom'
-      mode = 'subscribe'
-      #
-      uri = URI.parse(hub)   
-      response = Net::HTTP::post_form(uri,{ 'hub.callback' => pshb_callback_url, 
-                                            'hub.mode'     => mode,
-                                            'hub.topic'    => topic,
-                                            'hub.verify'   => 'sync'})                                            
-	puts response.body
-      #TO-DO: process 4XX response.status                                      
-    end                                                                                
-  end
-  
-  #def pshb_publish#(topic,hub)
+  #def pshb_subscription_request#(topic,hub,mode)
   #  t = Thread.new do
-  #    #test params
+  #    #test
   #    hub = 'http://138.4.7.113:4567/' # last '/' is mandatory!
   #    topic = 'http://138.4.7.69:3000/api/user/demo/home.atom'
+  #    mode = 'subscribe'
   #    #
-  #    uri = URI.parse(hub)
-  #    response = Net::HTTP::post_form(uri,{ 'hub.mode' => 'publish',
-  #                                          'hub.url'  => topic})
+  #    uri = URI.parse(hub)   
+  #    response = Net::HTTP::post_form(uri,{ 'hub.callback' => pshb_callback_url, 
+  #                                          'hub.mode'     => mode,
+  #                                          'hub.topic'    => topic,
+  #                                          'hub.verify'   => 'sync'})                                            
+	#puts response.body
   #    #TO-DO: process 4XX response.status                                      
-  #  end
+  #  end                                                                                
   #end  
-  
 end

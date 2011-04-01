@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-	s.name = "Social2Social"
+	s.name = "social2social"
 	s.version = "0.0.1"
 	s.authors = ["Víctor Sánchez Belmar"]
 	s.summary = "Provides a social stream node able to decentralize contents with the OStatus protocol"

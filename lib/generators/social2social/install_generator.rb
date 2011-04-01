@@ -7,8 +7,6 @@ class Social2social::InstallGenerator < Rails::Generators::Base
   
   def route_pshb
     route "match 'pshb/callback' => 'pshb#callback', :as => :pshb_callback"
-    #route "match 'pshb/test_s' => 'pshb#pshb_subscription_request'"
-    #route "match 'pshb/test_p' => 'pshb#pshb_publish'"
   end
   
   def config_initializer

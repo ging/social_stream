@@ -1,3 +1,5 @@
+require 'social_stream'
+
 module Social2social
   
   mattr_accessor :hub
@@ -12,12 +14,10 @@ module Social2social
     end
   end
 
-  
   module Models
     autoload :Shareable, 'social2social/models/shareable'
+    autoload :UpdateTriggerable, 'social2social/models/updatetriggerable'
   end
 end
 
-require 'social_stream'
 require 'social2social/engine'
-require 'railtie.rb'

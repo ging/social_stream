@@ -10,9 +10,6 @@ module Social2social
         after_create :init_feeds_to_hub
       end
       
-      module ClassMethods
-      end
-      
       module InstanceMethods
         def init_feeds_to_hub
           publish_or_update_home_feed
