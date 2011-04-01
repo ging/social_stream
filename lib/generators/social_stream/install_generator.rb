@@ -3,6 +3,7 @@ class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
 
   hook_for :authentication
   hook_for :messages
+  hook_for 'acts-as-taggable-on'
 
   source_root File.expand_path('../templates', __FILE__)
 

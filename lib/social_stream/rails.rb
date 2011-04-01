@@ -27,6 +27,8 @@ require 'will_paginate'
 require 'omniauth/oauth'
 # CSS themes
 require 'rails_css_themes'
+#Tags
+require 'acts-as-taggable-on'
 
 module SocialStream
   class Engine < ::Rails::Engine #:nodoc:

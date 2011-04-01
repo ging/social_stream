@@ -66,12 +66,13 @@ namespace :db do
       
       # = Groups
       available_actors = Actor.all
-      
+
       10.times do
         founder = available_actors[rand(available_actors.size)]
         
         Group.create :name  => Forgery::Name.company_name,
                      :email => Forgery::Internet.email_address,
+                     #:tag_list => Forgery::LoremIpsum.words(3,:random => true),
         :_founder => founder.slug
       end
       

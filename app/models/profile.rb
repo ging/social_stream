@@ -1,6 +1,8 @@
 class Profile < ActiveRecord::Base
   belongs_to :actor
   
+  acts_as_taggable
+  
   accepts_nested_attributes_for :actor
   
   validates_presence_of :actor_id
