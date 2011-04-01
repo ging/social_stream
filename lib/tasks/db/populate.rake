@@ -36,7 +36,9 @@ namespace :db do
       
       def set_tags(klass)
         klass.all.each do |el|
-          el.tag_list = Forgery::LoremIpsum.words(3,:random => true)
+          el.tag_list = Forgery::LoremIpsum.words(1,:random => true)+", "+
+                        Forgery::LoremIpsum.words(1,:random => true)+", "+
+                        Forgery::LoremIpsum.words(1,:random => true)
           el.save!
         end
       end
