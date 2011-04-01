@@ -77,7 +77,6 @@ class Tie < ActiveRecord::Base
   scope :sent_or_received_by, lambda { |a|
     where(arel_table[:sender_id].eq(Actor.normalize_id(a)).
           or(arel_table[:receiver_id].eq(Actor.normalize_id(a))))
-
   }
 
   scope :related_by, lambda { |r|
@@ -242,6 +241,12 @@ class Tie < ActiveRecord::Base
       relation_name != relation.try(:name) &&
       sender.present?
       self.relation = sender.relation(relation_name)
+      #Check
+      debugger
+      
+      
+      
+      
     end
   end
 

@@ -195,12 +195,17 @@ en:
     website: "Website"      
   public:
     other: "Everybody"
+  relations: Relations
   representation:
     action: "representing"
     change: "Change"
   service:
     one: "Service"
     other: "Services"
+  permissions:
+      one: Allow %{user} to read my wall
+      two: Follow %{user}
+      three: Allow %{user} to write in my wall
   products:
     one: "Product"
     other: "Products"
