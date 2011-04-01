@@ -9,7 +9,7 @@
 	  	<%= form_for @tie do |f| %>  
            	<%= f.hidden_field :receiver_id %>
            	<%= f.hidden_field :sender_id %>
-			<input type="hidden" value="" name="relation_name"/>
+			<%= f.hidden_field :relation_name %>
         	   
 			<div class="block">
 				  <div class="close_add_contact">
@@ -45,9 +45,9 @@
 							</div>
 							
 							<div id="relationPermissions">
-								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="read"> <%= t('permissions.one', :user=> @tie.receiver.name) %></p>
-								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="follow" checked="true"> <%= t('permissions.two', :user=> @tie.receiver.name) %></p>
-								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="create"> <%= t('permissions.three', :user=> @tie.receiver.name) %></p>
+								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[read]"> <%= t('permissions.one', :user=> @tie.receiver.name) %></p>
+								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[follow]" checked="true"> <%= t('permissions.two', :user=> @tie.receiver.name) %></p>
+								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[create]"> <%= t('permissions.three', :user=> @tie.receiver.name) %></p>
 							</div>
 						</div>
 					</div>

@@ -26,7 +26,7 @@ $(".dropdown dd ul li a.option").click(function() {
 	var text = $(this).html();
 	$(".dropdown dt a span").html(text);
 	$(".dropdown dd ul").hide();
-	$('input[name$="relation_name"]').val(getSelectedValue("relationsSelect"));
+	$('input[name$="tie[relation_name]"]').val(getSelectedValue("relationsSelect"));
 });
 
 
@@ -47,7 +47,7 @@ function getSelectedValue(id) {
 
 function setSelectedValue(text){
 	if(validate_value_for_input(text)){
-		$('input[name$="relation_name"]').val(text);
+		$('input[name$="tie[relation_name]"]').val(text);
 	    $(".dropdown dt a span").html(text);
 		$("#relationPermissions").show();
 	}

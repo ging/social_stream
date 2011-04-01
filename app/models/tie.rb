@@ -46,6 +46,9 @@
 #
 class Tie < ActiveRecord::Base
   attr_accessor :message
+  attr_accessor :read
+  attr_accessor :follow
+  attr_accessor :create
 
   # Facilitates relation assigment along with find_relation callback
   attr_writer :relation_name
@@ -237,16 +240,44 @@ class Tie < ActiveRecord::Base
   # Before validation callback
   # Infers relation from its name and the type of the actors
   def find_relation
+      
     if relation_name.present? &&
       relation_name != relation.try(:name) &&
       sender.present?
+     
       self.relation = sender.relation(relation_name)
-      #Check
-      debugger
+      
+      if(self.relation == nil)
+        #Crear nueva relacion       
+
+        permissions_name=["read","follow","create"]
+        permissions=[]
+         
+        permissions_name.each do |name|
+          if(getVariableWithName(name)=="on")
+            permissions << Permission.find_all_by_action_and_function_and_object(name,"star_ties","activity");
+          end
+        end
+
+        ###################################################################
+        #debugger
+        #Create the new relation with the permissions defined in permissions
+        ###################################################################
+        self.relation = Relation.create (:name=>relation_name,:sender_type=>sender.subject_type, :receiver_type=>receiver.subject_type)
+        #self.relation = Relation.create (:name=>relation_name,:sender_type=>sender.subject_type, :receiver_type=>receiver.subject_type, :permissions=>permissions)
+      end
       
       
-      
-      
+    end
+  end
+  
+  def getVariableWithName(name)
+    if name=="read"
+      return read
+    elsif name=="follow"
+      return follow
+    elsif name=="create"
+      return create
     end
   end
 
