@@ -14,9 +14,12 @@ class Actor < ActiveRecord::Base
   @subtypes_name = :subject
   include SocialStream::Models::Supertype
   
+  delegate :tag_list, :tag_list=, :to => :activity_object
+  
   validates_presence_of :name, :subject_type
   
   acts_as_messageable
+  
   acts_as_url :name, :url_attribute => :slug
   
   has_one :profile, :dependent => :destroy

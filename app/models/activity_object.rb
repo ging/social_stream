@@ -12,6 +12,8 @@ class ActivityObject < ActiveRecord::Base
   @subtypes_name = :object
   include SocialStream::Models::Supertype
 
+  acts_as_taggable
+  
   has_many :activity_object_activities, :dependent => :destroy
   has_many :activities, :through => :activity_object_activities
   has_one  :actor

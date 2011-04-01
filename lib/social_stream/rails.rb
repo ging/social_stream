@@ -34,6 +34,7 @@ module SocialStream
   class Engine < ::Rails::Engine #:nodoc:
     config.app_generators.authentication :devise
     config.app_generators.messages :mailboxer
+    config.app_generators.taggings :acts_as_taggable_on
 
     config.to_prepare do
       %w( actor activity_object ).each do |supertype|
@@ -45,6 +46,8 @@ module SocialStream
       ApplicationController.helper SubjectsHelper
       ApplicationController.helper TiesHelper
       ApplicationController.helper LocationHelper
+      
+      ActsAsTaggableOn::TagsHelper
     end
 
     initializer "social_stream.inflections" do

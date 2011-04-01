@@ -149,20 +149,6 @@ class CreateSocialStream < ActiveRecord::Migration
     
     add_index "relations", "parent_id"
     
-    create_table "tags", :force => true do |t|
-      t.string   "name",       :limit => 45
-      t.datetime "created_at"
-      t.datetime "updated_at"
-    end
-    
-    create_table "tags_activity_objects", :force => true do |t|
-      t.integer "tag_id"
-      t.integer "activity_object_id"
-    end
-    
-    add_index "tags_activity_objects", "activity_object_id"
-    add_index "tags_activity_objects", "tag_id"
-    
     create_table "tie_activities", :force => true do |t|
       t.integer "tie_id"
       t.integer "activity_id"
@@ -229,9 +215,6 @@ class CreateSocialStream < ActiveRecord::Migration
     add_foreign_key "relation_permissions", "relations", :name => "relation_permissions_on_relation_id"
     add_foreign_key "relation_permissions", "permissions", :name => "relation_permissions_on_permission_id"
     
-    add_foreign_key "tags_activity_objects", "activity_objects", :name => "tags_activity_objects_on_activity_object_id"
-    add_foreign_key "tags_activity_objects", "tags", :name => "tags_activity_objects_on_tag_id"
-    
     add_foreign_key "tie_activities", "ties",       :name => "tie_activities_on_tie_id"
     add_foreign_key "tie_activities", "activities", :name => "tie_activities_on_activity_id"
     
@@ -266,9 +249,6 @@ class CreateSocialStream < ActiveRecord::Migration
     remove_foreign_key "relation_permissions", :name => "relation_permissions_on_relation_id"
     remove_foreign_key "relation_permissions", :name => "relation_permissions_on_permission_id"
     
-    remove_foreign_key "tags_activity_objects", :name => "tags_activity_objects_on_activity_object_id"
-    remove_foreign_key "tags_activity_objects", :name => "tags_activity_objects_on_tag_id"
-    
     remove_foreign_key "tie_activities", :name => "tie_activities_on_tie_id"
     remove_foreign_key "tie_activities", :name => "tie_activities_on_activity_id"
     
@@ -292,8 +272,6 @@ class CreateSocialStream < ActiveRecord::Migration
     drop_table :profiles
     drop_table :relation_permissions
     drop_table :relations
-    drop_table :tags
-    drop_table :tags_activity_objects
     drop_table :ties
     drop_table :users
 

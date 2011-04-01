@@ -34,6 +34,13 @@ namespace :db do
         end
       end
       
+      def set_tags(klass)
+        klass.all.each do |el|
+          el.tag_list = Forgery::LoremIpsum.words(3,:random => true)
+          el.save!
+        end
+      end
+      
       puts 'User population'
       users_start = Time.now
       
@@ -72,11 +79,11 @@ namespace :db do
         
         Group.create :name  => Forgery::Name.company_name,
                      :email => Forgery::Internet.email_address,
-                     #:tag_list => Forgery::LoremIpsum.words(3,:random => true),
         :_founder => founder.slug
       end
       
       set_logos(Group)
+      set_tags(Group)
       
       groups_end = Time.now 
       puts '   -> ' +  (groups_end - groups_start).round(4).to_s + 's'

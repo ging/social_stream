@@ -2,7 +2,7 @@ class Group < ActiveRecord::Base
   attr_accessor :_founder
   attr_accessor :_participants
 
-  delegate :tag_list, :description, :description=, :to => :profile!
+  delegate :description, :description=, :to => :profile!
 
   after_create :create_founder
   after_create :create_participants
