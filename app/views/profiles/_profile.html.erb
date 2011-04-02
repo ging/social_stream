@@ -197,3 +197,20 @@
 	  </div>
 	</div>
 <% end %>
+<div class="space_center"></div>
+<div class="block" id="tags_info">
+<div class="header">
+    <div class="header_text">
+      Tags:
+    </div>
+    <div class="header_icon_right">
+      <%= link_to (image_tag('/images/btn/edit.png')), :controller => :api,
+                           :action => :create_key %>
+    </div>
+  </div>
+  <div class="content">
+  	<div class="field">
+ 		<%= @profile.subject.tag_list %>
+	</div>
+  </div>
+</div>

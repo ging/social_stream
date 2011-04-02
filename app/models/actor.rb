@@ -14,7 +14,7 @@ class Actor < ActiveRecord::Base
   @subtypes_name = :subject
   include SocialStream::Models::Supertype
   
-  delegate :tag_list, :tag_list=, :to => :activity_object
+  delegate :tag_list, :tag_list=, :tagged_with, :tag_counts, :to => :activity_object
   
   validates_presence_of :name, :subject_type
   
