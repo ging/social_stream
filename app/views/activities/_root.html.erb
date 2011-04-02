@@ -25,15 +25,13 @@
     <%= render :partial => 'comments/new',
                :locals => { :activity => activity } %>
 
-  </div>			
-  <div class="space_comments"></div>
-
+  </div>
 
   <div class="space_activities">
     <% if activity.activity_objects.count > 1 %>
       <div class="space_sub"></div>
     <%else %>
-      <div class="space_center"></div>
+      <div class="#"></div>
     <%end%>
   </div>
 <% end %>
