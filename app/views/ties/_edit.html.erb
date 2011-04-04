@@ -1,0 +1,61 @@
+<div class="dialog_add_tie" id="new_tie">
+    <div class="content_add_user" >
+      <div class="activity_add_ties">
+  
+  	  <%= location(
+		image_tag("btn/btn_friend.png", :class => "menu_icon")+t('tie.new.title')
+	  ) %>
+  
+	  	<%= form_for @tie do |f| %>  
+           	<%= f.hidden_field :receiver_id %>
+           	<%= f.hidden_field :sender_id %>
+			<%= f.hidden_field :relation_name %>
+        	   
+			<div class="block">
+				  <div class="close_add_contact">
+				  	<%=link_to('X','#', :id => "close_add_contact")%>
+				  </div>
+				  <div class="form_row center">
+				    <h2> <%= t('tie.edit.title') %> </h2>
+				  </div>	
+					<div class="two_columns_container">
+						<div class="form_column_left">
+							<p class="colum_field_title"><%= t('message.one') %></p>
+							<%= f.text_area :message,   :class =>"new_tie_text_area" %>
+						</div>
+		
+						<div class="form_column_right">
+							<div class="select_relations">
+								
+								<div id="relationsSelect" class="dropdown">
+									<dt><a href="#"><span><%= t('relations') %></span></a></dt>
+									<dd>
+									    <ul>
+										<% (@tie.sender.relations.sort.map{ |r| [ r.name] }).each do |relationArray| %>
+											<li><a href="#" class="option"><%=relationArray[0]%><span class="value"><%=relationArray[0]%></span></a></li>
+										<% end %>
+											<li><a href="#" class="input_link">
+												<span class="value"></span>
+												<input type="text" class="input_select"/>
+												</a></li>
+									    </ul>
+									</dd>
+							    </div>
+								
+							</div>
+							
+							<div id="relationPermissions">
+								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[relation_permissions][]" value="<%= Permission.find_by_action_and_function_and_object("read","star_ties","activity").id%>"> <%= t('permissions.read', :user=> @tie.receiver.name) %></p>
+								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[relation_permissions][]" value="<%= Permission.find_by_action("follow").id%>"> <%= t('permissions.follow', :user=> @tie.receiver.name) %></p>
+								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[relation_permissions][]" value="<%= Permission.find_by_action_and_function_and_object("create","tie","activity").id%>"> <%= t('permissions.write', :user=> @tie.receiver.name) %></p>
+							</div>
+						</div>
+					</div>
+					<div class="form_bottom">
+						<%= submit_tag t('contact.edit.submit'), :class => "button" %>
+					</div>
+				</div>
+			<% end %>
+    	</div>
+	</div>
+</div>
