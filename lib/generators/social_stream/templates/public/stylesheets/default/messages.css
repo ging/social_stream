@@ -1,4 +1,8 @@
 /******************** Common ***********************/
+h2{
+	padding-left:10px;
+}
+
 .pagination {
 	padding: 5px 5px 5px 5px;
 	text-align: center;
@@ -38,13 +42,13 @@
 .message .subject {
 }
 .message .date {
+	color: #6C6D6F;
 }
 .conversation_full .messages .unread .header{
-	color: #FFF;
-	background-color: #708EE5;
+	background-color: #E0E0FF;
 }
 .conversation_full .messages .unread .body{
-	border: 1px solid #708EE5;
+	border: 1px solid #E0E0FF;
 }
 .conversation_full .messages .unread .subject{
 	font-weight: bold;
@@ -105,9 +109,10 @@
 	font-weight: bold;
 }
 .conversations .conversation .date {
+	color: #6C6D6F;
 }
 .conversations .conversation .briefing {
-	color: #2A48A0;
+	color: #6C6D6F;
 }
 .conversations .conversation .notification {
 	float:left;
@@ -116,5 +121,5 @@
 	margin: 0px 5px 0px 0px;
 }
 .conversations .unread .notification {
-	/*background-color: #2A3890;*/
+	background-color: #2A3890;
 }

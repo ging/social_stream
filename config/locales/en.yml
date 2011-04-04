@@ -166,10 +166,12 @@ en:
     information: "Information"
     wall: "Wall"
   message:
+    answer: "Write your answer"
     inbox: "Inbox"
     new: "New Message"
     one: "Message"
     other: "Messages"
+    participants: "Participants"
     sentbox: "Sentbox"
     trash: "Trash"
     send: "Send a message"

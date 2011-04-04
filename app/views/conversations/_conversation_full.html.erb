@@ -10,6 +10,7 @@
 <div class="clearfloat">
 </div>
 <div class="participants">
+	<h3><%= t("message.participants") %>:</h3>
 	<% conversation.recipients.each do |recp| %>
 	<%= link_to image_tag(recp.logo.url(:tie), :title=>recp.name, :alt => recp.name), recp.subject %>
 	<% end %>
@@ -38,7 +39,7 @@
 	<% end %>
 		<div class="block">
 		<div class="form_row">
-			Write your answer:
+			<%= t("message.answer") %>
 		</div>
 		<div class="form_row">
 			<%= text_area_tag :body, nil,:rows =>6, :cols=> 53, :class => "required form_tag" %>
