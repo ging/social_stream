@@ -9,14 +9,28 @@
   <% if user_signed_in? %>
     <% if current_subject.ties_to(subject).present? %>
       <li >
-      <%= link_to(image_tag("btn/btn_friend.png", :class => "menu_icon")+t('tie.edit.contact', :type => current_subject.ties_to(subject).first.relation_name), '#') %>
+      <%= link_to image_tag("btn/btn_friend.png", :class => "menu_icon")+t('tie.edit.contact', :type => current_subject.ties_to(subject).first.relation_name), edit_tie_path(current_subject.ties_to(subject).first) %>
      </li>
     <% else %>
       <li >
-        <%= link_to(image_tag("btn/btn_friend.png", :class => "menu_icon")+t('tie.add.contact'), '#') %>
-      </li>
-      <li>
-        <%= link_to(image_tag("btn/twitter-follow-icon.png", :size => "19x19", :class => "menu_icon")+t('tie.add.follow'), '#') %>
+      <%= link_to(image_tag("btn/btn_friend.png", :class => "menu_icon")+t('tie.add.contact'), '#', :id => 'contacts_menu') %>
+        <ul>
+          <% current_subject.relations.sort.each do |r| %>
+            <li>
+            <%= link_to image_tag("btn/twitter-follow-icon.png", :size => "19x19", :class => "menu_icon") + r.name,
+                        ties_path('tie[sender_id]'   => current_subject.actor_id,
+                                  'tie[receiver_id]' => subject.actor_id,
+                                  'tie[relation_id]' => r.id),
+                        :method => :post   %>
+            </li>
+
+          <% end %>
+          <li>
+          <%= link_to image_tag("btn/twitter-follow-icon.png", :size => "19x19", :class => "menu_icon") + t('tie.relation.new'),
+                      new_tie_path('tie[sender_id]'   => current_subject.actor_id,
+                                   'tie[receiver_id]' => subject.actor_id) %>
+          </li>
+        </ul>
       </li>
     <% end %>
   <% end %>

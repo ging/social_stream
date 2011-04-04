@@ -229,7 +229,7 @@ class Actor < ActiveRecord::Base
   
   # Set of ties sent by this actor received by a
   def ties_to(a)
-    sent_ties.received_by(a)
+    sent_ties.received_by(a).original
   end
   
   def ties_to?(a)

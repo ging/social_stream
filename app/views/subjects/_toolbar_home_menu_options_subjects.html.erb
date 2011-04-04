@@ -1,6 +1,6 @@
 <%= menu_options[:groups] || capture do %>
   <li>
-    <%= link_to( image_tag("btn/btn_group.png", :class => "menu_icon")+t('group.other'), '#', :id => "subjects_menu") %>
+    <%= link_to( image_tag("btn/btn_group.png", :class => "menu_icon")+t('group.other'), '#', :id => "groups_menu") %>
     <ul>
       <li>
         <%= link_to( image_tag("btn/btn_group.png", :class => "menu_icon")+t('group.new.action'), new_group_path) %>

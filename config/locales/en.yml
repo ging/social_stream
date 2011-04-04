@@ -236,12 +236,12 @@ en:
   tie:
     add:
       bookmark: "Bookmark"
-      contact: "Add contact as"
+      contact: "Add contact as..."
       follow: "Follow"
       like: "Like"
       partner: "Add Partner"
-    category:
-      new: "New category"
+    relation:
+      new: "New contact type"
     edit:
       contact: "Contact: %{type}"
       title: "Edit Contact"
