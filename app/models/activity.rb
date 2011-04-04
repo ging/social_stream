@@ -137,7 +137,7 @@ class Activity < ActiveRecord::Base
   def title view
     case verb
     when "follow", "make-friend"
-      I18n.t "activity.verb.#{ verb }.title",
+      I18n.t "activity.verb.#{ verb }.#{ tie.receiver.subject_type }.title",
              :subject => view.link_name(sender_subject),
              :contact => view.link_name(receiver_subject)
     when "post"
