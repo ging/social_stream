@@ -1,6 +1,5 @@
 <% my_file_name = File.basename(@avatar.logo.queued_for_write[:original].path) %>
 
-
 <div id="precropDiv" class = "block title content" style="width:500px;display:inline-block;padding: 5px 4px 5px 4px;">
 	<%= image_tag "tmp/#{my_file_name}",:id=>"cropImage" %>
 </div>

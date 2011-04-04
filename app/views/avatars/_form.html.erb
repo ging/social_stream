@@ -14,10 +14,7 @@
   </div>
   <% end %>
   <div class="form_row">
-  	<%= f.label t('avatar.new') %>
-  </div>
-  <div class="form_row">
-  	<%= f.file_field :logo, :class => "button" %>
+  	<%= f.file_field :logo %>
 
 	  <%= f.submit t('avatar.upload'), :class => "button" %>
   </div>

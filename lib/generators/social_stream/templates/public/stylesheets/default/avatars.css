@@ -1,20 +1,26 @@
 /******************** Common ***********************/
 
-
 /******************** Avatars ***********************/
-.avatar{
+.avatars{
+	padding-left: 10px;
+}
+.avatar {
 	float:left;
-	padding:0px;
+	position:relative;
 }
-
-.avatars .actions{
-	border: 1px solid #E0EEF5;
+.avatar .actions {
 }
-
-.default .img{
+.avatar .delete_avatar {
+	position:absolute;
+	top:5px;
+	right:5px;
+}
+.avatar .default {
+	border: 5px solid #2A3890;
+}
+.avatar .non_default {
 	border: 5px solid #E0EEF5;
 }
-
 /******************** New form ***********************/
-.new_logo_form{
+.new_logo_form {
 }

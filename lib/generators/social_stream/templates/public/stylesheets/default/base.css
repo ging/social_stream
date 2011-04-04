@@ -11,6 +11,7 @@ div {	margin: 0px;	padding: 0px;	font-family: Helvetica;	font-size: 11px;}
 a:link,a:visited {	color: inherit;	text-decoration: inherit;}
 a:hover {	text-decoration: underline;}
 .clearfloat {	clear: both;	height: 0px;}
+h2{padding-left:10px;}
 
 
 /******* Main Structure SECTION***************************/

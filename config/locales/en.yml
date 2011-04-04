@@ -43,6 +43,8 @@ en:
     new: "Create a new avatar"
     new_short: "New avatar"
     no_avatars: "You haven't any avatar, plesase create a new one."
+    one: "Avatar"
+    other: "Avatars"
     preview: "Preview"
     profile_change: "Change your avatar"
     set_default: "Set as default"

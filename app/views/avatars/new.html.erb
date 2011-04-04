@@ -4,12 +4,25 @@
     <%= stylesheet_link_tag "logos", :media => "screen, projection" %>
 <%end%>
 <% toolbar :profile => current_subject %>
+
+<%= location(
+	link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('profile.one'), [current_subject,:profile]),	
+	link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('avatar.other'), avatars_path)
+) %>
+<br class="clearfloat" />
+<div class="space_center"></div>
+<div class="space_center"></div>
 <div id="content_logo">
 <% if !@avatar.logo.errors['precrop'].blank? %>
-	<h1><%= t('avatar.crop_image') %></h1>
+
+	<h2><%= t('avatar.crop_image') %></h2>
+	<br class="clearfloat" />
+<div class="space_center"></div>
 	<%= render :partial => 'precrop' %>
 <% else %>
-	<h1><%= t('avatar.new') %></h1>
+	<h2><%= t('avatar.new') %></h2>
+	<br class="clearfloat" />
+<div class="space_center"></div>
 	<%= render :partial => 'form' %>
 <% end %>
 </div>
