@@ -203,9 +203,9 @@ en:
     one: "Service"
     other: "Services"
   permissions:
-      one: Allow %{user} to read my wall
-      two: Follow %{user}
-      three: Allow %{user} to write in my wall
+      read: Allow %{user} to read my wall
+      follow: Follow %{user}
+      write: Allow %{user} to write in my wall
   products:
     one: "Product"
     other: "Products"

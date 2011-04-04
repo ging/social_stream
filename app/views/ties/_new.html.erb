@@ -45,9 +45,10 @@
 							</div>
 							
 							<div id="relationPermissions">
-								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[read]"> <%= t('permissions.one', :user=> @tie.receiver.name) %></p>
-								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[follow]" checked="true"> <%= t('permissions.two', :user=> @tie.receiver.name) %></p>
-								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[create]"> <%= t('permissions.three', :user=> @tie.receiver.name) %></p>
+								
+								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[relation_permissions][]" value=""> <%= t('permissions.read', :user=> @tie.receiver.name) %></p>
+								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[relation_permissions][]" value="" checked="true"> <%= t('permissions.follow', :user=> @tie.receiver.name) %></p>
+								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[relation_permissions][]" value=""> <%= t('permissions.write', :user=> @tie.receiver.name) %></p>
 							</div>
 						</div>
 					</div>
