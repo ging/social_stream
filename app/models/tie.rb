@@ -241,6 +241,7 @@ class Tie < ActiveRecord::Base
   # Before validation callback
   # Assigns relation or builds it based on the param
   def find_or_build_relation
+    debugger
     return if find_relation || relation_name.blank?
 
     self.relation = Relation.new :name => relation_name,
@@ -288,7 +289,7 @@ class Tie < ActiveRecord::Base
   # Send a message to the receiver of the tie
   def send_message
     if original? && message.present?
-      sender.send_message(receiver, message, I18n.t("activity.verb.#{ contact_verb }.message", :name => sender.name))
+      sender.send_message(receiver, message, I18n.t("activity.verb.#{ contact_verb }.#{ receiver.subject_type }.message", :name => sender.name))
     end
   end
 

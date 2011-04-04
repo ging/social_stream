@@ -45,10 +45,9 @@
 							</div>
 							
 							<div id="relationPermissions">
-								
-								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[relation_permissions][]" value=""> <%= t('permissions.read', :user=> @tie.receiver.name) %></p>
-								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[relation_permissions][]" value="" checked="true"> <%= t('permissions.follow', :user=> @tie.receiver.name) %></p>
-								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[relation_permissions][]" value=""> <%= t('permissions.write', :user=> @tie.receiver.name) %></p>
+								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[relation_permissions][]" value="<%= Permission.find_by_action_and_function_and_object("read","star_ties","activity").id%>"> <%= t('permissions.read.activity.star_ties', :user=> @tie.receiver.name) %></p>
+								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[relation_permissions][]" value="<%= Permission.find_by_action("follow").id%>" checked="true"> <%= t('permissions.follow', :user=> @tie.receiver.name) %></p>
+								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[relation_permissions][]" value="<%= Permission.find_by_action_and_function_and_object("create","tie","activity").id%>"> <%= t('permissions.create.activity.tie', :user=> @tie.receiver.name) %></p>
 							</div>
 						</div>
 					</div>

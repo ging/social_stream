@@ -20,9 +20,21 @@ en:
         follow:
           title: "%{subject} added %{contact} as contact."
           message: "%{name} added you as contact."
+          User:
+            title: "%{subject} added %{contact} as contact."
+            message: "%{name} added you as contact."
+          Group:
+            title: "%{subject} added %{contact} as contact."
+            message: "%{name} added you as contact."
         make-friend:
           title: "%{subject} and %{contact} are now connected."
           message: "%{name} also added you as contact."
+          User:
+            title: "%{subject} and %{contact} are now connected."
+            message: "%{name} also added you as contact."
+          Group:
+            title: "%{subject} added %{contact} as contact."
+            message: "%{name} added you as contact."
   avatar:
     crop_image: "Crop the uploaded image"
     crop_submit: "Crop"
@@ -195,7 +207,7 @@ en:
     website: "Website"      
   public:
     other: "Everybody"
-  relations: Relations
+  relations: "Relations"
   representation:
     action: "representing"
     change: "Change"
@@ -203,9 +215,16 @@ en:
     one: "Service"
     other: "Services"
   permissions:
-      read: Allow %{user} to read my wall
-      follow: Follow %{user}
-      write: Allow %{user} to write in my wall
+    read:
+      activity:
+        star_ties: "Allow %{user} to read my wall"
+      tie:
+        weak_star_ties: "Not defined"
+    follow: "Follow %{user}"
+    create: 
+         activity:
+             tie: "Allow %{user} to write in my wall"
+             weak_ties: "Not defined"
   products:
     one: "Product"
     other: "Products"
@@ -225,6 +244,7 @@ en:
       new: "New category"
     edit:
       contact: "Contact: %{type}"
+      title: "Edit Contact"
     new:
       title: "Add New Contact"
     pending:
