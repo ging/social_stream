@@ -39,6 +39,8 @@ class Relation < ActiveRecord::Base
     where(:sender_type => st, :receiver_type => rt)
   }
 
+  validates_presence_of :name
+
   has_many :relation_permissions, :dependent => :destroy
   has_many :permissions, :through => :relation_permissions
 
