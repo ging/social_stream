@@ -50,6 +50,8 @@ class Tie < ActiveRecord::Base
 
   # Facilitates relation assigment along with find_relation callback
   attr_writer :relation_name
+  # Facilitates new relation permissions assigment along with find_or build_relation callback
+  attr_reader :relation_permissions
 
   belongs_to :sender,
              :class_name => "Actor",
@@ -99,8 +101,9 @@ class Tie < ActiveRecord::Base
 
   validates_presence_of :sender_id, :receiver_id, :relation_id
 
-  before_validation :find_relation
+  before_validation :find_or_build_relation
 
+  before_create :save_relation
   after_create :complete_weak_set
   after_create :create_activity
   after_create :send_message
@@ -236,16 +239,29 @@ class Tie < ActiveRecord::Base
   private
 
   # Before validation callback
+  # Assigns relation or builds it based on the param
+  def find_or_build_relation
+    return if find_relation || relation_name.blank?
+
+    self.relation = Relation.new :name => relation_name,
+                                 :actor => sender
+
+    relation.permission_ids = relation_permissions
+  end
+
   # Infers relation from its name and the type of the actors
   def find_relation
-      
-    if relation_name.present? &&
-      relation_name != relation.try(:name) &&
-      sender.present?
+    return if relation_name.blank?
 
+    if relation_name == relation.try(:name)
+      relation
+    elsif sender.present?
       self.relation = sender.relation(relation_name)
-      
     end
+ end
+ 
+  def save_relation
+    relation.save! if relation.new_record?
   end
  
 

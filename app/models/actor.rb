@@ -67,7 +67,7 @@ class Actor < ActiveRecord::Base
     joins(:received_ties).merge(Tie.sent_by(a))
   }
  
-  after_create :initialize_ties
+  after_create :create_initial_relations
   
   after_create :create_profile
   
@@ -301,11 +301,8 @@ class Actor < ActiveRecord::Base
   
   private
   
-  def initialize_ties
-    ::SocialStream::Relations.create(subject_type).each do |r|
-      sent_ties.create! :receiver => self,
-                        :relation => r
-    end
+  # After create callback
+  def create_initial_relations
+    Relation.defaults_for(self)
   end
-  
 end
