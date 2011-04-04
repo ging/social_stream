@@ -1,6 +1,11 @@
 class AvatarsController < InheritedResources::Base
 
   before_filter :authenticate_user!
+  
+  def index
+  	@avatar = Avatar.new
+  end
+  
   def update
 
     if !current_subject.avatars.blank?

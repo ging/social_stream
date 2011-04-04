@@ -49,11 +49,13 @@ function update_crop(coords) {
 <% end %>
 
 <%= form_for :logo, @avatar,:url => avatars_path, :html => { :multipart => true } do |f| %>
-
+<div class= "block">
   <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
     <%= f.hidden_field attribute, :id => attribute %>
   <% end %>
 	<%= f.hidden_field :name, :value => my_file_name %>
-	<br>
-  <p><%= f.submit t('avatar.crop_submit') %></p>
+	  <div class="form_row">
+  <%= f.submit t('avatar.crop_submit'), :class => "button" %>
+  </div>
+  </div>
 <% end %>

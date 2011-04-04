@@ -1,0 +1,20 @@
+/******************** Common ***********************/
+
+
+/******************** Avatars ***********************/
+.avatar{
+	float:left;
+	padding:0px;
+}
+
+.avatars .actions{
+	border: 1px solid #E0EEF5;
+}
+
+.default .img{
+	border: 5px solid #E0EEF5;
+}
+
+/******************** New form ***********************/
+.new_logo_form{
+}

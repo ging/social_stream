@@ -1,42 +1,30 @@
 <% toolbar :profile => current_subject %>
 
-<h1><%= t('avatar.list') %></h1>
+<% content_for :headers do %>
+<%= stylesheet_link_tag "avatars.css", :media => "screen, projection" %>
+<% end %>
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+
+<%= location("Profile (ADD LINK)","Avatars (ADD LINK)") %>
+
+<h2><%= t('avatar.list') %></h2>
 
 <% current_subject.avatars.each do |avatar| %>
 <% unless avatar.id.blank? && (current_subject.avatars.size == 1) %>
   <% unless avatar.id.blank? %>
-  <tr>  
-  	<td style="margin-left: 5px;">
-  	<% if avatar.active%>
-  	  <%= image_tag avatar.logo.url(:profile), :style => "border: 7px solid #e0eef5" %></image_tag>
-  	   <td><%= link_to image_tag("btn/close.png", :class => "menu_icon"), avatar, :confirm => t('avatar.destroy_sure'), :method => :delete %></td>
-  	  <td></td>
-    <% else %>
-      <%= image_tag avatar.logo.url(:profile), :style => "margin: 7px" %></image_tag>
-       <td><%= link_to image_tag("btn/close.png"), avatar, :confirm => t('avatar.destroy_sure'), :method => :delete %></td>
-      <td><%= link_to t('avatar.set_default'), avatar, :confirm => t('avatar.set_default_sure'), :method => :put %></td>
-    <% end %>
-    </td>
-   </tr>
-  <%end%>
+	<%= div_for(avatar, :class => avatar.active ? 'default' : '') do %>
+	  	  <%= image_tag avatar.logo.url(:profile) %>
+	  	<% unless avatar.active %>
+	  		<div class="actions">
+	       <%= link_to image_tag("btn/close.png"), avatar, :confirm => t('avatar.destroy_sure'), :method => :delete %>
+	      <%= link_to t('avatar.set_default'), avatar, :confirm => t('avatar.set_default_sure'), :method => :put %>
+	      </div>
+	    <% end %>
+  	<% end %>
   <%else%>
-    <tr>
-      <td>
         <%= t('avatar.no_avatars') %>
-      </td>
-    </tr>
-  
   <% end %>
 <% end %>
-</table>
-
+<% end %>
 <br />
-
-<%= link_to t('avatar.new_short'), new_avatar_path %>
+<%= render :partial => 'form' %>

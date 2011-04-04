@@ -13,9 +13,13 @@
     </ul>
   </div>
   <% end %>
-  <%= f.file_field :logo %>
-  <div class="actions">
-    <%= f.submit t('avatar.upload') %>
+  <div class="form_row">
+  	<%= f.label t('avatar.new') %>
+  </div>
+  <div class="form_row">
+  	<%= f.file_field :logo, :class => "button" %>
+
+	  <%= f.submit t('avatar.upload'), :class => "button" %>
   </div>
   <div id= "prueba">
   </div>
