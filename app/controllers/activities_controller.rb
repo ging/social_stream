@@ -1,5 +1,6 @@
 class ActivitiesController < InheritedResources::Base
   belongs_to_subjects
+  actions :index
 
   respond_to :js
 
