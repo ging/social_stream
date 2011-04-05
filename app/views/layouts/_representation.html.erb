@@ -3,7 +3,7 @@
   <%= link_to(current_user.name, current_user) %>
   <%= t('representation.action') %>
   <%= form_for(Representation.new(current_subject), :url => representation_path) do |f| %>
-    <%= f.select :subject_dom_id, current_user.represented.unshift(current_user).map{ |s| [ s.name, dom_id(s) ] } %>
+    <%= f.select :subject_dom_id, current_user.represented.unshift(current_user).map{ |s| [ s.name, dom_id(s) ] }, :class=>"button" %>
     <%= f.submit t('representation.change') %>
   <% end %>
 

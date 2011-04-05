@@ -1,3 +1,6 @@
+<% content_for :headers do %>
+  <%= javascript_include_tag 'hoverIntent','superfish' %>
+<% end %>
 <div id="headerFront">
   <div class="banner_top banner_top_height">
     <div id="header_left">
@@ -18,9 +21,28 @@
     </div>
     <div id="header_right">
       <% if user_signed_in? %>
+        <div id="account">
+          <ul class="sf-menu">
+            <li class="current" >
+              <%# link_to t('account.one')+ '<span class='+'sf-sub-indicator> »</span>' , '#' , :class=>"sf-with-ul" %>
+              <a href="#" class="sf-with-ul" id="btn_menu_config">Account<span class="sf-sub-indicator"> »</span></a>
+
+              <ul>
+                <li>
+                  <%= link_to 'Configurations', '#' %>
+                </li>
+                <li>
+                  <%= link_to 'Notifications', '#' %>
+                </li>
+                <li class="current">
+                  <%= link_to 'Privacy', '#' %>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
         <div class="menu_list menu_white" id="menu_account">
           <ul>
-            <li class="btn_menu_config"><%= link_to t('account.one'), '#' %></li>
             <li class="pipe">|</li>
             <li class="pipe"><%= render :partial => 'layouts/representation' %></li>
             <li class="pipe"> | </li>
