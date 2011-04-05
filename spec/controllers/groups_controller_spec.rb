@@ -1,6 +1,8 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe GroupsController do
+  include SocialStream::TestHelpers::Controllers
+
   render_views
 
   describe "when Anonymous" do
@@ -14,6 +16,23 @@ describe GroupsController do
       get :show, :id => Factory(:group).to_param
 
       assert_response :success
+    end
+
+    context "faking a new group" do
+      before do
+        model_attributes[:_founder] = Factory(:user).slug
+      end
+
+      it_should_behave_like "Deny Creating"
+    end
+
+    context "an existing group" do
+      before do
+        @current_model = Factory(:group)
+      end
+
+      it_should_behave_like "Deny Updating"
+      it_should_behave_like "Deny Destroying"
     end
   end
 
@@ -43,13 +62,48 @@ describe GroupsController do
       assert_response :success
     end
 
-    it "should update contact group" do
-      @group = Factory(:member, :receiver => @user.actor).sender_subject
-      put :update, :id => @group.to_param,
-                   "group" => { "profile_attributes" => { "organization" => "Social Stream" } }
+    context "a new own group" do
+      before do
+        model_attributes[:_founder] = @user.slug
+      end
 
-      response.should redirect_to(@group)
+      it_should_behave_like "Allow Creating"
     end
+
+    context "a new fake group" do
+      before do
+        model_attributes[:_founder] = Factory(:user).slug
+      end
+
+      it_should_behave_like "Deny Creating"
+    end
+
+    context "a external group" do
+      before do
+        @current_model = Factory(:group)
+      end
+
+      it_should_behave_like "Deny Updating"
+      it_should_behave_like "Deny Destroying"
+    end
+
+
+    context "a existing own group" do
+      before do
+        @current_model = Factory(:member, :receiver => @user.actor).sender_subject
+      end
+
+      it "should update contact group" do
+        put :update, :id => @current_model.to_param,
+                     "group" => { "profile_attributes" => { "organization" => "Social Stream" } }
+
+        response.should redirect_to(@current_model)
+      end
+
+      # it_should_behave_like "Allow Updating"
+      it_should_behave_like "Allow Destroying"
+    end
+
   end
 end
 
