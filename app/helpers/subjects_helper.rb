@@ -10,6 +10,20 @@ module SubjectsHelper
 	# * If blank, render the home menu
 	#
 	# The menu option allows overwriting a menu slot with the content of the given block
+  #
+  # 
+  # Autoexpanding a menu section on your view:
+  # 
+  # Toolbar allows you to autoexpand certain menu section that may be of interest for your view.
+  # For example, the messages menu when you are looking your inbox. This is done through :option elemnent.
+  #
+  # To get it working, you must use the proper :option to be expanded, ":option => :messages" in the 
+  # mentioned example. This will try, automatically, to expand the section of the menu where its root
+  # list link, the one expanding the section, has an id equal to "#messages_menu". If you use 
+  # ":options => :contacts" it will try to expand "#contacts_menu". 
+  #
+  # For now its working with :option => :messages, :contacts or :groups
+  #
 	#
 	# Examples:
 	#
@@ -28,7 +42,9 @@ module SubjectsHelper
 	# Render the profile toolbar for group changing the contacts menu option:
 	#
 	#   <% toolbar :profile => @group, :option => :contacts %>
-	#
+  #
+	
+	
 	def toolbar(options = {}, &block)
 		if options[:option] && block_given?
 			menu_options[options[:option]] = capture(&block)
@@ -44,12 +60,14 @@ module SubjectsHelper
 
 		case request.format
 		when Mime::JS
-			<<-EOJ
-			  /*
-		      $('#toolbar').html('#{ escape_javascript(content) }');
-		      */
+			response = <<-EOJ
+			  
+		      $('#toolbar').html("#{ escape_javascript(content) }");
+		      initMenu();
 		      expandSubMenu('#{ options[:option] }');
 		      EOJ
+		      
+		      response.html_safe
 		else
 			content_for(:toolbar) do
 				content
