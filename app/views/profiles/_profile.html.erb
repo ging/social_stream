@@ -1,8 +1,12 @@
+<%= location(
+  link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('menu.information'), [current_subject, :profile])
+) %>
 <div class="space_center"></div>
+<h2><%=t('menu.information')%></h2>
 <div class="block" id="personal_info" >
   <div class="header">
     <div class="header_text">
-      <%=t('profile.' + current_subject.class.to_s.downcase + '.info')%>
+      <%=t('profile.' + @profile.subject.class.to_s.downcase + '.info')%>
     </div>
     <div class="header_icon_right">
       <%= link_to (image_tag('/images/btn/edit.png')),  :controller => :profiles , :action => :edit, :section => "about_me"%>
@@ -147,7 +151,7 @@
 <div class="block" id="experience_info">
   <div class="header">
     <div class="header_text">
-      <%=t('profile.' + current_subject.class.to_s.downcase + '.experience')%>
+      <%=t('profile.' + @profile.subject.class.to_s.downcase + '.experience')%>
     </div>
     <div class="header_icon_right">
       <%= link_to (image_tag('/images/btn/edit.png')),  :controller => :profiles , :action => :edit, :section => "my_experience"%>
@@ -180,15 +184,15 @@
 <% end %>
 <div class="space_center"></div>
 <% if (@profile.to_param==current_user.to_param and @profile.authentication_token) %>
-<div class="block" id="developer_info">
-  <div class="header">
-    <div class="header_text">
-      ApiKey: <%= @profile.authentication_token %>
-    </div>
-    <div class="header_icon_right">
-      <%= link_to (image_tag('/images/btn/edit.png')), :controller => :api,
-                           :action => :create_key %>
-    </div>
-  </div>
-</div>
+	<div class="block" id="developer_info">
+	  <div class="header">
+	    <div class="header_text">
+	      ApiKey: <%= @profile.authentication_token %>
+	    </div>
+	    <div class="header_icon_right">
+	      <%= link_to (image_tag('/images/btn/edit.png')), :controller => :api,
+	                           :action => :create_key %>
+	    </div>
+	  </div>
+	</div>
 <% end %>
