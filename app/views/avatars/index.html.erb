@@ -17,7 +17,7 @@
 <br class="clearfloat" />
 <div class="space_center"></div>
 <div class="space_center"></div>
-<% unless @avatars.first.id.blank? && (@avatars.size == 1) %>
+<% unless(@avatars.empty? || (@avatars.first.present? && @avatars.first.id.blank?)) %>
   <h2>Use your saved avatars ...</h2>
   <div class="space_center"></div>
   <div class="space_center"></div>
