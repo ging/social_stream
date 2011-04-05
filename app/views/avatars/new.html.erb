@@ -1,28 +1,33 @@
 <% content_for :headers do %>
 	<%= javascript_include_tag 'jquery.Jcrop.min' %>
 	<%= stylesheet_link_tag "jquery.Jcrop", :media => "screen, projection" %>
-    <%= stylesheet_link_tag "logos", :media => "screen, projection" %>
+  <%= stylesheet_link_tag "avatars", :media => "screen, projection" %>
 <%end%>
+
 <% toolbar :profile => current_subject %>
+
+<% content_for :sidebar do %>
+  <%= render :partial => 'home/sidebar' %>
+<% end %>
 
 <%= location(
 	link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('profile.one'), [current_subject,:profile]),	
-	link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('avatar.other'), avatars_path)
+	link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('avatar.other'), avatars_path)
 ) %>
+
 <br class="clearfloat" />
 <div class="space_center"></div>
 <div class="space_center"></div>
 <div id="content_logo">
 <% if !@avatar.logo.errors['precrop'].blank? %>
-
 	<h2><%= t('avatar.crop_image') %></h2>
 	<br class="clearfloat" />
-<div class="space_center"></div>
+  <div class="space_center"></div>
 	<%= render :partial => 'precrop' %>
 <% else %>
 	<h2><%= t('avatar.new') %></h2>
 	<br class="clearfloat" />
-<div class="space_center"></div>
+  <div class="space_center"></div>
 	<%= render :partial => 'form' %>
 <% end %>
 </div>

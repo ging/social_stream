@@ -33,7 +33,7 @@ en:
             message: "%{name} added you as contact."
   avatar:
     crop_image: "Crop the uploaded image"
-    crop_submit: "Crop"
+    crop_submit: "Crop image"
     destroy: "Delete"
     destroy_sure: "Are you sure you wan't to delete the selected avatar?"
     error:
@@ -45,6 +45,7 @@ en:
     no_avatars: "You haven't any avatar, plesase create a new one."
     one: "Avatar"
     other: "Avatars"
+    original: "Original image"
     preview: "Preview"
     profile_change: "Change your avatar"
     set_default: "Set as default"

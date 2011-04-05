@@ -2,6 +2,7 @@
 
 <% content_for :headers do %>
 <%= stylesheet_link_tag "avatars.css", :media => "screen, projection" %>
+<%= javascript_include_tag 'avatars.js' %>
 <% end %>
 
 <% content_for :sidebar do %>
@@ -10,35 +11,43 @@
 
 <%= location(
 	link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('profile.one'), [current_subject,:profile]),	
-	link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('avatar.other'), avatars_path)
+	link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('avatar.other'), avatars_path)
 ) %>
+
 <br class="clearfloat" />
 <div class="space_center"></div>
 <div class="space_center"></div>
-<h2>Use your saved avatars ...</h2>
-<div class="space_center"></div>
-<div class="space_center"></div>
-<div class="avatars">
-<% current_subject.avatars.each do |avatar| %>
-<% unless avatar.id.blank? && (current_subject.avatars.size == 1) %>
-  <% unless avatar.id.blank? %>
-	<%= div_for(avatar) do %>
-	  	<% if avatar.active %>	  	
-	  	  <%= image_tag(avatar.logo.url(:profile), :class => "default", :size => "94x94") %>
-	    <% else %>
-	  	   <%= link_to image_tag("btn/close.png"), avatar, :confirm => t('avatar.destroy_sure'), :method => :delete, :class => "delete_avatar" %>
-	       <%= link_to (image_tag(avatar.logo.url(:profile), :class => "non_default", :size => "94x94"), avatar, :confirm => t('avatar.set_default_sure'), :method => :put) %>
-	  	 <% end %>
-  	<% end %>
-  <%else%>
-        <%= t('avatar.no_avatars') %>
+<% unless current_subject.avatars.first.id.blank? && (current_subject.avatars.size == 1) %>
+  <h2>Use your saved avatars ...</h2>
+  <div class="space_center"></div>
+  <div class="space_center"></div>
+  <div class="avatars">
+  <% current_subject.avatars.each do |avatar| %>
+    <% unless avatar.id.blank? %>
+  	<%= div_for(avatar) do %>
+  	     <div class="boxgrid captionfull">
+           <%= image_tag(avatar.logo.url(:profile), :class => avatar.active ? 'default' : 'non_default', :size => '94x94') %>
+           <% if avatar.active %>    
+             <div class="cover boxcaption">    
+               <%= link_to "Delete avatar", avatar, :confirm => t('avatar.destroy_sure'), :method => :delete %>
+             </div>  
+           <% else %>
+             <div class="cover boxcaption">    
+               <%= link_to "Set as default", avatar, :confirm => t('avatar.set_default_sure'), :method => :put %>
+               <%= link_to "Delete avatar", avatar, :confirm => t('avatar.destroy_sure'), :method => :delete %>
+             </div>
+           <% end %>
+         </div>  	  	 
+    	<% end %>
+      <% end %>
   <% end %>
+  </div>
+  <br />
+  <br class="clearfloat" />
+  <div class="space_center"></div>
+  <div class="space_center"></div>
+  <h2>... our upload a new one</h2>
+<% else %>
+  <h2>Upload an avatar</h2>
 <% end %>
-<% end %>
-</div>
-<br />
-<br class="clearfloat" />
-<div class="space_center"></div>
-<div class="space_center"></div>
-<h2>... our upload a new one</h2>
 <%= render :partial => 'form' %>

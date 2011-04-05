@@ -1,26 +1,80 @@
 /******************** Common ***********************/
 
 /******************** Avatars ***********************/
-.avatars{
-	padding-left: 10px;
+.avatars {
+  padding-left: 10px;
 }
 .avatar {
-	float:left;
-	position:relative;
+  float:left;
+  position:relative;
 }
 .avatar .actions {
 }
 .avatar .delete_avatar {
-	position:absolute;
-	top:5px;
-	right:5px;
+  position:absolute;
+  top:5px;
+  right:5px;
+  display:none;
 }
 .avatar .default {
-	border: 5px solid #2A3890;
+  border: 5px solid #2A3890;
 }
 .avatar .non_default {
-	border: 5px solid #E0EEF5;
+  border: 5px solid #E0EEF5;
 }
 /******************** New form ***********************/
 .new_logo_form {
 }
+/******************** Slide Effect ***********************/
+.boxgrid {
+  width: 104px;
+  height: 104px;
+  float:left;
+  overflow: hidden;
+  position: relative;
+}
+.boxgrid img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 0;
+}
+.boxcaption {
+  top: 104px;
+  left: 5px;
+  float: left;
+  position: absolute;
+  background: #E0EEF5;
+  opacity: .8;
+  width: 84px;
+  height: 28px;
+  /* For IE 5-7 */
+  filter: progid
+  :DXImageTransform.Microsoft.Alpha(Opacity=80);
+  /* For IE 8 */
+  -MS-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+}
+.captionfull .boxcaption {
+  top: 104px;
+  left: 5px;
+  padding: 5px;
+}
+/**************** Crop **************/
+#precropDiv {
+  width:499px;
+  display:inline-block;
+  padding: 0px 30px 0px 29px;
+}
+#precropPrev {
+  vertical-align:top;
+  display:inline-block;
+  /*padding: 5px 4px 5px 4px;*/
+}
+#precropPrevImg {
+  width:100px;
+  height:100px;
+  overflow:hidden;
+  margin-left:30px;
+  border: 1px solid #E0EEF5;
+}
+
