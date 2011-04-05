@@ -207,7 +207,6 @@ en:
     website: "Website"      
   public:
     other: "Everybody"
-  relations: "Relations"
   representation:
     action: "representing"
     change: "Change"
@@ -241,6 +240,7 @@ en:
       like: "Like"
       partner: "Add Partner"
     relation:
+      one: "Contact type"
       new: "New contact type"
     edit:
       contact: "Contact: %{type}"
