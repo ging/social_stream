@@ -53,7 +53,7 @@ function update_crop(coords) {
 }
 <% end %>
 
-<%= form_for :logo, @avatar,:url => avatars_path, :html => { :multipart => true } do |f| %>
+<%= form_for @avatar, :html => { :multipart => true } do |f| %>
 <div class= "block">
   <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
     <%= f.hidden_field attribute, :id => attribute %>

@@ -17,12 +17,12 @@
 <br class="clearfloat" />
 <div class="space_center"></div>
 <div class="space_center"></div>
-<% unless current_subject.avatars.first.id.blank? && (current_subject.avatars.size == 1) %>
+<% unless @avatars.first.id.blank? && (@avatars.size == 1) %>
   <h2>Use your saved avatars ...</h2>
   <div class="space_center"></div>
   <div class="space_center"></div>
   <div class="avatars">
-  <% current_subject.avatars.each do |avatar| %>
+  <% @avatars.each do |avatar| %>
     <% unless avatar.id.blank? %>
   	<%= div_for(avatar) do %>
   	     <div class="boxgrid captionfull">
