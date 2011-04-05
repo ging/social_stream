@@ -33,7 +33,7 @@ en:
             message: "%{name} added you as contact."
   avatar:
     crop_image: "Crop the uploaded image"
-    crop_submit: "Crop"
+    crop_submit: "Crop image"
     destroy: "Delete"
     destroy_sure: "Are you sure you wan't to delete the selected avatar?"
     error:
@@ -45,23 +45,29 @@ en:
     no_avatars: "You haven't any avatar, plesase create a new one."
     one: "Avatar"
     other: "Avatars"
+    original: "Original image"
     preview: "Preview"
     profile_change: "Change your avatar"
     set_default: "Set as default"
     set_default_sure: "Are you sure you wan't to set this avatar as default?"
     upload: "Upload"
   browse: "Browse"
+  button:
+    cancel: "Cancel"
+    update: "Update"
   comment:
     input: "Write a comment..."
     confirm_delete: "Delete comment?"
   contact:
-    one: "Contact"
-    other: "Contacts"
     all_n: "All contacts (%{count})"
+    edit:
+      submit: "Edit Contact"
     new:
       link: "+ Add contact"
       title: "Add %{name} as contact"
       submit: "Add Contact"
+    one: "Contact"
+    other: "Contacts"
   copyright: "2010 Copyright - All rights reserved"
   days: Days
   delete:
@@ -99,22 +105,6 @@ en:
     unlocks:
       send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
       unlocked: 'Your account was successfully unlocked. You are now signed in.'
-  edit:
-    aboutme: "About me --NOTE: use profile.<class>.about"
-    actualcity: "Actual City --NOTE: use profile.actualcity"
-    address: "Address --NOTE: use profile.address"
-    birthday: "BirthDay --NOTE: use profile.<class>.birthday"
-    contact: "Contact information --NOTE: use profile.contact"
-    email: "E-mail --NOTE: use profile.email"
-    experience: "Experience --NOTE: use profile.experience"
-    fax: "Fax --NOTE: use profile.fax"
-    group_info: "Group information --NOTE: use profile.<class>.info"
-    mobile: "Mobile --NOTE: use profile.mobile"
-    organization: "Organization --NOTE: use profile.organization"
-    personal_info: "Personal information --NOTE: use profile.<class>.info"
-    phone: "Phone --NOTE: use profile.phone"
-    profile: "Edit profile"
-    website: "Website --NOTE: use profile.website"
   forgot_password: "Forgot you password?"
   frontpage:
     collaborate:
@@ -207,7 +197,6 @@ en:
     website: "Website"      
   public:
     other: "Everybody"
-  relations: "Relations"
   representation:
     action: "representing"
     change: "Change"
@@ -241,6 +230,7 @@ en:
       like: "Like"
       partner: "Add Partner"
     relation:
+      one: "Contact type"
       new: "New contact type"
     edit:
       contact: "Contact: %{type}"

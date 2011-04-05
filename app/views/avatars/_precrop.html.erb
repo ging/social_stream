@@ -1,18 +1,25 @@
 <% my_file_name = File.basename(@avatar.logo.queued_for_write[:original].path) %>
 
-<div id="precropDiv" class = "block title content" style="width:500px;display:inline-block;padding: 5px 4px 5px 4px;">
-	<%= image_tag "tmp/#{my_file_name}",:id=>"cropImage" %>
-</div>
-
-<div  class = "block logo" style = "vertical-align:top;display:inline-block;padding: 5px 4px 5px 4px;" ><%= t('avatar.preview') %></br>
-  <div style="width:100px;height:100px;overflow:hidden;margin-left:5px;" >
-		<%= image_tag "tmp/#{my_file_name}",:id=>"preview" %>
+<div class = "block">
+  <div id="precropPrev" >
+    <div class="form_row">
+      <%= t('avatar.preview') %>
+    </div>
+    <div id="precropPrevImg" class="logo">
+      <%= image_tag "tmp/#{my_file_name}",:id=>"preview" %>
+    </div>  
+  </div>
+  
+  <div class="form_row">
+    <%= t('avatar.original') %>
+  </div>
+  
+  <div id="precropDiv" class = "block title content">
+  	<%= image_tag "tmp/#{my_file_name}",:id=>"cropImage" %>
   </div>
 </div>
-
 <% content_for :javascript do %>
-	$("#sidebar").remove();
-        jQuery('#cropImage').Jcrop({
+jQuery('#cropImage').Jcrop({
             bgColor:     'clear',
             bgOpacity:   .6,
             setSelect:   [ 0, 0, 200, 200 ],
@@ -30,8 +37,7 @@ function update_crop(coords) {
   	ry = 100/$("#cropImage").height();
   	coords.x = 0;
   	coords.y = 0;
-  }
-  
+  }  
   
   $('#preview').css({
     width: Math.round(rx * $("#cropImage").width()) + 'px',
@@ -53,7 +59,7 @@ function update_crop(coords) {
     <%= f.hidden_field attribute, :id => attribute %>
   <% end %>
 	<%= f.hidden_field :name, :value => my_file_name %>
-	  <div class="form_row">
+	  <div class="form_row center">
   <%= f.submit t('avatar.crop_submit'), :class => "button" %>
   </div>
   </div>

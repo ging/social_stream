@@ -140,3 +140,37 @@ textarea.new_tie_text_area{ width:100%; height: 100px; color: #2A3890;}
 
 /*************SPACES SECTION *************/
 .space_center {	padding-top: 9px;	padding-right: 4px;	text-align: center;}
+
+/********** Current logo change **********/
+.logo_grid {
+  width: 142px;
+  height: 119px;
+  overflow: hidden;
+  position: relative;
+}
+.logo_grid img {
+  position: absolute;
+  top: 0;
+  left: 23px;
+  border: 0;
+}
+.logo_caption {
+  top: 119px;
+  left: 23px;
+  float: left;
+  position: absolute;
+  background: #E0EEF5;
+  opacity: .8;
+  width: 119px;
+  height: 18px;
+  /* For IE 5-7 */
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  /* For IE 8 */
+  -MS-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+}
+.logo_full .logo_caption {
+  top: 119px;
+  left: 23pxpx;
+  padding: 0px;
+}
+

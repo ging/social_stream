@@ -24,6 +24,7 @@ module SocialStream
         end
       end
 
+      # Activities
       can :create, Activity do |a|
         a.tie.allows?(user, 'create', 'activity')
       end
@@ -38,6 +39,25 @@ module SocialStream
 
       can :destroy, Activity do |a|
         a.tie.allows?(user, 'destroy', 'activity')
+      end
+
+      # Groups
+      can :read, Group
+
+      can :create, Group do |g|
+        user.present? &&
+          ( g._founder == user.slug ||
+            Actor.find_by_slug!(g._founder).sent_ties.received_by(user).with_permissions('represent', nil).any? )
+      end
+
+      can :update, Group do |g|
+        user.present? &&
+          g.sent_ties.received_by(user).with_permissions('represent', nil).any?
+      end
+
+      can :destroy, Group do |g|
+        user.present? &&
+          g.sent_ties.received_by(user).with_permissions('represent', nil).any?
       end
     end
   end

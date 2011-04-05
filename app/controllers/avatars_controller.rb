@@ -42,7 +42,8 @@ class AvatarsController < InheritedResources::Base
       end
       @avatar.active = true
       @avatar.save
-      redirect_to [current_subject, :profile]
+      redirect_to avatars_path
+      #redirect_to [current_subject, :profile]
     end
   end
 

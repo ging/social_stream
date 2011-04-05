@@ -23,6 +23,10 @@ module SocialStream
         { model_sym => model_attributes }
       end
 
+      def updating_attributes
+        attributes.merge({ :id => @current_model.to_param })
+      end
+
       # Post.count
       def model_count
         model_class.count
@@ -59,6 +63,57 @@ module SocialStream
           resource.should be_new_record
         end
       end
+
+      shared_examples_for "Allow Updating" do
+        it "should update" do
+          put :update, updating_attributes
+
+          resource = assigns(model_sym)
+
+          resource.should_receive(:update_attributes).with(attributes)
+          assert resource.valid?
+          response.should redirect_to(resource)
+        end
+      end
+
+      shared_examples_for "Deny Updating" do
+        it "should not update" do
+          begin
+            put :update, updating_attributes
+          rescue CanCan::AccessDenied
+          end
+
+          resource = assigns(model_sym)
+
+          resource.should_not_receive(:update_attributes)
+        end
+      end
+
+      shared_examples_for "Allow Destroying" do
+        it "should destroy" do
+          count = model_count
+          delete :destroy, :id => @current_model.to_param
+
+          resource = assigns(model_sym)
+
+          model_count.should eq(count - 1)
+        end
+      end
+
+      shared_examples_for "Deny Destroying" do
+        it "should not destroy" do
+          count = model_count
+          begin
+            delete :destroy, :id => @current_model.to_param
+          rescue CanCan::AccessDenied
+          end
+
+          resource = assigns(model_sym)
+
+          model_count.should eq(count)
+        end
+      end
+
     end
   end
 end

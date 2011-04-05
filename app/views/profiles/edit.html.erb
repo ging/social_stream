@@ -15,9 +15,32 @@
   });
 <% end %>
 
+<%if params[:section].present? 
+  case params[:section]
+  when "about_me"
+    level2 = link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('profile.' + current_subject.class.to_s.downcase + '.info'),
+      :controller => :profiles , :action => :edit, :section => "about_me")
+  when "contact_info" 
+    level2 = link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('profile.contact'),
+      :controller => :profiles , :action => :edit, :section => "contact_info")
+  when "my_experience" 
+    level2 = link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('profile.' + current_subject.class.to_s.downcase + '.experience'),
+      :controller => :profiles , :action => :edit, :section => "my_experience")
+	end
+else
+  level2 = link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('profile.one'),
+      :controller => :profiles , :action => :edit)
+end %>
+
+<%= location(
+  link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('menu.information'), [current_subject, :profile]),
+  level2
+) %>
+<div class="space_center"></div>
+
 <%= form_for(@profile, :url => [current_subject, :profile], :remote => true) do |f| %>
 
-<div class="block">
+<div class="block" id="profile_form">
   <% if !params[:section].present? or params[:section].eql?("about_me") %>
 		<% content_for :javascript do %>
 	    $(function () {
@@ -156,11 +179,13 @@
   <% end %>
 
   <% if params[:section].present? %>
-  <%= hidden_field_tag("section", params[:section]) %>
+    <%= hidden_field_tag("section", params[:section]) %>
   <% end %>
   <div class="form_row space_center">
-    <%= f.submit "Update", :class => "button" %>&nbsp;
-    <button class="button" onclick="window.location.href='<%= polymorphic_path(current_subject) %>';">Cancel</button>
+    <%= f.submit t('button.update'), :class => "button" %>&nbsp;
+    <button class="button" onclick="window.location.href='<%= polymorphic_path(current_subject) %>';">
+    	<%= t('button.cancel')%>
+		</button>
   </div>
 
 <% end %>

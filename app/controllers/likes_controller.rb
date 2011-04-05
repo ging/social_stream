@@ -1,4 +1,6 @@
 class LikesController < ApplicationController
+  before_filter :authenticate_user!
+
   # POST /activities/1/like.js
   def create
     @like = Like.new(current_subject, params[:activity_id])

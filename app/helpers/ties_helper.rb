@@ -28,4 +28,10 @@ module TiesHelper
   def link_follow_state
       link_to("Unfollow", home_path)
   end
+  
+  
+  def get_permission_id(action,object,function)
+    return Permission.find_by_action_and_function_and_object(action,object,function).id
+  end
+  
 end
