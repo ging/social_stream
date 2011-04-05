@@ -1,61 +1,102 @@
-<div class="dialog_add_tie" id="new_tie">
-    <div class="content_add_user" >
-      <div class="activity_add_ties">
-  
-  	  <%= location(
-		image_tag("btn/btn_friend.png", :class => "menu_icon")+t('tie.new.title')
-	  ) %>
-  
-	  	<%= form_for @tie do |f| %>  
-           	<%= f.hidden_field :receiver_id %>
-           	<%= f.hidden_field :sender_id %>
-			<%= f.hidden_field :relation_name %>
-        	   
-			<div class="block">
-				  <div class="close_add_contact">
-				  	<%=link_to('X','#', :id => "close_add_contact")%>
-				  </div>
-				  <div class="form_row center">
-				    <h2> <%= t('tie.edit.title') %> </h2>
-				  </div>	
-					<div class="two_columns_container">
-						<div class="form_column_left">
-							<p class="colum_field_title"><%= t('message.one') %></p>
-							<%= f.text_area :message,   :class =>"new_tie_text_area" %>
-						</div>
+<% content_for :headers do %>
+  <%= stylesheet_link_tag "addContact.css", :media => "screen, projection" %>
+	 <%= javascript_include_tag 'addContact'%>
+<% end %> 
+
+<% toolbar :profile => @tie.receiver_subject, :option => 'contacts' %>
+
+<% read_starTies_activity_id = get_permission_id("read","star_ties","activity") %>
+<% follow_id = get_permission_id("follow",nil,nil) %>
+<% create_tie_activity_id = get_permission_id("create","tie","activity") %>
+
+<% content_for :javascript do %>
+  $(document).ready(function() { 
+    defaultRelations = ["friend","acquaintance","public"]
+    
+		relation_name = "<%=@tie.relation.name%>";
+		$(".dropdown dt a span").html(relation_name);   
+    $('input[name$="tie[relation_name]"]').val(relation_name);
+			
+		if (defaultRelations.indexOf(relation_name)==-1){
+
+			//Rellenar relations
+			var allowRead_starTies_activity = <%=(@tie.relation.permissions.find_by_id(read_starTies_activity_id)!=nil)%>
+			var allowFollow = <%=(@tie.relation.permissions.find_by_id(follow_id)!=nil)%>
+			var allowCreate_tie_activity = <%=(@tie.relation.permissions.find_by_id(create_tie_activity_id)!=nil)%>
+			
+			if(allowRead_starTies_activity){
+			   $("#<%= read_starTies_activity_id %>").attr('checked',true);
+			}
+			
+			if(allowFollow){
+			   $("#<%= follow_id %>").attr('checked',true);
+			}
+			
+			if(allowCreate_tie_activity){
+			   $("#<%= create_tie_activity_id %>").attr('checked',true);
+			}
+			
+      $("#relationPermissions").show();
+		}
 		
-						<div class="form_column_right">
-							<div class="select_relations">
-								
-								<div id="relationsSelect" class="dropdown">
-									<dt><a href="#"><span><%= t('relations') %></span></a></dt>
-									<dd>
-									    <ul>
-										<% (@tie.sender.relations.sort.map{ |r| [ r.name] }).each do |relationArray| %>
-											<li><a href="#" class="option"><%=relationArray[0]%><span class="value"><%=relationArray[0]%></span></a></li>
-										<% end %>
-											<li><a href="#" class="input_link">
-												<span class="value"></span>
-												<input type="text" class="input_select"/>
-												</a></li>
-									    </ul>
-									</dd>
-							    </div>
-								
-							</div>
-							
-							<div id="relationPermissions">
-								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[relation_permissions][]" value="<%= Permission.find_by_action_and_function_and_object("read","star_ties","activity").id%>"> <%= t('permissions.read', :user=> @tie.receiver.name) %></p>
-								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[relation_permissions][]" value="<%= Permission.find_by_action("follow").id%>"> <%= t('permissions.follow', :user=> @tie.receiver.name) %></p>
-								<p class="relationPermision"><input type="checkbox" class="checkbox_permission" name="tie[relation_permissions][]" value="<%= Permission.find_by_action_and_function_and_object("create","tie","activity").id%>"> <%= t('permissions.write', :user=> @tie.receiver.name) %></p>
-							</div>
-						</div>
-					</div>
-					<div class="form_bottom">
-						<%= submit_tag t('contact.edit.submit'), :class => "button" %>
-					</div>
-				</div>
-			<% end %>
-    	</div>
-	</div>
+	});
+<% end %>
+
+<div class="dialog_add_tie" id="new_tie">
+  <div class="content_add_user" >
+    <div class="activity_add_ties">
+      
+
+      <%= location(
+        link_to(image_tag("btn/btn_friend.png", :class => "menu_icon")+t('tie.edit.title'), edit_tie_path,:remote => true)
+      ) %>
+      
+      <%= form_for @tie do |f| %>  
+        <%= f.hidden_field :receiver_id %>
+        <%= f.hidden_field :sender_id %>
+        <%= f.hidden_field :relation_name %>
+             
+      <div class="block">
+                  
+        <div class="form_row center">
+         <h2> <%= t('tie.edit.title') %> </h2>
+        </div>  
+        <div class="two_columns_container">
+          <div class="form_column_left">
+           <p class="colum_field_title"><%= t('message.one') %></p>
+            <%= f.text_area :message,   :class =>"new_tie_text_area" %>
+          </div>
+          
+          <div class="form_column_right">
+            <div class="select_relations">  
+              <div id="relationsSelect" class="dropdown">
+              <dt><a href="#"><span><%= t('tie.relation.one') %></span></a></dt>
+              <dd>                
+                <ul>
+                <% (@tie.sender.relations.sort.map{ |r| [ r.name] }).each do |relationArray| %>
+                  <li><a href="#" class="option"><%=relationArray[0]%><span class="value"><%=relationArray[0]%></span></a></li>
+                <% end %>
+                  <li><a href="#" class="input_link">
+                   <span class="value"></span>
+                   <input type="text" class="input_select"/>
+                    </a></li>
+                </ul>
+              </dd>
+                </div>
+              </div>
+
+              <div id="relationPermissions">
+                <p class="relationPermision"><input type="checkbox" id="<%=read_starTies_activity_id%>" class="checkbox_permission" name="tie[relation_permissions][]" value="<%=read_starTies_activity_id%>">  <%= t('permissions.read.activity.star_ties', :user=> @tie.receiver.name) %></p>
+                <p class="relationPermision"><input type="checkbox" id="<%=follow_id%>"                 class="checkbox_permission" name="tie[relation_permissions][]" value="<%=follow_id%>">                  <%= t('permissions.follow', :user=> @tie.receiver.name) %></p>
+                <p class="relationPermision"><input type="checkbox" id="<%=create_tie_activity_id%>"    class="checkbox_permission" name="tie[relation_permissions][]" value="<%=create_tie_activity_id%>">     <%= t('permissions.create.activity.tie', :user=> @tie.receiver.name) %></p>
+              </div>
+            </div>
+          </div>
+          <div class="form_bottom">
+            <%= submit_tag t('contact.edit.submit'), :class => "button" %>
+          </div>
+        </div>
+      <% end %>
+      </div>
+  </div>
 </div>

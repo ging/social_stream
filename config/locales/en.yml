@@ -59,13 +59,15 @@ en:
     input: "Write a comment..."
     confirm_delete: "Delete comment?"
   contact:
-    one: "Contact"
-    other: "Contacts"
     all_n: "All contacts (%{count})"
+    edit:
+      submit: "Edit Contact"
     new:
       link: "+ Add contact"
       title: "Add %{name} as contact"
       submit: "Add Contact"
+    one: "Contact"
+    other: "Contacts"
   copyright: "2010 Copyright - All rights reserved"
   days: Days
   delete:
