@@ -49,8 +49,7 @@
   width: 84px;
   height: 28px;
   /* For IE 5-7 */
-  filter: progid
-  :DXImageTransform.Microsoft.Alpha(Opacity=80);
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
   /* For IE 8 */
   -MS-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
 }
