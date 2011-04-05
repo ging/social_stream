@@ -18,6 +18,16 @@ describe GroupsController do
       assert_response :success
     end
 
+    it "should not render new" do
+      begin
+        get :new
+
+        assert false
+      rescue CanCan::AccessDenied 
+        assert true
+      end
+    end
+
     context "faking a new group" do
       before do
         model_attributes[:_founder] = Factory(:user).slug
@@ -58,6 +68,12 @@ describe GroupsController do
 
     it "should render other group" do
       get :show, :id => Factory(:group).to_param
+
+      assert_response :success
+    end
+
+    it "should render new" do
+      get :new, 'group' => { '_founder' => @user.to_param }
 
       assert_response :success
     end

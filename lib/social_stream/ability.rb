@@ -42,13 +42,12 @@ module SocialStream
       end
 
       # Groups
-      can :read, Group do |g|
-        true
-      end
+      can :read, Group
 
       can :create, Group do |g|
         user.present? &&
-          g._founder == user.slug
+          ( g._founder == user.slug ||
+            Actor.find_by_slug!(g._founder).sent_ties.received_by(user).with_permissions('represent', nil).any? )
       end
 
       can :update, Group do |g|
