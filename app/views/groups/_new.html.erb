@@ -17,6 +17,12 @@
   });
 <% end %>
 
+<%= location(
+  link_to(image_tag("btn/btn_group.png", :class => "menu_icon")+t('group.other'), groups_path),
+  link_to(image_tag("btn/btn_group.png", :class => "menu_icon")+t('group.new.action'), new_group_path('group' => { '_founder' => current_subject.slug }))
+) %>
+<div class="space_center"></div>
+
 <%= form_for @group do |f| %>
 	<% f.object._founder = current_subject.slug %>
 	<%= f.hidden_field :_founder %>
@@ -34,9 +40,10 @@
 		</div>
 	<% end %>
 	<div class="block">
-	  <div class="form_row center">
+	  <div class="form_row">
 	    <h2><%= t('group.new.action') %></h2>
-	  </div>	
+	  </div>
+		<div class="space_center"></div>	
 		<div class="form_row">
 			<div class="form_label">
 				<%= f.label t('group.new.name') %>
