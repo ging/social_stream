@@ -45,7 +45,7 @@ Gem::Specification.new do |s|
 
 
   # Development Gem dependencies
-  s.add_development_dependency('rails', '~> 3.0.5')
+  s.add_development_dependency('rails', '~> 3.0.6')
   # Integration testing
   s.add_development_dependency('capybara', '~> 0.3.9')
   # Testing database
