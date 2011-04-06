@@ -48,17 +48,17 @@ module SocialStream
       can :create, Group do |g|
         user.present? &&
           ( g._founder == user.slug ||
-            Actor.find_by_slug!(g._founder).sent_ties.received_by(user).with_permissions('represent', nil).any? )
+            Actor.find_by_slug!(g._founder).represented_by?(user) )
       end
 
       can :update, Group do |g|
         user.present? &&
-          g.sent_ties.received_by(user).with_permissions('represent', nil).any?
+          g.represented_by?(user)
       end
 
       can :destroy, Group do |g|
         user.present? &&
-          g.sent_ties.received_by(user).with_permissions('represent', nil).any?
+          g.represented_by?(user)
       end
 
       can :read, Profile
@@ -68,7 +68,11 @@ module SocialStream
         user.present? &&
           ( p.subject.is_a?(User) ?
               p.subject == user :
-              p.subject.sent_ties.received_by(user).with_permissions('represent', nil).any? )
+              p.subject.represented_by?(user) )
+      end
+
+      can :create, Representation do |r|
+        r.subject.represented_by?(user)
       end
     end
   end

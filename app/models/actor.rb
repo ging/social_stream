@@ -243,6 +243,13 @@ class Actor < ActiveRecord::Base
     sent_ties.allowing(subject, action, objective)
   end
 
+  # Can this actor be represented by subject. Does she has permissions for it?
+  def represented_by?(subject)
+    return false if subject.blank?
+
+    sent_ties.received_by(subject).with_permissions('represent', nil).any?
+  end
+
   # The ties that allow attaching an activity to them. This method is used for caching
   def active_ties
     @active_ties ||= {}
