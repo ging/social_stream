@@ -1,22 +1,32 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Tie do
-  it "should create from relation name" do
-    relation = Relation.first
-    sender = Factory(relation.sender_type.underscore)
+  context "between 2 users" do
+    before do
+      @sender, @receiver = 2.times.map{ Factory(:user) }
+    end
 
-    receiver_type = relation.receiver_type.present? ?
-                      relation.receiver_type :
-                      relation.sender_type
-                   
-    receiver = Factory(receiver_type.underscore)
+    it "should be created from relation name" do
+      relation = @sender.relations.first
 
-    tie = Factory(:tie, :sender_id => sender.actor.id,
-                        :receiver_id => receiver.actor.id,
-                        :relation_name => relation.name)
-    tie.should be_valid
+      tie = Tie.create(:sender_id => @sender.actor_id,
+                       :receiver_id => @receiver.actor_id,
+                       :relation_name => relation.name)
+
+      tie.should_not be_new_record
+    end
+
+    it "should be created from relation_name and permissions" do
+      tie = Tie.create :sender_id => @sender.actor_id,
+                       :receiver_id => @receiver.actor_id,
+                       :relation_name => "new relation",
+                       :relation_permissions => [ Permission.first.id, Permission.last.id ]
+
+      puts tie.errors
+      tie.should_not be_new_record
+      tie.relation.should_not be_new_record
+    end
   end
-
 
   describe "friend" do
     before do

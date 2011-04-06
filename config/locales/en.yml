@@ -231,7 +231,7 @@ en:
       partner: "Add Partner"
     relation:
       one: "Contact type"
-      new: "New contact type"
+      new: "New type"
     edit:
       contact: "Contact: %{type}"
       title: "Edit Contact"

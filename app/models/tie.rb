@@ -99,7 +99,7 @@ class Tie < ActiveRecord::Base
       joins(:relation => :permissions).merge(Permission.follow)
   }
 
-  validates_presence_of :sender_id, :receiver_id, :relation_id
+  validates_presence_of :sender_id, :receiver_id, :relation
 
   before_validation :find_or_build_relation
 
@@ -241,7 +241,6 @@ class Tie < ActiveRecord::Base
   # Before validation callback
   # Assigns relation or builds it based on the param
   def find_or_build_relation
-
     return if find_relation || relation_name.blank?
 
     self.relation = Relation.new :name => relation_name,
