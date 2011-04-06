@@ -50,6 +50,9 @@ en:
     profile_change: "Change your avatar"
     set_default: "Set as default"
     set_default_sure: "Are you sure you wan't to set this avatar as default?"
+    text:
+      new: "... or upload a new one"
+      use: "Use your saved avatars ..."
     upload: "Upload"
   browse: "Browse"
   button:
