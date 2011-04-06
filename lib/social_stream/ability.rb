@@ -3,6 +3,7 @@ module SocialStream
     include CanCan::Ability
 
     def initialize(user)
+
       # Activity Objects
       (SocialStream.objects - [ :actor ]).map{ |obj|
         obj.to_s.classify.constantize
@@ -58,6 +59,16 @@ module SocialStream
       can :destroy, Group do |g|
         user.present? &&
           g.sent_ties.received_by(user).with_permissions('represent', nil).any?
+      end
+
+      can :read, Profile
+
+      # Profile
+      can :update, Profile do |p|
+        user.present? &&
+          ( p.subject.is_a?(User) ?
+              p.subject == user :
+              p.subject.sent_ties.received_by(user).with_permissions('represent', nil).any? )
       end
     end
   end

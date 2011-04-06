@@ -21,11 +21,42 @@ describe ProfilesController do
 
       assert_response :success
     end
+
+    it "should not render others edit" do
+      begin
+        get :edit, :user_id => Factory(:user).to_param
+
+        assert false
+      rescue CanCan::AccessDenied
+        assert true
+      end
+    end
+
+    it "should update" do
+      put :update, :user_id => @user.to_param, :profile => { :organization => "Social Stream" }
+
+      response.should redirect_to([@user, :profile])
+    end
+
+    it "should not update other's" do
+      begin
+        put :update, :user_id => Factory(:user).to_param, :profile => { :organization => "Social Stream" }
+
+        assert false
+      rescue CanCan::AccessDenied
+        assert true
+      end
+    end
+
   end
 
   context "for a group" do
     before do
-      @group = Factory(:group)
+      membership = Factory(:member)
+      @group = membership.sender_subject
+      @user  = membership.receiver_subject
+
+      sign_in @user
       represent @group
     end
 
@@ -39,6 +70,32 @@ describe ProfilesController do
       get :edit, :group_id => @group.to_param
 
       assert_response :success
+    end
+
+    it "should not render others edit" do
+      begin
+        get :edit, :group_id => Factory(:group).to_param
+
+        assert false
+      rescue CanCan::AccessDenied
+        assert true
+      end
+    end
+
+    it "should update" do
+      put :update, :group_id => @group.to_param, :profile => { :organization => "Social Stream" }
+
+      response.should redirect_to([@group, :profile])
+    end
+
+    it "should not update other's" do
+      begin
+        put :update, :group_id => Factory(:group).to_param, :profile => { :organization => "Social Stream" }
+
+        assert false
+      rescue CanCan::AccessDenied
+        assert true
+      end
     end
   end
 end
