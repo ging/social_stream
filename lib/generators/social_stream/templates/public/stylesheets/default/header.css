@@ -42,8 +42,8 @@ li.btn_menu_browse{background: transparent url("/images/btn/btn_browse.png") no-
 #menu_account ul{	list-style: none;	margin: 0px;	float:left;}
 #menu_account ul li{	line-height:20px;	padding:5px 0px 5px 20px; vertical-align:top;}
 
-#account{display:inline-block;vertical-align: top; height:22px;}
-
+#account, #representation_li,#current_user_info, #representations_menu {display:inline-block;vertical-align: top; height:22px; color:#FFF;}
+#representation_li{margin-right:20px;margin-left:10px;display:none;}
 
 li.btn_menu_exit{background: transparent url("/images/btn/btn_exit.png") no-repeat left center;}
 li.btn_menu_representation{}
@@ -119,9 +119,8 @@ ul.sf-menu li li li.sfHover ul {
 	/*margin-bottom:	1em;   */
 }
 .sf-menu a {
-	padding: 		.55em 1em;
+	padding: 		.40em 1em .70em 2em;
 	text-decoration:none;
-  padding-left:2em;
 }
 .sf-menu a, .sf-menu a:visited  { /* visited pseudo selector so IE6 applies text colour*/
 	color:			#fff;

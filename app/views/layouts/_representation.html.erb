@@ -1,17 +1,45 @@
-
-  <%= link_to(image_tag(current_user.logo.url(:tie), :width => 20, :height => 20, :class => 'menu_icon'), current_user) %>
-  <%= link_to(current_user.name, current_user) %>
-  <%= t('representation.action') %>
+  <div id="current_user_info">
+    <%= link_to(image_tag(current_user.logo.url(:representation), :width => 20, :height => 20, :class => 'menu_icon'), current_user) %>
+    <%= link_to(current_user.name, current_user) %>
+    <%= t('representation.action') %>
+  </div>
   <%= form_for(Representation.new(current_subject), :url => representation_path) do |f| %>
-    <%= f.select :subject_dom_id, current_user.represented.unshift(current_user).map{ |s| [ s.name, dom_id(s) ] }, :class=>"button" %>
+    <%= f.select :subject_dom_id, current_user.represented.unshift(current_user).map{ |s| [ s.name, dom_id(s) ] }, :class=>"button sf-menu" %>
     <%= f.submit t('representation.change') %>
   <% end %>
+  <% representations = current_user.represented.unshift(current_user) %>
+  <% representations.delete(current_subject) %>
+     <div id="representations_menu">
+      <ul class="sf-menu" >
+            <li id="representation_li">
+              <a href="#" class="sf-with-ul" style="background: transparent url('<%= current_user.logo.url(:representation)%>') no-repeat left top;"><%= current_subject.name %><span class="sf-sub-indicator"> »</span></a>
+              <ul>
+                <% representations.each do |representation| %>
+                <li>
+                  <a href="#" class="sf-with-ul" style="background: transparent url('<%= representation.logo.url(:representation)%>') no-repeat left center;margin-left:2px;"><%= representation.name %></a>
+               </li>
+                <% end %>
+              </ul>
+            </li>
+            <li class="current" id="account">
+              <a href="#" class="sf-with-ul" id="btn_menu_config"><%= t('account.one') %><span class="sf-sub-indicator"> »</span></a>
 
-
+              <ul>
+                <li>
+                  <%= link_to 'Configurations', '#' %>
+                </li>
+                <li>
+                  <%= link_to 'Notifications', '#' %>
+                </li>
+                <li class="current">
+                  <%= link_to 'Privacy', '#' %>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          </div>
 <%-# this should be in content_for(:javascript), but the partial is rendered after yield(:javascript) -%>
 <script type="text/javascript" charset="utf-8">
-  $("#representation_submit").hide();
-  $("#representation_subject_dom_id").change(function() {
-    $(this).closest("form").submit();
-  });
+  $("#new_representation").hide();
+  $("#representation_li").show();
 </script>
