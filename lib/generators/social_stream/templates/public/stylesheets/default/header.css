@@ -42,8 +42,14 @@ li.btn_menu_browse{background: transparent url("/images/btn/btn_browse.png") no-
 #menu_account ul{	list-style: none;	margin: 0px;	float:left;}
 #menu_account ul li{	line-height:20px;	padding:5px 0px 5px 20px; vertical-align:top;}
 
+#menu_pipe{	vertical-align: top; height:23px; }
+#menu_pipe span {	float:right;	padding-right: 5px;	vertical-align: top;	padding-top: 5px;}
+#menu_pipe ul{	list-style: none;	margin: 0px;	float:left;}
+#menu_pipe ul li{	line-height:20px;	padding:5px 0px 5px 0px; vertical-align:top;}
+
+
 #account, #representation_li,#current_user_info, #representations_menu {display:inline-block;vertical-align: top; height:22px; color:#FFF;}
-#representation_li{margin-right:20px;margin-left:10px;display:none;}
+#representation_li{margin-left:10px;display:none;}
 
 li.btn_menu_exit{background: transparent url("/images/btn/btn_exit.png") no-repeat left center;}
 li.btn_menu_representation{}
