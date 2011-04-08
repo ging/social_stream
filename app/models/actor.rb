@@ -247,7 +247,11 @@ class Actor < ActiveRecord::Base
   def represented_by?(subject)
     return false if subject.blank?
 
-    sent_ties.received_by(subject).with_permissions('represent', nil).any?
+    sent_ties.
+      received_by(subject).
+      joins(:relation => :permissions).
+      merge(Permission.represent).
+      any?
   end
 
   # The ties that allow attaching an activity to them. This method is used for caching
