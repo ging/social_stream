@@ -10,12 +10,20 @@ describe RepresentationsController do
         sign_in @user
       end
 
+      context "representing herself" do
+        it "should redirect_to root" do
+          post :create, :representation => { :subject_dom_id => dom_id(@user) }
+
+          response.should redirect_to(:root)
+        end
+      end
+
       context "representing own group" do
         before do
           @group = Factory(:member, :receiver => @user.actor).sender_subject
         end
 
-        it "should redirect_to home" do
+        it "should redirect_to root" do
           post :create, :representation => { :subject_dom_id => dom_id(@group) }
 
           response.should redirect_to(:root)

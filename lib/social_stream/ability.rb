@@ -71,6 +71,7 @@ module SocialStream
               p.subject.represented_by?(user) )
       end
 
+      # Representation
       can :create, Representation do |r|
         r.subject.represented_by?(user)
       end
