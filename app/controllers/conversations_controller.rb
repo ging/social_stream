@@ -15,9 +15,9 @@ class ConversationsController < ApplicationController
 
   def show
     if @box.eql? 'trash'
-      @receipts = @conversation.receipts(@actor).trash
+      @receipts = @conversation.receipts_for(@actor).trash
     else
-      @receipts = @conversation.receipts(@actor).not_trash
+      @receipts = @conversation.receipts_for(@actor).not_trash
     end
     render :action => :show
     @receipts.mark_as_read
@@ -41,14 +41,14 @@ class ConversationsController < ApplicationController
     end
 
     if params[:reply_all].present?
-      last_receipt = @conversation.receipts(@actor).last
+      last_receipt = @conversation.receipts_for(@actor).last
       @receipt = @actor.reply_to_all(last_receipt, params[:body])
     end
 
     if @box.eql? 'trash'
-      @receipts = @conversation.receipts(@actor).trash
+      @receipts = @conversation.receipts_for(@actor).trash
     else
-      @receipts = @conversation.receipts(@actor).not_trash
+      @receipts = @conversation.receipts_for(@actor).not_trash
     end
     render :action => :show
     @receipts.mark_as_read
