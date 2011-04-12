@@ -85,8 +85,8 @@ class CreateSocialStream < ActiveRecord::Migration
     
     create_table "permissions", :force => true do |t|
       t.string   "action"
-      t.string   "object"
-      t.string   "function"
+      t.string   "object",   :default => nil
+      t.string   "function", :default => nil
       t.datetime "created_at"
       t.datetime "updated_at"
     end
@@ -165,7 +165,6 @@ class CreateSocialStream < ActiveRecord::Migration
       t.integer  "relation_id"
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.boolean  "original", :default => true
     end
     
     add_index "ties", "receiver_id"

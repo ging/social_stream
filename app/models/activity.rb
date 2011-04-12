@@ -10,12 +10,6 @@
 # There are two types of wall, :home and :profile. Check {Actor#wall} for more information
 #
 class Activity < ActiveRecord::Base
-  # The direction of the sender and receiver subjects compared with the attached tie
-  SUBJECT_DIRECTIONS = {
-    :direct  => %w(follow make-friend),
-    :inverse => %w(like post update)
-  }
-
   has_ancestry
 
   belongs_to :activity_verb
@@ -51,9 +45,9 @@ class Activity < ActiveRecord::Base
     q
   }
 
-  # After an activity is created, it is associated to ties
+  # After an activity is created, it is disseminated to follower ties
   attr_accessor :_tie
-  after_create :assign_to_ties
+  after_create :disseminate_to_ties
 
   # The name of the verb of this activity
   def verb
@@ -70,7 +64,7 @@ class Activity < ActiveRecord::Base
   # This method provides the {Actor}. Use {#sender_subject} for the {SocialStream::Models::Subject Subject}
   # ({User}, {Group}, etc..)
   def sender
-    direct? ? tie.sender : tie.receiver
+    tie.sender 
   end
 
   # The {SocialStream::Models::Subject Subject} author of this activity
@@ -78,7 +72,7 @@ class Activity < ActiveRecord::Base
   # This method provides the {SocialStream::Models::Subject Subject} ({User}, {Group}, etc...).
   # Use {#sender} for the {Actor}.
   def sender_subject
-    direct? ? tie.sender_subject : tie.receiver_subject
+    tie.sender_subject
   end
 
   # The wall where the activity is shown belongs to receiver
@@ -86,7 +80,7 @@ class Activity < ActiveRecord::Base
   # This method provides the {Actor}. Use {#receiver_subject} for the {SocialStream::Models::Subject Subject}
   # ({User}, {Group}, etc..)
   def receiver
-    direct? ? tie.receiver : tie.sender
+    tie.receiver
   end
 
   # The wall where the activity is shown belongs to the receiver
@@ -94,7 +88,7 @@ class Activity < ActiveRecord::Base
   # This method provides the {SocialStream::Models::Subject Subject} ({User}, {Group}, etc...).
   # Use {#receiver} for the {Actor}.
   def receiver_subject
-    direct? ? tie.receiver_subject : tie.sender_subject
+    tie.receiver_subject
   end
 
   # The comments about this activity
@@ -108,7 +102,7 @@ class Activity < ActiveRecord::Base
   end
 
   def liked_by(user) #:nodoc:
-    likes.joins(:ties).where('tie_activities.original' => true).merge(Tie.received_by(user))
+    likes.joins(:ties).where('tie_activities.original' => true).merge(Tie.sent_by(user))
   end
 
   # Does user like this activity?
@@ -118,15 +112,14 @@ class Activity < ActiveRecord::Base
 
   # Build a new children activity where subject like this
   def new_like(subject)
-    a= children.new :verb => "like",
-                    :_tie => subject.sent_ties(:receiver => receiver,
-                                               :relation => relation).first
+    a = children.new :verb => "like",
+                     :_tie => subject.sent_ties(:receiver => receiver).first
+
     if direct_activity_object.present? 
       a.activity_objects << direct_activity_object
     end
     
     a
-  
   end
 
   # The first activity object of this activity
@@ -154,17 +147,9 @@ class Activity < ActiveRecord::Base
   private
 
   # Assign to ties of followers
-  def assign_to_ties
-    original = tie_activities.create!(:tie => _tie)
-
-    # All the ties following the activities attached to this tie, allowed to read
-    # this activity
-    Tie.following([_tie.sender_id, _tie.receiver_id]).each do |t|
-      if _tie.allows?(t.sender_id, 'read', 'activity')
-        tie_activities.create!(:tie => t,
-                               :original => false)
-      end
-    end
+  def disseminate_to_ties
+    # Create the original sender tie_activity
+    tie_activities.create!(:tie => _tie)
   end
 
 

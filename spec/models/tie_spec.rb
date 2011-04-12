@@ -9,9 +9,9 @@ describe Tie do
     it "should be created from relation name" do
       relation = @sender.relations.first
 
-      tie = Tie.create(:sender_id => @sender.actor_id,
+      tie = Tie.create :sender_id => @sender.actor_id,
                        :receiver_id => @receiver.actor_id,
-                       :relation_name => relation.name)
+                       :relation_name => relation.name
 
       tie.should_not be_new_record
     end
@@ -25,6 +25,22 @@ describe Tie do
       puts tie.errors
       tie.should_not be_new_record
       tie.relation.should_not be_new_record
+    end
+  end
+
+  context "replied" do
+    before do
+      @sent = Factory(:friend)
+      @received = Factory(:friend,
+                         :sender_id => @sent.receiver_id,
+                         :receiver_id => @sent.sender_id)
+    end
+
+    it "should be found by scopes" do
+      Tie.replied.should include(@sent)
+      Tie.replied.should include(@received)
+      Tie.replying(@sent).should include(@received)
+      Tie.replying(@received).should include(@sent)
     end
   end
 
@@ -50,12 +66,10 @@ describe Tie do
 
       it "creates activity" do
         Tie.allowing(@s, 'create', 'activity').should include(@tie)
-        Tie.allowing(@s, 'create', 'activity').should_not include(@tie.related('public'))
       end
 
       it "reads activity" do
         Tie.allowing(@s, 'read', 'activity').should include(@tie)
-        Tie.allowing(@s, 'read', 'activity').should include(@tie.related('public'))
       end
     end
 
@@ -66,12 +80,10 @@ describe Tie do
 
       it "creates activity" do
         Tie.allowing(@s, 'create', 'activity').should_not include(@tie)
-        Tie.allowing(@s, 'create', 'activity').should_not include(@tie.related('public'))
       end
 
       it "reads activity" do
         Tie.allowing(@s, 'read', 'activity').should include(@tie)
-        Tie.allowing(@s, 'read', 'activity').should include(@tie.related('public'))
       end
     end
 
@@ -82,12 +94,10 @@ describe Tie do
 
       it "creates activity" do
         Tie.allowing(@s, 'create', 'activity').should_not include(@tie)
-        Tie.allowing(@s, 'create', 'activity').should_not include(@tie.related('public'))
       end
 
       it "reads activity" do
         Tie.allowing(@s, 'read', 'activity').should_not include(@tie)
-#        Tie.allowing(@s, 'read', 'activity').should_not include(@tie.related('public'))
       end
     end
 
@@ -98,12 +108,10 @@ describe Tie do
 
       it "creates activity" do
         Tie.allowing(@s, 'create', 'activity').should_not include(@tie)
-        Tie.allowing(@s, 'create', 'activity').should_not include(@tie.related('public'))
       end
       
       it "reads activity" do
         Tie.allowing(@s, 'read', 'activity').should_not include(@tie)
-        Tie.allowing(@s, 'read', 'activity').should     include(@tie.related('public'))
       end
     end
   end
@@ -120,7 +128,6 @@ describe Tie do
 
       it "updates activity" do
         Tie.allowing(@s, 'update', 'activity').should include(@tie)
-        Tie.allowing(@s, 'update', 'activity').should include(@tie.related('public'))
       end
     end
 
@@ -131,17 +138,14 @@ describe Tie do
 
       it "creates activity" do
         Tie.allowing(@s, 'create', 'activity').should_not include(@tie)
-        Tie.allowing(@s, 'create', 'activity').should_not include(@tie.related('public'))
       end
 
        it "reads activity" do
         Tie.allowing(@s, 'read', 'activity').should include(@tie)
-        Tie.allowing(@s, 'read', 'activity').should include(@tie.related('public'))
       end
 
       it "updates activity" do
         Tie.allowing(@s, 'update', 'activity').should include(@tie)
-        Tie.allowing(@s, 'update', 'activity').should include(@tie.related('public'))
       end
     end
   end

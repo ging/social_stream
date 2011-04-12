@@ -232,31 +232,31 @@ class Actor < ActiveRecord::Base
   
   # Set of ties sent by this actor received by a
   def ties_to(a)
-    sent_ties.received_by(a).original
+    sent_ties.received_by(a)
   end
   
   def ties_to?(a)
     ties_to(a).present?
   end
-  
-  # All the ties this actor has with subject that support permission
-  def sent_ties_allowing(subject, action, objective)
+
+  # The sent {Tie ties} by this {Actor} that grant subject the permission to perform action on object
+  def allow(subject, action, object = nil)
     return [] if subject.blank?
-    
-    sent_ties.allowing(subject, action, objective)
+
+    sent_ties.allowing(subject, action, object)
   end
 
-  # Can this {Actor} be represented by subject? Either they are the same {Actor} or
-  # subject has permissions for it
+  # Does this {Actor} have any {Tie} to subject that grants her the permission of performing action on object
+  def allow?(subject, action, object = nil)
+    allow(subject, action, object).any?
+  end
+  
+  # Can this actor be represented by subject. Does she has permissions for it?
   def represented_by?(subject)
     return false if subject.blank?
 
-    Actor.normalize(subject) == self ||
-      sent_ties.
-        received_by(subject).
-        joins(:relation => :permissions).
-        merge(Permission.represent).
-        any?
+    self.class.normalize(subject) == self ||
+      allow?(subject, 'represent')
   end
 
   # The ties that allow attaching an activity to them. This method is used for caching
@@ -264,10 +264,17 @@ class Actor < ActiveRecord::Base
     @active_ties ||= {}
   end
 
-  # The ties that allow subject creating activities for this actor
-  def active_ties_for(subject)
+  # This {Actor} #allow s subject to create activities and subject has at least one tie to subject
+  def activity_ties_for(subject)
     active_ties[subject] ||=
-      sent_ties_allowing(subject, 'create', 'activity')
+      ( allow?(subject, 'create', 'activity') ?
+        ties_to(subject) :
+        [] )
+  end
+
+  # Is there any {Tie} for subject to create an activity to this {Actor} ?
+  def activity_ties_for?(subject)
+    activity_ties_for(subject).any?
   end
 
   def pending_ties

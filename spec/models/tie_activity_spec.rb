@@ -1,49 +1,106 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe TieActivity do
-  describe "for followers" do
-    before do
-      @tie = Factory(:friend)
-
-      @tie_to_sender_friend   = Factory(:friend, :receiver => @tie.sender)
-      @tie_to_receiver_friend = Factory(:friend, :receiver => @tie.receiver)
-    end
-
-    describe "of a public activity" do
+  describe "dissemination" do
+    context "a friend b" do
       before do
-        @a = Factory(:activity, :_tie => @tie.related(@tie.sender.relations.sort.last))
+        @afb = Factory(:friend)
       end
 
-      it "should be created" do
-        assert @tie_to_sender_friend.activities.include?(@a)
-        assert @tie_to_receiver_friend.activities.include?(@a)
-      end
-    end
-
-    describe "of a friend activity" do
-      before do
-        @a = Factory(:activity, :_tie => @tie)
-      end
-
-      it "should not be created" do
-        assert !@tie_to_sender_friend.activities.include?(@a)
-        assert !@tie_to_receiver_friend.activities.include?(@a)
-      end
-    end
-
-    describe "one of them being friend" do
-      before do
-        Factory(:friend, :sender => @tie.sender, :receiver => @tie_to_receiver_friend.sender)
-      end
-
-      describe "with a friend activity" do
+      context "c friend a" do
         before do
-          @a = Factory(:activity, :_tie => @tie)
+          @cfa = Factory(:friend, :receiver => @afb.sender)
+          @a = Factory(:activity, :_tie => @afb)
         end
 
-        it "should be created for the friend" do
-          assert !@tie_to_sender_friend.activities.include?(@a)
-          assert @tie_to_receiver_friend.activities.include?(@a)
+        it "should not be created" do
+          @cfa.activities.should_not include(@a)
+        end
+
+        context "and a friend c" do
+          before do
+            @afc = Factory(:friend, :sender => @cfa.receiver, :receiver => @cfa.sender)
+            @a = Factory(:activity, :_tie => @afb)
+          end
+
+          it "should be created" do
+            @cfa.activities.should include(@a)
+          end
+
+        end
+      end
+
+      context "and d friend b" do
+        before do
+          @dfb = Factory(:friend, :receiver => @afb.receiver)
+          @a = Factory(:activity, :_tie => @afb)
+        end
+
+        it "should not be created" do
+          @dfb.activities.should_not include(@a)
+        end
+
+        context "and b friend d" do
+          before do
+            @bfd = Factory(:friend, :sender => @dfb.receiver, :receiver => @dfb.sender)
+            @a = Factory(:activity, :_tie => @afb)
+          end
+
+          it "should not be created" do
+            @dfb.activities.should_not include(@a)
+          end
+        end
+
+      end
+
+      context "and b friend a" do
+        before do
+          @bfa = Factory(:friend, :sender => @afb.receiver, :receiver => @afb.sender)
+        end
+
+        context "c friend a" do
+          before do
+            @cfa = Factory(:friend, :receiver => @afb.sender)
+            @a = Factory(:activity, :_tie => @afb)
+          end
+
+          it "should not be created" do
+            @cfa.activities.should_not include(@a)
+          end
+
+          context "and a friend c" do
+            before do
+              @afc = Factory(:friend, :sender => @cfa.receiver, :receiver => @cfa.sender)
+              @a = Factory(:activity, :_tie => @afb)
+            end
+
+            it "should be created" do
+              @cfa.activities.should include(@a)
+            end
+
+          end
+        end
+
+        context "and d friend b" do
+          before do
+            @dfb = Factory(:friend, :receiver => @afb.receiver)
+            @a = Factory(:activity, :_tie => @afb)
+          end
+
+          it "should not be created" do
+            @dfb.activities.should_not include(@a)
+          end
+
+          context "and b friend d" do
+            before do
+              @bfd = Factory(:friend, :sender => @dfb.receiver, :receiver => @dfb.sender)
+              @a = Factory(:activity, :_tie => @afb)
+            end
+
+            it "should be created" do
+              @dfb.activities.should include(@a)
+            end
+          end
         end
       end
     end

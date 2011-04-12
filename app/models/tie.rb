@@ -1,16 +1,19 @@
-# A tie is a link between two {Actor actors} with a {Relation relation}.
+# A {Tie} is a link between two {Actor Actors} with a {Relation}.
 #
-# The first {Actor actor} is the sender of the {Tie tie}. The second {Actor actor}
-# is the receiver of the {Tie tie}.
+# The first {Actor} is the sender of the {Tie}. The second {Actor}
+# is the receiver of the {Tie}.
 #
 # = {Tie Ties} and {Activity activities}
-# {Activity Activities} are attached to {Tie ties}. 
-# * The sender of the tie is the target of the {Activity}.
-#   The wall-profile of an {Actor} is composed by the resources assigned to
-#   the {Tie Ties} in which the {Actor} is the sender.
-# * The receiver {Actor} of the {Tie} is the author of the {Activity}.
+# {Activity Activities} are attached to {Tie ties}. When _Alice_ post in _Bob_'s wall,
+# the {Activity} is attached to the {Tie} from _Alice_ to _Bob_
+#
+# * The sender of the {Tie} is the author of the {Activity}.
 #   It is the user that uploads a resource to the website or the social entity that
-#   originates the {Activity}.
+#   originates the {Activity} (for example: add as contact).
+#
+# * The receiver {Actor} of the {Tie} is the receiver of the {Activity}.
+#   The {Activity} will appear in the wall of the receiver, depending on the permissions
+#
 # * The {Relation} sets up the mode in which the {Activity} is shared.
 #   It sets the rules, or {Permission Permissions}, by which {Actor} have access
 #   to the {Activity}.
@@ -35,7 +38,6 @@
 # = Scopes
 # There are several scopes defined:
 #
-# original:: ties created by actors. It excludes ties created in the weaker set.
 # sent_by(actor):: ties whose sender is actor
 # received_by(actor):: ties whose receiver is actor
 # sent_or_received_by(actor):: the union of the former
@@ -45,13 +47,12 @@
 #           is replied if there is a tie from b to a
 #
 class Tie < ActiveRecord::Base
-  attr_accessor :message
-  attr_accessor :relation_permissions
-
   # Facilitates relation assigment along with find_relation callback
   attr_writer :relation_name
   # Facilitates new relation permissions assigment along with find_or build_relation callback
-  attr_reader :relation_permissions
+  attr_accessor :relation_permissions
+  # Send a message when this tie is created
+  attr_accessor :message
 
   belongs_to :sender,
              :class_name => "Actor",
@@ -65,9 +66,7 @@ class Tie < ActiveRecord::Base
   has_many :tie_activities, :dependent => :destroy
   has_many :activities, :through => :tie_activities
 
-  scope :original, where(:original => true)
-
-  scope :recent, order("#{ quoted_table_name }.created_at DESC")
+  scope :recent, order("ties.created_at DESC")
 
   scope :sent_by, lambda { |a|
     where(:sender_id => Actor.normalize_id(a))
@@ -94,6 +93,12 @@ class Tie < ActiveRecord::Base
       where("ties.sender_id = ties_2.receiver_id AND ties.receiver_id = ties_2.sender_id")
   }
 
+  scope :replying, lambda { |tie|
+    replied.
+      where('ties_2.sender_id' => tie.sender_id).
+      where('ties_2.receiver_id' => tie.receiver_id)
+  }
+
   scope :following, lambda { |a|
     where(:receiver_id => Actor.normalize_id(a)).
       joins(:relation => :permissions).merge(Permission.follow)
@@ -104,7 +109,6 @@ class Tie < ActiveRecord::Base
   before_validation :find_or_build_relation
 
   before_create :save_relation
-  after_create :complete_weak_set
   after_create :create_activity
   after_create :send_message
 
@@ -185,12 +189,6 @@ class Tie < ActiveRecord::Base
   # We get the set of ties that are allowing certain permission
   #
 
-  scope :with_permissions, lambda { |action, object|
-    joins(:relation => :permissions).
-      where('permissions.action' => action).
-      where('permissions.object' => object)
-  }
-
   # Given a given permission (action, object), the access_set are the set of ties that grant that permission.
   scope :access_set, lambda { |tie, action, object|
     with_permissions(action, object).
@@ -201,8 +199,8 @@ class Tie < ActiveRecord::Base
     query = 
       select("DISTINCT ties.*").
         from("ties INNER JOIN relations ON relations.id = ties.relation_id, ties as ties_as INNER JOIN relations AS relations_as ON relations_as.id = ties_as.relation_id INNER JOIN relation_permissions ON relations_as.id = relation_permissions.relation_id INNER JOIN permissions ON permissions.id = relation_permissions.permission_id").
-        where("permissions.action = ?", action).
-        where("permissions.object = ?", object)
+        where("permissions.action" => action).
+        where("permissions.object" => object)
 
     conds = Permission.parameter_conditions
     # FIXME: Patch to support public activities
@@ -236,6 +234,25 @@ class Tie < ActiveRecord::Base
     allowing(user, action, object).any?
   end
 
+  scope :with_permissions, lambda { |action, object|
+    joins(:relation => :permissions).
+      where('permissions.action' => action).
+      where('permissions.object' => object)
+  }
+
+  # All the ties that are allowed to follow activities from this tie
+  def followers
+    followers = Tie.received_by(sender).with_permissions('follow', nil)
+
+    unless relation_name == 'public'
+      allowed = access_set('read', 'activity').map(&:receiver_id)
+
+      followers = followers.sent_by(allowed)
+    end
+
+    followers
+  end
+
   private
 
   # Before validation callback
@@ -265,34 +282,21 @@ class Tie < ActiveRecord::Base
   end
  
 
-  # After create callback
-  # Creates ties with weaker relations in the strength hierarchy of this tie
-  def complete_weak_set
-    return if reflexive?
-
-    relation.weaker.each do |r|
-      if relation_set(:relations => r).blank?
-        t = relation_set.build :relation => r,
-                               :original => false
-        t.save!
-      end
-    end
-  end
-  
+  # After create callback to create related {Activity}
   def create_activity
-    return if ! original? || reflexive?
+    return if reflexive?
 
     Activity.create! :_tie => self, :activity_verb => ActivityVerb[contact_verb]
   end
- 
-  # Send a message to the receiver of the tie
-  def send_message
-    if original? && message.present?
-      sender.send_message(receiver, message, I18n.t("activity.verb.#{ contact_verb }.#{ receiver.subject_type }.message", :name => sender.name))
-    end
+
+   def contact_verb
+    replied? ? "make-friend" : "follow"
   end
 
-  def contact_verb
-    replied? ? "make-friend" : "follow"
+  # Send a message to the receiver of the tie
+  def send_message
+    if message.present?
+      sender.send_message(receiver, message, I18n.t("activity.verb.#{ contact_verb }.#{ receiver.subject_type }.message", :name => sender.name))
+    end
   end
 end

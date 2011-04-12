@@ -43,10 +43,10 @@
 #
 # Available functions are:
 #
-# +tie+:: apply the permission to the established tie only.
+# nil:: apply the permission to the established tie only.
 #
 #         Example: if the _friend_ relation has the permission
-#         <tt>create activity tie</tt>, the _friend_ can create activities
+#         <tt>create activity nil</tt>, the _friend_ can create activities
 #         attached to this tie only. _Bob_ can create activities only at _Alice_'s
 #         _friend_ level.
 #
@@ -90,7 +90,7 @@ class Permission < ActiveRecord::Base
   # The SQL and ARel conditions for permission queries
   ParameterConditions = {
     :table => {
-      'tie' =>
+      nil =>
         "ties_as.sender_id = ties.sender_id AND ties_as.receiver_id = ties.receiver_id AND ties_as.relation_id = ties.relation_id",
       'weak_ties' =>
         "ties_as.sender_id = ties.sender_id AND ties_as.receiver_id = ties.receiver_id AND relations.lft BETWEEN relations_as.lft AND relations_as.rgt",
@@ -100,7 +100,7 @@ class Permission < ActiveRecord::Base
         "ties_as.sender_id = ties.sender_id AND relations.lft BETWEEN relations_as.lft AND relations_as.rgt"
     },
     :arel => {
-      'tie' => lambda { |as, t|
+      nil => lambda { |as, t|
         # The same sender, receiver and relation
         as[:sender_id].eq(t.sender_id).and(
           as[:receiver_id].eq(t.receiver_id)).and(
@@ -141,7 +141,7 @@ class Permission < ActiveRecord::Base
       else
         ParameterConditions[:table].inject([]){ |result, pc|
           result <<
-            sanitize_sql([ "#{ pc.last } AND permissions.function = ?", pc.first ])
+            "#{ pc.last } AND #{ sanitize_sql('permissions.function' => pc.first) }"
         }.join(" OR ")
       end
     end

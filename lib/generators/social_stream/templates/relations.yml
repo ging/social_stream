@@ -12,10 +12,10 @@ user:
     name: friend
     permissions:
       - [ follow ]                       # follow the activities of the friend
-      - [ create,  activity, tie ]       # let the friend create activities to the same tie
+      - [ create,  activity ]            # let the friend create activities
       - [ read,    activity, star_ties ] # friend can read activities from the other friends
-      - [ update,  activity, tie ]       # update activities to the same tie
-      - [ destroy, activity, tie ]       # destroy activities to the same tie
+      - [ update,  activity ]            # update her activities
+      - [ destroy, activity ]            # destroy her activities
   acquaintance:
     name: acquaintance
     parent: friend # friend relation is stronger than acquaintance

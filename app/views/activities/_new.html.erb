@@ -1,4 +1,4 @@
-<% if receiver.active_ties_for(current_subject).any? %>
+<% if receiver.activity_ties_for?(current_subject) %>
   <% content_for :javascript do %>
 
     securityImage = "<%= escape_javascript(image_tag('btn/btn_security.png', :id => 'security_image', :alt => 'security')) %>";
@@ -11,14 +11,14 @@
 
   <div id="activities_header" class="content_size">
     <%= form_for Post.new(:text => t('activity.input'),
-                          :_activity_tie_id => receiver.active_ties_for(current_subject).first.id),
+                          :_activity_tie_id => receiver.activity_ties_for(current_subject).first.id),
                           :remote => true  do |f| %>
       <%= f.text_field :text, :id => "input_activities", :size => 85 %>
       <div id="activities_share_btn">
 
-        <% if receiver.active_ties_for(current_subject).count > 1 %>
+        <% if receiver.activity_ties_for(current_subject).count > 1 %>
           <div id="securities">
-            <%= f.select :_activity_tie_id, receiver.active_ties_for(current_subject).sort{ |t, u| t.relation <=> u.relation }.map{ |t| [ t.relation_name, t.id ] }, {}, :id => 'security' %>
+            <%= f.select :_activity_tie_id, receiver.activity_ties_for(current_subject).sort{ |t, u| t.relation <=> u.relation }.map{ |t| [ t.relation_name, t.id ] }, {}, :id => 'security' %>
           </div>
         <% else %>
           <%= f.hidden_field :_activity_tie_id %>
