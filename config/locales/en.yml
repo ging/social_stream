@@ -15,7 +15,7 @@ en:
     one: "Activity"
     other: "Activities"
     to_comment: "Comment"
-    unlike: "Already I do not like"
+    unlike: "I do not like anymore"
     verb:
         follow:
           User:
@@ -24,6 +24,13 @@ en:
           Group:
             title: "%{subject} added %{contact} as contact."
             message: "%{name} added you as contact."
+        like:
+          User:
+            title: "%{subject} is a fan of %{contact}."
+            message: "%{name} is now your fan."
+          Group:
+            title: "%{subject} is a fan of %{contact}."
+            message: "%{name} is now your fan."
         make-friend:
           User:
             title: "%{subject} and %{contact} are now connected."

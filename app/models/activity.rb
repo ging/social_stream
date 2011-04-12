@@ -34,8 +34,6 @@ class Activity < ActiveRecord::Base
   has_many :activity_objects,
            :through => :activity_object_activities
 
-  after_create :like_direct_object
-
   scope :wall, lambda { |type, ties|
     q = select("DISTINCT activities.*").
           roots.
@@ -118,9 +116,15 @@ class Activity < ActiveRecord::Base
 
   # Build a new children activity where subject like this
   def new_like(subject)
-    children.new :verb => "like",
-                 :_tie => subject.sent_ties(:receiver => receiver,
-                                            :relation => relation).first
+    a= children.new :verb => "like",
+                    :_tie => subject.sent_ties(:receiver => receiver,
+                                               :relation => relation).first
+    if direct_activity_object.present? 
+      a.activity_objects << direct_activity_object
+    end
+    
+    a
+  
   end
 
   # The first activity object of this activity
@@ -136,7 +140,7 @@ class Activity < ActiveRecord::Base
   # The title for this activity in the stream
   def title view
     case verb
-    when "follow", "make-friend"
+    when "follow", "make-friend", "like"
       I18n.t "activity.verb.#{ verb }.#{ tie.receiver.subject_type }.title",
              :subject => view.link_name(sender_subject),
              :contact => view.link_name(receiver_subject)
@@ -161,14 +165,6 @@ class Activity < ActiveRecord::Base
     end
   end
 
-  # Link like activities with parent direct object
-  def like_direct_object
-    return unless verb == "like"
-
-    return if parent.direct_object.blank?
-
-    activity_objects << parent.direct_activity_object
-  end
 
   private
 

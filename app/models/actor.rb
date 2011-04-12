@@ -315,6 +315,31 @@ class Actor < ActiveRecord::Base
     avatars.active.first || avatars.build
   end
   
+  # The 'like' qualifications emmited to this actor
+  def likes
+    Activity.joins(:activity_verb).where('activity_verbs.name' => "like").
+             joins(:activity_objects).where('activity_objects.id' => activity_object_id)
+  end
+  
+  def liked_by(subject) #:nodoc:
+    likes.joins(:ties).where('tie_activities.original' => true).merge(Tie.received_by(subject))
+  end
+  
+  # Does subject like this {Actor}?
+  def liked_by?(subject)
+    liked_by(subject).present?
+  end
+  
+  # Build a new activity where subject like this
+  def new_like(subject)
+    a = Activity.new :verb => "like",
+                     :_tie => subject.ties_to(self).first
+    
+    a.activity_objects << activity_object           
+                    
+    a             
+  end
+  
   private
   
   # After create callback

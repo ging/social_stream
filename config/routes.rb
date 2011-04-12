@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   # Social Stream subjects configured in config/initializers/social_stream.rb
   SocialStream.subjects.each do |actor|
     resources actor.to_s.pluralize do
+      resource :like
       resource :profile
       resources :activities
     end
