@@ -34,7 +34,7 @@ class Activity < ActiveRecord::Base
   has_many :activity_objects,
            :through => :activity_object_activities
 
-  after_craete :send_notifications
+  after_create :send_notifications
   
   scope :wall, lambda { |type, ties|
     q = select("DISTINCT activities.*").
