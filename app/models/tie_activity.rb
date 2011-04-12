@@ -20,10 +20,7 @@ class TieActivity < ActiveRecord::Base
     receiver_ties =
       Tie.
         with_permissions('create', 'activity').
-        replying(tie).
-        # The line below fix an annoying bug in Rails 3.0.6 that deletes the join part
-        # from the with_permissions scope
-        from("ties INNER JOIN relations ON ties.relation_id = relations.id, ties as ties_2 INNER JOIN relation_permissions ON relation_permissions.relation_id = relations.id")
+        replying(tie)
 
     if receiver_ties.present?
       followers |= receiver_ties

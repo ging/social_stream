@@ -94,9 +94,8 @@ class Tie < ActiveRecord::Base
   }
 
   scope :replying, lambda { |tie|
-    replied.
-      where('ties_2.sender_id' => tie.sender_id).
-      where('ties_2.receiver_id' => tie.receiver_id)
+    where(:sender_id => tie.receiver_id).
+    where(:receiver_id => tie.sender_id)
   }
 
   scope :following, lambda { |a|
