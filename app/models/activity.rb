@@ -34,6 +34,8 @@ class Activity < ActiveRecord::Base
   has_many :activity_objects,
            :through => :activity_object_activities
 
+  after_craete :send_notifications
+  
   scope :wall, lambda { |type, ties|
     q = select("DISTINCT activities.*").
           roots.
@@ -182,5 +184,10 @@ class Activity < ActiveRecord::Base
     else
       raise "Unknown direction for verb #{ verb }"
     end
+  end
+  
+  #Send notifications to actors based on proximity, interest and permissions
+  def send_notifications
+    
   end
 end
