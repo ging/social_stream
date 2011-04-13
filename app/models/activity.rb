@@ -155,22 +155,6 @@ class Activity < ActiveRecord::Base
 
   private
 
-  # The {#sender} and the {#receiver} of the {Activity} depends on its {ActivityVerb}
-  #
-  # Contact activities such as make-friend or follow are direct. They have the same sender
-  # and receiver as their tie. On the other hand, post activities are inverse. The sender of
-  # the activity is the receiver of the tie and the receiver of the activity is the sender of
-  # the tie
-  def direct?
-    if SUBJECT_DIRECTIONS[:direct].include?(verb)
-      true
-    elsif SUBJECT_DIRECTIONS[:inverse].include?(verb)
-      false
-    else
-      raise "Unknown direction for verb #{ verb }"
-    end
-  end
-  
   #Send notifications to actors based on proximity, interest and permissions
   def send_notifications
     
