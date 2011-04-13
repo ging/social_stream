@@ -329,7 +329,7 @@ class Actor < ActiveRecord::Base
   end
   
   def liked_by(subject) #:nodoc:
-    likes.joins(:ties).where('tie_activities.original' => true).merge(Tie.received_by(subject))
+    likes.joins(:ties).where('tie_activities.original' => true).merge(Tie.sent_by(subject))
   end
   
   # Does subject like this {Actor}?
