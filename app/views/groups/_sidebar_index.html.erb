@@ -28,7 +28,7 @@
 <script type="text/javascript">
   var word_list = new Array(
 	<% tag_cloud(tags, %w(5 7 9 11 13 15)) do |tag, weight| %>
-		{text: "<%= tag.name %>", weight: <%= weight %>, url: ""},    
+		{text: "<%= tag.name %>", weight: <%= weight %>, url: "?tag=<%= tag.name %>"},    
 	<% end %>
 	{text: "", weight:0, url:""}
   );

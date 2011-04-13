@@ -7,6 +7,7 @@ class GroupsController < InheritedResources::Base
     @groups = Group.alphabetic.
                     letter(params[:letter]).
                     search(params[:search]).
+                    tagged_with(params[:tag]).
                     paginate(:per_page => 10, :page => params[:page])
 
     index! do |format|

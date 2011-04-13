@@ -43,6 +43,12 @@ module SocialStream
         scope :search, lambda{ |param|
           joins(:actor).merge(Actor.search(param))
         }
+        
+        scope :tagged_with, lambda { |param|
+          if param.present?
+            joins(:actor => :activity_object).merge(ActivityObject.tagged_with(param))
+          end
+        }
 
         scope :distinct_initials, joins(:actor).merge(Actor.distinct_initials)
 

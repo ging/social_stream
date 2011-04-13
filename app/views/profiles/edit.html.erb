@@ -26,6 +26,9 @@
   when "my_experience" 
     level2 = link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('profile.' + current_subject.class.to_s.downcase + '.experience'),
       :controller => :profiles , :action => :edit, :section => "my_experience")
+  when "tags"
+  level2 = link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('profile.' + current_subject.class.to_s.downcase + '.tags'),
+    :controller => :profiles , :action => :edit, :section => "tags")
 	end
 else
   level2 = link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('profile.one'),
@@ -41,6 +44,29 @@ end %>
 <%= form_for(@profile, :url => [current_subject, :profile], :remote => true) do |f| %>
 
 <div class="block" id="profile_form">
+  
+  <% if !params[:section].present? or params[:section].eql?("tags") %>
+    <div class="row">
+		<div class="form_row">
+			<div class="form_label">
+		       <%= f.label t(current_subject.class.to_s.downcase + '.tags') %>
+		      </div>
+		      <div class="form_field">
+		      	  <%= f.fields_for :actor do |actor_form| %>
+				    <div class="form_row">
+				      <div class="form_label">
+				       <%= f.label t('actor.name') %>
+				      </div>
+				      <div class="form_field">
+				       <%= actor_form.text_field :tag_list, :class => "required form_tag"  %>
+				      </div>
+				    </div>
+		      	 <%end%>
+		      </div>
+    	</div>
+	</div>
+  <% end %>
+  
   <% if !params[:section].present? or params[:section].eql?("about_me") %>
 		<% content_for :javascript do %>
 	    $(function () {

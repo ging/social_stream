@@ -30,6 +30,11 @@
 		$("#experience_info").addClass('section_highlight');
 	<%end%>
 	
+	<% if !params[:section].present? or params[:section].eql?("tags") %>
+		$("#tags").removeClass('section_normal');
+		$("#tags").addClass('section_highlight');
+	<%end%>
+	
 <% else %>
   $("#profile_notice").html("<h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>"
 	 +"<ul><% @profile.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></ul>");

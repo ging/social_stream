@@ -59,6 +59,12 @@ class Actor < ActiveRecord::Base
       where('actors.name LIKE ?', "%#{ param }%")
     end
   }
+  
+  scope :tagged_with, lambda { |param|
+    if param.present?
+      joins(:activity_object).merge(ActivityObject.tagged_with(param))
+    end
+  }
 
   scope :distinct_initials, select('DISTINCT SUBSTR(actors.name,1,1) as initial').order("initial ASC")
 

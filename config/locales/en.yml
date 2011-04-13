@@ -189,11 +189,13 @@ en:
       birthday: "Anniversary"
       experience: "Area of expertise"
       info: "Group information"
+      tags: "Group tags"
     user:
       about: "About me"
       birthday: "Birthday"
       experience: "Experience"
       info: "Personal information"
+      tags: "User tags"
     actualcity: "Actual City"
     address: "Address"
     contact: "Contact information"
