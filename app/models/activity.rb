@@ -143,6 +143,35 @@ class Activity < ActiveRecord::Base
       view.link_name sender_subject
     end.html_safe
   end
+  
+  def notificable?
+    return true if is_root?
+    return true if ['post','update'].include? root.verb
+    #return false if ['follow','like','make_friend'].include? root.verb #Not necessary 
+    return false 
+  end
+  
+  def notify
+    return nil if !notificable?
+        #Avaible verbs: follow, like, make-friend, post, update
+    case verb
+    when 'like'
+      #Like a SUBJECT
+      
+      #Like an OBJECT
+      
+    when 'follow','make_friend'
+      #Follow or Make friend with a SUBJECT
+      receipts = _tie.receiver.notify(I18n.t("activity.verb." + verb + "." + _tie.receiver_subject.class.to_s + ".notification.subject", :name => _tie.sender.name),
+      I18n.t("activity.verb." + verb + "." + _tie.receiver_subject.class.to_s + ".notification.body", :name => _tie.sender.name))
+    when 'post','update'
+      #Post or udapte an OBJECT
+      if _tie.sender!=_tie.receiver
+        receipts = _tie.receiver.notify(I18n.t("activity.verb." + verb + "." + _tie.receiver_subject.class.to_s + ".notification.subject", :name => _tie.sender.name, :direct_object => direct_object.class.to_s),
+        I18n.t("activity.verb." + verb + "." + _tie.receiver_subject.class.to_s + ".notification.body", :name => _tie.sender.name, :direct_object => direct_object.class.to_s))        
+      end      
+    end
+  end
 
   private
 
@@ -157,6 +186,6 @@ class Activity < ActiveRecord::Base
 
   #Send notifications to actors based on proximity, interest and permissions
   def send_notifications
-    
+    notify
   end
 end
