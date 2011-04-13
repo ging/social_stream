@@ -28,11 +28,20 @@ margin-top: auto; margin-bottom:auto;}
     padding:15px 10px 15px 50px;
     background-repeat: no-repeat;
     background-position: 10px center;
+    width: 440px;
+    margin-left: auto;
+    margin-right: auto;
 }
-.notice {color: #00529B;background-color: #BDE5F8;background-image: url('/public/btn/info.png');}
-.success {color: #4F8A10;background-color: #DFF2BF;background-image:url('/public/btn/success.png');}
-.alert {color: #9F6000;background-color: #FEEFB3;background-image: url('/public/btn/warning.png');}
-.error {color: #D8000C;background-color: #FFBABA;background-image: url('/public/btn/error.png');}
+.notice ul, .success ul, .alert ul, .error ul, .validation ul{
+  margin-left:50px;
+  
+}
+label.validation_error{color: #D8000C;background-color: #FFBABA;border: 1px solid;
+                       display: block;padding-left:5px;padding-right:5px;width:90%;}
+.notice {color: #00529B;background-color: #BDE5F8;background-image: url('/images/btn/info.png');}
+.success {color: #4F8A10;background-color: #DFF2BF;background-image:url('/images/btn/success.png');}
+.alert {color: #9F6000;background-color: #FEEFB3;background-image: url('/images/btn/warning.png');}
+.error {color: #D8000C;background-color: #FFBABA;background-image: url('/images/btn/error.png');}
 
 /************Forms SECTION **************/
 input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:1.0em;  line-height:135%;

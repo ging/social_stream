@@ -47,6 +47,7 @@ class MessagesController < ApplicationController
 		@receipt = @actor.send_message(@recipients, params[:body], params[:subject])
 		if (@receipt.errors.blank?)
 			@conversation = @receipt.conversation
+      flash[:success]="Your message was sent"
 			redirect_to conversation_path(@conversation, :box => :sentbox)
 		else
 			render :action => :new
