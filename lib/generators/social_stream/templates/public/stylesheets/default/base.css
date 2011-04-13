@@ -22,10 +22,17 @@ margin-top: auto; margin-bottom:auto;}
 
 
  /*********** Notices SECTION *********************/
-.error, .notice, .success {padding:.8em;margin-bottom:1em;}
-.notice {color:#1F4A75; font-weight:bold; font-size:1.3em; display:block; text-align:center;}
-.error{color:red;}
-.success {color: #088A08}
+.notice, .success, .alert, .error, .validation {
+    border: 1px solid;
+    margin: 10px 0px;
+    padding:15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+.notice {color: #00529B;background-color: #BDE5F8;background-image: url('/public/btn/info.png');}
+.success {color: #4F8A10;background-color: #DFF2BF;background-image:url('/public/btn/success.png');}
+.alert {color: #9F6000;background-color: #FEEFB3;background-image: url('/public/btn/warning.png');}
+.error {color: #D8000C;background-color: #FFBABA;background-image: url('/public/btn/error.png');}
 
 /************Forms SECTION **************/
 input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:1.0em;  line-height:135%;
