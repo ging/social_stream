@@ -302,4 +302,5 @@ en:
     other: "Users"
     all: "All users"
     all_n: "All users (%{count})"
+  welcome: "Welcome to SocialStream!"
 

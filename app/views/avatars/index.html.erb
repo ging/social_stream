@@ -5,6 +5,9 @@
 <%= javascript_include_tag 'avatars.js' %>
 <% end %>
 
+<% content_for :title do%>
+  <%= current_subject.name %>
+<% end%>
 <% content_for :sidebar do %>
   <%= render :partial => 'home/sidebar' %>
 <% end %>
