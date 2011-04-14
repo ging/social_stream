@@ -17,15 +17,16 @@ module SocialStream
         end
 
         can :read, klass do |k|
-          k._activity_tie.allows?(user, 'read', 'activity')
+          k.post_activity.tie.allows?(user, 'read', 'activity')
         end
 
         can :update, klass do |k|
-          k._activity_tie.allows?(user, 'update', 'activity')
+          k.post_activity.tie.allows?(user, 'update', 'activity')
         end
 
         can :destroy, klass do |k|
-          k._activity_tie.allows?(user, 'destroy', 'activity')
+          k.post_activity.tie.sender.represented_by?(user) ||
+            k.post_activity.tie.allows?(user, 'destroy', 'activity')
         end
       end
 
