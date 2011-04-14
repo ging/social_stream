@@ -21,7 +21,12 @@ class Relation
 
     # A {Relation::Public public relation} is always the weakest
     def <=>(relation)
-      -1
+      1
+    end
+
+    # The name of public relation
+    def name
+      I18n.t('relation.public.name')
     end
 
     # Are we supporting custom permissions for {Relation::Public}? Not by the moment.
