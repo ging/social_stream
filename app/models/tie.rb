@@ -103,7 +103,7 @@ class Tie < ActiveRecord::Base
       joins(:relation => :permissions).merge(Permission.follow)
   }
 
-  scope :public, lambda {
+  scope :public_relation, lambda {
     joins(:relation).where('relations.type' => 'Relation::Public')
   }
 
