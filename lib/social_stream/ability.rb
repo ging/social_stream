@@ -9,7 +9,11 @@ module SocialStream
         obj.to_s.classify.constantize
       }.each do |klass|
         can :create, klass do |k|
-          k._activity_tie.allows?(user, 'create', 'activity')
+          if k._activity_tie.reflexive?
+            k._activity_tie.sender.represented_by?(user)
+          else
+            k._activity_tie.allows?(user, 'create', 'activity')
+          end
         end
 
         can :read, klass do |k|
@@ -52,23 +56,18 @@ module SocialStream
       end
 
       can :update, Group do |g|
-        user.present? &&
-          g.represented_by?(user)
+        g.represented_by?(user)
       end
 
       can :destroy, Group do |g|
-        user.present? &&
-          g.represented_by?(user)
+        g.represented_by?(user)
       end
 
       can :read, Profile
 
       # Profile
       can :update, Profile do |p|
-        user.present? &&
-          ( p.subject.is_a?(User) ?
-              p.subject == user :
-              p.subject.represented_by?(user) )
+        p.subject.represented_by?(user)
       end
 
       # Representation

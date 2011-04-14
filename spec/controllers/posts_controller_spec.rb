@@ -13,11 +13,30 @@ describe PostsController do
     end
 
     describe "posts to user" do
-      before do
-        model_assigned_to @user.sent_ties.received_by(@user).related_by(@user.relations.sort.first).first
+      describe "with first relation" do
+        before do
+          model_assigned_to @user.sent_ties.received_by(@user).related_by(@user.relations.sort.first).first
+        end
+
+        it_should_behave_like "Allow Creating"
       end
 
-      it_should_behave_like "Allow Creating"
+      describe "with last relation" do
+        before do
+          model_assigned_to @user.sent_ties.received_by(@user).related_by(@user.relations.sort.last).first
+        end
+
+        it_should_behave_like "Allow Creating"
+      end
+
+      describe "with public relation" do
+        before do
+          model_assigned_to @user.sent_ties.received_by(@user).related_by(@user.relation_public).first
+        end
+
+        it_should_behave_like "Allow Creating"
+      end
+
     end
 
     describe "post to friend" do
