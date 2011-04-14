@@ -14,7 +14,7 @@ Factory.define :acquaintance, :parent => :tie do |t|
 end
 
 Factory.define :public, :parent => :tie do |t|
-  t.after_build { |u| u.relation = u.sender.relation('public') }
+  t.after_build { |u| u.relation = u.sender.relation_public }
 end
 
 # Group ties

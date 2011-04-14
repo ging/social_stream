@@ -234,7 +234,7 @@ describe Activity do
 
     before do
       user = Factory(:user)
-      tie = user.ties.where(:relation_id => user.relation('public')).first
+      tie = user.ties.where(:relation_id => user.relation_public).first
       create_activity_assigned_to(tie)
     end
 

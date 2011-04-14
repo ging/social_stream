@@ -50,7 +50,7 @@ class Tie < ActiveRecord::Base
   # Facilitates relation assigment along with find_relation callback
   attr_writer :relation_name
   # Facilitates new relation permissions assigment along with find_or build_relation callback
-  attr_accessor :relation_permissions
+  attr_accessor :relation_sphere, :relation_permissions
   # Send a message when this tie is created
   attr_accessor :message
 
@@ -101,6 +101,10 @@ class Tie < ActiveRecord::Base
   scope :following, lambda { |a|
     where(:receiver_id => Actor.normalize_id(a)).
       joins(:relation => :permissions).merge(Permission.follow)
+  }
+
+  scope :public, lambda {
+    joins(:relation).where('relations.type' => 'Relation::Public')
   }
 
   validates_presence_of :sender_id, :receiver_id, :relation
@@ -204,7 +208,7 @@ class Tie < ActiveRecord::Base
     conds = Permission.parameter_conditions
     # FIXME: Patch to support public activities
     if action == 'read' && object == 'activity'
-      conds = sanitize_sql([ "( #{ conds } ) OR relations.name = ?", "public" ])
+      conds = "( #{ conds } ) OR #{ sanitize_sql('relations.type' => 'Relation::Public') }"
     end
 
     query.where(conds)
@@ -227,8 +231,10 @@ class Tie < ActiveRecord::Base
 
   # Does this tie allows user to perform action on object?
   def allows?(user, action, object)
-    # FIXME: Patch to support public activities
-    return true if relation.name == 'public' && action == 'read' && object == 'activity'
+    # FIXME: Patch to support public activities.
+    if relation.is_a?(Relation::Public)
+      return relation.allows?(user, action, object)
+    end
 
     allowing(user, action, object).any?
   end
@@ -243,7 +249,7 @@ class Tie < ActiveRecord::Base
   def followers
     followers = Tie.received_by(sender).with_permissions('follow', nil)
 
-    unless relation_name == 'public'
+    unless relation.is_a?(Relation::Public)
       allowed = access_set('read', 'activity').map(&:receiver_id)
 
       followers = followers.sent_by(allowed)
@@ -259,8 +265,8 @@ class Tie < ActiveRecord::Base
   def find_or_build_relation
     return if find_relation || relation_name.blank?
 
-    self.relation = Relation.new :name => relation_name,
-                                 :actor => sender
+    self.relation = Relation::Custom.new :name   => relation_name,
+                                         :sphere => nil
 
     relation.permission_ids = relation_permissions
   end

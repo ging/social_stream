@@ -16,16 +16,13 @@ user:
       - [ read,    activity, star_ties ] # friend can read activities from the other friends
       - [ update,  activity ]            # update her activities
       - [ destroy, activity ]            # destroy her activities
+    sphere: personal
   acquaintance:
     name: acquaintance
     parent: friend # friend relation is stronger than acquaintance
     permissions:
       - [ read,    activity, star_ties ]
-  public:
-    name: public
-    parent: acquaintance # acquaintance is stronger than public
-    permissions:
-      - [ read,    activity, star_ties ]
+    sphere: personal
 
 group:
   member:
@@ -37,13 +34,10 @@ group:
       - [ update,  activity, weak_star_ties ] # update and destroy activities to members,
       - [ destroy, activity, weak_star_ties ] # acquaintance and public
       - [ read,    tie,      weak_star_ties ]
+    sphere: organization
   partner:
     name: partner
     parent: member # member is stronger than partner
     permissions:
       - [ read,    activity, star_ties ]
-  public:
-    name: public
-    parent: partner # partner is stronger than public
-    permissions:
-      - [ read,    activity, star_ties ]
+    sphere: organization

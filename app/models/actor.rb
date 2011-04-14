@@ -25,8 +25,8 @@ class Actor < ActiveRecord::Base
   has_one :profile, :dependent => :destroy
 
   has_many :avatars,
-  		  :validate => true,
-  		  :autosave => true
+           :validate => true,
+           :autosave => true
   		  
   has_many :sent_ties,
            :class_name => "Tie",
@@ -45,6 +45,10 @@ class Actor < ActiveRecord::Base
   has_many :receivers,
            :through => :sent_ties,
            :uniq => true
+
+  has_many :spheres
+
+  has_many :relations, :through => :spheres
 
   scope :alphabetic, order('actors.name')
 
@@ -130,14 +134,14 @@ class Actor < ActiveRecord::Base
     Tie.sent_or_received_by(self)
   end
   
-  # Relations defined and managed by this actor
-  def relations
-    Relation.includes(:ties).merge(Tie.sent_by(self))
-  end
-  
   # A given relation defined and managed by this actor
   def relation(name)
     relations.find_by_name(name)
+  end
+
+  # The {Relation::Public} for this {Actor} 
+  def relation_public
+    Relation::Public.of(self)
   end
   
   # All the {Actor actors} this one has relation with
@@ -307,8 +311,7 @@ class Actor < ActiveRecord::Base
     ts = ties
 
     if type == :profile
-      # FIXME: show public activities
-      return [] if options[:for].blank?
+      return ties.public if options[:for].blank?
 
       ts = ts.allowing(options[:for], 'read', 'activity')
     end
@@ -357,6 +360,7 @@ class Actor < ActiveRecord::Base
   
   # After create callback
   def create_initial_relations
-    Relation.defaults_for(self)
+    Relation::Public.default_for(self)
+    Relation::Custom.defaults_for(self)
   end
 end
