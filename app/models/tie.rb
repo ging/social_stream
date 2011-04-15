@@ -230,10 +230,10 @@ class Tie < ActiveRecord::Base
   end
 
   # Does this tie allows user to perform action on object?
-  def allows?(user, action, object)
+  def allow?(user, action, object)
     # FIXME: Patch to support public activities.
     if relation.is_a?(Relation::Public)
-      return relation.allows?(user, action, object)
+      return relation.allow?(user, action, object)
     end
 
     allowing(user, action, object).any?

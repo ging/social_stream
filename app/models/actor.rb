@@ -244,6 +244,14 @@ class Actor < ActiveRecord::Base
   def ties_to(a)
     sent_ties.received_by(a)
   end
+
+  # Get the first of the ties created to a, or create a new one with the {Relation::Public}
+  def ties_to!(a)
+    ties_to(a).present? ?
+      ties_to(a) :
+      Array(sent_ties.create!(:receiver => a,
+                              :relation => relation_public))
+  end
   
   def ties_to?(a)
     ties_to(a).present?
@@ -278,7 +286,7 @@ class Actor < ActiveRecord::Base
   def activity_ties_for(subject)
     active_ties[subject] ||=
       ( allow?(subject, 'create', 'activity') ?
-        ties_to(subject) :
+        subject.ties_to!(self) :
         [] )
   end
 

@@ -8,43 +8,42 @@ module SocialStream
       (SocialStream.objects - [ :actor ]).map{ |obj|
         obj.to_s.classify.constantize
       }.each do |klass|
-        can :create, klass do |k|
-          if k._activity_tie.reflexive?
-            k._activity_tie.sender.represented_by?(user)
-          else
-            k._activity_tie.allows?(user, 'create', 'activity')
-          end
+        can :create, klass do |k| # can :create, Post do |post|
+          k._activity_tie.sender.represented_by?(user) &&
+            ( k._activity_tie.reflexive? ||
+              # FIXME: representations
+              k._activity_tie.receiver.allow?(user, 'create', 'activity') )
         end
 
-        can :read, klass do |k|
-          k.post_activity.tie.allows?(user, 'read', 'activity')
+        can :read, klass do |k| # can :read, Post do |post|
+          k.post_activity.tie.allow?(user, 'read', 'activity')
         end
 
-        can :update, klass do |k|
-          k.post_activity.tie.allows?(user, 'update', 'activity')
+        can :update, klass do |k| # can :update, Post do |post|
+          k.post_activity.tie.allow?(user, 'update', 'activity')
         end
 
-        can :destroy, klass do |k|
+        can :destroy, klass do |k| # can :destroy, Post do |post|
           k.post_activity.tie.sender.represented_by?(user) ||
-            k.post_activity.tie.allows?(user, 'destroy', 'activity')
+            k.post_activity.tie.allow?(user, 'destroy', 'activity')
         end
       end
 
       # Activities
       can :create, Activity do |a|
-        a.tie.allows?(user, 'create', 'activity')
+        a.tie.allow?(user, 'create', 'activity')
       end
 
       can :read, Activity do |a|
-        a.tie.allows?(user, 'read', 'activity')
+        a.tie.allow?(user, 'read', 'activity')
       end
 
       can :update, Activity do |a|
-        a.tie.allows?(user, 'update', 'activity')
+        a.tie.allow?(user, 'update', 'activity')
       end
 
       can :destroy, Activity do |a|
-        a.tie.allows?(user, 'destroy', 'activity')
+        a.tie.allow?(user, 'destroy', 'activity')
       end
 
       # Groups

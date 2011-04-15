@@ -30,7 +30,7 @@ class Relation
     end
 
     # Are we supporting custom permissions for {Relation::Public}? Not by the moment.
-    def allows?(user, action, object)
+    def allow?(user, action, object)
       action == 'read' && object == 'activity'
     end
 

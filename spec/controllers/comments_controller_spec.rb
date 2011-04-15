@@ -21,7 +21,9 @@ describe CommentsController do
 
     describe "comment from friend" do
       before do
-        model_assigned_to Factory(:friend, :receiver => @user.actor)
+        f = Factory(:friend, :receiver => @user.actor).sender
+
+        model_assigned_to Factory(:friend, :sender => @user.actor, :receiver => f)
       end
 
       it_should_behave_like "Allow Creating"
@@ -29,7 +31,9 @@ describe CommentsController do
 
     describe "post from acquaintance" do
       before do
-        model_assigned_to Factory(:acquaintance, :receiver => @user.actor)
+        a = Factory(:acquaintance, :receiver => @user.actor).sender
+
+        model_assigned_to Factory(:friend, :sender => @user.actor, :receiver => a)
       end
 
       it_should_behave_like "Deny Creating"
