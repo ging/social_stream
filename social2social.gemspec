@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
 	s.name = "social2social"
-	s.version = "0.0.1"
+	s.version = "0.0.2"
 	s.authors = ["Víctor Sánchez Belmar"]
 	s.summary = "Provides a social stream node able to decentralize contents with the OStatus protocol"
 	s.description = "This gem allow you to connect several social stream nodes using PSHB hubs, also allows to follow, and share streams with social stream users in any node."
