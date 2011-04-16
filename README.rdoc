@@ -1,2 +1,25 @@
 = Social2social
-# TO-DO: Say something cool about social2social and other stuff.
+
+#TO-DO: Say something amazing about social2social
+
+= Installation
+
+Add to your Gemfile:
+
+  gem 'social2social'
+
+and run:
+
+  bundle update
+
+Then:
+
+  rails generate social2social:install
+
+You're almost there, now run:
+
+  rake db:migrate
+
+And finally:
+
+  rails server
