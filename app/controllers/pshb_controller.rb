@@ -16,26 +16,8 @@ class PshbController < ApplicationController
       # and delete permissions/remote actor if necessary
     end  
 
-    logger.debug request.body.read
+    #If we got here we are receiving XML
+    doc = Nokogiri::XML(request.body.read)
+    puts doc.xpath('//xmlns:title').first.content
   end
-  
-  #require "net/http"
-  #require "uri"
-  
-  #def pshb_subscription_request#(topic,hub,mode)
-  #  t = Thread.new do
-  #    #test
-  #    hub = 'http://138.4.7.113:4567/' # last '/' is mandatory!
-  #    topic = 'http://138.4.7.69:3000/api/user/demo/home.atom'
-  #    mode = 'subscribe'
-  #    #
-  #    uri = URI.parse(hub)   
-  #    response = Net::HTTP::post_form(uri,{ 'hub.callback' => pshb_callback_url, 
-  #                                          'hub.mode'     => mode,
-  #                                          'hub.topic'    => topic,
-  #                                          'hub.verify'   => 'sync'})                                            
-	#puts response.body
-  #    #TO-DO: process 4XX response.status                                      
-  #  end                                                                                
-  #end  
 end

@@ -4,7 +4,7 @@ module Social2social
 
     config.to_prepare do
       #Loading RemoteUser as SocialStream Subject
-      SocialStream.subjects << :remote_user
+      SocialStream.subjects << :remote_subject
       ::Actor.load_subtype_features
       
       #Patching Actor

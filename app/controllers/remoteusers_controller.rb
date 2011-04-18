@@ -3,14 +3,22 @@ class RemoteusersController < ApplicationController
   
   def index
     if params[:slug].present?
-      u = RemoteUser.find_or_create_using_wslug(params[:slug])
+      #Selecting the remote subject
+      u = RemoteSubject.find_or_create_using_wslug(params[:slug])
       
+      #Creating the tie between me and the remote subject
       t = Tie.create!(:sender => current_user.actor,
                       :receiver => u.actor,
                       :relation_name => "friend") 
       
-      p = Post.create!(:text => "testing testing",
-                       :_activity_tie_id => t)                                                                  
+      #Requesting a subscription to the hub
+      t = Thread.new do
+        uri = URI.parse(Social2social.hub)   
+        response = Net::HTTP::post_form(uri,{ 'hub.callback' => pshb_callback_url, 
+                                              'hub.mode'     => "subscribe",
+                                              'hub.topic'    => u.home_feed_url,
+                                              'hub.verify'   => 'sync'})                                            
+      end                                                         
     end
     
     respond_to do |format|
