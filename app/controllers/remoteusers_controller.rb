@@ -3,14 +3,14 @@ class RemoteusersController < ApplicationController
   
   def index
     if params[:slug].present?
-      wfslug = params[:slug].split('@')
-      a = RemoteUser.create!(:name => wfslug[0], 
-                             :webfinger_slug => params[:slug],
-                             :origin_node_url => wfslug[1],
-                             :hub_url => Social2social.hub)
-      home_feed = 'http://'+a.origin_node_url+'/api/user/'+a.name+'/home/'                       
-      puts home_feed                       
-      #TO-DO: I'M WORKING HERE
+      u = RemoteUser.find_or_create_using_wslug(params[:slug])
+      
+      t = Tie.create!(:sender => current_user.actor,
+                      :receiver => u.actor,
+                      :relation_name => "friend") 
+      
+      p = Post.create!(:text => "testing testing",
+                       :_activity_tie_id => t)                                                                  
     end
     
     respond_to do |format|

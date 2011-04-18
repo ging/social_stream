@@ -23,6 +23,14 @@ class Social2social::InstallGenerator < Rails::Generators::Base
                                      "  public:\n    name: public\n    permissions:\n      - [ read, tie, star_tie ]"  
   end
   
+  def inject_translations
+    copy_file 'en.yml', 'config/locales/s2s.en.yml'
+  end
+  
+  def copy_public
+    directory "public"
+  end
+  
   require 'rails/generators/active_record'
 
   def self.next_migration_number(dirname)
