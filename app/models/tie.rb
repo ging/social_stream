@@ -230,7 +230,11 @@ class Tie < ActiveRecord::Base
   end
 
   # Does this tie allows user to perform action on object?
+  #
+  # We allow all actions on reflexive ties
   def allow?(user, action, object)
+    return true if Actor.normalize_id(user) == sender_id && reflexive?
+
     # FIXME: Patch to support public activities.
     if relation.is_a?(Relation::Public)
       return relation.allow?(user, action, object)
