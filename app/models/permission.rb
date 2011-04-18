@@ -93,11 +93,11 @@ class Permission < ActiveRecord::Base
       nil =>
         "ties_as.sender_id = ties.sender_id AND ties_as.receiver_id = ties.receiver_id AND ties_as.relation_id = ties.relation_id",
       'weak_ties' =>
-        "ties_as.sender_id = ties.sender_id AND ties_as.receiver_id = ties.receiver_id AND relations.lft BETWEEN relations_as.lft AND relations_as.rgt",
+        "ties_as.sender_id = ties.sender_id AND ties_as.receiver_id = ties.receiver_id AND (relations.id = relations_as.id OR relations.ancestry = relations_as.id OR relations.ancestry = (relations_as.ancestry || '/' || relations_as.id) OR relations.ancestry LIKE (relations_as.id || '/%') OR relations.ancestry LIKE (relations_as.ancestry || '/' || relations_as.id || '/%'))",
       'star_ties' =>
         "ties_as.sender_id = ties.sender_id AND ties_as.relation_id = ties.relation_id",
       'weak_star_ties' =>
-        "ties_as.sender_id = ties.sender_id AND relations.lft BETWEEN relations_as.lft AND relations_as.rgt"
+        "ties_as.sender_id = ties.sender_id AND (relations.id = relations_as.id OR relations.ancestry = relations_as.id OR relations.ancestry = (relations_as.ancestry || '/' || relations_as.id) OR relations.ancestry LIKE (relations_as.id || '/%') OR relations.ancestry LIKE (relations_as.ancestry || '/' || relations_as.id || '/%'))"
     },
     :arel => {
       nil => lambda { |as, t|

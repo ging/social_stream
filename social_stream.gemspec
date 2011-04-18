@@ -12,10 +12,8 @@ Gem::Specification.new do |s|
 
   # Gem dependencies
   #
-  # Activity hierarchies
-  s.add_runtime_dependency('atd-ancestry', '1.3.0')
-  # Relation hierarchies
-  s.add_runtime_dependency('nested_set', '~> 1.5.3')
+  # Activity and Relation hierarchies
+  s.add_runtime_dependency('ancestry', '~> 1.2.3')
   # SQL foreign keys
   s.add_runtime_dependency('foreigner', '~> 0.9.1')
   # Authentication

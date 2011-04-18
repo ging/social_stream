@@ -64,31 +64,6 @@ class Relation < ActiveRecord::Base
         normalize(r, options).id
       end
     end
-
-    # A relation in the top of a strength hierarchy
-    def strongest
-      root
-    end
-  end
-
-  # Other relations below in the same hierarchy that this relation
-  def weaker
-    descendants
-  end
-
-  # Relations below or at the same level of this relation
-  def weaker_or_equal
-    self_and_descendants
-  end
-
-  # Other relations above in the same hierarchy that this relation
-  def stronger
-    ancestors
-  end
-
-  # Relations above or at the same level of this relation
-  def stronger_or_equal
-    self_and_ancestors
   end
 
   # Relation class scoped in the same mode that this relation

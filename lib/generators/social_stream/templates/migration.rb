@@ -143,13 +143,11 @@ class CreateSocialStream < ActiveRecord::Migration
       t.datetime "updated_at"
       t.string   "sender_type"
       t.string   "receiver_type"
-      t.integer  "parent_id"
-      t.integer  "lft"
-      t.integer  "rgt"
+      t.string   "ancestry"
       t.integer  "sphere_id"
     end
     
-    add_index "relations", "parent_id"
+    add_index "relations", "ancestry"
     add_index "relations", "sphere_id"
 
     create_table "spheres", :force => true do |t|
