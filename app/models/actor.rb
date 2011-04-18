@@ -368,7 +368,7 @@ class Actor < ActiveRecord::Base
   
   # After create callback
   def create_initial_relations
-    Relation::Public.default_for(self)
     Relation::Custom.defaults_for(self)
+    Relation::Public.default_for(self)
   end
 end
