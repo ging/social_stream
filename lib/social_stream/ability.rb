@@ -44,6 +44,13 @@ module SocialStream
         a.tie.allow?(subject, 'destroy', 'activity')
       end
 
+      # Users
+      can :read, User
+
+      can :update, User do |u|
+        u.represented_by?(subject)
+      end
+
       # Groups
       can :read, Group
 

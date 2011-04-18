@@ -15,6 +15,16 @@ describe UsersController do
 
       assert_response :success
     end
+
+    it "should not render edit" do
+      begin
+        get :edit, :id => Factory(:user).to_param
+
+        assert false
+      rescue CanCan::AccessDenied 
+        assert true
+      end
+    end
   end
 
   describe "when authenticated" do
@@ -41,6 +51,24 @@ describe UsersController do
 
       assert_response :success
     end
+
+    it "should render edit page" do
+      pending "Account section"
+      get :edit, :id => @user.to_param
+
+      assert_response :success
+    end
+
+    it "should not render other's edit" do
+      begin
+        get :edit, :id => Factory(:user).to_param
+
+        assert false
+      rescue CanCan::AccessDenied 
+        assert true
+      end
+    end
+
   end
 end
 
