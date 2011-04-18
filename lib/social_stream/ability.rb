@@ -10,7 +10,7 @@ module SocialStream
       }.each do |klass|
         can :create, klass do |k| # can :create, Post do |post|
           k._activity_tie.sender_id == subject.actor_id &&
-            k._activity_tie.allow?(subject, 'create', 'activity')
+            k._activity_tie.receiver.allow?(subject, 'create', 'activity')
         end
 
         can :read, klass do |k| # can :read, Post do |post|
@@ -22,7 +22,8 @@ module SocialStream
         end
 
         can :destroy, klass do |k| # can :destroy, Post do |post|
-          k.post_activity.tie.allow?(subject, 'destroy', 'activity')
+          k.post_activity.tie.sender_id == Actor.normalize_id(subject) ||
+            k.post_activity.tie.allow?(subject, 'destroy', 'activity')
         end
       end
 
@@ -48,7 +49,7 @@ module SocialStream
 
       can :create, Group do |g|
         subject.present? &&
-          g._founder == user.slug
+          g._founder == subject.slug
       end
 
       can :update, Group do |g|
