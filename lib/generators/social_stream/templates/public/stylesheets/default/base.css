@@ -25,7 +25,7 @@ margin-top: auto; margin-bottom:auto;}
 .notice, .success, .alert, .error, .validation {
     border: 1px solid;
     margin: 10px 0px;
-    padding:15px 10px 15px 50px;
+    padding:15px 10px 15px 40px;
     background-repeat: no-repeat;
     background-position: 10px center;
     width: 440px;
@@ -34,12 +34,12 @@ margin-top: auto; margin-bottom:auto;}
     font-weight: bold;
 }
 .notice ul, .success ul, .alert ul, .error ul, .validation ul{
-  margin-left:50px;
+  margin-left:40px;
   
 }
 label.validation_error{color: #D8000C;background-color: #FFBABA;border: 1px solid;
                        display: block;padding-left:5px;padding-right:5px;width:90%;}
-.notice {color: #00529B;background-color: #BDE5F8;background-image: url('/images/btn/info.png');}
+.notice {border-color:#BDC7D8; color: #1F4A75;background-color: #DEEFF8;background-image: url('/images/btn/info.png');}
 .success {color: #4F8A10;background-color: #DFF2BF;background-image:url('/images/btn/success.png');}
 .alert {color: #9F6000;background-color: #FEEFB3;background-image: url('/images/btn/warning.png');}
 .error {color: #D8000C;background-color: #FFBABA;background-image: url('/images/btn/error.png');}
@@ -171,13 +171,14 @@ textarea.new_tie_text_area{ width:100%; height: 100px; color: #2A3890;}
   left: 23px;
   border: 0;
 }
+
 .logo_caption {
   top: 119px;
   left: 23px;
   float: left;
   position: absolute;
   background: #E0EEF5;
-  opacity: .8;
+  opacity: 0.8;
   width: 119px;
   height: 18px;
   /* For IE 5-7 */
@@ -187,7 +188,7 @@ textarea.new_tie_text_area{ width:100%; height: 100px; color: #2A3890;}
 }
 .logo_full .logo_caption {
   top: 119px;
-  left: 23pxpx;
+  left: 23px;
   padding: 0px;
 }
 
