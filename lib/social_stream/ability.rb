@@ -2,78 +2,81 @@ module SocialStream
   class Ability
     include CanCan::Ability
 
-    def initialize(user)
+    def initialize(subject)
 
       # Activity Objects
       (SocialStream.objects - [ :actor ]).map{ |obj|
         obj.to_s.classify.constantize
       }.each do |klass|
-        can :create, klass do |k|
-          k._activity_tie.allows?(user, 'create', 'activity')
+        can :create, klass do |k| # can :create, Post do |post|
+          k._activity_tie.sender_id == subject.actor_id &&
+            k._activity_tie.receiver.allow?(subject, 'create', 'activity')
         end
 
-        can :read, klass do |k|
-          k._activity_tie.allows?(user, 'read', 'activity')
+        can :read, klass do |k| # can :read, Post do |post|
+          k.post_activity.tie.allow?(subject, 'read', 'activity')
         end
 
-        can :update, klass do |k|
-          k._activity_tie.allows?(user, 'update', 'activity')
+        can :update, klass do |k| # can :update, Post do |post|
+          k.post_activity.tie.allow?(subject, 'update', 'activity')
         end
 
-        can :destroy, klass do |k|
-          k._activity_tie.allows?(user, 'destroy', 'activity')
+        can :destroy, klass do |k| # can :destroy, Post do |post|
+          k.post_activity.tie.sender_id == Actor.normalize_id(subject) ||
+            k.post_activity.tie.allow?(subject, 'destroy', 'activity')
         end
       end
 
       # Activities
       can :create, Activity do |a|
-        a.tie.allows?(user, 'create', 'activity')
+        a.tie.allow?(subject, 'create', 'activity')
       end
 
       can :read, Activity do |a|
-        a.tie.allows?(user, 'read', 'activity')
+        a.tie.allow?(subject, 'read', 'activity')
       end
 
       can :update, Activity do |a|
-        a.tie.allows?(user, 'update', 'activity')
+        a.tie.allow?(subject, 'update', 'activity')
       end
 
       can :destroy, Activity do |a|
-        a.tie.allows?(user, 'destroy', 'activity')
+        a.tie.allow?(subject, 'destroy', 'activity')
+      end
+
+      # Users
+      can :read, User
+
+      can :update, User do |u|
+        u.represented_by?(subject)
       end
 
       # Groups
       can :read, Group
 
       can :create, Group do |g|
-        user.present? &&
-          ( g._founder == user.slug ||
-            Actor.find_by_slug!(g._founder).represented_by?(user) )
+        subject.present? &&
+          g._founder == subject.slug
       end
 
       can :update, Group do |g|
-        user.present? &&
-          g.represented_by?(user)
+        g.represented_by?(subject)
       end
 
       can :destroy, Group do |g|
-        user.present? &&
-          g.represented_by?(user)
+        g.represented_by?(subject)
       end
 
       can :read, Profile
 
       # Profile
       can :update, Profile do |p|
-        user.present? &&
-          ( p.subject.is_a?(User) ?
-              p.subject == user :
-              p.subject.represented_by?(user) )
+        p.subject.represented_by?(subject)
       end
 
       # Representation
       can :create, Representation do |r|
-        r.subject.represented_by?(user)
+        r.subject.represented_by?(subject)
       end
     end
   end

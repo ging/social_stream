@@ -266,6 +266,9 @@ en:
   products:
     one: "Product"
     other: "Products"
+  relation:
+    public:
+      name: "Public"
   share: "Share"
   sign_in: "Sign in"
   sign_out: "Sign out"

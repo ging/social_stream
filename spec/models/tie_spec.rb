@@ -17,6 +17,8 @@ describe Tie do
     end
 
     it "should be created from relation_name and permissions" do
+      pending "Redesign forms"
+
       tie = Tie.create :sender_id => @sender.actor_id,
                        :receiver_id => @receiver.actor_id,
                        :relation_name => "new relation",

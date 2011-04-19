@@ -12,10 +12,8 @@ Gem::Specification.new do |s|
 
   # Gem dependencies
   #
-  # Activity hierarchies
-  s.add_runtime_dependency('atd-ancestry', '1.3.0')
-  # Relation hierarchies
-  s.add_runtime_dependency('nested_set', '~> 1.5.3')
+  # Activity and Relation hierarchies
+  s.add_runtime_dependency('ancestry', '~> 1.2.3')
   # SQL foreign keys
   s.add_runtime_dependency('foreigner', '~> 0.9.1')
   # Authentication
@@ -39,14 +37,14 @@ Gem::Specification.new do |s|
   # Theme support
   s.add_runtime_dependency('rails_css_themes','~> 1.0.0')	
   # Messages
-  s.add_runtime_dependency('mailboxer','~> 0.0.15')
+  s.add_runtime_dependency('mailboxer','~> 0.0.16')
   # Avatar manipulation
   s.add_runtime_dependency('rmagick','~> 2.13.1')
   # Tagging
   s.add_runtime_dependency('acts-as-taggable-on','~> 2.0.6')
 
   # Development Gem dependencies
-  s.add_development_dependency('rails', '~> 3.0.6')
+  s.add_development_dependency('rails', '~> 3.0.7')
   # Integration testing
   s.add_development_dependency('capybara', '~> 0.3.9')
   # Testing database

@@ -137,17 +137,27 @@ class CreateSocialStream < ActiveRecord::Migration
     add_index "relation_permissions", "permission_id"
     
     create_table "relations", :force => true do |t|
-      t.string   "name",       :limit => 45
+      t.string   "type"
+      t.string   "name"
       t.datetime "created_at"
       t.datetime "updated_at"
       t.string   "sender_type"
       t.string   "receiver_type"
-      t.integer  "parent_id"
-      t.integer  "lft"
-      t.integer  "rgt"
+      t.string   "ancestry"
+      t.integer  "sphere_id"
     end
     
-    add_index "relations", "parent_id"
+    add_index "relations", "ancestry"
+    add_index "relations", "sphere_id"
+
+    create_table "spheres", :force => true do |t|
+      t.string   "name"
+      t.integer  "actor_id"
+      t.datetime "created_at"
+      t.datetime "updated_at"
+    end
+
+    add_index "spheres", "actor_id"
     
     create_table "tie_activities", :force => true do |t|
       t.integer "tie_id"
@@ -165,6 +175,7 @@ class CreateSocialStream < ActiveRecord::Migration
       t.integer  "relation_id"
       t.datetime "created_at"
       t.datetime "updated_at"
+      t.boolean  "original", :default => true
     end
     
     add_index "ties", "receiver_id"
@@ -214,6 +225,10 @@ class CreateSocialStream < ActiveRecord::Migration
     add_foreign_key "relation_permissions", "relations", :name => "relation_permissions_on_relation_id"
     add_foreign_key "relation_permissions", "permissions", :name => "relation_permissions_on_permission_id"
     
+    add_foreign_key "relations", "spheres", :name => "relations_on_sphere_id"
+
+    add_foreign_key "spheres", "actors", :name => "spheres_on_actor_id"
+
     add_foreign_key "tie_activities", "ties",       :name => "tie_activities_on_tie_id"
     add_foreign_key "tie_activities", "activities", :name => "tie_activities_on_activity_id"
     
@@ -247,6 +262,10 @@ class CreateSocialStream < ActiveRecord::Migration
     
     remove_foreign_key "relation_permissions", :name => "relation_permissions_on_relation_id"
     remove_foreign_key "relation_permissions", :name => "relation_permissions_on_permission_id"
+
+    remove_foreign_key "relations", :name => "relations_on_sphere_id"
+
+    remove_foreign_key "spheres", :name => "spheres_on_actor_id"
     
     remove_foreign_key "tie_activities", :name => "tie_activities_on_tie_id"
     remove_foreign_key "tie_activities", :name => "tie_activities_on_activity_id"
@@ -271,8 +290,8 @@ class CreateSocialStream < ActiveRecord::Migration
     drop_table :profiles
     drop_table :relation_permissions
     drop_table :relations
+    drop_table :spheres
     drop_table :ties
     drop_table :users
-
   end
 end

@@ -230,11 +230,11 @@ describe Activity do
     end
   end
 
-  describe "belonging to public tie" do
+  describe "belonging to public self tie" do
 
     before do
       user = Factory(:user)
-      tie = user.ties.where(:relation_id => user.relation('public')).first
+      tie = user.ties.where(:relation_id => user.relation_public).first
       create_activity_assigned_to(tie)
     end
 
@@ -243,10 +243,10 @@ describe Activity do
         create_ability_accessed_by_receiver
       end
 
-      it_should_behave_like "Denies Creating"
+      it_should_behave_like "Allows Creating"
       it_should_behave_like "Allows Reading"
-      it_should_behave_like "Denies Updating"
-      it_should_behave_like "Denies Destroying"
+      it_should_behave_like "Allows Updating"
+      it_should_behave_like "Allows Destroying"
     end
     
     describe "accessed by a friend" do
