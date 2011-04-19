@@ -47,7 +47,7 @@ module SocialStream
         # Override Cancan#current_ability method to use {#current_subject}
         def current_ability
           @current_ability ||=
-            Ability.new(current_subject)
+            Ability.new(current_user, current_subject)
         end
 
         private

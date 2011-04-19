@@ -2,6 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe RepresentationsController do
   include ActionController::RecordIdentifier
+  include SocialStream::TestHelpers
 
   describe "create" do
     context "with logged user" do
@@ -10,7 +11,7 @@ describe RepresentationsController do
         sign_in @user
       end
 
-      context "representing herself" do
+      context "to represent herself" do
         it "should redirect_to root" do
           post :create, :representation => { :subject_dom_id => dom_id(@user) }
 
@@ -18,7 +19,7 @@ describe RepresentationsController do
         end
       end
 
-      context "representing own group" do
+      context "to represent own group" do
         before do
           @group = Factory(:member, :receiver => @user.actor).sender_subject
         end
@@ -30,7 +31,22 @@ describe RepresentationsController do
         end
       end
 
-      context "representing other group" do
+      context "representing own group" do
+        before do
+          @group = Factory(:member, :receiver => @user.actor).sender_subject
+          represent @group
+        end
+
+        context "to represent herself" do
+          it "should redirect_to root" do
+            post :create, :representation => { :subject_dom_id => dom_id(@user) }
+
+            response.should redirect_to(:root)
+          end
+        end
+      end
+
+      context "to represent other group" do
         before do
           @group = Factory(:group)
         end
