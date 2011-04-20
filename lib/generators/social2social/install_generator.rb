@@ -19,8 +19,8 @@ class Social2social::InstallGenerator < Rails::Generators::Base
   
   def inject_remote_user_relation
     append_file 'config/relations.yml',
-                     "\nremote_subject:\n  friend:\n    name: friend\n    permissions:\n      - [ follow ]\n"+
-                                        "  public:\n    name: public\n    permissions:\n      - [ read, tie, star_tie ]"  
+                     "\nremote_subject:\n  friend:\n    name: friend\n    permissions:\n      - [ follow ]\n    sphere: personal\n"+
+                                        "  public:\n    name: public\n    permissions:\n      - [ read, tie, star_tie ]\n    sphere: personal"  
   end
   
   def inject_translations
