@@ -23,3 +23,4 @@
 .banner_footer .a_border {	border-right: thin solid;	color: #0656a4;	padding: 0px 7px;	text-decoration: underline;}
 .banner_footer a {	color: #0656a4;	padding: 0px 7px;	text-decoration: underline;}
 
+.rowfooter{float:right;}

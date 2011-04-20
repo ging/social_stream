@@ -1,11 +1,11 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- HTML5 DOCTYPE -->
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
     <title><%= yield(:title).empty? ? t('socialstream') : yield(:title)%></title>
     <meta name="keywords" content="SNA, social, stream, activity" >
-    <meta name="description" content= <%= yield(:description).empty? ? "" : yield(:description) %> >
-    
+    <meta name="description" content= "<%= yield(:description).empty? ? "Home" : yield(:description) %>" >
     <%= stylesheet_link_tag "base", "header","home","footer",
                              :media => "screen, projection" %>
     <%= javascript_include_tag 'jquery.min', 'jquery-ui.min','rails', 'jquery.livequery', 'ui.dropdownchecklist'%>
@@ -17,7 +17,7 @@
       <%= csrf_meta_tag %>
     <% end %>
 
-    <script type="text/javascript" charset="utf-8">
+    <script type="text/javascript">
       $(document).ready(function() {
         <%= yield :javascript %>
       })
@@ -25,31 +25,31 @@
   </head>
   <body>
     <div id="wrapper">
-      <%= render :partial => "layouts/header" %>
+      <header><%= render :partial => "layouts/header" %></header>
       <div id="wrapper_body">
-        <div id="toolbar">
+        <nav id="toolbar">
           <div id="toolbarContent" class="block">
             <div class="space_center">
             </div>
               <%= yield :toolbar %>
           </div>
-        </div>
-        <div id="content">
+        </nav>
+        <section id="content">
           <% flash.each do |name, msg| %>
             <div class="<%= name %>">
             <%= msg %>
             </div>
           <% end %>
           <%= yield %>
-        </div>
-        <div id="sidebar">
+        </section>
+        <aside id="sidebar">
           <div id="sidebarContent">
-              <%=  yield :sidebar %>
+              <%= yield :sidebar %>
           </div>
-        </div>
+        </aside>
         <div class="space_center white"></div>
       </div>
-      <%= render :partial => "layouts/footer" %>
+      <footer><%= render :partial => "layouts/footer" %></footer>
     </div>
   </body>
 </html>

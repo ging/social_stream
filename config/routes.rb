@@ -35,8 +35,11 @@ Rails.application.routes.draw do
   resources :avatars
 
   resources :messages
+
   resources :conversations
-  
+
+  resources :comments
+
   resources :ties do
     collection do
       get 'suggestion'

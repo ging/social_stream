@@ -3,16 +3,17 @@
  <%= form_for Comment.new(:text => t('comment.input'),
                           :_activity_tie_id =>
                             activity.receiver.activity_ties_for(current_subject).first.id,
-                          :_activity_parent_id => activity.id),
-              :remote => true do |f| %>
-   <%= f.hidden_field :_activity_tie_id %>
-   <%= f.hidden_field :_activity_parent_id %>
-   <%= f.text_field :text,   :class =>"input_new_comments" %>
+                          :_activity_parent_id => activity.id
+              ),
+          :html => { :class => "new_comment", :id => "new_comment"+dom_id(activity)  },
+          :remote => true do |f| %>
+   <%= f.hidden_field :_activity_tie_id,  :id => "activity_receiver_tie_from_id_"+dom_id(activity) %>
+   <%= f.hidden_field :_activity_parent_id, :id => "activity_id_"+dom_id(activity) %>
+   <%= f.text_field :text,   :class =>"input_new_comments" , :id => "comment_text_"+dom_id(activity) %>
    <div class="activities_comment_btn">
      <div class="activities_security"></div>
-     <%= f.submit t('share'), :class =>"myButtonBlue" %>
+     <%= f.submit t('share'), :class =>"myButtonBlue", :id => "comment_submit"+dom_id(activity) %>
    </div>
  <% end %>
     </div>
 <% end %>
-

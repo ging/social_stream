@@ -1,7 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<!-- HTML5 DOCTYPE -->
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8">
     <title><%= yield(:title).empty? ? t('socialstream') : yield(:title)%></title>
     <%= stylesheet_link_tag "header","frontpage", "base", "footer",
                             :media => "screen, projection" %>
@@ -10,7 +11,7 @@
     <% if protect_against_forgery? %>
       <%= csrf_meta_tag %>
     <% end %>
-    <script type="text/javascript" charset="utf-8">
+    <script type="text/javascript" >
     $(document).ready(function() {
       <%= yield :javascript%>
     });
@@ -19,12 +20,18 @@
   </head>
   <body>
     <div id="wrapper">
-      <%= render :partial => "frontpage/header" %>
-      <div id="wrapper_body">
-        <%= yield %>
-      </div>
-      <%= render :partial => "frontpage/sponsor" %>
-      <%= render :partial => "layouts/footer" %>
+      <header>
+        <%= render :partial => "frontpage/header" %>
+      </header>
+      <section>
+        <div id="wrapper_body">
+          <%= yield %>
+        </div>
+        <%= render :partial => "frontpage/sponsor" %>
+      </section>
+      <footer>
+        <%= render :partial => "layouts/footer" %>
+      </footer>
     </div>
   </body>
 </html>
