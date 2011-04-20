@@ -9,11 +9,11 @@ Gem::Specification.new do |s|
 	s.files = `git ls-files`.split("\n")
 
 	# Gem dependencies
-  s.add_runtime_dependency('social_stream','~> 0.4.3')
+  s.add_runtime_dependency('social_stream','~> 0.4.4')
   s.add_runtime_dependency('nokogiri','~> 1.4.4')
   
 	# Development Gem dependencies
-	s.add_development_dependency('rails', '~> 3.0.5')
+	s.add_development_dependency('rails', '~> 3.0.7')
 	s.add_development_dependency('sqlite3-ruby')
 	if RUBY_VERSION < '1.9'
 		s.add_development_dependency('ruby-debug', '~> 0.10.3')
