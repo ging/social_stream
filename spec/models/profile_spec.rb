@@ -8,7 +8,7 @@ describe Profile do
 
     context "accessed by her" do
       before do
-        @ability = Ability.new(@profile.subject, @profile.subject)
+        @ability = Ability.new(@profile.subject)
       end
 
       it "should allow read" do
@@ -23,7 +23,7 @@ describe Profile do
     context "accessed by other" do
       before do
         u = Factory(:user)
-        @ability = Ability.new(u, u)
+        @ability = Ability.new(u)
       end
 
       it "should allow read" do

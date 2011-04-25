@@ -1,8 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe RepresentationsController do
+describe HomeController do
   include ActionController::RecordIdentifier
   include SocialStream::TestHelpers
+
+  render_views
 
   describe "create" do
     context "with logged user" do
@@ -13,9 +15,10 @@ describe RepresentationsController do
 
       context "to represent herself" do
         it "should redirect_to root" do
-          post :create, :representation => { :subject_dom_id => dom_id(@user) }
+          get :index, :s => @user.slug
 
-          response.should redirect_to(:root)
+          assigns(:current_subject).should == @user
+          response.should be_success
         end
       end
 
@@ -25,9 +28,10 @@ describe RepresentationsController do
         end
 
         it "should redirect_to root" do
-          post :create, :representation => { :subject_dom_id => dom_id(@group) }
+          get :index, :s => @group.slug
 
-          response.should redirect_to(:root)
+          assigns(:current_subject).should == @group
+          response.should be_success
         end
       end
 
@@ -39,9 +43,10 @@ describe RepresentationsController do
 
         context "to represent herself" do
           it "should redirect_to root" do
-            post :create, :representation => { :subject_dom_id => dom_id(@user) }
+            get :index, :s => @user.slug
 
-            response.should redirect_to(:root)
+            assigns(:current_subject).should == @user
+            response.should be_success
           end
         end
       end
@@ -53,9 +58,11 @@ describe RepresentationsController do
 
         it "should deny access" do
           begin
-            post :create, :representation => { :subject_dom_id => dom_id(@group) }
+            get :index, :s => @group.slug
 
             assert false
+          rescue ActionView::Template::Error => e
+            assert e.message == "Not authorized!"
           rescue CanCan::AccessDenied
             assert true
           end

@@ -32,6 +32,7 @@ module SocialStream
         # Current subject represented by the user. Defaults to the own user
         def current_subject
           @current_subject ||=
+            current_subject_from_params  ||
             current_subject_from_session ||
               current_user
         end
@@ -47,10 +48,23 @@ module SocialStream
         # Override Cancan#current_ability method to use {#current_subject}
         def current_ability
           @current_ability ||=
-            Ability.new(current_user, current_subject)
+            Ability.new(current_subject)
         end
 
         private
+
+        # Get represented subject from params[:s]
+        def current_subject_from_params
+          return unless params[:s].present?
+
+          subject = Actor.find_by_slug!(params[:s]).subject
+
+          unless subject.represented_by?(current_user)
+            raise CanCan::AccessDenied.new("Not authorized!", :represent, subject.name)
+          end
+
+          self.current_subject = subject
+        end
 
         # Get represented subject from session
         def current_subject_from_session

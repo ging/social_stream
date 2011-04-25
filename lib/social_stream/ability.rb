@@ -3,7 +3,7 @@ module SocialStream
     include CanCan::Ability
 
     # Create a new ability for this user, who is currently representing subject
-    def initialize(user, subject)
+    def initialize(subject)
 
       # Activity Objects
       (SocialStream.objects - [ :actor ]).map{ |obj|
@@ -73,11 +73,6 @@ module SocialStream
       # Profile
       can :update, Profile do |p|
         p.subject.represented_by?(subject)
-      end
-
-      # Representation
-      can :create, Representation do |r|
-        r.subject.represented_by?(user)
       end
     end
   end

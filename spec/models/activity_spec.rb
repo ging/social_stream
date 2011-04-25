@@ -9,17 +9,17 @@ module ActivityTestHelper
   def create_ability_accessed_by(tie_type)
     t = Factory(tie_type, :sender => @tie.sender)
     u = t.receiver_subject
-    @ability = Ability.new(u, u)
+    @ability = Ability.new(u)
   end
 
   def create_ability_accessed_by_receiver
     u = @tie.receiver_subject
-    @ability = Ability.new(u, u)
+    @ability = Ability.new(u)
   end
 
   def create_ability_accessed_publicly
     u = Factory(:user)
-    @ability = Ability.new(u, u)
+    @ability = Ability.new(u)
   end
 
   shared_examples_for "Allows Creating" do
