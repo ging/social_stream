@@ -5,7 +5,10 @@
 
 <div id="menu_lateral">
   <ul class="menu">
-    <%= render :partial => "toolbar/profile_menu_tie_options", :locals => { :subject => subject } %>
+    <% unless subject == current_subject %>
+      <%= render :partial => "toolbar/profile_menu_tie_options", :locals => { :subject => subject } %>
+    <% end %>
+
     <%= render :partial => "toolbar/profile_menu_basic_options", :locals => { :subject => subject } %>
   </ul>
 </div>
