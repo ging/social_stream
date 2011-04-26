@@ -83,7 +83,17 @@ describe GroupsController do
         model_attributes[:_founder] = @user.slug
       end
 
-      it_should_behave_like "Allow Creating"
+      it "should allow creating" do
+        count = Group.count
+        post :create, attributes
+
+        group = assigns(:group)
+
+        Group.count.should eq(count + 1)
+        group.should be_valid
+        assigns(:current_subject).should eq(group)
+        response.should redirect_to(:home)
+      end
     end
 
     context "a new fake group" do

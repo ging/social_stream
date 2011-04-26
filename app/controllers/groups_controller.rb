@@ -1,7 +1,7 @@
 class GroupsController < InheritedResources::Base
   load_and_authorize_resource
 
-  respond_to :html, :xml, :js
+  respond_to :html, :js
 
   def index
     @groups = Group.alphabetic.
@@ -12,6 +12,15 @@ class GroupsController < InheritedResources::Base
 
     index! do |format|
       format.html { render :layout => (user_signed_in? ? 'application' : 'frontpage') }
+    end
+  end
+
+  def create
+    create! do |success, failure|
+      success.html {
+        self.current_subject = @group
+        redirect_to :home
+      }
     end
   end
 

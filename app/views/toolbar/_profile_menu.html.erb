@@ -1,0 +1,15 @@
+<% content_for :headers do %>
+  <%= stylesheet_link_tag "menu", :media => "screen, projection" %>
+  <%= javascript_include_tag 'menu' %>
+<% end %>
+
+<div id="menu_lateral">
+  <ul class="menu">
+    <% unless subject == current_subject %>
+      <%= render :partial => "toolbar/profile_menu_tie_options", :locals => { :subject => subject } %>
+    <% end %>
+
+    <%= render :partial => "toolbar/profile_menu_basic_options", :locals => { :subject => subject } %>
+  </ul>
+</div>
+<div class="space_center"></div>

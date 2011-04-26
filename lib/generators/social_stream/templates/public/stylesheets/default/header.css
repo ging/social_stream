@@ -49,7 +49,7 @@ li.btn_menu_browse{background: transparent url("/images/btn/btn_browse.png") no-
 
 
 #account, #representation_li,#current_user_info, #representations_menu {display:inline-block;vertical-align: top; height:22px; color:#FFF;}
-#representation_li{margin-left:10px;display:none;}
+#representation_li{margin-left:10px;}
 
 li.btn_menu_exit{background: transparent url("/images/btn/btn_exit.png") no-repeat left center;}
 li.btn_menu_representation{}

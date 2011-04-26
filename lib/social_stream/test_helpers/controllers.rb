@@ -44,7 +44,7 @@ module SocialStream
           resource = assigns(model_sym)
 
           model_count.should eq(count + 1)
-          assert resource.valid?
+          resource.should be_valid
           response.should redirect_to(resource)
         end
       end

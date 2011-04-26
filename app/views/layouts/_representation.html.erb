@@ -1,14 +1,12 @@
 <div id="current_user_info">
   <%= link_to(image_tag(current_user.logo.url(:representation), :width => 20, :height => 20, :class => 'menu_icon'), current_user) %>
   <%= link_to(current_user.name, current_user) %>
+
   <%= t('representation.action') %>
 </div>
-<%= form_for(Representation.new(current_subject), :url => representation_path) do |f| %>
-  <%= f.select :subject_dom_id, current_user.represented.unshift(current_user).map{ |s| [ s.name, dom_id(s) ] }, :class=>"button sf-menu" %>
-  <%= f.submit t('representation.change') %>
-<% end %>
-<% representations = current_user.represented.unshift(current_user) %>
-<% representations.delete(current_subject) %>
+
+<% representations = current_user.represented.unshift(current_user) - [current_subject] %>
+
 <div id="representations_menu">
   <ul class="sf-menu" >
     <li id="representation_li">
@@ -16,15 +14,10 @@
       <ul>
         <% representations.each do |representation| %>
         <li>
-          <%= link_to  representation.name , representation_path(:representation => {:subject_dom_id => dom_id(representation)}),:method => :post, :style => "background: transparent url('#{representation.logo.url(:representation)}') no-repeat left center;margin-left:2px;"%>
+        <%= link_to representation.name, { :s => representation.slug }, { :style => "background: transparent url('#{representation.logo.url(:representation)}') no-repeat left center;margin-left:2px;" } %>
        </li>
         <% end %>
       </ul>
     </li>
   </ul>
 </div>
-<%-# this should be in content_for(:javascript), but the partial is rendered after yield(:javascript) -%>
-<%= javascript_tag ('
-  $("#new_representation").hide();
-  $("#representation_li").show();
-')%>
