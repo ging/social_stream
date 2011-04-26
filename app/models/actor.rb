@@ -364,6 +364,13 @@ class Actor < ActiveRecord::Base
     a             
   end
   
+  #Returning whether an email should be sent for this object (Message or Notification).
+  #Required by Mailboxer gem.
+  def should_email?(object)
+    #TODO
+    return true
+  end
+  
   private
   
   # After create callback
