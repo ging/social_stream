@@ -10,7 +10,8 @@
     <div class="activity_add_ties">
       
 		  <%= location(
-			  link_to(image_tag("btn/btn_friend.png", :class => "menu_icon")+t('tie.new.title'), new_tie_path("tie[sender_id]" => @tie.sender.id, "tie[receiver_id]" => @tie.receiver.id),:remote => true)
+			  link_to(image_tag("btn/btn_friend.png", :class => "menu_icon")+t('tie.new.title'),
+                new_tie_path("tie[sender_id]" => @tie.sender.id, "tie[receiver_id]" => @tie.receiver.id),:remote => true)
 		  ) %>
       
 	  	<%= form_for @tie do |f| %>  

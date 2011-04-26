@@ -18,11 +18,12 @@ module TiesHelper
   end
 
   def new_tie_link(tie)
-    link_to t("contact.new.link"),
-            new_tie_path("tie[sender_id]" => tie.sender.id,
-                         "tie[receiver_id]" => tie.receiver.id),
-            :title => t("contact.new.title",
-                        :name => tie.receiver_subject.name)
+    link_to_tie = link_to t("contact.new.link"),
+                      new_tie_path( "tie[sender_id]" => tie.sender.id,
+                      'tie[receiver_id]' => tie.receiver.id),
+                      :title => t("contact.new.title",
+                      :name => tie.receiver_subject.name)
+    return link_to_tie
   end
 
   def link_follow_state
