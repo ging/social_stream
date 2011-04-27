@@ -58,6 +58,16 @@ module SocialStream
             group("#{ table_name }.id").
             order("popularity DESC")
         }
+
+        scope :voted, lambda { 
+          joins(:actor => { :activity_object => { :activities => :activity_verb } }).
+            where('activity_verbs.name' => 'like').
+            select("DISTINCT #{ table_name }.*, COUNT(#{ table_name}.id) AS votes").
+            group("#{ table_name }.id").
+            order("votes DESC")
+        }
+
+
       end
       
       module InstanceMethods
