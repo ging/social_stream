@@ -277,6 +277,16 @@ class Actor < ActiveRecord::Base
       allow?(subject, 'represent')
   end
 
+  # The set of ties from this {Actor} to itself.
+  def reflexive_ties
+    sent_ties.received_by(self)
+  end
+
+  # This Actor's public {Tie}
+  def public_tie
+    reflexive_ties.related_by(relation_public).first
+  end
+
   # The ties that allow attaching an activity to them. This method is used for caching
   def active_ties
     @active_ties ||= {}
