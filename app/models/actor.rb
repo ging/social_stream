@@ -329,9 +329,9 @@ class Actor < ActiveRecord::Base
     ts = ties
 
     if type == :profile
-      return ties.public_relation if options[:for].blank?
-
-      ts = ts.allowing(options[:for], 'read', 'activity')
+      ts = ( options[:for].blank? ?
+               ts.public_relation :
+               ts.allowing(options[:for], 'read', 'activity') )
     end
 
     if options[:relation].present?

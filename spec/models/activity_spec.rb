@@ -105,25 +105,73 @@ describe Activity do
   end
 
   describe "wall" do
-    before do
-      @activity = Factory(:activity)
-    end
+    context "with a friend activity" do
+      before do
+        @activity = Factory(:activity)
+      end
 
-    describe "type home" do
-      it "should include activity" do
-        @activity.sender.wall(:home).should include(@activity)
-        @activity.receiver.wall(:home).should include(@activity)
+      describe "sender home" do
+        it "should include activity" do
+          @activity.sender.wall(:home).should include(@activity)
+        end
+      end
+
+      describe "receiver home" do
+        it "should include activity" do
+          @activity.receiver.wall(:home).should include(@activity)
+        end
+      end
+
+      describe "alien home" do
+        it "should not include activity" do
+          Factory(:user).wall(:home).should_not include(@activity)
+        end
+      end
+
+      describe "sender profile" do
+        context "for sender" do
+          it "should include activity" do
+            @activity.sender.wall(:profile, :for => @activity.sender).should include(@activity)
+          end
+        end
+
+        context "for receiver" do
+          it "should include activity" do
+            @activity.sender.wall(:profile, :for => @activity.receiver).should include(@activity)
+            @activity.sender.wall(:profile,
+                                  :for => @activity.receiver,
+                                  :relation => @activity.tie.relation).should include(@activity)
+          end
+        end
       end
     end
 
-    describe "type profile" do
-      it "should include activity" do
-        @activity.sender.wall(:profile, :for => @activity.sender).should include(@activity)
-        @activity.sender.wall(:profile, :for => @activity.receiver).should include(@activity)
-        @activity.sender.wall(:profile,
-                              :for => @activity.receiver,
-                              :relation => @activity.tie.relation).should include(@activity)
+    context "with public activity" do
+      before do
+        tie = Factory(:user).public_tie
+        @activity = Factory(:activity, :_tie => tie)
+      end
 
+      describe "sender home" do
+        it "should include activity" do
+          @activity.sender.wall(:home).should include(@activity)
+        end
+      end
+
+      describe "sender profile" do
+        context "accessed by alien" do
+          it "should include activity" do
+            @activity.sender.wall(:profile,
+                                  :for => Factory(:user)).should include(@activity)
+          end
+        end
+
+        context "accessed by anonymous" do
+          it "should include activity" do
+            @activity.sender.wall(:profile,
+                                  :for => nil).should include(@activity)
+          end
+        end
       end
     end
   end
