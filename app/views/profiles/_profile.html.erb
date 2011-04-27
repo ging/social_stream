@@ -1,6 +1,7 @@
-<%= location(
-  link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('menu.information'), [current_subject, :profile])
-) %>
+<% content_for :location do%>
+  <%= location(link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('menu.information'), 
+              [current_subject, :profile])) %>
+<%end%>
 <div class="space_center"></div>
 <h2><%=t('menu.information')%></h2>
 <div class="space_center"></div>

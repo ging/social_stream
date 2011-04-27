@@ -5,7 +5,7 @@
 	
 <% if @profile.valid? %>
 
-  $("#profile_notice").html("<h2>Form Submitted!</h2>");
+  $("#profile_notice").html("<%= t('profile.update.success')%>");
 	$("#profile_notice").removeClass('error');
   $("#profile_notice").addClass('success');
 	
@@ -36,7 +36,7 @@
 	<%end%>
 	
 <% else %>
-  $("#profile_notice").html("<h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>"
+  $("#profile_notice").html("<h2><%= pluralize(@profile.errors.count, "error") %> <%= t('profile.update.error')%></h2>"
 	 +"<ul><% @profile.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></ul>");
 	$("#profile_notice").removeClass('success');
 	$("#profile_notice").addClass('error'); 

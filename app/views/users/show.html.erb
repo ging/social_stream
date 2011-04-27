@@ -7,9 +7,11 @@
   <%= render :partial => 'sidebar_index' %>
 <% end %>
 
-<% toolbar :profile => @user %>
+<% content_for :location do %>
+  <%= render :partial => 'location' %>
+<% end %>
 
-<%= render :partial => 'location' %>
+<% toolbar :profile => @user %>
 
 <br class="clearfloat" />
 <div class="space_center">

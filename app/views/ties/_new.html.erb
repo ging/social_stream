@@ -2,6 +2,10 @@
   <%= stylesheet_link_tag "addContact.css", :media => "screen, projection" %>
   <%= javascript_include_tag 'addContact'%>
 <% end %> 
+<% content_for :location do %>
+  <%= stylesheet_link_tag "addContact.css", :media => "screen, projection" %>
+  <%= javascript_include_tag 'addContact'%>
+<% end %> 
 
 <% toolbar :profile => @tie.receiver_subject, :option => 'contacts' %>
 

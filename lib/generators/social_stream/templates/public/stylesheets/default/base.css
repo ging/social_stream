@@ -31,7 +31,6 @@ margin-top: auto; margin-bottom:auto;}
     width: 440px;
     margin-left: auto;
     margin-right: auto;
-    font-weight: bold;
 }
 .notice ul, .success ul, .alert ul, .error ul, .validation ul{
   margin-left:40px;
