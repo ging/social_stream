@@ -7,7 +7,7 @@ atom_feed({'xmlns:activity' => 'http://activitystrea.ms/spec/1.0/'}) do |feed|
 	
 	for activity in @activities
 		feed.entry(activity) do |entry|
-			if activity.class.name != "Tie"
+			if activity.class.name != "Tie" and activity.activity_verb.name == "post"
 		    	#Atom compliant for not ActivityStream readers
 				entry.title('Activity')
 				entry.summary(activity.direct_object.text)
