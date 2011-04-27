@@ -86,7 +86,7 @@ en:
     list: "You have these avatars"
     new: "Create a new avatar"
     new_short: "New avatar"
-    no_avatars: "You haven't any avatar, plesase create a new one."
+    no_avatars: "You haven't got any avatar, plesase create a new one."
     one: "Avatar"
     other: "Avatars"
     original: "Original image"
@@ -243,7 +243,10 @@ en:
     organization: "Organization"
     phone: "Phone"
     profile: "Edit profile"
-    website: "Website"      
+    website: "Website" 
+    update:
+      error: "Please, check the format of your profile:"
+      success: "Your profile has been updated"     
   public:
     other: "Everybody"
   representation:

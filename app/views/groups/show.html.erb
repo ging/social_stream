@@ -9,9 +9,11 @@
   <%= render :partial => 'sidebar_show' %>
 <% end %>
 
-<% toolbar :profile => @group %>
+<% content_for :location do %>
+  <%= render :partial => 'location' %>
+<% end %>
 
-<%= render :partial => 'location' %>
+<% toolbar :profile => @group %>
 
 <br class="clearfloat" />
 <div class="space_center">

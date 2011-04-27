@@ -11,11 +11,11 @@
 <% content_for :sidebar do %>
 	<%= render :partial => "groups/sidebar_index" %>
 <% end %>
-
-<div id="map_location" class="content_size">
-  Your are here ><img src="images/btn/btn_browse.png" class="btn_config"> <%=t('browse')%>: <span id="name_group"><b><%= t('group.all')%></b></span>, <%= link_to(t('user.by'), users_path) %>
-</div>
-
+<% content_for :location do %>
+  <%= location(image_tag("btn/btn_browse.png", :class=>"btn_config") + t('browse') +": "+ 
+               link_to(t('user.by'), users_path) + ", "+ 
+               content_tag(:b,content_tag(:span, t('group.all'), :id=>'name_group')))%>
+<% end %>
 
 <div class="space_center"></div>
 <div class="space_center"></div>

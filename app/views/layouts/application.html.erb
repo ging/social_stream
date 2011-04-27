@@ -34,14 +34,19 @@
               <%= yield :toolbar %>
           </div>
         </nav>
-        <section id="content">
+        <div id= "center_body">
+          <div id="map_location">
+            <%= yield :location %>
+          </div>
           <% flash.each do |name, msg| %>
             <div class="<%= name %>">
-            <%= msg %>
+              <%= msg %>
             </div>
           <% end %>
-          <%= yield %>
-        </section>
+          <section id="content">
+            <%= yield %>
+          </section>
+        </div>
         <aside id="sidebar">
           <div id="sidebarContent">
               <%= yield :sidebar %>

@@ -34,11 +34,12 @@ else
   level2 = link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('profile.one'),
       :controller => :profiles , :action => :edit)
 end %>
-
-<%= location(
-  link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('menu.information'), [current_subject, :profile]),
-  level2
-) %>
+<% content_for :location do%>
+  <%= location(
+    link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('menu.information'), [current_subject, :profile]),
+    level2
+  ) %>
+<%end%>
 <div class="space_center"></div>
 
 <%= form_for(@profile, :url => [current_subject, :profile], :remote => true) do |f| %>

@@ -1,10 +1,11 @@
 <% content_for :sidebar do %>
   <% render :partial => 'sidebar' %>
 <% end %>
+<% content_for :location do %>
+  <%= render :partial => 'location' %>
+<% end %>
 
 <% toolbar %>
-
-<%= render :partial => 'location' %>
 
 <br class="clearfloat" />
 <div class="space_center">
