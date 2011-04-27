@@ -7,27 +7,28 @@ atom_feed({'xmlns:activity' => 'http://activitystrea.ms/spec/1.0/'}) do |feed|
 	
 	for activity in @activities
 		feed.entry(activity) do |entry|
-		    #Atom compliant for not ActivityStream readers
-			entry.title('Activity')
-			entry.summary(activity.direct_object.text)
+			if activity.class.name != "Tie"
+		    	#Atom compliant for not ActivityStream readers
+				entry.title('Activity')
+				entry.summary(activity.direct_object.text)
 			
-			#ActivityStream compliant
+				#ActivityStream compliant
 			
-			entry.author do |a|
-				a.name(activity.sender_subject.name)
-				a.tag!('activity:object-type','person')
+				entry.author do |a|
+					a.name(activity.sender_subject.name)
+					a.tag!('activity:object-type','person')
+					end
+			
+					entry.tag!('activity:verb',activity.activity_verb.name)
+			
+				entry.tag!('activity:object') do |act_ob|
+					act_ob.title('Activity')
+					act_ob.tag!('activity:object-type','status')
+					act_ob.publised(activity.created_at)
+				end
+			
+				entry.content(activity.direct_object.text,:type=>'text/html')
 			end
-			
-			entry.tag!('activity:verb',activity.activity_verb.name)
-			
-			entry.tag!('activity:object') do |act_ob|
-				act_ob.title('Activity')
-				act_ob.tag!('activity:object-type','status')
-				act_ob.publised(activity.created_at)
-			end
-			
-			entry.content(activity.direct_object.text,:type=>'text/html')
-			
 		end
 	end
 	
