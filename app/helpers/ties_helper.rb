@@ -31,7 +31,7 @@ module TiesHelper
   
   
   def get_permission_id(action,object,function)
-    return Permission.find_by_action_and_function_and_object(action,object,function).id
+    return Permission.find_by_action_and_object_and_function(action,object,function).id
   end
   
 end
