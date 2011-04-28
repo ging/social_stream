@@ -45,8 +45,10 @@
 			var levelSelected = $('label[for$='+id+']').html();
 			
 			var nlevel= levels.length;
-			var pos = levels.indexOf(levelSelected);
-			
+			var index = levels.indexOf(levelSelected);
+			var value = (100/nlevel)*(index+0.5);
+			$("#slider-range").slider("values",1,value);
+			$( "#level" ).val(levelSelected);
 			
 			$.ajax({
 	      url: "<%= permissions_path %>",
