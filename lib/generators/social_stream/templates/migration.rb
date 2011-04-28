@@ -24,6 +24,7 @@ class CreateSocialStream < ActiveRecord::Migration
       t.datetime "created_at"
       t.datetime "updated_at"
       t.string   "object_type", :limit => 45
+      t.integer  "like_count", :default => 0
     end
     
     create_table "activity_verbs", :force => true do |t|
@@ -40,6 +41,7 @@ class CreateSocialStream < ActiveRecord::Migration
       t.datetime "created_at"
       t.datetime "updated_at"
       t.integer  "activity_object_id"
+      t.integer  "follower_count", :default => 0
     end
     
     add_index "actors", "activity_object_id"

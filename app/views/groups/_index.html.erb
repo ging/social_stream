@@ -12,6 +12,10 @@
         <div class="name black" >
           <%= link_to group.name, group %>
         </div>
+        <div class="brief">
+          <%= t 'follower.n', :count => group.follower_count %>,
+          <%= t 'like.n',     :count => group.like_count %>
+        </div>
         <div class="link">
           <%= ties_to(group) %>
         </div>

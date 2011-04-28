@@ -152,6 +152,10 @@ en:
     unlocks:
       send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
       unlocked: 'Your account was successfully unlocked. You are now signed in.'
+  follower:
+    n:
+      one: "1 follower"
+      other: "%{count} followers"
   forgot_password: "Forgot you password?"
   frontpage:
     collaborate:
@@ -179,6 +183,7 @@ en:
     one: "Group"
     other: "Groups"
     all: "All groups"
+    all_n: "All groups (%{count})"
     by: "By groups"    
     last: "Last groups"
     my: "My groups"
@@ -188,14 +193,17 @@ en:
       description: "Description"
       participants: "Participants"
     cloud: "Group tag cloud"
-    popular:
-      most: "Most popular"
-    voted:
-      most: "Most voted"
+    most:
+      popular: "Most popular"
+      voted: "Most voted"
   help: "Help"
   home: "Home"
   inbox:
     one: "Inbox"
+  like:
+    n:
+      one: "1 fan"
+      other: "%{count} fans"
   location:
     message: "You are here > %{location}"
     base: "You are here"

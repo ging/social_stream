@@ -28,7 +28,6 @@ class Activity < ActiveRecord::Base
   has_many :activity_objects,
            :through => :activity_object_activities
 
-  after_create :send_notifications
   
   scope :wall, lambda { |type, ties|
     q = select("DISTINCT activities.*").
@@ -45,9 +44,14 @@ class Activity < ActiveRecord::Base
     q
   }
 
+  after_create :send_notifications
+
   # After an activity is created, it is disseminated to follower ties
   attr_accessor :_tie
   after_create :disseminate_to_ties
+
+  after_create  :increment_like_count
+  after_destroy :decrement_like_count
 
   # The name of the verb of this activity
   def verb
@@ -181,11 +185,26 @@ class Activity < ActiveRecord::Base
     tie_activities.create!(:tie => _tie)
   end
 
-
-  private
-
   #Send notifications to actors based on proximity, interest and permissions
   def send_notifications
     notify
+  end
+
+  # after_create callback
+  #
+  # Increment like counter in objects with a like activity
+  def increment_like_count
+    return if verb != "like" || direct_activity_object.blank?
+
+    direct_activity_object.increment!(:like_count)
+  end
+
+  # after_destroy callback
+  #
+  # Decrement like counter in objects when like activity is destroyed
+  def decrement_like_count
+    return if verb != "like" || direct_activity_object.blank?
+
+    direct_activity_object.decrement!(:like_count)
   end
 end

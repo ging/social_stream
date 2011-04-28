@@ -287,6 +287,19 @@ class Actor < ActiveRecord::Base
     reflexive_ties.related_by(relation_public).first
   end
 
+  # Find a tie to subject with the {#relation_public}
+  def public_tie_to(subject)
+    sent_ties.received_by(subject).related_by(relation_public).first
+  end
+
+  # Find or create a tie to subject with the {#relation_public}
+  def public_tie_to!(subject)
+    public_tie_to(subject) ||
+      sent_ties.create!(:receiver_id => Actor.normalize_id(subject),
+                        :relation_id => relation_public.id,
+                        :original    => false)
+  end
+
   # The ties that allow attaching an activity to them. This method is used for caching
   def active_ties
     @active_ties ||= {}
@@ -367,7 +380,7 @@ class Actor < ActiveRecord::Base
   # Build a new activity where subject like this
   def new_like(subject)
     a = Activity.new :verb => "like",
-                     :_tie => subject.ties_to(self).first
+                     :_tie => subject.public_tie_to!(self)
     
     a.activity_objects << activity_object           
                     

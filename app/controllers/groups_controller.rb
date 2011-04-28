@@ -4,7 +4,8 @@ class GroupsController < InheritedResources::Base
   respond_to :html, :js
 
   def index
-    @groups = Group.alphabetic.
+    @groups = Group.most(params[:most]).
+                    alphabetic.
                     letter(params[:letter]).
                     search(params[:search]).
                     tagged_with(params[:tag]).

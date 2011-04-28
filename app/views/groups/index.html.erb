@@ -26,13 +26,13 @@
   <div id="tab" class="widget content_size">
     <ul class="tab">
       <li>
-          <a href="/groups">All <%= t('group.other')%> (<%=Group.count%>) </a>
+        <%= link_to t('group.all_n', :count => Group.count), :most => nil %>
       </li>
       <li>
-          <a href="#most_popular"> <%= t('group.popular.most')%></a>
+        <%= link_to t('group.most.popular'), :most => :popular %>
       </li>
       <li>
-          <a href="#most_voted"> <%= t('group.voted.most')%> </a>
+        <%= link_to t('group.most.voted'), :most=> :voted %>
       </li>
     </ul>
     <div id="spaces" class="tab">

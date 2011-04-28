@@ -115,6 +115,9 @@ class Tie < ActiveRecord::Base
   after_create :create_activity
   after_create :send_message
 
+  after_create  :increment_follower_count
+  after_destroy :decrement_follower_count
+
   def relation_name
     @relation_name || relation.try(:name)
   end
@@ -307,5 +310,40 @@ class Tie < ActiveRecord::Base
     if message.present?
       sender.send_message(receiver, message, I18n.t("activity.verb.#{ contact_verb }.#{ receiver.subject_type }.message", :name => sender.name))
     end
+  end
+
+  # after_create callback
+  #
+  # Increment the {Actor}'s follower_count
+  def increment_follower_count
+    return if reflexive? ||
+              !relation.permissions.include?(Permission.follow.first)
+
+    # Because we allow several ties from the same sender to the same receiver,
+    # we check the receiver does not already have a follower tie from this sender
+    return if sender.sent_ties.
+                     received_by(receiver).
+                     with_permissions('follow', nil).
+                     where("ties.id != ?", id).
+                     present?
+
+    receiver.increment!(:follower_count)
+  end
+
+  # after_destroy callback
+  #
+  # Decrement the {Actor}'s follower_count
+  def decrement_follower_count
+    return if reflexive? ||
+              !relation.permissions.include?(Permission.follow.first)
+
+    # Because we allow several ties from the same sender to the same receiver,
+    # we check the receiver does not still have a follower tie from this sender
+    return if sender.sent_ties.
+                     received_by(receiver).
+                     with_permissions('follow', nil).
+                     present?
+
+    receiver.decrement!(:follower_count)
   end
 end

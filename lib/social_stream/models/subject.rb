@@ -53,20 +53,22 @@ module SocialStream
         scope :distinct_initials, joins(:actor).merge(Actor.distinct_initials)
 
         scope :popular, lambda { 
-          joins(:actor => :received_ties).
-            select("DISTINCT #{ table_name }.*, COUNT(#{ table_name}.id) AS popularity").
-            group("#{ table_name }.id").
-            order("popularity DESC")
+          joins(:actor).
+            order("actors.follower_count DESC")
         }
 
         scope :voted, lambda { 
-          joins(:actor => { :activity_object => { :activities => :activity_verb } }).
-            where('activity_verbs.name' => 'like').
-            select("DISTINCT #{ table_name }.*, COUNT(#{ table_name}.id) AS votes").
-            group("#{ table_name }.id").
-            order("votes DESC")
+          joins(:actor => :activity_object).
+            order('activity_objects.like_count DESC')
         }
 
+        scope :most, lambda { |m|
+          types = %w( popular voted )
+
+          if types.include?(m)
+            __send__ m
+          end
+        }
 
       end
       

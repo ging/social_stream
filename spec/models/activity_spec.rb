@@ -75,35 +75,6 @@ end
 describe Activity do
   include ActivityTestHelper
 
-  describe "like" do
-
-    describe "activity" do
-      before do
-        @like_activity = Factory(:like_activity)
-        @activity = @like_activity.parent
-      end
-
-      it "should recognize the user who likes it" do
-        assert @activity.liked_by?(@like_activity.sender)
-      end
-
-      it "should not recognize the user who does not like it" do
-        assert ! @activity.liked_by?(Factory(:user))
-      end
-    end
-
-    describe "actor" do
-      before do
-        @tie = Factory(:friend)
-        @like = Like.build(@tie.sender, @tie.receiver).save
-      end
-
-      it "should recognize the user who likes it" do
-        assert @tie.receiver.liked_by?(@tie.sender)
-      end
-    end
-  end
-
   describe "wall" do
     context "with a friend activity" do
       before do

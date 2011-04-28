@@ -30,6 +30,30 @@ describe Tie do
     end
   end
 
+  describe "follower_count" do
+    it "should be incremented" do
+      sender, receiver = 2.times.map{ Factory(:user) }
+
+      count = receiver.follower_count
+
+      Tie.create :sender_id => sender.actor_id,
+                 :receiver_id => receiver.actor_id,
+                 :relation_id => sender.relations.sort.first.id
+
+      receiver.reload.follower_count.should eq(count + 1)
+    end
+    
+    it "should be decremented" do
+      tie = Factory(:friend)
+      receiver = tie.receiver
+      count = receiver.follower_count
+
+      tie.destroy
+
+      receiver.reload.follower_count.should eq(count - 1)
+    end
+  end
+
   context "replied" do
     before do
       @sent = Factory(:friend)
