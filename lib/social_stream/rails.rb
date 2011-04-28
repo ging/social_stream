@@ -19,6 +19,7 @@ require 'has_scope'
 # Logo attachments
 require 'paperclip'
 require 'paperclip/social_stream'
+require 'avatars_for_rails'
 # Pagination
 require 'will_paginate'
 # Oauth

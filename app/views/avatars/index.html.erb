@@ -1,8 +1,15 @@
 <% toolbar :profile => current_subject %>
 
 <% content_for :headers do %>
-<%= stylesheet_link_tag "avatars.css", :media => "screen, projection" %>
-<%= javascript_include_tag 'avatars.js' %>
+  <%= stylesheet_link_tag "avatars.css", :media => "screen, projection" %>
+  <%= javascript_include_tag 'avatars.js' %>
+  <%= javascript_include_tag 'jquery.Jcrop.min' %>
+  <%= javascript_include_tag 'jquery.form' %>
+  <%= javascript_include_tag 'jquery.fileupload' %>
+  <%= javascript_include_tag 'jquery.fileupload-ui' %>
+  <%= stylesheet_link_tag "jquery.Jcrop", :media => "screen, projection" %>
+  <%= stylesheet_link_tag "avatars", :media => "screen, projection" %><br/>
+  <%= stylesheet_link_tag "jquery.fileupload-ui", :media => "screen, projection" %>
 <% end %>
 
 <% content_for :title do%>
@@ -19,40 +26,5 @@
   ) %>
 <%end%>
 
-<br class="clearfloat" />
-<div class="space_center"></div>
-<div class="space_center"></div>
-<% unless(@avatars.empty? || (@avatars.first.present? && @avatars.first.id.blank?)) %>
-  <h2><%=t('avatar.text.use') %></h2>
-  <div class="space_center"></div>
-  <div class="space_center"></div>
-  <div class="avatars">
-  <% @avatars.each do |avatar| %>
-    <% unless avatar.id.blank? %>
-  	<%= div_for(avatar) do %>
-  	     <div class="boxgrid captionfull">
-           <%= image_tag(avatar.logo.url(:profile), :class => avatar.active ? 'default' : 'non_default', :size => '94x94') %>
-           <% if avatar.active %>    
-             <div class="cover boxcaption">    
-               <%= link_to "Delete avatar", avatar, :confirm => t('avatar.destroy_sure'), :method => :delete %>
-             </div>  
-           <% else %>
-             <div class="cover boxcaption">    
-               <%= link_to "Set as default", avatar, :confirm => t('avatar.set_default_sure'), :method => :put %>
-               <%= link_to "Delete avatar", avatar, :confirm => t('avatar.destroy_sure'), :method => :delete %>
-             </div>
-           <% end %>
-         </div>  	  	 
-    	<% end %>
-      <% end %>
-  <% end %>
-  </div>
-  <br />
-  <br class="clearfloat" />
-  <div class="space_center"></div>
-  <div class="space_center"></div>
-  <h2><%=t('avatar.text.new') %></h2>
-<% else %>
-  <h2><%= t('avatar.new') %></h2>
-<% end %>
+<%= render :partial => 'list' %>
 <%= render :partial => 'form' %>

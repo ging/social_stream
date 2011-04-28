@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   
   resource :representation
   
-  resources :avatars
+    #resources :avatars
 
   resources :messages
 

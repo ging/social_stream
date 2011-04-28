@@ -44,6 +44,11 @@ module SocialStream
 
           @current_subject = instance
         end
+          
+        def current_actor
+            return current_subject.actor
+        end
+          
 
         # Override Cancan#current_ability method to use {#current_subject}
         def current_ability
