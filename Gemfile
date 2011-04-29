@@ -5,6 +5,6 @@ gemspec
 #use a local code of mailboxer gem
 #@dependencies.delete_if {|d| d.name == 'mailboxer' }
 #gem 'mailboxer', :path => '../mailboxer'
-gem 'avatars_for_rails'
+#gem 'avatars_for_rails'
 
 
