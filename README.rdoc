@@ -8,8 +8,8 @@ among the most popular websites, while many content oriented applications are su
 networking features in order to improve engagement, enhance user awareness and stimulate communities
 around the website.
 
-{Social Stream}[http://github.com/ging/social_stream] is based in
-{Social Network Analysis}[http://en.wikipedia.org/wiki/Social_network] concepts and methods,
+{Social Stream}[http://github.com/ging/social_stream] is based on
+{social network analysis (SNA)}[http://en.wikipedia.org/wiki/Social_network] concepts and methods,
 including social entities (actors), ties and relations. Social Stream is so flexible that you can
 define custom actors (groups, organizations, institutions, social events) and relationships
 (friends, collegues, members, administrators, contributors, attendants, speakers).
