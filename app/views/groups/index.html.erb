@@ -11,11 +11,9 @@
 <% content_for :sidebar do %>
 	<%= render :partial => "groups/sidebar_index" %>
 <% end %>
-<% content_for :location do %>
-  <%= location(image_tag("btn/btn_browse.png", :class=>"btn_config") + t('browse') +": "+ 
-               link_to(t('user.by'), users_path) + ", "+ 
-               content_tag(:b,content_tag(:span, t('group.all'), :id=>'name_group')))%>
-<% end %>
+<%= location(image_tag("btn/btn_browse.png", :class=>"btn_config") + t('browse') +": "+ 
+             link_to(t('user.by'), users_path) + ", "+ 
+             content_tag(:b,content_tag(:span, t('group.all'), :id=>'name_group')))%>
 
 <div class="space_center"></div>
 <div class="space_center"></div>

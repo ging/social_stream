@@ -19,12 +19,10 @@
   <%= render :partial => 'home/sidebar' %>
 <% end %>
 
-<% content_for :location do%>
-  <%= location(
-  	link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('profile.one'), [current_subject,:profile]),	
-  	link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('avatar.other'), avatars_path)
-  ) %>
-<%end%>
+<%= location(
+ 	link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('profile.one'), [current_subject,:profile]),	
+ 	link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('avatar.other'), avatars_path)
+) %>
 
 <%= render :partial => 'list' %>
 <%= render :partial => 'form' %>

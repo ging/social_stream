@@ -16,12 +16,12 @@
 		height: 6
   });
 <% end %>
-<% content_for :location do%>
+
 <%= location(
     link_to(image_tag("btn/btn_group.png", :class => "menu_icon")+t('group.other'), groups_path),
     link_to(image_tag("btn/btn_group.png", :class => "menu_icon")+t('group.new.action'), new_group_path('group' => { '_founder' => current_subject.slug }))
   ) %>
-<% end%>
+
 <div class="space_center"></div>
 
 <%= form_for @group do |f| %>

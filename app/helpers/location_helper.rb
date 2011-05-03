@@ -1,5 +1,5 @@
 module LocationHelper
-	
+  
   # Renders the location stack for your view. You can add as many stack levels as you wish.
   #
   # Usage:  
@@ -20,15 +20,29 @@ module LocationHelper
   #
   #   	<%= location(link_to(leve1.name, level1.url),link_to(leve2.name, level2.url)) %>
   #
-	def location(*stack)
-		location_body = t('location.base')
-		stack.collect {|level|
-			location_body << t('location.separator') + level
-		}
+  def location(*stack)
+    location_body = t('location.base')
+    stack.collect {|level|
+      location_body << t('location.separator') + level
+    }
+    
+    location_div = capture do
+      render :partial => "location/location", :locals=>{:location_body => location_body}
+    end
+    
+    case request.format
+      when Mime::JS
+      response = <<-EOJ
 
-		location_div = capture do
-			render :partial => "location/location", :locals=>{:location_body => location_body}
-		end
-	end
-
+          $('#map_location').html("#{ escape_javascript(location_div) }");
+          EOJ
+      
+      response.html_safe
+    else
+      content_for(:location) do
+        location_div
+      end
+    end
+    
+  end
 end

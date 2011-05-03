@@ -38,11 +38,9 @@
           <div id="map_location">
             <%= yield :location %>
           </div>
-          <% flash.each do |name, msg| %>
-            <div class="<%= name %>">
-              <%= msg %>
-            </div>
-          <% end %>
+          <div id="flash">
+            <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
+          </div>
           <section id="content">
             <%= yield %>
           </section>

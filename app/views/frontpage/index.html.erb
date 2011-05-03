@@ -3,10 +3,9 @@
 <%end%>
 
 <div class="banner_busqueda">
+  <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
   <div id="espacio_busqueda">
-    <% flash.each do |name, msg| %>
-      <div id="<%= name %>"><%= msg %></div>
-    <% end %>
+    
   </div>
   <%= render :partial => "search" %>
 </div>

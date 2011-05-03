@@ -9,32 +9,6 @@
 	$("#profile_notice").removeClass('error');
   $("#profile_notice").addClass('success');
 	
-  /*$("#sidebarContent").replaceWith("<%#= escape_javascript(render(:partial => 'sidebar_show'))%>");*/
-
-  $("#contact_info").addClass('section_normal');
-  $("#experience_info").addClass('section_normal');
-	$("#personal_info").addClass('section_normal');
-	
-  <% if !params[:section].present? or params[:section].eql?("about_me") %>	                  
-		$("#personal_info").removeClass('section_normal');
-		$("#personal_info").addClass('section_highlight');
-	<%end%>
-	
-	<% if !params[:section].present? or params[:section].eql?("contact_info") %>
-		$("#contact_info").removeClass('section_normal');
-		$("#contact_info").addClass('section_highlight');
-	<%end%>
-
-	<% if !params[:section].present? or params[:section].eql?("my_experience") %>
-		$("#experience_info").removeClass('section_normal');
-		$("#experience_info").addClass('section_highlight');
-	<%end%>
-	
-	<% if !params[:section].present? or params[:section].eql?("tags") %>
-		$("#tags").removeClass('section_normal');
-		$("#tags").addClass('section_highlight');
-	<%end%>
-	
 <% else %>
   $("#profile_notice").html("<h2><%= pluralize(@profile.errors.count, "error") %> <%= t('profile.update.error')%></h2>"
 	 +"<ul><% @profile.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></ul>");

@@ -9,10 +9,9 @@
   <%= render :partial => 'sidebar_show' %>
 <% end %>
 
-<% content_for :location do %>
-  <%= render :partial => 'location' %>
-<% end %>
-
+<%= location(link_to(image_tag("btn/btn_group.png", :class => "btn_config")+t('group.one')+": "+
+                      content_tag(:span, ( sanitize @group.name), :class=>"name_group")))%>
+                      
 <% toolbar :profile => @group %>
 
 <br class="clearfloat" />

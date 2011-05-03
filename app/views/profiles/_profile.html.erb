@@ -1,78 +1,10 @@
-<% content_for :location do%>
-  <%= location(link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('menu.information'), 
-              [current_subject, :profile])) %>
-<%end%>
 <div class="space_center"></div>
 <h2><%=t('menu.information')%></h2>
 <div class="space_center"></div>
-<div class="block" id="personal_info" >
-  <div class="header">
-    <div class="header_text">
-      <%=t('profile.' + @profile.subject.class.to_s.downcase + '.info')%>
-    </div>
-    <div class="header_icon_right">
-      <%= link_to (image_tag('/images/btn/edit.png')),  :controller => :profiles , :action => :edit, :section => "about_me"%>
-    </div>
-  </div>
-  <div class="content">
-    <div class="sub-block"  >
-      <% if @profile.organization? %>
-        <div class="row">
-          <div class="label">
-            <%=t('profile.organization')%>:
-          </div>
-          <div class="field">
-            <%=h @profile.organization %>
-          </div>
-        </div>
-      <%end%>
-      <% if @profile.birthday? %>
-        <div class="row">
-          <div class="label">
-            <%=t('profile.' + current_subject.class.to_s.downcase + '.birthday')%>:
-          </div>
-          <div class="field">
-            <%=h I18n.l @profile.birthday, :format => :long %>
-          </div>
-        </div>
-				<% if current_subject.class.eql?(User) %>
-	        <div class="row">
-	          <div class="label">
-	              <%=t('profile.age')%>:
-	          </div>
-	          <div class="field">
-	              <%=h @profile.age %>
-	          </div>
-	        </div>
-				<%end%>
-      <%end%>
-      <% if @profile.city? %>
-        <div class="row">
-          <div class="label">
-            <%=t('profile.actualcity')%>:
-          </div>
-          <div class="field">
-            <%=h @profile.city %>
-            <% if @profile.country? %>
-              , <%=@profile.country%>
-            <%end%>
-          </div>
-        </div>
-      <%end%>
-      <% if @profile.description? %>
-        <div class="row">
-          <div class="label">
-            <%=t('profile.' + current_subject.class.to_s.downcase + '.about')%>:
-          </div>
-          <div class="row">
-              <%=h @profile.description %>
-          </div>
-        </div>
-      <%end%>
-    </div>
-  </div>
-</div>
 
+<% if (!is_personal_empty?) or(is_owner?)%>
+  <%= render :partial=> "personal"%>
+<%end%>
 
 <div class="space_center"></div>
 <div class="block" id="contact_info">
@@ -80,9 +12,11 @@
     <div class="header_text">
       <%=t('profile.contact')%>
     </div>
-    <div class="header_icon_right">
-      <%= link_to (image_tag('/images/btn/edit.png')), :controller => :profiles , :action => :edit, :section => "contact_info"%>
-    </div>
+    <% if is_owner? %>
+      <div class="header_icon_right">
+        <%= link_to (image_tag('/images/btn/edit.png')), :controller => :profiles , :action => :edit, :section => "contact_info"%>
+      </div>
+    <%end%>
   </div>
   <div class="content">
     <div class="sub-block"  >
@@ -148,16 +82,18 @@
     </div>
   </div>
 </div>
-
+<% if @profile.experience?%>
 <div class="space_center"></div>
 <div class="block" id="experience_info">
   <div class="header">
     <div class="header_text">
       <%=t('profile.' + @profile.subject.class.to_s.downcase + '.experience')%>
     </div>
-    <div class="header_icon_right">
-      <%= link_to (image_tag('/images/btn/edit.png')),  :controller => :profiles , :action => :edit, :section => "my_experience"%>
-    </div>
+    <% if is_owner? %>
+      <div class="header_icon_right">
+        <%= link_to (image_tag('/images/btn/edit.png')),  :controller => :profiles , :action => :edit, :section => "my_experience"%>
+      </div>
+    <%end%>
   </div>
   <div class="content">
     <div class="row">
@@ -165,8 +101,25 @@
     </div>
   </div>
 </div>
-<% if (!@profile.blank?) && (!current_subject.blank?)%>
-  <% if (@profile.actor == current_subject.actor) %>
+<%elsif is_owner?%>
+<div class="space_center"></div>
+<div class="block" id="experience_info">
+  <div class="header">
+    <div class="header_text">
+      <%=t('profile.' + @profile.subject.class.to_s.downcase + '.experience')%>
+    </div>
+      <div class="header_icon_right">
+        <%= link_to (image_tag('/images/btn/edit.png')),  :controller => :profiles , :action => :edit, :section => "my_experience"%>
+      </div>
+  </div>
+  <div class="content">
+    <div class="row">
+      <%=t('profile.empty')%>
+    </div>
+  </div>
+</div>
+<%end%>
+<% if is_owner? %>
   <div class="space_center"></div>
   <div class="block" id="avatar_info">
     <div class="header">
@@ -182,7 +135,6 @@
       </div>
     </div>
   </div>
-  <% end %>
 <% end %>
 <div class="space_center"></div>
 <% if (@profile.to_param==current_user.to_param and @profile.authentication_token) %>
@@ -199,22 +151,7 @@
 	</div>
 <% end %>
 <div class="space_center"></div>
-<% if @profile.subject.tag_list.count > 0 %>
-<div class="block" id="tags_info">
-<div class="header">
-    <div class="header_text">
-      Tags:
-    </div>
-    <div class="header_icon_right">
-      <%= link_to (image_tag('/images/btn/edit.png')), :controller => :profiles , 
-			:action => :edit, :section => "tags"%>
-    </div>
-  </div>
-  <div class="content">
-  	<div class="field">
- 		<%= @profile.subject.tag_list %>
-	</div>
-  </div>
-</div>
+<% if (@profile.subject.tag_list.count > 0) or (is_owner?) %>
+  <%= render :partial=>"tags"%>
 <% end %>
 

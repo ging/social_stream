@@ -46,6 +46,7 @@ module SocialStream
       ApplicationController.helper TiesHelper
       ApplicationController.helper LocationHelper
       ApplicationController.helper ToolbarHelper
+      ApplicationController.helper ProfilesHelper
       
       ActsAsTaggableOn::TagsHelper
     end

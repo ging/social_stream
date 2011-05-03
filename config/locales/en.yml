@@ -246,11 +246,13 @@ en:
     contact: "Contact information"
     country: "Country"
     email: "E-mail"
+    empty: "These fields are empty. Please, update them."
     fax: "Fax"
     mobile: "Mobile"
     organization: "Organization"
     phone: "Phone"
     profile: "Edit profile"
+    tags: "Tags"
     website: "Website" 
     update:
       error: "Please, check the format of your profile:"
