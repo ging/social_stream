@@ -18,7 +18,8 @@ module SocialStream
     # alphabetic:: sort subjects by name
     # search:: simple search by name
     # distinct_initials:: get only the first letter of the name
-    # popular:: sort by most incoming {Tie ties}
+    # followed:: sort by most following incoming {Tie ties}
+    # liked:: sort by most likes
     #
     module Subject
       extend ActiveSupport::Concern
@@ -52,18 +53,18 @@ module SocialStream
 
         scope :distinct_initials, joins(:actor).merge(Actor.distinct_initials)
 
-        scope :popular, lambda { 
+        scope :followed, lambda { 
           joins(:actor).
             order("actors.follower_count DESC")
         }
 
-        scope :voted, lambda { 
+        scope :liked, lambda { 
           joins(:actor => :activity_object).
             order('activity_objects.like_count DESC')
         }
 
         scope :most, lambda { |m|
-          types = %w( popular voted )
+          types = %w( followed liked )
 
           if types.include?(m)
             __send__ m

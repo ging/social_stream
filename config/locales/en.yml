@@ -194,8 +194,8 @@ en:
       participants: "Participants"
     cloud: "Group tag cloud"
     most:
-      popular: "Most popular"
-      voted: "Most voted"
+      followed: "Most followed"
+      liked: "Most liked"
   help: "Help"
   home: "Home"
   inbox:
