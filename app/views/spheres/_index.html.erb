@@ -1,0 +1,28 @@
+<% spheres = current_subject.spheres  %>	
+<% i = 0 %>
+
+<table class="tableCheckBoxOptions">
+  <% spheres.each_with_index do |sphere, index| %>
+    <% i = i+1 %>
+
+    <%if index%2==0%>
+      <tr><td>
+          <div contain=<%="C#{i}"%> class="checkboxOptionLeft"><input id=<%="C#{i}"%> optionOf="context" type="checkbox"/> <label for=<%="C#{i}"%>><%=sphere.name%></label></div>
+        </td>
+
+        <% if index==spheres.length %>
+        </tr>
+      <% end %>
+
+    <% else %>
+      <td>
+        <div contain=<%="C#{i}"%> class="checkboxOptionLeft"><input id=<%="C#{i}"%> optionOf="context" type="checkbox"/> <label for=<%="C#{i}"%>><%=sphere.name%></label></div>
+    </td></tr>
+  <% end %>
+
+  <% end %>
+</table>
+
+<%= javascript_tag do %>
+  $('input').checkBox();
+<% end %>

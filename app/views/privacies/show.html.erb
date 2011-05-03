@@ -1,164 +1,135 @@
 <% content_for :headers do %>
   <%= stylesheet_link_tag "privacy.css", :media => "screen, projection" %>
-	<%= stylesheet_link_tag "jquery.ui.slider.css", :media => "screen, projection" %>
-	<%= stylesheet_link_tag "jquery.ui.slidertheme.css", :media => "screen, projection" %>
-	<%= javascript_include_tag 'ui.checkbox'%>
-	<%= javascript_include_tag 'privacy.js'%>
+  <%= stylesheet_link_tag "jquery.ui.slider.css", :media => "screen, projection" %>
+  <%= stylesheet_link_tag "jquery.ui.slidertheme.css", :media => "screen, projection" %>
+  <%= javascript_include_tag 'ui.checkbox'%>
+  <%= javascript_include_tag 'privacy.js'%>
 <% end %> 
 
 <% toolbar :profile => current_subject, :option => 'contacts' %>
 
 
 <script type="text/javascript">
-	
+
   function checkBoxEnable(id) {
-		$('div[contain$='+id+']').addClass("checked-option");
+    $('div[contain$='+id+']').addClass("checked-option");
 
-		if ($("#"+id).attr("optionOf")=="context"){			
-			$(":checkbox[optionOf$=context]:checked:not(#"+id+")").checkBox('changeCheckStatus', false);
-			$(":checkbox[optionOf$=level]:checked").checkBox('changeCheckStatus', false);
-			$(":checkbox[optionOf$=permissions]:checked").checkBox('changeCheckStatus', false);
-			
-		var contextSelected = $('label[for$='+id+']').html();
-			
-		$.ajax({
-      url: "<%= levels_path %>",
-      context: document.body,
-			data: { context: contextSelected },
-      success: function(html){
-				$("#privacy_levels").html(html);
-				$('input').checkBox();
-				initLevels();
-				$("#privacy_levels").show();
-				return true;
+    if ($("#"+id).attr("optionOf")=="context"){			
+      $(":checkbox[optionOf$=context]:checked:not(#"+id+")").checkBox('changeCheckStatus', false);
+      $(":checkbox[optionOf$=level]:checked").checkBox('changeCheckStatus', false);
+      $(":checkbox[optionOf$=permissions]:checked").checkBox('changeCheckStatus', false);
+
+      var contextSelected = $('label[for$='+id+']').html();
+
+      $.ajax({
+        url: "<%= levels_path %>",
+        context: document.body,
+        data: { context: contextSelected },
+        success: function(html){
+          $("#privacy_levels").html(html);
+          $('input').checkBox();
+          initLevels();
+          $("#privacy_levels").show();
+          return true;
       }
-    });
+  });
+}
 
-		}
-    		
-		if ($("#"+id).attr("optionOf")=="level"){
-			$(":checkbox[optionOf$=level]:checked:not(#"+id+")").checkBox('changeCheckStatus', false);
-			$(":checkbox[optionOf$=permissions]:checked").checkBox('changeCheckStatus', false);
-			
-			var checkboxContextId = $(":checkbox[optionOf$=context]:checked").attr("id");
-			var contextSelected = $('label[for$='+checkboxContextId+']').html();
-			var levelSelected = $('label[for$='+id+']').html();
-			
-			var nlevel= levels.length;
-			var index = levels.indexOf(levelSelected);
-			var value = (100/nlevel)*(index+0.5);
-			$("#slider-range").slider("values",1,value);
-			$( "#level" ).val(levelSelected);
-			
-			$.ajax({
-	      url: "<%= permissions_path %>",
-	      context: document.body,
-	      data: { context: contextSelected, level: levelSelected },
-	      success: function(html){
-	        $("#privacy_permissions").html(html);
-	        $('input').checkBox();
-					initPermissions();
-					$("#privacy_levels").show();
-	        $("#privacy_permissions").show();
-	        return true;
-	      }
-      });
+if ($("#"+id).attr("optionOf")=="level"){
+  $(":checkbox[optionOf$=level]:checked:not(#"+id+")").checkBox('changeCheckStatus', false);
+  $(":checkbox[optionOf$=permissions]:checked").checkBox('changeCheckStatus', false);
+
+  var checkboxContextId = $(":checkbox[optionOf$=context]:checked").attr("id");
+  var contextSelected = $('label[for$='+checkboxContextId+']').html();
+  var levelSelected = $('label[for$='+id+']').html();
+
+  var nlevel= levels.length;
+  var index = levels.indexOf(levelSelected);
+  var value = (100/nlevel)*(index+0.5);
+  $("#slider-range").slider("values",1,value);
+  $( "#level" ).val(levelSelected);
+
+  $.ajax({
+    url: "<%= permissions_path %>",
+    context: document.body,
+    data: { context: contextSelected, level: levelSelected },
+    success: function(html){
+      $("#privacy_permissions").html(html);
+      $('input').checkBox();
+      initPermissions();
+      $("#privacy_levels").show();
+      $("#privacy_permissions").show();
+      return true;
     }
-		
-    if ($("#" + id).attr("optionOf") == "permissions") {
-			refreshPrivacyRules();
-	  }
-		
+  });
+}
+
+if ($("#" + id).attr("optionOf") == "permissions") {
+  refreshPrivacyRules();
+}
+
+}
+
+function checkBoxDisable(id) {
+  $('div[contain$='+id+']').removeClass("checked-option");
+
+  if ($("#"+id).attr("optionOf")=="context"){
+    $("#privacy_permissions").hide();
+    $("#privacy_levels").hide();
   }
-	
-  function checkBoxDisable(id) {
-    $('div[contain$='+id+']').removeClass("checked-option");
-    
-    if ($("#"+id).attr("optionOf")=="context"){
-      $("#privacy_permissions").hide();
-       $("#privacy_levels").hide();
-    }
-		
-		if ($("#"+id).attr("optionOf")=="level"){     
-      $("#privacy_permissions").hide();
-    }
-		
-		if ($("#" + id).attr("optionOf") == "permissions") {
-      refreshPrivacyRules();
-    }
-  } 
-	
-	function createContext(){
 
-		$.ajax({
-      url: "<%= privacy_path %>",
-      context: document.body,
-      data: { context: $("#new_context_input").val() },
-      success: function(html){
-        return true;
-      }
-    }); 
-	}
-	
+  if ($("#"+id).attr("optionOf")=="level"){     
+    $("#privacy_permissions").hide();
+  }
+
+  if ($("#" + id).attr("optionOf") == "permissions") {
+    refreshPrivacyRules();
+  }
+} 
+
+function createContext(){
+  $.ajax({
+    url: "<%= privacy_path %>",
+    context: document.body,
+    data: { context: $("#new_context_input").val() },
+    success: function(html){
+      return true;
+    }
+  }); 
+}
+
 </script>
 
-    <div id="wrapper_section">   
-            
-    <p class="pageTitle"> Privacy & context </p>
+<div id="wrapper_section">   
 
-    <form action="#">
-    	
-	  <div id="privacy_context" class="privacy_block_section first_block_section">
-	    <p class="sectionTitle"> 1. Choose context </p>
-	            
-	    <div class="privacy_add_element">
-	      <div id="new_context_title_block"> 
-	        	<a href="#"><span id="new_context_title" class="privacy_span_new"> + New context </span></a>
-				</div> 
-	      <div id="new_context_input_block"> 
-				  <p><input type="text" id="new_context_input" class="privacy_input_new"/></p>
-					<button class="button" id="submit_new_context" >Save</button>
-					<button class="button" id="cancel_new_context" >Cancel</button>
-				</div>
-	    </div>
-	
-			
-	   
-			<% spheres = current_subject.spheres  %>	
-			<% i = 0 %>
+  <p class="pageTitle"> Privacy & context </p>
 
-      <table class="tableCheckBoxOptions">
-      <% spheres.each_with_index do |sphere, index| %>
-			<% i = i+1 %>
-			
-      <%if index%2==0%>
-			   <tr><td>
-			   	 <div contain=<%="C#{i}"%> class="checkboxOptionLeft"><input id=<%="C#{i}"%> optionOf="context" type="checkbox"/> <label for=<%="C#{i}"%>><%=sphere.name%></label></div>
-					</td>
-					
-					<% if index==spheres.length %>
-					  </tr>
-					<% end %>
-					
-			<% else %>
-			    <td>
-           <div contain=<%="C#{i}"%> class="checkboxOptionLeft"><input id=<%="C#{i}"%> optionOf="context" type="checkbox"/> <label for=<%="C#{i}"%>><%=sphere.name%></label></div>
-          </td></tr>
-			<% end %>
-			    
-			<% end %>
-			</table>
-			
-    </div>
-    
-		
-	    <div id="privacy_levels" class="privacy_block_section">
-	    </div>
-   
-		
-	  <div id="privacy_permissions" class="privacy_block_section">
+  <div id="privacy_context" class="privacy_block_section first_block_section">
+    <p class="sectionTitle"> 1. Choose context </p>
+
+    <div class="privacy_add_element">
+      <div id="new_context_title_block"> 
+        <a href="#"><span id="new_context_title" class="privacy_span_new"> + New context </span></a>
+      </div> 
+      <div id="new_context_input_block"> 
+        <%= render :partial => 'spheres/form' %>
+      </div>
     </div>
 
-		
-    </form>
+
+    <div id="spheres">
+      <%= render :partial => 'spheres/index' %>
+    </div>
+
+</div>
+
+
+<div id="privacy_levels" class="privacy_block_section">
+</div>
+
+
+<div id="privacy_permissions" class="privacy_block_section">
+</div>
+
+
     </div> 

@@ -197,6 +197,10 @@ en:
       followed: "Most followed"
       liked: "Most liked"
   help: "Help"
+  helpers:
+    submit:
+      sphere:
+        create: "Save"
   home: "Home"
   inbox:
     one: "Inbox"

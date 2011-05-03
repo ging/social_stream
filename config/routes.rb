@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :spheres
+
   match 'privacy/permissions' => 'privacies#permissions', :as => :permissions
   match 'privacy/levels' => 'privacies#levels', :as => :levels
   match 'contacts' => 'contacts#index', :as => 'contacts'

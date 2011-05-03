@@ -1,0 +1,6 @@
+<% if @sphere.errors.present? %>
+  $('#new_context_input_block').html("<%= escape_javascript render(:partial => 'spheres/form') %>");
+<% else %>
+  $('#spheres').html("<%= escape_javascript render(:partial => 'spheres/index') %>");
+<% end %>
+
