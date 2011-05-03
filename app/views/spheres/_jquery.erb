@@ -1,0 +1,78 @@
+function checkBoxEnable(id) {
+	$('div[contain$='+id+']').addClass("checked-option");
+
+	if ($("#"+id).attr("optionOf")=="context"){			
+		$(":checkbox[optionOf$=context]:checked:not(#"+id+")").checkBox('changeCheckStatus', false);
+		$(":checkbox[optionOf$=level]:checked").checkBox('changeCheckStatus', false);
+		$(":checkbox[optionOf$=permissions]:checked").checkBox('changeCheckStatus', false);
+
+		var contextSelected = $('label[for$='+id+']').html();
+
+		$.ajax({
+			url: "<%= levels_path %>",
+			context: document.body,
+			data: { context: contextSelected },
+			success: function(html){
+				$("#privacy_levels").html(html);
+				$('input').checkBox();
+				initLevels();
+				$("#privacy_levels").show();
+				return true;
+			}
+		});
+	}
+
+	if ($("#"+id).attr("optionOf")=="level"){
+		$(":checkbox[optionOf$=level]:checked:not(#"+id+")").checkBox('changeCheckStatus', false);
+		$(":checkbox[optionOf$=permissions]:checked").checkBox('changeCheckStatus', false);
+
+		var checkboxContextId = $(":checkbox[optionOf$=context]:checked").attr("id");
+		var contextSelected = $('label[for$='+checkboxContextId+']').html();
+		var levelSelected = $('label[for$='+id+']').html();
+
+		var nlevel= levels.length;
+		var index = levels.indexOf(levelSelected);
+		var value = (100/nlevel)*(index+0.5);
+		$("#slider-range").slider("values",1,value);
+		$( "#level" ).val(levelSelected);
+
+		$.ajax({
+			url: "<%= permissions_path %>",
+			context: document.body,
+			data: { context: contextSelected, level: levelSelected },
+			success: function(html){
+				$("#privacy_permissions").html(html);
+				$('input').checkBox();
+				initPermissions();
+				$("#privacy_levels").show();
+				$("#privacy_permissions").show();
+				return true;
+			}
+		});
+	}
+
+	if ($("#" + id).attr("optionOf") == "permissions") {
+		refreshPrivacyRules();
+	}
+
+}
+
+function checkBoxDisable(id) {
+	$('div[contain$='+id+']').removeClass("checked-option");
+
+	if ($("#"+id).attr("optionOf")=="context"){
+		$("#privacy_permissions").hide();
+		$("#privacy_levels").hide();
+	}
+
+	if ($("#"+id).attr("optionOf")=="level"){     
+		$("#privacy_permissions").hide();
+	}
+
+	if ($("#" + id).attr("optionOf") == "permissions") {
+		refreshPrivacyRules();
+	}
+} 
+
+
+
