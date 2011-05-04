@@ -2,7 +2,7 @@ SocialStream.setup do |config|
   # List the models that are social entities. These will have ties between them.
   # Remember you must add an "actor_id" foreign key column to your migration!
   #
-  # config.actors = [:user, :group ]
+  # config.subjects = [:user, :group ]
 
   # Include devise modules in User. See devise documentation for details.
   # Others available are:
@@ -13,5 +13,5 @@ SocialStream.setup do |config|
   # Type of activities managed by actors
   # Remember you must add an "activity_object_id" foreign key column to your migration!
   #
-  # config.activity_objects = [ :post, :comment, :messages ]
+  # config.objects = [ :post, :comment ]
 end
