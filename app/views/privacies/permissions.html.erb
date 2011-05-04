@@ -1,5 +1,3 @@
-<%= javascript_include_tag 'privacy.js'%>
-
 <% level = current_subject.spheres.find_by_name(params[:context]).relations.find_by_name(params[:level]) %>
 
 <% if level != nil%>

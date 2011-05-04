@@ -16,14 +16,74 @@
 .dropdown dd ul li a:hover { background-color: #EBF2F4;}
 
 .input_select{ height: 20px; width: 90%; background-color: #DFECF1; margin: auto; margin-top:5px; margin-bottom:5px; color: #1F4A75; border: 1px solid #1F4A75; text-align: center; font-size:1.0em;}
-.input_link{ text-align: center; }
 
 .select_relations{ text-align: center; padding-right:50px; margin-top: -5px;}
-.relationPermision{ color: #2A3890; }
-#relationPermissions{ text-align: left; margin-top: 15px; }
 
-.checkbox_permission {
-	margin-top: 5px;
-	color: red;
+
+
+.ui-radio-state-disabled, .ui-radio-state-checked-disabled, .ui-radio-state-disabled-hover, .ui-radio-state-checked-disabled-hover {
+  color: #999;
 }
+
+span.ui-checkbox, span.ui-radio {
+  display: block;
+  float: left;
+  width: 16px;
+  height: 17px;
+  background: url(/images/icon_checkbox.png) 0 -40px no-repeat;
+}
+
+span.ui-helper-hidden {
+  display: none;
+}
+
+label {
+  display: block;
+  font-family: sans-serif;
+  padding: 2px;
+  margin-left: 20px;
+}
+
+span.ui-radio-state-hover, span.ui-checkbox-state-hover {
+  background-position: 0 -114px;
+}
+
+span.ui-checkbox-state-checked {
+  background-position: 0 -1px;
+}
+
+span.ui-checkbox-state-checked-hover {
+  background-position: 0 -75px;
+}
+
+span.ui-radio-state-checked-disabled-hover,span.ui-radio-state-checked-disabled, span.ui-radio-state-checked {
+  background-position: 0 -161px;
+}
+
+span.ui-radio-state-checked-hover {
+  background-position: 0 -200px;
+}
+
+.ui-helper-hidden-accessible {
+  position: absolute;
+  left: -999em;
+}
+
+
+li.sphere_name {
+	background-color: #1F4A75;
+	padding: 5px;
+	text-align: left;
+}
+
+span.sphere_name{
+	color: white;
+}
+
+.checked-option{
+  background-color: #dfecf1;
+}
+
+
+
 
