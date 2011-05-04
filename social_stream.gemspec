@@ -43,7 +43,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('rmagick','~> 2.13.1')
   # Tagging
   s.add_runtime_dependency('acts-as-taggable-on','~> 2.0.6')
-
+  
   # Development Gem dependencies
   s.add_development_dependency('rails', '~> 3.0.7')
   # Integration testing

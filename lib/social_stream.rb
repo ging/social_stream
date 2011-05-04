@@ -35,7 +35,8 @@ module SocialStream
     end
 
     def objects
-      @@objects | [ :actor ]
+      @@objects.push(:actor) unless @@objects.include?(:actor)
+      @@objects
     end
 
     # Load models for rewrite in application

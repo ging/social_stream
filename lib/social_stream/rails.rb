@@ -28,6 +28,8 @@ require 'omniauth/oauth'
 require 'rails_css_themes'
 #Tags
 require 'acts-as-taggable-on'
+#Files
+#require 'social_stream-files'
 
 module SocialStream
   class Engine < ::Rails::Engine #:nodoc:
