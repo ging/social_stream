@@ -1,0 +1,81 @@
+<div class="space_center"></div>
+  <div class="block" id="contact_info">
+    <div class="header">
+      <div class="header_text">
+        <%=t('profile.contact')%>
+      </div>
+      <% if is_owner? %>
+        <div class="header_icon_right">
+          <%= link_to (image_tag('/images/btn/edit.png')), :controller => :profiles , :action => :edit, :section => "contact_info"%>
+        </div>
+      <%end%>
+    </div>
+    <div class="content">
+      <% if !is_contact_empty?%>
+        <div class="sub-block"  >
+          <% if @profile.phone? %>
+            <div class="row">
+              <div class="label">
+                <%=t('profile.phone')%>
+              </div>
+              <div class="field">
+                <%=h @profile.phone %>
+              </div>
+            </div>
+          <%end%>
+          <% if @profile.mobile? %>
+            <div class="row">
+              <div class="label">
+                <%=t('profile.mobile')%>
+              </div>
+              <div class="field">
+                <%=h @profile.mobile %>
+              </div>
+            </div>
+          <%end%>
+          <% if @profile.fax? %>
+            <div class="row">
+              <div class="label">
+                <%=t('profile.fax')%>
+              </div>
+              <div class="field">
+                <%=h @profile.fax %>
+              </div>
+            </div>
+          <%end%>
+          <% if @profile.address? %>
+            <div class="row">
+              <div class="label">
+                <%=t('profile.address')%>
+              </div>
+              <div class="field">
+                <%=h @profile.address %>
+              </div>
+            </div>
+          <%end%>
+          <% if @profile.website? %>
+            <div class="row">
+              <div class="label">
+                <%=t('profile.website')%>
+              </div>
+              <div class="field">
+                <a href="<%=h @profile.website %>"><%=h @profile.website %></a>
+              </div>
+            </div>
+          <%end%>
+          <% if @profile.subject.email? %>  
+            <div class="row">
+              <div class="label">
+                <%=t('profile.email')%>:
+              </div>
+              <div class="field">
+                <%=h @profile.subject.email %>
+              </div>
+            </div>
+          <%end%>
+        </div>
+      <%elsif is_owner?%>
+        <%=t('profile.empty')%>
+      <%end%>
+    </div>
+  </div>

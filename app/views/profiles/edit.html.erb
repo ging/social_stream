@@ -88,8 +88,6 @@ end %>
 	    $(function () {
 	        $( "#profile_birthday" ).datepicker({ yearRange: '1900:<%= Time.now.utc.to_date.year%>',
 	                                          changeYear: true, maxDate: '+0d', defaultDate: '-30y'});
-	        $("#personal_info").addClass('section_highlight');
-	
 	    });
 	  <% end %>
     <div class="row">
@@ -154,13 +152,6 @@ end %>
 	  </div>
   <% end %>
   <% if !params[:section].present? or params[:section].eql?("contact_info") %>
-
-    <% content_for :javascript do %>
-      $(function() {
-          $("#contact_info").addClass('section_highlight');
-      });
-    <% end %>
-
     <div class="form_row">
         <h2><%=t('profile.contact')%></h2>
     </div>
@@ -207,11 +198,6 @@ end %>
     </div>
   <% end %>
   <% if !params[:section].present? or params[:section].eql?("my_experience") %>
-    <% content_for :javascript do %>
-      $(function() {
-          $("#experience_info").addClass('section_highlight');
-      });
-    <% end %>
     <div class="form_row">
         <h2><%=t('profile.' + current_subject.class.to_s.downcase + '.experience')%></h2>
     </div>

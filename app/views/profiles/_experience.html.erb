@@ -1,0 +1,22 @@
+  <div class="space_center"></div>
+  <div class="block" id="experience_info">
+    <div class="header">
+      <div class="header_text">
+        <%=t('profile.' + @profile.subject.class.to_s.downcase + '.experience')%>
+      </div>
+      <% if is_owner? %>
+        <div class="header_icon_right">
+          <%= link_to (image_tag('/images/btn/edit.png')),  :controller => :profiles , :action => :edit, :section => "my_experience"%>
+        </div>
+      <%end%>
+    </div>
+    <div class="content">
+      <%if @profile.experience?%>
+        <div class="row">
+          <%=h @profile.experience %>
+        </div>
+      <%elsif is_owner?%>
+        <%=t('profile.empty')%>
+      <%end%>
+    </div>
+  </div>

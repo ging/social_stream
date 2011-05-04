@@ -18,4 +18,14 @@ module ProfilesHelper
     end
   end
   
+  #Returns true if the "Personal Information" section is empty
+  def is_contact_empty?
+    if (@profile.phone?) or (@profile.mobile?) or (@profile.fax?) or (@profile.address?)or 
+       (@profile.website?) or (@profile.subject.email?)
+      return false
+    else
+      return true
+    end
+  end
+  
 end
