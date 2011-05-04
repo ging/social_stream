@@ -4,8 +4,8 @@
   <head>
     <meta charset="utf-8">
     <title><%= yield(:title).empty? ? t('socialstream') : yield(:title)%></title>
-    <meta name="keywords" content="SNA, social, stream, activity" >
-    <meta name="description" content= "<%= yield(:description).empty? ? "Home" : yield(:description) %>" >
+    <meta name="keywords" content="<%= t('profile.tags.default') %><%= yield(:keywords) %>" >
+    <meta name="description" content= "<%= yield(:description).empty? ? t('frontpage.main_title') : yield(:description) %>" >
     <%= stylesheet_link_tag "base", "header","home","footer",
                              :media => "screen, projection" %>
     <%= javascript_include_tag 'jquery.min', 'jquery-ui.min','rails', 'jquery.livequery', 'ui.dropdownchecklist'%>

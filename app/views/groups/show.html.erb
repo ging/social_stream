@@ -1,10 +1,16 @@
 <% content_for :title do %>
   <%= @group.name%>
 <% end %>
-<% content_for :description do %>
-  <%= @group.profile.description%>
+
+<% if @group.profile.description? %>
+  <% content_for :description do %>
+    <%= @group.profile.description%>
+  <% end %>
 <% end %>
 
+<% content_for :keywords do %>
+  <%= @group.profile.subject.tag_list%>
+<% end %>
 <% content_for :sidebar do %>
   <%= render :partial => 'sidebar_show' %>
 <% end %>

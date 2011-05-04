@@ -256,7 +256,9 @@ en:
     organization: "Organization"
     phone: "Phone"
     profile: "Edit profile"
-    tags: "Tags"
+    tags: 
+      default: "social, stream,"
+      other: "Tags"
     website: "Website" 
     update:
       error: "Please, check the format of your profile:"
