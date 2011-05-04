@@ -1,6 +1,10 @@
 class SocialstreamFiles::InstallGenerator < Rails::Generators::Base
   include Rails::Generators::Migration
   
+  def route_downloads
+    route "match 'attachments/:id/:style.:format' => 'attachments#download'"
+  end
+  
   require 'rails/generators/active_record'
 
   def self.next_migration_number(dirname)
