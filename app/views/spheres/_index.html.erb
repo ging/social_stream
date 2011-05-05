@@ -7,7 +7,7 @@
 
     <%if index%2==0%>
       <tr><td>
-          <div contain=<%="C#{i}"%> class="checkboxOptionLeft"><input id=<%="C#{i}"%> optionOf="context" type="checkbox"/> <label for=<%="C#{i}"%>><%=sphere.name%></label></div>
+          <div contain=<%= dom_id(sphere) %> class="checkboxOptionLeft"><input id=<%= dom_id(sphere) %> optionOf="sphere" type="checkbox"/> <label for=<%= dom_id(sphere) %>><%=sphere.name%></label></div>
         </td>
 
         <% if index==spheres.length %>
@@ -16,7 +16,7 @@
 
     <% else %>
       <td>
-        <div contain=<%="C#{i}"%> class="checkboxOptionLeft"><input id=<%="C#{i}"%> optionOf="context" type="checkbox"/> <label for=<%="C#{i}"%>><%=sphere.name%></label></div>
+        <div contain=<%= dom_id(sphere) %> class="checkboxOptionLeft"><input id=<%= dom_id(sphere) %> optionOf="sphere" type="checkbox"/> <label for=<%= dom_id(sphere) %>><%=sphere.name%></label></div>
     </td></tr>
   <% end %>
 

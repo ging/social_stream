@@ -1,0 +1,29 @@
+<% @relation ||= @sphere.relations.build %>
+
+<%= form_for @relation, :remote => true do |f| %>
+  <%= f.hidden_field :sphere_id %>
+
+  <% if @relation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@relation.errors.count, "error") %> prohibited this relation from being saved:</h2>
+
+      <ul>
+      <% @relation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p><%= f.text_field :name, :class => "privacy_input_new", :size => 20 %></p>
+  <%= f.submit nil, :class => "button" %>
+  <button class="button" id="cancel_new_relation" ><%= t('button.cancel') %></button>
+<% end %>
+
+<%= javascript_tag do %>
+  $("#cancel_new_relation").click(function() {   
+    $("#new_relation_input_block").hide();
+    $("#new_relation_title_block").show();
+    return false;
+  });
+<% end %>

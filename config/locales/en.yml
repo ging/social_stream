@@ -201,6 +201,8 @@ en:
     submit:
       sphere:
         create: "Save"
+      relation:
+        create: "Save"
   home: "Home"
   inbox:
     one: "Inbox"
@@ -256,9 +258,7 @@ en:
     organization: "Organization"
     phone: "Phone"
     profile: "Edit profile"
-    tags: 
-      default: "social, stream,"
-      other: "Tags"
+    tags: "Tags"
     website: "Website" 
     update:
       error: "Please, check the format of your profile:"
@@ -286,6 +286,11 @@ en:
     one: "Product"
     other: "Products"
   relation:
+    in_sphere:
+      choose: "2. Levels on \"%{name}\" context"
+    me:
+      name: "Me"
+    new: "+ New level"
     public:
       name: "Public"
   share: "Share"
@@ -293,6 +298,10 @@ en:
   sign_out: "Sign out"
   sign_up: "Sign up"
   socialstream: "SocialStream"
+  sphere:
+    title: "Privacy & context"
+    choose: "1. Choose context"
+    new: '+ New context'
   tie:
     add:
       bookmark: "Bookmark"

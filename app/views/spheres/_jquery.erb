@@ -1,57 +1,65 @@
+var relations;
+var relationsOrder;
+
+function checkBoxId(id) {
+  return id.match(/\d+$/)[0];
+}
+
+function checkBoxValue(id) {
+  return $('label[for$=' + id +']').html(); 
+}
+
+function checkBoxOrder(id) {
+  return parseInt($('label[for$=' + id +']').attr("order"));
+}
+
+function checkBoxIdByOrder(order) {
+  return $('label[order$=' + order +']').attr("for");
+}
+
+
 function checkBoxEnable(id) {
 	$('div[contain$='+id+']').addClass("checked-option");
 
-	if ($("#"+id).attr("optionOf")=="context"){			
-		$(":checkbox[optionOf$=context]:checked:not(#"+id+")").checkBox('changeCheckStatus', false);
+	if ($("#"+id).attr("optionOf")=="sphere"){			
+		$(":checkbox[optionOf$=sphere]:checked:not(#"+id+")").checkBox('changeCheckStatus', false);
+                /*
 		$(":checkbox[optionOf$=level]:checked").checkBox('changeCheckStatus', false);
 		$(":checkbox[optionOf$=permissions]:checked").checkBox('changeCheckStatus', false);
+                */
 
-		var contextSelected = $('label[for$='+id+']').html();
+		var sphereSelected = checkBoxId(id);
 
 		$.ajax({
-			url: "<%= levels_path %>",
+			url: "<%= relations_path %>",
 			context: document.body,
-			data: { context: contextSelected },
-			success: function(html){
-				$("#privacy_levels").html(html);
-				$('input').checkBox();
-				initLevels();
-				$("#privacy_levels").show();
-				return true;
-			}
+			data: { sphere_id: sphereSelected },
+                        dataType: "script"
 		});
 	}
 
-	if ($("#"+id).attr("optionOf")=="level"){
-		$(":checkbox[optionOf$=level]:checked:not(#"+id+")").checkBox('changeCheckStatus', false);
+	if ($("#"+id).attr("optionOf")=="relation"){
+		$(":checkbox[optionOf$=relation]:checked:not(#"+id+")").checkBox('changeCheckStatus', false);
+                /*
 		$(":checkbox[optionOf$=permissions]:checked").checkBox('changeCheckStatus', false);
+                */
 
-		var checkboxContextId = $(":checkbox[optionOf$=context]:checked").attr("id");
-		var contextSelected = $('label[for$='+checkboxContextId+']').html();
-		var levelSelected = $('label[for$='+id+']').html();
+		var relationSelected = checkBoxId(id);
+                var relationOrder = checkBoxOrder(id);
 
-		var nlevel= levels.length;
-		var index = levels.indexOf(levelSelected);
-		var value = (100/nlevel)*(index+0.5);
-		$("#slider-range").slider("values",1,value);
-		$( "#level" ).val(levelSelected);
+                var value = relations.length - checkBoxOrder(id) - 2;
+		$("#slider-range").slider("value", value);
+		$( "#relation" ).val(checkBoxValue(id));
 
 		$.ajax({
 			url: "<%= permissions_path %>",
 			context: document.body,
-			data: { context: contextSelected, level: levelSelected },
-			success: function(html){
-				$("#privacy_permissions").html(html);
-				$('input').checkBox();
-				initPermissions();
-				$("#privacy_levels").show();
-				$("#privacy_permissions").show();
-				return true;
-			}
+			data: { relation_id: relationSelected },
+                        dataType: "script"
 		});
 	}
 
-	if ($("#" + id).attr("optionOf") == "permissions") {
+	if ($("#" + id).attr("optionOf") == "permission") {
 		refreshPrivacyRules();
 	}
 
@@ -60,13 +68,13 @@ function checkBoxEnable(id) {
 function checkBoxDisable(id) {
 	$('div[contain$='+id+']').removeClass("checked-option");
 
-	if ($("#"+id).attr("optionOf")=="context"){
-		$("#privacy_permissions").hide();
-		$("#privacy_levels").hide();
+	if ($("#"+id).attr("optionOf")=="sphere"){
+		$("#permissions").hide();
+		$("#relations").hide();
 	}
 
-	if ($("#"+id).attr("optionOf")=="level"){     
-		$("#privacy_permissions").hide();
+	if ($("#"+id).attr("optionOf")=="relations"){     
+		$("#permissions").hide();
 	}
 
 	if ($("#" + id).attr("optionOf") == "permissions") {
@@ -76,3 +84,32 @@ function checkBoxDisable(id) {
 
 
 
+
+function initSlider() {
+  /* TODO: get relations from checkboxOptions */
+  relations.unshift("<%= t 'relation.public.name' %>");
+  relations.push("<%= t 'relation.me.name' %>");
+
+  $("#relation").val(relations[relations.length - 1]);
+
+  $("#slider-range").slider({
+    orientation: "vertical",
+    range: "min",
+    min: 0,
+    max: relations.length - 1,
+    step: 1,
+    value: relations.length - 1,
+    slide: function(event, ui) {
+      $('#relation').val(relations[ui.value]);
+      },
+    stop: function(event, ui) {
+      var order = relations.length - ui.value - 2;
+      if (order >= 0 && order < relations.length - 2) {
+        var id = '#' + checkBoxIdByOrder(order);
+        $(id).click();
+        // In Firefox 3 you have to repeat it twice. WTF?
+        $(id).click();
+      }
+    }
+  });
+};

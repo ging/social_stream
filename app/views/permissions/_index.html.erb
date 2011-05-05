@@ -1,0 +1,91 @@
+<% permissions = @permissions %>
+<% read_activity_starTies_id = get_permission_id("read","activity","star_ties") %>
+<% create_activity_id = get_permission_id("create","activity", nil) %>
+<% destroy_activity_id = get_permission_id("destroy","activity", nil) %>
+
+
+<script type="text/javascript">
+  function getMessageFromPermission(permission){
+    return permission + " just on " + "<%=params[:level]%>" + " level.";
+  }
+
+function refreshPrivacyRules(){
+  $("#privacy_rules_ulist").html("");
+
+  selectedPermissions = $(":checkbox[optionOf$=permissions]:checked");
+
+  if (selectedPermissions.length > 0){
+    $.each(selectedPermissions, function(index, item) { 
+        var checkboxPermissionId = item.id;
+        var permission = $('label[for$='+checkboxPermissionId+']').html();
+        $("#privacy_rules_ulist").append('<li>' + getMessageFromPermission(permission) +'</li>');
+        });
+  } else {
+    $("#privacy_rules_ulist").append('<li>' + 'Select permissions to add Privacy Rules' +'</li>');
+  }
+}
+
+function initPermissions(){
+  $("#new_context_input_block").hide();
+  $("#new_level_input_block").hide();
+  $("#new_context_title_block").show();
+  $("#new_level_title_block").show();
+
+  var allowRead_activity_starTies = "<%=(permissions.find_by_id(read_activity_starTies_id)!=nil)%>"
+    var allowCreate_activity = "<%=(permissions.find_by_id(create_activity_id)!=nil)%>"
+    var allowDestroy_activity = "<%=(permissions.find_by_id(destroy_activity_id)!=nil)%>"
+
+    if(allowRead_activity_starTies=='true'){
+      id="<%= read_activity_starTies_id %>";
+      $('input[permission$='+id+']').checkBox('changeCheckStatus', true);
+    }
+
+  if(allowCreate_activity=='true'){
+    id="<%= create_activity_id %>";
+    $('input[permission$='+id+']').checkBox('changeCheckStatus', true);
+  }
+
+  if(allowDestroy_activity=='true'){
+    id="<%= destroy_activity_id %>";
+    $('input[permission$='+id+']').checkBox('changeCheckStatus', true);	
+  }
+
+  refreshPrivacyRules();
+}
+</script>
+
+
+<%i = (current_subject.spheres).count + (current_subject.spheres.find_by_name(params[:context]).relations).count %>
+<%i = i+1 %>
+
+<div id="columns_container">
+
+  <div id="permissions_list_block">
+
+    <p class="sectionTitle"> 3. Permissions on "<%=params[:level]%>" level </p>
+
+    <div class="privacy_add_element"></div>
+
+    <table class="tableCheckBoxOptions">
+      <tr><td>
+          <div contain=<%="C#{i}"%> class="checkboxPermissionOptionLeft"><input id=<%="C#{i}"%> optionOf="permissions" permission="<%=read_activity_starTies_id%>"  type="checkbox"/> <label for=<%="C#{i}"%>>Allow to read my wall</label></div>
+          <%i = i+1 %>
+          </td><td>
+          <div contain=<%="C#{i}"%> class="checkboxPermissionOptionRight"><input id=<%="C#{i}"%> optionOf="permissions" permission="<%= create_activity_id%>"       type="checkbox"/> <label for=<%="C#{i}"%>>Allow to write in my wall</label></div>
+          <%i = i+1 %>
+      </td></tr>
+      <tr><td>
+          <div contain=<%="C#{i}"%> class="checkboxPermissionOptionLeft"><input id=<%="C#{i}"%> optionOf="permissions" permission="<%= destroy_activity_id%>"       type="checkbox"/> <label for=<%="C#{i}"%>>Allow to destroy activities in my wall</label></div>
+          <%i = i+1 %>
+      </td></tr>
+    </table>
+  </div>
+
+  <div id="privacy_rules">
+    <p class="sectionTitle"> Privacy Rules </p>
+    <ul class="privacy_rules_list" id="privacy_rules_ulist"></ul>
+    <%= button_to "Save", { :action => "create" }, {:class => "button" } %>
+  </div>
+
+
+</div>

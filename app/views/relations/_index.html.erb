@@ -1,0 +1,34 @@
+<%= javascript_include_tag 'jquery.ui.widget'%>
+<%= javascript_include_tag 'jquery.ui.mouse'%>
+<%= javascript_include_tag 'jquery.ui.slider.js'%>
+
+<p class="sectionTitle"><%= t 'relation.in_sphere.choose', :name => @sphere.name %> </p>
+
+
+<div class="privacy_add_element">
+  <div id="new_relation_title_block"> 
+    <a href="#"><span id="new_relation_title" class="privacy_span_new"><%= t 'relation.new' %></span></a>
+  </div> 
+  <div id="new_relation_input_block"> 
+    <%= render :partial => 'relations/form' %>
+  </div>
+</div>
+
+<div id="relation_list">
+  <%= render :partial => 'relations/list', :object => @relations %>
+</div>
+
+<%= javascript_tag do %>
+  $(function() {
+    $("#new_relation_input_block").hide();
+
+    $("#new_relation_title").click(function() {
+      $("#new_relation_title_block").hide();
+      $("#new_relation_input_block").show();
+    });
+
+    relations = <%= @relations.sort.reverse.map{ |r| h(r.name) }.to_json.html_safe %>; 
+
+    initSlider();
+  })
+<% end %>

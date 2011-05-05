@@ -25,16 +25,14 @@ Rails.application.routes.draw do
   end
 
   resources :spheres
+  resources :relations
+  resources :permissions
 
-  match 'privacy/permissions' => 'privacies#permissions', :as => :permissions
-  match 'privacy/levels' => 'privacies#levels', :as => :levels
   match 'contacts' => 'contacts#index', :as => 'contacts'
   match 'tags'     => 'tags#index', :as => 'tags'
   
   # Find subjects by slug
   match 'subjects/lrdd/:id' => 'subjects#lrdd', :as => 'subject_lrdd'
-  
-  resource :privacy
   
   resource :representation
   
