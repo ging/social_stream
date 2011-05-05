@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
 	s.name = "social_stream-files"
-	s.version = "0.0.1"
+	s.version = "0.0.2"
 	s.authors = ["Víctor Sánchez Belmar"]
 	s.summary = "Provides capabilities to upload files as another social stream activity"
 	s.description = "This gem allow you upload almost any kind of file as new social stream activity."
