@@ -1,30 +1,19 @@
-<% spheres = current_subject.spheres  %>	
-<% i = 0 %>
-
 <table class="tableCheckBoxOptions">
-  <% spheres.each_with_index do |sphere, index| %>
-    <% i = i+1 %>
-
-    <%if index%2==0%>
-      <tr><td>
-          <div contain=<%= dom_id(sphere) %> class="checkboxOptionLeft"><input id=<%= dom_id(sphere) %> optionOf="sphere" type="checkbox"/> <label for=<%= dom_id(sphere) %>><%=sphere.name%></label></div>
-        </td>
-
-        <% if index==spheres.length %>
-        </tr>
-      <% end %>
-
-    <% else %>
-      <td>
-        <div contain=<%= dom_id(sphere) %> class="checkboxOptionLeft"><input id=<%= dom_id(sphere) %> optionOf="sphere" type="checkbox"/> <label for=<%= dom_id(sphere) %>><%=sphere.name%></label></div>
-    </td></tr>
+  <% @spheres.each do |sphere| %>
+    <%= raw cycle("<tr><td>", "<td>", :name => "begin_cell") %>
+      <div contain="<%= dom_id(sphere) %>" class="checkboxOptionLeft">
+        <input id=<%= dom_id(sphere) %> type="checkbox"/>
+        <label for=<%= dom_id(sphere) %>><%=sphere.name%></label>
+      </div>
+    <%= raw cycle("</td>", "</td></tr>", :name => "end_cell") %>
   <% end %>
 
-  <% end %>
+  <%= raw("</tr>") if @spheres.size.odd? %>
+
 </table>
 
 <%= javascript_tag do %>
   $(function() {
-    $('input').checkBox();
+    $('input[id^="sphere"]').checkBox();
   })
 <% end %>

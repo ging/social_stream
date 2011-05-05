@@ -5,6 +5,10 @@ function checkBoxId(id) {
   return id.match(/\d+$/)[0];
 }
 
+function checkBoxType(id) {
+  return id.match(/(.*)_\d+$/)[1]
+}
+
 function checkBoxValue(id) {
   return $('label[for$=' + id +']').html(); 
 }
@@ -21,12 +25,10 @@ function checkBoxIdByOrder(order) {
 function checkBoxEnable(id) {
 	$('div[contain$='+id+']').addClass("checked-option");
 
-	if ($("#"+id).attr("optionOf")=="sphere"){			
-		$(":checkbox[optionOf$=sphere]:checked:not(#"+id+")").checkBox('changeCheckStatus', false);
-                /*
-		$(":checkbox[optionOf$=level]:checked").checkBox('changeCheckStatus', false);
-		$(":checkbox[optionOf$=permissions]:checked").checkBox('changeCheckStatus', false);
-                */
+        switch (checkBoxType(id)) {
+
+	case "sphere":
+		$(':checkbox[id^="sphere"]:checked:not(#' + id + ')').checkBox('changeCheckStatus', false);
 
 		var sphereSelected = checkBoxId(id);
 
@@ -36,53 +38,62 @@ function checkBoxEnable(id) {
 			data: { sphere_id: sphereSelected },
                         dataType: "script"
 		});
-	}
 
-	if ($("#"+id).attr("optionOf")=="relation"){
-		$(":checkbox[optionOf$=relation]:checked:not(#"+id+")").checkBox('changeCheckStatus', false);
-                /*
-		$(":checkbox[optionOf$=permissions]:checked").checkBox('changeCheckStatus', false);
-                */
+                break;
 
-		var relationSelected = checkBoxId(id);
-                var relationOrder = checkBoxOrder(id);
+	case "relation_custom":
+		$(':checkbox[id^="relation"]:checked:not(#' + id + ')').checkBox('changeCheckStatus', false);
 
                 var value = relations.length - checkBoxOrder(id) - 2;
 		$("#slider-range").slider("value", value);
+
 		$( "#relation" ).val(checkBoxValue(id));
 
 		$.ajax({
 			url: "<%= permissions_path %>",
 			context: document.body,
-			data: { relation_id: relationSelected },
+			data: { relation_id: checkBoxId(id) },
                         dataType: "script"
 		});
-	}
 
-	if ($("#" + id).attr("optionOf") == "permission") {
+                break;
+
+	case "permission":
 		refreshPrivacyRules();
-	}
+                break;
 
+        default:
+          alert("Unknown type of checkBox: " + checkBoxType(id));
+        }
 }
 
 function checkBoxDisable(id) {
 	$('div[contain$='+id+']').removeClass("checked-option");
 
-	if ($("#"+id).attr("optionOf")=="sphere"){
+        switch (checkBoxType(id)) {
+
+	case "sphere":
+                $("#permissions").html("");
 		$("#permissions").hide();
 		$("#relations").hide();
-	}
 
-	if ($("#"+id).attr("optionOf")=="relations"){     
+                break;
+
+	case "relation_custom":
+                $("#permissions").html("");
 		$("#permissions").hide();
-	}
+	        
+                break;
 
-	if ($("#" + id).attr("optionOf") == "permissions") {
+	case "permission":
 		refreshPrivacyRules();
-	}
+
+                break;
+        default:
+          alert("Unknown type of checkBox: " + checkBoxType(id));
+
+        }
 } 
-
-
 
 
 function initSlider() {

@@ -285,7 +285,7 @@ en:
       nil:
         nil: "Follow"
     of_relation:
-      choose: "3. Permissions of \"%{name}\" relation"
+      choose: "3. Permissions of \"%{name}\" level"
     read:
       activity:
         star_ties: "Read activities in wall"

@@ -35,6 +35,17 @@
           $("#new_sphere_title_block").hide();
           $("#new_sphere_input_block").show();
         });
+
+        $("#loading").hide();
+
+        $("#loading").ajaxStart(function(){
+           $(this).show();
+        });
+
+        $("#loading").ajaxStop(function(){
+           $(this).hide();
+        });
+
       })
     <% end %>
 
@@ -51,6 +62,8 @@
 
   <div id="permissions" class="privacy_block_section">
   </div>
+
+  <div id="loading"></div>
 
   <%= javascript_tag do %>
     $(function() {

@@ -14,15 +14,18 @@
       <div class="checkboxOptionLeft"><label><%= t 'relation.me.name' %></label></div>
   </td></tr>
 
-  <% i = 0 %>
+  <% order = 0 %>
   <% list.reverse.each do |r| %>
     <tr><td>
-        <div contain=<%= dom_id r %> class="checkboxOptionLeft"><input id=<%= dom_id r %> optionOf="relation" type="checkbox"/> <label for="<%= dom_id r %>" order="<%= i %>"><%= r.name %></label></div>
+      <div contain=<%= dom_id r %> class="checkboxOptionLeft">
+        <input id=<%= dom_id r %> type="checkbox"/>
+        <label for="<%= dom_id r %>" order="<%= order %>"><%= r.name %></label>
+      </div>
     </td></tr>
-    <% i += 1 %>
+    <% order += 1 %>
   <% end %>
 
   <tr><td>
       <div class="checkboxOptionLeft"><label><%= t 'relation.public.name' %></label></div>
   </td></tr>
-  </table>
+</table>
