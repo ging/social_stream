@@ -146,4 +146,8 @@ class Permission < ActiveRecord::Base
       end
     end
   end
+
+  def in_words
+    I18n.t "permission.#{ action }.#{ object || "nil" }.#{ function || "nil" }"
+  end
 end

@@ -30,6 +30,8 @@ require 'rails_css_themes'
 require 'acts-as-taggable-on'
 #Files
 #require 'social_stream-files'
+# HTML forms
+require 'formtastic'
 
 module SocialStream
   class Engine < ::Rails::Engine #:nodoc:
@@ -49,6 +51,7 @@ module SocialStream
       ApplicationController.helper LocationHelper
       ApplicationController.helper ToolbarHelper
       ApplicationController.helper ProfilesHelper
+      ApplicationController.helper PermissionsHelper
       
       ActsAsTaggableOn::TagsHelper
     end

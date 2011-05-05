@@ -106,10 +106,10 @@ function initSlider() {
       var order = relations.length - ui.value - 2;
       if (order >= 0 && order < relations.length - 2) {
         var id = '#' + checkBoxIdByOrder(order);
-        $(id).click();
-        // In Firefox 3 you have to repeat it twice. WTF?
-        $(id).click();
+        $(id).checkBox('changeCheckStatus', true);
       }
     }
   });
 };
+
+<%= render :partial => 'permissions/jquery' %>

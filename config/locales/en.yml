@@ -101,6 +101,7 @@ en:
   browse: "Browse"
   button:
     cancel: "Cancel"
+    save: "Save"
     update: "Update"
   comment:
     input: "Write a comment..."
@@ -273,17 +274,26 @@ en:
   service:
     one: "Service"
     other: "Services"
-  permissions:
+  permission:
+    create: 
+      activity:
+        nil: "Post to wall"
+    destroy:
+      activity:
+        nil: "Delete activities in wall"
+    follow:
+      nil:
+        nil: "Follow"
+    of_relation:
+      choose: "3. Permissions of \"%{name}\" relation"
     read:
       activity:
-        star_ties: "Allow %{user} to read my wall"
+        star_ties: "Read activities in wall"
       tie:
         weak_star_ties: "Not defined"
-    follow: "Follow %{user}"
-    create: 
-         activity:
-             tie: "Allow %{user} to write in my wall"
-             weak_ties: "Not defined"
+  privacy:
+    rule:
+      title: "Privacy rules"
   products:
     one: "Product"
     other: "Products"
