@@ -3,7 +3,10 @@ class Attachment < ActiveRecord::Base
                     :url => '/:class/:id/:style.:extension',
                     :path => ':rails_root/attachments/:class/:id_partition/:style.:extension'
   
-  def can_be_downloaded?
-    true #TO-DO
+  validates_attachment_presence :file
+  
+  def can_be_downloaded
+    return true 
+    #TO-DO
   end
 end

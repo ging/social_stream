@@ -1,0 +1,5 @@
+<% form_for Attachment.new(:_activity_tie_id => a_tie_id), 
+  :html => { :multipart => true } do |form| %>
+  <%= form.hidden_field :_activity_tie_id %>
+  <%= form.file_field :file %>
+<% end %>
