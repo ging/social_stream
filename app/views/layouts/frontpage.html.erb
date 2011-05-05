@@ -26,6 +26,9 @@
         <%= render :partial => "frontpage/header" %>
       </header>
       <section>
+        <div id="flash">
+          <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
+        </div>
         <div id="wrapper_body">
           <%= yield %>
         </div>
