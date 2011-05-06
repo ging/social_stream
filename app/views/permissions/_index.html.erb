@@ -2,7 +2,7 @@
 
   <div id="permissions_list_block">
 
-    <p class="sectionTitle"><%= t 'permission.of_relation.choose', :name => @relation.name %></p>
+    <p class="sectionTitle"><%= raw t('permission.of_relation.choose', :name => h(@relation.name)) %></p>
 
     <div class="privacy_add_element"></div>
 
@@ -19,10 +19,18 @@
 
   <div id="privacy_rules">
     <p class="sectionTitle"><%= t 'privacy.rule.title' %></p>
-    <%= t 'privacy.intro', :relation => @relation.name %>
+
+    <%= raw t('privacy.intro', :relation => h(@relation.name)) %>
+
     <%= semantic_form_for @relation do |f| %>
       <%= f.input :permissions, :as => :check_boxes, :collection => Permission.all.each.inject({}){ |h, p| h[p.description(:detailed, @relation)] = p.id; h } %>
       <%= f.submit t('button.save'), :class => 'button' %>
     <% end %>
   </div>
 </div>
+
+<%= javascript_tag do %>
+  $(function() {
+    initPrivacyRules();
+  })
+<% end %>

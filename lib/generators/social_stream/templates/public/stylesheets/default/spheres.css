@@ -87,7 +87,6 @@ input.privacy_input_new{
 	background-color: #dfecf1;
 	border: 1px solid #1F4A75;
 	color: #1F4A75;
-	text-align: center;
 }
 
 span.privacy_span_new {
@@ -201,6 +200,19 @@ span.privacy_span_new {
 .privacy_rules_list li{
 	font-family: sans-serif;
 	padding: 5px 0px 5px 0px;
+}
+
+#relation_custom_permissions_input fieldset{
+	border: 0px;
+	text-align: left;
+}
+
+#relation_custom_permissions_input legend{
+	display: none;
+}
+
+#relation_custom_permissions_input input{
+	display: none;
 }
 
 #loading {

@@ -314,9 +314,9 @@ en:
             nil: "Update the wall activities posted by %{relation}"
             weak_star_ties: "Update the wall activities posted in levels %{relations} and %{public}"
     of_relation:
-      choose: "3. Permissions for contacts in \"%{name}\" level"
+      choose: "3. Permissions in <strong>%{name}</strong> level"
   privacy:
-    intro: "Contacts in %{relation} level are only allowed to:"
+    intro: "Contacts at <strong>%{relation}</strong> level are only allowed to:"
     rule:
       title: "Privacy rules"
   products:
@@ -324,7 +324,7 @@ en:
     other: "Products"
   relation_custom:
     in_sphere:
-      choose: "2. Levels in \"%{name}\" context"
+      choose: "2. Levels in <strong>%{name}</strong> context"
     new: "+ New level"
   relation_public:
       name: "Public"
