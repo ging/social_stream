@@ -21,6 +21,10 @@ label {
 	margin-left: 20px;
 }
 
+label.ui-checkbox {
+	cursor: pointer;
+}
+
 span.ui-radio-state-hover, span.ui-checkbox-state-hover {
 	background-position: 0 -114px;
 }
@@ -105,6 +109,7 @@ span.privacy_span_new {
 	text-align: left;
 	margin-left: 30px;
 	margin-right: 15px;
+	cursor: pointer;
 }
 
 .checkboxOptionRight{
@@ -199,5 +204,6 @@ span.privacy_span_new {
 	height: 128px;
 	width: 100%;
 	margin-top: 64px;
+	cursor: wait;
 }
 
