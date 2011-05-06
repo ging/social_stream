@@ -275,23 +275,48 @@ en:
     one: "Service"
     other: "Services"
   permission:
-    create: 
-      activity:
-        nil: "Post to wall"
-    destroy:
-      activity:
-        nil: "Delete activities in wall"
-    follow:
-      nil:
-        nil: "Follow"
+    description:
+      brief:
+        create: 
+          activity:
+            nil: "Post to wall"
+        destroy:
+          activity:
+            nil: "Delete activities in wall"
+        follow:
+          nil:
+        read:
+          activity:
+            star_ties: "Read wall"
+      detailed:
+        create:
+          activity:
+            nil: "Post to \"%{sphere}\" wall at %{relation} level"
+            weak_ties: "Post to \"%{sphere}\" wall as %{relations} and %{public}"
+        destroy:
+          activity:
+            nil: "Delete the activities posted to \"%{sphere}\" wall by this %{relation}"
+            weak_star_ties: "Delete the activities posted to \"%{sphere}\" wall at levels %{relations} and %{public}"
+        follow:
+          nil:
+            nil: "Subscribe to the activities of the contacts at %{relation} level"
+        read:
+          activity:
+            star_ties: "Read posts from other %{relation} in %{sphere} wall"
+          tie:
+            weak_star_ties:
+              "See contacts in levels: %{relations} and %{public}"
+        represent:
+          nil:
+            nil: "Represent us in the website"
+        update:
+          activity:
+            nil: "Update the wall activities posted by %{relation}"
+            weak_star_ties: "Update the wall activities posted in levels %{relations} and %{public}"
     of_relation:
-      choose: "3. Permissions of \"%{name}\" level"
-    read:
-      activity:
-        star_ties: "Read activities in wall"
-      tie:
-        weak_star_ties: "Not defined"
+      choose: "3. Permissions for contacts in \"%{name}\" level"
   privacy:
+    intro: "Contacts in %{relation} level are only allowed to:"
     rule:
       title: "Privacy rules"
   products:
@@ -299,9 +324,7 @@ en:
     other: "Products"
   relation_custom:
     in_sphere:
-      choose: "2. Levels on \"%{name}\" context"
-    me:
-      name: "Me"
+      choose: "2. Levels in \"%{name}\" context"
     new: "+ New level"
   relation_public:
       name: "Public"

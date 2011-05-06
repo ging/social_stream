@@ -12,7 +12,7 @@
   </tr>
 
   <% order = 0 %>
-  <% list.reverse.each do |r| %>
+  <% list.sort.each do |r| %>
     <tr><td>
       <div contain=<%= dom_id r %> class="checkboxOptionLeft">
         <input id=<%= dom_id r %> type="checkbox"/>

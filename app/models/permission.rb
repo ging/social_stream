@@ -147,7 +147,34 @@ class Permission < ActiveRecord::Base
     end
   end
 
-  def in_words
-    I18n.t "permission.#{ action }.#{ object || "nil" }.#{ function || "nil" }"
+  # An explanation of the permissions. Type can be brief or detailed.
+  # If detailed, description includes details about the relation
+  def description(type, relation = nil)
+    options = ( relation.present? ? description_options(relation) : {} )
+
+    I18n.t "permission.description.#{ type }.#{ action }.#{ object || "nil" }.#{ function || "nil" }",
+           options
+  end
+
+  private
+
+  def description_options(relation)
+    { 
+      :sphere => relation.sphere.name,
+      :public => I18n.t('relation_public.name')
+    }.tap do |h|
+      case function
+      when NilClass, "star_ties"
+        h[:relation] = relation.name
+      when "weak_ties", "weak_star_ties"
+        h[:relations] = relation.
+                        weaker_or_equal.
+                        sort.
+                        map(&:name).
+                        join(", ")
+
+      end
+    end
+
   end
 end

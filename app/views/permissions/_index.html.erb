@@ -1,5 +1,3 @@
-<%i = 1 %>
-
 <div id="columns_container">
 
   <div id="permissions_list_block">
@@ -12,7 +10,7 @@
       <% default_permissions.each do |p| %>
       <tr>
         <td>
-          <div contain=<%= dom_id p %> class="checkboxPermissionOptionLeft"><input id=<%= dom_id p %> optionOf="permissions" type="checkbox"/> <label for=<%= dom_id p %>><%= p.in_words %></label></div>
+          <div contain=<%= dom_id p %> class="checkboxPermissionOptionLeft"><input id=<%= dom_id p %> optionOf="permissions" type="checkbox"/> <label for=<%= dom_id p %>><%= p.description(:brief) %></label></div>
         </td>
       </tr>
       <% end %>
@@ -21,8 +19,9 @@
 
   <div id="privacy_rules">
     <p class="sectionTitle"><%= t 'privacy.rule.title' %></p>
+    <%= t 'privacy.intro', :relation => @relation.name %>
     <%= semantic_form_for @relation do |f| %>
-      <%= f.input :permissions, :as => :check_boxes, :collection => Permission.all.each.inject({}){ |h, p| h[p.in_words] = p.id; h } %>
+      <%= f.input :permissions, :as => :check_boxes, :collection => Permission.all.each.inject({}){ |h, p| h[p.description(:detailed, @relation)] = p.id; h } %>
       <%= f.submit t('button.save'), :class => 'button' %>
     <% end %>
   </div>
