@@ -9,3 +9,4 @@ nbproject
 .DS_Store
 .yardoc/*
 lib/generators/social_stream/templates/public/images/tmp/
+**.*swp
