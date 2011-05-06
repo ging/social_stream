@@ -11,7 +11,7 @@
   <ul class="activity_tabs">
     <li><%= link_to "<span>#{ h owner.name }</span>".html_safe, "#wall-profile" %></li>
 
-    <% owner.relations.sort.each do |r| %>
+    <% owner.relation_customs.sort.each do |r| %>
       <li><%= link_to "<span>#{ h r.name }</span>".html_safe,
                       polymorphic_path([ owner, Activity.new ], :section => r.id, :wall => true),
                       :title => "wall-#{ r.id }" %></li>
@@ -26,7 +26,7 @@
                                                  paginate(:page => params[:page]) } %>
   </div>
 
-  <% owner.relations.sort.each do |r| %>
+  <% owner.relation_customs.sort.each do |r| %>
     <div id="wall-<%= r.id %>"></div>
   <% end %>
 </div>

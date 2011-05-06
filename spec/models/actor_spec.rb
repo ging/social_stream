@@ -14,6 +14,6 @@ describe Actor do
   end
 
   it "should generate relations" do
-    assert Factory(:actor).relations.present?
+    assert Factory(:actor).relation_customs.present?
   end
 end

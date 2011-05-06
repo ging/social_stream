@@ -20,7 +20,7 @@
         <%= link_to t('contact.all_n', :count => current_subject.contacts(:direction => :sent).count), contacts_path %> -
         <% Actor.distinct_initials.
                  contacted_from(current_subject).
-                 merge(Tie.related_by(current_subject.relations.find_by_id(params[:relation]))).
+                 merge(Tie.related_by(current_subject.relation_customs.find_by_id(params[:relation]))).
                  distinct_initials.
                  each do |l| %>
           <%= link_to l.initial,{:letter => l.initial,:page => 1},:class => "contact_letter_link" %>

@@ -13,7 +13,7 @@ describe CommentsController do
 
     describe "comment from user" do
       before do
-        model_assigned_to @user.sent_ties.received_by(@user).related_by(@user.relations.sort.first).first
+        model_assigned_to @user.sent_ties.received_by(@user).related_by(@user.relation_customs.sort.first).first
       end
 
       it_should_behave_like "Allow Creating"

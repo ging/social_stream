@@ -58,7 +58,7 @@
 							  	<% i = 1 %>
 								<% @tie.sender.spheres.each do |sphere| %>
 								  <li class="sphere_name"><span class="sphere_name"><%=sphere.name%></span></li>
-								  <% sphere.relations.sort.each do |relation| %>
+								  <% sphere.customs.sort.each do |relation| %>
 										<li><div contain=<%="C#{i}"%>><input id=<%="C#{i}"%> optionOf="<%=sphere.name%>" type="checkbox"/><label for=<%="C#{i}"%>><a href="#" class="option" sphere="<%=sphere.name%>"><%=relation.name%></a></label></div></li>
 										<% i = i+1 %>
 									<% end %>

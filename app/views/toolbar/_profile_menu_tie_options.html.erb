@@ -17,7 +17,7 @@
       <li >
       <%= link_to(image_tag("btn/btn_friend.png", :class => "menu_icon")+t('tie.add.contact'), '#', :id => 'contacts_menu') %>
         <ul>
-          <% current_subject.relations.sort.each do |r| %>
+          <% current_subject.relation_customs.sort.each do |r| %>
             <li>
             <%= link_to image_tag("btn/twitter-follow-icon.png", :size => "19x19", :class => "menu_icon") + r.name,
                         ties_path('tie[sender_id]'   => current_subject.actor_id,

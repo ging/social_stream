@@ -48,7 +48,9 @@ class Actor < ActiveRecord::Base
 
   has_many :spheres
 
-  has_many :relations, :through => :spheres
+  has_many :relation_customs,
+           :through => :spheres, 
+           :source  => :customs
 
   scope :alphabetic, order('actors.name')
 
@@ -136,7 +138,7 @@ class Actor < ActiveRecord::Base
   
   # A given relation defined and managed by this actor
   def relation(name)
-    relations.find_by_name(name)
+    relation_customs.find_by_name(name)
   end
 
   # The {Relation::Public} for this {Actor} 

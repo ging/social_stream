@@ -8,7 +8,7 @@
   <li>
     <%= link_to( image_tag("btn/btn_friend.png", :class => "menu_icon")+t('contact.other'), '#', :id => "contacts_menu") %>
     <ul>
-    <% current_subject.relations.sort.each do |r| %>
+    <% current_subject.relation_customs.sort.each do |r| %>
       <li>
       <%= link_to image_tag("btn/btn_friend.png", :class => "menu_icon") + r.name , contacts_path(:relation => r.id) %>
       </li>

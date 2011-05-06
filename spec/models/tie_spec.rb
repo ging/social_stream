@@ -7,7 +7,7 @@ describe Tie do
     end
 
     it "should be created from relation name" do
-      relation = @sender.relations.first
+      relation = @sender.relation_customs.first
 
       tie = Tie.create :sender_id => @sender.actor_id,
                        :receiver_id => @receiver.actor_id,
@@ -38,7 +38,7 @@ describe Tie do
 
       Tie.create :sender_id => sender.actor_id,
                  :receiver_id => receiver.actor_id,
-                 :relation_id => sender.relations.sort.first.id
+                 :relation_id => sender.relation_customs.sort.first.id
 
       receiver.reload.follower_count.should eq(count + 1)
     end

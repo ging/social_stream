@@ -8,7 +8,7 @@ class ContactsController < ApplicationController
           q.alphabetic.
             letter(params[:letter]).
             search(params[:search]).
-            merge(Tie.related_by(current_subject.relations.find_by_id(params[:relation])))
+            merge(Tie.related_by(current_subject.relation_customs.find_by_id(params[:relation])))
         }
 
     respond_to do |format|
