@@ -1,0 +1,30 @@
+<%= javascript_include_tag 'jquery.ui.widget'%>
+<%= javascript_include_tag 'jquery.ui.mouse'%>
+<%= javascript_include_tag 'jquery.ui.slider.js'%>
+
+<p class="sectionTitle"><%= t 'relation_custom.in_sphere.choose', :name => @sphere.name %> </p>
+
+
+<div class="privacy_add_element">
+  <div id="new_relation_custom_title_block"> 
+    <a href="#"><span id="new_relation_custom_title" class="privacy_span_new"><%= t 'relation_custom.new' %></span></a>
+  </div> 
+  <div id="new_relation_custom_input_block"> 
+    <%= render :partial => 'relation/customs/form' %>
+  </div>
+</div>
+
+<div id="relation_custom_list">
+  <%= render :partial => 'relation/customs/list', :object => @customs %>
+</div>
+
+<%= javascript_tag do %>
+  $(function() {
+    $("#new_relation_custom_input_block").hide();
+
+    $("#new_relation_custom_title").click(function() {
+      $("#new_relation_custom_title_block").hide();
+      $("#new_relation_custom_input_block").show();
+    });
+  })
+<% end %>

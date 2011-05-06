@@ -22,7 +22,7 @@ margin-top: auto; margin-bottom:auto;}
 
 
  /*********** Notices SECTION *********************/
-.notice, .success, .alert, .error, .validation {
+.notice, .success, .alert, .error, .validation, #error_explanation {
     border: 1px solid;
     margin: 10px 0px;
     padding:15px 10px 15px 40px;
@@ -41,7 +41,7 @@ label.validation_error{color: #D8000C;background-color: #FFBABA;border: 1px soli
 .notice {border-color:#BDC7D8; color: #1F4A75;background-color: #DEEFF8;background-image: url('/images/btn/info.png');}
 .success {color: #4F8A10;background-color: #DFF2BF;background-image:url('/images/btn/success.png');}
 .alert {color: #9F6000;background-color: #FEEFB3;background-image: url('/images/btn/warning.png');}
-.error {color: #D8000C;background-color: #FFBABA;background-image: url('/images/btn/error.png');}
+.error, #error_explanation {color: #D8000C;background-color: #FFBABA;background-image: url('/images/btn/error.png');}
 
 /************Forms SECTION **************/
 input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:1.0em;  line-height:135%;

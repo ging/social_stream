@@ -1,5 +1,5 @@
 <table class="tableCheckBoxOptions">
-  <% @spheres.each do |sphere| %>
+  <% list.each do |sphere| %>
     <%= raw cycle("<tr><td>", "<td>", :name => "begin_cell") %>
       <div contain="<%= dom_id(sphere) %>" class="checkboxOptionLeft">
         <input id=<%= dom_id(sphere) %> type="checkbox"/>
@@ -8,7 +8,7 @@
     <%= raw cycle("</td>", "</td></tr>", :name => "end_cell") %>
   <% end %>
 
-  <%= raw("</tr>") if @spheres.size.odd? %>
+  <%= raw("</tr>") if list.size.odd? %>
 
 </table>
 

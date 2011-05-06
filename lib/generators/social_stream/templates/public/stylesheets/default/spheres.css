@@ -142,21 +142,25 @@ span.privacy_span_new {
   background-color: #1f4a75;
 }
 
-.sliderDiv{
+.slider-div{
+	float: right;
+	margin-right: 5px;
 }
 
-.sliderTitle{
+.slider-header, .slider-footer{
 	text-align: center;
 	border: 0; 
 	color: #1f4a75; 
 	font-weight: bold;
-	margin-bottom: 10px;
 	width: 100%;
 }
 
+.slider-header {
+	margin-bottom: 10px;
+}
 
-#privacy_permissions{
-	
+.slider-footer {
+	margin-top: 10px;
 }
 
 .privacy_block_section{

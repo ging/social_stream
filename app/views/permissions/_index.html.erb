@@ -21,7 +21,7 @@
 
   <div id="privacy_rules">
     <p class="sectionTitle"><%= t 'privacy.rule.title' %></p>
-    <%= semantic_form_for @relation, :url => relation_path(@relation) do |f| %>
+    <%= semantic_form_for @relation do |f| %>
       <%= f.input :permissions, :as => :check_boxes, :collection => Permission.all.each.inject({}){ |h, p| h[p.in_words] = p.id; h } %>
       <%= f.submit t('button.save'), :class => 'button' %>
     <% end %>

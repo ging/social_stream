@@ -1,0 +1,20 @@
+<% if @custom.errors.present? %>
+  $('#new_relation_custom_input_block').html("<%= escape_javascript render(:partial => 'relation/customs/form') %>");
+<% else %>
+  // Hide #permissions
+  $('#permissions').html("");
+  $('#permissions').hide();
+
+  // Restore form
+  $('#relation_custom_name').val('');
+  $('#new_relation_custom_input_block').hide();
+  $('#new_relation_custom_title_block').show();
+
+
+  // Refresh list
+  $('#relation_custom_list').html("<%= escape_javascript render(:partial => 'relation/customs/list', :object => @custom.sphere.customs.reload) %>");
+
+  // Select relation_custom
+  $('#' + '<%= dom_id @custom %>').checkBox('changeCheckStatus', true);
+<% end %>
+

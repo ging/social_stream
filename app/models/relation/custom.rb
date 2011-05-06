@@ -17,7 +17,9 @@ class Relation::Custom < Relation
   has_one    :actor, :through => :sphere
 
   validates_presence_of :name, :sphere_id
+  validates_uniqueness_of :name, :scope => :sphere_id
 
+  before_validation :assign_parent
   after_create :initialize_tie
 
   class << self
@@ -102,6 +104,15 @@ class Relation::Custom < Relation
 
 
   private
+
+  # Before create callback
+  #
+  # Assign the last relation as parent if there are other custom relations in the sphere
+  def assign_parent
+    return if parent.present? || sphere.customs.blank?
+
+    self.parent = sphere.customs.sort.last
+  end
 
   # Create reflexive tie for the owner of this {Relation::Custom custom relation}
   def initialize_tie

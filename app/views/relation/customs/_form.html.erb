@@ -1,0 +1,29 @@
+<% @custom ||= @sphere.customs.build %>
+
+<%= form_for @custom, :remote => true do |f| %>
+  <%= f.hidden_field :sphere_id %>
+
+  <% if @custom.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@custom.errors.count, "error") %> prohibited this custom relation from being saved:</h2>
+
+      <ul>
+      <% @custom.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p><%= f.text_field :name, :class => "privacy_input_new", :size => 20 %></p>
+  <%= f.submit nil, :class => "button" %>
+  <button class="button" id="cancel_new_relation_custom" ><%= t('button.cancel') %></button>
+<% end %>
+
+<%= javascript_tag do %>
+  $("#cancel_new_relation_custom").click(function() {   
+    $("#new_relation_custom_input_block").hide();
+    $("#new_relation_custom_title_block").show();
+    return false;
+  });
+<% end %>

@@ -1,5 +1,4 @@
 var relations;
-var relationsOrder;
 
 function checkBoxId(id) {
   return id.match(/\d+$/)[0];
@@ -33,7 +32,7 @@ function checkBoxEnable(id) {
 		var sphereSelected = checkBoxId(id);
 
 		$.ajax({
-			url: "<%= relations_path %>",
+			url: "<%= relation_customs_path %>",
 			context: document.body,
 			data: { sphere_id: sphereSelected },
                         dataType: "script"
@@ -42,7 +41,7 @@ function checkBoxEnable(id) {
                 break;
 
 	case "relation_custom":
-		$(':checkbox[id^="relation"]:checked:not(#' + id + ')').checkBox('changeCheckStatus', false);
+		$(':checkbox[id^="relation_custom"]:checked:not(#' + id + ')').checkBox('changeCheckStatus', false);
 
                 var value = relations.length - checkBoxOrder(id) - 2;
 		$("#slider-range").slider("value", value);
@@ -98,8 +97,8 @@ function checkBoxDisable(id) {
 
 function initSlider() {
   /* TODO: get relations from checkboxOptions */
-  relations.unshift("<%= t 'relation.public.name' %>");
-  relations.push("<%= t 'relation.me.name' %>");
+  relations.unshift("<%= t 'relation_public.name' %>");
+  relations.push("<%= current_subject.name %>");
 
   $("#relation").val(relations[relations.length - 1]);
 

@@ -25,7 +25,9 @@ Rails.application.routes.draw do
   end
 
   resources :spheres
-  resources :relations
+  namespace "relation" do
+    resources :customs
+  end
   resources :permissions
 
   match 'contacts' => 'contacts#index', :as => 'contacts'

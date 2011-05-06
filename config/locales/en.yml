@@ -202,7 +202,7 @@ en:
     submit:
       sphere:
         create: "Save"
-      relation:
+      relation_custom:
         create: "Save"
   home: "Home"
   inbox:
@@ -297,13 +297,13 @@ en:
   products:
     one: "Product"
     other: "Products"
-  relation:
+  relation_custom:
     in_sphere:
       choose: "2. Levels on \"%{name}\" context"
     me:
       name: "Me"
     new: "+ New level"
-    public:
+  relation_public:
       name: "Public"
   share: "Share"
   sign_in: "Sign in"

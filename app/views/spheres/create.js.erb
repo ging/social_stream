@@ -1,6 +1,20 @@
 <% if @sphere.errors.present? %>
-  $('#new_context_input_block').html("<%= escape_javascript render(:partial => 'spheres/form') %>");
+  $('#new_sphere_input_block').html("<%= escape_javascript render(:partial => 'spheres/form') %>");
 <% else %>
-  $('#spheres').html("<%= escape_javascript render(:partial => 'spheres/index') %>");
+  // Hide #relations and #permissions
+  $('#permissions').html("");
+  $('#permissions').hide();
+  $('#relations').hide();
+
+  // Restore form
+  $('#sphere_name').val('');
+  $('#new_sphere_input_block').hide();
+  $('#new_sphere_title_block').show();
+
+  // Refresh list
+  $('#spheres_list').html("<%= escape_javascript render(:partial => 'spheres/list', :object => current_subject.spheres) %>");
+
+  // Select sphere
+  $('#' + '<%= dom_id @sphere %>').checkBox('changeCheckStatus', true);
 <% end %>
 
