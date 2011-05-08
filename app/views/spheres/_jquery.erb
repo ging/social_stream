@@ -120,6 +120,8 @@ function initSlider() {
       if (order >= 0 && order < relations.length - 2) {
         var id = '#' + checkBoxIdByOrder(order);
         $(id).checkBox('changeCheckStatus', true);
+      } else {
+        $(':checkbox[id^="relation_custom"]:checked').checkBox('changeCheckStatus', false);
       }
     }
   });
@@ -137,10 +139,10 @@ function initPrivacyRules() {
   $('#relation_custom_permissions_input input').each(
     function() {
       if ($(this).attr('checked')) {
-        $('input[id="permission_' + $(this).attr('value') + '"]').checkBox('changeCheckStatus', true);
+        $(':checkbox[id="permission_' + $(this).attr('value') + '"]').checkBox('changeCheckStatus', true);
 
       } else {
-        hidePermission($(this.attr("id")));
+        hidePermission($(this).attr("id"));
       }
     }
   );
