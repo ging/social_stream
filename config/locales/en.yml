@@ -285,9 +285,10 @@ en:
             nil: "Delete activities in wall"
         follow:
           nil:
+            nil: "Follow activity"
         read:
           activity:
-            star_ties: "Read wall"
+            weak_star_ties: "Read wall"
       detailed:
         create:
           activity:
@@ -302,7 +303,7 @@ en:
             nil: "Subscribe to the activities of the contacts at %{relation} level"
         read:
           activity:
-            star_ties: "Read posts from other %{relation} in %{sphere} wall"
+            weak_star_ties: "Read posts in \"%{sphere}\" wall at levels %{relations}"
           tie:
             weak_star_ties:
               "See contacts in levels: %{relations} and %{public}"
