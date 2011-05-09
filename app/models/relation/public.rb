@@ -25,7 +25,7 @@ class Relation::Public < Relation
 
   # The name of public relation
   def name
-    I18n.t('relation.public.name')
+    I18n.t('relation_public.name')
   end
 
   # Are we supporting custom permissions for {Relation::Public}? Not by the moment.
