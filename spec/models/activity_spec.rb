@@ -336,8 +336,8 @@ describe Activity do
 
       it_should_behave_like "Denies Creating"
       it_should_behave_like "Allows Reading"
-      it_should_behave_like "Allows Updating"
-      it_should_behave_like "Allows Destroying"
+      it_should_behave_like "Denies Updating"
+      it_should_behave_like "Denies Destroying"
     end
 
     describe "accessed by partner" do

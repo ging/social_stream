@@ -19,7 +19,7 @@ class Relation::Custom < Relation
   validates_presence_of :name, :sphere_id
   validates_uniqueness_of :name, :scope => :sphere_id
 
-  before_validation :assign_parent
+  before_validation :assign_parent, :on => :create
   after_create :initialize_tie
 
   class << self
@@ -57,7 +57,7 @@ class Relation::Custom < Relation
       # Parent, relations must be set after creation
       # FIXME: Can fix with ruby 1.9 and ordered hashes
       cfg_rels.each_pair do |name, cfg_rel|
-        rels[name].update_attribute(:parent, rels[cfg_rel['parent']]) if cfg_rel['parent'].present?
+        rels[name].update_attribute(:parent, rels[cfg_rel['parent']])
       end
 
       rels.values

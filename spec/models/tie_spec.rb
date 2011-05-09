@@ -171,7 +171,7 @@ describe Tie do
       end
 
       it "updates activity" do
-        Tie.allowing(@s, 'update', 'activity').should include(@tie)
+        Tie.allowing(@s, 'update', 'activity').should_not include(@tie)
       end
     end
   end

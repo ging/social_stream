@@ -11,17 +11,17 @@ user:
   friend:
     name: friend
     permissions:
-      - [ follow ]                       # follow the activities of the friend
-      - [ create,  activity ]            # let the friend create activities
-      - [ read,    activity, star_ties ] # friend can read activities from the other friends
-      - [ update,  activity ]            # update her activities
-      - [ destroy, activity ]            # destroy her activities
+      - [ follow ]                            # follow the activities of the friend
+      - [ create,  activity ]                 # let the friend create activities
+      - [ read,    activity, weak_star_ties ] # friend can read activities from the other friends and below
+      - [ update,  activity ]                 # update her activities
+      - [ destroy, activity ]                 # delete her activities
     sphere: personal
   acquaintance:
     name: acquaintance
     parent: friend # friend relation is stronger than acquaintance
     permissions:
-      - [ read,    activity, star_ties ]
+      - [ read,    activity, weak_star_ties ]
     sphere: personal
 
 group:
@@ -29,15 +29,15 @@ group:
     name: member
     permissions:
       - [ represent ]                         # let the member act as the group
-      - [ create,  activity, weak_ties ]      # let them member create activities at the level of member, partner and public
-      - [ read,    activity, star_ties ]      # read activities from other members
-      - [ update,  activity, weak_star_ties ] # update and destroy activities to members,
-      - [ destroy, activity, weak_star_ties ] # acquaintance and public
+      - [ create,  activity ]                 # let them member create activities
+      - [ read,    activity, weak_star_ties ] # read activities from other members
+      - [ update,  activity ]                 # update her activities
+      - [ destroy, activity ]                 # delete her activities
       - [ read,    tie,      weak_star_ties ]
     sphere: organization
   partner:
     name: partner
     parent: member # member is stronger than partner
     permissions:
-      - [ read,    activity, star_ties ]
-    sphere: organization
+      - [ read,    activity, weak_star_ties ]
+    sphere: external_relations
