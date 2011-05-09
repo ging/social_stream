@@ -97,7 +97,7 @@ namespace :db do
       # = Ties
       available_actors.each do |a|
         actors = available_actors.dup - Array(a)
-        relations = a.relations
+        relations = a.relation_customs
         
         Forgery::Basic.number(:at_most => actors.size).times do
           actor = actors.delete_at((rand * actors.size).to_i)
