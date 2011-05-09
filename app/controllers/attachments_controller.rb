@@ -1,32 +1,28 @@
-class AttachmentsController < ApplicationController
+class AttachmentsController < InheritedResources::Base
+  load_and_authorize_resource
+  
+  respond_to :html,:js
   
   SEND_FILE_METHOD = :default
 
-  def download
-    head(:not_found) and return if (attachment = Attachment.find_by_id(params[:id])).nil?
-    head(:forbidden) and return unless attachment.can_be_downloaded
-
-    path = attachment.file.path(params[:style])
-    head(:bad_request) and return unless File.exist?(path) && params[:format].to_s == File.extname(path).gsub(/^\.+/, '')
-
-    send_file_options = { :type => File.mime_type?(path) }
-
-    case SEND_FILE_METHOD
-      when :apache then send_file_options[:x_sendfile] = true
-      when :nginx then head(:x_accel_redirect => path.gsub(Rails.root, ''), :content_type => send_file_options[:type]) and return
-    end
-
-    send_file(path, send_file_options)
-  end
-  
-  def new
-    @attachment = Attachment.create( params[:attachment] )    
-    respond_to do |format|
+  def show
+    show! do |format|
+      format.all { download }
       format.html
     end
   end
   
-  def create
-    @attachment = Attachment.create( params[:attachment] )
+  def download
+    path = @attachment.file.path(params[:style])
+    head(:bad_request) and return unless File.exist?(path) 
+    send_file_options = {} 
+
+    case SEND_FILE_METHOD
+      when :apache then send_file_options[:x_sendfile] = true
+      when :nginx then head(:x_accel_redirect => path.gsub(Rails.root, ''))
+    end
+
+    send_file(path, send_file_options)
   end
+
 end

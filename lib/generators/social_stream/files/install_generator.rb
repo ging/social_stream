@@ -2,13 +2,7 @@ class SocialStream::Files::InstallGenerator < Rails::Generators::Base
   include Rails::Generators::Migration
   
   source_root File.expand_path('../templates', __FILE__)
-  
-  def route_downloads
-    route "match 'attachments/:id/:style.:format' => 'attachments#download', :method => 'get'"
-    #test
-    route "match 'uploadfile/' => 'attachments#new'"
-  end
-  
+    
   def inject_translations
     copy_file 'en.yml', 'config/locales/files.en.yml'
   end
