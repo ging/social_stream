@@ -149,32 +149,39 @@ class Activity < ActiveRecord::Base
   end
   
   def notificable?
-    return true if is_root?
-    return true if ['post','update'].include? root.verb
-    #return false if ['follow','like','make_friend'].include? root.verb #Not necessary 
-    return false 
+    is_root? or ['post','update'].include?(root.verb)
   end
   
   def notify
     return nil if !notificable?
         #Avaible verbs: follow, like, make-friend, post, update
     case verb
-    when 'like'
-      #Like a SUBJECT
-      
-      #Like an OBJECT
-      
-    when 'follow','make_friend'
-      #Follow or Make friend with a SUBJECT
-      receipts = _tie.receiver.notify(I18n.t("activity.verb." + verb + "." + _tie.receiver_subject.class.to_s + ".notification.subject", :name => _tie.sender.name),
-      I18n.t("activity.verb." + verb + "." + _tie.receiver_subject.class.to_s + ".notification.body", :name => _tie.sender.name))
-    when 'post','update'
-      #Post or udapte an OBJECT
-      if _tie.sender!=_tie.receiver
-        receipts = _tie.receiver.notify(I18n.t("activity.verb." + verb + "." + _tie.receiver_subject.class.to_s + ".notification.subject", :name => _tie.sender.name, :direct_object => direct_object.class.to_s),
-        I18n.t("activity.verb." + verb + "." + _tie.receiver_subject.class.to_s + ".notification.body", :name => _tie.sender.name, :direct_object => direct_object.class.to_s))        
+    when 'like'      
+      if direct_object.present?    
+        #Like an OBJECT
+        if _tie.sender!=_tie.receiver
+          notification_subject = I18n.t("activity.verb.like.Object.notification.subject", :activity => self)
+          notification_body = capture do
+            render :partial => 'activities/notifications/like_object', :locales => {:activity => self}
+          end 
+        end
+      else
+        #Like a SUBJECT  
+        notification_subject = I18n.t("activity.verb.like." + _tie.receiver_subject.class.to_s + ".notification.subject", :activity => self)
+        body = capture do
+          render :partial => 'activities/notifications/like_subject', :locales => {:activity => self}
+        end
       end      
-    end
+    when 'follow','make_friend','post','update'
+      #Follow or Make friend with a SUBJECT or Post or udapte an OBJECT
+      if _tie.sender!=_tie.receiver  
+        notification_subject = I18n.t("activity.verb." + verb + "." + _tie.receiver_subject.class.to_s + ".notification.subject", :activity => self)
+        notification_body = capture do
+          render :partial => 'activities/notifications/' + verb, :locales => {:activity => self}
+        end        
+      end      
+    end    
+    receipts = _tie.receiver.notify(notification_subject,notification_body)
   end
 
   private
