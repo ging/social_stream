@@ -84,7 +84,7 @@ class Actor < ActiveRecord::Base
  
   after_create :create_initial_relations
   
-  after_create :create_profile
+  after_create :save_or_create_profile
   
   class << self
     # Get actor's id from an object, if possible
@@ -402,5 +402,17 @@ class Actor < ActiveRecord::Base
   def create_initial_relations
     Relation::Custom.defaults_for(self)
     Relation::Public.default_for(self)
+  end
+
+  # After create callback
+  #
+  # Save the profile if it is present. Otherwise create it
+  def save_or_create_profile
+    if profile.present?
+      profile.actor_id = id
+      profile.save!
+    else
+      create_profile
+    end
   end
 end

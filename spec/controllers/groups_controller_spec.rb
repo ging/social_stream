@@ -81,6 +81,7 @@ describe GroupsController do
     context "a new own group" do
       before do
         model_attributes[:_founder] = @user.slug
+        model_attributes[:_participants] = [Factory(:user).slug]
       end
 
       it "should allow creating" do
