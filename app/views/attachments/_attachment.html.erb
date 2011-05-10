@@ -1,3 +1,4 @@
 <%= div_for attachment, :class => 'content_size' do %>
-  Just uploaded a file: <%= simple_format attachment.file_file_name %>
+  Just uploaded a file:
+  <%= link_to attachment.file_file_name, attachment, :class => "" %>
 <% end %>

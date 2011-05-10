@@ -2,11 +2,7 @@ class SocialStream::Files::InstallGenerator < Rails::Generators::Base
   include Rails::Generators::Migration
   
   source_root File.expand_path('../templates', __FILE__)
-    
-  def inject_translations
-    copy_file 'en.yml', 'config/locales/files.en.yml'
-  end
-  
+
   require 'rails/generators/active_record'
 
   def self.next_migration_number(dirname)
