@@ -164,21 +164,23 @@ class Activity < ActiveRecord::Base
         #Like an OBJECT
         if _tie.sender!=_tie.receiver
           notification_subject = I18n.t("activity.verb.like.Object.notification.subject", :activity => self)
-          notification_body = actionview.render 'activities/notifications/like_object', :locals => {:activity => self}
+          notification_body = actionview.render 'notifications/activities/like_object', :locals => {:activity => self}
         end
       else
         #Like a SUBJECT  
         notification_subject = I18n.t("activity.verb.like." + _tie.receiver_subject.class.to_s + ".notification.subject", :activity => self)
-        notification_body = actionview.render  'activities/notifications/like_subject', :locals => {:activity => self}
+        notification_body = actionview.render  'notifications/activities/like_subject', :locals => {:activity => self}
       end      
-    when 'follow','make_friend','post','update'
+    when 'follow','make-friend','post','update'
       #Follow or Make friend with a SUBJECT or Post or udapte an OBJECT
       if _tie.sender!=_tie.receiver  
         notification_subject = I18n.t("activity.verb." + verb + "." + _tie.receiver_subject.class.to_s + ".notification.subject", :activity => self)
-        notification_body = actionview.render  'activities/notifications/' + verb, :locals => {:activity => self}
+        notification_body = actionview.render  'notifications/activities/' + verb, :locals => {:activity => self}
       end      
-    end    
-    receipts = _tie.receiver.notify(notification_subject,notification_body)
+    end 
+    if notification_subject.present? and notification_body.present?
+      receipts = _tie.receiver.notify(notification_subject, notification_body)
+    end
   end
 
   private
