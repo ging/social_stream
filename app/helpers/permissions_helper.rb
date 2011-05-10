@@ -3,7 +3,8 @@ module PermissionsHelper
     [
       [ "read",    "activity", "weak_star_ties" ],
       [ "create",  "activity", nil ],
-      [ "follow", nil, nil]
+      [ "follow", nil, nil],
+      [ "represent", nil, nil]
     ]
 
   def default_permissions

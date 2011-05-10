@@ -22,8 +22,8 @@
 
     <%= raw t('privacy.intro', :relation => h(@relation.name)) %>
 
-    <%= semantic_form_for @relation do |f| %>
-      <%= f.input :permissions, :as => :check_boxes, :collection => Permission.all.each.inject({}){ |h, p| h[p.description(:detailed, @relation)] = p.id; h } %>
+    <%= semantic_form_for @relation, :remote => true do |f| %>
+      <%= f.input :permissions, :as => :check_boxes, :collection => default_permissions.map{ |p| [p.description(:detailed, @relation), p.id] } %>
       <%= f.submit t('button.save'), :class => 'button' %>
     <% end %>
   </div>

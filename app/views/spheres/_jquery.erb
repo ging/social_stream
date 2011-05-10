@@ -58,7 +58,8 @@ function checkBoxEnable(id) {
                 break;
 
 	case "permission":
-                showPermission('relation_custom_permission_ids_' + checkBoxId(id));
+                $('input[id="relation_custom_permission_ids_' + checkBoxId(id) + '"]').attr('checked', 'checked');
+                $('label[for="relation_custom_permission_ids_' + checkBoxId(id) + '"]').parent().show();
 
                 break;
 
@@ -88,7 +89,8 @@ function checkBoxDisable(id) {
                 break;
 
 	case "permission":
-                hidePermission('relation_custom_permission_ids_' + checkBoxId(id));
+                $('input[id="relation_custom_permission_ids_' + checkBoxId(id) + '"]').removeAttr('checked');
+                $('label[for="relation_custom_permission_ids_' + checkBoxId(id) + '"]').parent().hide();
 
                 break;
         default:
@@ -126,24 +128,3 @@ function initSlider() {
     }
   });
 };
-
-function showPermission(id) {
-  $('label[for="' + id + '"]').parent().show();
-}
-
-function hidePermission(id) {
-  $('label[for="' + id + '"]').parent().hide();
-}
-
-function initPrivacyRules() {
-  $('#relation_custom_permissions_input input').each(
-    function() {
-      if ($(this).attr('checked')) {
-        $(':checkbox[id="permission_' + $(this).attr('value') + '"]').checkBox('changeCheckStatus', true);
-
-      } else {
-        hidePermission($(this).attr("id"));
-      }
-    }
-  );
-}

@@ -266,10 +266,13 @@ en:
             nil: "Delete activities in wall"
         follow:
           nil:
-            nil: "Follow activity"
+            nil: "Send their activity"
         read:
           activity:
             weak_star_ties: "Read wall"
+        represent:
+          nil:
+            nil: "Represent"
       detailed:
         create:
           activity:
@@ -281,16 +284,16 @@ en:
             weak_star_ties: "Delete the activities posted to \"%{sphere}\" wall at levels %{relations} and %{public}"
         follow:
           nil:
-            nil: "Subscribe to the activities of the contacts at %{relation} level"
+            nil: "Activities of the contacts at %{relation} level will appear in our home wall"
         read:
           activity:
-            weak_star_ties: "Read posts in \"%{sphere}\" wall at levels %{relations}"
+            weak_star_ties: "Read posts in \"%{sphere}\" wall at levels %{relations} and %{public}"
           tie:
             weak_star_ties:
               "See contacts in levels: %{relations} and %{public}"
         represent:
           nil:
-            nil: "Represent us in the website"
+            nil: "Represent me/us in the website"
         update:
           activity:
             nil: "Update the wall activities posted by %{relation}"
@@ -301,6 +304,7 @@ en:
     intro: "Contacts at <strong>%{relation}</strong> level are only allowed to:"
     rule:
       title: "Privacy rules"
+      saved: "Privacy rules saved"
   products:
     one: "Product"
     other: "Products"
