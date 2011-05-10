@@ -1,5 +1,9 @@
 <ul class="menu">
 
+<%= menu_options[:notifications] || capture do %>
+  <%= render :partial =>'toolbar/notifications_menu'%>
+<% end %>
+
 <%= menu_options[:messages] || capture do %>
   <%= render :partial =>'toolbar/message_menu'%>
 <% end %>

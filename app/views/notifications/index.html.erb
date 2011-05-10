@@ -1,0 +1,19 @@
+<% content_for :title do %>
+  <%= current_subject.name %>
+<% end %>
+
+<% content_for :headers do %>
+  <%= stylesheet_link_tag "messages.css", :media => "screen, projection" %>
+<% end %>
+
+<% content_for :sidebar do %>
+  <%= render :partial => 'home/sidebar' %>
+<% end %>
+
+<%= location(
+    link_to(image_tag("btn/btn_notification.png", :class => "menu_icon")+t('notification.other'), notifications_path,:remote => true)
+) %>
+
+<% toolbar  %>
+
+<%= render :partial => 'index' %>

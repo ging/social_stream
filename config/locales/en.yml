@@ -229,6 +229,9 @@ en:
     sentbox: "Sentbox"
     trash: "Trash"
     send: "Send a message"
+  notification:
+    one: "Notification"
+    other: "Notifications"
   password:
     forgot: "Do you forgot your password?"
   post:

@@ -43,6 +43,8 @@ Rails.application.routes.draw do
   resources :messages
 
   resources :conversations
+  
+  resources :notifications
 
   resources :comments
 

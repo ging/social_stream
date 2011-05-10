@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
   # Theme support
   s.add_runtime_dependency('rails_css_themes','~> 1.0.0')	
   # Messages
-  s.add_runtime_dependency('mailboxer','~> 0.1.2')
+  s.add_runtime_dependency('mailboxer','~> 0.1.3')
   # Avatar manipulation
   s.add_runtime_dependency('rmagick','~> 2.13.1')
   # Tagging
