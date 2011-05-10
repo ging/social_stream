@@ -151,34 +151,31 @@ class Activity < ActiveRecord::Base
   def notificable?
     is_root? or ['post','update'].include?(root.verb)
   end
-  
+    
   def notify
     return nil if !notificable?
         #Avaible verbs: follow, like, make-friend, post, update
+        
+    actionview = ActivitiesController.new.view_context
+    
     case verb
     when 'like'      
       if direct_object.present?    
         #Like an OBJECT
         if _tie.sender!=_tie.receiver
           notification_subject = I18n.t("activity.verb.like.Object.notification.subject", :activity => self)
-          notification_body = capture do
-            render :partial => 'activities/notifications/like_object', :locales => {:activity => self}
-          end 
+          notification_body = actionview.render 'activities/notifications/like_object', :locals => {:activity => self}
         end
       else
         #Like a SUBJECT  
         notification_subject = I18n.t("activity.verb.like." + _tie.receiver_subject.class.to_s + ".notification.subject", :activity => self)
-        body = capture do
-          render :partial => 'activities/notifications/like_subject', :locales => {:activity => self}
-        end
+        notification_body = actionview.render  'activities/notifications/like_subject', :locals => {:activity => self}
       end      
     when 'follow','make_friend','post','update'
       #Follow or Make friend with a SUBJECT or Post or udapte an OBJECT
       if _tie.sender!=_tie.receiver  
         notification_subject = I18n.t("activity.verb." + verb + "." + _tie.receiver_subject.class.to_s + ".notification.subject", :activity => self)
-        notification_body = capture do
-          render :partial => 'activities/notifications/' + verb, :locales => {:activity => self}
-        end        
+        notification_body = actionview.render  'activities/notifications/' + verb, :locals => {:activity => self}
       end      
     end    
     receipts = _tie.receiver.notify(notification_subject,notification_body)
