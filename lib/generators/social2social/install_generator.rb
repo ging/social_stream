@@ -22,11 +22,7 @@ class Social2social::InstallGenerator < Rails::Generators::Base
                      "\nremote_subject:\n  friend:\n    name: friend\n    permissions:\n      - [ follow ]\n    sphere: personal\n"+
                                         "  public:\n    name: public\n    permissions:\n      - [ read, tie, star_tie ]\n    sphere: personal"  
   end
-  
-  def inject_translations
-    copy_file 'en.yml', 'config/locales/s2s.en.yml'
-  end
-  
+
   def copy_public
     directory "public"
   end
