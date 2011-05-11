@@ -21,52 +21,23 @@ en:
           User:
             title: "%{subject} added %{contact} as contact."
             message: "%{name} added you as contact."
-            notification:
-              subject: "%{activity._tie.sender.name} added you as contact."
           Group:
             title: "%{subject} added %{contact} as contact."
             message: "%{name} added you as contact."
-            notification:
-              subject: "%{activity._tie.sender.name} added you as contact."
         like:
           User:
             title: "%{subject} is a fan of %{contact}."
             message: "%{name} is now your fan."
-            notification:
-              subject: "%{activity._tie.sender.name} is now your fan."
           Group:
             title: "%{subject} is a fan of %{contact}."
             message: "%{name} is now your fan."
-            notification:
-              subject: "%{activity._tie.sender.name} is now your fan."
-          Object:
-            notification:
-              subject: "%{activity._tie.sender.name} likes %{activity.direct_object}."
         make-friend:
           User:
             title: "%{subject} and %{contact} are now connected."
             message: "%{name} also added you as contact."
-            notification:
-              subject: "%{activity._tie.sender.name} also added you as contact."
           Group:
             title: "%{subject} added %{contact} as contact."
             message: "%{name} added you as contact."
-            notification:
-              subject: "%{activity._tie.sender.name} added you as contact."
-        post:
-          User:
-            notification:
-              subject: "%{activity._tie.sender.name} has posted %{activity.direct_object.to_s} in your wall"
-          Group:
-            notification:
-              subject: "%{activity._tie.sender.name} has posted %{activity.direct_object.to_s} in your wall"
-        update:
-          User:
-            notification:
-              subject: "%{activity._tie.sender.name} has updated %{activity.direct_object.to_s} in your wall"
-          Group:
-            notification:
-              subject: "%{activity._tie.sender.name} has updated %{activity.direct_object.to_s} in your wall"
              
   avatar:
     crop_image: "Crop the uploaded image"
