@@ -9,9 +9,9 @@ class NotificationsController < ApplicationController
   end
 
   def show
-#    @receipts = @mailbox.receipts_for(@notification)
-#    render :action => :show
-#    @receipts.mark_as_read
+    render :action => :show
+    @actor.read @notification
+    
   end
 
   def new
@@ -27,12 +27,15 @@ class NotificationsController < ApplicationController
   end
 
   def update
-
-
+    if params[:read].present?
+      @actor.read @notification   
+    end
+    redirect_to notifications_path(:page => params[:page])
   end
 
   def destroy
-
+    @notification.destroy
+    redirect_to notifications_path
   end
 
   private

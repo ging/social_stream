@@ -3,9 +3,9 @@
 <div class="notification">
 </div>
 <div class="sender_photo">
-  <%#= link_to image_tag(conversation.last_sender.logo.url(:actor),
-  :title => conversation.last_sender.name, :alt => conversation.last_sender.name),
-  conversation.last_sender.subject %>
+  <%= link_to image_tag(current_subject.logo.url(:actor),
+  :title => current_subject.name, :alt => current_subject.name),
+  current_subject %>
 </div>
 <div class="content_left">
   <div class="sender_name">
@@ -17,13 +17,24 @@
 </div>
 <div class="content_right">
   <div class="subject">
-    <%= link_to(truncate(notification.subject, :length => 55), notification_path(notification.id,:page => params[:page])) %>
+    <%= truncate(notification.subject, :length => 55) %>
   </div>
   <div class="briefing">
     <%= raw(truncate(strip_tags(notification.body), :length => 50)) %>
   </div>
   <div class="clearfloat">
   </div>
+</div>
+<div class="action">
+  <%= link_to(image_tag('btn/btn_notification_delete.png', :alt => "Mark as read", :title => "Mark as read"),
+  notification_path(notification, :page => params[:page], :read => "Read"),
+  :method => :put, :remote => true) %>
+</div>
+<div class="action">  
+  <%= link_to(image_tag('btn/btn_notification_delete.png', :alt => "Delete", :title => "Delete"),
+  notification_path(notification, :page => params[:page]),
+  :confirm => 'Do you want to delete "' + notification.subject,
+  :method => :delete, :remote => true) %>
 </div>
 <div class="clearfloat">
 </div>

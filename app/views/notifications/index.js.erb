@@ -1,0 +1,8 @@
+$("#content").html("<%=escape_javascript(render :partial => 'index') %>");
+
+<%= location(link_to(image_tag("btn/btn_notification.png", :class => "menu_icon")+t('notification.other'), notifications_path,:remote => true)) %>
+
+$('.pagination a').attr('data-remote', 'true');
+    
+
+$("head").append($("<%= escape_javascript(stylesheet_link_tag "messages.css", :media => "screen, projection") %>"));
