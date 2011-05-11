@@ -5,13 +5,13 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>You have a new notification: <%= strip_tags(@notification.subject) %></h1>
+    <h1>You have a new notification: <%= strip_tags decode_notification @notification.subject,@notification.object %></h1>
     <p>
       You have received a new notification:
     </p>
     <blockquote>
       <p>
-        <%= raw decode_notification @notification.body %>
+        <%= raw decode_notification @notification.body,@notification.object %>
       </p>
     </blockquote>
     <p>

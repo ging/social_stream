@@ -1,25 +1,21 @@
 module NotificationsHelper
-  def encode_link_to_model object, label = nil
-    label ||= object.class.to_s.downcase
-    obj_class = object.class.to_s
-    obj_id = object.nil? ? "0" : object.id.to_s
-    "[a," + label + "," + obj_class + ":" + obj_id + "]"
-  end
+  def decode_notification notification_text, activity
+    if activity.tie.present?
+      notification_text = notification_text.gsub(/\%\{sender\}/,link_to(activity.tie.sender.name,activity.tie.sender.subject))
+      notification_text = notification_text.gsub(/\%\{sender.name\}/,activity.tie.sender.name)
+    elsif activity._tie.present?
+      notification_text = notification_text.gsub(/\%\{sender\}/,link_to(activity._tie.sender.name,activity._tie.sender.subject))
+      notification_text = notification_text.gsub(/\%\{sender.name\}/,activity._tie.sender.name)
+    end
 
-  def decode_notification text
-    text.gsub(/\[a,[^\[]*,[^\[]*\]/) {|link|
-      data = link.match /\[a,(.*),(.*)\]/
-      label = data[1]
-      obj_class = data[2].split(':')[0]
-      obj_id = data[2].split(':')[1]       
-      if obj_class.eql? NilClass.to_s  
-        label
+      if activity.direct_object.present?
+        notification_text=notification_text.gsub(/\%\{object\}/,link_to(activity.direct_object.class.to_s.downcase,activity.direct_object))
+        notification_text=notification_text.gsub(/\%\{object.name\}/,activity.direct_object.class.to_s.downcase)
       else
-        obj = eval(obj_class).find_by_id(obj_id)
-        obj = obj.subject if obj.is_a? Actor
-        link_to(label,obj)
+        notification_text=notification_text.gsub(/\%\{object\}/,"nilclass")
+        notification_text=notification_text.gsub(/\%\{object.name\}/,"nilclass")
       end
-    }
-  end
 
+    notification_text
+  end
 end

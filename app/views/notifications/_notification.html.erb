@@ -17,10 +17,10 @@
 </div>
 <div class="content_right">
   <div class="subject">
-    <%= truncate(notification.subject, :length => 55) %>
+    <%= raw decode_notification notification.subject,notification.object %>
   </div>
   <div class="briefing">
-    <%= raw decode_notification notification.body %>
+    <%= raw decode_notification notification.body, notification.object %>
   </div>
   <div class="clearfloat">
   </div>

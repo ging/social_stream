@@ -161,7 +161,7 @@ class Activity < ActiveRecord::Base
         notification_body = actionview.render :partial =>  'notifications/activities/' + verb + "_body", :locals => {:activity => self}
     end 
     if notification_subject.present? and notification_body.present?
-      receipts = _tie.receiver.notify(notification_subject, notification_body)
+      receipts = _tie.receiver.notify(notification_subject, notification_body, self)
     end
   end
 
