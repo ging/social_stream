@@ -1,20 +1,24 @@
 module NotificationsHelper
-  
   def encode_link_to_model object, label = nil
-    label ||= object.to_s
-    "[a," + label + "," + object.class.to_s + ":" + object.id.to_s + "]"
+    label ||= object.class.to_s.downcase
+    obj_class = object.class.to_s
+    obj_id = object.nil? ? "0" : object.id.to_s
+    "[a," + label + "," + obj_class + ":" + obj_id + "]"
   end
-  
+
   def decode_notification text
     text.gsub(/\[a,[^\[]*,[^\[]*\]/) {|link|
       data = link.match /\[a,(.*),(.*)\]/
       label = data[1]
-      object_class = data[2].split(':')[0]
-      object_id = data[2].split(':')[1]
-      object = eval(object_class).find_by_id(object_id)
-      object = object.subject if object.is_a? Actor 
-      link_to label,object
+      obj_class = data[2].split(':')[0]
+      obj_id = data[2].split(':')[1]       
+      if obj_class.eql? NilClass.to_s  
+        label
+      else
+        obj = obj.subject if obj.is_a? Actor
+        link_to(label,obj)
+      end 
     }
   end
-  
+
 end

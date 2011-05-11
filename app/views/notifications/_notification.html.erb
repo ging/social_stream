@@ -20,7 +20,7 @@
     <%= truncate(notification.subject, :length => 55) %>
   </div>
   <div class="briefing">
-    <%= raw(truncate(strip_tags(notification.body), :length => 50)) %>
+    <%= raw decode_notification notification.body %>
   </div>
   <div class="clearfloat">
   </div>
