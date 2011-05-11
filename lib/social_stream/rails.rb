@@ -52,6 +52,7 @@ module SocialStream
       ApplicationController.helper ToolbarHelper
       ApplicationController.helper ProfilesHelper
       ApplicationController.helper PermissionsHelper
+      ApplicationController.helper NotificationsHelper
       
       ActsAsTaggableOn::TagsHelper
     end
