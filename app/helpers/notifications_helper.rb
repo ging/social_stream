@@ -15,9 +15,10 @@ module NotificationsHelper
       if obj_class.eql? NilClass.to_s  
         label
       else
+        obj = eval(obj_class).find_by_id(obj_id)
         obj = obj.subject if obj.is_a? Actor
         link_to(label,obj)
-      end 
+      end
     }
   end
 
