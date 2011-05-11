@@ -154,29 +154,11 @@ class Activity < ActiveRecord::Base
     
   def notify
     return nil if !notificable?
-        #Avaible verbs: follow, like, make-friend, post, update
-        
-    actionview = ActivitiesController.new.view_context
-    
-    case verb
-    when 'like'      
-      if direct_object.present?    
-        #Like an OBJECT
-        if _tie.sender!=_tie.receiver
-          notification_subject = I18n.t("activity.verb.like.Object.notification.subject", :activity => self)
-          notification_body = actionview.render 'notifications/activities/like_object', :locals => {:activity => self}
-        end
-      else
-        #Like a SUBJECT  
-        notification_subject = I18n.t("activity.verb.like." + _tie.receiver_subject.class.to_s + ".notification.subject", :activity => self)
-        notification_body = actionview.render  'notifications/activities/like_subject', :locals => {:activity => self}
-      end      
-    when 'follow','make-friend','post','update'
-      #Follow or Make friend with a SUBJECT or Post or udapte an OBJECT
-      if _tie.sender!=_tie.receiver  
-        notification_subject = I18n.t("activity.verb." + verb + "." + _tie.receiver_subject.class.to_s + ".notification.subject", :activity => self)
-        notification_body = actionview.render  'notifications/activities/' + verb, :locals => {:activity => self}
-      end      
+    #Avaible verbs: follow, like, make-friend, post, update        
+    actionview = ActivitiesController.new.view_context    
+    if ['like','follow','make-friend','post','update'].include? verb and _tie.sender!=_tie.receiver  
+        notification_subject = actionview.render :partial => 'notifications/activities/' + verb + "_subject", :locals => {:activity => self}
+        notification_body = actionview.render :partial =>  'notifications/activities/' + verb + "_body", :locals => {:activity => self}
     end 
     if notification_subject.present? and notification_body.present?
       receipts = _tie.receiver.notify(notification_subject, notification_body)

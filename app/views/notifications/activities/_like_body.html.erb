@@ -1,0 +1,5 @@
+<% if activity.direct_object.present? %>
+  <%= render :partial => 'notifications/activities/like_object_body', :locals => {:activity => activity} %>
+<% else %>
+  <%= render :partial => 'notifications/activities/like_subject_body', :locals => {:activity => activity} %>
+<% end %>
