@@ -9,8 +9,10 @@ module NotificationsHelper
     end
 
       if activity.direct_object.present?
-        notification_text=notification_text.gsub(/\%\{object\}/,link_to(activity.direct_object.class.to_s.downcase,activity.direct_object))
-        notification_text=notification_text.gsub(/\%\{object.name\}/,activity.direct_object.class.to_s.downcase)
+        object = activity.direct_object
+        object = object.subject if object.is_a? Actor
+        notification_text=notification_text.gsub(/\%\{object\}/,link_to(object.class.to_s.downcase,object))
+        notification_text=notification_text.gsub(/\%\{object.name\}/,object.class.to_s.downcase)
       else
         notification_text=notification_text.gsub(/\%\{object\}/,"nilclass")
         notification_text=notification_text.gsub(/\%\{object.name\}/,"nilclass")

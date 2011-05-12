@@ -6,7 +6,7 @@
 #
 # == Wall
 # The Activity.wall(type, ties) scope provides all the activities attached to a set of ties
-# 
+#
 # There are two types of wall, :home and :profile. Check {Actor#wall} for more information
 #
 class Activity < ActiveRecord::Base
@@ -28,7 +28,6 @@ class Activity < ActiveRecord::Base
   has_many :activity_objects,
            :through => :activity_object_activities
 
-  
   scope :wall, lambda { |type, ties|
     q = select("DISTINCT activities.*").
           roots.
@@ -44,14 +43,16 @@ class Activity < ActiveRecord::Base
     q
   }
 
-  after_create :send_notifications
-
   # After an activity is created, it is disseminated to follower ties
   attr_accessor :_tie
   after_create :disseminate_to_ties
 
   after_create  :increment_like_count
   after_destroy :decrement_like_count
+  
+  #For now, it should be the last one
+  #FIXME
+  after_create :send_notifications
 
   # The name of the verb of this activity
   def verb
@@ -68,7 +69,7 @@ class Activity < ActiveRecord::Base
   # This method provides the {Actor}. Use {#sender_subject} for the {SocialStream::Models::Subject Subject}
   # ({User}, {Group}, etc..)
   def sender
-    tie.sender 
+    tie.sender
   end
 
   # The {SocialStream::Models::Subject Subject} author of this activity
@@ -117,12 +118,12 @@ class Activity < ActiveRecord::Base
   # Build a new children activity where subject like this
   def new_like(subject)
     a = children.new :verb => "like",
-                     :_tie => subject.sent_ties(:receiver => receiver).first
+    :_tie => subject.sent_ties(:receiver => receiver).first
 
-    if direct_activity_object.present? 
+    if direct_activity_object.present?
       a.activity_objects << direct_activity_object
     end
-    
+
     a
   end
 
@@ -141,28 +142,27 @@ class Activity < ActiveRecord::Base
     case verb
     when "follow", "make-friend", "like"
       I18n.t "activity.verb.#{ verb }.#{ tie.receiver.subject_type }.title",
-             :subject => view.link_name(sender_subject),
-             :contact => view.link_name(receiver_subject)
+      :subject => view.link_name(sender_subject),
+      :contact => view.link_name(receiver_subject)
     when "post"
       view.link_name sender_subject
     end.html_safe
   end
-  
+
   def notificable?
     is_root? or ['post','update'].include?(root.verb)
   end
-    
+
   def notify
-    return nil if !notificable?
-    #Avaible verbs: follow, like, make-friend, post, update        
-    actionview = ActivitiesController.new.view_context    
-    if ['like','follow','make-friend','post','update'].include? verb and _tie.sender!=_tie.receiver  
-        notification_subject = actionview.render :partial => 'notifications/activities/' + verb + "_subject", :locals => {:activity => self}
-        notification_body = actionview.render :partial =>  'notifications/activities/' + verb + "_body", :locals => {:activity => self}
-    end 
-    if notification_subject.present? and notification_body.present?
-      receipts = _tie.receiver.notify(notification_subject, notification_body, self)
+    return true if !notificable?
+    #Avaible verbs: follow, like, make-friend, post, update
+    actionview = ActivitiesController.new.view_context
+    if ['like','follow','make-friend','post','update'].include? verb and _tie.sender!=_tie.receiver
+      notification_subject = actionview.render :partial => 'notifications/activities/' + verb + "_subject", :locals => {:activity => self}
+      notification_body = actionview.render :partial =>  'notifications/activities/' + verb + "_body", :locals => {:activity => self}
+      _tie.receiver.notify(notification_subject, notification_body, self)
     end
+    true
   end
 
   private

@@ -1,5 +1,5 @@
-<% if activity.direct_object.present? %>
-  <%= render :partial => 'notifications/activities/like_object_subject', :locals => {:activity => activity} %>
+<% if activity.direct_object.is_a? Actor %>
+  <%= render :partial => 'notifications/activities/like_subject_subject' %>
 <% else %>
-  <%= render :partial => 'notifications/activities/like_subject_subject', :locals => {:activity => activity} %>
+  <%= render :partial => 'notifications/activities/like_object_subject' %>
 <% end %>
