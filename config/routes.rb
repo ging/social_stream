@@ -44,7 +44,11 @@ Rails.application.routes.draw do
 
   resources :conversations
   
-  resources :notifications
+  resources :notifications do
+    collection do
+      put 'update_all'
+    end
+  end
 
   resources :comments
 

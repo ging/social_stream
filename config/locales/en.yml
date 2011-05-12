@@ -196,6 +196,9 @@ en:
   notification:
     one: "Notification"
     other: "Notifications"
+    read: "Mark as read"
+    read_all: "Mark all as read"
+    unread: "Mark as unread"
   password:
     forgot: "Do you forgot your password?"
   post:
@@ -328,6 +331,7 @@ en:
       other: "Suggestions"
       all: "All"
     options: "Tie options"
+  sure: "Are you sure?"
   time:
     ago: "%{time} ago"
   user:

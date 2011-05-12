@@ -26,9 +26,15 @@
   </div>
 </div>
 <div class="action">
-  <%= link_to(image_tag('btn/btn_notification_delete.png', :alt => "Mark as read", :title => "Mark as read"),
-  notification_path(notification, :page => params[:page], :read => "Read"),
-  :method => :put, :remote => true) %>
+  <% if notification.is_unread?(current_subject) %>
+    <%= link_to(image_tag('btn/btn_notification_delete.png', :alt => t('notification.read'), 
+        :title => t('notification.read')), notification_path(notification, :page => params[:page], :read => "Read"),
+        :method => :put, :remote => true) %>
+  <% else%>
+    <%= link_to(image_tag('btn/btn_notification_delete.png', :alt => t('notification.unread'), 
+        :title => t('notification.unread')), notification_path(notification, :page => params[:page], :read => "Unread"),
+        :method => :put, :remote => true) %>
+  <% end%>
 </div>
 <div class="action">  
   <%= link_to(image_tag('btn/btn_notification_delete.png', :alt => "Delete", :title => "Delete"),

@@ -28,8 +28,18 @@ class NotificationsController < ApplicationController
 
   def update
     if params[:read].present?
-      @actor.read @notification   
+      if params[:read].eql?("Read")
+        @actor.read @notification
+      elsif params[:read].eql?("Unread")
+        @actor.unread @notification
+      end
     end
+    redirect_to notifications_path(:page => params[:page])
+  end
+  
+  def update_all
+    @notifications= @mailbox.notifications.all
+    @actor.read @notifications
     redirect_to notifications_path(:page => params[:page])
   end
 
@@ -50,6 +60,7 @@ class NotificationsController < ApplicationController
 
 
   def check_current_subject_is_owner
+    
     @notification = Notification.find_by_id(params[:id])
 
     if @notification.nil? #TODO or !@notification.is_receiver?(@actor)
