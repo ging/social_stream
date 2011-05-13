@@ -1,4 +1,15 @@
+<% content_for :headers do %>
+	<%= stylesheet_link_tag "attachments" %>
+<% end %>
+
 <%= div_for attachment, :class => 'content_size' do %>
-  Just uploaded a file:
-  <%= link_to attachment.file_file_name, attachment, :class => "" %>
+
+  <div class="attachment_thumb">
+    <%= link_to format_image(attachment.file_content_type), attachment, :class => "" %>
+  </div>
+  
+  <div class="attachment_text">
+  	Just uploaded a file:<%= link_to attachment.file_file_name, attachment, :class => "" %>
+  </div>
+
 <% end %>

@@ -3,6 +3,10 @@ class SocialStream::Files::InstallGenerator < Rails::Generators::Base
   
   source_root File.expand_path('../templates', __FILE__)
 
+  def copy_public
+      directory "public"
+  end
+
   require 'rails/generators/active_record'
 
   def self.next_migration_number(dirname)
