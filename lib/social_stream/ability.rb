@@ -74,6 +74,11 @@ module SocialStream
       can :update, Profile do |p|
         p.subject.represented_by?(subject)
       end
+
+      # Privacy
+      can [:create, :read, :update, :destroy], Sphere, :actor_id => subject.try(:actor_id)
+      can [:create, :read, :update, :destroy], Relation::Custom, :sphere => { :actor_id => subject.try(:actor_id) }
+      can :read, Permission
     end
   end
 end

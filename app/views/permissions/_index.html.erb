@@ -10,7 +10,10 @@
       <% default_permissions.each do |p| %>
       <tr>
         <td>
-          <div contain=<%= dom_id p %> class="checkboxPermissionOptionLeft"><input id=<%= dom_id p %> optionOf="permissions" type="checkbox"/> <label for=<%= dom_id p %>><%= p.description(:brief) %></label></div>
+          <div contain=<%= dom_id p %> class="checkboxPermissionOptionLeft">
+            <input id=<%= dom_id p %> optionOf="permissions" type="checkbox"/>
+            <label for=<%= dom_id p %>><%= p.description(:brief) %></label>
+          </div>
         </td>
       </tr>
       <% end %>
