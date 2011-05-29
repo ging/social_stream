@@ -1,16 +1,2 @@
-<div class="space_center"></div>
-<%= render :partial => "ties/suggestions" %>
-<div class="space_center"></div>
-<%= render :partial => 'ties/pendings' %>
+<%= render :partial => 'contacts/suggestions_and_pendings' %>
 
-  <% content_for :javascript do %>
-
-    $(".suggestions .tie_close").livequery("click",function(){
-    temp = $(this);
-    $.get("<%=suggestion_ties_path%>", function(data) {
-    temp.parents(".tie").replaceWith(data);
-    });
-
-    });
-
-  <% end %>

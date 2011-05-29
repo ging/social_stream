@@ -10,18 +10,11 @@
     </div>
   </div>
   <div id="wordcloud" class="content"></div>
-</div>
+</div
 
-<% if user_signed_in? %>
-<div class="space_center"></div>
-<%= render :partial => "ties/suggestions" %>
-<div class="space_center"></div>
-<%= render :partial => 'ties/pendings' %>
-
+<%= render :partial => 'contacts/suggestions_and_pendings' %>
 
 <%= javascript_include_tag "jqcloud-0.1.3.min.js" %>
-<% end %>
-
 
 <% tags = ActivityObject.tag_counts %>
 

@@ -17,4 +17,27 @@ class ContactsController < ApplicationController
       format.json { render :text => @contacts.map{ |c| { 'key' => c.name, 'value' => c.slug } }.to_json }
     end
   end
+
+  def new
+    @contact = Contact.new(current_actor, params[:id].to_i)
+  end
+
+  def edit
+    @contact = Contact.new(current_actor, params[:id].to_i)
+  end
+
+  def update
+    @contact = Contact.new(current_actor, params[:id].to_i)
+
+    if @contact.update_attributes(params[:contact])
+      redirect_to @contact.receiver_subject
+    else
+      render :action => 'edit'
+    end
+  end
+
+  def suggestion
+    @tie = current_subject.suggestion
+    render :layout  => false
+  end
 end

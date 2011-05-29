@@ -1,10 +1,10 @@
 <% if current_subject.suggestion.present? %>
   <% content_for :javascript do %>
 
-    $(".suggestions .tie_close").livequery("click",function(){
+    $(".suggestions .contact_close").livequery("click",function(){
     temp = $(this);
-    $.get("<%=suggestion_ties_path%>", function(data) {
-    temp.parents(".tie").replaceWith(data);
+    $.get("<%=suggestion_contacts_path%>", function(data) {
+    temp.parents(".contact").replaceWith(data);
     });
 
     });
@@ -15,12 +15,12 @@
     <div class="header">
       <%= image_tag('btn/notifications.png', :class => "header_icon") %>
       <div class="header_text">
-        <%=t('tie.suggestion.one') %>
+        <%=t('contact.suggestion.one') %>
       </div>
     </div>
     <div class="content">
       <% if (sgs = current_subject.suggestions(2)).present? %>
-        <%= render :partial => '/ties/tie', :collection => sgs %>
+        <%= render :partial => 'contacts/contact', :collection => sgs %>
       <%end%>
     </div>
   </div>

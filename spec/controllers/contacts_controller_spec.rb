@@ -15,4 +15,27 @@ describe ContactsController do
     end
   end
 
+  describe "when authenticated" do
+    before do
+      @user = Factory(:user)
+
+      sign_in @user
+    end
+
+    it "should render edit" do
+      get :edit, :id => Factory(:user).actor_id
+
+      assert_response :success
+    end
+
+    it "should render update" do
+      contact = Factory(:user)
+
+      put :update, :id => contact.actor_id,
+                   :contact => { "relation_ids" => [ "gotcha", @user.relations.first.id ] }
+
+      response.should redirect_to(contact)
+      @user.sent_ties.received_by(contact).first.relation.should == @user.relations.first
+    end
+  end
 end

@@ -24,13 +24,18 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :contacts do
+    collection do
+      get 'suggestion'
+    end
+  end
+
   resources :spheres
   namespace "relation" do
     resources :customs
   end
   resources :permissions
 
-  match 'contacts' => 'contacts#index', :as => 'contacts'
   match 'tags'     => 'tags#index', :as => 'tags'
   
   # Find subjects by slug
@@ -52,12 +57,6 @@ Rails.application.routes.draw do
 
   resources :comments
 
-  resources :ties do
-    collection do
-      get 'suggestion'
-    end
-  end
-  
   resources :activities do
     resource :like
   end

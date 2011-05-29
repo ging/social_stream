@@ -1,11 +1,11 @@
-<% if current_subject.pending_ties.any? %>
+<% if current_subject.pending_contacts.any? %>
 <div class="block">
   <div class="header">
     <%= image_tag('btn/btn_notifications.png', :class => "header_icon") %>
-    <div class="header_text"><%= t 'tie.pending.other' %></div>
+    <div class="header_text"><%= t 'contact.pending.other' %></div>
   </div>
   <div class="content">
-    <%= render current_subject.pending_ties %>
+    <%= render current_subject.pending_contacts %>
   </div>
 </div>
 <% end -%>

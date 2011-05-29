@@ -6,11 +6,11 @@ end
 # User ties
 
 Factory.define :friend, :parent => :tie do |t|
-  t.after_build { |u| u.relation = u.sender.relation('friend') }
+  t.after_build { |u| u.relation = u.sender.relation_custom('friend') }
 end
 
 Factory.define :acquaintance, :parent => :tie do |t|
-  t.after_build { |u| u.relation = u.sender.relation('acquaintance') }
+  t.after_build { |u| u.relation = u.sender.relation_custom('acquaintance') }
 end
 
 Factory.define :public, :parent => :tie do |t|
@@ -23,7 +23,7 @@ Factory.define :g2u_tie, :parent => :tie do |t|
 end
 
 Factory.define :member, :parent => :g2u_tie do |t|
-  t.after_build { |u| u.relation = u.sender.relation('member') }
+  t.after_build { |u| u.relation = u.sender.relation_custom('member') }
 end
 
 Factory.define :g2g_tie, :parent => :tie do |t|
@@ -32,6 +32,6 @@ Factory.define :g2g_tie, :parent => :tie do |t|
 end
 
 Factory.define :partner, :parent => :g2g_tie do |t|
-  t.after_build { |u| u.relation = u.sender.relation('partner') }
+  t.after_build { |u| u.relation = u.sender.relation_custom('partner') }
 end
 

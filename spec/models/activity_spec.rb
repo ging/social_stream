@@ -201,7 +201,7 @@ describe Activity do
   describe "belonging to friend self tie" do
     before do
       user = Factory(:user)
-      tie = user.ties.where(:relation_id => user.relation('friend')).first
+      tie = user.ties.where(:relation_id => user.relation_custom('friend')).first
       create_activity_assigned_to(tie)
     end
 

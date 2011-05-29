@@ -73,13 +73,24 @@ en:
   contact:
     all_n: "All contacts (%{count})"
     edit:
+      title: "Edit contact"
       submit: "Edit Contact"
     new:
       link: "+ Add contact"
-      title: "Add %{name} as contact"
+      title: "Add new contact"
       submit: "Add Contact"
     one: "Contact"
     other: "Contacts"
+    pending:
+      other: "Pending requests"
+      all: "All"
+    relation:
+      one: "Contact type"
+      new: "New type"
+    suggestion:
+      one: "Suggestion"
+      other: "Suggestions"
+      all: "All"
   copyright: "2010 Copyright - All rights reserved"
   days: Days
   delete:
@@ -308,29 +319,6 @@ en:
     title: "Privacy & context"
     choose: "1. Choose context"
     new: '+ New context'
-  tie:
-    add:
-      bookmark: "Bookmark"
-      contact: "Add contact as..."
-      follow: "Follow"
-      like: "Like"
-      partner: "Add Partner"
-    relation:
-      one: "Contact type"
-      new: "New type"
-    edit:
-      contact: "Contact: %{type}"
-      title: "Edit Contact"
-    new:
-      title: "Add New Contact"
-    pending:
-      other: "Pending requests"
-      all: "All"
-    suggestion:
-      one: "Suggestion"
-      other: "Suggestions"
-      all: "All"
-    options: "Tie options"
   sure: "Are you sure?"
   time:
     ago: "%{time} ago"

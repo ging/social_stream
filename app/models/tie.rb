@@ -112,8 +112,6 @@ class Tie < ActiveRecord::Base
   before_validation :find_or_build_relation
 
   before_create :save_relation
-  after_create :create_activity
-  after_create :send_message
 
   after_create  :increment_follower_count
   after_destroy :decrement_follower_count
@@ -285,31 +283,12 @@ class Tie < ActiveRecord::Base
     if relation_name == relation.try(:name)
       relation
     elsif sender.present?
-      self.relation = sender.relation(relation_name)
+      self.relation = sender.relation_custom(relation_name)
     end
  end
  
   def save_relation
     relation.save! if relation.new_record?
-  end
- 
-
-  # After create callback to create related {Activity}
-  def create_activity
-    return if reflexive?
-
-    Activity.create! :_tie => self, :activity_verb => ActivityVerb[contact_verb]
-  end
-
-   def contact_verb
-    replied? ? "make-friend" : "follow"
-  end
-
-  # Send a message to the receiver of the tie
-  def send_message
-    if message.present?
-      sender.send_message(receiver, message, I18n.t("activity.verb.#{ contact_verb }.#{ receiver.subject_type }.message", :name => sender.name))
-    end
   end
 
   # after_create callback

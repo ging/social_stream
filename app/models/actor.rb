@@ -135,9 +135,19 @@ class Actor < ActiveRecord::Base
   def ties
     Tie.sent_or_received_by(self)
   end
+
+  # The relations that belong to this actor.
+  #
+  # The are both {Relation::Custom} and {Relation::Public} so
+  # we get them from the reciprocal ties
+  def relations
+    Relation.
+      joins(:ties).
+      merge(Tie.sent_by(self).received_by(self))
+  end
   
   # A given relation defined and managed by this actor
-  def relation(name)
+  def relation_custom(name)
     relation_customs.find_by_name(name)
   end
 
@@ -214,7 +224,7 @@ class Actor < ActiveRecord::Base
   # Options::
   # * type: the class of the recommended subject
   #
-  # @return [Tie]
+  # @return [Contact]
   def suggestion(options = {})
     candidates_types =
     options[:type].present? ?
@@ -235,11 +245,7 @@ class Actor < ActiveRecord::Base
     
     return nil unless candidate.present?
     
-    # Building ties with sent_ties catches them and excludes them from pending ties.
-    # An useful side effect for excluding this ones from pending, but can be weird!
-    # Maybe we must use:
-    # Tie.sent_by(self).build :receiver_id => candidate.actor.id
-    sent_ties.build :receiver_id => candidate.actor.id
+    Contact.new self, candidate.actor.id
   end
   
   # Set of ties sent by this actor received by a
@@ -299,7 +305,7 @@ class Actor < ActiveRecord::Base
     public_tie_to(subject) ||
       sent_ties.create!(:receiver_id => Actor.normalize_id(subject),
                         :relation_id => relation_public.id,
-                        :original    => false)
+                        :intended    => false)
   end
 
   # The ties that allow attaching an activity to them. This method is used for caching
@@ -325,6 +331,13 @@ class Actor < ActiveRecord::Base
     received_ties.where('ties.sender_id NOT IN (?)', sent_ties.map(&:receiver_id).uniq).map(&:sender_id).uniq.
     map{ |i| Tie.new :sender => self,
                          :receiver_id => i }
+  end
+
+  # Build a new {Contact} from each of {#pending_ties}
+  def pending_contacts
+    pending_ties.map do |t|
+      Contact.new(self, t.receiver_id)
+    end
   end
   
   # The set of {Activity activities} in the wall of this {Actor}.

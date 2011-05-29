@@ -177,7 +177,7 @@ class CreateSocialStream < ActiveRecord::Migration
       t.integer  "relation_id"
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.boolean  "original", :default => true
+      t.boolean  "intended", :default => true
     end
     
     add_index "ties", "receiver_id"

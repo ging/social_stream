@@ -1,0 +1,20 @@
+<div id="contact_<%=dom_id(contact.receiver_subject)%>" class="row">
+  <div class="logo">
+    <%= link_to(image_tag(contact.receiver.logo.url(:contact)),
+                contact.receiver_subject) %>
+  </div>
+  <div class="sub-block">
+    <div class="name">
+      <%= link_to(contact.receiver_subject.name, contact.receiver_subject, :class => "contact_link") %>
+    </div>
+    <div class="brief">
+      <%= contact_brief(contact.receiver_subject) %>
+    </div>
+    <div class="link" id="contact_link<%= dom_id(contact.receiver_subject)%>">
+      <%= new_contact_link(contact) %>
+    </div>
+  </div>
+  <div class="close"><%=link_to('X','#')%></div>
+  <div class="space_center">
+  </div>  
+</div>

@@ -9,9 +9,8 @@
 .dropdown dt a {background:#DFECF1 url(/images/btn/arrowBlue.png) no-repeat scroll right center; display:block; padding-right:20px;
                 border:1px solid #1F4A75; width:150px;}
 .dropdown dt a span {cursor:pointer; display:block; padding:5px;}
-.dropdown dd ul { background:#DFECF1 none repeat scroll 0 0; border:1px solid #1F4A75; color:#1F4A75; display:none;
-                  left:0px; padding:5px 0px; position:absolute; top:2px; width:auto; min-width:170px; list-style:none;}
-.dropdown span.value { display:none;}
+.dropdown dd ul { background:#DFECF1 none repeat scroll 0 0; border:1px solid #1F4A75; color:#1F4A75; 
+                  left:0px; padding:0px; position:absolute; top:2px; width:auto; min-width:170px; list-style:none;}
 .dropdown dd ul li a { padding:5px; display:block; font-size:1.0em;}
 .dropdown dd ul li a:hover { background-color: #EBF2F4;}
 

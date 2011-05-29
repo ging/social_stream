@@ -41,7 +41,7 @@ class Relation < ActiveRecord::Base
         r
       when String
         if options[:sender]
-          options[:sender].relation(r)
+          options[:sender].relation_custom(r)
         else
           raise "Must provide a sender when looking up relations from name: #{ options[:sender] }"
         end
