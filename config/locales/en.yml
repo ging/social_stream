@@ -266,7 +266,7 @@ en:
             nil: "Delete activities in wall"
         follow:
           nil:
-            nil: "Send their activity"
+            nil: "Follow their activity"
         read:
           activity:
             weak_star_ties: "Read wall"
@@ -310,7 +310,7 @@ en:
     other: "Products"
   relation_custom:
     in_sphere:
-      choose: "2. Levels in <strong>%{name}</strong> context"
+      choose: "2. Levels in <strong>%{name}</strong> sphere"
     new: "+ New level"
   relation_public:
       name: "Public"
@@ -321,8 +321,8 @@ en:
   socialstream: "SocialStream"
   sphere:
     title: "Privacy & context"
-    choose: "1. Choose context"
-    new: '+ New context'
+    choose: "1. Choose sphere"
+    new: '+ New sphere'
   sure: "Are you sure?"
   time:
     ago: "%{time} ago"
