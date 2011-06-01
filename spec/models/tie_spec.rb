@@ -15,19 +15,6 @@ describe Tie do
 
       tie.should_not be_new_record
     end
-
-    it "should be created from relation_name and permissions" do
-      pending "Redesign forms"
-
-      tie = Tie.create :sender_id => @sender.actor_id,
-                       :receiver_id => @receiver.actor_id,
-                       :relation_name => "new relation",
-                       :relation_permissions => [ Permission.first.id, Permission.last.id ]
-
-      puts tie.errors
-      tie.should_not be_new_record
-      tie.relation.should_not be_new_record
-    end
   end
 
   describe "follower_count" do
