@@ -8,5 +8,5 @@ nbproject
 .project
 .DS_Store
 .yardoc/*
-lib/generators/social_stream/templates/public/images/tmp/
+lib/generators/social_stream/base/templates/public/images/tmp/
 **.*swp

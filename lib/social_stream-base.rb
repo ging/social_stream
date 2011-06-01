@@ -1,3 +1,36 @@
+# Database foreign keys
+require 'foreigner'
+# jQuery
+require 'jquery-rails'
+# Permalinks:
+require 'stringex'
+# Hierarchical relationships in Activity and Relation:
+require 'ancestry'
+# Messages
+require 'mailboxer'
+# User authentication
+require 'devise'
+# Authorization
+require 'cancan'
+# REST controllers
+require 'inherited_resources'
+# Scopes in controllers
+require 'has_scope'
+# Logo attachments
+require 'paperclip'
+require 'paperclip/social_stream'
+require 'avatars_for_rails'
+# Pagination
+require 'will_paginate'
+# Oauth
+require 'omniauth/oauth'
+# CSS themes
+require 'rails_css_themes'
+#Tags
+require 'acts-as-taggable-on'
+# HTML forms
+require 'formtastic'
+
 # Provides your Rails application with social network and activity stream support
 module SocialStream
   autoload :Ability,   'social_stream/ability'
@@ -62,4 +95,4 @@ module SocialStream
   end
 end
 
-require 'social_stream/rails'
+require 'social_stream/base'

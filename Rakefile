@@ -10,7 +10,7 @@ require 'ci/reporter/rake/rspec'
 
 require 'bundler'
 
-require File.join(File.dirname(__FILE__), 'lib', 'social_stream', 'version')
+require File.join(File.dirname(__FILE__), 'lib', 'social_stream', 'base', 'version')
 
 
 RSpec::Core::RakeTask.new(:spec)
@@ -19,7 +19,7 @@ task :default => :spec
 
 Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'SocialStream'
+  rdoc.title    = 'SocialStream Base'
   rdoc.options << '--line-numbers' << '--inline-source'
   rdoc.rdoc_files.include('README.rdoc')
   rdoc.rdoc_files.include('lib/**/*.rb', 'app/**/*.rb')

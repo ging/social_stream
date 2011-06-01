@@ -1,6 +1,6 @@
 # Social Stream migration template
 social_stream_migration =
-  File.join(File.dirname(__FILE__), '..', '..', 'lib', 'generators', 'social_stream', 'templates', 'migration')
+  File.join(File.dirname(__FILE__), '..', '..', 'lib', 'generators', 'social_stream', 'base', 'templates', 'migration')
 
 require social_stream_migration
 

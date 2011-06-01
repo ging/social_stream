@@ -1,10 +1,10 @@
-require File.join(File.dirname(__FILE__), 'lib', 'social_stream', 'version')
+require File.join(File.dirname(__FILE__), 'lib', 'social_stream', 'base', 'version')
 
 Gem::Specification.new do |s|
-  s.name = "social_stream"
-  s.version = SocialStream::VERSION.dup
-  s.summary = "Social networking features and activity streams for Ruby on Rails."
-  s.description = "Ruby on Rails engine supporting social networking features and activity streams."
+  s.name = "social_stream-base"
+  s.version = SocialStream::Base::VERSION.dup
+  s.summary = "Basic features for Social Stream, the core for building social network websites"
+  s.description = "Social Stream is a Ruby on Rails engine providing your application with social networking features and activity streams.\n\nThis gem packages the basic functionality, along with basic actors (user, group) and activity objects(post and comments)"
   s.authors = [ "GING - DIT - UPM",
                 "CISE - ESPOL" ]
   s.homepage = "http://social-stream.dit.upm.es/"

@@ -1,4 +1,4 @@
-class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
+class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
   include Rails::Generators::Migration
 
   hook_for :taggings, :as => :migration
