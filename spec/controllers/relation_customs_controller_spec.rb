@@ -75,11 +75,14 @@ describe Relation::CustomsController do
       end
 
       it "should not render index" do
-        pending
+	begin
+          get :index, :sphere_id => @sphere.id, :format => "js"
 
-        get :index, :sphere_id => @sphere.id, :format => "js"
-
-        assert false
+	  # Should not get here
+          assert false
+        rescue CanCan::AccessDenied
+          assigns(:customs).should be_blank
+        end
       end
 
       context "a new relation" do

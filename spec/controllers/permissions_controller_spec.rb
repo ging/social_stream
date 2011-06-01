@@ -31,8 +31,6 @@ describe PermissionsController do
       end
 
       it "should not render index" do
-        pending
-
         begin
           get :index, :relation_id => @relation.id, :format => "js"
 
