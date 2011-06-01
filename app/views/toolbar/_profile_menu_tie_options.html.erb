@@ -12,13 +12,13 @@
     <% if current_subject.ties_to(subject).present? %>
       <li >
       <%= link_to image_tag("btn/btn_friend.png", :class => "menu_icon") +
-                  t('tie.edit.contact', :type => current_subject.ties_to(subject).map(&:relation_name).join(", ")),
+                  current_subject.ties_to(subject).map(&:relation_name).join(", "),
                   edit_contact_path(subject.actor_id) %>
      </li>
     <% else %>
       <li >
       <%= link_to image_tag("btn/btn_friend.png", :class => "menu_icon") +
-                  t('tie.add.contact'),
+                  t('contact.new.title'),
                   edit_contact_path(subject.actor_id),
                   :id => 'contacts_menu' %>
       </li>

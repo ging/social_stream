@@ -250,7 +250,7 @@ class Actor < ActiveRecord::Base
   
   # Set of ties sent by this actor received by a
   def ties_to(a)
-    sent_ties.received_by(a)
+    sent_ties.received_by(a).intended
   end
 
   # Get the first of the ties created to a, or create a new one with the {Relation::Public}

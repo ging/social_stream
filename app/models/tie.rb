@@ -45,6 +45,8 @@
 #                        integer, array
 # replied:: ties having at least another tie in the other way, a tie from a to b
 #           is replied if there is a tie from b to a
+# intended:: ties can be desactivated by subjects when they change their connections.
+#            This scope gathers the active ones
 #
 class Tie < ActiveRecord::Base
   # Facilitates relation assigment along with find_relation callback
@@ -106,6 +108,8 @@ class Tie < ActiveRecord::Base
   scope :public_relation, lambda {
     joins(:relation).where('relations.type' => 'Relation::Public')
   }
+
+  scope :intended, where(:intended => true)
 
   validates_presence_of :sender_id, :receiver_id, :relation
 

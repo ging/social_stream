@@ -91,6 +91,8 @@ en:
       one: "Suggestion"
       other: "Suggestions"
       all: "All"
+    type:
+      new: "New type"
   copyright: "2010 Copyright - All rights reserved"
   days: Days
   delete:

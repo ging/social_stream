@@ -69,13 +69,13 @@ span.ui-radio-state-checked-hover {
 }
 
 
-li.sphere_name {
+li.sphere_name, li.new_sphere {
 	background-color: #1F4A75;
 	padding: 5px;
 	text-align: left;
 }
 
-span.sphere_name{
+span.sphere_name, span.sphere_name a{
 	color: white;
 }
 
