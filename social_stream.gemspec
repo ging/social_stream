@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   # Pagination
   s.add_runtime_dependency('will_paginate', '~> 3.0.pre2')
   # OAuth client
-  s.add_runtime_dependency('omniauth','~> 0.2.5')	
+  s.add_runtime_dependency('omniauth','~> 0.2.6')
   # OAuth provider
   s.add_runtime_dependency('oauth-plugin','~> 0.4.0.pre1')	
   # Theme support
