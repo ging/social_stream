@@ -3,13 +3,13 @@
     <a href="#" class="sf-with-ul" id="btn_menu_config"><%= t('account.one') %><span class="sf-sub-indicator"> »</span></a>
     <ul>
       <li>
-        <%= link_to 'Configurations', '#' %>
+        <%= link_to t('account.settings'), edit_user_registration_path %>
       </li>
       <li>
-        <%= link_to 'Notifications', '#' %>
+        <%= link_to t('account.notifications'), '#' %>
       </li>
       <li class="current">
-        <%= link_to 'Privacy', spheres_path %>
+        <%= link_to t('account.privacy'), spheres_path %>
       </li>
     </ul>
   </li>

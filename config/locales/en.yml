@@ -6,6 +6,9 @@ en:
     accept: "Accept"
   account:
     one: "Account"
+    notifications: "Notifications"
+    privacy: "Privacy"
+    settings: "Settings"
   activity:
     confirm_delete: "Delete activity?"
     delete: "Delete"
