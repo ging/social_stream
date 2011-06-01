@@ -75,11 +75,11 @@ class Actor < ActiveRecord::Base
   scope :distinct_initials, select('DISTINCT SUBSTR(actors.name,1,1) as initial').order("initial ASC")
 
   scope :contacted_to, lambda { |a|
-    joins(:sent_ties).merge(Tie.received_by(a))
+    joins(:sent_ties).merge(Tie.received_by(a).intended)
   }
 
   scope :contacted_from, lambda { |a|
-    joins(:received_ties).merge(Tie.sent_by(a))
+    joins(:received_ties).merge(Tie.sent_by(a).intended)
   }
  
   after_create :create_initial_relations
