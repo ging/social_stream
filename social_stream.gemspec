@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n")
 
   # Gem dependencies
-  s.add_runtime_dependency('social_stream-base', '0.5.0')
+  s.add_runtime_dependency('social_stream-base', '0.5.1')
  
   # Development Gem dependencies
   s.add_development_dependency('rails', '~> 3.0.7')
