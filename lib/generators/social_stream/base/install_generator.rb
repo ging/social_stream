@@ -38,7 +38,7 @@ class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
   end
 
   def create_application_layout
-    copy_file File.join(File.dirname(__FILE__), '../../../',
+    copy_file File.join(File.dirname(__FILE__), '../../../../',
                         'app/views/layouts/application.html.erb'),
               'app/views/layouts/application.html.erb'
   end
