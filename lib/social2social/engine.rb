@@ -1,7 +1,5 @@
 module Social2social
   class Engine < Rails::Engine
-    config.app_generators.social_stream :social_stream
-
     config.to_prepare do
       #Patching Actor
       Actor.class_eval do

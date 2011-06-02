@@ -1,8 +1,6 @@
 class Social2social::InstallGenerator < Rails::Generators::Base
   include Rails::Generators::Migration
   
-  hook_for :social_stream
-  
   source_root File.expand_path('../templates', __FILE__)
   
   def route_pshb
