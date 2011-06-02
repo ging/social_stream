@@ -3,14 +3,6 @@ class Social2social::InstallGenerator < Rails::Generators::Base
   
   source_root File.expand_path('../templates', __FILE__)
   
-  def route_pshb
-    route "match 'pshb/callback' => 'pshb#callback', :as => :pshb_callback"
-  end
-  
-  def route_ru
-    route "match 'remoteuser/' => 'remoteusers#index', :as => :add_remote_user"
-  end
-  
   def config_initializer
     copy_file 'initializer.rb', 'config/initializers/social2social.rb'
   end
