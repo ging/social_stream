@@ -11,40 +11,7 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n")
 
   # Gem dependencies
-  #
-  # Activity and Relation hierarchies
-  s.add_runtime_dependency('ancestry', '~> 1.2.3')
-  # SQL foreign keys
-  s.add_runtime_dependency('foreigner', '~> 0.9.1')
-  # Authentication
-  s.add_runtime_dependency('devise', '~> 1.2.rc')
-  # CRUD controllers
-  s.add_runtime_dependency('inherited_resources', '~> 1.2.2')
-  # Slug generation
-  s.add_runtime_dependency('stringex', '~> 1.2.0')
-  # Avatar attachments
-  s.add_runtime_dependency('paperclip', '~> 2.3.4')
-  s.add_runtime_dependency('avatars_for_rails', '~> 0.0.9')
-  # jQuery
-  s.add_runtime_dependency('jquery-rails', '~> 0.2.5')
-  # Authorization
-  s.add_runtime_dependency('cancan', '~> 1.6.4')
-  # Pagination
-  s.add_runtime_dependency('will_paginate', '~> 3.0.pre2')
-  # OAuth client
-  s.add_runtime_dependency('omniauth','~> 0.2.6')
-  # OAuth provider
-  s.add_runtime_dependency('oauth-plugin','~> 0.4.0.pre1')	
-  # Theme support
-  s.add_runtime_dependency('rails_css_themes','~> 1.0.0')	
-  # Messages
-  s.add_runtime_dependency('mailboxer','~> 0.1.4')
-  # Avatar manipulation
-  s.add_runtime_dependency('rmagick','~> 2.13.1')
-  # Tagging
-  s.add_runtime_dependency('acts-as-taggable-on','~> 2.0.6')
-  # HTML Forms
-  s.add_runtime_dependency('formtastic','~> 1.2.3')
+  s.add_runtime_dependency('social_stream-base', '0.5.0')
  
   # Development Gem dependencies
   s.add_development_dependency('rails', '~> 3.0.7')
@@ -64,6 +31,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency('forgery', '~> 0.3.6')
   # Continous integration
   s.add_development_dependency('ci_reporter', '~> 1.6.4')
-  # Scaffold generator
-  s.add_development_dependency('nifty-generators','~> 0.4.5')
 end

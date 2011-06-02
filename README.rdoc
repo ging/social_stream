@@ -39,31 +39,19 @@ Then:
 
   rails generate social_stream:install
 
-This will generate the following:
-* A jquery:install generation for jQuery support
-* A devise:install generation for authentication support
-* An initializer file with configuration for Social Stream.
-* A configuration file for defining custom Social Stream relations. You can define your application default relations at <tt>config/relations.yml</tt>
-* A new application layout
-* A migration providing the database schema
-
 Do not forget to migrate your database
 
   rake db:migrate
 
-== Actors and Activity Objects
+= Social Stream modules
 
-{Social Stream}[http://github.com/ging/social_stream] relies in Devise[http://github.com/plataformatec/devise].
-You have authenticated users support in your application by default.
+Social Stream is divided in modules. Developers can customize their social
+network with the functionalities they need for each case.
 
-Besides, there is another kind of actor: groups. If you want other type of actor
-(like organizations or social events) you must include an <tt>actor_id</tt> column in
-the new actor migration. Then add it to <tt>config/initializers/social_stream.rb</tt>
+Current Social Stream distribution includes:
 
-There is also support for two types of basic activity objects: posts and comments.
-You can create other types, like photos, bookmarks or videos, but you must do the same: 
-add a <tt>activity_object_id</tt> column in the migration and include it in the
-initializer.
+* {Social Stream Base}[https://github.com/ging/social_stream-base], basic functionalities
+  along with users, group, post and comments
 
 = Documentation
 
@@ -71,5 +59,5 @@ initializer.
 
 = Discussion
 
-It is at an early stage of development.
-Feel free to add an issue or send a message at github[http://github.com/ging/social_stream].
+We are reaching beta phase of development.
+Feel free to add an issue or send a message at github[https://github.com/ging/social_stream].

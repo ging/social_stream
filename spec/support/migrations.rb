@@ -1,24 +1,23 @@
-# Social Stream migration template
-social_stream_migration =
-  File.join(File.dirname(__FILE__), '..', '..', 'lib', 'generators', 'social_stream', 'templates', 'migration')
+class MigrationFinder
+  def initialize gem, path
+    finder = Gem::GemPathSearcher.new
+    taggable_spec = finder.find(gem)
+    taggable_migration = finder.matching_files(taggable_spec,
+                                               File.join(*path)).first
 
-require social_stream_migration
+    require taggable_migration
+  end
+end
 
-# Adding acts_as_taggable_on
-finder = Gem::GemPathSearcher.new
-taggable_spec = finder.find('acts-as-taggable-on')
-taggable_migration = finder.matching_files(taggable_spec,
-                                           File.join("generators","acts_as_taggable_on","migration","templates","active_record","migration")).first
+# Social Stream Base
+MigrationFinder.new 'social_stream-base',
+                    ['generators', 'social_stream', 'base', 'templates', 'migration']
 
-require taggable_migration
+# acts-as-taggable-on
+MigrationFinder.new 'acts-as-taggable-on',
+                   ["generators", "acts_as_taggable_on", "migration", "templates", "active_record", "migration"]
 
-# Mailboxer migration template
-finder = Gem::GemPathSearcher.new
-mailboxer_spec = finder.find('mailboxer')
-mailboxer_migration =
-  finder.matching_files(mailboxer_spec,
-                        File.join('generators', 'mailboxer', 'templates', 'migration')).first
-
-require mailboxer_migration
-
+# Mailboxer
+MigrationFinder.new 'mailboxer',
+                    ['generators', 'mailboxer', 'templates', 'migration']
 

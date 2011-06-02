@@ -1,5 +1,0 @@
-<% if activity.direct_object.is_a? Actor %>
-  <%= render :partial => 'notifications/activities/like_subject_subject' %>
-<% else %>
-  <%= render :partial => 'notifications/activities/like_object_subject' %>
-<% end %>
