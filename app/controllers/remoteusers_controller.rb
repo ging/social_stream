@@ -16,7 +16,7 @@ class RemoteusersController < ApplicationController
         uri = URI.parse(Social2social.hub)   
         response = Net::HTTP::post_form(uri,{ 'hub.callback' => pshb_callback_url, 
                                               'hub.mode'     => "subscribe",
-                                              'hub.topic'    => u.home_feed_url,
+                                              'hub.topic'    => u.public_feed_url,
                                               'hub.verify'   => 'sync'})
                                                                                           
       end                                                         

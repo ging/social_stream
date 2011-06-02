@@ -9,8 +9,10 @@ module Social2social
       
       module InstanceMethods
         def update_feed_to_hub
-          if self.original
-            self.tie.sender.publish_or_update_home_feed
+          if original?
+            if tie.relation.is_a?(Relation::Public)
+              tie.sender.publish_or_update_public_feed
+	    end
           end
         end
       end

@@ -17,9 +17,9 @@ class RemoteSubject < ActiveRecord::Base
     end
   end
   
-  #Home feed url for this RemoteUser
-  def home_feed_url
-    "http://"+origin_node_url.to_s+"/api/user/"+name.to_s+"/home.atom"                       
+  # Public feed url for this RemoteUser
+  def public_feed_url
+    "http://"+origin_node_url.to_s+"/api/user/"+name.to_s+"/public.atom"                       
   end
   
   
