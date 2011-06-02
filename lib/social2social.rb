@@ -1,4 +1,4 @@
-require 'social_stream'
+require 'social_stream-base'
 
 module Social2social
   
