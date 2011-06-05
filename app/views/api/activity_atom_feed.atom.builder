@@ -1,8 +1,8 @@
 atom_feed({'xmlns:activity' => 'http://activitystrea.ms/spec/1.0/'}) do |feed|
-  feed.title(@user.name + ' public stream') 
+  feed.title(@subject.name + ' public stream') 
   feed.updated(@activities.first.updated_at)
   feed.author do
-    feed.name(@user.name)
+    feed.name(@subject.name)
   end
     
   for activity in @activities

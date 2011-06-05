@@ -20,13 +20,11 @@ class ApiController < ApplicationController
   end
   
   def activity_atom_feed
-    @user = current_user
-    if params[:id] != nil
-      @user = User.find_by_slug!(params[:id])
-    end
-    
-    @page = params[:page]
-    @activities = @user.wall(:home).paginate(:page => params[:page], :per_page => 10)
+    @subject = Actor.find_by_slug!(params[:id])
+    # FIXME: why? check with Victor
+    @subject ||= current_user
+
+    @activities = @subject.wall(:home).paginate(:page => params[:page], :per_page => 10)
      
     respond_to do |format|
       format.atom
