@@ -23,6 +23,11 @@ user:
     permissions:
       - [ read,    activity, weak_star_ties ]
     sphere: personal
+  partner:
+    name: partner
+    permissions:
+      - [ read, activity, weak_star_ties ]
+    sphere: work
 
 group:
   member:
@@ -41,3 +46,4 @@ group:
     permissions:
       - [ read,    activity, weak_star_ties ]
     sphere: external_relations
+
