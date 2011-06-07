@@ -1,4 +1,4 @@
-class SocialStream::Files::InstallGenerator < Rails::Generators::Base
+class SocialStream::Attachments::InstallGenerator < Rails::Generators::Base
   include Rails::Generators::Migration
   
   source_root File.expand_path('../templates', __FILE__)
@@ -14,6 +14,6 @@ class SocialStream::Files::InstallGenerator < Rails::Generators::Base
   end
 
   def create_migration_file
-    migration_template 'migration.rb', 'db/migrate/create_social_stream_files.rb'
+    migration_template 'migration.rb', 'db/migrate/create_social_stream_attachments.rb'
   end
 end
