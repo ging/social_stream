@@ -7,7 +7,7 @@
     <div class="privacy_add_element"></div>
 
     <table class="tableCheckBoxOptions">
-      <% default_permissions.each do |p| %>
+      <% default_permissions.each_with_index do |p, i| %>
       <tr>
         <td>
           <div contain=<%= dom_id p %> class="checkboxPermissionOptionLeft">
@@ -15,6 +15,9 @@
             <label for=<%= dom_id p %>><%= p.description(:brief) %></label>
           </div>
         </td>
+      <% if i == 0 %>
+        <td rowspan="<%= default_permissions.size %>" id="privacy-rule-arrow"><%= t 'privacy.rule.add' %></td>
+      <% end %>
       </tr>
       <% end %>
     </table>

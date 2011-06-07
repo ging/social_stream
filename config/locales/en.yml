@@ -308,6 +308,7 @@ en:
   privacy:
     intro: "Contacts at <strong>%{relation}</strong> level are only allowed to:"
     rule:
+      add: "Add"
       title: "Privacy rules"
       saved: "Privacy rules saved"
   products:

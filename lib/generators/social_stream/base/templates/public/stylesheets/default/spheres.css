@@ -191,16 +191,23 @@ span.privacy_span_new {
 		margin:0 auto;
 }
 
-.privacy_rules_list{
-	text-decoration: none;
-	margin: 20px 10px 20px 50px;
-	text-align: left;
-  list-style-type: square;
+#relation_custom_permissions_input {
+	list-style-type: none;
 }
 
-.privacy_rules_list li{
+#relation_custom_permissions_input ol{
+	text-decoration: none;
+	margin: 0 10px 0 30px;
+	text-align: left;
+}
+
+#relation_custom_permissions_input ol li{
 	font-family: sans-serif;
 	padding: 5px 0px 5px 0px;
+}
+
+#relation_custom_permissions_input label {
+	margin-left: 0px;
 }
 
 #relation_custom_permissions_input fieldset{
@@ -222,5 +229,10 @@ span.privacy_span_new {
 	width: 100%;
 	margin-top: 64px;
 	cursor: wait;
+}
+
+#privacy-rule-arrow {
+	background: url('images/add-policy.png') no-repeat center center;
+	color: #FFFFFF;
 }
 
