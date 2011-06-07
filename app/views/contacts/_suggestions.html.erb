@@ -1,7 +1,7 @@
 <% if current_subject.suggestion.present? %>
   <% content_for :javascript do %>
 
-    $(".suggestions .contact_close").livequery("click",function(){
+    $(".suggestions .close").livequery("click",function(){
     temp = $(this);
     $.get("<%=suggestion_contacts_path%>", function(data) {
     temp.parents(".contact").replaceWith(data);
@@ -19,9 +19,11 @@
       </div>
     </div>
     <div class="content">
-      <% if (sgs = current_subject.suggestions(2)).present? %>
-        <%= render :partial => 'contacts/contact', :collection => sgs %>
-      <%end%>
+      <div class="suggestions">
+        <% if (sgs = current_subject.suggestions(2)).present? %>
+          <%= render :partial => 'contacts/contact', :collection => sgs %>
+        <%end%>
+      </div>
     </div>
   </div>
 <%end%>
