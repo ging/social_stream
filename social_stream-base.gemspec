@@ -46,8 +46,10 @@ Gem::Specification.new do |s|
   # HTML Forms
   s.add_runtime_dependency('formtastic','~> 1.2.3')
  
+  # Freeze Rails to 3.0.7 until Mailboxer bug is fixed
+  s.add_runtime_dependency('rails', '3.0.7')
+
   # Development Gem dependencies
-  s.add_development_dependency('rails', '~> 3.0.7')
   # Integration testing
   s.add_development_dependency('capybara', '~> 0.3.9')
   # Testing database
