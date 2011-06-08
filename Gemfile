@@ -8,7 +8,9 @@ source "http://rubygems.org"
 # gem 'avatars_for_rails', :path => '../avatars_for_rails'
 
 # social_stream-base
-gem 'social_stream-base', :path => '../social_stream-base'
+if File.exists?(File.join(File.dirname(__FILE__), '..', 'social_stream-base'))
+  gem 'social_stream-base', :path => '../social_stream-base'
+end
 
 # gem 'social_stream-files', :path => '../social_stream-files'
 # gem 'social2social', :path => '../social2social'
