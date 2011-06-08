@@ -18,5 +18,5 @@
 <% end %>
 
 <%= render :partial => "activities/index",
-           :locals => { :activities => current_subject.wall(:home).paginate(:page => params[:page]),
+           :locals => { :activities => current_subject.wall(:home).page(params[:page]),
                         :owner => current_subject } %>

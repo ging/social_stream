@@ -23,7 +23,7 @@
                :locals => { :owner      => owner,
                             :activities => owner.wall(:profile,
                                                       :for => current_subject).
-                                                 paginate(:page => params[:page]) } %>
+                                                 page(params[:page]) } %>
   </div>
 
   <% owner.relation_customs.sort.each do |r| %>

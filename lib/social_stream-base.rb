@@ -21,7 +21,7 @@ require 'paperclip'
 require 'paperclip/social_stream'
 require 'avatars_for_rails'
 # Pagination
-require 'will_paginate'
+require 'kaminari'
 # Oauth
 require 'omniauth/oauth'
 # CSS themes

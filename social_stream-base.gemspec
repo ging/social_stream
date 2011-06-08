@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   # Authorization
   s.add_runtime_dependency('cancan', '~> 1.6.4')
   # Pagination
-  s.add_runtime_dependency('will_paginate', '~> 3.0.pre2')
+  s.add_runtime_dependency('kaminari', '~> 0.12.4')
   # OAuth client
   s.add_runtime_dependency('omniauth','~> 0.2.6')
   # OAuth provider

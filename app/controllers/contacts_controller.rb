@@ -12,8 +12,8 @@ class ContactsController < ApplicationController
         }
 
     respond_to do |format|
-      format.html { @contacts = @contacts.paginate(:page => params[:page], :per_page => 10) }
-      format.js { @contacts = @contacts.paginate(:page => params[:page], :per_page => 10) }
+      format.html { @contacts = Kaminari.paginate_array(@contacts).page(params[:page]).per(10) }
+      format.js { @contacts = Kaminari.paginate_array(@contacts).page(params[:page]).per(10) }
       format.json { render :text => @contacts.map{ |c| { 'key' => c.name, 'value' => c.slug } }.to_json }
     end
   end

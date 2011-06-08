@@ -30,5 +30,5 @@
 
 <%= render :partial => "activities/index",
            :locals  => { :activities => @user.wall(:profile, :for => current_subject).
-                                              paginate(:page => params[:page]),
+                                              page(params[:page]),
                          :owner => @user } %>

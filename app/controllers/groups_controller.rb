@@ -9,7 +9,7 @@ class GroupsController < InheritedResources::Base
                     letter(params[:letter]).
                     search(params[:search]).
                     tagged_with(params[:tag]).
-                    paginate(:per_page => 10, :page => params[:page])
+                    page(params[:page]).per(10)
 
     index! do |format|
       format.html { render :layout => (user_signed_in? ? 'application' : 'frontpage') }

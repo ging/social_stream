@@ -24,7 +24,7 @@ class ApiController < ApplicationController
     # FIXME: why? check with Victor
     @subject ||= current_user
 
-    @activities = @subject.wall(:home).paginate(:page => params[:page], :per_page => 10)
+    @activities = @subject.wall(:home).page(params[:page]).per(10)
      
     respond_to do |format|
       format.atom

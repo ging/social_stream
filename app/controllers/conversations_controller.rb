@@ -5,11 +5,11 @@ class ConversationsController < ApplicationController
   before_filter :check_current_subject_in_conversation, :only => [:show, :update, :destroy]
   def index
     if @box.eql?"inbox"
-      @conversations = @mailbox.inbox.paginate(:per_page => 9, :page => params[:page])
+      @conversations = @mailbox.inbox.page(params[:page]).per(9)
     elsif @box.eql?"sentbox"
-      @conversations = @mailbox.sentbox.paginate(:per_page => 9, :page => params[:page])
+      @conversations = @mailbox.sentbox.page(params[:page]).per(9)
     else
-      @conversations = @mailbox.trash.paginate(:per_page => 9, :page => params[:page])
+      @conversations = @mailbox.trash.page(params[:page]).per(9)
     end
   end
 
