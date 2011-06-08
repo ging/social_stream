@@ -1,1 +1,0 @@
-../../../../../social_stream-base/lib/generators/social_stream/base/templates/initializer.rb
