@@ -17,9 +17,11 @@ class Activity < ActiveRecord::Base
   has_many :tie_activities, :dependent => :destroy
   has_many :ties, :through => :tie_activities
 
-  has_one :tie,
-          :through => :tie_activities,
+  # The original tie
+  has_one :tie_activity,
           :conditions => { 'tie_activities.original' => true }
+  has_one :tie,
+          :through => :tie_activity
 
   delegate :relation, :to => :tie
 
