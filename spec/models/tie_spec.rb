@@ -23,9 +23,15 @@ describe Tie do
 
       count = receiver.follower_count
 
+      follower_relation = sender.
+                          relation_customs.
+                          joins(:permissions).
+                          merge(Permission.follow).
+                          first
+
       Tie.create :sender_id => sender.actor_id,
                  :receiver_id => receiver.actor_id,
-                 :relation_id => sender.relation_customs.sort.first.id
+                 :relation_id => follower_relation.id
 
       receiver.reload.follower_count.should eq(count + 1)
     end
