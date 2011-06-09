@@ -57,7 +57,7 @@ Gem::Specification.new do |s|
     s.add_development_dependency('ruby-debug', '~> 0.10.3')
   end
   # Specs
-  s.add_development_dependency('rspec-rails', '~> 2.5.0')
+  s.add_development_dependency('rspec-rails', '~> 2.6.1')
   # Fixtures
   s.add_development_dependency('factory_girl', '~> 1.3.2')
   # Population
