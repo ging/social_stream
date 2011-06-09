@@ -23,7 +23,13 @@ describe SpheresController do
         @current_model = Factory(:sphere)
       end
 
-      it_should_behave_like "Deny Updating"
+      it "should not update" do
+        put :update, updating_attributes
+
+        assigns(:sphere).should be_blank
+        response.should redirect_to(:new_user_session)
+      end
+
       it_should_behave_like "Deny Destroying"
     end
   end
@@ -54,15 +60,17 @@ describe SpheresController do
         model_attributes[:actor_id] = Factory(:user).actor_id
       end
 
-      it "should belong to user" do
+      it "should not be created" do
         count = Sphere.count
-        post :create, attributes
+	begin
+          post :create, attributes
 
-        resource = assigns(:sphere)
+          assert false
+        rescue CanCan::AccessDenied
+          assigns(:sphere).should be_new_record
 
-        Sphere.count.should eq(count + 1)
-        resource.should be_valid
-        resource.actor.should eq(@user.actor)
+          Sphere.count.should eq(count)
+        end
       end
     end
 
