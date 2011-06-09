@@ -227,16 +227,16 @@ class Actor < ActiveRecord::Base
   # @return [Contact]
   def suggestion(options = {})
     candidates_types =
-    options[:type].present? ?
-    Array(options[:type]) :
-    self.class.subtypes
+      ( options[:type].present? ?
+          Array(options[:type]) :
+          self.class.subtypes )
     
     candidates_classes = candidates_types.map{ |t| t.to_s.classify.constantize }
     
     # Candidates are all the instance of "type" minus all the subjects
     # that are receiving any tie from this actor
     candidates = candidates_classes.inject([]) do |cs, klass|
-      cs += klass.all - contacts(:type => klass, :direction => :sent)
+      cs += klass.all - contacts(:type => klass.to_s.underscore, :direction => :sent)
       cs -= Array(subject) if subject.is_a?(klass)
       cs
     end
