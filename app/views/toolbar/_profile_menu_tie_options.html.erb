@@ -19,7 +19,7 @@
       <li >
       <%= link_to image_tag("btn/btn_friend.png", :class => "menu_icon") +
                   t('contact.new.title'),
-                  edit_contact_path(subject.actor_id),
+		  new_contact_path(:id => subject.actor_id),
                   :id => 'contacts_menu' %>
       </li>
     <% end %>
