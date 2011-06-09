@@ -76,11 +76,12 @@ en:
   contact:
     all_n: "All contacts (%{count})"
     edit:
-      title: "Edit contact"
+      title: "Edit contact to %{name}"
       submit: "Edit Contact"
     new:
       link: "+ Add contact"
-      title: "Add new contact"
+      title: "Add %{name} to your contacts"
+      menu: "Add contact"
       submit: "Add Contact"
     one: "Contact"
     other: "Contacts"
@@ -95,7 +96,7 @@ en:
       other: "Suggestions"
       all: "All"
     type:
-      new: "New type"
+      new: "+ New type"
   copyright: "2010 Copyright - All rights reserved"
   days: Days
   delete:
