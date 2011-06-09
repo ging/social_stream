@@ -321,6 +321,37 @@ class Actor < ActiveRecord::Base
         [] )
   end
 
+  # Builds a hash of options their spheres as keys
+  def grouped_activity_ties_for(subject)
+    ties = activity_ties_for(subject)
+
+    spheres =
+      ties.map{ |t| t.relation.respond_to?(:sphere) ? t.relation.sphere : I18n.t('relation_public.name') }.uniq
+
+    spheres.sort!{ |x, y|
+      case x
+      when Sphere
+        case y
+        when Sphere
+          x.id <=> y.id
+        else
+          -1
+        end
+      else
+        1
+      end
+    }
+
+    spheres.map{ |s|
+      case s
+      when Sphere
+        [ s.name, ties.select{ |t| t.relation.respond_to?(:sphere) && t.relation.sphere == s }.sort{ |x, y| x.relation <=> y.relation }.map{ |u| [ u.relation.name, u.id ] } ]
+      else
+        [ s, ties.select{ |t| t.relation.is_a?(Relation::Public) }.map{ |u| [ u.relation.name, u.id ] } ]
+      end
+    }
+  end
+
   # Is there any {Tie} for subject to create an activity to this {Actor} ?
   def activity_ties_for?(subject)
     activity_ties_for(subject).any?

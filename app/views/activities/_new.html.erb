@@ -18,7 +18,9 @@
 
         <% if receiver.activity_ties_for(current_subject).count > 1 %>
           <div id="securities">
-            <%= f.select :_activity_tie_id, receiver.activity_ties_for(current_subject).sort{ |t, u| t.relation <=> u.relation }.map{ |t| [ t.relation_name, t.id ] }, {}, :id => 'security' %>
+            <%= f.select :_activity_tie_id,
+                          grouped_options_for_select(receiver.grouped_activity_ties_for(current_subject)),
+                         {}, :id => 'security' %>
           </div>
         <% else %>
           <%= f.hidden_field :_activity_tie_id %>
