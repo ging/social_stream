@@ -35,8 +35,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('omniauth','~> 0.2.6')
   # OAuth provider
   s.add_runtime_dependency('oauth-plugin','~> 0.4.0.pre1')	
-  # Theme support
-  s.add_runtime_dependency('rails_css_themes','~> 1.0.0')	
   # Messages
   s.add_runtime_dependency('mailboxer','~> 0.1.4')
   # Avatar manipulation

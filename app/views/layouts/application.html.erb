@@ -12,7 +12,8 @@
 
     <%= yield :headers %>
 
-    <link rel="shortcut icon" href="/images/icons/favicon.ico" />
+    <%= favicon_link_tag "icons/favicon.ico" %>
+
     <% if protect_against_forgery? %>
       <%= csrf_meta_tag %>
     <% end %>

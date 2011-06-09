@@ -26,16 +26,16 @@ span.find{  padding-right:5px;}
 #frontpage_title{	font-size: 17px;	font-weight:bold;	color: #1F4A75;	vertical-align: top;	margin: 0px;
 	text-align: center;	padding: 0px;}
 .icon{  display:inline-block;  width:60px }
-#icon_share{  background: transparent url(/images/frontpage/share.png);  width:56px;  height:57px;}
-#icon_meet{  background: transparent url(/images/frontpage/meet.png);  width:56px;  height:57px;}
-#icon_collaborate{  background: transparent url(/images/frontpage/collaborate.png);  width:56px;  height:57px;}
+#icon_share{  background: transparent url(frontpage/share.png);  width:56px;  height:57px;}
+#icon_meet{  background: transparent url(frontpage/meet.png);  width:56px;  height:57px;}
+#icon_collaborate{  background: transparent url(frontpage/collaborate.png);  width:56px;  height:57px;}
 .icon_text{  text-align:center;  width:100%;  font-weight:bold;}
 #join_form{  float:right;  padding-right:50px;}
 .sentences{  width:80%;  display:inline-block;  vertical-align:top;  padding-top:10px;}
 .sentences ul,.sentences li{  list-style-type:none;  font-size:14px;  margin-left:10px;  padding-top:3px;}
-.sentences li.purple{  list-style-image:url("/images/frontpage/purple_sq.png");}
-.sentences li.green{  list-style-image:url("/images/frontpage/green_sq.png");}
-.sentences li.yellow{  list-style-image:url("/images/frontpage/yellow_sq.png");}
+.sentences li.purple{  list-style-image:url("frontpage/purple_sq.png");}
+.sentences li.green{  list-style-image:url("frontpage/green_sq.png");}
+.sentences li.yellow{  list-style-image:url("frontpage/yellow_sq.png");}
 #text_bottom_title{	font-size: 14px;	color: #000;	font-weight: bold;}
 
 
@@ -44,11 +44,11 @@ span.find{  padding-right:5px;}
 #caracteristics span {	float:left;	padding-right: 13px;	vertical-align: top;	padding-top: 5px;}
 #caracteristics ul{	list-style: none;	margin: 0px;	float:left;}
 #caracteristics ul li{	font-size:13px;	line-height:18px;	padding:7px 0 8px 30px;}
-li.participants{background: transparent url("/images/frontpage/right_webcam.gif") no-repeat left center;}
-li.organizers{background: transparent url("/images/frontpage/right_organizers.gif") no-repeat left center;}
-li.spaces{background: transparent url("/images/frontpage/right_people.gif") no-repeat left center;}
-li.comments{background: transparent url("/images/frontpage/right_comments.gif") no-repeat left center;}
-li.tags{background: transparent url("/images/frontpage/right_tags.gif") no-repeat left center;}
-li.networks{background: transparent url("/images/frontpage/right_social.gif") no-repeat left center;}
+li.participants{background: transparent url("frontpage/right_webcam.gif") no-repeat left center;}
+li.organizers{background: transparent url("frontpage/right_organizers.gif") no-repeat left center;}
+li.spaces{background: transparent url("frontpage/right_people.gif") no-repeat left center;}
+li.comments{background: transparent url("frontpage/right_comments.gif") no-repeat left center;}
+li.tags{background: transparent url("frontpage/right_tags.gif") no-repeat left center;}
+li.networks{background: transparent url("frontpage/right_social.gif") no-repeat left center;}
 
 
