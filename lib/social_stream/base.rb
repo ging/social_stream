@@ -50,7 +50,7 @@ module SocialStream
           config.avatarable_styles = { :representation => "20x20>",
                                        :contact        => "30x30>",
                                        :actor          => '35x35>',
-                                       :profile        => '94x94'}
+                                       :profile        => '119x119'}
         end
       end
     end
