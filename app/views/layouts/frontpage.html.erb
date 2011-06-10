@@ -9,7 +9,9 @@
     <%= stylesheet_link_tag "header","frontpage", "base", "footer",
                             :media => "screen, projection" %>
     <%= javascript_include_tag 'jquery', 'jquery.livequery' %>
-    <link rel="shortcut icon" href="/images/icons/favicon.ico" />
+
+    <%= favicon_link_tag "icons/favicon.ico" %>
+
     <% if protect_against_forgery? %>
       <%= csrf_meta_tag %>
     <% end %>

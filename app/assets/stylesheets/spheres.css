@@ -7,7 +7,7 @@ span.ui-checkbox, span.ui-radio {
 	float: left;
 	width: 16px;
 	height: 17px;
-	background: url(/images/icon_checkbox.png) 0 -40px no-repeat;
+	background: url(icon_checkbox.png) 0 -40px no-repeat;
 	cursor: pointer;
 }
 

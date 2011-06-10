@@ -10,15 +10,14 @@ module SocialStream
         attr_accessor :_activity_tie_id
         attr_accessor :_activity_parent_id
 
-        belongs_to :activity_object, :dependent => :destroy, :autosave => true
+        belongs_to :activity_object, :dependent => :destroy
         has_many   :activity_object_activities, :through => :activity_object
 
         delegate :post_activity,
                  :like_count,
                  :to => :activity_object
 
-        alias_method_chain :create_activity_object, :type
-        before_create :create_activity_object
+        before_create :create_activity_object_with_type
 
         unless self == Actor
           before_create :create_post_activity
@@ -43,9 +42,13 @@ module SocialStream
           (activities.includes(:activity_verb) & ActivityVerb.verb_name('post')).first
         end
 
-        # Create corresponding ActivityObject including this class type
-        def create_activity_object_with_type(attributes = {}) #:nodoc:
-          create_activity_object_without_type attributes.update(:object_type => self.class.to_s)
+	# before_create callback
+	#
+        # Build corresponding ActivityObject including this class type
+        def create_activity_object_with_type #:nodoc:
+          o = create_activity_object! :object_type => self.class.to_s
+	  # WEIRD: Rails 3.1.0.rc3 does not assign activity_object_id
+	  self.activity_object_id = o.id
         end
 
         def _activity_tie

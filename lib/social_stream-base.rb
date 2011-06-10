@@ -24,8 +24,6 @@ require 'avatars_for_rails'
 require 'kaminari'
 # Oauth
 require 'omniauth/oauth'
-# CSS themes
-require 'rails_css_themes'
 #Tags
 require 'acts-as-taggable-on'
 # HTML forms

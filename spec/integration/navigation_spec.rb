@@ -15,7 +15,7 @@ describe "Navigation" do
       fill_in 'user_email', :with => @user.email
       fill_in 'user_password', :with => 'testing'
 
-      click 'user_submit'
+      click_button 'Sign in'
     end
 
     context "with other user" do

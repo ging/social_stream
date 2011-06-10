@@ -10,11 +10,11 @@
 <div id="representations_menu">
   <ul class="sf-menu" >
     <li id="representation_li">
-      <a href="#" class="sf-with-ul" style="background: transparent url('<%= current_subject.logo.url(:representation)%>') no-repeat left top;"><%= current_subject.name %><span class="sf-sub-indicator"> »</span></a>
+      <a href="#" class="sf-with-ul" style="background: transparent url('<%= image_path current_subject.logo.url(:representation)%>') no-repeat left top;"><%= current_subject.name %><span class="sf-sub-indicator"> »</span></a>
       <ul>
         <% representations.each do |representation| %>
         <li>
-        <%= link_to representation.name, { :s => representation.slug }, { :style => "background: transparent url('#{representation.logo.url(:representation)}') no-repeat left center;margin-left:2px;" } %>
+        <%= link_to representation.name, { :s => representation.slug }, { :style => "background: transparent url('#{ image_path representation.logo.url(:representation)}') no-repeat left center;margin-left:2px;" } %>
        </li>
         <% end %>
       </ul>

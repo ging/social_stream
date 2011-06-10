@@ -20,7 +20,7 @@
         <%= t('avatar.profile_change')%>
       </div>
       <div class="header_icon_right">
-        <%= link_to (image_tag('/images/btn/edit.png')),  :controller => "avatars" , :action => "index" %>
+        <%= link_to (image_tag('btn/edit.png')),  :controller => "avatars" , :action => "index" %>
       </div>
     </div>
     <div class="content">
@@ -37,7 +37,7 @@
 	      ApiKey: <%= @profile.authentication_token %>
 	    </div>
 	    <div class="header_icon_right">
-	      <%= link_to (image_tag('/images/btn/edit.png')), :controller => :api,
+	      <%= link_to (image_tag('btn/edit.png')), :controller => :api,
 	                           :action => :create_key %>
 	    </div>
 	  </div>

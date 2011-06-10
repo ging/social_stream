@@ -5,7 +5,7 @@ class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
   hook_for :authentication
   hook_for :messages
 
-  source_root File.expand_path('../templates', __FILE__)
+  source_root File.expand_path(File.join('..', 'templates'), __FILE__)
 
   def devise_initializer_config
     inject_into_file "config/initializers/devise.rb",
@@ -29,29 +29,21 @@ class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
     copy_file 'relations.yml', 'config/relations.yml'
   end
 
-  def copy_public
-    directory "public"
-  end
-
   def remove_public_index
     remove_file 'public/index.html'
   end
 
   def create_application_layout
-    copy_file File.join(File.dirname(__FILE__), '../../../../',
+    copy_file File.join(File.dirname(__FILE__),
+                        '..', '..', '..', '..',
                         'app/views/layouts/application.html.erb'),
               'app/views/layouts/application.html.erb'
   end
 
-  # TODO: hook_for :orm
-  require 'rails/generators/active_record'
-
-  def self.next_migration_number(dirname)
-    ActiveRecord::Generators::Base.next_migration_number(dirname)
-  end
-
   def create_migration_file
-    migration_template 'migration.rb', 'db/migrate/create_social_stream.rb'
+    copy_file File.join(File.dirname(__FILE__),
+                        '..', '..', '..', '..',
+                        'db/migrate/20110610112023_create_social_stream.rb'),
+              'db/migrate/20110610112023_create_social_stream.rb'
   end
-    
 end

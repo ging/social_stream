@@ -18,5 +18,9 @@ describe User do
 
     assert ! user.represented.include?(tie.sender_subject)
   end
+
+  it "should have activity object" do
+    Factory(:user).activity_object.should be_present
+  end
 end
 

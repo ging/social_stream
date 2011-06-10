@@ -23,10 +23,9 @@ Gem::Specification.new do |s|
   # Slug generation
   s.add_runtime_dependency('stringex', '~> 1.2.0')
   # Avatar attachments
-  s.add_runtime_dependency('paperclip', '~> 2.3.4')
-  s.add_runtime_dependency('avatars_for_rails', '~> 0.0.9')
+  s.add_runtime_dependency('avatars_for_rails', '~> 0.0.10')
   # jQuery
-  s.add_runtime_dependency('jquery-rails', '~> 0.2.5')
+  s.add_runtime_dependency('jquery-rails', '~> 1.0.9')
   # Authorization
   s.add_runtime_dependency('cancan', '~> 1.6.4')
   # Pagination
@@ -35,8 +34,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('omniauth','~> 0.2.6')
   # OAuth provider
   s.add_runtime_dependency('oauth-plugin','~> 0.4.0.pre1')	
-  # Theme support
-  s.add_runtime_dependency('rails_css_themes','~> 1.0.0')	
   # Messages
   s.add_runtime_dependency('mailboxer','~> 0.1.4')
   # Avatar manipulation
@@ -47,7 +44,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('formtastic','~> 1.2.3')
  
   # Freeze Rails to 3.0.7 until Mailboxer bug is fixed
-  s.add_runtime_dependency('rails', '3.0.7')
+  s.add_runtime_dependency('rails', '3.1.0.rc4')
 
   # Development Gem dependencies
   # Integration testing
@@ -59,7 +56,7 @@ Gem::Specification.new do |s|
     s.add_development_dependency('ruby-debug', '~> 0.10.3')
   end
   # Specs
-  s.add_development_dependency('rspec-rails', '~> 2.5.0')
+  s.add_development_dependency('rspec-rails', '~> 2.6.1')
   # Fixtures
   s.add_development_dependency('factory_girl', '~> 1.3.2')
   # Population
