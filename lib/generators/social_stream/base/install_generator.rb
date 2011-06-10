@@ -29,10 +29,6 @@ class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
     copy_file 'relations.yml', 'config/relations.yml'
   end
 
-  def copy_public
-    directory "public"
-  end
-
   def remove_public_index
     remove_file 'public/index.html'
   end
