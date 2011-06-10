@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('paperclip', '~> 2.3.4')
   s.add_runtime_dependency('avatars_for_rails', '~> 0.0.9')
   # jQuery
-  s.add_runtime_dependency('jquery-rails', '~> 0.2.5')
+  s.add_runtime_dependency('jquery-rails', '~> 1.0.9')
   # Authorization
   s.add_runtime_dependency('cancan', '~> 1.6.4')
   # Pagination

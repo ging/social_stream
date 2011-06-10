@@ -177,6 +177,7 @@ en:
     most:
       followed: "Most followed"
       liked: "Most liked"
+    tags: "Tags"
   help: "Help"
   helpers:
     submit:
