@@ -11,7 +11,7 @@ end
 
 # Social Stream Base
 MigrationFinder.new 'social_stream-base',
-                    ['generators', 'social_stream', 'base', 'templates', 'migration']
+                    ['..', 'db', 'migrate', '20110610112023_create_social_stream']
 
 # acts-as-taggable-on
 MigrationFinder.new 'acts-as-taggable-on',
