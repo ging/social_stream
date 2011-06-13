@@ -7,6 +7,9 @@
       <%= devise_error_messages! %>
       <div class="form_row"><%=t('devise.passwords.field')  %></div>
       <div class="form_row"><%= f.text_field :email %></div>
+
+      <%= render :partial => "devise/shared/links" %>
+
       <div class="space_center"></div>
       <div class="btn_login">
         <%= f.submit t('action.send'), :class =>"myButton" %>
