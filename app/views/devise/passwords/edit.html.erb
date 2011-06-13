@@ -1,16 +1,16 @@
 <div id="login">
-  <h2><%= t('password.update') %></h2>
+  <h2><%= t('devise.passwords.update') %></h2>
   <div class="space_height">
   </div>
   <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
     <%= devise_error_messages! %>
     <%= f.hidden_field :reset_password_token %>
     <div class="line">
-      <div class="label"><%= f.label t('password.default') %></div>
+      <div class="label"><%= f.label :password %></div>
       <div class="field"><%= f.password_field :password, :class =>"field_x" %></div>
     </div>
     <div class="line">
-      <div class="label"><%= f.label t('password.confirmation') %></div>
+      <div class="label"><%= f.label :password_confirmation %></div>
       <div class="field"><%= f.password_field :password_confirmation, :class =>"field_x" %></div>
     </div>
     <div class="space_height"></div>
