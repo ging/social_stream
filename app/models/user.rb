@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
   def password_required?
     !persisted? || !password.nil? || !password_confirmation.nil?
   end
+
+     def find_first(options)
+      raise options.inspect
+    end
   
   class << self
     %w( email slug name ).each do |a|
@@ -50,8 +54,8 @@ class User < ActiveRecord::Base
     end                                    # end
       EOS
     end
-    
-    # Overwrite devise default find method to support login with email,
+
+   # Overwrite devise default find method to support login with email,
     # presence ID and login
     def find_for_authentication(conditions)
       if ( login = conditions[:email] ).present?
@@ -64,10 +68,10 @@ class User < ActiveRecord::Base
         super
       end
     end
-    
-    def find_or_initialize_with_error_by(attribute, value, error=:invalid)
-      if attribute == :email
-        find_or_initialize_with_error_by_email(value, error)
+
+    def find_or_initialize_with_errors(required_attributes, attributes, error=:invalid)
+      if required_attributes == [:email]
+        find_or_initialize_with_error_by_email(attributes[:email], error)
       else
         super
       end
