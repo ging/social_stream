@@ -60,6 +60,7 @@
         }
 
         var temp_elem = $('<'+element.get(0).tagName+' name="'+name+'" id="'+elemid+'" multiple="multiple" class="hidden">');
+        
         $.each(element.children('option'), function(i, option) {
           option = $(option);
           temp_elem.data(option.val(), option.text());
@@ -67,7 +68,8 @@
             var id = addItem(option.text(), option.val(), true, option.hasClass("locked"));
             temp_elem.append('<option value="'+option.val()+'" selected="selected" id="opt_'+id+'"class="selected">'+option.text()+'</option>');
           }
-        })
+        });
+        
         element.after(temp_elem);
         element.remove();
         element = temp_elem;
@@ -391,9 +393,7 @@
       }
 
       function maxItems() {
-        if (options.maxitems != 0) {
-          return (holder.children("li.bit-box").length < options.maxitems);
-        }
+          return options.maxitems != 0 && (holder.children("li.bit-box").length < options.maxitems);
       }
 
       function addTextItem(value) {
@@ -475,7 +475,7 @@
         'get': function(id) {
           return json_cache.data(id);
         }
-      }
+      };
       
       var _key =  {'enter': 13, 'tab': 9, 'backspace': 8, 'leftarrow': 37, 'uparrow': 38,'rightarrow': 39, 'downarrow': 40};
       
@@ -487,7 +487,7 @@
             randomstring += chars.substring(rnum, rnum + 1);
         }
         return randomstring;
-      }
+      };
       
       var cache = {
         'search': function (text, callback) {
@@ -521,6 +521,7 @@
           return count;
         }
       };
+      
       init();
       return this;
     });
