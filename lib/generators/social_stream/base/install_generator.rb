@@ -41,9 +41,8 @@ class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
   end
 
   def create_migration_file
-    copy_file File.join(File.dirname(__FILE__),
-                        '..', '..', '..', '..',
-                        'db/migrate/20110610112023_create_social_stream.rb'),
-              'db/migrate/20110610112023_create_social_stream.rb'
+    require 'rake'
+    Rails.application.load_tasks
+    Rake::Task['social_stream_base_engine:install:migrations'].invoke
   end
 end
