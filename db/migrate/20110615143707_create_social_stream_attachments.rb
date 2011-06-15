@@ -1,4 +1,4 @@
-class CreateSocialStreamFiles < ActiveRecord::Migration
+class CreateSocialStreamAttachments < ActiveRecord::Migration
   
   def self.up
     create_table "attachments", :force => true do |t|
