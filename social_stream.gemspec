@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
 
   # Gem dependencies
   s.add_runtime_dependency('social_stream-base', '0.5.2')
+  s.add_runtime_dependency('social_stream-attachments', '0.0.3')
  
   # Development Gem dependencies
   s.add_development_dependency('rails', '~> 3.0.7')
