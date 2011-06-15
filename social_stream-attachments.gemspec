@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "social_stream-attachments"
-  s.version = "0.0.3"
+  s.version = "0.1.0"
   s.authors = ["Víctor Sánchez Belmar", "GING - DIT - UPM"]
   s.summary = "File capabilities for Social Stream, the core for building social network websites"
   s.description = "Social Stream is a Ruby on Rails engine providing your application with social networking features and activity streams.\n\nThis gem allow you upload almost any kind of file as new social stream activity."
@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n")
 
   # Gem dependencies
-  s.add_runtime_dependency('social_stream-base','~> 0.5.1')
+  s.add_runtime_dependency('social_stream-base','~> 0.6.0')
 
   # Development Gem dependencies
   s.add_development_dependency('rails', '3.1.0.rc4')
