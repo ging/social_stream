@@ -12,18 +12,6 @@ module SocialStream
         %w( actor activity_object ).each do |supertype|
           supertype.classify.constantize.load_subtype_features
         end
-
-        # https://rails.lighthouseapp.com/projects/8994/tickets/1905-apphelpers-within-plugin-not-being-mixed-in
-        ApplicationController.helper ActivitiesHelper
-        ApplicationController.helper SubjectsHelper
-        ApplicationController.helper LocationHelper
-        ApplicationController.helper ToolbarHelper
-        ApplicationController.helper ProfilesHelper
-        ApplicationController.helper PermissionsHelper
-        ApplicationController.helper NotificationsHelper
-        ApplicationController.helper ContactsHelper
-      
-        ActsAsTaggableOn::TagsHelper
       end
 
       initializer "social_stream-base.inflections" do
