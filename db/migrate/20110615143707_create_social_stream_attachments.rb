@@ -2,6 +2,7 @@ class CreateSocialStreamAttachments < ActiveRecord::Migration
   
   def self.up
     create_table "attachments", :force => true do |t|
+      t.string   "type"
       t.integer  "activity_object_id"
       t.datetime "created_at"
       t.datetime "updated_at"
