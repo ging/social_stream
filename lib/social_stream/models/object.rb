@@ -10,7 +10,7 @@ module SocialStream
         attr_accessor :_activity_tie_id
         attr_accessor :_activity_parent_id
 
-        belongs_to :activity_object, :dependent => :destroy
+        belongs_to :activity_object, :dependent => :destroy, :autosave => true
         has_many   :activity_object_activities, :through => :activity_object
 
         delegate :post_activity,

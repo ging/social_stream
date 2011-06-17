@@ -26,6 +26,7 @@ require 'kaminari'
 require 'omniauth/oauth'
 #Tags
 require 'acts-as-taggable-on'
+require 'acts_as_taggable_on/social_stream'
 # HTML forms
 require 'formtastic'
 
