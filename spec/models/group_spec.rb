@@ -12,5 +12,14 @@ describe Group do
   it "should have activity_object" do
     Factory(:group).activity_object.should be_present
   end
+
+  it "should save tag list" do
+    g = Factory(:group)
+
+    g.tag_list = "bla, ble"
+    g.save!
+
+    g.reload.tag_list.should be_present
+  end
 end
 
