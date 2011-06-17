@@ -52,7 +52,9 @@ Current Social Stream distribution includes:
 
 * {Social Stream Base}[https://github.com/ging/social_stream-base], basic functionalities
   along with users, group, post and comments
-
+* {Social Stream Attachments}[https://github.com/ging/social_stream-attachments], support for
+  activities on files
+ 
 = Documentation
 
 {Social Stream documentation is available at rdoc.info}[http://rubydoc.info/gems/social_stream/frames]
