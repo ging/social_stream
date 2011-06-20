@@ -35,3 +35,22 @@
 	margin-bottom: 10px;
 	clear: both;
 }
+
+.attachment_tile{
+	margin: 4px;
+	width: 80px;
+	height: 65px;
+	border: 1px solid transparent;
+	float: left;
+	text-align: center;
+}
+
+.attachment_section_header{
+	margin-top: 15px;
+	margin-bottom: 5px;
+	padding-left: 10px;
+	position: relative;
+	width:90%;
+	border-left: 3px solid #2A3890;
+	background-color: #e0edf2;
+}

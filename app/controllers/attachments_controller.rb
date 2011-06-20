@@ -24,5 +24,11 @@ class AttachmentsController < InheritedResources::Base
 
     send_file(path, send_file_options)
   end
+  
+  def index
+    @attachment_activities = current_subject.wall(:profile,
+                                        :for => current_subject,
+                                        :object_type => :Attachment).all;
+  end
 
 end

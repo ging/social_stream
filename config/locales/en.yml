@@ -2,3 +2,4 @@ en:
   attachment:
     confirm_delete: "Delete activity?"
     title: "Attachments"
+    mine: "My attachments"
