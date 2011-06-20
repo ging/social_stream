@@ -439,6 +439,11 @@ class Actor < ActiveRecord::Base
     #TODO
     return true
   end
+
+  # Use slug as parameter
+  def to_param
+    slug
+  end
   
   private
   
