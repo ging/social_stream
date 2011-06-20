@@ -397,7 +397,7 @@ class Actor < ActiveRecord::Base
       ts = ts.related_by(Relation.normalize(options[:relation], :sender => self))
     end
 
-    Activity.wall type, ts.all
+    Activity.wall type, ts.all, options
   end
   
   def logo

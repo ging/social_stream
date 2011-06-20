@@ -30,12 +30,16 @@ class Activity < ActiveRecord::Base
   has_many :activity_objects,
            :through => :activity_object_activities
 
-  scope :wall, lambda { |type, ties|
+  scope :wall, lambda { |type, ties, options|
     q = select("DISTINCT activities.*").
           roots.
           joins(:tie_activities).
           where('tie_activities.tie_id' => ties).
           order("created_at desc")
+          
+    if options[:object_type].present?
+      q = q.joins(:activity_objects).where('activity_objects.object_type' => options[:object_type])
+    end
 
     # Profile wall is composed by original TieActivities. Not original are copies for followers
     if type == :profile
