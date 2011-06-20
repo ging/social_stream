@@ -1,4 +1,4 @@
-<% if receiver.activity_ties_for?(current_subject) %>
+<% if user_signed_in? && current_subject.activity_ties_to?(receiver) %>
   <% content_for :javascript do %>
 
     securityImage = "<%= escape_javascript(image_tag('btn/btn_security.png', :id => 'security_image', :alt => 'security')) %>";
@@ -11,15 +11,15 @@
 
   <div id="activities_header" class="content_size">
     <%= form_for Post.new(:text => t('activity.input'),
-                          :_activity_tie_id => receiver.activity_ties_for(current_subject).first.id),
+                          :_activity_tie_id => current_subject.activity_ties_to(receiver).first.id),
                           :remote => true  do |f| %>
       <%= f.text_field :text, :id => "input_activities", :size => 85 %>
       <div id="activities_share_btn">
 
-        <% if receiver.activity_ties_for(current_subject).count > 1 %>
+        <% if current_subject.activity_ties_to(receiver).count > 1 %>
           <div id="securities">
             <%= f.select :_activity_tie_id,
-                          grouped_options_for_select(receiver.grouped_activity_ties_for(current_subject)),
+                          grouped_options_for_select(current_subject.grouped_activity_ties_to(receiver)),
                          {}, :id => 'security' %>
           </div>
         <% else %>

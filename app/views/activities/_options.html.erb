@@ -1,7 +1,7 @@
 <div class="activity_options">
   <ul class="activity_options" >
     <li><div class="post_time_ago"><%= t('time.ago', :time => time_ago_in_words(activity.created_at)) %></div></li>
-    <% if activity.is_root? && activity.receiver.activity_ties_for?(current_subject) %>
+    <% if activity.is_root? && current_subject.activity_ties_to?(activity.receiver) %>
     <li><div class="verb_comment"> · <%= link_to t('activity.to_comment'), "#", :class => "to_comment" %> </div></li>
     <% end %>
     <li><div class="verb_like" id="like_<%= dom_id(activity) %>"> · <%= link_like(activity)%></div></li>

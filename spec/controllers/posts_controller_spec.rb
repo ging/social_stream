@@ -53,7 +53,7 @@ describe PostsController do
       before do
         friend = Factory(:friend, :receiver => @user.actor).sender
 
-        model_assigned_to friend.activity_ties_for(@user).first
+        model_assigned_to @user.activity_ties_to(friend).first
       end
 
       it_should_behave_like "Allow Creating"
@@ -76,7 +76,7 @@ describe PostsController do
 
       describe "with public relation" do
         before do
-          tie = @group.activity_ties_for(@user).first
+          tie = @user.activity_ties_to(@group).first
           model_assigned_to tie
           @current_model = Factory(:post, :_activity_tie_id => tie)
         end

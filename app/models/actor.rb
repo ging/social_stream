@@ -257,7 +257,7 @@ class Actor < ActiveRecord::Base
   def ties_to!(a)
     ties_to(a).present? ?
       ties_to(a) :
-      Array(sent_ties.create!(:receiver => a,
+      Array(sent_ties.create!(:receiver => Actor.normalize(a),
                               :relation => relation_public))
   end
   
@@ -313,17 +313,17 @@ class Actor < ActiveRecord::Base
     @active_ties ||= {}
   end
 
-  # This {Actor} #allow s subject to create activities and subject has at least one tie to subject
-  def activity_ties_for(subject)
+  # subject must {#allow} this {Actor} to create activities in one of the ties to him
+  def activity_ties_to(subject)
     active_ties[subject] ||=
-      ( allow?(subject, 'create', 'activity') ?
-        subject.ties_to!(self) :
+      ( subject.allow?(self, 'create', 'activity') ?
+        ties_to!(subject) :
         [] )
   end
 
   # Builds a hash of options their spheres as keys
-  def grouped_activity_ties_for(subject)
-    ties = activity_ties_for(subject)
+  def grouped_activity_ties_to(subject)
+    ties = activity_ties_to(subject)
 
     spheres =
       ties.map{ |t| t.relation.respond_to?(:sphere) ? t.relation.sphere : I18n.t('relation_public.name') }.uniq
@@ -353,8 +353,8 @@ class Actor < ActiveRecord::Base
   end
 
   # Is there any {Tie} for subject to create an activity to this {Actor} ?
-  def activity_ties_for?(subject)
-    activity_ties_for(subject).any?
+  def activity_ties_to?(subject)
+    activity_ties_to(subject).any?
   end
 
   def pending_ties

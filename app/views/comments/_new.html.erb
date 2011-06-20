@@ -1,8 +1,8 @@
-<% if activity.receiver.activity_ties_for?(current_subject) %>
+<% if user_signed_in? && current_subject.activity_ties_to?(activity.receiver) %>
   <div class="activity_new_comment">
  <%= form_for Comment.new(:text => t('comment.input'),
                           :_activity_tie_id =>
-                            activity.receiver.activity_ties_for(current_subject).first.id,
+                            current_subject.activity_ties_to(activity.receiver).first.id,
                           :_activity_parent_id => activity.id
               ),
           :html => { :class => "new_comment", :id => "new_comment"+dom_id(activity)  },

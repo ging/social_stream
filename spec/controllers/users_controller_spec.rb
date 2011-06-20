@@ -46,10 +46,20 @@ describe UsersController do
       assert_response :success
     end
 
-    it "should render self page" do
+    it "should render other's page" do
       get :show, :id => Factory(:user).to_param
 
       assert_response :success
+    end
+
+    it "should render other's page with activity" do
+      tie = Factory(:friend, :receiver => @user.actor)
+      friend = tie.sender
+      Factory(:post, :_activity_tie_id => @user.activity_ties_to(friend).first)
+
+      get :show, :id => friend.to_param
+
+      response.should be_success
     end
 
     it "should render edit page" do
