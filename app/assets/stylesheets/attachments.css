@@ -28,3 +28,10 @@
 	height: 50px;
 	vertical-align: middle;
 }
+
+#new_attachment{
+	margin-top: 10px;
+	margin-left: 15px;
+	margin-bottom: 10px;
+	clear: both;
+}
