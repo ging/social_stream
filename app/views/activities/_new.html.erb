@@ -32,7 +32,7 @@
 <% end %><!-- END OF FORM -->
 
 <% SocialStream.activity_forms.each do |element| %>
-	<%= render :partial => element.to_s+'/new', :locals =>{:a_tie_id => 		current_subject.activity_ties_to(receiver).first.id} %>
+	<%= render :partial => element.to_s.pluralize+'/new', :locals =>{:a_tie_id => 		current_subject.activity_ties_to(receiver).first.id} %>
 <% end %>
 
 <div id="activities_share_btn">
