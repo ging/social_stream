@@ -1,4 +1,4 @@
-<% if current_subject.activity_ties_to?(receiver) %>
+<% if user_signed_in? && current_subject.activity_ties_to?(receiver) %>
   <% content_for :javascript do %>
 
     securityImage = "<%= escape_javascript(image_tag('btn/btn_security.png', :id => 'security_image', :alt => 'security')) %>";
@@ -31,7 +31,9 @@
 </div>
 <% end %><!-- END OF FORM -->
 
-<%= render :partial => 'attachments/new', :locals =>{:a_tie_id => current_subject.activity_ties_to(receiver).first.id} %>
+<% SocialStream.activity_forms.each do |element| %>
+	<%= render :partial => element.to_s+'/new', :locals =>{:a_tie_id => 		current_subject.activity_ties_to(receiver).first.id} %>
+<% end %>
 
 <div id="activities_share_btn">
 <div id="securities"><%= select_tag :_activity_tie_id, options_for_select(current_subject.activity_ties_to(receiver).sort{ |t, u| t.relation <=> u.relation }.map{ |t| [ t.relation_name, t.id ] }), :id => 'security' %></div>
