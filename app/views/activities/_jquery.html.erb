@@ -1,9 +1,26 @@
+//initial state
+$('#wrapper_activities_header form').hide();
+$('#new_post').show();
+
+//clicks on headers
+$('.activities_title_header').live('click',function(){
+	$('.activities_title_header').removeClass('selected');
+	$(this).addClass('selected');
+	$('#wrapper_activities_header form').hide();
+	$('#new_'+this.id.split("_")[1]).show();
+});
+
+//submit
+$('#masterSubmitButton').live('click',function(){
+	$('#wrapper_activities_header form:visible').submit();
+});
+
 //javascript for main activities input
 title = "<%= t('activity.input') %>";
 $("#input_activities").click(function(){
   if(this.value == title){
     this.value="";
-    $("#activities_share_btn").show();
+    $("#masterSubmitButton").show();
   }
 });
 

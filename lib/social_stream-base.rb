@@ -61,6 +61,10 @@ module SocialStream
   mattr_writer :objects
   @@objects = [ :post, :comment ]
 
+  mattr_accessor :activity_forms
+  #@@activity_forms = [:attachment]
+  @@activity_forms = []
+  
   class << self
     def setup
       yield self

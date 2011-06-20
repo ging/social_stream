@@ -10,7 +10,14 @@
 <div id="wrapper_activities">
   <div id="wrapper_activities_header">
     <div id="activities_title" class="content_size">
-      <%= image_tag("btn/btn_activities.png") %> <%=t('activity.other')%>
+		<div id="header_post" class="activities_title_header">
+      		<%= image_tag("btn/btn_activities.png") %> <%=t('activity.other')%>
+		</div>
+		<% SocialStream.activity_forms.each do |element| %>
+			<div id="header_<%= element %>" class="activities_title_header">	
+	      		<%= image_tag("btn/"+element.to_s+".png") %> <%=t(element.to_s+'.title')%>
+			</div>
+		<% end %> 	
     </div>
     <%= render :partial => 'activities/new', :locals => { :receiver => owner } %>
   </div>

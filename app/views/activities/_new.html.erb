@@ -1,4 +1,4 @@
-<% if user_signed_in? && current_subject.activity_ties_to?(receiver) %>
+<% if current_subject.activity_ties_to?(receiver) %>
   <% content_for :javascript do %>
 
     securityImage = "<%= escape_javascript(image_tag('btn/btn_security.png', :id => 'security_image', :alt => 'security')) %>";
@@ -7,6 +7,9 @@
     $("#security").dropdownchecklist( { closeRadioOnClick: true } );
     $("#security_image").parent().width(28);
     $("#security_image").parent().parent().width(28);
+	$('#security').change(function() {
+	  $('input[name*="_activity_tie_id"]').val($('#security').attr("value"));
+	});
   <% end %>
 
   <div id="activities_header" class="content_size">
@@ -14,19 +17,24 @@
                           :_activity_tie_id => current_subject.activity_ties_to(receiver).first.id),
                           :remote => true  do |f| %>
       <%= f.text_field :text, :id => "input_activities", :size => 85 %>
-      <div id="activities_share_btn">
-
+      <%= f.hidden_field :_activity_tie_id %>
+      <!--<div id="activities_share_btn">
         <% if current_subject.activity_ties_to(receiver).count > 1 %>
           <div id="securities">
-            <%= f.select :_activity_tie_id,
-                          grouped_options_for_select(current_subject.grouped_activity_ties_to(receiver)),
-                         {}, :id => 'security' %>
+            <%= f.select :_activity_tie_id, current_subject.activity_ties_to(receiver).sort{ |t, u| t.relation <=> u.relation }.map{ |t| [ t.relation_name, t.id ] }, {}, :id => 'security' %>
           </div>
         <% else %>
           <%= f.hidden_field :_activity_tie_id %>
         <% end %>
         <%= f.submit t('share'), :class =>"myButtonBlue" %>
-      </div>
-    <% end -%>
-  </div>
+    </div>-->
+</div>
+<% end %><!-- END OF FORM -->
+
+<%= render :partial => 'attachments/new', :locals =>{:a_tie_id => current_subject.activity_ties_to(receiver).first.id} %>
+
+<div id="activities_share_btn">
+<div id="securities"><%= select_tag :_activity_tie_id, options_for_select(current_subject.activity_ties_to(receiver).sort{ |t, u| t.relation <=> u.relation }.map{ |t| [ t.relation_name, t.id ] }), :id => 'security' %></div>
+<%= submit_tag(t('share'), :class => "myButtonBlue", :id => "masterSubmitButton") %>
+</div>
 <% end %>
