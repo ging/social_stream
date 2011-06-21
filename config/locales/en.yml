@@ -1,5 +1,5 @@
 en:
-  attachment:
+  document:
     confirm_delete: "Delete activity?"
-    title: "Attachments"
-    mine: "My attachments"
+    title: "Documents"
+    mine: "My documents"

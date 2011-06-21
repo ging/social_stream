@@ -1,0 +1,57 @@
+.attachment
+{
+	padding-top: 10px;
+}
+
+.attachment_text
+{
+	position: relative;
+	width: 90%;
+	vertical-align: middle;
+	line-height: 50px;
+	height: 50px;
+	float:left;
+	font-size:13px;
+}
+
+.attachment_text a
+{
+	color: #2A3890;
+	padding-left: 10px;
+}
+
+.attachment_thumb
+{
+	position: relative;
+	width: 10%;
+	float: left;
+	height: 50px;
+	vertical-align: middle;
+}
+
+#new_attachment{
+	margin-top: 10px;
+	margin-left: 15px;
+	margin-bottom: 10px;
+	clear: both;
+}
+
+.attachment_tile{
+	margin: 4px;
+	width: 80px;
+	height: 65px;
+	border: 1px solid transparent;
+	float: left;
+	text-align: center;
+	overflow: hidden;
+}
+
+.attachment_section_header{
+	margin-top: 15px;
+	margin-bottom: 5px;
+	padding-left: 10px;
+	position: relative;
+	width:90%;
+	border-left: 3px solid #2A3890;
+	background-color: #e0edf2;
+}

@@ -1,3 +1,4 @@
 Rails.application.routes.draw do
-  resources :attachments
+  resources :documents
+  match 'documents/:id/download' => 'documents#download'
 end
