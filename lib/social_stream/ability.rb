@@ -4,7 +4,10 @@ module SocialStream
 
     # Create a new ability for this user, who is currently representing subject
     def initialize(subject)
-
+      
+      #Download alias action
+      alias_action :download, :to => :show
+      
       # Activity Objects
       (SocialStream.objects - [ :actor ]).map{ |obj|
         obj.to_s.classify.constantize
