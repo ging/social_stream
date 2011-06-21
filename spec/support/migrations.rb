@@ -21,6 +21,6 @@ MigrationFinder.new 'acts-as-taggable-on',
 MigrationFinder.new 'mailboxer',
                     ['generators', 'mailboxer', 'templates', 'migration']
 
-# Social Stream Attachments
-MigrationFinder.new 'social_stream-attachments',
-                    ['..', 'db', 'migrate', '20110615143707_create_social_stream_attachments.rb']
+# Social Stream Documents
+MigrationFinder.new 'social_stream-documents',
+                    ['..', 'db', 'migrate', '20110615143707_create_social_stream_documents.rb']

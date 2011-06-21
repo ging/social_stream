@@ -12,7 +12,7 @@ if File.exists?(File.join(File.dirname(__FILE__), '..', 'social_stream-base'))
   gem 'social_stream-base', :path => '../social_stream-base'
 end
 
-# gem 'social_stream-files', :path => '../social_stream-files'
+# gem 'social_stream-documents', :path => '../social_stream-documents'
 # gem 'social2social', :path => '../social2social'
 
 gemspec
