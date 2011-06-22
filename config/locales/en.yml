@@ -1,5 +1,21 @@
 en:
   document:
-    confirm_delete: "Delete activity?"
+    confirm_delete: "Delete document?"
     title: "Documents"
     mine: "My documents"
+    msg: "Just uploaded a document:"
+  picture:
+    confirm_delete: "Delete picture?"
+    title: "Pictures"
+    mine: "My pictures"  
+    msg: "Just uploaded a picture:"
+  video:
+    confirm_delete: "Delete video?"
+    title: "Videos"
+    mine: "My videoss"  
+    msg: "Just uploaded a video:" 
+  audio:
+    confirm_delete: "Delete audio?"
+    title: "Audios"
+    mine: "My audios"  
+    msg: "Just uploaded an audio:"  

@@ -1,0 +1,23 @@
+<% content_for :headers do %>
+	<%= stylesheet_link_tag "documents" %>
+<% end %>
+
+<%= div_for audio, :class => 'content_size' do %>
+
+  <div class="attachment_thumb">
+    <%= link_to thumb_for(audio),
+        {:controller => "documents", :action => "download", :id => audio}, 
+        :class => "" %>
+  </div>
+  
+  <div class="attachment_text">
+  	<%= t('audio.msg') %><%= link_to audio.file_file_name, 
+    {:controller => "documents", :action => "download", :id => audio},  
+    :class => "" %>
+
+	<audio src="<%= download_document_path(audio) %>" controls="controls">
+		Your browser does not support the audio element.
+	</audio>
+  </div>
+
+<% end %>

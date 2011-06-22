@@ -1,3 +1,17 @@
 <li>
-  <%= link_to( image_tag("btn/document.png", :class => "menu_icon")+t('document.title'), documents_path) %>
+  <%= link_to( image_tag("btn/document.png", :class => "menu_icon")+t('document.title'), documents_path) %>	
+	<ul>
+		<li>
+			<%= link_to( image_tag("btn/btn_gallery.png", 
+		        :class => "menu_icon")+t('picture.title'), pictures_path) %>
+		</li>
+		<li>
+			<%= link_to( image_tag("btn/btn_video.png", 
+			    :class => "menu_icon")+t('video.title'), videos_path) %>
+		</li>
+		<li>
+			<%= link_to( image_tag("btn/btn_outline.png", 
+			:class => "menu_icon")+t('audio.title'), audios_path) %>
+		</li>	
+	</ul>
 </li>

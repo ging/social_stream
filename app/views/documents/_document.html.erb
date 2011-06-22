@@ -11,7 +11,7 @@
   </div>
   
   <div class="attachment_text">
-  	Just uploaded a file:<%= link_to document.file_file_name, 
+  	<%= t('document.msg') %><%= link_to document.file_file_name, 
     {:controller => "documents", :action => "download", :id => document},  
     :class => "" %>
   </div>

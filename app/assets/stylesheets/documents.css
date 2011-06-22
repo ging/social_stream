@@ -8,8 +8,8 @@
 	position: relative;
 	width: 90%;
 	vertical-align: middle;
-	line-height: 50px;
-	height: 50px;
+	line-height: 20px;
+	height: auto;
 	float:left;
 	font-size:13px;
 }
@@ -18,6 +18,17 @@
 {
 	color: #2A3890;
 	padding-left: 10px;
+}
+
+.attachment_text audio
+{
+	position:relative;
+}
+
+.attachment_text video
+{
+	position:relative;
+	height: 180px;
 }
 
 .attachment_thumb
@@ -29,7 +40,7 @@
 	vertical-align: middle;
 }
 
-#new_attachment{
+#new_document{
 	margin-top: 10px;
 	margin-left: 15px;
 	margin-bottom: 10px;

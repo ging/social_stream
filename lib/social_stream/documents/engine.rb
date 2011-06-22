@@ -12,6 +12,7 @@ module SocialStream
         Mime::Type.register "image/png", :png, [ "image/x-png" ]
         Mime::Type.register "image/bmp", :bmp
       end
+
     end
   end
 end

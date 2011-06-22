@@ -7,9 +7,8 @@ class DocumentsController < InheritedResources::Base
   
   def show
     path = @document.file.path(params[:style])
-    puts path
     respond_to do |format|
-      format.png {send_file path, 
+      format.all {send_file path, 
                   :type => @document.file_content_type,
                   :disposition => "inline"}
     end
@@ -31,7 +30,13 @@ class DocumentsController < InheritedResources::Base
   def index
     @document_activities = current_subject.wall(:profile,
                                         :for => current_subject,
-                                        :object_type => :Document).all;
+                                        :object_type => [:Audio,:Video,:Picture,:Document]).all;
+  end
+    
+  def create
+    super do |format|
+      format.all {redirect_to documents_path}
+    end
   end
 
 end

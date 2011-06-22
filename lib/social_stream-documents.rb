@@ -2,7 +2,6 @@ require 'social_stream-base'
 
 module SocialStream
   module Documents
-
   end
 end
 

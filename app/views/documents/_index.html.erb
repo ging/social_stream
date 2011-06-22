@@ -11,7 +11,7 @@
   		</div>
 
   		<div class="attachment_tile_text">
-  			<%= link_to wrap_file_name(document.file_file_name),
+  			<%= link_to document.file_file_name,
                 {:controller => "documents", :action => "download", :id => document},
                 :class => "",
  				:alt => document.file_file_name %>
