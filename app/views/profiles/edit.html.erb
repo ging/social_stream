@@ -46,41 +46,37 @@ end %>
 <div class="block" id="profile_form">
   
   <% if !params[:section].present? or params[:section].eql?("tags") %>
-	<% content_for :headers do %>
-	  <%= stylesheet_link_tag "fcbkComplete.css", :media => "screen, projection" %>
-	  <%= javascript_include_tag 'jquery.fcbkcomplete.min', 'jquery.validate' %>
-	<% end %>
-	
-	<% content_for :javascript do %>
-	  $(function() {
-	    $(".new_group").validate();
-	  });
-	  $("#profile_actor_attributes_tag_list").fcbkcomplete({
-	    json_url: "<%= tags_path(:format => :json) %>",
-			cache: false,
-			filter_case: true,
-			filter_hide: true,
-			newel: false,
-			height: 6
-	  });
-	 <% @profile.subject.tag_list.each do |tag| %> $("#profile_actor_attributes_tag_list").trigger("addItem",{"title":"<%= tag %>","value":"<%= tag %>"});
-	<% end %>
-	<% end %>
-	
+  	<% content_for :headers do %>
+  	  <%= stylesheet_link_tag "fcbkComplete.css", :media => "screen, projection" %>
+  	  <%= javascript_include_tag 'jquery.fcbkcomplete.min', 'jquery.validate' %>
+  	<% end %>
+  	
+  	<% content_for :javascript do %>
+  	  $(function() {
+  	    $(".new_group").validate();
+  	  });
+  	  $("#profile_actor_attributes_tag_list").fcbkcomplete({
+  	    json_url: "<%= tags_path(:format => :json) %>",
+  			cache: false,
+  			filter_case: true,
+  			filter_hide: true,
+  			newel: false,
+  			height: 6
+  	  });
+  	 <% @profile.subject.tag_list.each do |tag| %> $("#profile_actor_attributes_tag_list").trigger("addItem",{"title":"<%= tag %>","value":"<%= tag %>"});
+  	 <% end %>
+  	<% end %>
+  	
     <div class="row">
-		<div class="form_row">
-		      	  <%= f.fields_for :actor do |actor_form| %>
-				    <div class="form_row">
-				      <div class="form_label">
-				       <%= f.label t(current_subject.class.to_s.downcase + '.tags') %>
-				      </div>
-				      <div class="form_field">
-						<%= actor_form.select :tag_list, [], :class => "form_tag" %>				
-				      </div>
-				    </div>
-		      	 <%end%>
-    	</div>
-	</div>
+      <div class="form_row">
+        <h2><%=t('profile.tags.other')%></h2>
+      </div>
+      <%= f.fields_for :actor do |actor_form| %>
+        <div class="form_row">
+  			 <%= actor_form.select :tag_list, [], :class => "form_tag" %>
+        </div>
+      <%end%>
+  	</div>
   <% end %>
   
   <% if !params[:section].present? or params[:section].eql?("about_me") %>

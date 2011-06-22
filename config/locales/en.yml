@@ -182,6 +182,7 @@ en:
     trash: "Trash"
     send: "Send a message"
   notification:
+    destroy_sure: "Do you want to delete this notification?"
     one: "Notification"
     other: "Notifications"
     read: "Mark as read"
