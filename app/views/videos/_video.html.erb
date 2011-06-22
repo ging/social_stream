@@ -15,7 +15,7 @@
     {:controller => "documents", :action => "download", :id => video},  
     :class => "" %>
 
-	<video src="<%= download_document_path(video) %>" controls="controls">
+	<video src="<%= video_path(video)+"?style=webm" %>" controls="controls">
 		Your browser does not support the video element.
 	</video>
   </div>

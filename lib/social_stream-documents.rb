@@ -5,4 +5,5 @@ module SocialStream
   end
 end
 
+require 'paperclip_processors/ffmpeg'
 require 'social_stream/documents/engine'
