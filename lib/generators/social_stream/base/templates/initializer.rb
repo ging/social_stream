@@ -17,5 +17,5 @@ SocialStream.setup do |config|
   # config.objects = [ :post, :comment ]
   
   # Form modules to be loaded 
-  # config.activity_forms = [ :attachment, :other_module, :foo, :bar ]
+  # config.activity_forms = [ :document, :other_module, :foo, :bar ]
 end

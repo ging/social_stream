@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  #Background tasks
+  mount Resque::Server, :at => "/resque"
+  
   root :to => "frontpage#index"
   
   match 'home' => 'home#index', :as => :home

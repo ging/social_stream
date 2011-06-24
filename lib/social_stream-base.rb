@@ -29,6 +29,8 @@ require 'acts-as-taggable-on'
 require 'acts_as_taggable_on/social_stream'
 # HTML forms
 require 'formtastic'
+#Background tasks
+require 'resque/server'
 
 # Provides your Rails application with social network and activity stream support
 module SocialStream
@@ -62,7 +64,7 @@ module SocialStream
   @@objects = [ :post, :comment ]
 
   mattr_accessor :activity_forms
-  #@@activity_forms = [:attachment]
+  ##@@activity_forms = [:document]
   @@activity_forms = []
   
   class << self
