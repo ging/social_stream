@@ -18,5 +18,5 @@ class VideosController < InheritedResources::Base
                                         :for => current_subject,
                                         :object_type => :Video).all;
   end
-  
+    
 end
