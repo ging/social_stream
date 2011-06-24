@@ -5,7 +5,7 @@ class NotificationsController < ApplicationController
   before_filter :check_current_subject_is_owner, :only => [:show, :update, :destroy]
   
   def index
-    @notifications = @mailbox.notifications.page(params[:page]).per(10)
+    @notifications = @mailbox.notifications.not_trashed.page(params[:page]).per(10)
   end
 
   def show
