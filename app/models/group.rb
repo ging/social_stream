@@ -40,7 +40,8 @@ class Group < ActiveRecord::Base
     
      @_participants.each do |participant|
       
-      participant_actor = Actor.find_by_slug!(participant)
+      #participant_actor = Actor.find_by_slug!(participant)
+      participant_actor = Actor.find_by_id!(participant)
 
       sent_ties.create! :receiver => participant_actor,
                         :relation => relation_customs.sort.first
