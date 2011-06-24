@@ -16,7 +16,6 @@
     <%= raw decode_notification notification.subject,notification.object %>
   </div>
   <div class="briefing">
-    ////// <%= notification.is_unread?(@actor) %> ////// <%= notification.is_trashed?(@actor) %> ///////
     <%= raw decode_notification notification.body, notification.object %>
   </div>
   <div class="clearfloat">
