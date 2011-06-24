@@ -1,3 +1,3 @@
 <li>
-  <%= link_to( image_tag("btn/btn_notification.png", :class => "menu_icon")+t('notification.other'), notifications_path) %>
+  <%= link_to( image_tag("btn/btn_notification.png", :class => "menu_icon")+t('notification.other')+' ('+@notifications.count.to_s+')', notifications_path)  %>
 </li>

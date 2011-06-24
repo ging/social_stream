@@ -44,7 +44,7 @@ class NotificationsController < ApplicationController
   end
 
   def destroy
-    @notification.destroy
+    @notification.receipt_for(@actor).move_to_trash
     redirect_to notifications_path
   end
 

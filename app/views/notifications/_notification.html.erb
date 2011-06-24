@@ -16,6 +16,7 @@
     <%= raw decode_notification notification.subject,notification.object %>
   </div>
   <div class="briefing">
+    ////// <%= notification.receipt_for(@actor).first.trashed%> ///////
     <%= raw decode_notification notification.body, notification.object %>
   </div>
   <div class="clearfloat">
