@@ -1,9 +1,9 @@
 module DocumentsHelper
 
-  FORMATS = ["doc","ppt","xls","rar","zip","mp3","plain","pdf"]
+  FORMATS = ["msword","vnd.ms-powerpoint","msexcel","rar","zip","mp3","plain","pdf"]
   
   def thumb_for(document)
-    format = document.file_content_type
+    format = document.file_content_type 
     if FORMATS.include?(format.split('/')[1])
       image_tag 'formats/'+format.split('/')[1]+'.png' 
     else
