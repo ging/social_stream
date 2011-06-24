@@ -1,11 +1,9 @@
 class Relation::Public < Relation
-  attr_accessor :actor
-
-  after_create :initialize_tie
-
   scope :actor, lambda { |a|
-    joins(:ties).merge(Tie.sent_by(a))
+    where(:actor_id => Actor.normalize_id(a))
   }
+
+  validates_presence_of :actor_id
 
   class << self
     def default_for(actor)
@@ -31,12 +29,5 @@ class Relation::Public < Relation
   # Are we supporting custom permissions for {Relation::Public}? Not by the moment.
   def allow?(user, action, object)
     action == 'read' && object == 'activity'
-  end
-
-  private
-
-  def initialize_tie
-    ties.create! :sender => actor,
-                 :receiver => actor
   end
 end

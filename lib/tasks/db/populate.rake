@@ -76,9 +76,9 @@ namespace :db do
       10.times do
         founder = available_actors[rand(available_actors.size)]
         
-        Group.create :name  => Forgery::Name.company_name,
-                     :email => Forgery::Internet.email_address,
-        :_founder => founder.slug
+        Group.create! :name  => Forgery::Name.company_name,
+                      :email => Forgery::Internet.email_address,
+                      :_founder => founder.slug
       end
       
       set_logos(Group)
@@ -101,8 +101,9 @@ namespace :db do
         
         Forgery::Basic.number(:at_most => actors.size).times do
           actor = actors.delete_at((rand * actors.size).to_i)
-          a.sent_ties.create :receiver => actor,
-                             :relation => relations.random
+          Contact.create! :sender_id => a.id,
+                          :receiver_id => actor.id,
+                          :relation_ids => Array(relations.random.id)
         end
       end
       
@@ -121,7 +122,8 @@ namespace :db do
                       "This post should be for #{ t.relation.name } of #{ t.sender.name }.\n#{ Forgery::LoremIpsum.paragraph(:random => true) }",
                         :created_at => Time.at(rand(updated)),
                         :updated_at => updated,
-        :_activity_tie_id => t.id
+                        :_contact_id => t.contact_id,
+                        :_relation_ids => Array(t.relation_id)
         
         p.post_activity.update_attributes(:created_at => p.created_at,
                                           :updated_at => p.updated_at)

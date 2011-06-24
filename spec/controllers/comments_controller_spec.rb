@@ -13,27 +13,34 @@ describe CommentsController do
 
     describe "comment from user" do
       before do
-        model_assigned_to @user.sent_ties.received_by(@user).related_by(@user.relation_customs.sort.first).first
+        contact = @user.contact_to!(@user)
+        relation = @user.relation_customs.sort.first
+
+        model_assigned_to contact, relation
       end
 
       it_should_behave_like "Allow Creating"
     end
 
-    describe "comment from friend" do
+    describe "comment to friend" do
       before do
-        f = Factory(:friend, :receiver => @user.actor).sender
+        f = Factory(:friend, :contact => Factory(:contact, :receiver => @user.actor)).sender
+        contact = @user.contact_to!(f)
+        relation = f.relation_custom('friend')
 
-        model_assigned_to Factory(:friend, :sender => @user.actor, :receiver => f)
+        model_assigned_to contact, relation
       end
 
       it_should_behave_like "Allow Creating"
     end
 
-    describe "post from acquaintance" do
+    describe "post to acquaintance" do
       before do
-        a = Factory(:acquaintance, :receiver => @user.actor).sender
+        a = Factory(:acquaintance, :contact => Factory(:contact, :receiver => @user.actor)).sender
+        contact = @user.contact_to!(a)
+        relation = a.relation_custom('acquaintance')
 
-        model_assigned_to Factory(:friend, :sender => @user.actor, :receiver => a)
+        model_assigned_to contact, relation
       end
 
       it_should_behave_like "Deny Creating"

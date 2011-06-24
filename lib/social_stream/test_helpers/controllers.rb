@@ -32,8 +32,9 @@ module SocialStream
         model_class.count
       end
 
-      def model_assigned_to tie
-        model_attributes[:_activity_tie_id] = tie.id
+      def model_assigned_to contact, relation_ids
+        model_attributes[:_contact_id] = contact.id
+        model_attributes[:_relation_ids] = Array(relation_ids).map(&:id)
       end
 
       shared_examples_for "Allow Creating" do

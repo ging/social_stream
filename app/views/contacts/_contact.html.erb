@@ -11,7 +11,7 @@
       <%= contact_brief(contact.receiver_subject) %>
     </div>
     <div class="link" id="contact_link<%= dom_id(contact.receiver_subject)%>">
-      <%= new_contact_link(contact) %>
+      <%= contact_to(contact.receiver) %>
     </div>
   </div>
   <div class="close"><%=link_to('X','#')%></div>

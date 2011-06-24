@@ -4,38 +4,37 @@ describe ContactsController do
 
   render_views
 
-  before do
-    sign_in Factory(:friend).sender_subject
+  before(:all) do
+    @tie = Factory(:friend)
+    @user = @tie.sender_subject
   end
 
-  describe "GET 'index'" do
-    it "should be successful" do
-      get 'index'
-      response.should be_success
-    end
+  it "should be successful" do
+    sign_in @user
+
+    get 'index'
+    response.should be_success
   end
 
-  describe "when authenticated" do
-    before do
-      @user = Factory(:user)
+  it "should render edit" do
+    sign_in @user
 
-      sign_in @user
-    end
+    get :edit, :id => @tie.contact_id
 
-    it "should render edit" do
-      get :edit, :id => Factory(:user).actor_id
+    assert_response :success
+  end
 
-      assert_response :success
-    end
+  it "should render update" do
+    sign_in @user
 
-    it "should render update" do
-      contact = Factory(:user)
+    put :update, :id => @tie.contact_id,
+                 :contact => { "relation_ids" => [ "gotcha", @user.relations.last.id ] }
 
-      put :update, :id => contact.actor_id,
-                   :contact => { "relation_ids" => [ "gotcha", @user.relations.first.id ] }
-
-      response.should redirect_to(contact)
-      @user.sent_ties.received_by(contact).first.relation.should == @user.relations.first
-    end
+    response.should redirect_to(@tie.receiver_subject)
+    @user.reload.
+      sent_ties.
+      merge(Contact.received_by(@tie.receiver)).
+      first.relation.
+      should == @user.relations.last
   end
 end

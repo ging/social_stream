@@ -4,11 +4,10 @@ class ContactsController < ApplicationController
   def index
     @contacts =
       current_subject.
-        contacts(:direction => :sent){ |q|
+        contacts(:direction => :sent, :relations => params[:relation]){ |q|
           q.alphabetic.
             letter(params[:letter]).
-            search(params[:search]).
-            merge(Tie.related_by(current_subject.relation_customs.find_by_id(params[:relation])))
+            search(params[:search])
         }
 
     respond_to do |format|
@@ -18,16 +17,17 @@ class ContactsController < ApplicationController
     end
   end
 
-  def new
-    @contact = Contact.new(current_actor, params[:id].to_i)
-  end
-
   def edit
-    @contact = Contact.new(current_actor, params[:id].to_i)
+    @contact = current_subject.sent_contacts.find params[:id]
   end
 
   def update
-    @contact = Contact.new(current_actor, params[:id].to_i)
+    @contact = current_subject.sent_contacts.find params[:id]
+
+    # This should be in the model
+    if params[:contact][:relation_ids].present?
+      params[:contact][:relation_ids].delete("gotcha")
+    end
 
     if @contact.update_attributes(params[:contact])
       redirect_to @contact.receiver_subject
@@ -37,7 +37,7 @@ class ContactsController < ApplicationController
   end
 
   def suggestion
-    @tie = current_subject.suggestion
+    @contact = current_subject.suggestion
     render :layout  => false
   end
 end

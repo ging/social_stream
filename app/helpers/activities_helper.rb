@@ -18,4 +18,9 @@ module ActivitiesHelper
       end
     end
   end
+
+  # Build a new activity based on the current_subject. Useful for authorization queries
+  def new_activity(receiver)
+    Activity.new :contact_id => (user_signed_in? ? current_subject.contact_to!(receiver).id : nil)
+  end
 end

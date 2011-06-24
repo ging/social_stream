@@ -60,7 +60,7 @@ describe GroupsController do
     end
 
     it "should render contact group" do
-      @group = Factory(:member, :receiver => @user.actor).sender_subject
+      @group = Factory(:member, :contact => Factory(:group_contact, :receiver => @user.actor)).sender_subject
       get :show, :id => @group.to_param
 
       assert_response :success
@@ -90,8 +90,8 @@ describe GroupsController do
 
         group = assigns(:group)
 
-        Group.count.should eq(count + 1)
         group.should be_valid
+        Group.count.should eq(count + 1)
         assigns(:current_subject).should eq(group)
         response.should redirect_to(:home)
       end
@@ -117,7 +117,7 @@ describe GroupsController do
 
     context "a existing own group" do
       before do
-        @current_model = Factory(:member, :receiver => @user.actor).sender_subject
+        @current_model = Factory(:member, :contact => Factory(:group_contact, :receiver => @user.actor)).sender_subject
       end
 
       it "should update contact group" do

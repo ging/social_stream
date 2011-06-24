@@ -12,21 +12,19 @@ user:
     name: friend
     permissions:
       - [ follow ]                            # follow the activities of the friend
-      - [ create,  activity ]                 # let the friend create activities
-      - [ read,    activity, weak_star_ties ] # friend can read activities from the other friends and below
-      - [ update,  activity ]                 # update her activities
-      - [ destroy, activity ]                 # delete her activities
+      - [ create,  activity, same_level ]     # let the friend create activities
+      - [ read,    activity, same_and_lower_levels ] # friend can read activities from the other friends and below
     sphere: personal
   acquaintance:
     name: acquaintance
     parent: friend # friend relation is stronger than acquaintance
     permissions:
-      - [ read,    activity, weak_star_ties ]
+      - [ read,    activity, same_and_lower_levels ]
     sphere: personal
   partner:
     name: partner
     permissions:
-      - [ read, activity, weak_star_ties ]
+      - [ read, activity, same_and_lower_levels ]
     sphere: work
 
 group:
@@ -34,16 +32,14 @@ group:
     name: member
     permissions:
       - [ represent ]                         # let the member act as the group
-      - [ create,  activity ]                 # let them member create activities
-      - [ read,    activity, weak_star_ties ] # read activities from other members
-      - [ update,  activity ]                 # update her activities
-      - [ destroy, activity ]                 # delete her activities
-      - [ read,    tie,      weak_star_ties ]
+      - [ create,  activity, same_and_lower_levels ] # let them member create activities
+      - [ read,    activity, same_and_lower_levels ] # read activities from other members
+      - [ read,    tie,      same_and_lower_levels ]
     sphere: organization
   partner:
     name: partner
     parent: member # member is stronger than partner
     permissions:
-      - [ read,    activity, weak_star_ties ]
+      - [ read,    activity, same_and_lower_levels ]
     sphere: external_relations
 

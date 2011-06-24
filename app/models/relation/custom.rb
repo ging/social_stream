@@ -13,14 +13,16 @@ class Relation::Custom < Relation
   inspect
   has_ancestry
 
-  belongs_to :sphere
-  has_one    :actor, :through => :sphere
+  attr_protected :actor_id
 
-  validates_presence_of :name, :sphere_id
+  belongs_to :sphere
+  belongs_to :actor
+
+  validates_presence_of :name, :sphere_id, :actor_id
   validates_uniqueness_of :name, :scope => :sphere_id
 
   before_validation :assign_parent, :on => :create
-  after_create :initialize_tie
+  before_validation :assign_actor,  :on => :create
 
   class << self
     # Relations configuration
@@ -102,7 +104,6 @@ class Relation::Custom < Relation
     path
   end
 
-
   private
 
   # Before create callback
@@ -114,9 +115,10 @@ class Relation::Custom < Relation
     self.parent = sphere.customs.sort.last
   end
 
-  # Create reflexive tie for the owner of this {Relation::Custom custom relation}
-  def initialize_tie
-    ties.create! :sender => sphere.actor,
-                 :receiver => sphere.actor
+  # Before create callback
+  #
+  # Assign the sphere's actor
+  def assign_actor
+    self.actor = sphere.actor
   end
 end

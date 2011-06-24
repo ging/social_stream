@@ -20,8 +20,8 @@ class User < ActiveRecord::Base
   
   def recent_groups
     contacts(:type => :group, :direction => :sent) do |q|
-      q.select("ties.created_at").
-        merge(Tie.recent)
+      q.select("contacts.created_at").
+        merge(Contact.recent)
     end
   end
 

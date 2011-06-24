@@ -16,9 +16,10 @@ describe PostsController do
     describe "posts to user" do
       describe "with first relation" do
         before do
-          tie = @user.sent_ties.received_by(@user).related_by(@user.relation_customs.sort.first).first
-          model_assigned_to tie
-          @current_model = Factory(:post, :_activity_tie_id => tie)
+          contact = @user.contact_to!(@user)
+          relation = @user.relation_customs.sort.first
+          model_assigned_to @user.contact_to!(@user), relation
+          @current_model = Factory(:post, :_contact_id => contact.id, :_relation_ids => Array(relation.id))
         end
 
         it_should_behave_like "Allow Creating"
@@ -27,9 +28,10 @@ describe PostsController do
 
       describe "with last relation" do
         before do
-          tie = @user.sent_ties.received_by(@user).related_by(@user.relation_customs.sort.last).first
-          model_assigned_to tie
-          @current_model = Factory(:post, :_activity_tie_id => tie)
+          contact = @user.contact_to!(@user)
+          relation = @user.relation_customs.sort.last
+          model_assigned_to @user.contact_to!(@user), relation
+          @current_model = Factory(:post, :_contact_id => contact.id, :_relation_ids => Array(relation.id))
         end
 
         it_should_behave_like "Allow Creating"
@@ -38,22 +40,22 @@ describe PostsController do
 
       describe "with public relation" do
         before do
-          tie = @user.sent_ties.received_by(@user).related_by(@user.relation_public).first
-          model_assigned_to tie
-          @current_model = Factory(:post, :_activity_tie_id => tie)
+          contact = @user.contact_to!(@user)
+          relation = @user.relation_public
+          model_assigned_to @user.contact_to!(@user), relation
+          @current_model = Factory(:post, :_contact_id => contact.id)
         end
 
         it_should_behave_like "Allow Creating"
         it_should_behave_like "Allow Destroying"
       end
-
     end
 
     describe "post to friend" do
       before do
-        friend = Factory(:friend, :receiver => @user.actor).sender
+        friend = Factory(:friend, :contact => Factory(:contact, :receiver => @user.actor)).sender
 
-        model_assigned_to @user.activity_ties_to(friend).first
+        model_assigned_to @user.contact_to!(friend), friend.relation_custom('friend')
       end
 
       it_should_behave_like "Allow Creating"
@@ -61,9 +63,9 @@ describe PostsController do
 
     describe "post to acquaintance" do
       before do
-        ac = Factory(:acquaintance, :receiver => @user.actor).sender
+        ac = Factory(:acquaintance, :contact => Factory(:contact, :receiver => @user.actor)).sender
 
-        model_assigned_to Factory(:friend, :sender => @user.actor, :receiver => ac)
+        model_assigned_to @user.contact_to!(ac), ac.relation_custom('acquaintance')
       end
 
       it_should_behave_like "Deny Creating"
@@ -71,14 +73,16 @@ describe PostsController do
 
     describe "posts represented group" do
       before do
-        @group = Factory(:member, :receiver_id => @user.actor_id).sender_subject
+        @group = Factory(:member, :contact => Factory(:group_contact, :receiver => @user.actor)).sender_subject
       end
 
       describe "with public relation" do
         before do
-          tie = @user.activity_ties_to(@group).first
-          model_assigned_to tie
-          @current_model = Factory(:post, :_activity_tie_id => tie)
+          contact = @user.contact_to!(@group)
+          relation = @group.relation_public
+
+          model_assigned_to contact, relation
+          @current_model = Factory(:post, :_contact_id => contact.id, :_relation_ids => Array(relation.id))
         end
 
         it_should_behave_like "Allow Creating"
@@ -92,9 +96,10 @@ describe PostsController do
 
         describe "with first relation" do
           before do
-            tie = @group.sent_ties.received_by(@group).related_by(@group.relation_customs.sort.first).first
-            model_assigned_to tie
-            @current_model = Factory(:post, :_activity_tie_id => tie)
+            contact = @group.contact_to!(@group)
+            relation = @group.relation_customs.sort.first
+            model_assigned_to contact, relation
+            @current_model = Factory(:post, :_contact_id => contact.id, :_relation_ids => Array(relation.id))
           end
 
           it_should_behave_like "Allow Creating"
@@ -103,9 +108,10 @@ describe PostsController do
 
         describe "with last relation" do
           before do
-            tie = @group.sent_ties.received_by(@group).related_by(@group.relation_customs.sort.last).first
-            model_assigned_to tie
-            @current_model = Factory(:post, :_activity_tie_id => tie)
+            contact = @group.contact_to!(@group)
+            relation = @group.relation_customs.sort.last
+            model_assigned_to contact, relation
+            @current_model = Factory(:post, :_contact_id => contact.id, :_relation_ids => Array(relation.id))
           end
 
           it_should_behave_like "Allow Creating"
@@ -114,9 +120,10 @@ describe PostsController do
 
         describe "with public relation" do
           before do
-            tie = @group.sent_ties.received_by(@group).related_by(@group.relation_public).first
-            model_assigned_to tie
-            @current_model = Factory(:post, :_activity_tie_id => tie)
+            contact = @group.contact_to!(@group)
+            relation = @group.relation_public
+            model_assigned_to contact, relation
+            @current_model = Factory(:post, :_contact_id => contact.id, :_relation_ids => Array(relation.id))
           end
 
           it_should_behave_like "Allow Creating"

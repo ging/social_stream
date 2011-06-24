@@ -28,24 +28,33 @@ class Actor < ActiveRecord::Base
            :validate => true,
            :autosave => true
   		  
-  has_many :sent_ties,
-           :class_name => "Tie",
+  has_many :sent_contacts,
+           :class_name  => 'Contact',
            :foreign_key => 'sender_id',
-           :dependent => :destroy
+           :dependent   => :destroy
+
+  has_many :received_contacts,
+           :class_name  => 'Contact',
+           :foreign_key => 'receiver_id',
+           :dependent   => :destroy
+
+  has_many :sent_ties,
+           :through => :sent_contacts,
+           :source  => :ties
   
   has_many :received_ties,
-           :class_name => "Tie",
-           :foreign_key => 'receiver_id',
-           :dependent => :destroy
+           :through => :received_contacts,
+           :source  => :ties
   
   has_many :senders,
-           :through => :received_ties,
+           :through => :received_contacts,
            :uniq => true
   
   has_many :receivers,
-           :through => :sent_ties,
+           :through => :sent_contacts,
            :uniq => true
 
+  has_many :relations
   has_many :spheres
 
   has_many :relation_customs,
@@ -75,13 +84,20 @@ class Actor < ActiveRecord::Base
   scope :distinct_initials, select('DISTINCT SUBSTR(actors.name,1,1) as initial').order("initial ASC")
 
   scope :contacted_to, lambda { |a|
-    joins(:sent_ties).merge(Tie.received_by(a).intended)
+    joins(:sent_contacts).merge(Contact.active.received_by(a))
   }
 
   scope :contacted_from, lambda { |a|
-    joins(:received_ties).merge(Tie.sent_by(a).intended)
+    joins(:received_contacts).merge(Contact.active.sent_by(a))
   }
- 
+
+  scope :followed_by, lambda { |a|
+    select("DISTINCT actors.*").
+      joins(:received_ties => { :relation => :permissions }).
+      merge(Contact.sent_by(a)).
+      merge(Permission.follow)
+  }
+
   after_create :create_initial_relations
   
   after_create :save_or_create_profile
@@ -123,29 +139,12 @@ class Actor < ActiveRecord::Base
     end
   end
   
-  
-  
   # The subject instance for this actor
   def subject
     subtype_instance ||
     activity_object.try(:object)
   end
-  
-  # All the ties sent or received by this actor
-  def ties
-    Tie.sent_or_received_by(self)
-  end
 
-  # The relations that belong to this actor.
-  #
-  # The are both {Relation::Custom} and {Relation::Public} so
-  # we get them from the reciprocal ties
-  def relations
-    Relation.
-      joins(:ties).
-      merge(Tie.sent_by(self).received_by(self))
-  end
-  
   # A given relation defined and managed by this actor
   def relation_custom(name)
     relation_customs.find_by_name(name)
@@ -187,7 +186,7 @@ class Actor < ActiveRecord::Base
     end
     
     if options[:relations].present?
-      as = as.merge(Tie.related_by(options[:relations]))
+      as = as.joins(:ties).merge(Tie.related_by(options[:relations]))
     end
     
     as
@@ -207,6 +206,11 @@ class Actor < ActiveRecord::Base
     end
     
     as.map(&:subject)
+  end
+
+  # Return a contact to subject. Create it if it does not exist
+  def contact_to!(subject)
+    Contact.find_or_create_by_sender_id_and_receiver_id id, Actor.normalize_id(subject)
   end
   
   # This is an scaffold for a recomendations engine
@@ -245,88 +249,83 @@ class Actor < ActiveRecord::Base
     
     return nil unless candidate.present?
     
-    Contact.new self, candidate.actor.id
+    Contact.new :sender => self, :receiver => candidate.actor
   end
   
-  # Set of ties sent by this actor received by a
-  def ties_to(a)
-    sent_ties.received_by(a).intended
+  # Set of ties sent by this actor received by subject
+  def ties_to(subject)
+    sent_ties.merge(Contact.received_by(subject))
   end
 
-  # Get the first of the ties created to a, or create a new one with the {Relation::Public}
-  def ties_to!(a)
-    ties_to(a).present? ?
-      ties_to(a) :
-      Array(sent_ties.create!(:receiver => Actor.normalize(a),
-                              :relation => relation_public))
+  def ties_to?(subject)
+    ties_to(subject).present?
   end
-  
+
+ 
   def ties_to?(a)
     ties_to(a).present?
   end
 
-  # The sent {Tie ties} by this {Actor} that grant subject the permission to perform action on object
-  def allow(subject, action, object = nil)
-    return [] if subject.blank?
-
-    sent_ties.allowing(subject, action, object)
-  end
-
-  # Does this {Actor} have any {Tie} to subject that grants her the permission of performing action on object
-  def allow?(subject, action, object = nil)
-    allow(subject, action, object).any?
-  end
-  
   # Can this actor be represented by subject. Does she has permissions for it?
   def represented_by?(subject)
     return false if subject.blank?
 
     self.class.normalize(subject) == self ||
-      allow?(subject, 'represent')
+      sent_ties.
+        merge(Contact.received_by(subject)).
+        joins(:relation => :permissions).
+        merge(Permission.represent).
+        any?
   end
 
-  # The set of ties from this {Actor} to itself.
-  def reflexive_ties
-    sent_ties.received_by(self)
+  # The relations that allow attaching an activity to them. This method is used for caching
+  def active_relations
+    @active_relations ||= { :sender => {}, :receiver => {} }
   end
 
-  # This Actor's public {Tie}
-  def public_tie
-    reflexive_ties.related_by(relation_public).first
+  # An {Activity} can be shared with multiple {audicences Audience}, which corresponds to a {Relation}.
+  #
+  # This method returns all the {relations Relation} that this actor can use to broadcast an Activity
+  #
+  # Options:
+  # from:: limit the relations to one side, from the :sender or the :receiver of the activity
+  #
+  def activity_relations(subject, options = {})
+    return relations if Actor.normalize(subject) == self
+
+    case options[:from]
+    when :sender
+      sender_activity_relations(subject)
+    when :receiver
+      receiver_activity_relations(subject)
+    else
+      sender_activity_relations(subject) +
+        receiver_activity_relations(subject)
+    end
   end
 
-  # Find a tie to subject with the {#relation_public}
-  def public_tie_to(subject)
-    sent_ties.received_by(subject).related_by(relation_public).first
+  # Are there any activity_relations present?
+  def activity_relations?(*args)
+    activity_relations(*args).any?
   end
 
-  # Find or create a tie to subject with the {#relation_public}
-  def public_tie_to!(subject)
-    public_tie_to(subject) ||
-      sent_ties.create!(:receiver_id => Actor.normalize_id(subject),
-                        :relation_id => relation_public.id,
-                        :intended    => false)
+  # Relations from this actor that can be read by subject
+  def sender_activity_relations(subject)
+    active_relations[:sender][subject] ||=
+      Relation.allow(subject, 'read', 'activity', :owner => self)
   end
 
-  # The ties that allow attaching an activity to them. This method is used for caching
-  def active_ties
-    @active_ties ||= {}
-  end
-
-  # subject must {#allow} this {Actor} to create activities in one of the ties to him
-  def activity_ties_to(subject)
-    active_ties[subject] ||=
-      ( subject.allow?(self, 'create', 'activity') ?
-        ties_to!(subject) :
-        [] )
+  def receiver_activity_relations(subject)
+    active_relations[:receiver][subject] ||=
+      Relation.allow(self, 'create', 'activity', :owner => subject)
   end
 
   # Builds a hash of options their spheres as keys
-  def grouped_activity_ties_to(subject)
-    ties = activity_ties_to(subject)
+  def grouped_activity_relations(subject)
+    rels = activity_relations(subject)
 
     spheres =
-      ties.map{ |t| t.relation.respond_to?(:sphere) ? t.relation.sphere : I18n.t('relation_public.name') }.uniq
+      rels.map{ |r| r.respond_to?(:sphere) ? r.sphere : I18n.t('relation_public.name') }.uniq
 
     spheres.sort!{ |x, y|
       case x
@@ -345,29 +344,29 @@ class Actor < ActiveRecord::Base
     spheres.map{ |s|
       case s
       when Sphere
-        [ s.name, ties.select{ |t| t.relation.respond_to?(:sphere) && t.relation.sphere == s }.sort{ |x, y| x.relation <=> y.relation }.map{ |u| [ u.relation.name, u.id ] } ]
+        [ s.name, rels.select{ |r| r.respond_to?(:sphere) && r.sphere == s }.sort.map{ |u| [ u.name, u.id ] } ]
       else
-        [ s, ties.select{ |t| t.relation.is_a?(Relation::Public) }.map{ |u| [ u.relation.name, u.id ] } ]
+        [ s, rels.select{ |r| r.is_a?(Relation::Public) }.map{ |u| [ u.name, u.id ] } ]
       end
     }
   end
 
-  # Is there any {Tie} for subject to create an activity to this {Actor} ?
-  def activity_ties_to?(subject)
-    activity_ties_to(subject).any?
+  # Is this {Actor} allowed to create a comment on activity?
+  def can_comment?(activity)
+    comment_relations(activity).any?
   end
 
-  def pending_ties
-    @pending_ties ||=
-    received_ties.where('ties.sender_id NOT IN (?)', sent_ties.map(&:receiver_id).uniq).map(&:sender_id).uniq.
-    map{ |i| Tie.new :sender => self,
-                         :receiver_id => i }
+  # Are there any relations that allow this actor to create a comment on activity?
+  def comment_relations(activity)
+    activity.relations.select{ |r| r.is_a?(Relation::Public) } |
+      Relation.allow(self, 'create', 'activity', :in => activity.relations)
   end
 
-  # Build a new {Contact} from each of {#pending_ties}
+  # Build a new {Contact} from each that has not inverse
   def pending_contacts
-    pending_ties.map do |t|
-      Contact.new(self, t.receiver_id)
+    received_contacts.pending.all.map do |c|
+      c.inverse ||
+        c.receiver.contact_to!(c.sender)
     end
   end
   
@@ -385,21 +384,39 @@ class Actor < ActiveRecord::Base
   #             the wall for members of the group.
   #             
   def wall(type, options = {})
-    ts = ties
+    args = {}
 
-    if type == :profile
-      ts = ( options[:for].blank? ?
-               ts.public_relation :
-               ts.allowing(options[:for], 'read', 'activity') )
+    args[:type]  = type
+    args[:owner] = self
+    # Preserve this options
+    [ :for, :object_type ].each do |opt|
+      args[opt]   = options[opt]
     end
 
-    if options[:relation].present?
-      ts = ts.related_by(Relation.normalize(options[:relation], :sender => self))
+    if type == :home
+      args[:followed] = Actor.followed_by(self).map(&:id)
     end
 
-    Activity.wall type, ts.all, options
+    # TODO: this is not scalling for sure. We must use a fact table in the future
+    args[:relation_ids] =
+      case type
+      when :home
+        # The relations from followings that can be read
+        Relation.allow(self, 'read', 'activity').map(&:id)
+      when :profile
+        # FIXME: options[:relation]
+        #
+        # The relations that can be read by options[:for]
+        options[:for].present? ?
+          Relation.allow(options[:for], 'read', 'activity').map(&:id) :
+          []
+      else
+        raise "Unknown type of wall: #{ type }"
+      end
+
+    Activity.wall args
   end
-  
+ 
   def logo
     avatar!.logo
   end
@@ -415,7 +432,7 @@ class Actor < ActiveRecord::Base
   end
   
   def liked_by(subject) #:nodoc:
-    likes.joins(:ties).where('tie_activities.original' => true).merge(Tie.sent_by(subject))
+    likes.joins(:contact).merge(Contact.sent_by(subject))
   end
   
   # Does subject like this {Actor}?
@@ -426,7 +443,7 @@ class Actor < ActiveRecord::Base
   # Build a new activity where subject like this
   def new_like(subject)
     a = Activity.new :verb => "like",
-                     :_tie => subject.public_tie_to!(self)
+                     :contact => subject.contact_to!(self)
     
     a.activity_objects << activity_object           
                     

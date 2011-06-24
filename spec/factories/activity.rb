@@ -1,10 +1,12 @@
 Factory.define :activity do |a|
-  a.association :_tie, :factory => :friend
+  a.contact { Factory(:friend).contact }
   a.activity_verb { ActivityVerb["post"] }
+  a.relation_ids  { |b| Array(b.sender.relation_custom('friend')) }
 end
 
 Factory.define :like_activity, :parent => :activity do |a|
   a.association :parent, :factory => :activity
+  a.contact { |b| Factory(:friend, :sender => b.parent.sender).receiver.contact_to!(b.parent.sender) }
   a.activity_verb { ActivityVerb["like"] }
-  a._tie { |tie| tie.association(:friend, :sender => tie.parent.tie.sender) }
+  a.relation_ids { |b| Array(b.parent.contact.ties.first.relation.id) }
 end

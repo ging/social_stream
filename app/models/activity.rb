@@ -1,61 +1,88 @@
 # Activities follow the {Activity Streams}[http://activitystrea.ms/] standard.
 #
-# == Activities and Ties
-# Every activity is attached to a Tie, which defines the sender, the receiver and
-# the relation in which the activity is transferred
+# == Activities, Contacts and Audiences
+# Every activity is attached to a {Contact}, which defines the sender and the receiver of the {Activity}
+#
+# Besides, the activity is attached to one or more relations, which define the audicence of the activity,
+# the {actors Actor} that can reach it and their {permissions Permission}
 #
 # == Wall
-# The Activity.wall(type, ties) scope provides all the activities attached to a set of ties
+# The Activity.wall(args) scope provides all the activities appearing in a wall
 #
 # There are two types of wall, :home and :profile. Check {Actor#wall} for more information
 #
 class Activity < ActiveRecord::Base
   has_ancestry
 
+  belongs_to :contact
   belongs_to :activity_verb
 
-  has_many :tie_activities, :dependent => :destroy
-  has_many :ties, :through => :tie_activities
-
-  # The original tie
-  has_one :tie_activity,
-          :conditions => { 'tie_activities.original' => true }
-  has_one :tie,
-          :through => :tie_activity
-
-  delegate :relation, :to => :tie
+  has_many :audiences, :dependent => :destroy
+  has_many :relations, :through => :audiences
 
   has_many :activity_object_activities,
            :dependent => :destroy
   has_many :activity_objects,
            :through => :activity_object_activities
 
-  scope :wall, lambda { |type, ties, options|
-    q = select("DISTINCT activities.*").
-          roots.
-          joins(:tie_activities).
-          where('tie_activities.tie_id' => ties).
-          order("created_at desc")
-          
-    if options[:object_type].present?
-      q = q.joins(:activity_objects).where('activity_objects.object_type' => options[:object_type])
+  scope :wall, lambda { |args|
+    q =
+      select("DISTINCT activities.*").
+      joins(:contact).
+      joins(:audiences).
+      joins(:relations).
+      roots
+
+    if args[:object_type].present?
+      q = q.joins(:activity_objects).
+            where('activity_objects.object_type' => args[:object_type])
     end
 
-    # Profile wall is composed by original TieActivities. Not original are copies for followers
-    if type == :profile
-      q = q.where('tie_activities.original' => true)
-    end
+    contacts   = Contact.arel_table
+    audiences  = Audience.arel_table
+    relations  = Relation.arel_table
 
-    q
+    owner_conditions =
+      contacts[:sender_id].eq(Actor.normalize_id(args[:owner])).
+        or(contacts[:receiver_id].eq(Actor.normalize_id(args[:owner])))
+
+    audience_conditions =
+      audiences[:relation_id].eq(args[:relations]).
+        or(relations[:type].eq('Relation::Public'))
+
+    conds =
+      case args[:type]
+      when :home
+        followed_conditions =
+          contacts[:sender_id].in(args[:followed]).
+            or(contacts[:receiver_id].in(args[:followed]))
+
+        owner_conditions.
+          or(followed_conditions.and(audience_conditions))
+      when :profile
+        if args[:for].present?
+          visitor_conditions =
+            contacts[:sender_id].eq(Actor.normalize_id(args[:for])).
+              or(contacts[:receiver_id].eq(Actor.normalize_id(args[:for])))
+
+          owner_conditions.
+            and(visitor_conditions.or(audience_conditions))
+        else
+          owner_conditions.
+            and(audience_conditions)
+        end
+      else
+        raise "Unknown wall type: #{ args[:type] }" 
+      end
+
+    q.where(conds).
+      order("created_at desc")
   }
-
-  # After an activity is created, it is disseminated to follower ties
-  attr_accessor :_tie
-  after_create :disseminate_to_ties
 
   after_create  :increment_like_count
   after_destroy :decrement_like_count
-  
+ 
+
   #For now, it should be the last one
   #FIXME
   after_create :send_notifications
@@ -75,7 +102,7 @@ class Activity < ActiveRecord::Base
   # This method provides the {Actor}. Use {#sender_subject} for the {SocialStream::Models::Subject Subject}
   # ({User}, {Group}, etc..)
   def sender
-    tie.sender
+    contact.sender
   end
 
   # The {SocialStream::Models::Subject Subject} author of this activity
@@ -83,7 +110,7 @@ class Activity < ActiveRecord::Base
   # This method provides the {SocialStream::Models::Subject Subject} ({User}, {Group}, etc...).
   # Use {#sender} for the {Actor}.
   def sender_subject
-    tie.sender_subject
+    contact.sender_subject
   end
 
   # The wall where the activity is shown belongs to receiver
@@ -91,7 +118,7 @@ class Activity < ActiveRecord::Base
   # This method provides the {Actor}. Use {#receiver_subject} for the {SocialStream::Models::Subject Subject}
   # ({User}, {Group}, etc..)
   def receiver
-    tie.receiver
+    contact.receiver
   end
 
   # The wall where the activity is shown belongs to the receiver
@@ -99,7 +126,7 @@ class Activity < ActiveRecord::Base
   # This method provides the {SocialStream::Models::Subject Subject} ({User}, {Group}, etc...).
   # Use {#receiver} for the {Actor}.
   def receiver_subject
-    tie.receiver_subject
+    contact.receiver_subject
   end
 
   # The comments about this activity
@@ -113,7 +140,7 @@ class Activity < ActiveRecord::Base
   end
 
   def liked_by(user) #:nodoc:
-    likes.joins(:ties).where('tie_activities.original' => true).merge(Tie.sent_by(user))
+    likes.joins(:contact).merge(Contact.sent_by(user))
   end
 
   # Does user like this activity?
@@ -124,7 +151,8 @@ class Activity < ActiveRecord::Base
   # Build a new children activity where subject like this
   def new_like(subject)
     a = children.new :verb => "like",
-    :_tie => subject.sent_ties(:receiver => receiver).first
+                     :contact => subject.contact_to!(receiver),
+                     :relation_ids => subject.comment_relations(self).map(&:id)
 
     if direct_activity_object.present?
       a.activity_objects << direct_activity_object
@@ -147,7 +175,7 @@ class Activity < ActiveRecord::Base
   def title view
     case verb
     when "follow", "make-friend", "like"
-      I18n.t "activity.verb.#{ verb }.#{ tie.receiver.subject_type }.title",
+      I18n.t "activity.verb.#{ verb }.#{ receiver.subject_type }.title",
       :subject => view.link_name(sender_subject),
       :contact => view.link_name(receiver_subject)
     when "post"
@@ -163,21 +191,43 @@ class Activity < ActiveRecord::Base
     return true if !notificable?
     #Avaible verbs: follow, like, make-friend, post, update
     actionview = ActivitiesController.new.view_context
-    if ['like','follow','make-friend','post','update'].include? verb and _tie.sender!=_tie.receiver
+
+    if ['like','follow','make-friend','post','update'].include? verb and !contact.reflexive?
       notification_subject = actionview.render :partial => 'notifications/activities/' + verb + "_subject", :locals => {:activity => self}
       notification_body = actionview.render :partial =>  'notifications/activities/' + verb + "_body", :locals => {:activity => self}
-      _tie.receiver.notify(notification_subject, notification_body, self)
+      receiver.notify(notification_subject, notification_body, self)
     end
     true
   end
 
-  private
+  # Is subject allowed to perform action on this {Activity}?
+  def allow?(subject, action)
+    return false if contact.blank?
 
-  # Assign to ties of followers
-  def disseminate_to_ties
-    # Create the original sender tie_activity
-    tie_activities.create!(:tie => _tie)
-  end
+    # We do not support private activities by now
+    return false if relation_ids.blank?
+
+    case action
+    when 'create'
+      return contact.sender_id == Actor.normalize_id(subject) &&
+             relation_ids.any? &&
+             Relation.
+               allow(subject, action, 'activity', :in => relation_ids).all.size == relation_ids.size
+    when 'read'
+      return true if [contact.sender_id, contact.receiver_id].include?(Actor.normalize_id(subject)) || relations.select{ |r| r.is_a?(Relation::Public) }.any?
+    when 'update'
+      return true if contact.sender_id == Actor.normalize_id(subject)
+    when 'destroy'
+      return true if [contact.sender_id, contact.receiver_id].include?(Actor.normalize_id(subject))
+    end
+
+    Relation.
+      allow(subject, action, 'activity').
+      where('relations.id' => relation_ids).
+      any?
+   end
+
+  private
 
   #Send notifications to actors based on proximity, interest and permissions
   def send_notifications

@@ -7,7 +7,7 @@ module SocialStream
       extend ActiveSupport::Concern
 
       included do
-        attr_accessor :_activity_tie_id
+        attr_accessor :_contact_id, :_relation_ids
         attr_accessor :_activity_parent_id
 
         belongs_to :activity_object, :dependent => :destroy, :autosave => true
@@ -20,10 +20,10 @@ module SocialStream
         before_create :create_activity_object_with_type
 
         unless self == Actor
-          before_create :create_post_activity
-          before_update :create_update_activity
+          validates_presence_of :_contact_id
 
-          validates_presence_of :_activity_tie
+          after_create :create_post_activity
+          after_update :create_update_activity
         end
       end
 
@@ -42,6 +42,12 @@ module SocialStream
           (activities.includes(:activity_verb) & ActivityVerb.verb_name('post')).first
         end
 
+        # Build the post activity when this object is not saved
+        def build_post_activity
+          Activity.new :contact_id   => _contact_id,
+                       :relation_ids => Array(_relation_ids)
+        end
+
 	# before_create callback
 	#
         # Build corresponding ActivityObject including this class type
@@ -51,8 +57,8 @@ module SocialStream
 	  self.activity_object_id = o.id
         end
 
-        def _activity_tie
-          @_activity_tie ||= Tie.find(_activity_tie_id)
+        def _contact
+          @_contact ||= Contact.find(_contact_id)
         end
 
         private
@@ -66,9 +72,10 @@ module SocialStream
         end
 
         def create_activity(verb)
-          a = Activity.new :verb      => verb,
-                           :_tie      => _activity_tie,
-                           :parent_id => _activity_parent_id
+          a = Activity.new :verb         => verb,
+                           :contact      => _contact,
+                           :relation_ids => _relation_ids,
+                           :parent_id    => _activity_parent_id
 
           a.activity_objects << activity_object
 

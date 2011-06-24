@@ -1,25 +1,30 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 module ActivityTestHelper
-  def create_activity_assigned_to(tie)
-    @tie = tie
-    @activity = Factory(:activity, :_tie => tie)
+  def create_activity(contact, relations)
+    @activity = Factory(:activity,
+                        :contact_id => contact.id,
+                        :relation_ids => Array(Relation.normalize_id(relations)))
+
   end
 
-  def create_ability_accessed_by(tie_type)
-    t = Factory(tie_type, :sender => @tie.sender)
-    u = t.receiver_subject
-    @ability = Ability.new(u)
+  def create_ability_accessed_by(subject)
+    @ability = Ability.new(subject)
   end
 
-  def create_ability_accessed_by_receiver
-    u = @tie.receiver_subject
-    @ability = Ability.new(u)
+  def create_ability_accessed_by_related(tie_type)
+    @tie = create_related_tie(tie_type)
+    @related = @tie.receiver_subject
+    @ability = Ability.new(@related)
   end
 
   def create_ability_accessed_publicly
     u = Factory(:user)
     @ability = Ability.new(u)
+  end
+
+  def create_related_tie(tie_type)
+    Factory(tie_type, :contact => Factory(:contact, :sender => Actor.normalize(@subject)))
   end
 
   shared_examples_for "Allows Creating" do
@@ -111,16 +116,22 @@ describe Activity do
             @activity.sender.wall(:profile, :for => @activity.receiver).should include(@activity)
             @activity.sender.wall(:profile,
                                   :for => @activity.receiver,
-                                  :relation => @activity.tie.relation).should include(@activity)
+                                  :relation => @activity.relations.first).should include(@activity)
           end
         end
       end
     end
+  end
+
+  context "user" do
+    before(:all) do
+      @subject = @user = Factory(:user)
+    end
 
     context "with public activity" do
       before do
-        tie = Factory(:user).public_tie
-        @activity = Factory(:activity, :_tie => tie)
+        contact = @user.contact_to!(@user)
+        create_activity(contact, @user.relation_public)
       end
 
       describe "sender home" do
@@ -145,221 +156,226 @@ describe Activity do
         end
       end
     end
-  end
 
-  describe "belonging to friend" do
-    before do
-      create_activity_assigned_to(Factory(:friend))
-    end
-
-    describe "accessed by sender" do
+    describe "belonging to friend" do
       before do
-        create_ability_accessed_by_receiver
+        @tie = create_related_tie(:friend)
+        create_activity(@tie.contact.inverse!, @tie.relation)
       end
 
-      it_should_behave_like "Allows Creating"
-      it_should_behave_like "Allows Reading"
-      it_should_behave_like "Allows Updating"
-      it_should_behave_like "Allows Destroying"
+      describe "accessed by sender" do
+        before do
+          create_ability_accessed_by(@tie.receiver_subject)
+        end
+
+        it_should_behave_like "Allows Creating"
+        it_should_behave_like "Allows Reading"
+        it_should_behave_like "Allows Updating"
+        it_should_behave_like "Allows Destroying"
+      end
+      
+      describe "accessed by different friend" do
+        before do
+          create_ability_accessed_by_related :friend
+        end
+
+       it_should_behave_like "Denies Creating"
+        it_should_behave_like "Allows Reading"
+        it_should_behave_like "Denies Updating"
+        it_should_behave_like "Denies Destroying"
+      end
+
+      describe "accessed by acquaintance" do
+        before do
+          create_ability_accessed_by_related :acquaintance
+        end
+
+
+        it_should_behave_like "Denies Creating"
+        it_should_behave_like "Denies Reading"
+        it_should_behave_like "Denies Updating"
+        it_should_behave_like "Denies Destroying"
+      end
+
+      describe "accessed publicly" do
+        before do
+          create_ability_accessed_publicly
+        end
+
+        it_should_behave_like "Denies Creating"
+        it_should_behave_like "Denies Reading"
+        it_should_behave_like "Denies Updating"
+        it_should_behave_like "Denies Destroying"
+      end
     end
     
-    describe "accessed by different friend" do
+    describe "belonging to user's friend relation" do
       before do
-        create_ability_accessed_by :friend
+        create_activity(@user.contact_to!(@user), @user.relation_custom('friend'))
       end
 
+      describe "accessed by the sender" do
+        before do
+          create_ability_accessed_by(@user)
+        end
+
+        it_should_behave_like "Allows Creating"
+        it_should_behave_like "Allows Reading"
+        it_should_behave_like "Allows Updating"
+        it_should_behave_like "Allows Destroying"
+      end
+      
+      describe "accessed by a friend" do
+        before do
+          create_ability_accessed_by_related :friend
+        end
+
+        it_should_behave_like "Denies Creating"
+        it_should_behave_like "Allows Reading"
+        it_should_behave_like "Denies Updating"
+        it_should_behave_like "Denies Destroying"
+      end
+
+      describe "accessed by acquaintance" do
+        before do
+          create_ability_accessed_by_related :acquaintance
+        end
+
+        it_should_behave_like "Denies Creating"
+        it_should_behave_like "Denies Reading"
+        it_should_behave_like "Denies Updating"
+        it_should_behave_like "Denies Destroying"
+      end
+
+      describe "accessed publicly" do
+        before do
+          create_ability_accessed_publicly
+        end
+
+        it_should_behave_like "Denies Creating"
+        it_should_behave_like "Denies Reading"
+        it_should_behave_like "Denies Updating"
+        it_should_behave_like "Denies Destroying"
+      end
+    end
+
+    describe "belonging to user's public relation" do
+
+      before do
+        create_activity(@user.contact_to!(@user), @user.relation_public)
+      end
+
+      describe "accessed by the sender" do
+        before do
+          create_ability_accessed_by(@user)
+        end
+
+        it_should_behave_like "Allows Creating"
+        it_should_behave_like "Allows Reading"
+        it_should_behave_like "Allows Updating"
+        it_should_behave_like "Allows Destroying"
+      end
+      
+      describe "accessed by a friend" do
+        before do
+          create_ability_accessed_by_related :friend
+        end
+
+        it_should_behave_like "Denies Creating"
+        it_should_behave_like "Allows Reading"
+        it_should_behave_like "Denies Updating"
+        it_should_behave_like "Denies Destroying"
+      end
+
+      describe "accessed by acquaintance" do
+        before do
+          create_ability_accessed_by_related :acquaintance
+        end
+
+        it_should_behave_like "Denies Creating"
+        it_should_behave_like "Allows Reading"
+        it_should_behave_like "Denies Updating"
+        it_should_behave_like "Denies Destroying"
+      end
+
+      describe "accessed publicly" do
+        before do
+          create_ability_accessed_publicly
+        end
+
+        it_should_behave_like "Denies Creating"
+        it_should_behave_like "Allows Reading"
+        it_should_behave_like "Denies Updating"
+        it_should_behave_like "Denies Destroying"
+      end
+    end
+
+    describe "belonging to other user's public relation" do
+
+      before do
+        @tie = Factory(:public)
+        create_activity @tie.contact, @tie.sender.relation_public
+        create_ability_accessed_by @tie.receiver_subject
+      end
+      
       it_should_behave_like "Denies Creating"
-      it_should_behave_like "Allows Reading"
-      it_should_behave_like "Denies Updating"
-      it_should_behave_like "Denies Destroying"
-    end
-
-    describe "accessed by acquaintance" do
-      before do
-        create_ability_accessed_by :acquaintance
-      end
-
-
-      it_should_behave_like "Denies Creating"
-      it_should_behave_like "Denies Reading"
-      it_should_behave_like "Denies Updating"
-      it_should_behave_like "Denies Destroying"
-    end
-
-    describe "accessed publicly" do
-      before do
-        create_ability_accessed_publicly
-      end
-
-      it_should_behave_like "Denies Creating"
-      it_should_behave_like "Denies Reading"
-      it_should_behave_like "Denies Updating"
-      it_should_behave_like "Denies Destroying"
-    end
-  end
-  
-  describe "belonging to friend self tie" do
-    before do
-      user = Factory(:user)
-      tie = user.ties.where(:relation_id => user.relation_custom('friend')).first
-      create_activity_assigned_to(tie)
-    end
-
-    describe "accessed by the sender" do
-      before do
-        create_ability_accessed_by_receiver
-      end
-
-      it_should_behave_like "Allows Creating"
-      it_should_behave_like "Allows Reading"
-      it_should_behave_like "Allows Updating"
-      it_should_behave_like "Allows Destroying"
-    end
-    
-    describe "accessed by a friend" do
-      before do
-        create_ability_accessed_by :friend
-      end
-
-      it_should_behave_like "Denies Creating"
-      it_should_behave_like "Allows Reading"
-      it_should_behave_like "Denies Updating"
-      it_should_behave_like "Denies Destroying"
-    end
-
-    describe "accessed by acquaintance" do
-      before do
-        create_ability_accessed_by :acquaintance
-      end
-
-      it_should_behave_like "Denies Creating"
-      it_should_behave_like "Denies Reading"
-      it_should_behave_like "Denies Updating"
-      it_should_behave_like "Denies Destroying"
-    end
-
-    describe "accessed publicly" do
-      before do
-        create_ability_accessed_publicly
-      end
-
-      it_should_behave_like "Denies Creating"
-      it_should_behave_like "Denies Reading"
-      it_should_behave_like "Denies Updating"
-      it_should_behave_like "Denies Destroying"
-    end
-  end
-
-  describe "belonging to public self tie" do
-
-    before do
-      user = Factory(:user)
-      tie = user.ties.where(:relation_id => user.relation_public).first
-      create_activity_assigned_to(tie)
-    end
-
-    describe "accessed by the sender" do
-      before do
-        create_ability_accessed_by_receiver
-      end
-
-      it_should_behave_like "Allows Creating"
-      it_should_behave_like "Allows Reading"
-      it_should_behave_like "Allows Updating"
-      it_should_behave_like "Allows Destroying"
-    end
-    
-    describe "accessed by a friend" do
-      before do
-        create_ability_accessed_by :friend
-      end
-
-      it_should_behave_like "Denies Creating"
-      it_should_behave_like "Allows Reading"
-      it_should_behave_like "Denies Updating"
-      it_should_behave_like "Denies Destroying"
-    end
-
-    describe "accessed by acquaintance" do
-      before do
-        create_ability_accessed_by :acquaintance
-      end
-
-      it_should_behave_like "Denies Creating"
-      it_should_behave_like "Allows Reading"
-      it_should_behave_like "Denies Updating"
-      it_should_behave_like "Denies Destroying"
-    end
-
-    describe "accessed publicly" do
-      before do
-        create_ability_accessed_publicly
-      end
-
-      it_should_behave_like "Denies Creating"
-      it_should_behave_like "Allows Reading"
-      it_should_behave_like "Denies Updating"
-      it_should_behave_like "Denies Destroying"
     end
   end
 
-  describe "belonging to public tie from a public" do
-
-    before do
-      create_activity_assigned_to(Factory(:public))
-      create_ability_accessed_by_receiver
-    end
-    
-    it_should_behave_like "Denies Creating"
-  end
-
-  describe "belonging to member tie" do
-    before do
-      create_activity_assigned_to(Factory(:member))
+  context "group" do
+    before(:all) do
+      @subject = @group = Factory(:group)
     end
 
-    describe "accessed by same member" do
+    describe "belonging to member tie" do
       before do
-        create_ability_accessed_by_receiver
+        @tie = create_related_tie(:member)
+        create_activity @tie.contact.inverse!, @tie.relation
       end
 
-      it_should_behave_like "Allows Creating"
-      it_should_behave_like "Allows Reading"
-      it_should_behave_like "Allows Updating"
-      it_should_behave_like "Allows Destroying"
-    end
-    
-    describe "accessed by different member" do
-      before do
-        create_ability_accessed_by :member
+      describe "accessed by same member" do
+        before do
+          create_ability_accessed_by @tie.receiver_subject
+        end
+
+        it_should_behave_like "Allows Creating"
+        it_should_behave_like "Allows Reading"
+        it_should_behave_like "Allows Updating"
+        it_should_behave_like "Allows Destroying"
+      end
+      
+      describe "accessed by different member" do
+        before do
+          create_ability_accessed_by_related :member
+        end
+
+        it_should_behave_like "Denies Creating"
+        it_should_behave_like "Allows Reading"
+        it_should_behave_like "Denies Updating"
+        it_should_behave_like "Denies Destroying"
       end
 
-      it_should_behave_like "Denies Creating"
-      it_should_behave_like "Allows Reading"
-      it_should_behave_like "Denies Updating"
-      it_should_behave_like "Denies Destroying"
-    end
+      describe "accessed by partner" do
+        before do
+          create_ability_accessed_by_related :partner
+        end
 
-    describe "accessed by partner" do
-      before do
-        create_ability_accessed_by :partner
+        it_should_behave_like "Denies Creating"
+        it_should_behave_like "Denies Reading"
+        it_should_behave_like "Denies Updating"
+        it_should_behave_like "Denies Destroying"
       end
 
-      it_should_behave_like "Denies Creating"
-      it_should_behave_like "Denies Reading"
-      it_should_behave_like "Denies Updating"
-      it_should_behave_like "Denies Destroying"
-    end
+      describe "accessed publicly" do
+        before do
+          create_ability_accessed_publicly
+        end
 
-    describe "accessed publicly" do
-      before do
-        create_ability_accessed_publicly
+        it_should_behave_like "Denies Creating"
+        it_should_behave_like "Denies Reading"
+        it_should_behave_like "Denies Updating"
+        it_should_behave_like "Denies Destroying"
       end
-
-      it_should_behave_like "Denies Creating"
-      it_should_behave_like "Denies Reading"
-      it_should_behave_like "Denies Updating"
-      it_should_behave_like "Denies Destroying"
     end
   end
 end

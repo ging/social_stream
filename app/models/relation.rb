@@ -18,15 +18,22 @@
 #
 # See the documentation of {Permission} for more details on permission definition.
 #
+# = {Activity Activities} and {Relation relations}
+# Each {Activity} can be attached to one or more {Relation relations}.
+# The {Relation} sets up the mode in which the {Activity} is shared.
+# It sets the {Audience} that has access to it, and the {Permission Permissions} that rule that access.
+#
 class Relation < ActiveRecord::Base
-  scope :mode, lambda { |st, rt|
-    where(:sender_type => st, :receiver_type => rt)
-  }
+  belongs_to :actor
 
   has_many :relation_permissions, :dependent => :destroy
   has_many :permissions, :through => :relation_permissions
 
   has_many :ties, :dependent => :destroy
+
+  scope :mode, lambda { |st, rt|
+    where(:sender_type => st, :receiver_type => rt)
+  }
 
   before_create :initialize_sender_type
 
@@ -63,6 +70,65 @@ class Relation < ActiveRecord::Base
       else
         normalize(r, options).id
       end
+    end
+ 
+    # All the relations that allow subject to perform action
+    #
+    # Options:
+    #   in:: Limit possible relations to a set
+    #   owner:: The owner of the relations
+    #   public_relations:: include also {Relation::Public} whose activities can always be read
+    def allow(subject, action, object, options = {})
+      # The case when the owner == subject is special,
+      # all the permissions are granted to the owner of the relations
+      if options[:owner].present? && Actor.normalize(options[:owner]) == Actor.normalize(subject)
+        rels = subject.relations
+
+        if options[:in].present?
+          rels = rels & options[:in]
+        end
+
+        rels
+      end
+
+      # Relation conditions
+      # Some relations can have permissions that grant permissions to other relations
+      # through Relation#function
+      conds = Permission.relation_conditions
+
+      # Permission conditions
+      # Set the permission conditions
+      conds = "( #{ conds } ) AND #{ sanitize_sql('permissions_as.action' => action) } AND #{ sanitize_sql('permissions_as.object' => object) }"
+
+      # Relation::Public permissions cannot be customized yet
+      if action == 'read' && object == 'activity' && (options[:public].nil? || options[:public])
+        conds =
+          "( #{ conds } ) OR #{ sanitize_sql('relations.type' => 'Relation::Public') }" 
+      end
+
+      # subject conditions
+      #
+      # Relation permissions are granted to the contact receiver.
+      # However, relation owners have all the permissions
+      conds = "( ( #{ conds } ) AND #{ sanitize_sql('contacts_as.receiver_id' => Actor.normalize_id(subject)) } ) OR #{ sanitize_sql('relations.actor_id' => Actor.normalize_id(subject)) }"
+
+      # Add owner condition
+      if options[:owner].present?
+        conds = "( #{ conds } ) AND #{ sanitize_sql('relations.actor_id' => Actor.normalize_id(options[:owner])) }"
+      end
+
+      # Add in condition
+      if options[:in].present?
+        conds = "( #{ conds } ) AND #{ sanitize_sql('relations.id' => Relation.normalize_id(Array(options[:in]))) }"
+      end
+
+      select("DISTINCT relations.*").
+        from("relations, contacts AS contacts_as INNER JOIN ties AS ties_as ON contacts_as.id = ties_as.contact_id INNER JOIN relations AS relations_as ON relations_as.id = ties_as.relation_id INNER JOIN relation_permissions AS relation_permissions_as ON relations_as.id = relation_permissions_as.relation_id INNER JOIN permissions AS permissions_as ON permissions_as.id = relation_permissions_as.permission_id").
+        where(conds)
+    end
+
+    def allow?(*args)
+      allow(*args).any?
     end
   end
 

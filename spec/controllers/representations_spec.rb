@@ -24,7 +24,7 @@ describe HomeController do
 
       context "to represent own group" do
         before do
-          @group = Factory(:member, :receiver => @user.actor).sender_subject
+          @group = Factory(:member, :contact => Factory(:group_contact, :receiver => @user.actor)).sender_subject
         end
 
         it "should redirect_to root" do
@@ -37,7 +37,7 @@ describe HomeController do
 
       context "representing own group" do
         before do
-          @group = Factory(:member, :receiver => @user.actor).sender_subject
+          @group = Factory(:member, :contact => Factory(:group_contact, :receiver => @user.actor)).sender_subject
           represent @group
         end
 

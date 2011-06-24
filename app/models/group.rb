@@ -17,25 +17,24 @@ class Group < ActiveRecord::Base
   
   def recent_groups
     contacts(:type => :group, :direction => :sent) do |q|
-      q.select("ties.created_at").
-        merge(Tie.recent)
+      q.select("contacts.created_at").
+        merge(Contact.recent)
     end
   end
  
   private
 
-  #Creates the ties between the group and the founder
+  # Creates the ties between the group and the founder
   def create_founder
     founder =
       Actor.find_by_slug(_founder) || raise("Cannot create group without founder")
 
-    sent_ties.create! :receiver => founder,
-                      :relation => relation_customs.sort.first
+    sent_contacts.create! :receiver => founder,
+                          :relation_ids => Array(relation_customs.sort.first.id)
   end
   
-  #Creates the ties betwbeen the group and the participants
+  # Creates the ties between the group and the participants
   def create_participants
-    
      return if @_participants.blank?
     
      @_participants.each do |participant|
@@ -43,8 +42,8 @@ class Group < ActiveRecord::Base
       #participant_actor = Actor.find_by_slug!(participant)
       participant_actor = Actor.find_by_id!(participant)
 
-      sent_ties.create! :receiver => participant_actor,
-                        :relation => relation_customs.sort.first
+      sent_contacts.create! :receiver => participant_actor,
+                            :relation_ids => Array(relation_customs.sort.first)
      end
   end
 end

@@ -13,39 +13,37 @@ module SocialStream
         obj.to_s.classify.constantize
       }.each do |klass|
         can :create, klass do |k| # can :create, Post do |post|
-          k._activity_tie.sender_id == subject.actor_id &&
-            k._activity_tie.receiver.allow?(subject, 'create', 'activity')
+          k.build_post_activity.allow?(subject, 'create')
         end
 
         can :read, klass do |k| # can :read, Post do |post|
-          k.post_activity.tie.allow?(subject, 'read', 'activity')
+          k.post_activity.allow?(subject, 'read')
         end
 
         can :update, klass do |k| # can :update, Post do |post|
-          k.post_activity.tie.allow?(subject, 'update', 'activity')
+          k.post_activity.allow?(subject, 'update')
         end
 
         can :destroy, klass do |k| # can :destroy, Post do |post|
-          k.post_activity.tie.sender_id == Actor.normalize_id(subject) ||
-            k.post_activity.tie.allow?(subject, 'destroy', 'activity')
+          k.post_activity.allow?(subject, 'destroy')
         end
       end
 
       # Activities
       can :create, Activity do |a|
-        a.tie.allow?(subject, 'create', 'activity')
+        a.allow?(subject, 'create')
       end
 
       can :read, Activity do |a|
-        a.tie.allow?(subject, 'read', 'activity')
+        a.allow?(subject, 'read')
       end
 
       can :update, Activity do |a|
-        a.tie.allow?(subject, 'update', 'activity')
+        a.allow?(subject, 'update')
       end
 
       can :destroy, Activity do |a|
-        a.tie.allow?(subject, 'destroy', 'activity')
+        a.allow?(subject, 'destroy')
       end
 
       # Users

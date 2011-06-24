@@ -1,6 +1,5 @@
 Factory.define :tie do |t|
-  t.sender   { |s| Factory(:user).actor }
-  t.receiver { |r| Factory(:user).actor }
+  t.association :contact
 end
 
 # User ties
@@ -19,7 +18,7 @@ end
 
 # Group ties
 Factory.define :g2u_tie, :parent => :tie do |t|
-  t.sender   { |u| Factory(:group).actor }
+  t.contact { |c| Factory(:group_contact) }
 end
 
 Factory.define :member, :parent => :g2u_tie do |t|
@@ -27,8 +26,7 @@ Factory.define :member, :parent => :g2u_tie do |t|
 end
 
 Factory.define :g2g_tie, :parent => :tie do |t|
-  t.sender   { |u| Factory(:group).actor }
-  t.receiver { |u| Factory(:group).actor }
+  t.contact { |c| Factory(:g2g_contact) }
 end
 
 Factory.define :partner, :parent => :g2g_tie do |t|
