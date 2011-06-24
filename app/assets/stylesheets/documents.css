@@ -49,12 +49,23 @@
 
 .attachment_tile{
 	margin: 4px;
+	margin-bottom: 8px;
 	width: 80px;
 	height: 65px;
-	border: 1px solid transparent;
+	border-bottom: 2px solid transparent;
 	float: left;
 	text-align: center;
 	overflow: hidden;
+}
+
+.attachment_tile:hover{
+	background-color: #e0edf2;
+	border-bottom: 2px solid #2A3890;
+}
+
+.attachment_tile.selected{
+	background-color: #e0edf2;
+	border-bottom: 2px solid green;	
 }
 
 .attachment_section_header{
@@ -65,4 +76,21 @@
 	width:90%;
 	border-left: 3px solid #2A3890;
 	background-color: #e0edf2;
+}
+
+.player{
+	position: absolute;
+	border-left: 24px solid #2A3890;
+	border-right: 24px solid #2A3890;
+	background-color: #e0edf2;
+	bottom: 0px;
+	right: 0px;
+	max-height: 300px;
+}
+
+#downloadButton{
+	position: absolute;
+	bottom: 5px;
+	right: 0px;
+	width: 24px;
 }

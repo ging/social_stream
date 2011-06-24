@@ -7,14 +7,16 @@
 		<div class="attachment_tile_thumb">
     		<%= link_to thumb_for(document), 
                 {:controller => "documents", :action => "download", :id => document}, 
-                :class => "" %>
+ 				:type => document.type, 
+				:path => document_path(document) %>
   		</div>
 
   		<div class="attachment_tile_text">
   			<%= link_to document.file_file_name,
                 {:controller => "documents", :action => "download", :id => document},
-                :class => "",
- 				:alt => document.file_file_name %>
+ 				:alt => document.file_file_name,
+ 				:type => document.type,
+ 				:path => document_path(document) %>
   		</div>
 	</div>
 <% end %>
