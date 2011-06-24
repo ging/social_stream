@@ -1,5 +1,6 @@
 en:
   document:
+    all: "All documents"  
     confirm_delete: "Delete document?"
     title: "Documents"
     mine: "My documents"
@@ -12,7 +13,7 @@ en:
   video:
     confirm_delete: "Delete video?"
     title: "Videos"
-    mine: "My videoss"  
+    mine: "My videos"  
     msg: "Just uploaded a video:" 
   audio:
     confirm_delete: "Delete audio?"
