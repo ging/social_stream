@@ -114,7 +114,7 @@
         if (!preadded) {
           $("#" + elemid + "_annoninput").remove();
           addInput(focusme);
-          var _item = $('<option value="'+value+'" id="opt_'+id+'" class="selected" selected="selected">'+xssDisplay(title)+'</option>');
+          var _item = $('<option value="'+xssDisplay(value, 1)+'" id="opt_'+id+'" class="selected" selected="selected">'+xssDisplay(title)+'</option>');
           element.append(_item);
           if (options.onselect) {
             funCall(options.onselect, _item);
@@ -185,7 +185,7 @@
         });
 
         input.keyup( function(event) {
-          var etext = xssPrevent(input.val());
+          var etext = xssPrevent(input.val(), 1);
           
           if (event.keyCode == _key.backspace && etext.length == 0) {
             feed.hide();
@@ -217,7 +217,7 @@
                 var getBoxTimeoutValue = getBoxTimeout;
                 setTimeout( function() {
                   if (getBoxTimeoutValue != getBoxTimeout) return;
-                  $.getJSON(options.json_url, {"tag": etext}, function(data) {
+                  $.getJSON(options.json_url, {"tag": xssDisplay(etext)}, function(data) {
                     addMembers(etext, data);
                     json_cache_object.set(etext, 1);
                     bindEvents();
@@ -242,26 +242,22 @@
 
       function addMembers(etext, data) {
         feed.html('');
-
         if (!options.cache && data != null) {
           cache.clear();
         }
-
         addTextItem(etext);
-
         if (data != null && data.length) {
           $.each(data, function(i, val) {
-            cache.set(val.key, val.value);
+            cache.set(xssPrevent(val.key), xssPrevent(val.value));
           });
-        }
-        
+        }        
         var maximum = options.maxshownitems < cache.length() ? options.maxshownitems: cache.length();
         var content = '';
         $.each(cache.search(etext), function (i, object) {
           if (options.filter_selected && element.children("option[value=" + object.key + "]").hasClass("selected")) {
             //nothing here...
           } else {
-            content += '<li rel="' + object.key + '">' + itemIllumination(object.value, etext) + '</li>';
+            content += '<li rel="' + object.key + '">' + xssDisplay(itemIllumination(object.value, etext)) + '</li>';
             counter++;
             maximum--;
           }
@@ -289,7 +285,7 @@
       function itemIllumination(text, etext) {
         if (options.filter_case) {
           try {
-            var regex = new RegExp("(.*)(" + etext + ")(.*)", ((options.filter_case) ?"g":"ig"));
+            var regex = new RegExp("(.*)(" + etext + ")(.*)", ((options.filter_case) ?"g":"gi"));
             var text = text.replace(regex,'$1<em>$2</em>$3');
           } catch(ex) {};
         } else {
@@ -425,12 +421,27 @@
         }
         return true;
       }
-
-      function xssPrevent(string) {
-        return escape(string.replace(/script(.*)/g, ""));
+      
+      function xssPrevent(string, flag) {
+        if (typeof flag != "undefined") {
+          for(i = 0; i < string.length; i++) {
+            var charcode = string.charCodeAt(i);
+            if ((_key.exclamation <= charcode && charcode <= _key.slash) || 
+                (_key.colon <= charcode && charcode <= _key.at) || 
+                (_key.squarebricket_left <= charcode && charcode <= _key.apostrof)) {
+              string = string.replace(string[i], escape(string[i]));
+            }
+          }
+          string = string.replace(/(\{|\}|\*)/i, "\\$1");
+        }
+        return string.replace(/script(.*)/g, "");
       }
       
-      function xssDisplay(string) {
+      function xssDisplay(string, flag) {
+        string = string.replace('\\', "");
+        if (typeof flag != "undefined") {
+          return string;
+        }
         return unescape(string);
       }
 
@@ -477,7 +488,20 @@
         }
       };
       
-      var _key =  {'enter': 13, 'tab': 9, 'backspace': 8, 'leftarrow': 37, 'uparrow': 38,'rightarrow': 39, 'downarrow': 40};
+      var _key = { 'enter': 13,
+                   'tab': 9,
+                   'backspace': 8,
+                   'leftarrow': 37,
+                   'uparrow': 38,
+                   'rightarrow': 39,
+                   'downarrow': 40,
+                   'exclamation': 33,
+                   'slash': 47,
+                   'colon': 58,
+                   'at': 64,
+                   'squarebricket_left': 91,
+                   'apostrof': 96
+                 };
       
       var randomId = function() {
         var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
