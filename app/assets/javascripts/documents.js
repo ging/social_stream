@@ -2,8 +2,8 @@ $('.attachment_tile a').live("click",function(e){
 	e.preventDefault();
 	
 	var download_link = this;
-	
-	if($('.player').length > 0 && $('.attachment_tile.selected')==1){
+
+	if($('.player').length > 0 && $('.attachment_tile.selected').length==1){
 		removePlayers();
 		return;
 	}
