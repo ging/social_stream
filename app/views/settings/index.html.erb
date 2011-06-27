@@ -9,9 +9,22 @@
 <% toolbar %>
 
 <% content_for :headers do %>
+  <%= stylesheet_link_tag "settings.css", :media => "screen, projection" %>
 <% end %>
 
 <% content_for :javascript do %>
+	var notifications_open = false;
+	showNotificationsSettings = function(){
+		if (notifications_open){
+            $("#notifications_settings_content").hide("slow");
+            $("#notifications_settings_briefing").show("slow");
+			notifications_open = false;
+		}else{
+			$("#notifications_settings_content").show("slow");
+            $("#notifications_settings_briefing").hide("slow");
+			notifications_open = true;
+		}		
+	}
 <% end %>
 
 <%= render :partial => 'index' %>

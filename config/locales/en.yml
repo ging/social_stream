@@ -6,7 +6,6 @@ en:
     accept: "Accept"
   account:
     edit: "Edit user"
-    notifications: "Notifications"
     one: "Account"
     privacy: "Privacy"
     settings: "Settings"
@@ -21,28 +20,27 @@ en:
     to_comment: "Comment"
     unlike: "I do not like anymore"
     verb:
-        follow:
-          User:
-            title: "%{subject} added %{contact} as contact."
-            message: "%{name} added you as contact."
-          Group:
-            title: "%{subject} added %{contact} as contact."
-            message: "%{name} added you as contact."
-        like:
-          User:
-            title: "%{subject} is a fan of %{contact}."
-            message: "%{name} is now your fan."
-          Group:
-            title: "%{subject} is a fan of %{contact}."
-            message: "%{name} is now your fan."
-        make-friend:
-          User:
-            title: "%{subject} and %{contact} are now connected."
-            message: "%{name} also added you as contact."
-          Group:
-            title: "%{subject} added %{contact} as contact."
-            message: "%{name} added you as contact."
-             
+      follow:
+        User:
+          title: "%{subject} added %{contact} as contact."
+          message: "%{name} added you as contact."
+        Group:
+          title: "%{subject} added %{contact} as contact."
+          message: "%{name} added you as contact."
+      like:
+        User:
+          title: "%{subject} is a fan of %{contact}."
+          message: "%{name} is now your fan."
+        Group:
+          title: "%{subject} is a fan of %{contact}."
+          message: "%{name} is now your fan."
+      make-friend:
+        User:
+          title: "%{subject} and %{contact} are now connected."
+          message: "%{name} also added you as contact."
+        Group:
+          title: "%{subject} added %{contact} as contact."
+          message: "%{name} added you as contact."           
   avatar:
     crop_image: "Crop the uploaded image"
     crop_submit: "Crop image"
@@ -298,7 +296,15 @@ en:
       choose: "2. Levels in <strong>%{name}</strong> sphere"
     new: "+ New level"
   relation_public:
-      name: "Public"
+    name: "Public"
+  settings:
+    notifications:
+      briefing: "Settings about notifications behaviour and mail alerts"
+      name: "Notifications"
+      by_email:
+        name: "Send me an email when I receive a notification"
+        always: "Always"
+        never: "Never"
   share: "Share"
   sign_in: "Sign in"
   sign_out: "Sign out"

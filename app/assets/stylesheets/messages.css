@@ -45,6 +45,10 @@
 .message .date {
 	color: #6C6D6F;
 }
+.message ul {
+    margin: 0px 5px
+    ;padding-left:40px;
+}
 .conversation_full .messages .unread .header{
 	background-color: #E0E0FF;
 }
