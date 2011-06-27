@@ -46,7 +46,7 @@ Rails.application.routes.draw do
   
   resource :representation
   
-    #resources :avatars
+  resources :settings
 
   resources :messages
 

@@ -5,8 +5,9 @@ en:
     send: "Send"
     accept: "Accept"
   account:
-    one: "Account"
+    edit: "Edit user"
     notifications: "Notifications"
+    one: "Account"
     privacy: "Privacy"
     settings: "Settings"
   activity:

@@ -38,6 +38,7 @@ class CreateSocialStream < ActiveRecord::Migration
       t.string   "email",     :default => "", :null => false
       t.string   "slug"
       t.string   "subject_type"
+      t.boolean  "notify_by_email", :default => true
       t.datetime "created_at"
       t.datetime "updated_at"
       t.integer  "activity_object_id"

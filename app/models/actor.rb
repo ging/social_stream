@@ -436,8 +436,7 @@ class Actor < ActiveRecord::Base
   #Returning whether an email should be sent for this object (Message or Notification).
   #Required by Mailboxer gem.
   def should_email?(object)
-    #TODO
-    return true
+    return notify_by_email
   end
 
   # Use slug as parameter

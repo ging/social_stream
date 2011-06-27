@@ -35,7 +35,7 @@
 li.btn_menu_home{background: transparent url("btn/btn_home.png") no-repeat left center;}
 li.btn_menu_profile{background: transparent url("btn/btn_profile.png") no-repeat left center;}
 li.btn_menu_browse{background: transparent url("btn/btn_browse.png") no-repeat left center;}
-#btn_menu_config{background: transparent url("btn/btn_config.png") no-repeat left center;}
+#btn_menu_config,#btn_menu_account_settings{background: transparent url("btn/btn_config.png") no-repeat left center;}
 
 #menu_account{	vertical-align: top; height:23px; }
 #menu_account span {	float:right;	padding-right: 5px;	vertical-align: top;	padding-top: 5px;}
