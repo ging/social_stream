@@ -25,5 +25,9 @@
   <%= render :partial => 'toolbar/home_menu_options_subjects' %>
 <% end %>
 
+<%= menu_options[:invitations] || capture do %>
+  <%= render :partial =>'toolbar/invitations_menu'%>
+<% end %>
+
 </ul>
 

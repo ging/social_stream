@@ -160,6 +160,11 @@ en:
   home: "Home"
   inbox:
     one: "Inbox"
+  invitation:
+    e-mails: "E-mail address"
+    one: "Invitation"
+    other: "Invitations"
+    text: "Write your own message"
   like:
     n:
       one: "1 fan"

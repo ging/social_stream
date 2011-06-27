@@ -51,6 +51,8 @@ Rails.application.routes.draw do
   resources :messages
 
   resources :conversations
+
+  resources :invitations
   
   resources :notifications do
     collection do
