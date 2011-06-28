@@ -22,17 +22,17 @@
   </div>
 </div>
 <div class="action">  
-  <%= link_to(image_tag('btn/btn_notification_delete.png', :alt => "Delete", :title => "Delete"),
-  notification_path(notification, :page => params[:page]),
-  :confirm => t('notification.destroy_sure'),
-  :method => :delete, :remote => true) %>
-</div>
-<div class="action"> 
   <% if notification.is_unread?(@actor) %>
     <%= link_to(image_tag('btn/btn_notification_read.png', :alt => t('notification.read'), 
         :title => t('notification.read')), notification_path(notification, :page => params[:page], :read => "Read"),
         :method => :put, :remote => true) %>
   <% end%>
+  
+  <%= link_to(image_tag('btn/btn_notification_delete.png', :alt => "Delete", :title => "Delete"),
+  notification_path(notification, :page => params[:page]),
+  :confirm => t('notification.destroy_sure'),
+  :method => :delete, :remote => true) %>
+
 </div>
 <div class="clearfloat">
 </div>

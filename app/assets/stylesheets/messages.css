@@ -87,16 +87,16 @@
 	padding: 5px 5px 5px 5px;
 	width:549px;
 	height:40px;
-	border-bottom:1px solid #E0EEF5;
+	border-bottom:1px solid #FFF;
 }
 .conversations .conversation .content_left {
 	float:left;
-	width:25%;
+	width:20%;
 	padding: 7px 0px 0px 0px;
 }
 .conversations .conversation .content_right {
 	float:left;
-	width:60%;
+	width:55%;
 	padding: 7px 0px 0px 0px;
 }
 .conversations .conversation .sender_photo {

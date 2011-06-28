@@ -12,7 +12,7 @@
 <div class="participants">
 	<h3><%= t("message.participants") %>:</h3>
 	<% conversation.recipients.each do |recp| %>
-	<%= link_to image_tag(recp.logo.url(:tie), :title=>recp.name, :alt => recp.name), recp.subject %>
+	<%= link_to image_tag(recp.logo.url(:contact), :title=>recp.name, :alt => recp.name), recp.subject %>
 	<% end %>
 </div>
 <div class="messages">
