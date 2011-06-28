@@ -35,7 +35,6 @@ class MessagesController < ApplicationController
 	# POST /messages
 	# POST /messages.xml
 	def create
-		@actor = current_subject
 		@recipients = Array.new
 		if params[:_recipients].present?
 			params[:_recipients].each do |recp_id|

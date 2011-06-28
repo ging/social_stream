@@ -1,16 +1,24 @@
-<ul class="sf-menu" >
-  <li class="current" id="account">
-    <a href="#" class="sf-with-ul" id="btn_menu_config"><%= t('account.one') %><span class="sf-sub-indicator"> »</span></a>
-    <ul>
-      <li>
-        <%= link_to t('account.edit'), edit_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to t('account.settings'), settings_path, :id => "btn_menu_account_settings" %>
-      </li>
-      <li class="current">
-        <%= link_to t('account.privacy'), spheres_path %>
-      </li>
+<div id="account_menu">
+    <ul class="sf-menu" >
+        <li class="current" id="account">
+            <a href="#" class="sf-with-ul" id="btn_menu_config">
+            <%= t('account.one') %>
+            <span class="sf-sub-indicator"> »</span>
+            </a>
+            <ul>
+                <li>
+                    <%= link_to t('account.edit'), edit_user_registration_path %>
+                </li>
+                <li>
+                    <%= link_to t('account.settings'), settings_path, :id => "btn_menu_account_settings" %>
+                </li>
+                <li class="current">
+                    <%= link_to t('account.privacy'), spheres_path %>
+                </li>
+                <li class="btn_menu_exit">
+                    <%= link_to t('sign_out'), destroy_user_session_path, :id => "btn_menu_account_logout"  %>
+                </li>
+            </ul>
+        </li>
     </ul>
-  </li>
-</ul>
+</div>

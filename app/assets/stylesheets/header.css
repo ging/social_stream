@@ -36,6 +36,7 @@ li.btn_menu_home{background: transparent url("btn/btn_home.png") no-repeat left 
 li.btn_menu_profile{background: transparent url("btn/btn_profile.png") no-repeat left center;}
 li.btn_menu_browse{background: transparent url("btn/btn_browse.png") no-repeat left center;}
 #btn_menu_config,#btn_menu_account_settings{background: transparent url("btn/btn_config.png") no-repeat left center;}
+#btn_menu_account_logout{background: transparent url("btn/btn_exit.png") no-repeat left center;}
 
 #menu_account{	vertical-align: top; height:23px; }
 #menu_account span {	float:right;	padding-right: 5px;	vertical-align: top;	padding-top: 5px;}
@@ -48,10 +49,9 @@ li.btn_menu_browse{background: transparent url("btn/btn_browse.png") no-repeat l
 #menu_pipe ul li{	line-height:20px;	padding:5px 0px 5px 0px; vertical-align:top;}
 
 
-#account, #representation_li,#current_user_info, #representations_menu {display:inline-block;vertical-align: top; height:22px; color:#FFF;}
+#account, #representation_li,#current_user_info, #representations_menu, #account_menu {display:inline-block;vertical-align: top; height:22px; color:#FFF;}
 #representation_li{margin-left:10px;}
 
-li.btn_menu_exit{background: transparent url("btn/btn_exit.png") no-repeat left center;}
 li.btn_menu_representation{}
 #menu_home ul li.pipe,#menu_account ul li.pipe{padding:0px 3px 0px 3px; margin:0px;}
 .menu_white{display:inline-block; color:#fff;}

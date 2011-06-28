@@ -21,19 +21,14 @@
     </div>
     <div id="header_right">
        <% if user_signed_in? %>
-        <%= render :partial => 'layouts/account' %>
+        <%= render :partial => 'layouts/representation' %>
         <div class="menu_list menu_white" id="menu_pipe" >
           <ul>
             <li class="pipe">|</li>
           </ul>
         </div>
-        <%= render :partial => 'layouts/representation' %>
-        <div class="menu_list menu_white" id="menu_account">
-          <ul>
-            <li class="pipe">|</li>
-            <li class="btn_menu_exit"><%= link_to t('sign_out'), destroy_user_session_path %></li>
-          </ul>
-        </div>
+        <%= render :partial => 'layouts/account' %>
+
       <% end %>
     </div>
   </div>
