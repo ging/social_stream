@@ -8,7 +8,6 @@ en:
     edit: "Edit user"
     one: "Account"
     privacy: "Privacy"
-    settings: "Settings"
   activity:
     confirm_delete: "Delete activity?"
     delete: "Delete"
@@ -298,6 +297,9 @@ en:
   relation_public:
     name: "Public"
   settings:
+    one: "Settings"
+    for: "Settings for"
+    main: "Main settings"
     notifications:
       briefing: "Settings about notifications behaviour and mail alerts"
       name: "Notifications"
@@ -305,6 +307,15 @@ en:
         name: "Send me an email when I receive a notification"
         always: "Always"
         never: "Never"
+    edit_user:
+      briefing: "Change your email or password"
+      name: "Edit user data"
+      email: "Email"
+      new_password: "Password"
+      new_password_confirmation: "Password confirmation"
+      new_password_comment: "Leave blank if you don't want to change it" 
+      current_password: "Current password"
+      current_password_comment: "We need your current password to confirm your changes"
   share: "Share"
   sign_in: "Sign in"
   sign_out: "Sign out"
