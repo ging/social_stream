@@ -8,7 +8,7 @@
     <meta name="description" content= "<%= yield(:description).empty? ? t('frontpage.main_title') : yield(:description) %>" >
     <%= stylesheet_link_tag "base", "header","home","footer",
                              :media => "screen, projection" %>
-    <%= javascript_include_tag 'jquery.min', 'jquery-ui.min','rails', 'jquery.livequery', 'ui.dropdownchecklist'%>
+    <%= javascript_include_tag 'jquery.min', 'jquery-ui.min','rails', 'jquery.livequery', 'ui.dropdownchecklist','modernizr.min'%>
 
     <%= yield :headers %>
 
