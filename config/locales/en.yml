@@ -297,16 +297,11 @@ en:
   relation_public:
     name: "Public"
   settings:
-    one: "Settings"
+    error: "Some errors raised when saving your changes"
     for: "Settings for"
     main: "Main settings"
-    notifications:
-      briefing: "Settings about notifications behaviour and mail alerts"
-      name: "Notifications"
-      by_email:
-        name: "Send me an email when I receive a notification"
-        always: "Always"
-        never: "Never"
+    one: "Settings"
+    success: "Your settings where correctly changed"
     edit_user:
       briefing: "Change your email or password"
       name: "Edit user data"
@@ -316,6 +311,13 @@ en:
       new_password_comment: "Leave blank if you don't want to change it" 
       current_password: "Current password"
       current_password_comment: "We need your current password to confirm your changes"
+    notifications:
+      briefing: "Settings about notifications behaviour and mail alerts"
+      name: "Notifications"
+      by_email:
+        name: "Send me an email when I receive a notification"
+        always: "Always"
+        never: "Never"
   share: "Share"
   sign_in: "Sign in"
   sign_out: "Sign out"

@@ -46,7 +46,11 @@ Rails.application.routes.draw do
   
   resource :representation
   
-  resources :settings
+  resources :settings do
+    collection do
+      put 'update_all'
+    end
+  end
 
   resources :messages
 
