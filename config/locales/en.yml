@@ -158,9 +158,13 @@ en:
   inbox:
     one: "Inbox"
   invitation:
-    e-mails: "E-mail address"
+    e-mails: "E-mail addresses"
+    error: "Your request was unprocessable"
+    invited: " has invited you to SocialStream!"
+    join: "Invite other people to join SocialStream!"
     one: "Invitation"
     other: "Invitations"
+    success: "Your invitations have successfully been sent"
     text: "Write your own message"
   like:
     n:

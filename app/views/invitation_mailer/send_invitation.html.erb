@@ -1,3 +1,40 @@
-<p>You have been invited to SocialStream!</p>
+<div>
+  <div><%= @sender.name %> has invited you to <%= link_to( t('socialstream'), new_user_registration_path)%>
+    <div><%= @message%></div>
+  </div>
+  <div>
+    <div>
+      <%= t('frontpage.share.default')%>
+    </div>
+    <div>
+      <ul>
+        <li><%= t('frontpage.share.sentence1') %></li>
+        <li><%= t('frontpage.share.sentence2') %></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div>
+    <div>
+      <%= t('frontpage.meet.default')%>
+    </div>
+    <div>
+      <ul>
+        <li><%= t('frontpage.meet.sentence1') %></li>
+      </ul>
+    </div>
+  </div>
 
-<p><%= @message%></p>
+  <div>
+    <div>
+      <%= t('frontpage.collaborate.default')%>
+    </div>
+    <div>
+      <ul>
+        <li><%= t('frontpage.collaborate.sentence1') %></li>
+        <li><%= t('frontpage.collaborate.sentence2') %></li>
+      </ul>
+    </div>
+  </div>
+</div>
+

@@ -1,8 +1,9 @@
 class InvitationMailer < ActionMailer::Base
   
-  def send_invitation(email, message)
-    @message= message
-    mail(:to => email, :subject => "SocialStream Invitation")  
+  def send_invitation(receiver, sender, message)
+    @sender= sender
+    @message= message  
+    mail(:to => receiver, :subject => "SocialStream Invitation")
   end
 
 end

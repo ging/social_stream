@@ -124,6 +124,7 @@ textarea.new_contact_text_area{ width:100%; height: 100px; color: #2A3890;}
 
 
 /******** FORMS  SECTION *******/
+.block .form_comment{ font-weight:normal;}
 .block .field{  display:inline;  padding: 0px;  width:50%;}
 .block .form_tag{border-color: #0656a4;	color: #2A3890;	padding: 5px 5px 5px 5px;  border:1px solid #BDC7D8; width:90%;}
 .block .form_tag_long{border-color: #0656a4;	color: #2A3890;	padding: 5px 5px 5px 5px;  border:1px solid #BDC7D8; width:91%;}

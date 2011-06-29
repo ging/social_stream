@@ -1,3 +1,15 @@
-You have been invited to SocialStream!
+<%= @sender.name %> has invited you to <%= link_to( t('socialstream'), new_user_registration_path)%>
+"<%= @message%>"
 
-<%= @message%>
+<%= t('frontpage.main_title') %>
+
+<%= t('frontpage.share.default')%>:
+<%= t('frontpage.share.sentence1') %>
+<%= t('frontpage.share.sentence2') %>
+
+<%= t('frontpage.meet.default')%>:
+<%= t('frontpage.meet.sentence1') %>
+
+<%= t('frontpage.collaborate.default')%>:
+<%= t('frontpage.collaborate.sentence1') %>
+<%= t('frontpage.collaborate.sentence2') %>
