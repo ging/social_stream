@@ -10,45 +10,11 @@
 
 <% content_for :headers do %>
   <%= stylesheet_link_tag "settings.css", :media => "screen, projection" %>
+  <%= javascript_include_tag 'settings.js' %>
 <% end %>
 
 <% content_for :javascript do %>
-    var notifications_open = false;
-    var edit_user_open = false;
     
-    closeAllSettings = function(){
-        $("#notifications_settings_content").hide("slow");
-        $("#notifications_settings_briefing").show("slow");
-        notifications_open = false;
-        $("#edit_user_settings_content").hide("slow");
-        $("#edit_user_settings_briefing").show("slow");
-        edit_user_open = false;
-    }
-    
-    showNotificationsSettings = function(){
-        if (notifications_open){
-            $("#notifications_settings_content").hide("slow");
-            $("#notifications_settings_briefing").show("slow");
-            notifications_open = false;
-        }else{
-            closeAllSettings();
-            $("#notifications_settings_content").show("slow");
-            $("#notifications_settings_briefing").hide("slow");
-            notifications_open = true;
-        }       
-    }
-    showEditUserSettings = function(){
-        if (edit_user_open){
-            $("#edit_user_settings_content").hide("slow");
-            $("#edit_user_settings_briefing").show("slow");
-            edit_user_open = false;
-        }else{
-            closeAllSettings();
-            $("#edit_user_settings_content").show("slow");
-            $("#edit_user_settings_briefing").hide("slow");
-            edit_user_open = true;
-        }       
-    }
 <% end %>
 
 <%= render :partial => 'index' %>

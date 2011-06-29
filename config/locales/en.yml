@@ -302,15 +302,13 @@ en:
     main: "Main settings"
     one: "Settings"
     success: "Your settings where correctly changed"
-    edit_user:
-      briefing: "Change your email or password"
-      name: "Edit user data"
-      email: "Email"
-      new_password: "Password"
-      new_password_confirmation: "Password confirmation"
-      new_password_comment: "Leave blank if you don't want to change it" 
-      current_password: "Current password"
-      current_password_comment: "We need your current password to confirm your changes"
+    api_key:
+      briefing: "Manage your API key"
+      confirm: "Are you sure?"
+      empty: "Empty Token"
+      explanation: "This is your API key"
+      name: "API Key"
+      regenerate: "Regenerate API key"
     notifications:
       briefing: "Settings about notifications behaviour and mail alerts"
       name: "Notifications"

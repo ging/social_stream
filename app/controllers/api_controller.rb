@@ -4,6 +4,10 @@ class ApiController < ApplicationController
   
   def create_key
     current_user.reset_authentication_token!
+    if params[:api_settings].present?
+      redirect_to settings_path(:api_settings => true)
+      return
+    end
     redirect_to :controller => :users, :action => :show, :id => current_user.to_param, :auth_token => params[:auth_token]
   end
   
