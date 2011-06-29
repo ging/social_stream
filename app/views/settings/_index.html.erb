@@ -6,4 +6,6 @@
 <div class="space_center">
 </div>
 <%= render :partial => "notifications" %>
+<% if current_subject.respond_to? :authentication_token%>
 <%= render :partial => "api_key" %>
+<% end %>
