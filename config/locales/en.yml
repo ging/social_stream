@@ -1,4 +1,15 @@
 en:
+  audio:
+    confirm_delete: "Delete audio?"
+    title: "Audios"
+    mine: "My audios"
+    msg: "Just uploaded an audio:"
+  conference:
+    all: "All conferences"
+    confirm_delete: "Delete conference?"
+    title: "Conferences"
+    mine: "My conferences"
+    msg: "Just uploaded a conference:"
   document:
     all: "All documents"  
     confirm_delete: "Delete document?"
@@ -10,13 +21,14 @@ en:
     title: "Pictures"
     mine: "My pictures"  
     msg: "Just uploaded a picture:"
+  resource:
+    all: "All Resources"
+    confirm_delete: "Delete resource?"
+    title: "Resources"
+    mine: "My resources"
+    msg: "Just uploaded a resource:"
   video:
     confirm_delete: "Delete video?"
     title: "Videos"
     mine: "My videos"  
     msg: "Just uploaded a video:" 
-  audio:
-    confirm_delete: "Delete audio?"
-    title: "Audios"
-    mine: "My audios"  
-    msg: "Just uploaded an audio:"  

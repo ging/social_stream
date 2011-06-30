@@ -7,3 +7,6 @@ spec/dummy/tmp/
 *.DS_Store
 Gemfile.lock
 .project
+.idea/*
+.idea/social_stream-documents.iml
+
