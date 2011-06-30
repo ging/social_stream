@@ -20,6 +20,8 @@ describe Tie do
     end
     
     it "should be decremented" do
+      pending
+
       tie = Factory(:friend)
       contact = tie.contact
       receiver = tie.receiver

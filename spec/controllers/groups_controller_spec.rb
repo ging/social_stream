@@ -118,7 +118,7 @@ describe GroupsController do
           participants.should include(@user_participant)
           participants.should include(@group_participant)
 
-          group.contacts(:direction => :received)
+          group.contact_subjects(:direction => :received)
           response.should redirect_to(:home)
         end
         end
