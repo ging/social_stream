@@ -1,0 +1,13 @@
+<% object._contact_id = current_subject.contact_to!(receiver).id %>
+
+<%= form_for object, :remote => true  do |f| %>
+  <%= f.hidden_field :_contact_id %>
+
+  <%= render :partial => object.class.to_s.tableize+'/fields' , :locals => {:f => f} %>	
+
+  <% if current_subject != receiver %>
+    <% receiver.activity_relations(current_subject, :from => :receiver).each do |r| %>
+      <%= f.hidden_field "_relation_ids][", :value => r.id %>
+    <% end %>
+  <% end %>
+<% end %>

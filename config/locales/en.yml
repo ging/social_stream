@@ -198,6 +198,7 @@ en:
   password:
     forgot: "Do you forgot your password?"
   post:
+    title: "Posts"  
     confirm_delete: "Delete post?"
   profile:
     one: "Profile"

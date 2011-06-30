@@ -12,39 +12,14 @@
 	});
   <% end %>
 
-  <div id="activities_header" class="content_size">
-    <%= form_for Post.new(:text => t('activity.input'),
-                          :_contact_id => current_subject.contact_to!(receiver).id),
-                          :remote => true  do |f| %>
-      <%= f.hidden_field :_contact_id %>
-
-      <%= f.text_field :text, :id => "input_activities", :size => 85 %>
-
-      <% if current_subject != receiver %>
-        <% receiver.activity_relations(current_subject, :from => :receiver).each do |r| %>
-          <%= f.hidden_field "_relation_ids][", :value => r.id %>
-        <% end %>
-      <% end %>
-
-      <!--<div id="activities_share_btn">
-
-        <% if current_subject.activity_relations(receiver, :from => :sender).count > 1 %>
-          <div id="securities">
-            <%= f.select "_relation_ids",
-                          grouped_options_for_select(current_subject.grouped_activity_relations(receiver)),
-                          {}, :id => 'security' %>
-          </div>
-        <% else %>
-          <%= f.hidden_field "_relation_ids", :value => current_subject.activity_relations(receiver, :from => :sender).first %>
-        <% end %>
-        <%= f.submit t('share'), :class =>"myButtonBlue" %>
-    </div>-->
+<div id="activities_header" class="content_size">
+	<% SocialStream.activity_forms.each do |element| %>
+		<%= render :partial => element.to_s.pluralize+'/new',
+						  	:locals  => {
+						  		:receiver => receiver
+						  	} %>
+	<% end %>
 </div>
-<% end %><!-- END OF FORM -->
-
-<% SocialStream.activity_forms.each do |element| %>
-	<%= render :partial => element.to_s.pluralize+'/new', :locals =>{:a_tie_id => 		current_subject.activity_ties_to(receiver).first.id} %>
-<% end %>
 
 <div id="activities_share_btn">
 <div id="securities"><%= select_tag :_relation_ids, grouped_options_for_select(current_subject.grouped_activity_relations(receiver)), :id => 'security' %></div>
