@@ -198,7 +198,7 @@ class Actor < ActiveRecord::Base
   # options before the mapping to subjects
   #
   # See #contact_actors for options
-  def contacts(options = {})
+  def contact_subjects(options = {})
     as = contact_actors(options)
     
     if block_given?
@@ -240,7 +240,7 @@ class Actor < ActiveRecord::Base
     # Candidates are all the instance of "type" minus all the subjects
     # that are receiving any tie from this actor
     candidates = candidates_classes.inject([]) do |cs, klass|
-      cs += klass.all - contacts(:type => klass.to_s.underscore, :direction => :sent)
+      cs += klass.all - contact_subjects(:type => klass.to_s.underscore, :direction => :sent)
       cs -= Array(subject) if subject.is_a?(klass)
       cs
     end

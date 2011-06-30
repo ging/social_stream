@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   end
   
   def recent_groups
-    contacts(:type => :group, :direction => :sent) do |q|
+    contact_subjects(:type => :group, :direction => :sent) do |q|
       q.select("contacts.created_at").
         merge(Contact.recent)
     end
@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
 
   # Subjects this user can acts as
   def represented
-    contacts(:direction => :received) do |q|
+    contact_subjects(:direction => :received) do |q|
       q.joins(:sent_ties => { :relation => :permissions }).merge(Permission.represent)
     end
   end

@@ -12,11 +12,11 @@ class Group < ActiveRecord::Base
   end
 
   def followers
-    contacts(:subject_type => :user, :direction => :received)
+    contact_subjects(:subject_type => :user, :direction => :received)
   end
   
   def recent_groups
-    contacts(:type => :group, :direction => :sent) do |q|
+    contact_subjects(:type => :group, :direction => :sent) do |q|
       q.select("contacts.created_at").
         merge(Contact.recent)
     end
@@ -39,11 +39,10 @@ class Group < ActiveRecord::Base
     
      @_participants.each do |participant|
       
-      #participant_actor = Actor.find_by_slug!(participant)
-      participant_actor = Actor.find_by_id!(participant)
+       participant_actor = Actor.find(participant)
 
-      sent_contacts.create! :receiver => participant_actor,
-                            :relation_ids => Array(relation_customs.sort.first)
+       sent_contacts.create! :receiver => participant_actor,
+                             :relation_ids => Array(relation_customs.sort.first.id)
      end
   end
 end

@@ -4,7 +4,7 @@ class ContactsController < ApplicationController
   def index
     @contacts =
       current_subject.
-        contacts(:direction => :sent, :relations => params[:relation]){ |q|
+        contact_subjects(:direction => :sent, :relations => params[:relation]){ |q|
           q.alphabetic.
             letter(params[:letter]).
             search(params[:search])
@@ -13,7 +13,7 @@ class ContactsController < ApplicationController
     respond_to do |format|
       format.html { @contacts = Kaminari.paginate_array(@contacts).page(params[:page]).per(10) }
       format.js { @contacts = Kaminari.paginate_array(@contacts).page(params[:page]).per(10) }
-      format.json { render :text => @contacts.map{ |c| { 'key' => c.id.to_s, 'value' => c.name } }.to_json }
+      format.json { render :text => @contacts.map{ |c| { 'key' => c.actor_id.to_s, 'value' => c.name } }.to_json }
     end
   end
 

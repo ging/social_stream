@@ -81,7 +81,6 @@ describe GroupsController do
     context "a new own group" do
       before do
         model_attributes[:_founder] = @user.slug
-        model_attributes[:_participants] = [Factory(:user).id]
       end
 
       it "should allow creating" do
@@ -95,6 +94,34 @@ describe GroupsController do
         assigns(:current_subject).should eq(group)
         response.should redirect_to(:home)
       end
+
+      context "with participants" do
+        before do
+          @user_participant = Factory(:user)
+          @group_participant = Factory(:group)
+
+          model_attributes[:_participants] = [@user_participant.actor_id, @group_participant.actor_id]
+        end
+
+        it "should allow creating" do
+          count = Group.count
+          post :create, attributes
+
+          group = assigns(:group)
+
+          group.should be_valid
+          Group.count.should eq(count + 1)
+          assigns(:current_subject).should eq(group)
+
+          participants = group.contact_subjects(:direction => :sent)
+
+          participants.should include(@user_participant)
+          participants.should include(@group_participant)
+
+          group.contacts(:direction => :received)
+          response.should redirect_to(:home)
+        end
+        end
     end
 
     context "a new fake group" do
