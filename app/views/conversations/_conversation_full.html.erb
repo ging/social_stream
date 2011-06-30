@@ -2,7 +2,7 @@
 	<h2><%= conversation.subject %></h2>
 </div>
 <div class="action">
-	<% unless @box.eql?'trash' %><%= link_to ( image_tag('btn/btn_delete.png', :atl => "Delete", :title => "Delete"),
+	<% unless @box.eql?'trash' %><%= link_to(image_tag('btn/btn_delete.png', :atl => "Delete", :title => "Delete"),
 	conversation_path(conversation, :location => 'conversation', :box => @box),
 	:confirm => 'Do you want to move "' + conversation.subject + '" to trash?',
 	:method => :delete, :remote => true) %><% end %>
