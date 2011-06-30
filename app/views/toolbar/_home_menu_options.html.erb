@@ -4,11 +4,6 @@
   <%= render :partial =>'toolbar/notifications_menu'%>
 <% end %>
 
-<% if SocialStream.activity_forms.include? :document %>
-    <%= menu_options[:uploads] || capture do %>
-      <%= render :partial =>'toolbar/uploads_menu'%>
-    <% end %>
-<% end %>
 
 <%= menu_options[:messages] || capture do %>
   <%= render :partial =>'toolbar/message_menu'%>
@@ -30,10 +25,17 @@
   </li>
 <% end %>
 
-
 <%= menu_options[:subjects] || capture do %>
   <%= render :partial => 'toolbar/home_menu_options_subjects' %>
 <% end %>
+
+<% if SocialStream.activity_forms.include? :document %>
+    <%= menu_options[:uploads] || capture do %>
+      <%= render :partial =>'toolbar/uploads_menu'%>
+    <% end %>
+<% end %>
+
+
 
 </ul>
 
