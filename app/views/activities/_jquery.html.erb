@@ -12,10 +12,14 @@ $('.activities_title_header').live('click',function(){
 
 //submit
 $('#masterSubmitButton').live('click',function(){
-	/*$('#security').change(function() {
-	  $('input[name*="_activity_tie_id"]').val($('#security').attr("value"));
-	});*/
-	
+	$('.liveAdded').remove();
+	$('#wrapper_activities_header form:visible').append(
+	$('<input/>')
+	  .addClass('liveAdded')
+	  .attr('type', 'hidden')
+	  .attr('name', $('#wrapper_activities_header form:visible')
+	  .attr('id').split('_')[1]+'[_relation_ids][]')
+	  .val($('#security option:selected').attr('value')));
 	$('#wrapper_activities_header form:visible').submit();
 });
 

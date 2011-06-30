@@ -1,6 +1,6 @@
 <% object._contact_id = current_subject.contact_to!(receiver).id %>
 
-<%= form_for object, :remote => true  do |f| %>
+<%= form_for object, :remote => remote  do |f| %>
   <%= f.hidden_field :_contact_id %>
 
   <%= render :partial => object.class.to_s.tableize+'/fields' , :locals => {:f => f} %>	

@@ -4,7 +4,7 @@
     securityImage = "<%= escape_javascript(image_tag('btn/btn_security.png', :id => 'security_image', :alt => 'security')) %>";
     downImage = "<%= escape_javascript(image_tag('btn/btn_down.png')) %>";
 
-    $("#security").dropdownchecklist( { closeRadioOnClick: true } );
+	$("#security").dropdownchecklist( { closeRadioOnClick: true, forceMultiple: false } );
     $("#security_image").parent().width(28);
     $("#security_image").parent().parent().width(28);
   <% end %>
@@ -19,7 +19,7 @@
 </div>
 
 <div id="activities_share_btn">
-<div id="securities"><%= select_tag :_relation_ids, grouped_options_for_select(current_subject.grouped_activity_relations(receiver)), :id => 'security' %></div>
+<div id="securities"><%= select_tag :_relation_ids, grouped_options_for_select(current_subject.grouped_activity_relations(receiver)), :id => 'security', :multiple => nil %></div>
 <%= submit_tag(t('share'), :class => "myButtonBlue", :id => "masterSubmitButton") %>
 </div>
 <% end %>

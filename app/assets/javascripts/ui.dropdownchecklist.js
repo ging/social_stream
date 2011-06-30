@@ -1,19 +1,18 @@
 ;(function($) {
-    /*
+/*
     * ui.dropdownchecklist
     *
-    * Copyright (c) 2008-2010 Adrian Tosca, Copyright (c) 2010 Ittrium LLC
-    * Dual licensed under the MIT (MIT-LICENSE.txt)
-    * and GPL (GPL-LICENSE.txt) licenses.
+    * Copyright (c) 2008-2010 Adrian Tosca, Copyright (c) 2010-2011 Ittrium LLC
+    * Dual licensed under the MIT (MIT-LICENSE.txt) OR GPL (GPL-LICENSE.txt) licenses.
     *
-    */
+*/
     // The dropdown check list jQuery plugin transforms a regular select html element into a dropdown check list.
     $.widget("ui.dropdownchecklist", {
     	// Some globlals
     	// $.ui.dropdownchecklist.gLastOpened - keeps track of last opened dropdowncheck list so we can close it
     	// $.ui.dropdownchecklist.gIDCounter - simple counter to provide a unique ID as needed
         version: function() {
-            alert('DropDownCheckList v1.1');
+            alert('DropDownCheckList v1.4');
         },    	
         // Creates the drop container that keeps the items and appends it to the document
         _appendDropContainer: function( controlItem ) {
@@ -23,7 +22,8 @@
             wrapper.addClass("ui-widget");
             // assign an id
             wrapper.attr("id",controlItem.attr("id") + '-ddw');
-            // initially hidden
+            // initially positioned way off screen to prevent it from displaying
+            // NOTE absolute position to enable width/height calculation
             wrapper.css({ position: 'absolute', left: "-33000px", top: "-33000px"  });
             
             var container = $("<div/>"); // the actual container
@@ -139,9 +139,10 @@
             var self = this, sourceSelect = this.sourceSelect, options = this.options;
 
             // the control is wrapped in a basic container
+            // inline-block at this level seems to give us better size control
             var wrapper = $("<span/>");
             wrapper.addClass("ui-dropdownchecklist ui-dropdownchecklist-selector-wrapper ui-widget");
-            wrapper.css({ cursor: "default", overflow: "hidden" });
+            wrapper.css( { display: "inline-block", cursor: "default", overflow: "hidden" } );
             
             // assign an ID 
             var baseID = sourceSelect.attr("id");
@@ -173,7 +174,7 @@
 			control.blur(function(e) {self._handleFocus(e,false,true);});
             wrapper.append(control);
 
-			// the optional icon (which is inherently a block)
+			// the optional icon (which is inherently a block) which we can float
 			if (options.icon != null) {
 				var iconPlacement = (options.icon.placement == null) ? "left" : options.icon.placement;
 	            var anIcon = $("<div/>");
@@ -183,7 +184,7 @@
 	            control.append(anIcon);
 			}
             // the text container keeps the control text that is built from the selected (checked) items
-            // inline-block needed to enable 'width' but has interesting problems cross browser
+            // inline-block needed to prevent long text from wrapping to next line when icon is active
             var textContainer = $("<span/>");
             textContainer.addClass("ui-dropdownchecklist-text");
             textContainer.css( {  display: "inline-block", 'white-space': "nowrap", overflow: "hidden" } );
@@ -221,7 +222,7 @@
             return wrapper;
         },
         // Creates a drop item that coresponds to an option element in the source select
-        _createDropItem: function(index, tabIndex, value, text, checked, disabled, indent) {
+        _createDropItem: function(index, tabIndex, value, text, optCss, checked, disabled, indent) {
             var self = this, options = this.options, sourceSelect = this.sourceSelect, controlWrapper = this.controlWrapper;
             // the item contains a div that contains a checkbox input and a lable for the text
             // the div
@@ -248,8 +249,9 @@
             // the text
             var label = $("<label for=" + id + "/>");
             label.addClass("ui-dropdownchecklist-text");
+            if ( optCss != null ) label.attr('style',optCss);
             label.css({ cursor: "default" });
-            label.text(text);
+            label.html(text);
 			if (indent) {
 				item.addClass("ui-dropdownchecklist-indent");
 			}
@@ -277,6 +279,15 @@
 				e.stopImmediatePropagation();
 				if (aCheckBox.hasClass("active") ) {
 					// Active checkboxes take active action
+	                var callback = self.options.onItemClick;
+	                if ($.isFunction(callback)) try {
+                        callback.call(self,aCheckBox,sourceSelect.get(0));
+                    } catch (ex) {
+                        // reject the change on any error
+                        aCheckBox.prop("checked",!aCheckBox.prop("checked"));
+	                	self._syncSelected(aCheckBox);
+                        return;
+                    } 
 	                self._syncSelected(aCheckBox);
 	                self.sourceSelect.trigger("change", 'ddcl_internal');
 	                if (!self.isMultiple && options.closeRadioOnClick) {
@@ -313,8 +324,18 @@
 				if (!anItem.hasClass("ui-state-disabled") ) {
 					// check/uncheck the underlying control
 					var aCheckBox = anItem.find("input");
-	                var checked = aCheckBox.attr("checked");
-	                aCheckBox.attr("checked", !checked);
+	                var checked = aCheckBox.prop("checked");
+	                aCheckBox.prop("checked", !checked);
+	                
+	                var callback = self.options.onItemClick;
+	                if ($.isFunction(callback)) try {
+                        callback.call(self,aCheckBox,sourceSelect.get(0));
+                    } catch (ex) {
+                        // reject the change on any error
+                        aCheckBox.prop("checked",checked);
+	                	self._syncSelected(aCheckBox);
+                        return;
+                    } 
 	                self._syncSelected(aCheckBox);
 	                self.sourceSelect.trigger("change", 'ddcl_internal');
 	                if (!checked && !self.isMultiple && options.closeRadioOnClick) {
@@ -364,17 +385,48 @@
             });
 			return group;
 		},
+		_createCloseItem: function(text) {
+			var self = this;
+			var closeItem = $("<div />");
+			closeItem.addClass("ui-state-default ui-dropdownchecklist-close ui-dropdownchecklist-item");
+			closeItem.css({'white-space': 'nowrap', 'text-align': 'right'});
+			
+            var label = $("<span/>");
+            label.addClass("ui-dropdownchecklist-text");
+            label.css( { cursor: "default" });
+            label.html(text);
+			closeItem.append(label);
+			
+			// close the control on click
+	        closeItem.click(function(e) {
+	        	var aGroup= $(this);
+                e.stopImmediatePropagation();
+                // retain the focus even if no action is taken
+                aGroup.focus();
+                self._toggleDropContainer( false );
+            });
+            closeItem.hover(
+            	function(e) { $(this).addClass("ui-state-hover"); }
+            , 	function(e) { $(this).removeClass("ui-state-hover"); }
+            );
+	        // do not let the focus wander around
+			closeItem.focus(function(e) { 
+	        	var aGroup = $(this);
+                e.stopImmediatePropagation();
+            });
+			return closeItem;
+		},
         // Creates the drop items and appends them to the drop container
         // Also calculates the size needed by the drop container and returns it
         _appendItems: function() {
-            var self = this, sourceSelect = this.sourceSelect, dropWrapper = this.dropWrapper;
+            var self = this, config = this.options, sourceSelect = this.sourceSelect, dropWrapper = this.dropWrapper;
             var dropContainerDiv = dropWrapper.find(".ui-dropdownchecklist-dropcontainer");
 			sourceSelect.children().each(function(index) { // when the select has groups
 				var opt = $(this);
                 if (opt.is("option")) {
                     self._appendOption(opt, dropContainerDiv, index, false, false);
                 } else if (opt.is("optgroup")) {
-					var disabled = opt.attr("disabled");
+					var disabled = opt.prop("disabled");
                     var text = opt.attr("label");
                     if (text != "") {
 	                    var group = self._createGroupItem(text,disabled);
@@ -383,6 +435,10 @@
                     self._appendOptions(opt, dropContainerDiv, index, true, disabled);
                 }
 			});
+			if ( config.explicitClose != null ) {
+				var closeItem = self._createCloseItem(config.explicitClose);
+				dropContainerDiv.append(closeItem);
+			}
             var divWidth = dropContainerDiv.outerWidth();
             var divHeight = dropContainerDiv.outerHeight();
             return { width: divWidth, height: divHeight };
@@ -397,47 +453,91 @@
 		},
         _appendOption: function(option, container, index, indent, forceDisabled) {
             var self = this;
-            var text = option.text();
-            var value = option.val();
-            var selected = option.attr("selected");
-			var disabled = (forceDisabled || option.attr("disabled"));
-			// Use the same tab index as the selector replacement
-			var tabIndex = self.controlSelector.attr("tabindex");
-            var item = self._createDropItem(index, tabIndex, value, text, selected, disabled, indent);
-            container.append(item);
+            // Note that the browsers destroy any html structure within the OPTION
+            var text = option.html();
+            if ( (text != null) && (text != '') ) {
+            	var value = option.val();
+            	var optCss = option.attr('style');
+            	var selected = option.prop("selected");
+				var disabled = (forceDisabled || option.prop("disabled"));
+				// Use the same tab index as the selector replacement
+				var tabIndex = self.controlSelector.attr("tabindex");
+            	var item = self._createDropItem(index, tabIndex, value, text, optCss, selected, disabled, indent);
+            	container.append(item);
+            }
         },
         // Synchronizes the items checked and the source select
         // When firstItemChecksAll option is active also synchronizes the checked items
         // senderCheckbox parameters is the checkbox input that generated the synchronization
         _syncSelected: function(senderCheckbox) {
             var self = this, options = this.options, sourceSelect = this.sourceSelect, dropWrapper = this.dropWrapper;
+            var selectOptions = sourceSelect.get(0).options;
             var allCheckboxes = dropWrapper.find("input.active");
-            if (options.firstItemChecksAll) {
-                // if firstItemChecksAll is true, check all checkboxes if the first one is checked
-                if ((senderCheckbox != null) && (senderCheckbox.attr("index") == 0)) {
-                    allCheckboxes.attr("checked", senderCheckbox.attr("checked"));
+            if (options.firstItemChecksAll == 'exclusive') {
+            	if ((senderCheckbox == null) && $(selectOptions[0]).prop("selected") ) {
+            		// Initialization call with first item active
+                    allCheckboxes.prop("checked", false);
+                    $(allCheckboxes[0]).prop("checked", true);
+                } else if ((senderCheckbox != null) && (senderCheckbox.attr("index") == 0)) {
+                	// Action on the first, so all other checkboxes NOT active
+                	var firstIsActive = senderCheckbox.prop("checked");
+                    allCheckboxes.prop("checked", false);
+                    $(allCheckboxes[0]).prop("checked", firstIsActive);
                 } else  {
                     // check the first checkbox if all the other checkboxes are checked
                     var allChecked = true;
                     var firstCheckbox = null;
                     allCheckboxes.each(function(index) {
                         if (index > 0) {
-                            var checked = $(this).attr("checked");
+                            var checked = $(this).prop("checked");
                             if (!checked) { allChecked = false; }
                         } else {
                         	firstCheckbox = $(this);
                         }
                     });
                     if ( firstCheckbox != null ) {
-                    	firstCheckbox.attr("checked", allChecked );
+                    	if ( allChecked ) {
+                    		// when all are checked, only the first left checked
+                    		allCheckboxes.prop("checked", false);
+                    	}
+                    	firstCheckbox.prop("checked", allChecked );
+                    }
+                }
+            } else if (options.firstItemChecksAll) {
+            	if ((senderCheckbox == null) && $(selectOptions[0]).prop("selected") ) {
+            		// Initialization call with first item active so force all to be active
+                    allCheckboxes.prop("checked", true);
+                } else if ((senderCheckbox != null) && (senderCheckbox.attr("index") == 0)) {
+                	// Check all checkboxes if the first one is checked
+                    allCheckboxes.prop("checked", senderCheckbox.prop("checked"));
+                } else  {
+                    // check the first checkbox if all the other checkboxes are checked
+                    var allChecked = true;
+                    var firstCheckbox = null;
+                    allCheckboxes.each(function(index) {
+                        if (index > 0) {
+                            var checked = $(this).prop("checked");
+                            if (!checked) { allChecked = false; }
+                        } else {
+                        	firstCheckbox = $(this);
+                        }
+                    });
+                    if ( firstCheckbox != null ) {
+                    	firstCheckbox.prop("checked", allChecked );
                     }
                 }
             }
             // do the actual synch with the source select
+            var empties = 0;
             allCheckboxes = dropWrapper.find("input");
-            var selectOptions = sourceSelect.get(0).options;
             allCheckboxes.each(function(index) {
-                $(selectOptions[index]).attr("selected", $(this).attr("checked"));
+            	var anOption = $(selectOptions[index + empties]);
+            	var optionText = anOption.html();
+            	if ( (optionText == null) || (optionText == '') ) {
+                    empties += 1;
+                    anOption = $(selectOptions[index + empties]);
+            	}
+                anOption.prop("selected", $(this).prop("checked"));
             });
             // update the text shown in the control
             self._updateControlText();
@@ -459,14 +559,14 @@
             var selectOptions = sourceSelect.find("option");
             var text = self._formatText(selectOptions, options.firstItemChecksAll, firstOption);
             var controlLabel = controlWrapper.find(".ui-dropdownchecklist-text");
-
+            controlLabel.html(text);
+            // the attribute needs naked text, not html
             //controlLabel.html(text);
             controlLabel.html(securityImage);
             controlLabel.append(" ");
             controlLabel.append(downImage);
             //controlLabel.attr("title", text);
             controlLabel.attr("title", "security");
-
         },
         // Formats the text that is shown in the control
         _formatText: function(selectOptions, firstItemChecksAll, firstOption) {
@@ -478,16 +578,25 @@
                 } catch(ex) {
                 	alert( 'textFormatFunction failed: ' + ex );
                 }
-            } else if (firstItemChecksAll && (firstOption != null) && firstOption.attr("selected")) {
+            } else if (firstItemChecksAll && (firstOption != null) && firstOption.prop("selected")) {
                 // just set the text from the first item
-                text = firstOption.text();
+                text = firstOption.html();
             } else {
                 // concatenate the text from the checked items
                 text = "";
                 selectOptions.each(function() {
-                    if ($(this).attr("selected")) {
+                    if ($(this).prop("selected")) {
                         if ( text != "" ) { text += ", "; }
-                        text += $(this).text();
+                        /* NOTE use of .html versus .text, which can screw up ampersands for IE */
+                        var optCss = $(this).attr('style');
+                        var tempspan = $('<span/>');
+                        tempspan.html( $(this).html() );
+                        if ( optCss == null ) {
+                        	text += tempspan.html();
+                        } else {
+                        	tempspan.attr('style',optCss);
+                        	text += $("<span/>").append(tempspan).html();
+                        }
                     }
                 });
                 if ( text == "" ) {
@@ -522,7 +631,7 @@
                     $(document).unbind("click", hide);
                     
                     // keep the items out of the tab order by disabling them
-                    instance.dropWrapper.find("input.active").attr("disabled","disabled");
+                    instance.dropWrapper.find("input.active").prop("disabled",true);
                     
                     // the following blur just does not fire???  because it is hidden???  because it does not have focus???
 			  		//instance.sourceSelect.trigger("blur");
@@ -541,21 +650,45 @@
 	                $.ui.dropdownchecklist.gLastOpened = instance;
 
 	            	var config = instance.options;
+/**** Issue127 (and the like) to correct positioning when parent element is relative
+ ****	This positioning only worked with simple, non-relative parent position
 	                instance.dropWrapper.css({
 	                    top: instance.controlWrapper.offset().top + instance.controlWrapper.outerHeight() + "px",
 	                    left: instance.controlWrapper.offset().left + "px"
 	                });
-					var ancestorsZIndexes = instance.controlWrapper.parents().map(
-						function() {
-							var zIndex = $(this).css("z-index");
-							return isNaN(zIndex) ? 0 : zIndex; }
-						).get();
-					var parentZIndex = Math.max.apply(Math, ancestorsZIndexes);
-					if (parentZIndex > 0) {
-						instance.dropWrapper.css({
-							zIndex: (parentZIndex+1)
-						});
+****/
+             		if ((config.positionHow == null) || (config.positionHow == 'absolute')) {
+             			/** Floats above subsequent content, but does NOT scroll */
+		                instance.dropWrapper.css({
+		                    position: 'absolute'
+		                ,   top: instance.controlWrapper.position().top + instance.controlWrapper.outerHeight() + "px"
+		                ,   left: instance.controlWrapper.position().left + "px"
+		                });
+		            } else if (config.positionHow == 'relative') {
+		            	/** Scrolls with the parent but does NOT float above subsequent content */
+		                instance.dropWrapper.css({
+		                    position: 'relative'
+		                ,   top: "0px"
+		                ,   left: "0px"
+		                });
 					}
+					var zIndex = 0;
+					if (config.zIndex == null) {
+						var ancestorsZIndexes = instance.controlWrapper.parents().map(
+							function() {
+								var zIndex = $(this).css("z-index");
+								return isNaN(zIndex) ? 0 : zIndex; }
+							).get();
+						var parentZIndex = Math.max.apply(Math, ancestorsZIndexes);
+						if ( parentZIndex >= 0) zIndex = parentZIndex+1;
+					} else {
+						/* Explicit set from the optins */
+						zIndex = parseInt(config.zIndex);
+					}
+					if (zIndex > 0) {
+						instance.dropWrapper.css( { 'z-index': zIndex } );
+					}
+
 	                var aControl = instance.controlSelector;
 	                aControl.addClass("ui-state-active");
 	                aControl.removeClass("ui-state-hover");
@@ -569,7 +702,7 @@
 	                
                     // insert the items back into the tab order by enabling all active ones
                     var activeItems = instance.dropWrapper.find("input.active");
-                    activeItems.removeAttr("disabled");
+                    activeItems.prop("disabled",false);
                     
                     // we want the focus on the first active input item
                     var firstActiveItem = activeItems.get(0);
@@ -608,8 +741,9 @@
             var controlText = control.find(".ui-dropdownchecklist-text");
             var controlIcon = control.find(".ui-icon");
             if ( controlIcon != null ) {
-            	// Must be an inner/outer/border problem, but IE6 needs an extra bit of space
-            	controlWidth -= (controlIcon.outerWidth() + 6);
+            	// Must be an inner/outer/border problem, but IE6 needs an extra bit of space,
+            	// otherwise you can get text pushed down into a second line when icons are active
+            	controlWidth -= (controlIcon.outerWidth() + 4);
             	controlText.css( { width: controlWidth + "px" } );
             }
             // Account for padding, borders, etc
@@ -646,10 +780,10 @@
             var sourceSelect = self.element;
             self.initialDisplay = sourceSelect.css("display");
             sourceSelect.css("display", "none");
-            self.initialMultiple = sourceSelect.attr("multiple");
+            self.initialMultiple = sourceSelect.prop("multiple");
             self.isMultiple = self.initialMultiple;
             if (options.forceMultiple != null) { self.isMultiple = options.forceMultiple; }
-            sourceSelect.attr("multiple", true);
+            sourceSelect.prop("multiple", true);
             self.sourceSelect = sourceSelect;
 
             // append the control that resembles a single selection select
@@ -691,18 +825,18 @@
 			var aParent = item.parent();
 			// account for enabled/disabled
             if ( disabled ) {
-            	item.attr("disabled","disabled");
+            	item.prop("disabled",true);
             	item.removeClass("active");
             	item.addClass("inactive");
             	aParent.addClass("ui-state-disabled");
             } else {
-            	item.removeAttr("disabled");
+            	item.prop("disabled",false);
             	item.removeClass("inactive");
             	item.addClass("active");
             	aParent.removeClass("ui-state-disabled");
             }
             // adjust the checkbox state
-            item.attr("checked",selected);
+            item.prop("checked",selected);
         },
         _refreshGroup: function(group,disabled) {
             if ( disabled ) {
@@ -711,6 +845,11 @@
             	group.removeClass("ui-state-disabled");
             }
         },
+        // External command to explicitly close the dropdown
+        close: function() {
+			this._toggleDropContainer(false);
+        },
+        // External command to refresh the ddcl from the underlying selector
         refresh: function() {
             var self = this, sourceSelect = this.sourceSelect, dropWrapper = this.dropWrapper;
             
@@ -721,9 +860,9 @@
             var optionCount = 0;
 			sourceSelect.children().each(function(index) {
 				var opt = $(this);
-				var disabled = opt.attr("disabled");
+				var disabled = opt.prop("disabled");
                 if (opt.is("option")) {
-                	var selected = opt.attr("selected");
+                	var selected = opt.prop("selected");
                 	var anItem = $(allCheckBoxes[optionCount]);
                     self._refreshOption(anItem, disabled, selected);
                     optionCount += 1;
@@ -734,30 +873,34 @@
                     	self._refreshGroup(aGroup, disabled);
                     	groupCount += 1;
 	                }
-					opt.children("option").each(function(subindex) {
+					opt.children("option").each(function() {
 		                var subopt = $(this);
-						var subdisabled = (disabled || subopt.attr("disabled"));
-                		var selected = subopt.attr("selected");
-                		var subItem = $(allCheckBoxes[optionCount + subindex]);
+						var subdisabled = (disabled || subopt.prop("disabled"));
+                		var selected = subopt.prop("selected");
+                		var subItem = $(allCheckBoxes[optionCount]);
 		                self._refreshOption(subItem, subdisabled, selected );
+		                optionCount += 1;
 		            });
                 }
 			});
-        	// update the text shown in the control
-        	self._updateControlText();
+			// sync will handle firstItemChecksAll and updateControlText
+			self._syncSelected(null);
         },
+        // External command to enable the ddcl control
         enable: function() {
             this.controlSelector.removeClass("ui-state-disabled");
             this.disabled = false;
         },
+        // External command to disable the ddcl control
         disable: function() {
             this.controlSelector.addClass("ui-state-disabled");
             this.disabled = true;
         },
+        // External command to destroy all traces of the ddcl control
         destroy: function() {
             $.Widget.prototype.destroy.apply(this, arguments);
             this.sourceSelect.css("display", this.initialDisplay);
-            this.sourceSelect.attr("multiple", this.initialMultiple);
+            this.sourceSelect.prop("multiple", this.initialMultiple);
             this.controlWrapper.unbind().remove();
             this.dropWrapper.remove();
         }
@@ -765,12 +908,14 @@
 
     $.extend($.ui.dropdownchecklist, {
         defaults: {
-            width: null,
-            maxDropHeight: null,
-            firstItemChecksAll: false,
-            closeRadioOnClick: false,
-            minWidth: 50,
-            bgiframe: false
+            width: null
+        ,   maxDropHeight: null
+        ,   firstItemChecksAll: false
+        ,   closeRadioOnClick: false
+        ,   minWidth: 50
+        ,   positionHow: 'absolute'
+        ,   bgiframe: false
+        ,	explicitClose: null
         }
     });
 
