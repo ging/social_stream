@@ -1,8 +1,8 @@
 module PermissionsHelper
   DEFAULT_PERMISSIONS =
     [
-      [ "read",    "activity", "weak_star_ties" ],
-      [ "create",  "activity", nil ],
+      [ "read",    "activity", "same_and_lower_levels" ],
+      [ "create",  "activity", "same_level" ],
       [ "follow", nil, nil],
       [ "represent", nil, nil]
     ]

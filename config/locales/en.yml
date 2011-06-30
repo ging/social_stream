@@ -245,7 +245,7 @@ en:
       brief:
         create: 
           activity:
-            nil: "Post to wall"
+            same_level: "Post to wall"
         destroy:
           activity:
             nil: "Delete activities in wall"
@@ -254,27 +254,26 @@ en:
             nil: "Follow their activity"
         read:
           activity:
-            weak_star_ties: "Read wall"
+            same_and_lower_levels: "Read wall"
         represent:
           nil:
             nil: "Represent"
       detailed:
         create:
           activity:
-            nil: "Post to \"%{sphere}\" wall at %{relation} level"
-            weak_ties: "Post to \"%{sphere}\" wall as %{relations} and %{public}"
+            same_level: "Post to \"%{sphere}\" wall at %{relation} level"
+            same_and_lower_levels: "Post to \"%{sphere}\" wall as %{relations} and %{public}"
         destroy:
           activity:
             nil: "Delete the activities posted to \"%{sphere}\" wall by this %{relation}"
-            weak_star_ties: "Delete the activities posted to \"%{sphere}\" wall at levels %{relations} and %{public}"
         follow:
           nil:
             nil: "Activities of the contacts at %{relation} level will appear in our home wall"
         read:
           activity:
-            weak_star_ties: "Read posts in \"%{sphere}\" wall at levels %{relations} and %{public}"
+            same_and_lower_levels: "Read posts in \"%{sphere}\" wall at levels %{relations} and %{public}"
           tie:
-            weak_star_ties:
+            same_and_lower_levels:
               "See contacts in levels: %{relations} and %{public}"
         represent:
           nil:

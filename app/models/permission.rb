@@ -102,9 +102,9 @@ class Permission < ActiveRecord::Base
       :public => I18n.t('relation_public.name')
     }.tap do |h|
       case function
-      when NilClass, "star_ties"
+      when NilClass, "same_level"
         h[:relation] = relation.name
-      when "weak_ties", "weak_star_ties"
+      when "same_and_lower_levels"
         h[:relations] = relation.
                         weaker_or_equal.
                         sort.
