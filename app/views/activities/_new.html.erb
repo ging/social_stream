@@ -7,9 +7,6 @@
     $("#security").dropdownchecklist( { closeRadioOnClick: true } );
     $("#security_image").parent().width(28);
     $("#security_image").parent().parent().width(28);
-	$('#security').change(function() {
-	  $('input[name*="_activity_tie_id"]').val($('#security').attr("value"));
-	});
   <% end %>
 
 <div id="activities_header" class="content_size">

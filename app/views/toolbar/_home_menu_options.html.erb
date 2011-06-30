@@ -4,7 +4,7 @@
   <%= render :partial =>'toolbar/notifications_menu'%>
 <% end %>
 
-<% if SocialStream.activity_forms.include? :documents %>
+<% if SocialStream.activity_forms.include? :document %>
     <%= menu_options[:uploads] || capture do %>
       <%= render :partial =>'toolbar/uploads_menu'%>
     <% end %>
