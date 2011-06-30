@@ -1,0 +1,10 @@
+<%= menu_options[:profile] || capture do %>
+  <li>
+    <%= link_to( image_tag("btn/btn_edit.png", :class => "menu_icon")+t('menu.information'), [subject, :profile]) %>
+  </li>
+<% end %>
+
+<%= menu_options[:uploads] || capture do %>
+  <%= render :partial =>'toolbar/home_menu_uploads'%>
+<% end %>
+

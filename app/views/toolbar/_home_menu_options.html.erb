@@ -18,6 +18,9 @@
   <li>
     <%= link_to( image_tag("btn/btn_friend.png", :class => "menu_icon")+t('contact.other'), '#', :id => "contacts_menu") %>
     <ul>
+      <%= menu_options[:invitations] || capture do %>
+        <%= render :partial =>'toolbar/invitations_menu'%>
+      <% end %>
     <% current_subject.relation_customs.sort.each do |r| %>
       <li>
       <%= link_to image_tag("btn/btn_friend.png", :class => "menu_icon") + r.name , contacts_path(:relation => r.id) %>
@@ -27,9 +30,6 @@
   </li>
 <% end %>
 
-<%= menu_options[:invitations] || capture do %>
-  <%= render :partial =>'toolbar/invitations_menu'%>
-<% end %>
 
 <%= menu_options[:subjects] || capture do %>
   <%= render :partial => 'toolbar/home_menu_options_subjects' %>
