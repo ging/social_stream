@@ -21,7 +21,9 @@ module ActivitiesHelper
 
   # Build a new activity based on the current_subject. Useful for authorization queries
   def new_activity(receiver)
-    Activity.new :contact_id => (user_signed_in? ? current_subject.contact_to!(receiver).id : nil),
+    return Activity.new unless user_signed_in?
+
+    Activity.new :contact_id => current_subject.contact_to!(receiver).id,
                  :relation_ids => receiver.activity_relations(current_subject, :from => :receiver).map(&:id)
   end
 end
