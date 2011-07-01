@@ -10,7 +10,7 @@
   <div class ="content">
       <div class="contact space_center">
         <% cs.each do |contact| %>
-            <%= link_to(image_tag(contact.logo.url, :alt => contact.name , :size => "28x28"), contact) %>
+            <%= link_to(image_tag(contact.logo.url(:contact), :alt => contact.name , :size => "28x28"), contact) %>
         <% end %>
       </div>
   </div>
