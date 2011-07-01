@@ -11,5 +11,5 @@ representation_path = $("#avatar_img_<%= new_id %>").attr('src').replace("/profi
 $('#current_user_avatar_img').attr('src', representation_path);
 $('#current_subject_avatar_img').css('background-image', "url('" + representation_path +"')");
 
-  
+$("#current_avatar_img").attr('src', $("#avatar_img_<%= new_id %>").attr('src') );
   
