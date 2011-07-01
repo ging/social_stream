@@ -1,5 +1,6 @@
 module NotificationsHelper
   def decode_notification notification_text, activity
+    return if activity.nil?
     notification_text = notification_text.gsub(/\%\{sender\}/, link_to(activity.sender.name, activity.sender.subject))
     notification_text = notification_text.gsub(/\%\{sender.name\}/,activity.sender.name)
 
