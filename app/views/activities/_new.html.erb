@@ -10,12 +10,12 @@
   <% end %>
 
 <div id="activities_header" class="content_size">
-	<% SocialStream.activity_forms.each do |element| %>
-		<%= render :partial => element.to_s.pluralize+'/new',
-						  	:locals  => {
-						  		:receiver => receiver
-						  	} %>
-	<% end %>
+  <% SocialStream.activity_forms.each do |element| %>
+    <%= render :partial => element.to_s.pluralize+'/new',
+               :locals  => {
+                             :receiver => receiver
+                           } %>
+  <% end %>
 </div>
 
 <div id="activities_share_btn">
