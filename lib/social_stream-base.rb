@@ -31,6 +31,8 @@ require 'acts_as_taggable_on/social_stream'
 require 'formtastic'
 #Background tasks
 require 'resque/server'
+#Simple Navigation for menu
+require 'simple-navigation'
 
 # Provides your Rails application with social network and activity stream support
 module SocialStream
