@@ -20,7 +20,7 @@ module SocialStream
         before_create :create_activity_object_with_type
 
         unless self == Actor
-          validates_presence_of :_contact_id
+          validates_presence_of :_contact_id, :on => :create
 
           after_create :create_post_activity
           after_update :create_update_activity
@@ -68,6 +68,8 @@ module SocialStream
         end
 
         def create_update_activity
+          return if _contact_id.blank?
+          
           create_activity "update"
         end
 

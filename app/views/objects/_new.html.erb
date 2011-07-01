@@ -1,4 +1,5 @@
 <% object._contact_id = current_subject.contact_to!(receiver).id %>
+<% remote = true if remote.nil? %>
 
 <%= form_for object, :remote => remote  do |f| %>
   <%= f.hidden_field :_contact_id %>

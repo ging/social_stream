@@ -66,6 +66,7 @@ class Tie < ActiveRecord::Base
 
   validate :relation_belongs_to_sender
 
+  after_create  :create_activity
   after_create  :increment_follower_count
   after_destroy :decrement_follower_count
 
@@ -82,6 +83,17 @@ class Tie < ActiveRecord::Base
   end
 
   private
+
+  # before_create callback
+  #
+  # Create contact activity if this is the first tie
+  def create_activity
+    return unless contact.ties_count == 1
+
+    Activity.create! :contact => contact,
+                     :relation_ids => contact.relation_ids,
+                     :activity_verb => ActivityVerb[contact.verb]
+  end
 
   # after_create callback
   #

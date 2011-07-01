@@ -20,14 +20,12 @@ describe Tie do
     end
     
     it "should be decremented" do
-      pending
-
       tie = Factory(:friend)
       contact = tie.contact
       receiver = tie.receiver
       count = receiver.follower_count
 
-      contact.relation_ids = []
+      contact.reload.relation_ids = []
 
       receiver.reload.follower_count.should eq(count - 1)
     end

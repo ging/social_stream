@@ -53,7 +53,6 @@ class Contact < ActiveRecord::Base
   validates_presence_of :sender_id, :receiver_id
 
   after_create :set_inverse
-  after_create :create_activity
   after_create :send_message
 
   def sender_subject
@@ -81,21 +80,51 @@ class Contact < ActiveRecord::Base
       inverse.ties_count > 0
   end
 
-  private
-
-  # Create the related {Activity}
-  def create_activity
-    return if relations.blank?
-
-    Activity.create! :contact => self,
-                     :relation_ids => relation_ids,
-                     :activity_verb => ActivityVerb[verb]
-  end
-
+  # The {ActivityVerb} corresponding to this {Contact}, depending on if
+  # it is pending or already replied
   def verb
     pending? ? "follow" : "make-friend"
   end
 
+  # has_many collection=objects method does not trigger destroy callbacks,
+  # so follower_count will not be updated
+  #
+  # We need to update that status here
+  def relation_ids=(ids)
+    remove_follower(ids)
+
+    association(:relations).ids_writer(ids)
+  end
+
+  private
+
+  def remove_follower(ids)
+    # There was no follower
+    return if relation_ids.blank?
+
+    ids = ids.map(&:to_i)
+
+    return if ids.sort == relation_ids.sort
+
+    following = Relation.
+                  where(:id => relation_ids).
+                  joins(:permissions).
+                  merge(Permission.follow).
+                  any?
+
+    if following
+      will_follow = Relation.
+                      where(:id => ids).
+                      joins(:permissions).
+                      merge(Permission.follow).
+                      any?
+
+      if !will_follow
+        receiver.decrement!(:follower_count)
+      end
+    end
+  end
+ 
   # Send a message to the contact receiver
   def send_message
     if message.present?
