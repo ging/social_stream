@@ -120,7 +120,7 @@ namespace :db do
         
         p = Post.create :text =>
                       "This post should be for #{ t.relation.name } of #{ t.sender.name }.\n#{ Forgery::LoremIpsum.paragraph(:random => true) }",
-                        :created_at => Time.at(rand(updated)),
+                        :created_at => Time.at(rand(updated.to_i)),
                         :updated_at => updated,
                         :_contact_id => t.contact_id,
                         :_relation_ids => Array(t.relation_id)
