@@ -34,9 +34,10 @@
 .attachment_thumb
 {
 	position: relative;
-	width: 10%;
+	/*width: 10%;*/
 	float: left;
-	height: 50px;
+	/*height: 50px;*/
+  padding-right:5px;
 	vertical-align: middle;
 }
 
