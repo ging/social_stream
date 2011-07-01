@@ -9,20 +9,11 @@
 <%= menu_options[:contacts] || capture do %>
   <!-- TODO: create helper -->
   <% if user_signed_in? %>
-    <% if current_subject.ties_to(subject).present? %>
-      <li >
-      <%= link_to image_tag("btn/btn_friend.png", :class => "menu_icon") +
-                  current_subject.ties_to(subject).map(&:relation_name).join(", "),
-                  edit_contact_path(subject.actor_id) %>
+    <li >
+    <%= link_to image_tag("btn/btn_friend.png", :class => "menu_icon") +
+                current_subject.ties_to(subject).map(&:relation_name).join(", "),
+                edit_contact_path(current_subject.contact_to!(subject)) %>
      </li>
-    <% else %>
-      <li >
-      <%= link_to image_tag("btn/btn_friend.png", :class => "menu_icon") +
-                  t('contact.new.menu'),
-		  new_contact_path(:id => subject.actor_id),
-                  :id => 'contacts_menu' %>
-      </li>
-    <% end %>
   <% end %>
 <% end %>
 
