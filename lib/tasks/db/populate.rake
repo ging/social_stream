@@ -116,7 +116,7 @@ namespace :db do
       posts_start = Time.now
       
       SocialStream::Populate.power_law(Tie.all) do |t|
-        updated = Time.at(rand(Time.now))
+        updated = Time.at(rand(Time.now.to_i))
         
         p = Post.create :text =>
                       "This post should be for #{ t.relation.name } of #{ t.sender.name }.\n#{ Forgery::LoremIpsum.paragraph(:random => true) }",
