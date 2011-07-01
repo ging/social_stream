@@ -2,9 +2,9 @@
 
 <div class="notification"></div>
 <div class="sender_photo">
-  <%= link_to image_tag(notification.object.tie.sender.logo.url(:actor),
-      :title => notification.object.tie.sender.name, :alt => notification.object.tie.sender.name),
-      notification.object.tie.sender.subject %>
+  <%= link_to image_tag(notification.object.sender.logo.url(:actor),
+      :title => notification.object.sender.name, :alt => notification.object.sender.name),
+      notification.object.sender.subject %>
 </div>
 <div class="content_left">
   <div class="date">
