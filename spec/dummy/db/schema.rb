@@ -4,5 +4,5 @@ ActiveRecord::Schema.define(:version => 0) do
   CreateMailboxer.up
   CreateSocialStream.up
   ActsAsTaggableOnMigration.up
-  CreateSocialStreamAttachments.up
+  CreateSocialStreamDocuments.up
 end
