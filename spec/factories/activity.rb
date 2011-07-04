@@ -4,6 +4,11 @@ Factory.define :activity do |a|
   a.relation_ids  { |b| Array(b.sender.relation_custom('friend').id) }
 end
 
+Factory.define :self_activity, :parent => :activity do |a|
+  a.contact { Factory(:self_contact) }
+  a.relation_ids  { |b| Array(b.sender.relation_custom('friend').id) }
+end
+
 Factory.define :public_activity, :parent => :activity do |a|
   a.relation_ids  { |b| Array(b.sender.relation_public.id) }
 end

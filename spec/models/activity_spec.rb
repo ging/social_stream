@@ -104,6 +104,13 @@ describe Activity do
         end
       end
 
+      describe "friend's profile" do
+        it "should not include activity" do
+          friend = Factory(:friend, :contact => Factory(:contact, :sender => @activity.sender)).receiver
+          friend.wall(:profile, :for => @activity.sender).should_not include(@activity)
+        end
+      end
+
       describe "sender profile" do
         context "for sender" do
           it "should include activity" do
@@ -118,6 +125,19 @@ describe Activity do
                                   :for => @activity.receiver,
                                   :relation => @activity.relations.first).should include(@activity)
           end
+        end
+      end
+    end
+
+    context "with a self friend activity" do
+      before do
+        @activity = Factory(:self_activity)
+      end
+
+      describe "friend's profile" do
+        it "should not include activity" do
+          friend = Factory(:friend, :contact => Factory(:contact, :sender => @activity.sender)).receiver
+          friend.wall(:profile, :for => @activity.sender).should_not include(@activity)
         end
       end
     end
