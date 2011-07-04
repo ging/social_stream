@@ -7,12 +7,11 @@ source "http://rubygems.org"
 # gem 'mailboxer', :path => '../mailboxer'
 # gem 'avatars_for_rails', :path => '../avatars_for_rails'
 
-# social_stream-base
-if File.exists?(File.join(File.dirname(__FILE__), '..', 'social_stream-base'))
-  gem 'social_stream-base', :path => '../social_stream-base'
+# social_stream gems
+%w(social_stream-base social_stream-documents social2social).each do |g|
+  if File.exists?(File.join(File.dirname(__FILE__), '..', g))
+    gem g, :path => File.join('..', g)
+  end
 end
-
-# gem 'social_stream-documents', :path => '../social_stream-documents'
-# gem 'social2social', :path => '../social2social'
 
 gemspec
