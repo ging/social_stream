@@ -1,5 +1,5 @@
 require 'social_stream-base'
-require 'social_stream-attachments'
+require 'social_stream-documents'
 
 module SocialStream
   class Engine < ::Rails::Engine #:nodoc:
