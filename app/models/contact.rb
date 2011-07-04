@@ -126,11 +126,11 @@ class Contact < ActiveRecord::Base
       end
     end
   end
- 
+
   # Send a message to the contact receiver
   def send_message
     if message.present?
-      sender.send_message(receiver, message, I18n.t("activity.verb.#{ contact_verb }.#{ receiver.subject_type }.message", :name => sender.name))
+      sender.send_message(receiver, message, I18n.t("activity.verb.#{ verb }.#{ receiver.subject_type }.message", :name => sender.name))
     end
   end
 
