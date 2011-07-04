@@ -8,12 +8,6 @@ module SocialStream
       config.app_generators.messages :mailboxer
       config.app_generators.taggings :acts_as_taggable_on
 
-      config.to_prepare do
-        %w( actor activity_object ).each do |supertype|
-          supertype.classify.constantize.load_subtype_features
-        end
-      end
-
       initializer "social_stream-base.inflections" do
         ActiveSupport::Inflector.inflections do |inflect|
           inflect.singular /^([Tt]ie)s$/, '\1'

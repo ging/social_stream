@@ -1,4 +1,6 @@
 class Group < ActiveRecord::Base
+  include SocialStream::Models::Subject
+
   attr_accessor :_founder
   attr_accessor :_participants
 

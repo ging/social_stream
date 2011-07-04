@@ -18,15 +18,6 @@ module SocialStream #:nodoc:
         def subtypes
           SocialStream.__send__ @subtypes_name.to_s.tableize # SocialStream.subjects # in Actor
         end
-
-        def load_subtype_features
-          features = "SocialStream::Models::#{ @subtypes_name.to_s.classify }".constantize
-
-          subtypes.each do |s|
-            s = s.to_s.classify.constantize
-            s.__send__(:include, features) unless s.ancestors.include?(features)
-          end
-        end
       end 
 
       module InstanceMethods

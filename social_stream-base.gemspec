@@ -42,10 +42,11 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('acts-as-taggable-on','~> 2.0.6')
   # HTML Forms
   s.add_runtime_dependency('formtastic','~> 1.2.3')
+  # Simple navigation for menu
+  s.add_runtime_dependency('simple-navigation')
   #Gem dependencies
   s.add_runtime_dependency('resque','~> 1.17.1')
   
-  # Freeze Rails to 3.0.7 until Mailboxer bug is fixed
   s.add_runtime_dependency('rails', '3.1.0.rc4')
 
   # Development Gem dependencies

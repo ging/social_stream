@@ -1,6 +1,8 @@
 require 'devise/orm/active_record'
 
 class User < ActiveRecord::Base
+  include SocialStream::Models::Subject
+
   has_many :authentications
   devise *SocialStream.devise_modules
 

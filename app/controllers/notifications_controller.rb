@@ -9,8 +9,6 @@ class NotificationsController < ApplicationController
   end
 
   def show
-    render :action => :show
-    @actor.read @notification
     
   end
 

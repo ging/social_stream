@@ -21,7 +21,7 @@
 <% end %>
 
 <div id="contact-form">
-  <%= form_for @contact, :url => contact_path(@contact.to_param), :html => { :method => :put } do |f| %>  
+  <%= form_for @contact do |f| %>
     <%= hidden_field_tag "contact[relation_ids][]", "gotcha" %>
 
     <% current_subject.spheres.each do |sphere| %>

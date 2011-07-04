@@ -40,6 +40,10 @@ module ToolbarHelper
   #
 
   def toolbar(options = {}, &block)
+    old_toolbar(options,&block)
+  end
+
+    def old_toolbar(options = {}, &block)
     if options[:option] && block_given?
       menu_options[options[:option]] = capture(&block)
     end
@@ -56,10 +60,10 @@ module ToolbarHelper
     when Mime::JS
       response = <<-EOJ
 
-		      $('#toolbar').html("#{ escape_javascript(content) }");
-		      initMenu();
-		      expandSubMenu('#{ options[:option] }');
-		      EOJ
+          $('#toolbar').html("#{ escape_javascript(content) }");
+          initMenu();
+          expandSubMenu('#{ options[:option] }');
+          EOJ
 
       response.html_safe
     else
@@ -79,5 +83,19 @@ module ToolbarHelper
   # @api private
   def menu_options #:nodoc:
     @menu_options ||= {}
+  end
+  
+  def default_toolbar_menu
+    items = [{:key => :notifications, 
+             :name => image_tag("btn/btn_notification.png", :class => "menu_icon")+t('notification.other')+' ('+ current_subject.mailbox.notifications.not_trashed.unread.count.to_s+')',
+             :url => notifications_path}]
+    
+    return render_items items
+  end
+  
+  def render_items(items)
+    menu = render_navigation :items => items
+    menu = menu.gsub(/\<ul\>/,'<ul class="menu">')
+    return raw menu
   end
 end
