@@ -37,4 +37,23 @@ describe ContactsController do
       first.relation.
       should == @user.relations.last
   end
+
+  it "should create contact" do
+    sign_in @user
+
+    group = Factory(:group)
+    contact = @user.contact_to!(group)
+    
+
+    put :update, :id => contact.id,
+                 :contact => { :relation_ids => [ "gotcha", @user.relations.last.id ],
+                               :message => "Testing" }
+
+    response.should redirect_to(contact.receiver_subject)
+    contact.reload.
+      ties.
+      first.relation.
+      should == @user.relations.last
+  end
+
 end
