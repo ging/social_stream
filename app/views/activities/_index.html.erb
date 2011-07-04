@@ -11,8 +11,8 @@
   <div id="wrapper_activities_header">
     <div id="activities_title" class="content_size">
 		<% SocialStream.activity_forms.each do |element| %>
-			<div id="header_<%= element %>" class="activities_title_header">	
-	      		<%= image_tag("btn/"+element.to_s+".png") %> <%=t(element.to_s+'.title')%>
+			<div id="header_<%= element %>" class="activities_title_header">
+				<%= render :partial => element.to_s.pluralize+'/header' %>			    
 			</div>
 		<% end %> 	
     </div>
