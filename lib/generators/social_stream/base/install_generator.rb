@@ -40,6 +40,10 @@ class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
               'app/views/layouts/application.html.erb'
   end
 
+  def create_navigation_config
+    copy_file 'navigation.rb', 'config/navigation.rb'
+  end
+
   def create_migration_file
     require 'rake'
     Rails.application.load_tasks
