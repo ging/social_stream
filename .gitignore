@@ -7,3 +7,4 @@ spec/dummy/tmp/
 *.DS_Store
 **.*swp
 Gemfile.lock
+.code_swarm
