@@ -17,6 +17,6 @@ end
 CreateMailboxer.up
 CreateSocialStream.up
 ActsAsTaggableOnMigration.up
-CreateSocialStreamAttachments.up
+CreateSocialStreamDocuments.up
 
 require File.expand_path("../../dummy/db/seeds", __FILE__)
