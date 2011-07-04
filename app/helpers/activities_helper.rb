@@ -24,6 +24,6 @@ module ActivitiesHelper
     return Activity.new unless user_signed_in?
 
     Activity.new :contact_id => current_subject.contact_to!(receiver).id,
-                 :relation_ids => receiver.activity_relations(current_subject, :from => :receiver).map(&:id)
+                 :relation_ids => current_subject.activity_relations(receiver, :from => :receiver).map(&:id)
   end
 end

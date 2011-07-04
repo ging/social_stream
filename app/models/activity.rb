@@ -209,10 +209,17 @@ class Activity < ActiveRecord::Base
 
     case action
     when 'create'
-      return contact.sender_id == Actor.normalize_id(subject) &&
-             relation_ids.any? &&
-             Relation.
-               allow(subject, action, 'activity', :in => relation_ids).all.size == relation_ids.size
+      return false if contact.sender_id != Actor.normalize_id(subject)
+
+      rels = Relation.normalize(relation_ids)
+
+      foreign_rels = rels.select{ |r| r.actor_id != contact.sender_id }
+
+      # Only posting to own relations
+      return true if foreign_rels.blank?
+
+      return Relation.
+               allow(subject, action, 'activity', :in => foreign_rels).all.size == foreign_rels.size
     when 'read'
       return true if [contact.sender_id, contact.receiver_id].include?(Actor.normalize_id(subject)) || relations.select{ |r| r.is_a?(Relation::Public) }.any?
     when 'update'
