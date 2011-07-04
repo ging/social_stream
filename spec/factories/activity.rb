@@ -1,7 +1,11 @@
 Factory.define :activity do |a|
   a.contact { Factory(:friend).contact }
   a.activity_verb { ActivityVerb["post"] }
-  a.relation_ids  { |b| Array(b.sender.relation_custom('friend')) }
+  a.relation_ids  { |b| Array(b.sender.relation_custom('friend').id) }
+end
+
+Factory.define :public_activity, :parent => :activity do |a|
+  a.relation_ids  { |b| Array(b.sender.relation_public.id) }
 end
 
 Factory.define :like_activity, :parent => :activity do |a|

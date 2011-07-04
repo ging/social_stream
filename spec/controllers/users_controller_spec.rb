@@ -16,6 +16,15 @@ describe UsersController do
       assert_response :success
     end
 
+    it "should render show with public activity" do
+      activity = Factory(:public_activity)
+
+      get :show, :id => activity.receiver.to_param
+
+      response.should be_success
+      response.body.should =~ /activity_#{ activity.id }/
+    end
+
     it "should not render edit" do
       begin
         get :edit, :id => Factory(:user).to_param
