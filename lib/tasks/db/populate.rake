@@ -101,9 +101,7 @@ namespace :db do
         
         Forgery::Basic.number(:at_most => actors.size).times do
           actor = actors.delete_at((rand * actors.size).to_i)
-          Contact.create! :sender_id => a.id,
-                          :receiver_id => actor.id,
-                          :relation_ids => Array(relations.random.id)
+          a.contact_to!(actor).relation_ids = Array(relations.random.id)
         end
       end
       
