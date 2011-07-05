@@ -11,6 +11,7 @@ en:
     mine: "My conferences"
     msg: "Just uploaded a conference:"
   document:
+    simple_all: "All"  
     all: "All documents"  
     confirm_delete: "Delete document?"
     title: "Documents"
