@@ -3,7 +3,7 @@
   <%= javascript_include_tag 'menu' %>
 <% end %>
 
-<div id="menu_lateral">
+<div id="menu_lateral" class="toolbar_menu">
   <ul class="menu">
     <% unless subject == current_subject %>
       <%= render :partial => "toolbar/profile_menu_tie_options", :locals => { :subject => subject } %>

@@ -3,11 +3,10 @@
   <%= javascript_include_tag 'menu' %>
 <% end %>
 
-<div id="menu_lateral">
+<div id="menu_lateral" class="toolbar_menu">
   <%= render :partial => "toolbar/home_menu_options" %>
   <hr>
   Testing SimpleNavigation<br>Please move along
   <hr>
   <%= yield(:toolbar_menu).empty? ? default_toolbar_menu : yield(:toolbar_menu)%>
 </div>
-

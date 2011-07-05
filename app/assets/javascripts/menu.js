@@ -1,6 +1,6 @@
 function initMenu() {
-	$('.menu ul').hide();
-	$('.menu li a').click( function() {
+	$('.toolbar_menu ul li ul').hide();
+	$('.toolbar_menu li a').click( function() {
 		$(this).next().slideToggle('normal');
 	}
 	);
