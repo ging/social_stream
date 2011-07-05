@@ -9,7 +9,7 @@ module SocialStream
       alias_action :download, :to => :show
       
       # Activity Objects
-      (SocialStream.objects - [ :actor ]).map{ |obj|
+      (SocialStream.objects - [ :actor, :comment ]).map{ |obj|
         obj.to_s.classify.constantize
       }.each do |klass|
         can :create, klass do |k| # can :create, Post do |post|
@@ -27,6 +27,22 @@ module SocialStream
         can :destroy, klass do |k| # can :destroy, Post do |post|
           k.post_activity.allow?(subject, 'destroy')
         end
+      end
+
+      can :create, Comment do |c|
+        c.activity_parent.allow?(subject, 'read')
+      end
+
+      can :read, Comment do |c|
+        c.post_activity.allow?(subject, 'read')
+      end
+
+      can :update, Comment do |c|
+        c.post_activity.allow?(subject, 'update')
+      end
+
+      can :destroy, Comment do |c|
+        c.post_activity.allow?(subject, 'destroy')
       end
 
       # Activities

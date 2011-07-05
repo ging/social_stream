@@ -353,7 +353,11 @@ class Actor < ActiveRecord::Base
   end
 
   # Is this {Actor} allowed to create a comment on activity?
+  #
+  # We are allowing comments from everyone signed in by now
   def can_comment?(activity)
+    return true
+
     comment_relations(activity).any?
   end
 
