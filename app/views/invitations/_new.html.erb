@@ -4,13 +4,11 @@
   });
 <% end %>
 
-<br class="clearfloat" />
-<div class="space_center"></div>
 <div class="space_center"></div>
 
 <h2><%=t('invitation.other')%></h2>
 
-<%= form_tag invitations_path, :method=> :post, :class => "invitation_form"  do %>
+<%= form_tag invitations_path, :method=> :post, :class => "invitation_form", :remote => true  do %>
   <div class="block">   
     <h3 class= "form_row"><%=t('invitation.join')%></h3>
     <div class="form_row form_label ">
