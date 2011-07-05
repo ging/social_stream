@@ -39,7 +39,6 @@ module ToolbarHelper
   #   <% toolbar :profile => @group, :option => :contacts %>
   #
   def toolbar(options = {}, &block)
-    
     old_toolbar(options,&block)
   end
 
@@ -89,26 +88,27 @@ module ToolbarHelper
     home_menu
   end
 
-  def home_menu
+  def home_toolbar_menu
+    items = Array.new
     #Notifications
-    items = [{:key => :notifications,
-        :name => image_tag("btn/btn_notification.png", :class => "menu_icon")+t('notification.other')+' ('+ current_subject.mailbox.notifications.not_trashed.unread.count.to_s+')',
-        :url => notifications_path,
-        :options => {:link => {:id => "notifications_menu"}}}]
+    items << {:key => :notifications,
+      :name => image_tag("btn/btn_notification.png")+t('notification.other')+' ('+ current_subject.mailbox.notifications.not_trashed.unread.count.to_s+')',
+      :url => notifications_path,
+      :options => {:link => {:id => "notifications_menu"}}}
 
     #Messages
-    items << {:key => :messages, 
-        :name => image_tag("btn/new.png", :class => "menu_icon")+t('message.other')+' (' + current_subject.mailbox.inbox(:unread => true).count.to_s + ')',
-        :url => "#",
-        :options => {:link => {:id => "messages_menu"}}, 
-        :items => [
-          {:key => :message_new, :name => image_tag("btn/message_new.png", :class => "menu_icon")+ t('message.new'), :url => new_message_path},
-          {:key => :message_inbox, :name => image_tag("btn/message_inbox.png", :class => "menu_icon")+t('message.inbox')+' (' + current_subject.mailbox.inbox(:unread => true).count.to_s + ')', 
-                   :url => conversations_path, :options => {:link =>{:remote=> true}}},
-          {:key => :message_sentbox, :name => image_tag("btn/message_sentbox.png", :class => "menu_icon")+t('message.sentbox'), :url => conversations_path(:box => :sentbox), :remote=> true},
-          {:key => :message_trash, :name => image_tag("btn/message_trash.png", :class => "menu_icon")+t('message.trash'), :url => conversations_path(:box => :trash)}
+    items << {:key => :messages,
+      :name => image_tag("btn/new.png")+t('message.other')+' (' + current_subject.mailbox.inbox(:unread => true).count.to_s + ')',
+      :url => "#",
+      :options => {:link => {:id => "messages_menu"}},
+      :items => [
+        {:key => :message_new, :name => image_tag("btn/message_new.png")+ t('message.new'), :url => new_message_path},
+        {:key => :message_inbox, :name => image_tag("btn/message_inbox.png")+t('message.inbox')+' (' + current_subject.mailbox.inbox(:unread => true).count.to_s + ')',
+          :url => conversations_path, :options => {:link =>{:remote=> true}}},
+        {:key => :message_sentbox, :name => image_tag("btn/message_sentbox.png")+t('message.sentbox'), :url => conversations_path(:box => :sentbox), :remote=> true},
+        {:key => :message_trash, :name => image_tag("btn/message_trash.png")+t('message.trash'), :url => conversations_path(:box => :trash)}
       ]}
-    
+
     #Documents if present
     if SocialStream.activity_forms.include? :document
       items << {:key => :resources,
@@ -116,40 +116,47 @@ module ToolbarHelper
         :url => "#",
         :options => {:link => {:id => "resources_menu"}},
         :items => [
-          {:key => :resources_documents,:name => image_tag("btn/btn_documents.png", :class => "menu_icon")+t('document.title'),:url => documents_path},
-          {:key => :resources_pictores,:name => image_tag("btn/btn_gallery.png", :class => "menu_icon")+t('picture.title'),:url => pictures_path},
-          {:key => :resources_videos,:name => image_tag("btn/btn_video.png", :class => "menu_icon")+t('video.title'),:url => videos_path},
-          {:key => :resources_audios,:name => image_tag("btn/btn_audio.png", :class => "menu_icon")+t('audio.title'),:url => audios_path}
+          {:key => :resources_documents,:name => image_tag("btn/btn_documents.png")+t('document.title'),:url => documents_path},
+          {:key => :resources_pictores,:name => image_tag("btn/btn_gallery.png")+t('picture.title'),:url => pictures_path},
+          {:key => :resources_videos,:name => image_tag("btn/btn_video.png")+t('video.title'),:url => videos_path},
+          {:key => :resources_audios,:name => image_tag("btn/btn_audio.png")+t('audio.title'),:url => audios_path}
         ]}
     end
-      
+
     #Contacts
-    relation_items = [{:key => :invitations, :name => image_tag("btn/btn_invitation.png", :class => "menu_icon")+t('invitation.other'), :url => new_invitation_path}]
+    relation_items = [{:key => :invitations, :name => image_tag("btn/btn_invitation.png")+t('invitation.other'), :url => new_invitation_path}]
     current_subject.relation_customs.sort.each do |r|
-      relation_items << {:key => r.name + "_menu", 
-                         :name => image_tag("btn/btn_friend.png", :class => "menu_icon") + r.name,
-                         :url => contacts_path(:relation => r.id)}
-    end    
-    items << {:key => :contacts, 
-        :name => image_tag("btn/btn_friend.png", :class => "menu_icon")+t('contact.other'),
-        :url => "#",
-        :options => {:link => {:id => "contacts_menu"}}, 
-        :items => relation_items}
-        
+      relation_items << {:key => r.name + "_menu",
+        :name => image_tag("btn/btn_friend.png") + r.name,
+        :url => contacts_path(:relation => r.id)}
+    end
+    items << {:key => :contacts,
+      :name => image_tag("btn/btn_friend.png")+t('contact.other'),
+      :url => "#",
+      :options => {:link => {:id => "contacts_menu"}},
+      :items => relation_items}
+
     #Subjects
     items << {:key => :groups,
-      :name => image_tag("btn/btn_group.png", :class => "menu_icon")+t('group.other'),
+      :name => image_tag("btn/btn_group.png")+t('group.other'),
       :url => "#",
       :options => {:link => {:id => "groups_menu"}},
-      :items => [{:key => :new_group ,:name => image_tag("btn/btn_group.png", :class => "menu_icon")+t('group.new.action'),:url => new_group_path('group' => { '_founder' => current_subject.slug })}]
+      :items => [{:key => :new_group ,:name => image_tag("btn/btn_group.png")+t('group.new.action'),:url => new_group_path('group' => { '_founder' => current_subject.slug })}]
     }
-        
-        
+
     return render_items items
   end
 
-  def profile_menu
-    
+  def profile_toolbar_menu(subject=current_subject)
+    items = Array.new
+
+    if subject!=current_subject
+      items << {:key => :like_button,
+        :name => link_like_params(subject)[0],
+        :url => link_like_params(subject)[1],
+        :options => {:link => link_like_params(subject)[2]}}
+    end
+    return render_items items
   end
 
   def render_items(items)
