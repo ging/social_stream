@@ -74,7 +74,7 @@ describe GroupsController do
     end
 
     it "should render new" do
-      get :new, 'group' => { '_founder' => @user.to_param }
+      get :new
 
       assert_response :success
     end

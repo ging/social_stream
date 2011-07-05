@@ -1,4 +1,8 @@
 class GroupsController < InheritedResources::Base
+  # Set group founder to current_subject
+  # Must do before authorization
+  before_filter :set_founder, :only => :new
+
   load_and_authorize_resource
 
   respond_to :html, :js
@@ -31,5 +35,14 @@ class GroupsController < InheritedResources::Base
   # See InheritedResources::BaseHelpers#resource
   def resource
     @group ||= end_of_association_chain.find_by_slug!(params[:id])
+  end
+
+  private
+
+  def set_founder
+    return unless user_signed_in?
+
+    params[:group]            ||= {}
+    params[:group][:_founder] ||= current_subject.slug
   end
 end
