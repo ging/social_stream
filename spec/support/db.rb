@@ -6,7 +6,7 @@ rescue
   puts "WARNING: ActsAsTaggableOnMigration failed to rollback" 
 end
 
-%w(SocialStream Mailboxer).each do |m|
+%w(Mailboxer).each do |m|
   begin
     "Create#{ m }".constantize.down
   rescue
@@ -15,7 +15,6 @@ end
 end
 
 CreateMailboxer.up
-CreateSocialStream.up
 ActsAsTaggableOnMigration.up
 
 require File.expand_path("../../dummy/db/seeds", __FILE__)
