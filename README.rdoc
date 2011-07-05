@@ -33,7 +33,7 @@ Add to your Gemfile:
 
 and run:
 
-  bundle update
+  bundle
 
 Then:
 
