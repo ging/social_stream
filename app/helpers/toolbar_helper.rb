@@ -89,11 +89,25 @@ module ToolbarHelper
         :name => image_tag("btn/btn_notification.png", :class => "menu_icon")+t('notification.other')+' ('+ current_subject.mailbox.notifications.not_trashed.unread.count.to_s+')',
         :url => notifications_path}]
 
-    items << {:key => :dummy1, :name => "Dummy 1", :url => "#", :items => [
-        {:key => :dummy1_1, :name => "Dummy 1.1", :url => "#"},
-        {:key => :dummy1_2, :name => "Dummy 1.2", :url => "#"}
+    items << {:key => :messages, 
+        :name => image_tag("btn/new.png", :class => "menu_icon")+t('message.other')+' (' + current_subject.mailbox.inbox(:unread => true).count.to_s + ')',
+        :url => "#", :items => [
+          {:key => :message_new, :name => image_tag("btn/message_new.png", :class => "menu_icon")+ t('message.new'), :url => new_message_path},
+          {:key => :message_inbox, :name => image_tag("btn/message_inbox.png", :class => "menu_icon")+t('message.inbox')+' (' + current_subject.mailbox.inbox(:unread => true).count.to_s + ')', 
+                   :url => conversations_path, :options => {:link =>{:remote=> true}}},
+          {:key => :message_sentbox, :name => image_tag("btn/message_sentbox.png", :class => "menu_icon")+t('message.sentbox'), :url => conversations_path(:box => :sentbox), :remote=> true},
+          {:key => :message_trash, :name => image_tag("btn/message_trash.png", :class => "menu_icon")+t('message.trash'), :url => conversations_path(:box => :trash)}
       ]}
-
+      
+    items << {:key => :contacts, 
+        :name => image_tag("btn/btn_friend.png", :class => "menu_icon")+t('contact.other'),
+        :url => "#", :items => [
+          {:key => :invitations, :name => image_tag("btn/btn_invitation.png", :class => "menu_icon")+t('invitation.other'), :url => new_invitation_path},
+          {:key => :message_inbox, :name => image_tag("btn/message_inbox.png", :class => "menu_icon")+t('message.inbox')+' (' + current_subject.mailbox.inbox(:unread => true).count.to_s + ')', 
+                   :url => conversations_path, :options => {:link =>{:remote=> true}}},
+          {:key => :message_sentbox, :name => image_tag("btn/message_sentbox.png", :class => "menu_icon")+t('message.sentbox'), :url => conversations_path(:box => :sentbox), :remote=> true},
+          {:key => :message_trash, :name => image_tag("btn/message_trash.png", :class => "menu_icon")+t('message.trash'), :url => conversations_path(:box => :trash)}
+      ]}
     return render_items items
   end
 
