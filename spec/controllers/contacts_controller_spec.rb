@@ -56,4 +56,26 @@ describe ContactsController do
       should == @user.relations.last
   end
 
+  it "should create contact with several relations" do
+    sign_in @user
+
+    group = Factory(:group)
+    contact = @user.contact_to!(group)
+    # Initialize inverse contact
+    contact.inverse!
+    relations = [ @user.relation_custom('friend'), @user.relation_custom('partner') ]
+    
+
+    put :update, :id => contact.id,
+                 :contact => { :relation_ids => [ "gotcha", relations.map(&:id) ].flatten,
+                               :message => "Testing" }
+
+    response.should redirect_to(contact.receiver_subject)
+
+    contact.reload.
+      ties.
+      map(&:relation).
+      map(&:id).sort.
+      should == relations.map(&:id).sort
+  end
 end

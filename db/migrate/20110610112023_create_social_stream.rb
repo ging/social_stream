@@ -94,7 +94,7 @@ class CreateSocialStream < ActiveRecord::Migration
       t.datetime "created_at"
       t.datetime "updated_at"
       t.integer  "inverse_id"
-      t.integer  "ties_count"
+      t.integer  "ties_count", :default => 0
     end
 
     add_index "contacts", "receiver_id"
