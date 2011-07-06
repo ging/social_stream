@@ -30,7 +30,7 @@ module SocialStream
       end
 
       can :create, Comment do |c|
-        c.activity_parent.allow?(subject, 'read')
+        c._activity_parent.allow?(subject, 'read')
       end
 
       can :read, Comment do |c|
