@@ -1,38 +1,55 @@
 <div>
-  <div><%= @sender.name %> has invited you to <%= link_to( t('socialstream'), new_user_registration_path)%>
-    <div><%= @message%></div>
+  <div>
+    <span id="name" style="font-weight: bold;"><%= @sender.name %></span> has invited you to <%= link_to( t('socialstream'), new_user_registration_url)%>
+    <br/>
+    <table width="50%" style="border-style: solid; border-color: #2A3890; margin:10px; border-width: 2px;">
+      <tr>
+        <td><img src="http://<%= ActionMailer::Base.default_url_options[:host] +@sender.logo.url(:profile)%>" alt="<%=@sender.name%>"></td>
+        <td>"<%= @message%>"</td>
+      </tr>
+    </table>
   </div>
   <div>
     <div>
-      <%= t('frontpage.share.default')%>
+      <%= t('frontpage.share.default')%>:
     </div>
     <div>
       <ul>
-        <li><%= t('frontpage.share.sentence1') %></li>
-        <li><%= t('frontpage.share.sentence2') %></li>
-      </ul>
-    </div>
-  </div>
-  
-  <div>
-    <div>
-      <%= t('frontpage.meet.default')%>
-    </div>
-    <div>
-      <ul>
-        <li><%= t('frontpage.meet.sentence1') %></li>
+        <li>
+          <%= t('frontpage.share.sentence1') %>
+        </li>
+        <li>
+          <%= t('frontpage.share.sentence2') %>
+        </li>
       </ul>
     </div>
   </div>
 
   <div>
     <div>
-      <%= t('frontpage.collaborate.default')%>
+      <%= t('frontpage.meet.default')%>:
     </div>
     <div>
       <ul>
-        <li><%= t('frontpage.collaborate.sentence1') %></li>
-        <li><%= t('frontpage.collaborate.sentence2') %></li>
+        <li>
+          <%= t('frontpage.meet.sentence1') %>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <div>
+      <%= t('frontpage.collaborate.default')%>:
+    </div>
+    <div>
+      <ul>
+        <li>
+          <%= t('frontpage.collaborate.sentence1') %>
+        </li>
+        <li>
+          <%= t('frontpage.collaborate.sentence2') %>
+        </li>
       </ul>
     </div>
   </div>
