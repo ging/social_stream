@@ -21,6 +21,17 @@ describe CommentsController do
       end
 
       it_should_behave_like "Allow Creating"
+
+      it "should create with js" do
+        count = model_count
+        post :create, attributes.merge(:format => :js)
+
+        resource = assigns(model_sym)
+
+        model_count.should eq(count + 1)
+        resource.should be_valid
+        response.should be_success
+      end
     end
 
     describe "comment to friend" do
