@@ -1,0 +1,8 @@
+<% @document_activities.each do |a| %>
+	<% document = a.activity_objects.first.document %>
+	<div class="media_preview picture">
+		<img src="<%= link_for_wall(document) %>" class="media_preview_image" />
+		<div class="media_preview_title"><%= document.file_file_name %></div>
+		<div class="media_preview_detail">some detail</div>
+	</div>
+<% end %>

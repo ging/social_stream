@@ -13,6 +13,6 @@ class PicturesController < InheritedResources::Base
   def index
     @document_activities = current_subject.wall(:profile,
                                         :for => current_subject,
-                                        :object_type => :Picture).all;
+                                        :object_type => :Picture).page(params[:page]).per(params[:per])
   end
 end  

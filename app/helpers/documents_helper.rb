@@ -8,11 +8,17 @@ module DocumentsHelper
       image_tag 'formats/'+format.split('/')[1]+'.png' 
     else
       if is_image?(document)
-        image_tag document.file.url(:thumb)+"?style=thumb"
+        format = Mime::Type.lookup(document.file_content_type)
+        image_tag url_for(document)+"."+format.to_sym.to_s+"?style=thumb"
       else
         image_tag 'formats/default.png'
       end
     end
+  end
+  
+  def link_for_wall(document)
+    format = Mime::Type.lookup(document.file_content_type)
+    url_for(document)+"."+format.to_sym.to_s+"?style=thumb0"
   end
   
   def wrap_file_name(name)

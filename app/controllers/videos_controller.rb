@@ -16,7 +16,7 @@ class VideosController < InheritedResources::Base
   def index
     @document_activities = current_subject.wall(:profile,
                                         :for => current_subject,
-                                        :object_type => :Video).all;
+                                        :object_type => :Video).page(params[:page]).per(params[:per])
   end
     
 end
