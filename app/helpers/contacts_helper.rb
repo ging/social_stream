@@ -7,16 +7,18 @@ module ContactsHelper
   # to create new ties to actor
   def contact_to(a)
     if user_signed_in?
-      if current_subject.ties_to?(a)
-        current_subject.ties_to(a).map(&:relation_name).join(", ")
-      else
-        link_to t("contact.new.link"),
-                edit_contact_path(current_subject.contact_to!(a)),
-                                  :title => t("contact.new.title",
-                                  :name => a.name)
-      end
+      link_to contact_status(a),
+              edit_contact_path(current_subject.contact_to!(a)),
+                                :title => t("contact.new.title",
+                                :name => a.name)
     else
       link_to t("contact.new.link"), new_user_session_path
     end
+  end
+
+  def contact_status(a)
+    current_subject.ties_to?(a) ?
+      current_subject.ties_to(a).map(&:relation_name).join(", ") :
+      t("contact.new.link")
   end
 end
