@@ -39,10 +39,6 @@ module ToolbarHelper
   #   <% toolbar :profile => @group, :option => :contacts %>
   #
   def toolbar(options = {}, &block)
-    old_toolbar(options,&block)
-  end
-
-  def old_toolbar(options = {}, &block)
     if options[:option] && block_given?
       menu_options[options[:option]] = capture(&block)
     end
@@ -85,7 +81,7 @@ module ToolbarHelper
   end
 
   def default_toolbar_menu
-    home_menu
+    home_toolbar_menu
   end
 
   def home_toolbar_menu
@@ -147,15 +143,34 @@ module ToolbarHelper
     return render_items items
   end
 
-  def profile_toolbar_menu(subject=current_subject)
+  def profile_toolbar_menu(subject = current_subject)
     items = Array.new
 
     if subject!=current_subject
+      #Like button
       items << {:key => :like_button,
         :name => link_like_params(subject)[0],
         :url => link_like_params(subject)[1],
         :options => {:link => link_like_params(subject)[2]}}
+        
+      if user_signed_in?
+        #Relation button
+        items << {:key => :subject_relation,
+          :name => image_tag("btn/btn_friend.png") + current_subject.ties_to(subject).map(&:relation_name).join(", "),
+          :url => edit_contact_path(current_subject.contact_to!(subject))
+        }
+        #Send message button
+        items << {:key => :send_message,
+          :name => image_tag("btn/btn_send.png")+t('message.send'),
+          :url => new_message_path(:receiver => subject.slug)
+        }
+      end
     end
+    #Information button
+    items << {:key => :subject_info,
+      :name => image_tag("btn/btn_edit.png")+t('menu.information'),
+      :url => [subject, :profile]
+    }
     return render_items items
   end
 

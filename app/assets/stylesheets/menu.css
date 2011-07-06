@@ -8,7 +8,7 @@
 .toolbar_menu li ul li a, ul.menu ul.menu li ul li a {  background: #fff; border-left: 5px #2A3890 solid;
   color: #2A3890;  padding-left: 10px;}
 .toolbar_menu li ul li a:hover {  background: #DEEFF8;  border-left: 5px #2A3890 solid;  padding-left: 15px;}
-
+.toolbar_menu img { vertical-align: middle; padding-bottom: 3px;    padding-right: 3px;  padding-left: 3px; display: inline-block;}
 /*
 div.panel {    border: 1px #2A3890 solid;    padding: 5px;    margin-top: 0px;}
 ul.menu li ul li a:hover, ul.menu ul.menu li ul li a:hover {  background: #DEEFF8;  border-left: 5px #2A3890 solid;
