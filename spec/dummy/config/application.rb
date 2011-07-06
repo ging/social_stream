@@ -7,7 +7,7 @@ require "action_view/railtie"
 require "action_mailer/railtie"
 
 Bundler.require
-require "socialstream_files"
+require "social_stream-documents"
 
 module Dummy
   class Application < Rails::Application
