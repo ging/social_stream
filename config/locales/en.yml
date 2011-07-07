@@ -236,7 +236,7 @@ en:
   public:
     other: "Everybody"
   representation:
-    action: "representing"
+    action: "as"
     change: "Change"
   service:
     one: "Service"
