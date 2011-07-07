@@ -80,11 +80,52 @@ module ToolbarHelper
     @menu_options ||= {}
   end
 
-  def default_toolbar_menu
-    home_toolbar_menu
+  #Prints the home toolbar menu.
+  #By default it prints the default_home_toolbar_menu, but yo can 
+  #change everything in your initializer
+  #
+  #NOTE: To correctly show your menu in the vies we suggest using 
+  #the simple_navigation list renderer o create the menu as a list
+  #of links 
+  # <ul>
+  #   <li>
+  #     <a href="url">Link</a>
+  #   </li>
+  # </ul>
+  #
+  #To use simple navigation renderer you should create an array of 
+  #items like explained in the wiki of simple_navigation for ad-hoc menus
+  #in https://github.com/andi/simple-navigation/wiki/Dynamic-Navigation-Items
+  #and return with the expression
+  # render_items items
+  def home_toolbar_menu
+    default_home_toolbar_menu
   end
 
-  def home_toolbar_menu
+  #Prints the home profile menu.
+  #By default it prints the default_profile_toolbar_menu, but yo can 
+  #change everything in your initializer
+  #
+  #NOTE: To correctly show your menu in the vies we suggest using 
+  #the simple_navigation list renderer o create the menu as a list
+  #of links 
+  # <ul>
+  #   <li>
+  #     <a href="url">Link</a>
+  #   </li>
+  # </ul>
+  #
+  #To use simple navigation renderer you should create an array of 
+  #items like explained in the wiki of simple_navigation for ad-hoc menus
+  #in https://github.com/andi/simple-navigation/wiki/Dynamic-Navigation-Items
+  #and return with the expression
+  # render_items items
+  def profile_toolbar_menu(subject=current_subject)
+    default_profile_toolbar_menu(subject)
+  end
+
+  #Prints the default home toolbar menu
+  def default_home_toolbar_menu
     items = Array.new
     #Notifications
     items << {:key => :notifications,
@@ -108,12 +149,12 @@ module ToolbarHelper
     #Documents if present
     if SocialStream.activity_forms.include? :document
       items << {:key => :resources,
-        :name => image_tag("btn/btn_resource.png",:class =>"menu_icon")+t('resource.title'),
+        :name => image_tag("btn/btn_resource.png",:class =>"menu_icon")+t('resource.mine'),
         :url => "#",
         :options => {:link => {:id => "resources_menu"}},
         :items => [
           {:key => :resources_documents,:name => image_tag("btn/btn_documents.png")+t('document.title'),:url => documents_path},
-          {:key => :resources_pictores,:name => image_tag("btn/btn_gallery.png")+t('picture.title'),:url => pictures_path},
+          {:key => :resources_pictures,:name => image_tag("btn/btn_gallery.png")+t('picture.title'),:url => pictures_path},
           {:key => :resources_videos,:name => image_tag("btn/btn_video.png")+t('video.title'),:url => videos_path},
           {:key => :resources_audios,:name => image_tag("btn/btn_audio.png")+t('audio.title'),:url => audios_path}
         ]}
@@ -140,11 +181,17 @@ module ToolbarHelper
       :items => [{:key => :new_group ,:name => image_tag("btn/btn_group.png")+t('group.new.action'),:url => new_group_path('group' => { '_founder' => current_subject.slug })}]
     }
 
-    return render_items items
+    render_items items
   end
 
-  def profile_toolbar_menu(subject = current_subject)
+  #Prints the default profile toolbar menu
+  def default_profile_toolbar_menu(subject = current_subject)
     items = Array.new
+    #Information button
+    items << {:key => :subject_info,
+      :name => image_tag("btn/btn_edit.png")+t('menu.information'),
+      :url => [subject, :profile]
+    }
 
     if subject!=current_subject
       #Like button
@@ -166,14 +213,28 @@ module ToolbarHelper
         }
       end
     end
-    #Information button
-    items << {:key => :subject_info,
-      :name => image_tag("btn/btn_edit.png")+t('menu.information'),
-      :url => [subject, :profile]
-    }
-    return render_items items
+    #Documents if present
+    if SocialStream.activity_forms.include? :document
+      if subject == current_subject
+        resources_label = t('resource.mine')
+      else
+        resources_label = t('resource.title')        
+      end
+      items << {:key => :resources,
+        :name => image_tag("btn/btn_resource.png",:class =>"menu_icon")+resources_label,
+        :url => "#",
+        :options => {:link => {:id => "resources_menu"}},
+        :items => [
+          {:key => :resources_documents,:name => image_tag("btn/btn_documents.png")+t('document.title'),:url => documents_path},
+          {:key => :resources_pictures,:name => image_tag("btn/btn_gallery.png")+t('picture.title'),:url => pictures_path},
+          {:key => :resources_videos,:name => image_tag("btn/btn_video.png")+t('video.title'),:url => videos_path},
+          {:key => :resources_audios,:name => image_tag("btn/btn_audio.png")+t('audio.title'),:url => audios_path}
+        ]}
+    end
+    render_items items
   end
 
+  #Renders array of navigation items with simple_navigation
   def render_items(items)
     menu = render_navigation :items => items
     return raw menu
