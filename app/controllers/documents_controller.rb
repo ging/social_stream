@@ -35,7 +35,7 @@ class DocumentsController < InheritedResources::Base
     
   def create
     super do |format|
-      format.all {redirect_to documents_path}
+      format.all {redirect_to home_path}
     end
   end
 

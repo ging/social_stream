@@ -6,7 +6,7 @@
 .attachment_text
 {
 	position: relative;
-	width: 90%;
+	width: 70%;
 	vertical-align: middle;
 	line-height: 20px;
 	height: auto;
@@ -46,6 +46,7 @@
 	margin-left: 15px;
 	margin-bottom: 10px;
 	clear: both;
+	text-align: left;
 }
 
 .attachment_tile{
@@ -151,3 +152,8 @@
 	font-size: 11px;
 	color: #2A3890;
 }
+
+.picture_summary_class{
+	margin-top: 14px;
+}
+
