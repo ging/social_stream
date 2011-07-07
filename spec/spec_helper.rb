@@ -21,9 +21,6 @@ ActiveRecord::Migration.verbose = false
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
-# Run any available migration
-ActiveRecord::Migrator.migrate File.expand_path("../dummy/db/migrate/", __FILE__)
-
 # Load Factories
 require 'factory_girl'
 Dir["#{File.dirname(__FILE__)}/factories/*.rb"].each {|f| require f}
