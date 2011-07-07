@@ -18,6 +18,13 @@ test:
   pool: 5
   timeout: 5000
 
+test_mysql:
+  adapter: mysql
+  database: social_stream_test
+  username: root
+  password:
+  sockect: /var/run/mysqld/mysqld.sock
+
 test_pg:
   adapter: postgresql
   encoding: unicode
