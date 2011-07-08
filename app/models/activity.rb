@@ -80,7 +80,7 @@ class Activity < ActiveRecord::Base
   }
 
   after_create  :increment_like_count
-  after_destroy :decrement_like_count
+  after_destroy :decrement_like_count, :delete_notifications
  
 
   #For now, it should be the last one
@@ -257,5 +257,14 @@ class Activity < ActiveRecord::Base
     return if verb != "like" || direct_activity_object.blank?
 
     direct_activity_object.decrement!(:like_count)
+  end
+  
+  # after_destroy callback
+  #
+  # Destroy any Notification linked with the activity
+  def delete_notifications
+    Notification.find_by_object(self).each do |notification|
+      notification.destroy
+    end
   end
 end
