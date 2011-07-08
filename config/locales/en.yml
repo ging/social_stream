@@ -162,6 +162,7 @@ en:
     error: "Your request was unprocessable"
     invited: " has invited you to SocialStream!"
     join: "Invite other people to join SocialStream!"
+    join_me: "Join me at SocialStream!"
     one: "Invitation"
     other: "Invitations"
     success: "Your invitations have successfully been sent"
