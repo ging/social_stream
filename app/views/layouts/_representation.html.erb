@@ -6,7 +6,7 @@
   <% end %> 
   <%= link_to(current_user.name, current_user) %>
 
-  <%= t('representation.action') %>
+  <span id="representation_text"><%= t('representation.action') %></span>
 </div>
 
 <% representations = current_user.represented.unshift(current_user) - [current_subject] %>

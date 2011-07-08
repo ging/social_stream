@@ -52,7 +52,7 @@ li.btn_menu_browse{background: transparent url("btn/btn_browse.png") no-repeat l
 
 #account, #representation_li,#current_user_info, #representations_menu, #account_menu, #settings_menu {display:inline-block;vertical-align: top; height:22px; color:#FFF;}
 #representation_li{margin-left:10px;}
-
+#representation_text{display:inline;margin-left:2px;}
 li.btn_menu_representation{}
 #menu_home ul li.pipe,#menu_account ul li.pipe{padding:0px 3px 0px 3px; margin:0px;}
 .menu_white{display:inline-block; color:#fff;}
