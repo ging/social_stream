@@ -81,45 +81,11 @@ module ToolbarHelper
   end
 
   #Prints the home toolbar menu.
-  #By default it prints the default_home_toolbar_menu, but yo can 
-  #change everything in your initializer
-  #
-  #NOTE: To correctly show your menu in the vies we suggest using 
-  #the simple_navigation list renderer o create the menu as a list
-  #of links 
-  # <ul>
-  #   <li>
-  #     <a href="url">Link</a>
-  #   </li>
-  # </ul>
-  #
-  #To use simple navigation renderer you should create an array of 
-  #items like explained in the wiki of simple_navigation for ad-hoc menus
-  #in https://github.com/andi/simple-navigation/wiki/Dynamic-Navigation-Items
-  #and return with the expression
-  # render_items items
   def home_toolbar_menu
     default_home_toolbar_menu
   end
 
   #Prints the home profile menu.
-  #By default it prints the default_profile_toolbar_menu, but yo can 
-  #change everything in your initializer
-  #
-  #NOTE: To correctly show your menu in the vies we suggest using 
-  #the simple_navigation list renderer o create the menu as a list
-  #of links 
-  # <ul>
-  #   <li>
-  #     <a href="url">Link</a>
-  #   </li>
-  # </ul>
-  #
-  #To use simple navigation renderer you should create an array of 
-  #items like explained in the wiki of simple_navigation for ad-hoc menus
-  #in https://github.com/andi/simple-navigation/wiki/Dynamic-Navigation-Items
-  #and return with the expression
-  # render_items items
   def profile_toolbar_menu(subject=current_subject)
     default_profile_toolbar_menu(subject)
   end
