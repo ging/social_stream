@@ -82,8 +82,13 @@ end %>
   <% if !params[:section].present? or params[:section].eql?("about_me") %>
 		<% content_for :javascript do %>
 	    $(function () {
-	        $( "#profile_birthday" ).datepicker({ yearRange: '1900:<%= Time.now.utc.to_date.year%>',
-	                                          changeYear: true, maxDate: '+0d', defaultDate: '-30y'});
+	      defDate='-30y';
+	      if(<%= @profile.birthday?%>){        
+	        defDate= new Date('<%=@profile.birthday%>');
+	      }
+	      $( "#profile_birthday" ).datepicker({ yearRange: '1900:<%= Time.now.utc.to_date.year%>',
+	                                          changeYear: true, maxDate: '+0d', 
+	                                          defaultDate: defDate});
 	    });
 	  <% end %>
     <div class="row">
