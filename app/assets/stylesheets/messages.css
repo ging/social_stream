@@ -92,12 +92,12 @@
 .conversations .conversation .content_left {
 	float:left;
 	width:25%;
-	padding: 7px 0px 0px 0px;
+	padding: 0px;
 }
 .conversations .conversation .content_right {
 	float:left;
 	width:55%;
-	padding: 7px 0px 0px 0px;
+	padding: 0px;
 }
 .conversations .conversation .sender_photo {
 	float:left;
