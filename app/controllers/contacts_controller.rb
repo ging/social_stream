@@ -1,6 +1,5 @@
 class ContactsController < ApplicationController
   before_filter :authenticate_user!
-  include SubjectsHelper, ActionView::Helpers::TextHelper
   
   def index
     @contacts =
@@ -14,7 +13,7 @@ class ContactsController < ApplicationController
     respond_to do |format|
       format.html { @contacts = Kaminari.paginate_array(@contacts).page(params[:page]).per(10) }
       format.js { @contacts = Kaminari.paginate_array(@contacts).page(params[:page]).per(10) }
-      format.json { render :text => @contacts.map{ |c| { 'key' => c.actor_id.to_s, 'value' => truncate_name(c.name) } }.to_json }
+      format.json { render :text => @contacts.map{ |c| { 'key' => c.actor_id.to_s, 'value' => self.class.helpers.truncate_name(c.name) } }.to_json }
     end
   end
 
