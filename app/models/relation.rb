@@ -57,7 +57,7 @@ class Relation < ActiveRecord::Base
       when Array
         r.map{ |e| Relation.normalize(e, options) }
       else
-        raise "Unable to normalize relation #{ r.inspect }"
+        raise "Unable to normalize relation #{ r.class }: #{ r.inspect }"
       end
     end
 

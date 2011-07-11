@@ -161,10 +161,12 @@ class Actor < ActiveRecord::Base
   # Options:
   # * type: Filter by the class of the contacts.
   # * direction: sent or received
-  # * relations: Restrict the relations of considered ties
+  # * relations: Restrict the relations of considered ties. Defaults to {Relation::Custom subject's custom relations}
   # * include_self: False by default, don't include this actor as subject even they have ties with themselves.
   #
   def contact_actors(options = {})
+    options[:relations] ||= relation_customs.to_a
+
     subject_types   = Array(options[:type] || self.class.subtypes)
     subject_classes = subject_types.map{ |s| s.to_s.classify }
     
@@ -186,9 +188,7 @@ class Actor < ActiveRecord::Base
       as = as.where("actors.id != ?", self.id)
     end
     
-    if options[:relations].present?
-      as = as.joins(:ties).merge(Tie.related_by(options[:relations]))
-    end
+    as = as.joins(:received_ties).merge(Tie.related_by(options[:relations]))
     
     as
   end
