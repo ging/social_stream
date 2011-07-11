@@ -1,16 +1,4 @@
 <% if current_subject.suggestion.present? %>
-  <% content_for :javascript do %>
-
-    $(".suggestions .close").livequery("click",function(){
-    temp = $(this);
-    $.get("<%=suggestion_contacts_path%>", function(data) {
-    temp.parents(".contact").replaceWith(data);
-    });
-
-    });
-
-  <% end %>
-
   <div class="block">
     <div class="header">
       <%= image_tag('btn/notifications.png', :class => "header_icon") %>
@@ -21,7 +9,7 @@
     <div class="content">
       <div class="suggestions">
         <% if (sgs = current_subject.suggestions(2)).present? %>
-          <%= render :partial => 'contacts/contact', :collection => sgs %>
+          <%= render sgs %>
         <%end%>
       </div>
     </div>

@@ -241,7 +241,7 @@ class Actor < ActiveRecord::Base
     # Candidates are all the instance of "type" minus all the subjects
     # that are receiving any tie from this actor
     candidates = candidates_classes.inject([]) do |cs, klass|
-      cs += klass.all - contact_subjects(:type => klass.to_s.underscore, :direction => :sent)
+      cs += klass.all - contact_subjects(:type => klass.to_s.underscore, :direction => :sent, :relations => relations.to_a)
       cs -= Array(subject) if subject.is_a?(klass)
       cs
     end
@@ -250,7 +250,7 @@ class Actor < ActiveRecord::Base
     
     return nil unless candidate.present?
     
-    Contact.new :sender => self, :receiver => candidate.actor
+    contact_to!(candidate)
   end
   
   # Set of ties sent by this actor received by subject

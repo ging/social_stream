@@ -36,8 +36,13 @@ class ContactsController < ApplicationController
     end
   end
 
-  def suggestion
-    @contact = current_subject.suggestion
-    render :layout  => false
+  def destroy
+    @contact = current_subject.sent_contacts.find params[:id]
+    
+    @contact.relation_ids = [current_subject.relation_public.id]
+
+    respond_to do |format|
+      format.js
+    end
   end
 end
