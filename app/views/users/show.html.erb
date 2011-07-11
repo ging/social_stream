@@ -17,7 +17,7 @@
 <% end %>
 
 <%= location(link_to(image_tag("btn/btn_profile.png", :class => "btn_config")+t('profile.one')+": "+
-                      content_tag(:span, ( sanitize @user.name), :class=>"name_group")))%>
+                      content_tag(:span, ( truncate_name sanitize @user.name), :class=>"name_group")))%>
               
 <% toolbar :profile => @user %>
 

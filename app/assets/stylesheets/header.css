@@ -79,7 +79,7 @@ li.btn_menu_representation{}
 .sf-menu ul {
 	position:		absolute;
 	top:			-999em;
-	width:			10em; /* left offset of submenus need to match (see below) */
+	width:			17em; /* left offset of submenus need to match (see below) */
 }
 .sf-menu ul li {
 	width:			100%;

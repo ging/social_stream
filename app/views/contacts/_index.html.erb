@@ -13,7 +13,7 @@
     </div>
     <div class="sub-block">
       <div class="name black" >
-        <%=link_to(contact.name, contact)%>
+        <%=link_to(truncate_name(contact.name), contact)%>
       </div>
       <div class="link">
         <%= contact_to(contact) %>

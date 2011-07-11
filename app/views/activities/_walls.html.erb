@@ -9,7 +9,7 @@
 
 <div id="tabs" class="block">
   <ul class="activity_tabs">
-    <li><%= link_to "<span>#{ h owner.name }</span>".html_safe, "#wall-profile" %></li>
+    <li><%= link_to "<span>#{ h truncate_name owner.name }</span>".html_safe, "#wall-profile" %></li>
 
     <% owner.relation_customs.sort.each do |r| %>
       <li><%= link_to "<span>#{ h r.name }</span>".html_safe,
