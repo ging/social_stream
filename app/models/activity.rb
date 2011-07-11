@@ -225,14 +225,23 @@ class Activity < ActiveRecord::Base
     when 'update'
       return true if contact.sender_id == Actor.normalize_id(subject)
     when 'destroy'
-      return true if [contact.sender_id, contact.receiver_id].include?(Actor.normalize_id(subject))
+      # We only allow destroying to sender and receiver by now
+      return [contact.sender_id, contact.receiver_id].include?(Actor.normalize_id(subject))
     end
 
     Relation.
       allow(subject, action, 'activity').
       where('relations.id' => relation_ids).
       any?
-   end
+  end
+
+  # Can subject delete the object of this activity?
+  def delete_object_by?(subject)
+    subject.present? &&
+    direct_object.present? &&
+      ! direct_object.is_a?(Actor) &&
+      allow?(subject, 'destroy')
+  end
 
   private
 
