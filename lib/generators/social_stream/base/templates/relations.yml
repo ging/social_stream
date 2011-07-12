@@ -11,35 +11,27 @@ user:
   friend:
     name: friend
     permissions:
-      - [ follow ]                            # follow the activities of the friend
-      - [ create,  activity, same_level ]     # let the friend create activities
-      - [ read,    activity, same_and_lower_levels ] # friend can read activities from the other friends and below
-    sphere: personal
+      - [ follow ]
+      - [ create,  activity ]
+      - [ read,    activity ]
   acquaintance:
     name: acquaintance
-    parent: friend # friend relation is stronger than acquaintance
     permissions:
-      - [ read,    activity, same_and_lower_levels ]
-    sphere: personal
-  partner:
-    name: partner
+      - [ read,    activity ]
+  colleague:
+    name: colleague
     permissions:
-      - [ read, activity, same_and_lower_levels ]
-    sphere: work
+      - [ read, activity ]
 
 group:
   member:
     name: member
     permissions:
-      - [ represent ]                         # let the member act as the group
-      - [ create,  activity, same_and_lower_levels ] # let them member create activities
-      - [ read,    activity, same_and_lower_levels ] # read activities from other members
-      - [ read,    tie,      same_and_lower_levels ]
-    sphere: organization
+      - [ represent ]
+      - [ create,  activity ]
+      - [ read,    activity ]
+      - [ read,    tie ]
   partner:
     name: partner
-    parent: member # member is stronger than partner
     permissions:
-      - [ read,    activity, same_and_lower_levels ]
-    sphere: external_relations
-
+      - [ read,    activity ]

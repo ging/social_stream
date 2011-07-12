@@ -42,7 +42,7 @@ class Relation::Custom < Relation
         if (ps = cfg_rel['permissions']).present?
           ps.each do |p| 
             rels[name].permissions << 
-              Permission.find_or_create_by_action_and_object_and_function(*p)
+              Permission.find_or_create_by_action_and_object(*p)
           end 
         end
       end

@@ -244,46 +244,25 @@ en:
     description:
       brief:
         create: 
-          activity:
-            same_level: "Post to wall"
-        destroy:
-          activity:
-            nil: "Delete activities in wall"
+          activity: "Post to wall"
         follow:
-          nil:
-            nil: "Follow their activity"
+          nil: "Follow their activity"
         read:
-          activity:
-            same_and_lower_levels: "Read wall"
+          activity: "Read wall"
         represent:
-          nil:
-            nil: "Represent"
+          nil: "Represent"
       detailed:
         create:
-          activity:
-            same_level: "Post to \"%{relation}\" wall"
-            same_and_lower_levels: "Post to \"%{relations}\" and %{public}"
-        destroy:
-          activity:
-            nil: "Delete the activities posted to \"%{relation}\" wall"
+          activity: "Post to \"%{relation}\" wall"
         follow:
-          nil:
-            nil: "Activities of the contacts at %{relation} level will appear in our home wall"
+          nil: "Activities of the contacts at %{relation} will appear in our home wall"
         read:
-          activity:
-            same_and_lower_levels: "Read posts in \"%{relations}\" wall and %{public}"
-          tie:
-            same_and_lower_levels:
-              "See contacts in levels: %{relations} and %{public}"
+          activity: "Read posts in \"%{relation}\" wall"
+          tie: "See contacts in levels: %{relations} and %{public}"
         represent:
-          nil:
-            nil: "Represent me/us in the website"
-        update:
-          activity:
-            nil: "Update the wall activities posted by %{relation}"
-            weak_star_ties: "Update the wall activities posted in levels %{relations} and %{public}"
+          nil: "Represent me/us in the website"
     of_relation:
-      choose: "3. Permissions in <strong>%{name}</strong> level"
+      choose: "2. Permissions in <strong>%{name}</strong> level"
   privacy:
     intro: "Contacts at <strong>%{relation}</strong> level are only allowed to:"
     rule:

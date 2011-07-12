@@ -5,10 +5,4 @@
   <%= f.hidden_field :_contact_id %>
 
   <%= render :partial => object.class.to_s.tableize+'/fields' , :locals => {:f => f} %>	
-
-  <% if current_subject != receiver %>
-    <% current_subject.activity_relations(receiver, :from => :receiver).each do |r| %>
-      <%= f.hidden_field "_relation_ids][", :value => r.id %>
-    <% end %>
-  <% end %>
 <% end %>

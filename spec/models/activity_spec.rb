@@ -263,7 +263,7 @@ describe Activity do
           create_ability_accessed_by_related :friend
         end
 
-       it_should_behave_like "Denies Creating"
+        it_should_behave_like "Denies Creating"
         it_should_behave_like "Allows Reading"
         it_should_behave_like "Denies Updating"
         it_should_behave_like "Denies Destroying"
@@ -273,7 +273,6 @@ describe Activity do
         before do
           create_ability_accessed_by_related :acquaintance
         end
-
 
         it_should_behave_like "Denies Creating"
         it_should_behave_like "Denies Reading"

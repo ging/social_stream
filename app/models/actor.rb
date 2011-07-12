@@ -293,46 +293,20 @@ class Actor < ActiveRecord::Base
         any?
   end
 
-  # The relations that allow attaching an activity to them. This method is used for caching
-  def active_relations
-    @active_relations ||= { :sender => {}, :receiver => {} }
-  end
-
   # An {Activity} can be shared with multiple {audicences Audience}, which corresponds to a {Relation}.
   #
   # This method returns all the {relations Relation} that this actor can use to broadcast an Activity
   #
-  # Options:
-  # from:: limit the relations to one side, from the :sender or the :receiver of the activity
   #
   def activity_relations(subject, options = {})
     return relations if Actor.normalize(subject) == self
 
-    case options[:from]
-    when :sender
-      sender_activity_relations(subject)
-    when :receiver
-      receiver_activity_relations(subject)
-    else
-      sender_activity_relations(subject) +
-        receiver_activity_relations(subject)
-    end
+    Array.new
   end
 
   # Are there any activity_relations present?
   def activity_relations?(*args)
     activity_relations(*args).any?
-  end
-
-  # Relations from this actor that can be read by subject
-  def sender_activity_relations(subject)
-    active_relations[:sender][subject] ||=
-      Relation.allow(subject, 'read', 'activity', :owner => self)
-  end
-
-  def receiver_activity_relations(subject)
-    active_relations[:receiver][subject] ||=
-      Relation.allow(self, 'create', 'activity', :owner => subject)
   end
 
   # Is this {Actor} allowed to create a comment on activity?
