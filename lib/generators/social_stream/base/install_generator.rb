@@ -44,6 +44,10 @@ class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
     copy_file 'navigation.rb', 'config/navigation.rb'
   end
 
+  def create_mailboxer_custom_config
+    copy_file 'mailboxer_custom.rb', 'config/initializers/mailboxer.rb'
+  end
+
   def create_migration_file
     require 'rake'
     Rails.application.load_tasks
