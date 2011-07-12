@@ -136,8 +136,17 @@ class Actor < ActiveRecord::Base
   end
   
   # Returns the email used for Mailboxer
-  def mailboxer_email
-    email
+  def mailboxer_email    
+    return email if email.present?
+    if (group = self.subject).is_a? Group
+      relation = group.relation_customs.sort.first
+      receivers = group.contact_actors(:direction => :sent, :relations => relation)
+      emails = Array.new
+      receivers.each do |receiver|
+        emails << receiver.mailboxer_email
+      end
+      return emails
+    end
   end
   
   # The subject instance for this actor
