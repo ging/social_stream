@@ -80,7 +80,7 @@ class Activity < ActiveRecord::Base
   }
 
   after_create  :increment_like_count
-  after_destroy :decrement_like_count
+  after_destroy :decrement_like_count, :delete_notifications
  
 
   #For now, it should be the last one
@@ -209,23 +209,39 @@ class Activity < ActiveRecord::Base
 
     case action
     when 'create'
-      return contact.sender_id == Actor.normalize_id(subject) &&
-             relation_ids.any? &&
-             Relation.
-               allow(subject, action, 'activity', :in => relation_ids).all.size == relation_ids.size
+      return false if contact.sender_id != Actor.normalize_id(subject)
+
+      rels = Relation.normalize(relation_ids)
+
+      foreign_rels = rels.select{ |r| r.actor_id != contact.sender_id }
+
+      # Only posting to own relations
+      return true if foreign_rels.blank?
+
+      return Relation.
+               allow(subject, action, 'activity', :in => foreign_rels).all.size == foreign_rels.size
     when 'read'
       return true if [contact.sender_id, contact.receiver_id].include?(Actor.normalize_id(subject)) || relations.select{ |r| r.is_a?(Relation::Public) }.any?
     when 'update'
       return true if contact.sender_id == Actor.normalize_id(subject)
     when 'destroy'
-      return true if [contact.sender_id, contact.receiver_id].include?(Actor.normalize_id(subject))
+      # We only allow destroying to sender and receiver by now
+      return [contact.sender_id, contact.receiver_id].include?(Actor.normalize_id(subject))
     end
 
     Relation.
       allow(subject, action, 'activity').
       where('relations.id' => relation_ids).
       any?
-   end
+  end
+
+  # Can subject delete the object of this activity?
+  def delete_object_by?(subject)
+    subject.present? &&
+    direct_object.present? &&
+      ! direct_object.is_a?(Actor) &&
+      allow?(subject, 'destroy')
+  end
 
   private
 
@@ -250,5 +266,14 @@ class Activity < ActiveRecord::Base
     return if verb != "like" || direct_activity_object.blank?
 
     direct_activity_object.decrement!(:like_count)
+  end
+  
+  # after_destroy callback
+  #
+  # Destroy any Notification linked with the activity
+  def delete_notifications
+    Notification.find_by_object(self).each do |notification|
+      notification.destroy
+    end
   end
 end

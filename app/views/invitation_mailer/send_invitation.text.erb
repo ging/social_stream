@@ -1,5 +1,10 @@
-<%= @sender.name %> has invited you to <%= link_to( t('socialstream'), new_user_registration_path)%>
-"<%= @message%>"
+<%= @sender.name %> has invited you to <%= t('socialstream')%>: <%= new_user_registration_url%>
+
+<% if @message.blank? %>
+  <%= t('invitation.join_me')%>         
+<%else%>
+  "<%= @message%>"
+<%end%>
 
 <%= t('frontpage.main_title') %>
 

@@ -162,6 +162,7 @@ en:
     error: "Your request was unprocessable"
     invited: " has invited you to SocialStream!"
     join: "Invite other people to join SocialStream!"
+    join_me: "Join me at SocialStream!"
     one: "Invitation"
     other: "Invitations"
     success: "Your invitations have successfully been sent"
@@ -236,7 +237,7 @@ en:
   public:
     other: "Everybody"
   representation:
-    action: "representing"
+    action: "as"
     change: "Change"
   service:
     one: "Service"
@@ -300,6 +301,7 @@ en:
     new: "+ New level"
   relation_public:
     name: "Public"
+  required: "* These fields are required"
   settings:
     error: "Some errors raised when saving your changes"
     for: "Settings for"

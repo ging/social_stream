@@ -1,0 +1,4 @@
+$("#flash").empty();
+$("#flash").append("<%= escape_javascript(render :partial => "layouts/flash", :locals => {:flash => flash})%>");
+$("#content").empty();
+$("#content").append("<%= escape_javascript(render(:partial => 'new'))%>");

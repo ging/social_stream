@@ -61,6 +61,10 @@ module SocialStream
           @_contact ||= Contact.find(_contact_id)
         end
 
+        def _activity_parent
+          @_activity_parent ||= Activity.find(_activity_parent_id)
+        end
+
         private
 
         def create_post_activity

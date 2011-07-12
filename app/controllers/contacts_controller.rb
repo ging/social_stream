@@ -13,7 +13,7 @@ class ContactsController < ApplicationController
     respond_to do |format|
       format.html { @contacts = Kaminari.paginate_array(@contacts).page(params[:page]).per(10) }
       format.js { @contacts = Kaminari.paginate_array(@contacts).page(params[:page]).per(10) }
-      format.json { render :text => @contacts.map{ |c| { 'key' => c.actor_id.to_s, 'value' => c.name } }.to_json }
+      format.json { render :text => @contacts.map{ |c| { 'key' => c.actor_id.to_s, 'value' => self.class.helpers.truncate_name(c.name) } }.to_json }
     end
   end
 
@@ -36,8 +36,13 @@ class ContactsController < ApplicationController
     end
   end
 
-  def suggestion
-    @contact = current_subject.suggestion
-    render :layout  => false
+  def destroy
+    @contact = current_subject.sent_contacts.find params[:id]
+    
+    @contact.relation_ids = [current_subject.relation_public.id]
+
+    respond_to do |format|
+      format.js
+    end
   end
 end

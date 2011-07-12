@@ -1,4 +1,4 @@
-<div id="contact_<%=dom_id(contact.receiver_subject)%>" class="row contact">
+<%= div_for contact, :class => 'row' do %>
   <div class="logo">
     <%= link_to(image_tag(contact.receiver.logo.url(:contact)),
                 contact.receiver_subject) %>
@@ -14,7 +14,7 @@
       <%= contact_to(contact.receiver) %>
     </div>
   </div>
-  <div class="close"><%=link_to('X','#')%></div>
+  <div class="close"><%= link_to 'X', contact, :method => :delete, :remote => true %></div>
   <div class="space_center">
   </div>  
-</div>
+<% end %>

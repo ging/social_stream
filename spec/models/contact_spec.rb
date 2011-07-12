@@ -12,5 +12,16 @@ describe Contact do
     end
   end
 
+  context "with message" do
+    before do
+      @sent = Factory(:contact, :message => 'Hello')
+      @received = @sent.inverse!
+    end
+
+    it "should send to the receiver" do
+      @sent.message.should == 'Hello'
+      @sent.sender_subject.should eq(@received.receiver_subject)
+    end
+  end
 
 end

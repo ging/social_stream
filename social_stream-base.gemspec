@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   # Slug generation
   s.add_runtime_dependency('stringex', '~> 1.2.0')
   # Avatar attachments
-  s.add_runtime_dependency('avatars_for_rails', '~> 0.1.0')
+  s.add_runtime_dependency('avatars_for_rails', '~> 0.1.3')
   # jQuery
   s.add_runtime_dependency('jquery-rails', '~> 1.0.9')
   # Authorization
@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   # OAuth provider
   s.add_runtime_dependency('oauth-plugin','~> 0.4.0.pre1')	
   # Messages
-  s.add_runtime_dependency('mailboxer','~> 0.2.3')
+  s.add_runtime_dependency('mailboxer','~> 0.2.5')
   # Avatar manipulation
   s.add_runtime_dependency('rmagick','~> 2.13.1')
   # Tagging
@@ -56,7 +56,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency('sqlite3-ruby')
   # Debugging
   if RUBY_VERSION < '1.9'
-    s.add_development_dependency('ruby-debug', '~> 0.10.3')
+    s.add_development_dependency('ruby-debug')
+  else
+    s.add_development_dependency('ruby-debug19')
   end
   # Specs
   s.add_development_dependency('rspec-rails', '~> 2.6.1')

@@ -10,7 +10,7 @@
       </div>
       <div class="sub-block">
         <div class="name black" >
-          <%= link_to group.name, group %>
+          <%= link_to truncate_name(group.name), group %>
         </div>
         <div class="brief">
           <%= t 'follower.n', :count => group.follower_count %>,

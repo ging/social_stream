@@ -4,24 +4,28 @@
   <% else %>
     <%= link_to(image_tag(current_user.logo.url(:representation), :width => 20, :height => 20, :class => 'menu_icon'), current_user) %>
   <% end %> 
-  <%= link_to(current_user.name, current_user) %>
-
-  <%= t('representation.action') %>
+  <%= link_to(truncate_name(current_user.name), current_user) %>
 </div>
+
 
 <% representations = current_user.represented.unshift(current_user) - [current_subject] %>
 
-<div id="representations_menu">
+<% if !representations.empty? %>
+
+<span id="representation_text"><%= t('representation.action') %></span>
+
+<div id="representations_menu">	
   <ul class="sf-menu" >
     <li id="representation_li">
-      <a href="#" class="sf-with-ul" id="current_subject_avatar_img" style="background: transparent url('<%= image_path current_subject.logo.url(:representation)%>') no-repeat left top;"><%= current_subject.name %><span class="sf-sub-indicator"> »</span></a>
+      <a href="#" class="sf-with-ul" id="current_subject_avatar_img" style="background: transparent url('<%= image_path current_subject.logo.url(:representation)%>') no-repeat left top;"><%= truncate_name current_subject.name %><span class="sf-sub-indicator"> »</span></a>
       <ul>
         <% representations.each do |representation| %>
         <li>
-        <%= link_to representation.name, { :s => representation.slug }, { :style => "background: transparent url('#{ image_path representation.logo.url(:representation)}') no-repeat left center;margin-left:2px;" } %>
+        <%= link_to truncate_name(representation.name), { :s => representation.slug }, { :style => "background: transparent url('#{ image_path representation.logo.url(:representation)}') no-repeat left center;margin-left:2px;" } %>
        </li>
         <% end %>
       </ul>
     </li>
   </ul>
 </div>
+<% end %>

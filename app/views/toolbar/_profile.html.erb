@@ -1,13 +1,22 @@
+<% content_for :headers do %>
+<%= stylesheet_link_tag "menu", :media => "screen, projection" %>
+<%= javascript_include_tag 'menu' %>
+<% end %>
+
 <%= render :partial => 'toolbar/logo', :locals => { :subject => subject } %>
 
-<div class="block space_center"></div>
+<div class="block space_center">
+</div>
 
-<%= render :partial => 'toolbar/profile_menu', :locals => { :subject => subject } %>
+<div id="menu_lateral" class="toolbar_menu">
+    <%= yield(:toolbar_menu).empty? ? profile_toolbar_menu(subject) : yield(:toolbar_menu) %>
+</div>
 
-<div class="block space_center"></div>
-
+<div class="block space_center">
+</div>
 
 <%= render :partial => 'subjects/contacts', :locals => { :subject => subject } %>
 
-<div class="block space_center"></div>
-<div class="block space_center"></div>
+<div class="block space_center">
+</div>
+

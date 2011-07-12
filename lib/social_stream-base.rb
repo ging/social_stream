@@ -40,6 +40,7 @@ module SocialStream
   autoload :Populate,  'social_stream/populate'
   autoload :Relations, 'social_stream/relations'
   autoload :TestHelpers, 'social_stream/test_helpers'
+  autoload :ToolbarConfig, 'social_stream/toolbar_config'
 
   module Controllers
     autoload :Helpers, 'social_stream/controllers/helpers'

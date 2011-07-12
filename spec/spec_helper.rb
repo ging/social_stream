@@ -18,9 +18,6 @@ Capybara.default_selector = :css
 # FIXME orm
 ActiveRecord::Migration.verbose = false
 
-# Run any available migration
-ActiveRecord::Migrator.migrate File.expand_path("../dummy/db/migrate/", __FILE__)
-
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 

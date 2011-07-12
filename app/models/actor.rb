@@ -161,10 +161,12 @@ class Actor < ActiveRecord::Base
   # Options:
   # * type: Filter by the class of the contacts.
   # * direction: sent or received
-  # * relations: Restrict the relations of considered ties
+  # * relations: Restrict the relations of considered ties. Defaults to {Relation::Custom subject's custom relations}
   # * include_self: False by default, don't include this actor as subject even they have ties with themselves.
   #
   def contact_actors(options = {})
+    options[:relations] ||= relation_customs.to_a
+
     subject_types   = Array(options[:type] || self.class.subtypes)
     subject_classes = subject_types.map{ |s| s.to_s.classify }
     
@@ -186,9 +188,7 @@ class Actor < ActiveRecord::Base
       as = as.where("actors.id != ?", self.id)
     end
     
-    if options[:relations].present?
-      as = as.joins(:ties).merge(Tie.related_by(options[:relations]))
-    end
+    as = as.joins(:received_ties).merge(Tie.related_by(options[:relations]))
     
     as
   end
@@ -241,7 +241,7 @@ class Actor < ActiveRecord::Base
     # Candidates are all the instance of "type" minus all the subjects
     # that are receiving any tie from this actor
     candidates = candidates_classes.inject([]) do |cs, klass|
-      cs += klass.all - contact_subjects(:type => klass.to_s.underscore, :direction => :sent)
+      cs += klass.all - contact_subjects(:type => klass.to_s.underscore, :direction => :sent, :relations => relations.to_a)
       cs -= Array(subject) if subject.is_a?(klass)
       cs
     end
@@ -250,7 +250,7 @@ class Actor < ActiveRecord::Base
     
     return nil unless candidate.present?
     
-    Contact.new :sender => self, :receiver => candidate.actor
+    contact_to!(candidate)
   end
   
   # Set of ties sent by this actor received by subject
@@ -353,7 +353,11 @@ class Actor < ActiveRecord::Base
   end
 
   # Is this {Actor} allowed to create a comment on activity?
+  #
+  # We are allowing comments from everyone signed in by now
   def can_comment?(activity)
+    return true
+
     comment_relations(activity).any?
   end
 
@@ -365,7 +369,7 @@ class Actor < ActiveRecord::Base
 
   # Build a new {Contact} from each that has not inverse
   def pending_contacts
-    received_contacts.pending.all.map do |c|
+    received_contacts.not_reflexive.pending.all.map do |c|
       c.inverse ||
         c.receiver.contact_to!(c.sender)
     end

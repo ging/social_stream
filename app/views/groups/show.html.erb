@@ -16,7 +16,7 @@
 <% end %>
 
 <%= location(link_to(image_tag("btn/btn_group.png", :class => "btn_config")+t('group.one')+": "+
-                      content_tag(:span, ( sanitize @group.name), :class=>"name_group")))%>
+                      content_tag(:span, ( truncate_name sanitize @group.name), :class=>"name_group")))%>
                       
 <% toolbar :profile => @group %>
 

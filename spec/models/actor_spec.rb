@@ -16,4 +16,13 @@ describe Actor do
   it "should generate relations" do
     assert Factory(:actor).relation_customs.present?
   end
+
+  context 'pending contacts' do
+    it 'should not include self' do
+      a = Factory(:actor)
+      c = a.contact_to!(a)
+
+      a.pending_contacts.should_not include(c)
+    end
+  end
 end

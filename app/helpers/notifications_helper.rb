@@ -1,8 +1,9 @@
 module NotificationsHelper
+  include SubjectsHelper, ActionView::Helpers::TextHelper
   def decode_notification notification_text, activity
     return if activity.nil?
-    notification_text = notification_text.gsub(/\%\{sender\}/, link_to(activity.sender.name, activity.sender.subject))
-    notification_text = notification_text.gsub(/\%\{sender.name\}/,activity.sender.name)
+    notification_text = notification_text.gsub(/\%\{sender\}/, link_to(truncate_name(activity.sender.name), activity.sender.subject))
+    notification_text = notification_text.gsub(/\%\{sender.name\}/,truncate_name(activity.sender.name))
 
     if activity.direct_object.present?
       object = activity.direct_object

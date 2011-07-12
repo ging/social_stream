@@ -3,6 +3,10 @@ Factory.define :contact do |c|
   c.receiver { |r| Factory(:user).actor }
 end
 
+Factory.define :self_contact, :parent => :contact do |c|
+  c.receiver { |d| d.sender }
+end
+
 Factory.define :group_contact, :parent => :contact do |g|
   g.sender { |s| Factory(:group).actor }
 end

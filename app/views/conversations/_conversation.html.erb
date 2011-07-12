@@ -8,7 +8,7 @@
 </div>
 <div class="content_left">
 	<div class="sender_name">
-		<%= link_to conversation.last_sender.name, conversation.last_sender.subject %>
+		<%= link_to truncate_name(conversation.last_sender.name), conversation.last_sender.subject %>
 	</div>
 	<div class="date">
 		<%= t('time.ago', :time => time_ago_in_words(conversation.updated_at)) %>

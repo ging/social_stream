@@ -27,11 +27,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :contacts do
-    collection do
-      get 'suggestion'
-    end
-  end
+  resources :contacts
 
   resources :spheres
   namespace "relation" do

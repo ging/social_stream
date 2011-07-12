@@ -19,7 +19,9 @@ describe HomeController do
 
     it "should render" do
       get :index
-      assert_response :success
+
+      response.should be_success
+      response.body.should =~ /activities_share_btn/
     end
 
     describe "when representing" do

@@ -50,6 +50,8 @@ class Contact < ActiveRecord::Base
 
   scope :active, where(arel_table[:ties_count].gt(0))
 
+  scope :not_reflexive, where(arel_table[:sender_id].not_eq(arel_table[:receiver_id]))
+
   validates_presence_of :sender_id, :receiver_id
   validates_uniqueness_of :sender_id, :scope => :receiver_id
   validates_uniqueness_of :receiver_id, :scope => :sender_id
@@ -126,11 +128,11 @@ class Contact < ActiveRecord::Base
       end
     end
   end
- 
+
   # Send a message to the contact receiver
   def send_message
     if message.present?
-      sender.send_message(receiver, message, I18n.t("activity.verb.#{ contact_verb }.#{ receiver.subject_type }.message", :name => sender.name))
+      sender.send_message(receiver, message, I18n.t("activity.verb.#{ verb }.#{ receiver.subject_type }.message", :name => sender.name))
     end
   end
 

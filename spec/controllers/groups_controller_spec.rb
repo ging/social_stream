@@ -63,7 +63,8 @@ describe GroupsController do
       @group = Factory(:member, :contact => Factory(:group_contact, :receiver => @user.actor)).sender_subject
       get :show, :id => @group.to_param
 
-      assert_response :success
+      response.should be_success
+      response.body.should =~ /activities_share_btn/
     end
 
     it "should render other group" do
@@ -73,7 +74,7 @@ describe GroupsController do
     end
 
     it "should render new" do
-      get :new, 'group' => { '_founder' => @user.to_param }
+      get :new
 
       assert_response :success
     end
