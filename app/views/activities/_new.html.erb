@@ -19,7 +19,7 @@
 </div>
 
 <div id="activities_share_btn">
-<div id="securities"><%= select_tag :_relation_ids, grouped_options_for_select(current_subject.grouped_activity_relations(receiver)), :id => 'security', :multiple => nil %></div>
+  <div id="securities"><%= select_tag :_relation_ids, options_for_select(current_subject.activity_relations(receiver).sort.map{ |r| [ r.name, r.id ] }), :id => 'security', :multiple => nil %></div>
 <%= submit_tag(t('share'), :class => "myButtonBlue", :id => "masterSubmitButton") %>
 </div>
 <% end %>

@@ -98,7 +98,6 @@ class Permission < ActiveRecord::Base
 
   def description_options(relation)
     { 
-      :sphere => relation.sphere.name,
       :public => I18n.t('relation_public.name')
     }.tap do |h|
       case function

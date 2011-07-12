@@ -56,11 +56,6 @@ class Actor < ActiveRecord::Base
            :uniq => true
 
   has_many :relations
-  has_many :spheres
-
-  has_many :relation_customs,
-           :through => :spheres, 
-           :source  => :customs
 
   scope :alphabetic, order('actors.name')
 
@@ -144,6 +139,11 @@ class Actor < ActiveRecord::Base
   def subject
     subtype_instance ||
     activity_object.try(:object)
+  end
+
+  # All the {Relation relations} defined by this {Actor}
+  def relation_customs
+    relations.where(:type => 'Relation::Custom')
   end
 
   # A given relation defined and managed by this actor
@@ -319,37 +319,6 @@ class Actor < ActiveRecord::Base
   def receiver_activity_relations(subject)
     active_relations[:receiver][subject] ||=
       Relation.allow(self, 'create', 'activity', :owner => subject)
-  end
-
-  # Builds a hash of options their spheres as keys
-  def grouped_activity_relations(subject)
-    rels = activity_relations(subject)
-
-    spheres =
-      rels.map{ |r| r.respond_to?(:sphere) ? r.sphere : I18n.t('relation_public.name') }.uniq
-
-    spheres.sort!{ |x, y|
-      case x
-      when Sphere
-        case y
-        when Sphere
-          x.id <=> y.id
-        else
-          -1
-        end
-      else
-        1
-      end
-    }
-
-    spheres.map{ |s|
-      case s
-      when Sphere
-        [ s.name, rels.select{ |r| r.respond_to?(:sphere) && r.sphere == s }.sort.map{ |u| [ u.name, u.id ] } ]
-      else
-        [ s, rels.select{ |r| r.is_a?(Relation::Public) }.map{ |u| [ u.name, u.id ] } ]
-      end
-    }
   end
 
   # Is this {Actor} allowed to create a comment on activity?

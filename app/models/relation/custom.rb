@@ -13,16 +13,10 @@ class Relation::Custom < Relation
   inspect
   has_ancestry
 
-  attr_protected :actor_id
-
-  belongs_to :sphere
   belongs_to :actor
 
-  validates_presence_of :name, :sphere_id, :actor_id
-  validates_uniqueness_of :name, :scope => :sphere_id
-
-  before_validation :assign_parent, :on => :create
-  before_validation :assign_actor,  :on => :create
+  validates_presence_of :name, :actor_id
+  validates_uniqueness_of :name, :scope => :actor_id
 
   class << self
     # Relations configuration
@@ -40,13 +34,10 @@ class Relation::Custom < Relation
       rels = {}
 
       cfg_rels.each_pair do |name, cfg_rel|
-        raise("Must associatiate relation #{ cfg_rel['name'] } to a sphere") if cfg_rel['sphere'].blank?
-        sphere = actor.spheres.find_or_create_by_name(cfg_rel['sphere'])
-
         rels[name] =
-          create! :sphere        => sphere,
-                  :receiver_type => cfg_rel['receiver_type'],
-                  :name =>          cfg_rel['name']
+          create! :actor =>         actor,
+                  :name  =>         cfg_rel['name'],
+                  :receiver_type => cfg_rel['receiver_type']
 
         if (ps = cfg_rel['permissions']).present?
           ps.each do |p| 
@@ -102,23 +93,5 @@ class Relation::Custom < Relation
   # Relations above or at the same level of this relation
   def stronger_or_equal
     path
-  end
-
-  private
-
-  # Before create callback
-  #
-  # Assign the last relation as parent if there are other custom relations in the sphere
-  def assign_parent
-    return if parent.present? || sphere.customs.blank?
-
-    self.parent = sphere.customs.sort.last
-  end
-
-  # Before create callback
-  #
-  # Assign the sphere's actor
-  def assign_actor
-    self.actor = sphere.actor
   end
 end

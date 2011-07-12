@@ -150,8 +150,6 @@ en:
   help: "Help"
   helpers:
     submit:
-      sphere:
-        create: "Save"
       relation_custom:
         create: "Save"
   home: "Home"
@@ -263,17 +261,17 @@ en:
       detailed:
         create:
           activity:
-            same_level: "Post to \"%{sphere}\" wall at %{relation} level"
-            same_and_lower_levels: "Post to \"%{sphere}\" wall as %{relations} and %{public}"
+            same_level: "Post to \"%{relation}\" wall"
+            same_and_lower_levels: "Post to \"%{relations}\" and %{public}"
         destroy:
           activity:
-            nil: "Delete the activities posted to \"%{sphere}\" wall by this %{relation}"
+            nil: "Delete the activities posted to \"%{relation}\" wall"
         follow:
           nil:
             nil: "Activities of the contacts at %{relation} level will appear in our home wall"
         read:
           activity:
-            same_and_lower_levels: "Read posts in \"%{sphere}\" wall at levels %{relations} and %{public}"
+            same_and_lower_levels: "Read posts in \"%{relations}\" wall and %{public}"
           tie:
             same_and_lower_levels:
               "See contacts in levels: %{relations} and %{public}"
@@ -296,9 +294,9 @@ en:
     one: "Product"
     other: "Products"
   relation_custom:
-    in_sphere:
-      choose: "2. Levels in <strong>%{name}</strong> sphere"
-    new: "+ New level"
+    title: "Privacy & context"
+    choose: "1. Choose stream"
+    new: "+ New stream"
   relation_public:
     name: "Public"
   required: "* These fields are required"
@@ -327,10 +325,6 @@ en:
   sign_out: "Sign out"
   sign_up: "Sign up"
   socialstream: "SocialStream"
-  sphere:
-    title: "Privacy & context"
-    choose: "1. Choose sphere"
-    new: '+ New sphere'
   sure: "Are you sure?"
   time:
     ago: "%{time} ago"
