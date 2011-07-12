@@ -1,5 +1,5 @@
 <% if activity.direct_object.is_a? Actor %>
-  <%= render :partial => 'notifications/activities/like_subject_body' %>
+  %{sender} is now your fan.
 <% else %>
-  <%= render :partial => 'notifications/activities/like_object_body'%>
+  %{sender} likes your %{object}.
 <% end %>

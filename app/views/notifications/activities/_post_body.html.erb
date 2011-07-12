@@ -1,2 +1,6 @@
-%{sender} added a %{object} in your wall. 
-
+<% if activity.direct_object.respond_to? :text %>
+  "%{object.text}"
+<%end%>
+<% if activity.direct_object.is_a?(Document)%>
+  %{image}
+<% end%>

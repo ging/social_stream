@@ -10,6 +10,9 @@ module NotificationsHelper
       object = object.subject if object.is_a? Actor
       notification_text=notification_text.gsub(/\%\{object\}/,link_to(object.class.to_s.downcase,object))
       notification_text=notification_text.gsub(/\%\{object.name\}/,object.class.to_s.downcase)
+      notification_text=notification_text.gsub(/\%\{object.text\}/,object.text.truncate(100, :separator =>' ')) if object.respond_to? :text 
+      notification_text=notification_text.gsub(/\%\{object.image\}/,thumb_for(object)) if object.is_a?(Document)
+      
     else
       notification_text=notification_text.gsub(/\%\{object\}/,"nilclass")
       notification_text=notification_text.gsub(/\%\{object.name\}/,"nilclass")
