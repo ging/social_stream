@@ -272,7 +272,7 @@ class Activity < ActiveRecord::Base
   #
   # Destroy any Notification linked with the activity
   def delete_notifications
-    Notification.find_by_object(self).each do |notification|
+    Notification.with_object(self).each do |notification|
       notification.destroy
     end
   end
