@@ -135,6 +135,11 @@ class Actor < ActiveRecord::Base
     end
   end
   
+  # Returns the email used for Mailboxer
+  def mailboxer_email
+    email
+  end
+  
   # The subject instance for this actor
   def subject
     subtype_instance ||

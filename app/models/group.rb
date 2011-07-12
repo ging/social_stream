@@ -23,6 +23,18 @@ class Group < ActiveRecord::Base
         merge(Contact.recent)
     end
   end
+  
+  # Returns the email used for Mailboxer
+  def mailboxer_email
+    return email if email.present?
+    relation = group.relation_customs.sort.first
+    receivers = group.contact_actors(:direction => :sent, :relations => relation)
+    emails = Array.new
+    receivers.each do |receiver|
+      emails << receiver.mailboxer_email
+    end
+    emails
+  end
  
   private
 
