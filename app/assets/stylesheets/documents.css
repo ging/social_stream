@@ -97,31 +97,6 @@
 	width: 24px;
 }
 
-#media_wall{
-	position: relative;
-	margin-left: auto;
-	margin-right: auto;
-	background-color: #e0edf2;
-	width: 100%;
-	margin-bottom: 20px;
-	height: 130px;
-}
-
-#media_wall_buttons{
-	position: relative;
-	margin-left: auto;
-	margin-right: auto;
-	width: 100%;
-	text-align: right;
-}
-
-#media_wall_buttons li{
-	display:inline;
-	margin-left:2px;
-	margin-right:2px;
-	padding: 0px;
-}
-
 .media_preview{
 	float:left;
 	margin: 10px;
