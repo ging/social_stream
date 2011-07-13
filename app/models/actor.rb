@@ -175,25 +175,23 @@ class Actor < ActiveRecord::Base
   # Options:
   # * type: Filter by the class of the contacts.
   # * direction: sent or received
-  # * relations: Restrict the relations of considered ties. Defaults to {Relation::Custom subject's custom relations}
+  # * relations: Restrict the relations of considered ties. Defaults to {Relation::Custom relations of custom type}
   # * include_self: False by default, don't include this actor as subject even they have ties with themselves.
   #
   def contact_actors(options = {})
-    options[:relations] ||= relation_customs.to_a
-
     subject_types   = Array(options[:type] || self.class.subtypes)
     subject_classes = subject_types.map{ |s| s.to_s.classify }
     
     as = Actor.select("DISTINCT actors.*").
-    where('actors.subject_type' => subject_classes).
-    includes(subject_types)
+               where('actors.subject_type' => subject_classes).
+               includes(subject_types)
     
     
     case options[:direction]
       when :sent
-        as = as.contacted_from(self)
+        as = as.joins(:received_ties => :relation).merge(Contact.sent_by(self))
       when :received
-        as = as.contacted_to(self)
+        as = as.joins(:sent_ties => :relation).merge(Contact.received_by(self))
     else
       raise "contact actors in both directions are not supported yet"
     end
@@ -202,7 +200,11 @@ class Actor < ActiveRecord::Base
       as = as.where("actors.id != ?", self.id)
     end
     
-    as = as.joins(:received_ties).merge(Tie.related_by(options[:relations]))
+    if options[:relations].present?
+      as = as.merge(Tie.related_by(options[:relations]))
+    else
+      as = as.merge(Relation.where(:type => 'Relation::Custom'))
+    end
     
     as
   end

@@ -33,3 +33,7 @@ Factory.define :partner, :parent => :g2g_tie do |t|
   t.after_build { |u| u.relation = u.sender.relation_custom('partner') }
 end
 
+Factory.define :group_public, :parent => :g2g_tie do |t|
+  t.after_build { |u| u.relation = u.sender.relation_public }
+end
+

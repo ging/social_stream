@@ -21,6 +21,8 @@ user:
   colleague:
     name: colleague
     permissions:
+      - [ follow ]
+      - [ create,  activity ]
       - [ read, activity ]
 
 group:

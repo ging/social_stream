@@ -21,7 +21,8 @@
 <div id="activities_share_btn">
 <% if current_subject == receiver %>
   <div id="securities"><%= select_tag :_relation_ids, options_for_select(current_subject.activity_relations(receiver).sort.map{ |r| [ r.name, r.id ] }), :id => 'security', :multiple => nil %></div>
-<%= submit_tag(t('share'), :class => "myButtonBlue", :id => "masterSubmitButton") %>
 <% end %>
+
+  <%= submit_tag(t('share'), :class => "myButtonBlue", :id => "masterSubmitButton") %>
 </div>
 <% end %>

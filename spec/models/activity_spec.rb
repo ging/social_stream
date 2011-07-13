@@ -461,4 +461,14 @@ describe Activity do
       end
     end
   end
+
+  context "without relations" do
+    it "should allow create to friend" do
+      tie = Factory(:friend)
+
+      activity = Activity.new :contact_id => tie.contact.inverse!.id
+
+      assert activity.allow?(tie.receiver, 'create')
+    end
+  end
 end
