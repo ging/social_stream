@@ -1,3 +1,3 @@
 class Audio < Document
-  
+ 
 end

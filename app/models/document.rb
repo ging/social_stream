@@ -1,6 +1,8 @@
 class Document < ActiveRecord::Base
   include SocialStream::Models::Object
 
+  IMAGE_FORMATS = ["doc","ppt","xls","rar","zip","mpeg","plain","pdf"]
+
   has_attached_file :file, 
                     :url => '/:class/:id.:extension',
                     :path => ':rails_root/documents/:class/:id_partition/:style.:extension'
@@ -31,6 +33,23 @@ class Document < ActiveRecord::Base
       end
       
       return doc
+    end
+  end
+
+  def mime_type
+    Mime::Type.lookup(file_content_type)
+  end
+
+  def format
+    mime_type.to_sym
+  end
+
+  # Thumbnail file
+  def thumb helper
+    if format && IMAGE_FORMATS.include?(format.to_s)
+      "formats/#{ format }.png"
+    else
+      "formats/default.png"
     end
   end
   
