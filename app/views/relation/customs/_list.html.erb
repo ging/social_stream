@@ -1,36 +1,19 @@
-<table class="tableCheckBoxOptions">  
-
-  <tr><td colspan="2"><div class="slider-header"><%= current_subject.name %></div></td></tr>
-
-  <tr><td rowspan="<%= list.size + 1 %>">
-      <div class="slider-div">
-        <p>
-        <div id="slider-range"></div>
-        </p>
+<table class="tableCheckBoxOptions">
+  <% list.each do |r| %>
+    <%= raw cycle("<tr><td>", "<td>", :name => "begin_cell") %>
+      <div contain="<%= dom_id(r) %>" class="checkboxOptionLeft">
+        <input id=<%= dom_id(r) %> type="checkbox"/>
+        <label for=<%= dom_id(r) %>><%=r.name%></label>
       </div>
-    </td>
-  </tr>
-
-  <% order = 0 %>
-  <% list.sort.each do |r| %>
-    <tr><td>
-      <div contain=<%= dom_id r %> class="checkboxOptionLeft">
-        <input id=<%= dom_id r %> type="checkbox"/>
-        <label for="<%= dom_id r %>" order="<%= order %>"><%= r.name %></label>
-      </div>
-    </td></tr>
-    <% order += 1 %>
+    <%= raw cycle("</td>", "</td></tr>", :name => "end_cell") %>
   <% end %>
 
-  <tr><td colspan="2"><div class="slider-footer"><%= t 'relation_public.name' %></div></td><tr>
+  <%= raw("</tr>") if list.size.odd? %>
+
 </table>
 
 <%= javascript_tag do %>
   $(function() {
-    relations = <%= list.sort.reverse.map{ |r| h(r.name) }.to_json.html_safe %>; 
-
     $('input[id^="relation_custom"]').checkBox();
-
-    initSlider();
   })
 <% end %>

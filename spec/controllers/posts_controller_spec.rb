@@ -76,10 +76,10 @@ describe PostsController do
         @group = Factory(:member, :contact => Factory(:group_contact, :receiver => @user.actor)).sender_subject
       end
 
-      describe "with public relation" do
+      describe "with member relation" do
         before do
           contact = @user.contact_to!(@group)
-          relation = @group.relation_public
+          relation = @group.relation_custom('member')
 
           model_assigned_to contact, relation
           @current_model = Factory(:post, :_contact_id => contact.id, :_relation_ids => Array(relation.id))

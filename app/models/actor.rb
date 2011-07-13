@@ -56,11 +56,6 @@ class Actor < ActiveRecord::Base
            :uniq => true
 
   has_many :relations
-  has_many :spheres
-
-  has_many :relation_customs,
-           :through => :spheres, 
-           :source  => :customs
 
   scope :alphabetic, order('actors.name')
 
@@ -140,10 +135,29 @@ class Actor < ActiveRecord::Base
     end
   end
   
+  # Returns the email used for Mailboxer
+  def mailboxer_email    
+    return email if email.present?
+    if (group = self.subject).is_a? Group
+      relation = group.relation_customs.sort.first
+      receivers = group.contact_actors(:direction => :sent, :relations => relation)
+      emails = Array.new
+      receivers.each do |receiver|
+        emails << receiver.mailboxer_email
+      end
+      return emails
+    end
+  end
+  
   # The subject instance for this actor
   def subject
     subtype_instance ||
     activity_object.try(:object)
+  end
+
+  # All the {Relation relations} defined by this {Actor}
+  def relation_customs
+    relations.where(:type => 'Relation::Custom')
   end
 
   # A given relation defined and managed by this actor
@@ -161,25 +175,23 @@ class Actor < ActiveRecord::Base
   # Options:
   # * type: Filter by the class of the contacts.
   # * direction: sent or received
-  # * relations: Restrict the relations of considered ties. Defaults to {Relation::Custom subject's custom relations}
+  # * relations: Restrict the relations of considered ties. Defaults to {Relation::Custom relations of custom type}
   # * include_self: False by default, don't include this actor as subject even they have ties with themselves.
   #
   def contact_actors(options = {})
-    options[:relations] ||= relation_customs.to_a
-
     subject_types   = Array(options[:type] || self.class.subtypes)
     subject_classes = subject_types.map{ |s| s.to_s.classify }
     
     as = Actor.select("DISTINCT actors.*").
-    where('actors.subject_type' => subject_classes).
-    includes(subject_types)
+               where('actors.subject_type' => subject_classes).
+               includes(subject_types)
     
     
     case options[:direction]
       when :sent
-        as = as.contacted_from(self)
+        as = as.joins(:received_ties => :relation).merge(Contact.sent_by(self))
       when :received
-        as = as.contacted_to(self)
+        as = as.joins(:sent_ties => :relation).merge(Contact.received_by(self))
     else
       raise "contact actors in both directions are not supported yet"
     end
@@ -188,7 +200,11 @@ class Actor < ActiveRecord::Base
       as = as.where("actors.id != ?", self.id)
     end
     
-    as = as.joins(:received_ties).merge(Tie.related_by(options[:relations]))
+    if options[:relations].present?
+      as = as.merge(Tie.related_by(options[:relations]))
+    else
+      as = as.merge(Relation.where(:type => 'Relation::Custom'))
+    end
     
     as
   end
@@ -279,77 +295,20 @@ class Actor < ActiveRecord::Base
         any?
   end
 
-  # The relations that allow attaching an activity to them. This method is used for caching
-  def active_relations
-    @active_relations ||= { :sender => {}, :receiver => {} }
-  end
-
   # An {Activity} can be shared with multiple {audicences Audience}, which corresponds to a {Relation}.
   #
   # This method returns all the {relations Relation} that this actor can use to broadcast an Activity
   #
-  # Options:
-  # from:: limit the relations to one side, from the :sender or the :receiver of the activity
   #
   def activity_relations(subject, options = {})
     return relations if Actor.normalize(subject) == self
 
-    case options[:from]
-    when :sender
-      sender_activity_relations(subject)
-    when :receiver
-      receiver_activity_relations(subject)
-    else
-      sender_activity_relations(subject) +
-        receiver_activity_relations(subject)
-    end
+    Array.new
   end
 
   # Are there any activity_relations present?
   def activity_relations?(*args)
     activity_relations(*args).any?
-  end
-
-  # Relations from this actor that can be read by subject
-  def sender_activity_relations(subject)
-    active_relations[:sender][subject] ||=
-      Relation.allow(subject, 'read', 'activity', :owner => self)
-  end
-
-  def receiver_activity_relations(subject)
-    active_relations[:receiver][subject] ||=
-      Relation.allow(self, 'create', 'activity', :owner => subject)
-  end
-
-  # Builds a hash of options their spheres as keys
-  def grouped_activity_relations(subject)
-    rels = activity_relations(subject)
-
-    spheres =
-      rels.map{ |r| r.respond_to?(:sphere) ? r.sphere : I18n.t('relation_public.name') }.uniq
-
-    spheres.sort!{ |x, y|
-      case x
-      when Sphere
-        case y
-        when Sphere
-          x.id <=> y.id
-        else
-          -1
-        end
-      else
-        1
-      end
-    }
-
-    spheres.map{ |s|
-      case s
-      when Sphere
-        [ s.name, rels.select{ |r| r.respond_to?(:sphere) && r.sphere == s }.sort.map{ |u| [ u.name, u.id ] } ]
-      else
-        [ s, rels.select{ |r| r.is_a?(Relation::Public) }.map{ |u| [ u.name, u.id ] } ]
-      end
-    }
   end
 
   # Is this {Actor} allowed to create a comment on activity?

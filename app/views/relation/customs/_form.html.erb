@@ -1,7 +1,7 @@
-<% @custom ||= @sphere.customs.build %>
+<% @custom ||= Relation::Custom.new(:actor_id => current_subject.actor_id) %>
 
 <%= form_for @custom, :remote => true do |f| %>
-  <%= f.hidden_field :sphere_id %>
+  <%= f.hidden_field :actor_id %>
 
   <% if @custom.errors.any? %>
     <div id="error_explanation">

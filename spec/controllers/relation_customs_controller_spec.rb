@@ -1,9 +1,44 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Relation::CustomsController do
-  include SocialStream::TestHelpers::Controllers
-
   render_views
+
+  describe "when Anonymous" do
+    context "faking a new relation" do
+      it "should not create" do
+        post :create, :custom => Factory.attributes_for(:relation_custom)
+
+        response.should redirect_to(:new_user_session)
+      end
+    end
+
+    context "an existing relation" do
+      before do
+        @relation = Factory(:relation_custom)
+      end
+
+      it "should not update" do
+        put :update, :id => @relation.to_param, :custom => { :name => 'Testing' }
+
+        assigns(:custom).should be_blank
+        response.should redirect_to(:new_user_session)
+      end
+
+      it "should not destroy" do
+        count = Relation.count
+        begin
+          delete :destroy, :id => @relation.to_param
+        rescue CanCan::AccessDenied
+        end
+
+        relation = assigns(:custom)
+
+        Relation.count.should eq(count)
+      end
+
+    end
+  end
+
 
   describe "when authenticated" do
     before do
@@ -12,92 +47,66 @@ describe Relation::CustomsController do
       sign_in @user
     end
 
-    context "with an existing sphere" do
+    it "should render index" do
+      get :index
+
+      response.should be_success
+    end
+
+    context "a new own relation" do
+      it "should be created" do
+        count = Relation::Custom.count
+
+        post :create, :custom => { :name => "Test create", :actor_id => @user.actor_id }, :format => 'js'
+
+        relation = assigns(:custom)
+
+        Relation::Custom.count.should eq(count + 1)
+        relation.should be_valid
+        response.should be_success
+      end
+    end
+
+    context "a new fake relation" do
+      it "should not be created" do
+        count = Relation.count
+	begin
+          post :create, :custom => Factory.attributes_for(:relation_custom)
+
+          assert false
+        rescue CanCan::AccessDenied
+          assigns(:custom).should be_new_record
+
+          Relation.count.should eq(count)
+        end
+      end
+    end
+
+    context "a existing own relation" do
       before do
-        @sphere = Factory(:sphere, :actor_id => @user.actor_id)
+        @relation = Factory(:relation_custom, :actor => @user.actor)
       end
 
-      it "should render index" do
-        get :index, :sphere_id => @sphere.id, :format => "js"
+      it "should allow updating" do
+        attrs = { :name => "Updating own" }
 
+        put :update, :id => @relation.to_param, :relation_custom => attrs, :format => 'js'
+
+        relation = assigns(:custom)
+
+#          relation.should_receive(:update_attributes).with(attrs)
+        relation.should be_valid
         response.should be_success
       end
 
-      context "a new relation" do
-        it "should be created" do
-          count = Relation::Custom.count
+      it "should allow destroying" do
+        pending "Delete relations"
 
-          post :create, :custom => { :name => "Test create", :sphere_id => @sphere.id }, :format => 'js'
+        count = Relation::Custom.count
 
-          relation = assigns(:custom)
+        delete :destroy, :id => @relation.to_param, :format => :js
 
-          Relation::Custom.count.should eq(count + 1)
-          relation.should be_valid
-          response.should be_success
-        end
-
-      end
-
-      context "a existing own relation" do
-        before do
-          @relation = Factory(:relation_custom, :sphere_id => @sphere.id)
-          @relation.reload
-        end
-
-        it "should allow updating" do
-          attrs = { :name => "Updating own" }
-
-          put :update, :id => @relation.to_param, :relation_custom => attrs, :format => 'js'
-
-          relation = assigns(:custom)
-
-#          relation.should_receive(:update_attributes).with(attrs)
-          relation.should be_valid
-          response.should be_success
-        end
-
-        it "should allow destroying" do
-          pending "Delete relations"
-
-          count = Relation::Custom.count
-
-          delete :destroy, :id => @relation.to_param, :format => :js
-
-          Relation::Custom.count.should eq(count - 1)
-        end
-      end
-
-    end
-
-    context "with a fake sphere" do
-      before do
-        @sphere = Factory(:sphere)
-      end
-
-      it "should not render index" do
-	begin
-          get :index, :sphere_id => @sphere.id, :format => "js"
-
-	  # Should not get here
-          assert false
-        rescue CanCan::AccessDenied
-          assigns(:customs).should be_blank
-        end
-      end
-
-      context "a new relation" do
-        it "should belong to user" do
-          count = Relation::Custom.count
-
-          begin
-            post :create, :relation_custom => { :name => "Test create", :sphere_id => @sphere.id }, :format => 'js'
-
-            assert false
-          rescue CanCan::AccessDenied
-
-            Relation::Custom.count.should eq(count)
-          end
-        end
+        Relation::Custom.count.should eq(count - 1)
       end
     end
 
@@ -126,8 +135,6 @@ describe Relation::CustomsController do
         end
       end
     end
-
-
   end
 end
 

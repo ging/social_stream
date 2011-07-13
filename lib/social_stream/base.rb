@@ -35,6 +35,12 @@ module SocialStream
                                        :profile        => '119x119'}
         end
       end
+
+      initializer "social_stream-base.mailboxer", :before => :load_config_initializers do
+        Mailboxer.setup do |config|
+          config.email_method = :mailboxer_email
+        end
+      end
     end
   end
 end

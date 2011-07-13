@@ -14,8 +14,7 @@ describe PermissionsController do
 
     context "with an existing relation" do
       before do
-        @sphere = Factory(:sphere, :actor_id => @user.actor_id)
-        @relation = Factory(:relation_custom, :sphere_id => @sphere.id)
+        @relation = Factory(:relation_custom, :actor_id => @user.actor_id)
       end
 
       it "should render index" do

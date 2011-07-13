@@ -55,6 +55,29 @@ describe User do
     end
   end
 
+  context "public of a group" do
+    before do
+      tie = Factory(:group_public, :contact => Factory(:group_contact, :receiver => @user.actor))
+      @group = tie.receiver_subject
+    end
+
+    context "without accept the group" do
+      it "should not represent" do
+        @user.represented.should_not include(@group)
+      end
+    end
+
+    context "accepting the group" do
+      before do
+        Factory(:friend, :contact => @user.contact_to!(@group))
+      end
+
+      it "should not represent" do
+        @user.represented.should_not include(@group)
+      end
+    end
+  end
+
   it "should have activity object" do
     Factory(:user).activity_object.should be_present
   end

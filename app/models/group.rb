@@ -23,9 +23,7 @@ class Group < ActiveRecord::Base
         merge(Contact.recent)
     end
   end
- 
-  private
-
+  
   # Creates the ties between the group and the founder
   def create_founder
     founder =

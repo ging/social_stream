@@ -26,27 +26,8 @@ function checkBoxEnable(id) {
 
         switch (checkBoxType(id)) {
 
-	case "sphere":
-		$(':checkbox[id^="sphere"]:checked:not(#' + id + ')').checkBox('changeCheckStatus', false);
-
-		var sphereSelected = checkBoxId(id);
-
-		$.ajax({
-			url: "<%= relation_customs_path %>",
-			context: document.body,
-			data: { sphere_id: sphereSelected },
-                        dataType: "script"
-		});
-
-                break;
-
 	case "relation_custom":
 		$(':checkbox[id^="relation_custom"]:checked:not(#' + id + ')').checkBox('changeCheckStatus', false);
-
-                var value = relations.length - checkBoxOrder(id) - 2;
-		$("#slider-range").slider("value", value);
-
-		$( "#relation" ).val(checkBoxValue(id));
 
 		$.ajax({
 			url: "<%= permissions_path %>",
@@ -73,19 +54,10 @@ function checkBoxDisable(id) {
 
         switch (checkBoxType(id)) {
 
-	case "sphere":
-                $("#permissions").html("");
-		$("#permissions").hide();
-		$("#relations").hide();
-
-                break;
-
 	case "relation_custom":
                 $("#permissions").html("");
 		$("#permissions").hide();
 
-		$("#slider-range").slider("value", relations.length - 1);
-	        
                 break;
 
 	case "permission":
@@ -98,33 +70,3 @@ function checkBoxDisable(id) {
 
         }
 } 
-
-
-function initSlider() {
-  /* TODO: get relations from checkboxOptions */
-  relations.unshift("<%= t 'relation_public.name' %>");
-  relations.push("<%= current_subject.name %>");
-
-  $("#relation").val(relations[relations.length - 1]);
-
-  $("#slider-range").slider({
-    orientation: "vertical",
-    range: "min",
-    min: 0,
-    max: relations.length - 1,
-    step: 1,
-    value: relations.length - 1,
-    slide: function(event, ui) {
-      $('#relation').val(relations[ui.value]);
-      },
-    stop: function(event, ui) {
-      var order = relations.length - ui.value - 2;
-      if (order >= 0 && order < relations.length - 2) {
-        var id = '#' + checkBoxIdByOrder(order);
-        $(id).checkBox('changeCheckStatus', true);
-      } else {
-        $(':checkbox[id^="relation_custom"]:checked').checkBox('changeCheckStatus', false);
-      }
-    }
-  });
-};

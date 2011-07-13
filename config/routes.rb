@@ -29,7 +29,6 @@ Rails.application.routes.draw do
 
   resources :contacts
 
-  resources :spheres
   namespace "relation" do
     resources :customs
   end

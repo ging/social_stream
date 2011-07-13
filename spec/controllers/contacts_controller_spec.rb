@@ -63,7 +63,7 @@ describe ContactsController do
     contact = @user.contact_to!(group)
     # Initialize inverse contact
     contact.inverse!
-    relations = [ @user.relation_custom('friend'), @user.relation_custom('partner') ]
+    relations = [ @user.relation_custom('friend'), @user.relation_custom('colleague') ]
     
 
     put :update, :id => contact.id,

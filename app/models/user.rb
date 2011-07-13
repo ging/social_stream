@@ -29,8 +29,12 @@ class User < ActiveRecord::Base
 
   # Subjects this user can acts as
   def represented
+    candidates = contact_actors(:direction => :sent).map(&:id)
+
     contact_subjects(:direction => :received) do |q|
-      q.joins(:sent_ties => { :relation => :permissions }).merge(Permission.represent)
+      q.joins(:sent_ties => { :relation => :permissions }).
+        merge(Permission.represent).
+        where(:id => candidates)
     end
   end
   

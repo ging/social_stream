@@ -204,22 +204,30 @@ class Activity < ActiveRecord::Base
   def allow?(subject, action)
     return false if contact.blank?
 
-    # We do not support private activities by now
-    return false if relation_ids.blank?
-
     case action
     when 'create'
       return false if contact.sender_id != Actor.normalize_id(subject)
 
-      rels = Relation.normalize(relation_ids)
+      if relation_ids.present?
+        rels = Relation.normalize(relation_ids)
 
-      foreign_rels = rels.select{ |r| r.actor_id != contact.sender_id }
+        foreign_rels = rels.select{ |r| r.actor_id != contact.sender_id }
 
-      # Only posting to own relations
-      return true if foreign_rels.blank?
+        # Only posting to own relations
+        return true if foreign_rels.blank?
 
-      return Relation.
-               allow(subject, action, 'activity', :in => foreign_rels).all.size == foreign_rels.size
+        return Relation.
+                 allow(subject, action, 'activity', :in => foreign_rels).all.size == foreign_rels.size
+      else
+        if contact.reflexive?
+          return true
+        else
+          relation_ids = receiver.relation_customs.allow(sender, 'create', 'activity')
+
+          return relation_ids.present?
+        end
+      end
+
     when 'read'
       return true if [contact.sender_id, contact.receiver_id].include?(Actor.normalize_id(subject)) || relations.select{ |r| r.is_a?(Relation::Public) }.any?
     when 'update'
@@ -230,9 +238,7 @@ class Activity < ActiveRecord::Base
     end
 
     Relation.
-      allow(subject, action, 'activity').
-      where('relations.id' => relation_ids).
-      any?
+      allow?(subject, action, 'activity', :in => self.relation_ids, :public => false)
   end
 
   # Can subject delete the object of this activity?
@@ -272,7 +278,7 @@ class Activity < ActiveRecord::Base
   #
   # Destroy any Notification linked with the activity
   def delete_notifications
-    Notification.find_by_object(self).each do |notification|
+    Notification.with_object(self).each do |notification|
       notification.destroy
     end
   end
