@@ -100,6 +100,21 @@ class Contact < ActiveRecord::Base
     association(:relations).ids_writer(ids)
   end
 
+  # Is this {Contact} +new+ or +edit+ for {SocialStream::Models::Subject subject} ?
+  #
+  # action is +new+ when, despite of being created, it has not {Tie ties} or it has a {Tie} with a
+  # {Relation::Public public relation}. 
+  #
+  # The contact's action is +edit+ when it has any {Tie} with a {Relation::Custom custom relation}
+  #
+  def action
+    if ties_count > 0 && relations.where(:type => 'Relation::Custom').any?
+      'edit'
+    else
+      'new'
+    end
+  end
+
   private
 
   def remove_follower(ids)

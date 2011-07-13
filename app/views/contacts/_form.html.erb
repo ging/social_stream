@@ -34,7 +34,7 @@
     <% end %>
     </ul>
 
-    <div id="contact-new">
+    <div id="relation-new">
       <%= link_to t('contact.type.new'), relation_customs_path %>
     </div>
 
@@ -44,7 +44,7 @@
     </div>
 
     <div id="contact-submit">
-      <%= submit_tag t("contact.#{ controller.action_name }.submit"), :class => "button" %>
+      <%= submit_tag t("contact.#{ f.object.action }.submit"), :class => "button" %>
     </div>
   <% end %>
 </div>
