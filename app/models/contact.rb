@@ -57,7 +57,7 @@ class Contact < ActiveRecord::Base
   validates_uniqueness_of :receiver_id, :scope => :sender_id
 
   after_create :set_inverse
-  after_create :send_message
+  after_save :send_message
 
   def sender_subject
     sender.try(:subject)
@@ -146,9 +146,9 @@ class Contact < ActiveRecord::Base
 
   # Send a message to the contact receiver
   def send_message
-    if message.present?
-      sender.send_message(receiver, message, I18n.t("activity.verb.#{ verb }.#{ receiver.subject_type }.message", :name => sender.name))
-    end
+    return if message.blank?
+
+    sender.send_message(receiver, message, I18n.t("activity.verb.#{ verb }.#{ receiver.subject_type }.message", :name => sender.name))
   end
 
   def set_inverse
