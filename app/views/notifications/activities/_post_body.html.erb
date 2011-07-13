@@ -1,6 +1,7 @@
 <% if activity.direct_object.respond_to? :text %>
   "%{object.text}"
 <%end%>
-<% if activity.direct_object.is_a?(Document)%>
-  %{image}
+
+<% if SocialStream.activity_forms.include? :document and activity.direct_object.is_a? Document %>
+  %{object.image}
 <% end%>
