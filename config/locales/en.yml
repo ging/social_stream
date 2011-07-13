@@ -87,6 +87,7 @@ en:
     pending:
       other: "Pending requests"
       all: "All"
+      all_n: "See all pending requests (%{count})"
     relation:
       one: "Contact type"
       new: "New type"
