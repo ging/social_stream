@@ -1,5 +1,5 @@
 <% if activity.direct_object.is_a? Actor %>
-%{sender.name} is now your fan.
+  %{sender.name} is now your fan.
 <% else %>
-%{sender.name} likes your %{object.name} 
+  %{sender.name} likes your %{object.name} 
 <% end %>

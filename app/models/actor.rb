@@ -143,7 +143,7 @@ class Actor < ActiveRecord::Base
       receivers = group.contact_actors(:direction => :sent, :relations => relation)
       emails = Array.new
       receivers.each do |receiver|
-        emails << receiver.mailboxer_email
+        emails << receiver.email
       end
       return emails
     end

@@ -191,7 +191,10 @@ en:
     trash: "Trash"
     send: "Send a message"
   notification:
+    confirm: "Confirm %{sender.name} as contact?"
     destroy_sure: "Do you want to delete this notification?"
+    edit: "Edit %{sender.name} contact attributes?"
+    look: "Take a look at %{sender.name}'s wall"
     one: "Notification"
     other: "Notifications"
     read: "Mark as read"
