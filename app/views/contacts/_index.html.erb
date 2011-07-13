@@ -1,7 +1,11 @@
 <% cont=0; %>
 
 <% @contacts.each do |contact| %>
-
+  <% if params[:pending].present? %>
+    <% contact = contact.sender.subject %>
+  <% else %>
+    <% contact = contact.receiver.subject %>
+  <% end %>
   <% if (cont%2) == 0 %>
     <% cont+=1; %>
      <div class="row">
