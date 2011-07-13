@@ -73,6 +73,7 @@ en:
     confirm_delete: "Delete comment?"
   contact:
     all_n: "All contacts (%{count})"
+    addressbook: "Addressbook"
     edit:
       title: "Edit contact to %{name}"
       submit: "Edit Contact"
@@ -163,6 +164,7 @@ en:
     join_me: "Join me at SocialStream!"
     one: "Invitation"
     other: "Invitations"
+    toolbar: "Invite"
     success: "Your invitations have successfully been sent"
     text: "Write your own message"
   like:
