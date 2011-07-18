@@ -225,9 +225,15 @@ class Actor < ActiveRecord::Base
     as.map(&:subject)
   end
 
+  # Return a contact to subject.
+  def contact_to(subject)
+    sent_contacts.received_by(subject).first
+  end
+
   # Return a contact to subject. Create it if it does not exist
   def contact_to!(subject)
-    Contact.find_or_create_by_sender_id_and_receiver_id id, Actor.normalize_id(subject)
+    contact_to(subject) ||
+      sent_contacts.create!(:receiver_id => Actor.normalize_id(subject))
   end
   
   # This is an scaffold for a recomendations engine
