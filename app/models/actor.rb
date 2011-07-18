@@ -407,7 +407,8 @@ class Actor < ActiveRecord::Base
   # Build a new activity where subject like this
   def new_like(subject)
     a = Activity.new :verb => "like",
-                     :contact => subject.contact_to!(self)
+                     :contact => subject.contact_to!(self),
+                     :relation_ids => Array(subject.relation_public.id)
     
     a.activity_objects << activity_object           
                     

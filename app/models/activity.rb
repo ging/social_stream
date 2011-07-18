@@ -79,10 +79,13 @@ class Activity < ActiveRecord::Base
       order("created_at desc")
   }
 
+  before_validation :fill_relations
+
   after_create  :increment_like_count
   after_destroy :decrement_like_count, :delete_notifications
- 
 
+  validates_presence_of :relations
+ 
   #For now, it should be the last one
   #FIXME
   after_create :send_notifications
@@ -222,9 +225,9 @@ class Activity < ActiveRecord::Base
         if contact.reflexive?
           return true
         else
-          relation_ids = receiver.relation_customs.allow(sender, 'create', 'activity')
-
-          return relation_ids.present?
+          receiver.
+            relation_customs.allow(sender, 'create', 'activity').
+            present?
         end
       end
 
@@ -250,6 +253,16 @@ class Activity < ActiveRecord::Base
   end
 
   private
+
+  # Before validation callback
+  #
+  # Fill the relations when posting to other subject's wall
+  def fill_relations
+    return if contact.reflexive? || relations.present?
+
+    self.relations =
+      contact.receiver.relation_customs.allow(contact.sender, 'create', 'activity')
+  end
 
   #Send notifications to actors based on proximity, interest and permissions
   def send_notifications
