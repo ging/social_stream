@@ -1,1 +1,5 @@
-%{look}
+<% if activity.direct_object.is_a? Actor %>
+  %{look}
+<% else %>
+  "%{object.text}" 
+<% end %>
