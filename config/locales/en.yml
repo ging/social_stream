@@ -11,12 +11,14 @@ en:
     mine: "My conferences"
     msg: "Just uploaded a conference:"
   document:
-    simple_all: "All"  
     all: "All documents"  
     confirm_delete: "Delete document?"
-    title: "Documents"
+    form:
+      title: "Resource"
     mine: "My documents"
     msg: "Just uploaded a document:"
+    simple_all: "All"  
+    title: "Documents"
   picture:
     confirm_delete: "Delete picture?"
     title: "Pictures"
