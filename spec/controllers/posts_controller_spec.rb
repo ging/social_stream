@@ -132,5 +132,24 @@ describe PostsController do
       end
     end
   end
+
+  context "creating post in group's wall" do
+    before do
+      @tie = Factory(:member)
+    end
+
+    it "should assign activity to member" do
+      sign_in @tie.receiver_subject
+
+      post :create, :post => { :text => "Test",
+                               :_contact_id => @tie.contact.inverse!.id,
+                               :_relation_ids => [""] }
+
+      post = assigns(:post)
+
+      post.should be_valid
+      post.post_activity.relations.should include(@tie.relation)
+    end
+  end
 end
 
