@@ -1,11 +1,14 @@
+<% if params[:pending].present? %>
+  <h2><%= t('contact.pending.other') %></h2>
+<% else %>
+  <h2><%= t('contact.addressbook') %></h2>
+<% end %>
+
+<div class="space_center"></div>
 <% cont=0; %>
 
 <% @contacts.each do |contact| %>
-  <% if params[:pending].present? %>
-    <% contact = contact.sender.subject %>
-  <% else %>
     <% contact = contact.receiver.subject %>
-  <% end %>
   <% if (cont%2) == 0 %>
     <% cont+=1; %>
      <div class="row">

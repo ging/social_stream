@@ -2,21 +2,18 @@ class ContactsController < ApplicationController
   before_filter :authenticate_user!
   
   def index
+    if params[:pending].present?
+      pending
+      return  
+    end
     @contacts =
       Contact.sent_by(current_subject).
               joins(:receiver).merge(Actor.alphabetic).
               merge(Actor.letter(params[:letter])).
-              merge(Actor.search(params[:search]))
-    
-    if params[:pending].present?
-      @contacts = 
-        Contact.received_by(current_subject).
-              joins(:sender).merge(Actor.alphabetic).
-              merge(Actor.letter(params[:letter])).
               merge(Actor.search(params[:search])).
-              pending.
-              not_reflexive
-    end
+              active
+    
+
 
     respond_to do |format|
       format.html { @contacts = @contacts.page(params[:page]).per(10) }
@@ -51,6 +48,17 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       format.js
+    end
+  end
+  
+  def pending
+
+      @contacts = current_subject.pending_contacts
+
+    respond_to do |format|
+      format.html { @contacts = Kaminari.paginate_array(@contacts).page(params[:page]).per(10) }
+      format.js { Kaminari.paginate_array(@contacts).page(params[:page]).per(10) }
+      format.json { render :text => @contacts.map{ |c| { 'key' => c.actor_id.to_s, 'value' => self.class.helpers.truncate_name(c.name) } }.to_json }
     end
   end
 end
