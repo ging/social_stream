@@ -88,7 +88,7 @@ class Tie < ActiveRecord::Base
   #
   # Create contact activity if this is the first tie
   def create_activity
-    return if contact.reload.ties_count != 1
+    return if contact.reload.ties_count != 1 || relation.is_a?(Relation::Public)
 
     Activity.create! :contact => contact,
                      :relation_ids => contact.relation_ids,

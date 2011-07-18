@@ -40,5 +40,15 @@ describe Tie do
       @tie.receiver.received_contacts.pending.should be_present
     end
   end
+
+  describe "with public relation" do
+    it "should not create activity" do
+      count = Activity.count
+
+      Factory(:public)
+
+      Activity.count.should eq(count)
+    end
+  end
 end
 
