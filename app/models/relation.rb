@@ -93,7 +93,7 @@ class Relation < ActiveRecord::Base
       end
 
       # Add in condition
-      if options[:in].present?
+      if ! options[:in].nil?
         conds = conds.and(Relation.arel_table[:id].in(Relation.normalize_id(Array(options[:in]))))
       end
 

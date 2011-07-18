@@ -211,25 +211,24 @@ class Activity < ActiveRecord::Base
     when 'create'
       return false if contact.sender_id != Actor.normalize_id(subject)
 
-      if relation_ids.present?
-        rels = Relation.normalize(relation_ids)
+      val = 
+        if relation_ids.present?
+          rels = Relation.normalize(relation_ids)
 
-        foreign_rels = rels.select{ |r| r.actor_id != contact.sender_id }
+          foreign_rels = rels.select{ |r| r.actor_id != contact.sender_id }
 
-        # Only posting to own relations
-        return true if foreign_rels.blank?
-
-        return Relation.
-                 allow(subject, action, 'activity', :in => foreign_rels).all.size == foreign_rels.size
-      else
-        if contact.reflexive?
-          return true
+          # Only posting to own relations
+          foreign_rels.blank? ||
+            Relation.
+              allow(subject, action, 'activity', :in => foreign_rels).all.size == foreign_rels.size
         else
-          receiver.
-            relation_customs.allow(sender, 'create', 'activity').
-            present?
+          contact.reflexive? ||
+            receiver.
+              relation_customs.allow(sender, 'create', 'activity').
+              present?
         end
-      end
+
+      return val
 
     when 'read'
       return true if [contact.sender_id, contact.receiver_id].include?(Actor.normalize_id(subject)) || relations.select{ |r| r.is_a?(Relation::Public) }.any?

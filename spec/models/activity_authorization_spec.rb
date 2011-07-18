@@ -276,6 +276,16 @@ describe Activity do
       
       it_should_behave_like "Denies Creating"
     end
+
+    describe "build to non replied contact" do
+      before do
+        @tie = Factory(:friend, :contact => Factory(:contact, :sender => @user.actor))
+        @activity = Activity.new :contact_id => @tie.contact.id
+        create_ability_accessed_by @tie.sender_subject
+      end
+
+      it_should_behave_like "Denies Creating"
+    end
   end
 
   context "group" do
