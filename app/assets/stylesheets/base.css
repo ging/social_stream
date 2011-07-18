@@ -199,12 +199,28 @@ textarea.new_contact_text_area{ width:100%; height: 100px; color: #2A3890;}
 	padding: 2px;
 	margin-right: 10px;
 	margin-bottom: 5px;
-	cursor: pointer;
-	float: left;
 	border: 2px solid transparent;
+	color: #000000;
 }
 
-.activities_title_header.selected{
+.activities_title_header img{
+	margin-bottom: -4px;
+	margin-right: 4px;
+}
+
+#activity_form_select {
+	margin-left: 10px;
+}
+
+.activity_form_selector{
+	padding: 2px;
+	margin-bottom: 5px;
+	float: left;
+	border: 2px solid transparent;
+	cursor: pointer; 
+}
+
+.activity_form_selector.selected{
 	border: 2px solid #46B9E8;
 }
 

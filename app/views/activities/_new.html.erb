@@ -18,6 +18,14 @@
   <% end %>
 </div>
 
+<div id="activity_form_select">
+  <% SocialStream.activity_forms.each do |element| %>
+    <div id="select_<%= element %>" class="activity_form_selector">
+      <%= image_tag "btn/#{ element }.png", :title => t("#{ element }.form.title") %>
+    </div>
+  <% end %> 	
+</div>
+
 <div id="activities_share_btn">
 <% if current_subject == receiver %>
   <div id="securities"><%= select_tag :_relation_ids, options_for_select(current_subject.activity_relations(receiver).sort.map{ |r| [ r.name, r.id ] }), :id => 'security', :multiple => nil %></div>

@@ -1,10 +1,11 @@
 //initial state
 $('#wrapper_activities_header form').hide();
-$('#new_post').show();
+$('#new_<%= SocialStream.activity_forms.first %>').show();
+$('#select_<%= SocialStream.activity_forms.first %>').addClass('selected');
 
 //clicks on headers
-$('.activities_title_header').live('click',function(){
-	$('.activities_title_header').removeClass('selected');
+$('.activity_form_selector').live('click',function(){
+	$('.activity_form_selector').removeClass('selected');
 	$(this).addClass('selected');
 	$('#wrapper_activities_header form').hide();
 	$('#new_'+this.id.split("_")[1]).show();
