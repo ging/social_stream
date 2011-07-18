@@ -279,8 +279,8 @@ en:
     other: "Products"
   relation_custom:
     title: "Privacy & context"
-    choose: "1. Choose stream"
-    new: "+ New stream"
+    choose: "1. Choose sphere"
+    new: "+ New sphere"
   relation_public:
     name: "Public"
   required: "* These fields are required"
