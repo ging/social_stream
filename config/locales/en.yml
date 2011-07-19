@@ -177,6 +177,12 @@ en:
     message: "You are here > %{location}"
     base: "You are here"
     separator: " > "
+  mailboxer:
+    message_mailer:
+      subject_new: "%{subject}"
+      subject_reply: "%{subject}"
+    notification_mailer:
+      subject: "%{subject}"
   menu:
     options: "Menu Options"
     information: "Information"
