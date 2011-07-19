@@ -44,6 +44,12 @@ class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
     copy_file 'navigation.rb', 'config/navigation.rb'
   end
 
+  def add_javascripts
+    inject_into_file 'app/assets/javascripts/application.js',
+                     "//= require social_stream-base\n",
+                     :before => '//= require_tree .'
+  end
+
   def create_migration_file
     require 'rake'
     Rails.application.load_tasks
