@@ -5,17 +5,14 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>You have a new notification: <%= strip_tags decode_notification @notification.subject,@notification.object %></h1>
-    <p>
-      You have received a new notification:
-    </p>
+    <h1><%= raw decode_notification @notification.subject,@notification.object %></h1>
     <blockquote>
       <p>
         <%= raw decode_notification @notification.body,@notification.object %>
       </p>
     </blockquote>
     <p>
-      Visit <%= link_to root_url,root_url %> and go to your notifications for more info.
+      Visit <%= link_to notifications_url,notifications_url %> and check all your notifications.
     </p>
   </body>
 </html>

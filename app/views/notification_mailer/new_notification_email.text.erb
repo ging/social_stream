@@ -1,11 +1,9 @@
 <% self.class.send :include, NotificationsHelper %>
-You have a new notification: <%= strip_tags decode_notification @notification.subject,@notification.object %>
+<%= strip_tags decode_notification @notification.subject,@notification.object %>
 ===============================================
- 
-You have received a new notification:
 
 -----------------------------------------------
 <%= strip_tags decode_notification @notification.body,@notification.object  %>
 -----------------------------------------------
 
-Visit <%= root_url %> and go to your notifications for more info.
+Visit <%= link_to notifications_url,notifications_url %> and check all your notifications.
