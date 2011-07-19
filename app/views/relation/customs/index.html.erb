@@ -1,13 +1,8 @@
 <% content_for :headers do %>
   <%= stylesheet_link_tag "relation_customs.css", :media => "screen, projection" %>
-  <%= javascript_include_tag 'ui.checkbox'%>
 <% end %> 
 
 <% toolbar :profile => current_subject, :option => 'contacts' %>
-
-<%= javascript_tag do %>
-  <%= render :partial => 'relation/customs/jquery' %>
-<% end %>
 
 <div id="wrapper_section">   
 

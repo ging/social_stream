@@ -2,10 +2,6 @@
   <%= t('contact.other')%>
 <%end%>
 
-<% content_for :headers do %>
-  <%= javascript_include_tag 'jquery.ba-url','ajax.paginate' %>
-<% end %>
-
 <% content_for :sidebar do %>
   <%= render :partial => 'home/sidebar' %>
 <% end %>

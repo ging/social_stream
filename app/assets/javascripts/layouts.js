@@ -1,7 +1,7 @@
-// initialise plugins
-jQuery(function(){
-  
-   
+//= require hoverIntent
+//= require superfish
+//
+$(function() {
     jQuery('ul.sf-menu').superfish({
         delay: 2000, // one second delay on mouseout
         animation: {
@@ -11,13 +11,7 @@ jQuery(function(){
         autoArrows: false,
         dropShadows: false // disable drop shadows
     });
-    
-    
-});
 
-
-
-$(document).ready(function(){
     $('#tabright> ul').tabs({
         fx: {
              height: 'toggle',
@@ -25,4 +19,3 @@ $(document).ready(function(){
         }
     });
 });
-

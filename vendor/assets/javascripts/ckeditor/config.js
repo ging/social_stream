@@ -18,4 +18,6 @@ CKEDITOR.editorConfig = function( config ) {
 	['Link','Unlink'],
 	['Image','Smiley']
 	];
+
+	config.baseHref = 'patata';
 };

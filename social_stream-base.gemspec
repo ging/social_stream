@@ -46,6 +46,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('simple-navigation')
   #Gem dependencies
   s.add_runtime_dependency('resque','~> 1.17.1')
+  # Modernizr.js javascript library
+  s.add_runtime_dependency('modernizr-rails', '~> 2.0.6')
   
   s.add_runtime_dependency('rails', '3.1.0.rc4')
 

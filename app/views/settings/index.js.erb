@@ -3,7 +3,6 @@
 <% else %>
     $("#content").html("<%= escape_javascript(render :partial => 'index') %>");
     $("head").append($("<%= escape_javascript(stylesheet_link_tag "settings.css", :media => "screen, projection") %>"));
-    $("head").append($("<%= escape_javascript(javascript_include_tag 'settings.js') %>"));
     <%= toolbar %>
 <% end %>
 

@@ -1,7 +1,11 @@
+//= require jquery.livequery
+//
 //initial state
-$('#wrapper_activities_header form').hide();
-$('#new_<%= SocialStream.activity_forms.first %>').show();
-$('#select_<%= SocialStream.activity_forms.first %>').addClass('selected');
+$(function() {
+  $('#wrapper_activities_header form').hide();
+  $('#new_<%= SocialStream.activity_forms.first %>').show();
+  $('#select_<%= SocialStream.activity_forms.first %>').addClass('selected');
+});
 
 //clicks on headers
 $('.activity_form_selector').live('click',function(){
@@ -25,22 +29,26 @@ $('#masterSubmitButton').live('click',function(){
 });
 
 //javascript for main activities input
-title = "<%= t('activity.input') %>";
-$("#input_activities").click(function(){
-  if(this.value == title){
-    this.value="";
-    $("#masterSubmitButton").show();
-  }
+$(function() {
+  activity_input = "<%= I18n.t('activity.input') %>";
+  $("#input_activities").click(function(){
+    if(this.value == activity_input){
+      this.value = "";
+      $("#masterSubmitButton").show();
+    }
+  });
 });
 
 
 //javascript for comments
-$(".input_new_comments").val("<%= t('comment.input') %>");
-$(".activities_comment_btn").hide();
+$(function() {
+  $(".input_new_comments").val("<%= I18n.t('comment.input') %>");
+  $(".activities_comment_btn").hide();
+});
 
 //usa livequery para usar el javascript luego de una accion con  AJAX
 $(".input_new_comments").livequery("click",function(){
-	if(this.value == "<%= t('comment.input') %>"){
+	if(this.value == "<%= I18n.t('comment.input') %>"){
 		$(this).val("");
 	}
 	$(".activities_comment_btn").hide();
@@ -49,12 +57,12 @@ $(".input_new_comments").livequery("click",function(){
 $(".input_new_comments").livequery("blur",function(){
 	if(this.value == ""){
 		$(".activities_comment_btn").hide();
-    $(this).val("<%= t('comment.input') %>");
+    $(this).val("<%= I18n.t('comment.input') %>");
 	}
 });
 
 $(".input_new_comments").click(function(){
-	if(this.value == "<%= t('comment.input') %>"){
+	if(this.value == "<%= I18n.t('comment.input') %>"){
 		$(this).val("");
 	}
 	$(".activities_comment_btn").hide();

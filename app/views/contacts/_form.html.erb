@@ -1,20 +1,5 @@
 <% content_for :headers do %>
   <%= stylesheet_link_tag "contacts.css", :media => "screen, projection" %>
-  <%= javascript_include_tag 'ui.checkbox'%>
-<% end %>
-
-<%= javascript_tag do %>
-  $(function() {
-    $('input[id^="relation_custom"]').checkBox();
-  })
-	
-  function checkBoxEnable(id) {
-    $('div[contain$=' + id + ']').addClass("checked-option");
-  }
-
-  function checkBoxDisable(id) {
-    $('div[contain$='+id+']').removeClass("checked-option");
-  } 
 <% end %>
 
 <div id="contact-form">

@@ -6,13 +6,6 @@
 
 <% content_for :headers do %>
   <%= stylesheet_link_tag "jquery-ui", :media => "screen, projection" %>
-  <%= javascript_include_tag 'jquery.validate' %>
-<% end %>
-
-<% content_for :javascript do %>
-  $(function() {
-	   $(".edit_profile").validate();
-  });
 <% end %>
 
 <%if params[:section].present? 
@@ -48,7 +41,6 @@ end %>
   <% if !params[:section].present? or params[:section].eql?("tags") %>
   	<% content_for :headers do %>
   	  <%= stylesheet_link_tag "fcbkComplete.css", :media => "screen, projection" %>
-  	  <%= javascript_include_tag 'jquery.fcbkcomplete.min', 'jquery.validate' %>
   	<% end %>
   	
   	<% content_for :javascript do %>

@@ -8,8 +8,6 @@
     <meta name="description" content= "<%= yield(:description).empty? ? "Home" : yield(:description) %>" >
     <%= stylesheet_link_tag "header","frontpage", "base", "footer",
                             :media => "screen, projection" %>
-    <%= javascript_include_tag 'jquery', 'jquery.livequery' %>
-
     <%= favicon_link_tag "icons/favicon.ico" %>
 
     <% if protect_against_forgery? %>

@@ -1,3 +1,5 @@
+//= require ui.checkbox
+
 var relations;
 
 function checkBoxId(id) {
@@ -27,10 +29,14 @@ function checkBoxEnable(id) {
         switch (checkBoxType(id)) {
 
 	case "relation_custom":
+		if ($('#' + id).parents().hasClass('edit_contact')) {
+			break;
+		};
+
 		$(':checkbox[id^="relation_custom"]:checked:not(#' + id + ')').checkBox('changeCheckStatus', false);
 
 		$.ajax({
-			url: "<%= permissions_path %>",
+			url: "../permissions",
 			context: document.body,
 			data: { relation_id: checkBoxId(id) },
                         dataType: "script"
@@ -55,7 +61,11 @@ function checkBoxDisable(id) {
         switch (checkBoxType(id)) {
 
 	case "relation_custom":
-                $("#permissions").html("");
+       		if ($('#' + id).parents().hasClass('edit_contact')) {
+			break;
+		};
+
+	        $("#permissions").html("");
 		$("#permissions").hide();
 
                 break;

@@ -33,6 +33,8 @@ require 'formtastic'
 require 'resque/server'
 #Simple Navigation for menu
 require 'simple-navigation'
+# Modernizr.js library
+require 'modernizr-rails'
 
 # Provides your Rails application with social network and activity stream support
 module SocialStream
