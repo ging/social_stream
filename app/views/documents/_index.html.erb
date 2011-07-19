@@ -8,6 +8,7 @@
     		<%= link_to big_thumb_for(document), 
                 {:controller => "documents", :action => "download", :id => document}, 
  				:type => document.type, 
+				:title => document.file_file_name,
 				:path => document_path(document) %>
   		</div>
 
