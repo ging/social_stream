@@ -6,7 +6,7 @@
 .attachment_text
 {
 	position: relative;
-	width: 70%;
+	width: 90%;
 	vertical-align: middle;
 	line-height: 20px;
 	height: auto;
@@ -126,10 +126,6 @@
 	overflow:hidden;
 	font-size: 11px;
 	color: #2A3890;
-}
-
-.picture_summary_class{
-	margin-top: 14px;
 }
 
 .size_19px {

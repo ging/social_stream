@@ -6,6 +6,10 @@ module DocumentsHelper
     image_tag document.thumb(self)
   end
   
+  def big_thumb_for(document)
+    image_tag document.big_thumb(self)
+  end
+  
   def link_for_wall(document)
     format = Mime::Type.lookup(document.file_content_type)
     url_for(document)+"."+format.to_sym.to_s+"?style=thumb0"

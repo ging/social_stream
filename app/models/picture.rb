@@ -6,6 +6,12 @@ class Picture < Document
                                 :thumb0 => ["130x80#"]
                                }                                  
   def thumb helper
+    "formats/photo.png"
+  end
+  
+  def big_thumb helper
     helper.picture_path self, :format => format, :style => 'thumb'
   end
+  
+  
 end

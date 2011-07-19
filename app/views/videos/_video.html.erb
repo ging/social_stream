@@ -7,7 +7,7 @@
   </div>
   
   <div class="attachment_text">
-  	<%= t('video.msg') %><%= link_to video.file_file_name, 
+  	<%= t('video.msg') %><%= link_to "\""+video.file_file_name+"\"", 
     {:controller => "documents", :action => "download", :id => video},  
     :class => "" %>
 
