@@ -1,3 +1,3 @@
 //= require jquery.scrollTo.min
 //= require jquery.validate
-//= require ckeditor
+//= require ckeditor.rails

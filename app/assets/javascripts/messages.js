@@ -1,3 +1,3 @@
 //= require jquery.fcbkcomplete
 //= require jquery.validate
-//= require ckeditor
+//= require ckeditor.rails
