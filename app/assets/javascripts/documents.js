@@ -1,4 +1,7 @@
 $('.attachment_tile a').live("click",function(e){
+	if(this.type ==""){
+		return true;
+	}
 	e.preventDefault();
 	
 	var download_link = this;
@@ -28,7 +31,7 @@ $('.attachment_tile a').live("click",function(e){
 		$(this).parent().parent().addClass("selected");
 		$('body').append("<img class='player' id='picture_player' src='"+download_link+"' />");		
 		$('body').append("<a href='"+download_link+"'><img id='downloadButton' src='assets/formats/default.png' /></a>");
-	}
+	}		
 });
 
 function removePlayers(){
