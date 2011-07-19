@@ -1,5 +1,5 @@
 <div class="attachment_section_header">
-	<h3><%= t('document.mine') %></h3>
+	<h3><%= @subject ? t('document.not_mine') : t('document.mine') %></h3>
 </div>
 <% @document_activities.each do |a| %>
 	<% document = a.activity_objects.first.document %>

@@ -17,6 +17,7 @@ en:
       title: "Resource"
     mine: "My documents"
     msg: "Just uploaded a document:"
+    not_mine: "Documents"
     simple_all: "All"  
     title: "Documents"
   picture:
