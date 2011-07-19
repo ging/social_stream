@@ -41,5 +41,11 @@ class DocumentsController < InheritedResources::Base
       format.all {redirect_to request.referer || home_path}
     end
   end
+  
+  def destroy
+    @post_activity = resource.post_activity
+
+    destroy!
+  end
 
 end

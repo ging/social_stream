@@ -19,4 +19,9 @@ class VideosController < InheritedResources::Base
                                         :object_type => :Video).page(params[:page]).per(params[:per])
   end
     
+  def destroy
+    @post_activity = resource.post_activity
+
+    destroy!
+  end
 end

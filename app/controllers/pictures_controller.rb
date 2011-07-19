@@ -15,4 +15,10 @@ class PicturesController < InheritedResources::Base
                                         :for => current_subject,
                                         :object_type => :Picture).page(params[:page]).per(params[:per])
   end
+  
+  def destroy
+    @post_activity = resource.post_activity
+
+    destroy!
+  end
 end  

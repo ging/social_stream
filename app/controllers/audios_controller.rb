@@ -16,4 +16,10 @@ class AudiosController < InheritedResources::Base
                                         :object_type => :Audio).page(params[:page]).per(params[:per])
   end
   
+  
+  def destroy
+    @post_activity = resource.post_activity
+
+    destroy!
+  end
 end
