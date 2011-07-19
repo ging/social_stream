@@ -5,10 +5,10 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1><%= raw decode_notification @notification.subject,@notification.object %></h1>
+    <h1><%= strip_tags decode_notification @notification.subject,@notification.notified_object %></h1>
     <blockquote>
       <p>
-        <%= raw decode_notification @notification.body,@notification.object %>
+        <%= raw decode_notification @notification.body,@notification.notified_object %>
       </p>
     </blockquote>
     <p>

@@ -1,9 +1,6 @@
 <% self.class.send :include, NotificationsHelper %>
-<%= strip_tags decode_notification @notification.subject,@notification.object %>
+<%= strip_tags decode_notification @notification.subject,@notification.notified_object %>
 ===============================================
-
------------------------------------------------
-<%= strip_tags decode_notification @notification.body,@notification.object  %>
------------------------------------------------
+<%= strip_tags decode_notification @notification.body,@notification.notified_object  %>
 
 Visit <%= link_to notifications_url,notifications_url %> and check all your notifications.

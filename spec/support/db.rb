@@ -20,7 +20,12 @@ rescue
   puts "WARNING: Social Stream Base failed to rollback" 
 end
 
-CreateMailboxer.up
+# Mailboxer
+#CreateMailboxer.up
+mailboxer_path = Gem::GemPathSearcher.new.find('mailboxer').full_gem_path
+mailboxer_migration = File.join([mailboxer_path,'db', 'migrate'])
+ActiveRecord::Migrator.migrate mailboxer_migration
+
 ActsAsTaggableOnMigration.up
 
 # Run any available migration

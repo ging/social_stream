@@ -2,12 +2,12 @@
 
 <div class="notification"></div>
 <div class="sender_photo">
-  <%if notification.object.nil? %>
+  <%if notification.notified_object.nil? %>
     <%= image_tag('logos/actor/user.png',:title => "unknown", :alt => "unknown")%>
   <%else%>
-    <%= link_to image_tag(notification.object.sender.logo.url(:actor),
-        :title => notification.object.sender.name, :alt => notification.object.sender.name),
-        notification.object.sender.subject %>
+    <%= link_to image_tag(notification.notified_object.sender.logo.url(:actor),
+        :title => notification.notified_object.sender.name, :alt => notification.notified_object.sender.name),
+        notification.notified_object.sender.subject %>
   <%end%>
 </div>
 <div class="content_left">
@@ -17,10 +17,10 @@
 </div>
 <div class="content_right">
   <div class="subject">
-    <%= raw decode_notification notification.subject,notification.object %>
+    <%= raw decode_notification notification.subject,notification.notified_object %>
   </div>
   <div class="briefing">
-    <%= raw decode_notification notification.body, notification.object %>
+    <%= raw decode_notification notification.body, notification.notified_object %>
   </div>
   <div class="clearfloat">
   </div>
