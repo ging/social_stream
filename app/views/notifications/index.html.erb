@@ -2,10 +2,6 @@
   <%= current_subject.name %>
 <% end %>
 
-<% content_for :headers do %>
-  <%= stylesheet_link_tag "messages.css", :media => "screen, projection" %>
-<% end %>
-
 <% content_for :sidebar do %>
   <%= render :partial => 'home/sidebar' %>
 <% end %>

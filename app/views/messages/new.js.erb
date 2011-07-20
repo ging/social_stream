@@ -1,8 +1,5 @@
 $("#content").html("<%= escape_javascript(render :partial => 'new') %>");
 
-$("head").append($("<%= escape_javascript(stylesheet_link_tag "messages.css", :media => "screen, projection") %>"));
-$("head").append($("<%= escape_javascript(stylesheet_link_tag "fcbkComplete.css", :media => "screen, projection") %>"));
-
 <%= toolbar :option => :messages %>
 
 

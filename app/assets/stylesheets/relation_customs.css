@@ -15,14 +15,14 @@ span.ui-helper-hidden {
 	display: none;
 }
 
-label {
+#relation_customs label, #permissions label {
 	display: block;
 	font-family: sans-serif;
 	padding: 2px;
 	margin-left: 20px;
 }
 
-label.ui-checkbox {
+#relation_customs label.ui-checkbox, #permissions label.ui-checkbox {
 	cursor: pointer;
 }
 

@@ -54,7 +54,7 @@ span.ui-helper-hidden {
   display: none;
 }
 
-label {
+#contact-form label {
   display: block;
   font-family: sans-serif;
   padding: 2px;

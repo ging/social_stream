@@ -6,9 +6,9 @@
     <title><%= yield(:title).empty? ? t('socialstream') : yield(:title)%></title>
     <meta name="keywords" content="<%= t('profile.tags.default') %><%= yield(:keywords) %>" >
     <meta name="description" content= "<%= yield(:description).empty? ? t('frontpage.main_title') : yield(:description) %>" >
-    <%= stylesheet_link_tag "base", "header","home","footer",
-                             :media => "screen, projection" %>
-    <%= javascript_include_tag 'application' %>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application" %>
 
     <%= yield :headers %>
 

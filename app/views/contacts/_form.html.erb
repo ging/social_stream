@@ -1,7 +1,3 @@
-<% content_for :headers do %>
-  <%= stylesheet_link_tag "contacts.css", :media => "screen, projection" %>
-<% end %>
-
 <div id="contact-form">
   <%= form_for @contact do |f| %>
     <%= hidden_field_tag "contact[relation_ids][]", "gotcha" %>

@@ -7,11 +7,6 @@
 
 <% toolbar :option => :messages %>
 
-<% content_for :headers do %>
-  <%= stylesheet_link_tag "messages.css", :media => "screen, projection" %>
-  <%= stylesheet_link_tag "fcbkComplete.css", :media => "screen, projection" %>
-<% end %>
-
 <% content_for :javascript do %>
 
 	var recipients = $("#_recipients").fcbkcomplete({

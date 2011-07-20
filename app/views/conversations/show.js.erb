@@ -1,7 +1,5 @@
 $("#content").html("<%= escape_javascript(render :partial => 'show') %>");
 
-$("head").append($("<%= escape_javascript(stylesheet_link_tag "messages.css", :media => "screen, projection")  %>"));
-
 <%= toolbar :option => :messages %>
 
 $('.cont_conversation').validate();

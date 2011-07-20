@@ -4,10 +4,6 @@
   <%= render :partial => "#{ current_subject.class.to_s.tableize }/sidebar_index" %>
 <% end %>
 
-<% content_for :headers do %>
-  <%= stylesheet_link_tag "jquery-ui", :media => "screen, projection" %>
-<% end %>
-
 <%if params[:section].present? 
   case params[:section]
   when "about_me"
@@ -39,10 +35,6 @@ end %>
 <div class="block" id="profile_form">
   
   <% if !params[:section].present? or params[:section].eql?("tags") %>
-  	<% content_for :headers do %>
-  	  <%= stylesheet_link_tag "fcbkComplete.css", :media => "screen, projection" %>
-  	<% end %>
-  	
   	<% content_for :javascript do %>
   	  $(function() {
   	    $(".new_group").validate();

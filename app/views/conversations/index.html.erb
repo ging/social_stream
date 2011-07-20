@@ -6,10 +6,6 @@
   <%= render :partial => 'home/sidebar' %>
 <% end %>
 
-<% content_for :headers do %>
-  <%= stylesheet_link_tag "messages.css", :media => "screen, projection" %>
-<% end %>
-
 <% content_for :javascript do %>
   $('.pagination a').attr('data-remote', 'true');
 <% end %>
