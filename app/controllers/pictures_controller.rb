@@ -1,6 +1,8 @@
 class PicturesController < InheritedResources::Base
   load_and_authorize_resource
   
+  respond_to :html,:js
+  
   def show
     path = @picture.file.path(params[:style])
     respond_to do |format|
@@ -18,7 +20,7 @@ class PicturesController < InheritedResources::Base
   
   def destroy
     @post_activity = resource.post_activity
-
+    
     destroy!
   end
 end  

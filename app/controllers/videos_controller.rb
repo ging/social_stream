@@ -1,6 +1,8 @@
 class VideosController < InheritedResources::Base
   load_and_authorize_resource
   
+  respond_to :html,:js
+  
   def show
     path = @video.file.path(params[:style])
     if(params[:style].present?)

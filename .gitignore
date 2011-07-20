@@ -9,4 +9,4 @@ Gemfile.lock
 .project
 .idea/*
 .idea/social_stream-documents.iml
-
+app/views/*/.tmp_*

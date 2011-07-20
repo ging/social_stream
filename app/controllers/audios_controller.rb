@@ -1,6 +1,8 @@
 class AudiosController < InheritedResources::Base
   load_and_authorize_resource
   
+  respond_to :html,:js
+  
   def show
     path = @audio.file.path(params[:style])
     respond_to do |format|
