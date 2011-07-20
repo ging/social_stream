@@ -25,5 +25,24 @@ describe LikesController do
 
     assert ! @activity.liked_by?(@subject)
   end
+
+  it "should create, destroy and create it again" do
+    @activity = Factory(:activity)
+    @subject  = @activity.receiver_subject
+
+    sign_in @subject
+
+    post :create, :activity_id => @activity.id
+
+    assert @activity.liked_by?(@subject)
+
+    delete :destroy, :activity_id => @activity.id
+
+    assert ! @activity.liked_by?(@subject)
+
+    post :create, :activity_id => @activity.id
+
+    assert @activity.liked_by?(@subject)
+  end
 end
 
