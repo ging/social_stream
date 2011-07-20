@@ -30,7 +30,6 @@ class DocumentsController < InheritedResources::Base
   def index
     @subject = User.find_by_slug(params[:user_id]) || Group.find_by_slug(params[:group_id])
     
-    #TODO, clarify if use :home or :profile
     @document_activities = (@subject ? @subject : current_subject).wall(:home,
                                         :for => current_subject,
                                         :object_type => [:Audio,:Video,:Picture,:Document]).page(params[:page]).per(params[:per])

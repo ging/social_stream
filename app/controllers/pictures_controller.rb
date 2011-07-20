@@ -13,9 +13,12 @@ class PicturesController < InheritedResources::Base
   end
   
   def index
-    @document_activities = current_subject.wall(:profile,
+    @subject = User.find_by_slug(params[:user_id]) || Group.find_by_slug(params[:group_id])
+    
+    @document_activities = (@subject ? @subject : current_subject).wall(:home,
                                         :for => current_subject,
-                                        :object_type => :Picture).page(params[:page]).per(params[:per])
+                                        :object_type => [:Picture]).page(params[:page]).per(params[:per])
+   
   end
   
   def destroy
