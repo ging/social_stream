@@ -53,8 +53,8 @@ class ContactsController < ApplicationController
     @contacts = current_subject.pending_contacts
 
     respond_to do |format|
-      format.html { @contacts = Kaminari.paginate_array(@contacts).page(params[:page]).per(2) }
-      format.js { @contacts = Kaminari.paginate_array(@contacts).page(params[:page]).per(2) }
+      format.html { @contacts = Kaminari.paginate_array(@contacts).page(params[:page]).per(10) }
+      format.js { @contacts = Kaminari.paginate_array(@contacts).page(params[:page]).per(10) }
       format.json { render :text => @contacts.map{ |c| { 'key' => c.actor_id.to_s, 'value' => self.class.helpers.truncate_name(c.name) } }.to_json }
     end
   end
