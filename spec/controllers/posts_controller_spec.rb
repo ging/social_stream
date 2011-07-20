@@ -151,5 +151,17 @@ describe PostsController do
       post.post_activity.relations.should include(@tie.relation)
     end
   end
+
+  context "creating public post" do
+    before do
+      @post = Factory(:public_post)
+    end
+
+    it "should render" do
+      get :show, :id => @post.to_param
+
+      response.should be_success
+    end
+  end
 end
 

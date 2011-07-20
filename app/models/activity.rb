@@ -231,7 +231,11 @@ class Activity < ActiveRecord::Base
       return val
 
     when 'read'
-      return true if [contact.sender_id, contact.receiver_id].include?(Actor.normalize_id(subject)) || relations.select{ |r| r.is_a?(Relation::Public) }.any?
+      return true if relations.select{ |r| r.is_a?(Relation::Public) }.any?
+
+      return false if subject.blank?
+
+      return true if [contact.sender_id, contact.receiver_id].include?(Actor.normalize_id(subject))
     when 'update'
       return true if contact.sender_id == Actor.normalize_id(subject)
     when 'destroy'
