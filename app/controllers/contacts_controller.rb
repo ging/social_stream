@@ -7,10 +7,10 @@ class ContactsController < ApplicationController
     end
     @contacts =
     Contact.sent_by(current_subject).
-    joins(:receiver).merge(Actor.alphabetic).
-    merge(Actor.letter(params[:letter])).
-    merge(Actor.search(params[:search])).
-    active
+            joins(:receiver).merge(Actor.alphabetic).
+            merge(Actor.letter(params[:letter])).
+            merge(Actor.search(params[:search])).
+            active
 
     respond_to do |format|
       format.html { @contacts = @contacts.page(params[:page]).per(10) }
