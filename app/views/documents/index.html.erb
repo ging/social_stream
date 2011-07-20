@@ -6,11 +6,6 @@
   <%= render :partial => 'home/sidebar' %>
 <% end %>
 
-<% content_for :headers do %>
-	<%= stylesheet_link_tag "documents" %>
-	<%= javascript_include_tag 'documents' %>  
-<% end %>
-
 <%if @subject%>
 <%= location(
   link_to(image_tag("btn/btn_profile.png", :class => "menu_icon")+ @subject.name, polymorphic_path(@subject),:remote => true),
