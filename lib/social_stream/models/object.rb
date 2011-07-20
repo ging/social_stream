@@ -65,6 +65,16 @@ module SocialStream
           @_activity_parent ||= Activity.find(_activity_parent_id)
         end
 
+        # The {SocialStream::Models::Subject subject} that posted this object
+        def _author
+          post_activity.contact.sender_subject
+        end
+
+        # The owner of the wall where {#_author} posted this object
+        def _owner
+          post_activity.contact.receiver_subject
+        end
+
         private
 
         def create_post_activity
