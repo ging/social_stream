@@ -1,7 +1,7 @@
 <div class="attachment_section_header">
 	<h3><%= t('picture.mine') %></h3>
 </div>
-<% @document_activities.each do |a| %>
+<% @activities.each do |a| %>
 	<% document = a.activity_objects.first.document %>
 	<div class="attachment_tile">
 		<div class="attachment_tile_thumb">
