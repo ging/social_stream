@@ -26,7 +26,7 @@
       </div>
       <div style="padding: 10px 5px 5px 5px;">    
         <p>
-          <%= link_to t('message.look'), conversation_url(@message.conversation)%> at <%= t('socialstream')%>
+          <%= link_to((t('message.look')+" at "+t('socialstream')), conversation_url(@message.conversation))%> 
         </p>
       </div>
     </div>

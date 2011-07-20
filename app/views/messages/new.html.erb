@@ -17,7 +17,7 @@
 		height: 6
 	});	
 
-	
+	/*
 	$('#body').ckeditor(
 	 function(){
 	  $('#cke_top_body').click( updateTextArea);
@@ -38,7 +38,7 @@
 			$("#body").trigger('keyup');       
   }
 	
-
+*/
 	<% unless @recipient.nil? %>
 		$("#_recipients").trigger("addItem",[{"title": "<%= truncate_name @recipient.name %>", "value": "<%= @recipient.id %>"}]);
 	<% end %>
