@@ -33,11 +33,8 @@ class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
     remove_file 'public/index.html'
   end
 
-  def create_application_layout
-    copy_file File.join(File.dirname(__FILE__),
-                        '..', '..', '..', '..',
-                        'app/views/layouts/application.html.erb'),
-              'app/views/layouts/application.html.erb'
+  def remove_application_layout
+    remove_file 'app/views/layouts/application.html.erb'
   end
 
   def create_navigation_config
