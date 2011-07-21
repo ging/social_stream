@@ -15,19 +15,21 @@ module SocialStream #:nodoc:
       end
 
       module ClassMethods
+        def subtypes_name
+          @subtypes_name
+        end
+
         def subtypes
-          SocialStream.__send__ @subtypes_name.to_s.tableize # SocialStream.subjects # in Actor
+          SocialStream.__send__ subtypes_name.to_s.tableize # SocialStream.subjects # in Actor
         end
       end 
 
       module InstanceMethods
         def subtype_instance
-          self.class.subtypes.each do |s|
-            i = __send__(s)
-            return i if i.present?
-          end
-
-          nil
+          if __send__("#{ self.class.subtypes_name }_type").present?      # if object_type.present?
+            object_class = __send__("#{ self.class.subtypes_name }_type") #   object_class = object_type # => "Video"
+            __send__ object_class.constantize.base_class.to_s.underscore  #   __send__ "document"
+                       end                                                # end
         end
       end
     end

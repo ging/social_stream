@@ -151,8 +151,7 @@ class Actor < ActiveRecord::Base
   
   # The subject instance for this actor
   def subject
-    subtype_instance ||
-    activity_object.try(:object)
+    subtype_instance
   end
 
   # All the {Relation relations} defined by this {Actor}

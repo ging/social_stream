@@ -16,12 +16,12 @@ class ActivityObject < ActiveRecord::Base
   
   has_many :activity_object_activities, :dependent => :destroy
   has_many :activities, :through => :activity_object_activities
-  has_one  :actor
 
   # The object of this activity object
   def object
-    subtype_instance ||
-      actor.try(:subject)
+    subtype_instance.is_a?(Actor) ?
+      subtype_instance.subject :
+      subtype_instance
   end
 
   # The activity in which this activity_object was created
