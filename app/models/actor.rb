@@ -236,7 +236,7 @@ class Actor < ActiveRecord::Base
   end
 
   def sent_active_contact_ids
-    sent_contacts.active.map(&:id)
+    sent_contacts.active.map(&:receiver_id)
   end
   
   # By now, it returns a suggested {Contact} to another {Actor} without any current {Tie}
