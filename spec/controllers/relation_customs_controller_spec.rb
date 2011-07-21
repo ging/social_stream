@@ -69,9 +69,10 @@ describe Relation::CustomsController do
 
     context "a new fake relation" do
       it "should not be created" do
+        actor = Factory(:user).actor
         count = Relation.count
 	begin
-          post :create, :custom => Factory.attributes_for(:relation_custom)
+          post :create, :custom => Factory.attributes_for(:relation_custom, :actor => actor)
 
           assert false
         rescue CanCan::AccessDenied
