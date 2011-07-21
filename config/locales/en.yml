@@ -11,7 +11,7 @@ en:
   activity:
     confirm_delete: "Delete activity?"
     delete: "Delete"
-    input: "What do you do?"
+    input: "What are you doing?"
     last: "Last Activities"
     like: "I like"
     one: "Activity"
