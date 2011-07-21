@@ -6,7 +6,7 @@ class CommonDocumentsController < InheritedResources::Base
   def index
     @activities = subject.wall(:profile,
                                :for => current_subject,
-                               :object_type => [:Picture]).
+                               :object_type => Array(self.class.index_object_type)).
                           page(params[:page]).
                           per(params[:per])
   end
@@ -33,5 +33,11 @@ class CommonDocumentsController < InheritedResources::Base
 
   def subject
     @subject ||= parent || current_subject
+  end
+
+  class << self
+    def index_object_type
+      controller_name.classify
+    end
   end
 end

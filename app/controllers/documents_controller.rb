@@ -3,14 +3,6 @@ class DocumentsController < CommonDocumentsController
   
   SEND_FILE_METHOD = :default
 
-  def index
-    @activities = subject.wall(:profile,
-                               :for => current_subject,
-                               :object_type => [:Audio,:Video,:Picture,:Document]).
-                          page(params[:page]).
-                          per(params[:per])
-  end
-
   def create
     super do |format|
       format.all {redirect_to request.referer || home_path}
@@ -28,5 +20,11 @@ class DocumentsController < CommonDocumentsController
     end
 
     send_file(path, send_file_options)
+  end
+
+  class << self
+    def index_object_type
+      [:Audio,:Video,:Picture,:Document]
+    end
   end
 end
