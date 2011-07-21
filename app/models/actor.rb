@@ -233,16 +233,18 @@ class Actor < ActiveRecord::Base
   # Return a contact to subject. Create it if it does not exist
   def contact_to!(subject)
     contact_to(subject) ||
-      sent_contacts.create!(:receiver_id => Actor.normalize_id(subject))
+      sent_contacts.create!(:receiver => Actor.normalize(subject))
+  end
+
+  def sent_active_contact_ids
+    sent_contacts.active.map(&:id)
   end
   
   # By now, it returns a suggested {Contact} to another {Actor} without any current {Tie}
   #
   # @return [Contact]
   def suggestions(size = 1)
-    contact_ids = sent_contacts.active.map(&:id)
-
-    candidates = Actor.where(Actor.arel_table[:id].not_in(contact_ids))
+    candidates = Actor.where(Actor.arel_table[:id].not_in(sent_active_contact_ids + [id]))
 
     size.times.map {
       candidates.delete_at rand(candidates.size)
