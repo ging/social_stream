@@ -21,11 +21,9 @@ class Contact < ActiveRecord::Base
              :class_name => "Contact"
 
   belongs_to :sender,
-             :class_name => "Actor",
-             :include => SocialStream.subjects
+             :class_name => "Actor"
   belongs_to :receiver,
-             :class_name => "Actor",
-             :include => SocialStream.subjects
+             :class_name => "Actor"
 
   has_many :ties
   has_many :relations, :through => :ties
