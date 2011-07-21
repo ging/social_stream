@@ -30,6 +30,8 @@ class Contact < ActiveRecord::Base
   has_many :ties
   has_many :relations, :through => :ties
 
+  has_many :activities
+
   scope :sent_by, lambda { |a|
     where(:sender_id => Actor.normalize_id(a))
   }
@@ -78,16 +80,18 @@ class Contact < ActiveRecord::Base
       receiver.contact_to!(sender)
   end
 
-  # Is not the inverse of this {Contact}
+  # The {Contact} in the other way is established
   def pending?
-    inverse &&
+    inverse.present? &&
       inverse.ties_count > 0
   end
 
-  # The {ActivityVerb} corresponding to this {Contact}, depending on if
-  # it is pending or already replied
+  # The {ActivityVerb} corresponding to this {Contact}. If this contact is pending,
+  # the other one was establised already, so this is going to "make-friend".
+  # If it is not pending, the contact in the other way was not established, so this
+  # is following
   def verb
-    pending? ? "follow" : "make-friend"
+    pending? ? "make-friend" : "follow"
   end
 
   # has_many collection=objects method does not trigger destroy callbacks,

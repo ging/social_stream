@@ -39,6 +39,23 @@ describe Tie do
     it "should create pending" do
       @tie.receiver.received_contacts.pending.should be_present
     end
+
+    it "should create activity with follow verb" do
+      @tie.contact.activities.should be_present
+      @tie.contact.activities.first.verb.should eq('follow')
+    end
+
+    context "reciprocal" do
+      before do
+        @reciprocal = Factory(:friend, :contact => @tie.contact.inverse!)
+      end
+
+      it "should create activity with make-friend verb" do
+        @reciprocal.contact.activities.should be_present
+        @reciprocal.contact.activities.first.verb.should eq('make-friend')
+      end
+    end
+
   end
 
   describe "with public relation" do
