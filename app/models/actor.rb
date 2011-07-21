@@ -257,13 +257,9 @@ class Actor < ActiveRecord::Base
     sent_ties.merge(Contact.received_by(subject))
   end
 
+  # Is there any {Tie} sent by this actor and received by subject
   def ties_to?(subject)
     ties_to(subject).present?
-  end
-
- 
-  def ties_to?(a)
-    ties_to(a).present?
   end
 
   # Can this actor be represented by subject. Does she has permissions for it?
