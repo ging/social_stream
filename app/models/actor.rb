@@ -236,43 +236,19 @@ class Actor < ActiveRecord::Base
       sent_contacts.create!(:receiver_id => Actor.normalize_id(subject))
   end
   
-  # This is an scaffold for a recomendations engine
-  #
-  
-  # Make n suggestions
-  # TODO: make more
-  def suggestions(n)
-    n.times.map{ |m| suggestion }
-  end
-  
-  # By now, it returns a tie suggesting a relation from SuggestedRelations
-  # to another subject without any current relation
-  #
-  # Options::
-  # * type: the class of the recommended subject
+  # By now, it returns a suggested {Contact} to another {Actor} without any current {Tie}
   #
   # @return [Contact]
-  def suggestion(options = {})
-    candidates_types =
-      ( options[:type].present? ?
-          Array(options[:type]) :
-          self.class.subtypes )
-    
-    candidates_classes = candidates_types.map{ |t| t.to_s.classify.constantize }
-    
-    # Candidates are all the instance of "type" minus all the subjects
-    # that are receiving any tie from this actor
-    candidates = candidates_classes.inject([]) do |cs, klass|
-      cs += klass.all - contact_subjects(:type => klass.to_s.underscore, :direction => :sent, :relations => relations.to_a)
-      cs -= Array(subject) if subject.is_a?(klass)
-      cs
-    end
-    
-    candidate = candidates[rand(candidates.size)]
-    
-    return nil unless candidate.present?
-    
-    contact_to!(candidate)
+  def suggestions(size = 1)
+    contact_ids = sent_contacts.active.map(&:id)
+
+    candidates = Actor.where(Actor.arel_table[:id].not_in(contact_ids))
+
+    size.times.map {
+      candidates.delete_at rand(candidates.size)
+    }.compact.map { |a|
+      contact_to! a
+    }
   end
   
   # Set of ties sent by this actor received by subject

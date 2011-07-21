@@ -1,4 +1,4 @@
-<% if current_subject.suggestion.present? %>
+<% if (sgs = current_subject.suggestions(2)).present? %>
   <div class="block">
     <div class="header">
       <%= image_tag('btn/notifications.png', :class => "header_icon") %>
@@ -8,9 +8,7 @@
     </div>
     <div class="content">
       <div class="suggestions">
-        <% if (sgs = current_subject.suggestions(2)).present? %>
-          <%= render sgs %>
-        <%end%>
+        <%= render sgs %>
       </div>
     </div>
   </div>
