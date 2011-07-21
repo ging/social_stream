@@ -69,6 +69,8 @@ en:
     cancel: "Cancel"
     save: "Save"
     update: "Update"
+  cleditor:
+    controls: "bold italic underline strikethrough subscript superscript | size style | bullets | image link unlink"
   comment:
     input: "Write a comment..."
     confirm_delete: "Delete comment?"

@@ -15,10 +15,10 @@ module SocialStream
         :url => "#",
         :options => {:link => {:id => "messages_menu"}},
         :items => [
-          {:key => :message_new, :name => image_tag("btn/message_new.png")+ t('message.new'), :url => new_message_path},
+          {:key => :message_new, :name => image_tag("btn/message_new.png")+ t('message.new'), :url => new_message_path, :options => {:link =>{:remote=> true}}},
           {:key => :message_inbox, :name => image_tag("btn/message_inbox.png")+t('message.inbox')+' (' + current_subject.mailbox.inbox(:unread => true).count.to_s + ')',
             :url => conversations_path, :options => {:link =>{:remote=> true}}},
-          {:key => :message_sentbox, :name => image_tag("btn/message_sentbox.png")+t('message.sentbox'), :url => conversations_path(:box => :sentbox), :remote=> true},
+          {:key => :message_sentbox, :name => image_tag("btn/message_sentbox.png")+t('message.sentbox'), :url => conversations_path(:box => :sentbox), :options => {:link =>{:remote=> true}}},
           {:key => :message_trash, :name => image_tag("btn/message_trash.png")+t('message.trash'), :url => conversations_path(:box => :trash)}
         ]}
 

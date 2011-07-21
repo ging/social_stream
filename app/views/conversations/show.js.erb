@@ -4,6 +4,11 @@ $("#content").html("<%= escape_javascript(render :partial => 'show') %>");
 
 $('.cont_conversation').validate();
 <% unless @box.eql?'trash' %>
+  $("#body").cleditor({
+    width:493,
+    controls:  "<%= t('cleditor.controls')%>"   
+  });
+
 	var message_hash = window.location.hash.match(/^.*message_(\d+).*$/);
 	if (message_hash && message_hash.length > 0){
 		$.scrollTo('#message_' + message_hash[1] ,1500,{axis:'y'});
