@@ -15,6 +15,12 @@ class UsersController < InheritedResources::Base
     end
   end
 
+  def show
+    show! do |format|
+      format.html { render :layout => (user_signed_in? ? 'application' : 'frontpage') }
+    end
+  end
+
   # Supported through devise
   def new; end; def create; end
   # Not supported yet
