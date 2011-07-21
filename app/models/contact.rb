@@ -122,6 +122,12 @@ class Contact < ActiveRecord::Base
     end
   end
 
+  def status
+    established? ?
+      ties.includes(:relation).map(&:relation_name).join(", ") :
+      I18n.t("contact.new.link")
+  end
+
   private
 
   def remove_follower(ids)

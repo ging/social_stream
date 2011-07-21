@@ -3,14 +3,8 @@ module ContactsHelper
     "N contacts in common"
   end
 
-  def contact_status(c)
-    c.established? ?
-      c.ties.map(&:relation_name).join(", ") :
-      t("contact.new.link")
-  end
-
   def contact_link(c)
-    link_to contact_status(c),
+    link_to c.status,
             edit_contact_path(c),
             :title => t("contact.#{ c.action }.title", :name => c.receiver.name)
 
