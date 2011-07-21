@@ -78,9 +78,14 @@ class Contact < ActiveRecord::Base
       receiver.contact_to!(sender)
   end
 
+  # Has this {Contact} any {Tie}?
+  def established?
+    ties_count > 0
+  end
+
   # The {Contact} in the other way is established
-  def pending?
-    inverse.present? &&
+  def replied?
+    inverse_id.present? &&
       inverse.ties_count > 0
   end
 
@@ -89,7 +94,7 @@ class Contact < ActiveRecord::Base
   # If it is not pending, the contact in the other way was not established, so this
   # is following
   def verb
-    pending? ? "make-friend" : "follow"
+    replied? ? "make-friend" : "follow"
   end
 
   # has_many collection=objects method does not trigger destroy callbacks,

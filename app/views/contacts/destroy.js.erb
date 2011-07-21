@@ -1,5 +1,5 @@
 <% 
-  new_contact = @contact.pending? ? current_subject.pending_contacts.last : current_subject.suggestions.first
+  new_contact = @contact.replied? ? current_subject.pending_contacts.last : current_subject.suggestions.first
   render_string = new_contact.present? ? render(new_contact) : ""
 %>
 
