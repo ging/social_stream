@@ -219,6 +219,7 @@ en:
   profile:
     one: "Profile"
     age: "Age"
+    must_be_signed_id: "You must be signed in"
     group:
       about: "About us"
       birthday: "Anniversary"

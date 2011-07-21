@@ -69,7 +69,7 @@
                 <%=t('profile.email')%>:
               </div>
               <div class="field">
-                <%=h @profile.subject.email %>
+                <%= show_if_signed_in(h(@profile.subject.email)) %>
               </div>
             </div>
           <%end%>
