@@ -1,15 +1,1 @@
-<% content_for :title do %>
-  <%= current_subject.name %> 
-<% end %>
-
-<% content_for :sidebar do %>
-  <%= render :partial => 'home/sidebar' %>
-<% end %>
-
-<%= location(
-    link_to(image_tag("btn/btn_audio.png", :class => "menu_icon")+t('audio.title'), audios_path,:remote => true)
-) %>
-
-<% toolbar %>
-
-<%= render :partial => 'index' %>
+<%=render(:partial => 'common/index') %>

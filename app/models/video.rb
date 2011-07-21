@@ -12,5 +12,15 @@ class Video < Document
   def videoprocess
     Resque.enqueue(Videoencoder, self.id)
   end
+     
                       
+  # Thumbnail file
+  def thumb helper    
+      "formats/video.png"
+  end
+  
+  # Thumbnail file
+  def big_thumb helper    
+      "formats_big/video.png"
+  end
 end
