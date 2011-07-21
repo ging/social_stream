@@ -11,7 +11,7 @@
       <%= contact_brief(contact.receiver_subject) %>
     </div>
     <div class="link" id="contact_link<%= dom_id(contact.receiver_subject)%>">
-      <%= contact_to(contact.receiver) %>
+      <%= contact_link(contact) %>
     </div>
   </div>
   <div class="close"><%= link_to 'X', contact, :method => :delete, :remote => true %></div>
