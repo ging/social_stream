@@ -1,4 +1,4 @@
-<% if current_subject.pending_contacts.any? %>
+<% if current_subject.pending_contacts? %>
 <div class="block">
   <div class="header">
     <%= image_tag('btn/btn_notifications.png', :class => "header_icon") %>
@@ -9,7 +9,7 @@
   <div class="content">
     <%= render current_subject.pending_contacts.shuffle.first(2) %>
     <div class="row more_pending">
-      <%= link_to t('contact.pending.all_n', :count => current_subject.pending_contacts.size), contacts_path(:pending=>true)%>
+      <%= link_to t('contact.pending.all_n', :count => current_subject.pending_contacts_count), contacts_path(:pending=>true)%>
     </div>
     <div class="space_center">
     </div>
