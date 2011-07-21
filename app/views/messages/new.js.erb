@@ -12,22 +12,6 @@ var recipients = $("#_recipients").fcbkcomplete({
 });
 
 
-$('#body').ckeditor(
-);
-
-var editor = $('#body').ckeditorGet();
-
-editor.on("instanceReady", function(){
-	this.document.on("keyup", updateTextArea);
-	this.document.on("paste", updateTextArea);
-	this.document.on("mousedown", updateTextArea);
-});
-
-var updateTextArea = function (){
-	editor.updateElement();
-	$("#body").trigger('keyup');
-}
-
 <% unless @recipient.nil? %>
 	$("#_recipients").trigger("addItem",[{"title": "<%= @recipient.name %>", "value": "<%= @recipient.id %>"}]);
 <% end %>

@@ -17,28 +17,6 @@
 		height: 6
 	});	
 
-	/*
-	$('#body').ckeditor(
-	 function(){
-	  $('#cke_top_body').click( updateTextArea);
-	 },
-	 		{ width:493 }
-	);
-	
-	var editor = $('#body').ckeditorGet();
-	
-  editor.on("instanceReady", function(){	   
-    this.document.on("keyup", updateTextArea);
-    this.document.on("paste", updateTextArea);
-		this.document.on("mousedown", updateTextArea);
-  });
-
-  var updateTextArea = function (){ 
-			editor.updateElement();	
-			$("#body").trigger('keyup');       
-  }
-	
-*/
 	<% unless @recipient.nil? %>
 		$("#_recipients").trigger("addItem",[{"title": "<%= truncate_name @recipient.name %>", "value": "<%= @recipient.id %>"}]);
 	<% end %>
