@@ -14,6 +14,8 @@
 class Activity < ActiveRecord::Base
   has_ancestry
 
+  paginates_per 10
+
   belongs_to :contact
   belongs_to :activity_verb
 
