@@ -12,7 +12,7 @@ class DocumentsController < CommonDocumentsController
   def download
     path = @document.file.path(params[:style])
     head(:bad_request) and return unless File.exist?(path) 
-    send_file_options = {} 
+    send_file_options = {:filename=>@document.file_file_name} 
 
     case SEND_FILE_METHOD
       when :apache then send_file_options[:x_sendfile] = true

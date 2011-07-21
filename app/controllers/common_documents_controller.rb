@@ -17,6 +17,7 @@ class CommonDocumentsController < InheritedResources::Base
     respond_to do |format|
       format.all {
         send_file path, 
+                  :filename => resource.file_file_name,
                   :type => resource.file_content_type,
                   :disposition => "inline"
       }
