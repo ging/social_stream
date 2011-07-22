@@ -12,6 +12,14 @@ module NotificationsHelper
                                                                               :action=> :show, :id=> activity.sender.subject.slug, :only_path => false)))
     notification_text = notification_text.gsub(/\%\{sender.name\}/,truncate_name(activity.sender.name))
     
+    if activity.receiver.subject.is_a?(User)
+      notification_text = notification_text.gsub(/\%\{whose\}/,"your")
+      notification_text = notification_text.gsub(/\%\{who\}/,"you")
+    else
+      notification_text = notification_text.gsub(/\%\{whose\}/,truncate_name(activity.receiver.name)+"'s")
+      notification_text = notification_text.gsub(/\%\{who\}/,truncate_name(activity.receiver.name))
+    end
+      
     if activity.direct_object.present?
       object = activity.direct_object
       object = object.subject if object.is_a? Actor
@@ -21,7 +29,8 @@ module NotificationsHelper
       notification_text=notification_text.gsub(/\%\{object.name\}/,object.class.to_s.downcase)
       notification_text=notification_text.gsub(/\%\{object.text\}/,link_to(object.text.truncate(100, :separator =>' '), 
                                                                           url_for(:controller=> object.class.to_s.downcase.pluralize, :action=> :show, 
-                                                                                  :id=> object.id, :only_path => false))) if object.respond_to? :text 
+                                                                                  :id=> object.id, :only_path => false))) if object.respond_to? :text
+      
       #notification_text=notification_text.gsub(/\%\{object.image\}/,thumb_for(object)) if SocialStream.activity_forms.include? :document and object.is_a? Document
       
     else
