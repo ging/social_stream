@@ -104,4 +104,8 @@ module SocialStream
   end
 end
 
+module Mailboxer
+  autoload :NotificationDecoder,   'mailboxer/notification_decoder'
+end
+
 require 'social_stream/base'
