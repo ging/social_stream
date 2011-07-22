@@ -5,7 +5,7 @@
   </div>
   <div class="sub-block">
     <div class="name">
-      <%= link_to(contact.receiver_subject.name, contact.receiver_subject, :class => "contact_link") %>
+      <%= link_to(truncate_name(contact.receiver_subject.name), contact.receiver_subject, :class => "contact_link") %>
     </div>
     <div class="brief">
       <%= contact_brief(contact.receiver_subject) %>
