@@ -12,7 +12,8 @@ class User < ActiveRecord::Base
   validates_presence_of :email
 
   validates_format_of :email, :with => Devise.email_regexp, :allow_blank => true
-  # TODO: uniqueness of email, which is in actor
+
+  validate :email_must_be_uniq
   
   with_options :if => :password_required? do |v|
     v.validates_presence_of     :password
@@ -45,9 +46,11 @@ class User < ActiveRecord::Base
     !persisted? || !password.nil? || !password_confirmation.nil?
   end
 
-     def find_first(options)
-      raise options.inspect
-    end
+  private
+
+  def email_must_be_uniq
+    errors.add(:email, "is already taken") if User.find_by_email(email).present?
+  end
   
   class << self
     %w( email slug name ).each do |a|
