@@ -1,16 +1,10 @@
 class CommonDocumentsController < InheritedResources::Base
   belongs_to_subjects :optional => true
 
-  load_and_authorize_resource
+  before_filter :subject!, :only => :index
 
-  def index
-    @activities = subject.wall(:profile,
-                               :for => current_subject,
-                               :object_type => Array(self.class.index_object_type)).
-                          page(params[:page]).
-                          per(params[:per])
-  end
- 
+  load_and_authorize_resource :except => :index
+
   def show
     path = resource.file.path(params[:style])
 
@@ -33,7 +27,19 @@ class CommonDocumentsController < InheritedResources::Base
   private
 
   def subject
-    @subject ||= parent || current_subject
+    @subject ||= association_chain[-1] || current_subject
+  end
+
+  def subject!
+    @subject ||= association_chain[-1] || warden.authenticate!(:user)
+  end
+
+  def collection
+    @activities = subject.wall(:profile,
+                               :for => current_subject,
+                               :object_type => Array(self.class.index_object_type)).
+                          page(params[:page]).
+                          per(params[:per])
   end
 
   class << self
