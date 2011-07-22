@@ -22,7 +22,8 @@
 	display: inline-block;	color: #000;	width: 100%;  font-size: 13px;  color: #2A3890;}
 .actor_logo {	width: 38px;	padding: 8px 0px 5px 5px;	display: inline-block;	vertical-align: top;}
 .activity_content {	padding: 8px 0px 0px 0px;	display: inline-block;	color: #000;	width: 90%;}
-.actor_name {	font-weight: bold;	color: #2A3890;  font-size: 13px;}
+.actor_name {font-size: 13px;}
+.actor_name a{font-weight: bold;}
 .post a {	color: #2A3890;}
 
 /***************** ACTIVITY OPTIONS ***/
