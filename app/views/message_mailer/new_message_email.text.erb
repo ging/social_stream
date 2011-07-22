@@ -1,4 +1,5 @@
-<%= @message.sender.name%> has sent you a new message: <%= @message.subject.html_safe? ? @message.subject : strip_tags(@message.subject) %>
+<% self.class.send :include, SubjectsHelper %>
+<%=truncate_name(@message.sender.name)%> has sent a new message to <%= @receiver.subject.is_a?(Group) ? @receiver.name : "you" %>
 
 -----------------------------------------------
 <%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>

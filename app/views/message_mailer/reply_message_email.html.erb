@@ -1,3 +1,4 @@
+<% self.class.send :include, SubjectsHelper %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,8 +7,8 @@
   <body>
     <div>
       <div style="padding: 10px 5px 5px 5px;">
-        <span style="font-weight: bold;"><%= @message.sender.name%></span> 
-        has sent a reply: <%= @message.subject.html_safe? ? @message.subject : strip_tags(@message.subject) %>
+        <span style="font-weight: bold;"><%= truncate_name(@message.sender.name)%></span> 
+        has sent a reply to <%= @receiver.subject.is_a?(Group) ? @receiver.name : "you" %>
       </div>
       <div style="position: static;padding: 5px; border: #2A3890 solid 2px; background-color: #E1EEF5; margin:10px; min-height: 125px; width: 500px;">
         <div style="float:left; margin-right:7px; border: thin solid #D4E4EA; background-color: white; max-height: 119px;">
@@ -19,7 +20,7 @@
               <br/><span style="color: #6C6D6F; font-weight: normal;"><%= @message.sender.profile.organization%></span>
             <% end %>
           </p>       
-          <p>
+          <p style="text-align: justify; font-style: italic;">
             <%= raw @message.body %>
           </p>
         </div>
