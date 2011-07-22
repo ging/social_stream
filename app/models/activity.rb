@@ -16,8 +16,11 @@ class Activity < ActiveRecord::Base
 
   paginates_per 10
 
-  belongs_to :contact
   belongs_to :activity_verb
+
+  belongs_to :contact
+  has_one :sender,   :through => :contact
+  has_one :receiver, :through => :contact
 
   has_many :audiences, :dependent => :destroy
   has_many :relations, :through => :audiences
