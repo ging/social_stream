@@ -42,9 +42,9 @@ module SocialStream
         :url => "#",
         :options => {:link => {:id => "contacts_menu"}},
         :items => [
-          {:key => :invitations, :name => image_tag("btn/btn_friend.png")+t('contact.addressbook'), :url => contacts_path},
-          {:key => :invitations, :name => image_tag("btn/btn_invitation.png")+t('invitation.toolbar'), :url => new_invitation_path},
-          {:key => :invitations, :name => image_tag("btn/btn_friend.png")+t('contact.pending.other'), :url => contacts_path(:pending=>true)}
+          {:key => :invitations, :name => image_tag("btn/btn_friend.png")+t('contact.current'), :url => contacts_path},
+          {:key => :invitations, :name => image_tag("btn/btn_friend.png")+t('contact.pending.other'), :url => contacts_path(:pending=>true)},
+          {:key => :invitations, :name => image_tag("btn/btn_invitation.png")+t('invitation.toolbar'), :url => new_invitation_path}
         ]}
 
       #Subjects

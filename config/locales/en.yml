@@ -76,7 +76,7 @@ en:
     confirm_delete: "Delete comment?"
   contact:
     all_n: "All contacts (%{count})"
-    addressbook: "Addressbook"
+    current: "Current"
     edit:
       title: "Edit contact to %{name}"
       submit: "Edit Contact"
@@ -88,7 +88,7 @@ en:
     one: "Contact"
     other: "Contacts"
     pending:
-      other: "Pending requests"
+      other: "Pending"
       all: "All"
       all_n: "See all pending requests (%{count})"
     relation:
