@@ -19,3 +19,8 @@ Factory.define :like_activity, :parent => :activity do |a|
   a.activity_verb { ActivityVerb["like"] }
   a.relation_ids { |b| Array(b.parent.contact.ties.first.relation.id) }
 end
+
+
+Factory.define :fan_activity, :parent => :public_activity do |a|
+  a.activity_objects { |b| Array(b.receiver.activity_object) }
+end

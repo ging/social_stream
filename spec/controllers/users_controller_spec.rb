@@ -16,6 +16,18 @@ describe UsersController do
       assert_response :success
     end
 
+    context "with fans" do
+      before do
+        @user = Factory(:fan_activity).receiver_subject
+      end
+
+      it "should render show" do
+        get :show, :id => @user.to_param
+
+        response.should be_success
+      end
+    end
+
     it "should render show with public activity" do
       activity = Factory(:public_activity)
 
@@ -81,7 +93,6 @@ describe UsersController do
         assert true
       end
     end
-
   end
 end
 

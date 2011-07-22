@@ -24,6 +24,7 @@
 .content_size {font-size: 13px;}
 .space_center_border {	padding-top: 8px;	padding-right: 4px;	border-bottom: thin solid #D4E4EA;}
 .title_bold{font-size:14px; font-weight:bold;}
+
 /********GROUPS HOME************/
 .browse_letter{	text-align:center;}
 .btn_group{  vertical-align:top;}
@@ -36,7 +37,12 @@
 #my_groups {	width: 100%;}
 
 
+/********SUBJECTS HOME************/
 
+.btn_subject{  vertical-align:top;}
+.user .logo, .group .logo{  display:block;  text-align:center;}
+.user .title a, .group .title a{  display:block;  font-size:9px;  text-decoration:none;  text-align:center;}
+.user .title a:hover, .group .title a:hover{  display:block;  text-decoration:underline;}
 
 
 

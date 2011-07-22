@@ -254,6 +254,7 @@ class Activity < ActiveRecord::Base
     subject.present? &&
     direct_object.present? &&
       ! direct_object.is_a?(Actor) &&
+      ! direct_object.class.ancestors.include?(SocialStream::Models::Subject) &&
       allow?(subject, 'destroy')
   end
 
