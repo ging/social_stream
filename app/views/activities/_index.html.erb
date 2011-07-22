@@ -8,8 +8,7 @@
     <%= render :partial => 'activities/new', :locals => { :receiver => owner } %>
   </div>
 
-  <div id="wall">
-    <%= render activities  %>
-    <%= paginate activities %>
-  </div>
+  <%= render :partial => 'activities/wall',
+             :locals  => { :activities => activities } %>
+
 </div>
