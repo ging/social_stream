@@ -28,6 +28,8 @@ class Actor < ActiveRecord::Base
   has_many :avatars,
            :validate => true,
            :autosave => true
+  has_one  :avatar,
+           :conditions => { :active => true }
   		  
   has_many :sent_contacts,
            :class_name  => 'Contact',
@@ -373,7 +375,7 @@ class Actor < ActiveRecord::Base
   end
 
   def avatar!
-    avatars.active.first || avatars.build
+    avatar || avatars.build
   end
   
   # The 'like' qualifications emmited to this actor
