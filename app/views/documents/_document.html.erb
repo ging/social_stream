@@ -5,7 +5,7 @@
 <%= div_for document, :class => 'content_size' do %>
 
   <div class="attachment_thumb">
-    <%= link_to thumb_for(document),
+    <%= link_to thumb_for(document, 16),
         {:controller => "documents", :action => "download", :id => document}, 
         :class => "" %>
   </div>

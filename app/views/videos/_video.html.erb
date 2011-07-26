@@ -1,7 +1,7 @@
 <%= div_for video, :class => 'content_size' do %>
 
   <div class="attachment_thumb">
-    <%= link_to thumb_for(video),
+    <%= link_to thumb_for(video, 16),
         {:controller => "documents", :action => "download", :id => video}, 
         :class => "" %>
   </div>

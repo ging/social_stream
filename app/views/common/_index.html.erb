@@ -27,7 +27,7 @@
 	<% document = a.activity_objects.first.document %>
 	<div class="attachment_tile">
 		<div class="attachment_tile_thumb">
-    		<%= link_to big_thumb_for(document), 
+    		<%= link_to thumb_for(document,48), 
                 {:controller => "documents", :action => "download", :id => document}, 
  				:type => document.type, 
 				:title => document.file_file_name,

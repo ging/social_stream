@@ -1,7 +1,7 @@
 <%= div_for audio, :class => 'content_size' do %>
 
   <div class="attachment_thumb">
-    <%= link_to thumb_for(audio),
+    <%= link_to thumb_for(audio, 16),
         {:controller => "documents", :action => "download", :id => audio}, 
         :class => "" %>
   </div>

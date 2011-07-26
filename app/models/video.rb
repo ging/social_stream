@@ -15,12 +15,11 @@ class Video < Document
      
                       
   # Thumbnail file
-  def thumb helper    
-      "formats/video.png"
-  end
-  
-  # Thumbnail file
-  def big_thumb helper    
-      "formats_big/video.png"
+  def thumb(size, helper)
+    if format && IMAGE_FORMATS.include?(format.to_s)
+      "#{ size.to_s }/video.png"
+    else
+      "#{ size.to_s }/video.png"
+    end
   end
 end

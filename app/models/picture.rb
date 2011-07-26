@@ -5,13 +5,15 @@ class Picture < Document
                     :styles => {:thumb  => ["48x48#"],
                                 :thumb0 => ["130x80#"]
                                }                                  
-  def thumb helper
-    "formats/photo.png"
+  # Thumbnail file
+  def thumb(size, helper)
+    case size
+      when 16
+        "#{ size.to_s }/photo.png"
+      when 48
+        helper.picture_path self, :format => format, :style => 'thumb'    
+    end
   end
-  
-  def big_thumb helper
-    helper.picture_path self, :format => format, :style => 'thumb'
-  end
-  
+    
   
 end

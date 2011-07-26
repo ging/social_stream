@@ -45,21 +45,12 @@ class Document < ActiveRecord::Base
   end
 
   # Thumbnail file
-  def thumb helper
+  def thumb(size, helper)
     if format && IMAGE_FORMATS.include?(format.to_s)
-      "formats/#{ format }.png"
+      "#{ size.to_s }/#{ format }.png"
     else
-      "formats/default.png"
+      "#{ size.to_s }/default.png"
     end
   end
-  
-  # Thumbnail file
-  def big_thumb helper
-    if format && IMAGE_FORMATS.include?(format.to_s)
-      "formats_big/#{ format }.png"
-    else
-      "formats_big/default.png"
-    end
-  end
-  
+    
 end
