@@ -1,14 +1,4 @@
 <% if can? :create, new_activity(receiver) %>
-  <% content_for :javascript do %>
-
-    securityImage = "<%= escape_javascript(image_tag('btn/btn_security.png', :id => 'security_image', :alt => 'security')) %>";
-    downImage = "<%= escape_javascript(image_tag('btn/btn_down.png')) %>";
-
-	$("#security").dropdownchecklist( { closeRadioOnClick: true, forceMultiple: false } );
-    $("#security_image").parent().width(28);
-    $("#security_image").parent().parent().width(28);
-  <% end %>
-
 <div id="activities_header" class="content_size">
   <% SocialStream.activity_forms.each do |element| %>
     <%= render :partial => element.to_s.pluralize+'/new',
@@ -26,11 +16,11 @@
   <% end %> 	
 </div>
 
-<div id="activities_share_btn">
 <% if current_subject == receiver %>
-  <div id="securities"><%= select_tag :_relation_ids, options_for_select(current_subject.activity_relations(receiver).sort.map{ |r| [ r.name, r.id ] }), :id => 'security', :multiple => nil %></div>
+  <div id="securities"><%= select_tag :_relation_ids, options_for_select(current_subject.activity_relations(receiver).sort.map{ |r| [ r.name, r.id ] }), :id => 'security', :multiple => true, :title => t('activity.new.security.title') %></div>
 <% end %>
 
+<div id="activities_share_btn">
   <%= submit_tag(t('share'), :class => "myButtonBlue", :id => "masterSubmitButton") %>
 </div>
 <% end %>

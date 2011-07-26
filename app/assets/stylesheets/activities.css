@@ -1,5 +1,6 @@
 /*
  *= require jquery-ui
+ *= require chosen
  */
 
 
@@ -15,7 +16,7 @@
 #input_activities {	border-color: #0656a4; color: #2A3890;	padding: 5px 5px 5px 5px;
   border:1px solid #BDC7D8; width:95%;}
 #activities_share_btn {	text-align: right;	padding: 5px 16px 0px 10px;	vertical-align: middle;}
-#securities{  display:inline-block;  text-align:left;}
+#securities{  display:inline-block;  text-align:left; float: left;}
 
 /******************* WALL - ACTIVITY ***************/
 .activity {	text-align:left;	display: block;	vertical-align: top;	padding: 2px 0px 0px 0px;
@@ -69,10 +70,7 @@
 
 
 /*********** DROP DOWN**********/
-/** Simple modifications needed for DropDownCheckList to take advantage of ThemeRoller settings */
-.ui-dropdownchecklist .ui-widget-content,.ui-dropdownchecklist-selector .ui-state-default {	border: none;  vertical-align:middle;}
-.ui-dropdownchecklist-selector-wrapper {	vertical-align: middle;}
-.ui-dropdownchecklist-selector {}
-.ui-dropdownchecklist-group {}
-.ui-dropdownchecklist-text{ padding:3px 3px 0px;}
-
+#security_chzn .chzn-choices {
+	padding-left: 20px;
+	background: url('btn/btn_security.png') no-repeat 10px center;
+}

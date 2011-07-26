@@ -3,5 +3,3 @@ $("#input_activities").val("<%= t('activity.input') %>");
 //Display the new post
 $("#wall").prepend("<%= escape_javascript(render @post.post_activity) %>");
 
-// TEMPORARY FIX
-//$("#activities_share_btn").hide();
