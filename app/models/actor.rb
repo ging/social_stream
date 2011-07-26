@@ -317,7 +317,7 @@ class Actor < ActiveRecord::Base
 
   # Build a new {Contact} from each that has not inverse
   def pending_contacts
-    received_contacts.not_reflexive.pending.includes(:inverse).all.map do |c|
+    received_contacts.pending.includes(:inverse).all.map do |c|
       c.inverse ||
         c.receiver.contact_to!(c.sender)
     end

@@ -24,4 +24,14 @@ describe Contact do
     end
   end
 
+  context "spurious" do
+    before do
+      @contact = Factory(:contact)
+      @contact.inverse!
+    end
+
+    it "should not appear as pending" do
+      @contact.sender.pending_contacts.should_not include(@contact)
+    end
+  end
 end
