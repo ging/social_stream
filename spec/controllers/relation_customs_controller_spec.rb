@@ -72,7 +72,7 @@ describe Relation::CustomsController do
         actor = Factory(:user).actor
         count = Relation.count
 	begin
-          post :create, :custom => Factory.attributes_for(:relation_custom, :actor => actor)
+          post :create, :custom => { :name => 'Test', :actor_id => actor.id }
 
           assert false
         rescue CanCan::AccessDenied
