@@ -6,7 +6,7 @@ module NotificationsHelper
     notification_text = notification_text.gsub(/\%\{sender\}/, link_to(truncate_name(activity.sender.name), 
                                                                       url_for(:controller=> activity.sender.subject.class.to_s.downcase.pluralize, 
                                                                               :action=> :show, :id=> activity.sender.subject.slug, :only_path => false)))   
-    notification_text = notification_text.gsub(/\%\{confirm\}/,link_to(t('notification.confirm'),edit_contact_url(activity.receiver.contact_to!(activity.sender))))
+    notification_text = notification_text.gsub(/\%\{confirm\}/,link_to(t('notification.confirm'),edit_contact_url(activity.receiver.contact_to!(activity.sender), :s => activity.sender.slug)))
     notification_text = notification_text.gsub(/\%\{look\}/,link_to(t('notification.look'),
                                                                       url_for(:controller=> activity.sender.subject.class.to_s.downcase.pluralize, 
                                                                               :action=> :show, :id=> activity.sender.subject.slug, :only_path => false)))
