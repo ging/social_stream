@@ -81,5 +81,13 @@ describe User do
   it "should have activity object" do
     Factory(:user).activity_object.should be_present
   end
+
+  it "should update password" do
+    user = Factory(:user)
+    user.password = "testing"
+    user.password_confirmation = "testing"
+
+    assert user.save
+  end
 end
 

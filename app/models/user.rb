@@ -49,7 +49,10 @@ class User < ActiveRecord::Base
   private
 
   def email_must_be_uniq
-    errors.add(:email, "is already taken") if User.find_by_email(email).present?
+    user = User.find_by_email(email)
+    if user.present? && user.id =! self.id
+      errors.add(:email, "is already taken")
+    end
   end
   
   class << self
