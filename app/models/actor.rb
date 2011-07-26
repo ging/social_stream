@@ -137,17 +137,33 @@ class Actor < ActiveRecord::Base
     end
   end
   
-  # Returns the email used for Mailboxer
-  def mailboxer_email    
-    return email if email.present?
+  #Returning the email address of the model if an email should be sent for this object (Message or Notification).
+  #If the actor is a Group and has no email address, an array with the email of the highest rank members will be
+  #returned isntead.
+  #
+  #If no mail has to be sent, return nil.
+  def mailboxer_email(object)
+    #If actor has disabled the emails, return nil.
+    return nil if !notify_by_email
+    #If actor has enabled the emails and has email
+    return "#{name} <#{email}>" if email.present?
+    #If actor is a Group, has enabled emails but no mail we return the highest_rank ones.
     if (group = self.subject).is_a? Group
       relation = group.relation_customs.sort.first
       receivers = group.contact_actors(:direction => :sent, :relations => relation)
       emails = Array.new
       receivers.each do |receiver|
-        emails << receiver.email
+        receiver_emails = receiver.mailboxer_email(object)
+        case receiver_emails
+        when String
+          emails << receiver_emails
+        when Array
+          receveir_emails.each do |receveir_email|
+            emails << receiver_email
+          end
+        end
       end
-      return emails
+    return emails
     end
   end
   
@@ -404,12 +420,6 @@ class Actor < ActiveRecord::Base
     a             
   end
   
-  #Returning whether an email should be sent for this object (Message or Notification).
-  #Required by Mailboxer gem.
-  def should_email?(object)
-    return notify_by_email
-  end
-
   # Use slug as parameter
   def to_param
     slug
