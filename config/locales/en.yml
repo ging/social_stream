@@ -41,6 +41,9 @@ en:
         Group:
           title: "%{subject} added %{contact} as contact."
           message: "%{name} added you as contact."           
+      post:
+        title:
+          other_wall: "%{sender} → %{receiver}"
   avatar:
     crop_image: "Crop the uploaded image"
     crop_submit: "Crop image"

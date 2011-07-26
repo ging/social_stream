@@ -187,7 +187,13 @@ class Activity < ActiveRecord::Base
       :subject => view.link_name(sender_subject),
       :contact => view.link_name(receiver_subject)
     when "post"
-      view.link_name sender_subject
+      if sender == receiver
+        view.link_name sender_subject
+      else
+        I18n.t "activity.verb.post.title.other_wall",
+               :sender => view.link_name(sender_subject),
+               :receiver => view.link_name(receiver_subject)
+      end
     end.html_safe
   end
 
