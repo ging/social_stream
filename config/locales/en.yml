@@ -286,7 +286,7 @@ en:
         represent:
           nil: "Represent me/us in the website"
     of_relation:
-      choose: "2. Permissions in <strong>%{name}</strong> level"
+      choose: "2. Permissions in <strong>%{name}</strong> sphere"
   privacy:
     intro: "Contacts at <strong>%{relation}</strong> level are only allowed to:"
     rule:
