@@ -41,6 +41,12 @@ $(function() {
       $("#masterSubmitButton").show();
     }
   });
+  event_input = "<%= I18n.t('event.input') %>";
+  $("#event_name").click(function(){
+    if(this.value == event_input){
+      this.value = "";
+    }
+  });
 });
 
 

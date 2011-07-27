@@ -46,7 +46,7 @@ label.validation_error{color: #D8000C;background-color: #FFBABA;border: 1px soli
 /************Forms SECTION **************/
 input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:1.0em;  line-height:135%;
   margin-right:4px;	color:white;	padding:1px;}
-textarea.new_contact_text_area{ width:100%; height: 100px; color: #2A3890;}
+textarea.new_contact_text_area{ height: 100px; color: #2A3890;}
 .colum_field_title{ text-align: center; }
 .needed{color:#D8000C;font-weight: normal;}
 .select_relations select{ font-size: 12px; color: white; background-color:#1F4A75;} 
