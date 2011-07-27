@@ -14,7 +14,7 @@
 #sponsor{background-color:#fff}
 #toolbar {	width: 160px;	border-color: #000;	vertical-align: top;	display: table-cell;padding: 5px 5px 5px 5px;}
 #toolbarContent{}
-#wrapper_body{}
+#wrapper_body{ background-color: #ffffff; }
 #content_logo{/*width: 779px*/}
 
 
