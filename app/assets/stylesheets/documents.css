@@ -144,6 +144,42 @@
 
 }
 
-.jp-audio {
+.jp-audio, .jp-video {
 	margin: 5px 0 5px 0;
 }
+
+.hidenJplayer {
+	height: 0px;
+	width: 0px;
+}
+
+.video_thumbnail_class {
+	width: 180px;
+	height: 135px;
+}
+
+.video_thumbnail_image{
+	position: relative;
+	top:0px;
+	width: 180px;
+	z-index:1;
+}
+
+.video_thumbnail_play_over {
+	background: transparent url("jplayer.blue.monday.video.play.png") no-repeat center;
+	/* position: relative; */
+	position: relative;
+	cursor:pointer;
+	z-index:2;
+}
+
+.video_thumbnail_play_over:hover {
+	background: transparent url("jplayer.blue.monday.video.play.hover.png") no-repeat center;
+}
+
+.video_thumbnail_play_over {
+	top:-135px;
+	width:180px;
+	height:135px;
+}
+
