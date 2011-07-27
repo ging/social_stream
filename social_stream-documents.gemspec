@@ -13,7 +13,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('paperclip-ffmpeg', '~> 0.7.0')
   s.add_runtime_dependency('paperclip','2.3.11')
   # Development Gem dependencies
-  s.add_development_dependency('rails', '3.1.0.rc4')
   s.add_development_dependency('sqlite3-ruby')
   if RUBY_VERSION < '1.9'
     s.add_development_dependency('ruby-debug', '~> 0.10.3')
