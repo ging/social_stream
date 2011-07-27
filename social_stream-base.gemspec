@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   # OAuth provider
   s.add_runtime_dependency('oauth-plugin','~> 0.4.0.pre1')	
   # Messages
-  s.add_runtime_dependency('mailboxer','~> 0.4.3')
+  s.add_runtime_dependency('mailboxer','~> 0.5.0')
   # Avatar manipulation
   s.add_runtime_dependency('rmagick','~> 2.13.1')
   # Tagging

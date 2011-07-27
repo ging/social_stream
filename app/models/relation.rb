@@ -32,6 +32,9 @@ class Relation < ActiveRecord::Base
   has_many :ties, :dependent => :destroy
   has_many :contacts, :through => :ties
 
+  has_many :audiences, :dependent => :destroy
+  has_many :activities, :through => :audiences
+
   scope :mode, lambda { |st, rt|
     where(:sender_type => st, :receiver_type => rt)
   }

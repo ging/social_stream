@@ -160,7 +160,7 @@ class Activity < ActiveRecord::Base
   def new_like(subject)
     a = children.new :verb => "like",
                      :contact => subject.contact_to!(receiver),
-                     :relation_ids => subject.comment_relations(self).map(&:id)
+                     :relation_ids => self.relation_ids
 
     if direct_activity_object.present?
       a.activity_objects << direct_activity_object
@@ -267,16 +267,30 @@ class Activity < ActiveRecord::Base
       allow?(subject, 'destroy')
   end
 
+  # The {Relation} with which activity is shared
+  def audience_in_words(subject)
+    visible_relations =
+      relations.select{ |r| r.actor_id == Actor.normalize_id(subject) || r.is_a?(Relation::Public) }
+
+    visible_relations.present? ?
+      I18n.t('activity.audience.visible', :audience => visible_relations.map(&:name).join(", ")) :
+      I18n.t('activity.audience.hidden', :audience => relations.map(&:actor).map(&:name).join(", "))
+  end
+
   private
 
   # Before validation callback
   #
   # Fill the relations when posting to other subject's wall
   def fill_relations
-    return if contact.reflexive? || relations.present?
+    return if relation_ids.present?
 
-    self.relations =
-      contact.receiver.relation_customs.allow(contact.sender, 'create', 'activity')
+    self.relation_ids =
+      if contact.reflexive?
+        Array(receiver.relation_public.id)
+      else
+        receiver.relation_customs.allow(contact.sender, 'create', 'activity').map(&:id)
+      end
   end
 
   #Send notifications to actors based on proximity, interest and permissions

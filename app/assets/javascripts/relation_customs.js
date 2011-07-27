@@ -34,6 +34,7 @@ function checkBoxEnable(id) {
 		};
 
 		$(':checkbox[id^="relation_custom"]:checked:not(#' + id + ')').checkBox('changeCheckStatus', false);
+		$('div[contain$='+id+'] div.options').show();
 
 		$.ajax({
 			url: "../permissions",
@@ -67,6 +68,8 @@ function checkBoxDisable(id) {
 
 	        $("#permissions").html("");
 		$("#permissions").hide();
+
+		$('div[contain$='+id+'] div.options').hide();
 
                 break;
 

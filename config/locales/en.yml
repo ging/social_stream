@@ -9,14 +9,14 @@ en:
     one: "Account"
     privacy: "Privacy"
   activity:
+    audience:
+      visible: "Shared with %{audience}"
+      hidden: "Shared with spheres of %{audience}"
     confirm_delete: "Delete activity?"
     delete: "Delete"
     input: "What are you doing?"
     last: "Last Activities"
     like: "I like"
-    new:
-      security:
-        title: "Share with..."
     one: "Activity"
     other: "Activities"
     title: "Activities"
@@ -163,6 +163,7 @@ en:
     submit:
       relation_custom:
         create: "Save"
+        update: "Update"
   home: "Home"
   inbox:
     one: "Inbox"
@@ -297,9 +298,12 @@ en:
     one: "Product"
     other: "Products"
   relation_custom:
-    title: "Privacy & context"
     choose: "1. Choose sphere"
+    confirm_delete: "Delete this sphere?"
+    delete: "Delete"
+    edit: "Change name"
     new: "+ New sphere"
+    title: "Privacy & context"
   relation_public:
     name: "Public"
   required: "* These fields are required"
