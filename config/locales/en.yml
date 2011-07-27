@@ -9,14 +9,14 @@ en:
     one: "Account"
     privacy: "Privacy"
   activity:
+    audience:
+      visible: "Shared with %{audience}"
+      hidden: "Shared with spheres of %{audience}"
     confirm_delete: "Delete activity?"
     delete: "Delete"
     input: "What are you doing?"
     last: "Last Activities"
     like: "I like"
-    new:
-      security:
-        title: "Share with..."
     one: "Activity"
     other: "Activities"
     title: "Activities"

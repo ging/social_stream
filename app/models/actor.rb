@@ -298,7 +298,7 @@ class Actor < ActiveRecord::Base
   #
   #
   def activity_relations(subject, options = {})
-    return relations if Actor.normalize(subject) == self
+    return relation_customs if Actor.normalize(subject) == self
 
     Array.new
   end
