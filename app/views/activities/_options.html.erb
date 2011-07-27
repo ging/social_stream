@@ -1,6 +1,8 @@
 <div class="activity_options">
   <ul class="activity_options" >
+    <% if user_signed_in? %>
     <li><div class="security"><%= image_tag('btn/btn_security.png', :title => activity.audience_in_words(current_subject)) %></div></li>
+    <% end %>
     <li><div class="post_time_ago"><%= t('time.ago', :time => time_ago_in_words(activity.created_at)) %></div></li>
     <% if activity.is_root? && user_signed_in? %>
     <li><div class="verb_comment"> · <%= link_to t('activity.to_comment'), "#", :class => "to_comment" %> </div></li>
