@@ -3,10 +3,13 @@
   $("#jpId<%=video.id%>").jPlayer( {
     ready: function () {
       $(this).jPlayer("setMedia", {
-        webmv: "http://localhost:3000/original.webm" // Defines the webm url
+        webmv: "<%= video_path(video)+"?style=webm" %>", // Defines the webm url
+		flv: "<%= video_path(video)+"?style=flv" %>"
       });
     },
-	supplied: "webmv",
+	solution:"flash, html",
+	preload: "none",
+	supplied: "webmv, flv",
 	swfPath: "assets",
 	cssSelectorAncestor: "#jp_interface_<%=video.id%>"
   });
@@ -29,7 +32,7 @@
     :class => "attachment_text_link" %>
 
   <div id="video_thumbnail_<%=video.id%>" class="video_thumbnail_class">
-    <%=image_tag("http://localhost:3000/original.png", :class => "video_thumbnail_image")%>
+    <%=image_tag(video_path(video)+"?style=png", :class => "video_thumbnail_image")%>
 	<div id="<%=video.id%>" class="video_thumbnail_play_over"></div>
   </div>
 
