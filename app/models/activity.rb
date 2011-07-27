@@ -160,7 +160,7 @@ class Activity < ActiveRecord::Base
   def new_like(subject)
     a = children.new :verb => "like",
                      :contact => subject.contact_to!(receiver),
-                     :relation_ids => subject.comment_relations(self).map(&:id)
+                     :relation_ids => self.relation_ids
 
     if direct_activity_object.present?
       a.activity_objects << direct_activity_object
