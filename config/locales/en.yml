@@ -298,10 +298,12 @@ en:
     one: "Product"
     other: "Products"
   relation_custom:
-    title: "Privacy & context"
     choose: "1. Choose sphere"
-    new: "+ New sphere"
+    confirm_delete: "Delete this sphere?"
+    delete: "Delete"
     edit: "Change name"
+    new: "+ New sphere"
+    title: "Privacy & context"
   relation_public:
     name: "Public"
   required: "* These fields are required"
