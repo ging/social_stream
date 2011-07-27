@@ -9,7 +9,7 @@
   <div class="attachment_text">
   	<%= t('video.msg') %><%= link_to "\""+video.file_file_name+"\"", 
     {:controller => "documents", :action => "download", :id => video},  
-    :class => "" %>
+    :class => "attachment_text_link" %>
 
 	<video src="<%= video_path(video)+"?style=webm" %>" controls="controls">
 		Your browser does not support the video element.

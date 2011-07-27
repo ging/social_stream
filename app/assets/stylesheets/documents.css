@@ -3,7 +3,7 @@
 	padding-top: 10px;
 }
 
-.attachment_text
+.attachment_content
 {
 	position: relative;
 	width: 90%;
@@ -11,10 +11,17 @@
 	line-height: 20px;
 	height: auto;
 	float:left;
+	font-size:13px;	
+}
+
+.attachment_text
+{
+	line-height: 20px;
+	height: auto;
 	font-size:13px;
 }
 
-.attachment_text a
+.attachment_text_link
 {
 	color: #2A3890;
 	padding-left: 10px;
@@ -130,4 +137,13 @@
 
 .size_19px {
 	width: 19px;
+}
+
+
+#jpId {
+
+}
+
+.jp-audio {
+	margin: 5px 0 5px 0;
 }
