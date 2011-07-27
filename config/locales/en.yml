@@ -163,6 +163,7 @@ en:
     submit:
       relation_custom:
         create: "Save"
+        update: "Update"
   home: "Home"
   inbox:
     one: "Inbox"
@@ -300,6 +301,7 @@ en:
     title: "Privacy & context"
     choose: "1. Choose sphere"
     new: "+ New sphere"
+    edit: "Change name"
   relation_public:
     name: "Public"
   required: "* These fields are required"

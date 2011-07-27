@@ -19,7 +19,8 @@ span.ui-helper-hidden {
 	display: block;
 	font-family: sans-serif;
 	padding: 2px;
-	margin-left: 20px;
+	margin-left: 10px;
+	float: left;
 }
 
 #relation_customs label.ui-checkbox, #permissions label.ui-checkbox {
@@ -46,10 +47,40 @@ span.ui-radio-state-checked-hover {
 	background-position: 0 -200px;
 }
 
+#relation_customs input {
+	float: left;
+}
+
+#relation_customs span {
+	float: left;
+}
+
 form {
 	overflow: hidden;
 	height: 1%;
 	margin: 0px 0;
+}
+
+#relation_customs .options {
+	float: right;
+	display: none;
+}
+
+#relation_customs .button {
+	margin-left: 0;
+}
+
+#cancel_new_relation_custom {
+	margin-right: 10px;
+}
+
+.relation_custom_name_form {
+	display: none;
+}
+
+.cancel_edit_relation_custom {
+	margin-right: 10px;
+	float: right;
 }
 
 .ui-helper-hidden-accessible {
@@ -78,10 +109,14 @@ form {
 	padding: 15px 20px 15px 20px;
 }
 
-.privacy_add_element{
+#new_relation {
 	text-align: right;
 	padding: 5px 0px 5px 0px;
-	margin: 0px 10px 15px 0px;
+	margin: 0px 10px 15px 30px;
+}
+
+#new_relation_custom_input_block {
+	display: none;
 }
 
 input.privacy_input_new{
@@ -133,34 +168,6 @@ span.privacy_span_new {
 .selectNew{
 	padding: 0px 0px 0px 0px;
 	margin: 0px 0px 0px 0px;
-}
-
-#slider-range{
-  height:120px;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #1f4a75;
-}
-
-.slider-div{
-	float: right;
-	margin-right: 5px;
-}
-
-.slider-header, .slider-footer{
-	text-align: center;
-	border: 0; 
-	color: #1f4a75; 
-	font-weight: bold;
-	width: 100%;
-}
-
-.slider-header {
-	margin-bottom: 10px;
-}
-
-.slider-footer {
-	margin-top: 10px;
 }
 
 .privacy_block_section{
