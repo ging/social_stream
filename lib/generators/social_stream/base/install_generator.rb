@@ -56,6 +56,7 @@ class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
   def create_migration_file
     require 'rake'
     Rails.application.load_tasks
+    Rake::Task['railties:install:migrations'].reenable
     Rake::Task['social_stream_base_engine:install:migrations'].invoke
   end
 end
