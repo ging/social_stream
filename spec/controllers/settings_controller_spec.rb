@@ -1,10 +1,14 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-
-
 describe SettingsController do
   include SocialStream::TestHelpers
   render_views
+
+  before do
+    @user = Factory(:user)
+    @actor = @user.actor
+    sign_in @user
+  end
 
   it "should render index" do
     get :index
@@ -16,28 +20,22 @@ describe SettingsController do
     response.should redirect_to settings_path
   end
 
-describe "Notification settings" do
-    before do
-      @user = Factory(:user)
-      @actor = @user.actor
-      sign_in @user
-    end
-
+  describe "Notification settings" do
     it "update notification email settings to Never" do
-      @actor.update_attribute(:notify_by_email, true)
-      assert @actor.notify_by_email.should
+      @actor.update_attributes(:notify_by_email => true)
+      @actor.notify_by_email.should==true
       put :update_all, :settings_section => "notifications", :notify_by_email => "never"
-      response.should redirect_to settings_path
-      assert ! @actor.notify_by_email.should
+      @actor.reload
+      @actor.notify_by_email.should==false
 
     end
 
     it "update notification email settings to Always" do
-      @actor.update_attribute(:notify_by_email, false)
-      assert ! @actor.notify_by_email.should
+      @actor.update_attributes(:notify_by_email => false)
+      @actor.notify_by_email.should==false
       put :update_all, :settings_section => "notifications", :notify_by_email => "always"
-      response.should redirect_to settings_path
-      assert @actor.notify_by_email.should
+      @actor.reload
+      @actor.notify_by_email.should==true
     end
   end
 end
