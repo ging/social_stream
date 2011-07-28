@@ -11,3 +11,4 @@ Gemfile.lock
 .idea/social_stream-documents.iml
 app/views/*/.tmp_*
 **.*swp
+.idea
