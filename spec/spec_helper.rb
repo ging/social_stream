@@ -23,8 +23,12 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 # Load Factories
 require 'factory_girl'
-Dir["#{File.dirname(__FILE__)}/factories/*.rb"].each {|f| require f}
+base_path = File.join(Gem::GemPathSearcher.new.find('social_stream-base').full_gem_path, 'spec')
+[ base_path,  File.dirname(__FILE__) ].each do |path|
+  Dir["#{path}/factories/*.rb"].each {|f| require f}
+end
 
+=begin
 RSpec.configure do |config|
   # Remove this line if you don't want RSpec's should and should_not
   # methods or matchers
@@ -34,3 +38,4 @@ RSpec.configure do |config|
   # == Mock Framework
   config.mock_with :rspec
 end
+=end

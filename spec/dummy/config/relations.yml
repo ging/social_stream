@@ -1,0 +1,39 @@
+# Default relations for Social Stream
+#
+# Define the default relations and permissions supported by your application
+# Though subjects can customize their own relations, these are the defaults
+# to start up 
+#
+# Detailed information on permissions is available at:
+# http://rdoc.info/gems/social_stream/Permission
+#
+user:
+  friend:
+    name: friend
+    permissions:
+      - [ follow ]
+      - [ create,  activity ]
+      - [ read,    activity ]
+  acquaintance:
+    name: acquaintance
+    permissions:
+      - [ read,    activity ]
+  colleague:
+    name: colleague
+    permissions:
+      - [ follow ]
+      - [ create,  activity ]
+      - [ read, activity ]
+
+group:
+  member:
+    name: member
+    permissions:
+      - [ represent ]
+      - [ create,  activity ]
+      - [ read,    activity ]
+      - [ read,    tie ]
+  partner:
+    name: partner
+    permissions:
+      - [ read,    activity ]

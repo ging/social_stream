@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   if RUBY_VERSION < '1.9'
     s.add_development_dependency('ruby-debug', '~> 0.10.3')
   end
-  s.add_development_dependency('rspec-rails', '~> 2.5.0')
+  s.add_development_dependency('rspec-rails', '~> 2.6.0')
   s.add_development_dependency('factory_girl', '~> 1.3.2')
   s.add_development_dependency('forgery', '~> 0.3.6')
   s.add_development_dependency('capybara', '~> 0.3.9')
