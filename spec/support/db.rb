@@ -1,22 +1,5 @@
-require File.join(File.dirname(__FILE__), 'migrations')
+require 'social_stream/migrations/documents'
 
-begin
-  ActsAsTaggableOnMigration.down
-rescue
-  puts "WARNING: ActsAsTaggableOnMigration failed to rollback" 
-end
+SocialStream::Migrations::Documents.new.down
 
-%w(SocialStream Mailboxer).each do |m|
-  begin
-    "Create#{ m }".constantize.down
-  rescue
-    puts "WARNING: #{ m } migration failed to rollback" 
-  end
-end
-
-CreateMailboxer.up
-CreateSocialStream.up
-ActsAsTaggableOnMigration.up
-CreateSocialStreamDocuments.up
-
-require File.expand_path("../../dummy/db/seeds", __FILE__)
+SocialStream::Migrations::Documents.new.up
