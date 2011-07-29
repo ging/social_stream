@@ -17,10 +17,7 @@ class Video < Document
                       
   # Thumbnail file
   def thumb(size, helper)
-    if format && IMAGE_FORMATS.include?(format.to_s)
       "#{ size.to_s }/video.png"
-    else
-      "#{ size.to_s }/video.png"
-    end
   end
+  
 end

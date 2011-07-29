@@ -3,6 +3,8 @@ class Document < ActiveRecord::Base
 
   IMAGE_FORMATS = ["doc","ppt","xls","rar","zip","mpeg","plain","pdf"]
 
+  STYLE_FORMAT = {"webm" =>"webm", "flv"=>"flv", "thumb"=>"png", "thumb0"=>"png"}
+
   has_attached_file :file, 
                     :url => '/:class/:id.:extension',
                     :path => ':rails_root/documents/:class/:id_partition/:style.:extension'
