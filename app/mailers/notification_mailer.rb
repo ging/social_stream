@@ -12,7 +12,9 @@ class NotificationMailer < ActionMailer::Base
   end
 
   include ActionView::Helpers::SanitizeHelper
+  #DIFFERENT FROM ORIGINAL----------------------
   include Mailboxer::NotificationDecoder
+  #END OF DIFFERENCE----------------------------
 
   #Sends an email for indicating a new message for the receiver
   def new_notification_email(notification,receiver)
@@ -20,7 +22,8 @@ class NotificationMailer < ActionMailer::Base
     @receiver = receiver
     #DIFFERENT FROM ORIGINAL----------------------
     subject = notification.subject.to_s
-    #subject = notifications.subject_decoded
+    subject = decode_basic_notification(subject,notification.notified_object)
+    subject = subject.gsub(/\n/,'')
     #END OF DIFFERENCE----------------------------
     subject = strip_tags(subject) unless subject.html_safe?
     mail(:to => receiver.send(Mailboxer.email_method,notification), :subject => t('mailboxer.notification_mailer.subject', :subject => subject)) do |format|

@@ -101,11 +101,9 @@ describe Relation::CustomsController do
       end
 
       it "should allow destroying" do
-        pending "Delete relations"
-
         count = Relation::Custom.count
 
-        delete :destroy, :id => @relation.to_param, :format => :js
+        delete :destroy, :id => @relation.to_param
 
         Relation::Custom.count.should eq(count - 1)
       end
