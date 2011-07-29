@@ -57,9 +57,8 @@ module SocialStream
         # Requirements: the controller must inherit from +InheritedResources::Base+ and the method
         # {ClassMethods#belongs_to_subjects} must be called
         #
-        #
         #   class PostsController < InheritedResources::Base
-        #     belongs_to_subjects
+        #     belongs_to_subjects :optional => true
         #   end
         #
         #   # /users/demo/posts
