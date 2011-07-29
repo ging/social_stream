@@ -5,7 +5,9 @@ module SocialStream
       extend ActiveSupport::Concern
 
       included do
-        helper_method :current_subject
+        helper_method :current_subject,
+                      :profile_subject,
+                      :profile_subject_is_current?
       end
 
       module ClassMethods
@@ -46,9 +48,43 @@ module SocialStream
         end
           
         def current_actor
-            return current_subject.actor
+          current_subject.actor
         end
-          
+
+        # Returns the {SocialStream::Models::Subject subject} that is in the path, or
+        # the {#current_subject} if some {User} is logged in.
+        #
+        # Requirements: the controller must inherit from +InheritedResources::Base+ and the method
+        # {ClassMethods#belongs_to_subjects} must be called
+        #
+        #
+        #   class PostsController < InheritedResources::Base
+        #     belongs_to_subjects
+        #   end
+        #
+        #   # /users/demo/posts
+        #   profile_subject #=> User demo
+        #
+        #   # /groups/test/posts
+        #   profile_subject #=> Group test
+        #
+        #   # /posts
+        #   profile_subject #=> current_subject
+        #
+        #
+        def profile_subject
+          @profile_subject ||= association_chain[-1] || current_subject
+        end
+
+        # Go to sign in page if {#profile_subject} is blank
+        def profile_subject!
+          @profile_subject ||= association_chain[-1] || warden.authenticate!
+        end
+
+        # A {User} must be logged in and is equal to {#profile_subject}
+        def profile_subject_is_current?
+          user_signed_in? && profile_subject == current_subject
+        end
 
         # Override Cancan#current_ability method to use {#current_subject}
         def current_ability
