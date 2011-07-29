@@ -1,7 +1,7 @@
 class CommonDocumentsController < InheritedResources::Base
   belongs_to_subjects :optional => true
 
-  before_filter :subject!, :only => :index
+  before_filter :profile_subject!, :only => :index
 
   load_and_authorize_resource :except => :index
 
@@ -26,20 +26,12 @@ class CommonDocumentsController < InheritedResources::Base
 
   private
 
-  def subject
-    @subject ||= association_chain[-1] || current_subject
-  end
-
-  def subject!
-    @subject ||= association_chain[-1] || warden.authenticate!
-  end
-
   def collection
-    @activities = subject.wall(:profile,
-                               :for => current_subject,
-                               :object_type => Array(self.class.index_object_type)).
-                          page(params[:page]).
-                          per(params[:per])
+    @activities = profile_subject.wall(:profile,
+                                       :for => current_subject,
+                                       :object_type => Array(self.class.index_object_type)).
+                                  page(params[:page]).
+                                  per(params[:per])
   end
 
   class << self
