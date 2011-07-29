@@ -31,7 +31,7 @@ class CommonDocumentsController < InheritedResources::Base
   end
 
   def subject!
-    @subject ||= association_chain[-1] || warden.authenticate!(:user)
+    @subject ||= association_chain[-1] || warden.authenticate!
   end
 
   def collection

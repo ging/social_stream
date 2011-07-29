@@ -9,6 +9,12 @@ describe PicturesController do
     end
 
     it "should render index" do
+      get :index
+
+      response.should redirect_to(:new_user_session)
+    end
+
+    it "should render receiver's index" do
       get :index, :user_id => @picture.post_activity.receiver.to_param
 
       response.should be_success
