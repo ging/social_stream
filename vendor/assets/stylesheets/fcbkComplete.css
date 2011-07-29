@@ -1,5 +1,5 @@
 /* TextboxList sample CSS */
-ul.holder { margin: 0; border: 1px solid #BDC7D8; overflow: hidden; height: auto !important; height: 1%; padding: 5px; }
+ul.holder { margin: 0; border: 1px solid #BDC7D8; background-color:#fff; overflow: hidden; height: auto !important; height: 1%; padding: 5px; }
 *:first-child+html ul.holder { padding-bottom: 2px; } * html ul.holder { padding-bottom: 2px; } /* ie7 and below */
 ul.holder li { float: left; list-style-type: none; /*margin: 0 5px 4px 0;*/ white-space:nowrap;}
 ul.holder li.bit-box, ul.holder li.bit-input input { font: 11px "Lucida Grande", "Verdana"; }
