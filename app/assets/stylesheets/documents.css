@@ -183,3 +183,8 @@
 	height:135px;
 }
 
+/* needed to hide the flash element when used */
+.jpId_size0{
+	width: 0px;
+	height: 0px;
+}
