@@ -10,7 +10,7 @@ class VideosController < CommonDocumentsController
     end
     respond_to do |format|
       format.all {send_file path, 
-                  :type => params[:style]=="thumb" ? "image/png" : @video.file_content_type,
+                  :type => Document::STYLE_MIMETYPE[params[:style]],  # CANT USE: @video.file_content_type because it is allways video/mp4 and breaks explorer and firefox
                   :disposition => "inline"}
     end
   end

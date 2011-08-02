@@ -5,6 +5,8 @@ class Document < ActiveRecord::Base
 
   STYLE_FORMAT = {"webm" =>"webm", "flv"=>"flv", "thumb"=>"png", "thumb0"=>"png"}
 
+  STYLE_MIMETYPE = {"webm" =>"video/webm", "flv"=>"video/x-flv", "thumb"=>"image/png", "thumb0"=>"image/png", "mp3"=>"audio/mpeg"}
+
   has_attached_file :file, 
                     :url => '/:class/:id.:extension',
                     :path => ':rails_root/documents/:class/:id_partition/:style.:extension'
