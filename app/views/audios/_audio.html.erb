@@ -3,10 +3,10 @@
   $("#jpId<%=audio.id%>").jPlayer( {
     ready: function () {
       $(this).jPlayer("setMedia", {
-        m4a: "<%= download_document_path(audio) %>" // Defines the mp3 url
+        webma: "<%= audio_path(audio) + "?style=webma" %>" // Defines the webma url
       });
     },
-    supplied: "m4a",
+    supplied: "webma",
 	swfPath: "assets",
 	cssSelectorAncestor: "#jp_interface_<%=audio.id%>"
   });
