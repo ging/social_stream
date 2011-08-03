@@ -37,3 +37,16 @@ group:
     name: partner
     permissions:
       - [ read,    activity ]
+
+event:
+  member:
+    name: member
+    permissions:
+      - [ represent ]
+      - [ create,  activity ]
+      - [ read,    activity ]
+      - [ read,    tie ]
+  partner:
+    name: partner
+    permissions:
+      - [ read,    activity ]
