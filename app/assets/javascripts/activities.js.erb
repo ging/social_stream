@@ -52,43 +52,65 @@ $(function() {
 
 //javascript for comments
 $(function() {
+  //"write new comment..." text in every text field for comments
   $(".input_new_comments").val("<%= I18n.t('comment.input') %>");
+  
+  //show only the text fields for new comment if there are any comment to the post
+  $(".activity_new_comment").each(function(){
+  	if ($.trim($(this).siblings(".activity_comments").text()) != ""){
+  	  $(this).show();
+  	}
+  });
   $(".activities_comment_btn").hide();
+  
+  //if there are 4 or more commments we only show the last 2 and a link to show the rest
+  $(".activity_comments").each(function(){
+  	var comments = $(this).children(".subactivity");  	
+  	//check if there are more than 3 comments
+  	if (comments.size() > 3){
+  		$(this).prepend("<div class='hide_show_comments'><a href='#' onclick='showAllComments(\""+ $(this).attr('id') +"\"); return false;'><%= I18n.t('comment.view_all') %> (" + comments.size() + ")</a></div>");
+  		comments.slice(0,comments.size()-2).hide();
+  		//hide alto space_comments
+  		$(this).children(".space_comments").slice(0,comments.size()-2).hide();
+  	}
+  });
 });
+
+showAllComments = function(id){
+	$("#"+id).children().show();
+	//and hide the hide_show_comments
+	$("#"+id).children(".hide_show_comments").hide();
+};
 
 //usa livequery para usar el javascript luego de una accion con  AJAX
-$(".input_new_comments").livequery("click",function(){
+$(".input_new_comments").live("click",function(){
 	if(this.value == "<%= I18n.t('comment.input') %>"){
 		$(this).val("");
 	}
 	$(".activities_comment_btn").hide();
 	$(this).parent(".new_comment").children(".activities_comment_btn").show();
 });
-$(".input_new_comments").livequery("blur",function(){
+
+/* this function works but it finishes and no other event is done
+ * I mean: when you click in other button the blur happens but the click is not done
+$(".input_new_comments").live("blur",function(){
 	if(this.value == ""){
 		$(".activities_comment_btn").hide();
-    $(this).val("<%= I18n.t('comment.input') %>");
+        $(this).val("<%= I18n.t('comment.input') %>");
 	}
+	return true;
 });
-
-$(".input_new_comments").click(function(){
-	if(this.value == "<%= I18n.t('comment.input') %>"){
-		$(this).val("");
-	}
-	$(".activities_comment_btn").hide();
-	$(this).parent(".new_comment").children(".activities_comment_btn").show();
-});
+*/
 
 //javascript for tocomment option
-$(".to_comment").livequery("click", function(){
-  $(this).parents(".activity_content").find(".input_new_comments").click();
+$(".to_comment").live("click", function(){
+  $(this).parents(".activity_content").find(".activity_new_comment").show();
+  $(".input_new_comments").val("<%= I18n.t('comment.input') %>");
+  $(this).parents(".activity_content").find(".input_new_comments").click();  
   $(this).parents(".activity_content").find(".input_new_comments").focus();
 	return false;
 });
-$(".to_comment").livequery("blur", function(){
-  $(this).parents(".activity_content").find(".input_new_comments").blur();
-	return false;
-});
+
 
 
 

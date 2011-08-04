@@ -19,8 +19,9 @@
 #securities{  display:inline-block;  text-align:left; float: left; padding-left:5px;}
 
 /******************* WALL - ACTIVITY ***************/
-.activity {	text-align:left;	display: block;	vertical-align: top;	padding: 10px 0px 0px 0px;
-	display: inline-block;	color: #000;	width: 100%;  font-size: 13px;  color: #2A3890;}
+.super_activity{width: 95%;}
+.activity {	text-align:left;	display: block;	vertical-align: top;	padding: 10px 0px 5px 0px;
+	display: inline-block;	color: #000; font-size: 13px;  color: #2A3890;border-bottom:1px solid #E9E9E9;}
 .actor_logo {	width: 38px;	padding: 8px 0px 5px 5px;	display: inline-block;	vertical-align: top;}
 .activity_content {	padding: 8px 0px 0px 0px;	display: inline-block;	color: #000;	width: 90%;}
 .actor_name {font-size: 13px;}
@@ -30,6 +31,7 @@
 /***************** ACTIVITY OPTIONS ***/
 .activity_options {	color: #2A3890;	font-size: 10px;  display: inline-block;}
 .actor_name-activity_objects{  font-weight: bold;	color: #2A3890;  font-size:12px;}
+.activity_objects{padding-bottom:5px;}
 .subactivity_objects{	color: #000;  font-weight:normal;  font-size:11px;}
 .post_time_ago {	color: #6c6d6f;}
 .activity_options {  list-style:none;	margin:0;	padding:0;}
@@ -55,20 +57,20 @@
 
 
 .activity_new_comment{  font-size: 11px;  padding-left: 5px;	background: #deeff8;
-	border: thin solid #D4E4E4;}
+	border: thin solid #D4E4E4; width:100%;  padding-top: 3px;  padding-bottom: 3px;display:none;}
 .actor_logo_subactivity {	width: 40px;	padding: 5px 3px 5px 2px;	display: inline-block;
 	vertical-align: top;}
 .input_new_comments{	border:1px solid #BDC7D8;	width:98%;	padding: 2px;}
-.activity_new_comment{	font-size: 11px;  width:100%;  padding-top: 3px;  padding-bottom: 3px;}
 .subactivity{  font-size: 11px;  padding: 0px 0px 0px 5px;  background: #deeff8;
-  border: thin solid #D4E4E4;}
+  border: thin solid #D4E4E4; width: 100%; }
 .space_comments {	padding-top: 1px;	padding-bottom: 1px;}
 #input_activities {	border-color: #0656a4;	color: #2A3890;	padding: 5px 5px 5px 5px;
   border:1px solid #BDC7D8;}
 #activities_share_btn {	text-align: right;	padding: 5px 16px 0px 10px;	vertical-align: middle;}
 .activities_comment_btn{ text-align: right;    padding: 2px 5px 2px 10px;    vertical-align: middle;}
 
-
+.hide_show_comments{font-size: 11px;  padding-left: 5px;	background: #deeff8;
+	border: thin solid #D4E4E4; width:100%;  padding-top: 3px;  padding-bottom: 3px;}
 /*********** DROP DOWN**********/
 #security_chzn .chzn-choices {
 	padding-left: 20px;

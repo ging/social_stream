@@ -80,6 +80,7 @@ en:
   comment:
     input: "Write a comment..."
     confirm_delete: "Delete comment?"
+    view_all: "View all comments"
   contact:
     all_n: "All contacts (%{count})"
     current: "Current"
