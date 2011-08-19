@@ -95,11 +95,16 @@ module SocialStream
     #
     # Maybe Rails provides some method to do this, in this case, please tell!!
     def require_model(m)
-      path = $:.find{ |f| f =~ Regexp.new(File.join('social_stream.*', 'app', 'models')) }
+      paths = $:.find_all{ |f| f =~ Regexp.new(File.join('social_stream.*', 'app', 'models')) }
 
-      raise "Can't find social_stream path" if path.blank?
+      raise "Can't find social_stream path" if paths.blank?
 
-      require_dependency File.join(path, m)
+      paths.each do |path|
+        if File.exists?(File.join(path, "#{m}.rb"))
+          require_dependency File.join(path, m)
+        end
+      end
+
     end
   end
 end
