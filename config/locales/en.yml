@@ -307,7 +307,7 @@ en:
     title: "Privacy & context"
   relation_public:
     name: "Public"
-  required: "* These fields are required"
+  required: "(*) These fields are required"
   settings:
     error: "Some errors raised when saving your changes"
     for: "Settings for"
