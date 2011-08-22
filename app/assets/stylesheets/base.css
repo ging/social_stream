@@ -102,6 +102,7 @@ textarea.new_contact_text_area{ height: 100px; color: #2A3890;}
 .block .header_icon{ margin-top: 2px;  width:14px;  height:14px; }
 .block .header_icon_right {	float: right;	padding-right: 5px;	padding-top: 3px;}
 .block .header_text {	margin-top: 3px;	display: inline-block;}
+.block .header_title {	margin-top: 3px;	display: inline-block; font-weight: bold}
 .block .logo{ 	display: inline-block; vertical-align:top;}
 .block .right{padding-right:20px; float:right;}
 .block .row {	display: block;}
