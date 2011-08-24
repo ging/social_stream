@@ -11,7 +11,9 @@ class Picture < Document
       when 16
         "#{ size.to_s }/photo.png"
       when 48
-        helper.picture_path self, :format => format, :style => 'thumb'    
+        helper.picture_path self, :format => format, :style => 'thumb'   
+      when 130
+        helper.picture_path self, :format => format, :style => 'thumb0'    
     end
   end
     

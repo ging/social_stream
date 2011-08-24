@@ -88,7 +88,7 @@
 }
 
 .player{
-	position: absolute;
+	position: fixed;
 	border-left: 24px solid #2A3890;
 	border-right: 24px solid #2A3890;
 	background-color: #e0edf2;
@@ -98,7 +98,7 @@
 }
 
 #downloadButton{
-	position: absolute;
+	position: fixed;
 	bottom: 5px;
 	right: 0px;
 	width: 24px;
