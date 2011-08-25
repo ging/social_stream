@@ -1,11 +1,11 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe PicturesController do
+describe DocumentsController do
   render_views
 
-  context "with public picture" do
+  context "with public document" do
     before do
-      @public_picture = Factory(:public_picture)      
+      @public_document = Factory(:public_document)      
     end
 
     describe "when not authenticated" do
@@ -14,17 +14,17 @@ describe PicturesController do
         response.should redirect_to(:new_user_session)
       end
   
-      it "should render receiver's index with public picture included" do
-        get :index, :user_id => @public_picture.post_activity.receiver.to_param  
+      it "should render receiver's index with public document included" do
+        get :index, :user_id => @public_document.post_activity.receiver.to_param  
         response.should be_success
         response.body.should =~ /attachment_tile/
-        response.body.should =~ /rails.png/
+        response.body.should =~ /small.pdf/
       end
       
       it "should render receiver's show" do
-        get :show, :id => @public_picture.to_param
+        get :show, :id => @public_document.to_param
         response.should be_success
-        response.headers["Content-Type"].should include('image/png')
+        response.headers["Content-Type"].should include('application/pdf')
       end
     end
     
@@ -34,30 +34,30 @@ describe PicturesController do
       end
 
       it "should render index" do
-        get :index, :user_id => @public_picture.post_activity.receiver.to_param  
+        get :index, :user_id => @public_document.post_activity.receiver.to_param  
         response.should be_success
         response.body.should =~ /attachment_tile/
-        response.body.should =~ /rails.png/
+        response.body.should =~ /small.pdf/
       end
       
       it "should render show" do
-        get :show, :id => @public_picture.to_param
+        get :show, :id => @public_document.to_param
         response.should be_success
-        response.headers["Content-Type"].should include('image/png')
+        response.headers["Content-Type"].should include('application/pdf')
       end
     end
   end #end of the context
   
-  context "with private picture" do
+  context "with private document" do
     before do     
-      @private_picture = Factory(:private_picture)
+      @private_document = Factory(:private_document)
     end
     describe "when not authenticated" do
-      it "should render receiver's index without private picture" do
-        get :index, :user_id => @private_picture.post_activity.receiver.to_param  
+      it "should render receiver's index without private document" do
+        get :index, :user_id => @private_document.post_activity.receiver.to_param  
         response.should be_success
         response.body.should_not =~ /attachment_tile/
-        response.body.should_not =~ /privado.png/
+        response.body.should_not =~ /small.pdf/
       end
     end
     
@@ -66,14 +66,14 @@ describe PicturesController do
         sign_in Factory(:user)
       end
       it "should render index" do
-        get :index, :user_id => @private_picture.post_activity.receiver.to_param  
+        get :index, :user_id => @private_document.post_activity.receiver.to_param  
         response.should be_success
         response.body.should_not =~ /attachment_tile/
-        response.body.should_not =~ /privado.png/
+        response.body.should_not =~ /small.pdf/
       end
       
       it "should render show" do
-        lambda {get :show, :id => @private_picture.to_param}.should raise_error(CanCan::AccessDenied)
+        lambda {get :show, :id => @private_document.to_param}.should raise_error(CanCan::AccessDenied)
       end
     end
   end
