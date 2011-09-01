@@ -11,3 +11,4 @@ nbproject
 lib/generators/social_stream/base/templates/public/images/tmp/
 **.*swp
 .code_swarm
+.rvmrc
