@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   # SQL foreign keys
   s.add_runtime_dependency('foreigner', '~> 0.9.1')
   # Authentication
-  s.add_runtime_dependency('devise', '~> 1.3.4')
+  s.add_runtime_dependency('devise', '~> 1.4.3')
   # CRUD controllers
   s.add_runtime_dependency('inherited_resources', '~> 1.2.2')
   # Slug generation
@@ -49,7 +49,7 @@ Gem::Specification.new do |s|
   # Modernizr.js javascript library
   s.add_runtime_dependency('modernizr-rails', '~> 2.0.6')
   
-  s.add_runtime_dependency('rails', '3.1.0.rc5')
+  s.add_runtime_dependency('rails', '3.1.0')
 
   # Development Gem dependencies
   # Integration testing
