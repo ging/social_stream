@@ -1,0 +1,8 @@
+<% toolbar :option => :contacts %>
+
+<div id="ties"></div>
+
+<%= javascript_tag do %>
+  var tiesData = <%= raw SocialStream::D3::Force.new(current_subject.egocentric_ties, self).to_json %>;
+  $('#ties').tiesGraph(tiesData);
+<% end %>

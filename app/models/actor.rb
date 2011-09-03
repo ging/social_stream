@@ -280,6 +280,13 @@ class Actor < ActiveRecord::Base
     ties_to(subject).present?
   end
 
+  # The {Tie ties} sent by this actor, plus the second grade ties
+  def egocentric_ties
+    @egocentric_ties ||=
+      load_egocentric_ties
+  end
+
+
   # Can this actor be represented by subject. Does she has permissions for it?
   def represented_by?(subject)
     return false if subject.blank?
@@ -443,5 +450,19 @@ class Actor < ActiveRecord::Base
     else
       create_profile
     end
+  end
+
+  # Calculate {#egocentric_ties}
+  def load_egocentric_ties
+    ties = sent_ties.includes(:contact).to_a
+
+    contact_ids = ties.map{ |t| t.contact.receiver_id }
+
+    second_grade_ties =
+      contact_ids.
+        map{ |i| Tie.sent_by(i) }.
+        flatten
+
+    ties + second_grade_ties
   end
 end

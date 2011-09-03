@@ -39,6 +39,7 @@ require 'modernizr-rails'
 # Provides your Rails application with social network and activity stream support
 module SocialStream
   autoload :Ability,   'social_stream/ability'
+  autoload :D3,        'social_stream/d3'
   autoload :Populate,  'social_stream/populate'
   autoload :Relations, 'social_stream/relations'
   autoload :TestHelpers, 'social_stream/test_helpers'
