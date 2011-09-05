@@ -66,7 +66,7 @@ Gem::Specification.new do |s|
   # Fixtures
   s.add_development_dependency('factory_girl', '~> 1.3.2')
   # Population
-  s.add_development_dependency('forgery', '~> 0.4.1')
+  s.add_development_dependency('forgery', '~> 0.4.2')
   # Continous integration
   s.add_development_dependency('ci_reporter', '~> 1.6.4')
   # Scaffold generator
