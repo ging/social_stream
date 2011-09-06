@@ -7,8 +7,6 @@
       <% if user_signed_in? %>
         <div class="menu_list menu_white" id="menu_home">
           <ul>
-            <li class="btn_menu_home"><%= link_to t('home'), home_path %></li>
-            <li class="pipe">|</li>
             <li class="btn_menu_profile"><%= link_to(t('profile.one'), current_subject)%></li>
             <li class="pipe">|</li>
             <li class="btn_menu_browse"><%=link_to(t('browse'),users_path) %></li>

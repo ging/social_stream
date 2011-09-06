@@ -1,0 +1,68 @@
+<% toolbar :profile => current_subject %>
+
+<%= location(image_tag("btn/btn_account.png", :class => "menu_icon")+t('account.one'), 
+  link_to (t('account.edit'), edit_user_registration_path)
+) %>
+
+<div class="space_center"></div>
+
+<div class="block" id="account_form">
+  <div class="form_row">
+    <h2><%= t('account.edit') %></h2>
+  </div>
+  
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+    <%= devise_error_messages! %>
+  
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label :email %>
+      </div>
+      <div class="form_field">
+        <%= f.email_field :email, :class => "form_tag" %>
+      </div>
+    </div>
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label :password %>
+      </div>
+      <div class="form_field">
+        <%= f.password_field :password, :class => "form_tag" %><br/>
+        <span class="form_comment">(Leave blank if you don't want to change it)</span>
+      </div>
+    </div>
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label :password_confirmation %>
+      </div>
+      <div class="form_field">
+        <%= f.password_field :password_confirmation, :class => "form_tag" %>
+      </div>
+    </div>
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label :current_password %>
+      </div>
+      <div class="form_field">
+        <%= f.password_field :current_password, :class => "form_tag" %><br/>
+        <span class="form_comment">(We need your current password to confirm your changes)</span>
+      </div>
+    </div>
+    <div class="form_row space_center">
+      <%= f.submit t('button.update'), :class => "button" %>
+      <button class="button" onclick="window.location.href='<%= polymorphic_path(current_subject) %>';">
+        <%= t('button.cancel')%>
+      </button>
+    </div>
+  <% end %>
+<div>
+<div class="block">  
+  <div class="content">
+    <h3>Cancel my account</h3>
+  </div>
+  
+  <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
+  
+  <%= link_to "Back", :back %>
+
+</div>
