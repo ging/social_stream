@@ -99,10 +99,9 @@ module SocialStream
 
           subject = Actor.find_by_slug!(params[:s]).subject
 
-          # remove security to control allow "slug" until tapiador fix it
-          #unless subject.represented_by?(current_user)
-          #  raise CanCan::AccessDenied.new("Not authorized!", :represent, subject.name)
-          #end
+          unless subject.represented_by?(current_user)
+            raise CanCan::AccessDenied.new("Not authorized!", :represent, subject.name)
+          end
 
           self.current_subject = subject
         end

@@ -57,7 +57,6 @@ describe HomeController do
         end
 
         it "should deny access" do
-          pending
           begin
             get :index, :s => @group.slug
 
