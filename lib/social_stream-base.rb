@@ -35,6 +35,8 @@ require 'resque/server'
 require 'simple-navigation'
 # Modernizr.js library
 require 'modernizr-rails'
+# Sphinx search engine
+require 'thinking-sphinx'
 
 # Provides your Rails application with social network and activity stream support
 module SocialStream

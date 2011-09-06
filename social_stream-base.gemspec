@@ -48,6 +48,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('resque','~> 1.17.1')
   # Modernizr.js javascript library
   s.add_runtime_dependency('modernizr-rails', '~> 2.0.6')
+  # Sphinx search engine
+  s.add_runtime_dependency('thinking-sphinx', '~> 2.0.7')
 
   # Development gem dependencies
   #
