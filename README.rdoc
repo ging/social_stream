@@ -1,0 +1,6 @@
+= Social Stream Events
+
+Events and Video conferences capabilities to
+{Social Stream}[http://social-stream.dit.upm.es/], the core for building social
+network websites. This gem allow you  to add events and videoconferences as new social stream activity.
+

@@ -1,0 +1,69 @@
+<% content_for :title do%>
+  <%= t('event.other') %>
+<%end%>
+
+<% toolbar if user_signed_in? %>
+
+<% content_for :sidebar do %>
+	<%= render :partial => "events/sidebar_cloud" %>
+<% end %>
+<%= location(image_tag("btn/btn_browse.png", :class=>"btn_config") + t('browse') +": "+ 
+             link_to(t('user.by'), users_path) + ", "+ 
+             link_to(t('group.by'), groups_path) + ", "+ 
+             content_tag(:b,content_tag(:span, t('event.all'), :id=>'name_group')))%>
+
+<div class="space_center"></div>
+<div class="space_center"></div>
+<div class="space_center"></div>
+<div class="space_center"></div>
+
+<div id="my_conferences" class="block">
+  <div id="tab" class="widget content_size">
+    <ul class="tab">
+      <li>
+        <%= link_to t('event.all_n', :count => Event.count), :most => nil %>
+      </li>
+      <li>
+        <%= link_to t('event.live', :count => Event.count), {:most => nil,:live=> :live} %>
+      </li>
+      <li>
+        <%= link_to t('event.most.followed'), :most => :followed %>
+      </li>
+      <li>
+        <%= link_to t('event.most.liked'), :most=> :liked %>
+      </li>
+    </ul>
+    <div id="spaces" class="tab">
+      <div class="space_center"></div>
+      <div class="row">
+        <input type="text" value="Search by name" id="search_field" class="search_input" />
+        <%= image_tag("btn/search.png",:size=>"20x20",:id=>"search_button") %>
+      </div>
+      <div class="space_center"></div>
+      <div class="row">
+        <div class="center">
+          
+          <% initials=nil 
+              if (params[:live].nil?) 
+                initials=Event.distinct_initials
+              else
+                initials=Event.live_events.distinct_initials
+              end %>
+          <% for g in initials %>
+            <%= link_to g.initial,{:letter => g.initial,:page => 1},:class => "user_letter_link" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="space_center"></div>
+      <div id="list_users_ajax" class="tab_content">
+        <%= render :partial => "events/manage", :locals=>{:events=>@events}%>
+      </div>
+      <div class="space_center"></div>
+    </div>
+  </div>
+</div>	
+
+ 
+<br class="clearfloat" />
+<div class="space_center">
+</div>

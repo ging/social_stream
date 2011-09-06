@@ -1,0 +1,30 @@
+<% content_for :title do %>
+  <%= t('event.list') %>
+<% end %>
+
+<% content_for :sidebar do %>
+  <%= render :partial => 'home/sidebar' %>
+<% end %>
+
+<%= location(link_to(image_tag("btn/event.png", :class => "btn_config")+t('conference.list')))%>
+
+<% toolbar %>
+
+<br class="clearfloat" />
+<div class="space_center">
+</div>
+
+<div class="attachment_section_header">
+	<h3><%=t('conference.list')%></h3>
+</div>
+<% @events.each do |a| %>
+	<%# document = a.activity_objects.first.document %>
+	<div class="attachment_tile">
+		<div class="attachment_tile_thumb">
+      <%= link_to(image_tag('logos/actor/event.png', :size =>"48x48"), a )%>
+    </div>
+    <div class="attachment_tile_text">
+      <%= link_to( a.name, a )%>
+    </div>
+	</div>
+<% end %>

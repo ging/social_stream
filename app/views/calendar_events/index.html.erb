@@ -1,0 +1,162 @@
+<% content_for :headers do  -%>
+  <%= javascript_include_tag :defaults, 'jquery', 'jquery-ui', 'fullcalendar' %>
+  <%= stylesheet_link_tag 'jquery-ui', 'fullcalendar' %>
+<% end -%>
+
+<% content_for :javascript do %>
+      $(document).ready(function(){
+		$('#calendar').fullCalendar({
+		    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
+			             'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 
+			                  'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+			dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+			dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+			buttonText: {
+			    prev:     '&nbsp;&#9668;&nbsp;',  // left triangle
+			    next:     '&nbsp;&#9658;&nbsp;',  // right triangle
+			    prevYear: '&nbsp;&lt;&lt;&nbsp;', // <<
+			    nextYear: '&nbsp;&gt;&gt;&nbsp;', // >>
+			    today:    'Hoy',
+			    month:    'Mes',
+			    week:     'Semana',
+			    day:      'Dia'
+			},
+			firstDay: 1,
+			allDayText: 'Todo el dia',
+			axisFormat: 'HH:mm G\'M\'\'T\' <%= escape_javascript(Time.zone.formatted_offset) %>',
+                        ignoreTimezone: true,
+			allowCalEventOverlap: false,
+			selectable: true,
+			selectHelper: true,
+			select: function(start, end, allDay) {
+				var title = "<%= escape_javascript(params[:reservation][:title])%>";
+
+				if (dateAvailable(start, end, allDay)) {			
+					$('#calendar').fullCalendar('renderEvent', {
+						title: title,
+						start: start,
+						end: end,
+                                          editable: true,
+						allDay: allDay
+					  }, false
+                    );
+				    createReservationEvent(title, start, end, allDay);					
+				}
+				$('#calendar').fullCalendar('unselect');
+			},
+			editable: true,
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			defaultView: 'agendaWeek',
+			height: 500,
+			columnFormat: {
+                            month: 'ddd',
+                            week: 'ddd d/M',
+                            day: 'dddd d/M'
+                     },
+			slotMinutes: 30,
+			loading: function(bool){
+				if (bool) 
+					//$('#loading').show();
+					$('#loading').hide();
+				else 
+					$('#loading').hide();
+			},
+
+			//events: "/calendar_events/get_events",
+			eventSources: [
+				"/calendar_events/get_room_events?room_id=<%=@room.id%>",
+				<% if @rooms %>
+				"/calendar_events/get_others_events?room_ids="+$('#room_ids').val(),
+				<% end %>
+				function(start, end, callback) {
+					$.ajax({
+						url: '/calendar_events/get_calendar_events',
+						dataType: 'json',
+						data: {
+							start: Math.round(start.getTime() / 1000),
+							end: Math.round(end.getTime() / 1000),
+							calendar_events: parent.$('#reservation_calendar_events').val()
+						},
+						success: function(events) {
+							callback(events);
+						}
+					});
+				}				
+			],
+			timeFormat: 'HH:mm t{ - HH:mm t} ',
+			dragOpacity: "0.5",
+			eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc){
+				if (dateAvailable(event.start, event.end, allDay)) 
+				{
+				  moveEvent(event, dayDelta, minuteDelta, allDay);
+                }
+			    else 
+				{
+			      revertFunc();
+			    }
+			},
+			
+			eventResize: function(event, dayDelta, minuteDelta, revertFunc){
+				if (dateAvailable(event.start, event.end, false)) 
+				{				
+				  resizeEvent(event, dayDelta, minuteDelta);
+				}
+				else 
+				{
+				  revertFunc();
+				}
+			},
+			
+			eventClick: function(event, jsEvent, view){
+			    if (event.editable) {
+					showEventDetails(event);
+				} else {
+				    showEventDescription(event);
+				}
+			}
+		});
+	});
+	
+<% end %>
+
+<p>
+  <% link_to_remote 'Create Event', 
+      :url => {:action => :new}, 
+      :before => "$('#loading').show()", 
+      :complete => "$('#loading').hide()"
+  %>
+
+<%=  select_tag :room_ids, 
+    "<option>Seleccione otras salas</option>" + 
+    options_for_select(Room.find(:all, :order => "country, space_id, name").select {|y| y.id !=  @room.id && !y.space.nil? }.collect {|x| ["#{x.country}, #{x.space.name}, #{x.name}", x.id]}, @rooms ? @rooms.collect {|z| z.id } : ""), 
+    :multiple =>true, :size => 3, :style => "font-size: 10px;", :onchange => "parent.$('#fancy_frame').attr('src', '/calendar_events?reservation[room_id]=#{@room.id}&reservation[title]=#{params[:reservation][:title]}&calendar_events=#{params[:calendar_events]}&room_ids='+$('#room_ids').val());" 
+%>
+<br />
+<% if @rooms %>
+Aula seleccionada(s):
+<% @rooms.each do |room| %>
+<span style="font-size: 10px;"><%= "#{room.country}, #{room.space.name}, #{room.name}" %></span>
+<% end %>
+<% end %>
+</p>
+
+<div><div id='calendar'></div></div>
+
+<div id = "desc_dialog" style ="display:none;">
+  <div id = "event_desc"></div>
+  <br/>
+  <br/>
+  <div id = "event_actions">
+    <span id = "edit_event"></span>
+    <span id = "delete_event"></span>
+  </div>
+</div>
+<div id = "create_event_dialog" style ="display:none;">
+  <div id = "create_event">
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<% content_for :title do%>
+  <%= t('contact.other')%>
+<%end%>
+
+<% content_for :sidebar do %>
+  <%= render :partial => 'home/sidebar' %>
+<% end %>
+
+<% toolbar :option => :contacts %>
+
+<div id="my_conferences">
+  <div id="contacts" class="block">
+    <div class="search_field_wrapper">
+      <input type="text" value="Search by name" id="search_field" class="search_input" />
+      <%= image_tag("btn/search.png",:size=>"20x20",:id=>"search_button") %>
+    </div>
+    <div class="space_center"></div>
+    <div class="row" >
+      <div class="center" id="header_contacts">
+      <%= render :partial => "settings/header"%>
+      </div>
+    </div>
+    <div class="space_center"></div>
+    <div id="list_contacts_ajax" class="tab_content block">
+      <%= render :partial => "settings/manage"%>
+    </div>
+    <div class="space_center"></div>
+  </div>
+</div>
+
+<div class="space_center"></div>

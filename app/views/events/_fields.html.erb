@@ -1,0 +1,5 @@
+<% f.object._founder = current_subject.slug  %>
+<%= f.hidden_field :_founder %>
+<%= f.hidden_field :founder_id, :value => current_subject.id %>
+<%= f.text_field :name, :size => 85, :value => t('event.input')  %>
+

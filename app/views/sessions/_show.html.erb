@@ -1,0 +1,27 @@
+<div class="block session">
+	<div class="session_wrapper1">
+    <div class="event_hour">
+      <%=t('time.from').capitalize%>
+		</div>
+	  <div class="event_month">
+      <%=session.start_at.strftime("%H:%M") %>
+    </div>
+		<div class="event_hour">
+			<%=t('time.to')%>
+		</div>
+		<div class="event_month">
+			<%=session.end_at.strftime("%H:%M") %>
+		</div>
+	</div>
+	<div class="session_wrapper2">
+		<div class="block header_text session_title">
+      <h3><span class="header_title"><%=session.title%></span></h3>
+               <%= link_to image_tag("btn/btn_edit.png" , :alt => "name"),{:controller => :sessions , :action => :edit,:id_event=>@event.id,:id=>session.id}%>|
+
+         <%= link_to image_tag("btn/trash.png" , :alt => "name"),{:controller => :sessions , :action => :destroy,:id=>session.id}, :confirm => t('actor.confirm_delete')%>
+	  </div>
+	  <div class="content">
+	    <%=session.description %>
+	  </div>
+	</div>
+</div>

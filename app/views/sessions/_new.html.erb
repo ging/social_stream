@@ -1,0 +1,63 @@
+<% receiver = current_subject%>
+
+<div class="space_center"></div>
+<div class="space_center"></div>
+<div class="row">
+  <div class="form_row">
+      <h2><%=t('session.new')%></h2>
+  </div>
+</div>
+<div class="space_center"></div>
+<div class="space_center"></div>
+
+
+<%= form_for @session,:url => {:action => :create}, :method => 'post' do |f| %>
+<div class="block">
+  <div class="form_row">
+    <div class="form_label">
+      <%=t('session.one').capitalize + ' ' + t('session.title')%>:
+    </div>
+    <div class="form_field">
+      <%= f.text_field :title,  :class => "form_tag" %>
+      <span class="needed"> (*)</span>
+    </div>
+  </div>
+  <div class="form_row">
+    <div class="form_label">
+      <%=t('time.from')%>
+    </div>
+    <div class="form_field">
+      <%= f.datetime_select :start_at, {:start_year => Time.zone.now.year, :minute_step => Agenda::SLOT_VALUES[1], :default => Agenda.next_time_slot_for_drop_down + 2.hours} %>
+      <span class="needed"> (*)</span>
+    </div>
+  </div>
+  <div class="form_row">
+    <div class="form_label">
+      <%=t('time.to')%>
+    </div>
+    <div class="form_field">
+      <%= f.datetime_select :end_at, {:start_year => Time.zone.now.year, :minute_step => Agenda::SLOT_VALUES[1], :default => Agenda.next_time_slot_for_drop_down + 2.hours + 30.minutes} %>
+      <span class="needed"> (*)</span>
+    </div>
+  </div>
+  <div class="form_row">
+    <div class="form_label">
+      <%=t('session.one').capitalize + ' ' + t('session.description')%>:
+    </div>
+  </div>
+  <div class="form_row">
+    <%= text_area_tag :description, nil, :name => 'session[description]', :maxlength => 100, :rows => 6, :class => "form_tag_long" %>
+  </div>
+  <div class="form_row needed"><%=t('required')%></div>
+  <div class="form_row space_center">
+    <%= f.hidden_field :_contact_id, :value => current_subject.contact_to!(receiver).id %>
+    <%= hidden_field_tag :event_id, @event.id %>
+    <%= f.submit t('button.create'), :class => "button" %>&nbsp;
+    <button class="button" onclick="window.location.href='<%=agenda_path(@event)%>';">
+      <%= t('button.cancel')%>
+    </button>
+  </div>
+</div>
+<% end %>
+
+

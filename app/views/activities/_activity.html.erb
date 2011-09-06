@@ -1,0 +1,5 @@
+<% if activity.is_root? %>
+  <%= render :partial => "activities/root", :locals => { :activity => activity } %>
+<% else %>
+  <%= render :partial => "activities/child", :locals => { :activity => activity } %>
+<% end %>

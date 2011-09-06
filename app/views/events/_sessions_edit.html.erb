@@ -1,0 +1,46 @@
+<% #debugger %>
+<% content_for :javascript do %>
+
+ calendar = $('#calendar').fullCalendar({
+    header: {
+      left: '',
+      center: '',
+      right: ''
+    },
+    allDaySlot: false,
+    axisFormat: 'HH:mm',
+    timeFormat: 'H:mm{ - H:mm}',
+    slotMinutes: 15,  
+    year:<%= @event.start_at.strftime("%Y")%>,
+    month:<%= @event.start_at.month-1 %>,
+    date:<%= @event.start_at.strftime("%d")%>,
+    minTime: '<%= @event.start_at.hour.to_s + ':00' %>',
+    maxTime: '<%= (@event.end_at.hour + 1).to_s + ':00' %>',
+    editable: true,
+    defaultView: 'agendaDay',  
+    selectHelper:true,
+    selectable:true,
+    unselectAuto:false,
+    events: <%= @event.agenda.to_fullcalendar_json %>,
+    select: function(startDate, endDate, allDay) {
+        var title = prompt('Event Title:');
+        if (title) {
+          $.post('<%= event_agenda_sessions_path(@event)%>', { session : {name: title, start_at: startDate + "", end_at: endDate + ""}});
+          calendar.fullCalendar('renderEvent',
+            {
+              title: title,
+              start: startDate,
+              end: endDate,
+              allDay: allDay
+            },
+            true // make the event "stick"
+          );
+        }
+        calendar.fullCalendar('unselect');
+      },
+
+  });
+
+<% end %>
+
+<div id="calendar"></div>

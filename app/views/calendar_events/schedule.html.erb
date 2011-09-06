@@ -1,0 +1,143 @@
+<% content_for :headers do  -%>
+  <%= javascript_include_tag :defaults, 'jquery', 'jquery-ui', 'fullcalendar' %>
+  <%= stylesheet_link_tag 'jquery-ui', 'fullcalendar' %>
+<% end -%>
+
+<% content_for :javascript do %>
+      var room_id = <%=@room.id%>
+      $(document).ready(function(){
+		$('#calendar').fullCalendar({
+		    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
+			             'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 
+			                  'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+			dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+			dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+			buttonText: {
+			    prev:     '&nbsp;&#9668;&nbsp;',  // left triangle
+			    next:     '&nbsp;&#9658;&nbsp;',  // right triangle
+			    prevYear: '&nbsp;&lt;&lt;&nbsp;', // <<
+			    nextYear: '&nbsp;&gt;&gt;&nbsp;', // >>
+			    today:    'Hoy',
+			    month:    'Mes',
+			    week:     'Semana',
+			    day:      'Dia'
+			},
+			firstDay: 1,
+			allDayText: 'Todo el dia',
+			axisFormat: 'HH:mm G\'M\'\'T\' <%= escape_javascript(Time.zone.formatted_offset) %>',
+			ignoreTimezone: true,
+			allowCalEventOverlap: false,
+			selectable: true,
+			selectHelper: true,
+			select: function(start, end, allDay) {
+				var title = "No disponible";
+
+				if (dateScheduleAvailable(start, end, allDay)) {			
+/*
+					$('#calendar').fullCalendar('renderEvent', {
+						title: title,
+						start: start,
+						end: end,
+						editable: true,
+						allDay: allDay,
+						className: 'not-available'
+					  }, false // make the event "stick"
+                    );
+*/
+				    //createNotAvailableEvent(title, start, end, allDay, room_id);
+				  jQuery.ajax({
+				    data: 'start=' + start + '&end=' + end + '&room_id=' + room_id + '&allDay=' + allDay,
+				    dataType: 'script',
+				    type: 'get',
+				    url: "/calendar_events/new"
+				  });
+				}
+				$('#calendar').fullCalendar('unselect');
+			},
+			editable: true,
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			defaultView: 'agendaWeek',
+			height: 500,
+			columnFormat: {
+                            month: 'ddd',
+                            week: 'ddd d/M',
+                            day: 'dddd d/M'
+                     },
+			slotMinutes: 30,
+			loading: function(bool){
+				if (bool) 
+					//$('#loading').show();
+					$('#loading').hide();
+				else 
+					$('#loading').hide();
+			},
+
+			eventSources: [
+                            '/calendar_events/get_schedule_events?room_id='+room_id,
+                            '/calendar_events/get_room_reservations_events?room_id='+room_id
+                                   ],
+			timeFormat: 'HH:mm t{ - HH:mm t} ',
+			dragOpacity: "0.5",
+			eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc){
+				if (dateScheduleAvailable(event.start, event.end, allDay)) 
+				{
+				  moveEvent(event, dayDelta, minuteDelta, allDay);
+                }
+			    else 
+				{
+			      revertFunc();
+			    }
+			},
+			
+			eventResize: function(event, dayDelta, minuteDelta, revertFunc){
+				if (dateScheduleAvailable(event.start, event.end, false)) 
+				{				
+				  resizeEvent(event, dayDelta, minuteDelta);
+				}
+				else 
+				{
+				  revertFunc();
+				}
+			},
+			
+			eventClick: function(event, jsEvent, view){
+			    if (event.editable) {
+					showEventDetails(event);
+				} else {
+				    showEventDescription(event);
+				}
+			}
+//            }
+		});
+	});
+	
+<% end %>
+
+<p>
+  <%= link_to_remote 'Agregar horario NO disponible', 
+      :url => {:action => :new,  :params => {:room_id => @room.id}}, 
+      :before => "$('#loading').show()", 
+      :complete => "$('#loading').hide()"
+  %>
+</p>
+
+<div><div id='calendar'></div></div>
+
+<div id = "desc_dialog" style ="display:none;">
+  <div id = "event_desc"></div>
+  <br/>
+  <br/>
+  <div id = "event_actions">
+    <span id = "edit_event"></span>
+    <span id = "delete_event"></span>
+  </div>
+</div>
+<div id = "create_event_dialog" style ="display:none;">
+  <div id = "create_event">
+  </div>
+</div>

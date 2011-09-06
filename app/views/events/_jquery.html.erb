@@ -1,0 +1,125 @@
+//javascript for main activities input
+title = "<%= t('activity.input') %>";
+$("#input_activities").click(function(){
+  if(this.value == title){
+    this.value="";
+    $("#masterSubmitButton").show();
+  }
+});
+
+//initial state
+$('#wrapper_activities_header form').hide();
+$('#new_post').show();
+
+//clicks on headers
+$('.activities_title_header').live('click',function(){
+	$('.activities_title_header').removeClass('selected');
+	$(this).addClass('selected');
+	$('#wrapper_activities_header form').hide();
+	$('#new_'+this.id.split("_")[1]).show();
+});
+
+//submit
+$('#masterSubmitButton').live('click',function(){
+	$('.liveAdded').remove();
+	$('#wrapper_activities_header form:visible').append(
+	$('<input/>')
+	  .addClass('liveAdded')
+	  .attr('type', 'hidden')
+	  .attr('name', $('#wrapper_activities_header form:visible')
+	  .attr('id').split('_')[1]+'[_relation_ids][]')
+	  .val($('#security option:selected').attr('value')));
+	$('#wrapper_activities_header form:visible').submit();
+});
+
+
+//javascript for comments
+$(".input_new_comments").val("<%= t('comment.input') %>");
+$(".activities_comment_btn").hide();
+
+//usa livequery para usar el javascript luego de una accion con  AJAX
+$(".input_new_comments").livequery("click",function(){
+	if(this.value == "<%= t('comment.input') %>"){
+		$(this).val("");
+	}
+	$(".activities_comment_btn").hide();
+	$(this).parent(".new_comment").children(".activities_comment_btn").show();
+});
+$(".input_new_comments").livequery("blur",function(){
+	if(this.value == ""){
+		$(".activities_comment_btn").hide();
+    $(this).val("<%= t('comment.input') %>");
+	}
+});
+
+$(".input_new_comments").click(function(){
+	if(this.value == "<%= t('comment.input') %>"){
+		$(this).val("");
+	}
+	$(".activities_comment_btn").hide();
+	$(this).parent(".new_comment").children(".activities_comment_btn").show();
+});
+
+//javascript for tocomment option
+$(".to_comment").livequery("click", function(){
+  $(this).parents(".activity_content").find(".input_new_comments").click();
+  $(this).parents(".activity_content").find(".input_new_comments").focus();
+	return false;
+});
+$(".to_comment").livequery("blur", function(){
+  $(this).parents(".activity_content").find(".input_new_comments").blur();
+	return false;
+});
+
+
+
+
+
+
+
+
+
+//move he last list item before the first item. The purpose of this is if the user clicks to slide left he will be able to see the last item.
+$('#carousel_ul li:first').before($('#carousel_ul li:last'));
+
+
+//when user clicks the image for sliding right
+$('#right_scroll img').livequery("click",function(){
+
+  //get the width of the items ( i like making the jquery part dynamic, so if you change the width in the css you won't have o change it here too ) '
+  var item_width = $('#carousel_ul li').outerWidth() + 10;
+
+  //calculae the new left indent of the unordered list
+  var left_indent = parseInt($('#carousel_ul').css('left')) - item_width;
+
+  //make the sliding effect using jquery's anumate function '
+  $('#carousel_ul:not(:animated)').animate({'left' : left_indent},500,function(){
+
+      //get the first list item and put it after the last list item (that's how the infinite effects is made) '
+      $('#carousel_ul li:last').after($('#carousel_ul li:first'));
+
+      //and get the left indent to the default -210px
+      $('#carousel_ul').css({'left' : '-210px'});
+  });
+});
+
+//when user clicks the image for sliding left
+$('#left_scroll img').livequery("click",function(){
+
+  var item_width = $('#carousel_ul li').outerWidth() + 10;
+
+  /* same as for sliding right except that it's current left indent + the item width (for the sliding right it's - item_width) */
+  var left_indent = parseInt($('#carousel_ul').css('left')) + item_width;
+
+  $('#carousel_ul:not(:animated)').animate({'left' : left_indent},500,function(){
+
+  /* when sliding to left we are moving the last item before the first list item */
+  $('#carousel_ul li:first').before($('#carousel_ul li:last'));
+
+  /* and again, when we make that change we are setting the left indent of our unordered list to the default -210px */
+  $('#carousel_ul').css({'left' : '-210px'});
+  });
+
+
+});
+
