@@ -11,7 +11,7 @@ class GroupsController < InheritedResources::Base
     @groups = Group.most(params[:most]).
                     alphabetic.
                     letter(params[:letter]).
-                    search(params[:search]).
+                    name_search(params[:search]).
                     tagged_with(params[:tag]).
                     page(params[:page]).per(10)
 

@@ -75,7 +75,7 @@ class Actor < ActiveRecord::Base
     end
   }
 
-  scope :search, lambda { |param|
+  scope :name_search, lambda { |param|
     if param.present?
       where('actors.name LIKE ?', "%#{ param }%")
     end

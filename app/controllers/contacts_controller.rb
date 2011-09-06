@@ -9,7 +9,7 @@ class ContactsController < ApplicationController
     Contact.sent_by(current_subject).
             joins(:receiver).merge(Actor.alphabetic).
             merge(Actor.letter(params[:letter])).
-            merge(Actor.search(params[:search])).
+            merge(Actor.name_search(params[:search])).
             active
 
     respond_to do |format|

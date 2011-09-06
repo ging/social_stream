@@ -6,7 +6,7 @@ class UsersController < InheritedResources::Base
   def index
     @users = User.alphabetic.
                   letter(params[:letter]).
-                  search(params[:search]).
+                  name_search(params[:search]).
                   tagged_with(params[:tag]).
                   page(params[:page]).per(10)
 

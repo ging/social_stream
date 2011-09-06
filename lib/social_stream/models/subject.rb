@@ -16,7 +16,7 @@ module SocialStream
     # There are several scopes available for subjects 
     #
     # alphabetic:: sort subjects by name
-    # search:: simple search by name
+    # name_search:: simple search by name
     # distinct_initials:: get only the first letter of the name
     # followed:: sort by most following incoming {Tie ties}
     # liked:: sort by most likes
@@ -41,8 +41,8 @@ module SocialStream
           joins(:actor).merge(Actor.letter(param))
         }
 
-        scope :search, lambda{ |param|
-          joins(:actor).merge(Actor.search(param))
+        scope :name_search, lambda{ |param|
+          joins(:actor).merge(Actor.name_search(param))
         }
         
         scope :tagged_with, lambda { |param|
