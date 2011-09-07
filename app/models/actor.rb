@@ -65,7 +65,8 @@ class Actor < ActiveRecord::Base
            :through => :sent_contacts,
            :uniq => true
 
-  has_many :relations
+  has_many :relations,
+           :dependent => :destroy
 
   scope :alphabetic, order('actors.name')
 

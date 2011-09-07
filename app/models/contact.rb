@@ -25,10 +25,13 @@ class Contact < ActiveRecord::Base
   belongs_to :receiver,
              :class_name => "Actor"
 
-  has_many :ties
-  has_many :relations, :through => :ties
+  has_many :ties,
+           :dependent => :destroy
+  has_many :relations,
+           :through => :ties
 
-  has_many :activities
+  has_many :activities,
+           :dependent => :destroy
 
   scope :sent_by, lambda { |a|
     where(:sender_id => Actor.normalize_id(a))
