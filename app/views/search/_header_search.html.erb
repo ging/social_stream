@@ -1,0 +1,6 @@
+<% search_result.each do |actor| %>
+
+<div class="global_search_display_row" align="left">
+  <%= link_to image_tag(actor.logo.url(:actor)) + actor.name,actor.subject %>
+  </div>
+<% end %>

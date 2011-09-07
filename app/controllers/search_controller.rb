@@ -4,14 +4,11 @@ class SearchController < ApplicationController
   
   def index
     if params[:mode].eql? "header_search"
-      @search = Actor.search "*#{params[:id]}*"
+      @search_result = Actor.search "*#{params[:id]}*", :page => 1, :per_page => 10
+      render :partial => "header_search", :locals =>{:search_result => @search_result}
+      return
     else
-      @search = ThinkingSphinx.search "*#{params[:id]}*"      
-    end
-    
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json  { render :json => {:results => @search.to_json} }
+      @search_result = ThinkingSphinx.search "*#{params[:id]}*"      
     end
   end
 

@@ -1,10 +1,35 @@
 /******************** Search box css ***********************/
 #header_search {
-  width: 165px;
   float: left;
   padding: 0 10px;
 }
 #global_search_input {
-  width: 155px;
+  width: 175px;
+  border: solid 1px #dedede;
+  padding: 2px;
+}
+#global_search_display {
+  width: 175px;
+  display: none;
+  float: right;
+  margin-right: 35px;
+  border-left: solid 1px #dedede;
+  border-right: solid 1px #dedede;
+  border-bottom: solid 1px #dedede;
+  overflow: hidden;
+  z-index:99;
+  vertical-align: middle;
+}
+.global_search_display_row {
+  padding: 4px;
+  border-top: solid 1px #dedede;
+  font-size: 10px;
+  height: 35px;
+  background: #E1EEF5;
+  overflow: hidden;
+}
+.global_search_display_row:hover {
+  background: #3b5998;
+  color: #FFFFFF;
 }
 /******************** Search box css END ***********************/
