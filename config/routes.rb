@@ -65,6 +65,8 @@ Rails.application.routes.draw do
     resource :like
   end
   
+  match 'search' => 'search#index', :as => :search
+  
   match 'ties' => 'ties#index', :as => :ties
   
   # Social Stream objects configured in config/initializers/social_stream.rb

@@ -8,11 +8,14 @@
         <div class="menu_list menu_white" id="menu_home">
           <ul>
             <li class="btn_menu_profile"><%= link_to(t('profile.one'), current_subject)%></li>
-            <li class="pipe">|</li>
-            <li class="btn_menu_browse"><%=link_to(t('browse'),users_path) %></li>
           </ul>
         </div>
       <% end %>
+    </div>
+    <div id="header_search">
+      <form action="/search.php" method="post">
+          <input id="global_search_input" name="search" value="Search ..." type="text" autocomplete="off" />
+      </form>
     </div>
     <div id="header_right">
        <% if user_signed_in? %>

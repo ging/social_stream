@@ -1,0 +1,10 @@
+/******************** Search box css ***********************/
+#header_search {
+  width: 165px;
+  float: left;
+  padding: 0 10px;
+}
+#global_search_input {
+  width: 155px;
+}
+/******************** Search box css END ***********************/
