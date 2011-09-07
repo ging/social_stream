@@ -7,6 +7,9 @@ en:
   account:
     edit: "Edit user"
     one: "Account"
+    password:
+      new: "New password"
+      retype: "Retype new password"
     privacy: "Privacy"
   activity:
     audience:
