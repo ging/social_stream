@@ -1,3 +1,4 @@
+//= require search
 //= require hoverIntent
 //= require superfish
 //
