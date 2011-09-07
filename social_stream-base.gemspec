@@ -37,7 +37,7 @@ Gem::Specification.new do |s|
   # OAuth provider
   s.add_runtime_dependency('oauth-plugin','~> 0.4.0.pre1')	
   # Messages
-  s.add_runtime_dependency('mailboxer','~> 0.5.0')
+  s.add_runtime_dependency('mailboxer','~> 0.5.3')
   # Tagging
   s.add_runtime_dependency('acts-as-taggable-on','~> 2.0.6')
   # HTML Forms
