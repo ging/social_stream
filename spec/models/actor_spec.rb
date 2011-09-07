@@ -41,8 +41,6 @@ describe Actor do
   end
 
   it "should be destroyed" do
-    pending
-
     u = Factory(:user)
     a = u.actor
 
