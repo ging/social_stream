@@ -27,7 +27,8 @@ module SocialStream
       included do
         belongs_to :actor,
                    :validate => true,
-                   :autosave => true
+                   :autosave => true,
+                   :dependent => :destroy
         
         has_one :profile, :through => :actor
         

@@ -63,11 +63,11 @@ class Contact < ActiveRecord::Base
   after_save :send_message
 
   def sender_subject
-    sender.try(:subject)
+    sender.subject
   end
 
   def receiver_subject
-    receiver.try(:subject)
+    receiver.subject
   end
 
   # Does this {Contact} have the same sender and receiver?

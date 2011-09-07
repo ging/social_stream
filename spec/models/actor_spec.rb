@@ -25,4 +25,29 @@ describe Actor do
       a.pending_contacts.should_not include(c)
     end
   end
+
+  it 'should generate suggestion' do
+    10.times do
+      Factory(:user)
+    end
+
+    sgs = Factory(:user).suggestions(5)
+
+    sgs.size.should be(5)
+
+    sgs_names = sgs.map{ |s| s.receiver_subject.name }.compact
+
+    sgs.size.should be(5)
+  end
+
+  it "should be destroyed" do
+    pending
+
+    u = Factory(:user)
+    a = u.actor
+
+    u.destroy
+
+    Actor.find_by_id(a.id).should be_nil
+  end
 end
