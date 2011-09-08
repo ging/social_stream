@@ -3,10 +3,13 @@
     <input id="global_search_input" name="search" type="text" autocomplete="off" />
   </form>
   <div id="global_search_display">
+    <%= image_tag('loading.gif', :class => :loading) %>
   </div>
 </div>
 <%= javascript_tag do %>
 $(document).ready(function() {
+  var last_search = "";
+  
   $("#global_search_input").Watermark("Search");
 
   $("#global_search_input").keyup(function() {
@@ -17,16 +20,22 @@ $(document).ready(function() {
     else if(searchstring.length < 2) {
       $("#global_search_display").hide();
     } else {
-      $.ajax({
-        type : "GET",
-        url : "<%= search_url %>?id=" + searchstring + "&mode=header_search",
-        cache : false,
-        success : function(html) {      
-          if ($("#global_search_input").val()==searchstring){ //Only show if input value is still the same
-            $("#global_search_display").html(html).show();
-          }          
-        }
-      });
+      if (last_search!=searchstring){
+        last_search=searchstring;
+        $("#global_search_display").html("<%= escape_javascript(image_tag('loading.gif', :class => :loading)) %>").show();
+        $.ajax({
+          type : "GET",
+          url : "<%= search_url %>?id=" + searchstring + "&mode=header_search",
+          success : function(html) {      
+            if ($("#global_search_input").val()==searchstring){ //Only show if input value is still the same
+              $("#global_search_display").html(html);
+            }          
+          },
+          error: function(){
+            $("#global_search_display").html("Something went wrong with search engine");
+         }
+        });
+      }
     }
     return false;
   });  

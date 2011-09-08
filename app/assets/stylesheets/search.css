@@ -25,8 +25,12 @@
   overflow: hidden;
   position: absolute;
   z-index: 2000;
+  background: whiteSmoke;
+  text-align: center;
 }
 
+#global_search_display .loading {
+}
 #global_search_display a {  
   color: #2A3890;
   text-decoration: none;
@@ -44,6 +48,7 @@
   height: 35px;
   background: whiteSmoke;
   overflow: hidden;
+  text-align: left;
 }
 .global_search_display_row .logo{
   float:left;
