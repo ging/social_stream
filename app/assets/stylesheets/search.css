@@ -29,8 +29,6 @@
   text-align: center;
 }
 
-#global_search_display .loading {
-}
 #global_search_display a {  
   color: #2A3890;
   text-decoration: none;
@@ -41,7 +39,7 @@
   font-weight: bold;
 }
 
-.global_search_display_row {
+#global_search_display  li {
   padding: 4px;
   border-top: solid 1px #B9B9B9;
   font-size: 10px;
@@ -50,28 +48,18 @@
   overflow: hidden;
   text-align: left;
 }
-.global_search_display_row .logo{
+#global_search_display  li .logo{
   float:left;
   margin-right: 5px;  
 }
 
-.global_search_display_row .name {
+#global_search_display  li .name {
   float:left;
 }
 
 
-.global_search_display_row:hover {
+#global_search_display  li:hover {
   background: #CFDEFF;
   color: #2A3890;
-}
-
-.global_search_display_row a {
-  color: #2A3890;
-  text-decoration: none;  
-}
-.global_search_display_row a:hover {  
-  color: #2A3890;
-  text-decoration: none;
-  font-weight: bold;
 }
 /******************** Search box css END ***********************/

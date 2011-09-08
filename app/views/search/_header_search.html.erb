@@ -1,11 +1,10 @@
+<ul>
 <% search_result.each do |actor| %>
-
-
   <%= link_to actor.subject do %>
-    <div class="global_search_display_row" >
+    <li>
       <%= image_tag(actor.logo.url(:actor), :class => :logo) %> 
-      <%= content_tag(:span, actor.name, :class => :name) %>
-         
-    </div>
+      <%= content_tag(:span, actor.name, :class => :name) %>         
+    </li>
     <% end %>
 <% end %>
+</ul>

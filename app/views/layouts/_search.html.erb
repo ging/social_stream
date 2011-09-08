@@ -10,6 +10,16 @@
 $(document).ready(function() {
   var last_search = "";
   
+  $(document).click(function() {
+    $("#global_search_display").hide();
+  });
+  $('#global_search_input').click(function(e) {
+    e.stopPropagation();
+  });
+  $('#global_search_display').click(function(e) {
+    e.stopPropagation();
+  });
+  
   $("#global_search_input").Watermark("Search");
 
   $("#global_search_input").keyup(function() {
