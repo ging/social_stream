@@ -10,7 +10,7 @@ $(document).ready(function() {
     } else {
       $.ajax({
         type : "GET",
-        url : "search?id=" + searchstring + "&mode=header_search",
+        url : "/search?id=" + searchstring + "&mode=header_search",
         cache : false,
         success : function(html) {
           $("#global_search_display").html(html).show();
