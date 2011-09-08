@@ -1,6 +1,11 @@
 <% search_result.each do |actor| %>
 
-<div class="global_search_display_row" align="left">
-  <%= link_to image_tag(actor.logo.url(:actor)) + actor.name,actor.subject %>
-  </div>
+
+  <%= link_to actor.subject do %>
+    <div class="global_search_display_row" >
+      <%= image_tag(actor.logo.url(:actor), :class => :logo) %> 
+      <%= content_tag(:span, actor.name, :class => :name) %>
+         
+    </div>
+    <% end %>
 <% end %>

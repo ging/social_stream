@@ -12,9 +12,7 @@
         </div>
       <% end %>
     </div>
-    <div id="header_search">      
-        <%= render :partial => 'layouts/search' %>
-    </div>
+    <%= render :partial => 'layouts/search' %>
     <div id="header_right">
        <% if user_signed_in? %>
         <%= render :partial => 'layouts/representation' %>

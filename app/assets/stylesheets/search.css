@@ -19,22 +19,54 @@
   display: none;
   float: right;
   margin-right: 35px;
-  border-left: solid 1px #dedede;
-  border-right: solid 1px #dedede;
-  border-bottom: solid 1px #dedede;
+  border-left: solid 1px #B9B9B9;
+  border-right: solid 1px #B9B9B9;
+  border-bottom: solid 1px #B9B9B9;
   overflow: hidden;
-  position: relative;
+  position: absolute;
+  z-index: 2000;
 }
+
+#global_search_display a {  
+  color: #2A3890;
+  text-decoration: none;
+}
+#global_search_display a:hover {
+  color: #2A3890;
+  text-decoration: none;  
+  font-weight: bold;
+}
+
 .global_search_display_row {
   padding: 4px;
-  border-top: solid 1px #dedede;
+  border-top: solid 1px #B9B9B9;
   font-size: 10px;
   height: 35px;
-  background: #E1EEF5;
+  background: whiteSmoke;
   overflow: hidden;
 }
+.global_search_display_row .logo{
+  float:left;
+  margin-right: 5px;  
+}
+
+.global_search_display_row .name {
+  float:left;
+}
+
+
 .global_search_display_row:hover {
-  background: #3b5998;
-  color: #FFFFFF;
+  background: #CFDEFF;
+  color: #2A3890;
+}
+
+.global_search_display_row a {
+  color: #2A3890;
+  text-decoration: none;  
+}
+.global_search_display_row a:hover {  
+  color: #2A3890;
+  text-decoration: none;
+  font-weight: bold;
 }
 /******************** Search box css END ***********************/

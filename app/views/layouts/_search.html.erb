@@ -1,9 +1,10 @@
-<form action="#" method="post">
-  <input id="global_search_input" name="search" type="text" autocomplete="off" />
-</form>
-<div id="global_search_display">
+<div id="header_search">      
+  <form action="#" method="post">
+    <input id="global_search_input" name="search" type="text" autocomplete="off" />
+  </form>
+  <div id="global_search_display">
+  </div>
 </div>
-
 <%= javascript_tag do %>
 $(document).ready(function() {
   $("#global_search_input").Watermark("Search");
