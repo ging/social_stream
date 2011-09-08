@@ -12,12 +12,8 @@
         </div>
       <% end %>
     </div>
-    <div id="header_search">
-      <form action="/search.php" method="post">
-          <input id="global_search_input" name="search" type="text" autocomplete="off" />
-      </form>
-      <div id="global_search_display">
-      </div>
+    <div id="header_search">      
+        <%= render :partial => 'layouts/search' %>
     </div>
     <div id="header_right">
        <% if user_signed_in? %>

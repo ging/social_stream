@@ -1,0 +1,33 @@
+<form action="#" method="post">
+  <input id="global_search_input" name="search" type="text" autocomplete="off" />
+</form>
+<div id="global_search_display">
+</div>
+
+<%= javascript_tag do %>
+$(document).ready(function() {
+  $("#global_search_input").Watermark("Search");
+
+  $("#global_search_input").keyup(function() {
+    var searchstring = $(this).val();
+    if((searchstring=="")){
+      $("#global_search_display").hide();
+    }
+    else if(searchstring.length < 2) {
+      $("#global_search_display").hide();
+    } else {
+      $.ajax({
+        type : "GET",
+        url : "<%= search_url %>?id=" + searchstring + "&mode=header_search",
+        cache : false,
+        success : function(html) {      
+          if ($("#global_search_input").val()==searchstring){ //Only show if input value is still the same
+            $("#global_search_display").html(html).show();
+          }          
+        }
+      });
+    }
+    return false;
+  });  
+})
+<% end %>
