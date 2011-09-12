@@ -1,4 +1,4 @@
-<% if activity.direct_object.is_a? Actor %>
+<% if activity.direct_object.is_a? Actor or activity.direct_object.respond_to? :actor %>
   %{look}
 <% else %>
   "%{object.text}" 

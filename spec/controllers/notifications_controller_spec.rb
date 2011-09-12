@@ -20,13 +20,13 @@ describe NotificationsController do
   it "should update read" do
     put :update, :id => @receipt.notification.to_param, :read => "Read"
     @receipt.notification.is_unread?(@actor).should==false
-    response.should redirect_to notifications_path
+    assert_response :success
   end
 
   it "should update unread" do
     put :update, :id => @receipt.notification.to_param, :read => "Unread"
     @receipt.notification.is_unread?(@actor).should==true
-    response.should redirect_to notifications_path
+    assert_response :success
   end
 
   it "should update all" do
@@ -34,7 +34,7 @@ describe NotificationsController do
     put :update_all
     @receipt.notification.is_unread?(@actor).should==false
     @receipt2.notification.is_unread?(@actor).should==false
-    response.should redirect_to notifications_path
+    assert_response :success
   end
   
   it "should send to trash" do

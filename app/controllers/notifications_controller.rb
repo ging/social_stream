@@ -32,13 +32,15 @@ class NotificationsController < ApplicationController
         @actor.unread @notification
       end
     end
-    redirect_to notifications_path(:page => params[:page])
+    @notifications = @mailbox.notifications.not_trashed.page(params[:page]).per(10)
+    render :action => :index
   end
   
   def update_all
     @notifications= @mailbox.notifications.all
     @actor.read @notifications
-    redirect_to notifications_path(:page => params[:page])
+    @notifications = @mailbox.notifications.not_trashed.page(params[:page]).per(10)
+    render :action => :index
   end
 
   def destroy
