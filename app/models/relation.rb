@@ -35,6 +35,12 @@ class Relation < ActiveRecord::Base
   has_many :audiences, :dependent => :destroy
   has_many :activities, :through => :audiences
 
+  validates_presence_of :actor_id
+
+  scope :actor, lambda { |a|
+    where(:actor_id => Actor.normalize_id(a))
+  }
+
   scope :mode, lambda { |st, rt|
     where(:sender_type => st, :receiver_type => rt)
   }

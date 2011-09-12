@@ -16,6 +16,10 @@ Factory.define :public, :parent => :tie do |t|
   t.after_build { |u| u.relation = u.sender.relation_public }
 end
 
+Factory.define :reject, :parent => :tie do |t|
+  t.after_build { |u| u.relation = u.sender.relation_reject }
+end
+
 # Group ties
 Factory.define :g2u_tie, :parent => :tie do |t|
   t.contact { |c| Factory(:group_contact) }

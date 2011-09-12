@@ -116,12 +116,13 @@ class Contact < ActiveRecord::Base
   # Is this {Contact} +new+ or +edit+ for {SocialStream::Models::Subject subject} ?
   #
   # action is +new+ when, despite of being created, it has not {Tie ties} or it has a {Tie} with a
-  # {Relation::Public public relation}. 
+  # {Relation::Reject reject relation}. 
   #
-  # The contact's action is +edit+ when it has any {Tie} with a {Relation::Custom custom relation}
+  # The contact's action is +edit+ when it has any {Tie} with a {Relation::Custom custom relation} or
+  # a {Relation::Public public relation}
   #
   def action
-    if ties_count > 0 && relations.where(:type => 'Relation::Custom').any?
+    if ties_count > 0 && relations.where(:type => ['Relation::Custom', 'Relation::Public']).any?
       'edit'
     else
       'new'

@@ -41,7 +41,7 @@ class ContactsController < ApplicationController
   def destroy
     @contact = current_subject.sent_contacts.find params[:id]
 
-    @contact.relation_ids = [current_subject.relation_public.id]
+    @contact.relation_ids = [current_subject.relation_reject.id]
 
     respond_to do |format|
       format.js

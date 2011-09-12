@@ -59,13 +59,24 @@ describe Tie do
   end
 
   describe "with public relation" do
-    it "should not create activity" do
+    it "should create activity" do
       count = Activity.count
 
       Factory(:public)
 
+      Activity.count.should eq(count + 1)
+    end
+  end
+
+  describe "with reject relation" do
+    it "should not create activity" do
+      count = Activity.count
+
+      Factory(:reject)
+
       Activity.count.should eq(count)
     end
   end
+
 end
 

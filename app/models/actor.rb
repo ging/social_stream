@@ -195,7 +195,12 @@ class Actor < ActiveRecord::Base
   def relation_public
     Relation::Public.of(self)
   end
-  
+
+  # The {Relation::Reject} for this {Actor} 
+  def relation_reject
+    Relation::Reject.of(self)
+  end
+ 
   # All the {Actor actors} this one has relation with
   #
   # Options:
@@ -229,7 +234,7 @@ class Actor < ActiveRecord::Base
     if options[:relations].present?
       as = as.merge(Tie.related_by(options[:relations]))
     else
-      as = as.merge(Relation.where(:type => 'Relation::Custom'))
+      as = as.merge(Relation.where(:type => ['Relation::Custom', 'Relation::Public']))
     end
     
     as
@@ -447,6 +452,7 @@ class Actor < ActiveRecord::Base
   def create_initial_relations
     Relation::Custom.defaults_for(self)
     Relation::Public.default_for(self)
+    Relation::Reject.default_for(self)
   end
 
   # After create callback
