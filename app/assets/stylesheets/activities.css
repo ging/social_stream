@@ -60,7 +60,7 @@
 	border: thin solid #D4E4E4; width:100%;  padding-top: 3px;  padding-bottom: 3px;display:none;}
 .actor_logo_subactivity {	width: 40px;	padding: 5px 3px 5px 2px;	display: inline-block;
 	vertical-align: top;}
-.input_new_comments{	border:1px solid #BDC7D8;	width:98%;	padding: 2px;}
+.input_new_comments{	border:1px solid #BDC7D8;	width:98%;	padding: 2px; color:#2A3890;}
 .subactivity{  font-size: 11px;  padding: 0px 0px 0px 5px;  background: #deeff8;
   border: thin solid #D4E4E4; width: 100%; }
 .space_comments {	padding-top: 1px;	padding-bottom: 1px;}

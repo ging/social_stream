@@ -34,18 +34,8 @@ $('#masterSubmitButton').live('click',function(){
 
 //javascript for main activities input
 $(function() {
-  activity_input = "<%= I18n.t('activity.input') %>";
   $("#input_activities").click(function(){
-    if(this.value == activity_input){
-      this.value = "";
       $("#masterSubmitButton").show();
-    }
-  });
-  event_input = "<%= I18n.t('event.input') %>";
-  $("#event_name").click(function(){
-    if(this.value == event_input){
-      this.value = "";
-    }
   });
 });
 
@@ -53,7 +43,8 @@ $(function() {
 //javascript for comments
 $(function() {
   //"write new comment..." text in every text field for comments
-  $(".input_new_comments").val("<%= I18n.t('comment.input') %>");
+  $("#input_activities").Watermark("<%= I18n.t('activity.input') %>","#666");
+  $(".input_new_comments").Watermark("<%= I18n.t('comment.input') %>","#666");
   
   //show only the text fields for new comment if there are any comment to the post
   $(".activity_new_comment").each(function(){
@@ -84,9 +75,6 @@ showAllComments = function(id){
 
 //usa livequery para usar el javascript luego de una accion con  AJAX
 $(".input_new_comments").live("click",function(){
-	if(this.value == "<%= I18n.t('comment.input') %>"){
-		$(this).val("");
-	}
 	$(".activities_comment_btn").hide();
 	$(this).parent(".new_comment").children(".activities_comment_btn").show();
 });
@@ -96,7 +84,6 @@ $(".input_new_comments").live("click",function(){
 $(".input_new_comments").live("blur",function(){
 	if(this.value == ""){
 		$(".activities_comment_btn").hide();
-        $(this).val("<%= I18n.t('comment.input') %>");
 	}
 	return true;
 });
@@ -105,7 +92,6 @@ $(".input_new_comments").live("blur",function(){
 //javascript for tocomment option
 $(".to_comment").live("click", function(){
   $(this).parents(".activity_content").find(".activity_new_comment").show();
-  $(".input_new_comments").val("<%= I18n.t('comment.input') %>");
   $(this).parents(".activity_content").find(".input_new_comments").click();  
   $(this).parents(".activity_content").find(".input_new_comments").focus();
 	return false;
