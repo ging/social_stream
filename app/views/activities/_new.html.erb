@@ -11,7 +11,7 @@
 <div id="activity_form_select">
   <% SocialStream.activity_forms.each do |element| %>
     <div id="select_<%= element %>" class="activity_form_selector">
-      <%= image_tag "btn/#{ element }.png", :title => t("#{ element }.form.title") %>
+      <%= t("#{ element }.form.title") %>
     </div>
   <% end %> 	
 </div>
