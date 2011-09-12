@@ -16,7 +16,7 @@ en:
     all: "All documents"  
     confirm_delete: "Delete document?"
     form:
-      title: "Resource"
+      title: "File"
     mine: "My documents"
     msg: "Uploaded a document:"
     not_mine: "Documents"
