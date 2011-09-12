@@ -6,14 +6,21 @@
 
 <%= devise_error_messages! %>
 
+<% content_for :javascript do %>
+  $(".user_edit").validate();
+<%end%>
+
 <div class="space_center"></div>
 <h2><%= t('account.edit') %></h2>
 <div class="space_center"></div>
 
 <div class="block" id="password_form">
   <div class="header">
-    Change password
+    <div class="header_text">
+      <%=t("account.password.change")%>
+    </div>
   </div>
+  <div class="space_center"></div>
   <div >
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
     <div class="form_row">
@@ -51,8 +58,11 @@
 </div>
 <div class="block" id="email_form">
   <div class="header">
-    Change email address
+    <div class="header_text">
+      <%=t("account.email.change")%>
+    </div>
   </div>
+  <div class="space_center"></div>
   <div >
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
     <div class="form_row">
@@ -60,7 +70,7 @@
         <%= f.label :email %>
       </div>
       <div class="form_field">
-        <%= f.email_field :email, :class => "form_tag" %>
+        <%= f.email_field :email, :class => "required form_tag" %>
       </div>
     </div>
     <div class="form_row">
@@ -82,9 +92,13 @@
 </div>
 <div class="block" id="cancel_account">
   <div class="header">
-    Cancel account
+    <div class="header_text">
+      <%=t("account.cancel")%>
+    </div>
   </div>
+  <div class="space_center"></div>
   <div class="form_row">
     Unhappy? <b><%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</b>
   </div>
 </div>
+<div class="space_center"></div>

@@ -5,9 +5,13 @@ en:
     send: "Send"
     accept: "Accept"
   account:
-    edit: "Edit user"
+    cancel: "Cancel account"
+    edit: "Edit account"
+    email: 
+      change: "Change email address"
     one: "Account"
     password:
+      change: "Change password"
       new: "New password"
       retype: "Retype new password"
     privacy: "Privacy"
