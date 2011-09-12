@@ -268,7 +268,8 @@ class Actor < ActiveRecord::Base
   end
 
   def sent_active_contact_ids
-    sent_contacts.active.map(&:receiver_id)
+    @sent_active_contact_ids ||=
+      load_sent_active_contact_ids
   end
   
   # By now, it returns a suggested {Contact} to another {Actor} without any current {Tie}
@@ -358,6 +359,11 @@ class Actor < ActiveRecord::Base
       c.inverse ||
         c.receiver.contact_to!(c.sender)
     end
+  end
+
+  # Count the contacts in common between this {Actor} and subject
+  def common_contacts_count(subject)
+    (sent_active_contact_ids & subject.sent_active_contact_ids).size
   end
   
   # The set of {Activity activities} in the wall of this {Actor}.
@@ -479,5 +485,10 @@ class Actor < ActiveRecord::Base
         flatten
 
     ties + second_grade_ties
+  end
+
+  # Calculate {#sent_active_contact_ids}
+  def load_sent_active_contact_ids
+    sent_contacts.active.map(&:receiver_id)
   end
 end

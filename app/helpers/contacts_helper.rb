@@ -1,6 +1,6 @@
 module ContactsHelper
-  def contact_brief(contact)
-    "N contacts in common"
+  def contact_brief(subject)
+    t 'contact.in_common', :count => current_subject.common_contacts_count(subject)
   end
 
   def contact_link(c)

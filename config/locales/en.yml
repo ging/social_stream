@@ -94,6 +94,9 @@ en:
     edit:
       title: "Edit contact to %{name}"
       submit: "Edit Contact"
+    in_common:
+      one: "1 contact in common"
+      other: "%{count} contacts in common"
     new:
       link: "+ Add contact"
       title: "Add %{name} to your contacts"
