@@ -9,6 +9,20 @@ $(function() {
   $('#security').chosen();
 });
 
+
+$(document).ready(function() {
+  $('#new_post').submit(function() {
+    $("#input_activities").blur();
+    $("#masterSubmitButton").val("<%= I18n.t('activity.sending') %>...");
+    $('#new_post').attr("disabled", true);   
+    $('#masterSubmitButton').attr("disabled", true);   
+    $('#input_activities').attr('readonly', true);     
+    return true;
+  });
+});
+
+
+
 //clicks form selector
 $('.activity_form_selector').live('click',function(){
 	$('.activity_form_selector').removeClass('selected');
@@ -79,16 +93,6 @@ $(".input_new_comments").live("click",function(){
 	$(this).parent(".new_comment").children(".activities_comment_btn").show();
 });
 
-/* this function works but it finishes and no other event is done
- * I mean: when you click in other button the blur happens but the click is not done
-$(".input_new_comments").live("blur",function(){
-	if(this.value == ""){
-		$(".activities_comment_btn").hide();
-	}
-	return true;
-});
-*/
-
 //javascript for tocomment option
 $(".to_comment").live("click", function(){
   $(this).parents(".activity_content").find(".activity_new_comment").show();
@@ -96,15 +100,6 @@ $(".to_comment").live("click", function(){
   $(this).parents(".activity_content").find(".input_new_comments").focus();
 	return false;
 });
-
-
-
-
-
-
-
-
-
 
 //move he last list item before the first item. The purpose of this is if the user clicks to slide left he will be able to see the last item.
 $('#carousel_ul li:first').before($('#carousel_ul li:last'));

@@ -26,6 +26,7 @@ en:
     like: "I like"
     one: "Activity"
     other: "Activities"
+    sending: "Sending"
     title: "Activities"
     to_comment: "Comment"
     unlike: "I do not like anymore"

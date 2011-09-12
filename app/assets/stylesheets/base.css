@@ -67,7 +67,7 @@ textarea.new_contact_text_area{ height: 100px; color: #2A3890;}
       color-stop(0.16, rgb(0,122,193)), color-stop(0.58, rgb(56,148,209)), color-stop(0.79, rgb(168,222,249)) );
   background-image: -moz-linear-gradient(center bottom,
       rgb(0,122,193) 16%, rgb(56,148,209) 58%, rgb(168,222,249) 79%);
-  border-radius: 0.2em;  color: #fff; width: 60px;  height: 22px;  border: none;}
+  border-radius: 0.2em;  color: #fff; padding: 0 10px;  height: 22px;  border: none;}
 .myButtonBlue span {  display: block;  line-height: 14px;  padding: 3px 0 3px 10px;}
 .myButtonBlue:active {  background-position: bottom right;  color: #000;  outline: none; }
 .myButtonBlue:active span {  background-position: bottom left;  padding: 3px 0 2px 18px; }
