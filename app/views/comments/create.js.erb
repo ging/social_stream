@@ -1,4 +1,10 @@
+$(".submitActivity").val("<%= I18n.t('share') %>");
+$('.input_new_comments').val("");   
+$('.input_new_comments').blur();   
+$(".submitActivity").removeAttr("disabled");   
+$('.input_new_comments').removeAttr('readonly'); 
+$('.new_comment').removeAttr("disabled");   
+
 //Display the new comment
 $("#comments_activity_<%= @comment.post_activity.parent.id %>").append("<%= escape_javascript(render @comment.post_activity) %>");
-$(".input_new_comments").val("<%= t('comment.input') %>");
 $(".activities_comment_btn").hide();
