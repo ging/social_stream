@@ -46,7 +46,7 @@
   height: 35px;
   background: whiteSmoke;
   overflow: hidden;
-  text-align: left;
+  text-align: center;
 }
 #global_search_display  li .logo{
   float:left;
@@ -62,4 +62,15 @@
   background: #CFDEFF;
   color: #2A3890;
 }
+
+
+#global_search_display  span{
+  float:left;
+  margin-top: 10px;  
+}
+
+#global_search_display  .warning{
+  width:100%; 
+}
+
 /******************** Search box css END ***********************/
