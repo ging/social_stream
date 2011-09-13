@@ -9,8 +9,10 @@ module SocialStream
         @events = find_migration('social_stream-events')
       end
 
-      def up
-        super
+      def up(options = {})
+        if options[:base]
+          super
+        end
 
         ActiveRecord::Migrator.migrate @events
       end
