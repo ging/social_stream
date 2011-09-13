@@ -40,8 +40,7 @@ describe NotificationsController do
   it "should send to trash" do
     delete :destroy, :id => @receipt.notification.to_param
     @receipt.notification.is_trashed?(@actor).should==true
-    response.should redirect_to notifications_path
-    
+    assert_response :success
   end
 
 end

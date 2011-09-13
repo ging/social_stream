@@ -45,7 +45,8 @@ class NotificationsController < ApplicationController
 
   def destroy
     @notification.receipt_for(@actor).move_to_trash
-    redirect_to notifications_path
+    @notifications = @mailbox.notifications.not_trashed.page(params[:page]).per(10)
+    render :action => :index
   end
 
   private
