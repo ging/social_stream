@@ -71,7 +71,14 @@ module SocialStream
             __send__ m
           end
         }
-
+  
+        define_index do
+          indexes actor.name, :sortable => true
+          indexes actor.email
+          indexes actor.slug
+                
+          has created_at
+        end
       end
       
       module InstanceMethods

@@ -1,15 +1,16 @@
+<% if search_result.empty? %>
+<ul><li><%= content_tag(:span,I18n.t('search.actor.none'), :class => :warning) %></li></ul>
+<% else %>
 <ul>
-<% search_result.each do |actor| %>
-  <%= link_to actor.subject do %>
+<% search_result.each do |subject| %>
+  <%= link_to subject do %>
     <li>
-      <%= image_tag(actor.logo.url(:actor), :class => :logo) %> 
-      <%= content_tag(:span, actor.name, :class => :name) %>         
+      <%= image_tag(subject.actor.logo.url(:actor), :class => :logo) %> 
+      <%= content_tag(:span, subject.actor.name, :class => :name) %>         
     </li>
     <% end %>
 <% end %>
 </ul>
-
-
-<% if search_result.empty? %>
-<ul><li><%= content_tag(:span,I18n.t('search.actor.none'), :class => :warning) %></li></ul>
 <% end %>
+
+

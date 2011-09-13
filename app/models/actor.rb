@@ -20,15 +20,7 @@ class Actor < ActiveRecord::Base
   validates_presence_of :name, :subject_type
   
   acts_as_messageable
-  
-  define_index do
-    indexes name, :sortable => true
-    indexes email
-    indexes slug
-    
-    has created_at
-  end
-  
+
   acts_as_url :name, :url_attribute => :slug
   
   has_one :profile, :dependent => :destroy
