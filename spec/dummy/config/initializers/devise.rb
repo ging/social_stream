@@ -2,8 +2,9 @@
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
   # ==> Mailer Configuration
-  # Configure the e-mail address which will be shown in DeviseMailer.
-  config.mailer_sender = "please-change-me@config-initializers-devise.com"
+  # Configure the e-mail address which will be shown in Devise::Mailer,
+  # note that it will be overwritten if you use your own mailer class with default "from" parameter.
+  config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
@@ -34,7 +35,12 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  # config.case_insensitive_keys = [ :email ]
+  config.case_insensitive_keys = [ :email ]
+
+  # Configure which authentication keys should have whitespace stripped.
+  # These keys will have whitespace before and after removed upon creating or
+  # modifying a user and when used to authenticate or find a user. Default is :email.
+  config.strip_whitespace_keys = [ :email ]
 
   # Tell if authentication through request.params is enabled. True by default.
   # config.params_authenticatable = true
@@ -48,10 +54,22 @@ Devise.setup do |config|
   # The realm used in Http Basic Authentication. "Application" by default.
   # config.http_authentication_realm = "Application"
 
+  # It will change confirmation, password recovery and other workflows
+  # to behave the same regardless if the e-mail provided was right or wrong.
+  # Does not affect registerable.
+  # config.paranoid = true
+
   # ==> Configuration for :database_authenticatable
   # For bcrypt, this is the cost for hashing the password and defaults to 10. If
   # using other encryptors, it sets how many times you want the password re-encrypted.
-  config.stretches = 10
+  #
+  # Limiting the stretches to just one in testing will increase the performance of
+  # your test suite dramatically. However, it is STRONGLY RECOMMENDED to not use
+  # a value less than 10 in other environments.
+  config.stretches = Rails.env.test? ? 1 : 10
+
+  # Setup a pepper to generate the encrypted password.
+  # config.pepper = "6bcafeb00da5bc1cd324c5155e7ddfc9c611ae53faf8f534a0603480a6a8a5e3ad1ce172123dfda4f5f8fb81d81e1bdfa119be34333baf2406304d2ae6355377"
 
   # ==> Configuration for :confirmable
   # The time you want to give your user to confirm his account. During this time
@@ -61,6 +79,9 @@ Devise.setup do |config|
   # without confirming the account, but blocking it after a certain period
   # (ie 2 days).
   # config.confirm_within = 2.days
+
+  # Defines which key will be used when confirming an account
+  # config.confirmation_keys = [ :email ]
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
@@ -76,12 +97,18 @@ Devise.setup do |config|
   # to false if you are not using database authenticatable.
   config.use_salt_as_remember_token = true
 
-  # ==> Configuration for :validatable
-  # Range for password length. Default is 6..20.
-  # config.password_length = 6..20
+  # Options to be passed to the created cookie. For instance, you can set
+  # :secure => true in order to force SSL only cookies.
+  # config.cookie_options = {}
 
-  # Regex to use to validate the email address
-  # config.email_regexp = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
+  # ==> Configuration for :validatable
+  # Range for password length. Default is 6..128.
+  # config.password_length = 6..128
+
+  # Email regex used to validate email formats. It simply asserts that
+  # an one (and only one) @ exists in the given string. This is mainly
+  # to give user feedback and not to assert the e-mail validity.
+  # config.email_regexp = /\A[^@]+@[^@]+\z/
 
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
@@ -93,6 +120,9 @@ Devise.setup do |config|
   # :failed_attempts = Locks an account after a number of failed attempts to sign in.
   # :none            = No lock strategy. You should handle locking by yourself.
   # config.lock_strategy = :failed_attempts
+
+  # Defines which key will be used when locking and unlocking an account
+  # config.unlock_keys = [ :email ]
 
   # Defines which strategy will be used to unlock an account.
   # :email = Sends an unlock link to the user email
@@ -108,6 +138,16 @@ Devise.setup do |config|
   # Time interval to unlock the account if :time is enabled as unlock_strategy.
   # config.unlock_in = 1.hour
 
+  # ==> Configuration for :recoverable
+  #
+  # Defines which key will be used when recovering the password for an account
+  # config.reset_password_keys = [ :email ]
+
+  # Time interval you can reset your password with a reset password key.
+  # Don't put a too small interval or your users won't have the time to
+  # change their passwords.
+  config.reset_password_within = 2.hours
+
   # ==> Configuration for :encryptable
   # Allow you to use another encryption algorithm besides bcrypt (default). You can use
   # :sha1, :sha512 or encryptors from others authentication tools as :clearance_sha1,
@@ -115,9 +155,6 @@ Devise.setup do |config|
   # and :restful_authentication_sha1 (then you should set stretches to 10, and copy
   # REST_AUTH_SITE_KEY to pepper)
   # config.encryptor = :sha512
-
-  # Setup a pepper to generate the encrypted password.
-  # config.pepper = "6efecaefd488a07abded679d45be30dc97935d74c44825b647149a6fa30ee8cd5e05bb3a426ce8a87fcd75b04079b1bac68a079acdcc175800c4131dde7961f0"
 
   # ==> Configuration for :token_authenticatable
   # Defines name of the authentication token params key
@@ -150,11 +187,12 @@ Devise.setup do |config|
   # If you have any extra navigational formats, like :iphone or :mobile, you
   # should add them to the navigational formats lists.
   #
-  # The :"*/*" format below is required to match Internet Explorer requests.
-  # config.navigational_formats = [:"*/*", :html]
+  # The :"*/*" and "*/*" formats below is required to match Internet
+  # Explorer requests.
+  # config.navigational_formats = [:"*/*", "*/*", :html]
 
-  # The default HTTP method used to sign out a resource. Default is :get.
-  # config.sign_out_via = :get
+  # The default HTTP method used to sign out a resource. Default is :delete.
+  config.sign_out_via = :delete
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
@@ -163,7 +201,13 @@ Devise.setup do |config|
   config.omniauth :linked_in, "ekxfXU8nueVSMQ9fc5KJAryBkyztUlCBYMW3DoQPzbE79WhivvzhQloRNHCHgPeB", "WYiHFT-KKFgjd45W3-pEAficmXRHmN6_6DGwj1C_ZILJlSO1gBvv6VNYXU9tybGY"
                       
   config.omniauth :facebook, "129571360447856","eef39dce5e20e76f77495c59623bdb38"
- 
+                      
+  #config.omniauth :twitter, "wgTxO0fTpjTeSnjKC9ZHA","JepulVWwLcuAnGfWjwCu47yEP0TcJJfKtvISPBsilI"
+                      
+  config.token_authentication_key = :auth_token
+                      
+  config.stateless_token = true
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
