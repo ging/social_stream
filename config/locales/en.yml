@@ -287,7 +287,7 @@ en:
         read:
           activity: "Read wall"
         represent:
-          nil: "Represent"
+          nil: "Administrate"
       detailed:
         create:
           activity: "Post to \"%{relation}\" wall"
@@ -297,7 +297,7 @@ en:
           activity: "Read posts in \"%{relation}\" wall"
           tie: "See contacts in levels: %{relations} and %{public}"
         represent:
-          nil: "Represent me/us in the website"
+          nil: "Change session to act as %{subject}"
     of_relation:
       choose: "2. Permissions in <strong>%{name}</strong> sphere"
   privacy:

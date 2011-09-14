@@ -45,10 +45,7 @@ class Permission < ActiveRecord::Base
 
   # An explanation of the permissions. Type can be brief or detailed.
   # If detailed, description includes more information about the relation
-  def description(type, relation = nil)
-    options = {}
-    options[:relation] = relation.name if relation.present?
-
+  def description(type, options = {})
     I18n.t "permission.description.#{ type }.#{ action }.#{ object || "nil" }",
            options
   end
