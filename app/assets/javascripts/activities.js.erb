@@ -13,21 +13,18 @@ $(function() {
 
 $(document).ready(function() {
   $('#wrapper_activities_header form').submit(function() {
-    if ($(this).children('#input_activities').val()=="<%= I18n.t('activity.input') %>"){
-      return false;
-    }else{
-      $(this).children('input').blur();
-      $("#masterSubmitButton").val("<%= I18n.t('activity.sending') %>...");
-      $(this).attr("disabled", true);   
-      $('#masterSubmitButton').attr("disabled", true);   
-      $(this).children('input').attr('readonly', true);     
+    $(this).children('input').blur();
+    $("#masterSubmitButton").val("<%= I18n.t('activity.sending') %>...");
+    $(this).attr("disabled", true);   
+    $('#masterSubmitButton').attr("disabled", true);   
+    $(this).children('input').attr('readonly', true);     
     
-      // Add _relation_ids[] parameter from authorization selector
-      $('.liveAdded').remove();
+    // Add _relation_ids[] parameter from authorization selector
+    $('.liveAdded').remove();
     
-      var currentForm = $(this);
-    
-      $('#security option:selected').each(function() {
+    var currentForm = $(this);
+  
+    $('#security option:selected').each(function() {
                 currentForm.append(
                 $('<input/>')
                   .addClass('liveAdded')
@@ -35,22 +32,17 @@ $(document).ready(function() {
                   .attr('name', currentForm
                   .attr('id').split('_')[1]+'[_relation_ids][]')
                   .val($(this).attr('value')));
-      });
-      return true;
-    }
+    });
+    return true;
   });
   
   $('.new_comment').submit(function() {
-    if ($(this).children('.input_new_comments').val()=="<%= I18n.t('comment.input') %>"){
-      return false;
-    }else{
-      $(this).children('input').blur();
-      $(this).children('submit').val("<%= I18n.t('activity.sending') %>...");
-      $(this).attr("disabled", true);   
-      $(this).children('submit').attr("disabled", true);   
-      $(this).children('input').attr('readonly', true); 
-      return true;
-    }
+    $(this).children('input').blur();
+    $(this).children('submit').val("<%= I18n.t('activity.sending') %>...");
+    $(this).attr("disabled", true);   
+    $(this).children('submit').attr("disabled", true);   
+    $(this).children('input').attr('readonly', true); 
+    return true;    
   });
 });
 unblock_all_forms = function() {  
