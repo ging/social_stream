@@ -7,44 +7,52 @@ $(function() {
   $('#new_<%= SocialStream.activity_forms.first %>').show();
   $('#select_<%= SocialStream.activity_forms.first %>').addClass('selected');
   $('#security').chosen();
+  $("#input_activities").Watermark("<%= I18n.t('activity.input') %>","#666");
 });
 
 
 $(document).ready(function() {
   $('#wrapper_activities_header form').submit(function() {
-    $(this).children('input').blur();
-    $("#masterSubmitButton").val("<%= I18n.t('activity.sending') %>...");
-    $(this).attr("disabled", true);   
-    $('#masterSubmitButton').attr("disabled", true);   
-    $(this).children('input').attr('readonly', true);     
-
-    // Add _relation_ids[] parameter from authorization selector
-    $('.liveAdded').remove();
-
-    var currentForm = $(this);
-
-    $('#security option:selected').each(function() {
-            currentForm.append(
-            $('<input/>')
-              .addClass('liveAdded')
-              .attr('type', 'hidden')
-              .attr('name', currentForm
-              .attr('id').split('_')[1]+'[_relation_ids][]')
-              .val($(this).attr('value')));
-    });
-    return true;
+    if ($(this).children('#input_activities').val()=="<%= I18n.t('activity.input') %>"){
+      return false;
+    }else{
+      $(this).children('input').blur();
+      $("#masterSubmitButton").val("<%= I18n.t('activity.sending') %>...");
+      $(this).attr("disabled", true);   
+      $('#masterSubmitButton').attr("disabled", true);   
+      $(this).children('input').attr('readonly', true);     
+    
+      // Add _relation_ids[] parameter from authorization selector
+      $('.liveAdded').remove();
+    
+      var currentForm = $(this);
+    
+      $('#security option:selected').each(function() {
+                currentForm.append(
+                $('<input/>')
+                  .addClass('liveAdded')
+                  .attr('type', 'hidden')
+                  .attr('name', currentForm
+                  .attr('id').split('_')[1]+'[_relation_ids][]')
+                  .val($(this).attr('value')));
+      });
+      return true;
+    }
   });
   
   $('.new_comment').submit(function() {
-    $(this).children('input').blur();
-    $(this).children('submit').val("<%= I18n.t('activity.sending') %>...");
-    $(this).attr("disabled", true);   
-    $(this).children('submit').attr("disabled", true);   
-    $(this).children('input').attr('readonly', true); 
-    return true;
+    if ($(this).children('.input_new_comments').val()=="<%= I18n.t('comment.input') %>"){
+      return false;
+    }else{
+      $(this).children('input').blur();
+      $(this).children('submit').val("<%= I18n.t('activity.sending') %>...");
+      $(this).attr("disabled", true);   
+      $(this).children('submit').attr("disabled", true);   
+      $(this).children('input').attr('readonly', true); 
+      return true;
+    }
   });
 });
-
 unblock_all_forms = function() {  
   //Sharing buttons
   $(".submitActivity").val("<%= I18n.t('share') %>");  
@@ -54,7 +62,9 @@ unblock_all_forms = function() {
   $("#masterSubmitButton").val("<%= I18n.t('share') %>");  
   $("#masterSubmitButton").removeAttr("disabled"); 
   $('#wrapper_activities_header form').removeAttr("disabled"); 
-  $('#wrapper_activities_header form').children('input').removeAttr("readonly");     
+  $('#wrapper_activities_header form').children('input').removeAttr("readonly");    
+  $('#wrapper_activities_header form').children('input').val("");   
+  $$('#wrapper_activities_header form').children('input').blur();    
   
   //New comments
   $('.input_new_comments').val("");   
@@ -85,10 +95,7 @@ $(function() {
 
 
 //javascript for comments
-$(function() {
-  //"write new comment..." text in every text field for comments
-  $("#input_activities").Watermark("<%= I18n.t('activity.input') %>","#666");
-  
+$(function() {  
   //show only the text fields for new comment if there are any comment to the post
   $(".activity_new_comment").each(function(){
   	if ($.trim($(this).siblings(".activity_comments").text()) != ""){
