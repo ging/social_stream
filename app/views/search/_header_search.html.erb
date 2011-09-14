@@ -6,7 +6,7 @@
   <%= link_to subject do %>
     <li>
       <%= image_tag(subject.actor.logo.url(:actor), :class => :logo) %> 
-      <%= content_tag(:span, subject.actor.name, :class => :name) %>         
+      <%= content_tag(:span, truncate_name(subject.actor.name), :class => :name) %>         
     </li>
     <% end %>
 <% end %>

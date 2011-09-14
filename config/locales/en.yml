@@ -323,6 +323,7 @@ en:
     actor:
       none: "Nothing found"
     at_least: "Write at least two characters"
+    wrong: "There seems to be a problem with the search engine"
   settings:
     error: "Some errors raised when saving your changes"
     for: "Settings for"

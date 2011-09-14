@@ -25,9 +25,11 @@ $(document).ready(function() {
   $("#global_search_input").keyup(function() {
     var searchstring = $(this).val();
     if((searchstring=="")){
+      if (last_search!=searchstring){last_search=searchstring;}
       $("#global_search_display").hide();
     }
     else if(searchstring.length < 2) {
+      if (last_search!=searchstring){last_search=searchstring;}
       $("#global_search_display").html("<ul><li><%= escape_javascript(content_tag(:span,I18n.t('search.at_least'), :class => :warning)) %></li></ul>").show();
     } else {
       if (last_search!=searchstring){
@@ -42,7 +44,7 @@ $(document).ready(function() {
             }          
           },
           error: function(){
-            $("#global_search_display").html("Something went wrong with search engine");
+            $("#global_search_display").html("<ul><li><%= escape_javascript(content_tag(:span,I18n.t('search.wrong'), :class => :warning)) %></li></ul>");
          }
         });
       }

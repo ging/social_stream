@@ -55,6 +55,10 @@
 
 #global_search_display  li .name {
   float:left;
+  width: 125px;
+  overflow: hidden;
+  height: 25px;
+  text-align: left;
 }
 
 
@@ -63,11 +67,6 @@
   color: #2A3890;
 }
 
-
-#global_search_display  span{
-  float:left;
-  margin-top: 10px;  
-}
 
 #global_search_display  .warning{
   width:100%; 
