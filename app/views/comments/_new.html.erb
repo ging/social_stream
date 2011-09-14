@@ -22,14 +22,7 @@
 <% end %>
 
 <%= javascript_tag do %>
-$(document).ready(function() {
-  $('#new_comment<%= dom_id(activity) %>').submit(function() {
-    $('#comment_text_<%= dom_id(activity) %>').blur();
-    $('#comment_submit_<%= dom_id(activity) %>').val("<%= I18n.t('activity.sending') %>...");
-    $('#new_comment<%= dom_id(activity) %>').attr("disabled", true);   
-    $('#comment_submit_<%= dom_id(activity) %>').attr("disabled", true);   
-    $('#comment_text_<%= dom_id(activity) %>').attr('readonly', true); 
-    return true;
+  $(document).ready(function() {
+    $("#comment_text_<%= dom_id(activity) %>").Watermark("<%= I18n.t('comment.input') %>","#666");
   });
-});
 <% end %>

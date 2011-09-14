@@ -32,10 +32,36 @@ $(document).ready(function() {
               .attr('id').split('_')[1]+'[_relation_ids][]')
               .val($(this).attr('value')));
     });
-
+    return true;
+  });
+  
+  $('.new_comment').submit(function() {
+    $(this).children('input').blur();
+    $(this).children('submit').val("<%= I18n.t('activity.sending') %>...");
+    $(this).attr("disabled", true);   
+    $(this).children('submit').attr("disabled", true);   
+    $(this).children('input').attr('readonly', true); 
     return true;
   });
 });
+
+unblock_all_forms = function() {  
+  //Sharing buttons
+  $(".submitActivity").val("<%= I18n.t('share') %>");  
+  $(".submitActivity").removeAttr("disabled"); 
+  
+  //Header activities form
+  $("#masterSubmitButton").val("<%= I18n.t('share') %>");  
+  $("#masterSubmitButton").removeAttr("disabled"); 
+  $('#wrapper_activities_header form').removeAttr("disabled"); 
+  $('#wrapper_activities_header form').children('input').removeAttr("readonly");     
+  
+  //New comments
+  $('.input_new_comments').val("");   
+  $('.input_new_comments').blur();   
+  $('.input_new_comments').removeAttr('readonly'); 
+  $('.new_comment').removeAttr("disabled");   
+}
 
 $('#masterSubmitButton').live('click',function(){
   $('#wrapper_activities_header form:visible').submit();
@@ -62,7 +88,6 @@ $(function() {
 $(function() {
   //"write new comment..." text in every text field for comments
   $("#input_activities").Watermark("<%= I18n.t('activity.input') %>","#666");
-  $(".input_new_comments").Watermark("<%= I18n.t('comment.input') %>","#666");
   
   //show only the text fields for new comment if there are any comment to the post
   $(".activity_new_comment").each(function(){

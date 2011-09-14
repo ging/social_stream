@@ -1,9 +1,4 @@
-$(".submitActivity").val("<%= I18n.t('share') %>");
-$('#input_activities').val("");   
-$('#input_activities').blur();   
-$(".submitActivity").removeAttr("disabled");   
-$('#input_activities').removeAttr('readonly'); 
-$('#new_post').removeAttr("disabled");   
+unblock_all_forms();
     
 //Display the new post
 $("#wall").prepend("<%= escape_javascript(render @post.post_activity) %>");
