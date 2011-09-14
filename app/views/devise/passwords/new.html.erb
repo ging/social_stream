@@ -5,10 +5,15 @@
     <div class="space_center"></div>
     <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
       <%= devise_error_messages! %>
-      <div class="form_row"><%=t('devise.passwords.field')  %></div>
-      <div class="form_row"><%= f.text_field :email %></div>
+      <div class="instructions"><%= t('devise.passwords.acquire') %></div>
+      <div class="form_row">
+        <div class="form_label"<%= f.label :email %></div>
+        <div class="form_field"><%= f.text_field :email, :class => "form_tag" %></div>
+      </div>
 
-      <%= render :partial => "devise/shared/links" %>
+      <div id="devise_links">
+        <%= render :partial => "devise/shared/links" %>
+      </div>
 
       <div class="space_center"></div>
       <div class="btn_login">

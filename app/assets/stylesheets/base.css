@@ -130,7 +130,7 @@ textarea.new_contact_text_area{ height: 100px; color: #2A3890;}
 .block .field{  display:inline;  padding: 0px;  width:50%;}
 .block .form_tag{border-color: #0656a4;	color: #2A3890;	padding: 5px 5px 5px 5px;  border:1px solid #BDC7D8; width:90%;}
 .block .form_tag_long{border-color: #0656a4;	color: #2A3890;	padding: 5px 5px 5px 5px;  border:1px solid #BDC7D8; width:91%;}
-.block .form_label{display:inline-block;  width:25%; font-weight:bold; vertical-align:top; padding-top:3px;}
+.block .form_label{display:inline-block;  width:25%; font-weight:bold; vertical-align:10%; padding-top:3px;}
 .block .form_field{  display:inline-block;  padding: 0px;  width:73%;}
 .block .form_row {display: block; padding:5px; padding-left:20px;}
 .block .form_sub_row {display: block; padding:5px; padding-left:30px;}
@@ -140,6 +140,7 @@ textarea.new_contact_text_area{ height: 100px; color: #2A3890;}
 .block .form_column_right {	display: block; padding: 5px 10px 5px 10px; float:right; width:31%; text-align: center;}
 .block .form_bottom { display: block; padding:5px; padding-left:20px; clear:both; text-align: center; }
 .block .select_relations{ padding-top:20px; text-align: center; }
+#form_participants{vertical-align:60%;}
 
 
 /********* Links SECTION **********/

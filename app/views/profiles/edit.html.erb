@@ -96,7 +96,8 @@ end %>
 	      <%= f.label t('profile.' + current_subject.class.to_s.downcase + '.birthday')%>
 	    </div>
 	    <div class="form_field">
-	      <%= date_select "profile", "birthday", :order => [:day, :month, :year], :end_year=> Date.today.year, :start_year=> (Date.today.year - 100) %>
+	      <%= date_select "profile", "birthday", :order => [:day, :month, :year], :end_year=> Date.today.year, 
+	         :start_year=> (Date.today.year - 100), :prompt => { :day => 'Day', :month => 'Month', :year => 'Year' } %>
 	    </div>
 	  </div>
 
@@ -186,10 +187,7 @@ end %>
   <% end %>
   
   <div class="form_row space_center">
-    <%= f.submit t('button.update'), :class => "button" %>&nbsp;
-    <button class="button" onclick="window.location.href='<%= polymorphic_path(current_subject) %>';">
-    	<%= t('button.cancel')%>
-		</button>
+    <%= f.submit t('button.update'), :class => "button" %>
   </div>
 
 <% end %>

@@ -17,6 +17,7 @@ span.find{  padding-right:5px;}
 #devise_links {padding: 5px 0 5px 0;}
 #devise_links a{font-weight: bold;line-height: 15px; }
 #login{  padding-top: 5px;}
+.instructions{text-align: left; padding-bottom: 5px;}
 #welcome{  margin: 50px auto 50px auto;  width:330px;  padding:20px;  border: thin solid #2A3890;
   text-align:center;}
 #wrapper_left{  vertical-align:top;  width:49%;  display:inline-block;    padding-left: 20px;}
