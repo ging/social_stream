@@ -7,7 +7,7 @@
 <% end %>
 
 <%= location(
-    link_to(image_tag("btn/btn_notification.png", :class => "menu_icon")+t('notification.other'), notifications_path,:remote => true) +' ('+@mailbox.notifications.not_trashed.unread.count.to_s+')'
+    link_to(t('notification.other'), notifications_path,:remote => true) +' ('+@mailbox.notifications.not_trashed.unread.count.to_s+')'
 ) %>
 
 <% toolbar  %>

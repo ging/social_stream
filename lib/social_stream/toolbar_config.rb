@@ -3,11 +3,6 @@ module SocialStream
     #Prints the default home toolbar menu
     def default_home_toolbar_menu
       items = Array.new
-      #Notifications
-      items << {:key => :notifications,
-        :name => image_tag("btn/btn_notification.png")+t('notification.other')+' ('+ current_subject.mailbox.notifications.not_trashed.unread.count.to_s+')',
-        :url => notifications_path,
-        :options => {:link => {:id => "notifications_menu"}}}
 
       #Messages
       items << {:key => :messages,
