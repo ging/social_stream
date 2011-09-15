@@ -1,0 +1,17 @@
+<div class="event_search_result">
+  <div class="logo">
+    <%= link_to (image_tag(event.logo.url , :size => "50x50", :alt => event.name )), event  %>
+  </div>
+  <div class="sub-block">
+    <div class="name black" >
+      <%= link_to truncate_name(event.name), event %>
+    </div>
+    <div class="brief">
+      <%= t 'follower.n', :count => event.follower_count %>,
+      <%= t 'like.n',     :count => event.like_count %>
+    </div>
+    <div class="link">
+      <%= contact_to(event) %>
+    </div>
+  </div>
+</div>
