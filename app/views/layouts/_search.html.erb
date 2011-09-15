@@ -1,8 +1,8 @@
 <div id="header_search">      
-  <form action="#" method="post">
-    <input id="global_search_input" name="search" type="text" autocomplete="off" />
-  </form>
-  <div id="global_search_display">
+    <%= form_tag(search_path) do %>
+    <%= text_field_tag :search_query, nil,:autocomplete => :off, :id => :header_search_input %>
+    <% end %>
+  <div id="header_search_display">
     <%= image_tag('loading.gif', :class => :loading) %>
   </div>
 </div>
@@ -11,40 +11,40 @@ $(document).ready(function() {
   var last_search = "";
   
   $(document).click(function() {
-    $("#global_search_display").hide();
+    $("#header_search_display").hide();
   });
-  $('#global_search_input').click(function(e) {
+  $('#header_search_input').click(function(e) {
     e.stopPropagation();
   });
-  $('#global_search_display').click(function(e) {
+  $('#header_search_display').click(function(e) {
     e.stopPropagation();
   });
   
-  $("#global_search_input").Watermark("Search");
+  $("#header_search_input").Watermark("<%= escape_javascript(I18n.t('search.name')) %>");
 
-  $("#global_search_input").keyup(function() {
+  $("#header_search_input").keyup(function() {
     var searchstring = $(this).val();
     if((searchstring=="")){
       if (last_search!=searchstring){last_search=searchstring;}
-      $("#global_search_display").hide();
+      $("#header_search_display").hide();
     }
     else if(searchstring.length < 2) {
       if (last_search!=searchstring){last_search=searchstring;}
-      $("#global_search_display").html("<ul><li><%= escape_javascript(content_tag(:span,I18n.t('search.at_least'), :class => :warning)) %></li></ul>").show();
+      $("#header_search_display").html("<ul><li><%= escape_javascript(content_tag(:span,I18n.t('search.at_least'), :class => :warning)) %></li></ul>").show();
     } else {
       if (last_search!=searchstring){
         last_search=searchstring;
-        $("#global_search_display").html("<ul><li><%= escape_javascript(image_tag('loading.gif', :class => :loading)) %></li></ul>").show();
+        $("#header_search_display").html("<ul><li><%= escape_javascript(image_tag('loading.gif', :class => :loading)) %></li></ul>").show();
         $.ajax({
           type : "GET",
-          url : "<%= search_url %>?id=" + searchstring + "&mode=header_search",
+          url : "<%= search_url %>?search_query=" + searchstring + "&mode=header_search",
           success : function(html) {      
-            if ($("#global_search_input").val()==searchstring){ //Only show if input value is still the same
-              $("#global_search_display").html(html);
+            if ($("#header_search_input").val()==searchstring){ //Only show if input value is still the same
+              $("#header_search_display").html(html);
             }          
           },
           error: function(){
-            $("#global_search_display").html("<ul><li><%= escape_javascript(content_tag(:span,I18n.t('search.wrong'), :class => :warning)) %></li></ul>");
+            $("#header_search_display").html("<ul><li><%= escape_javascript(content_tag(:span,I18n.t('search.wrong'), :class => :warning)) %></li></ul>");
          }
         });
       }

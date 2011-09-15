@@ -1,0 +1,16 @@
+<%= location(link_to(t('search.name')))%>
+<br class="clearfloat" />
+<div class="space_center">
+</div>
+<h2><%= t('search.name') %></h2>
+<div class="space_center">
+</div>
+<div id="search_wrapper">
+  <%= form_tag(search_path) do %>
+    <div class="block">
+      <div class="form_row search_row">
+        <%= text_field_tag :search, params[:search_query].present? ? params[:search_query] : nil ,:autocomplete => :off, :id => :global_search_input %>
+      </div>
+    </div>
+  <% end %>  
+</div>
