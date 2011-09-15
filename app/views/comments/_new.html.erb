@@ -24,5 +24,6 @@
 <%= javascript_tag do %>
   $(document).ready(function() {
     $("#comment_text_<%= dom_id(activity) %>").Watermark("<%= I18n.t('comment.input') %>","#666");
+    activate_anti_rebounds();  
   });
 <% end %>

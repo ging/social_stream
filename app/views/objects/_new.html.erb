@@ -6,3 +6,9 @@
 
   <%= render :partial => object.class.to_s.tableize+'/fields' , :locals => {:f => f} %>	
 <% end %>
+
+<%= javascript_tag do %>
+$(document).ready(function(){  
+  activate_anti_rebounds();  
+});
+<% end %>

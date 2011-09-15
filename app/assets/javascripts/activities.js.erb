@@ -12,12 +12,15 @@ $(function() {
 
 
 $(document).ready(function() {
+  activate_anti_rebounds();
+});
+
+activate_anti_rebounds = function(){
   $('#wrapper_activities_header form').submit(function() {
-    $(this).children('input').blur();
-    $("#masterSubmitButton").val("<%= I18n.t('activity.sending') %>...");
-    $(this).attr("disabled", true);   
-    $('#masterSubmitButton').attr("disabled", true);   
-    $(this).children('input').attr('readonly', true);     
+    $(this).find('input[type=text]').each(function() {
+      $(this).blur().attr('readonly', true);
+    });
+    $("#masterSubmitButton").val("<%= I18n.t('activity.sending') %>...").attr("disabled", true); 
     
     // Add _relation_ids[] parameter from authorization selector
     $('.liveAdded').remove();
@@ -37,32 +40,28 @@ $(document).ready(function() {
   });
   
   $('.new_comment').submit(function() {
-    $(this).children('input').blur();
-    $(this).children('submit').val("<%= I18n.t('activity.sending') %>...");
-    $(this).attr("disabled", true);   
-    $(this).children('submit').attr("disabled", true);   
-    $(this).children('input').attr('readonly', true); 
+    $(this).find('input[type=text]').each(function() {
+      $(this).blur().attr('readonly', true); 
+    });
+    $(this).find(".submitActivity").each(function() {
+      $(this).val("<%= I18n.t('activity.sending') %>...").attr("disabled", true);   
+    });
     return true;    
   });
-});
+}
+
 unblock_all_forms = function() {  
   //Sharing buttons
-  $(".submitActivity").val("<%= I18n.t('share') %>");  
-  $(".submitActivity").removeAttr("disabled"); 
-  
+  $(".submitActivity").val("<%= I18n.t('share') %>").removeAttr("disabled");  
   //Header activities form
-  $("#masterSubmitButton").val("<%= I18n.t('share') %>");  
-  $("#masterSubmitButton").removeAttr("disabled"); 
-  $('#wrapper_activities_header form').removeAttr("disabled"); 
-  $('#wrapper_activities_header form').children('input').removeAttr("readonly");    
-  $('#wrapper_activities_header form').children('input').val("");   
-  $$('#wrapper_activities_header form').children('input').blur();    
-  
+  $("#masterSubmitButton").val("<%= I18n.t('share') %>").removeAttr("disabled");
+  $('#wrapper_activities_header form').find('input[type=text]').each(function() {
+    $(this).removeAttr("readonly").val("").blur();
+  });  
   //New comments
-  $('.input_new_comments').val("");   
-  $('.input_new_comments').blur();   
-  $('.input_new_comments').removeAttr('readonly'); 
-  $('.new_comment').removeAttr("disabled");   
+  $('.input_new_comments').each(function() {
+    $(this).removeAttr("readonly").val("");
+  }); 
 }
 
 $('#masterSubmitButton').live('click',function(){
