@@ -16,10 +16,9 @@ class SearchController < ApplicationController
 
   private
   def global_search query
-    result = Array.new
-    subjects = SocialStream.subjects.map{|sym| sym = sym.to_s.classify.constantize}
-    subjects.each do |subject|
-      result << ThinkingSphinx.search("*#{query}*", :page => 1, :per_page => 10, :classes => [subject])
+    result = Hash.new
+    SocialStream.subjects.each do |subject_sym|
+      result.update({subject_sym => ThinkingSphinx.search("*#{query}*", :page => 1, :per_page => 10, :classes => [subject_sym.to_s.classify.constantize])})
     end
     return result
   end

@@ -15,11 +15,13 @@
   <% end %>  
 </div>
 <div id="search_results" class="block">
-  <% @search_result.each do |subject_result| %>
-    <% subject_result.each do |subject|%>
-      <%= subject_search_result subject %>
-    <% end %>
-    <hr/>
+  <% SocialStream.subjects.each do |subject_type| %>
+    <div class="subject_search_results" class="block">    
+      <div class="title"><%= subject_type.to_s.capitalize.pluralize %></div>
+      <% @search_result[subject_type].each do |subject|%>
+        <%= subject_with_details subject %>
+      <% end %>
+    </div>
   <% end %>
   
 </div>

@@ -6,8 +6,9 @@
 <% cont+=1; %>
 <div class="row">
   <% end %>
-  <%= subject_search_result user %>
-
+  <div class="label">
+    <%= subject_with_details user %>
+  </div>
   <% end %>
 
   <% if ((cont%2) != 0) 	%> <div class="label"></div>

@@ -1,4 +1,5 @@
 /******************** Search css ***********************/
+/********************************* Header **************/
 #header_search {
   float: left;
   padding: 1px 10px 0 10px;
@@ -70,7 +71,24 @@
 #header_search_display  .warning {
   width: 100%;
 }
+/********************************* Global ******************/
 .search_row {
   text-align: center;
+}
+.subject_with_details {
+  padding: 5px;
+}
+.subject_search_results {
+  width: 270px;
+  float: left;
+  text-align: center;
+  margin: 3px;
+}
+.subject_search_results .title{
+  width: 260px;
+  margin: auto;
+  background-color: #E1EEF5;
+  padding:5px;
+  font-weight: bold;
 }
 /******************** Search css END ***********************/
