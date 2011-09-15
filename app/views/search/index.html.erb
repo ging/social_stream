@@ -1,5 +1,5 @@
 <% content_for :title do %>
-  <%=t('settings.one')%>
+  <%=t('search.name')%> <%= params[:search_query].present? ? ": #{params[:search_query]}" : ""%>
 <% end %>
 
 <% content_for :sidebar do %>
