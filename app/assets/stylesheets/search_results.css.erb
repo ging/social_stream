@@ -1,0 +1,9 @@
+/******************** Search results css ***********************/
+<% subjects_types = SocialStream.subjects.map{|sym| sym = sym.to_s} %>
+<% subjects_types.each do |subject_type| %>
+ .<%= subject_type%>_search_result{
+   width: 49%;
+   display: inline-block;
+ }
+<% end %>
+/******************** Search results css END ***********************/

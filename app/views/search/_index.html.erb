@@ -5,12 +5,21 @@
 <h2><%= t('search.name') %></h2>
 <div class="space_center">
 </div>
-<div id="search_wrapper">
+<div id="search_form">
   <%= form_tag(search_path) do %>
     <div class="block">
       <div class="form_row search_row">
-        <%= text_field_tag :search, params[:search_query].present? ? params[:search_query] : nil ,:autocomplete => :off, :id => :global_search_input %>
+        <%= text_field_tag :search_query, params[:search_query].present? ? params[:search_query] : nil ,:autocomplete => :off, :id => :global_search_input %>
       </div>
     </div>
   <% end %>  
+</div>
+<div id="search_results" class="block">
+  <% @search_result.each do |subject_result| %>
+    <% subject_result.each do |subject|%>
+      <%= subject_search_result subject %>
+    <% end %>
+    <hr/>
+  <% end %>
+  
 </div>

@@ -1,0 +1,13 @@
+<div class="user_search_result">
+  <div class="logo">
+    <%= link_to (image_tag(user.logo.url , :size => "50x50", :alt => user.name )),user  %>
+  </div>
+  <div class="sub-block">
+    <div class="name black" >
+      <%= link_to(truncate_name(user.name), user)%>
+    </div>
+    <div class="link">
+      <%= contact_to(user) %>
+    </div>
+  </div>
+</div>

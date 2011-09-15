@@ -4,23 +4,7 @@
 	  <% cont+=1; %>
  	  <div class="row">
 	<% end %>
-    <div class="label">
-      <div class="logo">
-        <%= link_to (image_tag(group.logo.url , :size => "50x50", :alt => group.name )), group  %>
-      </div>
-      <div class="sub-block">
-        <div class="name black" >
-          <%= link_to truncate_name(group.name), group %>
-        </div>
-        <div class="brief">
-          <%= t 'follower.n', :count => group.follower_count %>,
-          <%= t 'like.n',     :count => group.like_count %>
-        </div>
-        <div class="link">
-          <%= contact_to(group) %>
-        </div>
-      </div>
-    </div>
+	<%= subject_search_result group %>
 	<% if ((cont%2) == 0) 	%>
   	</div>
 	<% end %>

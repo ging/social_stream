@@ -1,12 +1,11 @@
-/******************** Search box css ***********************/
+/******************** Search css ***********************/
 #header_search {
   float: left;
   padding: 1px 10px 0 10px;
-  z-index:2001;
+  z-index: 2001;
 }
-
 #header_search_input, #global_search_input {
-  padding:0 3px 0 22px;
+  padding: 0 3px 0 22px;
   background: url('btn/search_icon.png') 5px 50% no-repeat white;
   font-size: 11px;
   color: #2A3890;
@@ -35,17 +34,15 @@
   background: whiteSmoke;
   text-align: center;
 }
-
-#header_search_display a {  
+#header_search_display a {
   color: #2A3890;
   text-decoration: none;
 }
 #header_search_display a:hover {
   color: #2A3890;
-  text-decoration: none;  
+  text-decoration: none;
   font-weight: bold;
 }
-
 #header_search_display  li {
   padding: 4px;
   border-top: solid 1px #B9B9B9;
@@ -55,32 +52,25 @@
   overflow: hidden;
   text-align: center;
 }
-#header_search_display  li .logo{
-  float:left;
-  margin-right: 5px;  
+#header_search_display  li .logo {
+  float: left;
+  margin-right: 5px;
 }
-
 #header_search_display  li .name {
-  float:left;
+  float: left;
   width: 125px;
   overflow: hidden;
   height: 25px;
   text-align: left;
 }
-
-
 #header_search_display  li:hover {
   background: #CFDEFF;
   color: #2A3890;
 }
-
-
-#header_search_display  .warning{
-  width:100%; 
+#header_search_display  .warning {
+  width: 100%;
 }
-
-.search_row{
+.search_row {
   text-align: center;
 }
-
-/******************** Search box css END ***********************/
+/******************** Search css END ***********************/
