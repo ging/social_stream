@@ -1,0 +1,45 @@
+<% content_for :title do %>
+  <%= profile_subject.name %> 
+<% end %>
+
+<% content_for :sidebar do %>
+  <%= render :partial => 'home/sidebar' %>
+<% end %>
+
+<%if profile_subject_is_current?%>
+  <%= location(
+    link_to(image_tag(("btn/btn_#{controller.controller_name.singularize}.png"), :class => "menu_icon")+t(controller.controller_name.singularize + '.title'), polymorphic_path(controller.controller_name),:remote => true)
+    ) %>
+  <% toolbar %>
+<%else%>
+  <%= location(
+    link_to(image_tag("btn/btn_profile.png", :class => "menu_icon")+ profile_subject.name, polymorphic_path(profile_subject),:remote => true),
+    link_to(image_tag(("btn/btn_#{controller.controller_name.singularize}.png"), :class => "menu_icon")+t(controller.controller_name.singularize + '.title'), polymorphic_path([profile_subject, controller.controller_name]),:remote => true)
+    ) %>
+  <% toolbar :profile => profile_subject %>
+<%end%>
+
+
+<div class="attachment_section_header">
+	<h3><%= profile_subject_is_current? ? t(controller.controller_name.singularize + '.mine') : t(controller.controller_name.singularize + '.not_mine') %></h3>
+</div>
+<% @activities.each do |a| %>
+	<% document = a.activity_objects.first.document %>
+	<div class="attachment_tile">
+		<div class="attachment_tile_thumb">
+    		<%= link_to thumb_for(document,48), 
+                {:controller => "documents", :action => "download", :id => document}, 
+ 				:type => document.type, 
+				:title => document.file_file_name,
+				:path => document_path(document) %>
+  		</div>
+
+  		<div class="attachment_tile_text">
+  			<%= link_to document.file_file_name,
+                {:controller => "documents", :action => "download", :id => document},
+ 				:alt => document.file_file_name,
+ 				:type => document.type,
+ 				:path => document_path(document) %>
+  		</div>
+	</div>
+<% end %>

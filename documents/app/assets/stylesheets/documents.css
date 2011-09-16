@@ -1,0 +1,190 @@
+.attachment
+{
+	padding-top: 10px;
+}
+
+.attachment_content
+{
+	position: relative;
+	width: 90%;
+	vertical-align: middle;
+	line-height: 20px;
+	height: auto;
+	float:left;
+	font-size:13px;	
+}
+
+.attachment_text
+{
+	line-height: 20px;
+	height: auto;
+	font-size:13px;
+}
+
+.attachment_text_link
+{
+	color: #2A3890;
+	padding-left: 10px;
+}
+
+.attachment_text audio
+{
+	position:relative;
+}
+
+.attachment_text video
+{
+	position:relative;
+	height: 180px;
+}
+
+.attachment_thumb
+{
+	position: relative;
+	/*width: 10%;*/
+	float: left;
+	/*height: 50px;*/
+  padding-right:5px;
+	vertical-align: middle;
+}
+
+#new_document{
+	margin-top: 10px;
+	margin-left: 15px;
+	margin-bottom: 10px;
+	clear: both;
+	text-align: left;
+}
+
+.attachment_tile{
+	margin: 4px;
+	margin-bottom: 8px;
+	width: 80px;
+	height: 65px;
+	border-bottom: 2px solid transparent;
+	float: left;
+	text-align: center;
+	overflow: hidden;
+}
+
+.attachment_tile:hover{
+	background-color: #e0edf2;
+	border-bottom: 2px solid #2A3890;
+}
+
+.attachment_tile.selected{
+	background-color: #e0edf2;
+	border-bottom: 2px solid green;	
+}
+
+.attachment_section_header{
+	margin-top: 15px;
+	margin-bottom: 5px;
+	padding-left: 10px;
+	position: relative;
+	width:90%;
+	border-left: 3px solid #2A3890;
+	background-color: #e0edf2;
+}
+
+.player{
+	position: fixed;
+	border-left: 24px solid #2A3890;
+	border-right: 24px solid #2A3890;
+	background-color: #e0edf2;
+	bottom: 0px;
+	right: 0px;
+	max-height: 300px;
+}
+
+#downloadButton{
+	position: fixed;
+	bottom: 5px;
+	right: 0px;
+	width: 24px;
+}
+
+.media_preview{
+	float:left;
+	margin: 10px;
+	width: 140px;
+	height: 110px;
+	text-align:center;
+}
+
+.media_preview_image{
+	position: relative;
+	top: 0px;
+	width:130px;	
+	height: 80px;
+}
+
+.media_preview_title{
+	position:relative;
+	width: 100%;
+	overflow:hidden;
+	font-size: 12px;
+	color: #2A3890;
+}
+
+.media_preview_detail{
+	position: relative;
+	width: 100%;
+	overflow:hidden;
+	font-size: 11px;
+	color: #2A3890;
+}
+
+.size_19px {
+	width: 19px;
+}
+
+
+#jpId {
+
+}
+
+.jp-audio, .jp-video {
+	margin: 5px 0 5px 0;
+}
+
+.hidenJplayer {
+	height: 0px;
+	width: 0px;
+}
+
+.video_thumbnail_class {
+	width: 180px;
+	height: 135px;
+}
+
+.video_thumbnail_image{
+	position: relative;
+	top:0px;
+	width: 180px;
+	z-index:1;
+}
+
+.video_thumbnail_play_over {
+	background: transparent url("jplayer.blue.monday.video.play.png") no-repeat center;
+	/* position: relative; */
+	position: relative;
+	cursor:pointer;
+	z-index:2;
+}
+
+.video_thumbnail_play_over:hover {
+	background: transparent url("jplayer.blue.monday.video.play.hover.png") no-repeat center;
+}
+
+.video_thumbnail_play_over {
+	top:-135px;
+	width:180px;
+	height:135px;
+}
+
+/* needed to hide the flash element when used */
+.jpId_size0{
+	width: 0px;
+	height: 0px;
+}

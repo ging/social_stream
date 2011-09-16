@@ -1,0 +1,14 @@
+.bundle/
+log/*.log
+pkg/
+spec/dummy/db/*.sqlite3
+spec/dummy/log/*.log
+spec/dummy/tmp/
+*.DS_Store
+Gemfile.lock
+.project
+.idea/*
+.idea/social_stream-documents.iml
+app/views/*/.tmp_*
+**.*swp
+.idea

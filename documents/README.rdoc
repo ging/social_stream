@@ -1,0 +1,6 @@
+= Social Stream Documents
+
+Social Stream Documents provides with files support to
+{Social Stream}[http://social-stream.dit.upm.es/], the core for building social
+network websites. This gem allows actor to upload files as other activity type.
+

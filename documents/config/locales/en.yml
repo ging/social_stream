@@ -1,0 +1,43 @@
+en:
+  audio:
+    confirm_delete: "Delete audio?"
+    title: "Audios"
+    mine: "My audios"
+    msg: "Uploaded an audio:"
+    not_mine: "Audios"
+  conference:
+    all: "All conferences"
+    confirm_delete: "Delete conference?"
+    title: "Conferences"
+    mine: "My conferences"
+    msg: "Uploaded a conference:"
+    not_mine: "Conferences"
+  document:
+    all: "All documents"  
+    confirm_delete: "Delete document?"
+    form:
+      title: "File"
+    mine: "My documents"
+    msg: "Uploaded a document:"
+    not_mine: "Documents"
+    simple_all: "All"  
+    title: "Documents"
+  picture:
+    confirm_delete: "Delete picture?"
+    title: "Pictures"
+    mine: "My pictures"  
+    msg: "Uploaded a picture:"
+    not_mine: "Pictures"
+  resource:
+    all: "All Resources"
+    confirm_delete: "Delete resource?"
+    title: "Resources"
+    mine: "My resources"
+    msg: "Uploaded a resource:"
+    not_mine: "Resources"
+  video:
+    confirm_delete: "Delete video?"
+    title: "Videos"
+    mine: "My videos"  
+    msg: "Uploaded a video:" 
+    not_mine: "Videos"
