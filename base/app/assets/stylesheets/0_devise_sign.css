@@ -3,6 +3,9 @@
   width:100%;
 }
 
+#footer ul{
+  padding-left: 59px;
+}
 #sidebar{
   display:none;  
 }

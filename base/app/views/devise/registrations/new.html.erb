@@ -1,3 +1,7 @@
+<% content_for :headers do%>
+  <%= stylesheet_link_tag "0_devise_sign", :media => "screen, projection" %>
+<%end%>
+
 <div id="welcome">
   <div id="login" class="block">
   <h2><%= t('sign_up').capitalize %></h2>
@@ -22,7 +26,7 @@
       <div class="form_field"><%= f.password_field :password_confirmation, :class =>"form_tag"  %></div>
     </div>
     <div class="form_row center">
-      <div id="btn_login"><%= f.submit t('action.accept').capitalize,:class=>"myButton"  %></div>
+      <div id="btn_login"><%= f.submit t('action.accept').capitalize,:class=>"button"  %></div>
     </div>
   <% end %>
   <div class="form_row center">

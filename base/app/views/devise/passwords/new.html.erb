@@ -1,3 +1,6 @@
+<% content_for :headers do%>
+  <%= stylesheet_link_tag "0_devise_sign", :media => "screen, projection" %>
+<%end%>
 <div id="welcome">
   <div id="login" class="block">
     <h2><%= t('password.forgot') %></h2>
@@ -17,7 +20,7 @@
 
       <div class="space_center"></div>
       <div class="btn_login">
-        <%= f.submit t('action.send'), :class =>"myButton" %>
+        <%= f.submit t('action.send'), :class =>"button" %>
       </div>
     <% end %>
   </div>
