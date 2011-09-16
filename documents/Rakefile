@@ -27,3 +27,10 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
 end
 
 Bundler::GemHelper.install_tasks
+
+# Modify this gem's tags
+class Bundler::GemHelper
+  def version_tag
+    "documents#{version}"
+  end
+end

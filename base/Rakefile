@@ -27,7 +27,7 @@ end
 
 Bundler::GemHelper.install_tasks
 
-# Modify this gem tags
+# Modify this gem's tags
 class Bundler::GemHelper
   def version_tag
     "base#{version}"
