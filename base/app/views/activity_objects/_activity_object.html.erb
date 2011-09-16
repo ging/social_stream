@@ -1,1 +1,7 @@
-<%= render activity_object.object %>
+<% unless activity_object.object.is_a? Actor or activity_object.object.respond_to? :actor %>
+  <%= render activity_object.object %>
+<% else %>
+  <div class="block">
+    <%= subject_with_details activity_object.object %>
+  </div>
+<% end %>
