@@ -1,0 +1,18 @@
+if @event
+  if @event.save
+    page<<"if (parent.$('#reservation_calendar_events')) { parent.$('#reservation_calendar_events').val(parent.$('#reservation_calendar_events').val() + ' ' + #{@event.id}) };"
+    page<<"$('#calendar').fullCalendar( 'refetchEvents' )"
+    #page<<"$('#create_event_dialog').dialog('destroy')"
+  else
+    page.alert @event.errors.full_messages(',').join("\n")
+  end
+end
+
+if @event_series
+  if @event_series.save
+    page<<"$('#calendar').fullCalendar( 'refetchEvents' )"
+    #page<<"$('#create_event_dialog').dialog('destroy')"
+  else
+    page.alert @event_series.errors.full_messages(',').join("\n")
+  end
+end

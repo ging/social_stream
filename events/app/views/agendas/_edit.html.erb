@@ -1,0 +1,136 @@
+<% content_for :headers do  %>
+  <%= javascript_include_tag 'fullcalendar' %>
+  <%= stylesheet_link_tag 'fullcalendar' %>
+<% end -%>
+<% receiver = current_subject%>
+
+<% content_for :javascript do %>
+  $(document).ready(function(){
+		$('#calendar').fullCalendar({
+			firstDay: 1,
+			axisFormat: 'HH:mm G\'M\'\'T\' <%= escape_javascript(Time.zone.formatted_offset) %>',
+                        ignoreTimezone: true,
+			allowCalEventOverlap: false,
+			selectable: true,
+			selectHelper: true,
+			select: function(start, end, allDay) {
+				if (dateAvailable(start, end, allDay)) {
+          var title = prompt('Event Title:');
+          if (title != "" && title != null) {
+					  $('#calendar').fullCalendar('renderEvent', {
+						title: title,
+						start: start,
+						end: end,
+            editable: true,
+						allDay: allDay
+					  }, false
+                    );
+				    session=createSessionEvent(title, start, end, '<%= @event.id%>','<%=current_subject.contact_to!(receiver).id %>');
+            $('#calendar').fullCalendar('refetchEvents');
+				 }
+        }
+				$('#calendar').fullCalendar('unselect');
+			},
+			header: {
+	      left: 'month,agendaWeek,agendaDay',
+				center: 'title',
+        right: 'prev,next today',
+
+			},
+			defaultView: 'agendaWeek',
+			height: 500,
+			columnFormat: {
+                            month: 'ddd',
+                            week: 'ddd d/M',
+                            day: 'dddd d/M'
+      },
+			slotMinutes: 30,
+			loading: function(bool){
+				if (bool)
+					//$('#loading').show();
+					$('#loading').hide();
+				else
+					$('#loading').hide();
+			},
+
+      editable: true,
+			timeFormat: 'HH:mm t{ - HH:mm t} ',
+			dragOpacity: "0.5",
+			eventDrop: function(session, dayDelta, minuteDelta, allDay, revertFunc){
+				moveSession(session, dayDelta, minuteDelta, allDay);
+			},
+
+			eventResize: function(session, dayDelta, minuteDelta, revertFunc){
+			  resizeEvent(session, dayDelta, minuteDelta);
+			},
+
+      eventSources: [
+      function(start, end, callback) {
+        $.ajax({
+          url: "/events/<%= params[:id]%>/agenda/get_sessions",
+          dataType: 'json',
+          data: {
+            start: Math.round(start.getTime() / 1000),
+            end: Math.round(end.getTime() / 1000)
+
+          },
+          success: function(events) {
+            callback(events);
+          }
+        });
+      }
+      ],
+
+			eventClick: function(session, jsEvent, view){
+			  if (session.editable) {
+					showSessionDetails(session);
+				}else {
+				  showSessionDescription(session);
+				}
+			}
+		});
+	});
+
+<% end %>
+
+<div class="space_center"></div>
+<h3> &nbsp; <%= t('Outline') +' '+ t('preposition.and')+' '+t('session.other') %></h3>
+<div class="space_center"></div>
+
+
+<div id="fc-btn-agenda">
+<td class="fc-header-left">
+  <span class="fc-state-default">
+    <span class="fc-button-inner">
+      <span class="fc-button-content"><%=link_to('Agenda',agenda_path(@event))%></span>
+    </span>
+  </span>
+</td>
+</div>
+
+
+<div class="space_center"></div>
+
+
+<div>
+  <div id='calendar'></div>
+</div>
+
+<div id = "desc_dialog" style ="display:none;">
+  <div id = "event_desc"></div>
+  <br/>
+  <br/>
+  <div id = "event_actions">
+    <span id = "edit_event"></span>
+    <span id = "delete_event"></span>
+  </div>
+</div>
+<div id = "create_event_dialog" style ="display:none;">
+  <div id = "create_event">
+  </div>
+</div>
+
+<div class="space_center"></div>
+<div class="space_center"></div>
+<div class="space_center"></div>
+<div class="space_center"></div>

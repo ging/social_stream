@@ -1,0 +1,25 @@
+<% if params[:pending].present? %>
+  <h2><%= t('contact.pending.other') %></h2>
+<% else %>
+  <h2><%= t('contact.addressbook') %></h2>
+<% end %>
+
+<div class="space_center"></div>
+<% cont=0; %>
+<% @cs.each do |contact| %>
+  <% if (cont%2) == 0 %>
+    <% cont+=1; %>
+    <div class="row">
+  <% end %>
+    <%= render :partial => "settings/contacto", :locals => {:contact => contact} %>
+    </div>
+<% end %>
+
+<% if ((cont%2) != 0) 	%>
+  <div class="label"></div>
+  </div>
+<% end %>
+
+<div class="row">
+  <%= paginate @cs %>
+</div>

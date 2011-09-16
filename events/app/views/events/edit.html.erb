@@ -1,0 +1,12 @@
+<% content_for :headers do %>
+  <%= javascript_include_tag 'fullcalendar' %>
+  <%= stylesheet_link_tag "fullcalendar", :media => "screen, projection" %>
+<% end %>
+
+<% content_for :sidebar do %>
+  <%= render :partial => 'home/sidebar' %>
+<% end %>
+
+<% toolbar %>
+
+

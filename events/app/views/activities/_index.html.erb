@@ -1,0 +1,94 @@
+<% content_for :javascript do %>
+    $(function() {
+				/**
+				* the element
+				*/
+				var $ui 		= $('#form_filter');
+				var $ui_really = $('#ul_filter');
+				/**
+				* on focus and on click display the dropdown, 
+				* and change the arrow image
+				*/
+				/*$ui.find('.sb_down').bind('focus click',function()*/
+        $ui.find('.sb_down').bind('mouseover',function()
+        {
+					$ui.find('.sb_down')
+					   .addClass('sb_up')
+					   .removeClass('sb_down')
+					   .andSelf()
+					   .find('.sb_dropdown')
+					   .show();
+              /*$ui.find('.sb_up')
+					   .hide();*/
+				});
+				
+				/**
+				* on mouse leave hide the dropdown, 
+				* and change the arrow image
+				*/
+      
+				$ui_really.bind('mouseleave',function(){
+
+					$ui.find('.sb_up')
+					   .addClass('sb_down')
+					   .removeClass('sb_up')
+					   .andSelf()
+					   .find('.sb_dropdown')
+					   .hide();
+              /*$ui.find('.sb_down')
+					   .show();*/
+				});
+				
+				/**
+				* selecting all checkboxes
+				*/
+				$ui.find('.sb_dropdown').find('label[for="all"]').prev().bind('click',function(){
+					$(this).parent().siblings().find(':checkbox').attr('checked',this.checked).attr('disabled',this.checked);
+				});
+            });    
+<% end %>
+<div id="wrapper_activities">
+  <div id="wrapper_activities_header">
+    <div id="activities_title" class="content_size">
+      <div class="activities_title_header">
+        <%= image_tag("btn/activity.png") %><%= t 'activity.title' %>
+      </div>
+    </div>
+    <%= render :partial => 'activities/new', :locals => { :receiver => owner } %>
+  </div>
+  <div id="filter_div">
+        <%= form_tag "/activities/documents", :method => :post ,:id=> 'form_filter', :class => "tie_form",:remote=> true do %>
+						<span class="sb_down">Filter</span>
+					<ul class="sb_dropdown" style="display:none;" id="ul_filter">
+
+						<li>
+                <%= check_box_tag 'types', 'Documents', false, :class => 'accept_tos',:onchange=>'$(\'#form_filter\').submit();'%>
+                <label for="<%=t('activity.view.documents')%>"><%=t('activity.view.documents')%></label>
+            </li>
+  					<li>
+                <%= check_box_tag 'types', 'Audio', false, :class => 'accept_tos',:onchange=>'$(\'#form_filter\').submit();'%>
+                <label for="t('activity.view.audio')"><%=t('activity.view.audio')%></label>
+            </li>
+						<li>
+                <%= check_box_tag 'types', 'Event', false, :class => 'accept_tos',:onchange=>'$(\'#form_filter\').submit();'%>
+                <label for="<%=t('activity.view.event')%>"><%=t('activity.view.event')%></label>
+            </li>
+						<li>
+                <%= check_box_tag 'types', 'Picture', false, :class => 'accept_tos',:onchange=>'$(\'#form_filter\').submit();'%>
+                <label for="<%=t('activity.view.photos')%>"><%=t('activity.view.photos')%></label>
+            </li>
+						<li>
+                <%= check_box_tag 'types', 'Post', false, :class => 'accept_tos',:onchange=>'$(\'#form_filter\').submit();'%>
+                <label for="<%=t('activity.view.post')%>"><%=t('activity.view.post')%></label>
+            </li>
+						<li>
+                <%= check_box_tag 'types', 'Video', false, :class => 'accept_tos',:onchange=>'$(\'#form_filter\').submit();'%>
+                <label for="<%=t('activity.view.video')%>"><%=t('activity.view.video')%></label>
+            </li>
+					</ul>
+        <% end %>
+  </div>
+  <%= render :partial => 'activities/wall',
+             :locals  => { :activities => activities } %>
+
+</div>

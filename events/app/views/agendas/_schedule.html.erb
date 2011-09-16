@@ -1,0 +1,19 @@
+<div class="block row schedule">
+	<div class="session_wrapper1">
+      <div class="event_date_image">
+        <div class="event_day"> <%= sanitize(@event.start_at.strftime("%d")) %> </div>
+        <div class="event_month"> <%= localize(@event.start_at, :format => "%b")%> </div>
+      </div>
+	</div>
+	<div class="session_wrapper2">
+		<div class="block header_text">
+      <h1><span class="header_title black"><%=@event.actor.name%></span></h1>
+	  </div>
+
+    <div class="block session_content">
+	    <span class="black"><%= t('when')%>: </span><%=@event.get_formatted_date%><br/>
+      <span class="black"><%= t('session.description').capitalize%>:</span><br/>
+      <%=@event.actor.profile.description %>
+	  </div>
+	</div>
+</div>

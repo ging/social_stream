@@ -1,0 +1,65 @@
+<% #remote_form_for @event, :url => {:action => :create}, :before => "$('#creating_events').show();", :complete => "$('#creating_events').hide();" do |f| 
+%>
+<% remote_form_for @event, :url => {:action => :create}, :complete => "$('#create_event_dialog').dialog('destroy');" do |f| %>
+
+<!--
+<p>
+  <%=f.label :title %>
+  <br/>
+  <%=f.text_field :title %>
+</p>
+-->
+<%=f.hidden_field :title, :value => "No disponible" %>
+<!--
+<p>
+  <%=f.label :description %>
+  <br/>
+  <%=f.text_area :description, :rows => 4, :cols => 30 %>
+</p>
+-->
+<%=f.hidden_field :description, :value => "No disponible" %>
+<p>
+  <%=f.label :starttime, 'Inicio' %>
+  <br/>
+  <%=f.datetime_select :starttime, :minute_step => 30 %>
+</p>
+<p>
+  <%=f.label :endtime, 'Fin' %>
+  <br/>
+  <%=f.datetime_select :endtime, :minute_step => 30 %>
+</p>
+<p>
+  <%=f.label :all_day, "Todo el día" %>
+  <%=f.check_box :all_day %>
+</p>
+<p>
+  <%=f.label :period, "Repetir" %>
+  <%=f.select :period, CalendarEvent::REPEATS,{}, :onchange => "showPeriodAndFrequency(this.value);" %>
+</p>
+<div id = "frequency" style = "display:none;">
+<p>
+  <%=f.label :frequency, "Repetir cada" %>
+  <%=f.select :frequency, (1..30).to_a %> <span id = "period"></span>
+</p>
+<p>
+  <%=f.label :starttime, 'Repetir hasta' %>
+  <%=check_box_tag :repeat, 1, false, :onchange => "showRepeatUntil(this.checked);" %>
+  <span id="repeat_until" style = "display:none;">
+  <%= select_date nil, {:prefix => :repeat_until, :include_blank => true}, :order => [:year, :month, :day] %>
+  </span>  
+</p>
+</div>
+<!--
+<p>
+  <%=f.label :starttime, 'Repetir hasta' %>
+  <br/>
+  <%= select_date Date.current, :prefix => :repeat_until, :order => [:year, :month, :day] %>
+</p>
+-->
+
+<%=f.hidden_field :object_id, :value => @room.id %>
+<%=f.hidden_field :object_type, :value => 'Room' %>
+<p>
+  <%=f.submit 'Agregar' %> <span id = "creating_events" style = "display:none;">Agregando, espere por favor...</span>
+</p>
+<%end %>

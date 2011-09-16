@@ -1,0 +1,21 @@
+<%= render :partial => 'toolbar/logo', :locals => { :subject => subject } %>
+
+<div class="block space_center">
+</div>
+
+<div id="menu_lateral" class="toolbar_menu">
+    <%= yield(:toolbar_menu).empty? ? profile_toolbar_menu(subject) : yield(:toolbar_menu) %>
+</div>
+
+<div class="block space_center">
+</div>
+<%  if  subject.subject_type == 'Event' %>
+  <% subject.relation_customs.each do |temp| %>
+    <%= render :partial => 'toolbar/organizer', :locals => { :subject => subject,:tie=> temp } %>
+  <% end %>
+  <%= render :partial => 'toolbar/suscribed', :locals => { :subject => subject } %>
+<% end %>
+<div class="block space_center">
+</div>
+
+

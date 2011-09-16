@@ -1,0 +1,1 @@
+$("#contact<%= @receiver.id.to_s %>").html("<%= escape_javascript(render :partial => 'settings/contacto', :locals => {:contact => @receiver}) %>");

@@ -1,0 +1,38 @@
+<% content_for :title do%>
+  <%= t('contact.other')%>
+<%end%>
+
+<% content_for :sidebar do %>
+  <%= render :partial => 'home/sidebar' %>
+<% end %>
+
+<% toolbar :option => :contacts %>
+
+<div id="my_conferences">
+  <div id="contacts" class="block">
+    <div class="search_field_wrapper">
+      <input type="text" value="Search by name" id="search_field" class="search_input" />
+      <%= image_tag("btn/search.png",:size=>"20x20",:id=>"search_button") %>
+    </div>
+    <div class="space_center"></div>
+    <div class="row" >
+      <div class="center">
+        <%= link_to t('contact.all_n', :count => current_subject.contact_subjects(:direction => :sent).count), contacts_path %> -
+        <% Actor.distinct_initials.
+                 contacted_from(current_subject).
+                 merge(Tie.related_by(current_subject.relation_customs.find_by_id(params[:relation]))).
+                 distinct_initials.
+                 each do |l| %>
+          <%= link_to l.initial,{:letter => l.initial,:page => 1},:class => "contact_letter_link" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="space_center"></div>
+    <div id="list_contacts_ajax" class="tab_content block">
+      <%= render :partial => "contacts/index"%>
+    </div>
+    <div class="space_center"></div>
+  </div>
+</div>
+
+<div class="space_center"></div>

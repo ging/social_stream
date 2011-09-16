@@ -1,0 +1,97 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  activity:
+    verb:
+      follow:
+        Event:
+          title: "%{subject} added %{contact} as contact."
+          message: "%{name} added you as contact."
+      like:
+        Event:
+          title: "%{subject} is a fan of %{contact}."
+          message: "%{name} is now your fan."
+      make-friend:
+        Event:
+          title: "%{subject} and %{contact} are now connected."
+          message: "%{name} also added you as contact."
+      post:
+        User:
+          title: "%{subject} add %{contact} like a new session."
+        Event:
+          title: "%{subject} created a new session."
+    view:
+      documents: "Documents"
+      audio: "Audio"
+      event: "Events"
+      photos: "Photos"
+      post: "Posts"
+      video: "videos"
+  actor:
+    created: "Created by"
+    delete: "Delete"
+    confirm_delete: "Confirm delete?"
+  agenda:
+    confirm_delete: "delete"
+  button:
+    create: "Create"
+  conference:
+    title: "Conferences"
+    list: "Contact's conferences"
+  date:
+    at: at
+    undefined: Undefined
+  event:
+    all: "All events"
+    all_n: "All events"
+    by: "By events"
+    cloud: "Events tag cloud"
+    confirm_delete: "Delete"
+    form:
+      title: "Event"
+    title: "Events"
+    input: "What is the name of event?"
+    list: "Contact's events"
+    live: "Live events"
+    most:
+      followed: "Most followed"
+      liked: "Most liked"
+    other: "Events"
+    suscribed: "Last Suscribed"
+  menu:
+    outline: "Outline"
+  profile:
+    event:
+      about: "About us"
+      birthday: "Anniversary"
+      experience: "Area of expertise"
+      info: "Event information"
+      tags: "Event tags"
+    outline: "Outline"
+  preposition:
+    and: "and"
+  session:
+    confirm_delete: "delete"
+    new: "New Session"
+    one: "session"
+    other: "sessions"
+    title: "title"
+    description: "description"
+    schedule: "schedule"
+  settings:
+    manage:
+      name: "Admin Contacs"
+      briefing: "Settings contacts preferences"
+      explanation: "Change contacts permissions"
+  time:
+    am: am
+    end: End time
+    from: from
+    pm: pm
+    start: Start time
+    to: to
+  timezone:
+    one: Timezone
+    set_up: You have not set up your time zone. <a href="{{path}}">Set it up now</a>
+
