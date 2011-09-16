@@ -1,0 +1,35 @@
+<div id="columns_container">
+
+  <div id="permissions_list_block">
+
+    <p class="sectionTitle"><%= raw t('permission.of_relation.choose', :name => h(@relation.name)) %></p>
+
+    <table class="tableCheckBoxOptions">
+      <% default_permissions.each_with_index do |p, i| %>
+      <tr>
+        <td>
+          <div contain=<%= dom_id p %> class="checkboxPermissionOptionLeft">
+            <input id=<%= dom_id p %> optionOf="permissions" type="checkbox"/>
+            <label for=<%= dom_id p %>><%= p.description(:brief) %></label>
+            <div class="clearfloat"></div>
+          </div>
+        </td>
+      <% if i == 0 %>
+        <td rowspan="<%= default_permissions.size %>" id="privacy-rule-arrow"><%= t 'privacy.rule.add' %></td>
+      <% end %>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div id="privacy_rules">
+    <p class="sectionTitle"><%= t 'privacy.rule.title' %></p>
+
+    <%= raw t('privacy.intro', :relation => h(@relation.name)) %>
+
+    <%= semantic_form_for @relation, :url => polymorphic_path(@relation, :section => 'rules'), :remote => true do |f| %>
+      <%= f.input :permissions, :as => :check_boxes, :collection => default_permissions.map{ |p| [p.description(:detailed, :relation => @relation.name, :subject => current_subject.name), p.id] } %>
+      <%= f.submit t('button.save'), :class => 'button' %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+$("#avatar_img_<%= old_id %>").removeClass("default");
+$("#avatar_img_<%= old_id %>").addClass("non_default");
+$("#avatar_link_<%= old_id %>").show();
+
+$("#avatar_img_<%= new_id %>").removeClass("non_default");
+$("#avatar_img_<%= new_id %>").addClass("default");
+$("#avatar_link_<%= new_id %>").hide();
+
+representation_path = $("#avatar_img_<%= new_id %>").attr('src').replace("/profile/", "/representation/");  
+
+$('#current_user_avatar_img').attr('src', representation_path);
+$('#current_subject_avatar_img').css('background-image', "url('" + representation_path +"')");
+
+$("#current_avatar_img").attr('src', $("#avatar_img_<%= new_id %>").attr('src') );
+  

@@ -1,0 +1,35 @@
+<% self.class.send :include, SubjectsHelper %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <div>
+      <div style="padding: 10px 5px 5px 5px;">
+        <span style="font-weight: bold;"><%= truncate_name(@message.sender.name)%></span>
+         has sent a new message to <%= @receiver.subject.is_a?(Group) ? @receiver.name : "you" %>
+      </div>
+      <div style="position: static;padding: 5px; border: #2A3890 solid 2px; background-color: #E1EEF5; margin:10px; min-height: 125px; width: 500px;">
+        <div style="float:left; margin-right:7px; border: thin solid #D4E4EA; background-color: white; max-height: 119px;">
+          <img src="http://<%= ActionMailer::Base.default_url_options[:host] +@message.sender.logo.url(:profile)%>" alt="<%=@message.sender.name%>">
+        </div>
+        <div style=" margin: 5px 5px 5px 5px;">
+          <p style="font-weight: bold; "><%= @message.sender.name %>
+            <% if @message.sender.profile.organization? %>
+              <br/><span style="color: #6C6D6F; font-weight: normal;"><%= @message.sender.profile.organization%></span>
+            <% end %>
+          </p>       
+          <p style="text-align: justify; font-style: italic;">
+            <%= raw @message.body %>
+          </p>
+        </div>
+      </div>
+      <div style="padding: 10px 5px 5px 5px;">    
+        <p>
+          <%= link_to((t('message.look')+" at "+t('socialstream')), conversation_url(@message.conversation))%> 
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

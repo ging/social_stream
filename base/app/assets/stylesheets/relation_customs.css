@@ -1,0 +1,245 @@
+.ui-radio-state-disabled, .ui-radio-state-checked-disabled, .ui-radio-state-disabled-hover, .ui-radio-state-checked-disabled-hover {
+	color: #999;
+}
+
+span.ui-checkbox, span.ui-radio {
+	display: block;
+	float: left;
+	width: 16px;
+	height: 17px;
+	background: url(icon_checkbox.png) 0 -40px no-repeat;
+	cursor: pointer;
+}
+
+span.ui-helper-hidden {
+	display: none;
+}
+
+#relation_customs label, #permissions label {
+	display: block;
+	font-family: sans-serif;
+	padding: 2px;
+	margin-left: 10px;
+	float: left;
+}
+
+#relation_customs label.ui-checkbox, #permissions label.ui-checkbox {
+	cursor: pointer;
+}
+
+span.ui-radio-state-hover, span.ui-checkbox-state-hover {
+	background-position: 0 -114px;
+}
+
+span.ui-checkbox-state-checked {
+	background-position: 0 -1px;
+}
+
+span.ui-checkbox-state-checked-hover {
+	background-position: 0 -75px;
+}
+
+span.ui-radio-state-checked-disabled-hover,span.ui-radio-state-checked-disabled, span.ui-radio-state-checked {
+	background-position: 0 -161px;
+}
+
+span.ui-radio-state-checked-hover {
+	background-position: 0 -200px;
+}
+
+#relation_customs input {
+	float: left;
+}
+
+#relation_customs span {
+	float: left;
+}
+
+form {
+	overflow: hidden;
+	height: 1%;
+	margin: 0px 0;
+}
+
+#relation_customs .options {
+	float: right;
+	display: none;
+}
+
+#relation_customs .button {
+	margin-left: 0;
+}
+
+#cancel_new_relation_custom {
+	margin-right: 10px;
+}
+
+.relation_custom_name_form {
+	display: none;
+}
+
+.cancel_edit_relation_custom {
+	margin-right: 10px;
+	float: right;
+}
+
+.ui-helper-hidden-accessible {
+	position: absolute;
+	left: -999em;
+}
+
+#wrapper_section{
+	width: 95%;
+	margin-left: 10px;
+}
+
+.checked-option{
+	background-color: #dfecf1;
+}
+
+.pageTitle{
+	color: black;
+	padding: 0px 10px 0px 0px;
+	font-size: 15px;
+}
+
+.sectionTitle{
+	background-color: #dfecf1;
+	color: #4d539d;
+	padding: 15px 20px 15px 20px;
+}
+
+#new_relation {
+	text-align: right;
+	padding: 5px 0px 5px 0px;
+	margin: 0px 10px 15px 30px;
+}
+
+#new_relation_custom_input_block {
+	display: none;
+}
+
+input.privacy_input_new{
+	background-color: #dfecf1;
+	border: 1px solid #1F4A75;
+	color: #1F4A75;
+}
+
+span.privacy_span_new {
+	font-family: sans-serif;
+  margin-right: 10px;
+}
+
+#tableCheckBoxOptions {
+	border: none;
+	width: 100%;
+	padding: 5px 0px 5px 0px;
+}
+
+.tableCheckBoxOptions td {
+	width: 250px;
+}
+
+.checkboxOptionLeft{
+	text-align: left;
+	margin-left: 30px;
+	margin-right: 15px;
+	cursor: pointer;
+}
+
+.checkboxOptionRight{
+	text-align: left;
+	margin-left: 15px;
+	margin-right: 30px;
+}
+
+.checkboxPermissionOptionLeft{
+  text-align: left;
+  margin-left: 5px;
+  margin-right: 3px;
+}
+
+.checkboxPermissionOptionRight{
+  text-align: left;
+  margin-left: 3px;
+  margin-right: 5px;
+}
+
+.selectNew{
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+}
+
+.privacy_block_section{
+	margin-top: 50px;
+}
+
+.first_block_section{
+  margin-top: 10px;
+}
+
+#permissions_list_block{
+	width: 50%;
+	float: left;
+	text-align: center;
+	display: block;
+}
+
+#privacy_rules{
+	width: 45%;
+	float: right;
+	text-align: center;
+	display: block;
+	border:1px solid #1F4A75;
+}
+
+#columns_container{
+    width: 100%;
+		margin:0 auto;
+}
+
+#relation_custom_permissions_input {
+	list-style-type: none;
+}
+
+#relation_custom_permissions_input ol{
+	text-decoration: none;
+	margin: 0 10px 0 30px;
+	text-align: left;
+}
+
+#relation_custom_permissions_input ol li{
+	font-family: sans-serif;
+	padding: 5px 0px 5px 0px;
+}
+
+#relation_custom_permissions_input label {
+	margin-left: 0px;
+}
+
+#relation_custom_permissions_input fieldset{
+	border: 0px;
+	text-align: left;
+}
+
+#relation_custom_permissions_input legend{
+	display: none;
+}
+
+#relation_custom_permissions_input input{
+	display: none;
+}
+
+#loading {
+	background: url('images/loading.gif') no-repeat center center;
+	height: 128px;
+	width: 100%;
+	margin-top: 64px;
+	cursor: wait;
+}
+
+#privacy-rule-arrow {
+	background: url('images/add-policy.png') no-repeat center center;
+	color: #FFFFFF;
+}
+

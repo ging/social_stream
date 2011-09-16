@@ -1,0 +1,19 @@
+<% cont=0; %>
+
+<% @users.each do |user| %>
+
+<% if (cont%2) == 0 %>
+<% cont+=1; %>
+<div class="row">
+  <% end %>
+  <div class="label">
+    <%= subject_with_details user %>
+  </div>
+  <% end %>
+
+  <% if ((cont%2) != 0) 	%> <div class="label"></div>
+</div>
+<% end %>
+<div class="row">
+  <%= paginate @users %>
+</div>

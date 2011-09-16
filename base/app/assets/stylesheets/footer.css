@@ -1,0 +1,26 @@
+#sponsor-wrapper{ text-align:right; vertical-align:middle;}
+#sponsor{width:960px;margin:0 auto;color:#666; }
+
+#footer{width: 960px;margin-left: auto;margin-right: auto;padding: 0;position: relative; text-align:center;
+	clear:left;font-size:0.9166em;line-height:1.6363;color:#666;padding:0.75em 0;}
+#footer ul, #sponsor ul{list-style-type:none;margin:0 0.5em; }
+#footer ul li,#sponsor ul li{display:inline-block;margin-right:0.25em;position:relative;}
+#footer ul li#trade_mark,#sponsor ul li#trademark{font-weight:bold;color:#111;}
+#footer ul li#trade_mark_logo{font-weight:normal;}
+#footer a, #sponsor a{color:#666;}
+#footer a:hover, #sponsor a:hover{color:#444; text-decoration: underline;}
+#footer .icon,#global .icon{margin-bottom:-4px;}
+#footer-wrapper{background-color:#e1eef5;}
+#footer_right{font-weight:normal;}
+#footer_right{ font-size: 10px; line-height: 1.1em;}
+
+
+#footerFront {	width: 100%;	padding: 0;	background: #E1EEF5;}
+.banner_footer { width: 960px;	margin-left: auto;	margin-right: auto;	padding: 0;	position: relative;}
+.banner_footer #footer_content {	text-align: center;	color: #ccc;}
+.banner_footer {	width: 960px;	color: #0656a4;	margin-left: auto;	margin-right: auto;	padding-top: 2px;
+	position: relative;}
+.banner_footer .a_border {	border-right: thin solid;	color: #0656a4;	padding: 0px 7px;	text-decoration: underline;}
+.banner_footer a {	color: #0656a4;	padding: 0px 7px;	text-decoration: underline;}
+
+.rowfooter{float:right;}

@@ -1,0 +1,6 @@
+$("#content").html("<%=escape_javascript(render :partial => 'index') %>");
+<%= location(link_to(image_tag("btn/message_" + @box + ".png", :class => "menu_icon")+t('message.' + @box), conversations_path(:box => @box),:remote => true)) %>
+
+$('.pagination a').attr('data-remote', 'true');
+	  
+<%= toolbar :option => :messages %>

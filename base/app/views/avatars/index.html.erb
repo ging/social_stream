@@ -1,0 +1,29 @@
+<% toolbar :profile => current_subject %>
+
+<% content_for :headers do %>
+  <%= stylesheet_link_tag "avatars.css", :media => "screen, projection" %>
+  <%= javascript_include_tag 'jquery.Jcrop.min' %>
+  <%= javascript_include_tag 'jquery.form' %>
+  <%= javascript_include_tag 'jquery.fileupload' %>
+  <%= javascript_include_tag 'jquery.fileupload-ui' %>
+  <%= javascript_include_tag 'avatars.js' %>
+
+  <%= stylesheet_link_tag "jquery.Jcrop", :media => "screen, projection" %>
+  <%= stylesheet_link_tag "avatars", :media => "screen, projection" %><br/>
+  <%= stylesheet_link_tag "jquery.fileupload-ui", :media => "screen, projection" %>
+<% end %>
+
+<% content_for :title do%>
+  <%= current_subject.name %>
+<% end%>
+<% content_for :sidebar do %>
+  <%= render :partial => 'home/sidebar' %>
+<% end %>
+
+<%= location(
+ 	link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('profile.one'), [current_subject,:profile]),	
+ 	link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('avatar.other'), avatars_path)
+) %>
+
+<%= render :partial => 'list' %>
+<%= render :partial => 'form' %>

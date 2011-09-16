@@ -1,0 +1,369 @@
+en:
+  actor:
+    name: "Name"
+  action:
+    send: "Send"
+    accept: "Accept"
+  account:
+    cancel: "Cancel account"
+    edit: "Edit account"
+    email: 
+      change: "Change email address"
+    one: "Account"
+    password:
+      change: "Change password"
+      new: "New password"
+      retype: "Retype new password"
+    privacy: "Privacy"
+  activity:
+    audience:
+      visible: "Shared with %{audience}"
+      hidden: "Shared with spheres of %{audience}"
+    confirm_delete: "Delete activity?"
+    delete: "Delete"
+    input: "What are you doing?"
+    last: "Last Activities"
+    like: "I like"
+    one: "Activity"
+    other: "Activities"
+    sending: "Sending"
+    title: "Activities"
+    to_comment: "Comment"
+    unlike: "I do not like anymore"
+    verb:
+      follow:
+        User:
+          title: "%{subject} added %{contact} as contact."
+          message: "%{name} added you as contact."
+        Group:
+          title: "%{subject} added %{contact} as contact."
+          message: "%{name} added you as contact."
+      like:
+        User:
+          title: "%{subject} is a fan of %{contact}."
+          message: "%{name} is now your fan."
+        Group:
+          title: "%{subject} is a fan of %{contact}."
+          message: "%{name} is now your fan."
+      make-friend:
+        User:
+          title: "%{subject} and %{contact} are now connected."
+          message: "%{name} also added you as contact."
+        Group:
+          title: "%{subject} added %{contact} as contact."
+          message: "%{name} added you as contact."           
+      post:
+        title:
+          other_wall: "%{sender} → %{receiver}"
+  avatar:
+    crop_image: "Crop the uploaded image"
+    crop_submit: "Crop image"
+    destroy: "Delete"
+    destroy_sure: "Are you sure you wan't to delete the selected avatar?"
+    error:
+      no_file: "You have to select a file"
+      no_image_file: "The file you uploaded isn't valid, it must be an image file"
+    list: "You have these avatars"
+    new: "Create a new avatar"
+    new_short: "New avatar"
+    no_avatars: "You haven't got any avatar, plesase create a new one."
+    one: "Avatar"
+    other: "Avatars"
+    original: "Original image"
+    preview: "Preview"
+    profile_change: "Change your avatar"
+    set_default: "Set as default"
+    set_default_sure: "Are you sure you wan't to set this avatar as default?"
+    text:
+      new: "... or upload a new one"
+      use: "Use your saved avatars ..."
+    upload: "Upload"
+  browse: "Browse"
+  button:
+    cancel: "Cancel"
+    save: "Save"
+    update: "Update"
+  cleditor:
+    controls: "bold italic underline strikethrough subscript superscript | size style | bullets | image link unlink"
+  comment:
+    input: "Write a comment..."
+    confirm_delete: "Delete comment?"
+    view_all: "View all comments"
+  contact:
+    all_n: "All contacts (%{count})"
+    current: "Current"
+    edit:
+      title: "Edit contact to %{name}"
+      submit: "Edit Contact"
+    graph:
+      one: "Graph"
+      empty: "We're sorry but you don't have any contacts yet. You can try the search box to look for somebody!"
+    in_common:
+      one: "1 contact in common"
+      other: "%{count} contacts in common"
+    new:
+      link: "+ Add contact"
+      title: "Add %{name} to your contacts"
+      menu: "Add contact"
+      submit: "Add Contact"
+    one: "Contact"
+    other: "Contacts"
+    pending:
+      other: "Pending"
+      all: "All"
+      all_n: "See all pending requests (%{count})"
+    relation:
+      one: "Contact type"
+      new: "New type"
+    suggestion:
+      one: "Suggestion"
+      other: "Suggestions"
+      all: "All"
+    type:
+      new: "+ New type"
+  copyright: "2010 Copyright - All rights reserved"
+  days: Days
+  delete:
+    confirm: Delete %{element}}?
+  devise:
+    passwords:
+      acquire: "Type the email address bound to your account and we will sent you a new one:"
+      confirm: "Confirm password"
+      update: "Change your password"
+  follower:
+    n:
+      one: "1 follower"
+      other: "%{count} followers"
+  forgot_password: "Forgot you password?"
+  frontpage:
+    collaborate:
+      default: "Collaborate"
+      sentence1: "Organize your projects and activities"
+      sentence2: "Create your own groups"
+    elements:
+      comments: "Comments"
+      networks: "Social Networks"
+      organizers: "Organizers"
+      participants: "Participants"
+      groups: "Groups"
+      tags: "Tags"
+    main_title: "SocialStream is a core for building social network websites."
+    meet:
+      default: "Meet"
+      sentence1: "Meet interesting people and groups"
+    share:
+      default: "Share"
+      sentence1: "Your contacts and relations"
+      sentence2: "Posts, comments and activities"
+    stats: "%{users} users and %{groups} groups registered"
+  find: "Find"
+  group:
+    one: "Group"
+    other: "Groups"
+    all: "All groups"
+    all_n: "All groups (%{count})"
+    by: "By groups"    
+    last: "Last groups"
+    my: "My groups"
+    new:
+      action: "New group"
+      name: "Name"
+      description: "Description"
+      participants: "Participants"
+    cloud: "Group tag cloud"
+    most:
+      followed: "Most followed"
+      liked: "Most liked"
+    tags: "Tags"
+  help: "Help"
+  helpers:
+    submit:
+      relation_custom:
+        create: "Save"
+        update: "Update"
+  home: "Home"
+  inbox:
+    one: "Inbox"
+  invitation:
+    e-mails: "E-mail addresses"
+    error: "Your request was unprocessable"
+    invited: " has invited you to SocialStream!"
+    join: "Invite other people to join SocialStream!"
+    join_me: "Join me at SocialStream!"
+    one: "Invitation"
+    other: "Invitations"
+    toolbar: "Invite"
+    success: "Your invitations have successfully been sent"
+    text: "Write your own message"
+  like:
+    n:
+      one: "1 fan"
+      other: "%{count} fans"
+  location:
+    message: "You are here > %{location}"
+    base: "You are here"
+    separator: " > "
+  mailboxer:
+    message_mailer:
+      subject_new: "%{subject}"
+      subject_reply: "%{subject}"
+    notification_mailer:
+      subject: "%{subject}"
+  menu:
+    options: "Menu Options"
+    information: "Information"
+    wall: "Wall"
+  message:
+    answer: "Write your answer"
+    inbox: "Inbox"
+    look: "Take a look at this conversation"
+    new: "New Message"
+    one: "Message"
+    other: "Messages"
+    participants: "Participants"
+    send: "Send a message"
+    sentbox: "Sentbox"
+    trash: "Trash"
+  notification:
+    confirm: "Confirm %{sender.name} as contact?"
+    destroy_sure: "Do you want to delete this notification?"
+    look: "Take a look at %{sender.name}'s wall"
+    one: "Notification"
+    other: "Notifications"
+    read: "Mark as read"
+    read_all: "Mark all as read"
+    unread: "Mark as unread"
+  password:
+    forgot: "Acquire a new password"
+  post:
+    confirm_delete: "Delete post?"
+    form:
+      title: "Post"
+    title: "Posts"  
+  profile:
+    one: "Profile"
+    age: "Age"
+    must_be_signed_id: "You must be signed in"
+    group:
+      about: "About us"
+      birthday: "Anniversary"
+      experience: "Area of expertise"
+      info: "Group information"
+      tags: "Group tags"
+    user:
+      about: "About me"
+      birthday: "Birthday"
+      experience: "Experience"
+      info: "Personal information"
+      tags: "User tags"
+    actualcity: "Actual City"
+    address: "Address"
+    contact: "Contact information"
+    country: "Country"
+    email: "E-mail"
+    empty: "These fields are empty. Please, update them."
+    fax: "Fax"
+    mobile: "Mobile"
+    organization: "Organization"
+    phone: "Phone"
+    profile: "Edit profile"
+    tags:
+      default: "social, stream,"
+      other: "Tags"
+    website: "Website" 
+    update:
+      error: "Please, check the format of your profile:"
+      success: "Your profile has been updated"     
+  public:
+    other: "Everybody"
+  representation:
+    action: "as"
+    change: "Change"
+  service:
+    one: "Service"
+    other: "Services"
+  permission:
+    description:
+      brief:
+        create: 
+          activity: "Post to wall"
+        follow:
+          nil: "Follow their activity"
+        read:
+          activity: "Read wall"
+        represent:
+          nil: "Administrate"
+      detailed:
+        create:
+          activity: "Post to \"%{relation}\" wall"
+        follow:
+          nil: "Activities of the contacts at %{relation} will appear in our home wall"
+        read:
+          activity: "Read posts in \"%{relation}\" wall"
+          tie: "See contacts in levels: %{relations} and %{public}"
+        represent:
+          nil: "Change session to act as %{subject}"
+    of_relation:
+      choose: "2. Permissions in <strong>%{name}</strong> sphere"
+  privacy:
+    intro: "Contacts at <strong>%{relation}</strong> level are only allowed to:"
+    rule:
+      add: "Add"
+      title: "Privacy rules"
+      saved: "Privacy rules saved"
+  products:
+    one: "Product"
+    other: "Products"
+  relation_custom:
+    choose: "1. Choose sphere"
+    confirm_delete: "Delete this sphere?"
+    delete: "Delete"
+    edit: "Change name"
+    new: "+ New sphere"
+    title: "Privacy & context"
+  relation_public:
+    name: "Public"
+  required: "(*) These fields are required"
+  search:
+    actor:
+      none: "Nothing found"
+    at_least: "Write at least two characters"
+    name: "Search"
+    write: "Write your query ..."
+    wrong: "There seems to be a problem with the search engine"
+  settings:
+    error: "Some errors raised when saving your changes"
+    for: "Settings for"
+    main: "Main settings"
+    one: "Settings"
+    success: "Your settings where correctly changed"
+    api_key:
+      briefing: "Manage your API key"
+      confirm: "Are you sure?"
+      empty: "Empty Token"
+      explanation: "This is your API key"
+      name: "API Key"
+      regenerate: "Regenerate API key"
+    notifications:
+      briefing: "Settings about notifications behaviour and mail alerts"
+      name: "Notifications"
+      by_email:
+        name: "Send me an email when I receive a notification"
+        always: "Always"
+        never: "Never"
+  share: "Share"
+  sign_in: "Sign in"
+  sign_out: "Sign out"
+  sign_up: "Sign up"
+  socialstream: "SocialStream"
+  sure: "Are you sure?"
+  time:
+    ago: "%{time} ago"
+  user:
+    by: "By Users"
+    one: "User"
+    other: "Users"
+    all: "All users"
+    all_n: "All users (%{count})"
+  welcome: "Welcome to SocialStream!"
+

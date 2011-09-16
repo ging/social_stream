@@ -1,0 +1,11 @@
+<% content_for :title do%>
+  <%= t('group.new.action')%>
+<%end%>
+
+<% toolbar :option => 'groups' %>
+
+<% content_for :sidebar do %>
+  <%= render :partial => "sidebar_index" %>
+<% end %>
+
+<%= render :partial => 'new' %>

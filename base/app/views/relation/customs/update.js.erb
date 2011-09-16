@@ -1,0 +1,11 @@
+<% if params[:section] == 'rules' %>
+  <%= render :partial => 'update_rules' %>
+<% else %>
+  var div = $('div[contain$=<%= dom_id(@custom) %>]');
+  div.children('label').html("<%= escape_javascript @custom.name %>");
+  div.children('label').show();
+  div.children('.options').show();
+  div.children('.relation_custom_name_form').hide();
+<% end %>
+
+

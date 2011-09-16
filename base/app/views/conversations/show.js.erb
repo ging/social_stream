@@ -1,0 +1,26 @@
+$("#content").html("<%= escape_javascript(render :partial => 'show') %>");
+
+<%= toolbar :option => :messages %>
+
+$('.cont_conversation').validate();
+<% unless @box.eql?'trash' %>
+  $("#body").cleditor({
+    width:493,
+    controls:  "<%= t('cleditor.controls')%>"   
+  });
+
+	var message_hash = window.location.hash.match(/^.*message_(\d+).*$/);
+	if (message_hash && message_hash.length > 0){
+		$.scrollTo('#message_' + message_hash[1] ,1500,{axis:'y'});
+	}else{
+		$.scrollTo('#message_<%= @conversation.last_message.id %>',1500,{axis:'y'});		
+	}
+
+<% else %>
+	var message_hash = window.location.hash.match(/^.*message_(\d+).*$/);
+	if (message_hash && message_hash.length > 0){
+		$.scrollTo('#message_' + message_hash[1] ,1500,{axis:'y'});
+	}else{
+		$.scrollTo('#message_<%= @conversation.last_message.id %>',1500,{axis:'y'});		
+	}
+<% end %>

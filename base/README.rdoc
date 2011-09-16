@@ -1,0 +1,68 @@
+= Social Stream Base
+
+Social Stream Base provides the basic functionality for
+{Social Stream}[http://social-stream.dit.upm.es/], the core for building social
+network websites. The features of this gem are limited, for a complete social
+network environment see https://github.com/ging/social_stream
+
+== Features
+
+* Social network infraestructure
+* Activity streams infraestructure
+* Subjects: {User} and {Group}
+* Objects: {Post} and {Commment}
+* Private messages and notifications, by {Mailboxer}[https://github.com/ging/mailboxer]
+* Avatars, by {Avatars For Rails}[https://github.com/ging/avatars_for_rails]
+
+= Installation
+
+This will install Social Stream basic functionalities. For a complete social network
+platform see {Social Stream}[https://github.com/ging/social_stream]
+
+Add to your Gemfile:
+
+  gem 'social_stream-base'
+
+and run:
+
+  bundle update
+
+Then:
+
+  rails generate social_stream:base:install
+
+This will generate the following:
+* A jquery:install generation for jQuery support
+* A devise:install generation for authentication support
+* An initializer file with configuration for Social Stream.
+* A configuration file for defining custom Social Stream relations. You can define your application default relations at <tt>config/relations.yml</tt>
+* A new application layout
+* A migration providing the database schema
+
+Do not forget to migrate your database
+
+  rake db:migrate
+
+== Actors and Activity Objects
+
+{Social Stream Base}[https://github.com/ging/social_stream-base] relies in
+Devise[https://github.com/plataformatec/devise].
+You have authenticated users support in your application by default.
+
+Besides, there is another kind of actor: groups. If you want other type of actor
+(like organizations or social events) you must include an <tt>actor_id</tt> column in
+the new actor migration. Then add it to <tt>config/initializers/social_stream.rb</tt>
+
+There is also support for two types of basic activity objects: posts and comments.
+You can create other types, like photos, bookmarks or videos, but you must do the same: 
+add a <tt>activity_object_id</tt> column in the migration and include it in the
+initializer.
+
+= Documentation
+
+{Social Stream Base documentation is available at rdoc.info}[http://rubydoc.info/gems/social_stream-base/frames]
+
+= Discussion
+
+We are reaching beta phase of development.
+Feel free to add an issue or send a message at github[https://github.com/ging/social_stream-base].

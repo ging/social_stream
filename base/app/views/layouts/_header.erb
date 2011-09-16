@@ -1,0 +1,41 @@
+<div id="headerFront">
+  <div class="banner_top banner_top_height">
+    <div id="header_left">
+      <div id="logo_txt">
+        <%= link_to(image_tag('header-logo.png', :alt => t('socialstream')), root_path) %>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <% if user_signed_in? %>
+        <div class="menu_list menu_white" id="menu_home">
+          <ul>
+            <li class="btn_menu_profile"><%= link_to(t('profile.one'), current_subject)%></li>
+            <li id="header_notifications">
+              <%= link_to( current_subject.mailbox.notifications.not_trashed.unread.count.to_s, notifications_path) %>
+            </li>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+    <% if user_signed_in? %>
+      <%= render :partial => 'layouts/search' %>
+    <%end%>
+    <div id="header_right">
+       <% if user_signed_in? %>
+        <%= render :partial => 'layouts/representation' %>
+        <div class="menu_list menu_white" id="menu_pipe" >
+          <ul>
+            <li class="pipe">|</li>
+          </ul>
+        </div>
+        <%= render :partial => 'layouts/settings' %>
+        
+        <div class="menu_list menu_white" id="menu_pipe" >
+          <ul>
+            <li class="pipe">|</li>
+          </ul>
+        </div>
+        <%= render :partial => 'layouts/account' %>
+
+      <% end %>
+    </div>
+  </div>
+</div>

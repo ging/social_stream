@@ -1,0 +1,58 @@
+<% content_for :title do%>
+  <%= t('group.other') %>
+<%end%>
+
+<% toolbar if user_signed_in? %>
+
+<% content_for :sidebar do %>
+	<%= render :partial => "groups/sidebar_index" %>
+<% end %>
+<%= location(image_tag("btn/btn_browse.png", :class=>"btn_config") + t('browse') +": "+ 
+             link_to(t('user.by'), users_path) + ", "+ 
+             content_tag(:b,content_tag(:span, t('group.all'), :id=>'name_group')))%>
+
+<div class="space_center"></div>
+<div class="space_center"></div>
+<div class="space_center"></div>
+<div class="space_center"></div>
+
+<div id="my_conferences" class="block">
+  <div id="tab" class="widget content_size">
+    <ul class="tab">
+      <li>
+        <%= link_to t('group.all_n', :count => Group.count), :most => nil %>
+      </li>
+      <li>
+        <%= link_to t('group.most.followed'), :most => :followed %>
+      </li>
+      <li>
+        <%= link_to t('group.most.liked'), :most=> :liked %>
+      </li>
+    </ul>
+    <div id="spaces" class="tab">
+      <div class="space_center"></div>
+      <div class="row">
+        <input type="text" value="Search by name" id="search_field" class="search_input" />
+        <%= image_tag("btn/search.png",:size=>"20x20",:id=>"search_button") %>
+      </div>
+      <div class="space_center"></div>
+      <div class="row">
+        <div class="center">
+          <% for g in Group.distinct_initials %>
+            <%= link_to g.initial,{:letter => g.initial,:page => 1},:class => "user_letter_link" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="space_center"></div>
+      <div id="list_users_ajax" class="tab_content">
+        <%= render :partial => "groups/index"%>
+      </div>
+      <div class="space_center"></div>
+    </div>
+  </div>
+</div>	
+
+ 
+<br class="clearfloat" />
+<div class="space_center">
+</div>

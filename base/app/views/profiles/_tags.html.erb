@@ -1,0 +1,22 @@
+  <div class="block" id="tags_info">
+    <div class="header">
+      <div class="header_text">
+        <%=t('profile.tags.other')%>
+      </div>
+      <% if is_owner? %>
+        <div class="header_icon_right">
+          <%= link_to (image_tag('btn/edit.png')), :controller => :profiles , 
+                       :action => :edit, :section => "tags"%>
+        </div>
+      <% end %>
+    </div>
+    <div class="content">
+      <div class="field">
+        <% if @profile.subject.tag_list.count > 0 %>
+          <%= @profile.subject.tag_list %>
+        <%else%>
+          <%=t('profile.empty')%>
+        <%end%>
+      </div>
+    </div>
+  </div>

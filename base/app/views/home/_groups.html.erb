@@ -1,0 +1,24 @@
+<% if (groups = current_subject.recent_groups).any? %>
+  <div id="groups_title" class="content_size">
+      <%=t('group.last') %> (<span id="group_count"><%= groups.count %></span>)
+  </div>
+
+  <div id="groups_list" class="content_size">
+  <% if (groups.count) > 10 %>
+    <div id='carousel_container'>
+      <div id='left_scroll'><%=image_tag("btn/group_left.png")%></div>
+      <div id='carousel_inner'>
+
+    <% else %>
+     <div class="space_center"></div>
+    <%end%>
+    <ul id='carousel_ul' class="menu_list">
+      <%= render groups %>
+    </ul>
+    <% if (groups.count) > 10 %>
+     </div>
+     <div id='right_scroll'><%=image_tag("btn/group_right.png")%></div>
+    </div>
+    <% end %>
+  </div>
+<% end %>

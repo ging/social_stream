@@ -1,0 +1,59 @@
+<!-- HTML5 DOCTYPE -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= yield(:title).empty? ? t('socialstream') : yield(:title)%></title>
+    <meta name="keywords" content="<%= t('profile.tags.default') %><%= yield(:keywords) %>" >
+    <meta name="description" content= "<%= yield(:description).empty? ? t('frontpage.main_title') : yield(:description) %>" >
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application" %>
+
+    <%= yield :headers %>
+
+    <%= favicon_link_tag "icons/favicon.ico" %>
+
+    <% if protect_against_forgery? %>
+      <%= csrf_meta_tag %>
+    <% end %>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        <%= yield :javascript %>
+      })
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <header><%= render :partial => "layouts/header" %></header>
+      <div id="wrapper_body">
+        <nav id="toolbar">
+          <div id="toolbarContent" class="block">
+            <div class="space_center">
+            </div>
+              <%= yield :toolbar %>
+          </div>
+        </nav>
+        <div id= "center_body">
+          <div id="map_location">
+            <%= yield :location %>
+          </div>
+          <div id="flash">
+            <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
+          </div>
+          <section id="content">
+            <%= yield %>
+          </section>
+        </div>
+        <aside id="sidebar">
+          <div id="sidebarContent">
+              <%= yield :sidebar %>
+          </div>
+        </aside>
+        <div class="space_center white"></div>
+      </div>
+      <footer><%= render :partial => "layouts/footer" %></footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<% if user_signed_in? && current_subject.can_comment?(activity) %>
+  <div class="activity_new_comment">
+ <%= form_for Comment.new(:text => t('comment.input'),
+                          :_contact_id =>
+                            current_subject.contact_to!(activity.receiver).id,
+                          :_activity_parent_id => activity.id
+              ),
+          :html => { :class => "new_comment", :id => "new_comment"+dom_id(activity)  },
+          :remote => true do |f| %>
+
+   <%= f.hidden_field :_contact_id %>
+   <%= f.hidden_field :_activity_parent_id %>
+
+   <%= f.text_field :text, :class =>"input_new_comments", :id => "comment_text_"+dom_id(activity) %>
+
+   <div class="activities_comment_btn">
+     <div class="activities_security"></div>
+     <%= f.submit t('share'), :class =>"myButtonBlue submitActivity", :id => "comment_submit_"+dom_id(activity) %>
+   </div>
+ <% end %>
+    </div>
+<% end %>
+
+<%= javascript_tag do %>
+  $(document).ready(function() {
+    $("#comment_text_<%= dom_id(activity) %>").Watermark("<%= I18n.t('comment.input') %>","#666");
+    activate_anti_rebounds();  
+  });
+<% end %>

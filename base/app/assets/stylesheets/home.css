@@ -1,0 +1,51 @@
+/******** MAIN Structure home *********/
+#center_body {
+	width: 560px;
+	border-right: thin solid #D4E4EA;
+	border-bottom: thin solid #D4E4EA;
+  border-left: thin solid #D4E4EA;
+	vertical-align: top;
+	display: table-cell;
+	padding-top: 10px;
+	font-size: 14px;
+}
+#sidebar {width: 220px;	display: table-cell;vertical-align: top;}
+#sidebarContent{  padding-left:3px; padding-right:3px;}
+#sponsor{background-color:#fff}
+#toolbar {	width: 160px;	border-color: #000;	vertical-align: top;	display: table-cell;padding: 5px 5px 5px 5px;}
+#toolbarContent{}
+#wrapper_body{ background-color: #ffffff; }
+#content_logo{/*width: 779px*/}
+
+
+/*************** HOME ****************/
+#logo_index { text-align: center;}
+#map_location {padding-left: 4px;	display: inline-block; }
+.content_size {font-size: 13px;}
+.space_center_border {	padding-top: 8px;	padding-right: 4px;	border-bottom: thin solid #D4E4EA;}
+.title_bold{font-size:14px; font-weight:bold;}
+
+/********GROUPS HOME************/
+.browse_letter{	text-align:center;}
+.btn_group{  vertical-align:top;}
+.group{  display:inline-block;  width:50px;}
+.group_content{  display:block;  text-align:center;}
+#groups_list {	width: 100%;	padding-bottom: 5px;	text-align: center;  display: inline-block;}
+#groups_title {	width: 100%;	padding-left: 5px;	font-weight: bold;}
+.group_title a{  display:block;  font-size:9px;  text-decoration:none;  text-align:center;}
+.group_title a:hover{  display:block;  text-decoration:underline;}
+#my_groups {	width: 100%;}
+
+
+/********SUBJECTS HOME************/
+
+.btn_subject{  vertical-align:top;}
+.user .logo, .group .logo{  display:block;  text-align:center;}
+.user .title a, .group .title a{  display:block;  font-size:9px;  text-decoration:none;  text-align:center;}
+.user .title a:hover, .group .title a:hover{  display:block;  text-decoration:underline;}
+
+
+
+
+
+

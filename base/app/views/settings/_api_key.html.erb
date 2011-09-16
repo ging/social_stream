@@ -1,0 +1,26 @@
+<div class="block" id="api_key_settings">
+    <div class="header">
+        <div class="header_text">
+            <%= t('settings.api_key.name')%>
+        </div>
+        <div class="header_icon_right">
+            <%= link_to (image_tag('btn/edit.png')),  "javascript:showApiKeySettings();" %>
+        </div>
+    </div>
+    <div class="content" id="api_key_settings_briefing">        
+        <div class="form_row">
+            <%= t('settings.api_key.briefing')%>
+        </div>
+    </div>
+    <div class="content" id="api_key_settings_content" style="display:none;">
+        <div class="settings_block">
+            <div class="form_row">
+               <%=t('settings.api_key.explanation') %>: <span id="api_token"><%= current_subject.authentication_token.blank? ? t('settings.api_key.empty') : current_subject.authentication_token %></span>
+            </div>
+            <div class="form_sub_row">
+                <%= link_to t('settings.api_key.regenerate'), api_keygen_path(:api_settings => true), :confirm => t('settings.api_key.confirm'), :remote => true  %>
+            </div>
+
+        </div>
+    </div>
+</div>

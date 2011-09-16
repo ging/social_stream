@@ -1,0 +1,135 @@
+/*
+ *= require fcbkComplete
+ *= require jquery.cleditor
+ */
+
+/******************** Common ***********************/
+
+.pagination {
+	padding: 5px 5px 5px 5px;
+	text-align: center;
+}
+.read_all{
+  text-align: right;
+  padding-right: 5px;
+}
+/******************* Message ***********************/
+.message{
+	width:549px;
+	padding: 5px 5px 5px 5px;
+}
+.message .container{
+	float:left;
+	width:509px;
+}
+.message .header{
+	padding: 5px 5px 5px 5px;
+	background-color: #E0EEF5;
+	height:40px;
+}
+.message .body{
+	padding: 5px 5px 5px 5px;
+	border: 1px solid #E0EEF5;
+}
+.message .content_left {
+	float:left;
+	width:25%;
+}
+.message .content_right {
+	float:left;
+	width:75%;
+}
+.message .sender_photo {
+	float:left;
+	padding: 0px 5px 0px 0px;
+}
+.message .sender_name {
+}
+.message .subject {
+}
+.message .date {
+	color: #6C6D6F;
+}
+.message ul {
+    margin: 0px 5px
+    ;padding-left:40px;
+}
+.conversation_full .messages .unread .header{
+	background-color: #E0E0FF;
+}
+.conversation_full .messages .unread .body{
+	border: 1px solid #E0E0FF;
+}
+.conversation_full .messages .unread .subject{
+	font-weight: bold;
+}
+/*************** Full Conversation *****************/
+.conversation_full {
+}
+.conversation_full .title {
+	float:left;
+	padding: 5px 5px 5px 5px;
+}
+.conversation_full .action {
+	float:right;
+	padding: 5px 5px 5px 5px;
+}
+.conversation_full .participants {
+	border-top:1px solid #E0EEF5;
+	border-bottom:1px solid #E0EEF5;
+	padding: 5px 5px 3px 5px;
+}
+/***************** Conversations *******************/
+.conversations {
+	border-top:1px solid #E0EEF5;
+	border-bottom:1px solid #E0EEF5;
+}
+.conversations .unread {
+	background-color: #E0EEF5;
+}
+.conversations .conversation {
+	color: #2A3890;
+	padding: 5px 5px 5px 5px;
+	width:549px;
+	height:40px;
+	border-bottom:1px solid #FFF;
+}
+.conversations .conversation .content_left {
+	float:left;
+	width:25%;
+	padding: 0px;
+}
+.conversations .conversation .content_right {
+	float:left;
+	width:55%;
+	padding: 0px;
+}
+.conversations .conversation .sender_photo {
+	float:left;
+	padding: 2px 5px 0px 0px;
+}
+.conversations .conversation .action {
+	float:right;
+}
+.conversations .conversation .sender_name {
+}
+.conversations .conversation .subject {
+}
+.conversations .unread .subject {
+	font-weight: bold;
+}
+.conversations .conversation .date {
+	color: #6C6D6F;
+}
+.conversations .conversation .briefing {
+	color: #6C6D6F;
+}
+.conversations .conversation .notification {
+	float:left;
+	width:5px;
+	height:100%;
+	margin: 0px 5px 0px 0px;
+}
+.conversations .unread .notification {
+	background-color: #2A3890;
+}

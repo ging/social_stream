@@ -1,0 +1,30 @@
+<% content_for :title do %>
+  <%= @group.name%>
+<% end %>
+
+<% if @group.profile.description? %>
+  <% content_for :description do %>
+    <%= @group.profile.description%>
+  <% end %>
+<% end %>
+
+<% content_for :keywords do %>
+  <%= @group.profile.subject.tag_list%>
+<% end %>
+<% content_for :sidebar do %>
+  <%= render :partial => 'sidebar_show' %>
+<% end %>
+
+<%= location(link_to(image_tag("btn/btn_group.png", :class => "btn_config")+t('group.one')+": "+
+                      content_tag(:span, ( truncate_name sanitize @group.name), :class=>"name_group")))%>
+                      
+<% toolbar :profile => @group %>
+
+<br class="clearfloat" />
+<div class="space_center">
+</div>
+
+<div class="space_center">
+</div>
+
+<%= render :partial => 'activities/walls', :locals => { :owner => @group } %>

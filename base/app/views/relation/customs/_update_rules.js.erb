@@ -1,0 +1,5 @@
+<% if @custom.errors.present? %>
+  $('#new_relation_custom_input_block').html("<%= escape_javascript render(:partial => 'relation/customs/form') %>");
+<% else %>
+  alert("<%= escape_javascript t('privacy.rule.saved') %>");
+<% end %>

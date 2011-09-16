@@ -1,0 +1,19 @@
+<% cont=0; %>
+<% @groups.each do |group| %>
+<% if (cont%2) == 0 %>
+<% cont+=1; %>
+<div class="row">
+  <% end %>
+  <div class="label">
+    <%= subject_with_details group %>
+  </div>
+  <% if ((cont%2) == 0) 	%>
+</div>
+<% end %>
+<% end %>
+<% if ((cont%2) != 0) 	%> <div class="label"></div>
+</div>
+<% end %>
+<div class="row">
+  <%= paginate @groups %>
+</div>

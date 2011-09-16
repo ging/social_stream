@@ -1,0 +1,6 @@
+<% if user_signed_in? %>
+  <div class="space_center"></div>
+  <%= render :partial => "contacts/suggestions" %>
+  <div class="space_center"></div>
+  <%= render :partial => 'contacts/pendings' %>
+<% end %>

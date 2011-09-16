@@ -1,0 +1,22 @@
+<% content_for :sidebar do %>
+  <% render :partial => 'sidebar' %>
+<% end %>
+
+<%= location(link_to(image_tag("btn/btn_home.png", :class => "btn_config")+t('home')+": "+
+                      content_tag(:span, ( sanitize current_subject.name), :class=>"name_group")))%>
+                      
+<% toolbar %>
+
+<br class="clearfloat" />
+<div class="space_center">
+</div>
+
+<% if current_subject.respond_to?(:recent_groups) %>
+<div id="my_groups">
+  <%= render :partial => "groups" %>
+</div>
+<% end %>
+
+<%= render :partial => "activities/index",
+           :locals => { :activities => current_subject.wall(:home).page(params[:page]),
+                        :owner => current_subject } %>

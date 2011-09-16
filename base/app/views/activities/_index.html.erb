@@ -1,0 +1,14 @@
+<div id="wrapper_activities">
+  <div id="wrapper_activities_header">
+    <div id="activities_title" class="content_size">
+      <div class="activities_title_header">
+        <%= image_tag("btn/activity.png") %><%= t 'activity.title' %>
+      </div>
+    </div>
+    <%= render :partial => 'activities/new', :locals => { :receiver => owner } %>
+  </div>
+
+  <%= render :partial => 'activities/wall',
+             :locals  => { :activities => activities } %>
+
+</div>

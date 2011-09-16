@@ -1,0 +1,94 @@
+/******************** Search css ***********************/
+/********************************* Header **************/
+#header_search {
+  float: left;
+  padding: 1px 10px 0 10px;
+  z-index: 2001;
+}
+#header_search_input, #global_search_input {
+  padding: 0 3px 0 22px;
+  background: url('btn/search_icon.png') 5px 50% no-repeat white;
+  font-size: 11px;
+  color: #2A3890;
+}
+#header_search_input {
+  border: solid 1px #dedede;
+  height: 16px;
+  width: 150px;
+}
+#global_search_input {
+  border: solid 1px #aeaeae;
+  height: 25px;
+  width: 300px;
+}
+#header_search_display {
+  width: 175px;
+  display: none;
+  float: right;
+  margin-right: 35px;
+  border-left: solid 1px #B9B9B9;
+  border-right: solid 1px #B9B9B9;
+  border-bottom: solid 1px #B9B9B9;
+  overflow: hidden;
+  position: absolute;
+  z-index: 2000;
+  background: whiteSmoke;
+  text-align: center;
+}
+#header_search_display a {
+  color: #2A3890;
+  text-decoration: none;
+}
+#header_search_display a:hover {
+  color: #2A3890;
+  text-decoration: none;
+  font-weight: bold;
+}
+#header_search_display  li {
+  padding: 4px;
+  border-top: solid 1px #B9B9B9;
+  font-size: 10px;
+  height: 35px;
+  background: whiteSmoke;
+  overflow: hidden;
+  text-align: center;
+}
+#header_search_display  li .logo {
+  float: left;
+  margin-right: 5px;
+}
+#header_search_display  li .name {
+  float: left;
+  width: 125px;
+  overflow: hidden;
+  height: 25px;
+  text-align: left;
+}
+#header_search_display  li:hover {
+  background: #CFDEFF;
+  color: #2A3890;
+}
+#header_search_display  .warning {
+  width: 100%;
+}
+/********************************* Global ******************/
+.search_row {
+  text-align: center;
+}
+.subject_with_details {
+  padding: 5px;
+}
+.subject_search_results {
+  width: 270px;
+  float: left;
+  text-align: center;
+  margin: 3px;
+}
+.subject_search_results .title{
+  width: 260px;
+  margin: auto;
+  background-color: #E1EEF5;
+  padding:5px;
+  font-weight: bold;
+}
+/******************** Search css END ***********************/

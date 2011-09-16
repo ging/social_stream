@@ -1,0 +1,33 @@
+<% content_for :javascript do %>
+  $(function() {
+     $(".invitation_form").validate();
+  });
+<% end %>
+
+<div class="space_center"></div>
+
+<h2><%=t('invitation.other')%></h2>
+
+<%= form_tag invitations_path, :method=> :post, :class => "invitation_form", :remote => true  do %>
+  <div class="block">   
+    <h3 class= "form_row"><%=t('invitation.join')%></h3>
+    <div class="form_row form_label ">
+      <%= label_tag t('invitation.e-mails')%>
+      <span class= "form_comment">(Separated by commas)</span>
+    </div>
+
+    <div class="form_row">
+      <%= text_field_tag 'mails', nil, :class => "required emails form_tag" %>
+    </div>  
+    <div class="form_row form_label">
+      <%=t('invitation.text')%>
+    </div>
+    <div class="form_row">
+      <%= text_area_tag 'message', nil, :class => "form_tag", :maxlength => 500, :rows => 10 %>
+    </div>
+  </div>
+  
+  <div class="form_row space_center">
+    <%= submit_tag t('action.send'), :class => "button" %>
+  </div>
+<%end%>

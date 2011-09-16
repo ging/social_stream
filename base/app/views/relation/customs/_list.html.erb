@@ -1,0 +1,56 @@
+<table class="tableCheckBoxOptions">
+  <% list.each do |r| %>
+    <%= raw cycle("<tr><td>", "<td>", :name => "begin_cell") %>
+      <div contain="<%= dom_id(r) %>" class="checkboxOptionLeft">
+        <input id=<%= dom_id(r) %> type="checkbox"/>
+        <label for=<%= dom_id(r) %>><%=r.name%></label>
+        <div class="options">
+          <%= link_to image_tag("btn/edit.png", :class => "menu_icon", :title => t('relation_custom.edit')), '#', :class => "relation_custom_edit_link" %>
+          <%= link_to image_tag("btn/delete.png", :class => "menu_icon", :title => t('relation_custom.delete')), r, :class => "relation_custom_delete_link", :method => :delete, :confirm => t('relation_custom.confirm_delete') %>
+
+        </div>
+        <div class="relation_custom_name_form">
+          <%= form_for r, :remote => true do |f| %>
+            <p><%= f.text_field :name, :class => "privacy_input_new", :size => 18 %></p>
+            <%= f.submit nil, :class => "button" %>
+            <button class="button cancel_edit_relation_custom" ><%= t('button.cancel') %></button>
+          <% end %>
+        </div>
+        <div class="clearfloat"></div>
+      </div>
+    <%= raw cycle("</td>", "</td></tr>", :name => "end_cell") %>
+  <% end %>
+
+  <%= raw cycle("<tr><td>", "<td>", :name => "begin_cell") %>
+    <div id="new_relation">
+      <div id="new_relation_custom_title_block"> 
+        <a href="#"><span id="new_relation_custom_title" class="privacy_span_new"><%= t('relation_custom.new') %></span></a>
+      </div> 
+      <div id="new_relation_custom_input_block"> 
+        <%= render :partial => 'relation/customs/form' %>
+      </div>
+    </div>
+  <%= raw cycle("</td>", "</td></tr>", :name => "end_cell") %>
+
+  <%= raw("</tr>") if list.size.odd? %>
+
+</table>
+
+<%= javascript_tag do %>
+  $(function() {
+    $('input[id^="relation_custom"]').checkBox();
+
+    $('.relation_custom_edit_link').click(function() {
+      $(this).parent().hide();
+      $(this).parent().siblings('label').hide();
+      $(this).parent().siblings('.relation_custom_name_form').show();
+    });
+
+    $(".cancel_edit_relation_custom").click(function() {   
+      $(this).parent().parent().hide();
+      $(this).parent().parent().siblings('label, .options').show();
+
+      return false;
+    });
+  })
+<% end %>

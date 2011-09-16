@@ -1,0 +1,195 @@
+<% toolbar :profile => current_subject %>
+
+<% content_for :sidebar do %>
+  <%= render :partial => "#{ current_subject.class.to_s.tableize }/sidebar_index" %>
+<% end %>
+
+<%if params[:section].present? 
+  case params[:section]
+  when "about_me"
+    level2 = link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('profile.' + current_subject.class.to_s.downcase + '.info'),
+      :controller => :profiles , :action => :edit, :section => "about_me")
+  when "contact_info" 
+    level2 = link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('profile.contact'),
+      :controller => :profiles , :action => :edit, :section => "contact_info")
+  when "my_experience" 
+    level2 = link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('profile.' + current_subject.class.to_s.downcase + '.experience'),
+      :controller => :profiles , :action => :edit, :section => "my_experience")
+  when "tags"
+  level2 = link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('profile.' + current_subject.class.to_s.downcase + '.tags'),
+    :controller => :profiles , :action => :edit, :section => "tags")
+	end
+else
+  level2 = link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('profile.one'),
+      :controller => :profiles , :action => :edit)
+end %>
+
+<%= location(
+  link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('menu.information'), [current_subject, :profile]),
+  level2
+) %>
+<div class="space_center"></div>
+
+<%= form_for(@profile, :url => [current_subject, :profile], :remote => true) do |f| %>
+
+<div class="block" id="profile_form">
+  
+  <% if !params[:section].present? or params[:section].eql?("tags") %>
+  	<% content_for :javascript do %>
+  	  $(function() {
+  	    $(".new_group").validate();
+  	  });
+  	  $("#profile_actor_attributes_tag_list").fcbkcomplete({
+  	    json_url: "<%= tags_path(:format => :json) %>",
+  			cache: false,
+  			filter_case: true,
+  			filter_hide: true,
+  			newel: false,
+  			height: 6
+  	  });
+  	 <% @profile.subject.tag_list.each do |tag| %> $("#profile_actor_attributes_tag_list").trigger("addItem",{"title":"<%= tag %>","value":"<%= tag %>"});
+  	 <% end %>
+  	<% end %>
+  	
+    <div class="row">
+      <div class="form_row">
+        <h2><%=t('profile.tags.other')%></h2>
+      </div>
+      <%= f.fields_for :actor do |actor_form| %>
+        <div class="form_row">
+  			 <%= actor_form.select :tag_list, [], :class => "form_tag" %>
+        </div>
+      <%end%>
+  	</div>
+  <% end %>
+  
+  <% if !params[:section].present? or params[:section].eql?("about_me") %>
+    <div class="row">
+	    <div class="form_row">
+	        <h2><%=t('profile.' + current_subject.class.to_s.downcase + '.info')%></h2>
+	    </div>
+	
+		  <%= f.fields_for :actor do |actor_form| %>
+		    <div class="form_row">
+		      <div class="form_label">
+		       <%= f.label t('actor.name') %><span class="needed"> (*)</span>
+		      </div>
+		      <div class="form_field">
+		       <%= actor_form.text_field :name, :class => "required form_tag"%>
+		      </div>
+		    </div>
+      <%end%>
+
+    </div>
+		
+	  <div class="form_row">
+	    <div class="form_label">
+	      <%= f.label t('profile.organization')%>
+	    </div>
+	    <div class="form_field">
+	      <%= f.text_field :organization , :class => "form_tag" %>
+	    </div>
+	  </div>
+
+	  <div class="form_row">
+	    <div class="form_label">
+	      <%= f.label t('profile.' + current_subject.class.to_s.downcase + '.birthday')%>
+	    </div>
+	    <div class="form_field">
+	      <%= date_select "profile", "birthday", :order => [:day, :month, :year], :end_year=> Date.today.year, 
+	         :start_year=> (Date.today.year - 100), :prompt => { :day => 'Day', :month => 'Month', :year => 'Year' } %>
+	    </div>
+	  </div>
+
+	  <div class="form_row">
+	    <div class="form_label">
+	      <%= f.label t('profile.actualcity')%>
+	    </div>
+	    <div class="form_field">
+	      <%= f.text_field :city,  :class => "form_tag" %>
+	    </div>
+	  </div>
+
+	  <div class="form_row">
+	    <div class="form_label">
+	      <%= f.label t('profile.country') %>
+	    </div>
+	    <div class="form_field">
+	      <%= f.text_field :country,  :class => "form_tag" %>
+	    </div>
+	  </div>
+
+	  <div class="form_row form_label">
+	    <%= f.label t('profile.' + current_subject.class.to_s.downcase + '.about') %>
+	  </div>
+	  <div class="form_row">
+	    <%= f.text_area :description, :maxlength => 200, :rows => 10, :class => "form_tag_long" %>
+	  </div>
+	  <div class="form_row needed"><%=t('required')%></div>
+  <% end %>
+  <% if !params[:section].present? or params[:section].eql?("contact_info") %>
+    <div class="form_row">
+        <h2><%=t('profile.contact')%></h2>
+    </div>
+
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label t('profile.phone')%>
+      </div>
+      <div class="form_field">
+        <%= f.text_field :phone, :class => "phone form_tag" %>
+      </div>
+    </div>
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label t('profile.mobile') %>
+      </div>
+      <div class="form_field">
+        <%= f.text_field :mobile, :class => "phone form_tag" %>
+      </div>
+    </div>
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label t('profile.fax') %>
+      </div>
+      <div class="form_field">
+        <%= f.text_field :fax, :class => "phone form_tag" %>
+      </div>
+    </div>
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label t('profile.address') %>
+      </div>
+      <div class="form_field">
+        <%= f.text_field :address, :class => "form_tag" %>
+      </div>
+    </div>
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label t('profile.website')%>
+      </div>
+      <div class="form_field">
+        <%= f.text_field :website, :class => "url form_tag" %>
+      </div>
+    </div>
+  <% end %>
+  <% if !params[:section].present? or params[:section].eql?("my_experience") %>
+    <div class="form_row">
+        <h2><%=t('profile.' + current_subject.class.to_s.downcase + '.experience')%></h2>
+    </div>
+    <div class="row center">
+      <%= f.text_area :experience, :maxlength => 500, :rows => 10, :class => "form_tag_long" %>
+    </div>
+  <% end %>
+
+  <% if params[:section].present? %>
+    <%= hidden_field_tag("section", params[:section]) %>
+  <% end %>
+  
+  <div class="form_row space_center">
+    <%= f.submit t('button.update'), :class => "button" %>
+  </div>
+
+<% end %>
+</div>
+

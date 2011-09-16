@@ -1,0 +1,7 @@
+<% if params[:api_settings].present? %>
+    $('#api_token').html('<%= current_subject.authentication_token.blank? ? t('settings.api_key.empty') : current_subject.authentication_token %>')
+<% else %>
+    $("#content").html("<%= escape_javascript(render :partial => 'index') %>");
+    <%= toolbar %>
+<% end %>
+

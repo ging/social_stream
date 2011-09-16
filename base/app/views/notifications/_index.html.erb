@@ -1,0 +1,21 @@
+
+<br class="clearfloat" />
+<div class="space_center">
+</div>
+<div class="space_center"></div>
+
+<h2><%= t('notification.other') %></h2>
+
+<div class="read_all">
+  <%= link_to(t('notification.read_all'), update_all_notifications_path(:page => params[:page]),
+      :confirm => t('sure'),:method => :put, :remote => true) %>
+</div>
+
+<div class="conversations"> 
+  <% @notifications.each do |notification|%>
+    <% read_class = notification.is_unread?(@actor) ? 'unread' : '' %>
+    <%= render :partial => 'notification', :object => notification, :locals => {:read_class => read_class} %>
+  <% end %>
+  <%= paginate @notifications %>
+</div>
+

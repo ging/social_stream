@@ -1,0 +1,48 @@
+<% toolbar :profile => current_subject, :option => 'contacts' %>
+
+<div id="wrapper_section">   
+
+  <p class="pageTitle"><%= t 'relation_custom.title' %></p>
+
+  <div id="relation_customs" class="privacy_block_section first_block_section">
+    <p class="sectionTitle"><%= t 'relation_custom.choose' %></p>
+
+
+    <%= javascript_tag do %>
+      $(function() {
+        $("#new_relation_custom_title").click(function() {
+          $("#new_relation_custom_title_block").hide();
+          $("#new_relation_custom_input_block").show();
+        });
+
+        $("#loading").hide();
+
+        $("#loading").ajaxStart(function(){
+           $(this).show();
+        });
+
+        $("#loading").ajaxStop(function(){
+           $(this).hide();
+        });
+
+      })
+    <% end %>
+
+    <div id="relation_customs_list">
+      <%= render :partial => 'relation/customs/list', :object => @customs %>
+    </div>
+
+</div>
+
+
+  <div id="permissions" class="privacy_block_section">
+  </div>
+
+  <div id="loading"></div>
+
+  <%= javascript_tag do %>
+    $(function() {
+      $("#permissions").hide();
+    })
+  <% end %>
+</div> 

@@ -1,0 +1,25 @@
+<% content_for :title do%>
+  <%= @profile.subject.name %>
+<%end%>
+<% if @profile.description? %>
+  <% content_for :description do %>
+    <%= @profile.description%>
+  <% end %>
+<%end%>
+
+<% content_for :keywords do %>
+  <%= @profile.subject.tag_list%>
+<% end %>
+
+<% content_for :sidebar do %>
+  <%= render :partial => 'users/sidebar_index' %>
+<% end %>
+
+<% toolbar :profile => @profile.subject %>
+
+
+<%= location(link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('menu.information'), 
+              [@profile.subject, :profile])) %>
+
+
+<%= render :partial => "profile" %>

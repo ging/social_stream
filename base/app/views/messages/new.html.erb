@@ -1,0 +1,38 @@
+<% content_for :title do %>
+  <%=t('message.other')%>
+<% end %>
+<% content_for :sidebar do %>
+  <%= render :partial => 'home/sidebar' %>
+<% end %>
+
+<% toolbar :option => :messages %>
+
+<%= location(
+  link_to(image_tag("btn/new.png", :class => "menu_icon")+t('message.other'), conversations_path,:remote => true),
+  link_to(image_tag("btn/message_new.png", :class => "menu_icon")+ t('message.new'), new_message_path, :remote => true)
+) %>
+
+<% content_for :javascript do %>
+
+	var recipients = $("#_recipients").fcbkcomplete({
+                json_url: "<%= contacts_path(:format => :json) %>",
+		cache: true,
+		filter_hide: true,
+		newel: false,
+		height: 6
+	});	
+	
+	$("#body").cleditor({
+	  width:493,
+	  controls:  "<%= t('cleditor.controls')%>"   
+	});
+
+	<% unless @recipient.nil? %>
+		$("#_recipients").trigger("addItem",[{"title": "<%= truncate_name @recipient.name %>", "value": "<%= @recipient.id %>"}]);
+	<% end %>
+
+  $(".new_message").validate();
+
+<% end %>
+
+<%= render :partial => 'new' %>

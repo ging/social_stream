@@ -1,0 +1,34 @@
+<% content_for :title do %>
+  <%= @user.name%>
+<% end %>
+
+<% if @user.profile.description? %>
+  <% content_for :description do %>
+    <%= @user.profile.description%>
+  <% end %>
+<% end %>
+
+<% content_for :keywords do %>
+  <%= @user.profile.subject.tag_list%>
+<% end %>
+
+<% content_for :sidebar do %>
+  <%= render :partial => 'sidebar_index' %>
+<% end %>
+
+<%= location(link_to(image_tag("btn/btn_profile.png", :class => "btn_config")+t('profile.one')+": "+
+                      content_tag(:span, ( truncate_name sanitize @user.name), :class=>"name_group")))%>
+              
+<% toolbar :profile => @user %>
+
+<br class="clearfloat" />
+<div class="space_center">
+</div>
+
+<%= render :partial => "users/groups",
+           :locals  => { :user => @user } %>
+
+<%= render :partial => "activities/index",
+           :locals  => { :activities => @user.wall(:profile, :for => current_subject).
+                                              page(params[:page]),
+                         :owner => @user } %>

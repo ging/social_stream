@@ -1,0 +1,20 @@
+<%= @sender.name %> has invited you to <%= t('socialstream')%>: <%= new_user_registration_url%>
+
+<% if @message.blank? %>
+  <%= t('invitation.join_me')%>         
+<%else%>
+  "<%= @message%>"
+<%end%>
+
+<%= t('frontpage.main_title') %>
+
+<%= t('frontpage.share.default')%>:
+<%= t('frontpage.share.sentence1') %>
+<%= t('frontpage.share.sentence2') %>
+
+<%= t('frontpage.meet.default')%>:
+<%= t('frontpage.meet.sentence1') %>
+
+<%= t('frontpage.collaborate.default')%>:
+<%= t('frontpage.collaborate.sentence1') %>
+<%= t('frontpage.collaborate.sentence2') %>

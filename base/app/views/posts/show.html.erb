@@ -1,0 +1,10 @@
+<% content_for :javascript do %>
+    var message_hash = window.location.hash.match(/^.*activity_(\d+).*$/);
+    if (message_hash && message_hash > 0){
+      $.scrollTo('#activity_' + message_hash[1] ,1500,{axis:'y'});
+    }
+<% end %>
+
+<%= render :partial => 'objects/show',
+           :locals  => { :object => @post } %>
+

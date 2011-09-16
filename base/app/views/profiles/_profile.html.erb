@@ -1,0 +1,36 @@
+<div class="space_center"></div>
+<h2><%=t('menu.information')%></h2>
+<div class="space_center"></div>
+
+<% if (!is_personal_empty?) or(is_owner?)%>
+  <%= render :partial=> "personal"%>
+<%end%>
+
+<% if (!is_contact_empty?) or(is_owner?)%>
+  <%= render :partial=> "contact"%>
+<%end%>
+<% if (@profile.experience?) or(is_owner?)%>
+  <%= render :partial=> "experience"%>
+<%end%>
+<% if is_owner? %>
+  <div class="space_center"></div>
+  <div class="block" id="avatar_info">
+    <div class="header">
+      <div class="header_text">
+        <%= t('avatar.profile_change')%>
+      </div>
+      <div class="header_icon_right">
+        <%= link_to (image_tag('btn/edit.png')),  :controller => "avatars" , :action => "index" %>
+      </div>
+    </div>
+    <div class="content">
+      <div class="row">
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="space_center"></div>
+<% if (@profile.subject.tag_list.count > 0) or (is_owner?) %>
+  <%= render :partial=>"tags"%>
+<% end %>
+

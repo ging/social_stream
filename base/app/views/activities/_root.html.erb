@@ -1,0 +1,37 @@
+<%= div_for activity, :class => 'super_activity' do %>
+
+  <div class="actor_logo">
+    <%= link_to image_tag(activity.sender_subject.logo.url(:actor),
+                          :alt => activity.sender_subject.name),
+                 activity.sender_subject %>
+  </div>
+
+  <div class="activity_content">
+  	
+    <div class="actor_name">
+      <%= activity.title(self) %>
+    </div>
+
+    <div class="activity_objects">
+      <%= render activity.activity_objects %>
+    </div>
+
+    <%= render :partial => 'activities/options',
+               :locals => { :activity => activity } %>
+
+    <%= render :partial => 'activities/comments',
+               :locals => { :activity => activity } %>
+
+    <%= render :partial => 'comments/new',
+               :locals => { :activity => activity } %>
+
+  </div>
+
+  <div class="space_activities">
+    <% if activity.activity_objects.count > 1 %>
+      <div class="space_sub"></div>
+    <%else %>
+      <div class="#"></div>
+    <%end%>
+  </div>
+<% end %>

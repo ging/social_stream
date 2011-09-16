@@ -1,0 +1,10 @@
+$('#permissions').html("<%= escape_javascript render(:partial => 'index') %>");
+$('input[id^="permission"]').checkBox();
+<% default_permissions.each do |p| %>
+  <% if @relation.permission_ids.include? p.id %>
+    $('input[id="permission_<%= p.id %>"]').checkBox('changeCheckStatus', true);
+  <% else %>
+    $('label[for="relation_custom_permission_ids_' + <%= p.id %> + '"]').parent().hide();
+  <% end %>
+<% end %>
+$('#permissions').show();

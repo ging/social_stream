@@ -1,0 +1,215 @@
+/****************** HEADER STRUCTURE ******/
+#headerFront {	width: 100%;	padding: 0;	background: #1F4A75;  padding: 2px 0px 0px 0px;}
+#header_left {	left: 0px;	float: left;	padding-left: 5px;}
+#header_right {	right: 0px;	float: right; padding-right: 10px;  }
+.banner_top{	width: 960px;	margin-left: auto;	margin-right: auto;	margin-top: 3px;  padding-bottom: 3px;
+	position: relative; }
+.banner_top_height{	height:23px;}
+
+/********** CONTENT ************/
+#headerFront .div_login a{	color:#FFFFFF;	padding-right: 2px; }
+#headerFront .div_login a:hover{text-decoration:underline; }
+#logo{  width:218px;  height:50px;  float:left;  vertical-align:top; }
+#logo_txt {color: #fff;	display: inline;	vertical-align: top;	padding-top: 2px; }
+.div_login {	color:#FFF;	width:65%;	display:inline-block;	text-align: right;	vertical-align: top;
+	padding-top: 5px;	font-weight:normal;	margin-top:3px;  float:right; }
+.div_login #username{	height:10px; }
+.div_login, .input_username{	position:relative;	padding: 0px;	border: 0px; }
+.div_login #login_button{	width:61px;	height:18px; }
+.div_login a.login{	background-color:#497FC1;	padding-right:2px;	padding-left:2px;	color:white; }
+.div_login .subtexto{	padding-top: 8px;	height:12px;	font-size: 11px; }
+.div_login .a_border{	border-right:thin solid;	padding-right:7px;	text-decoration:underline; }
+#new_representation {	display: inline-block;}
+#header_notifications{padding: 0px 5px 0px 5px !important;}
+#header_notifications a{ color: white; background-color: #879eb5;-moz-border-radius: 6px; -webkit-border-radius: 6px;
+                border-radius: 6px; padding: 4px 9px 4px 9px;}
+#representation {  display: inline;  padding-left:3px;  padding-right:3px;}
+.txt_config {color: #fff;	vertical-align: top;	display: inline;	padding-top: 2px;	border-right: thin solid;
+	padding-right: 3px;}
+.txt_config2 {color: #fff;	vertical-align: top;	display: inline;	padding-top: 2px;	padding-right: 3px;}
+
+
+/******** MENU HEADER *******/
+#menu_home{	vertical-align: top; }
+#menu_home a {color:white;}
+#menu_home span {	float:left;	padding-right: 5px;	vertical-align: top;	padding-top: 5px;}
+#menu_home ul{	list-style: none;	margin: 0px;	float:left;}
+#menu_home ul li{	line-height:20px;	padding:5px 0px 5px 20px; vertical-align:top;}
+
+li.btn_menu_home{background: transparent url("btn/btn_home.png") no-repeat left center;}
+li.btn_menu_profile{background: transparent url("btn/btn_profile.png") no-repeat left center;}
+li.btn_menu_browse{background: transparent url("btn/btn_browse.png") no-repeat left center;}
+#btn_menu_settings{background: transparent url("btn/btn_config.png") no-repeat left center;}
+#btn_menu_account{background: transparent url("btn/btn_account.png") no-repeat left center;}
+#btn_menu_account_logout{background: transparent url("btn/btn_exit.png") no-repeat left center;}
+
+#menu_account{	vertical-align: top; height:23px; }
+#menu_account span {	float:right;	padding-right: 5px;	vertical-align: top;	padding-top: 5px;}
+#menu_account ul{	list-style: none;	margin: 0px;	float:left;}
+#menu_account ul li{	line-height:20px;	padding:5px 0px 5px 20px; vertical-align:top;}
+
+#menu_pipe{	vertical-align: top; height:23px; }
+#menu_pipe span {	float:right;	padding-right: 5px;	vertical-align: top;	padding-top: 5px;}
+#menu_pipe ul{	list-style: none;	margin: 0px;	float:left;}
+#menu_pipe ul li{	line-height:20px;	padding:5px 0px 5px 0px; vertical-align:top;}
+
+
+#account, #representation_li,#current_user_info, #representations_menu, #account_menu, #settings_menu {display:inline-block;vertical-align: top; height:22px; color:#FFF;}
+#representation_li{margin-left:10px;}
+#representation_text{display:inline;margin-left:2px;color:#FFF;}
+#current_user_info a{color:white;}
+li.btn_menu_representation{}
+#menu_home ul li.pipe,#menu_account ul li.pipe{padding:0px 3px 0px 3px; margin:0px;}
+.menu_white{display:inline-block; color:#fff;}
+.white_link{padding-top:3px;  vertical-align:top;  display:inline-block;}
+.black{color:#000; font-weight:bold;}
+
+
+
+
+
+
+
+
+
+/*** ESSENTIAL STYLES ***/
+.sf-menu, .sf-menu * {
+	margin:			0;
+	padding:		0;
+	list-style:		none;
+}
+.sf-menu {
+	/*line-height:	1.0;*/
+}
+.sf-menu ul {
+	position:		absolute;
+	top:			-999em;
+	width:			17em; /* left offset of submenus need to match (see below) */
+}
+.sf-menu ul li {
+	width:			100%;
+}
+.sf-menu li:hover {
+	visibility:		inherit; /* fixes IE7 'sticky bug' */
+}
+.sf-menu li {
+	float:			left;
+	position:		relative;
+}
+.sf-menu a {
+	display:		block;
+	position:		relative;
+}
+.sf-menu li:hover ul,
+.sf-menu li.sfHover ul {
+	left:			0;
+	top:			2.2em; /* match top ul list item height */
+	z-index:		99;
+}
+ul.sf-menu li:hover li ul,
+ul.sf-menu li.sfHover li ul {
+	top:			-999em;
+}
+ul.sf-menu li li:hover ul,
+ul.sf-menu li li.sfHover ul {
+	left:			10em; /* match ul width */
+	top:			0;
+}
+ul.sf-menu li li:hover li ul,
+ul.sf-menu li li.sfHover li ul {
+	top:			-999em;
+}
+ul.sf-menu li li li:hover ul,
+ul.sf-menu li li li.sfHover ul {
+	left:			10em; /* match ul width */
+	top:			0;
+}
+
+/*** DEMO SKIN ***/
+.sf-menu {
+	float:			left;
+	/*margin-bottom:	1em;   */
+}
+.sf-menu a {
+	padding: 		.40em 1em .70em 2em;
+	text-decoration:none;
+}
+.sf-menu a, .sf-menu a:visited  { /* visited pseudo selector so IE6 applies text colour*/
+	color:			#fff;
+  padding-right:0px;
+
+}
+.sf-menu li {
+	background:		#1F4A75;
+}
+
+.sf-menu li li {
+	background:		#1F4A75;
+}
+.sf-menu li li li {
+	background:		#1F4A75;
+}
+.sf-menu li:hover, .sf-menu li.sfHover,
+.sf-menu a:focus, .sf-menu a:hover, .sf-menu a:active {
+	background:		#CFDEFF;
+  color: #1F4A75;
+	outline:		0;
+}
+
+
+
+/*** arrows **/
+.sf-menu a.sf-with-ul {
+	padding-right: 	1.75em;
+	min-width:		1px; /* trigger IE7 hasLayout so spans position accurately */
+}
+.sf-sub-indicator {
+	position:		absolute;
+	display:		block;
+	right:			0.5em;
+	top:			1.05em; /* IE6 only */
+	width:			10px;
+	height:			12px;
+	text-indent: 	-999em;
+	overflow:		hidden;
+	background:		url('btn/arrows-ffffff.png') no-repeat -10px -100px; /* 8-bit indexed alpha png. IE6 gets solid image only */
+}
+a > .sf-sub-indicator {  /* give all except IE6 the correct values */
+	top:			.6em;
+	background-position: 0 -100px; /* use translucent arrow for modern browsers*/
+}
+/* apply hovers to modern browsers */
+a:focus > .sf-sub-indicator,
+a:hover > .sf-sub-indicator,
+a:active > .sf-sub-indicator,
+li:hover > a > .sf-sub-indicator,
+li.sfHover > a > .sf-sub-indicator {
+	background-position: -10px -100px; /* arrow hovers for modern browsers*/
+}
+
+/* point right for anchors in subs */
+.sf-menu ul .sf-sub-indicator { background-position:  -15px 0; }
+.sf-menu ul a > .sf-sub-indicator { background-position:  0 0; }
+/* apply hovers to modern browsers */
+.sf-menu ul a:focus > .sf-sub-indicator,
+.sf-menu ul a:hover > .sf-sub-indicator,
+.sf-menu ul a:active > .sf-sub-indicator,
+.sf-menu ul li:hover > a > .sf-sub-indicator,
+.sf-menu ul li.sfHover > a > .sf-sub-indicator {
+	background-position: -10px 0; /* arrow hovers for modern browsers*/
+}
+
+/*** shadows for all but IE6 ***/
+.sf-shadow ul {
+	background:	url('btn/shadow.png') no-repeat bottom right;
+	padding: 0 6px 9px 0;
+  /*
+	-moz-border-rius-bottomleft: 17px;
+	-moz-border-radius-topright: 17px;
+	-webkit-border-top-right-radius: 17px;
+	-webkit-border-bottom-left-radius: 17px;
+	*/
+}
+.sf-shadow ul.sf-shadow-off {
+	background: transparent;
+}

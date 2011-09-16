@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <div>
+      <div>
+        <div style="padding: 10px 5px 5px 5px;">
+          <span id="name" style="font-weight: bold;"><%= @sender.name %></span> has invited you to <%= link_to( t('socialstream'), new_user_registration_url)%>
+        </div>
+        <div style="position: static;padding: 5px; border: #2A3890 solid 2px; background-color: #E1EEF5; margin:10px; min-height: 125px; width: 500px;">
+          <div style="float:left; margin-right:7px; border: thin solid #D4E4EA; background-color: white; max-height: 119px;">
+            <img src="http://<%= ActionMailer::Base.default_url_options[:host] +@sender.logo.url(:profile)%>" alt="<%=@sender.name%>">
+          </div>
+          <div style=" margin: 5px 5px 5px 5px;">
+            <p style="font-weight: bold; "><%= @sender.name %>
+              <% if @sender.profile.organization? %>
+                <br/><span style="color: #6C6D6F; font-weight: normal;"><%= @sender.profile.organization%></span>
+              <% end %>
+            </p>       
+            <% if @message.blank? %>
+              <p style="text-align: justify;"><%= t('invitation.join_me')%></p>         
+            <%else%>
+              <p style="text-align: justify; font-style: italic;">"<%= @message%>"</p>
+            <%end%>
+          </div>
+        </div>
+      </div>
+      <div style="padding: 10px 5px 5px 5px;">
+        <div>
+          <div>
+            <%= t('frontpage.share.default')%>:
+          </div>
+          <div>
+            <ul>
+              <li>
+                <%= t('frontpage.share.sentence1') %>
+              </li>
+              <li>
+                <%= t('frontpage.share.sentence2') %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      
+        <div>
+          <div>
+            <%= t('frontpage.meet.default')%>:
+          </div>
+          <div>
+            <ul>
+              <li>
+                <%= t('frontpage.meet.sentence1') %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      
+        <div>
+          <div>
+            <%= t('frontpage.collaborate.default')%>:
+          </div>
+          <div>
+            <ul>
+              <li>
+                <%= t('frontpage.collaborate.sentence1') %>
+              </li>
+              <li>
+                <%= t('frontpage.collaborate.sentence2') %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

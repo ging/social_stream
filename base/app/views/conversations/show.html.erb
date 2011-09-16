@@ -1,0 +1,35 @@
+<% content_for :title do %>
+  <%=t('message.other')%>
+<% end %>
+
+<% content_for :sidebar do %>
+  <%= render :partial => 'home/sidebar' %>
+<% end %>
+
+<% toolbar :option => :messages %>
+
+<% content_for :javascript do %>
+$('.cont_conversation').validate();
+<% unless @box.eql?'trash' %>
+  $("#body").cleditor({
+    width:493,
+    controls:  "<%= t('cleditor.controls')%>"   
+  });
+
+		var message_hash = window.location.hash.match(/^.*message_(\d+).*$/);
+		if (message_hash && message_hash.length > 0){
+			$.scrollTo('#message_' + message_hash[1] ,1500,{axis:'y'});
+		}else{
+			$.scrollTo('#message_<%= @conversation.last_message.id %>',1500,{axis:'y'});		
+		}
+<% else %>
+		var message_hash = window.location.hash.match(/^.*message_(\d+).*$/);
+		if (message_hash && message_hash > 0){
+			$.scrollTo('#message_' + message_hash[1] ,1500,{axis:'y'});
+		}else{
+			$.scrollTo('#message_<%= @conversation.last_message.id %>',1500,{axis:'y'});	
+		}
+<% end %>
+<% end %>
+
+<%= render :partial => 'show' %>

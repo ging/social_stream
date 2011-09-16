@@ -1,0 +1,92 @@
+#contact-form {
+  margin: 25px 45px 25px 45px;
+}
+
+#contact-form ul {
+  margin-left: 20px;
+  list-style-type: none;
+}
+
+#contact-form li {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 50%;
+}
+
+div.sphere-name {
+  font-weight: bold;
+  color: #1F4A75;
+}
+
+#relation-new {
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+#contact-message {
+  margin-top: 20px;
+}
+
+#contact-message label {
+  margin: 0;
+}
+
+#contact-submit {
+  clear: both;
+  padding: 5px 5px 5px 20px;
+  padding-left: 20px;
+  text-align: center;
+}
+
+.ui-radio-state-disabled, .ui-radio-state-checked-disabled, .ui-radio-state-disabled-hover, .ui-radio-state-checked-disabled-hover {
+  color: #999;
+}
+
+span.ui-checkbox, span.ui-radio {
+  display: block;
+  float: left;
+  width: 16px;
+  height: 17px;
+  background: url(icon_checkbox.png) 0 -40px no-repeat;
+}
+
+span.ui-helper-hidden {
+  display: none;
+}
+
+#contact-form label {
+  display: block;
+  font-family: sans-serif;
+  padding: 2px;
+  margin-left: 20px;
+}
+
+span.ui-radio-state-hover, span.ui-checkbox-state-hover {
+  background-position: 0 -114px;
+}
+
+span.ui-checkbox-state-checked {
+  background-position: 0 -1px;
+}
+
+span.ui-checkbox-state-checked-hover {
+  background-position: 0 -75px;
+}
+
+span.ui-radio-state-checked-disabled-hover,span.ui-radio-state-checked-disabled, span.ui-radio-state-checked {
+  background-position: 0 -161px;
+}
+
+span.ui-radio-state-checked-hover {
+  background-position: 0 -200px;
+}
+
+.ui-helper-hidden-accessible {
+  position: absolute;
+  left: -999em;
+}
+
+.checked-option{
+  background-color: #dfecf1;
+}
+

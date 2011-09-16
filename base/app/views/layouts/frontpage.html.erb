@@ -1,0 +1,43 @@
+<!-- HTML5 DOCTYPE -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= yield(:title).empty? ? t('socialstream') : yield(:title)%></title>
+    <meta name="keywords" content="<%= yield(:keywords).empty? ? t('profile.tags.default') : yield(:keywords) %>" >
+    <meta name="description" content= "<%= yield(:description).empty? ? "Home" : yield(:description) %>" >
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= favicon_link_tag "icons/favicon.ico" %>
+
+    <% if protect_against_forgery? %>
+      <%= csrf_meta_tag %>
+    <% end %>
+    <script type="text/javascript" >
+    $(document).ready(function() {
+      <%= yield :javascript%>
+    });
+    </script>
+    <%= yield :headers %>
+  </head>
+  <body>
+    <div id="wrapper">
+      <header>
+        <%= render :partial => "frontpage/header" %>
+      </header>
+      <section>
+        <div id="wrapper_body">
+          <div class="space_center"></div>
+          <div id="flash">
+            <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
+          </div>
+          <%= yield %>
+        </div>
+        <%= render :partial => "frontpage/sponsor" %>
+      </section>
+      <footer>
+        <%= render :partial => "layouts/footer" %>
+      </footer>
+    </div>
+  </body>
+</html>

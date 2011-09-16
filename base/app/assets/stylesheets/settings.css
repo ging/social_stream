@@ -1,0 +1,9 @@
+/******************** Common ***********************/
+.settings_block {
+    display:block;
+    padding-left:10px;
+}
+#api_token {
+    font-weight: bold;
+    font-style: italic;
+}

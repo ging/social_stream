@@ -1,0 +1,5 @@
+//Display the new post
+$("#wall").prepend("<%= escape_javascript(render @post.post_activity) %>");
+
+unblock_all_forms();
+

@@ -1,0 +1,5 @@
+<% if activity.direct_object.is_a? Actor or activity.direct_object.respond_to? :actor %>
+%{sender} is now %{whose} fan.
+<% else %>
+%{sender} likes %{whose} %{object.name}%>
+<% end %>

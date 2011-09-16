@@ -1,0 +1,31 @@
+<div id="contact-form">
+  <%= form_for @contact do |f| %>
+    <%= hidden_field_tag "contact[relation_ids][]", "gotcha" %>
+
+    <ul>
+    <% current_subject.relation_customs.each do |relation| %>
+      <li>
+        <div contain="<%= dom_id relation %>">
+          <input id="<%= dom_id relation %>" name="contact[relation_ids][]" value="<%= relation.id %>" type="checkbox" <%= raw('checked="checked"') if @contact.relation_ids.include?(relation.id) %> />
+          <label for="<%= dom_id relation %>">
+            <%= relation.name %>
+          </label>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+
+    <div id="relation-new">
+      <%= link_to t('contact.type.new'), relation_customs_path %>
+    </div>
+
+    <div id="contact-message">
+      <%= f.label :message %>
+      <%= f.text_area :message, :class =>"new_contact_text_area" %>
+    </div>
+
+    <div id="contact-submit">
+      <%= submit_tag t("contact.#{ f.object.action }.submit"), :class => "button" %>
+    </div>
+  <% end %>
+</div>
