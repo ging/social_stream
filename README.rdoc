@@ -50,9 +50,9 @@ network with the functionalities they need for each case.
 
 Current Social Stream distribution includes:
 
-* {Social Stream Base}[https://github.com/ging/social_stream-base], basic functionalities
+* {Social Stream Base}[https://github.com/ging/social_stream/tree/master/base], basic functionalities
   along with users, group, post and comments
-* {Social Stream Attachments}[https://github.com/ging/social_stream-attachments], support for
+* {Social Stream Documents}[https://github.com/ging/social_stream/tree/master/documents], support for
   activities on files
  
 = Documentation

@@ -45,7 +45,7 @@ Do not forget to migrate your database
 
 == Actors and Activity Objects
 
-{Social Stream Base}[https://github.com/ging/social_stream-base] relies in
+{Social Stream Base}[https://github.com/ging/social_stream/tree/master/base] relies in
 Devise[https://github.com/plataformatec/devise].
 You have authenticated users support in your application by default.
 
@@ -60,9 +60,9 @@ initializer.
 
 = Documentation
 
-{Social Stream Base documentation is available at rdoc.info}[http://rubydoc.info/gems/social_stream-base/frames]
+{Social Stream Base documentation is available at rdoc.info}[http://rubydoc.info/gems/social_stream/frames]
 
 = Discussion
 
 We are reaching beta phase of development.
-Feel free to add an issue or send a message at github[https://github.com/ging/social_stream-base].
+Feel free to add an issue or send a message at github[https://github.com/ging/social_stream].
