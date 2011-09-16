@@ -1,16 +1,21 @@
-<% if search_result.empty? %>
-<ul><li><%= content_tag(:span,I18n.t('search.actor.none'), :class => :warning) %></li></ul>
-<% else %>
 <ul>
-<% search_result.each do |subject| %>
-  <%= link_to subject do %>
-    <li>
-      <%= image_tag(subject.actor.logo.url(:actor), :class => :logo) %> 
-      <%= content_tag(:span, truncate_name(subject.actor.name), :class => :name) %>         
+<% SocialStream.subjects.each do |subject_type| %>
+  
+    <li class="title">
+      <%= subject_type.to_s.capitalize.pluralize %>
     </li>
-    <% end %>
-<% end %>
+    <% if @search_result[subject_type].empty? %>
+      <li class="none">
+        <%= I18n.t('search.no_subject_found', :subject => subject_type.to_s) %>
+      </li>
+    <% else %>
+      <% @search_result[subject_type].each do |subject|%>
+        <li class="subject_result"><%= subject_with_details subject %></li>
+      <% end %>
+      <li class="more">
+        <%= I18n.t('search.all_subject_results', :subject => subject_type.to_s.pluralize, :count => @search_result[(subject_type.to_s+"_total").to_sym].to_s) %>        
+      </li>
+    <% end %>    
+  </li>
+  <% end %>
 </ul>
-<% end %>
-
-

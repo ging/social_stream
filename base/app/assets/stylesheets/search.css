@@ -22,7 +22,7 @@
   width: 300px;
 }
 #header_search_display {
-  width: 175px;
+  width: 225px;
   display: none;
   float: right;
   margin-right: 35px;
@@ -33,7 +33,7 @@
   position: absolute;
   z-index: 2000;
   background: whiteSmoke;
-  text-align: center;
+  text-align: left;
 }
 #header_search_display a {
   color: #2A3890;
@@ -51,22 +51,49 @@
   height: 35px;
   background: whiteSmoke;
   overflow: hidden;
-  text-align: center;
-}
-#header_search_display  li .logo {
-  float: left;
-  margin-right: 5px;
-}
-#header_search_display  li .name {
-  float: left;
-  width: 125px;
-  overflow: hidden;
-  height: 25px;
-  text-align: left;
 }
 #header_search_display  li:hover {
   background: #CFDEFF;
   color: #2A3890;
+}
+#header_search_display  li .logo {
+  float: left;
+  height: 35px;
+  width: 35px;
+  margin-right: 5px;
+}
+#header_search_display  li .logo img {
+  height: 100%;
+  width: 100%;
+}
+#header_search_display  li .name {
+  margin-top: 3px;
+  width: 175px;
+  overflow: hidden;
+}
+#header_search_display  li .link {
+  display: none;
+}
+#header_search_display  li.subject_result {
+  padding: 0px;
+  height: 45px;
+}
+#header_search_display  li.title {
+  overflow: hidden;
+  text-align: center;
+  background: #879EB5;
+  height: 15px;
+  color: whiteSmoke;
+  font-weight: bold;
+}
+#header_search_display  li.loading {
+  text-align: center;
+}
+#header_search_display  li.more, #header_search_display  li.none {
+  height: 15px;
+  text-align: center;
+}
+#header_search_display  li.title:hover, #header_search_display  li.more:hover, #header_search_display  li.none:hover {
 }
 #header_search_display  .warning {
   width: 100%;
@@ -84,11 +111,11 @@
   text-align: center;
   margin: 3px;
 }
-.subject_search_results .title{
+.subject_search_results .title {
   width: 260px;
   margin: auto;
   background-color: #E1EEF5;
-  padding:5px;
+  padding: 5px;
   font-weight: bold;
 }
 /******************** Search css END ***********************/

@@ -3,7 +3,7 @@
     <%= text_field_tag :search_query, nil,:autocomplete => :off, :id => :header_search_input %>
   </form>
   <div id="header_search_display">
-    <%= image_tag('loading.gif', :class => :loading) %>
+    <ul><li class="loading"><%= image_tag('loading.gif', :class => :loading) %></li></ul>
   </div>
 </div>
 <%= javascript_tag do %>
@@ -34,7 +34,7 @@ $(document).ready(function() {
     } else {
       if (last_search!=searchstring){
         last_search=searchstring;
-        $("#header_search_display").html("<ul><li><%= escape_javascript(image_tag('loading.gif', :class => :loading)) %></li></ul>").show();
+        $("#header_search_display").html("<ul><li class=\"loading\"><%= escape_javascript(image_tag('loading.gif', :class => :loading)) %></li></ul>").show();
         $.ajax({
           type : "GET",
           url : "<%= search_url %>?search_query=" + searchstring + "&mode=header_search",
