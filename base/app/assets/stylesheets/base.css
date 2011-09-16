@@ -18,7 +18,7 @@ h2{padding-left:10px;}
 body{font-size:1.0em;  color:#2A3890;  background-color:#ffffff; overflow-y: scroll;}
 #wrapper { 	background-color: #f5f5f5;	width: 100%; margin: 0px auto;	  }
 #wrapper_body{min-height: 552px; width: 960px; margin:0px auto;	margin-left: auto;	margin-right: auto;
-margin-top: auto; margin-bottom:auto;}
+margin-top: auto; margin-bottom:auto; background-image:none;}
 
 
  /*********** Notices SECTION *********************/
@@ -52,16 +52,6 @@ textarea.new_contact_text_area{ height: 100px; color: #2A3890;}
 .select_relations select{ font-size: 12px; color: white; background-color:#1F4A75;} 
 
 /************ Forms - Buttons  SECTION ***************************/
-.myButton{ cursor:pointer;
-  background-image: -webkit-gradient(linear,left bottom,left top, color-stop(0.01, rgb(116,191,67)),
-      color-stop(0.51, rgb(117,189,68)),color-stop(0.76, rgb(195,222,171)));
-  background-image: -moz-linear-gradient(center bottom,rgb(116,191,67) 1%,rgb(117,189,68) 51%,
-      rgb(195,222,171) 76%);
-  border-radius: 0.2em;  color: #fff; width: 88px;  height: 26px;  border: none;}
-.myButton span {  display: block;  line-height: 14px;  padding: 5px 0 5px 18px;}
-.myButton:active {  background-position: bottom right;  color: #000;  outline: none;}
-.myButton:active span {  background-position: bottom left;  padding: 6px 0 4px 18px;}
-
 .myButtonBlue{ cursor:pointer;
   background-image: -webkit-gradient( linear, left bottom, left top,
       color-stop(0.16, rgb(0,122,193)), color-stop(0.58, rgb(56,148,209)), color-stop(0.79, rgb(168,222,249)) );
@@ -83,7 +73,9 @@ textarea.new_contact_text_area{ height: 100px; color: #2A3890;}
 .myButtonLarge:active {  background-position: bottom right;  color: #000;  outline: none;}
 .myButtonLarge:active span {  background-position: bottom left;  padding: 6px 0 4px 18px;}
 
-.button{margin: 10px 0 10px 10px;padding: 3px 3px 3px 3px;color:#FFFFFF;background-color: #1F4A75;}
+.button{margin: 10px 0 10px 0px;padding: 3px 20px 3px 20px;color:#FFFFFF;background-color: #1F4A75;
+        -moz-border-radius: 6px; -webkit-border-radius: 6px; border-radius: 6px;
+        font-size: 13px;}
 .optionHeader {
 	color: #fff;
 	overflow: hidden;

@@ -1,0 +1,20 @@
+#center_body{
+  border: none;
+  width:100%;
+}
+
+#sidebar{
+  display:none;  
+}
+
+#toolbar{
+  padding: 0;
+}
+
+#wrapper_body{
+  background-color: inherit;
+  background-image: url("/assets/big-logo.png");
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  width:100%;
+}

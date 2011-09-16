@@ -18,8 +18,9 @@ span.find{  padding-right:5px;}
 #devise_links a{font-weight: bold;line-height: 15px; }
 #login{  padding-top: 5px;}
 .instructions{text-align: left; padding-bottom: 5px;}
-#welcome{  margin: 50px auto 50px auto;  width:330px;  padding:20px;  border: thin solid #2A3890;
-  text-align:center;}
+#welcome{  margin: 50px auto 50px auto;  width:330px;  padding:20px;  border: 3px solid #BDC7D8;
+  text-align:center; background-color: white;-moz-border-radius: 20px; 
+  -webkit-border-radius: 20px; border-radius: 20px;}
 #wrapper_left{  vertical-align:top;  width:49%;  display:inline-block;    padding-left: 20px;}
 #wrapper_right{ vertical-align:top;  width:48%;  display:inline-block;}
 
