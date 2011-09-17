@@ -1,0 +1,10 @@
+<div id="search_form">
+  <form action="<%= params[:id].present? ? focus_search_path(:id => params[:id].pluralize) : search_path %>" method="get">
+    <div class="block">
+      <div class="form_row search_row">
+        <%= text_field_tag :search_query, params[:search_query].present? ? params[:search_query] : nil ,:autocomplete => :off, :id => :global_search_input %>
+        
+      </div>
+    </div>
+  </form>
+</div>
