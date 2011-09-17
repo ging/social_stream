@@ -106,16 +106,29 @@
   padding: 5px;
 }
 .subject_search_results {
-  width: 270px;
-  float: left;
+  width: 280px;
   text-align: center;
-  margin: 3px;
 }
-.subject_search_results .title {
-  width: 260px;
+#search_results {
+  text-align: center;
+}
+#search_results .left{
+  float: left;
+  padding: 0;
+}
+#search_results .right{
+  float: right;
+  padding: 0;
+}
+#search_results .title {
+  width: 540px;
   margin: auto;
   background-color: #E1EEF5;
   padding: 5px;
   font-weight: bold;
+  text-align: center;
+}
+#search_results .subject_search_results .title {
+  width: 260px;
 }
 /******************** Search css END ***********************/

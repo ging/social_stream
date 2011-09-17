@@ -65,7 +65,8 @@ Rails.application.routes.draw do
     resource :like
   end
   
-  match 'search' => 'search#index', :as => :search
+  match 'search' => 'search#index', :as => :search  
+  match 'search/:id' => 'search#index', :as => :focus_search
   
   match 'ties' => 'ties#index', :as => :ties
   

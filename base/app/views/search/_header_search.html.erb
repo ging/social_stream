@@ -13,8 +13,8 @@
         <li class="subject_result"><%= subject_with_details subject %></li>
       <% end %>
       <li class="more">
-        <%= I18n.t('search.all_subject_results', :subject => subject_type.to_s.pluralize, :count => @search_result[(subject_type.to_s+"_total").to_sym].to_s) %>        
-      </li>
+        <%= focus_search_link(I18n.t('search.all_subject_results', :subject => subject_type.to_s.pluralize, :count => @search_result[(subject_type.to_s+"_total").to_sym].to_s),subject_type.to_s,params[:search_query]) %>
+     </li>
     <% end %>    
   </li>
   <% end %>
