@@ -11,8 +11,8 @@ namespace :db do
     task :create => :environment do
 
       LOGOS_PATH = File.join(Rails.root, 'lib', 'logos')
-      USERS = ENV["USERS"] || 9
-      GROUPS = ENV["GROUPS"] || 10
+      USERS = ENV["USERS"].to_i || 9
+      GROUPS = ENV["GROUPS"].to_i || 10
       if ENV["HARDCORE"].present?
         USERS = 999
         GROUPS = 1000    
@@ -46,7 +46,7 @@ namespace :db do
         end
       end
 
-      puts 'User population (' + (USERS+1).to_s + ' users)'
+      puts 'User population (Demo and ' + USERS.to_s + ' users more)'
       users_start = Time.now
 
       # = Users
