@@ -1,0 +1,19 @@
+<% SocialStream.subjects.each do |subject_type| %>
+<div class="subject_search_results block  <%= cycle "left", "right" %>">
+  <div class="title">
+    <%= subject_type.to_s.capitalize.pluralize %>
+  </div>
+  <% if @search_result[subject_type].empty? %>
+  <div class="subject_with_details">
+    <%= I18n.t('search.no_subject_found', :subject => subject_type.to_s) %>
+  </div>
+  <% else %>
+  <% @search_result[subject_type].each do |subject|%>
+  <%= subject_with_details subject %>
+  <% end %>
+  <div class="subject_with_details">
+    <%= focus_search_link(I18n.t('search.all_subject_results', :subject => subject_type.to_s.pluralize, :count => @search_result[(subject_type.to_s+"_total").to_sym].to_s),subject_type.to_s,params[:search_query]) %>
+  </div>
+  <% end %>
+</div>
+<% end %> 

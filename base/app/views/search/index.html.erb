@@ -12,8 +12,5 @@
     
 <% end %>
 
-<% unless params[:focus].present? %>
-  <%= render :partial => 'index' %>
-<% else %>
-  <%= render :partial => 'focus_search' %>
-<% end %>
+
+ <%= render :partial => 'index' %>

@@ -336,7 +336,7 @@ en:
       query: "See more results for %{query} >"
     name: "Search"
     no_subject_found: "No %{subject} was found."
-    searching: "Searching %{name}"
+    searching: "Searching: %{query}"
     show_all: "Show all results"
     write: "Write your query ..."
     wrong: "There seems to be a problem with the search engine"
