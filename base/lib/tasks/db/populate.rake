@@ -11,6 +11,12 @@ namespace :db do
     task :create => :environment do
 
       LOGOS_PATH = File.join(Rails.root, 'lib', 'logos')
+      USERS = ENV["USERS"] || 9
+      GROUPS = ENV["GROUPS"] || 10
+      if ENV["HARDCORE"].present?
+        USERS = 999
+        GROUPS = 1000    
+      end      
 
       Mailboxer.setup do |config|
         config.uses_emails = false
@@ -40,7 +46,7 @@ namespace :db do
         end
       end
 
-      puts 'User population'
+      puts 'User population (' + (USERS+1).to_s + ' users)'
       users_start = Time.now
 
       # = Users
@@ -55,7 +61,7 @@ namespace :db do
 
       require 'forgery'
 
-      9.times do
+      USERS.times do
         User.create! :name => Forgery::Name.full_name,
                      :email => Forgery::Internet.email_address,
                      :password => 'demonstration',
@@ -66,13 +72,13 @@ namespace :db do
       users_end = Time.now
       puts '   -> ' + (users_end - users_start).round(4).to_s + 's'
 
-      puts 'Groups population'
+      puts 'Groups population (' + GROUPS.to_s + ' groups)'
       groups_start = Time.now
 
       # = Groups
       available_actors = Actor.all
 
-      10.times do
+      GROUPS.times do
         founder = available_actors[rand(available_actors.size)]
 
         Group.create! :name  => Forgery::Name.company_name,
