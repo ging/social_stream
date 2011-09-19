@@ -329,7 +329,12 @@ en:
       none: "Nothing found"
     all_subject_results: "Search all %{subject} (%{count})"
     at_least: "Write at least two characters"
-    global: "Global search"
+    global: 
+      name: "Global search"
+      query: "See more results for %{query} >"
+      first_result:
+        more: "Showing the first %{count} results."
+        one: "Showing the first result."
     name: "Search"
     no_subject_found: "No %{subject} was found."
     searching: "Searching %{name}"

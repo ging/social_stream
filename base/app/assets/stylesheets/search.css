@@ -51,6 +51,7 @@
   height: 35px;
   background: whiteSmoke;
   overflow: hidden;
+  text-align: center;
 }
 #header_search_display  li:hover {
   background: #CFDEFF;
@@ -77,6 +78,7 @@
 #header_search_display  li.subject_result {
   padding: 0px;
   height: 45px;
+  text-align: left;
 }
 #header_search_display  li.title {
   overflow: hidden;
@@ -86,12 +88,12 @@
   color: whiteSmoke;
   font-weight: bold;
 }
-#header_search_display  li.loading {
+#header_search_display  li.loading, #header_search_display  li.more, #header_search_display  li.none {
   text-align: center;
 }
-#header_search_display  li.more, #header_search_display  li.none {
-  height: 15px;
-  text-align: center;
+#header_search_display  li.more {
+  padding-top: 10px;
+  height: 30px;
 }
 #header_search_display  li.title:hover, #header_search_display  li.more:hover, #header_search_display  li.none:hover {
 }

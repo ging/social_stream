@@ -1,21 +1,22 @@
+<% total = 0 %>
 <ul>
-<% SocialStream.subjects.each do |subject_type| %>
-  
-    <li class="title">
-      <%= subject_type.to_s.capitalize.pluralize %>
-    </li>
-    <% if @search_result[subject_type].empty? %>
-      <li class="none">
-        <%= I18n.t('search.no_subject_found', :subject => subject_type.to_s) %>
+<% SocialStream.subjects.each do |subject_type| %>  
+    <% unless @search_result[subject_type].empty? %>
+      <li class="title">
+        <%= subject_type.to_s.capitalize.pluralize %>
       </li>
-    <% else %>
       <% @search_result[subject_type].each do |subject|%>
+        <% total+=1 %>
         <li class="subject_result"><%= subject_with_details subject %></li>
       <% end %>
-      <li class="more">
-        <%= focus_search_link(I18n.t('search.all_subject_results', :subject => subject_type.to_s.pluralize, :count => @search_result[(subject_type.to_s+"_total").to_sym].to_s),subject_type.to_s,params[:search_query]) %>
-     </li>
     <% end %>    
   </li>
-  <% end %>
+<% end %>
+
+  <%= link_to raw('<li class="more">' + 
+              t('search.global.query', :query => truncate(params[:search_query],:length => 20)) + 
+              '<br>' +
+              t('search.global.first_result.' + (total==1 ? 'one' : 'more'), 
+              :count => total.to_s) + '</li>'), 
+              search_path(:search_query => params[:search_query]) %>
 </ul>
