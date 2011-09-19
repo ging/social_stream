@@ -3,12 +3,12 @@
 <%end%>
 <div id="welcome">
   <div id="login" class="block">
-    <h2><%= t('password.forgot') %></h2>
+    <h2><%= t('devise.passwords.forgot') %></h2>
     <div class="space_center"></div>
     <div class="space_center"></div>
     <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
       <%= devise_error_messages! %>
-      <div class="instructions"><%= t('devise.passwords.acquire') %></div>
+      <div class="instructions"><%= t('devise.passwords.instructions') %></div>
       <div class="form_row">
         <div class="form_label"<%= f.label :email %></div>
         <div class="form_field"><%= f.text_field :email, :class => "form_tag" %></div>

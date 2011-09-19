@@ -127,8 +127,9 @@ en:
     confirm: Delete %{element}}?
   devise:
     passwords:
-      acquire: "Type the email address bound to your account and we will sent you a new one:"
       confirm: "Confirm password"
+      forgot: "Forgot your password?"
+      instructions: "Type the email address bound to your account and we will sent you instructions to change it:"
       update: "Change your password"
   follower:
     n:
@@ -233,8 +234,6 @@ en:
     read: "Mark as read"
     read_all: "Mark all as read"
     unread: "Mark as unread"
-  password:
-    forgot: "Acquire a new password"
   post:
     confirm_delete: "Delete post?"
     form:

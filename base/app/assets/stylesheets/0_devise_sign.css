@@ -1,3 +1,8 @@
+/* This stylesheet overwrites some of the parameters fixed by other stylesheets found in
+ * assets/stylesheets. Since they are compiled all together in alphabetic order, it should be
+ * start by zero to make sure it is the first one to be executed. 
+ */
+
 #center_body{
   border: none;
   width:100%;
