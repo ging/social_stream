@@ -114,11 +114,11 @@
 #search_results {
   text-align: center;
 }
-#search_results .left{
+#search_results .left {
   float: left;
   padding: 0;
 }
-#search_results .right{
+#search_results .right {
   float: right;
   padding: 0;
 }
@@ -132,5 +132,28 @@
 }
 #search_results .subject_search_results .title {
   width: 260px;
+}
+/********************************* Focus options ***********/
+#focus_options ul {
+  list-style: none;
+}
+#focus_options ul li {
+  line-height: 27px;
+  vertical-align: top;
+  display: inline;
+}
+#focus_options  li span:hover {
+  background: #CFDEFF;
+  color: #2A3890;
+}
+#focus_options ul li a:hover{
+  text-decoration: none;
+}
+#focus_options ul li span{
+  padding: 5px 10px;
+  background-color: #E1EEF5;
+}
+#focus_options ul li span.selected{
+  border: solid 1px #2A3890;
 }
 /******************** Search css END ***********************/

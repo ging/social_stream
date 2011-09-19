@@ -331,13 +331,14 @@ en:
     at_least: "Write at least two characters"
     global: 
       name: "Global search"
-      query: "See more results for %{query} >"
       first_result:
         more: "Showing the first %{count} results."
         one: "Showing the first result."
+      query: "See more results for %{query} >"
     name: "Search"
     no_subject_found: "No %{subject} was found."
     searching: "Searching %{name}"
+    show_all: "Show all results"
     write: "Write your query ..."
     wrong: "There seems to be a problem with the search engine"
   settings:

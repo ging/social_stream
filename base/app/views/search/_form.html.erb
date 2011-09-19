@@ -1,10 +1,22 @@
 <div id="search_form">
   <form action="<%= search_path %>" method="get">
     <div class="block">
+      <%= hidden_field_tag :focus, params[:focus] %>
       <div class="form_row search_row">
-        <%= hidden_field_tag :focus, params[:focus] %>
         <%= text_field_tag :search_query, params[:search_query].present? ? params[:search_query] : nil ,:autocomplete => :off, :id => :global_search_input %>
       </div>
+      <div  id="focus_options" class="form_row search_row">
+        <ul>
+          <li><%= link_to content_tag(:span,t('search.show_all'),:class => params[:focus].blank? ? 'selected' : ''), search_path, :search_query => params[:search_query] %></li>
+          <% SocialStream.subjects.each do |subject| %>
+            <% selected_class = (params[:focus].present? and params[:focus].pluralize.downcase.eql?(subject.to_s.pluralize.downcase)) ? 'selected' : ''%>
+            <li><%= focus_search_link content_tag(:span, subject.to_s.pluralize.capitalize, 
+                                                  :class => selected_class), 
+                                      subject.to_s.classify.constantize, 
+                                      params[:search_query] %></li>
+          <% end %>
+        </ul>
+      </div>      
     </div>
   </form>
 </div>
