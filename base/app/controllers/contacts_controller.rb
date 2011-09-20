@@ -26,9 +26,11 @@ class ContactsController < ApplicationController
   def update
     @contact = current_subject.sent_contacts.find params[:id]
 
-    # This should be in the model
-    if params[:contact][:relation_ids].present?
-      params[:contact][:relation_ids].delete("gotcha")
+    # FIXME: This should be in the model
+    if params[:contact][:relation_ids].present? &&
+       params[:contact][:relation_ids].delete("gotcha") &&
+       params[:contact][:relation_ids].blank?
+      params[:contact][:relation_ids] << @contact.sender.relation_public.id
     end
 
     if @contact.update_attributes(params[:contact])
