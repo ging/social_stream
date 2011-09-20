@@ -1,0 +1,9 @@
+$('#search_results').html("<% unless params[:focus].present? %><%= escape_javascript render :partial => 'global_search' %><% else %><%= escape_javascript render :partial => 'focus_search' %><% end %>");
+
+$('#focus_options ul li a span').removeClass('selected');
+
+<% if params[:focus].present? %>
+	$('#focus_options ul li a span.<%= params[:focus].pluralize.downcase %>').addClass('selected');
+<% else %>
+	$('#focus_options ul li a span.global').addClass('selected');
+<% end %>

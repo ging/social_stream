@@ -1,5 +1,5 @@
 <div id="search_form">
-  <form action="<%= search_path %>" method="get">
+  <form action="<%= search_path %>" method="get" data-remote="true">
     <div class="block">
       <%= hidden_field_tag :focus, params[:focus] %>
       <div class="form_row search_row">
@@ -7,11 +7,11 @@
       </div>
       <div  id="focus_options" class="form_row search_row">
         <ul>
-          <li><%= link_to content_tag(:span,t('search.show_all'),:class => params[:focus].blank? ? 'selected' : ''), search_path(:search_query => params[:search_query]) %></li>
+          <li><%= link_to content_tag(:span,t('search.show_all'),:class => params[:focus].blank? ? 'global selected' : 'global'), search_path(:search_query => params[:search_query]), :remote => true %></li>
           <% SocialStream.subjects.each do |subject| %>
             <% selected_class = (params[:focus].present? and params[:focus].pluralize.downcase.eql?(subject.to_s.pluralize.downcase)) ? 'selected' : ''%>
             <li><%= focus_search_link content_tag(:span, subject.to_s.pluralize.capitalize, 
-                                                  :class => selected_class), 
+                                                  :class => selected_class + " " + subject.to_s.pluralize.downcase), 
                                       subject.to_s.classify.constantize, 
                                       params[:search_query] %></li>
           <% end %>
