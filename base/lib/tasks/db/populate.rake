@@ -91,7 +91,7 @@ namespace :db do
 
         Group.create! :name  => Forgery::Name.company_name,
                       :email => Forgery::Internet.email_address,
-                      :_founder => founder.slug
+                      :_contact_id => founder.ego_contact.id
       end
 
       set_tags(Group)
