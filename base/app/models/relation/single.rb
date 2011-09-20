@@ -17,6 +17,6 @@ class Relation::Single < Relation
 
   # The name of public relation
   def name
-    I18n.t("relation_#{ self.class.name }.name")
+    I18n.t("relation_#{ self.class.name.split("::").last.underscore }.name")
   end
 end
