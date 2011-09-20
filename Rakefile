@@ -13,7 +13,9 @@ require 'bundler'
 require File.join(File.dirname(__FILE__), 'lib', 'social_stream', 'version')
 
 
-RSpec::Core::RakeTask.new(:spec)
+RSpec::Core::RakeTask.new(:spec) do |s|
+  s.pattern = ['./spec/**/*_spec.rb', '*/spec/*/*_spec.rb']
+end
 
 task :default => :spec
 

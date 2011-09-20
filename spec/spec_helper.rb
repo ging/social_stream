@@ -18,17 +18,9 @@ Capybara.default_selector = :css
 # FIXME orm
 ActiveRecord::Migration.verbose = false
 
-# Run any available migration
-ActiveRecord::Migrator.migrate File.expand_path("../dummy/db/migrate/", __FILE__)
-
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 # Load Factories
 require 'factory_girl'
-Dir["#{File.dirname(__FILE__)}/factories/*.rb"].each {|f| require f}
-
-RSpec.configure do |config|
-  # == Mock Framework
-  config.mock_with :rspec
-end
+Dir["#{File.dirname(__FILE__)}/factories/*.rb", "#{File.dirname(__FILE__)}/../*/spec/factories/*.rb"].each {|f| require f}
