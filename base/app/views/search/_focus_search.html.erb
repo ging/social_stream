@@ -2,14 +2,14 @@
   <%= @search_class_sym.to_s.capitalize.pluralize %>
 </div>
 <br class="clearfloat" />
-<% if @search_result[@search_class_sym].empty? %>
+<% if @search_result.empty? %>
 <div class="subject_with_details">
   <%= I18n.t('search.no_subject_found', :subject => @search_class_sym.to_s) %>
 </div>
 <% else %>
 <% total = 0 %>
 <div class="subject_search_results block left">
-  <% @search_result[@search_class_sym].each do |subject|%>
+  <% @search_result.each do |subject|%>
   <%= subject_with_details subject %>
   <% total+=1 %>
   <% if (total%(SearchController::FOCUS_SEARCH_PER_PAGE/2)==0) %>
@@ -18,4 +18,5 @@
   <% end %>
   <% end %>
 </div>
+<%= paginate @search_result %>
 <% end %> 
