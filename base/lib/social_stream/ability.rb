@@ -74,7 +74,7 @@ module SocialStream
 
       can :create, Group do |g|
         subject.present? &&
-          g._founder == subject.slug
+          g._contact.sender_id == Actor.normalize_id(subject)
       end
 
       can :update, Group do |g|

@@ -27,10 +27,10 @@ module ActivitiesHelper
     end
   end
 
-  # Build a new activity based on the current_subject. Useful for authorization queries
-  def new_activity(receiver)
-    return Activity.new unless user_signed_in?
+  # Build a new post based on the current_subject. Useful for authorization queries
+  def new_post(receiver)
+    return Post.new unless user_signed_in?
 
-    Activity.new :contact_id => current_subject.contact_to!(receiver).id
+    Post.new :_contact_id => current_subject.contact_to!(receiver).id
   end
 end

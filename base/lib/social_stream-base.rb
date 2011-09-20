@@ -72,7 +72,7 @@ module SocialStream
   @@objects = [ :post, :comment ]
 
   mattr_accessor :activity_forms
-  @@activity_forms = [:post]
+  @@activity_forms = [ :post, :group ]
   
   class << self
     def setup

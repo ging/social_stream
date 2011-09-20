@@ -30,7 +30,7 @@ describe GroupsController do
 
     context "faking a new group" do
       before do
-        model_attributes[:_founder] = Factory(:user).slug
+        model_attributes[:_contact_id] = Factory(:user).ego_contact.id
       end
 
       it_should_behave_like "Deny Creating"
@@ -81,7 +81,7 @@ describe GroupsController do
 
     context "a new own group" do
       before do
-        model_attributes[:_founder] = @user.slug
+        model_attributes[:_contact_id] = @user.ego_contact.id
       end
 
       it "should allow creating" do
@@ -127,7 +127,7 @@ describe GroupsController do
 
     context "a new fake group" do
       before do
-        model_attributes[:_founder] = Factory(:user).slug
+        model_attributes[:_contact_id] = Factory(:user).ego_contact.id
       end
 
       it_should_behave_like "Deny Creating"

@@ -48,7 +48,7 @@ class GroupsController < InheritedResources::Base
   def set_founder
     return unless user_signed_in?
 
-    params[:group]            ||= {}
-    params[:group][:_founder] ||= current_subject.slug
+    params[:group]               ||= {}
+    params[:group][:_contact_id] ||= current_subject.ego_contact.id
   end
 end

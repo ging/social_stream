@@ -143,7 +143,7 @@ describe PostsController do
 
       post :create, :post => { :text => "Test",
                                :_contact_id => @tie.contact.inverse!.id,
-                               :_relation_ids => [""] }
+                             }
 
       post = assigns(:post)
 

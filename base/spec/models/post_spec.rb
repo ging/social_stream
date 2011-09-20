@@ -30,4 +30,30 @@ describe Post do
       end
     end
   end
+
+  context "without relations" do
+    it "should allow create to friend" do
+      tie = Factory(:friend)
+
+      post = Post.new :text => "testing",
+                      :_contact_id => tie.contact.inverse!.id
+
+      assert post.build_post_activity.allow? tie.receiver_subject, 'create'
+
+      ability = Ability.new(tie.receiver_subject)
+
+      ability.should be_able_to(:create, post)
+    end
+
+    it "should fill relation" do
+      tie = Factory(:friend)
+
+      post = Post.new :text => "testing",
+                      :_contact_id => tie.contact.inverse!.id
+
+      post.save!
+
+      post.post_activity.relations.should include(tie.relation)
+    end
+  end
 end

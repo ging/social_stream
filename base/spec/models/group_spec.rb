@@ -4,7 +4,7 @@ describe Group do
   it "should save description" do
     g = Group.create(:name => "Test",
                      :description => "Testing description",
-                     :_founder => Factory(:user).slug)
+                     :_contact_id => Factory(:user).ego_contact.id)
 
     g.reload.description.should be_present
   end

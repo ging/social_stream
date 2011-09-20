@@ -26,11 +26,7 @@
 #founder #created{display: inline-block;}
 #founder #thumb{display: inline-block;}
 
-#event_name{
-  border: 1px solid #BDC7D8;
-  padding: 5px;
-  width: 95%;
-}.sb_wrapper input[type="text"],
+.sb_wrapper input[type="text"],
 ul.sb_dropdown{
 	border:1px solid #fff;
 	background: #fafafa; 

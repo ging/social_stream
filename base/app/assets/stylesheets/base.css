@@ -208,7 +208,7 @@ textarea.new_contact_text_area{ height: 100px; color: #2A3890;}
 }
 
 .activity_form_selector{
-	padding: 2px;
+	padding: 5px;
 	margin-bottom: 5px;
 	float: left;
 	border: 2px solid transparent;

@@ -13,14 +13,14 @@
 
 <%= location(
     link_to(image_tag("btn/btn_group.png", :class => "menu_icon")+t('group.other'), groups_path),
-    link_to(image_tag("btn/btn_group.png", :class => "menu_icon")+t('group.new.action'), new_group_path('group' => { '_founder' => current_subject.slug }))
+    link_to(image_tag("btn/btn_group.png", :class => "menu_icon")+t('group.new.action'), new_group_path)
   ) %>
 
 <div class="space_center"></div>
 
 <%= form_for @group do |f| %>
-	<% f.object._founder = current_subject.slug %>
-	<%= f.hidden_field :_founder %>
+	<% f.object._contact_id ||= current_subject.ego_contact.id %>
+	<%= f.hidden_field :_contact_id %>
 
 	<% if @group.errors.any? %>
 		<div id="notice">

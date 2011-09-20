@@ -164,6 +164,9 @@ en:
     all: "All groups"
     all_n: "All groups (%{count})"
     by: "By groups"    
+    form:
+      title: "Group"
+    input: "What is the name of the group?"
     last: "Last groups"
     my: "My groups"
     new:

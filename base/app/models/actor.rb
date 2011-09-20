@@ -259,6 +259,11 @@ class Actor < ActiveRecord::Base
       sent_contacts.create!(:receiver => Actor.normalize(subject))
   end
 
+  # The {Contact} of this {Actor} to self (totally close!)
+  def ego_contact
+    contact_to!(self)
+  end
+
   def sent_active_contact_ids
     @sent_active_contact_ids ||=
       load_sent_active_contact_ids

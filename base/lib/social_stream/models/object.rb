@@ -7,7 +7,8 @@ module SocialStream
       extend ActiveSupport::Concern
 
       included do
-        attr_accessor :_contact_id, :_relation_ids
+        attr_accessor :_contact_id
+        attr_writer   :_relation_ids
         attr_accessor :_activity_parent_id
 
         belongs_to :activity_object, :dependent => :destroy, :autosave => true
@@ -59,6 +60,23 @@ module SocialStream
 
         def _contact
           @_contact ||= Contact.find(_contact_id)
+        end
+
+        def _relation_ids
+          @_relation_ids ||=
+            if _contact_id.nil?
+              nil
+            else
+              if _contact.reflexive?
+                Array.wrap(_contact.sender.relation_public.id)
+              else
+                 _contact.
+                   receiver.
+                   relation_customs.
+                   allow(_contact.sender, 'create', 'activity').
+                   map(&:id)
+              end
+            end
         end
 
         def _activity_parent

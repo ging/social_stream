@@ -13,7 +13,7 @@
 #wrapper_activities_header {	padding-top: 5px;  padding-bottom: 5px;	background-color: #deeff8;}
 #activities_title {	vertical-align: top;	margin-left: 10px;	font-weight: bold;}
 #activities_header {	width: 100%;	margin-bottom: 5px;	text-align: center;	padding-top: 5px;}
-#input_activities {	border-color: #0656a4; color: #2A3890;	padding: 5px 5px 5px 5px;
+#activities_header input[type="text"] {	border-color: #0656a4; color: #2A3890;	padding: 5px 5px 5px 5px;
   border:1px solid #BDC7D8; width:95%;}
 #activities_share_btn {	text-align: right;	padding: 5px 16px 0px 10px;	vertical-align: middle;}
 #securities{  display:inline-block;  text-align:left; float: left; padding-left:5px;}

@@ -43,14 +43,6 @@ module SocialStream
           {:key => :invitations, :name => image_tag("btn/btn_invitation.png")+t('invitation.toolbar'), :url => new_invitation_path}
         ]}
 
-      #Subjects
-      items << {:key => :groups,
-        :name => image_tag("btn/btn_group.png")+t('group.other'),
-        :url => "#",
-        :options => {:link => {:id => "groups_menu"}},
-        :items => [{:key => :new_group ,:name => image_tag("btn/btn_group.png")+t('group.new.action'),:url => new_group_path('group' => { '_founder' => current_subject.slug })}]
-      }
-
       render_items items
     end
 
