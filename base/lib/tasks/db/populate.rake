@@ -11,12 +11,20 @@ namespace :db do
     task :create => :environment do
 
       LOGOS_PATH = File.join(Rails.root, 'lib', 'logos')
-      USERS = ENV["USERS"].to_i || 9
-      GROUPS = ENV["GROUPS"].to_i || 10
+      USERS = (ENV["USERS"] || 9).to_i
+      GROUPS =  (ENV["GROUPS"] || 10).to_i
       if ENV["HARDCORE"].present?
         USERS = 999
         GROUPS = 1000    
-      end      
+      end
+      if USERS < 9
+        USERS = 9
+        puts "WARNING: There should be at least 10 users (Demo user and 9 more). Changing USERS to 9."
+      end
+      if GROUPS < 10
+        GROUPS = 10
+        puts "WARNING: There should be at least 10 groups. Changing GROUPS to 10."
+      end
 
       Mailboxer.setup do |config|
         config.uses_emails = false
@@ -102,7 +110,7 @@ namespace :db do
       available_actors.each do |a|
         actors = available_actors.dup - Array(a)
         relations = a.relations
-
+        break if actors.size==0
         Forgery::Basic.number(:at_most => actors.size).times do
           actor = actors.delete_at((rand * actors.size).to_i)
           a.contact_to!(actor).relation_ids = Array(Forgery::Extensions::Array.new(relations).random.id)
