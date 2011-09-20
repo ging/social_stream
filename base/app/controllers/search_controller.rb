@@ -2,12 +2,12 @@ class SearchController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
 
   #before_filter :authenticate_user! #??
-  
+
   FOCUS_SEARCH_PER_PAGE=16
-  
+  MIN_QUERY=2
   def index
     @search_class_sym = params[:focus].singularize.to_sym unless params[:focus].blank?
-    if params[:search_query].blank?
+    if params[:search_query].blank? or too_short_query
       @search_result = nil_search
     else
       if params[:mode].eql? "header_search"
@@ -25,6 +25,11 @@ class SearchController < ApplicationController
   end
 
   private
+
+  def too_short_query
+    bare_query = strip_tags(params[:search_query]) unless bare_query.html_safe?
+    return bare_query.strip.size < MIN_QUERY
+  end
 
   def get_search_query
     search_query = ""
@@ -47,15 +52,11 @@ class SearchController < ApplicationController
 
   def search max_results
     result = Hash.new
-    total = 0
     total_shown = 0
     SocialStream.subjects.each do |subject_sym|
       result.update({subject_sym => ThinkingSphinx.search(get_search_query, :classes => [subject_sym.to_s.classify.constantize]).page(1).per(max_results)})
       result.update({(subject_sym.to_s+"_total").to_sym => ThinkingSphinx.count(get_search_query, :classes => [subject_sym.to_s.classify.constantize])})
-      total+=ThinkingSphinx.count(get_search_query, :classes => [subject_sym.to_s.classify.constantize])
     end
-    result.update({:total => total})
-    result.update({:total_shown => total_shown})
     return result
   end
 
@@ -66,12 +67,15 @@ class SearchController < ApplicationController
   end
 
   def nil_search
-    result = Hash.new
-    SocialStream.subjects.each do |subject_sym|
-      result.update({subject_sym => []})
-      result.update({(subject_sym.to_s+"_total").to_sym => 0})
+    if params[:focus].present?
+      result = []
+    else
+      result = Hash.new
+      SocialStream.subjects.each do |subject_sym|
+        result.update({subject_sym => []})
+        result.update({(subject_sym.to_s+"_total").to_sym => 0})
+      end
     end
-    result.update({:total => 0})
     return result
   end
 end

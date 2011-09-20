@@ -7,3 +7,5 @@ $('#focus_options ul li a span').removeClass('selected');
 <% else %>
 	$('#focus_options ul li a span.global').addClass('selected');
 <% end %>
+
+ $('title').text('<%=t('search.name')%> <%= escape_javascript(params[:search_query].present? ? ": #{params[:search_query]}" : "")%>');

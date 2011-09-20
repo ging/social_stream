@@ -1,9 +1,9 @@
 <div id="search_form">
-  <form action="<%= search_path %>" method="get" data-remote="true">
+  <form action="<%= search_path %>" method="get" data-remote="true" id="search_form">
     <div class="block">
       <%= hidden_field_tag :focus, params[:focus] %>
       <div class="form_row search_row">
-        <%= text_field_tag :search_query, params[:search_query].present? ? params[:search_query] : nil ,:autocomplete => :off, :id => :global_search_input %>
+        <%= text_field_tag :search_query, params[:search_query].present? ? params[:search_query] : nil ,:autocomplete => :off, :id => :global_search_input, :minlength => 2, :class => :required %>
       </div>
       <div  id="focus_options" class="form_row search_row">
         <ul>
@@ -20,3 +20,9 @@
     </div>
   </form>
 </div>
+
+<%= javascript_tag do %>
+	$(document).ready(function() {
+		$("#search_form").validate();
+	});
+<% end %>
