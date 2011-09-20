@@ -12,3 +12,4 @@ Gemfile.lock
 app/views/*/.tmp_*
 **.*swp
 .idea
+spec/dummy/db/*sqlite3-journal
