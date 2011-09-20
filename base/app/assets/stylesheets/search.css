@@ -7,7 +7,6 @@
 }
 #header_search_input, #global_search_input {
   padding: 0 3px 0 22px;
-  background: url('mini-loading.gif') 5px 50% no-repeat white; /*Preloads the image, DO NOT DELETE*/
   background: url('btn/search_icon.png') 5px 50% no-repeat white;
   font-size: 11px;
   color: #2A3890;
