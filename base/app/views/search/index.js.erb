@@ -3,9 +3,15 @@ $('#search_results').html("<% unless params[:focus].present? %><%= escape_javasc
 $('#focus_options ul li a span').removeClass('selected');
 
 <% if params[:focus].present? %>
-	$('#focus_options ul li a span.<%= params[:focus].pluralize.downcase %>').addClass('selected');
+$('#focus_options ul li a span.<%= params[:focus].pluralize.downcase %>').addClass('selected');
 <% else %>
-	$('#focus_options ul li a span.global').addClass('selected');
+$('#focus_options ul li a span.global').addClass('selected');
 <% end %>
 
- $('title').text('<%=t('search.name')%> <%= escape_javascript(params[:search_query].present? ? ": #{params[:search_query]}" : "")%>');
+$('title').text('<%= t('search.name')%> <%= escape_javascript(params[:search_query].present? ? ": #{params[:search_query]}" : "")%>');
+
+<% if too_short_query? %>
+$('#too_short_error').show();
+<% else %>
+$('#too_short_error').hide();
+<% end %> 

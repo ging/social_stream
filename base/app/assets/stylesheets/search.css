@@ -133,6 +133,11 @@
 #search_results .subject_search_results .title {
   width: 260px;
 }
+/********************************* Form and errors *********/
+#search_form .error{
+	display:none;
+}
+
 /********************************* Focus options ***********/
 #focus_options ul {
   list-style: none;
