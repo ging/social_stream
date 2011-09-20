@@ -1,5 +1,7 @@
 class ContactsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :exclude_reflexive, :except => [ :index, :pending ]
+
   def index
     if params[:pending].present?
       pending
@@ -20,12 +22,9 @@ class ContactsController < ApplicationController
   end
 
   def edit
-    @contact = current_subject.sent_contacts.find params[:id]
   end
 
   def update
-    @contact = current_subject.sent_contacts.find params[:id]
-
     # FIXME: This should be in the model
     if params[:contact][:relation_ids].present? &&
        params[:contact][:relation_ids].delete("gotcha") &&
@@ -41,8 +40,6 @@ class ContactsController < ApplicationController
   end
 
   def destroy
-    @contact = current_subject.sent_contacts.find params[:id]
-
     @contact.relation_ids = [current_subject.relation_reject.id]
 
     respond_to do |format|
@@ -51,13 +48,22 @@ class ContactsController < ApplicationController
   end
 
   def pending
-
     @contacts = current_subject.pending_contacts
 
     respond_to do |format|
       format.html { @contacts = Kaminari.paginate_array(@contacts).page(params[:page]).per(10) }
       format.js { @contacts = Kaminari.paginate_array(@contacts).page(params[:page]).per(10) }
       format.json { render :text => @contacts.map{ |c| { 'key' => c.receiver_id.to_s, 'value' => self.class.helpers.truncate_name(c.receiver.name) } }.to_json }
+    end
+  end
+
+  private
+
+  def exclude_reflexive
+    @contact = current_subject.sent_contacts.find params[:id]
+
+    if @contact.reflexive?
+      redirect_to home_path
     end
   end
 end

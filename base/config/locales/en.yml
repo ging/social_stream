@@ -372,6 +372,8 @@ en:
   sign_out: "Sign out"
   sign_up: "Sign up"
   socialstream: "SocialStream"
+  subject:
+    this_is_you: "This is you!"
   sure: "Are you sure?"
   time:
     ago: "%{time} ago"

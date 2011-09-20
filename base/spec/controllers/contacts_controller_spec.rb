@@ -78,4 +78,27 @@ describe ContactsController do
       map(&:id).sort.
       should == relations.map(&:id).sort
   end
+
+  context "with reflexive contact" do
+    before do
+      @contact = @user.ego_contact
+    end
+
+    it "should redirect edit" do
+      sign_in @user
+
+      get :edit, :id => @contact
+
+      response.should redirect_to(home_path)
+    end
+
+    it "should render update" do
+      sign_in @user
+
+      put :update, :id => @contact,
+                   :contact => { "relation_ids" => [ "gotcha", @user.relations.last.id ] }
+
+      response.should redirect_to(home_path)
+    end
+  end
 end
