@@ -125,14 +125,17 @@ class Contact < ActiveRecord::Base
     if ties_count > 0 && relations.where(:type => ['Relation::Custom', 'Relation::Public']).any?
       'edit'
     else
-      'new'
+      replied? ? 'reply' : 'new'
     end
   end
 
   def status
-    established? ?
-      ties.includes(:relation).map(&:relation_name).join(", ") :
-      I18n.t("contact.new.link")
+    case action
+    when 'edit'
+      ties.includes(:relation).map(&:relation_name).join(", ")
+    else
+      I18n.t("contact.#{ action }.link")
+    end
   end
 
   private

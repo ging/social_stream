@@ -94,7 +94,7 @@ en:
     current: "Current"
     edit:
       title: "Edit contact to %{name}"
-      submit: "Edit Contact"
+      submit: "Edit contact"
     graph:
       one: "Graph"
       empty: "We're sorry but you don't have any contacts yet. You can try the search box to look for somebody!"
@@ -115,6 +115,10 @@ en:
     relation:
       one: "Contact type"
       new: "New type"
+    reply:
+      link: "+ Reply contact"
+      title: "Reply contact request to %{name}"
+      submit: "Reply contact"
     suggestion:
       one: "Suggestion"
       other: "Suggestions"
