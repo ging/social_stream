@@ -16,15 +16,29 @@ module LocationHelper
   # partial => location/_location.html.erb 
   #
   # Example:  
-  # 	Render a location with a two leves depth:
+  # 	Render a location with two leves depth:
   #
   #   	<%= location(link_to(leve1.name, level1.url),link_to(leve2.name, level2.url)) %>
   #
   def location(*stack)
-    location_body = t('location.base')
-    stack.collect {|level|
-      location_body << t('location.separator') + level
-    }
+    
+    location_body = '<div class="last">' + stack.last + '</div>'
+    
+    if stack.count >1
+      location_body.insert(0, '<div class="penultimate">'+ stack.last(2).first + '</div>')
+    end
+    
+    if stack.count >2   
+      stack.first(stack.count - 2).reverse.collect {|level|
+        location_body.insert(0, '<div class="mid">'+ level + '</div>')
+      }
+    end
+    
+    if stack.count ==1
+      location_body.insert(0, '<div class="first"><span class="penultimate">'+ t('location.base') + '</span></div>')
+    else
+      location_body.insert(0, '<div class="first"><span class="mid">'+ t('location.base') + '</span></div>')
+    end
     
     location_div = capture do
       render :partial => "location/location", :locals=>{:location_body => location_body}

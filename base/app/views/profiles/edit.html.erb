@@ -7,25 +7,25 @@
 <%if params[:section].present? 
   case params[:section]
   when "about_me"
-    level2 = link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('profile.' + current_subject.class.to_s.downcase + '.info'),
+    level2 = link_to( t('profile.' + current_subject.class.to_s.downcase + '.info'),
       :controller => :profiles , :action => :edit, :section => "about_me")
   when "contact_info" 
-    level2 = link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('profile.contact'),
+    level2 = link_to(t('profile.contact'),
       :controller => :profiles , :action => :edit, :section => "contact_info")
   when "my_experience" 
-    level2 = link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('profile.' + current_subject.class.to_s.downcase + '.experience'),
+    level2 = link_to(t('profile.' + current_subject.class.to_s.downcase + '.experience'),
       :controller => :profiles , :action => :edit, :section => "my_experience")
   when "tags"
-  level2 = link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('profile.' + current_subject.class.to_s.downcase + '.tags'),
+  level2 = link_to(t('profile.' + current_subject.class.to_s.downcase + '.tags'),
     :controller => :profiles , :action => :edit, :section => "tags")
 	end
 else
-  level2 = link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('profile.one'),
+  level2 = link_to(t('profile.one'),
       :controller => :profiles , :action => :edit)
 end %>
 
 <%= location(
-  link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('menu.information'), [current_subject, :profile]),
+  link_to(t('menu.information'), [current_subject, :profile]),
   level2
 ) %>
 <div class="space_center"></div>
