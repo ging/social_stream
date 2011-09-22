@@ -1,6 +1,4 @@
-class Video < Document
-  after_save :videoprocess
-  
+class Video < Document  
   has_attached_file :file, 
                     :url => '/:class/:id.:extension',
                     :path => ':rails_root/documents/:class/:id_partition/:style.:extension',
@@ -11,11 +9,6 @@ class Video < Document
                     },:processors => [:ffmpeg]
                     
   process_in_background :file
-                    
-  def videoprocess
-    Resque.enqueue(Videoencoder, self.id)
-  end
-     
                       
   # Thumbnail file
   def thumb(size, helper)
