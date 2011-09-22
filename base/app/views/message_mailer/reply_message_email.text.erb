@@ -5,4 +5,4 @@
 "<%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>"
 -----------------------------------------------
 
-<%=t('message.look')%> at <%= t('socialstream')%>: <%=conversation_url(@message.conversation)%>.
+<%=t('message.look')%> at <%= t('site.name')%>: <%=conversation_url(@message.conversation)%>.

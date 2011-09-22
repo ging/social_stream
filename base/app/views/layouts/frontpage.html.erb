@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title><%= yield(:title).empty? ? t('socialstream') : yield(:title)%></title>
+    <title><%= yield(:title).empty? ? t('site.name') : yield(:title)%></title>
     <meta name="keywords" content="<%= yield(:keywords).empty? ? t('profile.tags.default') : yield(:keywords) %>" >
     <meta name="description" content= "<%= yield(:description).empty? ? "Home" : yield(:description) %>" >
     <%= stylesheet_link_tag "application" %>
