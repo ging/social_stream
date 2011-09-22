@@ -4,7 +4,6 @@
 //
 $(function() {
     jQuery('ul.sf-menu').superfish({
-        delay: 2000, // one second delay on mouseout
         animation: {
             height: 'show'
         }, // fade-in and slide-down animation
