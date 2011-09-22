@@ -1,6 +1,10 @@
 require 'social_stream-base'
 
 module SocialStream
+  module ToolbarConfig
+    autoload :Documents, 'social_stream/toolbar_config/documents'
+  end
+
   module Documents
     # Add :document to SocialStream.objects and SocialStream.activity_forms by default
     # It can be configured by users at application's config/initializers/social_stream.rb

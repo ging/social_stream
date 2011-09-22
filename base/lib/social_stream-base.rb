@@ -45,7 +45,6 @@ module SocialStream
   autoload :Populate,  'social_stream/populate'
   autoload :Relations, 'social_stream/relations'
   autoload :TestHelpers, 'social_stream/test_helpers'
-  autoload :ToolbarConfig, 'social_stream/toolbar_config'
 
   module Controllers
     autoload :Helpers, 'social_stream/controllers/helpers'
@@ -59,6 +58,10 @@ module SocialStream
 
   module TestHelpers
     autoload :Controllers, 'social_stream/test_helpers/controllers'
+  end
+
+  module ToolbarConfig
+    autoload :Base, 'social_stream/toolbar_config/base'
   end
 
   mattr_accessor :subjects

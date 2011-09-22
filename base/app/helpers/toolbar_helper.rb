@@ -1,4 +1,7 @@
 module ToolbarHelper
+  # Configuration of toolbar items
+  include SocialStream::ToolbarConfig
+
   # Define the toolbar content for your view. There are two typical cases, depending on the value of
   # options[:profile]
   # * If present, render the profile menu for the {SocialStream::Models::Subject subject}
@@ -82,21 +85,17 @@ module ToolbarHelper
 
   #Prints the home toolbar menu.
   def home_toolbar_menu
-    default_home_toolbar_menu
+    render_items home_toolbar_items
   end
 
   #Prints the home profile menu.
   def profile_toolbar_menu(subject=current_subject)
-    default_profile_toolbar_menu(subject)
+    render_items profile_toolbar_items(subject)
   end
  
-
   #Renders array of navigation items with simple_navigation
   def render_items(items)
     menu = render_navigation :items => items
     return raw menu
   end
-  
-  
-  include SocialStream::ToolbarConfig
 end

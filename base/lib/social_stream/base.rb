@@ -24,6 +24,12 @@ module SocialStream
         end
       end
 
+      initializer "social_stream-base.toolbar_config" do
+        SocialStream::ToolbarConfig.module_eval do
+          include SocialStream::ToolbarConfig::Base
+        end
+      end
+
       initializer "social_stream-base.avatars_for_rails" do
         AvatarsForRails.setup do |config|
           config.avatarable_model = :actor
