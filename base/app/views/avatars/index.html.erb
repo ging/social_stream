@@ -21,8 +21,8 @@
 <% end %>
 
 <%= location(
- 	link_to(image_tag("btn/btn_edit.png", :class => "menu_icon")+t('profile.one'), [current_subject,:profile]),	
- 	link_to(image_tag("btn/edit.png", :class => "menu_icon")+t('avatar.other'), avatars_path)
+ 	link_to(t('menu.information'), [current_subject,:profile]),	
+ 	link_to(t('avatar.other'), avatars_path)
 ) %>
 
 <%= render :partial => 'list' %>

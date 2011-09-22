@@ -8,13 +8,13 @@
 
 <%if profile_subject_is_current?%>
   <%= location(
-    link_to(image_tag(("btn/btn_#{controller.controller_name.singularize}.png"), :class => "menu_icon")+t(controller.controller_name.singularize + '.title'), polymorphic_path(controller.controller_name),:remote => true)
+    link_to(t(controller.controller_name.singularize + '.title'), polymorphic_path(controller.controller_name),:remote => true)
     ) %>
   <% toolbar %>
 <%else%>
   <%= location(
-    link_to(image_tag("btn/btn_profile.png", :class => "menu_icon")+ profile_subject.name, polymorphic_path(profile_subject),:remote => true),
-    link_to(image_tag(("btn/btn_#{controller.controller_name.singularize}.png"), :class => "menu_icon")+t(controller.controller_name.singularize + '.title'), polymorphic_path([profile_subject, controller.controller_name]),:remote => true)
+    link_to(profile_subject.name, polymorphic_path(profile_subject),:remote => true),
+    link_to(t(controller.controller_name.singularize + '.title'), polymorphic_path([profile_subject, controller.controller_name]),:remote => true)
     ) %>
   <% toolbar :profile => profile_subject %>
 <%end%>

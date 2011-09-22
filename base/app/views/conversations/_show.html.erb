@@ -1,6 +1,6 @@
 <%= location(
-	link_to(image_tag("btn/message_" + @box + ".png", :class => "menu_icon")+t('message.' + @box), conversations_path(:box => @box),:remote => true),
-	link_to(image_tag("btn/message_conversation.png", :class => "menu_icon")+ truncate(@conversation.subject, :length => 45), conversation_path(@conversation.id,:box => @box,:page => params[:page]))
+	link_to(t('message.' + @box), conversations_path(:box => @box),:remote => true),
+	link_to(truncate(@conversation.subject, :length => 45), conversation_path(@conversation.id,:box => @box,:page => params[:page]))
 ) %>
 
 <br class="clearfloat" />

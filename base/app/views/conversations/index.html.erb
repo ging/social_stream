@@ -10,9 +10,7 @@
   $('.pagination a').attr('data-remote', 'true');
 <% end %>
 
-<%= location(
-    link_to(image_tag("btn/message_" + @box + ".png", :class => "menu_icon")+t('message.' + @box), conversations_path(:box => @box),:remote => true)
-) %>
+<%= location(link_to(t('message.' + @box), conversations_path(:box => @box),:remote => true)) %>
 
 <% toolbar :option => :messages %>
 

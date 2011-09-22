@@ -16,8 +16,7 @@
   <%= render :partial => 'sidebar_index' %>
 <% end %>
 
-<%= location(link_to(image_tag("btn/btn_profile.png", :class => "btn_config")+t('profile.one')+": "+
-                      content_tag(:span, ( truncate_name sanitize @user.name), :class=>"name_group")))%>
+<%= location(link_to(t('profile.one')+": "+truncate_name(sanitize @user.name)))%>
               
 <% toolbar :profile => @user %>
 

@@ -19,8 +19,8 @@ span.find{  padding-right:5px;}
 #login{  padding-top: 5px;}
 .instructions{text-align: left; padding-bottom: 5px;}
 #remember{padding-left:22%; text-align: left;}
-#user_password_confirmation{vertical-align: 30%;}
-#user_password_confirmation_label {padding-top: 0;}
+#welcome #user_password_confirmation{vertical-align: 30%;}
+#welcome #user_password_confirmation_label {padding-top: 0;}
 #welcome{  margin: 50px auto 50px auto;  width:330px;  padding:20px;  border: 4px solid #BDC7D8;
   background-color: white;-moz-border-radius: 20px; 
   -webkit-border-radius: 20px; border-radius: 20px;}

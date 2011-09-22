@@ -22,23 +22,7 @@ module LocationHelper
   #
   def location(*stack)
     
-    location_body = '<div class="last">' + stack.last + '</div>'
-    
-    if stack.count >1
-      location_body.insert(0, '<div class="penultimate">'+ stack.last(2).first + '</div>')
-    end
-    
-    if stack.count >2   
-      stack.first(stack.count - 2).reverse.collect {|level|
-        location_body.insert(0, '<div class="mid">'+ level + '</div>')
-      }
-    end
-    
-    if stack.count ==1
-      location_body.insert(0, '<div class="first"><span class="penultimate">'+ t('location.base') + '</span></div>')
-    else
-      location_body.insert(0, '<div class="first"><span class="mid">'+ t('location.base') + '</span></div>')
-    end
+    location_body = render :partial => "location/location_body", :locals=>{:stack => stack}
     
     location_div = capture do
       render :partial => "location/location", :locals=>{:location_body => location_body}
