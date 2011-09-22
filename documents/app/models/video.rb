@@ -10,6 +10,8 @@ class Video < Document
                                 :thumb0  => {:geometry => "130x80", :format => 'png', :time => 5}
                     },:processors => [:ffmpeg]
                     
+  process_in_background :file
+                    
   def videoprocess
     Resque.enqueue(Videoencoder, self.id)
   end

@@ -1,4 +1,5 @@
 require 'social_stream-base'
+require 'delayed_paperclip'
 
 module SocialStream
   module ToolbarConfig
