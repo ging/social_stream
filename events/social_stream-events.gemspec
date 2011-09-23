@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "social_stream-events"
-  s.version = "0.0.2"
+  s.version = SocialStream::Events::VERSION.dup
   s.authors = ["Diego Carrera", "Antonio Tapiador", "GING - DIT - UPM"]
   s.summary = "Events and Video conferences capabilities for Social Stream, the core for building social network websites"
   s.description = "Social Stream is a Ruby on Rails engine providing your application with social networking features and activity streams.\n\nThis gem allow you  to add events and videoconferences as new social stream activity."
