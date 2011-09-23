@@ -163,6 +163,9 @@
 	top:0px;
 	width: 180px;
 	z-index:1;
+  width: 180px;
+  height: 135px;
+  overflow: hidden;
 }
 
 .video_thumbnail_play_over {
