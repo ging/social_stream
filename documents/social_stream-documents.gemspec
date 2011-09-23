@@ -1,7 +1,7 @@
 # encoding: UTF-8
 Gem::Specification.new do |s|
   s.name = "social_stream-documents"
-  s.version = "0.2.6"
+  s.version = SocialStream::Documents::VERSION.dup
   s.authors = ["Víctor Sánchez Belmar", "GING - DIT - UPM"]
   s.summary = "File capabilities for Social Stream, the core for building social network websites"
   s.description = "Social Stream is a Ruby on Rails engine providing your application with social networking features and activity streams.\n\nThis gem allow you upload almost any kind of file as new social stream activity."
