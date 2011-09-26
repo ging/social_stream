@@ -65,7 +65,7 @@ module SocialStream
         end
 
         def commit
-          system commit_command
+          system(commit_command) || raise(RuntimeError.new)
         end
 
         def commit_command
@@ -77,7 +77,7 @@ module SocialStream
         end
 
         def rake_release
-          system rake_release_command
+          system(rake_release_command) || raise(RuntimeError.new)
         end
 
         def rake_release_command
