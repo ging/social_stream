@@ -1,3 +1,6 @@
+# encoding: UTF-8
+require File.join(File.dirname(__FILE__), 'lib', 'social_stream', 'events', 'version')
+
 Gem::Specification.new do |s|
   s.name = "social_stream-events"
   s.version = SocialStream::Events::VERSION.dup

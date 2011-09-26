@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require File.join(File.dirname(__FILE__), 'lib', 'social_stream', 'base', 'version')
 
 Gem::Specification.new do |s|
