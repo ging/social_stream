@@ -17,11 +17,23 @@
     :class => "attachment_text_link" %>
   </div>
   
-  <div class="picture_link">
+  <div class="picture_link picture_thumbnail_show">
     <%= link_to thumb_for(picture, 130),
-        {:controller => "documents", :action => "download", :id => picture}, 
+        picture, 
         :type => picture.type, 
 		:title => picture.file_file_name,
 		:path => document_path(picture) %>
   </div>
+<% end %>
+
+
+<%= javascript_tag do %>
+  $(document).ready(function() {
+    $('.picture_thumbnail_show a').lightBox({ 
+      imageLoading: 'assets/lightbox-ico-loading.gif',
+      imageBtnClose: 'assets/lightbox-btn-close.gif',
+      imageBtnPrev: 'assets/lightbox-btn-prev.gif',
+      imageBtnNext: 'assets/lightbox-btn-next.gif',
+      imageBlank: 'assets/lightbox-blank.gif'});
+  })
 <% end %>

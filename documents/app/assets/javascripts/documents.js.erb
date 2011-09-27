@@ -28,12 +28,6 @@ $('.attachment_tile a, .picture_link a').live("click",function(e){
 		$('body').append("<a href='"+download_link+"'><img id='downloadButton' src='<%= asset_path "16/default.png" %>' /></a>");
 		return;
 	}
-	if(this.type == "Picture"){
-		removePlayers();
-		$(this).parent().parent().addClass("selected");
-		$('body').append("<img class='player' id='picture_player' src='"+download_link+"' />");	
-		$('body').append("<a href='" + download_link + "'><img id='downloadButton' src='<%= asset_path "16/default.png" %>' /></a>");
-	}		
 });
 
 function removePlayers(){

@@ -7,6 +7,10 @@ module DocumentsHelper
   def thumb_for(document, size)
     image_tag document.thumb(size, self)
   end
+  
+  def thumb_file_for(document, size)
+    document.thumb(size, self)
+  end
     
   def link_for_wall(document)
     format = Mime::Type.lookup(document.file_content_type)
