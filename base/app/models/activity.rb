@@ -52,7 +52,7 @@ class Activity < ActiveRecord::Base
         or(contacts[:receiver_id].eq(Actor.normalize_id(args[:owner])))
 
     audience_conditions =
-      audiences[:relation_id].eq(args[:relations]).
+      audiences[:relation_id].eq(args[:relation_ids]).
         or(relations[:type].eq('Relation::Public'))
 
     conds =
