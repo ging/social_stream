@@ -194,7 +194,7 @@ en:
     one: "Inbox"
   invitation:
     e-mails: "E-mail addresses"
-    error: "Your request was unprocessable"
+    error: "Your request was unprocessable. Make sure you wrote correct e-mail addresses."
     invited: " has invited you to Social Stream!"
     join: "Invite other people to join Social Stream!"
     join_me: "Join me at Social Stream!"

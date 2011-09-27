@@ -11,11 +11,11 @@ class InvitationsController < ApplicationController
         receivers.each do |receiver|
           InvitationMailer.send_invitation(receiver, current_subject, params[:message]).deliver
         end
-        redirect_to new_invitation_path, :flash => { :success => t('invitation.success')}
+        render :action => :new, :locals => {:flash => { :success => t('invitation.success')}}
         return
       end
     end
-    redirect_to new_invitation_path, :flash => { :error => t('invitation.error')}
+    render :action => :new, :locals => {:flash => { :error => t('invitation.error')}}
 
   end
 
