@@ -11,3 +11,4 @@ nbproject
 lib/generators/social_stream/templates/public/images/tmp/
 **.*swp
 spec/dummy/documents/pictures/*
+.code_swarm
