@@ -9,7 +9,7 @@ $("#content").html("<%= escape_javascript(render :partial => 'new') %>");
 
 
 var recipients = $("#_recipients").fcbkcomplete({
-        json_url: "<%= contacts_path(:format => :json) %>",
+        json_url: "<%= contacts_path(:form => true, :format => :json) %>",
 	cache: true,
 	filter_hide: true,
 	newel: false,

@@ -13,7 +13,7 @@ class ContactsController < ApplicationController
     respond_to do |format|
       format.html { @contacts = @contacts.page(params[:page]).per(10) }
       format.js { @contacts = @contacts.page(params[:page]).per(10) }
-      format.json { render :text => @contacts.map{ |c| { 'key' => c.receiver_id.to_s, 'value' => self.class.helpers.truncate_name(c.receiver.name) } }.to_json }
+      format.json { render :text => to_json(@contacts) }
     end
   end
 
@@ -66,5 +66,24 @@ class ContactsController < ApplicationController
     if @contact.reflexive?
       redirect_to home_path
     end
+  end
+
+  def to_json(contacts)
+    contacts.map{ |c|
+      if params[:form].present?
+        {
+          'key' => c.receiver_id.to_s,
+          'value' => self.class.helpers.truncate_name(c.receiver.name)
+        }
+      else
+        {
+          'name'  => c.receiver.name,
+          'url'   => polymorphic_url(c.receiver_subject),
+          'image' => {
+            'url' => root_url + c.receiver.logo.url
+          }
+        }
+      end
+    }.to_json
   end
 end
