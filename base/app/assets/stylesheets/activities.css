@@ -23,14 +23,14 @@
 .activity {	text-align:left;	display: block;	vertical-align: top;	padding: 10px 0px 5px 0px;
 	display: inline-block;	color: #000; font-size: 13px;  color: #2A3890;border-bottom:1px solid #E9E9E9;}
 .actor_logo {	width: 38px;	padding: 8px 0px 5px 5px;	display: inline-block;	vertical-align: top;}
-.activity_content {	padding: 8px 0px 0px 0px;	display: inline-block;	color: #000;	width: 89%;}
+.activity_content {	padding: 0px;	display: inline-block;	color: #000;	width: 89%;}
 .actor_name {font-size: 13px;}
 .actor_name a{font-weight: bold;}
 .post a {	color: #2A3890;}
 
 /***************** ACTIVITY OPTIONS ***/
 .activity_options {	color: #2A3890;	font-size: 10px;  display: inline-block;}
-.actor_name-activity_objects{  font-weight: bold;	color: #2A3890;  font-size:12px;}
+.actor_name-activity_objects{  font-weight: bold;	color: #2A3890;  font-size:12px; margin: 5px 0px;}
 .activity_objects{padding-bottom:5px;}
 .subactivity_objects{	color: #000;  font-weight:normal;  font-size:11px;}
 .post_time_ago {	color: #6c6d6f;}
@@ -71,7 +71,7 @@
 
 .hide_show_comments{font-size: 11px;  padding-left: 5px;	background: #deeff8;
 	border: thin solid #D4E4E4; width:100%;  padding-top: 3px;  padding-bottom: 3px;}
-.new_comment{ display: inline-block; padding-top: 19px; width: 410px;}
+.new_comment{ width: 410px;}
 /*********** DROP DOWN**********/
 #security_chzn .chzn-choices {
 	padding-left: 20px;
