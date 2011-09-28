@@ -1,11 +1,11 @@
 <% if user_signed_in? && current_subject.can_comment?(activity) %>
   <div class="activity_new_comment">
-    <div class="actor_logo_subactivity">
+    <div class="actor_logo_new_comment">
       <%= image_tag(current_subject.logo.url(:actor),
                             :alt => current_subject.name)%>
     </div>
     <div class= "activity_content">
-      <div class="actor_name-activity_objects">
+      <div class="actor_name_new_comment">
         <%= current_subject.name %>
       </div>
       <%= form_for Comment.new(:text => t('comment.input'),
@@ -22,7 +22,7 @@
         <%= f.text_field :text, :class =>"input_new_comments", :id => "comment_text_"+dom_id(activity) %>
 
         <div class="activities_comment_btn">
-        <div class="activities_security"></div>
+          <div class="activities_security"></div>
           <%= f.submit t('share'), :class =>"myButtonBlue submitActivity", :id => "comment_submit_"+dom_id(activity) %>
         </div>
       <% end %>
@@ -33,10 +33,6 @@
 <%= javascript_tag do %>
   $(document).ready(function() {
     $("#comment_text_<%= dom_id(activity) %>").Watermark("<%= I18n.t('comment.input') %>","#666");
-    activate_anti_rebounds();
-    $(".input_new_comments").blur(function(){
-        $(".activity_new_comment").hide();
-        $(".comment_shown").show();
-      });  
+    activate_anti_rebounds(); 
   });
 <% end %>

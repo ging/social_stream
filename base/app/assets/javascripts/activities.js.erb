@@ -91,11 +91,12 @@ $(function() {
   //show only the text fields for new comment if there are any comment to the post
   $(".activity_new_comment").each(function(){
   	if ($.trim($(this).siblings(".activity_comments").text()) != ""){
-  	  $(this).addClass("comment_shown");
   	  $(this).show();
   	}
   });
   $(".activities_comment_btn").hide();
+  $(".actor_name_new_comment").hide();
+  $(".actor_logo_new_comment").hide();
   
   //if there are 4 or more commments we only show the last 2 and a link to show the rest
   $(".activity_comments").each(function(){
@@ -117,9 +118,16 @@ showAllComments = function(id){
 };
 
 //usa livequery para usar el javascript luego de una accion con  AJAX
-$(".input_new_comments").live("click",function(){
+$(".input_new_comments").live("click", function(){
 	$(".activities_comment_btn").hide();
+	$(".new_comment").removeClass("new_comment_shown");
+	$(".actor_name_new_comment").hide();
+	$(".actor_logo_new_comment").hide();
 	$(this).parent(".new_comment").children(".activities_comment_btn").show();
+	$(this).parent(".new_comment").addClass("new_comment_shown");
+	$(this).parents(".activity_new_comment").find(".actor_name_new_comment").show();
+  $(this).parents(".activity_new_comment").find(".actor_logo_new_comment").show();
+  return false;
 });
 
 //javascript for tocomment option

@@ -30,7 +30,7 @@
 
 /***************** ACTIVITY OPTIONS ***/
 .activity_options {	color: #2A3890;	font-size: 10px;  display: inline-block;}
-.actor_name-activity_objects{  font-weight: bold;	color: #2A3890;  font-size:12px; margin: 5px 0px;}
+.actor_name-activity_objects, .actor_name_new_comment{  font-weight: bold;	color: #2A3890;  font-size:12px; margin: 5px 0px;}
 .activity_objects{padding-bottom:5px;}
 .subactivity_objects{	color: #000;  font-weight:normal;  font-size:11px;}
 .post_time_ago {	color: #6c6d6f;}
@@ -42,6 +42,7 @@
 .activity_options .icon_blue{  padding-left:5px;  list-style-image:url("/images/point_blue.png");
   list-style-position:inside;}
 
+.security, .post_time_ago, .verb_comment, .verb_like, .verb_comment, .verb_delete{ display: inline-block;}
 
 
 /************* ACTIVITY - FOOTER *********/
@@ -58,7 +59,7 @@
 
 .activity_new_comment{  font-size: 11px;  padding-left: 5px;	background: #deeff8;
 	border: thin solid #D4E4E4; padding-top: 3px;  padding-bottom: 3px;display:none;}
-.actor_logo_subactivity {	width: 40px;	padding: 5px 3px 5px 2px;	display: inline-block;
+.actor_logo_subactivity, .actor_logo_new_comment{	width: 40px;	padding: 5px 3px 5px 2px;	display: inline-block;
 	vertical-align: top;}
 .input_new_comments{	border:1px solid #BDC7D8;	width:98%;	padding: 2px; color:#2A3890;}
 .subactivity{  font-size: 11px;  padding: 0px 5px 0px 5px;  background: #deeff8;
@@ -71,7 +72,8 @@
 
 .hide_show_comments{font-size: 11px;  padding-left: 5px;	background: #deeff8;
 	border: thin solid #D4E4E4; width:100%;  padding-top: 3px;  padding-bottom: 3px;}
-.new_comment{ width: 410px;}
+.new_comment{ width: 465px;}
+.new_comment_shown{ width: 410px;}
 /*********** DROP DOWN**********/
 #security_chzn .chzn-choices {
 	padding-left: 20px;

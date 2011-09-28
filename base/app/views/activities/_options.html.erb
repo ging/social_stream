@@ -1,15 +1,18 @@
 <div class="activity_options">
-  <ul class="activity_options" >
     <% if user_signed_in? %>
-    <li><div class="security"><%= image_tag('btn/btn_security.png', :title => activity.audience_in_words(current_subject)) %></div></li>
+      <div class="security"><%= image_tag('btn/btn_security.png', :title => activity.audience_in_words(current_subject)) %></div>
     <% end %>
-    <li><div class="post_time_ago"><%= t('time.ago', :time => time_ago_in_words(activity.created_at)) %></div></li>
+    <div class="post_time_ago"><%= t('time.ago', :time => time_ago_in_words(activity.created_at)) %></div>
     <% if activity.is_root? && user_signed_in? %>
-    <li><div class="verb_comment"> · <%= link_to t('activity.to_comment'), "#", :class => "to_comment" %> </div></li>
+      <div class="verb_comment"> · <%= link_to t('activity.to_comment'), "#", :class => "to_comment" %> </div>
     <% end %>
-    <li><div class="verb_like" id="like_<%= dom_id(activity) %>"> · <%= link_like(activity)%></div></li>
+      <div class="verb_like" id="like_<%= dom_id(activity) %>"> · <%= link_like(activity)%></div>
     <% if activity.delete_object_by?(current_subject) %>
-      <li><div class="verb_delete"> · <%= link_to t('activity.delete'), activity.direct_object , :confirm => t('confirm_delete', :scope => activity.direct_object.class.to_s.underscore), :method => :delete,  :remote => true %> </div></li>
+      <div class="verb_delete"> 
+        · <%= link_to t('activity.delete'), activity.direct_object , :confirm => t('confirm_delete', 
+                      :scope => activity.direct_object.class.to_s.underscore), :method => :delete,  
+                      :remote => true %> 
+      </div>
     <% end %>
   </ul>
 </div>
