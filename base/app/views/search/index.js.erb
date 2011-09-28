@@ -1,6 +1,5 @@
-//if ($('#global_search_input').val()=="<%= params[:search_query]%>"){
-  
   $('#search_results').html("<% unless params[:focus].present? %><%= escape_javascript render :partial => 'global_search' %><% else %><%= escape_javascript render :partial => 'focus_search' %><% end %>");
+  $('#search_form_div').html("<%= escape_javascript render :partial => 'form' %>");
   
   $('#focus_options ul li a span').removeClass('selected');
   
@@ -19,7 +18,3 @@
   <% end %> 
   
   $('#global_search_input').removeClass("searching");
-  
-/*}else{
-  alert("ignored <%= params[:search_query]%>");
-}*/

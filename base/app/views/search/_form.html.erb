@@ -1,4 +1,3 @@
-<div>
   <form action="<%= search_path %>" method="get" data-remote="true" id="search_form">
     <div class="block">
     	<div class="error" id="too_short_error" <%= too_short_query? ? 'style=display:block;' : ''  %>><%= t('search.at_least') %></div>
@@ -20,7 +19,6 @@
       </div>      
     </div>
   </form>
-</div>
 
 <%= javascript_tag do %>
 	$(document).ready(function() {
