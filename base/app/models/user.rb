@@ -3,7 +3,7 @@ require 'devise/orm/active_record'
 class User < ActiveRecord::Base
   include SocialStream::Models::Subject
 
-  has_many :authentications
+  has_many :authentications, :dependent => :destroy
   devise *SocialStream.devise_modules
 
   # Setup accessible (or protected) attributes for your model
