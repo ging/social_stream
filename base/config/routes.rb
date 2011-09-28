@@ -34,7 +34,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :contacts
+  resources :contacts do
+    collection do
+      get 'pending'
+    end
+  end
 
   namespace "relation" do
     resources :customs

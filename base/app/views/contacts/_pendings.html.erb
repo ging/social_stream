@@ -9,7 +9,7 @@
   <div class="content">
     <%= render current_subject.pending_contacts.shuffle.first(2) %>
     <div class="row more_pending">
-      <%= link_to t('contact.pending.all_n', :count => current_subject.pending_contacts_count), contacts_path(:pending=>true)%>
+      <%= link_to t('contact.pending.all_n', :count => current_subject.pending_contacts_count), pending_contacts_path %>
     </div>
     <div class="space_center">
     </div>
