@@ -1,4 +1,5 @@
 require 'social_stream/migrations/documents'
+require 'social_stream/migrations/events'
 
 SocialStream::Migrations::Events.new.down
 SocialStream::Migrations::Documents.new.down
