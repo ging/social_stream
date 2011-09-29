@@ -7,12 +7,12 @@ module SocialStream
   end
 
   module Events
-    # Add :event, :agenda, :session to SocialStream.objects and SocialStream.activity_forms
+    # Add :event, :agenda, :session to SocialStream's subjects, objects and activity_forms
     # by default
     # It can be configured by users at application's config/initializers/social_stream.rb
     SocialStream.subjects.push(:event) unless SocialStream.subjects.include?(:event)
 
-    [:event, :agenda, :session].each do |o|
+    [ :agenda, :session ].each do |o|
       SocialStream.objects.push(o) unless SocialStream.objects.include?(o)
     end
     
