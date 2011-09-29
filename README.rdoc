@@ -54,6 +54,7 @@ Current Social Stream distribution includes:
   along with users, group, post and comments
 * {Social Stream Documents}[https://github.com/ging/social_stream/tree/master/documents], support for
   activities on files
+* {Social Stream Events}[https://github.com/ging/social_stream/tree/master/events], videoconference events with an agenda and several sessions
  
 = Documentation
 
