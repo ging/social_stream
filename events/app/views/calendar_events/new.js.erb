@@ -1,9 +1,0 @@
-page.replace_html 'create_event', :partial => 'form'
-page<< "$('#create_event_dialog').dialog({
-        title: 'Agregar horario',
-        modal: true,
-        width: 500,
-        close: function(event, ui) { $('#create_event_dialog').dialog('destroy') }
-
-    });
-"
