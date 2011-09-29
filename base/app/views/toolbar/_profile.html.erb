@@ -10,7 +10,14 @@
 <div class="block space_center">
 </div>
 
-<%= render :partial => 'subjects/contacts', :locals => { :subject => subject } %>
+<%  if  subject.subject_type == 'Event' %>
+  <% subject.relation_customs.each do |temp| %>
+    <%= render :partial => 'toolbar/organizer', :locals => { :subject => subject,:tie=> temp } %>
+  <% end %>
+  <%= render :partial => 'toolbar/suscribed', :locals => { :subject => subject } %>
+<% else %>
+  <%= render :partial => 'subjects/contacts', :locals => { :subject => subject } %>
+<% end %>
 
 <div class="block space_center">
 </div>

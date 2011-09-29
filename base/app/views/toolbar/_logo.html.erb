@@ -14,3 +14,10 @@
     <%= link_to image_tag(subject.logo.url, :alt => subject.name , :size => "119x119"), subject %>
   <% end %>
 </div>
+<% if subject.subject_type == 'Event' %>
+<%  @founder = Actor.normalize(subject.founder_id) %>
+<div id="founder">
+  <div id="created"><%=t('actor.created')%></div>
+  <div id="thumb"><%= link_to(image_tag(@founder.logo.url(:representation), :width => 20, :height => 20, :class => 'menu_icon', :id=> 'current_user_avatar_img'), @founder.subject  ) %></div>
+</div>
+<% end %>
