@@ -22,7 +22,7 @@ test_mysql:
   adapter: mysql
   database: social_stream_test
   username: root
-  password: root
+  password:
   sockect: /var/run/mysqld/mysqld.sock
 
 test_pg:
