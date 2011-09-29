@@ -58,6 +58,7 @@ en:
   browse: "Browse"
   button:
     cancel: "Cancel"
+    create: "Create"
     save: "Save"
     update: "Update"
   cleditor:
@@ -223,6 +224,8 @@ en:
     form:
       title: "Post"
     title: "Posts"  
+  preposition:
+    and: "and"
   profile:
     one: "Profile"
     age: "Age"

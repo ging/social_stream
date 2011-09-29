@@ -34,8 +34,6 @@ en:
     confirm_delete: "Confirm delete?"
   agenda:
     confirm_delete: "delete"
-  button:
-    create: "Create"
   conference:
     title: "Conferences"
     list: "Contact's conferences"
@@ -69,8 +67,6 @@ en:
       info: "Event information"
       tags: "Event tags"
     outline: "Outline"
-  preposition:
-    and: "and"
   session:
     confirm_delete: "delete"
     new: "New Session"
