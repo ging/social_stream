@@ -1,0 +1,13 @@
+<% representations = current_user.represented.unshift(current_user) - [current_subject] %>
+<% unless representations.empty? %>
+<li>
+  <%= link_to "Switch session", "javascript:;", :class=>"session_change" %>
+  <ul>
+    <% representations.each do |representation| %>
+    <li>
+      <%= link_to truncate_name(representation.name), { :s => representation.slug }, { :style => "background: transparent url('#{ image_path representation.logo.url(:representation)}') no-repeat left center;margin-left:2px;" } %>
+    </li>
+    <% end %>
+  </ul>
+</li>
+<% end %> 

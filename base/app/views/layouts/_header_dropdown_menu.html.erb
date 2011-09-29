@@ -1,0 +1,22 @@
+<div id="header_dropdown_menu">
+  <ul class="sf-menu" >
+    <li class="header_dropdown_li">
+      <a href="#" class="sf-with-ul" id="current_subject_avatar_img" style="background: transparent url('<%= image_path current_subject.logo.url(:representation)%>') no-repeat left top;"><%= truncate_name current_subject.name %><span class="sf-sub-indicator"> »</span></a>
+      <ul>
+        <%= render :partial => 'layouts/header_dropdown_menu_sessions'%>
+        <li>
+          <%= link_to t('account.edit'), edit_user_registration_path %>
+        </li>
+        <li>
+          <%= link_to t('settings.main'), settings_path, :id => "btn_menu_settings" %>
+        </li>
+        <li>
+          <%= link_to t('account.privacy'), relation_customs_path %>
+        </li>
+        <li>
+          <%= link_to t('sign_out'), destroy_user_session_path, :method => :delete  %>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

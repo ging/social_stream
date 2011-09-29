@@ -20,9 +20,9 @@
 .div_login .subtexto{	padding-top: 8px;	height:12px;	font-size: 11px; }
 .div_login .a_border{	border-right:thin solid;	padding-right:7px;	text-decoration:underline; }
 #new_representation {	display: inline-block;}
-#header_notifications{padding: 0px 5px 0px 5px !important;}
 #header_notifications a{ color: white; background-color: #879eb5;-moz-border-radius: 6px; -webkit-border-radius: 6px;
                 border-radius: 6px; padding: 4px 9px 4px 9px;}
+#header_inbox_count a{ color: white; background-color: #879eb5; padding: 2px 5px 2px 5px;}
 #representation {  display: inline;  padding-left:3px;  padding-right:3px;}
 .txt_config {color: #fff;	vertical-align: top;	display: inline;	padding-top: 2px;	border-right: thin solid;
 	padding-right: 3px;}
@@ -30,46 +30,26 @@
 
 
 /******** MENU HEADER *******/
-#menu_home{	vertical-align: top; }
+#menu_home, .menu_home {vertical-align: top; }
 #menu_home a {color:white;}
-#menu_home span {	float:left;	padding-right: 5px;	vertical-align: top;	padding-top: 5px;}
-#menu_home ul{	list-style: none;	margin: 0px;	float:left;}
-#menu_home ul li{	line-height:20px;	padding:5px 0px 5px 20px; vertical-align:top;}
+#menu_home a:hover {text-decoration: none;}
+#menu_home ul {list-style: none;	margin: 0px;	float:left;}
+#menu_home ul li {line-height:20px;	vertical-align:top;}
 
-li.btn_menu_home{background: transparent url("btn/btn_home.png") no-repeat left center;}
-li.btn_menu_profile{background: transparent url("btn/btn_profile.png") no-repeat left center;}
-li.btn_menu_browse{background: transparent url("btn/btn_browse.png") no-repeat left center;}
-#btn_menu_settings{background: transparent url("btn/btn_config.png") no-repeat left center;}
-#btn_menu_account{background: transparent url("btn/btn_account.png") no-repeat left center;}
-#btn_menu_account_logout{background: transparent url("btn/btn_exit.png") no-repeat left center;}
+#header_dropdown_menu,.header_dropdown_li {width: 180px;display:inline-block;vertical-align: top; height:22px; color:#FFF;}
 
-#menu_account{	vertical-align: top; height:23px; }
-#menu_account span {	float:right;	padding-right: 5px;	vertical-align: top;	padding-top: 5px;}
-#menu_account ul{	list-style: none;	margin: 0px;	float:left;}
-#menu_account ul li{	line-height:20px;	padding:5px 0px 5px 20px; vertical-align:top;}
+#header_dropdown_menu ul li {width: 180px;line-height: 15px;}
+#header_dropdown_menu ul li a{padding: .40em 1em .70em 2.5em;}
+#header_dropdown_menu ul li a:hover{color:#1F4A75;}
+#header_dropdown_menu ul li ul li a{padding: .40em 1em .70em 1em;}
+#header_dropdown_menu ul li ul li ul li a{padding: .40em 1em .70em 2.5em;}
+#header_dropdown_menu ul li ul li ul{position: absolute; left: -180px;}
+#header_dropdown_menu a.session_change{background: transparent url('btn/arrow_session_change.png') no-repeat 3px 6px;}
 
-#menu_pipe{	vertical-align: top; height:23px; }
-#menu_pipe span {	float:right;	padding-right: 5px;	vertical-align: top;	padding-top: 5px;}
-#menu_pipe ul{	list-style: none;	margin: 0px;	float:left;}
-#menu_pipe ul li{	line-height:20px;	padding:5px 0px 5px 0px; vertical-align:top;}
-
-
-#account, #representation_li,#current_user_info, #representations_menu, #account_menu, #settings_menu {display:inline-block;vertical-align: top; height:22px; color:#FFF;}
-#representation_li{margin-left:10px;}
-#representation_text{display:inline;margin-left:2px;color:#FFF;}
-#current_user_info a{color:white;}
-li.btn_menu_representation{}
-#menu_home ul li.pipe,#menu_account ul li.pipe{padding:0px 3px 0px 3px; margin:0px;}
+#menu_home ul li.pipe,#menu_account ul li.pipe{padding:0; margin:0;font-size: 20px;font-weight: bold;}
 .menu_white{display:inline-block; color:#fff;}
 .white_link{padding-top:3px;  vertical-align:top;  display:inline-block;}
 .black{color:#000; font-weight:bold;}
-
-
-
-
-
-
-
 
 
 /*** ESSENTIAL STYLES ***/
@@ -131,7 +111,7 @@ ul.sf-menu li li li.sfHover ul {
 	/*margin-bottom:	1em;   */
 }
 .sf-menu a {
-	padding: 		.40em 1em .70em 2em;
+	padding: 		.40em 1em .70em 1em;
 	text-decoration:none;
 }
 .sf-menu a, .sf-menu a:visited  { /* visited pseudo selector so IE6 applies text colour*/

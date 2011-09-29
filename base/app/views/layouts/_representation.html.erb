@@ -11,9 +11,6 @@
 <% representations = current_user.represented.unshift(current_user) - [current_subject] %>
 
 <% if !representations.empty? %>
-
-<span id="representation_text"><%= t('representation.action') %></span>
-
 <div id="representations_menu">	
   <ul class="sf-menu" >
     <li id="representation_li">

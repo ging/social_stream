@@ -330,7 +330,7 @@ en:
   settings:
     error: "Some errors raised when saving your changes"
     for: "Settings for"
-    main: "Main settings"
+    main: "Settings"
     manage:
       name: "Admin Contacs"
       briefing: "Settings contacts preferences"
