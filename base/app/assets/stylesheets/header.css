@@ -20,8 +20,8 @@
 .div_login .subtexto{	padding-top: 8px;	height:12px;	font-size: 11px; }
 .div_login .a_border{	border-right:thin solid;	padding-right:7px;	text-decoration:underline; }
 #new_representation {	display: inline-block;}
-#header_notifications a{color: white; background: transparent url('btn/header_notifications.png') no-repeat center center;padding: 4px 8px 6px 7px;}
-#header_inbox_count a{ color: white; background-color: #879eb5; padding: 2px 5px 2px 5px;}
+#header_notifications a{color: white; background: transparent url('btn/header_notifications.png') no-repeat center center;padding: 4px 10px 6px 11px;}
+#header_inbox_count a{ color: white; background-color: #879eb5; padding: 2px 7px 2px 7px;}
 #representation {  display: inline;  padding-left:3px;  padding-right:3px;}
 .txt_config {color: #fff;	vertical-align: top;	display: inline;	padding-top: 2px;	border-right: thin solid;
 	padding-right: 3px;}
