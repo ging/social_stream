@@ -8,7 +8,7 @@
 .div_busqueda #find_button{	width:15px;	border:0px;	height:15px;}
 .div_busqueda .a_border{	border-right:thin solid;	color:#0656a4;	padding:0px 7px;	text-decoration:underline;}
 .div_busqueda a{	color:#0656a4;	padding:0px 7px;	text-decoration:underline;}
-#espacio_busqueda {	width:692px;  margin-left:20px;	height:45px;	margin-bottom:0px;	float:left;
+#espacio_busqueda {	width:652px;  margin-left:20px;	height:45px;	margin-bottom:0px;	float:left;
 	display:inline;}
 #form_busqueda{  padding-top:3px;}
 span.find{  padding-right:5px;}

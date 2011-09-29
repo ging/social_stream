@@ -14,7 +14,11 @@
 #header_search_input {
   border: solid 1px #dedede;
   height: 16px;
-  width: 150px;
+  width: 200px;
+}
+.banner_busqueda #header_search_input {
+  border: solid 1px #aaa;
+  height: 20px;
 }
 #global_search_input {
   border: solid 1px #aeaeae;
