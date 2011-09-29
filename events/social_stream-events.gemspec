@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n")
 
   # Gem dependencies
-  s.add_runtime_dependency('social_stream-base','~> 0.9.0')
+  s.add_runtime_dependency('social_stream-base', '~> 0.9.11')
   # Development Gem dependencies
   s.add_development_dependency('sqlite3-ruby')
   if RUBY_VERSION < '1.9'
