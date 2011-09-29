@@ -40,7 +40,7 @@ namespace :db do
             dimensions = Avatar.get_image_dimensions(avatar)
             l = Avatar.new(:actor => i.actor,:logo => File.open(avatar), :name => File.basename(avatar), :crop_x => 0, :crop_y => 0, :crop_w => dimensions[:width], :crop_h => dimensions[:height] )
             l.active = true
-            l.save
+            l.save!
           end
         end
       end

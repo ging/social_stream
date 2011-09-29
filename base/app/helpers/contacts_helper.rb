@@ -7,9 +7,11 @@ module ContactsHelper
     if c.reflexive?
       t('subject.this_is_you')
     else
-      link_to c.status,
+      link_to(c.status,
               edit_contact_path(c),
-              :title => t("contact.#{ c.action }.title", :name => c.receiver.name)
+              :title => t("contact.#{ c.action }.title", :name => c.receiver.name)) +
+        "<br/>".html_safe +
+        link_to(t('actor.delete'), contact_path(c), :action => :destroy, :confirm => t('actor.confirm_delete'), :remote => true)
     end
 
   end

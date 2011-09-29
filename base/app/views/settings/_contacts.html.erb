@@ -1,0 +1,16 @@
+<div class="block" id="manage_settings">
+  <div class="header">
+    <div class="header_text">
+      <%= t('settings.manage.name')%>
+    </div>
+    <div class="header_icon_right">
+      <%= link_to (image_tag('btn/edit.png')), :controller => :settings , :action => :manage%>
+    </div>
+  </div>
+  <div class="content" id="contact_settings_briefing">
+    <div class="form_row">
+      <%= t('settings.manage.briefing')%>
+    </div>
+  </div>
+</div>
+

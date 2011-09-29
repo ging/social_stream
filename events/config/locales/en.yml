@@ -79,11 +79,6 @@ en:
     title: "title"
     description: "description"
     schedule: "schedule"
-  settings:
-    manage:
-      name: "Admin Contacs"
-      briefing: "Settings contacts preferences"
-      explanation: "Change contacts permissions"
   time:
     am: am
     end: End time
