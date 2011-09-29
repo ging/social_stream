@@ -30,5 +30,9 @@
   <div class="space_center"></div>
 <%end%>
 
-<%= render :partial => 'activities/walls', :locals => { :owner => @event } %>
+<%= render :partial => "activities/index",
+           :locals  => { :activities => @event.wall(:profile, :for => current_subject).
+                                               page(params[:page]),
+                         :owner => @event } %>
+
 
