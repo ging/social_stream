@@ -6,6 +6,10 @@
   <%= render :partial=> "personal"%>
 <%end%>
 
+<%  if  @profile.subject.subject_type == 'Event' %>
+  <%= render :partial=> "outline", :locals => {:profile => @profile} %>
+<% end %>
+
 <% if (!is_contact_empty?) or(is_owner?)%>
   <%= render :partial=> "contact"%>
 <%end%>
