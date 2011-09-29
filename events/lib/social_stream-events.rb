@@ -1,4 +1,5 @@
 require 'social_stream-base'
+require 'conference_manager-ruby'
 
 module SocialStream
   module ToolbarConfig
@@ -13,7 +14,7 @@ module SocialStream
       SocialStream.objects.push(o) unless SocialStream.objects.include?(o)
     end
     
-    SocialStream.activity_forms.push(:event) unless SocialStream.objects.include?(:event)
+    SocialStream.activity_forms.push(:event) unless SocialStream.activity_forms.include?(:event)
   end
 end
 
