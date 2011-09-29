@@ -35,14 +35,14 @@
 #menu_home ul {list-style: none;	margin: 0px;	float:left;}
 #menu_home ul li {line-height:20px;	vertical-align:top;}
 
-#header_dropdown_menu,.header_dropdown_li {width: 180px;display:inline-block;vertical-align: top; height:22px; color:#FFF;}
+#header_dropdown_menu,.header_dropdown_li {width: 120px;display:inline-block;vertical-align: top; height:22px; color:#FFF;}
 
-#header_dropdown_menu ul li {width: 180px;line-height: 15px;}
+#header_dropdown_menu ul li {width: 120px;line-height: 15px;}
 #header_dropdown_menu ul li a{padding: .40em 1em .70em 2.5em;}
 #header_dropdown_menu ul li a:hover{color:#1F4A75;}
 #header_dropdown_menu ul li ul li a{padding: .40em 1em .70em 1em;}
 #header_dropdown_menu ul li ul li ul li a{padding: .40em 1em .70em 2.5em;}
-#header_dropdown_menu ul li ul li ul{position: absolute; left: -180px;}
+#header_dropdown_menu ul li ul li ul{position: absolute; left: -120px;}
 #header_dropdown_menu a.session_change{background: transparent url('btn/arrow_session_change.png') no-repeat 3px 6px;}
 
 #menu_home ul li.pipe,#menu_account ul li.pipe{padding:0; margin:0;font-size: 20px;font-weight: bold;}

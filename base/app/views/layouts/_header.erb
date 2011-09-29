@@ -21,7 +21,7 @@
             </li>            
             <li class="pipe">·</li>
             <li>
-              <%= link_to(t('message.inbox'), conversations_path) %>
+              <%= link_to(t('message.other'), conversations_path) %>
               <span id="header_inbox_count">
               <%= link_to(current_subject.mailbox.inbox(:unread => true).count.to_s, conversations_path) %>
               </span>
