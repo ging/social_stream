@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   # Gem dependencies
   s.add_runtime_dependency('social_stream-base', '~> 0.9.11')
   s.add_runtime_dependency('social_stream-documents', '~> 0.2.8')
-  s.add_runtime_dependency('social_stream-events', '~> 0.0.4')
+  s.add_runtime_dependency('social_stream-events', '~> 0.0.5')
  
   # Development Gem dependencies
   #
