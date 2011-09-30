@@ -123,10 +123,11 @@ $(".input_new_comments").live("click", function(){
 	$(".new_comment").removeClass("new_comment_shown");
 	$(".actor_name_new_comment").hide();
 	$(".actor_logo_new_comment").hide();
-	$(this).parent(".new_comment").children(".activities_comment_btn").show();
-	$(this).parent(".new_comment").addClass("new_comment_shown");
-	$(this).parents(".activity_new_comment").find(".actor_name_new_comment").show();
-  $(this).parents(".activity_new_comment").find(".actor_logo_new_comment").show();
+  var comment= $(this).parents(".activity_new_comment");
+  comment.find(".activities_comment_btn").show();
+  $(this).parents(".new_comment").addClass("new_comment_shown");
+  comment.find(".actor_name_new_comment").show();
+  comment.find(".actor_logo_new_comment").show();
   return false;
 });
 

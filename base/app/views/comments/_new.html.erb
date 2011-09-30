@@ -18,9 +18,12 @@
 
         <%= f.hidden_field :_contact_id %>
         <%= f.hidden_field :_activity_parent_id %>
-    
-        <%= f.text_field :text, :class =>"input_new_comments", :id => "comment_text_"+dom_id(activity) %>
-
+        
+        <div class="input_new_comments_container">
+          <%= f.text_area :text, :class =>"input_new_comments", :id => "comment_text_"+dom_id(activity), :rows => 1 %>
+          <div class="copy_new_comment" id="copy_comment_text_<%= dom_id(activity) %>"></div>
+        </div>
+        
         <div class="activities_comment_btn">
           <div class="activities_security"></div>
           <%= f.submit t('share'), :class =>"myButtonBlue submitActivity", :id => "comment_submit_"+dom_id(activity) %>
@@ -34,5 +37,19 @@
   $(document).ready(function() {
     $("#comment_text_<%= dom_id(activity) %>").Watermark("<%= I18n.t('comment.input') %>","#666");
     activate_anti_rebounds(); 
+ 
+    $("#comment_text_<%= dom_id(activity) %>")
+        .change(autoSize)
+        .keydown(autoSize)
+        .keyup(autoSize);
+    autoSize();
+    
+    function autoSize() {
+    // Copy textarea contents; browser will calculate correct height of copy,
+    // which will make overall container taller, which will make textarea taller.
+     var text = $("#comment_text_<%= dom_id(activity) %>").val().replace(/\n/g, '<br/>');
+      $("#copy_comment_text_<%= dom_id(activity) %>").html(text);
+    }   
+
   });
 <% end %>

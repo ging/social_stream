@@ -61,7 +61,8 @@
 	border: thin solid #D4E4E4; padding-top: 3px;  padding-bottom: 3px;display:none;}
 .actor_logo_subactivity, .actor_logo_new_comment{	width: 40px;	padding: 5px 3px 5px 2px;	display: inline-block;
 	vertical-align: top;}
-.input_new_comments{	border:1px solid #BDC7D8;	width:98%;	padding: 2px; color:#2A3890;}
+.input_new_comments{	border:1px solid #BDC7D8;	width:98%;	padding: 2px; color:#2A3890; resize: none;
+                       position: absolute; height: 100%; overflow: hidden; font-size:inherit;}
 .subactivity{  font-size: 11px;  padding: 0px 5px 0px 5px;  background: #deeff8;
   border: thin solid #D4E4E4; display:block; }
 .space_comments {	padding-top: 1px;	padding-bottom: 1px;}
@@ -70,10 +71,14 @@
 #activities_share_btn {	text-align: right;	padding: 5px 16px 0px 10px;	vertical-align: middle;}
 .activities_comment_btn{ text-align: right; padding: 5px 5px 2px 10px; vertical-align: middle;}
 
-.hide_show_comments{font-size: 11px;  padding-left: 5px;	background: #deeff8;
-	border: thin solid #D4E4E4; width:100%;  padding-top: 3px;  padding-bottom: 3px;}
+.hide_show_comments{font-size: 11px;  padding: 3px 10px;	background: #deeff8;
+	border: thin solid #D4E4E4;}
 .new_comment{ width: 465px;}
 .new_comment_shown{ width: 410px;}
+
+.copy_new_comment{visibility: hidden; padding:6px; padding-bottom: 1.5em;font-size:inherit; line-height: 1.15em;
+                  margin-bottom:7px;}
+.input_new_comments_container{min-height: 30px; position: relative;  }
 /*********** DROP DOWN**********/
 #security_chzn .chzn-choices {
 	padding-left: 20px;
