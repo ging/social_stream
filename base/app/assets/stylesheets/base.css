@@ -52,30 +52,11 @@ textarea.new_contact_text_area{ height: 100px; color: #2A3890;}
 .select_relations select{ font-size: 12px; color: white; background-color:#1F4A75;} 
 
 /************ Forms - Buttons  SECTION ***************************/
-.myButtonBlue{ cursor:pointer;
-  background-image: -webkit-gradient( linear, left bottom, left top,
-      color-stop(0.16, rgb(0,122,193)), color-stop(0.58, rgb(56,148,209)), color-stop(0.79, rgb(168,222,249)) );
-  background-image: -moz-linear-gradient(center bottom,
-      rgb(0,122,193) 16%, rgb(56,148,209) 58%, rgb(168,222,249) 79%);
-  border-radius: 0.2em;  color: #fff; padding: 0 10px;  height: 22px;  border: none;}
-.myButtonBlue span {  display: block;  line-height: 14px;  padding: 3px 0 3px 10px;}
-.myButtonBlue:active {  background-position: bottom right;  color: #000;  outline: none; }
-.myButtonBlue:active span {  background-position: bottom left;  padding: 3px 0 2px 18px; }
 
-.myButtonLarge{ cursor:pointer;
-  background-image: -webkit-gradient(linear,left bottom,left top,
-          color-stop(0.01, rgb(116,191,67)),color-stop(0.51, rgb(117,189,68)),
-          color-stop(0.76, rgb(195,222,171))  );
-          background-image: -moz-linear-gradient(center bottom,rgb(116,191,67) 1%,
-          rgb(117,189,68) 51%,rgb(195,222,171) 76%);
-          border-radius: 0.2em;color: #fff; width: 200px; height: 26px; border: none;}
-.myButtonLarge span {  display: block;  line-height: 14px;  padding: 5px 0 5px 18px;}
-.myButtonLarge:active {  background-position: bottom right;  color: #000;  outline: none;}
-.myButtonLarge:active span {  background-position: bottom left;  padding: 6px 0 4px 18px;}
 
-.button{margin: 10px 0 10px 0px;padding: 3px 20px 3px 20px;color:#FFFFFF;background-color: #1F4A75;
-        -moz-border-radius: 6px; -webkit-border-radius: 6px; border-radius: 6px;
-        font-size: 13px;}
+button, input[type=submit]{margin: 10px 0 10px 0px;padding: 3px 20px 3px 20px;color:#FFFFFF;
+                            background-color: #1F4A75; -moz-border-radius: 6px; -webkit-border-radius: 6px;
+                            border-radius: 6px; font-size: 13px;}
 .optionHeader {
 	color: #fff;
 	overflow: hidden;
@@ -143,7 +124,6 @@ textarea.new_contact_text_area{ height: 100px; color: #2A3890;}
 /********* Menu header SECTION ************/
 .menu_list ul{list-style-type:none;}
 .menu_list li{display: inline;padding-right: 2px; padding-left: 2px; }
-.field_x{  border: thin solid #005C84;  width: 130px;}
 .line{  display:block;  margin:10px 2px 10px 10px;}
 
 /*************MENU ICON SECTION**********/

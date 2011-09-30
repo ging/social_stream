@@ -51,6 +51,7 @@ activate_anti_rebounds = function(){
   });
 }
 
+
 unblock_all_forms = function() {  
   //Sharing buttons
   $(".submitActivity").val("<%= I18n.t('share') %>").removeAttr("disabled");  
@@ -103,7 +104,9 @@ $(function() {
   	var comments = $(this).children(".subactivity");  	
   	//check if there are more than 3 comments
   	if (comments.size() > 3){
-  		$(this).prepend("<div class='hide_show_comments'><a href='#' onclick='showAllComments(\""+ $(this).attr('id') +"\"); return false;'><%= I18n.t('comment.view_all') %> (" + comments.size() + ")</a></div>");
+  		$(this).prepend("<div class='hide_show_comments'><a href='#' onclick='showAllComments(\""+ 
+  		                 $(this).attr('id') +"\"); return false;'><%= I18n.t('comment.view_all') %> (" + 
+  		                comments.size() + ")</a></div><div class='space_comments'></div>");
   		comments.slice(0,comments.size()-2).hide();
   		//hide alto space_comments
   		$(this).children(".space_comments").slice(0,comments.size()-2).hide();
@@ -130,6 +133,14 @@ $(".input_new_comments").live("click", function(){
   comment.find(".actor_logo_new_comment").show();
   return false;
 });
+
+autoSize= function(activity_dom_id) {
+  // Copy textarea contents; browser will calculate correct height of copy,
+  // which will make overall container taller, which will make textarea taller.
+  var text = $("#comment_text_"+activity_dom_id).val().replace(/\n/g, '<br/>');
+  $("#copy_comment_text_"+activity_dom_id).html(text);
+}  
+    
 
 //javascript for tocomment option
 $(".to_comment").live("click", function(){

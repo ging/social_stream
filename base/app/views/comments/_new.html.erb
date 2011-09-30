@@ -39,17 +39,10 @@
     activate_anti_rebounds(); 
  
     $("#comment_text_<%= dom_id(activity) %>")
-        .change(autoSize)
-        .keydown(autoSize)
-        .keyup(autoSize);
-    autoSize();
-    
-    function autoSize() {
-    // Copy textarea contents; browser will calculate correct height of copy,
-    // which will make overall container taller, which will make textarea taller.
-     var text = $("#comment_text_<%= dom_id(activity) %>").val().replace(/\n/g, '<br/>');
-      $("#copy_comment_text_<%= dom_id(activity) %>").html(text);
-    }   
+        .change(function(){autoSize("<%= dom_id(activity) %>");})
+        .keydown(function(){autoSize("<%= dom_id(activity) %>");})
+        .keyup(function(){autoSize("<%= dom_id(activity) %>");});
+    autoSize("<%= dom_id(activity) %>"); 
 
   });
 <% end %>
