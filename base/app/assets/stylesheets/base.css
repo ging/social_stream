@@ -203,3 +203,34 @@ button, input[type=submit]{margin: 10px 0 10px 0px;padding: 3px 20px 3px 20px;co
 	text-align: center;
 }
 
+/********************************* Menu list options ***********/
+.menu_plain_list {
+  list-style: none;
+}
+.menu_plain_list li {
+  line-height: 27px;
+  vertical-align: top;
+  display: inline;
+}
+.menu_plain_list li span:hover {
+  background: #CFDEFF;
+  color: #2A3890;
+}
+.menu_plain_list li a:hover {
+  text-decoration: none;
+}
+.menu_plain_list li span {
+  padding: 5px 10px;
+  background-color: #E1EEF5;
+}
+.menu_plain_list li span.selected {
+  border: solid 1px #2A3890;
+}
+
+.menu_plain_list img{
+  vertical-align: middle;
+  padding-bottom: 3px;
+  padding-right: 3px;
+  padding-left: 3px;
+  display: inline-block;
+}

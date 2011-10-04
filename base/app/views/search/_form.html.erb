@@ -6,7 +6,7 @@
         <%= text_field_tag :search_query, params[:search_query].present? ? params[:search_query] : nil ,:autocomplete => :off, :id => :global_search_input %>
       </div>
       <div  id="focus_options" class="form_row search_row">
-        <ul>
+        <ul class="menu_plain_list">
           <li><%= link_to content_tag(:span,t('search.show_all'),:class => params[:focus].blank? ? 'global selected' : 'global'), search_path(:search_query => params[:search_query]), :remote => true %></li>
           <% SocialStream.subjects.each do |subject| %>
             <% selected_class = (params[:focus].present? and params[:focus].pluralize.downcase.eql?(subject.to_s.pluralize.downcase)) ? 'selected' : ''%>
