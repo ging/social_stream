@@ -1,5 +1,6 @@
 class Session < ActiveRecord::Base
   include SocialStream::Models::Object
+  acts_as_conference_manager_session
 
   belongs_to :agenda
   has_one :event, :through => :agenda

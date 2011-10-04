@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
   include SocialStream::Models::Subject
+  acts_as_conference_manager_event
 
   has_one :agenda, :dependent => :destroy
   has_many :sessions, :through => :agenda
