@@ -2,6 +2,9 @@ module SocialStream
   module Release
     class << self
       def create(*args)
+        # First of all, update gems
+        system "bundle"
+
         dependencies = Global::Release.new.dependencies
 
         components = args.map do |a|
