@@ -7,7 +7,7 @@
     <h2><%= t('sign_in') %></h2>
     <div class="space_center"></div>
     <div class="space_center"></div>
-    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+    <%= form_for(resource, :as => resource_name, :url => user_session_path) do |f| %>
       <%= devise_error_messages! %>
       <div class="form_row">
         <div class="form_label"><%= f.label :email %></div>
