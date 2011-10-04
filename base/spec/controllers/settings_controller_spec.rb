@@ -17,7 +17,7 @@ describe SettingsController do
 
   it "should render index after update_all" do
     put :update_all
-    response.should redirect_to settings_path
+    assert_response :success
   end
 
   describe "Notification settings" do
