@@ -1,6 +1,6 @@
 <div id="headerFront">
   <div class="banner_top">
-    <div id="logo"><%= link_to(image_tag('logo.png', :alt => t('socialstream')), '/'); %></div>
+    <div id="logo"><%= link_to(image_tag('logo.png', :alt => t('site.name')), '/'); %></div>
     <div class="div_login">
       <%= form_for User.new, :as => :user, :url => user_session_path do |f| -%>
         <div id="login_data">
