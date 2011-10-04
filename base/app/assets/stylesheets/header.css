@@ -16,8 +16,11 @@
 .div_login #username{	height:10px; }
 .div_login, .input_username{	position:relative;	padding: 0px;	border: 0px; }
 .div_login #login_button{	width:61px;	height:18px; }
+.div_login #login_data{display: block;}
+.div_login .login_data_block{ display: inline-block; padding-left: 10px;}
+.div_login .login_data_block input{ width: 250px;}
 .div_login a.login{	background-color:#497FC1;	padding-right:2px;	padding-left:2px;	color:white; }
-.div_login .subtexto{	padding-top: 8px;	height:12px;	font-size: 11px; }
+.div_login .subtexto{	padding-top: 8px;	height:20px;	font-size: 11px; }
 .div_login .a_border{	border-right:thin solid;	padding-right:7px;	text-decoration:underline; }
 #new_representation {	display: inline-block;}
 #header_notifications a{color: white; background: transparent url('btn/header_notifications.png') no-repeat center center;padding: 4px 10px 6px 11px;}

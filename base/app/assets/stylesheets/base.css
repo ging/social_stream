@@ -44,8 +44,8 @@ label.validation_error{color: #D8000C;background-color: #FFBABA;border: 1px soli
 .error, #error_explanation {color: #D8000C;background-color: #FFBABA;background-image: url('btn/error.png');}
 
 /************Forms SECTION **************/
-input.other_blue{	background:#497FC1;	border:0px;	cursor:pointer;  font-size:1.0em;  line-height:135%;
-  margin-right:4px;	color:white;	padding:1px;}
+input.other_blue{	background-color:#497FC1 !important;	border:0px;	cursor:pointer; line-height:135%;
+                  padding: 1px 5px !important; margin: 5px 0px !important;}
 textarea.new_contact_text_area{ height: 100px; color: #2A3890;}
 .colum_field_title{ text-align: center; }
 .needed{color:#6C6D6F;font-weight: normal;}
