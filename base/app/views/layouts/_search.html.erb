@@ -1,5 +1,5 @@
 <div id="header_search">      
-  <form action="<%=search_path%>" method="get">
+  <form action="<%=search_path%>" method="get" id="header_search_form">
     <%= text_field_tag :search_query, nil,:autocomplete => :off, :id => :header_search_input %>
   </form>
   <div id="header_search_display">
@@ -21,6 +21,10 @@ $(document).ready(function() {
   });
   $('#header_search_display').click(function(e) {
     e.stopPropagation();
+  });
+  
+  $("#header_search_form").submit(function(){
+  	$("#header_search_display").hide();
   });
   
   $("#header_search_input").Watermark("<%= escape_javascript(I18n.t('search.name')) %>");
