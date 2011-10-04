@@ -1,16 +1,11 @@
 <% content_for :title do %>
-  <%=t('search.name')%> <%= params[:search_query].present? ? ": #{params[:search_query]}" : ""%>
+<%= t('search.name')%> <%= params[:search_query].present? ? ": #{params[:search_query]}" : ""%>
 <% end %>
 
 <% content_for :sidebar do %>
-  <%= render :partial => 'home/sidebar' %>
+<%= render :partial => 'home/sidebar' %>
 <% end %>
 
-<% toolbar %>
+<% toolbar if user_signed_in? %>
 
-<% content_for :javascript do %>
-    
-<% end %>
-
-
- <%= render :partial => 'index' %>
+<%= render :partial => 'index' %> 
