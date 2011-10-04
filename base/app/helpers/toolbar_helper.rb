@@ -74,7 +74,6 @@ module ToolbarHelper
     content_for(:javascript) do
     <<-EOJ
     expandSubMenu('#{ options[:option] }');
-      # Base toolbar items
     EOJ
     end
     end
