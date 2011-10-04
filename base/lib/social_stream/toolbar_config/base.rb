@@ -4,32 +4,7 @@ module SocialStream
       # Base toolbar items
       def home_toolbar_items
         Array.new.tap do |items|
-          # Messages
-          items << {
-            :key => :messages,
-            :name => image_tag("btn/new.png")+t('message.other')+' (' + current_subject.mailbox.inbox(:unread => true).count.to_s + ')',
-            :url => "#",
-            :options => {:link => {:id => "messages_menu"}},
-            :items => [
-              { :key => :message_new,
-                :name => image_tag("btn/message_new.png")+ t('message.new'),
-                :url => new_message_path,
-                :options => {:link =>{:remote=> false}}},
-              { :key => :message_inbox,
-                :name => image_tag("btn/message_inbox.png")+t('message.inbox')+' (' + current_subject.mailbox.inbox(:unread => true).count.to_s + ')',
-                :url => conversations_path,
-                :options => {:link =>{:remote=> false}}},
-              { :key => :message_sentbox,
-                :name => image_tag("btn/message_sentbox.png")+t('message.sentbox'),
-                :url => conversations_path(:box => :sentbox),
-                :options => {:link =>{:remote=> false}}},
-              { :key => :message_trash,
-                :name => image_tag("btn/message_trash.png")+t('message.trash'),
-                :url => conversations_path(:box => :trash)}
-            ]
-          }
-
-          #Contacts
+        #Contacts
           items << {
             :key => :contacts,
             :name => image_tag("btn/btn_friend.png")+t('contact.other'),
@@ -48,7 +23,7 @@ module SocialStream
       # Builds the default profile toolbar items
       def profile_toolbar_items(subject = current_subject)
         Array.new.tap do |items|
-          #Information button
+        #Information button
           items << {
             :key => :subject_info,
             :name => image_tag("btn/btn_edit.png")+t('menu.information'),
@@ -79,6 +54,27 @@ module SocialStream
               }
             end
           end
+        end
+      end
+
+      def messages_toolbar_items
+        Array.new.tap do |items|
+        # Messages
+          items << { :key => :message_new,
+            :name => image_tag("btn/message_new.png")+ t('message.new'),
+            :url => new_message_path,
+            :options => {:link =>{:remote=> false}}}
+          items << { :key => :message_inbox,
+            :name => image_tag("btn/message_inbox.png")+t('message.inbox')+' (' + current_subject.mailbox.inbox(:unread => true).count.to_s + ')',
+            :url => conversations_path,
+            :options => {:link =>{:remote=> false}}}
+          items << { :key => :message_sentbox,
+            :name => image_tag("btn/message_sentbox.png")+t('message.sentbox'),
+            :url => conversations_path(:box => :sentbox),
+            :options => {:link =>{:remote=> false}}}
+          items << { :key => :message_trash,
+            :name => image_tag("btn/message_trash.png")+t('message.trash'),
+            :url => conversations_path(:box => :trash)}
         end
       end
     end
