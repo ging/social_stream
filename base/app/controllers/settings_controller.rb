@@ -37,7 +37,7 @@ class SettingsController < ApplicationController
     else
       flash[:error] = t('settings.error')
     end
-    redirect_to :action => :index
+    render :action => :index
   end
 
 end

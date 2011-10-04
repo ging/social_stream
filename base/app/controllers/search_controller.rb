@@ -22,6 +22,10 @@ class SearchController < ApplicationController
         end
       end
     end
+    respond_to do |format|
+      format.html { render :layout => (user_signed_in? ? 'application' : 'frontpage') }
+      format.js
+    end
   end
 
   private
