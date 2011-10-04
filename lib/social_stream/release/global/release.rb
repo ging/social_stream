@@ -8,25 +8,6 @@ module SocialStream
 
         attr_reader :name, :version
 
-        class << self
-          def create(*args)
-            dependencies = new.dependencies
-
-            components = args.map do |a|
-              name, version = a.split(":")
-
-              if dependencies.include?(name)
-                ComponentRelease.new(name, version).release!
-              else
-                target = name
-              end
-            end
-
-
-            new(target).release!
-          end
-        end
-
         def initialize(target = nil)
           @target = target
         end
