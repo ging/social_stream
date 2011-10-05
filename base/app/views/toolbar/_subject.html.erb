@@ -1,0 +1,10 @@
+<div class="subject_with_details">
+  <div class="logo">
+    <%= link_to (image_tag(current_subject.logo.url , :size => "50x50", :alt => current_subject.name )), current_subject  %>
+  </div>
+  <div class="sub-block">
+    <div class="name black" >
+      <%= link_to truncate_name(current_subject.name, :length => 80), current_subject %>
+    </div>
+  </div>
+</div>

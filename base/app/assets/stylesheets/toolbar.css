@@ -1,3 +1,10 @@
 /*
  *= require menu
  */
+
+#toolbar .subject_with_details .sub-block{
+  width:62%;
+  word-wrap: break-word;
+  height: 50px;
+  overflow: hidden;
+}

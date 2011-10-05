@@ -5,7 +5,7 @@
   <ul>
     <% representations.each do |representation| %>
     <li>
-      <%= link_to truncate_name(representation.name), { :s => representation.slug }, { :style => "background: transparent url('#{ image_path representation.logo.url(:representation)}') no-repeat left center;margin-left:2px;" } %>
+      <%= link_to truncate_name(representation.name, :length => 15), { :s => representation.slug }, { :style => "background: transparent url('#{ image_path representation.logo.url(:representation)}') no-repeat left center;margin-left:2px;" } %>
     </li>
     <% end %>
   </ul>

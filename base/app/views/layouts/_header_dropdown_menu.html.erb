@@ -1,7 +1,7 @@
 <div id="header_dropdown_menu">
   <ul class="sf-menu" >
     <li class="header_dropdown_li">
-      <a href="#" class="sf-with-ul" id="current_subject_avatar_img" style="background: transparent url('<%= image_path current_subject.logo.url(:representation)%>') no-repeat left top;"><%= truncate_name current_subject.name %><span class="sf-sub-indicator"> »</span></a>
+      <a href="#" class="sf-with-ul" id="current_subject_avatar_img" style="background: transparent url('<%= image_path current_subject.logo.url(:representation)%>') no-repeat left top;"><%= truncate_name current_subject.name, :length => 15 %><span class="sf-sub-indicator"> »</span></a>
       <ul>
         <%= render :partial => 'layouts/header_dropdown_menu_sessions'%>
         <li>
