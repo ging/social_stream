@@ -1,5 +1,7 @@
+@import "colors";
+
 /****************** HEADER STRUCTURE ******/
-#headerFront {	width: 100%;	padding: 0;	background: #1F4A75;  padding: 2px 0px 0px 0px;}
+#headerFront {	width: 100%;	padding: 0;	background: $main-color;  padding: 2px 0px 0px 0px;}
 #header_left {	left: 0px;	float: left;	padding-left: 5px;}
 #header_right {	right: 0px;	float: right; padding-right: 10px;  }
 .banner_top{	width: 960px;	margin-left: auto;	margin-right: auto;	margin-top: 3px;  padding-bottom: 3px;
@@ -7,11 +9,11 @@
 .banner_top_height{	height:23px;}
 
 /********** CONTENT ************/
-#headerFront .div_login a{	color:#FFFFFF;	padding-right: 2px; }
+#headerFront .div_login a{	color:$text-over-main;	padding-right: 2px; }
 #headerFront .div_login a:hover{text-decoration:underline; }
 #logo{  width:218px;  height:50px;  float:left;  vertical-align:top; }
-#logo_txt {color: #fff;	display: inline;	vertical-align: top;	padding-top: 2px; }
-.div_login {	color:#FFF;	width:65%;	display:inline-block;	text-align: right;	vertical-align: top;
+#logo_txt {color: $text-over-main;	display: inline;	vertical-align: top;	padding-top: 2px; }
+.div_login {	color:$text-over-main;	width:65%;	display:inline-block;	text-align: right;	vertical-align: top;
 	padding-top: 5px;	font-weight:normal;	margin-top:3px;  float:right; }
 .div_login #username{	height:10px; }
 .div_login, .input_username{	position:relative;	padding: 0px;	border: 0px; }
@@ -19,16 +21,16 @@
 .div_login #login_data{display: block;}
 .div_login .login_data_block{ display: inline-block; padding-left: 10px;}
 .div_login .login_data_block input{ width: 250px;}
-.div_login a.login{	background-color:#497FC1;	padding-right:2px;	padding-left:2px;	color:white; }
 .div_login .subtexto{	padding-top: 8px;	height:20px;	font-size: 11px; }
 .div_login .a_border{	border-right:thin solid;	padding-right:7px;	text-decoration:underline; }
 #new_representation {	display: inline-block;}
-#header_notifications a{color: white; background: transparent url('btn/header_notifications.png') no-repeat center center;padding: 4px 10px 6px 11px;}
-#header_inbox_count a{ color: white; background-color: #879eb5; padding: 2px 7px 2px 7px;}
+#header_notifications a{color: white; padding: 4px 10px 6px 11px;
+                      background: transparent url('btn/header_notifications.png') no-repeat center center;}
+#header_inbox_count a{ color: white; background-color: $auxiliar-color; padding: 2px 7px 2px 7px;}
 #representation {  display: inline;  padding-left:3px;  padding-right:3px;}
-.txt_config {color: #fff;	vertical-align: top;	display: inline;	padding-top: 2px;	border-right: thin solid;
-	padding-right: 3px;}
-.txt_config2 {color: #fff;	vertical-align: top;	display: inline;	padding-top: 2px;	padding-right: 3px;}
+.txt_config {color: $text-over-main;	vertical-align: top;	display: inline;	padding-top: 2px;	
+              border-right: thin solid; padding-right: 3px;}
+.txt_config2 {color: $text-over-main;	vertical-align: top;	display: inline;	padding-top: 2px;	padding-right: 3px;}
 
 
 /******** MENU HEADER *******/
@@ -38,20 +40,21 @@
 #menu_home ul {list-style: none;	margin: 0px;	float:left;}
 #menu_home ul li {line-height:20px;	vertical-align:top;}
 
-#header_dropdown_menu,.header_dropdown_li {width: 120px;display:inline-block;vertical-align: top; height:22px; color:#FFF;}
+#header_dropdown_menu,.header_dropdown_li {width: 120px;display:inline-block;vertical-align: top; height:22px; 
+                        color:$text-over-main;}
 
 #header_dropdown_menu ul li {width: 120px;line-height: 15px;}
 #header_dropdown_menu ul li a{padding: .40em 1em .70em 2.5em;}
-#header_dropdown_menu ul li a:hover{color:#1F4A75;}
+#header_dropdown_menu ul li a:hover{color:$main-color;}
 #header_dropdown_menu ul li ul li a{padding: .40em 1em .70em 1em;}
 #header_dropdown_menu ul li ul li ul li a{padding: .40em 1em .70em 2.5em;}
 #header_dropdown_menu ul li ul li ul{position: absolute; left: -120px;}
 #header_dropdown_menu a.session_change{background: transparent url('btn/arrow_session_change.png') no-repeat 3px 6px;}
 
 #menu_home ul li.pipe,#menu_account ul li.pipe{padding:0; margin:0;font-size: 20px;font-weight: bold;}
-.menu_white{display:inline-block; color:#fff;}
+.menu_white{display:inline-block; color:$text-over-main;}
 .white_link{padding-top:3px;  vertical-align:top;  display:inline-block;}
-.black{color:#000; font-weight:bold;}
+.black{color:$sentence-color; font-weight:bold;}
 
 
 /*** ESSENTIAL STYLES ***/
@@ -117,24 +120,24 @@ ul.sf-menu li li li.sfHover ul {
 	text-decoration:none;
 }
 .sf-menu a, .sf-menu a:visited  { /* visited pseudo selector so IE6 applies text colour*/
-	color:			#fff;
+	color:			$text-over-main;
   padding-right:0px;
 
 }
 .sf-menu li {
-	background:		#1F4A75;
+	background:		$main-color;
 }
 
 .sf-menu li li {
-	background:		#1F4A75;
+	background:		$main-color;
 }
 .sf-menu li li li {
-	background:		#1F4A75;
+	background:		$main-color;
 }
 .sf-menu li:hover, .sf-menu li.sfHover,
 .sf-menu a:focus, .sf-menu a:hover, .sf-menu a:active {
-	background:		#CFDEFF;
-  color: #1F4A75;
+	background:		$secondary-color;
+  color: $main-color;
 	outline:		0;
 }
 

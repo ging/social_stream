@@ -37,6 +37,8 @@ require 'simple-navigation'
 require 'modernizr-rails'
 # Sphinx search engine
 require 'thinking-sphinx'
+# Syntactically Awesome Stylesheets
+require 'sass-rails'
 
 # Provides your Rails application with social network and activity stream support
 module SocialStream
