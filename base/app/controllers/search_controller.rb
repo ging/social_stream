@@ -47,11 +47,11 @@ class SearchController < ApplicationController
   end
 
   def global_search
-    return search 6
+    return search 5
   end
 
   def header_search
-    return search 3
+    return search 2
   end
 
   def search max_results

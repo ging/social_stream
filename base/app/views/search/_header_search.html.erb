@@ -2,9 +2,6 @@
 <ul>
 <% SocialStream.subjects.each do |subject_type| %>  
     <% unless @search_result[subject_type].empty? %>
-      <li class="title">
-        <%= subject_type.to_s.capitalize.pluralize %>
-      </li>
       <% @search_result[subject_type].each do |subject|%>
         <% total+=1 %>
         <li class="subject_result"><%= subject_with_details subject %></li>
