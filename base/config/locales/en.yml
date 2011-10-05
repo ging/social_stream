@@ -126,19 +126,19 @@ en:
       comments: "Comments"
       networks: "Social Networks"
       organizers: "Organizers"
-      participants: "Participants"
+      participants: "Video conferences"
       groups: "Groups"
       tags: "Tags"
     main_title: "Social Stream is a core for building social network websites."
     meet:
       default: "Meet"
       sentence1: "Meet interesting people and groups"
+      sentence2: "Find last activity of your contacts"
     share:
       default: "Share"
-      sentence1: "Your contacts and relations"
-      sentence2: "Posts, comments and activities"
+      sentence1: "Your proyects and activities"
+      sentence2: "Posts, photos, audio and videos"
     stats: "%{users} users and %{groups} groups registered"
-  find: "Find"
   group:
     one: "Group"
     other: "Groups"

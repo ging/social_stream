@@ -40,6 +40,7 @@
     <div class="sentences">
       <ul>
         <li class="green"><%= t('frontpage.meet.sentence1') %></li>
+        <li class="green"><%= t('frontpage.meet.sentence2') %></li>
       </ul>
     </div>
   </div>
@@ -65,30 +66,7 @@
 </div>
 
 <div id="wrapper_right">
-  <div id="caracteristics">
-    <ul>
-      <li class="participants">
-          <%= t('frontpage.elements.participants') %>
-      </li>
-      <li class="organizers">
-          <%= t('frontpage.elements.organizers') %>
-      </li>
-      <li class="spaces">
-          <%= t('frontpage.elements.groups') %>
-      </li>
-      <li class="comments">
-          <%= t('frontpage.elements.comments') %>
-      </li>
-      <li class="tags">
-          <%= t('frontpage.elements.tags') %>
-      </li>
-      <li class="networks">
-          <%= t('frontpage.elements.networks') %>
-      </li>
-    </ul>
-  </div>
+  <%= render :partial => 'frontpage/caracteristics' %>
 </div>
 
 <div id="espacio_body_bottom"></div>
-
-
