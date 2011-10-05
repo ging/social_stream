@@ -172,9 +172,9 @@ en:
   invitation:
     e-mails: "E-mail addresses"
     error: "Your request was unprocessable. Make sure you wrote correct e-mail addresses."
-    invited: " has invited you to Social Stream!"
-    join: "Invite other people to join Social Stream!"
-    join_me: "Join me at Social Stream!"
+    invited: "%{sender} has invited you to %{site}!"
+    join: "Invite other people to join %{site}!"
+    join_me: "Join me at %{site}!"
     one: "Invitation"
     other: "Invitations"
     toolbar: "Invite"

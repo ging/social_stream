@@ -10,7 +10,7 @@
 
 <%= form_tag invitations_path, :method=> :post, :class => "invitation_form", :remote => true  do %>
   <div class="block">   
-    <h3 class= "form_row"><%=t('invitation.join')%></h3>
+    <h3 class= "form_row"><%=t('invitation.join', :site => t('site.name'))%></h3>
     <div class="form_row form_label ">
       <%= label_tag t('invitation.e-mails')%>
       <span class= "form_comment">(Separated by commas)</span>

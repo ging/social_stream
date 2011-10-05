@@ -1,7 +1,7 @@
-<%= @sender.name %> has invited you to <%= t('site.name')%>: <%= new_user_registration_url%>
+<%= t('invitation.invited', :sender => @sender.name, :site => t('site.name')) %>: <%= new_user_registration_url%>
 
 <% if @message.blank? %>
-  <%= t('invitation.join_me')%>         
+  <%= t('invitation.join_me', :site => t('site.name'))%>         
 <%else%>
   "<%= @message%>"
 <%end%>
@@ -14,6 +14,7 @@
 
 <%= t('frontpage.meet.default')%>:
 <%= t('frontpage.meet.sentence1') %>
+<%= t('frontpage.meet.sentence2') %>
 
 <%= t('frontpage.collaborate.default')%>:
 <%= t('frontpage.collaborate.sentence1') %>
