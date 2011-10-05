@@ -9,6 +9,15 @@ class Video < Document
                     },:processors => [:ffmpeg]
                     
   process_in_background :file
+  
+  define_index do
+    indexes title
+    indexes file_file_name, :as => :file_name
+    indexes description
+    indexes activity_object.tags.name, :as => :tags
+    
+    has created_at
+  end
                       
   # Thumbnail file
   def thumb(size, helper)
