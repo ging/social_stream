@@ -159,7 +159,7 @@ class Actor < ActiveRecord::Base
         when String
           emails << receiver_emails
         when Array
-          receveir_emails.each do |receveir_email|
+          receiver_emails.each do |receiver_email|
             emails << receiver_email
           end
         end
