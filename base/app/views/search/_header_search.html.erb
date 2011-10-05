@@ -1,10 +1,10 @@
 <% total = 0 %>
 <ul>
-<% SocialStream.subjects.each do |subject_type| %>  
-    <% unless @search_result[subject_type].empty? %>
-      <% @search_result[subject_type].each do |subject|%>
+<% SocialStream.quick_search_models.each do |model_sym| %>  
+    <% unless @search_result[model_sym].empty? %>
+      <% @search_result[model_sym].each do |subject|%>
         <% total+=1 %>
-        <li class="subject_result"><%= subject_with_details subject %></li>
+        <li class="result"><%= model_with_details subject %></li>
       <% end %>
     <% end %>    
   </li>

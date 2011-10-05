@@ -79,7 +79,7 @@
 #header_search_display  li .link {
   display: none;
 }
-#header_search_display  li.subject_result {
+#header_search_display  li.result {
   padding: 0px;
   height: 45px;
   text-align: left;
@@ -111,7 +111,7 @@
 .search_row {
   text-align: center;
 }
-.subject_with_details {
+.model_with_details {
   padding: 5px;
 }
 .subject_search_results {

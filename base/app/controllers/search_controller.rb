@@ -1,10 +1,9 @@
 class SearchController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
 
-  #before_filter :authenticate_user! #??
-
-  FOCUS_SEARCH_PER_PAGE=16
+  FOCUS_SEARCH_PER_PAGE=24
   MIN_QUERY=2
+  
   def index
     @search_class_sym = params[:focus].singularize.to_sym unless params[:focus].blank?
     if params[:search_query].blank? or too_short_query
@@ -47,19 +46,21 @@ class SearchController < ApplicationController
   end
 
   def global_search
-    return search 5
+    return search "extended", 5
   end
 
   def header_search
-    return search 2
+    return search "quick", 2
   end
 
-  def search max_results
+  def search mode, max_results
     result = Hash.new
+    models = SocialStream.extended_search_models
+    models = SocialStream.quick_search_models if mode.eql? "quick"
     total_shown = 0
-    SocialStream.subjects.each do |subject_sym|
-      result.update({subject_sym => ThinkingSphinx.search(get_search_query, :classes => [subject_sym.to_s.classify.constantize]).page(1).per(max_results)})
-      result.update({(subject_sym.to_s+"_total").to_sym => ThinkingSphinx.count(get_search_query, :classes => [subject_sym.to_s.classify.constantize])})
+    models.each do |model_sym|
+      result.update({model_sym => ThinkingSphinx.search(get_search_query, :classes => [model_sym.to_s.classify.constantize]).page(1).per(max_results)})
+      result.update({(model_sym.to_s+"_total").to_sym => ThinkingSphinx.count(get_search_query, :classes => [model_sym.to_s.classify.constantize])})
     end
     return result
   end
@@ -72,12 +73,13 @@ class SearchController < ApplicationController
 
   def nil_search
     if params[:focus].present?
-      result = []
+    result = []
     else
+      models = SocialStream.extended_search_models | SocialStream.quick_search_models
       result = Hash.new
-      SocialStream.subjects.each do |subject_sym|
-        result.update({subject_sym => []})
-        result.update({(subject_sym.to_s+"_total").to_sym => 0})
+      models.each do |model_sym|
+        result.update({model_sym => []})
+        result.update({(model_sym.to_s+"_total").to_sym => 0})
       end
     end
     return result

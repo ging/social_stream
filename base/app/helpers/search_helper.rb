@@ -1,8 +1,8 @@
 module SearchHelper  
-  def subject_with_details subject
-    subject = subject.subject if subject.is_a? Actor    
-    render :partial => subject.class.to_s.pluralize.downcase + '/' + subject.class.to_s.downcase + '_with_details',
-           :locals => {subject.class.to_s.downcase.to_sym => subject}
+  def model_with_details model
+    model = model.model if model.is_a? Actor    
+    render :partial => model.class.to_s.pluralize.downcase + '/' + model.class.to_s.downcase + '_with_details',
+           :locals => {model.class.to_s.downcase.to_sym => model}
   end
   
   def focus_search_link text, search_class, query

@@ -3,14 +3,14 @@
 </div>
 <br class="clearfloat" />
 <% if @search_result.empty? %>
-<div class="subject_with_details">
+<div class="model_with_details">
 	<%= I18n.t('search.no_subject_found', :subject => @search_class_sym.to_s) %>
 </div>
 <% else %>
 <% total = 0 %>
 <% @search_result.each do |subject|%>
 <div class="subject_search_results block left">
-	<%= subject_with_details subject %>
+	<%= model_with_details subject %>
 </div>
 <% end %>
 <%= paginate @search_result %>

@@ -20,4 +20,10 @@ SocialStream.setup do |config|
   # You can write your own activity objects
   #
   # config.activity_forms = [ :post, :document, :foo, :bar ]
+  
+  # Quick search (header) and Extended search models and its order. Remember to create
+  # the indexes with thinking-sphinx if you are using customized models.
+  # 
+  # config.quick_search_models = [:user, :group]
+  # config.extended_search_models = [:user, :group]
 end

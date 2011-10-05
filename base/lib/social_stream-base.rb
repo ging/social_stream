@@ -79,6 +79,12 @@ module SocialStream
   mattr_accessor :activity_forms
   @@activity_forms = [ :post, :group ]
   
+  mattr_accessor :quick_search_models
+  @@quick_search_models = [ :user, :group ]
+  
+  mattr_accessor :extended_search_models
+  @@extended_search_models = [ :user, :group ]
+  
   class << self
     def setup
       yield self

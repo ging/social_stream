@@ -303,7 +303,7 @@ en:
   search:
     actor:
       none: "Nothing found"
-    all_subject_results: "Search all %{subject} (%{count})"
+    all_results: "Search all %{subject} (%{count})"
     at_least: "Write at least two characters"
     global: 
       name: "Global search"

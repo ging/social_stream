@@ -8,11 +8,11 @@
       <div  id="focus_options" class="form_row search_row">
         <ul class="menu_plain_list">
           <li><%= link_to content_tag(:span,t('search.show_all'),:class => params[:focus].blank? ? 'global selected' : 'global'), search_path(:search_query => params[:search_query]), :remote => true %></li>
-          <% SocialStream.subjects.each do |subject| %>
-            <% selected_class = (params[:focus].present? and params[:focus].pluralize.downcase.eql?(subject.to_s.pluralize.downcase)) ? 'selected' : ''%>
-            <li><%= focus_search_link content_tag(:span, subject.to_s.pluralize.capitalize, 
-                                                  :class => selected_class + " " + subject.to_s.pluralize.downcase), 
-                                      subject.to_s.classify.constantize, 
+          <% SocialStream.extended_search_models.each do |model_sym| %>
+            <% selected_class = (params[:focus].present? and params[:focus].pluralize.downcase.eql?(model_sym.to_s.pluralize.downcase)) ? 'selected' : ''%>
+            <li><%= focus_search_link content_tag(:span, model_sym.to_s.pluralize.capitalize, 
+                                                  :class => selected_class + " " + model_sym.to_s.pluralize.downcase), 
+                                      model_sym.to_s.classify.constantize, 
                                       params[:search_query] %></li>
           <% end %>
         </ul>
