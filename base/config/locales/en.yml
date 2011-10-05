@@ -261,12 +261,6 @@ en:
       success: "Your profile has been updated"     
   public:
     other: "Everybody"
-  representation:
-    action: "as"
-    change: "Change"
-  service:
-    one: "Service"
-    other: "Services"
   permission:
     description:
       brief:
@@ -296,9 +290,6 @@ en:
       add: "Add"
       title: "Privacy rules"
       saved: "Privacy rules saved"
-  products:
-    one: "Product"
-    other: "Products"
   relation_custom:
     choose: "1. Choose sphere"
     confirm_delete: "Delete this sphere?"
