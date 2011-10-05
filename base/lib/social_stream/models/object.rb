@@ -16,7 +16,9 @@ module SocialStream
 
         delegate :post_activity,
                  :like_count,
-                 :to => :activity_object
+                 :tag_list, :tag_list=,
+                 :tagged_with, :tag_counts,
+                 :to => :activity_object!
 
         before_create :create_activity_object_with_type
 
@@ -29,6 +31,10 @@ module SocialStream
       end
 
       module InstanceMethods
+        def activity_object!
+          activity_object || build_activity_object(:object_type => self.class.to_s)
+        end
+
         # All the activities with this object
         def activities
           Activity.
