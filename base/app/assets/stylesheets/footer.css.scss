@@ -1,0 +1,22 @@
+@import "colors";
+
+#sponsor-wrapper{ text-align:right; vertical-align:middle;}
+#sponsor{width:960px;margin:0 auto;color:$details-color; }
+
+#footer{width: 960px;margin-left: auto;margin-right: auto;padding: 0;position: relative; text-align:center;
+	clear:left;font-size:0.9166em;line-height:1.6363;color:$details-color;padding:0.75em 0;}
+#footer ul, #sponsor ul{list-style-type:none;margin:0 0.5em; }
+#footer ul li,#sponsor ul li{display:inline-block;margin-right:0.25em;position:relative;}
+#footer ul li#trade_mark,#sponsor ul li#trademark{font-weight:bold;color:$sentence-color;}
+#footer ul li#trade_mark_logo{font-weight:normal;}
+#footer a, #sponsor a{color:$details-color;}
+#footer a:hover, #sponsor a:hover{color:$sentence-color; text-decoration: underline;}
+#footer .icon,#global .icon{margin-bottom:-4px;}
+#footer-wrapper{background-color:$secondary-color;}
+#footer_right{font-weight:normal;}
+#footer_right{ font-size: 10px; line-height: 1.1em;}
+
+
+#footerFront {	width: 100%;	padding: 0;	background: $secondary-color;}
+
+.rowfooter{float:right;}

@@ -18,7 +18,7 @@ h2{padding-left:10px;}
 
 /******* Main Structure SECTION***************************/
 body{font-size:1.0em;  color: $main-color; background-color:$text-over-main; overflow-y: scroll;}
-#wrapper { 	background-color: $wrapper;	width: 100%; margin: 0px auto;	  }
+#wrapper { 	background-color: $fill-color;	width: 100%; margin: 0px auto;	  }
 #wrapper_body{min-height: 552px; width: 960px; margin:0px auto;	margin-left: auto;	margin-right: auto;
 margin-top: auto; margin-bottom:auto; background-image:none; padding-bottom: 9px;}
 
@@ -218,21 +218,20 @@ button, input[type=submit]{margin: 10px 0 10px 0px;padding: 3px 20px 3px 20px;co
   display: inline;
 }
 .menu_plain_list li span:hover {
-  background: #CFDEFF;
-  color: #2A3890;
+  background: $separation-color;
 }
 .menu_plain_list li a:hover {
   text-decoration: none;
 }
 .menu_plain_list li span {
   padding: 5px 10px;
-  background-color: #E1EEF5;
+  background-color: $secondary-color;
 }
 .menu_plain_list li span.selected {
-  border: solid 1px #2A3890;
+  border: solid 1px $main-color;
 }
 .menu_plain_list li span.disabled {
-  background-color: $wrapper;
+  background-color: $fill-color;
   color: $input-border-color;
 }
 
