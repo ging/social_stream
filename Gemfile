@@ -15,3 +15,8 @@ end
 # gem 'social2social', :path => '../social2social'
 
 gemspec
+
+group :test do
+  gem 'mysql2'
+  gem 'pg'
+end

@@ -18,13 +18,16 @@ test:
   pool: 5
   timeout: 5000
 
+test_mysql:
+  adapter: mysql2
+  database: social_stream_test
+  username: 
+  encoding: utf8
+
 test_pg:
   adapter: postgresql
-  encoding: unicode
   database: social_stream_test
-  pool: 5
-  username: social_stream
-  password:
+  username: postgres
 
 production:
   adapter: sqlite3

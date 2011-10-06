@@ -4,6 +4,10 @@ ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 require "rspec/rails"
 
+db_name = (ENV['DB'].present? ? "#{ ENV["RAILS_ENV"] }_#{ ENV['DB'] }" : "test")
+ActiveRecord::Base.establish_connection(db_name)
+ActiveRecord::Base.default_timezone = :utc
+
 ActionMailer::Base.delivery_method = :test
 ActionMailer::Base.perform_deliveries = true
 ActionMailer::Base.default_url_options[:host] = "test.com"
