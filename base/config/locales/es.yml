@@ -68,7 +68,9 @@ es:
     view_all: "Ver todos los comentarios"
   contact:
     all_n: "Todos los contactos (%{count})"
+    confirm_delete: "¿Borrar contacto?"
     current: "Actuales"
+    delete: "Borrar"
     edit:
       title: "Editar contacto con %{name}"
       submit: "Editar contacto"
@@ -218,10 +220,10 @@ es:
     read_all: "Marcar todas como leídas"
     unread: "Marcar como no leídas"
   post:
-    confirm_delete: "¿Borrar publicación?"
+    confirm_delete: "¿Borrar texto?"
     form:
-      title: "Publicación"
-    title: "Publicaciones"
+      title: "Texto"
+    title: "Textos"
   profile:
     one: "Perfil"
     age: "Edad"

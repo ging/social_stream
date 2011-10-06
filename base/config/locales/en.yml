@@ -69,7 +69,9 @@ en:
     view_all: "View all comments"
   contact:
     all_n: "All contacts (%{count})"
+    confirm_delete: "Delete contact?"
     current: "Current"
+    delete: "Delete"
     edit:
       title: "Edit contact to %{name}"
       submit: "Edit contact"
