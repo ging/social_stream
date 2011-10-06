@@ -1,0 +1,38 @@
+es:
+  audio:
+    confirm_delete: "¿Borrar audios?"
+    title: "Audios"
+    mine: "Mis audios"
+    msg: "Subió un audio:"
+    not_mine: "Audios"
+    processing: "Procesando fichero de audio..."
+  document:
+    all: "Todos los documentos"
+    confirm_delete: "¿Borrar documento?"
+    form:
+      title: "Fichero"
+    mine: "Mis documentos"
+    msg: "Subió un documento:"
+    not_mine: "Documentos"
+    simple_all: "Todos"
+    title: "Documentos"
+  picture:
+    confirm_delete: "¿Borrar imagen?"
+    title: "Imágenes"
+    mine: "Mis imágenes"
+    msg: "Subió una imagen:"
+    not_mine: "Imágenes"
+  resource:
+    all: "Todos los recursos"
+    confirm_delete: "¿Borrar recursos?"
+    title: "Recursos"
+    mine: "Mis recursos"
+    msg: "Subió un recurso:"
+    not_mine: "Recursos"
+  video:
+    confirm_delete: "¿Borrar vídeo?"
+    title: "Vídeos"
+    mine: "Mis vídeos"  
+    msg: "Subió un vídeo:"
+    not_mine: "Vídeos"
+    processing: "Procesando vídeo..."
