@@ -31,11 +31,11 @@
   </form>
 
 <%= javascript_tag do %>
-	$(document).ready(function() {
-	  $.preloadImages ("assets/mini-loading.gif");
-	  
-	  $('#search_form').submit(function() {
-	    query = $('#global_search_input').val();
+  $(function() {
+    $.preloadImages ("assets/mini-loading.gif");
+
+    $('#search_form').submit(function() {
+      query = $('#global_search_input').val();
       if((query=="")||(query.length < 2)||(query=="<%= t('search.write') %>")){
         $('#too_short_error').show();
         $('#global_search_input').removeClass("searching");
@@ -47,6 +47,8 @@
         $('#global_search_input').blur();
       }
       return true;
-	  });
-	});
+    });
+
+    $("#global_search_input").Watermark("<%= I18n.t('search.write') %>");
+  });
 <% end %>
