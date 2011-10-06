@@ -19,7 +19,7 @@ class Document < ActiveRecord::Base
     indexes description
     indexes activity_object.tags.name, :as => :tags
     
-    where sanitize_sql(["type", nil])
+    where "type IS NULL"
     
     has created_at
   end
