@@ -21,7 +21,6 @@ en:
       hidden: "Shared with spheres of %{audience}"
     confirm_delete: "Delete activity?"
     delete: "Delete"
-    input: "What are you doing?"
     last: "Last Activities"
     like: "I like"
     one: "Activity"
@@ -224,6 +223,7 @@ en:
     confirm_delete: "Delete post?"
     form:
       title: "Post"
+    input: "What are you doing?"
     title: "Posts"  
   preposition:
     and: "and"

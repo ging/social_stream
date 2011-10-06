@@ -21,7 +21,6 @@ es:
       hidden: "Compartido con esferas de %{audience}"
     confirm_delete: "¿Borrar actividad?"
     delete: "Borrar"
-    input: "¿Qué quieres compartir?"
     last: "Últimas actividades"
     like: "Me gusta"
     one: "Actividad"
@@ -223,6 +222,7 @@ es:
     confirm_delete: "¿Borrar texto?"
     form:
       title: "Texto"
+    input: "¿Qué quieres compartir?"
     title: "Textos"
   profile:
     one: "Perfil"
