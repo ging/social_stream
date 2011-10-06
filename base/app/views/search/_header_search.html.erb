@@ -1,15 +1,12 @@
 <% total = 0 %>
 <ul>
-<% SocialStream.quick_search_models.each do |model_sym| %>  
-    <% unless @search_result[model_sym].empty? %>
-      <% @search_result[model_sym].each do |subject|%>
+    <% unless @search_result.empty? %>
+      <% @search_result.each do |model|%>
         <% total+=1 %>
-        <li class="result"><%= model_with_details subject %></li>
+        <li class="result"><%= model_with_details model %></li>
       <% end %>
     <% end %>    
   </li>
-<% end %>
-
   <%= link_to raw('<li class="more">' + 
                   t("search.global.first_result.#{ total == 1 ? 'one' : 'more' }", :count => total) +
                   '<br>' +

@@ -298,8 +298,6 @@ es:
     name: "Público"
   required: "(*) Estos campos son obligatorios"
   search:
-    actor:
-      none: "Sin resultados"
     all_subject_results: "Ver todos %{subject} (%{count})"
     at_least: "Escribe al menos 2 letras"
     global: 
@@ -310,6 +308,7 @@ es:
       query: "Más resultados para %{query} >"
     name: "Buscar"
     no_subject_found: "No se encontró a %{subject}."
+    nothing: "No se ha econtrado nada."
     searching: "Buscando: %{query}"
     show_all: "Todos los resultados"
     write: "Escribe tu búsqueda..."

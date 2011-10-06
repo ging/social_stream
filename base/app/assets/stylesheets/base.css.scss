@@ -231,6 +231,10 @@ button, input[type=submit]{margin: 10px 0 10px 0px;padding: 3px 20px 3px 20px;co
 .menu_plain_list li span.selected {
   border: solid 1px #2A3890;
 }
+.menu_plain_list li span.disabled {
+  background-color: whiteSmoke;
+  color: $input-border-color;
+}
 
 .menu_plain_list img{
   vertical-align: middle;
