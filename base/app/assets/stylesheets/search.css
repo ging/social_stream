@@ -115,8 +115,11 @@
   padding: 5px;
 }
 .subject_search_results {
-  width: 280px;
+  width: 186px;
   text-align: center;
+}
+.subject_search_results .sub-block{
+  width: 60%;
 }
 #search_results {
   text-align: center;
@@ -128,17 +131,6 @@
 #search_results .right {
   float: right;
   padding: 0;
-}
-#search_results .title {
-  width: 540px;
-  margin: auto;
-  background-color: #E1EEF5;
-  padding: 5px;
-  font-weight: bold;
-  text-align: center;
-}
-#search_results .subject_search_results .title {
-  width: 260px;
 }
 /********************************* Form and errors *********/
 #search_form .error {
