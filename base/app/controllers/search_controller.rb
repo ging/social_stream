@@ -3,7 +3,7 @@ class SearchController < ApplicationController
   
   helper_method :get_search_query
 
-  FOCUS_SEARCH_PER_PAGE=24
+  RESULTS_SEARCH_PER_PAGE=15
   MIN_QUERY=2
   
   def index
@@ -38,7 +38,7 @@ class SearchController < ApplicationController
     if mode.to_s.eql? "quick"
       result.page(1).per(7)
     else
-      result.page(params[:page]).per(FOCUS_SEARCH_PER_PAGE)
+      result.page(params[:page]).per(RESULTS_SEARCH_PER_PAGE)
     end
     return result
   end
@@ -46,7 +46,7 @@ class SearchController < ApplicationController
   def focus_search
     @search_class_sym = params[:focus].singularize.to_sym unless params[:focus].blank?
     search_class = @search_class_sym.to_s.classify.constantize
-    ThinkingSphinx.search(get_search_query, :classes => [search_class]).page(params[:page]).per(FOCUS_SEARCH_PER_PAGE)
+    ThinkingSphinx.search(get_search_query, :classes => [search_class]).page(params[:page]).per(RESULTS_SEARCH_PER_PAGE)
   end
 
   def too_short_query
