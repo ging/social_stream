@@ -6,13 +6,6 @@ en:
     msg: "Uploaded an audio:"
     not_mine: "Audios"
     processing: "Processing audio clip"
-  conference:
-    all: "All conferences"
-    confirm_delete: "Delete conference?"
-    title: "Conferences"
-    mine: "My conferences"
-    msg: "Uploaded a conference:"
-    not_mine: "Conferences"
   document:
     all: "All documents"  
     confirm_delete: "Delete document?"
