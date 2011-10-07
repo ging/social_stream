@@ -11,6 +11,9 @@
 	padding-top: 10px;
 	font-size: 14px;
 }
+#center_body.frontpage_view {
+  width: 100%;
+}
 #sidebar {width: 220px;	display: table-cell;vertical-align: top;}
 #sidebarContent{  padding-left:3px; padding-right:3px;}
 #sponsor{background-color:$text-over-main}
