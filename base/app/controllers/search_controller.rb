@@ -3,7 +3,7 @@ class SearchController < ApplicationController
   
   helper_method :get_search_query
 
-  RESULTS_SEARCH_PER_PAGE=15
+  RESULTS_SEARCH_PER_PAGE=12
   MIN_QUERY=2
   
   def index
