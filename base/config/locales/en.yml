@@ -315,7 +315,7 @@ en:
     no_subject_found: "No %{subject} was found."
     nothing: "Nothing found"
     searching: "Searching: %{query}"
-    show_all: "Show all results"
+    show_all: "All"
     write: "Write your query ..."
     wrong: "There seems to be a problem with the search engine"
   settings:

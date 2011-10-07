@@ -312,7 +312,7 @@ es:
     no_subject_found: "No se encontró a %{subject}."
     nothing: "No se ha econtrado nada."
     searching: "Buscando: %{query}"
-    show_all: "Todos los resultados"
+    show_all: "Todos"
     write: "Escribe tu búsqueda..."
     wrong: "Parece que hay un problema con el motor de búsqueda"
   settings:

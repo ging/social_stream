@@ -3,7 +3,7 @@
     <% unless @search_result.empty? %>
       <% @search_result.each do |model|%>
         <% total+=1 %>
-        <li class="result"><%= model_with_details model %></li>
+        <li class="result"><%= render_global_search_for model %></li>
       <% end %>
     <% end %>    
   </li>

@@ -3,10 +3,13 @@
   <%= I18n.t('search.nothing') %>
 </div>
 <% else %>
-<% total = 0 %>
 <% @search_result.each do |model|%>
 <div class="subject_search_results block left">
-  <%= model_with_details model %>
+  <% if @search_class_sym.nil? %>
+    <%= render_global_search_for model %>
+  <% else %>
+    <%= render_focus_search_for model %>
+  <% end %>
 </div>
 <% end %>
 <br class="clearfloat">

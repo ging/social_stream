@@ -80,10 +80,10 @@ module SocialStream
   @@activity_forms = [ :post, :group ]
   
   mattr_accessor :quick_search_models
-  @@quick_search_models = [ :user, :group ]
+  @@quick_search_models = [ :user, :group, :post ]
   
   mattr_accessor :extended_search_models
-  @@extended_search_models = [ :user, :group ]
+  @@extended_search_models = [ :user, :group, :post ]
   
   class << self
     def setup
