@@ -57,6 +57,22 @@ en:
       liked: "Me Gusta"
     other: "Eventos"
     suscribed: "últimos suscritos"
+  frontpage:
+    collaborate:
+      sentence1: "Organice sus proyectos y actividades"
+      sentence2: "Participe en conferencias y eventos"
+      sentence3: "Cree su propio espacio y conferencias"
+    elements:
+      conferences: "Conferencias"
+    meet:
+      sentence1: "Descubra las mejores videoconferencias online"
+      sentence2: "Conozca gente y grupos interesantes"
+      sentence3: "Videoconferencia con sus colegas"
+    share:
+      sentence1: "Grabación y streaming de videoconferencias"
+      sentence2: "Publicaciones, comentarios, documentos, fotos, audios y vídeos"
+      sentence3: "Sus contactos y relaciones"
+
   menu:
     outline: "Agenda"
   profile:

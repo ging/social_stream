@@ -57,6 +57,20 @@ en:
       liked: "Most liked"
     other: "Events"
     suscribed: "Last Suscribed"
+  frontpage:
+    elements:
+    collaborate:
+      sentence1: "Organize your projects and activities"
+      sentence2: "Participate in conferences and events"
+      sentence3: "Create your own group and conferences"
+    meet:
+      sentence1: "Discover best online videoconferences"
+      sentence2: "Meet interesting people and groups"
+      sentence3: "Video chat with your colleagues"
+    share:
+      sentence1: "Videoconference recording and streaming"
+      sentence2: "Posts, comments, documents, photos, audios and videos"
+      sentence3: "Your contacts and relations"
   menu:
     outline: "Outline"
   profile:
