@@ -1,33 +1,6 @@
-<% content_for :title do %>
-  <%= @user.name%>
-<% end %>
-
-<% if @user.profile.description? %>
-  <% content_for :description do %>
-    <%= @user.profile.description%>
-  <% end %>
-<% end %>
-
-<% content_for :keywords do %>
-  <%= @user.profile.subject.tag_list%>
-<% end %>
-
-<% content_for :sidebar do %>
-  <%= render :partial => 'sidebar_index' %>
-<% end %>
-
-<%= location(link_to(t('profile.one')+": "+truncate_name(sanitize @user.name)))%>
-              
+<% if user_signed_in? %>
+<%= render :partial => 'show' %>
+<% else %>
 <% toolbar :profile => @user %>
-
-<br class="clearfloat" />
-<div class="space_center">
-</div>
-
-<%= render :partial => "users/groups",
-           :locals  => { :user => @user } %>
-
-<%= render :partial => "activities/index",
-           :locals  => { :activities => @user.wall(:profile, :for => current_subject).
-                                              page(params[:page]),
-                         :owner => @user } %>
+<%= render :partial => 'show_frontpage' %>
+<% end %> 
