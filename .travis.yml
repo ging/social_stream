@@ -5,3 +5,6 @@ rvm:
 env:
   - DB=mysql
   - DB=postgres
+before_script:
+  - "mysql -e 'create database social_stream_test;'"
+  - "psql -c 'create database social_stream_test;' -U postgres"
