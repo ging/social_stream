@@ -1,7 +1,7 @@
 @import "colors";
 
 /****************** HEADER STRUCTURE ******/
-#headerFront {	width: 100%;	padding: 0;	background: $main-color;  padding: 2px 0px 0px 0px;}
+#headerFront {	width: 100%;	padding: 0;	background: $header-color;  padding: 2px 0px 0px 0px;}
 #header_left {	left: 0px;	float: left;	padding-left: 5px;}
 #header_right {	right: 0px;	float: right; padding-right: 10px;  }
 .banner_top{	width: 960px;	margin-left: auto;	margin-right: auto;	margin-top: 3px;  padding-bottom: 3px;
@@ -26,7 +26,7 @@
 #new_representation {	display: inline-block;}
 #header_notifications a{color: white; padding: 4px 10px 6px 11px;
                       background: transparent url('btn/header_notifications.png') no-repeat center center;}
-#header_inbox_count a{ color: white; background-color: $auxiliar-color; padding: 2px 7px 2px 7px;}
+#header_inbox_count a{ color: white; background-color: $header-notification-color; padding: 2px 7px 2px 7px;}
 #representation {  display: inline;  padding-left:3px;  padding-right:3px;}
 .txt_config {color: $text-over-main;	vertical-align: top;	display: inline;	padding-top: 2px;	
               border-right: thin solid; padding-right: 3px;}
@@ -125,14 +125,14 @@ ul.sf-menu li li li.sfHover ul {
 
 }
 .sf-menu li {
-	background:		$main-color;
+	background:		$header-color;
 }
 
 .sf-menu li li {
-	background:		$main-color;
+	background:		$header-color;
 }
 .sf-menu li li li {
-	background:		$main-color;
+	background:		$header-color;
 }
 .sf-menu li:hover, .sf-menu li.sfHover,
 .sf-menu a:focus, .sf-menu a:hover, .sf-menu a:active {
