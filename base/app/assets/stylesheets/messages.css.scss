@@ -1,3 +1,5 @@
+@import "colors";
+
 /*
  *= require fcbkComplete
  *= require jquery.cleditor
@@ -24,12 +26,12 @@
 }
 .message .header{
 	padding: 5px 5px 5px 5px;
-	background-color: #E0EEF5;
+	background-color: $secondary-color;
 	height:40px;
 }
 .message .body{
 	padding: 5px 5px 5px 5px;
-	border: 1px solid #E0EEF5;
+	border: 1px solid $secondary-color;
 }
 .message .content_left {
 	float:left;
@@ -48,17 +50,17 @@
 .message .subject {
 }
 .message .date {
-	color: #6C6D6F;
+	color: $details-color;
 }
 .message ul {
     margin: 0px 5px
     ;padding-left:40px;
 }
 .conversation_full .messages .unread .header{
-	background-color: #E0E0FF;
+	background-color: $unread-color;
 }
 .conversation_full .messages .unread .body{
-	border: 1px solid #E0E0FF;
+	border: 1px solid $unread-color;
 }
 .conversation_full .messages .unread .subject{
 	font-weight: bold;
@@ -75,24 +77,24 @@
 	padding: 5px 5px 5px 5px;
 }
 .conversation_full .participants {
-	border-top:1px solid #E0EEF5;
-	border-bottom:1px solid #E0EEF5;
+	border-top:1px solid $secondary-color;
+	border-bottom:1px solid $secondary-color;
 	padding: 5px 5px 3px 5px;
 }
 /***************** Conversations *******************/
 .conversations {
-	border-top:1px solid #E0EEF5;
-	border-bottom:1px solid #E0EEF5;
+	border-top:1px solid $secondary-color;
+	border-bottom:1px solid $secondary-color;
 }
 .conversations .unread {
-	background-color: #E0EEF5;
+	background-color: $secondary-color;
 }
 .conversations .conversation {
-	color: #2A3890;
+	color: $main-color;
 	padding: 5px 5px 5px 5px;
 	width:549px;
 	height:40px;
-	border-bottom:1px solid #FFF;
+	border-bottom:1px solid $text-over-main;
 }
 .conversations .conversation .content_left {
 	float:left;
@@ -119,10 +121,10 @@
 	font-weight: bold;
 }
 .conversations .conversation .date {
-	color: #6C6D6F;
+	color: $details-color;
 }
 .conversations .conversation .briefing {
-	color: #6C6D6F;
+	color: $details-color;
 }
 .conversations .conversation .notification {
 	float:left;
@@ -131,5 +133,5 @@
 	margin: 0px 5px 0px 0px;
 }
 .conversations .unread .notification {
-	background-color: #2A3890;
+	background-color: $main-color;
 }

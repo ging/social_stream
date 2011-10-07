@@ -61,7 +61,7 @@ module ToolbarHelper
     when Mime::JS
       response = <<-EOJ
 
-          $('#toolbar').html("#{ escape_javascript(content) }");
+          $('#toolbarContent').html("#{ escape_javascript(content) }");
           initMenu();
           expandSubMenu('#{ options[:option] }');
           EOJ

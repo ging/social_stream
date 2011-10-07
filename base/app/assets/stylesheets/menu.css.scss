@@ -1,0 +1,19 @@
+@import "colors";
+
+/**************MENU***********/
+.toolbar_menu {list-style-type:none;  margin: 0;  padding: 0;  width: 15em; 
+                border-bottom: thin solid $separation-color; }
+.toolbar_menu ul {list-style-type:none;  margin: 0;  padding: 0;  width: 15em;  }
+.toolbar_menu a {  display: block;  text-decoration: none; }
+.toolbar_menu li {  border-top: thin solid $separation-color; padding-left:0px;  }
+.toolbar_menu li a, ul.menu ul.menu li a {  background: $text-over-main;  color: $main-color; padding:5px 0px; }
+.toolbar_menu li a:hover, ul.menu ul.menu li a:hover {  background: $secondary-color;  color: $main-color; 
+                 text-decoration:none; }
+.toolbar_menu li ul li a, ul.menu ul.menu li ul li a {  background: $text-over-main; border-left: 5px $main-color solid;
+  color: $main-color;  padding-left: 10px;}
+.toolbar_menu li ul li a:hover {  background: $secondary-color;  border-left: 5px $main-color solid;  padding-left: 15px;}
+.toolbar_menu img { vertical-align: middle; padding-bottom: 3px; padding-right: 3px;  padding-left: 3px; 
+                  display: inline-block;}
+
+
+
