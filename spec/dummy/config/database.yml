@@ -20,13 +20,13 @@ test:
 
 test_mysql:
   adapter: mysql2
-  database: social_stream_test
+  database: myapp_test
   username: 
   encoding: utf8
 
 test_pg:
   adapter: postgresql
-  database: social_stream_test
+  database: myapp_test
   username: postgres
 
 production:
