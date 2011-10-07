@@ -1,360 +1,88 @@
-es:
-  actor:
-    name: "Nombre"
-  action:
-    send: "Enviar"
-    accept: "Aceptar"
-  account:
-    cancel: "Cancelar lar cuenta"
-    edit: "Editar cuenta"
-    email: 
-      change: "Cambiar dirección de correo"
-    one: "Cuenta"
-    password:
-      change: "Cambiar contraseña"
-      new: "Nueva contraseña"
-      retype: "Repetir nueva contraseña"
-    privacy: "Privacidad"
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
   activity:
-    audience:
-      visible: "Compartido con %{audience}"
-      hidden: "Compartido con esferas de %{audience}"
-    confirm_delete: "¿Borrar actividad?"
-    delete: "Borrar"
-    last: "Últimas actividades"
-    like: "Me gusta"
-    one: "Actividad"
-    other: "Actividades"
-    sending: "Enviando"
-    title: "Actividades"
-    to_comment: "Comentar"
-    unlike: "Ya no me gusta"
     verb:
       follow:
-        User:
+        Event:
           title: "%{subject} añadió %{contact} como contacto."
           message: "%{name} te añadió como contacto."
-        Group:
-          title: "%{subject} se unió al grupo %{contact}."
-          message: "%{name} te añadió como contacto."
       like:
-        User:
+        Event:
           title: "%{subject} es fan de %{contact}."
-          message: "%{name} es tu fan."
-        Group:
-          title: "%{subject} es fan de %{contact}."
-          message: "%{name} es tu fan."
+          message: "%{name} es ahora tu fan."
       make-friend:
-        User:
-          title: "%{subject} y %{contact} ahora están conectados."
-          message: "%{name} también te añadió como su contacto."
-        Group:
-          title: "%{subject} añadió a %{contact}."
-          message: "%{name} te añadió."           
+        Event:
+          title: "%{subject} y %{contact} estan conectados."
+          message: "%{name} te ha añadido como contacto."
       post:
-        title:
-          other_wall: "%{sender} → %{receiver}"
-  browse: "Descubrir"
-  button:
-    cancel: "Cancelar"
-    save: "Guardar"
-    update: "Actualizar"
-  cleditor:
-    controls: "negrita cursiva subrayado tachado subíndice superíndice | tamaño estilo | lista | imagen enlazar desenlazar"
-  comment:
-    input: "Comentar..."
-    confirm_delete: "¿Borrar commentario?"
-    view_all: "Ver todos los comentarios"
-  contact:
-    all_n: "Todos los contactos (%{count})"
-    confirm_delete: "¿Borrar contacto?"
-    current: "Actuales"
+        User:
+          title: "%{subject} añadio %{contact} como nueva sessión."
+        Event:
+          title: "%{subject} ha creado una nueva sessión."
+    view:
+      documents: "Documentos"
+      audio: "Audio"
+      event: "Eventos"
+      photos: "Fotos"
+      post: "Publicaciones"
+      video: "Videos"
+  actor:
+    created: "Creado por"
     delete: "Borrar"
-    edit:
-      title: "Editar contacto con %{name}"
-      submit: "Editar contacto"
-    graph:
-      one: "Gráfico"
-      empty: "Lo sentimos pero aún no tienes contactos, pero ¡puedes probar a buscar en la caja de búsqueda!"
-    in_common:
-      one: "1 contacto en común"
-      other: "%{count} contactos en común"
-    new:
-      link: "+ Añadir contacto"
-      title: "Añadir a %{name} como contacto"
-      menu: "Añadir contacto"
-      submit: "Añadir"
-    one: "Contacto"
-    other: "Contactos"
-    pending:
-      other: "Pendientes"
-      all: "Todos"
-      all_n: "Ver todas los contactos pendientes (%{count})"
-    relation:
-      one: "Tipo de contacto"
-      new: "Nuevo tipo"
-    reply:
-      link: "+ Responder contacto"
-      title: "Responder contacto con %{name}"
-      submit: "Responder contacto"
-    suggestion:
-      one: "Sugerencia"
-      other: "Sugerencias"
-      all: "Todas"
-    type:
-      new: "+ Nuevo tipo"
-  copyright: "2011 Copyright - Derechos reservados"
-  delete:
-    confirm: "¿Borrar %{element}}?"
-  devise:
-    passwords:
-      confirm: "Confirmar contraseña"
-      forgot: "¿Olvidaste tu contraseña?"
-      instructions: "Introduce el correo electrónico y te mandaremos instrucciones para cambiarlo"
-      update: "Cambiar contraseña"
-  follower:
-    n:
-      one: "1 seguidor/a"
-      other: "%{count} seguidores"
-  forgot_password: "¿Olvidaste tu contraseña?"
-  frontpage:
-    collaborate:
-      default: "Colabora"
-      sentence1: "Organice sus proyectos y actividades"
-      sentence2: "Participe en conferencias y eventos"
-      sentence3: "Cree su propio espacio y conferencias"
-    elements:
-      comments: "Comentarios"
-      conferences: "Conferencias"
-      networks: "Redes sociales"
-      organizers: "Organizadores"
-      participants: "Participantes"
-      groups: "Grupos"
-      tags: "Etiquetas"
-    main_title: "Social Stream es un núcleo para construir webs con características de red social"
-    meet:
-      default: "Encuentra"
-      sentence1: "Descubra las mejores videoconferencias online"
-      sentence2: "Conozca gente y grupos interesantes"
-      sentence3: "Videoconferencia con sus colegas"
-    share:
-      default: "Comparte"
-      sentence1: "Grabaci\xC3\xB3n y streaming de videoconferencias"
-      sentence2: "Publicaciones, comentarios, documentos, fotos, audios y vídeos"
-      sentence3: "Sus contactos y relaciones"
-    stats: "%{users} personas and %{groups} grupos registrados"
-  group:
-    one: "Grupo"
-    other: "Grupos"
-    all: "Todos los grupos"
-    all_n: "Todos los grupos (%{count})"
-    by: "Por grupos"
+    confirm_delete: "Confirmar borrar?"
+  agenda:
+    confirm_delete: "borrar"
+  conference:
+    title: "Conferencias"
+    list: "Conferencias de contactos"
+  date:
+    at: "a"
+    undefined: "no definido"
+  event:
+    all: "todos los eventos"
+    all_n: "Todos los events"
+    by: "Por eventos"
+    cloud: "Nube de etiquetas de eventos"
+    confirm_delete: "Borrar"
     form:
-      title: "Grupo"
-    input: "¿Cuál es el nombre del grupo?"
-    last: "Últimos grupos"
-    my: "Mis grupos"
-    new:
-      action: "Nuevo grupo"
-      name: "Nombre"
-      description: "Descripción"
-      participants: "Participantes"
-    cloud: "Nube de etiquetas de grupos"
+      title: "Evento"
+    title: "Eventos"
+    input: "Cual es el nombre del evento?"
+    list: "Contactos del evento"
+    live: "Eventos en vivo"
     most:
       followed: "Más seguidos"
-      liked: "Más populares"
-    tags: "Etiquetas"
-  help: "Ayuda"
-  helpers:
-    submit:
-      relation_custom:
-        create: "Guardar"
-        update: "Actualizar"
-  home: "Inicio"
-  inbox:
-    one: "Entrada"
-  invitation:
-    e-mails: "Correo electrónico"
-    error: "No se pudo atender a la petición. Asegurate de haber escrito una dirección de correo correcta"
-    invited: "%{sender} te ha invitado a %{site}"
-    join: "¡Invita a otras personas a unirse a %{site}!"
-    join_me: "¡Únete a mi en %{site}!"
-    one: "Invitación"
-    other: "Invitaciones"
-    toolbar: "Invitar"
-    success: "Se han enviado tus invitaciones"
-    text: "Escribe tu mensaje"
-  like:
-    n:
-      one: "1 fan"
-      other: "%{count} fans"
-  location:
-    message: "Estás aquí > %{location}"
-    base: "Estás aquí"
-    separator: " > "
-  mailboxer:
-    message_mailer:
-      subject_new: "%{subject}"
-      subject_reply: "%{subject}"
-    notification_mailer:
-      subject: "%{subject}"
+      liked: "Me Gusta"
+    other: "Eventos"
+    suscribed: "últimos suscritos"
   menu:
-    options: "Opciones"
-    information: "Información"
-    wall: "Muro"
-  message:
-    answer: "Responder"
-    inbox: "Entrada"
-    look: "Échale un vistazo a esta conversación"
-    new: "Nuevo mensaje"
-    one: "Mensaje"
-    other: "Mensajes"
-    participants: "Participantes"
-    send: "Enviar un mensaje"
-    sentbox: "Salida"
-    trash: "Papelera"
-  notification:
-    confirm: "¿Confirmar contacto con %{sender.name}?"
-    destroy_sure: "¿Borrar notificación?"
-    look: "Écha un vistazo al muro de %{sender.name}"
-    one: "Notificación"
-    other: "Notificaciones"
-    read: "Marcar como leída"
-    read_all: "Marcar todas como leídas"
-    unread: "Marcar como no leídas"
-  post:
-    confirm_delete: "¿Borrar texto?"
-    form:
-      title: "Texto"
-    input: "¿Qué quieres compartir?"
-    title: "Textos"
+    outline: "Agenda"
   profile:
-    one: "Perfil"
-    age: "Edad"
-    must_be_signed_id: "Debes identificarte"
-    group:
-      about: "Sobre nosotros"
+    event:
+      about: "Acerca de"
       birthday: "Aniversario"
-      experience: "Temas que se trabajan"
-      info: "Información sobre el grupo"
-      tags: "Etiquetas del grupo"
-    user:
-      about: "Sobre mí"
-      birthday: "Cumpleaños"
-      experience: "Intereses"
-      info: "Información personal"
-      tags: "Etiquetas"
-    actualcity: "Ciudad actual"
-    address: "Dirección"
-    contact: "Información de contacto"
-    country: "País"
-    email: "Correo electrónico"
-    empty: "Estos campos están vacíos. ¡Actualízalos!"
-    fax: "Fax"
-    mobile: "Móvil"
-    organization: "Organización"
-    phone: "Teléfono"
-    profile: "Editar perfil"
-    tags:
-      default: "social, stream,"
-      other: "Etiquetas"
-    website: "Sitio web" 
-    update:
-      error: "Por favor, comprueba el formato de tu perfil:"
-      success: "Tu perfil se ha actualizado"
-  public:
-    other: "Todo el mundo"
-  permission:
-    description:
-      brief:
-        create: 
-          activity: "Publicar en el muro"
-        follow:
-          nil: "Seguir su actividad"
-        read:
-          activity: "Leer muro"
-        represent:
-          nil: "Administrar"
-      detailed:
-        create:
-          activity: "Publicar en el muro de\"%{relation}\""
-        follow:
-          nil: "Las actividades de los contactos en %{relation} aparecerán en tu página de inicio"
-        read:
-          activity: "Leer publicaciones en el muro de \"%{relation}\""
-          tie: "Ver contactos en los niveles: %{relations} y %{public}"
-        represent:
-          nil: "Cambiar sesión para actuar en nombre de %{subject}"
-    of_relation:
-      choose: "2. Permisos para <strong>%{name}</strong>"
-  privacy:
-    intro: "Los contactos en <strong>%{relation}</strong> solo pueden:"
-    rule:
-      add: "Añadir"
-      title: "Reglas de privacidad"
-      saved: "Reglas de privacidad guardadas"
-  relation_custom:
-    choose: "1. Elegir tipo de relación"
-    confirm_delete: "¿Borrar este tipo de relación?"
-    delete: "Borrar"
-    edit: "Cambiar nombre"
-    new: "+ Nuevo tipo"
-    title: "Privacidad y contexto"
-  relation_public:
-    name: "Público"
-  required: "(*) Estos campos son obligatorios"
-  search:
-    all_subject_results: "Ver todos %{subject} (%{count})"
-    at_least: "Escribe al menos 2 letras"
-    global: 
-      name: "Búsqueda global"
-      first_result:
-        more: "Mostrando los primeros %{count} resultados."
-        one: "Mostrando el primer resultado"
-      query: "Más resultados para %{query} >"
-    name: "Buscar"
-    no_subject_found: "No se encontró a %{subject}."
-    nothing: "No se ha econtrado nada."
-    searching: "Buscando: %{query}"
-    show_all: "Todos"
-    write: "Escribe tu búsqueda..."
-    wrong: "Parece que hay un problema con el motor de búsqueda"
-  settings:
-    error: "Hubo errores al guardar los cambios"
-    for: "Ajustes para"
-    main: "Ajustes principales"
-    one: "Ajustes"
-    success: "Ajustes guardados con éxito"
-    api_key:
-      briefing: "Gestiona tu clave API"
-      confirm: "¿Estás seguro?"
-      empty: "Token vacío"
-      explanation: "Ésta es tu clave API"
-      name: "Clave API"
-      regenerate: "Regenerar clave API"
-    notifications:
-      briefing: "Ajustes sobre notificaciones y alertas por correo"
-      name: "Notificaciones"
-      by_email:
-        name: "Mandarme un correo cuando me llega una notificación"
-        always: "Siempre"
-        never: "Nunca"
-  share: "Compartir"
-  sign_in: "Entrar"
-  sign_out: "Salir"
-  sign_up: "Registrarse"
-  site:
-    name: "Social Stream"
-  subject:
-    this_is_you: "¡Eres tú!"
-  sure: "¿Seguro?"
+      experience: "Area of experiencia"
+      info: "Information del evento"
+      tags: "Etiquetas del event"
+    outline: "agenda"
+  session:
+    confirm_delete: "borrar"
+    new: "Nueva session"
+    one: "session"
+    other: "sessions"
+    title: "titulo"
+    description: "descripción"
+    schedule: "horario"
   time:
-    ago: "hace %{time}"
-  user:
-    by: "Por usuarios"
-    one: "Usuario"
-    other: "Usuarios"
-    all: "Todos los usuarios"
-    all_n: "Todos los usuarios (%{count})"
-  welcome: "¡Bienvenid@ a %{site}!"
+    am: am
+    end: "fecha final"
+    from: "desde"
+    pm: pm
+    start: "fecha inicio"
+    to: "a"
+  timezone:
+    one: "Zona horaria"
+    set_up: You have not set up your time zone. <a href="{{path}}">Set it up now</a>
 
