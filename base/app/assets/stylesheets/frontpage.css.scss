@@ -1,27 +1,21 @@
+@import "colors";
+
 /********************** BÚSQUEDA *****************/
 .banner_busqueda {	width:960px;	height:61px;	margin-left:auto;	margin-right:auto;	padding:0;
 	position:relative;  padding-top:10px;}
-.div_busqueda {	color:#0656a4;	width:248px;	display:inline-block;	text-align: right;
-  vertical-align: top;	font-size: 12px;}
-.div_busqueda #subtexto_busqueda {	padding-bottom: 8px;	height:12px;}
-.div_busqueda #input_find{	position:relative;	border-color:#0656a4;	padding: 0px;	border: 1px inset;}
-.div_busqueda #find_button{	width:15px;	border:0px;	height:15px;}
-.div_busqueda .a_border{	border-right:thin solid;	color:#0656a4;	padding:0px 7px;	text-decoration:underline;}
-.div_busqueda a{	color:#0656a4;	padding:0px 7px;	text-decoration:underline;}
-#espacio_busqueda {	width:652px;  margin-left:20px;	height:45px;	margin-bottom:0px;	float:left;
-	display:inline;}
+#espacio_busqueda {	width:652px;  margin-left:20px;	height:45px;	margin-bottom:0px; float:left; display:inline;}
 #form_busqueda{  padding-top:3px;}
 span.find{  padding-right:5px;}
 
 /************** sub structure Frontpage **************/
 #devise_links {padding: 20px 0 5px 5px; margin-left: 20%;}
-#devise_links a{font-weight: bold;line-height: 15px; color: #777;}
+#devise_links a{font-weight: bold;line-height: 15px; color: $details-color;}
 #login{  padding-top: 5px;}
 .instructions{text-align: left; padding-bottom: 5px;}
 #remember{padding-left:22%; text-align: left;}
 #welcome #user_password_confirmation{vertical-align: 30%;}
 #welcome #user_password_confirmation_label {padding-top: 0;}
-#welcome{  margin: 50px auto 50px auto;  width:330px;  padding:20px;  border: 4px solid #BDC7D8;
+#welcome{  margin: 50px auto 50px auto;  width:330px;  padding:20px;  border: 4px solid $input-border-color;
   background-color: white;-moz-border-radius: 20px; 
   -webkit-border-radius: 20px; border-radius: 20px;}
 #welcome .form_field{ width: 75%;}
@@ -37,7 +31,7 @@ span.find{  padding-right:5px;}
 
 /***************** content Frontpage *****************/
 .espacio{height:10px;}
-#frontpage_title{	font-size: 17px;	font-weight:bold;	color: #1F4A75;	vertical-align: top;	margin: 0px;
+#frontpage_title{	font-size: 17px;	font-weight:bold;	color: $main-color;	vertical-align: top;	margin: 0px;
 	text-align: center;	padding: 0px;}
 .icon{  display:inline-block;  width:60px }
 #icon_share{  background: transparent url(frontpage/share.png);  width:56px;  height:57px;}
@@ -50,7 +44,7 @@ span.find{  padding-right:5px;}
 .sentences li.purple{  list-style-image:url("frontpage/purple_sq.png");}
 .sentences li.green{  list-style-image:url("frontpage/green_sq.png");}
 .sentences li.yellow{  list-style-image:url("frontpage/yellow_sq.png");}
-#text_bottom_title{	font-size: 14px;	color: #000;	font-weight: bold;}
+#text_bottom_title{	font-size: 14px;	color: $sentence-color;	font-weight: bold;}
 
 
 /*********** TEXT Frontpage **********/

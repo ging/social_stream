@@ -1,1 +1,7 @@
 <%= f.text_field :text, :id => "input_activities", :size => 85 %>
+
+<%= javascript_tag do %>
+  $(function() {
+    $("#input_activities").Watermark("<%= I18n.t('post.input') %>","#666");
+  });
+<% end %>

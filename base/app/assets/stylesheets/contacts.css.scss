@@ -1,3 +1,5 @@
+@import "colors";
+
 #contact-form {
   margin: 25px 45px 25px 45px;
 }
@@ -15,7 +17,7 @@
 
 div.sphere-name {
   font-weight: bold;
-  color: #1F4A75;
+  color: $main-color;
 }
 
 #relation-new {
@@ -39,7 +41,7 @@ div.sphere-name {
 }
 
 .ui-radio-state-disabled, .ui-radio-state-checked-disabled, .ui-radio-state-disabled-hover, .ui-radio-state-checked-disabled-hover {
-  color: #999;
+  color: $details-color;
 }
 
 span.ui-checkbox, span.ui-radio {
@@ -48,6 +50,7 @@ span.ui-checkbox, span.ui-radio {
   width: 16px;
   height: 17px;
   background: url(icon_checkbox.png) 0 -40px no-repeat;
+  cursor: pointer;
 }
 
 span.ui-helper-hidden {
@@ -87,6 +90,6 @@ span.ui-radio-state-checked-hover {
 }
 
 .checked-option{
-  background-color: #dfecf1;
+  background-color: $secondary-color;
 }
 

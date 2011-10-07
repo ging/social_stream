@@ -10,10 +10,20 @@
           <li><%= link_to content_tag(:span,t('search.show_all'),:class => params[:focus].blank? ? 'global selected' : 'global'), search_path(:search_query => params[:search_query]), :remote => true %></li>
           <% SocialStream.extended_search_models.each do |model_sym| %>
             <% selected_class = (params[:focus].present? and params[:focus].pluralize.downcase.eql?(model_sym.to_s.pluralize.downcase)) ? 'selected' : ''%>
-            <li><%= focus_search_link content_tag(:span, model_sym.to_s.pluralize.capitalize, 
-                                                  :class => selected_class + " " + model_sym.to_s.pluralize.downcase), 
-                                      model_sym.to_s.classify.constantize, 
-                                      params[:search_query] %></li>
+            <% disabled =ThinkingSphinx.count(get_search_query, :classes => [model_sym.to_s.classify.constantize])==0 %>
+            <% disabled_class = (disabled ? 'disabled' : '') %>
+            <li>
+            <% unless disabled %>
+              <%= focus_search_link content_tag(:span, model_sym.to_s.pluralize.capitalize, 
+                                                    :class => selected_class + " " + disabled_class + " " + model_sym.to_s.pluralize.downcase), 
+                                        model_sym.to_s.classify.constantize, 
+                                        params[:search_query] %>
+            <% else %>
+               <%= content_tag(:span, model_sym.to_s.pluralize.capitalize, 
+                               :class => selected_class + " " + disabled_class + " " + model_sym.to_s.pluralize.downcase,
+                               :title => I18n.t('search.no_subject_found', :subject => model_sym.to_s)) %>
+            <% end %>
+            </li>
           <% end %>
         </ul>
       </div>      
@@ -21,11 +31,11 @@
   </form>
 
 <%= javascript_tag do %>
-	$(document).ready(function() {
-	  $.preloadImages ("assets/mini-loading.gif");
-	  
-	  $('#search_form').submit(function() {
-	    query = $('#global_search_input').val();
+  $(function() {
+    $.preloadImages ("assets/mini-loading.gif");
+
+    $('#search_form').submit(function() {
+      query = $('#global_search_input').val();
       if((query=="")||(query.length < 2)||(query=="<%= t('search.write') %>")){
         $('#too_short_error').show();
         $('#global_search_input').removeClass("searching");
@@ -37,6 +47,8 @@
         $('#global_search_input').blur();
       }
       return true;
-	  });
-	});
+    });
+
+    $("#global_search_input").Watermark("<%= I18n.t('search.write') %>");
+  });
 <% end %>

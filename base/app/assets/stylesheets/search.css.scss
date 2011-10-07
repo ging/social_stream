@@ -1,3 +1,5 @@
+@import "colors";
+
 /******************** Search css ***********************/
 /********************************* Header **************/
 #header_search {
@@ -9,19 +11,18 @@
   padding: 0 3px 0 22px;
   background: url('btn/search_icon.png') 5px 50% no-repeat white;
   font-size: 11px;
-  color: #2A3890;
+  color: $main-color;
 }
 #header_search_input {
-  border: solid 1px #dedede;
+  border: solid 1px $input-border-color;
   height: 16px;
   width: 200px;
 }
 .banner_busqueda #header_search_input {
-  border: solid 1px #aaa;
   height: 20px;
 }
 #global_search_input {
-  border: solid 1px #aeaeae;
+  border: solid 1px $input-border-color;
   height: 25px;
   width: 300px;
 }
@@ -30,36 +31,35 @@
   display: none;
   float: right;
   margin-right: 35px;
-  border-left: solid 1px #B9B9B9;
-  border-right: solid 1px #B9B9B9;
-  border-bottom: solid 1px #B9B9B9;
+  border: solid 1px $auxiliar-color;
+  border-top: none;
   overflow: hidden;
   position: absolute;
   z-index: 2000;
-  background: whiteSmoke;
+  background: $fill-color;
   text-align: left;
 }
 #header_search_display a {
-  color: #2A3890;
+  color: $main-color;
   text-decoration: none;
 }
 #header_search_display a:hover {
-  color: #2A3890;
+  color: $main-color;
   text-decoration: none;
   font-weight: bold;
 }
 #header_search_display  li {
   padding: 4px;
-  border-top: solid 1px #B9B9B9;
+  border-top: solid 1px $auxiliar-color;
   font-size: 10px;
   height: 35px;
-  background: whiteSmoke;
+  background: $fill-color;
   overflow: hidden;
   text-align: center;
 }
 #header_search_display  li:hover {
-  background: #CFDEFF;
-  color: #2A3890;
+  background: $secondary-color;
+  color: $main-color;
 }
 #header_search_display  li .logo {
   float: left;
@@ -84,14 +84,6 @@
   height: 45px;
   text-align: left;
 }
-#header_search_display  li.title {
-  overflow: hidden;
-  text-align: center;
-  background: #879EB5;
-  height: 15px;
-  color: whiteSmoke;
-  font-weight: bold;
-}
 #header_search_display  li.loading, #header_search_display  li.more, #header_search_display  li.none {
   text-align: center;
 }
@@ -115,8 +107,20 @@
   padding: 5px;
 }
 .subject_search_results {
-  width: 280px;
+  width: 186px;
+  height: 61px;
+  overflow: hidden;
   text-align: center;
+}
+.subject_search_results img {
+  width: 48px;
+  height: 48px;
+}
+.subject_search_results .sub-block {
+  width: 69%;
+  word-wrap: break-word;
+  height: 50px;
+  overflow: hidden;
 }
 #search_results {
   text-align: center;
@@ -129,20 +133,11 @@
   float: right;
   padding: 0;
 }
-#search_results .title {
-  width: 540px;
-  margin: auto;
-  background-color: #E1EEF5;
-  padding: 5px;
-  font-weight: bold;
-  text-align: center;
-}
-#search_results .subject_search_results .title {
-  width: 260px;
+#search_results .highlight{
+  background-color: $unread-color;
 }
 /********************************* Form and errors *********/
 #search_form .error {
   display: none;
 }
-
 /******************** Search css END ***********************/

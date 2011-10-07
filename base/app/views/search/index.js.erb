@@ -1,4 +1,4 @@
-  $('#search_results').html("<% unless params[:focus].present? %><%= escape_javascript render :partial => 'global_search' %><% else %><%= escape_javascript render :partial => 'focus_search' %><% end %>");
+  $('#search_results').html("<%= escape_javascript render :partial => 'extended_search' %>");
   $('#search_form_div').html("<%= escape_javascript render :partial => 'form' %>");
   
   $('#focus_options ul li a span').removeClass('selected');

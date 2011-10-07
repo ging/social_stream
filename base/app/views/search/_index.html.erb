@@ -7,11 +7,6 @@
 <%= render :partial => 'form' %> 
 </div>
 <div class="space_center"></div>
-<div class="space_center"></div>
 <div id="search_results" class="block">  
-  <% unless params[:focus].present? %>
-    <%= render :partial => 'global_search' %>
-  <% else %>
-    <%= render :partial => 'focus_search' %>
-  <% end %>
+    <%= render :partial => 'extended_search' %>
 </div>

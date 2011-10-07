@@ -1,19 +1,5 @@
-.ui-radio-state-disabled, .ui-radio-state-checked-disabled, .ui-radio-state-disabled-hover, .ui-radio-state-checked-disabled-hover {
-	color: #999;
-}
+@import "colors";
 
-span.ui-checkbox, span.ui-radio {
-	display: block;
-	float: left;
-	width: 16px;
-	height: 17px;
-	background: url(icon_checkbox.png) 0 -40px no-repeat;
-	cursor: pointer;
-}
-
-span.ui-helper-hidden {
-	display: none;
-}
 
 #relation_customs label, #permissions label {
 	display: block;
@@ -93,19 +79,15 @@ form {
 	margin-left: 10px;
 }
 
-.checked-option{
-	background-color: #dfecf1;
-}
-
 .pageTitle{
-	color: black;
+	color: $sentence-color;
 	padding: 0px 10px 0px 0px;
 	font-size: 15px;
 }
 
 .sectionTitle{
-	background-color: #dfecf1;
-	color: #4d539d;
+	background-color: $secondary-color;
+	color: $main-color;
 	padding: 15px 20px 15px 20px;
 }
 
@@ -120,9 +102,9 @@ form {
 }
 
 input.privacy_input_new{
-	background-color: #dfecf1;
-	border: 1px solid #1F4A75;
-	color: #1F4A75;
+	background-color: $secondary-color;
+	border: 1px solid $main-color;
+	color: $main-color;
 }
 
 span.privacy_span_new {
@@ -190,7 +172,7 @@ span.privacy_span_new {
 	float: right;
 	text-align: center;
 	display: block;
-	border:1px solid #1F4A75;
+	border:1px solid $main-color;
 }
 
 #columns_container{
@@ -240,6 +222,6 @@ span.privacy_span_new {
 
 #privacy-rule-arrow {
 	background: url('images/add-policy.png') no-repeat center center;
-	color: #FFFFFF;
+	color: $text-over-main;
 }
 

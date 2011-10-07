@@ -11,6 +11,9 @@ module SocialStream
     # by default
     # It can be configured by users at application's config/initializers/social_stream.rb
     SocialStream.subjects.push(:event) unless SocialStream.subjects.include?(:event)
+    
+    SocialStream.quick_search_models.push(:event) unless SocialStream.quick_search_models.include?(:event)
+    SocialStream.extended_search_models.push(:event) unless SocialStream.extended_search_models.include?(:event)
 
     [ :agenda, :session ].each do |o|
       SocialStream.objects.push(o) unless SocialStream.objects.include?(o)

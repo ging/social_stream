@@ -21,7 +21,6 @@ es:
       hidden: "Compartido con esferas de %{audience}"
     confirm_delete: "¿Borrar actividad?"
     delete: "Borrar"
-    input: "¿Qué quieres compartir?"
     last: "Últimas actividades"
     like: "Me gusta"
     one: "Actividad"
@@ -68,7 +67,9 @@ es:
     view_all: "Ver todos los comentarios"
   contact:
     all_n: "Todos los contactos (%{count})"
+    confirm_delete: "¿Borrar contacto?"
     current: "Actuales"
+    delete: "Borrar"
     edit:
       title: "Editar contacto con %{name}"
       submit: "Editar contacto"
@@ -222,10 +223,11 @@ es:
     read_all: "Marcar todas como leídas"
     unread: "Marcar como no leídas"
   post:
-    confirm_delete: "¿Borrar publicación?"
+    confirm_delete: "¿Borrar texto?"
     form:
-      title: "Publicación"
-    title: "Publicaciones"
+      title: "Texto"
+    input: "¿Qué quieres compartir?"
+    title: "Textos"
   profile:
     one: "Perfil"
     age: "Edad"
@@ -302,8 +304,6 @@ es:
     name: "Público"
   required: "(*) Estos campos son obligatorios"
   search:
-    actor:
-      none: "Sin resultados"
     all_subject_results: "Ver todos %{subject} (%{count})"
     at_least: "Escribe al menos 2 letras"
     global: 
@@ -314,8 +314,9 @@ es:
       query: "Más resultados para %{query} >"
     name: "Buscar"
     no_subject_found: "No se encontró a %{subject}."
+    nothing: "No se ha econtrado nada."
     searching: "Buscando: %{query}"
-    show_all: "Todos los resultados"
+    show_all: "Todos"
     write: "Escribe tu búsqueda..."
     wrong: "Parece que hay un problema con el motor de búsqueda"
   settings:

@@ -21,7 +21,6 @@ en:
       hidden: "Shared with spheres of %{audience}"
     confirm_delete: "Delete activity?"
     delete: "Delete"
-    input: "What are you doing?"
     last: "Last Activities"
     like: "I like"
     one: "Activity"
@@ -69,7 +68,9 @@ en:
     view_all: "View all comments"
   contact:
     all_n: "All contacts (%{count})"
+    confirm_delete: "Delete contact?"
     current: "Current"
+    delete: "Delete"
     edit:
       title: "Edit contact to %{name}"
       submit: "Edit contact"
@@ -226,6 +227,7 @@ en:
     confirm_delete: "Delete post?"
     form:
       title: "Post"
+    input: "What are you doing?"
     title: "Posts"  
   preposition:
     and: "and"
@@ -305,8 +307,6 @@ en:
     name: "Public"
   required: "(*) These fields are required"
   search:
-    actor:
-      none: "Nothing found"
     all_results: "Search all %{subject} (%{count})"
     at_least: "Write at least two characters"
     global: 
@@ -317,8 +317,9 @@ en:
       query: "See more results for %{query} >"
     name: "Search"
     no_subject_found: "No %{subject} was found."
+    nothing: "Nothing found"
     searching: "Searching: %{query}"
-    show_all: "Show all results"
+    show_all: "All"
     write: "Write your query ..."
     wrong: "There seems to be a problem with the search engine"
   settings:
