@@ -121,23 +121,27 @@ en:
     collaborate:
       default: "Collaborate"
       sentence1: "Organize your projects and activities"
-      sentence2: "Create your own groups"
+      sentence2: "Participate in conferences and events"
+      sentence3: "Create your own group and conferences"
     elements:
       comments: "Comments"
+      conferences: "Conferences"
       networks: "Social Networks"
       organizers: "Organizers"
-      participants: "Video conferences"
+      participants: "Participants"
       groups: "Groups"
       tags: "Tags"
     main_title: "Social Stream is a core for building social network websites."
     meet:
       default: "Meet"
-      sentence1: "Meet interesting people and groups"
-      sentence2: "Find last activity of your contacts"
+      sentence1: "Discover best online videoconferences"
+      sentence2: "Meet interesting people and groups"
+      sentence3: "Video chat with your colleagues"
     share:
       default: "Share"
-      sentence1: "Your proyects and activities"
-      sentence2: "Posts, photos, audio and videos"
+      sentence1: "Videoconference recording and streaming"
+      sentence2: "Posts, comments, documents, photos, audios and videos"
+      sentence3: "Your contacts and relations"
     stats: "%{users} users and %{groups} groups registered"
   group:
     one: "Group"

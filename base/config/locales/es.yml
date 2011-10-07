@@ -119,10 +119,12 @@ es:
   frontpage:
     collaborate:
       default: "Colabora"
-      sentence1: "Organiza tus proyectos y actividades"
-      sentence2: "Crea tus propios grupos"
+      sentence1: "Organice sus proyectos y actividades"
+      sentence2: "Participe en conferencias y eventos"
+      sentence3: "Cree su propio espacio y conferencias"
     elements:
       comments: "Comentarios"
+      conferences: "Conferencias"
       networks: "Redes sociales"
       organizers: "Organizadores"
       participants: "Participantes"
@@ -131,12 +133,14 @@ es:
     main_title: "Social Stream es un núcleo para construir webs con características de red social"
     meet:
       default: "Encuentra"
-      sentence1: "Descubre grupos y gente interesante"
-      sentence2: "Encuentra la última actividad de tus contactos"
+      sentence1: "Descubra las mejores videoconferencias online"
+      sentence2: "Conozca gente y grupos interesantes"
+      sentence3: "Videoconferencia con sus colegas"
     share:
       default: "Comparte"
-      sentence1: "Tus proyectos y actividades"
-      sentence2: "Comentarios, fotos, audio y vídeo"
+      sentence1: "Grabaci\xC3\xB3n y streaming de videoconferencias"
+      sentence2: "Publicaciones, comentarios, documentos, fotos, audios y vídeos"
+      sentence3: "Sus contactos y relaciones"
     stats: "%{users} personas and %{groups} grupos registrados"
   group:
     one: "Grupo"

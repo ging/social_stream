@@ -55,14 +55,21 @@ span.find{  padding-right:5px;}
 
 /*********** TEXT Frontpage **********/
 #caracteristics{	vertical-align: top;}
-#caracteristics span {	float:left;	padding-right: 13px;	vertical-align: top;	padding-top: 5px;}
-#caracteristics ul{	list-style: none;	margin: 0px;	float:left;}
+#caracteristics #video {	float:left;	padding-right: 14px;	vertical-align: top;	padding-top: 5px;}
+#caracteristics ul {	list-style: none;	margin: 0px;	float:left;}
 #caracteristics ul li{	font-size:13px;	line-height:18px;	padding:7px 0 8px 30px;}
+#gallery ul li{	font-size:13px;	line-height:18px;	padding:0px 0 0px 2px;}
+li.conferences{background: transparent url("frontpage/right_conference.png") no-repeat left center;}
 li.participants{background: transparent url("frontpage/right_webcam.gif") no-repeat left center;}
 li.organizers{background: transparent url("frontpage/right_organizers.gif") no-repeat left center;}
-li.spaces{background: transparent url("frontpage/right_people.gif") no-repeat left center;}
+li.groups{background: transparent url("frontpage/right_people.gif") no-repeat left center;}
 li.comments{background: transparent url("frontpage/right_comments.gif") no-repeat left center;}
 li.tags{background: transparent url("frontpage/right_tags.gif") no-repeat left center;}
 li.networks{background: transparent url("frontpage/right_social.gif") no-repeat left center;}
+
+
+
+
+
 
 

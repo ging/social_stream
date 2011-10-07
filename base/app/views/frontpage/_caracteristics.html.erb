@@ -1,21 +1,63 @@
+<%content_for(:javascript) do  %>
+  $(function() {
+    var galleries = $('.ad-gallery').adGallery();
+  });
+<%end%>
+
 <div id="caracteristics">
-  <ul>
-    <li class="participants">
+  <span id ="video">
+    <div id="gallery" class="ad-gallery">
+      <div class="ad-image-wrapper">
+      </div>
+      <div class="ad-controls">
+      </div>
+      <div class="ad-nav">
+        <div class="ad-thumbs">
+          <ul class="ad-thumb-list">
+            <li class="gallery">
+              <%= link_to(image_tag('frontpage/thumbs/tvideo_1_happy.jpg', :alt => "Kostas Glinos",
+                                    :longdesc=> "http://coffeescripter.com/"),
+                          image_path('frontpage/video_1_happy.jpg')); %>
+            </li>
+            <li class="gallery">
+              <%= link_to(image_tag('frontpage/thumbs/t10.jpg', :class =>"image1" ),
+                          'http://localhost:3000/assets/frontpage/10.jpg'); %>
+            </li>
+            <li class="gallery">
+              <%= link_to(image_tag('frontpage/thumbs/t11.jpg',:class =>"image2" ),
+                          'http://localhost:3000/assets/frontpage/2.jpg'); %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="descriptions">
+
+    </div>
+  </span>
+
+  <ul class="list">
+    <li class="list conferences">
+        <%= t('frontpage.elements.conferences') %>
+    </li>
+
+    <li class="list participants">
         <%= t('frontpage.elements.participants') %>
     </li>
-    <li class="organizers">
+    <li class="list organizers">
         <%= t('frontpage.elements.organizers') %>
     </li>
-    <li class="spaces">
+    <li class="list groups">
         <%= t('frontpage.elements.groups') %>
     </li>
-    <li class="comments">
+    <li class="list comments">
         <%= t('frontpage.elements.comments') %>
     </li>
-    <li class="tags">
+    <li class="list tags">
         <%= t('frontpage.elements.tags') %>
     </li>
-    <li class="networks">
+    <li class="list networks">
         <%= t('frontpage.elements.networks') %>
     </li>
   </ul>
