@@ -17,6 +17,10 @@ end
 gemspec
 
 group :test do
-  gem 'mysql2'
-  gem 'pg'
+  case ENV['DB']
+  when 'mysql'
+    gem 'mysql2'
+  when 'postgres'
+    gem 'pg'
+  end
 end
