@@ -24,7 +24,7 @@ test_mysql:
   username: 
   encoding: utf8
 
-test_pg:
+test_postgres:
   adapter: postgresql
   database: social_stream_test
   username: postgres
