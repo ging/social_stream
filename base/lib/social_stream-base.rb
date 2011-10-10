@@ -84,7 +84,10 @@ module SocialStream
   
   mattr_accessor :extended_search_models
   @@extended_search_models = [ :user, :group, :post ]
-  
+
+  mattr_accessor :cleditor_controls
+  @@cleditor_controls = "bold italic underline strikethrough subscript superscript | size style | bullets | image link unlink"
+ 
   class << self
     def setup
       yield self

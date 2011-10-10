@@ -67,8 +67,6 @@ es:
     cancel: "Cancelar"
     save: "Guardar"
     update: "Actualizar"
-  cleditor:
-    controls: "negrita cursiva subrayado tachado subíndice superíndice | tamaño estilo | lista | imagen enlazar desenlazar"
   comment:
     input: "Comentar..."
     confirm_delete: "¿Borrar commentario?"
