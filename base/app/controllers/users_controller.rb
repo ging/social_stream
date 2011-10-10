@@ -10,15 +10,10 @@ class UsersController < InheritedResources::Base
                   tagged_with(params[:tag]).
                   page(params[:page]).per(10)
 
-    index! do |format|
-      format.html { render :layout => (user_signed_in? ? 'application' : 'frontpage') }
-    end
+
   end
 
   def show
-    show! do |format|
-      format.html { render :layout => (user_signed_in? ? 'application' : 'frontpage') }
-    end
   end
 
   # Supported through devise

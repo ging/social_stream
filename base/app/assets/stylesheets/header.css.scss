@@ -14,14 +14,15 @@
 #logo{  width:218px;  height:50px;  float:left;  vertical-align:top; }
 #logo_txt {color: $text-over-main;	display: inline;	vertical-align: top;	padding-top: 2px; }
 .div_login {	color:$text-over-main;	width:65%;	display:inline-block;	text-align: right;	vertical-align: top;
-	padding-top: 5px;	font-weight:normal;	margin-top:3px;  float:right; }
+	font-weight:normal;	 float:right; }
 .div_login #username{	height:10px; }
-.div_login, .input_username{	position:relative;	padding: 0px;	border: 0px; }
+.div_login .input_username{	position:relative;	padding: 2px;	border: 0px; }
 .div_login #login_button{	width:61px;	height:18px; }
 .div_login #login_data{display: block;}
 .div_login .login_data_block{ display: inline-block; padding-left: 10px;}
-.div_login .login_data_block input{ width: 250px;}
-.div_login .subtexto{	padding-top: 8px;	height:20px;	font-size: 11px; }
+.div_login .login_data_block input{ width: 200px;}
+.div_login .login_data_block input[type=submit]{ width: 70px;}
+.div_login .options{ height:20px;	font-size: 11px;}
 .div_login .a_border{	border-right:thin solid;	padding-right:7px;	text-decoration:underline; }
 #new_representation {	display: inline-block;}
 #header_notifications a{color: white; padding: 4px 10px 6px 11px;
