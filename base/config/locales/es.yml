@@ -15,6 +15,13 @@ es:
       new: "Nueva contraseña"
       retype: "Repetir nueva contraseña"
     privacy: "Privacidad"
+  activerecord:
+    attributes:
+      user:
+        email: "Correo"
+        name: "Nombre"
+        password: "Contraseña"
+        password_confirmation: "Confirmar contraseña"
   activity:
     audience:
       visible: "Compartido con %{audience}"
