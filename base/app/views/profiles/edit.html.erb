@@ -37,7 +37,7 @@ end %>
   <% if !params[:section].present? or params[:section].eql?("tags") %>
   	<% content_for :javascript do %>
   	  $(function() {
-  	    $(".new_group").validate();
+  	    $(".new_group").validate({errorClass: "validation_error"});
   	  });
   	  $("#profile_actor_attributes_tag_list").fcbkcomplete({
   	    json_url: "<%= tags_path(:format => :json) %>",
@@ -95,7 +95,7 @@ end %>
 	    <div class="form_label">
 	      <%= f.label t('profile.' + current_subject.class.to_s.downcase + '.birthday')%>
 	    </div>
-	    <div class="form_field">
+	    <div class="form_field" id="form_select">
 	      <%= date_select "profile", "birthday", :order => [:day, :month, :year], :end_year=> Date.today.year, 
 	         :start_year=> (Date.today.year - 100), :prompt => { :day => 'Day', :month => 'Month', :year => 'Year' } %>
 	    </div>
@@ -119,8 +119,10 @@ end %>
 	    </div>
 	  </div>
 
-	  <div class="form_row form_label">
-	    <%= f.label t('profile.' + current_subject.class.to_s.downcase + '.about') %>
+	  <div class="form_row">
+	    <div class="form_label">
+	     <%= f.label t('profile.' + current_subject.class.to_s.downcase + '.about') %>
+	    </div>
 	  </div>
 	  <div class="form_row">
 	    <%= f.text_area :description, :maxlength => 200, :rows => 10, :class => "form_tag_long" %>

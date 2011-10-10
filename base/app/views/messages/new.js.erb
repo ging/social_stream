@@ -25,4 +25,4 @@ var recipients = $("#_recipients").fcbkcomplete({
 	$("#_recipients").trigger("addItem",[{"title": "<%= @recipient.name %>", "value": "<%= @recipient.id %>"}]);
 <% end %>
 
-$(".new_message").validate();
+$(".new_message").validate({errorClass: "validation_error"});

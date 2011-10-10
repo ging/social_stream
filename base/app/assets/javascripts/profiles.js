@@ -2,5 +2,8 @@
 //= require jquery.fcbkcomplete
 
 $(function() {
-	$(".edit_profile").validate();
+  jQuery.validator.addMethod("phone", function(value, element){
+      return this.optional(element) || /^((\((\+?)\d+\))?|(\+\d+)?)[ ]*-?(\d+[ ]*\-?[ ]*\d*)+$/.test(value);
+    }, " Please enter a valid telephone number");
+	$(".edit_profile").validate({errorClass: "validation_error"});
 });

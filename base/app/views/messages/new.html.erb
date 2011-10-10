@@ -31,7 +31,7 @@
 		$("#_recipients").trigger("addItem",[{"title": "<%= truncate_name @recipient.name %>", "value": "<%= @recipient.id %>"}]);
 	<% end %>
 
-  $(".new_message").validate();
+  $(".new_message").validate({errorClass: "validation_error"});
 
 <% end %>
 

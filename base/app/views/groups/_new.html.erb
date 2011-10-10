@@ -1,6 +1,6 @@
 <% content_for :javascript do %>
   $(function() {
-    $(".new_group").validate();
+    $(".new_group").validate({errorClass: "validation_error"});
   });
   $("#group__participants").fcbkcomplete({
                 json_url: "<%= contacts_path(:form => true, :format => :json) %>",

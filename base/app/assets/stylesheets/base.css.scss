@@ -34,7 +34,7 @@ margin-top: auto; margin-bottom:auto; background-image:none; padding-bottom: 9px
     margin-left: auto;
     margin-right: auto;
 }
-.notice ul, .success ul, .alert ul, .error ul, .validation ul{
+.notice ul, .success ul, .alert ul, .error ul, .validation ul, #error_explanation ul{
   margin-left:40px;
   
 }
@@ -108,8 +108,9 @@ button, input[type=submit]{margin: 10px 0 10px 0px;padding: 3px 20px 3px 20px;co
 .block .field{  display:inline;  padding: 0px;  width:50%;}
 .block .form_tag{color: $main-color; padding: 5px 5px 5px 5px;  border:1px solid $input-border-color; width:90%;}
 .block .form_tag_long{color: $main-color;	padding: 5px 5px 5px 5px;  border:1px solid $input-border-color; width:91%;}
-.block .form_label{display:inline-block;  width:25%; font-weight:bold; vertical-align:10%; padding-top:3px;}
+.block .form_label{display:inline-block;  width:25%; font-weight:bold; vertical-align:top; padding-top:7px;}
 .block .form_field{  display:inline-block;  padding: 0px;  width:73%;}
+.block #form_select.form_field{ padding: 3px 0px;}
 .block .form_row {display: block; padding:5px; padding-left:20px;}
 .block .form_sub_row {display: block; padding:5px; padding-left:30px;}
 .block .label{  display:inline-block;  width:49%; }

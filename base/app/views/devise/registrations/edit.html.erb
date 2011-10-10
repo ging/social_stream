@@ -7,7 +7,7 @@
 <%= devise_error_messages! %>
 
 <% content_for :javascript do %>
-  $(".user_edit").validate();
+  $(".user_edit").validate({errorClass: "validation_error"});
 <%end%>
 
 <div class="space_center"></div>

@@ -9,7 +9,7 @@
 <% toolbar :option => :messages %>
 
 <% content_for :javascript do %>
-$('.cont_conversation').validate();
+$('.cont_conversation').validate({errorClass: "validation_error"});
 <% unless @box.eql?'trash' %>
   $("#body").cleditor({
     width:493,
