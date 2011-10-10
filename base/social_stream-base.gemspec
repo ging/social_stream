@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   # Slug generation
   s.add_runtime_dependency('stringex', '~> 1.3.0')
   # Avatar attachments
-  s.add_runtime_dependency('avatars_for_rails', '~> 0.1.3')
+  s.add_runtime_dependency('avatars_for_rails', '~> 0.1.4')
   # jQuery
   s.add_runtime_dependency('jquery-rails', '~> 1.0.9')
   # Authorization
