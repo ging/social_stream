@@ -205,6 +205,10 @@ en:
     base: "You are here"
     separator: " > "
   mailboxer:
+    form:
+      body: "Body"
+      recipients: "Recipients"
+      subject: "Subject"
     message_mailer:
       subject_new: "%{subject}"
       subject_reply: "%{subject}"

@@ -202,6 +202,10 @@ es:
     base: "Estás aquí"
     separator: " > "
   mailboxer:
+    form:
+      body: "Mensaje"
+      recipients: "Para"
+      subject: "Asunto"
     message_mailer:
       subject_new: "%{subject}"
       subject_reply: "%{subject}"
