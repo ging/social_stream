@@ -114,6 +114,13 @@ es:
   delete:
     confirm: "¿Borrar %{element}}?"
   devise:
+    links:
+      sign_in: "Entrar"
+      sign_up: "Registrarse"
+      forgot_password: "¿Olvidaste tu contraseña?"
+      confirmation_instructions: "¿No recibiste instrucciones de confirmación?"
+      unlock_instructions: "¿No recibiste instrucciones de desbloqueo?"
+      sign_in_with: "Entrar con %{provider}"
     passwords:
       confirm: "Confirmar contraseña"
       forgot: "¿Olvidaste tu contraseña?"
