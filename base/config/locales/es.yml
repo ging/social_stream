@@ -33,6 +33,10 @@ es:
     like: "Me gusta"
     one: "Actividad"
     other: "Actividades"
+    privacy:
+      contacts:
+        user: "Contactos de %{receiver}"
+        group: "Integrantes de %{receiver}"
     sending: "Enviando"
     title: "Actividades"
     to_comment: "Comentar"

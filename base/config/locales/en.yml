@@ -33,6 +33,10 @@ en:
     like: "I like"
     one: "Activity"
     other: "Activities"
+    privacy:
+      contacts:
+        user: "Contacts of %{receiver}"
+        group: "Members of %{receiver}"
     sending: "Sending"
     title: "Activities"
     to_comment: "Comment"

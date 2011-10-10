@@ -333,9 +333,11 @@ class Actor < ActiveRecord::Base
   #
   #
   def activity_relations(subject, options = {})
-    return relation_customs if Actor.normalize(subject) == self
-
-    Array.new
+    if Actor.normalize(subject) == self
+      return relation_customs + Array.wrap(relation_public)
+    else
+      Array.new
+    end
   end
 
   # Are there any activity_relations present?
