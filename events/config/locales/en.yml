@@ -59,6 +59,7 @@ en:
     suscribed: "Last Suscribed"
   frontpage:
     elements:
+      conferences: "Conferences"
     collaborate:
       sentence1: "Organize your projects and activities"
       sentence2: "Participate in conferences and events"
