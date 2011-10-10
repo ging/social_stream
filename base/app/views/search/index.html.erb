@@ -8,8 +8,4 @@
 
 <% toolbar if user_signed_in? %>
 
-<% if user_signed_in? %>
 <%= render :partial => 'index' %>
-<% else %>
-<%= render :partial => 'index_frontpage' %>
-<% end %> 

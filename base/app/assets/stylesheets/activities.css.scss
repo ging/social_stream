@@ -19,6 +19,10 @@
 #activities_share_btn {	text-align: right;	padding: 5px 16px 0px 10px;	vertical-align: middle;}
 #securities{  display:inline-block;  text-align:left; float: left; padding-left:5px;}
 
+#security_chzn .chzn-choices {
+	padding-left: 20px;
+	background: url('btn/btn_security.png') no-repeat 10px center;
+}
 /******************* WALL - ACTIVITY ***************/
 .super_activity{width: 95%;}
 .activity {	text-align:left;	display: block;	vertical-align: top;	padding: 10px 0px 5px 0px;
@@ -76,8 +80,3 @@
 .copy_new_comment{visibility: hidden; padding:6px; padding-bottom: 1.5em;font-size:inherit; line-height: 1.15em;
                   margin-bottom:7px;}
 .input_new_comments_container{min-height: 30px; position: relative;  }
-/*********** DROP DOWN**********/
-#security_chzn .chzn-choices {
-	padding-left: 20px;
-	background: url('btn/btn_security.png') no-repeat 10px center;
-}

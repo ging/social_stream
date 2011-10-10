@@ -1,6 +1,1 @@
-<% if user_signed_in? %>
 <%= render :partial => 'show' %>
-<% else %>
-<% toolbar :profile => @user %>
-<%= render :partial => 'show_frontpage' %>
-<% end %> 

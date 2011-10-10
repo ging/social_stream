@@ -22,9 +22,19 @@
   <% end %> 	
 </div>
 
-<% if current_subject == receiver %>
-  <div id="securities"><%= select_tag :_relation_ids, options_for_select(current_subject.activity_relations(receiver).sort.map{ |r| [ r.name, r.id ] }), :id => 'security', :multiple => true, :title => t('relation_public.name') %></div>
-<% end %>
+<div id="securities">
+  <% if current_subject == receiver %>
+    <%= select_tag :_relation_ids, options_for_select(current_subject.activity_relations(receiver).sort.map{ |r| [ r.name, r.id ] }), :id => 'security', :multiple => true, :title => t("activity.privacy.contacts.#{ receiver.class.to_s.underscore }", :receiver => receiver.name) %>
+  <% else %>
+    <div id="security_chzn" class="chzn-container chzn-container-multi">
+      <ul class="chzn-choices">
+        <li class="search-field">
+        <input type="text" value="<%= t "activity.privacy.contacts.#{ receiver.class.to_s.underscore }", :receiver => receiver.name %>" class="default" disabled="disabled">
+        </li>
+      </ul>
+    </div>
+  <% end %>
+</div>
 
 <div id="activities_share_btn">
   <%= submit_tag(t('share'), :class => "button submitActivity", :id => "masterSubmitButton") %>

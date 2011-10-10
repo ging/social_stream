@@ -57,13 +57,13 @@
     </div>
   </div>
   <div class="espacio"></div>
-  <div id="join_form">
-      <%= link_to image_tag("frontpage/join.gif", :alt=>"register"), new_user_registration_path, :class => "register_link" %>
-  </div>
 </div>
 
 <div id="wrapper_right">
   <%= render :partial => 'frontpage/caracteristics' %>
 </div>
 
+<div id="join_form">
+  <%= button_to t('frontpage.register'), new_user_registration_path, :method=> :get %>
+</div>
 <div id="espacio_body_bottom"></div>

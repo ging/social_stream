@@ -7,6 +7,8 @@ $(function() {
   $('#new_<%= SocialStream.activity_forms.first %>').show();
   $('#select_<%= SocialStream.activity_forms.first %>').addClass('selected');
   $('#security').chosen();
+  // Remove width calculation
+  $('#securities input.default').css('width', '');
 });
 
 

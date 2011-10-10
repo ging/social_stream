@@ -281,7 +281,7 @@ class Activity < ActiveRecord::Base
 
     self.relation_ids =
       if contact.reflexive?
-        Array(receiver.relation_public.id)
+        receiver.relation_customs.map(&:id)
       else
         receiver.relation_customs.allow(contact.sender, 'create', 'activity').map(&:id)
       end

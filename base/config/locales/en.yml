@@ -15,6 +15,14 @@ en:
       new: "New password"
       retype: "Retype new password"
     privacy: "Privacy"
+  activerecord:
+    attributes:
+      user:
+        email: "Email"
+        name: "Name"
+        password: "Password"
+        password_confirmation: "Confirm password"
+        remember_me: "Remember me"
   activity:
     audience:
       visible: "Shared with %{audience}"
@@ -25,6 +33,10 @@ en:
     like: "I like"
     one: "Activity"
     other: "Activities"
+    privacy:
+      contacts:
+        user: "Contacts of %{receiver}"
+        group: "Members of %{receiver}"
     sending: "Sending"
     title: "Activities"
     to_comment: "Comment"
@@ -60,8 +72,6 @@ en:
     create: "Create"
     save: "Save"
     update: "Update"
-  cleditor:
-    controls: "bold italic underline strikethrough subscript superscript | size style | bullets | image link unlink"
   comment:
     input: "Write a comment..."
     confirm_delete: "Delete comment?"
@@ -108,6 +118,13 @@ en:
   delete:
     confirm: Delete %{element}}?
   devise:
+    links:
+      sign_in: "Sign in"
+      sign_up: "Sign up"
+      forgot_password: "Forgot you password?"
+      confirmation_instructions: "Didn't receive confirmation instructions?"
+      unlock_instructions: "Didn't receive unlock instructions?"
+      sign_in_with: "Sign in with %{provider}"
     passwords:
       confirm: "Confirm password"
       forgot: "Forgot your password?"
@@ -137,6 +154,7 @@ en:
       default: "Meet"
       sentence1: "Meet interesting people and groups"
       sentence2: "Find last activity of your contacts"
+    register: "Register now!"
     share:
       default: "Share"
       sentence1: "Your proyects and activities"
@@ -192,6 +210,10 @@ en:
     base: "You are here"
     separator: " > "
   mailboxer:
+    form:
+      body: "Body"
+      recipients: "Recipients"
+      subject: "Subject"
     message_mailer:
       subject_new: "%{subject}"
       subject_reply: "%{subject}"
