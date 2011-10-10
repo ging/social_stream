@@ -22,6 +22,7 @@ es:
         name: "Nombre"
         password: "Contraseña"
         password_confirmation: "Confirmar contraseña"
+        remember_me: "Recuérdame"
   activity:
     audience:
       visible: "Compartido con %{audience}"
