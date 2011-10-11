@@ -58,10 +58,16 @@ span.ui-helper-hidden {
 }
 
 #contact-form label {
-  display: block;
-  font-family: sans-serif;
   padding: 2px;
+}
+
+#contact-form label[for=contact_message] {
+  display: block;
   margin-left: 20px;
+}
+
+#contact-form .new_contact_text_area {
+	width: 99%;
 }
 
 span.ui-radio-state-hover, span.ui-checkbox-state-hover {
@@ -92,4 +98,3 @@ span.ui-radio-state-checked-hover {
 .checked-option{
   background-color: $secondary-color;
 }
-

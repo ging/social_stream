@@ -1,16 +1,23 @@
 <div id="contact-form">
   <%= form_for @contact do |f| %>
-    <%= hidden_field_tag "contact[relation_ids][]", "gotcha" %>
+    <%= hidden_field_tag "contact[relation_ids][]", "0" %>
+
+    <% if @contact.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= t 'contact.error_count', :count => @contact.errors.count %></h2>
+
+        <ul>
+        <% @contact.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
 
     <ul>
     <% current_subject.relation_customs.each do |relation| %>
       <li>
-        <div contain="<%= dom_id relation %>">
-          <input id="<%= dom_id relation %>" name="contact[relation_ids][]" value="<%= relation.id %>" type="checkbox" <%= raw('checked="checked"') if @contact.relation_ids.include?(relation.id) %> />
-          <label for="<%= dom_id relation %>">
-            <%= relation.name %>
-          </label>
-        </div>
+      <%= check_box_tag "contact[relation_ids][]", relation.id, f.object.relation_ids.include?(relation.id), :id => "contact_relation_ids_#{ relation.id }" %><%= label_tag "contact_relation_ids_#{ relation.id }", relation.name %>
       </li>
     <% end %>
     </ul>

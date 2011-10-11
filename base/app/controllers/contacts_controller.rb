@@ -23,11 +23,8 @@ class ContactsController < ApplicationController
 
   def update
     # FIXME: This should be in the model
-    if params[:contact][:relation_ids].present? &&
-       params[:contact][:relation_ids].delete("gotcha") &&
-       params[:contact][:relation_ids].blank?
-      params[:contact][:relation_ids] << @contact.sender.relation_public.id
-    end
+    params[:contact][:relation_ids].present? &&
+     params[:contact][:relation_ids].delete("0")
 
     if @contact.update_attributes(params[:contact])
       redirect_to @contact.receiver_subject

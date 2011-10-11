@@ -17,6 +17,8 @@ es:
     privacy: "Privacidad"
   activerecord:
     attributes:
+      contact:
+        relation_ids: "El tipo de contacto"
       user:
         email: "Correo"
         name: "Nombre"
@@ -90,6 +92,9 @@ es:
     edit:
       title: "Editar contacto con %{name}"
       submit: "Editar contacto"
+    error_count:
+      one: "1 error impidió que se guardara este contacto:"
+      other: "%{count} errores impidieron que se guardara este contacto"
     graph:
       one: "Gráfico"
       empty: "Lo sentimos pero aún no tienes contactos, pero ¡puedes probar a buscar en la caja de búsqueda!"
