@@ -25,8 +25,15 @@ es:
         remember_me: "Recuérdame"
   activity:
     audience:
-      visible: "Compartido con %{audience}"
-      hidden: "Compartido con esferas de %{audience}"
+      hidden:
+        summary: "Restringido"
+        full: "Compartido con contactos de %{audience}"
+      public:
+        summary: "Público"
+        full: "Accesible por toda Internet"
+      visible:
+        summary: "Restringido"
+        full: "Compartido con %{audience}"
     confirm_delete: "¿Borrar actividad?"
     delete: "Borrar"
     last: "Últimas actividades"
