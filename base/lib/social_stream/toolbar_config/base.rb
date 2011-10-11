@@ -4,7 +4,7 @@ module SocialStream
       # Base toolbar items
       def home_toolbar_items
         Array.new.tap do |items|
-        #Contacts
+          #Contacts
           items << {
             :key => :contacts,
             :name => image_tag("btn/btn_friend.png")+t('contact.other'),
@@ -15,6 +15,17 @@ module SocialStream
               {:key => :contacts_graph, :name => image_tag("btn/btn_friend.png")+t('contact.graph.one'), :url => ties_path},
               {:key => :invitations, :name => image_tag("btn/btn_friend.png")+t('contact.pending.other'), :url => pending_contacts_path},
               {:key => :invitations, :name => image_tag("btn/btn_invitation.png")+t('invitation.toolbar'), :url => new_invitation_path}
+            ]
+          }
+
+          # Groups
+          items << {
+            :key  => :groups,
+            :name => image_tag("btn/btn_group.png") + t('group.other'),
+            :url  => '#',
+            :options => { :link => { :id => "groups_menu" } },
+            :items => [
+              {:key => :new_group ,:name => image_tag("btn/btn_group.png")+t('group.new.action'),:url => new_group_path}
             ]
           }
         end

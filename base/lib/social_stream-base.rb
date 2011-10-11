@@ -77,7 +77,7 @@ module SocialStream
   @@objects = [ :post, :comment ]
 
   mattr_accessor :activity_forms
-  @@activity_forms = [ :post, :group ]
+  @@activity_forms = [ :post ]
   
   mattr_accessor :quick_search_models
   @@quick_search_models = [ :user, :group, :post ]

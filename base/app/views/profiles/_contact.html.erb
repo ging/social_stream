@@ -63,7 +63,7 @@
               </div>
             </div>
           <%end%>
-          <% if @profile.subject.email? %>  
+          <% if @profile.subject.email? && user_signed_in? %>  
             <div class="row">
               <div class="label">
                 <%=t('profile.email')%>:

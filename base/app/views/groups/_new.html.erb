@@ -12,8 +12,8 @@
 <% end %>
 
 <%= location(
-    link_to(image_tag("btn/btn_group.png", :class => "menu_icon")+t('group.other'), groups_path),
-    link_to(image_tag("btn/btn_group.png", :class => "menu_icon")+t('group.new.action'), new_group_path)
+    link_to(t('group.other'), groups_path),
+    link_to(t('group.new.action'), new_group_path)
   ) %>
 
 <div class="space_center"></div>
