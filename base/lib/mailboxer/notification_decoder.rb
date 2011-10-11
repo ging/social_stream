@@ -13,10 +13,11 @@ module Mailboxer
       notification_text = notification_text.gsub(/\%\{sender.name\}/,truncate_name(activity.sender.name))
 
       if activity.receiver.subject.is_a?(User)
-        notification_text = notification_text.gsub(/\%\{whose\}/,"your")
-        notification_text = notification_text.gsub(/\%\{who\}/,"you")
+        notification_text = notification_text.gsub(/\%\{whose\}/,t('notification.whose.user'))
+        notification_text = notification_text.gsub(/\%\{who\}/,t('notification.who.user'))
       else
-        notification_text = notification_text.gsub(/\%\{whose\}/,truncate_name(activity.receiver.name)+"'s")
+        notification_text = notification_text.gsub(/\%\{whose\}/,t('notification.whose.others', 
+                                                    :receiver => truncate_name(activity.receiver.name)))
         notification_text = notification_text.gsub(/\%\{who\}/,truncate_name(activity.receiver.name))
       end
 
@@ -49,10 +50,11 @@ module Mailboxer
       notification_text = notification_text.gsub(/\%\{sender.name\}/,truncate_name(activity.sender.name))
 
       if activity.receiver.subject.is_a?(User)
-        notification_text = notification_text.gsub(/\%\{whose\}/,"your")
-        notification_text = notification_text.gsub(/\%\{who\}/,"you")
+        notification_text = notification_text.gsub(/\%\{whose\}/,t('notification.whose.user'))
+        notification_text = notification_text.gsub(/\%\{who\}/,t('notification.who.user'))
       else
-        notification_text = notification_text.gsub(/\%\{whose\}/,truncate_name(activity.receiver.name)+"'s")
+        notification_text = notification_text.gsub(/\%\{whose\}/,t('notification.whose.others', 
+                                                  :receiver => truncate_name(activity.receiver.name)))
         notification_text = notification_text.gsub(/\%\{who\}/,truncate_name(activity.receiver.name))
       end
 

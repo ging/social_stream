@@ -1,2 +1,5 @@
-%{sender} added %{who} as contact.
-
+<% if activity.receiver.subject.is_a?(User) %>
+  <%= t('notification.added.user') %>
+<% else %>
+  <%= t('notification.added.other') %>
+<% end %>

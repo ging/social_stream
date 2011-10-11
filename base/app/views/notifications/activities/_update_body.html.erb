@@ -1,1 +1,5 @@
-%{sender} updated a %{object} in %{whose} wall. 
+<% if activity.receiver.subject.is_a?(User) %>
+  <%= t('notification.update.user') %>
+<% else %>
+  <%= t('notification.update.other') %>
+<% end %>

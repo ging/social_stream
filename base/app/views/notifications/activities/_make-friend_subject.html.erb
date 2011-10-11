@@ -1,2 +1,5 @@
-%{sender} also added %{who} as contact. 
-
+<% if activity.receiver.subject.is_a?(User) %>
+  <%= t('notification.makefriend.user') %>
+<% else %>
+  <%= t('notification.makefriend.other') %>
+<% end %>

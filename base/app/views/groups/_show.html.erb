@@ -15,8 +15,7 @@
   <%= render :partial => 'sidebar_show' %>
 <% end %>
 
-<%= location(link_to(image_tag("btn/btn_group.png", :class => "btn_config")+t('group.one')+": "+
-                      content_tag(:span, ( truncate_name sanitize @group.name), :class=>"name_group")))%>
+<%= location(link_to(t('group.one')+": "+truncate_name(sanitize @group.name)))%>
                       
 <% toolbar :profile => @group %>
 
