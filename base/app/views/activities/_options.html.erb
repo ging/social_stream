@@ -9,7 +9,7 @@
     <% if user_signed_in? %>
       ·
       <%= link_to activity.audience_in_words(current_subject, :details => :summary),
-                  '#',
+                  'javascript:;',
                   :class => 'activity_audience_summary' %>
       <div class="activity_audience">
         <%= activity.audience_in_words(current_subject) %>

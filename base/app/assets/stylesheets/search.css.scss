@@ -118,7 +118,23 @@
   overflow: hidden;
   text-align: center;
 }
-.subject_search_results img {
+.subject_search_results.post {
+  width: 560px;
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+}
+.subject_search_results.post .activity_objects a,.subject_search_results .brief a{
+  text-decoration: none;
+  color: inherit;
+}
+.subject_search_results .post.content_size {
+  word-wrap: break-word;
+}
+.subject_search_results .logo {
+  display:inline-block;
+}
+.subject_search_results .logo img {
   width: 48px;
   height: 48px;
 }

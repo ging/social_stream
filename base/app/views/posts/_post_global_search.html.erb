@@ -5,11 +5,13 @@
   </div>
   <div class="sub-block">
     <div class="brief">
+    <%= link_to post do%>
       <% text = excerpt(strip_tags(post.text),get_search_query_words.first,:radius => 25) %>
       <% if text.length < 60 %>
         <% text = excerpt(strip_tags(post.text),get_search_query_words.first,:radius => 30 + (60 - text.length)) %>
       <% end %>
       <%= highlight(text,get_search_query_words) %>
+      <% end %>
       <br>
     </div>
   </div>
