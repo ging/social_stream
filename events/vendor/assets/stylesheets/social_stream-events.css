@@ -9,9 +9,6 @@
  *= require_self
  *= require social_stream-base
  *= require social_stream-documents
- *= require fullcalendar.print
- *= require fullcalendar
- *= require jquery.ad-gallery
  *= require_tree . 
 */
 #filter_div
