@@ -6,6 +6,11 @@
 
 @import "colors";
 
+/* Fixes to tipsy, the plugin for tooltips */
+
+.tipsy{ background-image: url(../assets/tipsy.gif); }
+.tipsy-inner { background-color: $secondary-color; color: $sentence-color; }
+
 /****************** WALL - ACTIVITIES *********************/
 #wrapper_activities {}
 #wall{	text-align:center;}
