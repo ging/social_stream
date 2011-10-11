@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby
+#Set Connection Script
+#@author Aldo
+
+require 'logger'
+require 'rest_client'
+
+path = "/var/log/ejabberd/scripts.log"
+file = File.open(path, File::WRONLY | File::APPEND | File::CREAT)
+file.sync = true
+$logger = Logger.new(file)
+$logger.level = Logger::DEBUG
+
+def getOption(option)
+  File.open('/etc/ejabberd/ssconfig.cfg', 'r') do |f1|  
+    while line = f1.gets  
+      line = line.gsub(/\n/,'')
+      if line.match(/^#/)
+        #Comments
+      elsif line.match(/^#{option}/)
+        return line.gsub(/#{option}/,'')
+      end  
+    end  
+  end
+  return "Undefined"
+end
+
+$url = getOption("set_connection_api=")
+$pass = getOption("ejabberd_password=")
+
+
+def log(text)
+	$logger.info "Set Connection Script: " + text
+end
+
+def setConnection(username)
+  log("setConnection(#{username})")
+  RestClient.post($url, :name => username, :password => $pass)
+  return true
+
+  rescue RestClient::Exception
+    log("RestClient::Exception with setConnection(#{username})")
+end
+
+
+setConnection(ARGV[0])
+
+

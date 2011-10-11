@@ -1,0 +1,57 @@
+#!/usr/bin/env ruby
+#Presence Script
+#@author Aldo
+
+require 'logger'
+require 'rest_client'
+
+path = "/var/log/ejabberd/scripts.log"
+file = File.open(path, File::WRONLY | File::APPEND | File::CREAT)
+file.sync = true
+$logger = Logger.new(file)
+$logger.level = Logger::DEBUG
+
+def getOption(option)
+  File.open('/etc/ejabberd/ssconfig.cfg', 'r') do |f1|  
+    while line = f1.gets  
+      line = line.gsub(/\n/,'')
+      if line.match(/^#/)
+        #Comments
+      elsif line.match(/^#{option}/)
+        return line.gsub(/#{option}/,'')
+      end  
+    end  
+  end
+  return "Undefined"
+end
+
+$url = getOption("synchronize_presence_api=")
+$pass = getOption("ejabberd_password=")
+
+
+def log(text)
+	$logger.info "Synchronize Presence Script: " + text
+end
+
+def synchronize()
+  log("Start Synchronize")
+ 
+  users = []
+  output = %x[ejabberdctl connected-users]
+  sessions = output.split("\n")
+  
+  sessions.each do |session|
+	users << session.split("@")[0]
+  end
+
+  RestClient.post($url, :name => users, :password => $pass)
+  return true
+
+  rescue RestClient::Exception
+    log("RestClient::Exception")
+end
+
+
+synchronize()
+
+

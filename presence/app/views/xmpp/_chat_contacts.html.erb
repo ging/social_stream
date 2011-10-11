@@ -1,0 +1,46 @@
+      <div>
+      	
+			<div class="block">
+		    <div class="header">
+		      <%=image_tag("btn/btn_friend.png", :class => "header_icon")%>
+		      <div class="header_text">
+		        Chat
+		      </div>
+		    </div>
+				
+				<div id="status" class="dropdown">
+			    <dt><a href=""><span>Establecer estado</span></a></dt>
+			    <dd>
+			        <ul>
+					      <li><a href="#" class="option"><img class="flag" src="assets/status/available.png" alt=""/> Disponible <span class="value">chat</span></a></li>
+					      <li><a href="#" class="option"><img class="flag" src="assets/status/away.png" alt=""/> Ausente <span class="value">away</span></a></li>
+					      <li><a href="#" class="option"><img class="flag" src="assets/status/dnd.png" alt=""/> No molestar <span class="value">dnd</span></a></li>
+			        </ul>
+			    </dd>
+        </div>
+				
+		  </div>
+	
+	    <% @contacts = getChatContacts %>
+
+			<div class="users_connected">
+				<% unless @contacts.empty? %>
+				  <%@contacts.each do |contact| %>
+							<div class="user_presence" name='<%=contact.name%>' slug='<%=contact.slug%>'>
+								<a title='<%=contact.name%>' class="presence_user_link" width="28">
+								  <%=image_tag(contact.logo.url, :alt => contact.name , :title => contact.name, :size => "28x28")%>
+									<% if contact.user.status %>
+									<%=image_tag("status/" + contact.user.status + ".png", :class => "presence_status") %></a>
+									<% end %>
+								</a>
+              </div>
+				  <%end%>
+				<% end %>
+			</div>
+			
+			</div>
+ 	
+			<div id="chat_divs">	
+	      <div id="chat_div">
+	      </div>
+			</div>

@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby
+#Set Presence Script
+#@author Aldo
+
+require 'logger'
+require 'rest_client'
+
+path = "/var/log/ejabberd/scripts.log"
+file = File.open(path, File::WRONLY | File::APPEND | File::CREAT)
+file.sync = true
+$logger = Logger.new(file)
+$logger.level = Logger::DEBUG
+
+def getOption(option)
+  File.open('/etc/ejabberd/ssconfig.cfg', 'r') do |f1|  
+    while line = f1.gets  
+      line = line.gsub(/\n/,'')
+      if line.match(/^#/)
+        #Comments
+      elsif line.match(/^#{option}/)
+        return line.gsub(/#{option}/,'')
+      end  
+    end  
+  end
+  return "Undefined"
+end
+
+$url = getOption("set_presence_api=")
+$pass = getOption("ejabberd_password=")
+
+
+def log(text)
+	$logger.info "Set Presence Script: " + text
+end
+
+def setPresence(username,status)
+  log("setPresence(#{username},#{status})")
+  RestClient.post($url, :name => username, :status => status, :password => $pass)
+  return true
+
+  rescue RestClient::Exception
+    log("RestClient::Exception with setPresence(#{username})")
+end
+
+
+setPresence(ARGV[0],ARGV[1])
+
+

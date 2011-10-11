@@ -1,0 +1,114 @@
+#!/usr/bin/env ruby
+
+require 'logger'
+require 'rest_client'
+
+$stdout.sync = true
+$stdin.sync = true
+
+path = "/var/log/ejabberd/auth.log"
+file = File.open(path, File::WRONLY | File::APPEND | File::CREAT)
+file.sync = true
+$logger = Logger.new(file)
+$logger.level = Logger::DEBUG
+
+$logger.info "#{Process.pid}: Starting ejabberd authentication service"
+
+
+def getOption(option)
+  File.open('/etc/ejabberd/ssconfig.cfg', 'r') do |f1|  
+    while line = f1.gets  
+      line = line.gsub(/\n/,'')
+      if line.match(/^#/)
+        #Comments
+      elsif line.match(/^#{option}/)
+        return line.gsub(/#{option}/,'')
+      end  
+    end  
+  end
+  return "Undefined"
+end
+
+$accessUrl = getOption("auth_api=")
+$sslogin = getOption("ss_login=")
+$sspass = getOption("ss_password=")
+
+
+def auth(username, password)
+
+  #[TEST] Admin password
+  if username == "admin" and password == "pass"
+    return true
+  end
+
+  #Social Stream password
+  if username == $sslogin and password == $sspass
+    return true
+  end
+
+  begin
+    response = RestClient.post $accessUrl, :user => { :email => username , :password => password }
+
+    if response.code == 201
+      return true
+    else
+      return false
+    end
+  
+  rescue => e
+    
+    unless e.class.name == "RestClient::Unauthorized" and e.message == "401 Unauthorized"
+	$logger.error "#{Process.pid}: Exception in auth(username, password)"
+    	$logger.error "#{Process.pid}: #{e.class.name}: #{e.message}"
+    end
+
+    return false
+  end
+  
+end
+
+
+loop do
+  begin
+    $stdin.eof? # wait for input
+    start = Time.now
+
+    msg = $stdin.read(2)
+    length = msg.unpack('n').first
+
+    msg = $stdin.read(length)
+    cmd, *data = msg.split(":")
+
+    $logger.info "#{Process.pid}: Incoming Request: '#{cmd}'"
+    success = case cmd
+    
+    when "auth"
+      $logger.info "#{Process.pid}: Authenticating #{data[0]}@#{data[1]}"
+      $logger.info "#{Process.pid}: With password #{data[2]}"
+      #password = data[2]
+      
+      #Authorization condition for LOGIN
+      auth(data[0], data[2])
+      
+      
+    when "isuser"
+     
+      $logger.info "#{Process.pid}: Isuser #{data[0]}@#{data[1]}"
+
+      #Authorization condition for ISUSER (Add buddys)
+      true
+      
+    else
+      false
+    end
+
+    bool = success ? 1 : 0
+    $stdout.write [2, bool].pack("nn")
+    $logger.info "#{Process.pid}: Response: #{success ? "success" : "failure"}"
+  rescue => e
+    $logger.error "#{Process.pid}: #{e.class.name}: #{e.message}"
+    $logger.error "#{Process.pid}: " + e.backtrace.join("\n\t")
+    $logger.error "#{Process.pid}: Finish process"
+    break
+  end
+end

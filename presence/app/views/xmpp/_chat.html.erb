@@ -1,0 +1,59 @@
+  <% content_for :headers do %>
+	  <%= stylesheet_link_tag "chat.css", :media => "screen, projection" %>
+	  <%= javascript_include_tag 'jquery-ui-1.8.14.custom.min'%>
+	  <%= javascript_include_tag 'jquery.ui.chatbox'%>
+	  <%= javascript_include_tag 'jquery.tools.min'%>
+	  <%= javascript_include_tag 'strophe'%>
+	  <%= javascript_include_tag 'xmpp_client'%>
+		<%= javascript_include_tag 'store'%>
+  <% end %>
+	
+		
+	<script type="text/javascript">
+			
+		//Global variables
+		var BOSH_SERVICE = '<%=Socialstream::Presence::BOSH_SERVICE%>';
+		var domain = '<%=Socialstream::Presence::DOMAIN%>';
+    var user_name = '<%=current_user.name%>';
+		var user_slug = '<%=current_user.slug%>';
+    var user_jid = '<%=current_user.slug%>'+"@"+domain;
+		var sound_path = "/assets/audio/chat/onMessage"
+
+    function connectToServer(chatPassword){
+		  <%unless current_user.nil? %>
+				
+				//Get Password
+				if ((chatPassword!=null)&&(chatPassword!="")){
+					var password = chatPassword;
+				} else if ((window.sessionStorage)&&(sessionStorage.getItem("ss_user_pass") != null)) {
+          var password = sessionStorage.getItem("ss_user_pass");
+        } else {
+					return false;
+				}
+				
+				try {
+            //Connect actual user to the chat
+            connection = new Strophe.Connection(BOSH_SERVICE);
+            connection.connect(user_jid, password, onConnect);
+        } catch (err) {
+            //"Handle errors"
+						return false;
+        }
+
+				return true;
+      <%end%>
+		}
+
+		$(document).ready(function () {	
+			if (connectToServer(null)==false){
+				refreshChatWindow();
+			}
+		});
+		
+	</script>
+			
+	<div id="chat_partial">		
+	<%= render :partial => 'xmpp/chat_connecting' %>
+    <!-- <%= render :partial => 'xmpp/chat_connecting' %> -->
+		<!-- <%= render :partial => 'xmpp/chat_contacts' %> -->
+	</div>

@@ -1,0 +1,13 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Chat</title>
+</head>
+<body>
+	<script type="text/javascript">
+		sessionStorage.setItem("ss_user_pass","demonstration")
+	</script>
+  <%= render :partial => 'xmpp/chat' %>
+	<p> <a href="/test">Volver</a></p>
+</body>
+</html>

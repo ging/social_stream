@@ -1,0 +1,231 @@
+/* Chatbox style sheet */
+
+.ui-chatbox {
+    position: fixed;
+    bottom:0;
+    padding: 2px 2px 2px 2px;
+    padding: 2px 2px 2px 2px;
+    background:  #CCCCCC;
+}
+
+.ui-chatbox-titlebar {
+    padding: 3px 3px 3px 3px;
+    height: 20px;
+}
+
+.ui-chatbox-content {
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    border: 0px;
+}
+
+.ui-chatbox-log {
+    padding: 3px 3px 3px 3px;
+    height: 150px;
+    overflow-y: auto;
+    background: #FFFFFF;
+}
+
+.ui-chatbox-input {
+    padding: 3px 3px 3px 3px;
+    border-top: 1px solid grey;
+    overflow: hidden;
+    /* background: #FFFFFF; */
+}
+
+.ui-chatbox-input-box {
+    margin: 5px 5px 5px 5px;
+    border: 2px solid lightgrey;
+    height: 35px;
+}
+
+.ui-chatbox-icon {
+    float: right;
+}
+
+.ui-chatbox-input-focus {
+    border-color: #6699FF;
+}
+
+.ui-chatbox-msg {
+    float: left;
+    clear: both;
+}
+
+
+/* Presence Partial */
+
+div.user_presence {
+	float: left;
+	position: relative;
+	width: 30px;
+	height: 30px;
+}
+
+.user_presence p {
+  text-align: center;
+}
+
+#chat_partial {
+	width: 150px;
+	margin-top: 10px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.presence_status {
+	position: absolute;
+  bottom:0px;
+  right:0px;
+  border:none;
+}
+
+.users_connected{
+	display: block;
+	width: 150px;
+}
+
+.chat_off{
+  width: 150px;
+}
+
+#passwordFormChat{
+	width: 150px;
+  background-color: #1F4A75;
+  padding-top:3px;
+	padding-bottom:1px;
+}
+
+label.chatPasswordTitle{
+  color: white;
+  margin-left: 5px;
+}
+
+input.chat_password{
+  width: 135px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+input.connectChatButton{
+	text-align: center;
+}
+
+
+
+
+
+/* Tooltip */
+
+.tooltip {
+  display:none;
+  font-size:12px;
+  height:21px;
+  width:160px;
+  padding: 18px 25px 15px 25px;
+	margin: -15px 0px 0px 0px;
+  color:#fff;
+	background:transparent url(black_arrow3.png);
+	text-align: center;
+	/* border: 5px solid red; */
+}
+
+
+/* Status style sheet */
+
+
+#status{
+	z-index: 1;
+}
+
+.desc { 
+  color:#6b6b6b;
+}
+
+.desc a {
+	color:#0092dd;
+}
+        
+.dropdown dd, .dropdown dt, .dropdown ul { 
+  margin:0px; 
+	padding:0px; 
+}
+
+.dropdown dd { 
+  position:relative; 
+}
+
+.dropdown a, .dropdown a:visited { 
+  color:#1F4A75; 
+	text-decoration:none; 
+	outline:none;
+}
+
+.dropdown a:hover { 
+  color:#1F4A75;
+}
+.dropdown dt a:hover { 
+  color:#1F4A75; 
+	border: 1px solid #1F4A75;
+}
+
+.dropdown dt a {
+	background:#DFECF1 url(btn/arrowBlue.png) no-repeat scroll right center; 
+	display:block; 
+	padding-right:20px;
+  border:1px solid #DFECF1; 
+	width:128px;
+}
+
+
+
+.dropdown dt a span {
+	cursor:pointer; 
+	display:block; 
+	padding:5px;
+}
+	
+.dropdown dd ul { 
+  background:#DFECF1 none repeat scroll 0 0; 
+	border:1px solid #DFECF1; color:#DFECF1; 
+	display:none;
+  left:0px; 
+	padding:5px 0px; 
+	position:absolute; 
+	top:2px; 
+	width:auto; 
+	min-width:170px; 
+	list-style:none;
+	z-index: 1;
+}
+	
+.dropdown span.value { 
+  display:none;
+}
+
+.dropdown dd ul li a { 
+  padding:5px; 
+	display:block;
+}
+
+.dropdown dd ul li a:hover { 
+  background-color:#D4E5EF;
+}
+
+.dropdown img.flag { 
+  border:none; 
+	vertical-align:middle; 
+	margin-left:10px; 
+}
+
+.flagvisibility { 
+  display:none;
+}
+
+.input_select{ 
+  width: 100%; 
+	background-color: #D0C9AF; 
+	margin-top:5px;
+	margin-bottom:5px; 
+}

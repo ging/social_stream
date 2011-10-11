@@ -1,0 +1,35 @@
+     <script type="text/javascript">
+        $(document).ready(function () { 			
+		      if ((window.sessionStorage) && (sessionStorage.getItem("ss_user_pass") != null)) {
+		        $("#passwordFormChat").hide();
+		      } else {
+		        $("#passwordFormChat").show();
+		      }
+					
+		      $('.connectChatButton').bind('click', function () {
+		        connectToServer($('#user_password').val());
+		      });
+					
+					$('.storePass').bind('click', function () {
+            storePassword();
+          });
+					
+        });
+      </script>
+			
+			<div class="block">
+        <div class="header">
+          <%=image_tag("btn/btn_friend.png", :class => "header_icon")%>
+          <div class="header_text">
+            Chat Disconnected
+          </div>
+        </div>
+      </div>
+  
+      <div class="chat_off">
+      	<div id="passwordFormChat">
+      	  <label for="user_password" class="chatPasswordTitle">Password</label>
+          <input id="user_password" class="chat_password" type="password"></input>
+				</div>
+				<input class="other_blue connectChatButton storePass" value="Connect">
+      </div>
