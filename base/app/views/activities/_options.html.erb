@@ -1,12 +1,21 @@
 <div class="activity_options">
-    <% if user_signed_in? %>
-      <div class="security"><%= image_tag('btn/btn_security.png', :title => activity.audience_in_words(current_subject)) %></div>
-    <% end %>
     <div class="post_time_ago"><%= t('time.ago', :time => time_ago_in_words(activity.created_at)) %></div>
     <% if activity.is_root? && user_signed_in? %>
       <div class="verb_comment"> · <%= link_to t('activity.to_comment'), "#", :class => "to_comment" %> </div>
     <% end %>
-      <div class="verb_like" id="like_<%= dom_id(activity) %>"> · <%= link_like(activity)%></div>
+
+    <div class="verb_like" id="like_<%= dom_id(activity) %>"> · <%= link_like(activity)%></div>
+
+    <% if user_signed_in? %>
+      ·
+      <%= link_to activity.audience_in_words(current_subject, :details => :summary),
+                  '#',
+                  :class => 'activity_audience_summary' %>
+      <div class="activity_audience">
+        <%= activity.audience_in_words(current_subject) %>
+      </div>
+    <% end %>
+
     <% if activity.delete_object_by?(current_subject) %>
       <div class="verb_delete"> 
         · <%= link_to t('activity.delete'), activity.direct_object , :confirm => t('confirm_delete', 

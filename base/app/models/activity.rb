@@ -262,13 +262,26 @@ class Activity < ActiveRecord::Base
   end
 
   # The {Relation} with which activity is shared
-  def audience_in_words(subject)
-    visible_relations =
-      relations.select{ |r| r.actor_id == Actor.normalize_id(subject) || r.is_a?(Relation::Public) }
+  def audience_in_words(subject, options = {})
+    options[:details] ||= :full
 
-    visible_relations.present? ?
-      I18n.t('activity.audience.visible', :audience => visible_relations.map(&:name).join(", ")) :
-      I18n.t('activity.audience.hidden', :audience => relations.map(&:actor).map(&:name).join(", "))
+    public_relation = relations.select{ |r| r.is_a?(Relation::Public) }
+
+    visibility, audience =
+      if public_relation.present?
+        [ :public, nil ]
+      else
+        visible_relations =
+          relations.select{ |r| r.actor_id == Actor.normalize_id(subject)}
+
+        if visible_relations.present?
+          [ :visible, visible_relations.map(&:name).join(", ") ]
+        else
+          [ :hidden, relations.map(&:actor).map(&:name).join(", ") ]
+        end
+      end
+
+    I18n.t "activity.audience.#{ visibility }.#{ options[:details] }", :audience => audience
   end
 
   private
@@ -279,6 +292,7 @@ class Activity < ActiveRecord::Base
   def fill_relations
     return if relation_ids.present?
 
+    # FIXME: repeated in SocialStream::Models::Object#_relation_ids
     self.relation_ids =
       if contact.reflexive?
         receiver.relation_customs.map(&:id)

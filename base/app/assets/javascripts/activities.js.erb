@@ -1,5 +1,6 @@
 //= require jquery.livequery
 //= require chosen.jquery
+//= require jquery.tipsy
 //
 //initial state
 $(function() {
@@ -9,6 +10,8 @@ $(function() {
   $('#security').chosen();
   // Remove width calculation
   $('#securities input.default').css('width', '');
+
+  setActivityPrivacyTooltips();
 });
 
 
@@ -193,4 +196,22 @@ $('#left_scroll img').livequery("click",function(){
 
 
 });
+
+setActivityPrivacyTooltips = function(activityId) {
+  var fullId = '.activity_audience';
+  var summaryId = '.activity_audience_summary';
+
+  if (activityId != undefined) {
+    fullId = '#' + activityId + ' ' + fullId;
+    summaryId = '#' + activityId + ' ' + summaryId;
+  }
+
+  $(fullId).hide();
+  $(summaryId).tipsy({
+    html: true,
+    title: function(){
+      return $(this).siblings('.activity_audience').html();
+    }
+  });
+};
 

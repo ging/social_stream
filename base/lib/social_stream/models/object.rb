@@ -73,8 +73,9 @@ module SocialStream
             if _contact_id.nil?
               nil
             else
+              # FIXME: repeated in Activity#fill_relations
               if _contact.reflexive?
-                Array.wrap(_contact.sender.relation_public.id)
+                _contact.sender.relation_customs.map(&:id)
               else
                  _contact.
                    receiver.
