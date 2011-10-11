@@ -181,7 +181,8 @@ class Contact < ActiveRecord::Base
   end
 
   def set_inverse
-    inverse = Contact.sent_by(receiver_id).received_by(sender_id).first
+    
+    inverse = self.class.sent_by(receiver_id).received_by(sender_id).first
 
     return if inverse.blank?
 
