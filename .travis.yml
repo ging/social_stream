@@ -4,8 +4,8 @@ rvm:
   - jruby
   - ree
 env:
-  - DB=mysql
-  - DB=postgres
+  - DB=mysql JRUBY_OPTS='–server -Dnative.enabled=true'
+  - DB=postgres JRUBY_OPTS='–server -Dnative.enabled=true'
 before_script:
   - "mysql -e 'create database social_stream_test;'"
   - "psql -c 'create database social_stream_test;' -U postgres"
