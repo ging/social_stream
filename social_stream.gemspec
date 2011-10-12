@@ -20,7 +20,14 @@ Gem::Specification.new do |s|
   # Integration testing
   s.add_development_dependency('capybara', '~> 0.3.9')
   # Testing database
-  s.add_development_dependency('sqlite3-ruby')
+  case ENV['DB']
+  when 'mysql'
+    s.add_development_dependency('mysql2')
+  when 'postgres'
+    s.add_development_dependency('pg')
+  else
+    s.add_development_dependency('sqlite3')
+  end
   # Debugging
   if RUBY_VERSION < '1.9'
     s.add_development_dependency('ruby-debug', '~> 0.10.3')
