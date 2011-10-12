@@ -1,11 +1,10 @@
 rvm:
   - 1.8.7
   - 1.9.2
-  - jruby
   - ree
 env:
-  - DB=mysql JRUBY_OPTS='–server -Dnative.enabled=true'
-  - DB=postgres JRUBY_OPTS='–server -Dnative.enabled=true'
+  - DB=mysql
+  - DB=postgres
 before_script:
   - "mysql -e 'create database social_stream_test;'"
   - "psql -c 'create database social_stream_test;' -U postgres"
