@@ -6,6 +6,7 @@ rvm:
 env:
   - DB=mysql
   - DB=postgres
+  - JRUBY_OPTS='–server -Dnative.enabled=true'
 before_script:
   - "mysql -e 'create database social_stream_test;'"
   - "psql -c 'create database social_stream_test;' -U postgres"
