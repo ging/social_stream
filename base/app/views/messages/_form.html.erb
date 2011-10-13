@@ -33,7 +33,7 @@
 		<%= text_area_tag :body, nil,:rows =>6, :cols=> 53, :class => "required form_tag", :maxlength => 5000 %>
 	</div>
 	<div class="actions center">
-		<%= submit_tag "Send Message", :name => :send_message, :class => "button" %>
+		<%= submit_tag t('mailboxer.send'), :name => :send_message, :class => "button" %>
 	</div>
 </div>
 <% end %>

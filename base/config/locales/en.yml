@@ -222,15 +222,21 @@ en:
     base: "You are here"
     separator: " > "
   mailboxer:
+    delete: "Delete"
+    delete_confirm: "Do you want to move '%{object}' to trash?"
     form:
       body: "Body"
       recipients: "Recipients"
       subject: "Subject"
+    mark_as_read: "Mark as read"
     message_mailer:
       subject_new: "%{subject}"
       subject_reply: "%{subject}"
     notification_mailer:
       subject: "%{subject}"
+    reply: "Reply"
+    send: "Send message
+    sent: "Your message was sent"
   menu:
     options: "Menu Options"
     information: "Information"

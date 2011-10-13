@@ -219,15 +219,21 @@ es:
     base: "Estás aquí"
     separator: " > "
   mailboxer:
+    delete: "Borrar"
+    delete_confirm: "¿Quieres enviar '%{object}' a la papelera?"
     form:
       body: "Mensaje"
       recipients: "Para"
       subject: "Asunto"
+    mark_as_read: "Marcar como leido"
     message_mailer:
       subject_new: "%{subject}"
       subject_reply: "%{subject}"
     notification_mailer:
-      subject: "%{subject}"
+      subject: "%{subject}"    
+    reply: "Contestar"
+    send: "Enviar mensaje"
+    sent: "Tu mensaje fue enviado"
   menu:
     options: "Opciones"
     information: "Información"
