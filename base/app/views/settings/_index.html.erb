@@ -1,12 +1,17 @@
-<%= location(link_to(image_tag("btn/btn_config.png", :class => "btn_config")+t('account.one')+": "+t('account.settings')))%>
 <br class="clearfloat" />
 <div class="space_center">
 </div>
 <h2><%= t('settings.for')%> <%= current_subject.name %></h2>
 <div class="space_center">
 </div>
+<% if current_subject==current_user %>
+<%= render :partial => "devise/registrations/edit_user", :locals => { :resource => current_user, :resource_name => :user }%>
+<% end %>
 <%= render :partial => "notifications" %>
 <% if current_subject.respond_to? :authentication_token%>
 <%= render :partial => "api_key" %>
 <% end %>
 <%= render :partial => "contacts" %>
+<% if current_subject==current_user %>
+<%= render :partial => "devise/registrations/delete_account", :locals => { :resource => current_user, :resource_name => :user }%>
+<% end %>

@@ -1,0 +1,87 @@
+<% content_for :javascript do %>
+$(".user_edit").validate({errorClass: "validation_error"});
+<%end%>
+<div class="block" id="password_form">
+  <div class="header">
+    <div class="header_text">
+      <%= t("account.password.change")%>
+    </div>
+    <div class="header_icon_right">
+      <%= link_to (image_tag('btn/edit.png')),  "javascript:showSettings(\"password_form\");" %>
+    </div>
+  </div>
+  <div id="password_form_briefing" class="settings_briefing content">
+    <div class="form_row">
+      <%= t('settings.password_change.briefing')%>
+    </div>
+  </div>
+  <div class="content settings_content" id="password_form_content" style="display:none;">
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label t('account.password.new') %>
+      </div>
+      <div class="form_field">
+        <%= f.password_field :password, :class => "form_tag" %>
+      </div>
+    </div>
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label t('account.password.retype') %>
+      </div>
+      <div class="form_field">
+        <%= f.password_field :password_confirmation, :class => "form_tag" %>
+      </div>
+    </div>
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label :current_password %>
+      </div>
+      <div class="form_field">
+        <%= f.password_field :current_password, :class => "form_tag" %>
+      </div>
+    </div>
+    <div class="form_row space_center">
+      <%= f.submit t('button.update'), :class => "button" %>
+    </div>
+    <% end%>
+  </div>
+</div>
+<div class="block" id="email_form">
+  <div class="header">
+    <div class="header_text">
+      <%= t("account.email.change")%>
+    </div>
+    <div class="header_icon_right">
+      <%= link_to (image_tag('btn/edit.png')),  "javascript:showSettings(\"email_form\");" %>
+    </div>
+  </div>
+  <div id="email_form_briefing" class="settings_briefing content">
+    <div class="form_row">
+      <%= t('settings.email_change.briefing')%>
+    </div>
+  </div>
+  <div class="content settings_content" id="email_form_content" style="display:none;">
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label :email %>
+      </div>
+      <div class="form_field">
+        <%= f.email_field :email, :class => "required form_tag" %>
+      </div>
+    </div>
+    <div class="form_row">
+      <div class="form_label">
+        <%= f.label :current_password %>
+      </div>
+      <div class="form_field">
+        <%= f.password_field :current_password, :class => "required form_tag" %>
+      </div>
+    </div>
+    <div class="form_row space_center">
+      <%= f.submit t('button.update'), :class => "button" %>
+    </div>
+    <% end%>
+  </div>
+</div>

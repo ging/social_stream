@@ -377,11 +377,6 @@ es:
     write: "Escribe tu búsqueda..."
     wrong: "Parece que hay un problema con el motor de búsqueda"
   settings:
-    error: "Hubo errores al guardar los cambios"
-    for: "Ajustes para"
-    main: "Ajustes principales"
-    one: "Ajustes"
-    success: "Ajustes guardados con éxito"
     api_key:
       briefing: "Gestiona tu clave API"
       confirm: "¿Estás seguro?"
@@ -389,6 +384,17 @@ es:
       explanation: "Ésta es tu clave API"
       name: "Clave API"
       regenerate: "Regenerar clave API"
+    cancel_account:
+      briefing: "Te permite cancelar tu cuenta"
+    email_change:
+      briefing: "Cambia tu email"
+    error: "Hubo errores al guardar los cambios"
+    for: "Ajustes para"
+    main: "Ajustes"
+    manage:
+      name: "Administrar contactos"
+      briefing: "Ajustes de contactos"
+      explanation: "Cambiar los permisos de contactos"
     notifications:
       briefing: "Ajustes sobre notificaciones y alertas por correo"
       name: "Notificaciones"
@@ -396,6 +402,10 @@ es:
         name: "Mandarme un correo cuando me llega una notificación"
         always: "Siempre"
         never: "Nunca"
+    one: "Ajustes"
+    password_change:
+      briefing: "Cambia tu contraseña"
+    success: "Ajustes guardados con éxito"
   share: "Compartir"
   sign_in: "Entrar"
   sign_out: "Salir"

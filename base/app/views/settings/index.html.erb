@@ -6,10 +6,13 @@
   <%= render :partial => 'home/sidebar' %>
 <% end %>
 
-<% toolbar %>
+<% toolbar :profile => current_subject %>
 
 <% content_for :javascript do %>
     
 <% end %>
+<%= location(t('account.one'), 
+  link_to(t('settings.main'), settings_path)
+) %>
 
 <%= render :partial => 'index' %>

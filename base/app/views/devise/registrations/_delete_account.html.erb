@@ -1,0 +1,20 @@
+<div class="block" id="cancel_account">
+  <div class="header">
+    <div class="header_text">
+      <%= t("account.cancel")%>
+    </div>
+    <div class="header_icon_right">
+      <%= link_to (image_tag('btn/edit.png')),  "javascript:showSettings(\"cancel_account\");" %>
+    </div>
+  </div>
+  <div id="cancel_account_briefing" class="settings_briefing content">
+    <div class="form_row">
+      <%= t('settings.cancel_account.briefing')%>
+    </div>
+  </div>
+  <div class="content settings_content" id="cancel_account_content" style="display:none;">
+    <div class="form_row">
+      Unhappy? <b><%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</b>
+    </div>
+  </div>
+</div>

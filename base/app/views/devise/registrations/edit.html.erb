@@ -1,98 +1,21 @@
 <% toolbar :profile => current_subject %>
-
+<% content_for :sidebar do %>
+  <%= render :partial => 'home/sidebar' %>
+<% end %>
 <%= location(t('account.one'), 
-  link_to(t('account.edit'), edit_user_registration_path)
+  link_to(t('settings.main'), settings_path)
 ) %>
-
-<%= devise_error_messages! %>
-
-<% content_for :javascript do %>
-  $(".user_edit").validate({errorClass: "validation_error"});
-<%end%>
-
-<div class="space_center"></div>
-<h2><%= t('account.edit') %></h2>
-<div class="space_center"></div>
-
-<div class="block" id="password_form">
-  <div class="header">
-    <div class="header_text">
-      <%=t("account.password.change")%>
-    </div>
-  </div>
-  <div class="space_center"></div>
-  <div >
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-    <div class="form_row">
-      <div class="form_label">
-        <%= f.label t('account.password.new') %>
-      </div>
-      <div class="form_field">
-        <%= f.password_field :password, :class => "form_tag" %>
-      </div>
-    </div>
-    <div class="form_row">
-      <div class="form_label">
-        <%= f.label t('account.password.retype') %>
-      </div>
-      <div class="form_field">
-        <%= f.password_field :password_confirmation, :class => "form_tag" %>
-      </div>
-    </div>
-    <div class="form_row">
-      <div class="form_label">
-        <%= f.label :current_password %>
-      </div>
-      <div class="form_field">
-        <%= f.password_field :current_password, :class => "form_tag" %>
-      </div>
-    </div>
-    <div class="form_row space_center">
-      <%= f.submit t('button.update'), :class => "button" %>
-    </div>
-    <% end%>
-  </div>
+<br class="clearfloat" />
+<div class="space_center">
 </div>
-<div class="block" id="email_form">
-  <div class="header">
-    <div class="header_text">
-      <%=t("account.email.change")%>
-    </div>
-  </div>
-  <div class="space_center"></div>
-  <div >
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-    <div class="form_row">
-      <div class="form_label">
-        <%= f.label :email %>
-      </div>
-      <div class="form_field">
-        <%= f.email_field :email, :class => "required form_tag" %>
-      </div>
-    </div>
-    <div class="form_row">
-      <div class="form_label">
-        <%= f.label :current_password %>
-      </div>
-      <div class="form_field">
-        <%= f.password_field :current_password, :class => "required form_tag" %>
-      </div>
-    </div>
-    <div class="form_row space_center">
-      <%= f.submit t('button.update'), :class => "button" %>
-    </div>
-    <% end%>
-  </div>
+<h2><%= t('settings.for')%> <%= current_subject.name %></h2>
+<div class="space_center">
 </div>
-<div class="block" id="cancel_account">
-  <div class="header">
-    <div class="header_text">
-      <%=t("account.cancel")%>
-    </div>
-  </div>
-  <div class="space_center"></div>
-  <div class="form_row">
-    Unhappy? <b><%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</b>
-  </div>
-</div>
-<div class="space_center"></div>
+<%= render :partial => "edit_user"%>
+
+<%= render :partial => "settings/notifications" %>
+<% if current_subject.respond_to? :authentication_token%>
+<%= render :partial => "settings/api_key" %>
+<% end %>
+<%= render :partial => "settings/contacts" %>
+<%= render :partial => "delete_account"%>

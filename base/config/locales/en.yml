@@ -382,15 +382,6 @@ en:
     write: "Write your query ..."
     wrong: "There seems to be a problem with the search engine"
   settings:
-    error: "Some errors raised when saving your changes"
-    for: "Settings for"
-    main: "Settings"
-    manage:
-      name: "Admin Contacs"
-      briefing: "Settings contacts preferences"
-      explanation: "Change contacts permissions"
-    one: "Settings"
-    success: "Your settings where correctly changed"
     api_key:
       briefing: "Manage your API key"
       confirm: "Are you sure?"
@@ -398,6 +389,17 @@ en:
       explanation: "This is your API key"
       name: "API Key"
       regenerate: "Regenerate API key"
+    cancel_account:
+      briefing: "Lets you cancel your account"
+    email_change:
+      briefing: "Change your email"
+    error: "Some errors raised when saving your changes"
+    for: "Settings for"
+    main: "Settings"
+    manage:
+      name: "Admin Contacs"
+      briefing: "Settings for contacts"
+      explanation: "Change contacts permissions"
     notifications:
       briefing: "Settings about notifications behaviour and mail alerts"
       name: "Notifications"
@@ -405,6 +407,10 @@ en:
         name: "Send me an email when I receive a notification"
         always: "Always"
         never: "Never"
+    one: "Settings"
+    password_change:
+      briefing: "Change your password"
+    success: "Your settings where correctly changed"
   share: "Share"
   sign_in: "Sign in"
   sign_out: "Sign out"
