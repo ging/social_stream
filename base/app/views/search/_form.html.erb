@@ -10,7 +10,7 @@
           <li><%= link_to content_tag(:span,t('search.show_all'),:class => params[:focus].blank? ? 'global selected' : 'global'), search_path(:search_query => params[:search_query]), :remote => true %></li>
           <% SocialStream.extended_search_models.each do |model_sym| %>
             <% selected_class = (params[:focus].present? and params[:focus].pluralize.downcase.eql?(model_sym.to_s.pluralize.downcase)) ? 'selected' : ''%>
-            <% disabled =ThinkingSphinx.count(get_search_query, :classes => [model_sym.to_s.classify.constantize])==0 %>
+            <% disabled = ThinkingSphinx.count(get_search_query, :classes => [model_sym.to_s.classify.constantize])==0 %>
             <% disabled_class = (disabled ? 'disabled' : '') %>
             <li>
             <% unless disabled %>
