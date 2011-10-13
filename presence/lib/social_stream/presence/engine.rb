@@ -18,29 +18,42 @@ module SocialStream
                
       initializer "social_stream-presence.synchronize" do
           #Synchronize User Presence
-          #Implement case XMMP Server Down
+          #Reset connected users when XMMP Server Down
           Thread.start {
             begin
-              client = Jabber::Client.new(Jabber::JID.new('social_stream-presence@trapo'))
+              #XMPP DOMAIN
+              domain = SocialStream::Presence.domain
+              #PASSWORD
+              password= SocialStream::Presence.password
+              #SS Username
+              ss_name = SocialStream::Presence.social_stream_presence_username
+              
+              ss_sid = ss_name + "@" + domain
+              client = Jabber::Client.new(Jabber::JID.new(ss_sid))
               client.connect
-              password = Socialstream::Presence::PASSWORD
               client.auth(password)
        
-              msg = Jabber::Message::new("social_stream-presence@trapo", "Synchronize")
+              msg = Jabber::Message::new(ss_sid, "Synchronize")
               msg.type=:chat
               client.send(msg)
               client.close()
             
-            rescue Errno::ECONNREFUSED
-              #XMPP Server Down
-              #Reset Connected Users
-              users = User.find_all_by_connected(true)
-              users.each do |user|
-                user.connected = false
-                user.save!
-              end
-              
-            end
+            rescue Exception => e
+              case e
+                when Errno::ECONNREFUSED
+                  begin
+                    users = User.find_all_by_connected(true)
+                    users.each do |user|
+                      user.connected = false
+                      user.save!
+                    end
+                    puts "Connection to XMPP Server refused: Reset Connected Users"
+                  rescue
+                  end
+                else
+                  puts "Unknown exception: #{e.to_s}"
+              end  
+            end           
           }
       end
       

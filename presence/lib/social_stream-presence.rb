@@ -7,6 +7,18 @@ module SocialStream
       autoload :BuddyManager, 'social_stream/presence/models/buddy_manager'
     end
 
+    mattr_accessor :domain
+    mattr_accessor :bosh_service
+    mattr_accessor :password
+    mattr_accessor :xmpp_server_password
+    mattr_accessor :social_stream_presence_username
+
+    class << self
+      def setup
+        yield self
+      end
+    end
+
   end
 end
 

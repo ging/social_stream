@@ -134,7 +134,7 @@ class XmppController < ApplicationController
   end
  
   def authorization
-    return params[:password] == Socialstream::Presence::XMPP_SERVER_PASSWORD
+    return params[:password] == SocialStream::Presence.xmpp_server_password
   end
   
   
@@ -159,15 +159,24 @@ class XmppController < ApplicationController
    
   def test
     puts "TEST"
-    client = Jabber::Client.new(Jabber::JID.new('social_stream-presence@trapo'))
-              client.connect
-              password = Socialstream::Presence::PASSWORD
-              client.auth(password)
+      
+    #XMPP DOMAIN
+    domain = SocialStream::Presence.domain
+    #PASSWORD
+    password= SocialStream::Presence.password
+    #SS Username
+    ss_name = SocialStream::Presence.social_stream_presence_username
+            
+    ss_sid = ss_name + "@" + domain 
+    client = Jabber::Client.new(Jabber::JID.new(ss_sid))
+    client.connect
+    client.auth(password)
    
-              #Sending a message
-              msg = Jabber::Message::new('social_stream-presence@trapo', "Message&order")
-              msg.type=:chat
-              client.send(msg) 
+    #Sending a message
+    msg = Jabber::Message::new(ss_sid, "Message&order")
+    msg.type=:chat
+    client.send(msg) 
+    client.close()
   end
   
   
