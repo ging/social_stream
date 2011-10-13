@@ -4,7 +4,7 @@
 <div class="action">
 	<% unless @box.eql?'trash' %><%= link_to(image_tag('btn/btn_delete.png', :atl => t('mailboxer.delete'), :title => t('mailboxer.delete')),
 	conversation_path(conversation, :location => 'conversation', :box => @box),
-	:confirm => t('mailboxer.delete_confirme', :object => conversation.subject),
+	:confirm => t('mailboxer.delete_confirm', :object => conversation.subject),
 	:method => :delete, :remote => true) %><% end %>
 </div>
 <div class="clearfloat">
