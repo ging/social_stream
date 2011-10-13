@@ -20,7 +20,7 @@ module Mailboxer
                                                     :receiver => truncate_name(activity.receiver.name)))
         notification_text = notification_text.gsub(/\%\{who\}/,truncate_name(activity.receiver.name))
       end
-
+              
       if activity.direct_object.present?
         object = activity.direct_object
         object = object.subject if object.is_a? Actor
@@ -28,10 +28,19 @@ module Mailboxer
                                                                       url_for(:controller=> object.class.to_s.underscore.pluralize, :action=> :show, 
                                                                               :id=> object.id, :only_path => false)))
         notification_text=notification_text.gsub(/\%\{object.name\}/,object.class.to_s.underscore)
-        notification_text=notification_text.gsub(/\%\{object.text\}/,link_to(object.text.truncate(100, :separator =>' '), 
+        
+        
+          
+        if object.respond_to? :text
+          notification_text=notification_text.gsub(/\%\{object.text\}/,link_to(object.text.truncate(100, :separator =>' '), 
                                                                           url_for(:controller=> object.class.to_s.underscore.pluralize, :action=> :show, 
-                                                                                  :id=> object.id, :only_path => false))) if object.respond_to? :text
-      
+                                                                                  :id=> object.id, :only_path => false))) 
+        elsif SocialStream.objects.include? :document and object.is_a? Document
+          notification_text=notification_text.gsub(/\%\{object.text\}/,link_to(object.file_file_name.truncate(100, :separator =>' '), 
+                                                                          url_for(:controller=> object.class.to_s.underscore.pluralize, :action=> :show, 
+                                                                                  :id=> object.id, :only_path => false)))
+                  
+        end
         #notification_text=notification_text.gsub(/\%\{object.image\}/,thumb_for(object)) if SocialStream.activity_forms.include? :document and object.is_a? Document
       
       else
