@@ -14,17 +14,6 @@ Rails.application.routes.draw do
   match 'home' => 'home#index', :as => :home
   match 'home' => 'home#index', :as => :user_root # devise after_sign_in_path_for
   
-  ##API###
-  match 'api/keygen' => 'api#create_key', :as => :api_keygen
-  match 'api/user/:id' => 'api#users'
-  match 'api/me' => 'api#users'
-  match 'api/me/home/' => 'api#activity_atom_feed', :format => 'atom', :as => :api_my_home
-  match 'api/me/contacts' => 'contacts#index', :format => 'json'
-  match 'api/subjects/:s/contacts' => 'contacts#index', :format => 'json'
-  match 'api/user/:id/public' => 'api#activity_atom_feed', :format => 'atom'
-  match 'api/user/:id/public' => 'api#activity_atom_feed', :format => 'atom'
-  ##/API##
-  
   # Webfinger
   match '.well-known/host-meta',:to => 'frontpage#host_meta'
   
@@ -87,4 +76,14 @@ Rails.application.routes.draw do
   (SocialStream.objects - [ :actor ]).each do |object|
     resources object.to_s.pluralize
   end
+  
+  ##API###
+  match 'api/keygen' => 'api#create_key', :as => :api_keygen
+  match 'api/user/:id' => 'api#users', :as => :api_user
+  match 'api/me' => 'api#users', :as => :api_me
+  match 'api/me/home/' => 'api#activity_atom_feed', :format => 'atom', :as => :api_my_home
+  match 'api/me/contacts' => 'contacts#index', :format => 'json', :as => :api_contacts
+  match 'api/subjects/:s/contacts' => 'contacts#index', :format => 'json', :as => :api_subject_contacts
+  match 'api/user/:id/public' => 'api#activity_atom_feed', :format => 'atom', :as => :api_user_activities
+  ##/API##
 end
