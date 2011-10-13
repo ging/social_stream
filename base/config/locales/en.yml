@@ -235,7 +235,7 @@ en:
     notification_mailer:
       subject: "%{subject}"
     reply: "Reply"
-    send: "Send message
+    send: "Send message"
     sent: "Your message was sent"
   menu:
     options: "Menu Options"
