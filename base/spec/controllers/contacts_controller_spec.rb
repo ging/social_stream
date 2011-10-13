@@ -28,7 +28,7 @@ describe ContactsController do
     sign_in @user
 
     put :update, :id => @tie.contact_id,
-                 :contact => { "relation_ids" => [ "gotcha", @user.relations.last.id ] }
+                 :contact => { "relation_ids" => [ @user.relations.last.id ] }
 
     response.should redirect_to(@tie.receiver_subject)
     @user.reload.
@@ -46,7 +46,7 @@ describe ContactsController do
     
 
     put :update, :id => contact.id,
-                 :contact => { :relation_ids => [ "gotcha", @user.relations.last.id ],
+                 :contact => { :relation_ids => [ @user.relations.last.id ],
                                :message => "Testing" }
 
     response.should redirect_to(contact.receiver_subject)
@@ -67,7 +67,7 @@ describe ContactsController do
     
 
     put :update, :id => contact.id,
-                 :contact => { :relation_ids => [ "gotcha", relations.map(&:id) ].flatten,
+                 :contact => { :relation_ids => relations.map(&:id),
                                :message => "Testing" }
 
     response.should redirect_to(contact.receiver_subject)
@@ -96,7 +96,7 @@ describe ContactsController do
       sign_in @user
 
       put :update, :id => @contact,
-                   :contact => { "relation_ids" => [ "gotcha", @user.relations.last.id ] }
+                   :contact => { "relation_ids" => [ @user.relations.last.id ] }
 
       response.should redirect_to(home_path)
     end

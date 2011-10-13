@@ -2,9 +2,9 @@
 	<h2><%= conversation.subject %></h2>
 </div>
 <div class="action">
-	<% unless @box.eql?'trash' %><%= link_to(image_tag('btn/btn_delete.png', :atl => "Delete", :title => "Delete"),
+	<% unless @box.eql?'trash' %><%= link_to(image_tag('btn/btn_delete.png', :atl => t('mailboxer.delete'), :title => t('mailboxer.delete')),
 	conversation_path(conversation, :location => 'conversation', :box => @box),
-	:confirm => 'Do you want to move "' + conversation.subject + '" to trash?',
+	:confirm => t('mailboxer.delete_confirm', :object => conversation.subject),
 	:method => :delete, :remote => true) %><% end %>
 </div>
 <div class="clearfloat">
@@ -45,7 +45,7 @@
 			<%= text_area_tag :body, nil,:rows =>6, :cols=> 53, :class => "required form_tag" %>
 		</div>
 		<div class="actions center">
-			<%= submit_tag "Reply", :name => :reply_all,:class => "button" %>
+			<%= submit_tag t('mailboxer.reply'), :name => :reply_all,:class => "button" %>
 		</div>
 	</div>
 	<% end %>

@@ -26,10 +26,10 @@
 </div>
 <% unless @box.eql?'trash' %>
 <div class="action">
-  <% link_to(image_tag('btn/btn_read.png', :alt => "Mark as read", :title => "Mark as read")) %>
-	<%= link_to(image_tag('btn/btn_delete.png', :alt => "Delete", :title => "Delete"),
+  <% link_to(image_tag('btn/btn_read.png', :alt => t('mailboxer.mark_as_read'), :title => t('mailboxer.mark_as_read'))) %>
+	<%= link_to(image_tag('btn/btn_delete.png', :alt => t('mailboxer.delete'), :title => t('mailboxer.delete')),
 	conversation_path(conversation, :location => @box, :box => @box, :page => params[:page]),
-	:confirm => 'Do you want to move "' + conversation.subject + '" to trash?',
+	:confirm => t('mailboxer.delete_confirm', :object => conversation.subject),
 	:method => :delete, :remote => true) %>
 </div>
 <% end %>

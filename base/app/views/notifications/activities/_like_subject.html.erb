@@ -1,5 +1,9 @@
 <% if activity.direct_object.is_a? Actor or activity.direct_object.respond_to? :actor %>
-%{sender} is now %{whose} fan.
+  <%= t('notification.fan')%>
 <% else %>
-%{sender} likes %{whose} %{object.name}%>
+  <% if activity.receiver.subject.is_a?(User) %>
+    <%= t('notification.like.user') %>
+  <% else %>
+    <%= t('notification.like.other') %>
+  <% end %>
 <% end %>

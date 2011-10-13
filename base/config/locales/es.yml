@@ -219,15 +219,21 @@ es:
     base: "Estás aquí"
     separator: " > "
   mailboxer:
+    delete: "Borrar"
+    delete_confirm: "¿Quieres enviar '%{object}' a la papelera?"
     form:
       body: "Mensaje"
       recipients: "Para"
       subject: "Asunto"
+    mark_as_read: "Marcar como leido"
     message_mailer:
       subject_new: "%{subject}"
       subject_reply: "%{subject}"
     notification_mailer:
-      subject: "%{subject}"
+      subject: "%{subject}"    
+    reply: "Contestar"
+    send: "Enviar mensaje"
+    sent: "Tu mensaje fue enviado"
   menu:
     options: "Opciones"
     information: "Información"
@@ -244,14 +250,35 @@ es:
     sentbox: "Salida"
     trash: "Papelera"
   notification:
+    added: 
+      other: "%{sender} añadió a %{who} como contacto."
+      user: "%{sender} te añadió como contacto."
     confirm: "¿Confirmar contacto con %{sender.name}?"
     destroy_sure: "¿Borrar notificación?"
+    fan: "%{sender} es ahora fan %{whose}."
+    like:
+      other: "A %{sender} le gusta el %{object.name} %{whose}." 
+      user: "A %{sender} le gusta tu %{object.name}."
     look: "Écha un vistazo al muro de %{sender.name}"
+    makefriend:
+      other: "%{sender} también añadió a %{who} como contacto."
+      user: "%{sender} también te añadió como contacto."
     one: "Notificación"
     other: "Notificaciones"
+    post:
+      other: "%{sender} añadió %{object} en el muro %{whose}."
+      user: "%{sender} añadió %{object} en tu muro."
     read: "Marcar como leída"
     read_all: "Marcar todas como leídas"
     unread: "Marcar como no leídas"
+    update:
+      other: "%{sender} actualizó %{object} en el muro %{whose}."
+      user: "%{sender} actualizó %{object} en tu muro."
+    who:
+      user: "tú"
+    whose: 
+      user: "tuyo"
+      others: "de %{receiver}"
   post:
     confirm_delete: "¿Borrar texto?"
     form:

@@ -15,12 +15,3 @@ end
 # gem 'social2social', :path => '../social2social'
 
 gemspec
-
-group :test do
-  case ENV['DB']
-  when 'mysql'
-    gem 'mysql2'
-  when 'postgres'
-    gem 'pg'
-  end
-end
