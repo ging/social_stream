@@ -108,10 +108,18 @@ input.chat_password{
 	margin-bottom: 5px;
 }
 
+
 input.connectChatButton{
 	text-align: center;
+	width: 150px;
+	background-color: #1F4A75;
+  border: 0 none;
+  cursor: pointer;
+	color: white;
+	font-family: Helvetica;
+  font-size: 11px;
+	padding: 2px 0 2px 0px;
 }
-
 
 
 
