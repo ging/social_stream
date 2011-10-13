@@ -30,10 +30,12 @@
 <%= javascript_tag do %>
   $(document).ready(function() {
     $('.picture_thumbnail_show a').lightBox({ 
+      maxHeight: 920,
+      maxWidth: 920,
       imageLoading: 'assets/lightbox-ico-loading.gif',
       imageBtnClose: 'assets/lightbox-btn-close.gif',
       imageBtnPrev: 'assets/lightbox-btn-prev.gif',
       imageBtnNext: 'assets/lightbox-btn-next.gif',
-      imageBlank: 'assets/lightbox-blank.gif'});
+      imageBlank: 'assets/lightbox-blank.gif'});    
   })
 <% end %>

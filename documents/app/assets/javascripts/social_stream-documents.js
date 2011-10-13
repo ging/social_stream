@@ -1,3 +1,4 @@
 //= require jquery.jplayer
 //= require_tree .
-//= require jquery.lightbox.min
+//= require jquery.lightbox-with-resize-plugin
+//= require maxSize.min
