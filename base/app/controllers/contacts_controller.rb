@@ -9,7 +9,8 @@ class ContactsController < ApplicationController
               merge(Actor.letter(params[:letter])).
               merge(Actor.name_search(params[:search])).
               related_by_param(params[:relation]).
-              positive
+              positive.
+              select("actors.name")
 
     respond_to do |format|
       format.html { @contacts = @contacts.page(params[:page]).per(10) }
