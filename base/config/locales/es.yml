@@ -48,7 +48,7 @@ es:
       myself:
         contacts:
           group: "Todos los integrantes"
-          user: "Tus contacts"
+          user: "Tus contactos"
       outside:
         contacts:
           group: "Integrantes de %{receiver}"
