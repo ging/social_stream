@@ -47,11 +47,11 @@ es:
     privacy:
       myself:
         contacts:
-          group: "Todos los miembros"
+          group: "Todos los integrantes"
           user: "Tus contacts"
       outside:
         contacts:
-          group: "Miembros de %{receiver}"
+          group: "Integrantes de %{receiver}"
           user: "Contactos de %{receiver}"
     sending: "Enviando"
     title: "Actividades"
