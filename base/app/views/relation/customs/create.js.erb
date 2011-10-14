@@ -13,7 +13,9 @@
   // Refresh list
   $('#relation_customs_list').html("<%= escape_javascript render(:partial => 'relation/customs/list', :object => current_subject.relation_customs) %>");
 
-  // Select relation_custom
-  $('#' + '<%= dom_id @custom %>').checkBox('changeCheckStatus', true);
+
+  $(function(){
+    selectRelation($('#' + '<%= dom_id @custom %>'));
+  });
 <% end %>
 

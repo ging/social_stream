@@ -1,6 +1,6 @@
 <div id="columns_container">
 
-  <div id="permissions_list_block">
+  <div id="permissions_list">
 
     <p class="sectionTitle"><%= raw t('permission.of_relation.choose', :name => h(@relation.name)) %></p>
 
@@ -9,7 +9,7 @@
       <tr>
         <td>
           <div contain=<%= dom_id p %> class="checkboxPermissionOptionLeft">
-            <input id=<%= dom_id p %> optionOf="permissions" type="checkbox"/>
+            <input id=<%= dom_id p %> class="permission" type="checkbox"/>
             <label for=<%= dom_id p %>><%= p.description(:brief) %></label>
             <div class="clearfloat"></div>
           </div>

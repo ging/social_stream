@@ -2,8 +2,8 @@
   <% list.each do |r| %>
     <%= raw cycle("<tr><td>", "<td>", :name => "begin_cell") %>
       <div contain="<%= dom_id(r) %>" class="checkboxOptionLeft">
-        <input id=<%= dom_id(r) %> type="checkbox"/>
-        <label for=<%= dom_id(r) %>><%=r.name%></label>
+        <input id="<%= dom_id(r) %>" type="radio" name="relation_custom"/>
+        <label for="<%= dom_id(r) %>"><%=r.name%></label>
         <div class="options">
           <%= link_to image_tag("btn/edit.png", :class => "menu_icon", :title => t('relation_custom.edit')), '#', :class => "relation_custom_edit_link" %>
           <%= link_to image_tag("btn/delete.png", :class => "menu_icon", :title => t('relation_custom.delete')), r, :class => "relation_custom_delete_link", :method => :delete, :confirm => t('relation_custom.confirm_delete') %>
@@ -37,9 +37,11 @@
 </table>
 
 <%= javascript_tag do %>
-  $(function() {
-    $('input[id^="relation_custom"]').checkBox();
-
+  $(function(){
+    $('#relation_customs_list :radio').change(function(){
+      selectRelation(this);
+    });
+    
     $('.relation_custom_edit_link').click(function() {
       $(this).parent().hide();
       $(this).parent().siblings('label').hide();
@@ -51,6 +53,11 @@
       $(this).parent().parent().siblings('label, .options').show();
 
       return false;
+    });
+
+    $("#new_relation_custom_title").click(function() {
+      $("#new_relation_custom_title_block").hide();
+      $("#new_relation_custom_input_block").show();
     });
   })
 <% end %>

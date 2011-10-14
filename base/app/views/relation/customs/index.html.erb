@@ -10,11 +10,6 @@
 
     <%= javascript_tag do %>
       $(function() {
-        $("#new_relation_custom_title").click(function() {
-          $("#new_relation_custom_title_block").hide();
-          $("#new_relation_custom_input_block").show();
-        });
-
         $("#loading").hide();
 
         $("#loading").ajaxStart(function(){

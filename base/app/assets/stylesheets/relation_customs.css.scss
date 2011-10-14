@@ -161,11 +161,15 @@ span.privacy_span_new {
   margin-top: 10px;
 }
 
-#permissions_list_block{
+#permissions_list{
 	width: 50%;
 	float: left;
 	text-align: center;
 	display: block;
+}
+
+#permissions_list input.permission {
+	float: left;
 }
 
 #privacy_rules{

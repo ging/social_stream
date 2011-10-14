@@ -19,6 +19,8 @@ es:
     attributes:
       contact:
         relation_ids: "El tipo de contacto"
+      relation/custom:
+        name: "Nombre"
       user:
         email: "Correo"
         name: "Nombre"
