@@ -3,14 +3,17 @@ class ContactsController < ApplicationController
   before_filter :exclude_reflexive, :except => [ :index, :pending ]
 
   def index
-    @contacts =
+    @total_contacts =
       Contact.sent_by(current_subject).
               joins(:receiver).merge(Actor.alphabetic).
-              merge(Actor.letter(params[:letter])).
-              merge(Actor.name_search(params[:search])).
-              related_by_param(params[:relation]).
               positive.
               select("actors.name")
+
+    @contacts =
+      @total_contacts.
+              merge(Actor.letter(params[:letter])).
+              merge(Actor.name_search(params[:search])).
+              related_by_param(params[:relation])
 
     respond_to do |format|
       format.html { @contacts = @contacts.page(params[:page]).per(10) }
