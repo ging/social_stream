@@ -43,9 +43,14 @@ en:
     one: "Activity"
     other: "Activities"
     privacy:
-      contacts:
-        user: "All contacts"
-        group: "All members"
+      myself:
+        contacts:
+          group: "All members"
+          user: "Your contacts"
+      outside:
+        contacts:
+          group: "Members of %{receiver}"
+          user: "Contacts of %{receiver}"
     sending: "Sending"
     title: "Activities"
     to_comment: "Comment"

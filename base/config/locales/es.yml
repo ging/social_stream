@@ -43,9 +43,14 @@ es:
     one: "Actividad"
     other: "Actividades"
     privacy:
-      contacts:
-        user: "Todos los contactos"
-        group: "Todos los miembros"
+      myself:
+        contacts:
+          group: "Todos los miembros"
+          user: "Tus contacts"
+      outside:
+        contacts:
+          group: "Miembros de %{receiver}"
+          user: "Contactos de %{receiver}"
     sending: "Enviando"
     title: "Actividades"
     to_comment: "Comentar"
