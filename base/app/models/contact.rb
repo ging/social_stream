@@ -50,6 +50,12 @@ class Contact < ActiveRecord::Base
 
   scope :active, where(arel_table[:ties_count].gt(0))
 
+  scope :positive, lambda {
+    select("DISTINCT contacts.*").
+      joins(:relations).
+      merge(Relation.where(:type => Relation.positive_names))
+  }
+
   scope :not_reflexive, where(arel_table[:sender_id].not_eq(arel_table[:receiver_id]))
 
   scope :pending, active.
@@ -128,7 +134,7 @@ class Contact < ActiveRecord::Base
   # a {Relation::Public public relation}
   #
   def action
-    if ties_count > 0 && relations.where(:type => ['Relation::Custom', 'Relation::Public']).any?
+    if ties_count > 0 && relations.where(:type => Relation.positive_names).any?
       'edit'
     else
       replied? ? 'reply' : 'new'

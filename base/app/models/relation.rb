@@ -24,6 +24,9 @@
 # It sets the {Audience} that has access to it, and the {Permission Permissions} that rule that access.
 #
 class Relation < ActiveRecord::Base
+  Positive = %w{ custom public }
+  Negative = %w{ reject }
+
   belongs_to :actor
 
   has_many :relation_permissions, :dependent => :destroy
@@ -81,7 +84,17 @@ class Relation < ActiveRecord::Base
         normalize(r, options).id
       end
     end
- 
+
+    # Positive relation names: [ 'Relation::Custom', 'Relation::Public' ]
+    def positive_names
+      Positive.map{ |r| "Relation::#{ r.classify }" }
+    end
+
+    # Negative relations: [ 'Relation::Reject' ]
+    def negative_names
+      Negative.map{ |r| "Relation::#{ r.classify }" }
+    end
+
     # All the relations that allow subject to perform action
     #
     # Options:
