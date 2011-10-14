@@ -33,8 +33,9 @@ span.ui-radio-state-checked-hover {
 	background-position: 0 -200px;
 }
 
-#relation_customs input {
+#relation_customs input, #relation_customs button{
 	float: left;
+	padding: 3px 10px 3px 10px;
 }
 
 #relation_customs span {

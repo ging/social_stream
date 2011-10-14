@@ -195,7 +195,7 @@ es:
     submit:
       relation_custom:
         create: "Guardar"
-        update: "Actualizar"
+        update: "Guardar"
   home: "Inicio"
   inbox:
     one: "Entrada"
