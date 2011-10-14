@@ -44,8 +44,8 @@ en:
     other: "Activities"
     privacy:
       contacts:
-        user: "Contacts of %{receiver}"
-        group: "Members of %{receiver}"
+        user: "All contacts"
+        group: "All members"
     sending: "Sending"
     title: "Activities"
     to_comment: "Comment"
