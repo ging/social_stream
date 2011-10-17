@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n")
 
   # Gem dependencies
-  s.add_runtime_dependency('social_stream-base', '~> 0.9.19')
+  s.add_runtime_dependency('social_stream-base', '~> 0.9.21')
   s.add_runtime_dependency('conference_manager-ruby', '~> 0.0.3')
 
   # Development Gem dependencies

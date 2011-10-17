@@ -86,7 +86,7 @@
       }
       * html .ad-gallery .ad-image-wrapper .ad-image .ad-image-description {
         background: none;
-        filter:progid:DXImageTransform.Microsoft.AlphaImageLoader (enabled=true, sizingMethod=scale, src='opa75.png');
+        filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src='opa75.png');
       }
         .ad-gallery .ad-image-wrapper .ad-image .ad-image-description .ad-description-title {
           display: block;
