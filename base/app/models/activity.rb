@@ -275,9 +275,9 @@ class Activity < ActiveRecord::Base
           relations.select{ |r| r.actor_id == Actor.normalize_id(subject)}
 
         if visible_relations.present?
-          [ :visible, visible_relations.map(&:name).join(", ") ]
+          [ :visible, visible_relations.map(&:name).uniq.join(", ") ]
         else
-          [ :hidden, relations.map(&:actor).map(&:name).join(", ") ]
+          [ :hidden, relations.map(&:actor).map(&:name).uniq.join(", ") ]
         end
       end
 
