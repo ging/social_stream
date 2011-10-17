@@ -82,6 +82,21 @@ class Tie < ActiveRecord::Base
     receiver.subject
   end
 
+  # The {Tie} is positive if its {Relation} is
+  def positive?
+    relation.positive?
+  end
+
+  # Does this {Tie} have positive {Tie ties} in the other way?
+  def positive_replied?
+    contact.positive_replied?
+  end
+
+  # This {Tie} is {#positive? positive} and {#positive_replied? positive replied}
+  def bidirectional?
+    positive? && positive_replied?
+  end
+
   private
 
   # before_create callback
