@@ -1,7 +1,7 @@
 <% representations = current_user.represented.unshift(current_user) - [current_subject] %>
 <% unless representations.empty? %>
 <li>
-  <%= link_to "Switch session", "javascript:;", :class=>"session_change" %>
+  <%= link_to t('representation.switch'), "javascript:;", :class=>"session_change" %>
   <ul>
     <% representations.each do |representation| %>
     <li>

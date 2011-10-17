@@ -366,6 +366,8 @@ es:
     title: "Privacidad y contexto"
   relation_public:
     name: "Público"
+  representation:
+    switch: "Cambiar sessión"
   required: "(*) Estos campos son obligatorios"
   search:
     all_subject_results: "Ver todos %{subject} (%{count})"
