@@ -41,15 +41,17 @@ module SocialStream
               client.connect
               client.auth(password)
    
-              #Check Subscription_type          
-              if isBidirectionalTie
+              #Check if is a positive and replied tie         
+              if self.bidirectional?
                 #SetRosterForBidirectionalTie[UserASID,UserBSID,UserAName,UserBName]
-                msg = Jabber::Message::new(ss_sid, "SetRosterForBidirectionalTie&" + user_sid + "&" + buddy_sid + "&" + buddy_name + "&" + user_name)
-              else
-                #Check if posstive tie
+                msg = Jabber::Message::new(ss_sid, "SetRosterForBidirectionalTie&" + user_sid + "&" + buddy_sid + "&" + buddy_name + "&" + user_name) 
+              elsif self.positive?
+                #Case: Possitive tie unidirectional
                 sType = "from"
                 #AddItemToRoster[UserSID,BuddySID,BuddyName,Subscription_type]
                 msg = Jabber::Message::new(ss_sid, "AddItemToRoster&" + user_sid + "&" + buddy_sid + "&" + buddy_name + "&" + sType)
+              else
+                return  
               end
 
               msg.type=:chat
@@ -65,10 +67,6 @@ module SocialStream
               end
             end   
             
-          end
-          
-          def isBidirectionalTie
-            return true
           end
           
         end
