@@ -3,7 +3,7 @@
 ////////////////////
 
 function log(msg) {
-    console.log(msg)
+    //console.log(msg)
 }
 
 
@@ -155,6 +155,7 @@ function onMessage(msg) {
 
 
 function onPresence(presence) {
+	    //log(presence);
 		  from = $(presence).attr('from');
 		  slug = from.split("@")[0];
 		  if(slug != user_slug){
@@ -239,11 +240,6 @@ function initAndPlaySound(sound){
 ////////////////////
 //Chat view jquery
 ////////////////////
-
-$(document).ready(function () {
-		initialTimer = setTimeout("updateChatWindow()", 15000);
-		initAudio();
-});
 
 function setUserFunctions(){
 	

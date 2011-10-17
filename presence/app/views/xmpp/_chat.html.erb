@@ -50,6 +50,8 @@
 			if (connectToServer(null)==false){
 				refreshChatWindow();
 			}
+			initialTimer = setTimeout("updateChatWindow()", 15000);
+      initAudio();
 		});
 		
 	</script>
