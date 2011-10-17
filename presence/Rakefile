@@ -1,1 +1,8 @@
 require 'bundler/gem_tasks'
+
+# Modify this gem's tags
+class Bundler::GemHelper
+  def version_tag
+    "presence#{version}"
+  end
+end
