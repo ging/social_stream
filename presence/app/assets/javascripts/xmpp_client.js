@@ -241,6 +241,12 @@ function initAndPlaySound(sound){
 //Chat view jquery
 ////////////////////
 
+function initDelegates(){
+  $('.user_presence').delegate( '.user_presence a[title]', 'hover', function(){ 
+    e.preventDefault();
+  });
+}
+
 function setUserFunctions(){
 	
 	$("div.user_presence").click(function(event, ui){
@@ -253,7 +259,6 @@ function setUserFunctions(){
 	    window[guest_slug].chatbox("option", "boxManager").toggleBox(true);
 	  };
 	});
-	
 	
 	//JQuery DropdwanStatus
 	
@@ -326,7 +331,8 @@ function refreshChatWindow(){
 function updateChatWindow(){
 	timerCounter=0;
 	log("updateChatWindow()");
-  $.post("/chatWindow", { userConnected: userConnected }, function(data){ 
+  $.post("/chatWindow", { userConnected: userConnected }, function(data){
+			$(".tooltip").hide() //Prevent tooltips
       $("#chat_partial").html(data);
       if (userConnected) {
         $(".user_presence a[title]").tooltip();

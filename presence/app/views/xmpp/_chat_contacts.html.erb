@@ -28,7 +28,7 @@
 				  <%@contacts.each do |contact| %>
 							<div class="user_presence" name='<%=contact.name%>' slug='<%=contact.slug%>'>
 								<a title='<%=contact.name%>' class="presence_user_link" width="28">
-								  <%=image_tag(contact.logo.url, :alt => contact.name , :title => contact.name, :size => "28x28")%>
+								  <%=image_tag(contact.logo.url, :alt => contact.name , :size => "28x28")%>
 									<% if contact.user.status %>
 									<%=image_tag("status/" + contact.user.status + ".png", :class => "presence_status") %></a>
 									<% end %>

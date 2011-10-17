@@ -4,7 +4,6 @@ namespace :presence do
 
   namespace :synchronize do
 
-
     desc "Synchronize user presence."
     task :connections => :environment do
       puts "Starting presence:synchronize:connections"
@@ -26,6 +25,7 @@ namespace :presence do
         puts "Connecting to Xmpp Server"
         client = Jabber::Client.new(Jabber::JID.new(ss_sid))
         client.connect
+        puts "Authentication..."
         client.auth(password)
         puts "Connected to Xmpp Server"
         
