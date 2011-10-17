@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "social_stream/presence/config"
+require "social_stream/presence/version"
 
 Gem::Specification.new do |s|
   s.name        = "social_stream-presence"
