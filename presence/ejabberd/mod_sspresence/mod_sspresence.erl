@@ -113,46 +113,66 @@ parseXmlCdata(Msg) ->
 
 execute(Message) ->
     %?INFO_MSG("Message vale: ~p", [Message]),
+    %?INFO_MSG("Order vale: ~p", [Order]),
     [Order|Params] = string:tokens(Message, "&"),
-
     case Order of
 	"AddItemToRoster" -> 
 	  	case length(Params) of
 			4 -> 	[UserSID,BuddySID,BuddyName,Subscription_type] = Params,
 				?INFO_MSG("Execute: ~p with params ~p", [Order,Params]),
-
-				%Command Name: add_rosteritem
-				% Needs mod_admin_extra (http://www.ejabberd.im/ejabberd-modules)
-				% ejabberdctl add_rosteritem localuser localserver user server nick group subs
-				%subs= none, from, to or both",
-
-				%frank-williamson@trapo adds demo@trapo to its roster 
-				%ejabberdctl add_rosteritem frank-williamson trapo demo trapo NickName SocialStream from
-
-				%frank-williamson@trapo adds demo@trapo and demo@trapo adds frank-williamson@trapo to its roster
-				%ejabberdctl add_rosteritem frank-williamson trapo demo trapo NickName SocialStream both
-				
 				[ContactName|_R] = string:tokens(BuddyName, " "),
 				[UserSlug,UserDomain] = string:tokens(UserSID, "@"),
 				[BuddySlug,BuddyDomain] = string:tokens(BuddySID, "@"),
-
-				Command = lists:concat(["ejabberdctl add_rosteritem ", UserSlug , " ", UserDomain, " ", BuddySlug, " ", BuddyDomain , " ", ContactName , " ", 					"SocialStream" , " ", Subscription_type]),
-				os:cmd(Command),
-				?INFO_MSG("Execute command: ~p", [Command]),
+				addItemToRoster(UserSlug,UserDomain,BuddySlug,BuddyDomain,ContactName,"SocialStream",Subscription_type),
 				ok;
-			_ -> 	?INFO_MSG("Incorrect parameters", []),
+			_ -> 	?INFO_MSG("Incorrect parameters in order ~p", [Order]),
+				ok
+	  	end,
+		ok;
+
+	"SetRosterForBidirectionalTie" -> 
+	  	case length(Params) of
+			4 -> 	[UserASID,UserBSID,UserAName,UserBName] = Params,
+				?INFO_MSG("Executing: ~p with params ~p", [Order,Params]),
+				[UserASlug,UserADomain] = string:tokens(UserASID, "@"),
+				[UserBSlug,UserBDomain] = string:tokens(UserBSID, "@"),
+				addItemToRoster(UserASlug,UserADomain,UserBSlug,UserBDomain,UserBName,"SocialStream","both"),
+				addItemToRoster(UserBSlug,UserBDomain,UserASlug,UserADomain,UserAName,"SocialStream","both"),
+				ok;
+			_ -> 	?INFO_MSG("Incorrect parameters in order ~p", [Order]),
 				ok
 	  	end,
 		ok;
 
 	"Synchronize" ->
-	synchronize(),
+	synchronizePresence(),
+	ok;
+
+	"SynchronizeRosters" ->
+	synchronizeRosters(),
 	ok;
 
 	_ -> ?INFO_MSG("Command not found", []),
 		ok
     end.
 
+
+
+%%Call ejabberdctl command add_rosteritem
+	%Command Name: add_rosteritem
+	%Needs mod_admin_extra (http://www.ejabberd.im/ejabberd-modules)
+	%ejabberdctl add_rosteritem localuser localserver buddy buddyserver nick group subs
+	%subs= none, from, to or both,
+
+	%Example
+	%ejabberdctl add_rosteritem frank-williamson trapo demo trapo NickName SocialStream from
+	%frank-williamson@trapo adds demo@trapo to its roster with subscription from, in the group SocialStream with the name Nickname
+%%
+addItemToRoster(UserSlug,UserDomain,BuddySlug,BuddyDomain,ContactName,Group,Subscription_type) ->
+	Command = lists:concat(["ejabberdctl add_rosteritem ", UserSlug , " ", UserDomain, " ", BuddySlug, " ", BuddyDomain , " \\'", ContactName , "\\' ", Group , " ", 					Subscription_type]),
+	os:cmd(Command),
+	?INFO_MSG("Execute command: ~p", [Command]),
+ok.
 
 %%GETTERS CONFIG VALUES
 %%CONFIG FILE: /etc/ejabberd/ssconfig.cfg
@@ -214,9 +234,16 @@ end.
 
 
 %%Send all connected users to Social Stream Rails Application
-synchronize() ->
+synchronizePresence() ->
 	Synchronize_path = string:concat(getOptionValue("scripts_path="), "/synchronize_presence_script "),
 	os:cmd(Synchronize_path),
+ok.
+
+
+%%Reset all rosters and wait to received data from Social Stream Rails Application
+synchronizeRosters() ->
+	SynchronizeRosters_path = string:concat(getOptionValue("scripts_path="), "/emanagement removeAllRosters"),
+	os:cmd(SynchronizeRosters_path),
 ok.
 
 

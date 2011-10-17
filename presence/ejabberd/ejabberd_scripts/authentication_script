@@ -37,12 +37,12 @@ $sspass = getOption("ss_password=")
 def auth(username, password)
 
   #[TEST ONLY] Allow everybody
-  return true
+  #return true
 
   #[TEST] Admin password
-  if username == "admin" and password == "pass"
-    return true
-  end
+  #if username == "admin" and password == "pass"
+  #  return true
+  #end
 
   #Social Stream password
   if username == $sslogin and password == $sspass

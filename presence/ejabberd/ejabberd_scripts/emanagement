@@ -1,0 +1,245 @@
+#!/usr/bin/env ruby
+
+#Ejabberd Management script
+#New features for management and maintenance ejabberd
+#@author Aldo
+
+require 'logger'
+
+path = "/var/log/ejabberd/scripts.log"
+file = File.open(path, File::WRONLY | File::APPEND | File::CREAT)
+file.sync = true
+$logger = Logger.new(file)
+$logger.level = Logger::DEBUG
+
+def getOption(option)
+  File.open('/etc/ejabberd/ssconfig.cfg', 'r') do |f1|  
+    while line = f1.gets  
+      line = line.gsub(/\n/,'')
+      if line.match(/^#/)
+        #Comments
+      elsif line.match(/^#{option}/)
+        return line.gsub(/#{option}/,'')
+      end  
+    end  
+  end
+  return "Undefined"
+end
+
+def ejabberdLog(text)
+	$logger.info "Ejabberd Management Script: " + text
+end
+
+#Configuration variables
+$domain = getOption("server_domain=")
+
+PARAMS_FOR_COMMANDS = {
+'getRoster' => 1,
+'removeBuddyFromRoster' => 2,
+'addBuddyToRoster' => 5,
+'removeRoster' => 1,
+'getBuddysFromRoster' => 1,
+'setBidireccionalBuddys' => 4,
+'help' => 0,
+'getUserResource' => 1,
+'sendMessageToUser' => 3,
+'sendPresence' => 2,
+'unsetPresence' => 1,
+'setPresence' => 1,
+'removeAllRosters' => 0,
+}
+
+SYNTAX_FOR_COMMANDS = {
+'getRoster' => "getRoster username",
+'removeBuddyFromRoster' => "removeBuddyFromRoster username buddy",
+'addBuddyToRoster' => "addBuddyToRoster username buddy buddyNick buddyGroup subscription_type",
+'removeRoster' => "removeRoster username",
+'getBuddysFromRoster' => "getBuddysFromRoster roster",
+'setBidireccionalBuddys' => "setBidireccionalBuddys usernameA usernameB nickA nickB",
+'getUserResource' => "getUserResource username",
+'sendMessageToUser' => "sendMessageToUser from_name to_name msg",
+'sendPresence' => 'sendPresence username show',
+'unsetPresence' => 'unsetPresence username',
+'setPresence' => 'setPresence username',
+'removeAllRosters' => 'removeAllRosters'
+}
+
+def log(msg)
+	logWithTitle(msg,nil)
+end
+
+def logWithTitle(msg,title)
+	puts "------------------------"
+	if title
+		puts ("<<<" + title + ">>>")
+	end
+	puts msg
+	puts "------------------------"
+end
+
+
+def getRoster(username)
+	command = "ejabberdctl get_roster " + username  + " " + $domain
+	%x[#{command}];
+end
+
+def removeBuddyFromRoster(username,buddy)
+	command = "ejabberdctl delete_rosteritem " + username + " " + $domain + " " + buddy + " " + $domain
+	%x[#{command}];
+end
+
+def addBuddyToRoster(username,buddy,buddyNick,buddyGroup,subscription_type)
+	command = "ejabberdctl add-rosteritem " + username + " " + $domain + " " + buddy + " " + $domain + " \\'" + buddyNick + "\\' " + buddyGroup + " " + subscription_type
+	%x[#{command}];
+end
+
+def removeRoster(username)
+	user_roster = getRoster(username);
+	user_buddys = getBuddysFromRoster(user_roster);
+	user_buddys.each do |buddy|
+		removeBuddyFromRoster(username,buddy)
+	end
+	return "Done"
+end
+
+def removeAllRosters()
+	command = "ejabberdctl process_rosteritems delete any any any any"
+	%x[#{command}];
+	return "Done";
+end
+
+def getBuddysFromRoster(roster)
+	buddys = []
+        lines = roster.split("\n")
+	lines.each do |line|
+		buddys << line.split("@")[0]
+	end
+	buddys
+end
+
+def setBidireccionalBuddys(usernameA,usernameB,nickA,nickB)
+	#addBuddyToRoster(username,buddy,buddyNick,buddyGroup,subscription_type)
+	addBuddyToRoster(usernameA,usernameB,nickB,"SocialStream","both")
+	addBuddyToRoster(usernameB,usernameA,nickA,"SocialStream","both")
+	sendPresence(usernameA,"chat")
+	sendPresence(usernameB,"chat")
+	return "Done"
+end
+
+def sendStanzaUserMessage(username,msg)
+	resource = getUserResource(username);
+	stanza = "\\<\\'message\\'\\>\\<\\'body\\'\\>\\'" + msg + "\\'\\<\\'/body\\'\\>\\<\\'/message\\'\\>"
+	command = "ejabberdctl send_stanza_c2s " + username + " " + $domain + " " + resource + " " + stanza
+	puts "Executing: " + command
+	%x[#{command}];
+	return "Done"
+end
+
+
+def sendPresence(username,show)
+	sendPresenceWithShow(username,username,show)
+end
+
+def unsetPresence(username)
+	sendPresenceStanzaWithType(username,username,"unavailable")
+end
+
+def setPresence(username)
+	sendPresenceStanzaWithType(username,username,"available")
+end
+
+def sendPresenceWithShow(from_name,to_name,show)
+	puts from_name
+	resource = getUserResource(from_name);
+	puts resource
+	from_sid = from_name + "@" + $domain;
+	to_sid = to_name + "@" + $domain;   
+	pres_stanza = "\\<\\'presence from=\\'\\\"\\'" + from_sid + "\\'\\\"\\' to=\\'\\\"\\'" + to_sid + "\\'\\\"\\>\\<\\'show\\'\\>\\'" + show + "\\'\\<\\'/show\\'\\>\\<\\'/presence\\'\\>" 
+	command = "ejabberdctl send_stanza_c2s " + from_name + " " + $domain + " " + resource + " " + pres_stanza
+	puts "Executing: " + command
+	%x[#{command}];
+	return "Done"
+end
+
+def sendPresenceStanzaWithType(from_name,to_name,presence_type)
+	resource = getUserResource(from_name);
+	from_sid = from_name + "@" + $domain;
+	to_sid = to_name + "@" + $domain;
+	pres_stanza = "\\<\\'presence type=\\'\\\"\\'" + presence_type + "\\'\\\"\\' from=\\'\\\"\\'" + from_sid + "\\'\\\"\\' to=\\'\\\"\\'" + to_sid + "\\'\\\"\\>\\<\\'/presence\\'\\>" 
+	command = "ejabberdctl send_stanza_c2s " + from_name + " " + $domain + " " + resource + " " + pres_stanza
+	puts "Executing: " + command
+	%x[#{command}];
+	return "Done"
+end
+
+def sendMessageToUser(from_name,to_name,msg)
+	from_sid = from_name + "@" + $domain;
+	to_sid = to_name + "@" + $domain;
+	command = "ejabberdctl send_message_chat " + from_sid + " " + to_sid + " " + "\\'" + msg + "\\'";
+	puts "Executing: " + command
+	%x[#{command}];
+	return "Done"
+end
+
+def getUserResource(username)
+	command = "ejabberdctl connected-users"
+	output = %x[#{command}];
+        lines = output.split("\n");
+	lines.each do |line|
+		if line.split("@")[0] == username
+			#puts "Find " + username
+			s = line.split("@")[1];
+			resource = s.split("/")[1];
+			return resource;	
+		end
+	end
+	return username + " no have any active session"
+end
+
+def help
+	log("Command list")
+	SYNTAX_FOR_COMMANDS.values.each do |command|
+		puts command
+	end
+	puts ""
+end
+
+log("Init Ejabberd Maintenance script")
+
+begin
+	if ARGV[0] and PARAMS_FOR_COMMANDS.keys.include?(ARGV[0])
+		if (ARGV.length == (PARAMS_FOR_COMMANDS[ARGV[0]]+1))
+
+			ejabberdLog("Executing (#{ARGV[0]})")
+
+			length = ARGV.length;
+			case length
+			when 1
+			  puts send(ARGV[0])
+			when 2
+			  puts send(ARGV[0],ARGV[1])
+			when 3
+			  puts send(ARGV[0],ARGV[1],ARGV[2])
+			when 4
+			  puts send(ARGV[0],ARGV[1],ARGV[2],ARGV[3])
+			when 5
+			  puts send(ARGV[0],ARGV[1],ARGV[2],ARGV[3],ARGV[4])
+			when 6
+			  puts send(ARGV[0],ARGV[1],ARGV[2],ARGV[3],ARGV[4],ARGV[5])
+			else
+			  puts send(ARGV[0],ARGV)
+			end
+			puts ""
+		else 
+			log("Error: Params required for command " + (ARGV[0]).to_s() + ": " + (PARAMS_FOR_COMMANDS[ARGV[0]]).to_s())
+			log("Use 'help' to get information about command syntax")
+		end
+	else
+		
+		log("Error: Command not recognized")
+		log("Use 'help' to get information about command syntax")
+	end
+rescue
+	puts "Parametros incorrectos"
+end
+
