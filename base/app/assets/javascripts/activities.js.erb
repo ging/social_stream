@@ -8,9 +8,19 @@ $(function() {
   $('#new_<%= SocialStream.activity_forms.first %>').show();
   $('#select_<%= SocialStream.activity_forms.first %>').addClass('selected');
   $('#security').chosen();
+  $('#security').change(function() {    
+    $(this).children("option:selected").each(function(i,opt){
+      if(opt.value==relation_public){
+        if(public_selected==false){
+          public_selected = true;
+        }else{
+          public_selected = false;
+        }
+      }
+    });
+  });
   // Remove width calculation
-  $('#securities input.default').css('width', '');
-
+  //$('#securities input.default').css('width', '');
   setActivityPrivacyTooltips();
 });
 

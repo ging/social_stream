@@ -24,7 +24,11 @@
 </div>
 
 <div id="securities">
-  <% if current_subject == receiver %>
+  <% if current_subject == receiver %>  
+    <%= javascript_tag do %>
+      var relation_public = <%= receiver.relation_public.id %>;
+      var public_selected = false;
+    <% end %>
     <%= select_tag :_relation_ids, options_for_select(current_subject.activity_relations(receiver).sort.map{ |r| [ r.name, r.id ] }), :id => 'security', :multiple => true, :title => t("activity.privacy.myself.contacts.#{ receiver.class.to_s.underscore }") %>
   <% else %>
     <div id="security_chzn" class="chzn-container chzn-container-multi">
