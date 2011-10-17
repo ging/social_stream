@@ -59,6 +59,10 @@ describe Tie do
   end
 
   describe "with public relation" do
+    before do
+      @tie = Factory(:public)
+    end
+
     it "should create activity" do
       count = Activity.count
 
@@ -66,9 +70,55 @@ describe Tie do
 
       Activity.count.should eq(count + 1)
     end
+
+    it "should be positive" do
+      @tie.should be_positive
+    end
+
+    it "should not be positive replied" do
+      @tie.should_not be_positive_replied
+    end
+
+    context "with public reply" do
+      before do
+        Factory(:public, :contact => @tie.contact.inverse!)
+
+        # It should reload tie.contact again, as its inverse is now set
+        @tie.reload
+      end
+
+      it "should be positive replied" do
+        @tie.should be_positive_replied
+      end
+
+      it "should be bidirectional" do
+        @tie.should be_bidirectional
+      end
+    end
+
+    context "with reject reply" do
+      before do
+       Factory(:reject, :contact => @tie.contact.inverse!)
+
+        # It should reload tie.contact again, as its inverse is now set
+        @tie.reload
+      end
+
+      it "should not be positive replied" do
+        @tie.should_not be_positive_replied
+      end
+
+      it "should not be bidirectional" do
+        @tie.should_not be_bidirectional
+      end
+    end
   end
 
   describe "with reject relation" do
+    before do
+      @tie = Factory(:reject)
+    end
+
     it "should not create activity" do
       count = Activity.count
 
@@ -76,7 +126,44 @@ describe Tie do
 
       Activity.count.should eq(count)
     end
-  end
 
+    it "should not be positive" do
+      @tie.should_not be_positive
+    end
+
+    context "with public reply" do
+      before do
+        Factory(:public, :contact => @tie.contact.inverse!)
+
+        # It should reload tie.contact again, as its inverse is now set
+        @tie.reload
+      end
+
+      it "should be positive replied" do
+        @tie.should be_positive_replied
+      end
+
+      it "should not be bidirectional" do
+        @tie.should_not be_bidirectional
+      end
+    end
+
+    context "with reject reply" do
+      before do
+       Factory(:reject, :contact => @tie.contact.inverse!)
+
+        # It should reload tie.contact again, as its inverse is now set
+        @tie.reload
+      end
+
+      it "should not be positive replied" do
+        @tie.should_not be_positive_replied
+      end
+
+      it "should not be bidirectional" do
+        @tie.should_not be_bidirectional
+      end
+    end
+  end
 end
 

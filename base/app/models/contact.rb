@@ -107,6 +107,11 @@ class Contact < ActiveRecord::Base
       inverse.ties_count > 0
   end
 
+  def positive_replied?
+    inverse_id.present? &&
+      self.class.positive.where(:id => inverse.id).any?
+  end
+
   # The {ActivityVerb} corresponding to this {Contact}. If this contact is pending,
   # the other one was establised already, so this is going to "make-friend".
   # If it is not pending, the contact in the other way was not established, so this

@@ -135,6 +135,11 @@ class Relation < ActiveRecord::Base
     Relation.mode(sender_type, receiver_type)
   end
 
+  # Is this {Relation} a Positive one?
+  def positive?
+    self.class.positive_names.include?(self.class.to_s)
+  end
+
   private
 
   # Before create callback
