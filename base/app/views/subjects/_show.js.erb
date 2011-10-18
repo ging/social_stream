@@ -1,2 +1,5 @@
 $('#wall').replaceWith("<%= escape_javascript render(:partial => 'activities/wall', :locals => { :activities => subject.wall(:profile, :for => current_subject).page(params[:page]) }) %>");
+
+setActivityPrivacyTooltips();
+
 $.scrollTo('#wall', 1500,{axis:'y'});

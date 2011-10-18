@@ -1,1 +1,3 @@
 $('#wall-<%= params[:section] || "profile" %>').html("<%= escape_javascript render(:partial => 'index', :locals => { :owner => parent, :activities => @activities }) %>");
+
+setActivityPrivacyTooltips();
