@@ -18,7 +18,7 @@ var recipients = $("#_recipients").fcbkcomplete({
 
   $("#body").cleditor({
     width:493,
-    controls:  "<%= t('cleditor.controls')%>"   
+    controls: "<%= SocialStream.cleditor_controls %>"    
   });
 
 <% unless @recipient.nil? %>

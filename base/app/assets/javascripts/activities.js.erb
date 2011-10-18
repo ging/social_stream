@@ -2,6 +2,7 @@
 //= require jquery.tipsy
 //
 //initial state
+var default_security_width = '100px';
 $(function() {
   $('#wrapper_activities_header form').hide();
   $('#new_<%= SocialStream.activity_forms.first %>').show();
@@ -33,18 +34,18 @@ $(function() {
   $('#securities .search-choice a').click(function(){
     console.log($('#security').children("option:selected").size());
     if($('#security').children("option:selected").size()==0){
-      $('#securities input').css('width', default_width)
+      $('#securities input').css('width', default_security_width)
     }
   });      
   });
   $('#securities input').blur(function(){
     console.log($('#security').children("option:selected").size());
     if($('#security').children("option:selected").size()==0){
-      $('#securities input').css('width', default_width)
+      $('#securities input').css('width', default_security_width)
     }
   });
   // Remove width calculation
-  $('#securities input.default').css('width', default_width);
+  $('#securities input.default').css('width', default_security_width);
   setActivityPrivacyTooltips();
 });
 

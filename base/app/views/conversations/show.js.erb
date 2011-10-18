@@ -6,7 +6,7 @@ $('.cont_conversation').validate({errorClass: "validation_error"});
 <% unless @box.eql?'trash' %>
   $("#body").cleditor({
     width:493,
-    controls:  "<%= t('cleditor.controls')%>"   
+    controls:  "<%= SocialStream.cleditor_controls %>"     
   });
 
 	var message_hash = window.location.hash.match(/^.*message_(\d+).*$/);
