@@ -9,10 +9,17 @@ describe ContactsController do
     @user = @tie.sender_subject
   end
 
-  it "should be successful" do
+  it "should render index" do
     sign_in @user
 
     get 'index'
+    response.should be_success
+  end
+
+  it "should render pending" do
+    sign_in @user
+
+    get 'pending'
     response.should be_success
   end
 

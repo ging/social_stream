@@ -3,14 +3,8 @@ class ContactsController < ApplicationController
   before_filter :exclude_reflexive, :except => [ :index, :pending ]
 
   def index
-    @total_contacts =
-      Contact.sent_by(current_subject).
-              joins(:receiver).merge(Actor.alphabetic).
-              positive.
-              select("actors.name")
-
     @contacts =
-      @total_contacts.
+      total_contacts.
               merge(Actor.letter(params[:letter])).
               merge(Actor.name_search(params[:search])).
               related_by_param(params[:relation])
@@ -46,6 +40,8 @@ class ContactsController < ApplicationController
   end
 
   def pending
+    total_contacts
+
     @contacts = current_subject.pending_contacts
 
     respond_to do |format|
@@ -87,5 +83,13 @@ class ContactsController < ApplicationController
         }
       end
     }.to_json
+  end
+
+  def total_contacts
+    @total_contacts ||=
+      Contact.sent_by(current_subject).
+              joins(:receiver).merge(Actor.alphabetic).
+              positive.
+              select("actors.name")
   end
 end
