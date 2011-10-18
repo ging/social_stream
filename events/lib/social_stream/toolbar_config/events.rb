@@ -1,18 +1,6 @@
 module SocialStream
   module ToolbarConfig
     module Events
-      def home_toolbar_items
-        items = super
-
-        items.find{ |i| i[:key] == :resources }[:items].unshift({
-          :key => :resources_events,
-          :name => image_tag("btn/btn_event.png")+t('conference.title'),
-          :url => events_path
-        })
-
-        items
-      end
-
       def profile_toolbar_items(subject = current_subject)
         items = super
 
