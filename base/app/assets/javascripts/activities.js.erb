@@ -1,5 +1,4 @@
 //= require jquery.livequery
-//= require chosen.jquery
 //= require jquery.tipsy
 //
 //initial state
@@ -7,20 +6,45 @@ $(function() {
   $('#wrapper_activities_header form').hide();
   $('#new_<%= SocialStream.activity_forms.first %>').show();
   $('#select_<%= SocialStream.activity_forms.first %>').addClass('selected');
-  $('#security').chosen();
+  chosen = $('#security').security_chosen();
   $('#security').change(function() {    
     $(this).children("option:selected").each(function(i,opt){
       if(opt.value==relation_public){
         if(public_selected==false){
           public_selected = true;
+          for(id in relation_options){
+            if(id==relation_public_pos){
+              $("#securitychzn_o_" + relation_public_pos).click();
+            }else{
+              chosen.result_deselect(id); 
+            }                       
+          }
+          chosen.results_update_field();
         }else{
-          public_selected = false;
+          if($('#security').children("option:selected").size()>1){
+            public_selected = false;          
+            chosen.result_deselect(relation_public_pos);
+            chosen.results_update_field();
+          }
         }
       }
-    });
+    });      
+    
+  $('#securities .search-choice a').click(function(){
+    console.log($('#security').children("option:selected").size());
+    if($('#security').children("option:selected").size()==0){
+      $('#securities input').css('width', default_width)
+    }
+  });      
+  });
+  $('#securities input').blur(function(){
+    console.log($('#security').children("option:selected").size());
+    if($('#security').children("option:selected").size()==0){
+      $('#securities input').css('width', default_width)
+    }
   });
   // Remove width calculation
-  //$('#securities input.default').css('width', '');
+  $('#securities input.default').css('width', default_width);
   setActivityPrivacyTooltips();
 });
 
@@ -74,7 +98,7 @@ unblock_all_forms = function() {
     $(this).removeAttr("readonly").val("").blur();
   });  
   //New comments
-  $('.input_new_comments').each(function() {
+  $('.input_new_comments').each(function() {chosen.result_deselect(0)
     $(this).removeAttr("readonly").val("");
   }); 
 }
