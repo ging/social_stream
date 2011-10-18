@@ -32,6 +32,7 @@
 .message .body{
 	padding: 5px 5px 5px 5px;
 	border: 1px solid $secondary-color;
+	word-wrap: break-word;
 }
 .message .content_left {
 	float:left;
