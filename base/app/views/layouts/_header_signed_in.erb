@@ -28,6 +28,7 @@
             </li>            
             <li class="pipe">·</li>
             <li>
+              <%= link_to(t('notification.other'), notifications_path) %>
               <span id="header_notifications">
               <%= link_to( current_subject.mailbox.notifications.not_trashed.unread.count.to_s, notifications_path) %>
               </span>
