@@ -1,0 +1,17 @@
+<div class="block">
+  <div class="header">
+    <div class="header_text">
+      <%= t("#{ current_subject.class.to_s.underscore }.destroy.one")%>
+    </div>
+  </div>
+  <div class="content">
+    <div class="form_row">
+      <%= t("#{ current_subject.class.to_s.underscore }.destroy.explanation") %>
+      <%= link_to t("#{ current_subject.class.to_s.underscore }.destroy.go_ahead"),
+          current_subject,
+          :method => :delete,
+          :confirm => t("#{ current_subject.class.to_s.underscore }.destroy.last_confirm") %>
+    </div>
+  </div>
+</div>
+

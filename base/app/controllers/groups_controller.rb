@@ -31,6 +31,15 @@ class GroupsController < InheritedResources::Base
     end
   end
 
+  def destroy
+    destroy! do |success, failure|
+      success.html {
+        self.current_subject = current_user
+        redirect_to :home
+      }
+    end
+  end
+
   protected
 
   # Overwrite resource method to support slug

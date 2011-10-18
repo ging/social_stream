@@ -185,6 +185,11 @@ en:
     all: "All groups"
     all_n: "All groups (%{count})"
     by: "By groups"    
+    destroy:
+      one: "Destroy group"
+      explanation: "All the activities, information and contacts of this group will be destroyed!"
+      go_ahead: "Yes, I am sure. Go ahead"
+      last_confirm: "This is your last chance. Are you really sure?"
     form:
       title: "Group"
     input: "What is the name of the group?"
