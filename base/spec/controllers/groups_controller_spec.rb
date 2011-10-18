@@ -19,21 +19,19 @@ describe GroupsController do
     end
 
     it "should not render new" do
-      begin
-        get :new
+      get :new
 
-        assert false
-      rescue CanCan::AccessDenied 
-        assert true
-      end
+      response.should redirect_to(new_user_session_path)
     end
 
     context "faking a new group" do
-      before do
-        model_attributes[:_contact_id] = Factory(:user).ego_contact.id
-      end
+      it "should deny creating" do
+        post :create, :group => { :name => "Test",
+                                  :_contact_id => Factory(:user).ego_contact.id
+                                }
 
-      it_should_behave_like "Deny Creating"
+        response.should redirect_to(new_user_session_path)
+      end
     end
 
     context "an existing group" do
@@ -158,7 +156,6 @@ describe GroupsController do
       # it_should_behave_like "Allow Updating"
       it_should_behave_like "Allow Destroying"
     end
-
   end
 end
 
