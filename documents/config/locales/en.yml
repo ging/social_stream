@@ -22,6 +22,12 @@ en:
     mine: "My pictures"  
     msg: "Uploaded a picture:"
     not_mine: "Pictures"
+  repository:
+    title: "Repository"
+    order:
+      by: "Order by"
+      last_modified: "Last modified"
+      most_popular: "Most popular"
   resource:
     all: "All Resources"
     confirm_delete: "Delete resource?"

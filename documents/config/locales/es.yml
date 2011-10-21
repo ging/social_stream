@@ -22,6 +22,12 @@ es:
     mine: "Mis imágenes"
     msg: "Subió una imagen:"
     not_mine: "Imágenes"
+  repository:
+    title: "Repositorio"
+    order:
+      by: "Ordenar por"
+      last_modified: "Última modificación"
+      most_popular: "Popularidad"
   resource:
     all: "Todos los recursos"
     confirm_delete: "¿Borrar recursos?"

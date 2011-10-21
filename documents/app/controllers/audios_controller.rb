@@ -7,6 +7,7 @@ class AudiosController < CommonDocumentsController
       path = path.split('.')[0]+'.'+Document::STYLE_FORMAT[params[:style]]
     end
     respond_to do |format|
+      format.html {render :action => :show}
       format.all {send_file path, 
                   :type => Document::STYLE_MIMETYPE[params[:style]],  # CANT USE: @video.file_content_type because it is allways video/mp4 and breaks explorer and firefox
                   :disposition => "inline"}

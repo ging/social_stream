@@ -1,3 +1,5 @@
+@import "colors";
+
 .attachment
 {
 	padding-top: 10px;
@@ -57,19 +59,25 @@
 }
 
 .attachment_tile{
-	margin: 4px;
-	margin-bottom: 8px;
-	width: 80px;
-	height: 65px;
+	margin: 5px;
+	width: 90px;
+	height: 70px;
 	border-bottom: 2px solid transparent;
 	float: left;
 	text-align: center;
 	overflow: hidden;
+  border: 1px solid transparent;
+  padding: 5px;
 }
 
+.attachment_tile img{
+  width: 48px;
+  height: 48px;
+}
+
+
 .attachment_tile:hover{
-	background-color: #e0edf2;
-	border-bottom: 2px solid #2A3890;
+	border: 1px solid $main-color;
 }
 
 .attachment_tile.selected{
@@ -85,6 +93,24 @@
 	width:90%;
 	border-left: 3px solid #2A3890;
 	background-color: #e0edf2;
+}
+
+#repository_filter {
+  margin-left: 10px;
+}
+
+#repository_filter #order_by{
+  margin: 5px 5px 5px 15px;
+}
+
+#repository_filter input {
+  padding: 0 3px 0 22px;
+  background: url('btn/search_icon.png') 5px 50% no-repeat white;
+  font-size: 11px;
+  color: $main-color;
+  border: solid 1px $input-border-color;
+  height: 25px;
+  width: 200px;
 }
 
 .player{

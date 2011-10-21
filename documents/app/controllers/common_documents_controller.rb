@@ -5,10 +5,12 @@ class CommonDocumentsController < InheritedResources::Base
 
   load_and_authorize_resource :except => :index
 
+
   def show
     path = resource.file.path(params[:style])
 
     respond_to do |format|
+      format.html {render :action => :show}
       format.all {
         send_file path, 
                   :filename => resource.file_file_name,

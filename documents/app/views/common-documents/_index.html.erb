@@ -1,45 +1,49 @@
 <% content_for :title do %>
-  <%= profile_subject.name %> 
+<%= profile_subject.name + ": " + t('repository.title') %>
 <% end %>
 
 <% content_for :sidebar do %>
-  <%= render :partial => 'home/sidebar' %>
+<%= render :partial => 'home/sidebar' %>
 <% end %>
 
 <%if profile_subject_is_current?%>
-  <%= location(
-    link_to(t(controller.controller_name.singularize + '.title'), polymorphic_path(controller.controller_name),:remote => true)
-    ) %>
-  <% toolbar %>
+<%= location(
+  link_to(t('repository.title'), polymorphic_path(controller.controller_name),:remote => true)
+  ) %>
 <%else%>
-  <%= location(
-    link_to(profile_subject.name, polymorphic_path(profile_subject),:remote => true),
-    link_to(t(controller.controller_name.singularize + '.title'), polymorphic_path([profile_subject, controller.controller_name]),:remote => true)
-    ) %>
-  <% toolbar :profile => profile_subject %>
+<%= location(
+  link_to(profile_subject.name, polymorphic_path(profile_subject),:remote => true),
+  link_to(t('repository.title'), polymorphic_path([profile_subject, controller.controller_name]),:remote => true)
+  ) %>
 <%end%>
 
-
-<div class="attachment_section_header">
-	<h3><%= profile_subject_is_current? ? t(controller.controller_name.singularize + '.mine') : t(controller.controller_name.singularize + '.not_mine') %></h3>
+<% toolbar :profile => profile_subject %>
+<br class="clearfloat" />
+<div class="space_center"></div>
+<div id="repository_filter">
+  <form action="<%= search_path%>" method="get" id="repository_filter">
+    <%= text_field_tag :filter_query, nil,:autocomplete => :off, :id => :repository_filter_input %>
+  </form>
+  <div id="order_by"><%= t('repository.order.by') %>: <%= t('repository.order.last_modified') %> · <%= t('repository.order.most_popular') %>  </div>
 </div>
-<% @activities.each do |a| %>
-	<% document = a.activity_objects.first.document %>
-	<div class="attachment_tile">
-		<div class="attachment_tile_thumb">
-    		<%= link_to thumb_for(document,48), 
-                {:controller => "documents", :action => "download", :id => document}, 
- 				:type => document.type, 
-				:title => document.file_file_name,
-				:path => document_path(document) %>
-  		</div>
+<div class="space_center"></div>
 
-  		<div class="attachment_tile_text">
-  			<%= link_to document.file_file_name,
-                {:controller => "documents", :action => "download", :id => document},
- 				:alt => document.file_file_name,
- 				:type => document.type,
- 				:path => document_path(document) %>
-  		</div>
-	</div>
-<% end %>
+<% @activities.each do |a| %>
+<% document = a.activity_objects.first.document %>
+<div class="attachment_tile">
+  <div class="attachment_tile_thumb">
+    <%= link_to thumb_for(document,48),
+    {:controller => "documents", :action => "show", :id => document},
+    :type => document.type,
+    :title => document.file_file_name,
+    :path => document_path(document) %>
+  </div>
+  <div class="attachment_tile_text">
+    <%= link_to truncate_name(document.file_file_name,:length => 15),
+    {:controller => "documents", :action => "show", :id => document},
+    :alt => document.file_file_name,
+    :type => document.type,
+    :path => document_path(document) %>
+  </div>
+</div>
+<% end %> 
