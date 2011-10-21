@@ -377,6 +377,7 @@ en:
   relation_public:
     name: "Public"
   representation:
+    notice: "Your session has changed. Now you are acting on behalf of %{subject}. Use the top-right menu to return to your session"
     switch: "Switch session"
   required: "(*) These fields are required"
   search:

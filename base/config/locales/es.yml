@@ -372,6 +372,7 @@ es:
   relation_public:
     name: "Público"
   representation:
+    notice: "Tu sesión ha cambiado. Ahora actúas en nombre de %{subject}. Para regresar a tu sessión, utiliza el menú de arriba a la derecha"
     switch: "Cambiar sessión"
   required: "(*) Estos campos son obligatorios"
   search:

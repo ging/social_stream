@@ -103,6 +103,12 @@ module SocialStream
             raise CanCan::AccessDenied.new("Not authorized!", :represent, subject.name)
           end
 
+          if subject != current_user
+            flash[:notice] ||= ""
+            flash[:notice] += t('representation.notice',
+                                :subject => subject.name)
+          end
+
           self.current_subject = subject
         end
 
