@@ -1,12 +1,8 @@
-require 'social_stream/migrations/finder'
-
 module SocialStream
   module Migrations
     class Base
       def initialize
-        find_old_migration 'acts-as-taggable-on',
-                       ["generators", "acts_as_taggable_on", "migration", "templates", "active_record", "migration"]
-
+        require_old_migration 'acts-as-taggable-on', 'lib/generators/acts_as_taggable_on/migration/templates/active_record/migration'
         @mailboxer_migration = find_migration 'mailboxer'
         @base_migration = find_migration 'social_stream-base'
       end
@@ -43,12 +39,13 @@ module SocialStream
       protected
 
       def find_migration(gem)
-        path = Gem::GemPathSearcher.new.find(gem).full_gem_path
-        File.join([path,'db', 'migrate'])
+        gem_path =  Gem::Specification.find_by_name(gem).full_gem_path
+        File.join([gem_path], 'db/migrate')
       end
-
-      def find_old_migration(gem, path)
-        SocialStream::Migrations::Finder.new gem, path
+      
+      def require_old_migration(gem,file_path)
+        gem_path =  Gem::Specification.find_by_name(gem).full_gem_path
+        require File.join([gem_path,file_path])
       end
     end
   end

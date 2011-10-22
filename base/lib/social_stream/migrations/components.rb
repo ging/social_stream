@@ -4,7 +4,8 @@ module SocialStream
   module Migrations
     class Components < Base
       def initialize
-        @component = find_migration("social_stream-#{ self.class.name.split('::').last.underscore }")
+        @component = find_migration "social_stream-#{ self.class.name.split('::').last.underscore }"
+        puts @component
       end
 
       def up(options = {})
