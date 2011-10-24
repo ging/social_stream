@@ -14,7 +14,7 @@
 	<script type="text/javascript">
 			
 		//Global variables
-		var BOSH_SERVICE = '<%=SocialStream::Presence.bosh_service%>';
+		var BOSH_SERVICE = '<%= SocialStream::Presence.bosh_service || root_url + "http-bind" %>';
 		var domain = '<%=SocialStream::Presence.domain%>';
     var user_name = '<%=current_user.name%>';
 		var user_slug = '<%=current_user.slug%>';

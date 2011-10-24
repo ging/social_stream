@@ -1,5 +1,5 @@
 namespace :presence do
-  desc 'Synchronize the Xmpp Server database with the Social Stream database'
+  desc 'Synchronize Xmpp Server with Social Stream Rails Application'
   task :synchronize => [ 'presence:synchronize:connections', 'presence:synchronize:rosters' ]
 
   namespace :synchronize do
@@ -45,6 +45,7 @@ namespace :presence do
     puts "Synchronization complete"
     end
 
+    desc "Synchronize Xmpp Server database with Social Stream Rails Application database"
     desc "Remove all rosters and populate rosters from Social Stream data."
     task :rosters => :environment do
         puts "Starting presence:synchronize:rosters"
