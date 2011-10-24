@@ -4,4 +4,6 @@
 //= require modernizr
 //= require jquery.lightbox-with-resize-plugin
 //
+//= require avatars_for_rails
+//
 //= require_tree .
