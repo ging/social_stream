@@ -241,12 +241,6 @@ function initAndPlaySound(sound){
 //Chat view jquery
 ////////////////////
 
-function initDelegates(){
-  $('.user_presence').delegate( '.user_presence a[title]', 'hover', function(){ 
-    e.preventDefault();
-  });
-}
-
 function setUserFunctions(){
 	
 	$("div.user_presence").click(function(event, ui){

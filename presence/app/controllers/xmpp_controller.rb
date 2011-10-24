@@ -52,7 +52,7 @@ class XmppController < ApplicationController
        return
     end
     
-    render :text => "Error"
+    render :text => "User not connected"
   end
   
   
@@ -117,6 +117,10 @@ class XmppController < ApplicationController
     status = params[:status]
     
     if setStatus(user,status)
+      if user && !user.connected
+        user.connected = true
+        user.save!
+      end
       render :text => 'Status changed'
     else
       render :text => 'Status not changed'
@@ -130,7 +134,17 @@ class XmppController < ApplicationController
       render :text => "Authorization error"
       return
     end
-    render :text => "Ok"
+    
+    user = User.find_by_slug(params[:name])
+    
+    if user && user.connected
+       user.connected = false
+       user.save!
+       render :text => "Ok"
+       return
+    end
+    
+    render :text => "User not connected"
   end
  
   def authorization
@@ -158,49 +172,7 @@ class XmppController < ApplicationController
   end
    
   def test
-    puts "TEST"
-      
-#    Thread.start{
-    
-#      #XMPP DOMAIN
-#      domain = SocialStream::Presence.domain
-#      #PASSWORD
-#      password= SocialStream::Presence.password
-#      #SS Username
-#      ss_name = SocialStream::Presence.social_stream_presence_username      
-#      ss_sid = ss_name + "@" + domain 
-#        
-#      client = Jabber::Client.new(Jabber::JID.new(ss_sid))
-#      client.connect
-#      client.auth(password)
-#     
-#      #Remove all rosters
-#      msg = Jabber::Message::new(ss_sid, "SynchronizeRosters")
-#      msg.type=:chat
-#      client.send(msg)
-#      
-# 
-#      #Write rosters
-#      users = User.all
-#      checkedUsers = []
-#    
-#      users.each do |user|
-#        checkedUsers << user.slug
-#        contacts = user.contact_actors(:type=>:user)
-#        contacts.each do |contact|
-#          unless checkedUsers.include?(contact.slug)
-#            user_sid = user.slug + "@" + domain
-#            buddy_sid = contact.slug + "@" + domain  
-#            msg = Jabber::Message::new(ss_sid, "SetRosterForBidirectionalTie&" + user_sid + "&" + buddy_sid + "&" + user.name + "&" + contact.name)
-#            msg.type=:chat
-#            client.send(msg)
-#          end
-#        end
-#      end
-#
-#      client.close()
-#    }  
-
+    #puts "TEST"
   end
   
   

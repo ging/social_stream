@@ -7,7 +7,42 @@ namespace :presence do
     desc "Synchronize user presence."
     task :connections => :environment do
       puts "Starting presence:synchronize:connections"
-      puts "Synchronization complete"
+      
+      begin
+        #XMPP DOMAIN
+        domain = SocialStream::Presence.domain
+        #PASSWORD
+        password= SocialStream::Presence.password
+        #SS Username
+        ss_name = SocialStream::Presence.social_stream_presence_username
+        
+        ss_sid = ss_name + "@" + domain
+        client = Jabber::Client.new(Jabber::JID.new(ss_sid))
+        client.connect
+        client.auth(password)
+ 
+        msg = Jabber::Message::new(ss_sid, "Synchronize")
+        msg.type=:chat
+        client.send(msg)
+        client.close()
+      
+      rescue Exception => e
+        case e
+          when Errno::ECONNREFUSED
+            desc "Reset connected users when XMMP Server Down"
+            puts "Connection to XMPP Server refused: Reset Connected Users"
+            users = User.find_all_by_connected(true)
+            users.each do |user|
+              user.connected = false
+              user.save!
+            end
+          else
+            puts "Unknown exception: #{e.to_s}"
+            return
+        end  
+      end              
+    
+    puts "Synchronization complete"
     end
 
     desc "Remove all rosters and populate rosters from Social Stream data."

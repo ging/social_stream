@@ -9,4 +9,6 @@ SocialStream::Presence.setup do |config|
   config.xmpp_server_password = "G&s6GBnO)anw2Ene%K12Cb=0quj@uDmA"
   #Username of the the Social Stream Admin sid
   config.social_stream_presence_username = "social_stream-presence"
+  #True to enable Social Stream Presence
+  config.enable = true
 end

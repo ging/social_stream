@@ -18,6 +18,10 @@ module SocialStream
           
           def save_buddy
             
+            unless SocialStream::Presence.enable
+              return
+            end
+            
             unless self.receiver.subject_type == "User" and self.sender.subject_type == "User"
               return
             end
