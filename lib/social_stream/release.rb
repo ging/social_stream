@@ -5,19 +5,41 @@ module SocialStream
         # First of all, update gems
         system "bundle"
 
-        dependencies = Global::Release.new.dependencies
+        parse_args(args)
 
-        components = args.map do |a|
+        all.each(&:bump_version)
+
+        all.each(&:update_dependencies)
+
+        system("git commit #{ all.map(&:commit_files).join(" ") } -m #{ @global.version }") ||
+          raise(RuntimeError.new)
+
+        all.each(&:rake_release)
+      end
+
+      def dependencies
+        @dependencies ||=
+          Global::Release.new.dependencies
+      end
+
+      def parse_args args
+        @components = []
+
+        args.each do |a|
           name, version = a.split(":")
 
           if dependencies.include?(name)
-            Component::Release.new(name, version).release!
+            @components << Component::Release.new(name, version)
           else
             @target = name
           end
         end
 
-        Global::Release.new(@target).release!
+        @global = Global::Release.new(@target)
+      end
+
+      def all
+        @components + [ @global ]
       end
     end
   end
