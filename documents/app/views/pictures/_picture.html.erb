@@ -19,7 +19,7 @@
   
   <div class="picture_link picture_thumbnail_show">
     <%= link_to thumb_for(picture, 130),
-        picture, 
+        {:controller => "documents", :action => "download", :id => picture}, 
         :type => picture.type, 
 		:title => picture.file_file_name,
 		:path => document_path(picture) %>
