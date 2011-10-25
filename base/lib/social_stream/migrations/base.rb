@@ -39,13 +39,19 @@ module SocialStream
       protected
 
       def find_migration(gem)
-        gem_path =  Gem::Specification.find_by_name(gem).full_gem_path
-        File.join([gem_path], 'db/migrate')
+        File.join([get_full_gem_path(gem)], 'db/migrate')
       end
-      
+
       def require_old_migration(gem,file_path)
-        gem_path =  Gem::Specification.find_by_name(gem).full_gem_path
-        require File.join([gem_path,file_path])
+        require File.join([get_full_gem_path(gem),file_path])
+      end
+
+      def get_full_gem_path(gem)
+        if (Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.8.0'))
+          return Gem::Specification.find_by_name(gem).full_gem_path
+        else
+          return Gem::GemPathSearcher.find(gem).full_gem_path
+        end
       end
     end
   end
