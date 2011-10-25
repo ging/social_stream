@@ -50,49 +50,79 @@ namespace :presence do
     task :rosters => :environment do
         puts "Starting presence:synchronize:rosters"
         
-        #XMPP DOMAIN
-        domain = SocialStream::Presence.domain
-        #PASSWORD
-        password= SocialStream::Presence.password
-        #SS Username
-        ss_name = SocialStream::Presence.social_stream_presence_username      
-        ss_sid = ss_name + "@" + domain 
+               
+        if SocialStream::Presence.remote_xmpp_server
         
-        puts "Connecting to Xmpp Server"
-        client = Jabber::Client.new(Jabber::JID.new(ss_sid))
-        client.connect
-        puts "Authentication..."
-        client.auth(password)
-        puts "Connected to Xmpp Server"
+          #XMPP DOMAIN
+          domain = SocialStream::Presence.domain
+          #PASSWORD
+          password= SocialStream::Presence.password
+          #SS Username
+          ss_name = SocialStream::Presence.social_stream_presence_username      
+          ss_sid = ss_name + "@" + domain 
+          
+          puts "Connecting to Xmpp Server"
+          client = Jabber::Client.new(Jabber::JID.new(ss_sid))
+          client.connect
+          puts "Authentication..."
+          client.auth(password)
+          puts "Connected to Xmpp Server"
+          
+          puts "Remove all rosters"
+          msg = Jabber::Message::new(ss_sid, "SynchronizeRosters")
+          msg.type=:chat
+          client.send(msg)
+          
+     
+          puts "Populate rosters"
+          users = User.all
+          checkedUsers = []
         
-        puts "Remove all rosters"
-        msg = Jabber::Message::new(ss_sid, "SynchronizeRosters")
-        msg.type=:chat
-        client.send(msg)
-        
-   
-        puts "Populate rosters"
-        users = User.all
-        checkedUsers = []
-      
-        users.each do |user|
-          checkedUsers << user.slug
-          contacts = user.contact_actors(:type=>:user)
-          contacts.each do |contact|
-            unless checkedUsers.include?(contact.slug)
-              user_sid = user.slug + "@" + domain
-              buddy_sid = contact.slug + "@" + domain  
-              msg = Jabber::Message::new(ss_sid, "SetRosterForBidirectionalTie&" + user_sid + "&" + buddy_sid + "&" + user.name + "&" + contact.name)
-              msg.type=:chat
-              client.send(msg)
+          users.each do |user|
+            checkedUsers << user.slug
+            contacts = user.contact_actors(:type=>:user)
+            contacts.each do |contact|
+              unless checkedUsers.include?(contact.slug)
+                user_sid = user.slug + "@" + domain
+                buddy_sid = contact.slug + "@" + domain  
+                msg = Jabber::Message::new(ss_sid, "SetRosterForBidirectionalTie&" + user_sid + "&" + buddy_sid + "&" + user.name + "&" + contact.name)
+                msg.type=:chat
+                client.send(msg)
+              end
             end
           end
-        end
-
-        puts "Synchronization complete"
-        puts "Closing connection"
-        client.close()  
-        puts "Connection closing"
+  
+          puts "Synchronization complete"
+          puts "Closing connection"
+          client.close()  
+          puts "Connection closing"
+        
+        else
+        #SocialStream::Presence.remote_xmpp_server=false
+        
+          puts "Removing all rosters"
+          system SocialStream::Presence.scripts_path + "/emanagement removeAllRosters"
+          puts "Rosters removed"
+     
+          puts "Populate rosters"
+          users = User.all
+          checkedUsers = []
+        
+          users.each do |user|
+            checkedUsers << user.slug
+            contacts = user.contact_actors(:type=>:user)
+            contacts.each do |contact|
+              unless checkedUsers.include?(contact.slug)
+                user_nick = user.name.split(" ")[0]
+                buddy_nick = contact.name.split(" ")[0]
+                command = SocialStream::Presence.scripts_path + "/emanagement setBidireccionalBuddys " + user.slug + " " + contact.slug + " " + user_nick + " " + buddy_nick
+                puts command
+                system command
+              end
+            end
+          end
+        
+      end
       
     end
   end
