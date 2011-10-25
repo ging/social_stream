@@ -21,8 +21,14 @@ describe DocumentsController do
         response.body.should =~ /small.pdf/
       end
       
-      it "should render receiver's show" do
+      it "should render receiver's html show" do
         get :show, :id => @public_document.to_param
+        response.should be_success
+        response.headers["Content-Type"].should include('text/html')
+      end
+      
+      it "should render receiver's format pdf show" do
+        get :show, :id => @public_document.to_param, :format => :pdf
         response.should be_success
         response.headers["Content-Type"].should include('application/pdf')
       end
@@ -40,8 +46,14 @@ describe DocumentsController do
         response.body.should =~ /small.pdf/
       end
       
-      it "should render show" do
+      it "should render html show" do
         get :show, :id => @public_document.to_param
+        response.should be_success
+        response.headers["Content-Type"].should include('text/html')
+      end
+      
+      it "should render format pdf show" do
+        get :show, :id => @public_document.to_param, :format => :pdf
         response.should be_success
         response.headers["Content-Type"].should include('application/pdf')
       end
