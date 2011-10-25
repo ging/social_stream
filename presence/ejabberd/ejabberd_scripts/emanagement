@@ -89,7 +89,8 @@ def removeBuddyFromRoster(username,buddy)
 end
 
 def addBuddyToRoster(username,buddy,buddyNick,buddyGroup,subscription_type)
-	command = "ejabberdctl add-rosteritem " + username + " " + $domain + " " + buddy + " " + $domain + " \\'" + buddyNick + "\\' " + buddyGroup + " " + subscription_type
+	#command = "ejabberdctl add-rosteritem " + username + " " + $domain + " " + buddy + " " + $domain + " \\'" + buddyNick + "\\' " + buddyGroup + " " + subscription_type
+	command = "ejabberdctl add-rosteritem " + username + " " + $domain + " " + buddy + " " + $domain + " " + buddyNick + " " + buddyGroup + " " + subscription_type
 	%x[#{command}];
 end
 
