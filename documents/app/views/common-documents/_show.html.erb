@@ -1,0 +1,35 @@
+<% if profile_subject.nil? %>
+  <% puts "----------------------------------------------------------------------" %>
+  <% puts profile_subject %>
+  <% profile_subject = current_subject %>  
+  <% puts profile_subject %>  
+  <% puts "----------------------------------------------------------------------" %>
+<% end %>
+
+<% content_for :title do %>
+<%= profile_subject.name + ": " + t('repository.title') %>
+<% end %>
+
+<% content_for :sidebar do %>
+<%= render :partial => 'home/sidebar' %>
+<% end %>
+
+<%if profile_subject_is_current?%>
+<%= location(
+  link_to(t('repository.title'), polymorphic_path(controller.controller_name),:remote => true)
+  ) %>
+<%else%>
+<%= location(
+  link_to(profile_subject.name, polymorphic_path(profile_subject),:remote => true),
+  link_to(t('repository.title'), polymorphic_path([profile_subject, controller.controller_name]),:remote => true)
+  ) %>
+<%end%>
+
+<% toolbar :profile => profile_subject %>
+
+
+<br class="clearfloat" />
+<div class="space_center"></div>
+<% if document %>
+  <%= document.inspect.to_s %>
+<% end %>

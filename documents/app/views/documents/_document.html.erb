@@ -6,13 +6,13 @@
 
   <div class="attachment_thumb">
     <%= link_to thumb_for(document, 16),
-        {:controller => "documents", :action => "download", :id => document}, 
+        document, 
         :class => "" %>
   </div>
 
   <div class="attachment_text">
   	<%= t('document.msg') %><%= link_to "\""+document.file_file_name+"\"", 
-    {:controller => "documents", :action => "download", :id => document},  
+    document,  
     :class => "attachment_text_link" %>
   </div>
 

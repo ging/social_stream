@@ -11,6 +11,12 @@ es:
     confirm_delete: "¿Borrar documento?"
     form:
       title: "Fichero"
+    info:
+      description:
+        default: "Sin descripción"
+        title: "Descripción"
+      title:
+        title: "Título"
     mine: "Mis documentos"
     msg: "Subió un documento:"
     not_mine: "Documentos"

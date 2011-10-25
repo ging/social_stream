@@ -1,11 +1,11 @@
 <div class="attachment_thumb">
   <%= link_to thumb_for(video, 16),
-  {:controller => "documents", :action => "download", :id => video},
+  :id => video,
   :class => "" %>
 </div>
 <div class="attachment_text">
   <%= t('video.msg') %><%= link_to "\""+video.file_file_name+"\"",
-  {:controller => "documents", :action => "download", :id => video},
+  video,
   :class => "attachment_text_link" %>
   <div id="video_thumbnail_<%= video.id%>" class="video_thumbnail_class">
     <%= image_tag(video_path(video)+".png?style=thumb", :class => "video_thumbnail_image", :alt => "")%> <div id="<%= video.id%>" class="video_thumbnail_play_over"></div>

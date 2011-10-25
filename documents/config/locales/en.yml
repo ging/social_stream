@@ -11,6 +11,12 @@ en:
     confirm_delete: "Delete document?"
     form:
       title: "File"
+    info:
+      description:
+        default: "No description given"
+        title: "Description"
+      title:
+        title: "Title"
     mine: "My documents"
     msg: "Uploaded a document:"
     not_mine: "Documents"

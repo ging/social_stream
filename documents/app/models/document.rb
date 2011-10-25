@@ -13,6 +13,8 @@ class Document < ActiveRecord::Base
   
   validates_attachment_presence :file
   
+  after_create :set_title_and_description
+  
   define_index do
     indexes title
     indexes file_file_name, :as => :file_name
@@ -66,6 +68,13 @@ class Document < ActiveRecord::Base
     else
       "#{ size.to_s }/default.png"
     end
+  end
+  
+  protected
+  
+  def set_title_and_description
+    #self.title = self.file_file_name
+    #self.description = I18n.t("document.info.description.default")
   end
     
 end
