@@ -87,7 +87,7 @@ loop do
     
     when "auth"
       $logger.info "#{Process.pid}: Authenticating #{data[0]}@#{data[1]}"
-      $logger.info "#{Process.pid}: With password #{data[2]}"
+      #$logger.info "#{Process.pid}: With password #{data[2]}"
       #password = data[2]
       
       #Authorization condition for LOGIN

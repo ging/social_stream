@@ -121,8 +121,8 @@ def setBidireccionalBuddys(usernameA,usernameB,nickA,nickB)
 	#addBuddyToRoster(username,buddy,buddyNick,buddyGroup,subscription_type)
 	addBuddyToRoster(usernameA,usernameB,nickB,"SocialStream","both")
 	addBuddyToRoster(usernameB,usernameA,nickA,"SocialStream","both")
-	sendPresence(usernameA,"chat")
-	sendPresence(usernameB,"chat")
+	#sendPresence(usernameA,"chat")
+	#sendPresence(usernameB,"chat")
 	return "Done"
 end
 

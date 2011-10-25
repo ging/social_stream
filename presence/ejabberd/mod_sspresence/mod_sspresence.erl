@@ -13,8 +13,8 @@ start(Host, _Opts) ->
     ejabberd_hooks:add(set_presence_hook, 		Host, ?MODULE, on_presence, 50),
     ejabberd_hooks:add(unset_presence_hook, 		Host, ?MODULE, on_unset_presence, 50),
     ejabberd_hooks:add(user_send_packet, 		Host, ?MODULE, on_packet_send, 50),
-    %Uncomment to reset connected users directly when module sspresence starts.
-    %reset_connections(),
+    %Reset connected users when module sspresence starts.
+    reset_connections(),
     ok.
 
 stop(Host) ->
@@ -169,7 +169,11 @@ execute(Message) ->
 	%frank-williamson@trapo adds demo@trapo to its roster with subscription from, in the group SocialStream with the name Nickname
 %%
 addItemToRoster(UserSlug,UserDomain,BuddySlug,BuddyDomain,ContactName,Group,Subscription_type) ->
-	Command = lists:concat(["ejabberdctl add_rosteritem ", UserSlug , " ", UserDomain, " ", BuddySlug, " ", BuddyDomain , " \\'", ContactName , "\\' ", Group , " ", 					Subscription_type]),
+	%%Command = lists:concat(["ejabberdctl add_rosteritem ", UserSlug , " ", UserDomain, " ", BuddySlug, " ", BuddyDomain , " \\'", ContactName , "\\' ", Group , " ", 					Subscription_type]),
+	%%Command = lists:concat(["ejabberdctl add_rosteritem ", UserSlug , " ", UserDomain, " ", BuddySlug, " ", BuddyDomain , " \'", ContactName , "\' ", Group , " ", 					Subscription_type]),
+	
+	[UserName|_R] = string:tokens(ContactName, " "),
+	Command = lists:concat(["ejabberdctl add_rosteritem ", UserSlug , " ", UserDomain, " ", BuddySlug, " ", BuddyDomain , " ", UserName , " ", Group , " ", 					Subscription_type]),
 	os:cmd(Command),
 	?INFO_MSG("Execute command: ~p", [Command]),
 ok.
@@ -248,10 +252,10 @@ ok.
 
 
 %Reset all connections
-%reset_connections() ->
-%	Reset_path = string:concat(getOptionValue("scripts_path="), "/reset_connection_script "),
-%	os:cmd(Reset_path),
-%ok.
+reset_connections() ->
+	Reset_path = string:concat(getOptionValue("scripts_path="), "/reset_connection_script "),
+	os:cmd(Reset_path),
+ok.
 
 
 
