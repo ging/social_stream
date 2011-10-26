@@ -26,12 +26,6 @@ describe PicturesController do
         response.should be_success
         response.headers["Content-Type"].should include('text/html')
       end
-      
-      it "should render receiver's format png show" do
-        get :show, :id => @public_picture.to_param, :format => :png
-        response.should be_success
-        response.headers["Content-Type"].should include('image/png')
-      end
     end
     
     describe "when authenticated" do
@@ -50,12 +44,6 @@ describe PicturesController do
         get :show, :id => @public_picture.to_param
         response.should be_success
         response.headers["Content-Type"].should include('text/html')
-      end
-      
-      it "should render format png show" do
-        get :show, :id => @public_picture.to_param, :format => :png
-        response.should be_success
-        response.headers["Content-Type"].should include('image/png')
       end
     end
   end #end of the context

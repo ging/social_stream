@@ -29,9 +29,11 @@ module SocialStream
         Mime::Type.register "audio/x-wav", :wav, [ "audio/wav" ]
         Mime::Type.register "audio/mpeg", :mpeg
         Mime::Type.register "audio/x-vorbis+ogg", :ogg, [ "application/ogg" ]
+        Mime::Type.register "audio/webm", :webma
 
         # Video
         Mime::Type.register "video/x-flv", :flv
+        Mime::Type.register "video/webm", :webm
       end
 
       initializer "social_stream-documents.toolbar_config" do

@@ -1,7 +1,7 @@
 class Picture < Document
   has_attached_file :file, 
                     :url => '/:class/:id.:extension',
-                    :path => ':rails_root/documents/:class/:id_partition/:style.:extension',
+                    :path => ':rails_root/documents/:class/:id_partition/:style',
                     :styles => {:thumb  => ["48x48#"],
                                 :thumb0 => ["130x80#"]
                                }                              

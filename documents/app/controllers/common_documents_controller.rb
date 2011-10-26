@@ -1,4 +1,6 @@
 class CommonDocumentsController < InheritedResources::Base
+  respond_to :html, :js
+
   belongs_to_subjects :optional => true
 
   before_filter :profile_subject!, :only => :index
@@ -7,14 +9,13 @@ class CommonDocumentsController < InheritedResources::Base
 
 
   def show
-    path = resource.file.path(params[:style])
-
     respond_to do |format|
       format.html {render :action => :show}
       format.all {
+        path = resource.file.path(params[:style] || params[:format])
+
         send_file path, 
                   :filename => resource.file_file_name,
-                  :type => resource.file_content_type,
                   :disposition => "inline"
       }
     end

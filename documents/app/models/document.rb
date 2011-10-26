@@ -3,13 +3,9 @@ class Document < ActiveRecord::Base
 
   IMAGE_FORMATS = ["doc","ppt","xls","rar","zip","mpeg","plain","pdf"]
 
-  STYLE_FORMAT = {"webm" =>"webm", "flv"=>"flv", "thumb"=>"png", "thumb0"=>"png", "webma"=>"webm"}
-
-  STYLE_MIMETYPE = {"webm" =>"video/webm", "flv"=>"video/x-flv", "thumb"=>"image/png", "thumb0"=>"image/png", "mp3"=>"audio/mpeg", "webma"=>"audio/webm"}
-
   has_attached_file :file, 
                     :url => '/:class/:id.:extension',
-                    :path => ':rails_root/documents/:class/:id_partition/:style.:extension'
+                    :path => ':rails_root/documents/:class/:id_partition/:style'
   
   validates_attachment_presence :file
   

@@ -1,5 +1,5 @@
 class DocumentsController < CommonDocumentsController
-  respond_to :html,:js,:png,:jpeg,:bmp,:gif
+  respond_to :html, :js
   
   SEND_FILE_METHOD = :default
 
@@ -12,9 +12,15 @@ class DocumentsController < CommonDocumentsController
   #TODO: we have to add the mimetype as in videos_controller
   def download
     path = @document.file.path(params[:style])
-    head(:bad_request) and return unless File.exist?(path) 
-    send_file_options = {:filename=>@document.file_file_name, :type => @document.file_content_type} 
 
+    head(:bad_request) and return unless File.exist?(path) 
+
+    send_file_options = {
+      :filename => @document.file_file_name,
+      :type => @document.file_content_type
+    }
+
+    # Ask Victor about the rationale of this:
     case SEND_FILE_METHOD
       when :apache then send_file_options[:x_sendfile] = true
       when :nginx then head(:x_accel_redirect => path.gsub(Rails.root, ''))
@@ -25,7 +31,7 @@ class DocumentsController < CommonDocumentsController
 
   class << self
     def index_object_type
-      [:Audio,:Video,:Picture,:Document]
+      [ :Audio, :Video, :Picture, :Document ]
     end
   end
 end

@@ -1,12 +1,12 @@
 <div class="attachment_thumb">
   <%= link_to thumb_for(audio, 16),
-  {:controller => "documents", :action => "download", :id => audio},
-  :class => "" %>
+              download_document_path(audio),
+              :class => "" %>
 </div>
 <div class="attachment_text">
   <%= t('audio.msg') %><%= link_to "\""+audio.file_file_name+"\"",
-  {:controller => "documents", :action => "download", :id => audio},
-  :class => "attachment_text_link" %>
+                                   download_document_path(audio),
+                                   :class => "attachment_text_link" %>
 </div>
 <div id="jpId<%= audio.id%>" class="jpId_size0"></div>
 <div class="jp-audio">
