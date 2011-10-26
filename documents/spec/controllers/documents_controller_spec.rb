@@ -22,15 +22,13 @@ describe DocumentsController do
       end
       
       it "should render receiver's html show" do
-        pending
-        get :show, :id => @public_document.to_param, :user_id => @public_document.post_activity.receiver.to_param
+        get :show, :id => @public_document.to_param
         response.should be_success
         response.headers["Content-Type"].should include('text/html')
       end
       
       it "should render receiver's format pdf show" do
-        pending
-        get :show, :id => @public_document.to_param, :format => :pdf, :user_id => @public_document.post_activity.receiver.to_param
+        get :show, :id => @public_document.to_param, :format => :pdf
         response.should be_success
         response.headers["Content-Type"].should include('application/pdf')
       end
@@ -49,15 +47,13 @@ describe DocumentsController do
       end
       
       it "should render html show" do
-        pending
-        get :show, :id => @public_document.to_param, :user_id => @public_document.post_activity.receiver.to_param
+        get :show, :id => @public_document.to_param
         response.should be_success
         response.headers["Content-Type"].should include('text/html')
       end
       
       it "should render format pdf show" do
-        pending
-        get :show, :id => @public_document.to_param, :format => :pdf, :user_id => @public_document.post_activity.receiver.to_param
+        get :show, :id => @public_document.to_param, :format => :pdf
         response.should be_success
         response.headers["Content-Type"].should include('application/pdf')
       end

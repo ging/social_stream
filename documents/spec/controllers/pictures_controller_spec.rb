@@ -22,15 +22,13 @@ describe PicturesController do
       end
       
       it "should render receiver's html show" do
-        pending
-        get :show, :id => @public_picture.to_param, :user_id => @public_picture.post_activity.receiver.to_param
+        get :show, :id => @public_picture.to_param
         response.should be_success
         response.headers["Content-Type"].should include('text/html')
       end
       
       it "should render receiver's format png show" do
-        pending
-        get :show, :id => @public_picture.to_param, :format => :png, :user_id => @public_picture.post_activity.receiver.to_param
+        get :show, :id => @public_picture.to_param, :format => :png
         response.should be_success
         response.headers["Content-Type"].should include('image/png')
       end
@@ -49,15 +47,13 @@ describe PicturesController do
       end
       
       it "should render html show" do
-        pending
-        get :show, :id => @public_picture.to_param, :user_id => @public_picture.post_activity.receiver.to_param
+        get :show, :id => @public_picture.to_param
         response.should be_success
         response.headers["Content-Type"].should include('text/html')
       end
       
       it "should render format png show" do
-        pending
-        get :show, :id => @public_picture.to_param, :format => :png, :user_id => @public_picture.post_activity.receiver.to_param
+        get :show, :id => @public_picture.to_param, :format => :png
         response.should be_success
         response.headers["Content-Type"].should include('image/png')
       end
