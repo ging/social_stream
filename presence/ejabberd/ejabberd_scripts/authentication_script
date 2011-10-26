@@ -45,8 +45,12 @@ def auth(username, password)
   #end
 
   #Social Stream password
-  if username == $sslogin and password == $sspass
-    return true
+  if username == $sslogin 
+    if password == $sspass
+      return true
+    else
+      return false
+    end
   end
 
   begin

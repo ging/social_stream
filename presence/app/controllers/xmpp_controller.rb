@@ -1,9 +1,3 @@
-require 'xmpp4r'
-require 'xmpp4r/muc'
-require 'xmpp4r/roster'
-require 'xmpp4r/client'
-require 'xmpp4r/message'
-
 class XmppController < ApplicationController
   
   #Mapping XMPP Standar Status to Social Stream Chat Status
@@ -19,42 +13,6 @@ class XmppController < ApplicationController
    
    
   #API METHODS
-
-  def resetConnection
-    unless authorization
-      render :text => "Authorization error"
-      return
-    end
-    
-    users = User.find_all_by_connected(true)
-    
-    users.each do |user|
-      user.connected = false
-      user.save!
-    end
-    
-    render :text => "Ok" 
-  end
-
-
-  def unsetConecction
-    unless authorization
-      render :text => "Authorization error"
-      return
-    end
-    
-    user = User.find_by_slug(params[:name])
-    
-    if user && user.connected
-       user.connected = false
-       user.save!
-       render :text => "Ok"
-       return
-    end
-    
-    render :text => "User not connected"
-  end
-  
   
   def setConnection  
     unless authorization
@@ -76,34 +34,22 @@ class XmppController < ApplicationController
   end
   
   
-  def synchronizePresence  
+  def unsetConecction
     unless authorization
       render :text => "Authorization error"
       return
     end
-     
-    #Actual connected users
-    user_slugs = params[:name]
     
-    #Check connected users
-    users = User.find_all_by_connected(true)
+    user = User.find_by_slug(params[:name])
     
-    users.each do |user|
-      if user_slugs.include?(user.slug) == false
-        user.connected = false
-        user.save!
-      end
+    if user && user.connected
+       user.connected = false
+       user.save!
+       render :text => "Ok"
+       return
     end
     
-    user_slugs.each do |user_slug|
-      u = User.find_by_slug(user_slug)
-      if (u != nil && u.connected  == false)
-        u.connected = true
-        u.save!
-      end
-    end
-    
-    render :text => "ok"
+    render :text => "User not connected"
   end
   
   
@@ -146,6 +92,34 @@ class XmppController < ApplicationController
     
     render :text => "User not connected"
   end
+  
+  
+  def resetConnection
+    unless authorization
+      render :text => "Authorization error"
+      return
+    end
+    
+    SocialStream::Presence::XmppServerOrder::reset_presence
+    
+    render :text => "Ok" 
+  end
+  
+  
+  def synchronizePresence  
+    unless authorization
+      render :text => "Authorization error"
+      return
+    end 
+     
+    #Actual connected users
+    user_slugs = params[:name]  
+    
+    SocialStream::Presence::XmppServerOrder::synchronize_presence_for_slugs(user_slugs)
+    
+    render :text => "ok"
+  end
+ 
  
   def authorization
     return params[:password] == SocialStream::Presence.xmpp_server_password
@@ -160,8 +134,7 @@ class XmppController < ApplicationController
       render :partial => 'xmpp/chat_off'
     end 
   end
-  
-  
+    
 
  
   
@@ -174,7 +147,6 @@ class XmppController < ApplicationController
   def test
     #puts "TEST"
   end
-  
   
   
   private

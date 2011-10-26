@@ -39,7 +39,7 @@ PARAMS_FOR_COMMANDS = {
 'addBuddyToRoster' => 5,
 'removeRoster' => 1,
 'getBuddysFromRoster' => 1,
-'setBidireccionalBuddys' => 4,
+'setBidireccionalBuddys' => 6,
 'help' => 0,
 'getUserResource' => 1,
 'sendMessageToUser' => 3,
@@ -52,10 +52,10 @@ PARAMS_FOR_COMMANDS = {
 SYNTAX_FOR_COMMANDS = {
 'getRoster' => "getRoster username",
 'removeBuddyFromRoster' => "removeBuddyFromRoster username buddy",
-'addBuddyToRoster' => "addBuddyToRoster username buddy buddyNick buddyGroup subscription_type",
+'addBuddyToRoster' => "addBuddyToRoster userSid buddySid buddyNick buddyGroup subscription_type",
 'removeRoster' => "removeRoster username",
 'getBuddysFromRoster' => "getBuddysFromRoster roster",
-'setBidireccionalBuddys' => "setBidireccionalBuddys usernameA usernameB nickA nickB",
+'setBidireccionalBuddys' => "setBidireccionalBuddys userASid userBSid userANick userBNick groupForA groupForB",
 'getUserResource' => "getUserResource username",
 'sendMessageToUser' => "sendMessageToUser from_name to_name msg",
 'sendPresence' => 'sendPresence username show',
@@ -88,12 +88,6 @@ def removeBuddyFromRoster(username,buddy)
 	%x[#{command}];
 end
 
-def addBuddyToRoster(username,buddy,buddyNick,buddyGroup,subscription_type)
-	#command = "ejabberdctl add-rosteritem " + username + " " + $domain + " " + buddy + " " + $domain + " \\'" + buddyNick + "\\' " + buddyGroup + " " + subscription_type
-	command = "ejabberdctl add-rosteritem " + username + " " + $domain + " " + buddy + " " + $domain + " " + buddyNick + " " + buddyGroup + " " + subscription_type
-	%x[#{command}];
-end
-
 def removeRoster(username)
 	user_roster = getRoster(username);
 	user_buddys = getBuddysFromRoster(user_roster);
@@ -118,13 +112,20 @@ def getBuddysFromRoster(roster)
 	buddys
 end
 
-def setBidireccionalBuddys(usernameA,usernameB,nickA,nickB)
-	#addBuddyToRoster(username,buddy,buddyNick,buddyGroup,subscription_type)
-	addBuddyToRoster(usernameA,usernameB,nickB,"SocialStream","both")
-	addBuddyToRoster(usernameB,usernameA,nickA,"SocialStream","both")
-	#sendPresence(usernameA,"chat")
-	#sendPresence(usernameB,"chat")
+def setBidireccionalBuddys(userASid,userBSid,userANick,userBNick,groupForA,groupForB)
+	addBuddyToRoster(userASid,userBSid,userBNick,groupForB,"both")
+	addBuddyToRoster(userBSid,userASid,userANick,groupForA,"both")
 	return "Done"
+end
+
+def addBuddyToRoster(userSid,buddySid,buddyNick,buddyGroup,subscription_type)
+	user = userSid.split("@")[0]
+	buddy = buddySid.split("@")[0]
+	userDomain = userSid.split("@")[1]
+	buddyDomain = buddySid.split("@")[1]
+	command = "ejabberdctl add-rosteritem " + user + " " + userDomain + " " + buddy + " " + buddyDomain + " " + buddyNick + " " + buddyGroup + " " + subscription_type
+	puts command
+	%x[#{command}];
 end
 
 def sendStanzaUserMessage(username,msg)
@@ -227,6 +228,8 @@ begin
 			  puts send(ARGV[0],ARGV[1],ARGV[2],ARGV[3],ARGV[4])
 			when 6
 			  puts send(ARGV[0],ARGV[1],ARGV[2],ARGV[3],ARGV[4],ARGV[5])
+			when 7
+			  puts send(ARGV[0],ARGV[1],ARGV[2],ARGV[3],ARGV[4],ARGV[5],ARGV[6])
 			else
 			  puts send(ARGV[0],ARGV)
 			end
