@@ -1,7 +1,7 @@
 <%= div_for picture, :class => 'content_size' do %>
   <div class="picture_show">
     <%= link_to image_tag_for(picture),
-        {:controller => "documents", :action => "download", :id => picture},
+        download_document_path(picture),
         :id => dom_id(picture) + "_a",
         :type => picture.type, 
 		    :title => picture.file_file_name,

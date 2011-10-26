@@ -9,3 +9,32 @@
   -webkit-border-radius: 5px; 
   border-radius: 5px;
 }
+
+#document_info .details{
+  color: $details-color;  
+}
+
+#created_at, #updated_at, #like_count {
+  margin: 5px;
+}
+#document_info .right, #document_info .left{
+  padding: 10px; 
+}
+#document_info .right{
+  float: right;
+  padding-right: 20px; 
+}
+#document_info .left{
+  float: left;
+}
+#document_info #actions{
+  margin-left: 15px; 
+}
+#document_info #actions .action{
+  margin-right: 10px; 
+}
+#document_info #actions .action img{
+  width: 16px;
+  height: 16px;
+}
+

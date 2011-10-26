@@ -13,7 +13,7 @@ module DocumentsHelper
   end
   
   def image_tag_for (document)
-    image_tag url_for(:controller => "documents", :action => "download", :id => document), 
+    image_tag download_document_path document, 
               :id => dom_id(document) + "_img"
   end
   

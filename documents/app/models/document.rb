@@ -5,7 +5,7 @@ class Document < ActiveRecord::Base
 
   has_attached_file :file, 
                     :url => '/:class/:id.:extension',
-                    :path => ':rails_root/documents/:class/:id_partition/:style'
+                    :path => ':rails_root/documents/:class/:id_partition/:style/:filename.:extension'
   
   validates_attachment_presence :file
   

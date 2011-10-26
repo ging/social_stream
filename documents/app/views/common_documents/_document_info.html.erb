@@ -1,10 +1,21 @@
 <div id="document_info">
-<div id="created_at">Created at: <%= document.created_at %></div>
-<div id="updated_at">Updated at: <%= document.updated_at %></div>
-<div id="like_count"><%= document.like_count %> likes</div>
-<div id="actions">
-  <%= link_to "Download", "javascript:;"%> - 
-  <%= link_to "Edit", "javascript:;"%> - 
-  <%= link_to "Delete", "javascript:;"%>
-</div>
+  <div class="left">
+    <div id="created_at">
+      <span class="details">Created at:</span> <%= I18n.localize document.created_at, :format => :long %>
+    </div>
+    <div id="updated_at">
+      <span class="details">Updated at:</span> <%= I18n.localize document.updated_at, :format => :long %>
+    </div>
+  </div>
+  <div class="right">
+    <div id="like_count">
+      <%= document.like_count %> <span class="details">likes</span>
+    </div>
+  </div>
+<br class="clearfloat" />
+  <div id="actions">
+    <%= link_to image_tag("btn/download.png") + "Download", "javascript:;", :class => :action %>
+    <%= link_to image_tag("btn/edit.png") + "Edit", "javascript:;", :class => :action %>
+    <%= link_to image_tag("btn/error.png") + "Delete", "javascript:;", :class => :action %>
+  </div>
 </div>
