@@ -1,0 +1,29 @@
+<% content_for :javascript do %>
+
+  $("#jpId<%=video.id%>").jPlayer( {
+    ready: function () {
+      $(this).jPlayer("setMedia", {
+        webmv: "<%= video_path(video)+"?style=webm" %>", // Defines the webm url
+		flv: "<%= video_path(video)+"?style=flv" %>"
+      });
+    },
+	solution:"flash, html",
+	preload: "none",
+	supplied: "webmv, flv",
+	swfPath: "assets",
+	cssSelectorAncestor: "#jp_interface_<%=video.id%>"
+  });
+  
+  hideJplayer(<%=video.id%>);
+  
+<% end %>
+
+<%= div_for video, :class => 'content_size' do %>
+
+  <% if video.file_processing %>
+    <%= render :partial => 'videos/video_processing', :locals => {:video => video}%>
+  <% else %>
+    <%= render :partial => 'videos/video_processed', :locals => {:video => video}%>  
+  <% end %>
+
+<% end %>

@@ -21,9 +21,12 @@
 
 <% toolbar :profile => profile_subject %>
 
-
 <br class="clearfloat" />
 <div class="space_center"></div>
-<% if document %>
-  <%= document.inspect.to_s %>
-<% end %>
+<h2><%= document.title.nil? ? document.file_file_name : document.title %></h2>
+<div class="space_center"></div>
+
+<%= show_view_for document %>
+
+<%= render :partial => "document_info", :locals => {:document => document} %>
+

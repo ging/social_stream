@@ -1,0 +1,11 @@
+@import "colors";
+
+.picture.content_size .picture_show img{
+  max-width: 500px;
+  max-height: 500px;
+  margin-left: 30px;
+  border: 2px solid black;
+  -moz-border-radius: 5px; 
+  -webkit-border-radius: 5px; 
+  border-radius: 5px;
+}

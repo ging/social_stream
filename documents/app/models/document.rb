@@ -9,7 +9,7 @@ class Document < ActiveRecord::Base
   
   validates_attachment_presence :file
   
-  after_create :set_title_and_description
+  before_create :set_title_and_description
   
   define_index do
     indexes title
@@ -69,8 +69,8 @@ class Document < ActiveRecord::Base
   protected
   
   def set_title_and_description
-    #self.title = self.file_file_name
-    #self.description = I18n.t("document.info.description.default")
+    self.title = self.file_file_name
+    self.description = I18n.t("document.info.description.default")    
   end
     
 end

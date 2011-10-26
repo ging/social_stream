@@ -2,19 +2,20 @@
 
   <div class="attachment_thumb picture_link">
     <%= link_to thumb_for(picture, 16),
-                download_document_path(picture),
-        :type => picture.type, 
-		:title => picture.file_file_name,
-		:path => document_path(picture) %>
+                 download_document_path(picture),
+                :type => picture.type, 
+            		:title => picture.file_file_name,
+            		:path => document_path(picture) %>
   </div>
   
   <div class="attachment_text picture_summary_class picture_link">
-  	<%= t('picture.msg') %><%= link_to "\""+picture.file_file_name+"\"", 
+  	<%= t('picture.msg') %>
+  	<%= link_to "\""+picture.file_file_name+"\"", 
                 download_document_path(picture),
-    :alt => picture.file_file_name,
- 	:type => picture.type,
- 	:path => document_path(picture),
-    :class => "attachment_text_link" %>
+                :alt => picture.file_file_name,
+               	:type => picture.type,
+               	:path => document_path(picture),
+                :class => "attachment_text_link" %>
   </div>
   
   <div class="picture_link picture_thumbnail_show">
