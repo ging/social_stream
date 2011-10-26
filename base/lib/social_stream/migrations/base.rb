@@ -50,7 +50,7 @@ module SocialStream
         if (Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.8.0'))
           return Gem::Specification.find_by_name(gem).full_gem_path
         else
-          return Gem::GemPathSearcher.find(gem).full_gem_path
+          return Gem::GemPathSearcher.new.find(gem).full_gem_path
         end
       end
     end
