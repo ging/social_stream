@@ -1,11 +1,3 @@
-<% if profile_subject.nil? %>
-  <% puts "----------------------------------------------------------------------" %>
-  <% puts profile_subject %>
-  <% profile_subject = current_subject %>  
-  <% puts profile_subject %>  
-  <% puts "----------------------------------------------------------------------" %>
-<% end %>
-
 <% content_for :title do %>
 <%= profile_subject.name + ": " + t('repository.title') %>
 <% end %>
