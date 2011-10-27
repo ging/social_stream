@@ -3,8 +3,8 @@
   $("#jpId<%=video.id%>").jPlayer( {
     ready: function () {
       $(this).jPlayer("setMedia", {
-        webmv: "<%= video_path(video, :format => 'webm' ) %>", // Defines the webm url
-        flv:   "<%= video_path(video, :format => 'flv') %>"
+        webmv: "<%= video_url(video, :format => 'webm' ) %>", // Defines the webm url
+        flv:   "<%= video_url(video, :format => 'flv') %>"
       });
     },
 	solution:"flash, html",

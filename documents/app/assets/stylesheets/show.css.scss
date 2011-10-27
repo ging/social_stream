@@ -10,6 +10,10 @@
   border-radius: 5px;
 }
 
+.video_show div.jp-video-270p{
+  padding-left: 40px;
+}
+
 #document_info .details{
   color: $details-color;  
 }
@@ -59,4 +63,7 @@
 #document_comments .activity, #document_comments .subactivity {
   background: transparent;
   border: none;
+}
+#document_comments .activity_new_comment {
+  display:block;
 }
