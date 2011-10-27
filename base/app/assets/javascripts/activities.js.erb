@@ -138,7 +138,7 @@ $(function() {
   $(".actor_logo_new_comment").hide();
   
   //if there are 4 or more commments we only show the last 2 and a link to show the rest
-  $(".activity_comments").each(function(){
+  $("#wall .activity_comments").each(function(){
   	var comments = $(this).children(".subactivity");  	
   	//check if there are more than 3 comments
   	if (comments.size() > 3){

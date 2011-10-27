@@ -13,22 +13,26 @@
 #document_info .details{
   color: $details-color;  
 }
+#document_info #dates, #document_info #date_labels{
+  display: inline-block;
+}
 
-#created_at, #updated_at, #like_count {
-  margin: 5px;
+#document_info {
+  margin-top: 10px; 
 }
 #document_info .right, #document_info .left{
-  padding: 10px; 
 }
 #document_info .right{
   float: right;
-  padding-right: 20px; 
+  margin-right: 30px; 
 }
 #document_info .left{
   float: left;
+  margin-left: 30px;
 }
 #document_info #actions{
-  margin-left: 15px; 
+  margin-top: 10px; 
+  margin-left: 30px; 
 }
 #document_info #actions .action{
   margin-right: 10px; 
@@ -38,3 +42,21 @@
   height: 16px;
 }
 
+#document_comments {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: thin solid $separation-color;
+}
+
+#document_comments .new_comment.new_comment_shown {
+  width: 500px;
+}
+
+#document_comments .new_comment {
+  width: 550px;
+}
+
+#document_comments .activity, #document_comments .subactivity {
+  background: transparent;
+  border: none;
+}

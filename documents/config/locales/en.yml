@@ -7,13 +7,19 @@ en:
     not_mine: "Audios"
     processing: "Processing audio clip"
   document:
-    all: "All documents"  
+    actions:
+      delete: "Delete"
+      download: "Download"
+      edit: "Edit"
+    all: "All documents"
     confirm_delete: "Delete document?"
     form:
       title: "File"
     info:
+      date:
+        created_at: "Created at"
+        updated_at: "Updated at"
       description:
-        default: "No description given"
         title: "Description"
       title:
         title: "Title"

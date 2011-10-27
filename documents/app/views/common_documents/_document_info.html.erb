@@ -1,10 +1,20 @@
 <div id="document_info">
   <div class="left">
-    <div id="created_at">
-      <span class="details">Created at:</span> <%= I18n.localize document.created_at, :format => :long %>
+    <div id="date_labels">
+      <div class="details">
+        <%= t('document.info.date.created_at') %>
+      </div>
+      <div class="details">
+        <%= t('document.info.date.updated_at') %>
+      </div>
     </div>
-    <div id="updated_at">
-      <span class="details">Updated at:</span> <%= I18n.localize document.updated_at, :format => :long %>
+    <div id="dates">
+      <div class="date">
+        <%= I18n.localize document.created_at, :format => :long %>
+      </div>
+      <div class="date">
+        <%= I18n.localize document.updated_at, :format => :long %>
+      </div>
     </div>
   </div>
   <div class="right">
@@ -12,10 +22,13 @@
       <%= document.like_count %> <span class="details">likes</span>
     </div>
   </div>
-<br class="clearfloat" />
+  <br class="clearfloat" />
   <div id="actions">
-    <%= link_to image_tag("btn/download.png") + "Download", "javascript:;", :class => :action %>
-    <%= link_to image_tag("btn/edit.png") + "Edit", "javascript:;", :class => :action %>
-    <%= link_to image_tag("btn/error.png") + "Delete", "javascript:;", :class => :action %>
+    <%= link_to image_tag("btn/download.png") + t('document.actions.download'), download_document_path(document), :class => :action %>
+    <%= link_to image_tag("btn/edit.png") + t('document.actions.edit'), "javascript:toggleEdit();", :class => :action %>
+    <% if document.post_activity.delete_object_by?(current_subject) %>
+      <%= link_to image_tag("btn/error.png") + t('document.actions.delete'), document.post_activity.direct_object , :confirm => t('confirm_delete',
+        :scope => document.post_activity.direct_object.class.to_s.underscore), :method => :delete %>
+    <% end %>
   </div>
 </div>

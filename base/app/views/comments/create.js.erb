@@ -1,6 +1,9 @@
 //Display the new comment
 $("#comments_activity_<%= @comment.post_activity.parent.id %>").append("<%= escape_javascript(render @comment.post_activity) %>");
 $(".activities_comment_btn").hide();
+$(".input_new_comments").each(function() {
+  $(this).focus().val("").blur();   
+});
 
 setActivityPrivacyTooltips("<%= escape_javascript dom_id(@comment.post_activity) %>");
 

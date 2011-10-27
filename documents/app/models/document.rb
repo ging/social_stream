@@ -70,7 +70,6 @@ class Document < ActiveRecord::Base
   
   def set_title_and_description
     self.title = self.file_file_name
-    self.description = I18n.t("document.info.description.default")    
   end
     
 end

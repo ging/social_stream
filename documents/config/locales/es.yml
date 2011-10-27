@@ -7,13 +7,19 @@ es:
     not_mine: "Audios"
     processing: "Procesando fichero de audio..."
   document:
+    actions:
+      delete: "Borrar"
+      download: "Descargar"
+      edit: "Editar"
     all: "Todos los documentos"
     confirm_delete: "¿Borrar documento?"
     form:
       title: "Fichero"
     info:
+      date:
+        created_at: "Creado"
+        updated_at: "Última modificación"
       description:
-        default: "Sin descripción"
         title: "Descripción"
       title:
         title: "Título"
