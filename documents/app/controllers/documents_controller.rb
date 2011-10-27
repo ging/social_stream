@@ -12,9 +12,6 @@ class DocumentsController < CommonDocumentsController
   #TODO: we have to add the mimetype as in videos_controller
   def download
     path = @document.file.path(params[:style])
-    
-    render :text => path
-    return
 
     head(:bad_request) and return unless File.exist?(path) 
 
