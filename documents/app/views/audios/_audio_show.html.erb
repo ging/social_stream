@@ -2,26 +2,61 @@
 
   $("#jpId<%=audio.id%>").jPlayer( {
     ready: function () {
-      $(this).jPlayer("setMedia", {
-        webma: "<%= audio_path(audio) + "?style=webma" %>" // Defines the webma url
+      $(this).jPlayer("setMedia", {        
+        webma: "<%= audio_url(audio, :format => 'webma') %>" // Defines the webma url
       });
     },
     supplied: "webma",
     preload: "none",
-	swfPath: "assets",
-	cssSelectorAncestor: "#jp_interface_<%=audio.id%>"
+  swfPath: "assets",
+  cssSelectorAncestor: "#jp_interface_<%=audio.id%>"
   });
 
 <% end %>
 
 <%= div_for audio, :class => 'content_size' do %>
-
-
+<div class="audio_show">
   <% if audio.file_processing %>
-    <%= render :partial => 'audios/audio_processing', :locals => {:audio => audio}%>
+  <div class="processing_text">
+    <%= t('audio.processing')%>
+  </div>
   <% else %>
-    <%= render :partial => 'audios/audio_processed', :locals => {:audio => audio}%>  
-  <% end %>
-
-
+  <div id="jpId<%= audio.id%>" class="jpId_size0"></div>
+  <div class="jp-audio">
+    <div class="jp-type-single">
+      <div id="jp_interface_<%= audio.id%>" class="jp-interface">
+        <ul class="jp-controls">
+          <li>
+            <a href="#" class="jp-play" tabindex="1">play</a>
+          </li>
+          <li>
+            <a href="#" class="jp-pause" tabindex="1">pause</a>
+          </li>
+          <li>
+            <a href="#" class="jp-stop" tabindex="1">stop</a>
+          </li>
+          <li>
+            <a href="#" class="jp-mute" tabindex="1">mute</a>
+          </li>
+          <li>
+            <a href="#" class="jp-unmute" tabindex="1">unmute</a>
+          </li>
+        </ul>
+        <div class="jp-progress">
+          <div class="jp-seek-bar">
+            <div class="jp-play-bar"></div>
+          </div>
+        </div>
+        <div class="jp-volume-bar">
+          <div class="jp-volume-bar-value"></div>
+        </div>
+        <div class="jp-current-time"></div>
+        <div class="jp-duration"></div>
+      </div>
+      <div id="jp_playlist_<%= audio.id%>" class="jp-playlist"></div>
+    </div>
+  </div>
+</div>
 <% end %>
+
+<% end %> 

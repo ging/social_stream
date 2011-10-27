@@ -2,8 +2,8 @@
 
   $("#jpId<%=audio.id%>").jPlayer( {
     ready: function () {
-      $(this).jPlayer("setMedia", {
-        webma: "<%= audio_path(audio) + "?style=webma" %>" // Defines the webma url
+      $(this).jPlayer("setMedia", {        
+        webma: "<%= audio_url(audio, :format => 'webma') %>" // Defines the webma url
       });
     },
     supplied: "webma",
