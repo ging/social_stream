@@ -8,6 +8,7 @@ class Document < ActiveRecord::Base
                     :path => ':rails_root/documents/:class/:id_partition/:style/:filename.:extension'
   
   validates_attachment_presence :file
+  validates_presence_of :title
   
   before_create :set_title_and_description
   

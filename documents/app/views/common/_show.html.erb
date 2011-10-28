@@ -28,7 +28,7 @@
 
 <%= show_view_for document %>
 
-<%= render :partial => "document_info", :locals => {:document => document} %>
+<%= render :partial => "common/document_info", :locals => {:document => document} %>
 
 <div id="document_comments">
   <%= render :partial => 'activities/comments', :locals => { :activity => document.post_activity } %>

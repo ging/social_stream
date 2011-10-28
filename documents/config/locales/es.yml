@@ -21,6 +21,8 @@ es:
         updated_at: "Última modificación"
       description:
         title: "Descripción"
+      file:
+        title: "Subir"
       title:
         title: "Título"
     mine: "Mis documentos"

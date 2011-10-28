@@ -48,3 +48,14 @@ showAllDocumentComments = function(id){
   //and hide the hide_show_comments
   $("#"+id).children(".hide_show_comments").hide();
 };
+
+toggleDocumentEdit = function(){
+  if($("#document_edit").css("display")=="none"){
+    $("#document_edit").show("slow");
+    $("#document_edit_action").addClass("selected");
+    
+  }else{
+    $("#document_edit").hide("slow");
+    $("#document_edit_action").removeClass("selected");
+  }
+}

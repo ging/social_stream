@@ -1,0 +1,49 @@
+<div class="block" id="document_edit" style="display:none;">
+  <%= form_for(document, :html => { :method => :put }) do |f| %>
+  <% if document and document.errors.any? %>
+  <%= javascript_tag do %>
+    $(document).ready(function(){
+      toggleDocumentEdit();
+    });
+  <% end %>
+  <div class="error">
+    <ul>
+      <% document.errors.full_messages.each do |msg| %>
+      <li>
+        <%= msg %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <div class="form_row">
+    <div class="form_label">
+      <%= f.label t('document.info.title.title') %>
+    </div>
+    <div class="form_field">
+      <%= f.text_field :title, :class => "form_tag" %>
+    </div>
+  </div>
+  <div class="form_row">
+    <div class="form_label">
+      <%= f.label t('document.info.description.title') %>
+    </div>
+    <div class="form_field">
+      <%= f.text_area :description, :class => "form_tag" %>
+    </div>
+  </div>
+  <!-- 
+  <div class="form_row">
+    <div class="form_label">
+      <%#= f.label t('document.info.file.title') %>
+    </div>
+    <div class="form_field">
+      <%#= f.file_field :file, :class => "form_tag" %>
+    </div>
+  </div>  
+  -->
+  <div class="actions center">
+    <%= f.submit t('document.actions.edit'), :class => "button" %>
+  </div>
+  <% end %>
+</div>

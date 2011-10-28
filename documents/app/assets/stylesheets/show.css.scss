@@ -45,11 +45,40 @@
   margin-left: 30px; 
 }
 #document_info #actions .action{
-  margin-right: 10px; 
+  margin-right: 10px;
+  padding: 5px;
+}
+#document_info #actions .action.selected{
+  border: thin solid $separation-color;
+  background: $secondary-color;
 }
 #document_info #actions .action img{
   width: 16px;
   height: 16px;
+}
+
+#document_edit {
+  margin: 5px 5px 0px 5px;
+  border: thin solid $separation-color;
+  background: $secondary-color;
+  
+}
+#document_edit textarea{
+  resize: none;
+  height: 75px;
+}
+#document_edit .form_row {
+  padding: 5px 10px;
+}
+#document_edit .form_label {
+  width: 100px;
+}
+#document_edit .form_field {
+  width: 415px;
+  padding: 0;
+}
+#document_edit .form_tag {
+  width: 100%;
 }
 
 #document_comments {

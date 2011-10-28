@@ -1,2 +1,2 @@
-class PicturesController < CommonDocumentsController
+class PicturesController < DocumentsController
 end  

@@ -24,11 +24,12 @@
   </div>
   <br class="clearfloat" />
   <div id="actions">
-    <%= link_to image_tag("btn/download.png") + t('document.actions.download'), download_document_path(document), :class => :action %>
-    <%= link_to image_tag("btn/edit.png") + t('document.actions.edit'), "javascript:toggleEdit();", :class => :action %>
+    <%= link_to content_tag(:span,image_tag("btn/download.png") + t('document.actions.download'), :class => :action), download_document_path(document) %>
+    <%= link_to content_tag(:span,image_tag("btn/edit.png") + t('document.actions.edit'), :class => :action, :id => :document_edit_action), "javascript:toggleDocumentEdit();" %>
     <% if document.post_activity.delete_object_by?(current_subject) %>
-      <%= link_to image_tag("btn/error.png") + t('document.actions.delete'), document.post_activity.direct_object , :confirm => t('confirm_delete',
+      <%= link_to content_tag(:span,image_tag("btn/error.png") + t('document.actions.delete'), :class => :action), document.post_activity.direct_object , :confirm => t('confirm_delete',
         :scope => document.post_activity.direct_object.class.to_s.underscore), :method => :delete %>
     <% end %>
   </div>
 </div>
+<%= render :partial => "common/edit_form", :locals => {:document => document} %>

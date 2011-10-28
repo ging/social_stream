@@ -1,2 +1,2 @@
-class AudiosController < CommonDocumentsController
+class AudiosController < DocumentsController
 end

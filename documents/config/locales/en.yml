@@ -21,6 +21,8 @@ en:
         updated_at: "Updated at"
       description:
         title: "Description"
+      file:
+        title: "Upload"
       title:
         title: "Title"
     mine: "My documents"

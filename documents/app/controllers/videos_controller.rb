@@ -1,2 +1,2 @@
-class VideosController < CommonDocumentsController
+class VideosController < DocumentsController
 end
