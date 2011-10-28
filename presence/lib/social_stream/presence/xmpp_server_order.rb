@@ -20,13 +20,33 @@ module SocialStream
             end
           end 
           
-          def addBuddyToRoster(userSID,buddySID,buddyNick,buddyGroup,subscription_type)
+          def unsetRosterForBidirectionalTie(userSid,oldfriendSid,oldfriendNick,oldfriendGroup)
+            if SocialStream::Presence.remote_xmpp_server
+              puts "Not implemented unsetRosterForBidirectionalTie(user_sid,oldfriend_sid,oldfriendNick,oldfriendGroup) for remote_xmpp_server"
+              return
+            else
+              #SocialStream::Presence.remote_xmpp_server=false
+              executeEmanagementLocalCommand("unsetBidireccionalBuddys",[userSid,oldfriendSid,oldfriendNick,oldfriendGroup])
+            end
+          end
+          
+          def addBuddyToRoster(userSid,buddySid,buddyNick,buddyGroup,subscription_type)
             if SocialStream::Presence.remote_xmpp_server
               puts "Not implemented addBuddyToRoster(userSID,buddySID,buddyNick,buddyGroup,subscription_type) for remote_xmpp_server"
               return
             else
               #SocialStream::Presence.remote_xmpp_server=false
-              executeEmanagementLocalCommand("addBuddyToRoster",[userSID,buddySID,buddyNick,buddyGroup,subscription_type])
+              executeEmanagementLocalCommand("addBuddyToRoster",[userSid,buddySid,buddyNick,buddyGroup,subscription_type])
+            end
+          end
+          
+          def removeBuddyFromRoster(userSid,buddySid)
+            if SocialStream::Presence.remote_xmpp_server
+              puts "Not implemented removeBuddyFromRoster(userSid,buddySid) for remote_xmpp_server"
+              return
+            else
+              #SocialStream::Presence.remote_xmpp_server=false
+              executeEmanagementLocalCommand("removeBuddyFromRoster",[userSid,buddySid])
             end
           end
           
@@ -50,17 +70,26 @@ module SocialStream
             else
               #SocialStream::Presence.remote_xmpp_server=false
               
-              #Get connected users locally
-              users = []
-              output = %x[ejabberdctl connected-users]
-              sessions = output.split("\n")
-  
-              sessions.each do |session|
-                users << session.split("@")[0]
-                puts session.split("@")[0]
-              end
+              #Get connected users locally 
+              output = executeEmanagementLocalCommand("isEjabberdNodeStarted",[])
+              nodeUp = output.split("\n")[3]
               
-              synchronize_presence_for_slugs(users)
+              if nodeUp and nodeUp.strip() == "true"
+                users = []
+                output = %x[ejabberdctl connected-users]
+                sessions = output.split("\n")
+  
+                sessions.each do |session|
+                  users << session.split("@")[0]
+                  puts session.split("@")[0]
+                end
+                
+                synchronize_presence_for_slugs(users)  
+                
+              else
+                reset_presence
+                return "Xmpp Server Down: Reset Connected Users"
+              end
               
             end
           end
@@ -170,8 +199,8 @@ module SocialStream
               command = command + " " + param.split(" ")[0]
             end
             puts "Executing " + command
-            system command
-            puts "Ok"
+            output = %x[#{command}];
+            return output
           end
         
       end

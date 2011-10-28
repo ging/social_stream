@@ -34,36 +34,56 @@ end
 $domain = getOption("server_domain=")
 
 PARAMS_FOR_COMMANDS = {
-'getRoster' => 1,
-'removeBuddyFromRoster' => 2,
-'addBuddyToRoster' => 5,
-'removeRoster' => 1,
-'getBuddysFromRoster' => 1,
-'setBidireccionalBuddys' => 6,
-'help' => 0,
-'getUserResource' => 1,
-'sendMessageToUser' => 3,
-'sendPresence' => 2,
-'unsetPresence' => 1,
-'setPresence' => 1,
-'removeAllRosters' => 0,
+	'addBuddyToRoster' => 5,
+	'removeBuddyFromRoster' => 2,
+	'setBidireccionalBuddys' => 6,
+	'unsetBidireccionalBuddys' => 4,
+	'getRoster' => 1,
+	'removeRoster' => 1,
+	'removeAllRosters' => 0,
+	'getBuddysFromRoster' => 1,
+	'getAllUsersWithRoster' => 0,
+	'getAllRosters' => 0,
+	'printAllRosters' => 0,
+	'printAllBidirecctionalBuddys' => 0,
+	'checkUser' => 1,
+	'checkBidirecctionalBuddys' => 2,
+	'sendPresence' => 2,
+	'setPresence' => 1,
+	'unsetPresence' => 1,
+	'sendMessageToUser' => 3,
+	'getUserResource' => 1,
+	'isEjabberdNodeStarted' => 0,
+	'help' => 0,
 }
 
 SYNTAX_FOR_COMMANDS = {
-'getRoster' => "getRoster username",
-'removeBuddyFromRoster' => "removeBuddyFromRoster username buddy",
-'addBuddyToRoster' => "addBuddyToRoster userSid buddySid buddyNick buddyGroup subscription_type",
-'removeRoster' => "removeRoster username",
-'getBuddysFromRoster' => "getBuddysFromRoster roster",
-'setBidireccionalBuddys' => "setBidireccionalBuddys userASid userBSid userANick userBNick groupForA groupForB",
-'getUserResource' => "getUserResource username",
-'sendMessageToUser' => "sendMessageToUser from_name to_name msg",
-'sendPresence' => 'sendPresence username show',
-'unsetPresence' => 'unsetPresence username',
-'setPresence' => 'setPresence username',
-'removeAllRosters' => 'removeAllRosters'
+	'addBuddyToRoster' => 'addBuddyToRoster userSid buddySid buddyNick buddyGroup subscription_type',
+	'removeBuddyFromRoster' => 'removeBuddyFromRoster userSid buddySid',
+	'setBidireccionalBuddys' => 'setBidireccionalBuddys userASid userBSid userANick userBNick groupForA groupForB',
+	'unsetBidireccionalBuddys' => 'unsetBidireccionalBuddys userSid oldFriendSid oldFriendNick groupForOldFriend',
+	'getRoster' => 'getRoster username',
+	'removeRoster' => 'removeRoster username',
+	'removeAllRosters' => 'removeAllRosters',
+	'getBuddysFromRoster' => 'getBuddysFromRoster roster',
+	'getAllUsersWithRoster' => 'getAllUsersWithRoster',
+	'getAllRosters' => 'getAllRosters',
+	'printAllRosters' => 'printAllRosters',
+	'printAllBidirecctionalBuddys' => 'printAllBidirecctionalBuddys',
+	'checkUser' => 'checkUser user',
+	'checkBidirecctionalBuddys' => 'checkBidirecctionalBuddys userASid userBSid',
+	'sendPresence' => 'sendPresence username show',
+	'setPresence' => 'setPresence username',
+	'unsetPresence' => 'unsetPresence username',
+	'sendMessageToUser' => 'sendMessageToUser from_name to_name msg',
+	'getUserResource' => 'getUserResource username',
+	'isEjabberdNodeStarted' => 'isEjabberdNodeStarted',
+	'help' => 'help',
 }
 
+
+
+#Debug methods
 def log(msg)
 	logWithTitle(msg,nil)
 end
@@ -78,29 +98,60 @@ def logWithTitle(msg,title)
 end
 
 
-def getRoster(username)
-	command = "ejabberdctl get_roster " + username  + " " + $domain
-	%x[#{command}];
-end
 
-def removeBuddyFromRoster(username,buddy)
-	command = "ejabberdctl delete_rosteritem " + username + " " + $domain + " " + buddy + " " + $domain
-	%x[#{command}];
-end
+#Methods to manage rosters from Social Stream Rails App
 
-def removeRoster(username)
-	user_roster = getRoster(username);
-	user_buddys = getBuddysFromRoster(user_roster);
-	user_buddys.each do |buddy|
-		removeBuddyFromRoster(username,buddy)
-	end
+def setBidireccionalBuddys(userASid,userBSid,userANick,userBNick,groupForA,groupForB)
+	addBuddyToRoster(userASid,userBSid,userBNick,groupForB,"both")
+	addBuddyToRoster(userBSid,userASid,userANick,groupForA,"both")
 	return "Done"
 end
 
-def removeAllRosters()
-	command = "ejabberdctl process_rosteritems delete any any any any"
+def unsetBidireccionalBuddys(userSid,oldFriendSid,oldFriendNick,groupForOldFriend)
+	if checkBidirecctionalBuddys(userSid,oldFriendSid)
+		removeBuddyFromRoster(userSid,oldFriendSid)
+		removeBuddyFromRoster(oldFriendSid,userSid)
+		addBuddyToRoster(userSid,oldFriendSid,oldFriendNick,groupForOldFriend,"to")
+		return "Done"
+	else
+		return userSid + " and " + oldFriendSid + " aren't bidireccional buddys"
+	end
+end
+
+def addBuddyToRoster(userSid,buddySid,buddyNick,buddyGroup,subscription_type)
+	user = userSid.split("@")[0]
+	buddy = buddySid.split("@")[0]
+	userDomain = userSid.split("@")[1]
+	buddyDomain = buddySid.split("@")[1]
+	command = "ejabberdctl add-rosteritem " + user + " " + userDomain + " " + buddy + " " + buddyDomain + " " + buddyNick + " " + buddyGroup + " " + subscription_type
 	%x[#{command}];
-	return "Done";
+	return "Done"
+end
+
+def removeBuddyFromRoster(userSid,buddySid)
+	user = userSid.split("@")[0]
+	buddy = buddySid.split("@")[0]
+	userDomain = userSid.split("@")[1]
+	buddyDomain = buddySid.split("@")[1]
+	if checkUserInRoster(buddy,getRoster(user))
+		command = "ejabberdctl delete_rosteritem " + user + " " + userDomain + " " + buddy + " " + buddyDomain
+		%x[#{command}];
+		return "Done"
+	else
+		return "User " + buddy + " not found in " + user + " roster."
+	end
+end
+
+
+#Roster Utilities
+
+def getRoster(username)
+	if checkUser(username)
+		command = "ejabberdctl get_roster " + username  + " " + $domain
+		%x[#{command}];
+	else
+		return "User " + username + " not found"
+	end
 end
 
 def getBuddysFromRoster(roster)
@@ -112,21 +163,125 @@ def getBuddysFromRoster(roster)
 	buddys
 end
 
-def setBidireccionalBuddys(userASid,userBSid,userANick,userBNick,groupForA,groupForB)
-	addBuddyToRoster(userASid,userBSid,userBNick,groupForB,"both")
-	addBuddyToRoster(userBSid,userASid,userANick,groupForA,"both")
+def removeRoster(username)
+	if checkUser(username)
+		user_sid = username + "@" + $domain
+		user_roster = getRoster(username);
+		user_buddys = getBuddysFromRoster(user_roster);
+		user_buddys.each do |buddy|
+			buddy_sid = buddy + "@" + $domain
+			removeBuddyFromRoster(user_sid,buddy_sid)
+		end
+		return "Done"	
+	else
+		return "User " + username + " not found"
+	end
+end
+
+def removeAllRosters()
+	command = "ejabberdctl process_rosteritems delete any any any any"
+	%x[#{command}];
+	return "Done";
+end
+
+def getAllUsersWithRoster()
+	command = "ejabberdctl process_rosteritems list any any any any"
+	output = %x[#{command}];
+
+	i = 0
+	users = []
+
+	lines = output.split("\n");
+	items = lines[0].split(" ")[2]
+
+	#test if items string contains a correct number
+	if items.to_i.to_s == items
+		if items.to_i > 0
+			lines.each do |line|
+				if i%2==1
+					user = line.split(" ")[1].split("@")[0]
+					#puts i.to_s() + " :" + line
+					unless users.include?(user)
+						users << user
+					end	
+				end
+				i=i+1
+			end
+		end
+	end
+	
+	return users;
+end
+
+def getAllRosters()
+	rosterList = { }
+
+	users = getAllUsersWithRoster()
+
+	users.each do |user|
+		roster = getRoster(user)
+		rosterList.store(user,roster)
+	end
+	return rosterList
+end
+
+def printAllRosters()
+	rosterList = getAllRosters()
+	rosterList.keys.each do |user|
+		puts "\n"
+		puts "-------------------------------------"
+		puts user + " Roster"
+		puts "-------------------------------------"
+		puts rosterList[user]
+		puts "-------------------------------------"
+		puts "\n"
+	end
 	return "Done"
 end
 
-def addBuddyToRoster(userSid,buddySid,buddyNick,buddyGroup,subscription_type)
-	user = userSid.split("@")[0]
-	buddy = buddySid.split("@")[0]
-	userDomain = userSid.split("@")[1]
-	buddyDomain = buddySid.split("@")[1]
-	command = "ejabberdctl add-rosteritem " + user + " " + userDomain + " " + buddy + " " + buddyDomain + " " + buddyNick + " " + buddyGroup + " " + subscription_type
-	puts command
-	%x[#{command}];
+def getAllBidirecctionalBuddys()
+	b_buddys = []
+	users = getAllUsersWithRoster()
+	nonCheckedUsers = users
+	users.each do |user|
+		nonCheckedUsers.delete(user)
+		nonCheckedUsers.each do |checkUser|
+			if checkBidirecctionalBuddys(user + "@" + $domain,checkUser + "@" + $domain)
+				b_buddys << [user,checkUser]
+			end
+		end
+	end
+	return b_buddys
 end
+
+def printAllBidirecctionalBuddys()
+	puts "This may take a while..."
+	b_buddys = getAllBidirecctionalBuddys
+	b_buddys.each do |contact|
+		puts "[" + contact[0] + "," + contact[1] + "]"
+	end
+	return "Done"
+end
+
+#Check if the user have a roster
+def checkUser(user)
+	return getAllUsersWithRoster().include?(user)
+end
+
+def checkUserInRoster(user,roster)
+	return getBuddysFromRoster(roster).include?(user)
+end
+
+def checkBidirecctionalBuddys(userASid,userBSid)
+	userA = userASid.split("@")[0]
+	userB = userBSid.split("@")[0]
+	rosterA = getRoster(userA)
+	rosterB = getRoster(userB)
+	return (checkUserInRoster(userA,rosterB) and checkUserInRoster(userB,rosterA))
+end
+
+
+#Manage stanzas Utilities
 
 def sendStanzaUserMessage(username,msg)
 	resource = getUserResource(username);
@@ -137,17 +292,16 @@ def sendStanzaUserMessage(username,msg)
 	return "Done"
 end
 
-
-def sendPresence(username,show)
-	sendPresenceWithShow(username,username,show)
+def setPresence(username)
+	sendPresenceStanzaWithType(username,username,"available")
 end
 
 def unsetPresence(username)
 	sendPresenceStanzaWithType(username,username,"unavailable")
 end
 
-def setPresence(username)
-	sendPresenceStanzaWithType(username,username,"available")
+def sendPresence(username,show)
+	sendPresenceWithShow(username,username,show)
 end
 
 def sendPresenceWithShow(from_name,to_name,show)
@@ -198,6 +352,22 @@ def getUserResource(username)
 	return username + " no have any active session"
 end
 
+
+#More utilities
+
+def isEjabberdNodeStarted
+	command = "ejabberdctl status"
+	output = %x[#{command}]
+	if firstLine = output.split("\n")[0]
+	  return ((firstLine.split(":")[1]).strip()=="started")
+	end
+	return false
+end
+
+
+
+#Help & Support methods
+
 def help
 	log("Command list")
 	SYNTAX_FOR_COMMANDS.values.each do |command|
@@ -205,6 +375,10 @@ def help
 	end
 	puts ""
 end
+
+
+
+#Main thread
 
 log("Init Ejabberd Maintenance script")
 
@@ -235,15 +409,16 @@ begin
 			end
 			puts ""
 		else 
-			log("Error: Params required for command " + (ARGV[0]).to_s() + ": " + (PARAMS_FOR_COMMANDS[ARGV[0]]).to_s())
-			log("Use 'help' to get information about command syntax")
+			puts "Error: Params required for command " + (ARGV[0]).to_s() + ": " + (PARAMS_FOR_COMMANDS[ARGV[0]]).to_s()
+			puts "Syntax for command " + (ARGV[0]).to_s() + "\n" + (SYNTAX_FOR_COMMANDS[ARGV[0]]).to_s()
+			puts "Use 'help' to get information about command syntax"
 		end
 	else
-		
-		log("Error: Command not recognized")
-		log("Use 'help' to get information about command syntax")
+		puts "Error: Command not recognized"
+		puts "Use 'help' to get information about command syntax"
 	end
 rescue
-	puts "Parametros incorrectos"
+	puts "Syntax error"
+	puts "Use 'help' to get information about command syntax"
 end
 
