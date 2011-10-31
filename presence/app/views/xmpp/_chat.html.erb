@@ -9,8 +9,8 @@
 	  <%= javascript_include_tag 'xmpp_client'%>
 		<%= javascript_include_tag 'store'%>
   <% end %>
-	
 		
+	
 	<script type="text/javascript">
 			
 		//Global variables
@@ -19,7 +19,13 @@
     var user_name = '<%=current_user.name%>';
 		var user_slug = '<%=current_user.slug%>';
     var user_jid = '<%=current_user.slug%>'+"@"+domain;
-		var sound_path = "/assets/audio/chat/onMessage"
+		var sound_path = "/assets/audio/chat/onMessage";
+		var cookie = "<%=cookies["_global_session"]%>";
+
+    function connectToServerWithCookie(){
+			 connection = new Strophe.Connection(BOSH_SERVICE);
+       connection.connect(user_jid, cookie, onConnect);
+		}
 
     function connectToServer(chatPassword){
 		  <%unless current_user.nil? %>

@@ -33,6 +33,7 @@ end
 #Configuration variables
 $domain = getOption("server_domain=")
 
+
 PARAMS_FOR_COMMANDS = {
 	'addBuddyToRoster' => 5,
 	'removeBuddyFromRoster' => 2,
@@ -54,6 +55,7 @@ PARAMS_FOR_COMMANDS = {
 	'sendMessageToUser' => 3,
 	'getUserResource' => 1,
 	'isEjabberdNodeStarted' => 0,
+	'checkEjabberdctlQuotedString' => 0,
 	'help' => 0,
 }
 
@@ -78,6 +80,7 @@ SYNTAX_FOR_COMMANDS = {
 	'sendMessageToUser' => 'sendMessageToUser from_name to_name msg',
 	'getUserResource' => 'getUserResource username',
 	'isEjabberdNodeStarted' => 'isEjabberdNodeStarted',
+	'checkEjabberdctlQuotedString' => 'checkEjabberdctlQuotedString',
 	'help' => 'help',
 }
 
@@ -123,7 +126,7 @@ def addBuddyToRoster(userSid,buddySid,buddyNick,buddyGroup,subscription_type)
 	buddy = buddySid.split("@")[0]
 	userDomain = userSid.split("@")[1]
 	buddyDomain = buddySid.split("@")[1]
-	command = "ejabberdctl add-rosteritem " + user + " " + userDomain + " " + buddy + " " + buddyDomain + " " + buddyNick + " " + buddyGroup + " " + subscription_type
+	command = buildCommand("ejabberdctl add-rosteritem " + user + " " + userDomain + " " + buddy + " " + buddyDomain + " " + buddyNick + " " + buddyGroup + " " + 					subscription_type)
 	%x[#{command}];
 	return "Done"
 end
@@ -134,7 +137,7 @@ def removeBuddyFromRoster(userSid,buddySid)
 	userDomain = userSid.split("@")[1]
 	buddyDomain = buddySid.split("@")[1]
 	if checkUserInRoster(buddy,getRoster(user))
-		command = "ejabberdctl delete_rosteritem " + user + " " + userDomain + " " + buddy + " " + buddyDomain
+		command = buildCommand("ejabberdctl delete_rosteritem " + user + " " + userDomain + " " + buddy + " " + buddyDomain)
 		%x[#{command}];
 		return "Done"
 	else
@@ -147,7 +150,7 @@ end
 
 def getRoster(username)
 	if checkUser(username)
-		command = "ejabberdctl get_roster " + username  + " " + $domain
+		command = buildCommand("ejabberdctl get_roster " + username  + " " + $domain)
 		%x[#{command}];
 	else
 		return "User " + username + " not found"
@@ -179,13 +182,13 @@ def removeRoster(username)
 end
 
 def removeAllRosters()
-	command = "ejabberdctl process_rosteritems delete any any any any"
+	command = buildCommand("ejabberdctl process_rosteritems delete any any any any")
 	%x[#{command}];
 	return "Done";
 end
 
 def getAllUsersWithRoster()
-	command = "ejabberdctl process_rosteritems list any any any any"
+	command = buildCommand("ejabberdctl process_rosteritems list any any any any")
 	output = %x[#{command}];
 
 	i = 0
@@ -286,7 +289,7 @@ end
 def sendStanzaUserMessage(username,msg)
 	resource = getUserResource(username);
 	stanza = "\\<\\'message\\'\\>\\<\\'body\\'\\>\\'" + msg + "\\'\\<\\'/body\\'\\>\\<\\'/message\\'\\>"
-	command = "ejabberdctl send_stanza_c2s " + username + " " + $domain + " " + resource + " " + stanza
+	command = buildCommand("ejabberdctl send_stanza_c2s " + username + " " + $domain + " " + resource + " " + stanza)
 	puts "Executing: " + command
 	%x[#{command}];
 	return "Done"
@@ -311,7 +314,7 @@ def sendPresenceWithShow(from_name,to_name,show)
 	from_sid = from_name + "@" + $domain;
 	to_sid = to_name + "@" + $domain;   
 	pres_stanza = "\\<\\'presence from=\\'\\\"\\'" + from_sid + "\\'\\\"\\' to=\\'\\\"\\'" + to_sid + "\\'\\\"\\>\\<\\'show\\'\\>\\'" + show + "\\'\\<\\'/show\\'\\>\\<\\'/presence\\'\\>" 
-	command = "ejabberdctl send_stanza_c2s " + from_name + " " + $domain + " " + resource + " " + pres_stanza
+	command = buildCommand("ejabberdctl send_stanza_c2s " + from_name + " " + $domain + " " + resource + " " + pres_stanza)
 	puts "Executing: " + command
 	%x[#{command}];
 	return "Done"
@@ -322,7 +325,7 @@ def sendPresenceStanzaWithType(from_name,to_name,presence_type)
 	from_sid = from_name + "@" + $domain;
 	to_sid = to_name + "@" + $domain;
 	pres_stanza = "\\<\\'presence type=\\'\\\"\\'" + presence_type + "\\'\\\"\\' from=\\'\\\"\\'" + from_sid + "\\'\\\"\\' to=\\'\\\"\\'" + to_sid + "\\'\\\"\\>\\<\\'/presence\\'\\>" 
-	command = "ejabberdctl send_stanza_c2s " + from_name + " " + $domain + " " + resource + " " + pres_stanza
+	command = buildCommand("ejabberdctl send_stanza_c2s " + from_name + " " + $domain + " " + resource + " " + pres_stanza)
 	puts "Executing: " + command
 	%x[#{command}];
 	return "Done"
@@ -331,14 +334,14 @@ end
 def sendMessageToUser(from_name,to_name,msg)
 	from_sid = from_name + "@" + $domain;
 	to_sid = to_name + "@" + $domain;
-	command = "ejabberdctl send_message_chat " + from_sid + " " + to_sid + " " + "\\'" + msg + "\\'";
+	command = buildCommand("ejabberdctl send_message_chat " + from_sid + " " + to_sid + " " + buildQuotedString(msg))
 	puts "Executing: " + command
 	%x[#{command}];
 	return "Done"
 end
 
 def getUserResource(username)
-	command = "ejabberdctl connected-users"
+	command = buildCommand("ejabberdctl connected-users")
 	output = %x[#{command}];
         lines = output.split("\n");
 	lines.each do |line|
@@ -356,7 +359,7 @@ end
 #More utilities
 
 def isEjabberdNodeStarted
-	command = "ejabberdctl status"
+	command = buildCommand("ejabberdctl status")
 	output = %x[#{command}]
 	if firstLine = output.split("\n")[0]
 	  return ((firstLine.split(":")[1]).strip()=="started")
@@ -364,9 +367,91 @@ def isEjabberdNodeStarted
 	return false
 end
 
+def checkEjabberdctlQuotedString
+	puts "checkForSimpleSlash: " + checkForSimpleSlash.to_s()
+	puts "checkForDoubleSlash: " + checkForDoubleSlash.to_s()
+end
+
+def checkForDoubleSlash
+	command = "ejabberdctl send_message_chat example@localhost example@localhost \\'Hello quoted string\\'"
+	if execute_as_sudo
+		command = "sudo " + command
+	end
+	#puts "Executing " + command
+	output = %x[#{command}]
+	firstLine = ""
+	lines = output.split("\n")
+	lines.each do |line|
+		if line != ""
+			firstLine = line
+			break
+		end
+	end
+
+	if firstLine==""
+		return true
+	elsif firstLine.split(":")[0]=="Error"
+		return false
+	else
+		#Unknown error		
+		return false
+	end
+end
+
+def checkForSimpleSlash
+	command = "ejabberdctl send_message_chat example@localhost example@localhost \'Hello quoted string\'"
+	if execute_as_sudo
+		command = "sudo " + command
+	end
+	#puts "Executing " + command
+	output = %x[#{command}]
+	firstLine = ""
+	lines = output.split("\n")
+	lines.each do |line|
+		if line != ""
+			firstLine = line
+			break
+		end
+	end
+
+	if firstLine==""
+		return true
+	elsif firstLine.split(":")[0]=="Error"
+		return false
+	else
+		#Unknown error		
+		return false
+	end
+end
+
+def buildQuotedString(msg)
+	if checkForSimpleSlash
+		return "\'" + msg + "\'"
+	end
+	if checkForDoubleSlash
+		return "\\'" + msg + "\\'"
+	end
+	return msg
+end
 
 
 #Help & Support methods
+
+def buildCommand(command)
+	if execute_as_sudo
+		command = "sudo " + command
+	end
+	return command
+end
+
+def execute_as_sudo
+	current_user = %x["whoami"].split("\n")[0]
+	sudo_users = getOption("users_require_sudo=")
+	sudo_users_array = sudo_users.split(",")
+	if sudo_users_array.include?(current_user)
+		return true
+	end
+end
 
 def help
 	log("Command list")

@@ -125,6 +125,10 @@ class XmppController < ApplicationController
     return params[:password] == SocialStream::Presence.xmpp_server_password
   end
   
+  def chatAuthWithCookie
+    cookie = params[:cookie]
+    render :text => "Ok"
+  end
   
   def chatWindow
     if (current_user) and (current_user.status != 'disable') and (params[:userConnected]=="true")
