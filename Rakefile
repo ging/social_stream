@@ -1,14 +1,12 @@
 # encoding: UTF-8
-require 'rake'
-require 'rake/rdoctask'
+require 'bundler/gem_tasks'
 
-require 'rubygems'
+require 'rdoc/task'
 
+require 'rspec/core'
 require 'rspec/core/rake_task'
 
 require 'ci/reporter/rake/rspec'
-
-require 'bundler'
 
 require File.join(File.dirname(__FILE__), 'lib', 'social_stream', 'version')
 

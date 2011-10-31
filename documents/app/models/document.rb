@@ -10,7 +10,9 @@ class Document < ActiveRecord::Base
   validates_attachment_presence :file
   validates_presence_of :title
   
-  before_create :set_title_and_description
+  before_validation(:on => :create) do
+    set_title_and_description
+  end
   
   define_index do
     indexes title

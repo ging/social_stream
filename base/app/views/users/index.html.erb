@@ -25,7 +25,7 @@
       <div class="center">
         <%= link_to t('user.all_n', :count => User.count), users_path %> -
         <% for u in User.distinct_initials %>
-          <%= link_to u.initial,{:letter => u.initial,:page => 1},:class => "user_letter_link" %>
+          <%= link_to u.initial.capitalize,{:letter => u.initial,:page => 1},:class => "user_letter_link" %>
         <% end %>
       </div>
     </div>

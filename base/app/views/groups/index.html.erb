@@ -39,7 +39,7 @@
       <div class="row">
         <div class="center">
           <% for g in Group.distinct_initials %>
-            <%= link_to g.initial,{:letter => g.initial,:page => 1},:class => "user_letter_link" %>
+            <%= link_to g.initial.capitalize,{:letter => g.initial,:page => 1},:class => "user_letter_link" %>
           <% end %>
         </div>
       </div>
