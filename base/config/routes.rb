@@ -82,8 +82,9 @@ Rails.application.routes.draw do
   match 'api/user/:id' => 'api#users', :as => :api_user
   match 'api/me' => 'api#users', :as => :api_me
   match 'api/me/home/' => 'api#activity_atom_feed', :format => 'atom', :as => :api_my_home
+  match 'api/user/:id/public' => 'api#activity_atom_feed', :format => 'atom', :as => :api_user_activities
+
   match 'api/me/contacts' => 'contacts#index', :format => 'json', :as => :api_contacts
   match 'api/subjects/:s/contacts' => 'contacts#index', :format => 'json', :as => :api_subject_contacts
-  match 'api/user/:id/public' => 'api#activity_atom_feed', :format => 'atom', :as => :api_user_activities
   ##/API##
 end
