@@ -4,12 +4,6 @@ module SocialStream
       def profile_toolbar_items(subject = current_subject)
         items = super
 
-        items.find{ |i| i[:key] == :resources }[:items].unshift({
-          :key => :resources_events,
-          :name => image_tag("btn/btn_event.png")+t('conference.title'),
-          :url => polymorphic_path([subject, Event.new])
-        })
-
         if SocialStream.activity_forms.include?(:event) &&
            subject.is_a?(Event) &&
            subject.agenda.present?

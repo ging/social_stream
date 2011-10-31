@@ -45,7 +45,7 @@ en:
   resource:
     all: "All Resources"
     confirm_delete: "Delete resource?"
-    title: "Resources"
+    title: "Repository"
     mine: "My resources"
     msg: "Uploaded a resource:"
     not_mine: "Resources"
