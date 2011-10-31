@@ -1,32 +1,7 @@
-<% content_for :title do %>
-<%= profile_subject.name + ": " + t('repository.title') %>
-<% end %>
-
-<% content_for :sidebar do %>
-<%= render :partial => 'home/sidebar' %>
-<% end %>
-
-<%if profile_subject_is_current?%>
-<%= location(
-  link_to(t('repository.title'), polymorphic_path(controller.controller_name),:remote => true)
-  ) %>
-<%else%>
-<%= location(
-  link_to(profile_subject.name, polymorphic_path(profile_subject),:remote => true),
-  link_to(t('repository.title'), polymorphic_path([profile_subject, controller.controller_name]),:remote => true)
-  ) %>
-<%end%>
-
-<% toolbar :profile => profile_subject %>
-<br class="clearfloat" />
-<div class="space_center"></div>
-<div id="repository_filter">
-  <form action="<%= search_path%>" method="get" id="repository_filter">
-    <%= text_field_tag :filter_query, nil,:autocomplete => :off, :id => :repository_filter_input %>
-  </form>
-  <div id="order_by"><%= t('repository.order.by') %>: <%= t('repository.order.last_modified') %> · <%= t('repository.order.most_popular') %>  </div>
-</div>
-<div class="space_center"></div>
+<% unless params[:no_layout].present? %>
+  <%= render :partial => "common/headers" %>
+  <div id="documents_grid">
+<% end %> 
 
 <% @activities.each do |a| %>
 <% document = a.activity_objects.first.document %>
@@ -46,4 +21,15 @@
     :path => document_path(document) %>
   </div>
 </div>
+<% end %> 
+
+<% if @activities.size == DocumentsController::PER_PAGE %>
+  <% next_url = url_for(:no_layout => true, 
+                        :page => params[:page].present? ? params[:page].to_i + 1 : 2,
+                        :query => params[:query].present? ? params[:query] : "") %>
+  <%= content_tag(:span, "", :class => "screw screw-after", :rel => next_url)%>
+<% end %>
+
+<% unless params[:no_layout].present? %>
+  </div>
 <% end %> 

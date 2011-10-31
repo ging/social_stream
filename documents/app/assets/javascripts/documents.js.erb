@@ -59,3 +59,9 @@ toggleDocumentEdit = function(){
     $("#document_edit_action").removeClass("selected");
   }
 }
+
+$(document).ready(function(){
+  $("body").screw({
+    loadingHTML: '<%= image_tag('loading.gif') %>'
+  });
+});

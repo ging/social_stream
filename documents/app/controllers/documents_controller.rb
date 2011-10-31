@@ -1,4 +1,5 @@
 class DocumentsController < InheritedResources::Base
+  include ActionView::Helpers::SanitizeHelper
   respond_to :html, :js
 
   belongs_to_subjects :optional => true
@@ -7,7 +8,19 @@ class DocumentsController < InheritedResources::Base
 
   load_and_authorize_resource :except => :index
 
+  PER_PAGE=20
   SEND_FILE_METHOD = :default
+  
+  def index
+    super do |format|
+      if params[:no_layout].present?
+        format.html { render :action => :index, :layout => false }      
+      else  
+        format.html { render :action => :index }
+      end
+    end
+  end
+  
   def create
     super do |format|
       format.all {redirect_to request.referer || home_path}
@@ -64,15 +77,29 @@ class DocumentsController < InheritedResources::Base
 
   def collection
     @activities = profile_subject.wall(:profile,
-    :for => current_subject,
-    :object_type => Array(self.class.index_object_type)).
-    page(params[:page]).
-    per(params[:per])
+                                       :for => current_subject,
+                                       :object_type => Array(self.class.index_object_type))
+    if params[:query].present? 
+      @activities = @activities.joins(:activity_objects => :document).where('documents.title LIKE ?', get_search_query)
+    end
+    @activities.page(params[:page]).per(PER_PAGE)
   end
 
   class << self
     def index_object_type
       [ :Audio, :Video, :Picture, :Document ]
     end
+  end
+  
+  def get_search_query
+    search_query = ""
+    param = strip_tags(params[:query]) || ""
+    bare_query = param unless bare_query.html_safe?
+    search_query_words = bare_query.strip.split
+    search_query_words.each_index do |i|
+      search_query+= search_query_words[i] + " " if i < (search_query_words.size - 1)
+      search_query+= "%" + search_query_words[i] + "% " if i == (search_query_words.size - 1)
+    end
+    return search_query.strip
   end
 end

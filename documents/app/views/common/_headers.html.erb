@@ -1,0 +1,76 @@
+<% content_for :title do %>
+<%= profile_subject.name + ": " + t('repository.title') %>
+<% end %>
+
+<% content_for :sidebar do %>
+<%= render :partial => 'home/sidebar' %>
+<% end %>
+
+<%if profile_subject_is_current?%>
+<%= location(
+  link_to(t('repository.title'), polymorphic_path(controller.controller_name),:remote => true)
+  ) %>
+<%else%>
+<%= location(
+  link_to(profile_subject.name, polymorphic_path(profile_subject),:remote => true),
+  link_to(t('repository.title'), polymorphic_path([profile_subject, controller.controller_name]),:remote => true)
+  ) %>
+<%end%>
+
+<% toolbar :profile => profile_subject %>
+<br class="clearfloat" />
+<div class="space_center"></div>
+<div id="repository_filter">
+  <form action="<%= search_path%>" method="get" id="repository_filter">
+    <%= text_field_tag :filter_query, nil,:autocomplete => :off, :id => :repository_filter_input %>
+  </form>
+  <div id="order_by"><%= t('repository.order.by') %>: <%= t('repository.order.last_modified') %> · <%= t('repository.order.most_popular') %>  </div>
+</div>
+<div class="space_center"></div>
+
+<%= javascript_tag do %>
+$(document).ready(function() {
+  var last_search = "";
+  
+  
+  $("#repository_filter_input").Watermark("<%= escape_javascript(I18n.t('search.name')) %>");
+
+  $("#repository_filter_input").keyup(function() {
+    var searchstring = $(this).val();
+    if((searchstring=="")){
+      if (last_search!=searchstring){last_search=searchstring;}
+      $("#documents_grid").html("<center><%= escape_javascript(image_tag('loading.gif', :class => :loading)) %></center>");
+        $.ajax({
+          type : "GET",
+          url : "<%= polymorphic_url([current_subject, Document.new]) %>?no_layout=true",
+          success : function(html) {      
+            if ($("#repository_filter_input").val()==searchstring){ //Only show if input value is still the same
+              $("#documents_grid").html(html);
+            }          
+          },
+          error: function(){
+            $("#header_search_display").html("<center><%= escape_javascript(content_tag(:span,I18n.t('search.wrong'), :class => :warning)) %></center>");
+         }
+        });
+    } else {
+      if (last_search!=searchstring){
+        last_search=searchstring;
+        $("#documents_grid").html("<center><%= escape_javascript(image_tag('loading.gif', :class => :loading)) %></center>");
+        $.ajax({
+          type : "GET",
+          url : "<%= polymorphic_url([current_subject, Document.new]) %>?query=" + searchstring + "&no_layout=true",
+          success : function(html) {      
+            if ($("#repository_filter_input").val()==searchstring){ //Only show if input value is still the same
+              $("#documents_grid").html(html);
+            }          
+          },
+          error: function(){
+            $("#header_search_display").html("<center><%= escape_javascript(content_tag(:span,I18n.t('search.wrong'), :class => :warning)) %></center>");
+         }
+        });
+      }
+    }
+    return false;
+  });  
+})
+<% end %>
