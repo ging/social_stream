@@ -10,6 +10,7 @@ module SocialStream
       
       class << self
         
+        
           def setRosterForBidirectionalTie(userASid,userBSid,userANick,userBNick,groupForA,groupForB)
             if SocialStream::Presence.remote_xmpp_server
               puts "Not implemented setRosterForBidirectionalTie(userASid,userBSid,userANick,userBNick,groupForA,groupForB) for remote_xmpp_server"
@@ -19,6 +20,7 @@ module SocialStream
               executeEmanagementLocalCommand("setBidireccionalBuddys",[userASid,userBSid,userANick,userBNick,groupForA,groupForB])
             end
           end 
+          
           
           def unsetRosterForBidirectionalTie(userSid,oldfriendSid,oldfriendNick,oldfriendGroup)
             if SocialStream::Presence.remote_xmpp_server
@@ -30,6 +32,7 @@ module SocialStream
             end
           end
           
+          
           def addBuddyToRoster(userSid,buddySid,buddyNick,buddyGroup,subscription_type)
             if SocialStream::Presence.remote_xmpp_server
               puts "Not implemented addBuddyToRoster(userSID,buddySID,buddyNick,buddyGroup,subscription_type) for remote_xmpp_server"
@@ -40,6 +43,7 @@ module SocialStream
             end
           end
           
+          
           def removeBuddyFromRoster(userSid,buddySid)
             if SocialStream::Presence.remote_xmpp_server
               puts "Not implemented removeBuddyFromRoster(userSid,buddySid) for remote_xmpp_server"
@@ -49,6 +53,39 @@ module SocialStream
               executeEmanagementLocalCommand("removeBuddyFromRoster",[userSid,buddySid])
             end
           end
+          
+          
+          #Before delete contact (destroy ties) callback
+          def removeBuddy(contact)
+            
+            unless SocialStream::Presence.enable
+              return
+            end
+            
+            unless contact.receiver.subject_type == "User" and contact.sender.subject_type == "User"
+              return
+            end
+ 
+            #XMPP DOMAIN
+            domain = SocialStream::Presence.domain
+            user_sid = contact.sender.slug + "@" + domain
+            user_name =  contact.sender.name  
+            buddy_sid = contact.receiver.slug + "@" + domain
+            buddy_name =  contact.receiver.name
+            
+            #Check for bidirecctional
+            
+            if contact.sender.contact_actors(:type=>:user).include?(contact.receiver)
+              #Bidirectional contacts
+              #Execute unsetRosterForBidirectionalTie(user_sid,oldfriend_sid,oldfriendNick,oldfriendGroup)
+              SocialStream::Presence::XmppServerOrder::unsetRosterForBidirectionalTie(buddy_sid,user_sid,user_name,"SocialStream")
+            elsif contact.sender.contact_actors(:type=>:user, :direction=>:sent).include?(contact.receiver)
+              #Unidirectional contacts
+              SocialStream::Presence::XmppServerOrder::removeBuddyFromRoster(user_sid,buddy_sid)
+            end
+            
+          end
+          
           
           def synchronize_presence
             if SocialStream::Presence.remote_xmpp_server  
@@ -105,6 +142,7 @@ module SocialStream
             end
           end
           
+          
           def synchronize_rosters
             puts "Removing all rosters"
             remove_all_rosters
@@ -129,6 +167,7 @@ module SocialStream
           end
           
           
+          
           #Help methods
           
           def getSocialStreamUserSid
@@ -138,6 +177,7 @@ module SocialStream
             ss_name = SocialStream::Presence.social_stream_presence_username
             return ss_name + "@" + domain
           end
+          
           
           def openXmppClientForSocialStreamUser
             begin            
@@ -158,11 +198,13 @@ module SocialStream
             end
           end
           
+          
           def sendXmppChatMessage(client,dest_sid,body)
                 msg = Jabber::Message::new(dest_sid, body)
                 msg.type=:chat
                 client.send(msg)
           end
+          
           
           def synchronize_presence_for_slugs(user_slugs)
             #Check connected users
@@ -184,6 +226,7 @@ module SocialStream
             end
           end
           
+          
           def reset_presence
             users = User.find_all_by_connected(true)
     
@@ -192,6 +235,7 @@ module SocialStream
               user.save!
             end
           end
+          
           
           def executeEmanagementLocalCommand(order,params)
             command = SocialStream::Presence.scripts_path + "/emanagement " + order
@@ -203,8 +247,8 @@ module SocialStream
             return output
           end
         
+        
       end
-
     end
   end
 end

@@ -44,7 +44,7 @@ module SocialStream
           end
           
           
-          def remove_buddy
+          def remove_buddy 
             
             unless SocialStream::Presence.enable
               return
@@ -64,7 +64,7 @@ module SocialStream
             #Check if is a positive and replied tie         
             if self.bidirectional?
               #Execute unsetRosterForBidirectionalTie(user_sid,oldfriend_sid,oldfriendNick,oldfriendGroup)
-              SocialStream::Presence::XmppServerOrder::unsetRosterForBidirectionalTie(user_sid,buddy_sid,buddy_name,"SocialStream")
+              SocialStream::Presence::XmppServerOrder::unsetRosterForBidirectionalTie(buddy_sid,user_sid,user_name,"SocialStream")
             elsif self.positive?
               #Case: Possitive tie unidirectional
               #Execute removeBuddyFromRoster(user_sid,buddy_sid)

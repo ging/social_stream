@@ -126,7 +126,9 @@ class Contact < ActiveRecord::Base
   # We need to update that status here
   def relation_ids=(ids)
     remove_follower(ids)
-
+    if defined?(SocialStream::Presence) and SocialStream::Presence.enable
+      SocialStream::Presence::XmppServerOrder::removeBuddy(self)
+    end
     association(:relations).ids_writer(ids)
   end
 
