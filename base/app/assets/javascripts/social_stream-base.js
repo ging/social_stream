@@ -3,6 +3,7 @@
 //= require jquery-ui
 //= require modernizr
 //= require jquery.lightbox-with-resize-plugin
+//= require jquery.screw
 //
 //= require avatars_for_rails
 //
