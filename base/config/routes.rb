@@ -23,7 +23,21 @@ Rails.application.routes.draw do
       resource :like
       resource :profile
       resources :activities
+
+      # Nested Social Stream objects configured in config/initializers/social_stream.rb
+      #
+      # /users/demo/posts
+      (SocialStream.objects - [ :actor ]).each do |object|
+        resources object.to_s.pluralize
+      end
     end
+  end
+
+  # Social Stream objects configured in config/initializers/social_stream.rb
+  #
+  # /posts
+  (SocialStream.objects - [ :actor ]).each do |object|
+    resources object.to_s.pluralize
   end
 
   resources :contacts do
@@ -72,10 +86,6 @@ Rails.application.routes.draw do
   
   match 'ties' => 'ties#index', :as => :ties
   
-  # Social Stream objects configured in config/initializers/social_stream.rb
-  (SocialStream.objects - [ :actor ]).each do |object|
-    resources object.to_s.pluralize
-  end
   
   ##API###
   match 'api/keygen' => 'api#create_key', :as => :api_keygen
