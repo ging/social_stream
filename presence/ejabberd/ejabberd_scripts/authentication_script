@@ -33,6 +33,7 @@ end
 
 $accessUrl = getOption("auth_api=")
 $accessByCookieUrl = getOption("auth_by_cookie_api=")
+$cookie_name = getOption("cookie_name=")
 $sslogin = getOption("ss_login=")
 $sspass = getOption("ss_password=")
 
@@ -80,7 +81,7 @@ end
 
 def authByCookie(username, cookie)
   begin
-    response = RestClient.get $accessByCookieUrl, :cookies => {:_global_session => cookie}
+    response = RestClient.get $accessByCookieUrl, :cookies => {:"#{$cookie_name}" => cookie}
     doc = REXML::Document.new(response.body)
 
     slug = ""
@@ -149,6 +150,7 @@ loop do
 	authByCookie(data[0], cookie)
       else
 	$logger.info "#{Process.pid}: With username #{data[0]} and password ******"
+	#$logger.info "#{Process.pid}: With username #{data[0]} and password #{data[2]}"
       	auth(data[0], data[2])
       end
       
