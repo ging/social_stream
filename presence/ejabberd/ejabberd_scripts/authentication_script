@@ -2,6 +2,8 @@
 
 require 'logger'
 require 'rest_client'
+require 'rexml/document'
+include REXML
 
 $stdout.sync = true
 $stdin.sync = true
@@ -30,6 +32,7 @@ def getOption(option)
 end
 
 $accessUrl = getOption("auth_api=")
+$accessByCookieUrl = getOption("auth_by_cookie_api=")
 $sslogin = getOption("ss_login=")
 $sspass = getOption("ss_password=")
 
@@ -75,6 +78,45 @@ def auth(username, password)
 end
 
 
+def authByCookie(username, cookie)
+  begin
+    response = RestClient.get $accessByCookieUrl, :cookies => {:_global_session => cookie}
+    doc = REXML::Document.new(response.body)
+
+    slug = ""
+    doc.elements.each('user/slug') do |ele|
+      slug = ele.text
+    end
+
+    if username != "" and username == slug
+	return true
+    else
+	return false
+    end  
+
+  rescue => e
+    
+    unless e.class.name == "RestClient::Unauthorized" and e.message == "401 Unauthorized"
+	$logger.error "#{Process.pid}: Exception in authByCookie(username, cookie)"
+    	$logger.error "#{Process.pid}: #{e.class.name}: #{e.message}"
+    end
+
+    return false
+  end
+end
+
+
+def validateParameters(username,domain,password)
+	if !username or !password or !domain
+		return false
+	end
+	if (username.gsub(/\s+/, "")=="") or (password.gsub(/\s+/, "")=="") or (domain.gsub(/\s+/, "")=="")
+		return false
+	end
+	return true
+end
+
+
 loop do
   begin
     $stdin.eof? # wait for input
@@ -91,12 +133,24 @@ loop do
     
     when "auth"
       $logger.info "#{Process.pid}: Authenticating #{data[0]}@#{data[1]}"
-      #$logger.info "#{Process.pid}: With password #{data[2]}"
-      #password = data[2]
       
-      #Authorization condition for LOGIN
-      auth(data[0], data[2])
-      
+      #Parameters basic validation: validateParameters(username,domain,password)
+      if !validateParameters(data[0],data[1],data[2])
+	$logger.info "#{Process.pid}: Invalid parameters"	
+	return false
+      end
+
+      #Select authorization condition for LOGIN
+      #Authentication methods: user/password or user/cookie
+      password = data[2]	
+      if password.split(">>")[0]=="AuthenticationByCookie"
+	cookie = password.split(">>")[1]
+	$logger.info "#{Process.pid}: With username #{data[0]} and cookie #{cookie}"      	
+	authByCookie(data[0], cookie)
+      else
+	$logger.info "#{Process.pid}: With username #{data[0]} and password ******"
+      	auth(data[0], data[2])
+      end
       
     when "isuser"
      

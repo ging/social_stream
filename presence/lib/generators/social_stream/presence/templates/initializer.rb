@@ -3,6 +3,8 @@ SocialStream::Presence.setup do |config|
   config.domain = "localhost"
   #Configures Bosh Service Path
   #config.bosh_service = "http://xmpp-proxy/http-bind"
+  #Configures Authentication Method: "cookie" or "password"
+  config.auth_method = "cookie"
   #Configures XMPP Server Password
   config.xmpp_server_password = "password"
   #Remote or local mode
