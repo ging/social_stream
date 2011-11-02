@@ -82,7 +82,7 @@ class DocumentsController < InheritedResources::Base
     if params[:query].present? 
       @activities = @activities.joins(:activity_objects => :document).where('documents.title LIKE ?', get_search_query)
     end
-    @activities.page(params[:page]).per(PER_PAGE)
+    @activities = @activities.page(params[:page]).per(PER_PAGE)
   end
 
   class << self

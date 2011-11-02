@@ -21,9 +21,7 @@
 <br class="clearfloat" />
 <div class="space_center"></div>
 <div id="repository_filter">
-  <form action="<%= search_path%>" method="get" id="repository_filter">
     <%= text_field_tag :filter_query, nil,:autocomplete => :off, :id => :repository_filter_input %>
-  </form>
   <div id="order_by"><%= t('repository.order.by') %>: <%= t('repository.order.last_modified') %> · <%= t('repository.order.most_popular') %>  </div>
 </div>
 <div class="space_center"></div>
