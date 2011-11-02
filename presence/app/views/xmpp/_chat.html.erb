@@ -15,7 +15,7 @@
 
     //Global variables
 		var BOSH_SERVICE = '<%= SocialStream::Presence.bosh_service || root_url + "http-bind/" %>';
-		var cookie = "AuthenticationByCookie>>" + "<%=cookies["_global_session"]%>";
+		var cookie = "AuthenticationByCookie>>" + "<%=cookies[Rails.application.config.session_options[:key]]%>";
 		var domain = '<%=SocialStream::Presence.domain%>';
 		var user_name = '<%=current_user.name%>';
 		var user_slug = '<%=current_user.slug%>';
