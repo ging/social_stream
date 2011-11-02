@@ -1,18 +1,32 @@
      <script type="text/javascript">
-        $(document).ready(function () { 			
-		      if ((window.sessionStorage) && (sessionStorage.getItem("ss_user_pass") != null)) {
-		        $("#passwordFormChat").hide();
-		      } else {
-		        $("#passwordFormChat").show();
-		      }
+        $(document).ready(function () {
 					
-		      $('.connectChatButton').bind('click', function () {
-		        connectToServer($('#user_password').val());
-		      });
-					
-					$('.storePass').bind('click', function () {
-            storePassword();
-          });
+					if (authByCookie()){
+					  //Authentication by cookie
+            
+            $("#passwordFormChat").hide();
+            $('.connectChatButton').bind('click', function () {
+              connectToServerWithCookie();
+            });
+            
+					} else {
+						//Authentication by password
+            
+            if ((window.sessionStorage) && (sessionStorage.getItem("ss_user_pass") != null)) {
+              $("#passwordFormChat").hide();
+            } else {
+              $("#passwordFormChat").show();
+            }
+            
+            $('.connectChatButton').bind('click', function () {
+              connectToServerWithPassword($('#user_password').val());
+            });
+          
+            $('.storePass').bind('click', function () {
+              storePassword();
+            });
+						
+					}
 					
         });
       </script>
