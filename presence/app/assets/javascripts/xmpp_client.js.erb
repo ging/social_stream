@@ -3,7 +3,7 @@
 ////////////////////
 
 function log(msg) {
-    //console.log(msg)
+    console.log(msg)
 }
 
 
@@ -16,6 +16,45 @@ statusMessage['chat'] = "";
 statusMessage['away'] = "Away";
 statusMessage['xa'] = "Away";
 statusMessage['dnd'] = "Busy";
+
+
+////////////////////
+//Connect functions
+////////////////////
+
+function connectToServerWithCookie(){
+    try {
+      connection = new Strophe.Connection(BOSH_SERVICE);
+      connection.connect(user_jid, cookie, onConnect);
+    } catch (err) {
+      //"Handle errors"
+      return false;
+    }
+}
+
+//Password: Get from chatPassword param if exists, instead try to get from sessionStorage.
+function connectToServerWithPassword(chatPassword){
+    
+    //Get Password
+    if ((chatPassword!=null)&&(chatPassword!="")){
+      var password = chatPassword;
+    } else if ((window.sessionStorage)&&(sessionStorage.getItem("ss_user_pass") != null)) {
+      var password = sessionStorage.getItem("ss_user_pass");
+    } else {
+      return false;
+    }
+    
+    try {
+        //Connect actual user to the chat
+        connection = new Strophe.Connection(BOSH_SERVICE);
+        connection.connect(user_jid, password, onConnect);
+    } catch (err) {
+        //"Handle errors"
+        return false;
+    }
+
+    return true;
+}
 
 ////////////////////
 //Strophe functions
@@ -176,6 +215,19 @@ function sendChatMessage(from,to,text){
 		return true;
 }
 
+function authByCookie(){
+	var authMethod = '<%= SocialStream::Presence.auth_method %>';
+	return authMethod=="cookie";
+}
+
+function authByPassword(){
+  var authMethod = '<%= SocialStream::Presence.auth_method %>';
+  return authMethod=="password";
+}
+
+function ifCookie(){
+	return (!(typeof cookie == 'undefined'))
+}
 
 ////////////////////
 //Audio functions
