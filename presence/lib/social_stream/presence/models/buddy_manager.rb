@@ -17,6 +17,10 @@ module SocialStream
               return
             end
             
+            unless self.receiver and self.sender
+              return
+            end
+            
             unless self.receiver.subject_type == "User" and self.sender.subject_type == "User"
               return
             end
@@ -47,6 +51,10 @@ module SocialStream
           def remove_buddy 
             
             unless SocialStream::Presence.enable
+              return
+            end
+            
+            unless self.receiver and self.sender
               return
             end
             
