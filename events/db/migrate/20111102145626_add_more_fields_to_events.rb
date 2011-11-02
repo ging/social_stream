@@ -1,6 +1,4 @@
-class FieldsEvents < ActiveRecord::Migration
-
-
+class AddMoreFieldsToEvents < ActiveRecord::Migration
   def change
     add_column :events, :description, :string
     add_column :events, :place, :string
@@ -22,7 +20,5 @@ class FieldsEvents < ActiveRecord::Migration
     add_column :events, :vc_mode, :int
     add_column :events, :other_participation_url, :text
     add_column :events, :web_interface, :int
-
   end
-
 end
