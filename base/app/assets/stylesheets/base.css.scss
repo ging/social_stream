@@ -191,19 +191,29 @@ div.chzn-container ul.chzn-choices li.search-field input{ cursor:pointer;}
 }
 
 #activity_form_select {
-	margin-left: 10px;
+	margin-left: 6px;
 }
 
 .activity_form_selector{
 	padding: 5px;
+	margin: 1px 2px;
 	margin-bottom: 5px;
 	float: left;
-	border: 2px solid transparent;
+	background: $text-over-main;
+	border: 1px solid $separation-color;
 	cursor: pointer; 
 }
 
 .activity_form_selector.selected{
-	border: 2px solid #46B9E8;
+  background: $auxiliar-color;
+	border: 1px solid $main-color;
+	color: $text-over-main;
+	font-weight: bold;
+}
+
+.activity_form_selector:hover{
+  background: $auxiliar-color;
+  color: $text-over-main;
 }
 
 .more_pending{
