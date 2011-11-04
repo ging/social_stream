@@ -140,22 +140,24 @@ module SocialStream
           end
           
           def executeCommand(command)
-            puts "Executing " + command
-            if SocialStream::Presence.remote_xmpp_server
-              output = executeRemoteCommand(command)
-            else
-              #SocialStream::Presence.remote_xmpp_server=false
-              output = executeLocalCommand(command)
-            end
+            output = executeCommands([command])
             return output
           end
           
           def executeCommands(commands)
-            puts "Executing the following commands:"
-            commands.each do |command|
-              puts command
-            end  
-            puts "Command list finish"
+            if commands.length > 1
+              puts "Executing the following commands:"
+              commands.each do |command|
+                puts command
+              end  
+              puts "Command list finish"
+            elsif commands.length == 1
+              puts "Executing " + commands[0]
+            else
+              puts "No command to execute"
+              return
+            end
+                       
             if SocialStream::Presence.remote_xmpp_server
               output = executeRemoteCommands(commands)
             else
@@ -163,10 +165,6 @@ module SocialStream
               output = executeLocalCommands(commands)
             end
             return output
-          end
-               
-          def executeLocalCommand(command)
-            return executeLocalCommands([command])
           end
         
           def executeLocalCommands(commands)
@@ -177,17 +175,33 @@ module SocialStream
             return output
           end
         
-          def executeRemoteCommand(command)
-            return executeRemoteCommands([command])
-          end
-        
           def executeRemoteCommands(commands)
             output="No command received";
-            Net::SSH.start( SocialStream::Presence.ssh_domain, SocialStream::Presence.ssh_user, :password => SocialStream::Presence.ssh_password, :auth_methods => ["password"]) do |session|
-              commands.each do |command|
-                output = session.exec!(command)
+            
+            begin
+              if SocialStream::Presence.ssh_password
+                Net::SSH.start( SocialStream::Presence.ssh_domain, SocialStream::Presence.ssh_user, :password => SocialStream::Presence.ssh_password, :auth_methods => ["password"]) do |session|
+                  commands.each do |command|
+                    output = session.exec!(command)
+                  end
+                end
+              else
+                #SSH with authentication key instead of password
+                Net::SSH.start( SocialStream::Presence.ssh_domain, SocialStream::Presence.ssh_user) do |session|
+                  commands.each do |command|
+                    output = session.exec!(command)
+                  end
+                end
               end
-            end
+            rescue Exception => e
+              case e
+                when Net::SSH::AuthenticationFailed
+                  output = "AuthenticationFailed on remote access"
+                else
+                  output = "Unknown exception in executeRemoteCommands method: #{e.to_s}"
+              end
+            end  
+ 
             return output
           end
         

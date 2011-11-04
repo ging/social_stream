@@ -18,6 +18,7 @@ SocialStream::Presence.setup do |config|
   #SSH Login
   #config.ssh_domain = "domain"
   #config.ssh_user = "login"
+  #Comment to allow SSH authentication with key instead of password
   #config.ssh_password= "password"
 
   #Configure to use a Xmpp Client on Rails App
