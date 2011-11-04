@@ -1,0 +1,11 @@
+es:
+  chat:
+    connecting: "Chat Conectando"
+    disconnected: "Chat Desconectado"
+    title: "Chat"
+    password: "Contraseña"
+    status:
+      choose: "Establecer estado"
+      available: "Disponible"
+      away: "Ausente"
+      dnd: "No molestar"

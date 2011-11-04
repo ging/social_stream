@@ -1,0 +1,11 @@
+en:
+  chat:
+    connecting: "Chat Connecting"
+    disconnected: "Chat Disconnected"
+    title: "Chat"
+    password: "Password"
+    status: 
+      choose: "Choose status"
+      available: "Available"
+      away: "Away"
+      dnd: "Busy"
