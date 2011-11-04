@@ -4,17 +4,17 @@
 		    <div class="header">
 		      <%=image_tag("btn/btn_friend.png", :class => "header_icon")%>
 		      <div class="header_text">
-		        Chat
+		        <%=t('chat.title')%>
 		      </div>
 		    </div>
 				
 				<div id="status" class="dropdown">
-			    <dt><a href=""><span>Establecer estado</span></a></dt>
+			    <dt><a href=""><span><%=t('chat.status.choose')%></span></a></dt>
 			    <dd>
 			        <ul>
-					      <li><a href="#" class="option"><img class="flag" src="assets/status/available.png" alt=""/> Disponible <span class="value">chat</span></a></li>
-					      <li><a href="#" class="option"><img class="flag" src="assets/status/away.png" alt=""/> Ausente <span class="value">away</span></a></li>
-					      <li><a href="#" class="option"><img class="flag" src="assets/status/dnd.png" alt=""/> No molestar <span class="value">dnd</span></a></li>
+					      <li><a href="#" class="option"><img class="flag" src="assets/status/available.png" alt=""/> <%=t('chat.status.available')%> <span class="value">chat</span></a></li>
+					      <li><a href="#" class="option"><img class="flag" src="assets/status/away.png" alt=""/> <%=t('chat.status.away')%> <span class="value">away</span></a></li>
+					      <li><a href="#" class="option"><img class="flag" src="assets/status/dnd.png" alt=""/> <%=t('chat.status.dnd')%> <span class="value">dnd</span></a></li>
 			        </ul>
 			    </dd>
         </div>
@@ -30,7 +30,7 @@
 								<a title='<%=contact.name%>' class="presence_user_link" width="28">
 								  <%=image_tag(contact.logo.url, :alt => contact.name , :size => "28x28")%>
 									<% if contact.user.status %>
-									<%=image_tag("status/" + contact.user.status + ".png", :class => "presence_status") %></a>
+									  <%=image_tag("status/" + contact.user.status + ".png", :class => "presence_status") %></a>
 									<% end %>
 								</a>
               </div>
