@@ -9,16 +9,21 @@ SocialStream::Presence.setup do |config|
   config.xmpp_server_password = "password"
   #Remote or local mode
   config.remote_xmpp_server = false
+  #Scripts path to execute ejabberd scripts: local or remote
+  config.scripts_path = "/scripts_path"
   #False to disable Social Stream Presence
   #config.enable = false
   
   #Parameters for remote mode
+  #SSH Login
+  #config.ssh_domain = "domain"
+  #config.ssh_user = "login"
+  #config.ssh_password= "password"
+
+  #Configure to use a Xmpp Client on Rails App
   #Username of the the Social Stream Admin sid
   config.social_stream_presence_username = "social_stream-presence"
   #Configures Social Stream Rails App Password
-  config.password = "password"
-  
-  #Parameters for local mode  
-  #Scripts path to execute local ejabberd commands
-  config.scripts_path = "/scripts_path"
+  config.password = "password"  
+
 end

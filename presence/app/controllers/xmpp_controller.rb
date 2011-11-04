@@ -100,7 +100,7 @@ class XmppController < ApplicationController
       return
     end
     
-    SocialStream::Presence::XmppServerOrder::reset_presence
+    SocialStream::Presence::XmppServerOrder::resetPresence
     
     render :text => "Ok" 
   end
@@ -115,7 +115,7 @@ class XmppController < ApplicationController
     #Actual connected users
     user_slugs = params[:name]  
     
-    SocialStream::Presence::XmppServerOrder::synchronize_presence_for_slugs(user_slugs)
+    SocialStream::Presence::XmppServerOrder::synchronizePresenceForSlugs(user_slugs)
     
     render :text => "ok"
   end
@@ -125,10 +125,6 @@ class XmppController < ApplicationController
     return params[:password] == SocialStream::Presence.xmpp_server_password
   end
   
-  def chatAuthWithCookie
-    cookie = params[:cookie]
-    render :text => "Ok"
-  end
   
   def chatWindow
     if (current_user) and (current_user.status != 'disable') and (params[:userConnected]=="true")

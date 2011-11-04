@@ -3,55 +3,31 @@ require 'xmpp4r/muc'
 require 'xmpp4r/roster'
 require 'xmpp4r/client'
 require 'xmpp4r/message'
+require 'net/ssh'
 
 module SocialStream
   module Presence
     class XmppServerOrder
       
       class << self
-        
-        
+               
           def setRosterForBidirectionalTie(userASid,userBSid,userANick,userBNick,groupForA,groupForB)
-            if SocialStream::Presence.remote_xmpp_server
-              puts "Not implemented setRosterForBidirectionalTie(userASid,userBSid,userANick,userBNick,groupForA,groupForB) for remote_xmpp_server"
-              return
-            else
-              #SocialStream::Presence.remote_xmpp_server=false
-              executeEmanagementLocalCommand("setBidireccionalBuddys",[userASid,userBSid,userANick,userBNick,groupForA,groupForB])
-            end
+              executeEmanagementCommand("setBidireccionalBuddys",[userASid,userBSid,userANick,userBNick,groupForA,groupForB])
           end 
           
           
           def unsetRosterForBidirectionalTie(userSid,oldfriendSid,oldfriendNick,oldfriendGroup)
-            if SocialStream::Presence.remote_xmpp_server
-              puts "Not implemented unsetRosterForBidirectionalTie(user_sid,oldfriend_sid,oldfriendNick,oldfriendGroup) for remote_xmpp_server"
-              return
-            else
-              #SocialStream::Presence.remote_xmpp_server=false
-              executeEmanagementLocalCommand("unsetBidireccionalBuddys",[userSid,oldfriendSid,oldfriendNick,oldfriendGroup])
-            end
+              executeEmanagementCommand("unsetBidireccionalBuddys",[userSid,oldfriendSid,oldfriendNick,oldfriendGroup])
           end
           
           
           def addBuddyToRoster(userSid,buddySid,buddyNick,buddyGroup,subscription_type)
-            if SocialStream::Presence.remote_xmpp_server
-              puts "Not implemented addBuddyToRoster(userSID,buddySID,buddyNick,buddyGroup,subscription_type) for remote_xmpp_server"
-              return
-            else
-              #SocialStream::Presence.remote_xmpp_server=false
-              executeEmanagementLocalCommand("addBuddyToRoster",[userSid,buddySid,buddyNick,buddyGroup,subscription_type])
-            end
+              executeEmanagementCommand("addBuddyToRoster",[userSid,buddySid,buddyNick,buddyGroup,subscription_type])
           end
           
           
           def removeBuddyFromRoster(userSid,buddySid)
-            if SocialStream::Presence.remote_xmpp_server
-              puts "Not implemented removeBuddyFromRoster(userSid,buddySid) for remote_xmpp_server"
-              return
-            else
-              #SocialStream::Presence.remote_xmpp_server=false
-              executeEmanagementLocalCommand("removeBuddyFromRoster",[userSid,buddySid])
-            end
+              executeEmanagementCommand("removeBuddyFromRoster",[userSid,buddySid])
           end
           
           
@@ -59,6 +35,10 @@ module SocialStream
           def removeBuddy(contact)
             
             unless SocialStream::Presence.enable
+              return
+            end
+            
+            unless contact.receiver and contact.sender
               return
             end
             
@@ -78,77 +58,56 @@ module SocialStream
             if contact.sender.contact_actors(:type=>:user).include?(contact.receiver)
               #Bidirectional contacts
               #Execute unsetRosterForBidirectionalTie(user_sid,oldfriend_sid,oldfriendNick,oldfriendGroup)
-              SocialStream::Presence::XmppServerOrder::unsetRosterForBidirectionalTie(buddy_sid,user_sid,user_name,"SocialStream")
+              unsetRosterForBidirectionalTie(buddy_sid,user_sid,user_name,"SocialStream")
             elsif contact.sender.contact_actors(:type=>:user, :direction=>:sent).include?(contact.receiver)
               #Unidirectional contacts
-              SocialStream::Presence::XmppServerOrder::removeBuddyFromRoster(user_sid,buddy_sid)
+              removeBuddyFromRoster(user_sid,buddy_sid)
             end
             
           end
           
           
-          def synchronize_presence
-            if SocialStream::Presence.remote_xmpp_server  
-              
-              begin
-                client = openXmppClientForSocialStreamUser
-                if client
-                  sendXmppChatMessage(client,getSocialStreamUserSid,"Synchronize")
-                  client.close()
-                  return "Ok"
-                else
-                  reset_presence
-                  return "Reset Connected Users"
-                end
-              rescue
-                puts "Error in SocialStream::Presence::XmppServerOrder::synchronize_presence"
-              end
-              
+          def synchronizePresence
+            
+            if !isEjabberdNodeUp
+              resetPresence
+              return "Xmpp Server Down: Reset Connected Users"
+            end 
+            
+            if SocialStream::Presence.remote_xmpp_server      
+              command = buildCommand("synchronize_presence_script","",[])
+              executeCommand(command)    
             else
               #SocialStream::Presence.remote_xmpp_server=false
               
-              #Get connected users locally 
-              output = executeEmanagementLocalCommand("isEjabberdNodeStarted",[])
-              nodeUp = output.split("\n")[3]
-              
-              if nodeUp and nodeUp.strip() == "true"
-                users = []
-                output = %x[ejabberdctl connected-users]
-                sessions = output.split("\n")
-  
-                sessions.each do |session|
-                  users << session.split("@")[0]
-                  puts session.split("@")[0]
-                end
-                
-                synchronize_presence_for_slugs(users)  
-                
-              else
-                reset_presence
-                return "Xmpp Server Down: Reset Connected Users"
+              #Get connected users locally  
+              users = []
+              output = %x[ejabberdctl connected-users]
+              sessions = output.split("\n")
+
+              sessions.each do |session|
+                users << session.split("@")[0]
+                puts session.split("@")[0]
               end
               
+              synchronizePresenceForSlugs(users)  
+              
             end
           end
           
           
-          def remove_all_rosters
-            if SocialStream::Presence.remote_xmpp_server
-              puts "Not implemented SocialStream::Presence::XmppServerOrder::remove_all_rosters for remote_xmpp_server"
-              return
-            else
-            #SocialStream::Presence.remote_xmpp_server=false
-              executeEmanagementLocalCommand("removeAllRosters",[])
-            end
+          def removeAllRosters
+              executeEmanagementCommand("removeAllRosters",[])
           end
           
           
-          def synchronize_rosters
-            puts "Removing all rosters"
-            remove_all_rosters
-            puts "Rosters removed"
-       
-            puts "Populate rosters"
+          def synchronizeRosters
+            commands = []
+            
+            #"Remove all rosters"
+            commands << buildCommand("emanagement","removeAllRosters",[])
+
+            #"Populate rosters"
             users = User.all
             checkedUsers = []
           
@@ -159,16 +118,128 @@ module SocialStream
                 unless checkedUsers.include?(contact.slug)
                   domain = SocialStream::Presence.domain
                   user_sid = user.slug + "@" + domain
-                  contact_sid = contact.slug + "@" + domain  
-                  setRosterForBidirectionalTie(user_sid,contact_sid,user.name,contact.name,"SocialStream","SocialStream")
+                  contact_sid = contact.slug + "@" + domain
+                  commands << buildCommand("emanagement","setBidireccionalBuddys",[user_sid,contact_sid,user.name,contact.name,"SocialStream","SocialStream"])
                 end
+              end
+            end
+            
+            executeCommands(commands)
+          end
+          
+     
+          def synchronizePresenceForSlugs(user_slugs)
+            #Check connected users
+            users = User.find_all_by_connected(true)
+            
+            users.each do |user|
+              if user_slugs.include?(user.slug) == false
+                user.connected = false
+                user.save!
+              end
+            end
+            
+            user_slugs.each do |user_slug|
+              u = User.find_by_slug(user_slug)
+              if (u != nil && u.connected  == false)
+                u.connected = true
+                u.save!
               end
             end
           end
           
           
+          def resetPresence
+            users = User.find_all_by_connected(true)
+    
+            users.each do |user|
+              user.connected = false
+              user.save!
+            end
+          end
           
-          #Help methods
+          
+          
+          #Execution commands manage  
+        
+          def buildCommand(script,order,params)
+            command = SocialStream::Presence.scripts_path + "/" + script + " " + order
+            params.each do |param|
+              command = command + " " + param.split(" ")[0]
+            end
+            return command
+          end
+          
+          def executeEmanagementCommand(order,params)
+            command = buildCommand("emanagement",order,params)
+            executeCommand(command)
+          end
+          
+          def executeCommand(command)
+            puts "Executing " + command
+            if SocialStream::Presence.remote_xmpp_server
+              output = executeRemoteCommand(command)
+            else
+              #SocialStream::Presence.remote_xmpp_server=false
+              output = executeLocalCommand(command)
+            end
+            return output
+          end
+          
+          def executeCommands(commands)
+            puts "Executing the following commands:"
+            commands.each do |command|
+              puts command
+            end  
+            puts "Command list finish"
+            if SocialStream::Presence.remote_xmpp_server
+              output = executeRemoteCommands(commands)
+            else
+              #SocialStream::Presence.remote_xmpp_server=false
+              output = executeLocalCommands(commands)
+            end
+            return output
+          end
+               
+          def executeLocalCommand(command)
+            return executeLocalCommands([command])
+          end
+        
+          def executeLocalCommands(commands)
+            output="No command received";
+            commands.each do |command|
+                output = %x[#{command}];
+            end
+            return output
+          end
+        
+          def executeRemoteCommand(command)
+            return executeRemoteCommands([command])
+          end
+        
+          def executeRemoteCommands(commands)
+            output="No command received";
+            Net::SSH.start( SocialStream::Presence.ssh_domain, SocialStream::Presence.ssh_user, :password => SocialStream::Presence.ssh_password, :auth_methods => ["password"]) do |session|
+              commands.each do |command|
+                output = session.exec!(command)
+              end
+            end
+            return output
+          end
+        
+        
+        
+         #Help methods
+         
+          def isEjabberdNodeUp
+              output = executeEmanagementCommand("isEjabberdNodeStarted",[])
+              nodeUp = output.split("\n")[3]
+              return (nodeUp and nodeUp.strip()=="true")
+          end
+        
+        
+        
+         #Xmpp client manage methods
           
           def getSocialStreamUserSid
             #XMPP DOMAIN
@@ -204,50 +275,7 @@ module SocialStream
                 msg.type=:chat
                 client.send(msg)
           end
-          
-          
-          def synchronize_presence_for_slugs(user_slugs)
-            #Check connected users
-            users = User.find_all_by_connected(true)
-            
-            users.each do |user|
-              if user_slugs.include?(user.slug) == false
-                user.connected = false
-                user.save!
-              end
-            end
-            
-            user_slugs.each do |user_slug|
-              u = User.find_by_slug(user_slug)
-              if (u != nil && u.connected  == false)
-                u.connected = true
-                u.save!
-              end
-            end
-          end
-          
-          
-          def reset_presence
-            users = User.find_all_by_connected(true)
-    
-            users.each do |user|
-              user.connected = false
-              user.save!
-            end
-          end
-          
-          
-          def executeEmanagementLocalCommand(order,params)
-            command = SocialStream::Presence.scripts_path + "/emanagement " + order
-            params.each do |param|
-              command = command + " " + param.split(" ")[0]
-            end
-            puts "Executing " + command
-            output = %x[#{command}];
-            return output
-          end
-        
-        
+               
       end
     end
   end

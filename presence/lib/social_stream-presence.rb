@@ -14,12 +14,15 @@ module SocialStream
     mattr_accessor :auth_method
     mattr_accessor :xmpp_server_password
     mattr_accessor :remote_xmpp_server
+    mattr_accessor :scripts_path
     mattr_accessor :enable
+    
+    mattr_accessor :ssh_domain
+    mattr_accessor :ssh_user
+    mattr_accessor :ssh_password
     
     mattr_accessor :social_stream_presence_username
     mattr_accessor :password
-
-    mattr_accessor :scripts_path
 
     @@auth_method = "cookie"
     @@remote_xmpp_server = false

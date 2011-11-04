@@ -7,7 +7,7 @@ namespace :presence do
     desc "Synchronize user presence"
     task :connections => :environment do
       puts "Starting presence:synchronize:connections"
-      SocialStream::Presence::XmppServerOrder::synchronize_presence
+      SocialStream::Presence::XmppServerOrder::synchronizePresence
       puts "Synchronization complete"
     end
 
@@ -15,7 +15,7 @@ namespace :presence do
     desc "Remove all rosters and populate rosters from Social Stream data."
     task :rosters => :environment do
         puts "Starting presence:synchronize:rosters"
-        SocialStream::Presence::XmppServerOrder::synchronize_rosters
+        SocialStream::Presence::XmppServerOrder::synchronizeRosters
         puts "Rosters Synchronization complete"
     end
   end

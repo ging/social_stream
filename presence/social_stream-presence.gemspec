@@ -22,6 +22,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('social_stream-base','~> 0.9.18')
   
   s.add_runtime_dependency "xmpp4r"
+
+  s.add_runtime_dependency "net-ssh"
   
   s.add_development_dependency "ruby-debug19"
   
