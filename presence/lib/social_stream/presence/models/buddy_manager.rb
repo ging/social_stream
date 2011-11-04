@@ -42,6 +42,16 @@ module SocialStream
               subscription_type = "to"
               SocialStream::Presence::XmppServerOrder::addBuddyToRoster(user_sid,buddy_sid,buddy_name,"SocialStream",subscription_type)
             else
+              #Negative Tie
+              
+              if self.contact.positive_replied?
+                #Bidirectional contacts
+                #Execute unsetRosterForBidirectionalTie(user_sid,oldfriend_sid,oldfriendNick,oldfriendGroup)
+                SocialStream::Presence::XmppServerOrder::unsetRosterForBidirectionalTie(buddy_sid,user_sid,user_name,"SocialStream")
+              else
+                SocialStream::Presence::XmppServerOrder::removeBuddyFromRoster(user_sid,buddy_sid)
+              end
+              
               return  
             end
             
@@ -49,38 +59,41 @@ module SocialStream
           
           
           def remove_buddy 
-            
-            unless SocialStream::Presence.enable
-              return
-            end
-            
-            unless self.receiver and self.sender
-              return
-            end
-            
-            unless self.receiver.subject_type == "User" and self.sender.subject_type == "User"
-              return
-            end
- 
-            #XMPP DOMAIN
-            domain = SocialStream::Presence.domain
-            user_sid = self.sender.slug + "@" + domain
-            user_name =  self.sender.name  
-            buddy_sid = self.receiver.slug + "@" + domain
-            buddy_name =  self.receiver.name
-            
-            #Check if is a positive and replied tie         
-            if self.bidirectional?
-              #Execute unsetRosterForBidirectionalTie(user_sid,oldfriend_sid,oldfriendNick,oldfriendGroup)
-              SocialStream::Presence::XmppServerOrder::unsetRosterForBidirectionalTie(buddy_sid,user_sid,user_name,"SocialStream")
-            elsif self.positive?
-              #Case: Possitive tie unidirectional
-              #Execute removeBuddyFromRoster(user_sid,buddy_sid)
-              SocialStream::Presence::XmppServerOrder::removeBuddyFromRoster(user_sid,buddy_sid)
-            else
-              return  
-            end
-            
+#            
+#            unless SocialStream::Presence.enable
+#              return
+#            end
+#            
+#            unless self.receiver and self.sender
+#              return
+#            end
+#            
+#            unless self.receiver.subject_type == "User" and self.sender.subject_type == "User"
+#              return
+#            end
+#            
+#            if self.contact.established?
+#              return
+#            end
+# 
+#            #XMPP DOMAIN
+#            domain = SocialStream::Presence.domain
+#            user_sid = self.sender.slug + "@" + domain
+#            user_name =  self.sender.name  
+#            buddy_sid = self.receiver.slug + "@" + domain
+#            
+#            #Check if is a positive and replied tie         
+#            if self.bidirectional?
+#              #Execute unsetRosterForBidirectionalTie(user_sid,oldfriend_sid,oldfriendNick,oldfriendGroup)
+#              SocialStream::Presence::XmppServerOrder::unsetRosterForBidirectionalTie(buddy_sid,user_sid,user_name,"SocialStream")
+#            elsif self.positive?
+#              #Case: Possitive tie unidirectional
+#              #Execute removeBuddyFromRoster(user_sid,buddy_sid)
+#              SocialStream::Presence::XmppServerOrder::removeBuddyFromRoster(user_sid,buddy_sid)
+#            else
+#              return  
+#            end
+#            
           end
           
         end

@@ -28,43 +28,7 @@ module SocialStream
           
           def removeBuddyFromRoster(userSid,buddySid)
               executeEmanagementCommand("removeBuddyFromRoster",[userSid,buddySid])
-          end
-          
-          
-          #Before delete contact (destroy ties) callback
-          def removeBuddy(contact)
-            
-            unless SocialStream::Presence.enable
-              return
-            end
-            
-            unless contact.receiver and contact.sender
-              return
-            end
-            
-            unless contact.receiver.subject_type == "User" and contact.sender.subject_type == "User"
-              return
-            end
- 
-            #XMPP DOMAIN
-            domain = SocialStream::Presence.domain
-            user_sid = contact.sender.slug + "@" + domain
-            user_name =  contact.sender.name  
-            buddy_sid = contact.receiver.slug + "@" + domain
-            buddy_name =  contact.receiver.name
-            
-            #Check for bidirecctional
-            
-            if contact.sender.contact_actors(:type=>:user).include?(contact.receiver)
-              #Bidirectional contacts
-              #Execute unsetRosterForBidirectionalTie(user_sid,oldfriend_sid,oldfriendNick,oldfriendGroup)
-              unsetRosterForBidirectionalTie(buddy_sid,user_sid,user_name,"SocialStream")
-            elsif contact.sender.contact_actors(:type=>:user, :direction=>:sent).include?(contact.receiver)
-              #Unidirectional contacts
-              removeBuddyFromRoster(user_sid,buddy_sid)
-            end
-            
-          end
+          end   
           
           
           def synchronizePresence
