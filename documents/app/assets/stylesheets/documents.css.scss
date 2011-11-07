@@ -67,13 +67,19 @@
 	overflow: hidden;
   border: 1px solid transparent;
   padding: 5px;
+  position: relative;
 }
 
-.attachment_tile img{
+.attachment_tile_thumb img{
   width: 48px;
   height: 48px;
 }
 
+.attachment_tile_tipsy{
+  position: absolute;
+  top: 0px;
+  right: 9px;
+}
 
 .attachment_tile:hover{
 	border: 1px solid $main-color;
@@ -94,6 +100,43 @@
 	background-color: #e0edf2;
 }
 
+.attachment_tile_tipsy_menu.tipsy {
+  padding-top: 0px;
+  display: none;
+}
+.attachment_tile_tipsy_menu.tipsy .tipsy-arrow {
+  display: none;
+}
+.attachment_tile_tipsy_menu.tipsy .tipsy-inner {
+  background-color: $text-over-main;
+  border-radius: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  padding:0px;
+}
+.attachment_tile_tipsy_menu.tipsy .actions {
+  border-bottom: 1px solid $main-color;
+  text-align: left;
+}
+.attachment_tile_tipsy_menu.tipsy .actions .action {
+  border: 1px solid $main-color;
+  border-bottom: 0px;
+  padding:5px;
+  width: 80px;
+}
+.attachment_tile_tipsy_menu.tipsy .actions .action:hover {
+  background-color: $secondary-color;
+}
+.attachment_tile_tipsy_menu.tipsy .actions a:hover {
+  text-decoration: none;
+}
+.attachment_tile_tipsy_menu.tipsy .actions .action img {
+  vertical-align: middle;
+  padding-bottom: 3px;
+  padding-right: 3px;
+  padding-left: 3px;
+  display: inline-block;
+}
 #repository_filter {
   margin-left: 10px;
 }

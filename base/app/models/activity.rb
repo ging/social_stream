@@ -261,6 +261,15 @@ class Activity < ActiveRecord::Base
       allow?(subject, 'destroy')
   end
 
+  # Can subject edit the object of this activity?
+  def edit_object_by?(subject)
+    subject.present? &&
+    direct_object.present? &&
+      ! direct_object.is_a?(Actor) &&
+      ! direct_object.class.ancestors.include?(SocialStream::Models::Subject) &&
+      allow?(subject, 'update')
+  end
+
   # The {Relation} with which activity is shared
   def audience_in_words(subject, options = {})
     options[:details] ||= :full

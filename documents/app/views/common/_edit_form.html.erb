@@ -47,3 +47,11 @@
   </div>
   <% end %>
 </div>
+
+<% if params[:editing].present? and params[:editing].eql?"true" and document.post_activity.edit_object_by?(current_subject) %>
+  <%= javascript_tag do %>
+    $(document).ready(function(){
+      toggleDocumentEdit();
+    });
+  <% end %>
+<% end %>
