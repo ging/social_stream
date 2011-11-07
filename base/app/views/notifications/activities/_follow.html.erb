@@ -1,0 +1,9 @@
+<%= raw t('notification.follow.'+ activity.receiver.subject.class.to_s.underscore, 
+ :sender => link_to(truncate_name(activity.sender.name), 
+                    url_for(:controller=> activity.sender.subject.class.to_s.underscore.pluralize,
+                            :action=> :show, :id=> activity.sender.subject.slug, :only_path => false)),
+ :who => t('notification.who.'+ activity.receiver.subject.class.to_s.underscore,
+            :name => truncate_name(activity.receiver.name))) %>
+
+<%= link_to(t('notification.confirm', :sender => truncate_name(activity.sender.name)),
+            edit_contact_url(activity.receiver.contact_to!(activity.sender),:s => activity.receiver.slug)) %>

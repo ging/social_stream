@@ -4,6 +4,7 @@ en:
     title: "Audios"
     mine: "My audios"
     msg: "Uploaded an audio:"
+    name: "an audio"
     not_mine: "Audios"
     processing: "Processing audio clip"
   document:
@@ -28,6 +29,7 @@ en:
         title: "Title"
     mine: "My documents"
     msg: "Uploaded a document:"
+    name: "a file"
     not_mine: "Documents"
     simple_all: "All"  
     title: "Documents"
@@ -36,6 +38,7 @@ en:
     title: "Pictures"
     mine: "My pictures"  
     msg: "Uploaded a picture:"
+    name: "a picture"
     not_mine: "Pictures"
   repository:
     title: "Files"
@@ -54,6 +57,7 @@ en:
     confirm_delete: "Delete video?"
     title: "Videos"
     mine: "My videos"  
-    msg: "Uploaded a video:" 
+    msg: "Uploaded a video:"
+    name: "a video" 
     not_mine: "Videos"
     processing: "Processing video"

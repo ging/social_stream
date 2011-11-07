@@ -90,6 +90,7 @@ es:
   comment:
     input: "Comentar..."
     confirm_delete: "¿Borrar commentario?"
+    name: "un comentario"
     view_all: "Ver todos los comentarios"
   contact:
     all_n: "Todos los contactos (%{count})"
@@ -270,12 +271,12 @@ es:
     sentbox: "Salida"
     trash: "Papelera"
   notification:
-    added: 
-      other: "%{sender} añadió a %{who} como contacto."
-      user: "%{sender} te añadió como contacto."
-    confirm: "¿Confirmar contacto con %{sender.name}?"
+    confirm: "¿Confirmar contacto con %{sender}?"
     destroy_sure: "¿Borrar notificación?"
     fan: "%{sender} es ahora fan %{whose}."
+    follow: 
+      other: "%{sender} añadió a %{who} como contacto."
+      user: "%{sender} te añadió como contacto."
     like:
       other: "A %{sender} le gusta el %{object.name} %{whose}." 
       user: "A %{sender} le gusta tu %{object.name}."
@@ -295,6 +296,7 @@ es:
       other: "%{sender} actualizó %{object} en el muro %{whose}."
       user: "%{sender} actualizó %{object} en tu muro."
     who:
+      group: "%{name}"
       user: "tú"
     whose: 
       user: "tuyo"
@@ -304,6 +306,7 @@ es:
     form:
       title: "Texto"
     input: "¿Qué quieres compartir?"
+    name: "una publicación"
     title: "Textos"
   profile:
     one: "Perfil"
@@ -440,6 +443,7 @@ es:
   sure: "¿Seguro?"
   time:
     ago: "hace %{time}"
+  unknown: "Desconocido"
   user:
     by: "Por usuarios"
     one: "Usuario"

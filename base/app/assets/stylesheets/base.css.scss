@@ -48,6 +48,7 @@ label.validation_error{color: $error-color;background-color: $error-background;b
         background-image: url('btn/warning.png');}
 .error, #error_explanation {border-color: $error-color; color: $error-color;background-color: $error-background;
                             background-image: url('btn/error.png');}
+.error h2, #error_explanation h2{ color: $error-color;}
 
 /************Forms SECTION **************/
 input.other_blue{	background-color:$auxiliar-color !important;	border:0px;	cursor:pointer; line-height:135%;

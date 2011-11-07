@@ -207,9 +207,7 @@ class Activity < ActiveRecord::Base
     actionview = ActivitiesController.new.view_context
 
     if ['like','follow','make-friend','post','update'].include? verb and !contact.reflexive?
-      notification_subject = actionview.render :partial => 'notifications/activities/' + verb + "_subject", :locals => {:activity => self}
-      notification_body = actionview.render :partial =>  'notifications/activities/' + verb + "_body", :locals => {:activity => self}
-      receiver.notify(notification_subject, notification_body, self)
+      receiver.notify("youre not supposed to see this", "youre not supposed to see this", self)
     end
     true
   end

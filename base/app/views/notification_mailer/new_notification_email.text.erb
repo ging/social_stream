@@ -1,6 +1,7 @@
 <% self.class.send :include, Mailboxer::NotificationDecoder %>
-<%= strip_tags decode_notification @notification.subject,@notification.notified_object %>
+
 -----------------------------------------------
-<%= strip_tags decode_notification @notification.body,@notification.notified_object  %>
+<%= render :partial => "notifications/activities/#{ @notification.notified_object.verb }", 
+                     :locals =>{:activity => @notification.notified_object}%>
 -----------------------------------------------
 Visit <%= notifications_url %> and check all your notifications.
