@@ -1,37 +1,43 @@
 <div id="document_info">
-  <div class="left">
-    <div id="date_labels">
-      <div class="details">
-        <%= t('document.info.date.created_at') %>
-      </div>
-      <div class="details">
-        <%= t('document.info.date.updated_at') %>
-      </div>
-    </div>
-    <div id="dates">
-      <div class="date">
-        <%= I18n.localize document.created_at, :format => :long %>
-      </div>
-      <div class="date">
-        <%= I18n.localize document.updated_at, :format => :long %>
-      </div>
-    </div>
-  </div>
-  <div class="right">
-    <div id="like_count">
-      <%= document.like_count %> <span class="details">likes</span>
-    </div>
-  </div>
-  <br class="clearfloat" />
   <div id="actions">
+    <%= link_to content_tag(:span,image_tag("btn/btn_write.png") + t('document.actions.details'), :class => :action, :id => :document_details_action), "javascript:toggleDocumentMenu('details');" %>
     <%= link_to content_tag(:span,image_tag("btn/download.png") + t('document.actions.download'), :class => :action), download_document_path(document) %>
     <% if document.post_activity.edit_object_by?(current_subject) %>
-      <%= link_to content_tag(:span,image_tag("btn/edit.png") + t('document.actions.edit'), :class => :action, :id => :document_edit_action), "javascript:toggleDocumentEdit();" %>
+    <%= link_to content_tag(:span,image_tag("btn/edit.png") + t('document.actions.edit'), :class => :action, :id => :document_edit_action), "javascript:toggleDocumentMenu('edit');" %>
     <% end %>
     <% if document.post_activity.delete_object_by?(current_subject) %>
-      <%= link_to content_tag(:span,image_tag("btn/error.png") + t('document.actions.delete'), :class => :action), document.post_activity.direct_object , :confirm => t('confirm_delete',
-        :scope => document.post_activity.direct_object.class.to_s.underscore), :method => :delete %>
+    <%= link_to content_tag(:span,image_tag("btn/error.png") + t('document.actions.delete'), :class => :action), document.post_activity.direct_object , :confirm => t('confirm_delete',
+      :scope => document.post_activity.direct_object.class.to_s.underscore), :method => :delete %>
     <% end %>
   </div>
+  <div id="document_details" class="document_menu" style="display:none;">
+    <div class="left">
+      <div id="date_labels">
+        <div class="details">
+          <%= t('document.info.date.created_at') %>
+        </div>
+        <div class="details">
+          <%= t('document.info.date.updated_at') %>
+        </div>
+      </div>      
+      <div id="dates">
+        <div class="date">
+          <%= I18n.localize document.created_at, :format => :long %>
+        </div>
+        <div class="date">
+          <%= I18n.localize document.updated_at, :format => :long %>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div id="like_count">
+        <%= document.like_count %> <span class="details">likes</span>
+      </div>      
+      <div id="file_size">
+        <span class="details">Size </span> <%= number_to_human_size document.file_file_size %>
+      </div>
+    </div>
+    <br class="clearfloat" />
+  </div>
 </div>
-<%= render :partial => "common/edit_form", :locals => {:document => document} %>
+<%= render :partial => "common/edit_form", :locals => {:document => document} %> 

@@ -9,6 +9,7 @@ en:
   document:
     actions:
       delete: "Delete"
+      details: "Details"
       download: "Download"
       edit: "Edit"
     all: "All documents"
