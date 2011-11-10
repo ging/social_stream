@@ -3,7 +3,6 @@
  :who => t('notification.who.'+ activity.receiver.subject.class.to_s.underscore,
             :name => truncate_name(activity.receiver.name))) %>
 -----------------------------------------------
-<%= t('notification.look', :sender => truncate_name(activity.sender.name))%>: <%=url_for(:controller=> activity.sender.subject.class.to_s.underscore.pluralize,
-                            :action=> :show, :id=> activity.sender.subject.slug, :only_path => false)%>
+<%= t('notification.look', :sender => truncate_name(activity.sender.name))%>: <%=polymorphic_url(activity.sender.subject)%>
 <%= t('notification.confirm', :sender => truncate_name(activity.sender.name)) %> <%= edit_contact_url(activity.receiver.contact_to!(activity.sender),
                                                                                       :s => activity.receiver.slug)%>

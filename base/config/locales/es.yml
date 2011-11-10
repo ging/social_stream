@@ -271,11 +271,12 @@ es:
     sentbox: "Salida"
     trash: "Papelera"
   notification:
+    all_text: "Lee el texto entero en %{url}"
     confirm: "¿Confirmar contacto con %{sender}?"
     destroy_sure: "¿Borrar notificación?"
     fan: "%{sender} es ahora fan %{whose}."
     follow: 
-      other: "%{sender} añadió a %{who} como contacto."
+      group: "%{sender} añadió a %{who} como contacto."
       user: "%{sender} te añadió como contacto."
     like:
       other: "A %{sender} le gusta el %{object.name} %{whose}." 
@@ -287,20 +288,21 @@ es:
     one: "Notificación"
     other: "Notificaciones"
     post:
-      other: "%{sender} añadió %{object} en el muro %{whose}."
-      user: "%{sender} añadió %{object} en tu muro."
+      group: "%{sender} añadió %{thing} en el muro %{whose}."
+      user: "%{sender} añadió %{thing} en tu muro."
     read: "Marcar como leída"
     read_all: "Marcar todas como leídas"
     unread: "Marcar como no leídas"
     update:
       other: "%{sender} actualizó %{object} en el muro %{whose}."
       user: "%{sender} actualizó %{object} en tu muro."
+    watch: "Échale un vistazo en %{url}"
     who:
       group: "%{name}"
       user: "tú"
     whose: 
+      group: "de %{receiver}"
       user: "tuyo"
-      others: "de %{receiver}"
   post:
     confirm_delete: "¿Borrar texto?"
     form:

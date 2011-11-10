@@ -74,6 +74,9 @@ en:
       sentence3: "Your contacts and relations"
   menu:
     outline: "Outline"
+  notification:
+    follow:
+      event: "%{sender} now is now following the event %{who}."
   profile:
     event:
       about: "About us"

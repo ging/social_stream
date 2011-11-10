@@ -204,10 +204,9 @@ class Activity < ActiveRecord::Base
   def notify
     return true if !notificable?
     #Avaible verbs: follow, like, make-friend, post, update
-    actionview = ActivitiesController.new.view_context
 
     if ['like','follow','make-friend','post','update'].include? verb and !contact.reflexive?
-      receiver.notify("youre not supposed to see this", "youre not supposed to see this", self)
+      receiver.notify("Youre not supposed to see this", "Youre not supposed to see this", self)
     end
     true
   end
