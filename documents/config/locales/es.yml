@@ -38,7 +38,7 @@ es:
     msg: "Subió una imagen:"
     not_mine: "Imágenes"
   repository:
-    title: "Repositorio"
+    title: "Archivos"
     order:
       by: "Ordenar por"
       last_modified: "Última modificación"
@@ -46,7 +46,7 @@ es:
   resource:
     all: "Todos los recursos"
     confirm_delete: "¿Borrar recursos?"
-    title: "Repositorio"
+    title: "Archivos"
     mine: "Mis recursos"
     msg: "Subió un recurso:"
     not_mine: "Recursos"

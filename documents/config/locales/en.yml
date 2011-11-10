@@ -38,7 +38,7 @@ en:
     msg: "Uploaded a picture:"
     not_mine: "Pictures"
   repository:
-    title: "Repository"
+    title: "Files"
     order:
       by: "Order by"
       last_modified: "Last modified"
@@ -46,7 +46,7 @@ en:
   resource:
     all: "All Resources"
     confirm_delete: "Delete resource?"
-    title: "Repository"
+    title: "Files"
     mine: "My resources"
     msg: "Uploaded a resource:"
     not_mine: "Resources"
