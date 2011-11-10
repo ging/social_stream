@@ -242,6 +242,14 @@ en:
       subject: "Subject"
     mark_as_read: "Mark as read"
     message_mailer:
+      has_sent_new: 
+        event: "has sent a new message to %{receiver}"
+        group: "has sent a new message to %{receiver}"
+        user: "has sent you a new message"
+      has_sent_reply: 
+        event: "has sent a reply to %{receiver}"
+        group: "has sent a reply to %{receiver}"
+        user: "has sent you a reply"
       subject_new: "%{subject}"
       subject_reply: "%{subject}"
     notification_mailer:

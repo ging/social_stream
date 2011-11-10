@@ -239,6 +239,14 @@ es:
       subject: "Asunto"
     mark_as_read: "Marcar como leido"
     message_mailer:
+      has_sent_new: 
+        event: "ha mandad un nuevo mensaje a %{receiver}"
+        group: "ha mandad un nuevo mensaje a %{receiver}"
+        user: "te ha mandad un nuevo mensaje"
+      has_sent_reply: 
+        event: "ha mandad una respuesta a %{receiver}"
+        group: "ha mandad una respuesta a %{receiver}"
+        user: "te ha mandad una respuesta"
       subject_new: "%{subject}"
       subject_reply: "%{subject}"
     notification_mailer:
