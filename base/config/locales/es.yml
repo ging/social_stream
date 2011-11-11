@@ -279,11 +279,11 @@ es:
       group: "%{sender} añadió a %{who} como contacto."
       user: "%{sender} te añadió como contacto."
     like:
-      other: "A %{sender} le gusta el %{object.name} %{whose}." 
-      user: "A %{sender} le gusta tu %{object.name}."
-    look: "Écha un vistazo al muro de %{sender.name}"
+      group: "A %{sender} le gusta el %{thing} %{whose}." 
+      user: "A %{sender} le gusta tu %{thing}."
+    look: "Echa un vistazo al muro de %{sender}"
     makefriend:
-      other: "%{sender} también añadió a %{who} como contacto."
+      group: "%{sender} también añadió a %{who} como contacto."
       user: "%{sender} también te añadió como contacto."
     one: "Notificación"
     other: "Notificaciones"
@@ -294,8 +294,8 @@ es:
     read_all: "Marcar todas como leídas"
     unread: "Marcar como no leídas"
     update:
-      other: "%{sender} actualizó %{object} en el muro %{whose}."
-      user: "%{sender} actualizó %{object} en tu muro."
+      group: "%{sender} actualizó %{thing} en el muro %{whose}."
+      user: "%{sender} actualizó %{thing} en tu muro."
     watch: "Échale un vistazo en %{url}"
     who:
       group: "%{name}"
@@ -308,7 +308,8 @@ es:
     form:
       title: "Texto"
     input: "¿Qué quieres compartir?"
-    name: "una publicación"
+    name: "publicación"
+    one: "una publicación"
     title: "Textos"
   profile:
     one: "Perfil"

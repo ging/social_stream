@@ -282,11 +282,11 @@ en:
       group: "%{sender} added %{who} as contact."
       user: "%{sender} added %{who} as contact."
     like:
-      other: "%{sender} likes %{whose} %{object.name}." 
-      user: "%{sender} likes %{whose} %{object.name}."
+      group: "%{sender} likes %{whose} %{thing}." 
+      user: "%{sender} likes %{whose} %{thing}."
     look: "Take a look at %{sender}'s wall"
     makefriend:
-      other: "%{sender} also added %{who} as contact."
+      group: "%{sender} also added %{who} as contact."
       user: "%{sender} also added %{who} as contact."
     one: "Notification"
     other: "Notifications"
@@ -297,8 +297,8 @@ en:
     read_all: "Mark all as read"
     unread: "Mark as unread"
     update:
-      other: "%{sender} updated a %{object} in %{whose} wall."
-      user: "%{sender} updated a %{object} in %{whose} wall."
+      group: "%{sender} updated %{thing} in %{whose} wall."
+      user: "%{sender} updated %{thing} in %{whose} wall."
     watch: "Watch it at %{url}"
     who:
       group: "%{name}"
@@ -311,7 +311,8 @@ en:
     form:
       title: "Post"
     input: "What are you doing?"
-    name: "a post"
+    name: "post"
+    one: "a post"
     title: "Posts"  
   preposition:
     and: "and"

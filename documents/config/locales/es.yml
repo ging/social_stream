@@ -4,8 +4,9 @@ es:
     title: "Audios"
     mine: "Mis audios"
     msg: "Subió un audio:"
-    name: "un archivo de audio"
+    name: "archivo de audio"
     not_mine: "Audios"
+    one: "un archivo de audio"
     processing: "Procesando fichero de audio..."
   document:
     actions:
@@ -29,8 +30,9 @@ es:
         title: "Título"
     mine: "Mis documentos"
     msg: "Subió un documento:"
-    name: "un documento"
+    name: "documento"
     not_mine: "Documentos"
+    one: "un documento"
     simple_all: "Todos"
     title: "Documentos"
   picture:
@@ -38,8 +40,9 @@ es:
     title: "Imágenes"
     mine: "Mis imágenes"
     msg: "Subió una imagen:"
-    name: "una imagen"
+    name: "imagen"
     not_mine: "Imágenes"
+    one: "una imagen"
   repository:
     title: "Archivos"
     order:
@@ -58,6 +61,7 @@ es:
     title: "Vídeos"
     mine: "Mis vídeos"  
     msg: "Subió un vídeo:"
-    name: "un vídeo"
+    name: "vídeo"
     not_mine: "Vídeos"
+    one: "un vídeo"
     processing: "Procesando vídeo..."

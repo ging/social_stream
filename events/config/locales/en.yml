@@ -55,6 +55,8 @@ en:
     most:
       followed: "Most followed"
       liked: "Most liked"
+    name: "event"
+    one: "an event"
     other: "Events"
     suscribed: "Last Suscribed"
   frontpage:
@@ -76,7 +78,19 @@ en:
     outline: "Outline"
   notification:
     follow:
-      event: "%{sender} now is now following the event %{who}."
+      event: "%{sender} wants to take part in the event %{who}."
+    like:
+      event: "%{sender} likes %{whose} %{thing}."
+    makefriend:
+      event: "%{sender} accepted the invitation to join the event %{who}."
+    post:
+      event: "%{sender} added %{thing} in %{whose} wall."
+    update:
+      event: "%{sender} updated %{thing} in %{whose} wall."
+    who:
+      event: "%{name}"
+    whose:
+      event: "%{receiver}'s"
   profile:
     event:
       about: "About us"

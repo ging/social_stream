@@ -55,6 +55,8 @@ es:
     most:
       followed: "Más seguidos"
       liked: "Me Gusta"
+    name: "evento"
+    one: "un evento"
     other: "Eventos"
     suscribed: "últimos suscritos"
   frontpage:
@@ -76,7 +78,19 @@ es:
     outline: "Agenda"
   notification:
     follow:
-      event: "%{sender} ha comenzado a seguir el evento %{who}."
+      event: "%{sender} quiere participar en el evento %{who}."
+    like:
+      event: "A %{sender} le gusta el %{thing} %{whose}."
+    makefriend:
+      event: "%{sender} aceptó la invitación para unirse al evento %{who}."
+    post:
+      event: "%{sender} añadió %{thing} en el muro %{whose}."
+    update:
+      event: "%{sender} actualizó %{thing} en el muro %{whose}."
+    who:
+      event: "%{name}"
+    whose:
+      event: "de %{receiver}'s"
   profile:
     event:
       about: "Acerca de"

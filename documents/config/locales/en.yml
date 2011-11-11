@@ -4,8 +4,9 @@ en:
     title: "Audios"
     mine: "My audios"
     msg: "Uploaded an audio:"
-    name: "an audio"
+    name: "audio"
     not_mine: "Audios"
+    one: "an audio"
     processing: "Processing audio clip"
   document:
     actions:
@@ -29,8 +30,9 @@ en:
         title: "Title"
     mine: "My documents"
     msg: "Uploaded a document:"
-    name: "a file"
+    name: "file"
     not_mine: "Documents"
+    one: "a file"
     simple_all: "All"  
     title: "Documents"
   picture:
@@ -38,8 +40,9 @@ en:
     title: "Pictures"
     mine: "My pictures"  
     msg: "Uploaded a picture:"
-    name: "a picture"
+    name: "picture"
     not_mine: "Pictures"
+    one: "a picture"
   repository:
     title: "Files"
     order:
@@ -58,6 +61,7 @@ en:
     title: "Videos"
     mine: "My videos"  
     msg: "Uploaded a video:"
-    name: "a video" 
+    name: "video" 
     not_mine: "Videos"
+    one: "a video"
     processing: "Processing video"
