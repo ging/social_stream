@@ -240,13 +240,11 @@ chatIcons[':('] = "face-sad.png";
 chatIcons['(B)'] = "beer.png";
 chatIcons['(C)'] = "clock.png";
 chatIcons['(P)'] = "present.png";
-chatIcons[':-|']= "face-plain.png";
 chatIcons[':P']= "face-raspberry.png";
-chatIcons[':-o']= "face-surprise.png";
-chatIcons[';)']= "face-wink.png";
 chatIcons[':Z']= "face-tired.png";
 chatIcons['(R)']= "rain.png";
 chatIcons['(S)']= "sun.png";
+chatIcons[';)']= "face-wink.png";
 
 
 
@@ -329,7 +327,7 @@ function parseWord(word){
 
   //Look for icons: Directly replace
 	var icons_a_pattern=/\(([A-Z])+\)/g
-	var icons_b_pattern=/:([()A-Z])(.)*/g
+	var icons_b_pattern=/(:|;)([()A-Z])(.)*/g
 	if (((icons_a_pattern.test(word))) || (icons_b_pattern.test(word))) { 
   	for (var i in chatIcons) {
   		word = word.replace(buildRegex(i), buildIconImage(i))
