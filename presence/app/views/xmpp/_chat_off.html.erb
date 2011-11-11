@@ -1,12 +1,17 @@
      <script type="text/javascript">
-        $(document).ready(function () {
-					
+				$(document).ready(function () {
+
+          connectButtonTimer = setInterval("connectButtonTimerFunction()", 1000)
+					connectButtonTimerCounter=periodBetweenAttempts+1
+
 					if (authByCookie()){
 					  //Authentication by cookie
             
             $("#passwordFormChat").hide();
             $('.connectChatButton').bind('click', function () {
-              connectToServerWithCookie();
+							if (requestConnectToChat()){
+								connectToServerWithCookie();
+							}
             });
             
 					} else {
@@ -19,7 +24,9 @@
             }
             
             $('.connectChatButton').bind('click', function () {
-              connectToServerWithPassword($('#user_password').val());
+							if (requestConnectToChat()) {
+								connectToServerWithPassword($('#user_password').val());
+			        }
             });
           
             $('.storePass').bind('click', function () {
@@ -29,13 +36,14 @@
 					}
 					
         });
+		
       </script>
 			
 			<div class="block">
         <div class="header">
           <%=image_tag("btn/btn_friend.png", :class => "header_icon")%>
           <div class="header_text">
-            <%=t('chat.disconnected')%>
+            <p id="chat_header_title"><%=t('chat.disconnected')%></p>
           </div>
         </div>
       </div>

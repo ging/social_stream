@@ -3,7 +3,7 @@
 ////////////////////
 
 function log(msg) {
-    console.log(msg)
+    //console.log(msg)
 }
 
 
@@ -17,6 +17,12 @@ statusMessage['away'] = "Away";
 statusMessage['xa'] = "Away";
 statusMessage['dnd'] = "Busy";
 
+var statusIcons = new Array();
+statusIcons[''] = "available";
+statusIcons['chat'] = "available";
+statusIcons['away'] = "away";
+statusIcons['xa'] = "away";
+statusIcons['dnd'] = "dnd";
 
 ////////////////////
 //Connect functions
@@ -54,6 +60,33 @@ function connectToServerWithPassword(chatPassword){
     }
 
     return true;
+}
+
+
+////////////////////
+//Reconnect button functions
+////////////////////
+
+var connectButtonTimer;
+var periodBetweenAttempts=15; //(seg)
+var connectButtonTimerCounter=periodBetweenAttempts;
+
+function connectButtonTimerFunction(){
+	  if(connectButtonTimerCounter < periodBetweenAttempts){
+			connectButtonTimerCounter++;
+		} else if (connectButtonTimerCounter == periodBetweenAttempts) {
+			$("#chat_header_title").html('<%=I18n.t('chat.disconnected')%>')
+		}
+}
+
+function requestConnectToChat(){
+  if (connectButtonTimerCounter > (periodBetweenAttempts-1)) {
+    connectButtonTimerCounter=0; 
+		$("#chat_header_title").html('<%=I18n.t('chat.connecting')%>')
+    return true
+  } else {
+    return false
+  } 
 }
 
 ////////////////////
@@ -114,9 +147,9 @@ function onConnect(status) {
    setTimeout ("onReconnect()", 3000);
   } else if (status == Strophe.Status.AUTHFAIL) {
    log('Strophe authentication fail.');
-   if ((window.sessionStorage)&&(sessionStorage.getItem("ss_user_pass") != null)){
-    sessionStorage.setItem("ss_user_pass",null);
-   }
+	   if ((window.sessionStorage)&&(sessionStorage.getItem("ss_user_pass") != null)){
+	    sessionStorage.setItem("ss_user_pass",null);
+	   }
    userConnected = false;
   } else if (status == Strophe.Status.ERROR) {
    log('Strophe error.');
@@ -165,26 +198,31 @@ function onMessage(msg) {
 			var from_slug = from.split("@")[0];
 			var from_name = $("#" + from_slug).attr("name");
 			var from_jid = from_slug + "@" + domain;
-			
-			log(from + ' says: ' + Strophe.getText(body));
+		
 		
 		  if (typeof ($('div.user_presence[slug=' + from_slug + ']').attr('name')) == 'undefined') {
+				//No connectionBox for this user!
 		    var from_name = from_slug;
+				refreshChatWindow();
 		  } else {
+				showConnectionBoxFromSlug(from_slug);
 		    var from_name = $('div.user_presence[slug=' + from_slug + ']').attr('name');
 		  }
 			
-			if (mustPlaySoundForChatWindow(window[from_slug])){
+			if (createChatBox(from_slug,from_name,from_jid,user_name,user_jid)) {
+			} else {
+        window[getChatVariableFromSlug(from_slug)].chatbox("option", "boxManager").toggleBox(true);
+			}
+			
+			content = parseContent(Strophe.getText(body));
+			//Send message to chatBox and post-message functions.					
+			$("#" + from_slug).chatbox("option", "boxManager").addMsg(from_name, content);
+			rotatePriority(from_slug);
+			blinkTitleOnMessage(from_name);
+			if (mustPlaySoundForChatWindow(window[getChatVariableFromSlug(from_slug)])){
           playSound("onMessageAudio");
       }
 			
-			if (createChatBox(from_slug,from_name,from_jid,user_name,user_jid)) {
-			} else {
-        window[from_slug].chatbox("option", "boxManager").toggleBox(true);
-			}
-							
-			$("#" + from_slug).chatbox("option", "boxManager").addMsg(from_name, Strophe.getText(body));
-			rotatePriority(from_slug);
     }
 
     // we must return true to keep the handler alive.  
@@ -192,25 +230,253 @@ function onMessage(msg) {
     return true;
 }
 
+///////////////////////////////////////////////////////
+//Allow new features in chat msg like links, images, icons, ...
+///////////////////////////////////////////////////////
+
+var chatIcons = new Array();
+chatIcons[':)'] = "face-smile.png";
+chatIcons[':('] = "face-sad.png";
+chatIcons['(B)'] = "beer.png";
+chatIcons['(C)'] = "clock.png";
+chatIcons['(P)'] = "present.png";
+
+function parseContent(content){
+	
+	var html_tag_pattern=/.*\<[^>]+>.*/g
+	if (html_tag_pattern.test(content)){
+		content = content.replace(/>/g, "&gt;");
+    content = content.replace(/</g, "&lt;");
+		return "<pre>" + content + "</pre>"
+	}
+	
+  words = content.split(" ");
+  for(i=0; i<words.length; i++){
+    words[i] = parseWord(words[i]);
+  }
+
+  return words.join(" "); 
+}
+
+function parseWord(word){ 
+  
+  //Look for empty words
+  if (word.trim()==""){
+		return word
+	}
+
+  //Look for simple words
+	var simple_word_pattern=/^[aA-zZ0-9]+$/g
+	if (simple_word_pattern.test(word)){
+		return word
+	}
+
+  //Look for http urls
+	var http_urls_pattern=/(http(s)?:\/\/)([aA-zZ0-9%=_&+?])+([./-][aA-zZ0-9%=_&+?]+)*[/]?/g
+  http_urls = word.match(http_urls_pattern)
+  if (http_urls!=null){
+    url = http_urls[0]
+    type = getUrlType(url);
+  
+    switch(type){
+    case "link":
+			link = buildUrlLink(url,url)
+			subwords = word.split(url)
+			word =  parseWord(subwords[0]) + link + parseWord(subwords[1])
+      break;
+    case "image":
+      imageLink = buildImageLink(url);
+      subwords = word.split(url)
+      word =  parseWord(subwords[0]) + imageLink + parseWord(subwords[1])
+			break;
+    default:
+    }
+    return word
+  }
+  
+
+  //Look for www urls
+	var www_urls_pattern = /(www[.])([aA-zZ0-9%=_&+?])+([.][aA-zZ0-9%=_&+?]+)*[/]?/g
+  www_urls = word.match(www_urls_pattern)
+  if (www_urls!=null){
+    url = www_urls[0]
+    type = getUrlType(url);
+
+    switch(type){
+    case "link":
+		  link = buildUrlLink("http://" + url,url)
+      subwords = word.split(url)
+      word =  parseWord(subwords[0]) + link + parseWord(subwords[1])
+      break;
+    case "image": 
+			imageLink = buildImageLink("http://" + url);
+			subwords = word.split(url)
+      word =  parseWord(subwords[0]) + imageLink + parseWord(subwords[1])
+      break;
+    default:
+    } 
+    return word
+  }
+
+  //Look for icons: Directly replace
+	var icons_a_pattern=/\(([A-Z])+\)/g
+	var icons_b_pattern=/:([()A-Z])(.)*/g
+	if (((icons_a_pattern.test(word))) || (icons_b_pattern.test(word))) { 
+  	for (var i in chatIcons) {
+  		word = word.replace(buildRegex(i), buildIconImage(i))
+  	}
+  }
+	
+  //Look for icons with Regex
+//	var icons_a_pattern=/\(([A-Z])+\)/g
+//  if (icons_a_pattern.test(word)){
+//    icon = word.replace(/[^(]*(\([A-Z]+\))(\([A-Z]+\))?(.)*/g, "$1")
+//    subwords = splitFirst(word,icon)
+//    image = buildIconImage(icon);
+//    return subwords[0] + image + subwords[1];
+//  }
+
+//	var icons_b_pattern=/:([()A-Z])(.)*/g
+//  if (icons_b_pattern.test(word)){
+//    icon = word.replace(/[aA-zZ]*(:[()A-Z])(.)*/g, "$1")
+//    subwords = splitFirst(word,icon)
+//		image = buildIconImage(icon);
+//		return subwords[0] + image + subwords[1];
+    //return parseWord(subwords[0]) + image + parseWord(subwords[1]);
+//  }
+  
+	
+  //No special content detected
+  return word
+}
+
+function splitFirst(word,key){
+    split=[]  
+    cut = word.split(key);   
+    split[0]=cut[0]
+    cut.shift()
+    paste = cut.join(key)
+    split[1]=paste
+    return split
+}
+
+function buildIconImage(icon){
+  if (icon in chatIcons){
+    image_file = chatIcons[icon]
+		image = "<img class=\"chatIcon\" src=\"assets/emoticons/" + image_file + "\"/>";
+		return image
+  }
+  return icon
+}
+
+function buildUrlLink(url,name){
+  link = "<a target=\"_blank\" class=\"chatLink\" href=\"" + url + "\">" + name + "</a>";
+	return link
+}
+
+function buildImageLink(url){
+  link = "<a target=\"_blank\" class=\"chatImageLink\" href=\"" + url + "\">" + "<img class=\"chatImage\" src=\"" + url + "\"/>" + "</a>";
+  return link
+}
+
+
+function buildRegex(word){
+	word = word.replace(")","\\)")
+	word = word.replace("(","\\(")
+  pattern = "(" + word + ")";
+  pattern = buildPattern(pattern)
+  return (new RegExp(pattern,'g'));
+}
+
+function buildPattern(pattern){
+	//Escape pattern special characters
+  pattern = pattern.replace("+","\\+")
+  pattern = pattern.replace("?","\\?")
+  return pattern
+}
+
+function getUrlType(url){
+  urlArray = url.split(".");
+  if (urlArray!=null && urlArray.length>0){
+    extension= urlArray[urlArray.length-1]
+  } else {
+    extension = null;
+  }
+
+  switch(extension){
+  case "jpg":
+    return "image"
+    break;
+  case "png":
+    return "image"
+    break;
+	case "gif":
+    return "image"
+    break;
+  default:
+    return "link"
+  }
+}
+
+
 
 function onPresence(presence) {
-	    //log(presence);
-		  from = $(presence).attr('from');
-		  slug = from.split("@")[0];
-		  if(slug != user_slug){
-		    setTimeout("refreshChatWindow()", 2000);
-		  }
+	 
+	  //Check presence stanza type
+		ptype = $(presence).attr('type');
+				
+		switch (ptype){
+			case undefined:
+			 processAvailablePresenceStanza(presence)
+			 break;
+			case "available":
+			  processAvailablePresenceStanza(presence)
+        break;
+			case "unavailable":
+        processUnavailablePresenceStanza(presence)
+        break;
+			default : 
+			  //Stanza type not recognize
+				processAvailablePresenceStanza(presence)
+		}
+				  
 	return true;
 } 
 
+function processAvailablePresenceStanza(presence){
+	from = $(presence).attr('from');
+  slug = from.split("@")[0];
+	
+	if (slug != user_slug) {
+		if (getConnectionBoxFromSlug(slug)!=null){
+			status = $(presence).find('show').text(); 
+      setUserIconStatus(slug, status);
+			if (cacheConnectedUsers.indexOf(slug) != -1) {
+	  	  showConnectionBoxFromSlug(slug);
+	    }	
+	  } else {
+	    setTimeout("refreshChatWindow()", 3000);
+	  }
+  }		
+}
+
+function processUnavailablePresenceStanza(presence){
+	from = $(presence).attr('from');
+  slug = from.split("@")[0];
+	
+	if (slug != user_slug) {
+	  if (getConnectionBoxFromSlug(slug)!=null){
+	    hideConnectionBoxFromSlug(slug)
+	  }
+  }
+}
 
 function sendChatMessage(from,to,text){
     var type = "chat";
     var body= $build("body");
     body.t(text);
     var message = $msg({to: to, from: from, type: 'chat'}).cnode(body.tree());
-    connection.send(message.tree());	
-		log(from + ' says: ' + text + ' to ' + to);    	
+    connection.send(message.tree());	  	
 		resumeAwayTimerIfAway();
 		return true;
 }
@@ -302,7 +568,7 @@ function setUserFunctions(){
 	  
 	  if (createChatBox(guest_slug, guest_name, guest_jid, user_name, user_jid)) {
 	  } else {
-	    window[guest_slug].chatbox("option", "boxManager").toggleBox(true);
+	    window[getChatVariableFromSlug(guest_slug)].chatbox("option", "boxManager").toggleBox(true);
 	  };
 	});
 	
@@ -401,17 +667,120 @@ function sendStatus(status){
 
 
 function mustPlaySoundForChatWindow(chatBox){
+	//Deny conditions
 	if(userStatus == "dnd"){
 		return false;
 	}
 	
-	if (typeof chatBox == 'undefined') {
+	//Accept conditions
+	if (!chatFocus){
 		return true;
-  }
+	}
 	
-	//Enable sounds only for new (or hidden) chatBoxes
-	return (chatBox.chatbox("option", "hidden") == true);
+	//Default action
+	return false
 }
+
+
+var chatFocus;
+
+function onChatBlur() {
+  chatFocus = false;
+};
+
+function onChatFocus(){
+  stopBlink();
+	titles = []; //Remove titles after StopBlink!
+  chatFocus = true;
+};
+
+function initFocusListeners(){
+	if (/*@cc_on!@*/false) { // check for Internet Explorer
+    document.onfocusin = onFocus;
+    document.onfocusout = onBlur;
+  } else {
+    window.onfocus = onChatFocus;
+    window.onblur =  onChatBlur;
+  }
+}
+
+
+var blinkTimer;
+var titles=[];
+
+function blinkTitle(titles,index){
+  $(document).attr("title", titles[index]);
+  index = (index+1)%titles.length
+  blinkTimer=setTimeout(function(){blinkTitle(titles,index)}, 2000);
+}
+
+function stopBlink(){
+  clearTimeout(blinkTimer);
+	if (titles.length > 0) {
+  	$(document).attr("title", titles[0]);
+  }
+}
+
+function blinkTitleOnMessage(username){
+  if (!chatFocus){
+    if (titles.length==0){
+      titles.push($(document).attr("title"))
+    }
+    if (titles.indexOf(username) == -1){
+      titles.push(username + " says...")
+    }
+    stopBlink();
+    blinkTitle(titles,titles.length-1);
+  }
+}
+
+function getConnectionBoxFromSlug(slug){
+	if ($('div.user_presence[slug=' + slug + ']').length > 0){
+		return ($('div.user_presence[slug=' + slug + ']'))[0];
+	}  else {
+		return null;
+	}
+}
+
+
+var cacheConnectedUsers = [];
+function hideConnectionBoxFromSlug(slug){
+  if ($('div.user_presence[slug=' + slug + ']').length > 0){
+    $('div.user_presence[slug=' + slug + ']').hide();
+		if(cacheConnectedUsers.indexOf(slug)==-1){
+		  cacheConnectedUsers.push(slug);
+		}
+  }
+}
+
+function showConnectionBoxFromSlug(slug){
+  if ($('div.user_presence[slug=' + slug + ']').length > 0){
+		if (!($('div.user_presence[slug=' + slug + ']').is(":visible"))){
+			 $('div.user_presence[slug=' + slug + ']').show();
+		}
+  }
+}
+
+function setUserIconStatus(slug, status){
+	 if (status in statusIcons) {
+   	 iconName = statusIcons[status];
+		 var $img_status = $('img.presence_status');
+		 connectionBox = getConnectionBoxFromSlug(slug);
+     $(connectionBox).find($img_status).attr("src", "/assets/status/" + iconName + ".png")
+   }
+}
+
+function getAllConnectedSlugs(){
+	connectedSlugs=[];
+  connectionBoxes = $('div.user_presence[slug]');
+	$.each(connectionBoxes, function(index, value) {
+	    if($(value).is(":visible")){
+	        connectedSlugs.push($(value).attr("slug"))
+	    }
+	});
+  return connectedSlugs
+}
+
 
 ////////////////////
 //Chat functions
@@ -429,8 +798,8 @@ function createChatBox(guest_slug,guest_name,guest_jid,user_name,user_jid){
 		//Create chatbox for new conversations
 		//Open chatbox for old conversations
 			
-		//Box Variable name = guest_slug
-    if (typeof window[guest_slug] == 'undefined') {
+		//Box Variable name = getChatVariableFromSlug(guest_slug)
+    if (typeof window[getChatVariableFromSlug(guest_slug)] == 'undefined') {
 			
           //Add div with id = guest_slug
           $("#chat_divs").append("<div id=" + guest_slug + " name=" + guest_name + "></div>")
@@ -444,7 +813,7 @@ function createChatBox(guest_slug,guest_name,guest_jid,user_name,user_jid){
 					var position = boxParams[1];
 					
 	
-          window[guest_slug] = $("#" + guest_slug).chatbox({id: user_name, 
+          window[getChatVariableFromSlug(guest_slug)] = $("#" + guest_slug).chatbox({id: user_name, 
                               user:{key : "value"},
 															hidden: false,
 															offset: offset, // relative to right edge of the browser window
@@ -468,31 +837,29 @@ function createChatBox(guest_slug,guest_name,guest_jid,user_name,user_jid){
 															
                               messageSent : function(id, user, msg) {
 																  rotatePriority(guest_slug);
-                                  $("#" + guest_slug).chatbox("option", "boxManager").addMsg(id, msg);
+                                  $("#" + guest_slug).chatbox("option", "boxManager").addMsg(id, parseContent(msg));
                                   sendChatMessage(user_jid,guest_jid,msg);
                               }});
 															
-					visibleChatBoxes[position-1] = window[guest_slug];
-					
-					
+					visibleChatBoxes[position-1] = window[getChatVariableFromSlug(guest_slug)];				
 															
 		      return true;
 					
     } else {
 			
-			    if (visibleChatBoxes.indexOf(window[guest_slug]) == -1) {
+			    if (visibleChatBoxes.indexOf(window[getChatVariableFromSlug(guest_slug)]) == -1) {
 						
 						//Offset Management for old box
 						boxParams = getBoxParams();
             var offset = boxParams[0];
             var position = boxParams[1];
 		
-            window[guest_slug].chatbox("option", "offset", offset);
-            window[guest_slug].chatbox("option", "position", position);
-            visibleChatBoxes[position-1] = window[guest_slug];
+            window[getChatVariableFromSlug(guest_slug)].chatbox("option", "offset", offset);
+            window[getChatVariableFromSlug(guest_slug)].chatbox("option", "position", position);
+            visibleChatBoxes[position-1] = window[getChatVariableFromSlug(guest_slug)];
 					}  
 					
-					window[guest_slug].chatbox("option", "hidden", false);
+					window[getChatVariableFromSlug(guest_slug)].chatbox("option", "hidden", false);
 			    return false;
 		}
 		
@@ -543,4 +910,10 @@ function rotatePriority(guest_slug){
 	}	
 }
 
+function getChatVariableFromSlug(slug){
+	return "slug_" + slug;
+}
 
+function getSlugFromChatVariable(variable){
+	return variable.split("_")[1];
+}

@@ -237,3 +237,23 @@ input.connectChatButton{
 	margin-top:5px;
 	margin-bottom:5px; 
 }
+
+
+/* Chat text */
+
+.chatImage {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.chatIcon {
+  max-width:20px;
+  max-height: 20px;
+}
+
+a.chatLink:link, a.chatLink:visited {
+    color: #1E726A;
+}
+
+.chatImageLink {
+}
