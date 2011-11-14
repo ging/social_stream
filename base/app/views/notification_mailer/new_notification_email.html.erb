@@ -17,8 +17,10 @@
               <br/><span style="color: #6C6D6F; font-weight: normal;"><%= @notification.notified_object.sender.profile.organization%></span>
             <% end %>
           </p>
-          <%= render :partial => "notifications/activities/#{ @notification.notified_object.verb }", 
-                     :locals =>{:activity => @notification.notified_object}%>
+          <p style="text-align: justify;">
+            <%= render :partial => "notifications/activities/#{ @notification.notified_object.verb }", 
+                       :locals =>{:activity => @notification.notified_object}%>
+          </p>
         </div>
       </div>
       <div style="padding: 10px 5px 5px 5px;">    

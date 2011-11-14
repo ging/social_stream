@@ -206,7 +206,7 @@ class Activity < ActiveRecord::Base
     #Avaible verbs: follow, like, make-friend, post, update
 
     if ['like','follow','make-friend','post','update'].include? verb and !contact.reflexive?
-      receiver.notify("Youre not supposed to see this", "Youre not supposed to see this", self)
+      receiver.notify("You have a new notification", "Youre not supposed to see this", self)
     end
     true
   end

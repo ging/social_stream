@@ -297,6 +297,7 @@ es:
       group: "%{sender} actualizó %{thing} en el muro %{whose}."
       user: "%{sender} actualizó %{thing} en tu muro."
     watch: "Échale un vistazo en %{url}"
+    watch_it: "¡Échale un vistazo!"
     who:
       group: "%{name}"
       user: "tú"

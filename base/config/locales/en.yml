@@ -300,6 +300,7 @@ en:
       group: "%{sender} updated %{thing} in %{whose} wall."
       user: "%{sender} updated %{thing} in %{whose} wall."
     watch: "Watch it at %{url}"
+    watch_it: "Watch it!"
     who:
       group: "%{name}"
       user: "you"
