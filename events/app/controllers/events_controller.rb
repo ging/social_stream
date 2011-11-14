@@ -15,14 +15,11 @@ class EventsController < InheritedResources::Base
         self.current_subject = @event
         redirect_to [current_subject, :profile]
       }
-
     end
-
   end
 
   def edit
     @event = Event.find(params[:id])
-
   end
 
   def index
@@ -77,7 +74,6 @@ class EventsController < InheritedResources::Base
 
   def set_founder
     return unless user_signed_in?
-
     params[:event]            ||= {}
     params[:event][:_founder] ||= current_subject.slug
   end

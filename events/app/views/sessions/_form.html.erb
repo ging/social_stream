@@ -19,19 +19,19 @@
   </div>
 
  <div class="form_row">
-    <%= label_tag :start_at%>
+    <%= label_tag :initDate%>
   </div>
   
   <div class="form_row">
-    <%= f.datetime_select :start_at %>
+    <%= f.datetime_select :initDate %>
   </div>
 
   <div class="form_row">
-    <%= label_tag :end_at%>
+    <%= label_tag :endDate%>
   </div>
   
   <div class="form_row">
-    <%= f.datetime_select :end_at %>
+    <%= f.datetime_select :endDate %>
   </div>
     <%= hidden_field_tag :id_event, @event.id %>
   <div class="form_row">

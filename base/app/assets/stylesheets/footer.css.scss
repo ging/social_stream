@@ -4,7 +4,7 @@
 #sponsor{width:960px;margin:0 auto;color:$details-color; }
 
 #footer{width: 960px;margin-left: auto;margin-right: auto;padding: 0;position: relative; text-align:center;
-	clear:left;font-size:0.9166em;line-height:1.6363;color:$details-color;padding:0.75em 0;}
+	clear:left;font-size:0.9166em;line-height:1.6363;color:$details-color;padding:0.75em 0; background: $secondary-color}
 #footer ul, #sponsor ul{list-style-type:none;margin:0 0.5em; }
 #footer ul li,#sponsor ul li{display:inline-block;margin-right:0.25em;position:relative;}
 #footer ul li#trade_mark,#sponsor ul li#trademark{font-weight:bold;color:$sentence-color;}

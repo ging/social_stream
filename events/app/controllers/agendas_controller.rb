@@ -25,8 +25,8 @@ class AgendasController < InheritedResources::Base
       sessions << {:id => session.id,
                    :title => session.title,
                    :description => session.description || "Some cool description here...",
-                   :start => "#{session.start_at.iso8601}",
-                   :end => "#{session.end_at.iso8601}",
+                   :start => "#{session.initDate.iso8601}",
+                   :end => "#{session.endDate.iso8601}",
                    :allDay => false,
                    :recurring =>  false,
                    :editable => true

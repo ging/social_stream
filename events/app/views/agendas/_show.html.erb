@@ -62,7 +62,7 @@
   <div id="tabs" class="widget content_size">
     <ul>
       <%for i in (1..@event.days)%>
-        <li><a href="#date<%=i%>"><%=(@event.start_at+(i-1).day).strftime("%A %d %b")%></a></li>
+        <li><a href="#date<%=i%>"><%=(@event.initDate+(i-1).day).strftime("%A %d %b")%></a></li>
       <%end%>
     </ul>
 

@@ -11,11 +11,11 @@
     axisFormat: 'HH:mm',
     timeFormat: 'H:mm{ - H:mm}',
     slotMinutes: 15,  
-    year:<%= @event.start_at.strftime("%Y")%>,
-    month:<%= @event.start_at.month-1 %>,
-    date:<%= @event.start_at.strftime("%d")%>,
-    minTime: '<%= @event.start_at.hour.to_s + ':00' %>',
-    maxTime: '<%= (@event.end_at.hour + 1).to_s + ':00' %>',
+    year:<%= @event.initDate.strftime("%Y")%>,
+    month:<%= @event.initDate.month-1 %>,
+    date:<%= @event.initDate.strftime("%d")%>,
+    minTime: '<%= @event.initDate.hour.to_s + ':00' %>',
+    maxTime: '<%= (@event.endDate.hour + 1).to_s + ':00' %>',
     editable: true,
     defaultView: 'agendaDay',  
     selectHelper:true,
@@ -25,7 +25,7 @@
     select: function(startDate, endDate, allDay) {
         var title = prompt('Event Title:');
         if (title) {
-          $.post('<%= event_agenda_sessions_path(@event)%>', { session : {name: title, start_at: startDate + "", end_at: endDate + ""}});
+          $.post('<%= event_agenda_sessions_path(@event)%>', { session : {name: title, initDate: startDate + "", endDate: endDate + ""}});
           calendar.fullCalendar('renderEvent',
             {
               title: title,

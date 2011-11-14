@@ -7,8 +7,8 @@ function createSessionEvent(title, start, end, event_id,receiver){
         data:
     'session[title]='+title+
     '&session[_contact_id]='+receiver+
-		'&session[start_at]='+start.toString().substring(0, 24)+
-		'&session[end_at]='+end.toString().substring(0, 24)+
+		'&session[initDate]='+start.toString().substring(0, 24)+
+		'&session[endDate]='+end.toString().substring(0, 24)+
 		'&event_id='+event_id,
         dataType: 'script',
         type: 'POST',
@@ -81,9 +81,9 @@ function deleteSession(session_id, delete_all){
 function dateScheduleAvailable(start, end, allDay){
 	return $('#calendar').fullCalendar('clientEvents', function(session)
 	{
-		if ((session.start_at < start && start < session.end_at) ||
-		    (session.start_at < end && end < session.end_at) ||
-		    (compareDate(session.start_at, start) && (session.allDay || allDay))
+		if ((session.initDate < start && start < session.endDate) ||
+		    (session.initDate < end && end < session.endDate) ||
+		    (compareDate(session.initDate, start) && (session.allDay || allDay))
 		   )
 			{
 				return true;
@@ -95,17 +95,17 @@ function dateScheduleAvailable(start, end, allDay){
 function dateAvailable(start, end, allDay){
 	return $('#calendar').fullCalendar('clientEvents', function(session)
 	{
-		if (session.start_at < start && start < session.end_at)
+		if (session.initDate < start && start < session.endDate)
 			return true;
-		else if (session.start_at < end && end < session.end_at)
+		else if (session.initDate < end && end < session.endDate)
 			return true;
-    else if (session.start_at > start && (session.end_at && session.end_at < end))
+    else if (session.initDate > start && (session.endDate && session.endDate < end))
       return true;
-		else if (compareDateWithMinutes(session.start_at, start))
+		else if (compareDateWithMinutes(session.initDate, start))
 			return true;
-		else if (session.end_at && compareDateWithMinutes(session.end_at, end))
+		else if (session.endDate && compareDateWithMinutes(session.endDate, end))
 			return true;
-		else if (compareDate(session.start_at, start) && (session.allDay || allDay))
+		else if (compareDate(session.initDate, start) && (session.allDay || allDay))
 			return true;
 		else
 			return false;

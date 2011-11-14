@@ -10,7 +10,7 @@
 (function($) {
   $.fn.adGallery = function(options) {
     var defaults = { loader_image: 'loader.gif',
-                     start_at_index: 0,
+                     initDate_index: 0,
                      description_wrapper: false,
                      thumb_opacity: 0.7,
                      animate_first_image: false,
@@ -202,22 +202,22 @@
       if(this.settings.enable_keyboard_move) {
         this.initKeyEvents();
       };
-      var start_at = parseInt(this.settings.start_at_index, 10);
+      var initDate = parseInt(this.settings.initDate_index, 10);
       if(window.location.hash && window.location.hash.indexOf('#ad-image') === 0) {
-        start_at = window.location.hash.replace(/[^0-9]+/g, '');
+        initDate = window.location.hash.replace(/[^0-9]+/g, '');
         // Check if it's a number
-        if((start_at * 1) != start_at) {
-          start_at = this.settings.start_at_index;
+        if((initDate * 1) != initDate) {
+          initDate = this.settings.initDate_index;
         };
       };
 
       this.loading(true);
-      this.showImage(start_at,
+      this.showImage(initDate,
         function() {
           // We don't want to start the slideshow before the image has been
           // displayed
           if(context.settings.slideshow.autostart) {
-            context.preloadImage(start_at + 1);
+            context.preloadImage(initDate + 1);
             context.slideshow.start();
           };
         }

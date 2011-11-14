@@ -1,11 +1,11 @@
 @import "colors";
 
 /****************** HEADER STRUCTURE ******/
-#headerFront {	width: 100%;	padding: 0;	background: $header-color;  padding: 2px 0px 0px 0px;}
+#headerFront {	width: 100%;	padding: 0;	background: $header-color;  padding: 0px 0px 0px 0px;}
 #header_left {	left: 0px;	float: left;	padding-left: 5px;}
 #header_right {	right: 0px;	float: right; padding-right: 10px;  }
-.banner_top{	width: 960px;	margin-left: auto;	margin-right: auto;	margin-top: 3px;  padding-bottom: 3px;
-	position: relative; }
+.banner_top{	width: 960px;	margin-left: auto;	margin-right: auto;	margin-top: 0px;  padding-bottom: 0px;
+	position: relative; background: $header-color; }
 .banner_top_height{	height:23px;}
 
 /********** CONTENT ************/

@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   include SocialStream::Models::Subject
-  acts_as_conference_manager_event
+  #acts_as_conference_manager_event
 
   has_one :agenda, :dependent => :destroy
   has_many :sessions, :through => :agenda
@@ -15,9 +15,12 @@ class Event < ActiveRecord::Base
   after_create :create_agenda
 
   scope :live_events, lambda { 
-  where("events.start_at <= ? AND events.end_at > ?", Time.zone.now, Time.zone.now)
+  where("events.initDate <= ? AND events.endDate > ?", Time.zone.now, Time.zone.now)
   }
-  
+
+  VC_MODE = [:in_person, :telemeeting, :teleconference, :teleclass]
+  RECORDING_TYPE = [:automatic, :manual, :none]
+
   #acts_as_conference_manager_event
   def profile!
     actor!.profile || actor!.build_profile
@@ -57,7 +60,7 @@ class Event < ActiveRecord::Base
 
   def days
     if has_date?
-      (end_at.to_date - start_at.to_date).to_i + 1
+      (endDate.to_date - initDate.to_date).to_i + 1
     else
       return 0
     end
@@ -66,7 +69,7 @@ class Event < ActiveRecord::Base
   #method to know if this event is happening now
   def is_happening_now?
      #first we check if start date is past and end date is future
-     if has_date? && start_at.past? && end_at.future?
+     if has_date? && initDate.past? && endDate.future?
        true
      else
        return false
@@ -84,7 +87,7 @@ class Event < ActiveRecord::Base
      if is_happening_now?
        #now we check the sessions
        agenda.agenda_entries.each do |session|
-         return entry if entry.start_at.past? && entry.end_time.future?
+         return entry if entry.initDate.past? && entry.end_time.future?
        end
      end
      return nil
@@ -92,41 +95,47 @@ class Event < ActiveRecord::Base
 
   #method to know if an event happens in the future
   def future?
-    return has_date? && start_at.future?
+    return has_date? && initDate.future?
   end
 
 
   #method to know if an event happens in the past
   def past?
-    return has_date? && end_at.past?
+    return has_date? && endDate.past?
   end
 
 
   def has_date?
-    start_at
+    initDate
+  end
+
+  def isabel_bw
+    256
   end
 
   def get_formatted_date
     has_date? ?
-    I18n::localize(start_at, :format => "%A, %d %b %Y #{I18n::translate('date.at')} %H:%M. #{get_formatted_timezone}") :
+    I18n::localize(initDate, :format => "%A, %d %b %Y #{I18n::translate('date.at')} %H:%M. #{get_formatted_timezone}") :
     I18n::t('date.undefined')
   end
 
   def get_formatted_day
     has_date? ?
-    I18n::localize(start_at, :format => "%A, %d %b %Y #{I18n::translate('date.at')} %H:%M. #{get_formatted_timezone}") :
+    I18n::localize(initDate, :format => "%A, %d %b %Y #{I18n::translate('date.at')} %H:%M. #{get_formatted_timezone}") :
     I18n::t('date.undefined')
   end
 
   def get_formatted_timezone
     has_date? ?
-      "#{Time.zone.name} (#{start_at.zone}, GMT #{start_at.formatted_offset})" :
+      "#{Time.zone.name} (#{initDate.zone}, GMT #{initDate.formatted_offset})" :
     I18n::t('date.undefined')
   end
 
   #method to get the starting hour of an event in the correct format
   def get_formatted_hour
-    has_date? ? start_at.strftime("%H:%M") : I18n::t('date.undefined')
+    has_date? ? initDate.strftime("%H:%M") : I18n::t('date.undefined')
   end
+
+
 
 end

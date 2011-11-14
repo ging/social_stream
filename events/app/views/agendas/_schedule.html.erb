@@ -1,8 +1,8 @@
 <div class="block row schedule">
 	<div class="session_wrapper1">
       <div class="event_date_image">
-        <div class="event_day"> <%= sanitize(@event.start_at.strftime("%d")) %> </div>
-        <div class="event_month"> <%= localize(@event.start_at, :format => "%b")%> </div>
+        <div class="event_day"> <%= sanitize(@event.initDate.strftime("%d")) %> </div>
+        <div class="event_month"> <%= localize(@event.initDate, :format => "%b")%> </div>
       </div>
 	</div>
 	<div class="session_wrapper2">

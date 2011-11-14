@@ -4,8 +4,8 @@ class CreateSocialStreamEvents < ActiveRecord::Migration
 
   create_table :events do |t|
     t.references :actor
-    t.datetime :start_at
-    t.datetime :end_at
+    t.datetime :initDate
+    t.datetime :endDate
     t.integer :founder_id
     t.timestamps
   end
@@ -19,8 +19,8 @@ class CreateSocialStreamEvents < ActiveRecord::Migration
   create_table :sessions do |t|
     t.references :activity_object
     t.references :agenda
-    t.datetime :start_at
-    t.datetime :end_at
+    t.datetime :initDate
+    t.datetime :endDate
     t.string   :title
     t.string  :description
     t.timestamps

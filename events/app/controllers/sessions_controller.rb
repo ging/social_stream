@@ -8,6 +8,7 @@ class SessionsController < InheritedResources::Base
 
   end
 
+
   def edit
     @event= Event.find_by_id(params[:id_event])
     @session= Session.find_by_id(params[:id])
@@ -21,16 +22,16 @@ class SessionsController < InheritedResources::Base
     @session.update_attributes(params[:session])
 #    @session = Session.new (params[:session])
 #    @session.save
-    if @event.start_at.nil?
-      @event.start_at = @session.start_at
-      @event.end_at =   @session.end_at
+    if @event.initDate.nil?
+      @event.initDate = @session.initDate
+      @event.endDate =   @session.endDate
       @event.save
     else
-      if @event.start_at > @session.start_at
-        @event.start_at = @session.start_at
+      if @event.initDate > @session.initDate
+        @event.initDate = @session.initDate
       end
-      if @event.end_at <  @session.end_at
-        @event.end_at =  @session.end_at
+      if @event.endDate <  @session.endDate
+        @event.endDate =  @session.endDate
       end
       @event.save
     end
@@ -41,18 +42,30 @@ class SessionsController < InheritedResources::Base
     @event = Event.find_by_id(params[:event_id])
     params[:session][:agenda_id]=@event.agenda.id
     @session = Session.new (params[:session])
-    @session.save
 
-    if @event.start_at.nil?
-      @event.start_at = @session.start_at
-      @event.end_at =   @session.end_at
+    # default configuration for VC server
+    @event.vc_mode = Event::VC_MODE.index(:in_person)
+    @session.cm_streaming = @event.streaming_by_default # this param is to set streamming url for vc-event
+    @session.cm_recording = true   #this param is only true if recording is automatic
+
+    #debugger
+
+    begin
+      @session.save
+    rescue StandardError => e
+      @session.errors[:base]<<(e.to_s)
+    end
+
+    if @event.initDate.nil?
+      @event.initDate = @session.initDate
+      @event.endDate =   @session.endDate
       @event.save
     else
-      if @event.start_at > @session.start_at
-        @event.start_at = @session.start_at
+      if @event.initDate > @session.initDate
+        @event.initDate = @session.initDate
       end
-      if @event.end_at <  @session.end_at
-        @event.end_at =  @session.end_at
+      if @event.endDate <  @session.endDate
+        @event.endDate =  @session.endDate
       end
       @event.save
     end
@@ -70,21 +83,21 @@ class SessionsController < InheritedResources::Base
   def move
     @session = Session.find_by_id(params[:id])
     if @session
-      @session.start_at = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@session.start_at))
-      @session.end_at = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@session.end_at))
+      @session.initDate = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@session.initDate))
+      @session.endDate = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@session.endDate))
       @session.save
     end
 
-    if @event.start_at.nil?
-      @event.start_at = @session.start_at
-      @event.end_at =  @session.end_at
+    if @event.initDate.nil?
+      @event.initDate = @session.initDate
+      @event.endDate =  @session.endDate
       @event.save
     else
-      if @event.start_at > @session.start_at
-        @event.start_at = @session.start_at
+      if @event.initDate > @session.initDate
+        @event.initDate = @session.initDate
       end
-      if @event.end_at < @session.end_at
-        @event.end_at = @session.end_at
+      if @event.endDate < @session.endDate
+        @event.endDate = @session.endDate
       end
       @event.save
     end
@@ -95,7 +108,7 @@ class SessionsController < InheritedResources::Base
   def resize
     @session = Session.find(params[:id])
     if @session
-      @session.end_at = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@session.end_at))
+      @session.endDate = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@session.endDate))
       @session.save
     end
   end
@@ -104,18 +117,18 @@ class SessionsController < InheritedResources::Base
   def destroy
     @session = Session.find(params[:id])
     @event = @session.event
-    start_at=@session.start_at
-    end_at=@session.end_at
+    initDate=@session.initDate
+    endDate=@session.endDate
     @session.destroy
 
-    if !@event.start_at.nil?
-      if start_at < @event.start_at
-        #changing the start_at of the event
-        @event.start_at = @event.sessions.order("start_at ASC").map{|x| x.start_at}.first
+    if !@event.initDate.nil?
+      if initDate < @event.initDate
+        #changing the initDate of the event
+        @event.initDate = @event.sessions.order("initDate ASC").map{|x| x.initDate}.first
       end
-      if end_at > @event.end_at
-        #changing the end_at of the event
-        @event.end_at = @event.sessions.order("end_at DESC").map{|x| x.end_at}.first
+      if endDate > @event.endDate
+        #changing the endDate of the event
+        @event.endDate = @event.sessions.order("endDate DESC").map{|x| x.endDate}.first
       end
       @event.save
     end    

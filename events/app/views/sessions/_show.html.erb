@@ -4,13 +4,13 @@
       <%=t('time.from').capitalize%>
 		</div>
 	  <div class="event_month">
-      <%=session.start_at.strftime("%H:%M") %>
+      <%=session.initDate.strftime("%H:%M") %>
     </div>
 		<div class="event_hour">
 			<%=t('time.to')%>
 		</div>
 		<div class="event_month">
-			<%=session.end_at.strftime("%H:%M") %>
+			<%=session.endDate.strftime("%H:%M") %>
 		</div>
 	</div>
 	<div class="session_wrapper2">

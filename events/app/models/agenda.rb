@@ -19,22 +19,22 @@ class Agenda < ActiveRecord::Base
 
 
   def start_date
-    event.start_at
+    event.initDate
   end
 
   def end_date
-    event.end_at
+    event.endDate
   end
 
   def getSessions(id,time_start,time_end)
-    @sessions = sessions.where( "start_at >= '#{time_start.to_formatted_s(:db)}' AND
-                             end_at  <= '#{time_end.to_formatted_s(:db)}' ")
+    @sessions = sessions.where( "initDate >= '#{time_start.to_formatted_s(:db)}' AND
+                             endDate  <= '#{time_end.to_formatted_s(:db)}' ")
   end
 
   def contents_for_day(i)
 
       @sessions = sessions.where(
-                "start_at >= :day_start AND start_at < :day_end", {:day_start => start_date.to_date + (i-1).day,
+                "initDate >= :day_start AND initDate < :day_end", {:day_start => start_date.to_date + (i-1).day,
                 :day_end => start_date.to_date + i.day})
 
 
