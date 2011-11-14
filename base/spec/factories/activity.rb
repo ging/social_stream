@@ -1,7 +1,32 @@
+# Helpers for building the post activity
+#
+class ActivityObjectSpecHelper < ActiveRecord::Base
+  set_table_name "activity_objects"
+end
+
+class PostSpecHelper < ActiveRecord::Base
+  set_table_name "posts"
+
+  belongs_to :activity_object_spec_helper, :foreign_key => "activity_object_id"
+end
+
+Factory.define :activity_object_spec_helper do |a|
+  a.object_type "Post"
+end
+
+Factory.define :post_spec_helper do |p|
+  p.association :activity_object_spec_helper
+  p.text "Post spec helper"
+end
+
+#
+## End of helpers
+
 Factory.define :activity do |a|
   a.contact { Factory(:friend).contact }
   a.activity_verb { ActivityVerb["post"] }
   a.relation_ids  { |b| Array(b.sender.relation_custom('friend').id) }
+  a.activity_object_ids { Array(Factory(:post_spec_helper).activity_object_spec_helper.id) }
 end
 
 Factory.define :self_activity, :parent => :activity do |a|
