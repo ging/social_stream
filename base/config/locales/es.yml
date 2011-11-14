@@ -90,6 +90,7 @@ es:
   comment:
     input: "Comentar..."
     confirm_delete: "¿Borrar commentario?"
+    name: "un comentario"
     view_all: "Ver todos los comentarios"
   contact:
     all_n: "Todos los contactos (%{count})"
@@ -239,6 +240,14 @@ es:
       subject: "Asunto"
     mark_as_read: "Marcar como leido"
     message_mailer:
+      has_sent_new: 
+        event: "ha mandad un nuevo mensaje a %{receiver}"
+        group: "ha mandad un nuevo mensaje a %{receiver}"
+        user: "te ha mandad un nuevo mensaje"
+      has_sent_reply: 
+        event: "ha mandad una respuesta a %{receiver}"
+        group: "ha mandad una respuesta a %{receiver}"
+        user: "te ha mandad una respuesta"
       subject_new: "%{subject}"
       subject_reply: "%{subject}"
     notification_mailer:
@@ -262,40 +271,45 @@ es:
     sentbox: "Salida"
     trash: "Papelera"
   notification:
-    added: 
-      other: "%{sender} añadió a %{who} como contacto."
-      user: "%{sender} te añadió como contacto."
-    confirm: "¿Confirmar contacto con %{sender.name}?"
+    all_text: "Lee el texto entero en %{url}"
+    confirm: "¿Confirmar contacto con %{sender}?"
     destroy_sure: "¿Borrar notificación?"
     fan: "%{sender} es ahora fan %{whose}."
+    follow: 
+      group: "%{sender} añadió a %{who} como contacto."
+      user: "%{sender} te añadió como contacto."
     like:
-      other: "A %{sender} le gusta el %{object.name} %{whose}." 
-      user: "A %{sender} le gusta tu %{object.name}."
-    look: "Écha un vistazo al muro de %{sender.name}"
+      group: "A %{sender} le gusta el %{thing} %{whose}." 
+      user: "A %{sender} le gusta tu %{thing}."
+    look: "Echa un vistazo al muro de %{sender}"
     makefriend:
-      other: "%{sender} también añadió a %{who} como contacto."
+      group: "%{sender} también añadió a %{who} como contacto."
       user: "%{sender} también te añadió como contacto."
     one: "Notificación"
     other: "Notificaciones"
     post:
-      other: "%{sender} añadió %{object} en el muro %{whose}."
-      user: "%{sender} añadió %{object} en tu muro."
+      group: "%{sender} añadió %{thing} en el muro %{whose}."
+      user: "%{sender} añadió %{thing} en tu muro."
     read: "Marcar como leída"
     read_all: "Marcar todas como leídas"
     unread: "Marcar como no leídas"
     update:
-      other: "%{sender} actualizó %{object} en el muro %{whose}."
-      user: "%{sender} actualizó %{object} en tu muro."
+      group: "%{sender} actualizó %{thing} en el muro %{whose}."
+      user: "%{sender} actualizó %{thing} en tu muro."
+    watch: "Échale un vistazo en %{url}"
     who:
+      group: "%{name}"
       user: "tú"
     whose: 
+      group: "de %{receiver}"
       user: "tuyo"
-      others: "de %{receiver}"
   post:
     confirm_delete: "¿Borrar texto?"
     form:
       title: "Texto"
     input: "¿Qué quieres compartir?"
+    name: "publicación"
+    one: "una publicación"
     title: "Textos"
   profile:
     one: "Perfil"
@@ -432,6 +446,7 @@ es:
   sure: "¿Seguro?"
   time:
     ago: "hace %{time}"
+  unknown: "Desconocido"
   user:
     by: "Por usuarios"
     one: "Usuario"

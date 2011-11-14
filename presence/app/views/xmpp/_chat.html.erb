@@ -37,11 +37,13 @@
 				
 				initialTimer = setTimeout("updateChatWindow()", 15000);
 	      initAudio();
+				initFocusListeners();
 				
 		});
 		
 	</script>
 			
+
 	<div id="chat_partial">		
 	  <%= render :partial => 'xmpp/chat_connecting' %>
 	</div>

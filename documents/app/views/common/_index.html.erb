@@ -5,13 +5,29 @@
 
 <% @activities.each do |a| %>
 <% document = a.activity_objects.first.document %>
-<div class="attachment_tile">
+<div class="attachment_tile" id="<%= dom_id(document)%>">
   <div class="attachment_tile_thumb">
     <%= link_to thumb_for(document,48),
     {:controller => "documents", :action => "show", :id => document},
     :type => document.type,
     :title => document.file_file_name,
     :path => document_path(document) %>
+  </div>
+  <div class="attachment_tile_tipsy">
+    <%= link_to image_tag("btn/btn_down.png"),
+    "javascript:;"  %>
+    <div class="tipsy_content" style="display:none;">
+      <div class="actions">        
+        <%= link_to content_tag(:div,image_tag("btn/download.png") + t('document.actions.download'), :class => :action), download_document_path(document) %>
+        <% if document.post_activity.edit_object_by?(current_subject) %>
+          <%= link_to content_tag(:div,image_tag("btn/edit.png") + t('document.actions.edit'), :class => :action, :id => :document_edit_action), document_path(document, :editing => true) %>
+        <% end %>
+        <% if document.post_activity.delete_object_by?(current_subject) %>
+          <%= link_to content_tag(:div,image_tag("btn/error.png") + t('document.actions.delete'), :class => :action), document.post_activity.direct_object , :confirm => t('confirm_delete',
+            :scope => document.post_activity.direct_object.class.to_s.underscore), :method => :delete %>
+        <% end %>
+      </div>
+    </div>
   </div>
   <div class="attachment_tile_text">
     <%= link_to truncate_name(document.file_file_name,:length => 15),
@@ -21,6 +37,21 @@
     :path => document_path(document) %>
   </div>
 </div>
+<%= javascript_tag do %>
+$(document).ready(function(){
+  $('#<%= dom_id(document)%> .attachment_tile_tipsy a').tipsy({
+    delayIn: 0,   
+    delayOut: 1000, 
+    gravity: 'nw', 
+    className: 'attachment_tile_tipsy_menu',
+    html: true,
+    hoverable: true,
+    title: function(){
+      return $('#<%= dom_id(document)%> .attachment_tile_tipsy .tipsy_content').html();
+    }
+  });
+});
+<% end %>
 <% end %> 
 
 <% if @activities.size == DocumentsController::PER_PAGE %>
@@ -33,3 +64,5 @@
 <% unless params[:no_layout].present? %>
   </div>
 <% end %> 
+
+

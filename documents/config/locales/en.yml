@@ -4,11 +4,14 @@ en:
     title: "Audios"
     mine: "My audios"
     msg: "Uploaded an audio:"
+    name: "audio"
     not_mine: "Audios"
+    one: "an audio"
     processing: "Processing audio clip"
   document:
     actions:
       delete: "Delete"
+      details: "Details"
       download: "Download"
       edit: "Edit"
     all: "All documents"
@@ -27,7 +30,9 @@ en:
         title: "Title"
     mine: "My documents"
     msg: "Uploaded a document:"
+    name: "file"
     not_mine: "Documents"
+    one: "a file"
     simple_all: "All"  
     title: "Documents"
   picture:
@@ -35,9 +40,11 @@ en:
     title: "Pictures"
     mine: "My pictures"  
     msg: "Uploaded a picture:"
+    name: "picture"
     not_mine: "Pictures"
+    one: "a picture"
   repository:
-    title: "Repository"
+    title: "Files"
     order:
       by: "Order by"
       last_modified: "Last modified"
@@ -45,7 +52,7 @@ en:
   resource:
     all: "All Resources"
     confirm_delete: "Delete resource?"
-    title: "Repository"
+    title: "Files"
     mine: "My resources"
     msg: "Uploaded a resource:"
     not_mine: "Resources"
@@ -53,6 +60,8 @@ en:
     confirm_delete: "Delete video?"
     title: "Videos"
     mine: "My videos"  
-    msg: "Uploaded a video:" 
+    msg: "Uploaded a video:"
+    name: "video" 
     not_mine: "Videos"
+    one: "a video"
     processing: "Processing video"

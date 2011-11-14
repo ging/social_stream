@@ -4,11 +4,14 @@ es:
     title: "Audios"
     mine: "Mis audios"
     msg: "Subió un audio:"
+    name: "archivo de audio"
     not_mine: "Audios"
+    one: "un archivo de audio"
     processing: "Procesando fichero de audio..."
   document:
     actions:
       delete: "Borrar"
+      details: "Detalles"
       download: "Descargar"
       edit: "Editar"
     all: "Todos los documentos"
@@ -27,7 +30,9 @@ es:
         title: "Título"
     mine: "Mis documentos"
     msg: "Subió un documento:"
+    name: "documento"
     not_mine: "Documentos"
+    one: "un documento"
     simple_all: "Todos"
     title: "Documentos"
   picture:
@@ -35,9 +40,11 @@ es:
     title: "Imágenes"
     mine: "Mis imágenes"
     msg: "Subió una imagen:"
+    name: "imagen"
     not_mine: "Imágenes"
+    one: "una imagen"
   repository:
-    title: "Repositorio"
+    title: "Archivos"
     order:
       by: "Ordenar por"
       last_modified: "Última modificación"
@@ -45,7 +52,7 @@ es:
   resource:
     all: "Todos los recursos"
     confirm_delete: "¿Borrar recursos?"
-    title: "Repositorio"
+    title: "Archivos"
     mine: "Mis recursos"
     msg: "Subió un recurso:"
     not_mine: "Recursos"
@@ -54,5 +61,7 @@ es:
     title: "Vídeos"
     mine: "Mis vídeos"  
     msg: "Subió un vídeo:"
+    name: "vídeo"
     not_mine: "Vídeos"
+    one: "un vídeo"
     processing: "Procesando vídeo..."

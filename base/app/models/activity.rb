@@ -204,12 +204,9 @@ class Activity < ActiveRecord::Base
   def notify
     return true if !notificable?
     #Avaible verbs: follow, like, make-friend, post, update
-    actionview = ActivitiesController.new.view_context
 
     if ['like','follow','make-friend','post','update'].include? verb and !contact.reflexive?
-      notification_subject = actionview.render :partial => 'notifications/activities/' + verb + "_subject", :locals => {:activity => self}
-      notification_body = actionview.render :partial =>  'notifications/activities/' + verb + "_body", :locals => {:activity => self}
-      receiver.notify(notification_subject, notification_body, self)
+      receiver.notify("Youre not supposed to see this", "Youre not supposed to see this", self)
     end
     true
   end
@@ -259,6 +256,15 @@ class Activity < ActiveRecord::Base
       ! direct_object.is_a?(Actor) &&
       ! direct_object.class.ancestors.include?(SocialStream::Models::Subject) &&
       allow?(subject, 'destroy')
+  end
+
+  # Can subject edit the object of this activity?
+  def edit_object_by?(subject)
+    subject.present? &&
+    direct_object.present? &&
+      ! direct_object.is_a?(Actor) &&
+      ! direct_object.class.ancestors.include?(SocialStream::Models::Subject) &&
+      allow?(subject, 'update')
   end
 
   # The {Relation} with which activity is shared

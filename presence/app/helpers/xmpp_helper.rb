@@ -16,5 +16,5 @@ module XmppHelper
 
     return connected_users  
   end
-
+  
 end

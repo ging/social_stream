@@ -10,6 +10,6 @@ module SubjectsHelper
   # Return the truncated name
   def truncate_name(name, options={})
     options = {:length => NAME_MAX_LENGTH, :separator => ' '}.merge options
-    truncate(name,options)
+    h truncate(name,options)
   end
 end

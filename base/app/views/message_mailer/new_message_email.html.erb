@@ -8,7 +8,7 @@
     <div>
       <div style="padding: 10px 5px 5px 5px;">
         <span style="font-weight: bold;"><%= truncate_name(@message.sender.name)%></span>
-         has sent a new message to <%= @receiver.subject.is_a?(Group) ? @receiver.name : "you" %>
+        <%= t('mailboxer.message_mailer.has_sent_new.' + @receiver.subject.class.to_s.downcase, :receiver => @receiver.name) %>
       </div>
       <div style="position: static;padding: 5px; border: #2A3890 solid 2px; background-color: #E1EEF5; margin:10px; min-height: 125px; width: 500px;">
         <div style="float:left; margin-right:7px; border: thin solid #D4E4EA; background-color: white; max-height: 119px;">

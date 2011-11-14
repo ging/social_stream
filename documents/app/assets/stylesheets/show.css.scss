@@ -35,6 +35,7 @@
 #document_info .right{
   float: right;
   margin-right: 30px; 
+  text-align: right;
 }
 #document_info .left{
   float: left;
@@ -56,8 +57,10 @@
   width: 16px;
   height: 16px;
 }
-
-#document_edit {
+#document_details {
+  padding: 10px 0px;
+}
+#document_edit, #document_details {
   margin: 5px 5px 0px 5px;
   border: thin solid $separation-color;
   background: $secondary-color;

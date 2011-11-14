@@ -1,4 +1,4 @@
-<div class="block" id="document_edit" style="display:none;">
+<div class="block document_menu" id="document_edit"  style="display:none;">
   <%= form_for(document, :html => { :method => :put }) do |f| %>
   <% if document and document.errors.any? %>
   <%= javascript_tag do %>
@@ -47,3 +47,11 @@
   </div>
   <% end %>
 </div>
+
+<% if params[:editing].present? and params[:editing].eql?"true" and document.post_activity.edit_object_by?(current_subject) %>
+  <%= javascript_tag do %>
+    $(document).ready(function(){
+      toggleDocumentMenu('edit');
+    });
+  <% end %>
+<% end %>

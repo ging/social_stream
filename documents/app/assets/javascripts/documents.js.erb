@@ -49,14 +49,18 @@ showAllDocumentComments = function(id){
   $("#"+id).children(".hide_show_comments").hide();
 };
 
-toggleDocumentEdit = function(){
-  if($("#document_edit").css("display")=="none"){
-    $("#document_edit").show("slow");
-    $("#document_edit_action").addClass("selected");
-    
-  }else{
-    $("#document_edit").hide("slow");
-    $("#document_edit_action").removeClass("selected");
+
+toggleDocumentMenu = function(name){
+  $(".document_menu").each(function(){
+    console.log($(this));
+    if($(this).css("display")!="none"){
+      $(this).slideToggle("slow");
+      $("#" + $(this).attr('id') + "_action").removeClass("selected");
+    }
+  });
+  if($("#document_" + name).css("display")=="none"){
+    $("#document_" + name).slideToggle("slow");
+    $("#document_" + name + "_action").addClass("selected");    
   }
 }
 

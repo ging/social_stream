@@ -1,5 +1,5 @@
 <% self.class.send :include, SubjectsHelper %>
-<%=truncate_name(@message.sender.name)%> has sent a new message to <%= @receiver.subject.is_a?(Group) ? @receiver.name : "you" %>
+<%=truncate_name(@message.sender.name)%> <%= t('mailboxer.message_mailer.has_sent_new.' + @receiver.subject.class.to_s.downcase, :receiver => @receiver.name) %>
 
 -----------------------------------------------
 <%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>

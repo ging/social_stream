@@ -91,6 +91,7 @@ en:
   comment:
     input: "Write a comment..."
     confirm_delete: "Delete comment?"
+    name: "a comment"
     view_all: "View all comments"
   contact:
     all_n: "All contacts (%{count})"
@@ -242,6 +243,14 @@ en:
       subject: "Subject"
     mark_as_read: "Mark as read"
     message_mailer:
+      has_sent_new: 
+        event: "has sent a new message to %{receiver}"
+        group: "has sent a new message to %{receiver}"
+        user: "has sent you a new message"
+      has_sent_reply: 
+        event: "has sent a reply to %{receiver}"
+        group: "has sent a reply to %{receiver}"
+        user: "has sent you a reply"
       subject_new: "%{subject}"
       subject_reply: "%{subject}"
     notification_mailer:
@@ -265,40 +274,45 @@ en:
     sentbox: "Sentbox"
     trash: "Trash"
   notification:
-    added:
-      other: "%{sender} added %{who} as contact."
-      user: "%{sender} added %{who} as contact."
-    confirm: "Confirm %{sender.name} as contact?"
+    all_text: "Read the whole text at %{url}"
+    confirm: "Confirm %{sender} as contact?"
     destroy_sure: "Do you want to delete this notification?"
     fan: "%{sender} is now %{whose} fan."
+    follow:
+      group: "%{sender} added %{who} as contact."
+      user: "%{sender} added %{who} as contact."
     like:
-      other: "%{sender} likes %{whose} %{object.name}." 
-      user: "%{sender} likes %{whose} %{object.name}."
-    look: "Take a look at %{sender.name}'s wall"
+      group: "%{sender} likes %{whose} %{thing}." 
+      user: "%{sender} likes %{whose} %{thing}."
+    look: "Take a look at %{sender}'s wall"
     makefriend:
-      other: "%{sender} also added %{who} as contact."
+      group: "%{sender} also added %{who} as contact."
       user: "%{sender} also added %{who} as contact."
     one: "Notification"
     other: "Notifications"
     post:
-      other: "%{sender} added a %{object} in %{whose} wall."
-      user: "%{sender} added a %{object} in %{whose} wall."
+      group: "%{sender} added %{thing} in %{whose} wall."
+      user: "%{sender} added %{thing} in %{whose} wall."
     read: "Mark as read"
     read_all: "Mark all as read"
     unread: "Mark as unread"
     update:
-      other: "%{sender} updated a %{object} in %{whose} wall."
-      user: "%{sender} updated a %{object} in %{whose} wall."
+      group: "%{sender} updated %{thing} in %{whose} wall."
+      user: "%{sender} updated %{thing} in %{whose} wall."
+    watch: "Watch it at %{url}"
     who:
+      group: "%{name}"
       user: "you"
     whose: 
-      others: "%{receiver}'s"
+      group: "%{receiver}'s"
       user: "your"
   post:
     confirm_delete: "Delete post?"
     form:
       title: "Post"
     input: "What are you doing?"
+    name: "post"
+    one: "a post"
     title: "Posts"  
   preposition:
     and: "and"
@@ -437,6 +451,7 @@ en:
   sure: "Are you sure?"
   time:
     ago: "%{time} ago"
+  unknown: "Unknown"
   user:
     by: "By Users"
     one: "User"

@@ -8,7 +8,7 @@ module SocialStream
           include SocialStream::Presence::Models::BuddyManager
         end
         
-      end 
+      end
  
     end
   end
