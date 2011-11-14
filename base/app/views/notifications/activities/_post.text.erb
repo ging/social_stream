@@ -5,11 +5,12 @@
             :receiver => truncate_name(activity.receiver.name)),
  :thing => t(activity.direct_object.class.to_s.underscore+'.one')) %>
 -----------------------------------------------
+
 <% if activity.direct_object.respond_to? :text %>
   "<%=activity.direct_object.text.truncate(100, :separator =>' ')%>"
 --><%= t('notification.all_text', :url => polymorphic_url(activity.direct_object))%>
 <% else%>
-  <%= t('notification.watch', :url => polymorphic_url( activity.direct_object))%>
+  <%= t('notification.watch', :url => polymorphic_url(activity.direct_object))%>
 <% end%>
 
 <%= raw t('notification.look', 

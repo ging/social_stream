@@ -5,11 +5,11 @@
  :whose => t('notification.whose.'+ activity.receiver.subject.class.to_s.underscore,
             :receiver => truncate_name(activity.receiver.name)),
  :thing => link_to(t(activity.direct_object.class.to_s.underscore+'.one'),
-                   polymorphic_url( activity.direct_object))) %>
+                   polymorphic_url(activity.direct_object))) %>
 
 <% if activity.direct_object.respond_to? :text %>
   <%= link_to(activity.direct_object.text.truncate(100, :separator =>' '),
-                   polymorphic_url( activity.direct_object))%>
+                   polymorphic_url(activity.direct_object))%>
 <%end%>
 <% if SocialStream.activity_forms.include? :document and activity.direct_object.is_a? Document %>
   
