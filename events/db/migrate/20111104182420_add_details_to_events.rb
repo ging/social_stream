@@ -5,9 +5,9 @@ class AddDetailsToEvents < ActiveRecord::Migration
     remove_column :events, :spam
     remove_column :events, :vc_mode
     remove_column :events, :web_interface
-    add_column :events, :marte_event, :int, :default => false
-    add_column :events, :spam, :int, :default => false
-    add_column :events, :vc_mode, :int , :default => 0
+    add_column :events, :marte_event, :boolean, :default => false
+    add_column :events, :spam, :boolean, :default => false
+    add_column :events, :vc_mode, :boolean , :default => 0
     add_column :events, :web_interface, :string, :default => false
     add_column :events, :isabel_interface, :string, :default => false
     add_column :events, :sip_interface, :string, :default => false
