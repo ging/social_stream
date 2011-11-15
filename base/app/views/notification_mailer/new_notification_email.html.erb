@@ -1,4 +1,4 @@
-<% self.class.send :include, Mailboxer::NotificationDecoder  %>
+<% self.class.send :include, SubjectsHelper, ActionView::Helpers::TextHelper  %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -25,7 +25,7 @@
       </div>
       <div style="padding: 10px 5px 5px 5px;">    
         <p>
-          Visit <%= link_to notifications_url,notifications_url %> and check all your notifications. 
+          <%= raw t('notification.visit', :url=> link_to(notifications_url,notifications_url))%>
         </p>
       </div>
     </div>

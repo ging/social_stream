@@ -273,6 +273,7 @@ es:
   notification:
     all_text: "Lee el texto entero en %{url}"
     confirm: "¿Confirmar contacto con %{sender}?"
+    default: "Tienes una nueva notificación"
     destroy_sure: "¿Borrar notificación?"
     fan: "%{sender} es ahora fan %{whose}."
     follow: 
@@ -296,6 +297,7 @@ es:
     update:
       group: "%{sender} actualizó %{thing} en el muro %{whose}."
       user: "%{sender} actualizó %{thing} en tu muro."
+    visit: "Visita %{url} y comprueba todas tus notificaciones."
     watch: "Échale un vistazo en %{url}"
     watch_it: "¡Échale un vistazo!"
     who:

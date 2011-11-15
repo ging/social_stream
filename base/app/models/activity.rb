@@ -206,7 +206,7 @@ class Activity < ActiveRecord::Base
     #Avaible verbs: follow, like, make-friend, post, update
 
     if ['like','follow','make-friend','post','update'].include? verb and !contact.reflexive?
-      receiver.notify("You have a new notification", "Youre not supposed to see this", self)
+      receiver.notify(notification_subject, "Youre not supposed to see this", self)
     end
     true
   end
@@ -307,6 +307,50 @@ class Activity < ActiveRecord::Base
       end
   end
 
+  def notification_subject
+    sender_name= sender.name.truncate(30, :separator => ' ')
+    receiver_name= receiver.name.truncate(30, :separator => ' ')
+    case verb 
+      when 'like'
+        if direct_object.is_a? Actor or direct_object.respond_to? :actor
+          I18n.t('notification.fan', 
+                :sender => sender_name,
+                :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
+                            :receiver => receiver_name))
+        else
+          I18n.t('notification.like.'+ receiver.subject.class.to_s.underscore, 
+                :sender => sender_name,
+                :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
+                            :receiver => receiver_name),
+                :thing => I18n.t(direct_object.class.to_s.underscore+'.name'))
+        end
+      when 'follow'
+        I18n.t('notification.follow.'+ receiver.subject.class.to_s.underscore, 
+              :sender => sender_name,
+              :who => I18n.t('notification.who.'+ receiver.subject.class.to_s.underscore),
+              :name => receiver_name)
+      when 'make-friend'
+        I18n.t('notification.makefriend.'+ receiver.subject.class.to_s.underscore, 
+              :sender => sender_name,
+              :who => I18n.t('notification.who.'+ receiver.subject.class.to_s.underscore,
+                              :name => receiver_name))
+      when 'post'
+        I18n.t('notification.post.'+ receiver.subject.class.to_s.underscore, 
+              :sender => sender_name,
+              :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
+                               :receiver => receiver_name),
+              :thing => I18n.t(direct_object.class.to_s.underscore+'.one'))
+      when 'update'
+        I18n.t('notification.update.'+ receiver.subject.class.to_s.underscore, 
+              :sender => sender_name,
+              :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
+                               :receiver => receiver_name),
+              :thing => I18n.t(direct_object.class.to_s.underscore+'.one'))
+      else
+        t('notification.default')
+      end
+  end
+  
   #Send notifications to actors based on proximity, interest and permissions
   def send_notifications
     notify
