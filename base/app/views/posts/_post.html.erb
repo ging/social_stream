@@ -1,3 +1,3 @@
 <%= div_for post, :class => 'content_size' do %>
-  <%= simple_format post.text %>
+  <%= simple_format auto_link(post.text) %>
 <% end %>

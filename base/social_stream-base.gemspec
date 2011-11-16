@@ -51,8 +51,10 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('modernizr-rails', '~> 2.0.6')
   # Sphinx search engine
   s.add_runtime_dependency('thinking-sphinx', '~> 2.0.8')
-  #Syntactically Awesome Stylesheets
+  # Syntactically Awesome Stylesheets
   s.add_runtime_dependency('sass-rails', '~> 3.1.0')
+  # Autolink text blocks
+  s.add_runtime_dependency('rails_autolink', '~> 1.0.4')
 
   # Development gem dependencies
   #

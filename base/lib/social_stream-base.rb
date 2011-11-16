@@ -39,6 +39,8 @@ require 'modernizr-rails'
 require 'thinking-sphinx'
 # Syntactically Awesome Stylesheets
 require 'sass-rails'
+# Autolink text blocks
+require 'rails_autolink'
 
 # Provides your Rails application with social network and activity stream support
 module SocialStream
