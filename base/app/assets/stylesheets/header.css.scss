@@ -4,8 +4,8 @@
 #headerFront {	width: 100%;	padding: 0;	background: $header-color;  padding: 0px 0px 0px 0px;}
 #header_left {	left: 0px;	float: left;	padding-left: 15px; padding-right: 5px; width:155px;}
 #header_right {	right: 0px;	float: right; padding-right: 10px;  }
-.banner_top{	width: 960px;	margin-left: auto;	margin-right: auto;	margin-top: 0px;  padding-bottom: 0px;
-	position: relative; background: $header-color; }
+.banner_top{	width: 960px;	margin-left: auto;	margin-right: auto;	margin-top: 0px;
+	position: relative; background: $header-color; padding: 3px; }
 .banner_top_height{	height:23px;}
 
 /********** CONTENT ************/
