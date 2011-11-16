@@ -21,7 +21,12 @@ module SocialStream
       initializer "social_stream-base.controller_helpers" do
         ActiveSupport.on_load(:action_controller) do
           include SocialStream::Controllers::Helpers
+          include SocialStream::Controllers::CancanDeviseIntegration
         end
+      end
+
+      initializer "social_stream-base.cancan_devise_integration" do
+        ApplicationController.rescue_handlers += [["CanCan::AccessDenied", :rescue_from_access_denied]]
       end
 
       initializer "social_stream-base.toolbar_config" do

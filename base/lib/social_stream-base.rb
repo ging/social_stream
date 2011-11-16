@@ -52,6 +52,7 @@ module SocialStream
 
   module Controllers
     autoload :Helpers, 'social_stream/controllers/helpers'
+    autoload :CancanDeviseIntegration, 'social_stream/controllers/cancan_devise_integration'
   end
 
   module Models
