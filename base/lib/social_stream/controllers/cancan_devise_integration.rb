@@ -10,8 +10,10 @@ module SocialStream
 
         # Redirect to login if the user is trying to access a protected resource
         # and she is not authenticated
-        def rescue_from_access_denied
-          unless user_signed_in?
+        def rescue_from_access_denied(exception)
+          if user_signed_in?
+            raise exception
+          else
             redirect_to new_user_session_path
           end
         end

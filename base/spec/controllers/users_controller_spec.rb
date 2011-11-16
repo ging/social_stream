@@ -41,9 +41,7 @@ describe UsersController do
       begin
         get :edit, :id => Factory(:user).to_param
 
-        assert false
-      rescue CanCan::AccessDenied 
-        assert true
+        response.should redirect_to(:new_user_session)
       end
     end
   end

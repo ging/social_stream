@@ -25,10 +25,6 @@ module SocialStream
         end
       end
 
-      initializer "social_stream-base.cancan_devise_integration" do
-        ApplicationController.rescue_handlers += [["CanCan::AccessDenied", :rescue_from_access_denied]]
-      end
-
       initializer "social_stream-base.toolbar_config" do
         SocialStream::ToolbarConfig.module_eval do
           include SocialStream::ToolbarConfig::Base
@@ -51,6 +47,10 @@ module SocialStream
         Mailboxer.setup do |config|
           config.email_method = :mailboxer_email
         end
+      end
+
+      config.to_prepare do
+        ApplicationController.rescue_handlers += [["CanCan::AccessDenied", :rescue_from_access_denied]]
       end
     end
   end
