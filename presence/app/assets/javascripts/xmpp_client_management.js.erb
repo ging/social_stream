@@ -1,0 +1,297 @@
+////////////////////
+//Hash table
+////////////////////
+var statusMessage = new Array();
+statusMessage[''] = "";
+statusMessage['chat'] = "";
+statusMessage['away'] = "Away";
+statusMessage['xa'] = "Away";
+statusMessage['dnd'] = "Busy";
+
+
+
+////////////////////
+//Connect functions
+////////////////////
+
+function connectToServerWithCookie(){
+    try {
+      connection = new Strophe.Connection(BOSH_SERVICE);
+      connection.connect(user_jid, cookie, onConnect);
+    } catch (err) {
+      //"Handle errors"
+      return false;
+    }
+}
+
+//Password: Get from chatPassword param if exists, instead try to get from sessionStorage.
+function connectToServerWithPassword(chatPassword){
+    
+    //Get Password
+    if ((chatPassword!=null)&&(chatPassword!="")){
+      var password = chatPassword;
+    } else if ((window.sessionStorage)&&(sessionStorage.getItem("ss_user_pass") != null)) {
+      var password = sessionStorage.getItem("ss_user_pass");
+    } else {
+      return false;
+    }
+    
+    try {
+        //Connect actual user to the chat
+        connection = new Strophe.Connection(BOSH_SERVICE);
+        connection.connect(user_jid, password, onConnect);
+    } catch (err) {
+        //"Handle errors"
+        return false;
+    }
+
+    return true;
+}
+
+////////
+//Auth Methods
+///////
+function authByCookie(){
+  var authMethod = '<%= SocialStream::Presence.auth_method %>';
+  return authMethod=="cookie";
+}
+
+function authByPassword(){
+  var authMethod = '<%= SocialStream::Presence.auth_method %>';
+  return authMethod=="password";
+}
+
+function ifCookie(){
+  return (!(typeof cookie == 'undefined'))
+}
+
+
+////////////////////
+//Stanza management using Strophe
+////////////////////
+
+//Global variables
+var userStatus = "chat";
+var awayTimerPeriod = 16000;
+var timerPeriod = 5000;
+var refreshMinTime = 3*timerPeriod;
+var awayTime = 300000;
+var awayCounter = 0;
+var timerCounter = 0;
+var connection = null;
+var userConnected = false;
+var reconnectAttempts = 3;
+var awayTimer;
+var timer;
+var requestContacts=false;
+var cyclesToRefresh = (refreshMinTime/timerPeriod);
+
+
+function onConnect(status) {
+	
+	//Status.ERROR An error has occurred
+	//Status.CONNECTING The connection is currently being made
+	//Status.CONNFAIL The connection attempt failed
+	//Status.AUTHENTICATING The connection is authenticating
+	//Status.AUTHFAIL The authentication attempt failed
+	//Status.CONNECTED  The connection has succeeded
+	//Status.DISCONNECTED The connection has been terminated
+	//Status.DISCONNECTING  The connection is currently being terminated
+	//Status.ATTACHED The connection has been attached
+	
+	log('Strophe onConnect callback call with status ' + status);
+	
+	if (status == Strophe.Status.ATTACHED){
+		log('Strophe connection attached');
+		return;
+	} 
+	
+	if (status == Strophe.Status.AUTHENTICATING ){
+    log('Strophe connection AUTHENTICATING');
+		return;
+  }
+	
+	if (status == Strophe.Status.CONNECTING) {
+     log('Strophe is connecting.');
+		 return;
+  } 
+		
+	clearTimeout(initialTimer);
+		
+	if (status == Strophe.Status.CONNFAIL) {
+   log('Strophe failed to connect.');
+   userConnected = false;
+   setTimeout ("onReconnect()", 3000);
+  } else if (status == Strophe.Status.AUTHFAIL) {
+   log('Strophe authentication fail.');
+	   if ((window.sessionStorage)&&(sessionStorage.getItem("ss_user_pass") != null)){
+	    sessionStorage.setItem("ss_user_pass",null);
+	   }
+   userConnected = false;
+  } else if (status == Strophe.Status.ERROR) {
+   log('Strophe error.');
+   userConnected = false;
+  } else if (status == Strophe.Status.DISCONNECTED) {
+   log('Strophe is disconnected.');
+   userConnected = false;
+	 clearTimeout(awayTimer);
+   setTimeout ("onReconnect()", 3000);
+  } else if (status == Strophe.Status.CONNECTED) {
+   log('Strophe is connected.');
+   log('Presenze stanza send for:' + connection.jid);
+   connection.addHandler(onMessage, null, 'message', null, null,  null);
+	 connection.addHandler(onPresence, null, 'presence', null, null,  null); 
+   //addHandler:(callback, namespace to match, stanza name, stanza type, stanza id , stanza from, options)
+   sendStatus(userStatus);
+   userConnected = true;
+   awayTimer = setInterval("awayTimerFunction()", awayTimerPeriod);
+	 timer = setInterval("timerFunction()", timerPeriod);
+  }
+	
+	updateChatWindow();
+}
+
+function onReconnect(){
+	if ((connection != null)&&(!userConnected)) {
+		if (reconnectAttempts>0) {
+			reconnectAttempts--;
+      connectToServer(null);
+      setTimeout ("onReconnect()", 9000);
+		} else {
+			//Notify issue to Rails App Server?
+		}
+	}
+}
+
+
+////////
+//Manage Message stanzas
+///////
+function onMessage(msg) {
+    var to = msg.getAttribute('to');
+    var from = msg.getAttribute('from');
+    var type = msg.getAttribute('type');
+    var elems = msg.getElementsByTagName('body');
+
+    if (type == "chat" && elems.length > 0) {
+	
+			var body = elems[0];
+			var from_slug = from.split("@")[0];
+			var from_name = $("#" + from_slug).attr("name");
+			var from_jid = from_slug + "@" + domain;
+		
+		
+		  if (typeof ($('div.user_presence[slug=' + from_slug + ']').attr('name')) == 'undefined') {
+				//No connectionBox for this user!
+		    var from_name = from_slug;
+				refreshChatWindow();
+		  } else {
+				showConnectionBoxFromSlug(from_slug);
+		    var from_name = $('div.user_presence[slug=' + from_slug + ']').attr('name');
+		  }
+			
+			if (createChatBox(from_slug,from_name,from_jid,user_name,user_jid)) {
+			} else {
+        window[getChatVariableFromSlug(from_slug)].chatbox("option", "boxManager").toggleBox(true);
+			}
+			
+			var content = getParsedContent(Strophe.getText(body),false)
+			//Send message to chatBox and post-message functions.					
+			$("#" + from_slug).chatbox("option", "boxManager").addMsg(from_name, content);
+			rotatePriority(from_slug);
+			blinkTitleOnMessage(from_name);
+			if (mustPlaySoundForChatWindow(window[getChatVariableFromSlug(from_slug)])){
+          playSound("onMessageAudio");
+      }
+			
+    }
+
+    // we must return true to keep the handler alive.  
+    // returning false would remove it after it finishes.
+    return true;
+}
+
+
+////////
+//Manage Presence stanzas
+///////
+function onPresence(presence) {
+	 
+	  //Check presence stanza type
+		ptype = $(presence).attr('type');
+				
+		switch (ptype){
+			case undefined:
+			 processAvailablePresenceStanza(presence)
+			 break;
+			case "available":
+			  processAvailablePresenceStanza(presence)
+        break;
+			case "unavailable":
+        processUnavailablePresenceStanza(presence)
+        break;
+			default : 
+			  //Stanza type not recognize
+				processAvailablePresenceStanza(presence)
+		}
+				  
+	return true;
+} 
+
+
+function processAvailablePresenceStanza(presence){
+	from = $(presence).attr('from');
+  slug = from.split("@")[0];
+	
+	if (slug != user_slug) {
+		if (getConnectionBoxFromSlug(slug)!=null){
+			status = $(presence).find('show').text(); 
+      setUserIconStatus(slug, status);
+			if (cacheConnectedUsers.indexOf(slug) != -1) {
+	  	  showConnectionBoxFromSlug(slug);
+	    }	
+	  } else {
+	    setTimeout("refreshChatWindow()", 3000);
+	  }
+  }		
+}
+
+function processUnavailablePresenceStanza(presence){
+	from = $(presence).attr('from');
+  slug = from.split("@")[0];
+	
+	if (slug != user_slug) {
+	  if (getConnectionBoxFromSlug(slug)!=null){
+	    hideConnectionBoxFromSlug(slug)
+	  }
+  }
+}
+
+////////
+//Send Message stanzas
+///////
+function sendChatMessage(from,to,text){
+    var type = "chat";
+    var body= $build("body");
+    body.t(text);
+    var message = $msg({to: to, from: from, type: 'chat'}).cnode(body.tree());
+    connection.send(message.tree());	  	
+		resumeAwayTimerIfAway();
+		return true;
+}
+
+
+////////
+//Send Presence stanzas with status
+///////
+function sendStatus(status){
+    if (status in statusMessage){
+      //Send status to the XMPP Server
+      var pres = $pres()
+      .c('status')
+      .t(statusMessage[status]).up() //Status message
+      .c('show')
+      .t(status);
+       connection.send(pres.tree());
+    }
+}
