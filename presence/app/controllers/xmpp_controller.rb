@@ -6,9 +6,7 @@ class XmppController < ApplicationController
   'chat' => 'available', 
   'away' => 'away', 
   'xa' => 'away',
-  'dnd' => 'dnd',
-  #Special status to disable chat
-  'disable' => 'disable'
+  'dnd' => 'dnd'
   }
    
    
@@ -127,12 +125,16 @@ class XmppController < ApplicationController
   
   
   def chatWindow
-    if (current_user) and (current_user.status != 'disable') and (params[:userConnected]=="true")
+    
+    if current_user and current_user.chat_enabled and (params[:userConnected]=="true")
       render :partial => 'chat/contacts'
-    else
-      #User not connected or chat desactivated
+    elsif current_user and current_user.chat_enabled
+      #User not connected
       render :partial => 'chat/off'
-    end 
+    else
+      #User with chat disabled
+      render :text => ''
+    end
   end
     
  
@@ -147,8 +149,8 @@ class XmppController < ApplicationController
       #Updating User Chat settings
       if section.eql? "chat"
         if current_user and current_subject and current_subject==current_user
-          current_user.status = STATUS[''] if params[:enable_chat].present? and params[:enable_chat].to_s.eql? "true"
-          current_user.status = STATUS['disable'] if !params[:enable_chat]
+          current_user.chat_enabled = true if params[:enable_chat].present? and params[:enable_chat].to_s.eql? "true"
+          current_user.chat_enabled = false  if !params[:enable_chat]
         end
       end
 

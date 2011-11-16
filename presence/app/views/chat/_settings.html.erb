@@ -21,7 +21,7 @@
         	<div class="form_row">
           </div>
           <div class="form_sub_row">
-            <% checked = !(current_user.status=="disable") %>
+            <% checked = current_user.chat_enabled %>
             <%= check_box_tag 'enable_chat', true, checked %>
             <%= label_tag(:enable_chat, "Enable or disable Social Stream Chat") %> 
           </div>
