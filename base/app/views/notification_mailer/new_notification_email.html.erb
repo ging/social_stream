@@ -6,7 +6,9 @@
   </head>
   <body>
     <div>
-      
+      <div >
+        <%= t('notification.hello', :receiver => @receiver.name)%>
+      </div>
       <div style="position: static;padding: 5px; border: #2A3890 solid 2px; background-color: #E1EEF5; margin:10px; min-height: 125px; width: 500px;">
         <div style="float:left; margin-right:7px; border: thin solid #D4E4EA; background-color: white; max-height: 119px;">
           <img src="<%= root_url + @notification.notified_object.sender.logo.url(:profile)%>" alt="<%=@notification.notified_object.sender.name%>">

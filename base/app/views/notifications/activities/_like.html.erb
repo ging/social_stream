@@ -20,7 +20,7 @@
   </div>
   <div class="briefing">
     <% if activity.direct_object.respond_to? :text %>
-      "<%= link_to(activity.direct_object.text.truncate(100, :separator =>' '),
+      "<%= link_to(sanitize(activity.direct_object.text.truncate(100, :separator =>' ')),
                   polymorphic_url( activity.direct_object))%>"
     <% else%>
       <%= link_to(t('notification.watch_it'),

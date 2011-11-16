@@ -85,6 +85,7 @@ es:
   browse: "Descubrir"
   button:
     cancel: "Cancelar"
+    create: "Crear"
     save: "Guardar"
     update: "Actualizar"
   comment:
@@ -158,9 +159,11 @@ es:
     collaborate:
       default: "Colabora"
       sentence1: "Organice sus proyectos y actividades"
-      sentence2: "Crea tus propios grupos"
+      sentence2: "Participe en grupos y conferencias"
+      sentence3: "Cree sus propios grupos y conferencias"
     elements:
       comments: "Comentarios"
+      conferences: "Conferencias"
       networks: "Redes sociales"
       organizers: "Organizadores"
       participants: "Participantes"
@@ -241,13 +244,13 @@ es:
     mark_as_read: "Marcar como leido"
     message_mailer:
       has_sent_new: 
-        event: "ha mandad un nuevo mensaje a %{receiver}"
-        group: "ha mandad un nuevo mensaje a %{receiver}"
-        user: "te ha mandad un nuevo mensaje"
+        event: "ha mandado un nuevo mensaje a %{receiver}"
+        group: "ha mandado un nuevo mensaje a %{receiver}"
+        user: "te ha mandado un nuevo mensaje"
       has_sent_reply: 
-        event: "ha mandad una respuesta a %{receiver}"
-        group: "ha mandad una respuesta a %{receiver}"
-        user: "te ha mandad una respuesta"
+        event: "ha mandado una respuesta a %{receiver}"
+        group: "ha mandado una respuesta a %{receiver}"
+        user: "te ha mandado una respuesta"
       subject_new: "%{subject}"
       subject_reply: "%{subject}"
     notification_mailer:
@@ -276,9 +279,10 @@ es:
     default: "Tienes una nueva notificación"
     destroy_sure: "¿Borrar notificación?"
     fan: "%{sender} es ahora fan %{whose}."
-    follow: 
+    follow:
       group: "%{sender} añadió a %{who} como contacto."
       user: "%{sender} te añadió como contacto."
+    hello: "Hola %{receiver},"
     like:
       group: "A %{sender} le gusta el %{thing} %{whose}." 
       user: "A %{sender} le gusta tu %{thing}."
@@ -314,6 +318,8 @@ es:
     name: "publicación"
     one: "una publicación"
     title: "Textos"
+  preposition:
+    and: "y"
   profile:
     one: "Perfil"
     age: "Edad"

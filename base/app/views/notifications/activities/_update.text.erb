@@ -1,11 +1,11 @@
 <%= raw t('notification.update.'+ activity.receiver.subject.class.to_s.underscore, 
- :sender => truncate_name(activity.sender.name),
- :whose => t('notification.whose.'+ activity.receiver.subject.class.to_s.underscore,
-            :receiver => truncate_name(activity.receiver.name)),
- :thing => t(activity.direct_object.class.to_s.underscore+'.one')) %>
------------------------------------------------
+           :sender => truncate_name(activity.sender.name),
+           :whose => t('notification.whose.'+ activity.receiver.subject.class.to_s.underscore,
+                      :receiver => truncate_name(activity.receiver.name)),
+           :thing => t(activity.direct_object.class.to_s.underscore+'.one')) %>
+
 <% if activity.direct_object.respond_to? :text %>
-  "<%=activity.direct_object.text.truncate(100, :separator =>' ')%>"
+  "<%= sanitize activity.direct_object.text.truncate(100, :separator =>' ')%>"
 --><%= t('notification.all_text', :url => polymorphic_url(activity.direct_object))%>
 <% else%>
   <%= t('notification.watch', :url => polymorphic_url( activity.direct_object))%>

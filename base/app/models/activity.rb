@@ -307,6 +307,9 @@ class Activity < ActiveRecord::Base
       end
   end
 
+  #
+  # Get the email subject for the activity's notification
+  #
   def notification_subject
     sender_name= sender.name.truncate(30, :separator => ' ')
     receiver_name= receiver.name.truncate(30, :separator => ' ')
@@ -327,8 +330,8 @@ class Activity < ActiveRecord::Base
       when 'follow'
         I18n.t('notification.follow.'+ receiver.subject.class.to_s.underscore, 
               :sender => sender_name,
-              :who => I18n.t('notification.who.'+ receiver.subject.class.to_s.underscore),
-              :name => receiver_name)
+              :who => I18n.t('notification.who.'+ receiver.subject.class.to_s.underscore,
+                             :name => receiver_name))
       when 'make-friend'
         I18n.t('notification.makefriend.'+ receiver.subject.class.to_s.underscore, 
               :sender => sender_name,

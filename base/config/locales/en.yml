@@ -282,6 +282,7 @@ en:
     follow:
       group: "%{sender} added %{who} as contact."
       user: "%{sender} added %{who} as contact."
+    hello: "Hi %{receiver},"
     like:
       group: "%{sender} likes %{whose} %{thing}." 
       user: "%{sender} likes %{whose} %{thing}."
