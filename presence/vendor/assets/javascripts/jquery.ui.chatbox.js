@@ -43,17 +43,21 @@
 		    self._scrollToBottom();
 
 		    if(!self.elem.uiChatboxTitlebar.hasClass("ui-state-focus") && !self.highlightLock) {
-			self.highlightLock = true;
-			self.highlightBox();
+			   self.highlightLock = true;
+			   self.highlightBox();
 		    }
 		},
 		highlightBox: function() {
-		    //this.elem.uiChatbox.addClass("ui-state-highlight");
+		    this.elem.uiChatbox.addClass("ui-state-highlight");
 		    var self = this;
-		    self.elem.uiChatboxTitlebar.effect("highlight", {}, 300);
+				
+				//Get highlight color from css
+				var dummy_element = $("<p class=\"chatWindowhighlighted\"></div>");
+        var options = {color: $(dummy_element).css("color")};
+		    self.elem.uiChatboxTitlebar.effect("highlight", options, 300);
 		    self.elem.uiChatbox.effect("bounce", {times:3}, 300, function(){
-			self.highlightLock = false;
-			self._scrollToBottom();
+			     self.highlightLock = false;
+			     self._scrollToBottom();
 		    });
 		},
 		toggleBox: function(show) {
@@ -69,7 +73,7 @@
 	toggleContent: function(event) {
 	    this.uiChatboxContent.toggle();
 	    if(this.uiChatboxContent.is(":visible")) {
-		this.uiChatboxInputBox.focus();
+		    this.uiChatboxInputBox.focus();
 	    }
 	},
 
@@ -91,7 +95,7 @@
 		.attr('outline', 0)
 		.focusin(function(){
 		    // ui-state-highlight is not really helpful here
-		    //self.uiChatbox.removeClass('ui-state-highlight');
+		    self.uiChatbox.removeClass('ui-state-highlight');
 		    self.uiChatboxTitlebar.addClass('ui-state-focus');
 		})
 		.focusout(function(){
@@ -131,8 +135,7 @@
 		})
 		.appendTo(uiChatboxTitlebar),
 	    uiChatboxTitlebarCloseText = $('<span></span>')
-		.addClass('ui-icon ' +
-			  'ui-icon-closethick')
+		.addClass('ui-icon-closethick ' + 'chat-thick ' + 'chat-closethick')
 		.text('close')
 		.appendTo(uiChatboxTitlebarClose),
 	    uiChatboxTitlebarMinimize = (self.uiChatboxTitlebarMinimize = $('<a href="#"></a>'))
@@ -154,8 +157,7 @@
 		})
 		.appendTo(uiChatboxTitlebar),
 	    uiChatboxTitlebarMinimizeText = $('<span></span>')
-		.addClass('ui-icon ' +
-			  'ui-icon-minusthick')
+		.addClass('ui-icon-minusthick ' +  'chat-thick ' + ' chat-minusthick')
 		.text('minimize')
 		.appendTo(uiChatboxTitlebarMinimize),
 	    // content

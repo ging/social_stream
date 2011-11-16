@@ -225,7 +225,7 @@ function onMessage(msg) {
         window[getChatVariableFromSlug(from_slug)].chatbox("option", "boxManager").toggleBox(true);
 			}
 			
-			content = parseContent(Strophe.getText(body));
+			var content = getParsedContent(Strophe.getText(body),false)
 			//Send message to chatBox and post-message functions.					
 			$("#" + from_slug).chatbox("option", "boxManager").addMsg(from_name, content);
 			rotatePriority(from_slug);
@@ -333,6 +333,17 @@ var www_urls_pattern = /(www[.])([aA-zZ0-9%=_&+?])+([./-][aA-zZ0-9%=_&+?]+)*[/]?
 var icons_a_pattern=/\([A-Z]\)/g
 var icons_b_pattern=/((:|;)([()A-Z]))/g
 var youtube_video_pattern=/(http(s)?:\/\/)?(((youtu.be\/)([aA-zZ0-9]+))|((www.youtube.com\/watch\?v=)([aA-z0-9Z&=.])+))/g
+
+
+function getParsedContent(content,fromUser){
+  if (fromUser){
+	 var chatTextclass = "ownChatText"
+	} else {
+	 var chatTextclass = "guestChatText"
+	}
+	return ("<span class=\"" + chatTextclass + "\">" + parseContent(content) +  "</span>");
+}
+
 
 function parseContent(content){
   
@@ -880,7 +891,7 @@ function createChatBox(guest_slug,guest_name,guest_jid,user_name,user_jid){
 															
                               messageSent : function(id, user, msg) {
 																  rotatePriority(guest_slug);
-                                  $("#" + guest_slug).chatbox("option", "boxManager").addMsg(id, parseContent(msg));
+                                  $("#" + guest_slug).chatbox("option", "boxManager").addMsg(id, getParsedContent(msg,true));
                                   sendChatMessage(user_jid,guest_jid,msg);
                               }});
 															

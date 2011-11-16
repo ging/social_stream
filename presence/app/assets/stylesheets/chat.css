@@ -8,6 +8,16 @@
     background:  #CCCCCC;
 }
 
+.ui-state-highlight {
+	background: #CCCCCC;
+	background-color: #CCCCCC;
+	border: 1px solid lightgrey;
+}
+
+.chatWindowhighlighted {
+	color: #CAC8F4;
+}
+
 .ui-chatbox-titlebar {
     padding: 3px 3px 3px 3px;
     height: 20px;
@@ -50,6 +60,28 @@
 .ui-chatbox-msg {
     float: left;
     clear: both;
+}
+
+
+/* Ticks */
+
+.chat-thick {
+	/* Possible background-image for thicks provided by jquery.ui 454545 , 222222 , 888888 , cd0a0a , ... */
+	background-image: url("images/ui-icons_454545_256x240.png");
+	background-repeat: no-repeat;
+  display: block;
+  overflow: hidden;
+  text-indent: -99999px;
+	height: 16px;
+  width: 16px;
+}
+
+.chat-minusthick{
+	background-position: -64px -128px;
+}
+
+.chat-closethick{
+	background-position: -96px -128px;
 }
 
 
@@ -240,6 +272,14 @@ input.connectChatButton{
 
 
 /* Chat text style */
+
+.ownChatText {
+  color: #342E82;
+}
+
+.guestChatText {
+  color: #342E82;
+}
 
 .chatImage {
   max-width: 100px;

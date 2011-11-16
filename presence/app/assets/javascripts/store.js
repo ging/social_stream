@@ -2,13 +2,6 @@
 //Store password with session storage
 ////////////////////
 
-$(document).ready(function () {
-		$('.storePass').bind('click', function () {
-         storePassword();
-    });
-});
-
-
 function storePassword() {
 	
 	  //Dont store password if cookie authentication is enable
