@@ -239,14 +239,19 @@ input.connectChatButton{
 }
 
 
-/* Chat text */
+/* Chat text style */
 
 .chatImage {
   max-width: 100px;
   max-height: 100px;
 }
 
-.chatIcon {
+.chatVideoImage {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.chatEmoticon {
   max-width:20px;
   max-height: 20px;
 }
@@ -255,5 +260,6 @@ a.chatLink:link, a.chatLink:visited {
     color: #1E726A;
 }
 
-.chatImageLink {
+a.chatImageLink:link, a.chatImageLink:visited {
+    color: #1E726A;
 }
