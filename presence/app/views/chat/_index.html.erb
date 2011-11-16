@@ -1,4 +1,4 @@
-<% if current_user and current_subject.subject_type=="User" %>
+<% if current_user and current_user.status!="disable" and current_subject.subject_type=="User" %>
 	
 
 	<script type="text/javascript">
@@ -35,7 +35,7 @@
 			
 
 	<div id="chat_partial">		
-	  <%= render :partial => 'xmpp/chat_connecting' %>
+	  <%= render :partial => 'chat/connecting' %>
 	</div>
 	
 <% end %>

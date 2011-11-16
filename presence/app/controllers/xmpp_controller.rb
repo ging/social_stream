@@ -128,15 +128,47 @@ class XmppController < ApplicationController
   
   def chatWindow
     if (current_user) and (current_user.status != 'disable') and (params[:userConnected]=="true")
-      render :partial => 'xmpp/chat_contacts'
+      render :partial => 'chat/contacts'
     else
       #User not connected or chat desactivated
-      render :partial => 'xmpp/chat_off'
+      render :partial => 'chat/off'
     end 
   end
     
-
  
+  def updateSettings
+    
+    success = false
+
+    #If no section selected, skips and gives error
+    if params[:settings_section].present?
+      section = params[:settings_section].to_s
+
+      #Updating User Chat settings
+      if section.eql? "chat"
+        if current_user and current_subject and current_subject==current_user
+          current_user.status = STATUS[''] if params[:enable_chat].present? and params[:enable_chat].to_s.eql? "true"
+          current_user.status = STATUS['disable'] if !params[:enable_chat]
+        end
+      end
+
+      #Here sections to add
+      #if section.eql? "section_name"
+      #   blah blah blah
+      #end
+
+      #Was everything ok?
+      success = current_subject.save
+    end
+
+    #Flashing and redirecting
+    if success
+      flash[:success] = t('settings.success')
+    else
+      flash[:error] = t('settings.error')
+    end
+    redirect_to :controller => :settings, :action => :index
+  end
   
   #TEST METHODS
   def active_users

@@ -16,3 +16,6 @@
 <% else %>
   <%= render :partial => 'destroy' %>
 <% end %>
+<% if defined?(SocialStream::Presence) and SocialStream::Presence.enable %>
+  <%= render :partial => 'chat/settings' %>
+<% end %>

@@ -1,0 +1,38 @@
+<% if current_user and current_subject and current_user==current_subject %>
+	
+<div class="block" id="chat_settings">
+    <div class="header">
+        <div class="header_text">
+             Chat
+        </div>
+        <div class="header_icon_right">
+          <%= link_to (image_tag('btn/edit.png')),  "javascript:showSettings(\"chat_settings\");" %>
+        </div>
+    </div>
+    <div id="chat_settings_briefing" class="settings_briefing content">        
+        <div class="form_row">
+            Enable and configure Social Stream Chat
+        </div>
+    </div>
+    <div class="content settings_content" id="chat_settings_content" style="display:none;">
+				<%= form_tag(:controller => "Xmpp", :action => "updateSettings", :method => "get") do %>
+        <ul>
+        <div class="settings_block">
+        	<div class="form_row">
+          </div>
+          <div class="form_sub_row">
+            <% checked = !(current_user.status=="disable") %>
+            <%= check_box_tag 'enable_chat', true, checked %>
+            <%= label_tag(:enable_chat, "Enable or disable Social Stream Chat") %> 
+          </div>
+          <div class="actions center">
+              <%= hidden_field_tag :settings_section, :chat %>
+              <%= submit_tag "Update Settings", :class => "button" %>
+          </div>
+        </div>
+        </ul>
+        <% end %>
+    </div>
+</div>
+	
+<% end %>

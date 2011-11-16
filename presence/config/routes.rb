@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   match '/xmpp/setPresence' => "Xmpp#setPresence"
   match '/xmpp/unsetPresence' => "Xmpp#unsetPresence"
   match '/chatWindow'=> "Xmpp#chatWindow"
-  match '/chatAuthWithCookie'=> "Xmpp#chatAuthWithCookie"
+  match '/xmpp/updateSettings'=> "Xmpp#updateSettings"
    
 end

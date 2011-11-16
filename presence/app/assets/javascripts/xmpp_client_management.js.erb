@@ -155,7 +155,14 @@ function onReconnect(){
 	if ((connection != null)&&(!userConnected)) {
 		if (reconnectAttempts>0) {
 			reconnectAttempts--;
-      connectToServer(null);
+			
+			if (authByCookie()){
+        //Authentication by cookie
+        connectToServerWithCookie(); 
+      } else {
+        //Authentication by password
+        connectToServerWithPassword(null);
+      }
       setTimeout ("onReconnect()", 9000);
 		} else {
 			//Notify issue to Rails App Server?
