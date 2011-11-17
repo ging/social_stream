@@ -208,7 +208,7 @@ class Actor < ActiveRecord::Base
     
     as = Actor.select('actors.*').
                # PostgreSQL requires that all the columns must be included in the GROUP BY
-               group(Actor.columns.map(&:name).map{ |c| "actors.#{ c }" }.join(", ")).
+               group((Actor.columns.map(&:name).map{ |c| "actors.#{ c }" } + [ "contacts.created_at" ].join(", ")).
                where('actors.subject_type' => subject_classes)
 
     if options[:load_subjects].nil? || options[:load_subjects]
