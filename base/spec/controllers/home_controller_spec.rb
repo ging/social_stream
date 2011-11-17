@@ -14,7 +14,8 @@ describe HomeController do
 
   describe "when authenticated" do
     before do
-      sign_in Factory(:user)
+      @user = Factory(:user)
+      sign_in @user
     end
 
     it "should render" do
@@ -22,6 +23,20 @@ describe HomeController do
 
       response.should be_success
       response.body.should =~ /activities_share_btn/
+    end
+
+    context "with a group" do
+      before do
+        Factory(:friend,
+                :contact => Factory(:g2g_contact, :sender => @user.actor))
+      end
+
+      it "should render" do
+        get :index
+
+        response.should be_success
+        response.body.should =~ /activities_share_btn/
+      end
     end
 
     describe "when representing" do

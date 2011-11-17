@@ -206,7 +206,9 @@ class Actor < ActiveRecord::Base
     subject_types   = Array(options[:type] || self.class.subtypes)
     subject_classes = subject_types.map{ |s| s.to_s.classify }
     
-    as = Actor.group('actors.id').
+    as = Actor.select('actors.*').
+               # PostgreSQL requires that all the columns must be included in the GROUP BY
+               group(Actor.columns.map(&:name).map{ |c| "actors.#{ c }" }.join(", ")).
                where('actors.subject_type' => subject_classes)
 
     if options[:load_subjects].nil? || options[:load_subjects]
