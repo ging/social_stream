@@ -44,7 +44,7 @@ es:
     not_mine: "Imágenes"
     one: "una imagen"
   repository:
-    title: "Archivos"
+    title: "Ficheros"
     order:
       by: "Ordenar por"
       last_modified: "Última modificación"

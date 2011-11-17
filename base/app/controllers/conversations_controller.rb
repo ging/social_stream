@@ -50,7 +50,7 @@ class ConversationsController < ApplicationController
     else
       @receipts = @mailbox.receipts_for(@conversation).not_trash
     end
-    render :action => :show
+    redirect_to :action => :show
     @receipts.mark_as_read
 
   end
