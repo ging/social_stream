@@ -91,7 +91,8 @@ es:
   comment:
     input: "Comentar..."
     confirm_delete: "¿Borrar commentario?"
-    name: "un comentario"
+    name: "comentario"
+    one: "un comentario"
     view_all: "Ver todos los comentarios"
   contact:
     all_n: "Todos los contactos (%{count})"
