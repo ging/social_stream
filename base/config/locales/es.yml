@@ -453,7 +453,7 @@ es:
     name: "Social Stream"
   subject:
     this_is_you: "¡Eres tú!"
-  sure: "¿Seguro?"
+  sure: "¿Confirmar?"
   time:
     ago: "hace %{time}"
   unknown: "Desconocido"
