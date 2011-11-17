@@ -206,7 +206,7 @@ class Actor < ActiveRecord::Base
     subject_types   = Array(options[:type] || self.class.subtypes)
     subject_classes = subject_types.map{ |s| s.to_s.classify }
     
-    as = Actor.select("DISTINCT actors.*").
+    as = Actor.group(:id).
                where('actors.subject_type' => subject_classes)
 
     if options[:load_subjects].nil? || options[:load_subjects]

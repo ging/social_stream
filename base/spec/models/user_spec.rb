@@ -29,6 +29,22 @@ describe User do
       it "should represent" do
         @user.represented.should include(@group)
       end
+
+      context "and a second group" do
+        before do
+          @second_group =
+            Factory(:member,
+                    :contact => Factory(:group_contact,
+                                        :receiver => @user.actor)
+                   ).sender_subject
+          Factory(:friend, :contact => @user.contact_to!(@second_group))
+        end
+
+        it "should represent both groups" do
+          @user.represented.should include(@group)
+          @user.represented.should include(@second_group)
+        end
+      end
     end
   end
 
