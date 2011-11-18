@@ -326,7 +326,7 @@ es:
     age: "Edad"
     must_be_signed_id: "Debes identificarte"
     group:
-      about: "Sobre nosotros"
+      about: "Sobre nosotros/as"
       birthday: "Aniversario"
       experience: "Temas que se trabajan"
       info: "Información sobre el grupo"
