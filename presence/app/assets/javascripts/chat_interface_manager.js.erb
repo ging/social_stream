@@ -195,3 +195,51 @@ function getAllConnectedSlugs(){
 	});
   return connectedSlugs
 }
+
+
+////////////////////
+//Insert received message in chatbox
+////////////////////
+
+function putReceivedMessageOnChatWindow(from_jid,from_slug,body,msgID){
+	
+	//Antiflood control
+	 if (antifloodControl(from_jid,from_slug,body,msgID)){
+	 	return;
+	 }
+	
+	//Check for from_slug name and connectionBox visibility
+	if (typeof($('div.user_presence[slug=' + from_slug + ']').attr('name')) == 'undefined') {
+		//No connectionBox for this user!
+		var from_name = from_slug;
+		refreshChatWindow();
+	}	else {
+		showConnectionBoxFromSlug(from_slug);
+		var from_name = $('div.user_presence[slug=' + from_slug + ']').attr('name');
+	}
+	
+	
+	//Create or toggle from_slug's chatBox.
+	if (createChatBox(from_slug, from_name, from_jid, user_name, user_jid)) {
+	}	else {
+		window[getChatVariableFromSlug(from_slug)].chatbox("option", "boxManager").toggleBox(true);
+	}
+	
+	//Parse content before show it.
+	var content = getParsedContent(Strophe.getText(body), false)
+	
+	//Show message to chatBox.        
+	$("#" + from_slug).chatbox("option", "boxManager").addMsg(from_name, content);
+	
+	//Rotate chatBoxes priority.
+	rotatePriority(from_slug);
+	
+	//Check for start blinkTitle.
+	blinkTitleOnMessage(from_name);
+	
+	//Check for play sound
+	if (mustPlaySoundForChatWindow(window[getChatVariableFromSlug(from_slug)])) {
+		playSound("onMessageAudio");
+	}
+	
+}

@@ -181,36 +181,11 @@ function onMessage(msg) {
     var elems = msg.getElementsByTagName('body');
 
     if (type == "chat" && elems.length > 0) {
-	
 			var body = elems[0];
 			var from_slug = from.split("@")[0];
-			var from_name = $("#" + from_slug).attr("name");
 			var from_jid = from_slug + "@" + domain;
 		
-		
-		  if (typeof ($('div.user_presence[slug=' + from_slug + ']').attr('name')) == 'undefined') {
-				//No connectionBox for this user!
-		    var from_name = from_slug;
-				refreshChatWindow();
-		  } else {
-				showConnectionBoxFromSlug(from_slug);
-		    var from_name = $('div.user_presence[slug=' + from_slug + ']').attr('name');
-		  }
-			
-			if (createChatBox(from_slug,from_name,from_jid,user_name,user_jid)) {
-			} else {
-        window[getChatVariableFromSlug(from_slug)].chatbox("option", "boxManager").toggleBox(true);
-			}
-			
-			var content = getParsedContent(Strophe.getText(body),false)
-			//Send message to chatBox and post-message functions.					
-			$("#" + from_slug).chatbox("option", "boxManager").addMsg(from_name, content);
-			rotatePriority(from_slug);
-			blinkTitleOnMessage(from_name);
-			if (mustPlaySoundForChatWindow(window[getChatVariableFromSlug(from_slug)])){
-          playSound("onMessageAudio");
-      }
-			
+		  putReceivedMessageOnChatWindow(from_jid,from_slug,body,null)	
     }
 
     // we must return true to keep the handler alive.  

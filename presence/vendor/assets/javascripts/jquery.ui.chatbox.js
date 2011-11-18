@@ -54,11 +54,18 @@
 				//Get highlight color from css
 				var dummy_element = $("<p class=\"chatWindowhighlighted\"></div>");
         var options = {color: $(dummy_element).css("color")};
+				
 		    self.elem.uiChatboxTitlebar.effect("highlight", options, 300);
-		    self.elem.uiChatbox.effect("bounce", {times:3}, 300, function(){
-			     self.highlightLock = false;
-			     self._scrollToBottom();
-		    });
+				
+				
+				if (((typeof mustBounceBoxForChatWindow == 'function')&&(mustBounceBoxForChatWindow(self)))||((typeof mustBounceBoxForChatWindow != 'function'))) {
+					 self.elem.uiChatbox.effect("bounce", {times:3}, 300, function(){
+           self.highlightLock = false;
+           self._scrollToBottom();
+          });
+				} else {
+					 self.highlightLock = false;
+				}
 		},
 		toggleBox: function(show) {
 		    this.elem.uiChatbox.toggle(show);
@@ -187,15 +194,17 @@
 			 )
 		.appendTo(uiChatboxInput)
 	        .keydown(function(event) {
-		    if(event.keyCode && event.keyCode == $.ui.keyCode.ENTER) {
-			msg = $.trim($(this).val());
-			if(msg.length > 0) {
-			    self.options.messageSent(self.options.id, self.options.user, msg);
-			}
-			$(this).val('');
-			return false;
-		    }
-		})
+				    if(event.keyCode && event.keyCode == $.ui.keyCode.ENTER) {
+							if (((typeof floodControl == 'function')&&(floodControl()))||((typeof floodControl != 'function'))) {
+						  	msg = $.trim($(this).val());
+						  	if (msg.length > 0) {
+						  		self.options.messageSent(self.options.id, self.options.user, msg);
+						  	}
+						  	$(this).val('');
+						  }
+							return false;
+				    }
+		      })
 		.focusin(function() {
 		    uiChatboxInputBox.addClass('ui-chatbox-input-focus');
 		    var box = $(this).parent().prev();

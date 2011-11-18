@@ -64,6 +64,132 @@ function blinkTitleOnMessage(username){
 }
 
 
+
+////////////////////
+//Antiflood
+////////////////////
+
+var lastMessageTimes = new Array();
+//lastMessageTimes['from_slug'] = ["timeOfLastMessage",["msgID1","msgID2"]];
+
+var timeBetweenMessages = 500; //mseconds
+
+//Return true when detects a text storm and control the text flood:
+//timeBetweenMessages is the minimum time that must elapse between the messages of the same contact.
+function antifloodControl(from_jid,from_slug,body,msgID) {
+	
+	if( from_slug in lastMessageTimes){
+
+  } else {
+    lastMessageTimes[from_slug] = [,[]];
+  }
+	
+	if (msgID==null){
+		msgID = generateMessageID();
+	}
+	
+	var lastMessageTime = lastMessageTimes[from_slug][0];
+	
+  var t = (new Date()).getTime();
+  if(t - lastMessageTime < timeBetweenMessages) {
+		        //Flood detected
+						return retryToShowMessage(from_jid,from_slug,body,msgID);
+  }
+	
+	//Check if is the first message of this user to be send.
+	//var messageQueue = lastMessageTimes[from_slug][1];
+	
+	if (lastMessageTimes[from_slug][1].length>0){
+		if((lastMessageTimes[from_slug][1])[0]==msgID){
+			//Message is the first on the queue: Show it and remove from the queue
+			lastMessageTimes[from_slug][1].splice(0,1);
+		} else {
+			//Message is not the first on the queue
+			return retryToShowMessage(from_jid,from_slug,body,msgID);
+		}
+	}
+	
+	//Message can be send
+  lastMessageTimes[from_slug][0] = t;	
+  return false;
+};
+
+
+var rootMessageID=1;
+function generateMessageID(){
+	return (++rootMessageID);
+}
+
+
+function retryToShowMessage(from_jid,from_slug,body,msgID){
+	//Enque the message if isn't in the queue
+  if (lastMessageTimes[from_slug][1].indexOf(msgID)==-1){
+    lastMessageTimes[from_slug][1].push(msgID);
+  }
+      
+  setTimeout(function(){putReceivedMessageOnChatWindow(from_jid,from_slug,body,msgID)}, timeBetweenMessages);
+  return true;
+}
+
+
+
+
+
+////////////////////
+//Controlflood
+////////////////////
+var timeBetweenOwnMessages = 500; //mseconds
+var lastMessageSentTime=null;
+
+function floodControl() {
+  var t = (new Date()).getTime();
+	
+	if(lastMessageSentTime==null){
+    lastMessageSentTime = t;
+    return true;
+  }
+	
+	if (t - lastMessageSentTime < timeBetweenOwnMessages) {
+    return false;
+  } else {
+    lastMessageSentTime = t;
+    return true;
+  } 
+};
+
+
+function initControlFlood(){
+	$(".ui-chatbox-input-box")
+}
+
+
+////////////////////
+//Bounce chatbox control
+////////////////////
+var lastBounceTimes = new Array();
+var timeBetweenBounces = 5000; //mseconds
+
+function mustBounceBoxForChatWindow(jqueryUIChatbox){
+	var from_slug = $($(jqueryUIChatbox.elem.uiChatbox).find(".ui-chatbox-content").children()[0]).attr("id")
+	
+  var t = (new Date()).getTime();
+	
+	if(!(from_slug in lastBounceTimes)){
+    lastBounceTimes[from_slug] = t;
+		return true;
+  }
+	 
+  var lastBounceTime = lastBounceTimes[from_slug];
+	
+  if (t - lastBounceTime < timeBetweenBounces) {
+    return false;
+  } else {
+		lastBounceTimes[from_slug] = t;
+		return true;
+	} 
+	
+}
+
 ////////////////////
 //Next features...
 ////////////////////
