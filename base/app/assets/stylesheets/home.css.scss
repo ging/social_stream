@@ -3,6 +3,7 @@
 /******** MAIN Structure home *********/
 #center_body {
 	width: 560px;
+	max-width: 560px;
 	border-right: thin solid $separation-color;
 	border-bottom: thin solid $separation-color;
   border-left: thin solid $separation-color;
