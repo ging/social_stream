@@ -131,6 +131,7 @@ describe PostsController do
         end
       end
     end
+
   end
 
   context "creating post in group's wall" do
@@ -161,6 +162,26 @@ describe PostsController do
       get :show, :id => @post.to_param
 
       response.should be_success
+    end
+  end
+
+  describe "to friend on representation change" do
+    before do
+      @post = Factory(:post)
+
+      @user = @post.post_activity.sender_subject
+
+      @group = Factory(:member, :contact => Factory(:g2g_contact, :receiver => @user.actor)).sender_subject
+
+      Factory(:friend, :contact => Factory(:g2g_contact, :sender => @user.actor))
+
+      sign_in @user
+    end
+
+    it "should redirect show to home" do
+      get :show, :id => @post.to_param, :s => @group.slug
+
+      response.should redirect_to(:home)
     end
   end
 end

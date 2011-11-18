@@ -11,8 +11,8 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n")
 
   # Gem dependencies
-  s.add_runtime_dependency('social_stream-base', '~> 0.9.33')
-  s.add_runtime_dependency('social_stream-documents', '~> 0.4.5')
+  s.add_runtime_dependency('social_stream-base', '~> 0.9.34')
+  s.add_runtime_dependency('social_stream-documents', '~> 0.4.6')
   s.add_runtime_dependency('social_stream-events', '~> 0.0.20')
  
   # Development Gem dependencies
@@ -29,8 +29,10 @@ Gem::Specification.new do |s|
     s.add_development_dependency('sqlite3')
   end
   # Debugging
-  if RUBY_VERSION < '1.9'
-    s.add_development_dependency('ruby-debug', '~> 0.10.3')
+  unless ENV["CI"]
+    if RUBY_VERSION < '1.9'
+      s.add_development_dependency('ruby-debug', '~> 0.10.3')
+    end
   end
   # Specs
   s.add_development_dependency('rspec-rails', '~> 2.5.0')
