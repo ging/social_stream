@@ -14,8 +14,8 @@ en:
       details: "Details"
       download: "Download"
       edit: "Edit"
-    all: "All documents"
-    confirm_delete: "Delete document?"
+    all: "All files"
+    confirm_delete: "Delete file?"
     form:
       title: "File"
     info:
@@ -28,8 +28,8 @@ en:
         title: "Upload"
       title:
         title: "Title"
-    mine: "My documents"
-    msg: "Uploaded a document:"
+    mine: "My files"
+    msg: "Uploaded a file:"
     name: "file"
     not_mine: "Documents"
     one: "a file"
@@ -52,7 +52,7 @@ en:
   resource:
     all: "All Resources"
     confirm_delete: "Delete resource?"
-    title: "Files"
+    title: "Resources"
     mine: "My resources"
     msg: "Uploaded a resource:"
     not_mine: "Resources"

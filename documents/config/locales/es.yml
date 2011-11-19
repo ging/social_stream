@@ -14,8 +14,8 @@ es:
       details: "Detalles"
       download: "Descargar"
       edit: "Editar"
-    all: "Todos los documentos"
-    confirm_delete: "¿Borrar documento?"
+    all: "Todos los ficheros"
+    confirm_delete: "¿Borrar fichero?"
     form:
       title: "Fichero"
     info:
@@ -28,11 +28,11 @@ es:
         title: "Subir"
       title:
         title: "Título"
-    mine: "Mis documentos"
-    msg: "Subió un documento:"
-    name: "documento"
+    mine: "Mis ficheros"
+    msg: "Subió un fichero:"
+    name: "fichero"
     not_mine: "Documentos"
-    one: "un documento"
+    one: "un fichero"
     simple_all: "Todos"
     title: "Documentos"
   picture:
@@ -52,7 +52,7 @@ es:
   resource:
     all: "Todos los recursos"
     confirm_delete: "¿Borrar recursos?"
-    title: "Archivos"
+    title: "Recursos"
     mine: "Mis recursos"
     msg: "Subió un recurso:"
     not_mine: "Recursos"
