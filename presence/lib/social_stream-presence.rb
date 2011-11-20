@@ -1,6 +1,12 @@
 require 'social_stream-base'
 
 module SocialStream
+  module Views
+    module Settings
+      autoload :Presence, 'social_stream/views/settings/presence'
+    end
+  end
+
   module Presence   
 
     autoload :XmppServerOrder, 'social_stream/presence/xmpp_server_order'
@@ -8,6 +14,7 @@ module SocialStream
     module Models
       autoload :BuddyManager, 'social_stream/presence/models/buddy_manager'
     end
+
 
     mattr_accessor :domain
     mattr_accessor :bosh_service

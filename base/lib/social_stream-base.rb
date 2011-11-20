@@ -61,6 +61,12 @@ module SocialStream
     autoload :Object,    'social_stream/models/object'
   end
 
+  module Views
+    module Settings
+      autoload :Base, 'social_stream/views/settings/base'
+    end
+  end
+
   module TestHelpers
     autoload :Controllers, 'social_stream/test_helpers/controllers'
   end
