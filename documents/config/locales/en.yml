@@ -31,10 +31,10 @@ en:
     mine: "My files"
     msg: "Uploaded a file:"
     name: "file"
-    not_mine: "Documents"
+    not_mine: "Files"
     one: "a file"
     simple_all: "All"  
-    title: "Documents"
+    title: "Files"
   picture:
     confirm_delete: "Delete picture?"
     title: "Pictures"
