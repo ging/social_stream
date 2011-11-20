@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   # Activity and Relation hierarchies
   s.add_runtime_dependency('ancestry', '~> 1.2.3')
   # SQL foreign keys
-  s.add_runtime_dependency('foreigner', '~> 0.9.1')
+  s.add_runtime_dependency('foreigner', '~> 1.1.1')
   # Authentication
   s.add_runtime_dependency('devise', '~> 1.4.5')
   # CRUD controllers
