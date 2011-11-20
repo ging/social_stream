@@ -190,7 +190,7 @@ es:
     destroy:
       one: "Destruir grupo"
       explanation: "¡Todas las actividades, información y contactos de este grupo serán destruídos!"
-      go_ahead: "Sí, estoy seguro/a. ¡Adelante!"
+      go_ahead: "Sí, estoy seguro/a. ¡Destruirlo todo!"
       last_confirm: "Es tu última oportunidad. ¿Realmente estás seguro/a?"
     form:
       title: "Grupo"

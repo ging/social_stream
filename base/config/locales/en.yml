@@ -190,7 +190,7 @@ en:
     destroy:
       one: "Destroy group"
       explanation: "All the activities, information and contacts of this group will be destroyed!"
-      go_ahead: "Yes, I am sure. Go ahead"
+      go_ahead: "Yes, I am sure. Destroy all!"
       last_confirm: "This is your last chance. Are you really sure?"
     form:
       title: "Group"
