@@ -135,4 +135,4 @@ module SocialStream
   end
 end
 
-require 'social_stream/base'
+require 'social_stream/base/engine'
