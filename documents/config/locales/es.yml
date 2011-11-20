@@ -31,10 +31,10 @@ es:
     mine: "Mis ficheros"
     msg: "Subió un fichero:"
     name: "fichero"
-    not_mine: "Documentos"
+    not_mine: "Ficheros"
     one: "un fichero"
     simple_all: "Todos"
-    title: "Documentos"
+    title: "Ficheros"
   picture:
     confirm_delete: "¿Borrar imagen?"
     title: "Imágenes"
