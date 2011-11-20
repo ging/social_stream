@@ -509,3 +509,5 @@ class Actor < ActiveRecord::Base
     sent_contacts.active.map(&:receiver_id)
   end
 end
+
+ActiveSupport.run_load_hooks(:actor, Actor)

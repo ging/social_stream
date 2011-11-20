@@ -1,15 +1,11 @@
 module SocialStream
   module Presence
     class Engine < Rails::Engine
-      config.to_prepare do
-        
-        #Patching Tie
-        Tie.class_eval do
+      initializer "social_stream-presence.tie" do
+        ActiveSupport.on_load(:tie) do
           include SocialStream::Presence::Models::BuddyManager
         end
-        
       end
- 
     end
   end
 end

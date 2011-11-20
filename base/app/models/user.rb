@@ -139,3 +139,5 @@ class User < ActiveRecord::Base
     
   end
 end
+
+ActiveSupport.run_load_hooks(:user, User)

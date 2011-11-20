@@ -150,3 +150,5 @@ class Tie < ActiveRecord::Base
       contact.sender_id == relation.actor_id
   end
 end
+
+ActiveSupport.run_load_hooks(:tie, Tie)
