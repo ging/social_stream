@@ -6,9 +6,7 @@ module SocialStream
           super.tap do |items|
             if SocialStream::Presence.enable
               if current_subject == current_user
-                position = items.index{ |i| i[:key] == 'notifications' } + 1
-
-                items.insert position, {
+                items.insert_before 'notifications', {
                   :key  => 'chat',
                   :html => render(:partial => "chat/settings")
                 }

@@ -3,7 +3,7 @@ module SocialStream
     module Settings
       module Base
         def settings_items
-          Array.new.tap do |items|
+          SocialStream::Views::Settings::ItemList.new.tap do |items|
             if current_subject  == current_user
               items << {
                 :key  => 'user.edit',

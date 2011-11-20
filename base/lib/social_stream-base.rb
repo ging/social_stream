@@ -63,7 +63,8 @@ module SocialStream
 
   module Views
     module Settings
-      autoload :Base, 'social_stream/views/settings/base'
+      autoload :Base,     'social_stream/views/settings/base'
+      autoload :ItemList, 'social_stream/views/settings/item_list'
     end
   end
 
