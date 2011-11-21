@@ -23,7 +23,12 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 # Load Factories
 require 'factory_girl'
-base_path = File.join(Gem::GemPathSearcher.new.find('social_stream-base').full_gem_path, 'spec')
+
+if (Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.8.0'))
+  base_path = File.join(Gem::Specification.find_by_name('social_stream-base').full_gem_path, 'spec')
+else
+  base_path = File.join(Gem::GemPathSearcher.new.find('social_stream-base').full_gem_path, 'spec')
+end
 [ base_path,  File.dirname(__FILE__) ].each do |path|
   Dir["#{path}/factories/*.rb"].each {|f| require f}
 end
