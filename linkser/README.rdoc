@@ -1,0 +1,6 @@
+= Social Stream Linkser
+
+Social Stream Linkser provides {Linkser}[https://github.com/ging/linkser/] support in 
+{Social Stream}[http://social-stream.dit.upm.es/], the core for building social
+network websites. 
+
