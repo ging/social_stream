@@ -4,15 +4,15 @@
     <%= link_to thumb_for(picture, 16),
                  picture_path(picture),
                 :type => picture.type, 
-            		:title => picture.file_file_name,
+            		:title => picture.title,
             		:path => document_path(picture) %>
   </div>
   
   <div class="attachment_text picture_summary_class picture_link">
   	<%= t('picture.msg') %>
-  	<%= link_to "\""+picture.file_file_name+"\"", 
+  	<%= link_to "\""+picture.title+"\"", 
                 picture_path(picture),
-                :alt => picture.file_file_name,
+                :alt => picture.title,
                	:type => picture.type,
                	:path => document_path(picture),
                 :class => "attachment_text_link" %>
@@ -22,7 +22,7 @@
     <%= link_to thumb_for(picture, 130),
                 download_document_path(picture),
         :type => picture.type, 
-		:title => picture.file_file_name,
+		:title => picture.title,
 		:path => document_path(picture) %>
   </div>
 <% end %>
