@@ -1,7 +1,7 @@
-<% unless activity_object.object.is_a? Actor or activity_object.object.respond_to? :actor %>
-  <%= render activity_object.object %>
-<% else %>
+<% if activity_object.object.is_a?(Actor) || activity_object.object.ancestors.include?(SocialStream::Models::Subject) %>
   <div class="block">
     <%= model_with_details activity_object.object %>
   </div>
+<% else %>
+  <%= render activity_object.object %>
 <% end %>

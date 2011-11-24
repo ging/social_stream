@@ -14,12 +14,6 @@ module SocialStream
         belongs_to :activity_object, :dependent => :destroy, :autosave => true
         has_many   :activity_object_activities, :through => :activity_object
 
-        delegate :post_activity,
-                 :like_count,
-                 :tag_list, :tag_list=,
-                 :tagged_with, :tag_counts,
-                 :to => :activity_object!
-
         before_create :create_activity_object_with_type
 
         unless self == Actor
@@ -35,18 +29,27 @@ module SocialStream
           activity_object || build_activity_object(:object_type => self.class.to_s)
         end
 
+        # Delegate missing methods to {ActivityObject}, if they exist there
+        def method_missing(method, *args, &block)
+          super
+        rescue NameError => object_error 
+          # These methods must be raised to avoid loops (the :activity_object association calls here again)
+          exceptions = [ :_activity_object_id ]
+          raise object_error if exceptions.include?(method)
+
+          activity_object!.__send__ method, *args, &block
+        end
+
+        # {ActivityObject} handles some methods
+        def respond_to? *args
+          super || activity_object!.respond_to?(*args)
+        end
+
         # All the activities with this object
         def activities
           Activity.
             includes(:activity_objects => self.class.to_s.underscore).
             where("#{ self.class.quoted_table_name }.id" => self.id)
-        end
-
-        # The activity in which this object was posted
-        #
-        # FIXME: Currently it only supports direct objects
-        def post_activity
-          (activities.includes(:activity_verb) & ActivityVerb.verb_name('post')).first
         end
 
         # Build the post activity when this object is not saved
