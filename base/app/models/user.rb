@@ -3,12 +3,17 @@ require 'devise/orm/active_record'
 class User < ActiveRecord::Base
   include SocialStream::Models::Subject
 
-  has_many :authentications, :dependent => :destroy
   devise *SocialStream.devise_modules
+
+  has_many :authentications, :dependent => :destroy
+
+  has_many :user_authored_objects,
+           :class_name => "ActivityObject",
+           :foreign_key => :user_author_id
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :profile_attributes
-  
+
   validates_presence_of :email
 
   validates_format_of :email, :with => Devise.email_regexp, :allow_blank => true

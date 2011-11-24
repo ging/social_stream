@@ -14,6 +14,13 @@ class ActivityObject < ActiveRecord::Base
 
   acts_as_taggable
   
+  # Author can be any type of Actor: User, Group, etc.
+  belongs_to :author, :class_name => "Actor"
+  # UserAuthor is the real user behind the Author
+  belongs_to :user_author, :class_name => "Actor"
+  # Owner is the wall's subject this object is posted to
+  belongs_to :owner, :class_name => "Actor"
+
   has_many :activity_object_activities, :dependent => :destroy
   has_many :activities, :through => :activity_object_activities
 

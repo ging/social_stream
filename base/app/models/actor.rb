@@ -58,6 +58,16 @@ class Actor < ActiveRecord::Base
   has_many :relations,
            :dependent => :destroy
 
+  has_many :authored_objects,
+           :class_name => "ActivityObject",
+           :foreign_key => :author_id,
+           :dependent => :destroy
+
+  has_many :owned_objects,
+           :class_name => "ActivityObject",
+           :foreign_key => :owner_id,
+           :dependent => :destroy
+
   scope :alphabetic, order('actors.name')
 
   scope :letter, lambda { |param|
