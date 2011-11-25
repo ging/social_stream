@@ -172,14 +172,11 @@ class XmppController < ApplicationController
     redirect_to :controller => :settings, :action => :index
   end
   
-  #TEST METHODS
+  
+  #Test Method
   def active_users
     @users = User.find_all_by_connected(true)
     @all_users = User.all
-  end
-   
-  def test
-    #puts "TEST"
   end
   
   

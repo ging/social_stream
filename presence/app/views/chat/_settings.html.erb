@@ -1,7 +1,7 @@
 <div class="block" id="chat_settings">
     <div class="header">
         <div class="header_text">
-             Chat
+             <%=t('chat.title')%>
         </div>
         <div class="header_icon_right">
           <%= link_to (image_tag('btn/edit.png')),  "javascript:showSettings(\"chat_settings\");" %>
@@ -9,7 +9,7 @@
     </div>
     <div id="chat_settings_briefing" class="settings_briefing content">        
         <div class="form_row">
-            Enable and configure Social Stream Chat
+            <%=t('chat.settings.title')%>
         </div>
     </div>
     <div class="content settings_content" id="chat_settings_content" style="display:none;">
@@ -21,11 +21,11 @@
           <div class="form_sub_row">
             <% checked = current_user.chat_enabled %>
             <%= check_box_tag 'enable_chat', true, checked %>
-            <%= label_tag(:enable_chat, "Enable or disable Social Stream Chat") %> 
+            <%= label_tag(:enable_chat, t('chat.settings.checkbox')) %> 
           </div>
           <div class="actions center">
               <%= hidden_field_tag :settings_section, :chat %>
-              <%= submit_tag "Update Settings", :class => "button" %>
+              <%= submit_tag t('chat.settings.update'), :class => "button" %>
           </div>
         </div>
         </ul>

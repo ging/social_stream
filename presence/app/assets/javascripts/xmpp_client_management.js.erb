@@ -258,7 +258,7 @@ function sendChatMessage(from,to,text){
     body.t(text);
     var message = $msg({to: to, from: from, type: 'chat'}).cnode(body.tree());
     connection.send(message.tree());	  	
-		resumeAwayTimerIfAway();
+		restartAwayTimer(false);
 		return true;
 }
 
@@ -275,5 +275,6 @@ function sendStatus(status){
       .c('show')
       .t(status);
        connection.send(pres.tree());
+			 setStatusWidgetTitle(status);
     }
 }

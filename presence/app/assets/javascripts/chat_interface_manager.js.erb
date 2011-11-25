@@ -1,6 +1,9 @@
 ////////////////////
 //Hash table
 ////////////////////
+
+//Keys: Xmpp status
+//Value: Social Stream Status
 var statusIcons = new Array();
 statusIcons[''] = "available";
 statusIcons['chat'] = "available";
@@ -63,29 +66,55 @@ function setUserFunctions(){
 	$(".dropdown dt a").click(function(event) {
 	 	event.preventDefault();
     $(".dropdown dd ul").toggle();
+		
+		if($(".dropdown dd ul").is(":visible")){
+			setStatusWidgetTitle("default");
+		} else {
+			setStatusWidgetTitle(userStatus);
+		}
+		
+		restartAwayTimer(false);
+		
   });
           
   $(".dropdown dd ul li a.option").click(function(event) { 
 	  event.preventDefault();
-		var text = $(this).html();
-    $(".dropdown dt a span").html(text);
-    userStatus = getSelectedValue("status");
+		userStatus = $(this).find("span.value").html();
     sendStatus(userStatus);
 		$(".dropdown dd ul").hide();
   });
   
-       
-  function getSelectedValue(id) {
-    return $("#" + id).find("dt a span.value").html();
-  }
   
   $(document).bind('click', function(e) {
     var $clicked = $(e.target);
     if (! $clicked.parents().hasClass("dropdown")){
       //Click outside the select...
         $(".dropdown dd ul").hide();
+				setStatusWidgetTitle(userStatus);
     }
   });
+	
+}
+
+function setStatusWidgetTitle(status){
+	
+	if ($(".dropdown dt a span").length == 0){
+		return;
+	}
+	
+  if (status in statusIcons) {
+		
+	  if ($("#" + statusIcons[status]).length == 0){
+      return;
+    }
+	  var text = $("#" + statusIcons[status]).html();
+    $(".dropdown dt a span").html(text);
+		
+  } else if(status=="default"){
+    var defaultTitle = '<%=I18n.t('chat.status.choose')%>'
+    $(".dropdown dt a span").html(defaultTitle);
+  }
+	 
 }
 
 
@@ -96,21 +125,32 @@ function setUserFunctions(){
 function awayTimerFunction(){
 	  awayCounter++;
 	  if (awayCounter > (awayTime/awayTimerPeriod)){
-	    userStatus = "away";
-			sendStatus(userStatus);
+			if (userStatus != "dnd") {
+	  	  userStatus = "away";
+	  	  sendStatus(userStatus);
+	    }
 			clearTimeout(awayTimer);
-	  } else {
-	    userStatus = "chat";
 	  }
 }
 
-function resumeAwayTimerIfAway(){
+function autochangeStatusOnUserAway(){
 	  if (userStatus == "away"){
-			awayCounter = 0;
-			userStatus = "chat";
-			sendStatus(userStatus);
+      userStatus = "chat";
+      sendStatus(userStatus);
+    }
+}
+
+function restartAwayTimer(autochangeStatus){
+		
+		if (awayCounter > (awayTime/awayTimerPeriod)){
 			awayTimer = setInterval("awayTimerFunction()", awayTimerPeriod);
+			
+			if(autochangeStatus){
+        autochangeStatusOnUserAway();
+      }
 		}
+		
+		awayCounter = 0;		
 }
 
 
@@ -144,6 +184,7 @@ function updateChatWindow(){
 			$(".tooltip").hide() //Prevent tooltips
       $("#chat_partial").html(data);
       if (userConnected) {
+				setStatusWidgetTitle(userStatus);
         $(".user_presence a[title]").tooltip();
         setUserFunctions();
       }

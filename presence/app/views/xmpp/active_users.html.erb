@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Demo2</title>
+  <title>Social Stream Presence</title>
 </head>
 <body>
 
 
-<p> Usuarios conectados Social Stream </p>
+<p> Social Stream connected users </p>
 
 <p>&nbsp;</p>
 <ul>
-<%@users.each do |user| %>
-  <li><b><%=user.name%></b></li>
-<%end%>
+  <%@users.each do |user| %>
+    <li><b><%=user.name%></b></li>
+  <%end%>
  </ul>
 <p>&nbsp;</p>
 
 
-<p> Usuarios Social Stream </p>
+<p> All Social Stream users </p>
 
 <p>&nbsp;</p>
 <ul>
-<%@all_users.each do |user| %>
-  <li><b><%=user.slug%></b> with email: <%=user.email%></li>
-<%end%>
+  <%@all_users.each do |user| %>
+    <li><b><%=user.slug%></b> with email: <%=user.email%></li>
+  <%end%>
  </ul>
 <p>&nbsp;</p>
  
-<p> <a href="/test">Volver</a></p>
+<p> <a href="/test">Come back</a></p>
 
 </body>
 </html>

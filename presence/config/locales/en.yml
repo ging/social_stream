@@ -9,3 +9,7 @@ en:
       available: "Available"
       away: "Away"
       dnd: "Busy"
+    settings:
+      title: "Enable and configure Social Stream Chat"  
+      checkbox: "Enable or disable Social Stream Chat"  
+      update: "Update Settings"
