@@ -135,7 +135,9 @@ function onConnect(status) {
    log('Strophe is disconnected.');
    userConnected = false;
 	 clearTimeout(awayTimer);
-   setTimeout ("onReconnect()", 3000);
+	 if(userStatus!="offline"){
+	 	setTimeout ("onReconnect()", 3000);
+	 }
   } else if (status == Strophe.Status.CONNECTED) {
    log('Strophe is connected.');
    log('Presenze stanza send for:' + connection.jid);
@@ -144,6 +146,7 @@ function onConnect(status) {
    //addHandler:(callback, namespace to match, stanza name, stanza type, stanza id , stanza from, options)
    sendStatus(userStatus);
    userConnected = true;
+	 userStatus = "chat";
    awayTimer = setInterval("awayTimerFunction()", awayTimerPeriod);
 	 timer = setInterval("timerFunction()", timerPeriod);
   }
@@ -170,6 +173,12 @@ function onReconnect(){
 	}
 }
 
+function disconnectStrophe(){
+	userStatus = "offline";
+	connection.send($pres({type: "unavailable"}).tree()); 
+	connection.disconnect();
+	setStatusWidgetTitle("offline");
+}
 
 ////////
 //Manage Message stanzas
@@ -198,7 +207,7 @@ function onMessage(msg) {
 //Manage Presence stanzas
 ///////
 function onPresence(presence) {
-	 
+	  
 	  //Check presence stanza type
 		ptype = $(presence).attr('type');
 				

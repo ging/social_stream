@@ -80,7 +80,11 @@ function setUserFunctions(){
   $(".dropdown dd ul li a.option").click(function(event) { 
 	  event.preventDefault();
 		userStatus = $(this).find("span.value").html();
-    sendStatus(userStatus);
+		if(userStatus == "offline"){
+			disconnectStrophe();
+		} else {
+			sendStatus(userStatus);
+		}
 		$(".dropdown dd ul").hide();
   });
   
@@ -102,17 +106,21 @@ function setStatusWidgetTitle(status){
 		return;
 	}
 	
-  if (status in statusIcons) {
-		
-	  if ($("#" + statusIcons[status]).length == 0){
-      return;
-    }
-	  var text = $("#" + statusIcons[status]).html();
-    $(".dropdown dt a span").html(text);
-		
-  } else if(status=="default"){
+	if(status=="default"){
     var defaultTitle = '<%=I18n.t('chat.status.choose')%>'
     $(".dropdown dt a span").html(defaultTitle);
+		return;
+  }
+	
+	if(status=="offline"){
+		var text = $("#" + status).html();
+    $(".dropdown dt a span").html(text);
+		return;
+	}
+	
+  if ((status in statusIcons)&&($("#" + statusIcons[status]).length > 0)) {		
+	  var text = $("#" + statusIcons[status]).html();
+    $(".dropdown dt a span").html(text);
   }
 	 
 }
