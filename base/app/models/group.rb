@@ -33,13 +33,17 @@ class Group < ActiveRecord::Base
 
   # Creates the ties from the founder to the group
   def create_ties_from_founder
-    _contact.sender.sent_contacts.create! :receiver_id  => actor_id,
-                                          :relation_ids => _relation_ids
+    author.sent_contacts.create! :receiver_id  => actor_id,
+                                 :relation_ids => _relation_ids
+
+    if represented_author?
+      # TODO: create tie with future representation relation
+    end
   end
   
   # Creates the ties from the group to the participants
   def create_ties_to_participants
-    ([ _contact.sender_id, _contact.receiver_id ] | Array.wrap(@_participants)).uniq.each do |a|
+    ([ author_id, user_author_id ].uniq | Array.wrap(@_participants)).uniq.each do |a|
       sent_contacts.create! :receiver_id => a,
                             :relation_ids => Array(relation_customs.sort.first.id)
     end

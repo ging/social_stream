@@ -2,9 +2,12 @@ require 'spec_helper'
 
 describe Group do
   it "should save description" do
-    g = Group.create(:name => "Test",
+    user = Factory(:user)
+
+    g = Group.create :name => "Test",
                      :description => "Testing description",
-                     :_contact_id => Factory(:user).ego_contact.id)
+                     :author_id => user.actor.id,
+                     :user_author_id => user.actor.id
 
     g.reload.description.should be_present
   end

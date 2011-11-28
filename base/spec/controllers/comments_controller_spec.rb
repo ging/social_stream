@@ -14,9 +14,10 @@ describe CommentsController do
     describe "comment from user" do
       before do
         activity = Factory(:self_activity, :contact => Factory(:self_contact, :sender => @user.actor))
-        contact = @user.contact_to!(@user)
 
-        model_attributes[:_contact_id] = contact.id
+        model_attributes[:author_id] = @user.actor_id
+        model_attributes[:owner_id]  = @user.actor_id
+        model_attributes[:user_author_id] = @user.actor_id
         model_attributes[:_activity_parent_id] = activity.id
       end
 
@@ -38,9 +39,10 @@ describe CommentsController do
       before do
         f = Factory(:friend, :contact => Factory(:contact, :receiver => @user.actor)).sender
         activity = Factory(:self_activity, :contact => f.contact_to!(f))
-        contact = @user.contact_to!(f)
 
-        model_attributes[:_contact_id] = contact.id
+        model_attributes[:author_id] = @user.actor_id
+        model_attributes[:owner_id]  = f.id
+        model_attributes[:user_author_id] = @user.actor_id
         model_attributes[:_activity_parent_id] = activity.id
       end
 
@@ -51,9 +53,10 @@ describe CommentsController do
       before do
         a = Factory(:acquaintance, :contact => Factory(:contact, :receiver => @user.actor)).sender
         activity = Factory(:self_activity, :contact => a.contact_to!(a))
-        contact = @user.contact_to!(a)
 
-        model_attributes[:_contact_id] = contact.id
+        model_attributes[:author_id] = @user.actor_id
+        model_attributes[:owner_id]  = a.id
+        model_attributes[:user_author_id] = @user.actor_id
         model_attributes[:_activity_parent_id] = activity.id
       end
 

@@ -2,18 +2,19 @@ Factory.define :document do |d|
   d.file { Rack::Test::UploadedFile.new(File.join(File.dirname(__FILE__), 'files', 'small.pdf'),
                                        'application/pdf') }
 
-  d._contact_id { Factory(:friend).contact_id }
-  d._relation_ids { |q| Array(Contact.find(q._contact_id).sender.relation_customs.sort.first.id) }
+  d.author_id { Factory(:friend).receiver.id }
+  d.owner_id  { |q| Actor.find(q.author_id).received_ties.first.sender.id }
+  d.user_author_id { |q| q.author_id }
 end
 
 Factory.define :public_document, :parent => :document do |d|
-  d._contact_id { Factory(:self_contact).id }
-  d._relation_ids { |q| Array(Contact.find(q._contact_id).sender.relation_public.id) }
+  d.owner_id  { |q| q.author_id }
+  d._relation_ids { |q| Array(q.author.relation_public.id) }
 end
 
 Factory.define :private_document, :parent => :document do |d|
   d.file { Rack::Test::UploadedFile.new(File.join(File.dirname(__FILE__), 'files', 'small.pdf'),
                                        'application/pdf') }
-  d._contact_id { Factory(:self_contact).id }
-  d._relation_ids { |q| Array(Contact.find(q._contact_id).sender.relation_customs.sort.first.id) }
+  d.owner_id  { |q| q.author_id }
+  d._relation_ids  { |q| Actor.find(q.author_id).relation_customs.sort.first.id }
 end

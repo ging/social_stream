@@ -36,7 +36,9 @@ describe Post do
       tie = Factory(:friend)
 
       post = Post.new :text => "testing",
-                      :_contact_id => tie.contact.inverse!.id
+                      :author_id => tie.receiver.id,
+                      :owner_id => tie.sender.id,
+                      :user_author_id => tie.receiver.id
 
       assert post.build_post_activity.allow? tie.receiver_subject, 'create'
 
@@ -49,7 +51,9 @@ describe Post do
       tie = Factory(:friend)
 
       post = Post.new :text => "testing",
-                      :_contact_id => tie.contact.inverse!.id
+                      :author_id => tie.receiver.id,
+                      :owner_id => tie.sender.id,
+                      :user_author_id => tie.receiver.id
 
       post.save!
 

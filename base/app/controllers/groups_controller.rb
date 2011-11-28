@@ -51,7 +51,8 @@ class GroupsController < InheritedResources::Base
   private
 
   def set_founder
-    params[:group]               ||= {}
-    params[:group][:_contact_id] ||= current_subject.ego_contact.id
+    params[:group]                  ||= {}
+    params[:group][:author_id]      ||= current_subject.try(:actor_id)
+    params[:group][:user_author_id] ||= current_user.try(:actor_id)
   end
 end

@@ -2,10 +2,11 @@ require 'spec_helper'
 
 module ActivityTestHelper
   def create_activity(contact, relations)
-    @activity = Factory(:activity,
-                        :contact_id => contact.id,
-                        :relation_ids => Array(Relation.normalize_id(relations)))
-
+    @activity = Factory(:post,
+                        :author_id => contact.sender.id,
+                        :owner_id  => contact.receiver.id,
+                        :user_author_id => contact.sender.id,
+                        :_relation_ids => Array(Relation.normalize_id(relations))).post_activity
   end
 
   def create_ability_accessed_by(subject)

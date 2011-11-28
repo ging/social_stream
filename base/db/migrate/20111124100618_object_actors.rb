@@ -17,11 +17,23 @@ class ObjectActors < ActiveRecord::Migration
     ActivityObject.record_timestamps = false
 
     ActivityObject.all.each do |a|
-      next if a.object_type == "Actor"
+      if a.object_type == "Actor"
+        next if a.object.is_a? User
 
-      a.author = a.post_activity.sender
-      a.owner  = a.post_activity.receiver
-      a.user_author = (a.author.is_a?(User) ? a.author : a.author.sent_ties.order(:created_at).first.receiver)
+        author = user_author = a.object.sent_ties.order(:created_at).first.receiver
+
+        until user_author.subject_type == "User"
+          user_author = user_author.sent_ties.order(:created_at).first.receiver
+        end
+
+        a.author = author
+        a.user_author = user_author
+      else
+        a.author = a.post_activity.sender
+        a.owner  = a.post_activity.receiver
+        a.user_author = (a.author.is_a?(User) ? a.author : a.author.sent_ties.order(:created_at).first.receiver)
+      end
+
       a.save!
     end
   end

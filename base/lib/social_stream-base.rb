@@ -51,8 +51,9 @@ module SocialStream
   autoload :TestHelpers, 'social_stream/test_helpers'
 
   module Controllers
-    autoload :Helpers, 'social_stream/controllers/helpers'
     autoload :CancanDeviseIntegration, 'social_stream/controllers/cancan_devise_integration'
+    autoload :Helpers, 'social_stream/controllers/helpers'
+    autoload :Objects, 'social_stream/controllers/objects'
   end
 
   module Models

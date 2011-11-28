@@ -9,9 +9,8 @@
         <%= current_subject.name %>
       </div>
       <%= form_for Comment.new(:text => t('comment.input'),
-                              :_contact_id =>
-                                current_subject.contact_to!(activity.receiver).id,
-                              :_activity_parent_id => activity.id
+                               :owner_id => Actor.normalize_id(activity.receiver),
+                               :_activity_parent_id => activity.id
                   ),
                 :html => { :class => "new_comment", :id => "new_comment"+dom_id(activity)  },
                 :remote => true do |f| %>

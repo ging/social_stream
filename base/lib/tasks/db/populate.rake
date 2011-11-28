@@ -91,7 +91,8 @@ namespace :db do
 
         Group.create! :name  => Forgery::Name.company_name,
                       :email => Forgery::Internet.email_address,
-                      :_contact_id => founder.ego_contact.id
+                      :author_id => founder.id,
+                      :user_author_id => founder.id
       end
 
       set_tags(Group)
@@ -128,11 +129,17 @@ namespace :db do
       SocialStream::Populate.power_law(Tie.all) do |t|
         updated = Time.at(rand(Time.now.to_i))
 
+        author = t.sender
+        owner  = t.receiver
+        user_author = ( t.sender.subject_type == "User" ? t.sender : t.sender.user_author )
+
         p = Post.create :text =>
                       "This post should be for #{ t.relation.name } of #{ t.sender.name }.\n#{ Forgery::LoremIpsum.paragraph(:random => true) }",
                         :created_at => Time.at(rand(updated.to_i)),
                         :updated_at => updated,
-                        :_contact_id => t.contact_id,
+                        :author_id  => author.id,
+                        :owner_id   => owner.id,
+                        :user_author_id => user_author.id,
                         :_relation_ids => Array(t.relation_id)
 
         p.post_activity.update_attributes(:created_at => p.created_at,

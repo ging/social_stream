@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 describe PostsController do
   include SocialStream::TestHelpers
   include SocialStream::TestHelpers::Controllers
@@ -19,7 +18,10 @@ describe PostsController do
           contact = @user.contact_to!(@user)
           relation = @user.relation_customs.sort.first
           model_assigned_to @user.contact_to!(@user), relation
-          @current_model = Factory(:post, :_contact_id => contact.id, :_relation_ids => Array(relation.id))
+          @current_model = Factory(:post, :author_id => @user.actor_id,
+                                          :owner_id  => @user.actor_id,
+                                          :user_author_id => @user.actor_id,
+                                          :_relation_ids => Array(relation.id))
         end
 
         it_should_behave_like "Allow Creating"
@@ -31,7 +33,10 @@ describe PostsController do
           contact = @user.contact_to!(@user)
           relation = @user.relation_customs.sort.last
           model_assigned_to @user.contact_to!(@user), relation
-          @current_model = Factory(:post, :_contact_id => contact.id, :_relation_ids => Array(relation.id))
+          @current_model = Factory(:post, :author_id => @user.actor_id,
+                                          :owner_id  => @user.actor_id,
+                                          :user_author_id => @user.actor_id,
+                                          :_relation_ids => Array(relation.id))
         end
 
         it_should_behave_like "Allow Creating"
@@ -43,7 +48,9 @@ describe PostsController do
           contact = @user.contact_to!(@user)
           relation = @user.relation_public
           model_assigned_to @user.contact_to!(@user), relation
-          @current_model = Factory(:post, :_contact_id => contact.id)
+          @current_model = Factory(:post, :author_id => @user.actor_id,
+                                          :owner_id  => @user.actor_id,
+                                          :user_author_id => @user.actor_id)
         end
 
         it_should_behave_like "Allow Creating"
@@ -82,7 +89,10 @@ describe PostsController do
           relation = @group.relation_custom('member')
 
           model_assigned_to contact, relation
-          @current_model = Factory(:post, :_contact_id => contact.id, :_relation_ids => Array(relation.id))
+          @current_model = Factory(:post, :author_id => contact.sender.id,
+                                          :owner_id  => contact.receiver.id,
+                                          :user_author_id => contact.sender.id,
+                                          :_relation_ids => Array(relation.id))
         end
 
         it_should_behave_like "Allow Creating"
@@ -99,7 +109,10 @@ describe PostsController do
             contact = @group.contact_to!(@group)
             relation = @group.relation_customs.sort.first
             model_assigned_to contact, relation
-            @current_model = Factory(:post, :_contact_id => contact.id, :_relation_ids => Array(relation.id))
+            @current_model = Factory(:post, :author_id => contact.sender.id,
+                                            :owner_id  => contact.receiver.id,
+                                            :user_author_id => contact.sender.id,
+                                            :_relation_ids => Array(relation.id))
           end
 
           it_should_behave_like "Allow Creating"
@@ -111,7 +124,10 @@ describe PostsController do
             contact = @group.contact_to!(@group)
             relation = @group.relation_customs.sort.last
             model_assigned_to contact, relation
-            @current_model = Factory(:post, :_contact_id => contact.id, :_relation_ids => Array(relation.id))
+            @current_model = Factory(:post, :author_id => contact.sender.id,
+                                            :owner_id  => contact.receiver.id,
+                                            :user_author_id => contact.sender.id,
+                                            :_relation_ids => Array(relation.id))
           end
 
           it_should_behave_like "Allow Creating"
@@ -123,7 +139,10 @@ describe PostsController do
             contact = @group.contact_to!(@group)
             relation = @group.relation_public
             model_assigned_to contact, relation
-            @current_model = Factory(:post, :_contact_id => contact.id, :_relation_ids => Array(relation.id))
+            @current_model = Factory(:post,  :author_id => contact.sender.id,
+                                             :owner_id  => contact.receiver.id,
+                                             :user_author_id => contact.sender.id,
+                                             :_relation_ids => Array(relation.id))
           end
 
           it_should_behave_like "Allow Creating"
@@ -143,13 +162,30 @@ describe PostsController do
       sign_in @tie.receiver_subject
 
       post :create, :post => { :text => "Test",
-                               :_contact_id => @tie.contact.inverse!.id,
+                               :owner_id  => @tie.contact.sender.id
                              }
 
       post = assigns(:post)
 
       post.should be_valid
       post.post_activity.relations.should include(@tie.relation)
+    end
+
+    it "should assign activity to member" do
+      sign_in @tie.receiver_subject
+
+      post :create, :post => { :text => "Test",
+                               :owner_id  => @tie.contact.sender.id
+                             },
+                    :format => :js
+                             
+
+      post = assigns(:post)
+
+      post.should be_valid
+      post.post_activity.relations.should include(@tie.relation)
+
+      response.should be_success
     end
   end
 

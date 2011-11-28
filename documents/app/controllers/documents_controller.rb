@@ -1,12 +1,10 @@
-class DocumentsController < InheritedResources::Base
+class DocumentsController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
-  respond_to :html, :js
+  include SocialStream::Controllers::Objects
 
   belongs_to_subjects :optional => true
 
   before_filter :profile_subject!, :only => :index
-
-  load_and_authorize_resource :except => :index
 
   PER_PAGE=20
   SEND_FILE_METHOD = :default
@@ -65,12 +63,6 @@ class DocumentsController < InheritedResources::Base
     end
 
     send_file(path, send_file_options)
-  end
-
-  def destroy
-    @post_activity = resource.post_activity
-
-    destroy!
   end
 
   private

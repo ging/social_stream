@@ -31,6 +31,7 @@ module ActivitiesHelper
   def new_post(receiver)
     return Post.new unless user_signed_in?
 
-    Post.new :_contact_id => current_subject.contact_to!(receiver).id
+    Post.new :author_id => Actor.normalize_id(current_subject),
+             :owner_id  => Actor.normalize_id(receiver)
   end
 end

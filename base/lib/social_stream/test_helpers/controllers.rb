@@ -33,7 +33,9 @@ module SocialStream
       end
 
       def model_assigned_to contact, relation_ids
-        model_attributes[:_contact_id] = contact.id
+        model_attributes[:author_id] = contact.sender.id
+        model_attributes[:owner_id]  = contact.receiver.id
+        model_attributes[:user_author_id] = contact.sender.id
         model_attributes[:_relation_ids] = Array(relation_ids).map(&:id)
       end
 

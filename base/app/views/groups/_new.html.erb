@@ -19,9 +19,6 @@
 <div class="space_center"></div>
 
 <%= form_for @group do |f| %>
-	<% f.object._contact_id ||= current_subject.ego_contact.id %>
-	<%= f.hidden_field :_contact_id %>
-
 	<% if @group.errors.any? %>
 		<div id="notice">
 			<h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>

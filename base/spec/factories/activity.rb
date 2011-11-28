@@ -38,11 +38,12 @@ Factory.define :public_activity, :parent => :activity do |a|
   a.relation_ids  { |b| Array(b.sender.relation_public.id) }
 end
 
-Factory.define :like_activity, :parent => :activity do |a|
+Factory.define :like_activity, :class => 'Activity' do |a|
   a.association :parent, :factory => :activity
   a.contact { |b| Factory(:friend, :sender => b.parent.sender).receiver.contact_to!(b.parent.sender) }
   a.activity_verb { ActivityVerb["like"] }
-  a.relation_ids { |b| Array(b.parent.contact.ties.first.relation.id) }
+  a.relation_ids  { |b| b.parent.relation_ids }
+  a.after_build{ |b| b.activity_object_ids = b.parent.activity_object_ids }
 end
 
 

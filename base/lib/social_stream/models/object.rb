@@ -7,17 +7,20 @@ module SocialStream
       extend ActiveSupport::Concern
 
       included do
-        attr_accessor :_contact_id
         attr_writer   :_relation_ids
         attr_accessor :_activity_parent_id
 
-        belongs_to :activity_object, :dependent => :destroy, :autosave => true
+        belongs_to :activity_object,
+                   :validate  => true,
+                   :autosave => true,
+                   :dependent => :destroy
+
         has_many   :activity_object_activities, :through => :activity_object
 
-        before_create :create_activity_object_with_type
+#        before_create :create_activity_object_with_type
 
         unless self == Actor
-          validates_presence_of :_contact_id, :on => :create
+          validates_presence_of :author_id, :owner_id, :user_author_id
 
           after_create :create_post_activity
           after_update :create_update_activity
@@ -45,6 +48,11 @@ module SocialStream
           super || activity_object!.respond_to?(*args)
         end
 
+        # Was the author represented with this {SocialStream::Models::Object object} was created?
+        def represented_author?
+          author_id == user_author_id
+        end
+
         # All the activities with this object
         def activities
           Activity.
@@ -68,7 +76,11 @@ module SocialStream
         end
 
         def _contact
-          @_contact ||= Contact.find(_contact_id)
+          @_contact ||= author && owner && author.contact_to!(owner)
+        end
+
+        def _contact_id
+          _contact.try(:id)
         end
 
         def _relation_ids
@@ -91,16 +103,6 @@ module SocialStream
 
         def _activity_parent
           @_activity_parent ||= Activity.find(_activity_parent_id)
-        end
-
-        # The {SocialStream::Models::Subject subject} that posted this object
-        def _author
-          post_activity.contact.sender_subject
-        end
-
-        # The owner of the wall where {#_author} posted this object
-        def _owner
-          post_activity.contact.receiver_subject
         end
 
         private

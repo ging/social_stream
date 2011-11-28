@@ -26,9 +26,7 @@ describe GroupsController do
 
     context "faking a new group" do
       it "should deny creating" do
-        post :create, :group => { :name => "Test",
-                                  :_contact_id => Factory(:user).ego_contact.id
-                                }
+        post :create, :group => { :name => "Test" }
 
         response.should redirect_to(new_user_session_path)
       end
@@ -79,7 +77,8 @@ describe GroupsController do
 
     context "a new own group" do
       before do
-        model_attributes[:_contact_id] = @user.ego_contact.id
+        model_attributes[:author_id] = @user.actor_id
+        model_attributes[:user_author_id] = @user.actor_id
       end
 
       it "should allow creating" do
@@ -125,7 +124,10 @@ describe GroupsController do
 
     context "a new fake group" do
       before do
-        model_attributes[:_contact_id] = Factory(:user).ego_contact.id
+        user = Factory(:user)
+
+        model_attributes[:author_id] = user.actor_id
+        model_attributes[:user_author_id] = user.actor_id
       end
 
       it_should_behave_like "Deny Creating"
