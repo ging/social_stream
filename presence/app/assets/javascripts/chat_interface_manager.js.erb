@@ -18,19 +18,20 @@ statusIcons['dnd'] = "dnd";
 
 var connectButtonTimer;
 var periodBetweenAttempts=15; //(seg)
-var connectButtonTimerCounter=periodBetweenAttempts;
+var connectButtonTimerCounter=periodBetweenAttempts+1;
 
 function connectButtonTimerFunction(){
-	  if(connectButtonTimerCounter < periodBetweenAttempts){
-			connectButtonTimerCounter++;
-		} else if (connectButtonTimerCounter == periodBetweenAttempts) {
+		connectButtonTimerCounter++;
+		if (connectButtonTimerCounter > (periodBetweenAttempts-1)) {
+			clearTimeout(connectButtonTimer);
 			$("#chat_header_title").html('<%=I18n.t('chat.disconnected')%>')
 		}
 }
 
 function requestConnectToChat(){
   if (connectButtonTimerCounter > (periodBetweenAttempts-1)) {
-    connectButtonTimerCounter=0; 
+    connectButtonTimerCounter=0;
+		connectButtonTimer = setInterval("connectButtonTimerFunction()", 1000) 
 		$("#chat_header_title").html('<%=I18n.t('chat.connecting')%>')
     return true
   } else {
