@@ -188,10 +188,11 @@ function refreshChatWindow(){
 function updateChatWindow(){
 	timerCounter=0;
 	log("updateChatWindow()");
-  $.post("/chatWindow", { userConnected: userConnected }, function(data){
+	var stropheConnectedAndOnlineStatus = ((isStropheConnected()) && (userStatus!="offline") && (!disconnectionFlag));
+  $.post("/chatWindow", { userConnected: stropheConnectedAndOnlineStatus }, function(data){
 			$(".tooltip").hide() //Prevent tooltips
       $("#chat_partial").html(data);
-      if (userConnected) {
+      if (isStropheConnected()) {
 				setStatusWidgetTitle(userStatus);
         $(".user_presence a[title]").tooltip();
         setUserFunctions();

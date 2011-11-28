@@ -1,7 +1,9 @@
 en:
   chat:
     connecting: "Chat Connecting"
+    reconnecting: "Chat Reconnecting"
     disconnected: "Chat Disconnected"
+    unableconnect: "Chat Disconnected"
     title: "Chat"
     password: "Password"
     status: 
