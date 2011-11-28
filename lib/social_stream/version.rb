@@ -1,3 +1,3 @@
 module SocialStream
-  VERSION = "0.12.14".freeze
+  VERSION = "0.13.0".freeze
 end
