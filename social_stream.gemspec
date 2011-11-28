@@ -3,15 +3,15 @@ require File.join(File.dirname(__FILE__), 'lib', 'social_stream', 'version')
 Gem::Specification.new do |s|
   s.name = "social_stream"
   s.version = SocialStream::VERSION.dup
-  s.summary = "Social networking features and activity streams for Ruby on Rails."
-  s.description = "Ruby on Rails engine supporting social networking features and activity streams."
+  s.summary = "A core for building social network websites"
+  s.description = "Social Stream is a Ruby on Rails engine for building social network websites. It supports contacts, posts, file uploads, private messages and many more."
   s.authors = [ "GING - DIT - UPM",
                 "CISE - ESPOL" ]
   s.homepage = "http://social-stream.dit.upm.es/"
   s.files = `git ls-files`.split("\n")
 
   # Gem dependencies
-  s.add_runtime_dependency('social_stream-base', '~> 0.10.0')
+  s.add_runtime_dependency('social_stream-base', '~> 0.10.1')
   s.add_runtime_dependency('social_stream-documents', '~> 0.5.0')
   s.add_runtime_dependency('social_stream-events', '~> 0.1.0')
  
