@@ -29,9 +29,11 @@ class ObjectActors < ActiveRecord::Migration
         a.author = author
         a.user_author = user_author
       else
+        next if a.post_activity.blank?
+
         a.author = a.post_activity.sender
         a.owner  = a.post_activity.receiver
-        a.user_author = (a.author.is_a?(User) ? a.author : a.author.sent_ties.order(:created_at).first.receiver)
+        a.user_author = (a.author.subject.is_a?(User) ? a.author : a.author.sent_ties.order(:created_at).first.receiver)
       end
 
       a.save!
