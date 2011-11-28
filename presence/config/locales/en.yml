@@ -3,7 +3,7 @@ en:
     connecting: "Chat Connecting"
     reconnecting: "Chat Reconnecting"
     disconnected: "Chat Disconnected"
-    unableconnect: "Chat Disconnected"
+    unableconnect: "Chat Out of Service"
     title: "Chat"
     password: "Password"
     status: 
