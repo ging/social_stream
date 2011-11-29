@@ -160,6 +160,7 @@ function onConnect(status) {
     log('Strophe is disconnected.');
 		disconnectionFlag = true;
 	  clearTimeout(awayTimer);
+		notifyWhenUsersDisconnect();
 	  reconnectTimer = setTimeout ("onReconnect()", 5000);
   } else if (status == Strophe.Status.CONNECTED) {
     log('Strophe is connected.');
@@ -173,6 +174,7 @@ function onConnect(status) {
 	  sendStatus(userStatus);
     awayTimer = setInterval("awayTimerFunction()", awayTimerPeriod);
 	  timer = setInterval("timerFunction()", timerPeriod);
+		hideAllNotifications();
   }
 	
 	updateChatWindow();
@@ -273,6 +275,7 @@ function processAvailablePresenceStanza(presence){
       setUserIconStatus(slug, status);
 			if (cacheConnectedUsers.indexOf(slug) != -1) {
 	  	  showConnectionBoxFromSlug(slug);
+				hideChatNotificationForSlug(slug);
 	    }	
 	  } else {
 	    setTimeout("refreshChatWindow()", 3000);
@@ -287,6 +290,7 @@ function processUnavailablePresenceStanza(presence){
 	if (slug != user_slug) {
 	  if (getConnectionBoxFromSlug(slug)!=null){
 	    hideConnectionBoxFromSlug(slug)
+			showChatNotificationForSlug(slug,$(getConnectionBoxFromSlug(slug)).attr("name") + " is offline");
 	  }
   }
 }

@@ -294,3 +294,40 @@ function putReceivedMessageOnChatWindow(from_jid,from_slug,body,msgID){
 	}
 	
 }
+
+
+////////////////////
+//Notifications on chat Window
+////////////////////
+
+function showChatNotificationForSlug(slug,msg){
+	var notification = $("#" + slug).parent().find("div.ui-chatbox-notify");
+	showChatNotification(notification,msg);
+}
+
+function showChatNotification(notification,msg){
+  notification.html("<p class==\"ui-chatbox-notify-text\">" + msg + "</p>");
+  notification.css("visibility","visible");
+  notification.fadeIn();
+}
+
+function hideChatNotificationForSlug(slug){
+  var notification = $("#" + slug).parent().find("div.ui-chatbox-notify");
+	hideChatNotification(notification);
+}
+
+function hideChatNotification(notification){
+  notification.fadeOut();
+  notification.css("visibility","hidden");
+}
+
+function notifyWhenUsersDisconnect(){
+	var notification = $("div.ui-chatbox-notify");
+	var msg = "You are offline";
+	showChatNotification(notification,msg);
+}
+
+function hideAllNotifications(){
+	var notification = $("div.ui-chatbox-notify");
+  hideChatNotification(notification);
+}

@@ -66,6 +66,19 @@ function blinkTitleOnMessage(username){
 
 
 ////////////////////
+//Control user data input on the chatbox
+////////////////////
+
+//Return true to allow user to send data to the chatbox.
+function userChatDataInputControl(){
+	var floodControlBoolean = floodControl();
+  var offlineDataSendControlBoolean = offlineDataSendControl();
+	return (floodControlBoolean && offlineDataSendControlBoolean);
+}
+
+
+
+////////////////////
 //Antiflood
 ////////////////////
 
@@ -189,6 +202,19 @@ function mustBounceBoxForChatWindow(jqueryUIChatbox){
 	} 
 	
 }
+
+
+
+////////////////////
+//Prevent user to send data to the chatbox when he is offline.
+////////////////////
+
+function offlineDataSendControl(){
+	return isStropheConnected();
+}
+
+
+
 
 ////////////////////
 //Next features...

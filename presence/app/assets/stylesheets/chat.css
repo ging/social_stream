@@ -62,6 +62,30 @@
     clear: both;
 }
 
+div.ui-chatbox-notify{
+	visibility: hidden;
+	background: #E5E5E5;
+	background-color: #E5E5E5;
+	color: black;
+	z-index: 1;
+	position:absolute;
+	top: 0;
+	margin-top: 30px;
+	padding: 4px 0px 4px 0px;
+	width: 236px;
+	text-align: center;
+	border-style:solid;
+  border-width:1px;
+	border-color: #CCCCCC;
+	opacity:0.95;
+  filter:alpha(opacity=95); /* For IE8 and earlier */
+}
+
+p.ui-chatbox-notify-text{
+  text-align: center;
+	font-weight: bold;
+}
+
 
 /* Ticks */
 

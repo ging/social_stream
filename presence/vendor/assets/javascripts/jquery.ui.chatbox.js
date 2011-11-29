@@ -167,7 +167,9 @@
 		.addClass('ui-icon-minusthick ' +  'chat-thick ' + ' chat-minusthick')
 		.text('minimize')
 		.appendTo(uiChatboxTitlebarMinimize),
-	    // content
+	    
+			
+			// content
 	    uiChatboxContent = (self.uiChatboxContent = $('<div></div>'))
 		.addClass('ui-widget-content ' +
 			  'ui-chatbox-content '
@@ -179,6 +181,19 @@
 			  'ui-chatbox-log'
 			 )
 		.appendTo(uiChatboxContent),
+		
+		//Notification div
+		uiChatboxNotify = (self.uiChatboxNotify = $('<div></div>'))
+    .addClass('ui-widget-content ' + 
+       'ui-chatbox-notify'
+       )
+    .click(function(event) {
+        // anything?
+				self.uiChatboxNotify.fadeOut();
+    })
+    .appendTo(uiChatboxContent),
+		
+		
 	    uiChatboxInput = (self.uiChatboxInput = $('<div></div>'))
 		.addClass('ui-widget-content ' + 
 			 'ui-chatbox-input'
@@ -195,7 +210,8 @@
 		.appendTo(uiChatboxInput)
 	        .keydown(function(event) {
 				    if(event.keyCode && event.keyCode == $.ui.keyCode.ENTER) {
-							if (((typeof floodControl == 'function')&&(floodControl()))||((typeof floodControl != 'function'))) {
+							var userChatDataInputControlBoolean = (((typeof userChatDataInputControl == 'function')&&(userChatDataInputControl()))||((typeof userChatDataInputControl != 'function')));
+							if (userChatDataInputControlBoolean) {
 						  	msg = $.trim($(this).val());
 						  	if (msg.length > 0) {
 						  		self.options.messageSent(self.options.id, self.options.user, msg);
