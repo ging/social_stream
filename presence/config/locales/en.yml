@@ -16,3 +16,5 @@ en:
       title: "Enable and configure Social Stream Chat"  
       checkbox: "Enable or disable Social Stream Chat"  
       update: "Update Settings"
+    notify:
+      offline: "You are offline"

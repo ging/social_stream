@@ -16,4 +16,6 @@ es:
       title: "Activación y configuración del chat de Social Stream"
       checkbox: "Activar o desactivar chat"  
       update: "Guardar configuración"
+    notify:
+      offline: "Desconectado"
        

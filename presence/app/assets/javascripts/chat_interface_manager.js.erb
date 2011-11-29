@@ -323,7 +323,7 @@ function hideChatNotification(notification){
 
 function notifyWhenUsersDisconnect(){
 	var notification = $("div.ui-chatbox-notify");
-	var msg = "You are offline";
+	var msg = '<%=I18n.t('chat.notify.offline')%>';
 	showChatNotification(notification,msg);
 }
 

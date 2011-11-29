@@ -210,7 +210,7 @@ function mustBounceBoxForChatWindow(jqueryUIChatbox){
 ////////////////////
 
 function offlineDataSendControl(){
-	return isStropheConnected();
+	return ((!disconnectionFlag) && (isStropheConnected()));
 }
 
 
