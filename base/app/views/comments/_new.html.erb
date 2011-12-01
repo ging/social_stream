@@ -15,7 +15,7 @@
                 :html => { :class => "new_comment", :id => "new_comment"+dom_id(activity)  },
                 :remote => true do |f| %>
 
-        <%= f.hidden_field :_contact_id %>
+        <%= f.hidden_field :owner_id %>
         <%= f.hidden_field :_activity_parent_id %>
         
         <div class="input_new_comments_container">
