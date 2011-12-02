@@ -11,7 +11,7 @@ class Document < ActiveRecord::Base
   validates_presence_of :title
   
   before_validation(:on => :create) do
-    set_title_and_description
+    set_title
   end
   
   define_index do
@@ -71,7 +71,7 @@ class Document < ActiveRecord::Base
   
   protected
   
-  def set_title_and_description
+  def set_title
     self.title = self.file_file_name
   end
     
