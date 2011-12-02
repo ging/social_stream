@@ -26,6 +26,15 @@ describe PostsController do
 
         it_should_behave_like "Allow Creating"
         it_should_behave_like "Allow Destroying"
+
+        it "should destroy with js" do
+          count = model_count
+          delete :destroy, :id => @current_model.to_param, :format => :js
+
+          resource = assigns(model_sym)
+
+          model_count.should eq(count - 1)
+        end
       end
 
       describe "with last relation" do

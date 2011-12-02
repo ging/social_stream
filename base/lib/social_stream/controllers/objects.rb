@@ -11,15 +11,21 @@ module SocialStream
         load_and_authorize_resource :except => :index
 
         respond_to :html, :js
+
+        # destroy method must be before the one provided by inherited_resources
+        include SocialStream::Controllers::Objects::UpperInstanceMethods
       end
 
-      module InstanceMethods
-
+      # Methods that should be included after the included block
+      module UpperInstanceMethods
         def destroy
           @post_activity = resource.post_activity
 
           destroy!
         end
+      end
+
+      module InstanceMethods
 
         protected
 
