@@ -76,14 +76,9 @@ describe GroupsController do
     end
 
     context "a new own group" do
-      before do
-        model_attributes[:author_id] = @user.actor_id
-        model_attributes[:user_author_id] = @user.actor_id
-      end
-
       it "should allow creating" do
         count = Group.count
-        post :create, attributes
+        post :create, :group => { :name => "Test" }
 
         group = assigns(:group)
 
@@ -97,13 +92,13 @@ describe GroupsController do
         before do
           @user_participant = Factory(:user)
           @group_participant = Factory(:group)
-
-          model_attributes[:_participants] = [@user_participant.actor_id, @group_participant.actor_id]
         end
 
         it "should allow creating" do
           count = Group.count
-          post :create, attributes
+          post :create,
+               :group => { :name => "Test group",
+                           :_participants => [ @user_participant.actor_id, @group_participant.actor_id ] }
 
           group = assigns(:group)
 
@@ -119,7 +114,7 @@ describe GroupsController do
           group.contact_subjects(:direction => :received)
           response.should redirect_to(:home)
         end
-        end
+      end
     end
 
     context "a new fake group" do

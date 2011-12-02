@@ -3,7 +3,7 @@ class GroupsController < InheritedResources::Base
 
   # Set group founder to current_subject
   # Must do before authorization
-  before_filter :set_founder, :only => :new
+  before_filter :set_founder, :only => [ :new, :create ]
 
   load_and_authorize_resource
 
