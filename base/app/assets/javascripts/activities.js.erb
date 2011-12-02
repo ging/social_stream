@@ -32,14 +32,12 @@ $(function() {
     });      
     
   $('#securities .search-choice a').click(function(){
-    console.log($('#security').children("option:selected").size());
     if($('#security').children("option:selected").size()==0){
       $('#securities input').css('width', default_security_width)
     }
   });      
   });
   $('#securities input').blur(function(){
-    console.log($('#security').children("option:selected").size());
     if($('#security').children("option:selected").size()==0){
       $('#securities input').css('width', default_security_width)
     }

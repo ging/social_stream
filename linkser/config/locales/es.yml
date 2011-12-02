@@ -1,3 +1,11 @@
 es:
   linkser:
     title: "Linkser"
+  link:
+    confirm_delete: "¿Borrar enlace?"
+    form:
+      title: "Enlace"
+    input: "Escribe una dirección"
+    name: "enlace"
+    one: "una enlace"
+    title: "Enlaces"

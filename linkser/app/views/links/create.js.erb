@@ -1,0 +1,7 @@
+//Display the new post
+$("#wall").prepend("<%= escape_javascript(render @link.post_activity) %>");
+
+setActivityPrivacyTooltips("<%= escape_javascript dom_id(@link.post_activity) %>");
+
+unblock_all_forms();
+

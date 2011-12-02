@@ -1,3 +1,11 @@
 en:
   linkser:
     title: "Linkser"
+  link:
+    confirm_delete: "Delete link?"
+    form:
+      title: "Link"
+    input: "Write the web address"
+    name: "link"
+    one: "a link"
+    title: "Links"  
