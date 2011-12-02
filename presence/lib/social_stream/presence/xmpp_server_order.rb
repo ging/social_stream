@@ -31,32 +31,16 @@ module SocialStream
           end   
           
           
+
           def synchronizePresence
-            
-            if !isEjabberdNodeUp
+            if isEjabberdNodeUp
+              output = executeEmanagementCommand("getConnectedUsers",[])
+              user_slugs = output.split("\n")
+              synchronizePresenceForSlugs(user_slugs)
+            else
               resetPresence
               return "Xmpp Server Down: Reset Connected Users"
-            end 
-            
-            if SocialStream::Presence.remote_xmpp_server      
-              command = buildCommand("synchronize_presence_script","",[])
-              executeCommand(command)    
-            else
-              #SocialStream::Presence.remote_xmpp_server=false
-              
-              #Get connected users locally  
-              users = []
-              output = %x[ejabberdctl connected-users]
-              sessions = output.split("\n")
-
-              sessions.each do |session|
-                users << session.split("@")[0]
-                puts session.split("@")[0]
-              end
-              
-              synchronizePresenceForSlugs(users)  
-              
-            end
+            end  
           end
           
           
@@ -93,6 +77,7 @@ module SocialStream
           
      
           def synchronizePresenceForSlugs(user_slugs)
+            
             #Check connected users
             users = User.find_all_by_connected(true)
             
@@ -211,7 +196,7 @@ module SocialStream
          
           def isEjabberdNodeUp
               output = executeEmanagementCommand("isEjabberdNodeStarted",[])
-              nodeUp = output.split("\n")[3]
+              nodeUp = output.split("\n")[0]
               return (nodeUp and nodeUp.strip()=="true")
           end
         

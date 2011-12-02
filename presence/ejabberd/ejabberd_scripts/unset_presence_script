@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-#Unset Connection Script
+#Unset Presence Script
 #@author Aldo
 
 require 'logger'
@@ -25,24 +25,24 @@ def getOption(option)
   return "Undefined"
 end
 
-$url = "http://" + getOption("web_domain=") + "/xmpp/unsetConnection"
+$url = "http://" + getOption("web_domain=") + "/xmpp/unsetPresence"
 $pass = getOption("ejabberd_password=")
 
 
 def log(text)
-	$logger.info "Unset Connection: " + text
+	$logger.info "Unset Presence Script: " + text
 end
 
-def unsetConnection(username)
-  log("unsetConnection(#{username})")
+def unsetPresence(username)
+  log("unsetPresence(#{username})")
   RestClient.post($url, :name => username, :password => $pass)
   return true
 
   rescue RestClient::Exception
-    log("RestClient::Exception with unsetConnection(#{username})")
+    log("RestClient::Exception with unsetPresence(#{username})")
 end
 
 
-unsetConnection(ARGV[0])
+unsetPresence(ARGV[0])
 
 

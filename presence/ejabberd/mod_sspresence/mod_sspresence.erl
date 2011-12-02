@@ -61,6 +61,10 @@ on_presence(User, _Server, _Resource, Packet) ->
 
 on_unset_presence(User, _Server, _Resource, _Status) ->
     ?INFO_MSG("mod_sspresence: on_unset_presence (~p)", [User]),
+    Login_path = string:concat(getOptionValue("scripts_path="), "/unset_presence_script "),
+    %% Wait for on_remove_connection
+    %% ?INFO_MSG("mod_sspresence: unset_presence_script call with  user (~p)", [User]),
+    %% os:cmd(string:join([Login_path, User , Status], " "));
     ok.
 
 on_packet_send(From, _To, {xmlelement, Type, _Attr, Subel} = _Packet) ->

@@ -39,7 +39,7 @@ module SocialStream
             elsif self.positive?
               #Case: Possitive tie unidirectional
               #Execute addBuddyToRoster(userSID,buddySID,buddyNick,buddyGroup,subscription_type)
-              subscription_type = "to"
+              subscription_type = "from"
               SocialStream::Presence::XmppServerOrder::addBuddyToRoster(user_sid,buddy_sid,buddy_name,"SocialStream",subscription_type)
             else
               #Negative Tie

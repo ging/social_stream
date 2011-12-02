@@ -31,11 +31,9 @@ def getOption(option)
   return "Undefined"
 end
 
-$accessUrl = getOption("auth_api=")
-$accessByCookieUrl = getOption("auth_by_cookie_api=")
+$accessByPasswordUrl = "http://" + getOption("web_domain=") + "/users/sign_in"
+$accessByCookieUrl = "http://" + getOption("web_domain=") + "/api/me"
 $cookie_name = getOption("cookie_name=")
-$sslogin = getOption("ss_login=")
-$sspass = getOption("ss_password=")
 
 
 def auth(username, password)
@@ -48,17 +46,9 @@ def auth(username, password)
   #  return true
   #end
 
-  #Social Stream password
-  if username == $sslogin 
-    if password == $sspass
-      return true
-    else
-      return false
-    end
-  end
 
   begin
-    response = RestClient.post $accessUrl, :user => { :email => username , :password => password }
+    response = RestClient.post $accessByPasswordUrl, :user => { :email => username , :password => password }
 
     if response.code == 201
       return true

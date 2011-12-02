@@ -25,8 +25,9 @@ def getOption(option)
   return "Undefined"
 end
 
-$url = getOption("synchronize_presence_api=")
+$url = "http://" + getOption("web_domain=") + "/xmpp/synchronizePresence"
 $pass = getOption("ejabberd_password=")
+$scripts_path = getOption("scripts_path=")
 
 
 def log(text)
@@ -37,7 +38,8 @@ def synchronize()
   log("Start Synchronize")
  
   users = []
-  output = %x[ejabberdctl connected-users]
+  command = $scripts_path + "/emanagement getConnectedUsers"
+  output = %x[#{command}]
   sessions = output.split("\n")
   
   sessions.each do |session|

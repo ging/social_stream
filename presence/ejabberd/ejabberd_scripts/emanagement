@@ -31,6 +31,8 @@ end
 #Configuration variables
 $domain = getOption("server_domain=")
 $verbose = (getOption("verbose=")=="true")
+$ejabberd_user = getOption("ejabberd_server_user=")
+$checkEjabberdctlQuotedString = false
 
 
 PARAMS_FOR_COMMANDS = {
@@ -41,9 +43,7 @@ PARAMS_FOR_COMMANDS = {
 	'getRoster' => 1,
 	'removeRoster' => 1,
 	'removeAllRosters' => 0,
-	'getBuddysFromRoster' => 1,
 	'getAllUsersWithRoster' => 0,
-	'getAllRosters' => 0,
 	'printAllRosters' => 0,
 	'printAllBidirecctionalBuddys' => 0,
 	'checkUser' => 1,
@@ -54,7 +54,9 @@ PARAMS_FOR_COMMANDS = {
 	'sendMessageToUser' => 3,
 	'getUserResource' => 1,
 	'isEjabberdNodeStarted' => 0,
+	'broadcast' => 2,
 	'checkEjabberdctlQuotedString' => 0,
+        'getConnectedUsers' => 0,
 	'help' => 0,
 }
 
@@ -66,9 +68,7 @@ SYNTAX_FOR_COMMANDS = {
 	'getRoster' => 'getRoster username',
 	'removeRoster' => 'removeRoster username',
 	'removeAllRosters' => 'removeAllRosters',
-	'getBuddysFromRoster' => 'getBuddysFromRoster roster',
 	'getAllUsersWithRoster' => 'getAllUsersWithRoster',
-	'getAllRosters' => 'getAllRosters',
 	'printAllRosters' => 'printAllRosters',
 	'printAllBidirecctionalBuddys' => 'printAllBidirecctionalBuddys',
 	'checkUser' => 'checkUser user',
@@ -79,7 +79,9 @@ SYNTAX_FOR_COMMANDS = {
 	'sendMessageToUser' => 'sendMessageToUser from_name to_name msg',
 	'getUserResource' => 'getUserResource username',
 	'isEjabberdNodeStarted' => 'isEjabberdNodeStarted',
+	'broadcast' => 'broadcast users msg (users values: "all" or slugs array)',
 	'checkEjabberdctlQuotedString' => 'checkEjabberdctlQuotedString',
+        'getConnectedUsers' => 'getConnectedUsers',
 	'help' => 'help',
 }
 
@@ -285,13 +287,6 @@ end
 
 #Manage stanzas Utilities
 
-def sendStanzaUserMessage(username,msg)
-	resource = getUserResource(username);
-	stanza = "\\<\\'message\\'\\>\\<\\'body\\'\\>\\'" + msg + "\\'\\<\\'/body\\'\\>\\<\\'/message\\'\\>"
-	executeCommand("ejabberdctl send_stanza_c2s " + username + " " + $domain + " " + resource + " " + stanza)
-	return "Done"
-end
-
 def setPresence(username)
 	sendPresenceStanzaWithType(username,username,"available")
 end
@@ -305,12 +300,14 @@ def sendPresence(username,show)
 end
 
 def sendPresenceWithShow(from_name,to_name,show)
-	puts from_name
+	#puts from_name
 	resource = getUserResource(from_name);
-	puts resource
+	#puts resource
 	from_sid = from_name + "@" + $domain;
 	to_sid = to_name + "@" + $domain;   
-	pres_stanza = "\\<\\'presence from=\\'\\\"\\'" + from_sid + "\\'\\\"\\' to=\\'\\\"\\'" + to_sid + "\\'\\\"\\>\\<\\'show\\'\\>\\'" + show + "\\'\\<\\'/show\\'\\>\\<\\'/presence\\'\\>" 
+	pres_stanza = "\\<" + buildQuotedString("presence from=") + "\\\"" + buildQuotedString(from_sid) + "\\\"" + buildQuotedString(" to=") + "\\\"" +
+			buildQuotedString(to_sid) + "\\\"\\>\\<" + buildQuotedString("show") + "\\>" + buildQuotedString(show) + "\\<" +
+			buildQuotedString("/show") + "\\>\\<" + buildQuotedString("/presence") + "\\>"
 	executeCommand("ejabberdctl send_stanza_c2s " + from_name + " " + $domain + " " + resource + " " + pres_stanza)
 	return "Done"
 end
@@ -319,7 +316,8 @@ def sendPresenceStanzaWithType(from_name,to_name,presence_type)
 	resource = getUserResource(from_name);
 	from_sid = from_name + "@" + $domain;
 	to_sid = to_name + "@" + $domain;
-	pres_stanza = "\\<\\'presence type=\\'\\\"\\'" + presence_type + "\\'\\\"\\' from=\\'\\\"\\'" + from_sid + "\\'\\\"\\' to=\\'\\\"\\'" + to_sid + "\\'\\\"\\>\\<\\'/presence\\'\\>" 
+	pres_stanza = "\\<" + buildQuotedString("presence type=") + "\\\"" + buildQuotedString(presence_type) + "\\\"" + buildQuotedString(" from=") + "\\\"" + 
+		buildQuotedString(from_sid) + "\\\"" + buildQuotedString(" to=") + "\\\"" + buildQuotedString(to_sid) + "\\\"\\>\\<" + buildQuotedString("/presence") + "\\>" 
 	executeCommand("ejabberdctl send_stanza_c2s " + from_name + " " + $domain + " " + resource + " " + pres_stanza)
 	return "Done"
 end
@@ -356,9 +354,44 @@ def isEjabberdNodeStarted
 	return false
 end
 
+def getConnectedUsers
+        users = []
+	output = executeCommand("ejabberdctl connected-users")
+	sessions = output.split("\n")
+	sessions.each do |session|
+	  users << session.split("@")[0]
+	end
+	return users
+end
+
+def broadcast(users,msg)
+	output = executeCommand("ejabberdctl connected-users")
+        lines = output.split("\n");
+	lines.each do |line|
+		username = line.split("@")[0]
+		if (users == "all") or (users.length > 1 and users.include?(username))
+			s = line.split("@")[1];
+			resource = s.split("/")[1];
+			sendMessageToUser("SocialStream",username,msg)
+		end
+	end
+	return "Done"
+end
+
+#Determine how to scape characters for build quoted strings
 def checkEjabberdctlQuotedString
 	puts "checkForSimpleSlash: " + checkForSimpleSlash.to_s()
 	puts "checkForDoubleSlash: " + checkForDoubleSlash.to_s()
+end
+
+def checkAndSetEjabberdctlQuotedString
+	if checkForSimpleSlash
+		$checkForSimpleSlash = true
+	end
+	if checkForDoubleSlash
+		$checkForDoubleSlash = true
+	end
+	$checkEjabberdctlQuotedString = true	
 end
 
 def checkForDoubleSlash
@@ -366,7 +399,7 @@ def checkForDoubleSlash
 	if execute_as_sudo
 		command = "sudo " + command
 	end
-	#puts "Executing " + command
+	
 	output = %x[#{command}]
 	firstLine = ""
 	lines = output.split("\n")
@@ -414,10 +447,14 @@ def checkForSimpleSlash
 end
 
 def buildQuotedString(msg)
-	if checkForSimpleSlash
+	if !$checkEjabberdctlQuotedString
+		checkAndSetEjabberdctlQuotedString
+	end
+	
+	if $checkForSimpleSlash
 		return "\'" + msg + "\'"
 	end
-	if checkForDoubleSlash
+	if $checkForDoubleSlash
 		return "\\'" + msg + "\\'"
 	end
 	return msg
@@ -431,7 +468,8 @@ def executeCommand(command)
 	command = buildCommand(command)
 	
 	if $verbose
-		puts "Executing: " + command
+		#Logging...
+		#puts "Executing: " + command
 		ejabberdLog("Executing (#{command})")
 	end
 
@@ -442,15 +480,20 @@ end
 
 def buildCommand(command)
 	if execute_as_sudo
-		command = "sudo -u ejabberd " + command
+		command = "sudo -u " + $ejabberd_user + " " + command
 	end
 	return command
 end
 
 def execute_as_sudo
-	current_user = %x["whoami"].split("\n")[0]
 	sudo_users = getOption("users_require_sudo=")
+
+	if sudo_users=="all"
+	 return true
+	end
+
 	sudo_users_array = sudo_users.split(",")
+        current_user = %x["whoami"].split("\n")[0]
 	if sudo_users_array.include?(current_user)
 		return true
 	end
@@ -468,7 +511,7 @@ end
 
 #Main thread
 
-log("Init Ejabberd Maintenance script")
+#log("Init Ejabberd Maintenance script")
 
 begin
 	if ARGV[0] and PARAMS_FOR_COMMANDS.keys.include?(ARGV[0])
