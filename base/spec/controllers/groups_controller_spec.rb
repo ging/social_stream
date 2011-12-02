@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe GroupsController do
+  include SocialStream::TestHelpers
   include SocialStream::TestHelpers::Controllers
 
   render_views
@@ -152,6 +153,25 @@ describe GroupsController do
 
       # it_should_behave_like "Allow Updating"
       it_should_behave_like "Allow Destroying"
+    end
+
+    context "representing a group" do
+      before do
+        @group = Factory(:member, :contact => Factory(:group_contact, :receiver => @user.actor)).sender_subject
+        represent(@group)
+      end
+
+      it "should allow creating" do
+        count = Group.count
+        post :create, :group => { :name => "Test" }
+
+        group = assigns(:group)
+
+        group.should be_valid
+        Group.count.should eq(count + 1)
+        assigns(:current_subject).should eq(group)
+        response.should redirect_to(:home)
+      end
     end
   end
 end

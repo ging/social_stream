@@ -162,6 +162,8 @@ class Actor < ActiveRecord::Base
       receivers = group.contact_actors(:direction => :sent, :relations => relation)
       emails = Array.new
       receivers.each do |receiver|
+        next unless Actor.normalize(receiver).subject_type.eql?("User")
+
         receiver_emails = receiver.mailboxer_email(object)
         case receiver_emails
         when String
