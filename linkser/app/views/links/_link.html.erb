@@ -1,3 +1,22 @@
 <%= div_for link, :class => 'content_size' do %>
-  <%= simple_format auto_link(link.title) %>
+  <% if link.image %>
+    <div class="thumbnail">
+      <%= image_tag(link.image)%>
+    </div>
+  <% end %>
+  <div class="info">
+    <% if link.title %>
+      <div class="title">
+        <%= link.title %>
+      </div>
+    <% end %>
+    <div class="url">
+      <%= auto_link(link.url) %>
+    </div>
+    <% if link.description %>
+      <div class="description">
+        <%= auto_link(link.description) %>
+      </div>
+    <% end %>
+  </div>
 <% end %>

@@ -8,12 +8,12 @@ class LinkserController < ApplicationController
         link.title = linkser_object.title
         link.description = linkser_object.description
         link.url = linkser_object.url
-        if linkser_object.ogp and linkser_object.opg.image
-          link.image = linkser_object.opg.image
+        if linkser_object.ogp and linkser_object.ogp.image
+          link.image = linkser_object.ogp.image
         elsif linkser_object.images and linkser_object.images.first
-          link.image = linkser_object.images.first[:url]
+          link.image = linkser_object.images.first.url
         end
-        render :text => link.to_json
+        render link
         return
       end
     end    

@@ -1,7 +1,7 @@
 @import "colors";
 
 #link_preview {
-  width: 90%;
+  width: 510px;
   height: 120px;
   border: 1px solid $auxiliar-color;
   margin: 5px auto;
@@ -10,4 +10,30 @@
 #link_preview img.loading{
   margin: auto;
   margin-top: 40px;
+}
+#link_preview .link {
+  position: relative;
+  padding: 10px;
+}
+#link_preview .link .thumbnail, #link_preview .link .thumbnail img{
+  float: left;
+  max-height: 100px;
+  max-width: 120px;
+}
+#link_preview .link .info{
+  float: left;
+  margin-left:10px;
+  width: 360px;
+  text-align: left;
+}
+
+#link_preview .link .info .title{
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+#link_preview .link .info .url{
+  text-decoration: underline;
+  margin-bottom: 5px;
+}
+#link_preview .link .info .description{
 }
