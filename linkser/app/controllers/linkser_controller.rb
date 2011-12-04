@@ -2,21 +2,21 @@ class LinkserController < ApplicationController
   def index
     if params[:url].present?
       url = params[:url]
-      linkser_object = Linkser.parse url
-      if linkser_object.is_a? Linkser::Objects::HTML
+      o = Linkser.parse url
+      if o.is_a? Linkser::Objects::HTML
         link = Link.new
-        link.title = linkser_object.title
-        link.description = linkser_object.description
-        link.url = linkser_object.url
-        if linkser_object.ogp and linkser_object.ogp.image
-          link.image = linkser_object.ogp.image
-        elsif linkser_object.images and linkser_object.images.first
-          link.image = linkser_object.images.first.url
+        link.title = o.title if o.title
+        link.description = o.description if o.description
+        link.url = o.last_url
+        if o.ogp and o.ogp.image
+          link.image = o.ogp.image
+        elsif o.images and o.images.first
+          link.image = o.images.first.url
         end
-        render link
+        render :partial => "links/link_preview", :locals => {:link => link}
         return
       end
     end    
-        render :text => "catacrocker"
+        render :text => I18n.t("link.errors.only_web")
   end
 end

@@ -4,5 +4,5 @@
 <%= form_for object, :remote => remote  do |f| %>
   <%= f.hidden_field :owner_id %>
 
-  <%= render :partial => object.class.to_s.tableize+'/new_activity_fields' , :locals => {:f => f} %>	
+  <%= render :partial => object.class.to_s.tableize+'/new_activity_fields' , :locals => {:f => f, :receiver => receiver} %>	
 <% end %>

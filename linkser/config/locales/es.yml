@@ -3,6 +3,9 @@ es:
     title: "Linkser"
   link:
     confirm_delete: "¿Borrar enlace?"
+    errors:
+      loading: "Error cargando"
+      only_webs: "Solo puedes compartir págnas web"
     form:
       title: "Enlace"
     input: "Escribe una dirección"

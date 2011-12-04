@@ -1,13 +1,15 @@
 <%= div_for link, :class => 'content_size' do %>
   <% if link.image %>
     <div class="thumbnail">
-      <%= link_to image_tag(link.image),link.url %>
+      <%= image_tag(link.image)%>
+      <%= hidden_field_tag "link[image]", link.image %>
     </div>
   <% end %>
   <div class="info">
     <% if link.title %>
       <div class="title">
         <%= link.title %>
+        <%= hidden_field_tag "link[title]", link.title %>
       </div>
     <% end %>
     <div class="url">
@@ -16,9 +18,8 @@
     <% if link.description %>
       <div class="description">
         <%= auto_link(link.description) %>
+        <%= hidden_field_tag "link[description]", link.description %>
       </div>
     <% end %>
   </div>
 <% end %>
-
-<br class="clearfloat">

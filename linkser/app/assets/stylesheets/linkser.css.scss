@@ -11,29 +11,31 @@
   margin: auto;
   margin-top: 40px;
 }
-#link_preview .link {
+.link {
   position: relative;
   padding: 10px;
 }
-#link_preview .link .thumbnail, #link_preview .link .thumbnail img{
+.link .thumbnail, .link .thumbnail img{
   float: left;
   max-height: 100px;
   max-width: 120px;
+  margin-right:10px;
 }
-#link_preview .link .info{
+.link .info{
   float: left;
-  margin-left:10px;
   width: 360px;
   text-align: left;
 }
-
-#link_preview .link .info .title{
+.activity_objects .link .info{
+  width: 320px;
+}
+.link .info .title{
   font-weight: bold;
   margin-bottom: 3px;
 }
-#link_preview .link .info .url{
+.link .info .url{
   text-decoration: underline;
   margin-bottom: 5px;
 }
-#link_preview .link .info .description{
+.link .info .description{
 }

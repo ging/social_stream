@@ -5,4 +5,5 @@ ActiveRecord::Schema.define(:version => 0) do
   CreateSocialStream.up
   ActsAsTaggableOnMigration.up
   CreateSocialStreamDocuments.up
+  CreateSocialStreamLinkser.up
 end

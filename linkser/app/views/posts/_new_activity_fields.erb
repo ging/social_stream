@@ -1,5 +1,7 @@
 <%= f.text_field :text, :id => "input_activities", :size => 85 %>
-
+<%= hidden_field_tag "link[owner_id]", Actor.normalize_id(receiver) %>
+<%= hidden_field_tag "link[url]" %>
+<%= hidden_field_tag "link[loaded]", false %>
 <div id="link_preview" style="display:none;"></div>
 
 <%= javascript_tag do %>
@@ -12,6 +14,9 @@
       
       var regexp = /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/
       if(regexp.test($("#input_activities").val())){
+        $("#link_url").val($("#input_activities").val());              
+        $("#link_loaded").val(false);
+        $("#new_post").attr("action","<%= links_path %>");
         if(this.currentValue!=this.lastValue){
           $("#link_preview").html("<%= escape_javascript(image_tag('loading.gif', :class => :loading)) %>");          
           this.lastValue = this.currentValue;
@@ -23,20 +28,18 @@
             success : function(html) {      
               console.log("Peticion guay a " + url);
               if ($("#input_activities").val()==url){ //Only show if input value is still the same
-                $("#link_preview").html(html);
-              console.log("Preview cambiada a " + url);
+                $("#link_preview").html(html);                
+                $("#link_loaded").val(true);
               }          
             },
             error: function (xhr, ajaxOptions, thrownError){ 
-              $("#link_preview").html(url + "> PUM!");
-              console.log("Error al pedir " + url);
-              console.log(xhr.status);
-              console.log(thrownError);
+              $("#link_preview").html("<span class=\"loading\"><%= escape_javascript(t("link.errors.loading"))%> " + url + "</span>");
             }         
           });
         }
         $("#link_preview").show();
       }else{
+        $("#new_post").attr("action","<%= posts_path %>");
         $("#link_preview").hide();
         $("#link_preview").html("");
       }
