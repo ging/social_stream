@@ -186,7 +186,7 @@ class Activity < ActiveRecord::Base
       I18n.t "activity.verb.#{ verb }.#{ receiver.subject_type }.title",
       :subject => view.link_name(sender_subject),
       :contact => view.link_name(receiver_subject)
-    when "post"
+    when "post", "update"
       if sender == receiver
         view.link_name sender_subject
       else
@@ -194,6 +194,8 @@ class Activity < ActiveRecord::Base
                :sender => view.link_name(sender_subject),
                :receiver => view.link_name(receiver_subject)
       end
+    else
+      "Must define activity title"
     end.html_safe
   end
 
