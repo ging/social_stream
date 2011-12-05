@@ -6,6 +6,7 @@
 
 <%= javascript_tag do %>
   $(function() {
+    $.preloadImages ("assets/loading.gif");
     $("#input_activities").Watermark("<%= I18n.t('post.input') %>","#666");
     
     var urlDetect = function(){
@@ -42,6 +43,7 @@
         $("#new_post").attr("action","<%= posts_path %>");
         $("#link_preview").hide();
         $("#link_preview").html("");
+        $("#link_url").val(""); 
       }
     }      
     $("#input_activities").change(urlDetect).keyup(urlDetect);

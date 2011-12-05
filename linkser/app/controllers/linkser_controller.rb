@@ -2,7 +2,7 @@ class LinkserController < ApplicationController
   def index
     if params[:url].present?
       url = params[:url]
-      o = Linkser.parse url
+      o = Linkser.parse url, {:max_images => 1}
       if o.is_a? Linkser::Objects::HTML
         link = Link.new
         link.title = o.title if o.title
