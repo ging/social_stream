@@ -1,10 +1,15 @@
-require 'social_stream/migrations/documents'
-require 'social_stream/migrations/events'
+gems = %w{ documents events linkser }
 
-SocialStream::Migrations::Events.new.down
-SocialStream::Migrations::Documents.new.down
-SocialStream::Migrations::Base.new.down
+gems.each do |g|
+  require "social_stream/migrations/#{ g }"
+end
 
-SocialStream::Migrations::Base.new.up
-SocialStream::Migrations::Documents.new.up
-SocialStream::Migrations::Events.new.up
+gems.unshift("base")
+
+gems.reverse.each do |g|
+  "SocialStream::Migrations::#{ g.camelize }".constantize.new.down
+end
+
+gems.each do |g|
+  "SocialStream::Migrations::#{ g.camelize }".constantize.new.up
+end
