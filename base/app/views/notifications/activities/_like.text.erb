@@ -1,4 +1,4 @@
-<% if activity.direct_object.is_a? Actor or activity.direct_object.respond_to? :actor %>
+<% if activity.direct_object.acts_as_actor? %>
   <%= raw t('notification.fan', 
         :sender => truncate_name(activity.sender.name),
         :whose => t('notification.whose.'+ activity.receiver.subject.class.to_s.underscore,
