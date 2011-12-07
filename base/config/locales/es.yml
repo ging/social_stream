@@ -324,6 +324,7 @@ es:
   profile:
     one: "Perfil"
     age: "Edad"
+    is_on: "esta en"
     must_be_signed_id: "Debes identificarte"
     group:
       about: "Sobre nosotros/as"

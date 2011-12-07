@@ -318,12 +318,14 @@ en:
     input: "What are you doing?"
     name: "post"
     one: "a post"
-    title: "Posts"  
+    title: "Posts"
   preposition:
     and: "and"
+    on: "on"
   profile:
     one: "Profile"
     age: "Age"
+    is_on: "is on"
     must_be_signed_id: "You must be signed in"
     group:
       about: "About us"
