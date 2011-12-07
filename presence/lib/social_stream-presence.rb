@@ -22,6 +22,7 @@ module SocialStream
     mattr_accessor :xmpp_server_password
     mattr_accessor :remote_xmpp_server
     mattr_accessor :scripts_path
+    mattr_accessor :ejabberd_module_path
     mattr_accessor :enable
     
     mattr_accessor :ssh_domain
@@ -33,7 +34,7 @@ module SocialStream
 
     @@auth_method = "cookie"
     @@remote_xmpp_server = false
-    @@enable = true
+    @@enable = false
     
     class << self
       def setup

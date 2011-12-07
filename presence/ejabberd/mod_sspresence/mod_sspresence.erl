@@ -1,10 +1,31 @@
+%%%-------------------------------------------------------------------
+%%% File    : mod_sspresence.erl
+%%% Author  : Aldo
+%%% Contact:  < social-stream@dit.upm.es >
+%%% Purpose : Process events and hooks for Social Stream Presence: http://social-stream.dit.upm.es/
+%%% Created : 1 Oct 2011
+%%%  
+%%%
+%%% http://social-stream.dit.upm.es/
+%%% Copyright © 2011 Social Stream
+%%%
+%%%-------------------------------------------------------------------
+
 -module(mod_sspresence).
+-author('aldo').
 
 -behavior(gen_mod).
 
 -include("ejabberd.hrl").
 
--export([start/2, stop/1, on_register_connection/3, on_remove_connection/3, on_presence/4, on_unset_presence/4, isConnected/1, on_packet_send/3]).
+-export([start/2, stop/1, 
+	on_register_connection/3, 
+	on_remove_connection/3, 
+	on_presence/4, 
+	on_unset_presence/4,
+	on_packet_send/3, 
+	isConnected/1
+	]).
 
 start(Host, _Opts) ->
     ?INFO_MSG("mod_sspresence starting", []),
@@ -52,34 +73,25 @@ on_presence(User, _Server, _Resource, Packet) ->
 
     case Type of
 	"presence" -> Status = getStatusFromSubel(Subel),
-		      Login_path = string:concat(getOptionValue("scripts_path="), "/set_presence_script "),
+		      Presence_path = string:concat(getOptionValue("scripts_path="), "/set_presence_script "),
 		      ?INFO_MSG("mod_sspresence: set_presence_script call with  user (~p) and status (~p)", [User,Status]),
-    		      os:cmd(string:join([Login_path, User , Status], " "));
+    		      os:cmd(string:join([Presence_path, User , Status], " "));
 	_ -> ok
     end,
     ok.
 
 on_unset_presence(User, _Server, _Resource, _Status) ->
     ?INFO_MSG("mod_sspresence: on_unset_presence (~p)", [User]),
-    Login_path = string:concat(getOptionValue("scripts_path="), "/unset_presence_script "),
+    _UPresence_path = string:concat(getOptionValue("scripts_path="), "/unset_presence_script "),
     %% Wait for on_remove_connection
     %% ?INFO_MSG("mod_sspresence: unset_presence_script call with  user (~p)", [User]),
-    %% os:cmd(string:join([Login_path, User , Status], " "));
+    %%os:cmd(string:join([UPresence_path, User , Status], " "));
     ok.
 
-on_packet_send(From, _To, {xmlelement, Type, _Attr, Subel} = _Packet) ->
+on_packet_send(_From, _To, {xmlelement, Type, _Attr, _Subel} = _Packet) ->
     case Type of
-	"message" -> 
-		{_SenderJID,Sender,_SenderDomain,_A,_B,_C,_D} = From,
-		
-		SSlogin = getOptionValue("ss_login="),
-
-		case Sender of
-			SSlogin ->
-                                Message = getMessageFromSubel(Subel),
-				execute(Message);
-                   	_ -> ok
-                end;
+	"message" ->
+               ok;
 	_ -> ok
     end.
 
@@ -105,82 +117,11 @@ getStatusFromSubel(Subel) ->
 	end. 
 
 
-getMessageFromSubel(Subel) ->
-    [{_I,_J,_K,[{_L,MessageData}]}] = Subel,
-    parseXmlCdata(MessageData).
-
-
 parseXmlCdata(Msg) ->
 	MessageString = binary_to_list(list_to_binary(io_lib:format("~p", [Msg]))),
 	lists:sublist(MessageString, 4, string:len(MessageString)-6).
 
 
-execute(Message) ->
-    %?INFO_MSG("Message vale: ~p", [Message]),
-    %?INFO_MSG("Order vale: ~p", [Order]),
-    [Order|Params] = string:tokens(Message, "&"),
-    case Order of
-	"AddItemToRoster" -> 
-	  	case length(Params) of
-			4 -> 	[UserSID,BuddySID,BuddyName,Subscription_type] = Params,
-				?INFO_MSG("Execute: ~p with params ~p", [Order,Params]),
-				[ContactName|_R] = string:tokens(BuddyName, " "),
-				[UserSlug,UserDomain] = string:tokens(UserSID, "@"),
-				[BuddySlug,BuddyDomain] = string:tokens(BuddySID, "@"),
-				addItemToRoster(UserSlug,UserDomain,BuddySlug,BuddyDomain,ContactName,"SocialStream",Subscription_type),
-				ok;
-			_ -> 	?INFO_MSG("Incorrect parameters in order ~p", [Order]),
-				ok
-	  	end,
-		ok;
-
-	"SetRosterForBidirectionalTie" -> 
-	  	case length(Params) of
-			4 -> 	[UserASID,UserBSID,UserAName,UserBName] = Params,
-				?INFO_MSG("Executing: ~p with params ~p", [Order,Params]),
-				[UserASlug,UserADomain] = string:tokens(UserASID, "@"),
-				[UserBSlug,UserBDomain] = string:tokens(UserBSID, "@"),
-				addItemToRoster(UserASlug,UserADomain,UserBSlug,UserBDomain,UserBName,"SocialStream","both"),
-				addItemToRoster(UserBSlug,UserBDomain,UserASlug,UserADomain,UserAName,"SocialStream","both"),
-				ok;
-			_ -> 	?INFO_MSG("Incorrect parameters in order ~p", [Order]),
-				ok
-	  	end,
-		ok;
-
-	"Synchronize" ->
-	synchronizePresence(),
-	ok;
-
-	"SynchronizeRosters" ->
-	synchronizeRosters(),
-	ok;
-
-	_ -> ?INFO_MSG("Command not found", []),
-		ok
-    end.
-
-
-
-%%Call ejabberdctl command add_rosteritem
-	%Command Name: add_rosteritem
-	%Needs mod_admin_extra (http://www.ejabberd.im/ejabberd-modules)
-	%ejabberdctl add_rosteritem localuser localserver buddy buddyserver nick group subs
-	%subs= none, from, to or both,
-
-	%Example
-	%ejabberdctl add_rosteritem frank-williamson trapo demo trapo NickName SocialStream from
-	%frank-williamson@trapo adds demo@trapo to its roster with subscription from, in the group SocialStream with the name Nickname
-%%
-addItemToRoster(UserSlug,UserDomain,BuddySlug,BuddyDomain,ContactName,Group,Subscription_type) ->
-	%%Command = lists:concat(["ejabberdctl add_rosteritem ", UserSlug , " ", UserDomain, " ", BuddySlug, " ", BuddyDomain , " \\'", ContactName , "\\' ", Group , " ", 					Subscription_type]),
-	%%Command = lists:concat(["ejabberdctl add_rosteritem ", UserSlug , " ", UserDomain, " ", BuddySlug, " ", BuddyDomain , " \'", ContactName , "\' ", Group , " ", 					Subscription_type]),
-	
-	[UserName|_R] = string:tokens(ContactName, " "),
-	Command = lists:concat(["ejabberdctl add_rosteritem ", UserSlug , " ", UserDomain, " ", BuddySlug, " ", BuddyDomain , " ", UserName , " ", Group , " ", 					Subscription_type]),
-	os:cmd(Command),
-	?INFO_MSG("Execute command: ~p", [Command]),
-ok.
 
 %%GETTERS CONFIG VALUES
 %%CONFIG FILE: /etc/ejabberd/ssconfig.cfg
@@ -240,19 +181,6 @@ case Output of
 		Sessions)
 end.
 
-
-%%Send all connected users to Social Stream Rails Application
-synchronizePresence() ->
-	Synchronize_path = string:concat(getOptionValue("scripts_path="), "/synchronize_presence_script "),
-	os:cmd(Synchronize_path),
-ok.
-
-
-%%Reset all rosters and wait to received data from Social Stream Rails Application
-synchronizeRosters() ->
-	SynchronizeRosters_path = string:concat(getOptionValue("scripts_path="), "/emanagement removeAllRosters"),
-	os:cmd(SynchronizeRosters_path),
-ok.
 
 
 %Reset all connections

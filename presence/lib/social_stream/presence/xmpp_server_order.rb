@@ -4,6 +4,7 @@ require 'xmpp4r/roster'
 require 'xmpp4r/client'
 require 'xmpp4r/message'
 require 'net/ssh'
+require 'net/sftp'
 
 module SocialStream
   module Presence
@@ -108,6 +109,117 @@ module SocialStream
           end
           
           
+          #Installation methods
+          
+          def copyFolder(oPath,dPath)
+            if SocialStream::Presence.remote_xmpp_server
+              #Remote mode
+              copyRemoteFolder(oPath,dPath)
+            else
+              #Local mode
+              SocialStream::Presence::XmppServerOrder::executeCommand("cp -r " + oPath + "/* " + dPath)
+            end
+          end
+          
+          
+          def copyRemoteFolder(localPath,remotePath)
+            begin
+              if SocialStream::Presence.ssh_password             
+               
+                Net::SFTP.start(SocialStream::Presence.ssh_domain, SocialStream::Presence.ssh_user, :password => SocialStream::Presence.ssh_password, :auth_methods => ["password"] ) do |sftp|
+                  recursiveCopyFolder(localPath,remotePath,sftp)
+                end 
+                
+              else
+                #SSH with authentication key instead of password              
+                Net::SFTP.start(SocialStream::Presence.ssh_domain, SocialStream::Presence.ssh_user) do |sftp|
+                  recursiveCopyFolder(localPath,remotePath,sftp)
+                end 
+              end
+              output="Ok"
+            rescue Exception => e
+              case e
+                when Net::SSH::AuthenticationFailed
+                  output = "AuthenticationFailed on remote access"
+                else
+                  output = "Unknown exception in copyRemoteFolder method: #{e.to_s}"
+              end
+            end  
+ 
+            return output
+          end
+          
+          
+          def recursiveCopyFolder(localPath,remotePath,sftp) 
+            # Create directory if not exits
+            sftp.mkdir(remotePath)
+            # Upload files to the remote host        
+            Dir.foreach(localPath) do |f|
+              file_path = localPath + "/#{f}"
+              if File.file?(file_path)
+                sftp.upload(file_path, remotePath + "/#{f}")
+              elsif File.directory?(file_path) and f!="." and f!=".."
+                recursiveCopyFolder(file_path,remotePath + "/#{f}",sftp)
+              end
+            end
+          end
+
+          def autoconf(options)
+            autoconf=[]
+            
+            #Add autoconfiguration options
+            #autoconf.push("key=value")
+
+            autoconf.push("scripts_path=" + SocialStream::Presence.scripts_path)
+            autoconf.push("ejabberd_password=" + SocialStream::Presence.xmpp_server_password)
+            autoconf.push("server_domain=" + SocialStream::Presence.domain)
+            autoconf.push("cookie_name=" + Rails.application.config.session_options[:key])
+            
+            #Param options
+            if options
+              options.each do |option|
+                autoconf = addManualOption(autoconf,option)
+              end
+            end
+            
+            #return "[key1=value1,key2=value2,key3=value3]"
+            return "[" + autoconf.join(',') + "]"
+          end
+          
+          
+          def addManualOption(array,option)
+            
+            optionSplit = option.split("=")
+            unless optionSplit.length == 2
+              return array
+            end
+            
+            key = optionSplit[0];
+            array.each do |element|
+              if element.split("=")[0]==key
+                #Replace element
+                array[array.index(element)]=option
+                return array
+              end
+            end
+            #Add option
+            array.push(option)
+            return array
+          end
+          
+          
+          def getExecutorUser
+            if SocialStream::Presence.remote_xmpp_server
+              if SocialStream::Presence.ssh_user
+                return SocialStream::Presence.ssh_user
+              else
+                return nil
+              end
+            else
+              return %x["whoami"].gsub(/\n/,"");
+            end
+          end
+          
           
           #Execution commands manage  
         
@@ -133,11 +245,11 @@ module SocialStream
             if commands.length > 1
               puts "Executing the following commands:"
               commands.each do |command|
-                puts command
+                puts parsingCommand(command)
               end  
               puts "Command list finish"
             elsif commands.length == 1
-              puts "Executing " + commands[0]
+              puts "Executing " + parsingCommand(commands[0])
             else
               puts "No command to execute"
               return
@@ -189,7 +301,7 @@ module SocialStream
  
             return output
           end
-        
+
         
         
          #Help methods
@@ -200,7 +312,10 @@ module SocialStream
               return (nodeUp and nodeUp.strip()=="true")
           end
         
-        
+          def parsingCommand(command)
+              #Hide passwords on sudo commands: command pattern = "echo password | sudo -S order"
+              return command.gsub(/echo ([aA-zZ]+) [|] sudo -S [.]*/,"echo ****** | sudo -S \\2")
+          end
         
          #Xmpp client manage methods
           
