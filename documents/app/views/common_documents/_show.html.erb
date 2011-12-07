@@ -1,4 +1,4 @@
-<% profile_subject ||= document.post_activity.receiver_subject %>
+<% profile_subject ||= document.owner_subject %>
 
 <% content_for :title do %>
 <%= profile_subject.name + ": " + t('repository.title') %>

@@ -1,4 +1,4 @@
-<% if activity.direct_object.is_a? Actor or activity.direct_object.respond_to? :actor %>
+<% if activity.direct_object.acts_as_actor? %>
   <div class="subject">
     <%= raw t('notification.fan', 
           :sender => link_to(truncate_name(activity.sender.name), polymorphic_url(activity.sender.subject)),

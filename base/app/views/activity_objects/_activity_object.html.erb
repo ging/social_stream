@@ -1,4 +1,4 @@
-<% if activity_object.object.is_a?(Actor) || activity_object.object.class.ancestors.include?(SocialStream::Models::Subject) %>
+<% if activity_object.acts_as_actor? %>
   <div class="block">
     <%= model_with_details activity_object.object %>
   </div>
