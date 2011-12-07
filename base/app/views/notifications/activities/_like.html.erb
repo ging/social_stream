@@ -1,4 +1,8 @@
 <% if activity.direct_object.is_a? Actor or activity.direct_object.respond_to? :actor %>
+<%puts("es un actor?")%>
+<%puts(activity.direct_object.is_a? Actor)%>
+<%puts("Responde a actor?")%>
+<%puts(activity.direct_object.respond_to? :actor)%>
   <div class="subject">
     <%= raw t('notification.fan', 
           :sender => link_to(truncate_name(activity.sender.name), polymorphic_url(activity.sender.subject)),
