@@ -56,4 +56,9 @@ class ActivityObject < ActiveRecord::Base
   def post_activity
     activities.includes(:activity_verb).where('activity_verbs.name' => 'post').first
   end
+
+  # Does this {ActivityObject} has {Actor}?
+  def acts_as_actor?
+    object_type == "Actor"
+  end
 end
