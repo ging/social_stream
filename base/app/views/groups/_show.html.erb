@@ -2,11 +2,13 @@
   <%= @group.name+" | "+t('site.name') %>
 <% end %>
 
-<% #if @group.profile.description? %>
-  <% content_for :description do %>
+<% content_for :description do %>
+  <% if @group.profile.description? %>
+    <%= @group.profile.description%>
+  <% else %>
     <%= @group.name+" "+t('profile.is_on') + " "+ t('site.name') %>
   <% end %>
-<% #end %>
+<% end %>
 
 <% content_for :keywords do %>
   <%= @group.profile.subject.tag_list%>
