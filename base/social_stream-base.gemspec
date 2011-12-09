@@ -35,8 +35,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('kaminari', '~> 0.12.4')
   # OAuth client
   s.add_runtime_dependency('omniauth','~> 0.2.6')
-  # OAuth provider
-  s.add_runtime_dependency('oauth-plugin','~> 0.4.0.pre1')	
   # Messages
   s.add_runtime_dependency('mailboxer','~> 0.5.4')
   # Tagging
