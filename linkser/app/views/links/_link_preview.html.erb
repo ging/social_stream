@@ -21,5 +21,8 @@
         <%= hidden_field_tag "link[description]", link.description %>
       </div>
     <% end %>
+    <% if link.callback_url %>
+        <%= hidden_field_tag "link[callback_url]", link.callback_url %>
+    <% end %>
   </div>
 <% end %>

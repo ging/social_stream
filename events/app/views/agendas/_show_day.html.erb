@@ -1,6 +1,0 @@
-<%sessions = @event.agenda.contents_for_day(day)%>
-<div class="space_center"></div>
-<%for session in sessions%>
-    <%=render :partial =>"sessions/show", :locals =>{:session => session, :expanded => true, :day=>day}%>
-    <div class="space_center"></div>
-<%end%>
