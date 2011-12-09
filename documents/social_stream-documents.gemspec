@@ -14,8 +14,10 @@ Gem::Specification.new do |s|
   # Gem dependencies
   s.add_runtime_dependency('social_stream-base', '~> 0.10.6')
   s.add_runtime_dependency('paperclip-ffmpeg', '~> 0.7.0')
+  # Waiting for version > 2.4.5, which fixes:
+  # https://github.com/thoughtbot/paperclip/issues/293
   s.add_runtime_dependency('paperclip','2.3.11')
-  s.add_runtime_dependency('delayed_paperclip','>= 0.7.2')
+  s.add_runtime_dependency('delayed_paperclip','0.7.2')
   # Development Gem dependencies
   s.add_development_dependency('sqlite3-ruby')
   if RUBY_VERSION < '1.9'
