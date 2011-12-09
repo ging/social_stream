@@ -20,10 +20,22 @@
   padding: 10px;
 }
 .link .thumbnail, .link .thumbnail img{
+  position: relative;
   float: left;
   max-height: 100px;
   max-width: 120px;
   margin-right:10px;
+}
+.link .thumbnail img.play_button{
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  opacity:0.6;
+  filter:alpha(opacity=60); /* For IE8 and earlier */
+}
+.link .thumbnail img.play_button:hover{
+  opacity:0.8;
+  filter:alpha(opacity=80); /* For IE8 and earlier */
 }
 .link .info{
   float: left;
@@ -43,3 +55,6 @@
 }
 .link .info .description{
 }
+.link iframe{
+  border: 0;
+} 

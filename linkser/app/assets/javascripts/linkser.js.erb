@@ -50,6 +50,10 @@ SocialStream.Linkser.initiate = function() {
   }
 }
 
+SocialStream.Linkser.openCallback = function(id,url){
+      $("#" + id).html($('<iframe>').attr('src',url).attr('width','470').attr('height','353'));
+}
+
 $(function(){
   SocialStream.Linkser.initiate();
 });

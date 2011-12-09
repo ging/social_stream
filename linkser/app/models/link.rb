@@ -15,18 +15,26 @@ class Link < ActiveRecord::Base
     has created_at
   end
 
+  def fill linkser_object
+    self.title = linkser_object.title if linkser_object.title
+    self.description = linkser_object.description if linkser_object.description
+    self.url = linkser_object.last_url
+    r = linkser_object.resource
+    if r and r.type and r.url      
+      self.callback_url = r.url
+    end
+    if linkser_object.ogp and linkser_object.ogp.image
+      self.image = linkser_object.ogp.image
+    elsif linkser_object.images and linkser_object.images.first
+      self.image = linkser_object.images.first.url
+    end
+  end
+
   def check_loaded
-    if !self.loaded.eql?"true" and self.title.nil? and self.description.nil? and self.image.nil?
+    if !self.loaded.eql? "true" and self.title.nil? and self.description.nil? and self.image.nil?
       o = Linkser.parse self.url, {:max_images => 1}
       if o.is_a? Linkser::Objects::HTML
-        self.title = o.title if o.title
-        self.description = o.description if o.description
-        self.url = o.last_url
-        if o.ogp and o.ogp.image
-          self.image = o.ogp.image
-        elsif o.images and o.images.first
-          self.image = o.images.first.url
-        end
+        self.fill o
       end
     end
   end
