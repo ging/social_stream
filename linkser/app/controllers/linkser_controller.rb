@@ -5,14 +5,7 @@ class LinkserController < ApplicationController
       o = Linkser.parse url, {:max_images => 1}
       if o.is_a? Linkser::Objects::HTML
         link = Link.new
-        link.title = o.title if o.title
-        link.description = o.description if o.description
-        link.url = o.last_url
-        if o.ogp and o.ogp.image
-          link.image = o.ogp.image
-        elsif o.images and o.images.first
-          link.image = o.images.first.url
-        end
+        link.fill o
         render :partial => "links/link_preview", :locals => {:link => link}
         return
       end

@@ -166,6 +166,16 @@ end %>
         <%= f.text_field :address, :class => "form_tag" %>
       </div>
     </div>
+    <%= f.fields_for :actor do |actor_form| %>
+    <div class="form_row">
+      <div class="form_label">
+        <%= actor_form.label t('profile.email')%>
+      </div>
+      <div class="form_field">
+        <%= actor_form.text_field :email, :class => "email form_tag" %>
+      </div>
+    </div>
+    <%end%>
     <div class="form_row">
       <div class="form_label">
         <%= f.label t('profile.website')%>
