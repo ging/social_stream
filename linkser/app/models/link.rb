@@ -32,9 +32,12 @@ class Link < ActiveRecord::Base
 
   def check_loaded
     if !self.loaded.eql? "true" and self.title.nil? and self.description.nil? and self.image.nil?
-      o = Linkser.parse self.url, {:max_images => 1}
-      if o.is_a? Linkser::Objects::HTML
-        self.fill o
+      begin
+        o = Linkser.parse self.url, {:max_images => 1}
+        if o.is_a? Linkser::Objects::HTML
+          self.fill o
+        end
+      rescue
       end
     end
   end
