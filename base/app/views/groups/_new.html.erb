@@ -9,6 +9,14 @@
 		newel: false,
 		height: 6
   });
+  $("#group_actor_tag_list").fcbkcomplete({
+		json_url: "<%= tags_path(:format => :json) %>",
+		cache: false,
+		filter_case: true,
+		filter_hide: true,
+		newel: false,
+		height: 6
+  });
 <% end %>
 
 <%= location(
@@ -50,6 +58,16 @@
 			</div>
 			<div class="form_field">
 				<%= f.select :_participants, [], :class => "form_tag" %>
+			</div>
+		</div>
+		<div class="form_row">
+			<div class="form_label" id="form_tags">
+				<%= f.label t('group.tags')%>
+			</div>
+			<div class="form_field">
+				<%= f.fields_for :actor do |actor_form| %>
+					<%= actor_form.select :tag_list, [], :class => "form_tag" %>
+				<%end%>
 			</div>
 		</div>
 		<div class="form_row form_label">
