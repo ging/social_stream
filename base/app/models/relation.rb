@@ -1,26 +1,43 @@
-# A relation defines a type of {Tie tie}. Relations are affective (friendship, liking, 
-# respect), formal or biological (authority, kinship), transfer of material 
-# resources (transactions, lending and borrowing), messages or conversations, 
-# physical connection and affiliation to same organizations.
+# A relation defines a type of {Tie} between two {Actor Actors}. From social literature, 
+# {Relation Relations} can be affective (friendship, liking, respect), formal or biological
+# (authority, kinship), transfer of material resources (transactions, lending and borrowing),
+# messages or conversations, physical connection and affiliation to same organizations.
 #
-# = Strength hierarchies
+# = Relation types defined in {SocialStream Social Stream}
 #
-# Relations are arranged in strength hierarchies, denoting that some ties between
-# two actors are stronger than others. For example, a "friend" relation is stronger than 
-# an "acquaintance" relation.
+# All the above cases could be supported in {SocialStream Social Stream}.
+# Nevertheless, the following {Relation Relations} are defined. All of them inherit from the
+# {Relation} class:
 #
-# When a strong tie is established, ties with weaker relations are establised as well
+# {Relation::Custom}:: user-defined {Relation}. Every {SocialStream::Models::Subject Subject}
+#                      is able to define their own {Relation::Custom Custom relation},
+#                      giving them a custom name 
+#                      (for instance: friend, colleague, partner, buddy) and {Permission Permissions}.
+# {Relation::Public}:: default {Relation} for ocassional {Tie Ties}.
+# {Relation::Reject}:: the {SocialStream::Models::Subject Subject} does not want to add the other
+#                      as a contact. A new {Tie} is created using this {Relation}
+#
+# You can define new {Relation Relations} in your application. Just create a new class and
+# inherit from {Relation}. This class already supports
+# {http://api.rubyonrails.org/classes/ActiveRecord/Base.html#label-Single+table+inheritance Single Table Inheritance (STI)}.
+#
+# = Relations and link building
+#
+# When a {SocialStream::Models::Subject Subject} creates a new link to other
+# {SocialStream::Models::Subject Subject}, she must specify one or serveral {Relation Relations}
+# for that link. (friend, colleague, {Relation::Public} or {Relation::Reject}.
+# A new {Tie} will be created for each {Relation}
 #
 # = Permissions
 #
-# {SocialStream::Models::Subject Subjects} assign {Permission permissions} to relations.
+# {SocialStream::Models::Subject Subjects} assign {Permission permissions} to {Relation Relations}.
 # This way, when establishing {Tie ties}, they are granting permissions to their contacts.
 #
 # See the documentation of {Permission} for more details on permission definition.
 #
-# = {Activity Activities} and {Relation relations}
+# = {Activity Activities} and {Relation Relations}
+#
 # Each {Activity} can be attached to one or more {Relation relations}.
-# The {Relation} sets up the mode in which the {Activity} is shared.
 # It sets the {Audience} that has access to it, and the {Permission Permissions} that rule that access.
 #
 class Relation < ActiveRecord::Base

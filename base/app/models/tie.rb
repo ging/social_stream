@@ -1,24 +1,16 @@
-# A {Tie} is a link between two {Actor Actors} ({Contact}) with a {Relation}.
+# A {Tie} is a link between two {Actor Actors},
+# and therefore, two {SocialStream::Models::Subject Subjects}.
 #
-# The first {Actor} is the sender of the {Tie}. The second {Actor}
-# is the receiver of the {Tie}.
-#
-# = Tie strengh
-#
-# Because each {Tie} belongs to a {Relation} and {Relation Relations} have strength
-# hierarchies, {Tie Ties} also have them. A {Tie} is stronger than other if its
-# {Relation} is stronger than the other's. For example, if _Alice_ has a _friend_ {Tie}
-# with _Bob_, and an _acquaintance_ {Tie} with _Charlie_, given that _friend_ {Relation}
-# is stronger than _acquaintance_, the {Tie} with _Bob_ is stronger than the {Tie} with
-# _Charlie_.
-#
+# It is made up with a {Contact} and a {Relation}. The {Contact} defines the sender
+# or {Actor} that declares the link, and the receiver or {Actor} that is pointed by
+# the declaration. The {Relation} defines the type of link (friend, colleague,
+# {Relation::Reject}, etc)
+
 # = Authorization
 # When an {Actor} establishes a {Tie} with other, she is granting a set of
 # {Permission Permissions} to them (posting to her wall, reading her posts, etc..)
 # The set of {Permission Permissions} granted are associated with the {Relation} of
 # the {Tie}.
-#
-# Usually, stronger ties (and relations) have more permissions than weaker ones.
 #
 # = Scopes
 # There are several scopes defined:
@@ -28,6 +20,7 @@
 # sent_or_received_by(actor):: the union of the former
 # related_by(relation):: ties with this relation. Accepts relation, relation_name,
 #                        integer, array
+#
 class Tie < ActiveRecord::Base
 
   belongs_to :contact, :counter_cache => true

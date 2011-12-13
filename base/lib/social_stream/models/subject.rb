@@ -2,15 +2,11 @@ require 'active_support/concern'
 
 module SocialStream
   module Models
-    # {Subject Subjects} are subtypes of {Actor}. {SocialStream} provides two
+    # {Subject Subjects} are subtypes of {Actor Actors}. {SocialStream Social Stream} provides two
     # {Subject Subjects}, {User} and {Group}
     #
-    # Each {Subject} is defined in +config/initializers/social_stream.rb+
-    #
-    # This module provides additional features for models that are subjects,
-    # extending them. Including the module in each {Subject} model is not required!
-    # After declared in +config/initializers/social_stream.rb+, {SocialStream} is
-    # responsible for adding subject features to each model.
+    # Each {Subject} must defined in +config/initializers/social_stream.rb+ in order to be
+    # included in the application.
     #
     # = Scopes
     # There are several scopes available for subjects 

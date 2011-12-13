@@ -1,14 +1,18 @@
-# An {Actor} is a social entity. This includes individuals, but also groups, departments,
+# An {Actor} represents a social entity. This includes individuals, but also groups, departments,
 # organizations even nations or states.
 #
-# Actors are the nodes of a social network. Two actors are linked by a {Tie}. The
-# type of a {tie} is a {Relation}. Each actor can define and customize their relations.
+# Actors are the nodes of a social network. Two actors are linked by {Tie Ties}. The
+# type of a {Tie} is a {Relation}. Each actor can define and customize their relations own
+# {Relation Relations}.
+#
+# Every {Actor} has an Avatar, a {Profile} with personal o group information, contact data, etc.
 #
 # = Actor subtypes
 # An actor subtype is called a {SocialStream::Models::Subject Subject}.
-# {SocialStream} provides 2 actor subtypes, {User} and {Group}, but the
+# {SocialStream} provides two actor subtypes, {User} and {Group}, but the
 # application developer can define as many actor subtypes as required.
-# Actors subtypes are added to +config/initializers/social_stream.rb+
+# Actor subtypes are added to +config/initializers/social_stream.rb+
+#
 #
 class Actor < ActiveRecord::Base
   @subtypes_name = :subject

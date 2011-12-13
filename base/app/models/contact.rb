@@ -1,8 +1,15 @@
-# The link between two {Actor actors}
+# A {Contact} is an ordered pair of {Actor Actors},
+# and therefore two {SocialStream::Models::Subject Subjects}.
 #
-# Each {Contact} has many {Tie ties}, which determine the kind of the link through {Relation relations}
+# {Contact Contacts} are created at convenience (in the case of {Actor#suggestions suggestions},
+# for instance), and they do not mean that there is a real link between those two
+# {SocialStream::Models::Subject Subjects}. Link existance is stored as {Tie Ties}.
 #
 # = {Contact Contacts} and {Activity activities}
+#
+# WARNING: This will be change soon to direct references to author, owner and user_author,
+# in the same way as {ActivityObject}
+#
 # Each {Activity} is attached to a {Contact}. When _Alice_ post in _Bob_'s wall,
 # the {Activity} is attached to the {Contact} from _Alice_ to _Bob_
 #
