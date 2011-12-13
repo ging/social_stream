@@ -52,8 +52,8 @@ stop(Host) ->
 on_register_connection(_SID, _JID, _Info) ->
     {_A,User,_B,_C,_D,_E,_F} = _JID,
     ?INFO_MSG("mod_sspresence: on_register_connection (~p)", [User]),
-    Login_path = string:concat(getOptionValue("scripts_path="), "/set_connection_script "),
-    os:cmd(string:join([Login_path, User ], " ")),
+    Rest_api_script_path = string:concat(getOptionValue("scripts_path="), "/rest_api_client_script "),
+    os:cmd(string:join([Rest_api_script_path, "setConnection", User ], " ")),
     ok.
 
 on_remove_connection(_SID, _JID, _SessionInfo) ->
@@ -62,8 +62,8 @@ on_remove_connection(_SID, _JID, _SessionInfo) ->
     Connected = isConnected(User),
     case Connected of
 	true -> ok;
-	_ -> Logout_path = string:concat(getOptionValue("scripts_path="), "/unset_connection_script "),
-             os:cmd(string:join([Logout_path, User ], " "))
+	_ -> Rest_api_script_path = string:concat(getOptionValue("scripts_path="), "/rest_api_client_script "),
+             os:cmd(string:join([Rest_api_script_path, "unsetConnection", User ], " "))
     end,
     ok.
 
@@ -73,19 +73,19 @@ on_presence(User, _Server, _Resource, Packet) ->
 
     case Type of
 	"presence" -> Status = getStatusFromSubel(Subel),
-		      Presence_path = string:concat(getOptionValue("scripts_path="), "/set_presence_script "),
+		      Rest_api_script_path = string:concat(getOptionValue("scripts_path="), "/rest_api_client_script "),
 		      ?INFO_MSG("mod_sspresence: set_presence_script call with  user (~p) and status (~p)", [User,Status]),
-    		      os:cmd(string:join([Presence_path, User , Status], " "));
+    		      os:cmd(string:join([Rest_api_script_path, "setPresence", User , Status], " "));
 	_ -> ok
     end,
     ok.
 
 on_unset_presence(User, _Server, _Resource, _Status) ->
     ?INFO_MSG("mod_sspresence: on_unset_presence (~p)", [User]),
-    _UPresence_path = string:concat(getOptionValue("scripts_path="), "/unset_presence_script "),
+    _Rest_api_script_path = string:concat(getOptionValue("scripts_path="), "/rest_api_client_script "),
     %% Wait for on_remove_connection
     %% ?INFO_MSG("mod_sspresence: unset_presence_script call with  user (~p)", [User]),
-    %%os:cmd(string:join([UPresence_path, User , Status], " "));
+    %%os:cmd(string:join([_Rest_api_script_path, "unsetPresence", User , Status], " ")),
     ok.
 
 on_packet_send(_From, _To, {xmlelement, Type, _Attr, _Subel} = _Packet) ->
@@ -185,8 +185,8 @@ end.
 
 %Reset all connections
 reset_connections() ->
-	Reset_path = string:concat(getOptionValue("scripts_path="), "/reset_connection_script "),
-	os:cmd(Reset_path),
+	Rest_api_script_path = string:concat(getOptionValue("scripts_path="), "/rest_api_client_script "),
+	os:cmd(string:join([Rest_api_script_path, "resetConnection"], " ")),
 ok.
 
 

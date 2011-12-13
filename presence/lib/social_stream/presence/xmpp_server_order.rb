@@ -5,6 +5,9 @@ require 'xmpp4r/client'
 require 'xmpp4r/message'
 require 'net/ssh'
 require 'net/sftp'
+require 'openssl'
+require 'digest/md5'
+
 
 module SocialStream
   module Presence
@@ -111,18 +114,18 @@ module SocialStream
           
           #Installation methods
           
-          def copyFolder(oPath,dPath)
+          def copyFolderToXmppServer(oPath,dPath)
             if SocialStream::Presence.remote_xmpp_server
               #Remote mode
-              copyRemoteFolder(oPath,dPath)
+              copyFolderToXmppServerRemote(oPath,dPath)
             else
               #Local mode
-              SocialStream::Presence::XmppServerOrder::executeCommand("cp -r " + oPath + "/* " + dPath)
+              executeCommand("cp -r " + oPath + "/* " + dPath)
             end
           end
           
           
-          def copyRemoteFolder(localPath,remotePath)
+          def copyFolderToXmppServerRemote(localPath,remotePath)
             begin
               if SocialStream::Presence.ssh_password             
                
@@ -150,7 +153,15 @@ module SocialStream
           end
           
           
-          def recursiveCopyFolder(localPath,remotePath,sftp) 
+          def recursiveCopyFolder(localPath,remotePath,sftp)
+            
+            #Check if localPath is a file
+            if File.file?(localPath) and File.file?(remotePath)
+              puts "Copy files..."
+              sftp.upload(localPath, remotePath)
+              return
+            end
+            
             # Create directory if not exits
             sftp.mkdir(remotePath)
             # Upload files to the remote host        
@@ -172,6 +183,7 @@ module SocialStream
 
             autoconf.push("scripts_path=" + SocialStream::Presence.scripts_path)
             autoconf.push("ejabberd_password=" + SocialStream::Presence.xmpp_server_password)
+            autoconf.push("secure_rest_api=" + SocialStream::Presence.secure_rest_api.to_s)
             autoconf.push("server_domain=" + SocialStream::Presence.domain)
             autoconf.push("cookie_name=" + Rails.application.config.session_options[:key])
             
@@ -220,6 +232,53 @@ module SocialStream
             end
           end
           
+          def generateRSAKeys(keysPath)
+            
+            unless File.directory?(keysPath)
+              return "Keys path not exists"
+            end
+            
+            web_public_key_path=keysPath+"/web_rsa_key_public.pem"
+            web_private_key_path=keysPath+"/web_rsa_key_private.pem"
+            xmpp_public_key_path=keysPath+"/xmpp_rsa_key_public.pem"
+            xmpp_private_key_path=keysPath+"/xmpp_rsa_key_private.pem"
+            
+            # .generate creates an object containing both keys
+            web_rsa_key = OpenSSL::PKey::RSA.generate( 1024 )
+            xmpp_rsa_key = OpenSSL::PKey::RSA.generate( 1024 )
+            
+            #Write keys as PEM's
+
+            #Public Key
+            web_rsa_key_public = web_rsa_key.public_key
+            xmpp_rsa_key_public = xmpp_rsa_key.public_key
+            output_public = File.new(web_public_key_path, "w")
+            output_public.puts web_rsa_key_public
+            output_public.close
+            output_public = File.new(xmpp_public_key_path, "w")
+            output_public.puts xmpp_rsa_key_public
+            output_public.close
+            puts "New Web Server public key stored in #{web_public_key_path}\n"
+            #puts "New Web Server public key:\n#{web_rsa_key_public}\n"
+            puts "New Xmpp Server public key stored in #{xmpp_public_key_path}\n"
+            #puts "New Xmpp Server public key:\n#{xmpp_rsa_key_public}\n"
+                       
+            #Private Key
+            web_rsa_key_private = web_rsa_key.to_pem
+            xmpp_rsa_key_private = xmpp_rsa_key.to_pem
+            output_private = File.new(web_private_key_path, "w")
+            output_private.puts web_rsa_key_private
+            output_private.close
+            output_private = File.new(xmpp_private_key_path, "w")
+            output_private.puts xmpp_rsa_key_private
+            output_private.close
+            puts "New Web Server private key stored in #{web_private_key_path}\n"
+            #puts "New Web Server private key:\n#{web_rsa_key_private}\n"
+            puts "New Xmpp Server private key stored in #{xmpp_private_key_path}\n"
+            #puts "New Xmpp Server private key:\n#{xmpp_rsa_key_private}\n"
+            
+            puts "Finish"
+          end
           
           #Execution commands manage  
         
@@ -264,44 +323,153 @@ module SocialStream
             return output
           end
         
+          def executeLocalCommand(command)
+            puts "Executing " + parsingCommand(command)
+            return executeLocalCommands([command])
+          end
+        
           def executeLocalCommands(commands)
-            output="No command received";
+            if commands.empty?
+              return "No command received";
+            end
+            output=""
             commands.each do |command|
-                output = %x[#{command}];
+                response = %x[#{command}]
+                output = output + "\n" + response;
             end
             return output
           end
         
           def executeRemoteCommands(commands)
-            output="No command received";
+            if commands.empty?
+              return "No command received";
+            end
             
             begin
+              output="";
               if SocialStream::Presence.ssh_password
                 Net::SSH.start( SocialStream::Presence.ssh_domain, SocialStream::Presence.ssh_user, :password => SocialStream::Presence.ssh_password, :auth_methods => ["password"]) do |session|
                   commands.each do |command|
-                    output = session.exec!(command)
+                    response = session.exec!(command)
+                    if response != nil
+                      output = output + "\n" + response
+                    end
                   end
                 end
               else
                 #SSH with authentication key instead of password
                 Net::SSH.start( SocialStream::Presence.ssh_domain, SocialStream::Presence.ssh_user) do |session|
                   commands.each do |command|
-                    output = session.exec!(command)
+                    response = session.exec!(command)
+                    if response != nil
+                      output = output + "\n" + response
+                    end
                   end
                 end
               end
             rescue Exception => e
               case e
                 when Net::SSH::AuthenticationFailed
-                  output = "AuthenticationFailed on remote access"
+                  return "ERROR: AuthenticationFailed on remote access"
                 else
-                  output = "Unknown exception in executeRemoteCommands method: #{e.to_s}"
+                  return "ERROR: Unknown exception in executeRemoteCommands method: #{e.to_s}"
               end
             end  
  
             return output
           end
 
+        
+          #Authorization methods
+          def authorization(params)
+            case SocialStream::Presence.secure_rest_api
+            when true
+              #Authorization using asymmetric RSA keys
+              begin
+                presence_root = File.expand_path("../../../../", __FILE__)
+                xmpp_public_key_path = presence_root + "/rsa_keys/xmpp_rsa_key_public.pem";
+                xmpp_public_key = OpenSSL::PKey::RSA.new(File.read(xmpp_public_key_path))
+                
+                stamp = xmpp_public_key.public_decrypt( params[:password] )
+               
+                #stamp = password#####timestamp#####hash
+                stampParams=stamp.split("#####")
+                password = stampParams[0]
+                timestamp = stampParams[1]
+                hash = stampParams[2]
+                
+                myHash = calculateHash(params)
+                
+                #Evaluating Hash
+                if (myHash != hash)
+                  #Hash not valid
+                  return false
+                end
+                
+                #Evaluating Timestamp
+                if ((Time.now.utc - Time.parse(timestamp).utc).to_int > (10*60))
+                  #Timestamp not valid
+                  return false
+                end
+
+                #Evaluating Password
+                return ( password == SocialStream::Presence.xmpp_server_password )
+              rescue
+                return false
+              end
+            else
+              #Basic authorization
+              return ( params[:password] and params[:password] == SocialStream::Presence.xmpp_server_password )
+            end
+          end
+          
+          
+          def calculateHash(params)
+            if params
+              params.delete("password")
+              params.delete("controller")
+              params.delete("action")
+            else
+              params = {};
+            end
+            
+            hash = "";
+            params.each do |key,value|
+              hash = hash + key.to_s + value.to_s
+            end
+            return Digest::MD5.hexdigest(hash)
+          end
+        
+        
+          def decryptParams(params)     
+            case SocialStream::Presence.secure_rest_api
+            when true
+              #Secure Mode
+              begin
+                if params[:encrypted_params]
+                  presence_root = File.expand_path("../../../../", __FILE__)
+                  web_private_key_path = presence_root + "/rsa_keys/web_rsa_key_private.pem";
+                  private_key = OpenSSL::PKey::RSA.new(File.read(web_private_key_path))
+                  
+                  clear_params_hash_string = private_key.private_decrypt( params[:encrypted_params] )
+                  clear_params = getHashFromHashString(clear_params_hash_string)
+                  params.delete("encrypted_params")
+                  
+                  clear_params.each do |key,value|
+                    params[key] = value
+                  end
+                end
+              
+                return params
+              rescue
+                return "Error in function: decryptParam(param)"
+              end
+              
+            else
+              #Non Secure Mode
+              return params
+            end
+          end
         
         
          #Help methods
@@ -315,6 +483,16 @@ module SocialStream
           def parsingCommand(command)
               #Hide passwords on sudo commands: command pattern = "echo password | sudo -S order"
               return command.gsub(/echo ([aA-zZ]+) [|] sudo -S [.]*/,"echo ****** | sudo -S \\2")
+          end
+          
+          def getHashFromHashString(hashString)
+            hash={}
+            hashString[1..-2].split(/, /).each {|entry|
+              entryMap=entry.split(/=>/); 
+              value_str = entryMap[1]; 
+              hash[entryMap[0].strip[1..-1].to_sym] = value_str.nil? ? "" : value_str.strip[1..-2]
+            }
+            return hash
           end
         
          #Xmpp client manage methods

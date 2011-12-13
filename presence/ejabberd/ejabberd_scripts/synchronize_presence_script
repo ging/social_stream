@@ -1,9 +1,14 @@
 #!/usr/bin/env ruby
-#Presence Script
+#Rest Api Client Script
+#Version: 13-12-2011
 #@author Aldo
+
 
 require 'logger'
 require 'rest_client'
+require 'openssl'
+require 'digest/md5'
+
 
 path = "/var/log/ejabberd/scripts.log"
 file = File.open(path, File::WRONLY | File::APPEND | File::CREAT)
@@ -25,35 +30,268 @@ def getOption(option)
   return "Undefined"
 end
 
-$url = "http://" + getOption("web_domain=") + "/xmpp/synchronizePresence"
+#Constants
+$secure_rest_api = getOption("secure_rest_api=")
 $pass = getOption("ejabberd_password=")
 $scripts_path = getOption("scripts_path=")
+$script_title = "Synchronize Presence script"
 
 
-def log(text)
-	$logger.info "Synchronize Presence Script: " + text
+def log(title,text)
+	$logger.info title + ": " + text
 end
+
+def getMethodName
+  caller[0] =~ /`(.*?)'/
+  $1
+end
+
+
+#####################
+#####  Example  #####
+#####################
+#def myHook(param1,param2)
+#    log(getMethodName,"(My message: #{param1},#{param2})")
+#    url = "http://" + getOption("web_domain=") + "/xmpp/hookRoute"
+
+#    params = {}
+#    encrypted_params = {}
+#    #Add params to sent in clear
+#    params[:param1_in_server]=param1
+#    #Add params to sent cipher
+#    encrypted_params[:param2_in_server]=param2
+
+#    return [getMethodName,generic_api_call(url,params,encrypted_params)]
+#end
+
+def setConnection(username)
+    log($script_title,"#{getMethodName}(#{username})")
+    url = "http://" + getOption("web_domain=") + "/xmpp/setConnection"
+
+    params = {}
+    encrypted_params = {}
+    encrypted_params[:name]=username
+
+    return [getMethodName,generic_api_call(url,params,encrypted_params)]
+end
+
+
+def unsetConnection(username)
+    log($script_title,"#{getMethodName}(#{username})")
+    url = "http://" + getOption("web_domain=") + "/xmpp/unsetConnection"
+
+    params = {}
+    encrypted_params = {}
+    encrypted_params[:name]=username
+
+    return [getMethodName,generic_api_call(url,params,encrypted_params)]
+end
+
+
+def setPresence(username,status)
+    log($script_title,"#{getMethodName}(#{username},#{status})")
+    url = "http://" + getOption("web_domain=") + "/xmpp/setPresence"
+
+    params = {}
+    encrypted_params = {}
+    encrypted_params[:name]=username
+    encrypted_params[:status]=status
+
+    return [getMethodName,generic_api_call(url,params,encrypted_params)]
+end
+
+
+def unsetPresence(username)
+    log($script_title,"#{getMethodName}(#{username})")
+    url = "http://" + getOption("web_domain=") + "/xmpp/unsetPresence"
+
+    params = {}
+    encrypted_params = {}
+    encrypted_params[:name]=username
+
+    return [getMethodName,generic_api_call(url,params,encrypted_params)]
+end
+
+
+def resetConnection()
+    log($script_title,"Call #{getMethodName}()")
+    url = "http://" + getOption("web_domain=") + "/xmpp/resetConnection"
+
+    params = {}
+    encrypted_params = {}
+
+    return [getMethodName,generic_api_call(url,params,encrypted_params)]
+end
+
 
 def synchronize()
-  log("Start Synchronize")
- 
-  users = []
-  command = $scripts_path + "/emanagement getConnectedUsers"
-  output = %x[#{command}]
-  sessions = output.split("\n")
-  
-  sessions.each do |session|
-	users << session.split("@")[0]
-  end
+    log($script_title,"Call #{getMethodName}()")
+    url = "http://" + getOption("web_domain=") + "/xmpp/synchronizePresence"
 
-  RestClient.post($url, :name => users, :password => $pass)
-  return true
 
-  rescue RestClient::Exception
-    log("RestClient::Exception")
+    #Get connected users using Emanagement
+    users = []
+    command = $scripts_path + "/emanagement getConnectedUsers"
+    output = %x[#{command}]
+    sessions = output.split("\n")
+
+    sessions.each do |session|
+      users << session.split("@")[0]
+    end
+    #Finish
+
+
+    #In this cases users always will be sent in clear (not cipher)
+    #(Too much data to cipher)
+    #Anyway, we must to build the hash to pass the authentication
+    params = {}
+    encrypted_params = {}
+    params[:name]=users.join(",")
+
+    return [getMethodName,generic_api_call(url,params,encrypted_params)]
 end
 
 
-synchronize()
 
+#Params must include the password and all the parameters to be sent in clear.
+#Anyway, If "secure_rest_api" is disable, encrypted_params will be send in clear.
+def generic_api_call(url,params,encrypted_params)
+
+  begin
+    unless params
+ 	params = {}
+    end
+
+    unless encrypted_params
+ 	 encrypted_params = {}
+    end
+
+    params[:password]=$pass
+
+    response=sendHttpRequest(url,params,encrypted_params)
+    puts response.body
+
+    if response.body.include?("Ok")
+    	return true
+    else
+    	return false
+    end
+
+  rescue => e
+    log($script_title,"#{e.class.name}: #{e.message}")
+    puts("#{e.class.name}: #{e.message}")
+    return false
+  end
+end
+
+
+#Send HTTP Request to Social Stream Presence API
+def sendHttpRequest(url,params,encrypted_params)
+
+    unless params[:password]
+	return "params[:password] required in sendHttpRequest";
+    end
+
+
+    if $secure_rest_api == "true"
+	xmpp_private_key_path = $scripts_path + "/rsa_keys/xmpp_rsa_key_private.pem";
+    	web_public_key_path = $scripts_path + "/rsa_keys/web_rsa_key_public.pem";
+    	xmpp_private_key = OpenSSL::PKey::RSA.new(File.read(xmpp_private_key_path))
+    	web_public_key = OpenSSL::PKey::RSA.new(File.read(web_public_key_path))
+
+	request_params = {};
+
+	#Copy non encypted params
+        params.each do |key,value|
+	  unless key.to_s == "password"
+		request_params[key] = value
+	  end 
+        end
+
+	#Include encrypted params
+	if encrypted_params and encrypted_params.empty? == false
+	  request_params[:encrypted_params] = web_public_key.public_encrypt(encrypted_params.to_s)
+	end
+	
+	#Generating stamp
+	#1 Get constant password
+	password = params[:password];
+	#2 Generating timestamp
+	timestamp = Time.now.utc.to_s
+	#3 Calculating Hash
+    	hash = calculateHash(request_params)
+
+	#Add cipher stamp to the request
+	request_params[:password] = xmpp_private_key.private_encrypt(password+"#####"+timestamp+"#####"+hash)
+	
+	#Replace previous params
+	params = request_params
+    else
+	#Non secure mode: send encrypted params in clear
+	if encrypted_params
+	  encrypted_params.each do |key,value|
+	      params[key] = value
+	  end
+	end
+    end
+    
+    response = RestClient.get url, :params => params
+    return response
+end
+
+
+def calculateHash(request_params)
+	unless request_params
+		request_params = {};
+	end
+
+	hash = "";
+        request_params.each do |key,value|
+              hash = hash + key.to_s + value.to_s
+        end
+        return Digest::MD5.hexdigest(hash)
+end
+
+
+
+
+def invokeApiCall(method,args)
+	length = args.length;
+	case length
+	when 0
+	  return send(method)
+	when 1
+	  return send(method,args[0])
+	when 2
+	  return send(method,args[0],args[1])
+	when 3
+	  return send(method,args[0],args[1],args[2])
+	when 4
+	  return send(method,args[0],args[1],args[2],args[3])
+	else
+	  return send(method,args)
+	end
+end
+
+
+#Main Program
+
+begin
+
+	args = []
+	method = "synchronize"
+
+	if (response = invokeApiCall(method, args) and response[1])
+	  	puts $script_title  + ": #{response[0]} [OK]"
+	  	log( $script_title  , "#{response[0]} [OK]" )
+	else
+	  	puts $script_title  + ": #{response[0]} [FAIL]"
+	  	log( $script_title  , "#{response[0]} [FAIL]" )
+	end
+
+rescue => e
+	log($script_title,"#{e.class.name}: #{e.message}")
+   	puts("#{e.class.name}: #{e.message}")
+    	exit 1
+end
 

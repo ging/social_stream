@@ -1,5 +1,7 @@
 class XmppController < ApplicationController
   
+  before_filter :authorization, :only => [:setConnection, :unsetConecction, :setPresence, :unsetPresence, :resetConnection, :synchronizePresence ]
+  
   #Mapping XMPP Standar Status to Social Stream Chat Status
   STATUS = {
   '' => 'available', 
@@ -10,14 +12,12 @@ class XmppController < ApplicationController
   }
    
    
-  #API METHODS
+  ############################## 
+  ########## REST API ##########
+  ##############################
   
-  def setConnection  
-    unless authorization
-      render :text => "Authorization error"
-      return
-    end
-    
+  def setConnection
+    params = @dparams
     user = User.find_by_slug(params[:name])
     
     if user && !user.connected
@@ -28,16 +28,12 @@ class XmppController < ApplicationController
        return
     end
     
-    render :text => "Error"
+    render :text => "Ok: The user was already connected"
   end
   
   
   def unsetConecction
-    unless authorization
-      render :text => "Authorization error"
-      return
-    end
-    
+    params = @dparams
     user = User.find_by_slug(params[:name])
     
     if user && user.connected
@@ -47,16 +43,12 @@ class XmppController < ApplicationController
        return
     end
     
-    render :text => "User not connected"
+    render :text => "Ok: The user was already disconnected"
   end
   
   
-  def setPresence  
-    unless authorization
-      render :text => "Authorization error"
-      return
-    end
-    
+  def setPresence 
+    params = @dparams
     user = User.find_by_slug(params[:name])
     status = params[:status]
     
@@ -65,20 +57,16 @@ class XmppController < ApplicationController
         user.connected = true
         user.save!
       end
-      render :text => 'Status changed'
+      render :text => "Ok: Status changed"
     else
-      render :text => 'Status not changed'
+      render :text => "Ok: Status not changed"
     end
     
   end
   
   
-  def unsetPresence  
-    unless authorization
-      render :text => "Authorization error"
-      return
-    end
-    
+  def unsetPresence
+    params = @dparams
     user = User.find_by_slug(params[:name])
     
     if user && user.connected
@@ -88,44 +76,36 @@ class XmppController < ApplicationController
        return
     end
     
-    render :text => "User not connected"
+    render :text => "Ok: The user was already disconnected"
   end
   
   
   def resetConnection
-    unless authorization
-      render :text => "Authorization error"
-      return
-    end
-    
     SocialStream::Presence::XmppServerOrder::resetPresence
-    
     render :text => "Ok" 
   end
   
   
-  def synchronizePresence  
-    unless authorization
-      render :text => "Authorization error"
+  def synchronizePresence
+    params = @dparams
+    
+    #Work without encrypted params
+    if params[:name] == nil or params[:name].empty? or params[:name]==""
+      render :text => "Ok: No users received"
       return
-    end 
-     
+    end
+    
     #Actual connected users
-    user_slugs = params[:name]  
-    
+    user_slugs = params[:name].split(",")
     SocialStream::Presence::XmppServerOrder::synchronizePresenceForSlugs(user_slugs)
-    
-    render :text => "ok"
-  end
- 
- 
-  def authorization
-    return params[:password] == SocialStream::Presence.xmpp_server_password
+    render :text => "Ok"
   end
   
   
-  def chatWindow
-    
+  
+  #OPEN METHODS
+  
+  def chatWindow 
     if current_user and current_user.chat_enabled and (params[:userConnected]=="true")
       render :partial => 'chat/contacts'
     elsif current_user and current_user.chat_enabled
@@ -183,7 +163,7 @@ class XmppController < ApplicationController
   private
   
   def setStatus(user,status)
-    if user and status and user.status != status and validStatus(status)  
+    if user and status and validStatus(status) and user.status != STATUS[status]
       user.status = STATUS[status]
       user.save!
       return true
@@ -193,6 +173,15 @@ class XmppController < ApplicationController
   
   def validStatus(status)
     return STATUS.keys.include?(status)
+  end
+  
+  
+  #Authorization to use REST API
+  def authorization
+    unless SocialStream::Presence::XmppServerOrder::authorization(params)
+      render :text => "Authorization error"
+    end
+    @dparams = SocialStream::Presence::XmppServerOrder::decryptParams(params)
   end
   
 end

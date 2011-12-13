@@ -20,6 +20,7 @@ module SocialStream
     mattr_accessor :bosh_service
     mattr_accessor :auth_method
     mattr_accessor :xmpp_server_password
+    mattr_accessor :secure_rest_api
     mattr_accessor :remote_xmpp_server
     mattr_accessor :scripts_path
     mattr_accessor :ejabberd_module_path
@@ -34,6 +35,7 @@ module SocialStream
 
     @@auth_method = "cookie"
     @@remote_xmpp_server = false
+    @@secure_rest_api = false
     @@enable = false
     
     class << self

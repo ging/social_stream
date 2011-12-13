@@ -34,7 +34,7 @@ end
 $secure_rest_api = getOption("secure_rest_api=")
 $pass = getOption("ejabberd_password=")
 $scripts_path = getOption("scripts_path=")
-$script_title = "Reset Connection script"
+$script_title = "Rest Api Client"
 
 
 def log(title,text)
@@ -279,7 +279,11 @@ end
 begin
 
 	args = []
-	method = "resetConnection";
+	method = ARGV[0];
+	ARGV.each do |arg|
+		args.push(arg)
+	end
+	args.shift;
 
 	if (response = invokeApiCall(method, args) and response[1])
 	  	puts $script_title  + ": #{response[0]} [OK]"

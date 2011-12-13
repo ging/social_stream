@@ -1,6 +1,6 @@
 namespace :presence do
   desc 'Copy ejabberd files to the xmpp server and write configuration files'
-  task :install => [ 'presence:install:copy_xmpp_server_files', 'presence:install_xmpp_server' , 'presence:autoconfigure_xmpp_server' ]
+  task :install => [ 'presence:install:copy_xmpp_server_files', 'presence:install_xmpp_server' , 'presence:autoconfigure_xmpp_server' , 'presence:generate_RSA_keys' ]
 
   namespace :install do
 
@@ -15,7 +15,7 @@ namespace :presence do
       #Cleaning dpath
       SocialStream::Presence::XmppServerOrder::executeCommands(["rm -r " + dpath,"mkdir -p " + dpath])
       #Copy folders
-      SocialStream::Presence::XmppServerOrder::copyFolder(opath,dpath)
+      SocialStream::Presence::XmppServerOrder::copyFolderToXmppServer(opath,dpath)
       
       puts "Social Stream Ejabberd files copied to " + dpath + " in Xmpp Server"
       puts "Copy_xmpp_server_files: Task complete"
@@ -63,9 +63,12 @@ namespace :presence do
         commands << "echo " + password + " | sudo -S " + SocialStream::Presence.scripts_path + "/sstream_ejabberd_files/installer.sh \"ejabberd_module_path=" + SocialStream::Presence.ejabberd_module_path + "\" \"scripts_path=" + SocialStream::Presence.scripts_path + "\" \"" + options + "\""
         
         #Execution order
-        output = SocialStream::Presence::XmppServerOrder::executeCommands(commands)
-        
+        output = SocialStream::Presence::XmppServerOrder::executeCommands(commands) 
         puts output
+        
+        #Generate RSA Keys
+        Rake::Task["presence:install:generate_RSA_keys"].execute
+        
         puts "Installation complete"
     end
     
@@ -94,6 +97,37 @@ namespace :presence do
       
       puts output
       puts "Autoconfigure complete"
+    end
+    
+    
+    desc "Generate and distribute RSA Keys"
+    task :generate_RSA_keys => :environment do
+      puts "Starting presence:generate_RSA_keys"
+      
+      presence_root = File.expand_path("../../../../", __FILE__)
+      webKeysPath = presence_root + "/rsa_keys";
+      xmppKeysPath = SocialStream::Presence.scripts_path + "/rsa_keys";
+      
+      puts "Cleaning previous keys"
+      #Cleaning Keys path
+      SocialStream::Presence::XmppServerOrder::executeLocalCommand("rm -r " + webKeysPath)
+      SocialStream::Presence::XmppServerOrder::executeLocalCommand("mkdir -p " + webKeysPath)
+      SocialStream::Presence::XmppServerOrder::executeCommands(["rm -r " + xmppKeysPath,"mkdir -p " + xmppKeysPath])
+      
+      puts "Generating new keys"
+      #Generating RSA Keys
+      SocialStream::Presence::XmppServerOrder::generateRSAKeys(webKeysPath)
+      
+      puts "Copy keys to the Xmpp Server"
+      #Copy Xmpp Keys to the Xmpp Server
+      SocialStream::Presence::XmppServerOrder::copyFolderToXmppServer(webKeysPath,xmppKeysPath)
+      
+      #Remove not own private keys
+      puts "Removing not own private keys"
+      SocialStream::Presence::XmppServerOrder::executeLocalCommand("rm -r " + webKeysPath + "/xmpp_rsa_key_private.pem")
+      SocialStream::Presence::XmppServerOrder::executeCommands(["rm -r " + xmppKeysPath + "/web_rsa_key_private.pem"])  
+
+      puts "Generate_RSA_keys: Task complete"
     end
     
   end
