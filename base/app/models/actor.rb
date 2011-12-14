@@ -485,6 +485,16 @@ class Actor < ActiveRecord::Base
     slug
   end
   
+  # JSON compatible with SocialCheesecake
+  def cheesecake_json
+    {
+      :sectors =>
+        relation_customs.map { |r|
+          r.to_cheesecake_hash
+        }
+    }.to_json
+  end
+
   private
   
   # After create callback

@@ -96,4 +96,17 @@ class Relation::Custom < Relation
   def stronger_or_equal
     path
   end
+
+  # JSON compatible with SocialCheesecake
+  def to_cheesecake_hash(options = {})
+    { :name => name }.tap do |hash|
+      if options[:subsector]
+        hash[:actors] = ties.map(&:receiver_id).uniq
+      else
+        hash[:subsectors] = ( weaker.present? ?
+                              weaker.map{ |w| w.to_cheesecake_hash(:subsector => true) } :
+                              Array.wrap(to_cheesecake_hash(:subsector => true)) )
+      end
+    end
+  end
 end

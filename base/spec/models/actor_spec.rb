@@ -48,4 +48,24 @@ describe Actor do
 
     Actor.find_by_id(a.id).should be_nil
   end
+
+  context "cheesecake" do
+    describe "one custom" do
+      before do
+        @user = Factory(:user)
+      end
+
+      it "should build json" do
+        hash = {
+          :sectors => @user.relation_customs.map do |r|
+            { :name => r.name,
+              :subsectors => [ { :name => r.name, :actors => [] } ]
+            }
+          end
+        }
+
+        @user.cheesecake_json.should eq(hash.to_json)
+      end
+    end
+  end
 end
