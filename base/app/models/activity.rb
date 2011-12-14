@@ -317,7 +317,7 @@ class Activity < ActiveRecord::Base
     receiver_name= receiver.name.truncate(30, :separator => ' ')
     case verb 
       when 'like'
-        if direct_object.is_a? Actor or direct_object.respond_to? :actor
+        if direct_object.acts_as_actor?
           I18n.t('notification.fan', 
                 :sender => sender_name,
                 :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
