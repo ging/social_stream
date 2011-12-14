@@ -6,8 +6,6 @@
 
 require 'logger'
 require 'rest_client'
-require 'openssl'
-require 'digest/md5'
 
 
 path = "/var/log/ejabberd/scripts.log"
@@ -194,6 +192,9 @@ def sendHttpRequest(url,params,encrypted_params)
 
 
     if $secure_rest_api == "true"
+	#Require libraries
+	require 'openssl'
+
 	xmpp_private_key_path = $scripts_path + "/rsa_keys/xmpp_rsa_key_private.pem";
     	web_public_key_path = $scripts_path + "/rsa_keys/web_rsa_key_public.pem";
     	xmpp_private_key = OpenSSL::PKey::RSA.new(File.read(xmpp_private_key_path))
@@ -241,6 +242,8 @@ end
 
 
 def calculateHash(request_params)
+	require 'digest/md5'
+
 	unless request_params
 		request_params = {};
 	end

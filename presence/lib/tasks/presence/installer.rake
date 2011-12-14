@@ -66,8 +66,10 @@ namespace :presence do
         output = SocialStream::Presence::XmppServerOrder::executeCommands(commands) 
         puts output
         
-        #Generate RSA Keys
-        Rake::Task["presence:install:generate_RSA_keys"].execute
+        if SocialStream::Presence.secure_rest_api
+          #Generate RSA Keys
+          Rake::Task["presence:install:generate_RSA_keys"].execute
+        end   
         
         puts "Installation complete"
     end

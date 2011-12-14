@@ -5,8 +5,6 @@ require 'xmpp4r/client'
 require 'xmpp4r/message'
 require 'net/ssh'
 require 'net/sftp'
-require 'openssl'
-require 'digest/md5'
 
 
 module SocialStream
@@ -238,6 +236,9 @@ module SocialStream
               return "Keys path not exists"
             end
             
+            #Require libraries
+            require 'openssl'
+
             web_public_key_path=keysPath+"/web_rsa_key_public.pem"
             web_private_key_path=keysPath+"/web_rsa_key_private.pem"
             xmpp_public_key_path=keysPath+"/xmpp_rsa_key_public.pem"
@@ -386,6 +387,9 @@ module SocialStream
             when true
               #Authorization using asymmetric RSA keys
               begin
+                #Require libraries
+                require 'openssl'
+                
                 presence_root = File.expand_path("../../../../", __FILE__)
                 xmpp_public_key_path = presence_root + "/rsa_keys/xmpp_rsa_key_public.pem";
                 xmpp_public_key = OpenSSL::PKey::RSA.new(File.read(xmpp_public_key_path))
@@ -425,6 +429,9 @@ module SocialStream
           
           
           def calculateHash(params)
+            #Require libraries
+            require 'digest/md5'
+            
             if params
               params.delete("password")
               params.delete("controller")
@@ -446,6 +453,9 @@ module SocialStream
             when true
               #Secure Mode
               begin
+                #Require libraries
+                require 'openssl'
+                
                 if params[:encrypted_params]
                   presence_root = File.expand_path("../../../../", __FILE__)
                   web_private_key_path = presence_root + "/rsa_keys/web_rsa_key_private.pem";
