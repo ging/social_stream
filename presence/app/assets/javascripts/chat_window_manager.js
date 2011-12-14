@@ -53,7 +53,8 @@ function createChatBox(guest_slug,guest_name,guest_jid,user_name,user_jid){
 															
                               messageSent : function(id, user, msg) {
 																	rotatePriority(guest_slug);
-                                  $("#" + guest_slug).chatbox("option", "boxManager").addMsg(id, getParsedContent(msg,true));
+																	var headerMessage = getParsedName(id,true);
+                                  $("#" + guest_slug).chatbox("option", "boxManager").addMsg(headerMessage, getParsedContent(msg,true));
                                   sendChatMessage(user_jid,guest_jid,msg);
                               }});
 															

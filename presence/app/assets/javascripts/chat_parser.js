@@ -241,3 +241,17 @@ function getUrlType(url){
       return "link"
   }
 }
+
+
+///////////////////////////////////////////////////////
+// Parsing user titles
+///////////////////////////////////////////////////////
+
+function getParsedName(name, fromUser){
+  if (fromUser){
+   var chatTextclass = "ownName"
+  } else {
+   var chatTextclass = "guestName"
+  }
+  return ("<span class=\"" + chatTextclass + "\">" + name +  "</span>");
+}

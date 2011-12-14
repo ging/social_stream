@@ -60,6 +60,7 @@ module SocialStream
             #"Populate rosters"
             users = User.all
             checkedUsers = []
+            site_name = I18n.t('site.name').delete(' ')
           
             users.each do |user|
               checkedUsers << user.slug
@@ -69,7 +70,7 @@ module SocialStream
                   domain = SocialStream::Presence.domain
                   user_sid = user.slug + "@" + domain
                   contact_sid = contact.slug + "@" + domain
-                  commands << buildCommand("emanagement","setBidireccionalBuddys",[user_sid,contact_sid,user.name,contact.name,"SocialStream","SocialStream"])
+                  commands << buildCommand("emanagement","setBidireccionalBuddys",[user_sid,contact_sid,user.name,contact.name,site_name,site_name])
                 end
               end
             end

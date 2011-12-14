@@ -278,9 +278,10 @@ function putReceivedMessageOnChatWindow(from_jid,from_slug,body,msgID){
 	
 	//Parse content before show it.
 	var content = getParsedContent(Strophe.getText(body), false)
+	var headerMessage = getParsedName(from_name,false);
 	
 	//Show message to chatBox.        
-	$("#" + from_slug).chatbox("option", "boxManager").addMsg(from_name, content);
+	$("#" + from_slug).chatbox("option", "boxManager").addMsg(headerMessage, content);
 	
 	//Rotate chatBoxes priority.
 	rotatePriority(from_slug);

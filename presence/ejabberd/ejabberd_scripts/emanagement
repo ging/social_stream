@@ -54,7 +54,7 @@ PARAMS_FOR_COMMANDS = {
 	'sendMessageToUser' => 3,
 	'getUserResource' => 1,
 	'isEjabberdNodeStarted' => 0,
-	'broadcast' => 2,
+	'broadcast' => 3,
 	'checkEjabberdctlQuotedString' => 0,
         'getConnectedUsers' => 0,
 	'help' => 0,
@@ -79,7 +79,7 @@ SYNTAX_FOR_COMMANDS = {
 	'sendMessageToUser' => 'sendMessageToUser from_name to_name msg',
 	'getUserResource' => 'getUserResource username',
 	'isEjabberdNodeStarted' => 'isEjabberdNodeStarted',
-	'broadcast' => 'broadcast users msg (users values: "all" or slugs array)',
+	'broadcast' => 'broadcast admin users msg (users values: "all" or slugs array)',
 	'checkEjabberdctlQuotedString' => 'checkEjabberdctlQuotedString',
         'getConnectedUsers' => 'getConnectedUsers',
 	'help' => 'help',
@@ -364,7 +364,7 @@ def getConnectedUsers
 	return users
 end
 
-def broadcast(users,msg)
+def broadcast(admin,users,msg)
 	output = executeCommand("ejabberdctl connected-users")
         lines = output.split("\n");
 	lines.each do |line|
@@ -372,7 +372,7 @@ def broadcast(users,msg)
 		if (users == "all") or (users.length > 1 and users.include?(username))
 			s = line.split("@")[1];
 			resource = s.split("/")[1];
-			sendMessageToUser("SocialStream",username,msg)
+			sendMessageToUser(admin,username,msg)
 		end
 	end
 	return "Done"

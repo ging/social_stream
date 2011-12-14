@@ -1,21 +1,28 @@
+@import "colors";
+
+
 /* Chatbox style sheet */
+
+.ui-widget-content{
+  border: none;  
+}
 
 .ui-chatbox {
     position: fixed;
     bottom:0;
     padding: 2px 2px 2px 2px;
     padding: 2px 2px 2px 2px;
-    background:  #CCCCCC;
+    background: $separation-color;
 }
 
 .ui-state-highlight {
-	background: #CCCCCC;
-	background-color: #CCCCCC;
-	border: 1px solid lightgrey;
+	background: $separation-color;
+	background-color: $separation-color;
+	border: 1px solid $separation-color;
 }
 
 .chatWindowhighlighted {
-	color: #CAC8F4;
+	color: $fill-color;
 }
 
 .ui-chatbox-titlebar {
@@ -33,28 +40,28 @@
     padding: 3px 3px 3px 3px;
     height: 150px;
     overflow-y: auto;
-    background: #FFFFFF;
+    background: $text-over-main;
 }
 
 .ui-chatbox-input {
     padding: 3px 3px 3px 3px;
-    border-top: 1px solid grey;
+    border-top: 1px solid $separation-color;
     overflow: hidden;
-    /* background: #FFFFFF; */
 }
 
 .ui-chatbox-input-box {
     margin: 5px 5px 5px 5px;
-    border: 2px solid lightgrey;
+    border: 1px solid $separation-color;
     height: 35px;
 }
+
 
 .ui-chatbox-icon {
     float: right;
 }
 
 .ui-chatbox-input-focus {
-    border-color: #6699FF;
+    border-color: $header-notification-color;
 }
 
 .ui-chatbox-msg {
@@ -62,10 +69,17 @@
     clear: both;
 }
 
+.ui-chatbox-log {
+	border: none;
+}
+
+
+/* notifications style sheet */
+
 div.ui-chatbox-notify{
 	visibility: hidden;
-	background: #E5E5E5;
-	background-color: #E5E5E5;
+	background: $fill-color;
+	background-color: $fill-color;
 	color: black;
 	z-index: 1;
 	position:absolute;
@@ -76,7 +90,7 @@ div.ui-chatbox-notify{
 	text-align: center;
 	border-style:solid;
   border-width:1px;
-	border-color: #CCCCCC;
+	border-color: $fill-color;
 	opacity:0.95;
   filter:alpha(opacity=95); /* For IE8 and earlier */
 }
@@ -85,6 +99,7 @@ p.ui-chatbox-notify-text{
   text-align: center;
 	font-weight: bold;
 }
+
 
 
 /* Ticks */
@@ -147,7 +162,7 @@ div.user_presence {
 
 #passwordFormChat{
 	width: 150px;
-  background-color: #1F4A75;
+  background-color: $main-color;
   padding-top:3px;
 	padding-bottom:1px;
 }
@@ -168,7 +183,7 @@ input.chat_password{
 input.connectChatButton{
 	text-align: center;
 	width: 150px;
-	background-color: #1F4A75;
+	background-color: $main-color;
   border: 0 none;
   cursor: pointer;
 	color: white;
@@ -189,28 +204,19 @@ input.connectChatButton{
   width:160px;
   padding: 18px 25px 15px 25px;
 	margin: -15px 0px 0px 0px;
-  color:#fff;
+  color: white;
 	background:transparent url(black_arrow3.png);
 	text-align: center;
-	/* border: 5px solid red; */
 }
+
 
 
 /* Status style sheet */
 
-
 #status{
 	z-index: 1;
 }
-
-.desc { 
-  color:#6b6b6b;
-}
-
-.desc a {
-	color:#0092dd;
-}
-        
+       
 .dropdown dd, .dropdown dt, .dropdown ul { 
   margin:0px; 
 	padding:0px; 
@@ -221,27 +227,26 @@ input.connectChatButton{
 }
 
 .dropdown a, .dropdown a:visited { 
-  color:#1F4A75; 
+  color: $main-color; 
 	text-decoration:none; 
 	outline:none;
 }
 
 .dropdown a:hover { 
-  color:#1F4A75;
+  color: $main-color;
 }
 .dropdown dt a:hover { 
-  color:#1F4A75; 
-	border: 1px solid #1F4A75;
+  color: $main-color; 
+	border: 1px solid $main-color;
 }
 
 .dropdown dt a {
-	background:#DFECF1 url(btn/arrowBlue.png) no-repeat scroll right center; 
+	background:$secondary-color url(btn/arrowBlue.png) no-repeat scroll right center; 
 	display:block; 
 	padding-right:20px;
-  border:1px solid #DFECF1; 
+  border:1px solid $secondary-color; 
 	width:128px;
 }
-
 
 
 .dropdown dt a span {
@@ -251,8 +256,9 @@ input.connectChatButton{
 }
 	
 .dropdown dd ul { 
-  background:#DFECF1 none repeat scroll 0 0; 
-	border:1px solid #DFECF1; color:#DFECF1; 
+  background: $secondary-color none repeat scroll 0 0; 
+	border:1px solid $secondary-color; 
+	color: $secondary-color; 
 	display:none;
   left:0px; 
 	padding:5px 0px; 
@@ -274,7 +280,7 @@ input.connectChatButton{
 }
 
 .dropdown dd ul li a:hover { 
-  background-color:#D4E5EF;
+  background-color: $separation-color;
 }
 
 .dropdown img.flag { 
@@ -287,22 +293,23 @@ input.connectChatButton{
   display:none;
 }
 
-.input_select{ 
-  width: 100%; 
-	background-color: #D0C9AF; 
-	margin-top:5px;
-	margin-bottom:5px; 
-}
-
 
 /* Chat text style */
 
 .ownChatText {
-  color: #342E82;
+  color: $main-color;
 }
 
 .guestChatText {
-  color: #342E82;
+  color: $sentence-color;
+}
+
+.ownName {
+  color: $main-color;
+}
+
+.guestName {
+  color: $sentence-color;
 }
 
 .chatImage {
@@ -321,9 +328,9 @@ input.connectChatButton{
 }
 
 a.chatLink:link, a.chatLink:visited {
-    color: #1E726A;
+    color: $main-color;
 }
 
 a.chatImageLink:link, a.chatImageLink:visited {
-    color: #1E726A;
+    color: $main-color;
 }
