@@ -489,7 +489,7 @@ class Actor < ActiveRecord::Base
   def cheesecake_json
     {
       :sectors =>
-        relation_customs.map { |r|
+        relation_customs.includes(:ties => :contact).map { |r|
           r.to_cheesecake_hash
         }
     }.to_json
