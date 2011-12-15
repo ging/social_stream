@@ -1,0 +1,26 @@
+#contacts_cheesecake {
+  width: 460px;
+  height: 460px;
+  margin: auto;
+  padding: 0px;  
+}
+
+#contacts_grid {
+  width: 100%;
+  position: relative;
+}
+#contacts_grid .actor {
+  width: 64px;
+  height: 64px;
+  float: left;
+  margin: 5px;
+}
+#contacts_grid .actor.focused {
+  border: 2px solid #00F;
+  background-color: #006;
+  margin: 3px;
+}
+#contacts_grid .actor img {
+  width: 64px;
+  height: 64px;
+}

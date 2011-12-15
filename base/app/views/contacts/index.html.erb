@@ -8,6 +8,81 @@
 
 <% toolbar :option => :contacts %>
 
+<div id="contacts_cheesecake"></div>
+<div id="contacts_grid">
+  <div class="actor" id="actor_0"><img src="assets/logos/original/user.png">
+  </div>
+  <div class="actor" id="actor_1"><img src="assets/logos/original/user.png">
+  </div>
+  <div class="actor" id="actor_2"><img src="assets/logos/original/user.png">
+  </div>
+  <div class="actor" id="actor_3"><img src="assets/logos/original/user.png">
+  </div>
+  <div class="actor" id="actor_4"><img src="assets/logos/original/user.png">
+  </div>
+</div>
+<%= javascript_tag do %>
+window.onload = function() {
+  var cheesecakeData = {
+          container: {
+                  id: "contacts_cheesecake",
+                  width: 440,
+                  height: 440
+                },
+                grid: {
+                  id: "contacts_grid",
+                  divIdPrefix: "actor_"
+                },
+            rMax : 200, 
+            center: {x : 220, y : 220},
+            sectors: [
+              {name:"John" ,  subsectors : [
+                {name : "Cassidy", 
+                  actors: [
+                    [0], 
+                    [1],
+                    [2]
+                  ]
+                },
+                {name : "Cassidy2"}
+              ]}, 
+              { name:"Anna" , subsectors : [
+                {name : "Abc"}, 
+                {name : "Cassidy2",  
+                  actors: [ 
+                    [3],
+                    [4]
+                  ]
+                }
+              ]}, 
+              { name:"Peter", subsectors : [
+                {name : "Another"},
+                {name : "World"}
+              ]},
+              { name:"Olivia",subsectors : [
+                {name : "Dunham"},
+                {name : "FBI"}
+              ]},
+              { name:"Altivia",subsectors : [
+                {name : "Dunham"},
+                {name : "FBI"}
+              ]},
+              { name:"Walter",subsectors : [
+                {name : "Bishop"},
+                {name : "Craziness",
+                actors: [[3]]
+              }]
+              },
+              { name:"Nina",subsectors : [
+                {name : "Massive Dynamic"}
+              ]}
+            ]
+          };
+      var cheese = new socialCheesecake.Cheesecake(cheesecakeData);  
+}      
+<% end %>
+
+<br class="clearfloat">
 <div id="my_conferences">
   <div id="contacts" class="block">
     <div class="search_field_wrapper">
