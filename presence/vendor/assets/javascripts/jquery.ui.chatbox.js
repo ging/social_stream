@@ -22,6 +22,8 @@
 	    hidden: false,
 	    offset: 0, // relative to right edge of the browser window
 	    width: 230, // width of the chatbox
+	    height: 400, // height of the chatbox
+	    video: 0, // height of the videoBox
 	    messageSent: function(id, user, msg){
 		// override this
 		this.boxManager.addMsg(user.first_name, msg);
@@ -168,6 +170,24 @@
 		.text('minimize')
 		.appendTo(uiChatboxTitlebarMinimize),
 	    
+			//Video Menu button
+			uiChatboxTitlebarVideo = (self.uiChatboxTitlebarVideo = $('<a href="#"></a>'))
+      .addClass('ui-corner-all ' + 
+        'ui-chatbox-icon' + ' ui-videobox-icon'
+       )
+      .attr('role', 'button')
+      //.hover(function() {uiChatboxTitlebarMinimize.addClass('ui-state-hover');},
+        //   function() {uiChatboxTitlebarMinimize.removeClass('ui-state-hover');})
+      .click(function(event) {
+        toogleVideoBox(self)
+        return false;
+      })
+      .appendTo(uiChatboxTitlebar),
+      uiChatboxTitlebarVideoText = $('<span></span>')
+      .addClass('ui-icon-circle-triangle-e ' +  'chat-thick ' + ' chat-videothick' )
+      .text('video')
+      .appendTo(uiChatboxTitlebarVideo),
+			
 			
 			// content
 	    uiChatboxContent = (self.uiChatboxContent = $('<div></div>'))
@@ -175,6 +195,19 @@
 			  'ui-chatbox-content '
 			 )
 		.appendTo(uiChatbox),
+		
+		//VideoBox div
+    uiVideobox = (self.uiVideobox = $('<div></div>'))
+    .addClass('ui-widget-content ' + 
+       'ui-videobox'
+       )
+    .click(function(event) {
+        // anything?
+        
+    })
+    .appendTo(uiChatboxContent),
+		
+		//ChatBoxLog
 	    uiChatboxLog = (self.uiChatboxLog = self.element)
 		//.show()
 		.addClass('ui-widget-content '+
@@ -235,11 +268,13 @@
 
 	    // switch focus to input box when whatever clicked
 	    uiChatboxContent.children().click(function(){
-		// click on any children, set focus on input box
-		self.uiChatboxInputBox.focus();
+		    // click on any children, set focus on input box
+		    self.uiChatboxInputBox.focus();
 	    });
 
 	    self._setWidth(self.options.width);
+			self._setHeight(self.options.height);
+			self._setVideo(self.options.video);
 	    self._position(self.options.offset);
 
 	    self.options.boxManager.init(self);
@@ -251,22 +286,28 @@
 
 	_setOption: function(option, value) {
 	    if(value != null){
-		switch(option) {
-		case "hidden":
-		    if(value) {
-			this.uiChatbox.hide();
-		    }
-		    else {
-			this.uiChatbox.show();
-		    }
-		    break;
-		case "offset":
-		    this._position(value);
-		    break;
-		case "width":
-		    this._setWidth(value);
-		    break;
-		}
+		  switch(option) {
+				case "hidden":
+				    if(value) {
+					   this.uiChatbox.hide();
+				    }
+				    else {
+					   this.uiChatbox.show();
+				    }
+				    break;
+				case "offset":
+				    this._position(value);
+				    break;
+				case "width":
+				    this._setWidth(value);
+				    break;
+			  case "height":
+            this._setHeight(value);
+            break;
+				case "video":
+            this._setVideo(value);
+            break;
+				}
 	    }
 
 	    $.Widget.prototype._setOption.apply(this, arguments);
@@ -278,6 +319,19 @@
 	    // this is a hack, but i can live with it so far
 	    this.uiChatboxInputBox.css("width", (width - 14) + "px");
 	},
+	
+	 _setHeight: function(height) {
+      this.uiChatboxLog.height(height + "px");
+  },
+	
+	_setVideo: function(videoHeight) {
+      this.uiVideobox.height(videoHeight + "px");
+			if (videoHeight==0){
+				this.uiVideobox.hide();
+			} else {
+				this.uiVideobox.show();
+			}
+  },
 
 	_position: function(offset) {
 	    this.uiChatbox.css("right", offset);

@@ -74,6 +74,16 @@
 }
 
 
+/* video window style */
+div.ui-videobox{
+	height: 0px;
+	border-bottom: 1px solid $separation-color;
+}
+
+div.ui-videobox-icon{
+  
+}
+
 /* notifications style sheet */
 
 div.ui-chatbox-notify{
@@ -121,6 +131,10 @@ p.ui-chatbox-notify-text{
 
 .chat-closethick{
 	background-position: -96px -128px;
+}
+
+.chat-videothick{
+	display: none;
 }
 
 

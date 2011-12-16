@@ -1,10 +1,12 @@
 ////////////////////
-//Chat functions
+//Chat Window Manager functions
 ////////////////////
 
 var nBox = 0;
 var maxBox = 5;
 var chatBoxWidth = 230;
+var chatBoxHeight = 170;
+var videoBoxHeight = 150;
 var visibleChatBoxes = new Array();
 var chatBoxSeparation = chatBoxWidth+12;
 
@@ -19,8 +21,6 @@ function createChatBox(guest_slug,guest_name,guest_jid,user_name,user_jid){
 			
           //Add div with id = guest_slug
           $("#chat_divs").append("<div id=" + guest_slug + " name=" + guest_name + "></div>")
-					
-					//Add CSS [...]
           
 					
 					//Offset Management for new box
@@ -34,6 +34,8 @@ function createChatBox(guest_slug,guest_name,guest_jid,user_name,user_jid){
 															hidden: false,
 															offset: offset, // relative to right edge of the browser window
                               width: chatBoxWidth, // width of the chatbox
+                              height: chatBoxHeight, // height of the chatbox
+                              video: 0, //height of the videoBox
                               title : guest_name,
 															position: position,
 															priority: visibleChatBoxes.length+1,
@@ -103,32 +105,6 @@ function getBoxParams(){
 }
 
 
-function getBoxIndexToReplace(){
-
-	tmp = visibleChatBoxes[0];
-	for (i=0;i<visibleChatBoxes.length;i++){
-    if (visibleChatBoxes[i].chatbox("option", "priority") > tmp.chatbox("option", "priority")) {
-			tmp = visibleChatBoxes[i];
-	  }
-  }
-	
-	return visibleChatBoxes.indexOf(tmp);
-}
-
-
-function rotatePriority(guest_slug){
-	priority = $("#" + guest_slug).chatbox("option", "priority")
-	if(priority>1){		
-			for (i=0;i<visibleChatBoxes.length;i++){
-        if(visibleChatBoxes[i].chatbox("option", "priority")<priority){
-					visibleChatBoxes[i].chatbox("option", "priority",visibleChatBoxes[i].chatbox("option", "priority")+1);
-				}
-      }		
-			$("#" + guest_slug).chatbox("option", "priority", 1);		
-	}	
-}
-
-
 function getChatVariableFromSlug(slug){
 	return "slug_" + slug;
 }
@@ -136,4 +112,75 @@ function getChatVariableFromSlug(slug){
 
 function getSlugFromChatVariable(variable){
 	return variable.split("_")[1];
+}
+
+
+////////////////////
+//Box replacement
+////////////////////
+
+function getBoxIndexToReplace(){
+
+  tmp = visibleChatBoxes[0];
+  for (i=0;i<visibleChatBoxes.length;i++){
+    if (visibleChatBoxes[i].chatbox("option", "priority") > tmp.chatbox("option", "priority")) {
+      tmp = visibleChatBoxes[i];
+    }
+  }
+  
+  return visibleChatBoxes.indexOf(tmp);
+}
+
+
+function rotatePriority(guest_slug){
+  priority = $("#" + guest_slug).chatbox("option", "priority")
+  if(priority>1){   
+      for (i=0;i<visibleChatBoxes.length;i++){
+        if(visibleChatBoxes[i].chatbox("option", "priority")<priority){
+          visibleChatBoxes[i].chatbox("option", "priority",visibleChatBoxes[i].chatbox("option", "priority")+1);
+        }
+      }   
+      $("#" + guest_slug).chatbox("option", "priority", 1);   
+  } 
+}
+
+
+////////////////////
+//Video Window Manager functions
+////////////////////
+
+function getVideoBoxFromSlug(slug){
+	return $("#" + slug).parent().find("div.ui-videobox")
+}
+
+function showVideoBox(slug,embed){
+	var chatBox = window[getChatVariableFromSlug(slug)]
+	getVideoBoxFromSlug(slug).html(embed);
+  chatBox.chatbox("option", "video",videoBoxHeight);
+}
+
+
+function hideVideoBox(slug){
+	  var chatBox = window[getChatVariableFromSlug(slug)]
+    chatBox.chatbox("option", "video", 0);
+}
+
+
+//Function called from JQuery UI Plugin
+function toogleVideoBox(uiElement){
+	  var slug = $(uiElement.element).attr("id");
+    toogleVideoBoxForSlug(slug)
+}
+
+function toogleVideoBoxForSlug(slug){
+	var chatBox = window[getChatVariableFromSlug(slug)]
+	if (chatBox.chatbox("option", "video")==0){
+		showVideoBox(slug,getVideoEmbedForSlug(slug))
+	} else {
+		hideVideoBox(slug);
+	}
+}
+
+function getVideoEmbedForSlug(slug){
+	return "<img src=\"http://www.batiburrillo.net/wp-content/uploads/2011/03/Freemake.jpg?cda6c1\" width=\"" + (chatBoxWidth-20) + "\"/>"
 }
