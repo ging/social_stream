@@ -1,0 +1,10 @@
+<% content_for :title do%>
+  <%= t('contact.other')%>
+<%end%>
+
+<% toolbar :option => :contacts %>
+
+<% location link_to(t("contact.other"),contacts_path) %>
+<%= render :partial => "index"%>
+
+<div class="space_center"></div>

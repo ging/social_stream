@@ -8,33 +8,6 @@
 
 <% toolbar :option => :contacts %>
 
-<div id="contacts_cheesecake"></div>
-<div id="contacts_grid">
-  <% current_subject.contact_actors.each do |actor|%>
-    <%= render :partial => "actors/actor_cheesecake", :locals => {:actor => actor}%>
-  <% end %>
-</div>
-<%= javascript_tag do %>
-window.onload = function() {
-  var cheesecakeData = {
-          container: {
-                  id: "contacts_cheesecake",
-                  width: 440,
-                  height: 440
-                },
-                grid: {
-                  id: "contacts_grid",
-                  divIdPrefix: "actor_"
-                },
-            rMax : 200, 
-            center: {x : 220, y : 220}           
-          };
-          cheesecakeData.sectors = <%= raw(current_subject.cheesecake_json) %>.sectors;
-      var cheese = new socialCheesecake.Cheesecake(cheesecakeData);  
-}      
-<% end %>
-
-<br class="clearfloat">
 <div id="my_conferences">
   <div id="contacts" class="block">
     <div class="search_field_wrapper">

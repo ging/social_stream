@@ -84,6 +84,8 @@ Rails.application.routes.draw do
   
   match 'search' => 'search#index', :as => :search  
   
+  match 'cheesecake' => 'cheesecake#index', :as => :cheesecake  
+  
   match 'ties' => 'ties#index', :as => :ties
   
   

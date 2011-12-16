@@ -1,13 +1,41 @@
+@import "colors";
+
+#cheesecake {
+  position: relative;
+  padding: 20px;
+}
 #contacts_cheesecake {
-  width: 460px;
-  height: 460px;
-  margin: auto;
+  width: 440px;
+  height: 440px;
   padding: 0px;  
+  float: left;
+}
+#contacts_filter {
+  width: 290px;
+  height: 64px;
+  position: relative;
+  float: left;
+  padding: 5px;
+}
+
+#cheesecake #contacts_filter #contacts_filter_input {
+  padding: 0 3px 0 22px;
+  background: url('btn/search_icon.png') 5px 50% no-repeat white;
+  font-size: 11px;
+  color: $main-color;
+  border: solid 1px $input-border-color;
+  height: 25px;
+  width: 200px;
+  margin-left: 26px;
+  margin-top: 18px;
 }
 
 #contacts_grid {
-  width: 100%;
+  width: 300px;
+  height: 370px;
+  overflow: hidden;
   position: relative;
+  float: left;
 }
 #contacts_grid .actor {
   width: 64px;
@@ -24,3 +52,4 @@
   width: 64px;
   height: 64px;
 }
+
