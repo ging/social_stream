@@ -224,7 +224,7 @@ namespace :db do
         mailboxer_end = Time.now
         puts '   -> ' +  (mailboxer_end - mailboxer_start).round(4).to_s + 's'
       else
-        puts '   -> Cheesecake Testing Mode. Avoiding Post Population.'        
+        puts '   -> Cheesecake Testing Mode. Avoiding Mailboxer Population.'        
       end
 
 
