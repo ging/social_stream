@@ -207,16 +207,25 @@ class Actor < ActiveRecord::Base
     Relation::Reject.of(self)
   end
  
-  # All the {Actor actors} this one has relation with
+  # All the {Actor Actors} this one has ties with:
+  # 
+  #   actor.contact_actors #=> array of actors that sent and receive ties from actor
   #
-  # Options:
-  # * type: Filter by the class of the contacts.
-  # * direction: sent or received
-  # * relations: Restrict the relations of considered ties. In the case of both directions,
-  #   only relations belonging to {Actor} are valid. It defaults to relations of
-  #   {Relation::Custom custom} and {Relation::Public public} types
-  # * include_self: False by default, don't include this actor as subject even they have ties with themselves.
-  # * load_subjects: True by default, make the queries for eager loading of contacts
+  #
+  #
+  # There are several options available to refine the query:
+  # type:: Filter by the class of the contacts ({User}, {Group}, etc.)
+  #          actor.contact_actors(:type => :user) #=> array of user actors. Exclude groups, etc.
+  #
+  # direction:: +:sent+ leaves only the actors this one has ties to. +:received+ gets
+  #             the actors sending ties to this actor, whether this actor added them or not
+  #               actor.contact_actors(:direction => :sent) #=> all the receivers of ties from actor
+  # relations:: Restrict to ties made up with +relations+. In the case of both directions,
+  #             only relations belonging to {Actor} are considered.
+  #             It defaults to actor's {Relation::Custom custom relations}
+  #               actor.contact_actors(:relations => [2]) #=> actors tied with relation #2
+  # include_self:: False by default, do not include this actor even they have ties with themselves.
+  # load_subjects:: True by default, make the queries for {http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html#label-Eager+loading+of+associations eager loading} of {SocialStream::Models::Subject Subject}
   #
   def contact_actors(options = {})
     subject_types   = Array(options[:type] || self.class.subtypes)
@@ -231,14 +240,19 @@ class Actor < ActiveRecord::Base
       as = as.includes(subject_types)
     end
     
-    # Make another query for getting the actors in the other way
+    # A blank :direction means reciprocate contacts, there must be ties in both directions
+    #
+    # This is achieved by getting the id of all the contacts that are sending ties
+    # Then, we filter the sent contacts query to only those contacts
     if options[:direction].blank?
       rcv_opts = options.dup
       rcv_opts[:direction] = :received
       rcv_opts[:load_subjects] = false
 
+      # Get the id of actors that are sending to this one
       sender_ids = contact_actors(rcv_opts).map(&:id)
 
+      # Filter the sent query with these ids
       as = as.where(:id => sender_ids)
 
       options[:direction] = :sent
