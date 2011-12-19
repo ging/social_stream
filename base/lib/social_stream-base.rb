@@ -41,6 +41,8 @@ require 'thinking-sphinx'
 require 'sass-rails'
 # Autolink text blocks
 require 'rails_autolink'
+# SocialCheesecake
+require 'social_cheesecake'
 
 # Provides your Rails application with social network and activity stream support
 module SocialStream
