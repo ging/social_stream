@@ -42,7 +42,7 @@ Gem::Specification.new do |s|
   # HTML Forms
   s.add_runtime_dependency('formtastic','~> 1.2.3')
   # Simple navigation for menu
-  s.add_runtime_dependency('simple-navigation')
+  s.add_runtime_dependency('simple-navigation', '~> 3.5.1')
   # Background jobs
   s.add_runtime_dependency('resque','~> 1.19.0')
   # Modernizr.js javascript library
