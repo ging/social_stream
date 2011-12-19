@@ -53,6 +53,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('sass-rails', '~> 3.1.0')
   # Autolink text blocks
   s.add_runtime_dependency('rails_autolink', '~> 1.0.4')
+  # SocialCheesecake
+  s.add_runtime_dependency('social_cheesecake','~> 0.0.1')
 
   # Development gem dependencies
   #

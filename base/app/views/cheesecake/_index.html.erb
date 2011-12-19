@@ -1,0 +1,38 @@
+<div id="cheesecake">
+  <div id="contacts_cheesecake"></div>
+  <div id="contacts_filter">
+    <%= text_field_tag :filter_query, nil,:autocomplete => :off, :id => :contacts_filter_input %>    
+  </div>
+  <div id="contacts_grid">
+    
+    <% @actors.each do |actor|%>
+      <%= render :partial => "actors/actor_cheesecake", :locals => {:actor => actor} %>
+    <% end %>
+  </div>
+  <br class="clearfloat">
+  <%= javascript_tag do %>
+  $(function(){
+    $("#center_body").css("width","782px");
+    $("#center_body").css("max-width","782px");
+    $("#content").css("width","782px");
+    $("#contacts_filter_input").Watermark("<%= escape_javascript(I18n.t('search.name')) %>");
+  });
+  window.onload = function() {
+    var cheesecakeData = {
+      container: {
+        id: "contacts_cheesecake",
+        width: 440,
+        height: 440
+      },
+        grid: {
+          id: "contacts_grid",
+          divIdPrefix: "actor_"
+      },
+        rMax : 200, 
+        center: {x : 220, y : 220}           
+      };
+      cheesecakeData.sectors = <%= raw(current_subject.cheesecake_json) %>.sectors;
+      var cheese = new socialCheesecake.Cheesecake(cheesecakeData);  
+  }      
+  <% end %>
+</div>

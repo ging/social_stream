@@ -12,10 +12,18 @@ namespace :db do
 
       LOGOS_PATH = File.join(Rails.root, 'lib', 'logos')
       USERS = (ENV["USERS"] || 9).to_i
-      GROUPS =  (ENV["GROUPS"] || 10).to_i
+      GROUPS = (ENV["GROUPS"] || 10).to_i
+      CHEESECAKE_TESTING = (ENV["CHEESECAKE_TESTING"].present? || false)
+      if CHEESECAKE_TESTING
+        puts "Cheesecake Testing mode: ON"
+      end
       if ENV["HARDCORE"].present?
         USERS = 999
         GROUPS = 1000    
+        puts "Hardcore mode: ON (May the Force be with you brave Padawan)"
+        if CHEESECAKE_TESTING
+          puts "WARNING: Hardcore and Cheesecake Modes activated. This situation is really slow. Please, avoid it."
+        end        
       end
       if USERS < 9
         USERS = 9
@@ -110,10 +118,15 @@ namespace :db do
       # = Ties
       available_actors.each do |a|
         actors = available_actors.dup - Array(a)
-        relations = a.relations
+        relations = a.relation_customs + Array.wrap(a.relation_reject)
         break if actors.size==0
         Forgery::Basic.number(:at_most => actors.size).times do
           actor = actors.delete_at((rand * actors.size).to_i)
+          a.contact_to!(actor).relation_ids = Array(Forgery::Extensions::Array.new(relations).random.id)
+        end
+        if CHEESECAKE_TESTING     
+          actor = Actor.first
+          puts a.name + " connecting with " + actor.name
           a.contact_to!(actor).relation_ids = Array(Forgery::Extensions::Array.new(relations).random.id)
         end
       end
@@ -122,92 +135,97 @@ namespace :db do
       puts '   -> ' +  (ties_end - ties_start).round(4).to_s + 's'
 
       # = Posts
-
       puts 'Post population'
-      posts_start = Time.now
-
-      SocialStream::Populate.power_law(Tie.all) do |t|
-        updated = Time.at(rand(Time.now.to_i))
-
-        author = t.sender
-        owner  = t.receiver
-        user_author = ( t.sender.subject_type == "User" ? t.sender : t.sender.user_author )
-
-        p = Post.create :text =>
-                      "This post should be for #{ t.relation.name } of #{ t.sender.name }.\n#{ Forgery::LoremIpsum.paragraph(:random => true) }",
-                        :created_at => Time.at(rand(updated.to_i)),
-                        :updated_at => updated,
-                        :author_id  => author.id,
-                        :owner_id   => owner.id,
-                        :user_author_id => user_author.id,
-                        :_relation_ids => Array(t.relation_id)
-
-        p.post_activity.update_attributes(:created_at => p.created_at,
-                                          :updated_at => p.updated_at)
+      unless CHEESECAKE_TESTING
+        posts_start = Time.now
+  
+        SocialStream::Populate.power_law(Tie.all) do |t|
+          updated = Time.at(rand(Time.now.to_i))
+  
+          author = t.sender
+          owner  = t.receiver
+          user_author = ( t.sender.subject_type == "User" ? t.sender : t.sender.user_author )
+  
+          p = Post.create :text =>
+                        "This post sActorhould be for #{ t.relation.name } of #{ t.sender.name }.\n#{ Forgery::LoremIpsum.paragraph(:random => true) }",
+                          :created_at => Time.at(rand(updated.to_i)),
+                          :updated_at => updated,
+                          :author_id  => author.id,
+                          :owner_id   => owner.id,
+                          :user_author_id => user_author.id,
+                          :_relation_ids => Array(t.relation_id)
+  
+          p.post_activity.update_attributes(:created_at => p.created_at,
+                                            :updated_at => p.updated_at)
+        end
+  
+        posts_end = Time.now
+        puts '   -> ' +  (posts_end - posts_start).round(4).to_s + 's'
+      else
+        puts '   -> Cheesecake Testing Mode. Avoiding Post Population.'        
       end
 
-      posts_end = Time.now
-      puts '   -> ' +  (posts_end - posts_start).round(4).to_s + 's'
-
+      # = Mailboxer      
       puts 'Mailboxer population'
-      mailboxer_start = Time.now
-
-      # = Mailboxer
-      available_actors = Actor.all
-
-      available_actors.each do |a|
-        actors = available_actors.dup - Array(a)
-
-        mult_recp = actors.uniq
-        if (demo = User.find_by_name('demo')) and !mult_recp.include? Actor.normalize(demo)
-          mult_recp << Actor.normalize(demo)
-        end
-        actor = mult_recp[(rand * mult_recp.size).to_i]
-        mult_recp.delete(actor)
-        mail = actor.send_message(mult_recp, "Hello all, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))
-        actor = mult_recp[(rand * mult_recp.size).to_i]
-        mail = actor.reply_to_all(mail, "Well, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
-        actor = mult_recp[(rand * mult_recp.size).to_i]
-        mail = actor.reply_to_all(mail, "Ok, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
-        actor = mult_recp[(rand * mult_recp.size).to_i]
-        mail = actor.reply_to_all(mail, "Pretty well, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
-        actor = mult_recp[(rand * mult_recp.size).to_i]
-        actor.reply_to_all(mail, "Finally, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
-
-
-        if (demo = User.find_by_name('demo'))
-          next if Actor.normalize(demo)==Actor.normalize(a)
-          mail = a.send_message(demo, "Hello, #{demo.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))
-          if rand > 0.5
-            mail = demo.reply_to_sender(mail, "Pretty well #{a.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+      unless CHEESECAKE_TESTING
+        mailboxer_start = Time.now
+        available_actors = Actor.all
+  
+        available_actors.each do |a|
+          actors = available_actors.dup - Array(a)
+  
+          mult_recp = actors.uniq
+          if (demo = User.find_by_name('demo')) and !mult_recp.include? Actor.normalize(demo)
+            mult_recp << Actor.normalize(demo)
+          end
+          actor = mult_recp[(rand * mult_recp.size).to_i]
+          mult_recp.delete(actor)
+          mail = actor.send_message(mult_recp, "Hello all, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))
+          actor = mult_recp[(rand * mult_recp.size).to_i]
+          mail = actor.reply_to_all(mail, "Well, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+          actor = mult_recp[(rand * mult_recp.size).to_i]
+          mail = actor.reply_to_all(mail, "Ok, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+          actor = mult_recp[(rand * mult_recp.size).to_i]
+          mail = actor.reply_to_all(mail, "Pretty well, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+          actor = mult_recp[(rand * mult_recp.size).to_i]
+          actor.reply_to_all(mail, "Finally, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+  
+  
+          if (demo = User.find_by_name('demo'))
+            next if Actor.normalize(demo)==Actor.normalize(a)
+            mail = a.send_message(demo, "Hello, #{demo.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))
             if rand > 0.5
-              a.reply_to_sender(mail, "Ok #{demo.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+              mail = demo.reply_to_sender(mail, "Pretty well #{a.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+              if rand > 0.5
+                a.reply_to_sender(mail, "Ok #{demo.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+              end
+            end
+            if rand > 0.75
+              mail.conversation.move_to_trash(demo)
             end
           end
-          if rand > 0.75
-            mail.conversation.move_to_trash(demo)
-          end
-        end
-
-        Forgery::Basic.number(:at_most => actors.size).times do
-          actor = actors.delete_at((rand * actors.size).to_i)
-          next if Actor.normalize(actor)==Actor.normalize(a)
-          mail = a.send_message(actor, "Hello, #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))
-          if rand > 0.5
-            mail = actor.reply_to_sender(mail, "Pretty well #{a.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+  
+          Forgery::Basic.number(:at_most => actors.size).times do
+            actor = actors.delete_at((rand * actors.size).to_i)
+            next if Actor.normalize(actor)==Actor.normalize(a)
+            mail = a.send_message(actor, "Hello, #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))
             if rand > 0.5
-              a.reply_to_sender(mail, "Ok #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+              mail = actor.reply_to_sender(mail, "Pretty well #{a.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+              if rand > 0.5
+                a.reply_to_sender(mail, "Ok #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+              end
+            end
+            if rand > 0.75
+              mail.conversation.move_to_trash(actor)
             end
           end
-          if rand > 0.75
-            mail.conversation.move_to_trash(actor)
-          end
         end
+  
+        mailboxer_end = Time.now
+        puts '   -> ' +  (mailboxer_end - mailboxer_start).round(4).to_s + 's'
+      else
+        puts '   -> Cheesecake Testing Mode. Avoiding Mailboxer Population.'        
       end
-
-      mailboxer_end = Time.now
-      puts '   -> ' +  (mailboxer_end - mailboxer_start).round(4).to_s + 's'
-
 
 
       puts 'Avatar population'

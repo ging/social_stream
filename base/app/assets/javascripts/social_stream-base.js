@@ -6,5 +6,6 @@
 //= require jquery.screw
 //
 //= require avatars_for_rails
+//= require social_cheesecake
 //
 //= require_tree .
