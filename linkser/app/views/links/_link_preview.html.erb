@@ -24,5 +24,11 @@
     <% if link.callback_url %>
         <%= hidden_field_tag "link[callback_url]", link.callback_url %>
     <% end %>
+    <% if link.width %>
+        <%= hidden_field_tag "link[width]", link.width %>
+    <% end %>
+    <% if link.height %>
+        <%= hidden_field_tag "link[height]", link.height %>
+    <% end %>
   </div>
 <% end %>

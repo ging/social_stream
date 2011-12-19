@@ -23,6 +23,8 @@ class Link < ActiveRecord::Base
     if r and r.type and r.url      
       self.callback_url = r.url
     end
+    self.width  = r.width  if r and r.width
+    self.height = r.height if r and r.height
     if linkser_object.ogp and linkser_object.ogp.image
       self.image = linkser_object.ogp.image
     elsif linkser_object.images and linkser_object.images.first

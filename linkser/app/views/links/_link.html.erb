@@ -7,7 +7,7 @@
         <%= javascript_tag do %>
           $("#link_<%= link.id.to_s %> img").each(function(){
             $(this).click(function(){
-              SocialStream.Linkser.openCallback("link_<%= link.id.to_s %>", "<%= link.callback_url %>");       
+              SocialStream.Linkser.openCallback("link_<%= link.id.to_s %>", "<%= link.callback_url %>", "<%= link.width %>", "<%= link.height %>");
             });
           });
           
