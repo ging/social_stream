@@ -11,9 +11,9 @@
   </div>
   <div class="activity_objects">
     <%= link_to post do%>
-      <% text = excerpt(strip_tags(post.text),get_search_query_words.first,:radius => 180) %>
+      <% text = excerpt(strip_tags(post.text),get_search_query_words.first,:radius => 180) || "" %>
       <% if text.length < 400 %>
-        <% text = excerpt(strip_tags(post.text),get_search_query_words.first,:radius => 540 - text.length) %>
+        <% text = excerpt(strip_tags(post.text),get_search_query_words.first,:radius => 540 - text.length) || "" %>
       <% end %>
       <%= highlight(text,get_search_query_words) %>
       <% end %>
