@@ -1,0 +1,96 @@
+<% content_for :headers do %>
+  <style type="text/css">
+    #sidebar {width: 0px;}
+    #center_body {width: 780px; max-width: 780px;}
+  </style>
+<% end %>
+
+<% content_for :title do %>
+  <%= profile_subject.name + ": " + t('event.title') %>
+<% end %>
+
+<%= location(
+  link_to(profile_subject.name, polymorphic_path(profile_subject)),
+  link_to(t('event.title'), polymorphic_path([profile_subject, Event.new]))
+  ) %>
+
+<% toolbar :profile => profile_subject %>
+
+<div id="calendar"></div>
+
+<%= javascript_tag do %>
+  $(function(){
+
+    <% if profile_subject.respond_to? :rooms %>
+      SocialStream.Events.current.roomIndex = <%= raw profile_subject.rooms.map(&:id) %>;
+    <% end %>
+
+    SocialStream.Events.current.eventColor = '#58310E';
+
+    SocialStream.Events.current.calendar = $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      firstDay: 1,
+      eventColor: SocialStream.Events.current.eventColor,
+      <% if can? :create, new_post(profile_subject) %>
+      selectable: true,
+      selectHelper: true,
+      select: function(startDate, endDate, allDay, jsEvent){
+
+        SocialStream.Events.current.newForm = new Boxy(
+          "<%= escape_javascript render(:partial => 'events/new') %>",
+          {
+            title: "<%= t('event.new.title') %>",
+            closeable: true,
+            closeText: "<%= t('boxy.close_text') %>",
+            draggable: true
+          }
+        );
+
+
+        SocialStream.Events.current.newForm.moveTo(jsEvent.clientX, jsEvent.clientY);
+
+        var c = SocialStream.Events.current.newForm.getContent();
+
+        c.children('#event_start_at').val(startDate.toJSON());
+        c.children('#event_end_at').val(endDate.toJSON());
+        c.children('#event_all_day').val(allDay.toString());
+
+        // From rails-scheduler gem
+        Scheduler.form.init(c.find('.scheduler_form'), startDate);
+      },
+      <% end %>
+      // Implement event edition
+      // editable: true,
+      events: function(start, end, callback) {
+        $.ajax({
+            url: "<%= escape_javascript polymorphic_path([profile_subject, Event.new]) %>",
+            dataType: 'json',
+            data: {
+                // our hypothetical feed requires UNIX timestamps
+                start: Math.round(start.getTime() / 1000),
+                end: Math.round(end.getTime() / 1000)
+            },
+            success: function(events) {
+                callback(
+                  $.map(events, function(event) {
+                    event.color = SocialStream.Events.tools.eventColor(event.roomId);
+                    return event;
+                        }
+                  )
+                );
+            }
+        });
+      }
+    });
+
+    <% if params[:at] %>
+      // TODO: optimize this to save one index call
+      SocialStream.Events.current.calendar.fullCalendar('changeView', "agendaDay");
+      SocialStream.Events.current.calendar.fullCalendar('gotoDate', new Date(<%= params[:at] %> * 1000));
+    <% end %>
+  });
+<% end %>

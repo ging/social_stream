@@ -1,5 +1,35 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-
+  activerecord:
+    attributes:
+      event:
+        title: "Title"
+        room: "Room"
+        frequency: "Frequency"
+      room:
+        name: "Name"
+    errors:
+      models:
+        room:
+          attributes:
+            name:
+              taken: "is taken"
+    models:
+      event: "event"
+      room: "room"
+  boxy:
+    close_text: "[close]"
+  event:
+    confirm_delete: "Delete event?"
+    new:
+      title: "New event"
+    one: "an event"
+    title: "Calendar"
+    wall_post: "Published an event: %{title}"
+  room:
+    confirm_delete: "Delete room?"
+    delete: "Delete"
+    settings:
+      title: "Rooms"
+      description: "Rooms available for event celebration"
+    watermark:
+      name: "New room"

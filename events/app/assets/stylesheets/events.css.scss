@@ -1,0 +1,37 @@
+// Place all the styles related to the events controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+//
+//= require fullcalendar
+//= require boxy
+
+#calendar {
+	margin-top: 20px;
+}
+
+#sidebar_calendar_date {
+  margin-left: 5px;
+}
+
+#sidebar_calendar {
+	width: 100%;
+	text-align: center;
+	padding-top: 5px;
+}
+
+#sidebar_calendar a {
+	color: black;
+}
+
+#sidebar_calendar td {
+  height: 25px;
+  border: 1px solid #CCCCCC;
+}
+
+#new_event div.form_row {
+  padding: 3px 0;
+}
+
+#scheduler-options {
+  padding: 2px 10px;
+}

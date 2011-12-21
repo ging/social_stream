@@ -1,0 +1,10 @@
+<div id="rooms">
+  <% current_subject.rooms.each do |room| %>
+    <div class="row">
+      <div class="label"><%= room.name %></div>
+      <div class="field">
+        <%= link_to image_tag("btn/delete.png", :class => "menu_icon", :title => t('room.delete')), room, :class => "room_delete_link", :method => :delete, :confirm => t('room.confirm_delete'), :remote => true %>
+      </div>
+    </div>
+  <% end %>
+</div>

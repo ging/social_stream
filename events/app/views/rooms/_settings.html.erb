@@ -1,0 +1,23 @@
+<div class="block" id="room_settings">
+  <div class="header">
+    <div class="header_text">
+      <%= t 'room.settings.title' %>
+    </div>
+    <div class="header_icon_right">
+      <%= link_to image_tag('btn/edit.png'),  "javascript:showSettings(\"room_settings\");" %>
+    </div>
+  </div>
+  <div id="room_settings_briefing" class="settings_briefing content">        
+    <div class="form_row">
+      <%= t 'room.settings.description' %>
+    </div>
+  </div>
+  <div class="content settings_content" id="room_settings_content" style="display:none;">
+    <div class="sub-block">
+      <%= render :partial => 'rooms/index' %>
+    </div>
+    <div class="sub-block">
+      <%= render :partial => 'rooms/form' %>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,11 @@
 /*
- * FullCalendar v1.5.1 Stylesheet
+ * FullCalendar v1.5.2 Stylesheet
  *
  * Copyright (c) 2011 Adam Shaw
  * Dual licensed under the MIT and GPL licenses, located in
  * MIT-LICENSE.txt and GPL-LICENSE.txt respectively.
  *
- * Date: Sat Apr 9 14:09:51 2011 -0700
+ * Date: Sun Aug 21 22:06:09 2011 -0700
  *
  */
 
@@ -133,8 +133,8 @@ html .fc,
 	
 .fc-cell-overlay { /* semi-transparent rectangle while dragging */
 	background: #9cf;
-	/*opacity: .2;*/
-	/*filter: alpha(opacity=20); /* for IE */
+	opacity: .2;
+	filter: alpha(opacity=20); /* for IE */
 	}
 	
 
@@ -279,10 +279,9 @@ a.fc-event {
 	}
 	
 .fc-event-skin {
-	border-color: #1F4A75;     /* default BORDER color */
-	background-color: #1F4A75; /* default BACKGROUND color */
+	border-color: #36c;     /* default BORDER color */
+	background-color: #36c; /* default BACKGROUND color */
 	color: #fff;            /* default TEXT color */
-
 	}
 	
 .fc-event-inner {
@@ -297,7 +296,6 @@ a.fc-event {
 .fc-event-time,
 .fc-event-title {
 	padding: 0 1px;
-  color:#fff;
 	}
 	
 .fc .ui-resizable-handle { /*** TODO: don't use ui-resizable anymore, change class ***/
@@ -591,8 +589,7 @@ table.fc-border-separate {
 	height: 100%;
 	background: #fff;
 	opacity: .3;
-
-
+	filter: alpha(opacity=30);
 	}
 	
 .fc .ui-draggable-dragging .fc-event-bg, /* TODO: something nicer like .fc-opacity */

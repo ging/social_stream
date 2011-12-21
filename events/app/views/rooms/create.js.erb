@@ -1,0 +1,7 @@
+<% if @room.valid? %>
+  $('#rooms').replaceWith("<%= escape_javascript render(:partial => 'index') %>");
+  $('#room_name').val("");
+  $('#room_name').Watermark("<%= escape_javascript t('room.watermark.name') %>");
+<% else %>
+  $('#new_room').replaceWith("<%= escape_javascript render(:partial => 'form') %>");
+<% end %>

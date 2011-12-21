@@ -1,0 +1,26 @@
+<div class="space_center"></div>
+
+<div class="block">
+  <div class="header">
+    <div class="header_text"><%= t 'event.title' %></div>
+  </div>
+
+  <div class="content">
+    <span id="sidebar_calendar_date"><%= l Date.today, :format => :long %></span>
+
+  <table id="sidebar_calendar">
+    <% bow = Time.now.beginning_of_week %>
+
+    <% 28.times do |i| %>
+      <% day = bow + i.days %>
+
+      <%= raw cycle("<tr>", *6.times.map{""}, :name => "tr_start") %>
+      <td<%= " class=\"fc-state-highlight\"".html_safe if day.today? %>>
+        <%= link_to day.day, polymorphic_path([subject, Event.new], :at => day.to_i) %>
+      </td>
+
+      <%= raw cycle(*6.times.map{""}, '</tr>', :name => "tr_end") %>
+    <% end %>
+  </table>
+  </div>
+</div>

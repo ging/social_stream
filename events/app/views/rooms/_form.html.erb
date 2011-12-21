@@ -1,0 +1,31 @@
+<%= form_for @room || Room.new(:actor => current_subject.actor), :remote => true do |f| %>
+  <%= f.hidden_field :actor_id %>
+
+  <% if f.object.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(f.object.errors.count, "error") %> evitaron que se guardara este espacio:</h2>
+
+      <ul>
+      <% f.object.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="label">
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+    <%= f.submit %>
+    </div>
+  </div>
+<% end %>
+
+<%= javascript_tag do %>
+  $(function(){
+    $('#room_name').Watermark("<%= escape_javascript t('room.watermark.name') %>");
+  });
+<% end %>
