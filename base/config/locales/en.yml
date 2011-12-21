@@ -9,6 +9,8 @@ en:
     edit: "Edit account"
     email: 
       change: "Change email address"
+    lang: 
+      change: "Change language"
     one: "Account"
     password:
       change: "Change password"
@@ -429,6 +431,8 @@ en:
       briefing: "Lets you cancel your account"
     email_change:
       briefing: "Change your email"
+    lang_change:
+      briefing: "Change your language"
     error: "Some errors raised when saving your changes"
     for: "Settings for"
     main: "Settings"
