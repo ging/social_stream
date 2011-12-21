@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.authors = ["Víctor Sánchez Belmar", "GING - DIT - UPM"]
   s.summary = "File capabilities for Social Stream, the core for building social network websites"
   s.description = "Social Stream is a Ruby on Rails engine providing your application with social networking features and activity streams.\n\nThis gem allow you upload almost any kind of file as new social stream activity."
-  s.email = "v.sanchezbelmar@gmail.com"
+  s.email = "social-stream@dit.upm.es"
   s.homepage = "http://github.com/ging/social_stream-documents"
   s.files = `git ls-files`.split("\n")
 
