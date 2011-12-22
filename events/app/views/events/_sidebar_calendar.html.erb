@@ -1,12 +1,13 @@
 <div class="space_center"></div>
 
 <div class="block">
-  <div class="header">
-    <div class="header_text"><%= t 'event.title' %></div>
-  </div>
-
   <div class="content">
-    <span id="sidebar_calendar_date"><%= l Date.today, :format => :long %></span>
+
+    <%= render :partial => 'events/calendar_month',
+               :locals  => {
+                 :position => :top,
+                 :date => Date.today.beginning_of_week 
+                } %>
 
   <table id="sidebar_calendar">
     <% bow = Time.now.beginning_of_week %>
@@ -15,12 +16,19 @@
       <% day = bow + i.days %>
 
       <%= raw cycle(*(Array.wrap("<tr>") + 6.times.map{""}) + Array.wrap(:name => "tr_start")) %>
-      <td<%= " class=\"fc-state-highlight\"".html_safe if day.today? %>>
+      <td class="<%= event_class(day.to_date) %>">
         <%= link_to day.day, polymorphic_path([profile_or_current_subject, Event.new], :at => day.to_i) %>
       </td>
 
       <%= raw cycle(*(6.times.map{""} + Array.wrap('</tr>') + Array.wrap(:name => "tr_end"))) %>
     <% end %>
   </table>
+
+    <%= render :partial => 'events/calendar_month',
+               :locals  => {
+                 :position => :bottom,
+                 :date => Date.today.beginning_of_week + 28
+                } %>
+
   </div>
 </div>

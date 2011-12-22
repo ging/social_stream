@@ -5,6 +5,8 @@
 //= require fullcalendar
 //= require boxy
 
+@import "colors";
+
 #calendar {
 	margin-top: 20px;
 }
@@ -17,6 +19,8 @@
 	width: 100%;
 	text-align: center;
 	padding-top: 5px;
+	border-top: thin solid $separation-color;
+	border-bottom: thin solid $separation-color;
 }
 
 #sidebar_calendar a {
@@ -25,7 +29,32 @@
 
 #sidebar_calendar td {
   height: 25px;
-  border: 1px solid #CCCCCC;
+}
+
+#sidebar_calendar td.past {
+  opacity: 0.2;
+}
+
+#sidebar_calendar td.today {
+  border: 1px solid $sentence-color;
+}
+
+#sidebar_calendar td.next_month {
+  opacity: 0.8;
+  background-color: #F2F2F2;
+}
+
+.sidebar_calendar_month {
+  text-align: center;
+  padding: 5px;
+}
+
+.sidebar_calendar_month a {
+  color: $sentence-color;
+}
+
+.sidebar_calendar_month.not_current a {
+  color: $details-color;
 }
 
 #new_event div.form_row {
