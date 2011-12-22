@@ -2,9 +2,7 @@
 <%= t('search.name')%> <%= params[:search_query].present? ? ": #{params[:search_query]}" : ""%>
 <% end %>
 
-<% content_for :sidebar do %>
-<%= render :partial => 'home/sidebar' %>
-<% end %>
+<% sidebar %>
 
 <% toolbar if user_signed_in? %>
 

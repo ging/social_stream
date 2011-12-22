@@ -4,9 +4,8 @@
 
 <% toolbar if user_signed_in? %>
 
-<% content_for :sidebar do %>
-	<%= render :partial => "groups/sidebar_index" %>
-<% end %>
+<% sidebar :group_index %>
+
 <%= location(t('browse') +": "+ 
              link_to(t('user.by'), users_path) + ", "+ 
              content_tag(:b,content_tag(:span, t('group.all'), :id=>'name_group')))%>

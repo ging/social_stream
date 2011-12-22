@@ -2,9 +2,7 @@
 <%= profile_subject.name + ": " + t('repository.title') %>
 <% end %>
 
-<% content_for :sidebar do %>
-<%= render :partial => 'home/sidebar' %>
-<% end %>
+<% sidebar %>
 
 <%if profile_subject_is_current?%>
 <%= location(

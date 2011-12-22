@@ -3,9 +3,8 @@
 <% content_for :title do%>
   <%= current_subject.name %>
 <% end%>
-<% content_for :sidebar do %>
-  <%= render :partial => 'home/sidebar' %>
-<% end %>
+
+<% sidebar %>
 
 <%= location(
  	link_to(t('menu.information'), [current_subject,:profile]),	

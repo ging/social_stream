@@ -4,8 +4,6 @@
 
 <% toolbar :option => 'groups' %>
 
-<% content_for :sidebar do %>
-  <%= render :partial => "sidebar_index" %>
-<% end %>
+<% sidebar :group_index %>
 
 <%= render :partial => 'new' %>

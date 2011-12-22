@@ -1,6 +1,4 @@
-<% content_for :sidebar do %>
-  <% render :partial => 'sidebar' %>
-<% end %>
+<% sidebar %>
 
 <%= location(link_to(t('home')+": "+ truncate_name(sanitize current_subject.name)))%>
                       

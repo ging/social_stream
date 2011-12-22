@@ -13,9 +13,8 @@
 <% content_for :keywords do %>
   <%= @group.profile.subject.tag_list%>
 <% end %>
-<% content_for :sidebar do %>
-  <%= render :partial => 'sidebar_show' %>
-<% end %>
+
+<% sidebar %>
 
 <%= location(link_to(t('group.one')+": "+truncate_name(sanitize @group.name)))%>
                       

@@ -1,48 +1,5 @@
-# Database foreign keys
-require 'foreigner'
-# jQuery
-require 'jquery-rails'
-# Permalinks:
-require 'stringex'
-# Hierarchical relationships in Activity and Relation:
-require 'ancestry'
-# Messages
-require 'mailboxer'
-# User authentication
-require 'devise'
-# Authorization
-require 'cancan'
-# REST controllers
-require 'inherited_resources'
-# Scopes in controllers
-require 'has_scope'
-# Logo attachments
-require 'paperclip'
-require 'paperclip/social_stream'
-require 'avatars_for_rails'
-# Pagination
-require 'kaminari'
-# Oauth
-require 'omniauth/oauth'
-#Tags
-require 'acts-as-taggable-on'
-require 'acts_as_taggable_on/social_stream'
-# HTML forms
-require 'formtastic'
-#Background tasks
-require 'resque/server'
-#Simple Navigation for menu
-require 'simple-navigation'
-# Modernizr.js library
-require 'modernizr-rails'
-# Sphinx search engine
-require 'thinking-sphinx'
-# Syntactically Awesome Stylesheets
-require 'sass-rails'
-# Autolink text blocks
-require 'rails_autolink'
-# SocialCheesecake
-require 'social_cheesecake'
+# Gem's dependencies
+require 'social_stream/base/dependencies'
 
 # Provides your Rails application with social network and activity stream support
 module SocialStream
@@ -65,9 +22,14 @@ module SocialStream
   end
 
   module Views
+    autoload :List, 'social_stream/views/list'
+
     module Settings
-      autoload :Base,     'social_stream/views/settings/base'
-      autoload :ItemList, 'social_stream/views/settings/item_list'
+      autoload :Base, 'social_stream/views/settings/base'
+    end
+
+    module Sidebar
+      autoload :Base, 'social_stream/views/sidebar/base'
     end
   end
 

@@ -2,9 +2,7 @@
   <%=t('message.other')%>
 <% end %>
 
-<% content_for :sidebar do %>
-  <%= render :partial => 'home/sidebar' %>
-<% end %>
+<% sidebar %>
 
 <% content_for :javascript do %>
   $('.pagination a').attr('data-remote', 'true');

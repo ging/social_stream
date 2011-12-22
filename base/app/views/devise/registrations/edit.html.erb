@@ -1,7 +1,7 @@
 <% toolbar :profile => current_subject %>
-<% content_for :sidebar do %>
-  <%= render :partial => 'home/sidebar' %>
-<% end %>
+
+<% sidebar %>
+
 <%= location(t('account.one'), 
   link_to(t('settings.main'), settings_path)
 ) %>
@@ -19,4 +19,3 @@
 <% end %>
 <%= render :partial => "settings/contacts" %>
 <%= render :partial => "delete_account"%>
-

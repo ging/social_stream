@@ -1,8 +1,6 @@
 <% toolbar :profile => current_subject %>
 
-<% content_for :sidebar do %>
-  <%= render :partial => "#{ current_subject.class.to_s.tableize }/sidebar_index" %>
-<% end %>
+<% sidebar %>
 
 <%if params[:section].present? 
   case params[:section]

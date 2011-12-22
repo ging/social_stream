@@ -2,9 +2,7 @@
   <%=t('settings.one')%>
 <% end %>
 
-<% content_for :sidebar do %>
-  <%= render :partial => 'home/sidebar' %>
-<% end %>
+<% sidebar %>
 
 <% toolbar :profile => current_subject %>
 

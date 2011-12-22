@@ -4,9 +4,7 @@
 
 <% toolbar if user_signed_in? %>
 
-<% content_for :sidebar do %>
-	<%= render :partial => "users/sidebar_index" %>
-<% end %>
+<% sidebar %>
 
 <%= location(t('browse') +": "+
              content_tag(:b ,content_tag(:span, t('user.other'), :id=>'name_group')) + ", "+ 

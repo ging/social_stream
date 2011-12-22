@@ -1,8 +1,6 @@
 <% toolbar  %>
 
-<% content_for :sidebar do %>
-  <%= render :partial => "home/sidebar" %>
-<% end %>
+<% sidebar %>
 
 <%= location(
   link_to(t('invitation.other'), new_invitation_path)

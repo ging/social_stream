@@ -15,9 +15,7 @@
   <%= @user.profile.subject.tag_list%>
 <% end %>
 
-<% content_for :sidebar do %>
-  <%= render :partial => 'sidebar_index' %>
-<% end %>
+<% sidebar %>
 
 <%= location(link_to(t('profile.one')+": "+truncate_name(sanitize @user.name)))%>
               

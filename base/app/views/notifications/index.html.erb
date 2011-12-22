@@ -2,9 +2,7 @@
   <%= current_subject.name %>
 <% end %>
 
-<% content_for :sidebar do %>
-  <%= render :partial => 'home/sidebar' %>
-<% end %>
+<% sidebar %>
 
 <%= location(
     link_to(t('notification.other'), notifications_path,:remote => true) +' ('+@mailbox.notifications.not_trashed.unread.count.to_s+')'

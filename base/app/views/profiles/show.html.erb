@@ -11,9 +11,7 @@
   <%= @profile.subject.tag_list%>
 <% end %>
 
-<% content_for :sidebar do %>
-  <%= render :partial => 'users/sidebar_index' %>
-<% end %>
+<% sidebar %>
 
 <% toolbar :profile => @profile.subject %>
 

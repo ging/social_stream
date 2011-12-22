@@ -1,9 +1,8 @@
 <% content_for :title do %>
   <%=t('message.other')%>
 <% end %>
-<% content_for :sidebar do %>
-  <%= render :partial => 'home/sidebar' %>
-<% end %>
+
+<% sidebar %>
 
 <% toolbar :option => :messages %>
 
