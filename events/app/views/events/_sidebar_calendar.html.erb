@@ -14,12 +14,12 @@
     <% 28.times do |i| %>
       <% day = bow + i.days %>
 
-      <%= raw cycle("<tr>", *6.times.map{""}, :name => "tr_start") %>
+      <%= raw cycle(*(Array.wrap("<tr>") + 6.times.map{""}) + Array.wrap(:name => "tr_start")) %>
       <td<%= " class=\"fc-state-highlight\"".html_safe if day.today? %>>
         <%= link_to day.day, polymorphic_path([profile_or_current_subject, Event.new], :at => day.to_i) %>
       </td>
 
-      <%= raw cycle(*6.times.map{""}, '</tr>', :name => "tr_end") %>
+      <%= raw cycle(*(6.times.map{""} + Array.wrap('</tr>') + Array.wrap(:name => "tr_end"))) %>
     <% end %>
   </table>
   </div>
