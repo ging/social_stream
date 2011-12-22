@@ -5,7 +5,7 @@
   <ul>
     <% representations.each do |representation| %>
     <li>
-      <%= link_to truncate_name(representation.name, :length => 15), { :s => representation.slug }, { :style => "background: transparent url('#{ image_path representation.logo.url(:representation)}') no-repeat left center;margin-left:2px;" } %>
+      <%= link_to truncate_name(representation.name, :length => 15) + (content_tag(:span, representation.pending_contacts_count.to_s, :class => "switch_pending_count") if representation.pending_contacts_count > 0), { :s => representation.slug }, { :style => "background: transparent url('#{ image_path representation.logo.url(:representation)}') no-repeat left center;margin-left:2px;" } %>
     </li>
     <% end %>
   </ul>
