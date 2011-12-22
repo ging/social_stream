@@ -7,6 +7,10 @@ module SocialStream
     module Settings
       autoload :Events, 'social_stream/views/settings/events'
     end
+
+    module Sidebar
+      autoload :Events, 'social_stream/views/sidebar/events'
+    end
   end
 
   module Events

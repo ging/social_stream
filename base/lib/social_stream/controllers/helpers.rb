@@ -7,6 +7,7 @@ module SocialStream
       included do
         helper_method :current_subject,
                       :profile_subject,
+                      :profile_or_current_subject,
                       :profile_subject_is_current?
       end
 
@@ -78,6 +79,16 @@ module SocialStream
         # Go to sign in page if {#profile_subject} is blank
         def profile_subject!
           @profile_subject ||= association_chain[-1] || warden.authenticate!
+        end
+
+        # Profile subject is suitable for paths like:
+        #   /users/demo/posts
+        #
+        # This method tries {#profile_subject} first and then {#current_subject}
+        def profile_or_current_subject
+          profile_subject || current_subject
+        rescue
+          current_subject
         end
 
         # A {User} must be logged in and is equal to {#profile_subject}

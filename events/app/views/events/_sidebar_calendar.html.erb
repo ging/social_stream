@@ -16,7 +16,7 @@
 
       <%= raw cycle("<tr>", *6.times.map{""}, :name => "tr_start") %>
       <td<%= " class=\"fc-state-highlight\"".html_safe if day.today? %>>
-        <%= link_to day.day, polymorphic_path([subject, Event.new], :at => day.to_i) %>
+        <%= link_to day.day, polymorphic_path([profile_or_current_subject, Event.new], :at => day.to_i) %>
       </td>
 
       <%= raw cycle(*6.times.map{""}, '</tr>', :name => "tr_end") %>
