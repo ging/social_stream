@@ -13,15 +13,15 @@ namespace :db do
       LOGOS_PATH = File.join(Rails.root, 'lib', 'logos')
       USERS = (ENV["USERS"] || 9).to_i
       GROUPS = (ENV["GROUPS"] || 10).to_i
-      CHEESECAKE_TESTING = (ENV["CHEESECAKE_TESTING"].present? || false)
-      if CHEESECAKE_TESTING
+      CHEESECAKE = (ENV["CHEESECAKE"].present? || false)
+      if CHEESECAKE
         puts "Cheesecake Testing mode: ON"
       end
       if ENV["HARDCORE"].present?
         USERS = 999
         GROUPS = 1000    
         puts "Hardcore mode: ON (May the Force be with you brave Padawan)"
-        if CHEESECAKE_TESTING
+        if CHEESECAKE
           puts "WARNING: Hardcore and Cheesecake Modes activated. This situation is really slow. Please, avoid it."
         end        
       end
@@ -121,13 +121,15 @@ namespace :db do
         relations = a.relation_customs + Array.wrap(a.relation_reject)
         break if actors.size==0
         Forgery::Basic.number(:at_most => actors.size).times do
-          actor = actors.delete_at((rand * actors.size).to_i)
-          a.contact_to!(actor).relation_ids = Array(Forgery::Extensions::Array.new(relations).random.id)
+          actor = actors.delete_at((rand * actors.size).to_i)          
+          a.contact_to!(actor).relation_ids = Array(Forgery::Extensions::Array.new(relations).random.id) unless a==actor
         end
-        if CHEESECAKE_TESTING     
+        if CHEESECAKE     
           actor = Actor.first
-          puts a.name + " connecting with " + actor.name
-          a.contact_to!(actor).relation_ids = Array(Forgery::Extensions::Array.new(relations).random.id)
+          unless a==actor
+            puts a.name + " connecting with " + actor.name
+            a.contact_to!(actor).relation_ids = Array(Forgery::Extensions::Array.new(relations).random.id)
+          end
         end
       end
 
@@ -136,7 +138,7 @@ namespace :db do
 
       # = Posts
       puts 'Post population'
-      unless CHEESECAKE_TESTING
+      unless CHEESECAKE
         posts_start = Time.now
   
         SocialStream::Populate.power_law(Tie.all) do |t|
@@ -167,7 +169,7 @@ namespace :db do
 
       # = Mailboxer      
       puts 'Mailboxer population'
-      unless CHEESECAKE_TESTING
+      unless CHEESECAKE
         mailboxer_start = Time.now
         available_actors = Actor.all
   
