@@ -19,7 +19,8 @@ class Actor < ActiveRecord::Base
   include SocialStream::Models::Supertype
   include SocialStream::Models::Object
   
-  validates_presence_of :name, :subject_type
+  validates_presence_of :name, :message => ''
+  validates_presence_of :subject_type
   
   acts_as_messageable
 
