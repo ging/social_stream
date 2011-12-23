@@ -9,7 +9,7 @@
 		newel: false,
 		height: 6
   });
-  $("#group_actor_tag_list").fcbkcomplete({
+  $("#group_tag_list").fcbkcomplete({
 		json_url: "<%= tags_path(:format => :json) %>",
 		cache: false,
 		filter_case: true,
@@ -65,9 +65,7 @@
 				<%= f.label t('group.tags')%>
 			</div>
 			<div class="form_field">
-				<%= f.fields_for :actor do |actor_form| %>
-					<%= actor_form.select :tag_list, [], :class => "form_tag" %>
-				<%end%>
+        			<%= f.select :tag_list, [], :class => "form_tag" %>
 			</div>
 		</div>
 		<div class="form_row form_label">
