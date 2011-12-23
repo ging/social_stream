@@ -9,6 +9,8 @@ es:
     edit: "Editar cuenta"
     email: 
       change: "Cambiar dirección de correo"
+    lang: 
+      change: "Cambiar idioma"
     one: "Cuenta"
     password:
       change: "Cambiar contraseña"
