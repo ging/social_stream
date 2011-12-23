@@ -29,7 +29,9 @@
                       background: transparent url('btn/header_notifications.png') no-repeat center center;}
 #header_inbox_count a{ color: white; background-color: $header-notification-color; padding: 2px 7px 2px 7px;}
 #representation {  display: inline;  padding-left:3px;  padding-right:3px;}
-.switch_pending_count { color: white; background-color: $header-notification-color; padding: 2px 7px 2px 7px !important; margin-left: 5px !important; float: right; }
+.switch_pending_count { color: white; text-align: right;
+                        background: transparent url('btn/header_notifications.png') no-repeat center center;
+                        padding: 2px 10px 4px 11px !important; margin: 0 5px 0 5px !important; float: right; }
 .txt_config {color: $text-over-main;	vertical-align: top;	display: inline;	padding-top: 2px;	
               border-right: thin solid; padding-right: 3px;}
 .txt_config2 {color: $text-over-main;	vertical-align: top;	display: inline;	padding-top: 2px;	padding-right: 3px;}
@@ -49,9 +51,9 @@
 #header_dropdown_menu ul li a{padding: .40em 1em .70em 2.5em;}
 #header_dropdown_menu ul li a:hover{color:$main-color;}
 #header_dropdown_menu ul li ul li a{padding: .40em 1em .70em 1em;}
-#header_dropdown_menu ul li ul li ul li {width: 160px;}
+#header_dropdown_menu ul li ul li ul li {width: 170px;}
 #header_dropdown_menu ul li ul li ul li a{padding: .40em 1em .70em 2.5em;}
-#header_dropdown_menu ul li ul li ul{position: absolute; left: -160px;}
+#header_dropdown_menu ul li ul li ul{position: absolute; left: -170px;}
 #header_dropdown_menu a.session_change{background: transparent url('btn/arrow_session_change.png') no-repeat 3px 6px;}
 
 #menu_home ul li.pipe,#menu_account ul li.pipe{padding:0; margin:0;font-size: 20px;font-weight: bold;}
