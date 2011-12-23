@@ -87,10 +87,13 @@
       }
     });
 
-    <% if params[:at] %>
+    <% if params[:date] %>
       // TODO: optimize this to save one index call
-      SocialStream.Events.current.calendar.fullCalendar('changeView', "agendaDay");
-      SocialStream.Events.current.calendar.fullCalendar('gotoDate', new Date(<%= params[:at] %> * 1000));
+      SocialStream.Events.current.calendar.fullCalendar('gotoDate', new Date(<%= escape_javascript params[:date] %> * 1000));
+    <% end %>
+
+    <% if params[:view] %>
+      SocialStream.Events.current.calendar.fullCalendar('changeView', "<%= escape_javascript params[:view] %>");
     <% end %>
   });
 <% end %>

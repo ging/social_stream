@@ -1,1 +1,1 @@
-<div id="sidebar_calendar_month_<%= position %>" class="sidebar_calendar_month<%= " not_current" if date.month != Date.today.month  %>"><%= link_to l(date, :format => "%B %Y"), '#' %></div>
+<div id="sidebar_calendar_month_<%= position %>" class="sidebar_calendar_month<%= " not_current" if date.month != Date.today.month  %>"><%= link_to l(date, :format => "%B %Y"), polymorphic_path([profile_or_current_subject, Event.new], :date => date.to_time.to_i) %></div>

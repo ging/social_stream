@@ -17,7 +17,7 @@
 
       <%= raw cycle(*(Array.wrap("<tr>") + 6.times.map{""}) + Array.wrap(:name => "tr_start")) %>
       <td class="<%= event_class(day.to_date) %>">
-        <%= link_to day.day, polymorphic_path([profile_or_current_subject, Event.new], :at => day.to_i) %>
+        <%= link_to day.day, polymorphic_path([profile_or_current_subject, Event.new], :date => day.to_i, :view => "agendaDay") %>
       </td>
 
       <%= raw cycle(*(6.times.map{""} + Array.wrap('</tr>') + Array.wrap(:name => "tr_end"))) %>
