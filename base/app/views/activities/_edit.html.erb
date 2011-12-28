@@ -1,0 +1,4 @@
+<% unless @activity_object.nil? %>
+  <%= render @activity_object.object_type.pluralize.downcase + '/edit' %>
+<%end%>
+
