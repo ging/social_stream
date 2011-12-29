@@ -16,12 +16,6 @@
       </div>
     <% end %>
 
-    <% if false # activity.edit_object_by?(current_subject) %>
-      <div class="verb_edit"> 
-        · <%= link_to t('activity.edit'), edit_activity_path(activity), :remote => true %> 
-      </div>
-    <% end %>
-
     <% if activity.delete_object_by?(current_subject) %>
       <div class="verb_delete"> 
         · <%= link_to t('activity.delete'), activity.direct_object , :confirm => t('confirm_delete', 

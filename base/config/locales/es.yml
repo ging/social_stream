@@ -41,7 +41,6 @@ es:
         summary: "Restringido"
         full: "Compartido con %{audience}"
     confirm_delete: "¿Borrar actividad?"
-    edit: "Editar"
     delete: "Borrar"
     last: "Últimas actividades"
     like: "Me gusta"

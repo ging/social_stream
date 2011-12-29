@@ -41,7 +41,6 @@ en:
         summary: "Restricted"
         full: "Shared with %{audience}"
     confirm_delete: "Delete activity?"
-    edit: "Edit"
     delete: "Delete"
     last: "Last Activities"
     like: "I like"
