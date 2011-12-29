@@ -16,6 +16,15 @@ class ActivitiesController < InheritedResources::Base
 
   def update
     @activity = Activity.find(params[:id])
+    respond_to do |format|
+      if @activity.update_attributes(params[:activity])
+        format.html { redirect_to current_subject, notice: 'Activity was successfully updated.' }
+	format.json { head :ok }
+      else
+        format.html { render action: "edit" }
+	format.json { render json: @activity.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   protected
