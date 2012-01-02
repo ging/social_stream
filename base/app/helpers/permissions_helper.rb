@@ -4,7 +4,8 @@ module PermissionsHelper
       [ "read",    "activity" ],
       [ "create",  "activity" ],
       [ "follow", nil ],
-      [ "represent", nil ]
+      [ "represent", nil ],
+      [ "notify", nil ]
     ]
 
   def default_permissions

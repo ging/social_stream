@@ -163,19 +163,20 @@ class Actor < ActiveRecord::Base
     return "#{name} <#{email}>" if email.present?
     #If actor is a Group, has enabled emails but no mail we return the highest_rank ones.
     if (group = self.subject).is_a? Group
-      relation = group.relation_customs.sort.first
-      receivers = group.contact_actors(:direction => :sent, :relations => relation)
       emails = Array.new
-      receivers.each do |receiver|
-        next unless Actor.normalize(receiver).subject_type.eql?("User")
+      group.relation_notifys.each do |relation|
+        receivers = group.contact_actors(:direction => :sent, :relations => relation)
+        receivers.each do |receiver|
+          next unless Actor.normalize(receiver).subject_type.eql?("User")
 
-        receiver_emails = receiver.mailboxer_email(object)
-        case receiver_emails
-        when String
-          emails << receiver_emails
-        when Array
-          receiver_emails.each do |receiver_email|
-            emails << receiver_email
+          receiver_emails = receiver.mailboxer_email(object)
+          case receiver_emails
+          when String
+            emails << receiver_emails
+          when Array
+            receiver_emails.each do |receiver_email|
+              emails << receiver_email
+            end
           end
         end
       end
@@ -196,6 +197,19 @@ class Actor < ActiveRecord::Base
   # A given relation defined and managed by this actor
   def relation_custom(name)
     relation_customs.find_by_name(name)
+  end
+
+  # All {Relation relations} with the 'notify' permission
+  def relation_notifys
+    rels = Array.new
+    relation_customs.each do |r|
+      r.permissions.each do |p|
+        if p.action == 'notify'
+	  rels << r
+	end
+      end
+    end
+    return rels
   end
 
   # The {Relation::Public} for this {Actor} 
