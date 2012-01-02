@@ -52,7 +52,7 @@
 #header_dropdown_menu ul li a:hover{color:$main-color;}
 #header_dropdown_menu ul li ul li a{padding: .40em 1em .70em 1em;}
 #header_dropdown_menu ul li ul li ul li {width: 170px;}
-#header_dropdown_menu ul li ul li ul li a{padding: .40em 1em .70em 2.5em;}
+#header_dropdown_menu ul li ul li ul li a{padding: .40em 1em .70em 2.5em; display:inline;}
 #header_dropdown_menu ul li ul li ul{position: absolute; left: -170px;}
 #header_dropdown_menu a.session_change{background: transparent url('btn/arrow_session_change.png') no-repeat 3px 6px;}
 
