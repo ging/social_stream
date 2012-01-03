@@ -21,10 +21,8 @@ module SocialStream
       extend ActiveSupport::Concern
       
       included do
-        belongs_to :actor,
-                   :validate => true,
-                   :autosave => true,
-                   :dependent => :destroy
+        subtype_of :actor,
+                   :build => { :subject_type => to_s }
         
         has_one :profile, :through => :actor
         
@@ -78,28 +76,8 @@ module SocialStream
       end
       
       module InstanceMethods
-        def actor!
-          actor || build_actor(:subject_type => self.class.to_s)
-        end
-        
         def to_param
           slug
-        end
-
-        # Delegate missing methods to {Actor}, if they exist there
-        def method_missing(method, *args, &block)
-          super
-        rescue NameError => subject_error 
-          # These methods must be raised to avoid loops (the :actor association calls here again)
-          exceptions = [ :_actor_id ]
-          raise subject_error if exceptions.include?(method)
-
-          actor!.__send__ method, *args, &block
-        end
-
-        # {Actor} handles some methods
-        def respond_to? *args
-          super || actor!.respond_to?(*args)
         end
       end
       
