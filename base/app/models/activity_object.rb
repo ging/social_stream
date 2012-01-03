@@ -9,8 +9,8 @@
 # Objects are added to +config/initializers/social_stream.rb+
 #
 class ActivityObject < ActiveRecord::Base
-  @subtypes_name = :object
-  include SocialStream::Models::Supertype
+  # ActivityObject is a supertype of SocialStream.objects
+  supertype_of :object
 
   acts_as_taggable
   
