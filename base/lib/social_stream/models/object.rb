@@ -10,10 +10,8 @@ module SocialStream
         attr_writer   :_relation_ids
         attr_accessor :_activity_parent_id
 
-        belongs_to :activity_object,
-                   :validate  => true,
-                   :autosave => true,
-                   :dependent => :destroy
+        subtype_of :activity_object,
+                   :build => { :object_type => to_s }
 
         has_many   :activity_object_activities, :through => :activity_object
 
@@ -28,26 +26,6 @@ module SocialStream
       end
 
       module InstanceMethods
-        def activity_object!
-          activity_object || build_activity_object(:object_type => self.class.to_s)
-        end
-
-        # Delegate missing methods to {ActivityObject}, if they exist there
-        def method_missing(method, *args, &block)
-          super
-        rescue NameError => object_error 
-          # These methods must be raised to avoid loops (the :activity_object association calls here again)
-          exceptions = [ :_activity_object_id ]
-          raise object_error if exceptions.include?(method)
-
-          activity_object!.__send__ method, *args, &block
-        end
-
-        # {ActivityObject} handles some methods
-        def respond_to? *args
-          super || activity_object!.respond_to?(*args)
-        end
-
         # Was the author represented with this {SocialStream::Models::Object object} was created?
         def represented_author?
           author_id == user_author_id

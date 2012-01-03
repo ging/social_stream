@@ -15,8 +15,9 @@
 #
 #
 class Actor < ActiveRecord::Base
-  @subtypes_name = :subject
-  include SocialStream::Models::Supertype
+  # Actor is a supertype of all subjects defined in SocialStream.subjects
+  supertype_of :subject
+
   include SocialStream::Models::Object
   
   validates_presence_of :name, :message => ''

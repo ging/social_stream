@@ -32,6 +32,18 @@ module SocialStream #:nodoc:
                        end                                                # end
         end
       end
+
+      module ActiveRecord
+        extend ActiveSupport::Concern
+
+        module ClassMethods
+          # This class is a supertype. Subtype classes are known as name
+          def supertype_of name
+            @subtypes_name = name
+            include SocialStream::Models::Supertype
+          end
+        end
+      end
     end
   end
 end
