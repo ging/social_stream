@@ -201,15 +201,7 @@ class Actor < ActiveRecord::Base
 
   # All {Relation relations} with the 'notify' permission
   def relation_notifys
-    rels = Array.new
-    relation_customs.each do |r|
-      r.permissions.each do |p|
-        if p.action == 'notify'
-	  rels << r
-	end
-      end
-    end
-    return rels
+    Relation.joins(:relation_permissions => :permission).where('permissions.action' => 'notify')
   end
 
   # The {Relation::Public} for this {Actor} 
