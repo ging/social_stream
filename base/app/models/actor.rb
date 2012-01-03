@@ -202,7 +202,7 @@ class Actor < ActiveRecord::Base
 
   # All {Relation relations} with the 'notify' permission
   def relation_notifys
-    Relation.joins(:relation_permissions => :permission).where('permissions.action' => 'notify')
+    relations.joins(:relation_permissions => :permission).where('permissions.action' => 'notify')
   end
 
   # The {Relation::Public} for this {Actor} 
