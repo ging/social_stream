@@ -7,7 +7,7 @@ SocialStream.Linkser.initiate = function() {
     if(this.lastValue == null)
       this.lastValue = "";
 
-    var regexp = /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/
+    var regexp = /^(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&;:\/~+#-]*[\w@?^=%&;\/~+#-])?$/
     if(regexp.test($("#input_activities").val())) {
       $("#link_url").val($("#input_activities").val());
       $("#link_loaded").val(false);
