@@ -371,6 +371,8 @@ es:
           activity: "Leer muro"
         represent:
           nil: "Administrar"
+        notify:
+          nil: "Notificar por email"
       detailed:
         create:
           activity: "Publicar en el muro de\"%{relation}\""
@@ -381,6 +383,8 @@ es:
           tie: "Ver contactos en los niveles: %{relations} y %{public}"
         represent:
           nil: "Cambiar sesión para actuar en nombre de %{subject}"
+        notify:
+          nil: "Las actividades de los contactos en %{relation} se te enviarán al email"
     of_relation:
       choose: "2. Permisos para <strong>%{name}</strong>"
   privacy:

@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
 
   # Gem dependencies
   s.add_runtime_dependency('social_stream-base', '~> 0.11.1')
-  s.add_runtime_dependency('linkser', '~> 0.0.9')
+  s.add_runtime_dependency('linkser', '~> 0.0.10')
   # Development Gem dependencies
   s.add_development_dependency('sqlite3-ruby')
   if RUBY_VERSION < '1.9'
