@@ -22,6 +22,7 @@ module SocialStream
         ActiveSupport.on_load(:action_controller) do
           include SocialStream::Controllers::Helpers
           include SocialStream::Controllers::CancanDeviseIntegration
+          include SocialStream::Controllers::I18nIntegration
         end
       end
 

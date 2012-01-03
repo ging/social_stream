@@ -430,6 +430,8 @@ es:
       briefing: "Te permite cancelar tu cuenta"
     email_change:
       briefing: "Cambia tu email"
+    lang_change:
+      briefing: "Cambia tu idioma"
     error: "Hubo errores al guardar los cambios"
     for: "Ajustes para"
     main: "Ajustes"
