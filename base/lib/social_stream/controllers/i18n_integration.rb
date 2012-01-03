@@ -16,6 +16,7 @@ module SocialStream
 
         private
 	def extract_locale_from_accept_language_header
+	  return nil if request.env['HTTP_ACCEPT_LANGUAGE'].nil?
 	  (request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).map{|l| l.to_sym} & I18n.available_locales).first
 	end
 
