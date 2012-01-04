@@ -2,9 +2,10 @@ require 'active_support/concern'
 
 module SocialStream #:nodoc:
   module Models
-    # Common methods for models that have subtypes. Currently, there are two supertypes:
-    # * Actor: participates in the social network and has ties with other actors. Its subtypes are subjects, like user or group
-    # * ActivityObject: created and managed by actors in activities. Its subtypes are objects, like post or comment
+    # Common methods for models having many {SocialStream::Models::Subtype subtypes}.
+    # Currently, there are two {SocialStream::Models::Supertype supertypes}:
+    # * {Actor}: participates in the social network and has {Tie Ties} with other actors. Its subtypes are {SocialStream::Models::Subject subjects}, such as {User} or {Group}
+    # * {ActivityObject}: created and managed by {Actor Actors} in {Activity Activities}. Its subtypes are {SocialStream::Models::Object objects}, like {Post} or {Comment}
     module Supertype
       extend ActiveSupport::Concern
 

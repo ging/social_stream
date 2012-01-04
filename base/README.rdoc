@@ -10,7 +10,7 @@ network environment see https://github.com/ging/social_stream
 * Social network infraestructure
 * Activity streams infraestructure
 * Subjects: {User} and {Group}
-* Objects: {Post} and {Commment}
+* Objects: {Post} and {Comment}
 * Private messages and notifications, by {Mailboxer}[https://github.com/ging/mailboxer]
 * Avatars, by {Avatars For Rails}[https://github.com/ging/avatars_for_rails]
 
