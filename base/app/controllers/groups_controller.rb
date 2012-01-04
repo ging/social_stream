@@ -1,4 +1,6 @@
-class GroupsController < InheritedResources::Base
+class GroupsController < ApplicationController
+  include SocialStream::Controllers::Subjects
+
   before_filter :authenticate_user!, :except => [ :index, :show ]
 
   # Set group founder to current_subject
@@ -17,9 +19,6 @@ class GroupsController < InheritedResources::Base
                     tagged_with(params[:tag]).
                     page(params[:page]).per(10)
 
-  end
-
-  def show
   end
 
   def create

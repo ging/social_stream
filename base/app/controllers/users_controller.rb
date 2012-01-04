@@ -1,4 +1,6 @@
-class UsersController < InheritedResources::Base
+class UsersController < ApplicationController
+  include SocialStream::Controllers::Subjects
+
   load_and_authorize_resource
 
   respond_to :html, :xml, :js
@@ -11,9 +13,6 @@ class UsersController < InheritedResources::Base
                   page(params[:page]).per(10)
 
 
-  end
-
-  def show
   end
 
   # Supported through devise
