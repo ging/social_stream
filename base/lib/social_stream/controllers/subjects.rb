@@ -10,7 +10,7 @@ module SocialStream
       module InstanceMethods
         # Overwrite {SocialStream::Controllers::Helpers::InstanceMethods#profile_subject}
         def profile_subject
-          resource
+          !resource.new? && resource || current_subject
         end
       end
     end
