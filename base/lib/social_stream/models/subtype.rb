@@ -22,8 +22,10 @@ module SocialStream #:nodoc:
               # FIXME: ruby1.9 remove .inspect
               build_#{ supertype_name }(#{ supertype_options[:build].inspect }) #     build_actor(:subject_type => "User")
           end                                                           # end
+
         EOS
 
+        alias_method :supertype!, "#{ supertype_name }!"
       end
 
       module ClassMethods
@@ -43,9 +45,7 @@ module SocialStream #:nodoc:
           raise subtype_error if exceptions.include?(method)
 
           begin
-            __send__("#{ self.class.supertype_name }!"). # actor!.
-              __send__ method, *args, &block             #   method *args, &block
-
+            supertype!.__send__ method, *args, &block
           # We rescue supertype's NameErrors so methods not defined are raised from
           # the subtype. Example: user.foo should raise "foo is not defined in user"
           # and not "in actor"
@@ -56,8 +56,7 @@ module SocialStream #:nodoc:
 
         # {SocialStream::Models::Supertype} handles some methods
         def respond_to? *args
-          super ||
-            __send__("#{ self.class.supertype_name }!").respond_to?(*args) # actor!.respond_to?(*args)
+          super || supertype!.respond_to?(*args)
         end 
       end
 
