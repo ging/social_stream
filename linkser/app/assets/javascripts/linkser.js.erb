@@ -1,7 +1,7 @@
 var SocialStream = SocialStream || {};
 SocialStream.Linkser = SocialStream.Linkser || {};
 SocialStream.Linkser.initiate = function() {
-  $.preloadImages("/assets/loading.gif");
+  $.preloadImages("<%= asset_path('loading.gif') %>");
   var urlDetect = function() {
     this.currentValue = $("#input_activities").val();
     if(this.lastValue == null)
@@ -13,7 +13,7 @@ SocialStream.Linkser.initiate = function() {
       $("#link_loaded").val(false);
       $("#new_post").attr("action", "/links");
       if(this.currentValue != this.lastValue) {
-        $("#link_preview").html($('<img>').attr('src', 'assets/loading.gif').addClass('loading'));
+        $("#link_preview").html($('<img>').attr('src', '<%= asset_path('loading.gif') %>').addClass('loading'));
         this.lastValue = this.currentValue;
         var url = this.currentValue;
         var urlDetect = this;
