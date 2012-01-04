@@ -25,6 +25,11 @@ module SocialStream
           # It usually appears repeated in the wall and provides no useful information
           #after_update :create_update_activity
         end
+
+        scope :authored_by, lambda { |subject|
+          joins(:activity_object).
+            merge(ActivityObject.authored_by(subject))
+        }
       end
 
       module InstanceMethods

@@ -44,6 +44,9 @@
   background-color: #F2F2F2;
 }
 
+#sidebar_calendar td.busy {
+  font-weight: bold;
+}
 .sidebar_calendar_month {
   text-align: center;
   padding: 5px;

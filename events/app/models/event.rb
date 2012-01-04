@@ -9,12 +9,23 @@ class Event < ActiveRecord::Base
 
   validate :room_belongs_to_receiver
 
+  class << self
+    def ocurrences(start_date, end_date)
+      between(start_date, end_date).
+      map { |e|
+        e.ocurrences(start_date, end_date)
+      }.
+      flatten.
+      uniq
+    end
+  end
+
   def to_json(options = {})
     if recurrence
       st = options[:start].try(:to_date)
       en = (options[:end] || end_at.end_of_month + 7.days).to_date
 
-      recurrence.events(:starts => st, :until  => en).map do |d|
+      ocurrences(st, en).map do |d|
 
         start_diff = d - start_at.to_date
         end_diff   = d - end_at.to_date
