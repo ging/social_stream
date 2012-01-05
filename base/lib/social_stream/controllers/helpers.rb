@@ -87,7 +87,7 @@ module SocialStream
         # This method tries {#profile_subject} first and then {#current_subject}
         def profile_or_current_subject
           profile_subject || current_subject
-        rescue NameError => e
+        rescue
           current_subject
         end
 
