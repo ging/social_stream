@@ -1,21 +1,3 @@
-<% content_for :javascript do %>
-
-  $("#jpId<%=video.id%>").jPlayer( {
-    ready: function () {
-      $(this).jPlayer("setMedia", {
-        webmv: "<%= video_url(video, :format => 'webm' ) %>", // Defines the webm url
-        flv:   "<%= video_url(video, :format => 'flv') %>"
-      });
-    },
-  solution:"flash, html",
-  preload: "none",
-  supplied: "webmv, flv",
-  swfPath: "assets",
-  cssSelectorAncestor: "#jp_interface_<%=video.id%>"
-  });
-  
-<% end %>
-
 <%= div_for video, :class => 'content_size' do %>
 <div class="video_show">
   <% if video.file_processing %>
@@ -58,7 +40,29 @@
       </div>
       <div id="jp_playlist_<%= video.id%>" class="jp-playlist"></div>
     </div>
+<div id="inspector"></div>
   </div>
   <% end %>
 </div>
 <% end %> 
+
+<%= javascript_tag do %>
+  $(function() {
+  <% unless video.file_processing %>
+    $("#jpId<%=video.id%>").jPlayer( {
+      ready: function () {
+        $(this).jPlayer("setMedia", {
+          webmv: "<%= video_url(video, :format => 'webm' ) %>", // Defines the webm url
+          flv:   "<%= video_url(video, :format => 'flv') %>"
+        });
+      },
+      solution:"flash, html",
+      preload: "none",
+      supplied: "webmv, flv",
+      swfPath: "assets",
+      cssSelectorAncestor: "#jp_interface_<%=video.id%>"
+    });
+  <% end %>
+  });
+<% end %>
+
