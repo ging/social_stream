@@ -7,7 +7,7 @@ en:
     name: "audio"
     not_mine: "Audios"
     one: "an audio"
-    processing: "Processing audio clip"
+    processing: "Processing audio clip. Please wait..."
   document:
     actions:
       delete: "Delete"
@@ -64,4 +64,4 @@ en:
     name: "video" 
     not_mine: "Videos"
     one: "a video"
-    processing: "Processing video"
+    processing: "Processing video. Please, wait..."

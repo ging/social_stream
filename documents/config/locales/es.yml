@@ -7,7 +7,7 @@ es:
     name: "archivo de audio"
     not_mine: "Audios"
     one: "un archivo de audio"
-    processing: "Procesando fichero de audio..."
+    processing: "Procesando fichero de audio. Espere, por favor..."
   document:
     actions:
       delete: "Borrar"
@@ -64,4 +64,4 @@ es:
     name: "vídeo"
     not_mine: "Vídeos"
     one: "un vídeo"
-    processing: "Procesando vídeo..."
+    processing: "Procesando vídeo. Espere, por favor..."
