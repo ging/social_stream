@@ -1,4 +1,8 @@
 en:
+  activerecord:
+    attributes:
+      document:
+        title: "Title"
   audio:
     confirm_delete: "Delete audio?"
     title: "Audios"

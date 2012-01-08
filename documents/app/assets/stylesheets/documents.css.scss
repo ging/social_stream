@@ -57,6 +57,15 @@
 	text-align: left;
 }
 
+#new_document_title_wrapper {
+  margin-top: 5px;
+}
+
+#new_document_title_wrapper input[type="text"] {
+	display: inline;
+        width: 30%;
+}
+
 .attachment_tile{
 	margin: 5px;
 	width: 90px;

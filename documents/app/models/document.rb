@@ -72,7 +72,7 @@ class Document < ActiveRecord::Base
   protected
   
   def set_title
-    self.title = self.file_file_name
+    self.title ||= self.file_file_name
   end
     
 end
