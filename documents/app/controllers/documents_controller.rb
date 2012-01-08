@@ -39,8 +39,9 @@ class DocumentsController < ApplicationController
         path = resource.file.path(params[:style] || params[:format])
 
         send_file path,
-        :filename => resource.file_file_name,
-        :disposition => "inline"
+                 :filename => resource.file_file_name,
+                 :disposition => "inline",
+                 :type => request.format
       }
     end
   end
