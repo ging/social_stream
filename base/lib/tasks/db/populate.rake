@@ -1,3 +1,5 @@
+require 'forgery'
+
 namespace :db do
   desc 'Populate database with fake data for development'
   task :populate => [ 'db:seed', 'db:populate:create' ]
