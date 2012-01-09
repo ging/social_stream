@@ -6,15 +6,22 @@ class UpdateNotifyPermissions < ActiveRecord::Migration
     r_ts = RelationPermission.record_timestamps
     RelationPermission.record_timestamps = false
 
-    # INSERT INTO permission_relation
+    # Make sure 'notify' exists
     perm_notify = Permission.where(:action => 'notify')[0]
     if perm_notify.nil?
       perm_notify = Permission.create(:action => 'notify')
     end
-    Relation.where(:sender_type => 'Group', :type => 'Relation::Custom').group('actor_id').each do |r|
+
+    seen_actors=[]
+    Relation.where(:sender_type => 'Group', :type => 'Relation::Custom').each do |r|
+      next if seen_actors.include? r.actor
+      seen_actors << r.actor
+      # INSERT INTO permission_relations
       RelationPermission.create do |rp|
         rp.relation = r
 	rp.permission = perm_notify
+	rp.created_at = r.created_at
+	rp.updated_at = r.updated_at
       end
     end
 
