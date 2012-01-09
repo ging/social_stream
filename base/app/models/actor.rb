@@ -64,13 +64,13 @@ class Actor < ActiveRecord::Base
   has_many :relations,
            :dependent => :destroy
 
-  has_many :authored_objects,
-           :class_name => "ActivityObject",
+  has_many :authored_channels,
+           :class_name => "Channel",
            :foreign_key => :author_id,
            :dependent => :destroy
 
-  has_many :owned_objects,
-           :class_name => "ActivityObject",
+  has_many :owned_channels,
+           :class_name => "Channel",
            :foreign_key => :owner_id,
            :dependent => :destroy
 

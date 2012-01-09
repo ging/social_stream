@@ -11,10 +11,11 @@ module SocialStream #:nodoc:
           attr_reader :supertype_name, :supertype_options
         end
 
-        belongs_to supertype_name,
-                   :validate => true,
-                   :autosave => true,
-                   :dependent => :destroy
+        belongs_to supertype_name, {
+                    :validate  => true,
+                    :autosave  => true,
+                    :dependent => :destroy
+                  }.merge(supertype_options[:belongs] || {})
 
         class_eval <<-EOS
           def #{ supertype_name }!                                      # def actor!
@@ -26,6 +27,8 @@ module SocialStream #:nodoc:
         EOS
 
         alias_method :supertype!, "#{ supertype_name }!"
+
+        before_validation :supertype!
       end
 
       module ClassMethods
@@ -72,7 +75,6 @@ module SocialStream #:nodoc:
           end
         end
       end
-
     end
   end
 end
