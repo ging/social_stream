@@ -1,9 +1,3 @@
-require File.join(File.dirname(__FILE__), '..', '..', 'support', 'migrations')
+require 'social_stream/migrations/base'
 
-ActiveRecord::Schema.define(:version => 0) do
-  CreateMailboxer.up
-  CreateSocialStream.up
-  ActsAsTaggableOnMigration.up
-  CreateSocialStreamDocuments.up
-  CreateSocialStreamLinkser.up
-end
+SocialStream::Migrations::Base.new.up
