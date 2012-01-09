@@ -21,8 +21,7 @@ module SocialStream
 	end
 
 	def user_preferred_locale
-	  return current_user.language if !current_user.nil?
-	  return nil
+          current_user.language if user_signed_in?
 	end
       end
     end
