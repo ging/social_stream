@@ -25,6 +25,12 @@ class Channel < ActiveRecord::Base
   validates_uniqueness_of :owner_id,       :scope => [ :author_id, :user_author_id ]
   validates_uniqueness_of :user_author_id, :scope => [ :author_id, :owner_id ]
 
+  scope :authored_by, lambda { |subject|
+    id = Actor.normalize_id subject
+
+    where(arel_table[:author_id].eq(id).or(arel_table[:user_author_id].eq(id)))
+  }
+
   # The {SocialStream::Models::Subject subject} author
   def author_subject
     author.subject

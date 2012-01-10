@@ -24,9 +24,7 @@ class ActivityObject < ActiveRecord::Base
   validates_presence_of :object_type
 
   scope :authored_by, lambda { |subject|
-    id = Actor.normalize_id subject
-
-    where(arel_table[:author_id].eq(id).or(arel_table[:user_author_id].eq(id)))
+    joins(:channel).merge(Channel.authored_by(subject))
   }
 
   before_validation :check_existing_channel

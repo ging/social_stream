@@ -13,7 +13,8 @@ module SocialStream
         subtype_of :activity_object,
                    :build => { :object_type => to_s }
 
-        has_many   :activity_object_activities, :through => :activity_object
+        has_one  :channel, :through => :activity_object
+        has_many :activity_object_activities, :through => :activity_object
 
 #        before_create :create_activity_object_with_type
 
