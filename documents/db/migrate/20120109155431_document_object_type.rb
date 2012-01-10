@@ -6,7 +6,8 @@ class DocumentObjectType < ActiveRecord::Migration
 
   def up
     ActivityObjectMigration.where(:object_type => %w( Picture Audio Video )).each do |a|
-      a.update_attribute! :object_type, "Document"
+      a.object_type = "Document"
+      a.save!
     end
   end
 
