@@ -1,5 +1,3 @@
-require 'forgery'
-
 namespace :db do
   desc 'Populate database with fake data for development'
   task :populate => [ 'db:seed', 'db:populate:create' ]
@@ -11,6 +9,7 @@ namespace :db do
 
     desc "Create populate data"
     task :create => :environment do
+      require 'forgery'
 
       LOGOS_PATH = File.join(Rails.root, 'lib', 'logos')
       USERS = (ENV["USERS"] || 9).to_i
