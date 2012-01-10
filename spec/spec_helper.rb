@@ -2,6 +2,9 @@
 ENV["RAILS_ENV"] ||= "test"
 ENV["RAILS_ENV"] = "#{ ENV["RAILS_ENV"] }_#{ ENV['DB'] }" if ENV['DB']
 
+# Do not check ImageMagick<=>Rmagick versions
+RMAGICK_BYPASS_VERSION_TEST = true
+
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 require "rspec/rails"
 
