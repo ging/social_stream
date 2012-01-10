@@ -32,24 +32,52 @@
 
 #contacts_grid {
   width: 300px;
-  height: 370px;
+  height: 348px;
   overflow: hidden;
   position: relative;
   float: left;
 }
 #contacts_grid .actor {
-  width: 64px;
-  height: 64px;
+  //width: 64px;
+  width: 48px;
+  height: 48px;
   float: left;
   margin: 5px;
 }
 #contacts_grid .actor.focused {
   border: 2px solid #00F;
-  background-color: #006;
   margin: 3px;
 }
 #contacts_grid .actor img {
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
 }
-
+#contacts_grid .actor .logo {
+  display: inline-block;
+}
+#contacts_grid .actor .link, #contacts_grid .actor .brief {
+  display: none;
+}
+.cheesecake_actor_tipsy.tipsy {
+  padding-top: 2px;
+  display: none;
+}
+.cheesecake_actor_tipsy.tipsy .tipsy-arrow {
+  display: none;
+}
+.cheesecake_actor_tipsy.tipsy .tipsy-inner {
+  background-color: $text-over-main;
+  padding: 9px;
+  border: 1px solid $main-color;
+}
+.cheesecake_actor_tipsy.tipsy .sub-block {
+  width: 100%;
+  word-wrap: break-word;
+  height: 50px;
+  overflow: hidden;
+  display: inline-block;
+  text-align: left;
+}
+.cheesecake_actor_tipsy.tipsy .logo {
+  display: none;
+}

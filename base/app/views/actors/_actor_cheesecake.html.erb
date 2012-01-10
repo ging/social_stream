@@ -1,4 +1,31 @@
+<!-- 
+<%= div_for actor do %>
+  <%= model_with_details actor.subject %>
+<% end %>
+-->
+
+
 <%= div_for actor do %>
   <%= image_tag(actor.logo.url , :size => "64x64", :alt => actor.name ) %>
 <% end %>
 
+<div id="<%= dom_id(actor)%>_details" style="display:none;">
+  <%= link_to truncate_name(actor.name), actor.subject %>
+</div>
+
+<%= javascript_tag do %>
+$(document).ready(function(){
+  $('#<%= dom_id(actor)%>').tipsy({
+    delayIn: 0,   
+    delayOut: 0, 
+    gravity: 'n', 
+    className: 'cheesecake_actor_tipsy',
+    html: true,
+    hoverable: true,
+    opacity: 0.95,
+    title: function(){      
+      return $('#<%= dom_id(actor)%>_details').html();
+    }
+  });
+});
+<% end %>
