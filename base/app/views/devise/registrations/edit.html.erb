@@ -13,6 +13,7 @@
 </div>
 <%= render :partial => "edit_user"%>
 
+<%= render :partial => "settings/language" %>
 <%= render :partial => "settings/notifications" %>
 <% if current_subject.respond_to? :authentication_token%>
 <%= render :partial => "settings/api_key" %>

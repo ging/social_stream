@@ -22,13 +22,22 @@ class SettingsController < ApplicationController
         end
       end
 
+      #Updating language
+      if section.eql? "language"
+        #Preferred language setting
+        if params[:language].present?
+          lang = params[:language].to_s
+          current_user.language = lang[0..1]
+        end
+      end
+
       #Here sections to add
       #if section.eql? "section_name"
       #   blah blah blah
       #end
 
-      #Was everything ok?
-      success = current_subject.save
+      # Was everything ok?
+      success = current_subject.save && current_user.save
     end
 
     #Flashing and redirecting
@@ -37,7 +46,9 @@ class SettingsController < ApplicationController
     else
       flash[:error] = t('settings.error')
     end
-    render :action => :index
+    # render :action => :index
+
+    redirect_to settings_path
   end
 
 end

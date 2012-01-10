@@ -16,6 +16,11 @@ module SocialStream
             end
 
             items << {
+              :key  => 'language',
+              :html => render(:partial => "language")
+            }
+
+            items << {
               :key  => 'notifications',
               :html => render(:partial => "notifications")
             }

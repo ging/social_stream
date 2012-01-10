@@ -437,6 +437,7 @@ en:
       briefing: "Change your email"
     lang_change:
       briefing: "Change your language"
+      name: "Change your language"
     error: "Some errors raised when saving your changes"
     for: "Settings for"
     main: "Settings"
