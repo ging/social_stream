@@ -25,6 +25,6 @@ Gem::Specification.new do |s|
   end
   s.add_development_dependency('rspec-rails', '~> 2.6.0')
   s.add_development_dependency('factory_girl', '~> 1.3.2')
-  s.add_development_dependency('forgery', '~> 0.3.6')
+  s.add_development_dependency('forgery', '~> 0.4.2')
   s.add_development_dependency('capybara', '~> 0.3.9')
 end
