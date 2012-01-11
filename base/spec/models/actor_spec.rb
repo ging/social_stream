@@ -57,8 +57,8 @@ describe Actor do
     it "should build json" do
       hash = {
         :sectors => @user.relation_customs.map do |r|
-          { :name => r.name,
-            :subsectors => [ { :name => r.name, :actors => [] } ]
+          { :id => r.id, :name => r.name,
+            :subsectors => [ { :id => r.id, :name => r.name, :actors => [] } ]
           }
         end
       }
