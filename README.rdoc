@@ -56,6 +56,7 @@ Current Social Stream distribution includes:
   activities on files
 * {Social Stream Events}[https://github.com/ging/social_stream/tree/master/events], sheduled events with calendar
 * {Social Stream Linkser}[https://github.com/ging/social_stream/tree/master/linkser], advanced management of links to other webpages
+* {Social Stream Presence}[https://github.com/ging/social_stream/tree/master/presence], XMPP based chat support 
  
 = Documentation
 

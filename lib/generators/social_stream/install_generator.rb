@@ -3,4 +3,5 @@ class SocialStream::InstallGenerator < Rails::Generators::Base #:nodoc:
   hook_for :documents
   hook_for :events
   hook_for :linkser
+  hook_for :chat
 end
