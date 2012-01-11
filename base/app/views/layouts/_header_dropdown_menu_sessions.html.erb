@@ -6,7 +6,7 @@
     <% representations.each do |representation| %>
     <li>
       <%= content_tag :span do %>
-        <%= link_to truncate_name(representation.name, :length => 15), { :s => representation.slug }, { :style => "background: transparent url('#{ image_path representation.logo.url(:representation)}') no-repeat left center;margin-left:2px;" } %>
+        <%= link_to truncate_name(representation.name, :length => 15), { :s => representation.slug }, { :style => "background: transparent url('#{ image_path representation.logo.url(:representation)}') no-repeat 0% 5px;margin-left:2px;" } %>
         <%  pending_total = representation.mailbox.notifications.not_trashed.unread.count %>
         <%= link_to content_tag(:span, pending_total.to_s, :class => "switch_pending_count"), notifications_path(:s => representation.slug), { :style => 'margin: 1px; padding: 0;' }  if pending_total > 0 %>
       <% end %>
