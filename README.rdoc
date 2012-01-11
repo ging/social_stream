@@ -43,6 +43,10 @@ Do not forget to migrate your database
 
   rake db:migrate
 
+Since {Social Stream}[http://github.com/ging/social_stream] depends on {Devise}[https://github.com/plataformatec/devise], make sure you follow {its setup instructions}[https://github.com/plataformatec/devise/tree/master/lib/generators/templates#readme]. Specifically, make sure you set the default URL options for your environments at <tt>config/environments/*.rb</tt> with something like:
+
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
 = Social Stream modules
 
 Social Stream is divided in modules. Developers can customize their social
