@@ -99,7 +99,7 @@ class Relation::Custom < Relation
 
   # JSON compatible with SocialCheesecake
   def to_cheesecake_hash(options = {})
-    { :name => name }.tap do |hash|
+    {:id => id, :name => name}.tap do |hash|
       if options[:subsector]
         hash[:actors] = ties.map{ |t| [t.contact.receiver_id, t.contact.receiver.name] }.uniq
       else
