@@ -1,4 +1,4 @@
-gems = %w{ documents events linkser }
+gems = %w{ documents events linkser presence }
 
 gems.each do |g|
   require "social_stream/migrations/#{ g }"

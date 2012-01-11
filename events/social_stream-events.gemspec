@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n")
 
   # Gem dependencies
-  s.add_runtime_dependency('social_stream-base', '~> 0.11.2')
+  s.add_runtime_dependency('social_stream-base', '~> 0.12.0')
   s.add_runtime_dependency('rails-scheduler', '~> 0.0.5')
   s.add_runtime_dependency('coffee-rails', '> 3.1.0')
 
