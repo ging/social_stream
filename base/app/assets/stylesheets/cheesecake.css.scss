@@ -32,25 +32,44 @@
 
 #contacts_grid {
   width: 300px;
-  height: 348px;
+  height: 336px;
   overflow: hidden;
   position: relative;
   float: left;
 }
+#contacts_grid_extra {
+  width: 270px;
+  padding: 5px;
+  height: 10px;
+  border: solid 1px $input-border-color;
+  text-align: center;
+  float: right;
+  margin-right: 20px;
+  cursor: pointer;
+}
 #contacts_grid .actor {
-  //width: 64px;
   width: 48px;
   height: 48px;
   float: left;
-  margin: 5px;
+  margin: 4px;
 }
 #contacts_grid .actor.focused {
-  border: 2px solid #00F;
-  margin: 3px;
+  border: 2px solid $main-color;
+  margin: 0px;
 }
 #contacts_grid .actor img {
   width: 48px;
   height: 48px;
+}
+#contacts_grid .actor.focused img {
+  width: 52px;
+  height: 52px;
+}
+#contacts_grid .actor.focused {
+  width: 52px;
+  height: 52px;
+  float: left;
+  margin: 0px;
 }
 #contacts_grid .actor .logo {
   display: inline-block;

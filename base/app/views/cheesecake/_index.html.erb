@@ -8,6 +8,15 @@
       <%= render :partial => "actors/actor_cheesecake", :locals => {:actor => actor} %>
     <% end %>
   </div>
+  <div id="contacts_grid_extra">    
+    Hay <span id="contacts_grid_extra_total">X</span> contactos ocultos
+  </div>
+  <%= javascript_tag do %>
+    $("#contacts_grid_extra").click(function(){
+      $("#contacts_grid").css("overflow-y","scroll");
+      $("#contacts_grid_extra").hide();
+    });
+  <% end %>
   <br class="clearfloat">
   <%= javascript_tag do %>
   $(function(){
@@ -30,6 +39,18 @@
         rMax : 200, 
         center: {x : 220, y : 220}           
       };
+      cheesecakeData.highlightedSectorCallback = function(cheesecake){
+        $("#contacts_grid").css("overflow-y","hidden");   
+        var sector = cheesecake.highlightedSector;
+        console.log(cheesecake.grid);
+        if((sector)&&(sector.actors.length > 30)){
+            $("#contacts_grid_extra").show();           
+        }else if ((sector==null)&&(cheesecake.grid.actors.length > 30)){
+            $("#contacts_grid_extra").show();              
+        }else{
+            $("#contacts_grid_extra").hide();
+        }   
+      }
       cheesecakeData.sectors = <%= raw(current_subject.cheesecake_json) %>.sectors;
       var cheese = new socialCheesecake.Cheesecake(cheesecakeData);  
       $("#contacts_filter_input").keyup(function(){
