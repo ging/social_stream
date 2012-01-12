@@ -12,6 +12,7 @@ namespace :db do
       require 'forgery'
 
       LOGOS_PATH = File.join(Rails.root, 'lib', 'logos')
+      LOGOS_TOTAL = (ENV["GROUPS"] || 10).to_i if ENV["LOGOS_TOTAL"].present?
       USERS = (ENV["USERS"] || 9).to_i
       GROUPS = (ENV["GROUPS"] || 10).to_i
       CHEESECAKE = (ENV["CHEESECAKE"].present? || false)
@@ -41,8 +42,13 @@ namespace :db do
 
       def set_logos(klass)
         klass.all.each do |i|
-          logo = Dir[File.join(LOGOS_PATH, klass.to_s.tableize, "#{ i.id }.*")].first
-          avatar = Dir[File.join(LOGOS_PATH, klass.to_s.tableize, "#{ i.id }.*")].first
+          if LOGOS_TOTAL
+            logo = Dir[File.join(LOGOS_PATH, klass.to_s.tableize, "#{ i.id.modulo(LOGOS_TOTAL) + 1 }.*")].first
+            avatar = Dir[File.join(LOGOS_PATH, klass.to_s.tableize, "#{ i.id.modulo(LOGOS_TOTAL) + 1 }.*")].first
+          else
+            logo = Dir[File.join(LOGOS_PATH, klass.to_s.tableize, "#{ i.id }.*")].first
+            avatar = Dir[File.join(LOGOS_PATH, klass.to_s.tableize, "#{ i.id }.*")].first            
+          end
 
           if avatar.present? && File.exists?(avatar)
             Avatar.copy_to_temp_file(avatar)
@@ -120,16 +126,18 @@ namespace :db do
       available_actors.each do |a|
         actors = available_actors.dup - Array(a)
         relations = a.relation_customs + Array.wrap(a.relation_reject)
-        break if actors.size==0
-        Forgery::Basic.number(:at_most => actors.size).times do
-          actor = actors.delete_at((rand * actors.size).to_i)          
-          a.contact_to!(actor).relation_ids = Array(Forgery::Extensions::Array.new(relations).random.id) unless a==actor
-        end
+        break if actors.size==0        
         if CHEESECAKE     
           actor = Actor.first
           unless a==actor
             puts a.name + " connecting with " + actor.name
-            a.contact_to!(actor).relation_ids = Array(Forgery::Extensions::Array.new(relations).random.id)
+            a.contact_to!(actor).relation_ids = Array(Forgery::Extensions::Array.new(a.relation_customs).random.id)
+            actor.contact_to!(a).relation_ids = Array(Forgery::Extensions::Array.new(actor.relation_customs).random.id)
+          end
+        else
+          Forgery::Basic.number(:at_most => actors.size).times do
+            actor = actors.delete_at((rand * actors.size).to_i)          
+            a.contact_to!(actor).relation_ids = Array(Forgery::Extensions::Array.new(relations).random.id) unless a==actor
           end
         end
       end
