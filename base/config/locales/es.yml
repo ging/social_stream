@@ -90,6 +90,10 @@ es:
     create: "Crear"
     save: "Guardar"
     update: "Actualizar"
+  cheesecake:
+    hidden_contact:
+      one: "contacto oculto"
+      other: "contactos ocultos"
   comment:
     input: "Comentar..."
     confirm_delete: "¿Borrar commentario?"

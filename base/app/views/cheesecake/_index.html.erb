@@ -8,8 +8,8 @@
       <%= render :partial => "actors/actor_cheesecake", :locals => {:actor => actor} %>
     <% end %>
   </div>
-  <div id="contacts_grid_extra">    
-    Hay <span id="contacts_grid_extra_total">X</span> contactos ocultos
+  <div id="contacts_grid_extra" style="display:none;">    
+    <span id="contacts_grid_extra_total"></span> <span id="contacts_grid_extra_text"></span>
   </div>
   <%= javascript_tag do %>
     $("#contacts_grid_extra").click(function(){
@@ -42,20 +42,47 @@
       cheesecakeData.highlightedSectorCallback = function(cheesecake){
         $("#contacts_grid").css("overflow-y","hidden");   
         var sector = cheesecake.highlightedSector;
-        console.log(cheesecake.grid);
-        if((sector)&&(sector.actors.length > 30)){
-            $("#contacts_grid_extra").show();           
-        }else if ((sector==null)&&(cheesecake.grid.actors.length > 30)){
-            $("#contacts_grid_extra").show();              
+        var actors = [];
+        var visibles = 0;
+        var extra_text = ["<%= t('cheesecake.hidden_contact.one')%>","<%= t('cheesecake.hidden_contact.other')%>"];
+        if(sector){
+            actors = sector.actors;           
+        }else{         
+            actors = cheesecake.grid.actors;    
+        }
+        for(var i in actors){
+          if(actors[i].isVisible()){
+            visibles++;
+          }
+        }        
+        if(visibles <= 30){
+          $("#contacts_grid_extra").hide();          
         }else{
-            $("#contacts_grid_extra").hide();
-        }   
+          $("#contacts_grid_extra_total").html(visibles - 30);
+          if((visibles - 30) == 1){
+            $("#contacts_grid_extra_text").html(extra_text[0]);
+          }else{
+            $("#contacts_grid_extra_text").html(extra_text[1]);
+          }          
+          $("#contacts_grid_extra").show();
+        }  
       }
       cheesecakeData.sectors = <%= raw(current_subject.cheesecake_json) %>.sectors;
       var cheese = new socialCheesecake.Cheesecake(cheesecakeData);  
       $("#contacts_filter_input").keyup(function(){
         cheese.searchEngine.filter($("#contacts_filter_input").val());
+        cheesecakeData.highlightedSectorCallback(cheese);
       });
+      if(cheese.grid.actors.length > 30){    
+        var extra_text = ["<%= t('cheesecake.hidden_contact.one')%>","<%= t('cheesecake.hidden_contact.other')%>"];
+        $("#contacts_grid_extra_total").html(cheese.grid.actors.length - 30);       
+        if((cheese.grid.actors.length - 30) == 1){
+          $("#contacts_grid_extra_text").html(extra_text[0]);
+        }else{
+          $("#contacts_grid_extra_text").html(extra_text[1]);
+        }       
+        $("#contacts_grid_extra").show();     
+      }
   }      
   <% end %>
 </div>
