@@ -344,10 +344,12 @@ class Activity < ActiveRecord::Base
           I18n.t('notification.post.'+ receiver.subject.class.to_s.underscore, 
               :sender => sender_name,
 	      :title => 'Re: ' + direct_object.parent_post.text.truncate(30, :separator => ' '))
-	else
+	elsif direct_object.is_a? Post
           I18n.t('notification.post.'+ receiver.subject.class.to_s.underscore, 
               :sender => sender_name,
 	      :title => direct_object.text.truncate(30, :separator => ' '))
+	else
+	  I18n.t('notification.default')
 	end
       when 'update'
         I18n.t('notification.update.'+ receiver.subject.class.to_s.underscore, 
