@@ -343,11 +343,11 @@ class Activity < ActiveRecord::Base
         if direct_object.is_a? Comment
           I18n.t('notification.post.'+ receiver.subject.class.to_s.underscore, 
               :sender => sender_name,
-	      :title => 'Re: ' + direct_object.parent_post.text)
+	      :title => 'Re: ' + direct_object.parent_post.text.truncate(30, :separator => ' '))
 	else
           I18n.t('notification.post.'+ receiver.subject.class.to_s.underscore, 
               :sender => sender_name,
-	      :title => direct_object.text)
+	      :title => direct_object.text.truncate(30, :separator => ' '))
 	end
       when 'update'
         I18n.t('notification.update.'+ receiver.subject.class.to_s.underscore, 
