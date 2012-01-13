@@ -12,7 +12,7 @@ namespace :db do
       require 'forgery'
 
       LOGOS_PATH = File.join(Rails.root, 'lib', 'logos')
-      LOGOS_TOTAL = (ENV["GROUPS"] || 10).to_i if ENV["LOGOS_TOTAL"].present?
+      LOGOS_TOTAL = (ENV["LOGOS_TOTAL"] || 10).to_i if ENV["LOGOS_TOTAL"].present?
       USERS = (ENV["USERS"] || 9).to_i
       GROUPS = (ENV["GROUPS"] || 10).to_i
       CHEESECAKE = (ENV["CHEESECAKE"].present? || false)
@@ -43,8 +43,8 @@ namespace :db do
       def set_logos(klass)
         klass.all.each do |i|
           if LOGOS_TOTAL
-            logo = Dir[File.join(LOGOS_PATH, klass.to_s.tableize, "#{ i.id.modulo(LOGOS_TOTAL) + 1 }.*")].first
-            avatar = Dir[File.join(LOGOS_PATH, klass.to_s.tableize, "#{ i.id.modulo(LOGOS_TOTAL) + 1 }.*")].first
+            logo = Dir[File.join(LOGOS_PATH, klass.to_s.tableize, "#{ rand(LOGOS_TOTAL) + 1 }.*")].first
+            avatar = Dir[File.join(LOGOS_PATH, klass.to_s.tableize, "#{ rand(LOGOS_TOTAL) + 1 }.*")].first
           else
             logo = Dir[File.join(LOGOS_PATH, klass.to_s.tableize, "#{ i.id }.*")].first
             avatar = Dir[File.join(LOGOS_PATH, klass.to_s.tableize, "#{ i.id }.*")].first            
