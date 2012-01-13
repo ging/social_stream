@@ -340,11 +340,15 @@ class Activity < ActiveRecord::Base
               :who => I18n.t('notification.who.'+ receiver.subject.class.to_s.underscore,
                               :name => receiver_name))
       when 'post'
-        I18n.t('notification.post.'+ receiver.subject.class.to_s.underscore, 
+        if direct_object.is_a? Comment
+          I18n.t('notification.post.'+ receiver.subject.class.to_s.underscore, 
               :sender => sender_name,
-              :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
-                               :receiver => receiver_name),
-              :thing => I18n.t(direct_object.class.to_s.underscore+'.one'))
+	      :title => 'Re: ' + direct_object.parent_post.text)
+	else
+          I18n.t('notification.post.'+ receiver.subject.class.to_s.underscore, 
+              :sender => sender_name,
+	      :title => direct_object.text)
+	end
       when 'update'
         I18n.t('notification.update.'+ receiver.subject.class.to_s.underscore, 
               :sender => sender_name,

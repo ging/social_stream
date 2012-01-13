@@ -300,8 +300,8 @@ en:
     one: "Notification"
     other: "Notifications"
     post:
-      group: "%{sender} added %{thing} in %{whose} wall."
-      user: "%{sender} added %{thing} in %{whose} wall."
+      group: "%{sender}: %{title}"
+      user: "%{sender}: %{title}"
     read: "Mark as read"
     read_all: "Mark all as read"
     unread: "Mark as unread"

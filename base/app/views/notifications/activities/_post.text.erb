@@ -1,9 +1,13 @@
 
+<% if activity.direct_object.is_a? Comment %>
 <%= raw t('notification.post.'+ activity.receiver.subject.class.to_s.underscore, 
            :sender => truncate_name(activity.sender.name),
-           :whose => t('notification.whose.'+ activity.receiver.subject.class.to_s.underscore,
-                      :receiver => truncate_name(activity.receiver.name)),
-           :thing => t(activity.direct_object.class.to_s.underscore+'.one')) %>
+           :title => activity.direct_object.parent_post.text) %>
+<% else %>
+<%= raw t('notification.post.'+ activity.receiver.subject.class.to_s.underscore, 
+           :sender => truncate_name(activity.sender.name),
+           :title => activity.direct_object.text) %>
+<% end %>
 
 
 <% if activity.direct_object.respond_to? :text %>
