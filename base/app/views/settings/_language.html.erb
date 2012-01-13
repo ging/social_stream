@@ -17,7 +17,7 @@
     <div class="form_row">
  <div class="form_label"><%= label_tag :language, t('settings.lang_change.name') %></div>
  <div class="form_field">
- <%= select_tag(:language, options_for_select(I18n.available_locales.map{|l| [ t("lang_names.#{l.to_s}") + ' (' + l.to_s + ')' , l.to_s ] }, current_user.language), :class => 'form_tag', :onchange => "$(\'#form_lang\').submit();" )%>
+ <%= select_tag(:language, options_for_select([[t('lang.browser'), 'browser']] + I18n.available_locales.map{|l| [ t("lang_names.#{l.to_s}") + ' (' + l.to_s + ')' , l.to_s ] }, (current_user.language.blank? ? 'browser' : current_user.language)), :class => 'form_tag', :onchange => "$(\'#form_lang\').submit();" )%>
  </div>
     </div>
             <div class="actions center">

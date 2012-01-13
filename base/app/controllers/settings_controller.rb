@@ -27,7 +27,11 @@ class SettingsController < ApplicationController
         #Preferred language setting
         if params[:language].present?
           lang = params[:language].to_s
-          current_user.language = lang[0..1]
+          if lang == 'browser'
+            current_user.language = nil
+          else
+            current_user.language = lang[0..1]
+          end
         end
       end
 
