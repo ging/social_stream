@@ -343,14 +343,20 @@ class Activity < ActiveRecord::Base
         if direct_object.is_a? Comment
           I18n.t('notification.post.'+ receiver.subject.class.to_s.underscore, 
               :sender => sender_name,
+	      :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
+	                       :receiver => receiver_name),
 	      :title => 'Re: ' + direct_object.parent_post.text.truncate(30, :separator => ' '))
 	elsif direct_object.is_a? Post
           I18n.t('notification.post.'+ receiver.subject.class.to_s.underscore, 
               :sender => sender_name,
+	      :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
+	                       :receiver => receiver_name),
 	      :title => direct_object.text.truncate(30, :separator => ' '))
 	elsif direct_object.respond_to? :title
           I18n.t('notification.post.'+ receiver.subject.class.to_s.underscore, 
               :sender => sender_name,
+	      :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
+	                       :receiver => receiver_name),
 	      :title => direct_object.title.truncate(30, :separator => ' '))
 	else
 	  I18n.t('notification.default')

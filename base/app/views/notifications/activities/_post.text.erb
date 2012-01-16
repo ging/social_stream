@@ -2,14 +2,20 @@
 <% if activity.direct_object.is_a? Comment %>
 <%= raw t('notification.post.'+ activity.receiver.subject.class.to_s.underscore, 
            :sender => truncate_name(activity.sender.name),
+           :whose => t('notification.whose.'+ activity.receiver.subject.class.to_s.underscore,
+                     :receiver => truncate_name(activity.receiver.name)),
            :title => activity.direct_object.parent_post.text.truncate(30, :separator => ' ')) %>
 <% elsif activity.direct_object.is_a? Post %>
 <%= raw t('notification.post.'+ activity.receiver.subject.class.to_s.underscore, 
            :sender => truncate_name(activity.sender.name),
+           :whose => t('notification.whose.'+ activity.receiver.subject.class.to_s.underscore,
+                     :receiver => truncate_name(activity.receiver.name)),
            :title => activity.direct_object.text.truncate(30, :separator => ' ')) %>
 <% elsif activity.direct_object.respond_to? :title %>
 <%= raw t('notification.post.'+ activity.receiver.subject.class.to_s.underscore, 
            :sender => truncate_name(activity.sender.name),
+           :whose => t('notification.whose.'+ activity.receiver.subject.class.to_s.underscore,
+                     :receiver => truncate_name(activity.receiver.name)),
            :title => activity.direct_object.title.truncate(30, :separator => ' ')) %>
 <% else %>
   <%= raw t('notification.default') %>

@@ -300,8 +300,8 @@ es:
     one: "Notificación"
     other: "Notificaciones"
     post:
-      group: "%{sender}: %{title}"
-      user: "%{sender}: %{title}"
+      group: "%{title} -- por %{sender} en el muro %{whose}"
+      user: "%{title} -- por %{sender} en tu muro"
     read: "Marcar como leída"
     read_all: "Marcar todas como leídas"
     unread: "Marcar como no leídas"
