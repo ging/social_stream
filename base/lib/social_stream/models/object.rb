@@ -16,8 +16,6 @@ module SocialStream
         has_one  :channel, :through => :activity_object
         has_many :activity_object_activities, :through => :activity_object
 
-#        before_create :create_activity_object_with_type
-
         unless self == Actor
           validates_presence_of :author_id, :owner_id, :user_author_id
 
@@ -50,15 +48,6 @@ module SocialStream
         def build_post_activity
           Activity.new :contact_id   => _contact_id,
                        :relation_ids => Array(_relation_ids)
-        end
-
-	# before_create callback
-	#
-        # Build corresponding ActivityObject including this class type
-        def create_activity_object_with_type #:nodoc:
-          o = create_activity_object! :object_type => self.class.to_s
-	  # WEIRD: Rails 3.1.0.rc3 does not assign activity_object_id
-	  self.activity_object_id = o.id
         end
 
         def _contact
