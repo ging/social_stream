@@ -11,6 +11,12 @@
                       polymorphic_url(activity.sender.subject)),
    :title => link_to(activity.direct_object.text.truncate(30, :separator => ' '),
                      polymorphic_url(activity.direct_object))) %>
+<% elsif activity.direct_object.respond_to? :title %>
+  <%= raw t('notification.post.'+ activity.receiver.subject.class.to_s.underscore, 
+   :sender => link_to(truncate_name(activity.sender.name), 
+                      polymorphic_url(activity.sender.subject)),
+   :title => link_to(activity.direct_object.title.truncate(30, :separator => ' '),
+                     polymorphic_url(activity.direct_object))) %>
 <% else %>
   <%= raw t('notification.default') %>
 <% end %>
@@ -18,6 +24,9 @@
 <div class="briefing">
   <% if activity.direct_object.respond_to? :text %>
     "<%= link_to(sanitize(activity.direct_object.text.truncate(100, :separator =>' ')),
+                     polymorphic_url(activity.direct_object))%>"
+  <% elsif activity.direct_object.respond_to? :description and not activity.direct_object.description.blank? %>
+    "<%= link_to(sanitize(activity.direct_object.description.truncate(100, :separator =>' ')),
                      polymorphic_url(activity.direct_object))%>"
   <% else%>
     <%= link_to(t('notification.watch_it'),
