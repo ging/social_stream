@@ -4,6 +4,7 @@ class Picture < Document
                     :path => ':rails_root/documents/:class/:id_partition/:style',
                     :styles => {:thumb  => ["48>"],
                                 :thumb0 => ["130x80"],
+                                :thumb1 => ["500>"]
                                }                              
                                
   define_index do
@@ -24,6 +25,8 @@ class Picture < Document
         helper.picture_path self, :format => format, :style => 'thumb'   
       when 130
         helper.picture_path self, :format => format, :style => 'thumb0'
+      when 500
+        helper.picture_path self, :format => format, :style => 'thumb1'
     end
   end
       
