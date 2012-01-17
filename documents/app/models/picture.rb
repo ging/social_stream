@@ -2,8 +2,8 @@ class Picture < Document
   has_attached_file :file, 
                     :url => '/:class/:id.:extension',
                     :path => ':rails_root/documents/:class/:id_partition/:style',
-                    :styles => {:thumb  => ["48x48#"],
-                                :thumb0 => ["130x80#"]
+                    :styles => {:thumb  => ["48>"],
+                                :thumb0 => ["130x80"],
                                }                              
                                
   define_index do
@@ -14,6 +14,7 @@ class Picture < Document
     
     has created_at
   end    
+
   # Thumbnail file
   def thumb(size, helper)
     case size
@@ -22,9 +23,8 @@ class Picture < Document
       when 48
         helper.picture_path self, :format => format, :style => 'thumb'   
       when 130
-        helper.picture_path self, :format => format, :style => 'thumb0'    
+        helper.picture_path self, :format => format, :style => 'thumb0'
     end
   end
-    
-  
+      
 end
