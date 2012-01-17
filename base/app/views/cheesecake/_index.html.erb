@@ -1,90 +1,33 @@
-<div id="cheesecake">
-  <div id="contacts_cheesecake"></div>
-  <div id="contacts_filter">
-    <%= text_field_tag :filter_query, nil,:autocomplete => :off, :id => :contacts_filter_input %>    
-  </div>
-  <div id="contacts_grid">    
-    <% @actors.each do |actor|%>
-      <%= render :partial => "actors/actor_cheesecake", :locals => {:actor => actor} %>
-    <% end %>
-  </div>
-  <div id="contacts_grid_extra" style="display:none;">    
-    <span id="contacts_grid_extra_total"></span> <span id="contacts_grid_extra_text"></span>
-  </div>
-  <%= javascript_tag do %>
-    $("#contacts_grid_extra").click(function(){
-      $("#contacts_grid").css("overflow-y","scroll");
-      $("#contacts_grid").scrollTo("+=308px", 800, {axis:'y'});
-      $("#contacts_grid_extra").hide();
-    });
-  <% end %>
-  <br class="clearfloat">
-  <%= javascript_tag do %>
-  $(function(){
-    $("#center_body").css("width","782px");
-    $("#center_body").css("max-width","782px");
-    $("#content").css("width","782px");
-    $("#contacts_filter_input").Watermark("<%= escape_javascript(I18n.t('search.name')) %>");
-  });
-  window.onload = function() {
-    var cheesecakeData = {
-      container: {
-        id: "contacts_cheesecake",
-        width: 440,
-        height: 440
-      },
-        grid: {
-          id: "contacts_grid",
-          divIdPrefix: "actor_"
-      },
-        rMax : 200, 
-        center: {x : 220, y : 220}           
-      };
-      cheesecakeData.highlightedSectorCallback = function(cheesecake){
-        $("#contacts_grid").css("overflow-y","hidden");   
-        var sector = cheesecake.highlightedSector;
-        var actors = [];
-        var visibles = 0;
-        var extra_text = ["<%= t('cheesecake.hidden_contact.one')%>","<%= t('cheesecake.hidden_contact.other')%>"];
-        if(sector){
-            actors = sector.actors;           
-        }else{         
-            actors = cheesecake.grid.actors;    
-        }
-        for(var i in actors){
-          if(actors[i].isVisible()){
-            visibles++;
-          }
-        }        
-        if(visibles <= 30){
-          $("#contacts_grid_extra").hide();          
-        }else{
-          $("#contacts_grid_extra_total").html(visibles - 30);
-          if((visibles - 30) == 1){
-            $("#contacts_grid_extra_text").html(extra_text[0]);
-          }else{
-            $("#contacts_grid_extra_text").html(extra_text[1]);
-          }          
-          $("#contacts_grid_extra").show();
-          $("#contacts_grid").scrollTo(0, 0);
-        }  
-      }
-      cheesecakeData.sectors = <%= raw(current_subject.cheesecake_json) %>.sectors;
-      var cheese = new socialCheesecake.Cheesecake(cheesecakeData);  
-      $("#contacts_filter_input").keyup(function(){
-        cheese.searchEngine.filter($("#contacts_filter_input").val());
-        cheesecakeData.highlightedSectorCallback(cheese);
-      });
-      if(cheese.grid.actors.length > 30){    
-        var extra_text = ["<%= t('cheesecake.hidden_contact.one')%>","<%= t('cheesecake.hidden_contact.other')%>"];
-        $("#contacts_grid_extra_total").html(cheese.grid.actors.length - 30);       
-        if((cheese.grid.actors.length - 30) == 1){
-          $("#contacts_grid_extra_text").html(extra_text[0]);
-        }else{
-          $("#contacts_grid_extra_text").html(extra_text[1]);
-        }       
-        $("#contacts_grid_extra").show();     
-      }
-  }      
+
+<div id="contacts_cheesecake"></div>
+<div id="contacts_filter">
+  <%= text_field_tag :filter_query, nil,:autocomplete => :off, :id => :contacts_filter_input %>    
+</div>
+<div id="contacts_grid">    
+  <% @actors.each do |actor|%>
+    <%= render :partial => "actors/actor_cheesecake", :locals => {:actor => actor} %>
   <% end %>
 </div>
+<div id="contacts_grid_extra" style="display:none;">    
+  <span id="contacts_grid_extra_total"></span> <span id="contacts_grid_extra_text"></span>
+</div>
+<div id="contacts_save">
+  <form action="<%= update_cheesecake_path %>" method="get" data-remote="true" id="contacts_save_form">
+     <input type="submit" id="contacts_save_button" value="Save changes">
+     <input type="hidden" id="contacts_save_changes">
+  </form>
+</div>
+<br class="clearfloat"> 
+<div id="contacts_changes">
+  <div id="contacts_changes_title">
+   Changes details
+  </div>
+  <div id="contacts_changes_details">
+    <ul>
+      <li>Working on it :)</li>
+    </ul>
+  </div>
+</div>
+<%= javascript_tag do %>
+  <%= render :partial => 'cheesecake' %>
+<% end %>

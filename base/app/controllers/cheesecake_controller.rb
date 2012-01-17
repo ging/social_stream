@@ -6,4 +6,8 @@ class CheesecakeController < ApplicationController
     @actors = current_subject.contact_actors(:direction => :sent)
   end
   
+  def update
+    @actors = current_subject.contact_actors(:direction => :sent)
+  end
+  
 end

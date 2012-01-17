@@ -1,0 +1,78 @@
+$(function(){
+  $("#center_body").css("width","782px");
+  $("#center_body").css("max-width","782px");
+  $("#content").css("width","782px");
+  $("#contacts_filter_input").Watermark("<%= escape_javascript(I18n.t('search.name')) %>");
+  $("#contacts_grid_extra").click(function(){
+    $("#contacts_grid").css("overflow-y","scroll");
+    $("#contacts_grid").scrollTo("+=308px", 800, {axis:'y'});
+    $("#contacts_grid_extra").hide();
+  });
+  $("#contacts_changes_title").click(function(){
+    $("#contacts_changes_details").slideToggle("slow", function(){        
+      $.scrollTo('#contacts_changes_details' ,300,{axis:'y'});
+    });
+  });
+
+  var cheesecakeData = {
+    container: {
+      id: "contacts_cheesecake",
+      width: 440,
+      height: 440
+    },
+      grid: {
+        id: "contacts_grid",
+        divIdPrefix: "actor_"
+    },
+      rMax : 200, 
+      center: {x : 220, y : 220}           
+    };
+    cheesecakeData.highlightedSectorCallback = function(cheesecake){
+      $("#contacts_grid").css("overflow-y","hidden");   
+      var sector = cheesecake.highlightedSector;
+      var actors = [];
+      var visibles = 0;
+      var extra_text = ["<%= t('cheesecake.hidden_contact.one')%>","<%= t('cheesecake.hidden_contact.other')%>"];
+      if(sector){
+          actors = sector.actors;           
+      }else{         
+          actors = cheesecake.grid.actors;    
+      }
+      for(var i in actors){
+        if(actors[i].isVisible()){
+          visibles++;
+        }
+      }        
+      if(visibles <= 30){
+        $("#contacts_grid_extra").hide();          
+      }else{
+        $("#contacts_grid_extra_total").html(visibles - 30);
+        if((visibles - 30) == 1){
+          $("#contacts_grid_extra_text").html(extra_text[0]);
+        }else{
+          $("#contacts_grid_extra_text").html(extra_text[1]);
+        }          
+        $("#contacts_grid_extra").show();
+        $("#contacts_grid").scrollTo(0, 1000);
+      }  
+    }
+    cheesecakeData.sectors = <%= raw(current_subject.cheesecake_json) %>.sectors;
+    var cheese = new socialCheesecake.Cheesecake(cheesecakeData);  
+    $("#contacts_filter_input").keyup(function(){
+      cheese.searchEngine.filter($("#contacts_filter_input").val());
+      cheesecakeData.highlightedSectorCallback(cheese);
+    });    
+    cheese.onChange = function(cheesecake){
+      $("#contacts_save_changes").val(JSON.stringify(cheesecake.getChanges()));
+    }
+    if(cheese.grid.actors.length > 30){    
+      var extra_text = ["<%= t('cheesecake.hidden_contact.one')%>","<%= t('cheesecake.hidden_contact.other')%>"];
+      $("#contacts_grid_extra_total").html(cheese.grid.actors.length - 30);       
+      if((cheese.grid.actors.length - 30) == 1){
+        $("#contacts_grid_extra_text").html(extra_text[0]);
+      }else{
+        $("#contacts_grid_extra_text").html(extra_text[1]);
+      }       
+      $("#contacts_grid_extra").show();     
+    }
+});      
