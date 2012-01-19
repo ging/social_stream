@@ -1,3 +1,4 @@
+<style type="text/css">
 /* This stylesheet overwrites some of the parameters fixed by other stylesheets found in
  * assets/stylesheets. Since they are compiled all together in alphabetic order, it should be
  * start by zero to make sure it is the first one to be executed. 
@@ -21,8 +22,9 @@
 
 #wrapper_body{
   background-color: inherit;
-  background-image: url("/assets/big-logo.png");
+  background-image: url("<%= asset_path("big-logo.png") %>");
   background-repeat: no-repeat;
   background-position: bottom left;
   width:100%;
 }
+</style>
