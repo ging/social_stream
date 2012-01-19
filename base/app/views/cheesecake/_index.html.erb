@@ -29,5 +29,19 @@
   </div>
 </div>
 <%= javascript_tag do %>
+  $("#center_body").css("width","782px");
+  $("#center_body").css("max-width","782px");
+  $("#content").css("width","782px");
+  $("#contacts_filter_input").Watermark("<%= escape_javascript(I18n.t('search.name')) %>");
+  $("#contacts_grid_extra").click(function(){
+    $("#contacts_grid").css("overflow-y","scroll");
+    $("#contacts_grid").scrollTo("+=308px", 800, {axis:'y'});
+    $("#contacts_grid_extra").hide();
+  });
+  $("#contacts_changes_title").click(function(){
+    $("#contacts_changes_details").slideToggle("slow", function(){
+      $.scrollTo('#contacts_changes_details' ,300,{axis:'y'});
+    });
+  });
   <%= render :partial => 'cheesecake' %>
 <% end %>
