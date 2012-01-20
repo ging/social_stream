@@ -8,8 +8,6 @@
 class Contact < ActiveRecord::Base
   # Send a message when this contact is created or updated
   attr_accessor :message
-  # Record who creates ties in behalf of a group or organization
-  attr_writer :user_author
 
   belongs_to :inverse,
              :class_name => "Contact"
@@ -131,6 +129,11 @@ class Contact < ActiveRecord::Base
   def user_author
     @user_author ||
       build_user_author
+  end
+
+  # Set who creates ties in behalf of a group or organization
+  def user_author= subject
+    @user_author = Actor.normalize(subject)
   end
 
   # Is this {Contact} +new+ or +edit+ for {SocialStream::Models::Subject subject} ?
