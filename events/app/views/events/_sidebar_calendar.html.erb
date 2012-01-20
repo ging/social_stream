@@ -50,7 +50,7 @@
 	  var end = new Date(event.end);
 	  for(loopTime=start.getTime(); loopTime <= end.getTime(); loopTime+=86400000) {
 	    var d = new Date(loopTime);
-	    $('#sidebar_day_'+ d.getDate() + '_' + (d.getMonth()+1)).addClass("busy");
+	    $('#sidebar_day_'+ d.getDate() + '_' + (d.getMonth()+1) + '_' + d.getFullYear()).addClass("busy");
 	  }
 	})
       }
