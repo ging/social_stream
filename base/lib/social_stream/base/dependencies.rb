@@ -43,5 +43,6 @@ require 'sass-rails'
 require 'rails_autolink'
 # SocialCheesecake
 require 'social_cheesecake'
-
+# I18n-js
+require 'i18n-js'
 

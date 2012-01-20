@@ -57,7 +57,7 @@ activate_anti_rebounds = function(){
     $(this).find('input[type=text]').each(function() {
       $(this).blur().attr('readonly', true);
     });
-    $("#masterSubmitButton").val("<%= I18n.t('activity.sending') %>...").attr("disabled", true); 
+    $("#masterSubmitButton").val(I18n.t('activity.sending') + '...').attr("disabled", true); 
     
     // Add _relation_ids[] parameter from authorization selector
     $('.liveAdded').remove();
@@ -81,7 +81,7 @@ activate_anti_rebounds = function(){
       $(this).blur().attr('readonly', true); 
     });
     $(this).find(".submitActivity").each(function() {
-      $(this).val("<%= I18n.t('activity.sending') %>...").attr("disabled", true);   
+      $(this).val(I18n.t('activity.sending') + '...').attr("disabled", true);   
     });
     return true;    
   });
@@ -90,9 +90,9 @@ activate_anti_rebounds = function(){
 
 unblock_all_forms = function() {  
   //Sharing buttons
-  $(".submitActivity").val("<%= I18n.t('share') %>").removeAttr("disabled");  
+  $(".submitActivity").val(I18n.t('share')).removeAttr("disabled");  
   //Header activities form
-  $("#masterSubmitButton").val("<%= I18n.t('share') %>").removeAttr("disabled");
+  $("#masterSubmitButton").val(I18n.t('share')).removeAttr("disabled");
   $('#wrapper_activities_header form').find('input[type=text]').each(function() {
     $(this).removeAttr("readonly").val("").blur();
   });  
@@ -141,7 +141,7 @@ $(function() {
   	//check if there are more than 3 comments
   	if (comments.size() > 3){
   		$(this).prepend("<div class='hide_show_comments'><a href='#' onclick='showAllComments(\""+ 
-  		                 $(this).attr('id') +"\"); return false;'><%= I18n.t('comment.view_all') %> (" + 
+  		                 $(this).attr('id') +"\"); return false;'>" + I18n.t('comment.view_all') + "(" +
   		                comments.size() + ")</a></div><div class='space_comments'></div>");
   		comments.slice(0,comments.size()-2).hide();
   		//hide alto space_comments

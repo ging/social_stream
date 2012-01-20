@@ -28,7 +28,7 @@ SocialStream.Linkser.initiate = function() {
           },
           error : function(xhr, ajaxOptions, thrownError) {
             if($("#input_activities").val() == url) {//Only show if input value is still the same
-              $("#link_preview").html($('<div>').addClass('loading').html("<%= I18n.t('link.errors.loading') %> " + url));
+              $("#link_preview").html($('<div>').addClass('loading').html(I18n.t('link.errors.loading') + " " + url));
             }
           }
         });

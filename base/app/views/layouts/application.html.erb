@@ -1,6 +1,6 @@
 <!-- HTML5 DOCTYPE -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= I18n.locale.to_s %>">
   <head>
     <meta charset="utf-8">
     <title><%= yield(:title).empty? ? t('site.name') : yield(:title)%></title>
@@ -19,6 +19,11 @@
     <% if protect_against_forgery? %>
       <%= csrf_meta_tag %>
     <% end %>
+
+    <script type="text/javascript">
+      I18n.defaultLocale = "<%= I18n.default_locale %>";
+      I18n.locale = "<%= I18n.locale %>";
+    </script>
 
     <script type="text/javascript">
       $(document).ready(function() {

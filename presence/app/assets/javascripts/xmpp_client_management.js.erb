@@ -187,7 +187,7 @@ function onReconnect(){
 		if (reconnectAttempts>0) {
 			reconnectAttempts--;
 			
-			$("#chat_header_title").html('<%=I18n.t('chat.reconnecting')%>')
+			$("#chat_header_title").html(I18n.t('chat.reconnecting'))
 			
 			if (authByCookie()){
         //Authentication by cookie
@@ -198,7 +198,7 @@ function onReconnect(){
       }
       reconnectTimer = setTimeout ("onReconnect()", 9000);
 		} else {
-			$("#chat_header_title").html('<%=I18n.t('chat.unableconnect')%>')
+			$("#chat_header_title").html(I18n.t('chat.unableconnect'))
 			//Notify issue to Rails App Server?
 		}
 		

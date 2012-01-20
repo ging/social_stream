@@ -57,6 +57,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('rails_autolink', '~> 1.0.4')
   # SocialCheesecake
   s.add_runtime_dependency('social_cheesecake','~> 0.2.0')
+  # I18n-js
+  s.add_runtime_dependency('i18n-js','~>2.1.2')
 
   # Development gem dependencies
   #

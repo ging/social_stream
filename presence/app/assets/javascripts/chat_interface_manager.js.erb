@@ -24,7 +24,7 @@ function connectButtonTimerFunction(){
 		connectButtonTimerCounter++;
 		if (connectButtonTimerCounter > (periodBetweenAttempts-1)) {
 			clearTimeout(connectButtonTimer);
-			$("#chat_header_title").html('<%=I18n.t('chat.disconnected')%>')
+			$("#chat_header_title").html(I18n.t('chat.disconnected'))
 		}
 }
 
@@ -32,7 +32,7 @@ function requestConnectToChat(){
   if (connectButtonTimerCounter > (periodBetweenAttempts-1)) {
     connectButtonTimerCounter=0;
 		connectButtonTimer = setInterval("connectButtonTimerFunction()", 1000) 
-		$("#chat_header_title").html('<%=I18n.t('chat.connecting')%>')
+		$("#chat_header_title").html(I18n.t('chat.connecting'))
     return true
   } else {
     return false
@@ -108,7 +108,7 @@ function setStatusWidgetTitle(status){
 	}
 	
 	if(status=="default"){
-    var defaultTitle = '<%=I18n.t('chat.status.choose')%>'
+    var defaultTitle = I18n.t('chat.status.choose');
     $(".dropdown dt a span").html(defaultTitle);
 		return;
   }
@@ -324,7 +324,7 @@ function hideChatNotification(notification){
 
 function notifyWhenUsersDisconnect(){
 	var notification = $("div.ui-chatbox-notify");
-	var msg = '<%=I18n.t('chat.notify.offline')%>';
+	var msg = I18n.t('chat.notify.offline');
 	showChatNotification(notification,msg);
 }
 
