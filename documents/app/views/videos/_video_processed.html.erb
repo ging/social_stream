@@ -9,7 +9,7 @@
   video,
   :class => "attachment_text_link" %>
   <div id="video_thumbnail_<%= video.id%>" class="video_thumbnail_class">
-    <%= image_tag(video_path(video, :format => :png, :style => 'thumb0'), :class => "video_thumbnail_image", :alt => "")%> <div id="<%= video.id%>" class="video_thumbnail_play_over"></div>
+    <%= image_tag(video_path(video, :format => :png, :style => 'thumbwall'), :class => "video_thumbnail_image", :alt => "")%> <div id="<%= video.id%>" class="video_thumbnail_play_over"></div>
   </div>
   <div id="full_video_<%= video.id%>" class="jp-video jp-video-270p">
     <div class="jp-type-single">

@@ -1,29 +1,24 @@
 <%= div_for picture, :class => 'content_size' do %>
 
-  <div class="attachment_thumb picture_link">
-    <%= link_to thumb_for(picture, 16),
-                 picture_path(picture),
-                :type => picture.type, 
-            		:title => picture.title,
-            		:path => document_path(picture) %>
-  </div>
-  
-  <div class="attachment_text picture_summary_class picture_link">
-  	<%= t('picture.msg') %>
-  	<%= link_to "\""+picture.title+"\"", 
-                picture_path(picture),
-                :alt => picture.title,
-               	:type => picture.type,
-               	:path => document_path(picture),
-                :class => "attachment_text_link" %>
-  </div>
-  
   <div class="picture_link picture_thumbnail_show">
     <%= link_to thumb_for(picture, 130),
                 download_document_path(picture),
-        :type => picture.type, 
-		:title => picture.title,
-		:path => document_path(picture) %>
+        :type => picture.type,
+                :title => picture.title,
+                :path => document_path(picture) %>
+  </div>
+
+  <div class="attachment_text picture_summary_class">
+        <div class="title"> 
+  	  <%= picture.title %>
+        </div>
+	<%= picture.description %>
+        <%= link_to t('picture.msg'),
+              picture_path(picture),
+              :alt => t('picture.msg'),
+              :type => picture.type,
+              :path => document_path(picture),
+              :class => "attachment_text_link picture_link" %>
   </div>
 <% end %>
 

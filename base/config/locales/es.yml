@@ -147,7 +147,7 @@ es:
     confirm: "¿Borrar %{element}}?"
   devise:
     links:
-      sign_in: "Ingresar"
+      sign_in: "Entrar"
       sign_up: "Registrarse"
       forgot_password: "¿Olvidaste tu contraseña?"
       confirmation_instructions: "¿No recibiste instrucciones de confirmación?"

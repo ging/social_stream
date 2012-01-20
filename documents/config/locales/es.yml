@@ -43,7 +43,7 @@ es:
     confirm_delete: "¿Borrar imagen?"
     title: "Imágenes"
     mine: "Mis imágenes"
-    msg: "Subió una imagen:"
+    msg: "Ver detalles..."
     name: "imagen"
     not_mine: "Imágenes"
     one: "una imagen"
