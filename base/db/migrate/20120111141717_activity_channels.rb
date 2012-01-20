@@ -15,7 +15,7 @@ class ActivityChannels < ActiveRecord::Migration
 
     ActivityMigration.reset_column_information
 
-    ActivityObject.all.each do |a|
+    ActivityMigration.all.each do |a|
       activity = Activity.find(a.id)
 
       case activity.verb
