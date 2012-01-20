@@ -42,7 +42,7 @@ class ActivityChannels < ActiveRecord::Migration
       a.save!
     end
 
-    remove_foreign_key "activities", :name => "index_activity_objects_on_contact_id"
+    remove_foreign_key "activities", :name => "index_activities_on_contact_id"
 
     remove_column :activities, :contact_id
 
