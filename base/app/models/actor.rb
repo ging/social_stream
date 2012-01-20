@@ -556,6 +556,10 @@ class Actor < ActiveRecord::Base
   def load_sent_active_contact_ids
     sent_contacts.active.map(&:receiver_id)
   end
+  
+  def unread_messages_count
+    mailbox.inbox(:unread => true).count(:id, :distinct => true)
+  end
 end
 
 ActiveSupport.run_load_hooks(:actor, Actor)
