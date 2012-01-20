@@ -133,7 +133,7 @@ class Contact < ActiveRecord::Base
 
   # Set who creates ties in behalf of a group or organization
   def user_author= subject
-    @user_author = Actor.normalize(subject)
+    @user_author = (subject.nil? ? nil : Actor.normalize(subject))
   end
 
   # Is this {Contact} +new+ or +edit+ for {SocialStream::Models::Subject subject} ?
