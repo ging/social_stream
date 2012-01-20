@@ -57,13 +57,13 @@ network with the functionalities they need for each case.
 
 Current Social Stream distribution includes:
 
-* {Social Stream Base}[https://github.com/ging/social_stream/tree/master/base], basic functionalities
+* {Base}[https://github.com/ging/social_stream/tree/master/base], basic functionalities of contacts, streams and walls,
   along with users, group, post and comments
-* {Social Stream Documents}[https://github.com/ging/social_stream/tree/master/documents], support for
-  activities on files
-* {Social Stream Events}[https://github.com/ging/social_stream/tree/master/events], sheduled events with calendar
-* {Social Stream Linkser}[https://github.com/ging/social_stream/tree/master/linkser], advanced management of links to other webpages
-* {Social Stream Presence}[https://github.com/ging/social_stream/tree/master/presence], XMPP based chat support 
+* {Documents}[https://github.com/ging/social_stream/tree/master/documents], support for
+  activities on files: pictures, audio and video with a HTML5 player
+* {Events}[https://github.com/ging/social_stream/tree/master/events], sheduled events with calendar
+* {Linkser}[https://github.com/ging/social_stream/tree/master/linkser], advanced management of links to other webpages
+* {Presence}[https://github.com/ging/social_stream/tree/master/presence], XMPP based chat support 
  
 = Documentation
 
