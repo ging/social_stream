@@ -17,8 +17,8 @@ class Like
         raise(ActiveRecord::RecordNotFound)
     end
 
-    def build(subject, object)
-       new object.new_like(subject)
+    def build(subject, user, object)
+       new object.new_like(subject, user)
     end
   end
 

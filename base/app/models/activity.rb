@@ -1,10 +1,10 @@
 # Activities follow the {Activity Streams}[http://activitystrea.ms/] standard.
 #
-# == Activities, Contacts and Audiences
-# Every activity is attached to a {Contact}, which defines the sender and the receiver of the {Activity}
+# == {Activity Activities}, {Channel Channels} and Audiences
+# Every activity is attached to a {Channel}, which defines the sender and the receiver of the {Activity}
 #
-# Besides, the activity is attached to one or more relations, which define the audicence of the activity,
-# the {actors Actor} that can reach it and their {permissions Permission}
+# Besides, the activity is attached to one or more relations, which define the audience of the activity,
+# in other words, the {actors Actor} that can reach it and their {permissions Permission}
 #
 # == Wall
 # The Activity.wall(args) scope provides all the activities appearing in a wall
@@ -12,15 +12,14 @@
 # There are two types of wall, :home and :profile. Check {Actor#wall} for more information
 #
 class Activity < ActiveRecord::Base
+  # See {SocialStream::Models::Channeled}
+  channeled
+
   has_ancestry
 
   paginates_per 10
 
   belongs_to :activity_verb
-
-  belongs_to :contact
-  has_one :sender,   :through => :contact
-  has_one :receiver, :through => :contact
 
   has_many :audiences, :dependent => :destroy
   has_many :relations, :through => :audiences
@@ -33,7 +32,7 @@ class Activity < ActiveRecord::Base
   scope :wall, lambda { |args|
     q =
       select("DISTINCT activities.*").
-      joins(:contact).
+      joins(:channel).
       joins(:audiences).
       joins(:relations).
       roots
@@ -43,13 +42,14 @@ class Activity < ActiveRecord::Base
             where('activity_objects.object_type' => args[:object_type])
     end
 
-    contacts   = Contact.arel_table
+    channels   = Channel.arel_table
     audiences  = Audience.arel_table
     relations  = Relation.arel_table
 
     owner_conditions =
-      contacts[:sender_id].eq(Actor.normalize_id(args[:owner])).
-        or(contacts[:receiver_id].eq(Actor.normalize_id(args[:owner])))
+      channels[:author_id].eq(Actor.normalize_id(args[:owner])).
+        or(channels[:user_author_id].eq(Actor.normalize_id(args[:owner]))).
+        or(channels[:owner_id].eq(Actor.normalize_id(args[:owner])))
 
     audience_conditions =
       audiences[:relation_id].in(args[:relation_ids]).
@@ -59,16 +59,16 @@ class Activity < ActiveRecord::Base
       case args[:type]
       when :home
         followed_conditions =
-          contacts[:sender_id].in(args[:followed]).
-            or(contacts[:receiver_id].in(args[:followed]))
+          channels[:author_id].in(args[:followed]).
+            or(channels[:owner_id].in(args[:followed]))
 
         owner_conditions.
           or(followed_conditions.and(audience_conditions))
       when :profile
         if args[:for].present?
           visitor_conditions =
-            contacts[:sender_id].eq(Actor.normalize_id(args[:for])).
-              or(contacts[:receiver_id].eq(Actor.normalize_id(args[:for])))
+            channels[:author_id].eq(Actor.normalize_id(args[:for])).
+              or(channels[:owner_id].eq(Actor.normalize_id(args[:for])))
 
           owner_conditions.
             and(visitor_conditions.or(audience_conditions))
@@ -110,7 +110,7 @@ class Activity < ActiveRecord::Base
   # This method provides the {Actor}. Use {#sender_subject} for the {SocialStream::Models::Subject Subject}
   # ({User}, {Group}, etc..)
   def sender
-    contact.sender
+    channel.author
   end
 
   # The {SocialStream::Models::Subject Subject} author of this activity
@@ -118,7 +118,7 @@ class Activity < ActiveRecord::Base
   # This method provides the {SocialStream::Models::Subject Subject} ({User}, {Group}, etc...).
   # Use {#sender} for the {Actor}.
   def sender_subject
-    contact.sender_subject
+    channel.author_subject
   end
 
   # The wall where the activity is shown belongs to receiver
@@ -126,7 +126,7 @@ class Activity < ActiveRecord::Base
   # This method provides the {Actor}. Use {#receiver_subject} for the {SocialStream::Models::Subject Subject}
   # ({User}, {Group}, etc..)
   def receiver
-    contact.receiver
+    channel.owner
   end
 
   # The wall where the activity is shown belongs to the receiver
@@ -134,7 +134,7 @@ class Activity < ActiveRecord::Base
   # This method provides the {SocialStream::Models::Subject Subject} ({User}, {Group}, etc...).
   # Use {#receiver} for the {Actor}.
   def receiver_subject
-    contact.receiver_subject
+    channel.owner_subject
   end
 
   # The comments about this activity
@@ -148,7 +148,7 @@ class Activity < ActiveRecord::Base
   end
 
   def liked_by(user) #:nodoc:
-    likes.joins(:contact).merge(Contact.sent_by(user))
+    likes.joins(:channel).merge(Channel.subject_authored_by(user))
   end
 
   # Does user like this activity?
@@ -157,9 +157,12 @@ class Activity < ActiveRecord::Base
   end
 
   # Build a new children activity where subject like this
-  def new_like(subject)
+  def new_like(subject, user)
+    channel = Channel.new :author      => Actor.normalize(subject),
+                          :user_author => Actor.normalize(user),
+                          :owner       => owner
     a = children.new :verb => "like",
-                     :contact => subject.contact_to!(receiver),
+                     :channel => channel,
                      :relation_ids => self.relation_ids
 
     if direct_activity_object.present?
@@ -207,7 +210,7 @@ class Activity < ActiveRecord::Base
     return true if !notificable?
     #Avaible verbs: follow, like, make-friend, post, update
 
-    if ['like','follow','make-friend','post','update'].include? verb and !contact.reflexive?
+    if ['like','follow','make-friend','post','update'].include? verb and !channel.reflexive?
       receiver.notify(notification_subject, "Youre not supposed to see this", self)
     end
     true
@@ -215,15 +218,15 @@ class Activity < ActiveRecord::Base
 
   # Is subject allowed to perform action on this {Activity}?
   def allow?(subject, action)
-    return false if contact.blank?
+    return false if channel.blank?
 
     case action
     when 'create'
-      return false if contact.sender_id != Actor.normalize_id(subject)
+      return false if subject.blank? || channel.author_id != Actor.normalize_id(subject)
 
       rels = Relation.normalize(relation_ids)
 
-      own_rels     = rels.select{ |r| r.actor_id == contact.sender_id }
+      own_rels     = rels.select{ |r| r.actor_id == channel.author_id }
       foreign_rels = rels - own_rels
 
       # Only posting to own relations or allowed to post to foreign relations
@@ -239,12 +242,12 @@ class Activity < ActiveRecord::Base
 
       return false if subject.blank?
 
-      return true if [contact.sender_id, contact.receiver_id].include?(Actor.normalize_id(subject))
+      return true if [channel.author_id, channel.owner_id].include?(Actor.normalize_id(subject))
     when 'update'
-      return true if contact.sender_id == Actor.normalize_id(subject)
+      return true if [channel.author_id, channel.owner_id].include?(Actor.normalize_id(subject))
     when 'destroy'
       # We only allow destroying to sender and receiver by now
-      return [contact.sender_id, contact.receiver_id].include?(Actor.normalize_id(subject))
+      return [channel.author_id, channel.owner_id].include?(Actor.normalize_id(subject))
     end
 
     Relation.
@@ -302,10 +305,10 @@ class Activity < ActiveRecord::Base
 
     # FIXME: repeated in SocialStream::Models::Object#_relation_ids
     self.relation_ids =
-      if contact.reflexive?
+      if channel.reflexive?
         receiver.relation_customs.map(&:id)
       else
-        receiver.relation_customs.allow(contact.sender, 'create', 'activity').map(&:id)
+        receiver.relation_customs.allow(channel.author, 'create', 'activity').map(&:id)
       end
   end
 

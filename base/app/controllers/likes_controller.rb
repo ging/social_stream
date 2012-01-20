@@ -3,7 +3,7 @@ class LikesController < ApplicationController
 
   # POST /activities/1/like.js
   def create
-    @like = Like.build(current_subject, @indirect_id)
+    @like = Like.build(current_subject, current_user, @indirect_id)
     
     respond_to do |format|
       if @like.save

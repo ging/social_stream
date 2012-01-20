@@ -9,10 +9,9 @@
 # Objects are added to +config/initializers/social_stream.rb+
 #
 class ActivityObject < ActiveRecord::Base
-  # ActivityObject is a subtype of Channel
-  # Author, owner and user_author of this ActivityObject are defined in its channel
-  subtype_of :channel,
-             :belongs => { :dependent => nil }
+  # See {SocialStream::Models::Channeled}
+  channeled
+
   # ActivityObject is a supertype of SocialStream.objects
   supertype_of :object
 
@@ -26,8 +25,6 @@ class ActivityObject < ActiveRecord::Base
   scope :authored_by, lambda { |subject|
     joins(:channel).merge(Channel.authored_by(subject))
   }
-
-  before_validation :check_existing_channel
 
   # The object of this activity object
   def object
@@ -44,22 +41,5 @@ class ActivityObject < ActiveRecord::Base
   # Does this {ActivityObject} has {Actor}?
   def acts_as_actor?
     object_type == "Actor"
-  end
-
-  protected
-
-  def check_existing_channel
-    return unless channel!.new_record?
-
-    existing_channel =
-      Channel.
-        where(:author_id      => author_id,
-              :owner_id       => owner_id,
-              :user_author_id => user_author_id).
-        first
-
-    return if existing_channel.blank?
-
-    self.channel = existing_channel
   end
 end

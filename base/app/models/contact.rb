@@ -5,24 +5,11 @@
 # for instance), and they do not mean that there is a real link between those two
 # {SocialStream::Models::Subject Subjects}. Link existance is stored as {Tie Ties}.
 #
-# = {Contact Contacts} and {Activity activities}
-#
-# WARNING: This will be change soon to direct references to author, owner and user_author,
-# in the same way as {ActivityObject}
-#
-# Each {Activity} is attached to a {Contact}. When _Alice_ post in _Bob_'s wall,
-# the {Activity} is attached to the {Contact} from _Alice_ to _Bob_
-#
-# * The sender of the {Contact} is the author of the {Activity}.
-#   It is the user that uploads a resource to the website or the social entity that
-#   originates the {Activity} (for example: add as contact).
-#
-# * The receiver {Actor} of the {Contact} is the receiver of the {Activity}.
-#   The {Activity} will appear in the wall of the receiver, depending on the permissions
-#
 class Contact < ActiveRecord::Base
   # Send a message when this contact is created or updated
   attr_accessor :message
+  # Record who creates ties in behalf of a group or organization
+  attr_writer :user_author
 
   belongs_to :inverse,
              :class_name => "Contact"
@@ -33,12 +20,11 @@ class Contact < ActiveRecord::Base
              :class_name => "Actor"
 
   has_many :ties,
-           :dependent => :destroy
+           :dependent  => :destroy,
+           :before_add => :set_user_author
+
   has_many :relations,
            :through => :ties
-
-  has_many :activities,
-           :dependent => :destroy
 
   scope :sent_by, lambda { |a|
     where(:sender_id => Actor.normalize_id(a))
@@ -131,9 +117,20 @@ class Contact < ActiveRecord::Base
   # so follower_count will not be updated
   #
   # We need to update that status here
+  #
+  # FIXME: use :after_remove callback
+  # http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html#label-Association+callbacks
   def relation_ids=(ids)
     remove_follower(ids)
     association(:relations).ids_writer(ids)
+  end
+
+  # Record who creates ties in behalf of a group or organization
+  #
+  # Defaults to the sender actor, if it is a user
+  def user_author
+    @user_author ||
+      build_user_author
   end
 
   # Is this {Contact} +new+ or +edit+ for {SocialStream::Models::Subject subject} ?
@@ -161,7 +158,43 @@ class Contact < ActiveRecord::Base
     end
   end
 
+  # The related {Channel} to this {Contact}.
+  #
+  # If the sender of this {Contact} is a user, the {Channel} is defined. If it is
+  # other kind of {SocialStream::Models::Subject}, the {Channel#user_author} must
+  # be provided.
+  def channel(user = nil)
+    user_id =
+      if sender.subject_type == "User"
+        sender_id
+      elsif user.present? && Actor.normalize(user).subject_type == "User"
+        Actor.normalize_id(user)
+      else
+        raise "Invalid channel user_author: #{ user.inspect }"
+      end
+
+    Channel.
+      find_or_create_by_author_id_and_user_author_id_and_owner_id sender_id,
+                                                                  user_id,
+                                                                  receiver_id
+  end
+
   private
+
+  def build_user_author
+    return sender if sender.subject_type == "User"
+
+    raise "Cannot determine user_author for #{ sender.inspect }"
+  end
+
+  # user_author is not preserved when the associated tie is build, in:
+  #
+  #   contact.ties.build
+  #
+  # so we need to preserve so the tie activity is recorded
+  def set_user_author(tie)
+    tie.contact.user_author = @user_author
+  end
 
   def remove_follower(ids)
     # There was no follower

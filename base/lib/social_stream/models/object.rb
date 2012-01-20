@@ -46,7 +46,9 @@ module SocialStream
 
         # Build the post activity when this object is not saved
         def build_post_activity
-          Activity.new :contact_id   => _contact_id,
+          Activity.new :author       => author,
+                       :user_author  => user_author,
+                       :owner        => owner,
                        :relation_ids => Array(_relation_ids)
         end
 
@@ -94,7 +96,7 @@ module SocialStream
 
         def create_activity(verb)
           a = Activity.new :verb         => verb,
-                           :contact      => _contact,
+                           :channel      => channel,
                            :relation_ids => _relation_ids,
                            :parent_id    => _activity_parent_id
 

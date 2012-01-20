@@ -24,6 +24,8 @@ class ContactsController < ApplicationController
     params[:contact][:relation_ids].present? &&
      params[:contact][:relation_ids].delete("0")
 
+    params[:contact][:user_author] = current_user
+
     if @contact.update_attributes(params[:contact])
       redirect_to @contact.receiver_subject
     else

@@ -19,7 +19,8 @@ class Channel < ActiveRecord::Base
   belongs_to :user_author,
              :class_name => "Actor"
 
-  has_many :activity_objects
+  has_many :activity_objects, :dependent => :destroy
+  has_many :activities, :dependent => :destroy
 
   validates_uniqueness_of :author_id,      :scope => [ :owner_id,  :user_author_id ]
   validates_uniqueness_of :owner_id,       :scope => [ :author_id, :user_author_id ]
@@ -29,6 +30,12 @@ class Channel < ActiveRecord::Base
     id = Actor.normalize_id subject
 
     where(arel_table[:author_id].eq(id).or(arel_table[:user_author_id].eq(id)))
+  }
+
+  scope :subject_authored_by, lambda { |subject|
+    id = Actor.normalize_id subject
+
+    where(:author_id => id)
   }
 
   # The {SocialStream::Models::Subject subject} author
@@ -44,5 +51,10 @@ class Channel < ActiveRecord::Base
   # The {SocialStream::Models::Subject subject} user actor
   def user_author_subject
     user_author.subject
+  end
+
+  # Does this {Channel} have the same sender and receiver?
+  def reflexive?
+    author_id == owner_id
   end
 end
