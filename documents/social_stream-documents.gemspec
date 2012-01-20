@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n")
 
   # Gem dependencies
-  s.add_runtime_dependency('social_stream-base', '~> 0.12.0')
+  s.add_runtime_dependency('social_stream-base', '~> 0.13.0')
   s.add_runtime_dependency('paperclip-ffmpeg', '~> 0.7.0')
   # Waiting for version > 2.4.5, which fixes:
   # https://github.com/thoughtbot/paperclip/issues/293
