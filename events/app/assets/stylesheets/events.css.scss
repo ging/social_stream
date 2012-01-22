@@ -7,6 +7,47 @@
 
 @import "colors";
 
+.event_date {
+  cursor: pointer;
+  display: block;
+  float: left;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px;
+}
+
+
+a.event_date {
+  color: $details-color;
+}
+
+div.event_date {
+    margin-left: 5px;
+    margin-right: 7px;
+    width: 64px;
+}
+
+.event_day {
+  font-size: 3em;
+  line-height: 90%;
+}
+
+.event_month {
+  font-size: 2em;
+  line-height: 70%;
+}
+
+.event_hour {
+  font-size: 1.2em;
+  min-height: 20px;
+  min-width: 30px;
+}
+
+.event_details {
+  padding-top: 10px;
+}
+
 #calendar {
 	margin-top: 20px;
 }
