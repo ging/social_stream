@@ -42,10 +42,7 @@ module SocialStream #:nodoc:
         def method_missing(method, *args, &block)
           super
         rescue NameError => subtype_error
-          # These methods must be raised to avoid loops
-          # (the @supertype_name association (i.e. :actor) calls here again)
-          exceptions = [ "_#{ self.class.supertype_foreign_key }".to_sym ] # [ :_actor_id ]
-          raise subtype_error if exceptions.include?(method)
+          raise subtype_error if _delegate_to_supertype?(:method)
 
           begin
             supertype!.__send__ method, *args, &block
@@ -59,8 +56,16 @@ module SocialStream #:nodoc:
 
         # {SocialStream::Models::Supertype} handles some methods
         def respond_to? *args
-          super || supertype!.respond_to?(*args)
+          super || _delegate_to_supertype?(:method) && supertype!.respond_to?(*args)
         end 
+
+        def _delegate_to_supertype?(method)
+          # These methods must not be delegated to avoid loops
+          # (the @supertype_name association (e.g. :actor) calls here again)
+          exceptions = [ "_#{ self.class.supertype_foreign_key }".to_sym ] # [ :_actor_id ]
+
+          exceptions.include?(method)
+        end
       end
 
       module ActiveRecord
