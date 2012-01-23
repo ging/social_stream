@@ -3,11 +3,13 @@
 #cheesecake {
   position: relative;
   padding: 20px;
+  padding-top: 0px;
 }
 #contacts_cheesecake {
   width: 440px;
   height: 440px;
-  padding: 0px;  
+  padding: 0px;
+  margin-top: 45px;  
   float: left;
 }
 #contacts_filter {
@@ -39,19 +41,59 @@
 }
 #contacts_grid_extra {
   width: 270px;
-  padding: 5px;
-  height: 10px;
-  border: solid 1px $input-border-color;
   text-align: center;
   float: right;
   margin-right: 20px;
   cursor: pointer;
+  vertical-align: middle;
+  padding-top: 6px;
+  background: #DEEFF8;
+  padding-left: 10px;
+  display: block;
+  height: 20px;
+  font-weight: bold;
+}
+#contacts_save {
+  width: 270px;
+  padding-right: 5px;
+  height: 25px;
+  text-align: right;
+  float: right;
+  margin-right: 20px;
+}
+#contacts_save_form {
+  overflow: visible; 
+}
+#contacts_changes {
+  width: 705px;
+  margin-left: 20px;
+}
+#contacts_changes_title {
+  vertical-align: middle;
+  padding-top: 6px;
+  background: $secondary-color;
+  padding-left: 10px;
+  display: block;
+  height: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#contacts_changes_details {
+  border: solid 1px $secondary-color;
+  border-top: 0px;
+  padding: 5px;
+  display: none;
+  max-height: 200px;
+}
+#contacts_changes_details ul{
+  padding-left: 20px;
 }
 #contacts_grid .actor {
   width: 48px;
   height: 48px;
   float: left;
   margin: 4px;
+  display: none;
 }
 #contacts_grid .actor.focused {
   border: 2px solid $main-color;

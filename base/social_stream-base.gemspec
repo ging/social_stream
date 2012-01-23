@@ -34,11 +34,11 @@ Gem::Specification.new do |s|
   # Authorization
   s.add_runtime_dependency('cancan', '~> 1.6.4')
   # Pagination
-  s.add_runtime_dependency('kaminari', '~> 0.12.4')
+  s.add_runtime_dependency('kaminari', '~> 0.13.0')
   # OAuth client
   s.add_runtime_dependency('omniauth','~> 0.2.6')
   # Messages
-  s.add_runtime_dependency('mailboxer','~> 0.5.4')
+  s.add_runtime_dependency('mailboxer','~> 0.6.0')
   # Tagging
   s.add_runtime_dependency('acts-as-taggable-on','~> 2.0.6')
   # HTML Forms

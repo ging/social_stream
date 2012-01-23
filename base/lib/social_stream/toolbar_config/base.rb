@@ -76,7 +76,7 @@ module SocialStream
             :url => new_message_path,
             :options => {:link =>{:remote=> false}}}
           items << { :key => :message_inbox,
-            :name => image_tag("btn/message_inbox.png")+t('message.inbox')+' (' + current_subject.mailbox.inbox(:unread => true).count.to_s + ')',
+            :name => image_tag("btn/message_inbox.png")+t('message.inbox')+' (' + current_subject.unread_messages_count.to_s + ')',
             :url => conversations_path,
             :options => {:link =>{:remote=> false}}}
           items << { :key => :message_sentbox,

@@ -22,7 +22,6 @@
 #                        integer, array
 #
 class Tie < ActiveRecord::Base
-
   belongs_to :contact, :counter_cache => true
 
   has_one :sender,   :through => :contact
@@ -98,8 +97,10 @@ class Tie < ActiveRecord::Base
   def create_activity
     return if contact.reload.ties_count != 1 || relation.is_a?(Relation::Reject)
 
-    Activity.create! :contact => contact,
-                     :relation_ids => contact.relation_ids,
+    Activity.create! :author        => contact.sender,
+                     :user_author   => contact.user_author,
+                     :owner         => contact.receiver,
+                     :relation_ids  => contact.relation_ids,
                      :activity_verb => ActivityVerb[contact.verb]
   end
 

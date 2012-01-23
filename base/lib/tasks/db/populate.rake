@@ -12,7 +12,7 @@ namespace :db do
       require 'forgery'
 
       LOGOS_PATH = File.join(Rails.root, 'lib', 'logos')
-      LOGOS_TOTAL = (ENV["LOGOS_TOTAL"] || 10).to_i if ENV["LOGOS_TOTAL"].present?
+      LOGOS_TOTAL = (ENV["LOGOS_TOTAL"] || 10).to_i
       USERS = (ENV["USERS"] || 9).to_i
       GROUPS = (ENV["GROUPS"] || 10).to_i
       CHEESECAKE = (ENV["CHEESECAKE"].present? || false)

@@ -3,20 +3,21 @@
 <div class="block">
   <div class="content">
 
+    <% bow = (Time.now - 1.days).beginning_of_week %>
+
     <%= render :partial => 'events/calendar_month',
                :locals  => {
                  :position => :top,
-                 :date => Date.today.beginning_of_week 
+                 :date => bow.to_date
                 } %>
 
   <table id="sidebar_calendar">
-    <% bow = Time.now.beginning_of_week %>
 
     <% 28.times do |i| %>
       <% day = bow + i.days %>
 
       <%= raw cycle(*(Array.wrap("<tr>") + 6.times.map{""}) + Array.wrap(:name => "tr_start")) %>
-      <td class="<%= event_class(day.to_date) %>">
+      <td id="sidebar_day_<%= day.day %>_<%= day.month %>_<%= day.year %>" class="sidebar_day">
         <%= link_to day.day, polymorphic_path([profile_or_current_subject, Event.new], :date => day.to_i, :view => "agendaDay") %>
       </td>
 
@@ -24,10 +25,42 @@
     <% end %>
   </table>
 
+  <%= javascript_tag do %>
+    var now = new Date();
+    $('#sidebar_day_' + now.getDate() + '_' + (now.getMonth()+1) + '_' + now.getFullYear()).addClass('today');
+    var re = new RegExp('sidebar_day_(..?)_(..?)_(..?.?.?)');
+    $('.sidebar_day').each(function(index, domEl){
+      var m = re.exec(domEl.id);
+      if(m == null) return;
+      var d = new Date(m[3], (m[2]-1), m[1], 23, 59, 59);
+      if(d < now) $(domEl).addClass('past');
+      if(m[2] != (now.getMonth()+1)) $(domEl).addClass('next_month');
+    });
+    $.ajax({
+      dataType: 'json',
+      cache: false,
+      url: "<%= escape_javascript polymorphic_path([@current_subject, Event.new]) %>",
+      data: {
+        start: <%= bow.to_i %>,
+	end: <%= (bow + 28.days).to_i %>
+      },
+      success: function(events) {
+        $.map(events, function(event) {
+	  var start = new Date(event.start); // This applies TZ
+	  var end = new Date(event.end);
+	  for(loopTime=start.getTime(); loopTime <= end.getTime(); loopTime+=86400000) {
+	    var d = new Date(loopTime);
+	    $('#sidebar_day_'+ d.getDate() + '_' + (d.getMonth()+1) + '_' + d.getFullYear()).addClass("busy");
+	  }
+	})
+      }
+    });
+  <% end %>
+
     <%= render :partial => 'events/calendar_month',
                :locals  => {
                  :position => :bottom,
-                 :date => Date.today.beginning_of_week + 28
+                 :date => (bow + 28.days).to_date
                 } %>
 
   </div>

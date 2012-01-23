@@ -4,12 +4,12 @@ class ConversationsController < ApplicationController
   before_filter :get_mailbox, :get_box, :get_actor
   before_filter :check_current_subject_in_conversation, :only => [:show, :update, :destroy]
   def index
-    if @box.eql?"inbox"
-      @conversations = Kaminari.paginate_array(@mailbox.inbox).page(params[:page]).per(9)
-    elsif @box.eql?"sentbox"
-      @conversations = Kaminari.paginate_array(@mailbox.sentbox).page(params[:page]).per(9)
+    if @box.eql? "inbox"
+      @conversations = @mailbox.inbox.page(params[:page]).per(9)
+    elsif @box.eql? "sentbox"
+      @conversations = @mailbox.sentbox.page(params[:page]).per(9)
     else
-      @conversations = Kaminari.paginate_array(@mailbox.trash).page(params[:page]).per(9)
+      @conversations = @mailbox.trash.page(params[:page]).per(9)
     end
   end
 

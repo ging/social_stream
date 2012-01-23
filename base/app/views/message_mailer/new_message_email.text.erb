@@ -1,4 +1,5 @@
-<% self.class.send :include, SubjectsHelper %>
+<% self.class.send :include, SubjectsHelper, NotificationsHelper %>
+<% locale_as @receiver.subject %>
 <%=truncate_name(@message.sender.name)%> <%= t('mailboxer.message_mailer.has_sent_new.' + @receiver.subject.class.to_s.downcase, :receiver => @receiver.name) %>
 
 -----------------------------------------------

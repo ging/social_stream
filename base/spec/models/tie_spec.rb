@@ -41,8 +41,8 @@ describe Tie do
     end
 
     it "should create activity with follow verb" do
-      @tie.contact.activities.should be_present
-      @tie.contact.activities.first.verb.should eq('follow')
+      @tie.contact.channel.activities.should be_present
+      @tie.contact.channel.activities.first.verb.should eq('follow')
     end
 
     context "reciprocal" do
@@ -51,8 +51,8 @@ describe Tie do
       end
 
       it "should create activity with make-friend verb" do
-        @reciprocal.contact.activities.should be_present
-        @reciprocal.contact.activities.first.verb.should eq('make-friend')
+        @reciprocal.contact.channel.activities.should be_present
+        @reciprocal.contact.channel.activities.first.verb.should eq('make-friend')
       end
     end
 

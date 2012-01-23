@@ -1,15 +1,38 @@
 <div class="subject">
+<% if activity.direct_object.is_a? Comment %>
   <%= raw t('notification.post.'+ activity.receiver.subject.class.to_s.underscore, 
    :sender => link_to(truncate_name(activity.sender.name), 
                       polymorphic_url(activity.sender.subject)),
    :whose => t('notification.whose.'+ activity.receiver.subject.class.to_s.underscore,
               :receiver => truncate_name(activity.receiver.name)),
-   :thing => link_to(t(activity.direct_object.class.to_s.underscore+'.one'),
+   :title => link_to(activity.direct_object.parent_post.text.truncate(30, :separator => ' '),
                      polymorphic_url(activity.direct_object))) %>
+<% elsif activity.direct_object.is_a? Post %>
+  <%= raw t('notification.post.'+ activity.receiver.subject.class.to_s.underscore, 
+   :sender => link_to(truncate_name(activity.sender.name), 
+                      polymorphic_url(activity.sender.subject)),
+   :whose => t('notification.whose.'+ activity.receiver.subject.class.to_s.underscore,
+              :receiver => truncate_name(activity.receiver.name)),
+   :title => link_to(activity.direct_object.text.truncate(30, :separator => ' '),
+                     polymorphic_url(activity.direct_object))) %>
+<% elsif activity.direct_object.respond_to? :title %>
+  <%= raw t('notification.post.'+ activity.receiver.subject.class.to_s.underscore, 
+   :sender => link_to(truncate_name(activity.sender.name), 
+                      polymorphic_url(activity.sender.subject)),
+   :whose => t('notification.whose.'+ activity.receiver.subject.class.to_s.underscore,
+              :receiver => truncate_name(activity.receiver.name)),
+   :title => link_to(activity.direct_object.title.truncate(30, :separator => ' '),
+                     polymorphic_url(activity.direct_object))) %>
+<% else %>
+  <%= raw t('notification.default') %>
+<% end %>
 </div>
 <div class="briefing">
   <% if activity.direct_object.respond_to? :text %>
     "<%= link_to(sanitize(activity.direct_object.text.truncate(100, :separator =>' ')),
+                     polymorphic_url(activity.direct_object))%>"
+  <% elsif activity.direct_object.respond_to? :description and not activity.direct_object.description.blank? %>
+    "<%= link_to(sanitize(activity.direct_object.description.truncate(100, :separator =>' ')),
                      polymorphic_url(activity.direct_object))%>"
   <% else%>
     <%= link_to(t('notification.watch_it'),

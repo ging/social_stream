@@ -281,7 +281,11 @@ describe Activity do
     describe "build to non replied contact" do
       before do
         @tie = Factory(:friend, :contact => Factory(:contact, :sender => @user.actor))
-        @activity = Activity.new :contact_id => @tie.contact.id
+        partner = @tie.receiver
+        @activity = Activity.new :author => @user.actor,
+                                 :user_author => @user.author,
+                                 :owner => partner
+
         create_ability_accessed_by @tie.sender_subject
       end
 

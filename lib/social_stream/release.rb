@@ -1,7 +1,7 @@
 module SocialStream
   module Release
     class << self
-      def create(*args)
+      def update(*args)
         # First of all, update gems
         system "bundle"
 
@@ -13,8 +13,16 @@ module SocialStream
 
         system("git commit #{ all.map(&:commit_files).join(" ") } -m #{ @global.version }") ||
           raise(RuntimeError.new)
+      end
 
+      def release
         all.each(&:rake_release)
+      end
+
+      def create(*args)
+        update *args
+
+        release
       end
 
       def dependencies

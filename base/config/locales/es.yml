@@ -1,4 +1,5 @@
 es:
+  language_name: "Español"
   actor:
     name: "Nombre"
   action:
@@ -146,7 +147,7 @@ es:
     confirm: "¿Borrar %{element}}?"
   devise:
     links:
-      sign_in: "Ingresar"
+      sign_in: "Entrar"
       sign_up: "Registrarse"
       forgot_password: "¿Olvidaste tu contraseña?"
       confirmation_instructions: "¿No recibiste instrucciones de confirmación?"
@@ -300,8 +301,8 @@ es:
     one: "Notificación"
     other: "Notificaciones"
     post:
-      group: "%{sender} añadió %{thing} en el muro %{whose}."
-      user: "%{sender} añadió %{thing} en tu muro."
+      group: "%{title} -- por %{sender} en el muro %{whose}"
+      user: "%{title} -- por %{sender} en tu muro"
     read: "Marcar como leída"
     read_all: "Marcar todas como leídas"
     unread: "Marcar como no leídas"

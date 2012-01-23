@@ -43,7 +43,7 @@ en:
     confirm_delete: "Delete picture?"
     title: "Pictures"
     mine: "My pictures"  
-    msg: "Uploaded a picture:"
+    msg: "See details..."
     name: "picture"
     not_mine: "Pictures"
     one: "a picture"

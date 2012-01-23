@@ -20,7 +20,7 @@ describe Like do
   describe "actor" do
     shared_examples_for "creates activity" do
       it "should recognize the user who likes it" do
-        Like.build(@sender, @receiver).save
+        Like.build(@sender, @sender, @receiver).save
 
         assert @receiver.liked_by?(@sender)
       end
@@ -28,13 +28,13 @@ describe Like do
       it "should increment like count" do
         count = @receiver.like_count
 
-        Like.build(@sender, @receiver).save
+        Like.build(@sender, @sender, @receiver).save
 
         @receiver.like_count.should eq(count + 1)
       end
 
       it "should decrement like count" do
-        @like = Like.build(@sender, @receiver)
+        @like = Like.build(@sender, @sender, @receiver)
         @like.save
 
         count = @receiver.like_count

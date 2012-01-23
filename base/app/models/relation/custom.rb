@@ -101,7 +101,7 @@ class Relation::Custom < Relation
   def to_cheesecake_hash(options = {})
     {:id => id, :name => name}.tap do |hash|
       if options[:subsector]
-        hash[:actors] = ties.map{ |t| [t.contact.receiver_id, t.contact.receiver.name] }.uniq
+        hash[:actors] = ties.map{ |t| [t.contact.receiver_id, t.contact.receiver.name, t.contact_id] }.uniq
       else
         hash[:subsectors] = ( weaker.present? ?
                               weaker.map{ |w| w.to_cheesecake_hash(:subsector => true) } :

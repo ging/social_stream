@@ -316,8 +316,15 @@ class Actor < ActiveRecord::Base
   end
 
   # The {Contact} of this {Actor} to self (totally close!)
-  def ego_contact
+  def self_contact
     contact_to!(self)
+  end
+
+  alias_method :ego_contact, :self_contact
+
+  # The {Channel} of this {Actor} to self (totally close!)
+  def self_channel
+    Channel.find_or_create_by_author_id_and_user_author_id_and_owner_id id, id, id
   end
 
   def sent_active_contact_ids
@@ -483,7 +490,7 @@ class Actor < ActiveRecord::Base
   end
   
   def liked_by(subject) #:nodoc:
-    likes.joins(:contact).merge(Contact.sent_by(subject))
+    likes.joins(:channel).merge(Channel.subject_authored_by(subject))
   end
   
   # Does subject like this {Actor}?
@@ -492,9 +499,14 @@ class Actor < ActiveRecord::Base
   end
   
   # Build a new activity where subject like this
-  def new_like(subject)
+  def new_like(subject, user)
+    channel =
+      Channel.
+        find_or_create_by_author_id_and_user_author_id_and_owner_id Actor.normalize_id(subject),
+                                                                    Actor.normalize_id(user),
+                                                                    id
     a = Activity.new :verb => "like",
-                     :contact => subject.contact_to!(self),
+                     :channel => channel,
                      :relation_ids => Array(subject.relation_public.id)
     
     a.activity_objects << activity_object           
@@ -555,6 +567,10 @@ class Actor < ActiveRecord::Base
   # Calculate {#sent_active_contact_ids}
   def load_sent_active_contact_ids
     sent_contacts.active.map(&:receiver_id)
+  end
+  
+  def unread_messages_count
+    mailbox.inbox(:unread => true).count(:id, :distinct => true)
   end
 end
 

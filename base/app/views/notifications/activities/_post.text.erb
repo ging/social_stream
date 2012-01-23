@@ -1,13 +1,32 @@
 
+<% if activity.direct_object.is_a? Comment %>
 <%= raw t('notification.post.'+ activity.receiver.subject.class.to_s.underscore, 
            :sender => truncate_name(activity.sender.name),
            :whose => t('notification.whose.'+ activity.receiver.subject.class.to_s.underscore,
-                      :receiver => truncate_name(activity.receiver.name)),
-           :thing => t(activity.direct_object.class.to_s.underscore+'.one')) %>
+                     :receiver => truncate_name(activity.receiver.name)),
+           :title => activity.direct_object.parent_post.text.truncate(30, :separator => ' ')) %>
+<% elsif activity.direct_object.is_a? Post %>
+<%= raw t('notification.post.'+ activity.receiver.subject.class.to_s.underscore, 
+           :sender => truncate_name(activity.sender.name),
+           :whose => t('notification.whose.'+ activity.receiver.subject.class.to_s.underscore,
+                     :receiver => truncate_name(activity.receiver.name)),
+           :title => activity.direct_object.text.truncate(30, :separator => ' ')) %>
+<% elsif activity.direct_object.respond_to? :title %>
+<%= raw t('notification.post.'+ activity.receiver.subject.class.to_s.underscore, 
+           :sender => truncate_name(activity.sender.name),
+           :whose => t('notification.whose.'+ activity.receiver.subject.class.to_s.underscore,
+                     :receiver => truncate_name(activity.receiver.name)),
+           :title => activity.direct_object.title.truncate(30, :separator => ' ')) %>
+<% else %>
+  <%= raw t('notification.default') %>
+<% end %>
 
 
 <% if activity.direct_object.respond_to? :text %>
   "<%= sanitize(activity.direct_object.text.truncate(100, :separator =>' '))%>"
+--><%= t('notification.all_text', :url => polymorphic_url(activity.direct_object))%>
+<% elsif activity.direct_object.respond_to? :description and not activity.direct_object.description.blank? %>
+  "<%= sanitize(activity.direct_object.description.truncate(100, :separator =>' '))%>"
 --><%= t('notification.all_text', :url => polymorphic_url(activity.direct_object))%>
 <% else%>
   <%= t('notification.watch', :url => polymorphic_url(activity.direct_object))%>

@@ -5,8 +5,8 @@ class Video < Document
                     :styles => {
                       :webm => {:format => 'webm'},
                       :flv  => { :format => 'flv' },
-                      :thumb  => {:geometry => "48x48" , :format => 'png', :time => 5},
-                      :thumb0 => {:geometry => "130x80", :format => 'png', :time => 5}
+                      :thumb48sq  => {:geometry => "48x48" , :format => 'png', :time => 5},
+                      :thumbwall => {:geometry => "130x97#", :format => 'png', :time => 5}
                     },
                     :processors => [:ffmpeg]
                     

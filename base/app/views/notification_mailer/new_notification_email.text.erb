@@ -1,4 +1,5 @@
-<% self.class.send :include, SubjectsHelper, ActionView::Helpers::TextHelper %>
+<% self.class.send :include, SubjectsHelper, NotificationsHelper, ActionView::Helpers::TextHelper %>
+<% locale_as @receiver.subject %>
 <%= t('notification.hello', :receiver => @receiver.name)%>
 
 <%= render :partial => "notifications/activities/#{ @notification.notified_object.verb }", 

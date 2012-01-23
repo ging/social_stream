@@ -7,4 +7,10 @@ class SocialStream < Thor
   def release(*args)
     ::SocialStream::Release.create *args
   end
+
+  desc "update", "set SocialStream's dependencies"
+  def update(*args)
+    ::SocialStream::Release.update *args
+  end
+
 end

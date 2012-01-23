@@ -18,8 +18,9 @@ module SocialStream
         Mime::Type.register 'application/xrd+xml', :xrd
       end
 
-      initializer "social_stream-base.model.supertype" do
+      initializer "social_stream-base.model.supertypes" do
         ActiveSupport.on_load(:active_record) do
+          include SocialStream::Models::Channeled::ActiveRecord
           include SocialStream::Models::Subtype::ActiveRecord
           include SocialStream::Models::Supertype::ActiveRecord
         end

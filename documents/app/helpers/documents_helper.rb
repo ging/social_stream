@@ -20,7 +20,7 @@ module DocumentsHelper
   def link_for_wall(document)
     format = Mime::Type.lookup(document.file_content_type)
 
-    polymorphic_path(document, :format => format, :style => 'thumb0')
+    polymorphic_path(document, :format => format, :style => 'thumbwall')
   end
   
   def show_view_for(document)

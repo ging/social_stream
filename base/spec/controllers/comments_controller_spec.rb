@@ -13,7 +13,7 @@ describe CommentsController do
 
     describe "comment from user" do
       before do
-        activity = Factory(:self_activity, :contact => Factory(:self_contact, :sender => @user.actor))
+        activity = Factory(:self_activity, :channel => @user.self_channel)
 
         model_attributes[:author_id] = @user.actor_id
         model_attributes[:owner_id]  = @user.actor_id
@@ -38,7 +38,7 @@ describe CommentsController do
     describe "comment to friend" do
       before do
         f = Factory(:friend, :contact => Factory(:contact, :receiver => @user.actor)).sender
-        activity = Factory(:self_activity, :contact => f.contact_to!(f))
+        activity = Factory(:self_activity, :channel => f.contact_to!(f).channel)
 
         model_attributes[:author_id] = @user.actor_id
         model_attributes[:owner_id]  = f.id
@@ -52,7 +52,7 @@ describe CommentsController do
     describe "post to acquaintance" do
       before do
         a = Factory(:acquaintance, :contact => Factory(:contact, :receiver => @user.actor)).sender
-        activity = Factory(:self_activity, :contact => a.contact_to!(a))
+        activity = Factory(:self_activity, :channel => a.self_channel)
 
         model_attributes[:author_id] = @user.actor_id
         model_attributes[:owner_id]  = a.id

@@ -23,14 +23,14 @@ end
 ## End of helpers
 
 Factory.define :activity do |a|
-  a.contact { Factory(:friend).contact }
+  a.channel { Factory(:friend).contact.channel }
   a.activity_verb { ActivityVerb["post"] }
   a.relation_ids  { |b| Array(b.sender.relation_custom('friend').id) }
   a.activity_object_ids { Array(Factory(:post_spec_helper).activity_object_spec_helper.id) }
 end
 
 Factory.define :self_activity, :parent => :activity do |a|
-  a.contact { Factory(:self_contact) }
+  a.channel { Factory(:self_contact).channel }
   a.relation_ids  { |b| Array(b.sender.relation_custom('friend').id) }
 end
 
@@ -40,7 +40,7 @@ end
 
 Factory.define :like_activity, :class => 'Activity' do |a|
   a.association :parent, :factory => :activity
-  a.contact { |b| Factory(:friend, :sender => b.parent.sender).receiver.contact_to!(b.parent.sender) }
+  a.channel { |b| Factory(:friend, :sender => b.parent.sender).receiver.contact_to!(b.parent.sender).channel }
   a.activity_verb { ActivityVerb["like"] }
   a.relation_ids  { |b| b.parent.relation_ids }
   a.after_build{ |b| b.activity_object_ids = b.parent.activity_object_ids }

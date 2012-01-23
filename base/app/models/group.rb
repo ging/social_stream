@@ -43,8 +43,11 @@ class Group < ActiveRecord::Base
   
   # Creates the ties from the group to the participants
   def create_ties_to_participants
-    ([ author_id, user_author_id ].uniq | Array.wrap(@_participants)).uniq.each do |a|
-      sent_contacts.create! :receiver_id => a,
+    participant_ids = ([ author_id, user_author_id ] | Array.wrap(@_participants)).uniq
+
+    participant_ids.each do |a|
+      sent_contacts.create! :receiver_id  => a,
+                            :user_author  => user_author,
                             :relation_ids => Array(relation_customs.sort.first.id)
     end
   end
