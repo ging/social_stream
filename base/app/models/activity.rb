@@ -348,7 +348,12 @@ class Activity < ActiveRecord::Base
               :sender => sender_name,
 	      :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
 	                       :receiver => receiver_name),
-	      :title => 'Re: ' + direct_object.parent_post.text.truncate(30, :separator => ' '))
+	      :title => if direct_object.parent_post.is_a? Post
+	                  'Re: ' + direct_object.parent_post.text.truncate(30, :separator => ' ')
+			elsif direct_object.parent_post.respond_to? :title
+	                  'Re: ' + direct_object.parent_post.title.truncate(30, :separator => ' ')
+			else t('notification.default')
+	                end)
 	elsif direct_object.is_a? Post
           I18n.t('notification.post.'+ receiver.subject.class.to_s.underscore, 
               :sender => sender_name,
