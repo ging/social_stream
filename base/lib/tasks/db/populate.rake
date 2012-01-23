@@ -131,13 +131,21 @@ namespace :db do
           actor = Actor.first
           unless a==actor
             puts a.name + " connecting with " + actor.name
-            a.contact_to!(actor).relation_ids = Array(Forgery::Extensions::Array.new(a.relation_customs).random.id)
-            actor.contact_to!(a).relation_ids = Array(Forgery::Extensions::Array.new(actor.relation_customs).random.id)
+            # DRY! :-S
+            contact = a.contact_to!(actor)
+            contact.user_author = a.user_author if a.subject_type != "User"
+            contact.relation_ids = Array(Forgery::Extensions::Array.new(a.relation_customs).random.id)
+
+            contact = actor.contact_to!(a)
+            contact.user_author = actor.user_author if actor.subject_type != "User"
+            contact.relation_ids = Array(Forgery::Extensions::Array.new(actor.relation_customs).random.id)
           end
         else
           Forgery::Basic.number(:at_most => actors.size).times do
             actor = actors.delete_at((rand * actors.size).to_i)          
-            a.contact_to!(actor).relation_ids = Array(Forgery::Extensions::Array.new(relations).random.id) unless a==actor
+            contact = a.contact_to!(actor)
+            contact.user_author = a.user_author if a.subject_type != "User"
+            contact.relation_ids = Array(Forgery::Extensions::Array.new(relations).random.id) unless a==actor
           end
         end
       end
