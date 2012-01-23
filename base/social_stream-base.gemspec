@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   # SQL foreign keys
   s.add_runtime_dependency('foreigner', '~> 1.1.1')
   # Authentication
-  s.add_runtime_dependency('devise', '~> 1.4.5')
+  s.add_runtime_dependency('devise', '~> 1.5.3')
   # CRUD controllers
   s.add_runtime_dependency('inherited_resources', '~> 1.3.0')
   # Slug generation
@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
   # Pagination
   s.add_runtime_dependency('kaminari', '~> 0.13.0')
   # OAuth client
-  s.add_runtime_dependency('omniauth','~> 0.2.6')
+  s.add_runtime_dependency('omniauth','~> 1.0.2')
   # Messages
   s.add_runtime_dependency('mailboxer','~> 0.6.0')
   # Tagging
