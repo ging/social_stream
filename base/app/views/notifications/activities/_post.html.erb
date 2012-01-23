@@ -5,8 +5,14 @@
                       polymorphic_url(activity.sender.subject)),
    :whose => t('notification.whose.'+ activity.receiver.subject.class.to_s.underscore,
               :receiver => truncate_name(activity.receiver.name)),
-   :title => link_to(activity.direct_object.parent_post.text.truncate(30, :separator => ' '),
-                     polymorphic_url(activity.direct_object))) %>
+   :title => if activity.direct_object.parent_post.is_a? Post
+               link_to(activity.direct_object.parent_post.text.truncate(30, :separator => ' '),
+                     polymorphic_url(activity.direct_object))
+	     elsif activity.direct_object.parent_post.respond_to? :title
+	       link_to(activity.direct_object.parent_post.title.truncate(30, :separator => ' '),
+	             polymorphic_url(activity.direct_object))
+	     else t('notification.default')
+             end) %>
 <% elsif activity.direct_object.is_a? Post %>
   <%= raw t('notification.post.'+ activity.receiver.subject.class.to_s.underscore, 
    :sender => link_to(truncate_name(activity.sender.name), 
