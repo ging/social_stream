@@ -47,7 +47,11 @@ module SocialStream
       end
 
       def all
-        @components + [ @global ]
+        components + [ @global ]
+      end
+
+      def components
+        @components ||= dependencies.map{ |d| Component::Release.new(d) }
       end
     end
   end

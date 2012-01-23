@@ -4,7 +4,7 @@ module SocialStream
       class Release < ::SocialStream::Release::Global::Release
         attr_reader :name
 
-        def initialize(name, version)
+        def initialize(name, version = nil)
           @name, @target = name, version
         end
 

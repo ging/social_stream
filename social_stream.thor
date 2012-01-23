@@ -5,7 +5,7 @@ class SocialStream < Thor
 
   desc "release", "release SocialStream's gems"
   def release(*args)
-    ::SocialStream::Release.create *args
+    ::SocialStream::Release.release
   end
 
   desc "update", "set SocialStream's dependencies"
