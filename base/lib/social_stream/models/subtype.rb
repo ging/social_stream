@@ -42,7 +42,7 @@ module SocialStream #:nodoc:
         def method_missing(method, *args, &block)
           super
         rescue NameError => subtype_error
-          raise subtype_error if _delegate_to_supertype?(:method)
+          raise subtype_error unless _delegate_to_supertype?(:method)
 
           begin
             supertype!.__send__ method, *args, &block
@@ -64,7 +64,7 @@ module SocialStream #:nodoc:
           # (the @supertype_name association (e.g. :actor) calls here again)
           exceptions = [ "_#{ self.class.supertype_foreign_key }".to_sym ] # [ :_actor_id ]
 
-          exceptions.include?(method)
+          ! exceptions.include?(method)
         end
       end
 
