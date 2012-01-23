@@ -115,26 +115,27 @@ class User < ActiveRecord::Base
       record
     end
 
-    def find_or_create_for_facebook_oauth(access_token,signed_in_resource=nil)
-      data = access_token['extra']['user_hash']
-      print data
-      auth = Authentication.find_by_provider_and_uid(access_token["provider"],access_token["uid"])
-      user = User.find_by_email(data["email"])
-      
-      if user == nil
-        user = User.create!(:name => data["name"], :email => data["email"], :password => Devise.friendly_token[0,20])
+    def find_or_create_for_facebook_oauth(hash, signed_in_resource = nil)
+      puts hash.inspect
+      auth = Authentication.find_by_provider_and_uid(hash["provider"], hash["uid"])
+      user = User.find_by_email(hash["info"]["email"])
+
+      if user.nil?
+        user = User.create!(:name => hash["info"]["name"], :email => hash["info"]["email"], :password => Devise.friendly_token[0,20])
       end
-      if auth == nil
-        auth = Authentication.create!(:user_id => user.id, :uid =>access_token["uid"], :provider => access_token["provider"])
+
+      if auth.nil?
+        auth = Authentication.create!(:user_id => user.id, :uid =>hash["uid"], :provider => hash["provider"])
       end
+
       user
     end
     
-    def find_or_create_for_linkedin_oauth(access_token,signed_in_resource=nil)
-      auth = Authentication.find_by_uid_and_provider(access_token["uid"],access_token["provider"])
+    def find_or_create_for_linkedin_oauth(hash,signed_in_resource=nil)
+      auth = Authentication.find_by_uid_and_provider(hash["uid"],hash["provider"])
       if auth==nil
-        user = User.create!(:name => access_token["user_info"]["name"], :email => 'demo@socialstream.com', :password => Devise.friendly_token[0,20])
-        auth = Authentication.create!(:user_id => user.id, :uid =>access_token["uid"], :provider => access_token["provider"])
+        user = User.create!(:name => hash["info"]["name"], :email => 'demo@socialstream.com', :password => Devise.friendly_token[0,20])
+        auth = Authentication.create!(:user_id => user.id, :uid =>hash["uid"], :provider => hash["provider"])
         user
       else
         user = User.find_by_id(auth.user_id)

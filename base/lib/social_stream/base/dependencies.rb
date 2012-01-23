@@ -23,7 +23,9 @@ require 'avatars_for_rails'
 # Pagination
 require 'kaminari'
 # Oauth
-require 'omniauth/oauth'
+require 'omniauth'
+require 'omniauth-facebook'
+require 'omniauth-linkedin'
 #Tags
 require 'acts-as-taggable-on'
 require 'acts_as_taggable_on/social_stream'
