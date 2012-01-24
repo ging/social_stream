@@ -84,9 +84,22 @@
   padding: 5px;
   display: none;
   max-height: 200px;
+  overflow-y: auto;
 }
 #contacts_changes_details ul{
   padding-left: 20px;
+}
+#contacts_changes_details .change_deleted{
+  font-weight: bold;
+  color: $error-color;
+}
+#contacts_changes_details .change_modified{
+  font-weight: bold;
+  color: $alert-color;
+}
+#contacts_changes_details .change_added{
+  font-weight: bold;
+  color: $success-color;
 }
 #contacts_grid .actor {
   width: 48px;

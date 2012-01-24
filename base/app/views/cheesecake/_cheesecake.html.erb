@@ -48,7 +48,75 @@ $(function(){
       cheesecakeData.highlightedSectorCallback(cheese);
     });    
     cheese.onChange = function(cheesecake){
-      $("#contacts_save_changes").val(JSON.stringify(cheesecake.getChanges()));
+      var initial = cheesecake.getInitialState();
+      var changes = cheesecake.getChanges();
+      var changes_html = "";
+      var actors = changes.actors;
+      $("#contacts_save_changes").val(JSON.stringify(changes));
+      for(var i in actors){
+        actor = actors[i];
+        if(actor.justAdded){
+          var new_subsectors = actor.subsectors;
+          var new_subsectors_string = "";
+          for(var i in new_subsectors){
+            if(i > 0) new_subsectors_string += ", ";
+            new_subsectors_string += cheesecake.getSubsectorById(new_subsectors[i]).label;
+          }
+          changes_html += "<div class=\"change_added\">" + actor.name + " has been removed from " + old_subsectors_string + "</div>";
+        }else if(actor.subsectors.length==0){
+          var old_subsectors = [];
+          var old_subsectors_string = "";
+          for(var i in initial.actors){
+            if(actor.id==initial.actors[i].id){
+              old_subsectors = initial.actors[i].subsectors;
+              break;
+            }
+          }
+          for(var i in old_subsectors){
+            if(i > 0) old_subsectors_string += ", ";
+            old_subsectors_string += cheesecake.getSubsectorById(old_subsectors[i]).label;
+          }
+          changes_html += "<div class=\"change_deleted\">" + actor.name + " has been removed from " + old_subsectors_string + "</div>";
+        }else{
+          var old_subsectors = [];
+          var new_subsectors = actor.subsectors;
+          var left_subsectors = "";
+          var joined_subsectors = "";
+          for(var i in initial.actors){
+            if(actor.id==initial.actors[i].id){
+              old_subsectors = initial.actors[i].subsectors;
+              break;
+            }
+          }
+          for(var i in old_subsectors){
+            if(new_subsectors.indexOf(old_subsectors[i])==-1){
+              if(left_subsectors.length!=0){
+                left_subsectors += ", ";
+              }
+              left_subsectors += cheesecake.getSubsectorById(old_subsectors[i]).label;
+            }
+          }
+          for(var i in new_subsectors){
+            if(old_subsectors.indexOf(new_subsectors[i])==-1){
+              if(joined_subsectors.length!=0){
+                joined_subsectors += ", ";
+              }
+              joined_subsectors += cheesecake.getSubsectorById(new_subsectors[i]).label;
+            }
+          }
+          if((joined_subsectors.length!=0)&&(left_subsectors.length!=0)){
+            changes_html += "<div class=\"change_modified\">" + actor.name + " has been removed from " + left_subsectors + " and added to " + joined_subsectors + "</div>";
+          }else if(joined_subsectors.length!=0){
+            changes_html += "<div class=\"change_added\">" + actor.name + " has been added to " + joined_subsectors + "</div>";
+          }else{
+            changes_html += "<div class=\"change_deleted\">" + actor.name + " has been removed from " + left_subsectors + "</div>";  
+          }
+        }
+      }
+      $("#contacts_changes_details").html(changes_html);
+      if (!$("#contacts_changes_details").is (":visible")){
+        $("#contacts_changes_details").slideToggle("slow");
+      }
     }
     if(cheese.grid.actors.length > 30){    
       var extra_text = ["<%= t('cheesecake.hidden_contact.one')%>","<%= t('cheesecake.hidden_contact.other')%>"];
