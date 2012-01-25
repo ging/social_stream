@@ -7,11 +7,9 @@ module SocialStream
         inherit_resources
       end
 
-      module InstanceMethods
-        # Overwrite {SocialStream::Controllers::Helpers::InstanceMethods#profile_subject}
-        def profile_subject
-          !resource.new_record? && resource || current_subject
-        end
+      # Overwrite {SocialStream::Controllers::Helpers::InstanceMethods#profile_subject}
+      def profile_subject
+        !resource.new_record? && resource || current_subject
       end
     end
   end

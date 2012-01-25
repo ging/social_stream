@@ -1,5 +1,3 @@
-require 'active_support/concern'
-
 module SocialStream
   module Models
     # {Subject Subjects} are subtypes of {Actor Actors}. {SocialStream Social Stream} provides two
@@ -75,12 +73,6 @@ module SocialStream
         end
       end
       
-      module InstanceMethods
-        def to_param
-          slug
-        end
-      end
-      
       module ClassMethods
         def find_by_slug(perm)
           includes(:actor).where('actors.slug' => perm).first
@@ -90,6 +82,10 @@ module SocialStream
           find_by_slug(perm) ||
             raise(ActiveRecord::RecordNotFound)
         end 
+      end
+
+      def to_param
+        slug
       end
     end
   end
