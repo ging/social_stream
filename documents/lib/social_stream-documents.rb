@@ -1,5 +1,4 @@
-require 'social_stream-base'
-require 'delayed_paperclip'
+require 'social_stream/documents/dependencies'
 
 module SocialStream
   module ToolbarConfig
@@ -20,6 +19,4 @@ module SocialStream
   end
 end
 
-#require 'paperclip_processors/ffmpeg'
-require 'paperclip-ffmpeg'
 require 'social_stream/documents/engine'
