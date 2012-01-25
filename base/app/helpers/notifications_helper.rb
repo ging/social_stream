@@ -10,7 +10,7 @@ module NotificationsHelper
       act_obj.title.truncate(30, :separator => ' ')
     elsif act_obj.respond_to? :url and (not act_obj.url.nil?)
       act_obj.url.truncate(30, :separator => ' ')
-    else t('notification.default')
+    else I18n.t('notification.default')
     end
   end
 
@@ -21,7 +21,7 @@ module NotificationsHelper
     elsif act_obj.respond_to? :description and (not act_obj.description.nil?)
       sanitize(act_obj.description.truncate(100, :separator =>' '))
     else
-      t('notification.watch_it')
+      I18n.t('notification.watch_it')
     end
   end
 
