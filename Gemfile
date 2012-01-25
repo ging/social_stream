@@ -7,8 +7,6 @@ source "http://rubygems.org"
 # gem 'mailboxer', :path => '../mailboxer'
 # gem 'avatars_for_rails', :path => '../avatars_for_rails'
 
-gem 'rails', '3.1.3'
-
 # social_stream gems
 %w(base documents).each do |g|
   gem "social_stream-#{ g }", :path => g
