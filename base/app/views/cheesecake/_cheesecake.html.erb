@@ -24,7 +24,7 @@ $(function(){
           actors = cheesecake.grid.actors;    
       }
       for(var i in actors){
-        if(actors[i].isVisible()){
+        if(!actors[i].isFiltered()){
           visibles++;
         }
       }        

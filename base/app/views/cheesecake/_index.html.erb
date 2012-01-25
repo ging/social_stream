@@ -13,18 +13,18 @@
 </div>
 <div id="contacts_save">
   <form action="<%= update_cheesecake_path %>" method="get" data-remote="true" id="contacts_save_form">
-     <input type="submit" id="contacts_save_button" value="Save changes">
+     <input type="submit" id="contacts_save_button" value="<%= t('cheesecake.changes.save') %>">
      <input type="hidden" id="contacts_save_changes" name="contacts_save_changes">
   </form>
 </div>
 <br class="clearfloat"> 
 <div id="contacts_changes">
   <div id="contacts_changes_title">
-   Changes details
+   <%= t('cheesecake.changes.details') %>
   </div>
   <div id="contacts_changes_details">
     <ul>
-      <li>Working on it :)</li>
+      <li><%= t('cheesecake.changes.none') %></li>
     </ul>
   </div>
 </div>

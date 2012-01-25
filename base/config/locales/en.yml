@@ -92,9 +92,13 @@ en:
     save: "Save"
     update: "Update"
   cheesecake:
+    changes:
+      details: "Change details"
+      none: "No changes"
+      save: "Save changes"
     hidden_contact:
-      one: "contact hidden"
-      other: "contacts hidden"
+      one: "hidden contact"
+      other: "hidden contacts"
   comment:
     input: "Write a comment..."
     confirm_delete: "Delete comment?"
