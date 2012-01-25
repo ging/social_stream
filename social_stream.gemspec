@@ -35,7 +35,9 @@ Gem::Specification.new do |s|
   # Debugging
   unless ENV["CI"]
     if RUBY_VERSION < '1.9'
-      s.add_development_dependency('ruby-debug', '~> 0.10.3')
+      s.add_development_dependency('ruby-debug')
+    else
+      s.add_development_dependency('ruby-debug19')
     end
   end
   # Specs
