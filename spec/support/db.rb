@@ -13,3 +13,9 @@ end
 gems.each do |g|
   "SocialStream::Migrations::#{ g.camelize }".constantize.new.up
 end
+
+# In Rails 3.2.0, we need to reload the database schema
+#
+# Some models are loaded before the database is created,
+# reporting their table does not exist in specs
+ActiveRecord::Base.connection.schema_cache.clear!
