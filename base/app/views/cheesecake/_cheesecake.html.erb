@@ -29,7 +29,7 @@ $(function(){
         }
       }        
       if(visibles <= 30){
-        $("#contacts_grid_extra").hide();          
+        $("#contacts_grid_extra").css("opacity",0);
       }else{
         $("#contacts_grid_extra_total").html(visibles - 30);
         if((visibles - 30) == 1){
@@ -37,7 +37,7 @@ $(function(){
         }else{
           $("#contacts_grid_extra_text").html(extra_text[1]);
         }          
-        $("#contacts_grid_extra").show();
+        $("#contacts_grid_extra").css("opacity",1);
         $("#contacts_grid").scrollTo(0, 1000);
       }  
     }
@@ -136,7 +136,7 @@ $(function(){
       }else{
         $("#contacts_grid_extra_text").html(extra_text[1]);
       }       
-      $("#contacts_grid_extra").show();     
+      $("#contacts_grid_extra").css("opacity",1);
     }
     $(document).ready(function(){
       $('#contacts_changes_button').tipsy({

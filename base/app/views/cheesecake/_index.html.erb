@@ -8,7 +8,7 @@
     <%= render :partial => "actors/actor_cheesecake", :locals => {:actor => actor} %>
   <% end %>
 </div>
-<div id="contacts_grid_extra" style="display:none;">    
+<div id="contacts_grid_extra" style="opacity:0;">
   <span id="contacts_grid_extra_total"></span> <span id="contacts_grid_extra_text"></span>
 </div>
 <div id="contacts_save">
@@ -37,7 +37,7 @@
   $("#contacts_grid_extra").click(function(){
     $("#contacts_grid").css("overflow-y","scroll");
     $("#contacts_grid").scrollTo("+=308px", 800, {axis:'y'});
-    $("#contacts_grid_extra").hide();
+    $("#contacts_grid_extra").css("opacity",0);
   });
   <%= render :partial => 'cheesecake' %>
 <% end %>
