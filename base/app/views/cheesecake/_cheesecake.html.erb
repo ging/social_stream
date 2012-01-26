@@ -12,35 +12,6 @@ $(function(){
       rMax : 200, 
       center: {x : 220, y : 220}           
     };
-    cheesecakeData.highlightedSectorCallback = function(cheesecake){
-      $("#contacts_grid").css("overflow-y","hidden");   
-      var sector = cheesecake.highlightedSector;
-      var actors = [];
-      var visibles = 0;
-      var extra_text = ["<%= t('cheesecake.hidden_contact.one')%>","<%= t('cheesecake.hidden_contact.other')%>"];
-      if(sector){
-          actors = sector.actors;           
-      }else{         
-          actors = cheesecake.grid.actors;    
-      }
-      for(var i in actors){
-        if(!actors[i].isFiltered()){
-          visibles++;
-        }
-      }        
-      if(visibles <= 30){
-        $("#contacts_grid_extra").css("opacity",0);
-      }else{
-        $("#contacts_grid_extra_total").html(visibles - 30);
-        if((visibles - 30) == 1){
-          $("#contacts_grid_extra_text").html(extra_text[0]);
-        }else{
-          $("#contacts_grid_extra_text").html(extra_text[1]);
-        }          
-        $("#contacts_grid_extra").css("opacity",1);
-        $("#contacts_grid").scrollTo(0, 1000);
-      }  
-    }
     cheesecakeData.sectors = <%= raw(current_subject.cheesecake_json) %>.sectors;
     var cheese = new socialCheesecake.Cheesecake(cheesecakeData);  
     $("#contacts_filter_input").keyup(function(){
