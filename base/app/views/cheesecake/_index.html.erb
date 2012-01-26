@@ -7,18 +7,17 @@
   <span id="contacts_selector_clear">Unselect all</span>
 </div>
 <div id="contacts_grid">
-  <div id="contacts_grid_selected">
-    <br class="clearfloat">
-  </div>
   <div id="contacts_grid_saving" style="display:none;">
     <%= image_tag('loading.gif') %>
   </div>
-  <% @actors.each do |actor|%>
-    <%= render :partial => "actors/actor_cheesecake", :locals => {:actor => actor} %>
-  <% end %>
-</div>
-<div id="contacts_grid_extra" style="opacity:0;">
-  <span id="contacts_grid_extra_total"></span> <span id="contacts_grid_extra_text"></span>
+  <div id="contacts_grid_selected">
+    <br class="clearfloat">
+  </div>
+  <div id="contacts_grid_available">
+    <% @actors.each do |actor|%>
+      <%= render :partial => "actors/actor_cheesecake", :locals => {:actor => actor} %>
+    <% end %>
+  </div>
 </div>
 <div id="contacts_save" style="display:none;">
   <form action="<%= update_cheesecake_path %>" method="get" data-remote="true" id="contacts_save_form">
@@ -61,6 +60,9 @@
         $("#contacts_grid_selected").slideToggle("fast");
         $("#contacts_selector_modifiers").css("opacity",1);
       }
+      var height = 336 - Math.ceil(($("#contacts_grid_selected").children().length - 1) / 10) * 28;
+      if(height != $("#contacts_grid_available").height())
+        $("#contacts_grid_available").animate({height: height});
       $(this).slideToggle("fast");
     });
   };
@@ -74,6 +76,9 @@
         $("#contacts_grid_selected").slideToggle("fast");
         $("#contacts_selector_modifiers").css("opacity",0);
       }
+      var height = 336 - Math.ceil(($("#contacts_grid_selected").children().length - 1) / 10) * 28;
+      if(height != $("#contacts_grid_available").height())
+        $("#contacts_grid_available").animate({height: height});
       $(this).slideToggle("fast");
       clone.remove();
     });

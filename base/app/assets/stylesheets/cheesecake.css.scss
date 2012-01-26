@@ -54,9 +54,16 @@
   position: relative;
   float: left;
 }
+#contacts_grid_available {
+  width: 300px;
+  height: 336px;
+  position: relative;
+  float: left;
+  overflow: auto;
+}
 #contacts_grid_saving {
   width: 280px;
-  height: 336px;
+  height: 100%;
   line-height: 336px;
   overflow: hidden;
   position: absolute;
@@ -64,20 +71,6 @@
   text-align: center;
   vertical-align: middle;
   background-color: $fill-color;
-}
-#contacts_grid_extra {
-  width: 270px;
-  text-align: center;
-  float: right;
-  margin-right: 20px;
-  cursor: pointer;
-  vertical-align: middle;
-  padding-top: 6px;
-  background: #DEEFF8;
-  padding-left: 10px;
-  display: block;
-  height: 20px;
-  font-weight: bold;
 }
 #contacts_save {
   width: 130px;
@@ -91,7 +84,6 @@
   overflow: visible; 
 }
 #contacts_save_button {
-  max-width: 130px;
   margin: 5px 0px 0px 0px;
   height: 25px;
   padding: 3px 10px 3px 10px;
