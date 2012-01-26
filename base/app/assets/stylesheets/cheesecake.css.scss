@@ -11,6 +11,7 @@
   padding: 0px;
   margin-top: 45px;  
   float: left;
+  position: relative;
 }
 #contacts_filter {
   width: 290px;
@@ -19,9 +20,9 @@
   float: left;
   padding: 5px;
 }
-
 #cheesecake #contacts_filter #contacts_filter_input {
   background: url('btn/search_icon.png') 5px 50% no-repeat white;
+  padding: 0 3px 0 22px;
   font-size: 11px;
   color: $main-color;
   border: solid 1px $input-border-color;
@@ -37,6 +38,17 @@
   overflow: hidden;
   position: relative;
   float: left;
+}
+#contacts_grid_saving {
+  width: 280px;
+  height: 336px;
+  line-height: 336px;
+  overflow: hidden;
+  position: absolute;
+  opacity: 0.80;
+  text-align: center;
+  vertical-align: middle;
+  background-color: $fill-color;
 }
 #contacts_grid_extra {
   width: 270px;

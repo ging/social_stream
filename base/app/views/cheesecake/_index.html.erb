@@ -3,7 +3,10 @@
 <div id="contacts_filter">
   <%= text_field_tag :filter_query, nil,:autocomplete => :off, :id => :contacts_filter_input %>    
 </div>
-<div id="contacts_grid">    
+<div id="contacts_grid">
+  <div id="contacts_grid_saving" style="display:none;">
+    <%= image_tag('loading.gif') %>
+  </div>
   <% @actors.each do |actor|%>
     <%= render :partial => "actors/actor_cheesecake", :locals => {:actor => actor} %>
   <% end %>
@@ -11,7 +14,7 @@
 <div id="contacts_grid_extra" style="opacity:0;">
   <span id="contacts_grid_extra_total"></span> <span id="contacts_grid_extra_text"></span>
 </div>
-<div id="contacts_save">
+<div id="contacts_save" style="display:none;">
   <form action="<%= update_cheesecake_path %>" method="get" data-remote="true" id="contacts_save_form">
      <input type="submit" id="contacts_save_button" value="<%= t('cheesecake.changes.save') %>">
      <input type="hidden" id="contacts_save_changes" name="contacts_save_changes">

@@ -52,8 +52,10 @@ $(function(){
       var changes = cheesecake.getChanges();
       if((changes.actors)&&(changes.actors.length==0)&&(changes.sectors)&&(changes.sectors.length==0)&&(changes.subsectors)&&(changes.subsectors.length==0)){
         $("#contacts_changes_button").hide();
+        $("#contacts_save").hide();
       }else{
         $("#contacts_changes_button").show();
+        $("#contacts_save").show();
         var total = 0;
         if(changes.actors)
             total += changes.actors.length;
@@ -163,4 +165,13 @@ $(function(){
         });
       }
     });
+    $("#contacts_save_form").submit(function(){
+      if($(".contacts_changes_tipsy_menu").length != 0){
+        $("#contacts_changes_button").tipsy("hide");
+      }
+      $("#contacts_grid_saving").show();
+      cheese.disable();
+      $("#contacts_save_button").val("<%= t('cheesecake.changes.saving') %>").attr("disabled","true");
+    });
+    $("#contacts_save_changes").val(JSON.stringify(cheese.getChanges()));
 });      

@@ -3,7 +3,7 @@
 <% end %>
 
 <div id="<%= dom_id(actor)%>_details" style="display:none;">
-  <%= link_to truncate_name(actor.name), actor.subject %>
+  <%= link_to truncate_name(actor.name), actor.subject, :target => "_blank" %>
 </div>
 
 <%= javascript_tag do %>

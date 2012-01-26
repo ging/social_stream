@@ -96,6 +96,7 @@ es:
       details: "Cambios detallados"
       none: "Sin cambios"
       save: "Guardar cambios"
+      saving: "Guardando..."
     hidden_contact:
       one: "contacto oculto"
       other: "contactos ocultos"
