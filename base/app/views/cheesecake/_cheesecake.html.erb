@@ -174,4 +174,5 @@ $(function(){
       $("#contacts_save_button").val("<%= t('cheesecake.changes.saving') %>").attr("disabled","true");
     });
     $("#contacts_save_changes").val(JSON.stringify(cheese.getChanges()));
+    $(".actor").on("click.unselected_actor",unselected_actor_click);
 });      

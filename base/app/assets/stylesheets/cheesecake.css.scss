@@ -151,30 +151,36 @@
   float: left;
   margin: 4px;
   display: none;
-}
-#contacts_grid .actor.focused {
-  border: 2px solid $main-color;
-  margin: 0px;
+  opacity: 0.8;
 }
 #contacts_grid .actor img {
   width: 48px;
   height: 48px;
 }
-#contacts_grid .actor.focused img {
-  width: 52px;
-  height: 52px;
-}
 #contacts_grid .actor.focused {
-  width: 52px;
-  height: 52px;
+  opacity: 1;
+}
+#contacts_grid .actor.focused img {
+
+}
+#contacts_grid_selected .actor {
+  border: 0px;
+  margin: 0px;
+  width: 26px;
+  height: 26px;
   float: left;
   margin: 0px;
 }
-#contacts_grid .actor .logo {
-  display: inline-block;
+#contacts_grid_selected .actor img {
+  width: 24px;
+  height: 24px;
 }
-#contacts_grid .actor .link, #contacts_grid .actor .brief {
-  display: none;
+#contacts_grid_selected{
+  width: 280px;
+  min-height: 56px;
+  max-height: 180px;
+  background-color: $fill-color;
+  overflow: visible;
 }
 .cheesecake_actor_tipsy.tipsy {
   padding-top: 2px;

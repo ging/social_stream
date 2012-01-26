@@ -4,6 +4,9 @@
   <%= text_field_tag :filter_query, nil,:autocomplete => :off, :id => :contacts_filter_input %>    
 </div>
 <div id="contacts_grid">
+  <div id="contacts_grid_selected">
+    <br class="clearfloat">
+  </div>
   <div id="contacts_grid_saving" style="display:none;">
     <%= image_tag('loading.gif') %>
   </div>
@@ -42,5 +45,27 @@
     $("#contacts_grid").scrollTo("+=308px", 800, {axis:'y'});
     $("#contacts_grid_extra").css("opacity",0);
   });
+  var unselected_actor_click = function(){
+    var clone = $(this).clone();
+    clone.attr("id",$(this).attr("id") + "_selected");
+    $(this).slideToggle("fast",function(){
+      clone.hide();
+      $(this).before(clone);
+      $("#contacts_grid_selected br.clearfloat").before($(this));
+      $(this).off("click.unselected_actor");
+      $(this).on("click.selected_actor", selected_actor_click);
+      $(this).slideToggle("fast");
+    });
+  };
+  var selected_actor_click = function(){
+    var clone = $("#" + $(this).attr("id") + "_selected");
+    $(this).slideToggle("fast",function(){
+      clone.before($(this));
+      $(this).off("click.selected_actor");
+      $(this).on("click.unselected_actor", unselected_actor_click);
+      $(this).slideToggle("fast");
+      clone.remove();
+    });
+  };
   <%= render :partial => 'cheesecake' %>
 <% end %>
