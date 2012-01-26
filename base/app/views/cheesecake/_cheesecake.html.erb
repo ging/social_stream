@@ -140,39 +140,18 @@ $(function(){
       }       
       $("#contacts_grid_extra").css("opacity",1);
     }
-    $(document).ready(function(){
-      $('#contacts_changes_button').tipsy({
-        delayIn: 0,
-        delayOut: 0,
-        gravity: 'se',
-        opacity: 1,
-        trigger: 'manual',
-        className: 'contacts_changes_tipsy_menu',
-        html: true,
-        hoverable: true,
-        title: function(){
-          return $('#contacts_changes').html();
-        }
-      });
-    });
-    $("#contacts_changes_button").click(function(){
-      if($(".contacts_changes_tipsy_menu").length != 0){
-        $("#contacts_changes_button").tipsy("hide");
-      }else{
-        $("#contacts_changes_button").tipsy("show");
-        $("#contacts_changes_title").click(function(){
-          $("#contacts_changes_button").tipsy("hide");
-        });
+    $('#contacts_changes_button').tipsy({
+      delayIn: 0,
+      delayOut: 0,
+      gravity: 'se',
+      opacity: 1,
+      trigger: 'manual',
+      className: 'contacts_changes_tipsy_menu',
+      html: true,
+      hoverable: true,
+      title: function(){
+        return $('#contacts_changes').html();
       }
-    });
-    $("#contacts_save_form").submit(function(){
-      if($(".contacts_changes_tipsy_menu").length != 0){
-        $("#contacts_changes_button").tipsy("hide");
-      }
-      $("#contacts_grid_saving").show();
-      cheese.disable();
-      $("#contacts_save_button").val("<%= t('cheesecake.changes.saving') %>").attr("disabled","true");
     });
     $("#contacts_save_changes").val(JSON.stringify(cheese.getChanges()));
-    $(".actor").on("click.unselected_actor",unselected_actor_click);
 });      

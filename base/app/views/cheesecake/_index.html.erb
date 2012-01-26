@@ -3,6 +3,9 @@
 <div id="contacts_filter">
   <%= text_field_tag :filter_query, nil,:autocomplete => :off, :id => :contacts_filter_input %>    
 </div>
+<div id="contacts_selector_modifiers">
+  <span id="contacts_selector_clear">Unselect all</span>
+</div>
 <div id="contacts_grid">
   <div id="contacts_grid_selected">
     <br class="clearfloat">
@@ -54,6 +57,10 @@
       $("#contacts_grid_selected br.clearfloat").before($(this));
       $(this).off("click.unselected_actor");
       $(this).on("click.selected_actor", selected_actor_click);
+      if($("#contacts_grid_selected").css("display")=="none"){
+        $("#contacts_grid_selected").slideToggle("fast");
+        $("#contacts_selector_modifiers").css("opacity",1);
+      }
       $(this).slideToggle("fast");
     });
   };
@@ -63,9 +70,37 @@
       clone.before($(this));
       $(this).off("click.selected_actor");
       $(this).on("click.unselected_actor", unselected_actor_click);
+      if($("#contacts_grid_selected").children().length <= 1){
+        $("#contacts_grid_selected").slideToggle("fast");
+        $("#contacts_selector_modifiers").css("opacity",0);
+      }
       $(this).slideToggle("fast");
       clone.remove();
     });
   };
+  $("#contacts_selector_clear").on("click",function(){
+    $("#contacts_grid_selected .actor").each(function(){
+      $(this).click();
+    });
+  });
+  $(".actor").on("click.unselected_actor",unselected_actor_click);
+  $("#contacts_changes_button").click(function(){
+      if($(".contacts_changes_tipsy_menu").length != 0){
+        $("#contacts_changes_button").tipsy("hide");
+      }else{
+        $("#contacts_changes_button").tipsy("show");
+        $("#contacts_changes_title").click(function(){
+          $("#contacts_changes_button").tipsy("hide");
+        });
+      }
+    });
+    $("#contacts_save_form").submit(function(){
+      if($(".contacts_changes_tipsy_menu").length != 0){
+        $("#contacts_changes_button").tipsy("hide");
+      }
+      $("#contacts_grid_saving").show();
+      cheese.disable();
+      $("#contacts_save_button").val("<%= t('cheesecake.changes.saving') %>").attr("disabled","true");
+    });
   <%= render :partial => 'cheesecake' %>
 <% end %>
