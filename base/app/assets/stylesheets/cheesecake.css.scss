@@ -21,7 +21,6 @@
 }
 
 #cheesecake #contacts_filter #contacts_filter_input {
-  padding: 0 3px 0 22px;
   background: url('btn/search_icon.png') 5px 50% no-repeat white;
   font-size: 11px;
   color: $main-color;
@@ -54,9 +53,9 @@
   font-weight: bold;
 }
 #contacts_save {
-  width: 270px;
+  width: 130px;
   padding-right: 5px;
-  height: 25px;
+  height: 30px;
   text-align: right;
   float: right;
   margin-right: 20px;
@@ -64,30 +63,63 @@
 #contacts_save_form {
   overflow: visible; 
 }
+#contacts_save_button {
+  max-width: 130px;
+  margin: 5px 0px 0px 0px;
+  height: 25px;
+  padding: 3px 10px 3px 10px;
+}
 #contacts_changes {
-  width: 705px;
-  margin-left: 20px;
+  width: 500px;
+  background-color: $text-over-main;
+  display: none;
+}
+#contacts_changes_button {
+  width: 130px;
+  height: 25px;
+  float: right;
+  margin-top: 10px;
+  cursor: pointer;
 }
 #contacts_changes_title {
   vertical-align: middle;
   padding-top: 6px;
-  background: $secondary-color;
   padding-left: 10px;
   display: block;
   height: 20px;
   font-weight: bold;
   cursor: pointer;
+  width: 500px;
+  border: solid 2px $main-color;
+  border-bottom: none;
+  background: url('cancel.png') 487px 50% no-repeat $secondary-color;
 }
 #contacts_changes_details {
-  border: solid 1px $secondary-color;
   border-top: 0px;
   padding: 5px;
-  display: none;
-  max-height: 200px;
+  height: 300px;
+  width: 500px;
+  overflow-y: auto;
+  background-color: $text-over-main;
+  border: solid 2px $main-color;
+  border-top: none;
   overflow-y: auto;
 }
 #contacts_changes_details ul{
   padding-left: 20px;
+}
+.contacts_changes_tipsy_menu.tipsy {
+  padding: 0px;
+  display: none;
+  width: 514px;
+  height: 340px;
+}
+.contacts_changes_tipsy_menu.tipsy .tipsy-arrow {
+  display: none;
+}
+.contacts_changes_tipsy_menu.tipsy .tipsy-inner {
+  background-color: $text-over-main;
+  padding:0px;
 }
 #contacts_changes_details .change_deleted{
   font-weight: bold;
