@@ -8,24 +8,25 @@
     <%= render :partial => "actors/actor_cheesecake", :locals => {:actor => actor} %>
   <% end %>
 </div>
-<div id="contacts_grid_extra" style="display:none;">    
+<div id="contacts_grid_extra" style="opacity:0;">
   <span id="contacts_grid_extra_total"></span> <span id="contacts_grid_extra_text"></span>
 </div>
 <div id="contacts_save">
   <form action="<%= update_cheesecake_path %>" method="get" data-remote="true" id="contacts_save_form">
-     <input type="submit" id="contacts_save_button" value="Save changes">
+     <input type="submit" id="contacts_save_button" value="<%= t('cheesecake.changes.save') %>">
      <input type="hidden" id="contacts_save_changes" name="contacts_save_changes">
   </form>
+</div>
+<div id="contacts_changes_button" style="display:none;">
+  <%= t('cheesecake.changes.details') %> (<span id="contacts_changes_button_total">0</span>)
 </div>
 <br class="clearfloat"> 
 <div id="contacts_changes">
   <div id="contacts_changes_title">
-   Changes details
+   <%= t('cheesecake.changes.details') %>
   </div>
   <div id="contacts_changes_details">
-    <ul>
-      <li>Working on it :)</li>
-    </ul>
+
   </div>
 </div>
 <%= javascript_tag do %>
@@ -36,12 +37,7 @@
   $("#contacts_grid_extra").click(function(){
     $("#contacts_grid").css("overflow-y","scroll");
     $("#contacts_grid").scrollTo("+=308px", 800, {axis:'y'});
-    $("#contacts_grid_extra").hide();
-  });
-  $("#contacts_changes_title").click(function(){
-    $("#contacts_changes_details").slideToggle("slow", function(){
-      $.scrollTo('#contacts_changes_details' ,300,{axis:'y'});
-    });
+    $("#contacts_grid_extra").css("opacity",0);
   });
   <%= render :partial => 'cheesecake' %>
 <% end %>

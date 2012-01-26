@@ -24,12 +24,12 @@ $(function(){
           actors = cheesecake.grid.actors;    
       }
       for(var i in actors){
-        if(actors[i].isVisible()){
+        if(!actors[i].isFiltered()){
           visibles++;
         }
       }        
       if(visibles <= 30){
-        $("#contacts_grid_extra").hide();          
+        $("#contacts_grid_extra").css("opacity",0);
       }else{
         $("#contacts_grid_extra_total").html(visibles - 30);
         if((visibles - 30) == 1){
@@ -37,7 +37,7 @@ $(function(){
         }else{
           $("#contacts_grid_extra_text").html(extra_text[1]);
         }          
-        $("#contacts_grid_extra").show();
+        $("#contacts_grid_extra").css("opacity",1);
         $("#contacts_grid").scrollTo(0, 1000);
       }  
     }
@@ -50,6 +50,19 @@ $(function(){
     cheese.onChange = function(cheesecake){
       var initial = cheesecake.getInitialState();
       var changes = cheesecake.getChanges();
+      if((changes.actors)&&(changes.actors.length==0)&&(changes.sectors)&&(changes.sectors.length==0)&&(changes.subsectors)&&(changes.subsectors.length==0)){
+        $("#contacts_changes_button").hide();
+      }else{
+        $("#contacts_changes_button").show();
+        var total = 0;
+        if(changes.actors)
+            total += changes.actors.length;
+        if(changes.sectors)
+            total += changes.sectors.length;
+        if(changes.subsectors)
+            total += changes.subsectors.length;
+        $("#contacts_changes_button_total").html(total);
+      }
       var changes_html = "";
       var actors = changes.actors;
       $("#contacts_save_changes").val(JSON.stringify(changes));
@@ -114,9 +127,6 @@ $(function(){
         }
       }
       $("#contacts_changes_details").html(changes_html);
-      if (!$("#contacts_changes_details").is (":visible")){
-        $("#contacts_changes_details").slideToggle("slow");
-      }
     }
     if(cheese.grid.actors.length > 30){    
       var extra_text = ["<%= t('cheesecake.hidden_contact.one')%>","<%= t('cheesecake.hidden_contact.other')%>"];
@@ -126,6 +136,31 @@ $(function(){
       }else{
         $("#contacts_grid_extra_text").html(extra_text[1]);
       }       
-      $("#contacts_grid_extra").show();     
+      $("#contacts_grid_extra").css("opacity",1);
     }
+    $(document).ready(function(){
+      $('#contacts_changes_button').tipsy({
+        delayIn: 0,
+        delayOut: 0,
+        gravity: 'se',
+        opacity: 1,
+        trigger: 'manual',
+        className: 'contacts_changes_tipsy_menu',
+        html: true,
+        hoverable: true,
+        title: function(){
+          return $('#contacts_changes').html();
+        }
+      });
+    });
+    $("#contacts_changes_button").click(function(){
+      if($(".contacts_changes_tipsy_menu").length != 0){
+        $("#contacts_changes_button").tipsy("hide");
+      }else{
+        $("#contacts_changes_button").tipsy("show");
+        $("#contacts_changes_title").click(function(){
+          $("#contacts_changes_button").tipsy("hide");
+        });
+      }
+    });
 });      

@@ -92,6 +92,10 @@ es:
     save: "Guardar"
     update: "Actualizar"
   cheesecake:
+    changes:
+      details: "Cambios detallados"
+      none: "Sin cambios"
+      save: "Guardar cambios"
     hidden_contact:
       one: "contacto oculto"
       other: "contactos ocultos"
