@@ -97,9 +97,6 @@ es:
       none: "Sin cambios"
       save: "Guardar cambios"
       saving: "Guardando..."
-    hidden_contact:
-      one: "contacto oculto"
-      other: "contactos ocultos"
   comment:
     input: "Comentar..."
     confirm_delete: "¿Borrar commentario?"

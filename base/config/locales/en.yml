@@ -97,9 +97,6 @@ en:
       none: "No changes"
       save: "Save changes"
       saving: "Saving..."
-    hidden_contact:
-      one: "hidden contact"
-      other: "hidden contacts"
   comment:
     input: "Write a comment..."
     confirm_delete: "Delete comment?"
