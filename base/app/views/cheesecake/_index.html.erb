@@ -85,27 +85,30 @@
   };
   $("#contacts_selector_clear").on("click",function(){
     $("#contacts_grid_selected .actor").each(function(){
-      $(this).click();
+      var evt = document.createEvent("MouseEvents");
+      evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+      var cb = $(this)[0];
+      !cb.dispatchEvent(evt);
     });
   });
   $(".actor").on("click.unselected_actor",unselected_actor_click);
   $("#contacts_changes_button").click(function(){
-      if($(".contacts_changes_tipsy_menu").length != 0){
+    if($(".contacts_changes_tipsy_menu").length != 0){
+      $("#contacts_changes_button").tipsy("hide");
+    }else{
+      $("#contacts_changes_button").tipsy("show");
+      $("#contacts_changes_title").click(function(){
         $("#contacts_changes_button").tipsy("hide");
-      }else{
-        $("#contacts_changes_button").tipsy("show");
-        $("#contacts_changes_title").click(function(){
-          $("#contacts_changes_button").tipsy("hide");
-        });
-      }
-    });
-    $("#contacts_save_form").submit(function(){
-      if($(".contacts_changes_tipsy_menu").length != 0){
-        $("#contacts_changes_button").tipsy("hide");
-      }
-      $("#contacts_grid_saving").show();
-      cheese.disable();
-      $("#contacts_save_button").val("<%= t('cheesecake.changes.saving') %>").attr("disabled","true");
-    });
+      });
+    }
+  });
+  $("#contacts_save_form").submit(function(){
+    if($(".contacts_changes_tipsy_menu").length != 0){
+      $("#contacts_changes_button").tipsy("hide");
+    }
+    $("#contacts_grid_saving").show();
+    cheese.disable();
+    $("#contacts_save_button").val("<%= t('cheesecake.changes.saving') %>").attr("disabled","true");
+  });
   <%= render :partial => 'cheesecake' %>
 <% end %>

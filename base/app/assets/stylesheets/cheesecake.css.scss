@@ -173,9 +173,10 @@
 }
 #contacts_grid .actor.focused {
   opacity: 1;
+  background: #F00;
 }
 #contacts_grid .actor.focused img {
-
+  opacity: 0;
 }
 #contacts_grid_selected .actor {
   border: 0px;
@@ -188,6 +189,12 @@
 #contacts_grid_selected .actor img {
   width: 24px;
   height: 24px;
+}
+#contacts_grid_selected.focused .actor {
+  background: #F00;
+}
+#contacts_grid_selected .actor.focused img {
+  opacity: 0;
 }
 #contacts_grid_selected {
   width: 280px;
