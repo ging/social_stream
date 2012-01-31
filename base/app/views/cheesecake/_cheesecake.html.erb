@@ -13,9 +13,17 @@ $(function(){
       center: {x : 220, y : 220}           
     };
     cheesecakeData.sectors = <%= raw(current_subject.cheesecake_json) %>.sectors;
-    var cheese = new socialCheesecake.Cheesecake(cheesecakeData);  
+    var cheese = new socialCheesecake.Cheesecake(cheesecakeData);
+    cheese.syncSectorFocusCallbacks = true;
+    cheese.onSectorFocusBegin = function(cheesecake,callback){
+      $("#contacts_grid_available").fadeOut("fast", callback);
+    };
+    cheese.onSectorFocusEnd = function(cheesecake){
+      console.log("end"); $("#contacts_grid_available").fadeIn("fast");
+    };
     $("#contacts_filter_input").keyup(function(){
       cheese.searchEngine.filter($("#contacts_filter_input").val());
+      //TODO: Make users unfiltered visible again
     });    
     cheese.onChange = function(cheesecake){
       var initial = cheesecake.getInitialState();
