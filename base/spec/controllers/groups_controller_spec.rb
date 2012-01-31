@@ -87,6 +87,7 @@ describe GroupsController do
         Group.count.should eq(count + 1)
         assigns(:current_subject).should eq(group)
         response.should redirect_to(:home)
+        @user.receivers.should include(group.actor)
       end
 
       context "with participants" do
@@ -171,6 +172,8 @@ describe GroupsController do
         Group.count.should eq(count + 1)
         assigns(:current_subject).should eq(group)
         response.should redirect_to(:home)
+        @user.receivers.should include(group.actor)
+        @group.receivers.should include(group.actor)
       end
     end
   end

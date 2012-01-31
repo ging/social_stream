@@ -37,7 +37,8 @@ class Group < ActiveRecord::Base
                                  :relation_ids => _relation_ids
 
     if represented_author?
-      # TODO: create tie with future representation relation
+      user_author.sent_contacts.create! :receiver_id  => actor_id,
+                                        :relation_ids => _relation_ids
     end
   end
   

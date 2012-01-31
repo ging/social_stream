@@ -29,11 +29,6 @@ module SocialStream
         }
       end
 
-      # Was the author represented with this {SocialStream::Models::Object object} was created?
-      def represented_author?
-        author_id == user_author_id
-      end
-
       # All the activities with this object
       def activities
         Activity.

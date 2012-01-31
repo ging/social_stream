@@ -57,4 +57,9 @@ class Channel < ActiveRecord::Base
   def reflexive?
     author_id == owner_id
   end
+
+  # Is the author represented in this {Channel}?
+  def represented_author?
+    author_id != user_author_id
+  end
 end
