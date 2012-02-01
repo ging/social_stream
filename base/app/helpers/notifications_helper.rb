@@ -17,9 +17,9 @@ module NotificationsHelper
   # An activity object description
   def description_of(act_obj)
     if act_obj.respond_to? :text and (not act_obj.text.nil?)
-      sanitize(act_obj.text.truncate(100, :separator =>' '))
+      sanitize(act_obj.text)
     elsif act_obj.respond_to? :description and (not act_obj.description.nil?)
-      sanitize(act_obj.description.truncate(100, :separator =>' '))
+      sanitize(act_obj.description)
     else
       I18n.t('notification.watch_it')
     end
