@@ -9,7 +9,7 @@ end
 
 Factory.define :public_document, :parent => :document do |d|
   d.owner_id  { |q| q.author_id }
-  d._relation_ids { |q| Array(q.author.relation_public.id) }
+  d._relation_ids { |q| Array(Relation::Public.instance.id) }
 end
 
 Factory.define :private_document, :parent => :document do |d|

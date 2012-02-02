@@ -53,9 +53,10 @@ describe PostsController do
       end
 
       describe "with public relation" do
+        pending "Singleton single relations" do
         before do
           contact = @user.contact_to!(@user)
-          relation = @user.relation_public
+          relation = Relation::Public.instance
           model_assigned_to @user.contact_to!(@user), relation
           @current_model = Factory(:post, :author_id => @user.actor_id,
                                           :owner_id  => @user.actor_id,
@@ -64,6 +65,7 @@ describe PostsController do
 
         it_should_behave_like "Allow Creating"
         it_should_behave_like "Allow Destroying"
+	end
       end
     end
 
@@ -144,9 +146,10 @@ describe PostsController do
         end
 
         describe "with public relation" do
+	  pending "Singleton single relations" do
           before do
             contact = @group.contact_to!(@group)
-            relation = @group.relation_public
+            relation = Relation::Public.instance
             model_assigned_to contact, relation
             @current_model = Factory(:post,  :author_id => contact.sender.id,
                                              :owner_id  => contact.receiver.id,
@@ -156,6 +159,7 @@ describe PostsController do
 
           it_should_behave_like "Allow Creating"
           it_should_behave_like "Allow Destroying"
+	  end
         end
       end
     end

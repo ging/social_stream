@@ -205,16 +205,6 @@ class Actor < ActiveRecord::Base
     relations.joins(:relation_permissions => :permission).where('permissions.action' => 'notify')
   end
 
-  # The {Relation::Public} for this {Actor} 
-  def relation_public
-    Relation::Public.of(self)
-  end
-
-  # The {Relation::Reject} for this {Actor} 
-  def relation_reject
-    Relation::Reject.of(self)
-  end
- 
   # All the {Actor Actors} this one has ties with:
   # 
   #   actor.contact_actors #=> array of actors that sent and receive ties from actor
@@ -381,7 +371,7 @@ class Actor < ActiveRecord::Base
   #
   def activity_relations(subject, options = {})
     if Actor.normalize(subject) == self
-      return relation_customs + Array.wrap(relation_public)
+      return relation_customs + Array.wrap(Relation::Public.instance)
     else
       Array.new
     end
@@ -507,7 +497,7 @@ class Actor < ActiveRecord::Base
                                                                     id
     a = Activity.new :verb => "like",
                      :channel => channel,
-                     :relation_ids => Array(subject.relation_public.id)
+                     :relation_ids => Array(Relation::Public.instance.id)
     
     a.activity_objects << activity_object           
                     
@@ -534,8 +524,6 @@ class Actor < ActiveRecord::Base
   # After create callback
   def create_initial_relations
     Relation::Custom.defaults_for(self)
-    Relation::Public.default_for(self)
-    Relation::Reject.default_for(self)
   end
 
   # After create callback

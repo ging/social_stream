@@ -141,7 +141,7 @@ class Tie < ActiveRecord::Base
 
   def relation_belongs_to_sender
     errors.add(:relation, "must belong to sender") unless
-      contact.sender_id == relation.actor_id
+      relation.actor_id.nil? or contact.sender_id == relation.actor_id
   end
 end
 

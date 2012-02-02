@@ -55,8 +55,6 @@ class Relation < ActiveRecord::Base
   has_many :audiences, :dependent => :destroy
   has_many :activities, :through => :audiences
 
-  validates_presence_of :actor_id
-
   scope :actor, lambda { |a|
     where(:actor_id => Actor.normalize_id(a))
   }
@@ -126,11 +124,6 @@ class Relation < ActiveRecord::Base
       conds =
         Permission.arel_table[:action].eq(action).and(Permission.arel_table[:object].eq(object))
 
-      # Relation::Public permissions cannot be customized yet
-      if action == 'read' && object == 'activity' && (options[:public].nil? || options[:public])
-        conds = conds.or(Relation.arel_table[:type].eq('Relation::Public'))
-      end
-
       # Add in condition
       if ! options[:in].nil?
         conds = conds.and(Relation.arel_table[:id].in(Relation.normalize_id(Array(options[:in]))))
@@ -138,6 +131,11 @@ class Relation < ActiveRecord::Base
 
       # subject conditions
       conds = conds.and(Contact.arel_table[:receiver_id].eq(Actor.normalize_id(subject)))
+
+      # Relation::Public permissions cannot be customized and should not depend on the subject
+      if action == 'read' && object == 'activity' && (options[:public].nil? || options[:public])
+        conds = conds.or(Relation.arel_table[:type].eq('Relation::Public'))
+      end
 
       q.where(conds)
     end

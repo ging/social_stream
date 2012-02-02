@@ -5,13 +5,8 @@
 #
 class Relation::Single < Relation
   class << self
-    def default_for(actor)
-      create! :actor => actor
-    end
-
-    # The {Relation::Public} belonging to actor
-    def of(actor)
-      actor(actor).first
+    def instance
+      first || create!
     end
   end
 

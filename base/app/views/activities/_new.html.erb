@@ -25,7 +25,7 @@
 <div id="securities">
   <% if current_subject == receiver %>  
     <%= javascript_tag do %>
-      var relation_public = <%= receiver.relation_public.id %>;
+      var relation_public = <%= Relation::Public.instance.id %>;
       var public_selected = false;
       var relation_options = <%= escape_javascript(current_subject.activity_relations(receiver).sort.map{ |r| r.id }.to_json) %>;
       var relation_public_pos = 0;

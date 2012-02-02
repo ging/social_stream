@@ -9,7 +9,7 @@ end
 
 Factory.define :public_picture, :parent => :picture do |p|
   p.owner_id  { |q| q.author_id }
-  p._relation_ids { |q| Array(q.author.relation_public.id) }
+  p._relation_ids { |q| Array(Relation::Public.instance.id) }
 end
 
 Factory.define :private_picture, :parent => :picture do |p|

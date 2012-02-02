@@ -12,7 +12,7 @@ class AddRejectRelation < ActiveRecord::Migration
           logger.warn "Public contact #{ t.contact_id } has #{ contact.ties_count }, when expecting 1"
         end
 
-        t.update_attribute :relation_id, t.sender.relation_reject.id
+        t.update_attribute :relation_id, Relation::Reject.instance.id
       end
   end
 
@@ -21,7 +21,7 @@ class AddRejectRelation < ActiveRecord::Migration
       includes(:relation, :contact).
       merge(Relation.where(:type => 'Relation::Reject')).
       each do |t|
-        t.update_attribute :relation_id, t.sender.relation_public.id
+        t.update_attribute :relation_id, Relation::Public.instance.id
       end
 
     Relation::Reject.destroy_all

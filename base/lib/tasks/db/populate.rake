@@ -125,7 +125,7 @@ namespace :db do
       # = Ties
       available_actors.each do |a|
         actors = available_actors.dup - Array(a)
-        relations = a.relation_customs + Array.wrap(a.relation_reject)
+        relations = a.relation_customs + Array.wrap(Relation::Reject.instance)
         break if actors.size==0        
         if CHEESECAKE     
           actor = Actor.first

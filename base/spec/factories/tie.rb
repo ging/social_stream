@@ -13,11 +13,11 @@ Factory.define :acquaintance, :parent => :tie do |t|
 end
 
 Factory.define :public, :parent => :tie do |t|
-  t.after_build { |u| u.relation = u.sender.relation_public }
+  t.after_build { |u| u.relation = Relation::Public.instance }
 end
 
 Factory.define :reject, :parent => :tie do |t|
-  t.after_build { |u| u.relation = u.sender.relation_reject }
+  t.after_build { |u| u.relation = Relation::Reject.instance }
 end
 
 # Group ties
@@ -38,6 +38,6 @@ Factory.define :partner, :parent => :g2g_tie do |t|
 end
 
 Factory.define :group_public, :parent => :g2g_tie do |t|
-  t.after_build { |u| u.relation = u.sender.relation_public }
+  t.after_build { |u| u.relation = Relation::Public.instance }
 end
 

@@ -34,7 +34,7 @@ class ContactsController < ApplicationController
   end
 
   def destroy
-    @contact.relation_ids = [current_subject.relation_reject.id]
+    @contact.relation_ids = [Relation::Reject.instance.id]
 
     respond_to do |format|
       format.js

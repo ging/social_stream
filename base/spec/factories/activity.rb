@@ -35,7 +35,7 @@ Factory.define :self_activity, :parent => :activity do |a|
 end
 
 Factory.define :public_activity, :parent => :activity do |a|
-  a.relation_ids  { |b| Array(b.sender.relation_public.id) }
+  a.relation_ids  { |b| Array(Relation::Public.instance.id) }
 end
 
 Factory.define :like_activity, :class => 'Activity' do |a|

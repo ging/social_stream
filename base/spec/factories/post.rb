@@ -7,5 +7,5 @@ end
 
 Factory.define :public_post, :parent => :post do |p|
   p.owner_id  { |q| q.author_id }
-  p._relation_ids { |q| Array(q.author.relation_public.id) }
+  p._relation_ids { |q| Array(Relation::Public.instance.id) }
 end
