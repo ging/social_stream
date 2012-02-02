@@ -20,7 +20,7 @@ $(function(){
     $("#contacts_grid_available").fadeOut("fast", callback);
   };
   cheese.onSectorFocusEnd = function(cheesecake){
-    console.log("end"); $("#contacts_grid_available").fadeIn("fast");
+    $("#contacts_grid_available").fadeIn("fast");
   };
   $("#contacts_filter_input").keyup(function(){
     cheese.searchEngine.filter($("#contacts_filter_input").val());
