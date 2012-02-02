@@ -31,6 +31,10 @@ class SingletonSingleRelations < ActiveRecord::Migration
         t.update_column(:relation_id, r_new.id)
       end
 
+      r.audiences.each do |a|
+        a.update_column(:relation_id, r_new.id)
+      end
+
       # Delete r
       r.delete
     end
