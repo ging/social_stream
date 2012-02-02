@@ -4,31 +4,25 @@
 	<script type="text/javascript">
 
     //Global variables
-		var BOSH_SERVICE = '<%= SocialStream::Presence.bosh_service || root_url + "http-bind/" %>';
 		var cookie = "AuthenticationByCookie>>" + "<%=cookies[Rails.application.config.session_options[:key]]%>";
-		var domain = '<%=SocialStream::Presence.domain%>';
 		var user_name = '<%=current_user.name%>';
 		var user_slug = '<%=current_user.slug%>';
 		var user_jid = '<%=current_user.slug%>'+"@"+domain;
-		var sound_path = "/assets/audio/chat/onMessage";
 
 
-		$(document).ready(function () {	
+		$(document).ready(function () {
 			
-			  if (authByCookie()){
-					if (connectToServerWithCookie()==false){
-	          refreshChatWindow();
-	        }
+			  if(getRestoreUserChatStatus()!="offline"){
+					connectToChat(user_jid,cookie,null);
+					//connectToChat(user_jid,null,null); //To use auth by password.
+					
+					initialTimer = setTimeout("updateChatWindow()", 15000);
 				} else {
-					if (connectToServerWithPassword(null)==false){
-	          refreshChatWindow();
-	        }
+					initialTimer = setTimeout("updateChatWindow()", 1);
 				}
 				
-				initialTimer = setTimeout("updateChatWindow()", 15000);
 	      initAudio();
 				initFocusListeners();
-				
 		});
 		
 	</script>

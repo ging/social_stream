@@ -1,4 +1,12 @@
 ////////////////////
+//Global constants
+////////////////////
+var BOSH_SERVICE = '<%= SocialStream::Presence.bosh_service || root_url + "http-bind/" %>';
+var domain = '<%=SocialStream::Presence.domain%>';
+var sound_path = "/assets/audio/chat/onMessage";
+
+
+////////////////////
 //Hash table
 ////////////////////
 var statusMessage = new Array();
@@ -14,21 +22,35 @@ statusMessage['dnd'] = "Busy";
 //Connect functions
 ////////////////////
 
-function isStropheConnected(){
-	if((connection!=null)&&(connection.connected)){
-      return true;
-    } else {
-			return false;
-		}
+
+function connectToChat(user_jid,cookie,password){
+	
+	if (isStropheConnected()){
+    return true;
+  } 
+		
+	if (authByCookie()){
+    if (connectToServerWithCookie(user_jid, cookie)==false){
+      refreshChatWindow();
+    }
+  } else {
+    if (connectToServerWithPassword(user_jid,password)==false){
+      refreshChatWindow();
+    }
+  }       
 }
 
 
-function connectToServerWithCookie(){
-	
-		if (isStropheConnected()){
-			log("connectToServerWithCookie() returns: Strophe already connected");
-		}	   
-	    log("connectToServerWithCookie() calls");
+function isStropheConnected(){
+  if((connection!=null)&&(connection.connected)){
+      return true;
+    } else {
+      return false;
+    }
+}
+
+
+function connectToServerWithCookie(user_jid, cookie){ 
     try {
       connection = new Strophe.Connection(BOSH_SERVICE);
       connection.connect(user_jid, cookie, onConnect);
@@ -36,16 +58,13 @@ function connectToServerWithCookie(){
       //"Handle errors"
       return false;
     }
+		return true;
 }
 
 
 //Password: Get from chatPassword param if exists, instead try to get from sessionStorage.
-function connectToServerWithPassword(chatPassword){
+function connectToServerWithPassword(user_jid, chatPassword){
     
-		if (isStropheConnected()){
-      log("connectToServerWithPassword() returns: Strophe already connected");
-    }
-		
     //Get Password
     if ((chatPassword!=null)&&(chatPassword!="")){
       var password = chatPassword;
@@ -67,6 +86,7 @@ function connectToServerWithPassword(chatPassword){
     return true;
 }
 
+
 ////////
 //Auth Methods
 ///////
@@ -80,21 +100,17 @@ function authByPassword(){
   return authMethod=="password";
 }
 
-function ifCookie(){
-  return (!(typeof cookie == 'undefined'))
-}
-
 
 ////////////////////
 //Stanza management using Strophe
 ////////////////////
 
 //Global variables
-var userStatus = "chat";
+var userStatus;
 var awayTimerPeriod = 60000;
 var timerPeriod = 5000;
 var refreshMinTime = 3*timerPeriod;
-var awayTime = 20*60000; //20 minutes
+var awayTime = 10*60000; //10 minutes
 var awayCounter = 0;
 var timerCounter = 0;
 var connection = null;
@@ -103,116 +119,125 @@ var awayTimer;
 var timer;
 var reconnectTimer;
 var disconnectionFlag = true;
+var afterNewConnectionFlagFlag = false;
 var requestContacts=false;
 var cyclesToRefresh = (refreshMinTime/timerPeriod);
 
 
 function onConnect(status) {
-	
-	//Status.ERROR An error has occurred
-	//Status.CONNECTING The connection is currently being made
-	//Status.CONNFAIL The connection attempt failed
-	//Status.AUTHENTICATING The connection is authenticating
-	//Status.AUTHFAIL The authentication attempt failed
-	//Status.CONNECTED  The connection has succeeded
-	//Status.DISCONNECTED The connection has been terminated
-	//Status.DISCONNECTING  The connection is currently being terminated
-	//Status.ATTACHED The connection has been attached
-	
-	log('Strophe onConnect callback call with status ' + status);
-	
-	if (status == Strophe.Status.ATTACHED){
-	  log('Strophe connection attached');
-		return;
-	} 
-	
-	if (status == Strophe.Status.AUTHENTICATING ){
-    log('Strophe connection AUTHENTICATING');
-		return;
-  }
-	
-	if (status == Strophe.Status.CONNECTING) {
-    log('Strophe is connecting.');
-	  return;
+  
+  //Status.ERROR An error has occurred
+  //Status.CONNECTING The connection is currently being made
+  //Status.CONNFAIL The connection attempt failed
+  //Status.AUTHENTICATING The connection is authenticating
+  //Status.AUTHFAIL The authentication attempt failed
+  //Status.CONNECTED  The connection has succeeded
+  //Status.DISCONNECTED The connection has been terminated
+  //Status.DISCONNECTING  The connection is currently being terminated
+  //Status.ATTACHED The connection has been attached
+  
+  log('Strophe onConnect callback call with status ' + status);
+  
+  if (status == Strophe.Status.ATTACHED){
+    log('Strophe connection attached');
+    return;
   } 
-	
-	if (status == Strophe.Status.DISCONNECTING) {
+  
+  if (status == Strophe.Status.AUTHENTICATING ){
+    log('Strophe connection AUTHENTICATING');
+    return;
+  }
+  
+  if (status == Strophe.Status.CONNECTING) {
+    log('Strophe is connecting.');
+    return;
+  } 
+  
+  if (status == Strophe.Status.DISCONNECTING) {
     log('Strophe is disconnecting.');
     return;
   } 
-		
-	clearTimeout(initialTimer);
-		
-	if (status == Strophe.Status.CONNFAIL) {
+    
+  clearTimeout(initialTimer);
+    
+  if (status == Strophe.Status.CONNFAIL) {
     log('Strophe failed to connect.');
     reconnectTimer = setTimeout ("onReconnect()", 5000);
-		disconnectionFlag = true;
+    disconnectionFlag = true;
   } else if (status == Strophe.Status.AUTHFAIL) {
     log('Strophe authentication fail.');
-	    if ((window.sessionStorage)&&(sessionStorage.getItem("ss_user_pass") != null)){
-	      sessionStorage.setItem("ss_user_pass",null);
-	    }
-			disconnectionFlag = true;
+      if ((window.sessionStorage)&&(sessionStorage.getItem("ss_user_pass") != null)){
+        sessionStorage.setItem("ss_user_pass",null);
+      }
+      disconnectionFlag = true;
   } else if (status == Strophe.Status.ERROR) {
     log('Strophe error.');
-		disconnectionFlag = true;
+    disconnectionFlag = true;
   } else if (status == Strophe.Status.DISCONNECTED) {
     log('Strophe is disconnected.');
-		disconnectionFlag = true;
-	  clearTimeout(awayTimer);
-		notifyWhenUsersDisconnect();
-	  reconnectTimer = setTimeout ("onReconnect()", 5000);
+    disconnectionFlag = true;
+    clearTimeout(awayTimer);
+    notifyWhenUsersDisconnect();
+    reconnectTimer = setTimeout ("onReconnect()", 5000);
   } else if (status == Strophe.Status.CONNECTED) {
+    //AFTER CONNECT ACTIONS
+    
     log('Strophe is connected.');
-    log('Presenze stanza send for:' + connection.jid);
-		clearTimeout(reconnectTimer);
-    connection.addHandler(onMessage, null, 'message', null, null,  null);
-	  connection.addHandler(onPresence, null, 'presence', null, null,  null); 
+		
+    clearTimeout(reconnectTimer);
+		
     //addHandler:(callback, namespace to match, stanza name, stanza type, stanza id , stanza from, options)
-		disconnectionFlag = false;
-	  userStatus = "chat";
-	  sendStatus(userStatus);
+    connection.addHandler(onMessage, null, 'message', null, null,  null);
+    connection.addHandler(onPresence, null, 'presence', null, null,  null); 
+		
+    disconnectionFlag = false;
+    afterNewConnectionFlag = true;
+		
+		log('Presenze stanza send for:' + connection.jid);
+		userStatus = getRestoreUserChatStatus();
+		if(userStatus=="offline"){
+			userStatus="chat";
+		}
+    sendStatus(userStatus);
+		
     awayTimer = setInterval("awayTimerFunction()", awayTimerPeriod);
-	  timer = setInterval("timerFunction()", timerPeriod);
-		hideAllNotifications();
+    timer = setInterval("timerFunction()", timerPeriod);
+		
+    hideAllNotifications();
   }
-	
-	updateChatWindow();
+  
+  updateChatWindow();
 }
 
 function onReconnect(){
-	
-	if ((!isStropheConnected())&&(userStatus!="offline")) {
-		
-		if (reconnectAttempts>0) {
-			reconnectAttempts--;
+  
+  if ((!isStropheConnected())&&(userStatus!="offline")) {
+    
+    if (reconnectAttempts>0) {
+      reconnectAttempts--;
+      
+      $("#chat_header_title").html('<%=I18n.t('chat.reconnecting')%>')
 			
-			$("#chat_header_title").html(I18n.t('chat.reconnecting'))
+			connectToChat(user_jid,cookie,null);
 			
-			if (authByCookie()){
-        //Authentication by cookie
-        connectToServerWithCookie(); 
-      } else {
-        //Authentication by password
-        connectToServerWithPassword(null);
-      }
       reconnectTimer = setTimeout ("onReconnect()", 9000);
-		} else {
-			$("#chat_header_title").html(I18n.t('chat.unableconnect'))
-			//Notify issue to Rails App Server?
-		}
-		
-	}
+			
+    } else {
+      $("#chat_header_title").html('<%=I18n.t('chat.unableconnect')%>')
+      //Notify issue to Rails App Server?
+    }
+    
+  }
 }
 
 function disconnectStrophe(){
-	userStatus = "offline";
-	setStatusWidgetTitle("offline");
-	
-	if(isStropheConnected()){
-		connection.send($pres({type: "unavailable"}).tree()); 
+  userStatus = "offline";
+  setStatusWidgetTitle("offline");
+  
+  if(isStropheConnected()){
+    connection.send($pres({type: "unavailable"}).tree()); 
     connection.disconnect();
-	}	
+  } 
 }
 
 ////////
@@ -225,11 +250,11 @@ function onMessage(msg) {
     var elems = msg.getElementsByTagName('body');
 
     if (type == "chat" && elems.length > 0) {
-			var body = elems[0];
-			var from_slug = from.split("@")[0];
-			var from_jid = from_slug + "@" + domain;
-		
-		  putReceivedMessageOnChatWindow(from_jid,from_slug,body,null)	
+      var body = elems[0];
+      var from_slug = from.split("@")[0];
+      var from_jid = from_slug + "@" + domain;
+    
+      putReceivedMessageOnChatWindow(from_jid,from_slug,body,null)  
     }
 
     // we must return true to keep the handler alive.  
@@ -242,56 +267,56 @@ function onMessage(msg) {
 //Manage Presence stanzas
 ///////
 function onPresence(presence) {
-	  
-	  //Check presence stanza type
-		ptype = $(presence).attr('type');
-				
-		switch (ptype){
-			case undefined:
-			 processAvailablePresenceStanza(presence)
-			 break;
-			case "available":
-			  processAvailablePresenceStanza(presence)
+    
+    //Check presence stanza type
+    ptype = $(presence).attr('type');
+        
+    switch (ptype){
+      case undefined:
+       processAvailablePresenceStanza(presence)
+       break;
+      case "available":
+        processAvailablePresenceStanza(presence)
         break;
-			case "unavailable":
+      case "unavailable":
         processUnavailablePresenceStanza(presence)
         break;
-			default : 
-			  //Stanza type not recognize
-				processAvailablePresenceStanza(presence)
-		}
-				  
-	return true;
+      default : 
+        //Stanza type not recognize
+        processAvailablePresenceStanza(presence)
+    }
+          
+  return true;
 } 
 
 
 function processAvailablePresenceStanza(presence){
-	from = $(presence).attr('from');
+  from = $(presence).attr('from');
   slug = from.split("@")[0];
-	
-	if (slug != user_slug) {
-		if (getConnectionBoxFromSlug(slug)!=null){
-			status = $(presence).find('show').text(); 
+  
+  if (slug != user_slug) {
+    if (getConnectionBoxFromSlug(slug)!=null){
+      status = $(presence).find('show').text(); 
       setUserIconStatus(slug, status);
-			if (cacheConnectedUsers.indexOf(slug) != -1) {
-	  	  showConnectionBoxFromSlug(slug);
-				hideChatNotificationForSlug(slug);
-	    }	
-	  } else {
-	    setTimeout("refreshChatWindow()", 3000);
-	  }
-  }		
+      if (cacheConnectedUsers.indexOf(slug) != -1) {
+        showConnectionBoxFromSlug(slug);
+        hideChatNotificationForSlug(slug);
+      } 
+    } else {
+      setTimeout("refreshChatWindow()", 3000);
+    }
+  }   
 }
 
 function processUnavailablePresenceStanza(presence){
-	from = $(presence).attr('from');
+  from = $(presence).attr('from');
   slug = from.split("@")[0];
-	
-	if (slug != user_slug) {
-	  if (getConnectionBoxFromSlug(slug)!=null){
-	    hideConnectionBoxFromSlug(slug)
-			showChatNotificationForSlug(slug,$(getConnectionBoxFromSlug(slug)).attr("name") + " is offline");
-	  }
+  
+  if (slug != user_slug) {
+    if (getConnectionBoxFromSlug(slug)!=null){
+      hideConnectionBoxFromSlug(slug)
+      showChatNotificationForSlug(slug,$(getConnectionBoxFromSlug(slug)).attr("name") + " is offline");
+    }
   }
 }
 
@@ -303,9 +328,9 @@ function sendChatMessage(from,to,text){
     var body= $build("body");
     body.t(text);
     var message = $msg({to: to, from: from, type: 'chat'}).cnode(body.tree());
-    connection.send(message.tree());	  	
-		restartAwayTimer(false);
-		return true;
+    connection.send(message.tree());      
+    restartAwayTimer();
+    return true;
 }
 
 
@@ -313,6 +338,11 @@ function sendChatMessage(from,to,text){
 //Send Presence stanzas with status
 ///////
 function sendStatus(status){
+	
+	  if((status in specialChatStatus)){
+      status = specialChatStatus[status];
+    }
+	
     if (status in statusMessage){
       //Send status to the XMPP Server
       var pres = $pres()
@@ -321,6 +351,6 @@ function sendStatus(status){
       .c('show')
       .t(status);
        connection.send(pres.tree());
-			 setStatusWidgetTitle(status);
+       setStatusWidgetTitle(status);
     }
 }

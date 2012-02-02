@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  #match "/active_users" => "Xmpp#active_users"
+  match "/active_users" => "Xmpp#active_users"
   
   match '/xmpp/setConnection' => "Xmpp#setConnection"
   match '/xmpp/unsetConnection' => "Xmpp#unsetConecction"

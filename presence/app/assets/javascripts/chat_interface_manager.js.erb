@@ -11,6 +11,11 @@ statusIcons['away'] = "away";
 statusIcons['xa'] = "away";
 statusIcons['dnd'] = "dnd";
 
+//Keys: Social Stream Special Status
+//Value: Social Stream Standard Status
+var specialChatStatus = new Array();
+specialChatStatus['autoaway'] = "away";
+
 
 ////////////////////
 //Reconnect button interface functions
@@ -21,18 +26,18 @@ var periodBetweenAttempts=15; //(seg)
 var connectButtonTimerCounter=periodBetweenAttempts+1;
 
 function connectButtonTimerFunction(){
-		connectButtonTimerCounter++;
-		if (connectButtonTimerCounter > (periodBetweenAttempts-1)) {
-			clearTimeout(connectButtonTimer);
-			$("#chat_header_title").html(I18n.t('chat.disconnected'))
-		}
+    connectButtonTimerCounter++;
+    if (connectButtonTimerCounter > (periodBetweenAttempts-1)) {
+      clearTimeout(connectButtonTimer);
+      $("#chat_header_title").html('<%=I18n.t('chat.disconnected')%>')
+    }
 }
 
 function requestConnectToChat(){
   if (connectButtonTimerCounter > (periodBetweenAttempts-1)) {
     connectButtonTimerCounter=0;
-		connectButtonTimer = setInterval("connectButtonTimerFunction()", 1000) 
-		$("#chat_header_title").html(I18n.t('chat.connecting'))
+    connectButtonTimer = setInterval("connectButtonTimerFunction()", 1000) 
+    $("#chat_header_title").html('<%=I18n.t('chat.connecting')%>')
     return true
   } else {
     return false
@@ -45,48 +50,48 @@ function requestConnectToChat(){
 ////////////////////
 
 function setUserFunctions(){
-	
-	$("div.user_presence").click(function(event, ui){
-	  var guest_name = $(this).attr("name");
-	  var guest_slug = $(this).attr("slug");
-	  var guest_jid = guest_slug + "@" + domain;
-	  
-	  if (createChatBox(guest_slug, guest_name, guest_jid, user_name, user_jid)) {
-	  } else {
-	    window[getChatVariableFromSlug(guest_slug)].chatbox("option", "boxManager").toggleBox(true);
-	  };
-	});
-	
-	
+  
+  $("div.user_presence").click(function(event, ui){
+    var guest_name = $(this).attr("name");
+    var guest_slug = $(this).attr("slug");
+    var guest_jid = guest_slug + "@" + domain;
+    
+    if (createChatBox(guest_slug, guest_name, guest_jid, user_name, user_jid)) {
+    } else {
+      window[getChatVariableFromSlug(guest_slug)].chatbox("option", "boxManager").toggleBox(true);
+    };
+  });
+  
+  
 ////////////////////
 //Chat interface: Status selector
 ////////////////////
 
-	//JQuery DropdwanStatus
-	
-	$(".dropdown dt a").click(function(event) {
-	 	event.preventDefault();
+  //JQuery DropdwanStatus
+  
+  $(".dropdown dt a").click(function(event) {
+    event.preventDefault();
     $(".dropdown dd ul").toggle();
-		
-		if($(".dropdown dd ul").is(":visible")){
-			setStatusWidgetTitle("default");
-		} else {
-			setStatusWidgetTitle(userStatus);
-		}
-		
-		restartAwayTimer(false);
-		
+    
+    if($(".dropdown dd ul").is(":visible")){
+      setStatusWidgetTitle("default");
+    } else {
+      setStatusWidgetTitle(userStatus);
+    }
+    
+    restartAwayTimer();
+    
   });
           
   $(".dropdown dd ul li a.option").click(function(event) { 
-	  event.preventDefault();
-		userStatus = $(this).find("span.value").html();
-		if(userStatus == "offline"){
-			disconnectStrophe();
-		} else {
-			sendStatus(userStatus);
-		}
-		$(".dropdown dd ul").hide();
+    event.preventDefault();
+    userStatus = $(this).find("span.value").html();
+    if(userStatus == "offline"){
+      disconnectStrophe();
+    } else {
+      sendStatus(userStatus);
+    }
+    $(".dropdown dd ul").hide();
   });
   
   
@@ -95,35 +100,40 @@ function setUserFunctions(){
     if (! $clicked.parents().hasClass("dropdown")){
       //Click outside the select...
         $(".dropdown dd ul").hide();
-				setStatusWidgetTitle(userStatus);
+        setStatusWidgetTitle(userStatus);
     }
   });
-	
+  
 }
 
 function setStatusWidgetTitle(status){
-	
-	if ($(".dropdown dt a span").length == 0){
-		return;
+  
+	if((status in specialChatStatus)){
+		status = specialChatStatus[status];
 	}
 	
-	if(status=="default"){
-    var defaultTitle = I18n.t('chat.status.choose');
+	
+  if ($(".dropdown dt a span").length == 0){
+    return;
+  }
+  
+  if(status=="default"){
+    var defaultTitle = '<%=I18n.t('chat.status.choose')%>'
     $(".dropdown dt a span").html(defaultTitle);
-		return;
+    return;
   }
-	
-	if(status=="offline"){
-		var text = $("#" + status).html();
+  
+  if(status=="offline"){
+    var text = $("#" + status).html();
     $(".dropdown dt a span").html(text);
-		return;
-	}
-	
-  if ((status in statusIcons)&&($("#" + statusIcons[status]).length > 0)) {		
-	  var text = $("#" + statusIcons[status]).html();
+    return;
+  }
+  
+  if ((status in statusIcons)&&($("#" + statusIcons[status]).length > 0)) {   
+    var text = $("#" + statusIcons[status]).html();
     $(".dropdown dt a span").html(text);
   }
-	 
+   
 }
 
 
@@ -132,34 +142,29 @@ function setStatusWidgetTitle(status){
 ////////////////////
 
 function awayTimerFunction(){
-	  awayCounter++;
-	  if (awayCounter > (awayTime/awayTimerPeriod)){
-			if (userStatus != "dnd") {
-	  	  userStatus = "away";
-	  	  sendStatus(userStatus);
-	    }
-			clearTimeout(awayTimer);
-	  }
+    awayCounter++;
+    if (awayCounter > (awayTime/awayTimerPeriod)){
+      if ((userStatus != "dnd")&&(userStatus != "away")) {
+        userStatus = "autoaway";
+        sendStatus(userStatus);
+      }
+      clearTimeout(awayTimer);
+    }
 }
 
-function autochangeStatusOnUserAway(){
-	  if (userStatus == "away"){
+function autochangeStatusIfAutoAway(){
+    if (userStatus == "autoaway"){
       userStatus = "chat";
       sendStatus(userStatus);
     }
 }
 
-function restartAwayTimer(autochangeStatus){
-		
-		if (awayCounter > (awayTime/awayTimerPeriod)){
-			awayTimer = setInterval("awayTimerFunction()", awayTimerPeriod);
-			
-			if(autochangeStatus){
-        autochangeStatusOnUserAway();
-      }
-		}
-		
-		awayCounter = 0;		
+function restartAwayTimer(){   
+    if (awayCounter > (awayTime/awayTimerPeriod)){
+      awayTimer = setInterval("awayTimerFunction()", awayTimerPeriod);
+      autochangeStatusIfAutoAway();
+    }  
+    awayCounter = 0;    
 }
 
 
@@ -168,82 +173,86 @@ function restartAwayTimer(autochangeStatus){
 ////////////////////
 
 function timerFunction(){
-    timerCounter++;	
-		
+    timerCounter++; 
+    
     if((timerCounter > cyclesToRefresh)&&(requestContacts)) {
         requestContacts = false;
         updateChatWindow();
-	  }
+    }
 }
 
 
 function refreshChatWindow(){  
-		if(timerCounter > cyclesToRefresh){
-			updateChatWindow();
-		} else {
-			requestContacts = true;
-		}
+    if(timerCounter > cyclesToRefresh){
+      updateChatWindow();
+    } else {
+      requestContacts = true;
+    }
 }
 
 
 function updateChatWindow(){
-	timerCounter=0;
-	log("updateChatWindow()");
-	var stropheConnectedAndOnlineStatus = ((isStropheConnected()) && (userStatus!="offline") && (!disconnectionFlag));
+  timerCounter=0;
+  log("updateChatWindow()");
+  var stropheConnectedAndOnlineStatus = ((isStropheConnected()) && (userStatus!="offline") && (!disconnectionFlag));
   $.post("/chatWindow", { userConnected: stropheConnectedAndOnlineStatus }, function(data){
-			$(".tooltip").hide() //Prevent tooltips
+      $(".tooltip").hide() //Prevent tooltips
       $("#chat_partial").html(data);
       if (isStropheConnected()) {
-				setStatusWidgetTitle(userStatus);
+        setStatusWidgetTitle(userStatus);
         $(".user_presence a[title]").tooltip();
         setUserFunctions();
+        if (afterNewConnectionFlag){
+          afterNewConnectionFlag = false;
+          restoreChatData();
+        }
       }
   });
 }
 
 function getConnectionBoxFromSlug(slug){
-	if ($('div.user_presence[slug=' + slug + ']').length > 0){
-		return ($('div.user_presence[slug=' + slug + ']'))[0];
-	}  else {
-		return null;
-	}
+  if ($('div.user_presence[slug=' + slug + ']').length > 0){
+    return ($('div.user_presence[slug=' + slug + ']'))[0];
+  }  else {
+    return null;
+  }
 }
 
 var cacheConnectedUsers = [];
 function hideConnectionBoxFromSlug(slug){
   if ($('div.user_presence[slug=' + slug + ']').length > 0){
     $('div.user_presence[slug=' + slug + ']').hide();
-		if(cacheConnectedUsers.indexOf(slug)==-1){
-		  cacheConnectedUsers.push(slug);
-		}
+    if(cacheConnectedUsers.indexOf(slug)==-1){
+      cacheConnectedUsers.push(slug);
+    }
   }
 }
 
 function showConnectionBoxFromSlug(slug){
   if ($('div.user_presence[slug=' + slug + ']').length > 0){
-		if (!($('div.user_presence[slug=' + slug + ']').is(":visible"))){
-			 $('div.user_presence[slug=' + slug + ']').show();
-		}
+    if (!($('div.user_presence[slug=' + slug + ']').is(":visible"))){
+       $('div.user_presence[slug=' + slug + ']').show();
+    }
   }
 }
 
 function setUserIconStatus(slug, status){
-	 if (status in statusIcons) {
-   	 iconName = statusIcons[status];
-		 var $img_status = $('img.presence_status');
-		 connectionBox = getConnectionBoxFromSlug(slug);
+   if (status in statusIcons) {
+     iconName = statusIcons[status];
+     var $img_status = $('img.presence_status');
+     connectionBox = getConnectionBoxFromSlug(slug);
      $(connectionBox).find($img_status).attr("src", "/assets/status/" + iconName + ".png")
    }
 }
 
 function getAllConnectedSlugs(){
-	connectedSlugs=[];
+  connectedSlugs=[];
   connectionBoxes = $('div.user_presence[slug]');
-	$.each(connectionBoxes, function(index, value) {
-	    if($(value).is(":visible")){
-	        connectedSlugs.push($(value).attr("slug"))
-	    }
-	});
+  $.each(connectionBoxes, function(index, value) {
+      if($(value).is(":visible")){
+          connectedSlugs.push($(value).attr("slug"))
+      }
+  });
   return connectedSlugs
 }
 
@@ -253,47 +262,47 @@ function getAllConnectedSlugs(){
 ////////////////////
 
 function putReceivedMessageOnChatWindow(from_jid,from_slug,body,msgID){
-	
-	//Antiflood control
-	 if (antifloodControl(from_jid,from_slug,body,msgID)){
-	 	return;
-	 }
-	
-	//Check for from_slug name and connectionBox visibility
-	if (typeof($('div.user_presence[slug=' + from_slug + ']').attr('name')) == 'undefined') {
-		//No connectionBox for this user!
-		var from_name = from_slug;
-		refreshChatWindow();
-	}	else {
-		showConnectionBoxFromSlug(from_slug);
-		var from_name = $('div.user_presence[slug=' + from_slug + ']').attr('name');
-	}
-	
-	
-	//Create or toggle from_slug's chatBox.
-	if (createChatBox(from_slug, from_name, from_jid, user_name, user_jid)) {
-	}	else {
-		window[getChatVariableFromSlug(from_slug)].chatbox("option", "boxManager").toggleBox(true);
-	}
-	
-	//Parse content before show it.
-	var content = getParsedContent(Strophe.getText(body), false)
-	var headerMessage = getParsedName(from_name,false);
-	
-	//Show message to chatBox.        
-	$("#" + from_slug).chatbox("option", "boxManager").addMsg(headerMessage, content);
-	
-	//Rotate chatBoxes priority.
-	rotatePriority(from_slug);
-	
-	//Check for start blinkTitle.
-	blinkTitleOnMessage(from_name);
-	
-	//Check for play sound
-	if (mustPlaySoundForChatWindow(window[getChatVariableFromSlug(from_slug)])) {
-		playSound("onMessageAudio");
-	}
-	
+  
+  //Antiflood control
+   if (antifloodControl(from_jid,from_slug,body,msgID)){
+    return;
+   }
+  
+  //Check for from_slug name and connectionBox visibility
+  if (typeof($('div.user_presence[slug=' + from_slug + ']').attr('name')) == 'undefined') {
+    //No connectionBox for this user!
+    var from_name = from_slug;
+    refreshChatWindow();
+  } else {
+    showConnectionBoxFromSlug(from_slug);
+    var from_name = $('div.user_presence[slug=' + from_slug + ']').attr('name');
+  }
+  
+  
+  //Create or toggle from_slug's chatBox.
+  if (createChatBox(from_slug, from_name, from_jid, user_name, user_jid)) {
+  } else {
+    window[getChatVariableFromSlug(from_slug)].chatbox("option", "boxManager").toggleBox(true);
+  }
+  
+  //Parse content before show it.
+  var content = getParsedContent(Strophe.getText(body), false)
+  var headerMessage = getParsedName(from_name,false);
+  
+  //Show message to chatBox.        
+  $("#" + from_slug).chatbox("option", "boxManager").addMsg(headerMessage, content);
+  
+  //Rotate chatBoxes priority.
+  rotatePriority(from_slug);
+  
+  //Check for start blinkTitle.
+  blinkTitleOnMessage(from_name);
+  
+  //Check for play sound
+  if (mustPlaySoundForChatWindow(window[getChatVariableFromSlug(from_slug)])) {
+    playSound("onMessageAudio");
+  }
+  
 }
 
 
@@ -302,8 +311,8 @@ function putReceivedMessageOnChatWindow(from_jid,from_slug,body,msgID){
 ////////////////////
 
 function showChatNotificationForSlug(slug,msg){
-	var notification = $("#" + slug).parent().find("div.ui-chatbox-notify");
-	showChatNotification(notification,msg);
+  var notification = $("#" + slug).parent().find("div.ui-chatbox-notify");
+  showChatNotification(notification,msg);
 }
 
 function showChatNotification(notification,msg){
@@ -314,7 +323,7 @@ function showChatNotification(notification,msg){
 
 function hideChatNotificationForSlug(slug){
   var notification = $("#" + slug).parent().find("div.ui-chatbox-notify");
-	hideChatNotification(notification);
+  hideChatNotification(notification);
 }
 
 function hideChatNotification(notification){
@@ -323,12 +332,12 @@ function hideChatNotification(notification){
 }
 
 function notifyWhenUsersDisconnect(){
-	var notification = $("div.ui-chatbox-notify");
-	var msg = I18n.t('chat.notify.offline');
-	showChatNotification(notification,msg);
+  var notification = $("div.ui-chatbox-notify");
+  var msg = '<%=I18n.t('chat.notify.offline')%>';
+  showChatNotification(notification,msg);
 }
 
 function hideAllNotifications(){
-	var notification = $("div.ui-chatbox-notify");
+  var notification = $("div.ui-chatbox-notify");
   hideChatNotification(notification);
 }

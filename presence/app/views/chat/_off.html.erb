@@ -7,7 +7,7 @@
             $("#passwordFormChat").hide();
             $('.connectChatButton').bind('click', function () {
 							if (requestConnectToChat()){
-								connectToServerWithCookie();
+								connectToChat(user_jid,cookie,null);
 							}
             });
             
@@ -22,7 +22,7 @@
             
             $('.connectChatButton').bind('click', function () {
 							if (requestConnectToChat()) {
-								connectToServerWithPassword($('#user_password').val());
+								connectToChat(user_jid,null,$('#user_password').val());
 			        }
             });
           

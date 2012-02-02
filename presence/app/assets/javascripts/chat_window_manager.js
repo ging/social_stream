@@ -20,7 +20,7 @@ function createChatBox(guest_slug,guest_name,guest_jid,user_name,user_jid){
     if (typeof window[getChatVariableFromSlug(guest_slug)] == 'undefined') {
 			
           //Add div with id = guest_slug
-          $("#chat_divs").append("<div id=" + guest_slug + " name=" + guest_name + "></div>")
+          $("#chat_divs").append("<div id=" + guest_slug + " name=" + guest_name + " class=chatbox ></div>")
           
 					
 					//Offset Management for new box
@@ -114,6 +114,13 @@ function getSlugFromChatVariable(variable){
 	return variable.split("_")[1];
 }
 
+function getVisibleChatBoxes(){
+	return visibleChatBoxes
+}
+
+function getAllChatBoxes(){
+  return $(".chatbox")
+}
 
 ////////////////////
 //Box replacement

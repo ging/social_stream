@@ -214,6 +214,21 @@ function offlineDataSendControl(){
 }
 
 
+////////////////////
+//Build name from slug
+////////////////////
+
+function getNameFromSlug(slug){
+	var cname = slug.split("-");
+  var name = "";
+  for(i=0; i<cname.length; i++){
+		 if (i!=0){
+		 	name = name + " ";
+		 }
+     name = name + cname[i][0].toUpperCase() + cname[i].substring(1,cname[i].length);
+  }
+	return name;
+}
 
 
 ////////////////////
