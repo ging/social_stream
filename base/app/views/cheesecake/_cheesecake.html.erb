@@ -5,121 +5,121 @@ $(function(){
       width: 440,
       height: 440
     },
-      grid: {
+    grid: {
         id: "contacts_grid",
         divIdPrefix: "actor_"
     },
-      rMax : 200, 
-      center: {x : 220, y : 220}           
-    };
-    cheesecakeData.sectors = <%= raw(current_subject.cheesecake_json) %>.sectors;
-    var cheese = new socialCheesecake.Cheesecake(cheesecakeData);
-    cheese.syncSectorFocusCallbacks = true;
-    cheese.onSectorFocusBegin = function(cheesecake,callback){
-      $("#contacts_grid_available").fadeOut("fast", callback);
-    };
-    cheese.onSectorFocusEnd = function(cheesecake){
-      console.log("end"); $("#contacts_grid_available").fadeIn("fast");
-    };
-    $("#contacts_filter_input").keyup(function(){
-      cheese.searchEngine.filter($("#contacts_filter_input").val());
-      //TODO: Make users unfiltered visible again
-    });    
-    cheese.onChange = function(cheesecake){
-      var initial = cheesecake.getInitialState();
-      var changes = cheesecake.getChanges();
-      if((changes.actors)&&(changes.actors.length==0)&&(changes.sectors)&&(changes.sectors.length==0)&&(changes.subsectors)&&(changes.subsectors.length==0)){
-        $("#contacts_changes_button").hide();
-        $("#contacts_save").hide();
-      }else{
-        $("#contacts_changes_button").show();
-        $("#contacts_save").show();
-        var total = 0;
-        if(changes.actors)
-            total += changes.actors.length;
-        if(changes.sectors)
-            total += changes.sectors.length;
-        if(changes.subsectors)
-            total += changes.subsectors.length;
-        $("#contacts_changes_button_total").html(total);
-      }
-      var changes_html = "";
-      var actors = changes.actors;
-      $("#contacts_save_changes").val(JSON.stringify(changes));
-      for(var i in actors){
-        actor = actors[i];
-        if(actor.justAdded){
-          var new_subsectors = actor.subsectors;
-          var new_subsectors_string = "";
-          for(var i in new_subsectors){
-            if(i > 0) new_subsectors_string += ", ";
-            new_subsectors_string += cheesecake.getSubsectorById(new_subsectors[i]).label;
-          }
-          changes_html += "<div class=\"change_added\">" + actor.name + " has been removed from " + old_subsectors_string + "</div>";
-        }else if(actor.subsectors.length==0){
-          var old_subsectors = [];
-          var old_subsectors_string = "";
-          for(var i in initial.actors){
-            if(actor.id==initial.actors[i].id){
-              old_subsectors = initial.actors[i].subsectors;
-              break;
-            }
-          }
-          for(var i in old_subsectors){
-            if(i > 0) old_subsectors_string += ", ";
-            old_subsectors_string += cheesecake.getSubsectorById(old_subsectors[i]).label;
-          }
-          changes_html += "<div class=\"change_deleted\">" + actor.name + " has been removed from " + old_subsectors_string + "</div>";
-        }else{
-          var old_subsectors = [];
-          var new_subsectors = actor.subsectors;
-          var left_subsectors = "";
-          var joined_subsectors = "";
-          for(var i in initial.actors){
-            if(actor.id==initial.actors[i].id){
-              old_subsectors = initial.actors[i].subsectors;
-              break;
-            }
-          }
-          for(var i in old_subsectors){
-            if(new_subsectors.indexOf(old_subsectors[i])==-1){
-              if(left_subsectors.length!=0){
-                left_subsectors += ", ";
-              }
-              left_subsectors += cheesecake.getSubsectorById(old_subsectors[i]).label;
-            }
-          }
-          for(var i in new_subsectors){
-            if(old_subsectors.indexOf(new_subsectors[i])==-1){
-              if(joined_subsectors.length!=0){
-                joined_subsectors += ", ";
-              }
-              joined_subsectors += cheesecake.getSubsectorById(new_subsectors[i]).label;
-            }
-          }
-          if((joined_subsectors.length!=0)&&(left_subsectors.length!=0)){
-            changes_html += "<div class=\"change_modified\">" + actor.name + " has been removed from " + left_subsectors + " and added to " + joined_subsectors + "</div>";
-          }else if(joined_subsectors.length!=0){
-            changes_html += "<div class=\"change_added\">" + actor.name + " has been added to " + joined_subsectors + "</div>";
-          }else{
-            changes_html += "<div class=\"change_deleted\">" + actor.name + " has been removed from " + left_subsectors + "</div>";  
+    rMax : 200,
+    center: {x : 220, y : 220}
+  };
+  cheesecakeData.sectors = <%= raw(current_subject.cheesecake_json) %>.sectors;
+  var cheese = new socialCheesecake.Cheesecake(cheesecakeData);
+  cheese.syncSectorFocusCallbacks = false;
+  cheese.onSectorFocusBegin = function(cheesecake,callback){
+    $("#contacts_grid_available").fadeOut("fast", callback);
+  };
+  cheese.onSectorFocusEnd = function(cheesecake){
+    console.log("end"); $("#contacts_grid_available").fadeIn("fast");
+  };
+  $("#contacts_filter_input").keyup(function(){
+    cheese.searchEngine.filter($("#contacts_filter_input").val());
+    //TODO: Make users unfiltered visible again
+  });
+  cheese.onChange = function(cheesecake){
+    var initial = cheesecake.getInitialState();
+    var changes = cheesecake.getChanges();
+    if((changes.actors)&&(changes.actors.length==0)&&(changes.sectors)&&(changes.sectors.length==0)&&(changes.subsectors)&&(changes.subsectors.length==0)){
+      $("#contacts_changes_button").hide();
+      $("#contacts_save").hide();
+    }else{
+      $("#contacts_changes_button").show();
+      $("#contacts_save").show();
+      var total = 0;
+      if(changes.actors)
+          total += changes.actors.length;
+      if(changes.sectors)
+          total += changes.sectors.length;
+      if(changes.subsectors)
+          total += changes.subsectors.length;
+      $("#contacts_changes_button_total").html(total);
+    }
+    var changes_html = "";
+    var actors = changes.actors;
+    $("#contacts_save_changes").val(JSON.stringify(changes));
+    for(var i in actors){
+      actor = actors[i];
+      if(actor.justAdded){
+        var new_subsectors = actor.subsectors;
+        var new_subsectors_string = "";
+        for(var i in new_subsectors){
+          if(i > 0) new_subsectors_string += ", ";
+          new_subsectors_string += cheesecake.getSubsectorById(new_subsectors[i]).label;
+        }
+        changes_html += "<div class=\"change_added\">" + actor.name + " has been removed from " + old_subsectors_string + "</div>";
+      }else if(actor.subsectors.length==0){
+        var old_subsectors = [];
+        var old_subsectors_string = "";
+        for(var i in initial.actors){
+          if(actor.id==initial.actors[i].id){
+            old_subsectors = initial.actors[i].subsectors;
+            break;
           }
         }
+        for(var i in old_subsectors){
+          if(i > 0) old_subsectors_string += ", ";
+          old_subsectors_string += cheesecake.getSubsectorById(old_subsectors[i]).label;
+        }
+        changes_html += "<div class=\"change_deleted\">" + actor.name + " has been removed from " + old_subsectors_string + "</div>";
+      }else{
+        var old_subsectors = [];
+        var new_subsectors = actor.subsectors;
+        var left_subsectors = "";
+        var joined_subsectors = "";
+        for(var i in initial.actors){
+          if(actor.id==initial.actors[i].id){
+            old_subsectors = initial.actors[i].subsectors;
+            break;
+          }
+        }
+        for(var i in old_subsectors){
+          if(new_subsectors.indexOf(old_subsectors[i])==-1){
+            if(left_subsectors.length!=0){
+              left_subsectors += ", ";
+            }
+            left_subsectors += cheesecake.getSubsectorById(old_subsectors[i]).label;
+          }
+        }
+        for(var i in new_subsectors){
+          if(old_subsectors.indexOf(new_subsectors[i])==-1){
+            if(joined_subsectors.length!=0){
+              joined_subsectors += ", ";
+            }
+            joined_subsectors += cheesecake.getSubsectorById(new_subsectors[i]).label;
+          }
+        }
+        if((joined_subsectors.length!=0)&&(left_subsectors.length!=0)){
+          changes_html += "<div class=\"change_modified\">" + actor.name + " has been removed from " + left_subsectors + " and added to " + joined_subsectors + "</div>";
+        }else if(joined_subsectors.length!=0){
+          changes_html += "<div class=\"change_added\">" + actor.name + " has been added to " + joined_subsectors + "</div>";
+        }else{
+          changes_html += "<div class=\"change_deleted\">" + actor.name + " has been removed from " + left_subsectors + "</div>";  
+        }
       }
-      $("#contacts_changes_details").html(changes_html);
     }
-    $('#contacts_changes_button').tipsy({
-      delayIn: 0,
-      delayOut: 0,
-      gravity: 'se',
-      opacity: 1,
-      trigger: 'manual',
-      className: 'contacts_changes_tipsy_menu',
-      html: true,
-      hoverable: true,
-      title: function(){
-        return $('#contacts_changes').html();
-      }
-    });
-    $("#contacts_save_changes").val(JSON.stringify(cheese.getChanges()));
+    $("#contacts_changes_details").html(changes_html);
+  }
+  $('#contacts_changes_button').tipsy({
+    delayIn: 0,
+    delayOut: 0,
+    gravity: 'se',
+    opacity: 1,
+    trigger: 'manual',
+    className: 'contacts_changes_tipsy_menu',
+    html: true,
+    hoverable: true,
+    title: function(){
+      return $('#contacts_changes').html();
+    }
+  });
+  $("#contacts_save_changes").val(JSON.stringify(cheese.getChanges()));
 });      
