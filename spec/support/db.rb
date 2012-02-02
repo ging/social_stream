@@ -1,3 +1,7 @@
+ActiveRecord::Base.connection.tables.each do |t|
+  ActiveRecord::Base.connection.drop_table t
+end
+
 gems = %w{ documents events linkser presence }
 
 gems.each do |g|
@@ -5,10 +9,6 @@ gems.each do |g|
 end
 
 gems.unshift("base")
-
-gems.reverse.each do |g|
-  "SocialStream::Migrations::#{ g.camelize }".constantize.new.down
-end
 
 gems.each do |g|
   "SocialStream::Migrations::#{ g.camelize }".constantize.new.up

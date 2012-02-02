@@ -1,8 +1,8 @@
 require 'social_stream/migrations/documents'
 
-
-SocialStream::Migrations::Documents.new.down
-SocialStream::Migrations::Base.new.down
+ActiveRecord::Base.connection.tables.each do |t|
+  ActiveRecord::Base.connection.drop_table t
+end
 
 SocialStream::Migrations::Base.new.up
 SocialStream::Migrations::Documents.new.up
