@@ -228,7 +228,10 @@ class Activity < ActiveRecord::Base
 
       rels = Relation.normalize(relation_ids)
 
-      own_rels     = rels.select{ |r| r.actor_id == channel.author_id }
+      own_rels = rels.select{ |r| r.actor_id == channel.author_id }
+      # Consider Relation::Single as own_relations
+      own_rels += rels.select{ |r| r.is_a?(Relation::Single) }
+
       foreign_rels = rels - own_rels
 
       # Only posting to own relations or allowed to post to foreign relations

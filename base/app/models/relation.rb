@@ -123,6 +123,11 @@ class Relation < ActiveRecord::Base
 
       conds =
         Permission.arel_table[:action].eq(action).and(Permission.arel_table[:object].eq(object))
+      # Relation::Public permissions cannot be customized and should not depend on the subject
+      if action == 'read' && object == 'activity' && (options[:public].nil? || options[:public])
+        conds = conds.or(Relation.arel_table[:type].eq('Relation::Public'))
+      end
+
 
       # Add in condition
       if ! options[:in].nil?
@@ -131,11 +136,6 @@ class Relation < ActiveRecord::Base
 
       # subject conditions
       conds = conds.and(Contact.arel_table[:receiver_id].eq(Actor.normalize_id(subject)))
-
-      # Relation::Public permissions cannot be customized and should not depend on the subject
-      if action == 'read' && object == 'activity' && (options[:public].nil? || options[:public])
-        conds = conds.or(Relation.arel_table[:type].eq('Relation::Public'))
-      end
 
       q.where(conds)
     end

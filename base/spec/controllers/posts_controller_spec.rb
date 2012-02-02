@@ -53,7 +53,6 @@ describe PostsController do
       end
 
       describe "with public relation" do
-        pending "Singleton single relations" do
         before do
           contact = @user.contact_to!(@user)
           relation = Relation::Public.instance
@@ -65,7 +64,6 @@ describe PostsController do
 
         it_should_behave_like "Allow Creating"
         it_should_behave_like "Allow Destroying"
-	end
       end
     end
 
@@ -146,7 +144,6 @@ describe PostsController do
         end
 
         describe "with public relation" do
-	  pending "Singleton single relations" do
           before do
             contact = @group.contact_to!(@group)
             relation = Relation::Public.instance
@@ -159,7 +156,6 @@ describe PostsController do
 
           it_should_behave_like "Allow Creating"
           it_should_behave_like "Allow Destroying"
-	  end
         end
       end
     end

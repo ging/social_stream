@@ -1,14 +1,19 @@
 class SingletonSingleRelations < ActiveRecord::Migration
   def up
-    r_new = Relation::Public.create!
-    Relation.find_all_by_type('Relation::Public').each do |r|
+    Tie.record_timestamps = false
+    Audience.record_timestamps = false
+
+    r_new = Relation::Public.instance
+
+    Relation::Public.all.each do |r|
       next if r == r_new
 
       # Reassign r -> r_new
-      Tie.find_all_by_relation_id(r.id).each do |t|
+      r.ties.each do |t|
         t.update_column(:relation_id, r_new.id)
       end
-      Audience.find_all_by_relation_id(r.id).each do |a|
+
+      r.audiences.each do |a|
         a.update_column(:relation_id, r_new.id)
       end
 
@@ -16,18 +21,16 @@ class SingletonSingleRelations < ActiveRecord::Migration
       r.delete
     end
 
-    r_new = Relation::Reject.create!
-    Relation.find_all_by_type('Relation::Reject').each do |r|
+    r_new = Relation::Reject.instance
+
+    Relation::Reject.all.each do |r|
       next if r == r_new
 
       # Reassign r -> r_new
-      Tie.find_all_by_relation_id(r.id).each do |t|
+      r.ties.each do |t|
         t.update_column(:relation_id, r_new.id)
       end
-      Audience.find_all_by_relation_id(r.id).each do |a|
-        a.update_column(:relation_id, r_new.id)
-      end
-      
+
       # Delete r
       r.delete
     end
