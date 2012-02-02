@@ -97,6 +97,8 @@ es:
       none: "Sin cambios"
       save: "Guardar cambios"
       saving: "Guardando..."
+    select:
+      hint: "Selecciona haciendo click en los retratos"
   comment:
     input: "Comentar..."
     confirm_delete: "¿Borrar commentario?"

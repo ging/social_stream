@@ -49,14 +49,14 @@
 
 #contacts_grid {
   width: 300px;
-  height: 336px;
+  height: 340px;
   overflow: hidden;
   position: relative;
   float: left;
 }
 #contacts_grid_available {
   width: 300px;
-  height: 336px;
+  height: 308px;
   position: relative;
   float: left;
   overflow: auto;
@@ -173,7 +173,7 @@
 #contacts_grid .actor.focused {
   opacity: 1;
   padding: 3px;
-  background: $auxiliar-color;
+  background: $secondary-color;
   border: 1px solid $main-color;
 }
 #contacts_grid .actor.focused img {
@@ -192,8 +192,11 @@
   width: 24px;
   height: 24px;
 }
-#contacts_grid_selected.focused .actor {
-  
+#contacts_grid_selected .actor.focused {
+  opacity: 1;
+  background: $header-notification-color;
+  padding: 2px 2px 2px 2px;
+  border: 0px;
 }
 #contacts_grid_selected .actor.focused img {
   
@@ -201,10 +204,16 @@
 #contacts_grid_selected {
   width: 280px;
   min-height: 28px;
-  background-color: $fill-color;
+  background-color: $secondary-color;
   border: 1px solid $main-color;
-  display: none;
-  padding-bottom: 2px;
+  padding: 0px;
+  margin-bottom: 2px;
+}
+#contacts_grid_selected_hint {
+  padding-top: 5px;
+  margin: auto;
+  height: 11px;
+  text-align: center;
 }
 .cheesecake_actor_tipsy.tipsy {
   padding-top: 2px;

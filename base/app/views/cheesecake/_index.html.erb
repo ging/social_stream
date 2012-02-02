@@ -11,6 +11,7 @@
     <%= image_tag('loading.gif') %>
   </div>
   <div id="contacts_grid_selected">
+    <div id="contacts_grid_selected_hint"><%= t('cheesecake.select.hint') %></div>
     <br class="clearfloat">
   </div>
   <div id="contacts_grid_available">
@@ -50,36 +51,36 @@
   var unselected_actor_click = function(){
     var clone = $(this).clone();
     clone.attr("id",$(this).attr("id") + "_selected");
-    $(this).slideToggle("fast",function(){
+    $(this).fadeOut("fast",function(){
       clone.hide();
       $(this).before(clone);
-      $("#contacts_grid_selected br.clearfloat").before($(this));
+      $("#contacts_grid_selected_hint").before($(this));
       $(this).off("click.unselected_actor");
       $(this).on("click.selected_actor", selected_actor_click);
-      if($("#contacts_grid_selected").css("display")=="none"){
-        $("#contacts_grid_selected").slideToggle("fast");
+      if($("#contacts_grid_selected_hint").css("display")!="none"){
         $("#contacts_selector_modifiers").css("opacity",1);
+        $("#contacts_grid_selected_hint").hide();
       }
       var height = 336 - Math.ceil(($("#contacts_grid_selected").children().length - 1) / 10) * 28;
       if(height != $("#contacts_grid_available").height())
         $("#contacts_grid_available").animate({height: height});
-      $(this).slideToggle("fast");
+      $(this).fadeIn("fast");
     });
   };
   var selected_actor_click = function(){
     var clone = $("#" + $(this).attr("id") + "_selected");
-    $(this).slideToggle("fast",function(){
+    $(this).fadeOut("fast",function(){
       clone.before($(this));
       $(this).off("click.selected_actor");
       $(this).on("click.unselected_actor", unselected_actor_click);
-      if($("#contacts_grid_selected").children().length <= 1){
-        $("#contacts_grid_selected").slideToggle("fast");
+      if($("#contacts_grid_selected").children().length <= 2){
         $("#contacts_selector_modifiers").css("opacity",0);
+        $("#contacts_grid_selected_hint").fadeIn("fast");
       }
       var height = 336 - Math.ceil(($("#contacts_grid_selected").children().length - 1) / 10) * 28;
       if(height != $("#contacts_grid_available").height())
         $("#contacts_grid_available").animate({height: height});
-      $(this).slideToggle("fast");
+      $(this).fadeIn("fast");
       clone.remove();
     });
   };

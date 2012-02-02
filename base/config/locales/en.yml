@@ -97,6 +97,8 @@ en:
       none: "No changes"
       save: "Save changes"
       saving: "Saving..."
+    select:
+      hint: "Select by clicking the portraits"
   comment:
     input: "Write a comment..."
     confirm_delete: "Delete comment?"
