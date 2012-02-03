@@ -263,10 +263,10 @@ function addContentToMainChatBox(content){
 function modifyChatPartialIfMainBox(chatPartial){
 	if (mainChatBox != null) {
 		p = $(chatPartial)
-    
 		$(p).find(".header").remove();
-		$(p).find(".dropdown dd ul").css("min-width",147); 
+		$(p).find(".dropdown dd ul").css("min-width",147);
+		return $(p); 
   }
 	
-	return $(p);
+	return chatPartial;
 }
