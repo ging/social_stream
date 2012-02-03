@@ -3,7 +3,7 @@
 <div class="block">
   <div class="content">
 
-    <% bow = (Time.now - 1.days).beginning_of_week %>
+    <% bow = (Time.now - 6.days).beginning_of_week %>
 
     <%= render :partial => 'events/calendar_month',
                :locals  => {
