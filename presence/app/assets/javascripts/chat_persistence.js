@@ -4,6 +4,8 @@
 
 
 function storeChatData(){
+	return
+	
   //Check for Session Storage support
   if (! window.sessionStorage){
     return
@@ -73,6 +75,19 @@ function storeChatConnectionParametres() {
 
 function storeUserChatStatus(){
 	sessionStorage.setItem("chat_user_status", userStatus);
+}
+
+function removeAllDataStored(){
+	sessionStorage.removeItem("cookie");
+  sessionStorage.removeItem("chat_user_name");
+  sessionStorage.removeItem("chat_user_slug");
+  sessionStorage.removeItem("chat_user_jid");
+	
+	sessionStorage.removeItem("chat_user_status");
+	
+	sessionStorage.removeItem("slugs_with_stored_log");
+	sessionStorage.removeItem("slugs_with_visible_max_chatbox");
+	sessionStorage.removeItem("slugs_with_visible_min_chatbox");
 }
 
 function getRestoreUserChatStatus(){

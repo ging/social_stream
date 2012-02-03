@@ -115,11 +115,18 @@ function getSlugFromChatVariable(variable){
 }
 
 function getVisibleChatBoxes(){
+	
+	for(i=0; i<visibleChatBoxes.length; i++){
+		if (visibleChatBoxes[i][0].id==chatSlugId){
+      visibleChatBoxes.splice(i,1)
+    }
+	}
+	
 	return visibleChatBoxes
 }
 
 function getAllChatBoxes(){
-  return $(".chatbox")
+  return $(".chatbox").not(document.getElementById(chatSlugId))
 }
 
 ////////////////////
@@ -190,4 +197,46 @@ function toogleVideoBoxForSlug(slug){
 
 function getVideoEmbedForSlug(slug){
 	return "<img src=\"http://www.batiburrillo.net/wp-content/uploads/2011/03/Freemake.jpg?cda6c1\" width=\"" + (chatBoxWidth-20) + "\"/>"
+}
+
+
+///////////////////////////
+// Create Main Chat Box
+///////////////////////////
+
+var mainChatBox;
+var chatSlugId="SocialStream_MainChat"
+
+function createMainChatBox(){
+	if (mainChatBox==null){
+		
+		//createChatBox(guest_slug,guest_name,guest_jid,user_name,user_jid)
+		if (createChatBox(chatSlugId,"Chat","Any","Any","Any")){
+			mainChatBox = window[getChatVariableFromSlug(chatSlugId)]
+			
+			//Modify default box
+			
+			//Delete closeTick and video Tick
+			$(mainChatBox.parent().parent()).find(".ui-chatbox-titlebar").find(".ui-icon-closethick").remove();
+			$(mainChatBox.parent().parent()).find(".ui-videobox-icon").remove()
+			//Delete nofitications div
+			$(mainChatBox.parent()).find(".ui-chatbox-notify").remove();
+			//Delete video div
+			$(mainChatBox.parent()).find(".ui-videobox").remove();
+			//Delete input
+			$(mainChatBox.parent()).find(".ui-chatbox-input").remove();
+			
+			//Set height
+			//window[getChatVariableFromSlug(chatSlugId)].css( "width", "160" ) 
+			
+			//Set width
+			
+			//Adjust 
+			
+		}
+	}
+}
+
+function addContentToMainChatBox(content){
+	$(mainChatBox.parent()).find("#" + chatSlugId).html(content);
 }

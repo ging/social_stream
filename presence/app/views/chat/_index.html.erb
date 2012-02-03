@@ -1,35 +1,55 @@
+<% flow = false %>
+
+
 <% if current_user and current_user.chat_enabled and current_subject.subject_type=="User" %>
 	
-
-	<script type="text/javascript">
-
-    //Global variables
-		var cookie = "AuthenticationByCookie>>" + "<%=cookies[Rails.application.config.session_options[:key]]%>";
-		var user_name = '<%=current_user.name%>';
-		var user_slug = '<%=current_user.slug%>';
-		var user_jid = '<%=current_user.slug%>'+"@"+domain;
-
-
-		$(document).ready(function () {
-			
-			  if(getRestoreUserChatStatus()!="offline"){
-					connectToChat(user_jid,cookie,null);
-					//connectToChat(user_jid,null,null); //To use auth by password.
-					
-					initialTimer = setTimeout("updateChatWindow()", 15000);
-				} else {
-					initialTimer = setTimeout("updateChatWindow()", 1);
-				}
-				
-	      initAudio();
-				initFocusListeners();
-		});
-		
-	</script>
-			
-
-	<div id="chat_partial">		
-	  <%= render :partial => 'chat/connecting' %>
+<div id="chat_wrapper"> 
+  <div id="chat_partial">   
+    <%= render :partial => 'chat/connecting' %>
+  </div>
+	<div id="chat_divs">  
+	  <div id="chat_div"></div>
 	</div>
-	
+</div>
+
+
+<script type="text/javascript">
+
+  //Global variables
+  var cookie = "AuthenticationByCookie>>" + "<%=cookies[Rails.application.config.session_options[:key]]%>";
+	var BOSH_SERVICE = '<%= SocialStream::Presence.bosh_service || root_url + "http-bind/" %>';
+  var user_name = '<%=current_user.name%>';
+  var user_slug = '<%=current_user.slug%>';
+  var user_jid = '<%=current_user.slug%>'+"@"+domain;
+
+
+  $(document).ready(function () {
+    
+      if(getRestoreUserChatStatus()!="offline"){
+        connectToChat(user_jid,cookie,null);
+        //connectToChat(user_jid,null,null); //To use auth by password.
+        
+        initialTimer = setTimeout("updateChatWindow()", 15000);
+      } else {
+        initialTimer = setTimeout("updateChatWindow()", 1);
+      }
+      
+      initAudio();
+      initFocusListeners();
+			
+  });
+  
+</script>
+
+	<% if flow %>
+	  <script type="text/javascript">
+	  	 $(document).ready(function () {
+			 	createMainChatBox();
+				addContentToMainChatBox($("#chat_partial"));
+				$("#chat_wrapper").find("#chat_partial").remove();
+			 });
+		</script>
+	<% end %>
+
+
 <% end %>

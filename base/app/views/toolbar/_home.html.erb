@@ -8,7 +8,7 @@
 </div>
 
 <% if defined?(SocialStream::Presence) and SocialStream::Presence.enable %>
-  <%= render :partial => 'chat/index' %>
+  <%= render :partial => 'chat/index' , :locals => {:flow => true} %>
 <% end %>
 
 <div class="block space_center">
