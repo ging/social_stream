@@ -32,7 +32,7 @@ add your own activities easily.
 
 Add to your Gemfile:
 
-  gem 'social_stream'
+  gem 'social_stream', '>= 0.19.0'
 
 and run:
 
