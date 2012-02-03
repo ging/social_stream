@@ -7,8 +7,19 @@ var sound_path = "/assets/audio/chat/onMessage";
 
 
 ////////////////////
-//Hash table
+//Hash tables
 ////////////////////
+
+//Keys: Social Stream Chat Status
+//Value: Xmpp status
+var sstreamChatStatus = new Array();
+sstreamChatStatus['available'] = "chat";
+sstreamChatStatus['away'] = "away";
+sstreamChatStatus['autoaway'] = "away";
+sstreamChatStatus['dnd'] = "dnd";
+
+//Keys: Xmpp status
+//Value: Message associated with Xmpp Status
 var statusMessage = new Array();
 statusMessage[''] = "";
 statusMessage['chat'] = "";
@@ -16,12 +27,20 @@ statusMessage['away'] = "Away";
 statusMessage['xa'] = "Away";
 statusMessage['dnd'] = "Busy";
 
+//Keys: Xmpp status
+//Value: Icon name (Same as Social Stream Status)
+var statusIcons = new Array();
+statusIcons[''] = "available";
+statusIcons['chat'] = "available";
+statusIcons['away'] = "away";
+statusIcons['xa'] = "away";
+statusIcons['dnd'] = "dnd";
+
 
 
 ////////////////////
 //Connect functions
 ////////////////////
-
 
 function connectToChat(user_jid,cookie,password){
 	
@@ -339,8 +358,8 @@ function sendChatMessage(from,to,text){
 ///////
 function sendStatus(status){
 	
-	  if((status in specialChatStatus)){
-      status = specialChatStatus[status];
+	  if((status in sstreamChatStatus)){
+      status = sstreamChatStatus[status];
     }
 	
     if (status in statusMessage){

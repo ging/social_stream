@@ -76,14 +76,15 @@ function storeUserChatStatus(){
 }
 
 function getRestoreUserChatStatus(){
-	if (! window.sessionStorage){
-    return "chat";
-  }
-  var restoreUserChatStatus = sessionStorage.getItem("chat_user_status");
-	if (restoreUserChatStatus !=  null){
+	if (!window.sessionStorage) {
+		return "available";
+	}
+	
+	var restoreUserChatStatus = sessionStorage.getItem("chat_user_status");
+	if ((restoreUserChatStatus != null)&&((restoreUserChatStatus in sstreamChatStatus)||(restoreUserChatStatus=="offline"))){
 		return restoreUserChatStatus;
-	} else {
-		return "chat";
+  } else {
+		return "available";
 	}
 }
 

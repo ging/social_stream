@@ -1,23 +1,4 @@
 ////////////////////
-//Hash table
-////////////////////
-
-//Keys: Xmpp status
-//Value: Social Stream Status
-var statusIcons = new Array();
-statusIcons[''] = "available";
-statusIcons['chat'] = "available";
-statusIcons['away'] = "away";
-statusIcons['xa'] = "away";
-statusIcons['dnd'] = "dnd";
-
-//Keys: Social Stream Special Status
-//Value: Social Stream Standard Status
-var specialChatStatus = new Array();
-specialChatStatus['autoaway'] = "away";
-
-
-////////////////////
 //Reconnect button interface functions
 ////////////////////
 
@@ -108,8 +89,8 @@ function setUserFunctions(){
 
 function setStatusWidgetTitle(status){
   
-	if((status in specialChatStatus)){
-		status = specialChatStatus[status];
+	if((status in sstreamChatStatus)){
+		status = sstreamChatStatus[status];
 	}
 	
 	
@@ -154,7 +135,7 @@ function awayTimerFunction(){
 
 function autochangeStatusIfAutoAway(){
     if (userStatus == "autoaway"){
-      userStatus = "chat";
+      userStatus = "available";
       sendStatus(userStatus);
     }
 }

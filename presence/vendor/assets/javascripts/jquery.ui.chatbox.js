@@ -196,6 +196,19 @@
 			 )
 		.appendTo(uiChatbox),
 		
+		
+		//Notification div
+    uiChatboxNotify = (self.uiChatboxNotify = $('<div></div>'))
+    .addClass('ui-widget-content ' + 
+       'ui-chatbox-notify'
+       )
+    .click(function(event) {
+        // anything?
+        self.uiChatboxNotify.fadeOut();
+    })
+    .appendTo(uiChatboxContent),
+		
+		
 		//VideoBox div
     uiVideobox = (self.uiVideobox = $('<div></div>'))
     .addClass('ui-widget-content ' + 
@@ -207,6 +220,7 @@
     })
     .appendTo(uiChatboxContent),
 		
+		
 		//ChatBoxLog
 	    uiChatboxLog = (self.uiChatboxLog = self.element)
 		//.show()
@@ -214,17 +228,6 @@
 			  'ui-chatbox-log'
 			 )
 		.appendTo(uiChatboxContent),
-		
-		//Notification div
-		uiChatboxNotify = (self.uiChatboxNotify = $('<div></div>'))
-    .addClass('ui-widget-content ' + 
-       'ui-chatbox-notify'
-       )
-    .click(function(event) {
-        // anything?
-				self.uiChatboxNotify.fadeOut();
-    })
-    .appendTo(uiChatboxContent),
 		
 		
 	    uiChatboxInput = (self.uiChatboxInput = $('<div></div>'))
