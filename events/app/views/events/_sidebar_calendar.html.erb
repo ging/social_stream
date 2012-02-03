@@ -18,7 +18,7 @@
 
       <%= raw cycle(*(Array.wrap("<tr>") + 6.times.map{""}) + Array.wrap(:name => "tr_start")) %>
       <td id="sidebar_day_<%= day.day %>_<%= day.month %>_<%= day.year %>" class="sidebar_day">
-        <%= link_to day.day, polymorphic_path([profile_or_current_subject, Event.new], :date => day.to_i, :view => "agendaDay") %>
+        <%= link_to day.day, polymorphic_path([profile_or_current_subject, Event.new], :date => day.to_i, :view => "agendaWeek") %>
       </td>
 
       <%= raw cycle(*(6.times.map{""} + Array.wrap('</tr>') + Array.wrap(:name => "tr_end"))) %>
