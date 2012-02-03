@@ -1,41 +1,46 @@
 
 <div id="contacts_cheesecake"></div>
-<div id="contacts_filter">
-  <%= text_field_tag :filter_query, nil,:autocomplete => :off, :id => :contacts_filter_input %>    
+<div id="sector_form" style="display:none;">
+  <%= render :partial => "sector_form" %>
 </div>
-<div id="contacts_selector_modifiers">
-  <span id="contacts_selector_clear">Unselect all</span>
-</div>
-<div id="contacts_grid">
-  <div id="contacts_grid_saving" style="display:none;">
-    <%= image_tag('loading.gif') %>
+<div id="contacts_explorer">
+  <div id="contacts_filter">
+    <%= text_field_tag :filter_query, nil,:autocomplete => :off, :id => :contacts_filter_input %>    
   </div>
-  <div id="contacts_grid_selected">
-    <div id="contacts_grid_selected_hint"><%= t('cheesecake.select.hint') %></div>
-    <br class="clearfloat">
+  <div id="contacts_selector_modifiers">
+    <span id="contacts_selector_clear">Unselect all</span>
   </div>
-  <div id="contacts_grid_available">
-    <% @actors.each do |actor|%>
-      <%= render :partial => "actors/actor_cheesecake", :locals => {:actor => actor} %>
-    <% end %>
+  <div id="contacts_grid">
+    <div id="contacts_grid_saving" style="display:none;">
+      <%= image_tag('loading.gif') %>
+    </div>
+    <div id="contacts_grid_selected">
+      <div id="contacts_grid_selected_hint"><%= t('cheesecake.select.hint') %></div>
+      <br class="clearfloat">
+    </div>
+    <div id="contacts_grid_available">
+      <% @actors.each do |actor|%>
+        <%= render :partial => "actors/actor_cheesecake", :locals => {:actor => actor} %>
+      <% end %>
+    </div>
   </div>
-</div>
-<div id="contacts_save" style="display:none;">
-  <form action="<%= update_cheesecake_path %>" method="get" data-remote="true" id="contacts_save_form">
-     <input type="submit" id="contacts_save_button" value="<%= t('cheesecake.changes.save') %>">
-     <input type="hidden" id="contacts_save_changes" name="contacts_save_changes">
-  </form>
-</div>
-<div id="contacts_changes_button" style="display:none;">
-  <%= t('cheesecake.changes.details') %> (<span id="contacts_changes_button_total">0</span>)
-</div>
-<br class="clearfloat"> 
-<div id="contacts_changes">
-  <div id="contacts_changes_title">
-   <%= t('cheesecake.changes.details') %>
+  <div id="contacts_changes_button" style="display:none;">
+    <%= t('cheesecake.changes.details') %> (<span id="contacts_changes_button_total">0</span>)
   </div>
-  <div id="contacts_changes_details">
-
+  <div id="contacts_save" style="display:none;">
+    <form action="<%= update_cheesecake_path %>" method="get" data-remote="true" id="contacts_save_form">
+       <input type="submit" id="contacts_save_button" value="<%= t('cheesecake.changes.save') %>">
+       <input type="hidden" id="contacts_save_changes" name="contacts_save_changes">
+    </form>
+  </div>
+  <br class="clearfloat"> 
+  <div id="contacts_changes">
+    <div id="contacts_changes_title">
+     <%= t('cheesecake.changes.details') %>
+    </div>
+    <div id="contacts_changes_details">
+  
+    </div>
   </div>
 </div>
 <%= javascript_tag do %>
@@ -102,14 +107,6 @@
         $("#contacts_changes_button").tipsy("hide");
       });
     }
-  });
-  $("#contacts_save_form").submit(function(){
-    if($(".contacts_changes_tipsy_menu").length != 0){
-      $("#contacts_changes_button").tipsy("hide");
-    }
-    $("#contacts_grid_saving").show();
-    cheese.disable();
-    $("#contacts_save_button").val("<%= t('cheesecake.changes.saving') %>").attr("disabled","true");
   });
   <%= render :partial => 'cheesecake' %>
 <% end %>

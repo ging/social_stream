@@ -37,10 +37,44 @@ $(function(){
   var cheese = new socialCheesecake.Cheesecake(cheesecakeData);
   cheese.syncSectorFocusCallbacks = false;
   cheese.onSectorFocusBegin = function(cheesecake,callback){
-    $("#contacts_grid_available").fadeOut("fast", callback);
+    if(cheese.highlightedSector.auxiliar){
+      $("#contacts_explorer").animate({width: 0},500,function(){        
+        $("#contacts_explorer").hide();
+      });
+      setTimeout(function(){
+        $("#sector_form").show();
+        $("#sector_form").animate({width: 300},500);
+      },100);     
+    }else{
+      $("#contacts_grid_available").fadeOut("fast", callback);      
+    }
   };
   cheese.onSectorFocusEnd = function(cheesecake){
-    $("#contacts_grid_available").fadeIn("fast");
+    if(cheese.highlightedSector.auxiliar){
+      
+    }else{
+      $("#contacts_grid_available").fadeIn("fast");      
+    }
+  };
+  cheese.onSectorUnfocusBegin = function(cheesecake,callback){
+    if(cheese.highlightedSector.auxiliar){
+      
+    }else{
+      $("#contacts_grid_available").fadeOut("fast", callback);      
+    }
+  };
+  cheese.onSectorUnfocusEnd = function(cheesecake){
+    if(cheese.highlightedSector.auxiliar){
+      $("#sector_form").animate({width: 0},500,function(){
+        $("#sector_form").hide();
+      });
+      setTimeout(function(){
+        $("#contacts_explorer").show();
+        $("#contacts_explorer").animate({width: 300},500);
+      },100);
+    }else{
+      $("#contacts_grid_available").fadeIn("fast");      
+    }
   };
   $("#contacts_filter_input").keyup(function(){
     cheese.searchEngine.filter($("#contacts_filter_input").val());
@@ -143,4 +177,14 @@ $(function(){
     }
   });
   $("#contacts_save_changes").val(JSON.stringify(cheese.getChanges()));
+  $("#contacts_save_form").off("submit.disable");
+  $("#contacts_save_form").on("submit.disable",function(){
+    
+    if($(".contacts_changes_tipsy_menu").length != 0){
+      $("#contacts_changes_button").tipsy("hide");
+    }
+    $("#contacts_grid_saving").show();
+    cheese.disable();
+    $("#contacts_save_button").val("<%= t('cheesecake.changes.saving') %>").attr("disabled","true");
+  });
 });      
