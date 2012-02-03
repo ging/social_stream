@@ -178,7 +178,7 @@ function updateChatWindow(){
   var stropheConnectedAndOnlineStatus = ((isStropheConnected()) && (userStatus!="offline") && (!disconnectionFlag));
   $.post("/chatWindow", { userConnected: stropheConnectedAndOnlineStatus }, function(data){
       $(".tooltip").hide() //Prevent tooltips
-      $("#chat_partial").html(data);
+      $("#chat_partial").html(modifyChatPartialIfMainBox(data));
       if (isStropheConnected()) {
         setStatusWidgetTitle(userStatus);
         $(".user_presence a[title]").tooltip();

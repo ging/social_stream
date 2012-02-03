@@ -8,6 +8,7 @@ var chatBoxWidth = 230;
 var chatBoxHeight = 170;
 var videoBoxHeight = 150;
 var visibleChatBoxes = new Array();
+var offsetForFlowBox = 0;
 var chatBoxSeparation = chatBoxWidth+12;
 
 
@@ -98,6 +99,11 @@ function getBoxParams(){
 		} else {
 		  nBox++;
 		  boxParams[0] = (nBox-1)*(chatBoxSeparation);
+			
+			if((nBox!=1)&&(mainChatBox!=null)){
+				boxParams[0] = boxParams[0] - offsetForFlowBox;
+			}
+			
 		  boxParams[1] = nBox;
 		}
 		
@@ -218,7 +224,7 @@ function createMainChatBox(){
 			
 			//Delete closeTick and video Tick
 			$(mainChatBox.parent().parent()).find(".ui-chatbox-titlebar").find(".ui-icon-closethick").remove();
-			$(mainChatBox.parent().parent()).find(".ui-videobox-icon").remove()
+			$(mainChatBox.parent().parent()).find(".ui-videobox-icon").remove();
 			//Delete nofitications div
 			$(mainChatBox.parent()).find(".ui-chatbox-notify").remove();
 			//Delete video div
@@ -227,16 +233,40 @@ function createMainChatBox(){
 			$(mainChatBox.parent()).find(".ui-chatbox-input").remove();
 			
 			//Set height
-			//window[getChatVariableFromSlug(chatSlugId)].css( "width", "160" ) 
+			window[getChatVariableFromSlug(chatSlugId)].css( "height", "180" ); 
 			
 			//Set width
+			var windowWidth=150;
+			window[getChatVariableFromSlug(chatSlugId)].parent().parent().css( "width", windowWidth );
+			$(mainChatBox.parent().parent()).find(".ui-chatbox-titlebar").css( "width", windowWidth-6 );
+			$(mainChatBox).css( "width", windowWidth-6 );
 			
-			//Adjust 
+			
+			//Adjust window offset
+			offsetForFlowBox = 235-windowWidth;
+			
+			//CSS Adjusts
+			$("#chat_partial").css("margin-top",-3)
+      $("#chat_partial").css("margin-left",-3)
+			$(".dropdown dd ul").css("min-width",147) 
 			
 		}
 	}
 }
 
+
 function addContentToMainChatBox(content){
 	$(mainChatBox.parent()).find("#" + chatSlugId).html(content);
+}
+
+
+function modifyChatPartialIfMainBox(chatPartial){
+	if (mainChatBox != null) {
+		p = $(chatPartial)
+    
+		$(p).find(".header").remove();
+		$(p).find(".dropdown dd ul").css("min-width",147); 
+  }
+	
+	return $(p);
 }

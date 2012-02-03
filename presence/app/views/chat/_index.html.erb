@@ -1,6 +1,3 @@
-<% flow = false %>
-
-
 <% if current_user and current_user.chat_enabled and current_subject.subject_type=="User" %>
 	
 <div id="chat_wrapper"> 
@@ -45,7 +42,7 @@
 	  <script type="text/javascript">
 	  	 $(document).ready(function () {
 			 	createMainChatBox();
-				addContentToMainChatBox($("#chat_partial"));
+				addContentToMainChatBox(modifyChatPartialIfMainBox($("#chat_partial")));
 				$("#chat_wrapper").find("#chat_partial").remove();
 			 });
 		</script>

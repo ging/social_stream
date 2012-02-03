@@ -4,7 +4,6 @@
 
 
 function storeChatData(){
-	return
 	
   //Check for Session Storage support
   if (! window.sessionStorage){
