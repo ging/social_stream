@@ -17,7 +17,7 @@
       <% day = bow + i.days %>
 
       <%= raw cycle(*(Array.wrap("<tr>") + 6.times.map{""}) + Array.wrap(:name => "tr_start")) %>
-      <td id="sidebar_day_<%= day.day %>_<%= day.month %>_<%= day.year %>" class="sidebar_day">
+      <td id="sidebar_day_<%= day.day %>_<%= day.month %>_<%= day.year %>">
         <%= link_to day.day, polymorphic_path([profile_or_current_subject, Event.new], :date => day.to_i, :view => "agendaWeek") %>
       </td>
 
@@ -29,12 +29,12 @@
     var now = new Date();
     $('#sidebar_day_' + now.getDate() + '_' + (now.getMonth()+1) + '_' + now.getFullYear()).addClass('today');
     var re = new RegExp('sidebar_day_(..?)_(..?)_(..?.?.?)');
-    $('.sidebar_day').each(function(index, domEl){
+    $('#sidebar_calendar td').each(function(index, domEl){
       var m = re.exec(domEl.id);
       if(m == null) return;
       var d = new Date(m[3], (m[2]-1), m[1], 23, 59, 59);
       if(d < now) $(domEl).addClass('past');
-      if(m[2] != (now.getMonth()+1)) $(domEl).addClass('next_month');
+      if(m[2] != (now.getMonth()+1) && d > now) $(domEl).addClass('next_month');
     });
     $.ajax({
       dataType: 'json',
