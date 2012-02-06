@@ -1,4 +1,5 @@
 # Monkey patch https://github.com/thoughtbot/paperclip/issues/293#issuecomment-2484541
+# Monkey patch https://github.com/thoughtbot/paperclip/commit/2583a27df497e72ec7a200b6aa707948e88fd166
 #
 # Remove with paperclip > 2.5.0
 require 'paperclip'
@@ -43,6 +44,19 @@ module Paperclip::ClassMethods
     validates_each(name) do |record, attr, value|
       attachment = record.attachment_for(name)
       attachment.send(:flush_errors)
+    end
+  end
+
+  def validates_attachment_presence name, options = {}
+    message = options[:message] || :empty
+    validates_each :"#{name}_file_name" do |record, attr, value|
+      if_clause_passed = options[:if].nil? || (options[:if].respond_to?(:call) ? options[:if].call(record) != false : record.send(options[:if]))
+      unless_clause_passed = options[:unless].nil? || (options[:unless].respond_to?(:call) ? !!options[:unless].call(record) == false : !record.send(options[:unless]))
+
+      if if_clause_passed && unless_clause_passed && value.blank?
+        record.errors.add(name, message)
+        record.errors.add("#{name}_file_name", message)
+      end
     end
   end
 end
