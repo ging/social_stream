@@ -106,6 +106,7 @@ es:
     one: "un comentario"
     view_all: "Ver todos los comentarios"
   contact:
+    addressbook: "Libreta de direcciones"
     all_n: "Todos los contactos (%{count})"
     confirm_delete: "¿Borrar contacto?"
     current: "Actuales"

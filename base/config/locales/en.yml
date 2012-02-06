@@ -106,6 +106,7 @@ en:
     one: "a comment"
     view_all: "View all comments"
   contact:
+    addressbook: "Addressbook"
     all_n: "All contacts (%{count})"
     confirm_delete: "Delete contact?"
     current: "Current"
