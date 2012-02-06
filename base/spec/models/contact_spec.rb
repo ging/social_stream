@@ -35,6 +35,17 @@ describe Contact do
     end
   end
 
+  context "reject" do
+    before do
+      @contact = Factory(:reject).contact
+      @contact.inverse!
+    end
+
+    it "should not appear as pending" do
+      @contact.receiver.pending_contacts.should_not include(@contact.inverse!)
+    end
+  end
+
   context "a pair" do
     before do
       @friend = Factory(:friend)

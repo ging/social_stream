@@ -50,6 +50,7 @@ class Contact < ActiveRecord::Base
   scope :not_reflexive, where(arel_table[:sender_id].not_eq(arel_table[:receiver_id]))
 
   scope :pending, active.
+                  positive.
                   not_reflexive.
                   joins("LEFT JOIN contacts AS inverse_contacts ON inverse_contacts.id = contacts.inverse_id").
                   where(arel_table[:inverse_id].eq(nil).or(arel_table.alias("inverse_contacts")[:ties_count].eq(0)))
