@@ -2,7 +2,6 @@
 //Global constants
 ////////////////////
 var domain = '<%=SocialStream::Presence.domain%>';
-var sound_path = "/assets/audio/chat/onMessage";
 
 
 ////////////////////
@@ -319,6 +318,7 @@ function processAvailablePresenceStanza(presence){
       if (cacheConnectedUsers.indexOf(slug) != -1) {
         showConnectionBoxFromSlug(slug);
         hideChatNotificationForSlug(slug);
+				updateConnectedUsersOfMainChatBox();
       } 
     } else {
       setTimeout("refreshChatWindow()", 3000);
@@ -334,6 +334,7 @@ function processUnavailablePresenceStanza(presence){
     if (getConnectionBoxFromSlug(slug)!=null){
       hideConnectionBoxFromSlug(slug)
       showChatNotificationForSlug(slug,$(getConnectionBoxFromSlug(slug)).attr("name") + " is offline");
+			updateConnectedUsersOfMainChatBox();
     }
   }
 }

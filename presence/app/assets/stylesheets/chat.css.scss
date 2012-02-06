@@ -28,6 +28,8 @@
 .ui-chatbox-titlebar {
     padding: 3px 3px 3px 3px;
     height: 20px;
+		background-color: $secondary-color;
+		color: $main-color;
 }
 
 .ui-chatbox-content {
@@ -53,6 +55,7 @@
     margin: 5px 5px 5px 5px;
     border: 1px solid $separation-color;
     height: 35px;
+		color: $main-color;
 }
 
 

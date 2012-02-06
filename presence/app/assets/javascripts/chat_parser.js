@@ -143,7 +143,7 @@ function splitFirst(word,key){
 function buildIconImage(icon){
   if (icon in chatIcons){
     image_file = chatIcons[icon]
-    return "<img class=\"chatEmoticon\" src=\"assets/emoticons/" + image_file + "\"/>";
+    return "<img class=\"chatEmoticon\" src=\"/assets/emoticons/" + image_file + "\"/>";
   }
   return icon
 }

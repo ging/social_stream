@@ -250,6 +250,8 @@ function createMainChatBox(){
       $("#chat_partial").css("margin-left",-3)
 			$(".dropdown dd ul").css("min-width",147) 
 			
+			//Header title
+			updateConnectedUsersOfMainChatBox();
 		}
 	}
 }
@@ -269,4 +271,8 @@ function modifyChatPartialIfMainBox(chatPartial){
   }
 	
 	return chatPartial;
+}
+
+function changeMainChatBoxHeaderTitle(title){
+  $($(mainChatBox.parent().parent()).find(".ui-chatbox-titlebar").find("span")[0]).html(title);
 }

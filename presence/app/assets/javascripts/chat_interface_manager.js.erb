@@ -183,6 +183,7 @@ function updateChatWindow(){
         setStatusWidgetTitle(userStatus);
         $(".user_presence a[title]").tooltip();
         setUserFunctions();
+				updateConnectedUsersOfMainChatBox();
         if (afterNewConnectionFlag){
           afterNewConnectionFlag = false;
           restoreChatData();
@@ -230,7 +231,7 @@ function getAllConnectedSlugs(){
   connectedSlugs=[];
   connectionBoxes = $('div.user_presence[slug]');
   $.each(connectionBoxes, function(index, value) {
-      if($(value).is(":visible")){
+		if($(value).css("display")!="none"){
           connectedSlugs.push($(value).attr("slug"))
       }
   });
@@ -321,4 +322,15 @@ function notifyWhenUsersDisconnect(){
 function hideAllNotifications(){
   var notification = $("div.ui-chatbox-notify");
   hideChatNotification(notification);
+}
+
+
+
+////////////////////
+//Update connected users of MainChatBox
+////////////////////
+
+function updateConnectedUsersOfMainChatBox(){
+	var connectedUsers = getAllConnectedSlugs().length;
+	changeMainChatBoxHeaderTitle( '<%=I18n.t('chat.title')%>' + " (" + connectedUsers + ")");
 }

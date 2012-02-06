@@ -23,7 +23,7 @@ function initSound(sound){
   var html5audio=document.createElement('audio')
   
   if (html5audio.canPlayType){ 
-    path = 'assets/chat/' + sound;
+    path = '/assets/chat/' + sound;
     window[sound] = new Audio();
 
     for(i=0; i<html5_audiotypes.length; i++){
