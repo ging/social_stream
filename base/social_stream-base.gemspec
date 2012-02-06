@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   # Avatar attachments
   s.add_runtime_dependency('avatars_for_rails', '~> 0.2.2')
   # jQuery
-  s.add_runtime_dependency('jquery-rails', '~> 1.0.9')
+  s.add_runtime_dependency('jquery-rails', '>= 1.0.9')
   # Authorization
   s.add_runtime_dependency('cancan', '~> 1.6.4')
   # Pagination
