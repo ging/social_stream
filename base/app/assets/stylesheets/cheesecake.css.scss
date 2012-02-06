@@ -5,6 +5,17 @@
   padding: 20px;
   padding-top: 0px;
 }
+#edit_sector_button {
+  position: absolute;
+  top: 75px;
+  left: 410px;
+  display: none;
+  z-index: 3000;
+}
+#edit_sector_button img {
+  width: 24px;
+  height: 24px;
+}
 #contacts_cheesecake {
   width: 440px;
   height: 440px;
@@ -13,7 +24,7 @@
   float: left;
   position: relative;
 }
-#sector_form {
+#sector_editor {
   float: left;
   position: relative;
   width: 0px;
@@ -256,4 +267,47 @@
 }
 .cheesecake_actor_tipsy.tipsy .logo {
   display: none;
+}
+#sector_form {
+  width: 300px;
+  height: 450px;
+  float: right;
+}
+#sector_form .title {
+  width: 300px;
+  text-align: center;
+  font-size: 13px;
+  padding: 20px 0px 15px 0px;
+}
+#sector_form .title #edited_sector_name {
+  font-size: 14px;
+  font-weight: bold;
+}
+#sector_form #edited_sector_color_out {
+  border: 1px solid $main-color;
+  background: $header-notification-color;
+  width: 14px;
+  height: 14px;
+  padding: 3px;
+}
+#sector_form #edited_sector_color_in {
+  background: $secondary-color;
+  width: 14px;
+  height: 14px;
+}
+#sector_form .subsector {
+  border: 1px solid $input-border-color;
+  background: $fill-color;
+  width: 260px;
+  min-height: 20px;
+}
+#sector_form .subsector .title {
+  width: 260px;
+  text-align: center;
+  font-size: 11px;
+  padding: 5px 0px 5px 0px;
+}
+#sector_form .subsector .title .edited_subsector_name {
+  font-size: 11px;
+  font-weight: bold;
 }
