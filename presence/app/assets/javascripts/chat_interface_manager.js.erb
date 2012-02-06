@@ -220,10 +220,11 @@ function showConnectionBoxFromSlug(slug){
 
 function setUserIconStatus(slug, status){
    if (status in statusIcons) {
-     iconName = statusIcons[status];
+     var iconName = statusIcons[status];
      var $img_status = $('img.presence_status');
+		 var path = '<%=image_path("status")%>';
      connectionBox = getConnectionBoxFromSlug(slug);
-     $(connectionBox).find($img_status).attr("src", "/assets/status/" + iconName + ".png")
+     $(connectionBox).find($img_status).attr("src", path + "/" + iconName + ".png")
    }
 }
 

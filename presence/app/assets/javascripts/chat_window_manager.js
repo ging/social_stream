@@ -211,7 +211,7 @@ function getVideoEmbedForSlug(slug){
 ///////////////////////////
 
 var mainChatBox;
-var chatSlugId="SocialStream_MainChat"
+var chatSlugId="SocialStream_MainChat";
 
 function createMainChatBox(){
 	if (mainChatBox==null){
@@ -258,7 +258,9 @@ function createMainChatBox(){
 
 
 function addContentToMainChatBox(content){
-	$(mainChatBox.parent()).find("#" + chatSlugId).html(content);
+	if (mainChatBox != null) {
+  	$(mainChatBox.parent()).find("#" + chatSlugId).html(content);
+  }
 }
 
 
@@ -274,5 +276,7 @@ function modifyChatPartialIfMainBox(chatPartial){
 }
 
 function changeMainChatBoxHeaderTitle(title){
-  $($(mainChatBox.parent().parent()).find(".ui-chatbox-titlebar").find("span")[0]).html(title);
+	if (mainChatBox != null) {
+  	$($(mainChatBox.parent().parent()).find(".ui-chatbox-titlebar").find("span")[0]).html(title);
+  }
 }
