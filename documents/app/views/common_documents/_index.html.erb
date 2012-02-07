@@ -8,10 +8,10 @@
 <div class="attachment_tile" id="<%= dom_id(document)%>">
   <div class="attachment_tile_thumb">
     <%= link_to thumb_for(document,48),
-    {:controller => "documents", :action => "show", :id => document},
-    :type => document.type,
-    :title => document.file_file_name,
-    :path => document_path(document) %>
+                document_path(document),
+                :type => document.type,
+                :title => document.file_file_name,
+                :path => document_path(document) %>
   </div>
   <div class="attachment_tile_tipsy">
     <%= link_to image_tag("btn/btn_down.png"),
