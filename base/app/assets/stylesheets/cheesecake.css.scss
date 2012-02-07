@@ -339,16 +339,20 @@
 .permissions_explanation_tipsy_menu {
   border: 1px solid $main-color;
   background: $secondary-color;
-  margin-right:10px;
   box-shadow: 0 0 5px #000000;
   -webkit-box-shadow: 0 0 5px #000000;
   -moz-box-shadow: 0 0 5px #000000;
   overflow: hidden;
   max-width: 300px;
+  padding-top: 3px;
 }
 .permissions_explanation_tipsy_menu.tipsy .tipsy-arrow {
   display: none;
 }
 .permissions_explanation_tipsy_menu.tipsy .tipsy-inner {
   max-width: 300px;
+  text-align: left;
+}
+.permissions_explanation_tipsy_menu.tipsy .tipsy-inner .permission {
+  padding-top: 3px;
 }
