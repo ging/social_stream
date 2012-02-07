@@ -11,6 +11,7 @@
   left: 410px;
   display: none;
   z-index: 3000;
+  cursor: pointer;
 }
 #edit_sector_button img {
   width: 24px;
@@ -334,9 +335,9 @@
   display: inline-block;
 }
 .permissions_explanation {
-  width: 500px;
+
 }
-.permissions_explanation_tipsy_menu {
+.permissions_explanation_tipsy_menu.tipsy {
   border: 1px solid $main-color;
   background: $secondary-color;
   box-shadow: 0 0 5px #000000;
@@ -344,6 +345,7 @@
   -moz-box-shadow: 0 0 5px #000000;
   overflow: hidden;
   max-width: 300px;
+  width: 300px;
   padding-top: 3px;
 }
 .permissions_explanation_tipsy_menu.tipsy .tipsy-arrow {

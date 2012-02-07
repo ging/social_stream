@@ -84,20 +84,16 @@
     })
   });
   $(".permissions_field").each(function(){
-    var field = $(this);
     $(this).tipsy({
       delayIn: 500,
       delayOut: 0,
       gravity: 'e',
+      offset: 100,
       opacity: 1,
       className: 'permissions_explanation_tipsy_menu',
       html: true,
       hoverable: true,
       title: function(){
-        setTimeout(function(){
-          $(".permissions_explanation_tipsy_menu").css({left: field.offset().left - 315})
-          $(".permissions_explanation_tipsy_menu").css({top: field.offset().top + field.height()/2 - $(".permissions_explanation_tipsy_menu").height()/2})
-        },0)
         return $(this).parent().find('.permissions_explanation').html();
       }
     });
