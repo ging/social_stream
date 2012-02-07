@@ -1,11 +1,11 @@
 <form id="sector_form">
 	<div class="title">
-		Editing <span id="edited_sector_name">New sector</span>
+		<%= t('cheesecake.form.editing')%> <div id="edited_sector_name" class="truncate">New sector</div>
 	</div>
 	<div class="block">
 		<div class="form_row less_padding">
 			<div class="form_label">
-				Name:
+				<%= t('cheesecake.form.fields.name')%>:
 			</div>
 			<div class="form_field">
 				<input type="text" id="form_sector_name" class="form_tag" value="New sector">
@@ -13,7 +13,7 @@
 		</div>
 		<div class="form_row less_padding">
 			<div class="form_label">
-				Color:
+				<%= t('cheesecake.form.fields.color')%>:
 			</div>
 			<div class="form_field">
 				<div id="edited_sector_color_out">
@@ -30,12 +30,12 @@
 		<div class="form_row less_padding">
 			<div class="subsector" id="subsector_<%= i %>">
 				<div class="title">
-					Subsector <span class="edited_subsector_name" id="edited_subsector_name_<%= i %>">New subsector <%= i %></span>
+					<%= t('cheesecake.form.fields.subsector')%> <div class="edited_subsector_name truncate" id="edited_subsector_name_<%= i %>">New subsector <%= i %></div>
 				</div>
 				<div class="content" <%= i==0 ? '' : 'style=display:none;' %>>
 					<div class="form_row">
 						<div class="form_label">
-							Name:
+							<%= t('cheesecake.form.fields.name')%>:
 						</div>
 						<div class="form_field">
 							<input type="text" class="form_tag" class="form_subsector_name" id="form_subsector_name_<%= i %>" value="New subsector <%= i %>">
@@ -43,24 +43,24 @@
 					</div>
 					<div class="form_row less_padding">
 						<div class="form_label">
-							Permissions:
+							<%= t('cheesecake.form.fields.permissions')%>:
 						</div>
 					</div>
 					<div class="form_row less_padding">
-						<div class="form_field">
-							<table class="tableCheckBoxOptions">
-								<% default_permissions.each_with_index do |p, i| %>
-								<tr>
-									<td>
-									<div contain=<%= dom_id p %> class="checkboxPermissionOptionLeft">
-										<input id=<%= dom_id p %> class="permission" type="checkbox"/>
-										<label for=<%= dom_id p %>><%= p.description(:brief) %></label>
-										<div class="clearfloat"></div>
-									</div></td>
-								</tr>
-								<% end %>
-							</table>
+						<div class="form_field permissions_field">
+							<% default_permissions.each_with_index do |p, i| %>
+								<div contain=<%= dom_id p %> class="checkboxPermissionOptionLeft">
+									<input class="permission <%= dom_id p %>" type="checkbox"/>
+									<label for=<%= dom_id p %>><%= p.description(:brief) %></label>
+									<div class="clearfloat"></div>
+								</div>
+							<% end %>
 						</div>
+						<div class="permissions_explanation" style="display:none;">
+						  <% default_permissions.each_with_index do |p, i| %>
+                  <div class="permission <%= dom_id p %>"> <%= p.description(:detailed) %></div>
+              <% end %>
+					  </div>
 					</div>
 				</div>
 			</div>
@@ -83,4 +83,22 @@
       }
     })
   });
+  $(".permissions_field").each(function(){
+    $(this).tipsy({
+      delayIn: 500,
+      delayOut: 0,
+      gravity: 'e',
+      opacity: 1,
+      className: 'permissions_explanation_tipsy_menu',
+      html: true,
+      hoverable: true,
+      title: function(){
+        setTimeout(function(){
+          $(".permissions_explanation_tipsy_menu").css({left: $(".permissions_field").offset().left - 315})
+          $(".permissions_explanation_tipsy_menu").css({top: $(".permissions_field").offset().top + $(".permissions_field").height()/2 - $(".permissions_explanation_tipsy_menu").height()/2})
+        },0)
+        return $(this).parent().find('.permissions_explanation').html();
+      }
+    });
+  });  
 <% end %>

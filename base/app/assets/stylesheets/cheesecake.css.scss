@@ -33,6 +33,11 @@
   overflow-y: visible;
   overflow-x: hidden;
 }
+#sector_editor .truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 #contacts_explorer {
   float: right;
   position: relative;
@@ -281,6 +286,8 @@
 #sector_form .title #edited_sector_name {
   font-size: 14px;
   font-weight: bold;
+  max-width: 150px;
+  display: inline-block;
 }
 #sector_form #edited_sector_color_out {
   border: 1px solid $main-color;
@@ -325,4 +332,25 @@
 #sector_form .subsector .title .edited_subsector_name {
   font-size: 11px;
   font-weight: bold;
+  max-width: 150px;
+  display: inline-block;
+}
+.permissions_explanation {
+  width: 500px;
+}
+.permissions_explanation_tipsy_menu {
+  border: 1px solid $main-color;
+  background: $secondary-color;
+  margin-right:10px;
+  box-shadow: 0 0 5px #000000;
+  -webkit-box-shadow: 0 0 5px #000000;
+  -moz-box-shadow: 0 0 5px #000000;
+  overflow: hidden;
+  max-width: 300px;
+}
+.permissions_explanation_tipsy_menu.tipsy .tipsy-arrow {
+  display: none;
+}
+.permissions_explanation_tipsy_menu.tipsy .tipsy-inner {
+  max-width: 300px;
 }

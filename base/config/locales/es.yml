@@ -96,7 +96,14 @@ es:
       details: "Cambios detallados"
       none: "Sin cambios"
       save: "Guardar cambios"
-      saving: "Guardando..."
+      saving: "Guardando..."      
+    form:
+      editing: "Editando"
+      fields:
+        color: "Color"
+        name: "Nombre"
+        permissions: "Permisos"
+        subsector: "Subsector"
     select:
       hint: "Selecciona haciendo click en los retratos"
   comment:

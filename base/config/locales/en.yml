@@ -97,6 +97,13 @@ en:
       none: "No changes"
       save: "Save changes"
       saving: "Saving..."
+    form:
+      editing: "Editing"
+      fields:
+        color: "Color"
+        name: "Name"
+        permissions: "Permissions"
+        subsector: "Subsector"
     select:
       hint: "Select by clicking the portraits"
   comment:
