@@ -103,7 +103,11 @@
       $("#contacts_changes_button").tipsy("hide");
     }else{
       $("#contacts_changes_button").tipsy("show");
-      $("#contacts_changes_title").click(function(){
+      $(".contacts_changes_tipsy_menu").css({left: $("#cheesecake").offset().left + 132})
+      $(window).on("resize.contacs_changes",function(){
+        $(".contacts_changes_tipsy_menu").css({left: $("#cheesecake").offset().left + 132})
+      });
+      $("#contacts_changes_title").on("click",function(){
         $("#contacts_changes_button").tipsy("hide");
       });
     }

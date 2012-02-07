@@ -113,7 +113,6 @@
   height: 30px;
   text-align: right;
   float: left;
-  margin-right: 20px;
 }
 #contacts_save_form {
   overflow: visible; 
@@ -132,7 +131,7 @@
   width: 130px;
   height: 25px;
   float: left;
-  margin-top: 10px;
+  margin: 10px 0px 0px 20px;
   cursor: pointer;
 }
 #contacts_changes_title {
@@ -167,8 +166,7 @@
   display: none;
   width: 514px;
   height: 340px;
-  top: 145px !important;
-  left: 460px !important;
+  top: 135px !important;
 }
 .contacts_changes_tipsy_menu.tipsy .tipsy-arrow {
   display: none;
