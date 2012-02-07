@@ -108,28 +108,79 @@
       });
     }
   });
-  var edit_sector_click = function(){
+  $("#sector_editor").data("show", function(callback){
+    $("#contacts_explorer").stop().animate({width: 0},500);
+    $("#sector_editor").stop().animate({width: 300},500, function(){
+      if(callback) callback();
+    });
+  });
+  $("#sector_editor").data("hide", function(callback){
+    $("#sector_editor").stop().animate({width: 0},500, function(){      
+      $(".add_subsector_clone").remove();
+    });
+    $("#contacts_explorer").stop().animate({width: 300},500, function(){
+      if(callback) callback();
+    });
+  });
+  $("#sector_editor").data("prepare", function(cheese){
+    var sector = cheese.getFocusedSector();
+    var subsector_count = sector.subsectors.length;
+    var original_add_sector_row = $("#original_add_subsector_row");
+    if(sector){
+      $("#form_sector_name").val(sector.label);
+      $("#edited_sector_name").html(sector.label);
+      $("#form_sector_name").off("keyup");
+      $("#form_sector_name").on("keyup",function(){
+        $("#edited_sector_name").html($("#form_sector_name").val());
+        sector.changeLabel($("#form_sector_name").val());
+        sector.changeLabel($("#form_sector_name").val());
+      });    
+      $(".add_subsector_clone").remove();
+      for(var i = 0; i < 4; i++){
+        var subsector = sector.subsectors[i];
+        if(subsector){
+          var add_subsector_clone = original_add_sector_row.clone().attr("id", "add_subsector_" + i).addClass("add_subsector_clone").show();          
+          $("#subsector_" + i).parent().before(add_subsector_clone);
+          $("#form_subsector_name_" + i).val(subsector.label);
+          $("#edited_subsector_name_" + i).html(subsector.label);
+          $("#form_subsector_name_" + i).off("keyup");
+          $("#form_subsector_name_" + i).on("keyup", [i,subsector],function(event){
+            $("#edited_subsector_name_" + event.data[0]).html($("#form_subsector_name_" + event.data[0]).val());
+            event.data[1].changeLabel($("#form_subsector_name_" + event.data[0]).val());
+          });
+          $("#subsector_" + i).show();
+        }else{
+          if(sector.subsectors[i-1]){
+            var add_subsector_clone = original_add_sector_row.clone().attr("id", "add_subsector_" + i).addClass("add_subsector_clone").show();          
+            $("#subsector_" + (i-1)).parent().after(add_subsector_clone);
+          }
+          $("#subsector_" + i).hide();
+        }
+      }
+    }
+  });
+  $("#edit_sector_button").data("edit_sector_click", function(event){
+    var cheese = event.data;
     $("#edit_sector_button").off("click.edit");
     $("#edit_sector_button").fadeOut("fast",function(){
       $("#edit_sector_button").html("<%= escape_javascript image_tag "btn/cheese_close_edit.png" %>");
       $("#edit_sector_button").fadeIn("fast");
     });
-    $("#contacts_explorer").stop().animate({width: 0},500);
-    $("#sector_editor").stop().animate({width: 300},500, function(){
-      $("#edit_sector_button").on("click.close_edit",close_edit_sector_click);
+    $("#sector_editor").data("prepare")(cheese);
+    $("#sector_editor").data("show")(function(){
+      $("#edit_sector_button").on("click.close_edit", cheese, $("#edit_sector_button").data("close_edit_sector_click"));
     });
-  }
-  var close_edit_sector_click = function(){
+  });
+  $("#edit_sector_button").data("close_edit_sector_click", function(event){
+    var cheese = event.data;
     $("#edit_sector_button").off("click.close_edit");
     $("#edit_sector_button").fadeOut("fast",function(){
       $("#edit_sector_button").html("<%= escape_javascript image_tag "btn/cheese_edit.png" %>");
       $("#edit_sector_button").fadeIn("fast");
     });
-    $("#sector_editor").stop().animate({width: 0},500);
-    $("#contacts_explorer").stop().animate({width: 300},500,function(){
-      $("#edit_sector_button").on("click.edit",edit_sector_click);
+    $("#sector_editor").data("hide")(function(){
+      $("#edit_sector_button").on("click.edit", cheese, $("#edit_sector_button").data("edit_sector_click"));
     });
-  }
-  $("#edit_sector_button").on("click.edit",edit_sector_click);
+  });
   <%= render :partial => 'cheesecake' %>
 <% end %>

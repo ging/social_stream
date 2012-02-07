@@ -30,8 +30,8 @@
   width: 0px;
   padding: 0px;
   margin: 0px;
-  overflow: hidden;
-  height: 450px;
+  overflow-y: visible;
+  overflow-x: hidden;
 }
 #contacts_explorer {
   float: right;
@@ -270,7 +270,6 @@
 }
 #sector_form {
   width: 300px;
-  height: 450px;
   float: right;
 }
 #sector_form .title {
@@ -295,11 +294,27 @@
   width: 14px;
   height: 14px;
 }
+#sector_form .form_row.less_padding {
+  padding: 2px 0px 2px 20px;
+}
 #sector_form .subsector {
-  border: 1px solid $input-border-color;
-  background: $fill-color;
+  border: 1px solid $main-color;
+  background: $secondary-color;
   width: 260px;
   min-height: 20px;
+}
+#sector_form .add_subsector {
+  border: 1px solid $main-color;
+  color: $main-color;
+  background: $auxiliar-color;
+  width: 260px;
+  height: 20px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+}
+#sector_form .add_subsector:hover {
+  background: $auxiliar-bright-color;
 }
 #sector_form .subsector .title {
   width: 260px;

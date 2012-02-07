@@ -38,11 +38,8 @@ $(function(){
   cheese.syncSectorFocusCallbacks = false;
   cheese.onSectorFocusBegin = function(cheesecake,callback){
     if((cheese.highlightedSector)&&(cheese.highlightedSector.auxiliar)){
-      $("#contacts_explorer").animate({width: 0},500,function(){        
-        $("#contacts_explorer").hide();
-      });
-      $("#sector_editor").show();
-      $("#sector_editor").animate({width: 300},500);
+      $("#sector_editor").data("prepare")(cheese);
+      $("#sector_editor").data("show")();
     }else{
       $("#contacts_grid_available").fadeOut("fast", callback);      
     }
@@ -52,6 +49,7 @@ $(function(){
       
     }else{
       $("#contacts_grid_available").fadeIn("fast");
+      $("#edit_sector_button").on("click.edit", cheese, $("#edit_sector_button").data("edit_sector_click"));
       $("#edit_sector_button").fadeIn("fast");
     }
   };
@@ -60,18 +58,19 @@ $(function(){
       
     }else{
       $("#contacts_grid_available").fadeOut("fast", callback);
+      $("#edit_sector_button").off("click");
       $("#edit_sector_button").fadeOut("fast");
     }
   };
   cheese.onSectorUnfocusEnd = function(cheesecake){
     if((cheese.highlightedSector)&&(cheese.highlightedSector.auxiliar)){
-      $("#sector_editor").animate({width: 0},500,function(){
-        $("#sector_editor").hide();
-      });
-      $("#contacts_explorer").show();
-      $("#contacts_explorer").animate({width: 300},500);
+      
     }else{
       $("#contacts_grid_available").fadeIn("fast");      
+    }
+    if($("#sector_editor").width() > 0){
+      $("#edit_sector_button").html("<%= escape_javascript image_tag "btn/cheese_edit.png" %>");
+      $("#sector_editor").data("hide")();
     }
   };
   $("#contacts_filter_input").keyup(function(){

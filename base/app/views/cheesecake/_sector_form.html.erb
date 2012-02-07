@@ -3,15 +3,15 @@
 		Editing <span id="edited_sector_name">New sector</span>
 	</div>
 	<div class="block">
-		<div class="form_row">
+		<div class="form_row less_padding">
 			<div class="form_label">
 				Name:
 			</div>
 			<div class="form_field">
-				<input type="text" class="form_tag" value="New sector">
+				<input type="text" id="form_sector_name" class="form_tag" value="New sector">
 			</div>
 		</div>
-		<div class="form_row">
+		<div class="form_row less_padding">
 			<div class="form_label">
 				Color:
 			</div>
@@ -21,27 +21,32 @@
 				</div>
 			</div>
 		</div>
-		<% for i in 1..4 do %>
-		<div class="form_row">
-			<div class="subsector">
+		<div class="form_row less_padding" id="original_add_subsector_row" style="display:none;">
+		  <div class="add_subsector">
+		    +
+		  </div>
+		</div>
+		<% for i in 0..3 do %>
+		<div class="form_row less_padding">
+			<div class="subsector" id="subsector_<%= i %>">
 				<div class="title">
-					Subsector <span class="edited_subsector_name">New subsector <%= i %></span>
+					Subsector <span class="edited_subsector_name" id="edited_subsector_name_<%= i %>">New subsector <%= i %></span>
 				</div>
-				<div class="content" <%= i==1 ? '' : 'style=display:none;' %>>
+				<div class="content" <%= i==0 ? '' : 'style=display:none;' %>>
 					<div class="form_row">
 						<div class="form_label">
 							Name:
 						</div>
 						<div class="form_field">
-							<input type="text" class="form_tag" value="New subsector <%= i %>">
+							<input type="text" class="form_tag" class="form_subsector_name" id="form_subsector_name_<%= i %>" value="New subsector <%= i %>">
 						</div>
 					</div>
-					<div class="form_row">
+					<div class="form_row less_padding">
 						<div class="form_label">
 							Permissions:
 						</div>
 					</div>
-					<div class="form_row">
+					<div class="form_row less_padding">
 						<div class="form_field">
 							<table class="tableCheckBoxOptions">
 								<% default_permissions.each_with_index do |p, i| %>
