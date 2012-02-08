@@ -1,9 +1,7 @@
 //Display the new post
 $("#wall").prepend("<%= escape_javascript(render @link.post_activity) %>");
 
-setActivityPrivacyTooltips("<%= escape_javascript dom_id(@link.post_activity) %>");
-
-unblock_all_forms();
+SocialStream.Timeline.newActivity("<%= escape_javascript dom_id(@link.post_activity) %>");
 
 $("#link_preview").hide();
 $("#link_preview").html("");          

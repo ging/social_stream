@@ -10,4 +10,7 @@
 //= require avatars_for_rails
 //= require social_cheesecake
 //
+//= require_self
 //= require_tree .
+
+var SocialStream = SocialStream || {};

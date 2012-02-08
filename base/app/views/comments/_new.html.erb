@@ -33,9 +33,8 @@
 <% end %>
 
 <%= javascript_tag do %>
-  $(document).ready(function() {
+  $(function() {
     $("#comment_text_<%= dom_id(activity) %>").Watermark("<%= I18n.t('comment.input') %>","#666");
-    activate_anti_rebounds(); 
  
     $("#comment_text_<%= dom_id(activity) %>")
         .change(function(){autoSize("<%= dom_id(activity) %>");})
@@ -43,5 +42,6 @@
         .keyup(function(){autoSize("<%= dom_id(activity) %>");});
     autoSize("<%= dom_id(activity) %>"); 
 
+    SocialStream.Wall.activateAntiRebounds();
   });
 <% end %>
