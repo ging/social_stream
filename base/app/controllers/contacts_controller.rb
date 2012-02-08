@@ -20,11 +20,12 @@ class ContactsController < ApplicationController
   end
 
   def update
+    # Record who is manipulating the contact, mainly in groups
+    @contact.user_author = current_user
+
     # FIXME: This should be in the model
     params[:contact][:relation_ids].present? &&
-     params[:contact][:relation_ids].delete("0")
-
-    params[:contact][:user_author] = current_user
+      params[:contact][:relation_ids].delete("0")
 
     if @contact.update_attributes(params[:contact])
       redirect_to @contact.receiver_subject

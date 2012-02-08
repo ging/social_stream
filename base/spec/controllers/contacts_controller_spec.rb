@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe ContactsController do
+  include SocialStream::TestHelpers
+  include SocialStream::TestHelpers::Controllers
 
   render_views
 
@@ -106,6 +108,28 @@ describe ContactsController do
                    :contact => { "relation_ids" => [ @user.relations.last.id ] }
 
       response.should redirect_to(home_path)
+    end
+  end
+
+  context "representing a group" do
+    before(:all) do
+      @group = Factory(:member, :contact => Factory(:group_contact, :receiver => @user.actor)).sender_subject
+    end
+
+    before do
+      sign_in(@user)
+      represent(@group)
+    end
+
+    it "should add other user as member" do
+      other_user = Factory(:user)
+      contact = @group.contact_to!(other_user)
+
+      put :update, :id => contact.id, :contact => { :relation_ids => @group.relation_customs.map(&:id) }
+
+      response.should redirect_to(other_user)
+
+      @group.receivers.should include(other_user.actor)
     end
   end
 end
