@@ -31,7 +31,7 @@
   </div>
   <div class="attachment_tile_text">
     <%= link_to truncate_name(document.file_file_name,:length => 15),
-    {:controller => "documents", :action => "show", :id => document},
+      document_path(document),
     :alt => document.file_file_name,
     :type => document.type,
     :path => document_path(document) %>
