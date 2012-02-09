@@ -38,7 +38,7 @@
 							<%= t('cheesecake.form.fields.name')%>:
 						</div>
 						<div class="form_field">
-							<input type="text" class="form_tag" class="form_subsector_name" id="form_subsector_name_<%= i %>" value="New subsector <%= i %>">
+							<input type="text" class="form_tag form_subsector_name" id="form_subsector_name_<%= i %>" value="New subsector <%= i %>">
 						</div>
 					</div>
 					<div class="form_row less_padding">
@@ -51,14 +51,21 @@
 							<% default_permissions.each_with_index do |p, i| %>
 								<div contain=<%= dom_id p %> class="checkboxPermissionOptionLeft">
 									<input id="form_subsector_<%= i %>_<%= dom_id p %>" class="permission <%= dom_id p %>" type="checkbox"/>
-									<label for=<%= dom_id p %>><%= p.description(:brief) %></label>
+									<label for="form_subsector_<%= i %>_<%= dom_id p %>"><%= p.description(:brief, :relation => "%RELATION_NAME%", :subject => current_subject) %></label>
 									<div class="clearfloat"></div>
 								</div>
 							<% end %>
 						</div>
 						<div class="permissions_explanation" style="display:none;">
 						  <% default_permissions.each_with_index do |p, i| %>
-                  <div class="permission <%= dom_id p %> positive edited_subsector_<%= i %>_<%= dom_id p %>"> <%= p.description(:detailed) %></div>
+                  <div class="permission <%= dom_id p %> positive edited_subsector_<%= i %>_<%= dom_id p %>">
+                    <div class="positive_message">
+                      <%= p.description(:detailed, :relation => "%RELATION_NAME%", :subject => current_subject, :state => "positive") %>
+                    </div>
+                    <div class="negative_message" style="display:none;">
+                      <%= p.description(:detailed, :relation => "%RELATION_NAME%", :subject => current_subject, :state => "negative") %>
+                    </div>
+                  </div>
               <% end %>
 					  </div>
 					</div>
@@ -86,7 +93,7 @@
   $(".permissions_field").each(function(){
     $(this).tipsy({
       delayIn: 500,
-      delayOut: 200,
+      delayOut: 20000,
       gravity: 'e',
       offset: 100,
       opacity: 1,
@@ -94,7 +101,9 @@
       html: true,
       hoverable: true,
       title: function(){
-        return $(this).parent().find('.permissions_explanation').html();
+        var html = $(this).parent().find('.permissions_explanation').html();
+        var relation = $(this).parent().parent().find('.form_subsector_name').val();
+        return html.replace(/%RELATION_NAME%/g, relation);
       }
     });
   });  

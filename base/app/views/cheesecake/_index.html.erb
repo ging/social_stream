@@ -157,8 +157,12 @@
               var label_class = permission_field.attr("id").replace("form_", "edited_");
               if(permission_field.is(":checked")){
                 $("." + label_class).removeClass("negative").addClass("positive");
+                $("." + label_class).find(".negative_message").hide();
+                $("." + label_class).find(".positive_message").show();
               }else{
                 $("." + label_class).removeClass("positive").addClass("negative");
+                $("." + label_class).find(".positive_message").hide();
+                $("." + label_class).find(".negative_message").show();
               }
             }
             update_state();

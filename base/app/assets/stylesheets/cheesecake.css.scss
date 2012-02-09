@@ -358,10 +358,11 @@
 }
 .permissions_explanation_tipsy_menu.tipsy .tipsy-inner .permission {
   padding: 4px 0px 4px 20px;
+  text-align: justify;
 }
 .permissions_explanation_tipsy_menu.tipsy .tipsy-inner .permission.positive {
-  background: url("btn/like.png") 0px no-repeat;
+  background: url("btn/permission_positive.png") 0px no-repeat;
 }
 .permissions_explanation_tipsy_menu.tipsy .tipsy-inner .permission.negative {
-  background: url("btn/uno.png") 0px no-repeat;
+  background: url("btn/permission_negative.png") 0px no-repeat;
 }
