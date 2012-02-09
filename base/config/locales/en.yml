@@ -411,8 +411,8 @@ en:
               negative: "They WILL NOT BE ABLE to change session and act as %{subject}"
           notify:
             nil:
-              positive: "Activities WILL BE notified to contacts at %{relation}"
-              negative: "Activities WILL NOT BE notified to contacts at %{relation}"
+              positive: "Activities WILL BE notified to contacts at %{name}"
+              negative: "Activities WILL NOT BE notified to contacts at %{name}"
     of_relation:
       choose: "2. Permissions in <strong>%{name}</strong> sphere"
   privacy:
