@@ -151,6 +151,19 @@
             $("#edited_subsector_name_" + event.data[0]).html($("#form_subsector_name_" + event.data[0]).val());
             event.data[1].changeLabel($("#form_subsector_name_" + event.data[0]).val());
           });
+          $("#subsector_" + i).find(".permissions_field .permission").each(function(){
+            var permission_field = $(this);
+            var update_state = function(){
+              var label_class = permission_field.attr("id").replace("form_", "edited_");
+              if(permission_field.is(":checked")){
+                $("." + label_class).removeClass("negative").addClass("positive");
+              }else{
+                $("." + label_class).removeClass("positive").addClass("negative");
+              }
+            }
+            update_state();
+            permission_field.on("change",update_state);
+          });
           $("#subsector_" + i).show();
         }else{
           if(sector.subsectors[i-1]){

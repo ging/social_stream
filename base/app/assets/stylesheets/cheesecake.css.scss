@@ -354,7 +354,14 @@
 .permissions_explanation_tipsy_menu.tipsy .tipsy-inner {
   max-width: 300px;
   text-align: left;
+  padding: 5px 8px 4px 2px;
 }
 .permissions_explanation_tipsy_menu.tipsy .tipsy-inner .permission {
-  padding-top: 3px;
+  padding: 4px 0px 4px 20px;
+}
+.permissions_explanation_tipsy_menu.tipsy .tipsy-inner .permission.positive {
+  background: url("btn/like.png") 0px no-repeat;
+}
+.permissions_explanation_tipsy_menu.tipsy .tipsy-inner .permission.negative {
+  background: url("btn/uno.png") 0px no-repeat;
 }

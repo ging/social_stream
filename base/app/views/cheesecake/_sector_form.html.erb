@@ -50,7 +50,7 @@
 						<div class="form_field permissions_field">
 							<% default_permissions.each_with_index do |p, i| %>
 								<div contain=<%= dom_id p %> class="checkboxPermissionOptionLeft">
-									<input class="permission <%= dom_id p %>" type="checkbox"/>
+									<input id="form_subsector_<%= i %>_<%= dom_id p %>" class="permission <%= dom_id p %>" type="checkbox"/>
 									<label for=<%= dom_id p %>><%= p.description(:brief) %></label>
 									<div class="clearfloat"></div>
 								</div>
@@ -58,7 +58,7 @@
 						</div>
 						<div class="permissions_explanation" style="display:none;">
 						  <% default_permissions.each_with_index do |p, i| %>
-                  <div class="permission <%= dom_id p %>"> <%= p.description(:detailed) %></div>
+                  <div class="permission <%= dom_id p %> positive edited_subsector_<%= i %>_<%= dom_id p %>"> <%= p.description(:detailed) %></div>
               <% end %>
 					  </div>
 					</div>
@@ -86,7 +86,7 @@
   $(".permissions_field").each(function(){
     $(this).tipsy({
       delayIn: 500,
-      delayOut: 0,
+      delayOut: 200,
       gravity: 'e',
       offset: 100,
       opacity: 1,
