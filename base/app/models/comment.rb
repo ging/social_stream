@@ -1,6 +1,7 @@
 class Comment < ActiveRecord::Base
   include SocialStream::Models::Object
 
+  alias_attribute :text, :description
   validates_presence_of :text
 
   def parent_post
@@ -10,14 +11,6 @@ class Comment < ActiveRecord::Base
   def _activity_parent_id=(id)
     self._relation_ids = Activity.find(id).relation_ids
     @_activity_parent_id = id
-  end
-
-  def text
-    description
-  end
-
-  def text=(term)
-    self.description = term
   end
 
   def title

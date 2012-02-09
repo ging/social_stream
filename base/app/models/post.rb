@@ -1,20 +1,13 @@
 class Post < ActiveRecord::Base
   include SocialStream::Models::Object
 
+  alias_attribute :text, :description
   validates_presence_of :text
 
   define_index do
     indexes text
 
     has created_at
-  end
-
-  def text
-    description
-  end
-
-  def text=(term)
-    self.description = term
   end
 
   def title
