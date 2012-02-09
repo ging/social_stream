@@ -1,6 +1,9 @@
 class EventsGroupTitleAndDescriptionInActivityObject < ActiveRecord::Migration
   def up
+    ActivityObject.record_timestamps = false
+
     # Fix 'events' table
+    Event.record_timestamps = false
     Event.all.each do |e|
       e.activity_object.title = e.title
       e.activity_object.description = ''
@@ -9,6 +12,7 @@ class EventsGroupTitleAndDescriptionInActivityObject < ActiveRecord::Migration
     change_table :events do |t|
       t.remove :title
     end
+    Event.reset_column_information
   end
 
   def down
