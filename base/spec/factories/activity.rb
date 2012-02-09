@@ -12,11 +12,11 @@ end
 
 Factory.define :activity_object_spec_helper do |a|
   a.object_type "Post"
+  a.description "Post spec helper"
 end
 
 Factory.define :post_spec_helper do |p|
   p.association :activity_object_spec_helper
-  p.text "Post spec helper"
 end
 
 #

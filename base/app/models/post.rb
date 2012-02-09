@@ -9,4 +9,16 @@ class Post < ActiveRecord::Base
     has created_at
   end
 
+  def text
+    description
+  end
+
+  def text=(term)
+    self.description = term
+  end
+
+  def title
+    description.truncate(30, :separator =>' ')
+  end
+
 end

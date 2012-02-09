@@ -1,4 +1,5 @@
 Factory.define :picture do |p|
+  p.sequence(:title)  { |n| "Picture #{ n }" }
   p.file { Rack::Test::UploadedFile.new(File.join(File.dirname(__FILE__), 'files', 'rails.png'),
                                        'image/png') }
 

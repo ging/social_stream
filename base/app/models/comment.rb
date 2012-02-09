@@ -11,4 +11,16 @@ class Comment < ActiveRecord::Base
     self._relation_ids = Activity.find(id).relation_ids
     @_activity_parent_id = id
   end
+
+  def text
+    description
+  end
+
+  def text=(term)
+    self.description = term
+  end
+
+  def title
+    description.truncate(30, :separator =>' ')
+  end
 end

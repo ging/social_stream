@@ -1,4 +1,5 @@
 Factory.define :document do |d|
+  d.sequence(:title)  { |n| "Document #{ n }" }
   d.file { Rack::Test::UploadedFile.new(File.join(File.dirname(__FILE__), 'files', 'small.pdf'),
                                        'application/pdf') }
 
