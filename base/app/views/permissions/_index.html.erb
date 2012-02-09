@@ -10,7 +10,7 @@
         <td>
           <div contain=<%= dom_id p %> class="checkboxPermissionOptionLeft">
             <input id=<%= dom_id p %> class="permission" type="checkbox"/>
-            <label for=<%= dom_id p %>><%= p.description(:brief) %></label>
+            <label for=<%= dom_id p %>><%= p.description(:brief, :subject => current_subject) %></label>
             <div class="clearfloat"></div>
           </div>
         </td>
@@ -28,7 +28,7 @@
     <%= raw t('privacy.intro', :relation => h(@relation.name)) %>
 
     <%= semantic_form_for @relation, :url => polymorphic_path(@relation, :section => 'rules'), :remote => true do |f| %>
-      <%= f.input :permissions, :as => :check_boxes, :collection => default_permissions.map{ |p| [p.description(:detailed, :relation => @relation.name, :subject => current_subject.name), p.id] } %>
+      <%= f.input :permissions, :as => :check_boxes, :collection => default_permissions.map{ |p| [p.description(:detailed, :relation => @relation.name, :subject => current_subject, :state => "positive"), p.id] } %>
       <%= f.submit t('button.save'), :class => 'button' %>
     <% end %>
   </div>

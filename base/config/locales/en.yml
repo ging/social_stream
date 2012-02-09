@@ -380,29 +380,39 @@ en:
     other: "Everybody"
   permission:
     description:
-      brief:
-        create: 
-          activity: "Post to wall"
-        follow:
-          nil: "Follow their activity"
-        read:
-          activity: "Read wall"
-        represent:
-          nil: "Administrate"
-        notify:
-          nil: "Notify via email"
-      detailed:
-        create:
-          activity: "Post to \"%{relation}\" wall"
-        follow:
-          nil: "Activities of the contacts at %{relation} will appear in our home wall"
-        read:
-          activity: "Read posts in \"%{relation}\" wall"
-          tie: "See contacts in levels: %{relations} and %{public}"
-        represent:
-          nil: "Change session to act as %{subject}"
-        notify:
-          nil: "Updates of contacts at %{relation} will be sent to your email"
+      default:
+        brief:
+          create: 
+            activity: "Post to your wall"
+          follow:
+            nil: "Follow their activity"
+          read:
+            activity: "Read your wall"
+          represent:
+            nil: "Administrate"
+          notify:
+            nil: "Notify"
+        detailed:
+          create:
+            activity:
+              positive: "They WILL BE ABLE to post new activities to your wall"
+              negative: "They WILL NOT BE ABLE to post new activities to your wall"
+          follow:
+            nil:
+              positive: "Activities of the contacts at %{relation} WILL APPEAR in your home wall"
+              negative: "Activities of the contacts at %{relation} WILL APPEAR in your home wall"
+          read:
+            activity:
+              positive: "They WILL BE ABLE to read posts in your wall, except those shared with specific contacts"
+              negative: "They WILL NOT BE ABLE to read posts in your wall, except those marked as public"
+          represent:
+            nil:
+              positive: "They WILL BE ABLE to change session and act as %{subject}"
+              negative: "They WILL NOT BE ABLE to change session and act as %{subject}"
+          notify:
+            nil:
+              positive: "Activities WILL BE notified to contacts at %{relation}"
+              negative: "Activities WILL NOT BE notified to contacts at %{relation}"
     of_relation:
       choose: "2. Permissions in <strong>%{name}</strong> sphere"
   privacy:

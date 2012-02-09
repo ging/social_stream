@@ -46,7 +46,22 @@ class Permission < ActiveRecord::Base
   # An explanation of the permissions. Type can be brief or detailed.
   # If detailed, description includes more information about the relation
   def description(type, options = {})
-    I18n.t "permission.description.#{ type }.#{ action }.#{ object || "nil" }",
+    unless options[:subject].present?
+      raise "Now we need subject for permission description"
+    end
+
+    options[:name] = options[:subject].name
+
+    prefix = "permission.description"
+    suffix = "#{ type }.#{ action }.#{ object || "nil" }"
+
+    if options[:state]
+      suffix += ".#{ options[:state] }"
+    end
+
+    options[:default] = :"#{ prefix }.default.#{ suffix }"
+
+    I18n.t "#{ prefix }.#{ options[:subject].subject_type.underscore }.#{ suffix }",
            options
   end
 end
