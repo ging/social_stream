@@ -9,8 +9,5 @@
 </div>
 <div class="briefing">
   "<%= link_to(description_of(activity.direct_object), polymorphic_url(activity.direct_object))%>"
-  <% if SocialStream.activity_forms.include? :document and activity.direct_object.is_a? Document %>
-    
-  <% end%>
 </div>
  
