@@ -32,6 +32,8 @@ function requestConnectToChat(){
 //Chat interface: Connection boxes
 ////////////////////
 
+var focusSearchContactsFlag=false;
+
 function setUserFunctions(){
 
 	settingTooltips();
@@ -114,6 +116,7 @@ function setUserFunctions(){
 	//Select contact function
 	//callback in changeSelectContactValue()
 
+  
   $("#search_chat_contact_flexselect").focus(function(e) {
 		changeContactListVisibility(true);
 	});
@@ -127,6 +130,10 @@ function setUserFunctions(){
 
 function changeSelectContactValue(name,value){
 	$("#search_chat_contact_flexselect").blur();
+	
+	if(value == "ZERO_CONTACTS"){
+		return;
+	}
 	
   var guest_slug = value;
   var guest_name = name;
@@ -173,11 +180,18 @@ function settingTooltips(){
 
 
 function changeContactListVisibility(visible){
-	 if (visible){
-      changeMainChatBoxHeight(mainChatBoxHeightWhileSearchContacts);
+  var nItems = $("#search_chat_contact_flexselect_dropdown ul li").length-1;
+	if (visible){
+		  focusSearchContactsFlag=true;
+		  if(nItems > 9){
+				changeMainChatBoxHeight(mainChatBoxHeightWhileSearchContacts);
+			} else {
+				var mainChatBoxMinRequiredHeight= mainChatBoxaddonsHeight + 20 + nItems * 19;
+				changeMainChatBoxHeight(mainChatBoxMinRequiredHeight);
+			}
 			$(".users_connected").hide();
   } else {
-      changeMainChatBoxHeight(getChatBoxHeightRequriedForConnectionBoxes()[0]);
+      changeMainChatBoxHeight(getChatBoxHeightRequiredForConnectionBoxes());
 			$(".users_connected").show();
   }
 }
@@ -301,13 +315,24 @@ function getConnectionBoxFromSlug(slug){
 }
 
 var cacheConnectedUsers = [];
+
 function hideConnectionBoxFromSlug(slug){
   if ($('div.user_presence[slug=' + slug + ']').length > 0){
     $('div.user_presence[slug=' + slug + ']').hide();
     if(cacheConnectedUsers.indexOf(slug)==-1){
       cacheConnectedUsers.push(slug);
     }
-		udpateMainChatBoxAfterUserDisconnect();
+		updateMainChatBoxAfterUserDisconnect();
+		
+		//Last user disconnected?
+		if (getAllConnectedSlugs().length ==0){
+			if($(".users_connected p.zero_users_connected").length > 0){
+				$(".users_connected p.zero_users_connected").show();
+			} else {
+				var msg = '<%=I18n.t('chat.zerousers')%>';
+        $(".users_connected").append('<p class="zero_users_connected">' + msg + '</p>')
+			}
+    }
   }
 }
 
@@ -315,6 +340,7 @@ function showConnectionBoxFromSlug(slug){
   if ($('div.user_presence[slug=' + slug + ']').length > 0){
     if (!($('div.user_presence[slug=' + slug + ']').is(":visible"))){
        $('div.user_presence[slug=' + slug + ']').show();
+			 $(".users_connected p.zero_users_connected").hide();
     }
   }
 }
@@ -468,12 +494,12 @@ function updateConnectedUsersOfMainChatBox(){
   if(mainChatBox!=null){
     var connectedUsers = getAllConnectedSlugs().length;
     changeMainChatBoxHeaderTitle( '<%=I18n.t('chat.title')%>' + " (" + connectedUsers + ")");
-    changeMainChatBoxHeight(getChatBoxHeightRequriedForConnectionBoxes()[0]);
+    changeMainChatBoxHeight(getChatBoxHeightRequiredForConnectionBoxes());
   }
 }
 
 
-function udpateMainChatBoxAfterUserDisconnect(){
-  changeMainChatBoxHeight(getChatBoxHeightRequriedForConnectionBoxes());
+function updateMainChatBoxAfterUserDisconnect(){
+  changeMainChatBoxHeight(getChatBoxHeightRequiredForConnectionBoxes());
   updateConnectedUsersOfMainChatBox();
 }

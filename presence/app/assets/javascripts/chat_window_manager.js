@@ -244,9 +244,14 @@ function getVideoEmbedForSlug(slug){
 ///////////////////////////
 
 var mainChatBox;
+var connectionBoxesForFile=5;
 var maxConnectionChatBoxesFilesWithoutOverflow = 11;
 var mainChatBoxWidth=150;
-var mainChatBoxHeightWhileSearchContacts=255;
+var mainChatBoxaddonsHeight=50;
+var heightForConnectionBoxFile=30;
+var mainChatBoxHeightWhileSearchContacts=260;
+var mainChatBoxMinHeight=136;
+var mainChatBoxMaxHeight= mainChatBoxaddonsHeight + heightForConnectionBoxFile*maxConnectionChatBoxesFilesWithoutOverflow;
 var chatSlugId="SocialStream_MainChat";
 
 function createMainChatBox(){
@@ -269,7 +274,7 @@ function createMainChatBox(){
 			$(mainChatBox.parent()).find(".ui-chatbox-input").remove();
 			
 			//Set height
-			changeMainChatBoxHeight(getChatBoxHeightRequriedForConnectionBoxes()[0]);
+			changeMainChatBoxHeight(getChatBoxHeightRequiredForConnectionBoxes());
 			
 			//Set width
 			window[getChatVariableFromSlug(chatSlugId)].parent().parent().css( "width", mainChatBoxWidth );
@@ -318,42 +323,41 @@ function changeMainChatBoxHeaderTitle(title){
   }
 }
 
+
 function changeMainChatBoxHeight(height){
 	if (mainChatBox != null) {
+		
+		if(($("#search_chat_contact_flexselect").is(":focus"))&&(! (focusSearchContactsFlag))){
+			return;
+		} else {
+			focusSearchContactsFlag=false;
+		}
+		
+		if(height > mainChatBoxMaxHeight){
+      //overflow = true;
+			height = mainChatBoxMaxHeight;
+      $(mainChatBox).css('overflow-y','visible');
+      mainChatBox.chatbox("option", "offset","5px")
+      mainChatBox.chatbox("option", "width", mainChatBoxWidth + 5)
+    } else {
+      $(mainChatBox).css('overflow-y','hidden');
+      mainChatBox.chatbox("option", "offset","0px")
+      mainChatBox.chatbox("option", "width",mainChatBoxWidth)
+			height = Math.max(height,mainChatBoxMinHeight)
+    }
+		
   	window[getChatVariableFromSlug(chatSlugId)].css("height", height);
   }
 }
 
 
-
-function getChatBoxHeightRequriedForConnectionBoxes(){
+function getChatBoxHeightRequiredForConnectionBoxes(){
 	if(mainChatBox!=null){
-		var addonsHeight=50;
-	  var heightForConnectionBoxFile=30;
-	  var connectionBoxesForFile=5;
-	  var mainChatBoxMinHeight=136;
-	  var mainChatBoxMaxHeight=addonsHeight + heightForConnectionBoxFile*maxConnectionChatBoxesFilesWithoutOverflow;
-	  var overflow;
-	  
-	  var desiredHeight = addonsHeight + Math.ceil(getAllConnectedSlugs().length/connectionBoxesForFile) * heightForConnectionBoxFile;
-	  
-	  if(desiredHeight > mainChatBoxMaxHeight){
-	    overflow = true;
-	    $(mainChatBox).css('overflow-y','visible');
-	    mainChatBox.chatbox("option", "offset","5px")
-	    mainChatBox.chatbox("option", "width", mainChatBoxWidth + 5)
-	  } else {
-	    overflow = false;
-	    $(mainChatBox).css('overflow-y','hidden');
-	    mainChatBox.chatbox("option", "offset","0px")
-	    mainChatBox.chatbox("option", "width",mainChatBoxWidth)
-	  }
-	  
-	  return [Math.max(Math.min(desiredHeight,mainChatBoxMaxHeight),mainChatBoxMinHeight),overflow];
+	  var desiredHeight = mainChatBoxaddonsHeight + Math.ceil(getAllConnectedSlugs().length/connectionBoxesForFile) * heightForConnectionBoxFile;
+	  return desiredHeight;
 	} else {
-		return [null,null];
+		return null;
 	}
-
 }
 
 

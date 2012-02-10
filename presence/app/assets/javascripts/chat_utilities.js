@@ -3,7 +3,7 @@
 ////////////////////
 
 function log(msg) {
-    console.log(msg)
+    //console.log(msg)
 }
 
 function simulate_new_user_connected(slug) {

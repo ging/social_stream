@@ -333,7 +333,7 @@ function processUnavailablePresenceStanza(presence){
   
   if (slug != user_slug) {
     if (getConnectionBoxFromSlug(slug)!=null){
-      hideConnectionBoxFromSlug(slug)
+      hideConnectionBoxFromSlug(slug);
 			showOfflineChatNotificationForSlug(slug);
 			updateConnectedUsersOfMainChatBox();
     }

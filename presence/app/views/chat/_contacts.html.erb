@@ -32,7 +32,9 @@
         <%@all_contacts.each do |contact| %>
           <option value="<%=contact.slug%>"><%=contact.name%></option>
         <% end %>
-      <% end %>
+      <% else %>
+			  <option value="ZERO_CONTACTS"> <%=t('chat.zerocontacts')%></option>
+			<% end %>
     </select>
   </div>
 
