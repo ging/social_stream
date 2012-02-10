@@ -1,9 +1,12 @@
 class DocumentsGroupTitleAndDescriptionInActivityObject < ActiveRecord::Migration
   def up
+    ao_ts = ActivityObject.record_timestamps
     ActivityObject.record_timestamps = false
 
     # Fix 'documents' table
+    d_ts = Document.record_timestamps
     Document.record_timestamps = false
+
     Document.all.each do |d|
       d.activity_object.title = d.title
       d.activity_object.description = d.description
@@ -14,6 +17,9 @@ class DocumentsGroupTitleAndDescriptionInActivityObject < ActiveRecord::Migratio
       t.remove :description
     end
     Document.reset_column_information
+    Document.record_timestamps = d_ts
+
+    ActivityObject.record_timestamps = ao_ts
   end
 
   def down
