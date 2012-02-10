@@ -1,7 +1,8 @@
 module XmppHelper
   
   def getChatContacts 
-     connected_users = []   
+     connected_users = []
+     all_users = []
      
      #Get bidirectional contacts
      contacts = current_user.contact_actors(:type=>:user)
@@ -12,9 +13,10 @@ module XmppHelper
        if contact.user.connected
          connected_users << contact.user
        end
+       all_users << contact.user 
      end
 
-    return connected_users  
+    return [connected_users,all_users]  
   end
   
 end

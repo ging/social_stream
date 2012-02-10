@@ -1,6 +1,5 @@
 @import "colors";
 
-
 /* Chatbox style sheet */
 
 .ui-widget-content{
@@ -208,7 +207,10 @@ input.connectChatButton{
 	padding: 2px 0 2px 0px;
 }
 
-
+p.zero_users_connected {
+	text-align: center;
+	margin-top: 10px;
+}
 
 
 /* Tooltip */
@@ -223,6 +225,7 @@ input.connectChatButton{
   color: white;
 	background:transparent url(black_arrow3.png);
 	text-align: center;
+	z-index: 10;
 }
 
 
@@ -283,7 +286,7 @@ input.connectChatButton{
 	width:auto; 
 	min-width:170px; 
 	list-style:none;
-	z-index: 1;
+	z-index: 2;
 }
 	
 .dropdown span.value { 
@@ -350,3 +353,40 @@ a.chatLink:link, a.chatLink:visited {
 a.chatImageLink:link, a.chatImageLink:visited {
     color: $main-color;
 }
+
+
+
+
+/* Chosen stylesheet */
+
+div.allContacts {
+  width: 100px;
+  display: block;
+}
+
+#search_chat_contact_flexselect {
+  background: url('btn/search_icon.png') 5px 50% no-repeat $secondary-color;
+  padding: 0 0px 0 0px;
+  font-size: 11px;
+  color: $main-color;
+  border: solid 1px $input-border-color;
+  height: 25px;
+  width: 122px;
+  padding: 0 3px 0 22px;
+  margin-bottom: 1px;
+}
+
+#search_chat_contact_flexselect_dropdown {
+	background: $secondary-color;
+}
+
+#search_chat_contact_flexselect_dropdown li {
+  background: $secondary-color;
+	font-size: 11px;
+  color: $main-color;
+}
+
+#search_chat_contact_flexselect_dropdown li:hover {
+	background: $separation-color;
+}
+

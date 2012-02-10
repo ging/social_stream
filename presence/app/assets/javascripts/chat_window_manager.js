@@ -41,17 +41,7 @@ function createChatBox(guest_slug,guest_name,guest_jid,user_name,user_jid){
 															position: position,
 															priority: visibleChatBoxes.length+1,
 															boxClosed: function(id) {
-                                
-																position = $("#" + guest_slug).chatbox("option", "position");
-																
-																for (i=position+1;i<visibleChatBoxes.length+1;i++){
-																	visibleChatBoxes[i-1].chatbox("option", "offset", visibleChatBoxes[i-1].chatbox("option", "offset") - chatBoxSeparation);
-																	visibleChatBoxes[i-1].chatbox("option", "position", visibleChatBoxes[i-1].chatbox("option", "position") - 1 );
-                                }
-																
-																visibleChatBoxes.splice(position-1,1);
-																$("#" + guest_slug).chatbox("option", "hidden", true);
-																nBox--;
+                                closeChatBox(guest_slug)
 															},
 															
                               messageSent : function(id, user, msg) {
@@ -111,29 +101,72 @@ function getBoxParams(){
 }
 
 
+function closeChatBox(guest_slug){
+	var position = $("#" + guest_slug).chatbox("option", "position");
+                                
+  for (i=position+1;i<visibleChatBoxes.length+1;i++){
+    visibleChatBoxes[i-1].chatbox("option", "offset", visibleChatBoxes[i-1].chatbox("option", "offset") - chatBoxSeparation);
+    visibleChatBoxes[i-1].chatbox("option", "position", visibleChatBoxes[i-1].chatbox("option", "position") - 1 );
+  }
+  
+  visibleChatBoxes.splice(position-1,1);
+  $("#" + guest_slug).chatbox("option", "hidden", true);
+  nBox--;
+}
+
+
 function getChatVariableFromSlug(slug){
 	return "slug_" + slug;
 }
-
 
 function getSlugFromChatVariable(variable){
 	return variable.split("_")[1];
 }
 
 function getVisibleChatBoxes(){
-	
 	for(i=0; i<visibleChatBoxes.length; i++){
 		if (visibleChatBoxes[i][0].id==chatSlugId){
       visibleChatBoxes.splice(i,1)
     }
 	}
-	
 	return visibleChatBoxes
 }
+
 
 function getAllChatBoxes(){
   return $(".chatbox").not(document.getElementById(chatSlugId))
 }
+
+function getChatBoxForSlug(slug){
+  if (typeof window[getChatVariableFromSlug(slug)] == 'undefined') {
+		return null;
+  } else {
+		return window[getChatVariableFromSlug(slug)];
+	}
+}
+
+
+function getAllSlugsWithChatBoxes(){
+	var slugsWithChatBox = [];
+	$.each(getAllChatBoxes(), function(index, value) {
+    slugsWithChatBox.push($(value).attr("id"))
+  });
+	return  slugsWithChatBox;
+}
+
+function getAllDisconnectedSlugsWithChatBoxes(){
+  var slugsWithChatBox = getAllSlugsWithChatBoxes();
+	var slugsConnected = getAllConnectedSlugs();
+	var allDisconnectedSlugsWithChatBox = [];
+	
+	$.each(slugsWithChatBox, function(index, value) {
+		if (slugsConnected.indexOf(value)==-1){
+			allDisconnectedSlugsWithChatBox.push(value);
+		}
+  });
+	return allDisconnectedSlugsWithChatBox;
+}
+
 
 ////////////////////
 //Box replacement
@@ -211,6 +244,9 @@ function getVideoEmbedForSlug(slug){
 ///////////////////////////
 
 var mainChatBox;
+var maxConnectionChatBoxesFilesWithoutOverflow = 11;
+var mainChatBoxWidth=150;
+var mainChatBoxHeightWhileSearchContacts=255;
 var chatSlugId="SocialStream_MainChat";
 
 function createMainChatBox(){
@@ -233,22 +269,23 @@ function createMainChatBox(){
 			$(mainChatBox.parent()).find(".ui-chatbox-input").remove();
 			
 			//Set height
-			window[getChatVariableFromSlug(chatSlugId)].css( "height", "180" ); 
+			changeMainChatBoxHeight(getChatBoxHeightRequriedForConnectionBoxes()[0]);
 			
 			//Set width
-			var windowWidth=150;
-			window[getChatVariableFromSlug(chatSlugId)].parent().parent().css( "width", windowWidth );
-			$(mainChatBox.parent().parent()).find(".ui-chatbox-titlebar").css( "width", windowWidth-6 );
-			$(mainChatBox).css( "width", windowWidth-6 );
+			window[getChatVariableFromSlug(chatSlugId)].parent().parent().css( "width", mainChatBoxWidth );
+			$(mainChatBox.parent().parent()).find(".ui-chatbox-titlebar").css( "width", mainChatBoxWidth-6 );
+			$(mainChatBox).css( "width", mainChatBoxWidth-6 );
 			
 			
 			//Adjust window offset
-			offsetForFlowBox = 235-windowWidth;
+			offsetForFlowBox = 235-mainChatBoxWidth;
 			
 			//CSS Adjusts
 			$("#chat_partial").css("margin-top",-3)
       $("#chat_partial").css("margin-left",-3)
 			$(".dropdown dd ul").css("min-width",147) 
+			$(mainChatBox).css('overflow-x','hidden')
+      $(mainChatBox).css('overflow-y','hidden')
 			
 			//Header title
 			updateConnectedUsersOfMainChatBox();
@@ -280,3 +317,43 @@ function changeMainChatBoxHeaderTitle(title){
   	$($(mainChatBox.parent().parent()).find(".ui-chatbox-titlebar").find("span")[0]).html(title);
   }
 }
+
+function changeMainChatBoxHeight(height){
+	if (mainChatBox != null) {
+  	window[getChatVariableFromSlug(chatSlugId)].css("height", height);
+  }
+}
+
+
+
+function getChatBoxHeightRequriedForConnectionBoxes(){
+	if(mainChatBox!=null){
+		var addonsHeight=50;
+	  var heightForConnectionBoxFile=30;
+	  var connectionBoxesForFile=5;
+	  var mainChatBoxMinHeight=136;
+	  var mainChatBoxMaxHeight=addonsHeight + heightForConnectionBoxFile*maxConnectionChatBoxesFilesWithoutOverflow;
+	  var overflow;
+	  
+	  var desiredHeight = addonsHeight + Math.ceil(getAllConnectedSlugs().length/connectionBoxesForFile) * heightForConnectionBoxFile;
+	  
+	  if(desiredHeight > mainChatBoxMaxHeight){
+	    overflow = true;
+	    $(mainChatBox).css('overflow-y','visible');
+	    mainChatBox.chatbox("option", "offset","5px")
+	    mainChatBox.chatbox("option", "width", mainChatBoxWidth + 5)
+	  } else {
+	    overflow = false;
+	    $(mainChatBox).css('overflow-y','hidden');
+	    mainChatBox.chatbox("option", "offset","0px")
+	    mainChatBox.chatbox("option", "width",mainChatBoxWidth)
+	  }
+	  
+	  return [Math.max(Math.min(desiredHeight,mainChatBoxMaxHeight),mainChatBoxMinHeight),overflow];
+	} else {
+		return [null,null];
+	}
+
+}
+
+

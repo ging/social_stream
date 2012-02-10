@@ -136,7 +136,8 @@ var awayTimer;
 var timer;
 var reconnectTimer;
 var disconnectionFlag = true;
-var afterNewConnectionFlagFlag = false;
+var afterNewConnectionFlag = false;
+var afterFirstConnectionFlag = true;
 var requestContacts=false;
 var cyclesToRefresh = (refreshMinTime/timerPeriod);
 
@@ -219,8 +220,6 @@ function onConnect(status) {
 		
     awayTimer = setInterval("awayTimerFunction()", awayTimerPeriod);
     timer = setInterval("timerFunction()", timerPeriod);
-		
-    hideAllNotifications();
   }
   
   updateChatWindow();
@@ -285,6 +284,8 @@ function onMessage(msg) {
 ///////
 function onPresence(presence) {
     
+		log(presence)
+		
     //Check presence stanza type
     ptype = $(presence).attr('type');
         
@@ -333,7 +334,7 @@ function processUnavailablePresenceStanza(presence){
   if (slug != user_slug) {
     if (getConnectionBoxFromSlug(slug)!=null){
       hideConnectionBoxFromSlug(slug)
-      showChatNotificationForSlug(slug,$(getConnectionBoxFromSlug(slug)).attr("name") + " is offline");
+			showOfflineChatNotificationForSlug(slug);
 			updateConnectedUsersOfMainChatBox();
     }
   }

@@ -6,6 +6,7 @@ en:
     unableconnect: "Chat Out of Service"
     title: "Chat"
     password: "Password"
+    zerousers: "No users connected"
     status: 
       choose: "Choose status"
       available: "Available"
@@ -18,3 +19,4 @@ en:
       update: "Update Settings"
     notify:
       offline: "You are offline"
+      guestOffline: "is offline"

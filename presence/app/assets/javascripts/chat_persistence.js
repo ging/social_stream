@@ -64,11 +64,19 @@ function storeConversations() {
 
 
 function storeChatConnectionParametres() {
-	if (sessionStorage.getItem("cookie") == null){
-    sessionStorage.setItem("cookie", cookie);
-    sessionStorage.setItem("chat_user_name", user_name);
-    sessionStorage.setItem("chat_user_slug", user_slug);
-    sessionStorage.setItem("chat_user_jid", user_jid);
+	if ((sessionStorage.getItem("cookie") == null)||(sessionStorage.getItem("chat_user_name") == null)){
+		if ((typeof cookie != 'undefined')&&(cookie!=null)){
+			sessionStorage.setItem("cookie", cookie);
+		}
+    if ((typeof user_name != 'undefined') && (user_name != null)) {
+			sessionStorage.setItem("chat_user_name", user_name);
+	  }
+		if ((typeof user_slug != 'undefined') && (user_slug != null)) {
+			sessionStorage.setItem("chat_user_slug", user_slug);
+	  }
+		if ((typeof user_jid != 'undefined') && (user_jid != null)) {
+			sessionStorage.setItem("chat_user_jid", user_jid);
+	  }
 	}	
 }
 
@@ -104,6 +112,7 @@ function getRestoreUserChatStatus(){
 
 
 function restoreChatData(){
+	
   //Check for Session Storage support
   if (! window.sessionStorage){
     return
@@ -162,7 +171,7 @@ function restoreConversations() {
 							 window[getChatVariableFromSlug(guest_slug)].parent().toggle(false);
 						}			
 						if ((visibleMaxSlugs.indexOf(guest_slug)==-1)&&(visibleMinSlugs.indexOf(guest_slug)==-1)){
-              window[getChatVariableFromSlug(guest_slug)].chatbox("option", "boxManager").toggleBox(false);  
+							closeChatBox(guest_slug); 
             }
           } else {
 						//Always created.

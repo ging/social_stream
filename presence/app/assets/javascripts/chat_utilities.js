@@ -3,7 +3,17 @@
 ////////////////////
 
 function log(msg) {
-    //console.log(msg)
+    console.log(msg)
+}
+
+function simulate_new_user_connected(slug) {
+  var stanza_test = '<presence xmlns="jabber:client" from="' + slug + '@localhost/27825459741328802387991286" to="demo@localhost/2517285379132880233667729">'
+  onPresence(stanza_test);
+}
+
+function simulate_new_user_disconnected(slug) {
+  var stanza_test = '<presence xmlns="jabber:client" type="unavailable" from="' + slug + '@localhost/27825459741328802387991286" to="demo@localhost/2517285379132880233667729">'
+  onPresence(stanza_test);
 }
 
 
@@ -229,6 +239,9 @@ function getNameFromSlug(slug){
   }
 	return name;
 }
+
+
+
 
 
 ////////////////////

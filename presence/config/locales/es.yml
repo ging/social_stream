@@ -6,6 +6,7 @@ es:
     unableconnect: "Chat Fuera de servicio"
     title: "Chat"
     password: "Contraseña"
+    zerousers: "No hay contactos conectados"
     status:
       choose: "Establecer estado"
       available: "Disponible"
@@ -18,4 +19,4 @@ es:
       update: "Guardar configuración"
     notify:
       offline: "Desconectado"
-       
+      guestOffline: "está desconectado"

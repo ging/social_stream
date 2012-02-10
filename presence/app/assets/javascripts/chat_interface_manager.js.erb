@@ -1,3 +1,5 @@
+var global;
+
 ////////////////////
 //Reconnect button interface functions
 ////////////////////
@@ -31,7 +33,12 @@ function requestConnectToChat(){
 ////////////////////
 
 function setUserFunctions(){
-  
+
+	settingTooltips();
+	
+	///////////////////////
+	//Open chatbox function
+	///////////////////////
   $("div.user_presence").click(function(event, ui){
     var guest_name = $(this).attr("name");
     var guest_slug = $(this).attr("slug");
@@ -43,10 +50,21 @@ function setUserFunctions(){
     };
   });
   
+	
+	//Hide tooltips on mouseleave
+	$("div.user_presence").mouseleave(function(e){
+		var div = $(this);
+		$.each($(".tooltip:visible"), function(index, value) {
+			if ( $($(".tooltip:visible")[0]).html() == $(div).attr("name") ){
+				$($(".tooltip:visible")[index]).hide();
+			}
+		});
+  });
   
-////////////////////
-//Chat interface: Status selector
-////////////////////
+	
+	////////////////////
+	//Chat interface: Status selector
+	////////////////////
 
   //JQuery DropdwanStatus
   
@@ -78,14 +96,92 @@ function setUserFunctions(){
   
   $(document).bind('click', function(e) {
     var $clicked = $(e.target);
+		
     if (! $clicked.parents().hasClass("dropdown")){
       //Click outside the select...
         $(".dropdown dd ul").hide();
         setStatusWidgetTitle(userStatus);
     }
   });
-  
+	
+	///////////////
+	//Search contacts enabling
+	///////////////
+	$("select.flexselect").flexselect({
+    allowMismatch: true
+  });
+	
+	//Select contact function
+	//callback in changeSelectContactValue()
+
+  $("#search_chat_contact_flexselect").focus(function(e) {
+		changeContactListVisibility(true);
+	});
+	
+	$("#search_chat_contact_flexselect").blur(function(e) {
+    changeContactListVisibility(false);
+  });
+
 }
+
+
+function changeSelectContactValue(name,value){
+	$("#search_chat_contact_flexselect").blur();
+	
+  var guest_slug = value;
+  var guest_name = name;
+  var guest_jid = guest_slug + "@" + domain;
+  if (createChatBox(guest_slug, guest_name, guest_jid, user_name, user_jid)) {
+  } else {
+    window[getChatVariableFromSlug(guest_slug)].chatbox("option", "boxManager").toggleBox(true);
+  };
+  
+  //Check for online status and show notification
+  if (getAllConnectedSlugs().indexOf(guest_slug)==-1) {
+		showOfflineChatNotificationForSlug(guest_slug);
+  }
+  
+	changeContactListVisibility(false);
+}
+
+
+function settingTooltips(){
+  if (mainChatBox == null) {
+    //Enabling default tooltips
+      $(".user_presence a[title]").tooltip();
+  } else {
+    //Enabling tooltips with center left position
+    
+    //Changing Tooltip CSS class by JQuery
+    var ss = document.styleSheets;
+    for (var i=0; i<ss.length; i++) {
+        var rules = ss[i].cssRules || ss[i].rules;
+        for (var j=0; j<rules.length; j++) {
+            if (rules[j].selectorText === ".tooltip") {
+                rules[j].style.background = 'url("black_arrow9.png") repeat scroll 0% 0% transparent'
+            }
+        }
+    } 
+    $(".user_presence a[title]").tooltip({
+      opacity: 0.95,
+      relative: false,
+      position: 'top left',
+      offset: [0,37]
+    });
+  }
+}
+
+
+function changeContactListVisibility(visible){
+	 if (visible){
+      changeMainChatBoxHeight(mainChatBoxHeightWhileSearchContacts);
+			$(".users_connected").hide();
+  } else {
+      changeMainChatBoxHeight(getChatBoxHeightRequriedForConnectionBoxes()[0]);
+			$(".users_connected").show();
+  }
+}
+
 
 function setStatusWidgetTitle(status){
   
@@ -179,14 +275,18 @@ function updateChatWindow(){
   $.post("/chatWindow", { userConnected: stropheConnectedAndOnlineStatus }, function(data){
       $(".tooltip").hide() //Prevent tooltips
       $("#chat_partial").html(modifyChatPartialIfMainBox(data));
+			updateConnectedUsersOfMainChatBox();
       if (isStropheConnected()) {
         setStatusWidgetTitle(userStatus);
-        $(".user_presence a[title]").tooltip();
-        setUserFunctions();
-				updateConnectedUsersOfMainChatBox();
+				setUserFunctions();
         if (afterNewConnectionFlag){
           afterNewConnectionFlag = false;
-          restoreChatData();
+					if(afterFirstConnectionFlag){
+						restoreChatData();
+						afterFirstConnectionFlag = false;
+					} else {
+						updateAllNotifications();
+					}
         }
       }
   });
@@ -207,6 +307,7 @@ function hideConnectionBoxFromSlug(slug){
     if(cacheConnectedUsers.indexOf(slug)==-1){
       cacheConnectedUsers.push(slug);
     }
+		udpateMainChatBoxAfterUserDisconnect();
   }
 }
 
@@ -229,16 +330,28 @@ function setUserIconStatus(slug, status){
 }
 
 function getAllConnectedSlugs(){
-  connectedSlugs=[];
-  connectionBoxes = $('div.user_presence[slug]');
-  $.each(connectionBoxes, function(index, value) {
-		if($(value).css("display")!="none"){
-          connectedSlugs.push($(value).attr("slug"))
-      }
-  });
-  return connectedSlugs
+  return getAllSlugsByChatConnectedState()[0];
 }
 
+function getAllDisconnectedSlugs(){
+  return getAllSlugsByChatConnectedState()[1];
+}
+
+function getAllSlugsByChatConnectedState(){
+  var onlineSlugs=[];
+	var offlineSlugs=[];
+	var allSlugs=[];
+  connectionBoxes = $('div.user_presence[slug]');
+  $.each(connectionBoxes, function(index, value) {
+    if($(value).css("display")!="none"){
+        onlineSlugs.push($(value).attr("slug"))
+    } else {
+				offlineSlugs.push($(value).attr("slug"))
+		}
+		allSlugs.push($(value).attr("slug"))
+  });
+  return [onlineSlugs,offlineSlugs,allSlugs]
+}
 
 ////////////////////
 //Insert received message in chatbox
@@ -293,25 +406,34 @@ function putReceivedMessageOnChatWindow(from_jid,from_slug,body,msgID){
 //Notifications on chat Window
 ////////////////////
 
-function showChatNotificationForSlug(slug,msg){
-  var notification = $("#" + slug).parent().find("div.ui-chatbox-notify");
-  showChatNotification(notification,msg);
-}
-
 function showChatNotification(notification,msg){
   notification.html("<p class==\"ui-chatbox-notify-text\">" + msg + "</p>");
   notification.css("visibility","visible");
   notification.fadeIn();
 }
 
-function hideChatNotificationForSlug(slug){
+function showChatNotificationForSlug(slug,msg){
   var notification = $("#" + slug).parent().find("div.ui-chatbox-notify");
-  hideChatNotification(notification);
+  showChatNotification(notification,msg);
+}
+
+function showOfflineChatNotificationForSlug(slug){
+	var slug_chat_box = getChatBoxForSlug(slug);
+	if(slug_chat_box!=null){
+		var name = slug_chat_box.attr("name")
+    var msg =  name + ' ' + '<%=I18n.t('chat.notify.guestOffline')%>';
+    showChatNotificationForSlug(slug,msg);
+	}
 }
 
 function hideChatNotification(notification){
   notification.fadeOut();
   notification.css("visibility","hidden");
+}
+
+function hideChatNotificationForSlug(slug){
+  var notification = $("#" + slug).parent().find("div.ui-chatbox-notify");
+  hideChatNotification(notification);
 }
 
 function notifyWhenUsersDisconnect(){
@@ -325,6 +447,17 @@ function hideAllNotifications(){
   hideChatNotification(notification);
 }
 
+function updateAllNotifications(){
+	hideAllNotifications();
+	if(disconnectionFlag){
+		notifyWhenUsersDisconnect();
+	} else {
+		//Notification for offline contacts
+		$.each(getAllDisconnectedSlugsWithChatBoxes(), function(index, value) {
+			showOfflineChatNotificationForSlug(value)
+    }); 
+	}
+}
 
 
 ////////////////////
@@ -332,6 +465,15 @@ function hideAllNotifications(){
 ////////////////////
 
 function updateConnectedUsersOfMainChatBox(){
-	var connectedUsers = getAllConnectedSlugs().length;
-	changeMainChatBoxHeaderTitle( '<%=I18n.t('chat.title')%>' + " (" + connectedUsers + ")");
+  if(mainChatBox!=null){
+    var connectedUsers = getAllConnectedSlugs().length;
+    changeMainChatBoxHeaderTitle( '<%=I18n.t('chat.title')%>' + " (" + connectedUsers + ")");
+    changeMainChatBoxHeight(getChatBoxHeightRequriedForConnectionBoxes()[0]);
+  }
+}
+
+
+function udpateMainChatBoxAfterUserDisconnect(){
+  changeMainChatBoxHeight(getChatBoxHeightRequriedForConnectionBoxes());
+  updateConnectedUsersOfMainChatBox();
 }
