@@ -209,13 +209,29 @@ class Activity < ActiveRecord::Base
   end
 
   def notify
-    return true if !notificable?
+    return true unless notificable?
     #Avaible verbs: follow, like, make-friend, post, update
 
-    if ['like','follow','make-friend','post','update'].include? verb and !channel.reflexive?
+    if direct_object.is_a? Comment
+      participants.each do |p|
+        p.notify(notification_subject, "Youre not supposed to see this", self) unless p == sender
+      end
+    elsif ['like','follow','make-friend','post','update'].include? verb and !channel.reflexive?
       receiver.notify(notification_subject, "Youre not supposed to see this", self)
     end
     true
+  end
+
+  def participants
+    parts=Set.new
+    channel.activity_objects.each do |ao|
+      if ao.acts_as_actor?
+        parts << ao.object unless ao.objec.nil?
+      elsif ao.object.respond_to? :actor
+        parts << ao.object.actor unless ao.object.actor.nil?
+      end
+    end
+    parts
   end
 
   # Is subject allowed to perform action on this {Activity}?
