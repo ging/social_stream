@@ -222,16 +222,19 @@ class Activity < ActiveRecord::Base
     true
   end
 
+  # A list of participants
   def participants
     parts=Set.new
-    channel.activity_objects.each do |ao|
-      if ao.acts_as_actor?
-        parts << ao.object unless ao.objec.nil?
-      elsif ao.object.respond_to? :actor
-        parts << ao.object.actor unless ao.object.actor.nil?
-      end
+    same_thread.map{|a| a.activity_objects.first}.each do |ao|
+      parts << ao.author if ao.respond_to? :author and !ao.author.nil?
     end
     parts
+  end
+
+  # This and related activities
+  def same_thread
+    return [self] if ancestry.nil?
+    [Activity.find(ancestry)] + Activity.find_all_by_ancestry(ancestry)
   end
 
   # Is subject allowed to perform action on this {Activity}?
