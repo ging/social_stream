@@ -13,6 +13,13 @@ class GroupTitleAndDescriptionInActivityObject < ActiveRecord::Migration
     Comment.record_timestamps = false
 
     Comment.all.each do |c|
+      # Remove comments that are not properly deleted
+      # https://github.com/ging/social_stream/issues/213
+      if c.activity_object.activities.blank?
+        c.destroy
+        next
+      end
+
       c.activity_object.description = c.read_attribute(:text)
       c.save!
     end
