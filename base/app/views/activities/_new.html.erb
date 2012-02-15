@@ -6,12 +6,6 @@
                              :receiver => receiver
                            } %>
   <% end %>
-
-  <%= javascript_tag do %>
-  $(function(){  
-    SocialStream.Wall.activateAntiRebounds();  
-  });
-  <% end %>
 </div>
 
 <div id="activity_form_select">
@@ -54,3 +48,10 @@
   <%= submit_tag(t('share'), :class => "button submitActivity", :id => "masterSubmitButton") %>
 </div>
 <% end %>
+
+<%= javascript_tag do %>
+  $(function(){  
+    SocialStream.Wall.setup();  
+  });
+<% end %>
+

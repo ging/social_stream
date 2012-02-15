@@ -3,3 +3,9 @@
   <%= paginate activities %>
 </div>
 
+<%= javascript_tag do %>
+  $(function(){  
+    SocialStream.Timeline.setup();  
+  });
+<% end %>
+
