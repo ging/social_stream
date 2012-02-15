@@ -13,7 +13,7 @@ class GroupTitleAndDescriptionInActivityObject < ActiveRecord::Migration
     Comment.record_timestamps = false
 
     Comment.all.each do |c|
-      c.activity_object.description = c.text
+      c.activity_object.description = c.read_attribute(:text)
       c.save!
     end
     change_table :comments do |t|
@@ -27,7 +27,7 @@ class GroupTitleAndDescriptionInActivityObject < ActiveRecord::Migration
     Post.record_timestamps = false
 
     Post.all.each do |p|
-      p.activity_object.description = p.text
+      p.activity_object.description = p.read_attribute(:text)
       p.save!
     end
     change_table :posts do |t|

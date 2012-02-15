@@ -8,8 +8,7 @@ class EventsGroupTitleAndDescriptionInActivityObject < ActiveRecord::Migration
     Event.record_timestamps = false
 
     Event.all.each do |e|
-      e.activity_object.title = e.title
-      e.activity_object.description = ''
+      e.activity_object.title = e.read_attribute(:title)
       e.save!
     end
     change_table :events do |t|

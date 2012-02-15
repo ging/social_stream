@@ -8,8 +8,8 @@ class DocumentsGroupTitleAndDescriptionInActivityObject < ActiveRecord::Migratio
     Document.record_timestamps = false
 
     Document.all.each do |d|
-      d.activity_object.title = d.title
-      d.activity_object.description = d.description
+      d.activity_object.title = d.read_attribute(:title)
+      d.activity_object.description = d.read_attribute(:description)
       d.save!
     end
     change_table :documents do |t|
