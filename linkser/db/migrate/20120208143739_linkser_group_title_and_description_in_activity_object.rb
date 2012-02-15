@@ -8,8 +8,8 @@ class LinkserGroupTitleAndDescriptionInActivityObject < ActiveRecord::Migration
     Link.record_timestamps = false
 
     Link.all.each do |l|
-      l.activity_object.title = l.title
-      l.activity_object.description = l.description
+      l.activity_object.title = l.read_attribute(:title)
+      l.activity_object.description = l.read_attribute(:description)
       l.save!
     end
 
