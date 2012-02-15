@@ -233,8 +233,8 @@ class Activity < ActiveRecord::Base
 
   # This and related activities
   def same_thread
-    return [self] if ancestry.nil?
-    [Activity.find(ancestry)] + Activity.find_all_by_ancestry(ancestry)
+    return [self] if is_root?
+    [parent] + siblings
   end
 
   # Is subject allowed to perform action on this {Activity}?
