@@ -207,6 +207,8 @@ function onConnect(status) {
     //addHandler:(callback, namespace to match, stanza name, stanza type, stanza id , stanza from, options)
     connection.addHandler(onMessage, null, 'message', null, null,  null);
     connection.addHandler(onPresence, null, 'presence', null, null,  null); 
+		connection.addHandler(onIQStanza,null, "iq", null, null);
+
 		
     disconnectionFlag = false;
     afterNewConnectionFlag = true;
@@ -232,19 +234,29 @@ function onReconnect(){
     if (reconnectAttempts>0) {
       reconnectAttempts--;
       
-      $("#chat_header_title").html('<%=I18n.t('chat.reconnecting')%>')
+			changeChatHeaderTitle('<%=I18n.t('chat.reconnecting')%>')
 			
 			connectToChat(user_jid,cookie,null);
 			
       reconnectTimer = setTimeout ("onReconnect()", 9000);
 			
     } else {
-      $("#chat_header_title").html('<%=I18n.t('chat.unableconnect')%>')
+			changeChatHeaderTitle('<%=I18n.t('chat.unableconnect')%>')
       //Notify issue to Rails App Server?
     }
     
   }
 }
+
+
+function changeChatHeaderTitle(msg){
+	if(mainChatBox==null){
+		$("#chat_header_title").html(msg)
+	} else {
+		changeMainChatBoxHeaderTitle(msg);
+	}
+}
+
 
 function disconnectStrophe(){
   userStatus = "offline";
@@ -255,6 +267,7 @@ function disconnectStrophe(){
     connection.disconnect();
   } 
 }
+
 
 ////////
 //Manage Message stanzas
@@ -287,7 +300,7 @@ function onPresence(presence) {
 		log(presence)
 		
     //Check presence stanza type
-    ptype = $(presence).attr('type');
+    var ptype = $(presence).attr('type');
         
     switch (ptype){
       case undefined:
@@ -309,12 +322,12 @@ function onPresence(presence) {
 
 
 function processAvailablePresenceStanza(presence){
-  from = $(presence).attr('from');
-  slug = from.split("@")[0];
+  var from = $(presence).attr('from');
+  var slug = from.split("@")[0];
   
   if (slug != user_slug) {
     if (getConnectionBoxFromSlug(slug)!=null){
-      status = $(presence).find('show').text(); 
+      var status = $(presence).find('show').text(); 
       setUserIconStatus(slug, status);
       if (cacheConnectedUsers.indexOf(slug) != -1) {
         showConnectionBoxFromSlug(slug);
@@ -328,8 +341,8 @@ function processAvailablePresenceStanza(presence){
 }
 
 function processUnavailablePresenceStanza(presence){
-  from = $(presence).attr('from');
-  slug = from.split("@")[0];
+  var from = $(presence).attr('from');
+  var slug = from.split("@")[0];
   
   if (slug != user_slug) {
     if (getConnectionBoxFromSlug(slug)!=null){
@@ -339,6 +352,65 @@ function processUnavailablePresenceStanza(presence){
     }
   }
 }
+
+
+////////
+//Manage IQ stanzas
+///////
+function onIQStanza(iq){
+  
+	var from = iq.getAttribute("from");
+	var slug = from.split("@")[0];
+	
+	if (slug == user_slug) {
+		return;
+  }
+	
+	var queryElements = iq.getElementsByTagName('query');
+
+  if (queryElements.length > 0) {
+    var query = queryElements[0];
+		var type = query.getAttribute("xmlns");
+		
+		if( type == "jabber:iq:version"){
+			var iqID = iq.getAttribute("id");
+			
+			//Response to client info request.
+			sendIQStanzaWithClientInfo(from,iqID);
+		}
+	}
+
+	return true;
+}
+
+
+function sendIQStanzaWithClientInfo(jid,iqID){
+	var client = "Social Stream XMPP Client"
+	var version = '<%=Socialstream::Presence::VERSION%>';
+	var iq = $iq({to: jid, type: "result", id: iqID})
+  .c("query", {xmlns: "jabber:iq:version"}).c("name").t(client).up().c("version").t(version);
+	connection.sendIQ(iq);
+}
+
+
+var iqIDNumber = 1000;
+function sendIQStanzaForRequestClientInfo(jid){
+  //var client = "Social Stream XMPP Client"
+  //var version = '<%=Socialstream::Presence::VERSION%>';
+  //var iq = $iq({to: jid, type: "result", id: iqID})
+  //.c("query", {xmlns: "jabber:iq:version"}).c("name").t(client).up().c("version").t(version);
+  //connection.sendIQ(iq);
+}
+
+
+function iqSuccess(){
+	log("iq sucess")
+}
+
+function iqFail(){
+	log("iq fail")
+}
+
 
 ////////
 //Send Message stanzas

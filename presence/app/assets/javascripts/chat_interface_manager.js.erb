@@ -12,7 +12,7 @@ function connectButtonTimerFunction(){
     connectButtonTimerCounter++;
     if (connectButtonTimerCounter > (periodBetweenAttempts-1)) {
       clearTimeout(connectButtonTimer);
-      $("#chat_header_title").html('<%=I18n.t('chat.disconnected')%>')
+			changeChatHeaderTitle('<%=I18n.t('chat.disconnected')%>')
     }
 }
 
@@ -20,7 +20,7 @@ function requestConnectToChat(){
   if (connectButtonTimerCounter > (periodBetweenAttempts-1)) {
     connectButtonTimerCounter=0;
     connectButtonTimer = setInterval("connectButtonTimerFunction()", 1000) 
-    $("#chat_header_title").html('<%=I18n.t('chat.connecting')%>')
+		changeChatHeaderTitle('<%=I18n.t('chat.connecting')%>')
     return true
   } else {
     return false
@@ -492,9 +492,17 @@ function updateAllNotifications(){
 
 function updateConnectedUsersOfMainChatBox(){
   if(mainChatBox!=null){
-    var connectedUsers = getAllConnectedSlugs().length;
-    changeMainChatBoxHeaderTitle( '<%=I18n.t('chat.title')%>' + " (" + connectedUsers + ")");
-    changeMainChatBoxHeight(getChatBoxHeightRequiredForConnectionBoxes());
+		if(isStropheConnected()){
+			var connectedUsers = getAllConnectedSlugs().length;
+      changeMainChatBoxHeaderTitle( '<%=I18n.t('chat.title')%>' + " (" + connectedUsers + ")");
+      changeMainChatBoxHeight(getChatBoxHeightRequiredForConnectionBoxes());
+		} else {
+			if(afterFirstConnectionFlag){
+				changeChatHeaderTitle('<%=I18n.t('chat.connecting')%>')
+			} else {
+				changeChatHeaderTitle('<%=I18n.t('chat.disconnected')%>')
+			}	
+		}
   }
 }
 
