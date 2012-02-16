@@ -30,7 +30,15 @@
       <option value=""></option>
       <% unless @all_contacts.empty? %>
         <%@all_contacts.each do |contact| %>
-          <option value="<%=contact.slug%>"><%=contact.name%></option>
+          <option value="<%=contact.slug%>">
+          	<%=contact.name%>
+							<a title='<%=contact.name%>' class="presence_user_link" width="28">
+	             <%=image_tag(contact.logo.url, :alt => contact.name , :size => "28x28")%>
+	             <% if contact.user.status %>
+	              <%=image_tag("status/" + contact.user.status + ".png", :class => "presence_status") %></a>
+	             <% end %>
+	           </a>
+					</option>
         <% end %>
       <% else %>
 			  <option value="ZERO_CONTACTS"> <%=t('chat.zerocontacts')%></option>

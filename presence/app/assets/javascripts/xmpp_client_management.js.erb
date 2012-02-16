@@ -234,14 +234,14 @@ function onReconnect(){
     if (reconnectAttempts>0) {
       reconnectAttempts--;
       
-			changeChatHeaderTitle('<%=I18n.t('chat.reconnecting')%>')
+			changeChatHeaderTitle(I18n.t('chat.reconnecting'))
 			
 			connectToChat(user_jid,cookie,null);
 			
       reconnectTimer = setTimeout ("onReconnect()", 9000);
 			
     } else {
-			changeChatHeaderTitle('<%=I18n.t('chat.unableconnect')%>')
+			changeChatHeaderTitle(I18n.t('chat.unableconnect'))
       //Notify issue to Rails App Server?
     }
     

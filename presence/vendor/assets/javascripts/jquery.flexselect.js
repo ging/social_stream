@@ -21,6 +21,7 @@
       allowMismatch: false,
       selectedClass: "flexselect_selected",
       dropdownClass: "flexselect_dropdown",
+			defaultmessage: "No results",
       inputIdTransform:    function(id)   { return id + "_flexselect"; },
       inputNameTransform:  function(name) { return; },
       dropdownIdTransform: function(id)   { return id + "_flexselect_dropdown"; }
@@ -46,9 +47,15 @@
       this.wire();
     },
 
-    preloadCache: function() {
+    //preloadCache: function() {
+    //  this.cache = this.select.children("option").map(function() {
+    //    return { name: $.trim($(this).text()), value: $(this).val(), score: 0.0 };
+    //  });
+    //},
+		
+		preloadCache: function() {
       this.cache = this.select.children("option").map(function() {
-        return { name: $.trim($(this).text()), value: $(this).val(), score: 0.0 };
+        return { name: ($(this).html()), value: $(this).val(), score: 0.0 };
       });
     },
 
@@ -65,6 +72,7 @@
         name: this.settings.inputNameTransform(this.select.attr("name")),
         accesskey: this.select.attr("accesskey"),
         tabindex: this.select.attr("tabindex"),
+				placeholder: this.select.attr("placeholder"),
         style: this.select.attr("style")
       }).addClass(this.select.attr("class")).val($.trim(selected.text()));
 
@@ -84,6 +92,7 @@
       this.input.click(function() {
         self.lastAbbreviation = null;
         self.focus();
+				if (!self.picked) self.filterResults();
       });
 
       this.input.mouseup(function(event) {
@@ -94,7 +103,7 @@
       this.input.focus(function() {
         self.abbreviationBeforeFocus = self.input.val();
         self.input.select();
-        if (!self.picked) self.filterResults();
+        //if (!self.picked) self.filterResults();
       });
 
       this.input.blur(function() {
@@ -185,8 +194,13 @@
         this.score = LiquidMetal.score(this.name, abbreviation);
         if (this.score > 0.0) results.push(this);
       });
+			
+			if (results.length==0){
+				var defaultOption = { name: this.settings.defaultmessage, value: "ZERO_CONTACTS", score: 9.9 };
+				results.push(defaultOption);
+			}
+			
       this.results = results;
-
       this.sortResults();
       this.renderDropdown();
       this.markFirst();
@@ -208,10 +222,13 @@
       });
 
       var list = this.dropdownList.html("");
-      $.each(this.results, function() {
-        // list.append($("<li/>").html(this.name + " <small>[" + Math.round(this.score*100)/100 + "]</small>"));
-        list.append($("<li/>").html(this.name));
-      });
+
+      if (this.results.length > 0) {
+				$.each(this.results, function() {
+	        list.append($("<li/>").html(this.name));
+	      });
+			}
+			
       this.dropdown.show();
     },
 
@@ -230,16 +247,16 @@
       if (selected) {
         //this.input.val(selected.name);
         //this.picked = true;
-				if(typeof changeSelectContactValue == "function"){
-          changeSelectContactValue(selected.name,selected.value);
-        } 
 				this.hidden.val(selected.value);
+        this.input.val("");
+				if(typeof changeSelectContactValue == "function"){
+          return changeSelectContactValue(selected.name,selected.value);
+        } 
       } else if (this.settings.allowMismatch) {
         this.hidden.val("");
       } else {
         this.reset();
       }
-			this.input.val("");
     },
 
     hide: function() {

@@ -12,7 +12,7 @@ function connectButtonTimerFunction(){
     connectButtonTimerCounter++;
     if (connectButtonTimerCounter > (periodBetweenAttempts-1)) {
       clearTimeout(connectButtonTimer);
-			changeChatHeaderTitle('<%=I18n.t('chat.disconnected')%>')
+			changeChatHeaderTitle(I18n.t('chat.disconnected'))
     }
 }
 
@@ -20,7 +20,7 @@ function requestConnectToChat(){
   if (connectButtonTimerCounter > (periodBetweenAttempts-1)) {
     connectButtonTimerCounter=0;
     connectButtonTimer = setInterval("connectButtonTimerFunction()", 1000) 
-		changeChatHeaderTitle('<%=I18n.t('chat.connecting')%>')
+		changeChatHeaderTitle(I18n.t('chat.connecting'))
     return true
   } else {
     return false
@@ -110,8 +110,11 @@ function setUserFunctions(){
 	//Search contacts enabling
 	///////////////
 	$("select.flexselect").flexselect({
-    allowMismatch: true
+    allowMismatch: true,
+		defaultmessage: I18n.t('chat.zerocontacts')
   });
+
+	$("#search_chat_contact_flexselect").Watermark(I18n.t('chat.search'),"#666");
 	
 	//Select contact function
 	//callback in changeSelectContactValue()
@@ -129,8 +132,9 @@ function setUserFunctions(){
 
 
 function changeSelectContactValue(name,value){
-	$("#search_chat_contact_flexselect").blur();
-	
+
+  $("#search_chat_contact_flexselect").blur();
+
 	if(value == "ZERO_CONTACTS"){
 		return;
 	}
@@ -209,7 +213,7 @@ function setStatusWidgetTitle(status){
   }
   
   if(status=="default"){
-    var defaultTitle = '<%=I18n.t('chat.status.choose')%>'
+    var defaultTitle = I18n.t('chat.status.choose')
     $(".dropdown dt a span").html(defaultTitle);
     return;
   }
@@ -329,7 +333,7 @@ function hideConnectionBoxFromSlug(slug){
 			if($(".users_connected p.zero_users_connected").length > 0){
 				$(".users_connected p.zero_users_connected").show();
 			} else {
-				var msg = '<%=I18n.t('chat.zerousers')%>';
+				var msg = I18n.t('chat.zerousers');
         $(".users_connected").append('<p class="zero_users_connected">' + msg + '</p>')
 			}
     }
@@ -447,7 +451,7 @@ function showOfflineChatNotificationForSlug(slug){
 	var slug_chat_box = getChatBoxForSlug(slug);
 	if(slug_chat_box!=null){
 		var name = slug_chat_box.attr("name")
-    var msg =  name + ' ' + '<%=I18n.t('chat.notify.guestOffline')%>';
+    var msg =  name + ' ' + I18n.t('chat.notify.guestOffline');
     showChatNotificationForSlug(slug,msg);
 	}
 }
@@ -464,7 +468,7 @@ function hideChatNotificationForSlug(slug){
 
 function notifyWhenUsersDisconnect(){
   var notification = $("div.ui-chatbox-notify");
-  var msg = '<%=I18n.t('chat.notify.offline')%>';
+  var msg = I18n.t('chat.notify.offline');
   showChatNotification(notification,msg);
 }
 
@@ -494,13 +498,13 @@ function updateConnectedUsersOfMainChatBox(){
   if(mainChatBox!=null){
 		if(isStropheConnected()){
 			var connectedUsers = getAllConnectedSlugs().length;
-      changeMainChatBoxHeaderTitle( '<%=I18n.t('chat.title')%>' + " (" + connectedUsers + ")");
+      changeMainChatBoxHeaderTitle( I18n.t('chat.title') + " (" + connectedUsers + ")");
       changeMainChatBoxHeight(getChatBoxHeightRequiredForConnectionBoxes());
 		} else {
 			if(afterFirstConnectionFlag){
-				changeChatHeaderTitle('<%=I18n.t('chat.connecting')%>')
+				changeChatHeaderTitle(I18n.t('chat.connecting'))
 			} else {
-				changeChatHeaderTitle('<%=I18n.t('chat.disconnected')%>')
+				changeChatHeaderTitle(I18n.t('chat.disconnected'))
 			}	
 		}
   }

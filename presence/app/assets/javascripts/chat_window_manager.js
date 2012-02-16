@@ -266,12 +266,16 @@ function createMainChatBox(){
 			//Delete closeTick and video Tick
 			$(mainChatBox.parent().parent()).find(".ui-chatbox-titlebar").find(".ui-icon-closethick").remove();
 			$(mainChatBox.parent().parent()).find(".ui-videobox-icon").remove();
+			//Margin for minusthick
+			(mainChatBox.parent().parent()).find(".ui-chatbox-titlebar").find(".chat-minusthick").parent().css("margin-right","5px")
 			//Delete nofitications div
 			$(mainChatBox.parent()).find(".ui-chatbox-notify").remove();
 			//Delete video div
 			$(mainChatBox.parent()).find(".ui-videobox").remove();
 			//Delete input
 			$(mainChatBox.parent()).find(".ui-chatbox-input").remove();
+			//Background
+			$(mainChatBox).css("background-color",$(mainChatBox.parent().parent()).find(".ui-chatbox-titlebar").css("background-color"));
 			
 			//Set height
 			changeMainChatBoxHeight(getChatBoxHeightRequiredForConnectionBoxes());
