@@ -8,6 +8,7 @@ module SocialStream
   end
 
   module Presence   
+    autoload :VERSION, 'social_stream/presence/version'
 
     autoload :XmppServerOrder, 'social_stream/presence/xmpp_server_order'
 
