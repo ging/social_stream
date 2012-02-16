@@ -8,6 +8,8 @@ class GroupTitleAndDescriptionInActivityObject < ActiveRecord::Migration
       t.text :description
     end
 
+    ActivityObject.reset_column_information
+
     # Fix 'comments' table
     c_ts = Comment.record_timestamps
     Comment.record_timestamps = false
