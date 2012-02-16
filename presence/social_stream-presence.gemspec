@@ -4,7 +4,7 @@ require "social_stream/presence/version"
 
 Gem::Specification.new do |s|
   s.name        = "social_stream-presence"
-  s.version     = Socialstream::Presence::VERSION
+  s.version     = SocialStream::Presence::VERSION
   s.authors     = ["Aldo Gordillo"]
   s.email       = ["iamchrono@gmail.com"]
   s.homepage    = "https://github.com/ging/social_stream-presence"
