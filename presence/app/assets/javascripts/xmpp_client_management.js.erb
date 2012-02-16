@@ -386,7 +386,7 @@ function onIQStanza(iq){
 
 function sendIQStanzaWithClientInfo(jid,iqID){
 	var client = "Social Stream XMPP Client"
-	var version = '<%=Socialstream::Presence::VERSION%>';
+	var version = '<%=SocialStream::Presence::VERSION%>';
 	var iq = $iq({to: jid, type: "result", id: iqID})
   .c("query", {xmlns: "jabber:iq:version"}).c("name").t(client).up().c("version").t(version);
 	connection.sendIQ(iq);
@@ -396,7 +396,7 @@ function sendIQStanzaWithClientInfo(jid,iqID){
 var iqIDNumber = 1000;
 function sendIQStanzaForRequestClientInfo(jid){
   //var client = "Social Stream XMPP Client"
-  //var version = '<%=Socialstream::Presence::VERSION%>';
+  //var version = '<%=SocialStream::Presence::VERSION%>';
   //var iq = $iq({to: jid, type: "result", id: iqID})
   //.c("query", {xmlns: "jabber:iq:version"}).c("name").t(client).up().c("version").t(version);
   //connection.sendIQ(iq);
