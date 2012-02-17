@@ -70,6 +70,7 @@ function createChatBox(guest_slug,guest_name,guest_jid,user_name,user_jid){
 					}  
 					
 					window[getChatVariableFromSlug(guest_slug)].chatbox("option", "hidden", false);
+					window[getChatVariableFromSlug(guest_slug)].parent().toggle(true)
 			    return false;
 		}
 		
@@ -114,6 +115,10 @@ function closeChatBox(guest_slug){
   nBox--;
 }
 
+
+/////////
+//Getters
+/////////
 
 function getChatVariableFromSlug(slug){
 	return "slug_" + slug;
@@ -168,6 +173,7 @@ function getAllDisconnectedSlugsWithChatBoxes(){
 }
 
 
+
 ////////////////////
 //Box replacement
 ////////////////////
@@ -196,6 +202,7 @@ function rotatePriority(guest_slug){
       $("#" + guest_slug).chatbox("option", "priority", 1);   
   } 
 }
+
 
 
 ////////////////////
@@ -237,6 +244,7 @@ function toogleVideoBoxForSlug(slug){
 function getVideoEmbedForSlug(slug){
 	return "<img src=\"http://www.batiburrillo.net/wp-content/uploads/2011/03/Freemake.jpg?cda6c1\" width=\"" + (chatBoxWidth-20) + "\"/>"
 }
+
 
 
 ///////////////////////////
@@ -331,7 +339,7 @@ function changeMainChatBoxHeaderTitle(title){
 function changeMainChatBoxHeight(height){
 	if (mainChatBox != null) {
 		
-		if(($("#search_chat_contact_flexselect").is(":focus"))&&(! (focusSearchContactsFlag))){
+		if(($("#chat_partial #search_chat_contact_flexselect").is(":focus"))&&(! (focusSearchContactsFlag))){
 			return;
 		} else {
 			focusSearchContactsFlag=false;

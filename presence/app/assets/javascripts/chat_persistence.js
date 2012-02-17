@@ -146,7 +146,7 @@ function restoreConversations() {
 			
 			
 			for (var i=0;i<storedSlugs.length;i++){
-		    restoreLog = sessionStorage.getItem("chat_log_" + storedSlugs[i]);
+		    var restoreLog = sessionStorage.getItem("chat_log_" + storedSlugs[i]);
 				
 				if (restoreLog != null){
 
@@ -179,10 +179,8 @@ function restoreConversations() {
 					
 					window[getChatVariableFromSlug(guest_slug)].html(restoreLog)
 					
-					//Mark as disconnect if user is offline.
-					if (typeof($('div.user_presence[slug=' + guest_slug + ']').attr('name')) == 'undefined') {
-            //No connectionBox for this user!
-            showChatNotificationForSlug(guest_slug,guest_name + " is offline");
+					if (! isSlugChatConnected(guest_slug)) {
+            showOfflineChatNotificationForSlug(guest_slug);
           }
 					
         }

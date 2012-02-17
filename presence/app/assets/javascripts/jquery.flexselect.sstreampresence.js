@@ -47,17 +47,24 @@
       this.wire();
     },
 
-    //preloadCache: function() {
-    //  this.cache = this.select.children("option").map(function() {
-    //    return { name: $.trim($(this).text()), value: $(this).val(), score: 0.0 };
-    //  });
-    //},
-		
-		preloadCache: function() {
+    preloadCache: function() {
       this.cache = this.select.children("option").map(function() {
-        return { name: ($(this).html()), value: $(this).val(), score: 0.0 };
+        return { name: $.trim($(this).text()), value: $(this).val(), score: 0.0 };
       });
     },
+		
+		//preloadCache: function() {
+    //  this.cache = this.select.children("option").map(function() {
+		//		var slug = $(this).val();
+				
+		//		if(slug!=""){
+		//			var code = $(getAvatarBoxFromSlug(slug)).html();
+		//			return { name: code, value: slug, score: 0.0 };
+		//		}
+
+        //return { name: ($(this).html()), value: $(this).val(), score: 0.0 };
+    //  });
+    //},
 
     renderControls: function() {
       var selected = this.select.children("option:selected");
@@ -119,6 +126,7 @@
           self.markSelected(rows.index($(event.target)));
         }
       });
+			
       this.dropdownList.mouseleave(function () {
         self.markSelected(-1);
       });

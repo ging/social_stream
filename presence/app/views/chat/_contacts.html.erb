@@ -1,65 +1,18 @@
-<div>
-	<div class="block">
-    <div class="header">
-      <%=image_tag("btn/btn_friend.png", :class => "header_icon")%>
-      <div class="header_text">
-        <%=t('chat.title')%>
-      </div>
-    </div>
-		
-		<div id="status" class="dropdown">
-	    <dt><a href=""><span><%=t('chat.status.choose')%></span></a></dt>
-	    <dd>
-	      <ul id="statusList">
-			    <li><a id="available" href="#" class="option"><img class="flag" src="<%=image_path("status/available.png")%>" alt=""/> <%=t('chat.status.available')%> <span class="value">available</span></a></li>
-			    <li><a id="away" href="#" class="option"><img class="flag" src="<%=image_path("status/away.png")%>" alt=""/> <%=t('chat.status.away')%> <span class="value">away</span></a></li>
-			    <li><a id="dnd" href="#" class="option"><img class="flag" src="<%=image_path("status/dnd.png")%>" alt=""/> <%=t('chat.status.dnd')%> <span class="value">dnd</span></a></li>
-				  <li><a id="offline" href="#" class="option"><img class="flag" src="<%=image_path("status/offline.png")%>" alt=""/> <%=t('chat.status.offline')%> <span class="value">offline</span></a></li>
-	      </ul>
-	    </dd>
-    </div>
-		
-  </div>
-	
-  <% @contacts = getChatContacts %>
-  <% @online_contacts = @contacts[0] %>
-	<% @all_contacts = @contacts[1] %>
+<% @all_contacts =  getChatContacts %>
 
-	<div class="allContacts">      
-    <select data-placeholder="Search Contact" id="search_chat_contact" class="flexselect">
-      <option value=""></option>
-      <% unless @all_contacts.empty? %>
-        <%@all_contacts.each do |contact| %>
-          <option value="<%=contact.slug%>">
-          	<%=contact.name%>
-							<a title='<%=contact.name%>' class="presence_user_link" width="28">
-	             <%=image_tag(contact.logo.url, :alt => contact.name , :size => "28x28")%>
-	             <% if contact.user.status %>
-	              <%=image_tag("status/" + contact.user.status + ".png", :class => "presence_status") %></a>
-	             <% end %>
-	           </a>
-					</option>
-        <% end %>
-      <% else %>
-			  <option value="ZERO_CONTACTS"> <%=t('chat.zerocontacts')%></option>
-			<% end %>
-    </select>
-  </div>
-
-	<div class="users_connected">
-	  <% if @online_contacts.empty? %>
-	    <p class="zero_users_connected"> <%=t('chat.zerousers')%> </p>
-	  <% else %>
-		  <%@online_contacts.each do |contact| %>
-			  <div class="user_presence" name='<%=contact.name%>' slug='<%=contact.slug%>'>
-				  <a title='<%=contact.name%>' class="presence_user_link" width="28">
-					  <%=image_tag(contact.logo.url, :alt => contact.name , :size => "28x28")%>
-					  <% if contact.user.status %>
-					    <%=image_tag("status/" + contact.user.status + ".png", :class => "presence_status") %></a>
-					  <% end %>
-					</a>
-        </div>
-		  <%end%>
+<div class="users_connected">
+  <%@all_contacts.each do |contact| %>
+		<% if contact.user.connected %>
+		  <div class="user_presence" name='<%=contact.name%>' slug='<%=contact.slug%>' connected='true'>
+		<% else %>
+		  <div class="user_presence" name='<%=contact.name%>' slug='<%=contact.slug%>' connected='false'>
 		<% end %>
-	</div>	
-</div>	
+        <a title='<%=contact.name%>' class="presence_user_link" width="28">
+          <%=image_tag(contact.logo.url, :alt => contact.name , :size => "28x28")%>
+          <% if contact.user.status %>
+            <%=image_tag("status/" + contact.user.status + ".png", :class => "presence_status") %>
+          <% end %>  
+        </a>
+      </div>
+  <%end%>
+</div>

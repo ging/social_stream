@@ -1,12 +1,73 @@
 <% if current_user and current_user.chat_enabled and current_subject.subject_type=="User" %>
 	
 <div id="chat_wrapper"> 
-  <div id="chat_partial">   
-    <%= render :partial => 'chat/connecting' %>
+
+  <div id="chat_partial">    
   </div>
+	
 	<div id="chat_divs">  
 	  <div id="chat_div"></div>
 	</div>
+	
+	<div id="chat_connecting">
+	  <div class="block">
+      <div class="header">
+        <%=image_tag("btn/btn_friend.png", :class => "header_icon")%>
+        <div class="header_text">
+          <%=t('chat.connecting')%>
+        </div>
+      </div>
+    </div>
+	</div>
+	
+  <div id="chat_connection_off">
+    <div class="block">
+      <div class="header">
+        <%=image_tag("btn/btn_friend.png", :class => "header_icon")%>
+        <div class="header_text">
+          <p id="chat_header_title"><%=t('chat.disconnected')%></p>
+        </div>
+      </div>
+    </div>
+    <div class="chat_off">
+      <div id="passwordFormChat">
+        <label for="user_password" class="chatPasswordTitle"><%=t('chat.password')%></label>
+        <input id="user_password" class="chat_password" type="password"></input>
+      </div>
+      <input class="connectChatButton storePass" value="Connect">
+    </div>	
+	</div>
+	
+	<div id="chat_widgets">
+		<div class="block">
+      <div class="header">
+        <%=image_tag("btn/btn_friend.png", :class => "header_icon")%>
+        <div class="header_text">
+          <%=t('chat.title')%>
+        </div>
+      </div>
+    
+	    <div id="status" class="dropdown">
+	      <dt><a href=""><span><%=t('chat.status.choose')%></span></a></dt>
+	      <dd>
+	        <ul id="statusList">
+	          <li><a id="available" href="#" class="option"><img class="flag" src="<%=image_path("status/available.png")%>" alt=""/> <%=t('chat.status.available')%> <span class="value">available</span></a></li>
+	          <li><a id="away" href="#" class="option"><img class="flag" src="<%=image_path("status/away.png")%>" alt=""/> <%=t('chat.status.away')%> <span class="value">away</span></a></li>
+	          <li><a id="dnd" href="#" class="option"><img class="flag" src="<%=image_path("status/dnd.png")%>" alt=""/> <%=t('chat.status.dnd')%> <span class="value">dnd</span></a></li>
+	          <li><a id="offline" href="#" class="option"><img class="flag" src="<%=image_path("status/offline.png")%>" alt=""/> <%=t('chat.status.offline')%> <span class="value">offline</span></a></li>
+	        </ul>
+	      </dd>
+	    </div>
+						
+			<div class="searchChatContacts">
+			    <select id="search_chat_contact" class="flexselect">
+			      <option value="">""</option>
+			    </select>
+			</div>
+			
+    </div>
+	</div>
+	
 </div>
 
 
@@ -21,10 +82,17 @@
 
 
   $(document).ready(function () {
-    
+			
+			//Inicial field
+			$("#chat_partial").html($("#chat_connecting").html())
+		
       if(getRestoreUserChatStatus()!="offline"){
-        connectToChat(user_jid,cookie,null);
-        //connectToChat(user_jid,null,null); //To use auth by password.
+				if (authByCookie()){
+					connectToChat(user_jid,cookie,null);
+				} else {
+					//Auth by password
+					connectToChat(user_jid,null,null);
+				}
         
         initialTimer = setTimeout("updateChatWindow()", 15000);
       } else {
@@ -32,20 +100,20 @@
       }
       
       initAudio();
-      initFocusListeners();			
+      initFocusListeners();
   });
   
 </script>
 
-	<% if flow %>
-	  <script type="text/javascript">
-	  	 $(document).ready(function () {
-			 	createMainChatBox();
-				addContentToMainChatBox(modifyChatPartialIfMainBox($("#chat_partial")));
-				$("#chat_wrapper").find("#chat_partial").remove();
-			 });
-		</script>
-	<% end %>
+<% if flow %>
+  <script type="text/javascript">
+	  $(document).ready(function () {
+		  createMainChatBox();
+			addContentToMainChatBox(modifyChatPartialIfMainBox($("#chat_partial")));
+			$("#chat_wrapper").find("#chat_partial").remove();
+		});
+	</script>
+<% end %>
 
 
 <% end %>

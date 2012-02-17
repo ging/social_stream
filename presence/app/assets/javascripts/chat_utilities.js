@@ -241,6 +241,12 @@ function getNameFromSlug(slug){
 }
 
 
+////////////////////
+//Special slugs management
+////////////////////
+function isAdminSlug(slug){
+	return (slug == '<%=SocialStream::Presence.social_stream_presence_username%>');
+}
 
 
 

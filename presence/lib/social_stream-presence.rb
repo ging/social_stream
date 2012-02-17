@@ -38,6 +38,7 @@ module SocialStream
     @@remote_xmpp_server = false
     @@secure_rest_api = false
     @@enable = false
+    @@social_stream_presence_username = "social_stream_presence"
     
     class << self
       def setup

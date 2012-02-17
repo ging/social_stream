@@ -223,8 +223,8 @@ function onConnect(status) {
     awayTimer = setInterval("awayTimerFunction()", awayTimerPeriod);
     timer = setInterval("timerFunction()", timerPeriod);
   }
-  
-  updateChatWindow();
+	 
+	 updateChatWindow();
 }
 
 function onReconnect(){
@@ -246,15 +246,6 @@ function onReconnect(){
     }
     
   }
-}
-
-
-function changeChatHeaderTitle(msg){
-	if(mainChatBox==null){
-		$("#chat_header_title").html(msg)
-	} else {
-		changeMainChatBoxHeaderTitle(msg);
-	}
 }
 
 
@@ -328,14 +319,12 @@ function processAvailablePresenceStanza(presence){
   if (slug != user_slug) {
     if (getConnectionBoxFromSlug(slug)!=null){
       var status = $(presence).find('show').text(); 
-      setUserIconStatus(slug, status);
-      if (cacheConnectedUsers.indexOf(slug) != -1) {
-        showConnectionBoxFromSlug(slug);
-        hideChatNotificationForSlug(slug);
-				updateConnectedUsersOfMainChatBox();
-      } 
+      setUserIconStatus(slug,status);
+			updateInterfaceAfterPresenceStanza(slug,true);
     } else {
-      setTimeout("refreshChatWindow()", 3000);
+			if(! isAdminSlug(slug)){
+				setTimeout("refreshChatWindow()", 3000);
+			}
     }
   }   
 }
@@ -346,9 +335,7 @@ function processUnavailablePresenceStanza(presence){
   
   if (slug != user_slug) {
     if (getConnectionBoxFromSlug(slug)!=null){
-      hideConnectionBoxFromSlug(slug);
-			showOfflineChatNotificationForSlug(slug);
-			updateConnectedUsersOfMainChatBox();
+			updateInterfaceAfterPresenceStanza(slug,false)
     }
   }
 }

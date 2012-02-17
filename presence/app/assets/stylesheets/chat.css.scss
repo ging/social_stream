@@ -106,9 +106,9 @@ div.ui-chatbox-notify{
 }
 
 p.ui-chatbox-notify-text{
-	margin-top: 10px;
+	margin-top: 0px;
   text-align: center;
-	font-weight: bold;
+	/* font-weight: bold; */
 }
 
 
@@ -141,6 +141,18 @@ p.ui-chatbox-notify-text{
 
 /* Presence Partial */
 
+#chat_connecting{
+	display: none;
+}
+
+#chat_connection_off{
+	display: none;
+}
+
+#chat_widgets{
+  display: none;
+}
+
 div.user_presence {
 	float: left;
 	position: relative;
@@ -161,9 +173,9 @@ div.user_presence {
 
 .presence_status {
 	position: absolute;
-  bottom:0px;
-  right:0px;
-  border:none;
+  bottom: 0px;
+  left: 14px;
+  border: none;
 }
 
 .users_connected{
@@ -193,7 +205,6 @@ input.chat_password{
 	margin-right: 5px;
 	margin-bottom: 5px;
 }
-
 
 input.connectChatButton{
 	text-align: center;
@@ -355,14 +366,7 @@ a.chatImageLink:link, a.chatImageLink:visited {
 }
 
 
-
-
 /* Search contacts stylesheet */
-
-div.allContacts {
-  width: 100px;
-  display: block;
-}
 
 #search_chat_contact_flexselect {
   background: url('btn/search_icon.png') 5px 50% no-repeat $secondary-color;

@@ -106,11 +106,8 @@ class XmppController < ApplicationController
   #OPEN METHODS
   
   def chatWindow 
-    if current_user and current_user.chat_enabled and (params[:userConnected]=="true")
+    if current_user and current_user.chat_enabled
       render :partial => 'chat/contacts'
-    elsif current_user and current_user.chat_enabled
-      #User not connected
-      render :partial => 'chat/off'
     else
       #User with chat disabled
       render :text => ''
