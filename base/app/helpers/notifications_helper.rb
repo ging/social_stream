@@ -28,4 +28,10 @@ module NotificationsHelper
     end
   end
 
+  # Add notification_id param to URL in order to mark notification read
+  def notification_url_of(target, notification)
+    return polymorphic_url(target, :notification_id => notification.id) unless notification.nil?
+    polymorphic_url(target)
+  end
+
 end

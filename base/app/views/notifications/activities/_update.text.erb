@@ -6,9 +6,9 @@
 
 <% if activity.direct_object.respond_to? :text %>
   "<%= sanitize activity.direct_object.text.truncate(100, :separator =>' ')%>"
---><%= t('notification.all_text', :url => polymorphic_url(activity.direct_object))%>
+--><%= t('notification.all_text', :url => notification_url_of(activity.direct_object, @notification))%>
 <% else%>
-  <%= t('notification.watch', :url => polymorphic_url( activity.direct_object))%>
+  <%= t('notification.watch', :url => notification_url_of( activity.direct_object, @notification))%>
 <% end%>
 
 <%= raw t('notification.look', 
