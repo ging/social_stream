@@ -13,6 +13,7 @@
 
 <div class="conversations"> 
   <% @notifications.each do |notification|%>
+    <% @notification = notification %>
     <% read_class = notification.is_unread?(@actor) ? 'unread' : '' %>
     <%= render :partial => 'notification', :object => notification, :locals => {:read_class => read_class} %>
   <% end %>

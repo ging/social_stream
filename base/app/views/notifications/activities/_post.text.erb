@@ -6,7 +6,7 @@
            :title => title_of(activity.direct_object)) %>
 
 "<%= description_of(activity.direct_object) %>"
---><%= t('notification.all_text', :url => polymorphic_url(activity.direct_object))%>
+--><%= t('notification.all_text', :url => notification_url_of(activity.direct_object, @notification))%>
 
 <%= raw t('notification.look', 
           :sender => truncate_name(activity.sender.name))%>: <%=polymorphic_url(activity.sender.subject)%>

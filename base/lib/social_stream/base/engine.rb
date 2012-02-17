@@ -31,6 +31,7 @@ module SocialStream
           include SocialStream::Controllers::Helpers
           include SocialStream::Controllers::CancanDeviseIntegration
           include SocialStream::Controllers::I18nIntegration
+          include SocialStream::Controllers::MarkNotificationsRead
         end
       end
 
