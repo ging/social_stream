@@ -8,8 +8,8 @@ class Link < ActiveRecord::Base
   before_create :check_loaded
 
   define_index do
-    indexes title
-    indexes description
+    indexes activity_object.title
+    indexes activity_object.description
     indexes url
 
     has created_at

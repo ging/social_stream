@@ -63,7 +63,7 @@ module SocialStream
   @@quick_search_models = [ :user, :group, :post ]
   
   mattr_accessor :extended_search_models
-  @@extended_search_models = [ :user, :group, :post ]
+  @@extended_search_models = [ :user, :group, :post, :comment ]
 
   mattr_accessor :cleditor_controls
   @@cleditor_controls = "bold italic underline strikethrough subscript superscript | size style | bullets | image link unlink"

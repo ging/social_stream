@@ -1,0 +1,18 @@
+<% author = comment.author_subject %>
+<div class="model_with_details">
+  <div class="logo">
+    <%= link_to (image_tag(author.logo.url , :size => "50x50", :alt => author.name )), author  %>
+  </div>
+  <div class="sub-block">
+    <div class="brief">
+    <%= link_to comment do%>
+      <% text = excerpt(strip_tags(comment.text),get_search_query_words.first,:radius => 25) || "" %>
+      <% if text.length < 60 %>
+        <% text = excerpt(strip_tags(comment.text),get_search_query_words.first,:radius => 30 + (60 - text.length)) || "" %>
+      <% end %>
+      <%= highlight(text,get_search_query_words) %>
+      <% end %>
+      <br>
+    </div>
+  </div>
+</div>

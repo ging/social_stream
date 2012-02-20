@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
   validates_presence_of :text
 
   define_index do
-    indexes text
+    indexes activity_object.description
 
     has created_at
   end
