@@ -17,6 +17,10 @@ class Activity < ActiveRecord::Base
   # See {SocialStream::Models::Channeled}
   channeled
 
+  # This has to be declared before 'has_ancestry' to work around rails issue #670
+  # See: https://github.com/rails/rails/issues/670
+  before_destroy :destroy_children_comments
+
   has_ancestry
 
   paginates_per 10
@@ -395,6 +399,15 @@ class Activity < ActiveRecord::Base
     return if verb != "like" || direct_activity_object.blank?
 
     direct_activity_object.increment!(:like_count)
+  end
+
+  # before_destroy callback
+  #
+  # Destroy children comments when the activity is destroyed
+  def destroy_children_comments
+    comments.each do |c|
+      c.direct_object.destroy
+    end
   end
 
   # after_destroy callback
