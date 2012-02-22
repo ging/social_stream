@@ -16,6 +16,10 @@ function simulate_new_user_disconnected(slug) {
   onPresence(stanza_test);
 }
 
+function getVideoEmbedForSlug(slug){
+  return "<img src=\"http://www.batiburrillo.net/wp-content/uploads/2011/03/Freemake.jpg?cda6c1\" width=\"" + (chatBoxWidth-20) + "\"/>"
+}
+
 
 ////////////////////
 //Blink page title when focus lost on new messages
@@ -93,7 +97,7 @@ function userChatDataInputControl(){
 ////////////////////
 
 var lastMessageTimes = new Array();
-//lastMessageTimes['from_slug'] = ["timeOfLastMessage",["msgID1","msgID2"]];
+//lastMessageTimes['slug'] = ["timeOfLastMessage",["msgID1","msgID2"]];
 
 var timeBetweenMessages = 500; //mseconds
 
@@ -181,11 +185,6 @@ function floodControl() {
 };
 
 
-function initControlFlood(){
-	$(".ui-chatbox-input-box")
-}
-
-
 ////////////////////
 //Bounce chatbox control
 ////////////////////
@@ -193,21 +192,30 @@ var lastBounceTimes = new Array();
 var timeBetweenBounces = 5000; //mseconds
 
 function mustBounceBoxForChatWindow(jqueryUIChatbox){
-	var from_slug = $($(jqueryUIChatbox.elem.uiChatbox).find(".ui-chatbox-content").children()[0]).attr("id")
 	
+	var slug = jqueryUIChatbox.elem.uiChatbox.find(".ui-chatbox-content").find(".ui-chatbox-log").attr("id")
+	
+	if (typeof slug == 'undefined') {
+		return false;
+	}
+	
+	if((slug in contactsInfo)&&(contactsInfo[slug].videoChatStatus!="disconnected")){
+      return false;
+	}
+
   var t = (new Date()).getTime();
 	
-	if(!(from_slug in lastBounceTimes)){
-    lastBounceTimes[from_slug] = t;
+	if(!(slug in lastBounceTimes)){
+    lastBounceTimes[slug] = t;
 		return true;
   }
 	 
-  var lastBounceTime = lastBounceTimes[from_slug];
+  var lastBounceTime = lastBounceTimes[slug];
 	
   if (t - lastBounceTime < timeBetweenBounces) {
     return false;
   } else {
-		lastBounceTimes[from_slug] = t;
+		lastBounceTimes[slug] = t;
 		return true;
 	} 
 	

@@ -1,3 +1,6 @@
+require 'opentok'
+
+
 class XmppController < ApplicationController
   
   before_filter :authorization, :only => [:setConnection, :unsetConecction, :setPresence, :unsetPresence, :resetConnection, :synchronizePresence ]
@@ -154,6 +157,20 @@ class XmppController < ApplicationController
   def active_users
     @users = User.find_all_by_connected(true)
     @all_users = User.all
+  end
+  
+  
+  def getOpenTokSessionIDAndToken
+    if current_user
+        opentok = OpenTok::OpenTokSDK.new SocialStream::Presence.opentok_api_key, SocialStream::Presence.opentok_api_secret
+        @session = opentok.create_session request.remote_addr
+        @user_token = opentok.generate_token :session_id => @session
+        @guest_token = opentok.generate_token :session_id => @session
+       
+        respond_to do |format|
+          format.xml
+        end
+    end
   end
   
   

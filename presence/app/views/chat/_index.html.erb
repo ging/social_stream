@@ -68,6 +68,10 @@
     </div>
 	</div>
 	
+	<div>
+		<div id="publisherID"></div>
+	</div>
+	
 </div>
 
 
@@ -94,13 +98,14 @@
 					connectToChat(user_jid,null,null);
 				}
         
-        initialTimer = setTimeout("updateChatWindow()", 15000);
+        initialTimer = setTimeout("updateChatWindow()", 10000);
       } else {
-        initialTimer = setTimeout("updateChatWindow()", 1);
+        updateChatWindow();
       }
       
       initAudio();
       initFocusListeners();
+			checkVideocallFeature();
   });
   
 </script>

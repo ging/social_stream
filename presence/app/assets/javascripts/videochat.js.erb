@@ -1,0 +1,394 @@
+////////////////////
+//Global constants
+////////////////////
+var opentok_apiKey = '<%=SocialStream::Presence.opentok_api_key%>';
+
+
+//Correspondence between slugs and session ids
+var slugOfSession = new Array();
+//slugOfSession['session_id'] = "slug";
+
+////////////////////
+//Session establishment
+////////////////////
+
+//VideoChat Session: Step 1
+function clickVideoChatButton(slug){
+
+	showNotificationOnVideoBox(slug,"");
+	var videoBoxVisibility = toogleVideoBoxForSlug(slug);
+	
+  if(! isUserConnected()){
+		showNotificationOnVideoBox(slug, I18n.t("chat.videochat.offline"));
+		return;
+	}	
+	
+	if(! isSlugChatConnected(slug)){
+		showNotificationOnVideoBox(slug, I18n.t("chat.videochat.guestOffline", {name: getNameFromSlug(slug)}));
+		return;
+	}
+	
+	if (slug in contactsInfo) {
+		
+		var connectionStatus = contactsInfo[slug].videoChatStatus;
+		
+		if(connectionStatus=="pending"){
+			return;
+		}
+		
+		if(connectionStatus!="disconnected"){
+			closeVideoSession(slug);
+			return;
+		}
+
+    //connectionStatus=="disconnected"
+    showNotificationOnVideoBox(slug,I18n.t('chat.videochat.negotiating'));
+		
+		if(! videoBoxVisibility){
+			return;
+		}
+		
+		contactsInfo[slug].videoChatStatus="negotiating";
+		
+		if(contactsInfo[slug].version != null){
+			initVideoChatSession(slug);
+			return;
+		} else {
+			sendIQStanzaForRequestClientInfo(slug);
+		}
+	} else {
+		showNotificationOnVideoBox(slug,I18n.t('chat.videochat.unable'))
+		return;
+	}
+}
+
+
+//VideoChat Session: Step 2
+function initVideoChatSession(slug){
+	if (contactsInfo[slug].version == getJavascriptXMPPClientName()) {
+		contactsInfo[slug].videoChatStatus="connecting";
+		showNotificationOnVideoBox(slug,I18n.t('chat.videochat.connecting'));
+		requestSessionIDAndTokenForVideoChat(slug);
+  } else {
+		showVideoChatNotificationForSlugClientIssue(slug);
+		contactsInfo[slug].videoChatStatus="disconnected";
+	}
+}
+
+//VideoChat Session: Step 3
+function requestSessionIDAndTokenForVideoChat(slug){
+
+	$.post("/requestVideoChat.xml", { }, function(data){
+      		
+		var session = $(data).find("session");
+    if (session.length == 1) {
+			if (($(session).find("id").length == 1) && (($(session).find("user_token").length == 1)) && (($(session).find("guest_token").length == 1))) {
+				contactsInfo[slug].session_id = $(session).find("id").text();
+				contactsInfo[slug].user_token = $(session).find("user_token").text();
+				contactsInfo[slug].guest_token = $(session).find("guest_token").text();
+				sendVideoChatRequestToUser(slug);
+				return;
+			}
+	  }
+		
+		showNotificationOnVideoBox(slug, I18n.t('chat.videochat.serverIssue'));
+		contactsInfo[slug].videoChatStatus="disconnected";
+  });
+}
+
+
+//VideoChat Session: Step 4
+function sendVideoChatRequestToUser(slug){
+	contactsInfo[slug].videoChatStatus="waiting";
+	showNotificationOnVideoBox(slug,I18n.t('chat.videochat.waiting'));
+	sendIQStanzaToRequestVideochat(slug);
+}
+
+//VideoChat Session: Step 5
+function receiveVideoChatResponseFromUser(slug,response){
+	if(response=="yes"){
+		showNotificationOnVideoBox(slug,I18n.t('chat.videochat.establishing'));
+		contactsInfo[slug].videoChatStatus="establishing";
+		initVideoCallWith(slug);
+	} else {
+		showNotificationOnVideoBox(slug,I18n.t("chat.videochat.rejected", {name: getNameFromSlug(slug)}));
+		contactsInfo[slug].videoChatStatus="disconnected";
+	}
+}
+
+
+//Closing session
+function closeVideoSession(slug){
+	var connectionStatus = contactsInfo[slug].videoChatStatus;
+	if(connectionStatus=="connected"){
+    showNotificationOnVideoBox(slug,I18n.t('chat.videochat.disconnecting'));
+		
+		//Close opentok session...
+		if(contactsInfo[slug].session.connected){
+			contactsInfo[slug].session.disconnect();
+		}
+		
+		restoreChatBoxAfterVideoCall(slug);
+  } else {
+		toogleVideoBoxForSlug(slug,false);
+	}
+	contactsInfo[slug].videoChatStatus="disconnected";
+}
+
+
+
+/////////////
+// Videochat interface functions
+////////////
+
+function clientInfoReceivedTrigger(slug){
+  //Check for videochat request
+  if ((slug in contactsInfo)&&(contactsInfo[slug].videoChatStatus="negotiating")){
+    initVideoChatSession(slug);
+  }
+}
+
+function showNotificationOnVideoBox(slug,msg){
+	setVideoBoxContent(slug,"<p class=\"video-info\"> " + msg +" </p>");
+}
+
+
+function updateInterfaceAfterVideoRequestReceived(slug){
+	
+	if (contactsInfo[slug].videoChatStatus!="disconnected"){
+		return;
+	} else {
+		contactsInfo[slug].videoChatStatus="pending";
+	}
+	
+  var jid = slug+"@"+contactsInfo[slug].domain
+	
+	//Show chatbox
+	if (createChatBox(slug, getNameFromSlug(slug), jid, user_name, user_jid)) {
+  } else {
+     getChatBoxForSlug(slug).chatbox("option", "boxManager").toggleBox(true);
+  };
+	
+	var chatBox = getChatBoxForSlug(slug);
+	
+	//Show invitation message
+	showInvitationInVideoBox(slug);
+	
+	//Show videobox
+  toogleVideoBoxForSlug(slug,true);
+}
+
+
+function showInvitationInVideoBox(slug){
+	var title = "<p class=\"video-info\">" + I18n.t("chat.videochat.call", {name: getNameFromSlug(slug)}) + " </p>";
+	var msg = title + "<p class=\"video-request\"> <a class=\"videoChatButton\" slug=\""+slug+"\" value=\"yes\">" + I18n.t("chat.videochat.accept") + "</a> -" 
+	+ " <a class=\"videoChatButton\" slug=\""+slug+"\" value=\"no\">" + I18n.t("chat.videochat.deny") + "</a> </p>";
+  setVideoBoxContent(slug,msg);
+	setVideochatRequestButtonsFunction();
+}
+
+function setVideochatRequestButtonsFunction(){
+	$(".videoChatButton").click(function(event) { 
+    event.preventDefault();
+		var result = $(this).attr("value");
+		var slug = $(this).attr("slug");
+		sendIQStanzaToResponseVideochat(slug,result);
+		
+		if(result=="yes"){
+			showNotificationOnVideoBox(slug,I18n.t('chat.videochat.establishing'));
+			contactsInfo[slug].videoChatStatus="establishing";
+      initVideoCallWith(slug);
+		} else {
+			contactsInfo[slug].videoChatStatus="disconnected";
+			closeVideoSession(slug);
+		}
+  });
+}
+
+function togglePublisherDivOnVideoChat(slug){
+	var publisherDiv = getPublisherVideoBoxForSlug(slug);
+	var chatBox = getChatBoxForSlug(slug);
+	var videoBox = getVideoBoxForSlug(slug);
+	
+	if((chatBox==null)||(videoBox==null)||(publisherDiv==null)){
+		return;
+	}
+	
+	var videoBoxVisibility = publisherDiv.css("z-index")!="-1";
+		
+	var desp = OPENTOK_PUBLISHER_HEIGHT + 1;
+	
+	var scrollHeight = $(chatBox)[0].scrollHeight;
+	var outerHeight = chatBox.outerHeight();
+	var diff = scrollHeight - chatBox.scrollTop() - outerHeight;
+	var scrollMov = 145;
+			
+	if (! videoBoxVisibility){
+		//Show publisher div
+    publisherDiv.css("z-index","100");
+		//Resize windows
+    chatBox.css("height",chatBox.height() - desp );
+		videoBox.css("height",videoBox.height() + desp );
+		chatBox.scrollTop(chatBox.scrollTop() + scrollMov);
+  } else {
+    //Hide publisher div
+		publisherDiv.css("z-index","-1");
+		//Resize windows
+    chatBox.css("height",chatBox.height() + desp );
+		videoBox.css("height",videoBox.height() - desp );
+		if(diff < desp){
+			chatBox.scrollTop(chatBox.scrollTop() - diff);
+		} else {
+			chatBox.scrollTop(chatBox.scrollTop() - scrollMov);
+		}
+  }
+}
+
+function restoreChatBoxAfterVideoCall(slug){
+	//Original dimensions
+	showNotificationOnVideoBox(slug,I18n.t('chat.videochat.disconnected'));
+	$(getChatBoxButtonForSlug(slug,"videoChange")).find("span").hide();
+  toogleVideoBoxForSlug(slug,false);
+	var chatBox = getChatBoxForSlug(slug);
+	chatBox.height(chatBoxHeight);
+}
+
+
+function checkVideocallFeature(){
+	if (opentok_apiKey=="default"){
+		//Hide videochat buttons
+		
+		//Changing Tooltip CSS class by JQuery
+    var ss = document.styleSheets;
+    for (var i=0; i<ss.length; i++) {
+        var rules = ss[i].cssRules || ss[i].rules;
+        for (var j=0; j<rules.length; j++) {
+            if (rules[j].selectorText === ".chat-videothick") {
+                rules[j].style.display = 'none'
+            }
+        }
+    } 
+	}
+}
+
+
+function clickVideoChangeChatButton(slug){
+	togglePublisherDivOnVideoChat(slug);
+}
+
+////////////////
+/// Tokbox management
+////////////////
+
+var OPENTOK_PUBLISHER_WIDTH = 235;
+var OPENTOK_PUBLISHER_HEIGHT = 145;
+
+var OPENTOK_SUBSCRIBER_WIDTH = 235;
+var OPENTOK_SUBSCRIBER_HEIGHT = 145;
+
+
+function initVideoCallWith(slug){
+
+	if (TB.checkSystemRequirements() != TB.HAS_REQUIREMENTS) {
+  	log("You don't have the minimum requirements to run this application." +
+			  "Please upgrade to the latest version of Flash.");
+  } else {
+  	//TB.setLogLevel(TB.DEBUG);
+  	contactsInfo[slug].session = TB.initSession(contactsInfo[slug].session_id);
+  	contactsInfo[slug].session.addEventListener('sessionConnected', sessionConnectedHandler);
+  	contactsInfo[slug].session.addEventListener('sessionDisconnected', sessionDisconnectedHandler);
+  	contactsInfo[slug].session.addEventListener('streamCreated', streamCreatedHandler);
+  	contactsInfo[slug].session.addEventListener('streamDestroyed', streamDestroyedHandler);
+  	contactsInfo[slug].session.connect(opentok_apiKey, contactsInfo[slug].user_token);
+  	slugOfSession[contactsInfo[slug].session_id] = slug;
+  }
+}
+
+
+        
+function sessionConnectedHandler(event) {
+	if (event.target.sessionId in slugOfSession){
+	  var slug = slugOfSession[event.target.sessionId];
+		contactsInfo[slug].videoChatStatus="connected";
+		$(getChatBoxButtonForSlug(slug,"videoChange")).find("span").show();
+		
+		//Create publishing div
+		var parentDiv = document.createElement('div');
+		var pubID = 'stream_publish_videochat_' + slug;
+		//pubID="publisherID"
+		parentDiv.setAttribute('id', pubID);
+		
+		parentDiv.setAttribute('class', 'stream_publish_videochat');
+		
+    var stubDiv = document.createElement("div");
+    stubDiv.id = "opentok_publisher";
+    parentDiv.appendChild(stubDiv);
+		
+		//Interface update
+		setVideoBoxContent(slug,parentDiv);
+		
+		//Publish
+		var publisherProps = {width: OPENTOK_PUBLISHER_WIDTH, height: OPENTOK_PUBLISHER_HEIGHT};
+		contactsInfo[slug].publisher = contactsInfo[slug].session.publish(stubDiv.id, publisherProps);
+		
+		//Subscribe
+    subscribeToStreams(event.streams,slug);
+		
+		//Toggle!
+		togglePublisherDivOnVideoChat(slug);
+	} else {
+		//Close
+	}
+}   
+ 
+ 
+function sessionDisconnectedHandler(event) {
+	// This signals that the user was disconnected from the Session. Any subscribers and publishers
+  // will automatically be removed. This default behaviour can be prevented using event.preventDefault()
+	
+	var slug = slugOfSession[event.target.sessionId];
+  contactsInfo[slug].publisher = null;
+	contactsInfo[slug].videoChatStatus="disconnected";
+}
+
+ 
+function streamCreatedHandler(event) {
+		var slug = slugOfSession[event.target.sessionId];
+		subscribeToStreams(event.streams,slug);
+}
+
+function streamDestroyedHandler(event) {
+      // This signals that a stream was destroyed. Any Subscribers will automatically be removed.
+      // This default behaviour can be prevented using event.preventDefault()
+			var slug = slugOfSession[event.target.sessionId];
+			log("streamDestroyedHandler: se destruyo el stream de " + slug)
+			closeVideoSession(slug);
+}
+ 
+ 
+function subscribeToStreams(streams,slug) {
+	var session = contactsInfo[slug].session
+	
+  for (var i = 0; i < streams.length; i++) {
+
+    // Make sure we don't subscribe to ourself
+    if (streams[i].connection.connectionId == session.connection.connectionId) {
+      return;
+    }
+		
+    // Create subscriber div
+		var parentDiv = document.createElement('div');
+    parentDiv.setAttribute('class', 'stream_videochat');
+		
+		var stubDiv = document.createElement("div");
+    stubDiv.id = 'stream' + streams[i].streamId;
+    parentDiv.appendChild(stubDiv);
+    
+    addVideoBoxContent(slug,parentDiv);
+                     
+    // Subscribe to the stream
+		var subscriberProps = { width: OPENTOK_SUBSCRIBER_WIDTH,
+                          height: OPENTOK_SUBSCRIBER_HEIGHT };
+    session.subscribe(streams[i], stubDiv.id, subscriberProps);
+  }
+}

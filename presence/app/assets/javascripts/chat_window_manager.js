@@ -5,8 +5,8 @@
 var nBox = 0;
 var maxBox = 5;
 var chatBoxWidth = 230;
-var chatBoxHeight = 170;
-var videoBoxHeight = 150;
+var chatBoxHeight = 180;
+var videoBoxHeight = 145;
 var visibleChatBoxes = new Array();
 var offsetForFlowBox = 0;
 var chatBoxSeparation = chatBoxWidth+12;
@@ -150,6 +150,46 @@ function getChatBoxForSlug(slug){
 	}
 }
 
+function getChatBoxHeaderForSlug(slug){
+  var chatBox = getChatBoxForSlug(slug);
+  if(chatBox!=null){
+    return chatBox.parent().parent().find(".ui-chatbox-titlebar")
+  } else {
+		return null;
+	}
+}
+
+function getChatBoxButtonsForSlug(slug){
+	var chatBoxHeader = getChatBoxHeaderForSlug(slug);
+	if(chatBoxHeader!=null){
+		return chatBoxHeader.find(".ui-chatbox-icon");
+	} else {
+		return null;
+	}
+}
+
+function getChatBoxButtonForSlug(slug,button){
+	var chatBoxButtons = getChatBoxButtonsForSlug(slug);
+	if(chatBoxButtons!=null){
+		switch (button){
+			case "close":
+			return chatBoxButtons[0];
+			break;
+			case "min":
+			return chatBoxButtons[1];
+			break;
+			case "video":
+      return chatBoxButtons[2];
+      break;
+			case "videoChange":
+      return chatBoxButtons[3];
+      break;
+			default : return null;
+		}
+	} else {
+		return null;
+	}
+}
 
 function getAllSlugsWithChatBoxes(){
 	var slugsWithChatBox = [];
@@ -209,41 +249,82 @@ function rotatePriority(guest_slug){
 //Video Window Manager functions
 ////////////////////
 
-function getVideoBoxFromSlug(slug){
-	return $("#" + slug).parent().find("div.ui-videobox")
+function getVideoBoxForSlug(slug){
+	var videoBox = $("#" + slug).parent().find("div.ui-videobox");
+	if(videoBox.length == 1){
+		return videoBox;
+	} else {
+		return null;
+	}
 }
 
-function showVideoBox(slug,embed){
-	var chatBox = window[getChatVariableFromSlug(slug)]
-	getVideoBoxFromSlug(slug).html(embed);
-  chatBox.chatbox("option", "video",videoBoxHeight);
+function getPublisherVideoBoxForSlug(slug){
+	var pubDiv = $("#stream_publish_videochat_" + slug);
+	if (pubDiv.length > 0) {
+		return pubDiv
+	} else {
+		return null;
+	}
 }
 
+function setVideoBoxContent(slug,embed){
+  var videoBox = getVideoBoxForSlug(slug);
+  if(videoBox!=null){
+    videoBox.html(embed);
+  }
+}
 
-function hideVideoBox(slug){
-	  var chatBox = window[getChatVariableFromSlug(slug)]
-    chatBox.chatbox("option", "video", 0);
+function addVideoBoxContent(slug,embed){
+  var videoBox = getVideoBoxForSlug(slug);
+  if(videoBox!=null){
+    videoBox.append(embed);
+  }
+}
+
+function showVideoBox(chatBox){
+		chatBox.chatbox("option", "video",videoBoxHeight);
+}
+
+function hideVideoBox(chatBox){
+  chatBox.chatbox("option", "video", 0);
 }
 
 
 //Function called from JQuery UI Plugin
 function toogleVideoBox(uiElement){
-	  var slug = $(uiElement.element).attr("id");
-    toogleVideoBoxForSlug(slug)
+	var slug = $(uiElement.element).attr("id");
+	clickVideoChatButton(slug);
 }
 
-function toogleVideoBoxForSlug(slug){
-	var chatBox = window[getChatVariableFromSlug(slug)]
-	if (chatBox.chatbox("option", "video")==0){
-		showVideoBox(slug,getVideoEmbedForSlug(slug))
-	} else {
-		hideVideoBox(slug);
+//Function called from JQuery UI Plugin
+function toogleVideoBoxChange(uiElement){
+  var slug = $(uiElement.element).attr("id");
+  clickVideoChangeChatButton(slug);
+}
+
+function toogleVideoBoxForSlug(slug,boolean){
+	var chatBox = getChatBoxForSlug(slug);
+	
+	if(boolean!=null){
+		if(boolean){
+			showVideoBox(chatBox);
+		} else {
+			hideVideoBox(chatBox);
+		}
+		return boolean;
+	}
+	
+	if(chatBox!=null){
+		if (chatBox.chatbox("option", "video")==0){
+	    showVideoBox(chatBox);
+			return true;
+	  } else {
+	    hideVideoBox(chatBox);
+			return false;
+	  }
 	}
 }
 
-function getVideoEmbedForSlug(slug){
-	return "<img src=\"http://www.batiburrillo.net/wp-content/uploads/2011/03/Freemake.jpg?cda6c1\" width=\"" + (chatBoxWidth-20) + "\"/>"
-}
 
 
 
@@ -303,6 +384,9 @@ function createMainChatBox(){
 			$(".dropdown dd ul").css("min-width",147) 
 			$(mainChatBox).css('overflow-x','hidden')
       $(mainChatBox).css('overflow-y','hidden')
+			
+			//Minimize
+			mainChatBox.parent().toggle(false);
 			
 			//Header title
 			updateConnectedUsersOfMainChatBox();

@@ -3,7 +3,6 @@
 ////////////////////
 var domain = '<%=SocialStream::Presence.domain%>';
 
-
 ////////////////////
 //Hash tables
 ////////////////////
@@ -34,7 +33,31 @@ statusIcons['away'] = "away";
 statusIcons['xa'] = "away";
 statusIcons['dnd'] = "dnd";
 
+//Contact information
+var contactsInfo = new Array();
+//contactsInfo['slug'] = "[Object chatContact]";
 
+//Manage contact information
+function chatContact(domain,resource,client,version) {
+  this.domain=domain
+  this.resource=resource
+  this.client=client;
+	this.version=version;
+	//Sender: disconnected, negotiating , connecting , waiting, establishing, connected
+	//Receiver: disconnected , pending , establishing, connected
+	this.videoChatStatus = "disconnected";
+	this.session_id=null;
+	this.user_token=null;
+	this.guest_token=null;
+	this.session=null;
+	this.publisher=null;
+} 
+
+
+//IQsIDs
+var iqStanzaID = new Array();
+iqStanzaID['cinfo'] = "versionID";
+iqStanzaID['videochatRequest'] = "videochatRequestID";
 
 ////////////////////
 //Connect functions
@@ -42,35 +65,39 @@ statusIcons['dnd'] = "dnd";
 
 function connectToChat(user_jid,cookie,password){
 	
-	if (isStropheConnected()){
+	if (isUserConnected()){
+		log("USer already connected")
     return true;
   } 
 		
 	if (authByCookie()){
     if (connectToServerWithCookie(user_jid, cookie)==false){
-      refreshChatWindow();
+      updateChatWindow();
     }
   } else {
     if (connectToServerWithPassword(user_jid,password)==false){
-      refreshChatWindow();
+      updateChatWindow();
     }
   }       
 }
 
 
 function isStropheConnected(){
-  if((connection!=null)&&(connection.connected)){
+  if((strophe_connection!=null)&&(strophe_connection.connected)){
       return true;
     } else {
       return false;
     }
 }
 
+function isUserConnected(){
+	return ((isStropheConnected()) && (userStatus!="offline") && (!disconnectionFlag));
+}
 
 function connectToServerWithCookie(user_jid, cookie){ 
     try {
-      connection = new Strophe.Connection(BOSH_SERVICE);
-      connection.connect(user_jid, cookie, onConnect);
+      strophe_connection = new Strophe.Connection(BOSH_SERVICE);
+      strophe_connection.connect(user_jid, cookie, onConnect);
     } catch (err) {
       //"Handle errors"
       return false;
@@ -93,8 +120,8 @@ function connectToServerWithPassword(user_jid, chatPassword){
     
     try {
         //Connect actual user to the chat
-        connection = new Strophe.Connection(BOSH_SERVICE);
-        connection.connect(user_jid, password, onConnect);
+        strophe_connection = new Strophe.Connection(BOSH_SERVICE);
+        strophe_connection.connect(user_jid, password, onConnect);
     } catch (err) {
         //"Handle errors"
         return false;
@@ -125,21 +152,15 @@ function authByPassword(){
 //Global variables
 var userStatus;
 var awayTimerPeriod = 60000;
-var timerPeriod = 5000;
-var refreshMinTime = 3*timerPeriod;
 var awayTime = 10*60000; //10 minutes
 var awayCounter = 0;
-var timerCounter = 0;
-var connection = null;
+var strophe_connection = null;
 var reconnectAttempts = 3;
 var awayTimer;
-var timer;
 var reconnectTimer;
-var disconnectionFlag = true;
+var disconnectionFlag = false;
 var afterNewConnectionFlag = false;
 var afterFirstConnectionFlag = true;
-var requestContacts=false;
-var cyclesToRefresh = (refreshMinTime/timerPeriod);
 
 
 function onConnect(status) {
@@ -156,7 +177,12 @@ function onConnect(status) {
   
   log('Strophe onConnect callback call with status ' + status);
   
-  if (status == Strophe.Status.ATTACHED){
+  if (status == Strophe.Status.ERROR){
+    log('Strophe connection error');
+    return;
+  } 
+	
+	 if (status == Strophe.Status.ATTACHED){
     log('Strophe connection attached');
     return;
   } 
@@ -174,9 +200,11 @@ function onConnect(status) {
   if (status == Strophe.Status.DISCONNECTING) {
     log('Strophe is disconnecting.');
     return;
-  } 
+  }
     
-  clearTimeout(initialTimer);
+	if(typeof initialTimer != 'undefined'){
+		clearTimeout(initialTimer);
+	}
     
   if (status == Strophe.Status.CONNFAIL) {
     log('Strophe failed to connect.');
@@ -205,15 +233,13 @@ function onConnect(status) {
     clearTimeout(reconnectTimer);
 		
     //addHandler:(callback, namespace to match, stanza name, stanza type, stanza id , stanza from, options)
-    connection.addHandler(onMessage, null, 'message', null, null,  null);
-    connection.addHandler(onPresence, null, 'presence', null, null,  null); 
-		connection.addHandler(onIQStanza,null, "iq", null, null);
+    strophe_connection.addHandler(onMessage, null, 'message', null, null,  null);
+    strophe_connection.addHandler(onPresence, null, 'presence', null, null,  null); 
+		strophe_connection.addHandler(onIQStanza,null, "iq", null, null);
 
-		
     disconnectionFlag = false;
     afterNewConnectionFlag = true;
 		
-		log('Presenze stanza send for:' + connection.jid);
 		userStatus = getRestoreUserChatStatus();
 		if(userStatus=="offline"){
 			userStatus="chat";
@@ -221,7 +247,6 @@ function onConnect(status) {
     sendStatus(userStatus);
 		
     awayTimer = setInterval("awayTimerFunction()", awayTimerPeriod);
-    timer = setInterval("timerFunction()", timerPeriod);
   }
 	 
 	 updateChatWindow();
@@ -254,8 +279,8 @@ function disconnectStrophe(){
   setStatusWidgetTitle("offline");
   
   if(isStropheConnected()){
-    connection.send($pres({type: "unavailable"}).tree()); 
-    connection.disconnect();
+    strophe_connection.send($pres({type: "unavailable"}).tree()); 
+    strophe_connection.disconnect();
   } 
 }
 
@@ -287,9 +312,9 @@ function onMessage(msg) {
 //Manage Presence stanzas
 ///////
 function onPresence(presence) {
-    
-		log(presence)
-		
+	
+	  log(presence)
+	
     //Check presence stanza type
     var ptype = $(presence).attr('type');
         
@@ -317,13 +342,14 @@ function processAvailablePresenceStanza(presence){
   var slug = from.split("@")[0];
   
   if (slug != user_slug) {
+		storeContactInformation(presence);
     if (getConnectionBoxFromSlug(slug)!=null){
       var status = $(presence).find('show').text(); 
       setUserIconStatus(slug,status);
 			updateInterfaceAfterPresenceStanza(slug,true);
     } else {
 			if(! isAdminSlug(slug)){
-				setTimeout("refreshChatWindow()", 3000);
+				updateChatWindow();
 			}
     }
   }   
@@ -340,76 +366,256 @@ function processUnavailablePresenceStanza(presence){
   }
 }
 
+function storeContactInformation(stanza){
+	var from = $(stanza).attr('from');
+	var split = from.split("@");
+	var slug = split[0];
+  var domain = split[1].split("/")[0];
+  var resource = split[1].split("/")[1];
+		
+	if (!(slug in contactsInfo)) {
+		var contact = new chatContact(domain,resource,null,null);
+		contactsInfo[slug]=contact;
+  } else {
+		contactsInfo[slug].domain = domain;
+		contactsInfo[slug].resource = resource;
+	}
+}
+
+
 
 ////////
 //Manage IQ stanzas
 ///////
+
+///////
+//RECEIVED STANZAS
+///////
 function onIQStanza(iq){
-  
+	var type = iq.getAttribute("type");
 	var from = iq.getAttribute("from");
 	var slug = from.split("@")[0];
 	
 	if (slug == user_slug) {
-		return;
+		return true;
   }
 	
-	var queryElements = iq.getElementsByTagName('query');
+	if(type=="get"){
+		return handleGetIQStanza(iq,from,slug);
+	} else if(type="result"){
+		return handleResultIQStanza(iq,from,slug)
+	}
+	
+	return true;
+}
+
+///////
+//RECEIVED STANZAS: GET
+///////
+function handleGetIQStanza(iq,jid,slug){
+	
+	var iqID = iq.getAttribute("id");
+	
+	//Case 1: Request client info
+  var queryElements = iq.getElementsByTagName('query');
 
   if (queryElements.length > 0) {
     var query = queryElements[0];
-		var type = query.getAttribute("xmlns");
-		
-		if( type == "jabber:iq:version"){
-			var iqID = iq.getAttribute("id");
-			
-			//Response to client info request.
-			sendIQStanzaWithClientInfo(from,iqID);
-		}
+    var xmlns_type = query.getAttribute("xmlns");
+    
+    if( xmlns_type == "jabber:iq:version"){
+      sendIQStanzaWithClientInfo(jid,iqID);
+      return true;
+    }
+    
+    if (xmlns_type == "jabber:iq:last") {
+      sendIQStanzaLast(jid,iqID);
+      return true;
+    }
+  }
+	
+	//Case 2: Request videochat
+	if(iqID==iqStanzaID['videochatRequest']){
+		handleGetVideochatIQStanza(jid,iqID,iq,slug)
+		return true;
 	}
+	
+	
+  //Case: Default behaviour
+  sendIQEmpty(jid,iqID);
 
+  return true;
+}
+
+
+
+function handleGetVideochatIQStanza(jid,iqID,iq,slug){
+	storeContactInformation(iq);
+	var queryTag = iq.getElementsByTagName('query');
+  
+  if (queryTag.length > 0) {
+    var queryElement = queryTag[0];
+    var session_id = queryElement.getElementsByTagName('session_id');
+    var token = queryElement.getElementsByTagName('token');
+    
+    if((session_id.length == 1)&&(token.length == 1)){
+			contactsInfo[slug].session_id =  $(session_id).text();
+      contactsInfo[slug].user_token = $(token).text(); 
+			updateInterfaceAfterVideoRequestReceived(slug);
+			return;
+    }
+  }
+	
+	//Send error stanza
+	sendIQEmpty(jid,iqID);
+}
+
+
+///////
+//RECEIVED STANZAS: RESULT
+///////
+function handleResultIQStanza(iq,jid,slug){
+  var iqID = iq.getAttribute("id");
+	
+	
+	if (iqID==iqStanzaID['cinfo']){
+    return handleIQResultWithClientInfo(iq,slug);
+	}
+	
+	if (iqID==iqStanzaID['videochatRequest']){
+    return handleIQResultFromVideochatRequest(iq,slug);
+  }
+	
+	//Case: Default behaviour
 	return true;
 }
 
 
+function handleIQResultWithClientInfo(iq,slug){
+  var queryTag = iq.getElementsByTagName('query');
+  
+  if (queryTag.length > 0) {
+    var queryElement = queryTag[0];
+    var name = queryElement.getElementsByTagName('name');
+    var version = queryElement.getElementsByTagName('version');
+    
+    if((name.length == 1)&&(version.length == 1)){
+      var clientValue =  $(name).text();
+      var versionValue = $(version).text();
+      
+      if (!(slug in contactsInfo)) {
+        var contact = new chatContact(null,null,clientValue,versionValue);
+        contactsInfo[slug]=contact;
+      } else {
+        contactsInfo[slug].client = clientValue;
+        contactsInfo[slug].version = versionValue;
+      }
+      clientInfoReceivedTrigger(slug);
+    }
+  }
+	
+	return true;
+}
+
+
+function handleIQResultFromVideochatRequest(iq,slug){
+	
+	var queryTag = iq.getElementsByTagName('query');
+  
+  if (queryTag.length > 0) {
+    var queryElement = queryTag[0];
+    var response = queryElement.getElementsByTagName('response');
+    
+    if(response.length == 1){
+      receiveVideoChatResponseFromUser(slug,$(response).text());
+			return true;
+    }
+  }
+	
+  receiveVideoChatResponseFromUser(slug,"Bad response");
+	return true;
+}
+
+
+
+///////
+//SEND STANZAS: GET
+///////
+function sendIQStanzaForRequestClientInfo(slug){
+  if (slug in contactsInfo) {
+    var domain = contactsInfo[slug].domain;
+    var resource = contactsInfo[slug].resource;
+    var jid=slug+"@"+domain+"/"+resource
+    
+    var iq = $iq({to: jid, type: "get", id: iqStanzaID['cinfo'], xmlns: "jabber:iq:version"})
+    .c("query", {xmlns: "jabber:iq:version"});
+    strophe_connection.sendIQ(iq);
+  }
+}
+
+function sendIQStanzaToRequestVideochat(slug){
+  if (slug in contactsInfo) {
+    var jid=slug+"@"+contactsInfo[slug].domain+"/"+contactsInfo[slug].resource;
+    
+    var iq = $iq({to: jid, type: "get", id: iqStanzaID['videochatRequest']})
+		.c("query", {xmlns: "urn:ietf:params:xml:ns:xmpp-stanzas"})
+		.c("session_id").t(contactsInfo[slug].session_id).up()
+    .c("token").t(contactsInfo[slug].guest_token);
+    strophe_connection.sendIQ(iq);
+  }
+}
+
+
+
+///////
+//SEND STANZAS: RESULT
+///////
 function sendIQStanzaWithClientInfo(jid,iqID){
 	var client = "Social Stream XMPP Client"
-	var version = '<%=SocialStream::Presence::VERSION%>';
+	var version = getJavascriptXMPPClientName();
 	var iq = $iq({to: jid, type: "result", id: iqID})
   .c("query", {xmlns: "jabber:iq:version"}).c("name").t(client).up().c("version").t(version);
-	connection.sendIQ(iq);
+	strophe_connection.sendIQ(iq);
 }
 
-
-var iqIDNumber = 1000;
-function sendIQStanzaForRequestClientInfo(jid){
-  //var client = "Social Stream XMPP Client"
-  //var version = '<%=SocialStream::Presence::VERSION%>';
-  //var iq = $iq({to: jid, type: "result", id: iqID})
-  //.c("query", {xmlns: "jabber:iq:version"}).c("name").t(client).up().c("version").t(version);
-  //connection.sendIQ(iq);
+function getJavascriptXMPPClientName(){
+	return '<%=SocialStream::Presence::VERSION%>';
 }
 
-
-function iqSuccess(){
-	log("iq sucess")
+function sendIQStanzaLast(jid,iqID){ 
+  var iq = $iq({to: jid, type: "result", id: iqID})
+  .c("query", {xmlns: "jabber:iq:last", seconds: "0"});
+  strophe_connection.sendIQ(iq);
 }
 
-function iqFail(){
-	log("iq fail")
+function sendIQEmpty(jid,iqID){
+  var iq = $iq({to: jid, type: "result", id: iqID})
+  strophe_connection.sendIQ(iq);
 }
+
+function sendIQStanzaToResponseVideochat(slug,result){
+  if (slug in contactsInfo) {
+    var jid=slug+"@"+contactsInfo[slug].domain+"/"+contactsInfo[slug].resource;
+    var iq = $iq({to: jid, type: "result", id: iqStanzaID['videochatRequest']})
+    .c("query", {xmlns: "urn:ietf:params:xml:ns:xmpp-stanzas"})
+    .c("response").t(result);
+    strophe_connection.sendIQ(iq);
+  }
+}
+
 
 
 ////////
 //Send Message stanzas
 ///////
 function sendChatMessage(from,to,text){
-    var type = "chat";
-    var body= $build("body");
-    body.t(text);
-    var message = $msg({to: to, from: from, type: 'chat'}).cnode(body.tree());
-    connection.send(message.tree());      
-    restartAwayTimer();
-    return true;
+  var type = "chat";
+  var body= $build("body");
+  body.t(text);
+  var message = $msg({to: to, from: from, type: 'chat'}).cnode(body.tree());
+  strophe_connection.send(message.tree());      
+  restartAwayTimer();
+  return true;
 }
 
 
@@ -429,7 +635,7 @@ function sendStatus(status){
       .t(statusMessage[status]).up() //Status message
       .c('show')
       .t(status);
-       connection.send(pres.tree());
+       strophe_connection.send(pres.tree());
        setStatusWidgetTitle(status);
     }
 }

@@ -46,7 +46,7 @@ function parseContent(content){
     return "<pre>" + content + "</pre>"
   }
   
-  words = content.split(" ");
+  var words = content.split(" ");
   for(i=0; i<words.length; i++){
     words[i] = parseWord(words[i]);
   }
@@ -131,18 +131,18 @@ function parseWord(word){
 }
 
 function splitFirst(word,key){
-    split=[]  
-    cut = word.split(key);   
+    var split=[]  
+    var cut = word.split(key);   
     split[0]=cut[0]
     cut.shift()
-    paste = cut.join(key)
+    var paste = cut.join(key)
     split[1]=paste
     return split
 }
 
 function buildIconImage(icon){
   if (icon in chatIcons){
-    image_file = chatIcons[icon]
+    var image_file = chatIcons[icon]
     return "<img class=\"chatEmoticon\" src=\"/assets/emoticons/" + image_file + "\"/>";
   }
   return icon

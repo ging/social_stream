@@ -21,4 +21,21 @@ en:
       update: "Update Settings"
     notify:
       offline: "You are offline"
-      guestOffline: "is offline"
+      guestOffline: "{{name}} is offline"
+    videochat:
+      disconnected: Videochat disconnected
+      disconnecting: Videochat disconnecting...
+      negotiating: Negotiating...
+      connecting: Connecting to the server...
+      waiting: Waiting for response...
+      establishing: Establishing...
+      connnected: Videochat connected.
+      unable: Unable to init videochat.
+      serverIssue: "Server Error: Invalid response"
+      call: "{{name}} wants to start a video call"
+      rejected: "{{name}} has rejected your call"
+      accept: Accept
+      deny: Deny
+      clientIssue: "{{name}}'s client not support videochat"
+      guestOffline: "Unable to connect. {{name}} is offline"
+      offline: "Unable to connect. You are offline"

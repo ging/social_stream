@@ -33,12 +33,16 @@ module SocialStream
     
     mattr_accessor :social_stream_presence_username
     mattr_accessor :password
+    
+    mattr_accessor :opentok_api_key
+    mattr_accessor :opentok_api_secret
 
     @@auth_method = "cookie"
     @@remote_xmpp_server = false
     @@secure_rest_api = false
     @@enable = false
     @@social_stream_presence_username = "social_stream_presence"
+    @@opentok_api_key = "default"
     
     class << self
       def setup

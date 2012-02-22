@@ -91,7 +91,7 @@ function settingChatBoxFunctions(){
     
     if (createChatBox(guest_slug, guest_name, guest_jid, user_name, user_jid)) {
     } else {
-      window[getChatVariableFromSlug(guest_slug)].chatbox("option", "boxManager").toggleBox(true);
+      getChatBoxForSlug(guest_slug).chatbox("option", "boxManager").toggleBox(true);
     };
   });
   
@@ -268,33 +268,13 @@ function restartAwayTimer(){
 //Update chatWindow Management
 ////////////////////
 
-function timerFunction(){
-    timerCounter++; 
-    
-    if((timerCounter > cyclesToRefresh)&&(requestContacts)) {
-        requestContacts = false;
-        updateChatWindow();
-    }
-}
-
-
-function refreshChatWindow(){  
-    if(timerCounter > cyclesToRefresh){
-      updateChatWindow();
-    } else {
-      requestContacts = true;
-    }
-}
-
-
-function updateChatWindow(){	
-	var stropheConnectedAndOnlineStatus = ((isStropheConnected()) && (userStatus!="offline") && (!disconnectionFlag));
+function updateChatWindow(){
 	timerCounter=0;
 	
 	log("updateChatWindow()");
-	log("Connected " + stropheConnectedAndOnlineStatus);
+	log("Connected " + isUserConnected());
 	
-	if(! stropheConnectedAndOnlineStatus){
+	if(! isUserConnected()){
 		loadDisconnectionDiv();
 		updateConnectedUsersOfMainChatBox();
 		return;
@@ -307,6 +287,7 @@ function updateChatWindow(){
 			hideConnectionBoxesFromDisconnectedSlugs();
 			setAllUserFunctions();
 			updateConnectedUsersOfMainChatBox();
+			checkForZeroUsersConnected();
       if (isStropheConnected()) {
         if (afterNewConnectionFlag){
           afterNewConnectionFlag = false;
@@ -510,20 +491,17 @@ function putReceivedMessageOnChatWindow(from_jid,from_slug,body,msgID){
     return;
    }
   
-  //Check slug connection and slugs connectionBox
-  if (existsSlugChatBox(from_slug)) {
+  //Check slugs connectionBox
+  if (!existsSlugChatBox(from_slug)) {
     //No connectionBox for this user!
     var from_name = getNameFromSlug(from_slug);
 		if(! isAdminSlug(from_slug)){
-			refreshChatWindow();
-		}
+      updateChatWindow();
+    }
   } else {
-		if(! isSlugChatConnected(from_slug)){
-			updateInterfaceAfterPresenceStanza(from_slug,"true");
-		}
-    var from_name = $('div.user_presence[slug=' + from_slug + ']').attr('name');
-  }
-  
+		var from_name = $('div.user_presence[slug=' + from_slug + ']').attr('name');
+	}
+
   //Create or toggle from_slug's chatBox.
   if (createChatBox(from_slug, from_name, from_jid, user_name, user_jid)) {
   } else {
@@ -564,16 +542,28 @@ function showChatNotification(notification,type,msg){
 
 function showChatNotificationForSlug(slug,type,msg){
   var notification = $("#" + slug).parent().find("div.ui-chatbox-notify");
-  showChatNotification(notification,type,msg);
+	if(notification.length==1){
+		showChatNotification(notification,type,msg);
+	}
 }
 
 function showOfflineChatNotificationForSlug(slug){
-	var slug_chat_box = getChatBoxForSlug(slug);
-	if(slug_chat_box!=null){
-		var name = slug_chat_box.attr("name")
-    var msg =  name + ' ' + I18n.t('chat.notify.guestOffline');
+		var msg = I18n.t("chat.notify.guestOffline", {name: getNameFromSlug(slug)});
     showChatNotificationForSlug(slug,"guestOffline",msg);
-	}
+}
+
+function showVideoChatNotificationForSlug(slug,msg){
+  showChatNotificationForSlug(slug,"videochat",msg);
+}
+
+function showVideoChatNotificationForSlugClientIssue(slug){
+	var msg = I18n.t("chat.notify.videochat.clientIssue", {name: getNameFromSlug(slug)});
+  showVideoChatNotificationForSlug(slug,msg);
+}
+
+function showVideoChatNotificationForSlugClientOffline(slug){
+  var msg = I18n.t("chat.notify.videochat.offline", {name: getNameFromSlug(slug)});
+  showVideoChatNotificationForSlug(slug,msg);
 }
 
 function hideChatNotification(notification){
@@ -617,8 +607,7 @@ function updateAllNotifications(){
 
 function updateConnectedUsersOfMainChatBox(){
   if(mainChatBox!=null){
-		var stropheConnectedAndOnlineStatus = ((isStropheConnected()) && (userStatus!="offline") && (!disconnectionFlag));
-		if(stropheConnectedAndOnlineStatus){
+		if(isUserConnected()){
 			var connectedUsers = getConnectedSlugsLength();
       changeMainChatBoxHeaderTitle( I18n.t('chat.title') + " (" + connectedUsers + ")");
       changeMainChatBoxHeight(getChatBoxHeightRequiredForConnectionBoxes());

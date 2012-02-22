@@ -20,5 +20,22 @@ es:
       checkbox: "Activar o desactivar chat"  
       update: "Guardar configuración"
     notify:
-      offline: "Desconectado"
-      guestOffline: "está desconectado"
+      offline: "Estás desconectado"
+      guestOffline: "{{name}} está desconectado"
+    videochat:
+      disconnected: Videochat desconectado
+      disconnecting: Videochat desconectando...
+      negotiating: Negociando...
+      connecting: Conectando con el servidor...
+      waiting: Esperando respuesta...
+      establishing: Estableciendo conexión...
+      connnected: Videochat conectado
+      unable: Imposible iniciar videochat
+      serverIssue: "Error del servidor: Respuesta inválida"
+      call: "{{name}} quiere iniciar una videollamada"
+      rejected: "{{name}} ha rechazado tu llamada"
+      accept: Aceptar
+      deny: Rechazar
+      clientIssue: "El cliente de {{name}} no soporta videochat"
+      guestOffline: "Imposible conectar. {{name}} está desconectado"
+      offline: "Imposible conectar. Estás desconectado"

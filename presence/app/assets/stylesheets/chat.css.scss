@@ -86,6 +86,41 @@ div.ui-videobox-icon{
   
 }
 
+div.ui-videobox-icon-change{
+  width: 100px;
+	height: 100px;
+}
+
+
+p.video-info{
+	padding-top: 25%;
+	text-align: center;
+}
+
+p.video-request{
+  padding-top: 20%;
+  text-align: center;
+	font-size: 130%;
+  font-weight: bolder;
+  color: $main-color;
+}
+
+.videoChatButton {
+	cursor: pointer;
+	font-size: 100%;
+}
+
+.stream_publish_videochat {
+    z-index: -1;
+    position: absolute;
+		top: 177px;
+}
+
+.stream_videochat{
+	width: 60%;
+  height: 60%;
+}
+
 /* notifications style sheet */
 
 div.ui-chatbox-notify{
@@ -135,9 +170,14 @@ p.ui-chatbox-notify-text{
 }
 
 .chat-videothick{
-	display: none;
+	/* display: none; */
+	padding: 1px;
 }
 
+.chat-videoPublisherthick{
+  display: none;
+	padding: 0px 9px 0px 9px;
+}
 
 /* Presence Partial */
 

@@ -176,8 +176,8 @@
         'ui-chatbox-icon' + ' ui-videobox-icon'
        )
       .attr('role', 'button')
-      //.hover(function() {uiChatboxTitlebarMinimize.addClass('ui-state-hover');},
-        //   function() {uiChatboxTitlebarMinimize.removeClass('ui-state-hover');})
+      .hover(function() {uiChatboxTitlebarVideo.addClass('ui-state-hover');},
+           function() {uiChatboxTitlebarVideo.removeClass('ui-state-hover');})
       .click(function(event) {
         toogleVideoBox(self)
         return false;
@@ -187,6 +187,25 @@
       .addClass('ui-icon-circle-triangle-e ' +  'chat-thick ' + ' chat-videothick' )
       .text('video')
       .appendTo(uiChatboxTitlebarVideo),
+			
+			
+			//Change video-window Menu button
+      uiChatboxTitlebarVideoChange = (self.uiChatboxTitlebarVideoChange = $('<a href="#"></a>'))
+      .addClass('ui-corner-all ' + 
+        'ui-chatbox-icon' + ' ui-videobox-icon-change'
+       )
+      .attr('role', 'button')
+      .hover(function() {uiChatboxTitlebarVideoChange.addClass('ui-state-hover');},
+           function() {uiChatboxTitlebarVideoChange.removeClass('ui-state-hover');})
+      .click(function(event) {
+        toogleVideoBoxChange(self)
+        return false;
+      })
+      .appendTo(uiChatboxTitlebar),
+      uiChatboxTitlebarVideoText = $('<span></span>')
+      .addClass('ui-icon-newwin ' +  'chat-thick ' + ' chat-videoPublisherthick' )
+      .text('')
+      .appendTo(uiChatboxTitlebarVideoChange),
 			
 			
 			// content

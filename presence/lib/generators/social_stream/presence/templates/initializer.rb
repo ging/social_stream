@@ -29,6 +29,12 @@ SocialStream::Presence.setup do |config|
   #Username of the the Social Stream Admin sid
   config.social_stream_presence_username = "social_stream-presence"
   #Configures Social Stream Rails App Password
-  config.password = <%= SecureRandom.hex(32).inspect %>  
+  config.password = <%= SecureRandom.hex(32).inspect %>
+  
+  #OpenTok settings (Only for videochat)
+  #Replace with your OpenTok API key.
+  #config.opentok_api_key = ""
+  #Replace with your OpenTok API secret.
+  #config.opentok_api_secret = ""
 
 end

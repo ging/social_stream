@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   match '/xmpp/unsetPresence' => "Xmpp#unsetPresence"
   match '/xmpp/resetConnection' => "Xmpp#resetConnection"
   match '/xmpp/synchronizePresence' => "Xmpp#synchronizePresence"
+  
   match '/xmpp/updateSettings'=> "Xmpp#updateSettings"
   match '/chatWindow'=> "Xmpp#chatWindow"
+  match '/requestVideoChat'=> "Xmpp#getOpenTokSessionIDAndToken"
    
 end

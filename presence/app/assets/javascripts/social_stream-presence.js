@@ -4,4 +4,5 @@
 //= require jquery.ui.chatbox.sstreampresence
 //= require jquery.flexselect.sstreampresence
 //= require liquidmetal
+//= require TB.min
 //= require_tree .
