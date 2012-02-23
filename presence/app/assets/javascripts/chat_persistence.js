@@ -10,9 +10,18 @@ function storeChatData(){
     return
   }
 	
+	storeChatStatus();
 	storeUserChatStatus();
-  storeChatConnectionParametres();
 	storeConversations();
+}
+
+function storeChatStatus(){
+	//Status of the mainChatBoxWindow
+  if(mainChatBox!=null){
+    sessionStorage.setItem("chat_mainChatBox_status", $(mainChatBox).is(":visible"));
+  } else {
+    sessionStorage.setItem("chat_mainChatBox_status", null);
+  } 
 }
 
 function storeConversations() {
@@ -22,8 +31,6 @@ function storeConversations() {
 	var storedSlugs = [];
 	var visibleMaxSlugs = [];
 	var visibleMinSlugs = [];
-	
-	//window[getChatVariableFromSlug("eric-white")].is(":visible")
 	
 	//Stored all conversations
 	for (var i=0;i<chatboxes.length;i++){
@@ -62,35 +69,13 @@ function storeConversations() {
   }
 }
 
-
-function storeChatConnectionParametres() {
-	if ((sessionStorage.getItem("cookie") == null)||(sessionStorage.getItem("chat_user_name") == null)){
-		if ((typeof cookie != 'undefined')&&(cookie!=null)){
-			sessionStorage.setItem("cookie", cookie);
-		}
-    if ((typeof user_name != 'undefined') && (user_name != null)) {
-			sessionStorage.setItem("chat_user_name", user_name);
-	  }
-		if ((typeof user_slug != 'undefined') && (user_slug != null)) {
-			sessionStorage.setItem("chat_user_slug", user_slug);
-	  }
-		if ((typeof user_jid != 'undefined') && (user_jid != null)) {
-			sessionStorage.setItem("chat_user_jid", user_jid);
-	  }
-	}	
-}
-
 function storeUserChatStatus(){
 	sessionStorage.setItem("chat_user_status", userStatus);
 }
 
 function removeAllDataStored(){
-	sessionStorage.removeItem("cookie");
-  sessionStorage.removeItem("chat_user_name");
-  sessionStorage.removeItem("chat_user_slug");
-  sessionStorage.removeItem("chat_user_jid");
-	
 	sessionStorage.removeItem("chat_user_status");
+	sessionStorage.removeItem("chat_mainChatBox_status");
 	
 	sessionStorage.removeItem("slugs_with_stored_log");
 	sessionStorage.removeItem("slugs_with_visible_max_chatbox");
@@ -117,7 +102,21 @@ function restoreChatData(){
   if (! window.sessionStorage){
     return
   }
+	
   restoreConversations();
+}
+
+
+function getRestoreMainChatBoxStatus(){
+	if (!window.sessionStorage) {
+    return false;
+  } else {
+		if(sessionStorage.getItem("chat_mainChatBox_status") == "true"){
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 
 function restoreConversations() {

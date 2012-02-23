@@ -405,7 +405,7 @@ function createMainChatBox(){
       $(mainChatBox).css('overflow-y','hidden')
 			
 			//Minimize
-			mainChatBox.parent().toggle(false);
+			mainChatBox.parent().toggle(getRestoreMainChatBoxStatus());
 			
 			//Header title
 			updateConnectedUsersOfMainChatBox();
