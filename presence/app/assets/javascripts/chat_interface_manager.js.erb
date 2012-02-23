@@ -384,6 +384,7 @@ function updateInterfaceAfterPresenceStanza(slug,available){
 	} else {
 		hideConnectionBoxFromSlug(slug);
 		showOfflineChatNotificationForSlug(slug);
+		closeVideoSession(slug);
 	}
   updateMainChatBoxAfterConnectionBoxChanges();
 	checkForZeroUsersConnected();
@@ -577,8 +578,15 @@ function hideChatNotificationForSlug(slug){
   hideChatNotification(notification);
 }
 
-function notifyWhenUsersDisconnect(){
-  var notification = $("div.ui-chatbox-notify");
+function updateInterfaceAfterUsersDisconnect(){
+  updateNotificationsAfterUserDisconnect();
+	$.each(getAllSlugsWithVisibleVideoBoxes(), function(index, value) {
+    closeVideoSession(value);
+  });
+}
+
+function updateNotificationsAfterUserDisconnect(){
+	var notification = $("div.ui-chatbox-notify");
   var msg = I18n.t('chat.notify.offline');
   showChatNotification(notification,"userOffline",msg);
 }
@@ -591,7 +599,7 @@ function hideAllNotifications(){
 function updateAllNotifications(){
 	hideAllNotifications();
 	if(disconnectionFlag){
-		notifyWhenUsersDisconnect();
+		updateNotificationsAfterUserDisconnect();
 	} else {
 		//Notification for offline contacts
 		$.each(getAllDisconnectedSlugsWithChatBoxes(), function(index, value) {

@@ -16,10 +16,6 @@ function simulate_new_user_disconnected(slug) {
   onPresence(stanza_test);
 }
 
-function getVideoEmbedForSlug(slug){
-  return "<img src=\"http://www.batiburrillo.net/wp-content/uploads/2011/03/Freemake.jpg?cda6c1\" width=\"" + (chatBoxWidth-20) + "\"/>"
-}
-
 
 ////////////////////
 //Blink page title when focus lost on new messages

@@ -26,6 +26,7 @@ es:
       disconnected: Videochat desconectado
       disconnecting: Videochat desconectando...
       negotiating: Negociando...
+      connectingWait: Conectando...
       connecting: Conectando con el servidor...
       waiting: Esperando respuesta...
       establishing: Estableciendo conexión...
@@ -34,8 +35,11 @@ es:
       serverIssue: "Error del servidor: Respuesta inválida"
       call: "{{name}} quiere iniciar una videollamada"
       rejected: "{{name}} ha rechazado tu llamada"
+      rejectedBusy: "{{name}} está ocupado"
       accept: Aceptar
       deny: Rechazar
       clientIssue: "El cliente de {{name}} no soporta videochat"
       guestOffline: "Imposible conectar. {{name}} está desconectado"
       offline: "Imposible conectar. Estás desconectado"
+      cancel: "{{name}} canceló la videollamada"
+      requirements: No tienes los requisitos minimos para iniciar la aplicación de videoconferencia. Por favor, actualiza a la última versión de Flash.

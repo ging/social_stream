@@ -191,12 +191,25 @@ function getChatBoxButtonForSlug(slug,button){
 	}
 }
 
-function getAllSlugsWithChatBoxes(){
-	var slugsWithChatBox = [];
-	$.each(getAllChatBoxes(), function(index, value) {
+
+function getAllSlugsWithChatOrVideoBoxes(){
+  var slugsWithChatBox = [];
+	var slugsWithVideoBox = [];
+  $.each(getAllChatBoxes(), function(index, value) {
+		if($(value).parent().find(".ui-videobox").is(":visible")){
+      slugsWithVideoBox.push($(value).attr("id"))
+    }
     slugsWithChatBox.push($(value).attr("id"))
   });
-	return  slugsWithChatBox;
+  return  [slugsWithChatBox,slugsWithVideoBox];
+}
+
+function getAllSlugsWithChatBoxes(){
+	return getAllSlugsWithChatOrVideoBoxes()[0];
+}
+
+function getAllSlugsWithVisibleVideoBoxes(){
+  return getAllSlugsWithChatOrVideoBoxes()[1];
 }
 
 function getAllDisconnectedSlugsWithChatBoxes(){
@@ -291,38 +304,44 @@ function hideVideoBox(chatBox){
 
 
 //Function called from JQuery UI Plugin
-function toogleVideoBox(uiElement){
+function toggleVideoBox(uiElement){
 	var slug = $(uiElement.element).attr("id");
 	clickVideoChatButton(slug);
 }
 
 //Function called from JQuery UI Plugin
-function toogleVideoBoxChange(uiElement){
+function toggleVideoBoxChange(uiElement){
   var slug = $(uiElement.element).attr("id");
   clickVideoChangeChatButton(slug);
 }
 
-function toogleVideoBoxForSlug(slug,boolean){
+function toggleVideoBoxForSlug(slug,force){
+	var aux;
 	var chatBox = getChatBoxForSlug(slug);
 	
-	if(boolean!=null){
-		if(boolean){
-			showVideoBox(chatBox);
-		} else {
-			hideVideoBox(chatBox);
-		}
-		return boolean;
-	}
+	if(chatBox==null) {
+		return null;
+  }
 	
-	if(chatBox!=null){
+	if(typeof force != 'undefined'){
+		aux = force;
+	} else {
 		if (chatBox.chatbox("option", "video")==0){
-	    showVideoBox(chatBox);
-			return true;
+	    aux=true;
 	  } else {
-	    hideVideoBox(chatBox);
-			return false;
+	    aux=false;
 	  }
 	}
+	
+  if (aux){
+		//Show
+    showVideoBox(chatBox);
+    return true;
+  } else {
+		//Hide
+    hideVideoBox(chatBox);
+    return false;
+  }
 }
 
 

@@ -58,6 +58,7 @@ function chatContact(domain,resource,client,version) {
 var iqStanzaID = new Array();
 iqStanzaID['cinfo'] = "versionID";
 iqStanzaID['videochatRequest'] = "videochatRequestID";
+iqStanzaID['videochatRequestCancel'] = "videochatRequestCancelID";
 
 ////////////////////
 //Connect functions
@@ -223,7 +224,7 @@ function onConnect(status) {
     log('Strophe is disconnected.');
     disconnectionFlag = true;
     clearTimeout(awayTimer);
-    notifyWhenUsersDisconnect();
+    updateInterfaceAfterUsersDisconnect();
     reconnectTimer = setTimeout ("onReconnect()", 5000);
   } else if (status == Strophe.Status.CONNECTED) {
     //AFTER CONNECT ACTIONS
@@ -440,7 +441,6 @@ function handleGetIQStanza(iq,jid,slug){
 		return true;
 	}
 	
-	
   //Case: Default behaviour
   sendIQEmpty(jid,iqID);
 
@@ -484,6 +484,10 @@ function handleResultIQStanza(iq,jid,slug){
 	
 	if (iqID==iqStanzaID['videochatRequest']){
     return handleIQResultFromVideochatRequest(iq,slug);
+  }
+	
+  if(iqID==iqStanzaID['videochatRequestCancel']){
+     return handleIQResultFromVideochatRequestCancel(iq,slug);
   }
 	
 	//Case: Default behaviour
@@ -536,6 +540,24 @@ function handleIQResultFromVideochatRequest(iq,slug){
 	return true;
 }
 
+
+function handleIQResultFromVideochatRequestCancel(iq,slug){
+  
+  var queryTag = iq.getElementsByTagName('query');
+  
+  if (queryTag.length > 0) {
+    var queryElement = queryTag[0];
+    var response = queryElement.getElementsByTagName('response');
+    
+    if(response.length == 1){
+      receiveVideoChatCancelationFromUser(slug,$(response).text());
+      return true;
+    }
+  }
+  
+  receiveVideoChatCancelationFromUser(slug,"Bad response");
+  return true;
+}
 
 
 ///////
@@ -599,6 +621,16 @@ function sendIQStanzaToResponseVideochat(slug,result){
     var iq = $iq({to: jid, type: "result", id: iqStanzaID['videochatRequest']})
     .c("query", {xmlns: "urn:ietf:params:xml:ns:xmpp-stanzas"})
     .c("response").t(result);
+    strophe_connection.sendIQ(iq);
+  }
+}
+
+function sendIQStanzaToCancelVideochat(slug){
+  if (slug in contactsInfo) {
+    var jid=slug+"@"+contactsInfo[slug].domain+"/"+contactsInfo[slug].resource;
+    var iq = $iq({to: jid, type: "result", id: iqStanzaID['videochatRequestCancel']})
+    .c("query", {xmlns: "urn:ietf:params:xml:ns:xmpp-stanzas"})
+    .c("response").t("cancel");
     strophe_connection.sendIQ(iq);
   }
 }

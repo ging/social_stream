@@ -179,7 +179,7 @@
       .hover(function() {uiChatboxTitlebarVideo.addClass('ui-state-hover');},
            function() {uiChatboxTitlebarVideo.removeClass('ui-state-hover');})
       .click(function(event) {
-        toogleVideoBox(self)
+        toggleVideoBox(self)
         return false;
       })
       .appendTo(uiChatboxTitlebar),
@@ -198,7 +198,7 @@
       .hover(function() {uiChatboxTitlebarVideoChange.addClass('ui-state-hover');},
            function() {uiChatboxTitlebarVideoChange.removeClass('ui-state-hover');})
       .click(function(event) {
-        toogleVideoBoxChange(self)
+        toggleVideoBoxChange(self)
         return false;
       })
       .appendTo(uiChatboxTitlebar),
