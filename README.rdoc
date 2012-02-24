@@ -30,7 +30,7 @@ add your own activities easily.
 
 = Installation
 
-Add to your Gemfile:
+Add the following to the Gemfile of the your Rails application:
 
   gem 'social_stream', '>= 0.19.0'
 
