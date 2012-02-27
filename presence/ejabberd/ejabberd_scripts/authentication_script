@@ -31,12 +31,10 @@ def getOption(option)
   return "Undefined"
 end
 
-$accessByPasswordUrl = "http://" + getOption("web_domain=") + "/users/sign_in"
-$accessByCookieUrl = "http://" + getOption("web_domain=") + "/api/me"
 $cookie_name = getOption("cookie_name=")
 
 
-def auth(username, password)
+def auth(username,domain,password)
 
   #[TEST ONLY] Allow everybody
   #return true
@@ -46,9 +44,10 @@ def auth(username, password)
   #  return true
   #end
 
+  accessByPasswordUrl = "http://" + getWebDomainUrlFromDomain(domain) + "/users/sign_in"
 
   begin
-    response = RestClient.post $accessByPasswordUrl, :user => { :email => username , :password => password }
+    response = RestClient.post accessByPasswordUrl, :user => { :email => username , :password => password }
 
     if response.code == 201
       return true
@@ -69,9 +68,10 @@ def auth(username, password)
 end
 
 
-def authByCookie(username, cookie)
+def authByCookie(username, domain, cookie)
   begin
-    response = RestClient.get $accessByCookieUrl, :cookies => {:"#{$cookie_name}" => cookie}
+    accessByCookieUrl = "http://" + getWebDomainUrlFromDomain(domain) + "/api/me"
+    response = RestClient.get accessByCookieUrl, :cookies => {:"#{$cookie_name}" => cookie}
     doc = REXML::Document.new(response.body)
 
     slug = ""
@@ -108,6 +108,16 @@ def validateParameters(username,domain,password)
 end
 
 
+def getWebDomainUrlFromDomain(domain)
+	web_domain = getOption(domain + "=");
+	if (web_domain != "Undefined")
+		return web_domain
+	else
+		return domain
+	end
+end
+
+
 loop do
   begin
     $stdin.eof? # wait for input
@@ -136,17 +146,17 @@ loop do
       password = data[2]	
       if password.split(">>")[0]=="AuthenticationByCookie"
 	cookie = password.split(">>")[1]
-	$logger.info "#{Process.pid}: With username #{data[0]} and cookie #{cookie}"      	
-	authByCookie(data[0], cookie)
+	$logger.info "#{Process.pid}: With userJid #{data[0]}@#{data[1]} and cookie #{cookie}"      	
+	authByCookie(data[0], data[1], cookie)
       else
-	$logger.info "#{Process.pid}: With username #{data[0]} and password ******"
-	#$logger.info "#{Process.pid}: With username #{data[0]} and password #{data[2]}"
-      	auth(data[0], data[2])
+	$logger.info "#{Process.pid}: With userJid #{data[0]}@#{data[1]} and password ******"
+	#$logger.info "#{Process.pid}: With userJid #{data[0]}@#{data[1]} and password #{data[2]}"
+      	auth(data[0], data[1], data[2])
       end
       
     when "isuser"
      
-      $logger.info "#{Process.pid}: Isuser #{data[0]}@#{data[1]}"
+      $logger.info "#{Process.pid}: Isuser with userJid: #{data[0]}@#{data[1]}"
 
       #Authorization condition for ISUSER (Add buddys)
       true

@@ -1,12 +1,14 @@
 #!/usr/bin/env ruby
-#Rest Api Client Script
-#Version: 13-12-2011
-#@author Aldo
+####################################
+#      Rest Api Client Script 
+#Generate and send requests to Social Stream presence API
+#@author Aldo Gordillo < agordillos@gmail.com >
+#@version 2.0 - 24-2-2012
+####################################
 
 
 require 'logger'
 require 'rest_client'
-
 
 path = "/var/log/ejabberd/scripts.log"
 file = File.open(path, File::WRONLY | File::APPEND | File::CREAT)
@@ -32,7 +34,7 @@ end
 $secure_rest_api = getOption("secure_rest_api=")
 $pass = getOption("ejabberd_password=")
 $scripts_path = getOption("scripts_path=")
-$script_title = "Synchronize Presence Script"
+$script_title = "Rest Api Client"
 
 
 def log(title,text)
@@ -50,7 +52,7 @@ end
 #####################
 #def myHook(param1,param2)
 #    log(getMethodName,"(My message: #{param1},#{param2})")
-#    url = "http://" + getOption("web_domain=") + "/xmpp/hookRoute"
+#    url = "http://" + getWebDomainUrlFromDomain(domain) + "/xmpp/hookRoute"
 
 #    params = {}
 #    encrypted_params = {}
@@ -62,58 +64,59 @@ end
 #    return [getMethodName,generic_api_call(url,params,encrypted_params)]
 #end
 
-def setConnection(username)
-    log($script_title,"#{getMethodName}(#{username})")
-    url = "http://" + getOption("web_domain=") + "/xmpp/setConnection"
+def setConnection(userJid)
+    log($script_title,"#{getMethodName}(#{userJid})")
+    url = "http://" + getWebDomainUrlFromDomain(getDomainFromJid(userJid)) + "/xmpp/setConnection"
 
     params = {}
     encrypted_params = {}
-    encrypted_params[:name]=username
+    encrypted_params[:name]=getUsernameFromJid(userJid)
 
     return [getMethodName,generic_api_call(url,params,encrypted_params)]
 end
 
 
-def unsetConnection(username)
-    log($script_title,"#{getMethodName}(#{username})")
-    url = "http://" + getOption("web_domain=") + "/xmpp/unsetConnection"
+def unsetConnection(userJid)
+    log($script_title,"#{getMethodName}(#{userJid})")
+    url = "http://" +  getWebDomainUrlFromDomain(getDomainFromJid(userJid)) + "/xmpp/unsetConnection"
 
     params = {}
     encrypted_params = {}
-    encrypted_params[:name]=username
+    encrypted_params[:name]=getUsernameFromJid(userJid)
 
     return [getMethodName,generic_api_call(url,params,encrypted_params)]
 end
 
 
-def setPresence(username,status)
-    log($script_title,"#{getMethodName}(#{username},#{status})")
-    url = "http://" + getOption("web_domain=") + "/xmpp/setPresence"
+def setPresence(userJid,status)
+    log($script_title,"#{getMethodName}(#{userJid},#{status})")
+    url = "http://" + getWebDomainUrlFromDomain(getDomainFromJid(userJid)) + "/xmpp/setPresence"
 
     params = {}
     encrypted_params = {}
-    encrypted_params[:name]=username
+    encrypted_params[:name]=getUsernameFromJid(userJid)
     encrypted_params[:status]=status
 
     return [getMethodName,generic_api_call(url,params,encrypted_params)]
 end
 
 
-def unsetPresence(username)
-    log($script_title,"#{getMethodName}(#{username})")
-    url = "http://" + getOption("web_domain=") + "/xmpp/unsetPresence"
+def unsetPresence(userJid)
+    log($script_title,"#{getMethodName}(#{userJid})")
+    url = "http://" + getWebDomainUrlFromDomain(getDomainFromJid(userJid)) + "/xmpp/unsetPresence"
 
     params = {}
     encrypted_params = {}
-    encrypted_params[:name]=username
+    encrypted_params[:name]=getUsernameFromJid(userJid)
 
     return [getMethodName,generic_api_call(url,params,encrypted_params)]
 end
 
 
+#Reset all domains connections
 def resetConnection()
     log($script_title,"Call #{getMethodName}()")
-    url = "http://" + getOption("web_domain=") + "/xmpp/resetConnection"
+    url = "http://" + getWebDomainUrlFromDomain("all") + "/xmpp/resetConnection"
 
     params = {}
     encrypted_params = {}
@@ -122,29 +125,31 @@ def resetConnection()
 end
 
 
-def synchronize()
-    log($script_title,"Call #{getMethodName}()")
-    url = "http://" + getOption("web_domain=") + "/xmpp/synchronizePresence"
-
-
+def synchronize(domain)
+    log($script_title,"Call #{getMethodName}(#{domain})")
+    url = "http://" + getWebDomainUrlFromDomain(domain) + "/xmpp/synchronizePresence"
+    
     #Get connected users using Emanagement
-    users = []
-    command = $scripts_path + "/emanagement getConnectedUsers"
+    jids = []
+    if domain=="all"
+	command = $scripts_path + "/emanagement getConnectedJids"
+    else
+	command = $scripts_path + "/emanagement getConnectedJidsByDomain " + domain
+    end
     output = %x[#{command}]
     sessions = output.split("\n")
 
     sessions.each do |session|
-      users << session.split("@")[0]
+      jids << session.split("/")[0]
     end
     #Finish
-
 
     #In this cases users always will be sent in clear (not cipher)
     #(Too much data to cipher)
     #Anyway, we must to build the hash to pass the authentication
     params = {}
     encrypted_params = {}
-    params[:name]=users.join(",")
+    params[:name]=jids.join(",")
 
     return [getMethodName,generic_api_call(url,params,encrypted_params)]
 end
@@ -277,11 +282,53 @@ def invokeApiCall(method,args)
 end
 
 
+def getUsernameFromJid(jid)
+	return jid.split("@")[0];
+end
+
+def getDomainFromJid(jid)
+	return jid.split("@")[1];
+end
+
+def getWebDomainUrlFromDomain(domain)
+
+	if domain=="all"
+	  return getWebDomainUrlFromDomain(getWebDomains()[0])
+	end
+
+	web_domain = getOption(domain + "=");
+	if (web_domain != "Undefined")
+		return web_domain
+	else
+		return domain
+	end
+end
+
+def getWebDomains()
+	begin
+		web_domains = getOption("web_domains=");
+		#web_domains=["domain1","domain2"]
+		return getElementsFromStringArray(web_domains);
+	rescue Exception=>e
+		return [""]
+	end
+end
+
+def getElementsFromStringArray(stringArray)
+	stringArray=stringArray[1,stringArray.length-2]
+	return stringArray.split(",")
+end
+
+
 #Main Program
 
 begin
+	if !ARGV[0]
+		puts("Syntax Error: ./synchronize_presence_script domain")
+		exit 1
+	end
 
-	args = []
+	args = ARGV[0]
 	method = "synchronize"
 
 	if (response = invokeApiCall(method, args) and response[1])

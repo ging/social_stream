@@ -1,9 +1,10 @@
 %%%-------------------------------------------------------------------
 %%% File    : mod_sspresence.erl
-%%% Author  : Aldo
-%%% Contact:  < social-stream@dit.upm.es >
+%%% Author  : Aldo Gordillo
+%%% Contact : < social-stream@dit.upm.es >
 %%% Purpose : Process events and hooks for Social Stream Presence: http://social-stream.dit.upm.es/
 %%% Created : 1 Oct 2011
+%%% Version : 2.0
 %%%  
 %%%
 %%% http://social-stream.dit.upm.es/
@@ -50,42 +51,46 @@ stop(Host) ->
 
 
 on_register_connection(_SID, _JID, _Info) ->
-    {_A,User,_B,_C,_D,_E,_F} = _JID,
-    ?INFO_MSG("mod_sspresence: on_register_connection (~p)", [User]),
+    {_A,User,Domain,_C,_D,_E,_F} = _JID,
+    UserJid = string:join([User, Domain ], "@"),
+    ?INFO_MSG("mod_sspresence: on_register_connection (~p)", [UserJid]),
     Rest_api_script_path = string:concat(getOptionValue("scripts_path="), "/rest_api_client_script "),
-    os:cmd(string:join([Rest_api_script_path, "setConnection", User ], " ")),
+    os:cmd(string:join([Rest_api_script_path, "setConnection", UserJid ], " ")),
     ok.
 
 on_remove_connection(_SID, _JID, _SessionInfo) ->
-    {_A,User,_B,_C,_D,_E,_F} = _JID,
-    ?INFO_MSG("mod_sspresence: on_remove_connection (~p)", [User]),
-    Connected = isConnected(User),
+    {_A,User,Domain,_C,_D,_E,_F} = _JID,
+    UserJid = string:join([User, Domain ], "@"),
+    ?INFO_MSG("mod_sspresence: on_remove_connection (~p)", [UserJid]),
+    Connected = isConnected(UserJid),
     case Connected of
 	true -> ok;
 	_ -> Rest_api_script_path = string:concat(getOptionValue("scripts_path="), "/rest_api_client_script "),
-             os:cmd(string:join([Rest_api_script_path, "unsetConnection", User ], " "))
+             os:cmd(string:join([Rest_api_script_path, "unsetConnection", UserJid ], " "))
     end,
     ok.
 
-on_presence(User, _Server, _Resource, Packet) ->
-     ?INFO_MSG("mod_sspresence: on_presence (~p)", [User]),
+on_presence(User, Server, _Resource, Packet) ->
+     UserJid = string:join([User, Server ], "@"),
+     ?INFO_MSG("mod_sspresence: on_presence (~p)", [UserJid]),
      {_xmlelement, Type, _Attr, Subel} = Packet,
 
     case Type of
 	"presence" -> Status = getStatusFromSubel(Subel),
 		      Rest_api_script_path = string:concat(getOptionValue("scripts_path="), "/rest_api_client_script "),
-		      ?INFO_MSG("mod_sspresence: set_presence_script call with  user (~p) and status (~p)", [User,Status]),
-    		      os:cmd(string:join([Rest_api_script_path, "setPresence", User , Status], " "));
+		      ?INFO_MSG("mod_sspresence: set_presence_script call with  userJid (~p) and status (~p)", [UserJid,Status]),
+    		      os:cmd(string:join([Rest_api_script_path, "setPresence", UserJid , Status], " "));
 	_ -> ok
     end,
     ok.
 
-on_unset_presence(User, _Server, _Resource, _Status) ->
-    ?INFO_MSG("mod_sspresence: on_unset_presence (~p)", [User]),
+on_unset_presence(User, Server, _Resource, _Status) ->
+    UserJid = string:join([User, Server ], "@"),
+    ?INFO_MSG("mod_sspresence: on_unset_presence (~p)", [UserJid]),
     _Rest_api_script_path = string:concat(getOptionValue("scripts_path="), "/rest_api_client_script "),
     %% Wait for on_remove_connection
-    %% ?INFO_MSG("mod_sspresence: unset_presence_script call with  user (~p)", [User]),
-    %%os:cmd(string:join([_Rest_api_script_path, "unsetPresence", User , Status], " ")),
+    %% ?INFO_MSG("mod_sspresence: unset_presence_script call with  userJid (~p)", [UserJid]),
+    %%os:cmd(string:join([_Rest_api_script_path, "unsetPresence", UserJid], " ")),
     ok.
 
 on_packet_send(_From, _To, {xmlelement, Type, _Attr, _Subel} = _Packet) ->
@@ -158,9 +163,9 @@ parser(In,Option) ->
 
 
 %%Check if a user is connected (any active session with Ejabberd server)
-isConnected(User) ->
+isConnected(UserJid) ->
 
-Command = string:concat("ejabberdctl connected-users | grep ", User),
+Command = string:concat("ejabberdctl connected-users | grep ", UserJid),
 Output = os:cmd(Command),
 
 case Output of
@@ -169,11 +174,10 @@ case Output of
 
       catch lists:foreach(
 		fun(S) ->
-		        [Slug|_R] = string:tokens(S, "@"),
-		        %User.slug connected = Slug
+		        [Jid|_R] = string:tokens(S, "/"),
 			
-			case Slug of
-			  User -> throw(true);
+			case Jid of
+			  UserJid -> throw(true);
 			  _ -> false
 			end                
 

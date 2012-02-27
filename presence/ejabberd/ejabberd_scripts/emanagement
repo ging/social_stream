@@ -1,8 +1,12 @@
 #!/usr/bin/env ruby
 
-#Ejabberd Management script
+####################################
+#          EMANAGEMENT
+#Ejabberd Management script 
 #New features for management and maintenance ejabberd
-#@author Aldo
+#@author Aldo Gordillo < agordillos@gmail.com >
+#@version 2.0 - 24-2-2012
+####################################
 
 require 'logger'
 
@@ -27,9 +31,7 @@ def getOption(option)
 end
 
 
-
 #Configuration variables
-$domain = getOption("server_domain=")
 $verbose = (getOption("verbose=")=="true")
 $ejabberd_user = getOption("ejabberd_server_user=")
 $checkEjabberdctlQuotedString = false
@@ -42,11 +44,12 @@ PARAMS_FOR_COMMANDS = {
 	'unsetBidireccionalBuddys' => 4,
 	'getRoster' => 1,
 	'removeRoster' => 1,
+	'removeAllRostersByDomain' => 1,
 	'removeAllRosters' => 0,
-	'getAllUsersWithRoster' => 0,
-	'printAllRosters' => 0,
-	'printAllBidirecctionalBuddys' => 0,
-	'checkUser' => 1,
+	'getAllUserJidsWithRosterByDomain' => 1,
+	'printAllRostersByDomain' => 1,
+	'printAllBidirecctionalBuddysByDomain' => 1,
+	'checkUserJid' => 1,
 	'checkBidirecctionalBuddys' => 2,
 	'sendPresence' => 2,
 	'setPresence' => 1,
@@ -55,39 +58,45 @@ PARAMS_FOR_COMMANDS = {
 	'getUserResource' => 1,
 	'isEjabberdNodeStarted' => 0,
 	'broadcast' => 3,
-	'checkEjabberdctlQuotedString' => 0,
-        'getConnectedUsers' => 0,
+	'broadcastToConnectedUsers' => 3,
+        'getConnectedJidsByDomain' => 1,
+	'getConnectedJids' => 0,
+	'kickUserJid' => 1,
 	'help' => 0,
 }
 
 SYNTAX_FOR_COMMANDS = {
-	'addBuddyToRoster' => 'addBuddyToRoster userSid buddySid buddyNick buddyGroup subscription_type',
-	'removeBuddyFromRoster' => 'removeBuddyFromRoster userSid buddySid',
-	'setBidireccionalBuddys' => 'setBidireccionalBuddys userASid userBSid userANick userBNick groupForA groupForB',
-	'unsetBidireccionalBuddys' => 'unsetBidireccionalBuddys userSid oldFriendSid oldFriendNick groupForOldFriend',
-	'getRoster' => 'getRoster username',
-	'removeRoster' => 'removeRoster username',
+	'addBuddyToRoster' => 'addBuddyToRoster userJid buddyJid buddyNick buddyGroup subscription_type',
+	'removeBuddyFromRoster' => 'removeBuddyFromRoster userJid buddyJid',
+	'setBidireccionalBuddys' => 'setBidireccionalBuddys userAJid userBJid userANick userBNick groupForA groupForB',
+	'unsetBidireccionalBuddys' => 'unsetBidireccionalBuddys userJid oldFriendJid oldFriendNick groupForOldFriend',
+	'getRoster' => 'getRoster userJid',
+	'removeRoster' => 'removeRoster userJid',
+	'removeAllRostersByDomain' => 'removeAllRostersByDomain domain',
 	'removeAllRosters' => 'removeAllRosters',
-	'getAllUsersWithRoster' => 'getAllUsersWithRoster',
-	'printAllRosters' => 'printAllRosters',
-	'printAllBidirecctionalBuddys' => 'printAllBidirecctionalBuddys',
-	'checkUser' => 'checkUser user',
-	'checkBidirecctionalBuddys' => 'checkBidirecctionalBuddys userASid userBSid',
-	'sendPresence' => 'sendPresence username show',
-	'setPresence' => 'setPresence username',
-	'unsetPresence' => 'unsetPresence username',
-	'sendMessageToUser' => 'sendMessageToUser from_name to_name msg',
-	'getUserResource' => 'getUserResource username',
+	'getAllUserJidsWithRosterByDomain' => 'getAllUserJidsWithRosterByDomain domain',
+	'printAllRostersByDomain' => 'printAllRostersByDomain domain',
+	'printAllBidirecctionalBuddysByDomain' => 'printAllBidirecctionalBuddysByDomain domain',
+	'checkUserJid' => 'checkUserJid userJid',
+	'checkBidirecctionalBuddys' => 'checkBidirecctionalBuddys userAJid userBJid',
+	'sendPresence' => 'sendPresence userJid show',
+	'setPresence' => 'setPresence userJid',
+	'unsetPresence' => 'unsetPresence userJid',
+	'sendMessageToUser' => 'sendMessageToUser fromJid toJid msg',
+	'getUserResource' => 'getUserResource userJid',
 	'isEjabberdNodeStarted' => 'isEjabberdNodeStarted',
-	'broadcast' => 'broadcast admin users msg (users values: "all" or slugs array)',
-	'checkEjabberdctlQuotedString' => 'checkEjabberdctlQuotedString',
-        'getConnectedUsers' => 'getConnectedUsers',
+	'broadcast' => 'broadcast admin userJids msg ',
+	'broadcastToConnectedUsers' => 'broadcastToConnectedUsers admin userJids msg (userJids value: "all" or jids array [jid1,jid2,...,jidN])',
+        'getConnectedJidsByDomain' => 'getConnectedJidsByDomain domain',
+	'getConnectedJids' => 'getConnectedJids',
+	'kickUserJid' => 'kickUserJid(userJid)',
 	'help' => 'help',
 }
 
 
-
+#########################
 #Debug methods
+#########################
 def ejabberdLog(text)
 	$logger.info "Ejabberd Management Script: " + text
 	if $verbose
@@ -109,93 +118,99 @@ def logWithTitle(msg,title)
 end
 
 
-
+#########################
 #Methods to manage rosters from Social Stream Rails App
-
-def setBidireccionalBuddys(userASid,userBSid,userANick,userBNick,groupForA,groupForB)
-	addBuddyToRoster(userASid,userBSid,userBNick,groupForB,"both")
-	addBuddyToRoster(userBSid,userASid,userANick,groupForA,"both")
+#########################
+def setBidireccionalBuddys(userAJid,userBJid,userANick,userBNick,groupForA,groupForB)
+	addBuddyToRoster(userAJid,userBJid,userBNick,groupForB,"both")
+	addBuddyToRoster(userBJid,userAJid,userANick,groupForA,"both")
 	return "Done"
 end
 
-def unsetBidireccionalBuddys(userSid,oldFriendSid,oldFriendNick,groupForOldFriend)
-	if checkBidirecctionalBuddys(userSid,oldFriendSid)
-		removeBuddyFromRoster(userSid,oldFriendSid)
-		removeBuddyFromRoster(oldFriendSid,userSid)
-		addBuddyToRoster(userSid,oldFriendSid,oldFriendNick,groupForOldFriend,"to")
+def unsetBidireccionalBuddys(userJid,oldFriendJid,oldFriendNick,groupForOldFriend)
+	if checkBidirecctionalBuddys(userJid,oldFriendJid)
+		removeBuddyFromRoster(userJid,oldFriendJid)
+		removeBuddyFromRoster(oldFriendJid,userJid)
+		addBuddyToRoster(userJid,oldFriendJid,oldFriendNick,groupForOldFriend,"to")
 		return "Done"
 	else
-		return userSid + " and " + oldFriendSid + " aren't bidireccional buddys"
+		return userJid + " and " + oldFriendJid + " aren't bidireccional buddys"
 	end
 end
 
-def addBuddyToRoster(userSid,buddySid,buddyNick,buddyGroup,subscription_type)
-	user = userSid.split("@")[0]
-	buddy = buddySid.split("@")[0]
-	userDomain = userSid.split("@")[1]
-	buddyDomain = buddySid.split("@")[1]
+def addBuddyToRoster(userJid,buddyJid,buddyNick,buddyGroup,subscription_type)
+	user = getUsernameFromJid(userJid)
+	buddy = getUsernameFromJid(buddyJid)
+	userDomain = getDomainFromJid(userJid)
+	buddyDomain = getDomainFromJid(buddyJid)
 	executeCommand("ejabberdctl add-rosteritem " + user + " " + userDomain + " " + buddy + " " + buddyDomain + " " + buddyNick + " " + buddyGroup + " " + 				subscription_type)
 	return "Done"
 end
 
-def removeBuddyFromRoster(userSid,buddySid)
-	user = userSid.split("@")[0]
-	buddy = buddySid.split("@")[0]
-	userDomain = userSid.split("@")[1]
-	buddyDomain = buddySid.split("@")[1]
-	if checkUserInRoster(buddy,getRoster(user))
+def removeBuddyFromRoster(userJid,buddyJid)
+	user = getUsernameFromJid(userJid)
+	buddy = getUsernameFromJid(buddyJid)
+	userDomain = getDomainFromJid(userJid)
+	buddyDomain = getDomainFromJid(buddyJid)
+	if checkUserJidInRoster(buddyJid,getRoster(userJid))
 		executeCommand("ejabberdctl delete_rosteritem " + user + " " + userDomain + " " + buddy + " " + buddyDomain)
 		return "Done"
 	else
-		return "User " + buddy + " not found in " + user + " roster."
+		return "User " + buddyJid + " not found in " + userJid + " roster."
 	end
 end
 
 
+#########################
 #Roster Utilities
-
-def getRoster(username)
-	if checkUser(username)
-		executeCommand("ejabberdctl get_roster " + username  + " " + $domain)
+#########################
+def getRoster(userJid)
+	if checkUserJid(userJid)
+		executeCommand("ejabberdctl get_roster " + getUsernameFromJid(userJid)  + " " + getDomainFromJid(userJid))
 	else
-		return "Roster not found for user " + username
+		return "Roster not found for user " + userJid
 	end
 end
 
-def getBuddysFromRoster(roster)
-	buddys = []
+def getBuddyJidsFromRoster(roster)
+	buddyJids = []
         lines = roster.split("\n")
 	lines.each do |line|
-		buddys << line.split("@")[0]
+		buddyJids << line.split(" ")[0]
 	end
-	buddys
+	buddyJids
 end
 
-def removeRoster(username)
-	if checkUser(username)
-		user_sid = username + "@" + $domain
-		user_roster = getRoster(username);
-		user_buddys = getBuddysFromRoster(user_roster);
-		user_buddys.each do |buddy|
-			buddy_sid = buddy + "@" + $domain
-			removeBuddyFromRoster(user_sid,buddy_sid)
-		end
+def removeRoster(userJid)
+	if checkUserJid(userJid)
+		executeCommand("ejabberdctl process_rosteritems delete any any " + userJid + " any")
 		return "Done"	
 	else
-		return "Roster not found for user " + username
+		return "Roster not found for userJid " + userJid
 	end
 end
 
-def removeAllRosters()
-	executeCommand("ejabberdctl process_rosteritems delete any any any any")
+def removeAllRostersByDomain(domain)
+	if(domain=="all")
+		executeCommand("ejabberdctl process_rosteritems delete any any any any")
+	else
+		executeCommand("ejabberdctl process_rosteritems delete any any *@" + domain + " any")
+	end
 	return "Done";
 end
 
-def getAllUsersWithRoster()
-	output = executeCommand("ejabberdctl process_rosteritems list any any any any")
+def removeAllRosters()
+	return removeAllRostersByDomain("all")
+end
 
-	users = []
+def getAllUserJidsWithRosterByDomain(domain)
+	if(domain=="all")
+		output = executeCommand("ejabberdctl process_rosteritems list any any any any")
+	else
+		output = executeCommand("ejabberdctl process_rosteritems list any any *@" + domain + " any")
+	end
 
+	userJids = []
 	lines = output.split("\n");
 	items = lines[0].split(" ")[2]
 
@@ -204,179 +219,177 @@ def getAllUsersWithRoster()
 		if items.to_i > 0
 			lines.each do |line|
 				if line.split(":")[0]=="Matches"
-					user = line.split(" ")[1].split("@")[0]
-					#puts i.to_s() + " :" + line
-					unless users.include?(user)
-						users << user
+					userJid = line.split(" ")[1]
+					#puts "Line:" + line
+					unless userJids.include?(userJid)
+						userJids << userJid
 					end	
 				end
 			end
 		end
 	end
 	
-	return users;
+	return userJids;
 end
 
-def getAllRosters()
+def getAllUserJidsWithRoster()
+	return getAllUserJidsWithRosterByDomain("all")
+end
+
+def getAllRostersByDomain(domain)
 	rosterList = { }
 
-	users = getAllUsersWithRoster()
+	userJids = getAllUserJidsWithRosterByDomain(domain)
 
-	users.each do |user|
-		roster = getRoster(user)
-		rosterList.store(user,roster)
+	userJids.each do |userJid|
+		roster = getRoster(userJid)
+		rosterList.store(userJid,roster)
 	end
 	return rosterList
 end
 
-def printAllRosters()
-	rosterList = getAllRosters()
-	rosterList.keys.each do |user|
+def getAllRosters()
+	return getAllRostersByDomain("all");
+end
+
+def printAllRostersByDomain(domain)
+	rosterList = getAllRostersByDomain(domain)
+	rosterList.keys.each do |userJid|
 		puts "\n"
 		puts "-------------------------------------"
-		puts user + " Roster"
+		puts userJid + " Roster"
 		puts "-------------------------------------"
-		puts rosterList[user]
+		puts rosterList[userJid]
 		puts "-------------------------------------"
 		puts "\n"
 	end
 	return "Done"
 end
 
-def getAllBidirecctionalBuddys()
-	b_buddys = []
-	users = getAllUsersWithRoster()
-	nonCheckedUsers = users
-	users.each do |user|
-		nonCheckedUsers.delete(user)
-		nonCheckedUsers.each do |checkUser|
-			if checkBidirecctionalBuddys(user + "@" + $domain,checkUser + "@" + $domain)
-				b_buddys << [user,checkUser]
+def printAllRosters()
+	return printAllRostersByDomain("all")
+end
+
+def getAllBidirecctionalBuddysByDomain(domain)
+	b_buddyJids = []
+	userJids = getAllUserJidsWithRosterByDomain(domain)
+	nonCheckedUsers = userJids
+	userJids.each do |userJid|
+		nonCheckedUsers.delete(userJid)
+		nonCheckedUsers.each do |checkUserJid|
+			if checkBidirecctionalBuddys(userJid,checkUserJid)
+				b_buddyJids << [userJid,checkUserJid]
 			end
 		end
 	end
-	return b_buddys
+	return b_buddyJids
 end
 
-def printAllBidirecctionalBuddys()
+def getAllBidirecctionalBuddys()
+	return getAllBidirecctionalBuddysByDomain("all")
+end
+
+def printAllBidirecctionalBuddysByDomain(domain)
 	puts "This may take a while..."
-	b_buddys = getAllBidirecctionalBuddys
+	b_buddys = getAllBidirecctionalBuddysByDomain(domain)
 	b_buddys.each do |contact|
 		puts "[" + contact[0] + "," + contact[1] + "]"
 	end
 	return "Done"
 end
 
-#Check if the user have a roster
-def checkUser(user)
-	return getAllUsersWithRoster().include?(user)
+def printAllBidirecctionalBuddys()
+	return printAllBidirecctionalBuddysByDomain("all")
 end
 
-def checkUserInRoster(user,roster)
-	return getBuddysFromRoster(roster).include?(user)
+#Check if the user have a roster in his domain
+def checkUserJid(userJid)
+	domain = getDomainFromJid(userJid)
+	return getAllUserJidsWithRosterByDomain(domain).include?(userJid)
 end
 
-def checkBidirecctionalBuddys(userASid,userBSid)
-	userA = userASid.split("@")[0]
-	userB = userBSid.split("@")[0]
-	rosterA = getRoster(userA)
-	rosterB = getRoster(userB)
-	return (checkUserInRoster(userA,rosterB) and checkUserInRoster(userB,rosterA))
+def checkUserJidInRoster(userJid,roster)
+	return getBuddyJidsFromRoster(roster).include?(userJid)
+end
+
+def checkBidirecctionalBuddys(userAJid,userBJid)
+	rosterA = getRoster(userAJid)
+	rosterB = getRoster(userBJid)
+	return (checkUserJidInRoster(userAJid,rosterB) and checkUserJidInRoster(userBJid,rosterA))
 end
 
 
+#########################
 #Manage stanzas Utilities
-
-def setPresence(username)
-	sendPresenceStanzaWithType(username,username,"available")
+#########################
+def setPresence(userJid)
+	sendPresenceStanzaWithType(userJid,userJid,"available")
 end
 
-def unsetPresence(username)
-	sendPresenceStanzaWithType(username,username,"unavailable")
+def unsetPresence(userJid)
+	sendPresenceStanzaWithType(userJid,userJid,"unavailable")
 end
 
 def sendPresence(username,show)
 	sendPresenceWithShow(username,username,show)
 end
 
-def sendPresenceWithShow(from_name,to_name,show)
-	#puts from_name
-	resource = getUserResource(from_name);
-	#puts resource
-	from_sid = from_name + "@" + $domain;
-	to_sid = to_name + "@" + $domain;   
-	pres_stanza = "\\<" + buildQuotedString("presence from=") + "\\\"" + buildQuotedString(from_sid) + "\\\"" + buildQuotedString(" to=") + "\\\"" +
-			buildQuotedString(to_sid) + "\\\"\\>\\<" + buildQuotedString("show") + "\\>" + buildQuotedString(show) + "\\<" +
+def sendPresenceWithShow(fromJid,toJid,show)
+	resource = getUserResource(fromJid);  
+	from_name = getUsernameFromJid(fromJid)
+	domain = getDomainFromJid(fromJid)
+	pres_stanza = "\\<" + buildQuotedString("presence from=") + "\\\"" + buildQuotedString(fromJid) + "\\\"" + buildQuotedString(" to=") + "\\\"" +
+			buildQuotedString(toJid) + "\\\"\\>\\<" + buildQuotedString("show") + "\\>" + buildQuotedString(show) + "\\<" +
 			buildQuotedString("/show") + "\\>\\<" + buildQuotedString("/presence") + "\\>"
-	executeCommand("ejabberdctl send_stanza_c2s " + from_name + " " + $domain + " " + resource + " " + pres_stanza)
+	executeCommand("ejabberdctl send_stanza_c2s " + from_name + " " + domain + " " + resource + " " + pres_stanza)
 	return "Done"
 end
 
-def sendPresenceStanzaWithType(from_name,to_name,presence_type)
-	resource = getUserResource(from_name);
-	from_sid = from_name + "@" + $domain;
-	to_sid = to_name + "@" + $domain;
+def sendPresenceStanzaWithType(fromJid,toJid,presence_type)
+	resource = getUserResource(fromJid);
+	from_name = getUsernameFromJid(fromJid)
+	domain = getDomainFromJid(fromJid)
 	pres_stanza = "\\<" + buildQuotedString("presence type=") + "\\\"" + buildQuotedString(presence_type) + "\\\"" + buildQuotedString(" from=") + "\\\"" + 
-		buildQuotedString(from_sid) + "\\\"" + buildQuotedString(" to=") + "\\\"" + buildQuotedString(to_sid) + "\\\"\\>\\<" + buildQuotedString("/presence") + "\\>" 
-	executeCommand("ejabberdctl send_stanza_c2s " + from_name + " " + $domain + " " + resource + " " + pres_stanza)
+		buildQuotedString(fromJid) + "\\\"" + buildQuotedString(" to=") + "\\\"" + buildQuotedString(toJid) + "\\\"\\>\\<" + buildQuotedString("/presence") + "\\>" 
+	executeCommand("ejabberdctl send_stanza_c2s " + from_name + " " + domain + " " + resource + " " + pres_stanza)
 	return "Done"
 end
 
-def sendMessageToUser(from_name,to_name,msg)
-	from_sid = from_name + "@" + $domain;
-	to_sid = to_name + "@" + $domain;
-	executeCommand("ejabberdctl send_message_chat " + from_sid + " " + to_sid + " " + buildQuotedString(msg))
+def sendMessageToUser(fromJid,toJid,msg)
+	executeCommand("ejabberdctl send_message_chat " + fromJid + " " + toJid + " " + buildQuotedString(msg))
 	return "Done"
 end
 
-def getUserResource(username)
+def getUserResource(userJid)
 	output = executeCommand("ejabberdctl connected-users")
         lines = output.split("\n");
 	lines.each do |line|
-		if line.split("@")[0] == username
-			#puts "Find " + username
-			s = line.split("@")[1];
-			resource = s.split("/")[1];
+		if line.split("/")[0] == userJid
+			#puts "Find " + userJid
+			resource = line.split("/")[1];
 			return resource;	
 		end
 	end
-	return username + " no have any active session"
+	return userJid + " no have any active session"
 end
 
 
-#More utilities
-
-def isEjabberdNodeStarted
-	output = executeCommand("ejabberdctl status")
-	if firstLine = output.split("\n")[0]
-	  return ((firstLine.split(":")[1]).strip()=="started")
-	end
-	return false
+#########################
+#Utilities
+#########################
+def getUsernameFromJid(jid)
+	return jid.split("@")[0];
 end
 
-def getConnectedUsers
-        users = []
-	output = executeCommand("ejabberdctl connected-users")
-	sessions = output.split("\n")
-	sessions.each do |session|
-	  users << session.split("@")[0]
-	end
-	return users
+def getDomainFromJid(jid)
+	return jid.split("@")[1];
 end
 
-def broadcast(admin,users,msg)
-	output = executeCommand("ejabberdctl connected-users")
-        lines = output.split("\n");
-	lines.each do |line|
-		username = line.split("@")[0]
-		if (users == "all") or (users.length > 1 and users.include?(username))
-			s = line.split("@")[1];
-			resource = s.split("/")[1];
-			sendMessageToUser(admin,username,msg)
-		end
-	end
-	return "Done"
+def getElementsFromStringArray(stringArray)
+	stringArray=stringArray[1,stringArray.length-2]
+	return stringArray.split(",")
 end
+
 
 #Determine how to scape characters for build quoted strings
 def checkEjabberdctlQuotedString
@@ -461,8 +474,84 @@ def buildQuotedString(msg)
 end
 
 
-#Help & Support methods
+#########################
+#Connection Info
+#########################
+def isEjabberdNodeStarted
+	output = executeCommand("ejabberdctl status")
+	if firstLine = output.split("\n")[0]
+	  return ((firstLine.split(":")[1]).strip()=="started")
+	end
+	return false
+end
 
+def getConnectedJidsByDomain(domain)
+        jids = []
+	if(domain=="all")
+		output = executeCommand("ejabberdctl connected-users")
+	else
+		output = executeCommand("ejabberdctl connected-users | grep @" + domain + "/")
+	end
+	sessions = output.split("\n")
+	sessions.each do |session|  
+	  jids << session.split("/")[0]
+	end
+	return jids
+end
+
+def getConnectedJids()
+	return getConnectedJidsByDomain("all")
+end
+
+
+#########################
+#Advanced features
+#########################
+def broadcast(admin,userJids,msg)
+	getElementsFromStringArray(userJids).each do |userJid|
+		sendMessageToUser(admin,userJid,msg)
+	end
+	return "Done"
+end
+
+def broadcastToConnectedUsers(admin,userJids,msg)
+	connectedJids = getConnectedJids()
+	if(userJids=="all")
+		connectedJids.each do |userJid|
+			sendMessageToUser(admin,userJid,msg)
+		end
+	else
+		getElementsFromStringArray(userJids).each do |userJid|
+			if (connectedJids.include?(userJid))
+				sendMessageToUser(admin,userJid,msg)
+			end
+		end
+	end
+	return "Done"
+end
+
+def kickUserJid(userJid)
+	user = getUsernameFromJid(userJid)
+	userDomain = getDomainFromJid(userJid)
+	resource = getUserResource(userJid);  
+	reason = "0"
+	executeCommand("ejabberdctl kick_session " + user + " " + userDomain + " " + resource + " " + reason)
+	return "Done"
+end
+
+def banUserJid(userJid)
+	kickUserJid(userJid)
+	#Notify Web server to ban user permanently
+end
+
+
+
+
+
+
+#########################
+#Execution commands methods
+#########################
 def executeCommand(command)
 	#Building...
 	command = buildCommand(command)
@@ -499,6 +588,10 @@ def execute_as_sudo
 	end
 end
 
+
+#########################
+#Support
+#########################
 def help
 	log("Command list")
 	SYNTAX_FOR_COMMANDS.values.each do |command|
@@ -509,8 +602,9 @@ end
 
 
 
+#########################
 #Main thread
-
+#########################
 #log("Init Ejabberd Maintenance script")
 
 begin
@@ -545,11 +639,14 @@ begin
 			puts "Use 'help' to get information about command syntax"
 		end
 	else
-		puts "Error: Command not recognized"
-		puts "Use 'help' to get information about command syntax"
+		if (ARGV.length==0)
+			help
+		else
+			puts "Error: Command not recognized"
+			puts "Use 'help' to get information about command syntax"
+		end
 	end
 rescue
 	puts "Syntax error"
 	puts "Use 'help' to get information about command syntax"
 end
-

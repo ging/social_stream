@@ -32,54 +32,53 @@ module SocialStream
               executeEmanagementCommand("removeBuddyFromRoster",[userSid,buddySid])
           end   
           
-          
-
-          def synchronizePresence
+         
+          # Presence synchronization
+          def synchronizePresence(webDomain)
             if isEjabberdNodeUp
-              output = executeEmanagementCommand("getConnectedUsers",[])
-              user_slugs = output.split("\n")
-              synchronizePresenceForSlugs(user_slugs)
+              if (webDomain=="all")
+                output = executeEmanagementCommand("getConnectedJids",[])
+              else
+                output = executeEmanagementCommand("getConnectedJidsByDomain",[webDomain])
+              end
+              user_jids = output.split("\n")
+              synchronizePresenceForJids(user_jids)
             else
               resetPresence
               return "Xmpp Server Down: Reset Connected Users"
             end  
           end
           
-          
-          def removeAllRosters
-              executeEmanagementCommand("removeAllRosters",[])
+          def synchronizePresenceForJids(user_jids)
+            domains = getDomainsFromJids(user_jids)
+            domains.each do |domain|
+              user_slugs = getSlugsFromJids(user_jids,domain)
+              synchronizePresenceForSlugs(user_slugs,domain) 
+            end 
           end
-          
-          
-          def synchronizeRosters
-            commands = []
-            
-            #"Remove all rosters"
-            commands << buildCommand("emanagement","removeAllRosters",[])
 
-            #"Populate rosters"
-            users = User.all
-            checkedUsers = []
-            site_name = I18n.t('site.name').delete(' ')
-          
-            users.each do |user|
-              checkedUsers << user.slug
-              contacts = user.contact_actors(:type=>:user)
-              contacts.each do |contact|
-                unless checkedUsers.include?(contact.slug)
-                  domain = SocialStream::Presence.domain
-                  user_sid = user.slug + "@" + domain
-                  contact_sid = contact.slug + "@" + domain
-                  commands << buildCommand("emanagement","setBidireccionalBuddys",[user_sid,contact_sid,user.name,contact.name,site_name,site_name])
+          def getSlugsFromJids(user_jids,domain)
+            user_slugs = []
+            user_jids.each do |user_jid|
+                if(user_jid.split("@")[1]==domain)
+                  user_slugs << user_jid.split("@")[0] 
                 end
-              end
-            end
-            
-            executeCommands(commands)
+             end
+             return user_slugs
           end
           
-     
-          def synchronizePresenceForSlugs(user_slugs)
+          def getDomainsFromJids(user_jids)
+            domains = []
+            user_jids.each do |user_jid|
+                domain=user_jid.split("@")[1]
+                if !domains.include?(domain) 
+                  domains << domain
+                end
+             end
+             return domains
+          end
+                  
+          def synchronizePresenceForSlugs(user_slugs,domain)
             
             #Check connected users
             users = User.find_all_by_connected(true)
@@ -101,6 +100,7 @@ module SocialStream
           end
           
           
+          #Reset presence for all domains
           def resetPresence
             users = User.find_all_by_connected(true)
     
@@ -108,6 +108,40 @@ module SocialStream
               user.connected = false
               user.save!
             end
+          end
+          
+          
+                    
+          # Rosters synchronization  
+          def removeAllRosters(webDomain)
+              executeEmanagementCommand("removeAllRostersByDomain",[webDomain])
+          end
+          
+          
+          def synchronizeRosters(webDomain)
+            commands = []
+            
+            #"Remove all rosters"
+            commands << buildCommand("emanagement","removeAllRostersByDomain",[webDomain])
+
+            #"Populate rosters"
+            users = User.all
+            checkedUsers = []
+            site_name = I18n.t('site.name').delete(' ')
+          
+            users.each do |user|
+              checkedUsers << user.slug
+              contacts = user.contact_actors(:type=>:user)
+              contacts.each do |contact|
+                unless checkedUsers.include?(contact.slug)
+                  user_sid = user.slug + "@" + webDomain
+                  contact_sid = contact.slug + "@" + webDomain
+                  commands << buildCommand("emanagement","setBidireccionalBuddys",[user_sid,contact_sid,user.name,contact.name,site_name,site_name])
+                end
+              end
+            end
+            
+            executeCommands(commands)
           end
           
           
@@ -183,8 +217,8 @@ module SocialStream
             autoconf.push("scripts_path=" + SocialStream::Presence.scripts_path)
             autoconf.push("ejabberd_password=" + SocialStream::Presence.xmpp_server_password)
             autoconf.push("secure_rest_api=" + SocialStream::Presence.secure_rest_api.to_s)
-            autoconf.push("server_domain=" + SocialStream::Presence.domain)
             autoconf.push("cookie_name=" + Rails.application.config.session_options[:key])
+            autoconf.push("web_domains=[" + SocialStream::Presence.config.domain + "]")
             
             #Param options
             if options
@@ -337,7 +371,7 @@ module SocialStream
             output=""
             commands.each do |command|
                 response = %x[#{command}]
-                output = output + "\n" + response;
+                output = output + response + "\n";
             end
             return output
           end
@@ -354,7 +388,7 @@ module SocialStream
                   commands.each do |command|
                     response = session.exec!(command)
                     if response != nil
-                      output = output + "\n" + response
+                      output = output + response + "\n";
                     end
                   end
                 end
@@ -506,10 +540,11 @@ module SocialStream
             return hash
           end
         
+        
          #Xmpp client manage methods
           
           def getSocialStreamUserSid
-            #XMPP DOMAIN
+            #WEB DOMAIN
             domain = SocialStream::Presence.domain
             #SS Username
             ss_name = SocialStream::Presence.social_stream_presence_username

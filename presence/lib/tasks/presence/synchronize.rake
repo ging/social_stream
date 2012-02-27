@@ -5,17 +5,31 @@ namespace :presence do
   namespace :synchronize do
 
     desc "Synchronize user presence"
-    task :connections => :environment do
+    task :connections, [:domain] => :environment do |t, args| 
       puts "Starting presence:synchronize:connections"
-      SocialStream::Presence::XmppServerOrder::synchronizePresence
+      unless args[:domain]
+        puts "No web domain specified"
+        domain = SocialStream::Presence.domain
+        puts "Executing  rake presence:synchronize:connections[" + domain + "]"
+      else
+        domain = args[:domain]
+      end
+      SocialStream::Presence::XmppServerOrder::synchronizePresence(domain)
       puts "Synchronization complete"
     end
 
     desc "Synchronize Xmpp Server database with Social Stream Rails Application database"
     desc "Remove all rosters and populate rosters from Social Stream data."
-    task :rosters => :environment do
+    task :rosters, [:domain] => :environment do |t, args| 
         puts "Starting presence:synchronize:rosters"
-        SocialStream::Presence::XmppServerOrder::synchronizeRosters
+        unless args[:domain]
+          puts "No web domain specified"
+          domain = SocialStream::Presence.domain
+          puts "Executing  rake presence:synchronize:rosters[" + domain + "]"
+        else
+          domain = args[:domain]
+        end
+        SocialStream::Presence::XmppServerOrder::synchronizeRosters(domain)
         puts "Rosters Synchronization complete"
     end
   end

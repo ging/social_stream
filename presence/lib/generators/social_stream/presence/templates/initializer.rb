@@ -1,5 +1,5 @@
 SocialStream::Presence.setup do |config| 
-  #Configures XMPP Server Domain
+  #Configures Web Server Domain served by XMPP Server
   config.domain = "localhost"
   #Configures Bosh Service Path
   #config.bosh_service = "http://xmpp-proxy/http-bind"

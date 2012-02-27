@@ -98,9 +98,9 @@ class XmppController < ApplicationController
       return
     end
     
-    #Actual connected users
-    user_slugs = params[:name].split(",")
-    SocialStream::Presence::XmppServerOrder::synchronizePresenceForSlugs(user_slugs)
+    #Actual connected jids
+    user_jids = params[:name].split(",")
+    SocialStream::Presence::XmppServerOrder::synchronizePresenceForJids(user_jids)
     render :text => "Ok"
   end
   
