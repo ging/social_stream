@@ -65,6 +65,25 @@ module SocialStream
         end
       end
 
+      shared_examples_for "Allow Reading" do
+        it "should read" do
+          get :show, :id => @current_model.to_param
+
+          response.should be_success
+        end
+      end
+
+      shared_examples_for "Deny Reading" do
+        it "should not read" do
+          begin
+            get :show, :id => @current_model.to_param
+
+            assert false
+          rescue CanCan::AccessDenied
+          end
+        end
+      end
+
       shared_examples_for "Allow Updating" do
         it "should update" do
           put :update, updating_attributes

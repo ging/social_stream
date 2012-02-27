@@ -25,6 +25,7 @@ describe PostsController do
         end
 
         it_should_behave_like "Allow Creating"
+        it_should_behave_like "Allow Reading"
         it_should_behave_like "Allow Destroying"
 
         it "should destroy with js" do
@@ -49,6 +50,7 @@ describe PostsController do
         end
 
         it_should_behave_like "Allow Creating"
+        it_should_behave_like "Allow Reading"
         it_should_behave_like "Allow Destroying"
       end
 
@@ -63,6 +65,7 @@ describe PostsController do
         end
 
         it_should_behave_like "Allow Creating"
+        it_should_behave_like "Allow Reading"
         it_should_behave_like "Allow Destroying"
       end
     end
@@ -72,9 +75,13 @@ describe PostsController do
         friend = Factory(:friend, :contact => Factory(:contact, :receiver => @user.actor)).sender
 
         model_assigned_to @user.contact_to!(friend), friend.relation_custom('friend')
+        @current_model = Factory(:post, :author_id => @user.actor_id,
+                                        :owner_id  => friend.id,
+                                        :user_author_id => @user.actor_id)
       end
 
       it_should_behave_like "Allow Creating"
+      it_should_behave_like "Allow Reading"
     end
 
     describe "post to acquaintance" do
@@ -85,6 +92,14 @@ describe PostsController do
       end
 
       it_should_behave_like "Deny Creating"
+    end
+
+    describe "post from other user" do
+      before do
+        @current_model = Factory(:post)
+      end
+
+      it_should_behave_like "Deny Reading"
     end
 
     describe "posts represented group" do
@@ -105,6 +120,7 @@ describe PostsController do
         end
 
         it_should_behave_like "Allow Creating"
+        it_should_behave_like "Allow Reading"
         it_should_behave_like "Allow Destroying"
       end
 
@@ -125,6 +141,7 @@ describe PostsController do
           end
 
           it_should_behave_like "Allow Creating"
+          it_should_behave_like "Allow Reading"
           it_should_behave_like "Allow Destroying"
         end
 
@@ -140,6 +157,7 @@ describe PostsController do
           end
 
           it_should_behave_like "Allow Creating"
+          it_should_behave_like "Allow Reading"
           it_should_behave_like "Allow Destroying"
         end
 
@@ -155,11 +173,11 @@ describe PostsController do
           end
 
           it_should_behave_like "Allow Creating"
+          it_should_behave_like "Allow Reading"
           it_should_behave_like "Allow Destroying"
         end
       end
     end
-
   end
 
   context "creating post in group's wall" do
