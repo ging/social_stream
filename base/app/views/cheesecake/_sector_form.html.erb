@@ -20,13 +20,8 @@
 					<div id="edited_sector_color_in"></div>
 				</div>
 			</div>
-		</div>
-		<div class="form_row less_padding" id="original_add_subsector_row" style="display:none;">
-		  <div class="add_subsector">
-		    +
-		  </div>
-		</div>
-		<% for i in 0..3 do %>
+		</div>		
+		<% 3.downto(0) do |i|%>
 		<div class="form_row less_padding">
 			<div class="subsector" id="subsector_<%= i %>">
 				<div class="title">
@@ -48,17 +43,17 @@
 					</div>
 					<div class="form_row less_padding">
 						<div class="form_field permissions_field">
-							<% default_permissions.each_with_index do |p, i| %>
+							<% default_permissions.each_with_index do |p, j| %>
 								<div contain=<%= dom_id p %> class="checkboxPermissionOptionLeft">
-									<input id="form_subsector_<%= i %>_<%= dom_id p %>" class="permission <%= dom_id p %>" type="checkbox"/>
-									<label for="form_subsector_<%= i %>_<%= dom_id p %>"><%= p.description(:brief, :relation => "%RELATION_NAME%", :subject => current_subject) %></label>
+									<input id="form_subsector_<%= j %>_<%= dom_id p %>" class="permission <%= dom_id p %>" type="checkbox"/>
+									<label for="form_subsector_<%= j %>_<%= dom_id p %>"><%= p.description(:brief, :relation => "%RELATION_NAME%", :subject => current_subject) %></label>
 									<div class="clearfloat"></div>
 								</div>
 							<% end %>
 						</div>
 						<div class="permissions_explanation" style="display:none;">
-						  <% default_permissions.each_with_index do |p, i| %>
-                  <div class="permission <%= dom_id p %> positive edited_subsector_<%= i %>_<%= dom_id p %>">
+						  <% default_permissions.each_with_index do |p, j| %>
+                  <div class="permission <%= dom_id p %> positive edited_subsector_<%= j %>_<%= dom_id p %>">
                     <div class="positive_message">
                       <%= p.description(:detailed, :relation => "%RELATION_NAME%", :subject => current_subject, :state => "positive") %>
                     </div>
@@ -72,6 +67,11 @@
 				</div>
 			</div>
 		</div>
+		<div class="form_row less_padding">
+      <div class="add_subsector" id="add_subsector_<%= i %>">
+        +
+      </div>
+    </div>
 		<% end %>
 	</div>
 </form>

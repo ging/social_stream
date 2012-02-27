@@ -119,18 +119,16 @@
     });
   });
   $("#sector_editor").data("hide", function(callback){
-    $("#sector_editor").stop().animate({width: 0},500, function(){
-      $(".add_subsector_clone").remove();
-    });
+    $("#sector_editor").stop().animate({width: 0},500);
     $("#contacts_explorer").stop().animate({width: 300},500, function(){
       if(callback) callback();
     });
   });
   $("#sector_editor").data("prepare", function(cheese){
     var sector = cheese.getFocusedSector();
-    var subsector_count = sector.subsectors.length;
-    var original_add_sector_row = $("#original_add_subsector_row");
     if(sector){
+      var subsector_count = sector.subsectors.length;
+      var maxReached = (subsector_count==4);
       $("#form_sector_name").val(sector.label);
       $("#edited_sector_name").html(sector.label);
       $("#form_sector_name").off("keyup");
@@ -138,44 +136,69 @@
         $("#edited_sector_name").html($("#form_sector_name").val());
         sector.changeLabel($("#form_sector_name").val());
       });
-      $(".add_subsector_clone").remove();
-      for(var i = 0; i < 4; i++){
-        var subsector = sector.subsectors[i];
-        if(subsector){
-          var add_subsector_clone = original_add_sector_row.clone().attr("id", "add_subsector_" + i).addClass("add_subsector_clone").show();          
-          $("#subsector_" + i).parent().before(add_subsector_clone);
-          $("#form_subsector_name_" + i).val(subsector.label);
-          $("#edited_subsector_name_" + i).html(subsector.label);
-          $("#form_subsector_name_" + i).off("keyup");
-          $("#form_subsector_name_" + i).on("keyup", [i,subsector],function(event){
-            $("#edited_subsector_name_" + event.data[0]).html($("#form_subsector_name_" + event.data[0]).val());
-            event.data[1].changeLabel($("#form_subsector_name_" + event.data[0]).val());
-          });
-          $("#subsector_" + i).find(".permissions_field .permission").each(function(){
-            var permission_field = $(this);
-            var update_state = function(){
-              var label_class = permission_field.attr("id").replace("form_", "edited_");
-              if(permission_field.is(":checked")){
-                $("." + label_class).removeClass("negative").addClass("positive");
-                $("." + label_class).find(".negative_message").hide();
-                $("." + label_class).find(".positive_message").show();
-              }else{
-                $("." + label_class).removeClass("positive").addClass("negative");
-                $("." + label_class).find(".positive_message").hide();
-                $("." + label_class).find(".negative_message").show();
-              }
-            }
-            update_state();
-            permission_field.on("change",update_state);
-          });
-          $("#subsector_" + i).show();
-        }else{
-          if(sector.subsectors[i-1]){
-            var add_subsector_clone = original_add_sector_row.clone().attr("id", "add_subsector_" + i).addClass("add_subsector_clone").show();          
-            $("#subsector_" + (i-1)).parent().after(add_subsector_clone);
+      if(maxReached){
+        $(".add_subsector").each(function(){
+          if($(this).is(':visible')){
+            $(this).slideToggle();
           }
-          $("#subsector_" + i).hide();
-        }
+        })
+      }
+      for(var i = 3; i >= 0; i--){
+        (function(){
+          var subsector = sector.subsectors[i];
+          var index = i;
+          if(subsector){
+            if(!$("#subsector_" + i).is(':visible')){
+              $("#subsector_" + i).slideToggle();
+            }
+            if(!maxReached){
+              if(sector.subsectors[i+1]==undefined){
+                $("#add_subsector_" + (i+1)).off("click");
+                if(!$("#add_subsector_" + (i+1)).is(':visible')){
+                  $("#add_subsector_" + (i+1)).slideToggle();
+                }
+                $("#add_subsector_" + (i+1)).on("click",function(){
+                  cheese.addNewSubsector(index+1);
+                });
+              }
+              $("#add_subsector_" + i).off("click");
+              if(!$("#add_subsector_" + i).is(':visible')){
+                $("#add_subsector_" + i).slideToggle();
+              }
+              $("#add_subsector_" + i).on("click",function(){
+                 cheese.addNewSubsector(index);
+              });
+            }
+            $("#form_subsector_name_" + i).val(subsector.label);
+            $("#edited_subsector_name_" + i).html(subsector.label);
+            $("#form_subsector_name_" + i).off("keyup");
+            $("#form_subsector_name_" + i).on("keyup", [i,subsector],function(event){
+              $("#edited_subsector_name_" + event.data[0]).html($("#form_subsector_name_" + event.data[0]).val());
+              event.data[1].changeLabel($("#form_subsector_name_" + event.data[0]).val());
+            });
+            $("#subsector_" + i).find(".permissions_field .permission").each(function(){
+              var permission_field = $(this);
+              var update_state = function(){
+                var label_class = permission_field.attr("id").replace("form_", "edited_");
+                if(permission_field.is(":checked")){
+                  $("." + label_class).removeClass("negative").addClass("positive");
+                  $("." + label_class).find(".negative_message").hide();
+                  $("." + label_class).find(".positive_message").show();
+                }else{
+                  $("." + label_class).removeClass("positive").addClass("negative");
+                  $("." + label_class).find(".positive_message").hide();
+                  $("." + label_class).find(".negative_message").show();
+                }
+              }
+              update_state();
+              permission_field.on("change",update_state);
+            });
+          }else{
+            $("#subsector_" + i).hide();
+            $("#add_subsector_" + i).off("click");
+            $("#add_subsector_" + i).hide();
+          }
+        })();
       }
     }
   });

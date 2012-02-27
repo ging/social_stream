@@ -73,6 +73,9 @@ $(function(){
       $("#sector_editor").data("hide")();
     }
   };
+  cheese.onSubsectorAdded = function(cheesecake){
+    $("#sector_editor").data("prepare")(cheesecake);
+  };
   $("#contacts_filter_input").keyup(function(){
     cheese.searchEngine.filter($("#contacts_filter_input").val());
     //TODO: Make users unfiltered visible again
