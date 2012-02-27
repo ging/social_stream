@@ -1,0 +1,170 @@
+#!/usr/bin/env ruby
+
+####################################
+#WebDomain script 
+#Add or remove web domains server by ejabberd
+#@author Aldo Gordillo < agordillos@gmail.com >
+#@version 1.0 - 27-2-2012
+####################################
+
+
+require 'logger'
+
+path = "/var/log/ejabberd/scripts.log"
+file = File.open(path, File::WRONLY | File::APPEND | File::CREAT)
+file.sync = true
+$logger = Logger.new(file)
+$logger.level = Logger::DEBUG
+def log(text)
+	$logger.info "SetWebDomain Script: " + text
+end
+
+$debug = true
+
+#Config files
+if($debug)
+	$ssconfig = '/etc/ejabberd/test/ssconfig.cfg'
+	$ejabberd = '/etc/ejabberd/test/ejabberd.cfg'
+else
+	$ssconfig = '/etc/ejabberd/ssconfig.cfg'
+	$ejabberd = '/etc/ejabberd/ejabberd.cfg'
+end
+
+$domain_not_exists = "Domain don't exists"
+$domain_exists = "Domain already exists"
+$done = "Done"
+
+def getOptionFromSSConfig(option)
+  File.open($ssconfig, 'r') do |f1|  
+    while line = f1.gets  
+      line = line.gsub(/\n/,'')
+      if line.match(/^#/)
+        #Comments
+      elsif line.match(/^#{option}/)
+        return line.gsub(/#{option}/,'')
+      end  
+    end  
+  end
+  return "Undefined"
+end
+
+def getWebDomains()
+	begin
+		web_domains = getOptionFromSSConfig("web_domains=");
+		#web_domains=["domain1","domain2"]
+		return getElementsFromStringArray(web_domains);
+	rescue Exception=>e
+		return [""]
+	end
+end
+
+def getElementsFromStringArray(stringArray)
+	stringArray=stringArray[1,stringArray.length-2]
+	return stringArray.split(",")
+end
+
+def getSSConfigStringFromDomainsArray(domainsArray)
+	return "[" + domainsArray.join(",") + "]"
+end
+
+def getEjabberdStringFromDomainsArray(domainsArray)
+	newDomains=[]
+	domainsArray.each do |domain|
+		newDomains << "\"" + domain + "\""
+	end
+	return "{hosts, [" + newDomains.join(" , ") + "]}."
+end
+
+
+#Write the domains array content in the corresponding configuration files
+def writeDomains(domains)
+	#SSconfig
+	ssconfigText = File.read($ssconfig)
+	newssconfig = ssconfigText.gsub(/web_domains=.*/, "web_domains=" + getSSConfigStringFromDomainsArray(domains))
+	File.open($ssconfig, "w") { |file| file.puts newssconfig }
+
+	#Ejabberd
+	ejabbberdText = File.read($ejabberd)
+	newEjabberdconfig = ejabbberdText.gsub(/^{hosts, .*/,  getEjabberdStringFromDomainsArray(domains))
+	File.open($ejabberd, "w") { |file| file.puts newEjabberdconfig }
+
+	return $done
+end
+
+
+def addDomain(domain,url)
+	if(url)
+		log("Add domain:" + domain + " with url:" + url)
+	else
+		log("Add domain:" + domain)
+	end
+	domains = getWebDomains();
+	if !domains.include?(domain)
+		domains << domain;
+		if((url)&&(url!=domain))
+			addDomainUrl(domain,url)
+		end
+		return writeDomains(domains)
+	else
+		return $domain_exists
+	end
+end
+
+def removeDomain(domain)
+	log("Remove domain:" + domain)
+	domains = getWebDomains();
+	if domains.include?(domain)
+		domains.delete(domain)
+		removeDomainUrl(domain)
+		return writeDomains(domains)
+	else
+		return $domain_not_exists
+	end
+end
+
+def updateDomain(domain,url)
+	removeDomain(domain)
+	return addDomain(domain,url)
+end
+
+def addDomainUrl(domain,url)
+	if (getOptionFromSSConfig(domain+"=")=="Undefined")
+		ssconfigText = File.read($ssconfig)
+		newssconfig = ssconfigText + "\n" + domain + "=" + url + "\n"
+		File.open($ssconfig, "w") { |file| file.puts newssconfig }
+	end
+end
+
+def removeDomainUrl(domain)
+	if (getOptionFromSSConfig(domain+"=")!="Undefined")
+		ssconfigText = File.read($ssconfig)
+		newssconfig = ssconfigText.gsub(/#{domain}=.*/, "")
+		File.open($ssconfig, "w") { |file| file.puts newssconfig }
+	end
+end
+
+
+#Main Thread
+
+begin
+	if (ARGV[0])
+		if ((ARGV[0]=="add")&&(ARGV[1]))
+			puts addDomain(ARGV[1],ARGV[2])
+			exit 0
+		elsif ((ARGV[0]=="remove")&&(ARGV[1]))
+			puts removeDomain(ARGV[1])
+			exit 0
+		elsif ((ARGV[0]=="update")&&(ARGV[1]))
+			puts updateDomain(ARGV[1],ARGV[2])
+			exit 0
+		elsif (ARGV[0]=="view")
+			puts getWebDomains()
+			exit 0
+		end
+	end
+	puts("Syntax error: ./manageWebDomains add/remove/update/view domain [url]")
+	exit 1
+rescue => e
+	puts("#{e.class.name}: #{e.message}")
+    	exit 1
+end

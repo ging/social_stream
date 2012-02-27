@@ -541,6 +541,35 @@ module SocialStream
           end
         
         
+        
+          #Multidomain tasks
+          def addWebDomain(domain,url)
+            commands = []
+            if url
+              commands << buildCommand("manageWebDomains","add",[domain,url])
+            else
+              commands << buildCommand("manageWebDomains","add",[domain])
+            end
+            return executeCommands(commands) 
+          end
+          
+          def removeWebDomain(domain)
+            commands = []
+            commands << buildCommand("manageWebDomains","remove",[domain])
+            return executeCommands(commands) 
+          end
+        
+          def updateWebDomain(domain,url)
+            commands = []
+            if url
+              commands << buildCommand("manageWebDomains","update",[domain,url])
+            else
+              commands << buildCommand("manageWebDomains","update",[domain])
+            end
+            return executeCommands(commands)
+          end
+        
+        
          #Xmpp client manage methods
           
           def getSocialStreamUserSid
