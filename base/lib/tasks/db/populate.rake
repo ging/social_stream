@@ -9,7 +9,7 @@ namespace :db do
 
     desc "Create populate data"
     task :create => [ :read_environment, :create_users, :create_groups, :create_ties, :create_posts, :create_messages, :create_avatars ]
-    
+
     desc "INTERNAL: read needed environment data and setup variables"
     task :read_environment => :environment do
       require 'forgery'
@@ -24,11 +24,11 @@ namespace :db do
       end
       if ENV["HARDCORE"].present?
         @USERS = 999
-        @GROUPS = 1000    
+        @GROUPS = 1000
         puts "Hardcore mode: ON (May the Force be with you brave Padawan)"
         if @CHEESECAKE
           puts "WARNING: Hardcore and Cheesecake Modes activated. This situation is really slow. Please, avoid it."
-        end        
+        end
       end
       if @USERS < 9
         @USERS = 9
@@ -57,8 +57,6 @@ namespace :db do
                      :password => 'demonstration',
                      :password_confirmation => 'demonstration'
       end
-
-      require 'forgery'
 
       @USERS.times do
         User.create! :name => Forgery::Name.full_name,
@@ -119,8 +117,8 @@ namespace :db do
       @available_actors.each do |a|
         actors = @available_actors.dup - Array(a)
         relations = a.relation_customs + Array.wrap(Relation::Reject.instance)
-        break if actors.size==0        
-        if @CHEESECAKE     
+        break if actors.size==0
+        if @CHEESECAKE
           actor = Actor.first
           unless a==actor
             puts a.name + " connecting with " + actor.name
@@ -135,7 +133,7 @@ namespace :db do
           end
         else
           Forgery::Basic.number(:at_most => actors.size).times do
-            actor = actors.delete_at((rand * actors.size).to_i)          
+            actor = actors.delete_at((rand * actors.size).to_i)
             contact = a.contact_to!(actor)
             contact.user_author = a.user_author if a.subject_type != "User"
             contact.relation_ids = Array(Forgery::Extensions::Array.new(relations).random.id) unless a==actor
@@ -154,14 +152,14 @@ namespace :db do
       puts 'Post population'
       unless @CHEESECAKE
         posts_start = Time.now
-  
+
         SocialStream::Populate.power_law(Tie.all) do |t|
           updated = Time.at(rand(Time.now.to_i))
-  
+
           author = t.sender
           owner  = t.receiver
           user_author = ( t.sender.subject_type == "User" ? t.sender : t.sender.user_author )
-  
+
           p = Post.create :text =>
                         "This post sActorhould be for #{ t.relation.name } of #{ t.sender.name }.\n#{ Forgery::LoremIpsum.paragraph(:random => true) }",
                           :created_at => Time.at(rand(updated.to_i)),
@@ -170,15 +168,15 @@ namespace :db do
                           :owner_id   => owner.id,
                           :user_author_id => user_author.id,
                           :_relation_ids => Array(t.relation_id)
-  
+
           p.post_activity.update_attributes(:created_at => p.created_at,
                                             :updated_at => p.updated_at)
         end
-  
+
         posts_end = Time.now
         puts '   -> ' +  (posts_end - posts_start).round(4).to_s + 's'
       else
-        puts '   -> Cheesecake Testing Mode. Avoiding Post Population.'        
+        puts '   -> Cheesecake Testing Mode. Avoiding Post Population.'
       end
     end
 
@@ -190,10 +188,10 @@ namespace :db do
       unless @CHEESECAKE
         mailboxer_start = Time.now
         @available_actors = Actor.all
-  
+
         @available_actors.each do |a|
           actors = @available_actors.dup - Array(a)
-  
+
           mult_recp = actors.uniq
           if (demo = User.find_by_name('demo')) and !mult_recp.include? Actor.normalize(demo)
             mult_recp << Actor.normalize(demo)
@@ -209,8 +207,8 @@ namespace :db do
           mail = actor.reply_to_all(mail, "Pretty well, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
           actor = mult_recp[(rand * mult_recp.size).to_i]
           actor.reply_to_all(mail, "Finally, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
-  
-  
+
+
           if (demo = User.find_by_name('demo'))
             next if Actor.normalize(demo)==Actor.normalize(a)
             mail = a.send_message(demo, "Hello, #{demo.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))
@@ -224,7 +222,7 @@ namespace :db do
               mail.conversation.move_to_trash(demo)
             end
           end
-  
+
           Forgery::Basic.number(:at_most => actors.size).times do
             actor = actors.delete_at((rand * actors.size).to_i)
             next if Actor.normalize(actor)==Actor.normalize(a)
@@ -240,11 +238,11 @@ namespace :db do
             end
           end
         end
-  
+
         mailboxer_end = Time.now
         puts '   -> ' +  (mailboxer_end - mailboxer_start).round(4).to_s + 's'
       else
-        puts '   -> Cheesecake Testing Mode. Avoiding Mailboxer Population.'        
+        puts '   -> Cheesecake Testing Mode. Avoiding Mailboxer Population.'
       end
 
     end
@@ -260,7 +258,7 @@ namespace :db do
             avatar = Dir[File.join(@LOGOS_PATH, klass.to_s.tableize, "#{ rand(@LOGOS_TOTAL) + 1 }.*")].first
           else
             logo = Dir[File.join(@LOGOS_PATH, klass.to_s.tableize, "#{ i.id }.*")].first
-            avatar = Dir[File.join(@LOGOS_PATH, klass.to_s.tableize, "#{ i.id }.*")].first            
+            avatar = Dir[File.join(@LOGOS_PATH, klass.to_s.tableize, "#{ i.id }.*")].first
           end
 
           if avatar.present? && File.exists?(avatar)
