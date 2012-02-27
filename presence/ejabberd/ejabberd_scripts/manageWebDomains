@@ -19,16 +19,10 @@ def log(text)
 	$logger.info "SetWebDomain Script: " + text
 end
 
-$debug = true
 
 #Config files
-if($debug)
-	$ssconfig = '/etc/ejabberd/test/ssconfig.cfg'
-	$ejabberd = '/etc/ejabberd/test/ejabberd.cfg'
-else
-	$ssconfig = '/etc/ejabberd/ssconfig.cfg'
-	$ejabberd = '/etc/ejabberd/ejabberd.cfg'
-end
+$ssconfig = '/etc/ejabberd/ssconfig.cfg'
+$ejabberd = '/etc/ejabberd/ejabberd.cfg'
 
 $domain_not_exists = "Domain don't exists"
 $domain_exists = "Domain already exists"
