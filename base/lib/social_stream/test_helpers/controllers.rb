@@ -33,9 +33,7 @@ module SocialStream
       end
 
       def model_assigned_to contact, relation_ids
-        model_attributes[:author_id] = contact.sender.id
         model_attributes[:owner_id]  = contact.receiver.id
-        model_attributes[:user_author_id] = contact.sender.id
         model_attributes[:_relation_ids] = Array(relation_ids).map(&:id)
       end
 
@@ -64,6 +62,25 @@ module SocialStream
 
           model_count.should eq(count)
           resource.should be_new_record
+        end
+      end
+
+      shared_examples_for "Allow Reading" do
+        it "should read" do
+          get :show, :id => @current_model.to_param
+
+          response.should be_success
+        end
+      end
+
+      shared_examples_for "Deny Reading" do
+        it "should not read" do
+          begin
+            get :show, :id => @current_model.to_param
+
+            assert false
+          rescue CanCan::AccessDenied
+          end
         end
       end
 
