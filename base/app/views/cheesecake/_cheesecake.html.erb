@@ -73,8 +73,8 @@ $(function(){
       $("#sector_editor").data("hide")();
     }
   };
-  cheese.onSubsectorAdded = function(cheesecake){
-    $("#sector_editor").data("prepare")(cheesecake);
+  cheese.onSubsectorAdded = function(subsector){
+    $("#sector_editor").data("prepare")(subsector.getCheesecake(),subsector);
   };
   $("#contacts_filter_input").keyup(function(){
     cheese.searchEngine.filter($("#contacts_filter_input").val());
