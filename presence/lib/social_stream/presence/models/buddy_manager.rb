@@ -23,7 +23,7 @@ module SocialStream
             return
           end
 
-          #XMPP DOMAIN
+          #WEB DOMAIN
           domain = SocialStream::Presence.domain
           user_sid = self.sender.slug + "@" + domain
           user_name =  self.sender.name  
