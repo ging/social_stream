@@ -6,10 +6,10 @@ Gem::Specification.new do |s|
   s.name        = "social_stream-presence"
   s.version     = SocialStream::Presence::VERSION
   s.authors     = ["Aldo Gordillo"]
-  s.email       = ["iamchrono@gmail.com"]
-  s.homepage    = "https://github.com/ging/social_stream-presence"
-  s.summary = "Presence capabilities for Social Stream, the core for building social network websites"
-  s.description = "Social Stream is a Ruby on Rails engine providing your application with social networking features and activity streams."
+  s.email       = ["agordillos@gmail.com"]
+  s.homepage    = "https://github.com/ging/social_stream/wiki/Getting-Started-With-Social-Stream-Presence"
+  s.summary = "Presence capabilities for Social Stream, the core for building social network websites."
+  s.description = "Social Stream Presence provides everything you need for including presence, instant messaging and video chat services in your social network website, including a complete chat fully integrated with Social Stream."
 
   s.rubyforge_project = "social_stream-presence"
 
