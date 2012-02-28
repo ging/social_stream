@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('social_stream-documents', '~> 0.11.1')
   s.add_runtime_dependency('social_stream-events', '~> 0.8.1')
   s.add_runtime_dependency('social_stream-linkser', '~> 0.6.1')
-  s.add_runtime_dependency('social_stream-presence', '~> 0.8.0')
+  s.add_runtime_dependency('social_stream-presence', '~> 0.8.3')
  
   # Development Gem dependencies
   #
