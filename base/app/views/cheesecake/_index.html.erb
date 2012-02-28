@@ -124,8 +124,12 @@
       if(callback) callback();
     });
   });
-  $("#sector_editor").data("prepare", function(cheese){
+  $("#sector_editor").data("prepare", function(cheese, newSubsector){
     var sector = cheese.getFocusedSector();
+    var newIndex = -1;
+    if(newSubsector){
+      newIndex = newSubsector.getIndex();
+    }
     if(sector){
       var subsector_count = sector.subsectors.length;
       var maxReached = (subsector_count==4);
@@ -147,9 +151,19 @@
         (function(){
           var subsector = sector.subsectors[i];
           var index = i;
+          var recentlyCreated = (newIndex != -1)&&(newIndex == index);
           if(subsector){
             if(!$("#subsector_" + i).is(':visible')){
               $("#subsector_" + i).slideToggle();
+            }
+            if(recentlyCreated || ((newIndex == -1)&&(i == 0))){
+              if(!$("#subsector_" + i).find(".content").is(':visible')){
+                $("#subsector_" + i).find(".content").slideToggle();
+              }
+            }else{
+              if($("#subsector_" + i).find(".content").is(':visible')){
+                $("#subsector_" + i).find(".content").slideToggle();
+              }
             }
             if(!maxReached){
               if(sector.subsectors[i+1]==undefined){
@@ -159,6 +173,11 @@
                 }
                 $("#add_subsector_" + (i+1)).on("click",function(){
                   cheese.addNewSubsector(index+1);
+                  $(".subsector .content").each(function(){
+                    if($(this).is(':visible')){
+                      $(this).slideToggle();
+                    }
+                  });
                 });
               }
               $("#add_subsector_" + i).off("click");
@@ -167,6 +186,11 @@
               }
               $("#add_subsector_" + i).on("click",function(){
                  cheese.addNewSubsector(index);
+                 $(".subsector .content").each(function(){
+                    if($(this).is(':visible')){
+                      $(this).slideToggle();
+                    }
+                  });
               });
             }
             $("#form_subsector_name_" + i).val(subsector.label);
