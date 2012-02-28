@@ -213,7 +213,7 @@ module SocialStream
             autoconf.push("ejabberd_password=" + SocialStream::Presence.xmpp_server_password)
             autoconf.push("secure_rest_api=" + SocialStream::Presence.secure_rest_api.to_s)
             autoconf.push("cookie_name=" + Rails.application.config.session_options[:key])
-            autoconf.push("web_domains=[" + SocialStream::Presence.config.domain + "]")
+            autoconf.push("web_domains=[" + SocialStream::Presence.domain + "]")
             
             #Param options
             if options
