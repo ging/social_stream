@@ -441,7 +441,7 @@ function handleGetIQStanza(iq,jid,slug){
 		return true;
 	}
 	
-  //Case: Default behaviour
+  //Case 3: Default behaviour
   sendIQEmpty(jid,iqID);
 
   return true;
@@ -466,7 +466,7 @@ function handleGetVideochatIQStanza(jid,iqID,iq,slug){
     }
   }
 	
-	//Send error stanza
+	//Send empty stanza
 	sendIQEmpty(jid,iqID);
 }
 
@@ -670,4 +670,16 @@ function sendStatus(status){
        strophe_connection.send(pres.tree());
        setStatusWidgetTitle(status);
     }
+}
+
+
+
+////////
+//MUC management
+///////
+
+function joinRoom(roomName){
+  //domain
+	//stropne_connection.muc.init(stropne_connection)
+	//stropne_connection.muc.join(room, user_name, onMessage, onPresence, null, null)
 }

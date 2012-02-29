@@ -7,7 +7,11 @@ module SocialStream
     class XmppServerOrder
       
       class << self
-               
+          
+          ##################
+          #Emanagement Calls
+          ##################
+    
           def setRosterForBidirectionalTie(userASid,userBSid,userANick,userBNick,groupForA,groupForB)
               executeEmanagementCommand("setBidireccionalBuddys",[userASid,userBSid,userANick,userBNick,groupForA,groupForB])
           end 
@@ -27,8 +31,23 @@ module SocialStream
               executeEmanagementCommand("removeBuddyFromRoster",[userSid,buddySid])
           end   
           
+          
+          def createPersistentRoom(roomName,domain)
+              executeEmanagementCommand("createPersistentRoom",[roomName,domain])
+          end
+          
+          
+          def destroyRoom(roomName,domain)
+              executeEmanagementCommand("destroyRoom",[roomName,domain])
+          end
          
+         
+         
+         
+          ##################
           # Presence synchronization
+          ##################
+          
           def synchronizePresence(webDomain)
             if isEjabberdNodeUp
               if (webDomain=="all")
@@ -106,8 +125,12 @@ module SocialStream
           end
           
           
-                    
-          # Rosters synchronization  
+          
+          
+          ##################
+          #  Rosters synchronization
+          ################## 
+         
           def removeAllRosters(webDomain)
               executeEmanagementCommand("removeAllRostersByDomain",[webDomain])
           end
@@ -140,7 +163,39 @@ module SocialStream
           end
           
           
-          #Installation methods
+          
+                    
+          ##################
+          #  Room (MUC) synchronization
+          ################## 
+          
+          def removeAllRooms(webDomain)
+              executeEmanagementCommand("destroyAllRoomsByDomain",[webDomain])
+          end
+          
+          
+          def synchronizeRooms(webDomain)
+            commands = []
+            
+            #Remove all mucs
+            commands << buildCommand("emanagement","destroyAllRoomsByDomain",[webDomain])
+
+            #Populate mucs
+            groups = Group.all
+
+            groups.each do |group|
+              commands << buildCommand("emanagement","createRoom",[group.slug,webDomain])
+            end
+            
+            executeCommands(commands)
+          end
+         
+         
+         
+         
+          ##################
+          #  Installation methods
+          ##################
           
           def copyFolderToXmppServer(oPath,dPath)
             if SocialStream::Presence.remote_xmpp_server
@@ -311,7 +366,12 @@ module SocialStream
             puts "Finish"
           end
           
-          #Execution commands manage  
+          
+          
+          
+          ##################
+          #  Execution commands management
+          ##################
         
           def buildCommand(script,order,params)
             command = SocialStream::Presence.scripts_path + "/" + script + " " + order
@@ -411,7 +471,12 @@ module SocialStream
           end
 
         
-          #Authorization methods
+        
+        
+          ##################
+          #  Authorization methods
+          ##################
+          
           def authorization(params)
             case SocialStream::Presence.secure_rest_api
             when true
@@ -509,11 +574,15 @@ module SocialStream
               #Non Secure Mode
               return params
             end
-          end
+          end        
         
         
-         #Help methods
-         
+        
+
+          ##################
+          #  Help methods
+          ##################
+          
           def isEjabberdNodeUp
               output = executeEmanagementCommand("isEjabberdNodeStarted",[])
               nodeUp = output.split("\n")[0]
@@ -536,7 +605,12 @@ module SocialStream
           end
         
           
-          #Multidomain tasks
+          
+          
+          ##################
+          #  Multidomain tasks
+          ##################
+          
           def addWebDomain(domain,url)
             commands = []
             if url

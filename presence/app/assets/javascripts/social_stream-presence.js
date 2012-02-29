@@ -1,5 +1,6 @@
 //= require jquery
 //= require strophe
+//= require strophe.muc
 //= require jquery.tools.tooltip
 //= require jquery.ui.chatbox.sstreampresence
 //= require jquery.flexselect.sstreampresence
