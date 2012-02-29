@@ -14,8 +14,8 @@ module SocialStream
 
     module Models
       autoload :BuddyManager, 'social_stream/presence/models/buddy_manager'
+      autoload :GroupManager, 'social_stream/presence/models/group_manager'
     end
-
 
     mattr_accessor :domain
     mattr_accessor :bosh_service
