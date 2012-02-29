@@ -77,7 +77,7 @@ $(function(){
     $("#sector_editor").data("prepare")(subsector.getCheesecake(),subsector);
   };
   $("#contacts_filter_input").keyup(function(){
-    cheese.searchEngine.filter($("#contacts_filter_input").val());
+    cheese.filter($("#contacts_filter_input").val());
     //TODO: Make users unfiltered visible again
   });
   cheese.onChange = function(cheesecake){
