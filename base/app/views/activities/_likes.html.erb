@@ -1,0 +1,5 @@
+<% if activity.likes.present? %>
+<div class="activity_likes subactivity " id="likes_<%= dom_id(activity) %>">
+  <%= like_sentence(activity) %>
+</div>
+<% end %>

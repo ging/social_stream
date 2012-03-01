@@ -34,4 +34,23 @@ module ActivitiesHelper
     Post.new :author_id => Actor.normalize_id(current_subject),
              :owner_id  => Actor.normalize_id(receiver)
   end
+
+  def like_sentence(activity)
+    likers_shown = 3
+    likers_count = activity.likes.count
+    likers_other = likers_count - likers_shown
+
+    # TODO: select likers from current_subject's contacts
+    likers =
+      activity.likes.first(likers_shown).
+      map{ |a| a.sender_subject }.
+      map{ |l| link_to l.name, l }.
+      join(", ")
+
+    if likers_other > 0
+      t("activity.like_sentence.many", :likers => likers, :count => likers_other).html_safe
+    else
+      t("activity.like_sentence.few",  :likers => likers, :count => likers_count).html_safe
+    end
+  end
 end
