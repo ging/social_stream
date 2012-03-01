@@ -19,11 +19,14 @@ es:
   boxy:
     close_text: "[cerrar]"
   event:
+    calendar: "Calendario"
     confirm_delete: "¿Borrar evento?"
     new:
       title: "Nuevo evento"
     one: "un evento"
-    title: "Calendario"
+    title:
+      one: "Evento"
+      other: "Eventos"
     wall_post: "Publicó un evento: %{title}"
   room:
     confirm_delete: "¿Borrar espacio?"

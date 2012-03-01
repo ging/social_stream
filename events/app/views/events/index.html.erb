@@ -6,12 +6,12 @@
 <% end %>
 
 <% content_for :title do %>
-  <%= profile_subject.name + ": " + t('event.title') %>
+  <%= profile_subject.name + ": " + t('event.calendar') %>
 <% end %>
 
 <%= location(
   link_to(profile_subject.name, polymorphic_path(profile_subject)),
-  link_to(t('event.title'), polymorphic_path([profile_subject, Event.new]))
+  link_to(t('event.calendar'), polymorphic_path([profile_subject, Event.new]))
   ) %>
 
 <% toolbar :profile => profile_subject %>
