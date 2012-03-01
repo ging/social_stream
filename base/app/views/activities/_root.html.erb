@@ -19,6 +19,9 @@
     <%= render :partial => 'activities/options',
                :locals => { :activity => activity } %>
 
+    <%= render :partial => 'activities/likes',
+               :locals => { :activity => activity } %>
+
     <%= render :partial => 'activities/comments',
                :locals => { :activity => activity } %>
 

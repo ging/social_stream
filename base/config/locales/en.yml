@@ -45,6 +45,13 @@ en:
     delete: "Delete"
     last: "Last Activities"
     like: "I like"
+    like_sentence:
+      few:
+        one: "%{likers} likes this"
+        other: "%{likers} like this"
+      many:
+        one: "%{likers} and %{count} more person like this"
+        other: "%{likers} and %{count} more people like this"
     one: "Activity"
     other: "Activities"
     privacy:
