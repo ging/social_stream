@@ -52,7 +52,7 @@ es:
       many:
         one: "A %{likers} y %{count} persona más les gusta esto"
         other: "A %{likers} y %{count} personas más les gusta esto"
-one: "Actividad"
+    one: "Actividad"
     other: "Actividades"
     privacy:
       myself:
