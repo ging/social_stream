@@ -314,7 +314,8 @@
   color: $main-color;
   background: $auxiliar-color;
   width: 260px;
-  height: 20px;
+  height: 14px;
+  line-height: 12px;
   text-align: center;
   font-size: 15px;
   font-weight: bold;
@@ -328,6 +329,7 @@
   text-align: center;
   font-size: 11px;
   padding: 5px 0px 5px 0px;
+  cursor: pointer;
 }
 #sector_form .subsector .title .edited_subsector_name {
   font-size: 11px;
