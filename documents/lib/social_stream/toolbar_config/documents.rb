@@ -6,7 +6,7 @@ module SocialStream
 
         items << {
           :key => :documents,
-          :name => image_tag("btn/btn_resource.png",:class =>"menu_icon")+t("document.title"),
+          :name => image_tag("btn/btn_resource.png",:class =>"menu_icon")+t("document.title.other"),
           :url => polymorphic_path([subject, Document.new]),
           :options => {:link => {:id => "documents_menu"}}
         }
@@ -17,7 +17,7 @@ module SocialStream
 
         items << {
           :key => :documents,
-          :name => image_tag("btn/btn_resource.png",:class =>"menu_icon")+t("document.title"),
+          :name => image_tag("btn/btn_resource.png",:class =>"menu_icon")+t("document.title.other"),
           :url => polymorphic_path([current_subject, Document.new]),
           :options => {:link => {:id => "documents_menu"}}
         }
