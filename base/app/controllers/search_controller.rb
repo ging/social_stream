@@ -26,8 +26,11 @@ class SearchController < ApplicationController
   private
 
   def search mode
-    models = SocialStream.extended_search_models
-    models = SocialStream.quick_search_models if mode.to_s.eql? "quick"
+    models = ( mode.to_s.eql?("quick") ?
+              SocialStream.extended_search_models :
+              SocialStream.quick_search_models
+             ).dup
+
     models.map! {|model_sym| model_sym.to_s.classify.constantize}
     result = ThinkingSphinx.search(get_search_query, :classes => models)
     result = authorization_filter result

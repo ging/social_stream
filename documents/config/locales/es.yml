@@ -5,13 +5,15 @@ es:
         title: "Título"
   audio:
     confirm_delete: "¿Borrar audios?"
-    title: "Audios"
     mine: "Mis audios"
     msg: "Subió un audio:"
     name: "archivo de audio"
     not_mine: "Audios"
     one: "un archivo de audio"
     processing: "Procesando fichero de audio. Espere, por favor..."
+    title:
+      one: "Audio"
+      other: "Audios"
   document:
     actions:
       delete: "Borrar"
@@ -38,15 +40,19 @@ es:
     not_mine: "Ficheros"
     one: "un fichero"
     simple_all: "Todos"
-    title: "Ficheros"
+    title:
+      one: "Fichero"
+      other: "Ficheros"
   picture:
     confirm_delete: "¿Borrar imagen?"
-    title: "Imágenes"
     mine: "Mis imágenes"
     msg: "Ver detalles..."
     name: "imagen"
     not_mine: "Imágenes"
     one: "una imagen"
+    title:
+      one: "Imagen"
+      other: "Imágenes"
   repository:
     title: "Ficheros"
     order:
@@ -62,10 +68,12 @@ es:
     not_mine: "Recursos"
   video:
     confirm_delete: "¿Borrar vídeo?"
-    title: "Vídeos"
     mine: "Mis vídeos"  
     msg: "Subió un vídeo:"
     name: "vídeo"
     not_mine: "Vídeos"
     one: "un vídeo"
     processing: "Procesando vídeo. Espere, por favor..."
+    title:
+      one: "Vídeo"
+      other: "Vídeos"

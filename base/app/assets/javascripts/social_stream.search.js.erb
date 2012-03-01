@@ -1,0 +1,27 @@
+SocialStream.Search = (function(SS, $, undefined){
+  function init(){
+    $.preloadImages ("<%= asset_path "mini-loading.gif" %>");
+
+    $('#search_form').submit(function() {
+      query = $('#global_search_input').val();
+      if((query=="")||(query.length < 2)||(query == I18n.t('search.write'))){
+        $('#too_short_error').show();
+        $('#global_search_input').removeClass("searching");
+        $('#global_search_input').blur();
+        $('#global_search_input').focus();
+        return false;
+      }else{
+        $('#global_search_input').addClass("searching");
+        $('#global_search_input').blur();
+      }
+      return true;
+    });
+
+    $("#global_search_input").Watermark(I18n.t('search.write'));
+  }
+
+  return {
+    init: init
+  }
+
+}) (SocialStream, jQuery);

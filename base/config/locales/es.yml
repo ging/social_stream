@@ -112,6 +112,9 @@ es:
     name: "comentario"
     one: "un comentario"
     view_all: "Ver todos los comentarios"
+    title:
+      one: "Comentario"
+      other: "Comentarios"
   contact:
     addressbook: "Libreta de direcciones"
     all_n: "Todos los contactos (%{count})"
@@ -226,6 +229,9 @@ es:
       followed: "Más seguidos"
       liked: "Más populares"
     tags: "Etiquetas"
+    title:
+      one: "Grupo"
+      other: "Grupos"
   help: "Ayuda"
   helpers:
     submit:
@@ -337,7 +343,9 @@ es:
     input: "¿Qué quieres compartir?"
     name: "publicación"
     one: "una publicación"
-    title: "Textos"
+    title:
+      one: "Texto"
+      other: "Textos"
   preposition:
     and: "y"
   profile:
@@ -514,11 +522,14 @@ es:
     ago: "hace %{time}"
   unknown: "Desconocido"
   user:
+    all: "Todos los usuarios"
+    all_n: "Todos los usuarios (%{count})"
     by: "Por usuarios"
     one: "Usuario"
     other: "Usuarios"
-    all: "Todos los usuarios"
-    all_n: "Todos los usuarios (%{count})"
+    title:
+      one: "Usuario"
+      other: "Usuarios"
   welcome: "¡Bienvenid@ a %{site}!"
   lang:
     browser: "Autodetectar el idioma del navegador"

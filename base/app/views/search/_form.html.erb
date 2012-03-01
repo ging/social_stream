@@ -1,54 +1,33 @@
-  <form action="<%= search_path %>" method="get" data-remote="true" id="search_form">
-    <div class="block">
-    	<div class="error" id="too_short_error" <%= too_short_query? ? 'style=display:block;' : ''  %>><%= t('search.at_least') %></div>
-      <%= hidden_field_tag :focus, params[:focus] %>
-      <div class="form_row search_row">
-        <%= text_field_tag :search_query, params[:search_query].present? ? params[:search_query] : nil ,:autocomplete => :off, :id => :global_search_input %>
-      </div>
-      <div  id="focus_options" class="form_row search_row">
-        <ul class="menu_plain_list">
-          <li><%= link_to content_tag(:span,t('search.show_all'),:class => params[:focus].blank? ? 'global selected' : 'global'), search_path(:search_query => params[:search_query]), :remote => true %></li>
-          <% SocialStream.extended_search_models.each do |model_sym| %>
-            <% selected_class = (params[:focus].present? and params[:focus].pluralize.downcase.eql?(model_sym.to_s.pluralize.downcase)) ? 'selected' : ''%>
-            <% disabled = ThinkingSphinx.count(get_search_query, :classes => [model_sym.to_s.classify.constantize])==0 %>
-            <% disabled_class = (disabled ? 'disabled' : '') %>
-            <li>
-            <% unless disabled %>
-              <%= focus_search_link content_tag(:span, model_sym.to_s.pluralize.capitalize, 
-                                                    :class => selected_class + " " + disabled_class + " " + model_sym.to_s.pluralize.downcase), 
-                                        model_sym.to_s.classify.constantize, 
-                                        params[:search_query] %>
-            <% else %>
-               <%= content_tag(:span, model_sym.to_s.pluralize.capitalize, 
-                               :class => selected_class + " " + disabled_class + " " + model_sym.to_s.pluralize.downcase,
-                               :title => I18n.t('search.no_subject_found', :subject => model_sym.to_s)) %>
-            <% end %>
-            </li>
-          <% end %>
-        </ul>
-      </div>      
+<%= form_tag search_path, :method => :get,
+                          :remote => true,
+                          :id => "search_form" do %>
+  <%= hidden_field_tag :focus, params[:focus] %>
+  <div class="block">
+    <div class="error" id="too_short_error" <%= 'style=display:block;' if too_short_query? %>><%= t('search.at_least') %></div>
+
+    <div class="form_row search_row">
+      <%= text_field_tag :search_query, params[:search_query], :autocomplete => :off, :id => :global_search_input %>
     </div>
-  </form>
+
+    <div  id="focus_options" class="form_row search_row">
+      <ul class="menu_plain_list">
+        <li><%= link_to content_tag(:span,
+                                    t('search.show_all'),
+                                    :class => "global #{ params[:focus].blank? && 'selected' }"),
+                        search_path(:search_query => params[:search_query]),
+                                    :remote => true %></li>
+        <% SocialStream.extended_search_models.each do |model_sym| %>
+          <li>
+            <%= search_tab(model_sym) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>      
+  </div>
+<% end %>
 
 <%= javascript_tag do %>
   $(function() {
-    $.preloadImages ("assets/mini-loading.gif");
-
-    $('#search_form').submit(function() {
-      query = $('#global_search_input').val();
-      if((query=="")||(query.length < 2)||(query=="<%= t('search.write') %>")){
-        $('#too_short_error').show();
-        $('#global_search_input').removeClass("searching");
-        $('#global_search_input').blur();
-        $('#global_search_input').focus();
-        return false;   
-      }else{        
-        $('#global_search_input').addClass("searching");
-        $('#global_search_input').blur();
-      }
-      return true;
-    });
-
-    $("#global_search_input").Watermark("<%= I18n.t('search.write') %>");
+    SocialStream.Search.init();
   });
 <% end %>

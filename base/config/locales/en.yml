@@ -111,6 +111,9 @@ en:
     confirm_delete: "Delete comment?"
     name: "comment"
     one: "a comment"
+    title:
+      one: "Comment"
+      other: "Comments"
     view_all: "View all comments"
   contact:
     addressbook: "Addressbook"
@@ -226,6 +229,9 @@ en:
       followed: "Most followed"
       liked: "Most liked"
     tags: "Tags"
+    title:
+      one: "Group"
+      other: "Groups"
   help: "Help"
   helpers:
     submit:
@@ -337,7 +343,9 @@ en:
     input: "What are you doing?"
     name: "post"
     one: "a post"
-    title: "Posts"
+    title:
+      one: "Post"
+      other: "Posts"
   preposition:
     and: "and"
     on: "on"
@@ -496,11 +504,14 @@ en:
     ago: "%{time} ago"
   unknown: "Unknown"
   user:
+    all: "All users"
+    all_n: "All users (%{count})"
     by: "By Users"
     one: "User"
     other: "Users"
-    all: "All users"
-    all_n: "All users (%{count})"
+    title:
+      one: "User"
+      other: "Users"
   welcome: "Welcome to %{site}!"
   lang:
     browser: "Auto-detect browser language"
