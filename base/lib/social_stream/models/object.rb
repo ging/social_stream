@@ -14,6 +14,18 @@ module SocialStream
         has_one  :channel, :through => :activity_object
         has_many :activity_object_activities, :through => :activity_object
 
+        has_many :activity_object_properties,
+                 :through => :activity_object
+        has_many :object_properties,
+                 :through => :activity_object,
+                 :source  => :properties
+        has_many :activity_object_holders,
+                 :through => :activity_object
+        has_many :object_holders,
+                 :through => :activity_object,
+                 :source  => :holders
+
+
         unless self == Actor
           validates_presence_of :author_id, :owner_id, :user_author_id
 
