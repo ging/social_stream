@@ -70,9 +70,9 @@ class Document < ActiveRecord::Base
   end
   
   protected
-  
+
   def set_title
-    self.title ||= self.file_file_name
+    self.title = file_file_name if self.title.blank?
   end
     
 end
