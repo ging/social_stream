@@ -20,6 +20,18 @@ class ActivityObject < ActiveRecord::Base
   has_many :activity_object_activities, :dependent => :destroy
   has_many :activities, :through => :activity_object_activities
 
+  has_many :activity_object_properties,
+           :dependent => :destroy
+  has_many :properties,
+           :through => :activity_object_properties
+  has_many :activity_object_holders,
+           :class_name  => "ActivityObjectProperty",
+           :foreign_key => :property_id,
+           :dependent   => :destroy
+  has_many :holders,
+           :through => :activity_object_holders,
+           :source  => :activity_object
+
   validates_presence_of :object_type
 
   scope :authored_by, lambda { |subject|
