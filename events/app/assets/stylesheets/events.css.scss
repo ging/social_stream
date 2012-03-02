@@ -15,6 +15,7 @@
   text-align: center;
   vertical-align: middle;
   padding: 10px;
+  width: 40px;
 }
 
 
@@ -46,6 +47,12 @@ div.event_date {
 
 .event_details {
   padding-top: 10px;
+}
+
+.event_poster {
+	width: 80px;
+	padding-right: 10px;
+	float: left;
 }
 
 #calendar {
