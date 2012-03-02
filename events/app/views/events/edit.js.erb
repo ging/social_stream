@@ -1,0 +1,5 @@
+<% if params[:poster] %>
+  $("#<%= dom_id @event %> .event_poster").hide("slow");
+  $("#<%= dom_id @event %> .event_details").hide("slow");
+  $("#<%= dom_id @event %>").append("<%= escape_javascript render(:partial => 'events/form_poster', :locals => { :event => @event }) %>");
+<% end %>

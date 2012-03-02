@@ -1,34 +1,44 @@
-<%= link_to event, :class => "event_date" do %>
-<div id="event-<%= event.id %>" class="event_date_image">
-  <div class="event_day">
-    <%= event.start_at.day %>
-  </div>
-  <div class="event_month">
-    <%= l event.start_at, :format => "%b" %>
-  </div>
-  <% unless event.all_day? %>
-    <div class="event_hour">
-      <%= l event.start_at, :format => "%H:%M" %>
+<%= div_for event do %>
+  <%= link_to event, :class => "event_date" do %>
+    <div class="event_date_image">
+      <div class="event_day">
+        <%= event.start_at.day %>
+      </div>
+      <div class="event_month">
+        <%= l event.start_at, :format => "%b" %>
+      </div>
+      <% unless event.all_day? %>
+        <div class="event_hour">
+          <%= l event.start_at, :format => "%H:%M" %>
+        </div>
+      <% end %>
     </div>
   <% end %>
-</div>
-<% end %>
 
-<%= javascript_tag do %>
-var d = new Date(<%= 1000*event.start_at.to_i %>);
-$("#event-<%= event.id %> .event_day").text($.datepicker.formatDate('d', d));
-$("#event-<%= event.id %> .event_month").text($.datepicker.formatDate('M', d));
-if($("#event-<%= event.id %> .event_hour").length) {
- var minutes = d.getMinutes();
- if (minutes<10) minutes = "0" + minutes;
- $("#event-<%= event.id %> .event_hour").text(d.getHours() + ':' + minutes);
-}
-<% end %>
+  <%= javascript_tag do %>
+  var d = new Date(<%= 1000*event.start_at.to_i %>);
+  $("#<%= dom_id event %> .event_day").text($.datepicker.formatDate('d', d));
+  $("#<%= dom_id event %> .event_month").text($.datepicker.formatDate('M', d));
+  if($("#<%= dom_id event %> .event_hour").length) {
+   var minutes = d.getMinutes();
+   if (minutes<10) minutes = "0" + minutes;
+   $("#<%= dom_id event %> .event_hour").text(d.getHours() + ':' + minutes);
+  }
+  <% end %>
 
-<div class="event_details">
-  <div class="title">
-  <%= link_to event.title, event %>
+  <div class="event_poster">
+    <% if can? :update, event %>
+      <div class="event_poster_update">
+        <%= link_to t('event.poster.update'), edit_event_path(event, :poster => true), :remote => true %>
+      </div>
+    <% end %>
   </div>
-</div>
+
+  <div class="event_details">
+    <div class="title">
+    <%= link_to event.title, event %>
+    </div>
+  </div>
+<% end %>
 
 <div class="clearfloat"></div>

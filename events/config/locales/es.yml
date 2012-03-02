@@ -24,6 +24,8 @@ es:
     new:
       title: "Nuevo evento"
     one: "un evento"
+    poster:
+      update: "Subir cartel"
     title:
       one: "Evento"
       other: "Eventos"
