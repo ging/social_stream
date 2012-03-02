@@ -122,6 +122,7 @@
   $("#sector_editor").data("prepare", function(cheese, newSubsector, noAdding){
     var sector = cheese.getFocusedSector();
     var newIndex = -1;
+    var defaultPermissions = "true,true,true,false,false";
     if(newSubsector != undefined){
       newIndex = newSubsector.getIndex();
     }
@@ -152,6 +153,13 @@
           var index = i;
           var recentlyCreated = (newIndex != -1)&&(newIndex == index);
           if(subsector){
+            if(noAdding && (newIndex != -1)){
+              if(i > newIndex){
+                $("#subsector_" + i).find(".permissions_field").data("fromString")($("#subsector_" + (i-1)).find(".permissions_field").data("toString")());
+              }else if(i == newIndex){
+                $("#subsector_" + i).find(".permissions_field").data("fromString")(defaultPermissions);
+              }
+            }
             if(!noAdding && (recentlyCreated || ((newIndex == -1)&&(i == 0)))){
               if(!$("#subsector_" + i).find(".content").is(':visible')){
                 var time = 1000;
@@ -160,7 +168,7 @@
                 }else if(subsector_count==3){
                   time = 1000;
                 }else if(subsector_count==4){
-                  time = 650;permissions_field
+                  time = 650;
                 }
                 $("#subsector_" + i).find(".content").stop().slideToggle(time);
               }
@@ -169,7 +177,6 @@
             }
             $("#subsector_" + i).stop().show();
             if(!maxReached){
-              
               if(sector.subsectors[i+1]==undefined){
                 $("#add_subsector_" + (i+1)).off("click");
                 if(!$("#add_subsector_" + (i+1)).is(':visible')){
@@ -225,4 +232,26 @@
       }
     }
   });
+  $(".permissions_field").each(function(){
+    var permissionsField = $(this)
+    permissionsField.data("toString", function(){
+      var permissions = []
+      permissionsField.find("input").each(function(){
+        permissions.push($(this).is(":checked"));
+      });
+      return permissions.toString();
+    });
+  });
+  $(".permissions_field").each(function(){
+    var permissionsField = $(this)
+    permissionsField.data("fromString", function(values){      
+      var permissions = values.split(",");
+      for(var i in permissions){
+        permissions[i] = (permissions[i] === "true");
+        permissionsField.find("input").eq(i).attr('checked', permissions[i]);
+      }
+      console.log(permissions);
+    });
+  });
+  
 <% end %>
