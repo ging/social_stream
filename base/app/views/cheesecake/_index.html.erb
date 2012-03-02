@@ -24,16 +24,6 @@
       <% end %>
     </div>
   </div>
-  <div id="contacts_changes_button" style="display:none;">
-    <%= t('cheesecake.changes.details') %> (<span id="contacts_changes_button_total">0</span>)
-  </div>
-  <div id="contacts_save" style="display:none;">
-    <form action="<%= update_cheesecake_path %>" method="get" data-remote="true" id="contacts_save_form">
-       <input type="submit" id="contacts_save_button" value="<%= t('cheesecake.changes.save') %>">
-       <input type="hidden" id="contacts_save_changes" name="contacts_save_changes">
-    </form>
-  </div>
-  <br class="clearfloat"> 
   <div id="contacts_changes">
     <div id="contacts_changes_title">
      <%= t('cheesecake.changes.details') %>
@@ -43,6 +33,16 @@
     </div>
   </div>
 </div>
+<div id="contacts_changes_button" style="display:none;">
+    <%= t('cheesecake.changes.details') %> (<span id="contacts_changes_button_total">0</span>)
+  </div>
+  <div id="contacts_save" style="display:none;">
+    <form action="<%= update_cheesecake_path %>" method="get" data-remote="true" id="contacts_save_form">
+       <input type="submit" id="contacts_save_button" value="<%= t('cheesecake.changes.save') %>">
+       <input type="hidden" id="contacts_save_changes" name="contacts_save_changes">
+    </form>
+  </div>
+  <br class="clearfloat">
 <%= javascript_tag do %>
   $("#center_body").css("width","782px");
   $("#center_body").css("max-width","782px");
