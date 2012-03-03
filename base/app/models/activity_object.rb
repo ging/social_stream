@@ -22,13 +22,14 @@ class ActivityObject < ActiveRecord::Base
 
   has_many :activity_object_properties,
            :dependent => :destroy
-  has_many :properties,
-           :through => :activity_object_properties
+  has_many :object_properties,
+           :through => :activity_object_properties,
+           :source => :property
   has_many :activity_object_holders,
            :class_name  => "ActivityObjectProperty",
            :foreign_key => :property_id,
            :dependent   => :destroy
-  has_many :holders,
+  has_many :object_holders,
            :through => :activity_object_holders,
            :source  => :activity_object
 
@@ -54,4 +55,9 @@ class ActivityObject < ActiveRecord::Base
   def acts_as_actor?
     object_type == "Actor"
   end
+
+  def object_holder_hash
+
+  end
+
 end

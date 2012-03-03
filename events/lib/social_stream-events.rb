@@ -17,7 +17,8 @@ module SocialStream
     autoload :Ability, 'social_stream/events/ability'
 
     module Models
-      autoload  :Actor, 'social_stream/events/models/actor'
+      autoload  :Actor,    'social_stream/events/models/actor'
+      autoload  :Document, 'social_stream/events/models/document'
     end
 
     SocialStream.objects.push(:event) unless SocialStream.objects.include?(:event)

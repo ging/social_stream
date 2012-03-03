@@ -13,6 +13,12 @@ module SocialStream
         end
       end
 
+      initializer "social_stream-events.document" do
+        ActiveSupport.on_load(:document) do
+          include SocialStream::Events::Models::Document
+        end
+      end
+
       initializer "social_stream-events.views.settings" do
         SocialStream::Views::Settings.module_eval do
           include SocialStream::Views::Settings::Events

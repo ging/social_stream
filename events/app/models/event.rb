@@ -27,6 +27,18 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def poster_object
+    object_properties.
+      where('activity_object_properties.type' => 'ActivityObjectProperty::Poster').
+      first
+  end
+
+  def poster
+    @poster ||=
+      poster_object.try(:document) ||
+      build_poster
+  end
+
   protected
 
   def build_json(start_time = start_at, end_time = end_at)
@@ -40,6 +52,12 @@ class Event < ActiveRecord::Base
       }
 
   end
+
+  def build_poster
+    Document.new(:event_property_object_id => activity_object_id,
+                 :owner_id => owner_id)
+  end
+
 
   private
 

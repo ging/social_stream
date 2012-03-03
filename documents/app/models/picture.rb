@@ -4,6 +4,7 @@ class Picture < Document
                     :path => ':rails_root/documents/:class/:id_partition/:style',
                     :styles => {:thumb48sq  => ["48x48"],
                                 :thumbwall => ["130x97#"],
+                                :midwall => ["80x97#"],
                                 :preview => ["500>"]
                                }                              
                                
@@ -23,6 +24,8 @@ class Picture < Document
         "#{ size.to_s }/photo.png"
       when 48
         helper.picture_path self, :format => format, :style => 'thumb48sq'
+      when 80
+        helper.picture_path self, :format => format, :style => 'midwall'
       when 130
         helper.picture_path self, :format => format, :style => 'thumbwall'
       when 500
