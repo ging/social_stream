@@ -78,6 +78,7 @@
 
 <%= javascript_tag do %>
   $(function(){
+    //Toggling between subsectors forms
     $(".subsector .title").off("click.toggle");
     $(".subsector .title").on("click.toggle",function(){
       if(!$(this).parent().find(".content").is(':visible')){
@@ -89,168 +90,179 @@
         $(this).parent().find(".content").slideToggle();
       }
     })
-  });
-  $(".permissions_field").each(function(){
-    $(this).tipsy({
-      delayIn: 500,
-      delayOut: 200,
-      gravity: 'e',
-      offset: 100,
-      opacity: 1,
-      className: 'permissions_explanation_tipsy_menu',
-      html: true,
-      hoverable: true,
-      title: function(){
-        var html = $(this).parent().find('.permissions_explanation').html();
-        var relation = $(this).parent().parent().find('.form_subsector_name').val();
-        return html.replace(/%RELATION_NAME%/g, relation);
-      }
-    });
-  });
-  $("#sector_editor").data("show", function(callback){
-    $("#contacts_explorer").stop().animate({width: 0},500);
-    $("#sector_editor").stop().animate({width: 300},500, function(){
-      if(callback) callback();
-    });
-  });
-  $("#sector_editor").data("hide", function(callback){
-    $("#sector_editor").stop().animate({width: 0},500);
-    $("#contacts_explorer").stop().animate({width: 300},500, function(){
-      if(callback) callback();
-    });
-  });
-  $("#sector_editor").data("prepare", function(cheese, newSubsector, noAdding){
-    var sector = cheese.getFocusedSector();
-    var newIndex = -1;
-    var defaultPermissions = "true,true,true,false,false";
-    if(newSubsector != undefined){
-      newIndex = newSubsector.getIndex();
-    }
-    if(noAdding == undefined){
-      noAdding = false;
-    }
-    if(sector){
-      var subsector_count = sector.subsectors.length;
-      var maxReached = (subsector_count==4);
-      $("#form_sector_name").val(sector.label);
-      $("#edited_sector_name").html(sector.label);
-      $("#form_sector_name").off("keyup");
-      $("#form_sector_name").on("keyup",function(){
-        $("#edited_sector_name").html($("#form_sector_name").val());
-        sector.changeLabel($("#form_sector_name").val());
+    //Tipsy for permission fields 
+    $(".permissions_field").each(function(){
+      $(this).tipsy({
+        delayIn: 500,
+        delayOut: 200,
+        gravity: 'e',
+        offset: 100,
+        opacity: 1,
+        className: 'permissions_explanation_tipsy_menu',
+        html: true,
+        hoverable: true,
+        title: function(){
+          var html = $(this).parent().find('.permissions_explanation').html();
+          var relation = $(this).parent().parent().find('.form_subsector_name').val();
+          return html.replace(/%RELATION_NAME%/g, relation);
+        }
       });
-      if(maxReached){
-        $(".add_subsector").each(function(){
-          /*if($(this).is(':visible')){
-            $(this).slideToggle();
-          }*/
-          $(this).hide(); 
-        })
+    });
+    //Showing form
+    $("#sector_editor").data("show", function(callback){
+      $("#contacts_explorer").stop().animate({width: 0},500);
+      $("#sector_editor").stop().animate({width: 300},500, function(){
+        if(callback) callback();
+      });
+    });
+    //Hidding form
+    $("#sector_editor").data("hide", function(callback){
+      $("#sector_editor").stop().animate({width: 0},500);
+      $("#contacts_explorer").stop().animate({width: 300},500, function(){
+        if(callback) callback();
+      });
+    });
+    //Preparing form
+    $("#sector_editor").data("prepare", function(cheese, newSubsector, noAdding){
+      var sector = cheese.getFocusedSector();
+      var newIndex = -1;
+      var defaultPermissions = "true,true,true,false,false";
+      if(newSubsector != undefined){
+        //newSubsector is used when we prepare the form just after creating a subsector
+        newIndex = newSubsector.getIndex();
       }
-      for(var i = 3; i >= 0; i--){
-        (function(){
-          var subsector = sector.subsectors[i];
-          var index = i;
-          var recentlyCreated = (newIndex != -1)&&(newIndex == index);
-          if(subsector){
-            if(noAdding && (newIndex != -1)){
-              if(i > newIndex){
-                $("#subsector_" + i).find(".permissions_field").data("fromString")($("#subsector_" + (i-1)).find(".permissions_field").data("toString")());
-              }else if(i == newIndex){
-                $("#subsector_" + i).find(".permissions_field").data("fromString")(defaultPermissions);
-              }
-            }
-            if(!noAdding && (recentlyCreated || ((newIndex == -1)&&(i == 0)))){
-              if(!$("#subsector_" + i).find(".content").is(':visible')){
-                var time = 1000;
-                if(subsector_count==2){
-                  time = 2200;
-                }else if(subsector_count==3){
-                  time = 1000;
-                }else if(subsector_count==4){
-                  time = 650;
+      if(noAdding == undefined){
+        //noAdding tweat when creating a subsector
+        noAdding = false;
+      }
+      if(sector){
+        var subsector_count = sector.subsectors.length;
+        var maxReached = (subsector_count==4);
+        $("#form_sector_name").val(sector.label);
+        $("#edited_sector_name").html(sector.label);
+        $("#form_sector_name").off("keyup");
+        $("#form_sector_name").on("keyup",function(){
+          $("#edited_sector_name").html($("#form_sector_name").val());
+          sector.changeLabel($("#form_sector_name").val());
+        });
+        if(maxReached){
+          $(".add_subsector").each(function(){
+            /*if($(this).is(':visible')){
+              $(this).slideToggle();
+            }*/
+            $(this).hide(); 
+          })
+        }
+        for(var i = 3; i >= 0; i--){
+          (function(){
+            var subsector = sector.subsectors[i];
+            var index = i;
+            var recentlyCreated = (newIndex != -1)&&(newIndex == index);
+            if(subsector){
+              if(noAdding && (newIndex != -1)){
+                //Tweat to move permissions fields when a subsector is created below
+                if(i > newIndex){
+                  $("#subsector_" + i).find(".permissions_field").data("fromString")($("#subsector_" + (i-1)).find(".permissions_field").data("toString")());
+                }else if(i == newIndex){
+                  $("#subsector_" + i).find(".permissions_field").data("fromString")(defaultPermissions);
                 }
-                $("#subsector_" + i).find(".content").stop().slideToggle(time);
               }
-            }else{
-              $("#subsector_" + i).find(".content").hide();
-            }
-            $("#subsector_" + i).stop().show();
-            if(!maxReached){
-              if(sector.subsectors[i+1]==undefined){
-                $("#add_subsector_" + (i+1)).off("click");
-                if(!$("#add_subsector_" + (i+1)).is(':visible')){
-                  $("#add_subsector_" + (i+1)).stop().slideToggle();
+              //Sliding content with different times as Cheesecake animation durations change
+              if(!noAdding && (recentlyCreated || ((newIndex == -1)&&(i == 0)))){
+                if(!$("#subsector_" + i).find(".content").is(':visible')){
+                  var time = 1000;
+                  if(subsector_count==2){
+                    time = 2200;
+                  }else if(subsector_count==3){
+                    time = 1000;
+                  }else if(subsector_count==4){
+                    time = 650;
+                  }
+                  $("#subsector_" + i).find(".content").stop().slideToggle(time);
+                }
+              }else{
+                $("#subsector_" + i).find(".content").hide();
+              }
+              $("#subsector_" + i).stop().show();
+              //Adding buttons are only shonw if the maximum was not reached
+              if(!maxReached){
+                if(sector.subsectors[i+1]==undefined){
+                  $("#add_subsector_" + (i+1)).off("click");
+                  if(!$("#add_subsector_" + (i+1)).is(':visible')){
+                    $("#add_subsector_" + (i+1)).stop().slideToggle();
+                  }
+                  if(!noAdding){
+                    $("#add_subsector_" + (i+1)).on("click",function(){
+                     $("#add_subsector_" + (index+1)).off("click");
+                     cheese.addNewSubsector(index+1);
+                    });
+                  }
+                }
+                $("#add_subsector_" + i).off("click");
+                if(!$("#add_subsector_" + i).is(':visible')){
+                  $("#add_subsector_" + i).stop().slideToggle();
                 }
                 if(!noAdding){
-                  $("#add_subsector_" + (i+1)).on("click",function(){
-                   $("#add_subsector_" + (index+1)).off("click");
-                   cheese.addNewSubsector(index+1);
+                  $("#add_subsector_" + i).on("click",function(){
+                     $("#add_subsector_" + index).off("click");
+                     cheese.addNewSubsector(index);
                   });
                 }
               }
-              $("#add_subsector_" + i).off("click");
-              if(!$("#add_subsector_" + i).is(':visible')){
-                $("#add_subsector_" + i).stop().slideToggle();
-              }
-              if(!noAdding){
-                $("#add_subsector_" + i).on("click",function(){
-                   $("#add_subsector_" + index).off("click");
-                   cheese.addNewSubsector(index);
-                });
-              }
-            }
-            $("#form_subsector_name_" + i).val(subsector.label);
-            $("#edited_subsector_name_" + i).html(subsector.label);
-            $("#form_subsector_name_" + i).off("keyup");
-            $("#form_subsector_name_" + i).on("keyup", [i,subsector],function(event){
-              $("#edited_subsector_name_" + event.data[0]).html($("#form_subsector_name_" + event.data[0]).val());
-              event.data[1].changeLabel($("#form_subsector_name_" + event.data[0]).val());
-            });
-            $("#subsector_" + i).find(".permissions_field .permission").each(function(){
-              var permission_field = $(this);
-              var update_state = function(){
-                var label_class = permission_field.attr("id").replace("form_", "edited_");
-                if(permission_field.is(":checked")){
-                  $("." + label_class).removeClass("negative").addClass("positive");
-                  $("." + label_class).find(".negative_message").hide();
-                  $("." + label_class).find(".positive_message").show();
-                }else{
-                  $("." + label_class).find(".positive_message").hide();
-                  $("." + label_class).find(".negative_message").show();
+              $("#form_subsector_name_" + i).val(subsector.label);
+              $("#edited_subsector_name_" + i).html(subsector.label);
+              $("#form_subsector_name_" + i).off("keyup");
+              $("#form_subsector_name_" + i).on("keyup", [i,subsector],function(event){
+                $("#edited_subsector_name_" + event.data[0]).html($("#form_subsector_name_" + event.data[0]).val());
+                event.data[1].changeLabel($("#form_subsector_name_" + event.data[0]).val());
+              });
+              $("#subsector_" + i).find(".permissions_field .permission").each(function(){
+                var permission_field = $(this);
+                var update_state = function(){
+                  var label_class = permission_field.attr("id").replace("form_", "edited_");
+                  if(permission_field.is(":checked")){
+                    $("." + label_class).removeClass("negative").addClass("positive");
+                    $("." + label_class).find(".negative_message").hide();
+                    $("." + label_class).find(".positive_message").show();
+                  }else{
+                    $("." + label_class).find(".positive_message").hide();
+                    $("." + label_class).find(".negative_message").show();
+                  }
                 }
-              }
-              update_state();
-              permission_field.on("change",update_state);
-            });
-          }else{
-            $("#subsector_" + i).hide();
-            //$("#add_subsector_" + i).off("click");
-            //$("#add_subsector_" + i).hide();
-          }
-        })();
+                update_state();
+                permission_field.on("change",update_state);
+              });
+            }else{
+              $("#subsector_" + i).hide();
+              //$("#add_subsector_" + i).off("click");
+              //$("#add_subsector_" + i).hide();
+            }
+          })();
+        }
       }
-    }
-  });
-  $(".permissions_field").each(function(){
-    var permissionsField = $(this)
-    permissionsField.data("toString", function(){
-      var permissions = []
-      permissionsField.find("input").each(function(){
-        permissions.push($(this).is(":checked"));
-      });
-      return permissions.toString();
     });
-  });
-  $(".permissions_field").each(function(){
-    var permissionsField = $(this)
-    permissionsField.data("fromString", function(values){      
-      var permissions = values.split(",");
-      for(var i in permissions){
-        permissions[i] = (permissions[i] === "true");
-        permissionsField.find("input").eq(i).attr('checked', permissions[i]);
-      }
-      console.log(permissions);
+    // toString and fromString methods for permissions fields
+    // to move permissions fileds from one sector to another
+    $(".permissions_field").each(function(){
+      var permissionsField = $(this)
+      permissionsField.data("toString", function(){
+        var permissions = []
+        permissionsField.find("input").each(function(){
+          permissions.push($(this).is(":checked"));
+        });
+        return permissions.toString();
+      });
+    });
+    $(".permissions_field").each(function(){
+      var permissionsField = $(this)
+      permissionsField.data("fromString", function(values){      
+        var permissions = values.split(",");
+        for(var i in permissions){
+          permissions[i] = (permissions[i] === "true");
+          permissionsField.find("input").eq(i).attr('checked', permissions[i]);
+        }
+        console.log(permissions);
+      });
     });
   });
   
