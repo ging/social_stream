@@ -4,7 +4,8 @@ class Picture < Document
                     :path => ':rails_root/documents/:class/:id_partition/:style',
                     :styles => {:thumb48sq  => ["48x48"],
                                 :thumbwall => ["130x97#"],
-                                :midwall => ["80x97#"],
+                                # midwall preserves A4 proportion: 210x297
+                                :midwall => ["80x113#"],
                                 :preview => ["500>"]
                                }                              
                                
