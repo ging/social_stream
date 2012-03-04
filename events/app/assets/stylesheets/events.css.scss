@@ -51,8 +51,26 @@ div.event_date {
 
 .event_poster {
 	width: 80px;
+	height: 113px;
 	padding-right: 10px;
 	float: left;
+	position: relative;
+}
+
+.event_poster_update {
+	top: 95px;
+	left: 10px;
+	float: left;
+	position: absolute;
+	background: $secondary-color;
+	text-align: center;
+	opacity: 0.8;
+	width: 80;
+	height: 18px;
+	/* For IE 5-7 */
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+	/* For IE 8 */
+	-MS-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
 }
 
 #calendar {
