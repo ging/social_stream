@@ -44,15 +44,12 @@
   </div>
   <br class="clearfloat">
 <%= javascript_tag do %>
+  //Tweak to remove right bar
   $("#center_body").css("width","782px");
   $("#center_body").css("max-width","782px");
   $("#content").css("width","782px");
   $("#contacts_filter_input").Watermark("<%= escape_javascript(I18n.t('search.name')) %>");
-  $("#contacts_grid_extra").click(function(){
-    $("#contacts_grid").css("overflow-y","scroll");
-    $("#contacts_grid").scrollTo("+=308px", 800, {axis:'y'});
-    $("#contacts_grid_extra").css("opacity",0);
-  });
+  //When clicking an unselected actor
   var unselected_actor_click = function(){
     var clone = $(this).clone();
     clone.attr("id",$(this).attr("id") + "_selected");
@@ -72,6 +69,7 @@
       $(this).fadeIn("fast");
     });
   };
+  //When clicking an selected actor
   var selected_actor_click = function(){
     var clone = $("#" + $(this).attr("id") + "_selected");
     $(this).fadeOut("fast",function(){
@@ -89,6 +87,7 @@
       clone.remove();
     });
   };
+  //Unselecting all actors
   $("#contacts_selector_clear").on("click",function(){
     $("#contacts_grid_selected .actor").each(function(){
       var evt = document.createEvent("MouseEvents");
@@ -98,6 +97,7 @@
     });
   });
   $(".actor").on("click.unselected_actor",unselected_actor_click);
+  //Detailed changes display
   $("#contacts_changes_button").click(function(){
     if($(".contacts_changes_tipsy_menu").length != 0){
       $("#contacts_changes_button").tipsy("hide");
@@ -112,6 +112,7 @@
       });
     }
   });
+  //Opening editing sector form
   $("#edit_sector_button").data("edit_sector_click", function(event){
     var cheese = event.data;
     $("#edit_sector_button").off("click.edit");
@@ -124,6 +125,7 @@
       $("#edit_sector_button").on("click.close_edit", cheese, $("#edit_sector_button").data("close_edit_sector_click"));
     });
   });
+  //Closing editing sector form
   $("#edit_sector_button").data("close_edit_sector_click", function(event){
     var cheese = event.data;
     $("#edit_sector_button").off("click.close_edit");

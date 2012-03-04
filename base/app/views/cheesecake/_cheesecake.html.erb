@@ -1,4 +1,5 @@
 $(function(){
+  //Cheesecake settings
   var cheesecakeData = {
     container: {
       id: "contacts_cheesecake",
@@ -33,9 +34,13 @@ $(function(){
     rMax : 200,
     center: {x : 220, y : 220}
   };
+  //Adding Cheesecake settings the sectors and users information from social_stream
   cheesecakeData.sectors = <%= raw(current_subject.cheesecake_json) %>.sectors;
+  //Cheesecake is created
   var cheese = new socialCheesecake.Cheesecake(cheesecakeData);
+  //We dont use synchronized callbacks for focus
   cheese.syncSectorFocusCallbacks = false;
+  //Callback when a sector focusing begins
   socialCheesecake.eventCallbackHandlers.onSectorFocusBegin = function(cheesecake,callback){
     if((cheese.highlightedSector)&&(cheese.highlightedSector.auxiliar)){
       $("#sector_editor").data("prepare")(cheese);
@@ -44,6 +49,7 @@ $(function(){
       $("#contacts_grid_available").fadeOut("fast", callback);      
     }
   };
+  //Callback when a sector focusing ends
   socialCheesecake.eventCallbackHandlers.onSectorFocusEnd = function(cheesecake){
     if((cheese.highlightedSector)&&(cheese.highlightedSector.auxiliar)){
       
@@ -53,6 +59,7 @@ $(function(){
       $("#edit_sector_button").fadeIn("fast");
     }
   };
+  //Callback when a sector unfocusing begins
   socialCheesecake.eventCallbackHandlers.onSectorUnfocusBegin = function(cheesecake,callback){
     if((cheese.highlightedSector)&&(cheese.highlightedSector.auxiliar)){
       
@@ -62,6 +69,7 @@ $(function(){
       $("#edit_sector_button").fadeOut("fast");
     }
   };
+  //Callback when a sector unfocusing ends
   socialCheesecake.eventCallbackHandlers.onSectorUnfocusEnd = function(cheesecake){
     if((cheese.highlightedSector)&&(cheese.highlightedSector.auxiliar)){
       
@@ -73,6 +81,7 @@ $(function(){
       $("#sector_editor").data("hide")();
     }
   };
+  //Callback when adding a new subsector begins
   socialCheesecake.eventCallbackHandlers.onSubsectorAddedBegin = function(subsector){
     var cheesecake = subsector.getCheesecake();
     $("#edit_sector_button").off("click.edit");
@@ -94,6 +103,7 @@ $(function(){
       $(this).off("click");
     });
   };
+  //Callback when adding a new subsector ends
   socialCheesecake.eventCallbackHandlers.onSubsectorAddedEnd = function(subsector){
     $("#sector_editor").data("prepare")(subsector.getCheesecake(),subsector,false);
   };
@@ -101,6 +111,9 @@ $(function(){
     cheese.filter($("#contacts_filter_input").val());
     //TODO: Make users unfiltered visible again
   });
+  //Callback when any change is made (added peopel, removed, edited or added secto, etc)
+  //This updates the changes hiddend field (sent when saving changes) and the detailed
+  //changes display
   socialCheesecake.eventCallbackHandlers.onChange = function(cheesecake){
     var initial = cheesecake.getInitialState();
     var changes = cheesecake.getChanges();
@@ -183,7 +196,8 @@ $(function(){
       }
     }
     $("#contacts_changes_details").html(changes_html);
-  }
+  }  
+  //Tipsy for displaying detailed changes
   $('#contacts_changes_button').tipsy({
     delayIn: 0,
     delayOut: 0,
