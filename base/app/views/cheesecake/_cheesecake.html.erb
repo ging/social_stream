@@ -36,7 +36,7 @@ $(function(){
   cheesecakeData.sectors = <%= raw(current_subject.cheesecake_json) %>.sectors;
   var cheese = new socialCheesecake.Cheesecake(cheesecakeData);
   cheese.syncSectorFocusCallbacks = false;
-  cheese.onSectorFocusBegin = function(cheesecake,callback){
+  socialCheesecake.eventCallbackHandlers.onSectorFocusBegin = function(cheesecake,callback){
     if((cheese.highlightedSector)&&(cheese.highlightedSector.auxiliar)){
       $("#sector_editor").data("prepare")(cheese);
       $("#sector_editor").data("show")();
@@ -44,7 +44,7 @@ $(function(){
       $("#contacts_grid_available").fadeOut("fast", callback);      
     }
   };
-  cheese.onSectorFocusEnd = function(cheesecake){
+  socialCheesecake.eventCallbackHandlers.onSectorFocusEnd = function(cheesecake){
     if((cheese.highlightedSector)&&(cheese.highlightedSector.auxiliar)){
       
     }else{
@@ -53,7 +53,7 @@ $(function(){
       $("#edit_sector_button").fadeIn("fast");
     }
   };
-  cheese.onSectorUnfocusBegin = function(cheesecake,callback){
+  socialCheesecake.eventCallbackHandlers.onSectorUnfocusBegin = function(cheesecake,callback){
     if((cheese.highlightedSector)&&(cheese.highlightedSector.auxiliar)){
       
     }else{
@@ -62,7 +62,7 @@ $(function(){
       $("#edit_sector_button").fadeOut("fast");
     }
   };
-  cheese.onSectorUnfocusEnd = function(cheesecake){
+  socialCheesecake.eventCallbackHandlers.onSectorUnfocusEnd = function(cheesecake){
     if((cheese.highlightedSector)&&(cheese.highlightedSector.auxiliar)){
       
     }else{
@@ -73,7 +73,7 @@ $(function(){
       $("#sector_editor").data("hide")();
     }
   };
-  cheese.onSubsectorAddedBegin = function(subsector){
+  socialCheesecake.eventCallbackHandlers.onSubsectorAddedBegin = function(subsector){
     var cheesecake = subsector.getCheesecake();
     $("#edit_sector_button").off("click.edit");
     $("#edit_sector_button").fadeOut("fast",function(){
@@ -94,14 +94,14 @@ $(function(){
       $(this).off("click");
     });
   };
-  cheese.onSubsectorAddedEnd = function(subsector){
+  socialCheesecake.eventCallbackHandlers.onSubsectorAddedEnd = function(subsector){
     $("#sector_editor").data("prepare")(subsector.getCheesecake(),subsector,false);
   };
   $("#contacts_filter_input").keyup(function(){
     cheese.filter($("#contacts_filter_input").val());
     //TODO: Make users unfiltered visible again
   });
-  cheese.onChange = function(cheesecake){
+  socialCheesecake.eventCallbackHandlers.onChange = function(cheesecake){
     var initial = cheesecake.getInitialState();
     var changes = cheesecake.getChanges();
     if((changes.actors)&&(changes.actors.length==0)&&(changes.sectors)&&(changes.sectors.length==0)&&(changes.subsectors)&&(changes.subsectors.length==0)){
