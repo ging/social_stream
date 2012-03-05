@@ -48,7 +48,7 @@ Strophe.addConnectionPlugin('muc', {
     });
     if (password != null) msg.cnode(Strophe.xmlElement("password", [], password));
     if (this._muc_handler == null) {
-      this._muc_handler = conn.addHandler(function(stanza) {
+      this._muc_handler = this._connection.addHandler(function(stanza) {
         var from, handler, handlers, id, roomname, x, xmlns, xquery, _i, _len;
         from = stanza.getAttribute('from');
         roomname = from.split("/")[0];

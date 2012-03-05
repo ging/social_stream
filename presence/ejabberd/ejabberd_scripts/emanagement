@@ -5,7 +5,7 @@
 #Ejabberd Management script 
 #New features for management and maintenance ejabberd
 #@author Aldo Gordillo < agordillos@gmail.com >
-#@version 2.0 - 24-2-2012
+#@version 2.1 - 28-2-2012
 ####################################
 
 require 'logger'
@@ -48,6 +48,7 @@ PARAMS_FOR_COMMANDS = {
 	'removeAllRosters' => 0,
 	'getAllUserJidsWithRosterByDomain' => 1,
 	'printAllRostersByDomain' => 1,
+	'printAllRosters' => 0,
 	'printAllBidirecctionalBuddysByDomain' => 1,
 	'checkUserJid' => 1,
 	'checkBidirecctionalBuddys' => 2,
@@ -62,6 +63,16 @@ PARAMS_FOR_COMMANDS = {
         'getConnectedJidsByDomain' => 1,
 	'getConnectedJids' => 0,
 	'kickUserJid' => 1,
+	'createPersistentRoom' => 2,
+	'createRoom' => 2,
+	'destroyRoom' => 2,
+	'destroyAllRoomsByDomain' => 1,
+	'destroyAllRooms' => 0,
+	'getAllJidsOfRoom' => 2,
+	'getAffiliationsOfRoom' => 2,
+	'setJidAffiliationOfRoom' => 4,
+	'printAllRoomsByDomain' => 1,
+	'printAllRooms' => 0,
 	'help' => 0,
 }
 
@@ -76,6 +87,7 @@ SYNTAX_FOR_COMMANDS = {
 	'removeAllRosters' => 'removeAllRosters',
 	'getAllUserJidsWithRosterByDomain' => 'getAllUserJidsWithRosterByDomain domain',
 	'printAllRostersByDomain' => 'printAllRostersByDomain domain',
+	'printAllRosters' => 'printAllRosters',
 	'printAllBidirecctionalBuddysByDomain' => 'printAllBidirecctionalBuddysByDomain domain',
 	'checkUserJid' => 'checkUserJid userJid',
 	'checkBidirecctionalBuddys' => 'checkBidirecctionalBuddys userAJid userBJid',
@@ -90,6 +102,16 @@ SYNTAX_FOR_COMMANDS = {
         'getConnectedJidsByDomain' => 'getConnectedJidsByDomain domain',
 	'getConnectedJids' => 'getConnectedJids',
 	'kickUserJid' => 'kickUserJid(userJid)',
+	'createPersistentRoom' => 'createPersistentRoom roomName domain',
+	'createRoom' => 'createRoom roomName domain',
+	'destroyRoom' => 'destroyRoom roomName domain',
+	'destroyAllRoomsByDomain' => 'destroyAllRoomsByDomain domain',
+	'destroyAllRooms' => 'destroyAllRooms',
+	'getAllJidsOfRoom' => 'getAllJidsOfRoom roomName domain',
+	'getAffiliationsOfRoom' => 'getAffiliationsOfRoom roomName domain',
+	'setJidAffiliationOfRoom' => 'setJidAffiliationOfRoom roomName domain jid affiliation (affiliation value: owner/admin/member/outcast/none)',
+	'printAllRoomsByDomain' => 'printAllRoomsByDomain domain',
+	'printAllRooms' => 'printAllRooms',
 	'help' => 'help',
 }
 
@@ -546,7 +568,115 @@ end
 
 
 
+#########################
+#MUC Methods (Multi-user-chat)
+#########################
 
+$muc_host = "conference"
+
+def printAllRoomsByDomain(domain)
+	if(domain=="all")
+		return printAllRooms
+	end
+	output = executeCommand("ejabberdctl muc_online_rooms " + domain)
+	return output;
+end
+
+def printAllRooms
+	output = executeCommand("ejabberdctl muc_online_rooms global")
+	return output;
+end
+
+def createPersistentRoom(roomName,domain)
+	createRoom(roomName,domain)
+	setRoomPersistence(roomName,domain,true)
+	return "Done"
+end
+
+def createRoom(roomName,domain)
+	executeCommand("ejabberdctl create_room " + roomName + " " + $muc_host + "." + domain + " " + domain)
+	return "Done"
+end
+
+def setRoomPersistence(roomName,domain,persistence)
+	if (persistence==true)
+		executeCommand("ejabberdctl change_room_option " + roomName + " " + $muc_host + "." + domain + " persistent true")
+	else
+		executeCommand("ejabberdctl change_room_option " + roomName + " " + $muc_host + "." + domain + " persistent false")
+	end
+end
+
+def destroyAllRoomsByDomain(domain)
+	rooms = getAllRoomsByDomain(domain)
+	rooms.each do |room|
+		destroyRoom(getNameFromRoom(room),getDomainFromRoom(room))
+	end
+	return "Done"
+end
+
+def destroyAllRooms()
+	return destroyAllRoomsByDomain("all")
+end
+
+def destroyRoom(roomName,domain)
+	executeCommand("ejabberdctl destroy_room " + roomName + " " + $muc_host + "." + domain + " " + domain)
+	return "Done"
+end
+
+def getAllRoomsByDomain(domain)
+	if(domain=="all")
+		output = executeCommand("ejabberdctl muc_online_rooms global")
+	else
+		output = executeCommand("ejabberdctl muc_online_rooms " + domain)
+	end
+	rooms = output.split("\n")
+	return rooms
+end
+
+def getAllJidsOfRoomObject(room)
+	return getAllJidsOfRoom(getNameFromRoom(room),getDomainFromRoom(room))
+end
+
+def getAllJidsOfRoom(roomName,domain)
+	jids = []
+	output = executeCommand("ejabberdctl get_room_occupants " + roomName + " " +  $muc_host + "." + domain)
+	lines = output.split("\n")
+	lines.each do |line|
+		jids << line.split("/")[0]
+	end
+	return jids
+end
+
+def getAffiliationsOfRoomObject(room)
+	return getAffiliationsOfRoom(getNameFromRoom(room),getDomainFromRoom(room))
+end
+
+def getAffiliationsOfRoom(roomName,domain)
+	affiliateds = []
+	output = executeCommand("ejabberdctl get_room_affiliations " + roomName + " " +  $muc_host + "." + domain)
+	lines = output.split("\n")
+	lines.each do |line|
+		split=line.split(" ");
+		jid = split[0]+"@"+split[1];
+		affiliation=split[2]
+		affiliateds << [jid,affiliation]
+	end
+	return affiliateds
+end
+
+#affiliation = Owner/Admin/Member/Outcast/None
+def setJidAffiliationOfRoom(roomName,domain,jid,affiliation)
+	output = executeCommand("ejabberdctl set_room_affiliation " + roomName + " " +  $muc_host + "." + domain + " " + jid + " " + affiliation)
+	return "Done"
+end
+
+def getDomainFromRoom(room)
+	return room.split(".")[1];
+end
+
+def getNameFromRoom(room)
+	return room.split("@")[0];
+end
 
 
 #########################
@@ -558,7 +688,7 @@ def executeCommand(command)
 	
 	if $verbose
 		#Logging...
-		#puts "Executing: " + command
+		puts "Executing: " + command
 		ejabberdLog("Executing (#{command})")
 	end
 

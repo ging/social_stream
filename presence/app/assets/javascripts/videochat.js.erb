@@ -3,7 +3,6 @@
 ////////////////////
 var opentok_apiKey = '<%=SocialStream::Presence.opentok_api_key%>';
 
-
 //Correspondence between slugs and session ids
 var slugOfSession = new Array();
 //slugOfSession['session_id'] = "slug";
@@ -11,7 +10,6 @@ var slugOfSession = new Array();
 ////////////////////
 //Videochat button actions
 ////////////////////
-
 function clickVideoChatButton(slug){
 	var videoBoxVisibility = toggleVideoBoxForSlug(slug);
 
@@ -27,7 +25,6 @@ function closeVideoChatWindow(slug){
     closeVideoSession(slug);
     return;
 }
-
 
 //Single variable for all slugs.
 var reconnectAttemptsVideo = 1;
@@ -87,7 +84,6 @@ function openVideoChatWindow(slug){
 }
 
 
-
 ////////////////////
 //Session establishment
 ////////////////////
@@ -133,7 +129,6 @@ function requestSessionIDAndTokenForVideoChat(slug){
 		contactsInfo[slug].videoChatStatus="disconnected";
   });
 }
-
 
 //VideoChat Session: Step 3
 function sendVideoChatRequestToUser(slug){
@@ -202,7 +197,6 @@ function closeVideoSession(slug){
 /////////////
 // Videochat interface functions
 ////////////
-
 function clientInfoReceivedTrigger(slug){
   //Check for videochat request
   if ((slug in contactsInfo)&&(contactsInfo[slug].videoChatStatus="negotiating")){
@@ -214,7 +208,6 @@ function showNotificationOnVideoBox(slug,msg){
 	setVideoBoxContent(slug,"<p class=\"video-info\"> " + msg +" </p>");
 }
 
-
 function updateInterfaceAfterVideoRequestReceived(slug){
 	
 	if (contactsInfo[slug].videoChatStatus!="disconnected"){
@@ -224,13 +217,8 @@ function updateInterfaceAfterVideoRequestReceived(slug){
 		contactsInfo[slug].videoChatStatus="pending";
 	}
 	
-  var jid = slug+"@"+contactsInfo[slug].domain
-	
-	//Show chatbox
-	if (createChatBox(slug, getNameFromSlug(slug), jid, user_name, user_jid)) {
-  } else {
-     getChatBoxForSlug(slug).chatbox("option", "boxManager").toggleBox(true);
-  };
+	//Show or create chatbox
+	createBuddyChatBox(slug);
 	
 	var chatBox = getChatBoxForSlug(slug);
 	
@@ -240,7 +228,6 @@ function updateInterfaceAfterVideoRequestReceived(slug){
 	//Show videobox
   toggleVideoBoxForSlug(slug,true);
 }
-
 
 function showInvitationInVideoBox(slug){
 	var title = "<p class=\"video-info\">" + I18n.t("chat.videochat.call", {name: getNameFromSlug(slug)}) + " </p>";
@@ -337,17 +324,16 @@ function clickVideoChangeChatButton(slug){
 	togglePublisherDivOnVideoChat(slug);
 }
 
+
+
 ////////////////
 /// Tokbox management
 ////////////////
-
 var OPENTOK_PUBLISHER_WIDTH = 235;
 var OPENTOK_PUBLISHER_HEIGHT = 145;
 
 var OPENTOK_SUBSCRIBER_WIDTH = 235;
 var OPENTOK_SUBSCRIBER_HEIGHT = 145;
-
-
 
 function initVideoCallWith(slug){
 	if (TB.checkSystemRequirements() != TB.HAS_REQUIREMENTS) {
@@ -364,7 +350,6 @@ function initVideoCallWith(slug){
   	slugOfSession[contactsInfo[slug].session_id] = slug;
   }
 }
-
 
 function sessionConnectedHandler(event) {
 	if (event.target.sessionId in slugOfSession){
@@ -400,7 +385,6 @@ function sessionConnectedHandler(event) {
 	}
 }   
  
- 
 function sessionDisconnectedHandler(event) {
 	// This signals that the user was disconnected from the Session. Any subscribers and publishers
   // will automatically be removed. This default behaviour can be prevented using event.preventDefault()
@@ -410,7 +394,6 @@ function sessionDisconnectedHandler(event) {
 	contactsInfo[slug].videoChatStatus="disconnected";
 }
 
- 
 function streamCreatedHandler(event) {
 		var slug = slugOfSession[event.target.sessionId];
 		subscribeToStreams(event.streams,slug);
@@ -420,10 +403,8 @@ function streamDestroyedHandler(event) {
       // This signals that a stream was destroyed. Any Subscribers will automatically be removed.
       // This default behaviour can be prevented using event.preventDefault()
 			var slug = slugOfSession[event.target.sessionId];
-			log("streamDestroyedHandler: se destruyo el stream de " + slug)
 			closeVideoSession(slug);
 }
- 
  
 function subscribeToStreams(streams,slug) {
 	var session = contactsInfo[slug].session
@@ -451,7 +432,6 @@ function subscribeToStreams(streams,slug) {
     session.subscribe(streams[i], stubDiv.id, subscriberProps);
   }
 }
-
 
 function accessAllowed(event){
   var slug = event.target.replacedDivId.split("&")[1];

@@ -43,3 +43,11 @@ en:
       offline: "Unable to connect. You are offline"
       cancel: "{{name}} cancel the videocall"
       requirements: You don't have the minimum requirements to run videocall application. Please upgrade to the latest version of Flash.
+    muc:
+      group: "{{group}} group"
+      join: "{{nick}} joined in the room."
+      leave: "{{nick}} has left the room."
+      occupants: "Occupants"
+      joining: "Joining..."
+      joinError: "You can't join in the room"
+      offline: "You are offline"

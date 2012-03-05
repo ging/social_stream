@@ -80,9 +80,10 @@
   //Global variables
   var cookie = "AuthenticationByCookie>>" + "<%=cookies[Rails.application.config.session_options[:key]]%>";
 	var BOSH_SERVICE = '<%= SocialStream::Presence.bosh_service || root_url + "http-bind/" %>';
-  var user_name = '<%=current_user.name%>';
+	var user_name = '<%=current_user.name%>';
   var user_slug = '<%=current_user.slug%>';
   var user_jid = '<%=current_user.slug%>'+"@"+domain;
+	
 
 
   $(document).ready(function () {
@@ -110,7 +111,7 @@
   
 </script>
 
-<% if flow %>
+<% if defined?(flow)!=nil and flow %>
   <script type="text/javascript">
 	  $(document).ready(function () {
 		  createMainChatBox();
@@ -118,6 +119,13 @@
 			$("#chat_wrapper").find("#chat_partial").remove();
 		});
 	</script>
+<% end %>
+
+
+<% if defined?(group)!=nil and group %>
+  <script type="text/javascript">
+  	var current_group_slug = '<%=group.slug%>';
+  </script>
 <% end %>
 
 

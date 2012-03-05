@@ -1,8 +1,6 @@
-var global;
 ////////////////////
 //Reconnect button interface functions
 ////////////////////
-
 var connectButtonTimer;
 var periodBetweenAttempts=15; //(seg)
 var connectButtonTimerCounter=periodBetweenAttempts+1;
@@ -38,10 +36,8 @@ function changeChatHeaderTitle(msg){
 ////////////////////
 //Chat interface: Setting Functions
 ////////////////////
-
 var focusSearchContactsFlag=false;
 var changeSelectContactValueFlag = false;
-
 
 function settingStatusSelector(){
   //JQuery DropdwanStatus 
@@ -81,18 +77,11 @@ function settingStatusSelector(){
   });
 }
 
-
 function settingChatBoxFunctions(){
 	
   $("div.user_presence").click(function(event, ui){
-    var guest_name = $(this).attr("name");
     var guest_slug = $(this).attr("slug");
-    var guest_jid = guest_slug + "@" + domain;
-    
-    if (createChatBox(guest_slug, guest_name, guest_jid, user_name, user_jid)) {
-    } else {
-      getChatBoxForSlug(guest_slug).chatbox("option", "boxManager").toggleBox(true);
-    };
+    createBuddyChatBox(guest_slug)
   });
   
   //Hide tooltips on mouseleave
@@ -161,18 +150,11 @@ function setAllUserFunctions(){
   settingTooltips();
 }
 
-
 function changeSelectContactValue(name,valueSelectedInSearchContacts){
 
 	if((valueSelectedInSearchContacts != "ZERO_CONTACTS")&&(valueSelectedInSearchContacts != "")){
 		var guest_slug = valueSelectedInSearchContacts;
-    var guest_name = getNameFromSlug(guest_slug);
-    var guest_jid = guest_slug + "@" + domain;
-  
-	  if (createChatBox(guest_slug, guest_name, guest_jid, user_name, user_jid)) {
-	  } else {
-	    window[getChatVariableFromSlug(guest_slug)].chatbox("option", "boxManager").toggleBox(true);
-	  };
+	  createBuddyChatBox(guest_slug)
   
 	  //Check for online status and show notification
 	  if (! isSlugChatConnected(guest_slug)) {
@@ -183,7 +165,6 @@ function changeSelectContactValue(name,valueSelectedInSearchContacts){
 	$("#chat_partial #search_chat_contact_flexselect").blur();
 	changeContactListVisibility(false);
 }
-
 
 function changeContactListVisibility(visible){
   var nItems = getAllSlugsLength();
@@ -201,7 +182,6 @@ function changeContactListVisibility(visible){
 			$(".users_connected").show();
   }
 }
-
 
 function setStatusWidgetTitle(status){
   
@@ -279,7 +259,7 @@ function updateChatWindow(){
 		updateConnectedUsersOfMainChatBox();
 		return;
 	}
-	 
+
   $.post("/chatWindow", { }, function(data){	
 		  //Prevent tooltips
       $(".tooltip").hide() 
@@ -293,13 +273,21 @@ function updateChatWindow(){
           afterNewConnectionFlag = false;
 					if(afterFirstConnectionFlag){
 						restoreChatData();
+						if(typeof current_group_slug != 'undefined') {
+							accessRoom(current_group_slug,false);
+						}
 						afterFirstConnectionFlag = false;
 					} else {
 						updateAllNotifications();
+						//Rejoin rooms
+						$.each(getAllSlugsWithVisibleGroupBoxes(), function(index, value) {
+					    accessRoom(value,$(value).is(":visible"))
+					  });
 					}
         }
       }
-  });
+  },'html');
+	
 }
 
 
@@ -341,7 +329,6 @@ function loadDisconnectionDiv(){
   }
 }
 
-
 function loadWidgetsDiv(data){
   $("#chat_partial").html(modifyChatPartialIfMainBox($("#chat_widgets").html()));
   $("#chat_partial").append(data);
@@ -357,7 +344,13 @@ function fillSearchContactSelect(){
   });
 }
 
-
+function updateInterfaceAfterUserDisconnect(){
+  updateNotificationsAfterUserDisconnect();
+  $.each(getAllSlugsWithVisibleVideoBoxes(), function(index, value) {
+    closeVideoSession(value);
+  });
+	
+}
 
 /////////////////////
 // Connection Box Management
@@ -436,7 +429,7 @@ function isSlugChatConnected(slug){
 }
 
 function existsSlugChatBox(slug){
-	return getConnectionBoxFromSlug(slug)!=null;
+	return getChatBoxForSlug(slug)!=null;
 }
 
 function getConnectedSlugsLength(){
@@ -485,36 +478,33 @@ function getAllSlugsByChatConnectedState(){
 //Insert received message in chatbox
 ////////////////////
 
-function putReceivedMessageOnChatWindow(from_jid,from_slug,body,msgID){
-  
+function afterReceivedChatMessage(from_slug,msg,msgID){
   //Antiflood control
-   if (antifloodControl(from_jid,from_slug,body,msgID)){
+  if (antifloodControl(from_slug,msg,msgID)){
     return;
-   }
-  
-  //Check slugs connectionBox
-  if (!existsSlugChatBox(from_slug)) {
-    //No connectionBox for this user!
-    var from_name = getNameFromSlug(from_slug);
-		if(! isAdminSlug(from_slug)){
-      updateChatWindow();
-    }
-  } else {
-		var from_name = $('div.user_presence[slug=' + from_slug + ']').attr('name');
-	}
-
-  //Create or toggle from_slug's chatBox.
-  if (createChatBox(from_slug, from_name, from_jid, user_name, user_jid)) {
-  } else {
-    window[getChatVariableFromSlug(from_slug)].chatbox("option", "boxManager").toggleBox(true);
   }
-  
+	var from_name = getNameFromSlug(from_slug)
+  createBuddyChatBox(from_slug)
+  writeReceivedMessageOnChatWindow(from_name,from_slug,msg)
+}
+
+function afterReceivedGroupChatMessage(room_nick_jid,msg){
+	var from_slug = getSlugFromJid(room_nick_jid)
+  var from_name = getNickFromChatRoomJid(room_nick_jid)
+	
+	if(!(existsSlugChatBox(from_slug))){
+		createGroupChatBox(from_slug,true)
+	}
+  writeReceivedMessageOnChatWindow(from_name,from_slug,msg)
+}
+
+function writeReceivedMessageOnChatWindow(from_name,from_slug,msg){
   //Parse content before show it.
-  var content = getParsedContent(Strophe.getText(body), false)
+  var content = getParsedContent(msg, false)
   var headerMessage = getParsedName(from_name,false);
   
-  //Show message to chatBox.        
-  $("#" + from_slug).chatbox("option", "boxManager").addMsg(headerMessage, content);
+  //Write message in chatBox.        
+  getChatBoxForSlug(from_slug).chatbox("option", "boxManager").addMsg(headerMessage, content);
   
   //Rotate chatBoxes priority.
   rotatePriority(from_slug);
@@ -523,89 +513,9 @@ function putReceivedMessageOnChatWindow(from_jid,from_slug,body,msgID){
   blinkTitleOnMessage(from_name);
   
   //Check for play sound
-  if (mustPlaySoundForChatWindow(window[getChatVariableFromSlug(from_slug)])) {
+  if (mustPlaySoundForChatWindow(getChatBoxForSlug(from_slug))) {
     playSound("onMessageAudio");
-  }
-  
-}
-
-
-////////////////////
-//Notifications on chat Window
-////////////////////
-
-function showChatNotification(notification,type,msg){
-  notification.html("<p notification_type=\"" + type + "\" class=\"ui-chatbox-notify-text\">" + msg + "</p>");
-  notification.css("display","block");
-	notification.css("visibility","visible");
-  notification.fadeIn();
-}
-
-function showChatNotificationForSlug(slug,type,msg){
-  var notification = $("#" + slug).parent().find("div.ui-chatbox-notify");
-	if(notification.length==1){
-		showChatNotification(notification,type,msg);
-	}
-}
-
-function showOfflineChatNotificationForSlug(slug){
-		var msg = I18n.t("chat.notify.guestOffline", {name: getNameFromSlug(slug)});
-    showChatNotificationForSlug(slug,"guestOffline",msg);
-}
-
-function showVideoChatNotificationForSlug(slug,msg){
-  showChatNotificationForSlug(slug,"videochat",msg);
-}
-
-function showVideoChatNotificationForSlugClientIssue(slug){
-	var msg = I18n.t("chat.notify.videochat.clientIssue", {name: getNameFromSlug(slug)});
-  showVideoChatNotificationForSlug(slug,msg);
-}
-
-function showVideoChatNotificationForSlugClientOffline(slug){
-  var msg = I18n.t("chat.notify.videochat.offline", {name: getNameFromSlug(slug)});
-  showVideoChatNotificationForSlug(slug,msg);
-}
-
-function hideChatNotification(notification){
-  notification.fadeOut();
-  notification.css("display","none");
-	notification.css("visibility","hidden");
-}
-
-function hideChatNotificationForSlug(slug){
-  var notification = $("#" + slug).parent().find("div.ui-chatbox-notify");
-  hideChatNotification(notification);
-}
-
-function updateInterfaceAfterUsersDisconnect(){
-  updateNotificationsAfterUserDisconnect();
-	$.each(getAllSlugsWithVisibleVideoBoxes(), function(index, value) {
-    closeVideoSession(value);
-  });
-}
-
-function updateNotificationsAfterUserDisconnect(){
-	var notification = $("div.ui-chatbox-notify");
-  var msg = I18n.t('chat.notify.offline');
-  showChatNotification(notification,"userOffline",msg);
-}
-
-function hideAllNotifications(){
-  var notification = $("div.ui-chatbox-notify");
-  hideChatNotification(notification);
-}
-
-function updateAllNotifications(){
-	hideAllNotifications();
-	if(disconnectionFlag){
-		updateNotificationsAfterUserDisconnect();
-	} else {
-		//Notification for offline contacts
-		$.each(getAllDisconnectedSlugsWithChatBoxes(), function(index, value) {
-			showOfflineChatNotificationForSlug(value)
-    }); 
-	}
+  } 
 }
 
 

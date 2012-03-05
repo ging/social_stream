@@ -33,7 +33,7 @@ statusIcons['away'] = "away";
 statusIcons['xa'] = "away";
 statusIcons['dnd'] = "dnd";
 
-//Contact information
+//Contacts information
 var contactsInfo = new Array();
 //contactsInfo['slug'] = "[Object chatContact]";
 
@@ -43,6 +43,8 @@ function chatContact(domain,resource,client,version) {
   this.resource=resource
   this.client=client;
 	this.version=version;
+	
+	//Videochat params
 	//Sender: disconnected, negotiating , connecting , waiting, establishing, connected
 	//Receiver: disconnected , pending , establishing, connected
 	this.videoChatStatus = "disconnected";
@@ -53,12 +55,26 @@ function chatContact(domain,resource,client,version) {
 	this.publisher=null;
 } 
 
+//Rooms information
+var roomsInfo = new Array();
+//roomsInfo['groupSlug'] = "[Object chatRoom]";
+
+//Manage room information
+function chatRoom() {
+  this.occupants=[];
+	this.joined = false;
+	this.affiliation = "none";
+	this.role = "none";
+} 
+
 
 //IQsIDs
 var iqStanzaID = new Array();
 iqStanzaID['cinfo'] = "versionID";
 iqStanzaID['videochatRequest'] = "videochatRequestID";
 iqStanzaID['videochatRequestCancel'] = "videochatRequestCancelID";
+
+
 
 ////////////////////
 //Connect functions
@@ -67,7 +83,6 @@ iqStanzaID['videochatRequestCancel'] = "videochatRequestCancelID";
 function connectToChat(user_jid,cookie,password){
 	
 	if (isUserConnected()){
-		log("USer already connected")
     return true;
   } 
 		
@@ -81,7 +96,6 @@ function connectToChat(user_jid,cookie,password){
     }
   }       
 }
-
 
 function isStropheConnected(){
   if((strophe_connection!=null)&&(strophe_connection.connected)){
@@ -105,7 +119,6 @@ function connectToServerWithCookie(user_jid, cookie){
     }
 		return true;
 }
-
 
 //Password: Get from chatPassword param if exists, instead try to get from sessionStorage.
 function connectToServerWithPassword(user_jid, chatPassword){
@@ -224,7 +237,8 @@ function onConnect(status) {
     log('Strophe is disconnected.');
     disconnectionFlag = true;
     clearTimeout(awayTimer);
-    updateInterfaceAfterUsersDisconnect();
+    updateInterfaceAfterUserDisconnect();
+		updateRoomsInfoAfterUserDisconnect();
     reconnectTimer = setTimeout ("onReconnect()", 5000);
   } else if (status == Strophe.Status.CONNECTED) {
     //AFTER CONNECT ACTIONS
@@ -234,7 +248,8 @@ function onConnect(status) {
     clearTimeout(reconnectTimer);
 		
     //addHandler:(callback, namespace to match, stanza name, stanza type, stanza id , stanza from, options)
-    strophe_connection.addHandler(onMessage, null, 'message', null, null,  null);
+    strophe_connection.addHandler(onMessage, null, 'message', 'chat', null,  null);
+		strophe_connection.addHandler(onRoomMessage, null, 'message', 'groupchat', null,  null);
     strophe_connection.addHandler(onPresence, null, 'presence', null, null,  null); 
 		strophe_connection.addHandler(onIQStanza,null, "iq", null, null);
 
@@ -274,7 +289,6 @@ function onReconnect(){
   }
 }
 
-
 function disconnectStrophe(){
   userStatus = "offline";
   setStatusWidgetTitle("offline");
@@ -289,18 +303,24 @@ function disconnectStrophe(){
 ////////
 //Manage Message stanzas
 ///////
+
+//Chat messages handler
 function onMessage(msg) {
-    var to = msg.getAttribute('to');
     var from = msg.getAttribute('from');
     var type = msg.getAttribute('type');
     var elems = msg.getElementsByTagName('body');
 
     if (type == "chat" && elems.length > 0) {
       var body = elems[0];
-      var from_slug = from.split("@")[0];
-      var from_jid = from_slug + "@" + domain;
-    
-      putReceivedMessageOnChatWindow(from_jid,from_slug,body,null)  
+			var msg = Strophe.getText(body);
+			var from_slug = getSlugFromJid(from)
+			
+			if(isChatRoomJid(from)){
+				return
+			} else {     
+        var from_slug = getSlugFromJid(from)
+        afterReceivedChatMessage(from_slug,msg,null)
+			}
     }
 
     // we must return true to keep the handler alive.  
@@ -313,35 +333,38 @@ function onMessage(msg) {
 //Manage Presence stanzas
 ///////
 function onPresence(presence) {
-	
-	  log(presence)
-	
-    //Check presence stanza type
-    var ptype = $(presence).attr('type');
-        
-    switch (ptype){
-      case undefined:
-       processAvailablePresenceStanza(presence)
-       break;
-      case "available":
-        processAvailablePresenceStanza(presence)
-        break;
-      case "unavailable":
-        processUnavailablePresenceStanza(presence)
-        break;
-      default : 
-        //Stanza type not recognize
-        processAvailablePresenceStanza(presence)
-    }
-          
-  return true;
-} 
+  if (isChatRoomJid($(presence).attr('from'))){
+    return onRoomPresence(presence);
+  } else {
+		return onBuddyPresence(presence);
+	}
+}
 
+function onBuddyPresence(presence){
+  var ptype = $(presence).attr('type');
+      
+  switch (ptype){
+    case undefined:
+     processAvailablePresenceStanza(presence)
+     break;
+    case "available":
+      processAvailablePresenceStanza(presence)
+      break;
+    case "unavailable":
+      processUnavailablePresenceStanza(presence)
+      break;
+    default : 
+      //Stanza type not recognize
+      processAvailablePresenceStanza(presence)
+  }
+	
+	return true;
+}
 
 function processAvailablePresenceStanza(presence){
   var from = $(presence).attr('from');
   var slug = from.split("@")[0];
-  
+	
   if (slug != user_slug) {
 		storeContactInformation(presence);
     if (getConnectionBoxFromSlug(slug)!=null){
@@ -359,7 +382,7 @@ function processAvailablePresenceStanza(presence){
 function processUnavailablePresenceStanza(presence){
   var from = $(presence).attr('from');
   var slug = from.split("@")[0];
-  
+	
   if (slug != user_slug) {
     if (getConnectionBoxFromSlug(slug)!=null){
 			updateInterfaceAfterPresenceStanza(slug,false)
@@ -383,6 +406,12 @@ function storeContactInformation(stanza){
 	}
 }
 
+function storeRoomInformation(roomName){
+  if (!(roomName in roomsInfo)) {
+    var room = new chatRoom();
+    roomsInfo[roomName]=room;
+  }
+}
 
 
 ////////
@@ -404,7 +433,7 @@ function onIQStanza(iq){
 	if(type=="get"){
 		return handleGetIQStanza(iq,from,slug);
 	} else if(type="result"){
-		return handleResultIQStanza(iq,from,slug)
+		return handleResultIQStanza(iq,from,slug);
 	}
 	
 	return true;
@@ -437,7 +466,7 @@ function handleGetIQStanza(iq,jid,slug){
 	
 	//Case 2: Request videochat
 	if(iqID==iqStanzaID['videochatRequest']){
-		handleGetVideochatIQStanza(jid,iqID,iq,slug)
+		handleGetVideochatIQStanza(jid,iqID,iq,slug);
 		return true;
 	}
 	
@@ -446,8 +475,6 @@ function handleGetIQStanza(iq,jid,slug){
 
   return true;
 }
-
-
 
 function handleGetVideochatIQStanza(jid,iqID,iq,slug){
 	storeContactInformation(iq);
@@ -476,7 +503,6 @@ function handleGetVideochatIQStanza(jid,iqID,iq,slug){
 ///////
 function handleResultIQStanza(iq,jid,slug){
   var iqID = iq.getAttribute("id");
-	
 	
 	if (iqID==iqStanzaID['cinfo']){
     return handleIQResultWithClientInfo(iq,slug);
@@ -588,7 +614,6 @@ function sendIQStanzaToRequestVideochat(slug){
 }
 
 
-
 ///////
 //SEND STANZAS: RESULT
 ///////
@@ -636,11 +661,24 @@ function sendIQStanzaToCancelVideochat(slug){
 }
 
 
-
 ////////
 //Send Message stanzas
 ///////
-function sendChatMessage(from,to,text){
+function sendChatMessage(guest_slug,msg){
+	rotatePriority(guest_slug);
+	if (isSlugGroup(guest_slug)){
+		var guest_jid = getRoomJidFromRoomName(guest_slug)
+		return sendGroupMessageToRoom(guest_jid,msg);
+	} else {
+		var headerMessage = getParsedName(user_name,true);                               
+    getChatBoxForSlug(guest_slug).chatbox("option", "boxManager").addMsg(headerMessage, getParsedContent(msg,true));
+		var guest_jid = getJidFromSlug(guest_slug)
+		return sendChatMessageToBuddy(guest_jid,msg);
+	}
+}
+
+function sendChatMessageToBuddy(to,text){
+	var from = user_jid
   var type = "chat";
   var body= $build("body");
   body.t(text);
@@ -673,13 +711,285 @@ function sendStatus(status){
 }
 
 
-
 ////////
 //MUC management
 ///////
 
+var muc_host = "conference";
+
 function joinRoom(roomName){
-  //domain
-	//stropne_connection.muc.init(stropne_connection)
-	//stropne_connection.muc.join(room, user_name, onMessage, onPresence, null, null)
+		return strophe_connection.muc.join(getRoomJidFromRoomName(roomName), getRoomNickFromUserName(), null, null, null, null)
+}
+
+function leaveRoom(roomName){
+  return strophe_connection.muc.leave(getRoomJidFromRoomName(roomName), getRoomNickFromUserName(), null, null) 
+}
+
+function sendGroupMessageToRoomWithName(roomName,msg){
+	return sendMessageToRoom(getRoomJidFromRoomName(roomName),msg)
+}
+
+function sendGroupMessageToRoom(roomJid,msg){
+  return strophe_connection.muc.message(roomJid, null, msg, null, "groupchat")
+}
+
+function sendPrivateMessageToRoomUser(roomName,userNick,msg){
+  return strophe_connection.muc.message(getRoomJidFromRoomName(roomName), userNick, msg, null, "chat")
+}
+
+function queryChatRoomOccupants(roomName){
+	return strophe_connection.muc.queryOccupants(getRoomJidFromRoomName(roomName), queryChatRoomOccupantsSuccess, queryChatRoomOccupantsFail)
+}
+
+function queryChatRoomOccupantsSuccess(iqResponse){
+  handleIQResultFromMucOccupantsRequest(iqResponse);
+	return true;
+}
+
+function queryChatRoomOccupantsFail(){
+	//log("queryChatRoomOccupantsFail")
+  return true;
+}
+
+function handleIQResultFromMucOccupantsRequest(iq){
+	var from = $(iq).attr('from');
+  var room_slug = getSlugFromJid(from)
+	var queryTag = iq.getElementsByTagName('query');
+  
+  if (queryTag.length > 0) {
+    var queryElement = queryTag[0];
+		var occupants = queryElement.getElementsByTagName('item');
+		$.each(occupants, function(index, value) {
+			//List all occupants
+			var nick = $(value).attr("name");
+			if(roomsInfo[room_slug].occupants.indexOf(nick)==-1){
+				roomsInfo[room_slug].occupants.push(nick)
+			}
+    });
+  }
+}
+
+function accessRoom(roomName,open){
+	storeRoomInformation(roomName)
+	if(roomsInfo[roomName].joined==false){
+		joinRoom(roomName)
+		queryChatRoomOccupants(roomName)
+	}
+	if(!existsSlugChatBox(roomName)){
+		createGroupChatBox(roomName,open)
+	}
+	return true
+}
+
+function updateRoomsInfoAfterUserDisconnect(){
+  $.each(getAllSlugsWithVisibleGroupBoxes(), function(index, value) {
+    storeRoomInformation(value)
+		var room = new chatRoom();
+    roomsInfo[value]=room;
+		initialNotificationInGroup(value,I18n.t('chat.muc.offline'))
+  });
+}
+
+function getRoomJidFromRoomName(roomName){
+  return roomName + "@" + muc_host + "." + domain;
+}
+
+function getRoomNickFromUserName(){
+	return user_name.split(" ")[0];
+}
+
+
+////////
+//MUC Stanzas
+///////
+
+//MUC Messages
+function onRoomMessage(msg) {
+	//from=roomSlug@conference.domain/from_slug
+  var from = msg.getAttribute('from');
+  var type = msg.getAttribute('type');
+  var elems = msg.getElementsByTagName('body');
+  
+  if (type == "groupchat" && elems.length > 0) {
+    var body = elems[0];
+		var user_nick = getNickFromChatRoomJid(from)
+	  var msg = Strophe.getText(body);
+		afterReceivedGroupChatMessage(from,msg)
+  }
+  return true;
+}
+
+
+//MUC Presence stanzas
+function onRoomPresence(presence) {
+	var from = $(presence).attr('from');
+	var to = $(presence).attr('to')
+  var nick = getNickFromChatRoomJid(from)
+	var ptype = $(presence).attr('type')
+	
+	//Join or Leave room stanzas of self user
+	if((nick == getRoomNickFromUserName())&&(getSlugFromJid(to) == user_slug)){
+	  switch (ptype){
+	    case undefined:
+	      processJoinRoomPresenceStanza(presence);
+	      break;
+	    case "available":
+	      processJoinRoomPresenceStanza(presence);
+	      break;
+	    case "unavailable":
+	      processLeaveRoomPresenceStanza(presence);
+	      break;
+	   }
+		return true;
+  }
+	
+	
+	//Rest of stanzas
+	switch (ptype){
+	 	case undefined:
+		  processAvailableRoomPresenceStanza(presence)
+      break;
+    case "available":
+		  processAvailableRoomPresenceStanza(presence)
+      break;
+    case "unavailable":
+		  processUnavailableRoomPresenceStanza(presence)
+      break;
+    default : 
+      //Stanza type not recognize
+      return true
+  }
+	
+  return true
+}
+
+
+function processJoinRoomPresenceStanza(presence){
+  var from = $(presence).attr('from');
+  var room_slug = getSlugFromJid(from);
+	storeRoomInformation(room_slug);
+	
+  var xElements = presence.getElementsByTagName('x');
+
+  if (xElements.length == 1) {
+    var xElement = xElements[0];
+    var items = xElement.getElementsByTagName('item');
+    
+    $.each(items, function(index, value) {
+			var role = $(value).attr("role")
+			var affiliation = $(value).attr("affiliation")
+			
+			roomsInfo[room_slug].affiliation = affiliation
+			roomsInfo[room_slug].role = role
+			if(roomsInfo[room_slug].joined == false){
+        roomsInfo[room_slug].joined = true
+        changeInitialNotificationInGroup(room_slug,I18n.t('chat.muc.occupants'))
+      }
+    });
+  }
+}
+
+function processLeaveRoomPresenceStanza(presence){
+  var from = $(presence).attr('from');
+  var room_slug = getSlugFromJid(from);
+  storeRoomInformation(room_slug);
+  roomsInfo[room_slug].affiliation = "none"
+  roomsInfo[room_slug].role = "none"
+	roomsInfo[room_slug].occupants = []
+  if(roomsInfo[room_slug].joined == true){
+    roomsInfo[room_slug].joined = false
+    changeInitialNotificationInGroup(room_slug,"")
+  }
+}
+
+function processAvailableRoomPresenceStanza(presence){
+	var from = $(presence).attr('from');
+	var nick = getNickFromChatRoomJid(from)
+  var room_slug = getSlugFromJid(from)
+	
+	storeRoomInformation(room_slug)
+	
+	if (roomsInfo[room_slug].occupants.indexOf(nick)==-1){
+		roomsInfo[room_slug].occupants.push(nick)
+		addNickToNotificationInGroup(room_slug,nick)
+    writeReceivedMessageOnChatWindow("",room_slug, I18n.t("chat.muc.join", {nick: nick}))
+	}
+}
+
+function processUnavailableRoomPresenceStanza(presence){
+	var from = $(presence).attr('from');
+	var nick = getNickFromChatRoomJid(from)
+  var room_slug = getSlugFromJid(from)
+  
+  storeRoomInformation(room_slug)
+  
+  if (roomsInfo[room_slug].occupants.indexOf(nick)!=-1){
+		roomsInfo[room_slug].occupants.splice(roomsInfo[room_slug].occupants.indexOf(nick),1)
+    removeNickFromNotificationInGroup(room_slug,nick)
+    writeReceivedMessageOnChatWindow("",room_slug,I18n.t("chat.muc.leave", {nick: nick}))
+  }
+}
+
+
+
+//////////////////
+// Getters
+//////////////////
+function getSlugFromJid(jid){
+	return jid.split("@")[0];
+}
+
+function getDomainFromJid(jid){
+  return jid.split("@")[1].split("/")[0];
+}
+
+function isChatRoomJid(jid){
+  if ((getDomainFromJid(jid).split(".")[0])==muc_host){
+    return true;
+  }
+  return false;
+}
+
+function getNameFromSlug(slug){
+	var connectionBox = getConnectionBoxFromSlug(slug);
+	
+	if(connectionBox!=null){
+		return $(connectionBox).attr("name");
+	}
+	
+	var chatBox = getChatBoxForSlug(slug)
+	if(chatBox!=null){
+    return chatBox.attr("name");
+  }	
+	
+	//return rebuildNameFromSlug(slug)
+	return slug;
+}
+
+function rebuildNameFromSlug(slug){
+	var cname = slug.split("-");
+  var name = "";
+  for(i=0; i<cname.length; i++){
+     if (i!=0){
+      name = name + " ";
+     }
+     name = name + cname[i][0].toUpperCase() + cname[i].substring(1,cname[i].length);
+  }
+  return name;
+}
+
+function getNameFromJid(){
+	return getNameFromSlug(getSlugFromJid(jid));
+}
+
+function getJidFromSlug(slug){
+	return slug + "@" + domain;
+}
+
+function getNickFromChatRoomJid(jid){
+	return jid.split("/")[1];
+}
+
+function purgeNickFromChatRoomJid(jid){
+	return jid.split("/")[0];
 }
