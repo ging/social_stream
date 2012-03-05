@@ -23,6 +23,7 @@
 	    offset: 0, // relative to right edge of the browser window
 	    width: 230, // width of the chatbox
 	    height: 400, // height of the chatbox
+	    groupBox: false, //if a group Chatbox?
 	    video: 0, // height of the videoBox
 	    messageSent: function(id, user, msg){
 		// override this
@@ -222,8 +223,7 @@
        'ui-chatbox-notify'
        )
     .click(function(event) {
-        // anything?
-        self.uiChatboxNotify.fadeOut();
+				onClickChatNotification(self.uiChatboxNotify)
     })
     .appendTo(uiChatboxContent),
 		
@@ -329,6 +329,9 @@
 				case "video":
             this._setVideo(value);
             break;
+			  case "groupBox":
+            this._setGroupBox(value);
+            break;
 				}
 	    }
 
@@ -344,6 +347,10 @@
 	
 	 _setHeight: function(height) {
       this.uiChatboxLog.height(height + "px");
+  },
+	
+	_setGroupBox: function(groupBox) {
+      this.uiChatboxLog.groupBox(groupBox);
   },
 	
 	_setVideo: function(videoHeight) {

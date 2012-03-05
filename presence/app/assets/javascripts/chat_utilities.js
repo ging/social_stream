@@ -2,18 +2,12 @@
 //Test functions
 ////////////////////
 
+var sspresence_debugging=true;
+
 function log(msg) {
-    //console.log(msg)
-}
-
-function simulate_new_user_connected(slug) {
-  var stanza_test = '<presence xmlns="jabber:client" from="' + slug + '@localhost/27825459741328802387991286" to="demo@localhost/2517285379132880233667729">'
-  onPresence(stanza_test);
-}
-
-function simulate_new_user_disconnected(slug) {
-  var stanza_test = '<presence xmlns="jabber:client" type="unavailable" from="' + slug + '@localhost/27825459741328802387991286" to="demo@localhost/2517285379132880233667729">'
-  onPresence(stanza_test);
+	  if(sspresence_debugging){
+			console.log(msg)
+		} 
 }
 
 
@@ -99,7 +93,7 @@ var timeBetweenMessages = 500; //mseconds
 
 //Return true when detects a text storm and control the text flood:
 //timeBetweenMessages is the minimum time that must elapse between the messages of the same contact.
-function antifloodControl(from_jid,from_slug,body,msgID) {
+function antifloodControl(from_slug,msg,msgID) {
 	
 	if( from_slug in lastMessageTimes){
 
@@ -116,7 +110,7 @@ function antifloodControl(from_jid,from_slug,body,msgID) {
   var t = (new Date()).getTime();
   if(t - lastMessageTime < timeBetweenMessages) {
 		        //Flood detected
-						return retryToShowMessage(from_jid,from_slug,body,msgID);
+						return retryToShowMessage(from_slug,msg,msgID);
   }
 	
 	//Check if is the first message of this user to be send.
@@ -128,7 +122,7 @@ function antifloodControl(from_jid,from_slug,body,msgID) {
 			lastMessageTimes[from_slug][1].splice(0,1);
 		} else {
 			//Message is not the first on the queue
-			return retryToShowMessage(from_jid,from_slug,body,msgID);
+			return retryToShowMessage(from_slug,msg,msgID);
 		}
 	}
 	
@@ -144,13 +138,13 @@ function generateMessageID(){
 }
 
 
-function retryToShowMessage(from_jid,from_slug,body,msgID){
+function retryToShowMessage(from_slug,msg,msgID){
 	//Enque the message if isn't in the queue
   if (lastMessageTimes[from_slug][1].indexOf(msgID)==-1){
     lastMessageTimes[from_slug][1].push(msgID);
   }
       
-  setTimeout(function(){putReceivedMessageOnChatWindow(from_jid,from_slug,body,msgID)}, timeBetweenMessages);
+  setTimeout(function(){afterReceivedChatMessage(from_slug,msg,msgID)}, timeBetweenMessages);
   return true;
 }
 
@@ -225,23 +219,6 @@ function mustBounceBoxForChatWindow(jqueryUIChatbox){
 
 function offlineDataSendControl(){
 	return ((!disconnectionFlag) && (isStropheConnected()));
-}
-
-
-////////////////////
-//Build name from slug
-////////////////////
-
-function getNameFromSlug(slug){
-	var cname = slug.split("-");
-  var name = "";
-  for(i=0; i<cname.length; i++){
-		 if (i!=0){
-		 	name = name + " ";
-		 }
-     name = name + cname[i][0].toUpperCase() + cname[i].substring(1,cname[i].length);
-  }
-	return name;
 }
 
 

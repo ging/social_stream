@@ -216,6 +216,7 @@ done
 msg "Copying Ejabberd modules"
 cp $installer_folder_path/mod_admin_extra/mod_admin_extra.beam $ejabberd_module_path
 cp $installer_folder_path/mod_sspresence/mod_sspresence.beam $ejabberd_module_path
+cp $installer_folder_path/mod_muc_admin/mod_muc_admin.beam $ejabberd_module_path
 
 msg "Copying scripts"
 cp -r $installer_folder_path/ejabberd_scripts/* $scripts_path

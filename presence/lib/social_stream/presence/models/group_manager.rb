@@ -19,7 +19,12 @@ module SocialStream
             return
           end 
           
-          SocialStream::Presence::XmppServerOrder::createPersistentRoom(self.slug,SocialStream::Presence.domain)
+          begin
+            SocialStream::Presence::XmppServerOrder::createPersistentRoom(self.slug,SocialStream::Presence.domain)
+          rescue Exception => e
+            logger.warn ("WARNING Exeception in Group Manager create_group_room: " + e.message)
+            puts ("WARNING Exeception in Group Manager create_group_room: " + e.message)
+          end
         end
         
         
@@ -33,7 +38,12 @@ module SocialStream
               return
             end
             
-            SocialStream::Presence::XmppServerOrder::destroyRoom(self.slug,SocialStream::Presence.domain)
+            begin
+              SocialStream::Presence::XmppServerOrder::destroyRoom(self.slug,SocialStream::Presence.domain)
+            rescue Exception => e 
+              logger.warn ("WARNING Exeception in Group Manager remove_group_room: " + e.message)
+              puts ("WARNING Exeception in Group Manager remove_group_room: " + e.message)
+            end
         end
       end
     end
