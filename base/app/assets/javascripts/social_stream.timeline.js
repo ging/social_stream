@@ -1,12 +1,12 @@
 SocialStream.Timeline = (function(SS, $, undefined){
-	var setupCallbacks = [];
+	var initCallbacks = [];
 
-	var addSetupCallback = function(callback){
-		setupCallbacks.push(callback);
+	var addInitCallback = function(callback){
+		initCallbacks.push(callback);
 	}
 
-	var setup = function(){
-		$.each(setupCallbacks, function(i, callback){ callback(); });
+	var init = function(){
+		$.each(initCallbacks, function(i, callback){ callback(); });
 	}
 
 	var setPrivacyTooltips = function(activityId) {
@@ -32,11 +32,11 @@ SocialStream.Timeline = (function(SS, $, undefined){
 		SS.Wall.unblockForms();
 	}
 
-	addSetupCallback(setPrivacyTooltips);
+	addInitCallback(setPrivacyTooltips);
 
 	return {
-		addSetupCallback: addSetupCallback,
-		setup: setup,
+		addInitCallback: addInitCallback,
+		init: init,
                 newActivity: newActivity
 	};
 }) (SocialStream, jQuery);

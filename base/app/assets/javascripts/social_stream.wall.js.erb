@@ -1,23 +1,23 @@
 //= require social_stream.timeline
 //
 SocialStream.Wall = (function(SS, $, undefined){
-	var setupCallbacks = [];
+	var initCallbacks = [];
 
-	var addSetupCallback = function(callback){
-		setupCallbacks.push(callback);
+	var addInitCallback = function(callback){
+		initCallbacks.push(callback);
 	}
 
-	var setup = function(){
-		$.each(setupCallbacks, function(i, callback){ callback(); });
+	var init = function(){
+		$.each(initCallbacks, function(i, callback){ callback(); });
 	}
 
-	var setupFirstForm = function(){
+	var initFirstForm = function(){
 		$('#wrapper_activities_header form').hide();
 		$('#new_<%= SocialStream.activity_forms.first %>').show();
 		$('#select_<%= SocialStream.activity_forms.first %>').addClass('selected');
 	}
 
-	var setupSecuritySelect = function(){
+	var initSecuritySelect = function(){
 		var default_security_width = '100px';
 
 		chosen = $('#security').security_chosen();
@@ -112,13 +112,13 @@ SocialStream.Wall = (function(SS, $, undefined){
           }); 
         }
 
-	addSetupCallback(setupFirstForm);
-	addSetupCallback(setupSecuritySelect);
-	addSetupCallback(activateAntiRebounds);
+	addInitCallback(initFirstForm);
+	addInitCallback(initSecuritySelect);
+	addInitCallback(activateAntiRebounds);
 
 	return {
-		addSetupCallback: addSetupCallback,
-                setup: setup,
+		addInitCallback: addInitCallback,
+                init: init,
                 activateAntiRebounds: activateAntiRebounds,
                 unblockForms: unblockForms  
 	};
