@@ -12,7 +12,7 @@ SocialStream.Events.Poster = (function(SS, $, undefined){
 			});
 	}
 
-	SS.Timeline.addSetupCallback(init);
+	SS.Timeline.addInitCallback(init);
 
 	return {
 		init: init
