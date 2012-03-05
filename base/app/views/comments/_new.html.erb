@@ -31,17 +31,3 @@
     </div>
   </div>
 <% end %>
-
-<%= javascript_tag do %>
-  $(function() {
-    $("#comment_text_<%= dom_id(activity) %>").Watermark("<%= I18n.t('comment.input') %>","#666");
- 
-    $("#comment_text_<%= dom_id(activity) %>")
-        .change(function(){autoSize("<%= dom_id(activity) %>");})
-        .keydown(function(){autoSize("<%= dom_id(activity) %>");})
-        .keyup(function(){autoSize("<%= dom_id(activity) %>");});
-    autoSize("<%= dom_id(activity) %>"); 
-
-    SocialStream.Wall.activateAntiRebounds();
-  });
-<% end %>
