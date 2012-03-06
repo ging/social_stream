@@ -1,0 +1,76 @@
+////////////////////
+//Multiplayer Games Core based on XMPP
+////////////////////
+
+PRESENCE.GAME = (function(P,$,undefined){
+  
+  //Gamecore variables  
+  var connection = null;
+	iqStanzaID['gameRequest'] = "gameRequestID";
+
+  var init = function(myConnection){
+    connection = myconnection;
+  };
+	
+	
+	var sendIQStanzaToRequestGame = function (slug,players,options){
+
+	  if (slug in contactsInfo) {
+	    var jid=slug+"@"+contactsInfo[slug].domain+"/"+contactsInfo[slug].resource;
+	    
+	    var iq = $iq({to: jid, type: "get", id: iqStanzaID['gameRequest']})
+	    .c("query", {xmlns: "urn:ietf:params:xml:ns:xmpp-stanzas"})
+			 .c("game", {name: "gameName"})
+			   .c("players", {})
+			     .c("player1").t("player1value").up()
+					 .c("player2").t("player2value").up()
+				 .c("options", {})
+           .c("options1").t("options1value").up()
+           .c("options2").t("options2value").up()
+	    strophe_connection.sendIQ(iq);
+	  }
+  };
+
+  //Getters
+  var getDummy = function(){
+    return param;
+  };
+
+
+  return {
+    init: init,
+		sendIQStanzaToRequestGame: sendIQStanzaToRequestGame,
+    getDummy: getDummy
+  };
+
+}) (PRESENCE, jQuery);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////
+//Interface Events
+////////////////////
+var global;
+
+function play(){
+	$(".chat-gamesthick").css("display","block");
+}
+
+function pickGamesButton(uiElement){
+  var slug = $(uiElement.element).attr("id");
+  //clickGamesButton(slug);
+	log("clickGamesButton(slug)" + slug)
+}
+
