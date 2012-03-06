@@ -40,7 +40,12 @@
 		    var self = this;
 		    var box = self.elem.uiChatboxLog;
 		    var e = document.createElement('div');
-		    $(e).html("<b>" + peer +":</b> " + msg)
+				if((peer==null)||($(peer).html()=="")){
+					var fContent = msg
+				} else {
+					var fContent = "<b>" + peer +":</b> " + msg
+				}
+		    $(e).html(fContent)
 			.addClass("ui-chatbox-msg");
 		    box.append(e);
 		    self._scrollToBottom();
@@ -207,6 +212,25 @@
       .addClass('ui-icon-newwin ' +  'chat-thick ' + ' chat-videoPublisherthick' )
       .text('')
       .appendTo(uiChatboxTitlebarVideoChange),
+			
+			
+			//Games Menu button
+      uiChatboxTitlebarGames = (self.uiChatboxTitlebarGames = $('<a href="#"></a>'))
+      .addClass('ui-corner-all ' + 
+        'ui-chatbox-icon' + ' ui-games-icon'
+       )
+      .attr('role', 'button')
+      .hover(function() {uiChatboxTitlebarGames.addClass('ui-state-hover');},
+           function() {uiChatboxTitlebarGames.removeClass('ui-state-hover');})
+      .click(function(event) {
+        pickGamesButton(self)
+        return false;
+      })
+      .appendTo(uiChatboxTitlebar),
+      uiChatboxTitlebarGamesText = $('<span></span>')
+      .addClass('ui-icon-star ' +  'chat-thick ' + ' chat-gamesthick' )
+      .text('')
+      .appendTo(uiChatboxTitlebarGames),
 			
 			
 			// content
