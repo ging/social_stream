@@ -49,5 +49,5 @@ en:
       leave: "{{nick}} has left the room."
       occupants: "Occupants"
       joining: "Joining..."
-      joinError: "You can't join in the room"
+      joinError: "You can't join in the room \n {{errorMsg}}"
       offline: "You are offline"
