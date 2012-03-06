@@ -184,7 +184,7 @@ module SocialStream
             groups = Group.all
 
             groups.each do |group|
-              commands << buildCommand("emanagement","createRoom",[group.slug,webDomain])
+              commands << buildCommand("emanagement","createPersistentRoom",[group.slug,webDomain])
             end
             
             executeCommands(commands)
