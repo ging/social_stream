@@ -49,5 +49,5 @@ es:
        leave: "{{nick}} se ha ido de la sala."
        occupants: "Miembros"
        joining: "Accediendo..."
-       joinError: "No se pudo acceder a la sala."
+       joinError: "No se pudo acceder a la sala.  \n {{errorMsg}}"
        offline: "Estás desconectado"

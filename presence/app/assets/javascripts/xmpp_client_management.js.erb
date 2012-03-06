@@ -65,7 +65,8 @@ function chatRoom() {
 	this.joined = false;
 	this.affiliation = "none";
 	this.role = "none";
-} 
+	this.nick = getBaseNickFromUserName();
+}
 
 
 //IQsIDs
@@ -316,7 +317,7 @@ function onMessage(msg) {
 			var from_slug = getSlugFromJid(from)
 			
 			if(isChatRoomJid(from)){
-				return
+				return true
 			} else {     
         var from_slug = getSlugFromJid(from)
         afterReceivedChatMessage(from_slug,msg,null)
@@ -718,11 +719,11 @@ function sendStatus(status){
 var muc_host = "conference";
 
 function joinRoom(roomName){
-		return strophe_connection.muc.join(getRoomJidFromRoomName(roomName), getRoomNickFromUserName(), null, null, null, null)
+		return strophe_connection.muc.join(getRoomJidFromRoomName(roomName), getRoomNickForRoom(roomName), null, null, null, null)
 }
 
 function leaveRoom(roomName){
-  return strophe_connection.muc.leave(getRoomJidFromRoomName(roomName), getRoomNickFromUserName(), null, null) 
+  return strophe_connection.muc.leave(getRoomJidFromRoomName(roomName), getRoomNickForRoom(roomName), null, null) 
 }
 
 function sendGroupMessageToRoomWithName(roomName,msg){
@@ -747,7 +748,6 @@ function queryChatRoomOccupantsSuccess(iqResponse){
 }
 
 function queryChatRoomOccupantsFail(){
-	//log("queryChatRoomOccupantsFail")
   return true;
 }
 
@@ -781,11 +781,15 @@ function accessRoom(roomName,open){
 	return true
 }
 
+function resetRoomConfig(roomName){
+	storeRoomInformation(roomName)
+	var room = new chatRoom()
+  roomsInfo[roomName]=room
+}
+
 function updateRoomsInfoAfterUserDisconnect(){
   $.each(getAllSlugsWithVisibleGroupBoxes(), function(index, value) {
-    storeRoomInformation(value)
-		var room = new chatRoom();
-    roomsInfo[value]=room;
+    resetRoomConfig(value)
 		initialNotificationInGroup(value,I18n.t('chat.muc.offline'))
   });
 }
@@ -794,8 +798,30 @@ function getRoomJidFromRoomName(roomName){
   return roomName + "@" + muc_host + "." + domain;
 }
 
-function getRoomNickFromUserName(){
+function getRoomNickForRoom(roomName){
+	if(roomName in roomsInfo){
+		return roomsInfo[roomName].nick;
+	} else {
+		return getBaseNickFromUserName();
+	}
+}
+
+function getBaseNickFromUserName(){
 	return user_name.split(" ")[0];
+}
+
+function changeRoomNickNameAndJoinAgain(roomName){
+	var old_nick = getRoomNickForRoom(roomName)
+	
+	if(old_nick.split("_").length > 4){
+		//Bucle prevention...
+		return false;
+	}
+	
+	storeRoomInformation(roomName)
+	roomsInfo[roomName].nick = old_nick + "_"
+	joinRoom(roomName)
+	return true;
 }
 
 
@@ -824,11 +850,12 @@ function onRoomMessage(msg) {
 function onRoomPresence(presence) {
 	var from = $(presence).attr('from');
 	var to = $(presence).attr('to')
+	var room_slug = getSlugFromJid(from);
   var nick = getNickFromChatRoomJid(from)
 	var ptype = $(presence).attr('type')
-	
+		
 	//Join or Leave room stanzas of self user
-	if((nick == getRoomNickFromUserName())&&(getSlugFromJid(to) == user_slug)){
+	if((nick == getRoomNickForRoom(room_slug))&&(getSlugFromJid(to) == user_slug)){
 	  switch (ptype){
 	    case undefined:
 	      processJoinRoomPresenceStanza(presence);
@@ -839,6 +866,9 @@ function onRoomPresence(presence) {
 	    case "unavailable":
 	      processLeaveRoomPresenceStanza(presence);
 	      break;
+			case "error":
+        processJoinErrorRoomPresenceStanza(presence);
+        break;
 	   }
 		return true;
   }
@@ -892,22 +922,51 @@ function processJoinRoomPresenceStanza(presence){
 function processLeaveRoomPresenceStanza(presence){
   var from = $(presence).attr('from');
   var room_slug = getSlugFromJid(from);
-  storeRoomInformation(room_slug);
-  roomsInfo[room_slug].affiliation = "none"
-  roomsInfo[room_slug].role = "none"
-	roomsInfo[room_slug].occupants = []
-  if(roomsInfo[room_slug].joined == true){
-    roomsInfo[room_slug].joined = false
-    changeInitialNotificationInGroup(room_slug,"")
+  resetRoomConfig(room_slug)
+  changeInitialNotificationInGroup(room_slug,"")
+}
+
+function processJoinErrorRoomPresenceStanza(presence){
+  var from = $(presence).attr('from')
+  var room_slug = getSlugFromJid(from)
+	var errorMsg = "Error";
+	
+  var eElements = presence.getElementsByTagName('error')
+  if (eElements.length == 1) {
+    var error = eElements[0];
+		var code = $(error).attr("code")
+		var type = $(error).attr("type")
+		errorMsg = errorMsg + " with code:" + code + " and type:" + type
+    var textElements = error.getElementsByTagName('text') 
+    if (textElements.length == 1) {
+		  var text = $(textElements[0]).text()
+			errorMsg = errorMsg + "\n" + text
+	  }
+		
+		//Try to fix errors!
+		if(code==409){
+			//Case: Nickname already in use
+			if (changeRoomNickNameAndJoinAgain(room_slug)){
+				return;
+			}
+		}
+		//if(code==403){
+      //Case: Auth Denied
+    //}
+
+		//[...]
+		
   }
+	
+	resetRoomConfig(room_slug)
+	initialNotificationInGroup(room_slug,I18n.t("chat.muc.joinError", {errorMsg: errorMsg}))
 }
 
 function processAvailableRoomPresenceStanza(presence){
 	var from = $(presence).attr('from');
 	var nick = getNickFromChatRoomJid(from)
   var room_slug = getSlugFromJid(from)
-	
-	storeRoomInformation(room_slug)
+	storeRoomInformation(room_slug);
 	
 	if (roomsInfo[room_slug].occupants.indexOf(nick)==-1){
 		roomsInfo[room_slug].occupants.push(nick)
@@ -920,9 +979,8 @@ function processUnavailableRoomPresenceStanza(presence){
 	var from = $(presence).attr('from');
 	var nick = getNickFromChatRoomJid(from)
   var room_slug = getSlugFromJid(from)
-  
-  storeRoomInformation(room_slug)
-  
+  storeRoomInformation(room_slug);
+	
   if (roomsInfo[room_slug].occupants.indexOf(nick)!=-1){
 		roomsInfo[room_slug].occupants.splice(roomsInfo[room_slug].occupants.indexOf(nick),1)
     removeNickFromNotificationInGroup(room_slug,nick)
