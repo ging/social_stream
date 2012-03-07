@@ -1,3 +1,5 @@
+//= require jquery.watermark
+//
 ////////////////////
 //Reconnect button interface functions
 ////////////////////
@@ -129,7 +131,7 @@ function settingSearchContactFunctions(){
     defaultmessage: I18n.t('chat.zerocontacts')
   });
 
-  $("#chat_partial #search_chat_contact_flexselect").Watermark(I18n.t('chat.search'),"#666");
+  $("#chat_partial #search_chat_contact_flexselect").watermark(I18n.t('chat.search'),"#666");
   
   //Select contact function
   //callback in changeSelectContactValue()

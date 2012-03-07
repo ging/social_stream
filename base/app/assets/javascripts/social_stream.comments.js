@@ -1,3 +1,5 @@
+//= require jquery.watermark
+//
 //= require social_stream.timeline
 //= require social_stream.objects
 
@@ -15,7 +17,7 @@ SocialStream.Comments = (function(SS, $, undefined){
 		$(".actor_name_new_comment").hide();
 		$(".actor_logo_new_comment").hide();
 
-		$(".input_new_comments").Watermark(I18n.t('comment.input'),"#666");
+		$(".input_new_comments").watermark(I18n.t('comment.input'),"#666");
 
 		$(".input_new_comments")
 			.change(function(){autoSize(this);})

@@ -48,7 +48,7 @@
   $("#center_body").css("width","782px");
   $("#center_body").css("max-width","782px");
   $("#content").css("width","782px");
-  $("#contacts_filter_input").Watermark("<%= escape_javascript(I18n.t('search.name')) %>");
+  $("#contacts_filter_input").watermark("<%= escape_javascript(I18n.t('search.name')) %>");
   //When clicking an unselected actor
   var unselected_actor_click = function(){
     var clone = $(this).clone();

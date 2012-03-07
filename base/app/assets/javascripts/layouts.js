@@ -1,6 +1,5 @@
 //= require hoverIntent
 //= require superfish
-//= require jquery.watermarkinput
 //
 $(function() {
     jQuery('ul.sf-menu').superfish({

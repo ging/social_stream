@@ -1,5 +1,7 @@
-//= require social_stream.timeline
+//= require jquery.watermark
 //
+//= require social_stream.timeline
+
 SocialStream.Wall = (function(SS, $, undefined){
   var initCallbacks = [];
 
@@ -21,6 +23,10 @@ SocialStream.Wall = (function(SS, $, undefined){
     $('#masterSubmitButton').click(function(){
       $('#wrapper_activities_header form:visible').submit();
     });
+  }
+
+  var initPostWatermark = function(){
+    $("#input_activities").watermark(I18n.t('post.input'), "#666");
   }
 
   var initFormSelector = function(){
@@ -129,6 +135,7 @@ SocialStream.Wall = (function(SS, $, undefined){
 
   addInitCallback(initFirstForm);
   addInitCallback(initFormButton);
+  addInitCallback(initPostWatermark );
   addInitCallback(initFormSelector);
   addInitCallback(initSecuritySelect);
   addInitCallback(activateAntiRebounds);

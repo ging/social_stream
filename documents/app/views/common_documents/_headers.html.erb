@@ -29,7 +29,7 @@ $(document).ready(function() {
   var last_search = "";
   
   
-  $("#repository_filter_input").Watermark("<%= escape_javascript(I18n.t('search.name')) %>");
+  $("#repository_filter_input").watermark("<%= escape_javascript(I18n.t('search.name')) %>");
 
   $("#repository_filter_input").keyup(function() {
     var searchstring = $(this).val();

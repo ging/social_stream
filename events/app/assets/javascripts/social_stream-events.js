@@ -1,3 +1,5 @@
+//= require jquery.watermark
+//
 //= require social_stream-base
 //
 //= require_self
