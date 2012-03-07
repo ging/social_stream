@@ -40,6 +40,11 @@
     <div class="title">
     <%= link_to event.title, event %>
     </div>
+
+    <div class="description">
+    <%= simple_format auto_link(event.description) %>
+    </div>
+
   </div>
 <% end %>
 
