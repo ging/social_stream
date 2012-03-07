@@ -6,21 +6,14 @@
     </div>
   <% end %>
   <div class="info">
-    <% if link.title %>
-      <div class="title">
-        <%= link.title %>
-        <%= hidden_field_tag "link[title]", link.title %>
-      </div>
-    <% end %>
-    <div class="url">
-      <%= auto_link(link.url) %>
+    <div class="title">
+      <%= text_field_tag "link[title]", link.title %>
     </div>
-    <% if link.description %>
-      <div class="description">
-        <%= auto_link(link.description) %>
-        <%= hidden_field_tag "link[description]", link.description %>
-      </div>
-    <% end %>
+
+    <div class="description">
+      <%= text_area_tag "link[description]", link.description %>
+    </div>
+
     <% if link.callback_url %>
         <%= hidden_field_tag "link[callback_url]", link.callback_url %>
     <% end %>

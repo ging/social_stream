@@ -47,7 +47,7 @@
 }
 .link .info{
   float: left;
-  width: 360px;
+  width: 350px;
   text-align: left;
 }
 .activity_objects .link .info{
@@ -61,7 +61,8 @@
   text-decoration: underline;
   margin-bottom: 5px;
 }
-.link .info .description{
+.link .info .description textarea {
+	height: 60px;
 }
 .link iframe{
   border: 0;

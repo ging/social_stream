@@ -1,25 +1,30 @@
-var SocialStream = SocialStream || {};
-SocialStream.Linkser = SocialStream.Linkser || {};
-SocialStream.Linkser.initiate = function() {
-  $.preloadImages("<%= asset_path('loading.gif') %>");
+//= require social_stream.wall
+
+SocialStream.Linkser.Wall = (function(SS, $) {
+  var regexp = /^(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&;:\/~+#-]*[\w@?^=%&;\/~+#-])?$/
+
   var urlDetect = function() {
     this.currentValue = $("#input_activities").val();
+
     if(this.lastValue == null)
       this.lastValue = "";
 
-    var regexp = /^(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&;:\/~+#-]*[\w@?^=%&;\/~+#-])?$/
     if(regexp.test($("#input_activities").val())) {
       $("#link_url").val($("#input_activities").val());
       $("#link_loaded").val(false);
       $("#new_post").attr("action", "/links");
+
       if(this.currentValue != this.lastValue) {
         $("#link_preview").html($('<img>').attr('src', '<%= asset_path('loading.gif') %>').addClass('loading'));
+
         this.lastValue = this.currentValue;
         var url = this.currentValue;
         var urlDetect = this;
+
         $.ajax({
           type : "GET",
           url : "/linkser_parse?url=" + url,
+          dataType: 'html',
           success : function(html) {
             if($("#input_activities").val() == url) {//Only show if input value is still the same
               $("#link_preview").html(html);
@@ -33,6 +38,7 @@ SocialStream.Linkser.initiate = function() {
           }
         });
       }
+
       $("#link_preview").show();
     } else {
       $("#new_post").attr("action", "/posts");
@@ -41,23 +47,36 @@ SocialStream.Linkser.initiate = function() {
       $("#link_url").val("");
     }
   }
-  if($("#new_post").length) {
-    $("#input_activities").change(urlDetect).keyup(urlDetect);
-    $("#new_post").append($('<input>').attr('type', 'hidden').attr('name', 'link[owner_id]').attr('id', 'link_owner_id').val($("#post_owner_id").val()));
-    $("#new_post").append($('<input>').attr('type', 'hidden').attr('name', 'link[url]').attr('id', 'link_url'));
-    $("#new_post").append($('<input>').attr('type', 'hidden').attr('name', 'link[loaded]').attr('id', 'link_loaded').val(false));
-    $("#new_post").append($('<div>').attr('id', 'link_preview').css('display', 'none'));
-  }
-}
 
-SocialStream.Linkser.openCallback = function(id,url,w,h){
+  var init = function(){
+    $.preloadImages("<%= asset_path('loading.gif') %>");
+
+    if($("#new_post").length) {
+      $("#input_activities").change(urlDetect).keyup(urlDetect);
+
+      $("#new_post").append($('<input>').attr('type', 'hidden').attr('name', 'link[owner_id]').attr('id', 'link_owner_id').val($("#post_owner_id").val()));
+      $("#new_post").append($('<input>').attr('type', 'hidden').attr('name', 'link[url]').attr('id', 'link_url'));
+      $("#new_post").append($('<input>').attr('type', 'hidden').attr('name', 'link[loaded]').attr('id', 'link_loaded').val(false));
+      $("#new_post").append($('<div>').attr('id', 'link_preview').css('display', 'none'));
+    }
+  }
+
+  var openCallback = function(id,url,w,h){
       var height='353';
+
       if(w>0 && h>0) {
           height=470*h/w;
       }
-      $("#" + id).html($('<iframe>').attr('src',url).attr('width','470').attr('height',height));
-}
 
-$(function(){
-  SocialStream.Linkser.initiate();
-});
+      $("#" + id).html($('<iframe>').attr('src',url).attr('width','470').attr('height',height));
+  }
+
+  SocialStream.Wall.addInitCallback(init);
+
+  return {
+    openCallback: openCallback
+  }
+
+})(SocialStream, jQuery);
+
+
