@@ -130,6 +130,18 @@ div.event_date {
   padding: 3px 0;
 }
 
+#new_event label {
+	float: left;
+	min-width: 60px;
+	text-align: right;
+	padding-right: 10px;
+}
+
+#new_event textarea {
+	height: 30px;
+	width: 200px;
+}
+
 #scheduler-options {
   padding: 2px 10px;
 }

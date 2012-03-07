@@ -21,6 +21,12 @@
     <%= f.text_field :title %>
   </div>
 
+  <div class="form_row">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+
   <% if profile_subject.rooms.any? %>
   <div class="form_row">
     <%= f.label :room %>
