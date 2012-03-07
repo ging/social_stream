@@ -1,3 +1,6 @@
+<%= render :partial => 'objects/show',
+           :locals  => { :object => document } %>
+
 <% profile_subject ||= document.owner_subject %>
 
 <% content_for :title do %>
@@ -16,8 +19,6 @@
   link_to(t('repository.title'), polymorphic_path([profile_subject, controller.controller_name]),:remote => true)
   ) %>
 <%end%>
-
-<% toolbar :profile => profile_subject %>
 
 <br class="clearfloat" />
 <div class="space_center"></div>

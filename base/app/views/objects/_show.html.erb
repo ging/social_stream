@@ -1,7 +1,5 @@
 <% toolbar :profile => object.owner_subject %>
 
-<%= render object.post_activity %>
-
 <%= javascript_tag do %>
   $(function() {
     SocialStream.Objects.init();
