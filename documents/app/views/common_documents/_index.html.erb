@@ -39,6 +39,9 @@
 </div>
 <%= javascript_tag do %>
 $(document).ready(function(){
+
+  SocialStream.Repository.init();
+
   $('#<%= dom_id(document)%> .attachment_tile_tipsy a').tipsy({
     delayIn: 0,   
     delayOut: 1000, 

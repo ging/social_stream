@@ -5,10 +5,10 @@
     </div>
   <% end %>
   <div id="actions">
-    <%= link_to content_tag(:span,image_tag("btn/btn_write.png") + t('document.actions.details'), :class => :action, :id => :document_details_action), "javascript:toggleDocumentMenu('details');" %>
+    <%= link_to content_tag(:span,image_tag("btn/btn_write.png") + t('document.actions.details'), :class => :action, :id => :document_details_action), "javascript:SocialStream.Repository.toggleDocumentMenu('details');" %>
     <%= link_to content_tag(:span,image_tag("btn/download.png") + t('document.actions.download'), :class => :action), download_document_path(document) %>
     <% if document.post_activity.edit_object_by?(current_subject) %>
-    <%= link_to content_tag(:span,image_tag("btn/edit.png") + t('document.actions.edit'), :class => :action, :id => :document_edit_action), "javascript:toggleDocumentMenu('edit');" %>
+    <%= link_to content_tag(:span,image_tag("btn/edit.png") + t('document.actions.edit'), :class => :action, :id => :document_edit_action), "javascript:SocialStream.Repository.toggleDocumentMenu('edit');" %>
     <% end %>
     <% if document.post_activity.delete_object_by?(current_subject) %>
     <%= link_to content_tag(:span,image_tag("btn/error.png") + t('document.actions.delete'), :class => :action), document.post_activity.direct_object , :confirm => t('confirm_delete',
