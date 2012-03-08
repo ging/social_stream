@@ -1,9 +1,8 @@
 //= require social_stream.timeline
-//= require social_stream.objects
 
 SocialStream.Video = (function(SS, $, undefined){
   var initJplayer = function(){
-    $(".jp-jplayer").each(function() {
+    $(".jp-video .jp-jplayer").each(function() {
       $(this).jPlayer({
         ready: function () {
           $(this).jPlayer("setMedia", {
@@ -25,9 +24,9 @@ SocialStream.Video = (function(SS, $, undefined){
     $(".video_thumbnail_play_over").click(function(){
       var video = $(this).closest(".video")
       video.find(".video-thumb").hide();
-    video.find(".video-details").hide();
-    video.find(".jp-video-play").hide();
-    video.find(".video-full").show();
+      video.find(".video-details").hide();
+      video.find(".jp-video-play").hide();
+      video.find(".video-full").show();
     video.find(".jp-jplayer").jPlayer("play", 0);
     });
 

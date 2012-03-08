@@ -1,28 +1,10 @@
-<% content_for :javascript do %>
-
-  $("#jpId<%=audio.id%>").jPlayer( {
-    ready: function () {
-      $(this).jPlayer("setMedia", {        
-        webma: "<%= audio_url(audio, :format => 'webma') %>" // Defines the webma url
-      });
-    },
-    supplied: "webma",
-    preload: "none",
-	swfPath: "assets",
-	cssSelectorAncestor: "#jp_interface_<%=audio.id%>"
-  });
-
-<% end %>
-
 <%= div_for audio, :class => 'content_size' do %>
-
 
   <% if audio.file_processing %>
     <%= render :partial => 'audios/audio_processing', :locals => {:audio => audio}%>
   <% else %>
     <%= render :partial => 'audios/audio_processed', :locals => {:audio => audio}%>  
   <% end %>
-
 
 <% end %>
 

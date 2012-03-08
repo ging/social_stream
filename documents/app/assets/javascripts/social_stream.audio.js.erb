@@ -1,0 +1,25 @@
+//= require social_stream.timeline
+
+SocialStream.Audio = (function(SS, $, undefined){
+  var initJplayer = function(){
+    $(".jp-audio .jp-jplayer").each(function() {
+      $(this).jPlayer({
+        ready: function () {
+          $(this).jPlayer("setMedia", {
+            webma: $(this).closest(".audio").find(".audio-webma").attr("href"), // Defines the webm url
+          });
+        },
+      preload: "none",
+      supplied: "webma",
+      swfPath: "<%= asset_path "" %>",
+      cssSelectorAncestor: "#" + $(this).closest(".audio-full").attr("id")
+      })
+    });
+
+    $(".audio-format-links").hide();
+  }
+
+  SocialStream.Timeline.addInitCallback(initJplayer);
+
+
+})(SocialStream, jQuery);
