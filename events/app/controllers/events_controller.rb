@@ -7,18 +7,16 @@ class EventsController < ApplicationController
 
   def index
     index! do |format|
+      format.js {
+        events_with_start_and_end
+      }
+
       format.json {
-        start_time = Time.at(params[:start].to_i)
-        end_time   = Time.at(params[:end].to_i)
-        @activities =
-          collection.
-           joins(:activity_objects => :event).
-            merge(Event.between(start_time, end_time))
+        events_with_start_and_end
 
         render :json =>
-          @activities.
-            map(&:direct_object).
-            map{ |e| e.to_json(:start => start_time, :end => end_time) }.flatten.to_json
+          @events.
+            map{ |e| e.to_json(:start => @start_time, :end => @end_time) }.flatten.to_json
       }
     end
   end
@@ -36,5 +34,17 @@ class EventsController < ApplicationController
       profile_subject.wall(:profile,
                            :for => current_subject,
                            :object_type => :Event)
+  end
+
+  def events_with_start_and_end
+    @start_time = Time.at(params[:start].to_i)
+    @end_time   = Time.at(params[:end].to_i)
+
+    @activities =
+      collection.
+      joins(:activity_objects => :event).
+      merge(Event.between(@start_time, @end_time))
+
+    @events = @activities.map(&:direct_object)
   end
 end

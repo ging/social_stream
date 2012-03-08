@@ -1,24 +1,17 @@
 SocialStream.Event = (function(SS, $, undefined) {
-	var create = function(start, end, allDay) {
-		var title = prompt('Event Title:');
-		if (title.length) {
-			$.post(SocialStream.Events.current.eventsPath,
-			       {
-					event: {
-						title: title,
-						start_at: start.toString(),
-						end_at: end.toString(),
-						all_day: allDay,
-						_contact_id: SocialStream.Events.current.contactId
-						}
-				},
-				undefined,
-				"script");
-		}
+	var indexCallbacks = [];
+
+	var addIndexCallback = function(callback){
+		indexCallbacks.push(callback);
+	}
+
+	var index = function(){
+		$.each(indexCallbacks, function(i, callback){ callback(); });
 	}
 
 	return {
-		create: create
+		addIndexCallback: addIndexCallback,
+		index: index
 	}
 
 })(SocialStream, jQuery);

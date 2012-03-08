@@ -163,3 +163,12 @@ div.event_date {
 #scheduler-options {
   padding: 2px 10px;
 }
+
+.tipsy-sidebar_calendar {
+	min-width: 300px;
+	border: solid $separation-color 1px;
+	padding: 10px;
+	background-color: #FFF;
+	opacity: 1;
+	border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px;
+}
