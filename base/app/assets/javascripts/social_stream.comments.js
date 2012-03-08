@@ -42,8 +42,13 @@ SocialStream.Comments = (function(SS, $, undefined){
 		//javascript for tocomment option
 		$(".to_comment").click(function(){
 			$(this).parents(".activity_content").find(".activity_new_comment").show();
-			$(this).parents(".activity_content").find(".input_new_comments").click();  
-			$(this).parents(".activity_content").find(".input_new_comments").focus();
+			$(this)
+			.closest(".activity_content")
+			.find(".input_new_comments")
+			.click()
+			.focus()
+			.val("");
+
 			return false;
 		});
 	}
