@@ -1,0 +1,39 @@
+//= require social_stream.timeline
+//= require social_stream.objects
+
+SocialStream.Video = (function(SS, $, undefined){
+  var initJplayer = function(){
+    $(".jp-jplayer").each(function() {
+      $(this).jPlayer({
+        ready: function () {
+          $(this).jPlayer("setMedia", {
+            webmv: $(this).closest(".video").find(".video-webm").attr("href"), // Defines the webm url
+            flv: $(this).closest(".video").find(".video-flv").attr("href") // Defines the flv url
+          });
+        },
+      solution:"flash, html",
+      preload: "none",
+      supplied: "webmv, flv",
+      swfPath: "<%= asset_path "" %>",
+      cssSelectorAncestor: "#" + $(this).closest(".video-full").attr("id")
+      })
+    });
+
+    $(".video-format-links").hide();
+    $(".video-full").hide();
+
+    $(".video_thumbnail_play_over").click(function(){
+      var video = $(this).closest(".video")
+      video.find(".video-thumb").hide();
+    video.find(".video-details").hide();
+    video.find(".jp-video-play").hide();
+    video.find(".video-full").show();
+    video.find(".jp-jplayer").jPlayer("play", 0);
+    });
+
+  }
+
+  SocialStream.Timeline.addInitCallback(initJplayer);
+
+
+})(SocialStream, jQuery);

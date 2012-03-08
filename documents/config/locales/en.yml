@@ -70,7 +70,7 @@ en:
   video:
     confirm_delete: "Delete video?"
     mine: "My videos"  
-    msg: "Uploaded a video:"
+    msg: "See details..."
     name: "video" 
     not_mine: "Videos"
     one: "a video"

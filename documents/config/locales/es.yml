@@ -69,7 +69,7 @@ es:
   video:
     confirm_delete: "¿Borrar vídeo?"
     mine: "Mis vídeos"  
-    msg: "Subió un vídeo:"
+    msg: "Ver detalles..."
     name: "vídeo"
     not_mine: "Vídeos"
     one: "un vídeo"

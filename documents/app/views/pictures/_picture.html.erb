@@ -12,7 +12,9 @@
         <div class="title"> 
   	  <%= picture.title %>
         </div>
-	<%= picture.description %>
+
+	<%= simple_format auto_link(picture.description) %>
+
         <%= link_to t('picture.msg'),
               picture_path(picture),
               :alt => t('picture.msg'),

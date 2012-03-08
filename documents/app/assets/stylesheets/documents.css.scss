@@ -238,37 +238,34 @@
 	width: 0px;
 }
 
-.video_thumbnail_class {
-	width: 180px;
-	height: 135px;
+.video_thumbnail_show {
+	width: 130px;
+	height: 97px;
+	padding: 10px;
+	float: left;
 }
 
 .video_thumbnail_image{
 	position: relative;
 	top:0px;
-	width: 180px;
+	width: 130px;
 	z-index:1;
-  width: 180px;
-  height: 135px;
-  overflow: hidden;
+	height: 97px;
+	overflow: hidden;
 }
 
 .video_thumbnail_play_over {
 	background: transparent url("jplayer.blue.monday.video.play.png") no-repeat center;
-	/* position: relative; */
 	position: relative;
 	cursor:pointer;
 	z-index:2;
+	top:-97px;
+	width:130px;
+	height:97px;
 }
 
 .video_thumbnail_play_over:hover {
 	background: transparent url("jplayer.blue.monday.video.play.hover.png") no-repeat center;
-}
-
-.video_thumbnail_play_over {
-	top:-135px;
-	width:180px;
-	height:135px;
 }
 
 /* needed to hide the flash element when used */

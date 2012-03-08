@@ -1,33 +1,3 @@
-function removePlayers(){
-	$('.attachment_tile').removeClass("selected");
-	$('.player').remove();
-	$('#downloadButton').remove();
-}
-
-$('#closeButton').live("click",function(){
-	removePlayers();
-});
-
-function hideJplayer(jplayerid){
-  $("#full_video_"+jplayerid).removeClass("jp-video-270p");
-  $("#jp_interface_"+jplayerid).hide();
-  $("#jp_playlist_"+jplayerid).hide();
-}
-
-function showJplayer(jplayerid){
-  $("#full_video_"+jplayerid).addClass("jp-video-270p");
-  $("#jp_interface_"+jplayerid).show();
-  $("#jp_playlist_"+jplayerid).show();
-  
-}
-
-$(".video_thumbnail_play_over").livequery("click",function(){
-  the_id = $(this).attr('id');
-  showJplayer(the_id);
-  $(this).parent().hide();
-  $("#jpId"+the_id).jPlayer("play", 0);
-});
-
 $(document).ready(function(){  
   //if there are 6 or more commments we only show the last 5 and a link to show the rest
   $("#document_comments .activity_comments").each(function(){
