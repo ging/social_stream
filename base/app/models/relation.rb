@@ -63,6 +63,10 @@ class Relation < ActiveRecord::Base
     where(:sender_type => st, :receiver_type => rt)
   }
 
+  scope :positive, lambda {
+    where(:type => positive_names)
+  }
+
   before_create :initialize_sender_type
 
   class << self

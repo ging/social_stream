@@ -48,6 +48,11 @@ class Tie < ActiveRecord::Base
     end
   }
 
+  scope :positive, lambda {
+    joins(:relation).
+      merge(Relation.positive)
+  }
+
   scope :with_permissions, lambda { |action, object|
     joins(:relation => :permissions).
       where('permissions.action' => action).
