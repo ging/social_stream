@@ -1,83 +1,78 @@
 ////////////////////
-//Tres en Raya
+//  Tres en Raya  //
 ////////////////////
 
 PRESENCE.GAME.TER = (function(P,$,undefined){
   
-	//Game core
-	var core = P.GAME
-	
-  //Game variables  
-  var players = null;
+	//Gamecore
+	var CORE = P.GAME
+		
+  //Games variables
+	var game;             //Game and player are objects defined in the gamecore.
   var player = null;
   var currentPlayer = null;
-  var options = null;
+	var playing=true;
+	
+	//We must define our ACTION object.
+	//The information exchanged between players is performed through the exchange of action type objects.
+	//We can define our own types of actions, with different fields
   function action(player,square) {
     this.player = player;
+		this.type = "general";
     this.square = square;
   }
-  var playing=true;
-
+	
   //Html Divs
   var divID = null;
   var containerDivId = 'tresEnRayaContainerDivID';
   var messageDivId = 'tresEnRayaMessageDivID';
 
-  //Boardgame
+  //Boardgame variables
   var board = [];
   var boardDimension = null;
   var squareDimension = null;
   var middleSquareDimension = null;
 
-  var init = function(myPlayers,myPlayer,myOptions,myDivID){
-    if (!validateParams(myPlayers,myPlayer,myOptions,myDivID)){
-      showMessage("Invalid parameters");
-      return;
-    }
-    players = myPlayers;
-    player = myPlayer;
-    options = settingOptions(myOptions);
-    divID = myDivID;
+
+
+  ////////////////
+  //   STARTER  //
+	////////////////
+	//The core will invoke this method automatically to start the game.
+	//*myPlayer = myself
+	//*myGame = Game object (is the same for all players)
+	//*myDivID = Div to render the game
+  var init = function(myPlayer,myGame,myDivID){
+		player = myPlayer;
+		game = myGame;
+		divID = myDivID;
+		
+		//Setting options
+    game.options = settingOptions(myGame.options);
+
+    //Init Graphics
     drawBoard();
+		
+		//Init Logic
     settingBoard();
+		
+		//Init Events
     setBoardEvents();
-    currentPlayer = players[0];
-    if(player==currentPlayer){
+    
+		//Init game variables
+    currentPlayer = game.players[0];
+		playing=true;
+		
+		//Start Play!
+    if(player.id==currentPlayer.id){
       showMessage("You start!")
     } else {
-      showMessage(currentPlayer + " starts!")
+      showMessage(currentPlayer.name + " starts!")
     }
   };
 
-  var validateParams = function(myPlayers,myPlayer,myOptions,myDivID){
-    
-    if ((typeof myPlayers=="undefined")||(typeof myPlayer=="undefined")||(typeof myOptions=="undefined")||(typeof myDivID=="undefined")){
-      return false;
-    }
 
-    //Check if myPlayers is an Array
-    if (myPlayers.constructor.toString().indexOf("Array") == -1){
-      return false;
-    }
-
-    //2 players at least
-    if(myPlayers.lenght < 2){
-      return false;
-    }
-
-    //Check if myOptions is an Array
-    if (myOptions.constructor.toString().indexOf("Array") == -1){
-      return false;
-    }
-    
-    //Check that myPlayer is contained on myPlayers
-    if(myPlayers.indexOf(myPlayer)==-1){
-      return false;
-    }
-
-    return true;  
-  }
-
+  //Set defaults for unspecified options
   var settingOptions = function(myOptions){
 
     if (!('theme' in myOptions)){
@@ -92,6 +87,133 @@ PRESENCE.GAME.TER = (function(P,$,undefined){
     return myOptions;
   };
 
+
+
+  ////////////////////////////////
+  //    CORE CONFIG CALLBACKS   //
+  ////////////////////////////////
+	
+	//Optional methods that can be invoked by the core
+		
+  //The Core provides basic validation
+	//We can include our own validation conditions here!
+	//The core will invoke this method automatically in the validation process
+  var validateParams = function(myPlayer,myGame,myDivID){
+    if(myGame.players.lenght < 2){
+      return new CORE.createValidationResult(false,"This game needs two players at least");
+    }
+    return new CORE.createValidationResult(true,"Ok");  
+  }
+	
+	
+	//MinimumRequirements to execute this game
+  var minimumRequirements = function(){
+		var requirements = new Array();
+    return requirements;
+  }
+
+
+
+  /////////////////////////////////     
+  // GAMECORE CALLS & CALLBACKS  //     * To send our actions to other players we will use the << sendAction >> method.   
+  /////////////////////////////////     * When some player send us a action, the core will invoke the << onActionReceived >> method.
+
+  var sendAction = function(action){
+    CORE.sendAction(game.id,game.players,action)
+    return;
+  }
+
+  var onActionReceived = function(action){
+    processAction(action);
+    return;
+  }
+
+
+
+  /////////////////////////
+  // ACTION MANAGEMENT  //     * These methods are not mandatory, but are highly recommended.   
+  ////////////////////////
+
+
+  //Processes an action of any player
+  var processAction = function(action){
+		
+    if(playing==false){
+      return
+    }
+
+    //Check if the action is legal.
+    if(!checkAction(action)){
+      showMessage("Ilegal action")
+      return false
+    }
+
+    if(player.id==action.player.id){
+      //Notify my actions!
+      sendAction(action)
+    }
+
+    //Update logic
+    updateLogic(action)
+
+    //Update Graphics
+    updateInterface(action)
+
+    //Check for winner
+		//If there is a winner, checkWinner() will return the winner's name.
+		//If not, it will return "finish" if the game is over without a winner, or null if the game is not over.
+    var winner = checkWinner()
+    if(winner!=null){
+			processWinner(winner)
+      finishGame()
+      return
+    }
+
+    //We continue with the next turn if the game is not over.
+    nextTurn();
+  }
+
+
+  //Check if the action is legal.
+  var checkAction = function(action){
+    
+    if(currentPlayer.id!=action.player.id){
+      //The player has made an action out of his turn.
+      return false;
+    }
+    
+    if(board[action.square][2]!=0){
+      //Square is already occupied by another figure.
+      return false;
+    }
+
+    return true;
+  }
+	
+	
+	//If we have a turn-based game we probably need a nextTurn method.
+	//This is an example
+  var nextTurn = function(){
+    var playersQuantity = game.players.length;
+    var indexActualPlayer = game.players.indexOf(currentPlayer);
+    if(indexActualPlayer==(playersQuantity-1)){
+      currentPlayer=game.players[0];
+    } else {
+      currentPlayer=game.players[indexActualPlayer+1];
+    }
+    if(player.id==currentPlayer.id){
+      showMessage("Is your turn!")
+    } else {  
+      showMessage(currentPlayer.name + " turn")
+    }
+  }
+
+
+
+  ///////////////////////   
+  // TER GAME METHODS  //      
+  ///////////////////////
+
   var drawBoard = function(){
     var containerDiv = document.createElement('div');
     containerDiv.setAttribute('id', containerDivId);
@@ -101,14 +223,15 @@ PRESENCE.GAME.TER = (function(P,$,undefined){
     var messageDiv = document.createElement('div');
     messageDiv.setAttribute('id', messageDivId);
     $(messageDiv).addClass('tresEnRayaMessageDivClass')
-    $(messageDiv).addClass('tresEnRayaMessageTheme' + options['theme'])
+    $(messageDiv).addClass('tresEnRayaMessageTheme' + game.options['theme'])
     $("#" + divID).append(messageDiv);
 
     var p = document.createElement('p');
     p.setAttribute('id', messageDivId + "p");
-    $(p).addClass('tresEnRayaMessagePTheme' + options['theme'])
+    $(p).addClass('tresEnRayaMessagePTheme' + game.options['theme'])
     $("#" + messageDivId).append(p);
     
+		var messageDivHeight = 12;
 
     //Adjust dimensions
     var parentWidth = $("#" + divID).width();
@@ -116,15 +239,17 @@ PRESENCE.GAME.TER = (function(P,$,undefined){
     var maxDimension = 300;
     var minDimension = 100;
 
-    var dimension = Math.min(parentWidth,parentHeight,maxDimension)
-    boardDimension = Math.max(dimension,minDimension)
+    var dimension = Math.max(Math.min(parentWidth,parentHeight,maxDimension),minDimension)
+    boardDimension = dimension - messageDivHeight;
     
     $("#" + containerDivId).height(boardDimension)
     $("#" + containerDivId).width(boardDimension);
+		$("#" + messageDivId).width(boardDimension);
 
     //Apply Theme
-    $("#" + containerDivId).addClass('tresEnRayaContainerTheme' + options['theme'])
+    $("#" + containerDivId).addClass('tresEnRayaContainerTheme' + game.options['theme'])
   };
+
 
   var settingBoard = function(){
     squareDimension = boardDimension/3;
@@ -141,9 +266,9 @@ PRESENCE.GAME.TER = (function(P,$,undefined){
     board[8] = [boardDimension-middleSquareDimension,boardDimension-middleSquareDimension,0]
   };
 
+
   var setBoardEvents = function(){
     $("#" + containerDivId).click(function (event) {
-      
       var offsetX = event.pageX - $("#" + containerDivId).offset().left
       var offsetY = event.pageY - $("#" + containerDivId).offset().top
 
@@ -151,14 +276,16 @@ PRESENCE.GAME.TER = (function(P,$,undefined){
         return;
       }
 
-      if(currentPlayer!=player){
-        //return;
+      if(currentPlayer.id!=player.id){
+        return;
       }
       square = getSquare(offsetX,offsetY)
+			
       var actionNew = new action(currentPlayer,square);
       processAction(actionNew)
     });
   };
+
 
   var getSquare = function(x,y){
     for(var i=0; i<board.length; i++){
@@ -169,51 +296,6 @@ PRESENCE.GAME.TER = (function(P,$,undefined){
     return 0;
   }
 
-
-  var processAction = function(action){
-
-    if(playing==false){
-      return;
-    }
-
-    //Check if the action is legal
-    if(!checkAction(action)){
-      showMessage("Ilegal action");
-      return false;
-    }
-
-    if(player==currentPlayer){
-      //Notify action
-      sendAction(action);
-    }
-
-
-    //Update logic
-    updateLogic(action);
-
-    //Update interface
-    updateInterface(action);
-
-    //Check for winner
-    var winner = checkWinner()
-    if(winner!=null){
-      if(winner!="finish"){
-        if(player==winner){
-          showMessage("You have won the game")
-        } else {
-          showMessage(winner + " has won the game")
-        }
-      } else {
-        showMessage("Finished game");
-      }
-      finishGame();
-      return
-    }
-
-    nextTurn();
-  }
-
-
   var showMessage = function(msg){
     $("#" + messageDivId + "p").html(msg)
   }
@@ -222,52 +304,43 @@ PRESENCE.GAME.TER = (function(P,$,undefined){
     playing = false;
   }
 
-  var checkAction = function(action){
-    if(board[action.square][2]!=0){
-      return false;
-    }
-
-    return true;
-  }
-
   var updateLogic = function(action){
-    board[action.square][2]=players.indexOf(action.player)+1;
+		if(action.player.id == game.players[0].id){
+			var r = 1;
+		} else {
+			var r = 2;
+		}
+    board[action.square][2]=r;
   }
 
   var updateInterface = function(action){
     var img = document.createElement('img');
 
-    if(action.player==players[0]){
+    if(action.player.id==game.players[0].id){
       var figure = "circle";
     } else {
       var figure = "aspa";
     }
 
-    $(img).attr("src","themes/" + options['theme'].toLowerCase() + "_" + figure + ".png");
-
+    var path = "/assets/games/ter/modern_circle.png"
+    $(img).attr("src","/assets/games/ter/" + game.options['theme'].toLowerCase() + "_" + figure + ".png");
     $("#" + containerDivId).append(img);
-    $(img).addClass('tresEnRayaImgTheme' + options['theme'])
-    $(img).width(squareDimension*0.8)
-    $(img).height(squareDimension*0.8)
-    var x = $("#" + containerDivId).offset().left
-    var y = $("#" + containerDivId).offset().top
-    $(img).css("top",y+board[action.square][1]-middleSquareDimension*0.8)
-    $(img).css("left",x+board[action.square][0]-middleSquareDimension*0.8)
+    $(img).addClass('tresEnRayaImgTheme' + game.options['theme'])
+		
+		//Calculate displacement
+		var figureSizePercent = 0.8;
+		var xdisplacement = -squareDimension*figureSizePercent/2*0.9;
+		var ydisplacement = 10;
+		
+    $(img).width(squareDimension*figureSizePercent)
+    $(img).height(squareDimension*figureSizePercent)
+    $(img).css("top",board[action.square][1]+ydisplacement)
+    $(img).css("left",board[action.square][0]+xdisplacement)
     return;
   }
 
-  var sendAction = function(action){
-    //Notify action to other players
-    //[...]
-    return;
-  }
 
-  var onActionReceived = function(action){
-    processAction(action);
-    return;
-  }
-
-  //Return winner's name if exists and null if dont exits.
+  //Return winner's name if exists and null if don't exits.
   //Return "finish" when the game is blocked.
   var checkWinner = function(){
     
@@ -288,97 +361,73 @@ PRESENCE.GAME.TER = (function(P,$,undefined){
 
     //Check horizontal
     if((board[0][2]==board[1][2])&&(board[1][2]==board[2][2])&&(board[2][2]!=0)){
-      return players[board[0][2]-1];
+      return game.players[board[0][2]-1];
     }
     if((board[3][2]==board[4][2])&&(board[4][2]==board[5][2])&&(board[5][2]!=0)){
-      return players[board[3][2]-1];
+      return game.players[board[3][2]-1];
     }
     if((board[6][2]==board[7][2])&&(board[7][2]==board[8][2])&&(board[8][2]!=0)){
-      return players[board[6][2]-1];
+      return game.players[board[6][2]-1];
     }
 
     //Check vertical
     if((board[0][2]==board[3][2])&&(board[3][2]==board[6][2])&&(board[6][2]!=0)){
-      return players[board[0][2]-1];
+      return game.players[board[0][2]-1];
     }
     if((board[1][2]==board[4][2])&&(board[4][2]==board[7][2])&&(board[7][2]!=0)){
-      return players[board[1][2]-1];
+      return game.players[board[1][2]-1];
     }
     if((board[2][2]==board[5][2])&&(board[5][2]==board[8][2])&&(board[8][2]!=0)){
-      return players[board[2][2]-1];
+      return game.players[board[2][2]-1];
     }
 
     //Check diagonals
     if((board[0][2]==board[4][2])&&(board[4][2]==board[8][2])&&(board[8][2]!=0)){
-      return players[board[0][2]-1];
+      return game.players[board[0][2]-1];
     }
     if((board[6][2]==board[4][2])&&(board[4][2]==board[2][2])&&(board[2][2]!=0)){
-      return players[board[6][2]-1];
+      return game.players[board[6][2]-1];
     }
 
     return null;
   }
 
-  var nextTurn = function(){
-    var playersQuantity = players.length;
-    var indexActualPlayer = players.indexOf(currentPlayer);
-    if(indexActualPlayer==(playersQuantity-1)){
-      currentPlayer=players[0];
-    } else {
-      currentPlayer=players[indexActualPlayer+1];
-    }
-    if(player==currentPlayer){
-      showMessage("Is your turn!")
-    } else {  
-      showMessage(currentPlayer + " turn")
-    }
-  }
 
-  var getRandomPlayer = function(){
-    var playersQuantity = players.length;
-    var randomIndex = Math.round(Math.random()*(players.length-1))
-    return players[randomIndex]
+  var processWinner = function(winner){
+    if(winner!="finish"){
+      if(player.id==winner.id){
+        showMessage("You have won the game")
+      } else {
+        showMessage(winner.name + " has won the game")
+      }
+    } else {
+      showMessage("Finished game");
+    }
   }
 
   //Getters
-  var getPlayers = function(){
-    return players;
-  }
-
-  var getOptions = function(){
-    return options;
+  var getGame = function(){
+    return game;
   }
 	
-	var getDummy = function(){
-		return core;
-	}
+	var getBoard = function(){
+    return board;
+  }
+	
+	var getMyplayer = function(){
+    return player;
+  }
+	
+	var getCurrentPlayer = function(){
+    return currentPlayer;
+  }
 
 
   return {
     init: init,
-		getDummy: getDummy,
-    onActionReceived: onActionReceived
+		validateParams: validateParams,
+		minimumRequirements: minimumRequirements,
+		onActionReceived: onActionReceived
   };
 
 }) (PRESENCE, jQuery);
-
-
-
-
-
-
-
-
-////////////////////
-//Interface Events
-////////////////////
-function play(){
-	$(".chat-gamesthick").css("display","block");
-}
-
-function pickGamesButton(uiElement){
-  var slug = $(uiElement.element).attr("id");
-  //clickGamesButton(slug);
-	log("clickGamesButton(slug)" + slug)
-}
-

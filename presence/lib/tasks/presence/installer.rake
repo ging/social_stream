@@ -41,9 +41,9 @@ namespace :presence do
           password = STDIN.gets.chomp
           system "stty echo"
           
-          if password.gsub(" ","")==""
+          if password.gsub(" ","")=="" and user != "root"
             puts "Please specify [sudo] password for " + user + " to execute the installer"
-            puts "You can provided it from keyboard input or execute the task as presence:install:xmpp_server[sudo_password]"
+            puts "You can provide it from keyboard input or execute the task as presence:install:xmpp_server[sudo_password]"
             exit 0
           end        
         end

@@ -223,7 +223,7 @@
       .hover(function() {uiChatboxTitlebarGames.addClass('ui-state-hover');},
            function() {uiChatboxTitlebarGames.removeClass('ui-state-hover');})
       .click(function(event) {
-        pickGamesButton(self)
+				PRESENCE.GAME.INTERFACE.pickGamesButton(self)
         return false;
       })
       .appendTo(uiChatboxTitlebar),

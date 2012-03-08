@@ -114,7 +114,7 @@ function restoreChatData(){
   if (! window.sessionStorage){
     return
   }
-	
+
 	restoreChatBoxes();
 }
 

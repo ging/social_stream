@@ -122,6 +122,27 @@ p.video-request{
   height: 60%;
 }
 
+
+
+/* Game stylesheet */
+.gameButton {
+  cursor: pointer;
+  font-size: 100%;
+}
+
+p.game-info{
+  padding-top: 25%;
+  text-align: center;
+}
+
+p.game-request{
+  padding-top: 20%;
+  text-align: center;
+  font-size: 130%;
+  font-weight: bolder;
+  color: $main-color;
+}
+
 /* notifications style sheet */
 
 div.ui-chatbox-notify{
@@ -181,7 +202,7 @@ p.ui-chatbox-notify-text{
 }
 
 .chat-gamesthick{
-  /*display: block; */
+  /* display: block; */
 	display: none;
   padding: 0px 1px 0px 1px;
 }

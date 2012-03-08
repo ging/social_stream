@@ -1,0 +1,134 @@
+////////////////////
+//Multiplayer Games Interface Manager
+////////////////////
+
+PRESENCE.GAME.INTERFACE = (function(P,$,undefined){
+  
+  //////////////////////////
+  //      TRIGGERS        //
+  //////////////////////////
+	
+  var pickGamesButton = function (uiElement){
+    var slug = $(uiElement.element).attr("id");
+    var videoBoxVisibility = toggleVideoBoxForSlug(slug);
+  
+    if (videoBoxVisibility) {
+      hideVideoChatButton(slug);
+			var mygame = generateDefaultGame(slug);
+      PRESENCE.GAME.requestUserToPlay(slug,mygame);
+    } else {
+      showVideoChatButton(slug);
+      PRESENCE.GAME.finishGame(slug);
+    }
+  }
+	
+	
+	////////////////////////////
+  //       CALLBACKS        //
+  ////////////////////////////
+	
+	updateInterfaceAfterGameRequestReceived = function(slug){
+    //gameStatus="pending";
+		
+	  //Show or create chatbox
+	  createBuddyChatBox(slug);
+	  var chatBox = getChatBoxForSlug(slug);
+		
+	  //Show invitation message
+	  showGameInvitation(slug);
+	  
+		//Hide hideVideoChatButton
+    hideVideoChatButton(slug);
+		
+	  //Show gamebox
+	  toggleVideoBoxForSlug(slug,true);
+	}
+	
+	var updateInterfaceBeforeStartGame = function(slug){
+    var parentDiv = document.createElement('div');
+    var divID = 'game_' + slug + contactsInfo[slug].game.id;
+    parentDiv.setAttribute('id', divID);
+    $(parentDiv).css('width', "100%");
+    $(parentDiv).css('height', "100%");
+    setVideoBoxContent(slug,parentDiv);
+
+    PRESENCE.GAME.startGame(slug,divID)
+  }
+  
+  var updateInterfaceAfterFinishGame = function(slug){
+    toggleVideoBoxForSlug(slug,false);
+    showVideoChatButton(slug);
+  }
+	
+	var updateInterfaceOnInformationMessage = function(slug,msg){
+    setVideoBoxContent(slug,"<p class=\"game-info\"> " + msg +" </p>");
+  }
+
+
+
+	///////////////////////////////
+  //  INTERFACE HELP METHODS   //
+  ///////////////////////////////
+	
+	var showGameInvitation = function(slug){
+		var title = "<p class=\"game-info\">" + I18n.t("chat.game.call", {name: getNameFromSlug(slug)}) + " </p>";
+    var msg = title + "<p class=\"game-request\"> <a class=\"gameButton\" slug=\""+slug+"\" value=\"yes\">" + I18n.t("chat.game.accept") + "</a> -" 
+    + " <a class=\"gameButton\" slug=\""+slug+"\" value=\"no\">" + I18n.t("chat.game.deny") + "</a> </p>";
+    setVideoBoxContent(slug,msg);
+    setGameRequestButtonsFunction();
+	}
+	
+	var setGameRequestButtonsFunction = function(){
+	  $(".gameButton").click(function(event) { 
+	    event.preventDefault();
+	    var result = $(this).attr("value");
+	    var slug = $(this).attr("slug");
+			PRESENCE.GAME.responseUserToPlay(slug,result);
+	  });
+	}
+	
+	var hideVideoChatButton = function(slug){
+		$(getChatBoxButtonForSlug(slug,"video")).hide();
+	}
+	
+	var showVideoChatButton = function(slug){
+    $(getChatBoxButtonForSlug(slug,"video")).show();
+  }
+	
+
+
+  //////////////////////
+  //  DEBUG METHODS   //
+  //////////////////////
+
+	var generateDefaultGame = function(guest_slug){
+		var player1 = new PRESENCE.GAME.player(user_slug,user_name)
+		var player2 = new PRESENCE.GAME.player(guest_slug,getNameFromSlug(guest_slug))
+		var localPlayers = [player1,player2]
+    var localOptions = new Array();
+    localOptions['theme']="Modern";
+    var mygame = new PRESENCE.GAME.game("TER","Tres en Raya",localPlayers,localOptions)
+		return mygame;
+	}
+
+
+  return {
+		pickGamesButton: pickGamesButton,
+		updateInterfaceAfterGameRequestReceived: updateInterfaceAfterGameRequestReceived,
+		updateInterfaceBeforeStartGame: updateInterfaceBeforeStartGame,
+		updateInterfaceAfterFinishGame: updateInterfaceAfterFinishGame,
+		updateInterfaceOnInformationMessage: updateInterfaceOnInformationMessage,
+		generateDefaultGame: generateDefaultGame
+  };
+
+}) (PRESENCE, jQuery);
+
+
+
+////////////////////
+//Interface Events
+////////////////////
+
+function play(){
+	$(".chat-gamesthick").css("display","block");
+}

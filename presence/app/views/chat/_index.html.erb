@@ -88,25 +88,22 @@
 
   $(document).ready(function () {
 			
-			//Inicial field
-			$("#chat_partial").html($("#chat_connecting").html())
-		
-      if(getRestoreUserChatStatus()!="offline"){
-				if (authByCookie()){
-					connectToChat(user_jid,cookie,null);
-				} else {
-					//Auth by password
-					connectToChat(user_jid,null,null);
-				}
-        
-        initialTimer = setTimeout("updateChatWindow()", 10000);
-      } else {
-        updateChatWindow();
-      }
+		//Inicial field
+		$("#chat_partial").html($("#chat_connecting").html())
+	
+    if(getRestoreUserChatStatus()!="offline"){
+			if (authByCookie()){
+				connectToChat(user_jid,cookie,null);
+			} else {
+				//Auth by password
+				connectToChat(user_jid,null,null);
+			}
+      initialTimer = setTimeout("updateChatWindow()", 10000);
+    } else {
+      updateChatWindow();
+    }
       
-      initAudio();
-      initFocusListeners();
-			checkVideocallFeature();
+	  PRESENCE.CORE.init();
   });
   
 </script>

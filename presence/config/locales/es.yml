@@ -51,3 +51,16 @@ es:
        joining: "Accediendo..."
        joinError: "No se pudo acceder a la sala.  \n {{errorMsg}}"
        offline: "Estás desconectado"
+    game:
+      call: "{{name}} quiere iniciar una partida"
+      accept: Aceptar
+      deny: Rechazar
+      offline: "Imposible conectar. Estás desconectado"
+      guestOffline: "Imposible conectar. {{name}} está desconectado"
+      unable: Imposible iniciar partida.
+      rejected: "{{name}} ha rechazado tu invitación"
+      rejectedBusy: "{{name}} está ocupado"
+      cancel: "{{name}} canceló la partida"
+      finish: "{{name}} ha cerrado el juego"
+      waiting: Esperando respuesta...
+      unknown: Respuesta desconocida

@@ -53,6 +53,12 @@ function chatContact(domain,resource,client,version) {
 	this.guest_token=null;
 	this.session=null;
 	this.publisher=null;
+	
+	//Game params
+	//Sender: disconnected, waiting, playing
+  //Receiver: disconnected , pending , playing
+	this.gameStatus="disconnected";
+	this.game=null;
 } 
 
 //Rooms information
@@ -387,6 +393,7 @@ function processUnavailablePresenceStanza(presence){
   if (slug != user_slug) {
     if (getConnectionBoxFromSlug(slug)!=null){
 			updateInterfaceAfterPresenceStanza(slug,false)
+			PRESENCE.GAME.userDisconnected(slug)
     }
   }
 }
@@ -426,7 +433,7 @@ function onIQStanza(iq){
 	var type = iq.getAttribute("type");
 	var from = iq.getAttribute("from");
 	var slug = from.split("@")[0];
-	
+
 	if (slug == user_slug) {
 		return true;
   }
@@ -577,12 +584,11 @@ function handleIQResultFromVideochatRequestCancel(iq,slug){
     var response = queryElement.getElementsByTagName('response');
     
     if(response.length == 1){
-      receiveVideoChatCancelationFromUser(slug,$(response).text());
+      receiveVideoChatCancelationFromUser(slug);
       return true;
     }
   }
   
-  receiveVideoChatCancelationFromUser(slug,"Bad response");
   return true;
 }
 
@@ -764,6 +770,7 @@ function handleIQResultFromMucOccupantsRequest(iq){
 			var nick = $(value).attr("name");
 			if(roomsInfo[room_slug].occupants.indexOf(nick)==-1){
 				roomsInfo[room_slug].occupants.push(nick)
+				addNickToNotificationInGroup(room_slug,nick)
 			}
     });
   }

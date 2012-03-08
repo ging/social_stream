@@ -3,74 +3,309 @@
 ////////////////////
 
 PRESENCE.GAME = (function(P,$,undefined){
-  
-  //Gamecore variables  
-  var connection = null;
-	iqStanzaID['gameRequest'] = "gameRequestID";
 
+	/////////////////////////////////
+  //       GAME CORE VARS        //
+  /////////////////////////////////
+	 
+	//Manage Game information
+	//gameID == Game to play
+  //Players == List of players
+  //Options == Game options
+	function game(gameId,gameName,players,options){
+	  this.id = gameId;
+		this.name = gameName;
+		this.players = players;
+		this.options = options;
+		this.handler = null;
+	}
+	
+	function player(id,name){
+    this.id = id;
+    this.name = name;
+  }
+	
+	function validationResult(pass,reason){
+    this.pass = pass;
+    this.reason = reason;
+  }
+	
+	var createValidationResult = function (pass,reason){
+		return new validationResult(pass,reason);
+	}
+	
+
+	/////////////////////////////////
+	//         CORE METHODS        //
+	/////////////////////////////////
+	
   var init = function(myConnection){
-    connection = myconnection;
+    P.GAME.COMUNICATION.init(myConnection);
   };
 	
-	
-	var sendIQStanzaToRequestGame = function (slug,players,options){
 
-	  if (slug in contactsInfo) {
-	    var jid=slug+"@"+contactsInfo[slug].domain+"/"+contactsInfo[slug].resource;
-	    
-	    var iq = $iq({to: jid, type: "get", id: iqStanzaID['gameRequest']})
-	    .c("query", {xmlns: "urn:ietf:params:xml:ns:xmpp-stanzas"})
-			 .c("game", {name: "gameName"})
-			   .c("players", {})
-			     .c("player1").t("player1value").up()
-					 .c("player2").t("player2value").up()
-				 .c("options", {})
-           .c("options1").t("options1value").up()
-           .c("options2").t("options2value").up()
-	    strophe_connection.sendIQ(iq);
+	var requestUserToPlay = function (slug,game){
+		if (slug in contactsInfo) {
+      var gameStatus = contactsInfo[slug].gameStatus;
+    } else {
+      var gameStatus = null;
+    }
+    
+    if(! isUserConnected()){
+      P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug, I18n.t("chat.game.offline"));
+      if(gameStatus!=null){
+        contactsInfo[slug].gameStatus = "disconnected";
+      }
+      return;
+    }
+
+    if(! isSlugChatConnected(slug)){
+      P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug, I18n.t("chat.game.guestOffline", {name: getNameFromSlug(slug)}));
+      if(gameStatus!=null){
+        contactsInfo[slug].gameStatus = "disconnected";
+      }
+      return;
+    }
+  
+    if(gameStatus==null){
+      P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug,I18n.t('chat.game.unable'));
+      return;
+    }
+  
+    if(gameStatus!="disconnected"){
+			P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug,"Esta ocupado en otro estado!=desconectado...")
+      return;
+    }
+
+    //gameStatus=="disconnected"
+    //Start connection
+    contactsInfo[slug].gameStatus="waiting";
+    P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug,I18n.t('chat.game.waiting'));
+
+	  contactsInfo[slug].game = game
+		var jid=slug+"@"+contactsInfo[slug].domain+"/"+contactsInfo[slug].resource;
+	  return P.GAME.COMUNICATION.sendIQStanzaToRequestGame(jid,game);
+	}
+	
+	var responseUserToPlay = function (slug,result){
+		if (! slug in contactsInfo) {
+		 	return;
 	  }
-  };
+		var jid=slug+"@"+contactsInfo[slug].domain+"/"+contactsInfo[slug].resource;
+    P.GAME.COMUNICATION.sendIQStanzaToResponseGameRequest(jid,result)
+    if(result=="yes"){
+      contactsInfo[slug].gameStatus="playing";
+      PRESENCE.GAME.INTERFACE.updateInterfaceBeforeStartGame(slug);
+    } else {
+      contactsInfo[slug].gameStatus="disconnected";
+      PRESENCE.GAME.INTERFACE.updateInterfaceAfterFinishGame(slug);
+    }
+  }
 
-  //Getters
-  var getDummy = function(){
-    return param;
-  };
+	var sendAction = function(gameId,players,action){
+		$.each(players, function(index, value) {
+      var slug = value.id;
+			if(slug!=user_slug){
+				if(slug in contactsInfo){
+					var jid=slug+"@"+contactsInfo[slug].domain+"/"+contactsInfo[slug].resource;
+          P.GAME.COMUNICATION.sendIQStanzaWithAction(jid,gameId,action);
+				}
+			}
+    });
+	}
 
+
+  var updateLogicAfterReceivedGameRequest = function(slug,gameId,gameName,players,options){	    
+    if(! slug in contactsInfo){
+      return;
+    }
+    contactsInfo[slug].game = new game(gameId,gameName,players,options)    
+    if (contactsInfo[slug].gameStatus!="disconnected"){
+      P.GAME.COMUNICATION.sendIQStanzaToResponseGameRequest(slug,"busy");
+      return true;
+    } else {
+      contactsInfo[slug].gameStatus="pending";
+    } 
+    P.GAME.INTERFACE.updateInterfaceAfterGameRequestReceived(slug)
+  }
+
+  var updateLogicAfterReceivedGameRequestResponse = function(slug,response){
+    if(contactsInfo[slug].gameStatus!="waiting"){
+      return true;
+    }
+    if(response=="yes"){
+      contactsInfo[slug].gameStatus = "playing";
+      P.GAME.INTERFACE.updateInterfaceBeforeStartGame(slug)
+    } else if (response=="no"){
+      P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug,I18n.t("chat.game.rejected", {name: getNameFromSlug(slug)}));
+      contactsInfo[slug].gameStatus="disconnected";
+    } else if (response=="busy"){
+      P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug,I18n.t("chat.game.rejectedBusy", {name: getNameFromSlug(slug)}));
+      contactsInfo[slug].gameStatus="disconnected";
+    } else {
+			P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug,I18n.t("chat.game.unknown", {name: getNameFromSlug(slug)}));
+      contactsInfo[slug].gameStatus="disconnected";
+		}
+  }
+	
+	var updateLogicAfterReceivedGameRequestCancelation = function(slug,status){
+    if(slug in contactsInfo){
+      if (status == "finish") {
+        if (contactsInfo[slug].gameStatus == "pending") {
+          P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug, I18n.t("chat.game.cancel", {name: getNameFromSlug(slug)}));
+          contactsInfo[slug].gameStatus = "disconnected";
+        } else if (contactsInfo[slug].gameStatus == "playing") {
+          P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug, I18n.t("chat.game.finish", {name: getNameFromSlug(slug)}));
+          contactsInfo[slug].gameStatus = "disconnected";
+        } 
+      }
+    } else {
+      finishGame(slug);
+    }
+  }
+
+  var getPlayerNameWithId = function(slug){
+		if(! slug in contactsInfo){
+			var game = contactsInfo[slug].game
+			if((game!=null)&&(game.players!=null)){ 
+				 $.each(game.players, function(index, value) {
+           if(value[0]==slug){
+					 	return value[1]
+					 }
+        });
+			}
+		}
+		return null
+	}
+
+  //Validation functions
+	var validateParams = function(myPlayer,game,myDivID){
+    var result;
+		
+		result = checkGameObject(game);
+    if(! result[0] ){
+      return result;
+    }
+    
+    if ((typeof myPlayer=="undefined")||(typeof myDivID=="undefined")){
+      return new validationResult(false,"myPlayer or myDivID undefined");
+    }
+
+    //Check if myPlayers is an Array
+    if (game.players.constructor.toString().indexOf("Array") == -1){
+      return new validationResult(false,"Game.Players is not an array");
+    }
+
+    //Check if myOptions is an Array
+    if (game.options.constructor.toString().indexOf("Array") == -1){
+      return new validationResult(false,"Game.options is not an array");
+    }
+    
+    //Check that myPlayer is contained on myPlayers
+    if(game.players.indexOf(myPlayer)==-1){
+      return new validationResult(false,"myPlayer is not contained in players array");
+    }
+
+    return new validationResult(true,"Ok");  
+  }
+	
+
+	var checkGameObject = function(game){
+    if((typeof game=="undefined")||(typeof game.id=="undefined")||(typeof game.name=="undefined")
+      ||(typeof game.players=="undefined")||(typeof game.options=="undefined")){
+      return new validationResult(false,"Some game field (game/game.id/game.name/game.players/game.options) is undefined");
+    }
+    
+    if((game.id=="")||(game.name=="")){
+      return new validationResult(false,"game.id or game.name is empty");
+    }
+    
+    if(game.id.split(" ").length > 2){
+      return new validationResult(false,"Invalid game.id. No whitespaces allowd in this field");
+    }
+		
+		return new validationResult(true,"Ok");   
+  }
+	
+	var startGame = function (slug,divID){
+		var game = contactsInfo[slug].game;
+		var myplayer = new player(user_slug,getPlayerNameWithId(user_slug))
+		var validationResult = validateParams(myplayer,game,divID)
+		
+		if(! validationResult.pass){
+			var msg = "StartPlay error with reason: " + validationResult.reason;
+			P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug,msg);
+			return;
+		}
+		
+		if(typeof PRESENCE.GAME[game.id].validateParams == "function"){
+			validationResult = PRESENCE.GAME[game.id].validateParams(myplayer,game,divID)
+			if(! validationResult.pass){
+	      var msg = "StartPlay error with reason: " + validationResult.reason;
+				P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug,msg);
+	      return;
+      }
+    } else {
+			log("Warning: Missed " + game.name + " validateParams method")
+		}
+		
+		if(typeof PRESENCE.GAME[game.id].minimumRequirements == "function"){
+      //Check requirements
+    } else {
+      log("Warning: Missed " + game.name + " minRequirements method")
+    }
+		
+		//Add handler and remove previous if exits
+		if(game.handler!=null){
+			PRESENCE.GAME.COMUNICATION.removeHandler(game.handler)
+		}
+		game.handler = PRESENCE.GAME.COMUNICATION.addHandler(game.id)
+		
+		//Call PRESENCE.GAME.gameId
+		var myplayer = new player(user_slug,user_name)
+    PRESENCE.GAME[game.id].init(myplayer,game,divID)
+	}
+	
+	var finishGame = function (slug){
+		if(slug in contactsInfo){
+      var gameStatus = contactsInfo[slug].gameStatus;
+      if(gameStatus=="playing"){
+				var jid=slug+"@"+contactsInfo[slug].domain+"/"+contactsInfo[slug].resource;
+        P.GAME.COMUNICATION.sendIQStanzaToFinishGame(jid);
+				if(contactsInfo[slug].game.handler!=null){
+					P.GAME.COMUNICATION.removeHandler(contactsInfo[slug].game.handler);
+          contactsInfo[slug].game.handler==null;
+        }
+      } else if(gameStatus=="waiting"){
+				var jid=slug+"@"+contactsInfo[slug].domain+"/"+contactsInfo[slug].resource;
+        P.GAME.COMUNICATION.sendIQStanzaToFinishGame(jid);
+      } else if(gameStatus=="pending"){
+        P.GAME.COMUNICATION.sendIQStanzaToResponseGameRequest(slug,"no");
+      }
+      contactsInfo[slug].gameStatus="disconnected";
+    }
+		
+		PRESENCE.GAME.INTERFACE.updateInterfaceAfterFinishGame(slug)
+	}
+
+  var userDisconnected = function(slug){
+		finishGame(slug)
+	}
 
   return {
     init: init,
-		sendIQStanzaToRequestGame: sendIQStanzaToRequestGame,
-    getDummy: getDummy
+		game: game,
+		player: player,
+		startGame: startGame,
+		finishGame: finishGame,
+		createValidationResult: createValidationResult,
+		requestUserToPlay: requestUserToPlay,
+		responseUserToPlay: responseUserToPlay,
+		updateLogicAfterReceivedGameRequest: updateLogicAfterReceivedGameRequest,
+		updateLogicAfterReceivedGameRequestCancelation: updateLogicAfterReceivedGameRequestCancelation,
+		updateLogicAfterReceivedGameRequestResponse: updateLogicAfterReceivedGameRequestResponse,
+		sendAction: sendAction,
+		userDisconnected: userDisconnected
   };
 
 }) (PRESENCE, jQuery);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-////////////////////
-//Interface Events
-////////////////////
-var global;
-
-function play(){
-	$(".chat-gamesthick").css("display","block");
-}
-
-function pickGamesButton(uiElement){
-  var slug = $(uiElement.element).attr("id");
-  //clickGamesButton(slug);
-	log("clickGamesButton(slug)" + slug)
-}
-

@@ -15,8 +15,7 @@ function clickVideoChatButton(slug){
 
 	if (videoBoxVisibility) {
 		openVideoChatWindow(slug);
-	}
-	else {
+	}	else {
 		closeVideoChatWindow(slug);
 	}
 }
@@ -158,7 +157,7 @@ function receiveVideoChatResponseFromUser(slug,response){
 }
 
 //Cancelation received
-function receiveVideoChatCancelationFromUser(slug,response){
+function receiveVideoChatCancelationFromUser(slug){
 	if(slug in contactsInfo){
 		if(contactsInfo[slug].videoChatStatus=="pending"){
 			showNotificationOnVideoBox(slug,I18n.t("chat.videochat.cancel", {name: getNameFromSlug(slug)}));

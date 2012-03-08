@@ -1,0 +1,313 @@
+////////////////////
+//Multiplayer Games Core based on XMPP
+//Comunication Module
+////////////////////
+
+PRESENCE.GAME.COMUNICATION = (function(P,$,undefined){
+  
+	//////////////////////////////////////////////
+  //       GAME COMUNICATION VARIABLES        //
+  //////////////////////////////////////////////
+	 
+  var connection = null;
+	iqStanzaID['gameRequest'] = "gameRequestID";
+	iqStanzaID['gameRequestFinish'] = "gameRequestFinishID";
+	iqStanzaID['gameAction'] = "gameActionID";
+
+	
+	/////////////////////////////////
+	//    COMUNICATION METHODS     //
+	/////////////////////////////////
+	
+  var init = function(myConnection){
+    connection = myConnection;
+		//addHandler:(callback, namespace to match, stanza name, stanza type, stanza id , stanza from, options)
+		connection.addHandler(handleRequestGameIQStanza,null, "iq", "get",iqStanzaID['gameRequest'], null);
+		connection.addHandler(handleIQResultFromGameRequest,null, "iq", "result",iqStanzaID['gameRequest'], null);
+		connection.addHandler(handleIQResultFromGameRequestFinish,null, "iq", "result", iqStanzaID['gameRequestFinish'], null);
+  };
+	
+	
+	
+	/////////////////////
+  // MANAGE GAME REQUESTS
+  /////////////////////
+	
+	//SEND GAME REQUEST
+	//Jid == Game Room or User to send the request game stanza
+	//Game == Game to play with configuration
+	var sendIQStanzaToRequestGame = function (jid,game){
+		var optionIndex=0;
+		var optionsSize=Object.keys(game.options).length;
+		
+    var iq = $iq({to: jid, type: "get", id: iqStanzaID['gameRequest']})
+    .c("query", {xmlns: "urn:ietf:params:xml:ns:xmpp-stanzas"})
+		 .c("game", {id: game.id, name: game.name})
+		   .c("players", {})
+			 
+			  $.each(game.players, function(index, value) {
+					if(index==game.players.length-1){
+						iq.c("player", {id: value.id}).t(value.name).up().up()
+					} else {
+						iq.c("player", {id: value.id}).t(value.name).up()
+					}
+        });
+				
+				iq.c("options", {})
+				
+				for (var key in game.options) {
+					if(optionIndex == optionsSize-1){
+						iq.c("option", {name: key}).t(game.options[key]).up().up()
+					} else {
+						iq.c("option", {name: key}).t(game.options[key]).up()
+					}
+					optionIndex=optionIndex+1;
+        }
+				
+    connection.sendIQ(iq);
+  };
+	
+	
+	//RECEIVE GAME REQUEST
+	var handleRequestGameIQStanza = function(iq){
+    var from = iq.getAttribute("from");
+    var slug = from.split("@")[0];
+    var gameId = "";
+    var gameName = "";
+    var players = []
+    var options = new Array();
+    
+    //Build game object
+    var gameTag = iq.getElementsByTagName('game');
+  
+    if (gameTag.length == 1) {
+      var gameElement = gameTag[0];
+      gameName = $(gameElement).attr("name")
+      gameId = $(gameElement).attr("id")
+      
+      var playersTag = iq.getElementsByTagName('players');
+      if (playersTag.length > 0) {
+          $.each($(playersTag).children(), function(index, value) {
+            players.push(new P.GAME.player($(value).attr("id"),$(value).text()))
+          });
+      }
+      
+      var optionsTag = iq.getElementsByTagName('options');
+      if (optionsTag.length > 0) {
+        $.each($(optionsTag).children(), function(index, value) {
+          options[$(value).attr("name")]=$(value).text();
+        });
+      }
+    }
+    
+		P.GAME.updateLogicAfterReceivedGameRequest(slug,gameId,gameName,players,options)
+    return true;
+  }
+  
+	
+	
+	/////////////////////
+  // MANAGE GAME REQUESTS RESPONSES
+  /////////////////////
+	
+	//SEND GAME REQUEST RESPONSE
+  var sendIQStanzaToResponseGameRequest = function(jid,result){
+    var iq = $iq({to: jid, type: "result", id: iqStanzaID['gameRequest']})
+    .c("query", {xmlns: "urn:ietf:params:xml:ns:xmpp-stanzas"})
+    .c("response").t(result);
+    connection.sendIQ(iq);
+  }
+	
+	//RECEIVE GAME REQUEST RESPONSE
+  var handleIQResultFromGameRequest = function(iq){
+    var from = iq.getAttribute("from");
+    var slug = from.split("@")[0]; 
+    var queryTag = iq.getElementsByTagName('query');
+    
+    if (queryTag.length > 0) {
+      var queryElement = queryTag[0];
+      var response = queryElement.getElementsByTagName('response');
+      
+      if(response.length == 1){
+        P.GAME.updateLogicAfterReceivedGameRequestResponse(slug,$(response).text())
+        return true;
+      }
+    }
+    return true;
+  }
+  
+	
+	
+	/////////////////////
+  // MANAGE GAME REQUESTS CANCELATIONS
+  /////////////////////
+	
+  //SEND GAME REQUEST CANCELATION
+  var sendIQStanzaToFinishGame = function(jid){
+    var iq = $iq({to: jid, type: "result", id: iqStanzaID['gameRequestFinish']})
+    .c("game", {xmlns: "urn:ietf:params:xml:ns:xmpp-stanzas"})
+    .c("status").t("finish");
+    connection.sendIQ(iq);
+  }
+
+	//RECEIVE GAME REQUEST CANCELATION
+  var handleIQResultFromGameRequestFinish = function(iq){
+    var from = iq.getAttribute("from");
+    var slug = from.split("@")[0]; 
+    var gameTag = iq.getElementsByTagName('game');
+    
+    if (gameTag.length > 0) {
+      var gameTagElement = gameTag[0];
+      var response = gameTagElement.getElementsByTagName('status');
+      
+      if(response.length == 1){
+        var gameStatus = $(response).text();
+        P.GAME.updateLogicAfterReceivedGameRequestCancelation(slug,gameStatus)
+        return true;
+      }
+    }
+    return true;
+  }
+
+
+	
+	/////////////////////
+  // MANAGE ACTION EXCHANGE 
+  /////////////////////
+	
+  function action(){}
+	
+	
+	//SEND ACTIONS
+	
+	var sendIQStanzaWithAction = function (jid,gameId,action){
+    var iqId = getIdForIqAction(gameId);
+    var iq = $iq({to: jid, type: "result", id: iqId})
+    .c("query", {xmlns: "urn:ietf:params:xml:ns:xmpp-stanzas"})
+     .c("game", {id: gameId})
+       .c("action", {type: action.type})
+		action.type=null;	  
+    iq = genetareIQStanzaWithObject(iq,action)
+    return connection.sendIQ(iq);
+  };
+	
+	var getIdForIqAction = function (gameId){
+		return iqStanzaID['gameAction'] + "_" + gameId;
+	}
+	
+	var genetareIQStanzaWithObject = function(iq,object){
+		if(typeof object != "object"){
+			return iq;
+		}
+		var childs=Object.keys(object).length;
+    var childsCounter = 0;
+		
+		$.each(object, function(index, value) {
+		  if(value==null){
+			  return;
+			}
+      if((typeof value == "object")){
+        //Complex object
+				iq.c(index, {})
+				iq = genetareIQStanzaWithObject(iq,value)
+      } else {
+        //Simple object
+        if(typeof value == "number"){
+          value = value + "";
+        }
+				if(childsCounter==childs-1){
+					iq.c(index, {}).t(value).up().up()
+				} else {
+					iq.c(index, {}).t(value).up()
+				}
+      }
+      childsCounter++;
+    });
+		return iq;
+	}
+
+
+  //RECEIVE ACTIONS
+	
+  var handleActionIQStanza = function(iq){
+		var from = iq.getAttribute("from");
+    var slug = from.split("@")[0]; 
+    var queryTags = iq.getElementsByTagName('query');
+    
+    if (queryTags.length == 1) {
+      var queryElement = queryTags[0];
+      var gameTags = queryElement.getElementsByTagName('game');
+      
+      if(gameTags.length == 1){
+        var game = gameTags[0];
+				var gameId = $(game).attr("id")
+				var actionElements = game.getElementsByTagName('action');
+				$.each(actionElements, function(index, value) {
+            var myaction = buildActionObject(value)
+						PRESENCE.GAME[gameId].onActionReceived(myaction)
+        });
+      }
+    }
+    return true;
+	}
+
+	var buildActionObject = function (actionTag){
+		var myaction = new action();
+		var type = $(actionTag).attr("type")
+		myaction.type = type;
+		myaction = buildComplexObject(myaction,actionTag)
+		return myaction
+	}
+	
+	var buildComplexObject = function(parent,childs){
+    $.each($(childs).children(), function(index, value) {
+       if ($(value).children().length>0) {
+         //Complex object
+				 parent[value.tagName]= new Object();
+				 parent[value.tagName]= buildComplexObject(parent[value.tagName],$(value))
+       } else {
+        //Simple object
+				
+        //Check dataformat
+        if(! isNaN(+($(value).text()))){
+          //$(value).text() is a string which contains a number
+          var myvalue = +($(value).text());
+        } else {
+          var myvalue = $(value).text();
+        }
+        parent[value.tagName]=myvalue
+       }
+    });
+		return parent
+	}
+
+
+  
+	/////////////////////////////
+	//REMOVE CONNECTION HANDLERS
+	/////////////////////////////
+	
+  var removeHandler = function(handler){
+		connection.deleteHandler(handler);
+	}
+	
+	var addHandler = function(gameId){
+		return connection.addHandler(handleActionIQStanza, null, "iq", "result", getIdForIqAction(gameId) , null);
+	}
+
+
+  return {
+    init: init,
+		sendIQStanzaToRequestGame: sendIQStanzaToRequestGame,
+		handleRequestGameIQStanza: handleRequestGameIQStanza,
+		sendIQStanzaToResponseGameRequest: sendIQStanzaToResponseGameRequest,
+		handleIQResultFromGameRequest: handleIQResultFromGameRequest,
+		sendIQStanzaToFinishGame: sendIQStanzaToFinishGame,
+    handleIQResultFromGameRequestFinish: handleIQResultFromGameRequestFinish,
+		sendIQStanzaWithAction: sendIQStanzaWithAction,
+    handleActionIQStanza: handleActionIQStanza,
+		addHandler : addHandler,
+		removeHandler: removeHandler
+  };
+
+}) (PRESENCE, jQuery);

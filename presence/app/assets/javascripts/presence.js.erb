@@ -2,3 +2,18 @@ var PRESENCE = PRESENCE || {};
 
 PRESENCE.VERSION = '<%=SocialStream::Presence::VERSION%>';
 PRESENCE.AUTHORS = 'Aldo Gordillo';
+
+
+PRESENCE.CORE = (function(P,$,undefined){
+
+  var init = function(){
+     initFocusListeners();
+     checkVideocallFeature();
+		 PRESENCE.GAME.init(strophe_connection);
+		 initAudio();
+  };
+
+  return {
+    init: init
+  };
+}) (PRESENCE, jQuery);

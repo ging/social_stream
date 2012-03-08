@@ -146,6 +146,9 @@ function createGroupChatBox(group_slug,open){
     
     //Modify default box
     
+		//Delete games Tick
+    $(getChatBoxButtonForSlug(group_slug,"games")).remove()
+		
     //Delete video Tick
     $(getChatBoxButtonForSlug(group_slug,"video")).remove();
     
@@ -188,9 +191,11 @@ function createMainChatBox(){
     
     //Modify default box
     
-    //Delete closeTick and video Tick
+    //Delete closeTick, video Tick and games tick
     $(mainChatBox.parent().parent()).find(".ui-chatbox-titlebar").find(".ui-icon-closethick").remove();
     $(mainChatBox.parent().parent()).find(".ui-videobox-icon").remove();
+		$(mainChatBox.parent().parent()).find(".chat-gamesthick").remove();
+		
     //Margin for minusthick
     (mainChatBox.parent().parent()).find(".ui-chatbox-titlebar").find(".chat-minusthick").parent().css("margin-right","5px")
     //Delete nofitications div
@@ -473,6 +478,8 @@ function getChatBoxButtonForSlug(slug,button){
       break;
       case "videoChange":
       return chatBoxButtons[3];
+		  case "games":
+      return chatBoxButtons[4];
       break;
       default : return null;
     }

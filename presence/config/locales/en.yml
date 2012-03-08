@@ -51,3 +51,16 @@ en:
       joining: "Joining..."
       joinError: "You can't join in the room \n {{errorMsg}}"
       offline: "You are offline"
+    game:
+      call: "{{name}} wants to play"
+      accept: Accept
+      deny: Deny
+      offline: "Unable to connect. You are offline"
+      guestOffline: "Unable to connect. {{name}} is offline"
+      unable: Unable to init game.
+      rejected: "{{name}} has rejected your invitation"
+      rejectedBusy: "{{name}} is busy"
+      cancel: "{{name}} cancel the invitation"
+      finish: "{{name}} close the game"
+      waiting: Waiting for response...
+      unknown: Unknown response

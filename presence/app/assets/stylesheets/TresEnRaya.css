@@ -1,0 +1,57 @@
+.tresEnRayaContainerDivClass {
+	border: none;
+	width: 100%;
+	height: 100%;
+}
+
+.tresEnRayaMessageDivClass {
+
+}
+
+.tresEnRayaContainerThemeClassic{
+	border: none;
+	background-image: url('games/ter/classic_board.png');
+	background-size: 100%;
+}
+
+.tresEnRayaContainerThemeModern{
+	border: none;
+	background-image: url('games/ter/modern_board.png');
+	background-size: 100%;
+}
+
+.tresEnRayaMessageThemeClassic {
+
+}
+
+.tresEnRayaMessageThemeModern {
+	background-color: black;
+}
+
+p.tresEnRayaMessagePThemeClassic {
+	text-align: center;
+	font-size: 80%;
+}
+
+p.tresEnRayaMessagePThemeModern {
+	text-align: center;
+	font-size: 80%;
+	color: white;
+}
+
+img.tresEnRayaImgThemeClassic{
+	border: none;
+	position: absolute;
+}
+
+img.tresEnRayaImgThemeModern{
+	border: none;
+	position: absolute;
+}
+
+#myGame{
+	width: 200px;
+	height: 200px;
+	margin-left: 200px;
+	margin-top: 300px;
+}
