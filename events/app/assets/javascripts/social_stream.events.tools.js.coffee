@@ -7,22 +7,6 @@
 #= require sprintf
 #= require scheduler
 
-SocialStream.Events.create = (start, end, allDay) ->
-  title = prompt('Event Title:');
-  if title
-    $.post(SocialStream.Events.current.eventsPath,
-           {
-           event: {
-             title: title,
-             start_at: start.toString(),
-             end_at: end.toString(),
-             all_day: allDay,
-             _contact_id: SocialStream.Events.current.contactId
-             }
-           },
-           undefined,
-          "script");
-
 SocialStream.Events.tools = {}
 
 SocialStream.Events.tools.currentRGB = () ->
