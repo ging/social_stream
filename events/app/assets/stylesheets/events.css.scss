@@ -95,6 +95,7 @@ div.event_date {
 
 #sidebar_calendar td {
   height: 25px;
+  padding: 1px;
 }
 
 #sidebar_calendar td.past {
@@ -113,6 +114,23 @@ div.event_date {
 #sidebar_calendar td.busy {
   font-weight: bold;
 }
+
+#sidebar_calendar td.busy:hover {
+  font-weight: bold;
+  color: $main-color;
+  background: $secondary-color;
+  border: $main-color 1px solid;
+  padding: 0px;
+}
+
+#sidebar_calendar td.busy.today {
+	padding: 0px;
+}
+
+#sidebar_calendar td.busy:hover a {
+  color: $main-color;
+}
+
 .sidebar_calendar_month {
   text-align: center;
   padding: 5px;
