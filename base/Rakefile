@@ -1,6 +1,6 @@
 # encoding: UTF-8
 require 'rake'
-require 'rake/rdoctask'
+require 'rdoc/task'
 
 require 'rubygems'
 
