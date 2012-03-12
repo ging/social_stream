@@ -8,4 +8,12 @@ class Relation::Public < Relation::Single
   def allow?(user, action, object)
     action == 'read' && object == 'activity'
   end
+
+  def receivers
+    Array.wrap Anonymous.instance
+  end
+
+  def receiver_ids
+    receivers.map(&:id)
+  end
 end

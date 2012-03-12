@@ -323,7 +323,7 @@ class Actor < ActiveRecord::Base
   #
   # @return [Contact]
   def suggestions(size = 1)
-    candidates = Actor.where(Actor.arel_table[:id].not_in(sent_active_contact_ids + [id]))
+    candidates = Actor.where(Actor.arel_table[:id].not_in(sent_active_contact_ids + [id, Anonymous.instance.id]))
 
     size.times.map {
       candidates.delete_at rand(candidates.size)
