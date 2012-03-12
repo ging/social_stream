@@ -30,6 +30,12 @@ class Activity < ActiveRecord::Base
   has_many :audiences, :dependent => :destroy
   has_many :relations, :through => :audiences
 
+  has_many :timelines,
+           :dependent => :destroy
+  has_many :timeline_actors,
+           :through => :timelines,
+           :source  => :actor
+
   has_many :activity_object_activities,
            :dependent => :destroy
   has_many :activity_objects,

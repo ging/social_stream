@@ -83,6 +83,12 @@ class Actor < ActiveRecord::Base
            :class_name => "ActivityAction",
            :dependent  => :destroy
 
+  has_many :timelines,
+           :dependent => :destroy
+  has_many :timeline_activities,
+           :through => :timelines,
+           :source  => :activity
+
   scope :alphabetic, order('actors.name')
 
   scope :letter, lambda { |param|
