@@ -48,7 +48,7 @@ Gem::Specification.new do |s|
   # Simple navigation for menu
   s.add_runtime_dependency('simple-navigation', '~> 3.5.1')
   # Background jobs
-  s.add_runtime_dependency('resque','~> 1.19.0')
+  s.add_runtime_dependency('resque','~> 1.20.0')
   # Modernizr.js javascript library
   s.add_runtime_dependency('modernizr-rails', '~> 2.0.6')
   # Sphinx search engine
