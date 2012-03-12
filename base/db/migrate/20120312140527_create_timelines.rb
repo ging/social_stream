@@ -10,6 +10,6 @@ class CreateTimelines < ActiveRecord::Migration
     add_index :timelines, :actor_id
 
     add_foreign_key "timelines", "activities", :name => "index_timelines_on_activity_id"
-    add_foreign_key "timelines", "actor", :name => "index_timelines_on_actor_id"
+    add_foreign_key "timelines", "actors", :name => "index_timelines_on_actor_id"
   end
 end
