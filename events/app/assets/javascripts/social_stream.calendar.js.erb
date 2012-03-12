@@ -62,9 +62,8 @@ SocialStream.Calendar = (function(SS, $, undefined){
           title: busyTipsy,
           html: true,
           fade: true,
-          className: 'sidebar_calendar_tipsy',
           hoverable: true,
-          gravity: 'e',
+          gravity: 'ne',
           opacity: 0.95
         });
       }
@@ -89,7 +88,7 @@ SocialStream.Calendar = (function(SS, $, undefined){
       }
     });
 
-    return '<div id="tipsy-' + this.id + '"><img src="<%= asset_path('loading.gif') %>"></div>';
+    return '<div id="tipsy-' + this.id + '" class="tipsy-sidebar_calendar"><img src="<%= asset_path('loading.gif') %>"></div>';
   }
 
   return {

@@ -4,6 +4,7 @@
 //
 //= require fullcalendar
 //= require boxy
+//= require tipsy
 
 @import "colors";
 
@@ -166,9 +167,14 @@ div.event_date {
 
 .tipsy-sidebar_calendar {
 	min-width: 300px;
+	width: 300px;
 	border: solid $separation-color 1px;
 	padding: 10px;
 	background-color: #FFF;
 	opacity: 1;
 	border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px;
+}
+
+.tipsy-inner {
+	max-width: 500px;
 }
