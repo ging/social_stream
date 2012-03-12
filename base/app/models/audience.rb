@@ -6,4 +6,12 @@
 class Audience < ActiveRecord::Base
   belongs_to :activity
   belongs_to :relation
+
+  after_create :create_timelines
+
+  protected
+
+  def create_timelines
+    activity.timeline_actor_ids += relation.receiver_ids
+  end
 end

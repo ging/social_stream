@@ -128,4 +128,21 @@ describe Activity do
       end
     end
   end
+
+  describe "to several relations" do
+    before do
+      @sender = Factory(:user).actor
+      @friend = Factory(:friend, :contact => Factory(:contact, :sender => @sender)).receiver
+      @acquaintance = Factory(:acquaintance, :contact => Factory(:contact, :sender => @sender)).receiver
+    end
+
+    it "should include timeline_actors" do
+      @activity = Factory(:activity,
+                          :channel => @sender.self_contact.channel,
+                          :relation_ids => @sender.relation_customs.map(&:id))
+
+      @activity.timeline_actors.should include(@friend)
+      @activity.timeline_actors.should include(@acquaintance)
+    end
+  end
 end
