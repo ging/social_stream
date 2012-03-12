@@ -10,7 +10,7 @@ module SocialStream
 
       # Set locale as per params, user preference or default
       def set_locale
-        I18n.locale = params[:locale] || user_preferred_locale || extract_locale_from_accept_language_header || I18n.default_locale
+        I18n.locale = params[:locale] || user_preferred_locale || session[:locale] || extract_locale_from_accept_language_header || I18n.default_locale
       end
 
       private
