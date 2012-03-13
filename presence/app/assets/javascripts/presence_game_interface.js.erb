@@ -3,31 +3,12 @@
 ////////////////////
 
 PRESENCE.GAME.INTERFACE = (function(P,$,undefined){
-  
-  //////////////////////////
-  //      TRIGGERS        //
-  //////////////////////////
-	
-  var pickGamesButton = function (uiElement){
-    var slug = $(uiElement.element).attr("id");
-    var videoBoxVisibility = toggleVideoBoxForSlug(slug);
-  
-    if (videoBoxVisibility) {
-      hideVideoChatButton(slug);
-			var mygame = generateDefaultGame(slug);
-      PRESENCE.GAME.requestUserToPlay(slug,mygame);
-    } else {
-      showVideoChatButton(slug);
-      PRESENCE.GAME.finishGame(slug);
-    }
-  }
-	
 	
 	////////////////////////////
   //       CALLBACKS        //
   ////////////////////////////
 	
-	updateInterfaceAfterGameRequestReceived = function(slug){
+	updateInterfaceAfterGameRequestReceived = function(slug,game){
     //gameStatus="pending";
 		
 	  //Show or create chatbox
@@ -35,7 +16,7 @@ PRESENCE.GAME.INTERFACE = (function(P,$,undefined){
 	  var chatBox = getChatBoxForSlug(slug);
 		
 	  //Show invitation message
-	  showGameInvitation(slug);
+	  showGameInvitation(slug,game);
 	  
 		//Hide hideVideoChatButton
     hideVideoChatButton(slug);
@@ -44,7 +25,7 @@ PRESENCE.GAME.INTERFACE = (function(P,$,undefined){
 	  toggleVideoBoxForSlug(slug,true);
 	}
 	
-	var updateInterfaceBeforeStartGame = function(slug){
+	var updateInterfaceBeforeStartGame = function(slug,game){
     var parentDiv = document.createElement('div');
     var divID = 'game_' + slug + contactsInfo[slug].game.id;
     parentDiv.setAttribute('id', divID);
@@ -55,7 +36,7 @@ PRESENCE.GAME.INTERFACE = (function(P,$,undefined){
     PRESENCE.GAME.startGame(slug,divID)
   }
   
-  var updateInterfaceAfterFinishGame = function(slug){
+  var updateInterfaceAfterFinishGame = function(slug,game){
     toggleVideoBoxForSlug(slug,false);
     showVideoChatButton(slug);
   }
@@ -66,12 +47,144 @@ PRESENCE.GAME.INTERFACE = (function(P,$,undefined){
 
 
 
+  //////////////////////////
+  //      TRIGGERS        //
+  //////////////////////////
+  
+  var pickGamesButton = function (uiElement){
+    var slug = $(uiElement.element).attr("id");
+    var videoBoxVisibility = toggleVideoBoxForSlug(slug);
+  
+    if (videoBoxVisibility) {
+      hideVideoChatButton(slug);
+      showGames(slug);
+    } else {
+      showVideoChatButton(slug);
+      PRESENCE.GAME.finishGame(slug);
+    }
+  }
+  
+  
+  ///////////////////////////
+  //      GAME LIST        //
+  ///////////////////////////
+  
+  function gameItem(name,choice,thumbnail) {
+    this.name = name;
+    this.choice = choice;
+    this.thumbnail = thumbnail;
+  }
+ 
+  var gameList = [];
+  gameList.push(new gameItem("Modern Tic Tac Toe","Modern-TER","/assets/games/ter/modern_thumbnail.png"))
+  gameList.push(new gameItem("Classic Tic Tac Toe","Classic-TER","/assets/games/ter/classic_thumbnail.png"))
+  //gameList.push(new gameItem("Street Fighter","SFIGTHER","/assets/games/sfighter/thumbnail.png"))
+  
+  var showGames = function(slug,gameItem){
+    if((typeof gameItem == 'undefined')||(gameItem==null)){
+      if (gameList.length > 0) {
+          gameItem = gameList[0]
+      } else {
+        gameItem = new gameItem("No games available","None","")
+      }
+    }
+    var template = generateGameSelectionTemplate(slug,gameItem)
+    setVideoBoxContent(slug,template);
+    setShowGamesButtonsFunction();
+  }
+	
+	var onGameSelected = function (slug,game){
+		  PRESENCE.GAME.requestUserToPlay(slug, game);
+  }
+
+
+
 	///////////////////////////////
   //  INTERFACE HELP METHODS   //
   ///////////////////////////////
 	
-	var showGameInvitation = function(slug){
-		var title = "<p class=\"game-info\">" + I18n.t("chat.game.call", {name: getNameFromSlug(slug)}) + " </p>";
+	var generateGameSelectionTemplate = function (slug,gameItem) {
+    var template = 
+    "<div class=\"game-choices\">" +
+    
+      "<div class=\"game-choice-buttonLeft\">" +
+        "<a class=\"game-choice-linkLeft\">" +
+          "<img class=\"game-button-img\" src=\"/assets/btn/group_left.png\" >" +
+        "</a>" +
+      "</div>" +
+      
+      "<div class=\"game-choice\">" +
+        "<a class=\"game-choice-link\" slug=" + slug + " choice=\"" + gameItem.choice + "\" >" +
+          "<img class=\"game-choice-img\" src=\"" + gameItem.thumbnail + "\" >" +
+          "<p class=\"game-name\">" + gameItem.name + " </p>" +
+        "</a>" +
+      "</div>" +
+      
+      "<div class=\"game-choice-buttonRight\">" +
+        "<a class=\"game-choice-linkRight\">" +
+          "<img class=\"game-button-img\" src=\"/assets/btn/group_right.png\" >" +
+        "</a>" +
+      "</div>" +
+      
+    "</div>"
+    return template;
+  }
+  
+  var setShowGamesButtonsFunction = function(){
+    $(".game-choice-link").click(function(event) {
+      var choice = $(this).attr("choice")
+      var slug = $(this).attr("slug")
+      var mygame = P.GAME.FACTORY.getGame(slug,choice);
+      onGameSelected(slug,mygame)
+    });
+
+	  $(".game-choice-linkLeft").click(function(event) {
+	    var gameChoice = $(event.target).parent().parent().parent().find(".game-choice-link")
+	    var slug = gameChoice.attr("slug")
+	    var choice = gameChoice.attr("choice")
+	    var newGameItem = getPreviousGameItem(choice)
+	    showGames(slug,newGameItem);
+	  });
+	  
+	  $(".game-choice-linkRight").click(function(event) {
+	    var gameChoice = $(event.target).parent().parent().parent().find(".game-choice-link")
+	    var slug = gameChoice.attr("slug")
+	    var choice = gameChoice.attr("choice")
+	    var newGameItem = getNextGameItem(choice)
+	    showGames(slug,newGameItem);
+	  });
+  }
+ 
+  var getNextGameItem = function(actualChoice){
+    var nextGameItem=null;
+    $.each(gameList, function(index, value) {
+      if(value.choice == actualChoice){
+        if(index==gameList.length-1){
+          nextGameItem = gameList[0]
+        } else {
+          nextGameItem = gameList[index+1];
+        }
+      }
+    });
+    return nextGameItem;
+  }
+ 
+  var getPreviousGameItem = function(actualChoice){
+    var nextGameItem=null;
+    $.each(gameList, function(index, value) {
+      if(value.choice == actualChoice){
+        if(index==0){
+          nextGameItem = gameList[gameList.length-1]
+        } else {
+          nextGameItem = gameList[index-1];
+        }
+      }
+    });
+    return nextGameItem;
+  }
+  
+	var showGameInvitation = function(slug,game){
+		var title = "<p class=\"game-info\">" + I18n.t("chat.game.call", {name: getNameFromSlug(slug), game: game.name}) + " </p>";
     var msg = title + "<p class=\"game-request\"> <a class=\"gameButton\" slug=\""+slug+"\" value=\"yes\">" + I18n.t("chat.game.accept") + "</a> -" 
     + " <a class=\"gameButton\" slug=\""+slug+"\" value=\"no\">" + I18n.t("chat.game.deny") + "</a> </p>";
     setVideoBoxContent(slug,msg);
@@ -95,40 +208,17 @@ PRESENCE.GAME.INTERFACE = (function(P,$,undefined){
     $(getChatBoxButtonForSlug(slug,"video")).show();
   }
 	
-
-
-  //////////////////////
-  //  DEBUG METHODS   //
-  //////////////////////
-
-	var generateDefaultGame = function(guest_slug){
-		var player1 = new PRESENCE.GAME.player(user_slug,user_name)
-		var player2 = new PRESENCE.GAME.player(guest_slug,getNameFromSlug(guest_slug))
-		var localPlayers = [player1,player2]
-    var localOptions = new Array();
-    localOptions['theme']="Modern";
-    var mygame = new PRESENCE.GAME.game("TER","Tres en Raya",localPlayers,localOptions)
-		return mygame;
+	var play = function(){
+		$(".chat-gamesthick").css("display","block");
 	}
-
-
+	
   return {
 		pickGamesButton: pickGamesButton,
 		updateInterfaceAfterGameRequestReceived: updateInterfaceAfterGameRequestReceived,
 		updateInterfaceBeforeStartGame: updateInterfaceBeforeStartGame,
 		updateInterfaceAfterFinishGame: updateInterfaceAfterFinishGame,
 		updateInterfaceOnInformationMessage: updateInterfaceOnInformationMessage,
-		generateDefaultGame: generateDefaultGame
+		play: play
   };
 
 }) (PRESENCE, jQuery);
-
-
-
-////////////////////
-//Interface Events
-////////////////////
-
-function play(){
-	$(".chat-gamesthick").css("display","block");
-}

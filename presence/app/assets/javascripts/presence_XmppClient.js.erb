@@ -263,7 +263,9 @@ function onConnect(status) {
     disconnectionFlag = false;
     afterNewConnectionFlag = true;
 		
-		userStatus = getRestoreUserChatStatus();
+		if(! userStatus){
+			userStatus = getRestoreUserChatStatus();
+		}
 		if(userStatus=="offline"){
 			userStatus="chat";
 		}

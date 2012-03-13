@@ -1,0 +1,583 @@
+////////////////////
+//  Street Fighter  //
+////////////////////
+
+PRESENCE.GAME.SFIGTHER = (function(P,$,undefined){
+
+  //Gamecore
+  var CORE = P.GAME
+    
+  //Games variables
+  var game;             //Game and player are objects defined in the gamecore.
+  var name = "Street Fighter"
+	var player = null;
+	var playing=true;
+	
+	//Character Ids
+	var cvsId = "cvs";
+	var aboboId = "abobo";
+	var characterId = null;
+	
+	// Possible moves;
+  var IDLE=          0;
+  var WALK_FORWARD=  1;
+  var WALK_BACKWARD= 2;
+  var PUNCH=         3;
+  var KICK=          4;
+  var BLOCK=         5;
+  var BEATEN=        6;
+  var DIE=           7;
+	
+	var PLAYGROUND_WIDTH = 800 ;
+  var PLAYGROUND_HEIGHT = 200;
+	var image_path = "/assets/games/sfighter/";
+	
+	//Fighters
+	var abobo;
+	var cvs;
+	
+  //We must define our ACTION object.
+  //The information exchanged between players is performed through the exchange of action type objects.
+  //We can define our own types of actions, with different fields
+  function action(player,movement) {
+    this.player = player;
+    this.move = movement;
+    this.type = "movement";
+  }
+	
+	
+	var lastAction = null;
+  
+  //Html Divs
+  var divID = null;
+
+
+	////////////////
+  //   STARTER  //
+  ////////////////
+  //The core will invoke this method automatically to start the game.
+  //*myPlayer = myself
+  //*myGame = Game object (is the same for all players)
+  //*myDivID = Div to render the game
+  var init = function(myPlayer,myGame,myDivID){
+		player = myPlayer;
+    game = myGame;
+    divID = "playground";
+    
+		if(myGame.players[0].id == myPlayer.id){
+			//Play with abobo
+			characterId = aboboId;
+		} else {
+			//Play with cvs
+			characterId = cvsId;
+		}
+
+    //Setting options
+    game.options = settingOptions(myGame.options);
+		
+    playing=true;
+    
+    drawBackground();	
+
+    settingKeyBoardEvents();
+
+    initFighters();
+
+	  //register the main callback
+    registerMainCallBack();
+
+		//start loading!
+		$().setLoadBar("loadingBar", 600);
+		
+		//Show welcome message
+		$.playground().startGame(function(){
+		  $("#welcomMessage").fadeOut(2000, function(){$(this).remove()});
+	  });
+	}
+	
+
+
+  //Set defaults for unspecified options
+  var settingOptions = function(myOptions){
+    //Apply default options for non specified opts.
+    return myOptions;
+  };
+
+
+  //Register the main callback
+  function registerMainCallBack(){
+	  $.playground().registerCallback(function(){
+		
+		  var cvs = $("#cvs");
+		  var cvsF = cvs.data("fighter");
+		  var cvsLeft = cvs.position().left;
+		  
+		  var abobo = $("#abobo");
+		  var aboboF = abobo.data("fighter");
+		  var aboboLeft = abobo.position().left;
+		  
+
+			
+		  //hit?
+		  if(cvsLeft+cvsF.animations[cvsF.currentState].width - 2 > aboboLeft){
+		    if((cvsF.currentState == KICK || cvsF.currentState == PUNCH) && aboboF.currentState != BEATEN){
+		      if (aboboF.currentState == KICK || aboboF.currentState == PUNCH) {
+		        hit(abobo)
+		        hit(cvs)
+		      } else if (aboboF.currentState != BLOCK){
+		        hit(abobo)
+		      }
+		    } else if ((aboboF.currentState == KICK || aboboF.currentState == PUNCH) && cvsF.currentState != BEATEN) {
+		      if (cvsF.currentState != BLOCK){
+		        hit(cvs)
+		      }
+		    }
+		  }
+		
+		  //Move
+		  if(cvsF.currentState == WALK_FORWARD){
+		    if((cvsLeft+cvsF.animations[cvsF.currentState].width+2) < aboboLeft){
+		      cvs.css("left", cvsLeft+2);
+		    }
+		  } else if ((cvsLeft > 50) && (cvsF.currentState == WALK_BACKWARD)){
+		        cvs.css("left", cvsLeft-2)
+		  }
+		    
+		  if(aboboF.currentState == WALK_FORWARD){
+		    if((cvsLeft+cvsF.animations[cvsF.currentState].width+2) < aboboLeft){
+		      abobo.css("left", aboboLeft - 2);
+		    }
+		  } else if ((aboboLeft < 650) && (aboboF.currentState == WALK_BACKWARD)){
+		        abobo.css("left", aboboLeft + 2);
+		  }
+		    
+		  var al = abobo.position().left - aboboF.animations[aboboF.currentState].deltaX;
+		  var cl = cvs.position().left - cvsF.animations[cvsF.currentState].deltaX;
+		   
+			  
+		  var centerPos = (al - cl)/2 + cl;
+		  scrollStage(-(centerPos-400)*0.5);
+			
+		  return false;
+    }, 30);
+}
+
+
+  ///////////////////////////
+  // Setting Keyboard Events
+	///////////////////////////
+	
+  var keyList = new Array();
+  keyList[37]=false //leftKey
+  keyList[39]=false //rightKey
+  keyList[65]=false //A=PUNCH
+  keyList[83]=false //S=KICK
+  keyList[90]=false //Z=BLOCK
+
+  var previousKey = null;
+  var currentKey = null;
+  
+	function settingKeyBoardEvents(){
+  	$(window).keydown(function(evt){
+  		if (typeof keyList[evt.which] != "undefined") {
+  			if (currentKey == evt.which) {
+  				keyList[currentKey] = true;
+  				return
+  			}
+  			previousKey = currentKey
+  			currentKey = evt.which
+  			if (previousKey != null) {
+  				keyList[previousKey] = false;
+  			}
+  			keyList[currentKey] = true;
+  		}
+  	}).keyup(function(evt){
+  		if (typeof keyList[evt.which] != "undefined") {
+			}
+		});
+	}
+
+  function nextMove(fighter,adversary){
+    if(fighter.data("fighter").currentState == DIE){
+      return DIE;
+    }
+    for(var key in keyList){
+      if (keyList[key]){
+        keyList[key] = false
+        var leftOriented = fighter.position().left-adversary.position().left > 0;
+  
+        switch (key) {
+            case "37":
+               //Left key
+		          if(leftOriented){
+		            return WALK_FORWARD
+		          } else {
+		            return WALK_BACKWARD
+		          }
+               
+            case "39":
+               //Right key
+                if(leftOriented){
+			            return WALK_BACKWARD
+			          } else {
+			            return WALK_FORWARD
+			          }
+  
+           case "65":
+               //A
+                return PUNCH
+           case "83":
+               //S
+                return KICK
+           case "90":
+               //Z
+                return BLOCK
+        }
+      }
+    }
+     return IDLE
+  }
+
+
+  ///////////////////////////
+  //    DRAW METHODS       //
+  ///////////////////////////
+
+  var drawBackground = function(){
+    var containderDiv = document.createElement('div');
+    containderDiv.setAttribute('id', divID);
+    containderDiv.setAttribute('style', "width: 800px; height: 200px;");
+    $("#wrapper_body").prepend(containderDiv)
+		
+		var welcomeMessageDiv = document.createElement('div');
+		welcomeMessageDiv.setAttribute('id', "welcomMessage");
+		welcomeMessageDiv.setAttribute('style', "position: absolute; top: 0px; width: 800px; height: 200px; color: white; z-index: 1000; background: #333;");
+		$("#" + divID).prepend(welcomeMessageDiv)
+		
+		$("#" + divID).playground({height: PLAYGROUND_HEIGHT, width: PLAYGROUND_WIDTH, refreshRate: 30, keyTracker: true});
+		
+		//Playground Sprites
+    var foreground  = new $.gameQuery.Animation({imageURL: image_path + "/stage/foreground.png", type: $.gameQuery.ANIMATION_VERTICAL});
+    var ground    = new $.gameQuery.Animation({imageURL: image_path + "/stage/ground.png"});
+    var background1 = new $.gameQuery.Animation({imageURL: image_path + "/stage/background1.png"});
+    var background2 = new $.gameQuery.Animation({imageURL: image_path + "/stage/background2.png"});
+    var background3 = new $.gameQuery.Animation({imageURL: image_path + "/stage/background3.png"});
+    $.playground().addSprite( "background3",
+                {posx: 90, posy: 0,
+                 height: 200, width: 534,
+                 animation: background3})
+          .addSprite( "background2",
+                {posx:30, posy: -50,
+                 height: 180, width: 432,
+                 animation: background2})
+          .addSprite( "background1",
+                {posx:50, posy: -150,
+                 height: 317, width: 749,
+                 animation: background1})
+          .addSprite( "ground",
+                {posx: -300, posy: 0,
+                 height: 200, width: 1493,
+                 animation: ground}).addGroup("fighters").end()
+          .addSprite( "foreground",
+                {posx:-800, posy: 165,
+                 height: 44, width: 2000,
+                 animation: foreground});
+    $("#sceengraph").css("background-color","#121423");
+    
+	}
+	
+	function initFighters(){
+    cvs = {
+      id: cvsId,
+      health: 100,
+      currentState : IDLE,
+      position: 250,
+      adversary: "#abobo",
+      animations: [ {animation: new $.gameQuery.Animation({ imageURL: image_path + "/cvs/cvs_idle_59x106x6.png",
+                numberOfFrame: 6,
+                delta: 59,
+                rate:240,
+                type: $.gameQuery.ANIMATION_HORIZONTAL | $.gameQuery.ANIMATION_CALLBACK}),
+      deltaX: 0, deltaY: 0, width: 59, height: 106},
+          {animation: new $.gameQuery.Animation({ imageURL: image_path + "/cvs/cvs_walk_forward_58x106x5.png",
+                numberOfFrame: 5,
+                delta: 58,
+                rate:240,
+                type: $.gameQuery.ANIMATION_HORIZONTAL | $.gameQuery.ANIMATION_CALLBACK}),
+      deltaX: 0, deltaY: 0, width: 58, height: 106},
+          {animation: new $.gameQuery.Animation({ imageURL: image_path + "/cvs/cvs_walk_backward_58x106x5.png",
+                numberOfFrame: 5,
+                delta: 58,
+                rate:240,
+                type: $.gameQuery.ANIMATION_HORIZONTAL | $.gameQuery.ANIMATION_CALLBACK}),
+      deltaX: 0, deltaY: 0, width: 58, height: 106},
+          {animation: new $.gameQuery.Animation({ imageURL: image_path + "/cvs/cvs_punch_120x104x6.png",
+                numberOfFrame: 6,
+                delta: 120,
+                rate:120,
+                type: $.gameQuery.ANIMATION_HORIZONTAL | $.gameQuery.ANIMATION_CALLBACK}),
+      deltaX: 0, deltaY: 2, width: 120, height: 104},
+          {animation: new $.gameQuery.Animation({ imageURL: image_path + "/cvs/cvs_kick_156x106x9.png",
+                numberOfFrame: 9,
+                delta: 156,
+                rate:90,
+                type: $.gameQuery.ANIMATION_HORIZONTAL | $.gameQuery.ANIMATION_CALLBACK}),
+      deltaX: -20, deltaY: 0, width: 156, height: 106},
+          {animation: new $.gameQuery.Animation({ imageURL: image_path + "/cvs/cvs_block_69x99x2.png",
+                numberOfFrame: 2,
+                delta: 69,
+                rate:480,
+                type: $.gameQuery.ANIMATION_HORIZONTAL | $.gameQuery.ANIMATION_CALLBACK}),
+      deltaX: 0, deltaY: 7, width: 69, height: 99},
+          {animation: new $.gameQuery.Animation({ imageURL: image_path + "/cvs/cvs_hit_59x103x1.png",
+                      rate: 720,
+                        type: $.gameQuery.ANIMATION_CALLBACK}),
+      deltaX: 0, deltaY: 3, width: 59, height: 103},
+          {animation: new $.gameQuery.Animation({ imageURL: image_path + "/cvs/cvs_die_150x110x1.png",
+            numberOfFrame: 1,
+                      rate: 720,
+                        type: $.gameQuery.ANIMATION_CALLBACK}),
+      deltaX: 0, deltaY: 3, width: 150, height: 110},
+      ]
+    }
+    
+    $("#fighters").addSprite("cvs",
+                {posx: 250,
+                 posy: 70,
+                 height: 106,
+                 width: 58,
+                 animation: cvs.animations[0].animation,
+                            geometry: $.gameQuery.GEOMETRY_RECTANGLE,
+                            callback: animate});
+    $("#cvs").data("fighter", cvs);
+
+    
+    abobo = {
+      id: aboboId,
+      health: 100,
+      currentState : IDLE,
+      position: 500,
+      adversary: "#cvs",
+      animations: [  {animation: new $.gameQuery.Animation({  imageURL: image_path + "/abobo/abobo_idle_100x121x3.png",
+                numberOfFrame: 3,
+                delta: 100,
+                rate:190,
+                type: $.gameQuery.ANIMATION_HORIZONTAL | $.gameQuery.ANIMATION_CALLBACK}),
+        deltaX: 0, deltaY: 49, width: 100, height: 121},
+              {animation: new $.gameQuery.Animation({ imageURL: image_path + "/abobo/abobo_walk_forward_94x126x6.png",
+                numberOfFrame: 6,
+                delta: 94,
+                rate:240,
+                type: $.gameQuery.ANIMATION_HORIZONTAL | $.gameQuery.ANIMATION_CALLBACK}),
+         deltaX: 0, deltaY: 44, width: 94, height: 126},
+              {animation: new $.gameQuery.Animation({ imageURL: image_path + "/abobo/abobo_walk_backward_94x126x6.png",
+                numberOfFrame: 6,
+                delta: 94,
+                rate:240,
+                type: $.gameQuery.ANIMATION_HORIZONTAL | $.gameQuery.ANIMATION_CALLBACK}),
+        deltaX: 0, deltaY: 44, width: 94, height: 126},
+              {animation: new $.gameQuery.Animation({ imageURL: image_path + "/abobo/abobo_punch_131x170x4.png",
+                numberOfFrame: 4,
+                delta: 131,
+                rate:150,
+                type: $.gameQuery.ANIMATION_HORIZONTAL | $.gameQuery.ANIMATION_CALLBACK}),
+        deltaX: -30, deltaY: 0, width: 131, height: 170},
+              {animation: new $.gameQuery.Animation({ imageURL: image_path + "/abobo/abobo_kick_137x130x2.png",
+                numberOfFrame: 2,
+                delta: 137,
+                rate:500,
+                type: $.gameQuery.ANIMATION_HORIZONTAL | $.gameQuery.ANIMATION_CALLBACK}),
+        deltaX: 20, deltaY: 40, width: 137, height: 130},
+              {animation: new $.gameQuery.Animation({ imageURL: image_path + "/abobo/abobo_block_81x130x1.png",
+                rate:700,
+                        type: $.gameQuery.ANIMATION_CALLBACK}),
+              deltaX: 0, deltaY: 40, width: 81, height: 130},
+              {animation: new $.gameQuery.Animation({ imageURL: image_path + "/abobo/abobo_hit_108x120x3.png",
+                numberOfFrame: 3,
+                delta: 108,
+                rate:240,
+                type: $.gameQuery.ANIMATION_HORIZONTAL | $.gameQuery.ANIMATION_CALLBACK}),
+        deltaX: 0, deltaY: 50, width: 108, height: 120},
+              {animation: new $.gameQuery.Animation({ imageURL: image_path + "/abobo/abobo_die_156x119x1.png",
+                numberOfFrame: 1,
+                delta: 0,
+                rate:500,
+                type: $.gameQuery.ANIMATION_HORIZONTAL | $.gameQuery.ANIMATION_CALLBACK}),
+        deltaX: 0, deltaY: 50, width: 156, height: 120}]
+    }
+        
+    $("#fighters").addSprite("abobo",
+                {posx: 550,
+                 posy: 60,
+                 height: 121,
+                 width: 100,
+                 animation: abobo.animations[0].animation,
+                            geometry: $.gameQuery.GEOMETRY_RECTANGLE,
+                            callback: animate});
+    $("#abobo").data("fighter", abobo);
+	}
+
+
+
+  //////////////////////////////
+  //    ANIMATION CALLBACKS   //
+  //////////////////////////////
+
+  function animate(sprite){
+    sprite = $(sprite);
+    fighter = sprite.data("fighter");
+    adversary = $(fighter.adversary);
+    adversaryFighter = adversary.data("fighter");
+    
+    var nextState = IDLE;
+    
+    if (fighter.id == characterId) {
+			//myfighter
+			nextState = nextMove(sprite,adversary)
+			var myaction = new action(nextState)
+			sendAction(myaction)
+    } else {
+			if (lastAction != null) {
+	  	  nextState = lastAction.move
+	    }
+    }
+    
+    changeAnimation(sprite, fighter.animations, nextState, fighter.currentState);
+    
+    if(nextState == PUNCH || nextState == KICK){
+        sprite.css("z-index", 20);
+    } else if(fighter.currentState == PUNCH || fighter.currentState == KICK){
+        sprite.css("z-index", undefined);
+    }
+    
+    fighter.currentState = nextState;
+  }
+
+    
+  var scrollStage = function (offset){
+    if(offset > 50){
+      offset = 50;
+    } else if(offset < -50) {
+      offset = -50;
+    }
+    $("#foreground").css("left", ""+(-800 + offset/0.5)+"px");
+        
+    $("#ground").css("left", ""+(-300 + offset)+"px");
+    $("#fighters").css("left", ""+ offset +"px");
+    
+    $("#background1").css("left", ""+(50 + offset/2)+"px");
+    $("#background2").css("left", ""+(30 + offset/4)+"px");
+    $("#background3").css("left", ""+(90 + offset/5)+"px");
+  }
+    
+
+  /*replace with new*/
+  var changeAnimation = function(sprite, animationArry, newAnimation , oldAnimation){
+    sprite
+      .setAnimation(animationArry[newAnimation].animation)
+      .width(animationArry[newAnimation].width)
+      .height(animationArry[newAnimation].height)
+      .css("top",  sprite.position().top  + animationArry[newAnimation].deltaY - animationArry[oldAnimation].deltaY)
+      .css("left", sprite.position().left + animationArry[newAnimation].deltaX - animationArry[oldAnimation].deltaX);
+  };
+    
+
+  function hit(sprite){
+    var spriteF = sprite.data("fighter");
+    spriteF.health = spriteF.health - 45;
+    if(spriteF.health<0){
+      changeAnimation(sprite, spriteF.animations, DIE, spriteF.currentState);
+      spriteF.currentState = DIE;
+      playing = false;
+    } else {
+      changeAnimation(sprite, spriteF.animations, BEATEN, spriteF.currentState);
+      spriteF.currentState = BEATEN;
+    }
+  }
+
+
+  ////////////////////////////////
+  //    CORE CONFIG CALLBACKS   //
+  ////////////////////////////////
+	
+	//Optional methods that can be invoked by the core
+		
+  //The Core provides basic validation
+	//We can include our own validation conditions here!
+	//The core will invoke this method automatically in the validation process
+  var validateParams = function(myPlayer,myGame,myDivID){
+
+    if(myGame.players.length != 2){
+      return new CORE.createValidationResult(false,"This game needs two players");
+    }
+    return new CORE.createValidationResult(true,"Ok");  
+  }
+	
+	
+	//MinimumRequirements to execute this game
+  var minimumRequirements = function(){
+		var requirements = new Array();
+    return requirements;
+  }
+
+
+
+  /////////////////////////////////     
+  // GAMECORE CALLS & CALLBACKS  //     * To send our actions to other players we will use the << sendAction >> method.   
+  /////////////////////////////////     * When some player send us a action, the core will invoke the << onActionReceived >> method.
+
+  var sendAction = function(action){
+    CORE.sendAction(game,action)
+    return;
+  }
+
+  var onActionReceived = function(action){
+    lastAction = action;
+    return;
+  }
+
+  //Get action type method
+	var getActionType = function(move){
+	  switch (key) {
+      case IDLE:
+        return "movement"
+      case WALK_FORWARD:
+        return "movement" 
+		  case WALK_BACKWARD:
+        return "movement"
+		  case PUNCH:
+        return "trigger"
+		  case KICK:
+        return "trigger"
+		  case BLOCK:
+        return "movement"
+		  case BEATEN:
+        return "trigger"
+		  case DIE:
+        return "trigger"
+    }
+	}
+
+  //Getters
+  var getName = function(){
+    return name
+  }
+	
+  var getGame = function(){
+    return game;
+  }
+	
+	var getMyplayer = function(){
+    return player;
+  }
+
+
+  return {
+    init: init,
+		getName: getName,
+		validateParams: validateParams,
+		minimumRequirements: minimumRequirements,
+		onActionReceived: onActionReceived
+  };
+
+}) (PRESENCE, jQuery);

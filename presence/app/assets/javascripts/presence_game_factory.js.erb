@@ -1,0 +1,47 @@
+////////////////////
+//Multiplayer Games Interface Manager
+////////////////////
+
+PRESENCE.GAME.FACTORY = (function(P,$,undefined){
+  
+  //////////////////////////
+  //        BUILDERS      //
+  //////////////////////////
+		
+	var getGame = function(slug,choice){
+		switch(choice){
+		case "Modern-TER":
+		  var options = new Array();
+      options['theme']="Modern";
+			return generateGame(slug,"TER",options)
+		case "Classic-TER":
+		  var options = new Array();
+      options['theme']="Classic";
+			return generateGame(slug,"TER",options)
+		default:
+		  return null
+		}
+	}
+	
+  var generateGame = function(guest_slug,gameId,options){
+    var player1 = new PRESENCE.GAME.player(user_slug,user_name)
+    var player2 = new PRESENCE.GAME.player(guest_slug,getNameFromSlug(guest_slug))
+    var players = [player1,player2]
+    var mygame = new PRESENCE.GAME.game(gameId,getGameName(gameId),players,options)
+    return mygame;
+  }
+
+  var getGameName = function(gameId){
+	  if (typeof PRESENCE.GAME[gameId].getName == "function") {
+			return PRESENCE.GAME[gameId].getName();
+	  } else {
+			return gameId;
+		}
+	}
+
+
+  return {
+		getGame: getGame
+  };
+
+}) (PRESENCE, jQuery);

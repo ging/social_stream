@@ -9,17 +9,25 @@ PRESENCE.GAME.TER = (function(P,$,undefined){
 		
   //Games variables
 	var game;             //Game and player are objects defined in the gamecore.
+	var name = "Tic Tac Toe"
   var player = null;
   var currentPlayer = null;
 	var playing=true;
 	
+	
 	//We must define our ACTION object.
 	//The information exchanged between players is performed through the exchange of action type objects.
 	//We can define our own types of actions, with different fields
-  function action(player,square) {
+  //function action(player,square) {
+    //this.player = player;
+    //this.square = square;
+		//this.type = "general";
+  //}
+	
+	function action(player,square) {
     this.player = player;
-		this.type = "general";
     this.square = square;
+    this.type = "general";
   }
 	
   //Html Divs
@@ -99,8 +107,8 @@ PRESENCE.GAME.TER = (function(P,$,undefined){
 	//We can include our own validation conditions here!
 	//The core will invoke this method automatically in the validation process
   var validateParams = function(myPlayer,myGame,myDivID){
-    if(myGame.players.lenght < 2){
-      return new CORE.createValidationResult(false,"This game needs two players at least");
+    if(myGame.players.length != 2){
+      return new CORE.createValidationResult(false,"This game needs two players");
     }
     return new CORE.createValidationResult(true,"Ok");  
   }
@@ -119,7 +127,7 @@ PRESENCE.GAME.TER = (function(P,$,undefined){
   /////////////////////////////////     * When some player send us a action, the core will invoke the << onActionReceived >> method.
 
   var sendAction = function(action){
-    CORE.sendAction(game.id,game.players,action)
+    CORE.sendAction(game,action)
     return;
   }
 
@@ -322,15 +330,13 @@ PRESENCE.GAME.TER = (function(P,$,undefined){
       var figure = "aspa";
     }
 
-    var path = "/assets/games/ter/modern_circle.png"
     $(img).attr("src","/assets/games/ter/" + game.options['theme'].toLowerCase() + "_" + figure + ".png");
     $("#" + containerDivId).append(img);
     $(img).addClass('tresEnRayaImgTheme' + game.options['theme'])
 		
-		//Calculate displacement
 		var figureSizePercent = 0.8;
-		var xdisplacement = -squareDimension*figureSizePercent/2*0.9;
-		var ydisplacement = 10;
+		var xdisplacement = -squareDimension*figureSizePercent/2*0.7;
+    var ydisplacement = 13;
 		
     $(img).width(squareDimension*figureSizePercent)
     $(img).height(squareDimension*figureSizePercent)
@@ -406,6 +412,10 @@ PRESENCE.GAME.TER = (function(P,$,undefined){
   }
 
   //Getters
+  var getName = function(){
+    return name
+  }
+	
   var getGame = function(){
     return game;
   }
@@ -425,6 +435,7 @@ PRESENCE.GAME.TER = (function(P,$,undefined){
 
   return {
     init: init,
+		getName: getName,
 		validateParams: validateParams,
 		minimumRequirements: minimumRequirements,
 		onActionReceived: onActionReceived

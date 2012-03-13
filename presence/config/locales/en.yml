@@ -52,7 +52,7 @@ en:
       joinError: "You can't join in the room \n {{errorMsg}}"
       offline: "You are offline"
     game:
-      call: "{{name}} wants to play"
+      call: "{{name}} wants to play a {{game}} game"
       accept: Accept
       deny: Deny
       offline: "Unable to connect. You are offline"

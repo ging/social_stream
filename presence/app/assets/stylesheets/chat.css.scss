@@ -81,10 +81,8 @@ div.ui-videobox{
 	height: 0px;
 	border-bottom: 1px solid $separation-color;
 	max-width: 230px;
-}
-
-div.ui-videobox-icon{
-  
+	text-align: center;
+	margin: auto;
 }
 
 div.ui-videobox-icon-change{
@@ -131,7 +129,7 @@ p.video-request{
 }
 
 p.game-info{
-  padding-top: 25%;
+  padding-top: 20%;
   text-align: center;
 }
 
@@ -141,6 +139,57 @@ p.game-request{
   font-size: 130%;
   font-weight: bolder;
   color: $main-color;
+}
+
+.game-choices{
+  display: inline;
+  width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+div.game-choice {
+  float: left;
+  position: relative;
+	width: 90px;
+  height: 90px;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 20px;
+}
+
+div.game-choice-buttonLeft {
+  float: left;
+  position: relative;
+	margin-left: 40px;
+	margin-top: 50px;
+}
+
+div.game-choice-buttonRight {
+  float: left;
+  position: relative;
+	margin-right: 40px;
+	margin-top: 50px;
+}
+
+img.game-choice-img{
+	width: 90px;
+	height: 90px;
+}
+
+img.game-choice-button{
+	margin-top: 5px;
+  width: 30px;
+  height: 30px;
+}
+
+p.game-name{
+	margin-top: 5px;
+  text-align: center;
+}
+
+a.game-choice-link{
+	
 }
 
 /* notifications style sheet */
@@ -192,8 +241,12 @@ p.ui-chatbox-notify-text{
 }
 
 .chat-videothick{
-	/* display: none; */
 	padding: 1px;
+	/*background-image: url("webcam.png");
+  background-repeat: no-repeat;
+  display: block;
+  height: 16px;
+  width: 16px; */
 }
 
 .chat-videoPublisherthick{

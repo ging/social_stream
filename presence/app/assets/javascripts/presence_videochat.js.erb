@@ -21,6 +21,8 @@ function clickVideoChatButton(slug){
 }
 
 function closeVideoChatWindow(slug){
+	  //Show games button
+    $(getChatBoxButtonForSlug(slug,"games")).show()
     closeVideoSession(slug);
     return;
 }
@@ -29,6 +31,9 @@ function closeVideoChatWindow(slug){
 var reconnectAttemptsVideo = 1;
 
 function openVideoChatWindow(slug){
+	
+	//Hide games button
+	$(getChatBoxButtonForSlug(slug,"games")).hide()
     
   if (slug in contactsInfo) {
     var connectionStatus = contactsInfo[slug].videoChatStatus;

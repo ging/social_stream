@@ -52,7 +52,7 @@ es:
        joinError: "No se pudo acceder a la sala.  \n {{errorMsg}}"
        offline: "Estás desconectado"
     game:
-      call: "{{name}} quiere iniciar una partida"
+      call: "{{name}} quiere iniciar una partida de {{game}}"
       accept: Aceptar
       deny: Rechazar
       offline: "Imposible conectar. Estás desconectado"

@@ -1,7 +1,7 @@
 ////////////////////
 //Debug functions
 ////////////////////
-var sspresence_debugging=true;
+var sspresence_debugging=false;
 
 function log(msg) {
 	  if(sspresence_debugging){

@@ -1,5 +1,6 @@
 ////////////////////
 //Multiplayer Games Core based on XMPP
+//Version: 1.2
 ////////////////////
 
 PRESENCE.GAME = (function(P,$,undefined){
@@ -45,6 +46,10 @@ PRESENCE.GAME = (function(P,$,undefined){
 	
 
 	var requestUserToPlay = function (slug,game){
+		if(game==null){
+			return;
+		}
+		
 		if (slug in contactsInfo) {
       var gameStatus = contactsInfo[slug].gameStatus;
     } else {
@@ -102,13 +107,13 @@ PRESENCE.GAME = (function(P,$,undefined){
     }
   }
 
-	var sendAction = function(gameId,players,action){
-		$.each(players, function(index, value) {
+	var sendAction = function(game,action){
+		$.each(game.players, function(index, value) {
       var slug = value.id;
 			if(slug!=user_slug){
 				if(slug in contactsInfo){
 					var jid=slug+"@"+contactsInfo[slug].domain+"/"+contactsInfo[slug].resource;
-          P.GAME.COMUNICATION.sendIQStanzaWithAction(jid,gameId,action);
+          P.GAME.COMUNICATION.sendIQStanzaWithAction(jid,game.id,action);
 				}
 			}
     });
@@ -126,7 +131,7 @@ PRESENCE.GAME = (function(P,$,undefined){
     } else {
       contactsInfo[slug].gameStatus="pending";
     } 
-    P.GAME.INTERFACE.updateInterfaceAfterGameRequestReceived(slug)
+    P.GAME.INTERFACE.updateInterfaceAfterGameRequestReceived(slug,contactsInfo[slug].game)
   }
 
   var updateLogicAfterReceivedGameRequestResponse = function(slug,response){
@@ -135,7 +140,7 @@ PRESENCE.GAME = (function(P,$,undefined){
     }
     if(response=="yes"){
       contactsInfo[slug].gameStatus = "playing";
-      P.GAME.INTERFACE.updateInterfaceBeforeStartGame(slug)
+      P.GAME.INTERFACE.updateInterfaceBeforeStartGame(slug,contactsInfo[slug].game)
     } else if (response=="no"){
       P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug,I18n.t("chat.game.rejected", {name: getNameFromSlug(slug)}));
       contactsInfo[slug].gameStatus="disconnected";
@@ -267,6 +272,7 @@ PRESENCE.GAME = (function(P,$,undefined){
 	}
 	
 	var finishGame = function (slug){
+		var game = null;
 		if(slug in contactsInfo){
       var gameStatus = contactsInfo[slug].gameStatus;
       if(gameStatus=="playing"){
@@ -283,9 +289,10 @@ PRESENCE.GAME = (function(P,$,undefined){
         P.GAME.COMUNICATION.sendIQStanzaToResponseGameRequest(slug,"no");
       }
       contactsInfo[slug].gameStatus="disconnected";
+			game = contactsInfo[slug].game
     }
 		
-		PRESENCE.GAME.INTERFACE.updateInterfaceAfterFinishGame(slug)
+		PRESENCE.GAME.INTERFACE.updateInterfaceAfterFinishGame(slug,game)
 	}
 
   var userDisconnected = function(slug){

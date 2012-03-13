@@ -190,8 +190,8 @@
       })
       .appendTo(uiChatboxTitlebar),
       uiChatboxTitlebarVideoText = $('<span></span>')
-      .addClass('ui-icon-circle-triangle-e ' +  'chat-thick ' + ' chat-videothick' )
-      .text('video')
+      .addClass('ui-icon-circle-triangle-e ' + 'chat-thick ' + ' chat-videothick' )
+      .text('     ')
       .appendTo(uiChatboxTitlebarVideo),
 			
 			

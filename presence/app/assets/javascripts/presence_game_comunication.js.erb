@@ -25,6 +25,7 @@ PRESENCE.GAME.COMUNICATION = (function(P,$,undefined){
 		connection.addHandler(handleRequestGameIQStanza,null, "iq", "get",iqStanzaID['gameRequest'], null);
 		connection.addHandler(handleIQResultFromGameRequest,null, "iq", "result",iqStanzaID['gameRequest'], null);
 		connection.addHandler(handleIQResultFromGameRequestFinish,null, "iq", "result", iqStanzaID['gameRequestFinish'], null);
+		connection.addHandler(handleActionIQStanza,null, "iq", "result", getIdForIqAction("gameId"), null);
   };
 	
 	
@@ -196,29 +197,67 @@ PRESENCE.GAME.COMUNICATION = (function(P,$,undefined){
 	}
 	
 	var genetareIQStanzaWithObject = function(iq,object){
+
 		if(typeof object != "object"){
 			return iq;
 		}
+		
 		var childs=Object.keys(object).length;
     var childsCounter = 0;
 		
 		$.each(object, function(index, value) {
+
 		  if(value==null){
 			  return;
 			}
+			
       if((typeof value == "object")){
         //Complex object
-				iq.c(index, {})
+				var object_type = "object"
+				
+				if(value.constructor.toString().indexOf("Array")!=-1){
+					object_type = "array"
+				}
+				
+				iq.c(index, {type: object_type})
 				iq = genetareIQStanzaWithObject(iq,value)
+				
       } else {
-        //Simple object
-        if(typeof value == "number"){
-          value = value + "";
+				//Simple object
+				
+				var data_type = (typeof value)
+				var index_type = (typeof index)
+				
+        switch (data_type){
+				  case "number":
+				    value = value + "";
+				    break;
+				  case "boolean":
+						value = value.toString();
+				    break;
+				  case "string":
+            //do nothing
+            break;
+				  default: 
+					  break;
+				}
+				
+				switch (index_type){
+          case "number":
+					   //case: Array
+					   index = "item";
+            break;
+          case "string":
+            //do nothing
+            break;
+          default: 
+            break;
         }
+				
 				if(childsCounter==childs-1){
-					iq.c(index, {}).t(value).up().up()
+					iq.c(index, {type: data_type}).t(value).up().up()
 				} else {
-					iq.c(index, {}).t(value).up()
+					iq.c(index, {type: data_type}).t(value).up()
 				}
       }
       childsCounter++;
@@ -263,19 +302,47 @@ PRESENCE.GAME.COMUNICATION = (function(P,$,undefined){
     $.each($(childs).children(), function(index, value) {
        if ($(value).children().length>0) {
          //Complex object
-				 parent[value.tagName]= new Object();
+				 if ($(value).attr("type")=="array"){
+				 	  parent[value.tagName] = new Array()
+				 } else {
+				 	  parent[value.tagName] = new Object()
+				 }
 				 parent[value.tagName]= buildComplexObject(parent[value.tagName],$(value))
+				 
        } else {
         //Simple object
+				var myvalue = null
+				var stringValue = $(value).text()
 				
         //Check dataformat
-        if(! isNaN(+($(value).text()))){
-          //$(value).text() is a string which contains a number
-          var myvalue = +($(value).text());
-        } else {
-          var myvalue = $(value).text();
+				var data_type = $(value).attr("type")
+				
+        switch (data_type){
+          case "number":
+						if(! isNaN(+(stringValue))){
+	            //$(value).text() is a string which contains a number
+	            myvalue = +(stringValue)
+	          }
+            break;
+          case "boolean":
+					  if((stringValue=="true")||(stringValue=="false")){
+							myvalue = (stringValue === "true")
+						}
+            break;
+					case "string":
+            myvalue = stringValue
+            break;
+          default: 
+            break;
         }
-        parent[value.tagName]=myvalue
+				   
+         //Is parent an array element and value an array item?
+         if((parent.constructor.toString().indexOf("Array")!=-1)&&(value.tagName == "item")){
+            parent.push(myvalue)
+         } else {
+				 	  parent[value.tagName]=myvalue
+				 }
+        
        }
     });
 		return parent
@@ -311,3 +378,6 @@ PRESENCE.GAME.COMUNICATION = (function(P,$,undefined){
   };
 
 }) (PRESENCE, jQuery);
+
+
+
