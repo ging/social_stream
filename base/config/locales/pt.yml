@@ -1,0 +1,507 @@
+pt:
+  language_name: "Português"
+  actor:
+    name: "Nome"
+  action:
+    send: "Enviar"
+    accept: "Aceitar"
+  account:
+    cancel: "Cancelar a conta"
+    edit: "Editar a conta"
+    email: 
+      change: "Mudar endereço de email"
+    lang: 
+      change: "Mudar idioma"
+    one: "Conta"
+    password:
+      change: "Mudar senha"
+      new: "Nova senha"
+      retype: "Repetir nova senha"
+    privacy: "Privacidade"
+  activerecord:
+    attributes:
+      contact:
+        relation_ids: "Tipo de contato"
+      relation/custom:
+        name: "Nome"
+      user:
+        email: "Email"
+        name: "Nome"
+        password: "Senha"
+        password_confirmation: "Confirmar senha"
+        remember_me: "Lembrar-me"
+  activity:
+    audience:
+      hidden:
+        summary: "Restrito"
+        full: "Compartilhado com contatos de %{audience}"
+      public:
+        summary: "Público"
+        full: "Acessível por toda Internet"
+      visible:
+        summary: "Restrito"
+        full: "Compartilhado com %{audience}"
+    confirm_delete: "Apagar atividade?"
+    delete: "Apagar"
+    last: "Últimas Atividades"
+    like: "Curtir"
+    one: "Atividade"
+    other: "Atividades"
+    privacy:
+      myself:
+        contacts:
+          group: "Todos os integrantes"
+          user: "Seus contatos"
+      outside:
+        contacts:
+          group: "Membros de %{receiver}"
+          user: "Contatos de %{receiver}"
+    sending: "Enviando"
+    title: "Atividades"
+    to_comment: "Comentário"
+    unlike: "Curtir (desfazer)"
+    verb:
+      follow:
+        User:
+          title: "%{subject} adicionou %{contact} como contato."
+          message: "%{name} adicionou você como contato."
+        Group:
+          title: "%{subject} adicionou %{contact} como contato."
+          message: "%{name} adicionou você como contato."
+      like:
+        User:
+          title: "%{subject} é fã de %{contact}."
+          message: "%{name} agora é seu fã."
+        Group:
+          title: "%{subject} é fã de %{contact}."
+          message: "%{name} agora é seu fã."
+      make-friend:
+        User:
+          title: "%{subject} e %{contact} estão agora conectados."
+          message: "%{name} também adicionou você como contato."
+        Group:
+          title: "%{subject} adicionou %{contact} como contato."
+          message: "%{name} adicionou você como contato."           
+      post:
+        title:
+          other_wall: "%{sender} → %{receiver}"
+  browse: "Browse"
+  button:
+    cancel: "Cancelar"
+    create: "Criar"
+    save: "Salvar"
+    update: "Atualizar"
+  cheesecake:
+    changes:
+      details: "Alterar detalhes"
+      none: "Sem alterações"
+      save: "Salvar alterações"
+      saving: "Salvando..."
+    form:
+      editing: "Editando"
+      fields:
+        color: "Cor"
+        name: "Nome"
+        permissions: "Permissões"
+        subsector: "Segmento"
+    select:
+      hint: "Selecione clicando nos retratos"
+  comment:
+    input: "Escreva um comentário..."
+    confirm_delete: "Excluir comentário?"
+    name: "comentário"
+    one: "um comentário"
+    view_all: "Veja todos comentários"
+  contact:
+    addressbook: "Catálogo de endereços"
+    all_n: "Todos os contatos (%{count})"
+    confirm_delete: "Excluir contato?"
+    current: "Atual"
+    delete: "Excluir"
+    edit:
+      title: "Editar contato com %{name}"
+      submit: "Editar contato"
+    error_count:
+      one: "1 erro impediu que este contato fosse salvo:"
+      other: "%{count} erros impediram que este contato fosse salvo:"
+    graph:
+      one: "Gráfico"
+      empty: "Lamentamos, mas você não tem nenhum contato ainda. Você pode tentar a caixa de pesquisa para procurar alguém!"
+    in_common:
+      one: "1 contato em comum"
+      other: "%{count} contatos em comum"
+    new:
+      link: "+ Adicionar contato"
+      title: "Adicionar %{name} aos seus contatos"
+      menu: "Adicionar contato"
+      submit: "Adicionar"
+    one: "Contato"
+    other: "Contatos"
+    pending:
+      other: "Pendente"
+      all: "Todos"
+      all_n: "Veja todos os contatos pendentes (%{count})"
+    relation:
+      one: "Tipo de contato"
+      new: "Novo tipo"
+    reply:
+      link: "+ Responder contato"
+      title: "Responder pedido de contato para %{name}"
+      submit: "Responder contato"
+    suggestion:
+      one: "Sugestão"
+      other: "Sugestões"
+      all: "Todas"
+    type:
+      new: "+ Novo tipo"
+  copyright: "2010 Copyright - todos direitos reservados"
+  delete:
+    confirm: "Apagar %{element}}?"
+  devise:
+    links:
+      sign_in: "Entrar"
+      sign_up: "Registrar"
+      forgot_password: "Esqueceu sua senha?"
+      confirmation_instructions: "Não recebeu instruções de confirmação?"
+      unlock_instructions: "Não recebeu instruções para desbloquear?"
+      sign_in_with: "Entrar com %{provider}"
+    passwords:
+      confirm: "Confirmar senha"
+      forgot: "Esqueceu sua senha?"
+      instructions: "Digite o endereço de e-mail vinculado a sua conta e nós lhe enviaremos instruções para alterá-la:"
+      update: "Mude sua senha"
+  follower:
+    n:
+      one: "1 seguidor"
+      other: "%{count} seguidores"
+  forgot_password: "Esqueceu sua senha?"
+  frontpage:
+    collaborate:
+      default: "Colaborar"
+      sentence1: "Organize seus projetos e atividades"
+      sentence2: "Participar de congressos e eventos"
+      sentence3: "Crie seu próprio grupo e conferências"
+    elements:
+      comments: "Comentários"
+      conferences: "Conferências"
+      networks: "Redes Sociais"
+      organizers: "Organizadores"
+      participants: "Participantes"
+      groups: "Grupos"
+      tags: "Tags"
+    main_title: "Social Stream é a base para a construção de sites de rede social."
+    meet:
+      default: "Encontrar"
+      sentence1: "Descubra grupos e pessoas interessantes"
+      sentence2: "Encontre a última atividade dos seus contatos"
+    register: "Registre agora!"
+    share:
+      default: "Compartilhar"
+      sentence1: "Seus projetos e atividades"
+      sentence2: "Comentários, fotos, audio e vídeos"
+    stats: "%{users} usuários e %{groups} grupos registrados"
+  group:
+    one: "Grupo"
+    other: "Grupos"
+    all: "Todos os grupos"
+    all_n: "Todos os grupos (%{count})"
+    by: "Por grupos"    
+    destroy:
+      one: "Excluir grupo"
+      explanation: "Todas as atividades, informações e contatos deste grupo serão excluídos!"
+      go_ahead: "Sim, tenho certeza. Excluir tudo!"
+      last_confirm: "Esta é sua última chance. Você realmente tem certeza?"
+    form:
+      title: "Grupo"
+    input: "Qual o nome do grupo?"
+    last: "Últimos grupos"
+    my: "Meus grupos"
+    new:
+      action: "Novo grupo"
+      name: "Nome"
+      description: "Descrição"
+      participants: "Participantes"
+    cloud: "Nuvem de tags de grupos"
+    most:
+      followed: "Mais seguidos"
+      liked: "Mais populares"
+    tags: "Tags"
+  help: "Ajuda"
+  helpers:
+    submit:
+      relation_custom:
+        create: "Salvar"
+        update: "Atualizar"
+  home: "Página inicial"
+  inbox:
+    one: "Entrada"
+  invitation:
+    e-mails: "Correio eletrônico"
+    error: "Sua solicitação não foi processada. Certifique-se de que você escreveu os endereços de correio eletrônico corretamente."
+    invited: "%{sender} convidou você para %{site}!"
+    join: "Convide outras pessoas para se juntar ao %{site}!"
+    join_me: "Junte-se a mim no %{site}!"
+    one: "Convite"
+    other: "Convites"
+    toolbar: "Convidar"
+    success: "Seus convites foram enviados com sucesso"
+    text: "Escreva sua mensagem"
+  like:
+    n:
+      one: "1 fã"
+      other: "%{count} fãs"
+  location:
+    message: "Você está aqui > %{location}"
+    base: "Você está aqui"
+    separator: " > "
+  mailboxer:
+    delete: "Excluir"
+    delete_confirm: "Você quer mover '%{object}' para o lixo?"
+    form:
+      body: "Mensagem"
+      recipients: "Para"
+      subject: "Assunto"
+    mark_as_read: "Marcar como lido"
+    message_mailer:
+      has_sent_new: 
+        event: "enviou uma nova mensagem para %{receiver}"
+        group: "enviou uma nova mensagem para %{receiver}"
+        user: "enviou-lhe uma nova mensagem"
+      has_sent_reply: 
+        event: "enviou uma resposta para %{receiver}"
+        group: "enviou uma resposta para %{receiver}"
+        user: "enviou-lhe uma resposta"
+      subject_new: "%{subject}"
+      subject_reply: "%{subject}"
+    notification_mailer:
+      subject: "%{subject}"
+    reply: "Responder"
+    send: "Enviar mensagem"
+    sent: "Sua mensagem foi enviada"
+  menu:
+    options: "Opções"
+    information: "Informação"
+    wall: "Mural"
+  message:
+    answer: "Escreva sua resposta"
+    inbox: "Entrada"
+    look: "Dê uma olhada nesta conversa"
+    new: "Nova mensagem"
+    one: "Mensagem"
+    other: "Mensagens"
+    participants: "Participantes"
+    send: "Enviar uma mensagem"
+    sentbox: "Enviadas"
+    trash: "Lixeira"
+  notification:
+    all_text: "Leia o texto todo em %{url}"
+    confirm: "Confirmar %{sender} como contato?"
+    default: "Você tem uma nova notificação"
+    destroy_sure: "Você deseja excluir esta notificação?"
+    fan: "%{sender} é agora %{whose} fã."
+    follow:
+      group: "%{sender} adicionado %{who} como contato."
+      user: "%{sender} adicionado %{who} como contato."
+    hello: "Olá %{receiver},"
+    like:
+      group: "%{sender} curte %{whose} %{thing}." 
+      user: "%{sender} curte %{whose} %{thing}."
+    look: "Dê uma olhada no mural de %{sender}"
+    makefriend:
+      group: "%{sender} também adicionou %{who} como contato."
+      user: "%{sender} também adicionou %{who} como contato."
+    one: "Notificação"
+    other: "Notificações"
+    post:
+      group: "%{title} -- por %{sender} no mural %{whose}"
+      user: "%{title} -- por %{sender} no seu mural"
+    read: "Marcar como lida"
+    read_all: "Marcar todas como lidas"
+    unread: "Marcar como não lida"
+    update:
+      group: "%{sender} atualizou %{thing} no mural %{whose}."
+      user: "%{sender} atualizou %{thing} no seu mural."
+    visit: "Visite %{url} e confira todas as suas notificações."
+    watch: "Dê uma olhada em %{url}"
+    watch_it: "Confira!"
+    who:
+      group: "%{name}"
+      user: "você"
+    whose: 
+      group: "%{receiver}'s"
+      user: "seu"
+  post:
+    confirm_delete: "Excluir postagem?"
+    form:
+      title: "Postagem"
+    input: "O que você está fazendo?"
+    name: "postagem"
+    one: "uma postagem"
+    title: "Postagens"
+  preposition:
+    and: "e"
+    on: "em"
+  profile:
+    one: "Perfil"
+    age: "Idade"
+    is_on: "está em"
+    must_be_signed_id: "Você precisa efetuar login"
+    group:
+      about: "Sobre nós"
+      birthday: "Anniversary"
+      experience: "Área de especialização"
+      info: "Informação sobre o grupo"
+      tags: "Tags do grupo"
+    user:
+      about: "Sobre mim"
+      birthday: "Aniversário"
+      experience: "Interesses"
+      info: "Informação pessoal"
+      tags: "Tags do usuário"
+    actualcity: "Cidade atual"
+    address: "Enderesso"
+    contact: "Informção de contato"
+    country: "País"
+    email: "E-mail"
+    empty: "Estes campos estão vazios. Por favor, atualize-os."
+    fax: "Fax"
+    mobile: "Celular"
+    organization: "Organização"
+    phone: "Telefone"
+    profile: "Editar perfil"
+    tags:
+      default: "social, stream,"
+      other: "Tags"
+    website: "Website" 
+    update:
+      error: "Por favor, verifique o formato do seu perfil"
+      success: "Seu perfil foi atualizado"     
+  public:
+    other: "Todos"
+  permission:
+    description:
+      default:
+        brief:
+          create: 
+            activity: "Publicar em seu mural"
+          follow:
+            nil: "Seguir atividade deles"
+          read:
+            activity: "Ler seu mural"
+          represent:
+            nil: "Administrar"
+          notify:
+            nil: "Notificar"
+        detailed:
+          create:
+            activity:
+              positive: "SERÃO CAPAZES DE postar novas atividades em seu mural"
+              negative: "NÃO SERÃO CAPAZES DE postar novas atividades em seu mural"
+          follow:
+            nil:
+              positive: "As atividades dos contatos em %{relation} IRÃO APARECER em seu mural"
+              negative: "As atividades dos contatos em %{relation} NÃO IRÃO APARECER em seu mural"
+          read:
+            activity:
+              positive: "SERÃO CAPAZES de ler as mensagens em seu mural, exceto aquelas compartilhadas com contatos específicos"
+              negative: "NÃO SERÃO CAPAZES de ler as mensagens em seu mural, exceto aquelas compartilhadas com contatos específicos"
+          represent:
+            nil:
+              positive: "SERÃO CAPAZES de mudar de sessão e agir como %{subject}"
+              negative: "NÃO SERÃO CAPAZES de mudar de sessão e agir como %{subject}"
+          notify:
+            nil:
+              positive: "As atividades SERÃO notificados para contatos em %{name}"
+              negative: "As atividades NÃO SERÃO notificados para contatos em %{name}"
+    of_relation:
+      choose: "2. Permissões para <strong>%{name}</strong>"
+  privacy:
+    intro: "Os contatos em <strong>%{relation}</strong>:"
+    rule:
+      add: "Adicionar"
+      title: "Regras de privacidade"
+      saved: "Regras de privacidade salvas"
+  relation_custom:
+    choose: "1. Escolha o tipo de relação"
+    confirm_delete: "Excluir esse relação?"
+    delete: "Excluir"
+    edit: "Mudar nome"
+    new: "+ Nova relação"
+    title: "Privacidade & contexto"
+  relation_public:
+    name: "Publico"
+  representation:
+    notice: "Sua sessão foi alterada. Agora você está agindo em nome de %{subject}. Use o menu superior direito para retornar à sua sessão"
+    switch: "Alterne sessão"
+  required: "(*) Estes campos são obrigatórios"
+  search:
+    all_results: "Pesquisar todos os %{subject} (%{count})"
+    at_least: "Escrever pelo menos dois caracteres"
+    global: 
+      name: "Pesquisa global"
+      first_result:
+        more: "Mostrando os primeiros %{count} resultados."
+        one: "Mostrando o primeiro resultado."
+      query: "Veja mais resultados para %{query} >"
+    name: "Search"
+    no_subject_found: "Nenhum %{subject} foi encontrado."
+    nothing: "Nada foi encontrado"
+    searching: "Pesquisando: %{query}"
+    show_all: "Todos"
+    write: "Escreva sua pesquisa ..."
+    wrong: "Parece haver um problema com o mecanismo de pesquisa"
+  settings:
+    api_key:
+      briefing: "Gerenciar a sua chave da API"
+      confirm: "Você tem certeza?"
+      empty: "Token vazio"
+      explanation: "Esta é sua chave da API"
+      name: "Chave da API"
+      regenerate: "Regerar chave da API"
+    cancel_account:
+      briefing: "Permite que você cancele sua conta"
+    email_change:
+      briefing: "Mude o seu e-mail"
+    lang_change:
+      briefing: "Alterar o idioma"
+      name: "Alterar o idioma"
+    error: "Alguns erros gerados ao salvar suas alterações"
+    for: "Configurações para"
+    main: "Configurações"
+    manage:
+      name: "Administrar Contatos"
+      briefing: "Configuração para contatos"
+      explanation: "Mudar as permissões dos contatos"
+    notifications:
+      briefing: "Configurações de notificações alertas de email"
+      name: "Notificaões"
+      by_email:
+        name: "Envie-me um email quando eu receber uma notificação"
+        always: "Sempre"
+        never: "Nunca"
+    one: "Configurações"
+    password_change:
+      briefing: "Mude sua senha"
+    success: "Suas configurações foram alteradas corretamente"
+  share: "Compartilhar"
+  sign_in: "Entrar"
+  sign_out: "Sair"
+  sign_up: "Cadastrar-se"
+  site:
+    name: "Social Stream"
+  subject:
+    this_is_you: "Este é você!"
+  sure: "Você tem certeza?"
+  time:
+    ago: "%{time} atrás"
+  unknown: "Desconhecido"
+  user:
+    by: "Por usuários"
+    one: "Usuário"
+    other: "Usuários"
+    all: "Todos os usuários"
+    all_n: "Todos os usuários (%{count})"
+  welcome: "Bem-vindo ao %{site}!"
+  lang:
+    browser: "Auto-detecção do idioma do navegador"
+    none: "Conteúdo independente da linguagem"
