@@ -40,16 +40,27 @@ Rails.application.routes.draw do
     resources object.to_s.pluralize
   end
 
-  resources :contacts do
-    collection do
-      get 'pending'
+  case SocialStream.relation_model
+  when :follow
+    resources :followers
+    resources :contacts do
+      collection do
+        get 'pending'
+      end
     end
-  end
+  when :custom
+    resources :contacts do
+      collection do
+        get 'pending'
+      end
+    end
 
-  namespace "relation" do
-    resources :customs
+    namespace "relation" do
+      resources :customs
+    end
+
+    resources :permissions
   end
-  resources :permissions
 
   match 'tags'     => 'tags#index', :as => 'tags'
   

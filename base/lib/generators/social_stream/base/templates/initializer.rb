@@ -20,6 +20,13 @@ SocialStream.setup do |config|
   # You can write your own activity objects
   #
   # config.activity_forms = [ :post, :document, :foo, :bar ]
+
+  # Config the relation model of your network
+  #
+  # :custom - users define their own relation types, and post with privacy, like Google+
+  # :follow - user just follow other users, like Twitter
+  #
+  # config.relation_model = :custom
   
   # Quick search (header) and Extended search models and its order. Remember to create
   # the indexes with thinking-sphinx if you are using customized models.

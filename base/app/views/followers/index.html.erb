@@ -1,0 +1,5 @@
+<% if params[:following] %>
+  <%= render @contacts %>
+<% else %>
+  <%= render @contacts.map(&:inverse!) %>
+<% end %>

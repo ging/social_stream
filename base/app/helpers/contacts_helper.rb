@@ -7,7 +7,7 @@ module ContactsHelper
     if c.reflexive?
       t('subject.this_is_you')
     else
-      render :partial => 'contacts/link', :locals => { :contact => c }
+      render :partial => "contacts/link_#{ SocialStream.relation_model }", :locals => { :contact => c }
     end
 
   end

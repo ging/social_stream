@@ -134,6 +134,8 @@ en:
     error_count:
       one: "1 error prohibited this contact from being saved:"
       other: "%{count} errors prohibited this contact from being saved:"
+    follow: "Follow"
+    following: "Following"
     graph:
       one: "Graph"
       empty: "We're sorry but you don't have any contacts yet. You can try the search box to look for somebody!"
@@ -164,6 +166,7 @@ en:
       all: "All"
     type:
       new: "+ New type"
+    unfollow: "Unfollow"
   copyright: "2010 Copyright - All rights reserved"
   delete:
     confirm: Delete %{element}}?

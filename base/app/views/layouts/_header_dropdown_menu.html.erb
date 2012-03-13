@@ -7,9 +7,11 @@
         <li>
           <%= link_to t('settings.main'), settings_path, :id => "btn_menu_settings" %>
         </li>
-        <li>
-          <%= link_to t('account.privacy'), relation_customs_path %>
-        </li>
+        <% if SocialStream.relation_model == :custom %>
+          <li>
+            <%= link_to t('account.privacy'), relation_customs_path %>
+          </li>
+        <% end %>
         <li>
           <%= link_to t('sign_out'), destroy_user_session_path, :method => :delete  %>
         </li>

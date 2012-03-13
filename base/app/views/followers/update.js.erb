@@ -1,0 +1,1 @@
+$(".<%= follow_link_class @contact %>").html("<%= escape_javascript render(:partial => "contacts/link_follow", :locals => { :contact => @contact.reload } )%>");

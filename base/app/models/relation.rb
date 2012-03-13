@@ -41,7 +41,7 @@
 # It sets the {Audience} that has access to it, and the {Permission Permissions} that rule that access.
 #
 class Relation < ActiveRecord::Base
-  Positive = %w{ custom public }
+  Positive = %w{ custom public follow }
   Negative = %w{ reject }
 
   belongs_to :actor

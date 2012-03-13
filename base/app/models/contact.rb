@@ -137,6 +137,13 @@ class Contact < ActiveRecord::Base
     @user_author = (subject.nil? ? nil : Actor.normalize(subject))
   end
 
+  # The sender of this {Contact} has establised positive sent to the receiver
+  #
+  # That means that there exists at least one {Tie} with a positive relation within them
+  def sent?
+    ties_count > 0 && relations.where(:type => Relation.positive_names).any?
+  end
+
   # Is this {Contact} +new+ or +edit+ for {SocialStream::Models::Subject subject} ?
   #
   # action is +new+ when, despite of being created, it has not {Tie ties} or it has a {Tie} with a
@@ -146,11 +153,7 @@ class Contact < ActiveRecord::Base
   # a {Relation::Public public relation}
   #
   def action
-    if ties_count > 0 && relations.where(:type => Relation.positive_names).any?
-      'edit'
-    else
-      replied? ? 'reply' : 'new'
-    end
+    sent? ? 'edit' : ( replied? ? 'reply' : 'new' )
   end
 
   def status
