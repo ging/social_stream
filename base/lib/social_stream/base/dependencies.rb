@@ -1,3 +1,5 @@
+# Monkey path Ruby on Rails
+require 'rails/social_stream'
 # Database foreign keys
 require 'foreigner'
 # jQuery
