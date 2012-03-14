@@ -1,6 +1,6 @@
 module ToolbarHelper
   # Configuration of toolbar items
-  include SocialStream::ToolbarConfig
+  include SocialStream::Views::Toolbar
 
   # Define the toolbar content for your view. There are two typical cases, depending on the value of
   # options[:profile]
@@ -42,68 +42,54 @@ module ToolbarHelper
   #
   #   <% toolbar :profile => @group, :option => :contacts %>
   #
-  def toolbar(options = {}, &block)
-    if options[:option] && block_given?
-      menu_options[options[:option]] = capture(&block)
-    end
-
-    content = capture do
-      if options[:profile]
-        render :partial => 'toolbar/profile', :locals => { :subject => options[:profile] }
-      elsif options[:option].present? and options[:option].to_s.eql? 'messages'
-        render :partial => 'toolbar/messages'
-      else
-        render :partial => 'toolbar/home'
-      end
-    end
+  def toolbar(type = :home, options = {})
+    content = toolbar_items(type, options).inject(ActiveSupport::SafeBuffer.new){ |result, item|
+      result + item[:html]
+    }
 
     case request.format
     when Mime::JS
       response = <<-EOJ
-
-          $('#toolbarContent').html("#{ escape_javascript(content) }");
-          initMenu();
-          expandSubMenu('#{ options[:option] }');
-          EOJ
+        $('#toolbarContent').html("#{ escape_javascript(content) }");
+        SocialStream.Toolbar.init({ option: '#{ options[:option] }' });
+      EOJ
 
       response.html_safe
     else
-    content_for(:toolbar) do
-    content
+      content_for(:toolbar) do
+        content
+      end
+
+      content_for(:javascript) do
+      <<-EOJ
+        SocialStream.Toolbar.init({ option: '#{ options[:option] }' });
+      EOJ
+      end
     end
-    content_for(:javascript) do
-    <<-EOJ
-    expandSubMenu('#{ options[:option] }');
-    EOJ
+  end
+
+  def toolbar_menu(type, options = {})
+    ActiveSupport::SafeBuffer.new.tap do |menu|
+      menu << '<div class="toolbar_menu">'.html_safe
+
+      toolbar_menu_render(toolbar_menu_items(type, options), menu)
+
+      menu << '</div>'.html_safe
     end
+  end
+
+  def toolbar_menu_render(items, menu)
+    menu << '<ul>'.html_safe
+    items.each do |item|
+      menu << '<li>'.html_safe
+
+      menu << item[:html]
+      if item[:items].present?
+        toolbar_menu_render(item[:items], menu)
+      end
+
+      menu << '</li>'.html_safe
     end
-  end
-
-  # Cache menu options for toolbar
-  #
-  # @api private
-  def menu_options #:nodoc:
-    @menu_options ||= {}
-  end
-
-  #Prints the home toolbar menu.
-  def home_toolbar_menu
-    render_items home_toolbar_items
-  end
-
-  #Prints the profile toolbar menu.
-  def profile_toolbar_menu(subject=current_subject)
-    render_items profile_toolbar_items(subject)
-  end
-
-  #Prints the messages toolbar menu.
-  def messages_toolbar_menu
-    render_items messages_toolbar_items
-  end
- 
-  #Renders array of navigation items with simple_navigation
-  def render_items(items)
-    menu = render_navigation :items => items
-    return raw menu
+    menu << '</ul>'.html_safe
   end
 end

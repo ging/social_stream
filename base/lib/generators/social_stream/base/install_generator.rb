@@ -41,10 +41,6 @@ class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
     remove_file 'app/views/layouts/application.html.erb'
   end
 
-  def create_navigation_config
-    copy_file 'navigation.rb', 'config/navigation.rb'
-  end
-
   def require_javascripts
     inject_into_file 'app/assets/javascripts/application.js',
                      "//= require social_stream-base\n",

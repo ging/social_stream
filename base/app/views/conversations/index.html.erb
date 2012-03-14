@@ -10,6 +10,6 @@
 
 <%= location(link_to(t('message.' + @box), conversations_path(:box => @box),:remote => true)) %>
 
-<% toolbar :option => :messages %>
+<% toolbar :messages %>
 
 <%= render :partial => 'index' %>

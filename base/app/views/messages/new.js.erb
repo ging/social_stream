@@ -1,6 +1,6 @@
 $("#content").html("<%= escape_javascript(render :partial => 'new') %>");
 
-<%= toolbar :option => :messages %>
+<%= toolbar :messages %>
 
 <%= location(
   link_to(image_tag("btn/new.png", :class => "menu_icon")+t('message.other'), conversations_path,:remote => true),

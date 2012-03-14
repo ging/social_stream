@@ -19,7 +19,7 @@
 
 <%= location(link_to(t('profile.one')+": "+truncate_name(sanitize @user.name)))%>
               
-<% toolbar :profile => @user %>
+<% toolbar :profile, :subject => @user %>
 
 <br class="clearfloat" />
 <div class="space_center">

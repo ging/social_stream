@@ -1,8 +1,10 @@
 require 'social_stream/documents/dependencies'
 
 module SocialStream
-  module ToolbarConfig
-    autoload :Documents, 'social_stream/toolbar_config/documents'
+  module Views
+    module Toolbar
+      autoload :Documents, 'social_stream/views/toolbar/documents'
+    end
   end
 
   module Documents

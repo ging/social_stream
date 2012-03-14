@@ -35,12 +35,6 @@ module SocialStream
         end
       end
 
-      initializer "social_stream-base.toolbar_config" do
-        SocialStream::ToolbarConfig.module_eval do
-          include SocialStream::ToolbarConfig::Base
-        end
-      end
-
       initializer "social_stream-base.views.settings" do
         SocialStream::Views::Settings.module_eval do
           include SocialStream::Views::Settings::Base
@@ -50,6 +44,12 @@ module SocialStream
       initializer "social_stream-base.views.sidebar" do
         SocialStream::Views::Sidebar.module_eval do
           include SocialStream::Views::Sidebar::Base
+        end
+      end
+
+      initializer "social_stream-base.views.toolbar" do
+        SocialStream::Views::Toolbar.module_eval do
+          include SocialStream::Views::Toolbar::Base
         end
       end
 

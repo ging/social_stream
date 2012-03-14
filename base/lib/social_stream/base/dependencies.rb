@@ -33,8 +33,6 @@ require 'acts_as_taggable_on/social_stream'
 require 'formtastic'
 #Background tasks
 require 'resque/server'
-#Simple Navigation for menu
-require 'simple-navigation'
 # Modernizr.js library
 require 'modernizr-rails'
 # Sphinx search engine

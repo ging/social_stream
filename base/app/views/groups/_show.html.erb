@@ -18,7 +18,7 @@
 
 <%= location(link_to(t('group.one')+": "+truncate_name(sanitize @group.name)))%>
                       
-<% toolbar :profile => @group %>
+<% toolbar :profile, :subject => @group %>
 
 <br class="clearfloat" />
 <div class="space_center">

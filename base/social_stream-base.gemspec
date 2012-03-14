@@ -45,8 +45,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('acts-as-taggable-on','~> 2.2.2')
   # HTML Forms
   s.add_runtime_dependency('formtastic','~> 1.2.3')
-  # Simple navigation for menu
-  s.add_runtime_dependency('simple-navigation', '~> 3.5.1')
   # Background jobs
   s.add_runtime_dependency('resque','~> 1.20.0')
   # Modernizr.js javascript library

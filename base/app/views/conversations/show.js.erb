@@ -1,6 +1,6 @@
 $("#content").html("<%= escape_javascript(render :partial => 'show') %>");
 
-<%= toolbar :option => :messages %>
+<%= toolbar :messages %>
 
 $('.cont_conversation').validate({errorClass: "validation_error"});
 <% unless @box.eql?'trash' %>

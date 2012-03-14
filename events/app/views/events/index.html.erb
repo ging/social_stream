@@ -14,7 +14,7 @@
   link_to(t('event.calendar'), polymorphic_path([profile_subject, Event.new]))
   ) %>
 
-<% toolbar :profile => profile_subject %>
+<% toolbar :profile, :subject => profile_subject %>
 
 <div id="calendar"></div>
 

@@ -53,9 +53,9 @@ module SocialStream
         Mime::Type.register "video/webm", :webm
       end
 
-      initializer "social_stream-documents.toolbar_config" do
-        SocialStream::ToolbarConfig.module_eval do
-          include SocialStream::ToolbarConfig::Documents
+      initializer "social_stream-documents.views.toolbar" do
+        SocialStream::Views::Toolbar.module_eval do
+          include SocialStream::Views::Toolbar::Documents
         end
       end
     end
