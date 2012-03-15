@@ -26,6 +26,8 @@ class Channel < ActiveRecord::Base
   validates_uniqueness_of :owner_id,       :scope => [ :author_id, :user_author_id ]
   validates_uniqueness_of :user_author_id, :scope => [ :author_id, :owner_id ]
 
+  before_validation :set_owner_id, :on => :create
+
   scope :authored_by, lambda { |subject|
     id = Actor.normalize_id subject
 
@@ -61,5 +63,11 @@ class Channel < ActiveRecord::Base
   # Is the author represented in this {Channel}?
   def represented_author?
     author_id != user_author_id
+  end
+
+  private
+
+  def set_owner_id
+    self.owner_id ||= author_id
   end
 end
