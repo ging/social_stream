@@ -266,7 +266,7 @@ namespace :db do
           if avatar.present? && File.exists?(avatar)
             Avatar.copy_to_temp_file(avatar)
             dimensions = Avatar.get_image_dimensions(avatar)
-            l = Avatar.new(:actor => i.actor,:logo => File.open(avatar), :name => File.basename(avatar), :crop_x => 0, :crop_y => 0, :crop_w => dimensions[:width], :crop_h => dimensions[:height] )
+            l = Avatar.new(:actor => i.actor, :name => File.basename(avatar), :crop_x => 0, :crop_y => 0, :crop_w => dimensions[:width], :crop_h => dimensions[:height] )
             l.active = true
             l.save!
           end
