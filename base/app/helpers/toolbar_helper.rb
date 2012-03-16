@@ -1,28 +1,25 @@
+# The toolbar is the left-side bar in Social Stream's layout
+#
 module ToolbarHelper
   # Configuration of toolbar items
   include SocialStream::Views::Toolbar
 
-  # Define the toolbar content for your view. There are two typical cases, depending on the value of
-  # options[:profile]
-  # * If present, render the profile menu for the {SocialStream::Models::Subject subject}
-  # * If blank, render the home menu
+  # This method define the toolbar content for your view. The toolbar is at the left
+  # side of the screen in vanilla SocialStream distribution.
   #
-  # The menu option allows overwriting a menu slot with the content of the given block
+  # The {type} argument chooses diffent configurations. There are three build-in cases:
+  # * :home, render the home menu
+  # * :profile, render the profile menu for the {SocialStream::Models::Subject subject}
+  #   this {type} needs a :subject {option} with the subject in the sidebar
+  # * :messages, render the messages menu
   #
-  #
-  # Autoexpanding a menu section on your view:
+  # Autoexpand a menu section on your view:
   #
   # Toolbar allows you to autoexpand certain menu section that may be of interest for your view.
   # For example, the messages menu when you are looking your inbox. This is done through :option element.
   #
-  # To get it working, you should use the proper :option to be expanded, ":option => :messages" in the
-  # mentioned example. This will try
-      # Base toolbar items, automatically, to expand the section of the menu where its root
-  # list link, the one expanding the section, has an id equal to "#messages_menu". If you use
+  # To get it working, you should use the proper :option to be expanded. For instance,
   # ":options => :contacts" it will try to expand "#contacts_menu".
-  #
-  # For now its working with :option => :messages, :contacts or :groups
-  #
   #
   # Examples:
   #
@@ -30,17 +27,21 @@ module ToolbarHelper
   #
   #   <% toolbar %>
   #
+  # or
+  #
+  #   <% toolbar :home %>
+  #
   # Render the profile toolbar for a user:
   #
-  #   <% toolbar :profile => @user %>
+  #   <% toolbar :profile, :subject => @user %>
   #
-  # Render the home toolbar changing the messages menu option:
+  # Render the messages menu:
   #
-  #   <% toolbar :option => :messages %>
+  #   <% toolbar :messages %>
   #
   # Render the profile toolbar for group changing the contacts menu option:
   #
-  #   <% toolbar :profile => @group, :option => :contacts %>
+  #   <% toolbar :profile, :subject => @group, :option => :contacts %>
   #
   def toolbar(type = :home, options = {})
     content = toolbar_items(type, options).inject(ActiveSupport::SafeBuffer.new){ |result, item|
