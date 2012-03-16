@@ -75,6 +75,10 @@ class Actor < ActiveRecord::Base
            :foreign_key => :owner_id,
            :dependent => :destroy
 
+  has_many :sent_actions,
+           :class_name => "Action",
+           :dependent  => :destroy
+
   scope :alphabetic, order('actors.name')
 
   scope :letter, lambda { |param|
