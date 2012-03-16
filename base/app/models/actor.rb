@@ -117,35 +117,6 @@ class Actor < ActiveRecord::Base
   after_create :save_or_create_profile
   
   class << self
-    # Get actor's id from an object, if possible
-    def normalize_id(a)
-      case a
-      when Integer
-        a
-      when Array
-        a.map{ |e| normalize_id(e) }
-      else
-        Actor.normalize(a).id
-      end
-    end
-    # Get actor from object, if possible
-    def normalize(a)
-      case a
-      when Actor
-        a
-      when Integer
-        Actor.find a
-      when Array
-        a.map{ |e| Actor.normalize(e) }
-      else
-        begin
-          a.actor
-        rescue
-          raise "Unable to normalize actor #{ a.inspect }"        
-        end
-      end
-    end
-
     def find_by_webfinger!(link)
       link =~ /(acct:)?(.*)@/
 

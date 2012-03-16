@@ -33,6 +33,36 @@ module SocialStream #:nodoc:
         def subtypes
           SocialStream.__send__ subtypes_name.to_s.tableize # SocialStream.subjects # in Actor
         end
+
+        # Get the supertype id from an object, if possible
+        def normalize_id(a)
+          case a
+          when Integer
+            a
+          when Array
+            a.map{ |e| normalize_id(e) }
+          else
+            normalize(a).id
+          end
+        end
+
+        # Get supertype from object, if possible
+        def normalize(a)
+          case a
+          when self
+            a
+          when Integer
+            find a
+          when Array
+            a.map{ |e| normalize(e) }
+          else
+            begin
+              a.supertype!
+            rescue
+              raise "Unable to normalize #{ self } #{ a.inspect }"
+            end
+          end
+        end
       end 
 
       def subtype_instance
