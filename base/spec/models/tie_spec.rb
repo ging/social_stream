@@ -13,8 +13,8 @@ describe Tie do
                           merge(Permission.follow).
                           first
 
-      Tie.create :contact_id => sender.contact_to!(receiver).id,
-                 :relation_id => follower_relation.id
+      Tie.create! :contact_id => sender.contact_to!(receiver).id,
+                  :relation_id => follower_relation.id
 
       receiver.reload.follower_count.should eq(count + 1)
     end

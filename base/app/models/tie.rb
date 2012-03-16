@@ -64,8 +64,8 @@ class Tie < ActiveRecord::Base
   validate :relation_belongs_to_sender
 
   after_create  :create_activity
-  after_create  :increment_follower_count
-  after_destroy :decrement_follower_count
+  after_create  :set_follow_action
+  after_destroy :unset_follow_action
 
   def relation_name
     relation.try(:name)
@@ -94,6 +94,41 @@ class Tie < ActiveRecord::Base
     positive? && positive_replied?
   end
 
+  # after_create callback
+  #
+  # Create the {Actor}'s follower_count
+  def set_follow_action
+    return if contact.reflexive? ||
+              !relation.permissions.include?(Permission.follow.first)
+
+    action = sender.action_to!(receiver)
+
+    return if action.follow?
+
+    action.update_attribute(:follow, true)
+  end
+
+  # after_remove callback
+  #
+  # Decrement the {Actor}'s follower_count
+  #
+  # This method needs to be public to be call from {Contact}'s after_remove callback
+  def unset_follow_action
+    return if contact.reflexive? ||
+              !relation.permissions.include?(Permission.follow.first)
+
+    # Because we allow several ties from the same sender to the same receiver,
+    # we check the receiver does not still have a follower tie from this sender
+    return if Tie.sent_by(sender).
+                  received_by(receiver).
+                  with_permissions('follow', nil).
+                  present?
+
+    action = sender.action_to!(receiver)
+
+    action.update_attribute(:follow, false)
+  end
+
   private
 
   # before_create callback
@@ -107,41 +142,6 @@ class Tie < ActiveRecord::Base
                      :owner         => contact.receiver,
                      :relation_ids  => contact.relation_ids,
                      :activity_verb => ActivityVerb[contact.verb]
-  end
-
-  # after_create callback
-  #
-  # Increment the {Actor}'s follower_count
-  def increment_follower_count
-    return if contact.reflexive? ||
-              !relation.permissions.include?(Permission.follow.first)
-
-    # Because we allow several ties from the same sender to the same receiver,
-    # we check the receiver does not already have a follower tie from this sender
-    return if Tie.sent_by(sender).
-                  received_by(receiver).
-                  with_permissions('follow', nil).
-                  where("ties.id != ?", id).
-                  present?
-
-    receiver.increment!(:follower_count)
-  end
-
-  # after_destroy callback
-  #
-  # Decrement the {Actor}'s follower_count
-  def decrement_follower_count
-    return if contact.reflexive? ||
-              !relation.permissions.include?(Permission.follow.first)
-
-    # Because we allow several ties from the same sender to the same receiver,
-    # we check the receiver does not still have a follower tie from this sender
-    return if Tie.sent_by(sender).
-                  received_by(receiver).
-                  with_permissions('follow', nil).
-                  present?
-
-    receiver.decrement!(:follower_count)
   end
 
   def relation_belongs_to_sender

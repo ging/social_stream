@@ -22,7 +22,8 @@ class Contact < ActiveRecord::Base
            :before_add => :set_user_author
 
   has_many :relations,
-           :through => :ties
+           :through => :ties,
+           :after_remove => :unset_follow_action
 
   scope :sent_by, lambda { |a|
     where(:sender_id => Actor.normalize_id(a))
@@ -112,18 +113,6 @@ class Contact < ActiveRecord::Base
     replied? ? "make-friend" : "follow"
   end
 
-  # has_many collection=objects method does not trigger destroy callbacks,
-  # so follower_count will not be updated
-  #
-  # We need to update that status here
-  #
-  # FIXME: use :after_remove callback
-  # http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html#label-Association+callbacks
-  def relation_ids=(ids)
-    remove_follower(ids)
-    association(:relations).ids_writer(ids)
-  end
-
   # Record who creates ties in behalf of a group or organization
   #
   # Defaults to the sender actor, if it is a user
@@ -203,31 +192,18 @@ class Contact < ActiveRecord::Base
     tie.contact.user_author = @user_author
   end
 
-  def remove_follower(ids)
-    # There was no follower
-    return if relation_ids.blank?
+  # after_remove callback
+  #
+  # has_many collection=objects method does not trigger destroy callbacks,
+  # so action#follow and follower_count will not be updated
+  #
+  # We need to update that status here
+  #
+  def unset_follow_action(relation)
+    tie = Tie.new :contact => self,
+                  :relation => relation
 
-    ids = ids.map(&:to_i)
-
-    return if ids.sort == relation_ids.sort
-
-    following = Relation.
-                  where(:id => relation_ids).
-                  joins(:permissions).
-                  merge(Permission.follow).
-                  any?
-
-    if following
-      will_follow = Relation.
-                      where(:id => ids).
-                      joins(:permissions).
-                      merge(Permission.follow).
-                      any?
-
-      if !will_follow
-        receiver.decrement!(:follower_count)
-      end
-    end
+    tie.unset_follow_action
   end
 
   # Send a message to the contact receiver

@@ -293,6 +293,17 @@ class Actor < ActiveRecord::Base
     Channel.find_or_create_by_author_id_and_user_author_id_and_owner_id id, id, id
   end
 
+  # Return the {Action} model to an {ActivityObject}
+  def action_to(activity_object)
+    sent_actions.received_by(activity_object).first
+  end
+
+  # Return the {Action} model to an {ActivityObject}. Create it if it does not exist
+  def action_to!(activity_object)
+    action_to(activity_object) ||
+      sent_actions.create!(:activity_object => ActivityObject.normalize(activity_object))
+  end
+
   def sent_active_contact_ids
     @sent_active_contact_ids ||=
       load_sent_active_contact_ids
