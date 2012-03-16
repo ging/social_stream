@@ -23,6 +23,8 @@ module SocialStream
         subtype_of :channel,
                    :belongs => { :dependent => nil }
 
+        # before_validation :set_owner_id, :on => :create
+
         before_validation :check_existing_channel
       end
 
@@ -42,6 +44,12 @@ module SocialStream
         return if existing_channel.blank?
 
         self.channel = existing_channel
+      end
+
+      private
+
+      def set_owner_id
+        self.owner_id ||= author_id
       end
     end
   end

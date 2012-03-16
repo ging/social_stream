@@ -59,9 +59,4 @@ class ActivityObject < ActiveRecord::Base
   def acts_as_actor?
     object_type == "Actor"
   end
-
-  def object_holder_hash
-
-  end
-
 end
