@@ -31,7 +31,9 @@ SocialStream.Event = (function(SS, $, undefined) {
 
         }
 
-        SocialStream.Timeline.addInitCallback(fixDates);
+	addIndexCallback(fixDates);
+
+        SocialStream.Timeline.addInitCallback(index);
 
 	return {
 		addIndexCallback: addIndexCallback,
