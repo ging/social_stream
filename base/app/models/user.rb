@@ -1,5 +1,13 @@
 require 'devise/orm/active_record'
 
+# Every social network must have users, and a social network builder couldn't be the exception.
+#
+# Social Stream uses the awesome gem {Devise https://github.com/plataformatec/devise}
+# for managing authentication
+#
+# Almost all the logic of the interaction between {User} and the rest of classes in Social Stream
+# is done through {SocialStream::Models::Subject} and {Actor}
+#
 class User < ActiveRecord::Base
   include SocialStream::Models::Subject
 

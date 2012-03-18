@@ -3,7 +3,17 @@
 #
 # {Contact Contacts} are created at convenience (in the case of {Actor#suggestions suggestions},
 # for instance), and they do not mean that there is a real link between those two
-# {SocialStream::Models::Subject Subjects}. Link existance is stored as {Tie Ties}.
+# {SocialStream::Models::Subject Subjects}. Link existance is stored as a {Tie}.
+# When Alice adds Bob as contact, a new {Tie} is created with the {Contact} from Alice to
+# Bob and the {Relation} that Alice chose.
+#
+# == Inverse Contacts
+#
+# Alice has a {Contact} to Bob. The inverse is the {Contact} from {Bob} to {Alice}.
+# Inverse contacts are used to check if contacts are replied, for instance, if Bob added
+# Alice as contact after she did so.
+#
+# Again, the Contact from Bob to Alice must have positive {Tie ties} to be active.
 #
 class Contact < ActiveRecord::Base
   # Send a message when this contact is created or updated
