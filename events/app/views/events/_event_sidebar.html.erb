@@ -1,0 +1,10 @@
+<%= div_for event_sidebar, :class => "event_sidebar" do %>
+
+  <%= render :partial => "events/event_date_sidebar", :locals => { :event => event_sidebar } %>
+
+  <%= render :partial => "events/event_poster", :locals => { :event => event_sidebar } %>
+
+  <%= render :partial => "events/event_details", :locals => { :event => event_sidebar } %>
+<% end %>
+
+<div class="clearfloat"></div>

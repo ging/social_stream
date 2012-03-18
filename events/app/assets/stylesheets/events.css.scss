@@ -46,6 +46,12 @@ div.event_date {
   min-width: 30px;
 }
 
+.event_sidebar .event_hour {
+  font-size: 2em;
+  line-height: 90%;
+}
+
+
 .event_details {
   padding-top: 10px;
   float: left;
@@ -164,6 +170,12 @@ div.event_date {
 
 #scheduler-options {
   padding: 2px 10px;
+}
+
+.event_sidebar {
+	float: left;
+	border-bottom: 1px solid $secondary-color;
+	padding: 5px;
 }
 
 .tipsy-sidebar_calendar {

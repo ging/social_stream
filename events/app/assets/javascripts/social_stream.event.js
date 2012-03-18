@@ -17,14 +17,21 @@ SocialStream.Event = (function(SS, $, undefined) {
 
             date = new Date(dateString);
 
-            $(this).find(".event_day").text($.datepicker.formatDate('d', date));
-            $(this).find(".event_month").text($.datepicker.formatDate('M', date));
+            var dayEl = $(this).find(".event_day");
+	    if (dayEl.length) {
+		    dayEl.text($.datepicker.formatDate('d', date));
+	    }
 
-            var hour = $(this).find(".event_hour");
-            if(hour && hour.length) {
+            var monthEl = $(this).find(".event_month");
+	    if (monthEl.length) {
+            	monthEl.text($.datepicker.formatDate('M', date));
+	    }
+
+            var hourEl = $(this).find(".event_hour");
+            if(hourEl.length) {
               var minutes = date.getMinutes();
               if (minutes<10) minutes = "0" + minutes;
-              hour.text(date.getHours() + ':' + minutes);
+              hourEl.text(date.getHours() + ':' + minutes);
             }
 
           });
