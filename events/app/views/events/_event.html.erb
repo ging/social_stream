@@ -1,51 +1,10 @@
 <%= div_for event do %>
-  <%= link_to event, :class => "event_date" do %>
-    <div class="event_date_image">
-      <div class="event_day">
-        <%= event.start_at.day %>
-      </div>
-      <div class="event_month">
-        <%= l event.start_at, :format => "%b" %>
-      </div>
-      <% unless event.all_day? %>
-        <div class="event_hour">
-          <%= l event.start_at, :format => "%H:%M" %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
 
-  <%= javascript_tag do %>
-  var d = new Date(<%= 1000*event.start_at.to_i %>);
-  $("#<%= dom_id event %> .event_day").text($.datepicker.formatDate('d', d));
-  $("#<%= dom_id event %> .event_month").text($.datepicker.formatDate('M', d));
-  if($("#<%= dom_id event %> .event_hour").length) {
-   var minutes = d.getMinutes();
-   if (minutes<10) minutes = "0" + minutes;
-   $("#<%= dom_id event %> .event_hour").text(d.getHours() + ':' + minutes);
-  }
-  <% end %>
+  <%= render :partial => "events/event_date", :locals => { :event => event } %>
 
-  <div class="event_poster">
-    <%= event_timeline_thumb(event) %>
+  <%= render :partial => "events/event_poster", :locals => { :event => event } %>
 
-    <% if can? :update, event %>
-      <div class="event_poster_update">
-        <%= link_to t('event.poster.update'), edit_event_path(event, :poster => true), :remote => true %>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="event_details">
-    <div class="title">
-    <%= link_to event.title, event %>
-    </div>
-
-    <div class="description">
-    <%= simple_format auto_link(event.description) %>
-    </div>
-
-  </div>
+  <%= render :partial => "events/event_details", :locals => { :event => event } %>
 <% end %>
 
 <div class="clearfloat"></div>
