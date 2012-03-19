@@ -81,6 +81,15 @@ div.event_date {
 	-MS-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
 }
 
+.event_frequency {
+	text-align: center;
+	font-size: 0.8em;
+}
+
+.event_sidebar .event_frequency {
+	font-size: 1em;
+}
+
 #calendar {
 	margin-top: 20px;
 }

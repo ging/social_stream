@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
 
   # Gem dependencies
   s.add_runtime_dependency('social_stream-base', '~> 0.17.2')
-  s.add_runtime_dependency('rails-scheduler', '~> 0.0.6')
+  s.add_runtime_dependency('rails-scheduler', '~> 0.0.8')
   s.add_runtime_dependency('coffee-rails', '>= 3.1.0')
 
   # Development Gem dependencies
