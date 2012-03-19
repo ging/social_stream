@@ -19,6 +19,9 @@ es:
   boxy:
     close_text: "[cerrar]"
   event:
+    action:
+      follow: "Me lo apunto"
+      unfollow: "Desapuntar"
     calendar: "Calendario"
     confirm_delete: "¿Borrar evento?"
     new:

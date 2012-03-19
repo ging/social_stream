@@ -1,0 +1,10 @@
+<%= form_for toggle_follow_action(activity_object),
+             :html => { :class => "follow_form-#{ dom_id activity_object }" },
+             :remote => true do |f| %>
+  <% if f.object.new_record? %>
+    <%= f.hidden_field :activity_object_id %>
+  <% end %>
+  <%= f.hidden_field :follow %>
+
+  <%= f.submit t("#{ activity_object.object_type.underscore }.action.#{ f.object.follow ? 'follow' : 'unfollow' }") %>
+<% end %>

@@ -59,4 +59,9 @@ class ActivityObject < ActiveRecord::Base
   def acts_as_actor?
     object_type == "Actor"
   end
+
+  # Return the {Action} model to an {Actor}
+  def action_from(actor)
+    received_actions.sent_by(actor).first
+  end
 end

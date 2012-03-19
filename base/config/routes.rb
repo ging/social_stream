@@ -62,6 +62,8 @@ Rails.application.routes.draw do
     resources :permissions
   end
 
+  resources :activity_actions
+
   match 'tags'     => 'tags#index', :as => 'tags'
   
   # Find subjects by slug

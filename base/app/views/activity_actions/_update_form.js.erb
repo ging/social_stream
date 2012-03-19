@@ -1,0 +1,1 @@
+$('.follow_form-<%= dom_id(activity_object) %>').replaceWith("<%= escape_javascript render(:partial => 'activity_actions/follow_form', :locals => { :activity_object => activity_object }) %>");
