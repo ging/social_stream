@@ -1,4 +1,4 @@
-class ActionFollow < ActiveRecord::Migration
+class ActivityActionFollow < ActiveRecord::Migration
   def up
     add_column :activity_actions, :follow, :boolean, :default => false
     add_column :activity_objects, :follower_count, :integer, :default => 0

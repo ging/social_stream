@@ -1,4 +1,4 @@
-class CreateActions < ActiveRecord::Migration
+class CreateActivityActions < ActiveRecord::Migration
   def change
     create_table :activity_actions do |t|
       t.references :actor
