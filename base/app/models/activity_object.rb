@@ -23,6 +23,10 @@ class ActivityObject < ActiveRecord::Base
   has_many :received_actions,
            :class_name => "ActivityAction",
            :dependent  => :destroy
+  has_many :followers,
+           :through => :received_actions,
+           :source  => :actor,
+           :conditions => { 'activity_actions.follow' => true }
 
   has_many :activity_object_properties,
            :dependent => :destroy
@@ -64,4 +68,5 @@ class ActivityObject < ActiveRecord::Base
   def action_from(actor)
     received_actions.sent_by(actor).first
   end
+
 end

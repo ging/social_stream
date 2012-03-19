@@ -10,11 +10,7 @@ class Group < ActiveRecord::Base
   def profile!
     actor!.profile || actor!.build_profile
   end
-
-  def followers
-    contact_subjects(:subject_type => :user, :direction => :received)
-  end
-  
+ 
   def recent_groups
     contact_subjects(:type => :group, :direction => :sent) do |q|
       q.select("contacts.created_at").
