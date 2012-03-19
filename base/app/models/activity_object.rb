@@ -21,7 +21,7 @@ class ActivityObject < ActiveRecord::Base
   has_many :activities, :through => :activity_object_activities
 
   has_many :received_actions,
-           :class_name => "Action",
+           :class_name => "ActivityAction",
            :dependent  => :destroy
 
   has_many :activity_object_properties,

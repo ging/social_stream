@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Action do
+describe ActivityAction do
   context "a following contact" do
     before do
       @tie = Factory(:friend)

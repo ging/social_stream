@@ -7,8 +7,8 @@
 #
 # Every {Actor} has an Avatar, a {Profile} with personal o group information, contact data, etc.
 #
-# {Actor Actors} perform {Action Actions} (like, suscribe, etc.) on {ActivityObject activity objects}
-# ({Post posts}, {Comment commments}, pictures, events..)
+# {Actor Actors} perform {ActivityAction actions} (like, suscribe, etc.) on
+# {ActivityObject activity objects} ({Post posts}, {Comment commments}, pictures, events..)
 #
 # = Actor subtypes
 # An actor subtype is called a {SocialStream::Models::Subject Subject}.
@@ -80,7 +80,7 @@ class Actor < ActiveRecord::Base
            :dependent => :destroy
 
   has_many :sent_actions,
-           :class_name => "Action",
+           :class_name => "ActivityAction",
            :dependent  => :destroy
 
   scope :alphabetic, order('actors.name')
@@ -297,12 +297,12 @@ class Actor < ActiveRecord::Base
     Channel.find_or_create_by_author_id_and_user_author_id_and_owner_id id, id, id
   end
 
-  # Return the {Action} model to an {ActivityObject}
+  # Return the {ActivityAction} model to an {ActivityObject}
   def action_to(activity_object)
     sent_actions.received_by(activity_object).first
   end
 
-  # Return the {Action} model to an {ActivityObject}. Create it if it does not exist
+  # Return the {ActivityAction} model to an {ActivityObject}. Create it if it does not exist
   def action_to!(activity_object)
     action_to(activity_object) ||
       sent_actions.create!(:activity_object => ActivityObject.normalize(activity_object))
