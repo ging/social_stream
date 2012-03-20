@@ -1,21 +1,12 @@
 module SocialStream #:nodoc:
   module Models
     # Common methods for models that have a {SocialStream::Models::Supertype}
+    #
+    # Examples of subtypes are {User} and {Group}, which have {Actor} as supertype,
+    # or {Post} and {Comment}, which have {ActivityObject} as supertype
+    #
+    # Methods are documented taking User as example of {SocialStream::Models::Subtype}
     module Subtype
-      # Add the class method {#subtype_of} to ActiveRecord::Base
-      module ActiveRecord
-        extend ActiveSupport::Concern
-
-        module ClassMethods
-          # This class is a subtype. Its supertype class is name
-          def subtype_of name, options = {}
-            @supertype_name = name
-            @supertype_options = options
-            include SocialStream::Models::Subtype
-          end
-        end
-      end
-
       extend ActiveSupport::Concern
 
       included do
@@ -23,29 +14,30 @@ module SocialStream #:nodoc:
           attr_reader :supertype_name, :supertype_options
         end
 
-        belongs_to supertype_name, {
-                    :validate  => true,
-                    :autosave  => true,
-                    :dependent => :destroy
-                  }.merge(supertype_options[:belongs] || {})
+        belongs_to supertype_name, {                          # belongs_to :actor, {
+                    :validate  => true,                       #   :validate => true
+                    :autosave  => true,                       #   :autosave => true
+                    :dependent => :destroy                    #   :dependent => :destroy
+                  }.merge(supertype_options[:belongs] || {})  #   }.merge(supertype_options[:belongs] || {})
 
         class_eval <<-EOS
-          def #{ supertype_name }!                                      # def actor!
-            #{ supertype_name } ||                                      #   actor ||
+          def #{ supertype_name }!                                              # def actor!
+            #{ supertype_name } ||                                              #   actor ||
               # FIXME: ruby1.9 remove .inspect
               build_#{ supertype_name }(#{ supertype_options[:build].inspect }) #     build_actor(:subject_type => "User")
-          end                                                           # end
+          end                                                                   # end
 
         EOS
 
-        alias_method :supertype!, "#{ supertype_name }!"
+        alias_method :supertype!, "#{ supertype_name }!" # alias_method :supertype!, :actor!
 
-        before_validation :supertype!
+        # Load the supertype to ensure it is saved along with this instance
+        before_validation :supertype! # before_validation :actor!
       end
 
       module ClassMethods
         def supertype_foreign_key
-          "#{ supertype_name }_id"
+          "#{ supertype_name }_id" # "actor_id"
         end 
       end
 
@@ -76,6 +68,20 @@ module SocialStream #:nodoc:
         exceptions = [ "_#{ self.class.supertype_foreign_key }".to_sym ] # [ :_actor_id ]
 
         ! exceptions.include?(method)
+      end
+
+      # Add the class method {#subtype_of} to ActiveRecord::Base
+      module ActiveRecord
+        extend ActiveSupport::Concern
+
+        module ClassMethods
+          # This class is a subtype. Its supertype class is name
+          def subtype_of name, options = {}
+            @supertype_name = name
+            @supertype_options = options
+            include SocialStream::Models::Subtype
+          end
+        end
       end
     end
   end
