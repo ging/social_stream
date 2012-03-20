@@ -19,8 +19,11 @@ en:
   boxy:
     close_text: "[close]"
   event:
-    action:
+    activity_action:
       follow: "Follow"
+      sentence:
+        one: "%{followers} follows this"
+        other: "%{followers} follow this"
       unfollow: "Unfollow"
     calendar: "Calendar"
     confirm_delete: "Delete event?"

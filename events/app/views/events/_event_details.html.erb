@@ -8,7 +8,14 @@
   </div>
 
   <div class="follow">
-    <%= render :partial => 'activity_actions/follow_form',
-               :locals => { :activity_object => event.activity_object } %>
+    <div class="follow_form">
+      <%= render :partial => 'activity_actions/follow_form',
+                 :locals => { :activity_object => event.activity_object } %>
+    </div>
+
+    <div class="follow_sentence">
+      <%= render :partial => 'activity_actions/follow_sentence',
+                 :locals  => { :activity_object => event.activity_object } %>
+    </div>
   </div>
 </div>

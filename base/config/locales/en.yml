@@ -49,8 +49,6 @@ en:
       one: "%{likers} likes this"
       other: "%{likers} like this"
       more:
-        one: "%{count} more person"
-        other: "%{count} more people"
     one: "Activity"
     other: "Activities"
     privacy:
@@ -91,6 +89,16 @@ en:
       post:
         title:
           other_wall: "%{sender} → %{receiver}"
+  activity_action:
+    follow: "Follow"
+    sentence:
+      follow:
+        one: "%{followers} follows this"
+        other: "%{followers} follow this"
+      more:
+        one: "%{count} more person"
+        other: "%{count} more people"
+    unfollow: "Unfollow"
   browse: "Browse"
   button:
     cancel: "Cancel"

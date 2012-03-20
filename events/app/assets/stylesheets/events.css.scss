@@ -86,6 +86,21 @@ div.event_date {
 	font-size: 0.8em;
 }
 
+.event_details .description {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 50px;
+}
+
+.event_details .follow_form {
+	float: left;
+}
+
+.event_details .follow_sentence {
+	float: left;
+	padding: 20px 10px;
+}
+
 .event_sidebar .event_frequency {
 	font-size: 1em;
 }

@@ -48,7 +48,7 @@ module ActivitiesHelper
     likers_other = likers_count - options[:likers_shown]
 
     if likers_other > 0
-      likers.push t("activity.like_sentence.more", :count => likers_other)
+      likers.push t("activity_action.sentence.more", :count => likers_other)
     end
 
     t("activity.like_sentence", :likers => likers.to_sentence, :count => likers_count).html_safe

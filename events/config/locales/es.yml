@@ -19,8 +19,12 @@ es:
   boxy:
     close_text: "[cerrar]"
   event:
-    action:
+    activity_action:
       follow: "Me lo apunto"
+      sentence:
+        follow:
+          one: "%{followers} se ha apuntado esto"
+          other: "%{followers} se han apuntado esto"
       unfollow: "Desapuntar"
     calendar: "Calendario"
     confirm_delete: "¿Borrar evento?"

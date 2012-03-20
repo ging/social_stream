@@ -48,9 +48,6 @@ es:
     like_sentence:
       one: "A %{likers} le gusta esto"
       other: "A %{likers} les gusta esto"
-      more:
-        one: "%{count} persona más"
-        other: "%{count} personas más"
     one: "Actividad"
     other: "Actividades"
     privacy:
@@ -91,6 +88,16 @@ es:
       post:
         title:
           other_wall: "%{sender} → %{receiver}"
+  activity_action:
+    follow: "Seguir"
+    sentence:
+      follow:
+        one: "%{count} sigue esto"
+        other: "%{count} siguen esto"
+      more:
+        one: "%{count} persona más"
+        other: "%{count} personas más"
+    unfollow: "Dejar de seguir"
   browse: "Descubrir"
   button:
     cancel: "Cancelar"

@@ -6,5 +6,5 @@
   <% end %>
   <%= f.hidden_field :follow %>
 
-  <%= f.submit t("#{ activity_object.object_type.underscore }.action.#{ f.object.follow ? 'follow' : 'unfollow' }") %>
+  <%= f.submit t("#{ activity_object.object_type.underscore }.activity_action.#{ f.object.follow ? 'follow' : 'unfollow' }", :default => "activity_action.#{ f.object.follow ? 'follow' : 'unfollow' }") %>
 <% end %>
