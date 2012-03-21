@@ -49,7 +49,7 @@ module SocialStream #:nodoc:
             a.map{ |e| normalize(e) }
           else
             begin
-              a.supertype!
+              a.__send__ "#{ name.underscore }!" # a.actor!
             rescue
               raise "Unable to normalize #{ self } #{ a.inspect }"
             end

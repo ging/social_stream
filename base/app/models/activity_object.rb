@@ -69,4 +69,8 @@ class ActivityObject < ActiveRecord::Base
     received_actions.sent_by(actor).first
   end
 
+  def actor!
+    actor || raise("Unknown Actor for ActivityObject: #{ inspect }")
+  end
+
 end

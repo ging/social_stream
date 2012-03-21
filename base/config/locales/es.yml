@@ -190,7 +190,11 @@ es:
       instructions: "Introduce el correo electrónico y te mandaremos instrucciones para cambiarlo"
       update: "Cambiar contraseña"
   follower:
-    n:
+    follower:
+      title: "Seguidores"
+    following:
+      title: "Siguiendo"
+  n:
       one: "1 seguidor/a"
       other: "%{count} seguidores"
   forgot_password: "¿Olvidaste tu contraseña?"

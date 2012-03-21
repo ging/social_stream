@@ -42,7 +42,10 @@ Rails.application.routes.draw do
 
   case SocialStream.relation_model
   when :follow
+    match 'followings' => 'followers#index', :as => :followings, :defaults => { :direction => 'sent' }
+    match 'followers' => 'followers#index', :as => :followers, :defaults => { :direction => 'received' }
     resources :followers
+
     resources :contacts do
       collection do
         get 'pending'

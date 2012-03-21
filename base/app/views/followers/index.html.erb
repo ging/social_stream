@@ -1,5 +1,1 @@
-<% if params[:following] %>
-  <%= render @contacts %>
-<% else %>
-  <%= render @contacts.map(&:inverse!) %>
-<% end %>
+<%= render @followers.map{ |f| current_subject.contact_to!(f) } %>

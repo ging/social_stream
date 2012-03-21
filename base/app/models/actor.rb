@@ -82,6 +82,10 @@ class Actor < ActiveRecord::Base
   has_many :sent_actions,
            :class_name => "ActivityAction",
            :dependent  => :destroy
+  has_many :followings,
+           :through => :sent_actions,
+           :source  => :activity_object,
+           :conditions => { 'activity_actions.follow' => true }
 
   scope :alphabetic, order('actors.name')
 
