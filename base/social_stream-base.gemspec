@@ -40,7 +40,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('omniauth-facebook','~> 1.2.0')
   s.add_runtime_dependency('omniauth-linkedin','~> 0.0.6')
   # Messages
-  s.add_runtime_dependency('mailboxer','~> 0.6.0')
+  s.add_runtime_dependency('mailboxer','~> 0.6.5')
   # Tagging
   s.add_runtime_dependency('acts-as-taggable-on','~> 2.2.2')
   # HTML Forms
