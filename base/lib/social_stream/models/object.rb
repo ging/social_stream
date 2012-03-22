@@ -56,14 +56,18 @@ module SocialStream
             nil
           else
             # FIXME: repeated in Activity#fill_relations
-            if _contact.reflexive?
-              _contact.sender.relation_customs.map(&:id)
+            if SocialStream.relation_model == :custom
+              if _contact.reflexive?
+                _contact.sender.relation_customs.map(&:id)
+              else
+                 _contact.
+                   receiver.
+                   relation_customs.
+                   allow(_contact.sender, 'create', 'activity').
+                   map(&:id)
+              end
             else
-               _contact.
-                 receiver.
-                 relation_customs.
-                 allow(_contact.sender, 'create', 'activity').
-                 map(&:id)
+              Array.wrap Relation::Public.instance.id
             end
           end
       end

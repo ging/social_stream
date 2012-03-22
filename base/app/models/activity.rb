@@ -331,13 +331,17 @@ class Activity < ActiveRecord::Base
   def fill_relations
     return if relation_ids.present?
 
-    # FIXME: repeated in SocialStream::Models::Object#_relation_ids
     self.relation_ids =
+    # FIXME: repeated in SocialStream::Models::Object#_relation_ids
+    if SocialStream.relation_model == :custom
       if channel.reflexive?
         receiver.relation_customs.map(&:id)
       else
         receiver.relation_customs.allow(channel.author, 'create', 'activity').map(&:id)
       end
+    else
+      Array.wrap Relation::Public.instance.id
+    end
   end
 
   #
