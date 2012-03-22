@@ -4,19 +4,11 @@ class FollowersController < ApplicationController
   respond_to :html, :js
 
   def index
-    @followers =
-      case params[:direction]
-      when 'sent'
-        current_subject.followings
-      when 'received'
-        current_subject.followers
-      else
-        raise ActiveRecord::RecordNotFound
-      end
+    @followings = current_subject.followings
+    @followers = current_subject.followers
 
     respond_to do |format|
-      format.html { @followers = @followers.page(params[:page]).per(20) }
-      format.js { @followers = @followers.page(params[:page]).per(20) }
+      format.html
       format.json { render :text => to_json(@followers) }
     end
   end
