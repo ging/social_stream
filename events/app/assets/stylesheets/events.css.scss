@@ -92,6 +92,10 @@ div.event_date {
 	height: 50px;
 }
 
+.event_details .title {
+	text-align: left;
+}
+
 .event_details .follow_form {
 	float: left;
 }
@@ -203,8 +207,8 @@ div.event_date {
 }
 
 .tipsy-sidebar_calendar {
-	min-width: 300px;
-	width: 300px;
+	min-width: 470px;
+	width: 470px;
 	border: solid $separation-color 1px;
 	padding: 10px;
 	background-color: #FFF;
