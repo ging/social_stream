@@ -5,14 +5,8 @@ module SocialStream
       extend ActiveSupport::Concern
 
       included do
-        attr_writer   :_relation_ids
-        attr_accessor :_activity_parent_id
-
         subtype_of :activity_object,
                    :build => { :object_type => to_s }
-
-        has_one  :channel, :through => :activity_object
-        has_many :activity_object_activities, :through => :activity_object
 
         unless self == Actor
           validates_presence_of :author_id, :owner_id, :user_author_id
@@ -27,76 +21,6 @@ module SocialStream
           joins(:activity_object).
             merge(ActivityObject.authored_by(subject))
         }
-      end
-
-      # All the activities with this object
-      def activities
-        Activity.
-          includes(:activity_objects => self.class.to_s.underscore).
-          where("#{ self.class.quoted_table_name }.id" => self.id)
-      end
-
-      # Build the post activity when this object is not saved
-      def build_post_activity
-        Activity.new :channel      => channel!,
-                     :relation_ids => Array(_relation_ids)
-      end
-
-      def _contact
-        @_contact ||= author && owner && author.contact_to!(owner)
-      end
-
-      def _contact_id
-        _contact.try(:id)
-      end
-
-      def _relation_ids
-        @_relation_ids ||=
-          if _contact_id.nil?
-            nil
-          else
-            # FIXME: repeated in Activity#fill_relations
-            if SocialStream.relation_model == :custom
-              if _contact.reflexive?
-                _contact.sender.relation_customs.map(&:id)
-              else
-                 _contact.
-                   receiver.
-                   relation_customs.
-                   allow(_contact.sender, 'create', 'activity').
-                   map(&:id)
-              end
-            else
-              Array.wrap Relation::Public.instance.id
-            end
-          end
-      end
-
-      def _activity_parent
-        @_activity_parent ||= Activity.find(_activity_parent_id)
-      end
-
-      private
-
-      def create_post_activity
-        create_activity "post"
-      end
-
-      def create_update_activity
-        return if _contact_id.blank?
-        
-        create_activity "update"
-      end
-
-      def create_activity(verb)
-        a = Activity.new :verb         => verb,
-                         :channel      => channel,
-                         :relation_ids => _relation_ids,
-                         :parent_id    => _activity_parent_id
-
-        a.activity_objects << activity_object
-
-        a.save!
       end
     end
   end

@@ -332,7 +332,7 @@ class Activity < ActiveRecord::Base
     return if relation_ids.present?
 
     self.relation_ids =
-    # FIXME: repeated in SocialStream::Models::Object#_relation_ids
+    # FIXME: repeated in ActivityObject#_relation_ids
     if SocialStream.relation_model == :custom
       if channel.reflexive?
         receiver.relation_customs.map(&:id)
