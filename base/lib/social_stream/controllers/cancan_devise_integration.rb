@@ -7,11 +7,11 @@ module SocialStream
       included do
         def after_sign_in_path_for(resource)
           returning_to = request.env['omniauth.origin'] || stored_location_for(resource) || session[:return_to] || root_path
-	  session[:return_to] = nil
-	  returning_to
+          session[:return_to] = nil
+          returning_to
         end
       end
-      
+
       private
 
       # Catch some authorization errors:
@@ -29,7 +29,7 @@ module SocialStream
             raise exception
           end
         else
-	  session[:return_to] = request.fullpath
+          session[:return_to] = request.fullpath
           redirect_to new_user_session_path
         end
       end
