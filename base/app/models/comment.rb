@@ -10,14 +10,8 @@ class Comment < ActiveRecord::Base
     has created_at
   end
 
-
   def parent_post
     self.post_activity.parent.direct_object
-  end
-
-  def _activity_parent_id=(id)
-    self._relation_ids = Activity.find(id).relation_ids
-    @_activity_parent_id = id
   end
 
   def title
