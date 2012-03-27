@@ -10,22 +10,38 @@ SocialStream.Comments = (function(SS, $, undefined){
 		$(".activity_new_comment").each(function(){
 			if ($.trim($(this).siblings(".activity_comments").text()) != ""){
 				$(this).show();
+				$(this).find(".input_new_comments").val("");
 			}
 		});
 
+		hideNewCommentElements();
+		newCommentWatermark();
+		newCommentAutoSize();
+		newCommentClick();
+		newCommentLink();
+	}
+
+	var hideNewCommentElements = function(){
 		$(".activities_comment_btn").hide();
 		$(".actor_name_new_comment").hide();
 		$(".actor_logo_new_comment").hide();
+	}
 
+	var newCommentWatermark = function(){
 		$(".input_new_comments").watermark(I18n.t('comment.input'),"#666");
+	}
 
+
+	var newCommentAutoSize = function(){
 		$(".input_new_comments")
 			.change(function(){autoSize(this);})
 			.keydown(function(){autoSize(this);})
 			.keyup(function(){autoSize(this);});
 
 		$(".input_new_comments").each(function(){autoSize(this)});
+	}
 
+	var newCommentClick = function(){
 		$(".input_new_comments").click(function(){
 			$(".activities_comment_btn").hide();
 			$(".new_comment").removeClass("new_comment_shown");
@@ -38,7 +54,9 @@ SocialStream.Comments = (function(SS, $, undefined){
 			comment.find(".actor_logo_new_comment").show();
 			return false;
 		});
+	}
 
+	var newCommentLink = function(){
 		//javascript for tocomment option
 		$(".to_comment").click(function(){
 			$(this).parents(".activity_content").find(".activity_new_comment").show();
@@ -49,7 +67,7 @@ SocialStream.Comments = (function(SS, $, undefined){
 			.focus()
 			.val("");
 
-			return false;
+		return false;
 		});
 	}
 
@@ -61,6 +79,13 @@ SocialStream.Comments = (function(SS, $, undefined){
 	}  
 
 	SocialStream.Timeline.addInitCallback(initNew);
+
+	SocialStream.Timeline.addCreateCallback(hideNewCommentElements);
+	SocialStream.Timeline.addCreateCallback(newCommentWatermark);
+	SocialStream.Timeline.addCreateCallback(newCommentAutoSize);
+	SocialStream.Timeline.addCreateCallback(newCommentClick);
+	SocialStream.Timeline.addCreateCallback(newCommentLink);
+
 	SocialStream.Objects.addInitCallback(initNew);
 
 	return {

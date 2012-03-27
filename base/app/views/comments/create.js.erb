@@ -5,4 +5,4 @@ $(".input_new_comments").each(function() {
   $(this).focus().val("").blur();   
 });
 
-SocialStream.Timeline.newActivity("<%= escape_javascript dom_id(@comment.post_activity) %>");
+SocialStream.Timeline.create("<%= escape_javascript dom_id(@comment.post_activity) %>");

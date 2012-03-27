@@ -140,6 +140,7 @@ SocialStream.Wall = (function(SS, $, undefined){
   addInitCallback(initSecuritySelect);
   addInitCallback(activateAntiRebounds);
 
+  SS.Timeline.addCreateCallback(unblockForms);
   return {
     addInitCallback: addInitCallback,
       init: init,

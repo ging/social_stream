@@ -1,12 +1,22 @@
 SocialStream.Timeline = (function(SS, $, undefined){
+	// FIXME: DRY!!
 	var initCallbacks = [];
+	var createCallbacks = [];
 
 	var addInitCallback = function(callback){
 		initCallbacks.push(callback);
 	}
 
+	var addCreateCallback = function(callback){
+		createCallbacks.push(callback);
+	}
+
 	var init = function(){
 		$.each(initCallbacks, function(i, callback){ callback(); });
+	}
+
+	var create = function(activityId){
+		$.each(createCallbacks, function(i, callback){ callback(activityId); });
 	}
 
 	var initPrivacyTooltips = function(activityId) {
@@ -51,19 +61,17 @@ SocialStream.Timeline = (function(SS, $, undefined){
 	};
 
 
-	var newActivity = function(activityId){
-		initPrivacyTooltips(activityId);
-		SS.Wall.unblockForms();
-	}
-
 	addInitCallback(initPrivacyTooltips);
 	addInitCallback(initComments);
+
+	addCreateCallback(initPrivacyTooltips);
 
 	return {
 		addInitCallback: addInitCallback,
 		init: init,
+		addCreateCallback: addCreateCallback,
+		create: create,
 		initPrivacyTooltips: initPrivacyTooltips,
-		showAllComments: showAllComments,
-                newActivity: newActivity
+		showAllComments: showAllComments
 	};
 }) (SocialStream, jQuery);
