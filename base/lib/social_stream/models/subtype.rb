@@ -53,7 +53,12 @@ module SocialStream #:nodoc:
         # the subtype. Example: user.foo should raise "foo is not defined in user"
         # and not "in actor"
         rescue NameError => supertype_error
-          raise subtype_error
+          if supertype_error.name == subtype_error.name &&
+               supertype_error.message =~ /#{ self.class.supertype_name.to_s.classify }/
+            raise subtype_error
+          else
+            raise supertype_error
+          end
         end
       end
 
