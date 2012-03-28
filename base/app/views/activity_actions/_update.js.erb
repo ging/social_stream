@@ -1,0 +1,11 @@
+SocialStream.Action.update({
+  activity_object: {
+    id: "<%= dom_id(@activity_action.activity_object) %>",
+    type: "<%= @activity_action.activity_object.object_type %>"
+  },
+  follow: {
+    following: <%= @activity_action.follow? %>,
+    form: "<%= escape_javascript render(:partial => 'activity_actions/follow_form', :locals => { :activity_object => @activity_action.activity_object }) %>",
+    sentence: "<%= escape_javascript render(:partial => 'activity_actions/follow_sentence', :locals => { :activity_object => @activity_action.activity_object }) %>"
+  }
+});

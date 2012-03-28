@@ -1,15 +1,19 @@
 //= require jquery.tipsy
 
 SocialStream.Calendar = (function(SS, $, undefined){
-  var elementRegExp = new RegExp('sidebar_day_(..?)_(..?)_(..?.?.?)');
   var eventsPath;
 
-  var elementMatch = function(el){
-    return elementRegExp.exec(el.id);
+  var element = function(){
+    return $("#sidebar_calendar");
+  }
+  var eventElementRegExp = new RegExp('sidebar_day_(..?)_(..?)_(..?.?.?)');
+
+  var eventElementMatch = function(el){
+    return eventElementRegExp.exec(el.id);
   }
 
-  var elementDate = function(el) {
-    var m = elementMatch(el);
+  var eventElementDate = function(el) {
+    var m = eventElementMatch(el);
 
     if(m == null) return;
 
@@ -29,7 +33,7 @@ SocialStream.Calendar = (function(SS, $, undefined){
 
 
     $('#sidebar_calendar td').each(function(index, domEl){
-      var d = elementDate(domEl)
+      var d = eventElementDate(domEl)
 
       if(d < now) $(domEl).addClass('past');
       if(d.getMonth() != now.getMonth() && d > now) $(domEl).addClass('next_month');
@@ -71,11 +75,11 @@ SocialStream.Calendar = (function(SS, $, undefined){
   }
 
   var busyTipsy = function(){
-    var startDate = elementDate(this)
+    var startDate = eventElementDate(this)
     startDate.setHours(0);
     startDate.setMinutes(0);
     startDate.setSeconds(0);
-    var endDate   = elementDate(this)
+    var endDate   = eventElementDate(this)
 
     $.ajax({
       dataType: "script",
@@ -92,7 +96,9 @@ SocialStream.Calendar = (function(SS, $, undefined){
   }
 
   return {
-    init: init
+    init: init,
+    element: element,
+    eventElement: eventElement
   }
 
 })(SocialStream, jQuery);
