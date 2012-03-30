@@ -113,6 +113,8 @@ class Actor < ActiveRecord::Base
     joins(:received_contacts).merge(Contact.active.sent_by(a))
   }
 
+  scope :followed, joins(:activity_object).merge(ActivityObject.followed)
+
   scope :followed_by, lambda { |a|
     select("DISTINCT actors.*").
       joins(:received_ties => { :relation => :permissions }).

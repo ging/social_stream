@@ -55,6 +55,8 @@ class ActivityObject < ActiveRecord::Base
     joins(:received_author_action).merge(ActivityAction.sent_by(subject))
   }
 
+  scope :followed, order("activity_objects.follower_count DESC")
+
   def received_role_action(role)
     received_actions.
       find{ |a| a.__send__ "#{ role }?" }

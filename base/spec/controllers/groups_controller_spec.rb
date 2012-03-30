@@ -13,6 +13,12 @@ describe GroupsController do
       assert_response :success
     end
 
+    it "should render index with most followed" do
+      get :index, :most => 'followed'
+
+      response.should be_success
+    end
+
     it "should render show" do
       get :show, :id => Factory(:group).to_param
 
