@@ -29,8 +29,8 @@ class Video < Document
   end
 
  # JSON, special edition for video files
-  def to_json
-    [:id => activity_object_id,
+  def to_json me=self
+    {:id => activity_object_id,
      :title => title,
      :description => description,
      :author => author.name,
@@ -39,7 +39,7 @@ class Video < Document
                    { :type => 'video/mp4',   :src => file(:mp4).to_s },
                    { :type => 'video/x-flv', :src => file(:flv).to_s }
                  ]
-    ].to_json
+    }.to_json
   end
   
 end
