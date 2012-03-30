@@ -35,9 +35,9 @@ class Video < Document
      :description => description,
      :author => author.name,
      :poster => file(:poster).to_s,
-     :sources => [ { :type => 'video/webm',  :src => file(:webm).to_s },
-                   { :type => 'video/mp4',   :src => file(:mp4).to_s },
-                   { :type => 'video/x-flv', :src => file(:flv).to_s }
+     :sources => [ { :type => Mime::WEBM.to_s,  :src => file(:webm).to_s },
+                   { :type => Mime::MP4.to_s,   :src => file(:mp4).to_s },
+                   { :type => Mime::FLV.to_s, :src => file(:flv).to_s }
                  ]
     }.to_json
   end
