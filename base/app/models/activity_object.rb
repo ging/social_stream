@@ -12,9 +12,6 @@ class ActivityObject < ActiveRecord::Base
   attr_writer :_relation_ids
   attr_reader :_activity_parent_id
 
-  # See {SocialStream::Models::Channeled}
-  channeled
-
   # ActivityObject is a supertype of SocialStream.objects
   supertype_of :object
 
@@ -25,7 +22,8 @@ class ActivityObject < ActiveRecord::Base
 
   has_many :received_actions,
            :class_name => "ActivityAction",
-           :dependent  => :destroy
+           :dependent  => :destroy,
+           :autosave   => true
   has_many :followers,
            :through => :received_actions,
            :source  => :actor,
@@ -54,19 +52,66 @@ class ActivityObject < ActiveRecord::Base
   # after_create :create_post_activity, :unless => :acts_as_actor?
 
   scope :authored_by, lambda { |subject|
-    joins(:channel).merge(Channel.authored_by(subject))
+    joins(:received_author_action).merge(ActivityAction.sent_by(subject))
   }
+
+  def received_role_action(role)
+    received_actions.
+      find{ |a| a.__send__ "#{ role }?" }
+  end
+
+  %w{ author user_author owner }.each do |role|
+    code = <<-EOC
+      def #{ role }_id                     # def author_id
+        received_role_action(:#{ role }).  #   received_role_action(:author).
+          try(:actor_id)                   #     try(:actor_id)
+      end                                  # end
+
+      def #{ role }_id=(actor_id)                    # def author_id=(actor_id)
+        action =                                     #   action =
+          received_actions.                          #     received_actions.
+            find{ |a| a.actor_id == actor_id }       #       select{ |a| a.actor_id == actor_id }
+                                                     #
+        if action                                    #   if action 
+          action.#{ role } = true                    #     action.author = true
+        else                                         #   else
+          received_actions.                          #     received_actions.
+            build :actor_id  => actor_id,            #       build :actor_id => actor_id,
+                  :#{ role } => true                 #             :author   => true
+        end                                          #   end
+                                                     #
+        actor_id                                     #  actor_id
+      end                                            # end
+
+      def #{ role }                        # def author
+        received_role_action(:#{ role }).  #   received_role_action(:author).
+          try(:actor)                      #     try(:actor)
+      end                                  # end
+
+      def #{ role }=(actor)           # def author=(actor)
+        self.#{ role }_id =           #   self.author_id =
+          Actor.normalize_id(actor)   #     Actor.normalize_id(actor)
+      end                             # end
+
+      def #{ role }_subject # def author_subject
+        #{ role }.subject   #   author.subject
+      end                   # end
+
+    EOC
+
+    class_eval code, __FILE__, __LINE__ - code.lines.count - 2
+  end
+
+  # Was the author represented when this {ActivityObject} was created?
+  def represented_author?
+    author_id != user_author_id
+  end
 
   # The object of this activity object
   def object
     subtype_instance.is_a?(Actor) ?
       subtype_instance.subject :
       subtype_instance
-  end
-
-  # The activity in which this activity_object was created
-  def post_activity
-    activities.includes(:activity_verb).where('activity_verbs.name' => 'post').first
   end
 
   # Does this {ActivityObject} has {Actor}?
@@ -79,26 +124,32 @@ class ActivityObject < ActiveRecord::Base
     received_actions.sent_by(actor).first
   end
 
+  # The activity in which this activity_object was created
+  def post_activity
+    activities.includes(:activity_verb).where('activity_verbs.name' => 'post').first
+  end
+
   # Build the post activity when this object is not saved
   def build_post_activity
-    Activity.new :channel      => channel!,
+    Activity.new :author       => author,
+                 :user_author  => user_author,
+                 :owner        => owner,
                  :relation_ids => Array(_relation_ids)
   end
 
   def _relation_ids
     @_relation_ids ||=
-      if channel!.author.blank? || channel!.owner.blank?
+      if author.blank? || owner.blank?
         nil
       else
         # FIXME: repeated in Activity#fill_relations
         if SocialStream.relation_model == :custom
-          if channel!.reflexive?
-            channel!.owner.relation_customs.map(&:id)
+          if author == owner
+            owner.relation_customs.map(&:id)
           else
-            channel!.
-              owner.
+            owner.
               relation_customs.
-              allow(channel.author, 'create', 'activity').
+              allow(author, 'create', 'activity').
               map(&:id)
           end
         else
@@ -128,9 +179,11 @@ class ActivityObject < ActiveRecord::Base
 
   def create_activity(verb)
     a = Activity.new :verb         => verb,
-      :channel      => channel,
-      :relation_ids => _relation_ids,
-      :parent_id    => _activity_parent_id
+                     :author_id    => author_id,
+                     :user_author  => user_author,
+                     :owner        => owner,
+                     :relation_ids => _relation_ids,
+                     :parent_id    => _activity_parent_id
 
     a.activity_objects << self
 

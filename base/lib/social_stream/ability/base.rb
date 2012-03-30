@@ -22,11 +22,11 @@ module SocialStream
           end
 
           can :update, klass do |k| # can :update, Post do |post|
-            [k.channel.author_id, k.channel.owner_id].include?(Actor.normalize_id(subject))
+            [k.author_id, k.owner_id].include?(Actor.normalize_id(subject))
           end
 
           can :destroy, klass do |k| # can :destroy, Post do |post|
-            [k.channel.author_id, k.channel.owner_id].include?(Actor.normalize_id(subject))
+            [k.author_id, k.owner_id].include?(Actor.normalize_id(subject))
           end
         end
 

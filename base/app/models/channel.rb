@@ -19,7 +19,6 @@ class Channel < ActiveRecord::Base
   belongs_to :user_author,
              :class_name => "Actor"
 
-  has_many :activity_objects, :dependent => :destroy
   has_many :activities, :dependent => :destroy
 
   validates_uniqueness_of :author_id,      :scope => [ :owner_id,  :user_author_id ]
