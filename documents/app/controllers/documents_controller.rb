@@ -21,6 +21,7 @@ class DocumentsController < ApplicationController
   
   def create
     super do |format|
+      format.json {render :json => @document}
       format.all {redirect_to request.referer || home_path}
     end
   end
@@ -34,8 +35,9 @@ class DocumentsController < ApplicationController
 
   def show
     respond_to do |format|
+      format.json {render :json => Document.find(params[:id]) }
       format.html {render :action => :show}
-      format.all {
+      format.any {
         path = resource.file.path(params[:style] || params[:format])
 
         send_file path,

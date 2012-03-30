@@ -4,7 +4,9 @@ class Video < Document
                     :path => ':rails_root/documents/:class/:id_partition/:style',
                     :styles => {
                       :webm => {:format => 'webm'},
-                      :flv  => { :format => 'flv' },
+                      :flv  => {:format => 'flv'},
+                      :mp4  => {:format => 'mp4'},
+                      :poster  => {:format => 'png', :time => 5},
                       :thumb48sq  => {:geometry => "48x48" , :format => 'png', :time => 5},
                       :thumbwall => {:geometry => "130x97#", :format => 'png', :time => 5}
                     },
@@ -24,6 +26,20 @@ class Video < Document
   # Thumbnail file
   def thumb(size, helper)
       "#{ size.to_s }/video.png"
+  end
+
+ # JSON, special edition for video files
+  def to_json
+    [:id => activity_object_id,
+     :title => title,
+     :description => description,
+     :author => author.name,
+     :poster => file(:poster).to_s,
+     :sources => [ { :type => 'video/webm',  :src => file(:webm).to_s },
+                   { :type => 'video/mp4',   :src => file(:mp4).to_s },
+                   { :type => 'video/x-flv', :src => file(:flv).to_s }
+                 ]
+    ].to_json
   end
   
 end
