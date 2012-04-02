@@ -51,6 +51,7 @@ module SocialStream
         # Video
         Mime::Type.register "video/x-flv", :flv
         Mime::Type.register "video/webm", :webm
+        Mime::Type.register "video/mp4", :mp4
       end
 
       initializer "social_stream-documents.views.toolbar" do

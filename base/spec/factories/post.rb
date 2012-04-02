@@ -9,3 +9,9 @@ Factory.define :public_post, :parent => :post do |p|
   p.owner_id  { |q| q.author_id }
   p._relation_ids { |q| Array(Relation::Public.instance.id) }
 end
+
+Factory.define :self_post, :parent => :post do |p|
+  p.author_id { Factory(:user).actor_id }
+  p.owner_id  { |q| q.author_id }
+  p.user_author_id { |q| q.author_id }
+end

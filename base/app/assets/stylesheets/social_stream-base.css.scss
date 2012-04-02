@@ -1,0 +1,13 @@
+/*
+ *= require avatars_for_rails
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+@import "colors";
+
+.ui-effects-transfer {
+	border: 2px solid $separation-color;
+	background-color: $secondary-color;
+}

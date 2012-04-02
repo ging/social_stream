@@ -54,11 +54,12 @@
         $(this).jPlayer("setMedia", {
           webmv: "<%= video_url(video, :format => 'webm' ) %>", // Defines the webm url
           flv:   "<%= video_url(video, :format => 'flv') %>"
+          mp4:   "<%= video_url(video, :format => 'mp4') %>"
         });
       },
       solution:"flash, html",
       preload: "none",
-      supplied: "webmv, flv",
+      supplied: "webmv, flv, mp4",
       swfPath: "assets",
       cssSelectorAncestor: "#jp_interface_<%=video.id%>"
     });

@@ -22,6 +22,7 @@ module SocialStream
         subtype_of :actor,
                    :build => { :subject_type => to_s }
         
+        has_one :activity_object, :through => :actor
         has_one :profile, :through => :actor
         
         validates_presence_of :name
@@ -48,7 +49,7 @@ module SocialStream
 
         scope :followed, lambda { 
           joins(:actor).
-            order("actors.follower_count DESC")
+            merge(Actor.followed)
         }
 
         scope :liked, lambda { 

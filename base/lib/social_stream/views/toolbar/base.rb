@@ -28,6 +28,12 @@ module SocialStream
                 :key => :menu,
                 :html => toolbar_menu(type, options)
               }
+
+              items << {
+                :key => :contacts,
+                :html => render(:partial => 'subjects/contacts', :locals => { :subject => subject })
+              }
+
             end
           end
         end

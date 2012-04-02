@@ -22,5 +22,40 @@ describe ActivityAction do
 
       action.reload.should_not be_follow
     end
+
+    describe "where posting to other owner" do
+      before do
+        @post = Factory(:post)
+      end
+
+      it "should not be duplicated" do
+        @post.received_actions.count.should == 2
+      end
+    end
+
+    describe "where posting to self" do
+      before do
+        @post = Factory(:self_post)
+      end
+
+      it "should not be duplicated" do
+        @post.received_actions.count.should == 1
+      end
+    end
+
+    describe "where building the post" do
+      before do
+        user = Factory(:user)
+        @post = Post.new :text => "Testing",
+                         :author => user,
+                         :owner  => user,
+                         :user_author => user
+        @post.save!
+      end
+
+      it "should not be duplicated" do
+        @post.received_actions.count.should == 1
+      end
+    end
   end
 end

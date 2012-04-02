@@ -3,7 +3,7 @@ module SocialStream
     # Common methods added to ApplicationController
     module CancanDeviseIntegration
       extend ActiveSupport::Concern
-      
+
       private
 
       # Catch some authorization errors:
@@ -17,14 +17,18 @@ module SocialStream
         if user_signed_in?
           if params[:s].present? && controller_name != 'home'
             redirect_to :home
-          else
-            raise exception
+            return
           end
         else
-          redirect_to new_user_session_path
+          if request.get?
+            session["user_return_to"] = request.fullpath
+            redirect_to new_user_session_path
+            return
+          end
         end
+
+        raise exception
       end
     end
   end
 end
-

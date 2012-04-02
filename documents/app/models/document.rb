@@ -68,6 +68,16 @@ class Document < ActiveRecord::Base
       "#{ size.to_s }/default.png"
     end
   end
+
+ # JSON, generic version for most documents
+  def to_json me=self
+    {:id => activity_object_id,
+     :title => title,
+     :description => description,
+     :author => author.name,
+     :src => file.to_s
+    }.to_json
+  end
   
   protected
 

@@ -11,6 +11,7 @@ class DocumentsController < ApplicationController
   
   def index
     super do |format|
+      format.json { render :json => collection.map{|a| a.activity_objects.first.document.to_json} }
       if params[:no_layout].present?
         format.html { render :action => :index, :layout => false }      
       else  
@@ -21,6 +22,7 @@ class DocumentsController < ApplicationController
   
   def create
     super do |format|
+      format.json { render :json => resource }
       format.all {redirect_to request.referer || home_path}
     end
   end
@@ -34,8 +36,9 @@ class DocumentsController < ApplicationController
 
   def show
     respond_to do |format|
+      format.json {render :json => resource }
       format.html {render :action => :show}
-      format.all {
+      format.any {
         path = resource.file.path(params[:style] || params[:format])
 
         send_file path,
