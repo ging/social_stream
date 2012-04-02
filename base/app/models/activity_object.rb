@@ -52,7 +52,8 @@ class ActivityObject < ActiveRecord::Base
   # after_create :create_post_activity, :unless => :acts_as_actor?
 
   scope :authored_by, lambda { |subject|
-    joins(:received_author_action).merge(ActivityAction.sent_by(subject))
+    joins(:received_actions).
+      merge(ActivityAction.sent_by(subject).where(:author => true))
   }
 
   scope :followed, order("activity_objects.follower_count DESC")

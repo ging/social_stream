@@ -60,4 +60,12 @@ describe Post do
       post.post_activity.relations.should include(tie.relation)
     end
   end
+
+  describe "authored_by" do
+    it "should work" do
+      post = Factory(:post)
+
+      Post.authored_by(post.author).should include(post)
+    end
+  end
 end

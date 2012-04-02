@@ -8,6 +8,9 @@ module SocialStream
         subtype_of :activity_object,
                    :build => { :object_type => to_s }
 
+        has_many :received_actions,
+                 :through => :activity_object
+
         unless self == Actor
           validates_presence_of :author_id, :owner_id, :user_author_id
 
