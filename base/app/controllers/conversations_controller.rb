@@ -59,17 +59,22 @@ class ConversationsController < ApplicationController
 
     @conversation.move_to_trash(@actor)
 
-    if params[:location].present?
-      case params[:location]
-      when 'conversation'
-        redirect_to conversations_path(:box => :trash)
-        return
-      else
-      redirect_to conversations_path(:box => @box,:page => params[:page])
-      return
-      end
+    respond_to do |format|
+      format.html {
+        if params[:location].present?
+          case params[:location]
+          when 'conversation'
+            redirect_to conversations_path(:box => :trash)
+            return
+          else
+          redirect_to conversations_path(:box => @box,:page => params[:page])
+          return
+          end
+        end
+        redirect_to conversations_path(:box => @box,:page => params[:page])
+      }
+      format.js { render :js => "window.location = '#{conversations_path(:box => @box,:page => params[:page])}';" }
     end
-    redirect_to conversations_path(:box => @box,:page => params[:page])
   end
 
   private
