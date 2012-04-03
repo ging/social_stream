@@ -10,13 +10,13 @@ end
 
 Factory.define :public_picture, :parent => :picture do |p|
   p.owner_id  { |q| q.author_id }
-  p._relation_ids { |q| Array(Relation::Public.instance.id) }
+  p.relation_ids { |q| Array(Relation::Public.instance.id) }
 end
 
 Factory.define :private_picture, :parent => :picture do |p|
   p.file { Rack::Test::UploadedFile.new(File.join(File.dirname(__FILE__), 'files', 'privado.png'),
                                        'image/png') }
   p.owner_id  { |q| q.author_id }
-  p._relation_ids  { |q| Actor.find(q.author_id).relation_customs.sort.first.id }
+  p.relation_ids  { |q| Actor.find(q.author_id).relation_customs.sort.first.id }
 end
 

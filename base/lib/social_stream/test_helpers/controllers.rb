@@ -34,7 +34,7 @@ module SocialStream
 
       def model_assigned_to contact, relation_ids
         model_attributes[:owner_id]  = contact.receiver.id
-        model_attributes[:_relation_ids] = Array(relation_ids).map(&:id)
+        model_attributes[:relation_ids] = Array(relation_ids).map(&:id)
       end
 
       shared_examples_for "Allow Creating" do

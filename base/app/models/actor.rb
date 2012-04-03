@@ -57,6 +57,10 @@ class Actor < ActiveRecord::Base
   has_many :received_ties,
            :through => :received_contacts,
            :source  => :ties
+
+  has_many :received_relations,
+           :through => :received_ties,
+           :source  => :relation
   
   has_many :senders,
            :through => :received_contacts,
@@ -311,6 +315,11 @@ class Actor < ActiveRecord::Base
       includes(:actor).
       map(&:actor).
       map(&:id)
+  end
+
+  # Does this {Actor} allow subject to perform action on object?
+  def allow?(subject, action, object)
+    ties_to(subject).with_permissions(action, object).any?
   end
 
   # The {Channel} of this {Actor} to self (totally close!)

@@ -24,7 +24,7 @@ namespace :db do
                              :author_id  => author.id,
                              :owner_id   => owner.id,
                              :user_author_id => user_author.id,
-                             :_relation_ids => [Relation::Public.instance.id]
+                             :relation_ids => [Relation::Public.instance.id]
         d.save!
       end
 

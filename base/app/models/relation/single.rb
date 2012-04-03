@@ -4,11 +4,21 @@
 # these {Relation relations}.
 #
 class Relation::Single < Relation
+  PERMISSIONS = []
+
   class << self
     def instance
       @instance ||=
-        first || create!
+        first ||
+          create!(:permissions => permissions)
     end
+
+    def permissions
+      self::PERMISSIONS.map{ |p|
+        Permission.find_or_create_by_action_and_object p.first, p.last
+      }
+    end
+
   end
 
   # The name of public relation

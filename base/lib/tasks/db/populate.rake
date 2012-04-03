@@ -176,7 +176,7 @@ namespace :db do
                         :author_id  => author.id,
                         :owner_id   => owner.id,
                         :user_author_id => user_author.id,
-                        :_relation_ids => Array(t.relation_id)
+                        :relation_ids => Array(t.relation_id)
 
         p.post_activity.update_attributes(:created_at => p.created_at,
                                           :updated_at => p.updated_at)

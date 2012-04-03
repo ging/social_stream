@@ -1,4 +1,9 @@
 class Relation::Public < Relation::Single
+  PERMISSIONS =
+    [
+      [ 'read', 'activity' ]
+    ]
+
   # A {Relation::Public public relation} is always the weakest
   def <=>(relation)
     1

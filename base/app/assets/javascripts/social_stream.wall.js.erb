@@ -91,7 +91,7 @@ SocialStream.Wall = (function(SS, $, undefined){
       });
       $("#masterSubmitButton").val(I18n.t('activity.sending') + '...').attr("disabled", true); 
 
-      // Add _relation_ids[] parameter from authorization selector
+      // Add relation_ids[] parameter from authorization selector
       $('.liveAdded').remove();
 
       var currentForm = $(this);
@@ -102,7 +102,7 @@ SocialStream.Wall = (function(SS, $, undefined){
           .addClass('liveAdded')
           .attr('type', 'hidden')
           .attr('name', currentForm
-            .attr('id').split('_')[1]+'[_relation_ids][]')
+            .attr('id').split('_')[1]+'[relation_ids][]')
           .val($(this).attr('value')));
       });
       return true;

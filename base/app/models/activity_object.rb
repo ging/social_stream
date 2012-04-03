@@ -9,13 +9,15 @@
 # Objects are added to +config/initializers/social_stream.rb+
 #
 class ActivityObject < ActiveRecord::Base
-  attr_writer :_relation_ids
   attr_reader :_activity_parent_id
 
   # ActivityObject is a supertype of SocialStream.objects
   supertype_of :object
 
   acts_as_taggable
+
+  has_many :activity_object_audiences, :dependent => :destroy
+  has_many :relations, :through => :activity_object_audiences
 
   has_many :activity_object_activities, :dependent => :destroy
   has_many :activities, :through => :activity_object_activities
@@ -42,7 +44,10 @@ class ActivityObject < ActiveRecord::Base
            :through => :activity_object_holders,
            :source  => :activity_object
 
+  before_validation :fill_relation_ids, :if => lambda { |obj| obj.object_type != "Actor" }
+
   validates_presence_of :object_type
+  validate :allowed_relations, :if => lambda { |obj| obj.object_type != "Actor" }
 
   # TODO: This is currently defined in lib/social_stream/models/object.rb
   #
@@ -110,6 +115,15 @@ class ActivityObject < ActiveRecord::Base
     class_eval code, __FILE__, __LINE__ - code.lines.count - 2
   end
 
+  # subject was the author, user author or owner of this {ActivityObject}?
+  def authored_or_owned_by?(subject)
+    return false if subject.blank?
+
+    received_actions.
+      merge(ActivityAction.authored_or_owned_by(subject)).
+      any?
+  end
+
   # Was the author represented when this {ActivityObject} was created?
   def represented_author?
     author_id != user_author_id
@@ -146,28 +160,7 @@ class ActivityObject < ActiveRecord::Base
     Activity.new :author       => author,
                  :user_author  => user_author,
                  :owner        => owner,
-                 :relation_ids => Array(_relation_ids)
-  end
-
-  def _relation_ids
-    @_relation_ids ||=
-      if author.blank? || owner.blank?
-        nil
-      else
-        # FIXME: repeated in Activity#fill_relations
-        if SocialStream.relation_model == :custom
-          if author == owner
-            owner.relation_customs.map(&:id)
-          else
-            owner.
-              relation_customs.
-              allow(author, 'create', 'activity').
-              map(&:id)
-          end
-        else
-          Array.wrap Relation::Public.instance.id
-        end
-      end
+                 :relation_ids => relation_ids
   end
 
   def _activity_parent
@@ -175,11 +168,43 @@ class ActivityObject < ActiveRecord::Base
   end
 
   def _activity_parent_id=(id)
-    self._relation_ids = Activity.find(id).relation_ids
+    self.relation_ids = Activity.find(id).relation_ids
     @_activity_parent_id = id
   end
 
   private
+
+  def fill_relation_ids
+    return if relation_ids.present? || author.blank? || owner.blank?
+
+    @valid_relations = true
+
+    self.relation_ids =
+      if SocialStream.relation_model == :custom
+        owner.
+          relations.
+          allowing('read', 'activity').
+          map(&:id)
+      else
+        Array.wrap Relation::Public.instance.id
+      end
+  end
+
+  # validate method
+  #
+  # check relations are included in 
+  def allowed_relations
+    return if @valid_relations
+
+    allowed_rels =
+      owner.relations.allowing('read', 'activity') + 
+      Relation::Single.allowing('read', 'activity')
+
+    if (relation_ids - allowed_rels.map(&:id)).any?
+      errors.add(:relation_ids, "not allowed")
+    end
+  end
+
 
   def create_post_activity
     create_activity "post"
@@ -194,7 +219,7 @@ class ActivityObject < ActiveRecord::Base
                      :author_id    => author_id,
                      :user_author  => user_author,
                      :owner        => owner,
-                     :relation_ids => _relation_ids,
+                     :relation_ids => relation_ids,
                      :parent_id    => _activity_parent_id
 
     a.activity_objects << self
