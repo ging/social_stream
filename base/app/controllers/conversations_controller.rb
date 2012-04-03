@@ -61,19 +61,19 @@ class ConversationsController < ApplicationController
 
     respond_to do |format|
       format.html {
-        if params[:location].present?
-          case params[:location]
-          when 'conversation'
-            redirect_to conversations_path(:box => :trash)
-            return
-          else
+        if params[:location].present? and params[:location] == 'conversation'
+          redirect_to conversations_path(:box => :trash)
+	else
           redirect_to conversations_path(:box => @box,:page => params[:page])
-          return
-          end
-        end
-        redirect_to conversations_path(:box => @box,:page => params[:page])
+	end
       }
-      format.js { render :js => "window.location = '#{conversations_path(:box => @box,:page => params[:page])}';" }
+      format.js {
+        if params[:location].present? and params[:location] == 'conversation'
+          render :js => "window.location = '#{conversations_path(:box => @box,:page => params[:page])}';"
+	else
+          render 'conversations/destroy'
+	end
+      }
     end
   end
 
