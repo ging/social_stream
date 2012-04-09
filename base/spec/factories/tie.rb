@@ -20,6 +20,10 @@ Factory.define :reject, :parent => :tie do |t|
   t.after_build { |u| u.relation = Relation::Reject.instance }
 end
 
+Factory.define :follow, :parent => :tie do |t|
+  t.after_build { |u| u.relation = Relation::Follow.instance }
+end
+
 # Group ties
 Factory.define :g2u_tie, :parent => :tie do |t|
   t.contact { |c| Factory(:group_contact) }

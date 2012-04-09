@@ -4,7 +4,7 @@ class FollowersController < ApplicationController
   respond_to :html, :js
 
   def index
-    @followings = current_subject.followings
+    @followings = current_subject.followings.where('activity_objects.object_type' => "Actor")
     @followers = current_subject.followers
 
     respond_to do |format|
