@@ -56,6 +56,11 @@ class ActivityObject < ActiveRecord::Base
       merge(ActivityAction.sent_by(subject).where(:author => true))
   }
 
+  scope :not_authored_by, lambda { |subject|
+    joins(:received_actions).
+      merge(ActivityAction.not_sent_by(subject).where(:author => true))
+  }
+
   scope :followed, order("activity_objects.follower_count DESC")
 
   def received_role_action(role)

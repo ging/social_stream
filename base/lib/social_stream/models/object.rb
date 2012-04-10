@@ -24,6 +24,11 @@ module SocialStream
           joins(:activity_object).
             merge(ActivityObject.authored_by(subject))
         }
+
+        scope :not_authored_by, lambda { |subject|
+          joins(:activity_object).
+            merge(ActivityObject.not_authored_by(subject))
+        }
       end
     end
   end
