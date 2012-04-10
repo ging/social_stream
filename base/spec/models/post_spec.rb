@@ -32,6 +32,14 @@ describe Post do
   end
 
   context "without relations" do
+    before do
+      @ss_relation_model = SocialStream.relation_model
+    end
+
+    after do
+      SocialStream.relation_model = @ss_relation_model
+    end
+
     context "in follow relation model" do
       before do
         SocialStream.relation_model = :follow

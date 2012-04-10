@@ -7,6 +7,13 @@ describe PostsController do
   render_views
 
   describe "authorizing" do
+    before do
+      @ss_relation_model = SocialStream.relation_model
+    end
+
+    after do
+      SocialStream.relation_model = @ss_relation_model
+    end
 
     describe "in follow relation model" do
       before do
