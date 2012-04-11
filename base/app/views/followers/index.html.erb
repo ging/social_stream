@@ -1,1 +1,26 @@
-<%= render @followers.map{ |f| current_subject.contact_to!(f) } %>
+<% sidebar %>
+<% toolbar :profile, :subject => current_subject %>
+<div class="followers tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active">
+    <a data-toggle="tab" href="#following"><%=t('follow.followings')%></a>
+    </li>
+    <li class="">
+    <a data-toggle="tab" href="#follower"><%=t('follow.followers')%></a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div id="following" class="tab-pane active offset1">
+      <%= render @followings.
+        page(params[:page]).
+        per(20).
+        map { |f| current_subject.contact_to!(f) } %>
+    </div>
+    <div id="follower" class="tab-pane offset1 ">
+      <%= render @followers.
+        page(params[:page]).
+        per(20).
+        map { |f| current_subject.contact_to!(f) } %>
+    </div>
+  </div>
+</div>
