@@ -7,7 +7,6 @@ class DocumentsController < ApplicationController
   before_filter :profile_subject!, :only => :index
 
   PER_PAGE=20
-  SEND_FILE_METHOD = :default
   
   def index
     super do |format|
@@ -59,12 +58,6 @@ class DocumentsController < ApplicationController
       :filename => @document.file_file_name,
       :type => @document.file_content_type
     }
-
-    # Ask Victor about the rationale of this:
-    case SEND_FILE_METHOD
-    when :apache then send_file_options[:x_sendfile] = true
-    when :nginx then head(:x_accel_redirect => path.gsub(Rails.root, ''))
-    end
 
     send_file(path, send_file_options)
   end
