@@ -8,6 +8,8 @@ module SocialStream
 
         before_filter :set_author_ids, :only => [ :new, :create, :update ]
 
+	after_filter :increment_visit_count, :only => :show
+
         load_and_authorize_resource :except => :index
 
         respond_to :html, :js
@@ -26,6 +28,10 @@ module SocialStream
       end
 
       protected
+
+      def increment_visit_count
+        resource.activity_object.increment!(:visit_count) if request.format == 'html'
+      end
 
       def set_author_ids
         resource_params.first[:author_id] = current_subject.try(:actor_id)
