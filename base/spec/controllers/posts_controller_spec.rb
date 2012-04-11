@@ -7,18 +7,20 @@ describe PostsController do
   render_views
 
   describe "authorizing" do
-    before do
+    before :all do
       @ss_relation_model = SocialStream.relation_model
     end
 
-    after do
+    after :all do
       SocialStream.relation_model = @ss_relation_model
     end
 
     describe "in follow relation model" do
-      before do
+      before :all do
         SocialStream.relation_model = :follow
+      end
 
+      before do
         @user = Factory(:user)
         sign_in @user
       end
@@ -32,11 +34,12 @@ describe PostsController do
       end
     end
 
-
     describe "in custom relation mode" do
-      before do
+      before :all do
         SocialStream.relation_model = :custom
+      end
 
+      before do
         @user = Factory(:user)
         sign_in @user
       end

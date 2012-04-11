@@ -32,11 +32,11 @@ describe Post do
   end
 
   context "without relations" do
-    before do
+    before :all do
       @ss_relation_model = SocialStream.relation_model
     end
 
-    after do
+    after :all do
       SocialStream.relation_model = @ss_relation_model
     end
 
