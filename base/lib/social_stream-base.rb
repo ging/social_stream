@@ -26,6 +26,13 @@ module SocialStream
     autoload :Supertype, 'social_stream/models/supertype'
   end
 
+  module Routing
+    module Constraints
+      autoload :Custom, 'social_stream/routing/constraints/custom'
+      autoload :Follow, 'social_stream/routing/constraints/follow'
+    end
+  end
+
   module Views
     autoload :List, 'social_stream/views/list'
 

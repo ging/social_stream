@@ -40,8 +40,7 @@ Rails.application.routes.draw do
     resources object.to_s.pluralize
   end
 
-  case SocialStream.relation_model
-  when :follow
+  constraints SocialStream::Routing::Constraints::Follow.new do
     match 'followings' => 'followers#index', :as => :followings, :defaults => { :direction => 'sent' }
     match 'followers' => 'followers#index', :as => :followers, :defaults => { :direction => 'received' }
     resources :followers
@@ -51,7 +50,9 @@ Rails.application.routes.draw do
         get 'pending'
       end
     end
-  when :custom
+  end
+
+  constraints SocialStream::Routing::Constraints::Custom.new do
     resources :contacts do
       collection do
         get 'pending'
