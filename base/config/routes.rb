@@ -1,14 +1,4 @@
 Rails.application.routes.draw do
-  #Background tasks
-  resque_constraint = lambda do |request|
-    #request.env['warden'].authenticate? and request.env['warden'].user.admin?
-    true
-  end
-
-  constraints resque_constraint do
-    mount Resque::Server, :at => "/resque"
-  end
-  
   root :to => "frontpage#index"
   
   match 'home' => 'home#index', :as => :home
@@ -117,4 +107,9 @@ Rails.application.routes.draw do
   match 'api/me/contacts' => 'contacts#index', :format => 'json', :as => :api_contacts
   match 'api/subjects/:s/contacts' => 'contacts#index', :format => 'json', :as => :api_subject_contacts
   ##/API##
+
+  #Background tasks
+  constraints SocialStream::Routing::Constraints::Resque.new do
+    mount Resque::Server, :at => "/resque"
+  end
 end
