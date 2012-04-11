@@ -11,6 +11,10 @@ class ActivityAction < ActiveRecord::Base
     where(:actor_id => Actor.normalize_id(actor))
   }
 
+  scope :not_sent_by, lambda{ |actor|
+    where(arel_table[:actor_id].not_in(Actor.normalize_id(actor)))
+  }
+
   scope :received_by, lambda{ |activity_object|
     where(:activity_object_id => ActivityObject.normalize_id(activity_object))
   }

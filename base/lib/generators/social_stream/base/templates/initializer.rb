@@ -27,7 +27,11 @@ SocialStream.setup do |config|
   # :follow - user just follow other users, like Twitter
   #
   # config.relation_model = :custom
-  
+
+  # Expose resque interface to manage background tasks at /resque
+  #
+  # config.resque_access = true
+ 
   # Quick search (header) and Extended search models and its order. Remember to create
   # the indexes with thinking-sphinx if you are using customized models.
   # 

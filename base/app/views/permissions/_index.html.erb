@@ -9,8 +9,13 @@
       <tr>
         <td>
           <div contain=<%= dom_id p %> class="checkboxPermissionOptionLeft">
-            <input id=<%= dom_id p %> class="permission" type="checkbox"/>
-            <label for=<%= dom_id p %>><%= p.description(:brief, :subject => current_subject) %></label>
+	    <% if disable_permission_edit? p %>
+              <input id=<%= dom_id p %> class="permission" type="checkbox" disabled="disabled"/>
+              <label for=<%= dom_id p %>><%= p.description(:brief, :subject => current_subject) %></label>
+	    <% else %>
+              <input id=<%= dom_id p %> class="permission" type="checkbox"/>
+              <label for=<%= dom_id p %>><%= p.description(:brief, :subject => current_subject) %></label>
+	    <% end %>
             <div class="clearfloat"></div>
           </div>
         </td>

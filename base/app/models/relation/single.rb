@@ -6,7 +6,8 @@
 class Relation::Single < Relation
   class << self
     def instance
-      first || create!
+      @instance ||=
+        first || create!
     end
   end
 

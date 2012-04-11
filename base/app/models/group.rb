@@ -1,3 +1,8 @@
+# {Group Groups} are the other kind of social entities supported in SocialStream::Base
+#
+# As with {User}, almost all the interaction with other classes in Social Stream is done
+# through {Actor}. The glue between {Group} and {Actor} is in {SocialStream::Models::Subject}
+#
 class Group < ActiveRecord::Base
   include SocialStream::Models::Subject
 

@@ -6,7 +6,7 @@ require 'devise/orm/active_record'
 # for managing authentication
 #
 # Almost all the logic of the interaction between {User} and the rest of classes in Social Stream
-# is done through {SocialStream::Models::Subject} and {Actor}
+# is done through {Actor}. The glue between {User} and {Actor} is in {SocialStream::Models::Subject}
 #
 class User < ActiveRecord::Base
   include SocialStream::Models::Subject

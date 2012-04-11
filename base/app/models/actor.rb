@@ -298,6 +298,21 @@ class Actor < ActiveRecord::Base
 
   alias_method :ego_contact, :self_contact
 
+  # The {ActivityObject ActivityObjects} followed by this {Actor}
+  # that are {Actor Actors}
+  def following_actor_objects
+    followings.
+      where('activity_objects.object_type' => "Actor")
+  end
+
+  # An array with the ids of {Actor Actors} followed by this {Actor}
+  def following_actor_ids
+    following_actor_objects.
+      includes(:actor).
+      map(&:actor).
+      map(&:id)
+  end
+
   # The {Channel} of this {Actor} to self (totally close!)
   def self_channel
     Channel.find_or_create_by_author_id_and_user_author_id_and_owner_id id, id, id

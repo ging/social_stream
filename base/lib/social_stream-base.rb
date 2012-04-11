@@ -26,6 +26,14 @@ module SocialStream
     autoload :Supertype, 'social_stream/models/supertype'
   end
 
+  module Routing
+    module Constraints
+      autoload :Custom, 'social_stream/routing/constraints/custom'
+      autoload :Follow, 'social_stream/routing/constraints/follow'
+      autoload :Resque, 'social_stream/routing/constraints/resque'
+    end
+  end
+
   module Views
     autoload :List, 'social_stream/views/list'
 
@@ -62,7 +70,10 @@ module SocialStream
 
   mattr_accessor :relation_model
   @@relation_model = :custom
-  
+
+  mattr_accessor :resque_access
+  @@resque_access = true
+ 
   mattr_accessor :quick_search_models
   @@quick_search_models = [ :user, :group, :post ]
   
