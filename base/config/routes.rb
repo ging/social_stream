@@ -3,10 +3,9 @@ Rails.application.routes.draw do
   
   match 'home' => 'home#index', :as => :home
   match 'home' => 'home#index', :as => :user_root # devise after_sign_in_path_for
-  
-  # Webfinger
-  match '.well-known/host-meta',:to => 'frontpage#host_meta'
-  
+
+  match 'search' => 'search#index', :as => :search
+
   # Social Stream subjects configured in config/initializers/social_stream.rb
   SocialStream.subjects.each do |actor|
     resources actor.to_s.pluralize do
@@ -30,17 +29,7 @@ Rails.application.routes.draw do
     resources object.to_s.pluralize
   end
 
-  constraints SocialStream::Routing::Constraints::Follow.new do
-    match 'followings' => 'followers#index', :as => :followings, :defaults => { :direction => 'sent' }
-    match 'followers' => 'followers#index', :as => :followers, :defaults => { :direction => 'received' }
-    resources :followers
-
-    resources :contacts do
-      collection do
-        get 'pending'
-      end
-    end
-  end
+  resources :comments
 
   constraints SocialStream::Routing::Constraints::Custom.new do
     resources :contacts do
@@ -56,13 +45,20 @@ Rails.application.routes.draw do
     resources :permissions
   end
 
+  constraints SocialStream::Routing::Constraints::Follow.new do
+    match 'followings' => 'followers#index', :as => :followings, :defaults => { :direction => 'sent' }
+    match 'followers' => 'followers#index', :as => :followers, :defaults => { :direction => 'received' }
+    resources :followers
+
+    resources :contacts do
+      collection do
+        get 'pending'
+      end
+    end
+  end
+
   resources :activity_actions
 
-  match 'tags'     => 'tags#index', :as => 'tags'
-  
-  # Find subjects by slug
-  match 'subjects/lrdd/:id' => 'subjects#lrdd', :as => 'subject_lrdd'
-  
   resource :representation
   
   resources :settings do
@@ -83,19 +79,16 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :comments
-
   resources :activities do
     resource :like
   end
-  
-  match 'search' => 'search#index', :as => :search  
   
   match 'cheesecake' => 'cheesecake#index', :as => :cheesecake  
   match 'update_cheesecake' => 'cheesecake#update', :as => :update_cheesecake  
   
   match 'ties' => 'ties#index', :as => :ties
   
+  match 'tags' => 'tags#index', :as => 'tags'
   
   ##API###
   match 'api/keygen' => 'api#create_key', :as => :api_keygen
@@ -108,8 +101,15 @@ Rails.application.routes.draw do
   match 'api/subjects/:s/contacts' => 'contacts#index', :format => 'json', :as => :api_subject_contacts
   ##/API##
 
+ 
   #Background tasks
   constraints SocialStream::Routing::Constraints::Resque.new do
     mount Resque::Server, :at => "/resque"
   end
+
+  # Webfinger
+  match '.well-known/host-meta',:to => 'frontpage#host_meta'
+
+  # Find subjects by slug
+  match 'subjects/lrdd/:id' => 'subjects#lrdd', :as => 'subject_lrdd'
 end
