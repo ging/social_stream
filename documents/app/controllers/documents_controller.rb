@@ -68,8 +68,8 @@ class DocumentsController < ApplicationController
     @activities = profile_subject.wall(:profile,
                                        :for => current_subject,
                                        :object_type => Array(self.class.index_object_type))
-    if params[:query].present? 
-      @activities = @activities.joins(:activity_objects => :document).where('documents.title LIKE ?', get_search_query)
+    if params[:q].present? 
+      @activities = @activities.joins(:activity_objects).where('activity_objects.title LIKE ? OR activity_objects.description LIKE ?', get_search_query, get_search_query)
     end
     @activities = @activities.page(params[:page]).per(PER_PAGE)
   end
@@ -82,7 +82,7 @@ class DocumentsController < ApplicationController
   
   def get_search_query
     search_query = ""
-    param = strip_tags(params[:query]) || ""
+    param = strip_tags(params[:q]) || ""
     bare_query = param unless bare_query.html_safe?
     search_query_words = bare_query.strip.split
     search_query_words.each_index do |i|
