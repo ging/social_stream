@@ -44,7 +44,7 @@ $(document).ready(function() {
         $("#header_search_display").html("<ul><li class=\"loading\"><%= escape_javascript(image_tag('loading.gif', :class => :loading)) %></li></ul>").show();
         $.ajax({
           type : "GET",
-          url : "<%= search_url %>?search_query=" + searchstring + "&mode=header_search",
+          url : "<%= search_url %>?q=" + searchstring + "&mode=header_search",
           success : function(html) {      
             if ($("#header_search_input").val()==searchstring){ //Only show if input value is still the same
               $("#header_search_display").html(html);
