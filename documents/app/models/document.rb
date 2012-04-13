@@ -70,13 +70,13 @@ class Document < ActiveRecord::Base
   end
 
  # JSON, generic version for most documents
-  def to_json me=self
-    {:id => activity_object_id,
+  def as_json(options = nil)
+    {:id => id,
      :title => title,
      :description => description,
      :author => author.name,
      :src => file.to_s
-    }.to_json
+    }
   end
   
   protected
