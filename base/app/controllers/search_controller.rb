@@ -82,7 +82,6 @@ class SearchController < ApplicationController
   def authorization_filter results
     filtered_results = Array.new
     results.each do |result|
-      puts result
       if result.is_a? SocialStream::Models::Object
         filtered_results << result if can? :read, result
       else
