@@ -41,3 +41,6 @@ SocialStream.setup do |config|
   # Cleditor controls. It is used in new message editor, for example
   # config.cleditor_controls = "bold italic underline strikethrough subscript superscript | size style | bullets | image link unlink"
 end
+
+# You can customize toolbar, sidebar and location bar from here
+# See https://github.com/ging/social_stream/wiki/How-to-customize-the-toolbar,-sidebar-and-location
