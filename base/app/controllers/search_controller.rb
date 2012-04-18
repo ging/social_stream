@@ -23,6 +23,7 @@ class SearchController < ApplicationController
           render :partial => "header_search"
         end
       }
+
       format.json {
         json_obj = (
           params[:type].present? ?
@@ -32,6 +33,8 @@ class SearchController < ApplicationController
 
         render :json => json_obj
       }
+
+      format.js
     end
   end
 
