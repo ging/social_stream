@@ -7,7 +7,6 @@ en:
     confirm_delete: "Delete audio?"
     title: "Audios"
     mine: "My audios"
-    msg: "Uploaded an audio:"
     name: "audio"
     not_mine: "Audios"
     one: "an audio"
@@ -15,6 +14,8 @@ en:
     title:
       one: "Audio"
       other: "Audios"
+  details:
+    msg: "See details..."
   document:
     actions:
       delete: "Delete"
@@ -36,7 +37,6 @@ en:
       title:
         title: "Title"
     mine: "My files"
-    msg: "Uploaded a file:"
     name: "file"
     not_mine: "Files"
     one: "a file"
@@ -47,7 +47,6 @@ en:
   picture:
     confirm_delete: "Delete picture?"
     mine: "My pictures"  
-    msg: "See details..."
     name: "picture"
     not_mine: "Pictures"
     one: "a picture"
@@ -65,12 +64,10 @@ en:
     confirm_delete: "Delete resource?"
     title: "Resources"
     mine: "My resources"
-    msg: "Uploaded a resource:"
     not_mine: "Resources"
   video:
     confirm_delete: "Delete video?"
     mine: "My videos"  
-    msg: "See details..."
     name: "video" 
     not_mine: "Videos"
     one: "a video"

@@ -6,7 +6,6 @@ es:
   audio:
     confirm_delete: "¿Borrar audios?"
     mine: "Mis audios"
-    msg: "Subió un audio:"
     name: "archivo de audio"
     not_mine: "Audios"
     one: "un archivo de audio"
@@ -14,6 +13,8 @@ es:
     title:
       one: "Audio"
       other: "Audios"
+  details:
+    msg: "Ver detalles..."
   document:
     actions:
       delete: "Borrar"
@@ -35,7 +36,6 @@ es:
       title:
         title: "Título"
     mine: "Mis ficheros"
-    msg: "Subió un fichero:"
     name: "fichero"
     not_mine: "Ficheros"
     one: "un fichero"
@@ -46,7 +46,6 @@ es:
   picture:
     confirm_delete: "¿Borrar imagen?"
     mine: "Mis imágenes"
-    msg: "Ver detalles..."
     name: "imagen"
     not_mine: "Imágenes"
     one: "una imagen"
@@ -64,12 +63,10 @@ es:
     confirm_delete: "¿Borrar recursos?"
     title: "Recursos"
     mine: "Mis recursos"
-    msg: "Subió un recurso:"
     not_mine: "Recursos"
   video:
     confirm_delete: "¿Borrar vídeo?"
     mine: "Mis vídeos"  
-    msg: "Ver detalles..."
     name: "vídeo"
     not_mine: "Vídeos"
     one: "un vídeo"
