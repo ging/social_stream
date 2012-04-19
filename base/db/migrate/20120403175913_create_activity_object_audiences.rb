@@ -24,5 +24,6 @@ class CreateActivityObjectAudiences < ActiveRecord::Migration
     end
 
     ActivityObjectAudience.record_timestamps = true
+    ActivityObject.reset_column_information
   end
 end
