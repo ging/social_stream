@@ -162,14 +162,14 @@ namespace :db do
       puts 'Post population'
       posts_start = Time.now
 
-      SocialStream::Populate.power_law(Tie.positive.all) do |t|
+      SocialStream::Populate.power_law(Tie.allowing('create', 'activity').all) do |t|
         updated = Time.at(rand(Time.now.to_i))
 
-        author = t.sender
-        owner  = t.receiver
+        author = t.receiver
+        owner  = t.sender
         user_author = ( t.sender.subject_type == "User" ? t.sender : t.sender.user_author )
 
-        p = Post.create :text =>
+        p = Post.create! :text =>
                       "This post should be for #{ t.relation.name } of #{ t.sender.name }.\n#{ Forgery::LoremIpsum.paragraph(:random => true) }",
                         :created_at => Time.at(rand(updated.to_i)),
                         :updated_at => updated,

@@ -206,7 +206,7 @@ class ActivityObject < ActiveRecord::Base
       Relation::Single.allowing('read', 'activity')
 
     if (relation_ids - allowed_rels.map(&:id)).any?
-      errors.add(:relation_ids, "not allowed")
+      errors.add(:relation_ids, "not allowed: #{ relation_ids }, author_id: #{ author_id }, owner_id: #{ owner_id }")
     end
   end
 
