@@ -73,6 +73,11 @@ class ActivityObject < ActiveRecord::Base
 
   scope :followed, order("activity_objects.follower_count DESC")
 
+  scope :shared_with, lambda { |relation_ids|
+    joins(:activity_object_audiences).
+      merge(ActivityObjectAudience.where(:relation_id => relation_ids))
+  }
+
   def received_role_action(role)
     received_actions.
       find{ |a| a.__send__ "#{ role }?" }
