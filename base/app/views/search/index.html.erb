@@ -1,5 +1,5 @@
 <% content_for :title do %>
-<%= t('search.name')%> <%= params[:search_query].present? ? ": #{params[:search_query]}" : ""%>
+<%= t('search.name')%> <%= params[:q].present? ? ": #{params[:q]}" : ""%>
 <% end %>
 
 <% sidebar %>

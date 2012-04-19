@@ -6,20 +6,35 @@ class SearchController < ApplicationController
   RESULTS_SEARCH_PER_PAGE=12
   MIN_QUERY=2
   def index
-    if params[:search_query].blank? or too_short_query
-    @search_result = []
-    else
-      if params[:mode].eql? "header_search"
-        @search_result = search :quick
-        render :partial => "header_search"
-      return
+    @search_result =
+      if params[:q].blank? || too_short_query
+        []
+      elsif params[:mode].eql? "header_search"
+        search :quick
+      elsif params[:type].present?
+        focus_search
       else
-        if params[:focus].present?
-          @search_result = focus_search
-        else
-          @search_result = search :extended
-        end
+        search :extended
       end
+
+    respond_to do |format|
+      format.html {
+        if params[:mode] == "header_search"
+          render :partial => "header_search"
+        end
+      }
+
+      format.json {
+        json_obj = (
+          params[:type].present? ?
+          { params[:type].pluralize => @search_result } :
+          @search_result
+        )
+
+        render :json => json_obj
+      }
+
+      format.js
     end
   end
 
@@ -43,7 +58,7 @@ class SearchController < ApplicationController
   end
 
   def focus_search
-    @search_class_sym = params[:focus].singularize.to_sym unless params[:focus].blank?
+    @search_class_sym = params[:type].singularize.to_sym unless params[:type].blank?
     search_class = @search_class_sym.to_s.classify.constantize
     result = ThinkingSphinx.search(get_search_query, :classes => [search_class])
     result = authorization_filter result
@@ -51,13 +66,13 @@ class SearchController < ApplicationController
   end
 
   def too_short_query
-    bare_query = strip_tags(params[:search_query]) unless bare_query.html_safe?
+    bare_query = strip_tags(params[:q]) unless bare_query.html_safe?
     return bare_query.strip.size < MIN_QUERY
   end
 
   def get_search_query
     search_query = ""
-    param = strip_tags(params[:search_query]) || ""
+    param = strip_tags(params[:q]) || ""
     bare_query = param unless bare_query.html_safe?
     search_query_words = bare_query.strip.split
     search_query_words.each_index do |i|
@@ -70,7 +85,6 @@ class SearchController < ApplicationController
   def authorization_filter results
     filtered_results = Array.new
     results.each do |result|
-      puts result
       if result.is_a? SocialStream::Models::Object
         filtered_results << result if can? :read, result
       else

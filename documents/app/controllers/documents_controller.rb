@@ -10,7 +10,7 @@ class DocumentsController < ApplicationController
   
   def index
     super do |format|
-      format.json { render :json => collection.map{|a| a.activity_objects.first.document.to_json} }
+      format.json { render :json => collection.map{|a| a.activity_objects.first.document} }
       if params[:no_layout].present?
         format.html { render :action => :index, :layout => false }      
       else  

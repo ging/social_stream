@@ -1,19 +1,19 @@
 <% if @search_result.empty? %>
-<div class="model_with_details">
-  <%= I18n.t('search.nothing') %>
-</div>
+  <div class="model_with_details">
+    <%= I18n.t('search.nothing') %>
+  </div>
 <% else %>
-<% @search_result.each do |model|%>
-<% if @search_class_sym.nil? %>
-<div class="subject_search_results block left">
-  <%= render_global_search_for model %>
-</div>
-<% else %>
-<div class="subject_search_results block left <%= model.class.name.downcase %>">
-  <%= render_focus_search_for model %>
-</div>
-<% end %>
-<% end %>
-<br class="clearfloat">
-<%= paginate @search_result %>
+  <% @search_result.each do |model|%>
+    <% if @search_class_sym.nil? %>
+      <div class="subject_search_results block left">
+        <%= render_global_search_for model %>
+      </div>
+    <% else %>
+      <div class="subject_search_results block left <%= model.class.name.downcase %>">
+        <%= render_focus_search_for model %>
+      </div>
+    <% end %>
+  <% end %>
+  <br class="clearfloat">
+  <%= paginate @search_result %>
 <% end %> 

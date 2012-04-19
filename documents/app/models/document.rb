@@ -15,14 +15,11 @@ class Document < ActiveRecord::Base
   end
   
   define_index do
-    indexes activity_object.title
+    activity_object_index
+
     indexes file_file_name, :as => :file_name
-    indexes activity_object.description
-    indexes activity_object.tags.name, :as => :tags
     
     where "type IS NULL"
-    
-    has created_at
   end
   
   class << self 
@@ -70,13 +67,13 @@ class Document < ActiveRecord::Base
   end
 
  # JSON, generic version for most documents
-  def to_json me=self
-    {:id => activity_object_id,
+  def as_json(options = nil)
+    {:id => id,
      :title => title,
      :description => description,
      :author => author.name,
      :src => file.to_s
-    }.to_json
+    }
   end
   
   protected

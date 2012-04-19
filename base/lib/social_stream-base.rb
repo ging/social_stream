@@ -35,7 +35,8 @@ module SocialStream
   end
 
   module Views
-    autoload :List, 'social_stream/views/list'
+    autoload :List,     'social_stream/views/list'
+    autoload :Location, 'social_stream/views/location'
 
     module Settings
       autoload :Base, 'social_stream/views/settings/base'

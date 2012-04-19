@@ -1,9 +1,13 @@
 <div class="<%= follow_link_class contact %>">
   <% if contact.sent? %>
-    <%= t 'contact.following' %>
-    <%= form_tag follower_path(contact), :method => :delete, :remote => true do |f| %>
-      <%= submit_tag t('contact.unfollow') %>
-    <% end %>
+    <div class="following-button">
+      <%= t 'contact.following' %>
+    </div>
+    <div class="unfollow-button">
+      <%= form_tag follower_path(contact), :method => :delete, :remote => true do |f| %>
+        <%= submit_tag t('contact.unfollow') %>
+      <% end %>
+    </div>
   <% else %>
     <%= form_tag follower_path(contact), :method => :put, :remote => true do |f| %>
       <%= submit_tag t('contact.follow') %>

@@ -16,12 +16,9 @@ class Video < Document
   process_in_background :file
   
   define_index do
-    indexes activity_object.title
+    activity_object_index
+
     indexes file_file_name, :as => :file_name
-    indexes activity_object.description
-    indexes activity_object.tags.name, :as => :tags
-    
-    has created_at
   end
                       
   # Thumbnail file
@@ -30,8 +27,8 @@ class Video < Document
   end
 
  # JSON, special edition for video files
-  def to_json me=self
-    {:id => activity_object_id,
+  def as_json(options = nil)
+    {:id => id,
      :title => title,
      :description => description,
      :author => author.name,
@@ -40,7 +37,7 @@ class Video < Document
                    { :type => Mime::MP4.to_s,   :src => file(:mp4).to_s },
                    { :type => Mime::FLV.to_s, :src => file(:flv).to_s }
                  ]
-    }.to_json
+    }
   end
   
 end

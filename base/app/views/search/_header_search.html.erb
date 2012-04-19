@@ -10,7 +10,7 @@
   <%= link_to raw('<li class="more">' + 
                   t("search.global.first_result.#{ total == 1 ? 'one' : 'more' }", :count => total) +
                   '<br>' +
-                  t('search.global.query', :query => truncate(h(params[:search_query]),:length => 20)) + 
+                  t('search.global.query', :query => truncate(h(params[:q]),:length => 20)) + 
                   '</li>'), 
-              search_path(:search_query => params[:search_query]) %>
+              search_path(:search_query => params[:q]) %>
 </ul>
