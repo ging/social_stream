@@ -12,5 +12,5 @@
                   '<br>' +
                   t('search.global.query', :query => truncate(h(params[:q]),:length => 20)) + 
                   '</li>'), 
-              search_path(:search_query => params[:q]) %>
+              search_path(:q => params[:q]) %>
 </ul>
