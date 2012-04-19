@@ -29,6 +29,11 @@ class ActivityObject < ActiveRecord::Base
            :source  => :actor,
            :conditions => { 'activity_actions.follow' => true }
 
+  # Associations for indexing
+  has_many :author_action,
+           :class_name => "ActivityAction",
+           :conditions => { 'activity_actions.author' => true }
+
   has_many :activity_object_properties,
            :dependent => :destroy
   has_many :object_properties,

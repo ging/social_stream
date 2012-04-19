@@ -8,11 +8,9 @@ class Link < ActiveRecord::Base
   before_create :check_loaded
 
   define_index do
-    indexes activity_object.title
-    indexes activity_object.description
-    indexes url
+    activity_object_index
 
-    has created_at
+    indexes url
   end
 
   def fill linkser_object

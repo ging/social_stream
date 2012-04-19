@@ -40,6 +40,7 @@ require 'resque/server'
 require 'modernizr-rails'
 # Sphinx search engine
 require 'thinking-sphinx'
+require 'thinking-sphinx/social_stream'
 # Syntactically Awesome Stylesheets
 require 'sass-rails'
 # Autolink text blocks
