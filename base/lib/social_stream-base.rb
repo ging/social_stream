@@ -26,6 +26,12 @@ module SocialStream
     autoload :Supertype, 'social_stream/models/supertype'
   end
 
+  module Population
+    autoload :ActivityObject, 'social_stream/population/activity_object'
+    autoload :PowerLaw,       'social_stream/population/power_law'
+    autoload :Timestamps,     'social_stream/population/timestamps'
+  end
+
   module Routing
     module Constraints
       autoload :Custom, 'social_stream/routing/constraints/custom'
