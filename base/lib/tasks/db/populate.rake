@@ -122,6 +122,13 @@ namespace :db do
         end
       end
 
+      Activity.includes(:activity_verb).merge(ActivityVerb.verb_name(["follow", "make-friend"])).each do |a|
+        t = SocialStream::Population::Timestamps.new
+
+        a.update_attributes :created_at => t.created,
+                            :updated_at => t.updated
+      end
+
       ties_end = Time.now
       puts '   -> ' +  (ties_end - ties_start).round(4).to_s + 's'
     end
