@@ -13,12 +13,12 @@
       <ul class="menu_plain_list">
         <li><%= link_to content_tag(:span,
                                     t('search.show_all'),
-                                    :class => "global #{ params[:type].blank? && 'selected' }"),
+                                    :class => "global #{ params[:type].blank? && 'active' }"),
                         search_path(:search_query => params[:q]),
                                     :remote => true %></li>
-        <% SocialStream.extended_search_models.each do |model_sym| %>
+        <% SocialStream::Search.keys(:extended).each do |model_sym| %>
           <li>
-            <%= search_tab(model_sym) %>
+            <%= render :partial => 'extended_tab', :locals => { :key => model_sym } %>
           </li>
         <% end %>
       </ul>

@@ -11,8 +11,6 @@ class SearchController < ApplicationController
         []
       elsif params[:mode].eql? "header_search"
         search :quick
-      elsif params[:type].present?
-        focus_search
       else
         search :extended
       end
@@ -41,28 +39,18 @@ class SearchController < ApplicationController
   private
 
   def search mode
-    models = ( mode.to_s.eql?("quick") ?
-              SocialStream.extended_search_models :
-              SocialStream.quick_search_models
-             ).dup
+    models = SocialStream::Search.models(mode, params[:type])
 
-    models.map! {|model_sym| model_sym.to_s.classify.constantize}
     result = ThinkingSphinx.search(get_search_query, :classes => models)
     result = authorization_filter result
+
     if mode.to_s.eql? "quick"
       result = Kaminari.paginate_array(result).page(1).per(7)
     else
       result = Kaminari.paginate_array(result).page(params[:page]).per(RESULTS_SEARCH_PER_PAGE)
     end
-    return result
-  end
 
-  def focus_search
-    @search_class_sym = params[:type].singularize.to_sym unless params[:type].blank?
-    search_class = @search_class_sym.to_s.classify.constantize
-    result = ThinkingSphinx.search(get_search_query, :classes => [search_class])
-    result = authorization_filter result
-    return Kaminari.paginate_array(result).page(params[:page]).per(RESULTS_SEARCH_PER_PAGE)
+    result
   end
 
   def too_short_query

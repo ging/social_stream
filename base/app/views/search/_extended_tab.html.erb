@@ -1,0 +1,5 @@
+<%= link_to (search_results?(key) ? search_path(:type => key, :q => params[:q]) : '#') do %>
+  <span class="<%= key %><%= " active" if params[:type] == key.to_s %><%= " disabled" unless search_results?(key) %>" <%= "title=\"#{ t 'search.no_subject_found', :subject => key.to_s }\"" %>>
+    <%= t("#{ key }.title.other") %>
+  </span>
+<% end %>

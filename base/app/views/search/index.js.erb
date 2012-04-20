@@ -1,12 +1,12 @@
   $('#search_results').html("<%= escape_javascript render :partial => 'extended_search' %>");
   $('#search_form_div').html("<%= escape_javascript render :partial => 'form' %>");
   
-  $('#focus_options ul li a span').removeClass('selected');
+  $('#focus_options ul li a span').removeClass('active');
   
   <% if params[:type].present? %>
-  $('#focus_options ul li a span.<%= params[:type].pluralize.downcase %>').addClass('selected');
+  $('#focus_options ul li a span.<%= params[:type].pluralize.downcase %>').addClass('active');
   <% else %>
-  $('#focus_options ul li a span.global').addClass('selected');
+  $('#focus_options ul li a span.global').addClass('active');
   <% end %>
   
   $('title').text('<%= t('search.name')%> <%= escape_javascript(params[:q].present? ? ": #{params[:q]}" : "")%>');

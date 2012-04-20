@@ -4,7 +4,7 @@
   </div>
 <% else %>
   <% @search_result.each do |model|%>
-    <% if @search_class_sym.nil? %>
+    <% if params[:type].blank? %>
       <div class="subject_search_results block left">
         <%= render_global_search_for model %>
       </div>
