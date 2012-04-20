@@ -7,8 +7,8 @@ network environment see https://github.com/ging/social_stream
 
 == Features
 
-* Social network infraestructure
-* Activity streams infraestructure
+* Social network infrastructure
+* Activity streams infrastructure
 * Subjects: {User} and {Group}
 * Objects: {Post} and {Comment}
 * Private messages and notifications, by {Mailboxer}[https://github.com/ging/mailboxer]
