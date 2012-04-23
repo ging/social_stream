@@ -17,8 +17,9 @@ namespace :db do
     task :read_environment => :environment do
       require 'forgery'
 
-      @LOGOS_PATH = File.join(Rails.root, 'lib', 'logos')
-      @LOGOS_TOTAL = (ENV["LOGOS_TOTAL"] || 10).to_i
+      @SS_BASE_PATH = Gem::Specification.find_by_name('social_stream-base').full_gem_path
+      @LOGOS_PATH = File.join(@SS_BASE_PATH, 'lib', 'logos')
+      @LOGOS_TOTAL = (ENV["LOGOS_TOTAL"] || 12).to_i
       @USERS = (ENV["USERS"] || 9).to_i
       @GROUPS = (ENV["GROUPS"] || 10).to_i
       if ENV["HARDCORE"].present?
