@@ -6,7 +6,7 @@ module ActivityTestHelper
                         :author_id => contact.sender.id,
                         :owner_id  => contact.receiver.id,
                         :user_author_id => contact.sender.id,
-                        :_relation_ids => Array(Relation.normalize_id(relations))).post_activity
+                        :relation_ids => Array(Relation.normalize_id(relations))).post_activity
   end
 
   def create_ability_accessed_by(subject)

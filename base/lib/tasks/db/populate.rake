@@ -122,6 +122,13 @@ namespace :db do
         end
       end
 
+      Activity.includes(:activity_verb).merge(ActivityVerb.verb_name(["follow", "make-friend"])).each do |a|
+        t = SocialStream::Population::Timestamps.new
+
+        a.update_attributes :created_at => t.created,
+                            :updated_at => t.updated
+      end
+
       ties_end = Time.now
       puts '   -> ' +  (ties_end - ties_start).round(4).to_s + 's'
     end
@@ -159,31 +166,10 @@ namespace :db do
     # POSTS
     desc "Create posts"
     task :create_posts => :read_environment do
-      puts 'Post population'
-      posts_start = Time.now
-
-      SocialStream::Populate.power_law(Tie.positive.all) do |t|
-        updated = Time.at(rand(Time.now.to_i))
-
-        author = t.sender
-        owner  = t.receiver
-        user_author = ( t.sender.subject_type == "User" ? t.sender : t.sender.user_author )
-
-        p = Post.create :text =>
-                      "This post should be for #{ t.relation.name } of #{ t.sender.name }.\n#{ Forgery::LoremIpsum.paragraph(:random => true) }",
-                        :created_at => Time.at(rand(updated.to_i)),
-                        :updated_at => updated,
-                        :author_id  => author.id,
-                        :owner_id   => owner.id,
-                        :user_author_id => user_author.id,
-                        :_relation_ids => Array(t.relation_id)
-
-        p.post_activity.update_attributes(:created_at => p.created_at,
-                                          :updated_at => p.updated_at)
+      SocialStream::Population::ActivityObject.new Post do |p|
+        p.text =
+          "This post should be for #{ p.relations.map(&:name).join(", ") } of #{ p.owner.name }.\n#{ Forgery::LoremIpsum.paragraph(:random => true) }"
       end
-
-      posts_end = Time.now
-      puts '   -> ' +  (posts_end - posts_start).round(4).to_s + 's'
     end
 
 

@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   
   # Gem dependencies
-  s.add_runtime_dependency('social_stream-base', '~> 0.19.0')
+  s.add_runtime_dependency('social_stream-base', '~> 0.20.0')
   
   s.add_runtime_dependency "xmpp4r"
 
@@ -27,6 +27,6 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency "net-sftp"
   
-  s.add_development_dependency "ruby-debug19"
+  s.add_development_dependency "debugger"
   
 end

@@ -53,7 +53,7 @@ describe PostsController do
             @current_model = Factory(:post, :author_id => @user.actor_id,
                                      :owner_id  => @user.actor_id,
                                      :user_author_id => @user.actor_id,
-                                     :_relation_ids => Array(relation.id))
+                                     :relation_ids => Array(relation.id))
           end
 
           it_should_behave_like "Allow Creating"
@@ -78,7 +78,7 @@ describe PostsController do
             @current_model = Factory(:post, :author_id => @user.actor_id,
                                      :owner_id  => @user.actor_id,
                                      :user_author_id => @user.actor_id,
-                                     :_relation_ids => Array(relation.id))
+                                     :relation_ids => Array(relation.id))
           end
 
           it_should_behave_like "Allow Creating"
@@ -149,7 +149,7 @@ describe PostsController do
             @current_model = Factory(:post, :author_id => contact.sender.id,
                                      :owner_id  => contact.receiver.id,
                                      :user_author_id => contact.sender.id,
-                                     :_relation_ids => Array(relation.id))
+                                     :relation_ids => Array(relation.id))
           end
 
           it_should_behave_like "Allow Creating"
@@ -170,7 +170,7 @@ describe PostsController do
               @current_model = Factory(:post, :author_id => contact.sender.id,
                                        :owner_id  => contact.receiver.id,
                                        :user_author_id => contact.sender.id,
-                                       :_relation_ids => Array(relation.id))
+                                       :relation_ids => Array(relation.id))
             end
 
             it_should_behave_like "Allow Creating"
@@ -186,7 +186,7 @@ describe PostsController do
               @current_model = Factory(:post, :author_id => contact.sender.id,
                                        :owner_id  => contact.receiver.id,
                                        :user_author_id => contact.sender.id,
-                                       :_relation_ids => Array(relation.id))
+                                       :relation_ids => Array(relation.id))
             end
 
             it_should_behave_like "Allow Creating"
@@ -202,7 +202,7 @@ describe PostsController do
               @current_model = Factory(:post,  :author_id => contact.sender.id,
                                        :owner_id  => contact.receiver.id,
                                        :user_author_id => contact.sender.id,
-                                       :_relation_ids => Array(relation.id))
+                                       :relation_ids => Array(relation.id))
             end
 
             it_should_behave_like "Allow Creating"

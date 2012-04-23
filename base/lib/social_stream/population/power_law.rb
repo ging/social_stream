@@ -1,14 +1,13 @@
 module SocialStream
-  module Populate
-
-    class << self
+  module Population
+    class PowerLaw
       # Yields each element of array y times given by 
       # {power law distribution}[http://en.wikipedia.org/wiki/Power_law]
       # y = ax**k + e
       # 
       # Options: Each constant in the function
       #
-      def power_law(array, options = {})
+      def initialize(array, options = {})
         options[:a] ||= array.size
         options[:k] ||= -2.5
         options[:e] ||= 1

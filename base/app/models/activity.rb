@@ -90,8 +90,6 @@ class Activity < ActiveRecord::Base
       order("created_at desc")
   }
 
-  before_validation :fill_relations
-
   after_create  :increment_like_count
   after_destroy :decrement_like_count, :delete_notifications
 
@@ -324,25 +322,6 @@ class Activity < ActiveRecord::Base
   end
 
   private
-
-  # Before validation callback
-  #
-  # Fill the relations when posting to other subject's wall
-  def fill_relations
-    return if relation_ids.present?
-
-    self.relation_ids =
-    # FIXME: repeated in ActivityObject#_relation_ids
-    if SocialStream.relation_model == :custom
-      if channel.reflexive?
-        receiver.relation_customs.map(&:id)
-      else
-        receiver.relation_customs.allow(channel.author, 'create', 'activity').map(&:id)
-      end
-    else
-      Array.wrap Relation::Public.instance.id
-    end
-  end
 
   #
   # Get the email subject for the activity's notification

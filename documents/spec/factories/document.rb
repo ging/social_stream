@@ -10,12 +10,12 @@ end
 
 Factory.define :public_document, :parent => :document do |d|
   d.owner_id  { |q| q.author_id }
-  d._relation_ids { |q| Array(Relation::Public.instance.id) }
+  d.relation_ids { |q| Array(Relation::Public.instance.id) }
 end
 
 Factory.define :private_document, :parent => :document do |d|
   d.file { Rack::Test::UploadedFile.new(File.join(File.dirname(__FILE__), 'files', 'small.pdf'),
                                        'application/pdf') }
   d.owner_id  { |q| q.author_id }
-  d._relation_ids  { |q| Actor.find(q.author_id).relation_customs.sort.first.id }
+  d.relation_ids  { |q| Actor.find(q.author_id).relation_customs.sort.first.id }
 end

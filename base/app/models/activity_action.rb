@@ -19,6 +19,14 @@ class ActivityAction < ActiveRecord::Base
     where(:activity_object_id => ActivityObject.normalize_id(activity_object))
   }
 
+  scope :authored_or_owned, where(arel_table[:author].eq(true).
+                                or(arel_table[:user_author].eq(true)).
+                                or(arel_table[:owner].eq(true)))
+
+  scope :authored_or_owned_by, lambda{ |subject|
+    authored_or_owned.sent_by(subject)
+  }
+
   before_create :follow_by_author_and_owner
 
   private

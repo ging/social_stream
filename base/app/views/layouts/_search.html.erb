@@ -1,6 +1,6 @@
 <div id="header_search">      
   <form action="<%=search_path%>" method="get" id="header_search_form">
-    <%= text_field_tag :search_query, nil,:autocomplete => :off, :id => :header_search_input %>
+    <%= text_field_tag :q, nil,:autocomplete => :off, :id => :header_search_input %>
   </form>
   <div id="header_search_display">
     <ul><li class="loading"><%= image_tag('loading.gif', :class => :loading) %></li></ul>

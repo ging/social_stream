@@ -53,8 +53,6 @@ describe Post do
                         :owner_id => tie.sender.id,
                         :user_author_id => tie.receiver.id
 
-        assert post.build_post_activity.allow? tie.receiver_subject, 'create'
-
         ability = Ability.new(tie.receiver_subject)
 
         ability.should be_able_to(:create, post)
@@ -87,8 +85,6 @@ describe Post do
           :author_id => tie.receiver.id,
           :owner_id => tie.sender.id,
           :user_author_id => tie.receiver.id
-
-        assert post.build_post_activity.allow? tie.receiver_subject, 'create'
 
         ability = Ability.new(tie.receiver_subject)
 

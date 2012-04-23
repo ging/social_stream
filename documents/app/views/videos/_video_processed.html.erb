@@ -10,9 +10,9 @@
 
   <%= simple_format auto_link(video.description) %>
 
-  <%= link_to t('video.msg'),
+  <%= link_to t('details.msg'),
     video,
-    :alt => t('picture.msg'),
+    :alt => t('details.msg'),
     :type => video.type,
     :path => document_path(video),
     :class => "attachment_text_link video_link" %>

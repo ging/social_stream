@@ -74,10 +74,10 @@ describe UsersController do
     it "should render other's page with activity" do
       tie = Factory(:friend, :receiver => @user.actor)
       friend = tie.sender
-      Factory(:post, :author_id  => tie.sender.id,
-                     :owner_id   => tie.receiver.id,
-                     :user_author_id => tie.sender.id,
-                     :_relation_ids => Array(tie.relation_id))
+      Factory(:post, :author_id  => @user.actor_id,
+                     :owner_id   => friend.id,
+                     :user_author_id => @user.actor_id,
+                     :relation_ids => Array(tie.relation_id))
 
       get :show, :id => friend.to_param
 

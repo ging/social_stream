@@ -28,6 +28,12 @@ class Tie < ActiveRecord::Base
   has_one :receiver, :through => :contact
 
   belongs_to :relation
+  has_many :permissions, :through => :relation
+
+  scope :allowing, lambda { |action, object|
+    joins(:relation).
+      merge(Relation.allowing(action, object))
+  }
 
   scope :recent, order("ties.created_at DESC")
 

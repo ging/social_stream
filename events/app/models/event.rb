@@ -64,7 +64,7 @@ class Event < ActiveRecord::Base
   def room_belongs_to_receiver
     return if room_id.blank?
 
-    unless _contact.receiver.room_ids.include?(room_id)
+    unless owner.room_ids.include?(room_id)
       errors.add(:room_id, :invalid)
     end
   end

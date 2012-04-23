@@ -67,6 +67,11 @@ class Relation < ActiveRecord::Base
     where(:type => positive_names)
   }
 
+  scope :allowing, lambda { |action, object|
+    joins(:permissions).
+      merge(Permission.where(:action => action).where(:object => object))
+  }
+
   before_create :initialize_sender_type
 
   class << self

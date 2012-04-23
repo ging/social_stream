@@ -13,20 +13,26 @@ module SocialStream
         (SocialStream.objects - [ :actor, :comment ]).map{ |obj|
           obj.to_s.classify.constantize
         }.each do |klass|
-          can :create, klass do |k| # can :create, Post do |post|
-            k.build_post_activity.allow?(subject, 'create')
+          can :create, klass do |object| # can :create, Post do |post|
+            object.author.present? &&
+              object.owner.present? &&
+              object.author == Actor.normalize(subject) &&
+              ( object.author == object.owner ||
+                object.owner.allow?(subject, 'create', 'activity') )
           end
 
-          can :read, klass do |k| # can :read, Post do |post|
-            k.post_activity.allow?(subject, 'read')
+          can :read, klass do |object| # can :read, Post do |post|
+            object.authored_or_owned_by?(subject) ||
+              object.relation_ids.include?(Relation::Public.instance.id) ||
+              subject.present? && (object.relation_ids & subject.received_relation_ids).any?
           end
 
-          can :update, klass do |k| # can :update, Post do |post|
-            [k.author_id, k.owner_id].include?(Actor.normalize_id(subject))
+          can :update, klass do |object| # can :update, Post do |post|
+            object.authored_or_owned_by?(subject)
           end
 
-          can :destroy, klass do |k| # can :destroy, Post do |post|
-            [k.author_id, k.owner_id].include?(Actor.normalize_id(subject))
+          can :destroy, klass do |object| # can :destroy, Post do |post|
+            object.authored_or_owned_by?(subject)
           end
         end
 

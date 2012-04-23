@@ -7,9 +7,18 @@
   </div>
 
   <div class="attachment_text">
-  	<%= t('document.msg') %><%= link_to "\""+document.title+"\"", 
-    document,  
-    :class => "attachment_text_link" %>
+   <div class="title">
+    <%= document.title %>
+   </div>
+
+   <%= simple_format auto_link(document.description) %>
+
+   <%= link_to t('details.msg'),
+       document_path(document),
+       :alt => t('details.msg'),
+       :type => document.type,
+       :path => document_path(document),
+       :class => "attachment_text_link document_link" %>
   </div>
 
 <% end %>

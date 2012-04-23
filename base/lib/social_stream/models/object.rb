@@ -11,6 +11,9 @@ module SocialStream
         has_many :received_actions,
                  :through => :activity_object
 
+        has_many :activity_object_audiences,
+                 :through => :activity_object
+
         unless self == Actor
           validates_presence_of :author_id, :owner_id, :user_author_id
 
@@ -29,6 +32,12 @@ module SocialStream
           joins(:activity_object).
             merge(ActivityObject.not_authored_by(subject))
         }
+
+        scope :shared_with, lambda { |relation_ids|
+          joins(:activity_object).
+            merge(ActivityObject.shared_with(relation_ids))
+        }
+
       end
     end
   end

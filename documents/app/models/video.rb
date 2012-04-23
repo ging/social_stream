@@ -1,7 +1,7 @@
 class Video < Document  
   has_attached_file :file, 
                     :url => '/:class/:id.:extension',
-                    :default_url => '/assets/missing_:style.png',
+                    :default_url => 'missing_:style.png',
                     :path => ':rails_root/documents/:class/:id_partition/:style',
                     :styles => {
                       :webm => {:format => 'webm'},

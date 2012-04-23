@@ -26,12 +26,35 @@ Factory.define :activity do |a|
   a.channel { Factory(:friend).contact.channel }
   a.activity_verb { ActivityVerb["post"] }
   a.relation_ids  { |b| Array(b.sender.relation_custom('friend').id) }
-  a.activity_object_ids { Array(Factory(:post_spec_helper).activity_object_spec_helper.id) }
+  a.activity_object_ids { |b|
+    # Create post
+    post = Factory(:post,
+                   :author_id => b.author_id,
+                   :owner_id  => b.owner_id,
+                   :user_author => b.user_author_id)
+
+    post.activities.delete_all
+
+    [post.activity_object_id]
+  }
 end
 
 Factory.define :self_activity, :parent => :activity do |a|
   a.channel { Factory(:self_contact).channel }
   a.relation_ids  { |b| Array(b.sender.relation_custom('friend').id) }
+  a.activity_object_ids { |b|
+    # Create post
+    post = Factory(:post,
+                   :author_id => b.author_id,
+                   :owner_id  => b.owner_id,
+                   :user_author => b.user_author_id,
+                   :relation_ids => b.relation_ids)
+
+    post.activities.delete_all
+
+    [post.activity_object_id]
+  }
+
 end
 
 Factory.define :public_activity, :parent => :activity do |a|

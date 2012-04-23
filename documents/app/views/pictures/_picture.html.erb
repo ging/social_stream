@@ -15,9 +15,9 @@
 
 	<%= simple_format auto_link(picture.description) %>
 
-        <%= link_to t('picture.msg'),
+        <%= link_to t('details.msg'),
               picture_path(picture),
-              :alt => t('picture.msg'),
+              :alt => t('details.msg'),
               :type => picture.type,
               :path => document_path(picture),
               :class => "attachment_text_link picture_link" %>
