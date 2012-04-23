@@ -1,8 +1,13 @@
-//Display the new comment
-$("#comments_activity_<%= @comment.post_activity.parent.id %>").append("<%= escape_javascript(render @comment.post_activity) %>");
-$(".activities_comment_btn").hide();
-$(".input_new_comments").each(function() {
-  $(this).focus().val("").blur();   
-});
+<% if @comment.valid? %>
+  //Display the new comment
+  $("#comments_activity_<%= @comment.post_activity.parent.id %>").append("<%= escape_javascript(render @comment.post_activity) %>");
+  $(".activities_comment_btn").hide();
+  $(".input_new_comments").each(function() {
+    $(this).focus().val("").blur();   
+  });
 
-SocialStream.Timeline.create("<%= escape_javascript dom_id(@comment.post_activity) %>");
+  SocialStream.Timeline.create("<%= escape_javascript dom_id(@comment.post_activity) %>");
+<% else %>
+  SocialStream.Timeline.create();
+  alert('<%= j @comment.errors.full_messages.to_sentence %>');
+<% end %>

@@ -1,4 +1,9 @@
-//Display the new post
-$("#wall").prepend("<%= escape_javascript(render @post.post_activity) %>");
+<% if @post.valid? %>
+  //Display the new post
+  $("#wall").prepend("<%= escape_javascript(render @post.post_activity) %>");
 
-SocialStream.Timeline.create("<%= escape_javascript dom_id(@post.post_activity) %>");
+  SocialStream.Timeline.create("<%= escape_javascript dom_id(@post.post_activity) %>");
+<% else %>
+  SocialStream.Timeline.create();
+  alert('<%= j @post.errors.full_messages.to_sentence %>');
+<% end %>
