@@ -240,7 +240,7 @@ div.chzn-container ul.chzn-choices li.search-field input{ cursor:pointer;}
   padding: 5px 7px;
   background-color: $secondary-color;
 }
-.menu_plain_list li span.selected {
+.menu_plain_list li span.selected, .menu_plain_list li span.active {
   border: solid 1px $main-color;
 }
 .menu_plain_list li span.disabled {

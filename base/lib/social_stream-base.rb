@@ -40,6 +40,8 @@ module SocialStream
     end
   end
 
+  autoload :Search, 'social_stream/search'
+
   module Views
     autoload :List,     'social_stream/views/list'
     autoload :Location, 'social_stream/views/location'
