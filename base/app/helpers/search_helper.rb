@@ -31,7 +31,8 @@ module SearchHelper
   end
 
   def search_results?(key)
-    ThinkingSphinx.count(get_search_query,
-                         :classes => SocialStream::Search.models(:extended, key)) > 0
+    SocialStream::Search.count(get_search_query,
+                               current_subject,
+                               :key => key) > 0
   end
 end

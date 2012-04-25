@@ -15,15 +15,13 @@ module SocialStream
         when :quick
           quick_search_models
         when :extended
-          if key
+          if key.present?
             if extended_search_models.keys.include?(key.to_sym)
               extended_search_models[key.to_sym]
             else
               if extended_search_models.values.flatten.map{ |k| k.to_s }.include?(key.to_s.classify)
                 [key.to_s.classify.constantize]
               else
-                debugger
-                puts ""
                 raise "Unknown search key #{ key }"
               end
             end
@@ -34,6 +32,26 @@ module SocialStream
           raise "Unknown search type #{ search_type }"
         end
       end
+
+      # Relations in which this subject can view search results
+      def relation_ids(subject)
+        rels = [Relation::Public::instance.id]
+
+        if subject
+          rels += subject.received_relation_ids
+        end
+
+        rels
+      end
+
+      def search(query, subject, options = {})
+        ThinkingSphinx.search *args_for_search(query, subject, options)
+      end
+
+      def count(query, subject, options = {})
+        ThinkingSphinx.count *args_for_search(query, subject, options)
+      end
+
 
       private
 
@@ -81,6 +99,19 @@ module SocialStream
 
             hash
           end
+      end
+
+      def args_for_search(query, subject, options = {})
+        options[:mode] ||= :extended
+
+        models = models(options[:mode], options[:key])
+        relation_ids = relation_ids(subject)
+
+        [
+          query,
+          :classes => models,
+          :with => { :relation_ids => relation_ids }
+        ]
       end
     end
   end

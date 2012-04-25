@@ -39,10 +39,10 @@ class SearchController < ApplicationController
   private
 
   def search mode
-    models = SocialStream::Search.models(mode, params[:type])
-
-    result = ThinkingSphinx.search(get_search_query, :classes => models)
-    result = authorization_filter result
+    result = SocialStream::Search.search(get_search_query,
+                                         current_subject,
+                                         :mode => mode,
+                                         :key  => params[:type])
 
     if mode.to_s.eql? "quick"
       result = Kaminari.paginate_array(result).page(1).per(7)
@@ -68,17 +68,5 @@ class SearchController < ApplicationController
       search_query+= "*" + search_query_words[i] + "* " if i == (search_query_words.size - 1)
     end
     return search_query.strip
-  end
-
-  def authorization_filter results
-    filtered_results = Array.new
-    results.each do |result|
-      if result.is_a? SocialStream::Models::Object
-        filtered_results << result if can? :read, result
-      else
-      filtered_results << result
-      end
-    end
-    return filtered_results
   end
 end
