@@ -71,11 +71,21 @@ class ActivityObject < ActiveRecord::Base
       merge(ActivityAction.not_sent_by(subject).where(:author => true))
   }
 
+  scope :owned_by, lambda { |subject|
+    joins(:received_actions).
+      merge(ActivityAction.sent_by(subject).where(:owner => true))
+  }
+
   scope :followed, order("activity_objects.follower_count DESC")
 
-  scope :shared_with, lambda { |relation_ids|
+  scope :followed_by, lambda { |subject|
+    joins(:received_actions).
+      merge(ActivityAction.sent_by(subject).where(:follow => true))
+  }
+
+  scope :shared_with, lambda { |subject|
     joins(:activity_object_audiences).
-      merge(ActivityObjectAudience.where(:relation_id => relation_ids))
+      merge(ActivityObjectAudience.where(:relation_id => Relation.ids_shared_with(subject)))
   }
 
   def received_role_action(role)

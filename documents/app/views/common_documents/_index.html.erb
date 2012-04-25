@@ -1,14 +1,13 @@
-<% unless params[:no_layout].present? %>
+<% if params[:no_layout].blank? %>
   <%= render :partial => "common_documents/headers" %>
   <div id="documents_grid">
 <% end %> 
 
-<% @activities.each do |a| %>
-<% document = a.activity_objects.first.document %>
+<% documents.each do |document| %>
 <div class="attachment_tile" id="<%= dom_id(document)%>">
   <div class="attachment_tile_thumb">
     <%= link_to thumb_for(document,48),
-                document_path(document),
+                document,
                 :type => document.type,
                 :title => document.file_file_name,
                 :path => document_path(document) %>
@@ -57,7 +56,7 @@ $(document).ready(function(){
 <% end %>
 <% end %> 
 
-<% if @activities.size == DocumentsController::PER_PAGE %>
+<% unless documents.last_page? %>
   <% next_url = url_for(:no_layout => true, 
                         :page => params[:page].present? ? params[:page].to_i + 1 : 2,
                         :query => params[:query].present? ? params[:query] : "") %>

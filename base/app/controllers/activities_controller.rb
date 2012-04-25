@@ -1,5 +1,4 @@
 class ActivitiesController < InheritedResources::Base
-  belongs_to_subjects
   actions :index
 
   respond_to :js
@@ -10,7 +9,7 @@ class ActivitiesController < InheritedResources::Base
     rel = params[:section].to_i if params[:section].present?
 
     # should be activities.page(params[:page], :count => { :select => 'activity.id', :distinct => true }) but it is not working in Rails 3.0.3 
-    @activities ||= association_chain[-1].
+    @activities ||= profile_subject.
                       wall(:profile,
                            :for => current_subject,
                            :relation => rel).

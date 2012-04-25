@@ -33,11 +33,20 @@ module SocialStream
             merge(ActivityObject.not_authored_by(subject))
         }
 
-        scope :shared_with, lambda { |relation_ids|
+        scope :owned_by, lambda { |subject|
           joins(:activity_object).
-            merge(ActivityObject.shared_with(relation_ids))
+            merge(ActivityObject.owned_by(subject))
         }
 
+        scope :shared_with, lambda { |subject|
+          joins(:activity_object).
+            merge(ActivityObject.shared_with(subject))
+        }
+
+        scope :followed_by, lambda { |subject|
+          joins(:activity_object).
+            merge(ActivityObject.followed_by(subject))
+        }
       end
     end
   end

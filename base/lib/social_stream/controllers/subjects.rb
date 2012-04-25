@@ -4,12 +4,14 @@ module SocialStream
       extend ActiveSupport::Concern
 
       included do
+        include SocialStream::Controllers::Helpers
+
         inherit_resources
       end
 
       # Overwrite {SocialStream::Controllers::Helpers::InstanceMethods#profile_subject}
       def profile_subject
-        !resource.new_record? && resource || current_subject
+        self.class.model_class.find_by_slug(params[:id])
       end
     end
   end

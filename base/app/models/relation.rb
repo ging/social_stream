@@ -152,6 +152,18 @@ class Relation < ActiveRecord::Base
     def allow?(*args)
       allow(*args).to_a.any?
     end
+
+    # All the {Relation} ids in {Tie Ties} this subject has received
+    # plus the one from {Relation::Public}
+    def ids_shared_with(subject)
+      ids = [Relation::Public.instance.id]
+
+      if SocialStream.relation_model == :custom && subject.present?
+        ids += subject.received_relation_ids
+      end
+
+      ids
+    end
   end
 
   # Relation class scoped in the same mode that this relation

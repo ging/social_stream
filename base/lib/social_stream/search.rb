@@ -33,17 +33,6 @@ module SocialStream
         end
       end
 
-      # Relations in which this subject can view search results
-      def relation_ids(subject)
-        rels = [Relation::Public::instance.id]
-
-        if subject
-          rels += subject.received_relation_ids
-        end
-
-        rels
-      end
-
       def search(query, subject, options = {})
         ThinkingSphinx.search *args_for_search(query, subject, options)
       end
@@ -105,7 +94,7 @@ module SocialStream
         options[:mode] ||= :extended
 
         models = models(options[:mode], options[:key])
-        relation_ids = relation_ids(subject)
+        relation_ids = Relation.ids_shared_with(subject)
 
         [
           query,

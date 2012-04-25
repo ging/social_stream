@@ -12,22 +12,12 @@ module SocialStream
       end
 
       module ClassMethods
-        # Add to controllers that have nested subjects. Examples are:
+        # Get the class relative to controller name
         #
-        #   class ProfilesController < InheritedResources::Base
-        #     belongs_to_subjects(:singleton => true) # provides /users/demo/profile
-        #   end
+        #   Post #=> in PostsController
         #
-        #   class ActivitiesController < InheritedResources::Base
-        #     belongs_to_subjects # provides /users/demo/activities
-        #   end
-        #
-        def belongs_to_subjects(options = {})
-          opts = { :polymorphic => true, :finder => :find_by_slug! }.update(options)
-
-          args = SocialStream.subjects + [ opts ]
-
-          belongs_to *args
+        def model_class
+          controller_name.classify.constantize
         end
       end
 
@@ -52,14 +42,7 @@ module SocialStream
       end
 
       # Returns the {SocialStream::Models::Subject subject} that is in the path, or
-      # the {#current_subject} if some {User} is logged in.
-      #
-      # Requirements: the controller must inherit from +InheritedResources::Base+ and the method
-      # {ClassMethods#belongs_to_subjects} must be called
-      #
-      #   class PostsController < InheritedResources::Base
-      #     belongs_to_subjects :optional => true
-      #   end
+      # nil if it is not provided
       #
       #   # /users/demo/posts
       #   profile_subject #=> User demo
@@ -68,26 +51,35 @@ module SocialStream
       #   profile_subject #=> Group test
       #
       #   # /posts
-      #   profile_subject #=> current_subject
+      #   profile_subject #=> nil
       #
       #
       def profile_subject
-        @profile_subject ||= association_chain[-1] || current_subject
+        @profile_subject ||= find_profile_subject
       end
 
-      # Go to sign in page if {#profile_subject} is blank
+      # Is {#profile_subject} provided?
+      def profile_subject?
+        profile_subject.present?
+      end
+
+      # Raise error if {#profile_subject} is not provided
       def profile_subject!
-        @profile_subject ||= association_chain[-1] || warden.authenticate!
+        profile_subject || warden.authenticate!
       end
 
-      # Profile subject is suitable for paths like:
-      #   /users/demo/posts
+      # Returns the {SocialStream::Models::Subject subject} that is in the path, or
+      # the {#current_subject} if some {User} is logged in.
       #
       # This method tries {#profile_subject} first and then {#current_subject}
       def profile_or_current_subject
         profile_subject || current_subject
-      rescue
-        current_subject
+      end
+
+      # This method tries {#profile_or_current_subject} but tries to
+      # authenticate if the user is not logged in
+      def profile_or_current_subject!
+        profile_or_current_subject || warden.authenticate!
       end
 
       # A {User} must be logged in and is equal to {#profile_subject}
@@ -127,6 +119,20 @@ module SocialStream
         return unless session[:subject_type].present? && session[:subject_id].present?
 
         session[:subject_type].constantize.find session[:subject_id]
+      end
+
+      def find_profile_subject
+        SocialStream.subjects.each do |type|
+          id = params["#{ type }_id"]
+
+          next if id.blank?
+
+          subject_class = type.to_s.classify.constantize
+
+          return subject_class.find_by_slug! id
+        end
+
+        nil
       end
     end
   end

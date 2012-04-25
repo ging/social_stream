@@ -6,6 +6,8 @@ class Document < ActiveRecord::Base
   has_attached_file :file, 
                     :url => '/:class/:id.:extension',
                     :path => ':rails_root/documents/:class/:id_partition/:style/:filename.:extension'
+
+  paginates_per 20
   
   validates_attachment_presence :file
   validates_presence_of :title
