@@ -2,4 +2,5 @@ log/*log
 db/*.sqlite3
 db/*.sqlite3-journal
 public/images/tmp/
+public/system
 tmp/*

@@ -1,3 +1,5 @@
-require 'social_stream/migrations/base'
+SocialStream::Components.each do |component|
+  require "social_stream/migrations/#{ component }"
 
-SocialStream::Migrations::Base.new.up
+  "SocialStream::Migrations::#{ component.to_s.camelcase }".constantize.new.up
+end

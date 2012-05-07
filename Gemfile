@@ -8,7 +8,7 @@ source "http://rubygems.org"
 # gem 'avatars_for_rails', :path => '../avatars_for_rails'
 
 # social_stream gems
-%w(base documents).each do |g|
+%w(base documents events linkser presence).each do |g|
   gem "social_stream-#{ g }", :path => g
 end
 

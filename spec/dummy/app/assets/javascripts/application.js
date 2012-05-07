@@ -4,6 +4,9 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require jquery
-//= require jquery_ujs
+//= require social_stream-base
+//= require social_stream-documents
+//= require social_stream-events
+//= require social_stream-linkser
+//= require social_stream-presence
 //= require_tree .
