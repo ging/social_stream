@@ -19,7 +19,7 @@
 <br class="clearfloat" />
 <div class="space_center"></div>
 <div id="repository_filter">
-    <%= text_field_tag :filter_query, nil,:autocomplete => :off, :id => :repository_filter_input %>
+    <%= text_field_tag :q, nil,:autocomplete => :off, :id => :repository_filter_input %>
   <div id="order_by"><%= t('repository.order.by') %>: <%= t('repository.order.last_modified') %> · <%= t('repository.order.most_popular') %>  </div>
 </div>
 <div class="space_center"></div>
@@ -38,7 +38,7 @@ $(document).ready(function() {
       $("#documents_grid").html("<center><%= escape_javascript(image_tag('loading.gif', :class => :loading)) %></center>");
         $.ajax({
           type : "GET",
-          url : "<%= polymorphic_url([current_subject, Document.new]) %>?no_layout=true",
+          url : "<%= search_documents_path %>",
           success : function(html) {      
             if ($("#repository_filter_input").val()==searchstring){ //Only show if input value is still the same
               $("#documents_grid").html(html);
@@ -54,7 +54,7 @@ $(document).ready(function() {
         $("#documents_grid").html("<center><%= escape_javascript(image_tag('loading.gif', :class => :loading)) %></center>");
         $.ajax({
           type : "GET",
-          url : "<%= polymorphic_url([current_subject, Document.new]) %>?q=" + searchstring + "&no_layout=true",
+          url : "<%= search_documents_path %>?q=" + searchstring,
           success : function(html) {      
             if ($("#repository_filter_input").val()==searchstring){ //Only show if input value is still the same
               $("#documents_grid").html(html);

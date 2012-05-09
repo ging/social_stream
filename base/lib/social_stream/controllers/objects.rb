@@ -10,7 +10,7 @@ module SocialStream
 
 	after_filter :increment_visit_count, :only => :show
 
-        load_and_authorize_resource :except => :index
+        load_and_authorize_resource :except => [ :index, :search ]
 
         respond_to :html, :js
 
@@ -20,6 +20,12 @@ module SocialStream
 
       # Methods that should be included after the included block
       module UpperInstanceMethods
+        def search
+          collection_variable_set self.class.model_class.search(params[:q], search_options)
+
+          render :layout => false
+        end
+
         def destroy
           @post_activity = resource.post_activity
 
@@ -77,6 +83,40 @@ module SocialStream
 
       def collection_variable_set value
         instance_variable_set "@#{ controller_name }", value
+      end
+
+      private
+      
+      def search_options
+        opts = search_scope_options
+
+        # Authentication
+        opts.deep_merge!({ :with => { :relation_ids => Relation.ids_shared_with(current_subject) } } )
+
+        # Pagination
+        opts.merge!({
+          :order => :created_at,
+          :sort_mode => :desc,
+          :per_page => params[:per_page] || self.class.model_class.default_per_page,
+          :page => params[:page]
+        })
+      end
+
+      def search_scope_options
+        if params[:scope].blank? || ! user_signed_in?
+          return {}
+        end
+
+        case params[:scope]
+        when "me"
+          { :with => { :author_id => [ current_subject.author_id ] } }
+        when "net"
+          { :with => { :author_id => current_subject.following_actor_and_self_ids } }
+        when "other"
+          { :without => { :author_id => current_subject.following_actor_and_self_ids } }
+        else
+          raise "Unknown search scope #{ params[:scope] }"
+        end
       end
     end
   end

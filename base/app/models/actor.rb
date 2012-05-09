@@ -317,6 +317,12 @@ class Actor < ActiveRecord::Base
       map(&:id)
   end
 
+  # An array with the ids of {Actor Actors} followed by this {Actor}
+  # plus the id from this {Actor}
+  def following_actor_and_self_ids
+    following_actor_ids + [ id ]
+  end
+
   # Does this {Actor} allow subject to perform action on object?
   def allow?(subject, action, object)
     ties_to(subject).with_permissions(action, object).any?

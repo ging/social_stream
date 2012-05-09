@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :videos
 
   resources :documents do
+    get "search",   :on => :collection
     get "download", :on => :member
   end
   
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
       resources :videos
 
       resources :documents do
+        get "search",   :on => :collection
         get "download", :on => :member
       end
     end

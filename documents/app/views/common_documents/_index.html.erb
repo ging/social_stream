@@ -59,7 +59,7 @@ $(document).ready(function(){
 <% unless documents.last_page? %>
   <% next_url = url_for(:no_layout => true, 
                         :page => params[:page].present? ? params[:page].to_i + 1 : 2,
-                        :query => params[:query].present? ? params[:query] : "") %>
+                        :q => params[:q]) %>
   <%= content_tag(:span, "", :class => "screw screw-after", :rel => next_url)%>
 <% end %>
 

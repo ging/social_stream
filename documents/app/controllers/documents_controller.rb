@@ -1,5 +1,4 @@
 class DocumentsController < ApplicationController
-  include ActionView::Helpers::SanitizeHelper
   include SocialStream::Controllers::Objects
 
   before_filter :profile_subject!, :only => :index
@@ -67,17 +66,5 @@ class DocumentsController < ApplicationController
     def index_object_type
       [ :Audio, :Video, :Picture, :Document ]
     end
-  end
-  
-  def get_search_query
-    search_query = ""
-    param = strip_tags(params[:q]) || ""
-    bare_query = param unless bare_query.html_safe?
-    search_query_words = bare_query.strip.split
-    search_query_words.each_index do |i|
-      search_query+= search_query_words[i] + " " if i < (search_query_words.size - 1)
-      search_query+= "%" + search_query_words[i] + "% " if i == (search_query_words.size - 1)
-    end
-    return search_query.strip
   end
 end

@@ -17,7 +17,9 @@ Rails.application.routes.draw do
       #
       # /users/demo/posts
       (SocialStream.objects - [ :actor ]).each do |object|
-        resources object.to_s.pluralize
+        resources object.to_s.pluralize do
+          get 'search', :on => :collection
+        end
       end
     end
   end
@@ -26,7 +28,9 @@ Rails.application.routes.draw do
   #
   # /posts
   (SocialStream.objects - [ :actor ]).each do |object|
-    resources object.to_s.pluralize
+    resources object.to_s.pluralize do
+      get 'search', :on => :collection
+    end
   end
 
   resources :comments

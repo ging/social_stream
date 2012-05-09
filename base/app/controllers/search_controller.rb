@@ -1,13 +1,11 @@
 class SearchController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
 
-  helper_method :get_search_query
-
   RESULTS_SEARCH_PER_PAGE=12
   MIN_QUERY=2
   def index
     @search_result =
-      if params[:q].blank? || too_short_query
+      if params[:q].blank? || params[:q].strip < MIN_QUERY
         []
       elsif params[:mode].eql? "header_search"
         search :quick
@@ -39,7 +37,7 @@ class SearchController < ApplicationController
   private
 
   def search mode
-    result = SocialStream::Search.search(get_search_query,
+    result = SocialStream::Search.search(params[:q],
                                          current_subject,
                                          :mode => mode,
                                          :key  => params[:type])
@@ -51,22 +49,5 @@ class SearchController < ApplicationController
     end
 
     result
-  end
-
-  def too_short_query
-    bare_query = strip_tags(params[:q]) unless bare_query.html_safe?
-    return bare_query.strip.size < MIN_QUERY
-  end
-
-  def get_search_query
-    search_query = ""
-    param = strip_tags(params[:q]) || ""
-    bare_query = param unless bare_query.html_safe?
-    search_query_words = bare_query.strip.split
-    search_query_words.each_index do |i|
-      search_query+= search_query_words[i] + " " if i < (search_query_words.size - 1)
-      search_query+= "*" + search_query_words[i] + "* " if i == (search_query_words.size - 1)
-    end
-    return search_query.strip
   end
 end
