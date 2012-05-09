@@ -1,6 +1,8 @@
-log/*log
+config/*sphinx.conf
 db/*.sqlite3
 db/*.sqlite3-journal
+db/sphinx
+log/*log
 public/images/tmp/
 public/system
 tmp/*
