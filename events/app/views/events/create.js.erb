@@ -5,7 +5,7 @@
 
   jQuery.each(<%= raw Array.wrap(@event.to_json).to_json  %>,
               function(index, ev) {
-    ev.color = SocialStream.Events.tools.eventColor(<%= @event.room_id %>);
+    ev.color = SocialStream.Event.color(<%= @event.room_id %>);
   
     cal.fullCalendar('renderEvent', ev,
                      true // make the event "stick"

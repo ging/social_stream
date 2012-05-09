@@ -11,6 +11,10 @@ SocialStream.Event = (function(SS, $, undefined) {
 		$.each(indexCallbacks, function(i, callback){ callback(); });
 	}
 
+	var color = function(){
+		SocialStream.Events.current.eventColor;
+	}
+
         var fixDates = function(){
           $(".event").each(function(){
             dateString = $(this).find("time").attr("datetime");
@@ -44,6 +48,7 @@ SocialStream.Event = (function(SS, $, undefined) {
 
 	return {
 		addIndexCallback: addIndexCallback,
+		color: color,
 		index: index
 	}
 

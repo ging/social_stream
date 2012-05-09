@@ -1,4 +1,7 @@
+//= require jquery.boxy
 //= require jquery.watermark
+//= require fullcalendar
+//= require scheduler
 //
 //= require social_stream-base
 //

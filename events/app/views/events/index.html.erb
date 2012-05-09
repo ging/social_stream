@@ -78,7 +78,7 @@
             success: function(events) {
                 callback(
                   $.map(events, function(event) {
-                    event.color = SocialStream.Events.tools.eventColor(event.roomId);
+                    event.color = SocialStream.Event.color(event.roomId);
                     return event;
                         }
                   )
