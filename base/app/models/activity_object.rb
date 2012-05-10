@@ -29,7 +29,7 @@ class ActivityObject < ActiveRecord::Base
   has_many :followers,
            :through => :received_actions,
            :source  => :actor,
-           :conditions => { :follow => true }
+           :conditions => { 'activity_actions.follow' => true }
 
   # Associations for indexing
   has_many :author_actions,
