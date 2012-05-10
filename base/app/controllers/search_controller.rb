@@ -5,7 +5,7 @@ class SearchController < ApplicationController
   MIN_QUERY=2
   def index
     @search_result =
-      if params[:q].blank? || params[:q].strip < MIN_QUERY
+      if params[:q].blank? || params[:q].strip.size < MIN_QUERY
         []
       elsif params[:mode].eql? "header_search"
         search :quick
