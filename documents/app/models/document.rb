@@ -20,8 +20,6 @@ class Document < ActiveRecord::Base
     activity_object_index
 
     indexes file_file_name, :as => :file_name
-    
-    where "type IS NULL"
   end
   
   class << self 
