@@ -159,6 +159,9 @@ class Relation < ActiveRecord::Base
       ids = [Relation::Public.instance.id]
 
       if SocialStream.relation_model == :custom && subject.present?
+        # Subject own defined custom relations
+        ids += subject.relation_ids
+        # From Ties sent by other subject
         ids += subject.received_relation_ids
       end
 
