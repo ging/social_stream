@@ -90,6 +90,11 @@ module SocialStream
       def search_options
         opts = search_scope_options
 
+        # profile_subject
+        if profile_subject.present?
+          opts.deep_merge!( { :with => { :owner_id => profile_subject.actor_id } } )
+        end
+
         # Authentication
         opts.deep_merge!({ :with => { :relation_ids => Relation.ids_shared_with(current_subject) } } )
 
@@ -100,6 +105,8 @@ module SocialStream
           :per_page => params[:per_page] || self.class.model_class.default_per_page,
           :page => params[:page]
         })
+
+        opts
       end
 
       def search_scope_options

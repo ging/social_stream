@@ -9,7 +9,8 @@ module SocialStream
             indexes activity_object.tags.name,   :as => :tags
 
             has created_at
-            has activity_object.author_action(:actor_id), :as => :author_id
+            has activity_object.author_actions(:actor_id), :as => :author_id
+            has activity_object.owner_actions(:actor_id),  :as => :owner_id
             has activity_object.activity_object_audiences(:relation_id), :as => :relation_ids
           end
         end
