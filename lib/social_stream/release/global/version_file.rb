@@ -1,6 +1,6 @@
 module SocialStream
   module Release
-    module Global
+    class Global
       # Manage component's version files
       #
       # This code is based on gem_release's version_file.rb

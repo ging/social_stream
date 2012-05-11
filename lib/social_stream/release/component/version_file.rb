@@ -1,6 +1,6 @@
 module SocialStream
   module Release
-    module Component
+    class Component
       class VersionFile < Global::VersionFile
         attr_reader :name
 
