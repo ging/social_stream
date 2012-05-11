@@ -104,6 +104,18 @@ describe Post do
         post.post_activity.relations.should include(tie.relation)
       end
     end
+
+    describe "a new post" do
+      before do
+        @user = Factory(:user)
+        @post = Post.create!(:text => "test",
+                             :author_id => @user.actor_id)
+      end
+
+      it "should be shared with user relations" do
+        @post.relation_ids.sort.should eq(@user.relation_ids.sort)
+      end
+    end
   end
 
   describe "authored_by" do
@@ -113,4 +125,6 @@ describe Post do
       Post.authored_by(post.author).should include(post)
     end
   end
+
+
 end
