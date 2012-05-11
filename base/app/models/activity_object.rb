@@ -52,7 +52,8 @@ class ActivityObject < ActiveRecord::Base
            :through => :activity_object_holders,
            :source  => :activity_object
 
-  before_validation :fill_relation_ids, :if => lambda { |obj| obj.object_type != "Actor" }
+
+  before_validation :fill_owner_id, :fill_user_author_id, :fill_relation_ids, :if => lambda { |obj| obj.object_type != "Actor" }
 
   validates_presence_of :object_type
   validate :allowed_relations, :if => lambda { |obj| obj.object_type != "Actor" }
@@ -196,6 +197,20 @@ class ActivityObject < ActiveRecord::Base
   end
 
   private
+
+  def fill_owner_id
+    return if owner_id.present? || author_id.blank?
+
+    self.owner_id = author_id
+  end
+
+  def fill_user_author_id
+    return if user_author_id.present? ||
+                author_id.blank? ||
+                author.subject_type != "User"
+
+    self.user_author_id = author_id
+  end
 
   def fill_relation_ids
     return if relation_ids.present? || author.blank? || owner.blank?
