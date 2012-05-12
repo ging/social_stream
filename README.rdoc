@@ -50,6 +50,16 @@ Since {Social Stream}[http://github.com/ging/social_stream] depends on {Devise}[
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
+Social Stream is not compatible with default mass attributes protection shipped with Rails 3.2.3
+http://weblog.rubyonrails.org/2012/3/30/ann-rails-3-2-3-has-been-released/
+
+You must set 
+   
+   config.active_record.whitelist_attributes = false in config/application.rb
+
+
+
+
 = Social Stream components
 
 Social Stream is divided into components. Developers can customize their social
