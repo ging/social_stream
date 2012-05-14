@@ -203,11 +203,3 @@ function restoreBuddyChatBoxes(visibleMaxSlugs,visibleMinSlugs) {
 }   
 
 
-////////////////////
-// Events
-////////////////////
-
-$(window).unload(function() {
-	storeChatData();
-	disconnectStrophe();
-});

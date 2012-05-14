@@ -543,3 +543,14 @@ function updateMainChatBoxAfterConnectionBoxChanges(){
   changeMainChatBoxHeight(getChatBoxHeightRequiredForConnectionBoxes());
   updateConnectedUsersOfMainChatBox();
 }
+
+
+
+////////////////////
+// Events
+////////////////////
+
+$(window).unload(function() {
+  storeChatData();
+  disconnectStrophe();
+});

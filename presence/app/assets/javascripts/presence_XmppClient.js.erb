@@ -303,6 +303,16 @@ function disconnectStrophe(){
   setStatusWidgetTitle("offline");
   
   if(isStropheConnected()){
+		
+		//Leave from rooms before disconnect
+//		if(roomsInfo){
+//			for(var roomName in roomsInfo){
+//				if(roomsInfo[roomName].joined){
+//					leaveRoom(roomName);
+//				}
+//			}
+//		}
+		
     strophe_connection.send($pres({type: "unavailable"}).tree()); 
     strophe_connection.disconnect();
   } 
