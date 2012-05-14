@@ -66,7 +66,7 @@
 		    self.elem.uiChatboxTitlebar.effect("highlight", options, 300);
 				
 				
-				if (((typeof mustBounceBoxForChatWindow == 'function')&&(mustBounceBoxForChatWindow(self)))||((typeof mustBounceBoxForChatWindow != 'function'))) {
+				if (((typeof PRESENCE.UTILITIES.mustBounceBoxForChatWindow == 'function')&&(PRESENCE.UTILITIES.mustBounceBoxForChatWindow(self)))||((typeof PRESENCE.UTILITIES.mustBounceBoxForChatWindow != 'function'))) {
 					 self.elem.uiChatbox.effect("bounce", {times:3}, 300, function(){
            self.highlightLock = false;
            self._scrollToBottom();
@@ -185,7 +185,7 @@
       .hover(function() {uiChatboxTitlebarVideo.addClass('ui-state-hover');},
            function() {uiChatboxTitlebarVideo.removeClass('ui-state-hover');})
       .click(function(event) {
-        toggleVideoBox(self)
+        PRESENCE.WINDOW.toggleVideoBox(self)
         return false;
       })
       .appendTo(uiChatboxTitlebar),
@@ -204,7 +204,7 @@
       .hover(function() {uiChatboxTitlebarVideoChange.addClass('ui-state-hover');},
            function() {uiChatboxTitlebarVideoChange.removeClass('ui-state-hover');})
       .click(function(event) {
-        toggleVideoBoxChange(self)
+        PRESENCE.WINDOW.toggleVideoBoxChange(self)
         return false;
       })
       .appendTo(uiChatboxTitlebar),
@@ -247,7 +247,7 @@
        'ui-chatbox-notify'
        )
     .click(function(event) {
-				onClickChatNotification(self.uiChatboxNotify)
+				PRESENCE.NOTIFICATIONS.onClickChatNotification(self.uiChatboxNotify)
     })
     .appendTo(uiChatboxContent),
 		
@@ -289,7 +289,7 @@
 		.appendTo(uiChatboxInput)
 	        .keydown(function(event) {
 				    if(event.keyCode && event.keyCode == $.ui.keyCode.ENTER) {
-							var userChatDataInputControlBoolean = (((typeof userChatDataInputControl == 'function')&&(userChatDataInputControl()))||((typeof userChatDataInputControl != 'function')));
+							var userChatDataInputControlBoolean = (((typeof PRESENCE.UTILITIES.userChatDataInputControl == 'function')&&(PRESENCE.UTILITIES.userChatDataInputControl()))||((typeof PRESENCE.UTILITIES.userChatDataInputControl != 'function')));
 							if (userChatDataInputControlBoolean) {
 						  	msg = $.trim($(this).val());
 						  	if (msg.length > 0) {

@@ -56,7 +56,7 @@ PRESENCE.GAME = (function(P,$,undefined){
       var gameStatus = null;
     }
     
-    if(! isUserConnected()){
+    if(! PRESENCE.XMPPClient.isUserConnected()){
       P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug, I18n.t("chat.game.offline"));
       if(gameStatus!=null){
         contactsInfo[slug].gameStatus = "disconnected";
@@ -64,8 +64,8 @@ PRESENCE.GAME = (function(P,$,undefined){
       return;
     }
 
-    if(! isSlugChatConnected(slug)){
-      P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug, I18n.t("chat.game.guestOffline", {name: getNameFromSlug(slug)}));
+    if(! PRESENCE.UIMANAGER.isSlugChatConnected(slug)){
+      P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug, I18n.t("chat.game.guestOffline", {name: PRESENCE.XMPPClient.getNameFromSlug(slug)}));
       if(gameStatus!=null){
         contactsInfo[slug].gameStatus = "disconnected";
       }
@@ -142,13 +142,13 @@ PRESENCE.GAME = (function(P,$,undefined){
       contactsInfo[slug].gameStatus = "playing";
       P.GAME.INTERFACE.updateInterfaceBeforeStartGame(slug,contactsInfo[slug].game)
     } else if (response=="no"){
-      P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug,I18n.t("chat.game.rejected", {name: getNameFromSlug(slug)}));
+      P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug,I18n.t("chat.game.rejected", {name: PRESENCE.XMPPClient.getNameFromSlug(slug)}));
       contactsInfo[slug].gameStatus="disconnected";
     } else if (response=="busy"){
-      P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug,I18n.t("chat.game.rejectedBusy", {name: getNameFromSlug(slug)}));
+      P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug,I18n.t("chat.game.rejectedBusy", {name: PRESENCE.XMPPClient.getNameFromSlug(slug)}));
       contactsInfo[slug].gameStatus="disconnected";
     } else {
-			P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug,I18n.t("chat.game.unknown", {name: getNameFromSlug(slug)}));
+			P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug,I18n.t("chat.game.unknown", {name: PRESENCE.XMPPClient.getNameFromSlug(slug)}));
       contactsInfo[slug].gameStatus="disconnected";
 		}
   }
@@ -157,10 +157,10 @@ PRESENCE.GAME = (function(P,$,undefined){
     if(slug in contactsInfo){
       if (status == "finish") {
         if (contactsInfo[slug].gameStatus == "pending") {
-          P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug, I18n.t("chat.game.cancel", {name: getNameFromSlug(slug)}));
+          P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug, I18n.t("chat.game.cancel", {name: PRESENCE.XMPPClient.getNameFromSlug(slug)}));
           contactsInfo[slug].gameStatus = "disconnected";
         } else if (contactsInfo[slug].gameStatus == "playing") {
-          P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug, I18n.t("chat.game.finish", {name: getNameFromSlug(slug)}));
+          P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug, I18n.t("chat.game.finish", {name: PRESENCE.XMPPClient.getNameFromSlug(slug)}));
           contactsInfo[slug].gameStatus = "disconnected";
         } 
       }
@@ -251,13 +251,13 @@ PRESENCE.GAME = (function(P,$,undefined){
 	      return;
       }
     } else {
-			log("Warning: Missed " + game.name + " validateParams method")
+			PRESENCE.UTILITIES.log("Warning: Missed " + game.name + " validateParams method")
 		}
 		
 		if(typeof PRESENCE.GAME[game.id].minimumRequirements == "function"){
       //Check requirements
     } else {
-      log("Warning: Missed " + game.name + " minRequirements method")
+      PRESENCE.UTILITIES.log("Warning: Missed " + game.name + " minRequirements method")
     }
 		
 		//Add handler and remove previous if exits

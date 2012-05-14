@@ -257,8 +257,8 @@
         //this.picked = true;
 				this.hidden.val(selected.value);
         this.input.val("");
-				if(typeof changeSelectContactValue == "function"){
-          return changeSelectContactValue(selected.name,selected.value);
+				if(typeof PRESENCE.UIMANAGER.changeSelectContactValue == "function"){
+          return PRESENCE.UIMANAGER.changeSelectContactValue(selected.name,selected.value);
         } 
       } else if (this.settings.allowMismatch) {
         this.hidden.val("");

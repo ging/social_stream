@@ -7,10 +7,11 @@ PRESENCE.AUTHORS = 'Aldo Gordillo';
 PRESENCE.CORE = (function(P,$,undefined){
 
   var init = function(){
-     initFocusListeners();
-     checkVideocallFeature();
-		 PRESENCE.GAME.init(strophe_connection);
-		 initAudio();
+		 PRESENCE.UIMANAGER.init();
+		 PRESENCE.UTILITIES.init();
+		 PRESENCE.VIDEOCHAT.init();
+		 PRESENCE.GAME.init(PRESENCE.XMPPClient.getConnection());
+		 PRESENCE.AUDIO.init();
   };
 
   return {

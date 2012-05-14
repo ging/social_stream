@@ -25,7 +25,7 @@ PRESENCE.GAME.FACTORY = (function(P,$,undefined){
 	
   var generateGame = function(guest_slug,gameId,options){
     var player1 = new PRESENCE.GAME.player(user_slug,user_name)
-    var player2 = new PRESENCE.GAME.player(guest_slug,getNameFromSlug(guest_slug))
+    var player2 = new PRESENCE.GAME.player(guest_slug,PRESENCE.XMPPClient.getNameFromSlug(guest_slug))
     var players = [player1,player2]
     var mygame = new PRESENCE.GAME.game(gameId,getGameName(gameId),players,options)
     return mygame;

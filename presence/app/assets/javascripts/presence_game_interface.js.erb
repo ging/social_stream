@@ -12,8 +12,8 @@ PRESENCE.GAME.INTERFACE = (function(P,$,undefined){
     //gameStatus="pending";
 		
 	  //Show or create chatbox
-	  createBuddyChatBox(slug);
-	  var chatBox = getChatBoxForSlug(slug);
+	  PRESENCE.WINDOW.createBuddyChatBox(slug);
+	  var chatBox = PRESENCE.WINDOW.getChatBoxForSlug(slug);
 		
 	  //Show invitation message
 	  showGameInvitation(slug,game);
@@ -22,7 +22,7 @@ PRESENCE.GAME.INTERFACE = (function(P,$,undefined){
     hideVideoChatButton(slug);
 		
 	  //Show gamebox
-	  toggleVideoBoxForSlug(slug,true);
+	  PRESENCE.WINDOW.toggleVideoBoxForSlug(slug,true);
 	}
 	
 	var updateInterfaceBeforeStartGame = function(slug,game){
@@ -31,18 +31,18 @@ PRESENCE.GAME.INTERFACE = (function(P,$,undefined){
     parentDiv.setAttribute('id', divID);
     $(parentDiv).css('width', "100%");
     $(parentDiv).css('height', "100%");
-    setVideoBoxContent(slug,parentDiv);
+    PRESENCE.WINDOW.setVideoBoxContent(slug,parentDiv);
 
     PRESENCE.GAME.startGame(slug,divID)
   }
   
   var updateInterfaceAfterFinishGame = function(slug,game){
-    toggleVideoBoxForSlug(slug,false);
+    PRESENCE.WINDOW.PRESENCE.WINDOW.toggleVideoBoxForSlug(slug,false);
     showVideoChatButton(slug);
   }
 	
 	var updateInterfaceOnInformationMessage = function(slug,msg){
-    setVideoBoxContent(slug,"<p class=\"game-info\"> " + msg +" </p>");
+    PRESENCE.WINDOW.setVideoBoxContent(slug,"<p class=\"game-info\"> " + msg +" </p>");
   }
 
 
@@ -53,7 +53,7 @@ PRESENCE.GAME.INTERFACE = (function(P,$,undefined){
   
   var pickGamesButton = function (uiElement){
     var slug = $(uiElement.element).attr("id");
-    var videoBoxVisibility = toggleVideoBoxForSlug(slug);
+    var videoBoxVisibility = PRESENCE.WINDOW.toggleVideoBoxForSlug(slug);
   
     if (videoBoxVisibility) {
       hideVideoChatButton(slug);
@@ -89,7 +89,7 @@ PRESENCE.GAME.INTERFACE = (function(P,$,undefined){
       }
     }
     var template = generateGameSelectionTemplate(slug,gameItem)
-    setVideoBoxContent(slug,template);
+    PRESENCE.WINDOW.setVideoBoxContent(slug,template);
     setShowGamesButtonsFunction();
   }
 	
@@ -184,10 +184,10 @@ PRESENCE.GAME.INTERFACE = (function(P,$,undefined){
   }
   
 	var showGameInvitation = function(slug,game){
-		var title = "<p class=\"game-info\">" + I18n.t("chat.game.call", {name: getNameFromSlug(slug), game: game.name}) + " </p>";
+		var title = "<p class=\"game-info\">" + I18n.t("chat.game.call", {name: PRESENCE.XMPPClient.getNameFromSlug(slug), game: game.name}) + " </p>";
     var msg = title + "<p class=\"game-request\"> <a class=\"gameButton\" slug=\""+slug+"\" value=\"yes\">" + I18n.t("chat.game.accept") + "</a> -" 
     + " <a class=\"gameButton\" slug=\""+slug+"\" value=\"no\">" + I18n.t("chat.game.deny") + "</a> </p>";
-    setVideoBoxContent(slug,msg);
+    PRESENCE.WINDOW.setVideoBoxContent(slug,msg);
     setGameRequestButtonsFunction();
 	}
 	
@@ -201,11 +201,11 @@ PRESENCE.GAME.INTERFACE = (function(P,$,undefined){
 	}
 	
 	var hideVideoChatButton = function(slug){
-		$(getChatBoxButtonForSlug(slug,"video")).hide();
+		$(PRESENCE.WINDOW.getChatBoxButtonForSlug(slug,"video")).hide();
 	}
 	
 	var showVideoChatButton = function(slug){
-    $(getChatBoxButtonForSlug(slug,"video")).show();
+    $(PRESENCE.WINDOW.getChatBoxButtonForSlug(slug,"video")).show();
   }
 	
 	var play = function(){

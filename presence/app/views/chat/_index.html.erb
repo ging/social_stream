@@ -82,25 +82,19 @@
 	var BOSH_SERVICE = '<%= SocialStream::Presence.bosh_service || root_url + "http-bind/" %>';
 	var user_name = '<%=current_user.name%>';
   var user_slug = '<%=current_user.slug%>';
-  var user_jid = '<%=current_user.slug%>'+"@"+domain;
+  var user_jid = PRESENCE.XMPPClient.getJidFromSlug('<%=current_user.slug%>');
 	
-
 
   $(document).ready(function () {
 			
 		//Inicial field
 		$("#chat_partial").html($("#chat_connecting").html())
 	
-    if(getRestoreUserChatStatus()!="offline"){
-			if (authByCookie()){
-				connectToChat(user_jid,cookie,null);
-			} else {
-				//Auth by password
-				connectToChat(user_jid,null,null);
-			}
-      initialTimer = setTimeout("updateChatWindow()", 10000);
+    if((PRESENCE.PERSISTENCE.getRestoreUserChatStatus()!="offline")&&(cookie)){
+			PRESENCE.XMPPClient.connectToChat(user_jid,cookie);
+      initialTimer = setTimeout("PRESENCE.UIMANAGER.updateChatWindow()", 10000);
     } else {
-      updateChatWindow();
+      PRESENCE.UIMANAGER.updateChatWindow();
     }
       
 	  PRESENCE.CORE.init();
@@ -111,8 +105,8 @@
 <% if defined?(flow)!=nil and flow %>
   <script type="text/javascript">
 	  $(document).ready(function () {
-		  createMainChatBox();
-			addContentToMainChatBox(modifyChatPartialIfMainBox($("#chat_partial")));
+		  PRESENCE.WINDOW.createMainChatBox();
+			PRESENCE.WINDOW.addContentToMainChatBox(PRESENCE.WINDOW.modifyChatPartialIfMainBox($("#chat_partial")));
 			$("#chat_wrapper").find("#chat_partial").remove();
 		});
 	</script>

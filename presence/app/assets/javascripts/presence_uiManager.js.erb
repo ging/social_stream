@@ -1,556 +1,568 @@
 ////////////////////
-//Reconnect button interface functions
+//UI MANAGER
 ////////////////////
-var connectButtonTimer;
-var periodBetweenAttempts=15; //(seg)
-var connectButtonTimerCounter=periodBetweenAttempts+1;
 
-function connectButtonTimerFunction(){
-    connectButtonTimerCounter++;
-    if (connectButtonTimerCounter > (periodBetweenAttempts-1)) {
-      clearTimeout(connectButtonTimer);
-			changeChatHeaderTitle(I18n.t('chat.disconnected'))
-    }
-}
+PRESENCE.UIMANAGER = (function(P,$,undefined){
+ 
+  //Keys: Xmpp status
+  //Value: Icon name (Same as Social Stream Status)
+  var statusIcons = new Array();
+  statusIcons[''] = "available";
+  statusIcons['chat'] = "available";
+  statusIcons['away'] = "away";
+  statusIcons['xa'] = "away";
+  statusIcons['dnd'] = "dnd";
 
-function requestConnectToChat(){
-  if (connectButtonTimerCounter > (periodBetweenAttempts-1)) {
-    connectButtonTimerCounter=0;
-    connectButtonTimer = setInterval("connectButtonTimerFunction()", 1000) 
-		changeChatHeaderTitle(I18n.t('chat.connecting'))
-    return true
-  } else {
-    return false
-  } 
-}
 
-function changeChatHeaderTitle(msg){
-  if(mainChatBox==null){
-    $("#chat_header_title").html(msg)
-  } else {
-    changeMainChatBoxHeaderTitle(msg);
-  }
-}
-       
+  var init = function(){
+	  // Events
+	  $(window).unload(function() {
+	    PRESENCE.PERSISTENCE.storeChatData();
+	    PRESENCE.XMPPClient.disconnect();
+	  });
+	}
 
-////////////////////
-//Chat interface: Setting Functions
-////////////////////
-var focusSearchContactsFlag=false;
-var changeSelectContactValueFlag = false;
-
-function settingStatusSelector(){
-  //JQuery DropdwanStatus 
-  $(".dropdown dt a").click(function(event) {
-    event.preventDefault();
-    $(".dropdown dd ul").toggle();
-    
-    if($(".dropdown dd ul").is(":visible")){
-      setStatusWidgetTitle("default");
-    } else {
-      setStatusWidgetTitle(userStatus);
-    }
-    
-    restartAwayTimer();
-  });
-          
-  $(".dropdown dd ul li a.option").click(function(event) { 
-    event.preventDefault();
-    userStatus = $(this).find("span.value").html();
-    if(userStatus == "offline"){
-      disconnectStrophe();
-    } else {
-      sendStatus(userStatus);
-    }
-    $(".dropdown dd ul").hide();
-  });
-  
-  
-  $(document).bind('click', function(e) {
-    var $clicked = $(e.target);
-    
-    if (! $clicked.parents().hasClass("dropdown")){
-      //Click outside the select...
-        $(".dropdown dd ul").hide();
-        setStatusWidgetTitle(userStatus);
-    }
-  });
-}
-
-function settingChatBoxFunctions(){
+	////////////////////
+	//Reconnect button interface functions
+	////////////////////
+	var connectButtonTimer;
+	var periodBetweenAttempts=15; //(seg)
+	var connectButtonTimerCounter=periodBetweenAttempts+1;
 	
-  $("div.user_presence").click(function(event, ui){
-    var guest_slug = $(this).attr("slug");
-    createBuddyChatBox(guest_slug)
-  });
-  
-  //Hide tooltips on mouseleave
-  $("div.user_presence").mouseleave(function(e){
-    var div = $(this);
-    $.each($(".tooltip:visible"), function(index, value) {
-      if ( $($(".tooltip:visible")[0]).html() == $(div).attr("name") ){
-        $($(".tooltip:visible")[index]).hide();
-      }
-    });
-  });
+	var connectButtonTimerFunction = function(){
+	    connectButtonTimerCounter++;
+	    if (connectButtonTimerCounter > (periodBetweenAttempts-1)) {
+	      clearTimeout(connectButtonTimer);
+				 if (! PRESENCE.XMPPClient.isUserConnected()) {
+				   changeChatHeaderTitle(I18n.t('chat.disconnected'))
+		     }
+	    }
+	}
 	
-}
-
-function settingTooltips(){
-  if (mainChatBox == null) {
-    //Enabling default tooltips
-      $(".user_presence a[title]").tooltip();
-  } else {
-    //Enabling tooltips with center left position
-    
-    //Changing Tooltip CSS class by JQuery
-    var ss = document.styleSheets;
-    for (var i=0; i<ss.length; i++) {
-        var rules = ss[i].cssRules || ss[i].rules;
-        for (var j=0; j<rules.length; j++) {
-            if (rules[j].selectorText === ".tooltip") {
-                rules[j].style.background = 'url("black_arrow9.png") repeat scroll 0% 0% transparent'
-            }
-        }
-    } 
-    $(".user_presence a[title]").tooltip({
-      opacity: 0.95,
-      relative: false,
-      position: 'top left',
-      offset: [0,31]
-    });
-  }
-}
-
-function settingSearchContactFunctions(){
-
-  $("#chat_partial select.flexselect").flexselect({
-    allowMismatch: true,
-    defaultmessage: I18n.t('chat.zerocontacts')
-  });
-
-  $("#chat_partial #search_chat_contact_flexselect").watermark(I18n.t('chat.search'),"#666");
-  
-  //Select contact function
-  //callback in changeSelectContactValue()
-
-  
-  $("#chat_partial #search_chat_contact_flexselect").focus(function(e) {
-    changeContactListVisibility(true);
-  });
-  
-  $("#chat_partial #search_chat_contact_flexselect").blur(function(e) {
-    changeContactListVisibility(false);
-  });
-}
-
-function setAllUserFunctions(){
-	settingStatusSelector();
-  settingChatBoxFunctions();
-  settingTooltips();
-}
-
-function changeSelectContactValue(name,valueSelectedInSearchContacts){
-
-	if((valueSelectedInSearchContacts != "ZERO_CONTACTS")&&(valueSelectedInSearchContacts != "")){
-		var guest_slug = valueSelectedInSearchContacts;
-	  createBuddyChatBox(guest_slug)
-  
-	  //Check for online status and show notification
-	  if (! isSlugChatConnected(guest_slug)) {
-	    showOfflineChatNotificationForSlug(guest_slug);
+	var requestConnectToChat = function(){
+	  if (connectButtonTimerCounter > (periodBetweenAttempts-1)) {
+	    connectButtonTimerCounter=0;
+	    connectButtonTimer = setInterval("PRESENCE.UIMANAGER.connectButtonTimerFunction()", 1000) 
+	    changeChatHeaderTitle(I18n.t('chat.connecting'))
+	    return true
+	  } else {
+	    return false
+	  } 
+	}
+	
+	var changeChatHeaderTitle = function(msg){
+	  if(PRESENCE.WINDOW.getMainChatBox()==null){
+	    $("#chat_header_title").html(msg)
+	  } else {
+	    PRESENCE.WINDOW.changeMainChatBoxHeaderTitle(msg);
 	  }
 	}
-  
-	$("#chat_partial #search_chat_contact_flexselect").blur();
-	changeContactListVisibility(false);
-}
-
-function changeContactListVisibility(visible){
-  var nItems = getAllSlugsLength();
-	if (visible){
-		  focusSearchContactsFlag=true;
-		  if(nItems > 9){
-				changeMainChatBoxHeight(mainChatBoxHeightWhileSearchContacts);
-			} else {
-				var mainChatBoxMinRequiredHeight= mainChatBoxaddonsHeight + 20 + nItems * 19;
-				changeMainChatBoxHeight(mainChatBoxMinRequiredHeight);
-			}
-			$(".users_connected").hide();
-  } else {
-      changeMainChatBoxHeight(getChatBoxHeightRequiredForConnectionBoxes());
-			$(".users_connected").show();
-  }
-}
-
-function setStatusWidgetTitle(status){
-  
-	if((status in sstreamChatStatus)){
-		status = sstreamChatStatus[status];
+	       
+	
+	////////////////////
+	//Chat interface: Setting Functions
+	////////////////////
+	var focusSearchContactsFlag=false;
+	var changeSelectContactValueFlag = false;
+	
+	var settingStatusSelector = function(){
+	  //JQuery DropdwanStatus 
+	  $(".dropdown dt a").click(function(event) {
+	    event.preventDefault();
+	    $(".dropdown dd ul").toggle();
+	    
+	    if($(".dropdown dd ul").is(":visible")){
+	      setStatusWidgetTitle("default");
+	    } else {
+	      setStatusWidgetTitle(PRESENCE.XMPPClient.getUserStatus());
+	    }
+	    
+	    PRESENCE.XMPPClient.restartAwayTimer();
+	  });
+	          
+	  $(".dropdown dd ul li a.option").click(function(event) { 
+	    event.preventDefault();
+			PRESENCE.XMPPClient.setUserStatus($(this).find("span.value").html());
+	    if(PRESENCE.XMPPClient.getUserStatus() == "offline"){
+	      PRESENCE.XMPPClient.disconnect();
+	    } else {
+	      PRESENCE.XMPPClient.sendStatus();
+	    }
+	    $(".dropdown dd ul").hide();
+	  });
+	  
+	  
+	  $(document).bind('click', function(e) {
+	    var $clicked = $(e.target);
+	    
+	    if (! $clicked.parents().hasClass("dropdown")){
+	      //Click outside the select...
+	        $(".dropdown dd ul").hide();
+	        setStatusWidgetTitle(PRESENCE.XMPPClient.getUserStatus());
+	    }
+	  });
 	}
 	
-  if ($(".dropdown dt a span").length == 0){
-    return;
-  }
-  
-  if(status=="default"){
-    var defaultTitle = I18n.t('chat.status.choose')
-    $(".dropdown dt a span").html(defaultTitle);
-    return;
-  }
-  
-  if(status=="offline"){
-    var text = $("#" + status).html();
-    $(".dropdown dt a span").html(text);
-    return;
-  }
-  
-  if ((status in statusIcons)&&($("#" + statusIcons[status]).length > 0)) {   
-    var text = $("#" + statusIcons[status]).html();
-    $(".dropdown dt a span").html(text);
-  }
-   
-}
-
-
-////////////////////
-//Away Timer Management
-////////////////////
-
-function awayTimerFunction(){
-    awayCounter++;
-    if (awayCounter > (awayTime/awayTimerPeriod)){
-      if ((userStatus != "dnd")&&(userStatus != "away")) {
-        userStatus = "autoaway";
-        sendStatus(userStatus);
-      }
-      clearTimeout(awayTimer);
-    }
-}
-
-function autochangeStatusIfAutoAway(){
-    if (userStatus == "autoaway"){
-      userStatus = "available";
-      sendStatus(userStatus);
-    }
-}
-
-function restartAwayTimer(){   
-    if (awayCounter > (awayTime/awayTimerPeriod)){
-      awayTimer = setInterval("awayTimerFunction()", awayTimerPeriod);
-      autochangeStatusIfAutoAway();
-    }  
-    awayCounter = 0;    
-}
-
-
-////////////////////
-//Update chatWindow Management
-////////////////////
-
-function updateChatWindow(){
-	timerCounter=0;
-	
-	log("updateChatWindow()");
-	log("Connected " + isUserConnected());
-	
-	if(! isUserConnected()){
-		loadDisconnectionDiv();
-		updateConnectedUsersOfMainChatBox();
-		return;
+	var settingChatBoxFunctions = function(){
+	  
+	  $("div.user_presence").click(function(event, ui){
+	    var guest_slug = $(this).attr("slug");
+	    PRESENCE.WINDOW.createBuddyChatBox(guest_slug)
+	  });
+	  
+	  //Hide tooltips on mouseleave
+	  $("div.user_presence").mouseleave(function(e){
+	    var div = $(this);
+	    $.each($(".tooltip:visible"), function(index, value) {
+	      if ( $($(".tooltip:visible")[0]).html() == $(div).attr("name") ){
+	        $($(".tooltip:visible")[index]).hide();
+	      }
+	    });
+	  });
+	  
 	}
-
-  $.post("/chatWindow", { }, function(data){	
-		  //Prevent tooltips
-      $(".tooltip").hide() 
-			loadWidgetsDiv(data);
-			hideConnectionBoxesFromDisconnectedSlugs();
-			setAllUserFunctions();
-			updateConnectedUsersOfMainChatBox();
-			checkForZeroUsersConnected();
-      if (isStropheConnected()) {
-        if (afterNewConnectionFlag){
-          afterNewConnectionFlag = false;
-					if(afterFirstConnectionFlag){
-						restoreChatData();
-						if(typeof current_group_slug != 'undefined') {
-							accessRoom(current_group_slug,false);
-						}
-						afterFirstConnectionFlag = false;
-					} else {
-						updateAllNotifications();
-						//Rejoin rooms
-						$.each(getAllSlugsWithVisibleGroupBoxes(), function(index, value) {
-					    accessRoom(value,$(value).is(":visible"))
-					  });
-					}
-        }
-      }
-  },'html');
 	
-}
-
-
-//////////////
-//Divs Load
-//////////////
-
-function loadConnectingDiv(){
-  $("#chat_partial").html($("#chat_connecting").html());
-}
-
-function loadDisconnectionDiv(){
-	$("#chat_partial").html(modifyChatPartialIfMainBox($("#chat_connection_off").html()));
+	var settingTooltips = function(){
+	  if (PRESENCE.WINDOW.getMainChatBox() == null) {
+	    //Enabling default tooltips
+	      $(".user_presence a[title]").tooltip();
+	  } else {
+	    //Enabling tooltips with center left position
+	    
+	    //Changing Tooltip CSS class by JQuery
+	    var ss = document.styleSheets;
+	    for (var i=0; i<ss.length; i++) {
+	        var rules = ss[i].cssRules || ss[i].rules;
+	        for (var j=0; j<rules.length; j++) {
+	            if (rules[j].selectorText === ".tooltip") {
+	                rules[j].style.background = 'url("black_arrow9.png") repeat scroll 0% 0% transparent'
+	            }
+	        }
+	    } 
+	    $(".user_presence a[title]").tooltip({
+	      opacity: 0.95,
+	      relative: false,
+	      position: 'top left',
+	      offset: [0,31]
+	    });
+	  }
+	}
 	
-	$('.connectChatButton').bind('click', function () {
-    if (requestConnectToChat()){
-      if (authByCookie()) {
-        connectToChat(user_jid,cookie,null);
-      } else {
-        connectToChat(user_jid,null,$('#user_password').val());
-      }
-    }
-  });
-  
-  if (authByCookie()){
-    $("#chat_partial #passwordFormChat").hide();
-  } else {
-		//Authentication by password
+	var settingSearchContactFunctions = function(){
+	
+	  $("#chat_partial select.flexselect").flexselect({
+	    allowMismatch: true,
+	    defaultmessage: I18n.t('chat.zerocontacts')
+	  });
+	
+	  $("#chat_partial #search_chat_contact_flexselect").watermark(I18n.t('chat.search'),"#666");
+	  
+	  //Select contact function
+	  //callback in changeSelectContactValue()
+	
+	  
+	  $("#chat_partial #search_chat_contact_flexselect").focus(function(e) {
+	    changeContactListVisibility(true);
+	  });
+	  
+	  $("#chat_partial #search_chat_contact_flexselect").blur(function(e) {
+	    changeContactListVisibility(false);
+	  });
+	}
+	
+	var setAllUserFunctions = function(){
+	  settingStatusSelector();
+	  settingChatBoxFunctions();
+	  settingTooltips();
+	}
+	
+	
+	var changeSelectContactValue = function (name,valueSelectedInSearchContacts){
+	
+	  if((valueSelectedInSearchContacts != "ZERO_CONTACTS")&&(valueSelectedInSearchContacts != "")){
+	    var guest_slug = valueSelectedInSearchContacts;
+	    PRESENCE.WINDOW.createBuddyChatBox(guest_slug)
+	  
+	    //Check for online status and show notification
+	    if (! isSlugChatConnected(guest_slug)) {
+	      PRESENCE.NOTIFICATIONS.showOfflineChatNotificationForSlug(guest_slug);
+	    }
+	  }
+	  
+	  $("#chat_partial #search_chat_contact_flexselect").blur();
+	  changeContactListVisibility(false);
+	}
+	
+	var changeContactListVisibility = function(visible){
+	  var nItems = getAllSlugsLength();
+	  if (visible){
+	      focusSearchContactsFlag=true;
+	      if(nItems > 9){
+					var mainChatBoxHeightWhileSearchContacts = PRESENCE.WINDOW.getMainchatBoxParams()[1];
+	        PRESENCE.WINDOW.changeMainChatBoxHeight(mainChatBoxHeightWhileSearchContacts);
+	      } else {
+					var mainChatBoxaddonsHeight = PRESENCE.WINDOW.getMainchatBoxParams()[0];
+	        var mainChatBoxMinRequiredHeight= mainChatBoxaddonsHeight + 20 + nItems * 19;
+	        PRESENCE.WINDOW.changeMainChatBoxHeight(mainChatBoxMinRequiredHeight);
+	      }
+	      $(".users_connected").hide();
+	  } else {
+	      PRESENCE.WINDOW.changeMainChatBoxHeight(PRESENCE.WINDOW.getChatBoxHeightRequiredForConnectionBoxes());
+	      $(".users_connected").show();
+	  }
+	}
+	
+	var setStatusWidgetTitle = function (status){
+	  
+	  if((status in PRESENCE.XMPPClient.getSStreamChatStatus())){
+	    status = PRESENCE.XMPPClient.getSStreamChatStatus()[status];
+	  }
+	  
+	  if ($(".dropdown dt a span").length == 0){
+	    return;
+	  }
+	  
+	  if(status=="default"){
+	    var defaultTitle = I18n.t('chat.status.choose')
+	    $(".dropdown dt a span").html(defaultTitle);
+	    return;
+	  }
+	  
+	  if(status=="offline"){
+	    var text = $("#" + status).html();
+	    $(".dropdown dt a span").html(text);
+	    return;
+	  }
+	  
+	  if ((status in statusIcons)&&($("#" + statusIcons[status]).length > 0)) {   
+	    var text = $("#" + statusIcons[status]).html();
+	    $(".dropdown dt a span").html(text);
+	  }
+	   
+	}
+	
+	
+	////////////////////
+	//Update chatWindow Management
+	////////////////////
+	
+	var updateChatWindow = function(){
+	  timerCounter=0;
+	  
+	  PRESENCE.UTILITIES.log("updateChatWindow()");
+	  PRESENCE.UTILITIES.log("Connected " + PRESENCE.XMPPClient.isUserConnected());
+	  
+	  if(! PRESENCE.XMPPClient.isUserConnected()){
+	    loadDisconnectionDiv();
+	    updateConnectedUsersOfMainChatBox();
+	    return;
+	  }
+	
+	  $.post("/chatWindow", { }, function(data){  
+	      //Prevent tooltips
+	      $(".tooltip").hide() 
+	      loadWidgetsDiv(data);
+	      hideConnectionBoxesFromDisconnectedSlugs();
+	      setAllUserFunctions();
+	      updateConnectedUsersOfMainChatBox();
+	      checkForZeroUsersConnected();
+				
+	      if (PRESENCE.XMPPClient.isStropheConnected()) {
+	        if (PRESENCE.XMPPClient.isNewConnection()){
+						PRESENCE.XMPPClient.setNewConnection(false)
+	          if(PRESENCE.XMPPClient.isFirstConnection()){
+	            PRESENCE.PERSISTENCE.restoreChatData();
+	            if(typeof current_group_slug != 'undefined') {
+	              PRESENCE.XMPPClient.accessRoom(current_group_slug,false);
+	            }
+							PRESENCE.XMPPClient.setFirstConnection(false);
+	          } else {
+	            PRESENCE.NOTIFICATIONS.updateAllNotifications();
+	            //Rejoin rooms
+	            $.each(PRESENCE.WINDOW.getAllSlugsWithVisibleGroupBoxes(), function(index, value) {
+	              PRESENCE.XMPPClient.accessRoom(value,$(value).is(":visible"))
+	            });
+	          }
+	        }
+	      }
+				
+	  },'html');
+	  
+	}
+	
+	
+	//////////////
+	//Divs Load
+	//////////////
+	
+	var loadConnectingDiv = function(){
+	  $("#chat_partial").html($("#chat_connecting").html());
+	}
+	
+	var loadDisconnectionDiv = function(){
+	  $("#chat_partial").html(PRESENCE.WINDOW.modifyChatPartialIfMainBox($("#chat_connection_off").html()));
+	  
+	  $('.connectChatButton').bind('click', function () {
+	    if (requestConnectToChat()){
+				if (PRESENCE.XMPPClient.authByCookie()) {
+					PRESENCE.XMPPClient.connectToChat(user_jid,cookie);
+		    } else {
+					PRESENCE.XMPPClient.connectToChat(user_jid,$('#user_password').val());
+				}
+	    }
+	  });
+	  
+	  if (PRESENCE.XMPPClient.authByCookie()){
+	    $("#chat_partial #passwordFormChat").hide();
+	  } else {
+	    //Authentication by password
+	    
+	    $('.storePass').bind('click', function () {
+	      PRESENCE.STORE.storePassword();
+	    });
+	    
+	    if ((window.sessionStorage) && (sessionStorage.getItem("ss_user_pass") != null)) {
+	      $("#chat_partial #passwordFormChat").hide()
+	    } else {
+	      $("#chat_partial #passwordFormChat").show();
+	    }
+	  }
+	}
+	
+	var loadWidgetsDiv = function(data){
+	  $("#chat_partial").html(PRESENCE.WINDOW.modifyChatPartialIfMainBox($("#chat_widgets").html()));
+	  $("#chat_partial").append(data);
+	  fillSearchContactSelect();
+	  settingSearchContactFunctions();
+	}
+	
+	var fillSearchContactSelect = function(){
+	  $("#chat_partial #search_chat_contact").children().remove()
+	  $("#chat_partial #search_chat_contact").append('<option value=""></option>')
+	  $.each(getAllSlugs(), function(index, value) {
+	     $("#chat_partial #search_chat_contact").append('<option value=' + value + '>' + PRESENCE.XMPPClient.getNameFromSlug(value) + '</option>')
+	  });
+	}
+	
+	var updateInterfaceAfterUserDisconnect = function(){
+	  PRESENCE.NOTIFICATIONS.updateNotificationsAfterUserDisconnect();
+	  $.each(PRESENCE.WINDOW.getAllSlugsWithVisibleVideoBoxes(), function(index, value) {
+	    PRESENCE.VIDEOCHAT.closeVideoSession(value);
+	  });
+	}
+	
+	/////////////////////
+	// Connection Box Management
+	/////////////////////
+	
+	var hideConnectionBoxesFromDisconnectedSlugs = function(){
+	  $('div.user_presence[slug][connected="false"]').hide();
+	}
+	
+	var hideConnectionBoxFromSlug = function(slug){
+	  $('div.user_presence[slug=' + slug + ']').attr("connected","false");
+	  $('div.user_presence[slug=' + slug + ']').hide();
+	}
+	
+	var showConnectionBoxFromSlug = function(slug){
+	  $('div.user_presence[slug=' + slug + ']').attr("connected","true");
+	  $('div.user_presence[slug=' + slug + ']').show();
+	}
+	
+	var updateInterfaceAfterPresenceStanza = function(slug,available){
+	  if(available){
+	    showConnectionBoxFromSlug(slug);
+	    PRESENCE.NOTIFICATIONS.hideChatNotificationForSlug(slug);
+	  } else {
+	    hideConnectionBoxFromSlug(slug);
+	    PRESENCE.NOTIFICATIONS.showOfflineChatNotificationForSlug(slug);
+	    PRESENCE.VIDEOCHAT.closeVideoSession(slug);
+	  }
+	  updateMainChatBoxAfterConnectionBoxChanges();
+	  checkForZeroUsersConnected();
+	}
+	
+	var checkForZeroUsersConnected = function(){
+	  if (getConnectedSlugsLength() == 0){
+	    if($(".users_connected p.zero_users_connected").length > 0){
+	      $(".users_connected p.zero_users_connected").show();
+	    } else {
+	      var msg = I18n.t('chat.zerousers');
+	      $(".users_connected").append('<p class="zero_users_connected">' + msg + '</p>')
+	    }
+	  } else {
+	    $(".users_connected p.zero_users_connected").hide();
+	  }
+	}
+	
+	
+	////////////////////
+	// Set Status Interface
+	////////////////////
+	
+	var setUserIconStatus = function (slug, status){
+	   if (status in statusIcons) {
+	     var iconName = statusIcons[status];
+	     var $img_status = $('img.presence_status');
+	     var path = '<%=image_path("status")%>';
+	     var connectionBox = getConnectionBoxFromSlug(slug);
+	     $(connectionBox).find($img_status).attr("src", path + "/" + iconName + ".png")
+	   }
+	}
+	
+	
+	//////////////////////
+	//Getters and Setters
+	//////////////////////
+	
+	var getConnectionBoxFromSlug = function (slug){
+	  if ($('div.user_presence[slug=' + slug + ']').length > 0){
+	    return ($('div.user_presence[slug=' + slug + ']'))[0];
+	  }  else {
+	    return null;
+	  }
+	}
+	
+	var isSlugChatConnected = function(slug){
+	  return $('div.user_presence[slug=' + slug + ']').attr("connected")=="true";
+	}
+	
+	var existsSlugChatBox = function(slug){
+	  return PRESENCE.WINDOW.getChatBoxForSlug(slug)!=null;
+	}
+	
+	var getConnectedSlugsLength = function(){
+	  return $('div.user_presence[slug][connected="true"]').length;
+	}
+	
+	var getAllSlugsLength = function(){
+	  return $('div.user_presence[slug]').length;
+	}
+	
+	var getDisconnectedSlugsLength = function(){
+	   return $('div.user_presence[slug][connected="false"]').length;
+	}
+	
+	var getAllSlugs = function(){
+	  return getAllSlugsByChatConnectedState()[2];
+	}
+	
+	var getAllConnectedSlugs = function(){
+	  return getAllSlugsByChatConnectedState()[0];
+	}
+	
+	var getAllDisconnectedSlugs = function(){
+	  return getAllSlugsByChatConnectedState()[1];
+	}
+	
+	var getAllSlugsByChatConnectedState = function(){
+	  var onlineSlugs=[];
+	  var offlineSlugs=[];
+	  var allSlugs=[];
+	  var connectionBoxes = $('div.user_presence[slug]');
+	  $.each(connectionBoxes, function(index, value) {
+	    if($(value).attr("connected")=="true"){
+	        onlineSlugs.push($(value).attr("slug"))
+	    } else {
+	        offlineSlugs.push($(value).attr("slug"))
+	    }
+	    allSlugs.push($(value).attr("slug"))
+	  });
+	  return [onlineSlugs,offlineSlugs,allSlugs]
+	}
+	
+	
+	////////////////////
+	//Insert received message in chatbox
+	////////////////////
+	
+	var afterReceivedChatMessage = function(from_slug,msg,msgID){
 		
-		$('.storePass').bind('click', function () {
-      storePassword();
-    });
+	  //Antiflood control
+	  if (PRESENCE.UTILITIES.antifloodControl(from_slug,msg,msgID)){
+	    return;
+	  }
+	  var from_name = PRESENCE.XMPPClient.getNameFromSlug(from_slug)
+	  PRESENCE.WINDOW.createBuddyChatBox(from_slug)
+	  writeReceivedMessageOnChatWindow(from_name,from_slug,msg)
+	}
+	
+	var afterReceivedGroupChatMessage = function(room_nick_jid,msg){
+	  var from_slug = PRESENCE.XMPPClient.getSlugFromJid(room_nick_jid)
+	  var from_name = PRESENCE.XMPPClient.getNickFromChatRoomJid(room_nick_jid)
+	  
+	  if(!(existsSlugChatBox(from_slug))){
+	    PRESENCE.WINDOW.createGroupChatBox(from_slug,true)
+	  }
+	  writeReceivedMessageOnChatWindow(from_name,from_slug,msg)
+	}
+	
+	var writeReceivedMessageOnChatWindow = function(from_name,from_slug,msg){
 		
-    if ((window.sessionStorage) && (sessionStorage.getItem("ss_user_pass") != null)) {
-      $("#chat_partial #passwordFormChat").hide()
-    } else {
-      $("#chat_partial #passwordFormChat").show();
-    }
-  }
-}
-
-function loadWidgetsDiv(data){
-  $("#chat_partial").html(modifyChatPartialIfMainBox($("#chat_widgets").html()));
-  $("#chat_partial").append(data);
-	fillSearchContactSelect();
-	settingSearchContactFunctions();
-}
-
-function fillSearchContactSelect(){
-	$("#chat_partial #search_chat_contact").children().remove()
-	$("#chat_partial #search_chat_contact").append('<option value=""></option>')
-	$.each(getAllSlugs(), function(index, value) {
-     $("#chat_partial #search_chat_contact").append('<option value=' + value + '>' + getNameFromSlug(value) + '</option>')
-  });
-}
-
-function updateInterfaceAfterUserDisconnect(){
-  updateNotificationsAfterUserDisconnect();
-  $.each(getAllSlugsWithVisibleVideoBoxes(), function(index, value) {
-    closeVideoSession(value);
-  });
+	  //Parse content before show it.
+	  var content = PRESENCE.PARSER.getParsedContent(msg, false)
+	  var headerMessage = PRESENCE.PARSER.getParsedName(from_name,false);
+	  
+	  //Write message in chatBox.        
+	  PRESENCE.WINDOW.getChatBoxForSlug(from_slug).chatbox("option", "boxManager").addMsg(headerMessage, content);
+	  
+	  //Rotate chatBoxes priority.
+	  PRESENCE.WINDOW.rotatePriority(from_slug);
+		
+	  //Check for start blinkTitle.
+	  PRESENCE.UTILITIES.blinkTitleOnMessage(from_name);
+	  
+	  //Check for play sound
+	  if (PRESENCE.AUDIO.mustPlaySoundForChatWindow(PRESENCE.WINDOW.getChatBoxForSlug(from_slug))) {
+	    PRESENCE.AUDIO.playSound("onMessageAudio");
+	  } 
+	}
 	
-}
-
-/////////////////////
-// Connection Box Management
-/////////////////////
-
-function hideConnectionBoxesFromDisconnectedSlugs(){
-  $('div.user_presence[slug][connected="false"]').hide();
-}
-
-function hideConnectionBoxFromSlug(slug){
-  $('div.user_presence[slug=' + slug + ']').attr("connected","false");
-  $('div.user_presence[slug=' + slug + ']').hide();
-}
-
-function showConnectionBoxFromSlug(slug){
-	$('div.user_presence[slug=' + slug + ']').attr("connected","true");
-  $('div.user_presence[slug=' + slug + ']').show();
-}
-
-function updateInterfaceAfterPresenceStanza(slug,available){
-	if(available){
-		showConnectionBoxFromSlug(slug);
-		hideChatNotificationForSlug(slug);
-	} else {
-		hideConnectionBoxFromSlug(slug);
-		showOfflineChatNotificationForSlug(slug);
-		closeVideoSession(slug);
-	}
-  updateMainChatBoxAfterConnectionBoxChanges();
-	checkForZeroUsersConnected();
-}
-
-function checkForZeroUsersConnected(){
-  if (getConnectedSlugsLength() == 0){
-    if($(".users_connected p.zero_users_connected").length > 0){
-      $(".users_connected p.zero_users_connected").show();
-    } else {
-      var msg = I18n.t('chat.zerousers');
-      $(".users_connected").append('<p class="zero_users_connected">' + msg + '</p>')
-    }
-  } else {
-		$(".users_connected p.zero_users_connected").hide();
-	}
-}
-
-
-////////////////////
-// Set Status Interface
-////////////////////
-
-function setUserIconStatus(slug, status){
-   if (status in statusIcons) {
-     var iconName = statusIcons[status];
-     var $img_status = $('img.presence_status');
-		 var path = '<%=image_path("status")%>';
-     var connectionBox = getConnectionBoxFromSlug(slug);
-     $(connectionBox).find($img_status).attr("src", path + "/" + iconName + ".png")
-   }
-}
-
-
-//////////////////////
-//Getters and Setters
-//////////////////////
-
-function getConnectionBoxFromSlug(slug){
-  if ($('div.user_presence[slug=' + slug + ']').length > 0){
-    return ($('div.user_presence[slug=' + slug + ']'))[0];
-  }  else {
-    return null;
-  }
-}
-
-function isSlugChatConnected(slug){
-  return $('div.user_presence[slug=' + slug + ']').attr("connected")=="true";
-}
-
-function existsSlugChatBox(slug){
-	return getChatBoxForSlug(slug)!=null;
-}
-
-function getConnectedSlugsLength(){
-  return $('div.user_presence[slug][connected="true"]').length;
-}
-
-function getAllSlugsLength(){
-	return $('div.user_presence[slug]').length;
-}
-
-function getDisconnectedSlugsLength(){
-   return $('div.user_presence[slug][connected="false"]').length;
-}
-
-function getAllSlugs(){
-	return getAllSlugsByChatConnectedState()[2];
-}
-
-function getAllConnectedSlugs(){
-  return getAllSlugsByChatConnectedState()[0];
-}
-
-function getAllDisconnectedSlugs(){
-  return getAllSlugsByChatConnectedState()[1];
-}
-
-function getAllSlugsByChatConnectedState(){
-  var onlineSlugs=[];
-	var offlineSlugs=[];
-	var allSlugs=[];
-  var connectionBoxes = $('div.user_presence[slug]');
-  $.each(connectionBoxes, function(index, value) {
-    if($(value).attr("connected")=="true"){
-        onlineSlugs.push($(value).attr("slug"))
-    } else {
-				offlineSlugs.push($(value).attr("slug"))
-		}
-		allSlugs.push($(value).attr("slug"))
-  });
-  return [onlineSlugs,offlineSlugs,allSlugs]
-}
-
-
-
-////////////////////
-//Insert received message in chatbox
-////////////////////
-
-function afterReceivedChatMessage(from_slug,msg,msgID){
-  //Antiflood control
-  if (antifloodControl(from_slug,msg,msgID)){
-    return;
-  }
-	var from_name = getNameFromSlug(from_slug)
-  createBuddyChatBox(from_slug)
-  writeReceivedMessageOnChatWindow(from_name,from_slug,msg)
-}
-
-function afterReceivedGroupChatMessage(room_nick_jid,msg){
-	var from_slug = getSlugFromJid(room_nick_jid)
-  var from_name = getNickFromChatRoomJid(room_nick_jid)
 	
-	if(!(existsSlugChatBox(from_slug))){
-		createGroupChatBox(from_slug,true)
+	////////////////////
+	//Update connected users of MainChatBox
+	////////////////////
+	
+	var updateConnectedUsersOfMainChatBox = function(){
+	  if(PRESENCE.WINDOW.getMainChatBox()!=null){
+	    if(PRESENCE.XMPPClient.isUserConnected()){
+	      var connectedUsers = getConnectedSlugsLength();
+	      PRESENCE.WINDOW.changeMainChatBoxHeaderTitle( I18n.t('chat.title') + " (" + connectedUsers + ")");
+	      PRESENCE.WINDOW.changeMainChatBoxHeight(PRESENCE.WINDOW.getChatBoxHeightRequiredForConnectionBoxes());
+	    } else {
+	      if(PRESENCE.XMPPClient.isFirstConnection()){
+	        changeChatHeaderTitle(I18n.t('chat.connecting'))
+	      } else {
+	        changeChatHeaderTitle(I18n.t('chat.disconnected'))
+	      } 
+	    }
+	  }
 	}
-  writeReceivedMessageOnChatWindow(from_name,from_slug,msg)
-}
+	
+	var updateMainChatBoxAfterConnectionBoxChanges = function(){
+	  PRESENCE.WINDOW.changeMainChatBoxHeight(PRESENCE.WINDOW.getChatBoxHeightRequiredForConnectionBoxes());
+	  updateConnectedUsersOfMainChatBox();
+	}
+	
 
-function writeReceivedMessageOnChatWindow(from_name,from_slug,msg){
-  //Parse content before show it.
-  var content = getParsedContent(msg, false)
-  var headerMessage = getParsedName(from_name,false);
-  
-  //Write message in chatBox.        
-  getChatBoxForSlug(from_slug).chatbox("option", "boxManager").addMsg(headerMessage, content);
-  
-  //Rotate chatBoxes priority.
-  rotatePriority(from_slug);
-  
-  //Check for start blinkTitle.
-  blinkTitleOnMessage(from_name);
-  
-  //Check for play sound
-  if (mustPlaySoundForChatWindow(getChatBoxForSlug(from_slug))) {
-    playSound("onMessageAudio");
-  } 
-}
+  return {
+    init: init,
+		changeChatHeaderTitle : changeChatHeaderTitle,
+		changeSelectContactValue : changeSelectContactValue,
+		setStatusWidgetTitle  : setStatusWidgetTitle,
+		updateChatWindow : updateChatWindow,
+		updateInterfaceAfterUserDisconnect : updateInterfaceAfterUserDisconnect,
+		updateInterfaceAfterPresenceStanza : updateInterfaceAfterPresenceStanza,
+		setUserIconStatus : setUserIconStatus,
+		connectButtonTimerFunction : connectButtonTimerFunction,
+		getConnectionBoxFromSlug : getConnectionBoxFromSlug,
+		isSlugChatConnected : isSlugChatConnected,
+		existsSlugChatBox : existsSlugChatBox,
+		getAllConnectedSlugs : getAllConnectedSlugs,
+		afterReceivedChatMessage : afterReceivedChatMessage,
+		afterReceivedGroupChatMessage : afterReceivedGroupChatMessage,
+		writeReceivedMessageOnChatWindow : writeReceivedMessageOnChatWindow,
+		updateConnectedUsersOfMainChatBox : updateConnectedUsersOfMainChatBox
+  };
 
-
-////////////////////
-//Update connected users of MainChatBox
-////////////////////
-
-function updateConnectedUsersOfMainChatBox(){
-  if(mainChatBox!=null){
-		if(isUserConnected()){
-			var connectedUsers = getConnectedSlugsLength();
-      changeMainChatBoxHeaderTitle( I18n.t('chat.title') + " (" + connectedUsers + ")");
-      changeMainChatBoxHeight(getChatBoxHeightRequiredForConnectionBoxes());
-		} else {
-			if(afterFirstConnectionFlag){
-				changeChatHeaderTitle(I18n.t('chat.connecting'))
-			} else {
-				changeChatHeaderTitle(I18n.t('chat.disconnected'))
-			}	
-		}
-  }
-}
-
-function updateMainChatBoxAfterConnectionBoxChanges(){
-  changeMainChatBoxHeight(getChatBoxHeightRequiredForConnectionBoxes());
-  updateConnectedUsersOfMainChatBox();
-}
-
-
-
-////////////////////
-// Events
-////////////////////
-
-$(window).unload(function() {
-  storeChatData();
-  disconnectStrophe();
-});
+}) (PRESENCE, jQuery);

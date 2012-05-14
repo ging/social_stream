@@ -1,1072 +1,1191 @@
 ////////////////////
-//Global constants
-////////////////////
-var domain = '<%=SocialStream::Presence.domain%>';
-
-////////////////////
-//Hash tables
+//XMPP Client Module
 ////////////////////
 
-//Keys: Social Stream Chat Status
-//Value: Xmpp status
-var sstreamChatStatus = new Array();
-sstreamChatStatus['available'] = "chat";
-sstreamChatStatus['away'] = "away";
-sstreamChatStatus['autoaway'] = "away";
-sstreamChatStatus['dnd'] = "dnd";
 
-//Keys: Xmpp status
-//Value: Message associated with Xmpp Status
-var statusMessage = new Array();
-statusMessage[''] = "";
-statusMessage['chat'] = "";
-statusMessage['away'] = "Away";
-statusMessage['xa'] = "Away";
-statusMessage['dnd'] = "Busy";
-
-//Keys: Xmpp status
-//Value: Icon name (Same as Social Stream Status)
-var statusIcons = new Array();
-statusIcons[''] = "available";
-statusIcons['chat'] = "available";
-statusIcons['away'] = "away";
-statusIcons['xa'] = "away";
-statusIcons['dnd'] = "dnd";
-
-//Contacts information
+//Global variable: Contacts information
 var contactsInfo = new Array();
 //contactsInfo['slug'] = "[Object chatContact]";
 
-//Manage contact information
-function chatContact(domain,resource,client,version) {
-  this.domain=domain
-  this.resource=resource
-  this.client=client;
-	this.version=version;
+
+PRESENCE.XMPPClient = (function(P,$,undefined){
+
+	//XMPP Client Variables
+	var domain = '<%=SocialStream::Presence.domain%>';
 	
-	//Videochat params
-	//Sender: disconnected, negotiating , connecting , waiting, establishing, connected
-	//Receiver: disconnected , pending , establishing, connected
-	this.videoChatStatus = "disconnected";
-	this.session_id=null;
-	this.user_token=null;
-	this.guest_token=null;
-	this.session=null;
-	this.publisher=null;
+	////////////////////
+	//Hash tables
+	////////////////////
 	
-	//Game params
-	//Sender: disconnected, waiting, playing
-  //Receiver: disconnected , pending , playing
-	this.gameStatus="disconnected";
-	this.game=null;
-} 
-
-//Rooms information
-var roomsInfo = new Array();
-//roomsInfo['groupSlug'] = "[Object chatRoom]";
-
-//Manage room information
-function chatRoom() {
-  this.occupants=[];
-	this.joined = false;
-	this.affiliation = "none";
-	this.role = "none";
-	this.nick = getBaseNickFromUserName();
-}
-
-
-//IQsIDs
-var iqStanzaID = new Array();
-iqStanzaID['cinfo'] = "versionID";
-iqStanzaID['videochatRequest'] = "videochatRequestID";
-iqStanzaID['videochatRequestCancel'] = "videochatRequestCancelID";
-
-
-
-////////////////////
-//Connect functions
-////////////////////
-
-function connectToChat(user_jid,cookie,password){
+	//Keys: Social Stream Chat Status
+	//Value: Xmpp status
+	var sstreamChatStatus = new Array();
+	sstreamChatStatus['available'] = "chat";
+	sstreamChatStatus['away'] = "away";
+	sstreamChatStatus['autoaway'] = "away";
+	sstreamChatStatus['dnd'] = "dnd";
 	
-	if (isUserConnected()){
-    return true;
-  } 
+	//Keys: Xmpp status
+	//Value: Message associated with Xmpp Status
+	var statusMessage = new Array();
+	statusMessage[''] = "";
+	statusMessage['chat'] = "";
+	statusMessage['away'] = "Away";
+	statusMessage['xa'] = "Away";
+	statusMessage['dnd'] = "Busy";
+	
+	//Manage contact information
+	function chatContact(domain,resource,client,version) {
+	  this.domain=domain
+	  this.resource=resource
+	  this.client=client;
+	  this.version=version;
+	  
+	  //Videochat params
+	  //Sender: disconnected, negotiating , connecting , waiting, establishing, connected
+	  //Receiver: disconnected , pending , establishing, connected
+	  this.videoChatStatus = "disconnected";
+	  this.session_id=null;
+	  this.user_token=null;
+	  this.guest_token=null;
+	  this.session=null;
+	  this.publisher=null;
+	  
+	  //Game params
+	  //Sender: disconnected, waiting, playing
+	  //Receiver: disconnected , pending , playing
+	  this.gameStatus="disconnected";
+	  this.game=null;
+	} 
+	
+	//Rooms information
+	var roomsInfo = new Array();
+	//roomsInfo['groupSlug'] = "[Object chatRoom]";
+	
+	//Manage room information
+	function chatRoom() {
+	  this.occupants=[];
+	  this.joined = false;
+	  this.affiliation = "none";
+	  this.role = "none";
+	  this.nick = getBaseNickFromUserName();
+	}
+	
+
+	//IQsIDs
+	var iqStanzaID = new Array();
+	iqStanzaID['cinfo'] = "versionID";
+	iqStanzaID['videochatRequest'] = "videochatRequestID";
+	iqStanzaID['videochatRequestCancel'] = "videochatRequestCancelID";
+	
+	
+	var init = function(){  }
+	
+	
+	////////////////////
+	//Connect functions
+	////////////////////
+	
+	var connectToChat = function(user_jid,credential){
+	  
+	  if (isUserConnected()){
+	    return true;
+	  } 
+	    
+	  if (authByCookie()){
+	    if (connectToServerWithCookie(user_jid, credential)==false){
+	      PRESENCE.UIMANAGER.updateChatWindow();
+	    }
+	  } else {
+	    if (connectToServerWithPassword(user_jid,credential)==false){
+	      PRESENCE.UIMANAGER.updateChatWindow();
+	    }
+	  }       
+	}
+	
+	var isStropheConnected = function(){
+	  if((strophe_connection!=null)&&(strophe_connection.connected)){
+	      return true;
+	    } else {
+	      return false;
+	    }
+	}
+	
+	var isUserConnected = function(){
+	  return ((isStropheConnected()) && (userStatus!="offline") && (!disconnectionFlag));
+	}
+	
+	var connectToServerWithCookie = function(user_jid, cookie){ 
+	    try {
+	      strophe_connection = new Strophe.Connection(BOSH_SERVICE);
+	      strophe_connection.connect(user_jid, cookie, onConnect);
+	    } catch (err) {
+	      //"Handle errors"
+	      return false;
+	    }
+	    return true;
+	}
+	
+	//Password: Get from chatPassword param if exists, instead try to get from sessionStorage.
+	var connectToServerWithPassword = function(user_jid, chatPassword){
+	    
+	    //Get Password
+	    if ((chatPassword!=null)&&(chatPassword!="")){
+	      var password = chatPassword;
+	    } else if ((window.sessionStorage)&&(sessionStorage.getItem("ss_user_pass") != null)) {
+	      var password = sessionStorage.getItem("ss_user_pass");
+	    } else {
+	      return false;
+	    }
+	    
+	    try {
+	        //Connect actual user to the chat
+	        strophe_connection = new Strophe.Connection(BOSH_SERVICE);
+	        strophe_connection.connect(user_jid, password, onConnect);
+	    } catch (err) {
+	        //"Handle errors"
+	        return false;
+	    }
+	
+	    return true;
+	}
+	
+	
+	////////
+	//Auth Methods
+	///////
+	var authByCookie = function(){
+	  var authMethod = '<%= SocialStream::Presence.auth_method %>';
+	  return authMethod=="cookie";
+	}
+	
+	var authByPassword = function(){
+	  var authMethod = '<%= SocialStream::Presence.auth_method %>';
+	  return authMethod=="password";
+	}
+	
+	
+	////////////////////
+	//Stanza management using Strophe
+	////////////////////
+	
+	//Global variables
+	var userStatus;
+	var awayTimerPeriod = 60000;
+	var awayTime = 10*60000; //10 minutes
+	var awayCounter = 0;
+	var strophe_connection = null;
+	var reconnectAttempts = 3;
+	var awayTimer;
+	var reconnectTimer;
+	var disconnectionFlag = false;
+	var afterNewConnectionFlag = false;
+	var afterFirstConnectionFlag = true;
+	
+	
+	var onConnect = function(status) {
+	  
+	  //Status.ERROR An error has occurred
+	  //Status.CONNECTING The connection is currently being made
+	  //Status.CONNFAIL The connection attempt failed
+	  //Status.AUTHENTICATING The connection is authenticating
+	  //Status.AUTHFAIL The authentication attempt failed
+	  //Status.CONNECTED  The connection has succeeded
+	  //Status.DISCONNECTED The connection has been terminated
+	  //Status.DISCONNECTING  The connection is currently being terminated
+	  //Status.ATTACHED The connection has been attached
+	  
+	  PRESENCE.UTILITIES.log('Strophe onConnect callback call with status ' + status);
+	  
+	  if (status == Strophe.Status.ERROR){
+	    PRESENCE.UTILITIES.log('Strophe connection error');
+	    return;
+	  } 
+	  
+	   if (status == Strophe.Status.ATTACHED){
+	    PRESENCE.UTILITIES.log('Strophe connection attached');
+	    return;
+	  } 
+	  
+	  if (status == Strophe.Status.AUTHENTICATING ){
+	    PRESENCE.UTILITIES.log('Strophe connection AUTHENTICATING');
+	    return;
+	  }
+	  
+	  if (status == Strophe.Status.CONNECTING) {
+	    PRESENCE.UTILITIES.log('Strophe is connecting.');
+	    return;
+	  } 
+	  
+	  if (status == Strophe.Status.DISCONNECTING) {
+	    PRESENCE.UTILITIES.log('Strophe is disconnecting.');
+	    return;
+	  }
+	    
+	  if(typeof initialTimer != 'undefined'){
+	    clearTimeout(initialTimer);
+	  }
+	    
+	  if (status == Strophe.Status.CONNFAIL) {
+	    PRESENCE.UTILITIES.log('Strophe failed to connect.');
+	    reconnectTimer = setTimeout ("PRESENCE.XMPPClient.onReconnect()", 5000);
+	    disconnectionFlag = true;
+	  } else if (status == Strophe.Status.AUTHFAIL) {
+	    PRESENCE.UTILITIES.log('Strophe authentication fail.');
+	      if ((window.sessionStorage)&&(sessionStorage.getItem("ss_user_pass") != null)){
+	        sessionStorage.setItem("ss_user_pass",null);
+	      }
+	      disconnectionFlag = true;
+	  } else if (status == Strophe.Status.ERROR) {
+	    PRESENCE.UTILITIES.log('Strophe error.');
+	    disconnectionFlag = true;
+	  } else if (status == Strophe.Status.DISCONNECTED) {
+	    PRESENCE.UTILITIES.log('Strophe is disconnected.');
+	    disconnectionFlag = true;
+	    clearTimeout(awayTimer);
+	    PRESENCE.UIMANAGER.updateInterfaceAfterUserDisconnect();
+	    updateRoomsInfoAfterUserDisconnect();
+	    reconnectTimer = setTimeout ("PRESENCE.XMPPClient.onReconnect()", 5000);
+	  } else if (status == Strophe.Status.CONNECTED) {
+	    //AFTER CONNECT ACTIONS
+	    
+	    PRESENCE.UTILITIES.log('Strophe is connected.');
+	    
+	    clearTimeout(reconnectTimer);
+	    
+	    //addHandler:(callback, namespace to match, stanza name, stanza type, stanza id , stanza from, options)
+	    strophe_connection.addHandler(onMessage, null, 'message', 'chat', null,  null);
+	    strophe_connection.addHandler(onRoomMessage, null, 'message', 'groupchat', null,  null);
+	    strophe_connection.addHandler(onPresence, null, 'presence', null, null,  null); 
+	    strophe_connection.addHandler(onIQStanza,null, "iq", null, null);
+	
+	    disconnectionFlag = false;
+	    afterNewConnectionFlag = true;
+	    
+	    if(! userStatus){
+	      userStatus = PRESENCE.PERSISTENCE.getRestoreUserChatStatus();
+	    }
+	    if(userStatus=="offline"){
+	      userStatus="chat";
+	    }
+	    sendStatus(userStatus);
+	    
+	    awayTimer = setInterval("PRESENCE.XMPPClient.awayTimerFunction()", awayTimerPeriod);
+	  }
+	   
+	   PRESENCE.UIMANAGER.updateChatWindow();
+	}
+	
+	var onReconnect = function(){
+	  
+		return
 		
-	if (authByCookie()){
-    if (connectToServerWithCookie(user_jid, cookie)==false){
-      updateChatWindow();
-    }
-  } else {
-    if (connectToServerWithPassword(user_jid,password)==false){
-      updateChatWindow();
-    }
-  }       
-}
-
-function isStropheConnected(){
-  if((strophe_connection!=null)&&(strophe_connection.connected)){
-      return true;
-    } else {
-      return false;
-    }
-}
-
-function isUserConnected(){
-	return ((isStropheConnected()) && (userStatus!="offline") && (!disconnectionFlag));
-}
-
-function connectToServerWithCookie(user_jid, cookie){ 
-    try {
-      strophe_connection = new Strophe.Connection(BOSH_SERVICE);
-      strophe_connection.connect(user_jid, cookie, onConnect);
-    } catch (err) {
-      //"Handle errors"
-      return false;
-    }
-		return true;
-}
-
-//Password: Get from chatPassword param if exists, instead try to get from sessionStorage.
-function connectToServerWithPassword(user_jid, chatPassword){
-    
-    //Get Password
-    if ((chatPassword!=null)&&(chatPassword!="")){
-      var password = chatPassword;
-    } else if ((window.sessionStorage)&&(sessionStorage.getItem("ss_user_pass") != null)) {
-      var password = sessionStorage.getItem("ss_user_pass");
-    } else {
-      return false;
-    }
-    
-    try {
-        //Connect actual user to the chat
-        strophe_connection = new Strophe.Connection(BOSH_SERVICE);
-        strophe_connection.connect(user_jid, password, onConnect);
-    } catch (err) {
-        //"Handle errors"
-        return false;
-    }
-
-    return true;
-}
-
-
-////////
-//Auth Methods
-///////
-function authByCookie(){
-  var authMethod = '<%= SocialStream::Presence.auth_method %>';
-  return authMethod=="cookie";
-}
-
-function authByPassword(){
-  var authMethod = '<%= SocialStream::Presence.auth_method %>';
-  return authMethod=="password";
-}
-
-
-////////////////////
-//Stanza management using Strophe
-////////////////////
-
-//Global variables
-var userStatus;
-var awayTimerPeriod = 60000;
-var awayTime = 10*60000; //10 minutes
-var awayCounter = 0;
-var strophe_connection = null;
-var reconnectAttempts = 3;
-var awayTimer;
-var reconnectTimer;
-var disconnectionFlag = false;
-var afterNewConnectionFlag = false;
-var afterFirstConnectionFlag = true;
-
-
-function onConnect(status) {
-  
-  //Status.ERROR An error has occurred
-  //Status.CONNECTING The connection is currently being made
-  //Status.CONNFAIL The connection attempt failed
-  //Status.AUTHENTICATING The connection is authenticating
-  //Status.AUTHFAIL The authentication attempt failed
-  //Status.CONNECTED  The connection has succeeded
-  //Status.DISCONNECTED The connection has been terminated
-  //Status.DISCONNECTING  The connection is currently being terminated
-  //Status.ATTACHED The connection has been attached
-  
-  log('Strophe onConnect callback call with status ' + status);
-  
-  if (status == Strophe.Status.ERROR){
-    log('Strophe connection error');
-    return;
-  } 
-	
-	 if (status == Strophe.Status.ATTACHED){
-    log('Strophe connection attached');
-    return;
-  } 
-  
-  if (status == Strophe.Status.AUTHENTICATING ){
-    log('Strophe connection AUTHENTICATING');
-    return;
-  }
-  
-  if (status == Strophe.Status.CONNECTING) {
-    log('Strophe is connecting.');
-    return;
-  } 
-  
-  if (status == Strophe.Status.DISCONNECTING) {
-    log('Strophe is disconnecting.');
-    return;
-  }
-    
-	if(typeof initialTimer != 'undefined'){
-		clearTimeout(initialTimer);
-	}
-    
-  if (status == Strophe.Status.CONNFAIL) {
-    log('Strophe failed to connect.');
-    reconnectTimer = setTimeout ("onReconnect()", 5000);
-    disconnectionFlag = true;
-  } else if (status == Strophe.Status.AUTHFAIL) {
-    log('Strophe authentication fail.');
-      if ((window.sessionStorage)&&(sessionStorage.getItem("ss_user_pass") != null)){
-        sessionStorage.setItem("ss_user_pass",null);
-      }
-      disconnectionFlag = true;
-  } else if (status == Strophe.Status.ERROR) {
-    log('Strophe error.');
-    disconnectionFlag = true;
-  } else if (status == Strophe.Status.DISCONNECTED) {
-    log('Strophe is disconnected.');
-    disconnectionFlag = true;
-    clearTimeout(awayTimer);
-    updateInterfaceAfterUserDisconnect();
-		updateRoomsInfoAfterUserDisconnect();
-    reconnectTimer = setTimeout ("onReconnect()", 5000);
-  } else if (status == Strophe.Status.CONNECTED) {
-    //AFTER CONNECT ACTIONS
-    
-    log('Strophe is connected.');
-		
-    clearTimeout(reconnectTimer);
-		
-    //addHandler:(callback, namespace to match, stanza name, stanza type, stanza id , stanza from, options)
-    strophe_connection.addHandler(onMessage, null, 'message', 'chat', null,  null);
-		strophe_connection.addHandler(onRoomMessage, null, 'message', 'groupchat', null,  null);
-    strophe_connection.addHandler(onPresence, null, 'presence', null, null,  null); 
-		strophe_connection.addHandler(onIQStanza,null, "iq", null, null);
-
-    disconnectionFlag = false;
-    afterNewConnectionFlag = true;
-		
-		if(! userStatus){
-			userStatus = getRestoreUserChatStatus();
-		}
-		if(userStatus=="offline"){
-			userStatus="chat";
-		}
-    sendStatus(userStatus);
-		
-    awayTimer = setInterval("awayTimerFunction()", awayTimerPeriod);
-  }
-	 
-	 updateChatWindow();
-}
-
-function onReconnect(){
-  
-  if ((!isStropheConnected())&&(userStatus!="offline")) {
-    
-    if (reconnectAttempts>0) {
-      reconnectAttempts--;
-      
-			changeChatHeaderTitle(I18n.t('chat.reconnecting'))
-			
-			connectToChat(user_jid,cookie,null);
-			
-      reconnectTimer = setTimeout ("onReconnect()", 9000);
-			
-    } else {
-			changeChatHeaderTitle(I18n.t('chat.unableconnect'))
-      //Notify issue to Rails App Server?
-    }
-    
-  }
-}
-
-function disconnectStrophe(){
-  userStatus = "offline";
-  setStatusWidgetTitle("offline");
-  
-  if(isStropheConnected()){
-		
-		//Leave from rooms before disconnect
-//		if(roomsInfo){
-//			for(var roomName in roomsInfo){
-//				if(roomsInfo[roomName].joined){
-//					leaveRoom(roomName);
-//				}
-//			}
-//		}
-		
-    strophe_connection.send($pres({type: "unavailable"}).tree()); 
-    strophe_connection.disconnect();
-  } 
-}
-
-
-////////
-//Manage Message stanzas
-///////
-
-//Chat messages handler
-function onMessage(msg) {
-    var from = msg.getAttribute('from');
-    var type = msg.getAttribute('type');
-    var elems = msg.getElementsByTagName('body');
-
-    if (type == "chat" && elems.length > 0) {
-      var body = elems[0];
-			var msg = Strophe.getText(body);
-			var from_slug = getSlugFromJid(from)
-			
-			if(isChatRoomJid(from)){
-				return true
-			} else {     
-        var from_slug = getSlugFromJid(from)
-        afterReceivedChatMessage(from_slug,msg,null)
-			}
-    }
-
-    // we must return true to keep the handler alive.  
-    // returning false would remove it after it finishes.
-    return true;
-}
-
-
-////////
-//Manage Presence stanzas
-///////
-function onPresence(presence) {
-  if (isChatRoomJid($(presence).attr('from'))){
-    return onRoomPresence(presence);
-  } else {
-		return onBuddyPresence(presence);
-	}
-}
-
-function onBuddyPresence(presence){
-  var ptype = $(presence).attr('type');
-      
-  switch (ptype){
-    case undefined:
-     processAvailablePresenceStanza(presence)
-     break;
-    case "available":
-      processAvailablePresenceStanza(presence)
-      break;
-    case "unavailable":
-      processUnavailablePresenceStanza(presence)
-      break;
-    default : 
-      //Stanza type not recognize
-      processAvailablePresenceStanza(presence)
-  }
-	
-	return true;
-}
-
-function processAvailablePresenceStanza(presence){
-  var from = $(presence).attr('from');
-  var slug = from.split("@")[0];
-	
-  if (slug != user_slug) {
-		storeContactInformation(presence);
-    if (getConnectionBoxFromSlug(slug)!=null){
-      var status = $(presence).find('show').text(); 
-      setUserIconStatus(slug,status);
-			updateInterfaceAfterPresenceStanza(slug,true);
-    } else {
-			if(! isAdminSlug(slug)){
-				updateChatWindow();
-			}
-    }
-  }   
-}
-
-function processUnavailablePresenceStanza(presence){
-  var from = $(presence).attr('from');
-  var slug = from.split("@")[0];
-	
-  if (slug != user_slug) {
-    if (getConnectionBoxFromSlug(slug)!=null){
-			updateInterfaceAfterPresenceStanza(slug,false)
-			PRESENCE.GAME.userDisconnected(slug)
-    }
-  }
-}
-
-function storeContactInformation(stanza){
-	var from = $(stanza).attr('from');
-	var split = from.split("@");
-	var slug = split[0];
-  var domain = split[1].split("/")[0];
-  var resource = split[1].split("/")[1];
-		
-	if (!(slug in contactsInfo)) {
-		var contact = new chatContact(domain,resource,null,null);
-		contactsInfo[slug]=contact;
-  } else {
-		contactsInfo[slug].domain = domain;
-		contactsInfo[slug].resource = resource;
-	}
-}
-
-function storeRoomInformation(roomName){
-  if (!(roomName in roomsInfo)) {
-    var room = new chatRoom();
-    roomsInfo[roomName]=room;
-  }
-}
-
-
-////////
-//Manage IQ stanzas
-///////
-
-///////
-//RECEIVED STANZAS
-///////
-function onIQStanza(iq){
-	var type = iq.getAttribute("type");
-	var from = iq.getAttribute("from");
-	var slug = from.split("@")[0];
-
-	if (slug == user_slug) {
-		return true;
-  }
-	
-	if(type=="get"){
-		return handleGetIQStanza(iq,from,slug);
-	} else if(type="result"){
-		return handleResultIQStanza(iq,from,slug);
+	  if ((!isStropheConnected())&&(userStatus!="offline")) {
+	    
+	    if (reconnectAttempts>0) {
+	      reconnectAttempts--;
+	      
+	      PRESENCE.UIMANAGER.changeChatHeaderTitle(I18n.t('chat.reconnecting'))
+	      
+	      connectToChat(user_jid,cookie,null);
+	      
+	      reconnectTimer = setTimeout ("PRESENCE.XMPPClient.onReconnect()", 9000);
+	      
+	    } else {
+	      PRESENCE.UIMANAGER.changeChatHeaderTitle(I18n.t('chat.unableconnect'))
+	      //Notify issue to Rails App Server?
+	    }
+	    
+	  }
 	}
 	
-	return true;
-}
-
-///////
-//RECEIVED STANZAS: GET
-///////
-function handleGetIQStanza(iq,jid,slug){
-	
-	var iqID = iq.getAttribute("id");
-	
-	//Case 1: Request client info
-  var queryElements = iq.getElementsByTagName('query');
-
-  if (queryElements.length > 0) {
-    var query = queryElements[0];
-    var xmlns_type = query.getAttribute("xmlns");
-    
-    if( xmlns_type == "jabber:iq:version"){
-      sendIQStanzaWithClientInfo(jid,iqID);
-      return true;
-    }
-    
-    if (xmlns_type == "jabber:iq:last") {
-      sendIQStanzaLast(jid,iqID);
-      return true;
-    }
-  }
-	
-	//Case 2: Request videochat
-	if(iqID==iqStanzaID['videochatRequest']){
-		handleGetVideochatIQStanza(jid,iqID,iq,slug);
-		return true;
+	var disconnect = function(){
+	  userStatus = "offline";
+	  PRESENCE.UIMANAGER.setStatusWidgetTitle("offline");
+	  
+	  if(isStropheConnected()){
+	    
+	    //Leave from rooms before disconnect
+	//    if(roomsInfo){
+	//      for(var roomName in roomsInfo){
+	//        if(roomsInfo[roomName].joined){
+	//          leaveRoom(roomName);
+	//        }
+	//      }
+	//    }
+	    
+	    strophe_connection.send($pres({type: "unavailable"}).tree()); 
+	    strophe_connection.disconnect();
+	  } 
 	}
 	
-  //Case 3: Default behaviour
-  sendIQEmpty(jid,iqID);
-
-  return true;
-}
-
-function handleGetVideochatIQStanza(jid,iqID,iq,slug){
-	storeContactInformation(iq);
-	var queryTag = iq.getElementsByTagName('query');
-  
-  if (queryTag.length > 0) {
-    var queryElement = queryTag[0];
-    var session_id = queryElement.getElementsByTagName('session_id');
-    var token = queryElement.getElementsByTagName('token');
-    
-    if((session_id.length == 1)&&(token.length == 1)){
-			contactsInfo[slug].session_id =  $(session_id).text();
-      contactsInfo[slug].user_token = $(token).text(); 
-			updateInterfaceAfterVideoRequestReceived(slug);
-			return;
-    }
-  }
 	
-	//Send empty stanza
-	sendIQEmpty(jid,iqID);
-}
-
-
-///////
-//RECEIVED STANZAS: RESULT
-///////
-function handleResultIQStanza(iq,jid,slug){
-  var iqID = iq.getAttribute("id");
+	  
+	////////////////////
+	//Away Timer Management
+	////////////////////
 	
-	if (iqID==iqStanzaID['cinfo']){
-    return handleIQResultWithClientInfo(iq,slug);
+	var awayTimerFunction = function(){
+	    awayCounter++;
+	    if (awayCounter > (awayTime/awayTimerPeriod)){
+	      if ((userStatus != "dnd")&&(userStatus != "away")) {
+	        userStatus = "autoaway";
+	        sendStatus(userStatus);
+	      }
+	      clearTimeout(awayTimer);
+	    }
 	}
 	
-	if (iqID==iqStanzaID['videochatRequest']){
-    return handleIQResultFromVideochatRequest(iq,slug);
-  }
-	
-  if(iqID==iqStanzaID['videochatRequestCancel']){
-     return handleIQResultFromVideochatRequestCancel(iq,slug);
-  }
-	
-	//Case: Default behaviour
-	return true;
-}
-
-
-function handleIQResultWithClientInfo(iq,slug){
-  var queryTag = iq.getElementsByTagName('query');
-  
-  if (queryTag.length > 0) {
-    var queryElement = queryTag[0];
-    var name = queryElement.getElementsByTagName('name');
-    var version = queryElement.getElementsByTagName('version');
-    
-    if((name.length == 1)&&(version.length == 1)){
-      var clientValue =  $(name).text();
-      var versionValue = $(version).text();
-      
-      if (!(slug in contactsInfo)) {
-        var contact = new chatContact(null,null,clientValue,versionValue);
-        contactsInfo[slug]=contact;
-      } else {
-        contactsInfo[slug].client = clientValue;
-        contactsInfo[slug].version = versionValue;
-      }
-      clientInfoReceivedTrigger(slug);
-    }
-  }
-	
-	return true;
-}
-
-
-function handleIQResultFromVideochatRequest(iq,slug){
-	
-	var queryTag = iq.getElementsByTagName('query');
-  
-  if (queryTag.length > 0) {
-    var queryElement = queryTag[0];
-    var response = queryElement.getElementsByTagName('response');
-    
-    if(response.length == 1){
-      receiveVideoChatResponseFromUser(slug,$(response).text());
-			return true;
-    }
-  }
-	
-  receiveVideoChatResponseFromUser(slug,"Bad response");
-	return true;
-}
-
-
-function handleIQResultFromVideochatRequestCancel(iq,slug){
-  
-  var queryTag = iq.getElementsByTagName('query');
-  
-  if (queryTag.length > 0) {
-    var queryElement = queryTag[0];
-    var response = queryElement.getElementsByTagName('response');
-    
-    if(response.length == 1){
-      receiveVideoChatCancelationFromUser(slug);
-      return true;
-    }
-  }
-  
-  return true;
-}
-
-
-///////
-//SEND STANZAS: GET
-///////
-function sendIQStanzaForRequestClientInfo(slug){
-  if (slug in contactsInfo) {
-    var domain = contactsInfo[slug].domain;
-    var resource = contactsInfo[slug].resource;
-    var jid=slug+"@"+domain+"/"+resource
-    
-    var iq = $iq({to: jid, type: "get", id: iqStanzaID['cinfo'], xmlns: "jabber:iq:version"})
-    .c("query", {xmlns: "jabber:iq:version"});
-    strophe_connection.sendIQ(iq);
-  }
-}
-
-function sendIQStanzaToRequestVideochat(slug){
-  if (slug in contactsInfo) {
-    var jid=slug+"@"+contactsInfo[slug].domain+"/"+contactsInfo[slug].resource;
-    
-    var iq = $iq({to: jid, type: "get", id: iqStanzaID['videochatRequest']})
-		.c("query", {xmlns: "urn:ietf:params:xml:ns:xmpp-stanzas"})
-		.c("session_id").t(contactsInfo[slug].session_id).up()
-    .c("token").t(contactsInfo[slug].guest_token);
-    strophe_connection.sendIQ(iq);
-  }
-}
-
-
-///////
-//SEND STANZAS: RESULT
-///////
-function sendIQStanzaWithClientInfo(jid,iqID){
-	var client = "Social Stream XMPP Client"
-	var version = getJavascriptXMPPClientName();
-	var iq = $iq({to: jid, type: "result", id: iqID})
-  .c("query", {xmlns: "jabber:iq:version"}).c("name").t(client).up().c("version").t(version);
-	strophe_connection.sendIQ(iq);
-}
-
-function getJavascriptXMPPClientName(){
-	return '<%=SocialStream::Presence::VERSION%>';
-}
-
-function sendIQStanzaLast(jid,iqID){ 
-  var iq = $iq({to: jid, type: "result", id: iqID})
-  .c("query", {xmlns: "jabber:iq:last", seconds: "0"});
-  strophe_connection.sendIQ(iq);
-}
-
-function sendIQEmpty(jid,iqID){
-  var iq = $iq({to: jid, type: "result", id: iqID})
-  strophe_connection.sendIQ(iq);
-}
-
-function sendIQStanzaToResponseVideochat(slug,result){
-  if (slug in contactsInfo) {
-    var jid=slug+"@"+contactsInfo[slug].domain+"/"+contactsInfo[slug].resource;
-    var iq = $iq({to: jid, type: "result", id: iqStanzaID['videochatRequest']})
-    .c("query", {xmlns: "urn:ietf:params:xml:ns:xmpp-stanzas"})
-    .c("response").t(result);
-    strophe_connection.sendIQ(iq);
-  }
-}
-
-function sendIQStanzaToCancelVideochat(slug){
-  if (slug in contactsInfo) {
-    var jid=slug+"@"+contactsInfo[slug].domain+"/"+contactsInfo[slug].resource;
-    var iq = $iq({to: jid, type: "result", id: iqStanzaID['videochatRequestCancel']})
-    .c("query", {xmlns: "urn:ietf:params:xml:ns:xmpp-stanzas"})
-    .c("response").t("cancel");
-    strophe_connection.sendIQ(iq);
-  }
-}
-
-
-////////
-//Send Message stanzas
-///////
-function sendChatMessage(guest_slug,msg){
-	rotatePriority(guest_slug);
-	if (isSlugGroup(guest_slug)){
-		var guest_jid = getRoomJidFromRoomName(guest_slug)
-		return sendGroupMessageToRoom(guest_jid,msg);
-	} else {
-		var headerMessage = getParsedName(user_name,true);                               
-    getChatBoxForSlug(guest_slug).chatbox("option", "boxManager").addMsg(headerMessage, getParsedContent(msg,true));
-		var guest_jid = getJidFromSlug(guest_slug)
-		return sendChatMessageToBuddy(guest_jid,msg);
-	}
-}
-
-function sendChatMessageToBuddy(to,text){
-	var from = user_jid
-  var type = "chat";
-  var body= $build("body");
-  body.t(text);
-  var message = $msg({to: to, from: from, type: 'chat'}).cnode(body.tree());
-  strophe_connection.send(message.tree());      
-  restartAwayTimer();
-  return true;
-}
-
-
-////////
-//Send Presence stanzas with status
-///////
-function sendStatus(status){
-	
-	  if((status in sstreamChatStatus)){
-      status = sstreamChatStatus[status];
-    }
-	
-    if (status in statusMessage){
-      //Send status to the XMPP Server
-      var pres = $pres()
-      .c('status')
-      .t(statusMessage[status]).up() //Status message
-      .c('show')
-      .t(status);
-       strophe_connection.send(pres.tree());
-       setStatusWidgetTitle(status);
-    }
-}
-
-
-////////
-//MUC management
-///////
-
-var muc_host = "conference";
-
-function joinRoom(roomName){
-		return strophe_connection.muc.join(getRoomJidFromRoomName(roomName), getRoomNickForRoom(roomName), null, null, null, null)
-}
-
-function leaveRoom(roomName){
-  return strophe_connection.muc.leave(getRoomJidFromRoomName(roomName), getRoomNickForRoom(roomName), null, null) 
-}
-
-function sendGroupMessageToRoomWithName(roomName,msg){
-	return sendMessageToRoom(getRoomJidFromRoomName(roomName),msg)
-}
-
-function sendGroupMessageToRoom(roomJid,msg){
-  return strophe_connection.muc.message(roomJid, null, msg, null, "groupchat")
-}
-
-function sendPrivateMessageToRoomUser(roomName,userNick,msg){
-  return strophe_connection.muc.message(getRoomJidFromRoomName(roomName), userNick, msg, null, "chat")
-}
-
-function queryChatRoomOccupants(roomName){
-	return strophe_connection.muc.queryOccupants(getRoomJidFromRoomName(roomName), queryChatRoomOccupantsSuccess, queryChatRoomOccupantsFail)
-}
-
-function queryChatRoomOccupantsSuccess(iqResponse){
-  handleIQResultFromMucOccupantsRequest(iqResponse);
-	return true;
-}
-
-function queryChatRoomOccupantsFail(){
-  return true;
-}
-
-function handleIQResultFromMucOccupantsRequest(iq){
-	var from = $(iq).attr('from');
-  var room_slug = getSlugFromJid(from)
-	var queryTag = iq.getElementsByTagName('query');
-  
-  if (queryTag.length > 0) {
-    var queryElement = queryTag[0];
-		var occupants = queryElement.getElementsByTagName('item');
-		$.each(occupants, function(index, value) {
-			//List all occupants
-			var nick = $(value).attr("name");
-			if(roomsInfo[room_slug].occupants.indexOf(nick)==-1){
-				roomsInfo[room_slug].occupants.push(nick)
-				addNickToNotificationInGroup(room_slug,nick)
-			}
-    });
-  }
-}
-
-function accessRoom(roomName,open){
-	storeRoomInformation(roomName)
-	if(roomsInfo[roomName].joined==false){
-		joinRoom(roomName)
-		queryChatRoomOccupants(roomName)
-	}
-	if(!existsSlugChatBox(roomName)){
-		createGroupChatBox(roomName,open)
-	}
-	return true
-}
-
-function resetRoomConfig(roomName){
-	storeRoomInformation(roomName)
-	var room = new chatRoom()
-  roomsInfo[roomName]=room
-}
-
-function updateRoomsInfoAfterUserDisconnect(){
-  $.each(getAllSlugsWithVisibleGroupBoxes(), function(index, value) {
-    resetRoomConfig(value)
-		initialNotificationInGroup(value,I18n.t('chat.muc.offline'))
-  });
-}
-
-function getRoomJidFromRoomName(roomName){
-  return roomName + "@" + muc_host + "." + domain;
-}
-
-function getRoomNickForRoom(roomName){
-	if(roomName in roomsInfo){
-		return roomsInfo[roomName].nick;
-	} else {
-		return getBaseNickFromUserName();
-	}
-}
-
-function getBaseNickFromUserName(){
-	return user_name.split(" ")[0];
-}
-
-function changeRoomNickNameAndJoinAgain(roomName){
-	var old_nick = getRoomNickForRoom(roomName)
-	
-	if(old_nick.split("_").length > 4){
-		//Bucle prevention...
-		return false;
+	var autochangeStatusIfAutoAway = function(){
+	    if (userStatus == "autoaway"){
+	      userStatus = "available";
+	      sendStatus(userStatus);
+	    }
 	}
 	
-	storeRoomInformation(roomName)
-	roomsInfo[roomName].nick = old_nick + "_"
-	joinRoom(roomName)
-	return true;
-}
+	var restartAwayTimer = function(){   
+	    if (awayCounter > (awayTime/awayTimerPeriod)){
+	      awayTimer = setInterval("PRESENCE.XMPPClient.awayTimerFunction()", awayTimerPeriod);
+	      autochangeStatusIfAutoAway();
+	    }  
+	    awayCounter = 0;    
+	}
+	
+	
+	////////
+	//Manage Message stanzas
+	///////
+	
+	//Chat messages handler
+	var onMessage = function(msg) {
 
-
-////////
-//MUC Stanzas
-///////
-
-//MUC Messages
-function onRoomMessage(msg) {
-	//from=roomSlug@conference.domain/from_slug
-  var from = msg.getAttribute('from');
-  var type = msg.getAttribute('type');
-  var elems = msg.getElementsByTagName('body');
-  
-  if (type == "groupchat" && elems.length > 0) {
-    var body = elems[0];
-		var user_nick = getNickFromChatRoomJid(from)
-	  var msg = Strophe.getText(body);
-		afterReceivedGroupChatMessage(from,msg)
-  }
-  return true;
-}
-
-
-//MUC Presence stanzas
-function onRoomPresence(presence) {
-	var from = $(presence).attr('from');
-	var to = $(presence).attr('to')
-	var room_slug = getSlugFromJid(from);
-  var nick = getNickFromChatRoomJid(from)
-	var ptype = $(presence).attr('type')
-		
-	//Join or Leave room stanzas of self user
-	if((nick == getRoomNickForRoom(room_slug))&&(getSlugFromJid(to) == user_slug)){
+	    var from = msg.getAttribute('from');
+	    var type = msg.getAttribute('type');
+	    var elems = msg.getElementsByTagName('body');
+	
+	    if (type == "chat" && elems.length > 0) {
+	      var body = elems[0];
+	      var msg = Strophe.getText(body);
+	      var from_slug = getSlugFromJid(from)
+	      
+	      if(isChatRoomJid(from)){
+	        return true
+	      } else {     
+	        var from_slug = getSlugFromJid(from)
+	        PRESENCE.UIMANAGER.afterReceivedChatMessage(from_slug,msg,null)
+	      }
+	    }
+	
+	    // we must return true to keep the handler alive.  
+	    // returning false would remove it after it finishes.
+	    return true;
+	}
+	
+	
+	////////
+	//Manage Presence stanzas
+	///////
+	var onPresence = function(presence) {
+	  if (isChatRoomJid($(presence).attr('from'))){
+	    return onRoomPresence(presence);
+	  } else {
+	    return onBuddyPresence(presence);
+	  }
+	}
+	
+	var onBuddyPresence = function(presence){
+	  var ptype = $(presence).attr('type');
+	      
 	  switch (ptype){
 	    case undefined:
-	      processJoinRoomPresenceStanza(presence);
-	      break;
+	     processAvailablePresenceStanza(presence)
+	     break;
 	    case "available":
-	      processJoinRoomPresenceStanza(presence);
+	      processAvailablePresenceStanza(presence)
 	      break;
 	    case "unavailable":
-	      processLeaveRoomPresenceStanza(presence);
+	      processUnavailablePresenceStanza(presence)
 	      break;
-			case "error":
-        processJoinErrorRoomPresenceStanza(presence);
-        break;
-	   }
-		return true;
-  }
-	
-	
-	//Rest of stanzas
-	switch (ptype){
-	 	case undefined:
-		  processAvailableRoomPresenceStanza(presence)
-      break;
-    case "available":
-		  processAvailableRoomPresenceStanza(presence)
-      break;
-    case "unavailable":
-		  processUnavailableRoomPresenceStanza(presence)
-      break;
-    default : 
-      //Stanza type not recognize
-      return true
-  }
-	
-  return true
-}
-
-
-function processJoinRoomPresenceStanza(presence){
-  var from = $(presence).attr('from');
-  var room_slug = getSlugFromJid(from);
-	storeRoomInformation(room_slug);
-	
-  var xElements = presence.getElementsByTagName('x');
-
-  if (xElements.length == 1) {
-    var xElement = xElements[0];
-    var items = xElement.getElementsByTagName('item');
-    
-    $.each(items, function(index, value) {
-			var role = $(value).attr("role")
-			var affiliation = $(value).attr("affiliation")
-			
-			roomsInfo[room_slug].affiliation = affiliation
-			roomsInfo[room_slug].role = role
-			if(roomsInfo[room_slug].joined == false){
-        roomsInfo[room_slug].joined = true
-        changeInitialNotificationInGroup(room_slug,I18n.t('chat.muc.occupants'))
-      }
-    });
-  }
-}
-
-function processLeaveRoomPresenceStanza(presence){
-  var from = $(presence).attr('from');
-  var room_slug = getSlugFromJid(from);
-  resetRoomConfig(room_slug)
-  changeInitialNotificationInGroup(room_slug,"")
-}
-
-function processJoinErrorRoomPresenceStanza(presence){
-  var from = $(presence).attr('from')
-  var room_slug = getSlugFromJid(from)
-	var errorMsg = "Error";
-	
-  var eElements = presence.getElementsByTagName('error')
-  if (eElements.length == 1) {
-    var error = eElements[0];
-		var code = $(error).attr("code")
-		var type = $(error).attr("type")
-		errorMsg = errorMsg + " with code:" + code + " and type:" + type
-    var textElements = error.getElementsByTagName('text') 
-    if (textElements.length == 1) {
-		  var text = $(textElements[0]).text()
-			errorMsg = errorMsg + "\n" + text
+	    default : 
+	      //Stanza type not recognize
+	      processAvailablePresenceStanza(presence)
 	  }
+	  
+	  return true;
+	}
+	
+	var processAvailablePresenceStanza = function(presence){
+	  var from = $(presence).attr('from');
+	  var slug = from.split("@")[0];
+	  
+	  if (slug != user_slug) {
+	    storeContactInformation(presence);
+	    if (PRESENCE.UIMANAGER.getConnectionBoxFromSlug(slug)!=null){
+	      var status = $(presence).find('show').text(); 
+	      PRESENCE.UIMANAGER.setUserIconStatus(slug,status);
+	      PRESENCE.UIMANAGER.updateInterfaceAfterPresenceStanza(slug,true);
+	    } else {
+	      if(! PRESENCE.UTILITIES.isAdminSlug(slug)){
+	        PRESENCE.UIMANAGER.updateChatWindow();
+	      }
+	    }
+	  }   
+	}
+	
+	var processUnavailablePresenceStanza = function(presence){
+	  var from = $(presence).attr('from');
+	  var slug = from.split("@")[0];
+	  
+	  if (slug != user_slug) {
+	    if (PRESENCE.UIMANAGER.getConnectionBoxFromSlug(slug)!=null){
+	      PRESENCE.UIMANAGER.updateInterfaceAfterPresenceStanza(slug,false)
+	      PRESENCE.GAME.userDisconnected(slug)
+	    }
+	  }
+	}
+	
+	var storeContactInformation = function(stanza){
+	  var from = $(stanza).attr('from');
+	  var split = from.split("@");
+	  var slug = split[0];
+	  var domain = split[1].split("/")[0];
+	  var resource = split[1].split("/")[1];
+	    
+	  if (!(slug in contactsInfo)) {
+	    var contact = new chatContact(domain,resource,null,null);
+	    contactsInfo[slug]=contact;
+	  } else {
+	    contactsInfo[slug].domain = domain;
+	    contactsInfo[slug].resource = resource;
+	  }
+	}
+	
+	var storeRoomInformation = function(roomName){
+	  if (!(roomName in roomsInfo)) {
+	    var room = new chatRoom();
+	    roomsInfo[roomName]=room;
+	  }
+	}
+	
+	
+	////////
+	//Manage IQ stanzas
+	///////
+	
+	///////
+	//RECEIVED STANZAS
+	///////
+	var onIQStanza = function(iq){
+	  var type = iq.getAttribute("type");
+	  var from = iq.getAttribute("from");
+	  var slug = from.split("@")[0];
+	
+	  if (slug == user_slug) {
+	    return true;
+	  }
+	  
+	  if(type=="get"){
+	    return handleGetIQStanza(iq,from,slug);
+	  } else if(type="result"){
+	    return handleResultIQStanza(iq,from,slug);
+	  }
+	  
+	  return true;
+	}
+	
+	///////
+	//RECEIVED STANZAS: GET
+	///////
+	var handleGetIQStanza = function(iq,jid,slug){
+	  
+	  var iqID = iq.getAttribute("id");
+	  
+	  //Case 1: Request client info
+	  var queryElements = iq.getElementsByTagName('query');
+	
+	  if (queryElements.length > 0) {
+	    var query = queryElements[0];
+	    var xmlns_type = query.getAttribute("xmlns");
+	    
+	    if( xmlns_type == "jabber:iq:version"){
+	      sendIQStanzaWithClientInfo(jid,iqID);
+	      return true;
+	    }
+	    
+	    if (xmlns_type == "jabber:iq:last") {
+	      sendIQStanzaLast(jid,iqID);
+	      return true;
+	    }
+	  }
+	  
+	  //Case 2: Request videochat
+	  if(iqID==iqStanzaID['videochatRequest']){
+	    handleGetVideochatIQStanza(jid,iqID,iq,slug);
+	    return true;
+	  }
+	  
+	  //Case 3: Default behaviour
+	  sendIQEmpty(jid,iqID);
+	
+	  return true;
+	}
+	
+	var handleGetVideochatIQStanza = function(jid,iqID,iq,slug){
+	  storeContactInformation(iq);
+	  var queryTag = iq.getElementsByTagName('query');
+	  
+	  if (queryTag.length > 0) {
+	    var queryElement = queryTag[0];
+	    var session_id = queryElement.getElementsByTagName('session_id');
+	    var token = queryElement.getElementsByTagName('token');
+	    
+	    if((session_id.length == 1)&&(token.length == 1)){
+	      contactsInfo[slug].session_id =  $(session_id).text();
+	      contactsInfo[slug].user_token = $(token).text(); 
+	      PRESENCE.VIDEOCHAT.updateInterfaceAfterVideoRequestReceived(slug);
+	      return;
+	    }
+	  }
+	  
+	  //Send empty stanza
+	  sendIQEmpty(jid,iqID);
+	}
+	
+	
+	///////
+	//RECEIVED STANZAS: RESULT
+	///////
+	var handleResultIQStanza = function(iq,jid,slug){
+	  var iqID = iq.getAttribute("id");
+	  
+	  if (iqID==iqStanzaID['cinfo']){
+	    return handleIQResultWithClientInfo(iq,slug);
+	  }
+	  
+	  if (iqID==iqStanzaID['videochatRequest']){
+	    return handleIQResultFromVideochatRequest(iq,slug);
+	  }
+	  
+	  if(iqID==iqStanzaID['videochatRequestCancel']){
+	     return handleIQResultFromVideochatRequestCancel(iq,slug);
+	  }
+	  
+	  //Case: Default behaviour
+	  return true;
+	}
+	
+	
+	var handleIQResultWithClientInfo = function(iq,slug){
+	  var queryTag = iq.getElementsByTagName('query');
+	  
+	  if (queryTag.length > 0) {
+	    var queryElement = queryTag[0];
+	    var name = queryElement.getElementsByTagName('name');
+	    var version = queryElement.getElementsByTagName('version');
+	    
+	    if((name.length == 1)&&(version.length == 1)){
+	      var clientValue =  $(name).text();
+	      var versionValue = $(version).text();
+	      
+	      if (!(slug in contactsInfo)) {
+	        var contact = new chatContact(null,null,clientValue,versionValue);
+	        contactsInfo[slug]=contact;
+	      } else {
+	        contactsInfo[slug].client = clientValue;
+	        contactsInfo[slug].version = versionValue;
+	      }
+	      PRESENCE.VIDEOCHAT.clientInfoReceivedTrigger(slug);
+	    }
+	  }
+	  
+	  return true;
+	}
+	
+	
+	var handleIQResultFromVideochatRequest = function(iq,slug){
+	  
+	  var queryTag = iq.getElementsByTagName('query');
+	  
+	  if (queryTag.length > 0) {
+	    var queryElement = queryTag[0];
+	    var response = queryElement.getElementsByTagName('response');
+	    
+	    if(response.length == 1){
+	      PRESENCE.VIDEOCHAT.receiveVideoChatResponseFromUser(slug,$(response).text());
+	      return true;
+	    }
+	  }
+	  
+	  PRESENCE.VIDEOCHAT.receiveVideoChatResponseFromUser(slug,"Bad response");
+	  return true;
+	}
+	
+	
+	var handleIQResultFromVideochatRequestCancel = function(iq,slug){
+	  
+	  var queryTag = iq.getElementsByTagName('query');
+	  
+	  if (queryTag.length > 0) {
+	    var queryElement = queryTag[0];
+	    var response = queryElement.getElementsByTagName('response');
+	    
+	    if(response.length == 1){
+	      receiveVideoChatCancelationFromUser(slug);
+	      return true;
+	    }
+	  }
+	  
+	  return true;
+	}
+	
+	
+	///////
+	//SEND STANZAS: GET
+	///////
+	var sendIQStanzaForRequestClientInfo = function(slug){
+	  if (slug in contactsInfo) {
+	    var domain = contactsInfo[slug].domain;
+	    var resource = contactsInfo[slug].resource;
+	    var jid=slug+"@"+domain+"/"+resource
+	    
+	    var iq = $iq({to: jid, type: "get", id: iqStanzaID['cinfo'], xmlns: "jabber:iq:version"})
+	    .c("query", {xmlns: "jabber:iq:version"});
+	    strophe_connection.sendIQ(iq);
+	  }
+	}
+	
+	var sendIQStanzaToRequestVideochat = function(slug){
+	  if (slug in contactsInfo) {
+	    var jid=slug+"@"+contactsInfo[slug].domain+"/"+contactsInfo[slug].resource;
+	    
+	    var iq = $iq({to: jid, type: "get", id: iqStanzaID['videochatRequest']})
+	    .c("query", {xmlns: "urn:ietf:params:xml:ns:xmpp-stanzas"})
+	    .c("session_id").t(contactsInfo[slug].session_id).up()
+	    .c("token").t(contactsInfo[slug].guest_token);
+	    strophe_connection.sendIQ(iq);
+	  }
+	}
+	
+	
+	///////
+	//SEND STANZAS: RESULT
+	///////
+	var sendIQStanzaWithClientInfo = function(jid,iqID){
+	  var client = "Social Stream XMPP Client"
+	  var version = getJavascriptXMPPClientName();
+	  var iq = $iq({to: jid, type: "result", id: iqID})
+	  .c("query", {xmlns: "jabber:iq:version"}).c("name").t(client).up().c("version").t(version);
+	  strophe_connection.sendIQ(iq);
+	}
+	
+	var getJavascriptXMPPClientName = function(){
+	  return '<%=SocialStream::Presence::VERSION%>';
+	}
+	
+	var sendIQStanzaLast = function(jid,iqID){ 
+	  var iq = $iq({to: jid, type: "result", id: iqID})
+	  .c("query", {xmlns: "jabber:iq:last", seconds: "0"});
+	  strophe_connection.sendIQ(iq);
+	}
+	
+	var sendIQEmpty = function(jid,iqID){
+	  var iq = $iq({to: jid, type: "result", id: iqID})
+	  strophe_connection.sendIQ(iq);
+	}
+	
+	var sendIQStanzaToResponseVideochat = function(slug,result){
+	  if (slug in contactsInfo) {
+	    var jid=slug+"@"+contactsInfo[slug].domain+"/"+contactsInfo[slug].resource;
+	    var iq = $iq({to: jid, type: "result", id: iqStanzaID['videochatRequest']})
+	    .c("query", {xmlns: "urn:ietf:params:xml:ns:xmpp-stanzas"})
+	    .c("response").t(result);
+	    strophe_connection.sendIQ(iq);
+	  }
+	}
+	
+	var sendIQStanzaToCancelVideochat = function(slug){
+	  if (slug in contactsInfo) {
+	    var jid=slug+"@"+contactsInfo[slug].domain+"/"+contactsInfo[slug].resource;
+	    var iq = $iq({to: jid, type: "result", id: iqStanzaID['videochatRequestCancel']})
+	    .c("query", {xmlns: "urn:ietf:params:xml:ns:xmpp-stanzas"})
+	    .c("response").t("cancel");
+	    strophe_connection.sendIQ(iq);
+	  }
+	}
+	
+	
+	////////
+	//Send Message stanzas
+	///////
+	var sendChatMessage = function(guest_slug,msg){
+	  PRESENCE.WINDOW.rotatePriority(guest_slug);
+	  if (PRESENCE.WINDOW.isSlugGroup(guest_slug)){
+	    var guest_jid = getRoomJidFromRoomName(guest_slug)
+	    return sendGroupMessageToRoom(guest_jid,msg);
+	  } else {
+	    var headerMessage = PRESENCE.PARSER.getParsedName(user_name,true);                               
+	    PRESENCE.WINDOW.getChatBoxForSlug(guest_slug).chatbox("option", "boxManager").addMsg(headerMessage, PRESENCE.PARSER.getParsedContent(msg,true));
+	    var guest_jid = getJidFromSlug(guest_slug)
+	    return sendChatMessageToBuddy(guest_jid,msg);
+	  }
+	}
+	
+	var sendChatMessageToBuddy = function(to,text){
+	  var from = user_jid
+	  var type = "chat";
+	  var body= $build("body");
+	  body.t(text);
+	  var message = $msg({to: to, from: from, type: 'chat'}).cnode(body.tree());
+	  strophe_connection.send(message.tree());      
+	  restartAwayTimer();
+	  return true;
+	}
+	
+	
+	////////
+	//Send Presence stanzas with status
+	///////
+	var sendStatus = function(status){
 		
-		//Try to fix errors!
-		if(code==409){
-			//Case: Nickname already in use
-			if (changeRoomNickNameAndJoinAgain(room_slug)){
-				return;
+		  if(! status){
+				status = userStatus;
 			}
-		}
-		//if(code==403){
-      //Case: Auth Denied
-    //}
-
-		//[...]
-		
-  }
-	
-	resetRoomConfig(room_slug)
-	initialNotificationInGroup(room_slug,I18n.t("chat.muc.joinError", {errorMsg: errorMsg}))
-}
-
-function processAvailableRoomPresenceStanza(presence){
-	var from = $(presence).attr('from');
-	var nick = getNickFromChatRoomJid(from)
-  var room_slug = getSlugFromJid(from)
-	storeRoomInformation(room_slug);
-	
-	if (roomsInfo[room_slug].occupants.indexOf(nick)==-1){
-		roomsInfo[room_slug].occupants.push(nick)
-		addNickToNotificationInGroup(room_slug,nick)
-    writeReceivedMessageOnChatWindow("",room_slug, I18n.t("chat.muc.join", {nick: nick}))
-	}
-}
-
-function processUnavailableRoomPresenceStanza(presence){
-	var from = $(presence).attr('from');
-	var nick = getNickFromChatRoomJid(from)
-  var room_slug = getSlugFromJid(from)
-  storeRoomInformation(room_slug);
-	
-  if (roomsInfo[room_slug].occupants.indexOf(nick)!=-1){
-		roomsInfo[room_slug].occupants.splice(roomsInfo[room_slug].occupants.indexOf(nick),1)
-    removeNickFromNotificationInGroup(room_slug,nick)
-    writeReceivedMessageOnChatWindow("",room_slug,I18n.t("chat.muc.leave", {nick: nick}))
-  }
-}
-
-
-
-//////////////////
-// Getters
-//////////////////
-function getSlugFromJid(jid){
-	return jid.split("@")[0];
-}
-
-function getDomainFromJid(jid){
-  return jid.split("@")[1].split("/")[0];
-}
-
-function isChatRoomJid(jid){
-  if ((getDomainFromJid(jid).split(".")[0])==muc_host){
-    return true;
-  }
-  return false;
-}
-
-function getNameFromSlug(slug){
-	var connectionBox = getConnectionBoxFromSlug(slug);
-	
-	if(connectionBox!=null){
-		return $(connectionBox).attr("name");
+	  
+	    if((status in sstreamChatStatus)){
+	      status = sstreamChatStatus[status];
+	    }
+	  
+	    if (status in statusMessage){
+	      //Send status to the XMPP Server
+	      var pres = $pres()
+	      .c('status')
+	      .t(statusMessage[status]).up() //Status message
+	      .c('show')
+	      .t(status);
+	       strophe_connection.send(pres.tree());
+	       PRESENCE.UIMANAGER.setStatusWidgetTitle(status);
+	    }
 	}
 	
-	var chatBox = getChatBoxForSlug(slug)
-	if(chatBox!=null){
-    return chatBox.attr("name");
-  }	
 	
-	//return rebuildNameFromSlug(slug)
-	return slug;
-}
-
-function rebuildNameFromSlug(slug){
-	var cname = slug.split("-");
-  var name = "";
-  for(i=0; i<cname.length; i++){
-     if (i!=0){
-      name = name + " ";
-     }
-     name = name + cname[i][0].toUpperCase() + cname[i].substring(1,cname[i].length);
+	////////
+	//MUC management
+	///////
+	
+	var muc_host = "conference";
+	
+	var joinRoom = function(roomName){
+	    return strophe_connection.muc.join(getRoomJidFromRoomName(roomName), getRoomNickForRoom(roomName), null, null, null, null)
+	}
+	
+	var leaveRoom = function(roomName){
+	  return strophe_connection.muc.leave(getRoomJidFromRoomName(roomName), getRoomNickForRoom(roomName), null, null) 
+	}
+	
+	var sendGroupMessageToRoomWithName = function(roomName,msg){
+	  return sendMessageToRoom(getRoomJidFromRoomName(roomName),msg)
+	}
+	
+	var sendGroupMessageToRoom = function(roomJid,msg){
+	  return strophe_connection.muc.message(roomJid, null, msg, null, "groupchat")
+	}
+	
+	var sendPrivateMessageToRoomUser = function(roomName,userNick,msg){
+	  return strophe_connection.muc.message(getRoomJidFromRoomName(roomName), userNick, msg, null, "chat")
+	}
+	
+	var queryChatRoomOccupants = function(roomName){
+	  return strophe_connection.muc.queryOccupants(getRoomJidFromRoomName(roomName), queryChatRoomOccupantsSuccess, queryChatRoomOccupantsFail)
+	}
+	
+	var queryChatRoomOccupantsSuccess = function(iqResponse){
+	  handleIQResultFromMucOccupantsRequest(iqResponse);
+	  return true;
+	}
+	
+	var queryChatRoomOccupantsFail = function(){
+	  return true;
+	}
+	
+	var handleIQResultFromMucOccupantsRequest = function(iq){
+	  var from = $(iq).attr('from');
+	  var room_slug = getSlugFromJid(from)
+	  var queryTag = iq.getElementsByTagName('query');
+	  
+	  if (queryTag.length > 0) {
+	    var queryElement = queryTag[0];
+	    var occupants = queryElement.getElementsByTagName('item');
+	    $.each(occupants, function(index, value) {
+	      //List all occupants
+	      var nick = $(value).attr("name");
+	      if(roomsInfo[room_slug].occupants.indexOf(nick)==-1){
+	        roomsInfo[room_slug].occupants.push(nick)
+	        PRESENCE.NOTIFICATIONS.addNickToNotificationInGroup(room_slug,nick)
+	      }
+	    });
+	  }
+	}
+	
+	var accessRoom = function(roomName,open){
+	  storeRoomInformation(roomName)
+	  if(roomsInfo[roomName].joined==false){
+	    joinRoom(roomName)
+	    queryChatRoomOccupants(roomName)
+	  }
+	  if(!PRESENCE.UIMANAGER.existsSlugChatBox(roomName)){
+	    PRESENCE.WINDOW.createGroupChatBox(roomName,open)
+	  }
+	  return true
+	}
+	
+	var resetRoomConfig = function(roomName){
+	  storeRoomInformation(roomName)
+	  var room = new chatRoom()
+	  roomsInfo[roomName]=room
+	}
+	
+	var updateRoomsInfoAfterUserDisconnect = function(){
+	  $.each(PRESENCE.WINDOW.getAllSlugsWithVisibleGroupBoxes(), function(index, value) {
+	    resetRoomConfig(value)
+	    PRESENCE.NOTIFICATIONS.initialNotificationInGroup(value,I18n.t('chat.muc.offline'))
+	  });
+	}
+	
+	var getRoomJidFromRoomName = function(roomName){
+	  return roomName + "@" + muc_host + "." + domain;
+	}
+	
+	var getRoomNickForRoom = function(roomName){
+	  if(roomName in roomsInfo){
+	    return roomsInfo[roomName].nick;
+	  } else {
+	    return getBaseNickFromUserName();
+	  }
+	}
+	
+	var getBaseNickFromUserName = function(){
+	  return user_name.split(" ")[0];
+	}
+	
+	var changeRoomNickNameAndJoinAgain = function(roomName){
+	  var old_nick = getRoomNickForRoom(roomName)
+	  
+	  if(old_nick.split("_").length > 4){
+	    //Bucle prevention...
+	    return false;
+	  }
+	  
+	  storeRoomInformation(roomName)
+	  roomsInfo[roomName].nick = old_nick + "_"
+	  joinRoom(roomName)
+	  return true;
+	}
+	
+	
+	////////
+	//MUC Stanzas
+	///////
+	
+	//MUC Messages
+	var onRoomMessage = function(msg) {
+	  //from=roomSlug@conference.domain/from_slug
+	  var from = msg.getAttribute('from');
+	  var type = msg.getAttribute('type');
+	  var elems = msg.getElementsByTagName('body');
+	  
+	  if (type == "groupchat" && elems.length > 0) {
+	    var body = elems[0];
+	    var user_nick = getNickFromChatRoomJid(from)
+	    var msg = Strophe.getText(body);
+	    PRESENCE.UIMANAGER.afterReceivedGroupChatMessage(from,msg)
+	  }
+	  return true;
+	}
+	
+	
+	//MUC Presence stanzas
+	var onRoomPresence = function(presence) {
+	  var from = $(presence).attr('from');
+	  var to = $(presence).attr('to')
+	  var room_slug = getSlugFromJid(from);
+	  var nick = getNickFromChatRoomJid(from)
+	  var ptype = $(presence).attr('type')
+	    
+	  //Join or Leave room stanzas of self user
+	  if((nick == getRoomNickForRoom(room_slug))&&(getSlugFromJid(to) == user_slug)){
+	    switch (ptype){
+	      case undefined:
+	        processJoinRoomPresenceStanza(presence);
+	        break;
+	      case "available":
+	        processJoinRoomPresenceStanza(presence);
+	        break;
+	      case "unavailable":
+	        processLeaveRoomPresenceStanza(presence);
+	        break;
+	      case "error":
+	        processJoinErrorRoomPresenceStanza(presence);
+	        break;
+	     }
+	    return true;
+	  }
+	  
+	  
+	  //Rest of stanzas
+	  switch (ptype){
+	    case undefined:
+	      processAvailableRoomPresenceStanza(presence)
+	      break;
+	    case "available":
+	      processAvailableRoomPresenceStanza(presence)
+	      break;
+	    case "unavailable":
+	      processUnavailableRoomPresenceStanza(presence)
+	      break;
+	    default : 
+	      //Stanza type not recognize
+	      return true
+	  }
+	  
+	  return true
+	}
+	
+	
+	var processJoinRoomPresenceStanza = function(presence){
+	  var from = $(presence).attr('from');
+	  var room_slug = getSlugFromJid(from);
+	  storeRoomInformation(room_slug);
+	  
+	  var xElements = presence.getElementsByTagName('x');
+	
+	  if (xElements.length == 1) {
+	    var xElement = xElements[0];
+	    var items = xElement.getElementsByTagName('item');
+	    
+	    $.each(items, function(index, value) {
+	      var role = $(value).attr("role")
+	      var affiliation = $(value).attr("affiliation")
+	      
+	      roomsInfo[room_slug].affiliation = affiliation
+	      roomsInfo[room_slug].role = role
+	      if(roomsInfo[room_slug].joined == false){
+	        roomsInfo[room_slug].joined = true
+	        PRESENCE.NOTIFICATIONS.changeInitialNotificationInGroup(room_slug,I18n.t('chat.muc.occupants'))
+	      }
+	    });
+	  }
+	}
+	
+	var processLeaveRoomPresenceStanza = function(presence){
+	  var from = $(presence).attr('from');
+	  var room_slug = getSlugFromJid(from);
+	  resetRoomConfig(room_slug)
+	  PRESENCE.NOTIFICATIONS.changeInitialNotificationInGroup(room_slug,"")
+	}
+	
+	var processJoinErrorRoomPresenceStanza = function(presence){
+	  var from = $(presence).attr('from')
+	  var room_slug = getSlugFromJid(from)
+	  var errorMsg = "Error";
+	  
+	  var eElements = presence.getElementsByTagName('error')
+	  if (eElements.length == 1) {
+	    var error = eElements[0];
+	    var code = $(error).attr("code")
+	    var type = $(error).attr("type")
+	    errorMsg = errorMsg + " with code:" + code + " and type:" + type
+	    var textElements = error.getElementsByTagName('text') 
+	    if (textElements.length == 1) {
+	      var text = $(textElements[0]).text()
+	      errorMsg = errorMsg + "\n" + text
+	    }
+	    
+	    //Try to fix errors!
+	    if(code==409){
+	      //Case: Nickname already in use
+	      if (changeRoomNickNameAndJoinAgain(room_slug)){
+	        return;
+	      }
+	    }
+	    //if(code==403){
+	      //Case: Auth Denied
+	    //}
+	
+	    //[...]
+	    
+	  }
+	  
+	  resetRoomConfig(room_slug)
+	  PRESENCE.NOTIFICATIONS.initialNotificationInGroup(room_slug,I18n.t("chat.muc.joinError", {errorMsg: errorMsg}))
+	}
+	
+	var processAvailableRoomPresenceStanza = function(presence){
+	  var from = $(presence).attr('from');
+	  var nick = getNickFromChatRoomJid(from)
+	  var room_slug = getSlugFromJid(from)
+	  storeRoomInformation(room_slug);
+	  
+	  if (roomsInfo[room_slug].occupants.indexOf(nick)==-1){
+	    roomsInfo[room_slug].occupants.push(nick)
+	    PRESENCE.NOTIFICATIONS.addNickToNotificationInGroup(room_slug,nick)
+	    PRESENCE.UIMANAGER.writeReceivedMessageOnChatWindow("",room_slug, I18n.t("chat.muc.join", {nick: nick}))
+	  }
+	}
+	
+	var processUnavailableRoomPresenceStanza = function(presence){
+	  var from = $(presence).attr('from');
+	  var nick = getNickFromChatRoomJid(from)
+	  var room_slug = getSlugFromJid(from)
+	  storeRoomInformation(room_slug);
+	  
+	  if (roomsInfo[room_slug].occupants.indexOf(nick)!=-1){
+	    roomsInfo[room_slug].occupants.splice(roomsInfo[room_slug].occupants.indexOf(nick),1)
+	    PRESENCE.NOTIFICATIONS.removeNickFromNotificationInGroup(room_slug,nick)
+	    PRESENCE.UIMANAGER.writeReceivedMessageOnChatWindow("",room_slug,I18n.t("chat.muc.leave", {nick: nick}))
+	  }
+	}
+	
+	
+	
+	//////////////////
+	// Getters
+	//////////////////
+	var getSlugFromJid = function(jid){
+	  return jid.split("@")[0];
+	}
+	
+	var getDomainFromJid = function(jid){
+	  return jid.split("@")[1].split("/")[0];
+	}
+	
+	var isChatRoomJid = function(jid){
+	  if ((getDomainFromJid(jid).split(".")[0])==muc_host){
+	    return true;
+	  }
+	  return false;
+	}
+	
+	var getNameFromSlug = function(slug){
+	  var connectionBox = PRESENCE.UIMANAGER.getConnectionBoxFromSlug(slug);
+	  
+	  if(connectionBox!=null){
+	    return $(connectionBox).attr("name");
+	  }
+	  
+	  var chatBox = PRESENCE.WINDOW.getChatBoxForSlug(slug)
+	  if(chatBox!=null){
+	    return chatBox.attr("name");
+	  } 
+	  
+	  //return rebuildNameFromSlug(slug)
+	  return slug;
+	}
+	
+	var rebuildNameFromSlug = function(slug){
+	  var cname = slug.split("-");
+	  var name = "";
+	  for(i=0; i<cname.length; i++){
+	     if (i!=0){
+	      name = name + " ";
+	     }
+	     name = name + cname[i][0].toUpperCase() + cname[i].substring(1,cname[i].length);
+	  }
+	  return name;
+	}
+	
+	var getNameFromJid = function(){
+	  return getNameFromSlug(getSlugFromJid(jid));
+	}
+	
+	var getJidFromSlug = function(slug){
+	  return slug + "@" + domain;
+	}
+	
+	var getNickFromChatRoomJid = function(jid){
+	  return jid.split("/")[1];
+	}
+	
+	var purgeNickFromChatRoomJid = function(jid){
+	  return jid.split("/")[0];
+	}
+	
+	var getSStreamChatStatus = function(){
+		return sstreamChatStatus;
+	}
+	
+	var getConnection = function(){
+		return strophe_connection;
+	}
+	
+	var isNewConnection = function(){
+		return afterNewConnectionFlag
+	}
+	
+	var setNewConnection = function(bol){
+    afterNewConnectionFlag = bol;
   }
-  return name;
-}
+	
+	var isFirstConnection = function(){
+    return afterFirstConnectionFlag;
+  }
+  
+  var setFirstConnection = function(bol){
+    afterFirstConnectionFlag = bol;
+  }
+	
+	var getUserStatus = function(){
+		return userStatus;
+	}
+	
+	var setUserStatus = function(status){
+		userStatus = status;
+	}
+	
+	var getDisconnectionFlag = function(){
+		return disconnectionFlag;
+	}
+	
+	var getRoomsInfo = function(){
+		return roomsInfo;
+	}
+	
+  return {
+    init: init,
+		connectToChat : connectToChat,
+		onReconnect : onReconnect,
+		isStropheConnected : isStropheConnected,
+		isUserConnected : isUserConnected,
+		authByCookie : authByCookie,
+		authByPassword : authByPassword,
+		disconnect : disconnect,
+		awayTimerFunction : awayTimerFunction,
+		restartAwayTimer : restartAwayTimer,
+		sendIQStanzaForRequestClientInfo : sendIQStanzaForRequestClientInfo,
+		sendIQStanzaToRequestVideochat : sendIQStanzaToRequestVideochat,
+		sendIQStanzaToResponseVideochat : sendIQStanzaToResponseVideochat,
+		sendIQStanzaToCancelVideochat : sendIQStanzaToCancelVideochat,
+		getJavascriptXMPPClientName : getJavascriptXMPPClientName,
+		sendChatMessage : sendChatMessage,
+		sendStatus : sendStatus,
+		accessRoom : accessRoom,
+		joinRoom : joinRoom,
+		leaveRoom : leaveRoom,
+		getSlugFromJid : getSlugFromJid,
+		getJidFromSlug : getJidFromSlug,
+		getNameFromSlug : getNameFromSlug,
+		getNickFromChatRoomJid : getNickFromChatRoomJid,
+		getConnection : getConnection,
+		isNewConnection : isNewConnection,
+		setNewConnection : setNewConnection,
+		isFirstConnection : isFirstConnection,
+		setFirstConnection : setFirstConnection,
+		getUserStatus : getUserStatus,
+		setUserStatus : setUserStatus,
+		getDisconnectionFlag : getDisconnectionFlag,
+		getRoomsInfo : getRoomsInfo,
+		getSStreamChatStatus: getSStreamChatStatus
+  };
 
-function getNameFromJid(){
-	return getNameFromSlug(getSlugFromJid(jid));
-}
+}) (PRESENCE, jQuery);
 
-function getJidFromSlug(slug){
-	return slug + "@" + domain;
-}
 
-function getNickFromChatRoomJid(jid){
-	return jid.split("/")[1];
-}
-
-function purgeNickFromChatRoomJid(jid){
-	return jid.split("/")[0];
-}
