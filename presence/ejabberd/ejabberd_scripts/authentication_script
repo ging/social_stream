@@ -32,6 +32,13 @@ def getOption(option)
 end
 
 $cookie_name = getOption("cookie_name=")
+$force_ssl = getOption("force_ssl=")
+
+if $force_ssl=="true"
+	$http="https"
+else
+	$http="http"
+end
 
 
 def auth(username,domain,password)
@@ -44,7 +51,7 @@ def auth(username,domain,password)
   #  return true
   #end
 
-  accessByPasswordUrl = "http://" + getWebDomainUrlFromDomain(domain) + "/users/sign_in"
+  accessByPasswordUrl = $http + "://" + getWebDomainUrlFromDomain(domain) + "/users/sign_in"
 
   begin
     response = RestClient.post accessByPasswordUrl, :user => { :email => username , :password => password }
@@ -70,7 +77,7 @@ end
 
 def authByCookie(username, domain, cookie)
   begin
-    accessByCookieUrl = "http://" + getWebDomainUrlFromDomain(domain) + "/api/me"
+    accessByCookieUrl = $http + "://" + getWebDomainUrlFromDomain(domain) + "/api/me"
     response = RestClient.get accessByCookieUrl, :cookies => {:"#{$cookie_name}" => cookie}
     doc = REXML::Document.new(response.body)
 

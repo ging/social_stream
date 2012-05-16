@@ -269,6 +269,7 @@ module SocialStream
             autoconf.push("secure_rest_api=" + SocialStream::Presence.secure_rest_api.to_s)
             autoconf.push("cookie_name=" + Rails.application.config.session_options[:key])
             autoconf.push("web_domains=[" + SocialStream::Presence.domain + "]")
+            autoconf.push("force_ssl=" + Rails.application.config.force_ssl.to_s()) 
             
             #Param options
             if options
