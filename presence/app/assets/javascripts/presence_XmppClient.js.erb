@@ -69,6 +69,7 @@ PRESENCE.XMPPClient = (function(P,$,undefined){
 	  this.affiliation = "none";
 	  this.role = "none";
 	  this.nick = getBaseNickFromUserName();
+		this.lastMessageId = null;
 	}
 	
 
@@ -360,7 +361,6 @@ PRESENCE.XMPPClient = (function(P,$,undefined){
 	
 	//Chat messages handler
 	var onMessage = function(msg) {
-
 	    var from = msg.getAttribute('from');
 	    var type = msg.getAttribute('type');
 	    var elems = msg.getElementsByTagName('body');
@@ -895,17 +895,27 @@ PRESENCE.XMPPClient = (function(P,$,undefined){
 	///////
 	
 	//MUC Messages
-	var onRoomMessage = function(msg) {
+	var onRoomMessage = function(roomMsg) {
+		
 	  //from=roomSlug@conference.domain/from_slug
-	  var from = msg.getAttribute('from');
-	  var type = msg.getAttribute('type');
-	  var elems = msg.getElementsByTagName('body');
+	  var from = roomMsg.getAttribute('from');
+	  var type = roomMsg.getAttribute('type');
+	  var elems = roomMsg.getElementsByTagName('body');
 	  
 	  if (type == "groupchat" && elems.length > 0) {
 	    var body = elems[0];
 	    var user_nick = getNickFromChatRoomJid(from)
 	    var msg = Strophe.getText(body);
-	    PRESENCE.UIMANAGER.afterReceivedGroupChatMessage(from,msg)
+			
+			//Prevent repeated messages
+			var roomSlug = getSlugFromJid(from);
+			var id = roomMsg.getAttribute('id');
+			if((roomSlug in roomsInfo)&&(roomsInfo[roomSlug].lastMessageId != null)&&(roomsInfo[roomSlug].lastMessageId == id)){
+				return true;
+			}
+			roomsInfo[roomSlug].lastMessageId = id;
+			
+			PRESENCE.UIMANAGER.afterReceivedGroupChatMessage(from,msg)
 	  }
 	  return true;
 	}
