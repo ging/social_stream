@@ -15,6 +15,9 @@ PRESENCE.GAME.COMUNICATION = (function(P,$,undefined){
 	iqStanzaID['gameRequestFinish'] = "gameRequestFinishID";
 	iqStanzaID['gameAction'] = "gameActionID";
 
+  var getIQStanzaID = function(){
+		return iqStanzaID;
+	}
 	
 	/////////////////////////////////
 	//    COMUNICATION METHODS     //
@@ -26,6 +29,7 @@ PRESENCE.GAME.COMUNICATION = (function(P,$,undefined){
 		if(connection){
 			connection.addHandler(handleRequestGameIQStanza,null, "iq", "get",iqStanzaID['gameRequest'], null);
       connection.addHandler(handleIQResultFromGameRequest,null, "iq", "result",iqStanzaID['gameRequest'], null);
+			connection.addHandler(handleIQErrorFromGameRequest,null, "iq", "error",iqStanzaID['gameRequest'], null);
       connection.addHandler(handleIQResultFromGameRequestFinish,null, "iq", "result", iqStanzaID['gameRequestFinish'], null);
       connection.addHandler(handleActionIQStanza,null, "iq", "result", getIdForIqAction("gameId"), null);
 		}
@@ -124,6 +128,7 @@ PRESENCE.GAME.COMUNICATION = (function(P,$,undefined){
 	
 	//RECEIVE GAME REQUEST RESPONSE
   var handleIQResultFromGameRequest = function(iq){
+		
     var from = iq.getAttribute("from");
     var slug = from.split("@")[0]; 
     var queryTag = iq.getElementsByTagName('query');
@@ -137,9 +142,17 @@ PRESENCE.GAME.COMUNICATION = (function(P,$,undefined){
         return true;
       }
     }
+		
     return true;
   }
   
+	//RECEIVE GAME REQUEST ERROR RESPONSE
+	var handleIQErrorFromGameRequest = function(iq){
+    var from = iq.getAttribute("from");
+    var slug = from.split("@")[0]; 
+    P.GAME.updateLogicAfterReceivedGameRequestError(slug)
+    return true;
+  }
 	
 	
 	/////////////////////
@@ -377,7 +390,8 @@ PRESENCE.GAME.COMUNICATION = (function(P,$,undefined){
 		sendIQStanzaWithAction: sendIQStanzaWithAction,
     handleActionIQStanza: handleActionIQStanza,
 		addHandler : addHandler,
-		removeHandler: removeHandler
+		removeHandler: removeHandler,
+		getIQStanzaID : getIQStanzaID
   };
 
 }) (PRESENCE, jQuery);

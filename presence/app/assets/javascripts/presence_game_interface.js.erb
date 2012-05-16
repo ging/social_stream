@@ -37,7 +37,7 @@ PRESENCE.GAME.INTERFACE = (function(P,$,undefined){
   }
   
   var updateInterfaceAfterFinishGame = function(slug,game){
-    PRESENCE.WINDOW.PRESENCE.WINDOW.toggleVideoBoxForSlug(slug,false);
+    PRESENCE.WINDOW.toggleVideoBoxForSlug(slug,false);
     showVideoChatButton(slug);
   }
 	
@@ -212,13 +212,33 @@ PRESENCE.GAME.INTERFACE = (function(P,$,undefined){
 		$(".chat-gamesthick").css("display","block");
 	}
 	
+	var enableGameFeature = function(enable){	  
+    //Changing chat-gamesthick CSS class by JQuery
+    var ss = document.styleSheets;
+    for (var i=0; i<ss.length; i++) {
+        var rules = ss[i].cssRules || ss[i].rules;
+        if (rules != undefined){
+          for (var j=0; j<rules.length; j++) {
+              if (rules[j].selectorText === ".chat-gamesthick") {
+								  if(enable){
+										rules[j].style.display = 'block'
+									} else {
+										rules[j].style.display = 'none'
+									}
+              }
+          }
+        }
+    }
+	}
+	
   return {
 		pickGamesButton: pickGamesButton,
 		updateInterfaceAfterGameRequestReceived: updateInterfaceAfterGameRequestReceived,
 		updateInterfaceBeforeStartGame: updateInterfaceBeforeStartGame,
 		updateInterfaceAfterFinishGame: updateInterfaceAfterFinishGame,
 		updateInterfaceOnInformationMessage: updateInterfaceOnInformationMessage,
-		play: play
+		play: play,
+		enableGameFeature : enableGameFeature
   };
 
 }) (PRESENCE, jQuery);

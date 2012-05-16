@@ -9,8 +9,9 @@ PRESENCE.CORE = (function(P,$,undefined){
   var init = function(){
 		 PRESENCE.UIMANAGER.init();
 		 PRESENCE.UTILITIES.init();
+		 PRESENCE.XMPPClient.init();
 		 PRESENCE.VIDEOCHAT.init();
-		 PRESENCE.GAME.init(PRESENCE.XMPPClient.getConnection());
+		 PRESENCE.GAME.init();
 		 PRESENCE.AUDIO.init();
   };
 

@@ -555,6 +555,10 @@ PRESENCE.WINDOW = (function(P,$,undefined){
 	  return groupBoxes;
 	}
 	
+	var getChatBoxHeight = function(){
+		return chatBoxHeight;
+	}
+	
 	
   return {
     init: init,
@@ -585,7 +589,8 @@ PRESENCE.WINDOW = (function(P,$,undefined){
 		isSlugGroup : isSlugGroup,
 		getAllSlugsWithVisibleGroupBoxes : getAllSlugsWithVisibleGroupBoxes,
 		getMainChatBox : getMainChatBox,
-		getMainchatBoxParams : getMainchatBoxParams 
+		getMainchatBoxParams : getMainchatBoxParams,
+		getChatBoxHeight : getChatBoxHeight 
   };
 
 }) (PRESENCE, jQuery);

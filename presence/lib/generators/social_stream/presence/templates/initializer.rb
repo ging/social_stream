@@ -36,5 +36,9 @@ SocialStream::Presence.setup do |config|
   #config.opentok_api_key = ""
   #Replace with your OpenTok API secret.
   #config.opentok_api_secret = ""
+  
+  #Multiplayer Games Service
+  #Uncomment to enable Multiplayer Games Service
+  #config.games = true
 
 end

@@ -40,8 +40,12 @@ PRESENCE.GAME = (function(P,$,undefined){
 	//         CORE METHODS        //
 	/////////////////////////////////
 	
-  var init = function(myConnection){
-    P.GAME.COMUNICATION.init(myConnection);
+  var init = function(){
+		var enable = '<%=SocialStream::Presence.games%>';
+		if(enable=="true"){
+			P.GAME.INTERFACE.enableGameFeature(true);
+      P.GAME.COMUNICATION.init(PRESENCE.XMPPClient.getConnection());
+		}
   };
 	
 
@@ -167,6 +171,14 @@ PRESENCE.GAME = (function(P,$,undefined){
     } else {
       finishGame(slug);
     }
+  }
+	
+	var updateLogicAfterReceivedGameRequestError = function(slug){
+    if(contactsInfo[slug].gameStatus!="waiting"){
+      return true;
+    }
+    P.GAME.INTERFACE.updateInterfaceOnInformationMessage(slug,I18n.t("chat.game.clientIssue", {name: PRESENCE.XMPPClient.getNameFromSlug(slug)}));
+    contactsInfo[slug].gameStatus="disconnected";
   }
 
   var getPlayerNameWithId = function(slug){
@@ -301,16 +313,17 @@ PRESENCE.GAME = (function(P,$,undefined){
 
   return {
     init: init,
-		game: game,
-		player: player,
-		startGame: startGame,
-		finishGame: finishGame,
-		createValidationResult: createValidationResult,
-		requestUserToPlay: requestUserToPlay,
-		responseUserToPlay: responseUserToPlay,
-		updateLogicAfterReceivedGameRequest: updateLogicAfterReceivedGameRequest,
-		updateLogicAfterReceivedGameRequestCancelation: updateLogicAfterReceivedGameRequestCancelation,
-		updateLogicAfterReceivedGameRequestResponse: updateLogicAfterReceivedGameRequestResponse,
+		game : game,
+		player : player,
+		startGame : startGame,
+		finishGame : finishGame,
+		createValidationResult : createValidationResult,
+		requestUserToPlay : requestUserToPlay,
+		responseUserToPlay : responseUserToPlay,
+		updateLogicAfterReceivedGameRequest : updateLogicAfterReceivedGameRequest,
+		updateLogicAfterReceivedGameRequestCancelation : updateLogicAfterReceivedGameRequestCancelation,
+		updateLogicAfterReceivedGameRequestResponse : updateLogicAfterReceivedGameRequestResponse,
+		updateLogicAfterReceivedGameRequestError : updateLogicAfterReceivedGameRequestError,
 		sendAction: sendAction,
 		userDisconnected: userDisconnected
   };

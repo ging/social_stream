@@ -40,6 +40,8 @@ module SocialStream
     
     mattr_accessor :opentok_api_key
     mattr_accessor :opentok_api_secret
+    
+    mattr_accessor :games
 
     @@auth_method = "cookie"
     @@remote_xmpp_server = false
@@ -47,6 +49,7 @@ module SocialStream
     @@enable = false
     @@social_stream_presence_username = "social_stream_presence"
     @@opentok_api_key = "default"
+    @@games = false
     
     class << self
       def setup

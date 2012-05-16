@@ -64,3 +64,4 @@ en:
       finish: "{{name}} close the game"
       waiting: Waiting for response...
       unknown: Unknown response
+      clientIssue: "{{name}}'s client not support games"

@@ -194,7 +194,7 @@ PRESENCE.VIDEOCHAT = (function(P,$,undefined){
 	      }
 	      restoreChatBoxAfterVideoCall(slug);
 	    } else if(connectionStatus=="waiting"){
-	      PRESENCE.CLIENT.sendIQStanzaToCancelVideochat(slug);
+	      PRESENCE.XMPPClient.sendIQStanzaToCancelVideochat(slug);
 	    } else if(connectionStatus=="pending"){
 	      PRESENCE.XMPPClient.sendIQStanzaToResponseVideochat(slug,"no");
 	    }
@@ -312,14 +312,14 @@ PRESENCE.VIDEOCHAT = (function(P,$,undefined){
 	  $(PRESENCE.WINDOW.getChatBoxButtonForSlug(slug,"videoChange")).find("span").hide();
 	  PRESENCE.WINDOW.toggleVideoBoxForSlug(slug,false);
 	  var chatBox = PRESENCE.WINDOW.getChatBoxForSlug(slug);
-	  chatBox.height(chatBoxHeight);
+	  chatBox.height(PRESENCE.WINDOW.getChatBoxHeight());
 	}
 	
 	var checkVideocallFeature = function(){
 	  if (opentok_apiKey=="default"){
 	    //Hide videochat buttons
 	    
-	    //Changing Tooltip CSS class by JQuery
+	    //Changing chat-videothick CSS class by JQuery
 	    var ss = document.styleSheets;
 	    for (var i=0; i<ss.length; i++) {
 	        var rules = ss[i].cssRules || ss[i].rules;
@@ -458,7 +458,9 @@ PRESENCE.VIDEOCHAT = (function(P,$,undefined){
 		closeVideoSession : closeVideoSession,
 		updateInterfaceAfterVideoRequestReceived : updateInterfaceAfterVideoRequestReceived,
 		receiveVideoChatResponseFromUser : receiveVideoChatResponseFromUser,
+		receiveVideoChatCancelationFromUser : receiveVideoChatCancelationFromUser,
 		clickVideoChangeChatButton : clickVideoChangeChatButton,
+		sessionConnectedHandler : sessionConnectedHandler,
 		sessionDisconnectedHandler : sessionDisconnectedHandler,
 		streamCreatedHandler : streamCreatedHandler,
 		streamDestroyedHandler : streamDestroyedHandler

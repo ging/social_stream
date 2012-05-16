@@ -64,3 +64,4 @@ es:
       finish: "{{name}} ha cerrado el juego"
       waiting: Esperando respuesta...
       unknown: Respuesta desconocida
+      clientIssue: "El cliente de {{name}} no tiene juegos"
