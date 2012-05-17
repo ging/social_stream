@@ -9,6 +9,11 @@ module SocialStream
         @name, @options = name, options
       end
 
+      # Has this component changes since the last release
+      def dirty?
+        `git log #{ last_tag }.. #{ name } | wc -l`.to_i > 0
+      end
+
       protected
 
       def version_file

@@ -1,3 +1,4 @@
+require File.expand_path('../kernel', __FILE__)
 require File.expand_path('../dependency_update', __FILE__)
 require File.expand_path('../global/version_file', __FILE__)
 
@@ -10,8 +11,8 @@ module SocialStream
 
       attr_reader :name, :version
 
-      def initialize(target = nil, options = {})
-        @target, @options = target, options
+      def initialize(target = nil)
+        @target = target
       end
       
       def bump
@@ -21,11 +22,7 @@ module SocialStream
       end
 
       def publish
-        if @options[:test]
-          puts rake_release_command
-        else
-          system(rake_release_command) || raise(RuntimeError.new)
-        end
+        release_cmd rake_release_command
       end
 
       def dependencies
@@ -35,6 +32,10 @@ module SocialStream
 
       def commit_files
         "#{ @version_file.filename } #{ gemspec }"
+      end
+
+      def last_tag
+        `git describe`.split('-').first
       end
 
       protected
