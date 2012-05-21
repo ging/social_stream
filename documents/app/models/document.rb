@@ -72,7 +72,7 @@ class Document < ActiveRecord::Base
      :title => title,
      :description => description,
      :author => author.name,
-     :src => file.to_s
+     :src => file.to_s.downcase
     }
   end
   
