@@ -14,20 +14,15 @@
   float: left;
   font-weight: bold;
   text-align: center;
-  vertical-align: middle;
-  padding: 10px;
-  width: 40px;
+  width: 45px;
 }
-
 
 a.event_date {
   color: $details-color;
 }
 
 div.event_date {
-    margin-left: 5px;
-    margin-right: 7px;
-    width: 64px;
+  margin-top: 25px;
 }
 
 .event_day {
@@ -60,7 +55,7 @@ div.event_date {
 .event_poster {
 	width: 80px;
 	height: 113px;
-	margin-right: 10px;
+	margin-left: 5px;
 	float: left;
 	position: relative;
 }
