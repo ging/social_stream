@@ -28,6 +28,7 @@ es:
       unfollow: "Desapuntar"
     calendar: "Calendario"
     confirm_delete: "¿Borrar evento?"
+    name: "evento"
     new:
       title: "Nuevo evento"
     one: "un evento"
