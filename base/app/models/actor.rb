@@ -448,7 +448,8 @@ class Actor < ActiveRecord::Base
 
     wall =
       Activity.
-        roots
+        roots.
+        includes(:author, :user_author, :owner, :activity_objects, :activity_verb, :relations)
 
     actor_ids =
       case type
