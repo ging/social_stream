@@ -86,6 +86,8 @@ Rails.application.routes.draw do
   resources :activities do
     resource :like
   end
+
+  get 'audience/index', :as => :audience
   
   match 'cheesecake' => 'cheesecake#index', :as => :cheesecake  
   match 'update_cheesecake' => 'cheesecake#update', :as => :update_cheesecake  

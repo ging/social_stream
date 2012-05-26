@@ -38,6 +38,7 @@ en:
       public:
         summary: "Public"
         full: "Shared with all the Internet"
+      show: "Mostrar"
       visible:
         summary: "Restricted"
         full: "Shared with %{audience}"

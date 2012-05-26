@@ -355,6 +355,21 @@ class Activity < ActiveRecord::Base
       allow?(subject, 'update')
   end
 
+  # Is this activity public?
+  def public?
+    relation_ids.include? Relation::Public.instance.id
+  end
+
+  # The {Actor Actors} this activity is shared with
+  def audience
+    raise "Cannot get the audience of a public activity!" if public?
+
+    [ owner ] +
+      Actor.
+        joins(:received_ties).
+        merge(Tie.where(:relation_id => relation_ids))
+  end
+
   # The {Relation} with which activity is shared
   def audience_in_words(subject, options = {})
     options[:details] ||= :full

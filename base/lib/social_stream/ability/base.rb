@@ -58,7 +58,9 @@ module SocialStream
         end
 
         can :read, Activity do |a|
-          a.allow?(subject, 'read')
+          a.public? ||
+            subject.present? &&
+            a.audience.include?(subject.actor) 
         end
 
         can :update, Activity do |a|

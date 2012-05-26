@@ -31,6 +31,7 @@ SocialStream.Timeline = (function(SS, $, undefined){
 		$(fullId).hide();
 		$(summaryId).tipsy({
 			html: true,
+			hoverable: true,
 			title: function(){
 				return $(this).siblings('.activity_audience').html();
 			}
