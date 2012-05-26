@@ -164,27 +164,6 @@ class Contact < ActiveRecord::Base
     end
   end
 
-  # The related {Channel} to this {Contact}.
-  #
-  # If the sender of this {Contact} is a user, the {Channel} is defined. If it is
-  # other kind of {SocialStream::Models::Subject}, the {Channel#user_author} must
-  # be provided.
-  def channel(user = nil)
-    user_id =
-      if sender.subject_type == "User"
-        sender_id
-      elsif user.present? && Actor.normalize(user).subject_type == "User"
-        Actor.normalize_id(user)
-      else
-        raise "Invalid channel user_author: #{ user.inspect }"
-      end
-
-    Channel.
-      find_or_create_by_author_id_and_user_author_id_and_owner_id sender_id,
-                                                                  user_id,
-                                                                  receiver_id
-  end
-
   private
 
   def build_user_author

@@ -73,16 +73,6 @@ class Actor < ActiveRecord::Base
   has_many :relations,
            :dependent => :destroy
 
-  has_many :authored_channels,
-           :class_name => "Channel",
-           :foreign_key => :author_id,
-           :dependent => :destroy
-
-  has_many :owned_channels,
-           :class_name => "Channel",
-           :foreign_key => :owner_id,
-           :dependent => :destroy
-
   has_many :sent_actions,
            :class_name => "ActivityAction",
            :dependent  => :destroy
@@ -328,11 +318,6 @@ class Actor < ActiveRecord::Base
     ties_to(subject).with_permissions(action, object).any?
   end
 
-  # The {Channel} of this {Actor} to self (totally close!)
-  def self_channel
-    Channel.find_or_create_by_author_id_and_user_author_id_and_owner_id id, id, id
-  end
-
   # Return the {ActivityAction} model to an {ActivityObject}
   def action_to(activity_object)
     sent_actions.received_by(activity_object).first
@@ -507,7 +492,7 @@ class Actor < ActiveRecord::Base
   end
   
   def liked_by(subject) #:nodoc:
-    likes.joins(:channel).merge(Channel.subject_authored_by(subject))
+    likes.authored_by(subject)
   end
   
   # Does subject like this {Actor}?
@@ -517,14 +502,11 @@ class Actor < ActiveRecord::Base
   
   # Build a new activity where subject like this
   def new_like(subject, user)
-    channel =
-      Channel.
-        find_or_create_by_author_id_and_user_author_id_and_owner_id Actor.normalize_id(subject),
-                                                                    Actor.normalize_id(user),
-                                                                    id
-    a = Activity.new :verb => "like",
-                     :channel => channel,
-                     :relation_ids => Array(Relation::Public.instance.id)
+    a = Activity.new :verb           => "like",
+                     :author_id      => Actor.normalize_id(subject),
+                     :user_author_id => Actor.normalize_id(user),
+                     :owner_id       => id,
+                     :relation_ids   => Array(Relation::Public.instance.id)
     
     a.activity_objects << activity_object           
                     

@@ -23,9 +23,11 @@ end
 ## End of helpers
 
 Factory.define :activity do |a|
-  a.channel { Factory(:friend).contact.channel }
+  a.author        { Factory(:user).actor }
+  a.user_author   { |b| b.author }
+  a.owner         { |b| Factory(:friend, :receiver => b.author).sender }
   a.activity_verb { ActivityVerb["post"] }
-  a.relation_ids  { |b| Array(b.sender.relation_custom('friend').id) }
+  a.relation_ids  { |b| [ b.owner.relation_custom('friend').id ] }
   a.activity_object_ids { |b|
     # Create post
     post = Factory(:post,
@@ -40,8 +42,10 @@ Factory.define :activity do |a|
 end
 
 Factory.define :self_activity, :parent => :activity do |a|
-  a.channel { Factory(:self_contact).channel }
-  a.relation_ids  { |b| Array(b.sender.relation_custom('friend').id) }
+  a.author       { Factory(:user).actor }
+  a.user_author  { |b| b.author }
+  a.owner        { |b| b.author }
+  a.relation_ids { |b| [ b.author.relation_custom('friend').id ] }
   a.activity_object_ids { |b|
     # Create post
     post = Factory(:post,
@@ -63,10 +67,12 @@ end
 
 Factory.define :like_activity, :class => 'Activity' do |a|
   a.association :parent, :factory => :activity
-  a.channel { |b| Factory(:friend, :sender => b.parent.sender).receiver.contact_to!(b.parent.sender).channel }
+  a.author        { |b| Factory(:friend, :sender => b.parent.owner).receiver }
+  a.user_author   { |b| b.author }
+  a.owner         { |b| b.parent.owner }
   a.activity_verb { ActivityVerb["like"] }
   a.relation_ids  { |b| b.parent.relation_ids }
-  a.after_build{ |b| b.activity_object_ids = b.parent.activity_object_ids }
+  a.after_build   { |b| b.activity_object_ids = b.parent.activity_object_ids }
 end
 
 
