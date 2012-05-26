@@ -112,14 +112,16 @@ namespace :db do
       ties_start = Time.now
 
       @available_actors.each do |a|
-        actors = @available_actors.dup - Array(a)
-        relations = a.relation_customs + Array.wrap(Relation::Reject.instance)
-        break if actors.size==0
+        actors = @available_actors.dup
+        actors.delete(a)
+
+        relations = a.relation_customs + [ Relation::Reject.instance ]
+
         Forgery::Basic.number(:at_most => actors.size).times do
           actor = actors.delete_at((rand * actors.size).to_i)
           contact = a.contact_to!(actor)
           contact.user_author = a.user_author if a.subject_type != "User"
-          contact.relation_ids = Array(Forgery::Extensions::Array.new(relations).random.id) unless a==actor
+          contact.relation_ids = [ Forgery::Extensions::Array.new(relations).random.id ]
         end
       end
 
