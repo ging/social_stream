@@ -25,7 +25,7 @@ end
 Factory.define :activity do |a|
   a.author        { Factory(:user).actor }
   a.user_author   { |b| b.author }
-  a.owner         { |b| Factory(:friend, :receiver => b.author).sender }
+  a.owner         { |b| Factory(:friend, :contact => Factory(:contact, :receiver => b.author)).sender }
   a.activity_verb { ActivityVerb["post"] }
   a.relation_ids  { |b| [ b.owner.relation_custom('friend').id ] }
   a.activity_object_ids { |b|

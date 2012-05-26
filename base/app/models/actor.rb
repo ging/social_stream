@@ -444,37 +444,28 @@ class Actor < ActiveRecord::Base
   #             the wall for members of the group.
   #             
   def wall(type, options = {})
-    args = {}
+    options[:for] = self if type == :home
 
-    args[:type]  = type
-    args[:owner] = self
-    # Preserve this options
-    [ :for, :object_type ].each do |opt|
-      args[opt]   = options[opt]
-    end
+    wall =
+      Activity.
+        roots
 
-    if type == :home
-      args[:followed] = Actor.followed_by(self).map(&:id)
-    end
-
-    # TODO: this is not scalling for sure. We must use a fact table in the future
-    args[:relation_ids] =
+    actor_ids =
       case type
       when :home
-        # The relations from followings that can be read
-        Relation.allow(self, 'read', 'activity').map(&:id)
+        following_actor_and_self_ids
       when :profile
-        # FIXME: options[:relation]
-        #
-        # The relations that can be read by options[:for]
-        options[:for].present? ?
-          Relation.allow(options[:for], 'read', 'activity').map(&:id) :
-          []
+        id
       else
         raise "Unknown type of wall: #{ type }"
       end
 
-    Activity.wall args
+    wall = wall.authored_or_owned_by(actor_ids)
+
+    # Authentication
+    wall = wall.shared_with(options[:for])
+
+    wall = wall.order("created_at desc")
   end
  
   def logo

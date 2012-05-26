@@ -24,11 +24,6 @@
 # that have a {Tie} with that relation (in other words, the contacts that
 # have been added as friends with that relation} will be able to reach the {Activity}
 #
-# == Wall
-# The Activity.wall(args) scope provides all the activities appearing in a wall
-#
-# There are two types of wall, :home and :profile. Check {Actor#wall} for more information
-#
 class Activity < ActiveRecord::Base
   # FIXME: this does not follow the Rails way
   include NotificationsHelper
@@ -63,6 +58,16 @@ class Activity < ActiveRecord::Base
   }
   scope :owned_by, lambda { |subject|
     where(:owner_id => Actor.normalize_id(subject))
+  }
+  scope :authored_or_owned_by, lambda { |subjects|
+    ids = Actor.normalize_id(subjects)
+
+    where(arel_table[:author_id].in(ids).or(arel_table[:owner_id].in(ids)))
+  }
+
+  scope :shared_with, lambda { |subject|
+    joins(:audiences).
+      merge(Audience.where(:relation_id => Relation.ids_shared_with(subject)))
   }
 
   scope :wall, lambda { |args|
