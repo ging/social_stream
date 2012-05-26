@@ -21,6 +21,7 @@ class RemoveActivityChannels < ActiveRecord::Migration
 
     Activity.record_timestamps = true
 
+    remove_foreign_key :activities, :name => 'index_activities_on_channel_id'
     remove_column :activities, :channel_id
 
     Activity.reset_column_information
