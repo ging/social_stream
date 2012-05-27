@@ -146,7 +146,7 @@ class Tie < ActiveRecord::Base
     Activity.create! :author        => contact.sender,
                      :user_author   => contact.user_author,
                      :owner         => contact.receiver,
-                     :relation_ids  => contact.relation_ids,
+                     :relation_ids  => contact.receiver.activity_relation_ids,
                      :activity_verb => ActivityVerb[contact.verb]
   end
 

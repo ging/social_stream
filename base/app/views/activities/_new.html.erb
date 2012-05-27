@@ -21,7 +21,7 @@
     <%= javascript_tag do %>
       var relation_public = <%= Relation::Public.instance.id %>;
       var public_selected = false;
-      var relation_options = <%= escape_javascript(current_subject.activity_relations(receiver).sort.map{ |r| r.id }.to_json) %>;
+      var relation_options = <%= escape_javascript(current_subject.activity_relations_for(receiver).sort.map{ |r| r.id }.to_json) %>;
       var relation_public_pos = 0;
       for(id in relation_options){
         if(relation_options[id]==relation_public){
@@ -32,7 +32,7 @@
       }
       //For security with check "var default_security_width = '100px';" in activities.js.erb
     <% end %>
-    <%= select_tag :relation_ids, options_for_select(current_subject.activity_relations(receiver).sort.map{ |r| [ r.name, r.id ] }), :id => 'security', :multiple => true, :title => t("activity.privacy.myself.contacts.#{ receiver.class.to_s.underscore }") %>
+    <%= select_tag :relation_ids, options_for_select(current_subject.activity_relations_for(receiver).sort.map{ |r| [ r.name, r.id ] }), :id => 'security', :multiple => true, :title => t("activity.privacy.myself.contacts.#{ receiver.class.to_s.underscore }") %>
   <% else %>
     <div id="security_chzn" class="chzn-container chzn-container-multi">
       <ul class="chzn-choices">

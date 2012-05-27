@@ -217,15 +217,7 @@ class ActivityObject < ActiveRecord::Base
 
     @valid_relations = true
 
-    self.relation_ids =
-      if SocialStream.relation_model == :custom
-        owner.
-          relations.
-          allowing('read', 'activity').
-          map(&:id)
-      else
-        Array.wrap Relation::Public.instance.id
-      end
+    self.relation_ids = owner.activity_relation_ids
   end
 
   # validate method

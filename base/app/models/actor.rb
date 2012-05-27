@@ -376,12 +376,26 @@ class Actor < ActiveRecord::Base
         any?
   end
 
-  # An {Activity} can be shared with multiple {audicences Audience}, which corresponds to a {Relation}.
+  # The default {Relation Relations} for sharing an {Activity} owned
+  # by this {Actor}
+  def activity_relations
+    SocialStream.relation_model == :custom ?
+      relations.
+        allowing('read', 'activity') :
+      [ Relation::Public.instance ]
+  end
+
+  # The ids of the default {Relation Relations} for sharing an {Activity}
+  # owned by this {Actor}
+  def activity_relation_ids
+    activity_relations.map(&:id)
+  end
+
+  # This method returns all the {relations Relation} that subject can choose to broadcast an Activity in this {Actor}'s wall
   #
-  # This method returns all the {relations Relation} that this actor can use to broadcast an Activity
+  # See {Activity} on how they can be shared with multiple {audicences Audience}, which corresponds to a {Relation}.
   #
-  #
-  def activity_relations(subject, options = {})
+  def activity_relations_for(subject, options = {})
     if Actor.normalize(subject) == self
       return relation_customs + Array.wrap(Relation::Public.instance)
     else
@@ -389,9 +403,9 @@ class Actor < ActiveRecord::Base
     end
   end
 
-  # Are there any activity_relations present?
-  def activity_relations?(*args)
-    activity_relations(*args).any?
+  # Are {#activity_relations} available for subject?
+  def activity_relations_for?(subject, options = {})
+    activity_relations(subject, options).any?
   end
 
   # Is this {Actor} allowed to create a comment on activity?
