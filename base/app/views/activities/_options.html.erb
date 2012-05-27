@@ -8,7 +8,7 @@
 
     <% if user_signed_in? %>
       ·
-      <%= link_to image_tag('btn/btn_security.png', :class => 'menu_icon') + activity.audience_in_words(current_subject, :details => :summary),
+      <%= link_to image_tag("btn/#{ activity.public? ? 'public' : 'restricted' }.png", :class => 'menu_icon') + activity.audience_in_words(current_subject, :details => :summary),
                   'javascript:;',
                   :class => 'activity_audience_summary' %>
       <div class="activity_audience">
