@@ -62,15 +62,16 @@ SocialStream.Wall = (function(SS, $, undefined){
               }                       
             }
             chosen.results_update_field();
-            changeSecurityImage('public');
           }else{
             if($('#security').children("option:selected").size()>1){
               public_selected = false;          
               chosen.result_deselect(relation_public_pos);
               chosen.results_update_field();
             }
-            changeSecurityImage('restricted');
           }
+          changeSecurityImage('public');
+        } else {
+          changeSecurityImage('restricted');
         }
       });
 
