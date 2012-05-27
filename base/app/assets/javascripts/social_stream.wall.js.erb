@@ -38,6 +38,12 @@ SocialStream.Wall = (function(SS, $, undefined){
     });
   }
 
+  var changeSecurityImage = function(type) {
+    $('#security_chzn .chzn-choices').
+      css('background-image', 'url(<%= asset_path('btn/') %>' + type + '.png)');
+  }
+
+
   var initSecuritySelect = function(){
     var default_security_width = '100px';
 
@@ -56,12 +62,14 @@ SocialStream.Wall = (function(SS, $, undefined){
               }                       
             }
             chosen.results_update_field();
+            changeSecurityImage('public');
           }else{
             if($('#security').children("option:selected").size()>1){
               public_selected = false;          
               chosen.result_deselect(relation_public_pos);
               chosen.results_update_field();
             }
+            changeSecurityImage('restricted');
           }
         }
       });
@@ -145,6 +153,6 @@ SocialStream.Wall = (function(SS, $, undefined){
     addInitCallback: addInitCallback,
       init: init,
       activateAntiRebounds: activateAntiRebounds,
-      unblockForms: unblockForms  
+      unblockForms: unblockForms
   };
 }) (SocialStream, jQuery)
