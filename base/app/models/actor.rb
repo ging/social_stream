@@ -448,6 +448,7 @@ class Actor < ActiveRecord::Base
 
     wall =
       Activity.
+        select("DISTINCT activities.*").
         roots.
         includes(:author, :user_author, :owner, :activity_objects, :activity_verb, :relations)
 
