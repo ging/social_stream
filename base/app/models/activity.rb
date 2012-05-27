@@ -364,7 +364,7 @@ class Activity < ActiveRecord::Base
   def audience
     raise "Cannot get the audience of a public activity!" if public?
 
-    [ owner ] +
+    [ author, user_author, owner ].uniq |
       Actor.
         joins(:received_ties).
         merge(Tie.where(:relation_id => relation_ids))
