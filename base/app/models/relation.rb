@@ -55,6 +55,8 @@ class Relation < ActiveRecord::Base
   has_many :audiences, :dependent => :destroy
   has_many :activities, :through => :audiences
 
+  has_many :activity_object_audiences, :dependent => :destroy
+
   scope :actor, lambda { |a|
     where(:actor_id => Actor.normalize_id(a))
   }
