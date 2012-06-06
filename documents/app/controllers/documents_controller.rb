@@ -38,6 +38,8 @@ class DocumentsController < ApplicationController
       format.any {
         path = resource.file.path(params[:style] || params[:format])
 
+        head(:not_found) and return unless File.exist?(path)
+
         send_file path,
                  :filename => resource.file_file_name,
                  :disposition => "inline",
@@ -50,7 +52,7 @@ class DocumentsController < ApplicationController
   def download
     path = @document.file.path(params[:style])
 
-    head(:bad_request) and return unless File.exist?(path)
+    head(:not_found) and return unless File.exist?(path)
 
     send_file_options = {
       :filename => @document.file_file_name,
