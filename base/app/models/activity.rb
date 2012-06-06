@@ -70,59 +70,6 @@ class Activity < ActiveRecord::Base
       merge(Audience.where(:relation_id => Relation.ids_shared_with(subject)))
   }
 
-  scope :wall, lambda { |args|
-    q =
-      select("DISTINCT activities.*").
-      joins(:audiences).
-      joins(:relations).
-      roots
-
-    if args[:object_type].present?
-      q = q.joins(:activity_objects).
-            where('activity_objects.object_type' => args[:object_type])
-    end
-
-    audiences  = Audience.arel_table
-    relations  = Relation.arel_table
-
-    owner_conditions =
-      arel_table[:author_id].eq(Actor.normalize_id(args[:owner])).
-        or(arel_table[:user_author_id].eq(Actor.normalize_id(args[:owner]))).
-        or(arel_table[:owner_id].eq(Actor.normalize_id(args[:owner])))
-
-    audience_conditions =
-      audiences[:relation_id].in(args[:relation_ids]).
-        or(relations[:type].eq('Relation::Public'))
-
-    conds =
-      case args[:type]
-      when :home
-        followed_conditions =
-          arel_table[:author_id].in(args[:followed]).
-            or(arel_table[:owner_id].in(args[:followed]))
-
-        owner_conditions.
-          or(followed_conditions.and(audience_conditions))
-      when :profile
-        if args[:for].present?
-          visitor_conditions =
-            arel_table[:author_id].eq(Actor.normalize_id(args[:for])).
-              or(arel_table[:owner_id].eq(Actor.normalize_id(args[:for])))
-
-          owner_conditions.
-            and(visitor_conditions.or(audience_conditions))
-        else
-          owner_conditions.
-            and(audience_conditions)
-        end
-      else
-        raise "Unknown wall type: #{ args[:type] }" 
-      end
-
-    q.where(conds).
-      order("created_at desc")
-  }
-
   after_create  :increment_like_count
   after_destroy :decrement_like_count, :delete_notifications
 
