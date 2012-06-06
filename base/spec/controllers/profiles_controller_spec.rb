@@ -38,6 +38,13 @@ describe ProfilesController do
       response.should redirect_to([@user, :profile])
     end
 
+    it "should update via AJAX" do
+      put :update, :user_id => @user.to_param, :profile => { :organization => "Social Stream" }, :format => :js
+
+      response.should be_success
+    end
+
+
     it "should not update other's" do
       begin
         put :update, :user_id => Factory(:user).to_param, :profile => { :organization => "Social Stream" }

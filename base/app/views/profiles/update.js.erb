@@ -1,6 +1,6 @@
 <% if @profile.valid? %>
   <% flash[:notice] = t('profile.update.success') %>
-  document.location.href="<%= resource_path(@profile) %>";
+  document.location.href="<%= polymorphic_path([ current_subject, :profile ]) %>";
 <% else %>
   if ($("#profile_notice").length == 0){
     $("#profile_form").prepend('<div id="profile_notice" class="notice"></div>');  
