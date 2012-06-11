@@ -1,4 +1,6 @@
 class ObjectChannelsToActions < ActiveRecord::Migration
+  class Channel < ActiveRecord::Base; end
+
   def up
     add_column :activity_actions, :author, :boolean, :default => false
     add_column :activity_actions, :user_author, :boolean, :default => false
