@@ -25,6 +25,10 @@ module SocialStream
         end
       end
 
+      initializer "social_stream-base.model.load_single_relations" do
+        SocialStream.single_relations.each{ |r| "Relation::#{ r.to_s.classify }".constantize }
+      end
+
       initializer "social_stream-base.controller.helpers" do
         ActiveSupport.on_load(:action_controller) do
           include SocialStream::Controllers::Helpers

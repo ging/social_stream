@@ -79,6 +79,9 @@ module SocialStream
   mattr_accessor :relation_model
   @@relation_model = :custom
 
+  mattr_accessor :single_relations
+  @@single_relations = [ :public, :follow, :reject ]
+
   mattr_accessor :resque_access
   @@resque_access = true
  
