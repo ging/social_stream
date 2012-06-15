@@ -23,7 +23,7 @@ SocialStream.Events.Action = (function(SS, $, undefined){
 		}
 	}
 
-//	SocialStream.Action.addUpdateCallback(animateCalendar);
+	SocialStream.Action.addUpdateCallback(animateCalendar);
 
 	return {
 	}

@@ -27,22 +27,18 @@ class EventsController < ApplicationController
 
   private
 
-  def collection
-    @activities =
-      (profile_subject || current_subject).wall(:profile,
-                           :for => current_subject,
-                           :object_type => :Event)
-  end
-
   def events_with_start_and_end
     @start_time = Time.at(params[:start].to_i)
     @end_time   = Time.at(params[:end].to_i)
 
-    @activities =
-      collection.
-      joins(:activity_objects => :event).
-      merge(Event.between(@start_time, @end_time))
+    subject = profile_or_current_subject
 
-    @events = @activities.map(&:direct_object)
+    @events = Event.followed_by(subject)
+
+    if subject != current_subject
+      @events = @events.shared_with(current_subject)
+    end
+
+    @events = @events.between(@start_time, @end_time)
   end
 end
