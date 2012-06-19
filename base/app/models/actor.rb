@@ -5,7 +5,7 @@
 # type of a {Tie} is a {Relation}. Each actor can define and customize their relations own
 # {Relation Relations}.
 #
-# Every {Actor} has an Avatar, a {Profile} with personal o group information, contact data, etc.
+# Every {Actor} has an Avatar, a {Profile} with personal or group information, contact data, etc.
 #
 # {Actor Actors} perform {ActivityAction actions} (like, suscribe, etc.) on
 # {ActivityObject activity objects} ({Post posts}, {Comment commments}, pictures, events..)
