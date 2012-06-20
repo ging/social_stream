@@ -81,6 +81,19 @@ class Actor < ActiveRecord::Base
            :source  => :activity_object,
            :conditions => { 'activity_actions.follow' => true }
 
+  has_many :authored_activities,
+           :class_name  => "Activity",
+           :foreign_key => :author_id,
+           :dependent   => :destroy
+  has_many :user_authored_activities,
+           :class_name  => "Activity",
+           :foreign_key => :user_author_id,
+           :dependent   => :destroy
+  has_many :owned_activities,
+           :class_name  => "Activity",
+           :foreign_key => :owner_id,
+           :dependent   => :destroy
+
   scope :alphabetic, order('actors.name')
 
   scope :letter, lambda { |param|
