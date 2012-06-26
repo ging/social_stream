@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   # jQuery
   s.add_runtime_dependency('jquery-rails', '>= 1.0.9')
   # Authorization
-  s.add_runtime_dependency('cancan', '~> 1.6.4')
+  s.add_runtime_dependency('cancan', '1.6.7')
   # Pagination
   s.add_runtime_dependency('kaminari', '~> 0.13.0')
   # OAuth client
