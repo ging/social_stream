@@ -6,7 +6,13 @@ class AddCommentCountToActivityObject < ActiveRecord::Migration
     ActivityObject.reset_column_information
 
     ActivityObject.all.each do |ao|
-      ao.comment_count = Activity.includes(:activity_objects).where('activity_objects.object_type' => "Comment").where(:ancestry => [ao.activities.first.id]).size
+      parent_activity = ao.activities.first
+
+      # Actors have not parent activities
+      next if parent_activity.blank?
+
+      ao.comment_count = Activity.includes(:activity_objects).where('activity_objects.object_type' => "Comment").where(:ancestry => [parent_activity.id]).size
+
       ao.save! if ao.comment_count > 0
     end
 
