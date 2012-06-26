@@ -92,6 +92,21 @@ class ActivityObject < ActiveRecord::Base
       merge(ActivityObjectAudience.where(:relation_id => Relation.ids_shared_with(subject)))
   }
 
+  # Obtain the {ActivityAction} between this {ActivityObject}
+  # and the {Actor} identified by actor_id
+  def received_action_by(actor_id)
+    received_actions.
+      find{ |a| a.actor_id == actor_id }
+  end
+
+  # Obtain received_action_by(actor_id) or create it if it does
+  # not exist
+  def received_action_by!(actor_id)
+    received_action_by(actor_id) ||
+      received_actions.build(:actor_id  => actor_id)
+  end
+
+  # Get the first {ActivityAction} that has activated the role flag
   def received_role_action(role)
     received_actions.
       find{ |a| a.__send__ "#{ role }?" }
@@ -106,17 +121,10 @@ class ActivityObject < ActiveRecord::Base
 
       def #{ role }_id=(actor_id)                    # def author_id=(actor_id)
         action =                                     #   action =
-          received_actions.                          #     received_actions.
-            find{ |a| a.actor_id == actor_id }       #       select{ |a| a.actor_id == actor_id }
+          received_action_by!(actor_id)              #     received_actions_by!(actor_id)
                                                      #
-        if action                                    #   if action 
-          action.#{ role } = true                    #     action.author = true
-        else                                         #   else
-          received_actions.                          #     received_actions.
-            build :actor_id  => actor_id,            #       build :actor_id => actor_id,
-                  :#{ role } => true                 #             :author   => true
-        end                                          #   end
-                                                     #
+        action.#{ role } = true                      #     action.author = true
+                                                    #
         actor_id                                     #  actor_id
       end                                            # end
 
@@ -133,7 +141,6 @@ class ActivityObject < ActiveRecord::Base
       def #{ role }_subject # def author_subject
         #{ role }.subject   #   author.subject
       end                   # end
-
     EOC
 
     class_eval code, __FILE__, __LINE__ - code.lines.count - 2
