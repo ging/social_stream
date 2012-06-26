@@ -121,10 +121,10 @@ class ActivityObject < ActiveRecord::Base
 
       def #{ role }_id=(actor_id)                    # def author_id=(actor_id)
         action =                                     #   action =
-          received_action_by!(actor_id)              #     received_actions_by!(actor_id)
+          received_action_by!(actor_id)              #     received_action_by!(actor_id)
                                                      #
         action.#{ role } = true                      #     action.author = true
-                                                    #
+                                                     #
         actor_id                                     #  actor_id
       end                                            # end
 
