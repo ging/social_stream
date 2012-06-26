@@ -182,12 +182,14 @@ class Activity < ActiveRecord::Base
 
   # The first activity object of this activity
   def direct_activity_object
-    activity_objects.first
+    @direct_activity_object ||=
+      activity_objects.first
   end
 
   # The first object of this activity
   def direct_object
-    direct_activity_object.try(:object)
+    @direct_object ||=
+      direct_activity_object.try(:object)
   end
 
   # The title for this activity in the stream
