@@ -9,6 +9,7 @@ class FixActivityObjectFollowerCount < ActiveRecord::Migration
     end
 
     ActivityObject.record_timestamps = true
+    ActivityObject.reset_column_information
   end
 
   def down
