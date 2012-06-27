@@ -31,6 +31,10 @@ describe ActivityAction do
       it "should not be duplicated" do
         @post.received_actions.count.should == 2
       end
+
+      it "should initialize follower count" do
+        @post.reload.follower_count.should == 2
+      end
     end
 
     describe "where posting to self" do
@@ -40,6 +44,10 @@ describe ActivityAction do
 
       it "should not be duplicated" do
         @post.received_actions.count.should == 1
+      end
+
+      it "should initialize follower count" do
+        @post.reload.follower_count.should == 1
       end
     end
 

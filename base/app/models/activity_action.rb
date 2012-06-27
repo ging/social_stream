@@ -5,8 +5,6 @@ class ActivityAction < ActiveRecord::Base
   belongs_to :actor
   belongs_to :activity_object
 
-  before_save :change_follower_count
-
   scope :sent_by, lambda{ |actor|
     where(:actor_id => Actor.normalize_id(actor))
   }
@@ -27,7 +25,10 @@ class ActivityAction < ActiveRecord::Base
     authored_or_owned.sent_by(subject)
   }
 
+
   before_create :follow_by_author_and_owner
+
+  after_save :change_follower_count
 
   private
 
