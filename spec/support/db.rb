@@ -18,4 +18,4 @@ end
 #
 # Some models are loaded before the database is created,
 # reporting their table does not exist in specs
-ActiveRecord::Base.connection.schema_cache.clear!
+ActiveRecord::Base.descendants.map(&:reset_column_information)
