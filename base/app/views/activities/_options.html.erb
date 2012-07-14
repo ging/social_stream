@@ -22,7 +22,7 @@
       </div>
     <% end %>
 
-    <% if activity.delete_object_by?(current_subject) %>
+    <% if activity.direct_object && can?(:destroy, activity.direct_object) %>
       <div class="verb_delete"> 
         · <%= link_to t('activity.delete'), activity.direct_object , :confirm => t('confirm_delete', 
                       :scope => activity.direct_object.class.to_s.underscore), :method => :delete,  

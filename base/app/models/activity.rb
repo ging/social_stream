@@ -245,65 +245,6 @@ class Activity < ActiveRecord::Base
     [parent] + siblings
   end
 
-  # Is subject allowed to perform action on this {Activity}?
-  def allow?(subject, action)
-    return false if author.blank?
-
-    case action
-    when 'create'
-      return false if subject.blank? || author_id != Actor.normalize_id(subject)
-
-      rels = Relation.normalize(relation_ids)
-
-      own_rels = rels.select{ |r| r.actor_id == author_id }
-      # Consider Relation::Single as own_relations
-      own_rels += rels.select{ |r| r.is_a?(Relation::Single) }
-
-      foreign_rels = rels - own_rels
-
-      # Only posting to own relations or allowed to post to foreign relations
-      return foreign_rels.blank? && own_rels.present? ||
-             foreign_rels.present? && Relation.allow(subject, 
-                                                     action,
-                                                     'activity',
-                                                     :in => foreign_rels).
-                                               all.size == foreign_rels.size
-
-    when 'read'
-      return true if relations.select{ |r| r.is_a?(Relation::Public) }.any?
-
-      return false if subject.blank?
-
-      return true if [author_id, owner_id].include?(Actor.normalize_id(subject))
-    when 'update'
-      return true if [author_id, owner_id].include?(Actor.normalize_id(subject))
-    when 'destroy'
-      # We only allow destroying to sender and receiver by now
-      return [author_id, owner_id].include?(Actor.normalize_id(subject))
-    end
-
-    Relation.
-      allow?(subject, action, 'activity', :in => self.relation_ids, :public => false)
-  end
-
-  # Can subject delete the object of this activity?
-  def delete_object_by?(subject)
-    subject.present? &&
-    direct_object.present? &&
-      ! direct_object.is_a?(Actor) &&
-      ! direct_object.class.ancestors.include?(SocialStream::Models::Subject) &&
-      allow?(subject, 'destroy')
-  end
-
-  # Can subject edit the object of this activity?
-  def edit_object_by?(subject)
-    subject.present? &&
-    direct_object.present? &&
-      ! direct_object.is_a?(Actor) &&
-      ! direct_object.class.ancestors.include?(SocialStream::Models::Subject) &&
-      allow?(subject, 'update')
-  end
-
   # Is this activity public?
   def public?
     relation_ids.include? Relation::Public.instance.id

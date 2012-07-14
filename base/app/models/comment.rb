@@ -12,7 +12,8 @@ class Comment < ActiveRecord::Base
   end
 
   def parent_post
-    self.post_activity.parent.direct_object
+    _activity_parent_id && _activity_parent.direct_object ||
+      post_activity.parent.direct_object
   end
 
   def title

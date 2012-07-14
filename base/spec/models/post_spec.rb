@@ -125,6 +125,4 @@ describe Post do
       Post.authored_by(post.author).should include(post)
     end
   end
-
-
 end

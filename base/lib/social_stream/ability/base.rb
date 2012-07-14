@@ -37,38 +37,26 @@ module SocialStream
         end
 
         can :create, Comment do |c|
-          c._activity_parent.allow?(subject, 'read')
+          can? :read, c.parent_post
         end
 
         can :read, Comment do |c|
-          c.post_activity.allow?(subject, 'read')
+          can? :read, c.parent_post
         end
 
         can :update, Comment do |c|
-          c.post_activity.allow?(subject, 'update')
+          can? :update, c.parent_post
         end
 
         can :destroy, Comment do |c|
-          c.post_activity.allow?(subject, 'destroy')
+          can? :destroy, c.parent_post
         end
 
         # Activities
-        can :create, Activity do |a|
-          a.allow?(subject, 'create')
-        end
-
         can :read, Activity do |a|
           a.public? ||
             subject.present? &&
             a.audience.include?(subject.actor) 
-        end
-
-        can :update, Activity do |a|
-          a.allow?(subject, 'update')
-        end
-
-        can :destroy, Activity do |a|
-          a.allow?(subject, 'destroy')
         end
 
         # Users
