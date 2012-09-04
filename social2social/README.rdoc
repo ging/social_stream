@@ -1,6 +1,7 @@
-= Social2social
+= Social2Social
 	
-#TO-DO: Say something amazing about social2social
+Provides a SocialStream powered node with social network federation support
+using OStatus
 
 = Installation
 
