@@ -3,9 +3,7 @@ class CreateSocial2social < ActiveRecord::Migration
   def self.up
     create_table :remote_subjects, :force => true do |t|
       t.integer :actor_id
-      t.string :webfinger_slug
-      t.string :hub_url
-      t.string :origin_node_url
+      t.string :webfinger_id
       t.timestamps
     end
     
