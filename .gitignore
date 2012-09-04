@@ -6,10 +6,15 @@ Gemfile.lock
 nbproject
 .loadpath
 .project
-.DS_Store
+*.DS_Store
 .yardoc/*
 lib/generators/social_stream/templates/public/images/tmp/
 **.*swp
 spec/dummy/documents/pictures/*
 spec/dummy/documents/documents/*
+log/*.log
+pkg/
+spec/dummy/db/*.sqlite3
+spec/dummy/log/*.log
+spec/dummy/tmp/
 .code_swarm
