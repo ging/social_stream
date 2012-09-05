@@ -4,7 +4,7 @@ require File.join(File.dirname(__FILE__), 'lib', 'social_stream', 'ostatus', 've
 Gem::Specification.new do |s|
   s.name = "social_stream-ostatus"
   s.version = SocialStream::Ostatus::VERSION.dup
-  s.authors = ["Víctor Sánchez Belmar", "GING - DIT - UPM"]
+  s.authors = ["Antonio Tapiador", "GING - DIT - UPM"]
   s.summary = "Provides a Social Stream node with social network federation support via OStatus protocol"
   s.description = "This gem allow you to connect several social stream nodes using PSHB hubs, also allows to follow, and share streams with social stream users in any node."
   s.email = "social-stream@dit.upm.es"

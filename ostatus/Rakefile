@@ -1,16 +1,6 @@
-require 'rubygems'
-require 'bundler'
+require 'bundler/gem_tasks'
 
-begin
-  Bundler.setup(:default, :development)
-rescue Bundler::BundlerError => e
-  $stderr.puts e.message
-  $stderr.puts "Run `bundle install` to install missing gems"
-  exit e.status_code
-end
-
-require 'rake'
-require 'rake/rdoctask'
+require 'rdoc/task'
 
 require 'rspec/core'
 require 'rspec/core/rake_task'
@@ -27,3 +17,10 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
 end
 
 Bundler::GemHelper.install_tasks
+
+# Modify this gem's tags
+class Bundler::GemHelper
+  def version_tag
+    "ostatus#{version}"
+  end
+end
