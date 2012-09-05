@@ -7,7 +7,7 @@ require "action_view/railtie"
 require "action_mailer/railtie"
 
 Bundler.require
-require "social2social"
+require "social_stream-ostatus"
 
 module Dummy
   class Application < Rails::Application

@@ -1,4 +1,4 @@
-= Social2Social
+= SocialStream OStatus
 	
 Provides a SocialStream powered node with social network federation support
 using OStatus
@@ -7,7 +7,7 @@ using OStatus
 
 Add to your Gemfile:
 
-  gem 'social2social'
+  gem 'social_stream-ostatus'
 
 and run:
 
@@ -15,7 +15,7 @@ and run:
 
 Then:
 
-  rails generate social2social:install
+  rails generate social_stream:ostatus:install
 
 You're almost there, now run:
 

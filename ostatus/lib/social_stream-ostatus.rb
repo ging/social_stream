@@ -15,8 +15,8 @@ module SocialStream
     end
 
     module Models
-      autoload :Actor, 'social2social/models/actor'
-      autoload :Audience, 'social2social/models/audience'
+      autoload :Actor, 'social_stream/ostatus/models/actor'
+      autoload :Audience, 'social_stream/ostatus/models/audience'
     end
   end
 end

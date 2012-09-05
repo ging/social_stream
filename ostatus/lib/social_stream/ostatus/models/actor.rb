@@ -19,8 +19,8 @@ module SocialStream
           
           def publish_or_update_public_feed
             t = Thread.new do
-              hub = Social2social.hub 
-              topic = Social2social.node_base_url+'/api/user/'+self.slug+'/public.atom'
+              hub = SocialStream::Ostatus.hub 
+              topic = SocialStream::Ostatus.node_base_url+'/api/user/'+self.slug+'/public.atom'
               
               uri = URI.parse(hub)
               response = Net::HTTP::post_form(uri,{ 'hub.mode' => 'publish',

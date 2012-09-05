@@ -13,7 +13,7 @@ class RemoteusersController < ApplicationController
       
       #Requesting a subscription to the hub
       t = Thread.new do
-        uri = URI.parse(Social2social.hub)   
+        uri = URI.parse(SocialStream::Ostatus.hub)   
         response = Net::HTTP::post_form(uri,{ 'hub.callback' => pshb_callback_url, 
                                               'hub.mode'     => "subscribe",
                                               'hub.topic'    => u.public_feed_url,

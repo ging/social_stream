@@ -1,4 +1,4 @@
-class CreateSocial2social < ActiveRecord::Migration
+class CreateSocialStreamOstatus < ActiveRecord::Migration
   
   def self.up
     create_table :remote_subjects, :force => true do |t|
