@@ -2,7 +2,7 @@ ActiveRecord::Base.connection.tables.each do |t|
   ActiveRecord::Base.connection.drop_table t
 end
 
-gems = %w{ documents events linkser presence }
+gems = %w{ documents events linkser presence ostatus }
 
 gems.each do |g|
   require "social_stream/migrations/#{ g }"
