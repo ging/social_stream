@@ -46,7 +46,7 @@ Gem::Specification.new do |s|
   # Tagging
   s.add_runtime_dependency('acts-as-taggable-on','~> 2.2.2')
   # HTML Forms
-  s.add_runtime_dependency('formtastic','~> 1.2.3')
+  s.add_runtime_dependency('formtastic','>= 1.2.3')
   # Background jobs
   s.add_runtime_dependency('resque','~> 1.20.0')
   # Modernizr.js javascript library
