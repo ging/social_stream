@@ -137,14 +137,6 @@ class Actor < ActiveRecord::Base
   
   after_create :save_or_create_profile
   
-  class << self
-    def find_by_webfinger!(link)
-      link =~ /(acct:)?(.*)@/
-
-      find_by_slug! $2
-    end
-  end
-  
   #Returning the email address of the model if an email should be sent for this object (Message or Notification).
   #If the actor is a Group and has no email address, an array with the email of the highest rank members will be
   #returned isntead.

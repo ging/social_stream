@@ -10,6 +10,16 @@ module SocialStream
         included do
           after_create :init_feeds_to_hub
         end
+
+        module ClassMethods
+          # Extract the slug from the webfinger id and return the actor
+          # searching by that slug
+          def find_by_webfinger!(link)
+            link =~ /(acct:)?(.*)@/
+
+            find_by_slug! $2
+          end
+        end
         
         def init_feeds_to_hub
           publish_or_update_public_feed

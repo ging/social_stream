@@ -1,5 +1,8 @@
 require 'social_stream-base'
 
+# Ruby implementation of OStatus
+require 'proudhon'
+
 module SocialStream
   module Ostatus
     mattr_accessor :hub

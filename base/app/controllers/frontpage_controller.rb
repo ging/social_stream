@@ -7,12 +7,6 @@ class FrontpageController < ApplicationController
     end
   end
 
-  # Webfinger protocol
-  # http://code.google.com/p/webfinger/
-  def host_meta
-  end
-  
-
   private
 
   def redirect_user_to_home

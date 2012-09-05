@@ -112,10 +112,4 @@ Rails.application.routes.draw do
   constraints SocialStream::Routing::Constraints::Resque.new do
     mount Resque::Server, :at => "/resque"
   end
-
-  # Webfinger
-  match '.well-known/host-meta',:to => 'frontpage#host_meta'
-
-  # Find subjects by slug
-  match 'subjects/lrdd/:id' => 'subjects#lrdd', :as => 'subject_lrdd'
 end
