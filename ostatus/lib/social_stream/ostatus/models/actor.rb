@@ -11,22 +11,20 @@ module SocialStream
           after_create :init_feeds_to_hub
         end
         
-        module InstanceMethods
-          def init_feeds_to_hub
-            publish_or_update_public_feed
-            #TO-DO: add calls to other public feeds if any
-          end
-          
-          def publish_or_update_public_feed
-            t = Thread.new do
-              hub = SocialStream::Ostatus.hub 
-              topic = SocialStream::Ostatus.node_base_url+'/api/user/'+self.slug+'/public.atom'
-              
-              uri = URI.parse(hub)
-              response = Net::HTTP::post_form(uri,{ 'hub.mode' => 'publish',
-                                                    'hub.url'  => topic})
-              #TO-DO: process 4XX look at: response.status
-            end
+        def init_feeds_to_hub
+          publish_or_update_public_feed
+          #TO-DO: add calls to other public feeds if any
+        end
+        
+        def publish_or_update_public_feed
+          t = Thread.new do
+            hub = SocialStream::Ostatus.hub 
+            topic = SocialStream::Ostatus.node_base_url+'/api/user/'+self.slug+'/public.atom'
+            
+            uri = URI.parse(hub)
+            response = Net::HTTP::post_form(uri,{ 'hub.mode' => 'publish',
+                                                  'hub.url'  => topic})
+            #TO-DO: process 4XX look at: response.status
           end
         end
       end 
