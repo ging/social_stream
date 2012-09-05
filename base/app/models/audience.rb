@@ -7,3 +7,5 @@ class Audience < ActiveRecord::Base
   belongs_to :activity
   belongs_to :relation
 end
+
+ActiveSupport.run_load_hooks(:audience, Audience)

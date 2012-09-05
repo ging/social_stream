@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name = "social2social"
+  s.name = "social_stream-ostatus"
   s.version = "0.0.4"
   s.authors = ["Víctor Sánchez Belmar", "GING"]
   s.summary = "Provides a Social Stream node with social network federation support via OStatus protocol"
@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 
   # Gem dependencies
   s.add_runtime_dependency('social_stream-base','~> 0.5.1')
-  s.add_runtime_dependency('nokogiri','~> 1.4.4')
+  s.add_runtime_dependency('nokogiri','> 1.4.4')
   
   # Development Gem dependencies
   s.add_development_dependency('sqlite3-ruby')
