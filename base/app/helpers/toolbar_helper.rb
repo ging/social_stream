@@ -48,11 +48,13 @@ module ToolbarHelper
       result + item[:html]
     }
 
+    toolbar_init = "SocialStream.Toolbar.init({ option: '#{ options[:option] }' });".html_safe
+
     case request.format
     when Mime::JS
-      response = <<-EOJ
-        $('#toolbarContent').html("#{ escape_javascript(content) }");
-        SocialStream.Toolbar.init({ option: '#{ options[:option] }' });
+      response = 
+        "$('#toolbarContent').html(\"#{ escape_javascript(content) }\");\n" +
+        toolbar_init
       EOJ
 
       response.html_safe
@@ -61,11 +63,7 @@ module ToolbarHelper
         content
       end
 
-      content_for(:javascript) do
-      <<-EOJ
-        SocialStream.Toolbar.init({ option: '#{ options[:option] }' });
-      EOJ
-      end
+      content_for :javascript, toolbar_init
     end
   end
 
