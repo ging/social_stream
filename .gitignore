@@ -13,3 +13,4 @@ lib/generators/social_stream/templates/public/images/tmp/
 spec/dummy/documents/pictures/*
 spec/dummy/documents/documents/*
 .code_swarm
+.sass-cache/
