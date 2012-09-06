@@ -5,7 +5,8 @@ class Like
   class << self
     # Find the children activity of activity_id liked by subject
     def find(subject, object)
-      like = new(object.liked_by(subject).first)
+      like = new(object.liked_by(subject).readonly(false).first)
+      return nil if like.object.nil?
       # Cache object to make it available before it is destroyed
       like.object
       like
@@ -18,7 +19,9 @@ class Like
     end
 
     def build(subject, user, object)
-       new object.new_like(subject, user)
+       l = self.find(subject,object)
+       l = new object.new_like(subject, user) if l.nil?
+       l
     end
   end
 
@@ -34,7 +37,9 @@ class Like
   # The object that is liked. It can be an activity
   def object
     @object ||=
-      if @like.is_root?
+      if @like.nil?
+        nil
+      elsif @like.is_root?
         obj = @like.direct_object
         obj = obj.subject if obj.is_a?(Actor)
         obj
