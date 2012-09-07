@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 # Freeze Rails version to help with bunlder resolution
-gem 'rails', '>= 2.3.8'
+gem 'builder', '~> 3.0.0'
 
 # Uncomment the following lines if you are planing to
 # use a local code of any of these gems
