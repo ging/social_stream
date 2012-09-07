@@ -181,6 +181,11 @@ class Relation < ActiveRecord::Base
     self.class.positive_names.include?(self.class.to_s)
   end
 
+  # Does this relation include the follow permission?
+  def follow?
+    permissions.follow.any?
+  end
+
   private
 
   # Before create callback

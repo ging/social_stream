@@ -74,5 +74,27 @@ describe Relation do
       end
     end
   end
+
+  describe 'with follow permission' do
+    before do
+      @relation = Relation.create!
+      @relation.permissions << Permission.find_or_create_by_action('follow')
+    end
+
+    it 'should follow?' do
+      @relation.follow?.should be_true
+    end
+  end
+
+  describe 'without follow permission' do
+    before do
+      @relation = Relation.create!
+    end
+
+    it 'should follow?' do
+      @relation.follow?.should be_false
+    end
+  end
+
 end
 
