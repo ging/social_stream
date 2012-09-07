@@ -9,7 +9,7 @@ module SocialStream
         end
         
         def update_feed_to_hub
-          if relation.is_a?(Relation::Public)
+          if relation.is_a?(::Relation::Public)
             activity.owner.publish_or_update_public_feed
           end
         end
