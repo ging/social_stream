@@ -121,3 +121,5 @@ class Relation::Custom < Relation
     end
   end
 end
+
+ActiveSupport.run_load_hooks(:relation_custom, Relation::Custom)

@@ -3,7 +3,8 @@ class CreateSocialStreamOstatus < ActiveRecord::Migration
   def self.up
     create_table :remote_subjects, :force => true do |t|
       t.integer :actor_id
-      t.string :webfinger_id
+      t.string  :webfinger_id
+      t.text    :webfinger_info
       t.timestamps
     end
     

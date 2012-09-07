@@ -195,4 +195,3 @@ class Relation < ActiveRecord::Base
     self.sender_type = actor.subject_type
   end
 end
-

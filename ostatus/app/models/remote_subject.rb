@@ -1,10 +1,15 @@
 class RemoteSubject < ActiveRecord::Base
   include SocialStream::Models::Subject
+  # Create absolute routes
+  include Rails.application.routes.url_helpers
 
+  attr_reader :url_helper
   attr_accessible :webfinger_id
 
   before_validation :fill_information,
                     :on => :create
+
+  after_create :suscribe_to_public_feed
   
   #validates_format_of :webfinger_slug, :with => Devise.email_regexp, :allow_blank => true
   
@@ -14,24 +19,10 @@ class RemoteSubject < ActiveRecord::Base
 
       return subject if subject.present?
 
-      begin
-        finger = Proudhon::Finger.fetch id
-      rescue
-        raise ActiveRecord::RecordNotFound
-      end
-
       create! :webfinger_id => id
     end
   end
   
-  # Public feed url for this RemoteSubject
-  #
-  # TODO: get from webfinger?
-  # It does not work for every remote user!
-  def public_feed_url
-    "http://#{ webfinger_url }/api/user/#{ name }/public.atom"                       
-  end
-
   # Return the slug in the webfinger_id
   def webfinger_slug
     splitted_webfinger_id.first
@@ -42,7 +33,12 @@ class RemoteSubject < ActiveRecord::Base
     splitted_webfinger_id.last
   end
 
-  protected
+  # URL of the activity feed from this {RemoteSubject}
+  def public_feed_url
+    webfinger_info[:updates_from]
+  end
+
+  private
 
   def splitted_webfinger_id
     @splitted_webfinger_id ||=
@@ -50,6 +46,33 @@ class RemoteSubject < ActiveRecord::Base
   end
 
   def fill_information
+    self.webfinger_info = build_webfinger_info
     self.name = webfinger_id
+  end
+
+  def build_webfinger_info
+    {
+      :updates_from => finger.links[:updates_from]
+    }
+  end
+
+  def finger
+    @finger ||=
+      fetch_finger
+  end
+
+  def fetch_finger
+    Proudhon::Finger.fetch webfinger_id
+  rescue
+    raise ::ActiveRecord::RecordNotFound
+  end
+
+  def suscribe_to_public_feed
+    return if public_feed_url.blank?
+
+    atom = Proudhon::Atom.from_uri(public_feed_url)
+
+    #FIXME: use canonical domain
+    atom.subscribe(pshb_callback_url, :host => SocialStream::Ostatus.pshb_host)
   end
 end
