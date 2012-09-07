@@ -1,8 +1,0 @@
-<h2> Follow remote user: </h2>
-<br/>
-
-<%= form_tag(add_remote_user_url, :method => "post") do %>
-  <%= label_tag(:slug, "Remote user slug:") %>
-  <%= text_field_tag(:slug) %>
-  <%= submit_tag("Follow") %>
-<% end %>

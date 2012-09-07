@@ -1,5 +1,10 @@
 class RemoteSubject < ActiveRecord::Base
-  attr_accessible :name, :webfinger_id, :origin_node_url
+  include SocialStream::Models::Subject
+
+  attr_accessible :webfinger_id
+
+  before_validation :fill_information,
+                    :on => :create
   
   #validates_format_of :webfinger_slug, :with => Devise.email_regexp, :allow_blank => true
   
@@ -9,8 +14,13 @@ class RemoteSubject < ActiveRecord::Base
 
       return subject if subject.present?
 
-      RemoteSubject.create! :name => id,
-                            :webfinger_id => id
+      begin
+        finger = Proudhon::Finger.fetch id
+      rescue
+        raise ActiveRecord::RecordNotFound
+      end
+
+      create! :webfinger_id => id
     end
   end
   
@@ -39,5 +49,7 @@ class RemoteSubject < ActiveRecord::Base
       webfinger_id.split('@')
   end
 
-
+  def fill_information
+    self.name = webfinger_id
+  end
 end
