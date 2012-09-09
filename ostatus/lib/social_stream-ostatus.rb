@@ -25,6 +25,7 @@ module SocialStream
     end
 
     module Models
+      autoload :Activity, 'social_stream/ostatus/models/activity'
       autoload :Actor, 'social_stream/ostatus/models/actor'
       autoload :Audience, 'social_stream/ostatus/models/audience'
       module Relation

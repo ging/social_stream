@@ -1,6 +1,12 @@
 module SocialStream
   module Ostatus
     class Engine < Rails::Engine
+      initializer 'social_stream-ostatus.activity' do
+        ActiveSupport.on_load(:activity) do
+          include SocialStream::Ostatus::Models::Activity
+        end
+      end
+
       initializer 'social_stream-ostatus.actor' do
         ActiveSupport.on_load(:actor) do
           include SocialStream::Ostatus::Models::Actor
