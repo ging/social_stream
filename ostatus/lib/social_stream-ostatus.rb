@@ -5,15 +5,18 @@ require 'proudhon'
 
 module SocialStream
   module Ostatus
+    # PuSH hub
     mattr_accessor :hub
     # Default to the PubSubHubbub reference Hub server
-    @@hub = 'pubsubhubbub.appspot.com'
+    @@hub = 'http://pubsubhubbub.appspot.com'
     
-    mattr_accessor :node_base_url
-    @@node_base_url = :node_base_url
+    # The host where the hub should take the activity feed from
+    mattr_accessor :activity_feed_host
+    @@activity_feed_host = 'localhost:3000'
 
+    # The host where the PuSH should send the callbacks to
     mattr_accessor :pshb_host
-    @@node_base_url = :pshb_host
+    @@pshb_host = 'localhost:3000'
    
     class << self
       def setup 

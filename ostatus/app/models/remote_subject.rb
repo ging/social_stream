@@ -66,8 +66,6 @@ class RemoteSubject < ActiveRecord::Base
 
   def fetch_finger
     Proudhon::Finger.fetch webfinger_id
-  rescue
-    raise ::ActiveRecord::RecordNotFound
   end
 
   def suscribe_to_public_feed

@@ -1,6 +1,19 @@
 atom_feed('xmlns:activity' => 'http://activitystrea.ms/spec/1.0/') do |feed|
+  feed.link :rel => 'self', :href => url_for(:only_path => false)
+  feed.link :rel => 'next', :href => url_for(:only_path => false, :page => params[:page].to_i + 1)
+  if params[:page].to_i > 1
+    feed.link :rel => 'previous', :href => url_for(:only_path => false, :page => params[:page].to_i - 1)
+  end 
+
+  #FIXME find a way to decouple the view from here
+
+  if defined? SocialStream::Ostatus
+    feed.link :rel => 'hub', :href => SocialStream::Ostatus.hub
+  end
+
   feed.title(profile_subject.name + ' stream') 
   feed.updated(@activities.first.present? ? @activities.first.updated_at : Time.now)
+
   feed.author do
     feed.name(profile_subject.name)
   end
@@ -26,10 +39,4 @@ atom_feed('xmlns:activity' => 'http://activitystrea.ms/spec/1.0/') do |feed|
       entry.content(render(activity.activity_objects), :type => 'text/html')
     end
   end
-
-  feed.link :rel => 'self', :href => url_for(:only_path => false)
-  feed.link :rel => 'next', :href => url_for(:only_path => false, :page => params[:page].to_i + 1)
-  if params[:page].to_i > 1
-    feed.link :rel => 'previous', :href => url_for(:only_path => false, :page => params[:page].to_i - 1)
-  end 
 end

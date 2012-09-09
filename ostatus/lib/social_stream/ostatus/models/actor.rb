@@ -6,9 +6,11 @@ module SocialStream
     module Models 
       module Actor
         extend ActiveSupport::Concern
+
+        include Rails.application.routes.url_helpers
         
         included do
-          after_create :init_feeds_to_hub
+          after_create :publish_feed
         end
 
         module ClassMethods
@@ -21,19 +23,15 @@ module SocialStream
           end
         end
         
-        def init_feeds_to_hub
-          publish_or_update_public_feed
-          #TO-DO: add calls to other public feeds if any
-        end
-        
-        def publish_or_update_public_feed
+        def publish_feed
           t = Thread.new do
-            hub = SocialStream::Ostatus.hub 
-            topic = SocialStream::Ostatus.node_base_url+'/api/user/'+self.slug+'/public.atom'
+            uri = URI.parse(SocialStream::Ostatus.hub)
+            topic = polymorphic_url [subject, :activities],
+                                    :format => :atom,
+                                    :host => SocialStream::Ostatus.activity_feed_host
             
-            uri = URI.parse(hub)
-            response = Net::HTTP::post_form(uri,{ 'hub.mode' => 'publish',
-                                                  'hub.url'  => topic})
+            response = Net::HTTP::post_form uri, { 'hub.mode' => 'publish',
+                                                   'hub.url'  => topic }
             #TO-DO: process 4XX look at: response.status
           end
         end
