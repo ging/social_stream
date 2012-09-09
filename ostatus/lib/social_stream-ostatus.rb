@@ -6,7 +6,8 @@ require 'proudhon'
 module SocialStream
   module Ostatus
     mattr_accessor :hub
-    @@hub = :hub
+    # Default to the PubSubHubbub reference Hub server
+    @@hub = 'pubsubhubbub.appspot.com'
     
     mattr_accessor :node_base_url
     @@node_base_url = :node_base_url
