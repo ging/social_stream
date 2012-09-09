@@ -24,6 +24,8 @@ module SocialStream
         end
         
         def publish_feed
+          return if subject_type == "RemoteSubject"
+
           t = Thread.new do
             uri = URI.parse(SocialStream::Ostatus.hub)
             topic = polymorphic_url [subject, :activities],
