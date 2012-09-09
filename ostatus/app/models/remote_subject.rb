@@ -12,7 +12,8 @@ class RemoteSubject < ActiveRecord::Base
   before_validation :fill_information,
                     :on => :create
 
-  after_create :suscribe_to_public_feed
+  after_create  :suscribe_to_public_feed
+  after_destroy :unsuscribe_to_public_feed
   
   #validates_format_of :webfinger_slug, :with => Devise.email_regexp, :allow_blank => true
   
@@ -74,5 +75,13 @@ class RemoteSubject < ActiveRecord::Base
     atom = Proudhon::Atom.from_uri(public_feed_url)
 
     atom.subscribe(pshb_callback_url(:host => SocialStream::Ostatus.pshb_host))
+  end
+
+  def unsuscribe_to_public_feed
+    return if public_feed_url.blank?
+
+    atom = Proudhon::Atom.from_uri(public_feed_url)
+
+    atom.unsubscribe(pshb_callback_url(:host => SocialStream::Ostatus.pshb_host))
   end
 end
