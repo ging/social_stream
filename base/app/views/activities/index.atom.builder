@@ -1,8 +1,7 @@
 atom_feed('xmlns:activity' => 'http://activitystrea.ms/spec/1.0/') do |feed|
-  feed.link :rel => 'self', :href => url_for(:only_path => false)
-  feed.link :rel => 'next', :href => url_for(:only_path => false, :page => params[:page].to_i + 1)
+  feed.link :rel => 'next', :href => url_for(:only_path => false, :page => params[:page].to_i + 1, :format => :atom)
   if params[:page].to_i > 1
-    feed.link :rel => 'previous', :href => url_for(:only_path => false, :page => params[:page].to_i - 1)
+    feed.link :rel => 'previous', :href => url_for(:only_path => false, :page => params[:page].to_i - 1, :format => :atom)
   end 
 
   #FIXME find a way to decouple the view from here
