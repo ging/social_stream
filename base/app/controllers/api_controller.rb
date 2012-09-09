@@ -22,17 +22,4 @@ class ApiController < ApplicationController
         
     redirect_to :controller => :users, :action => :show, :format => params[:format], :id => params[:id], :auth_token => params[:auth_token]
   end
-  
-  def activity_atom_feed
-    @subject = Actor.find_by_slug!(params[:id])
-    # FIXME: why? check with Victor
-    @subject ||= current_user
-
-    @activities = @subject.wall(:home).page(params[:page]).per(10)
-     
-    respond_to do |format|
-      format.atom
-    end
-  end
-  
 end
