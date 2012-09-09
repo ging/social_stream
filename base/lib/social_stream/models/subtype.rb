@@ -22,11 +22,9 @@ module SocialStream #:nodoc:
 
         class_eval <<-EOS
           def #{ supertype_name }!                                              # def actor!
-            return #{ supertype_name } if #{ supertype_name }.present?          #   return actor if actor.present?
-            # FIXME: ruby1.9 remove .inspect
-            @_supertype =  build_#{ supertype_name }(#{ supertype_options[:build].inspect }) #     build_actor(:subject_type => "User")
-            @_supertype.#{ base_class.name.underscore } = self
-            @_supertype
+            #{ supertype_name } ||                                              #   actor ||
+              # FIXME: ruby1.9 remove .inspect
+              build_#{ supertype_name }(#{ supertype_options[:build].inspect }) #     build_actor(:subject_type => "User")
           end                                                                   # end
 
         EOS
