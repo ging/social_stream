@@ -6,6 +6,9 @@ class RemoteSubject < ActiveRecord::Base
   attr_reader :url_helper
   attr_accessible :webfinger_id
 
+  # Save webfinger_info hash into the database
+  serialize :webfinger_info
+
   before_validation :fill_information,
                     :on => :create
 
@@ -72,7 +75,6 @@ class RemoteSubject < ActiveRecord::Base
 
     atom = Proudhon::Atom.from_uri(public_feed_url)
 
-    #FIXME: use canonical domain
-    atom.subscribe(pshb_callback_url, :host => SocialStream::Ostatus.pshb_host)
+    atom.subscribe(pshb_callback_url(:host => SocialStream::Ostatus.pshb_host))
   end
 end
