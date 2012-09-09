@@ -10,7 +10,7 @@ module SocialStream
         include Rails.application.routes.url_helpers
         
         included do
-          after_create :publish_feed
+          after_commit :publish_feed
         end
 
         module ClassMethods
