@@ -9,6 +9,8 @@ module SocialStream #:nodoc:
     module Subtype
       extend ActiveSupport::Concern
 
+      include SocialStream::ActivityStreams::Subtype
+
       included do
         class << self
           attr_reader :supertype_name, :supertype_options

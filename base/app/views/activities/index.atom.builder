@@ -24,18 +24,18 @@ atom_feed('xmlns:activity' => 'http://activitystrea.ms/spec/1.0/') do |feed|
 
       entry.author do |a|
         a.name(activity.sender.name)
-        a.tag!('activity:object-type', 'person')
+        a.tag!('activity:object-type', activity.sender.as_object_type)
       end
 
       entry.tag!('activity:verb', activity.verb)
 
-      entry.tag!('activity:object') do |act_ob|
-        act_ob.title('Activity')
-        act_ob.tag!('activity:object-type','status')
-        act_ob.publised(activity.created_at)
+      if (obj = activity.direct_object).present?
+        entry.tag!('activity:object') do |act_obj|
+          act_obj.title(obj.title)
+          act_obj.tag!('activity:object-type', obj.as_object_type)
+          act_obj.published(obj.created_at)
+        end
       end
-
-      entry.content(render(activity.activity_objects), :type => 'text/html')
     end
   end
 end

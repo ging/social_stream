@@ -17,7 +17,7 @@ module SocialStream
     #
     module Subject
       extend ActiveSupport::Concern
-      
+
       included do
         subtype_of :actor,
                    :build => { :subject_type => to_s }

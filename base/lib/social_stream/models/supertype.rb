@@ -11,6 +11,8 @@ module SocialStream #:nodoc:
     module Supertype
       extend ActiveSupport::Concern
 
+      include SocialStream::ActivityStreams::Supertype
+
       included do
         subtypes.each do |s|                # [ :user, :group ].each do |s|
           has_one s, :dependent => :destroy #   has_one s, :dependent => :destroy

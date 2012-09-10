@@ -29,6 +29,13 @@ module SocialStream
         SocialStream.single_relations.each{ |r| "Relation::#{ r.to_s.classify }".constantize }
       end
 
+      initializer "social_stream-base.model.register_activity_streams" do
+        SocialStream::ActivityStreams.register 'person', :user
+        SocialStream::ActivityStreams.register 'group'
+        SocialStream::ActivityStreams.register 'note',   :post
+        SocialStream::ActivityStreams.register 'comment'
+      end
+
       initializer "social_stream-base.controller.helpers" do
         ActiveSupport.on_load(:action_controller) do
           include SocialStream::Controllers::Helpers

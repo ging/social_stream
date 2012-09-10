@@ -136,6 +136,12 @@ class Actor < ActiveRecord::Base
   after_create :create_initial_relations
   
   after_create :save_or_create_profile
+
+  # FIXME SocialStream::ActivityStreams::Supertype should take precedence over
+  # SocialStream::ActivityStreams::Subtype
+  def as_object_type
+    subtype_instance.as_object_type
+  end
   
   #Returning the email address of the model if an email should be sent for this object (Message or Notification).
   #If the actor is a Group and has no email address, an array with the email of the highest rank members will be

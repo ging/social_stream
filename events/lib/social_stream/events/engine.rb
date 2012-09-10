@@ -7,16 +7,20 @@ module SocialStream
         end
       end
 
-      initializer "social_stream-events.actor" do
+      initializer "social_stream-events.models.actor" do
         ActiveSupport.on_load(:actor) do
           include SocialStream::Events::Models::Actor
         end
       end
 
-      initializer "social_stream-events.document" do
+      initializer "social_stream-events.models.document" do
         ActiveSupport.on_load(:document) do
           include SocialStream::Events::Models::Document
         end
+      end
+
+      initializer "social_stream-events.models.register_activity_streams" do
+        SocialStream::ActivityStreams.register 'event'
       end
 
       initializer "social_stream-events.views.settings" do
