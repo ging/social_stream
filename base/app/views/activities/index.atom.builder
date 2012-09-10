@@ -19,7 +19,7 @@ atom_feed('xmlns:activity' => 'http://activitystrea.ms/spec/1.0/') do |feed|
 
   @activities.each do |activity|
     feed.entry(activity) do |entry|
-      entry.title(activity.title(self))
+      entry.title(activity.stream_title)
       entry.summary(activity.direct_object.try(:description))
 
       entry.author do |a|
