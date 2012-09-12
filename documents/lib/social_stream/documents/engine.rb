@@ -55,10 +55,10 @@ module SocialStream
       end
 
       initializer "social_stream-documents.model.register_activity_streams" do
-        SocialStream::ActivityStreams.register 'file',  :document
-        SocialStream::ActivityStreams.register 'image', :picture
-        SocialStream::ActivityStreams.register 'audio'
-        SocialStream::ActivityStreams.register 'video'
+        SocialStream::ActivityStreams.register :file,  :document
+        SocialStream::ActivityStreams.register :image, :picture
+        SocialStream::ActivityStreams.register :audio
+        SocialStream::ActivityStreams.register :video
       end
 
       initializer "social_stream-documents.views.toolbar" do

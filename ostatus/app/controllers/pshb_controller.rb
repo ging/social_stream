@@ -16,10 +16,6 @@ class PshbController < ApplicationController
       return
     end  
 
-    atom = Proudhon::Atom.parse request.body.read
-
-    atom.entries.each do |entry|
-      Activity.from_entry entry
-    end
+    SocialStream::ActivityStreams.from_pshb_callback(request.body.read)
   end
 end

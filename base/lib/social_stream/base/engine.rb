@@ -30,10 +30,10 @@ module SocialStream
       end
 
       initializer "social_stream-base.model.register_activity_streams" do
-        SocialStream::ActivityStreams.register 'person', :user
-        SocialStream::ActivityStreams.register 'group'
-        SocialStream::ActivityStreams.register 'note',   :post
-        SocialStream::ActivityStreams.register 'comment'
+        SocialStream::ActivityStreams.register :person, :user
+        SocialStream::ActivityStreams.register :group
+        SocialStream::ActivityStreams.register :note,   :post
+        SocialStream::ActivityStreams.register :comment
       end
 
       initializer "social_stream-base.controller.helpers" do

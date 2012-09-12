@@ -20,7 +20,7 @@ module SocialStream
       end
 
       initializer "social_stream-events.models.register_activity_streams" do
-        SocialStream::ActivityStreams.register 'event'
+        SocialStream::ActivityStreams.register :event
       end
 
       initializer "social_stream-events.views.settings" do

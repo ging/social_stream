@@ -48,6 +48,11 @@ module SocialStream
             merge(ActivityObject.followed_by(subject))
         }
       end
+
+      module ClassMethods
+        # Nothing here by the moment, but methods are added by other
+        # SocialStream's components, such as Ostatus
+      end
     end
   end
 end

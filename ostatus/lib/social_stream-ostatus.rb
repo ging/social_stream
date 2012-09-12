@@ -24,10 +24,16 @@ module SocialStream
       end
     end
 
+    autoload :ActivityStreams, 'social_stream/ostatus/activity_streams'
+
     module Models
-      autoload :Activity, 'social_stream/ostatus/models/activity'
       autoload :Actor, 'social_stream/ostatus/models/actor'
       autoload :Audience, 'social_stream/ostatus/models/audience'
+
+      module Object
+        autoload :ClassMethods, 'social_stream/ostatus/models/object'
+      end
+
       module Relation
         autoload :Custom, 'social_stream/ostatus/models/relation/custom'
       end
