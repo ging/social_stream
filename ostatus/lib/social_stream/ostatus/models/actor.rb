@@ -34,7 +34,9 @@ module SocialStream
             
             response = Net::HTTP::post_form uri, { 'hub.mode' => 'publish',
                                                    'hub.url'  => topic }
-            #TO-DO: process 4XX look at: response.status
+            #TODO: process 4XX look at: response.status
+
+            ActiveRecord::Base.connection.close
           end
         end
       end 
