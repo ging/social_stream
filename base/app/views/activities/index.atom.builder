@@ -16,7 +16,7 @@ atom_feed('xmlns:activity' => 'http://activitystrea.ms/spec/1.0/') do |feed|
   feed.author do
     feed.name(profile_subject.name)
     feed.uri("acct:#{ profile_subject.slug }@#{ request.host_with_port }")
-    a.tag!('activity:object-type', profile_subject.as_object_type)
+    feed.tag!('activity:object-type', profile_subject.as_object_type)
   end
 
   @activities.each do |activity|
