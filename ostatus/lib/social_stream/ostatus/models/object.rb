@@ -13,7 +13,7 @@ module SocialStream
                 SocialStream::ActivityStreams.actor_from_entry! entry
 
               obj.title = entry.title
-              obj.description = entry.description
+              obj.description = entry.content
 
               yield obj if block_given?
             end
