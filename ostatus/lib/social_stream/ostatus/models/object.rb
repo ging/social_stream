@@ -15,6 +15,8 @@ module SocialStream
               obj.title = entry.title
               obj.description = entry.content
 
+              obj.relation_ids = [ Relation::Public.instance.id ]
+
               yield obj if block_given?
             end
           end
