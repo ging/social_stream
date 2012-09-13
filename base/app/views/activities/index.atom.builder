@@ -10,7 +10,7 @@ atom_feed('xmlns:activity' => 'http://activitystrea.ms/spec/1.0/') do |feed|
     feed.link :rel => 'hub', :href => SocialStream::Ostatus.hub
   end
 
-  feed.title(profile_subject.name + ' stream') 
+  feed.title(t 'activity.stream.atom_title', subject: profile_subject.name) 
   feed.updated(@activities.first.present? ? @activities.first.updated_at : Time.now)
 
   feed.author do
