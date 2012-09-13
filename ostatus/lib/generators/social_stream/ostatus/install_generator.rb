@@ -13,10 +13,4 @@ class SocialStream::Ostatus::InstallGenerator < Rails::Generators::Base
   def config_initializer
     copy_file 'initializer.rb', 'config/initializers/social_stream-ostatus.rb'
   end
-  
-  def inject_remote_user_relation
-    append_file 'config/relations.yml',
-                     "\nremote_subject:\n  friend:\n    name: friend\n    permissions:\n      - [ follow ]\n    sphere: personal\n"+
-                                        "  public:\n    name: public\n    permissions:\n      - [ read, tie, star_tie ]\n    sphere: personal"  
-  end
 end
