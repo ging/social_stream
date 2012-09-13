@@ -21,6 +21,8 @@ class RemoteSubject < ActiveRecord::Base
   
   class << self
     def find_or_create_using_webfinger_id(id)
+      id.gsub!('acct:', '')
+
       subject = RemoteSubject.find_by_webfinger_id(id)
 
       return subject if subject.present?
