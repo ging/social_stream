@@ -214,9 +214,16 @@ class Activity < ActiveRecord::Base
 
   # Title for activity streams
   def stream_title
+    # FIXMEEEEEEEEEEEEEEEEE
+    object = ( direct_object.present? ? 
+               ( direct_object.is_a?(SocialStream::Models::Subject) ? 
+                 direct_object.name :
+                 direct_object.title ) :
+               receiver.name )
+
     I18n.t "activity.stream.title.#{ verb }",
            :author => sender_subject.name,
-           :activity_object => direct_object.title
+           :activity_object => object
   end
     
   def notificable?

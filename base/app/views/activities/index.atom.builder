@@ -10,11 +10,13 @@ atom_feed('xmlns:activity' => 'http://activitystrea.ms/spec/1.0/') do |feed|
     feed.link :rel => 'hub', :href => SocialStream::Ostatus.hub
   end
 
-  feed.title(profile_subject.name + ' stream') 
+  feed.title(t 'activity.stream.atom_title', subject: profile_subject.name) 
   feed.updated(@activities.first.present? ? @activities.first.updated_at : Time.now)
 
   feed.author do
     feed.name(profile_subject.name)
+    feed.uri("acct:#{ profile_subject.slug }@#{ request.host_with_port }")
+    feed.tag!('activity:object-type', profile_subject.as_object_type)
   end
 
   @activities.each do |activity|
@@ -24,7 +26,8 @@ atom_feed('xmlns:activity' => 'http://activitystrea.ms/spec/1.0/') do |feed|
 
       entry.author do |a|
         a.name(activity.sender.name)
-        a.tag!('activity:object-type', activity.sender.as_object_type)
+        a.uri("acct:#{ activity.sender.slug }@#{ request.host_with_port }")
+        a.tag!('activity:object-type', activity.sender.as_object_type.to_s)
       end
 
       entry.tag!('activity:verb', activity.verb)
@@ -32,7 +35,7 @@ atom_feed('xmlns:activity' => 'http://activitystrea.ms/spec/1.0/') do |feed|
       if (obj = activity.direct_object).present?
         entry.tag!('activity:object') do |act_obj|
           act_obj.title(obj.title)
-          act_obj.tag!('activity:object-type', obj.as_object_type)
+          act_obj.tag!('activity:object-type', obj.as_object_type.to_s)
           act_obj.published(obj.created_at)
         end
       end

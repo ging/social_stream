@@ -62,6 +62,7 @@ es:
           user: "Contactos de %{receiver}"
     sending: "Enviando"
     stream:
+      atom_title: "Actividades de %{subject}"
       title:
         follow: "%{author} añadió a %{activity_object} como contacto"
         like: "A %{author} le gusta %{activity_object}"
