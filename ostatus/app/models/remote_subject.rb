@@ -9,6 +9,8 @@ class RemoteSubject < ActiveRecord::Base
   # Save webfinger_info hash into the database
   serialize :webfinger_info
 
+  validates_uniqueness_of :webfinger_id
+
   before_validation :fill_information,
                     :on => :create
 
