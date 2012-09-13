@@ -6,19 +6,17 @@ module SocialStream
           # Creates an new instance from ActivityStreams entry
           #
           def from_entry! entry
-            obj = new
+            create! do |obj|
+              obj.author =
+                obj.user_author =
+                obj.owner =
+                SocialStream::ActivityStreams.actor_from_entry! entry
 
-            obj.author =
-              obj.user_author =
-              obj.owner =
-              SocialStream::ActivityStreams.actor_from_entry! entry
+              obj.title = entry.title
+              obj.description = entry.description
 
-            obj.title = e.title
-            obj.description = e.description
-
-            yield obj if block_given?
-
-            obj.save!
+              yield obj if block_given?
+            end
           end
         end
       end
