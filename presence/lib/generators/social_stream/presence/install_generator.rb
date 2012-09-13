@@ -4,7 +4,7 @@ class SocialStream::Presence::InstallGenerator < Rails::Generators::Base
   source_root File.expand_path('../templates', __FILE__)
 
   def create_initializer_file
-    template 'initializer.rb', 'config/initializers/social_stream_presence.rb'
+    template 'initializer.rb', 'config/initializers/social_stream-presence.rb'
   end
 
   def create_migration_file
