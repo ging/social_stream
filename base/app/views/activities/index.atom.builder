@@ -27,7 +27,7 @@ atom_feed('xmlns:activity' => 'http://activitystrea.ms/spec/1.0/') do |feed|
       entry.author do |a|
         a.name(activity.sender.name)
         a.uri("acct:#{ activity.sender.slug }@#{ request.host_with_port }")
-        a.tag!('activity:object-type', activity.sender.as_object_type)
+        a.tag!('activity:object-type', activity.sender.as_object_type.to_s)
       end
 
       entry.tag!('activity:verb', activity.verb)
@@ -35,7 +35,7 @@ atom_feed('xmlns:activity' => 'http://activitystrea.ms/spec/1.0/') do |feed|
       if (obj = activity.direct_object).present?
         entry.tag!('activity:object') do |act_obj|
           act_obj.title(obj.title)
-          act_obj.tag!('activity:object-type', obj.as_object_type)
+          act_obj.tag!('activity:object-type', obj.as_object_type.to_s)
           act_obj.published(obj.created_at)
         end
       end
