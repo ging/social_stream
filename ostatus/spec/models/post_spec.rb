@@ -9,7 +9,7 @@ describe Post do
       SocialStream::ActivityStreams.should_receive(:actor_from_entry!) { @remote_subject }
 
       @entry.should_receive(:title) { "testing" } 
-      @entry.should_receive(:description) { "testing" }
+      @entry.should_receive(:content) { "testing" }
 
     end
     it "should create post" do
