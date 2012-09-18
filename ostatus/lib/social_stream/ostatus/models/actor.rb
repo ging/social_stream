@@ -10,7 +10,9 @@ module SocialStream
         include Rails.application.routes.url_helpers
         
         included do
-          has_one :actor_key, dependent: :destroy
+          has_one :actor_key, dependent: :destroy,
+                              validate:  true,
+                              autosave:  true
 
           after_commit :publish_feed
         end
@@ -25,7 +27,7 @@ module SocialStream
           end
         end
 
-        # Fetch or build the associated {ActorKey}
+        # Fetch or create the associated {ActorKey}
         def actor_key!
           actor_key ||
             create_actor_key!
