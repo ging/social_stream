@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
-  # Webfinger
+  # Host Meta
   match '/.well-known/host-meta', :to => HostMetaController.action(:index)
 
-  # Find subjects by slug
+  # Webfinger
   match '/webfinger' => 'webfinger#index', :as => 'webfinger'
 
-  match 'pshb/callback' => 'pshb#callback', :as => :pshb_callback
-  match 'remoteuser/' => 'remoteusers#index', :as => :add_remote_user
+  # PushSubHubBub callback
+  match 'pshb' => 'pshb#index', as: :pshb
+
+  # Salmon callback
+  match 'salmon' => 'salmon#index', as: :salmon
 end

@@ -78,7 +78,7 @@ class RemoteSubject < ActiveRecord::Base
 
     atom = Proudhon::Atom.from_uri(public_feed_url)
 
-    atom.subscribe(pshb_callback_url(:host => SocialStream::Ostatus.pshb_host))
+    atom.subscribe(pshb_url(:host => SocialStream::Ostatus.pshb_host))
   end
 
   def unsubscribe_to_public_feed
@@ -86,6 +86,6 @@ class RemoteSubject < ActiveRecord::Base
 
     atom = Proudhon::Atom.from_uri(public_feed_url)
 
-    atom.unsubscribe(pshb_callback_url(:host => SocialStream::Ostatus.pshb_host))
+    atom.unsubscribe(pshb_url(:host => SocialStream::Ostatus.pshb_host))
   end
 end

@@ -1,6 +1,5 @@
 class PshbController < ApplicationController
-  
-  def callback
+  def index
     case params['hub.mode']
     #TODO check PuSH specification about subscribe or async
     when 'subscribe', 'async'

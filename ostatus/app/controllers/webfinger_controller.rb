@@ -9,8 +9,9 @@ class WebfingerController < ActionController::Metal
       :subject => "acct:#{ actor.slug }@#{ request.host_with_port }",
       :alias   => polymorphic_url(actor.subject),
       :links   => {
-        :profile => polymorphic_url([actor.subject, :profile]),
-        :updates_from => polymorphic_url([actor.subject, :activities], :format => :atom)
+        profile: polymorphic_url([actor.subject, :profile]),
+        updates_from: polymorphic_url([actor.subject, :activities], :format => :atom),
+        salmon: salmon_url
       })
 
     self.response_body = finger.to_xml

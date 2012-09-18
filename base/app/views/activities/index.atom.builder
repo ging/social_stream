@@ -8,6 +8,7 @@ atom_feed('xmlns:activity' => 'http://activitystrea.ms/spec/1.0/') do |feed|
 
   if defined? SocialStream::Ostatus
     feed.link :rel => 'hub', :href => SocialStream::Ostatus.hub
+    feed.link rel: 'salmon', href: salmon_url
   end
 
   feed.title(t 'activity.stream.atom_title', subject: profile_subject.name) 
@@ -29,6 +30,9 @@ atom_feed('xmlns:activity' => 'http://activitystrea.ms/spec/1.0/') do |feed|
         a.uri("acct:#{ activity.sender.slug }@#{ request.host_with_port }")
         a.tag!('activity:object-type', activity.sender.as_object_type.to_s)
       end
+
+      #TODO Ostatus mentions:
+      # entry.link rel: mentioned, href: "acct:#{ mentioned.slug }@#{ host_with_port }"
 
       entry.tag!('activity:verb', activity.verb)
 

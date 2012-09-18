@@ -1,7 +1,7 @@
 module SocialStream
   module Ostatus
     module ActivityStreams
-      # Parses the body from a {PshbController#callback} and dispatches
+      # Parses the body from a {PshbController#index} and dispatches
       # entries for parsing to {#record_from_entry!}
       def from_pshb_callback(body)
         atom = Proudhon::Atom.parse body
@@ -11,6 +11,7 @@ module SocialStream
         end
       end
 
+      # Parses an activity form a PuSH or Salmon notification
       # Decides what action should be taken from an ActivityStreams entry
       def activity_from_entry! entry
         case entry.verb
@@ -37,6 +38,26 @@ module SocialStream
         end
 
         RemoteSubject.find_or_create_by_webfinger_id webfinger_id
+      end
+
+      # Parses the body from a {Salmon#index}
+      def from_salmon_callback(body)
+        salmon = Proudhon::Salmon.new body
+
+        entry = salmon.to_entry
+
+        validate_salmon_entry entry
+
+        activity_from_entry! entry
+      end
+
+      def validate_salmon_entry entry
+        # TODO
+        # finger = Proudhon::Finger.new author_webfinger_id
+        # magic_key = Proudhon::MagicKey.new finger.links[:magic_public_key]
+        # salmon.verify public_key
+
+        true
       end
     end
   end
