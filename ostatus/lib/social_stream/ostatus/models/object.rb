@@ -10,7 +10,7 @@ module SocialStream
               obj.author =
                 obj.user_author =
                 obj.owner =
-                SocialStream::ActivityStreams.actor_from_entry! entry
+                SocialStream::ActivityStreams.actor_from_entry!(entry)
 
               obj.title = entry.title
               obj.description = entry.content
