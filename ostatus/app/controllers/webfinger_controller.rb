@@ -11,7 +11,8 @@ class WebfingerController < ActionController::Metal
       :links   => {
         profile: polymorphic_url([actor.subject, :profile]),
         updates_from: polymorphic_url([actor.subject, :activities], :format => :atom),
-        salmon: salmon_url
+        salmon: salmon_url,
+        magic_key: actor.magic_public_key
       })
 
     self.response_body = finger.to_xml

@@ -31,11 +31,23 @@ module SocialStream
             create_actor_key!
         end
 
-        # OStatus key
-        def ostatus_key
+        # OpenSSL::PKey::RSA key
+        #
+        # The key is generated if it does not exist
+        def rsa_key
           actor_key!.key
         end
-        
+
+        # Public RSA instance of {#rsa_key}
+        def rsa_public_key
+          rsa_key.public_key
+        end
+
+        # MagicKey string from public key
+        def magic_public_key
+          Proudhon::MagicKey.to_s rsa_public_key
+        end
+
         def publish_feed
           return if subject_type == "RemoteSubject"
 
