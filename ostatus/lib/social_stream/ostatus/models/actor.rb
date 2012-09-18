@@ -10,6 +10,8 @@ module SocialStream
         include Rails.application.routes.url_helpers
         
         included do
+          has_one :actor_key, dependent: :destroy
+
           after_commit :publish_feed
         end
 
@@ -21,6 +23,17 @@ module SocialStream
 
             find_by_slug! $2
           end
+        end
+
+        # Fetch or build the associated {ActorKey}
+        def actor_key!
+          actor_key ||
+            create_actor_key!
+        end
+
+        # OStatus key
+        def ostatus_key
+          actor_key!.key
         end
         
         def publish_feed
