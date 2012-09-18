@@ -55,7 +55,6 @@ module ToolbarHelper
       response = 
         "$('#toolbarContent').html(\"#{ escape_javascript(content) }\");\n" +
         toolbar_init
-      EOJ
 
       response.html_safe
     else
