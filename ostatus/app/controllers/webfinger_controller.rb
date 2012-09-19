@@ -6,12 +6,14 @@ class WebfingerController < ActionController::Metal
     actor = Actor.find_by_webfinger!(params[:q])
 
     finger = Proudhon::Finger.new(
-      :subject => "acct:#{ actor.slug }@#{ request.host_with_port }",
+      :subject => actor.webfinger_uri,
       :alias   => polymorphic_url(actor.subject),
       :links   => {
         profile: polymorphic_url([actor.subject, :profile]),
         updates_from: polymorphic_url([actor.subject, :activities], :format => :atom),
-        salmon: salmon_url,
+        salmon: salmon_url(actor.slug),
+        replies: salmon_url(actor.slug),
+        mention: salmon_url(actor.slug),
         magic_key: actor.magic_public_key
       })
 

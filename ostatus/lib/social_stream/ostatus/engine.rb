@@ -7,6 +7,12 @@ module SocialStream
         end
       end
 
+      initializer 'social_stream-ostatus.models.activity' do
+        ActiveSupport.on_load(:activity) do
+          include SocialStream::Ostatus::Models::Activity
+        end
+      end
+
       initializer 'social_stream-ostatus.models.actor' do
         ActiveSupport.on_load(:actor) do
           include SocialStream::Ostatus::Models::Actor
@@ -16,6 +22,12 @@ module SocialStream
       initializer 'social_stream-ostatus.models.audience' do
         ActiveSupport.on_load(:audience) do
           include SocialStream::Ostatus::Models::Audience
+        end
+      end
+
+      initializer 'social_stream-ostatus.models.tie' do
+        ActiveSupport.on_load(:tie) do
+          include SocialStream::Ostatus::Models::Tie
         end
       end
 

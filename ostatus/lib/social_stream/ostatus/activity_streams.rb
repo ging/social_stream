@@ -13,11 +13,13 @@ module SocialStream
 
       # Parses an activity form a PuSH or Salmon notification
       # Decides what action should be taken from an ActivityStreams entry
-      def activity_from_entry! entry
+      def activity_from_entry! entry, receiver = nil
         case entry.verb
         when :post
           r = record_from_entry! entry
           r.post_activity
+        when :follow
+          Tie.from_entry! entry, receiver
         else
           raise "Unsupported verb #{ entry.verb }"
         end
@@ -40,13 +42,13 @@ module SocialStream
         RemoteSubject.find_or_create_by_webfinger_id webfinger_id
       end
 
-      # Parses the body from a {Salmon#index}
-      def from_salmon_callback(body)
+      # Parses the body from a {Salmon#index} and receiving actor
+      def from_salmon_callback(body, receiver)
         salmon = Proudhon::Salmon.new body
 
         validate_salmon salmon
 
-        activity_from_entry! salmon.to_entry
+        activity_from_entry! salmon.to_entry, receiver
       end
 
       def validate_salmon salmon

@@ -46,6 +46,11 @@ class RemoteSubject < ActiveRecord::Base
     webfinger_info[:updates_from]
   end
 
+  # URL of the Salmon endpoint for this {RemoteSubject}
+  def salmon_url
+    webfinger_info[:salmon]
+  end
+
   private
 
   def splitted_webfinger_id
@@ -61,7 +66,8 @@ class RemoteSubject < ActiveRecord::Base
 
   def build_webfinger_info
     {
-      :updates_from => finger.links[:updates_from]
+      updates_from: finger.links[:updates_from],
+      salmon:       finger.links[:salmon]
     }
   end
 

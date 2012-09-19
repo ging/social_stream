@@ -27,8 +27,10 @@ module SocialStream
     autoload :ActivityStreams, 'social_stream/ostatus/activity_streams'
 
     module Models
+      autoload :Activity, 'social_stream/ostatus/models/activity'
       autoload :Actor, 'social_stream/ostatus/models/actor'
       autoload :Audience, 'social_stream/ostatus/models/audience'
+      autoload :Tie, 'social_stream/ostatus/models/tie'
 
       module Object
         autoload :ClassMethods, 'social_stream/ostatus/models/object'

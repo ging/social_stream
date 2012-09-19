@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   match 'pshb' => 'pshb#index', as: :pshb
 
   # Salmon callback
-  match 'salmon' => 'salmon#index', as: :salmon
+  match 'salmon/:slug' => 'salmon#index', as: :salmon
 end

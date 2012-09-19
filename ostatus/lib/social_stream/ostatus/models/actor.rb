@@ -27,6 +27,16 @@ module SocialStream
           end
         end
 
+        # The Webfinger ID for this {Actor}
+        def webfinger_id
+          "#{ slug }@#{ SocialStream::Ostatus.activity_feed_host }"
+        end
+
+        # The Webfinger URI for this {Actor}
+        def webfinger_uri
+          "acct:#{ webfinger_id }"
+        end
+
         # Fetch or create the associated {ActorKey}
         def actor_key!
           actor_key ||
@@ -59,7 +69,8 @@ module SocialStream
         def publish_feed
           return if subject_type == "RemoteSubject"
 
-          t = Thread.new do
+          # FIXME: Rails 4 queues
+          Thread.new do
             uri = URI.parse(SocialStream::Ostatus.hub)
             topic = polymorphic_url [subject, :activities],
                                     :format => :atom,
