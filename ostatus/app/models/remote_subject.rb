@@ -55,6 +55,7 @@ class RemoteSubject < ActiveRecord::Base
 
   def fill_information
     self.webfinger_info = build_webfinger_info
+    self.rsa_key = finger.magic_key
     self.name = webfinger_id
   end
 

@@ -40,6 +40,12 @@ module SocialStream
           actor_key!.key
         end
 
+        # Set OpenSSL::PKey::RSA key
+        def rsa_key= key
+          k = actor_key || build_actor_key
+          k.key = key
+        end
+
         # Public RSA instance of {#rsa_key}
         def rsa_public_key
           rsa_key.public_key
