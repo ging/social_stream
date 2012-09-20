@@ -5,12 +5,13 @@ module SocialStream
         module ClassMethods
           # Creates an new instance from ActivityStreams entry
           #
-          def from_entry! entry
+          def from_entry! entry, receiver
             create! do |obj|
               obj.author =
-                obj.user_author =
-                obj.owner =
+                obj.user_author = 
                 SocialStream::ActivityStreams.actor_from_entry!(entry)
+
+              obj.owner = receiver || obj.author
 
               obj.title = entry.title
               obj.description = entry.content

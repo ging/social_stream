@@ -1,1 +1,6 @@
-<% toolbar :profile, :subject => @remote_subject %>
+<% toolbar :profile, subject: @remote_subject %>
+
+<%= render partial: "activities/index",
+           locals:  { activities: @remote_subject.wall(:profile, for: current_subject).
+                                              page(params[:page]),
+                         owner: @remote_subject } %>

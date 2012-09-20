@@ -19,14 +19,14 @@ module SocialStream
           Tie.from_entry! entry, receiver
         else
           # :post is the default verb
-          r = record_from_entry! entry
+          r = record_from_entry! entry, receiver
           r.post_activity
         end
       end
 
       # Redirects parsing to the suitable SocialStream's model
-      def record_from_entry! entry
-        model!(entry.objtype).from_entry! entry
+      def record_from_entry! entry, receiver
+        model!(entry.objtype).from_entry! entry, receiver
       end
 
       # Finds or creates a {RemoteSubject} from an ActivityStreams entry

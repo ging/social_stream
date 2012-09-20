@@ -5,5 +5,9 @@ class SalmonController < ApplicationController
     actor = Actor.find_by_slug! params[:slug]
 
     SocialStream::ActivityStreams.from_salmon_callback request.body.read, actor
+
+    # TODO handle errors
+    
+    render text: "Success!"
   end
 end

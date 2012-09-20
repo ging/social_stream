@@ -225,6 +225,11 @@ class Activity < ActiveRecord::Base
            :author => sender_subject.name,
            :activity_object => object
   end
+
+  # TODO: detailed description of activity
+  def stream_content
+    stream_title
+  end
     
   def notificable?
     is_root? or ['post','update'].include?(root.verb)
