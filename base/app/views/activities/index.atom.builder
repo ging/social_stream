@@ -8,7 +8,7 @@ atom_feed('xmlns:activity' => 'http://activitystrea.ms/spec/1.0/') do |feed|
 
   if defined? SocialStream::Ostatus
     feed.link :rel => 'hub', :href => SocialStream::Ostatus.hub
-    feed.link rel: 'salmon', href: salmon_url
+    feed.link rel: 'salmon', href: salmon_url(profile_subject.slug)
   end
 
   feed.title(t 'activity.stream.atom_title', subject: profile_subject.name) 
