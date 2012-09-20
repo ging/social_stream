@@ -19,6 +19,7 @@ module SocialStream
             Proudhon::Entry.new id: "tag:#{ SocialStream::Ostatus.activity_feed_host },2005:activity-#{ id }",
                                 title: stream_title,
                                 content: stream_content,
+                                verb: verb,
                                 author: Proudhon::Author.new(name: sender.name,
                                                              uri: sender.webfinger_id)
           salmon = entry.to_salmon
