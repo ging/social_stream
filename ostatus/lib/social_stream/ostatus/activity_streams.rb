@@ -15,13 +15,12 @@ module SocialStream
       # Decides what action should be taken from an ActivityStreams entry
       def activity_from_entry! entry, receiver = nil
         case entry.verb
-        when :post
-          r = record_from_entry! entry
-          r.post_activity
         when :follow
           Tie.from_entry! entry, receiver
         else
-          raise "Unsupported verb #{ entry.verb }"
+          # :post is the default verb
+          r = record_from_entry! entry
+          r.post_activity
         end
       end
 
