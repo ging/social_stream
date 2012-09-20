@@ -77,7 +77,13 @@ class RemoteSubject < ActiveRecord::Base
   end
 
   def fetch_finger
-    Proudhon::Finger.fetch webfinger_id
+    finger = 
+      Proudhon::Finger.fetch webfinger_id
+
+    # FIXME custom error
+    raise ::ActiveRecord::RecordNotFound if finger.blank?
+
+    finger
   end
 
   def subscribe_to_public_feed
