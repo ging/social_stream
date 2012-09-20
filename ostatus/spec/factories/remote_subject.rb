@@ -5,6 +5,10 @@ class << Proudhon::Finger
       { updates_from: 'feed' }
     end
 
+    def obj.magic_key
+      OpenSSL::PKey::RSA.generate 256
+    end
+
     obj
   end
 end
