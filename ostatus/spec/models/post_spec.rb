@@ -15,7 +15,7 @@ describe Post do
     it "should create post" do
       post_count = Post.count
 
-      post = Post.from_entry! @entry
+      post = Post.from_entry! @entry, nil
 
       post.author.should == @remote_subject.actor
 
