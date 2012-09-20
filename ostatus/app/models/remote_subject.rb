@@ -51,6 +51,13 @@ class RemoteSubject < ActiveRecord::Base
     webfinger_info[:salmon]
   end
 
+  # Fetch the webfinger again
+  def refresh_webfinger!
+    fill_webfinger_info
+
+    save!
+  end
+
   private
 
   def splitted_webfinger_id
@@ -59,9 +66,14 @@ class RemoteSubject < ActiveRecord::Base
   end
 
   def fill_information
+    fill_webfinger_info
+
+    self.name = webfinger_id
+  end
+
+  def fill_webfinger_info
     self.webfinger_info = build_webfinger_info
     self.rsa_key = finger.magic_key
-    self.name = webfinger_id
   end
 
   def build_webfinger_info

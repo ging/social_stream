@@ -11,5 +11,9 @@ class RemoteSubjectsController < ApplicationController
   def show
     @remote_subject =
       RemoteSubject.find_by_slug!(params[:id])
+
+    if params[:refresh]
+      @remote_subject.refresh_webfinger!
+    end
   end
 end
