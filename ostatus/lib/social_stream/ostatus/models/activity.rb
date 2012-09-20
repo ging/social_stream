@@ -24,7 +24,7 @@ module SocialStream
 
           # FIXME: Rails 4 queues
           Thread.new do
-            salmon.deliver receiver.salmon_url, sender.rsa_key
+            salmon.deliver receiver_subject.salmon_url, sender.rsa_key
 
             ActiveRecord::Base.connection.close
           end
