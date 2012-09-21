@@ -25,6 +25,15 @@ class << Proudhon::Atom
   end
 end
 
+RemoteSubject.class_eval do
+  def build_webfinger_info
+    {
+      aliases: [ "http://example.com/#{ webfinger_id.split('@').first }" ]
+    }
+
+  end
+end
+
 Factory.define :remote_subject do |s|
   s.sequence(:webfinger_id) { |n| "remote_subject-#{ n }@example.com" }
 end
