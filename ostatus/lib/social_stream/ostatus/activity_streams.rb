@@ -14,8 +14,10 @@ module SocialStream
       # Parses an activity form a PuSH or Salmon notification
       # Decides what action should be taken from an ActivityStreams entry
       def activity_from_entry! entry, receiver = nil
-        case entry.verb
-        when "follow"
+        # FIXME: should not use to_sym
+        # https://github.com/shf/proudhon/issues/7
+        case entry.verb.to_sym
+        when :follow
           Tie.from_entry! entry, receiver
         else
           # :post is the default verb
