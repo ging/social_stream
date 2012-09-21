@@ -38,7 +38,7 @@ module SocialStream
           raise "Entry author without uri: #{ entry }"
         end
 
-        RemoteSubject.find_or_create_by_webfinger_id webfinger_id
+        RemoteSubject.find_or_create_by_webfinger_uri! webfinger_id
       end
 
       # Parses the body from a {Salmon#index} and receiving actor
@@ -51,7 +51,7 @@ module SocialStream
       end
 
       def validate_salmon salmon
-        remote_subject = RemoteSubject.find_or_create_by_webfinger_id(salmon.to_entry.author.uri)
+        remote_subject = RemoteSubject.find_or_create_by_webfinger_uri!(salmon.to_entry.author.uri)
         key = remote_subject.rsa_key
 
         unless salmon.verify(key)

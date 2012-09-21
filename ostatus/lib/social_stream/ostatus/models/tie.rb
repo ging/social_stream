@@ -8,7 +8,7 @@ module SocialStream
           # Create a new {Tie} from OStatus entry
           def from_entry! entry, receiver
             # Sender must be remote
-            sender = RemoteSubject.find_or_create_by_webfinger_id entry.author.uri
+            sender = RemoteSubject.find_or_create_by_webfinger_uri! entry.author.uri
 
             contact = sender.contact_to!(receiver)
 

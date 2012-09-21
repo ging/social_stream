@@ -20,14 +20,12 @@ class RemoteSubject < ActiveRecord::Base
   #validates_format_of :webfinger_slug, :with => Devise.email_regexp, :allow_blank => true
   
   class << self
-    def find_or_create_using_webfinger_id(id)
-      id.gsub!('acct:', '')
+    def find_or_create_by_webfinger_uri(uri)
+      find_or_create_by_webfinger_id uri.gsub('acct:', '')
+    end
 
-      subject = RemoteSubject.find_by_webfinger_id(id)
-
-      return subject if subject.present?
-
-      create! :webfinger_id => id
+    def find_or_create_by_webfinger_uri!(uri)
+      find_or_create_by_webfinger_id! uri.gsub('acct:', '')
     end
   end
   
