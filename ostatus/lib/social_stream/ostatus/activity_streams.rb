@@ -37,7 +37,7 @@ module SocialStream
         webfinger_id = entry.author.uri
 
         if webfinger_id.blank?
-          raise "Entry author without uri: #{ entry }"
+          raise "Entry author without uri: #{ entry.to_xml }"
         end
 
         RemoteSubject.find_or_create_by_webfinger_uri! webfinger_id
