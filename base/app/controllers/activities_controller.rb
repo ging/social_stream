@@ -11,4 +11,10 @@ class ActivitiesController < ApplicationController
       format.atom
     end
   end
+
+  def show
+    activity = Activity.find(params[:id])
+
+    redirect_to activity.direct_object || activity.receiver_subject
+  end
 end
