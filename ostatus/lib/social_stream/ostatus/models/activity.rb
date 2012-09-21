@@ -21,7 +21,7 @@ module SocialStream
                                 content: stream_content,
                                 verb: verb,
                                 author: Proudhon::Author.new(name: sender.name,
-                                                             uri: sender.webfinger_id)
+                                                             uri: sender.webfinger_uri)
           salmon = entry.to_salmon
 
           # FIXME: Rails 4 queues
