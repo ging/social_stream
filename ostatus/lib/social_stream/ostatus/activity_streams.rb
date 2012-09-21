@@ -7,6 +7,10 @@ module SocialStream
         atom = Proudhon::Atom.parse body
 
         atom.entries.each do |entry|
+          # FIXME: get author from feed
+          # https://github.com/shf/proudhon/issues/8
+          entry.author.uri ||= feed.author.uri
+
           activity_from_entry! entry
         end
       end
