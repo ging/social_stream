@@ -1,4 +1,6 @@
 class SalmonController < ApplicationController
+  include SocialStream::Ostatus::Controllers::DebugRequests
+
   skip_before_filter :verify_authenticity_token
 
   def index

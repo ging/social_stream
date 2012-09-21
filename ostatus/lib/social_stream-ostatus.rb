@@ -17,7 +17,11 @@ module SocialStream
     # The host where the PuSH should send the callbacks to
     mattr_accessor :pshb_host
     @@pshb_host = 'localhost:3000'
-   
+
+    # Debug OStatus request with logger.info
+    mattr_accessor :debug_requests
+    @@debug_requests = false
+  
     class << self
       def setup 
         yield self
@@ -39,6 +43,10 @@ module SocialStream
       module Relation
         autoload :Custom, 'social_stream/ostatus/models/relation/custom'
       end
+    end
+    
+    module Controllers
+      autoload :DebugRequests, 'social_stream/ostatus/controllers/debug_requests'
     end
   end
 end

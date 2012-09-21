@@ -12,4 +12,7 @@ SocialStream::Ostatus.setup do |config|
   #
   # Remote subjects get their local activities updates with the PuSH callback
   config.pshb_host = 'localhost:3000'
+
+  # Debug OStatus requests
+  # config.debug_requests = true
 end
