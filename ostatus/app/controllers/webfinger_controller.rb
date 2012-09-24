@@ -7,7 +7,7 @@ class WebfingerController < ActionController::Metal
 
     finger = Proudhon::Finger.new(
       :subject => actor.webfinger_uri,
-      :alias   => polymorphic_url(actor.subject),
+      :alias   => [polymorphic_url(actor.subject)],
       :links   => {
         profile: polymorphic_url([actor.subject, :profile]),
         updates_from: polymorphic_url([actor.subject, :activities], :format => :atom),
