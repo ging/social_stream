@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
 
   # Gem dependencies
   s.add_runtime_dependency('social_stream-base','~> 0.22.0')
-  s.add_runtime_dependency('proudhon','>= 0.3.2')
+  s.add_runtime_dependency('proudhon','>= 0.3.4')
   s.add_runtime_dependency('nokogiri','> 1.4.4')
   
   # Development Gem dependencies
