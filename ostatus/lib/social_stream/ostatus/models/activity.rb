@@ -19,10 +19,14 @@ module SocialStream
             Proudhon::Entry.new id: "tag:#{ SocialStream::Ostatus.activity_feed_host },2005:activity-#{ id }",
                                 title: stream_title,
                                 content: stream_content,
-                                verb: verb,
+                                verb: SocialStream::ActivityStreams.verb(verb),
                                 author: Proudhon::Author.new(name: sender.name,
                                                              uri: sender.webfinger_uri)
           salmon = entry.to_salmon
+
+          if SocialStream::Ostatus.debug_requests
+            logger.info entry.to_xml
+          end
 
           # FIXME: Rails 4 queues
           Thread.new do

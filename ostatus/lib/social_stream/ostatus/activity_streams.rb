@@ -64,6 +64,16 @@ module SocialStream
           raise "Invalid salmon: #{ salmon }"
         end
       end
+
+      # Translate SocialStream activity verb to Proudhon verb
+      def verb orig
+        case orig
+        when 'make-friend'
+          :follow
+        else
+          orig.to_sym
+        end
+      end
     end
   end
 end
