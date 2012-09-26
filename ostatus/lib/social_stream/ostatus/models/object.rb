@@ -14,7 +14,7 @@ module SocialStream
               obj.owner = receiver || obj.author
 
               obj.title = entry.title
-              obj.description = entry.content
+              obj.description = entry.summary
 
               obj.relation_ids = [ ::Relation::Public.instance.id ]
 
