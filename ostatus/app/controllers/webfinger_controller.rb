@@ -9,6 +9,7 @@ class WebfingerController < ActionController::Metal
       :subject => actor.webfinger_uri,
       :alias   => [polymorphic_url(actor.subject)],
       :links   => {
+        avatar: root_url + actor.logo.url(:original),
         profile: polymorphic_url([actor.subject, :profile]),
         updates_from: polymorphic_url([actor.subject, :activities], :format => :atom),
         salmon: salmon_url(actor.slug),
