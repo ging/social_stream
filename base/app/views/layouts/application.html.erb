@@ -32,17 +32,21 @@
     </script>
   </head>
   <body>
-    <div id="wrapper">
-      <header><%= render :partial => "layouts/header" %></header>
-      <div id="wrapper_body">
-        <nav id="toolbar">
-          <div id="toolbarContent" class="block">
-            <div class="space_center">
-            </div>
+    <div id="wrapper" class="container">
+      <div class="row">
+        <div class="span12">
+          <%= render :partial => "layouts/header" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="span2">
+          <nav id="toolbar">
             <%= yield :toolbar %>
-          </div>
-        </nav>
-        <div id= "center_body">
+          </nav>
+        </div>
+
+        <div class="span7">
           <div id="map_location">
             <%= yield :location %>
           </div>
@@ -53,11 +57,14 @@
             <%= yield %>
           </section>
         </div>
+
+        <div class="span3">
         <aside id="sidebar">
           <div id="sidebarContent">
             <%= yield :sidebar %>
           </div>
         </aside>
+        </div>
       </div>
       <footer><%= render :partial => "layouts/footer" %></footer>
     </div>

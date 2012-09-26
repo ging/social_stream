@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require modernizr
+//= require bootstrap
 //= require jquery.lightbox-with-resize-plugin
 //= require jquery.screw
 //= require i18n

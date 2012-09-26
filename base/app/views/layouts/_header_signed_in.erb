@@ -1,45 +1,29 @@
-<div id="headerFront">
-  <div class="banner_top banner_top_height">
-    <div id="header_left">
-      <div id="logo_txt">
-        <%= link_to(image_tag('header-logo.png', :alt => t('site.name')), root_path) %>   
-      </div>
-    </div>
-    <% if user_signed_in? %>
-      <%= render :partial => 'layouts/search' %>
-    <%end%>
-    <div id="header_right">
-       <% if user_signed_in? %>
-        <div class="menu_list menu_white" id="menu_home">
-          <ul>
-            <li>
-              <%= link_to(t('home'), root_path)%>
-            </li>   
-            <li class="pipe">·</li>
-            <li>
-              <%= link_to(t('profile.one'), current_subject)%>
-            </li>            
-            <li class="pipe">·</li>
-            <li>
-              <%= link_to(t('message.other'), conversations_path) %>
-              <span id="header_inbox_count">
-              <%= link_to(current_subject.unread_messages_count.to_s, conversations_path) %>
-              </span>
-            </li>            
-            <li class="pipe">·</li>
-            <li>
-              <%= link_to(t('notification.other'), notifications_path) %>
-              <span id="header_notifications">
-              <%= link_to( current_subject.mailbox.notifications.not_trashed.unread.count.to_s, notifications_path) %>
-              </span>
-            </li>
-            <li class="pipe">·</li>
-            <li>
-              <%= render :partial => 'layouts/header_dropdown_menu' %>  
-            </li>
-          </ul>
-        </div>
-      <% end %>
-    </div>
+<div class="navbar navbar-inverse">
+  <div class="navbar-inner">
+    <%= link_to(image_tag('header-logo.png', :alt => t('site.name')), root_path, class: 'brand') %>
+
+    <!-- FIXME: search javascript functionality in 'layouts/search' -->
+
+    <%= form_tag search_path, method: 'get', class: "navbar-search pull-left" do %>
+      <%= text_field_tag :q, nil, autocomplete: :off, class: 'search-query', placeholder: t('search.name') %>
+    <% end %>
+
+     <ul class="nav pull-right">
+       <li><%= link_to(t('home'), root_path)%></li>   
+       <li><%= link_to(t('profile.one'), current_subject)%></li>            
+       <li>
+         <%= link_to(t('message.other'), conversations_path) %>
+         <span id="header_inbox_count">
+           <%= link_to(current_subject.unread_messages_count.to_s, conversations_path) %>
+         </span>
+       </li>            
+       <li>
+         <%= link_to(t('notification.other'), notifications_path) %>
+         <span id="header_notifications">
+           <%= link_to( current_subject.mailbox.notifications.not_trashed.unread.count.to_s, notifications_path) %>
+         </span>
+       </li>
+       <%= render partial: 'layouts/header_dropdown_menu' %>
+     </ul>
   </div>
 </div>

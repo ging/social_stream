@@ -1,21 +1,23 @@
-<div id="header_dropdown_menu">
-  <ul class="sf-menu" >
-    <li class="header_dropdown_li">
-      <a href="#" class="sf-with-ul" id="current_subject_avatar_img" style="background: transparent url('<%= image_path current_subject.logo.url(:representation)%>') no-repeat left top;"><%= truncate_name current_subject.name, :length => 15 %><span class="sf-sub-indicator"> »</span></a>
-      <ul>
-        <%= render :partial => 'layouts/header_dropdown_menu_sessions'%>
-        <li>
-          <%= link_to t('settings.main'), settings_path, :id => "btn_menu_settings" %>
-        </li>
-        <% if SocialStream.relation_model == :custom %>
-          <li>
-            <%= link_to t('account.privacy'), relation_customs_path %>
-          </li>
-        <% end %>
-        <li>
-          <%= link_to t('sign_out'), destroy_user_session_path, :method => :delete  %>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</div>
+<li class="dropdown">
+ <%= link_to '#', class: 'dropdown-toggle', "data-toggle" => "dropdown" do %>
+   <%= image_tag current_subject.logo.url(:representation) %>
+   <%= truncate_name(current_subject.name, length: 15) %>
+   <b class="caret"></b>
+ <% end %>
+ <ul class="dropdown-menu">
+   <%= render :partial => 'layouts/header_dropdown_menu_sessions'%>
+   <li>
+     <%= link_to t('settings.main'), settings_path, :id => "btn_menu_settings" %>
+   </li>
+   <% if SocialStream.relation_model == :custom %>
+     <li>
+     <%= link_to t('account.privacy'), relation_customs_path %>
+     </li>
+   <% end %>
+   <li class="divider"></li>
+   <li>
+   <%= link_to t('sign_out'), destroy_user_session_path, :method => :delete  %>
+   </li>
+ </ul>
+</li>
+
