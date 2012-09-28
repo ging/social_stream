@@ -20,5 +20,7 @@ class PshbController < ApplicationController
     end  
 
     SocialStream::ActivityStreams.from_pshb_callback(request.body.read)
+
+    render text: "Success!"
   end
 end
