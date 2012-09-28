@@ -19,6 +19,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('deep_merge')
   # Rails
   s.add_runtime_dependency('rails', '>= 3.1.0')
+  # Rails Engine Decorators
+  s.add_runtime_dependency('rails_engine_decorators')
   # Activity and Relation hierarchies
   s.add_runtime_dependency('ancestry', '~> 1.2.3')
   # SQL foreign keys

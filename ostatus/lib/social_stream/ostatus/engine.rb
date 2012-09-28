@@ -7,39 +7,9 @@ module SocialStream
         end
       end
 
-      initializer 'social_stream-ostatus.models.activity' do
-        ActiveSupport.on_load(:activity) do
-          include SocialStream::Ostatus::Models::Activity
-        end
-      end
-
-      initializer 'social_stream-ostatus.models.actor' do
-        ActiveSupport.on_load(:actor) do
-          include SocialStream::Ostatus::Models::Actor
-        end
-      end
-
-      initializer 'social_stream-ostatus.models.audience' do
-        ActiveSupport.on_load(:audience) do
-          include SocialStream::Ostatus::Models::Audience
-        end
-      end
-
-      initializer 'social_stream-ostatus.models.tie' do
-        ActiveSupport.on_load(:tie) do
-          include SocialStream::Ostatus::Models::Tie
-        end
-      end
-
       initializer 'social_stream-ostatus.models.object' do
         SocialStream::Models::Object::ClassMethods.module_eval do
           include SocialStream::Ostatus::Models::Object::ClassMethods
-        end
-      end
-
-      initializer 'social_stream-ostatus.models.relation_custom' do
-        ActiveSupport.on_load(:relation_custom) do
-          include SocialStream::Ostatus::Models::Relation::Custom
         end
       end
 

@@ -588,5 +588,3 @@ class Actor < ActiveRecord::Base
     mailbox.inbox(:unread => true).count(:id, :distinct => true)
   end
 end
-
-ActiveSupport.run_load_hooks(:actor, Actor)

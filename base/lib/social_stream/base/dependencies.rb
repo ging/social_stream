@@ -2,6 +2,8 @@
 require 'deep_merge'
 # Monkey patch Ruby on Rails
 require 'rails/social_stream'
+# Rails Engine Decorators
+require 'rails_engine_decorators'
 # Database foreign keys
 require 'foreigner'
 # jQuery
