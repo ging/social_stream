@@ -33,40 +33,29 @@
   </head>
   <body>
     <div id="wrapper" class="container">
-      <div class="row">
-        <div class="span12">
-          <%= render :partial => "layouts/header" %>
-        </div>
+      <%= render :partial => "layouts/header" %>
+      <nav id="toolbar">
+        <%= yield :toolbar %>
+      </nav>
+      <div id="map_location">
+        <%= yield :location %>
       </div>
-
-      <div class="row">
-        <div class="span2">
-          <nav id="toolbar">
-            <%= yield :toolbar %>
-          </nav>
-        </div>
-
-        <div class="span7">
-          <div id="map_location">
-            <%= yield :location %>
-          </div>
-          <div id="flash">
-            <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
-          </div>
-          <section id="content">
-            <%= yield %>
-          </section>
-        </div>
-
-        <div class="span3">
-        <aside id="sidebar">
-          <div id="sidebarContent">
-            <%= yield :sidebar %>
-          </div>
-        </aside>
-        </div>
+      <div id="flash">
+        <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
       </div>
-      <footer><%= render :partial => "layouts/footer" %></footer>
+      <section id="content">
+        <%= yield %>
+      </section>
+  
+      <aside id="sidebar">
+        <div id="sidebarContent">
+          <%= yield :sidebar %>
+        </div>
+      </aside>
     </div>
+    
+    <footer><%= render :partial => "layouts/footer" %>
+    </footer>
+
   </body>
 </html>

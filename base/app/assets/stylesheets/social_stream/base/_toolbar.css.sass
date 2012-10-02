@@ -1,5 +1,26 @@
 @import "bootstrap"
 
+#toolbar
+        
+    @include makeColumn(2, 0)
+    background-color: #000
+    display: table-cell
+    margin-left: 0px
+
+    .logo_index
+      
+        text-aling: center
+        h2 
+            font-size: 14px
+            a
+                text-decoration: none
+                color: #000000
+                hover
+                    cursor: pointer
+
 .toolbar_menu
-        @include makeRow
-        @include makeColumn(2, 0)
+    @include border-radius(5px)
+    background-color: #FFF
+
+       
+

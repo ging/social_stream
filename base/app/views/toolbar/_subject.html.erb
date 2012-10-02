@@ -1,10 +1,8 @@
-<div class="row">
-  <div class="span2">
     <div class="logo">
       <%= link_to (image_tag(current_subject.logo.url , :size => "50x50", :alt => current_subject.name )), current_subject  %>
     </div>
     <div class="name black" >
       <%= link_to truncate_name(current_subject.name, :length => 80), current_subject %>
     </div>
-  </div>
-</div>
+
+
