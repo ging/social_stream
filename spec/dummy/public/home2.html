@@ -1,0 +1,1705 @@
+<!-- HTML5 DOCTYPE -->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Social Stream</title>
+    <meta name="keywords" content="social, stream," >
+    <meta name="description" content= "Social Stream es un núcleo para construir webs con características de red social" >
+    <meta name="generator" content="SocialStream" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    <link href="/assets/application.css?body=1" media="screen" rel="stylesheet" type="text/css" />
+<link href="/assets/social_stream-base.css?body=1" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/assets/jquery.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery_ujs.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery-ui.js?body=1" type="text/javascript"></script>
+<script src="/assets/modernizr.js?body=1" type="text/javascript"></script>
+<script src="/assets/bootstrap-transition.js?body=1" type="text/javascript"></script>
+<script src="/assets/bootstrap-affix.js?body=1" type="text/javascript"></script>
+<script src="/assets/bootstrap-alert.js?body=1" type="text/javascript"></script>
+<script src="/assets/bootstrap-button.js?body=1" type="text/javascript"></script>
+<script src="/assets/bootstrap-carousel.js?body=1" type="text/javascript"></script>
+<script src="/assets/bootstrap-collapse.js?body=1" type="text/javascript"></script>
+<script src="/assets/bootstrap-dropdown.js?body=1" type="text/javascript"></script>
+<script src="/assets/bootstrap-modal.js?body=1" type="text/javascript"></script>
+<script src="/assets/bootstrap-scrollspy.js?body=1" type="text/javascript"></script>
+<script src="/assets/bootstrap-tab.js?body=1" type="text/javascript"></script>
+<script src="/assets/bootstrap-tooltip.js?body=1" type="text/javascript"></script>
+<script src="/assets/bootstrap-popover.js?body=1" type="text/javascript"></script>
+<script src="/assets/bootstrap-typeahead.js?body=1" type="text/javascript"></script>
+<script src="/assets/bootstrap.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.lightbox-with-resize-plugin.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.screw.js?body=1" type="text/javascript"></script>
+<script src="/assets/i18n.js?body=1" type="text/javascript"></script>
+<script src="/assets/i18n/translations.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.Jcrop.min.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.form.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.fileupload.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.fileupload-ui.js?body=1" type="text/javascript"></script>
+<script src="/assets/avatars_for_rails.js?body=1" type="text/javascript"></script>
+<script src="/assets/kinetic.js?body=1" type="text/javascript"></script>
+<script src="/assets/socialcheesecake/_header.js?body=1" type="text/javascript"></script>
+<script src="/assets/socialcheesecake/actor.js?body=1" type="text/javascript"></script>
+<script src="/assets/socialcheesecake/cheesecake.js?body=1" type="text/javascript"></script>
+<script src="/assets/socialcheesecake/colors.js?body=1" type="text/javascript"></script>
+<script src="/assets/socialcheesecake/eventCallbackHandlers.js?body=1" type="text/javascript"></script>
+<script src="/assets/socialcheesecake/grid.js?body=1" type="text/javascript"></script>
+<script src="/assets/socialcheesecake/search.js?body=1" type="text/javascript"></script>
+<script src="/assets/socialcheesecake/sector.js?body=1" type="text/javascript"></script>
+<script src="/assets/socialcheesecake/subsector.js?body=1" type="text/javascript"></script>
+<script src="/assets/socialcheesecake/text.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_cheesecake.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream-base.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.livequery.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.tipsy.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.watermark.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream.timeline.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream.wall.js?body=1" type="text/javascript"></script>
+<script src="/assets/activities.js?body=1" type="text/javascript"></script>
+<script src="/assets/activities_security_chosen-modified.jquery.js?body=1" type="text/javascript"></script>
+<script src="/assets/cheesecake.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.ba-url.js?body=1" type="text/javascript"></script>
+<script src="/assets/ajax.paginate.js?body=1" type="text/javascript"></script>
+<script src="/assets/contacts.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.scrollTo.min.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.validate.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.cleditor.min.js?body=1" type="text/javascript"></script>
+<script src="/assets/conversations.js?body=1" type="text/javascript"></script>
+<script src="/assets/jqcloud-0.1.3.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.fcbkcomplete.js?body=1" type="text/javascript"></script>
+<script src="/assets/groups.js?body=1" type="text/javascript"></script>
+<script src="/assets/invitations.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.ad-gallery.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.ad-gallery.pack.js?body=1" type="text/javascript"></script>
+<script src="/assets/hoverIntent.js?body=1" type="text/javascript"></script>
+<script src="/assets/superfish.js?body=1" type="text/javascript"></script>
+<script src="/assets/layouts.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.ae.image.resize.js?body=1" type="text/javascript"></script>
+<script src="/assets/messages.js?body=1" type="text/javascript"></script>
+<script src="/assets/posts.js?body=1" type="text/javascript"></script>
+<script src="/assets/preloader.js?body=1" type="text/javascript"></script>
+<script src="/assets/profiles.js?body=1" type="text/javascript"></script>
+<script src="/assets/relation_customs.js?body=1" type="text/javascript"></script>
+<script src="/assets/search.js?body=1" type="text/javascript"></script>
+<script src="/assets/settings.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream.action.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream.objects.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream.activity.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream.comments.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream.follow.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream.search.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream.toolbar.js?body=1" type="text/javascript"></script>
+<script src="/assets/d3.js?body=1" type="text/javascript"></script>
+<script src="/assets/d3.layout.js?body=1" type="text/javascript"></script>
+<script src="/assets/d3.geom.js?body=1" type="text/javascript"></script>
+<script src="/assets/ties.js?body=1" type="text/javascript"></script>
+<script src="/assets/users.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.jplayer.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream-documents.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream.audio.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream.repository.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream.video.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.boxy.js?body=1" type="text/javascript"></script>
+<script src="/assets/fullcalendar.js?body=1" type="text/javascript"></script>
+<script src="/assets/scheduler.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream-events.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream.calendar.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream.event.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream.events.action.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream.events.poster.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream-linkser.js?body=1" type="text/javascript"></script>
+<script src="/assets/linkser.js?body=1" type="text/javascript"></script>
+<script src="/assets/strophe.js?body=1" type="text/javascript"></script>
+<script src="/assets/strophe.muc.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.tools.tooltip.js?body=1" type="text/javascript"></script>
+<script src="/assets/liquidmetal.js?body=1" type="text/javascript"></script>
+<script src="/assets/TB.min.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.flexselect.sstreampresence.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery.ui.chatbox.sstreampresence.js?body=1" type="text/javascript"></script>
+<script src="/assets/presence.js?body=1" type="text/javascript"></script>
+<script src="/assets/presence_XmppClient.js?body=1" type="text/javascript"></script>
+<script src="/assets/presence_audio.js?body=1" type="text/javascript"></script>
+<script src="/assets/presence_game.js?body=1" type="text/javascript"></script>
+<script src="/assets/presence_game_comunication.js?body=1" type="text/javascript"></script>
+<script src="/assets/presence_game_factory.js?body=1" type="text/javascript"></script>
+<script src="/assets/presence_game_interface.js?body=1" type="text/javascript"></script>
+<script src="/assets/presence_game_sfighter.js?body=1" type="text/javascript"></script>
+<script src="/assets/presence_game_ter.js?body=1" type="text/javascript"></script>
+<script src="/assets/presence_notifications.js?body=1" type="text/javascript"></script>
+<script src="/assets/presence_parser.js?body=1" type="text/javascript"></script>
+<script src="/assets/presence_persistence.js?body=1" type="text/javascript"></script>
+<script src="/assets/presence_store.js?body=1" type="text/javascript"></script>
+<script src="/assets/presence_uiManager.js?body=1" type="text/javascript"></script>
+<script src="/assets/presence_utilities.js?body=1" type="text/javascript"></script>
+<script src="/assets/presence_videochat.js?body=1" type="text/javascript"></script>
+<script src="/assets/presence_windowManager.js?body=1" type="text/javascript"></script>
+<script src="/assets/social_stream-presence.js?body=1" type="text/javascript"></script>
+<script src="/assets/application.js?body=1" type="text/javascript"></script>
+
+    
+
+    <link href="/assets/icons/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+
+      <meta content="authenticity_token" name="csrf-param" />
+<meta content="azYT4uKrqGbmqf2TxSD/cZmGWgMHv19J3pMhTqbV3cQ=" name="csrf-token" />
+
+    <script type="text/javascript">
+      I18n.defaultLocale = "en";
+      I18n.locale = "es";
+    </script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        SocialStream.Toolbar.init({ option: '' });
+      })
+    </script>
+  </head>
+  <body>
+    <div id="wrapper" class="container">
+      <header>
+  <div class="navbar navbar-inverse">
+  <div class="navbar-inner">
+    <a href="/" class="brand"><img alt="Social Stream" src="/assets/header-logo.png" /></a>
+
+    <!-- FIXME: search javascript functionality in 'layouts/search' -->
+
+    <form accept-charset="UTF-8" action="/search" class="navbar-search pull-left" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+      <input autocomplete="off" class="search-query" id="q" name="q" placeholder="Buscar" type="text" />
+</form>
+     <ul class="nav pull-right">
+       <li><a href="/">Inicio</a></li>   
+       <li><a href="/users/demo">Perfil</a></li>            
+       <li>
+         <a href="/conversations">Mensajes</a>
+         <span id="header_inbox_count">
+           <a href="/conversations">0</a>
+         </span>
+       </li>            
+       <li>
+         <a href="/notifications">Notificaciones</a>
+         <span id="header_notifications">
+           <a href="/notifications">31</a>
+         </span>
+       </li>
+       <li class="dropdown">
+ <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+   <img alt="User" src="/assets/logos/representation/user.png" />
+   Demo
+   <b class="caret"></b>
+</a> <ul class="dropdown-menu">
+   
+   <li>
+     <a href="/settings" id="btn_menu_settings">Ajustes</a>
+   </li>
+     <li>
+     <a href="/relation/customs">Privacidad</a>
+     </li>
+   <li class="divider"></li>
+   <li>
+   <a href="/users/sign_out" data-method="delete" rel="nofollow">Salir</a>
+   </li>
+ </ul>
+</li>
+
+
+     </ul>
+  </div>
+</div>
+
+</header>
+
+      <nav id="toolbar">
+            <div class="logo">
+      <a href="/users/demo"><img alt="Demo" height="50" src="/assets/logos/original/user.png" width="50" /></a>
+    </div>
+    <div class="name black" >
+      <a href="/users/demo">Demo</a>
+    </div>
+
+
+<div class="toolbar_menu"><ul class="nav nav-pills nav-stacked"><li><a href="#" id="toolbar_menu-contacts"><img alt="Btn_friend" src="/assets/btn/btn_friend.png" />Contactos</a><ul class="nav nav-pills nav-stacked"><li><a href="/contacts"><img alt="Btn_friend" src="/assets/btn/btn_friend.png" />Actuales</a></li><li><a href="/ties"><img alt="Btn_friend" src="/assets/btn/btn_friend.png" />Gráfico</a></li><li><a href="/contacts/pending"><img alt="Btn_friend" src="/assets/btn/btn_friend.png" />Pendientes</a></li><li><a href="/invitations/new"><img alt="Btn_invitation" src="/assets/btn/btn_invitation.png" />Invitar</a></li></ul></li><li><a href="#" id="toolbar_menu-groups"><img alt="Btn_group" src="/assets/btn/btn_group.png" />Grupos</a><ul class="nav nav-pills nav-stacked"><li><a href="/groups/new"><img alt="Btn_group" src="/assets/btn/btn_group.png" />Nuevo grupo</a></li></ul></li><li><a href="/users/demo/documents" id="toolbar_menu-documents"><img alt="Btn_resource" class="menu_icon" src="/assets/btn/btn_resource.png" />Ficheros</a></li></ul></div>	
+<div id="chat_wrapper"> 
+
+  <div id="chat_partial">    
+  </div>
+	
+	<div id="chat_divs">  
+	  <div id="chat_div"></div>
+	</div>
+	
+	<div id="chat_connecting">
+	  <div class="block">
+      <div class="header">
+        <img alt="Btn_friend" class="header_icon" src="/assets/btn/btn_friend.png" />
+        <div class="header_text">
+          Chat Conectando
+        </div>
+      </div>
+    </div>
+	</div>
+	
+  <div id="chat_connection_off">
+    <div class="block">
+      <div class="header">
+        <img alt="Btn_friend" class="header_icon" src="/assets/btn/btn_friend.png" />
+        <div class="header_text">
+          <p id="chat_header_title">Chat Desconectado</p>
+        </div>
+      </div>
+    </div>
+    <div class="chat_off">
+      <div id="passwordFormChat">
+        <label for="user_password" class="chatPasswordTitle">Contraseña</label>
+        <input id="user_password" class="chat_password" type="password"></input>
+      </div>
+      <input class="connectChatButton storePass" value="Connect">
+    </div>	
+	</div>
+	
+	<div id="chat_widgets">
+		<div class="block">
+      <div class="header">
+        <img alt="Btn_friend" class="header_icon" src="/assets/btn/btn_friend.png" />
+        <div class="header_text">
+          Chat
+        </div>
+      </div>
+    
+	    <div id="status" class="dropdown">
+	      <dt><a href=""><span>Establecer estado</span></a></dt>
+	      <dd>
+	        <ul id="statusList">
+	          <li><a id="available" href="#" class="option"><img class="flag" src="/assets/status/available.png" alt=""/> Disponible <span class="value">available</span></a></li>
+	          <li><a id="away" href="#" class="option"><img class="flag" src="/assets/status/away.png" alt=""/> Ausente <span class="value">away</span></a></li>
+	          <li><a id="dnd" href="#" class="option"><img class="flag" src="/assets/status/dnd.png" alt=""/> No molestar <span class="value">dnd</span></a></li>
+	          <li><a id="offline" href="#" class="option"><img class="flag" src="/assets/status/offline.png" alt=""/> Desconectado <span class="value">offline</span></a></li>
+	        </ul>
+	      </dd>
+	    </div>
+						
+			<div class="searchChatContacts">
+			    <select id="search_chat_contact" class="flexselect">
+			      <option value="">""</option>
+			    </select>
+			</div>
+			
+    </div>
+	</div>
+	
+	<div>
+		<div id="publisherID"></div>
+	</div>
+	
+</div>
+
+
+<script type="text/javascript">
+
+  //Global variables
+  var cookie = "AuthenticationByCookie>>" + "BAh7CEkiD3Nlc3Npb25faWQGOgZFRkkiJTRkNDhlY2U4Y2VjYWQzYTU2MGY2YTQ2NTFlZGYxZjQzBjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMWF6WVQ0dUtycUdibXFmMlR4U0QvY1ptR1dnTUh2MTlKM3BNaFRxYlYzY1E9BjsARkkiGXdhcmRlbi51c2VyLnVzZXIua2V5BjsAVFsISSIJVXNlcgY7AEZbBmkGSSIiJDJhJDEwJFYvL1BIV3BvNWZXS0hnb0suTnJVYXUGOwBU--0032ba64ea91c01a118a04e3df38cf6fd561dc4a";
+	var BOSH_SERVICE = 'http://localhost:3000/http-bind/';
+	var user_name = 'Demo';
+  var user_slug = 'demo';
+  var user_jid = PRESENCE.XMPPClient.getJidFromSlug('demo');
+	
+
+  $(document).ready(function () {
+			
+		//Inicial field
+		$("#chat_partial").html($("#chat_connecting").html())
+	
+    if((PRESENCE.PERSISTENCE.getRestoreUserChatStatus()!="offline")&&(cookie)){
+			PRESENCE.XMPPClient.connectToChat(user_jid,cookie);
+      initialTimer = setTimeout("PRESENCE.UIMANAGER.updateChatWindow()", 10000);
+    } else {
+      PRESENCE.UIMANAGER.updateChatWindow();
+    }
+      
+	  PRESENCE.CORE.init();
+  });
+  
+</script>
+
+
+
+
+
+
+      </nav>
+      <div id="map_location">
+        <div class="content_size">
+	
+    
+    
+<div class="first"><span class="penultimate">Estás aquí</span></div><div class="last"><a href="/home">Inicio: Demo</a></div>
+
+</div>
+
+      </div>
+      <div id="flash">
+        
+      </div>
+      <section id="content">
+        
+
+                      
+
+<br class="clearfloat" />
+<div class="space_center">
+</div>
+
+<div id="my_groups">
+    <div id="groups_title" class="content_size">
+      Últimos grupos (<span id="group_count">5</span>)
+  </div>
+
+  <div id="groups_list" class="content_size">
+     <div class="space_center"></div>
+    <ul id='carousel_ul' class="menu_list">
+      <li>
+  <div class="group" id="group_1">
+  <div class="logo">
+    <a href="/groups/realblab"><img alt="Realblab" class="btn_subject" src="/assets/logos/actor/group.png" title="Realblab" /></a>
+  </div>
+  <div class="title">
+    <a href="/groups/realblab">Realblab</a>
+  </div>
+</div>
+</li>
+<li>
+  <div class="group" id="group_3">
+  <div class="logo">
+    <a href="/groups/tagfeed"><img alt="Tagfeed" class="btn_subject" src="/assets/logos/actor/group.png" title="Tagfeed" /></a>
+  </div>
+  <div class="title">
+    <a href="/groups/tagfeed">Tagfeed</a>
+  </div>
+</div>
+</li>
+<li>
+  <div class="group" id="group_2">
+  <div class="logo">
+    <a href="/groups/jabbertype"><img alt="Jabbertype" class="btn_subject" src="/assets/logos/actor/group.png" title="Jabbertype" /></a>
+  </div>
+  <div class="title">
+    <a href="/groups/jabbertype">Jabbertype</a>
+  </div>
+</div>
+</li>
+<li>
+  <div class="group" id="group_6">
+  <div class="logo">
+    <a href="/groups/skilith"><img alt="Skilith" class="btn_subject" src="/assets/logos/actor/group.png" title="Skilith" /></a>
+  </div>
+  <div class="title">
+    <a href="/groups/skilith">Skilith</a>
+  </div>
+</div>
+</li>
+<li>
+  <div class="group" id="group_10">
+  <div class="logo">
+    <a href="/groups/buzzshare"><img alt="Buzzshare" class="btn_subject" src="/assets/logos/actor/group.png" title="Buzzshare" /></a>
+  </div>
+  <div class="title">
+    <a href="/groups/buzzshare">Buzzshare</a>
+  </div>
+</div>
+</li>
+
+    </ul>
+  </div>
+
+</div>
+
+<div id="wrapper_activities">
+  <div id="wrapper_activities_header">
+    <div id="activities_title" class="content_size">
+      <div class="activities_title_header">
+        <img alt="Activity" src="/assets/btn/activity.png" />Actividades
+      </div>
+    </div>
+    <div id="activities_header" class="content_size">
+    
+<form accept-charset="UTF-8" action="/posts" class="new_post" data-remote="true" id="new_post" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="azYT4uKrqGbmqf2TxSD/cZmGWgMHv19J3pMhTqbV3cQ=" /></div>
+  <input id="post_owner_id" name="post[owner_id]" type="hidden" value="1" />
+
+  <input id="input_activities" name="post[text]" size="85" type="text" />
+	
+</form>
+
+    
+<form accept-charset="UTF-8" action="/documents" class="new_document" enctype="multipart/form-data" id="new_document" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="azYT4uKrqGbmqf2TxSD/cZmGWgMHv19J3pMhTqbV3cQ=" /></div>
+  <input id="document_owner_id" name="document[owner_id]" type="hidden" value="1" />
+
+  <input id="document_file" name="document[file]" type="file" />
+
+<div id="new_document_title_wrapper">
+<label for="document_title">Título</label> <input id="document_title" name="document[title]" size="30" type="text" value="" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+
+  $(function() {
+    $('#new_document_title_wrapper').hide();
+    $('#document_file').change(function(){
+      $('#new_document_title_wrapper').show();
+      $("#document_title").val($(this).val().replace(/C:\\fakepath\\/i, ''));
+    });
+  });
+
+//]]>
+</script>	
+</form>
+
+</div>
+
+<div id="activity_form_select">
+    <div id="select_post" class="activity_form_selector">
+      Texto
+    </div>
+    <div id="select_document" class="activity_form_selector">
+      Fichero
+    </div>
+</div>
+
+<div id="securities">
+    <script type="text/javascript">
+//<![CDATA[
+
+      var relation_public = 1;
+      var public_selected = false;
+      var relation_options = [3,4,5,1];
+      var relation_public_pos = 0;
+      for(id in relation_options){
+        if(relation_options[id]==relation_public){
+          break;
+        }else{
+          relation_public_pos++;
+        }
+      }
+      //For security with check "var default_security_width = '100px';" in activities.js.erb
+
+//]]>
+</script>    <select id="security" multiple="multiple" name="relation_ids[]" title="Tus contactos"><option value="3">friend</option>
+<option value="4">acquaintance</option>
+<option value="5">colleague</option>
+<option value="1">Público</option></select>
+</div>
+
+<div id="activities_share_btn">
+  <input class="button submitActivity" id="masterSubmitButton" name="commit" type="submit" value="Compartir" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+
+  $(function(){  
+    SocialStream.Wall.init();  
+  });
+
+//]]>
+</script>
+
+  </div>
+
+  <div id="wall">
+    <div class="activity super_activity" id="activity_202">
+
+  <div class="actor_logo">
+    <a href="/users/bobby-edwards"><img alt="Bobby Edwards" src="/assets/logos/actor/user.png" /></a>
+  </div>
+
+  <div class="activity_content">
+  	
+    <div class="actor_name">
+      <a href="/users/bobby-edwards">Bobby Edwards</a>
+    </div>
+
+    <div class="activity_objects">
+        <div class="post content_size" id="post_25">
+  <p>This post should be for Public of Bobby Edwards.
+<br />Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.</p>
+</div>
+
+    </div>
+
+    <div class="activity_options">
+    <div class="post_time_ago">hace más de 6 años</div>
+      <div class="verb_comment"> · <a href="#" class="to_comment">Comentar</a> </div>
+
+    <div class="verb_like" id="like_activity_202"> · <a href="/activities/202/like" class="verb_like" data-method="post" data-remote="true" id="like_activity_202" rel="nofollow"><img alt="Nolike" class="menu_icon" src="/assets/btn/nolike.png" />Me gusta</a></div>
+
+      ·
+      <a href="javascript:;" class="activity_audience_summary"><img alt="Public" class="menu_icon" src="/assets/btn/public.png" />Público</a>
+      <div class="activity_audience">
+        Accesible por toda Internet
+      </div>
+
+</div>
+
+
+    
+
+    <div class="activity_comments" id="comments_activity_202">
+</div>
+
+
+      <div class="activity_new_comment">
+    <div class="actor_logo_new_comment">
+      <img alt="Demo" src="/assets/logos/actor/user.png" />
+    </div>
+    <div class= "activity_content">
+      <div class="actor_name_new_comment">
+        Demo
+      </div>
+      <form accept-charset="UTF-8" action="/comments" class="new_comment" data-remote="true" id="new_commentactivity_202" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="azYT4uKrqGbmqf2TxSD/cZmGWgMHv19J3pMhTqbV3cQ=" /></div>
+
+        <input id="comment_owner_id" name="comment[owner_id]" type="hidden" value="3" />
+        <input id="comment__activity_parent_id" name="comment[_activity_parent_id]" type="hidden" value="202" />
+        
+        <div class="input_new_comments_container">
+          <textarea class="input_new_comments" cols="40" id="comment_text_activity_202" name="comment[text]" rows="1">
+Comentar...</textarea>
+          <div class="copy_new_comment" id="copy_comment_text_activity_202"></div>
+        </div>
+        
+        <div class="activities_comment_btn">
+          <div class="activities_security"></div>
+          <input class="myButtonBlue submitActivity" id="comment_submit_activity_202" name="commit" type="submit" value="Compartir" />
+        </div>
+</form>    </div>
+  </div>
+
+
+  </div>
+
+  <div class="space_activities">
+      <div class="#"></div>
+  </div>
+</div>
+  <div class="activity super_activity" id="activity_204">
+
+  <div class="actor_logo">
+    <a href="/users/demo"><img alt="Demo" src="/assets/logos/actor/user.png" /></a>
+  </div>
+
+  <div class="activity_content">
+  	
+    <div class="actor_name">
+      <a href="/users/demo">Demo</a>
+    </div>
+
+    <div class="activity_objects">
+        <div class="post content_size" id="post_27">
+  <p>This post should be for Public of Demo.
+<br />Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.</p>
+</div>
+
+    </div>
+
+    <div class="activity_options">
+    <div class="post_time_ago">hace alrededor de 10 años</div>
+      <div class="verb_comment"> · <a href="#" class="to_comment">Comentar</a> </div>
+
+    <div class="verb_like" id="like_activity_204"> · <a href="/activities/204/like" class="verb_like" data-method="post" data-remote="true" id="like_activity_204" rel="nofollow"><img alt="Nolike" class="menu_icon" src="/assets/btn/nolike.png" />Me gusta</a></div>
+
+      ·
+      <a href="javascript:;" class="activity_audience_summary"><img alt="Public" class="menu_icon" src="/assets/btn/public.png" />Público</a>
+      <div class="activity_audience">
+        Accesible por toda Internet
+      </div>
+
+      <div class="verb_delete"> 
+        · <a href="/posts/27" data-confirm="¿Borrar texto?" data-method="delete" data-remote="true" rel="nofollow">Borrar</a> 
+      </div>
+</div>
+
+
+    
+
+    <div class="activity_comments" id="comments_activity_204">
+</div>
+
+
+      <div class="activity_new_comment">
+    <div class="actor_logo_new_comment">
+      <img alt="Demo" src="/assets/logos/actor/user.png" />
+    </div>
+    <div class= "activity_content">
+      <div class="actor_name_new_comment">
+        Demo
+      </div>
+      <form accept-charset="UTF-8" action="/comments" class="new_comment" data-remote="true" id="new_commentactivity_204" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="azYT4uKrqGbmqf2TxSD/cZmGWgMHv19J3pMhTqbV3cQ=" /></div>
+
+        <input id="comment_owner_id" name="comment[owner_id]" type="hidden" value="1" />
+        <input id="comment__activity_parent_id" name="comment[_activity_parent_id]" type="hidden" value="204" />
+        
+        <div class="input_new_comments_container">
+          <textarea class="input_new_comments" cols="40" id="comment_text_activity_204" name="comment[text]" rows="1">
+Comentar...</textarea>
+          <div class="copy_new_comment" id="copy_comment_text_activity_204"></div>
+        </div>
+        
+        <div class="activities_comment_btn">
+          <div class="activities_security"></div>
+          <input class="myButtonBlue submitActivity" id="comment_submit_activity_204" name="commit" type="submit" value="Compartir" />
+        </div>
+</form>    </div>
+  </div>
+
+
+  </div>
+
+  <div class="space_activities">
+      <div class="#"></div>
+  </div>
+</div>
+  <div class="activity super_activity" id="activity_210">
+
+  <div class="actor_logo">
+    <a href="/groups/jaloo"><img alt="Jaloo" src="/assets/logos/actor/group.png" /></a>
+  </div>
+
+  <div class="activity_content">
+  	
+    <div class="actor_name">
+      <a href="/groups/jaloo">Jaloo</a>
+    </div>
+
+    <div class="activity_objects">
+        <div class="post content_size" id="post_33">
+  <p>This post should be for Public of Jaloo.
+<br />Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.</p>
+</div>
+
+    </div>
+
+    <div class="activity_options">
+    <div class="post_time_ago">hace más de 12 años</div>
+      <div class="verb_comment"> · <a href="#" class="to_comment">Comentar</a> </div>
+
+    <div class="verb_like" id="like_activity_210"> · <a href="/activities/210/like" class="verb_like" data-method="post" data-remote="true" id="like_activity_210" rel="nofollow"><img alt="Nolike" class="menu_icon" src="/assets/btn/nolike.png" />Me gusta</a></div>
+
+      ·
+      <a href="javascript:;" class="activity_audience_summary"><img alt="Public" class="menu_icon" src="/assets/btn/public.png" />Público</a>
+      <div class="activity_audience">
+        Accesible por toda Internet
+      </div>
+
+      <div class="verb_delete"> 
+        · <a href="/posts/33" data-confirm="¿Borrar texto?" data-method="delete" data-remote="true" rel="nofollow">Borrar</a> 
+      </div>
+</div>
+
+
+    
+
+    <div class="activity_comments" id="comments_activity_210">
+</div>
+
+
+      <div class="activity_new_comment">
+    <div class="actor_logo_new_comment">
+      <img alt="Demo" src="/assets/logos/actor/user.png" />
+    </div>
+    <div class= "activity_content">
+      <div class="actor_name_new_comment">
+        Demo
+      </div>
+      <form accept-charset="UTF-8" action="/comments" class="new_comment" data-remote="true" id="new_commentactivity_210" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="azYT4uKrqGbmqf2TxSD/cZmGWgMHv19J3pMhTqbV3cQ=" /></div>
+
+        <input id="comment_owner_id" name="comment[owner_id]" type="hidden" value="17" />
+        <input id="comment__activity_parent_id" name="comment[_activity_parent_id]" type="hidden" value="210" />
+        
+        <div class="input_new_comments_container">
+          <textarea class="input_new_comments" cols="40" id="comment_text_activity_210" name="comment[text]" rows="1">
+Comentar...</textarea>
+          <div class="copy_new_comment" id="copy_comment_text_activity_210"></div>
+        </div>
+        
+        <div class="activities_comment_btn">
+          <div class="activities_security"></div>
+          <input class="myButtonBlue submitActivity" id="comment_submit_activity_210" name="commit" type="submit" value="Compartir" />
+        </div>
+</form>    </div>
+  </div>
+
+
+  </div>
+
+  <div class="space_activities">
+      <div class="#"></div>
+  </div>
+</div>
+  <div class="activity super_activity" id="activity_134">
+
+  <div class="actor_logo">
+    <a href="/groups/mycat"><img alt="Mycat" src="/assets/logos/actor/group.png" /></a>
+  </div>
+
+  <div class="activity_content">
+  	
+    <div class="actor_name">
+      <a href="/groups/mycat">Mycat</a> añadió <a href="/users/demo">Demo</a> como contacto.
+    </div>
+
+    <div class="activity_objects">
+      
+    </div>
+
+    <div class="activity_options">
+    <div class="post_time_ago">hace casi 14 años</div>
+      <div class="verb_comment"> · <a href="#" class="to_comment">Comentar</a> </div>
+
+    <div class="verb_like" id="like_activity_134"> · <a href="/activities/134/like" class="verb_like" data-method="post" data-remote="true" id="like_activity_134" rel="nofollow"><img alt="Nolike" class="menu_icon" src="/assets/btn/nolike.png" />Me gusta</a></div>
+
+      ·
+      <a href="javascript:;" class="activity_audience_summary"><img alt="Restricted" class="menu_icon" src="/assets/btn/restricted.png" />Restringido</a>
+      <div class="activity_audience">
+        Compartido con friend, acquaintance, colleague
+          ·
+          <a href="/audience/index?activity_id=134" data-remote="true">Mostrar</a>
+          <div class="activity-audience-list-134">
+          </div>
+      </div>
+
+</div>
+
+
+    
+
+    <div class="activity_comments" id="comments_activity_134">
+    
+</div>
+
+
+      <div class="activity_new_comment">
+    <div class="actor_logo_new_comment">
+      <img alt="Demo" src="/assets/logos/actor/user.png" />
+    </div>
+    <div class= "activity_content">
+      <div class="actor_name_new_comment">
+        Demo
+      </div>
+      <form accept-charset="UTF-8" action="/comments" class="new_comment" data-remote="true" id="new_commentactivity_134" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="azYT4uKrqGbmqf2TxSD/cZmGWgMHv19J3pMhTqbV3cQ=" /></div>
+
+        <input id="comment_owner_id" name="comment[owner_id]" type="hidden" value="1" />
+        <input id="comment__activity_parent_id" name="comment[_activity_parent_id]" type="hidden" value="134" />
+        
+        <div class="input_new_comments_container">
+          <textarea class="input_new_comments" cols="40" id="comment_text_activity_134" name="comment[text]" rows="1">
+Comentar...</textarea>
+          <div class="copy_new_comment" id="copy_comment_text_activity_134"></div>
+        </div>
+        
+        <div class="activities_comment_btn">
+          <div class="activities_security"></div>
+          <input class="myButtonBlue submitActivity" id="comment_submit_activity_134" name="commit" type="submit" value="Compartir" />
+        </div>
+</form>    </div>
+  </div>
+
+
+  </div>
+
+  <div class="space_activities">
+      <div class="#"></div>
+  </div>
+</div>
+  <div class="activity super_activity" id="activity_245">
+
+  <div class="actor_logo">
+    <a href="/users/peter-reed"><img alt="Peter Reed" src="/assets/logos/actor/user.png" /></a>
+  </div>
+
+  <div class="activity_content">
+  	
+    <div class="actor_name">
+      <a href="/users/peter-reed">Peter Reed</a> → <a href="/users/demo">Demo</a>
+    </div>
+
+    <div class="activity_objects">
+        <div class="post content_size" id="post_68">
+  <p>This post should be for friend of Demo.
+<br />Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.</p>
+</div>
+
+    </div>
+
+    <div class="activity_options">
+    <div class="post_time_ago">hace alrededor de 14 años</div>
+      <div class="verb_comment"> · <a href="#" class="to_comment">Comentar</a> </div>
+
+    <div class="verb_like" id="like_activity_245"> · <a href="/activities/245/like" class="verb_like" data-method="post" data-remote="true" id="like_activity_245" rel="nofollow"><img alt="Nolike" class="menu_icon" src="/assets/btn/nolike.png" />Me gusta</a></div>
+
+      ·
+      <a href="javascript:;" class="activity_audience_summary"><img alt="Restricted" class="menu_icon" src="/assets/btn/restricted.png" />Restringido</a>
+      <div class="activity_audience">
+        Compartido con friend
+          ·
+          <a href="/audience/index?activity_id=245" data-remote="true">Mostrar</a>
+          <div class="activity-audience-list-245">
+          </div>
+      </div>
+
+      <div class="verb_delete"> 
+        · <a href="/posts/68" data-confirm="¿Borrar texto?" data-method="delete" data-remote="true" rel="nofollow">Borrar</a> 
+      </div>
+</div>
+
+
+    
+
+    <div class="activity_comments" id="comments_activity_245">
+</div>
+
+
+      <div class="activity_new_comment">
+    <div class="actor_logo_new_comment">
+      <img alt="Demo" src="/assets/logos/actor/user.png" />
+    </div>
+    <div class= "activity_content">
+      <div class="actor_name_new_comment">
+        Demo
+      </div>
+      <form accept-charset="UTF-8" action="/comments" class="new_comment" data-remote="true" id="new_commentactivity_245" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="azYT4uKrqGbmqf2TxSD/cZmGWgMHv19J3pMhTqbV3cQ=" /></div>
+
+        <input id="comment_owner_id" name="comment[owner_id]" type="hidden" value="1" />
+        <input id="comment__activity_parent_id" name="comment[_activity_parent_id]" type="hidden" value="245" />
+        
+        <div class="input_new_comments_container">
+          <textarea class="input_new_comments" cols="40" id="comment_text_activity_245" name="comment[text]" rows="1">
+Comentar...</textarea>
+          <div class="copy_new_comment" id="copy_comment_text_activity_245"></div>
+        </div>
+        
+        <div class="activities_comment_btn">
+          <div class="activities_security"></div>
+          <input class="myButtonBlue submitActivity" id="comment_submit_activity_245" name="commit" type="submit" value="Compartir" />
+        </div>
+</form>    </div>
+  </div>
+
+
+  </div>
+
+  <div class="space_activities">
+      <div class="#"></div>
+  </div>
+</div>
+  <div class="activity super_activity" id="activity_248">
+
+  <div class="actor_logo">
+    <a href="/users/peter-reed"><img alt="Peter Reed" src="/assets/logos/actor/user.png" /></a>
+  </div>
+
+  <div class="activity_content">
+  	
+    <div class="actor_name">
+      <a href="/users/peter-reed">Peter Reed</a> → <a href="/users/demo">Demo</a>
+    </div>
+
+    <div class="activity_objects">
+        <div class="post content_size" id="post_71">
+  <p>This post should be for friend of Demo.
+<br />Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.</p>
+</div>
+
+    </div>
+
+    <div class="activity_options">
+    <div class="post_time_ago">hace alrededor de 14 años</div>
+      <div class="verb_comment"> · <a href="#" class="to_comment">Comentar</a> </div>
+
+    <div class="verb_like" id="like_activity_248"> · <a href="/activities/248/like" class="verb_like" data-method="post" data-remote="true" id="like_activity_248" rel="nofollow"><img alt="Nolike" class="menu_icon" src="/assets/btn/nolike.png" />Me gusta</a></div>
+
+      ·
+      <a href="javascript:;" class="activity_audience_summary"><img alt="Restricted" class="menu_icon" src="/assets/btn/restricted.png" />Restringido</a>
+      <div class="activity_audience">
+        Compartido con friend
+          ·
+          <a href="/audience/index?activity_id=248" data-remote="true">Mostrar</a>
+          <div class="activity-audience-list-248">
+          </div>
+      </div>
+
+      <div class="verb_delete"> 
+        · <a href="/posts/71" data-confirm="¿Borrar texto?" data-method="delete" data-remote="true" rel="nofollow">Borrar</a> 
+      </div>
+</div>
+
+
+    
+
+    <div class="activity_comments" id="comments_activity_248">
+</div>
+
+
+      <div class="activity_new_comment">
+    <div class="actor_logo_new_comment">
+      <img alt="Demo" src="/assets/logos/actor/user.png" />
+    </div>
+    <div class= "activity_content">
+      <div class="actor_name_new_comment">
+        Demo
+      </div>
+      <form accept-charset="UTF-8" action="/comments" class="new_comment" data-remote="true" id="new_commentactivity_248" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="azYT4uKrqGbmqf2TxSD/cZmGWgMHv19J3pMhTqbV3cQ=" /></div>
+
+        <input id="comment_owner_id" name="comment[owner_id]" type="hidden" value="1" />
+        <input id="comment__activity_parent_id" name="comment[_activity_parent_id]" type="hidden" value="248" />
+        
+        <div class="input_new_comments_container">
+          <textarea class="input_new_comments" cols="40" id="comment_text_activity_248" name="comment[text]" rows="1">
+Comentar...</textarea>
+          <div class="copy_new_comment" id="copy_comment_text_activity_248"></div>
+        </div>
+        
+        <div class="activities_comment_btn">
+          <div class="activities_security"></div>
+          <input class="myButtonBlue submitActivity" id="comment_submit_activity_248" name="commit" type="submit" value="Compartir" />
+        </div>
+</form>    </div>
+  </div>
+
+
+  </div>
+
+  <div class="space_activities">
+      <div class="#"></div>
+  </div>
+</div>
+  <div class="activity super_activity" id="activity_247">
+
+  <div class="actor_logo">
+    <a href="/users/peter-reed"><img alt="Peter Reed" src="/assets/logos/actor/user.png" /></a>
+  </div>
+
+  <div class="activity_content">
+  	
+    <div class="actor_name">
+      <a href="/users/peter-reed">Peter Reed</a> → <a href="/users/demo">Demo</a>
+    </div>
+
+    <div class="activity_objects">
+        <div class="post content_size" id="post_70">
+  <p>This post should be for friend of Demo.
+<br />Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.</p>
+</div>
+
+    </div>
+
+    <div class="activity_options">
+    <div class="post_time_ago">hace más de 14 años</div>
+      <div class="verb_comment"> · <a href="#" class="to_comment">Comentar</a> </div>
+
+    <div class="verb_like" id="like_activity_247"> · <a href="/activities/247/like" class="verb_like" data-method="post" data-remote="true" id="like_activity_247" rel="nofollow"><img alt="Nolike" class="menu_icon" src="/assets/btn/nolike.png" />Me gusta</a></div>
+
+      ·
+      <a href="javascript:;" class="activity_audience_summary"><img alt="Restricted" class="menu_icon" src="/assets/btn/restricted.png" />Restringido</a>
+      <div class="activity_audience">
+        Compartido con friend
+          ·
+          <a href="/audience/index?activity_id=247" data-remote="true">Mostrar</a>
+          <div class="activity-audience-list-247">
+          </div>
+      </div>
+
+      <div class="verb_delete"> 
+        · <a href="/posts/70" data-confirm="¿Borrar texto?" data-method="delete" data-remote="true" rel="nofollow">Borrar</a> 
+      </div>
+</div>
+
+
+    
+
+    <div class="activity_comments" id="comments_activity_247">
+</div>
+
+
+      <div class="activity_new_comment">
+    <div class="actor_logo_new_comment">
+      <img alt="Demo" src="/assets/logos/actor/user.png" />
+    </div>
+    <div class= "activity_content">
+      <div class="actor_name_new_comment">
+        Demo
+      </div>
+      <form accept-charset="UTF-8" action="/comments" class="new_comment" data-remote="true" id="new_commentactivity_247" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="azYT4uKrqGbmqf2TxSD/cZmGWgMHv19J3pMhTqbV3cQ=" /></div>
+
+        <input id="comment_owner_id" name="comment[owner_id]" type="hidden" value="1" />
+        <input id="comment__activity_parent_id" name="comment[_activity_parent_id]" type="hidden" value="247" />
+        
+        <div class="input_new_comments_container">
+          <textarea class="input_new_comments" cols="40" id="comment_text_activity_247" name="comment[text]" rows="1">
+Comentar...</textarea>
+          <div class="copy_new_comment" id="copy_comment_text_activity_247"></div>
+        </div>
+        
+        <div class="activities_comment_btn">
+          <div class="activities_security"></div>
+          <input class="myButtonBlue submitActivity" id="comment_submit_activity_247" name="commit" type="submit" value="Compartir" />
+        </div>
+</form>    </div>
+  </div>
+
+
+  </div>
+
+  <div class="space_activities">
+      <div class="#"></div>
+  </div>
+</div>
+  <div class="activity super_activity" id="activity_188">
+
+  <div class="actor_logo">
+    <a href="/users/demo"><img alt="Demo" src="/assets/logos/actor/user.png" /></a>
+  </div>
+
+  <div class="activity_content">
+  	
+    <div class="actor_name">
+      <a href="/users/demo">Demo</a>
+    </div>
+
+    <div class="activity_objects">
+        <div class="post content_size" id="post_11">
+  <p>This post should be for Public of Demo.
+<br />Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.</p>
+</div>
+
+    </div>
+
+    <div class="activity_options">
+    <div class="post_time_ago">hace más de 15 años</div>
+      <div class="verb_comment"> · <a href="#" class="to_comment">Comentar</a> </div>
+
+    <div class="verb_like" id="like_activity_188"> · <a href="/activities/188/like" class="verb_like" data-method="post" data-remote="true" id="like_activity_188" rel="nofollow"><img alt="Nolike" class="menu_icon" src="/assets/btn/nolike.png" />Me gusta</a></div>
+
+      ·
+      <a href="javascript:;" class="activity_audience_summary"><img alt="Public" class="menu_icon" src="/assets/btn/public.png" />Público</a>
+      <div class="activity_audience">
+        Accesible por toda Internet
+      </div>
+
+      <div class="verb_delete"> 
+        · <a href="/posts/11" data-confirm="¿Borrar texto?" data-method="delete" data-remote="true" rel="nofollow">Borrar</a> 
+      </div>
+</div>
+
+
+    
+
+    <div class="activity_comments" id="comments_activity_188">
+</div>
+
+
+      <div class="activity_new_comment">
+    <div class="actor_logo_new_comment">
+      <img alt="Demo" src="/assets/logos/actor/user.png" />
+    </div>
+    <div class= "activity_content">
+      <div class="actor_name_new_comment">
+        Demo
+      </div>
+      <form accept-charset="UTF-8" action="/comments" class="new_comment" data-remote="true" id="new_commentactivity_188" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="azYT4uKrqGbmqf2TxSD/cZmGWgMHv19J3pMhTqbV3cQ=" /></div>
+
+        <input id="comment_owner_id" name="comment[owner_id]" type="hidden" value="1" />
+        <input id="comment__activity_parent_id" name="comment[_activity_parent_id]" type="hidden" value="188" />
+        
+        <div class="input_new_comments_container">
+          <textarea class="input_new_comments" cols="40" id="comment_text_activity_188" name="comment[text]" rows="1">
+Comentar...</textarea>
+          <div class="copy_new_comment" id="copy_comment_text_activity_188"></div>
+        </div>
+        
+        <div class="activities_comment_btn">
+          <div class="activities_security"></div>
+          <input class="myButtonBlue submitActivity" id="comment_submit_activity_188" name="commit" type="submit" value="Compartir" />
+        </div>
+</form>    </div>
+  </div>
+
+
+  </div>
+
+  <div class="space_activities">
+      <div class="#"></div>
+  </div>
+</div>
+  <div class="activity super_activity" id="activity_186">
+
+  <div class="actor_logo">
+    <a href="/groups/jaloo"><img alt="Jaloo" src="/assets/logos/actor/group.png" /></a>
+  </div>
+
+  <div class="activity_content">
+  	
+    <div class="actor_name">
+      <a href="/groups/jaloo">Jaloo</a>
+    </div>
+
+    <div class="activity_objects">
+        <div class="post content_size" id="post_9">
+  <p>This post should be for Public of Jaloo.
+<br />Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.</p>
+</div>
+
+    </div>
+
+    <div class="activity_options">
+    <div class="post_time_ago">hace alrededor de 20 años</div>
+      <div class="verb_comment"> · <a href="#" class="to_comment">Comentar</a> </div>
+
+    <div class="verb_like" id="like_activity_186"> · <a href="/activities/186/like" class="verb_like" data-method="post" data-remote="true" id="like_activity_186" rel="nofollow"><img alt="Nolike" class="menu_icon" src="/assets/btn/nolike.png" />Me gusta</a></div>
+
+      ·
+      <a href="javascript:;" class="activity_audience_summary"><img alt="Public" class="menu_icon" src="/assets/btn/public.png" />Público</a>
+      <div class="activity_audience">
+        Accesible por toda Internet
+      </div>
+
+      <div class="verb_delete"> 
+        · <a href="/posts/9" data-confirm="¿Borrar texto?" data-method="delete" data-remote="true" rel="nofollow">Borrar</a> 
+      </div>
+</div>
+
+
+    
+
+    <div class="activity_comments" id="comments_activity_186">
+</div>
+
+
+      <div class="activity_new_comment">
+    <div class="actor_logo_new_comment">
+      <img alt="Demo" src="/assets/logos/actor/user.png" />
+    </div>
+    <div class= "activity_content">
+      <div class="actor_name_new_comment">
+        Demo
+      </div>
+      <form accept-charset="UTF-8" action="/comments" class="new_comment" data-remote="true" id="new_commentactivity_186" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="azYT4uKrqGbmqf2TxSD/cZmGWgMHv19J3pMhTqbV3cQ=" /></div>
+
+        <input id="comment_owner_id" name="comment[owner_id]" type="hidden" value="17" />
+        <input id="comment__activity_parent_id" name="comment[_activity_parent_id]" type="hidden" value="186" />
+        
+        <div class="input_new_comments_container">
+          <textarea class="input_new_comments" cols="40" id="comment_text_activity_186" name="comment[text]" rows="1">
+Comentar...</textarea>
+          <div class="copy_new_comment" id="copy_comment_text_activity_186"></div>
+        </div>
+        
+        <div class="activities_comment_btn">
+          <div class="activities_security"></div>
+          <input class="myButtonBlue submitActivity" id="comment_submit_activity_186" name="commit" type="submit" value="Compartir" />
+        </div>
+</form>    </div>
+  </div>
+
+
+  </div>
+
+  <div class="space_activities">
+      <div class="#"></div>
+  </div>
+</div>
+  <div class="activity super_activity" id="activity_165">
+
+  <div class="actor_logo">
+    <a href="/groups/skajo"><img alt="Skajo" src="/assets/logos/actor/group.png" /></a>
+  </div>
+
+  <div class="activity_content">
+  	
+    <div class="actor_name">
+      <a href="/groups/skajo">Skajo</a> añadió <a href="/users/demo">Demo</a> como contacto.
+    </div>
+
+    <div class="activity_objects">
+      
+    </div>
+
+    <div class="activity_options">
+    <div class="post_time_ago">hace más de 21 años</div>
+      <div class="verb_comment"> · <a href="#" class="to_comment">Comentar</a> </div>
+
+    <div class="verb_like" id="like_activity_165"> · <a href="/activities/165/like" class="verb_like" data-method="post" data-remote="true" id="like_activity_165" rel="nofollow"><img alt="Nolike" class="menu_icon" src="/assets/btn/nolike.png" />Me gusta</a></div>
+
+      ·
+      <a href="javascript:;" class="activity_audience_summary"><img alt="Restricted" class="menu_icon" src="/assets/btn/restricted.png" />Restringido</a>
+      <div class="activity_audience">
+        Compartido con friend, acquaintance, colleague
+          ·
+          <a href="/audience/index?activity_id=165" data-remote="true">Mostrar</a>
+          <div class="activity-audience-list-165">
+          </div>
+      </div>
+
+</div>
+
+
+    
+
+    <div class="activity_comments" id="comments_activity_165">
+    
+</div>
+
+
+      <div class="activity_new_comment">
+    <div class="actor_logo_new_comment">
+      <img alt="Demo" src="/assets/logos/actor/user.png" />
+    </div>
+    <div class= "activity_content">
+      <div class="actor_name_new_comment">
+        Demo
+      </div>
+      <form accept-charset="UTF-8" action="/comments" class="new_comment" data-remote="true" id="new_commentactivity_165" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="azYT4uKrqGbmqf2TxSD/cZmGWgMHv19J3pMhTqbV3cQ=" /></div>
+
+        <input id="comment_owner_id" name="comment[owner_id]" type="hidden" value="1" />
+        <input id="comment__activity_parent_id" name="comment[_activity_parent_id]" type="hidden" value="165" />
+        
+        <div class="input_new_comments_container">
+          <textarea class="input_new_comments" cols="40" id="comment_text_activity_165" name="comment[text]" rows="1">
+Comentar...</textarea>
+          <div class="copy_new_comment" id="copy_comment_text_activity_165"></div>
+        </div>
+        
+        <div class="activities_comment_btn">
+          <div class="activities_security"></div>
+          <input class="myButtonBlue submitActivity" id="comment_submit_activity_165" name="commit" type="submit" value="Compartir" />
+        </div>
+</form>    </div>
+  </div>
+
+
+  </div>
+
+  <div class="space_activities">
+      <div class="#"></div>
+  </div>
+</div>
+
+    <nav class="pagination">
+    
+    
+        <span class="page current">
+  1
+</span>
+
+        <span class="page">
+  <a href="/home?page=2" rel="next">2</a>
+</span>
+
+        <span class="page">
+  <a href="/home?page=3">3</a>
+</span>
+
+        <span class="page">
+  <a href="/home?page=4">4</a>
+</span>
+
+        <span class="page">
+  <a href="/home?page=5">5</a>
+</span>
+
+        <span class="page gap"><span class="translation_missing" title="translation missing: es.views.pagination.truncate">Truncate</span></span>
+
+    <span class="next">
+  <a href="/home?page=2" rel="next"><span class="translation_missing" title="translation missing: es.views.pagination.next">Next</span></a>
+</span>
+
+    <span class="last">
+  <a href="/home?page=7"><span class="translation_missing" title="translation missing: es.views.pagination.last">Last</span></a>
+</span>
+
+  </nav>
+
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+
+  $(function(){  
+    SocialStream.Timeline.init();  
+  });
+
+//]]>
+</script>
+
+
+</div>
+
+
+      </section>
+  
+      <aside id="sidebar">
+        <div id="sidebarContent">
+          <div class="space_center"></div>
+
+<div class="block">
+  <div class="content">
+
+
+    <div id="sidebar_calendar_month_top" class="sidebar_calendar_month not_current"><a href="/users/demo/events?date=1348437600">septiembre 2012</a></div>
+
+
+  <table id="sidebar_calendar">
+
+
+      <tr>
+      <td id="sidebar_day_24_9_2012">
+        <a href="/users/demo/events?date=1348437600&amp;view=agendaWeek">24</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_25_9_2012">
+        <a href="/users/demo/events?date=1348524000&amp;view=agendaWeek">25</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_26_9_2012">
+        <a href="/users/demo/events?date=1348610400&amp;view=agendaWeek">26</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_27_9_2012">
+        <a href="/users/demo/events?date=1348696800&amp;view=agendaWeek">27</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_28_9_2012">
+        <a href="/users/demo/events?date=1348783200&amp;view=agendaWeek">28</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_29_9_2012">
+        <a href="/users/demo/events?date=1348869600&amp;view=agendaWeek">29</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_30_9_2012">
+        <a href="/users/demo/events?date=1348956000&amp;view=agendaWeek">30</a>
+      </td>
+
+      </tr>
+
+      <tr>
+      <td id="sidebar_day_1_10_2012">
+        <a href="/users/demo/events?date=1349042400&amp;view=agendaWeek">1</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_2_10_2012">
+        <a href="/users/demo/events?date=1349128800&amp;view=agendaWeek">2</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_3_10_2012">
+        <a href="/users/demo/events?date=1349215200&amp;view=agendaWeek">3</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_4_10_2012">
+        <a href="/users/demo/events?date=1349301600&amp;view=agendaWeek">4</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_5_10_2012">
+        <a href="/users/demo/events?date=1349388000&amp;view=agendaWeek">5</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_6_10_2012">
+        <a href="/users/demo/events?date=1349474400&amp;view=agendaWeek">6</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_7_10_2012">
+        <a href="/users/demo/events?date=1349560800&amp;view=agendaWeek">7</a>
+      </td>
+
+      </tr>
+
+      <tr>
+      <td id="sidebar_day_8_10_2012">
+        <a href="/users/demo/events?date=1349647200&amp;view=agendaWeek">8</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_9_10_2012">
+        <a href="/users/demo/events?date=1349733600&amp;view=agendaWeek">9</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_10_10_2012">
+        <a href="/users/demo/events?date=1349820000&amp;view=agendaWeek">10</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_11_10_2012">
+        <a href="/users/demo/events?date=1349906400&amp;view=agendaWeek">11</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_12_10_2012">
+        <a href="/users/demo/events?date=1349992800&amp;view=agendaWeek">12</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_13_10_2012">
+        <a href="/users/demo/events?date=1350079200&amp;view=agendaWeek">13</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_14_10_2012">
+        <a href="/users/demo/events?date=1350165600&amp;view=agendaWeek">14</a>
+      </td>
+
+      </tr>
+
+      <tr>
+      <td id="sidebar_day_15_10_2012">
+        <a href="/users/demo/events?date=1350252000&amp;view=agendaWeek">15</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_16_10_2012">
+        <a href="/users/demo/events?date=1350338400&amp;view=agendaWeek">16</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_17_10_2012">
+        <a href="/users/demo/events?date=1350424800&amp;view=agendaWeek">17</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_18_10_2012">
+        <a href="/users/demo/events?date=1350511200&amp;view=agendaWeek">18</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_19_10_2012">
+        <a href="/users/demo/events?date=1350597600&amp;view=agendaWeek">19</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_20_10_2012">
+        <a href="/users/demo/events?date=1350684000&amp;view=agendaWeek">20</a>
+      </td>
+
+      
+
+      
+      <td id="sidebar_day_21_10_2012">
+        <a href="/users/demo/events?date=1350770400&amp;view=agendaWeek">21</a>
+      </td>
+
+      </tr>
+  </table>
+
+  <script type="text/javascript">
+//<![CDATA[
+
+    $(function(){
+      SocialStream.Calendar.init({
+        eventsPath: "/events",
+        start: "1348437600",
+	end: "1350856800"
+      });
+    });
+
+//]]>
+</script>
+    <div id="sidebar_calendar_month_bottom" class="sidebar_calendar_month"><a href="/users/demo/events?date=1350856800">octubre 2012</a></div>
+
+
+  </div>
+</div>
+  <div class="space_center"></div>
+    <div class="block">
+    <div class="header">
+      <img alt="Notifications" class="header_icon" src="/assets/btn/notifications.png" />
+      <div class="header_text">
+        Sugerencia
+      </div>
+    </div>
+    <div class="content">
+      <div class="suggestions">
+        <div class="contact row" id="contact_244">
+  <div class="logo">
+    <a href="/users/johnny-roberts"><img alt="User" src="/assets/logos/contact/user.png" /></a>
+  </div>
+  <div class="sub-block">
+    <div class="name">
+      <a href="/users/johnny-roberts" class="contact_link">Johnny Roberts</a>
+    </div>
+    <div class="brief">
+      11 contactos en común
+    </div>
+    <div class="link" id="contact_linkuser_7">
+      <a href="/contacts/244/edit" title="Añadir a Johnny Roberts como contacto">+ Añadir contacto</a>
+
+
+    </div>
+  </div>
+  <div class="close"><a href="/contacts/244" data-method="delete" data-remote="true" rel="nofollow">X</a></div>
+  <div class="space_center">
+  </div>  
+</div><div class="contact row" id="contact_242">
+  <div class="logo">
+    <a href="/groups/skajo"><img alt="Group" src="/assets/logos/contact/group.png" /></a>
+  </div>
+  <div class="sub-block">
+    <div class="name">
+      <a href="/groups/skajo" class="contact_link">Skajo</a>
+    </div>
+    <div class="brief">
+      5 contactos en común
+    </div>
+    <div class="link" id="contact_linkgroup_9">
+      <a href="/contacts/242/edit" title="Responder contacto con Skajo">+ Responder contacto</a>
+
+
+    </div>
+  </div>
+  <div class="close"><a href="/contacts/242" data-method="delete" data-remote="true" rel="nofollow">X</a></div>
+  <div class="space_center">
+  </div>  
+</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="space_center"></div>
+  <div class="block">
+  <div class="header">
+    <img alt="Btn_notifications" class="header_icon" src="/assets/btn/btn_notifications.png" />
+    <div class="header_text">
+      Pendientes
+    </div>
+  </div>
+  <div class="content">
+    <div class="contact row" id="contact_242">
+  <div class="logo">
+    <a href="/groups/skajo"><img alt="Group" src="/assets/logos/contact/group.png" /></a>
+  </div>
+  <div class="sub-block">
+    <div class="name">
+      <a href="/groups/skajo" class="contact_link">Skajo</a>
+    </div>
+    <div class="brief">
+      5 contactos en común
+    </div>
+    <div class="link" id="contact_linkgroup_9">
+      <a href="/contacts/242/edit" title="Responder contacto con Skajo">+ Responder contacto</a>
+
+
+    </div>
+  </div>
+  <div class="close"><a href="/contacts/242" data-method="delete" data-remote="true" rel="nofollow">X</a></div>
+  <div class="space_center">
+  </div>  
+</div><div class="contact row" id="contact_240">
+  <div class="logo">
+    <a href="/groups/mycat"><img alt="Group" src="/assets/logos/contact/group.png" /></a>
+  </div>
+  <div class="sub-block">
+    <div class="name">
+      <a href="/groups/mycat" class="contact_link">Mycat</a>
+    </div>
+    <div class="brief">
+      5 contactos en común
+    </div>
+    <div class="link" id="contact_linkgroup_5">
+      <a href="/contacts/240/edit" title="Responder contacto con Mycat">+ Responder contacto</a>
+
+
+    </div>
+  </div>
+  <div class="close"><a href="/contacts/240" data-method="delete" data-remote="true" rel="nofollow">X</a></div>
+  <div class="space_center">
+  </div>  
+</div>
+    <div class="row more_pending">
+      <a href="/contacts/pending">Ver todas los contactos pendientes (4)</a>
+    </div>
+    <div class="space_center">
+    </div>
+  </div>
+</div>
+
+
+        </div>
+      </aside>
+    </div>
+    
+    <footer><div id="footerFront">
+	<div id="footer">
+    <div class="rowfooter">
+      <a href="http://validator.w3.org/check?uri=referer"><img alt="Html5" src="/assets/HTML5.png" /></a>
+      <a href="http://jigsaw.w3.org/css-validator/check/referer"><img alt="Html5_styling" src="/assets/HTML5_Styling.png" /></a>
+      <a href="http://jigsaw.w3.org/css-validator/check/referer"><img alt="Html5_semantics" src="/assets/HTML5_Semantics.png" /></a>
+    </div>
+	  <ul>
+                <li>2012 © </li>
+		<li id="trade_mark"><a href="http://social-stream.dit.upm.es/">Social Stream</a></li>
+	  </ul>
+	</div>
+</div>
+
+
+
+
+    </footer>
+
+  </body>
+</html>
