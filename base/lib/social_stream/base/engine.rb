@@ -33,7 +33,6 @@ module SocialStream
         SocialStream::ActivityStreams.register :person, :user
         SocialStream::ActivityStreams.register :group
         SocialStream::ActivityStreams.register :note,   :post
-        SocialStream::ActivityStreams.register :comment
       end
 
       initializer "social_stream-base.controller.helpers" do
