@@ -4,6 +4,8 @@
   <head>
     <meta charset="utf-8">
     <title><%= yield(:title).empty? ? t('site.name') : yield(:title)%></title>
+    <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
     <meta name="keywords" content="<%= t('profile.tags.default') %><%= yield(:keywords) %>" >
     <meta name="description" content= "<%= yield(:description).empty? ? t('frontpage.main_title') : yield(:description) %>" >
     <meta name="generator" content="SocialStream" />
@@ -38,7 +40,7 @@
         <%= yield :toolbar %>
       </nav>
       <div id="map_location">
-        <%= yield :location %>
+       
       </div>
       <div id="flash">
         <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
