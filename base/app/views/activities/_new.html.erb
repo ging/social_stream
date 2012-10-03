@@ -1,19 +1,23 @@
 <% if can? :create, new_post(receiver) %>
-<div id="activities_header" class="content_size">
+<div class="box_share">
   <% SocialStream.activity_forms.each do |element| %>
     <%= render :partial => element.to_s.pluralize+'/new_activity',
                :locals  => {
                              :receiver => receiver
                            } %>
-  <% end %>
+  <div id="activities_share_btn">
+  <%= submit_tag(t('share'), :class => "btn-primary", :id => "masterSubmitButton") %>
 </div>
+<% end %>
+
 
 <div id="activity_form_select">
   <% SocialStream.activity_forms.each do |element| %>
     <div id="select_<%= element %>" class="activity_form_selector">
       <%= t("#{ element }.form.title") %>
     </div>
-  <% end %> 	
+  <% end %> 
+
 </div>
 
 <div id="securities">
@@ -44,9 +48,6 @@
   <% end %>
 </div>
 
-<div id="activities_share_btn">
-  <%= submit_tag(t('share'), :class => "button submitActivity", :id => "masterSubmitButton") %>
-</div>
 <% end %>
 
 <%= javascript_tag do %>
@@ -54,4 +55,5 @@
     SocialStream.Wall.init();  
   });
 <% end %>
+</div>
 

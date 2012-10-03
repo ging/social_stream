@@ -1,6 +1,6 @@
 <%= div_for activity, :class => 'super_activity' do %>
 
-  <div class="actor_logo">
+  <div class="activity_avatar">
     <%= link_to image_tag(activity.sender_subject.logo.url(:actor),
                           :alt => activity.sender_subject.name),
                  activity.sender_subject %>
@@ -30,11 +30,11 @@
 
   </div>
 
-  <div class="space_activities">
+  
     <% if activity.activity_objects.count > 1 %>
-      <div class="space_sub"></div>
+
     <%else %>
-      <div class="#"></div>
+
     <%end%>
-  </div>
+
 <% end %>
