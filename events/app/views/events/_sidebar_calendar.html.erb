@@ -1,6 +1,5 @@
 <div class="calendar">
-
-
+ 
     <% bow = (Time.now - 6.days).beginning_of_week %>
 
     <%= render :partial => 'events/calendar_month',
@@ -9,7 +8,7 @@
                  :date => bow.to_date
                 } %>
 
-  <table id="days">
+  <table id="sidebar_calendar">
 
     <% 28.times do |i| %>
       <% day = bow + i.days %>
@@ -38,6 +37,5 @@
                  :position => :bottom,
                  :date => (bow + 28.days).to_date
                 } %>
-
 
 </div>

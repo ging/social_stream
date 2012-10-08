@@ -1,8 +1,72 @@
 @import "bootstrap"
 
 #sidebar
-    @include border-radius(5px) 
-    @include makeColumn(3, 0)
-    background-color: #000 
+  @include border-radius(5px) 
+  @include makeColumn(3, 0)
+  background-color: #000
+  padding-top: 10px  
 
- 
+  .calendar
+    padding: 5px
+    display: block
+    .month_top
+      padding: 5px
+      text-align: center	
+
+#days
+  padding: 5px
+  color: #fff
+  tr
+    color: #fff
+    td
+      padding-left: 7px
+      padding-right: 7px
+      text-align: right
+      a
+        color: #fff
+
+  .month_bottom
+    text-align: center  
+
+#suggestions
+  h4
+    color: #fff
+    font-family: OpenSans
+.content
+  padding: 5px 4px
+  .suggestion
+    .logo
+      display: inline
+    .data
+      display: inline-block
+      .name
+        color: #fff
+        .close
+          float: right
+      .brief
+      .add
+
+
+#pendings
+  h4
+    color: #fff
+    font-family: OpenSans
+
+    
+.content
+  padding: 5px 4px
+  .pendings
+    .logo
+      display: inline
+    .data
+      display: inline-block
+      .name
+        color: #fff
+        .close
+          float: right
+      .brief
+      .add
+
+
+
+

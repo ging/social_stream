@@ -7,13 +7,21 @@
 <% toolbar :home, :option => :contacts %>
 
 <div id="my_conferences">
-  <div id="contacts" class="block">
+  <div id="contacts">
+    <% if params[:pending].present? %>
+  <h2><%= t('contact.pending.other') %></h2>
+<% else %>
+  <h2><%= t('contact.addressbook') %></h2>
+<% end %>
+
+<div class="space_center"></div>
+<% cont=0; %>
     <div class="search_field_wrapper">
-      <input type="text" value="Search by name" id="search_field" class="search_input" />
-      <%= image_tag("btn/search.png",:size=>"20x20",:id=>"search_button") %>
+      <input type="text" id="search_field" class="search_input" placeholder="Search by name"/>
+      
     </div>
     <div class="space_center"></div>
-    <div class="row" >
+
       <div class="center">
         <%= link_to t('contact.all_n', :count => @total_contacts.count("DISTINCT contacts.id")), contacts_path %> -
         <% Actor.distinct_initials.
@@ -24,7 +32,7 @@
           <%= link_to l.initial,{:letter => l.initial,:page => 1},:class => "contact_letter_link" %>
         <% end %>
       </div>
-    </div>
+
     <div class="space_center"></div>
     <div id="list_contacts_ajax" class="tab_content block">
       <%= render :partial => "contacts/index"%>

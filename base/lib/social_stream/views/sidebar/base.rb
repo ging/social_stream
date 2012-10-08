@@ -15,7 +15,7 @@ module SocialStream
             if user_signed_in?
               items << {
                 :key => 'suggestions_and_pendings',
-                :html => render(:partial => 'contacts/suggestions_and_pendings')
+                :html => render(:partial => 'sidebar/suggestions_and_pendings')
               }
             end
           end
