@@ -82,5 +82,3 @@ class Document < ActiveRecord::Base
     self.title = file_file_name if self.title.blank?
   end
 end
-
-ActiveSupport.run_load_hooks(:document, Document) 
