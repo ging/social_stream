@@ -2,8 +2,8 @@ class Audio < Document
   has_attached_file :file, 
                     :url => '/:class/:id.:extension',
                     :path => ':rails_root/documents/:class/:id_partition/:style',
-                    :styles => {:webma => {:format => 'webm'}                                
-                    },:processors => [:ffmpeg]
+                    :styles => SocialStream::Documents.audio_styles,
+                    :processors => [ :ffmpeg ]
   
   process_in_background :file    
   
