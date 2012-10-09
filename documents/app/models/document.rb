@@ -4,7 +4,7 @@ class Document < ActiveRecord::Base
   IMAGE_FORMATS = ["doc","ppt","xls","rar","zip","mpeg","plain","pdf"]
 
   has_attached_file :file, 
-                    :url => '/:class/:id.:extension',
+                    :url => '/:class/:id.:content_type_extension',
                     :path => ':rails_root/documents/:class/:id_partition/:style/:filename.:extension'
 
   paginates_per 20
@@ -72,7 +72,7 @@ class Document < ActiveRecord::Base
      :title => title,
      :description => description,
      :author => author.name,
-     :src => file.to_s.downcase
+     :src => file.to_s
     }
   end
   

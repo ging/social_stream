@@ -1,6 +1,6 @@
 class Video < Document  
   has_attached_file :file, 
-                    :url => '/:class/:id.:extension',
+                    :url => '/:class/:id.:content_type_extension',
                     :default_url => 'missing_:style.png',
                     :path => ':rails_root/documents/:class/:id_partition/:style',
                     :styles => SocialStream::Documents.video_styles,
