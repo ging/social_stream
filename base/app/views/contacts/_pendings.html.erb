@@ -8,8 +8,9 @@
   <div class="content">
     <article class="pendings">
       <%= render :partial => 'contacts/contact', :collection => current_subject.pending_contacts.shuffle.first(2) %>
-        <%= link_to t('contact.pending.all_n', :count => current_subject.pending_contacts_count), pending_contacts_path %>
-      </article>
+      <div class="see-more">  <%= link_to t('contact.pending.all_n', :count => current_subject.pending_contacts_count), pending_contacts_path %>
+      </div>
+    </article>
   </div>
 </section>
 <% end -%>

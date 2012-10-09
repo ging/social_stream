@@ -1,56 +1,75 @@
-@import "bootstrap"
+
 
 #sidebar
   @include border-radius(5px) 
   @include makeColumn(3, 0)
-  background-color: #000
   padding-top: 10px  
 
   .calendar
     padding: 5px
     display: block
-    .month_top
-      padding: 5px
-      text-align: center	
+      
+        
+
+#month_top
+  padding: 5px
+  text-align: center
+  border-bottom: 1px solid #f1f1f1	
+  margin-bottom: 10px
 
 #days
   padding: 5px
-  color: #fff
+
   tr
-    color: #fff
+  
     td
       padding-left: 7px
       padding-right: 7px
       text-align: right
       a
-        color: #fff
+        color: #666
 
-  .month_bottom
-    text-align: center  
+#month_bottom
+  text-align: center
+  padding: 5px
+  border-top: 1px solid #f1f1f1  
+  margin-top: 10px
+  a 
+    color: #666
+    text-decoration: none 
 
 #suggestions
   h4
-    color: #fff
-    font-family: OpenSans
+    color: #000
+    font-family: $serifFontFamily
 .content
   padding: 5px 4px
   .suggestion
     .logo
       display: inline
+      img 
+        margin-top: -68px
+        margin-right: 8px
     .data
       display: inline-block
+      margin-bottom: 16px
       .name
-        color: #fff
-        .close
-          float: right
+        color: #000
+        .x
+          font-size: 12px
+          color: black
+          a
+            float: right
+            text-decoration: none
+            color: #888
       .brief
       .add
 
 
 #pendings
   h4
-    color: #fff
-    font-family: OpenSans
+    color: #000
+    font-family: $serifFontFamily
 
     
 .content
@@ -58,14 +77,29 @@
   .pendings
     .logo
       display: inline
+      img 
+        margin-top: -68px
+        margin-right: 8px
     .data
       display: inline-block
+      margin-bottom: 16px
       .name
         color: #fff
-        .close
+      .x
+        font-size: 12px
+        color: black
+        line-height: 20px
+        a
           float: right
-      .brief
-      .add
+          text-decoration: none
+          color: #888
+.see-more
+  font-size: 12px
+  line-height: 20px
+  a
+    text-decoration: none
+    color: #888
+      
 
 
 

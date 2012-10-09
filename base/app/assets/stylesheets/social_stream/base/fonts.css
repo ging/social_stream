@@ -5,5 +5,7 @@
   src: url(social_stream/fonts/opensans-regular.ttf);
 }
 
-
-.OpenSans {font-family:OpenSans;}
+@font-face{
+  font-family:BreeSerif;
+  src: url(social_stream/fonts/BreeSerif-Regular.ttf);
+}
