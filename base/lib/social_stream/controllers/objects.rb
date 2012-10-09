@@ -8,6 +8,8 @@ module SocialStream
 
         before_filter :set_author_ids, :only => [ :new, :create, :update ]
 
+        before_filter :authenticate_user!, :only => [:new, :edit, :create, :update, :destroy]
+
         after_filter :increment_visit_count, :only => :show
 
         load_and_authorize_resource :except => [ :new, :index, :search ]
