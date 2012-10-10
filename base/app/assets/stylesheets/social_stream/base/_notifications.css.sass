@@ -1,43 +1,59 @@
 @import "bootstrap"
 
 h2
-  display: inline
+  border-bottom: 1px solid #ccc
+  width: 100%
 .read_all
   float: right
-  margin-top: 28px
-  display: inline-block
   a
     text-decoration: none
     &:hover
-      color: white
+      opacity: 0.4
 
-.notification
-  padding: 5px
-  margin-bottom: 4px
-  margin-top: 4px
+.conversations
+  margin-top: 30px
+  .notification
+    padding: 5px
+    margin-bottom: 4px
+    margin-top: 4px
 
 .content_left
   float: left
-  padding-left: 6px
   display: inline
   .sender_photo
-    padding: 2px 5px
-    a
-      text-decoration: none
-      &:hover
-        opacity: 0.4
-  .date
-    color: #666666
-    font-size: 11px
+    padding: 0px 11px 0px 0px
+    img
+      width: 60px
+      heigth: 60px
+      a
+        text-decoration: none
+        &:hover
+          opacity: 0.4
 
 .content_right
   color: #666666
-  .subjet
-    font-weight: bold
-    white-space: nowrap
+  .subject
+    font-weight: normal
+    font-size: 14px
+    a
+      font-size: 15px
+      font-weight: bold
+      white-space: nowrap
+      &:hover
+        opacity: 0.4
+        text-decoration: none
   .briefing
     white-space: nowrap
-    width: 92%
+    width: 94%
     overflow: hidden
     text-overflow: ellipsis
     color: #666666
+
+.date
+  color: #666666
+  font-size: 11px
+  display: inline
+  margin-left: 4px
+  margin-right: 13px
+.action
+  display: inline-block 
