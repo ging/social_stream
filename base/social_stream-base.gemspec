@@ -50,7 +50,7 @@ Gem::Specification.new do |s|
   # HTML Forms
   s.add_runtime_dependency('formtastic','>= 1.2.3')
   # Background jobs
-  s.add_runtime_dependency('resque','~> 1.20.0')
+  s.add_runtime_dependency('resque','~> 1.23.0')
   # Modernizr.js javascript library
   s.add_runtime_dependency('modernizr-rails', '~> 2.0.6')
   # Sphinx search engine
