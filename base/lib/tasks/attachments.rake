@@ -1,6 +1,6 @@
 namespace :social_stream do
-  namespace :attachments do
-    desc "Fix attachment path from paperclip < 3.0"
+  namespace :avatars do
+    desc "Fix avatar's attachment path from paperclip < 3.0"
     task :fix => :environment do
       dir = "#{ Rails.root }/public/system/logos/"
 
