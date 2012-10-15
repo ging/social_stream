@@ -21,8 +21,10 @@ module SocialStream
         # FIXME: should not use to_sym
         # https://github.com/shf/proudhon/issues/7
         case entry.verb.to_sym
-        when :follow
-          Tie.from_entry! entry, receiver
+        when :follow, :subscribe, :join
+          Tie.create_from_entry! entry, receiver
+        when :unsubscribe, :leave
+          Tie.destroy_from_entry! entry, receiver
         else
           # :post is the default verb
           r = record_from_entry! entry, receiver
