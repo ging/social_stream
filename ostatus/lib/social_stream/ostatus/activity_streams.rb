@@ -23,7 +23,7 @@ module SocialStream
         case entry.verb.to_sym
         when :follow, :subscribe, :join
           Tie.create_from_entry! entry, receiver
-        when :unsubscribe, :leave
+        when :unsubscribe, :leave, 'http://ostatus.org/schema/1.0/unfollow'
           Tie.destroy_from_entry! entry, receiver
         else
           # :post is the default verb
