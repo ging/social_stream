@@ -4,10 +4,6 @@ module SocialStream
       module Tie
         extend ActiveSupport::Concern
 
-        included do
-          after_destroy :send_salmon
-        end
-
         module ClassMethods
           # Create a new {Tie} from OStatus entry
           def create_from_entry! entry, receiver
