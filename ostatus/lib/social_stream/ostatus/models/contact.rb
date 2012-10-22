@@ -42,7 +42,7 @@ module SocialStream
             Proudhon::Entry.new id: "tag:#{ SocialStream::Ostatus.activity_feed_host },2005:contact-destroy-#{ id }",
                                 title: title,
                                 content: title,
-                                verb: :unsubscribe,
+                                verb: 'http://ostatus.org/schema/1.0/unfollow',
                                 author: Proudhon::Author.new(name: sender.name,
                                                              uri: sender.webfinger_uri)
           salmon = entry.to_salmon
