@@ -13,7 +13,7 @@ class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
                       \n  config.omniauth :facebook, \"129571360447856\",\"eef39dce5e20e76f77495c59623bdb38\"
                       \n  #config.omniauth :twitter, \"wgTxO0fTpjTeSnjKC9ZHA\",\"JepulVWwLcuAnGfWjwCu47yEP0TcJJfKtvISPBsilI\"
                       \n  config.token_authentication_key = :auth_token
-                      \n  config.stateless_token = true",
+                      \n  config.skip_session_storage = [:token_auth]",
                       :after => "  # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'"
   end
 
