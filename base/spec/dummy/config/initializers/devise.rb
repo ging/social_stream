@@ -200,7 +200,7 @@ Devise.setup do |config|
 
   #re state_less token removal 
   #https://github.com/plataformatec/devise/issues/1499
-  config.skip_session_storage = [:token_auth]
+  config.skip_session_storage << :token_auth
                       
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
