@@ -30,7 +30,13 @@ module SocialStream
       :thumb48sq  => { :geometry => "48x48" , :format => 'png', :time => 5 },
       :thumbwall => { :geometry => "130x97#", :format => 'png', :time => 5 }
     }
- 
+
+    class << self
+      def setup
+        yield self
+      end
+    end
+
     # Add :document to SocialStream.objects and SocialStream.activity_forms by default
     # It can be configured by users at application's config/initializers/social_stream.rb
     [ :picture, :video, :audio, :document].each do |o|
