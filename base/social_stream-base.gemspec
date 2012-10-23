@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   # SQL foreign keys
   s.add_runtime_dependency('foreigner', '~> 1.1.1')
   # Authentication
-  s.add_runtime_dependency('devise', '~> 1.5.3')
+  s.add_runtime_dependency('devise', '~> 2.1.2')
   # CRUD controllers
   s.add_runtime_dependency('inherited_resources', '~> 1.3.0')
   # Slug generation
@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
   # jQuery
   s.add_runtime_dependency('jquery-rails', '>= 1.0.9')
   # Authorization
-  s.add_runtime_dependency('cancan', '1.6.7')
+  s.add_runtime_dependency('cancan', '~> 1.6.7')
   # Pagination
   s.add_runtime_dependency('kaminari', '~> 0.13.0')
   # OAuth client
