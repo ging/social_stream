@@ -22,12 +22,25 @@
 <% end %>
 
 <br class="clearfloat" />
-<div class="space_center"></div>
+
+<div class="resource tabbable">
+  <ul class="nav nav-tabs span7">
+    <li class="active">
+      <a href="#repo-1" data-toggle="tab">network</a>
+    </li>
+    <li class="">
+      <a href="#repo-2" data-toggle="tab">my</a>
+    </li>
+    <li class="">
+      <a href="#repo-3" data-toggle="tab">fauvorites</a>
+    </li>
+  </ul> 
+</div>
+
 <div id="repository_filter">
     <%= text_field_tag :q, nil,:autocomplete => :off, :id => :repository_filter_input %>
-  <div id="order_by"><%= t('repository.order.by') %>: <%= t('repository.order.last_modified') %> · <%= t('repository.order.most_popular') %>  </div>
 </div>
-<div class="space_center"></div>
+
 
 <%= javascript_tag do %>
 $(document).ready(function() {

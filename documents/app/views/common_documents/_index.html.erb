@@ -4,38 +4,59 @@
 <% end %> 
 
 <% documents.each do |document| %>
-<div class="attachment_tile" id="<%= dom_id(document)%>">
-  <div class="attachment_tile_thumb">
+
+<div class="thumbnail">
+  <div class="logo" "attachment_tile" id="<%= dom_id(document)%>">
+    <div class="attachment_tile_thumb">
     <%= link_to thumb_for(document,48),
                 document,
                 :type => document.type,
                 :title => document.file_file_name,
                 :path => document_path(document) %>
-  </div>
-  <div class="attachment_tile_tipsy">
-    <%= link_to image_tag("btn/btn_down.png"),
-    "javascript:;"  %>
-    <div class="tipsy_content" style="display:none;">
-      <div class="actions">        
-        <%= link_to content_tag(:div,image_tag("btn/download.png") + t('document.actions.download'), :class => :action), download_document_path(document) %>
-        <% if can? :update, document %>
-          <%= link_to content_tag(:div,image_tag("btn/edit.png") + t('document.actions.edit'), :class => :action, :id => :document_edit_action), document_path(document, :editing => true) %>
-        <% end %>
-        <% if can? :destroy, document %>
-          <%= link_to content_tag(:div,image_tag("btn/error.png") + t('document.actions.delete'), :class => :action), document.post_activity.direct_object , :confirm => t('confirm_delete',
-            :scope => document.post_activity.direct_object.class.to_s.underscore), :method => :delete %>
-        <% end %>
-      </div>
     </div>
   </div>
-  <div class="attachment_tile_text">
-    <%= link_to truncate_name(document.file_file_name,:length => 15),
+  <div class="data">
+    <div class="name">
+      <div class="caret">
+        <div class="attachment_tile_tipsy">
+        
+
+          <div class="tipsy_content" style="display:none;">
+            <div class="actions">        
+              <%= link_to content_tag(:div,image_tag("btn/download.png") + t('document.actions.download'), :class => :action), download_document_path(document) %>
+              <% if can? :update, document %>
+              <%= link_to content_tag(:div,image_tag("btn/edit.png") + t('document.actions.edit'), :class => :action, :id => :document_edit_action), document_path(document, :editing => true) %>
+              <% end %>
+              <% if can? :destroy, document %>
+              <%= link_to content_tag(:div,image_tag("btn/error.png") + t('document.actions.delete'), :class => :action), document.post_activity.direct_object , :confirm => t('confirm_delete',
+            :scope => document.post_activity.direct_object.class.to_s.underscore), :method => :delete %>
+              <% end %>
+            </div>
+          </div>
+        </div> 
+      </div>
+      <div class="attachment_tile_text">
+        <%= link_to truncate_name(document.file_file_name,:length => 15),
       document_path(document),
     :alt => document.file_file_name,
     :type => document.type,
     :path => document_path(document) %>
+      </div>
+    </div>
+    <div class="brief"> 7 contactos en común 
+    </div>
+    <div id="contact_linkuser_2" class="add">
+      <a title="Añadir a Beverly Gutierrez como contacto" href="/contacts/223/edit">+ Añadir contacto</a>
+    </div>
   </div>
 </div>
+
+
+
+
+  
+  
+
 <%= javascript_tag do %>
 $(document).ready(function(){
 

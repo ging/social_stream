@@ -21,7 +21,7 @@
     <%= yield :headers %>
   </head>
   <body>
-    <div id="wrapper">
+    <div class="wrapper">
       <header>
         <%= render :partial => "layouts/header" %>
       </header>
@@ -33,9 +33,11 @@
           </div>
           <%= yield %>
         </div>
-        <%= render :partial => "frontpage/sponsor" %>
       </section>
-      <footer>
+          <br class="clearfloat" />
+
+      <div class="push"></div>
+      <footer class="footerFront">
         <%= render :partial => "layouts/footer" %>
       </footer>
     </div>

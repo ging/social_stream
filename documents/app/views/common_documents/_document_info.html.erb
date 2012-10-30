@@ -35,19 +35,18 @@
 </div>
 <%= render :partial => "common_documents/edit_form", :locals => {:document => document} %> 
 <div id="actions">
- 
-    <% if can? :destroy, document %>
-    <%= link_to content_tag(:span,image_tag("btn/error.png"), :class => :action), document.post_activity.direct_object , :confirm => t('confirm_delete',
+  <% if can? :destroy, document %>
+  <%= link_to content_tag(:span,image_tag("btn/error.png"), :class => :action), document.post_activity.direct_object , :confirm => t('confirm_delete',
       :scope => document.post_activity.direct_object.class.to_s.underscore), :method => :delete %>
-      
-    <% if can? :update, document %>
-    <%= link_to content_tag(:span,image_tag("btn/edit.png"), :class => :action, :id => :document_edit_action), "javascript:SocialStream.Repository.toggleDocumentMenu('edit');" %>
+
+  <% if can? :update, document %>
+  <%= link_to content_tag(:span,image_tag("btn/edit.png"), :class => :action, :id => :document_edit_action), "javascript:SocialStream.Repository.toggleDocumentMenu('edit');" %>
     <% end %>
 
-    <%= link_to content_tag(:span,image_tag("btn/download.png"), :class => :action), download_document_path(document) %>
+  <%= link_to content_tag(:span,image_tag("btn/download.png"), :class => :action), download_document_path(document) %>
     <% end %>
-  </div>
+</div>
 
-<div id="description">
+<div class="description">
       <%= document.description %>
     </div>
