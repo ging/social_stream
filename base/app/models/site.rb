@@ -10,7 +10,7 @@ class Site < ActiveRecord::Base
   class << self
     def current
       @current ||=
-        first || create!(config: {})
+        first || create!
     end
   end
 end
