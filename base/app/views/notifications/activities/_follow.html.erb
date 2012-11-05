@@ -1,10 +1,6 @@
-<div class="subject">
+
   <%= raw t('notification.follow.'+ activity.receiver.subject.class.to_s.underscore, 
            :sender => link_to(truncate_name(activity.sender.name), polymorphic_url(activity.sender.subject)),
            :who => t('notification.who.'+ activity.receiver.subject.class.to_s.underscore,
                       :name => truncate_name(activity.receiver.name))) %>
-</div>
-<div class="briefing">
-  <%= raw link_to(t('notification.confirm', :sender => truncate_name(activity.sender.name)),
-              edit_contact_url(activity.receiver.contact_to!(activity.sender),:s => activity.receiver.slug)) %>
-</div>
+

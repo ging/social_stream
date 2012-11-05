@@ -8,18 +8,20 @@
       <div class="actor_name_new_comment">
         <%= current_subject.name %>
       </div>
-      <%= form_for Comment.new(:text => t('comment.input'),
-                               :owner_id => Actor.normalize_id(activity.receiver),
+      <%= form_for Comment.new(:owner_id => Actor.normalize_id(activity.receiver),
                                :_activity_parent_id => activity.id
                   ),
-                :html => { :class => "new_comment", :id => "new_comment"+dom_id(activity)  },
+                :html => {
+                  :class => "new_comment",
+                  :id => "new_comment"+dom_id(activity)
+                },
                 :remote => true do |f| %>
 
         <%= f.hidden_field :owner_id %>
         <%= f.hidden_field :_activity_parent_id %>
         
         <div class="input_new_comments_container">
-          <%= f.text_area :text, :class =>"input_new_comments", :id => "comment_text_"+dom_id(activity), :rows => 1 %>
+          <%= f.text_area :text, :class =>"input_new_comments", :id => "comment_text_"+dom_id(activity), :rows => 1, :paceholder => t('comment.input') %>
           <div class="copy_new_comment" id="copy_comment_text_<%= dom_id(activity) %>"></div>
         </div>
         

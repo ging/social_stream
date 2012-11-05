@@ -12,16 +12,16 @@
        <li><%= link_to(t('home'), root_path)%></li>   
        <li><%= link_to(t('profile.one'), current_subject)%></li>            
        <li>
-         <%= link_to(t('message.other'), conversations_path) %>
-         <span id="header_inbox_count">
+         <%= link_to(t('message.other'), conversations_path) %> 
+         <!-- <span id="header_inbox_count">
            <%= link_to(current_subject.unread_messages_count.to_s, conversations_path) %>
-         </span>
+         </span> -->
        </li>            
        <li>
          <%= link_to(t('notification.other'), notifications_path) %>
-         <span id="header_notifications">
+          <!--<span id="header_notifications">
            <%= link_to( current_subject.mailbox.notifications.not_trashed.unread.count.to_s, notifications_path) %>
-         </span>
+         </span> -->
        </li>
        <%= render partial: 'layouts/header_dropdown_menu' %>
      </ul>

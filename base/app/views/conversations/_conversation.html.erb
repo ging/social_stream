@@ -1,12 +1,11 @@
 <%= div_for(conversation, :class => read_class) do %>
-<div class="notification">
-</div>
-<div class="sender_photo">
+
+<div class="content_left">
+	<div class="sender_photo">
 	<%= link_to image_tag(conversation.last_sender.logo.url(:actor),
 	:title => conversation.last_sender.name, :alt => conversation.last_sender.name),
 	conversation.last_sender.subject %>
-</div>
-<div class="content_left">
+  </div>
 	<div class="sender_name">
 		<%= link_to truncate_name(conversation.last_sender.name), conversation.last_sender.subject %>
 	</div>

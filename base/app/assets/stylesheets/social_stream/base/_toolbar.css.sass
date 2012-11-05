@@ -1,5 +1,3 @@
-@import "bootstrap"
-
 #toolbar 
     @include makeColumn(2, 0)
     display: table-cell
@@ -16,10 +14,14 @@
             text-decoration: none
             color: #000000
             text-aling: center
+    input, select
+        @include makeColumn(2, 0)
+        margin-left: 0px
 
         
 .toolbar_menu
     @include border-radius(5px)
+
     
 
        

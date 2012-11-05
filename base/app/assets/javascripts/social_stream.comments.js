@@ -1,4 +1,4 @@
-//= require jquery.watermark
+//= require jquery.autosize
 //
 //= require social_stream.timeline
 //= require social_stream.objects
@@ -15,7 +15,6 @@ SocialStream.Comments = (function(SS, $, undefined){
 		});
 
 		hideNewCommentElements();
-		newCommentWatermark();
 		newCommentAutoSize();
 		newCommentClick();
 		newCommentLink();
@@ -27,18 +26,8 @@ SocialStream.Comments = (function(SS, $, undefined){
 		$(".actor_logo_new_comment").hide();
 	}
 
-	var newCommentWatermark = function(){
-		$(".input_new_comments").watermark(I18n.t('comment.input'),"#666");
-	}
-
-
 	var newCommentAutoSize = function(){
-		$(".input_new_comments")
-			.change(function(){autoSize(this);})
-			.keydown(function(){autoSize(this);})
-			.keyup(function(){autoSize(this);});
-
-		$(".input_new_comments").each(function(){autoSize(this)});
+                $(".input_new_comments").autosize();
 	}
 
 	var newCommentClick = function(){
@@ -71,17 +60,9 @@ SocialStream.Comments = (function(SS, $, undefined){
 		});
 	}
 
-	var autoSize = function(e) {
-		// Copy textarea contents; browser will calculate correct height of copy,
-		// which will make overall container taller, which will make textarea taller.
-		var text = $(e).val().replace(/\n/g, '<br/>');
-		$(e).siblings(".copy_new_comment").html(text);
-	}  
-
 	SocialStream.Timeline.addInitCallback(initNew);
 
 	SocialStream.Timeline.addCreateCallback(hideNewCommentElements);
-	SocialStream.Timeline.addCreateCallback(newCommentWatermark);
 	SocialStream.Timeline.addCreateCallback(newCommentAutoSize);
 	SocialStream.Timeline.addCreateCallback(newCommentClick);
 	SocialStream.Timeline.addCreateCallback(newCommentLink);
