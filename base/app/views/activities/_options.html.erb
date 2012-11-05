@@ -9,9 +9,9 @@
     <% if user_signed_in? %>
       ·
       <%= link_to image_tag("btn/#{ activity.public? ? 'public' : 'restricted' }.png", :class => 'menu_icon') + activity.audience_in_words(current_subject, :details => :summary),
-                  'javascript:;',
+                  '#',
                   :class => 'audience' %>
-      <div class="audience">
+      <div class="audience-tooltip tooltip top fade in">
         <%= activity.audience_in_words(current_subject) %>
         <% unless activity.public? %>
           ·
