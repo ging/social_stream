@@ -20,8 +20,8 @@ SocialStream.Timeline = (function(SS, $, undefined){
 	}
 
 	var initPrivacyTooltips = function(activityId) {
-		var fullId = '.activity_audience';
-		var summaryId = '.activity_audience_summary';
+		var summaryId = '.audience';
+		var fullId = '.audience-tooltip';
 
 		if (activityId != undefined) {
 			fullId = '#' + activityId + ' ' + fullId;
@@ -29,12 +29,10 @@ SocialStream.Timeline = (function(SS, $, undefined){
 		}
 
 		$(fullId).hide();
-		$(summaryId).tipsy({
+		$(summaryId).tooltip({
 			html: true,
-			hoverable: true,
-			opacity: 0.95,
 			title: function(){
-				return $(this).siblings('.activity_audience').html();
+				return $(this).siblings(fullId).html();
 			}
 		});
 	};
