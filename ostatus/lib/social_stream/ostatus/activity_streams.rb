@@ -21,8 +21,10 @@ module SocialStream
         # FIXME: should not use to_sym
         # https://github.com/shf/proudhon/issues/7
         case entry.verb.to_sym
-        when :follow
-          Tie.from_entry! entry, receiver
+        when :follow, :subscribe, :join
+          Tie.create_from_entry! entry, receiver
+        when :unsubscribe, :leave, 'http://ostatus.org/schema/1.0/unfollow'
+          Tie.destroy_from_entry! entry, receiver
         else
           # :post is the default verb
           r = record_from_entry! entry, receiver
@@ -62,6 +64,16 @@ module SocialStream
 
         unless salmon.verify(key)
           raise "Invalid salmon: #{ salmon }"
+        end
+      end
+
+      # Translate SocialStream activity verb to Proudhon verb
+      def verb orig
+        case orig
+        when 'make-friend'
+          :follow
+        else
+          orig.to_sym
         end
       end
     end

@@ -65,6 +65,7 @@ es:
       atom_title: "Actividades de %{subject}"
       title:
         follow: "%{author} añadió a %{activity_object} como contacto"
+        unfollow: "%{author} eliminó a %{activity_object} como contacto"
         like: "A %{author} le gusta %{activity_object}"
         make-friend: "%{author} también añadió a %{activity_object} como contacto"
         post: "%{author} publicó %{activity_object}"

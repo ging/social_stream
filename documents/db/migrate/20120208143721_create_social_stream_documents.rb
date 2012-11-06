@@ -10,8 +10,6 @@ class CreateSocialStreamDocuments < ActiveRecord::Migration
       t.string   "file_content_type"
       t.string   "file_file_size"
       t.boolean  "file_processing"
-      t.string   "title"
-      t.text     "description"
     end
 
     add_index "documents", ["activity_object_id"], :name => "index_documents_on_activity_object_id"

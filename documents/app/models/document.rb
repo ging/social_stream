@@ -4,7 +4,7 @@ class Document < ActiveRecord::Base
   IMAGE_FORMATS = ["doc","ppt","xls","rar","zip","mpeg","plain","pdf"]
 
   has_attached_file :file, 
-                    :url => '/:class/:id.:extension',
+                    :url => '/:class/:id.:content_type_extension',
                     :path => ':rails_root/documents/:class/:id_partition/:style/:filename.:extension'
 
   paginates_per 20
@@ -82,5 +82,3 @@ class Document < ActiveRecord::Base
     self.title = file_file_name if self.title.blank?
   end
 end
-
-ActiveSupport.run_load_hooks(:document, Document) 

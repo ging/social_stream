@@ -72,10 +72,6 @@ Devise.setup do |config|
   # If true, extends the user's remember period when remembered via cookie.
   # config.extend_remember_period = false
 
-  # If true, uses the password salt as remember token. This should be turned
-  # to false if you are not using database authenticatable.
-  config.use_salt_as_remember_token = true
-
   # ==> Configuration for :validatable
   # Range for password length. Default is 6..20.
   # config.password_length = 6..20
@@ -122,11 +118,7 @@ Devise.setup do |config|
   # ==> Configuration for :token_authenticatable
   # Defines name of the authentication token params key
   # config.token_authentication_key = :auth_token
-
-  # If true, authentication through token does not store user in session and needs
-  # to be supplied on each request. Useful if you are using the token as API token.
-  # config.stateless_token = false
-
+  
   # ==> Scopes configuration
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
@@ -163,6 +155,10 @@ Devise.setup do |config|
   config.omniauth :linkedin, "ekxfXU8nueVSMQ9fc5KJAryBkyztUlCBYMW3DoQPzbE79WhivvzhQloRNHCHgPeB", "WYiHFT-KKFgjd45W3-pEAficmXRHmN6_6DGwj1C_ZILJlSO1gBvv6VNYXU9tybGY"
                       
   config.omniauth :facebook, "129571360447856","eef39dce5e20e76f77495c59623bdb38"
+  
+  #re state_less token removal 
+  #https://github.com/plataformatec/devise/issues/1499
+  config.skip_session_storage << :token_auth
  
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

@@ -34,6 +34,7 @@ module SocialStream
       autoload :Activity, 'social_stream/ostatus/models/activity'
       autoload :Actor, 'social_stream/ostatus/models/actor'
       autoload :Audience, 'social_stream/ostatus/models/audience'
+      autoload :Contact, 'social_stream/ostatus/models/contact'
       autoload :Tie, 'social_stream/ostatus/models/tie'
 
       module Object

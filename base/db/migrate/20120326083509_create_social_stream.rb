@@ -11,6 +11,19 @@ class CreateSocialStream < ActiveRecord::Migration
     add_index "activities", ["activity_verb_id"], :name => "index_activities_on_activity_verb_id"
     add_index "activities", ["channel_id"], :name => "index_activities_on_channel_id"
 
+    create_table :activity_actions do |t|
+      t.references :actor
+      t.references :activity_object
+      t.boolean    :follow, :default => false
+      t.boolean    :author, :default => false
+      t.boolean    :user_author, :default => false
+      t.boolean    :owner,  :default => false
+
+      t.timestamps
+    end
+    add_index :activity_actions, :actor_id
+    add_index :activity_actions, :activity_object_id
+
     create_table "activity_object_activities", :force => true do |t|
       t.integer  "activity_id"
       t.integer  "activity_object_id"
@@ -23,14 +36,25 @@ class CreateSocialStream < ActiveRecord::Migration
     add_index "activity_object_activities", ["activity_object_id"], :name => "index_activity_object_activities_on_activity_object_id"
 
     create_table "activity_objects", :force => true do |t|
+      t.string   "title", :default => ""
+      t.text     "description"
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.string   "object_type", :limit => 45
-      t.integer  "like_count",                :default => 0
-      t.integer  "channel_id"
+      t.string   "object_type",    :limit => 45
+      t.integer  "like_count",     :default => 0
+      t.integer  "follower_count", :default => 0
     end
 
-    add_index "activity_objects", ["channel_id"], :name => "index_activity_objects_on_channel_id"
+    create_table :activity_object_properties do |t|
+      t.integer :activity_object_id
+      t.integer :property_id
+      t.string  :type
+
+      t.timestamp
+    end
+
+    add_index "activity_object_properties", "activity_object_id"
+    add_index "activity_object_properties", "property_id"
 
     create_table "activity_verbs", :force => true do |t|
       t.string   "name",       :limit => 45
@@ -47,7 +71,6 @@ class CreateSocialStream < ActiveRecord::Migration
       t.datetime "created_at"
       t.datetime "updated_at"
       t.integer  "activity_object_id"
-      t.integer  "follower_count",     :default => 0
     end
 
     add_index "actors", ["activity_object_id"], :name => "index_actors_on_activity_object_id"
@@ -97,7 +120,6 @@ class CreateSocialStream < ActiveRecord::Migration
 
     create_table "comments", :force => true do |t|
       t.integer  "activity_object_id"
-      t.text     "text"
       t.datetime "created_at"
       t.datetime "updated_at"
     end
@@ -136,7 +158,6 @@ class CreateSocialStream < ActiveRecord::Migration
       t.integer  "activity_object_id"
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.text     "text"
     end
 
     add_index "posts", ["activity_object_id"], :name => "index_posts_on_activity_object_id"
@@ -223,10 +244,14 @@ class CreateSocialStream < ActiveRecord::Migration
     add_foreign_key "activities", "activity_verbs", :name => "index_activities_on_activity_verb_id"
     add_foreign_key "activities", "channels", :name => "index_activities_on_channel_id"
 
+    add_foreign_key "activity_actions", "actors", :name => "index_activity_actions_on_actor_id"
+    add_foreign_key "activity_actions", "activity_objects", :name => "index_activity_actions_on_activity_object_id"
+
     add_foreign_key "activity_object_activities", "activities", :name => "index_activity_object_activities_on_activity_id"
     add_foreign_key "activity_object_activities", "activity_objects", :name => "activity_object_activities_on_activity_object_id"
 
-    add_foreign_key "activity_objects", "channels", :name => "index_activity_objects_on_channel_id"
+    add_foreign_key "activity_object_properties", "activity_objects", :name => "index_activity_object_properties_on_activity_object_id", :column => :activity_object_id
+    add_foreign_key "activity_object_properties", "activity_objects", :name => "index_activity_object_properties_on_property_id", :column => :property_id
 
     add_foreign_key "actors", "activity_objects", :name => "actors_on_activity_object_id"
 

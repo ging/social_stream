@@ -1,13 +1,8 @@
 class Picture < Document
   has_attached_file :file, 
-                    :url => '/:class/:id.:extension',
+                    :url => '/:class/:id.:content_type_extension',
                     :path => ':rails_root/documents/:class/:id_partition/:style',
-                    :styles => {:thumb48sq  => ["48x48"],
-                                :thumbwall => ["130x97#"],
-                                # midwall preserves A4 proportion: 210x297
-                                :midwall => ["80x113#"],
-                                :preview => ["500>"]
-                               }                              
+                    :styles => SocialStream::Documents.picture_styles
                                
   define_index do
     activity_object_index
@@ -28,6 +23,8 @@ class Picture < Document
         helper.picture_path self, :format => format, :style => 'thumbwall'
       when 500
         helper.picture_path self, :format => format, :style => 'preview'
+      when 1000
+        helper.picture_path self, :format => format, :style => 'original'
     end
   end
       

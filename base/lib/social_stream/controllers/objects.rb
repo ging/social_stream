@@ -8,9 +8,11 @@ module SocialStream
 
         before_filter :set_author_ids, :only => [ :new, :create, :update ]
 
-	after_filter :increment_visit_count, :only => :show
+        before_filter :authenticate_user!, :only => [:new, :edit, :create, :update, :destroy]
 
-        load_and_authorize_resource :except => [ :index, :search ]
+        after_filter :increment_visit_count, :only => :show
+
+        load_and_authorize_resource :except => [ :new, :index, :search ]
 
         respond_to :html, :js
 

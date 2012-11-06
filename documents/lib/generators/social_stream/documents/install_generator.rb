@@ -3,6 +3,10 @@ class SocialStream::Documents::InstallGenerator < Rails::Generators::Base
   
   source_root File.expand_path('../templates', __FILE__)
 
+  def create_initializer_file
+    template 'initializer.rb', 'config/initializers/social_stream-documents.rb'
+  end
+
   def create_migration_file
     require 'rake'
     Rails.application.load_tasks

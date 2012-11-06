@@ -19,22 +19,24 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('deep_merge')
   # Rails
   s.add_runtime_dependency('rails', '>= 3.1.0')
+  # Rails Engine Decorators
+  s.add_runtime_dependency('rails_engine_decorators')
   # Activity and Relation hierarchies
   s.add_runtime_dependency('ancestry', '~> 1.2.3')
   # SQL foreign keys
   s.add_runtime_dependency('foreigner', '~> 1.1.1')
   # Authentication
-  s.add_runtime_dependency('devise', '~> 1.5.3')
+  s.add_runtime_dependency('devise', '~> 2.1.2')
   # CRUD controllers
   s.add_runtime_dependency('inherited_resources', '~> 1.3.0')
   # Slug generation
   s.add_runtime_dependency('stringex', '~> 1.3.0')
   # Avatar attachments
-  s.add_runtime_dependency('avatars_for_rails', '~> 0.2.5')
+  s.add_runtime_dependency('avatars_for_rails', '~> 0.2.8')
   # jQuery
   s.add_runtime_dependency('jquery-rails', '>= 1.0.9')
   # Authorization
-  s.add_runtime_dependency('cancan', '1.6.7')
+  s.add_runtime_dependency('cancan', '~> 1.6.7')
   # Pagination
   s.add_runtime_dependency('kaminari', '~> 0.13.0')
   # OAuth client
@@ -48,7 +50,7 @@ Gem::Specification.new do |s|
   # HTML Forms
   s.add_runtime_dependency('formtastic','>= 1.2.3')
   # Background jobs
-  s.add_runtime_dependency('resque','~> 1.20.0')
+  s.add_runtime_dependency('resque','~> 1.23.0')
   # Modernizr.js javascript library
   s.add_runtime_dependency('modernizr-rails', '~> 2.0.6')
   # Sphinx search engine

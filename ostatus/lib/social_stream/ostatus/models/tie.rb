@@ -6,16 +6,17 @@ module SocialStream
 
         module ClassMethods
           # Create a new {Tie} from OStatus entry
-          def from_entry! entry, receiver
-            # Sender must be remote
-            sender = RemoteSubject.find_or_create_by_webfinger_uri! entry.author.uri
-
-            contact = sender.contact_to!(receiver)
-
-            # FIXME: hack
-            contact.user_author = sender
-            
+          def create_from_entry! entry, receiver
+            contact = ::Contact.from_entry! entry, receiver
+           
             contact.relation_ids = [::Relation::Public.instance.id]
+          end
+
+          # Remove all {Tie} from OStatus entry
+          def destroy_from_entry! entry, receiver
+            contact = ::Contact.from_entry! entry, receiver
+
+            contact.relation_ids = []
           end
         end
       end

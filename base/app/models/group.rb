@@ -57,5 +57,3 @@ class Group < ActiveRecord::Base
     end
   end
 end
-
-ActiveSupport.run_load_hooks(:group, Group)

@@ -74,7 +74,8 @@ describe Relation::CustomsController do
 	begin
           post :create, :custom => { :name => 'Test', :actor_id => actor.id }
 
-          assert false
+          assigns(:custom).should_not be_new_record
+          assigns(:custom).actor_id.should eq(@user.actor_id)
         rescue CanCan::AccessDenied
           assigns(:custom).should be_new_record
 

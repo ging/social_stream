@@ -1,16 +1,9 @@
 class Video < Document  
   has_attached_file :file, 
-                    :url => '/:class/:id.:extension',
+                    :url => '/:class/:id.:content_type_extension',
                     :default_url => 'missing_:style.png',
                     :path => ':rails_root/documents/:class/:id_partition/:style',
-                    :styles => {
-                      :webm => {:format => 'webm'},
-                      :flv  => {:format => 'flv'},
-                      :mp4  => {:format => 'mp4'},
-                      :poster  => {:format => 'png', :time => 5},
-                      :thumb48sq  => {:geometry => "48x48" , :format => 'png', :time => 5},
-                      :thumbwall => {:geometry => "130x97#", :format => 'png', :time => 5}
-                    },
+                    :styles => SocialStream::Documents.video_styles,
                     :processors => [:ffmpeg]
                     
   process_in_background :file
