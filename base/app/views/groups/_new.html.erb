@@ -1,24 +1,3 @@
-<% content_for :javascript do %>
-  $(function() {
-    $(".new_group").validate({errorClass: "validation_error"});
-  });
-  $("#group__participants").fcbkcomplete({
-                json_url: "<%= contacts_path(:form => true, :format => :json) %>",
-		cache: true,
-		filter_hide: true,
-		newel: false,
-		height: 6
-  });
-  $("#group_tag_list").fcbkcomplete({
-		json_url: "<%= tags_path(:format => :json) %>",
-		cache: false,
-		filter_case: true,
-		filter_hide: true,
-		newel: false,
-		height: 6
-  });
-<% end %>
-
 <%= location(
     link_to(t('group.other'), groups_path),
     link_to(t('group.new.action'), new_group_path)
@@ -43,6 +22,8 @@
 	  <div class="form_row">
 	    <h2><%= t('group.new.action') %></h2>
 	  </div>
+
+          Bootstrap Typeahead is not fully working yet
 		<div class="space_center"></div>	
 		<div class="form_row">
 			<div class="form_label">
@@ -79,3 +60,33 @@
 		</div>
 	</div>
 <% end %>
+
+<% content_for :javascript do %>
+  $(function() {
+    SocialStream.Group.new_(
+      {
+        typeahead: [
+          {
+            select: "#group__participants",
+            path:   "<%= contacts_path(form: true, format: :json) %>",
+            queryParam: "name"
+          },
+          {
+            select: "#group_tag_list",
+            path: "<%= tags_path(format: :json) %>",
+            queryParam: "tag"
+          }
+        ],
+        validate: [
+          {
+            form: ".new_group",
+            errorClass: "validation_error"
+
+          }
+        ]
+      }
+    );
+  });
+<% end %>
+
+
