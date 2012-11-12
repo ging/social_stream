@@ -6,34 +6,62 @@
     display: inline
     margin-right: -10px
     margin-left: 4px
+    margin-top: 13px
 
 .activity_content 
-    @include makeColumn(6, 0)
+    @include makeColumn(7, 0)
     display: inline-block
     margin-left: 5px
-    a
-        
+
+    h5
+        @include makeColumn(6, 0)
         font-size: 16px
+        margin-left: 0px
         text-decoration: none
         :hover
             opacity: 0.2
             text-decoration: none
+    .x
+
+        margin-left: 0px
+        font-size: 12px
+        color: black
+        padding-top: 10px
+        a
+            float: right
+            text-decoration: none
+            color: #888
     textarea
         resize: none
         width: 100%
-    .activity_objet
-    color: #000000
+
+    .activity_objects
+        margin-left: 56px
+        .attachment_thumb
+            @include makeColumn(1, 0)
+            margin-left: 0px
+            background: black
+        .attachment_text_link
+            font-size: 14px
+        .post p 
+            margin: 0 0 4px
+
     
 .activity_options
     @include makeColumn(6, 0)
+    margin-left: 56px 
     .post_time_ago
         display: inline
+        font-size: 12px
+        color: #444
     .to_comment
         display: inline-block
+        font-size: 14px
     .to_like
         display: inline-block
+        font-size: 14px
     .audience
         display: inline-block
-    .to_delete
-        display: inline-block
+        font-size: 14px
+
    
