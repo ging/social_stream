@@ -5,9 +5,9 @@
 
 SocialStream.Comments = (function(SS, $, undefined){
 	var hideCommentEl = [
-		".actor_logo_new_comment",
-		".actor_name_new_comment",
-		".activities_comment_btn"
+		".comment .avatar",
+		".comment h6",
+		".comment input[type=submit]"
 	];
 
 	var initNew = function(){
@@ -21,8 +21,8 @@ SocialStream.Comments = (function(SS, $, undefined){
 	var showInputsWithComments = function(){
 		// show only the text fields for new comment
 		// if there are any comment to the post
-		$(".activity_new_comment").each(function(){
-			if ($.trim($(this).siblings(".activity_comments").text()) !== ""){
+		$(".activity .new_comment").each(function(){
+			if ($.trim($(this).siblings(".activity .comments").text()) !== ""){
 				$(this).find(".input_new_comments").val("");
 			} else {
 				$(this).hide();
@@ -53,7 +53,7 @@ SocialStream.Comments = (function(SS, $, undefined){
 
 	var newCommentClick = function(){
 		$(".input_new_comments").click(function(){
-			$(".activities_comment_btn").hide();
+			$(".activities .submit").hide();
 			$(".new_comment").removeClass("new_comment_shown");
 			$(".actor_name_new_comment").hide();
 			$(".actor_logo_new_comment").hide();

@@ -1,4 +1,4 @@
-<%= div_for video, :class => 'content_size' do %>
+<%= div_for video do %>
 
   <% if video.file_processing %>
     <%= render :partial => 'videos/video_processing', :locals => {:video => video}%>

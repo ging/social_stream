@@ -20,7 +20,6 @@
       <div class="caret">
         <div class="attachment_tile_tipsy">
         
-
           <div class="tipsy_content" style="display:none;">
             <div class="actions">        
               <%= link_to content_tag(:div,image_tag("btn/download.png") + t('document.actions.download'), :class => :action), download_document_path(document) %>
@@ -37,10 +36,10 @@
       </div>
       <div class="attachment_tile_text">
         <%= link_to truncate_name(document.file_file_name,:length => 15),
-      document_path(document),
-    :alt => document.file_file_name,
-    :type => document.type,
-    :path => document_path(document) %>
+        document_path(document),
+          :alt => document.file_file_name,
+          :type => document.type,
+          :path => document_path(document) %>
       </div>
     </div>
     <div class="brief"> 7 contactos en común 

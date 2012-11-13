@@ -1,6 +1,6 @@
-<%= div_for link, :class => 'content_size' do %>
+<%= div_for link do %>
   <% if link.image %>
-    <div class="thumbnail">
+    <div class="thumb">
       <% if link.callback_url %>
         <%= link_to image_tag(link.image),"javascript:void(0)" %>
         <%= link_to image_tag("btn/btn_play.png", :class => "play_button"),"javascript:void(0)" %>
@@ -17,11 +17,11 @@
       <% end %>
     </div>
   <% end %>
-  <div class="info">
+  <div class="text">
     <% if link.title %>
-      <div class="title">
+      <h6>
         <%= link.title %>
-      </div>
+      </h6>
     <% end %>
     <div class="url">
       <%= link_to link.url, link.url, :target => "_blank" %>

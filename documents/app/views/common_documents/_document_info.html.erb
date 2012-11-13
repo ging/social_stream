@@ -13,25 +13,23 @@
         <div id="file_size">
         <span class="details">Size </span> <%= number_to_human_size document.file_file_size %>
       </div>
-
-      </div>      
-      
-    </div>
-    <div class="right">
-      <div id="document_details">
-        <div class="details">
-          <%= t('document.info.date.updated_at') %>
-        </div>
-        <div class="date">
-          <%= I18n.localize document.updated_at, :format => :long %>
-        </div>
-      </div>
-      <div id="like_count">
-        <%= document.like_count %> <span class="details">likes</span>
-      </div>      
-    </div>
-    <br class="clearfloat" />
+    </div>         
   </div>
+  <div class="right">
+    <div id="document_details">
+      <div class="details">
+        <%= t('document.info.date.updated_at') %>
+      </div>
+      <div class="date">
+        <%= I18n.localize document.updated_at, :format => :long %>
+      </div>
+    </div>
+    <div id="like_count">
+      <%= document.like_count %> <span class="details">likes</span>
+    </div>      
+  </div>
+  <br class="clearfloat" />
+</div>
 </div>
 <%= render :partial => "common_documents/edit_form", :locals => {:document => document} %> 
 <div id="actions">
@@ -48,5 +46,5 @@
 </div>
 
 <div class="description">
-      <%= document.description %>
-    </div>
+  <%= document.description %>
+</div>

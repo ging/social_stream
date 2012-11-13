@@ -1,6 +1,9 @@
 <div class="block document_menu" id="document_edit"  style="display:none;">
+  
   <%= form_for(document, :html => { :method => :put }) do |f| %>
+  
   <% if document and document.errors.any? %>
+  
   <%= javascript_tag do %>
     $(document).ready(function(){
       toggleDocumentEdit();

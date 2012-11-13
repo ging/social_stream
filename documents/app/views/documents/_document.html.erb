@@ -1,24 +1,18 @@
-<%= div_for document, :class => 'content_size' do %>
+<%= div_for document do %>
 
-  <div class="attachment_thumb">
-    <%= link_to thumb_for(document, 16),
-        document, 
-        :class => "" %>
+  <div class="thumb">
+    <%= link_to thumb_for(document, 75), document %>
   </div>
 
-  <div class="attachment_text">
-   <div class="title">
-    <%= document.title %>
-   </div>
+  <div class="text">
+    <h6>
+      <%= document.title %>
+    </h6>
 
-   <%= simple_format auto_link(document.description) %>
-
-   <%= link_to t('details.msg'),
-       document_path(document),
-       :alt => t('details.msg'),
-       :type => document.type,
-       :path => document_path(document),
-       :class => "attachment_text_link document_link" %>
+    <div class="description">
+      <%= simple_format "#{ auto_link(document.description) } #{ link_to t('details.msg'), document_path(document), :class => 'view_more' }" %>
+    </div>
+    
   </div>
 
-<% end %>
+<% end %> 

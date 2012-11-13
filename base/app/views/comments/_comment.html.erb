@@ -1,1 +1,3 @@
-<%= simple_format auto_link(comment.text) %>
+<%= div_for comment do %>
+  <%= simple_format auto_link(comment.text) %>
+<% end %>

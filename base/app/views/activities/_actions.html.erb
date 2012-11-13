@@ -1,0 +1,15 @@
+<div class="actions">
+  <div class="post_time_ago"><%= t('time.ago', :time => time_ago_in_words(activity.created_at)) %>
+  </div>
+  
+  <% if activity.is_root? && user_signed_in? %>
+  <div class="to_comment">  <%= link_to t('activity.to_comment'), "#", :class => "to_comment" %> 
+  </div>
+  <% end %>
+
+  <div class="to_like" id="like_<%= dom_id(activity) %>">  <%= link_like(activity)%>
+  </div>
+
+  <%= render :partial => 'activities/audience',
+             :locals => { :activity => activity } %>   
+</div>

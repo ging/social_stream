@@ -1,26 +1,17 @@
-<%= div_for picture, :class => 'content_size' do %>
+<%= div_for picture do %>
 
-  <div class="picture_link picture_thumbnail_show">
-    <%= link_to thumb_for(picture, 130),
-                download_document_path(picture),
-        :type => picture.type,
-                :title => picture.title,
-                :path => document_path(picture) %>
+  <div class="thumb">
+    <%= link_to thumb_for(picture, "170x127#"),
+                download_document_path(picture) %>
   </div>
 
-  <div class="attachment_text picture_summary_class">
-        <div class="title"> 
+  <div class="text">
+    <h6>
   	  <%= picture.title %>
-        </div>
-
-	<%= simple_format auto_link(picture.description) %>
-
-        <%= link_to t('details.msg'),
-              picture_path(picture),
-              :alt => t('details.msg'),
-              :type => picture.type,
-              :path => document_path(picture),
-              :class => "attachment_text_link picture_link" %>
+    </h6>
+    <div class="description">
+      <%= simple_format "#{ auto_link(picture.description) } #{ link_to t('details.msg'), picture, :class => 'view_more' }" %>
+    </div>
   </div>
 <% end %>
 

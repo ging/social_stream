@@ -27,16 +27,16 @@
       </header>
       <section>
         <div id="wrapper_body">
-          <div class="space_center"></div>
           <div id="flash">
             <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
           </div>
           <%= yield %>
         </div>
       </section>
-          <br class="clearfloat" />
-
-      <div class="push"></div>
+      <br class="clearfloat" />
+      
+      <div class="push">
+      </div>
       <footer class="footerFront">
         <%= render :partial => "layouts/footer" %>
       </footer>

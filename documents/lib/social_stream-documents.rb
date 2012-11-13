@@ -12,10 +12,11 @@ module SocialStream
     mattr_accessor :picture_styles
     @@picture_styles = {
       :thumb48sq  => ["48x48"],
-      :thumbwall => ["130x97#"],
+      :"170x127#" => ["170x127#"],
       # midwall preserves A4 proportion: 210x297
       :midwall => ["80x113#"],
       :preview => ["500>"]
+
     }
 
     mattr_accessor :audio_styles
@@ -28,7 +29,7 @@ module SocialStream
       :mp4  => { :format => 'mp4' },
       :poster  => { :format => 'png', :time => 5 },
       :thumb48sq  => { :geometry => "48x48" , :format => 'png', :time => 5 },
-      :thumbwall => { :geometry => "130x97#", :format => 'png', :time => 5 }
+      :"170x127#" => { :geometry => "170x127#", :format => 'png', :time => 5 }
     }
 
     class << self

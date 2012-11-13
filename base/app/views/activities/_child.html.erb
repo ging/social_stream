@@ -1,17 +1,17 @@
-<%= div_for activity, :class => "subactivity" do %>
-  <div class="actor_logo_subactivity">
-    <%= link_to image_tag(activity.sender_subject.logo.url(:actor),
+<%= div_for activity, :class => "child" do %>
+  <div class="avatar">
+    <%= link_to image_tag(activity.sender_subject.logo.url("35"),
                           :alt => activity.sender_subject.name),
                  activity.sender_subject %>
   </div>
-  <div class="activity_content">
-    <div class="actor_name-activity_objects">
+  <header>
+    <h6>
       <%= link_to(activity.sender_subject.name, activity.sender_subject) %>
-      <span class="subactivity_objects">
-        <%= render activity.activity_objects %>
-      </span>
+    </h6>
+    <div class="objects">
+      <%= render activity.activity_objects %>
     </div>
-    <%= render :partial => 'activities/options',
+    <%= render :partial => 'activities/actions',
                :locals => { :activity => activity } %>
-  </div>
+  </header>
 <% end %>

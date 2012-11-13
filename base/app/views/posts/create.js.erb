@@ -1,6 +1,6 @@
 <% if @post.valid? %>
   //Display the new post
-  $("#wall").prepend("<%= escape_javascript(render @post.post_activity) %>");
+  $("#timeline").prepend("<%= escape_javascript(render @post.post_activity) %>");
 
   SocialStream.Timeline.create("<%= escape_javascript dom_id(@post.post_activity) %>");
 <% else %>

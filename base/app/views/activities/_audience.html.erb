@@ -1,0 +1,14 @@
+<% if user_signed_in? %>
+  <%= link_to image_tag("btn/#{ activity.public? ? 'public' : 'restricted' }.png", :class => 'menu_icon') + activity.audience_in_words(current_subject, :details => :summary),
+    '#',
+    :class => 'audience' %>
+
+  <div class="audience-tooltip tooltip top fade in">
+    <%= activity.audience_in_words(current_subject) %>
+    <% unless activity.public? %>
+    <%= link_to t('activity.audience.show'), audience_path(activity_id: activity.id), remote: true %>
+      <div class="activity-audience-list-<%= activity.id %>">
+      </div>
+    <% end %>
+  </div>
+<% end %>

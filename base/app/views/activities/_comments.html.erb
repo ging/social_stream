@@ -1,4 +1,4 @@
-<div class="activity_comments" id="comments_<%= dom_id(activity) %>">
+<div class="comments" id="comments_<%= dom_id(activity) %>">
   <% if activity.direct_activity_object.blank? || activity.direct_activity_object.comment_count > 0 %>
     <%= render activity.comments %>
   <% end %>
