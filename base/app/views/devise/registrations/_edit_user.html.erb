@@ -1,12 +1,14 @@
 <% content_for :javascript do %>
 $(".user_edit").validate({errorClass: "validation_error"});
 <%end%>
-<div class="open" id="password_form">
-  <div class="header">
-    <div class="header_text">
+
+<div id="password_form">
+  <header>
+    <h5>
       <%= link_to ("change password"),  "javascript:showSettings(\"password_form\");" %>
-    </div>
-  </div>
+    </h5>
+  </header>
+
   <div class="content settings_content" id="password_form_content" style="display:none;">
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
     <div class="form_row">
@@ -17,6 +19,7 @@ $(".user_edit").validate({errorClass: "validation_error"});
         <%= f.password_field :password, :class => "form_tag" %>
       </div>
     </div>
+
     <div class="form_row">
       <div class="form_label">
         <%= f.label t('account.password.retype') %>
@@ -25,6 +28,7 @@ $(".user_edit").validate({errorClass: "validation_error"});
         <%= f.password_field :password_confirmation, :class => "form_tag" %>
       </div>
     </div>
+
     <div class="form_row">
       <div class="form_label">
         <%= f.label :current_password %>
@@ -33,18 +37,22 @@ $(".user_edit").validate({errorClass: "validation_error"});
         <%= f.password_field :current_password, :class => "form_tag" %>
       </div>
     </div>
-    <div class="form_row space_center">
+
+    <div class="form_row">
       <%= f.submit t('button.update'), :class => "button" %>
     </div>
     <% end%>
   </div>
 </div>
-<div class="open" id="email_form">
-  <div class="header">
-    <div class="header_text">
+
+
+<div id="email_form">
+  <header>
+    <h5>
       <%= link_to ("change email adrees"),  "javascript:showSettings(\"email_form\");" %>
-    </div>
-  </div>
+    </h5>
+  </header>
+
   <div class="content settings_content" id="email_form_content" style="display:none;">
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
     <div class="form_row">
@@ -55,6 +63,7 @@ $(".user_edit").validate({errorClass: "validation_error"});
         <%= f.email_field :email, :class => "required form_tag" %>
       </div>
     </div>
+
     <div class="form_row">
       <div class="form_label">
         <%= f.label :current_password %>
@@ -63,6 +72,7 @@ $(".user_edit").validate({errorClass: "validation_error"});
         <%= f.password_field :current_password, :class => "required form_tag" %>
       </div>
     </div>
+
     <div class="form_row space_center">
       <%= f.submit t('button.update'), :class => "button" %>
     </div>
