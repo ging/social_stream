@@ -1,9 +1,9 @@
 <% toolbar :profile, :subject => current_subject, :option => 'contacts' %>
 
-<div id="wrapper_section">   
+<div id="privacity">   
   <h2><%= t 'relation_custom.title' %></h2>
 
-  <div id="relation_customs" class="privacy_block_section first_block_section">
+  <div id="relation_customs">
     <h5><%= t 'relation_custom.choose' %></h5>
 
 
@@ -22,14 +22,14 @@
       })
     <% end %>
 
-    <div id="relation_customs_list">
+    <div id="list">
       <%= render :partial => 'relation/customs/list', :object => @customs %>
     </div>
 
 </div>
 
 
-  <div id="permissions" class="privacy_block_section">
+  <div id="permissions">
   </div>
 
   <div id="loading"></div>
