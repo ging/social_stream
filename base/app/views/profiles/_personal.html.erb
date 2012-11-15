@@ -1,15 +1,12 @@
-
-  <div id="personal_info" >
+  <article id="personal_info">
     <header>
       <h5>
-        <%=t('profile.' + @profile.subject.class.to_s.downcase + '.info')%>
+       <% if is_owner? %>
+        <%= link_to ("about_me"),  :controller => :profiles , :action => :edit, :section => "about_me"%>
       </h5>
-      <% if is_owner? %>
-        <div class="header_icon_right">
-          <%= link_to (image_tag('btn/edit.png')),  :controller => :profiles , :action => :edit, :section => "about_me"%>
-        </div>
       <% end %>
     </header>
+    
     <div class="content">
       <% if !is_personal_empty?%>
         <div class="sub-block"  >
@@ -71,4 +68,4 @@
       <%=t('profile.empty')%>
     <%end%>
     </div>
-  </div>
+  </article>

@@ -1,15 +1,12 @@
-<div class="space_center"></div>
-  <div class="block" id="contact_info">
-    <div class="header">
-      <div class="header_text">
-        <%=t('profile.contact')%>
-      </div>
-      <% if is_owner? %>
-        <div class="header_icon_right">
-          <%= link_to (image_tag('btn/edit.png')), :controller => :profiles , :action => :edit, :section => "contact_info"%>
-        </div>
+  <article id="contact_info">
+    <header>
+      <h5>
+        <% if is_owner? %>
+          <%= link_to ("contact_info"), :controller => :profiles , :action => :edit, :section => "contact_info"%>
+      </h5>
       <%end%>
-    </div>
+    </header>
+
     <div class="content">
       <% if !is_contact_empty?%>
         <div class="sub-block"  >
@@ -65,9 +62,6 @@
           <%end%>
           <% if @profile.subject.email? && user_signed_in? %>  
             <div class="row">
-              <div class="label">
-                <%=t('profile.email')%>:
-              </div>
               <div class="field">
                 <%= show_if_signed_in(h(@profile.subject.email)) %>
               </div>
@@ -78,4 +72,4 @@
         <%=t('profile.empty')%>
       <%end%>
     </div>
-  </div>
+  </article>

@@ -1,15 +1,12 @@
-  <div class="space_center"></div>
-  <div class="block" id="experience_info">
-    <div class="header">
-      <div class="header_text">
-        <%=t('profile.' + @profile.subject.class.to_s.downcase + '.experience')%>
-      </div>
-      <% if is_owner? %>
-        <div class="header_icon_right">
-          <%= link_to (image_tag('btn/edit.png')),  :controller => :profiles , :action => :edit, :section => "my_experience"%>
-        </div>
+  <article id="experience_info">
+    <header>
+      <h5>
+        <% if is_owner? %>
+          <%= link_to ("my_experience"),  :controller => :profiles , :action => :edit, :section => "my_experience"%>
+      </h5>
       <%end%>
-    </div>
+    </header>
+
     <div class="content">
       <%if @profile.experience?%>
         <div class="row">
@@ -19,4 +16,4 @@
         <%=t('profile.empty')%>
       <%end%>
     </div>
-  </div>
+  </article>
