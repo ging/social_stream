@@ -13,6 +13,10 @@
         @include makeColumn(7, 0)
         display: inline-block
         margin-left: 5px
+        margin-bottom: 4px
+        padding-bottom: 5px
+        border-bottom: 3px solid #f5f5f5
+        @include border-radius(15px) 
 
         h5
             @include makeColumn(6, 0)
@@ -73,10 +77,11 @@
 
     .child
         @include makeColumn(6, 1)
+        @include border-radius(5px)
         display: inline-block
         margin-left: 55px
+        margin-bottom: 6px
         background: #f5f5f5
-        @include border-radius(5px)
         padding-left: 6px
 
 
