@@ -1,25 +1,19 @@
 <% if user_signed_in? && current_subject.can_comment?(activity) %>
   <div class="new_comment">
     <div class="avatar">
-      <%= image_tag(current_subject.logo.url("45"),
-                            :alt => current_subject.name)%>
+      <%= image_tag(current_subject.logo.url("45")) %>
     </div>
+
     <header>
       <h6>
         <%= current_subject.name %>
       </h6>
     </header>
-    <%= form_for Comment.new(:owner_id => Actor.normalize_id(activity.receiver),:_activity_parent_id => activity.id),:remote => true do |f| %>
 
-      <%= f.hidden_field :owner_id %>
-      
-      <%= f.hidden_field :_activity_parent_id %>
-        
-      <%= f.text_area :text, :rows => 1, :paceholder => t('comment.input') %>
-      
-      <%= f.submit t('share'), :class => "btn" %>
-
-    <% end %>
+    <%= render partial: 'comments/new_form',
+               locals: {
+                 owner_id: Actor.normalize_id(activity.receiver),
+                 _activity_parent_id: activity.id
+               } %>
   </div>
-
 <% end %>

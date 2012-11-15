@@ -1,0 +1,4 @@
+<% if activity.is_root? && user_signed_in? %>
+  <div class="to_comment">  <%= link_to t('activity.to_comment'), "#", :class => "to_comment" %> 
+  </div>
+<% end %>
