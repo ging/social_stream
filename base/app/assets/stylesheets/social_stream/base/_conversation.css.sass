@@ -1,16 +1,17 @@
-.content_left
+.conversations
   @include makeColumn(1, 0)
   float: left
   display: inline
-  .sender_photo
-    padding: 0px 11px 0px 0px
-    img
-      width: 60px
-      heigth: 60px
-      a
-        text-decoration: none
-        &:hover
-          opacity: 0.4
+  .avatar
+    float: left
+    padding: 2px 5px 0 0
+  .date
+    color: #666666
+    font-size: 11px
+    display: inline
+    margin-left: 4px
+    margin-right: 13px
+
 
 .content_right
   @include makeColumn(5, 0)

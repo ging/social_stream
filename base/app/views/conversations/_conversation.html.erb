@@ -1,28 +1,40 @@
 <%= div_for(conversation, :class => read_class) do %>
 
 <div class="content_left">
-	<div class="sender_photo">
+	
+	<div class="avatar">
 	<%= link_to image_tag(conversation.last_sender.logo.url(:actor),
 	:title => conversation.last_sender.name, :alt => conversation.last_sender.name),
 	conversation.last_sender.subject %>
   </div>
-	<div class="sender_name">
-		<%= link_to truncate_name(conversation.last_sender.name), conversation.last_sender.subject %>
-	</div>
+	
+	<header>
+		<h6>
+			<%= link_to truncate_name(conversation.last_sender.name), conversation.last_sender.subject %>
+	  </h6>
+	</header>
+	
 	<div class="date">
 		<%= t('time.ago', :time => time_ago_in_words(conversation.updated_at)) %>
 	</div>
+
 </div>
+
 <div class="content_right">
+	
 	<div class="subject">
 		<%= link_to(truncate(conversation.subject, :length => 55), conversation_path(conversation.id,:box => @box,:page => params[:page])) %>
 	</div>
+	
 	<div class="briefing">
 		<%= raw(truncate(strip_tags(conversation.last_message.body), :length => 50)) %>
 	</div>
+	
 	<div class="clearfloat">
 	</div>
-</div>
+
+
+
 <% unless @box.eql?'trash' %>
 <div class="action">
   <% link_to(image_tag('btn/btn_read.png', :alt => t('mailboxer.mark_as_read'), :title => t('mailboxer.mark_as_read'))) %>
@@ -33,5 +45,6 @@
 </div>
 <% end %>
 <div class="clearfloat">
+</div>
 </div>
 <% end %>
