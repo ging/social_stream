@@ -1,33 +1,41 @@
-
-<h2><%=t('menu.information')%></h2>
-
-
-<% if (!is_personal_empty?) or(is_owner?)%>
-  <%= render :partial=> "personal"%>
-<%end%>
-
-<%  if  @profile.subject.subject_type == 'Event' %>
-  <%= render :partial=> "outline", :locals => {:profile => @profile} %>
-<% end %>
-
-<% if (!is_contact_empty?) or(is_owner?)%>
-  <%= render :partial=> "contact"%>
-<%end%>
-<% if (@profile.experience?) or(is_owner?)%>
-  <%= render :partial=> "experience"%>
-<%end%>
-<% if is_owner? %>
+<div>
+<p class="devise_title2"><%= t('profile.one') %></p>
+<div class="space_center"></div>
 
 <% if (@profile.subject.tag_list.count > 0) or (is_owner?) %>
-  <%= render :partial=>"tags"%>
+  <%= render :partial => "tags" %>
 <% end %>
 
-<article id="avatar_info">
-    <header>
-      <h5>
-        <%= link_to ("avatars"),  :controller => "avatars" , :action => "index" %>
-      </h5>
-    </header>
-  </article>
+<% if (!is_personal_empty?) or(is_owner?) %>
+  <%= render :partial => "personal" %>
 <% end %>
+
+<% if (!is_contact_empty?) or(is_owner?) %>
+  <%= render :partial => "contact" %>
+<% end %>
+
+<% if (@profile.experience?) or(is_owner?) %>
+  <%= render :partial => "experience" %>
+<% end %>
+
+<% if is_owner? %>
+
+
+<div class="row" id="avatar_info">
+  <div class="header_text2">
+    <%= t('avatar.profile_change') %>
+    <div class="header_icon_right">
+      <%= link_to (image_tag('edit_icon.png', :class=>"unborder")), :controller => "avatars", :action => "index" %>
+    </div>
+  </div>
+  <div class="space_center"></div>
+</div>
+
+
+<div class="content">
+  <div class="row">
+  </div>
+</div>
+<% end %>
+</div>
 
