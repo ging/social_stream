@@ -4,9 +4,9 @@
 
 <% sidebar %>
 
-<div class="gray_links">
-      <a id="me_load_more_button" data-remote="true" class="btn-more" href="#">Ver más...</a>
-    </div>
+<% content_for :javascript do %>
+  $('.pagination a').attr('data-remote', 'true');
+<% end %>
 
 <%= location(link_to(t('message.' + @box), conversations_path(:box => @box),:remote => true)) %>
 
