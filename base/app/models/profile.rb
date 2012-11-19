@@ -4,6 +4,8 @@ class Profile < ActiveRecord::Base
              autosave: true
 
   delegate :tag_list, :tag_list=,
+           :name, :name=,
+           :email, :email=,
            to: :actor
     
   validates_presence_of :actor_id

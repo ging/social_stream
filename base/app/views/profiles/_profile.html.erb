@@ -2,7 +2,7 @@
   <%= t('profile.one') %>
 </h2>
 
-<div id="#profile-info">
+<div id="profile-info">
   <% if can?(:update, @profile) || @profile.tags_present? %>
     <%= render partial: "tags" %>
   <% end %>
@@ -12,15 +12,15 @@
   <% end %>
 
   <% if can?(:update, @profile) || @profile.contact_present? %>
-    <%#= render :partial => "contact" %>
+    <%= render :partial => "contact" %>
   <% end %>
 
   <% if can?(:update, @profile) || @profile.experience? %>
-    <%#= render :partial => "experience" %>
+    <%= render :partial => "experience" %>
   <% end %>
 
   <% if can?(:update, @profile) || @profile.personal_present? %>
-    <%#= render :partial => "avatar" %>
+    <%= render :partial => "avatar" %>
   <% end %>
 
   <%= javascript_tag do %>

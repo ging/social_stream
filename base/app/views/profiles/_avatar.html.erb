@@ -1,11 +1,11 @@
-<div id="avatar_info">
+<div class="avatar section">
   <header>
     <h4>
       <%= t('avatar.profile_change') %>
     </h4>
-    <div class="header_icon_right">
-      <%= link_to (image_tag('edit_icon.png', :class=>"unborder")), :controller => "avatars", :action => "index" %>
+
+    <div class="edit_icon">
+      <%= link_to image_tag('edit_icon.png'), avatars_path %>
     </div>
   </div>
-
 </div>
