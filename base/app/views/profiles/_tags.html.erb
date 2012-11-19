@@ -1,4 +1,5 @@
 <div id="tags_info">
+  
   <header>
     <h4>
       <%= t('profile.tags.other') %>
@@ -11,121 +12,78 @@
   </header>
 
 
-  <div class="row span6 boxy_white">
-    <div class="space_center"></div>
-    <div class="content settings_briefing" id="tags_info_briefing">
+  <div class="content settings_briefing" id="tags_info_briefing">
+    <div class="field_profile">
+      <% if @profile.subject.tag_list.count > 0 %>
 
+        <%= @profile.subject.tag_list %>
 
-      <div class="field_profile">
-        <% if @profile.subject.tag_list.count > 0 %>
-
-          <%= @profile.subject.tag_list %>
-
-        <% else %>
-
-          <div id="field_profile_field_empty_tags">
-            <%= t('profile.empty') %>
-          </div>
-
-        <% end %>
+      <% else %>
+      
+      <div id="field_profile_field_empty_tags">
+        <%= t('profile.empty') %>
       </div>
-
-
-
-
+      <% end %>
     </div>
-    <% if is_owner? %>
-      <div class="content settings_content" id="tags_info_content" style="display:none;">
-        <div class="field_profile">
-        <%= form_for(@profile, :url => [current_subject, :profile], :remote => false) do |f| %>
-          <div class="block">
-            <%= f.fields_for :actor do |actor_form| %>
-              <div class="form_row">
-                 <!-- Tags -->
-                 <!-- Preload tags -->
-                 <%@tags = ActivityObject.tag_counts(:limit => 100, :order => "count desc")%>
-                 <ul id="preloadTagList" style="display:none">
-                   <%@tags.each do |tag| %>
-                      <li><%=tag.name%></li>
-                   <%end%>
-                 </ul>
-
-                 <div class="control-group">
-                    <div class="controls">
-                       <%= actor_form.hidden_field :tag_list, :class => "form_tag", :id => "input_tag_list" %>
-                       <div class="tagBoxNew span5">
-                          <ul class="tagList"></ul>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-            <% end %>
-            <%= f.submit t('button.update'), :class => "button", :id => "submit_update_tags_button" %>
-          </div>
-        <% end %>
-        </div>
-      </div>
-    <% end %>
-    <div class="space_center"></div>
   </div>
-</div>
-<%= content_for :javascript do %>
-  $(document).ready(function() {
-    var tagList = $(".tagList");
-    var tags = [];
 
-    //Load tags
-    $.each($("#preloadTagList li"), function(index, element) {
-       tags.push($(element).html());
+  
+  
+  <%= content_for :javascript do %>
+    $(document).ready(function() {
+      var tagList = $(".tagList");
+      var tags = [];
+
+      //Load tags
+      $.each($("#preloadTagList li"), function(index, element) {
+         tags.push($(element).html());
+      });
+
+      //Add existin tags to the input
+      var currentTags = $("#input_tag_list").val().split(",");
+      $.each(currentTags, function(index, tag) {
+         if((typeof tag == "string")&&(tag != "")){
+            $(tagList).append("<li>" + tag + "</li>")
+         }
+      });  
+
+                  $(tagList).tagit({tagSource:tags, sortable:true, maxLength:15, maxTags:8 ,
+                   watermarkAllowMessage: '<%=t('document.info.tags.addMessage')%>', watermarkDenyMessage: '<%=t('document.info.tags.limitMessage')%>' ,
+                    tagsChanged:function (tag, action) {
+                            //Check if the element popped is a suggestion
+                            if(action=="popped"){
+                                          $.each($(".tagit-suggestions li"), function(index, element) {
+                                                  if($(element).html()==tag){
+                                                    $(element).show();
+                                                  }
+            });
+                                  }
+        }
+                  });
+
+      //Allow suggestions
+      $(".tagit-suggestions li").on("click", function(){
+        var result = $(".tagit").tagit('add', $(this).html() );
+                          if(result==true){
+                            $(this).hide();
+                          }
+      });
+
+      //Fill tag_list hidden input before send
+       var button = $("#submit_update_tags_button");
+       $(button).click(function(event) {
+         var tagList = $(".tagList");
+         $("#input_tag_list").val(Vish.Utils.convertToTagsArray($(tagList).tagit("tags")));
+         return true;
+       });
+
     });
+  <% end %>
 
-    //Add existin tags to the input
-    var currentTags = $("#input_tag_list").val().split(",");
-    $.each(currentTags, function(index, tag) {
-       if((typeof tag == "string")&&(tag != "")){
-          $(tagList).append("<li>" + tag + "</li>")
-       }
-    });  
 
-                $(tagList).tagit({tagSource:tags, sortable:true, maxLength:15, maxTags:8 ,
-                 watermarkAllowMessage: '<%=t('document.info.tags.addMessage')%>', watermarkDenyMessage: '<%=t('document.info.tags.limitMessage')%>' ,
-                  tagsChanged:function (tag, action) {
-                          //Check if the element popped is a suggestion
-                          if(action=="popped"){
-                                        $.each($(".tagit-suggestions li"), function(index, element) {
-                                                if($(element).html()==tag){
-                                                  $(element).show();
-                                                }
-          });
-                                }
-      }
-                });
-
-    //Allow suggestions
-    $(".tagit-suggestions li").on("click", function(){
-      var result = $(".tagit").tagit('add', $(this).html() );
-                        if(result==true){
-                          $(this).hide();
-                        }
-    });
-
-    //Fill tag_list hidden input before send
-     var button = $("#submit_update_tags_button");
-     $(button).click(function(event) {
-       var tagList = $(".tagList");
-       $("#input_tag_list").val(Vish.Utils.convertToTagsArray($(tagList).tagit("tags")));
-       return true;
-     });
-
-  });
-<% end %>
-
- <div class="content">
-
+  <div class="content">
     <% if @profile.subject.tag_list.count > 0 %>
-
       <%= @profile.subject.tag_list %>
-
       <% else %>
       <h5>
         <%= t('profile.empty') %>
@@ -141,9 +99,11 @@
         <%= f.fields_for :actor do |actor_form| %>
      
         <%@tags = ActivityObject.tag_counts(:limit => 100, :order => "count desc")%>
+        
         <ul id="preloadTagList" style="display:none">
           <%@tags.each do |tag| %>
-            <li><%=tag.name%>
+            <li>
+              <%=tag.name%>
             </li>
           <%end%>
         </ul>
@@ -154,16 +114,11 @@
             <ul class="tagList">
             </ul>
           </div>
-        </div>
+        </div>  
       </div>
     </div>
   <% end %>
-  <%= f.submit t('button.update'), :class => "button", :id => "submit_update_tags_button" %>
-          </div>
-        <% end %>
-        </div>
-      </div>
-    <% end %>
-  </div>
+    <%= f.submit t('button.update'), :class => "button", :id => "submit_update_tags_button" %>
 </div>
--->
+<% end %>
+<% end %>
