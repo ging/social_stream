@@ -34,6 +34,7 @@
   <body>
     <div id="wrapper" class="container">
       <%= render :partial => "layouts/header" %>
+
       <nav id="toolbar">
         <%= yield :toolbar %>
       </nav>
@@ -41,15 +42,18 @@
       <div id="flash">
         <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
       </div>
-      <section id="content">
+
+      <section id="content<%= '-large' unless content_for?(:sidebar) %>">
         <%= yield %>
       </section>
   
-      <aside id="sidebar">
-        <div id="sidebarContent">
-          <%= yield :sidebar %>
-        </div>
-      </aside>
+      <% if content_for?(:sidebar) %>
+        <aside id="sidebar">
+          <div id="sidebarContent">
+            <%= yield :sidebar %>
+          </div>
+        </aside>
+      <% end %>
     </div>
     
     <footer class="footer"><%= render :partial => "layouts/footer" %>

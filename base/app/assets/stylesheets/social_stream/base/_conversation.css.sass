@@ -1,31 +1,29 @@
 @import "jquery.cleditor"
 
-.conversations
-  @include makeColumn(1, 0)
-  float: left
+#content-large
+  @include makeColumn(10, 0)
+
+.content_left
+  @include makeColumn(3, 0)
   display: inline
+  margin-left: 0px
   .avatar
     float: left
     padding: 2px 5px 0 0
-  .date
-    color: #666666
-    font-size: 11px
-    display: inline
-    margin-left: 4px
-    margin-right: 13px
 
 
 .content_right
-  @include makeColumn(5, 0)
+  @include makeColumn(7, 0)
   color: #666666
   display: inline-block
+  margin-left: 0px
+  margin-bottom: 15px
   .subject
     font-weight: normal
     font-size: 14px
     a
       font-size: 15px
       font-weight: bold
-      white-space: nowrap
       &:hover
         opacity: 0.4
         text-decoration: none
@@ -34,14 +32,15 @@
     overflow: hidden
     text-overflow: ellipsis
     color: #666666
-
-.info
- 
+  
   .date
     color: #666666
     font-size: 11px
     display: inline
     margin-left: 4px
     margin-right: 13px
+
   .action
-    display: inline-block 
+    float: right
+    margin-top: -20px
+
