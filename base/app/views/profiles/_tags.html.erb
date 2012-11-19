@@ -81,15 +81,7 @@
   <% end %>
 
 
-  <div class="content">
-    <% if @profile.subject.tag_list.count > 0 %>
-      <%= @profile.subject.tag_list %>
-      <% else %>
-      <h5>
-        <%= t('profile.empty') %>
-      </h5>
-    <% end %>
-  </div>
+
 
   <% if is_owner? %>
     <div class="content settings_content" id="tags_info_content" style="display:none;">
@@ -118,7 +110,7 @@
       </div>
     </div>
   <% end %>
-    <%= f.submit t('button.update'), :class => "button", :id => "submit_update_tags_button" %>
+ 
 </div>
 <% end %>
 <% end %>
