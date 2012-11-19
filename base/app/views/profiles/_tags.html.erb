@@ -1,116 +1,28 @@
-<div id="tags_info">
-  
+<div class="tags">
   <header>
     <h4>
       <%= t('profile.tags.other') %>
-      <% if is_owner? %>
-      <div class="header_icon_right">
-        <%= link_to (image_tag('edit_icon.png', :class=>"unborder")), "javascript:showSettings(\"tags_info\");" %>
-      </div>
-      <% end %>
+
+      <%= render partial: 'edit_icon' %>
     </h4>
   </header>
 
 
-  <div class="content settings_briefing">
-    <div class="field_profile">
-      <% if @profile.subject.tag_list.count > 0 %>
-
-        <%= @profile.subject.tag_list %>
-
-      <% else %>
-      
-      <div id="field_profile_field_empty_tags">
-        <%= t('profile.empty') %>
-      </div>
-      <% end %>
-    </div>
+  <div class="briefing">
+    <% if @profile.subject.tag_list.count > 0 %>
+      <%= @profile.subject.tag_list %>
+    <% else %>
+      <%= t('profile.empty') %>
+    <% end %>
   </div>
 
-  
-  
-  <%= content_for :javascript do %>
-    $(document).ready(function() {
-      var tagList = $(".tagList");
-      var tags = [];
+  <% if can?(:update, @profile) %>
+    <div class="update">
+      <%= form_for(@profile, :url => [ @profile.subject, :profile ], :remote => true) do |f| %>
+        <%= f.select :tag_list, [] %>
 
-      //Load tags
-      $.each($("#preloadTagList li"), function(index, element) {
-         tags.push($(element).html());
-      });
-
-      //Add existin tags to the input
-      var currentTags = $("#input_tag_list").val().split(",");
-      $.each(currentTags, function(index, tag) {
-         if((typeof tag == "string")&&(tag != "")){
-            $(tagList).append("<li>" + tag + "</li>")
-         }
-      });  
-
-                  $(tagList).tagit({tagSource:tags, sortable:true, maxLength:15, maxTags:8 ,
-                   watermarkAllowMessage: '<%=t('document.info.tags.addMessage')%>', watermarkDenyMessage: '<%=t('document.info.tags.limitMessage')%>' ,
-                    tagsChanged:function (tag, action) {
-                            //Check if the element popped is a suggestion
-                            if(action=="popped"){
-                                          $.each($(".tagit-suggestions li"), function(index, element) {
-                                                  if($(element).html()==tag){
-                                                    $(element).show();
-                                                  }
-            });
-                                  }
-        }
-                  });
-
-      //Allow suggestions
-      $(".tagit-suggestions li").on("click", function(){
-        var result = $(".tagit").tagit('add', $(this).html() );
-                          if(result==true){
-                            $(this).hide();
-                          }
-      });
-
-      //Fill tag_list hidden input before send
-       var button = $("#submit_update_tags_button");
-       $(button).click(function(event) {
-         var tagList = $(".tagList");
-         $("#input_tag_list").val(Vish.Utils.convertToTagsArray($(tagList).tagit("tags")));
-         return true;
-       });
-
-    });
-  <% end %>
-
-
-
-
-  <% if is_owner? %>
-    <div class="content settings_content" id="tags_info_content" style="display:none;">
-      <div class="field_profile">
-        <%= form_for(@profile, :url => [current_subject, :profile], :remote => false) do |f| %>
-
-        <%= f.fields_for :actor do |actor_form| %>
-     
-        <%@tags = ActivityObject.tag_counts(:limit => 100, :order => "count desc")%>
-        
-        <ul id="preloadTagList" style="display:none">
-          <%@tags.each do |tag| %>
-            <li>
-              <%=tag.name%>
-            </li>
-          <%end%>
-        </ul>
-
-        <div class="control-group">
-          <%= actor_form.hidden_field :tag_list, :class => "form_tag", :id => "input_tag_list" %>
-          <div class="tagBoxNew">
-            <ul class="tagList">
-            </ul>
-          </div>
-        </div>  
-      </div>
+        <%= f.submit %>
+      <% end %>
     </div>
   <% end %>
- 
 </div>
-<% end %>
-<% end %>

@@ -13,7 +13,7 @@ class TagsController < ApplicationController
       end
 
     if @tags.blank? && params[:tag].present?
-      @tags = [ params[:tag] ]
+      @tags = [ ActsAsTaggableOn::Tag.new(name: params[:tag]) ]
     end
 
     respond_to do |format|
