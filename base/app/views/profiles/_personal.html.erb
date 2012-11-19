@@ -1,4 +1,4 @@
-<div class="personal">
+<div class="personal section">
   <header>
     <h4>
       <%= t("profile.#{ @profile.subject.class.to_s.downcase }.info") %>
@@ -62,58 +62,48 @@
       <% end %>
 
     <% else %>
-      <h5>
-        <%= t('profile.empty') %>
-      </h5>
+      <%= render partial: 'empty' %>
     <% end %>
   </div>
 
   <% if can? :update, @profile %>
     <div class="update">
-        <%= form_for(@profile, :url => [current_subject, :profile], :remote => false) do |f| %>
-          <%= f.fields_for :actor do |actor_form| %>
+      <%= form_for(@profile, :url => [current_subject, :profile], :remote => false) do |f| %>
+        <h6>
+          <%= f.label t('actor.name') %>
+          <span class="required">*</span>
+        </h6>
 
+        <%= f.text_field :name, :class => "required" %>
 
-            <h6>
-              <%= f.label t('actor.name') %>
-              <span class="needed"></span>
-            </h6>
+        <h6>
+          <%= f.label :organization, t('profile.organization') %>
+        </h6>
 
-            <%= actor_form.text_field :name, :class => "required form_tag" %>
+        <%= f.text_field :organization %>
 
-            <h6>
-              <%= f.label t('profile.organization') %>
-            </h6>
+        <h6>
+          <%= f.label :birthday, t('profile.' + current_subject.class.to_s.downcase + '.birthday') %>
+        </h6>
 
-            <%= f.text_field :organization, :class => "form_tag" %>
+        <%= date_select "profile", "birthday", :order => [:day, :month, :year], :end_year => Date.today.year, :start_year => (Date.today.year - 100), :prompt => {:day => 'Day', :month => 'Month', :year => 'Year'} %>
 
-            <h6>
-              <%= f.label t('profile.' + current_subject.class.to_s.downcase + '.birthday') %>
-            </h6>
+        <%= f.label :city, t('profile.actualcity') %>
 
-            <%= date_select "profile", "birthday", :order => [:day, :month, :year], :end_year => Date.today.year, :start_year => (Date.today.year - 100), :prompt => {:day => 'Day', :month => 'Month', :year => 'Year'} %>
+        <%= f.text_field :city %>
 
-            <%= f.label t('profile.actualcity') %>
+        <%= f.label :country, t('profile.country') %>
 
+        <%= f.text_field :country %>
 
-            <%= f.text_field :city, :class => "form_tag" %>
+        <%= f.label :description, t("profile.#{ current_subject.class.to_s.downcase }.about") %>
 
-            <%= f.label t('profile.country') %>
+        <%= f.text_area :description, :maxlength => 200, :rows => 10 %>
 
-            <%= f.text_field :country, :class => "form_tag" %>
+        <%= t('required') %>
 
-            <%= f.label t('profile.' + current_subject.class.to_s.downcase + '.about') %>
-
-            <%= f.text_area :description, :maxlength => 200, :rows => 10, :class => "form_tag_long" %>
-
-            <%= t('required') %>
-          <% end %>
-          <%= f.submit t('button.update'), :class => "button" %>
-        <% end %>
+        <%= f.submit %>
       <% end %>
     </div>
-  </div>
+  <% end %>
 </div>
-
-
-

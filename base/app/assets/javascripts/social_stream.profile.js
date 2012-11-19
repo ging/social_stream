@@ -12,7 +12,15 @@ SocialStream.Profile = (function(SS, $, undefined){
 	};
 
   var initEditButtons = function(options) {
-    
+    $("#profile-info .update").hide();
+
+    $("#profile-info .edit_icon a[href=#]").click(function(){
+      $("#profile-info .update").hide();
+
+      var section = $(this).closest('.section');
+      section.find('.briefing').hide();
+      section.find('.update').show();
+    });
   };
 
   var initTagsForm = function(options){
