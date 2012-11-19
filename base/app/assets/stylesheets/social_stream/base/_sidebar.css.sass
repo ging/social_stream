@@ -1,5 +1,4 @@
 #sidebar
-  @include border-radius(5px) 
   @include makeColumn(3, 0)
   padding-top: 10px  
 
@@ -7,8 +6,6 @@
     padding: 5px
     display: block
       
-        
-
 #month_top
   padding: 5px
   text-align: center
@@ -41,17 +38,22 @@
     color: #000
     font-family: $serifFontFamily
     margin-left: 10px
-.content
+.contents
   padding: 5px 4px
-  margin-left: 18px
-  .suggestion
+  width: 100%
+  .content
+    margin-left: 9px
     .logo
+      @include makeColumn(1, 0)
       display: inline
+      margin-left: 0px
       img 
-        margin-top: -68px
+     
     .data
+      @include makeColumn(2, 0)
       display: inline-block
       margin-bottom: 16px
+      margin-left: -7px
       .name
         color: #000
         .x
@@ -61,8 +63,11 @@
             float: right
             text-decoration: none
             color: #888
-      .brief
+            margin-top: -19px
+      .info
+        font-size: 12px
       .add
+        font-size: 12px
 
 
 #pendings
@@ -71,27 +76,37 @@
     font-family: $serifFontFamily
     margin-left: 10px
 
-.content
+.contents
   padding: 5px 4px
-  margin-left: 18px
-  .pendings
+  width: 100%
+  .content
+    margin-left: 9px
     .logo
+      @include makeColumn(1, 0)
       display: inline
+      margin-left: 0px
       img 
-        margin-top: -68px
+     
     .data
+      @include makeColumn(2, 0)
       display: inline-block
       margin-bottom: 16px
+      margin-left: -7px
       .name
-        color: #fff
-      .x
+        color: #000
+        .x
+          font-size: 12px
+          color: black
+          a
+            float: right
+            text-decoration: none
+            color: #888
+            margin-top: -19px
+      .info
         font-size: 12px
-        color: black
-        line-height: 20px
-        a
-          float: right
-          text-decoration: none
-          color: #888
+      .add
+        font-size: 12px
+
 .see-more
   font-size: 12px
   line-height: 20px
