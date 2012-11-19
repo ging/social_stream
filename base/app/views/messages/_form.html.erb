@@ -1,39 +1,39 @@
-<h2><%= t('mailbox.message.new') %></h2>
-<%= form_tag messages_path, :method => :post , :class => "new_message" do %>
-<% if @receipt and @receipt.errors.any? %>
-<div class="error">
-	<h2><%= pluralize(@receipt.errors.count, "error") %> prohibited this message from being sent:</h2>
-	<ul>
-		<% @receipt.errors.full_messages.each do |msg| %>
-		<li>
-			<%= msg %>
-		</li>
-		<% end %>
-	</ul>
-</div>
-<% end %>
-<div class="block">
-	  <div class="form_row">
-      <%= label_tag t('mailboxer.form.recipients') %>
-		</div>
-	  <div class="form_row">
-      <%= select_tag :_recipients, "", :class => "required form_tag" %>
+<h2>
+	<%= t('mailbox.message.new') %>
+</h2>
 
-  </div>
-	<div class="form_row">
-      <%= label_tag t('mailboxer.form.subject') %>
-	</div>
-	<div class="form_row">
-		<%= text_field_tag :subject,nil, :class => "required form_tag" %>
-	</div>
-	<div class="form_row">
-      <%= label_tag t('mailboxer.form.body') %>
-	</div>
-	<div class="form_row" id="ck_editor" >
+<%= form_tag messages_path, :method => :post , :class => "new_message" do %>
+	<% if @receipt and @receipt.errors.any? %>
+		<div class="error">
+			<h2>
+				<%= pluralize(@receipt.errors.count, "error") %> prohibited this message from being sent:
+			</h2>
+			<ul>
+				<% @receipt.errors.full_messages.each do |msg| %>
+					<li>
+						<%= msg %>
+					</li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+  <%= label_tag t('mailboxer.form.recipients') %>
+
+	<%= select_tag :_recipients, "", :class => "required form_tag" %>
+
+	<%= label_tag t('mailboxer.form.subject') %>
+
+	<%= text_field_tag :subject,nil, :class => "required form_tag" %>
+	
+  <%= label_tag t('mailboxer.form.body') %>
+
+	<div id="ck_editor" >
 		<%= text_area_tag :body, nil,:rows =>6, :cols=> 53, :class => "required form_tag", :maxlength => 5000 %>
 	</div>
+	
 	<div class="actions center">
 		<%= submit_tag t('mailboxer.send'), :name => :send_message, :class => "button" %>
 	</div>
-</div>
+
 <% end %>
