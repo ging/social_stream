@@ -18,8 +18,8 @@ SocialStream.Profile = (function(SS, $, undefined){
       $("#profile-info .update").hide();
 
       var section = $(this).closest('.section');
-      section.find('.briefing').hide();
-      section.find('.update').show();
+      section.find('.briefing').hide('slow');
+      section.find('.update').show('slow');
     });
   };
 
