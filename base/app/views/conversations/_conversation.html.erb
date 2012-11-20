@@ -2,7 +2,7 @@
 
   <div class="content_left">
     <div class="avatar">
-      <%= link_to image_tag(conversation.last_sender.logo.url(:actor),
+      <%= link_to image_tag(conversation.last_sender.logo.url(:small),
                             :title => conversation.last_sender.name,
                             :alt => conversation.last_sender.name),
                   conversation.last_sender.subject %>

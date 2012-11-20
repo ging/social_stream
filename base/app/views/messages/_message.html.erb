@@ -1,6 +1,6 @@
 <%= div_for(message, :class => (message.is_unread?(@actor) ? 'unread' : '')) do %>
   <div class="avatar">
-    <%= link_to image_tag(message.sender.logo.url(:contact),
+    <%= link_to image_tag(message.sender.logo.url(:small),
                           :title => message.sender.name,
                           :alt => message.sender.name),
                  message.sender.subject %>
