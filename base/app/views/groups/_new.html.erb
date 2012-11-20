@@ -3,7 +3,6 @@
     link_to(t('group.new.action'), new_group_path)
   ) %>
 
-<div class="space_center"></div>
 
 <%= form_for @group do |f| %>
 	<% if @group.errors.any? %>
@@ -24,7 +23,7 @@
 	  </div>
 
           Bootstrap Typeahead is not fully working yet
-		<div class="space_center"></div>	
+          
 		<div class="form_row">
 			<div class="form_label">
 				<%= f.label t('group.new.name') %>

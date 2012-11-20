@@ -1,5 +1,5 @@
 <% if (groups = current_subject.recent_groups).any? %>
-  <h2 class="content_size">
+  <h2>
       <%=t('group.last') %> (<span class="group_count"><%= groups.count %></span>)
   </h2>
   <% if (groups.count) > 10 %>
