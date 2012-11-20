@@ -15,11 +15,19 @@ SocialStream.Profile = (function(SS, $, undefined){
     $("#profile-info .update").hide();
 
     $("#profile-info .edit_icon a[href=#]").click(function(){
-      $("#profile-info .update").hide();
+      var section = $(this).closest('.section')[0];
+      console.log(section);
 
-      var section = $(this).closest('.section');
-      section.find('.briefing').hide('slow');
-      section.find('.update').show('slow');
+      $("#profile-info .section").each(function(i, el) {
+        if (el === section)
+          return true;
+
+        $(el).find('.briefing').show();
+        $(el).find('.update').hide();
+      });
+
+      $(section).find('.briefing').toggle('slow');
+      $(section).find('.update').toggle('slow');
     });
   };
 
