@@ -1,7 +1,7 @@
 <% if user_signed_in? && current_subject.can_comment?(activity) %>
   <div class="new_comment">
     <div class="avatar">
-      <%= image_tag(current_subject.logo.url("45")) %>
+      <%= image_tag(current_subject.logo.url("small")) %>
     </div>
 
     <header>

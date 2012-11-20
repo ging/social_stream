@@ -14,32 +14,24 @@
   <h2><%= t('contact.addressbook') %></h2>
 <% end %>
 
-<div class="space_center"></div>
 <% cont=0; %>
     <div class="search_field_wrapper">
-      <input type="text" id="search_field" class="search_input" placeholder="Search by name"/>
-      
+      <input type="text" id="search_field" class="search_input" placeholder="Search by name"/> 
     </div>
-    <div class="space_center"></div>
 
-      <div class="center">
-        <%= link_to t('contact.all_n', :count => @total_contacts.count("DISTINCT contacts.id")), contacts_path %> -
-        <% Actor.distinct_initials.
-                 contacted_from(current_subject).
-                 merge(Tie.related_by(current_subject.relation_customs.find_by_id(params[:relation]))).
-                 distinct_initials.
-                 each do |l| %>
-          <%= link_to l.initial,{:letter => l.initial,:page => 1},:class => "contact_letter_link" %>
-        <% end %>
-      </div>
+    <div class="center">
+      <%= link_to t('contact.all_n', :count => @total_contacts.count("DISTINCT contacts.id")), contacts_path %> -
+      <% Actor.distinct_initials.
+               contacted_from(current_subject).
+               merge(Tie.related_by(current_subject.relation_customs.find_by_id(params[:relation]))).
+               distinct_initials.
+               each do |l| %>
+        <%= link_to l.initial,{:letter => l.initial,:page => 1},:class => "contact_letter_link" %>
+      <% end %>
+    </div>
 
-    <div class="space_center"></div>
     <div id="list_contacts_ajax" class="tab_content block">
       <%= render :partial => "contacts/index"%>
     </div>
-    <div class="space_center"></div>
   </div>
 </div>
-
-
-<div class="space_center"></div>
