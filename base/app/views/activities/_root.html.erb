@@ -1,8 +1,6 @@
-<% root_avatar_thumb ||= "45" %>
-
 <%= div_for activity, :class => 'root' do %>
   <div class="avatar">
-    <%= link_to image_tag(activity.sender_subject.logo.url(root_avatar_thumb),
+    <%= link_to image_tag(activity.sender_subject.logo.url('45'),
         :alt => activity.sender_subject.name), activity.sender_subject %>
   </div>
   <header>
