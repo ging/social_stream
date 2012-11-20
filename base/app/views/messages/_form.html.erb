@@ -31,9 +31,9 @@
 	<div id="ck_editor" >
 		<%= text_area_tag :body, nil,:rows =>6, :cols=> 53, :class => "required", :maxlength => 5000 %>
 	</div>
-
-	<div class="actions center">
+	
+	<div class="send" >
 		<%= submit_tag t('mailboxer.send'), :name => :send_message, :class => "btn" %>
-	</div>
+	</div
 
 <% end %>
