@@ -19,7 +19,7 @@
 
   <% if can? :update, @profile %>
     <div class="update">
-      <%= form_for(@profile, :url => [current_subject, :profile], :remote => false) do |f| %>
+      <%= form_for(@profile, :url => [current_subject, :profile]) do |f| %>
 
         <%= f.text_area :experience, :maxlength => 246, :rows => 5 %>
 

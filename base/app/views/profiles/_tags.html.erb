@@ -18,7 +18,7 @@
 
   <% if can?(:update, @profile) %>
     <div class="update">
-      <%= form_for(@profile, :url => [ @profile.subject, :profile ], :remote => true) do |f| %>
+      <%= form_for(@profile, :url => [ @profile.subject, :profile ]) do |f| %>
         <%= f.select :tag_list, [] %>
 
         <%= f.submit %>
