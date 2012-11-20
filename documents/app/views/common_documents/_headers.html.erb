@@ -23,20 +23,19 @@
 
 <br class="clearfloat" />
 
-<div class="resource tabbable">
-  <ul class="nav nav-tabs span7">
+<div class="document-tabs tabbable">
+  <ul class="nav nav-tabs">
+    <li class="">
+      <%= link_to t('document.scope.network'), "#repo-net", "data-toggle" => "tab" %>
+    </li>
     <li class="active">
-      <a href="#repo-1" data-toggle="tab">network</a>
-    </li>
-    <li class="">
-      <a href="#repo-2" data-toggle="tab">my</a>
-    </li>
-    <li class="">
-      <a href="#repo-3" data-toggle="tab">fauvorites</a>
+      <%= link_to t('document.scope.own'), "#repo-own", "data-toggle" => "tab" %>
     </li>
   </ul> 
 </div>
 
+<div class="tab-content">
+  <div id="repo-own"
 <div id="repository_filter">
     <%= text_field_tag :q, nil,:autocomplete => :off, :id => :repository_filter_input %>
 </div>
