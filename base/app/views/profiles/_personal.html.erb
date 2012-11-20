@@ -68,7 +68,7 @@
 
   <% if can? :update, @profile %>
     <div class="update">
-      <%= form_for(@profile, :url => [current_subject, :profile], :remote => false) do |f| %>
+      <%= form_for(@profile, :url => [current_subject, :profile]) do |f| %>
         <h6>
           <%= f.label t('actor.name') %>
           <span class="required">*</span>
