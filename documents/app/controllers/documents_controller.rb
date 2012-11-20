@@ -7,10 +7,6 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       format.html {
         collection
-
-        if params[:no_layout].present?
-          render :layout => false
-        end
       }
 
       format.json { render :json => collection }

@@ -1,3 +1,5 @@
+<h1><%= t 'document.title.other' %></h1>
+
 <% if profile_or_current_subject.present? %>
   <%= render :partial => 'common_documents/index', :locals => { :documents => collection } %>
 <% end %>

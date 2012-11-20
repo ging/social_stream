@@ -23,7 +23,9 @@ en:
       download: "Download"
       edit: "Edit"
     all: "All files"
+    by: "by %{author}"
     confirm_delete: "Delete file?"
+    filter: "filter"
     form:
       title: "File"
     info:
@@ -36,6 +38,10 @@ en:
         title: "Upload"
       title:
         title: "Title"
+    like:
+      n:
+        one: "1 like"
+        other: "%{count} likes"
     mine: "My files"
     name: "file"
     not_mine: "Files"
@@ -44,6 +50,10 @@ en:
     title:
       one: "File"
       other: "Files"
+    view:
+      n:
+        one: "1 view"
+        other: "%{count} views"
   picture:
     confirm_delete: "Delete picture?"
     mine: "My pictures"  
