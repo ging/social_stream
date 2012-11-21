@@ -1,9 +1,8 @@
 <div class="experience section">
   <header>
+    <%= render partial: 'edit_icon' %>
     <h4>
       <%= t("profile.#{ @profile.subject.class.to_s.downcase }.experience") %>
-
-      <%= render partial: 'edit_icon' %>
     </h4>
   </header>
 

@@ -1,9 +1,8 @@
 <div class="personal section">
   <header>
+    <%= render partial: 'edit_icon' %>
     <h4>
       <%= t("profile.#{ @profile.subject.class.to_s.downcase }.info") %>
-
-      <%= render partial: 'edit_icon' %>
     </h4>
   </header>
 
