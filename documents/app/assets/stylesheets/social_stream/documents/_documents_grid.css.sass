@@ -1,26 +1,20 @@
-.thumbnail
+.documents
   @include makeColumn(3, 0)
-  display: inline
- 
-  .logo
+  
+  .thumb
+    @include makeColumn(1, 0)
     display: inline
-    float: left
-    img 
-      margin-right: 8px
-      margin-top: 8px
-  .data
+    margin-top: 10px
+    
+  .brifing
+    @include makeColumn(2, 0)
     display: inline-block
-    margin-bottom: 16px
-    .attachment_tile_text
-      color: #000
-      font-size: 14px
-    .caret
-      margin-right: -16px
-      margin-top: 8px
-      float: right
-      a
-        
-        text-decoration: none
-        color: #888
-    .brief
-    .add
+    margin-left: 0px
+    
+    .author
+      margin-top: -10px
+      font-size: 13px
+    .actions
+      color: #888
+      font-size: 12px
+    
