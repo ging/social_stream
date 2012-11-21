@@ -72,8 +72,7 @@ class Profile < ActiveRecord::Base
       mobile? ||
       fax? ||
       address? ||
-      website? ||
-      actor.email?
+      website?
   end
 
   # True if the profile owner has tags attached
