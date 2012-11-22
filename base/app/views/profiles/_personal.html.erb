@@ -55,9 +55,8 @@
         <h5>
           <%= t("profile.#{ @profile.subject.class.to_s.downcase }.about") %>:
         </h5>
-        <p>
-        <%= h @profile.description %>
-        </p>
+
+        <%= simple_format @profile.description %>
       <% end %>
 
     <% else %>

@@ -8,9 +8,7 @@
 
   <div class="briefing">
     <% if @profile.experience? %>
-    <p>
       <%= simple_format @profile.experience %>
-    <p>
     <% else %>
       <%= render partial: 'empty' %>
     <% end %>
