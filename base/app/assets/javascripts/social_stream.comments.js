@@ -4,14 +4,14 @@
 //= require social_stream.objects
 
 SocialStream.Comments = (function(SS, $, undefined){
-  var hideCommentEl = [
+  var newElementsToHide = [
     ".avatar",
     "h6",
     "input[type=submit]"
   ];
 
   var initNew = function(){
-    initInputsWithComments();
+    initNewElements();
     newCommentAutoSize();
     newCommentClick();
     newCommentLink();
@@ -19,31 +19,47 @@ SocialStream.Comments = (function(SS, $, undefined){
 
   var hideNewCommentElements = function(root) {
     if (root === undefined)
-      root = ".new_comment";
+      root = "div.new_comment";
 
-    $.each(hideCommentEl, function(i, selector) {
-      $(root).find(selector).hide();
+    $.each(newElementsToHide, function(i, selector) {
+      var e = $(root).find(selector);
+      console.dir(e);
+      e.hide();
     });
   };
 
-  var initInputsWithComments = function(){
+  var showNewCommentElements = function(root) {
+    if (root === undefined)
+      root = "div.new_comment";
+
+    $.each(newElementsToHide, function(i, selector) {
+      $(root).find(selector).show();
+    });
+  };
+
+
+  var initNewElements = function(){
+    hideNewCommentElements();
+
     // show only the text fields for new comment
     // if there are any comment to the post
-    $(".activity .new_comment").each(function(){
-      if ($.trim($(this).siblings(".activity .comments").text()) !== ""){
-        hideNewCommentElements($(this));
-      } else {
-        // TODO: find why this is hiding the form of above elements
-        $(this).hide();
+    $(".root").each(function(){
+      var commentsDiv = $(this).find('div.comments');
+      var newDiv = $(this).find('div.new_comment');
+
+      if ($.trim(commentsDiv.text()) === ""){
+        newDiv.find('textarea').hide();
       }
     });
   };
 
 
   var hideNewActivityCommentElements = function(activityId){
-    var selector = $('#' + activityId + " .new_comment");
+    var newDiv = $('#' + activityId).closest('.root').find('div.new_comment');
 
-    hideNewCommentElements(selector);
+    newDiv.find("textarea").val('');
+
+    hideNewCommentElements(newDiv);
   };
 
   var newCommentAutoSize = function(){
@@ -52,23 +68,24 @@ SocialStream.Comments = (function(SS, $, undefined){
 
   var newCommentClick = function(){
     $(".new_comment textarea").click(function(){
-      hideNewCommentElements();
+      var newDiv = $(this).closest("div.new_comment");
 
-      var comment= $(this).parents(".new_comment");
+      showNewCommentElements(newDiv);
+    });
 
-      comment.find("input[type=submit]").show();
-      comment.find(".avatar").show();
 
-      return false;
+    $(".new_comment textarea").blur(function(){
+      if ($(this).val() === "")
+        hideNewCommentElements($(this).closest('div.new_comment'));
     });
   };
 
   var newCommentLink = function(){
     //javascript for tocomment option
     $(".to_comment").click(function(){
-      newCommentEl = $(this).parents(".activity").find(".new_comment");
-      newCommentEl.show();
-      newCommentEl.find('textarea').click().focus();
+      var newDiv = $(this).closest(".root").find("div.new_comment");
+
+      newDiv.find('textarea').show().click().focus();
 
       return false;
     });
