@@ -4,12 +4,6 @@
       <%= image_tag(current_subject.logo.url("small")) %>
     </div>
 
-    <header>
-      <h6>
-        <%= current_subject.name %>
-      </h6>
-    </header>
-
     <%= render partial: 'comments/new_form',
                locals: {
                  owner_id: Actor.normalize_id(activity.receiver),

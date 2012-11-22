@@ -6,7 +6,6 @@
 SocialStream.Comments = (function(SS, $, undefined){
   var newElementsToHide = [
     ".avatar",
-    "h6",
     "input[type=submit]"
   ];
 
