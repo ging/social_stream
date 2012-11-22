@@ -55,7 +55,7 @@ SocialStream.Timeline = (function(SS, $, undefined){
 	};
 
 	var showAllComments = function(id){
-		$("#"+id).children().show();
+		$("#"+id).children().show('show');
 		//and hide the hide_show_comments
 		$("#"+id).children(".hidden_comments").hide();
 	};
