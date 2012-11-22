@@ -45,7 +45,7 @@ SocialStream.Timeline = (function(SS, $, undefined){
 			//check if there are more than 3 comments
 			if (comments.size() > 3){
 				$(this).prepend("<div class='hidden_comments'><a href='#' onclick='SocialStream.Timeline.showAllComments(\"" + 
-					$(this).attr('id') +"\"); return false;'>" + I18n.t('comment.view_all') + "(" +
+					$(this).attr('id') +"\"); return false;'>" + I18n.t('comment.view_all') + " (" +
 					comments.size() + ")</a></div>");
 
 				comments.slice(0, comments.size() - 2).hide();
