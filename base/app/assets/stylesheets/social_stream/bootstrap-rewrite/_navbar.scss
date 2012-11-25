@@ -1,0 +1,16 @@
+// Brand: website or project name
+// -------------------------
+.navbar .brand {
+  float: left;
+  display: block;
+  padding-right: 19px;
+  padding-top: 0px;
+  margin-left: -36px; 
+  font-size: 20px;
+  font-weight: 200;
+  color: $navbarBrandColor;
+  text-shadow: 0 1px 0 $navbarBackgroundHighlight;
+  &:hover {
+    text-decoration: none;
+  }
+}
