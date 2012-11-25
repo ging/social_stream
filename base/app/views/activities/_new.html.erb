@@ -6,7 +6,7 @@
                              :receiver => receiver
                            } %>
   <div id="activities_share_btn">
-  <%= submit_tag(t('share'), :class => "btn-primary", :id => "masterSubmitButton") %>
+  <%= submit_tag(t('share'), :id => "masterSubmitButton") %>
 </div>
 <% end %>
 
@@ -55,5 +55,16 @@
     SocialStream.Wall.init();  
   });
 <% end %>
-</div>
 
+
+<div class="btn-group">
+  <button data-toggle="dropdown" class="btn btn-small dropdown-toggle">Tus contactos
+  </button>
+    <ul class="dropdown-menu">
+      <li><a href="#">friends</a></li>
+      <li><a href="#">acquaintance</a></li>
+      <li><a href="#">college</a></li>
+      <li><a href="#">publico</a></li>
+    </ul>
+  </div>
+</div>
