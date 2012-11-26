@@ -10,7 +10,7 @@
 
      <ul class="nav pull-right">
         <li>
-          <%= link_to '#', class: 'btn' do %>
+          <%= link_to '#' do %>
             <%= image_tag current_subject.logo.url(:representation) %>
             <%= truncate_name(current_subject.name, length: 15) %>
           <% end %>
