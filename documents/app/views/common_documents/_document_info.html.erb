@@ -1,46 +1,45 @@
-  <% if document.description %>
-  <% end %>
- 
-  <div class="first">
-    <div class="view_count">
-      <span class="count">views</span>
-    </div>
-    <div class="like_count">
-      <%= document.like_count %> <span class="count">likes</span>
-    </div>
-  </div>  
+<% if document.description %>
+<% end %>
 
-  <div class="description">
-    <h4>
-      description
-    </h4>
-    <%= document.description %>
+<div class="first">
+  <div class="view_count">
+    <span class="count">views</span>
   </div>
-  <div class="tags">
+  <div class="like_count">
+    <%= document.like_count %> <span class="count">likes</span>
   </div>
+</div>  
 
+<div class="description">
+  <h4>
+    description
+  </h4>
+  <%= document.description %>
+</div>
 
-  <div class="date_labels">
+<div class="tags">
+</div>
+
+<div class="date_labels">
+  <h4>
+    <%= t('document.info.date.created_at') %>
+  </h4>
+  <div class="date">
+    <%= I18n.localize document.created_at, :format => :long %>
+  <h4>
+    <%= t('document.info.date.updated_at') %>
+  </h4>
+  <div class="date">
+    <%= I18n.localize document.updated_at, :format => :long %>
+  </div>
+  <div class="file_size">
     <h4>
-      <%= t('document.info.date.created_at') %>
+      size
     </h4>
-    <div class="date">
-      <%= I18n.localize document.created_at, :format => :long %>
-    <h4>
-      <%= t('document.info.date.updated_at') %>
-    </h4>
-    <div class="date">
-      <%= I18n.localize document.updated_at, :format => :long %>
-    </div>
-
-    <div class="file_size">
-      <h4>
-        size
-      </h4>
-      <span class="details">
+    <span class="details">
       <%= number_to_human_size document.file_file_size %>
     </span>
-    </div>         
-  </div>
-  <%= render :partial => "common_documents/edit_form", :locals => {:document => document} %>
+  </div>         
+</div>
+<%= render :partial => "common_documents/edit_form", :locals => {:document => document} %>
 
