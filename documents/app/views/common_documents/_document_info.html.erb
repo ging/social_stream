@@ -1,48 +1,54 @@
 <div id="document_info">
   <% if document.description %>
   <% end %>
-  <div id="document_details">
-    <div class="left">
-      <div id="date_labels">
-        <div class="details">
-          <%= t('document.info.date.created_at') %>
-        </div>
-        <div class="date">
-          <%= I18n.localize document.created_at, :format => :long %>
-        </div>
-        <div id="file_size">
-        <span class="details">Size </span> <%= number_to_human_size document.file_file_size %>
-      </div>
-    </div>         
-  </div>
-  <div class="right">
-    <div id="document_details">
-      <div class="details">
-        <%= t('document.info.date.updated_at') %>
-      </div>
-      <div class="date">
-        <%= I18n.localize document.updated_at, :format => :long %>
-      </div>
+ 
+  <div class="first">
+    <div id="view_count">
+      <span class="count">views</span>
     </div>
     <div id="like_count">
-      <%= document.like_count %> <span class="details">likes</span>
-    </div>      
+      <%= document.like_count %> <span class="count">likes</span>
+    </div>
+  </div>  
+
+  <div class="title">
+    <h4>
+      title
+    </h4>
   </div>
-  <br class="clearfloat" />
-</div>
-</div>
-<%= render :partial => "common_documents/edit_form", :locals => {:document => document} %> 
-<div id="actions">
-  <% if can? :destroy, document %>
-  <%= link_to content_tag(:span,image_tag("btn/error.png"), :class => :action), document.post_activity.direct_object , :confirm => t('confirm_delete',
-      :scope => document.post_activity.direct_object.class.to_s.underscore), :method => :delete %>
+  <div class="description">
+    <h4>
+      description
+    </h4>
+    <%= document.description %>
+  </div>
+  <div class="tags">
+  </div>
 
-  <% if can? :update, document %>
-  <%= link_to content_tag(:span,image_tag("btn/edit.png"), :class => :action, :id => :document_edit_action), "javascript:SocialStream.Repository.toggleDocumentMenu('edit');" %>
-    <% end %>
-    <% end %>
+
+  <div id="date_labels">
+    <h4>
+      <%= t('document.info.date.created_at') %>
+    </h4>
+    <div class="date">
+      <%= I18n.localize document.created_at, :format => :long %>
+    <h4>
+      <%= t('document.info.date.updated_at') %>
+    </h4>
+    <div class="date">
+      <%= I18n.localize document.updated_at, :format => :long %>
+    </div>
+
+    <div id="file_size">
+      <h4>
+        size
+      </h4>
+      <span class="details">
+      <%= number_to_human_size document.file_file_size %>
+    </span>
+    </div>         
+  </div>
+  <%= render :partial => "common_documents/edit_form", :locals => {:document => document} %> 
 </div>
 
-<div class="description">
-  <%= document.description %>
-</div>
+

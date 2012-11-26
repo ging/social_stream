@@ -7,29 +7,23 @@
   #details
     @include makeColumn(3, 0)
     display:inline-block
+  #document_info
+  display:inline
 
+  .first
+    display:inline
+    #view_count
+      display:inline
+      .count
+    #like_count
+      display:inline-block
+      .count
+  .title
+  .description
 
+  .tags
+  .date_labels
+    .data
+  .file_size
+    .details  
 
-.documents
-  @include makeColumn(6, 0)
-
-.document
-  display: inline
-  
-  .thumb
-    @include makeColumn(1, 0)
-    display: inline
-    margin-top: 10px
-    
-  .brifing
-    @include makeColumn(2, 0)
-    display: inline-block
-    margin-left: 0px
-    
-    .author
-      margin-top: -10px
-      font-size: 13px
-    .actions
-      color: #888
-      font-size: 12px
-    

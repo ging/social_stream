@@ -26,8 +26,15 @@
 	<div class="picture-show">
 		<%= show_view_for document %>
 
+		<div id="actions">
+  <% if can? :destroy, document %>
+  <%= link_to content_tag(:span,image_tag("btn/error.png"), :class => :action), document.post_activity.direct_object , :confirm => t('confirm_delete',
+      :scope => document.post_activity.direct_object.class.to_s.underscore), :method => :delete %>
+
+
 		<%= link_to content_tag(:span,image_tag("btn/download.png"), :class => :action), download_document_path(document) %>
 	</div>
+</div>
 	<div class="tabbable">
 	  <ul class="nav nav-tabs">
 	    <li class="active"><a href="#" data-toggle="tab">Comentarios</a></li>
@@ -41,5 +48,18 @@
 
 
 <div id="details">
+
+	<div class="tabbable" id=" details">
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a href="#details" data-toggle="tab">Detalles</a>
+      </li>
+        <li class=""> <% if can? :update, document %>
+  <%= link_to content_tag(:span,image_tag("btn/edit.png"), :class => :action, :id => :document_edit_action), "javascript:SocialStream.Repository.toggleDocumentMenu('edit');" %>
+    <% end %>
+    <% end %></li>
+    </ul>
+  </div>
+
 	<%= render :partial => "common_documents/document_info", :locals => {:document => document} %>
 </div>
