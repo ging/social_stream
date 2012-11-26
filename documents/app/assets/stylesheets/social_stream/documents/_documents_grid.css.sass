@@ -1,29 +1,38 @@
 #content-large
   @include makeColumn(10, 0)
+  
   .central
     @include makeColumn(7, 0)
     display:inline-block
     margin-left: 0px
+
   #details
     @include makeColumn(3, 0)
     display:inline-block
-  #document_info
-  display:inline
+    margin-top: 20px
+    h4
+      color: #003CFF
+      margin-left: -10px
 
-  .first
-    display:inline
-    #view_count
-      display:inline
-      .count
-    #like_count
-      display:inline-block
-      .count
-  .title
-  .description
-
-  .tags
-  .date_labels
-    .data
-  .file_size
-    .details  
+    .first
+      margin-left: 20px
+      .view_count
+        display: inline
+        color: #003CFF
+        .count
+          color: #888
+      .like_count
+        display: inline-block
+        color: #003CFF
+        .count
+          color: #888
+    .description
+      margin-left: 20px
+    .tags
+      margin-left: 20px
+    .date_labels
+      margin-left: 20px
+      .data
+      .file_size
+        .details  
 

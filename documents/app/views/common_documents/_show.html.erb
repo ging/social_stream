@@ -20,9 +20,9 @@
 
 <br class="clearfloat" />
 
-<h2><%= document.title.nil? ? document.file_file_name : document.title %></h2>
-
 <div class="central">
+	<h2><%= document.title.nil? ? document.file_file_name : document.title %></h2>
+
 	<div class="picture-show">
 		<%= show_view_for document %>
 
@@ -48,18 +48,18 @@
 
 
 <div id="details">
-
-	<div class="tabbable" id=" details">
-    <ul class="nav nav-tabs">
-      <li class="active">
-        <a href="#details" data-toggle="tab">Detalles</a>
-      </li>
-        <li class=""> <% if can? :update, document %>
-  <%= link_to content_tag(:span,image_tag("btn/edit.png"), :class => :action, :id => :document_edit_action), "javascript:SocialStream.Repository.toggleDocumentMenu('edit');" %>
-    <% end %>
-    <% end %></li>
-    </ul>
-  </div>
+	<div class="tabbable">
+    	<ul class="nav nav-tabs">
+      		<li class="active">
+        		<a href="#details" data-toggle="tab">Detalles</a>
+      		</li>
+        	<li class=""> <% if can? :update, document %>
+  				<%= link_to content_tag(:span,image_tag("btn/edit.png"), :class => :action, :id => :document_edit_action), "javascript:SocialStream.Repository.toggleDocumentMenu('edit');" %>
+    			<% end %>
+    			<% end %>
+    		</li>
+    	</ul>
+  	</div>
 
 	<%= render :partial => "common_documents/document_info", :locals => {:document => document} %>
 </div>

@@ -1,21 +1,15 @@
-<div id="document_info">
   <% if document.description %>
   <% end %>
  
   <div class="first">
-    <div id="view_count">
+    <div class="view_count">
       <span class="count">views</span>
     </div>
-    <div id="like_count">
+    <div class="like_count">
       <%= document.like_count %> <span class="count">likes</span>
     </div>
   </div>  
 
-  <div class="title">
-    <h4>
-      title
-    </h4>
-  </div>
   <div class="description">
     <h4>
       description
@@ -26,7 +20,7 @@
   </div>
 
 
-  <div id="date_labels">
+  <div class="date_labels">
     <h4>
       <%= t('document.info.date.created_at') %>
     </h4>
@@ -39,7 +33,7 @@
       <%= I18n.localize document.updated_at, :format => :long %>
     </div>
 
-    <div id="file_size">
+    <div class="file_size">
       <h4>
         size
       </h4>
@@ -48,7 +42,5 @@
     </span>
     </div>         
   </div>
-  <%= render :partial => "common_documents/edit_form", :locals => {:document => document} %> 
-</div>
-
+  <%= render :partial => "common_documents/edit_form", :locals => {:document => document} %>
 
