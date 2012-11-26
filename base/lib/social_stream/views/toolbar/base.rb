@@ -45,7 +45,7 @@ module SocialStream
               #Contacts
               items << {
                 :key => :contacts,
-                :html => link_to(link_to(raw("<i class='iconnav-followers'></i> ")+t('contact.other'), "#", :id => 'toolbar_menu-contacts'),
+                :html => link_to(raw("<i class='iconnav-followers'></i> ")+t('contact.other'), "#", :id => 'toolbar_menu-contacts'),
                 :items => [
                   {
                     :key => :current,
@@ -84,7 +84,7 @@ module SocialStream
               #Information button
               items << {
                 :key => :subject_info,
-                :html => link_to(raw("<i class='icontool16-tool16_info'></i> ")+t('menu.information'), [subject, :profile])
+                :html => link_to(raw("<i class='icontool16-tool16_info'></i>")+t('menu.information'), [subject, :profile])
               }
 
               if subject != current_subject
