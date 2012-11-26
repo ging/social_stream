@@ -5,6 +5,16 @@
     @include makeColumn(7, 0)
     display:inline-block
     margin-left: 0px
+    .picture-show
+      padding: 10px
+      @include border-radius(10px)
+      border: 1px solid #f7f7f7
+      .document
+        @include border-radius(10px)
+        background: black
+        widht: auto
+        height: auto
+
 
   #details
     @include makeColumn(3, 0)
@@ -38,3 +48,60 @@
       .file_size
         .details  
 
+#content-large
+  .documents
+    .child
+      @include makeColumn(6, 1)
+      @include border-radius(5px)
+      display: inline-block
+      margin-left: 55px
+      margin-bottom: 6px
+      background: #f5f5f5
+      padding-left: 6px
+
+      .avatar
+        width: 40px 
+        h6
+          @include makeColumn(5, 0)
+          font-size: 15px
+          margin-left: 20px
+          margin-bottom: 3px
+          text-decoration: none
+          &:hover
+            text-decoration: none
+
+        .objects
+          @include makeColumn(5, 0)
+          margin-left: 66px
+          margin-top: -27px
+          word-wrap: break-word
+          .thumb
+            @include makeColumn(1, 0)
+            margin-left: 0px
+            background: black
+          .text
+            font-size: 14px
+          .description
+            margin: 0 0 4px
+
+        .actions
+          @include makeColumn(6, 0)
+          margin-left: 60px 
+          margin-bottom: 2px
+          margin-top: -5px
+          .post_time_ago
+            display: inline
+            font-size: 12px
+            color: #444
+            .to_comments
+              display: inline-block
+              font-size: 14px
+              margin-left: 5px
+            .to_like
+              display: inline-block
+              font-size: 14px
+              margin-left: 5px
+            .audience
+              display: inline-block
+              font-size: 14px
+              margin-left: 7px
