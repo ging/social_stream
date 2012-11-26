@@ -1,12 +1,11 @@
-<div class="block">
-  <div class="header">
-    <%= image_tag('btn/btn_tag.png', :class => "header_icon") %>
-    <div class="header_text">
-      <%= t 'group.cloud' %>
-    </div>
-  </div>
-  <div id="wordcloud" class="content"></div>
-</div>
+<header>
+  <%= image_tag('btn/btn_tag.png', :class => "header_icon") %>
+  <h5>
+    <%= t 'group.cloud' %>
+  </h5>
+</header>
+<div id="wordcloud" class="content"></div>
+
 
 <% tags = ActivityObject.tag_counts %>
 

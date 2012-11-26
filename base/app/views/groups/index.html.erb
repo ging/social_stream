@@ -28,13 +28,13 @@
         <input type="text" value="Search by name" id="search_field" class="search_input" />
         <%= image_tag("btn/search.png",:size=>"20x20",:id=>"search_button") %>
       </div>
-      <div class="row">
-        <div class="center">
-          <% for g in Group.distinct_initials %>
-            <%= link_to g.initial.capitalize,{:letter => g.initial,:page => 1},:class => "user_letter_link" %>
-          <% end %>
-        </div>
+
+      <div class="center">
+        <% for g in Group.distinct_initials %>
+          <%= link_to g.initial.capitalize,{:letter => g.initial,:page => 1},:class => "user_letter_link" %>
+        <% end %>
       </div>
+
       <div id="list_users_ajax" class="tab_content">
         <%= render :partial => "groups/index"%>
       </div>
