@@ -1,17 +1,13 @@
 <% if (cs = subject.contact_subjects(:direction => :sent)).present? %>
-  <header>
-    <%=image_tag("btn/btn_friend.png", :class => "header_icon")%>
-    <div class="header_text">
-      <%= cs.count %> <%= t('contact', :count => cs.count) %>
-    </div>
-  </header>
-
+  <h4>
+    <%= cs.count %> <%= t('contact', :count => cs.count) %>
+  </h4>
   <div class ="content">
-      <div class="contact">
-        <% cs.each do |contact| %>
-          <%= link_to(image_tag(contact.logo.url(:contact), :alt => contact.name, :title => contact.name, :size => "small"), contact) %>
-        <% end %>
-      </div>
+    <div class="contact">
+      <% cs.each do |contact| %>
+        <%= link_to(image_tag(contact.logo.url(:contact), :alt => contact.name, :title => contact.name, :size => "small"), contact) %>
+      <% end %>
+    </div>
   </div>
 <% end %>
 
