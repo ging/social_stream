@@ -9,21 +9,27 @@
     <% end %>
 
      <ul class="nav pull-right">
-       <li><%= link_to(raw("<i class='iconnav-home'></i> "), root_path)%></li>   
-       <li><%= link_to(t('profile.one'), current_subject)%></li>            
-       <li>
-         <%= link_to(raw("<i class='iconnav-message'></i> "), conversations_path) %> 
-         <!-- <span id="header_inbox_count">
-           <%= link_to(current_subject.unread_messages_count.to_s, conversations_path) %>
-         </span> -->
-       </li>            
-       <li>
-         <%= link_to(raw("<i class='iconnav-notification'></i> "), notifications_path) %>
+        <li>
+          <%= link_to '#', class: 'btn' do %>
+            <%= image_tag current_subject.logo.url(:representation) %>
+            <%= truncate_name(current_subject.name, length: 15) %>
+          <% end %>
+        </li>
+      <li><%= link_to(raw("<i class='iconnav-home'></i> "), root_path)%></li>   
+      <li><%= link_to(t('profile.one'), current_subject)%></li>            
+      <li>
+        <%= link_to(raw("<i class='iconnav-message'></i> "), conversations_path) %> 
+          <!-- <span id="header_inbox_count">
+            <%= link_to(current_subject.unread_messages_count.to_s, conversations_path) %>
+          </span> -->
+      </li>            
+      <li>
+        <%= link_to(raw("<i class='iconnav-notification'></i> "), notifications_path) %>
           <!--<span id="header_notifications">
-           <%= link_to( current_subject.mailbox.notifications.not_trashed.unread.count.to_s, notifications_path) %>
-         </span> -->
-       </li>
-       <%= render partial: 'layouts/header_dropdown_menu' %>
-     </ul>
+            <%= link_to( current_subject.mailbox.notifications.not_trashed.unread.count.to_s, notifications_path) %>
+          </span> -->
+      </li>
+        <%= render partial: 'layouts/header_dropdown_menu' %>
+    </ul>
   </div>
 </div>

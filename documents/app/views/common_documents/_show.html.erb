@@ -21,28 +21,34 @@
 <br class="clearfloat" />
 
 <div class="central">
-	<h2><%= document.title.nil? ? document.file_file_name : document.title %></h2>
+	<h2>
+		<%= document.title.nil? ? document.file_file_name : document.title %>
+	</h2>
 
 	<div class="picture-show">
 		<%= show_view_for document %>
-
 		<div id="actions">
-  <% if can? :destroy, document %>
-  <%= link_to content_tag(:span,image_tag("btn/error.png"), :class => :action), document.post_activity.direct_object , :confirm => t('confirm_delete',
-      :scope => document.post_activity.direct_object.class.to_s.underscore), :method => :delete %>
+  			<% if can? :destroy, document %>
+  			<%= link_to content_tag(:span,image_tag("btn/error.png"), :class => :action), document.post_activity.direct_object , :confirm => t('confirm_delete',
+      			:scope => document.post_activity.direct_object.class.to_s.underscore), :method => :delete %>
 
 
-		<%= link_to content_tag(:span,image_tag("btn/download.png"), :class => :action), download_document_path(document) %>
+			<%= link_to content_tag(:span,image_tag("btn/download.png"), :class => :action), download_document_path(document) %>
+		</div>
 	</div>
-</div>
 	<div class="tabbable">
-	  <ul class="nav nav-tabs">
-	    <li class="active"><a href="#" data-toggle="tab">Comentarios</a></li>
-	  </ul>
+		<ul class="nav nav-tabs">
+		    <li class="active">
+		    	<a href="#" data-toggle="tab">
+		    		Comentarios
+		    	</a>
+		    </li>
+		</ul>
 	</div>
+
 	<div id="document_comments">
-	  <%= render :partial => 'activities/comments', :locals => { :activity => document.post_activity } %>
-	  <%= render :partial => 'comments/new', :locals => { :activity => document.post_activity } %>
+	  	<%= render :partial => 'activities/comments', :locals => { :activity => document.post_activity } %>
+	  	<%= render :partial => 'comments/new', :locals => { :activity => document.post_activity } %>
 	</div>
 </div>
 
@@ -51,7 +57,9 @@
 	<div class="tabbable">
     	<ul class="nav nav-tabs">
       		<li class="active">
-        		<a href="#details" data-toggle="tab">Detalles</a>
+        		<a href="#details" data-toggle="tab">
+        			Detalles
+        		</a>
       		</li>
         	<li class=""> <% if can? :update, document %>
   				<%= link_to content_tag(:span,image_tag("btn/edit.png"), :class => :action, :id => :document_edit_action), "javascript:SocialStream.Repository.toggleDocumentMenu('edit');" %>
