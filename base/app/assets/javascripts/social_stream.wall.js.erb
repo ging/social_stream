@@ -34,7 +34,7 @@ SocialStream.Wall = (function(SS, $, undefined){
       $('.activity_form_selector').removeClass('selected');
       $(this).addClass('selected');
       $('#wrapper_activities_header form').hide();
-      $('#new_'+this.id.split("_")[1]).show();
+      $('#' + this.id.replace(/^select/, 'new')).show();
     });
   }
 
