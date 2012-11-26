@@ -7,8 +7,6 @@
 <%= profile_subject.name + ": " + t('repository.title') %>
 <% end %>
 
-<% sidebar %>
-
 <%if profile_subject_is_current?%>
 <%= location(
   link_to(t('repository.title'), polymorphic_path(controller.controller_name),:remote => true)
@@ -24,11 +22,24 @@
 
 <h2><%= document.title.nil? ? document.file_file_name : document.title %></h2>
 
-<%= show_view_for document %>
+<div class="central">
+	<div class="picture-show">
+		<%= show_view_for document %>
 
-<%= render :partial => "common_documents/document_info", :locals => {:document => document} %>
+		<%= link_to content_tag(:span,image_tag("btn/download.png"), :class => :action), download_document_path(document) %>
+	</div>
+	<div class="tabbable">
+	  <ul class="nav nav-tabs">
+	    <li class="active"><a href="#" data-toggle="tab">Comentarios</a></li>
+	  </ul>
+	</div>
+	<div id="document_comments">
+	  <%= render :partial => 'activities/comments', :locals => { :activity => document.post_activity } %>
+	  <%= render :partial => 'comments/new', :locals => { :activity => document.post_activity } %>
+	</div>
+</div>
 
-<div id="document_comments">
-  <%= render :partial => 'activities/comments', :locals => { :activity => document.post_activity } %>
-  <%= render :partial => 'comments/new', :locals => { :activity => document.post_activity } %>
+
+<div id="details">
+	<%= render :partial => "common_documents/document_info", :locals => {:document => document} %>
 </div>

@@ -40,16 +40,9 @@
   <% if can? :update, document %>
   <%= link_to content_tag(:span,image_tag("btn/edit.png"), :class => :action, :id => :document_edit_action), "javascript:SocialStream.Repository.toggleDocumentMenu('edit');" %>
     <% end %>
-
-  <%= link_to content_tag(:span,image_tag("btn/download.png"), :class => :action), download_document_path(document) %>
     <% end %>
 </div>
 
 <div class="description">
   <%= document.description %>
-</div>
-<div class="tabbable">
-  <ul class="nav nav-tabs">
-    <li class="active"><a href="#" data-toggle="tab">Comentarios</a></li>
-  </ul>
 </div>
