@@ -9,12 +9,7 @@
     <% end %>
 
      <ul class="nav pull-right">
-        <li>
-          <%= link_to '#' do %>
-            <%= image_tag current_subject.logo.url(:representation) %>
-            <%= truncate_name(current_subject.name, length: 15) %>
-          <% end %>
-        </li>
+        
       <li><%= link_to(raw("<i class='iconnav-home'></i> "), root_path)%></li>   
       <li><%= link_to(t('profile.one'), current_subject)%></li>            
       <li>
@@ -28,8 +23,9 @@
           <!--<span id="header_notifications">
             <%= link_to( current_subject.mailbox.notifications.not_trashed.unread.count.to_s, notifications_path) %>
           </span> -->
-      </li>
+      <li>
         <%= render partial: 'layouts/header_dropdown_menu' %>
+      </li>
     </ul>
   </div>
 </div>
