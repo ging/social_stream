@@ -16,7 +16,7 @@
         height: auto
 
 
-  #details
+  .details
     @include makeColumn(3, 0)
     display:inline-block
     margin-top: 20px
@@ -24,18 +24,14 @@
       color: #00C3FF
       margin-left: -10px
 
-    .first
-      margin-left: 20px
-      .view_count
+    .counters
+      color: #888
+      .counter
         display: inline
         color: #00C3FF
-        .count
-          color: #888
-      .like_count
-        display: inline-block
-        color: #00C3FF
-        .count
-          color: #888
+        font-sixe: 15px
+
+
     .description
       margin-left: 20px
     .tags
