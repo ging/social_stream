@@ -1,5 +1,5 @@
 <div class="dropdown">
-    <%= link_to '#' do %>
+    <%= link_to current_subject do %>
       <%= image_tag current_subject.logo.url(:representation) %>
       <%= truncate_name(current_subject.name, length: 15) %>
     <% end %>
