@@ -2,8 +2,6 @@
   <%= "#{ profile_subject && profile_subject.name + ': ' }#{ t('repository.title') }" %>
 <% end %>
 
-<% sidebar %>
-
 <% if profile_subject %>
   <%= location(
     link_to(profile_subject.name, polymorphic_path(profile_subject),:remote => true),
