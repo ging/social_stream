@@ -29,15 +29,15 @@ en:
     form:
       title: "File"
     info:
+      author: "Author"
       date:
         created_at: "Created at"
         updated_at: "Updated at"
-      description:
-        title: "Description"
-      file:
-        title: "Upload"
-      title:
-        title: "Title"
+      description: "Description"
+      file: "File"
+      size: "Size"
+      tags: "Tags"
+      title: "Title"
     like:
       n:
         one: "1 like"

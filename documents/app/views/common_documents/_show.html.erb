@@ -4,70 +4,75 @@
 <% profile_subject ||= document.owner_subject %>
 
 <% content_for :title do %>
-<%= profile_subject.name + ": " + t('repository.title') %>
+  <%= profile_subject.name + ": " + t('repository.title') %>
 <% end %>
-
-<%if profile_subject_is_current?%>
-<%= location(
-  link_to(t('repository.title'), polymorphic_path(controller.controller_name),:remote => true)
-  ) %>
-<%else%>
-<%= location(
-  link_to(profile_subject.name, polymorphic_path(profile_subject),:remote => true),
-  link_to(t('repository.title'), polymorphic_path([profile_subject, controller.controller_name]),:remote => true)
-  ) %>
-<%end%>
 
 <br class="clearfloat" />
 
-<div class="central">
-	<h2>
-		<%= document.title.nil? ? document.file_file_name : document.title %>
-	</h2>
+<%= div_for document do %>
+  <div class="central">
+    <h2>
+      <%= document.title %>
+    </h2>
 
-	<div class="picture-show">
-		<%= show_view_for document %>
-		<div id="actions">
-  			<% if can? :destroy, document %>
-  			<%= link_to content_tag(:span,image_tag("btn/error.png"), :class => :action), document.post_activity.direct_object , :confirm => t('confirm_delete',
-      			:scope => document.post_activity.direct_object.class.to_s.underscore), :method => :delete %>
+    <div class="show">
 
+      <%= show_view_for document %>
 
-			<%= link_to content_tag(:span,image_tag("btn/download.png"), :class => :action), download_document_path(document) %>
-		</div>
-	</div>
-	<div class="tabbable">
-		<ul class="nav nav-tabs">
-		    <li class="active">
-		    	<a href="#" data-toggle="tab">
-		    		Comentarios
-		    	</a>
-		    </li>
-		</ul>
-	</div>
+      <div class="actions">
+        <% if can? :destroy, document %>
+          <%= link_to image_tag("btn/error.png", alt: t('document.actions.delete'), title: t('document.actions.delete')), document,
+                      :confirm => t('confirm_delete', :scope => document.class.to_s.underscore),
+                      :method => :delete %>
+        <% end %>
 
-	<div id="document_comments">
-	  	<%= render :partial => 'activities/comments', :locals => { :activity => document.post_activity } %>
-	  	<%= render :partial => 'comments/new', :locals => { :activity => document.post_activity } %>
-	</div>
-</div>
+        <%= link_to image_tag("btn/download.png", alt: t('document.actions.download'), title: t('document.actions.download')), download_document_path(document) %>
+        </div>
+      </div>
 
+      <div class="tabbable">
+        <ul class="nav nav-tabs">
+          <li class="active">
+          <a href="#comments" data-toggle="tab">
+            <%= t 'comment.title.other' %>
+          </a>
+          </li>
+        </ul>
 
-<div id="details">
-	<div class="tabbable">
-    	<ul class="nav nav-tabs">
-      		<li class="active">
-        		<a href="#details" data-toggle="tab">
-        			Detalles
-        		</a>
-      		</li>
-        	<li class=""> <% if can? :update, document %>
-  				<%= link_to content_tag(:span,image_tag("btn/edit.png"), :class => :action, :id => :document_edit_action), "javascript:SocialStream.Repository.toggleDocumentMenu('edit');" %>
-    			<% end %>
-    			<% end %>
-    		</li>
-    	</ul>
-  	</div>
+        <div class="tab-content">
+          <div id="comments" class="comments">
+            <%= render :partial => 'activities/comments', :locals => { :activity => document.post_activity } %>
+            <%= render :partial => 'comments/new', :locals => { :activity => document.post_activity } %>
+          </div>
+        </div>
+      </div>
+    </div>
 
-	<%= render :partial => "common_documents/document_info", :locals => {:document => document} %>
-</div>
+    <div class="details">
+      <div class="tabbable">
+        <ul class="nav nav-tabs">
+          <li class="<%= document_details_tab_class document, :info %>">
+            <%= link_to t('document.details.info'), '#document-info', 'data-toggle' => 'tab' %>
+          </li>
+
+          <% if can? :update, document %>
+          <li class="<%= document_details_tab_class document, :edit %>">
+            <%= link_to image_tag("btn/edit.png", alt: t('document.actions.edit')), '#document-edit', 'data-toggle' => 'tab' %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="tab-content">
+        <div class="tab-pane <%= document_details_tab_class document, :info %>" id="document-info">
+          <%= render partial: "common_documents/info", locals: { document: document } %>
+        </div>
+        <% if can? :update, document %>
+          <div class="tab-pane <%= document_details_tab_class document, :edit %>" id="document-edit">
+            <%= render partial: 'common_documents/edit', locals: { document: document } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
