@@ -37,6 +37,8 @@ es:
       title: "Título"
     mine: "Mis ficheros"
     name: "fichero"
+    new_activity:
+      attach: "Adjuntar fichero"
     not_mine: "Ficheros"
     one: "un fichero"
     simple_all: "Todos"

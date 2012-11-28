@@ -40,6 +40,8 @@ en:
       title: "Title"
     mine: "My files"
     name: "file"
+    new_activity:
+      attach: "Attach file"
     not_mine: "Files"
     one: "a file"
     simple_all: "All"  
