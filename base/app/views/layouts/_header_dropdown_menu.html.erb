@@ -1,6 +1,6 @@
 <div class="dropdown">
     <%= link_to current_subject do %>
-      <%= image_tag current_subject.logo.url(:representation) %>
+      <%= image_tag current_subject.logo.url(:small) %>
       <%= truncate_name(current_subject.name, length: 15) %>
     <% end %>
     <%= link_to '#', class: 'dropdown-toggle', "data-toggle" => "dropdown" do %>
