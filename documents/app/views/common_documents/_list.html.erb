@@ -12,10 +12,8 @@
         <%= raw t('document.by', author: link_to(document.author.name, document.author_subject)) %>
       </div>
 
-      <div class="counters">
-        <span class="visit_count"> <%= t "document.view.n", count: "<span class\"counter\">#{ document.visit_count }</span>" %></span> /
-        <span class="like_count"><%= t 'document.like.n', count: "<span class\"counter\">#{ document.post_activity.likes.count }</span>" %></span>
-      </div>
+      <%= render partial: 'objects/counters', locals: { object: document } %>
+
     </div>
   <% end %>
 <% end %>

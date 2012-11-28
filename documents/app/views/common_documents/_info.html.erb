@@ -1,8 +1,5 @@
 <div class="info">
-  <div class="counters">
-    <span class="visit_count"> <%= raw t("document.view.n", count: "<span class=\"counter\">#{ document.visit_count }</span>") %></span> /
-    <span class="like_count"><%= raw t('document.like.n', count: "<span class=\"counter\">#{ document.post_activity.likes.count }</span>") %></span>
-  </div>
+  <%= render partial: 'objects/counters', locals: { object: document } %>
 
   <div class="description <%= 'blank' if document.description.blank? %>">
     <h4>

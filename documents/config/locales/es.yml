@@ -35,10 +35,6 @@ es:
       description: "Descripción"
       file: "Fichero"
       title: "Título"
-    like:
-      n:
-        one: "1 fan"
-        other: "%{count} fans"
     mine: "Mis ficheros"
     name: "fichero"
     not_mine: "Ficheros"
@@ -47,10 +43,6 @@ es:
     title:
       one: "Fichero"
       other: "Ficheros"
-    view:
-      n:
-        one: "1 vista"
-        other: "%{count} vistas"
   picture:
     confirm_delete: "¿Borrar imagen?"
     mine: "Mis imágenes"

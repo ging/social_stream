@@ -184,9 +184,16 @@ en:
     type:
       new: "+ New type"
     unfollow: "Unfollow"
-  copyright: "2010 Copyright - All rights reserved"
+  copyright: "2013 Copyright - All rights reserved"
+  counter:
+    like:
+      one: "<span class=\"counter\">%{count}</span> like"
+      other: "<span class=\"counter\">%{count}</span> likes"
+    view:
+      one: "<span class=\"counter\">%{count}</span> view"
+      other: "<span class=\"counter\">%{count}</span> views"
   delete:
-    confirm: Delete %{element}}?
+    confirm: "Delete %{element}}?"
   devise:
     links:
       sign_in: "Sign in"

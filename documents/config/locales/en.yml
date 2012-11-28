@@ -38,10 +38,6 @@ en:
       size: "Size"
       tags: "Tags"
       title: "Title"
-    like:
-      n:
-        one: "1 like"
-        other: "%{count} likes"
     mine: "My files"
     name: "file"
     not_mine: "Files"
@@ -50,10 +46,6 @@ en:
     title:
       one: "File"
       other: "Files"
-    view:
-      n:
-        one: "1 view"
-        other: "%{count} views"
   picture:
     confirm_delete: "Delete picture?"
     mine: "My pictures"  

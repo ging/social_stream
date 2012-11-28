@@ -183,7 +183,14 @@ es:
     type:
       new: "+ Nuevo tipo"
     unfollow: "Dejar de seguir"
-  copyright: "2011 Copyright - Derechos reservados"
+  copyright: "2013 Copyright - Derechos reservados"
+  counter:
+    like:
+      one: "<span class=\"counter\">%{count}</span> fan"
+      other: "<span class=\"counter\">%{count}</span> fans"
+    view:
+      one: "<span class=\"counter\">%{count}</span> vista"
+      other: "<span class=\"counter\">%{count}</span> vistas"
   delete:
     confirm: "¿Borrar %{element}}?"
   devise:
