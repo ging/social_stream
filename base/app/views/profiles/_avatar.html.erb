@@ -1,11 +1,8 @@
 <div class="avatar section">
   <header>
+  	<%= render partial: 'edit_icon' %>
     <h4>
       <%= t('avatar.profile_change') %>
     </h4>
-
-    <div class="edit_icon">
-      <%= link_to image_tag('edit_icon.png'), avatars_path %>
-    </div>
-  </div>
+  </header>
 </div>
