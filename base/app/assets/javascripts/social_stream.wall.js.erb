@@ -3,157 +3,45 @@
 //= require social_stream.timeline
 
 SocialStream.Wall = (function(SS, $, undefined){
-  var initCallbacks = [];
+  var showCallbacks = [];
+  var showOptions;
 
-  var addInitCallback = function(callback){
-    initCallbacks.push(callback);
-  }
+  var addShowCallback = function(callback){
+    showCallbacks.push(callback);
+  };
 
-  var init = function(){
-    $.each(initCallbacks, function(i, callback){ callback(); });
-  }
+  var show = function(options){
+    showOptions = options;
+    $.each(showCallbacks, function(i, callback){ callback(options); });
+  };
 
-  var initFirstForm = function(){
-    $('#wrapper_activities_header form').hide();
-    $('#new_<%= SocialStream.activity_forms.first %>').show();
-    $('#select_<%= SocialStream.activity_forms.first %>').addClass('selected');
-  }
-
-  var initFormButton = function(){
-    $('#masterSubmitButton').click(function(){
-      $('#wrapper_activities_header form:visible').submit();
+  var initRelationSelect = function(options){
+    $('.wall_input select[name*="relation_ids"]').multiselect({
+      'button': 'btn btn-small',
+      'text': relationSelectText
     });
-  }
+  };
 
-  var initPostWatermark = function(){
-    $("#input_activities").watermark(I18n.t('post.input'), "#666");
-  }
-
-  var initFormSelector = function(){
-    $('.activity_form_selector').click(function(){
-      $('.activity_form_selector').removeClass('selected');
-      $(this).addClass('selected');
-      $('#wrapper_activities_header form').hide();
-      $('#new_'+this.id.split("_")[1]).show();
-    });
-  }
-
-  var changeSecurityImage = function(type) {
-    $('#security_chzn .chzn-choices').
-      css('background-image', 'url(<%= asset_path('btn/') %>' + type + '.png)');
-  }
-
-
-  var initSecuritySelect = function(){
-    var default_security_width = '100px';
-
-    chosen = $('#security').security_chosen();
-
-    $('#security').change(function() {    
-      $(this).children("option:selected").each(function(i,opt){
-        if(opt.value==relation_public){
-          if(public_selected==false){
-            public_selected = true;
-            for(id in relation_options){
-              if(id==relation_public_pos){
-                $("#securitychzn_o_" + relation_public_pos).click();
-              }else{
-                chosen.result_deselect(id); 
-              }                       
-            }
-            chosen.results_update_field();
-          }else{
-            if($('#security').children("option:selected").size()>1){
-              public_selected = false;          
-              chosen.result_deselect(relation_public_pos);
-              chosen.results_update_field();
-            }
-          }
-          changeSecurityImage('public');
-        } else {
-          changeSecurityImage('restricted');
-        }
+  var relationSelectText = function(options) {
+    if (options.length == 0) {
+      return showOptions.wallInput.blankText;
+    }
+    else if (options.length > 3) {
+      return I18n.t('activity.privacy.relation', { count: options.length });
+    } else {
+      var selected = '';
+      options.each(function() {
+        selected += $(this).text() + ', ';
       });
 
-      $('#securities .search-choice a').click(function(){
-        if($('#security').children("option:selected").size()==0){
-          $('#securities input').css('width', default_security_width)
-        }
-      });      
-    });
+      return selected.substr(0, selected.length - 2);
+    }
+  };
 
-    $('#securities input').blur(function(){
-      if($('#security').children("option:selected").size()==0){
-        $('#securities input').css('width', default_security_width)
-      }
-    });
+  addShowCallback(initRelationSelect);
 
-    // Remove width calculation
-    $('#securities input.default').css('width', default_security_width);
-
-  }
-
-  var activateAntiRebounds = function(){
-    $('#wrapper_activities_header form').submit(function() {
-      $(this).find('input[type=text]').each(function() {
-        $(this).blur().attr('readonly', true);
-      });
-      $("#masterSubmitButton").val(I18n.t('activity.sending') + '...').attr("disabled", true); 
-
-      // Add relation_ids[] parameter from authorization selector
-      $('.liveAdded').remove();
-
-      var currentForm = $(this);
-
-      $('#security option:selected').each(function() {
-        currentForm.append(
-          $('<input/>')
-          .addClass('liveAdded')
-          .attr('type', 'hidden')
-          .attr('name', currentForm
-            .attr('id').split('_')[1]+'[relation_ids][]')
-          .val($(this).attr('value')));
-      });
-      return true;
-    });
-
-    $('.new_comment').submit(function() {
-      $(this).find('input[type=text]').each(function() {
-        $(this).blur().attr('readonly', true); 
-      });
-      $(this).find(".submitActivity").each(function() {
-        $(this).val(I18n.t('activity.sending') + '...').attr("disabled", true);   
-      });
-      return true;    
-    });
-  }
-
-  var unblockForms = function() {  
-    //Sharing buttons
-    $(".submitActivity").val(I18n.t('share')).removeAttr("disabled");  
-    //Header activities form
-    $("#masterSubmitButton").val(I18n.t('share')).removeAttr("disabled");
-    $('#wrapper_activities_header form').find('input[type=text]').each(function() {
-      $(this).removeAttr("readonly").val("").blur();
-    });  
-    //New comments
-    $('.input_new_comments').each(function() {
-      $(this).removeAttr("readonly").val("");
-    }); 
-  }
-
-  addInitCallback(initFirstForm);
-  addInitCallback(initFormButton);
-  addInitCallback(initPostWatermark );
-  addInitCallback(initFormSelector);
-  addInitCallback(initSecuritySelect);
-  addInitCallback(activateAntiRebounds);
-
-  SS.Timeline.addCreateCallback(unblockForms);
   return {
-    addInitCallback: addInitCallback,
-      init: init,
-      activateAntiRebounds: activateAntiRebounds,
-      unblockForms: unblockForms
+    show: show,
+    addShowCallback: addShowCallback
   };
 }) (SocialStream, jQuery)

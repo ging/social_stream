@@ -53,15 +53,18 @@ en:
     one: "Activity"
     other: "Activities"
     privacy:
-      myself:
-        contacts:
+      contact:
+        myself:
           group: "All members"
           user: "Your contacts"
-      outside:
-        contacts:
+        outside:
           group: "Members of %{receiver}"
           user: "Contacts of %{receiver}"
+      relation:
+        one: "%{count} group"
+        other: "%{count} groups"
     sending: "Sending"
+    share: "Share"
     stream:
       atom_title: "Activity Stream from %{subject}"
       title:

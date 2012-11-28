@@ -4,13 +4,13 @@ SocialStream.Linkser.Wall = (function(SS, $) {
   var regexp = /^(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&;:\/~+#-]*[\w@?^=%&;\/~+#-])?$/
 
   var urlDetect = function() {
-    this.currentValue = $("#input_activities").val();
+    this.currentValue = $("#post_text").val();
 
     if(this.lastValue == null)
       this.lastValue = "";
 
-    if(regexp.test($("#input_activities").val())) {
-      $("#link_url").val($("#input_activities").val());
+    if(regexp.test($("#post_text").val())) {
+      $("#link_url").val($("#post_text").val());
       $("#link_loaded").val(false);
       $("#new_post").attr("action", "/links");
 
@@ -26,13 +26,13 @@ SocialStream.Linkser.Wall = (function(SS, $) {
           url : "/linkser_parse?url=" + url,
           dataType: 'html',
           success : function(html) {
-            if($("#input_activities").val() == url) {//Only show if input value is still the same
+            if($("#post_text").val() == url) {//Only show if input value is still the same
               $("#link_preview").html(html);
               $("#link_loaded").val(true);
             }
           },
           error : function(xhr, ajaxOptions, thrownError) {
-            if($("#input_activities").val() == url) {//Only show if input value is still the same
+            if($("#post_text").val() == url) {//Only show if input value is still the same
               $("#link_preview").html($('<div>').addClass('loading').html(I18n.t('link.errors.loading') + " " + url));
             }
           }
@@ -52,7 +52,7 @@ SocialStream.Linkser.Wall = (function(SS, $) {
     $.preloadImages("<%= asset_path('loading.gif') %>");
 
     if($("#new_post").length) {
-      $("#input_activities").change(urlDetect).keyup(urlDetect);
+      $("#post_text").change(urlDetect).keyup(urlDetect);
 
       $("#new_post").append($('<input>').attr('type', 'hidden').attr('name', 'link[owner_id]').attr('id', 'link_owner_id').val($("#post_owner_id").val()));
       $("#new_post").append($('<input>').attr('type', 'hidden').attr('name', 'link[url]').attr('id', 'link_url'));
@@ -71,12 +71,10 @@ SocialStream.Linkser.Wall = (function(SS, $) {
       $("#" + id).html($('<iframe>').attr('src',url).attr('width','470').attr('height',height));
   }
 
-  SocialStream.Wall.addInitCallback(init);
+  SocialStream.Wall.addShowCallback(init);
 
   return {
     openCallback: openCallback
   }
 
 })(SocialStream, jQuery);
-
-

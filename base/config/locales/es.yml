@@ -52,15 +52,18 @@ es:
     one: "Actividad"
     other: "Actividades"
     privacy:
-      myself:
-        contacts:
+      contact:
+        myself:
           group: "Todos los integrantes"
           user: "Tus contactos"
-      outside:
-        contacts:
+        outside:
           group: "Integrantes de %{receiver}"
           user: "Contactos de %{receiver}"
+      relation:
+        one: "%{count} grupo"
+        other: "%{count} grupos"
     sending: "Enviando"
+    share: "Compartir"
     stream:
       atom_title: "Actividades de %{subject}"
       title:
