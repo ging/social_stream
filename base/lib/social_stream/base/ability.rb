@@ -1,6 +1,6 @@
 module SocialStream
-  class Ability
-    module Base
+  module Base
+    module Ability
       include CanCan::Ability
 
       # Create a new ability for this user, who is currently representing subject

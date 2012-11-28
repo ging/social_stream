@@ -54,4 +54,5 @@ require 'social_cheesecake'
 # I18n-js
 require 'i18n-js'
 require 'i18n-js/social_stream-base'
-
+# RubyParser
+require 'ruby_parser'

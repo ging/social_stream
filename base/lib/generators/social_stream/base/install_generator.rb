@@ -59,4 +59,71 @@ class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
     Rake::Task['railties:install:migrations'].reenable
     Rake::Task['social_stream_base_engine:install:migrations'].invoke
   end
+
+  def create_ability_file
+    ability_code = [
+      "class Ability",                                            #0
+      "  include SocialStream::Ability",                          #1
+      "",                                                         #2
+      "  def initialize(subject)",                                #3
+      "    super",                                                #4
+      "",                                                         #5
+      "    # Add your authorization rules here",                  #6
+      "    # For instance:",                                      #7
+      "    #    can :create, Comment",                            #8
+      "    #    can [:create, :destroy], Post do |p|",            #9
+      "    #      p.actor_id == Actor.normalize_id(subject)",     #10
+      "    #    end",                                             #11
+      "  end",                                                    #12
+      "end"]                                                      #13
+    ability_file = 'app/models/ability.rb'
+
+    if FileTest.exists? ability_file
+      code = RubyParser.new.parse File.read ability_file
+
+      ability_class = nil
+      if (code.sexp_type == :class)
+        if (code.sexp_body.first.to_s == 'Ability')
+          ability_class = code
+        end
+      else
+        code.each_of_type(:class) do |klass|
+          if klass.sexp_body.first == 'Ability'
+            ability_class = klass
+          end
+        end
+      end
+      if ability_class
+        include_found = false
+        initialize_found = false
+        super_found = false
+        code.each_of_type(:defn) do |method|
+          if method.sexp_body.first.to_s == "initialize"
+            initialize_found = true
+            method.each_of_type(:zsuper) { super_found = true }
+          end
+        end
+        if not File.read(ability_file).include?("include SocialStream::Ability\n")
+          inject_into_file ability_file, ability_code[1..2].join("\n")+"\n", :after => /class Ability(.*)\n/
+        end
+        if initialize_found
+          if super_found
+            inject_into_file ability_file, ability_code[6..11].join("\n")+"\n", :after => /def initialize(.*)\n/
+          else
+            inject_into_file ability_file, ability_code[4..11].join("\n")+"\n", :after => /def initialize(.*)\n/
+          end
+        else
+          inject_into_file ability_file, ability_code[2..12].join("\n")+"\n", :after => /include SocialStream::Ability\n/
+        end
+      else
+        # ability.rb without Ability class. Should we raise an exception?
+        append_to_file ability_file, ability_code.join("\n")
+      end
+    else
+      create_file ability_file, ability_code.join("\n")
+    end
+    # Does not work correctly when the old Ability class inherits from a class
+    # or includes a module whose 'initialize' method is non-empty and does not
+    # call 'super'
+  end
 end

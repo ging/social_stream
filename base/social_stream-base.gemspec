@@ -63,6 +63,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('social_cheesecake','~> 0.5.0')
   # I18n-js
   s.add_runtime_dependency('i18n-js','~>2.1.2')
+  # RubyParser
+  s.add_runtime_dependency('ruby_parser', '~>3.0.4')
 
   # Development gem dependencies
   #
