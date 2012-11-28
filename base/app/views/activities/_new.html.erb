@@ -12,8 +12,6 @@
 
       <%= f.select "relation_ids", options_for_select(current_subject.activity_relations_for(receiver).sort.map{ |r| [ r.name, r.id ] }), {}, { multiple: true } %> 
 
-      <% t("activity.privacy.myself.contacts.#{ receiver.class.to_s.underscore }") %>
-
       <%= f.submit t('activity.share') %>
 
     <% end %>
