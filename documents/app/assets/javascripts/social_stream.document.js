@@ -49,12 +49,25 @@ SocialStream.Document = (function(SS, $, undefined){
           name: 'document[file]',
           type: 'file'
         }).insertAfter('.wall_input textarea.document_description');
+
+        $('.wall_input form').
+          attr('action', $(this).attr('data-path')).
+          attr('enctype', 'multipart/form-data'); // this is ignored if done after creating the file input
+
+        $('.wall_input input[name="post[owner_id]"]').attr('name', 'document[owner_id');
+        $('.wall_input select[name="post[relation_ids][]"]').attr('name', 'document[relation_ids][]');
       }
+
 
       if ($('.wall_input input[type=file]').is(":visible")) {
         $('.wall_input input[type=file]').trigger('click');
       }
+
+      $('.wall_input input[type=file]').change(function(){
+        $("#post_text").val($(this).val().replace(/C:\\fakepath\\/i, ''));
+      });
     });
+
 
   };
 
