@@ -25,6 +25,8 @@ en:
     all: "All files"
     by: "by %{author}"
     confirm_delete: "Delete file?"
+    description:
+      input: "Add a description here"
     filter: "filter"
     form:
       title: "File"
@@ -46,6 +48,7 @@ en:
     one: "a file"
     simple_all: "All"  
     title:
+      input: "File title"
       one: "File"
       other: "Files"
   picture:
