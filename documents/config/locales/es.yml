@@ -24,6 +24,8 @@ es:
     all: "Todos los ficheros"
     by: "por %{author}"
     confirm_delete: "¿Borrar fichero?"
+    description:
+      input: "Añade una descripción aquí"
     filter: "filtrar"
     form:
       title: "Fichero"
@@ -43,6 +45,7 @@ es:
     one: "un fichero"
     simple_all: "Todos"
     title:
+      input: "Título del fichero"
       one: "Fichero"
       other: "Ficheros"
   picture:
