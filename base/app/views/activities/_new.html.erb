@@ -5,6 +5,8 @@
     
       <%= f.text_field :text, placeholder: t('post.input') %>
 
+      <%= f.submit t('activity.share') %>
+
       <% SocialStream.activity_forms.each do |element| %>
         <%= render partial: "#{ element.to_s.pluralize }/new_activity",
                    locals: { f: f, receiver: receiver } %>
@@ -12,7 +14,6 @@
 
       <%= f.select "relation_ids", options_for_select(current_subject.activity_relations_for(receiver).sort.map{ |r| [ r.name, r.id ] }), {}, { multiple: true } %> 
 
-      <%= f.submit t('activity.share') %>
 
     <% end %>
   </div>

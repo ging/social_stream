@@ -3,6 +3,61 @@
   h2
     font-family: $serifFontFamily
 
+  .wall_input
+    @include border-radius(15px) 
+    background-color: #ccc
+    padding: 5px 34px 7px 11px
+
+
+
+    input
+      @include makeColumn(6, 0)
+      @include border-radius(15px)
+      margin-top: 8px
+      display: block
+      &[type="submit"]
+        width: auto
+        padding: 3px 11px 4px 11px
+        float: right
+
+      &[type="checkbox"]
+        width: 30px
+        margin-left: 0px
+        margin-top: 3px
+        
+
+
+
+    .new_document
+      display: inline
+      margin-left: 20px
+      margin-top: 7px
+
+    .btn-group,
+    open
+      display: inline-block
+      .dropdown-menu
+        li
+          margin-left: 0px
+          padding-left: 7px
+          a
+            padding: 0px !important
+            label
+              margin-left: 0px
+              padding-left: 0px !important
+              padding-right: 16px
+              &:hover
+                background: rgb(0,232,232)
+                color: white
+
+
+
+
+
+
+
+      
+
 #flash
   @include makeColumn(10, 0)
 
