@@ -380,7 +380,7 @@ es:
     confirm_delete: "¿Borrar texto?"
     form:
       title: "Texto"
-    input: "¿Qué quieres compartir?"
+    input: "Comparte tus ideas..."
     name: "publicación"
     one: "una publicación"
     title:

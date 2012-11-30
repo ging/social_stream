@@ -381,7 +381,7 @@ en:
     confirm_delete: "Delete post?"
     form:
       title: "Post"
-    input: "What are you doing?"
+    input: "Share you thoughts here!"
     name: "post"
     one: "a post"
     title:
