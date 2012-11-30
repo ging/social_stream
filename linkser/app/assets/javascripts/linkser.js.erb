@@ -13,6 +13,7 @@ SocialStream.Linkser.Wall = (function(SS, $) {
       $("#link_url").val($("#post_text").val());
       $("#link_loaded").val(false);
       $("#new_post").attr("action", "/links");
+      SS.Wall.changeRelationSelect('link');
 
       if(this.currentValue != this.lastValue) {
         $("#link_preview").html($('<img>').attr('src', '<%= asset_path('loading.gif') %>').addClass('loading'));
@@ -41,12 +42,20 @@ SocialStream.Linkser.Wall = (function(SS, $) {
 
       $("#link_preview").show();
     } else {
-      $("#new_post").attr("action", "/posts");
-      $("#link_preview").hide();
-      $("#link_preview").html("");
-      $("#link_url").val("");
+      resetWallInput({ postText: false });
     }
   }
+
+  var resetWallInput = function(options) {
+    $("#new_post").attr("action", "/posts");
+    $("#link_preview").hide().html('');
+    $("#link_url").val("");
+    SS.Wall.changeRelationSelect('post');
+
+    if (options.postText) {
+      $('#post_text').val('');
+    }
+  };
 
   var init = function(){
     $.preloadImages("<%= asset_path('loading.gif') %>");
@@ -86,9 +95,14 @@ SocialStream.Linkser.Wall = (function(SS, $) {
       $("#" + id).html($('<iframe>').attr('src',url).attr('width','470').attr('height',height));
   }
 
+  var create = function() {
+    resetWallInput({ postText: true });
+  };
+
   SocialStream.Wall.addShowCallback(init);
 
   return {
+    create: create,
     openCallback: openCallback
   }
 

@@ -55,7 +55,7 @@ SocialStream.Document = (function(SS, $, undefined){
           attr('enctype', 'multipart/form-data'); // this is ignored if done after creating the file input
 
         $('.wall_input input[name="post[owner_id]"]').attr('name', 'document[owner_id');
-        $('.wall_input select[name="post[relation_ids][]"]').attr('name', 'document[relation_ids][]');
+        SS.Wall.changeRelationSelect('document');
       }
 
 

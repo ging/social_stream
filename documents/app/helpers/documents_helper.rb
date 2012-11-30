@@ -5,11 +5,21 @@ module DocumentsHelper
   
   #size can be any of the names that the document has size for
   def thumb_for(document, size)
-    image_tag document.thumb(size, self)
+    image_tag thumb_file_for(document, size)
   end
-  
+
   def thumb_file_for(document, size)
-    document.thumb(size, self)
+    style = document.class.attachment_definitions[:file][:styles]
+
+    format = style.respond_to?('[]') && style[:format] || document.format
+
+    if style
+      polymorphic_path document, format: format, thumb: size
+    else
+      FORMATS.include?(document.format) ?
+        "todo" :
+        "#{ size }/#{ document.class.to_s.underscore }.png"
+    end
   end
   
   def image_tag_for (document)

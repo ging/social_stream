@@ -9,7 +9,7 @@ module SocialStream
         Mime::Type.register "application/postscript", :ps, [ "application/ps" ]
         Mime::Type.register "application/vnd.oasis.opendocument.text", :odt
         Mime::Type.register "application/vnd.oasis.opendocument.presentation", :odp
-        Mime::Type.register "application/vnd.oasis.opendocument.presentation", :ods
+        Mime::Type.register "application/vnd.oasis.opendocument.spreadsheet", :ods
         Mime::Type.register "application/vnd.ms-word", :doc, [ "application/msword" ]
         Mime::Type.register "application/vnd.ms-powerpoint", :ppt, [ "application/mspowerpoint" ]
         Mime::Type.register "application/vnd.ms-excel", :xls, [ "application/msexcel" ]
