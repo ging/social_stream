@@ -1,23 +1,15 @@
 #link_preview
   .info 
-    background-color: black
-    .title 
-      @include border-radius(5px)
+    input
       &[type="text"]
-        width: auto
-        padding: 3px 11px 4px 11px
-        float: right
-
-
-    .description
-      @include border-radius(15px) 
-      background-color: #ccc
-      padding: 5px 34px 7px 11px
-      
+        @include border-radius(5px)
+  
 #link_description
+  @include makeColumn(6, 0)
+  @include border-radius(5px)
   resize: none
 .link_height
-  resize: none
+  background-color: black
 
 
 
