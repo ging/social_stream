@@ -51,13 +51,28 @@ SocialStream.Linkser.Wall = (function(SS, $) {
   var init = function(){
     $.preloadImages("<%= asset_path('loading.gif') %>");
 
-    if($("#new_post").length) {
+    if ($("#new_post").length) {
       $("#post_text").change(urlDetect).keyup(urlDetect);
 
-      $("#new_post").append($('<input>').attr('type', 'hidden').attr('name', 'link[owner_id]').attr('id', 'link_owner_id').val($("#post_owner_id").val()));
-      $("#new_post").append($('<input>').attr('type', 'hidden').attr('name', 'link[url]').attr('id', 'link_url'));
-      $("#new_post").append($('<input>').attr('type', 'hidden').attr('name', 'link[loaded]').attr('id', 'link_loaded').val(false));
-      $("#new_post").append($('<div>').attr('id', 'link_preview').css('display', 'none'));
+      $("#post_text").after(
+        $('<input>', {
+          type: 'hidden',
+          name: 'link[owner_id]'
+        }).val($("#post_owner_id").val()),
+        $('<input>', {
+          type: 'hidden',
+          name: 'link[url]',
+          id:   'link_url'
+        }),
+        $('<input>', {
+          type: 'hidden',
+          name: 'link[loaded]',
+          id:   'link_loaded'
+        }).val(false),
+        $('<div>', {
+          id: 'link_preview'
+        }).css('display', 'none')
+      );
     }
   }
 
