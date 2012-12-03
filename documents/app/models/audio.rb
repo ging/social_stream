@@ -13,9 +13,4 @@ class Audio < Document
     indexes file_file_name, :as => :file_name
   end 
               
-  # Thumbnail file
-  def thumb(size, helper)
-      "#{ size.to_s }/audio.png"
-  end
-  
 end

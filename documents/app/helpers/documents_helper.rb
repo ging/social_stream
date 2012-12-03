@@ -1,8 +1,4 @@
 module DocumentsHelper
-
-  FORMATS = ["msword","vnd.ms-powerpoint","msexcel","rar","zip","mp3","plain","pdf"]
-  
-  
   #size can be any of the names that the document has size for
   def thumb_for(document, size)
     image_tag thumb_file_for(document, size)
@@ -16,21 +12,24 @@ module DocumentsHelper
     if style
       polymorphic_path document, format: format, thumb: size
     else
-      FORMATS.include?(document.format) ?
-        "todo" :
-        "#{ size }/#{ document.class.to_s.underscore }.png"
+      icon_for(document)
     end
   end
-  
-  def image_tag_for (document)
-    image_tag download_document_path document, 
-              :id => dom_id(document) + "_img"
-  end
-  
-  def link_for_wall(document)
-    format = Mime::Type.lookup(document.file_content_type)
 
-    polymorphic_path(document, :format => format, :style => 'thumbwall')
+  # Return the right icon based on {#document}'s mime type
+  def icon document
+    "<i class=\"iconx-#{ icon_mime_type document }\">".html_safe
+  end
+
+  # Find the right class for the icon of this document, based on its format
+  def icon_mime_type document
+    if SocialStream::Documents.icon_mime_types[:subtypes].include?(document.format)
+      document.format
+    elsif SocialStream::Documents.icon_mime_types[:types].include?(document.mime_type_type_sym)
+      document.mime_type_type_sym
+    else
+      SocialStream.icon_mime_types[:default]
+    end
   end
   
   def show_view_for(document)

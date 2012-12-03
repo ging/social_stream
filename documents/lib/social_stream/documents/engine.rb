@@ -44,8 +44,9 @@ module SocialStream
         Mime::Type.register "audio/x-vorbis+ogg", :ogg, [ "application/ogg" ]
         Mime::Type.register "audio/webm", :webma
         # These are already defined in Rails 3.2
-        unless defined? Mime::MPEG
-          Mime::Type.register "audio/mpeg", :mpeg
+        # MPEG is currently reserved to 'video/mpeg'
+        unless defined? Mime::MP3
+          Mime::Type.register "audio/mpeg", :mp3
         end
 
         # Video

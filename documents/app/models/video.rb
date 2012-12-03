@@ -14,11 +14,6 @@ class Video < Document
     indexes file_file_name, :as => :file_name
   end
                       
-  # Thumbnail file
-  def thumb(size, helper)
-      "#{ size.to_s }/video.png"
-  end
-
  # JSON, special edition for video files
   def as_json(options = nil)
     {:id => id,

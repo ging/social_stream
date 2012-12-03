@@ -23,4 +23,20 @@ SocialStream::Documents.setup do |config|
   #    :thumb48sq  => { :geometry => "48x48" , :format => 'png', :time => 5 },
   #    :thumbwall => { :geometry => "130x97#", :format => 'png', :time => 5 }
   #  }
+
+  # List of mime types that have an icon defined
+  # config.icon_mime_types  = {
+  #    default: :default,
+  #    types: [
+  #      :text, :image, :audio, :video
+  #    ],
+  #    subtypes: [
+  #      :txt, :ps, :pdf, :sla, 
+  #      :odt, :odp, :ods, :doc, :ppt, :xls, :rtf,
+  #      :rar, :zip,
+  #      :jpeg, :gif, :png, :bmp, :xcf,
+  #      :wav, :ogg, :webma, :mpeg,
+  #      :flv, :webm, :mp4
+  #    ]
+  #  }
 end

@@ -32,6 +32,23 @@ module SocialStream
       :"170x127#" => { :geometry => "170x127#", :format => 'png', :time => 5 }
     }
 
+    # List of mime types that have an icon defined
+    mattr_accessor :icon_mime_types
+    @@icon_mime_types = {
+      default: :default,
+      types: [
+        :text, :image, :audio, :video
+      ],
+      subtypes: [
+        :txt, :ps, :pdf, :sla, 
+        :odt, :odp, :ods, :doc, :ppt, :xls, :rtf,
+        :rar, :zip,
+        :jpeg, :gif, :png, :bmp, :xcf,
+        :wav, :ogg, :webma, :mp3,
+        :flv, :webm, :mp4
+      ]
+    }
+
     class << self
       def setup
         yield self
