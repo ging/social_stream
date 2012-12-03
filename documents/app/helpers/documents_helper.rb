@@ -10,15 +10,15 @@ module DocumentsHelper
     format = style.respond_to?('[]') && style[:format] || document.format
 
     if style
-      polymorphic_path document, format: format, thumb: size
+      polymorphic_path document, format: format, style: size
     else
-      icon_for(document)
+      icon document, size
     end
   end
 
   # Return the right icon based on {#document}'s mime type
-  def icon document
-    "<i class=\"iconx-#{ icon_mime_type document }\">".html_safe
+  def icon document, size = 16
+    "<i class=\"iconx-#{ icon_mime_type document }\"></i>".html_safe
   end
 
   # Find the right class for the icon of this document, based on its format

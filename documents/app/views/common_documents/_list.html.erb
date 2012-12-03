@@ -1,7 +1,7 @@
 <% documents.each do |document| %>
   <%= div_for document do %>
     <div class="thumb">
-      <%= link_to thumb_for(document, 48), document, :title => document.file_file_name %>
+      <%= link_to icon(document, 48), document, :title => document.file_file_name %>
     </div>
     <div class="brifing">
       <h5>
