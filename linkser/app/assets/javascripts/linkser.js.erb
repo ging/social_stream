@@ -9,7 +9,7 @@ SocialStream.Linkser.Wall = (function(SS, $) {
     if(this.lastValue == null)
       this.lastValue = "";
 
-    if(regexp.test($("#post_text").val())) {
+    if (regexp.test($("#post_text").val())) {
       $("#link_url").val($("#post_text").val());
       $("#link_loaded").val(false);
       $("#new_post").attr("action", "/links");
@@ -42,7 +42,8 @@ SocialStream.Linkser.Wall = (function(SS, $) {
 
       $("#link_preview").show();
     } else {
-      resetWallInput({ postText: false });
+      // reset should return to /documents when there is a file
+      // resetWallInput({ postText: false });
     }
   }
 
