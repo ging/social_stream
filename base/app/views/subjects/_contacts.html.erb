@@ -5,7 +5,7 @@
   <div class ="content">
     <div class="contact">
       <% cs.each do |contact| %>
-        <%= link_to(image_tag(contact.logo.url(:contact), :alt => contact.name, :title => contact.name, :size => "small"), contact) %>
+        <%= link_to(image_tag(contact.logo.url(:small), :alt => contact.name, :title => contact.name, :size => "small"), contact) %>
       <% end %>
     </div>
   </div>
