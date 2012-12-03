@@ -47,7 +47,8 @@ SocialStream.Document = (function(SS, $, undefined){
 
         $('<input>', {
           name: 'document[file]',
-          type: 'file'
+          type: 'file',
+          style: 'display: none;'
         }).insertAfter('.wall_input textarea.document_description');
 
         $('.wall_input form').
@@ -59,9 +60,7 @@ SocialStream.Document = (function(SS, $, undefined){
       }
 
 
-      if ($('.wall_input input[type=file]').is(":visible")) {
-        $('.wall_input input[type=file]').trigger('click');
-      }
+      $('.wall_input input[type=file]').trigger('click');
 
       $('.wall_input input[type=file]').change(function(){
         $("#post_text").val($(this).val().replace(/C:\\fakepath\\/i, ''));
