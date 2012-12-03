@@ -1,37 +1,30 @@
-<% content_for :title do%>
-  <%= t('contact.other')%>
-<%end%>
-
 <% sidebar %>
 
-<% toolbar :home, :option => :contacts %>
+<% toolbar :profile, :subject => current_subject %>
 
-<div id="my_conferences">
-  <div id="contacts">
-    <% if params[:pending].present? %>
-  <h2><%= t('contact.pending.other') %></h2>
-<% else %>
-  <h2><%= t('contact.addressbook') %></h2>
-<% end %>
-
-<% cont=0; %>
-    <div class="search_field_wrapper">
-      <input type="text" id="search_field" class="search_input" placeholder="Search by name"/> 
+<div class="contacts tabbable">
+  <ul class="nav nav-tabs">
+    <li class="<%= 'active' if params[:d] == 'sent' %>">
+    <a data-toggle="tab" href="#sent" data-path="<%= contacts_path %>"<%= raw ' data-loaded="true"' if params[:d] == 'sent' %><%=t('follow.followings')%></a>
+    </li>
+    <li class="<%= 'active' if params[:d] == 'received' %>">
+    <a data-toggle="tab" href="#received" data-path="<%= contacts_path %>"<%= raw ' data-loaded="true"' if params[:d] == 'received' %>><%=t('follow.followers')%></a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div id="sent" class="tab-pane <%= 'active' if params[:d] == 'sent' %>">
+      <%= render partial: 'index',
+                 locals: { d: 'sent' } %>
     </div>
-
-    <div class="center">
-      <%= link_to t('contact.all_n', :count => @total_contacts.count("DISTINCT contacts.id")), contacts_path %> -
-      <% Actor.distinct_initials.
-               contacted_from(current_subject).
-               merge(Tie.related_by(current_subject.relation_customs.find_by_id(params[:relation]))).
-               distinct_initials.
-               each do |l| %>
-        <%= link_to l.initial,{:letter => l.initial,:page => 1},:class => "contact_letter_link" %>
-      <% end %>
-    </div>
-
-    <div id="list_contacts_ajax" class="tab_content block">
-      <%= render :partial => "contacts/index"%>
+    <div id="received" class="tab-pane <%= 'active' if params[:d] == 'received' %>">
+      <%= render partial: 'index',
+                 locals: { d: 'received' } %>
     </div>
   </div>
 </div>
+
+<%= javascript_tag do %>
+  $(function() {
+    SocialStream.Contact.index();
+  });
+<% end %>
