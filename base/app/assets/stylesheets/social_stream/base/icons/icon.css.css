@@ -1,31 +1,57 @@
-/**************REPOSITORIES css *************/
+/**************FILES 70px *************/
 
-[class^="iconx-"],   [class*=" iconx-"] {
+[class^="icon_file_70-"],   [class*="icon_file_70-"] {
   display: inline-block;
-  width: 32px;
-  height: 32px;
+  width: 70px;
+  height: 70px;
   line-height: 32px;
   vertical-align: text-top;
-  background-image: url("icons/iconrepository32.png");
-  background-position: 32px 32px;
+  background-image: url("icons/files_ico-70.png");
+  background-position: 70px 70px;
   background-repeat: no-repeat;
   *margin-right: .3em;
 }
-[class^="iconx-"]:last-child,   [class*=" iconx-"]:last-child {
+[class^="icon_file_70-"]:last-child,   [class*="icon_file_70-"]:last-child {
   *margin-left: 0;
 }
-.iconx-default { background-position: 0  -42px;  }
-.iconx-pdf     { background-position: -126px -42px;  }
-.iconx-word    { background-position: -168px -42px;  }
-.iconx-ppt     { background-position: -210px -42px;  }
-.iconx-excel   { background-position: -252px -42px; }
-.iconx-audio   { background-position: -294px -42px; }
-.iconx-picture { background-position: 0-126px; }
-.iconx-video   { background-position: 0 -210px; }
-.iconx-swf     { background-position: -168px -210px; }
-.iconx-quiz    { background-position: -210px -168px; }
-.iconx-vc      { background-position: -378px -84px;  }
+.icon_file_70-default { background-position: -0  -42px;  }
+.icon_file_70-xls     { background-position: -10px -10px;  }
+.icon_file_70-doc    { background-position: -90px -10px;  }
+.icon_file_70-ppt     { background-position: -170px -10px;  }
+.icon_file_70-pdf   { background-position: -250px -10px; }
+.icon_file_70-sla   { background-position: -330px -10px; }
+.icon_file_70-rtf { background-position: -410px -10px; }
+.icon_file_70-txt   { background-position: -10px -90px; }
+.icon_file_70-odt     { background-position: -90px -90px; }
+.icon_file_70-ods    { background-position: -170px -90px; }
+.icon_file_70-rtf     { background-position: -250px -90px;  }
+.icon_file_70-odp     { background-position: -330px -90px;  }
+.icon_file_70-ps     { background-position: -410px -90px;  }
+.icon_file_70-rar     { background-position: -10px -170px;  }
+.icon_file_70-zip     { background-position: -90px -170px;  }
+.icon_file_70-link     { background-position: -170px -170px;  }
+.icon_file_70-embeb     { background-position: -250px -170px;  }
+.icon_file_70-flv-1     { background-position: -330px -170px;  }
+.icon_file_70-mp4    { background-position: -10px -250px;  }
+.icon_file_70-wemb     { background-position: -90px -250px;  }
+.icon_file_70-flv-2     { background-position: -170px -250px;  }
+.icon_file_70-avi     { background-position: -250px -250px;  }
+.icon_file_70-mov     { background-position: -330px -250px;  }
+.icon_file_70-webma     { background-position: -410px -250px;  }
+.icon_file_70-bpm     { background-position: -10px -330px;  }
+.icon_file_70-xcf     { background-position: -90px -330px;  }
+.icon_file_70-jpg     { background-position: -170px -330px;  }
+.icon_file_70-gif     { background-position: -250px -330px;  }
+.icon_file_70-png     { background-position: -330px -330px;  }
+.icon_file_70-tiff     { background-position: -410px -330px;  }
+.icon_file_70-mp3     { background-position: -10px -410px;  }
+.icon_file_70-wav     { background-position: -90px -410px;  }
+.icon_file_70-ogg     { background-position: -170px -410px;  }
+.icon_file_70-aif     { background-position: -250px -410px;  }
 
+
+
+/*..................antiguo hover 70.......................
 .iconx-default:hover { background-position: 0  0;  }
 .iconx-pdf:hover     { background-position: -126px 0;  }
 .iconx-word:hover    { background-position: -168px 0;  }
@@ -38,8 +64,60 @@
 .iconx-quiz:hover    { background-position: -210px -210px;  }
 .iconx-vc:hover      { background-position: -378px -126px; }
 
+ */
 
-/*..................icon navigation 22x22....................... */
+
+/**************FILES 50px *************/
+
+[class^="icon_file_50-"],   [class*="icon_file_50-"] {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  line-height: 32px;
+  vertical-align: text-top;
+  background-image: url("icons/files_ico-50.png");
+  background-position: 50px 50px;
+  background-repeat: no-repeat;
+  *margin-right: .3em;
+}
+[class^="icon_file_50-"]:last-child,   [class*="icon_file_50-"]:last-child {
+  *margin-left: 0;
+}
+.icon_file_50-default { background-position: 0  -42px;  }
+.icon_file_50-xls     { background-position: 10px 10px;  }
+.icon_file_50-doc    { background-position: 70px 10px;  }
+.icon_file_50-ppt     { background-position: 130px 10px;  }
+.icon_file_50-pdf   { background-position: 190px 10px; }
+.icon_file_50-sla   { background-position: 260px 10px; }
+.icon_file_50-rtf { background-position: 310px 10px; }
+.icon_file_50-txt   { background-position: 10px 70px; }
+.icon_file_50-odt     { background-position: 70px 70px; }
+.icon_file_50-ods    { background-position: 130px 70px; }
+.icon_file_50-rtf     { background-position: 190px 70px;  }
+.icon_file_50-odp     { background-position: 260px 70px;  }
+.icon_file_50-ps     { background-position: 310px 70px;  }
+.icon_file_50-rar     { background-position: 10px 130px;  }
+.icon_file_50-zip     { background-position: 70px 130px;  }
+.icon_file_50-link     { background-position: 130px 130px;  }
+.icon_file_50-embeb     { background-position: 190px 130px;  }
+.icon_file_50-flv-1     { background-position: 260px 130px;  }
+.icon_file_50-mp4    { background-position: 10px 190px;  }
+.icon_file_50-wemb     { background-position: 70px 190px;  }
+.icon_file_50-flv-2     { background-position: 130px 190px;  }
+.icon_file_50-avi     { background-position: 190px 190px;  }
+.icon_file_50-mov     { background-position: 260px 190px;  }
+.icon_file_50-webma     { background-position: 310px 190px;  }
+.icon_file_50-bpm     { background-position: 10px 260px;  }
+.icon_file_50-xcf     { background-position: 70px 260px;  }
+.icon_file_50-jpg     { background-position: 130px 260px;  }
+.icon_file_50-gif     { background-position: 190px 260px;  }
+.icon_file_50-png     { background-position: 260px 260px;  }
+.icon_file_50-tiff     { background-position: 310px 260px;  }
+.icon_file_50-mp3     { background-position: 10px 310px;  }
+.icon_file_50-wav     { background-position: 70px 310px;  }
+.icon_file_50-ogg     { background-position: 130px 310px;  }
+.icon_file_50-aif     { background-position: 190px 310px;  }
+
 
 li{
   list-style-type:none}
