@@ -10,15 +10,15 @@
 
      <ul class="nav pull-right">
         
-      <li><%= link_to(raw("<i class='iconnav-home'></i> "), root_path)%></li>   
+      <li><%= link_to(raw("<i class='icon_navbar-home'></i> "), root_path)%></li>   
       <li>
-        <%= link_to(raw("<i class='iconnav-message'></i> "), conversations_path) %> 
+        <%= link_to(raw("<i class='icon_navbar-message'></i> "), conversations_path) %> 
           <!-- <span id="header_inbox_count">
             <%= link_to(current_subject.unread_messages_count.to_s, conversations_path) %>
           </span> -->
       </li>            
       <li>
-        <%= link_to(raw("<i class='iconnav-notification'></i> "), notifications_path) %>
+        <%= link_to(raw("<i class='icon_navbar-notification'></i> "), notifications_path) %>
           <!--<span id="header_notifications">
             <%= link_to( current_subject.mailbox.notifications.not_trashed.unread.count.to_s, notifications_path) %>
           </span> -->

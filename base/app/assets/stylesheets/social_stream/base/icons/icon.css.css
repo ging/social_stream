@@ -84,90 +84,73 @@
   *margin-left: 0;
 }
 .icon_file_50-default { background-position: 0  -42px;  }
-.icon_file_50-xls     { background-position: 10px 10px;  }
-.icon_file_50-doc    { background-position: 70px 10px;  }
-.icon_file_50-ppt     { background-position: 130px 10px;  }
-.icon_file_50-pdf   { background-position: 190px 10px; }
-.icon_file_50-sla   { background-position: 260px 10px; }
-.icon_file_50-rtf { background-position: 310px 10px; }
-.icon_file_50-txt   { background-position: 10px 70px; }
-.icon_file_50-odt     { background-position: 70px 70px; }
-.icon_file_50-ods    { background-position: 130px 70px; }
-.icon_file_50-rtf     { background-position: 190px 70px;  }
-.icon_file_50-odp     { background-position: 260px 70px;  }
-.icon_file_50-ps     { background-position: 310px 70px;  }
-.icon_file_50-rar     { background-position: 10px 130px;  }
-.icon_file_50-zip     { background-position: 70px 130px;  }
-.icon_file_50-link     { background-position: 130px 130px;  }
-.icon_file_50-embeb     { background-position: 190px 130px;  }
-.icon_file_50-flv-1     { background-position: 260px 130px;  }
-.icon_file_50-mp4    { background-position: 10px 190px;  }
-.icon_file_50-wemb     { background-position: 70px 190px;  }
-.icon_file_50-flv-2     { background-position: 130px 190px;  }
-.icon_file_50-avi     { background-position: 190px 190px;  }
-.icon_file_50-mov     { background-position: 260px 190px;  }
-.icon_file_50-webma     { background-position: 310px 190px;  }
-.icon_file_50-bpm     { background-position: 10px 260px;  }
-.icon_file_50-xcf     { background-position: 70px 260px;  }
-.icon_file_50-jpg     { background-position: 130px 260px;  }
-.icon_file_50-gif     { background-position: 190px 260px;  }
-.icon_file_50-png     { background-position: 260px 260px;  }
-.icon_file_50-tiff     { background-position: 310px 260px;  }
-.icon_file_50-mp3     { background-position: 10px 310px;  }
-.icon_file_50-wav     { background-position: 70px 310px;  }
-.icon_file_50-ogg     { background-position: 130px 310px;  }
-.icon_file_50-aif     { background-position: 190px 310px;  }
+.icon_file_50-xls     { background-position: -10px -10px;  }
+.icon_file_50-doc    { background-position: -70px -10px;  }
+.icon_file_50-ppt     { background-position: -130px -10px;  }
+.icon_file_50-pdf   { background-position: -190px -10px; }
+.icon_file_50-sla   { background-position: -260px -10px; }
+.icon_file_50-rtf { background-position: -310px -10px; }
+.icon_file_50-txt   { background-position: -10px -70px; }
+.icon_file_50-odt     { background-position: -70px -70px; }
+.icon_file_50-ods    { background-position: -130px -70px; }
+.icon_file_50-rtf     { background-position: -190px -70px;  }
+.icon_file_50-odp     { background-position: -260px -70px;  }
+.icon_file_50-ps     { background-position: -310px -70px;  }
+.icon_file_50-rar     { background-position: -10px -130px;  }
+.icon_file_50-zip     { background-position: -70px -130px;  }
+.icon_file_50-link     { background-position: -130px -130px;  }
+.icon_file_50-embeb     { background-position: -190px -130px;  }
+.icon_file_50-flv-1     { background-position: -260px -130px;  }
+.icon_file_50-mp4    { background-position: -10px -190px;  }
+.icon_file_50-wemb     { background-position: -70px -190px;  }
+.icon_file_50-flv-2     { background-position: -130px -190px;  }
+.icon_file_50-avi     { background-position: -190px -190px;  }
+.icon_file_50-mov     { background-position: -260px -190px;  }
+.icon_file_50-webma     { background-position: -310px -190px;  }
+.icon_file_50-bpm     { background-position: -10px -260px;  }
+.icon_file_50-xcf     { background-position: -70px -260px;  }
+.icon_file_50-jpg     { background-position: -130px -260px;  }
+.icon_file_50-gif     { background-position: -190px -260px;  }
+.icon_file_50-png     { background-position: -260px -260px;  }
+.icon_file_50-tiff     { background-position: -310px -260px;  }
+.icon_file_50-mp3     { background-position: -10px -310px;  }
+.icon_file_50-wav     { background-position: -70px -310px;  }
+.icon_file_50-ogg     { background-position: -130px -310px;  }
+.icon_file_50-aif     { background-position: -190px -310px;  }
 
 
 li{
   list-style-type:none}
 
-[class^="iconnav-"], [class*=" iconnav-"] {
-  background-image: url("icons/icon_nav.png");
+[class^="iconnav-"], [class*="icon_navbar-"] {
+  background-image: url("icons/navbar_ico-20.png");
   background-position:22px 22px;
   background-repeat:no-repeat no-repeat;
   display:inline-block;
   height:22px;
   width:22px;
-  line-height:22px;
+  line-height:20px;
   vertical-align:text-top;
   *margin-right: .3em;
 
 
 }
-[class^="iconnav-"]:last-child, [class*="iconnav-"]:last-child {
+[class^="iconnav-"]:last-child, [class*="icon_navbar-"]:last-child {
 }
 .iconnav-white {
-  background-image: url("icons/icon_nav.png");
+  background-image: url("icons/navbar_ico-20.png");
 }
 /* normal*/
-.iconnav-home { background-position:0 0;}
-.iconnav-message {background-position:-32px 0;}
-.iconnav-followers {background-position:-64px 0;}
-.iconnav-notification {background-position:-96px 0;}
-.iconnav-quiz {background-position:-159px 0;}
-.iconnav-tools {background-position:-128px 0;}
+.icon_navbar-home { background-position: -16px -38px;}
+.icon_navbar-message {background-position:-55px -38px;}
+.icon_navbar-followers {background-position:-96px -38px;}
+.icon_navbar-notification {background-position:-136px -38px;}
+.icon_navbar-tools {background-position:-177px -38px;}
 /* alarm*/
-.iconnav-notification_message {background-position:-32px -26px;}
-.iconnav-notification_followers {background-position:-64px -26px;}
-.iconnav-notification_notification {background-position:-96px -26px;}
-/* hover*/
-.iconnav-home:hover {background-position:0px -52px;}
-.iconnav-message:hover {background-position:-32px -52px;}
-.iconnav-followers:hover {background-position:-64px -52px;}
-.iconnav-notification:hover {background-position:-96px -52px;}
-.iconnav-quiz:hover {background-position:-159px -52px;}
-.iconnav-tools:hover {background-position:-128px -52px;}
+.icon_navbar-notif_message {background-position:-55px -8px;}
+.icon_navbar-notif_followers {background-position:-96px -8px;}
+.icon_navbar-notif_notification {background-position:-136px -8px;}
 
-.iconnav-mashme { background-position: 0 -78px ;}
-.iconnav-mashme:hover { background-position: 0 -104px ;}
-.iconnav-mashmered { background-position: -32px -78px ;}
-.iconnav-star { background-position: -32px -104px ;}
-.iconnav-star:hover { background-position: -64px -78px ;}
-.iconnav-starred { background-position: -64px -78px ;}
-.iconnav-my { background-position: - 96px -104px ;}
-.iconnav-my:hover { background-position: -96px -78px;}
-.iconnav-myred { background-position: -128px -104px;}
 
 
 /*..................icon file 16x16....................... */
