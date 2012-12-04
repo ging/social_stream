@@ -62,68 +62,37 @@ class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
 
   def create_ability_file
     ability_code = [
-      "class Ability",                                            #0
-      "  include SocialStream::Ability",                          #1
-      "",                                                         #2
-      "  def initialize(subject)",                                #3
-      "    super",                                                #4
+      "# The generator social_stream:install generator has modified this file.",       #0
+      "# Please, check everything is working fine, specially if the former `Ability`", #1
+      "# class inherited from another class or included another module",               #2
+      "class Ability",                                            #3
+      "  include SocialStream::Ability",                          #4
       "",                                                         #5
-      "    # Add your authorization rules here",                  #6
-      "    # For instance:",                                      #7
-      "    #    can :create, Comment",                            #8
-      "    #    can [:create, :destroy], Post do |p|",            #9
-      "    #      p.actor_id == Actor.normalize_id(subject)",     #10
-      "    #    end",                                             #11
-      "  end",                                                    #12
-      "end"]                                                      #13
+      "  def initialize(subject)",                                #6
+      "    super",                                                #7
+      "",                                                         #8
+      "    # Add your authorization rules here",                  #9
+      "    # For instance:",                                      #10
+      "    #    can :create, Comment",                            #11
+      "    #    can [:create, :destroy], Post do |p|",            #12
+      "    #      p.actor_id == Actor.normalize_id(subject)",     #13
+      "    #    end",                                             #14
+      "  end",                                                    #15
+      "end"]                                                      #16
     ability_file = 'app/models/ability.rb'
 
     if FileTest.exists? ability_file
-      code = RubyParser.new.parse File.read ability_file
-
-      ability_class = nil
-      if (code.sexp_type == :class)
-        if (code.sexp_body.first.to_s == 'Ability')
-          ability_class = code
-        end
-      else
-        code.each_of_type(:class) do |klass|
-          if klass.sexp_body.first == 'Ability'
-            ability_class = klass
-          end
-        end
+      prepend_to_file ability_file, ability_code[0..2].join("\n")+"\n"
+      if not File.read(ability_file).include?("include SocialStream::Ability\n")
+        inject_into_file ability_file, ability_code[4..5].join("\n")+"\n", :after => /class Ability(.*)\n/
       end
-      if ability_class
-        include_found = false
-        initialize_found = false
-        super_found = false
-        code.each_of_type(:defn) do |method|
-          if method.sexp_body.first.to_s == "initialize"
-            initialize_found = true
-            method.each_of_type(:zsuper) { super_found = true }
-          end
-        end
-        if not File.read(ability_file).include?("include SocialStream::Ability\n")
-          inject_into_file ability_file, ability_code[1..2].join("\n")+"\n", :after => /class Ability(.*)\n/
-        end
-        if initialize_found
-          if super_found
-            inject_into_file ability_file, ability_code[6..11].join("\n")+"\n", :after => /def initialize(.*)\n/
-          else
-            inject_into_file ability_file, ability_code[4..11].join("\n")+"\n", :after => /def initialize(.*)\n/
-          end
-        else
-          inject_into_file ability_file, ability_code[2..12].join("\n")+"\n", :after => /include SocialStream::Ability\n/
-        end
+      if File.read(ability_file).include?("def initialize\n")
+        inject_into_file ability_file, ability_code[7..14].join("\n")+"\n", :after => /def initialize(.*)\n/
       else
-        # ability.rb without Ability class. Should we raise an exception?
-        append_to_file ability_file, ability_code.join("\n")
+        inject_into_file ability_file, ability_code[5..15].join("\n")+"\n", :after => /include SocialStream::Ability\n/
       end
     else
-      create_file ability_file, ability_code.join("\n")
+      create_file ability_file, ability_code[3..16].join("\n")
     end
-    # Does not work correctly when the old Ability class inherits from a class
-    # or includes a module whose 'initialize' method is non-empty and does not
-    # call 'super'
   end
 end
