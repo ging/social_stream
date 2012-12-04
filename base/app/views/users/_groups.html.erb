@@ -1,5 +1,5 @@
 <div class="recent_groups">
-<% if (groups = current_subject.recent_groups).present? %>
+<% if (groups = user.recent_groups).present? %>
   <h2>
       <%=t('group.last') %> (<span class="group_count"><%= groups.count %></span>)
   </h2>

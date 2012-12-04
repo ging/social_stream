@@ -67,7 +67,7 @@ describe GroupsController do
       get :show, :id => @group.to_param
 
       response.should be_success
-      response.body.should =~ /activities_share_btn/
+      response.body.should =~ /new_post/
     end
 
     it "should render other group" do
