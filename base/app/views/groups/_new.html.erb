@@ -1,81 +1,42 @@
-<%= location(
-    link_to(t('group.other'), groups_path),
-    link_to(t('group.new.action'), new_group_path)
-  ) %>
-
-
 <%= form_for @group do |f| %>
-	<% if @group.errors.any? %>
-		<div id="notice">
-			<h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
-			<ul>
-				<% @group.errors.full_messages.each do |msg| %>
-	        <li>
-						<%= msg %>
-					</li>
-				<% end %>
-			</ul>
-		</div>
-	<% end %>
-	<div class="block">
-	  <div class="form_row">
-	    <h2><%= t('group.new.action') %></h2>
-	  </div>
+  <% if @group.errors.any? %>
+    <div class="error">
+      <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
+      <ul>
+        <% @group.errors.full_messages.each do |msg| %>
+          <li>
+          <%= msg %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-          Bootstrap Typeahead is not fully working yet
-          
-		<div class="form_row">
-			<div class="form_label">
-				<%= f.label t('group.new.name') %>
-			</div>
-			<div class="form_field">
-				<%= f.text_field :name, :class => "required form_tag" %>
-			</div>
-		</div>
-		<div class="form_row">
-			<div class="form_label" id="form_participants">
-			  <%= f.label t('group.new.participants') %>
-			</div>
-			<div class="form_field">
-				<%= f.select :_participants, [], :class => "form_tag" %>
-			</div>
-		</div>
-		<div class="form_row">
-			<div class="form_label" id="form_tags">
-				<%= f.label t('group.tags')%>
-			</div>
-			<div class="form_field">
-        			<%= f.select :tag_list, [], :class => "form_tag" %>
-			</div>
-		</div>
-		<div class="form_row form_label">
-			<%= f.label :description %>
-		</div>
-		<div class="form_row">
-			<%= f.text_area :description, :rows =>6, :cols=> 53, :class => "form_tag" %>
-		</div>
-		<div class="actions center">
-			<%= f.submit :class => "button" %>
-		</div>
-	</div>
+  <h2><%= t('group.new.action') %></h2>
+
+  <%= f.label :name, t('group.new.name') %>
+  <%= f.text_field :name %>
+
+  <%= f.label :_participants, t('group.new.participants') %>
+  <div class="fcbk">
+    <%= f.select :_participants, [], {}, 'data-path' => contacts_path(form: true, format: :json) %>
+  </div>
+
+  <%= f.label :tags_list, t('group.tags')%>
+  <div class="fcbk">
+    <%= f.select :tag_list, [], {}, 'data-path' => tags_path(format: :json) %>
+  </div>
+
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+
+  <%= f.submit :class => "button" %>
 <% end %>
 
-<% content_for :javascript do %>
+<%= javascript_tag do %>
   $(function() {
     SocialStream.Group.new_(
       {
-        typeahead: [
-          {
-            select: "#group__participants",
-            path:   "<%= contacts_path(form: true, format: :json) %>",
-            queryParam: "name"
-          },
-          {
-            select: "#group_tag_list",
-            path: "<%= tags_path(format: :json) %>",
-            queryParam: "tag"
-          }
-        ],
         validate: [
           {
             form: ".new_group",
@@ -87,5 +48,4 @@
     );
   });
 <% end %>
-
 

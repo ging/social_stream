@@ -14,17 +14,28 @@ SocialStream.Group = (function(SS, $, undefined){
 		$.each(new_Callbacks, function(i, callback){ callback(options); });
 	};
 
-	var initTypeahead = function(options){
-		$.each(options.typeahead, function(i, opt){
-			$(opt.select).typeahead({
-				source: function(query, process){
-					var qOpts = {};
-					qOpts[opt.queryParam] = query;
-					return $.get(opt.path, qOpts, function (data) { return process(data); });
-				}
-			});
-		});
-	};
+  var initFcbk = function() {
+    var url = $("#group__participants").attr('data-path');
+
+    $("#group__participants").fcbkcomplete({
+      json_url: url,
+      cache: true,
+      filter_hide: true,
+      newel: false,
+      height: 6
+    });
+
+    url = $("#group_tag_list").attr('data-path');
+
+    $("#group_tag_list").fcbkcomplete({
+      json_url: url,
+      cache: false,
+      filter_case: true,
+      filter_hide: true,
+      newel: false,
+      height: 6
+    });
+  };
 
 	var initValidate = function(options){
 		$.each(options.validate, function(i, opt){
@@ -32,8 +43,8 @@ SocialStream.Group = (function(SS, $, undefined){
 		});
 	};
 
-        addNew_Callback(initTypeahead);
-        addNew_Callback(initValidate);
+  addNew_Callback(initFcbk);
+  addNew_Callback(initValidate);
 
 	return {
 		new_: new_
