@@ -17,8 +17,8 @@ module DocumentsHelper
   end
 
   # Return the right icon based on {#document}'s mime type
-  def icon document, size = 16
-    "<i class=\"iconx-#{ icon_mime_type document }\"></i>".html_safe
+  def icon document, size = 50
+    "<i class=\"icon_file_#{ size }-#{ icon_mime_type document }\"></i>".html_safe
   end
 
   # Find the right class for the icon of this document, based on its format
