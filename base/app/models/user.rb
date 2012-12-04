@@ -34,11 +34,12 @@ class User < ActiveRecord::Base
     v.validates_length_of       :password, :within => Devise.password_length, :allow_blank => true
   end
   
-  def recent_groups
-    contact_subjects(:type => :group, :direction => :sent) do |q|
+  def recent_groups size = 5
+    contact_subjects(:type => :group, :direction => :sent) { |q|
       q.select("contacts.created_at").
-        merge(Contact.recent)
-    end
+        merge(Contact.recent).
+        limit(size)
+    }
   end
 
   # Subjects this user can acts as

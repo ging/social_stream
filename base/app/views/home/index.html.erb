@@ -5,9 +5,8 @@
 <% toolbar %>
 
 <% if current_subject.respond_to?(:recent_groups) %>
-<div id="my_groups">
-  <%= render :partial => "groups" %>
-</div>
+  <%= render partial: "users/groups",
+             locals: { user: current_subject } %>
 <% end %>
 
 <%= render :partial => "activities/index",
