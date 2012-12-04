@@ -155,22 +155,20 @@ li{
 [class^="message-"], [class*="message-"] {
   height:22px;
   width:22px;
-  background-image: url("icons/message_ico-20.png");
+  background-image: url("icons/mess_ico-30.png");
   line-height:22px;
 }
 
 .iconmessage22-message22_white {
-  background-image: url("icons/message_ico-20.png");}
+  background-image: url("icons/mess_ico-30.png");}
 
 .icon_message-nude { background-position: 0 0;}
-.icon_message-new { background-position: -32px 0;}
-.icon_message-remove { background-position: -64px 0;}
-.icon_message-trash { background-position: -96px 0;}
-.icon_message-ok { background-position: -128px 0;}
-.icon_message-sendbox { background-position: -160px 0;}
-.icon_message-inbox { background-position: -192px 0;}
-.icon_message-mail { background-position: -224px 0;}
-.icon_message-edit { background-position: -256px 0;}
+.icon_message-new { background-position: -55px -10px;}
+.icon_message-trash { background-position: -135px -10px;}
+.icon_message-ok { background-position: -174px -10px;}
+.icon_message-sendbox { background-position: -215px -10px;}
+.icon_message-inbox { background-position: -214px -10px;}
+.icon_message-edit { background-position: -335px -10px;}
 
 /*hover
 
@@ -198,14 +196,14 @@ li{
 
 
 .icon_chat-message { background-position: 0 0;}
-.icon_chat-new { background-position: -32px 0;}
-.icon_chat-remove { background-position: -64px 0;}
-.icon_chat-trash { background-position: -96px 0;}
-.icon_chat-ok { background-position: -128px 0;}
-.icon_chat-sendbox { background-position: -160px 0;}
-.icon_chat-inbox { background-position: -192px 0;}
-.icon_chat-mail { background-position: -224px 0;}
-.icon_chat-edit { background-position: -256px 0;}
+.icon_chat-new { background-position: -10px -10px;}
+.icon_chat-remove { background-position: -50px -10px;}
+.icon_chat-trash { background-position: -90px -10px;}
+.icon_chat-ok { background-position: -130px -10px;}
+.icon_chat-sendbox { background-position: -170px -10px;}
+.icon_chat-inbox { background-position: -220px -10px;}
+.icon_chat-mail { background-position: -270px -10px;}
+.icon_chat-edit { background-position: -310px -10px;}
 
 /*hover
 
