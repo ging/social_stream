@@ -143,7 +143,6 @@ en:
       other: "Comments"
     view_all: "View all comments"
   contact:
-    addressbook: "Addressbook"
     all_n: "All contacts (%{count})"
     confirm_delete: "Delete contact?"
     current: "Current"
@@ -173,6 +172,7 @@ en:
       other: "Pending"
       all: "All"
       all_n: "See all pending requests (%{count})"
+    received: "Received"
     relation:
       one: "Contact type"
       new: "New type"
@@ -180,6 +180,7 @@ en:
       link: "+ Reply contact"
       title: "Reply contact request to %{name}"
       submit: "Reply contact"
+    sent: "Added"
     suggestion:
       one: "Suggestion"
       other: "Suggestions"

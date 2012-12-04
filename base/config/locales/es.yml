@@ -142,7 +142,6 @@ es:
       one: "Comentario"
       other: "Comentarios"
   contact:
-    addressbook: "Libreta de direcciones"
     all_n: "Todos los contactos (%{count})"
     confirm_delete: "¿Borrar contacto?"
     current: "Actuales"
@@ -172,6 +171,7 @@ es:
       other: "Pendientes"
       all: "Todos"
       all_n: "Ver todas los contactos pendientes (%{count})"
+    received: "Recibidos"
     relation:
       one: "Tipo de contacto"
       new: "Nuevo tipo"
@@ -179,6 +179,7 @@ es:
       link: "+ Responder contacto"
       title: "Responder contacto con %{name}"
       submit: "Responder contacto"
+    sent: "Añadidos"
     suggestion:
       one: "Sugerencia"
       other: "Sugerencias"
