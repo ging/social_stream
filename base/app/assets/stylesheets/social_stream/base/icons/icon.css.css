@@ -1,16 +1,20 @@
-/**************FILES 70px *************/
-
-[class^="icon_file_70-"],   [class*="icon_file_70-"] {
+[class^="icon_"],   [class*="icon_"] {
   display: inline-block;
-  width: 70px;
-  height: 70px;
-  line-height: 32px;
   vertical-align: text-top;
-  background-image: url("icons/files_ico-70.png");
-  background-position: 70px 70px;
   background-repeat: no-repeat;
   *margin-right: .3em;
 }
+
+
+/**************FILES 70px *************/
+
+
+[class^="icon_file_70-"],   [class*="icon_file_70-"] {
+  width: 70px;
+  height: 70px;
+  background-image: url("icons/files_ico-70.png");
+}
+
 [class^="icon_file_70-"]:last-child,   [class*="icon_file_70-"]:last-child {
   *margin-left: 0;
 }
@@ -69,20 +73,16 @@
 
 /**************FILES 50px *************/
 
-[class^="icon_file_50-"],   [class*="icon_file_50-"] {
-  display: inline-block;
+
+[class^="file_50-"],   [class*="file_50-"] {
   width: 50px;
   height: 50px;
   line-height: 32px;
-  vertical-align: text-top;
   background-image: url("icons/files_ico-50.png");
   background-position: 50px 50px;
-  background-repeat: no-repeat;
-  *margin-right: .3em;
 }
-[class^="icon_file_50-"]:last-child,   [class*="icon_file_50-"]:last-child {
-  *margin-left: 0;
-}
+
+
 .icon_file_50-default { background-position: 0  -42px;  }
 .icon_file_50-xls     { background-position: -10px -10px;  }
 .icon_file_50-doc    { background-position: -70px -10px;  }
@@ -122,19 +122,14 @@
 li{
   list-style-type:none}
 
-[class^="iconnav-"], [class*="icon_navbar-"] {
+
+[class^="_navbar"], [class*="_navbar-"] {
   background-image: url("icons/navbar_ico-20.png");
-  background-position:22px 22px;
-  background-repeat:no-repeat no-repeat;
-  display:inline-block;
   height:22px;
   width:22px;
-  line-height:20px;
-  vertical-align:text-top;
-  *margin-right: .3em;
-
-
 }
+
+
 [class^="iconnav-"]:last-child, [class*="icon_navbar-"]:last-child {
 }
 .iconnav-white {
