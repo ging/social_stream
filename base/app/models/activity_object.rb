@@ -203,10 +203,6 @@ class ActivityObject < ActiveRecord::Base
     @_activity_parent_id = id
   end
 
-  def like_count
-    post_activity.likes.count
-  end
-
   private
 
   def fill_owner_id
