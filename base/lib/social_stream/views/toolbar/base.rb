@@ -45,19 +45,19 @@ module SocialStream
               #Contacts
               items << {
                 :key => :contacts,
-                :html => link_to(raw("<i class='iconnav-followers'></i> ")+t('contact.other'), "#", :id => 'toolbar_menu-contacts'),
+                :html => link_to(raw("<i class='icon_navbar-followers'></i> ")+t('contact.other'), "#", :id => 'toolbar_menu-contacts'),
                 :items => [
                   {
                     :key => :current,
-                    :html => link_to(raw("<i class='iconnav-followers'></i> ")+t('contact.current'), contacts_path)
+                    :html => link_to(raw("<i class='icon_navbar-followers'></i> ")+t('contact.current'), contacts_path)
                   },
                   {
                     :key => :contacts_graph,
-                    :html => link_to(raw("<i class='iconnav-followers'></i> ")+t('contact.graph.one'), ties_path)
+                    :html => link_to(raw("<i class='icon_navbar-followers'></i> ")+t('contact.graph.one'), ties_path)
                   },
                   {
                     :key => :pending,
-                    :html => link_to(raw("<i class='iconnav-followers'></i> ")+t('contact.pending.other'), pending_contacts_path)
+                    :html => link_to(raw("<i class='icon_navbar-followers'></i> ")+t('contact.pending.other'), pending_contacts_path)
                   },
                   {
                     :key => :invitations,
@@ -84,7 +84,7 @@ module SocialStream
               #Information button
               items << {
                 :key => :subject_info,
-                :html => link_to(raw("<i class='icontool16-tool16_info'></i>")+t('menu.information'), [subject, :profile])
+                :html => link_to(raw("<i class='icon_tool-info'></i>")+t('menu.information'), [subject, :profile])
               }
 
               if subject != current_subject
@@ -100,7 +100,7 @@ module SocialStream
                   #Relation button
                   items << {
                     :key => :subject_relation,
-                    :html => link_to(raw("<i class='iconnav-followers'></i> ") + current_subject.contact_to!(subject).status,
+                    :html => link_to(raw("<i class='icon_navbar-followers'></i> ") + current_subject.contact_to!(subject).status,
                                      edit_contact_path(current_subject.contact_to!(subject)))
                   }
 
@@ -116,28 +116,28 @@ module SocialStream
               # Messages
               items << {
                 :key => :message_new,
-                :html => link_to(raw("<i class='iconmessage22-message22_new'></i> ")+ t('message.new'),
+                :html => link_to(raw("<i class='icon_message-new'></i> ")+ t('message.new'),
                                  new_message_path,
                                  :remote=> false)
               }
 
               items << {
                 :key => :message_inbox,
-                :html => link_to(raw("<i class='iconmessage22-message22_inbox'></i> ")+t('message.inbox')+' (' + current_subject.unread_messages_count.to_s + ')',
+                :html => link_to(raw("<i class='icon_message-inbox'></i> ")+t('message.inbox')+' (' + current_subject.unread_messages_count.to_s + ')',
                                  conversations_path,
                                  :remote=> false)
               }
 
               items << {
                 :key => :message_sentbox,
-                :html => link_to(raw("<i class='iconmessage22-message22_sendbox'></i> ")+t('message.sentbox'),
+                :html => link_to(raw("<i class='icon_message-sendbox'></i> ")+t('message.sentbox'),
                                  conversations_path(:box => :sentbox),
                                  :remote=> false)
               }
 
               items << {
                 :key => :message_trash,
-                :html => link_to(raw("<i class='iconmessage22-message22_trash'></i> ")+t('message.trash'),
+                :html => link_to(raw("<i class='icon_message-trash'></i> ")+t('message.trash'),
                                  conversations_path(:box => :trash))
               }
             end
