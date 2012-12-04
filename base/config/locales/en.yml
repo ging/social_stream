@@ -162,6 +162,9 @@ en:
       one: "1 contact in common"
       other: "%{count} contacts in common"
     new:
+      button:
+        zero: "Add"
+        other: "%{count} roles"
       link: "+ Add contact"
       title: "Add %{name} to your contacts"
       menu: "Add contact"
