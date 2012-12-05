@@ -32,11 +32,6 @@ module DocumentsHelper
     end
   end
   
-  def show_view_for(document)
-    render :partial => document.class.to_s.pluralize.downcase + '/' + document.class.to_s.downcase + "_show",
-           :locals => {document.class.to_s.downcase.to_sym => document}
-  end
-
   def document_details_tab_class(document, tab)
     editing = document && document.errors.present?
 

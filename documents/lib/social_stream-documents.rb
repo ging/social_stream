@@ -15,7 +15,7 @@ module SocialStream
       :"170x127#" => ["170x127#"],
       # midwall preserves A4 proportion: 210x297
       :midwall => ["80x113#"],
-      :preview => ["500>"]
+      :"500" => ["500>"]
 
     }
 

@@ -17,7 +17,8 @@
 
     <div class="show">
 
-      <%= show_view_for document %>
+      <%= render partial: "#{ document.class.to_s.tableize }/#{ document.class.to_s.underscore }_show",
+                 locals: { document.class.to_s.underscore.to_sym => document } %>
 
       <div class="actions">
         <% if can? :destroy, document %>
