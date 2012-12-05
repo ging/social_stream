@@ -320,6 +320,7 @@ div.jp-volume-bar-value {
 	width:0px;
 	height:5px;
 }
+//*
 div.jp-current-time,
 div.jp-duration {
 	position: absolute;
@@ -347,7 +348,7 @@ div.jp-video div.jp-duration {
 	left:0px;
 	width:98%;
 	padding:0 1%;
-}
+}*//
 div.jp-playlist {
 	/* width:418px; */
 	width:100%;

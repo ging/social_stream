@@ -5,12 +5,9 @@
       <%= t 'contact.pending.other' %>
     </h4>
   </header>
-  <div class="contents">
-    <article class="content">
-      <%= render :partial => 'contacts/contact', :collection => current_subject.pending_contacts.shuffle.first(2) %>
-      <div class="see-more">  <%= link_to t('contact.pending.all_n', :count => current_subject.pending_contacts_count), pending_contacts_path %>
-      </div>
-    </article>
+  <%= render :partial => 'contacts/contact', :collection => current_subject.pending_contacts.shuffle.first(2) %>
+
+  <div class="see-more">  <%= link_to t('contact.pending.all_n', :count => current_subject.pending_contacts_count), pending_contacts_path %>
   </div>
 </section>
 <% end -%>
