@@ -1,2 +1,2 @@
-$(".verb_like#like_<%= dom_id(@like.object) %>").html("<%= escape_javascript(link_like(@like.object) ) %>");
+$(".like_<%= dom_id(@like.object) %>").html("<%= escape_javascript(render partial: 'activities/like', locals: { activity: @like.object }) %>");
 

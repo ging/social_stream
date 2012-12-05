@@ -1,3 +1,5 @@
-<div class="to_like" id="like_<%= dom_id(activity) %>">
-  <%= link_like(activity)%>
+<div class="to_like like_<%= dom_id(activity) %>">
+  <%= link_to [ activity, :like ], remote: true, method: ( like_next_action(activity) == 'like' ? :post : :delete ) do %>
+    <i class="icon_<%= like_next_action(activity) %>"></i> <%= t "activity.#{ like_next_action(activity) }" %>
+  <% end %>
 </div>
