@@ -51,6 +51,9 @@ en:
       attach: "Attach file"
     not_mine: "Files"
     one: "a file"
+    scope:
+      network: "Network"
+      own: "Own"
     simple_all: "All"  
     title:
       input: "File title"
