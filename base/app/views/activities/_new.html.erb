@@ -23,7 +23,7 @@
     $(function(){  
       SocialStream.Wall.show({
         wallInput: {
-          blankText: "<%= t "activity.privacy.contact.#{ receiver == current_subject ? :myself : :outside }.#{ receiver.class.to_s.underscore }" %>"
+          blankText: "<%= t "activity.privacy.contact.#{ receiver == current_subject ? :myself : :outside }.#{ receiver.class.to_s.underscore }", receiver: receiver.name %>"
         }
       });  
     });
