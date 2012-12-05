@@ -88,14 +88,6 @@ module SocialStream
               }
 
               if subject != current_subject
-                #Like button
-                items << {
-                  :key => :like_button,
-                  :html => link_to(link_like_params(subject)[0],
-                                   link_like_params(subject)[1],
-                                   :id => link_like_params(subject)[2])
-                }
-
                 if user_signed_in?
                   #Relation button
                   items << {
