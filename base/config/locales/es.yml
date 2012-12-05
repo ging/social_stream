@@ -161,6 +161,9 @@ es:
       one: "1 contacto en común"
       other: "%{count} contactos en común"
     new:
+      button:
+        zero: "Añadir"
+        other: "%{count} roles"
       link: "+ Añadir contacto"
       title: "Añadir a %{name} como contacto"
       menu: "Añadir contacto"
