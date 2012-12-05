@@ -10,7 +10,7 @@ SocialStream.Document = (function(SS, $, undefined){
 	};
 
   var initTagsForm = function(options) {
-    $('#document_tag_list').fcbkcomplete({
+    $('select[name*="[tag_list]"]').fcbkcomplete({
         json_url: options.tags.path,
         cache: false,
         filter_case: true,

@@ -3,17 +3,6 @@
 <% end %>
 
 <% if profile_subject %>
-  <%= location(
-    link_to(profile_subject.name, polymorphic_path(profile_subject),:remote => true),
-    link_to(t('repository.title'), polymorphic_path([profile_subject, controller.controller_name]),:remote => true)
-    ) %>
-<% else %>
-  <%= location(
-    link_to(t('repository.title'), polymorphic_path(controller.controller_name),:remote => true)
-    ) %>
-<% end %>
-
-<% if profile_subject %>
   <% toolbar :profile, :subject => profile_subject %>
 <% elsif user_signed_in? %>
   <% toolbar %>
@@ -32,9 +21,11 @@
   </ul> 
 </div>
 
+<% if user_signed_in? && profile_subject_is_current? %>
 <div class="add-new">  
-  <%= link_to t('add new') %>
+  <%= link_to t('document.new.link'), new_document_path %>
 </div>
+<% end %>
 
 <div class="tab-content">
   <div id="document-list-own" class="tab-pane active">

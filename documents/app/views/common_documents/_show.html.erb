@@ -70,7 +70,7 @@
         </div>
         <% if can? :update, document %>
           <div class="tab-pane <%= document_details_tab_class document, :edit %>" id="document-edit">
-            <%= render partial: 'common_documents/edit', locals: { document: document } %>
+            <%= render partial: 'common_documents/form', locals: { document: document } %>
           </div>
         <% end %>
       </div>

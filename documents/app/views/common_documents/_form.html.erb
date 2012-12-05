@@ -9,6 +9,9 @@
     </ul>
   </div>
 
+  <%= f.label :file, t('document.info.file') %>
+  <%= f.file_field :file %>
+
   <%= f.label :title, t('document.info.title') %>
   <%= f.text_field :title %>
 
@@ -20,10 +23,7 @@
     <%= f.select :tag_list, [] %>
   </div>
 
-  <%= f.label :file, t('document.info.file') %>
-  <%= f.file_field :file %>
-
-  <%= f.submit t('document.actions.edit'), :class => "button" %>
+  <%= f.submit :class => "button" %>
 <% end %>
 
 <%= javascript_tag do %>

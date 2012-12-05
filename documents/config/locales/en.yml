@@ -3,6 +3,8 @@ en:
     attributes:
       document:
         title: "Title"
+    models:
+      document: "File"
   audio:
     confirm_delete: "Delete audio?"
     title: "Audios"
@@ -42,6 +44,9 @@ en:
       title: "Title"
     mine: "My files"
     name: "file"
+    new:
+      link: "Add new"
+      title: "New file"
     new_activity:
       attach: "Attach file"
     not_mine: "Files"
