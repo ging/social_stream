@@ -61,9 +61,11 @@ SocialStream.Contact = (function($, SS, undefined) {
   };
 
   addIndexCallback(initTabs);
-  addIndexCallback(initContactButtons);
 
-  addShowCallback(initContactButtons);
+  // FIXME There is probably a more efficient way to do this..
+  $(function() {
+    initContactButtons();
+  });
 
   return {
     index: index,
