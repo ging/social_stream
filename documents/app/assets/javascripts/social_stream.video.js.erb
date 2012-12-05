@@ -19,18 +19,17 @@ SocialStream.Video = (function(SS, $, undefined){
       })
     });
 
-    $(".video-format-links").hide();
+    $(".video .format-links").hide();
     $(".video-full").hide();
 
-    $(".video_thumbnail_play_over").click(function(){
+    $(".video .play_over").click(function(){
       var video = $(this).closest(".video")
-      video.find(".video-thumb").hide();
-      video.find(".video-details").hide();
+      video.find(".thumb").hide();
+      video.find(".text").hide();
       video.find(".jp-video-play").hide();
       video.find(".video-full").show();
-    video.find(".jp-jplayer").jPlayer("play", 0);
+      video.find(".jp-jplayer").jPlayer("play", 0);
     });
-
   }
 
   SocialStream.Timeline.addInitCallback(initJplayer);

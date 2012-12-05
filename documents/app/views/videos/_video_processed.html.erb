@@ -13,7 +13,7 @@
     <%= simple_format "#{ auto_link(video.description) } #{ link_to t('details.msg'),video, :class => 'view_more' }" %>
   </div>
 
-  <div class="video-format-links">
+  <div class="format-links">
     <%= link_to "WebM", video_path(video, :format => :webm), :class => "video-webm" %>
     <%= link_to "FLV",  video_path(video, :format => :flv),  :class => "video-flv" %>
     <%= link_to "MP4",  video_path(video, :format => :mp4),  :class => "video-mp4" %>
