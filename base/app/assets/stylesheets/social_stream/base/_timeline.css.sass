@@ -47,9 +47,8 @@
       margin-left: 67px
       word-wrap: break-word
       .thumb
-        widht: 100%
+        @include makeColumn(2, 0)
         margin-left: 0px
-        background: black
       .text
         font-size: 14px
       .description
@@ -62,19 +61,19 @@
       margin-left: 56px 
       .post_time_ago
         display: inline
-        font-size: 12px
+        font-size: 11px
         color: #444
       .to_comment
         display: inline-block
-        font-size: 14px
+        font-size: 12px
         margin-left: 5px
       .to_like
         display: inline-block
-        font-size: 14px
+        font-size: 12px
         margin-left: 5px
       .audience
         display: inline-block
-        font-size: 14px
+        font-size: 12px
         margin-left: 7px
 
       .tooltip
@@ -127,7 +126,6 @@
       .thumb
         @include makeColumn(1, 0)
         margin-left: 0px
-        background: black
       .text
         font-size: 14px
       .description
@@ -140,19 +138,19 @@
       margin-top: -5px
       .post_time_ago
         display: inline
-        font-size: 12px
+        font-size: 10px
         color: #444
       .to_comment
         display: inline-block
-        font-size: 14px
+        font-size: 11px
         margin-left: 5px
       .to_like
         display: inline-block
-        font-size: 14px
+        font-size: 11px
         margin-left: 5px
       .audience
         display: inline-block
-        font-size: 14px
+        font-size: 11px
         margin-left: 7px
 
 #comment_text

@@ -20,7 +20,7 @@
     </li>
   </ul> 
 </div>
-
+<%= render partial: 'common_documents/filter' %>
 <% if user_signed_in? && profile_subject_is_current? %>
 <div class="add-new">  
   <%= link_to t('document.new.link'), new_document_path %>
@@ -29,8 +29,6 @@
 
 <div class="tab-content">
   <div id="document-list-own" class="tab-pane active">
-    <%= render partial: 'common_documents/filter' %>
-
     <div class="documents">
       <%= render partial: 'common_documents/list',
                  locals: { documents: collection } %>

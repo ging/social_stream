@@ -1,23 +1,32 @@
 #content-large
+  .filter
+    @include makeColumn(9, 0)
+    margin-left: 0px
+    display: inline
   .add-new
-    float: right
-  .documents
-    .document
-      display: inline
-      @include makeColumn(3, 0)
-      margin-left: 19px
-      .thumb
-        @include makeColumn(1, 0)
+    width: 90px
+    display: inline-block
+    margin-top: 3px
+    margin-left: -14px
+  .tab-content
+    @include makeColumn(10, 0)
+    .documents
+      .document
         display: inline
-        margin-top: 10px
-        margin-left: 0px
-      .brifing
-        @include makeColumn(2, 0)
-        display: inline-block
-        margin-left: 0px
-      .author
-        margin-top: -10px
-        font-size: 13px
-    .actions
-      color: #888
-      font-size: 12px
+        @include makeColumn(3, 0)
+        margin-left: 19px
+        .thumb
+          @include makeColumn(1, 0)
+          display: inline
+          margin-top: 10px
+          margin-left: 0px
+        .brifing
+          @include makeColumn(2, 0)
+          display: inline-block
+          margin-left: 0px
+        .author
+          margin-top: -10px
+          font-size: 13px
+      .actions
+        color: #888
+        font-size: 12px
