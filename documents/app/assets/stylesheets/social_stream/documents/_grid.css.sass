@@ -5,15 +5,37 @@
     @include makeColumn(7, 0)
     display:inline-block
     margin-left: 0px
-    .picture-show
+    .show
       padding: 10px
       @include border-radius(10px)
       border: 1px solid #f7f7f7
-      .document
-        @include border-radius(10px)
-        background: black
-        widht: auto
-        height: auto
+    .tab-content
+      .comments
+        @include makeColumn(7, 0)
+        margin-left: 0px
+
+        .new_comment
+          
+          .avatar
+            width: 45px
+            margin-left: 10px
+            float: left
+            img
+              margin-left: 0px
+              width: 40px
+            h6
+              margin-top: 69px
+            #comment_text
+              float: right
+              margin-right: 19px
+              margin-top: 19px
+              width: 440px
+              resize: none
+
+            input
+              &[type="submit"]
+                float: right
+                margin-right: 19px
 
 
   .details
