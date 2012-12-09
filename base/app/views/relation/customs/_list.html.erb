@@ -5,7 +5,13 @@
         <input id="<%= dom_id(r) %>" type="radio" name="relation_custom"/>
         <label for="<%= dom_id(r) %>"><%=r.name%></label>
         <div class="options">
+
+            <i class='icon_tool-edit'></i>
+
           <%= link_to image_tag("btn/edit.png", :class => "menu_icon", :title => t('relation_custom.edit')), '#', :class => "relation_custom_edit_link" %>
+          
+           
+
           <%= link_to image_tag("btn/delete.png", :class => "menu_icon", :title => t('relation_custom.delete')), r, :class => "relation_custom_delete_link", :method => :delete, :confirm => t('relation_custom.confirm_delete') %>
 
         </div>

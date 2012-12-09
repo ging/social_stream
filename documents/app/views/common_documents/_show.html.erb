@@ -22,12 +22,16 @@
 
       <div class="actions">
         <% if can? :destroy, document %>
-          <%= link_to image_tag("btn/error.png", alt: t('document.actions.delete'), title: t('document.actions.delete')), document,
+          <%= link_to (raw("<i class='icon_tool16-trash'></i> ")),  document,
                       :confirm => t('confirm_delete', :scope => document.class.to_s.underscore),
                       :method => :delete %>
         <% end %>
 
-        <%= link_to image_tag("btn/download.png", alt: t('document.actions.download'), title: t('document.actions.download')), download_document_path(document) %>
+        <!--alt: t('document.actions.delete'), title: t('document.actions.delete')),-->
+
+        <%= link_to (raw("<i class='icon_tool16-save'></i> ")),  download_document_path(document) %>
+         <!--alt: t('document.actions.download') title: t('document.actions.download'))-->
+        
         </div>
       </div>
 
@@ -58,7 +62,10 @@
 
           <% if can? :update, document %>
           <li class="<%= document_details_tab_class document, :edit %>">
-            <%= link_to image_tag("btn/edit.png", alt: t('document.actions.edit')), '#document-edit', 'data-toggle' => 'tab' %>
+
+            <%= link_to (raw("<i class='icon_tool16-edit'></i> ")), '#document-edit', 'data-toggle' => 'tab' %>
+            <!--alt: t('document.actions.edit'),-->
+
           </li>
           <% end %>
         </ul>

@@ -1,5 +1,6 @@
 <% if can?(:update, @profile) %>
   <div class="edit_icon">
-    <%= link_to image_tag('icons/edit_icon.png'), '#' %>
+  	<%= link_to(raw("<i class='icon_tool16-edit'></i> "), '#')%>
+    
   </div>
 <% end %>

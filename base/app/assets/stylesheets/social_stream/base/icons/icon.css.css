@@ -17,9 +17,7 @@
   background-image: url("icons/files_ico-70.png");
 }
 
-[class^="icon_file_70-"]:last-child,   [class*="icon_file_70-"]:last-child {
-  *margin-left: 0;
-}
+
 .icon_file_70-default { background-position: -0  -42px;  }
 .icon_file_70-xls     { background-position: -10px -10px;  }
 .icon_file_70-doc    { background-position: -90px -10px;  }
@@ -190,7 +188,7 @@ li{
 [class^="iconchat22-"], [class*="iconchat22-"] {
     height:22px;
     width:22px;
-    background-image: url("icon_chat22.png");
+    background-image: url("icons/chat_ico-30.png");
     line-height:22px;
 }
 
@@ -224,55 +222,55 @@ li{list-style-type:none}
 
 [class^="tool16-"], [class*="tool16-"] {
 
-  background-image: url("tools16.png");
+  background-image: url("icons/tools_ico-16.png");
   height:16px;
   width:16px;
   line-height:16px;
 }
 
 
-.icon_tool-ok{background-position: 0 0;}
-.icon_tool-less {background-position: -26px 0;}
-.icon_tool-more { background-position: -52px 0;}
-.icon_tool-multipli {background-position: -78px 0;}
-.icon_tool-play { background-position: -104px 0;}
-.icon_tool-pause {  background-position:-156px 0;}
-.icon_tool-advance{ background-position: -182px 0;}
-.icon_tool-rewind { background-position: -208px 0;}
-.icon_tool-arrow_1 { background-position: -260px -26px;}
-.icon_tool-arrow_2 { background-position: -286px -26px;}
-.icon_tool-arrow_3 { background-position: -312px -26px;}
-.icon_tool-arrow_4 { background-position: -338px -26px;}
-.icon_tool-volume_up { background-position: -234px 0;}
-.icon_tool-volume_down { background-position: -260px 0;}
-.icon_tool-quit_volumen { background-position: -286px 0;}
-.icon_tool-on{ background-position: -26px -52px;}
-.icon_tool-edit { background-position: -312px 0;}
-.icon_tool-tools { background-position: -338px 0;}
-.icon_tool-save { background-position: -390px 0;}
-.icon_tool-trash { background-position: -364px 0;}
-.icon_tool-adjunt { background-position: -364px 0;}
-.icon_tool-amplify { background-position: -182px -26px;}
-.icon_tool-reduce { background-position: -208px -26px;}
-.icon_tool-searcher { background-position: -156px -26px;}
-.icon_tool-private{ background-position: -26px -52px;}
-.icon_tool-public{ background-position: -26px -52px;}
-.icon_tool-phone { background-position: -52px -26px;}
-.icon_tool-trash { background-position: -78px -26px;}
-.icon_tool-close { background-position: -104px -26px;}
-.icon_tool-open { background-position: -130px -26px;}
-.icon_tool-phone { background-position: -234px -26px;}
-.icon_tool-tag { background-position: 0 -26px;}
-.icon_tool-question { background-position: -26px -26px;}
-.icon_tool-recharge { background-position: -364px 0;}
-.icon_tool-star_in{ background-position: -364px -26px;}
-.icon_tool-star_out { background-position: -390px -26px;}
-.icon_tool-print { background-position:-416px -26px;}
-.icon_tool-sms { background-position: 0 -52px;}
-.icon_tool-qrcode{ background-position: -26px -52px;}
-.icon_tool-embed { background-position: -52px -52px;}
-.icon_tool-branch{ background-position: -78px -52px;}
-.icon_tool-rss{ background-position: -104px -52px;}
-.icon_tool-info { background-position: -130px -52px;}
-.icon_tool-span { background-position: -156px -52px;}
+.icon_tool16-ok{background-position: -10px -10px;}
+.icon_tool16-less {background-position: -40px -10px;}
+.icon_tool16-more { background-position: -70px -10px;}
+.icon_tool16-multipli {background-position: -100px -10px;}
+.icon_tool16-play { background-position: -130px -10px;}
+.icon_tool16-pause {  background-position:-160px -10px;}
+.icon_tool16-advance{ background-position: -190px -10px;}
+.icon_tool16-rewind { background-position: -220px -10px;}
+
+.icon_tool16-arrow_1 { background-position: -10px -35px;}
+.icon_tool16-arrow_2 { background-position: -40px -35px;}
+.icon_tool16-arrow_3 { background-position: -70px -35px;}
+.icon_tool16-arrow_4 { background-position: -100px -35px;}
+.icon_tool16-volume_up { background-position: -130px -35px;}
+.icon_tool16-volume_down { background-position: -160px -35px;}
+.icon_tool16-quit_volumen { background-position: -190px -35px;}
+.icon_tool16-on{ background-position: -220px -35px;}
+
+.icon_tool16-edit { background-position: -10px -60px;}
+.icon_tool16-tools { background-position: -40px -60px;}
+.icon_tool16-save { background-position: -72px -60px;}
+.icon_tool16-trash { background-position: -100px -60px;}
+.icon_tool16-adjunt { background-position: -130px -60px;}
+.icon_tool16-amplify { background-position: -160px -60px;}
+.icon_tool16-reduce { background-position: -190px -60px;}
+.icon_tool16-searcher { background-position: -220px -60px;}
+
+.icon_tool16-private{ background-position: -10px -85px;}
+.icon_tool16-public{ background-position: -40px -85px;}
+.icon_tool16-phone { background-position: -70px -85px;}
+.icon_tool16-tag { background-position: -100px -85px;}
+.icon_tool16-question { background-position: -130px -85px;}
+.icon_tool16-recharge { background-position: -160px -85px;}
+.icon_tool16-like { background-position: -190px -85px;}
+.icon_tool16-unlike { background-position: -220px -85px;}
+
+.icon_tool16-print { background-position: -10px -26px;}
+.icon_tool16-sms { background-position: -40px -52px;}
+.icon_tool16-qrcode{ background-position: -70px -52px;}
+.icon_tool16-embed { background-position: -100px -52px;}
+.icon_tool16-branch{ background-position: -130px -52px;}
+.icon_tool16-rss{ background-position: -160px -52px;}
+.icon_tool16-info { background-position: -190px -52px;}
+.icon_tool16-span { background-position: -220px -52px;}
 
