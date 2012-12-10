@@ -183,6 +183,7 @@ en:
       link: "+ Reply contact"
       title: "Reply contact request to %{name}"
       submit: "Reply contact"
+    saving: "Saving..."
     sent: "Added"
     suggestion:
       one: "Suggestion"
