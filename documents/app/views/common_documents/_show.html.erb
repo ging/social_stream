@@ -22,15 +22,13 @@
 
       <div class="actions">
         <% if can? :destroy, document %>
-          <%= link_to (raw("<i class='icon_tool16-trash'></i> ")),  document,
-                      :confirm => t('confirm_delete', :scope => document.class.to_s.underscore),
-                      :method => :delete %>
+          <%= link_to raw("<i class='icon_tool16-trash'></i> "),  document,
+                      confirm: t('confirm_delete', scope: document.class.to_s.underscore),
+                      title: t('document.actions.delete'),
+                      method: :delete %>
         <% end %>
 
-        <!--alt: t('document.actions.delete'), title: t('document.actions.delete')),-->
-
-        <%= link_to (raw("<i class='icon_tool16-save'></i> ")),  download_document_path(document) %>
-         <!--alt: t('document.actions.download') title: t('document.actions.download'))-->
+        <%= link_to raw("<i class='icon_tool16-save'></i> "), download_document_path(document), title: t('document.actions.download') %>
         
         </div>
       </div>
