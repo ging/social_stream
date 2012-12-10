@@ -9,8 +9,15 @@
     <% end %>
 
      <ul class="nav pull-right">
-        
-      <li><%= link_to(raw("<i class='icon_navbar-home'></i> "), root_path)%></li>   
+      <li>
+        <%= link_to current_subject do %>
+          <%= image_tag current_subject.logo.url(:small) %>
+          <%= truncate_name(current_subject.name, length: 15) %>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to(raw("<i class='icon_navbar-home'></i> "), root_path)%>
+      </li>   
       <li>
         <%= link_to(raw("<i class='icon_navbar-message'></i> "), conversations_path) %> 
           <!-- <span id="header_inbox_count">
@@ -22,7 +29,8 @@
           <!--<span id="header_notifications">
             <%= link_to( current_subject.mailbox.notifications.not_trashed.unread.count.to_s, notifications_path) %>
           </span> -->
-      <li>
+      </li>
+      <li> 
         <%= render partial: 'layouts/header_dropdown_menu' %>
       </li>
     </ul>
