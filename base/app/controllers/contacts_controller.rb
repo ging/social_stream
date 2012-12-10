@@ -38,10 +38,18 @@ class ContactsController < ApplicationController
     params[:contact][:relation_ids].present? &&
       params[:contact][:relation_ids].delete("0")
 
-    if @contact.update_attributes(params[:contact])
-      redirect_to @contact.receiver_subject
-    else
-      render :action => 'edit'
+    @contact.update_attributes(params[:contact])
+
+    respond_to do |format|
+      format.html {
+        if @contact.errors.blank?
+          redirect_to @contact.receiver_subject
+        else
+          render :action => 'edit'
+        end
+      }
+
+      format.js
     end
   end
 

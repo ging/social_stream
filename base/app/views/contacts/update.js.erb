@@ -1,0 +1,7 @@
+<% if @contact.errors.blank? %>
+SocialStream.Contact.update({
+  id: "<%= @contact.id %>"
+});
+<% else %>
+SocialStream.Flash.error("<%= @contact.errors.full_messages.to_sentence %>");
+<% end %>
