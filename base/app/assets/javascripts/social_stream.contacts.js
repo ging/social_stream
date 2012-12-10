@@ -75,13 +75,18 @@ SocialStream.Contact = (function($, SS, undefined) {
       var contact = $(el).closest('div.contact');
       var contactId = $(contact).attr('data-contact_id');
 
-      $('[data-contact_id="' + contactId + '"]').each(function(i, el) {
+      var contacts = $('[data-contact_id="' + contactId + '"]');
+      /*
+      contacts.each(function(i, el) {
         if ($(el).children('.loading').length === 0)
           $(el).append('<div class="loading"></div>');
       });
 
       $('[data-contact_id="' + contactId + '"] .loading').show();
+      */
 
+      $('button', contacts).attr('data-loading-text', I18n.t('contact.saving'));
+      $('button', contacts).button('loading');
       $('form.edit_contact', contact).submit();
     });
   };
@@ -131,7 +136,11 @@ SocialStream.Contact = (function($, SS, undefined) {
   };
 
   var clearLoading = function(options) {
-    $('[data-contact_id="' + options.id + '"] .loading').hide();
+    var contacts = $('[data-contact_id="' + options.id + '"]');
+
+  //  $('.loading', contacts).hide();
+
+    $('button', contacts).button('reset');
   };
 
   addIndexCallback(initTabs);

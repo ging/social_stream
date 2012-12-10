@@ -182,6 +182,7 @@ es:
       link: "+ Responder contacto"
       title: "Responder contacto con %{name}"
       submit: "Responder contacto"
+    saving: "Guardando..."
     sent: "Añadidos"
     suggestion:
       one: "Sugerencia"
