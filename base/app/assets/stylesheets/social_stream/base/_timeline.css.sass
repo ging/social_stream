@@ -6,7 +6,7 @@
     display: inline
     margin-right: -10px
     margin-left: 4px
-    margin-top: 13px
+    margin-top: 6px
     img
       @include border-radius(5px) 
 
@@ -47,10 +47,18 @@
       margin-left: 67px
       word-wrap: break-word
       .thumb
-        @include makeColumn(2, 0)
-        margin-left: 0px
+        float: left
+        width: auto
+        padding-rigth: 10px
+        img
+          width: 170px
+        .play_button
+          width: auto
+          margin-left: -107px
       .text
-        font-size: 14px
+        font-size: 12px
+        h6
+          font-size: 14px 
       .description
         margin: 0 0 4px
         .view-more
