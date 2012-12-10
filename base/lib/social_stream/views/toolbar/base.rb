@@ -5,7 +5,7 @@ module SocialStream
         def toolbar_items type, options = {}
           SocialStream::Views::List.new.tap do |items|
             case type
-            when :home, :messages
+            when :home
               items << {
                 :key => :subject,
                 :html => render(:partial => 'toolbar/subject')
@@ -33,7 +33,11 @@ module SocialStream
                 :key => :contacts,
                 :html => render(:partial => 'subjects/contacts', :locals => { :subject => subject })
               }
-
+            when :messages
+              items << {
+                :key => :menu,
+                :html => toolbar_menu(type, options)
+              }
             end
           end
         end
