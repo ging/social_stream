@@ -4,9 +4,8 @@
         :alt => activity.sender_subject.name), activity.sender_subject %>
   </div>
   <header>
-    <h5>
-      <%= activity.title(self) %>
-    </h5>
+    <%= activity.title(self) %>
+
     <% if activity.direct_object && can?(:destroy, activity.direct_object) %>
     <div class="x"> 
       <%= link_to ('X'), activity.direct_object , :confirm => t('confirm_delete', 
