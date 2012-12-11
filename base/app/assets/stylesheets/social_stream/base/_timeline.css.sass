@@ -127,16 +127,17 @@
 
     h6
       @include makeColumn(5, 0)
-      font-size: 15px
-      margin-left: 20px
+      font-size: 14px
+      margin-left: 11px
       margin-bottom: 3px
+      margin-top: 0px
       text-decoration: none
       &:hover
         text-decoration: none
 
     .objects
       @include makeColumn(5, 0)
-      margin-left: 66px
+      margin-left: 58px
       margin-top: -27px
       word-wrap: break-word
       .thumb
@@ -149,7 +150,7 @@
 
     .actions
       @include makeColumn(6, 0)
-      margin-left: 60px 
+      margin-left: 58px 
       margin-bottom: 2px
       margin-top: -5px
       .post_time_ago
@@ -161,9 +162,10 @@
         font-size: 11px
         margin-left: 5px
       .to_like
-        display: inline-block
-        font-size: 11px
-        margin-left: 5px
+        a
+          display: inline-block
+          font-size: 11px !important
+          margin-left: 5px
       .audience
         display: inline-block
         font-size: 11px
