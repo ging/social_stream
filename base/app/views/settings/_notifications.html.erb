@@ -1,27 +1,23 @@
 <div id="notifications_settings">
-    <header>
-      <h5><%= link_to ('notifications'),  "javascript:showSettings(\"notifications_settings\");" %>
-      </h5>
-    </header>
+  <header>
+    <h5>
+      <%= link_to ('notifications'),  "javascript:showSettings(\"notifications_settings\");" %>
+    </h5>
+  </header>
 
-    <div class="content settings_content" id="notifications_settings_content" style="display:none;">
-        <%= form_tag update_all_settings_path, :method => :put do %>
-        <ul>
-            <div class="settings_block">
-                <div class="form_row">
-                    <li><%= t('settings.notifications.by_email.name')%>
-                    </li>
-                </div>
-                <div class="form_sub_row">
-                    <%= radio_button_tag :notify_by_email, 'always', current_subject.notify_by_email %> <%= t('settings.notifications.by_email.always') %>
-                    <%= radio_button_tag :notify_by_email, 'never', !current_subject.notify_by_email %> <%= t('settings.notifications.by_email.never') %>
-                </div>
-                <div class="actions center">
-                    <%= hidden_field_tag :settings_section, :notifications %>
-                    <%= submit_tag "Update Settings", :class => "button" %>
-                </div>
-            </div>
-        </ul>
-        <% end %>
+  <div class="content settings_content" id="notifications_settings_content" style="display:none;">
+    <%= form_tag update_all_settings_path, :method => :put do %>
+    
+    <%= t('settings.notifications.by_email.name')%>
+
+    <div class="options">          
+      <%= radio_button_tag :notify_by_email, 'always', current_subject.notify_by_email %> <%= t('settings.notifications.by_email.always') %>
+      <%= radio_button_tag :notify_by_email, 'never', !current_subject.notify_by_email %> <%= t('settings.notifications.by_email.never') %>
     </div>
+  
+   
+    <%= hidden_field_tag :settings_section, :notifications %>
+    <%= submit_tag "Update Settings", :class => "btn btn_notifications" %>
+    <% end %>
+  </div>
 </div>
