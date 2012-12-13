@@ -66,7 +66,6 @@ en:
       atom_title: "Activity Stream from %{subject}"
       title:
         follow: "%{author} added %{activity_object} as contact"
-        unfollow: "%{author} removed %{activity_object} as contact"
         like: "%{author} likes %{activity_object}"
         make-friend: "%{author} also added %{activity_object} as contact"
         post: "%{author} posted %{activity_object}"
@@ -89,6 +88,8 @@ en:
         Group:
           title: "%{subject} is a fan of %{contact}."
           message: "%{name} is now your fan."
+      join: 
+        one: "%{sender} joined the %{title} %{thing}."
       make-friend:
         User:
           title: "%{subject} and %{contact} are now connected."
