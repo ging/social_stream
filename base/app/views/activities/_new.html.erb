@@ -5,7 +5,7 @@
     
       <%= f.text_field :text, placeholder: t('post.input') %>
 
-      <%= f.submit t('activity.share') %>
+      <%= f.submit t('activity.share'), class: "btn" %>
 
       <% SocialStream.activity_forms.each do |element| %>
         <%= render partial: "#{ element.to_s.pluralize }/new_activity",

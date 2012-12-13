@@ -1,5 +1,5 @@
-<div class="navbar navbar">
-  <div class="navbar-inner">
+<header class="navbar navbar">
+  <nav class="navbar-inner">
     <%= link_to(image_tag('header-logo.png', :alt => t('site.name')), root_path, class: 'brand') %>
 
     <!-- FIXME: search javascript functionality in 'layouts/search' -->
@@ -31,5 +31,5 @@
         <%= render partial: 'layouts/header_dropdown_menu' %>
       </li>
     </ul>
-  </div>
-</div>
+  </nav>
+</header>
