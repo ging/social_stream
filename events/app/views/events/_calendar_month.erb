@@ -1,1 +1,3 @@
-<div id="month_<%= position %>" class="month<%= " not_current" if date.month != Date.today.month  %>"><%= link_to l(date, :format => "%B %Y"), polymorphic_path([profile_or_current_subject, Event.new], :date => date.to_time.to_i) %></div>
+<div id="month_<%= position %>" class="month<%= " not_current" if date.month != Date.today.month  %>">
+  <%= link_to l(date, :format => "%B %Y"), polymorphic_path([profile_or_current_subject, Event.new], :date => date.to_time.to_i) %>
+</div>
