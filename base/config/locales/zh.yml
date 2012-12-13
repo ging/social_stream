@@ -62,6 +62,14 @@ zh:
           group: "会员的 %{receiver}"
           user: "联系的 %{receiver}"
     sending: "传送中"
+    stream:
+      atom_title: "%{subject}的活动流"
+      title:
+        follow: "%{author}已加了%{activity_object}為关连"
+        like: "%{author}喜欢%{activity_object}"
+        make-friend: "%{author}还加了%{activity_object}为关连"
+        post: "%{author}发布了%{activity_object}"
+        updated: "%{author}更新了%{activity_object}"
     title: "活动"
     to_comment: "评论"
     unlike: "我不再喜欢了"

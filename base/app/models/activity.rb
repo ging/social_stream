@@ -217,6 +217,25 @@ class Activity < ActiveRecord::Base
     end.html_safe
   end
 
+  # Title for activity streams
+  def stream_title
+    # FIXMEEEEEEEEEEEEEEEEE
+    object = ( direct_object.present? ? 
+               ( direct_object.is_a?(SocialStream::Models::Subject) ? 
+                 direct_object.name :
+                 direct_object.title ) :
+               receiver.name )
+
+    I18n.t "activity.stream.title.#{ verb }",
+           :author => sender_subject.name,
+           :activity_object => object
+  end
+
+  # TODO: detailed description of activity
+  def stream_content
+    stream_title
+  end
+  
   def notificable?
     is_root? or ['post','update'].include?(root.verb)
   end
