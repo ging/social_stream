@@ -3,10 +3,255 @@
 <div id="privacity">   
   <h2><%= t 'relation_custom.title' %></h2>
 
-  <div id="relation_customs">
-    <h5><%= t 'relation_custom.choose' %></h5>
+  <div class="tabbable">
+    <ul class="nav nav-tabs">
+      <li class="active">
+      <a data-toggle="tab" href="#members"><%= t 'members' %></a>
+      </li>
+      <li class="">
+      <a data-toggle="tab" href="#users"><%= t 'users' %></a>
+      </li>
+    </ul>
+    <div class="filter">
+      <input type="text" placeholder="filtrar" name="q" id="q" autocomplete="off">
+    </div>
+    <div id="myTabContent" class="tab-content">
 
+    <div id="members" class="tab-pane">
+      
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Define Rol</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="profile">
+              <%= link_to current_subject do %>
+                <%= image_tag current_subject.logo.url(:small) %>
+                <span class="name">
+                  <%= truncate_name(current_subject.name, length: 15) %>
+                </span>
+              <% end %>
+            </td>
 
+            <td class="rol"> 
+              <div class="btn-group">
+                <button data-toggle="dropdown" class="dropdown-toggle btn btn-small" style="width:auto">Tus contactos <b class="caret"></b>
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#">
+                      <label class="checkbox" style="cursor: pointer;">
+                      <input type="checkbox" value="2"> 
+                        friend
+                      </label>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="3"> 
+                          acquaintance
+                      </label>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="4"> 
+                        colleague
+                      </label>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="1"> 
+                        Público
+                      </label>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </td>
+            <td class="tool">
+              <%= link_to(raw("<i class='icon_tool16-edit'></i> ")) %>
+            </td>
+            <td class="tool">
+              <%= link_to(raw("<i class='icon_tool16-private'></i> ")) %>
+            </td>
+            <td class="tool">
+              <%= link_to(raw("<i class='icon_tool16-public'></i> ")) %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn" type="button">
+        Add user
+      </button>
+    </div>
+    <div id="users" class="tab-pane">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td class="profile">
+              <%= link_to current_subject do %>
+                <%= image_tag current_subject.logo.url(:small) %>
+                <span class="name">
+                  <%= truncate_name(current_subject.name, length: 15) %>
+                </span>
+              <% end %>
+            </td>
+
+            <td class="rol"> 
+              <div class="btn-group">
+                <button data-toggle="dropdown" class="dropdown-toggle btn btn-small" style="width:auto">Tus contactos <b class="caret"></b>
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#">
+                      <label class="checkbox" style="cursor: pointer;">
+                      <input type="checkbox" value="2"> 
+                        friend
+                      </label>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="3"> 
+                          acquaintance
+                      </label>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="4"> 
+                        colleague
+                      </label>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="1"> 
+                        Público
+                      </label>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </td>
+            <td class="profile">
+              <%= link_to current_subject do %>
+                <%= image_tag current_subject.logo.url(:small) %>
+                <span class="name">
+                  <%= truncate_name(current_subject.name, length: 15) %>
+                </span>
+              <% end %>
+            </td>
+            <td class="tool">
+              <div class="btn-group">
+                <button data-toggle="dropdown" class="dropdown-toggle btn btn-small" style="width:auto">Tus contactos <b class="caret"></b>
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#">
+                      <label class="checkbox" style="cursor: pointer;">
+                      <input type="checkbox" value="2"> 
+                        friend
+                      </label>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="3"> 
+                          acquaintance
+                      </label>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="4"> 
+                        colleague
+                      </label>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="1"> 
+                        Público
+                      </label>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </td>
+            <td class="profile">
+              <%= link_to current_subject do %>
+                <%= image_tag current_subject.logo.url(:small) %>
+                <span class="name">
+                  <%= truncate_name(current_subject.name, length: 15) %>
+                </span>
+              <% end %>
+            </td>
+            <td class="tool">
+              <div class="btn-group">
+                <button data-toggle="dropdown" class="dropdown-toggle btn btn-small" style="width:auto">Tus contactos <b class="caret"></b>
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#">
+                      <label class="checkbox" style="cursor: pointer;">
+                      <input type="checkbox" value="2"> 
+                        friend
+                      </label>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="3"> 
+                          acquaintance
+                      </label>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="4"> 
+                        colleague
+                      </label>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="1"> 
+                        Público
+                      </label>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+  </div>
+<!--
     <%= javascript_tag do %>
       $(function() {
         $("#loading").hide();
@@ -39,4 +284,4 @@
       $("#permissions").hide();
     })
   <% end %>
-</div> 
+</div> -->
