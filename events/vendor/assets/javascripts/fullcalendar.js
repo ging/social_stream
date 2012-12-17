@@ -746,17 +746,17 @@ function Header(calendar, options) {
 							var icon = options.theme ? smartProperty(options.buttonIcons, buttonName) : null; // why are we using smartProperty here?
 							var text = smartProperty(options.buttonText, buttonName); // why are we using smartProperty here?
 							var button = $(
-								"<span class='btn fc-button-" + buttonName + " " + tm + "-state-default'>" +
-									"<span class='fc-button-inner'>" +
-										"<span class='fc-button-content'>" +
+								"<span class='btn " + buttonName + " " + tm + "'>" +
+									"<span>" +
+										"<span>" +
 											(icon ?
 												"<span class='fc-icon-wrap'>" +
-													"<span class='ui-icon ui-icon-" + icon + "'/>" +
+													"<span class='ui-icon ui-icon-" + icon + "/>" +
 												"</span>" :
 												text
 												) +
 										"</span>" +
-										"<span class='fc-button-effect'><span></span></span>" +
+										"<span class=''><span></span></span>" +
 									"</span>" +
 								"</span>"
 							);
@@ -776,19 +776,7 @@ function Header(calendar, options) {
 									.mouseup(function() {
 										button.removeClass(tm + '-state-down');
 									})
-									.hover(
-										function() {
-											button
-												.not('.' + tm + '-state-active')
-												.not('.' + tm + '-state-disabled')
-												.addClass(tm + '-state-hover');
-										},
-										function() {
-											button
-												.removeClass(tm + '-state-hover')
-												.removeClass(tm + '-state-down');
-										}
-									)
+									
 									.appendTo(e);
 								if (!prevButton) {
 									button.addClass(tm + '-corner-left');
