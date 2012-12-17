@@ -1,7 +1,8 @@
 source "http://rubygems.org"
 
-# Freeze Rails version to help with bunlder resolution
-gem 'builder', '~> 3.0.0'
+# Freeze rails version
+# https://github.com/ging/social_stream/issues/291
+gem 'rails', '3.2.8'
 
 # Uncomment the following lines if you are planing to
 # use a local code of any of these gems

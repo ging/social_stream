@@ -37,7 +37,7 @@ class Comment < ActiveRecord::Base
   def decrement_comment_count 
     return if self.post_activity.blank? || self.post_activity.parent.blank?
  
-    self.post_activity.parent.direct_activity_object.decrement!(:comment_count) 
+    self.post_activity.parent.direct_activity_object.try(:decrement!, :comment_count) 
   end 
 
 end

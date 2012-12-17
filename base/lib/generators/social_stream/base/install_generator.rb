@@ -62,23 +62,23 @@ class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
 
   def create_ability_file
     ability_code = [
-      "# The generator social_stream:install generator has modified this file.",       #0
-      "# Please, check everything is working fine, specially if the former `Ability`", #1
-      "# class inherited from another class or included another module",               #2
-      "class Ability",                                            #3
-      "  include SocialStream::Ability",                          #4
-      "",                                                         #5
-      "  def initialize(subject)",                                #6
-      "    super",                                                #7
-      "",                                                         #8
-      "    # Add your authorization rules here",                  #9
-      "    # For instance:",                                      #10
-      "    #    can :create, Comment",                            #11
-      "    #    can [:create, :destroy], Post do |p|",            #12
-      "    #      p.actor_id == Actor.normalize_id(subject)",     #13
-      "    #    end",                                             #14
-      "  end",                                                    #15
-      "end"]                                                      #16
+      "# Generator social_stream:install has modified this file. Please,",   #0
+      "# check everything is working ok, specially if the former `Ability`", #1
+      "# class inherited from another class or included another module",     #2
+      "class Ability",                                                       #3
+      "  include SocialStream::Ability",                                     #4
+      "",                                                                    #5
+      "  def initialize(subject)",                                           #6
+      "    super",                                                           #7
+      "",                                                                    #8
+      "    # Add your authorization rules here",                             #9
+      "    # For instance:",                                                 #10
+      "    #    can :create, Comment",                                       #11
+      "    #    can [:create, :destroy], Post do |p|",                       #12
+      "    #      p.actor_id == Actor.normalize_id(subject)",                #13
+      "    #    end",                                                        #14
+      "  end",                                                               #15
+      "end"]                                                                 #16
     ability_file = 'app/models/ability.rb'
 
     if FileTest.exists? ability_file

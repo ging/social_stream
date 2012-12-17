@@ -197,8 +197,8 @@ class Activity < ActiveRecord::Base
     case verb
     when "follow", "make-friend", "like"
       I18n.t "activity.verb.#{ verb }.#{ receiver.subject_type }.title",
-             :subject => view.link_name(sender_subject),
-             :contact => view.link_name(receiver_subject)
+      :subject => view.link_name(sender_subject),
+      :contact => view.link_name(receiver_subject)
     when "post", "update"
       if sender == receiver
         view.link_name sender_subject
@@ -207,6 +207,11 @@ class Activity < ActiveRecord::Base
                :sender => view.link_name(sender_subject),
                :receiver => view.link_name(receiver_subject)
       end
+    when 'join'
+      I18n.t('notification.join.one', 
+            :sender => view.link_name(sender_subject),
+            :thing => I18n.t(direct_object.class.to_s.underscore+'.one'),
+            :title => title_of(direct_object))
     else
       "Must define activity title"
     end.html_safe
@@ -230,20 +235,20 @@ class Activity < ActiveRecord::Base
   def stream_content
     stream_title
   end
-    
+  
   def notificable?
     is_root? or ['post','update'].include?(root.verb)
   end
 
   def notify
     return true unless notificable?
-    #Avaible verbs: follow, like, make-friend, post, update
+    #Avaible verbs: follow, like, make-friend, post, update, join
 
     if direct_object.is_a? Comment
       participants.each do |p|
         p.notify(notification_subject, "Youre not supposed to see this", self) unless p == sender
       end
-    elsif ['like','follow','make-friend','post','update'].include? verb and !reflexive?
+    elsif ['like','follow','make-friend','post','update', 'join'].include? verb and !reflexive?
       receiver.notify(notification_subject, "Youre not supposed to see this", self)
     end
     true
@@ -346,6 +351,12 @@ class Activity < ActiveRecord::Base
               :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
                                :receiver => receiver_name),
               :thing => I18n.t(direct_object.class.to_s.underscore+'.one'))
+      when 'join'
+        I18n.t('notification.join.one'  , 
+            :sender => sender_name,
+            :thing => I18n.t(direct_object.class.to_s.underscore+'.title.one'),
+            :title => title_of(direct_object))
+      
       else
         t('notification.default')
       end

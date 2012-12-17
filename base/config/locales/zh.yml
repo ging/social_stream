@@ -1,0 +1,552 @@
+zh:
+  language_name: "中文"
+  actor:
+    name: "姓名"
+  action:
+    send: "送出"
+    accept: "接收"
+  account:
+    cancel: "取消帐号"
+    edit: "编辑帐号"
+    email: 
+      change: "更改邮箱地址"
+    lang: 
+      change: "切换语言"
+    one: "帐号"
+    password:
+      change: "修改密码"
+      new: "新密码"
+      retype: "再次输入新密码"
+    privacy: "私隐"
+  activerecord:
+    attributes:
+      contact:
+        relation_ids: "联系方式"
+      relation/custom:
+        name: "姓名"
+      user:
+        email: "邮箱"
+        name: "姓名"
+        password: "密码"
+        password_confirmation: "确定密码"
+        remember_me: "记住我"
+  activity:
+    audience:
+      hidden:
+        summary: "禁止"
+        full: "连接分享 %{audience}"
+      public:
+        summary: "公开"
+        full: "分享给网络"
+      show: "展示"
+      visible:
+        summary: "禁止"
+        full: "分享 %{audience}"
+    confirm_delete: "刪除活动?"
+    delete: "删除"
+    last: "次前活动"
+    like: "我喜爱"
+    like_sentence:
+      one: "%{likers} 喜欢这个"
+      other: "%{likers} 喜欢这个"
+      more:
+    one: "一个活动"
+    other: "很多活动"
+    privacy:
+      myself:
+        contacts:
+          group: "所有会员"
+          user: "发送给"
+      outside:
+        contacts:
+          group: "会员的 %{receiver}"
+          user: "联系的 %{receiver}"
+    sending: "传送中"
+    stream:
+      atom_title: "%{subject}的活动流"
+      title:
+        follow: "%{author}已加了%{activity_object}為关连"
+        like: "%{author}喜欢%{activity_object}"
+        make-friend: "%{author}还加了%{activity_object}为关连"
+        post: "%{author}发布了%{activity_object}"
+        updated: "%{author}更新了%{activity_object}"
+    title: "活动"
+    to_comment: "评论"
+    unlike: "我不再喜欢了"
+    verb:
+      follow:
+        User:
+          title: "%{subject} 已加 %{contact} 作为联络."
+          message: "%{name} 已加您作为联系人."
+        Group:
+          title: "%{subject} 已加 %{contact} 作为联络."
+          message: "%{name} 已加您作为联络."
+      like:
+        User:
+          title: "%{subject} 已成为粉丝 %{contact}."
+          message: "%{name} 已成为你的粉丝."
+        Group:
+          title: "%{subject} 已成为粉丝 %{contact}."
+          message: "%{name} 已成为你的粉丝."
+      make-friend:
+        User:
+          title: "%{subject} 和 %{contact} 现已連结."
+          message: "%{姓名} 已加您作为联系人."
+        Group:
+          title: "%{subject} 已加 %{contact} 联络."
+          message: "%{name} 已加您作为联系人."           
+      post:
+        title:
+          other_wall: "%{sender} → %{receiver}"
+  activity_action:
+    follow: "关注"
+    sentence:
+      follow:
+        one: "%{followers} 关注这个"
+        other: "%{followers} 关注这个"
+      more:
+        one: "%{count} 一个人"
+        other: "%{count} 再多些人"
+    unfollow: "不再关注"
+  browse: "浏览"
+  button:
+    cancel: "取消"
+    create: "创建"
+    save: "保存"
+    update: "更新"
+  cheesecake:
+    changes:
+      details: "更改详情"
+      none: "沒有更改"
+      save: "保存更改"
+      saving: "保存中..."
+    form:
+      editing: "编辑中..."
+      fields:
+        color: "颜色"
+        name: "姓名"
+        permissions: "权限"
+        subsector: "界别分组"
+    select:
+      hint: "点击图片以便选择"
+  comment:
+    input: "请填写评论..."
+    confirm_delete: "删除评论?"
+    name: "评论"
+    one: "一篇评论"
+    title:
+      one: "评论"
+      other: "所有评论"
+    view_all: "查看所有评论 "
+  contact:
+    addressbook: "我的通讯录"
+    all_n: "所有联系(%{count})"
+    confirm_delete: "刪除联系?"
+    current: "近期"
+    delete: "刪除"
+    edit:
+      title: "编辑联络 %{name}"
+      submit: "编辑联络"
+    error_count:
+      one: "一个错误导致不能保存这个联络 :"
+      other: "%{count} 有一些错误导致不能保存这个联络:"
+    follow: "关注"
+    following: "关注中"
+    graph:
+      one: "图片"
+      empty: "对不起, 您沒有任何联系人. 您可以通过查找功能去查找可能认识的朋友!"
+    in_common:
+      one: "一个共同联系人"
+      other: "%{count} 共同联系人"
+    new:
+      link: "+ 加入联络"
+      title: "加入 %{name} 到您的联系人列表"
+      menu: "加入联络"
+      submit: "加入联络"
+    one: "联络"
+    other: "联系"
+    pending:
+      other: "暂缓"
+      all: "所有"
+      all_n: "查看所有暂缓申请 (%{count})"
+    relation:
+      one: "联络类别"
+      new: "新类别"
+    reply:
+      link: "+ 回复联系人"
+      title: "回复联络申请至 %{name}"
+      submit: "回复"
+      link: "+ 回复联系人"
+    suggestion:
+      one: "建议"
+      other: "建议"
+      all: "所有"
+    type:
+      new: "+ 新类别"
+    unfollow: "不再关注"
+  copyright: "2010 版权 - 版权所有"
+  delete:
+    confirm: 刪除 %{element}}?
+  devise:
+    links:
+      sign_in: "登录"
+      sign_up: "注册"
+      forgot_password: "忘了您的密码?"
+      confirmation_instructions: "还没收到激活指引吗?"
+      unlock_instructions: "还没收到解锁指引吗?"
+      sign_in_with: "以 %{provider} 登录"
+    passwords:
+      confirm: "确认密码"
+      forgot: "忘了?"
+      instructions: "请输入你的帐号关联的邮箱, 以便我们给您发送更改指示:"
+      update: "更改您的密码"
+  follower:
+    follower:
+      title: "粉丝"
+    following:
+      title: "关注"
+    n:
+      one: "一个粉丝"
+      other: "%{count} 粉丝"
+  forgot_password: "忘了您的密码吗?"
+  frontpage:
+    collaborate:
+      default: "合作"
+      sentence1: "组织您的习作和活动"
+      sentence2: "参与会议和活动"
+      sentence3: "创建您的群组和会议"
+    elements:
+      comments: "评论"
+      conferences: "发布会"
+      networks: "社交网络"
+      organizers: "主办单位"
+      participants: "参加者"
+      groups: "群组"
+      tags: "标记"
+    main_title: "社交视频互动是我们建立社交网的核心."
+    meet:
+      default: "认识"
+      sentence1: "认识有趣的人和群组"
+      sentence2: " 寻找于你相关的最新活动"
+    register: "请注册!"
+    share:
+      default: "分享"
+      sentence1: " 您的习作和活动"
+      sentence2: "近况, 照片, 音频 和 视频"
+    stats: "%{users} 用户 和 %{groups} 已注册的群组"
+  group:
+    one: "群组"
+    other: "群组"
+    all: "所有群组"
+    all_n: "所有群组 (%{count})"
+    by: "被群组"    
+    destroy:
+      one: "删除群组"
+      explanation: "所有和这个群组相关的活动的资料和联系会被删除!"
+      go_ahead: "是, 我肯定. 删除所有東西!"
+      last_confirm: "这是您最后机会. 您肯定吗?"
+    form:
+      title: "群组"
+    input: "这个群组叫什么名称?"
+    last: "最後的群组"
+    my: "我的群组"
+    new:
+      action: "新群组"
+      name: "名称"
+      description: "描述"
+      participants: "参与者"
+    cloud: "群组标记云"
+    most:
+      followed: "最多人关注"
+      liked: "最受欢迎"
+    tags: "标记"
+    title:
+      one: "群组"
+      other: "群组们"
+  help: "帮助"
+  helpers:
+    submit:
+      relation_custom:
+        create: "保存"
+        update: "更新"
+  home: "主页"
+  inbox:
+    one: "收件箱"
+  invitation:
+    e-mails: "电子邮箱"
+    error: "您的申请未能被处理. 请确定您的邮箱地址是否正确无误."
+    invited: "%{sender} 已邀请您到 %{site}!"
+    join: "邀请其他人加入 %{site}!"
+    join_me: "跟我一起在 %{site}!"
+    one: "邀请"
+    other: "邀请"
+    toolbar: "邀请"
+    success: "您的邀请已成功发送"
+    text: "写上您的讯息"
+  like:
+    n:
+      one: "一个粉丝"
+      other: "%{count} 粉丝们"
+  location:
+    message: "您在此 > %{location}"
+    base: "您在此"
+    separator: " > "
+  mailboxer:
+    delete: "刪除"
+    delete_confirm: "您要把 '%{object}' 移除到垃圾桶?"
+    form:
+      body: "主体"
+      recipients: "收件人"
+      subject: "主题"
+    mark_as_read: "标记已读"
+    message_mailer:
+      has_sent_new: 
+        event: "己发送新讯息 %{receiver}"
+        group: "己发送新讯息 %{receiver}"
+        user: "己给您发送新讯息"
+      has_sent_reply: 
+        event: "已给您回复 %{receiver}"
+        group: "已给您回复 %{receiver}"
+        user: "已给您回复"
+      subject_new: "%{subject}"
+      subject_reply: "%{subject}"
+    notification_mailer:
+      subject: "%{subject}"
+    reply: "回复"
+    send: "发送讯息"
+    sent: "您的讯息已发送"
+  menu:
+    options: "菜單选择"
+    information: "个人资料"
+    wall: "最新發佈"
+  message:
+    answer: "写上答案"
+    inbox: "收件箱"
+    look: "请留意这个对话"
+    new: "新讯息"
+    one: "讯息"
+    other: "讯息"
+    participants: "参与者"
+    send: "发送讯息"
+    sentbox: "寄件备份"
+    trash: "垃圾桶"
+  notification:
+    all_text: "在 %{url} 阅读所有內容"
+    confirm: "确定 %{sender} 作为联络?"
+    default: "您有新通知"
+    destroy_sure: "您是否想删除这个通知?"
+    fan: "%{sender} 现在是 %{whose} 粉丝."
+    follow:
+      chamber: "%{sender} 已加入 %{name}."
+      group: "%{sender} 已加到 %{who} 作为联络."
+      user: "%{sender} 已加到 %{who} 作为联络."
+    hello: "您好 %{receiver},"
+    join: 
+      one: "%{sender}參加了%{thing}%{title}."
+    like:
+      group: "%{sender} 喜欢 %{whose} %{thing}." 
+      user: "%{sender} 喜欢 %{whose} %{thing}."
+    look: "请看看这个 %{sender} 的最新发布"
+    makefriend:
+      group: "%{sender} 另加至 %{who} 作为联络."
+      user: "%{sender} 另加至 %{who} 作为联络."
+    one: "通知"
+    other: "通知"
+    post:
+      group: "%{title} -- %{sender} 發佈給 %{whose} "
+      user: "%{title} -- %{sender} 發佈給 %{whose} "
+    read: "标记已读"
+    read_all: "标记全部已读"
+    unread: "标记未读"
+    update:
+      group: "%{sender} 在 %{whose} 的最新发布已更新 %{thing} "
+      user: "%{sender} 在 %{whose} 的最新发布已更新 %{thing}"
+    visit: "浏览 %{url} 和检查您的所有通知."
+    watch: "在这里 %{url}查看这里"
+    watch_it: "查看这里!"
+    who:
+      group: "%{name}"
+      user: "您"
+    whose: 
+      group: "%{receiver} 的"
+      user: "您的"
+  post:
+    confirm_delete: "删除近況吗?"
+    form:
+      title: "近況"
+    input: "您有什么近況?"
+    name: "近況"
+    one: "一条近況"
+    title:
+      one: "近況"
+      other: "近況"
+  preposition:
+    and: "和"
+    on: "在上"
+  profile:
+    one: "个人背景资料"
+    age: "年齡"
+    is_on: "有效"
+    must_be_signed_id: "您必须持有有效证件"
+    group:
+      about: "关于我们"
+      birthday: "周年"
+      experience: "经验范畴"
+      info: "群组资料"
+      tags: "群组标记"
+    user:
+      about: "关于我"
+      birthday: "生日"
+      experience: "经验"
+      info: "个人资料"
+      tags: "标记"
+    actualcity: "上课城市"
+    address: "地址"
+    contact: "联络资料"
+    country: "国家"
+    email: "邮箱"
+    empty: "这些空格未填上. 请更新."
+    fax: "传真"
+    mobile: "手机"
+    organization: "组织"
+    phone: "电话"
+    profile: "编辑个人背景资料"
+    tags:
+      default: "社交, 视频,"
+      other: "标记"
+    website: "网站" 
+    update:
+      error: "请重组您的个人背景资料:"
+      success: "您的个人背景资料已更新"     
+  public:
+    other: "大家"
+  permission:
+    description:
+      default:
+        brief:
+          create: 
+            activity: "贴到您的最新发布"
+          follow:
+            nil: "关注他们的活动"
+          read:
+            activity: "阅读您的最新发布"
+          represent:
+            nil: "管理"
+          notify:
+            nil: "通知"
+        detailed:
+          create:
+            activity:
+              positive: "他们将会在您的最新发布标贴新的活动"
+              negative: "他们不能在您的最新发布标贴新的活动"
+          follow:
+            nil:
+              positive: "已有联系的活动 %{relation} 将出现在您主页的最新发布上"
+              negative: "已有联系的活动 %{relation} 将不会出现在您主页的最新发布上"
+          read:
+            activity:
+              positive: "他们能夠阅读在您的最新发布的內容, 除了那些有特別联系的分享"
+              negative: "他们能夠阅读在您的最新发布的內容, 除了那些被标识为公开"
+          represent:
+            nil:
+              positive: "他们将更改环节及作为 %{subject}"
+              negative: "他们不能更改环节及作为 %{subject}"
+          notify:
+            nil:
+              positive: "活动将会通知 %{name} 的联系"
+              negative: "活动将不会通知 %{name} 的联系"
+    of_relation:
+      choose: "2. <strong>%{name}</strong>圈內的权限"
+  privacy:
+    intro: "拥有 <strong>%{relation}</strong>级别的联系只容许作出以下行为:"
+    rule:
+      add: "加上"
+      title: "私隐规则"
+      saved: "私隐规则己保存"
+  relation_custom:
+    choose: "1. 选择圈子"
+    confirm_delete: "删除这个圈子?"
+    delete: "刪除"
+    edit: "更改名称"
+    new: "+ 新圈子"
+    title: "私隐和內容"
+  relation_public:
+    name: "公众"
+  representation:
+    notice: "您的环节已更改. 现在您以%{subject}的身份行动. 请使用右上角菜单回到您的环节"
+    switch: "转换环节"
+  required: "(*) 以上空格必須填写"
+  search:
+    all_results: "查找所有 %{subject} (%{count})"
+    at_least: "写下最少两个字符"
+    global: 
+      name: "全球搜查"
+      first_result:
+        more: "展示首回 %{count} 结果."
+        one: "首回结果展示中."
+      query: "查看更多结果 %{query} >"
+    name: "搜索"
+    no_subject_found: "沒有搜索到关于 %{subject} 的结果."
+    nothing: "沒有查询到任何结果"
+    searching: "查找中: %{query}"
+    show_all: "所有"
+    write: "写下您的问题 ..."
+    wrong: "搜查器发生了问题"
+  settings:
+    api_key:
+      briefing: "管理您的API钥匙"
+      confirm: "您肯定吗?"
+      empty: "沒有"
+      explanation: "这是您的的 API 钥匙"
+      name: "API 钥匙"
+      regenerate: "重新获取 API 钥匙"
+    cancel_account:
+      briefing: "让您注销帐号"
+    email_change:
+      briefing: "更改您的邮箱"
+    lang_change:
+      briefing: "更改您的语言"
+      name: "更改您的语言"
+    error: "当您保存更改时, 出现一些错误"
+    for: "为....设定"
+    main: "设定"
+    manage:
+      name: "行政联络"
+      briefing: "联系设定"
+      explanation: "更改联系允许"
+    notifications:
+      briefing: "关于通知行为和邮件提示的设定"
+      name: "通知"
+      by_email:
+        name: "当我收到通知时发邮件给我"
+        always: "经常"
+        never: "永不"
+    one: "设定"
+    password_change:
+      briefing: "更改密码"
+    success: "您的设定已成功更改"
+  share: "Share"
+  sign_in: "登录"
+  sign_out: "退出"
+  sign_up: "注册"
+  site:
+    name: "Gocess.com"
+  subject:
+    this_is_you: "这是您!"
+  sure: "您肯定吗?"
+  time:
+    ago: "%{time} 之前"
+  unknown: "不明"
+  user:
+    all: "所有用户"
+    all_n: "所有用户 (%{count})"
+    by: "被用户"
+    one: "用户"
+    other: "用户们"
+    title:
+      one: "用户"
+      other: "用户们"
+  welcome: "欢迎来到 %{site}!"
+  lang:
+    browser: "自动搜查浏览器语言"
+    none: "语言自主內容"
