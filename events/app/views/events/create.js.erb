@@ -1,21 +1,9 @@
 <% if @event.valid? %>
-  SocialStream.Events.current.newForm.unload();
-
-  var cal = SocialStream.Events.current.calendar;
-
-  jQuery.each(<%= raw Array.wrap(@event.to_json).to_json  %>,
-              function(index, ev) {
-    ev.color = SocialStream.Event.color(<%= @event.room_id %>);
-  
-    cal.fullCalendar('renderEvent', ev,
-                     true // make the event "stick"
-                    );
+  SocialStream.FullCalendar.create({
+    "events": "<%= j raw(Array.wrap(@event.to_json).to_json) %>"
   });
-
-  cal.fullCalendar('unselect');
-
 <% else %>
-  SocialStream.Events.current.newForm.setContent("<%= escape_javascript render(:partial => 'new') %>");
+  SocialStream.FullCalendar.getFormEl().setContent("<%= escape_javascript render(partial: 'new') %>");
 
-  Scheduler.form.init(SocialStream.Events.current.newForm.getContent().find('.scheduler_form'));
+  Scheduler.form.init(SocialStream.FullCalendar.getFormEl().getContent().find('.scheduler_form'));
 <% end %>

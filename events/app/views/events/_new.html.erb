@@ -16,31 +16,21 @@
     </div>
   <% end %>
 
-  <div class="form_row">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
 
-  <div class="form_row">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
 
 
   <% if f.object.owner.rooms.any? %>
-  <div class="form_row">
     <%= f.label :room %>
     <%= f.select :room_id, f.object.owner.rooms.map{ |r| [r.name, r.id] }, { :include_blank => true } %>
-  </div>
   <% end %>
 
-  <div class="form_row">
-    <%= render :partial => 'scheduler/form',
-               :locals  => { :f => f }
-     %>
-  </div>
+  <%= render :partial => 'scheduler/form',
+             :locals  => { :f => f }
+   %>
 
-  <div class="form_row space_center">
   <%= f.submit %>
-  </div>
 <% end %>
