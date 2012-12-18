@@ -88,6 +88,11 @@
       }
     });
 
+    // Hack for Fullcalendar + Twitter Bootstrap, see https://github.com/addyosmani/jquery-ui-bootstrap/issues/37
+    $('.fc-button-content').each(function() {
+      $(this).parent().parent().html($(this).html());
+    });
+
     <% if params[:date] %>
       // TODO: optimize this to save one index call
       SocialStream.Events.current.calendar.fullCalendar('gotoDate', new Date(<%= escape_javascript params[:date] %> * 1000));
