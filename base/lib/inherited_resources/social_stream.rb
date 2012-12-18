@@ -1,7 +1,7 @@
 # Monkey path inherited_resources
 #
 #
-# Fix https://github.com/josevalim/inherited_resources/issues/216
+# Pull request https://github.com/josevalim/inherited_resources/pull/237
 module InheritedResources::BaseHelpers
   private
 
@@ -11,8 +11,13 @@ module InheritedResources::BaseHelpers
   end
 
   def build_resource_params
-    rparams = [params[resource_request_name] || params[resource_instance_name] || {}]
+    rparams = [whitelisted_params || params[resource_request_name] || params[resource_instance_name] || {}]
     rparams << as_role if role_given?
     rparams
+  end
+
+  def whitelisted_params
+    whitelist_method = :"#{ resource_request_name }_params"
+    respond_to?(whitelist_method, true) && self.send(whitelist_method)
   end
 end
