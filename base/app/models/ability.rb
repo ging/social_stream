@@ -1,2 +1,3 @@
-class Ability < SocialStream::Ability
+class Ability
+  include SocialStream::Ability
 end
