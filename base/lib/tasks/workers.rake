@@ -52,6 +52,10 @@ namespace :workers do
       ENV['COUNT']
     end
 
+    def queue_pathname
+      queue.gsub(/[:\*<>\|\"\/\\\?]/, "_")
+    end
+
     def Process.exists?(pid)
       kill(0, pid.to_i) rescue false
     end
@@ -61,11 +65,11 @@ namespace :workers do
     end
 
     def pid_directory_for_group
-      @pid_directory_for_group ||= Rails.root.join('tmp', 'pids', "resque", queue)
+      @pid_directory_for_group ||= Rails.root.join('tmp', 'pids', "resque", queue_pathname)
     end
 
     def group_master_pid
-      File.read pid_directory.join("#{queue}.pid").to_s rescue nil
+      File.read pid_directory.join("#{queue_pathname}.pid").to_s rescue nil
     end
 
     def group?
@@ -77,7 +81,7 @@ namespace :workers do
     end
 
     def kill_worker(pid)
-      Process.kill("QUIT", pid)
+      Process.kill(9, pid)
       puts "Killed worker with PID #{pid}"
       rescue Errno::ESRCH => e
         puts " STALE worker with PID #{pid}"
@@ -97,7 +101,7 @@ namespace :workers do
         end
       end
       if group_master_pid
-        FileUtils.rm    pid_directory.join("#{queue}.pid").to_s
+        FileUtils.rm    pid_directory.join("#{queue_pathname}.pid").to_s
         FileUtils.rm_rf pid_directory_for_group.to_s
       end
     end
@@ -120,7 +124,13 @@ namespace :workers do
 
     # Handle exit
     trap('INT')  { shutdown }
-    trap('QUIT') { shutdown }
+
+    begin
+      trap('QUIT') { shutdown }
+    rescue ArgumentError
+      warn "SIGQUIT not supported"
+    end
+
     trap('TERM') { shutdown }
     trap('KILL') { shutdown }
     trap('SIGKILL') { shutdown }
@@ -130,7 +140,11 @@ namespace :workers do
     # Launch workers in separate processes, saving their PIDs
     @pids = []
     ENV['COUNT'].to_i.times do
-      @pids << Process.fork { Rake::Task['resque:work'].invoke }
+      if Process.respond_to?(:fork)
+        @pids << Process.fork { Rake::Task['resque:work'].invoke }
+      else
+        @pids << Process.spawn("rake environment resque:work", chdir: Rails.root)
+      end
     end
 
     if group?
@@ -138,7 +152,7 @@ namespace :workers do
       FileUtils.mkdir_p pid_directory.to_s
       FileUtils.mkdir_p pid_directory_for_group.to_s
       # Create PID files for workers
-      File.open( pid_directory.join("#{queue}.pid").to_s, 'w' ) do |f| f.write Process.pid end
+      File.open( pid_directory.join("#{queue_pathname}.pid").to_s, 'w' ) do |f| f.write Process.pid end
       @pids.each do |pid|
         File.open( pid_directory_for_group.join("worker_#{pid}.pid").to_s, 'w' ) { |f| f.write pid }
       end
@@ -156,7 +170,7 @@ namespace :workers do
     Resque::Worker.all.each do |worker|
       puts "Shutting down worker #{worker}"
       host, pid, queues = worker.id.split(':')
-      Process.kill("QUIT", pid.to_i)
+      Process.kill(9, pid.to_i)
     end
   end
 
