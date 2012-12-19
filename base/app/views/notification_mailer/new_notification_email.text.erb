@@ -2,9 +2,8 @@
 <% locale_as @receiver.subject %>
 <%= t('notification.hello', :receiver => @receiver.name)%>
 
-<%= render :partial => "notifications/activities/#{ @notification.notified_object.verb }", 
-                     :locals =>{:activity => @notification.notified_object}%>
-
+<%= render partial: "notifications/activities/#{ @notification.notified_object.verb }",
+           locals: { activity: @notification.notified_object } %>
 
 -----------------------------------------------
 <%= raw t('notification.visit', :url=> notifications_url)%>

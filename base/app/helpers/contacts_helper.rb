@@ -18,7 +18,13 @@ module ContactsHelper
     if user_signed_in?
       contact_link current_subject.contact_to!(a)
     else
-      link_to t("contact.new.link"), new_user_session_path
+      if SocialStream.relation_model == :follow
+        form_tag new_user_session_path do |f|
+          submit_tag t('contact.follow')
+        end
+      else
+        link_to t("contact.new.link"), new_user_session_path
+      end
     end
   end
 end
