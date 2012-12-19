@@ -3,11 +3,14 @@ require 'social_stream/base/dependencies'
 
 # Provides your Rails application with social network and activity stream support
 module SocialStream
-  autoload :Ability,   'social_stream/ability'
+  autoload :Ability, 'social_stream/ability'
   autoload :ActivityStreams, 'social_stream/activity_streams'
   module ActivityStreams
     autoload :Supertype, 'social_stream/activity_streams/supertype'
     autoload :Subtype,   'social_stream/activity_streams/subtype'
+  end
+  module Base
+    autoload :Ability,   'social_stream/base/ability'
   end
   autoload :D3,        'social_stream/d3'
   autoload :Populate,  'social_stream/populate'
