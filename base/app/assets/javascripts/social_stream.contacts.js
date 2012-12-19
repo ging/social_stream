@@ -57,15 +57,8 @@ SocialStream.Contact = (function($, SS, undefined) {
     if (options.length === 0) {
       return I18n.t('contact.new.button.zero');
     }
-    else if (options.length > 2) {
+    else {
       return I18n.t('contact.new.button', { count: options.length });
-    } else {
-      var selected = '';
-      options.each(function() {
-        selected += $(this).text() + ', ';
-      });
-
-      return selected.substr(0, selected.length - 2);
     }
 
   };

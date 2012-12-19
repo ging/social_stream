@@ -165,6 +165,7 @@ en:
     new:
       button:
         zero: "Add"
+        one: "%{count} role"
         other: "%{count} roles"
       link: "+ Add contact"
       title: "Add %{name} to your contacts"

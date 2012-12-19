@@ -163,6 +163,7 @@ es:
     new:
       button:
         zero: "Añadir"
+        one: "%{count} rol"
         other: "%{count} roles"
       link: "+ Añadir contacto"
       title: "Añadir a %{name} como contacto"
