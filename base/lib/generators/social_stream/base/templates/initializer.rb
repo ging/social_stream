@@ -10,13 +10,14 @@ SocialStream.setup do |config|
   # config.devise_modules = :database_authenticatable, :registerable,
   #                         :recoverable, :rememberable, :trackable,
   #                         :omniauthable, :token_authenticatable
-  
+
   # Type of activities managed by actors
   # Remember you must add an "activity_object_id" foreign key column to your migration!
+  # Be sure to add the other modules of Social Stream you might be using (e.g. :document, :event, :link ).
   #
   # config.objects = [ :post, :comment ]
-  
-  # Form for activity objects to be loaded 
+
+  # Form for activity objects to be loaded
   # You can write your own activity objects
   #
   # config.activity_forms = [ :post, :document, :foo, :bar ]
@@ -31,10 +32,10 @@ SocialStream.setup do |config|
   # Expose resque interface to manage background tasks at /resque
   #
   # config.resque_access = true
- 
+
   # Quick search (header) and Extended search models and its order. Remember to create
   # the indexes with thinking-sphinx if you are using customized models.
-  # 
+  #
   # config.quick_search_models = [:user, :group]
   # config.extended_search_models = [:user, :group]
 
