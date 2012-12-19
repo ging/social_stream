@@ -1,7 +1,7 @@
-require 'social_stream/ability/base'
+require 'social_stream/base/ability'
 
 module SocialStream
-  class Ability
-    include SocialStream::Ability::Base
+  module Ability
+    include SocialStream::Base::Ability
   end
 end

@@ -1,6 +1,6 @@
 <%= location(
 	link_to(t('message.' + @box), conversations_path(:box => @box),:remote => true),
-	link_to(truncate(@conversation.subject, :length => small), conversation_path(@conversation.id,:box => @box,:page => params[:page]))
+	link_to(truncate(@conversation.subject, :length => :small), conversation_path(@conversation.id,:box => @box,:page => params[:page]))
 ) %>
 
 <br class="clearfloat" />

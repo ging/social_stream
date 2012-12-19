@@ -2,7 +2,7 @@ module SocialStream
   module Events
     class Engine < Rails::Engine
       initializer "social_stream-events.ability" do
-        SocialStream::Ability.class_eval do
+        SocialStream::Ability.module_eval do
           include SocialStream::Events::Ability
         end
       end
