@@ -25,12 +25,12 @@
 
   <% if f.object.owner.rooms.any? %>
     <%= f.label :room %>
-    <%= f.select :room_id, f.object.owner.rooms.map{ |r| [r.name, r.id] }, { :include_blank => true } %>
+    <%= f.select :room_id, f.object.owner.rooms.map{ |r| [r.name, r.id] }, { include_blank: true } %>
   <% end %>
 
   <%= render :partial => 'scheduler/form',
              :locals  => { :f => f }
    %>
 
-  <%= f.submit %>
+  <%= f.submit nil, { class: "btn" } %>
 <% end %>
