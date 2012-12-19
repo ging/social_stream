@@ -81,10 +81,20 @@ namespace :workers do
     end
 
     def kill_worker(pid)
-      Process.kill(9, pid)
-      puts "Killed worker with PID #{pid}"
-      rescue Errno::ESRCH => e
-        puts " STALE worker with PID #{pid}"
+      %w{QUIT TERM KILL}.each do |signal|
+        if Signal.list.has_key?(signal)
+          begin
+            Process.kill(signal, pid)
+          rescue Errno::EINVAL
+            next
+          end
+
+          puts "Killed worker with PID #{pid}"
+          break
+        end
+      end
+    rescue Errno::ESRCH => e
+      puts " STALE worker with PID #{pid}"
     end
 
     def kill_workers
@@ -170,7 +180,7 @@ namespace :workers do
     Resque::Worker.all.each do |worker|
       puts "Shutting down worker #{worker}"
       host, pid, queues = worker.id.split(':')
-      Process.kill(9, pid.to_i)
+      kill_worker(pid.to_i)
     end
   end
 
