@@ -20,14 +20,8 @@
 
 <div class="content_right">
   <div class="briefing">
-    <% if notification.notified_object.verb == 'join' %>
-      <%= render :partial => "notifications/activities/join_#{ notification.notified_object.direct_object.class.to_s.underscore }", 
-                           :locals =>{:activity => notification.notified_object} %>
-    <% else %>
-    
-      <%= render :partial => "notifications/activities/#{ notification.notified_object.verb }", 
-                           :locals =>{:activity => notification.notified_object} %>
-    <% end %>
+    <%= render partial: "notifications/activities/#{ notification.notified_object.verb }", 
+               locals:  { activity: notification.notified_object } %>
   </div>
   <div class="clearfloat">
   </div>
