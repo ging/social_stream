@@ -48,7 +48,7 @@
   <% end %>
 </div>
 
-<% if params[:editing].present? and params[:editing].eql?"true" and document.post_activity.edit_object_by?(current_subject) %>
+<% if params[:editing] && can?(:update, document) %>
   <%= javascript_tag do %>
     $(document).ready(function(){
       SocialStream.Repository.toggleDocumentMenu('edit');
