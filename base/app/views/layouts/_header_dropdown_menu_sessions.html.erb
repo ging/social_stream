@@ -1,4 +1,5 @@
 <% representations = current_user.represented.unshift(current_user) - [current_subject] %>
+
 <% if representations.present? %>
 <li class="dropdown-submenu">
   <%= link_to t('representation.switch'), "#", tabindex: "-1" %>
@@ -6,7 +7,7 @@
     <% representations.each do |representation| %>
     <li>
         <%= link_to :s => representation.slug do %>
-          <%= image_tag representation.logo.url(:representation) %>
+          <%= image_tag representation.logo.url(:small) %>
           <%= truncate_name(representation.name, :length => 15) %>
         <% end %>
 
