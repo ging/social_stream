@@ -10,6 +10,7 @@ gem 'rails', '3.2.8'
 # Gems before social_stream-base
 # gem 'mailboxer', :path => '../mailboxer'
 # gem 'avatars_for_rails', :path => '../avatars_for_rails'
+# gem 'rails-scheduler', path: '../rails-scheduler'
 
 # social_stream gems
 %w(base documents events linkser presence).each do |g|

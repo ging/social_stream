@@ -126,10 +126,19 @@ SocialStream.FullCalendar = (function(SS, $, Scheduler, undefined){
     current.fullCalendar('unselect');
   };
 
+  var resetForm = function() {
+    var form = getFormEl();
+    form.find('#event_title').val('');
+    form.find('#event_description').val('');
+    
+    Scheduler.form.reset(form.find('.scheduler_form'));
+  };
+
   addShowCallback(initFullCalendar);
   addShowCallback(initFormModal);
 
   addCreateCallback(addEvent);
+  addCreateCallback(resetForm);
 
   return {
     create: create,
