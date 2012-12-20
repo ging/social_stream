@@ -15,32 +15,30 @@ SocialStream.Event = (function(SS, $, undefined) {
 		SocialStream.Events.current.eventColor;
 	}
 
-        var fixDates = function(){
-          $(".event").each(function(){
-            dateString = $(this).find("time").attr("datetime");
+  var fixDates = function(){
+    $(".event").each(function(){
+      dateString = $(this).find("time").attr("datetime");
 
-            date = new Date(dateString);
+      date = new Date(dateString);
 
-            var dayEl = $(this).find(".event .day");
-	    if (dayEl.length) {
-		    dayEl.text($.datepicker.formatDate('d', date));
-	    }
+      var dayEl = $(this).find(".event .day");
+      if (dayEl.length) {
+        dayEl.text($.datepicker.formatDate('d', date));
+      }
 
-            var monthEl = $(this).find(".event .month");
-	    if (monthEl.length) {
-            	monthEl.text($.datepicker.formatDate('M', date));
-	    }
+      var monthEl = $(this).find(".event .month");
+      if (monthEl.length) {
+        monthEl.text($.datepicker.formatDate('M', date));
+      }
 
-            var hourEl = $(this).find(".event .hour");
-            if(hourEl.length) {
-              var minutes = date.getMinutes();
-              if (minutes<10) minutes = "0" + minutes;
-              hourEl.text(date.getHours() + ':' + minutes);
-            }
-
-          });
-
-        }
+      var hourEl = $(this).find(".event .hour");
+      if(hourEl.length) {
+        var minutes = date.getMinutes();
+        if (minutes<10) minutes = "0" + minutes;
+        hourEl.text(date.getHours() + ':' + minutes);
+      }
+    });
+  }
 
 	addIndexCallback(fixDates);
 
