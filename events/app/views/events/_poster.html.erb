@@ -1,8 +1,8 @@
-<div class="event_poster">
+<div class="poster">
   <%= event_timeline_thumb(event) %>
 
   <% if can? :update, event %>
-    <div class="event_poster_update">
+    <div class="update">
       <%= link_to t('event.poster.update'), edit_event_path(event, :poster => true), :remote => true %>
     </div>
   <% end %>

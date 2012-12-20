@@ -21,17 +21,17 @@ SocialStream.Event = (function(SS, $, undefined) {
 
             date = new Date(dateString);
 
-            var dayEl = $(this).find(".event_day");
+            var dayEl = $(this).find(".event .day");
 	    if (dayEl.length) {
 		    dayEl.text($.datepicker.formatDate('d', date));
 	    }
 
-            var monthEl = $(this).find(".event_month");
+            var monthEl = $(this).find(".event .month");
 	    if (monthEl.length) {
             	monthEl.text($.datepicker.formatDate('M', date));
 	    }
 
-            var hourEl = $(this).find(".event_hour");
+            var hourEl = $(this).find(".event .hour");
             if(hourEl.length) {
               var minutes = date.getMinutes();
               if (minutes<10) minutes = "0" + minutes;
