@@ -31,7 +31,7 @@ module SocialStream
 
               items << {
                 :key => :contacts,
-                :html => render(:partial => 'subjects/contacts', :locals => { :subject => subject })
+                :html => render(:partial => 'toolbar/contacts', :locals => { :subject => subject })
               }
             when :messages
               items << {
