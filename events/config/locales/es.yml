@@ -35,6 +35,7 @@ es:
     popover:
       title: "Eventos el %{date}"
     poster:
+      button: "Subir"
       update: "Subir cartel"
     title:
       one: "Evento"
