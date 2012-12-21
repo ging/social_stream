@@ -5,7 +5,7 @@
   display: block;
   padding-right: 19px;
   padding-top: 0px;
-  margin-left: -36px; 
+  margin-left: -20px; 
   font-size: 20px;
   font-weight: 200;
   color: $navbarBrandColor;
@@ -23,6 +23,7 @@
   border: none;
   border-radius: none;
   box-shadow: none;
+  padding: 0;
 }
 
 // Navbar search
@@ -34,6 +35,10 @@
     @include font-sans-serif(12px, normal, 1);
     @include border-radius(5px); // redeclare because of specificity of the type attribute
   }
+}
+
+.navbar .nav {
+  margin: 0;
 }
 
 
