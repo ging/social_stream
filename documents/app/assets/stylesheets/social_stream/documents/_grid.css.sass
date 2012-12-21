@@ -9,7 +9,12 @@
       padding: 10px
       @include border-radius(10px)
       border: 1px solid #f7f7f7
-    .tab-content
+      background-color: #333333
+      text-align: center
+      .actions
+        margin-top: 10px
+    .tabbable
+      margin-top: 10px
       .comments
         @include makeColumn(7, 0)
         margin-left: 0px
@@ -44,29 +49,39 @@
     margin-top: 20px
     h4
       color: #00C3FF
-      margin-left: -10px
     .tab-content
       @include makeColumn(3, 0)
+      margin-left: 0px
 
-    .counters
-      color: #888
-      .counter
-        display: inline
-        color: #00C3FF
-        font-sixe: 15px
+#document-info
+  .counters
+    color: #888
+    margin-left: 10px
+    .counter
+      display: inline
+      color: #00C3FF
+      font-sixe: 15px
 
+  .description,
+  .tags,
+  .autor,
+  .dates
+    margin-left: 10px
+    .data
+    .file_size
+      .details  
 
-    .description
-      margin-left: 20px
-    .tags
-      margin-left: 20px
-    .autor
-      margin-left: 20px
-    .dates
-      margin-left: 20px
-      .data
-      .file_size
-        .details  
+#picture_description
+  height: 200px
+ 
+
+#document-edit
+  margin-left: 8px
+  .fcbk
+    margin-bottom: 20px
+  input
+    &[type="submit"]
+      float: right
 
 #content-large
   .documents
