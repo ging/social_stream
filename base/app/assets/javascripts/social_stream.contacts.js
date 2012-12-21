@@ -51,6 +51,17 @@ SocialStream.Contact = (function($, SS, undefined) {
       'button': 'btn btn-small',
       'text': relationSelectText
     });
+
+    // Forms
+    $('form.edit_contact').each(function(i, el) {
+      storeContactFormValues(el);
+    });
+
+    $('form.edit_contact ul.dropdown-menu input[type="checkbox"]').change(function() {
+      evalFormStatus(this);
+    });
+
+    $('form.edit_contact button.dropdown-toggle').on('click.dropdown.data-api', sendContactForms);
   };
 
   var relationSelectText = function(options) {
@@ -78,10 +89,15 @@ SocialStream.Contact = (function($, SS, undefined) {
       $('[data-contact_id="' + contactId + '"] .loading').show();
       */
 
+      $('button', contacts).data('resetText', relationSelectText($('option:selected', el)) + ' <b class="caret"></b>');
       $('button', contacts).attr('data-loading-text', I18n.t('contact.saving'));
       $('button', contacts).button('loading');
       $('form.edit_contact', contact).submit();
     });
+  };
+
+  var storeContactFormValues = function(el) {
+    $(el).data('relations', getInputValues(el));
   };
 
   // Dictate if some form has changed its status
@@ -98,10 +114,6 @@ SocialStream.Contact = (function($, SS, undefined) {
     }
   };
 
-  var initContactFormValues = function(el) {
-    $(el).data('relations', getInputValues(el));
-  };
-
   // Dictate if some form has changed its status
   var getInputValues = function(form) {
     return $('ul.dropdown-menu input[type="checkbox"]', form).
@@ -111,21 +123,15 @@ SocialStream.Contact = (function($, SS, undefined) {
              });
   };
 
-  var initContactForms = function() {
-    $('form.edit_contact').each(function(i, el) {
-      initContactFormValues(el);
-    });
-
-    $('form.edit_contact ul.dropdown-menu input[type="checkbox"]').change(function() {
-      evalFormStatus(this);
-    });
-
+  var initContactFormsHtmlListener = function() {
     $('html').on('click.dropdown.data-api', sendContactForms);
-    $('form.edit_contact button.dropdown-toggle').on('click.dropdown.data-api', sendContactForms);
   };
 
   var updateForm = function(options) {
-    $('[data-contact_id="' + options.id + '"] form.edit_contact').removeAttr('data-status');
+    var form = $('[data-contact_id="' + options.id + '"] form.edit_contact');
+    
+    form.removeAttr('data-status');
+    storeContactFormValues(form);
   };
 
   var clearLoading = function(options) {
@@ -137,14 +143,15 @@ SocialStream.Contact = (function($, SS, undefined) {
   };
 
   addIndexCallback(initTabs);
+  addIndexCallback(initContactButtons);
 
-  addUpdateCallback(clearLoading);
   addUpdateCallback(updateForm);
+  addUpdateCallback(clearLoading);
 
   // FIXME There is probably a more efficient way to do this..
   $(function() {
     initContactButtons();
-    initContactForms();
+    initContactFormsHtmlListener();
   });
 
   return {

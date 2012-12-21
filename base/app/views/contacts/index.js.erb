@@ -1,2 +1,4 @@
 $('#<%= params[:d] %>').html("<%= escape_javascript render(partial: 'index', locals: { d: params[:d] }) %>");
 $('.contacts ul.nav-tabs a[href="#<%= params[:d] %>"]').attr('data-loaded', 'true');
+
+SocialStream.Contact.index();
