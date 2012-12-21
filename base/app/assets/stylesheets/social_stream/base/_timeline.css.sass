@@ -70,16 +70,44 @@
           font-size: 12px
 
       .event
-        .event_date
+        .date
           @include makeColumn(1, 0)
           display: inline
-        .event_poster
+          margin-top: 8px
+          margin-left: -64px
+          .day,
+          .month,
+          .hour
+            text-align: center
+          .day,
+          .month
+            font-weight: bold
+          .day
+            font-size: 40px
+            line-height: 31px
+          .month
+            font-size: 25px
+            line-height: 26px
+          .hour
+            font-size: 15px
+        .poster
+          @include makeColumn(2, 0)
           display: inline-block
-        .event_details
+          margin-left: 0px
+        .details
+          @include makeColumn(4, 0)
           display: inline-block
+          margin-left: -40px
           .title
-          .description
+            font-size: 20px
+            line-height: 26px
+          .description,
+          .frequency
+            font-size: 12px
+          .frequency
+            color: #999
           .follow
+            margin-top: -10px
 
 
 
