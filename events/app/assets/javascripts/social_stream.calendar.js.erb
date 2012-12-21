@@ -6,7 +6,7 @@ SocialStream.Calendar = (function(SS, $, undefined){
   var element = function(){
     return $("#sidebar_calendar");
   }
-  var eventElementRegExp = new RegExp('sidebar_day_(..?)_(..?)_(..?.?.?)');
+  var eventElementRegExp = new RegExp('day_(..?)_(..?)_(..?.?.?)');
 
   var eventElementMatch = function(el){
     return eventElementRegExp.exec(el.id);
@@ -21,18 +21,21 @@ SocialStream.Calendar = (function(SS, $, undefined){
   }
 
   var eventElement = function(date) {
-    return $('#sidebar_day_' + date.getDate() + '_' + (date.getMonth()+1) + '_' + date.getFullYear())
+    return $('#day_' + date.getDate() + '_' + (date.getMonth()+1) + '_' + date.getFullYear())
   }
 
-  var init = function(options){
-    eventsPath = options["eventsPath"]
+  var show = function(){
+    var cal = $('#sidebar_calendar');
+    var calStart = cal.attr('data-start');
+    var calEnd = cal.attr('data-end');
+    eventsPath = cal.attr('data-path');
 
     var now = new Date();
 
     eventElement(now).addClass('today');
 
 
-    $('#sidebar_calendar td').each(function(index, domEl){
+    cal.find('.days td').each(function(index, domEl){
       var d = eventElementDate(domEl)
 
       if(d < now) $(domEl).addClass('past');
@@ -44,8 +47,8 @@ SocialStream.Calendar = (function(SS, $, undefined){
       cache: false,
       url: eventsPath,
       data: {
-        start: options["start"],
-        end: options["end"]
+        start: calStart,
+        end: calEnd
       },
 
       success: initBusyEvents
@@ -53,7 +56,7 @@ SocialStream.Calendar = (function(SS, $, undefined){
   }
 
   var initBusyEvents = function(events) {
-    $.map(events, function(event) {
+    $.each(events, function(i, event) {
       var start = new Date(event.start); // This applies TZ
       var end = new Date(event.end);
 
@@ -62,19 +65,27 @@ SocialStream.Calendar = (function(SS, $, undefined){
         var domEl = eventElement(d);
 
         domEl.addClass("busy");
-        domEl.tipsy({
-          title: busyTipsy,
-          html: true,
-          fade: true,
-          hoverable: true,
-          gravity: 'ne',
-          opacity: 0.95
-        });
       }
+
+      element().find('.busy').each(function(i, el) {
+        $(el).popover({
+          // use 'inside left' to hoverable it
+          placement: 'left',
+          trigger: 'hover',
+          title: busyTitle,
+          content: busyContent
+        });
+      });
     })
   }
 
-  var busyTipsy = function(){
+  var busyTitle = function(){
+    var date = eventElementDate(this);
+
+    return I18n.t('event.popover.title', { date: I18n.l('date.formats.long', date) } );
+  };
+
+  var busyContent = function(){
     var startDate = eventElementDate(this)
     startDate.setHours(0);
     startDate.setMinutes(0);
@@ -92,11 +103,11 @@ SocialStream.Calendar = (function(SS, $, undefined){
       }
     });
 
-    return '<div id="tipsy-' + this.id + '" class="tipsy-sidebar_calendar"><img src="<%= asset_path('loading.gif') %>"></div>';
+    return '<div id="tipsy-' + this.id + '"><img src="<%= asset_path('loading.gif') %>"></div>';
   }
 
   return {
-    init: init,
+    show: show,
     element: element,
     eventElement: eventElement
   }
