@@ -1,10 +1,4 @@
 class ActivityActionsController < ApplicationController
-  # Last tendencies in rails talk about filtering params in the controller,
-  # instead of using attr_protected
-  #
-  # We hope it will be shiped in Rails 4, so we write our custom method for now
-  before_filter :clean_params
-
   before_filter :can_read_activity_object, :only => :create
 
   respond_to :js
@@ -15,20 +9,19 @@ class ActivityActionsController < ApplicationController
         sent_actions.
         find_or_create_by_activity_object_id @activity_object.id
 
-    @activity_action.update_attributes params[:activity_action]
+    @activity_action.update_attributes activity_action_params
   end
 
   def update
-    activity_action.update_attributes params[:activity_action]
+    activity_action.update_attributes activity_action_params
   end
 
   private
 
-  def clean_params
-    return if params[:activity_action].blank?
-
-    params[:activity_action].delete(:actor_id)
-    params[:activity_action].delete(:activity_object_id) if params[:id].present?
+  def activity_action_params
+    params.
+      require(:activity_action).
+      permit(:follow)
   end
 
   def can_read_activity_object

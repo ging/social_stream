@@ -1,13 +1,16 @@
 class Profile < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
+
   belongs_to :actor,
              validate: true,
-             autosave: true
+             autosave: true,
+             inverse_of: :profile
 
   delegate :tag_list, :tag_list=,
            :name, :name=,
            :email, :email=,
            to: :actor
-    
+   
   validates_presence_of :actor_id
   
   validates_format_of :mobile, :phone, :fax,

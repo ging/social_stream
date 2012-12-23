@@ -12,7 +12,7 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    current_profile.update_attributes params[:profile]
+    current_profile.update_attributes profile_params
 
     respond_to do |format|
       format.html{ redirect_to [profile_subject, :profile] }
@@ -21,6 +21,15 @@ class ProfilesController < ApplicationController
   end
 
   private
+
+  def profile_params
+    params.
+      require(:profile).
+      permit(:name, :organization, :birthday, :city, :country, :description,
+             :phone, :mobile, :fax, :email, :address, :website,
+             :experience,
+             :tag_list)
+  end
 
   def subject_profile
     @profile ||=

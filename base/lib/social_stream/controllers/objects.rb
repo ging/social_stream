@@ -22,6 +22,16 @@ module SocialStream
 
       # Methods that should be included after the included block
       module UpperInstanceMethods
+        def allowed_params
+          [] # This should be overriden in controllers to allow extra params
+        end
+      
+        def whitelisted_params
+          return {} if request.present? and request.get?
+          all_allowed_params = allowed_params + [:created_at, :updated_at, :title, :description, :author_id, :owner_id, :user_author_id, :_activity_parent_id]
+          params.require(self.class.model_class.to_s.underscore.to_sym).permit( *all_allowed_params )
+        end
+
         def search
           collection_variable_set self.class.model_class.search(params[:q], search_options)
 

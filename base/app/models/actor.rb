@@ -31,7 +31,9 @@ class Actor < ActiveRecord::Base
 
   acts_as_url :name, :url_attribute => :slug
   
-  has_one :profile, :dependent => :destroy
+  has_one :profile,
+          dependent: :destroy,
+          inverse_of: :actor
 
   has_many :avatars,
            :validate => true,

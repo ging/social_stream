@@ -19,7 +19,8 @@ module SocialStream #:nodoc:
         belongs_to supertype_name, {                          # belongs_to :actor, {
                     :validate  => true,                       #   :validate => true
                     :autosave  => true,                       #   :autosave => true
-                    :dependent => :destroy                    #   :dependent => :destroy
+                    :dependent => :destroy,                   #   :dependent => :destroy
+                    :inverse_of => name.underscore.to_sym     #   :inverse_of => :user,
                   }.merge(supertype_options[:belongs] || {})  #   }.merge(supertype_options[:belongs] || {})
 
         class_eval <<-EOS
@@ -38,6 +39,10 @@ module SocialStream #:nodoc:
       end
 
       module ClassMethods
+        def supertype_sym
+          supertype_name.to_sym
+        end
+
         def supertype_foreign_key
           "#{ supertype_name }_id" # "actor_id"
         end 
@@ -50,7 +55,17 @@ module SocialStream #:nodoc:
         raise subtype_error unless _delegate_to_supertype?(:method)
 
         begin
-          supertype!.__send__ method, *args, &block
+          res = supertype!.__send__(method, *args, &block)
+
+          # Cache method
+          self.class.class_eval <<-STR, __FILE__, __LINE__ + 1
+            def #{ method } *args, &block
+              supertype!.__send__ :#{ method }, *args, &block
+            end
+          STR
+
+          res
+
         # We rescue supertype's NameErrors so methods not defined are raised from
         # the subtype. Example: user.foo should raise "foo is not defined in user"
         # and not "in actor"

@@ -14,9 +14,11 @@ module SocialStream #:nodoc:
       include SocialStream::ActivityStreams::Supertype
 
       included do
-        subtypes.each do |s|                # [ :user, :group ].each do |s|
-          has_one s, :dependent => :destroy #   has_one s, :dependent => :destroy
-        end                                 # end
+        subtypes.each do |s|                          # [ :user, :group ].each do |s|
+          has_one s,                                  #   has_one s,
+                  autosave:   false,                  #           autosave:   false,
+                  inverse_of: name.underscore.to_sym  #           inverse_of: :actor
+        end                                           # end
       end
 
       module ClassMethods
