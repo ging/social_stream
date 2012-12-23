@@ -27,6 +27,10 @@ class EventsController < ApplicationController
 
   private
 
+  def allowed_params
+    [:room]
+  end
+
   def events_with_start_and_end
     @start_time = Time.at(params[:start].to_i)
     @end_time   = Time.at(params[:end].to_i)

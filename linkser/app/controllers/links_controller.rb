@@ -8,4 +8,10 @@ class LinksController < ApplicationController
       format.all {redirect_to link_path(resource) || home_path}
     end
   end
+
+  private
+
+  def allowed_params
+    [:url]
+  end
 end

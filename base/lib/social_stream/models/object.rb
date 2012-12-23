@@ -47,6 +47,9 @@ module SocialStream
           joins(:activity_object).
             merge(ActivityObject.followed_by(subject))
         }
+
+        # Strong parameters
+        include ActiveModel::ForbiddenAttributesProtection
       end
 
       module ClassMethods
