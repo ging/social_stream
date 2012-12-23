@@ -1,8 +1,11 @@
 class Profile < ActiveRecord::Base
-  belongs_to :actor
-    
+  include ActiveModel::ForbiddenAttributesProtection
+
+  belongs_to :actor,
+             inverse_of: :profile
+
   accepts_nested_attributes_for :actor
-  
+    
   validates_presence_of :actor_id
   
   validates_format_of :mobile, :phone, :fax,
