@@ -19,7 +19,8 @@ module SocialStream #:nodoc:
         belongs_to supertype_name, {                          # belongs_to :actor, {
                     :validate  => true,                       #   :validate => true
                     :autosave  => true,                       #   :autosave => true
-                    :dependent => :destroy                    #   :dependent => :destroy
+                    :dependent => :destroy,                   #   :dependent => :destroy
+                    :inverse_of => name.underscore.to_sym     #   :inverse_of => :user,
                   }.merge(supertype_options[:belongs] || {})  #   }.merge(supertype_options[:belongs] || {})
 
         class_eval <<-EOS
