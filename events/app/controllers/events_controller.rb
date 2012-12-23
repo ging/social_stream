@@ -28,7 +28,7 @@ class EventsController < ApplicationController
   private
 
   def allowed_params
-    [:room]
+    [ :start_at, :end_at, :all_day, :frequency, :room_id ]
   end
 
   def events_with_start_and_end
