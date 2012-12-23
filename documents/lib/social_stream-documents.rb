@@ -13,8 +13,8 @@ module SocialStream
     @@picture_styles = {
       :thumb48sq  => ["48x48"],
       :"170x127#" => ["170x127#"],
-      # midwall preserves A4 proportion: 210x297
-      :midwall => ["80x113#"],
+      # this one preserves A4 proportion: 210x297
+      :"80x113#" => ["80x113#"],
       :"500" => ["500>"]
 
     }
