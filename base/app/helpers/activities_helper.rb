@@ -4,10 +4,12 @@ module ActivitiesHelper
   #
   # @param [Object]
   # @return [String]
-  def like_next_action object
-    user_signed_in? && object.liked_by?(current_subject) ?
-      'unlike' :
-      'like'
+  def like_status object
+    [ 'like', 'unlike' ].tap do |s|
+      if user_signed_in? && object.liked_by?(current_subject)
+        s.reverse!
+      end
+    end
   end
 
   # Build a new post based on the current_subject. Useful for authorization queries
