@@ -4,8 +4,9 @@ rvm:
 env:
   - DB=mysql
   - DB=postgres
-before_script:
+before_install:
   - "sudo apt-get install -qq libsndfile-dev"
+before_script:
   - "mysql -e 'create database social_stream_test;'"
   - "psql -c 'create database social_stream_test;' -U postgres"
 
