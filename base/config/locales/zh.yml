@@ -338,8 +338,8 @@ zh:
     fan: "%{sender} 现在是 %{whose} 粉丝."
     follow:
       chamber: "%{sender} 已加入 %{name}."
-      group: "%{sender} 已加到 %{who} 作为联络."
-      user: "%{sender} 已加到 %{who} 作为联络."
+      group: "%{sender} 已加到%{who}作为联络."
+      user: "%{sender} 已加到%{who}作为联络."
     hello: "您好 %{receiver},"
     join: 
       one: "%{sender}參加了%{thing}%{title}."
@@ -348,13 +348,13 @@ zh:
       user: "%{sender} 喜欢 %{whose} %{thing}."
     look: "请看看这个 %{sender} 的最新发布"
     makefriend:
-      group: "%{sender} 另加至 %{who} 作为联络."
-      user: "%{sender} 另加至 %{who} 作为联络."
+      group: "%{sender} 另加至%{who}作为联络."
+      user: "%{sender} 另加至%{who}作为联络."
     one: "通知"
     other: "通知"
     post:
-      group: "%{title} -- %{sender} 發佈給 %{whose} "
-      user: "%{title} -- %{sender} 發佈給 %{whose} "
+      group: "%{title} -- %{sender}發佈給%{whose} "
+      user: "%{title} -- %{sender}發佈給%{whose} "
     read: "标记已读"
     read_all: "标记全部已读"
     unread: "标记未读"
