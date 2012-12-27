@@ -49,4 +49,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency('forgery', '~> 0.4.2')
   # Continous integration
   s.add_development_dependency('ci_reporter', '~> 1.6.4')
+  # pry
+  s.add_development_dependency('pry-rails', '~> 0.2.2')
+  # Rails panel
+  s.add_development_dependency('meta_request', '~> 0.2.0')
 end

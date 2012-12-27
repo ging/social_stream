@@ -1,3 +1,10 @@
+if Rails.env == 'development'
+  # pry
+  require 'pry-rails'
+  # Rails panel
+  require 'meta_request'
+end
+
 module SocialStream
   Components = %w{ base documents events linkser presence ostatus }
 
