@@ -11,7 +11,12 @@ SocialStream::Documents.setup do |config|
 
   # Configure audio thumbnails
   #
-  # config.audio_styles = { :webma => {:format => 'webm'} }
+  # config.audio_styles = {
+  #   webma: { format: 'webm'},
+  #   waveform: { format: :png,
+  #               convert_options: {}
+  #   }
+  # }
 
   # Configure video thumbnails
   #

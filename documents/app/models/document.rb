@@ -22,28 +22,27 @@ class Document < ActiveRecord::Base
   
   class << self 
     def new(*args)
-      if !(self.name == "Document")
-        return super
-       end 
+      # If already called from subtype, continue through the stack
+      return super if self.name != "Document"
+
       doc = super
       
-      if(doc.file_content_type.nil?)
-        return doc
-      end
+      return doc if doc.file_content_type.blank?
       
-      if !(doc.file_content_type =~ /^image.*/).nil?
-        return Picture.new *args
+      if klass = lookup_subtype_class(doc)
+        return klass.new *args
       end
-      
-      if !(doc.file_content_type =~ /^audio.*/).nil?
-        return Audio.new *args
+
+      doc
+    end
+
+    # Searches for the suitable class based on its mime type
+    def lookup_subtype_class(doc)
+      SocialStream::Documents.subtype_classes_mime_types.each_pair do |klass, mime_types|
+        return klass.to_s.classify.constantize if mime_types.include?(doc.mime_type.to_sym)
       end
-      
-      if !(doc.file_content_type =~ /^video.*/).nil?
-        return Video.new *args
-      end
-      
-      return doc
+
+      nil
     end
   end
 

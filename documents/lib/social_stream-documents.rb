@@ -16,11 +16,20 @@ module SocialStream
       # this one preserves A4 proportion: 210x297
       :"80x113#" => ["80x113#"],
       :"500" => ["500>"]
-
     }
 
     mattr_accessor :audio_styles
-    @@audio_styles = { :webma => {:format => 'webm'} }
+    @@audio_styles = {
+      webma: {
+        format: 'webm',
+        processors: [ :ffmpeg ]
+      },
+      waveform: {
+        format: :png,
+        convert_options: {},
+        processors: [ :waveform ]
+      }
+    }
 
     mattr_accessor :video_styles
     @@video_styles = {
@@ -47,6 +56,15 @@ module SocialStream
         :wav, :ogg, :webma, :mp3,
         :flv, :webm, :mp4
       ]
+    }
+
+    # Mapping between subtype classes of Document (audio, video, etc) and
+    # the mime_types they handle
+    mattr_accessor :subtype_classes_mime_types
+    @@subtype_classes_mime_types = {
+      picture: [ :jpeg, :gif, :png, :bmp, :xcf ],
+      audio:   [ :wav, :ogg, :webma, :mp3 ],
+      video:   [ :flv, :webm, :mp4, :mpeg ]
     }
 
     class << self
