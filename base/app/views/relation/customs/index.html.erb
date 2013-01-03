@@ -99,149 +99,464 @@
       <table class="table">
         <tbody>
           <tr>
-            <td class="profile">
-              <%= link_to current_subject do %>
-                <%= image_tag current_subject.logo.url(:small) %>
-                <span class="name">
-                  <%= truncate_name(current_subject.name, length: 15) %>
-                </span>
-              <% end %>
+            <td>
+              <div class="profile">
+                <%= link_to current_subject do %>
+                  <%= image_tag current_subject.logo.url(:small) %>
+                  <span class="name">
+                    <%= truncate_name(current_subject.name, length: 15) %>
+                  </span>
+                <% end %>
+              </div>
+              <div class="rol"> 
+                <div class="btn-group">
+                  <button data-toggle="dropdown" class="dropdown-toggle btn btn-small" style="width:auto">Tus contactos <b class="caret"></b>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="2"> 
+                          friend
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="3"> 
+                            acquaintance
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="4"> 
+                          colleague
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="1"> 
+                          Público
+                        </label>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </td>
 
-            <td class="rol"> 
-              <div class="btn-group">
-                <button data-toggle="dropdown" class="dropdown-toggle btn btn-small" style="width:auto">Tus contactos <b class="caret"></b>
-                </button>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="#">
-                      <label class="checkbox" style="cursor: pointer;">
-                      <input type="checkbox" value="2"> 
-                        friend
-                      </label>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <label class="checkbox" style="cursor: pointer;">
-                        <input type="checkbox" value="3"> 
-                          acquaintance
-                      </label>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <label class="checkbox" style="cursor: pointer;">
-                        <input type="checkbox" value="4"> 
-                        colleague
-                      </label>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <label class="checkbox" style="cursor: pointer;">
-                        <input type="checkbox" value="1"> 
-                        Público
-                      </label>
-                    </a>
-                  </li>
-                </ul>
+            <td>
+              <div class="profile">
+                <%= link_to current_subject do %>
+                  <%= image_tag current_subject.logo.url(:small) %>
+                  <span class="name">
+                    <%= truncate_name(current_subject.name, length: 15) %>
+                  </span>
+                <% end %>
+              </div>
+              <div class="rol"> 
+                <div class="btn-group">
+                  <button data-toggle="dropdown" class="dropdown-toggle btn btn-small" style="width:auto">Tus contactos <b class="caret"></b>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="2"> 
+                          friend
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="3"> 
+                            acquaintance
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="4"> 
+                          colleague
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="1"> 
+                          Público
+                        </label>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </td>
-            <td class="profile">
-              <%= link_to current_subject do %>
-                <%= image_tag current_subject.logo.url(:small) %>
-                <span class="name">
-                  <%= truncate_name(current_subject.name, length: 15) %>
-                </span>
-              <% end %>
-            </td>
-            <td class="tool">
-              <div class="btn-group">
-                <button data-toggle="dropdown" class="dropdown-toggle btn btn-small" style="width:auto">Tus contactos <b class="caret"></b>
-                </button>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="#">
-                      <label class="checkbox" style="cursor: pointer;">
-                      <input type="checkbox" value="2"> 
-                        friend
-                      </label>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <label class="checkbox" style="cursor: pointer;">
-                        <input type="checkbox" value="3"> 
-                          acquaintance
-                      </label>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <label class="checkbox" style="cursor: pointer;">
-                        <input type="checkbox" value="4"> 
-                        colleague
-                      </label>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <label class="checkbox" style="cursor: pointer;">
-                        <input type="checkbox" value="1"> 
-                        Público
-                      </label>
-                    </a>
-                  </li>
-                </ul>
+
+            <td>
+              <div class="profile">
+                <%= link_to current_subject do %>
+                  <%= image_tag current_subject.logo.url(:small) %>
+                  <span class="name">
+                    <%= truncate_name(current_subject.name, length: 15) %>
+                  </span>
+                <% end %>
+              </div>
+              <div class="rol"> 
+                <div class="btn-group">
+                  <button data-toggle="dropdown" class="dropdown-toggle btn btn-small" style="width:auto">Tus contactos <b class="caret"></b>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="2"> 
+                          friend
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="3"> 
+                            acquaintance
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="4"> 
+                          colleague
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="1"> 
+                          Público
+                        </label>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </td>
-            <td class="profile">
-              <%= link_to current_subject do %>
-                <%= image_tag current_subject.logo.url(:small) %>
-                <span class="name">
-                  <%= truncate_name(current_subject.name, length: 15) %>
-                </span>
-              <% end %>
+          </tr>
+          <tr>
+            <td>
+              <div class="profile">
+                <%= link_to current_subject do %>
+                  <%= image_tag current_subject.logo.url(:small) %>
+                  <span class="name">
+                    <%= truncate_name(current_subject.name, length: 15) %>
+                  </span>
+                <% end %>
+              </div>
+              <div class="rol"> 
+                <div class="btn-group">
+                  <button data-toggle="dropdown" class="dropdown-toggle btn btn-small" style="width:auto">Tus contactos <b class="caret"></b>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="2"> 
+                          friend
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="3"> 
+                            acquaintance
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="4"> 
+                          colleague
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="1"> 
+                          Público
+                        </label>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </td>
-            <td class="tool">
-              <div class="btn-group">
-                <button data-toggle="dropdown" class="dropdown-toggle btn btn-small" style="width:auto">Tus contactos <b class="caret"></b>
-                </button>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="#">
-                      <label class="checkbox" style="cursor: pointer;">
-                      <input type="checkbox" value="2"> 
-                        friend
-                      </label>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <label class="checkbox" style="cursor: pointer;">
-                        <input type="checkbox" value="3"> 
-                          acquaintance
-                      </label>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <label class="checkbox" style="cursor: pointer;">
-                        <input type="checkbox" value="4"> 
-                        colleague
-                      </label>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <label class="checkbox" style="cursor: pointer;">
-                        <input type="checkbox" value="1"> 
-                        Público
-                      </label>
-                    </a>
-                  </li>
-                </ul>
+
+            <td>
+              <div class="profile">
+                <%= link_to current_subject do %>
+                  <%= image_tag current_subject.logo.url(:small) %>
+                  <span class="name">
+                    <%= truncate_name(current_subject.name, length: 15) %>
+                  </span>
+                <% end %>
+              </div>
+              <div class="rol"> 
+                <div class="btn-group">
+                  <button data-toggle="dropdown" class="dropdown-toggle btn btn-small" style="width:auto">Tus contactos <b class="caret"></b>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="2"> 
+                          friend
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="3"> 
+                            acquaintance
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="4"> 
+                          colleague
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="1"> 
+                          Público
+                        </label>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div class="profile">
+                <%= link_to current_subject do %>
+                  <%= image_tag current_subject.logo.url(:small) %>
+                  <span class="name">
+                    <%= truncate_name(current_subject.name, length: 15) %>
+                  </span>
+                <% end %>
+              </div>
+              <div class="rol"> 
+                <div class="btn-group">
+                  <button data-toggle="dropdown" class="dropdown-toggle btn btn-small" style="width:auto">Tus contactos <b class="caret"></b>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="2"> 
+                          friend
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="3"> 
+                            acquaintance
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="4"> 
+                          colleague
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="1"> 
+                          Público
+                        </label>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="profile">
+                <%= link_to current_subject do %>
+                  <%= image_tag current_subject.logo.url(:small) %>
+                  <span class="name">
+                    <%= truncate_name(current_subject.name, length: 15) %>
+                  </span>
+                <% end %>
+              </div>
+              <div class="rol"> 
+                <div class="btn-group">
+                  <button data-toggle="dropdown" class="dropdown-toggle btn btn-small" style="width:auto">Tus contactos <b class="caret"></b>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="2"> 
+                          friend
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="3"> 
+                            acquaintance
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="4"> 
+                          colleague
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="1"> 
+                          Público
+                        </label>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div class="profile">
+                <%= link_to current_subject do %>
+                  <%= image_tag current_subject.logo.url(:small) %>
+                  <span class="name">
+                    <%= truncate_name(current_subject.name, length: 15) %>
+                  </span>
+                <% end %>
+              </div>
+              <div class="rol"> 
+                <div class="btn-group">
+                  <button data-toggle="dropdown" class="dropdown-toggle btn btn-small" style="width:auto">Tus contactos <b class="caret"></b>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="2"> 
+                          friend
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="3"> 
+                            acquaintance
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="4"> 
+                          colleague
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="1"> 
+                          Público
+                        </label>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div class="profile">
+                <%= link_to current_subject do %>
+                  <%= image_tag current_subject.logo.url(:small) %>
+                  <span class="name">
+                    <%= truncate_name(current_subject.name, length: 15) %>
+                  </span>
+                <% end %>
+              </div>
+              <div class="rol"> 
+                <div class="btn-group">
+                  <button data-toggle="dropdown" class="dropdown-toggle btn btn-small" style="width:auto">Tus contactos <b class="caret"></b>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                        <input type="checkbox" value="2"> 
+                          friend
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="3"> 
+                            acquaintance
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="4"> 
+                          colleague
+                        </label>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <label class="checkbox" style="cursor: pointer;">
+                          <input type="checkbox" value="1"> 
+                          Público
+                        </label>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </td>
           </tr>

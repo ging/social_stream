@@ -1,3 +1,5 @@
+#content-large
+
 #privacity
   @include makeColumn(10, 0)
   h2
@@ -7,25 +9,32 @@
     margin-top: 13px
 
   .filter
-    widht: 300px !important
+    width: 300px !important
     float: right !important
+  .tatable
+    .tab-content
+
 
 #members,
 #users
   margin-top: 40px
   .table th,
-  .table td,
+  .table td
     vertical-align: middle
-  .profile
-    width: 100px
-    img
-      width: 30px
-  .rol
-    width: 100px
+  
+  .table td
+    .profile
+      display: inline
+      img
+        width: 30px
+    .rol
+      display: inline-block
+      vertical-align: middle
+      margin-left: 4px
 
   .tool
-    width: 30px
+
   .btn
-    float: right
+    float: left
    
           
