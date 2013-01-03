@@ -20,3 +20,12 @@
   <%= paginate @notifications %>
 </div>
 
+<% if SocialStream.auto_read_notification %>
+ <%= javascript_tag do %>
+    $.ajax({
+      url: '<%=update_all_notifications_path%>',
+      type: 'PUT'
+      });
+      
+  <% end %>
+<% end %>
