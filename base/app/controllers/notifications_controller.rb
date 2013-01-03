@@ -6,6 +6,11 @@ class NotificationsController < ApplicationController
   
   def index
     @notifications = @mailbox.notifications.not_trashed.page(params[:page]).per(10)
+    if Site.config[:auto_read_notification] 
+      @notifications.each do |n|
+        @actor.read n
+      end
+    end
   end
 
   def show

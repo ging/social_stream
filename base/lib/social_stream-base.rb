@@ -102,6 +102,10 @@ module SocialStream
   mattr_accessor :cleditor_controls
   @@cleditor_controls = "bold italic underline strikethrough subscript superscript | size style | bullets | image link unlink"
  
+  mattr_accessor :auto_read_notification
+  @@auto_read_notification = false
+  
+  
   class << self
     def setup
       yield self
