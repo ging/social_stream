@@ -6,6 +6,7 @@ class NotificationsController < ApplicationController
   
   def index
     @notifications = @mailbox.notifications.not_trashed.page(params[:page]).per(10)
+    
   end
 
   def show

@@ -192,29 +192,41 @@ class Activity < ActiveRecord::Base
       direct_activity_object.try(:object)
   end
 
+    
   # The title for this activity in the stream
   def title view
+    options = title_options
     case verb
     when "follow", "make-friend", "like"
       I18n.t "activity.verb.#{ verb }.#{ receiver.subject_type }.title",
-      :subject => view.link_name(sender_subject),
-      :contact => view.link_name(receiver_subject)
+      :subject => view.link_name(sender_subject, options.merge({:'data-title' => sender.name, :'data-content'=> sender.brief})),
+      :contact => view.link_name(receiver_subject, options.merge({:'data-title' => receiver.name, :'data-content'=> receiver.brief}))
     when "post", "update"
       if sender == receiver
-        view.link_name sender_subject
+        view.link_name sender_subject, options.merge({:'data-title' => sender.name, :'data-content'=> sender.brief})
       else
         I18n.t "activity.verb.post.title.other_wall",
-               :sender => view.link_name(sender_subject),
-               :receiver => view.link_name(receiver_subject)
+               :sender => view.link_name(sender_subject, options.merge({:'data-title' => sender.name, :'data-content'=> sender.brief})),
+               :receiver => view.link_name(receiver_subject, options.merge({:'data-title' => receiver.name, :'data-content'=> receiver.brief}))
       end
     when 'join'
       I18n.t('notification.join.one', 
-            :sender => view.link_name(sender_subject),
+            :sender => view.link_name(sender_subject, options.merge({:'data-title' => sender.name, :'data-content'=> sender.brief})),
             :thing => I18n.t(direct_object.class.to_s.underscore+'.one'),
             :title => title_of(direct_object))
     else
       "Must define activity title"
     end.html_safe
+  end
+  
+  def brief
+  
+    @brief ||= description
+  end
+
+  def title_options
+    # {:rel => :popover, :'data-trigger'=> :hover}
+    @title_options||= {}
   end
 
   # Title for activity streams
