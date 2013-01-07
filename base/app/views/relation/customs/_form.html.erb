@@ -15,9 +15,13 @@
     </div>
   <% end %>
 
-  <p><%= f.text_field :name, :class => "privacy_input_new", :size => 20 %></p>
-  <%= f.submit nil, :class => "button" %>
-  <button class="button" id="cancel_new_relation_custom" ><%= t('button.cancel') %></button>
+  <%= f.text_field :name, :class => "privacy_input_new", :size => 20 %>
+  <div class="btns">
+    <%= f.submit nil, :class => "btn" %>
+    <button class="btn" id="cancel_new_relation_custom" >
+      <%= t('button.cancel') %>
+    </button>
+  </div>
 <% end %>
 
 <%= javascript_tag do %>
