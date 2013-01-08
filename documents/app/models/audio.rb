@@ -3,7 +3,7 @@ class Audio < Document
                     :url => '/:class/:id.:content_type_extension',
                     :path => ':rails_root/documents/:class/:id_partition/:style',
                     :styles => SocialStream::Documents.audio_styles,
-                    :processors => [ :ffmpeg ]
+                    :processors => [ :ffmpeg, :waveform ]
   
   process_in_background :file    
   

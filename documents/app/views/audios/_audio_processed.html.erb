@@ -9,6 +9,9 @@
       <div id="jp_interface_<%= dom_id audio %>" class="jp-interface">
 
         <div class="jp-progress">
+
+          <%= image_tag document_path(audio, format: :png, style: :waveform) %>
+
           <div class="jp-seek-bar">
             <div class="jp-play-bar"></div>
           </div>
