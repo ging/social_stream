@@ -26,7 +26,12 @@ module SocialStream
       },
       waveform: {
         format: :png,
-        convert_options: {},
+        convert_options: {
+          color: :transparent,
+          background_color: 'ffffff',
+          width: 460,
+          height: 75
+        },
         processors: [ :waveform ]
       }
     }
