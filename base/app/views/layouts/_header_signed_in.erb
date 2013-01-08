@@ -8,6 +8,8 @@
       <%= text_field_tag :q, nil, autocomplete: :off, class: 'search-query', placeholder: t('search.name') %>
     <% end %>
 
+    <%= link_to(raw("<i class='icon_navbar-home'></i> "), explore_path)%>
+
      <ul class="nav pull-right">
       <li>
         <%= link_to current_subject do %>
