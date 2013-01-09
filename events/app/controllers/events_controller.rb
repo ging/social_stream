@@ -28,7 +28,15 @@ class EventsController < ApplicationController
   private
 
   def allowed_params
-    [ :start_at, :end_at, :all_day, :frequency, :room_id ]
+    [
+      :start_at, :end_at, :all_day,
+      :frequency,
+      # Weekly
+      :week_days,
+      # Monthly
+      :week_day_order, :week_day, :interval,
+      :room_id
+    ]
   end
 
   def events_with_start_and_end
