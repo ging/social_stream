@@ -51,9 +51,11 @@ class Group < ActiveRecord::Base
     participant_ids = ([ author_id, user_author_id ] | Array.wrap(@_participants)).uniq
 
     participant_ids.each do |a|
-      sent_contacts.create! :receiver_id  => a,
-                            :user_author  => user_author,
-                            :relation_ids => Array(relation_customs.sort.first.id)
+      c =
+        sent_contacts.create! :receiver_id  => a,
+                              :user_author  => user_author
+      
+      c.relation_ids = Array.wrap(relation_customs.sort.first.id)
     end
   end
 end
