@@ -8,3 +8,18 @@
     button
       @include makeColumn(2, 0)
       font-size: 18px
+
+#explore
+  @include makeColumn(12, 0)
+  .left,
+  .right
+    @include makeColumn(5, 0)
+    h3
+      border-bottom: 1px solid #999
+      font-size: 18px
+  .left
+    display: inline
+    margin-left: 30px
+  .right
+    display: inline-block
+    margin-left: 40px
