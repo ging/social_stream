@@ -1,9 +1,5 @@
 source "http://rubygems.org"
 
-# Freeze rails version
-# https://github.com/ging/social_stream/issues/291
-gem 'rails', '3.2.8'
-
 # Uncomment the following lines if you are planing to
 # use a local code of any of these gems
 
