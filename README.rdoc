@@ -1,7 +1,7 @@
 = Social Stream: a framework for building social network websites
 
 Social Stream is an engine for Ruby on Rails. It provides a robust and flexible framework
-with {http://en.wikipedia.org/wiki/Social_network}[social networking] features and {http://activitystrea.ms/}[activity streams] for building websites.
+with {social networking}[http://en.wikipedia.org/wiki/Social_network] features and {activity streams}[http://activitystrea.ms/] for building websites.
 
 {<img src="https://secure.travis-ci.org/ging/social_stream.png" />}[http://travis-ci.org/ging/social_stream]
 {<img src="https://codeclimate.com/badge.png" />}[https://codeclimate.com/github/ging/social_stream]
@@ -50,7 +50,7 @@ Since {Social Stream}[http://github.com/ging/social_stream] depends on {Devise}[
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
-Social Stream is not compatible with {http://weblog.rubyonrails.org/2012/3/30/ann-rails-3-2-3-has-been-released/}[default mass attributes protection shipped with Rails 3.2.3], but uses the {https://github.com/rails/strong_parameters}[strong_parameters gem] that will be the default in Rails 4.
+Social Stream is not compatible with {default mass attributes protection shipped with Rails 3.2.3}[http://weblog.rubyonrails.org/2012/3/30/ann-rails-3-2-3-has-been-released/], but uses the {strong_parameters gem}[https://github.com/rails/strong_parameters] that will be the default in Rails 4.
 
 You must set 
    
@@ -65,4 +65,4 @@ However, most of the documentation is in {the base gem}[http://rubydoc.info/gems
 
 = Discussion
 
-Feel free to add an issue at github[https://github.com/ging/social_stream/issues] or drop a message at {http://groups.google.com/group/social-stream}[Social Stream's Google group].
+Feel free to add an issue at github[https://github.com/ging/social_stream/issues] or drop a message at {Social Stream's Google group}[http://groups.google.com/group/social-stream].
