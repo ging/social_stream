@@ -1,75 +1,15 @@
-= Social Stream: core for building social network websites
-Social Stream is an engine for Ruby on Rails. It provides a robust and flexible core
-with social networking features and activity streams for building websites.
+= Social Stream: a framework for building social network websites
+
+Social Stream is an engine for Ruby on Rails. It provides a robust and flexible framework
+with {http://en.wikipedia.org/wiki/Social_network}[social networking] features and {http://activitystrea.ms/}[activity streams] for building websites.
 
 {<img src="https://secure.travis-ci.org/ging/social_stream.png" />}[http://travis-ci.org/ging/social_stream]
-{<img src="https://gemnasium.com/ging/social_stream.png" />}[https://gemnasium.com/ging/social_stream]
-
-== Social networking
-Social networks are a new paradigm on web application design. Social networking platforms stand 
-among the most popular websites, while many content oriented applications are supporting social
-networking features in order to improve engagement, enhance user awareness and stimulate communities
-around the website.
-
-{Social Stream}[http://github.com/ging/social_stream] is based on
-{social network analysis (SNA)}[http://en.wikipedia.org/wiki/Social_network] concepts and methods,
-including social entities (actors), ties and relations. Social Stream is so flexible that you can
-define custom actors (groups, organizations, institutions, social events) and relationships
-(friends, collegues, members, administrators, contributors, attendants, speakers).
-
-It also provides a new tie-based access control model, which grants rights at the relation level,
-allowing you to share activities with friends, administrators, members or everybody.
-
-== Activity Streams
-{Activity Streams}[http://activitystrea.ms/] is a format for syndicating social activities around the web. It has already been adopted by some of the major social networking platforms.
-
-{Social Stream}[http://github.com/ging/social_stream] provides a database schema based on the
-{Activity Streams specification}[http://activitystrea.ms/head/activity-schema.html], leading your
-application towards a well-known compatible data model design. It is extensible so you can
-add your own activities easily.
-
-= Installation
-
-Add the following to the Gemfile of the your Rails application:
-
-  gem 'social_stream', '>= 0.19.0'
-
-and run:
-
-  bundle
-
-Then:
-
-  rails generate social_stream:install
-
-Do not forget to migrate your database
-
-  rake db:migrate
-
-Since {Social Stream}[http://github.com/ging/social_stream] depends on {Devise}[https://github.com/plataformatec/devise], make sure you follow {its setup instructions}[https://github.com/plataformatec/devise/tree/master/lib/generators/templates#readme]. Specifically, make sure you set the default URL options for your environments at <tt>config/environments/*.rb</tt> with something like:
-
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-
-Social Stream is not compatible with default mass attributes protection shipped with Rails 3.2.3
-http://weblog.rubyonrails.org/2012/3/30/ann-rails-3-2-3-has-been-released/
-
-You must set 
-   
-   config.active_record.whitelist_attributes = false in config/application.rb
-
-
-
+{<img src="https://codeclimate.com/badge.png" />}[https://codeclimate.com/github/ging/social_stream]
 
 = Social Stream components
 
 Social Stream is divided into components. Developers can customize their social
-network with the functionalities they need for each case. For instance, the Gemfile
-in an application using documents and links only would contain the following:
-
-  gem 'social_stream-documents'
-  gem 'social_stream-linkser'
-
-Current Social Stream distribution include the following components:
+network with the functionalities they need for each case. Current Social Stream distribution include the following components:
 
 * {Base}[https://github.com/ging/social_stream/tree/master/base], basic functionalities of contacts, streams and walls,
   along with users, group, post and comments
@@ -79,6 +19,44 @@ Current Social Stream distribution include the following components:
 * {Linkser}[https://github.com/ging/social_stream/tree/master/linkser], advanced management of links to other webpages
 * {Presence}[https://github.com/ging/social_stream/tree/master/presence], XMPP based chat support 
  
+= Installation
+
+Add the following to the Gemfile of the your Rails application:
+
+  gem 'social_stream', '>= 1.0.0'
+
+In the case you do not want some functionality, include your desired components instead.
+For instance, the Gemfile in an application using documents and links only would contain the following:
+
+  gem 'social_stream-documents'
+  gem 'social_stream-linkser'
+
+
+Then run:
+
+  bundle
+
+Then:
+
+  rails generate social_stream:install
+
+or use specific generators if you are using components.
+
+Do not forget to migrate your database
+
+  rake db:migrate
+
+Since {Social Stream}[http://github.com/ging/social_stream] depends on {Devise}[https://github.com/plataformatec/devise], make sure you follow {its setup instructions}[https://github.com/plataformatec/devise/tree/master/lib/generators/templates#readme]. Specifically, make sure you set the default URL options for your environments at <tt>config/environments/*.rb</tt> with something like:
+
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+Social Stream is not compatible with {http://weblog.rubyonrails.org/2012/3/30/ann-rails-3-2-3-has-been-released/}[default mass attributes protection shipped with Rails 3.2.3], but uses the {https://github.com/rails/strong_parameters}[strong_parameters gem] that will be the default in Rails 4.
+
+You must set 
+   
+   config.active_record.whitelist_attributes = false in config/application.rb
+
+
 = Documentation
 
 {Social Stream documentation is available at rdoc.info}[http://rubydoc.info/gems/social_stream/frames]
@@ -87,5 +65,4 @@ However, most of the documentation is in {the base gem}[http://rubydoc.info/gems
 
 = Discussion
 
-We are reaching beta phase of development.
-Feel free to add an issue or send a message at github[https://github.com/ging/social_stream].
+Feel free to add an issue at github[https://github.com/ging/social_stream/issues] or drop a message at {http://groups.google.com/group/social-stream}[Social Stream's Google group].
