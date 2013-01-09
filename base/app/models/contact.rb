@@ -29,6 +29,7 @@ class Contact < ActiveRecord::Base
 
   has_many :ties,
            :dependent  => :destroy,
+           :inverse_of => :contact,
            :before_add => :set_user_author
 
   has_many :relations,

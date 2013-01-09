@@ -22,7 +22,9 @@
 #                        integer, array
 #
 class Tie < ActiveRecord::Base
-  belongs_to :contact, :counter_cache => true
+  belongs_to :contact,
+             :counter_cache => true,
+             :inverse_of    => :ties
 
   has_one :sender,   :through => :contact
   has_one :receiver, :through => :contact
