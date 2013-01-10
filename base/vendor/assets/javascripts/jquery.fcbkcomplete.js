@@ -102,7 +102,7 @@
         var liclass = "bit-box" + (locked ? " locked": "");
         var id = randomId();
         var txt = document.createTextNode(xssDisplay(title));
-        var aclose = $('<a class="closebutton" href="#"></a>');
+        var aclose = $('<a class="closebutton" href="#">x</a>');
         var li = $('<li class="'+liclass+'" rel="'+value+'" id="pt_'+id+'"></li>').prepend(txt).append(aclose);
 
         holder.append(li);

@@ -1,0 +1,22 @@
+<div class="details">
+  <div class="title">
+    <%= link_to event.title, event %>
+  </div>
+  <div class="frequency">
+    <%= event.frequency_description %>
+  </div>
+  <div class="description">
+    <%= simple_format auto_link(event.description) %>
+  </div>
+  <div class="follow">
+    <div class="follow_sentence">
+    <%= render :partial => 'activity_actions/follow_sentence',
+                 :locals  => { :activity_object => event.activity_object } %>
+    </div>
+    <div class="follow_form">
+      <%= render :partial => 'activity_actions/follow_form',
+                 :locals => { :activity_object => event.activity_object } %>
+    </div>
+
+  </div>
+</div>

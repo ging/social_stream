@@ -1,11 +1,9 @@
-
-<br class="clearfloat" />
-<div class="space_center">
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#"><%= t('message.' + @box) %></a></li>
+  </ul>
 </div>
-<div class="space_center"></div>
+<div class="conversations">
+  <%= render @conversations %>
 
-
-<h2><%= t('message.' + @box) %></h2>
-<div class="conversations">  
-  <%= render :partial => 'conversations' %>
 </div>

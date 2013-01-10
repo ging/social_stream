@@ -1,57 +1,31 @@
 <% if can? :create, new_post(receiver) %>
-<div id="activities_header" class="content_size">
-  <% SocialStream.activity_forms.each do |element| %>
-    <%= render :partial => element.to_s.pluralize+'/new_activity',
-               :locals  => {
-                             :receiver => receiver
-                           } %>
-  <% end %>
-</div>
+  <div class="wall_input">
+    <%= form_for Post.new(owner_id: Actor.normalize_id(receiver)), remote: true do |f| %>
+      <%= f.hidden_field :owner_id %>
+    
+      <%= f.text_field :text, placeholder: t('post.input') %>
 
-<div id="activity_form_select">
-  <% SocialStream.activity_forms.each do |element| %>
-    <div id="select_<%= element %>" class="activity_form_selector">
-      <%= t("#{ element }.form.title") %>
-    </div>
-  <% end %> 	
-</div>
+      <%= f.submit t('activity.share'), class: "btn" %>
 
-<div id="securities">
-  <% if current_subject == receiver %>  
-    <%= javascript_tag do %>
-      var relation_public = <%= Relation::Public.instance.id %>;
-      var public_selected = false;
-      var relation_options = <%= escape_javascript(current_subject.activity_relations_for(receiver).sort.map{ |r| r.id }.to_json) %>;
-      var relation_public_pos = 0;
-      for(id in relation_options){
-        if(relation_options[id]==relation_public){
-          break;
-        }else{
-          relation_public_pos++;
-        }
-      }
-      //For security with check "var default_security_width = '100px';" in activities.js.erb
+      <% SocialStream.activity_forms.each do |element| %>
+        <%= render partial: "#{ element.to_s.pluralize }/new_activity",
+                   locals: { f: f, receiver: receiver } %>
+      <% end %>
+
+      <%= f.select "relation_ids", options_for_select(current_subject.activity_relations_for(receiver).sort.map{ |r| [ r.name, r.id ] }), {}, { multiple: true } %> 
+
+
     <% end %>
-    <%= select_tag :relation_ids, options_for_select(current_subject.activity_relations_for(receiver).sort.map{ |r| [ r.name, r.id ] }), :id => 'security', :multiple => true, :title => t("activity.privacy.myself.contacts.#{ receiver.class.to_s.underscore }") %>
-  <% else %>
-    <div id="security_chzn" class="chzn-container chzn-container-multi">
-      <ul class="chzn-choices">
-        <li class="search-field">
-        <input type="text" value="<%= t "activity.privacy.outside.contacts.#{ receiver.class.to_s.underscore }", :receiver => truncate_name(receiver.name,:length => 15) %>" disabled="disabled">
-        </li>
-      </ul>
-    </div>
+  </div>
+ 
+
+  <%= javascript_tag do %>
+    $(function(){  
+      SocialStream.Wall.show({
+        wallInput: {
+          blankText: "<%= t "activity.privacy.contact.#{ receiver == current_subject ? :myself : :outside }.#{ receiver.class.to_s.underscore }", receiver: receiver.name %>"
+        }
+      });  
+    });
   <% end %>
-</div>
-
-<div id="activities_share_btn">
-  <%= submit_tag(t('share'), :class => "button submitActivity", :id => "masterSubmitButton") %>
-</div>
 <% end %>
-
-<%= javascript_tag do %>
-  $(function(){  
-    SocialStream.Wall.init();  
-  });
-<% end %>
-

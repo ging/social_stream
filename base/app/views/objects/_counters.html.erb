@@ -1,0 +1,5 @@
+<div class="counters">
+  <span class="visit_count"> <%= raw t("#{ object.class.to_s.underscore }.counter.view", count: object.visit_count, default: :'counter.view') %></span> /
+  <span class="like_count"><%= raw t("#{ object.class.to_s.underscore }.counter.like", count: object.like_count, default: :'counter.like') %></span>
+</div>
+

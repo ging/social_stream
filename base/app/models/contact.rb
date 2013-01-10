@@ -29,7 +29,7 @@ class Contact < ActiveRecord::Base
 
   has_many :ties,
            :dependent  => :destroy,
-           :before_add => :set_user_author
+           :inverse_of => :contact
 
   has_many :relations,
            :through => :ties,
@@ -164,21 +164,17 @@ class Contact < ActiveRecord::Base
     end
   end
 
+  # Return an array of options suitable for the contact add button
+  def options_for_select
+    sender.relation_customs.map{ |r| [ r.name, r.id ] }
+  end
+
   private
 
   def build_user_author
     return sender if sender.subject_type == "User"
 
     raise "Cannot determine user_author for #{ sender.inspect }"
-  end
-
-  # user_author is not preserved when the associated tie is build, in:
-  #
-  #   contact.ties.build
-  #
-  # so we need to preserve so the tie activity is recorded
-  def set_user_author(tie)
-    tie.contact.user_author = @user_author
   end
 
   # after_remove callback

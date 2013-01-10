@@ -9,7 +9,7 @@ module SocialStream
         Mime::Type.register "application/postscript", :ps, [ "application/ps" ]
         Mime::Type.register "application/vnd.oasis.opendocument.text", :odt
         Mime::Type.register "application/vnd.oasis.opendocument.presentation", :odp
-        Mime::Type.register "application/vnd.oasis.opendocument.presentation", :ods
+        Mime::Type.register "application/vnd.oasis.opendocument.spreadsheet", :ods
         Mime::Type.register "application/vnd.ms-word", :doc, [ "application/msword" ]
         Mime::Type.register "application/vnd.ms-powerpoint", :ppt, [ "application/mspowerpoint" ]
         Mime::Type.register "application/vnd.ms-excel", :xls, [ "application/msexcel" ]
@@ -44,8 +44,9 @@ module SocialStream
         Mime::Type.register "audio/x-vorbis+ogg", :ogg, [ "application/ogg" ]
         Mime::Type.register "audio/webm", :webma
         # These are already defined in Rails 3.2
-        unless defined? Mime::MPEG
-          Mime::Type.register "audio/mpeg", :mpeg
+        # MPEG is currently reserved to 'video/mpeg'
+        unless defined? Mime::MP3
+          Mime::Type.register "audio/mpeg", :mp3
         end
 
         # Video

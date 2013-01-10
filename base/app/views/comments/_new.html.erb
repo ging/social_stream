@@ -1,33 +1,13 @@
 <% if user_signed_in? && current_subject.can_comment?(activity) %>
-  <div class="activity_new_comment">
-    <div class="actor_logo_new_comment">
-      <%= image_tag(current_subject.logo.url(:actor),
-                            :alt => current_subject.name)%>
+  <div class="new_comment">
+    <div class="avatar">
+      <%= image_tag(current_subject.logo.url("small")) %>
     </div>
-    <div class= "activity_content">
-      <div class="actor_name_new_comment">
-        <%= current_subject.name %>
-      </div>
-      <%= form_for Comment.new(:text => t('comment.input'),
-                               :owner_id => Actor.normalize_id(activity.receiver),
-                               :_activity_parent_id => activity.id
-                  ),
-                :html => { :class => "new_comment", :id => "new_comment"+dom_id(activity)  },
-                :remote => true do |f| %>
 
-        <%= f.hidden_field :owner_id %>
-        <%= f.hidden_field :_activity_parent_id %>
-        
-        <div class="input_new_comments_container">
-          <%= f.text_area :text, :class =>"input_new_comments", :id => "comment_text_"+dom_id(activity), :rows => 1 %>
-          <div class="copy_new_comment" id="copy_comment_text_<%= dom_id(activity) %>"></div>
-        </div>
-        
-        <div class="activities_comment_btn">
-          <div class="activities_security"></div>
-          <%= f.submit t('share'), :class =>"myButtonBlue submitActivity", :id => "comment_submit_"+dom_id(activity) %>
-        </div>
-      <% end %>
-    </div>
+    <%= render partial: 'comments/new_form',
+               locals: {
+                 owner_id: Actor.normalize_id(activity.receiver),
+                 _activity_parent_id: activity.id
+               } %>
   </div>
 <% end %>

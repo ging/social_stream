@@ -1,5 +1,5 @@
 module SocialStream
   module Events
-    VERSION = "0.16.2".freeze
+    VERSION = "1.0.0".freeze
   end
 end

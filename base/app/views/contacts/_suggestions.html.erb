@@ -1,15 +1,14 @@
 <% if (sgs = current_subject.suggestions(2)).present? %>
-  <div class="block">
-    <div class="header">
-      <%= image_tag('btn/notifications.png', :class => "header_icon") %>
-      <div class="header_text">
-        <%=t('contact.suggestion.one') %>
-      </div>
-    </div>
-    <div class="content">
-      <div class="suggestions">
+  <section id="suggestions">
+    <header>
+      <h4>
+        <%=t('contact.suggestion.other') %>
+      </h4>
+    </header>
+    <div class="contents">
+      <article class="content">
         <%= render :partial => "contacts/contact", :collection => sgs %>
-      </div>
+      </article>
     </div>
-  </div>
+  </section>
 <%end%>

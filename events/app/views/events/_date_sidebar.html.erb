@@ -1,0 +1,14 @@
+<div class="date">
+  <%= link_to event, :class => "date" do %>
+    <time datetime="<%= event.start_at.xmlschema %>">
+      <% unless event.all_day? %>
+        <div class="hour">
+          <%= l event.start_at, :format => "%H:%M" %>
+        </div>
+      <% end %>
+        <div class="frequency">
+          <%= event.frequency_description %>
+        </div>
+    </time>
+  <% end %>
+</div>

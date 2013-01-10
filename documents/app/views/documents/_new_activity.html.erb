@@ -1,1 +1,3 @@
-<%= render :partial => 'objects/new_activity', :locals => {:remote => false, :receiver => receiver, :object => Document.new()} %>
+<button class="new_document" data-path="<%= documents_path %>">
+  <%= image_tag 'icons/attach.png', alt: t('document.new_activity.attach'), title: t('document.new_activity.attach') %>
+</button>

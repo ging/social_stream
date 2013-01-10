@@ -53,15 +53,18 @@ en:
     one: "Activity"
     other: "Activities"
     privacy:
-      myself:
-        contacts:
+      contact:
+        myself:
           group: "All members"
           user: "Your contacts"
-      outside:
-        contacts:
+        outside:
           group: "Members of %{receiver}"
           user: "Contacts of %{receiver}"
+      relation:
+        one: "%{count} group"
+        other: "%{count} groups"
     sending: "Sending"
+    share: "Share"
     stream:
       atom_title: "Activity Stream from %{subject}"
       title:
@@ -141,7 +144,6 @@ en:
       other: "Comments"
     view_all: "View all comments"
   contact:
-    addressbook: "Addressbook"
     all_n: "All contacts (%{count})"
     confirm_delete: "Delete contact?"
     current: "Current"
@@ -161,6 +163,10 @@ en:
       one: "1 contact in common"
       other: "%{count} contacts in common"
     new:
+      button:
+        zero: "Add"
+        one: "%{count} role"
+        other: "%{count} roles"
       link: "+ Add contact"
       title: "Add %{name} to your contacts"
       menu: "Add contact"
@@ -171,6 +177,7 @@ en:
       other: "Pending"
       all: "All"
       all_n: "See all pending requests (%{count})"
+    received: "Received"
     relation:
       one: "Contact type"
       new: "New type"
@@ -178,6 +185,8 @@ en:
       link: "+ Reply contact"
       title: "Reply contact request to %{name}"
       submit: "Reply contact"
+    saving: "Saving..."
+    sent: "Added"
     suggestion:
       one: "Suggestion"
       other: "Suggestions"
@@ -185,9 +194,16 @@ en:
     type:
       new: "+ New type"
     unfollow: "Unfollow"
-  copyright: "2010 Copyright - All rights reserved"
+  copyright: "2013 Copyright - All rights reserved"
+  counter:
+    like:
+      one: "<span class=\"counter\">%{count}</span> like"
+      other: "<span class=\"counter\">%{count}</span> likes"
+    view:
+      one: "<span class=\"counter\">%{count}</span> view"
+      other: "<span class=\"counter\">%{count}</span> views"
   delete:
-    confirm: Delete %{element}}?
+    confirm: "Delete %{element}}?"
   devise:
     links:
       sign_in: "Sign in"
@@ -372,7 +388,7 @@ en:
     confirm_delete: "Delete post?"
     form:
       title: "Post"
-    input: "What are you doing?"
+    input: "Share you thoughts here!"
     name: "post"
     one: "a post"
     title:

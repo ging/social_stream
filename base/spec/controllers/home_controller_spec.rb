@@ -22,7 +22,7 @@ describe HomeController do
       get :index
 
       response.should be_success
-      response.body.should =~ /activities_share_btn/
+      response.body.should =~ /new_post/
     end
 
     context "with a group" do
@@ -35,7 +35,7 @@ describe HomeController do
         get :index
 
         response.should be_success
-        response.body.should =~ /activities_share_btn/
+        response.body.should =~ /new_post/
       end
     end
 

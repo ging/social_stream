@@ -1,11 +1,12 @@
 <% content_for :title do%>
   <%= @profile.subject.name %>
-<%end%>
+<% end %>
+
 <% if @profile.description? %>
   <% content_for :description do %>
-    <%= @profile.description%>
+    <%= @profile.description %>
   <% end %>
-<%end%>
+<% end %>
 
 <% content_for :keywords do %>
   <%= @profile.subject.tag_list%>
@@ -14,9 +15,5 @@
 <% sidebar %>
 
 <% toolbar :profile, :subject => @profile.subject %>
-
-
-<%= location(link_to(t('menu.information'), [@profile.subject, :profile])) %>
-
 
 <%= render :partial => "profile" %>

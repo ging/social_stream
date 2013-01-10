@@ -1,21 +1,15 @@
-<% toolbar :profile, :subject => current_subject %>
-
-<% sidebar %>
-
 <%= location(t('account.one'), 
   link_to(t('settings.main'), settings_path)
 ) %>
-<br class="clearfloat" />
-<div class="space_center">
-</div>
-<h2><%= t('settings.for')%> <%= current_subject.name %></h2>
-<div class="space_center">
-</div>
-<%= render :partial => "edit_user"%>
 
+<h2>
+	<%= t('settings.for')%> <%= current_subject.name %>
+</h2>
+
+<%= render :partial => "edit_user"%>
 <%= render :partial => "settings/language" %>
 <%= render :partial => "settings/notifications" %>
 <% if current_subject.respond_to? :authentication_token%>
-<%= render :partial => "settings/api_key" %>
+  <%= render :partial => "settings/api_key" %>
 <% end %>
 <%= render :partial => "delete_account"%>

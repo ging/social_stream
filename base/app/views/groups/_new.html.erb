@@ -1,81 +1,51 @@
-<% content_for :javascript do %>
-  $(function() {
-    $(".new_group").validate({errorClass: "validation_error"});
-  });
-  $("#group__participants").fcbkcomplete({
-                json_url: "<%= contacts_path(:form => true, :format => :json) %>",
-		cache: true,
-		filter_hide: true,
-		newel: false,
-		height: 6
-  });
-  $("#group_tag_list").fcbkcomplete({
-		json_url: "<%= tags_path(:format => :json) %>",
-		cache: false,
-		filter_case: true,
-		filter_hide: true,
-		newel: false,
-		height: 6
-  });
-<% end %>
-
-<%= location(
-    link_to(t('group.other'), groups_path),
-    link_to(t('group.new.action'), new_group_path)
-  ) %>
-
-<div class="space_center"></div>
-
 <%= form_for @group do |f| %>
-	<% if @group.errors.any? %>
-		<div id="notice">
-			<h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
-			<ul>
-				<% @group.errors.full_messages.each do |msg| %>
-	        <li>
-						<%= msg %>
-					</li>
-				<% end %>
-			</ul>
-		</div>
-	<% end %>
-	<div class="block">
-	  <div class="form_row">
-	    <h2><%= t('group.new.action') %></h2>
-	  </div>
-		<div class="space_center"></div>	
-		<div class="form_row">
-			<div class="form_label">
-				<%= f.label t('group.new.name') %>
-			</div>
-			<div class="form_field">
-				<%= f.text_field :name, :class => "required form_tag" %>
-			</div>
-		</div>
-		<div class="form_row">
-			<div class="form_label" id="form_participants">
-			  <%= f.label t('group.new.participants') %>
-			</div>
-			<div class="form_field">
-				<%= f.select :_participants, [], :class => "form_tag" %>
-			</div>
-		</div>
-		<div class="form_row">
-			<div class="form_label" id="form_tags">
-				<%= f.label t('group.tags')%>
-			</div>
-			<div class="form_field">
-        			<%= f.select :tag_list, [], :class => "form_tag" %>
-			</div>
-		</div>
-		<div class="form_row form_label">
-			<%= f.label :description %>
-		</div>
-		<div class="form_row">
-			<%= f.text_area :description, :rows =>6, :cols=> 53, :class => "form_tag" %>
-		</div>
-		<div class="actions center">
-			<%= f.submit :class => "button" %>
-		</div>
-	</div>
+  <% if @group.errors.any? %>
+    <div class="error">
+      <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
+      <ul>
+        <% @group.errors.full_messages.each do |msg| %>
+          <li>
+          <%= msg %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h2><%= t('group.new.action') %></h2>
+
+  <%= f.label :name, t('group.new.name') %>
+  <%= f.text_field :name %>
+
+  <%= f.label :_participants, t('group.new.participants') %>
+  <div class="fcbk">
+    <%= f.select :_participants, [], {}, 'data-path' => contacts_path(form: true, format: :json) %>
+  </div>
+
+  <%= f.label :tags_list, t('group.tags')%>
+  <div class="fcbk">
+    <%= f.select :tag_list, [], {}, 'data-path' => tags_path(format: :json) %>
+  </div>
+
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+
+  <%= f.submit :class => "btn" %>
 <% end %>
+
+<%= javascript_tag do %>
+  $(function() {
+    SocialStream.Group.new_(
+      {
+        validate: [
+          {
+            form: ".new_group",
+            errorClass: "validation_error"
+
+          }
+        ]
+      }
+    );
+  });
+<% end %>
+

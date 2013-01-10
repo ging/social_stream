@@ -11,12 +11,12 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n")
 
   # Gem dependencies
-  s.add_runtime_dependency('social_stream-base', '~> 0.24.2')
-  s.add_runtime_dependency('social_stream-documents', '~> 0.18.1')
-  s.add_runtime_dependency('social_stream-events', '~> 0.16.2')
-  s.add_runtime_dependency('social_stream-linkser', '~> 0.15.0')
-  s.add_runtime_dependency('social_stream-presence', '~> 0.17.0')
-  s.add_runtime_dependency('social_stream-ostatus', '~> 0.2.0')
+  s.add_runtime_dependency('social_stream-base', '~> 1.0.0')
+  s.add_runtime_dependency('social_stream-documents', '~> 1.0.0')
+  s.add_runtime_dependency('social_stream-events', '~> 1.0.0')
+  s.add_runtime_dependency('social_stream-linkser', '~> 1.0.0')
+  s.add_runtime_dependency('social_stream-presence', '~> 1.0.0')
+  s.add_runtime_dependency('social_stream-ostatus', '~> 1.0.0')
  
   # Development Gem dependencies
   #
@@ -49,4 +49,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency('forgery', '~> 0.4.2')
   # Continous integration
   s.add_development_dependency('ci_reporter', '~> 1.6.4')
+  # pry
+  s.add_development_dependency('pry-rails', '~> 0.2.2')
+  # Rails panel
+  s.add_development_dependency('meta_request', '~> 0.2.0')
 end

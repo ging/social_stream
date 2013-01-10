@@ -1,18 +1,13 @@
 <% if current_subject.pending_contacts? %>
-<div class="block">
-  <div class="header">
-    <%= image_tag('btn/btn_notifications.png', :class => "header_icon") %>
-    <div class="header_text">
+<section id="pendings">
+  <header>
+    <h4>
       <%= t 'contact.pending.other' %>
-    </div>
+    </h4>
+  </header>
+  <%= render :partial => 'contacts/contact', :collection => current_subject.pending_contacts.shuffle.first(2) %>
+
+  <div class="see-more">  <%= link_to t('contact.pending.all_n', :count => current_subject.pending_contacts_count), pending_contacts_path %>
   </div>
-  <div class="content">
-    <%= render :partial => 'contacts/contact', :collection => current_subject.pending_contacts.shuffle.first(2) %>
-    <div class="row more_pending">
-      <%= link_to t('contact.pending.all_n', :count => current_subject.pending_contacts_count), pending_contacts_path %>
-    </div>
-    <div class="space_center">
-    </div>
-  </div>
-</div>
+</section>
 <% end -%>

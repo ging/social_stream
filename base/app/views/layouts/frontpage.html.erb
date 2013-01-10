@@ -21,21 +21,29 @@
     <%= yield :headers %>
   </head>
   <body>
-    <div id="wrapper">
-      <header>
+    <div class="wrapper container">
+      <header id="header">
         <%= render :partial => "layouts/header" %>
       </header>
       <section>
         <div id="wrapper_body">
-          <div class="space_center"></div>
           <div id="flash">
             <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
           </div>
+          <h3 class="description big">
+            Social Stream es un núcleo para construir webs con características de red social
+          </h3>
+          <h4 class="description lite">
+            1263 usuarios y 201 grupos registrados!
+          </h4>
           <%= yield %>
         </div>
-        <%= render :partial => "frontpage/sponsor" %>
       </section>
-      <footer>
+      <br class="clearfloat" />
+      
+      <div class="push">
+      </div>
+      <footer class="footerFront">
         <%= render :partial => "layouts/footer" %>
       </footer>
     </div>

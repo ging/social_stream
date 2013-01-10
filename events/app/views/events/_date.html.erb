@@ -1,0 +1,17 @@
+<div class="date">
+  <%= link_to event, :class => "date" do %>
+    <time datetime="<%= event.start_at.xmlschema %>">
+      <div class="day">
+        <%= event.start_at.day %>
+      </div>
+      <div class="month">
+        <%= l event.start_at, :format => "%b" %>
+      </div>
+      <% unless event.all_day? %>
+        <div class="hour">
+          <%= l event.start_at, :format => "%H:%M" %>
+        </div>
+      <% end %>
+    </time>
+  <% end %>
+</div>

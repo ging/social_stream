@@ -26,11 +26,10 @@ end %>
   link_to(t('menu.information'), [current_subject, :profile]),
   level2
 ) %>
-<div class="space_center"></div>
 
 <%= form_for(@profile, :url => [current_subject, :profile], :remote => true) do |f| %>
 
-<div class="block" id="profile_form">
+<div id="profile_form">
   
   <% if !params[:section].present? or params[:section].eql?("tags") %>
   	<% content_for :javascript do %>

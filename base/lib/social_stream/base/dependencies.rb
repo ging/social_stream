@@ -47,6 +47,8 @@ require 'thinking-sphinx'
 require 'thinking-sphinx/social_stream'
 # Syntactically Awesome Stylesheets
 require 'sass-rails'
+# Bootstrap for Sass
+require 'bootstrap-sass'
 # Autolink text blocks
 require 'rails_autolink'
 # SocialCheesecake

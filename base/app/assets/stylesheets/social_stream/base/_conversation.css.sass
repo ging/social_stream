@@ -1,0 +1,62 @@
+@import "jquery.cleditor"
+
+#content-large
+  @include makeColumn(10, 0)
+  margin-top: 20px
+
+.content_left
+  @include makeColumn(3, 0)
+  display: inline
+  .avatar
+    float: left
+    padding: 2px 5px 0 10px
+
+.content_right
+  @include makeColumn(7, 0)
+  color: #666666
+  display: inline-block
+  margin-left: 0px
+  margin-bottom: 15px
+  .subject
+    font-weight: normal
+    font-size: 14px
+    a
+      font-size: 15px
+      font-weight: bold
+      &:hover
+        opacity: 0.4
+        text-decoration: none
+  .briefing
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+    color: #666666
+  
+  .date
+    color: #666666
+    font-size: 11px
+    display: inline
+    margin-left: 4px
+    margin-right: 13px
+
+  .action
+    float: right
+    margin-top: -20px
+    margin-rigth: 10px
+
+#conversation
+  .new_message
+    margin-left: 20px
+  
+#ck_editor
+  .cleditorMain
+    @include border-radius(5px) 
+    width: 694px !important
+
+
+.conversation
+  opacity: 0.5
+
+.unread
+  opacity: 1
+  background-color: black

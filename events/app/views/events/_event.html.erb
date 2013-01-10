@@ -1,13 +1,10 @@
 <%= div_for event do %>
 
-  <div class="timeline-130">
-    <%= render :partial => "events/event_date", :locals => { :event => event } %>
+  <%= render :partial => "events/date", :locals => { :event => event } %>
 
-    <%= render :partial => "events/event_poster", :locals => { :event => event } %>
+  <%= render :partial => "events/poster", :locals => { :event => event } %>
 
-  </div>
-
-  <%= render :partial => "events/event_details", :locals => { :event => event } %>
+  <%= render :partial => "events/details", :locals => { :event => event } %>
 <% end %>
 
 <div class="clearfloat"></div>

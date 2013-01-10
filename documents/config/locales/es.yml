@@ -3,6 +3,8 @@ es:
     attributes:
       document:
         title: "Título"
+    models:
+      document: "Fichero"
   audio:
     confirm_delete: "¿Borrar audios?"
     mine: "Mis audios"
@@ -22,25 +24,36 @@ es:
       download: "Descargar"
       edit: "Editar"
     all: "Todos los ficheros"
+    by: "por %{author}"
     confirm_delete: "¿Borrar fichero?"
+    description:
+      input: "Añade una descripción aquí"
+    filter: "filtrar"
     form:
       title: "Fichero"
     info:
+      author: "Autor"
       date:
         created_at: "Creado"
         updated_at: "Última modificación"
-      description:
-        title: "Descripción"
-      file:
-        title: "Subir"
-      title:
-        title: "Título"
+      description: "Descripción"
+      file: "Fichero"
+      title: "Título"
     mine: "Mis ficheros"
     name: "fichero"
+    new:
+      link: "Añadir nuevo"
+      title: "Nuevo fichero"
+    new_activity:
+      attach: "Adjuntar fichero"
     not_mine: "Ficheros"
     one: "un fichero"
+    scope:
+      network: "Red"
+      own: "Propios"
     simple_all: "Todos"
     title:
+      input: "Título del fichero"
       one: "Fichero"
       other: "Ficheros"
   picture:

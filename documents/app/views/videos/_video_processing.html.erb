@@ -1,9 +1,10 @@
-<div class="attachment_thumb">
-  <%= thumb_for(video, 16) %>
+<div class="thumb">
+  <%= icon video, 70 %>
 </div>
-<div class="attachment_text">
-  <div class="title">
+<div class="text">
+  <h6>
     <%= video.title %>
+  </h6>
+  <div class="processing_text"><%= t('video.processing')%>
   </div>
-  <div class="processing_text"><%= t('video.processing')%></div>
 </div>

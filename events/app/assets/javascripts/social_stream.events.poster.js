@@ -1,16 +1,15 @@
 SocialStream.Events.Poster = (function(SS, $, undefined){
 	var init = function(){
-		$('.event_poster_update').hide();
+		$('.event .poster .update').hide();
 
-		$('.event_poster').hover(
+		$('.event .poster').hover(
 			function(){
-				$(this).find(".event_poster_update").fadeIn("slow");
-			        
+				$(this).find(".update").fadeIn("slow");
 			},
 			function(){
-				$(this).find(".event_poster_update").fadeOut("slow");
+				$(this).find(".update").fadeOut("slow");
 			});
-	}
+	};
 
 	SS.Timeline.addInitCallback(init);
 	SS.Event.addIndexCallback(init);

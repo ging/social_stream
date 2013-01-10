@@ -52,15 +52,18 @@ es:
     one: "Actividad"
     other: "Actividades"
     privacy:
-      myself:
-        contacts:
+      contact:
+        myself:
           group: "Todos los integrantes"
           user: "Tus contactos"
-      outside:
-        contacts:
+        outside:
           group: "Integrantes de %{receiver}"
           user: "Contactos de %{receiver}"
+      relation:
+        one: "%{count} grupo"
+        other: "%{count} grupos"
     sending: "Enviando"
+    share: "Compartir"
     stream:
       atom_title: "Actividades de %{subject}"
       title:
@@ -139,7 +142,6 @@ es:
       one: "Comentario"
       other: "Comentarios"
   contact:
-    addressbook: "Libreta de direcciones"
     all_n: "Todos los contactos (%{count})"
     confirm_delete: "¿Borrar contacto?"
     current: "Actuales"
@@ -159,6 +161,10 @@ es:
       one: "1 contacto en común"
       other: "%{count} contactos en común"
     new:
+      button:
+        zero: "Añadir"
+        one: "%{count} rol"
+        other: "%{count} roles"
       link: "+ Añadir contacto"
       title: "Añadir a %{name} como contacto"
       menu: "Añadir contacto"
@@ -169,6 +175,7 @@ es:
       other: "Pendientes"
       all: "Todos"
       all_n: "Ver todas los contactos pendientes (%{count})"
+    received: "Recibidos"
     relation:
       one: "Tipo de contacto"
       new: "Nuevo tipo"
@@ -176,6 +183,8 @@ es:
       link: "+ Responder contacto"
       title: "Responder contacto con %{name}"
       submit: "Responder contacto"
+    saving: "Guardando..."
+    sent: "Añadidos"
     suggestion:
       one: "Sugerencia"
       other: "Sugerencias"
@@ -183,7 +192,14 @@ es:
     type:
       new: "+ Nuevo tipo"
     unfollow: "Dejar de seguir"
-  copyright: "2011 Copyright - Derechos reservados"
+  copyright: "2013 Copyright - Derechos reservados"
+  counter:
+    like:
+      one: "<span class=\"counter\">%{count}</span> fan"
+      other: "<span class=\"counter\">%{count}</span> fans"
+    view:
+      one: "<span class=\"counter\">%{count}</span> vista"
+      other: "<span class=\"counter\">%{count}</span> vistas"
   delete:
     confirm: "¿Borrar %{element}}?"
   devise:
@@ -370,7 +386,7 @@ es:
     confirm_delete: "¿Borrar texto?"
     form:
       title: "Texto"
-    input: "¿Qué quieres compartir?"
+    input: "Comparte tus ideas..."
     name: "publicación"
     one: "una publicación"
     title:

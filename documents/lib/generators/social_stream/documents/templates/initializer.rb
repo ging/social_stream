@@ -11,7 +11,12 @@ SocialStream::Documents.setup do |config|
 
   # Configure audio thumbnails
   #
-  # config.audio_styles = { :webma => {:format => 'webm'} }
+  # config.audio_styles = {
+  #   webma: { format: 'webm'},
+  #   waveform: { format: :png,
+  #               convert_options: {}
+  #   }
+  # }
 
   # Configure video thumbnails
   #
@@ -22,5 +27,21 @@ SocialStream::Documents.setup do |config|
   #    :poster  => { :format => 'png', :time => 5 },
   #    :thumb48sq  => { :geometry => "48x48" , :format => 'png', :time => 5 },
   #    :thumbwall => { :geometry => "130x97#", :format => 'png', :time => 5 }
+  #  }
+
+  # List of mime types that have an icon defined
+  # config.icon_mime_types  = {
+  #    default: :default,
+  #    types: [
+  #      :text, :image, :audio, :video
+  #    ],
+  #    subtypes: [
+  #      :txt, :ps, :pdf, :sla, 
+  #      :odt, :odp, :ods, :doc, :ppt, :xls, :rtf,
+  #      :rar, :zip,
+  #      :jpeg, :gif, :png, :bmp, :xcf,
+  #      :wav, :ogg, :webma, :mpeg,
+  #      :flv, :webm, :mp4
+  #    ]
   #  }
 end

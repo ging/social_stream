@@ -1,4 +1,4 @@
-<div class="subject">
+
   <%= raw t('notification.update.'+ activity.receiver.subject.class.to_s.underscore, 
    :sender => link_to(truncate_name(activity.sender.name), 
                       polymorphic_url(activity.sender.subject)),
@@ -6,13 +6,5 @@
               :receiver => truncate_name(activity.receiver.name)),
    :thing => link_to(t(activity.direct_object.class.to_s.underscore+'.one'),
                      notification_url_of( activity.direct_object, @notification))) %>
-</div>
-<div class="briefing">
-  <% if activity.direct_object.respond_to? :text %>
-    "<%= link_to(sanitize(activity.direct_object.text.truncate(100, :separator =>' ')),
-                     notification_url_of(activity.direct_object, @notification))%>"
-  <% else%>
-    <%= link_to(t('notification.watch_it'),
-                notification_url_of( activity.direct_object, @notification))%>
-  <%end%>
-</div>
+
+

@@ -1,5 +1,7 @@
-<% if user_signed_in? %>
-<%= render :partial => 'layouts/header_signed_in' %>
-<% else %>
-<%= render :partial => 'layouts/header_signed_out' %>
-<% end %> 
+<header>
+  <% if user_signed_in? %>
+  <%= render :partial => 'layouts/header_signed_in' %>
+  <% else %>
+  <%= render :partial => 'layouts/header_signed_out' %>
+  <% end %> 
+</header>

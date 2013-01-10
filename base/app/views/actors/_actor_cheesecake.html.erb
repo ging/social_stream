@@ -1,5 +1,5 @@
 <%= div_for actor do %>
-  <%= image_tag(actor.logo.url , :size => "64x64", :alt => actor.name ) %>
+  <%= image_tag(actor.logo.url , :size => "small", :alt => actor.name ) %>
 <% end %>
 
 <div id="<%= dom_id(actor)%>_details" style="display:none;">

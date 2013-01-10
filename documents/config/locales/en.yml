@@ -3,6 +3,8 @@ en:
     attributes:
       document:
         title: "Title"
+    models:
+      document: "File"
   audio:
     confirm_delete: "Delete audio?"
     title: "Audios"
@@ -23,25 +25,38 @@ en:
       download: "Download"
       edit: "Edit"
     all: "All files"
+    by: "by %{author}"
     confirm_delete: "Delete file?"
+    description:
+      input: "Add a description here"
+    filter: "filter"
     form:
       title: "File"
     info:
+      author: "Author"
       date:
         created_at: "Created at"
         updated_at: "Updated at"
-      description:
-        title: "Description"
-      file:
-        title: "Upload"
-      title:
-        title: "Title"
+      description: "Description"
+      file: "File"
+      size: "Size"
+      tags: "Tags"
+      title: "Title"
     mine: "My files"
     name: "file"
+    new:
+      link: "Add new"
+      title: "New file"
+    new_activity:
+      attach: "Attach file"
     not_mine: "Files"
     one: "a file"
+    scope:
+      network: "Network"
+      own: "Own"
     simple_all: "All"  
     title:
+      input: "File title"
       one: "File"
       other: "Files"
   picture:

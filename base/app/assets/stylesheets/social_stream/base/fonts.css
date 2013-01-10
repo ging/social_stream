@@ -1,0 +1,11 @@
+/************* typography*******/
+
+@font-face{
+  font-family:OpenSans;
+  src: url(social_stream/fonts/opensans-regular.ttf);
+}
+
+@font-face{
+  font-family:BreeSerif;
+  src: url(social_stream/fonts/BreeSerif-Regular.ttf);
+}

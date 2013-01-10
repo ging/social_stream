@@ -1,0 +1,14 @@
+<div class="actions">
+  <%= render :partial => 'activities/time_ago',
+             :locals => { :activity => activity } %>   
+
+  <%= render :partial => 'activities/comment',
+             :locals => { :activity => activity } %>   
+
+  <%= render :partial => 'activities/like',
+             :locals => { :activity => activity } %>   
+
+  <%= render :partial => 'activities/audience',
+             :locals => { :activity => activity } %>   
+
+</div>

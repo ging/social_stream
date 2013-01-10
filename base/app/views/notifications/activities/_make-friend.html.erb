@@ -1,10 +1,5 @@
-<div class="subject">
+
   <%= raw t('notification.makefriend.'+ activity.receiver.subject.class.to_s.underscore, 
    :sender => link_to(truncate_name(activity.sender.name), polymorphic_url(activity.sender.subject)),
    :who => t('notification.who.'+ activity.receiver.subject.class.to_s.underscore,
               :name => truncate_name(activity.receiver.name))) %>
-</div>
-<div class="briefing">
-  <%= raw t('notification.look', 
-   :sender => link_to(truncate_name(activity.sender.name), polymorphic_url(activity.sender.subject))) %>
-</div>

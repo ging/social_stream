@@ -82,7 +82,7 @@ module SocialStream
   @@objects = [ :post, :comment ]
 
   mattr_accessor :activity_forms
-  @@activity_forms = [ :post ]
+  @@activity_forms = []
 
   mattr_accessor :relation_model
   @@relation_model = :custom

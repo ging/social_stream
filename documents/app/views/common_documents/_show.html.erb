@@ -4,32 +4,80 @@
 <% profile_subject ||= document.owner_subject %>
 
 <% content_for :title do %>
-<%= profile_subject.name + ": " + t('repository.title') %>
+  <%= profile_subject.name + ": " + t('repository.title') %>
 <% end %>
 
-<% sidebar %>
 
-<%if profile_subject_is_current?%>
-<%= location(
-  link_to(t('repository.title'), polymorphic_path(controller.controller_name),:remote => true)
-  ) %>
-<%else%>
-<%= location(
-  link_to(profile_subject.name, polymorphic_path(profile_subject),:remote => true),
-  link_to(t('repository.title'), polymorphic_path([profile_subject, controller.controller_name]),:remote => true)
-  ) %>
-<%end%>
+<%= div_for document do %>
+  <div class="central">
+    <h2>
+      <%= document.title %>
+    </h2>
 
-<br class="clearfloat" />
-<div class="space_center"></div>
-<h2><%= document.title.nil? ? document.file_file_name : document.title %></h2>
-<div class="space_center"></div>
+    <div class="show">
 
-<%= show_view_for document %>
+      <%= render partial: "#{ document.class.to_s.tableize }/#{ document.class.to_s.underscore }_show",
+                 locals: { document.class.to_s.underscore.to_sym => document } %>
 
-<%= render :partial => "common_documents/document_info", :locals => {:document => document} %>
+      <div class="actions">
+        <% if can? :destroy, document %>
+          <%= link_to raw("<i class='icon_tool16-trash'></i> "),  document,
+                      confirm: t('confirm_delete', scope: document.class.to_s.underscore),
+                      title: t('document.actions.delete'),
+                      method: :delete %>
+        <% end %>
 
-<div id="document_comments">
-  <%= render :partial => 'activities/comments', :locals => { :activity => document.post_activity } %>
-  <%= render :partial => 'comments/new', :locals => { :activity => document.post_activity } %>
-</div>
+        <%= link_to raw("<i class='icon_tool16-save'></i> "), download_document_path(document), title: t('document.actions.download') %>
+        
+        </div>
+      </div>
+
+      <div class="tabbable">
+        <ul class="nav nav-tabs">
+          <li class="active">
+          <a href="#comments" data-toggle="tab">
+            <%= t 'comment.title.other' %>
+          </a>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <div id="comments" class="comments">
+            <%= render :partial => 'activities/comments', :locals => { :activity => document.post_activity } %>
+            <%= render :partial => 'comments/new', :locals => { :activity => document.post_activity } %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="details">
+      <div class="tabbable">
+        <ul class="nav nav-tabs">
+          <li class="<%= document_details_tab_class document, :info %>">
+            <%= link_to t('document.details.info'), '#document-info', 'data-toggle' => 'tab' %>
+          </li>
+
+          <% if can? :update, document %>
+          <li class="<%= document_details_tab_class document, :edit %>">
+
+            <%= link_to (raw("<i class='icon_tool16-edit'></i> ")), '#document-edit', 'data-toggle' => 'tab' %>
+            <!--alt: t('document.actions.edit'),-->
+
+          </li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="tab-content">
+        <div class="tab-pane <%= document_details_tab_class document, :info %>" id="document-info">
+          <%= render partial: "common_documents/info", locals: { document: document } %>
+        </div>
+        <% if can? :update, document %>
+          <div class="tab-pane <%= document_details_tab_class document, :edit %>" id="document-edit">
+            <%= render partial: 'common_documents/form', locals: { document: document } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

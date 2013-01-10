@@ -2,24 +2,48 @@
   <%= render :partial => 'layouts/devise_style' %>
 <%end%>
 
-<div id="welcome">
-  <div id="login" class="block">
-  <h2><%= t('sign_up').capitalize %></h2>
-  <div class="space_center"></div>
-  <div class="space_center"></div>
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
+<div id="registration">
+  <article class="left">
+    <header>
+      <h2>
+        <% content_for :title do%>
+          <%= t('welcome', :site => t('site.name')) %>
+        <%end%>
+      </h2>
+    </header>
+    <div class="thumbnail inline">
+      <header>
+        <h6>title</h6>
+      </header>
+      <%= render :partial => 'frontpage/caracteristics' %>
+    </div>
+    <%= render :partial => 'layouts/search' %>
+  </article>
+
+  <div id="login" class="right">
+    <h2>
+      <%= t('sign_up').capitalize %>
+    </h2>
+ 
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
     <div class="form_row">
-      <div class="form_label"><%= f.label :name %></div>
-      <div class="form_field"><%= f.text_field :name, :class =>"form_tag"  %></div>
+      <div class="form_label"><%= f.label :name %>
+      </div>
+      <div class="form_field"><%= f.text_field :name, :class =>"form_tag"  %>
+      </div>
     </div>
     <div class="form_row">
-      <div class="form_label"><%= f.label :email %></div>
-      <div class="form_field"><%= f.text_field :email, :class =>"form_tag"  %></div>
+      <div class="form_label"><%= f.label :email %>
+      </div>
+      <div class="form_field"><%= f.text_field :email, :class =>"form_tag"  %>
+      </div>
     </div>
     <div class="form_row">
-      <div class="form_label"><%= f.label :password %></div>
-      <div class="form_field"><%= f.password_field :password, :class =>"form_tag", :id => "password"  %></div>
+      <div class="form_label"><%= f.label :password %>
+      </div>
+      <div class="form_field"><%= f.password_field :password, :class =>"form_tag", :id => "password"  %>
+      </div>
     </div>
     <div class="form_row">
       <div class="form_label" id="user_password_confirmation_label">

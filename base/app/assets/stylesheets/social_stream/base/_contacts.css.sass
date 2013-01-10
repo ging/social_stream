@@ -1,0 +1,49 @@
+.loading
+  width: 220px
+  height: 83px
+  background-color: white
+  z-index: 2
+  position: relative
+  
+#sent,
+#received
+  margin-left: 20px 
+  .contact
+    padding: 5px 4px
+    margin-right: 10px
+  .avatar
+    @include makeColumn(1, 0)
+    margin-left: 0
+    display: inline
+    img
+      @include border-radius(5px)
+      width: 45px 
+   
+  .data
+    @include makeColumn(2, 0)
+    display: inline-block
+    margin-bottom: 16px
+    margin-left: -7px
+    .name
+      color: #000
+      .x
+        font-size: 12px
+        color: black
+        a
+          float: right
+          text-decoration: none
+          margin-top: -19px
+    .info
+      font-size: 12px
+      color: #888
+  .add
+    @include makeColumn(3, 0)
+    margin-left: 0
+    font-size: 10px
+    z-index: 1
+    .edit_contact
+      margin-bottom: 0px
+    .dropdown-toggle
+      margin-left: 0 
+      widht: 100%
+

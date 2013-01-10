@@ -1,0 +1,11 @@
+<%= form_for Comment.new(:owner_id => owner_id, :_activity_parent_id => _activity_parent_id),:remote => true do |f| %>
+
+  <%= f.hidden_field :owner_id %>
+  
+  <%= f.hidden_field :_activity_parent_id %>
+    
+  <%= f.text_area :text, :rows => 1, :paceholder => t('comment.input') %>
+  
+  <%= f.submit t('activity.to_comment'), :class => "btn" %>
+
+<% end %>

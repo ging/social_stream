@@ -32,7 +32,10 @@ es:
     new:
       title: "Nuevo evento"
     one: "un evento"
+    popover:
+      title: "Eventos el %{date}"
     poster:
+      button: "Subir"
       update: "Subir cartel"
     title:
       one: "Evento"

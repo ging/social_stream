@@ -1,0 +1,35 @@
+<% bow = (Time.now - 6.days).beginning_of_week %>
+
+<div class="calendar" id="sidebar_calendar" data-path="<%= polymorphic_path([@current_subject, Event.new])%>" data-start="<%= bow.to_i %>" data-end="<%= (bow + 28.days).to_i %>">
+
+  <%= render partial: 'events/calendar_month',
+             locals: {
+               position: :top,
+               date: bow.to_date }
+  %>
+
+  <table id="days">
+
+    <% 28.times do |i| %>
+      <% day = bow + i.days %>
+      <%= raw cycle(*(Array.wrap("<tr>") + 6.times.map{""}) + Array.wrap(:name => "tr_start")) %>
+      <td id="day_<%= day.day %>_<%= day.month %>_<%= day.year %>">
+        <%= link_to day.day, polymorphic_path([profile_or_current_subject, Event.new], :date => day.to_i, :view => "agendaWeek") %>
+      </td>
+      <%= raw cycle(*(6.times.map{""} + Array.wrap('</tr>') + Array.wrap(:name => "tr_end"))) %>
+    <% end %>
+  </table>
+
+  <%= javascript_tag do %>
+    $(function(){
+      SocialStream.Calendar.show();
+    });
+  <% end %>
+
+  <%= render partial: 'events/calendar_month',
+             locals: {
+               position: :bottom,
+               date: (bow + 28.days).to_date
+             }
+  %>
+</div>

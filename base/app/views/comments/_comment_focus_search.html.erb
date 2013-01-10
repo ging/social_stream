@@ -1,15 +1,19 @@
 <% activity = comment.post_activity %>
 <%= div_for activity, :class => 'super_activity' do %>
-<div class="actor_logo">
-  <%= link_to image_tag(activity.sender_subject.logo.url(:actor),
-  :alt => activity.sender_subject.name),
-  activity.sender_subject %>
-</div>
-<div class="activity_content">
-  <div class="actor_name">
-    <%= activity.title(self) %>
+
+  <div class="avatar">
+    <%= link_to image_tag(activity.sender_subject.logo.url(:actor),
+    :alt => activity.sender_subject.name),
+    activity.sender_subject %>
   </div>
-  <div class="activity_objects">
+  <header>
+    <h6>
+      <%= activity.title(self) %>
+    </h6>
+  </header>
+
+
+  <div class="objects">
     <%= link_to comment do%>
       <% text = excerpt(strip_tags(comment.text),get_search_query_words.first,:radius => 180) || "" %>
       <% if text.length < 400 %>
@@ -18,7 +22,8 @@
       <%= highlight(text,get_search_query_words) %>
       <% end %>
   </div>
-  <div class="activity_options">
+  
+  <div class="actions">
     <div class="comment_time_ago">
       <%= t('time.ago', :time => time_ago_in_words(activity.created_at)) %>
     </div>
@@ -32,6 +37,5 @@
     </div>
     <% end %>
   </div>
-</div>
 <% end %> 
 

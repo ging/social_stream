@@ -1,4 +1,3 @@
-<div class="subject">
 <%= raw t('notification.post.'+ activity.receiver.subject.class.to_s.underscore, 
  :sender => link_to(truncate_name(activity.sender.name), 
                     polymorphic_url(activity.sender.subject)),
@@ -6,8 +5,6 @@
             :receiver => truncate_name(activity.receiver.name)),
  :title => link_to(title_of(activity.direct_object),
                    notification_url_of(activity.direct_object, @notification))) %>
-</div>
-<div class="briefing">
-  "<%= link_to(description_of(activity.direct_object), notification_url_of(activity.direct_object, @notification))%>"
-</div>
+
+
  

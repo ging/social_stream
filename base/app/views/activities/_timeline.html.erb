@@ -1,0 +1,10 @@
+<div class="timeline">
+  <%= render activities  %>
+</div>
+
+<%= javascript_tag do %>
+  $(function(){  
+    SocialStream.Timeline.init();  
+  });
+<% end %>
+

@@ -1,9 +1,3 @@
-<%= link_to(contact.status, edit_contact_path(contact),
-            :title => t("contact.#{ contact.action }.title", :name => contact.receiver.name)) %>
-
-<% if controller.controller_name == "contacts" %>
-
-<br/>
-<%= link_to(t('contact.delete'), contact_path(contact), :method => :delete, :confirm => t('contact.confirm_delete'), :remote => true) %>
-
+<%= form_for contact, remote: true do |f| %>
+  <%= f.select :relation_ids, contact.options_for_select, {}, { multiple: true } %>
 <% end %>

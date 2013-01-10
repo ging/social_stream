@@ -1,74 +1,107 @@
+<div class="personal section">
+  <header>
+    <%= render partial: 'edit_icon' %>
+    <h4>
+      <%= t("profile.#{ @profile.subject.class.to_s.downcase }.info") %>
+    </h4>
+  </header>
 
-  <div class="block" id="personal_info" >
-    <div class="header">
-      <div class="header_text">
-        <%=t('profile.' + @profile.subject.class.to_s.downcase + '.info')%>
-      </div>
-      <% if is_owner? %>
-        <div class="header_icon_right">
-          <%= link_to (image_tag('btn/edit.png')),  :controller => :profiles , :action => :edit, :section => "about_me"%>
-        </div>
+  <div class="briefing">
+    <% if @profile.personal_present? %>
+      <% if @profile.organization? %>
+        <h5>
+          <%= t('profile.organization') %>
+        </h5>
+
+        <p>
+        <%= h @profile.organization %>
+        </p>
+      <% end %>
+
+      <% if @profile.birthday? %>
+        <h5>
+          <%= t("profile.#{ @profile.subject.class.to_s.downcase }.birthday") %>:
+        </h5>
+
+        <p>
+        <%= h l(@profile.birthday, :format => :long) %>
+        </p>
+
+        <% if @profile.subject.is_a?(User) %>
+          <h5>
+            <%= t('profile.age') %>:
+          </h5>
+
+          <p>
+          <%= h @profile.age %>
+          </p>
+        <% end %>
+      <% end %>
+
+      <% if @profile.city? %>
+        <h5>
+          <%= t('profile.actualcity') %>:
+        </h5>
+
+        <p>
+        <%= h @profile.city %>
+        <% if @profile.country? %>
+          , <%= @profile.country %>
+        <% end %>
+        </p>       
+      <% end %>
+
+      <% if @profile.description? %>
+        <h5>
+          <%= t("profile.#{ @profile.subject.class.to_s.downcase }.about") %>:
+        </h5>
+
+        <%= simple_format @profile.description %>
+      <% end %>
+
+    <% else %>
+      <%= render partial: 'empty' %>
+    <% end %>
+  </div>
+
+  <% if can? :update, @profile %>
+    <div class="update">
+      <%= form_for(@profile, :url => [current_subject, :profile]) do |f| %>
+        <h6>
+          <%= f.label t('actor.name') %>
+          <span class="required">*</span>
+        </h6>
+
+        <%= f.text_field :name, :class => "required" %>
+
+        <h6>
+          <%= f.label :organization, t('profile.organization') %>
+        </h6>
+
+        <%= f.text_field :organization %>
+
+        <h6>
+          <%= f.label :birthday, t('profile.' + current_subject.class.to_s.downcase + '.birthday') %>
+        </h6>
+
+        <%= date_select "profile", "birthday", :order => [:day, :month, :year], :end_year => Date.today.year, :start_year => (Date.today.year - 100), :prompt => {:day => 'Day', :month => 'Month', :year => 'Year'} %>
+
+        <%= f.label :city, t('profile.actualcity') %>
+
+        <%= f.text_field :city %>
+
+        <%= f.label :country, t('profile.country') %>
+
+        <%= f.text_field :country %>
+
+        <%= f.label :description, t("profile.#{ current_subject.class.to_s.downcase }.about") %>
+
+        <%= f.text_area :description, :maxlength => 200, :rows => 10 %>
+
+        <%= t('required') %>
+
+        <%= f.submit %>
       <% end %>
     </div>
-    <div class="content">
-      <% if !is_personal_empty?%>
-        <div class="sub-block"  >
-          <% if @profile.organization? %>
-            <div class="row">
-              <div class="label">
-                <%=t('profile.organization')%>:
-              </div>
-              <div class="field">
-                <%=h @profile.organization %>
-              </div>
-            </div>
-          <%end%>
-          <% if @profile.birthday? %>
-            <div class="row">
-              <div class="label">
-                <%=t('profile.' + @profile.subject.class.to_s.downcase + '.birthday')%>:
-              </div>
-              <div class="field">
-                <%=h I18n.l @profile.birthday, :format => :long %>
-              </div>
-            </div>
-            <% if @profile.subject.class.eql?(User) %>
-              <div class="row">
-                <div class="label">
-                    <%=t('profile.age')%>:
-                </div>
-                <div class="field">
-                    <%=h @profile.age %>
-                </div>
-              </div>
-            <%end%>
-          <%end%>
-          <% if @profile.city? %>
-            <div class="row">
-              <div class="label">
-                <%=t('profile.actualcity')%>:
-              </div>
-              <div class="field">
-                <%=h @profile.city %>
-                <% if @profile.country? %>
-                  , <%=@profile.country%>
-                <%end%>
-              </div>
-            </div>
-          <%end%>
-          <% if @profile.description? %>
-            <div class="row">
-              <div class="label">
-                <%=t('profile.' + @profile.subject.class.to_s.downcase + '.about')%>:
-              </div>
-              <div class="row">
-                  <%=h @profile.description %>
-              </div>
-            </div>
-          <%end%>
-        </div>
-    <%elsif is_owner?%>
-      <%=t('profile.empty')%>
-    <%end%>
-    </div>
-  </div>
+  <% end %>
+</div>

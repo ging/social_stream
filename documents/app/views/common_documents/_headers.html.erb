@@ -22,12 +22,24 @@
 <% end %>
 
 <br class="clearfloat" />
-<div class="space_center"></div>
+
+<div class="document-tabs tabbable">
+  <ul class="nav nav-tabs">
+    <li class="">
+      <%= link_to t('document.scope.network'), "#repo-net", "data-toggle" => "tab" %>
+    </li>
+    <li class="active">
+      <%= link_to t('document.scope.own'), "#repo-own", "data-toggle" => "tab" %>
+    </li>
+  </ul> 
+</div>
+
+<div class="tab-content">
+  <div id="repo-own"
 <div id="repository_filter">
     <%= text_field_tag :q, nil,:autocomplete => :off, :id => :repository_filter_input %>
-  <div id="order_by"><%= t('repository.order.by') %>: <%= t('repository.order.last_modified') %> · <%= t('repository.order.most_popular') %>  </div>
 </div>
-<div class="space_center"></div>
+
 
 <%= javascript_tag do %>
 $(document).ready(function() {

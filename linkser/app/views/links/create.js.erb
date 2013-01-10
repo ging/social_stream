@@ -1,13 +1,6 @@
 //Display the new post
-$("#wall").prepend("<%= escape_javascript(render @link.post_activity) %>");
+$(".timeline").prepend("<%= escape_javascript(render @link.post_activity) %>");
 
 SocialStream.Timeline.create("<%= escape_javascript dom_id(@link.post_activity) %>");
 
-$("#link_preview").hide();
-$("#link_preview").html("");          
-$("#link_loaded").val(false);
-$("#link_preview").html("");
-$("#link_url").val("");
-
-
-
+SocialStream.Linkser.Wall.create();

@@ -13,7 +13,6 @@ SocialStream.Objects = (function(SS, $, undefined){
 	}
 
 	addInitCallback(SocialStream.Timeline.initPrivacyTooltips);
-	addInitCallback(SocialStream.Wall.activateAntiRebounds);
 
 	return {
 		addInitCallback: addInitCallback,

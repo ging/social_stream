@@ -3,33 +3,32 @@
 <%end%>
 
 <div id="welcome">
-  <div id="login" class="block">
-    <h2><%= t('sign_in') %></h2>
-    <div class="space_center"></div>
-    <div class="space_center"></div>
+  <div id="login" class="thumbnail">
+    <h2>
+      <%= t('sign_in') %>
+    </h2>
     <%= form_for(resource, :as => resource_name, :url => user_session_path) do |f| %>
       <%= devise_error_messages! %>
-      <div class="form_row">
-        <div class="form_label"><%= f.label :email %></div>
-        <div class="form_field"><%= f.email_field :email, :class => "form_tag" %></div>
-      </div>
-      <div class="form_row">
-        <div class="form_label"><%= f.label :password %></div>
-        <div class="form_field"><%= f.password_field :password, :class => "form_tag" %></div>
-      </div>
+     
+      <%= f.label :email %>
+
+      <%= f.email_field :email, :class => "form_tag" %>
+  
+      <%= f.label :password %>
+
+      <%= f.password_field :password, :class => "form_tag" %>
+ 
       <% if devise_mapping.rememberable? -%>
         <div id="remember">
-          <%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-        </div> 
+          <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+        </div>
       <% end -%>
       <div id="devise_links">
         <%= render :partial => "devise/shared/links" %>
       </div>
-
       <div class="btn_login">
-        <%= f.submit t('action.send'), :class =>"button storePass" %>
+        <%= f.submit t('action.send'), :class =>"btn storePass" %>
       </div>
     <% end %>
   </div>
-
 </div>

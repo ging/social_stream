@@ -6,7 +6,7 @@ module SocialStream
           super.tap do |items|
             if profile_or_current_subject
               items.unshift :key => 'calendar',
-                            :html => render(:partial => 'events/sidebar_calendar')
+                            :html => render(:partial => 'sidebar/calendar')
             end
           end
         end

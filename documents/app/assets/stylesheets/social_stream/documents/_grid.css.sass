@@ -1,0 +1,142 @@
+#content-large
+  @include makeColumn(10, 0)
+  
+  .central
+    @include makeColumn(7, 0)
+    display:inline-block
+    margin-left: 0px
+    .show
+      padding: 10px
+      @include border-radius(10px)
+      border: 1px solid #f7f7f7
+      background-color: #333333
+      text-align: center
+      .actions
+        margin-top: 10px
+    .tabbable
+      margin-top: 10px
+      .comments
+        @include makeColumn(7, 0)
+        margin-left: 0px
+
+        .new_comment
+          
+          .avatar
+            width: 45px
+            margin-left: 10px
+            float: left
+            img
+              margin-left: 0px
+              width: 40px
+            h6
+              margin-top: 69px
+            #comment_text
+              float: right
+              margin-right: 19px
+              margin-top: 19px
+              width: 440px
+              resize: none
+
+            input
+              &[type="submit"]
+                float: right
+                margin-right: 19px
+
+
+  .details
+    @include makeColumn(3, 0)
+    display:inline-block
+    margin-top: 20px
+    h4
+      color: #00C3FF
+    .tab-content
+      @include makeColumn(3, 0)
+      margin-left: 0px
+
+#document-info
+  .counters
+    color: #888
+    margin-left: 10px
+    .counter
+      display: inline
+      color: #00C3FF
+      font-sixe: 15px
+
+  .description,
+  .tags,
+  .autor,
+  .dates
+    margin-left: 10px
+    .data
+    .file_size
+      .details  
+
+#picture_description
+  height: 200px
+ 
+
+#document-edit
+  margin-left: 8px
+  .fcbk
+    margin-bottom: 20px
+  input
+    &[type="submit"]
+      float: right
+
+#content-large
+  .documents
+    .child
+      @include makeColumn(6, 1)
+      @include border-radius(5px)
+      display: inline-block
+      margin-left: 55px
+      margin-bottom: 6px
+      background: #f5f5f5
+      padding-left: 6px
+
+      .avatar
+        width: 40px 
+        h6
+          @include makeColumn(5, 0)
+          font-size: 15px
+          margin-left: 20px
+          margin-bottom: 3px
+          text-decoration: none
+          &:hover
+            text-decoration: none
+
+        .objects
+          @include makeColumn(5, 0)
+          margin-left: 66px
+          margin-top: -27px
+          word-wrap: break-word
+          .thumb
+            @include makeColumn(1, 0)
+            margin-left: 0px
+            background: black
+          .text
+            font-size: 14px
+          .description
+            margin: 0 0 4px
+
+        .actions
+          @include makeColumn(6, 0)
+          margin-left: 60px 
+          margin-bottom: 2px
+          margin-top: -5px
+          .post_time_ago
+            display: inline
+            font-size: 12px
+            color: #444
+            .to_comments
+              display: inline-block
+              font-size: 14px
+              margin-left: 5px
+            .to_like
+              display: inline-block
+              font-size: 14px
+              margin-left: 5px
+            .audience
+              display: inline-block
+              font-size: 14px
+              margin-left: 7px

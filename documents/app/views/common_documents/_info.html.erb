@@ -1,0 +1,50 @@
+<div class="info">
+  <%= render partial: 'objects/counters', locals: { object: document } %>
+
+  <div class="description <%= 'blank' if document.description.blank? %>">
+    <h4>
+      <%= t 'document.info.description' %>
+    </h4>
+
+    <%= document.description %>
+  </div>
+
+  <div class="tags">
+    <h4>
+      <%= t 'document.info.tags' %>
+    </h4>
+
+    <%= tag_list document %>
+  </div>
+
+  <div class="autor">
+    <h4>
+      <%= t 'document.info.author' %>
+    </h4>
+
+    <%= link_to document.author_subject.name, document.author_subject %>
+  </div>
+
+  <div class="dates">
+    <h4>
+      <%= t('document.info.date.created_at') %>
+    </h4>
+    <div class="date">
+      <%= I18n.localize document.created_at, :format => :long %>
+    </div>
+
+    <h4>
+      <%= t('document.info.date.updated_at') %>
+    </h4>
+    <div class="date">
+      <%= I18n.localize document.updated_at, :format => :long %>
+    </div>
+
+    <div class="file_size">
+      <h4>
+        <%= t('document.info.size') %>
+      </h4>
+      <%= number_to_human_size document.file_file_size %>
+    </div>         
+  </div>
+</div>

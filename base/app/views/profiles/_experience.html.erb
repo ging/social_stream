@@ -1,22 +1,27 @@
-  <div class="space_center"></div>
-  <div class="block" id="experience_info">
-    <div class="header">
-      <div class="header_text">
-        <%=t('profile.' + @profile.subject.class.to_s.downcase + '.experience')%>
-      </div>
-      <% if is_owner? %>
-        <div class="header_icon_right">
-          <%= link_to (image_tag('btn/edit.png')),  :controller => :profiles , :action => :edit, :section => "my_experience"%>
-        </div>
-      <%end%>
-    </div>
-    <div class="content">
-      <%if @profile.experience?%>
-        <div class="row">
-          <%=h @profile.experience %>
-        </div>
-      <%elsif is_owner?%>
-        <%=t('profile.empty')%>
-      <%end%>
-    </div>
+<div class="experience section">
+  <header>
+    <%= render partial: 'edit_icon' %>
+    <h4>
+      <%= t("profile.#{ @profile.subject.class.to_s.downcase }.experience") %>
+    </h4>
+  </header>
+
+  <div class="briefing">
+    <% if @profile.experience? %>
+      <%= simple_format @profile.experience %>
+    <% else %>
+      <%= render partial: 'empty' %>
+    <% end %>
   </div>
+
+  <% if can? :update, @profile %>
+    <div class="update">
+      <%= form_for(@profile, :url => [current_subject, :profile]) do |f| %>
+      
+        <%= f.text_area :experience, :maxlength => 246, :rows => 5 %>
+
+        <%= f.submit %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

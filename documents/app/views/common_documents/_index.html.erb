@@ -1,70 +1,92 @@
-<% if params[:no_layout].blank? %>
-  <%= render :partial => "common_documents/headers" %>
-  <div id="documents_grid">
-<% end %> 
+<% content_for :title do %>
+  <%= "#{ profile_subject && profile_subject.name + ': ' }#{ t('repository.title') }" %>
+<% end %>
 
-<% documents.each do |document| %>
-<div class="attachment_tile" id="<%= dom_id(document)%>">
-  <div class="attachment_tile_thumb">
-    <%= link_to thumb_for(document,48),
-                document,
-                :type => document.type,
-                :title => document.file_file_name,
-                :path => document_path(document) %>
-  </div>
-  <div class="attachment_tile_tipsy">
-    <%= link_to image_tag("btn/btn_down.png"),
-    "javascript:;"  %>
-    <div class="tipsy_content" style="display:none;">
-      <div class="actions">        
-        <%= link_to content_tag(:div,image_tag("btn/download.png") + t('document.actions.download'), :class => :action), download_document_path(document) %>
-        <% if can? :update, document %>
-          <%= link_to content_tag(:div,image_tag("btn/edit.png") + t('document.actions.edit'), :class => :action, :id => :document_edit_action), document_path(document, :editing => true) %>
-        <% end %>
-        <% if can? :destroy, document %>
-          <%= link_to content_tag(:div,image_tag("btn/error.png") + t('document.actions.delete'), :class => :action), document.post_activity.direct_object , :confirm => t('confirm_delete',
-            :scope => document.post_activity.direct_object.class.to_s.underscore), :method => :delete %>
-        <% end %>
-      </div>
+<% if profile_subject %>
+  <% toolbar :profile, :subject => profile_subject %>
+<% elsif user_signed_in? %>
+  <% toolbar %>
+<% end %>
+
+<br class="clearfloat" />
+
+<div class="document-tabs tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active">
+      <%= link_to t('document.scope.own'), "#document-list-own", "data-toggle" => "tab" %>
+    </li>
+    <li class="">
+      <%= link_to t('document.scope.network'), "#document-list-net", "data-toggle" => "tab" %>
+    </li>
+  </ul> 
+</div>
+<%= render partial: 'common_documents/filter' %>
+<% if user_signed_in? && profile_subject_is_current? %>
+<div class="add-new">  
+  <%= link_to t('document.new.link'), new_document_path %>
+</div>
+<% end %>
+
+<div class="tab-content">
+  <div id="document-list-own" class="tab-pane active">
+    <div class="documents">
+      <%= render partial: 'common_documents/list',
+                 locals: { documents: collection } %>
     </div>
   </div>
-  <div class="attachment_tile_text">
-    <%= link_to truncate_name(document.file_file_name,:length => 15),
-      document_path(document),
-    :alt => document.file_file_name,
-    :type => document.type,
-    :path => document_path(document) %>
+  
+  <div id="document-list-net" class="tab-pane">
+    <%= render partial: 'common_documents/filter' %>
+
+    <div class="documents">
+    </div>
   </div>
 </div>
+
+
+
 <%= javascript_tag do %>
-$(document).ready(function(){
+$(document).ready(function() {
+  var last_search = "";
+  
+  
 
-  SocialStream.Repository.init();
-
-  $('#<%= dom_id(document)%> .attachment_tile_tipsy a').tipsy({
-    delayIn: 0,   
-    delayOut: 1000, 
-    gravity: 'nw', 
-    className: 'attachment_tile_tipsy_menu',
-    html: true,
-    hoverable: true,
-    title: function(){
-      return $('#<%= dom_id(document)%> .attachment_tile_tipsy .tipsy_content').html();
+  $("#repository_filter_input").keyup(function() {
+    var searchstring = $(this).val();
+    if((searchstring=="")){
+      if (last_search!=searchstring){last_search=searchstring;}
+      $("#documents_grid").html("<center><%= escape_javascript(image_tag('loading.gif', :class => :loading)) %></center>");
+        $.ajax({
+          type : "GET",
+          url : "<%= polymorphic_path([ profile_subject, Document.new ], :action => :search) %>",
+          success : function(html) {      
+            if ($("#repository_filter_input").val()==searchstring){ //Only show if input value is still the same
+              $("#documents_grid").html(html);
+            }          
+          },
+          error: function(){
+            $("#header_search_display").html("<center><%= escape_javascript(content_tag(:span,I18n.t('search.wrong'), :class => :warning)) %></center>");
+         }
+        });
+    } else {
+      if (last_search!=searchstring){
+        last_search=searchstring;
+        $("#documents_grid").html("<center><%= escape_javascript(image_tag('loading.gif', :class => :loading)) %></center>");
+        $.ajax({
+          type : "GET",
+          url : "<%= polymorphic_path([ profile_subject, Document.new ], :action => :search) %>?q=" + searchstring,
+          success : function(html) {      
+            if ($("#repository_filter_input").val()==searchstring){ //Only show if input value is still the same
+              $("#documents_grid").html(html);
+            }          
+          },
+          error: function(){
+            $("#header_search_display").html("<center><%= escape_javascript(content_tag(:span,I18n.t('search.wrong'), :class => :warning)) %></center>");
+         }
+        });
+      }
     }
-  });
-});
+    return false;
+  });  
+})
 <% end %>
-<% end %> 
-
-<% unless documents.last_page? %>
-  <% next_url = url_for(:no_layout => true, 
-                        :page => params[:page].present? ? params[:page].to_i + 1 : 2,
-                        :q => params[:q]) %>
-  <%= content_tag(:span, "", :class => "screw screw-after", :rel => next_url)%>
-<% end %>
-
-<% unless params[:no_layout].present? %>
-  </div>
-<% end %> 
-
-

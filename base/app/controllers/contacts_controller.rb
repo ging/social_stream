@@ -3,15 +3,26 @@ class ContactsController < ApplicationController
   before_filter :exclude_reflexive, :except => [ :index, :pending ]
 
   def index
+    params[:d] ||= 'sent'
+
+    @contacts = Contact
+
     @contacts =
-      total_contacts.
-              merge(Actor.letter(params[:letter])).
-              merge(Actor.name_search(params[:search])).
-              related_by_param(params[:relation])
+    if params[:d] == 'received'
+      @contacts.received_by(current_subject).joins(:sender)
+    else
+      @contacts.sent_by(current_subject).joins(:receiver)
+    end
+
+    @contacts =
+      @contacts.
+        positive.
+        merge(Actor.name_search(params[:search])).
+        related_by_param(params[:relation])
 
     respond_to do |format|
-      format.html { @contacts = @contacts.page(params[:page]).per(10) }
-      format.js { @contacts = @contacts.page(params[:page]).per(10) }
+      format.html
+      format.js
       format.json { render :text => to_json(@contacts) }
     end
   end
@@ -27,10 +38,18 @@ class ContactsController < ApplicationController
     params[:contact][:relation_ids].present? &&
       params[:contact][:relation_ids].delete("0")
 
-    if @contact.update_attributes(params[:contact])
-      redirect_to @contact.receiver_subject
-    else
-      render :action => 'edit'
+    @contact.update_attributes(params[:contact])
+
+    respond_to do |format|
+      format.html {
+        if @contact.errors.blank?
+          redirect_to @contact.receiver_subject
+        else
+          render :action => 'edit'
+        end
+      }
+
+      format.js
     end
   end
 

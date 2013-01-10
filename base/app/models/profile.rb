@@ -2,10 +2,15 @@ class Profile < ActiveRecord::Base
   include ActiveModel::ForbiddenAttributesProtection
 
   belongs_to :actor,
+             validate: true,
+             autosave: true,
              inverse_of: :profile
 
-  accepts_nested_attributes_for :actor
-    
+  delegate :tag_list, :tag_list=,
+           :name, :name=,
+           :email, :email=,
+           to: :actor
+   
   validates_presence_of :actor_id
   
   validates_format_of :mobile, :phone, :fax,
@@ -49,13 +54,38 @@ class Profile < ActiveRecord::Base
   def subject
     actor.try(:subject)
   end
+
+  # Tells if the subject accessing the profile is its owner or not
+  def owner?(subject)
+    subject.present? &&
+      actor_id == Actor.normalize_id(subject)
+  end
   
+  # Returns true if the "Personal Information" section is empty
+  def personal_present?
+    organization? ||
+      birthday? || 
+      city? ||
+      description?
+  end
+  
+  # Returns true if the "Contact Information" section is empty
+  def contact_present?
+    phone? ||
+      mobile? ||
+      fax? ||
+      address? ||
+      website?
+  end
+
+  # True if the profile owner has tags attached
+  def tags_present?
+    actor.tag_list.count > 0
+  end
+
   private
 
   def validate_birthday
     errors.add(:birthday, "is invalid. Please, use \"month/day/year\" format and make sure you choose a valid date" ) if (@birthday_formatted_invalid) || (birthday.present? && !birthday.blank? && birthday > Date.today)
   end
-
-  
-  
 end

@@ -1,0 +1,5 @@
+<div class="to_like like_<%= dom_id(activity) %>">
+  <%= link_to [ activity, :like ], remote: true, method: ( like_status(activity).first == 'like' ? :post : :delete ) do %>
+    <i class="icon_tool16-<%= like_status(activity).last %>"></i> <%= t "activity.#{ like_status(activity).first }" %>
+  <% end %>
+</div>

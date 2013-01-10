@@ -1,0 +1,19 @@
+//
+// Variables
+// --------------------------------------------------
+
+
+// Typography
+// -------------------------
+$sansFontFamily:        "OpenSans", Arial, sans-serif;
+$serifFontFamily:       "BreeSerif", Times New Roman, Times, serif !default;
+$monoFontFamily:        "Courier New", monospace !default;
+
+$baseFontSize:          14px !default;
+$baseFontFamily:        $sansFontFamily;
+$baseLineHeight:        20px !default;
+$altFontFamily:         $serifFontFamily !default;
+
+$headingsFontFamily:    inherit !default; // empty to use BS default, $baseFontFamily
+$headingsFontWeight:    normal !default;    // instead of browser default, bold
+$headingsColor:         inherit !default; // empty to use BS default, $textColor

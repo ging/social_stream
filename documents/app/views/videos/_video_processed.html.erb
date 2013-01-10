@@ -1,23 +1,19 @@
-<div class="video-thumb video_thumbnail_show">
-  <%= image_tag(video_path(video, :format => :png, :style => 'thumbwall'), :class => "video_thumbnail_image", :alt => "")%>
-  <div class="video_thumbnail_play_over"></div>
+<div class="thumb">
+  <%= image_tag(video_path(video, :format => :png, :style => '170x127#'))%>
+  <div class="play_over">
+  </div>
 </div>
 
-<div class="attachment_text video-details">
-  <div class="title">
+<div class="text">
+  <h6>
     <%= video.title %>
+  </h6>
+
+  <div class="description">
+    <%= simple_format "#{ auto_link(video.description) } #{ link_to t('details.msg'),video, :class => 'view_more' }" %>
   </div>
 
-  <%= simple_format auto_link(video.description) %>
-
-  <%= link_to t('details.msg'),
-    video,
-    :alt => t('details.msg'),
-    :type => video.type,
-    :path => document_path(video),
-    :class => "attachment_text_link video_link" %>
-
-  <div class="video-format-links">
+  <div class="format-links">
     <%= link_to "WebM", video_path(video, :format => :webm), :class => "video-webm" %>
     <%= link_to "FLV",  video_path(video, :format => :flv),  :class => "video-flv" %>
     <%= link_to "MP4",  video_path(video, :format => :mp4),  :class => "video-mp4" %>

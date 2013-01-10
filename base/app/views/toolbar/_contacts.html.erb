@@ -1,0 +1,13 @@
+<% if (cs = subject.contact_subjects(:direction => :sent)).present? %>
+  <h4>
+    <%= cs.count %> <%= t('contact', :count => cs.count) %>
+  </h4>
+  <div class ="content">
+    <div class="contact">
+      <% cs.each do |contact| %>
+        <%= link_to(image_tag(contact.logo.url(:small), :alt => contact.name, :title => contact.name, :size => "small"), contact) %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+

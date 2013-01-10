@@ -1,40 +1,34 @@
-<%= div_for activity, :class => 'super_activity' do %>
-
-  <div class="actor_logo">
-    <%= link_to image_tag(activity.sender_subject.logo.url(:actor),
-                          :alt => activity.sender_subject.name),
-                 activity.sender_subject %>
+<%= div_for activity, :class => 'root' do %>
+  <div class="avatar">
+    <%= link_to image_tag(activity.sender_subject.logo.url('small'),
+        :alt => activity.sender_subject.name), activity.sender_subject %>
   </div>
+  <header>
+    <%= activity.title(self) %>
 
-  <div class="activity_content">
-  	
-    <div class="actor_name">
-      <%= activity.title(self) %>
+    <% if activity.direct_object && can?(:destroy, activity.direct_object) %>
+    <div class="x"> 
+      <%= link_to ('X'), activity.direct_object , :confirm => t('confirm_delete', 
+                    :scope => activity.direct_object.class.to_s.underscore), :method => :delete,  
+                    :remote => true %> 
     </div>
+    <% end %>
+  </header>
 
-    <div class="activity_objects">
-      <%= render activity.activity_objects %>
-    </div>
 
-    <%= render :partial => 'activities/options',
-               :locals => { :activity => activity } %>
+  <section class="objects">
+    <%= render activity.activity_objects %>
+  </section>
 
-    <%= render :partial => 'activities/likes',
-               :locals => { :activity => activity } %>
+  <%= render :partial => 'activities/actions',
+             :locals => { :activity => activity } %>
 
-    <%= render :partial => 'activities/comments',
-               :locals => { :activity => activity } %>
+  <%= render :partial => 'activities/likes',
+             :locals => { :activity => activity } %>
 
-    <%= render :partial => 'comments/new',
-               :locals => { :activity => activity } %>
+  <%= render :partial => 'activities/comments',
+             :locals => { :activity => activity } %>
 
-  </div>
-
-  <div class="space_activities">
-    <% if activity.activity_objects.count > 1 %>
-      <div class="space_sub"></div>
-    <%else %>
-      <div class="#"></div>
-    <%end%>
-  </div>
+  <%= render :partial => 'comments/new',
+             :locals => { :activity => activity } %>
 <% end %>

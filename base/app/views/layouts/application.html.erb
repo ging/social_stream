@@ -32,34 +32,34 @@
     </script>
   </head>
   <body>
-    <div id="wrapper">
-      <header><%= render :partial => "layouts/header" %></header>
-      <div id="wrapper_body">
+    <div id="wrapper" class="container">
+      <%= render :partial => "layouts/header" %>
+
+      <% if content_for?(:toolbar) %>
         <nav id="toolbar">
-          <div id="toolbarContent" class="block">
-            <div class="space_center">
-            </div>
-            <%= yield :toolbar %>
-          </div>
+          <%= yield :toolbar %>
         </nav>
-        <div id= "center_body">
-          <div id="map_location">
-            <%= yield :location %>
-          </div>
-          <div id="flash">
-            <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
-          </div>
-          <section id="content">
-            <%= yield %>
-          </section>
-        </div>
+      <% end %>
+      
+      <div id="flash">
+        <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
+      </div>
+
+      <section id="content" class="<%= content_section_class %>">
+        <%= yield %>
+      </section>
+  
+      <% if content_for?(:sidebar) %>
         <aside id="sidebar">
           <div id="sidebarContent">
             <%= yield :sidebar %>
           </div>
         </aside>
-      </div>
-      <footer><%= render :partial => "layouts/footer" %></footer>
+      <% end %>
     </div>
+    
+    <footer class="footer"><%= render :partial => "layouts/footer" %>
+    </footer>
+
   </body>
 </html>

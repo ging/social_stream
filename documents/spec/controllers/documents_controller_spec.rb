@@ -16,9 +16,9 @@ describe DocumentsController do
   
       it "should render receiver's index with public document included" do
         get :index, :user_id => @public_document.post_activity.receiver.to_param  
+
         response.should be_success
-        response.body.should =~ /attachment_tile/
-        response.body.should =~ /small.pdf/
+        response.body.should =~ /#{ controller.dom_id(@public_document) }/
       end
       
       it "should render receiver's html show" do
@@ -41,9 +41,9 @@ describe DocumentsController do
 
       it "should render index" do
         get :index, :user_id => @public_document.post_activity.receiver.to_param  
+
         response.should be_success
-        response.body.should =~ /attachment_tile/
-        response.body.should =~ /small.pdf/
+        response.body.should =~ /#{ controller.dom_id(@public_document) }/
       end
       
       it "should render html show" do
@@ -67,9 +67,9 @@ describe DocumentsController do
     describe "when not authenticated" do
       it "should render receiver's index without private document" do
         get :index, :user_id => @private_document.post_activity.receiver.to_param  
+
         response.should be_success
-        response.body.should_not =~ /attachment_tile/
-        response.body.should_not =~ /small.pdf/
+        response.body.should_not =~ /#{ controller.dom_id @private_document }/
       end
     end
     
@@ -79,9 +79,9 @@ describe DocumentsController do
       end
       it "should render index" do
         get :index, :user_id => @private_document.post_activity.receiver.to_param  
+
         response.should be_success
-        response.body.should_not =~ /attachment_tile/
-        response.body.should_not =~ /small.pdf/
+        response.body.should_not =~ /#{ controller.dom_id @private_document }/
       end
       
       it "should render show" do

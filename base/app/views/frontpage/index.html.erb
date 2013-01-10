@@ -1,69 +1,63 @@
-<% content_for :title do%>
-  <%= t('welcome', :site => t('site.name')) %>
-<%end%>
-
-<div class="banner_busqueda">
-  <div id="espacio_busqueda">    
-  </div>
+<section id="frontpage">
+  <article class="left">
+    <header>
+      <h2>
+        <% content_for :title do%>
+          <%= t('welcome', :site => t('site.name')) %>
+        <%end%>
+      </h2>
+    </header>
+    <div class="thumbnail inline">
+      <header>
+        <h6>title</h6>
+      </header>
+      <%= render :partial => 'frontpage/caracteristics' %>
+    </div>
     <%= render :partial => 'layouts/search' %>
-</div>
+  </article>
 
-<div id="wrapper_left">
-  <div id="frontpage_title">
-      <%= t('frontpage.main_title') %>
-      <span id="text_bottom_title">
-          <br/>
-          <%= t('frontpage.stats', :users => User.count, :groups => Group.count) %>
-      </span>
-  </div>
-  <div class="espacio"></div>
-  <div class="espacio"></div>
-  <div id="share">
-    <div class="icon">
-      <div id="icon_share"></div>
-      <div class="icon_text"><%= t('frontpage.share.default')%>  </div>
-    </div>
-    <div class="sentences">
-      <ul>
-        <li class="purple"><%= t('frontpage.share.sentence1') %></li>
-        <li class="purple"><%= t('frontpage.share.sentence2') %></li>
-      </ul>
-    </div>
-  </div>
-  <div class="espacio"></div>
-  <div id="meet">
-    <div class="icon">
-      <div id="icon_meet"></div>
-      <div class="icon_text"><%= t('frontpage.meet.default')%>  </div>
-    </div>
-    <div class="sentences">
-      <ul>
-        <li class="green"><%= t('frontpage.meet.sentence1') %></li>
-        <li class="green"><%= t('frontpage.meet.sentence2') %></li>
-      </ul>
-    </div>
-  </div>
-  <div class="espacio"></div>
-  <div id="collaborate">
-    <div class="icon">
-      <div id="icon_collaborate"></div>
-      <div class="icon_text"><%= t('frontpage.collaborate.default')%>  </div>
-    </div>
-    <div class="sentences">
-      <ul>
-        <li class="yellow"><%= t('frontpage.collaborate.sentence1') %></li>
-        <li class="yellow"><%= t('frontpage.collaborate.sentence2') %></li>
-      </ul>
-    </div>
-  </div>
-  <div class="espacio"></div>
-</div>
+  <article class="right">
+    <h3 data-i18n="Log In">Log In</h3>
+    <div id="headerFront">
+      <div class="banner_top">
+        <% unless params[:controller].eql? 'devise/sessions' and params[:action].eql? 'new' %>
+        <div class="div_login">
+          <%= form_for User.new, :as => :user, :url => user_session_path do |f| -%>
+          <div id="login_data">
+            <div class="login_data_block">
+              <span><%= f.label :email %>
+              </span>
+              <%= f.email_field :email, :class => "input_username" %>
+            </div>
+            <div class="login_data_block">
+              <span><%= f.label :password %>
+              </span>
+              <%= f.password_field :password, :class => "input_username" %>
+            </div>
+            
+            <div class="login_data_block">
+              <%= f.submit t(:sign_in), :class => 'other_blue storePass'%>
+            </div>
+          </div>
+          <div class="options">
+            <%= link_to t('sign_up'), new_user_registration_path, :class => "register_link" %>
+            <span>
+              |
+            </span>
+            <%= link_to t('forgot_password'), new_user_password_path, :class => "register_link" %>
+            <%= render :partial => "frontpage/social_networks" %>
+          </div>
+          <% end -%>
+        </div>
+        <% end %>
+        <br class="clearfloat" />
+      </div>
+    </div> 
+  </article>
+</section>
 
-<div id="wrapper_right">
-  <%= render :partial => 'frontpage/caracteristics' %>
-</div>
 
-<div id="join_form">
-  <%= button_to t('frontpage.register'), new_user_registration_path, :method=> :get %>
-</div>
-<div id="espacio_body_bottom"></div>
+
+
+
+

@@ -21,11 +21,7 @@
 <% toolbar :profile, :subject => @group %>
 
 <br class="clearfloat" />
-<div class="space_center">
-</div>
 
-<div class="space_center">
-</div>
 
 <%= render :partial => "activities/index",
            :locals  => { :activities => @group.wall(:profile, :for => current_subject).

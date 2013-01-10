@@ -16,9 +16,9 @@ describe PicturesController do
   
       it "should render receiver's index with public picture included" do
         get :index, :user_id => @public_picture.post_activity.receiver.to_param  
+
         response.should be_success
-        response.body.should =~ /attachment_tile/
-        response.body.should =~ /rails.png/
+        response.body.should =~ /#{ controller.dom_id @public_picture }/
       end
       
       it "should render receiver's html show" do
@@ -35,9 +35,9 @@ describe PicturesController do
 
       it "should render index" do
         get :index, :user_id => @public_picture.post_activity.receiver.to_param  
+
         response.should be_success
-        response.body.should =~ /attachment_tile/
-        response.body.should =~ /rails.png/
+        response.body.should =~ /#{ controller.dom_id @public_picture }/
       end
       
       it "should render html show" do
@@ -56,8 +56,8 @@ describe PicturesController do
       it "should render receiver's index without private picture" do
         get :index, :user_id => @private_picture.post_activity.receiver.to_param  
         response.should be_success
-        response.body.should_not =~ /attachment_tile/
-        response.body.should_not =~ /privado.png/
+
+        response.body.should_not =~ /#{ controller.dom_id @private_picture }/
       end
     end
     
@@ -68,8 +68,8 @@ describe PicturesController do
       it "should render index" do
         get :index, :user_id => @private_picture.post_activity.receiver.to_param  
         response.should be_success
-        response.body.should_not =~ /attachment_tile/
-        response.body.should_not =~ /privado.png/
+
+        response.body.should_not =~ /#{ controller.dom_id @private_picture }/
       end
       
       it "should render show" do

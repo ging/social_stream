@@ -77,7 +77,7 @@ module ToolbarHelper
   end
 
   def toolbar_menu_render(items, menu)
-    menu << '<ul>'.html_safe
+    menu << '<ul class="nav nav-pills nav-stacked">'.html_safe
     items.each do |item|
       menu << '<li>'.html_safe
 

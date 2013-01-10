@@ -25,7 +25,10 @@ class ProfilesController < ApplicationController
   def profile_params
     params.
       require(:profile).
-      permit(:organization, :birthday, :city, :country, :description, :phone, :mobile, :fax, :address, :website, :experience, actor_attributes: [ :id, :name, :email, :tag_list ])
+      permit(:name, :organization, :birthday, :city, :country, :description,
+             :phone, :mobile, :fax, :email, :address, :website,
+             :experience,
+             :tag_list)
   end
 
   def subject_profile

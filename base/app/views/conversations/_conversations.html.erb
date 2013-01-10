@@ -1,5 +1,0 @@
-<% @conversations.each do |conversation| %>
-	<% read_class = conversation.is_unread?(@actor) ? 'unread' : '' %>
-	<%= render :partial => 'conversation', :object => conversation, :locals => {:read_class => read_class} %>
-<% end %>
-<%= paginate @conversations %>
