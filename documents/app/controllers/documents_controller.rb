@@ -71,7 +71,7 @@ class DocumentsController < ApplicationController
   private
 
   def allowed_params
-    [:file]
+    [ :file ]
   end
 
   class << self
