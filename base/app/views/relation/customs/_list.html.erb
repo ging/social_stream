@@ -1,38 +1,34 @@
-<section class="privacity">
+<section class="relation_list">
   <% list.each do |r| %>
-    <div contain="<%= dom_id(r) %>" class="checkboxOptionLeft">
-      <input id="<%= dom_id(r) %>" type="radio" name="relation_custom"/>
-      <label for="<%= dom_id(r) %>"><%=r.name%></label>
-      <div class="options">
-        <i class="icon_tool16-edit"></i>
-        <i class="icon_tool16-trash"></i>
-<!--
-          <%= link_to image_tag("btn/edit.png", :class => "menu_icon", :title => t('relation_custom.edit')), '#', :class => "relation_custom_edit_link" %>
-          
-          <%= link_to image_tag("btn/delete.png", :class => "menu_icon", :title => t('relation_custom.delete')), r, :class => "relation_custom_delete_link", :method => :delete, :confirm => t('relation_custom.confirm_delete') %>
--->
-      </div>
-      <div class="relation_edit_name"> <!--.relation_edit_name  margin-top -36px, #new_relation_input_block  margin-top: -3px-->
-        <%= form_for r, :remote => true do |f| %>
-          <%= f.text_field :name, :class => "privacy_input_new", :size => 18 %>
-          <div class="btns">
-            <%= f.submit nil, :class => "btn" %>
-            <button class="btn cancel_edit_relation" >
-              <%= t('button.cancel') %>
-            </button>
-          </div>
+    <%= div_for r  do %>
+      <%= radio_button_tag :relation_custom, r.id, {}, id: "input_#{ dom_id r }" %>
+      <%= label_tag "input_#{ dom_id r }", r.name %>
+
+      <div class="actions">
+        <%= link_to '#', class: "edit" do %>
+          <i class="icon_tool16-edit"></i>
+        <% end %>
+
+        <%= link_to r, class: "delete", method: :delete, confirm: t('relation_custom.confirm_delete') do %>
+          <i class="icon_tool16-trash"></i>
         <% end %>
       </div>
-    </div>
+
+      <div class="edit_name">
+        <%= form_for r, :remote => true do |f| %>
+          <%= f.text_field :name %>
+
+          <%= f.submit nil, :class => "btn" %>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
     
   <div id="new_relation">
-    <a href="#" id="new_relation_custom_title" class="privacy_span_new"><%= t('relation_custom.new') %>
-    </a>
-  </div> 
-  <div id="new_relation_custom_input_block"> 
+    <%= link_to t('relation_custom.new'), '#', class: 'new' %>
+
     <%= render :partial => 'relation/customs/form' %>
-  </div>
+  </div> 
 </section>
 
 <%= javascript_tag do %>
