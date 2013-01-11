@@ -470,7 +470,7 @@ en:
               positive: "Activities WILL BE notified to contacts at %{name}"
               negative: "Activities WILL NOT BE notified to contacts at %{name}"
     of_relation:
-      choose: "2. Permissions in <strong>%{name}</strong> sphere"
+      choose: "Permissions in <strong>%{name}</strong> role"
   privacy:
     intro: "Contacts at <strong>%{relation}</strong> level are only allowed to:"
     rule:
@@ -478,12 +478,11 @@ en:
       title: "Privacy rules"
       saved: "Privacy rules saved"
   relation_custom:
-    choose: "1. Choose sphere"
     confirm_delete: "Delete this sphere?"
     delete: "Delete"
     edit: "Change name"
-    new: "+ New sphere"
-    title: "Privacy & context"
+    new: "+ New role"
+    title: "Privacy & roles"
   relation_public:
     name: "Public"
   representation:

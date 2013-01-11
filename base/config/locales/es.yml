@@ -486,7 +486,7 @@ es:
               positive: "PODRÁN leer las publicaciones que aparezcan en tu muro, salvo las que compartas solo con ciertas personas"
               negative: "NO PODRÁN leer las publicaciones que aparezcan en tu muro, salvo las que marques como públicas"
     of_relation:
-      choose: "2. Permisos para <strong>%{name}</strong>"
+      choose: "Permisos para <strong>%{name}</strong>"
   privacy:
     intro: "Los contactos en <strong>%{relation}</strong>:"
     rule:
@@ -494,12 +494,11 @@ es:
       title: "Reglas de privacidad"
       saved: "Reglas de privacidad guardadas"
   relation_custom:
-    choose: "1. Elegir tipo de relación"
     confirm_delete: "¿Borrar este tipo de relación?"
     delete: "Borrar"
     edit: "Cambiar nombre"
-    new: "+ Nuevo tipo"
-    title: "Privacidad y contexto"
+    new: "+ Nuevo rol"
+    title: "Privacidad y roles"
   relation_public:
     name: "Público"
   representation:
