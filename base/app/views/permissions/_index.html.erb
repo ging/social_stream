@@ -9,7 +9,7 @@
     <ul>
       <% default_permissions.each do |p| %>
         <li>
-        <%= check_box_tag 'relation[permission_ids][]', p.id, id: "checkbox_relation_#{ @relation.id }_permission_#{ p.id }" %>
+        <%= check_box_tag 'relation[permission_ids][]', p.id, @relation.permission_ids.include?(p.id), id: "checkbox_relation_#{ @relation.id }_permission_#{ p.id }" %>
         <%= f.label "checkbox_relation_#{ @relation.id }_permission_#{ p.id }", p.description(:brief, subject: current_subject) %>
         </li>
       <% end %>

@@ -1,15 +1,20 @@
-class PermissionsController < InheritedResources::Base
+class PermissionsController < ApplicationController
   before_filter :authenticate_user!
-
-  respond_to :js
-
-  actions :index
-
-  belongs_to :relation
+  before_filter :relation!
 
   def index
-    authorize! :read, parent
+    @permissions = @relation.permissions
 
-    index!
+    respond_to do |format|
+      format.html {
+        render partial: 'index', layout: false
+      }
+    end
+  end
+
+  private
+
+  def relation!
+    @relation = current_subject.relations.find(params[:relation_id])
   end
 end

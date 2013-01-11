@@ -5,12 +5,13 @@
 
     <%= render :partial => 'relation/customs/list', :object => @customs %>
 
-    <div id="permission">
-      <% @relation = @customs.first %>
-      <%= render partial: 'permissions/index' %>
+    <div id="permissions">
+      <% @customs.each do |r| %>
+        <div id="relation_<%= r.id %>_permissions" class="relation_permissions">
+          <div class="loading"></div>
+        </div>
+      <% end %>
     </div>
-
-    <div id="loading"></div>
 
     <%= javascript_tag do %>
       $(function() {
