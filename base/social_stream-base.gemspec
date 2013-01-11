@@ -47,8 +47,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('mailboxer','~> 0.6.5')
   # Tagging
   s.add_runtime_dependency('acts-as-taggable-on','~> 2.2.2')
-  # HTML Forms
-  s.add_runtime_dependency('formtastic','>= 1.2.3')
   # Background jobs
   s.add_runtime_dependency('resque','~> 1.23.0')
   # Modernizr.js javascript library

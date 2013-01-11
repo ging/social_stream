@@ -36,8 +36,6 @@ require 'omniauth-linkedin'
 #Tags
 require 'acts-as-taggable-on'
 require 'acts_as_taggable_on/social_stream'
-# HTML forms
-require 'formtastic'
 #Background tasks
 require 'resque/server'
 # Modernizr.js library
