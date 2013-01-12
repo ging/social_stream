@@ -60,9 +60,9 @@ You must set
 
 = Documentation
 
-{Social Stream documentation is available at rdoc.info}[http://rubydoc.info/gems/social_stream/frames]
+{Social Stream's wiki}[https://github.com/ging/social_stream/wiki] covers topics such as deployment howtos, development tips or an explanation of the database schema.
 
-However, most of the documentation is in {the base gem}[http://rubydoc.info/gems/social_stream-base/frames].
+Furthermore, {Social Stream's code documentation is available at rdoc.info}[http://rubydoc.info/gems/social_stream/frames]. Most of the stuff is in {the base gem}[http://rubydoc.info/gems/social_stream-base/frames].
 
 = Discussion
 

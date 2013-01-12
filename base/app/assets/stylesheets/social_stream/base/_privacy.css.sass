@@ -1,24 +1,23 @@
-#content-large
+#relation_customs
+  .relation_list
+    @include makeColumn(3, 0)
+    padding-right: 5px
+    padding-top: 13px
+    border-right: 1px solid #ccc
+    input
+      display: inline
+    label
+      display: inline-block
 
-#list
-  @include makeColumn(3, 0)
-  padding-right: 5px
-  padding-top: 13px
-  border-right: 1px solid #ccc
-  input
-    display: inline
-  label
-    display: inline-block
+    .actions
+      display: inline-block
+      float: right
+      margin-right: 10px
 
-  .options
-    display: inline-block
-    float: right
-    margin-right: 10px
+    .edit_name
 
-  .relation_edit_name
-
-  .btns
-    margin-left: 32px
+    .btn
+      margin-left: 32px
 
 
 
@@ -29,11 +28,11 @@
     
 #new_relation_input_block
 
-  .btns
+  .btn
     margin-left: 32px
 
 
-#permission
+#permissions
   @include makeColumn(6, 0)
   h4
     text-align: left
