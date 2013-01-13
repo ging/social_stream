@@ -6,7 +6,12 @@
     button
       @include makeColumn(2, 0)
       font-size: 18px
+      color: #ccc
       width: 157px
+      &:hover
+        color: #888
+    .active
+      color: #888
 
   .section
     @include clearfix
@@ -14,10 +19,14 @@
       @include makeColumn(6, 0)
       display: inline
       margin-left: 0px
+    .center
+      @include makeColumn(12, 0)
+      margin-left: 0px
     .right
       @include makeColumn(5, 0)
       display: inline-block
     .left,
+    .center,
     .right
       margin-top: 20px
       header
@@ -28,7 +37,7 @@
         .content
           @include clearfix
           margin-top: 7px
-          border-top: 1px solid #ccc
+          border-top: 1px solid #f3f3f3
           padding-top: 7px
           .box
             @include makeColumn(5, 0)
