@@ -12,7 +12,7 @@
   <% end %>
 
   <% if can?(:update, @profile) || @profile.contact_present? %>
-    <%= render :partial => "contact" %>
+    <%= render :partial => "comunication-info" %>
   <% end %>
 
   <% if can?(:update, @profile) || @profile.experience? %>

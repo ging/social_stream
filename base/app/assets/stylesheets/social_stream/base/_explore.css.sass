@@ -2,32 +2,50 @@
   @include makeColumn(12, 0)
   margin-left: 0
   .btn-group
-    margin-left: 40px
-    margin-right: 40px
     clear: both
     button
       @include makeColumn(2, 0)
       font-size: 18px
+      width: 157px
 
-#explore
-  @include makeColumn(12, 0)
-  .left,
-  .right
-    @include makeColumn(5, 0)
-    h3
-      border-bottom: 1px solid #999
-      font-size: 18px
-
-  .left
-    display: inline
-    margin-left: 30px
-    .trending
-      li
-        .first-line
-          a
-            font-size: 14px
-        .second-line
-          font-size: 12px
-  .right
-    display: inline-block
-    margin-left: 40px
+  .section
+    @include clearfix
+    .left
+      @include makeColumn(6, 0)
+      display: inline
+      margin-left: 0px
+    .right
+      @include makeColumn(5, 0)
+      display: inline-block
+    .left,
+    .right
+      margin-top: 20px
+      header
+        font-size: 18px
+        line-height: 15px
+      .article
+        margin-bottom: 20px
+        .content
+          @include clearfix
+          margin-top: 7px
+          border-top: 1px solid #ccc
+          padding-top: 7px
+          .box
+            @include makeColumn(5, 0)
+            font-size: 12px
+            word-wrap: break-word
+            .first-line
+              a
+                font-size: 14px
+                font-weight: bold
+                letter-spacing: -1pt
+            span
+              color: #ccc
+          .well-small
+            width: 30px
+            float: right
+            margin-bottom: 0px
+         
+    .right
+      display: inline-block
+      margin-left: 40px
