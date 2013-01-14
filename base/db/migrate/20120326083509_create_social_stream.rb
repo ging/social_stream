@@ -1,15 +1,19 @@
 class CreateSocialStream < ActiveRecord::Migration
   def change
     create_table "activities", :force => true do |t|
-      t.integer  "activity_verb_id"
-      t.datetime "created_at"
-      t.datetime "updated_at"
-      t.string   "ancestry"
-      t.integer  "channel_id"
+      t.integer    "activity_verb_id"
+      t.datetime   "created_at"
+      t.datetime   "updated_at"
+      t.string     "ancestry"
+      t.integer    "author_id"
+      t.integer    "user_author_id"
+      t.integer    "owner_id"
     end
 
     add_index "activities", ["activity_verb_id"], :name => "index_activities_on_activity_verb_id"
-    add_index "activities", ["channel_id"], :name => "index_activities_on_channel_id"
+    add_index "activities", ["author_id"], :name => "index_activities_on_author_id"
+    add_index "activities", ["user_author_id"], :name => "index_activities_on_user_author_id"
+    add_index "activities", ["owner_id"], :name => "index_activities_on_owner_id"
 
     create_table :activity_actions do |t|
       t.references :actor
@@ -43,6 +47,15 @@ class CreateSocialStream < ActiveRecord::Migration
       t.string   "object_type",    :limit => 45
       t.integer  "like_count",     :default => 0
       t.integer  "follower_count", :default => 0
+      t.integer  "visit_count",    :default => 0
+      t.integer  "comment_count",  :default => 0
+    end
+
+    create_table :activity_object_audiences do |t|
+      t.references :activity_object
+      t.references :relation
+
+      t.timestamps
     end
 
     create_table :activity_object_properties do |t|
@@ -210,6 +223,12 @@ class CreateSocialStream < ActiveRecord::Migration
     add_index "relations", ["actor_id"], :name => "index_relations_on_actor_id"
     add_index "relations", ["ancestry"], :name => "index_relations_on_ancestry"
 
+    create_table :sites do |t|
+      t.text :config
+
+      t.timestamps
+    end
+
     create_table "ties", :force => true do |t|
       t.integer  "contact_id"
       t.integer  "relation_id"
@@ -242,13 +261,18 @@ class CreateSocialStream < ActiveRecord::Migration
     add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
     add_foreign_key "activities", "activity_verbs", :name => "index_activities_on_activity_verb_id"
-    add_foreign_key "activities", "channels", :name => "index_activities_on_channel_id"
+    add_foreign_key "activities", "actors", :column => :author_id, :name => "index_activities_on_author_id"
+    add_foreign_key "activities", "actors", :column => :user_author_id, :name => "index_activities_on_user_author_id"
+    add_foreign_key "activities", "actors", :column => :owner_id, :name => "index_activities_on_owner_id"
 
     add_foreign_key "activity_actions", "actors", :name => "index_activity_actions_on_actor_id"
     add_foreign_key "activity_actions", "activity_objects", :name => "index_activity_actions_on_activity_object_id"
 
     add_foreign_key "activity_object_activities", "activities", :name => "index_activity_object_activities_on_activity_id"
     add_foreign_key "activity_object_activities", "activity_objects", :name => "activity_object_activities_on_activity_object_id"
+
+    add_foreign_key :activity_object_audiences, :activity_objects, :name => 'activity_object_audiences_on_activity_object_id'
+    add_foreign_key :activity_object_audiences, :relations, :name => 'activity_object_audiences_on_relation_id'
 
     add_foreign_key "activity_object_properties", "activity_objects", :name => "index_activity_object_properties_on_activity_object_id", :column => :activity_object_id
     add_foreign_key "activity_object_properties", "activity_objects", :name => "index_activity_object_properties_on_property_id", :column => :property_id
