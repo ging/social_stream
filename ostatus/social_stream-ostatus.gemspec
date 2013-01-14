@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n")
 
   # Gem dependencies
-  s.add_runtime_dependency('social_stream-base', '~> 1.0.0')
+  s.add_runtime_dependency('social_stream-base', '~> 1.1.0')
   s.add_runtime_dependency('proudhon','>= 0.3.6')
   s.add_runtime_dependency('nokogiri','> 1.4.4')
   
