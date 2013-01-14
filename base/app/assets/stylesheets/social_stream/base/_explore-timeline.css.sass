@@ -1,81 +1,164 @@
-.content-full
-  .center
-    header
-      font-size: 18px
-      line-height: 24px
-      margin-bottom: 20px
-    select
-      display: block
-    .input-xlarge
-      padding: 10px
-      margin-top: 6px
-    .btn-large
-      margin-top: -6px
-    .advanced-options
-      @include makeColumn(2, 0)
-      display: inline
-      margin-left: 0px
-      .menuv 
-        @include border-radius(7px)
-        border: 1px solid #f1f1f1 
-        width: auto
-        margin-left: none
-        padding-top: 10px
-        padding-left: 10px
-        padding-bottom: 10px
-        hr
-          margin: 7px 5px 0px -5px
-        ul 
-          margin-top: 7px
-          li 
-            margin-left: 1px
-            padding-bottom: 0px
-            padding-top: 0px
-            font-size: 14px
-            ol 
-              margin-left: 2px
-              padding-bottom: 0px
-              padding-top: 0px
-
-              li
-                margin-top: -7px
-                margin-bottom: 8px
-                padding-bottom: 0px
-                a
-                  color: #ccc
-
-        a 
-          margin-top: 8px
-          display: block
-          padding: 3px 6px 
-          font-size: 12px
-          cursor: pointer
-          &:hover 
-            background: #F9F9F9
-            color: #0088cc
-            font-size: 13px
-      .advanced 
-        color: #0088cc
-        font-size: 13px
-        margin-left: 0px !important
-        margin-top: 8px
+@import 'chosen'
+.content-full,
+.timeline,
+.comments
+  .media
+    .avatar
+      img
+        width: 60px !important
+    .media-heading
+      font-size: 14px
+      color: #888
+      a
         text-decoration: none
-        display: block
-        padding: 3px 6px
+      .x
+        display: inline-block
+        margin-left: 0px
         font-size: 12px
-        cursor: pointer
+        color: black
+        padding-right: 5px
+        float: right
+        margin-top: 1px
+        a
+          float: right
+          text-decoration: none
+          color: #888
+          &:hover
+            color: red
+    .media-body
+      
+      textarea
+        resize: none
+        width: 100%
+      .media
+        @include border-radius(5px)
+        background: #f5f5f5
+        padding: 9px 6px 11px 12px
+        a
+          img
+            width: 40px !important
 
-    .search-result 
-      .tags-list
-        display: inline
-        @include makeColumn(10, 0)
-        ul
-          @include makeColumn(2, 0)
-          margin-top: 20px
-          a
-            cursor: pointer
-            color: #ccc
-            &:hover
-              color: #0088cc
+        .objects
+          word-wrap: break-word
+          .thumb
+            float: left
+            width: auto
+            margin-right: 10px
+            img
+              width: 170px
+            .play_button
+              width: auto
+              margin-left: -107px
+          .text
+            font-size: 12px
+            h6
+              font-size: 14px 
+          .description
+            margin: 0 0 4px
+            .view-more
+              font-size: 12px
+
+        .actions
+          display: inline
+          .post_time_ago
+            display: inline-block
+            font-size: 11px
+            color: #444
+          .to_comment
+            display: inline-block
+            font-size: 12px
+            margin-left: 5px
+          .to_like
+            display: inline-block
+            font-size: 12px
+            margin-left: 5px
+          .audience
+            display: inline-block
+            font-size: 12px
+            margin-left: 7px
+
+          .tooltip
+            background: #444444
+            color: whitesmoke
+            @include border-radius(5px)
+            opacity: 1
+            margin-top: 26px
+            margin-left: 53px
+
+        .media-body
+          color: #888
+          word-wrap: break-word
+          .avatar
+            img
+              width: 60px !important
+          .media-heading
+            font-size: 14px
+            color: #888
+            a
+              text-decoration: none
+  
+          .actions
+            @include makeColumn(6, 0)
+            margin-left: 58px 
+            margin-bottom: 2px
+            margin-top: -5px
+            .post_time_ago
+              display: inline
+              font-size: 10px
+              color: #444
+            .to_comment
+              display: inline-block
+              font-size: 11px
+              margin-left: 5px
+            .to_like
+              a
+                display: inline-block
+                font-size: 11px !important
+                margin-left: 5px
+            .audience
+              display: inline-block
+              font-size: 11px
+              margin-left: 7px
+
+      .hidden_comments
+        float: right
+        margin: 2px 6px -2px 0 
+        a
+          font-size: 11px
+          text-decoration: none
+          color: #777777
+          &:hover
+            color: #0088CC
+
+    .likes
+      margin-left: 66px !important
+      font-size: 12px
+
+
+        
+
+#comment_text
+  float: right
+  margin-right: 19px
+  margin-top: 19px
+
+
+#new_comment
+  margin-left: 20px
+
+.new_comment
+  .avatar
+    widht: 45px
+    margin-left: 10px
+    float: left
+    img
+      margin-left: 49px
+      width: 40px
+    h6
+      margin-top: 69px
+
+    input.btn
+      float: right
+      margin-right: 19px
 
 
