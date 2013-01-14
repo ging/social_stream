@@ -56,7 +56,7 @@ Gem::Specification.new do |s|
   # Syntactically Awesome Stylesheets
   s.add_runtime_dependency('sass-rails', '>= 3.1.0')
   # Bootstrap for Sass
-  s.add_runtime_dependency('bootstrap-sass', '~> 2.1.0.0')
+  s.add_runtime_dependency('bootstrap-sass', '~> 2.2.2.0')
   # Autolink text blocks
   s.add_runtime_dependency('rails_autolink', '~> 1.0.4')
   # SocialCheesecake
