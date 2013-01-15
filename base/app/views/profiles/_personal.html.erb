@@ -97,10 +97,10 @@
         <%= f.label :description, t("profile.#{ current_subject.class.to_s.downcase }.about") %>
 
         <%= f.text_area :description, :maxlength => 200, :rows => 10 %>
-
-        <%= t('required') %>
-
-        <%= f.submit %>
+        <p>
+          <%= t('required') %>
+        </p>
+        <%= f.submit :class => "btn" %>
       <% end %>
     </div>
   <% end %>
