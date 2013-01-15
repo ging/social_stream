@@ -1,13 +1,15 @@
 <%= div_for activity, :class => 'root media' do %>
-  <div class="media-object avatar pull-left">
-    <%= link_to image_tag(activity.sender_subject.logo.url('small'),
+  <div class="avatar pull-left">
+    <div class="media-object">
+      <%= link_to image_tag(activity.sender_subject.logo.url('small'),
         :alt => activity.sender_subject.name), activity.sender_subject %>
+    </div>
   </div>
   <header class="media-heading">
     <%= activity.title(self) %>
 
     <% if activity.direct_object && can?(:destroy, activity.direct_object) %>
-    <div class="x"> 
+    <div class="x" style="float: right"> 
       <%= link_to ('X'), activity.direct_object , :confirm => t('confirm_delete', 
                     :scope => activity.direct_object.class.to_s.underscore), :method => :delete,  
                     :remote => true %> 

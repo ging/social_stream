@@ -1,8 +1,10 @@
 <%= div_for activity, :class => "child media" do %>
-  <div class="avatar">
+  <div class="pull-left avatar">
+    <div class="media-object">
     <%= link_to image_tag(activity.sender_subject.logo.url('small'),
                           :alt => activity.sender_subject.name),
                  activity.sender_subject %>
+    </div>
   </div>
   <header class="media-heading">
     <h6>
