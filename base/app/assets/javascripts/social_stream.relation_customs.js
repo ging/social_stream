@@ -32,12 +32,41 @@ SocialStream.RelationCustom = (function(SS, $, undefined){
     });
 
     list.find('.actions .edit').click(function() {
-      $(this).closest('.relation_custom').find('.edit_name').toggle('slow');
+      showEditForm($(this).closest('.relation_custom'));
+    });
+
+    list.find('.edit_name .submit').click(function() {
+      $(this).closest('.edit_name').find('form').submit();
     });
 
     list.find('a.new').click(function() {
       $(this).closest('#new_relation').find('.new_relation_custom').toggle('slow');
     });
+  };
+
+  var showEditForm = function(el) {
+    el.find('label').hide('slow');
+    el.find('.actions').hide('slow');
+
+    el.find('.edit_name').show('slow');
+
+    $('html').on('click.social_stream.relation_custom.edit_name', hideEditForms);
+  };
+
+  var hideEditForms = function(event) {
+    if ($(event.srcElement).closest('.relation_custom').length > 0) {
+      return;
+    }
+
+    $('.edit_name:visible').each(function() {
+      $(this).hide('slow');
+
+      var parent = $(this).closest('.relation_custom');
+      parent.find('label').show('slow');
+      parent.find('.actions').show('slow');
+    });
+
+    $('html').off('click.social_stream.relation_custom.edit_name');
   };
 
   var loadPermissionList = function(el) {

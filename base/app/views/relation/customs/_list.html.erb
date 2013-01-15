@@ -21,7 +21,9 @@
         <%= form_for r, :remote => true do |f| %>
           <%= f.text_field :name %>
 
-          <%= f.submit nil, :class => "btn" %>
+          <%= link_to '#', class: "submit" do %>
+            <i class="icon_tool16-ok"></i>
+          <% end %>
         <% end %>
       </div>
     <% end %>
