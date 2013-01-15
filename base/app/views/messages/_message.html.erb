@@ -1,28 +1,55 @@
 <%= div_for(message, :class => (message.is_unread?(@actor) ? 'unread' : '')) do %>
-  <div class="avatar">
-    <%= link_to image_tag(message.sender.logo.url(:small),
-                          :title => message.sender.name,
-                          :alt => message.sender.name),
-                 message.sender.subject %>
+  <div class="media">
+    <div class="pull-left">
+      <%= link_to image_tag(message.sender.logo.url(:small),
+                            :title => message.sender.name,
+                            :alt => message.sender.name),
+                   message.sender.subject %>
 
-  </div>
+    </div>
 
-  <div class="name">
-    <%= link_to truncate_name(message.sender.name), message.sender.subject %>
-  </div>
+    <div class="media-heading name">
+      <div class="name">
+      <%= link_to truncate_name(message.sender.name), message.sender.subject %>
+      </div>
+      <div class="date">
+        <%= t('time.ago', :time => time_ago_in_words(message.updated_at)) %>
+      </div>
+    </div>
 
-  <div class="date">
-    <%= t('time.ago', :time => time_ago_in_words(message.updated_at)) %>
+  <div class="media-body">
+    <div class="subject">
+      <%= truncate(message.subject, :length => 70) %>
+    </div>
+        
+    <div class="word-break pre-message">
+      <%= raw(message.body) %>
+    </div>
   </div>
-
-  <div class="subject">
-    <%= truncate(message.subject, :length => 70) %>
-  </div>
-      
-  <div class="word-break pre-message">
-    <%= raw(message.body) %>
-  </div>
-
-  <div class="clearfloat">
-  </div>
+</div>
 <% end %>
+
+
+<!--
+    <div class="name">
+      <%= link_to truncate_name(message.sender.name), message.sender.subject %>
+    </div>
+
+    <div class="date">
+      <%= t('time.ago', :time => time_ago_in_words(message.updated_at)) %>
+    </div>
+  </div>
+  <div class="text">
+    <div class="subject">
+      <%= truncate(message.subject, :length => 70) %>
+    </div>
+        
+    <div class="word-break pre-message">
+      <%= raw(message.body) %>
+    </div>
+
+    <div class="clearfloat">
+    </div>
+  </div>
+</div>
+
