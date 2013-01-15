@@ -18,7 +18,7 @@ describe PermissionsController do
       end
 
       it "should render index" do
-        get :index, :relation_id => @relation.id, :format => "js"
+        get :index, :relation_id => @relation.id, :format => "html"
 
         response.should be_success
       end
@@ -31,10 +31,10 @@ describe PermissionsController do
 
       it "should not render index" do
         begin
-          get :index, :relation_id => @relation.id, :format => "js"
+          get :index, :relation_id => @relation.id, :format => "html"
 
           assert false
-        rescue CanCan::AccessDenied
+        rescue ActiveRecord::RecordNotFound
           assigns(:permissions).should be_nil
         end
       end
