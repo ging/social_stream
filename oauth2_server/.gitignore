@@ -1,0 +1,10 @@
+pkg/*
+.bundle
+**.tmp_*
+Gemfile.lock
+.idea
+nbproject
+.loadpath
+.project
+.DS_Store
+.yardoc/*
