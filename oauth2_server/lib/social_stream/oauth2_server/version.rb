@@ -1,5 +1,5 @@
 module SocialStream
-  module Events
+  module Oauth2Server
     VERSION = "0.0.1".freeze
   end
 end
