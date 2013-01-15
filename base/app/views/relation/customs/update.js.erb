@@ -1,11 +1,17 @@
-<% if params[:section] == 'rules' %>
-  <%= render :partial => 'update_rules' %>
+<% if params[:section] == 'permissions' %>
+  <%= render :partial => 'update_permissions' %>
 <% else %>
-  var div = $('div[contain$=<%= dom_id(@custom) %>]');
-  div.children('label').html("<%= escape_javascript @custom.name %>");
-  div.children('label').show();
-  div.children('.options').show();
-  div.children('.relation_custom_name_form').hide();
+  <% if @custom.valid? %>
+    SocialStream.RelationCustom.update({
+      relation: {
+        id: <%= @custom.id %>,
+        name: "<%= @custom.name %>"
+      },
+      section: 'edit_name'
+    });
+  <% else %>
+    
+  <% end %>
 <% end %>
 
 

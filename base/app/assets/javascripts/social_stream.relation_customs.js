@@ -10,6 +10,16 @@ SocialStream.RelationCustom = (function(SS, $, undefined){
 		$.each(indexCallbacks, function(i, callback){ callback(); });
 	};
 
+	var updateCallbacks = [];
+
+	var addUpdateCallback = function(callback){
+		updateCallbacks.push(callback);
+	};
+
+	var update = function(options){
+		$.each(updateCallbacks, function(i, callback){ callback(options); });
+	};
+
   var getListEl = function() {
     return $('#relation_customs .relation_list');
   };
@@ -54,7 +64,7 @@ SocialStream.RelationCustom = (function(SS, $, undefined){
   };
 
   var hideEditForms = function(event) {
-    if ($(event.srcElement).closest('.relation_custom').length > 0) {
+    if (event && $(event.srcElement).closest('.relation_custom').length > 0) {
       return;
     }
 
@@ -93,45 +103,25 @@ SocialStream.RelationCustom = (function(SS, $, undefined){
     'html');
   };
 
+  var resetNameForm = function(options) {
+    if (options.section !== 'edit_name')
+      return;
+
+    var el = $('#relation_custom_' + options.relation.id);
+
+    el.find('label').text(options.relation.name);
+    el.find('input[name="relation_custom[name]"]').val(options.relation.name);
+
+    hideEditForms();
+  };
+
   addIndexCallback(initList);
 
+  addUpdateCallback(resetNameForm);
+
   return {
-    index: index
+    index: index,
+    update: update
   };
 
 })(SocialStream, jQuery);
-
-/*
-function getDomId(id) {
-  return id.match(/\d+$/)[0];
-}
-
-function selectRelation(radio){
-		$("#permissions").html("");
-	$('#relation_customs_list div.options').hide();
-
-	$(radio).siblings('div.options').show();
-
-	$.ajax({
-		url: "../permissions",
-		context: document.body,
-		data: { relation_id: getDomId($(radio).attr('id')) },
-		dataType: "script"
-	});
-
-};
-
-function selectPermission(box){
-	var id = getDomId($(box).attr('id'));
-	var input = $('input[id="relation_custom_permission_ids_' + id + '"]');
-	var label = $('label[for="relation_custom_permission_ids_' + id + '"]');
-
-	if ($(box).is(':checked')) {
-		input.attr('checked', 'checked');
-		label.parent().show();
-	} else {
-		input.removeAttr('checked');
-		label.parent().hide();
-	}
-}
-*/
