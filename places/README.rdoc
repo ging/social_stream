@@ -1,0 +1,3 @@
+= Social Stream Places
+
+This gem will change to support places

@@ -1,0 +1,82 @@
+# Sample localization file for Spanish. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  place:
+    actions:
+      delete: "Borrar"
+      details: "Detalles"
+      edit: "Editar"
+    all: "Todos los lugares"
+    confirm_delete: "¿Borrar lugar?"
+    form:
+      title: "Lugar"
+    info:
+      date:
+        created_at: "Creado el"
+        updated_at: "Actualizado el"
+      file:
+        title: "Cargar"
+      title:
+        title: "Título"
+    mine: "Mis lugares"
+    name: "lugar"
+    name_title: "Nombre del lugar"
+    phone_title: "Teléfono"
+    url_title: "Website"
+    address:
+      street: "Dirección"
+      locality: "Ciudad"
+      region: "Región"
+      postalcode: "Código postal"
+      country: "País"
+    not_mine: "Lugares"
+    one: "un lugar"
+    simple_all: "Todos"
+    title: "Lugares"
+    like:
+      me: "que me gustan"
+      other: "que gustan a %{contact}"
+    search:
+      name: "Busca tus lugares favoritos"
+      no_match: "¿No encuentras el lugar?"
+      new: "+ Añade un lugar nuevo"
+    comments:
+      contacts: "Ver sólo los comentarios de mis contactos"
+      all: "Ver todos los comentarios"
+    view:
+      list: "Lista"
+      map: "Mapa"
+    tabs:
+      mine: "Mis lugares"
+      friends: "De amigos"
+      recommended: "Recomendados"
+  activity:
+    verb:
+      like:
+        Place:
+          title: "A %{subject} le gusta %{activity_object}."
+          like: "También me gusta"
+          unlike: "Ya no me gusta"
+    like_construction:
+      like_friends:
+        one: "A %{friends} contacto"
+        other: "A %{friends} contactos"
+      like_and: " y "
+#      like_you: "you like this"
+      like_people:
+        one: "a %{people} persona"
+        other: "a %{people} personas"
+      like_others:
+        one: "%{people} otro"
+        other: "%{people} otros"
+      like_final:
+        one: " le gusta esto"
+        other: " les gusta esto"
+        you: "le gusta esto"
+
+#  repository:
+#    order:
+#      by: "Order by"
+#      last_modified: "Last modified"
+#      most_popular: "Most popular"

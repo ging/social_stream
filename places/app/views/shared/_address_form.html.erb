@@ -1,0 +1,15 @@
+<%= form.fields_for :address do |f| %>
+    <%= f.text_field :streetAddress, :class => "street" %>
+    <%= f.text_field :postalCode, :class => "postalcode" %>
+    <%= f.text_field :locality, :class => "locality" %>
+    <%= f.text_field :region, :class => "region" %>
+    <%= f.text_field :country, :class => "country" %>
+<% end %>
+
+<%= javascript_tag do %>
+  $(".street").watermark("<%= escape_javascript(I18n.t('place.address.street')) %>", {useNative: false, className: 'watermark'});
+  $(".locality").watermark("<%= escape_javascript(I18n.t('place.address.locality')) %>", {useNative: false, className: 'watermark'});
+  $(".region").watermark("<%= escape_javascript(I18n.t('place.address.region')) %>", {useNative: false, className: 'watermark'});
+  $(".postalcode").watermark("<%= escape_javascript(I18n.t('place.address.postalcode')) %>", {useNative: false, className: 'watermark'});
+  $(".country").watermark("<%= escape_javascript(I18n.t('place.address.country')) %>", {useNative: false, className: 'watermark'});
+<% end %>

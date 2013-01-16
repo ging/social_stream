@@ -1,0 +1,60 @@
+<%= render :partial => 'objects/show',
+           :locals  => { :object => @place } %>
+
+<%= div_for @place do %>
+	<div class="central">
+	  <h2>
+	    <%= @place.title %>
+	  </h2>
+
+		<%= render :partial => 'place_info' %>
+
+		<div class="tabbable">
+			<ul class="nav nav-tabs">
+		    <li class="active">
+		      <a href="#comments" data-toggle="tab">
+		        <%= t 'comment.title.other' %>
+		      </a>
+		    </li>
+		  </ul>
+
+		  <div class="tab-content">
+		    <div id="comments" class="comments">
+		      <%= render :partial => 'activities/comments', :locals => { :activity => @place.post_activity } %>
+		      <%= render :partial => 'comments/new', :locals => { :activity => @place.post_activity } %>
+		    </div>
+		  </div>
+		</div>
+	</div>
+
+  <div class="details">
+    <div class="tabbable">
+      <ul class="nav nav-tabs">
+        <li class="<%= place_details_tab_class @place, :info %>">
+          <%= link_to t('place.details.info'), '#place-info', 'data-toggle' => 'tab' %>
+        </li>
+
+        <% if can? :update, @place %>
+        <li class="<%= place_details_tab_class @place, :edit %>">
+
+          <%= link_to (raw("<i class='icon_tool16-edit'></i> ")), '#place-edit', 'data-toggle' => 'tab' %>
+          <!--alt: t('document.actions.edit'),-->
+
+        </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="tab-content">
+      <div class="tab-pane <%= place_details_tab_class @place, :info %>" id="place-info">
+        <%= render partial: 'info', locals: { place: @place } %>
+      </div>
+      <% if can? :update, @place %>
+        <div class="tab-pane <%= place_details_tab_class @place, :edit %>" id="place-edit">
+          <%= render partial: 'form', locals: { place: @place } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
