@@ -4,21 +4,21 @@
       <b class="caret"></b>
     <% end %>
 
-  <ol class="dropdown-menu">
+  <ul class="dropdown-menu">
     <%= render :partial => 'layouts/header_dropdown_menu_sessions'%>
-    <ul>
+    <li>
       <%= link_to t('settings.main'), settings_path, :id => "btn_menu_settings" %>
-    </ul>
+    </li>
     <% if SocialStream.relation_model == :custom %>
-    <ul>
+    <li>
       <%= link_to t('account.privacy'), relation_customs_path %>
-    </ul>
+    </li>
     <% end %>
-    <ul class="divider">
-    </ul>
-    <ul>
+    <li class="divider">
+    </li>
+    <li>
       <%= link_to t('sign_out'), destroy_user_session_path, :method => :delete  %>
-    </ul>
-  </ol>
+    </li>
+  </ul>
 </div>
 
