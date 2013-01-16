@@ -10,6 +10,16 @@ SocialStream.RelationCustom = (function(SS, $, undefined){
 		$.each(indexCallbacks, function(i, callback){ callback(); });
 	};
 
+	var createCallbacks = [];
+
+	var addCreateCallback = function(callback){
+		createCallbacks.push(callback);
+	};
+
+	var create = function(options){
+		$.each(createCallbacks, function(i, callback){ callback(options); });
+	};
+
 	var updateCallbacks = [];
 
 	var addUpdateCallback = function(callback){
@@ -103,6 +113,15 @@ SocialStream.RelationCustom = (function(SS, $, undefined){
     'html');
   };
 
+  var addToList = function(options) {
+    var list = getListEl();
+
+    $('#new_relation').before(options.relation.html);
+
+    initList();
+    
+  };
+
   var resetNameForm = function(options) {
     if (options.section !== 'edit_name')
       return;
@@ -117,10 +136,13 @@ SocialStream.RelationCustom = (function(SS, $, undefined){
 
   addIndexCallback(initList);
 
+  addCreateCallback(addToList);
+
   addUpdateCallback(resetNameForm);
 
   return {
     index: index,
+    create: create,
     update: update
   };
 

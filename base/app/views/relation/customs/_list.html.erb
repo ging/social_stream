@@ -1,34 +1,6 @@
 <section class="relation_list" data-permissions_path="<%= permissions_path %>">
-  <% list.each do |r| %>
-    <%= div_for r  do %>
-      <%= radio_button_tag :relation_custom,
-                           r.id,
-                           false,
-                           :id => "input_#{ dom_id r }" %>
-      <%= label_tag "input_#{ dom_id r }", r.name %>
-
-      <div class="actions">
-        <%= link_to '#', class: "edit" do %>
-          <i class="icon_tool16-edit"></i>
-        <% end %>
-
-        <%= link_to r, class: "delete", method: :delete, confirm: t('relation_custom.confirm_delete') do %>
-          <i class="icon_tool16-trash"></i>
-        <% end %>
-      </div>
-
-      <div class="edit_name">
-        <%= form_for r, :remote => true do |f| %>
-          <%= f.text_field :name %>
-
-          <%= link_to '#', class: "submit" do %>
-            <i class="icon_tool16-ok"></i>
-          <% end %>
-        <% end %>
-      </div>
-    <% end %>
-  <% end %>
-    
+  <%= render list %>
+   
   <div id="new_relation">
     <%= link_to t('relation_custom.new'), '#', class: 'new' %>
 
