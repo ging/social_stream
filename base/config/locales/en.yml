@@ -478,7 +478,7 @@ en:
       title: "Privacy rules"
       saved: "Privacy rules saved"
   relation_custom:
-    confirm_delete: "Delete this sphere?"
+    confirm_delete: "Delete this role?"
     delete: "Delete"
     edit: "Change name"
     new: "+ New role"

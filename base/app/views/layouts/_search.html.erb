@@ -3,10 +3,7 @@
     <%= text_field_tag :q, nil,:autocomplete => :off, :id => :header_search_input %>
   </form>
   <div id="header_search_display">
-    <div class="progress progress-striped active">
-      <div class="bar" style="width: 45%">
-      </div>
-    </div>
+    <%= render partial: 'layouts/loading' %>
   </div>
 </div>
 <%= javascript_tag do %>

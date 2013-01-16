@@ -1,0 +1,8 @@
+<% if @custom.destroyed? %>
+  SocialStream.RelationCustom.destroy({
+    relation: {
+      id: <%= @custom.id %>
+    }
+  });
+<% else %>
+<% end %>

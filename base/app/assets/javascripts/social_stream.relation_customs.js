@@ -30,6 +30,16 @@ SocialStream.RelationCustom = (function(SS, $, undefined){
 		$.each(updateCallbacks, function(i, callback){ callback(options); });
 	};
 
+	var destroyCallbacks = [];
+
+	var addDestroyCallback = function(callback){
+		destroyCallbacks.push(callback);
+	};
+
+	var destroy = function(options){
+		$.each(destroyCallbacks, function(i, callback){ callback(options); });
+	};
+
   var getListEl = function() {
     return $('#relation_customs .relation_list');
   };
@@ -110,6 +120,8 @@ SocialStream.RelationCustom = (function(SS, $, undefined){
       return;
     }
 
+    $('#permissions').find('.loading').show();
+
     var formEl = $('<div/>', {
       id: 'relation_' + relVal + '_permissions',
       'class': 'relation_permissions'
@@ -119,18 +131,23 @@ SocialStream.RelationCustom = (function(SS, $, undefined){
       'class': 'loading'
     });
 
-    formEl.appendTo('#permissions');
+    formEl.prependTo('#permissions');
 
    $.get(
      getPermissionsPath(),
      { relation_id: relVal },
      function(html) {
+       $('#permissions').find('.loading').hide();
        formEl.html(html);
        radioInput.attr('data-loaded', 'true');
 
        SS.Permission.initForm(formEl);
      },
     'html');
+  };
+
+  var initPermission = function() {
+    $('#permissions').find('.loading').hide();
   };
 
   var addToList = function(options) {
@@ -144,7 +161,7 @@ SocialStream.RelationCustom = (function(SS, $, undefined){
   };
 
   var resetNameForm = function(options) {
-    if (options.section !== 'edit_name')
+    if (options.section !== 'name')
       return;
 
     var el = $('#relation_custom_' + options.relation.id);
@@ -155,6 +172,15 @@ SocialStream.RelationCustom = (function(SS, $, undefined){
     hideEditForms();
   };
 
+  var resetPermissionForm = function(options) {
+    if (options.section !== 'permissions')
+      return;
+
+    $('#permissions').find('.loading').hide();
+
+    SS.Permission.enableForm('#relation_' + options.relation.id + '_permissions');
+  };
+
   var resetNewForm = function() {
     var el = $('#new_relation');
 
@@ -163,16 +189,26 @@ SocialStream.RelationCustom = (function(SS, $, undefined){
     el.find('input[name="relation_custom[name]"]').val('');
   };
 
+  var hideElement = function(options) {
+    $('#relation_custom_' + options.relation.id).hide();
+    $('#relation_' + options.relation.id + '_permissions').hide();
+  };
+
   addIndexCallback(initList);
+  addIndexCallback(initPermission);
 
   addCreateCallback(addToList);
 
   addUpdateCallback(resetNameForm);
+  addUpdateCallback(resetPermissionForm);
+
+  addDestroyCallback(hideElement);
 
   return {
     index: index,
     create: create,
-    update: update
+    update: update,
+    destroy: destroy
   };
 
 })(SocialStream, jQuery);

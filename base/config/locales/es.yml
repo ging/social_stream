@@ -494,7 +494,7 @@ es:
       title: "Reglas de privacidad"
       saved: "Reglas de privacidad guardadas"
   relation_custom:
-    confirm_delete: "¿Borrar este tipo de relación?"
+    confirm_delete: "¿Borrar este rol?"
     delete: "Borrar"
     edit: "Cambiar nombre"
     new: "+ Nuevo rol"

@@ -1,17 +1,11 @@
-<% if params[:section] == 'permissions' %>
-  <%= render :partial => 'update_permissions' %>
+<% if @custom.valid? %>
+  SocialStream.RelationCustom.update({
+    relation: {
+      id: <%= @custom.id %>,
+      name: "<%= @custom.name %>"
+    },
+    section: '<%= params[:section] %>'
+  });
 <% else %>
-  <% if @custom.valid? %>
-    SocialStream.RelationCustom.update({
-      relation: {
-        id: <%= @custom.id %>,
-        name: "<%= @custom.name %>"
-      },
-      section: 'edit_name'
-    });
-  <% else %>
-    
-  <% end %>
+
 <% end %>
-
-
