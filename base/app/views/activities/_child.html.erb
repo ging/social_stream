@@ -1,17 +1,21 @@
-<%= div_for activity, :class => "child" do %>
-  <div class="avatar">
+<%= div_for activity, :class => "child media" do %>
+  <div class="pull-left avatar">
+    <div class="media-object">
     <%= link_to image_tag(activity.sender_subject.logo.url('small'),
                           :alt => activity.sender_subject.name),
                  activity.sender_subject %>
+    </div>
   </div>
-  <header>
+  <header class="media-heading">
     <h6>
       <%= link_to(activity.sender_subject.name, activity.sender_subject) %>
     </h6>
+  </header>
+  <div class="media-body">
     <div class="objects">
       <%= render activity.activity_objects %>
     </div>
     <%= render :partial => 'activities/actions',
                :locals => { :activity => activity } %>
-  </header>
+  </div>
 <% end %>

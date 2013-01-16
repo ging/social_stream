@@ -12,8 +12,9 @@
     margin-left: 0px
     display: inline
     margin-top: 40px
+
   .right
-    @include makeColumn(6, 0)
+    @include makeColumn(5, 1)
     display:inline-block
 
 #registration
@@ -26,3 +27,15 @@
   .right
     @include makeColumn(6, 0)
     display:inline-block
+
+
+#header_search_form
+  margin-bottom: 0px
+
+#search
+  width: 92%
+  input
+    &[type="text"],
+      width: 90%
+  .thumbnail
+    width: 100%

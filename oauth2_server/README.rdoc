@@ -1,0 +1,3 @@
+= Social Stream OAuth2 Server
+
+Provide your site with OAuth2 Server capabilities

@@ -1,6 +1,6 @@
 @import "jquery.cleditor"
 
-#content-large
+.content-large
   @include makeColumn(10, 0)
   margin-top: 20px
 
@@ -8,9 +8,9 @@
   @include makeColumn(3, 0)
   display: inline
   .avatar
-    float: left
-    padding: 2px 5px 0 10px
-
+    display: inline
+  header
+    display: inline-block
 .content_right
   @include makeColumn(7, 0)
   color: #666666
@@ -53,10 +53,39 @@
     @include border-radius(5px) 
     width: 694px !important
 
-
 .conversation
   opacity: 0.5
 
 .unread
   opacity: 1
-  background-color: black
+
+.conversation_full
+  h3
+    white-space: nowrap
+    width: 50%
+    overflow: hidden
+    text-overflow: ellipsis
+    display: inline
+  .participants
+    padding: 7px 10px 9px 10px
+    @include border-radius(5px)
+    border: 1px solid #f1f1f1
+    img
+      padding: 4px 1px 2px 2px
+      width: 40px
+  .action
+    display: inline-block
+  .cont_conversation
+    .cleditorMain
+      @include border-radius(5px) 
+    .actions
+      margin-top: 10px
+
+  .message
+    .media
+      margin-left: 20px
+      .name
+        display: inline
+      .date
+        display: inline-block
+        color: #ccc

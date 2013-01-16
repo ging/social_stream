@@ -3,13 +3,13 @@
     <%= raw t('permission.of_relation.choose', :name => h(@relation.name)) %>
   </h4>
 
-  <%= form_for @relation do |f| %>
-    <%= hidden_field_tag 'relation[permission_ids][]', "" %>
+  <%= form_for @relation, url: polymorphic_path(@relation, section: 'permissions'), remote: true do |f| %>
+    <%= hidden_field_tag 'relation_custom[permission_ids][]', "" %>
 
     <ul>
       <% default_permissions.each do |p| %>
         <li>
-        <%= check_box_tag 'relation[permission_ids][]', p.id, @relation.permission_ids.include?(p.id), id: "checkbox_relation_#{ @relation.id }_permission_#{ p.id }" %>
+        <%= check_box_tag 'relation_custom[permission_ids][]', p.id, @relation.permission_ids.include?(p.id), id: "checkbox_relation_#{ @relation.id }_permission_#{ p.id }" %>
         <%= label_tag "checkbox_relation_#{ @relation.id }_permission_#{ p.id }", p.description(:brief, subject: current_subject) %>
         </li>
       <% end %>

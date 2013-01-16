@@ -1,13 +1,15 @@
-<%= div_for activity, :class => 'root' do %>
-  <div class="avatar">
-    <%= link_to image_tag(activity.sender_subject.logo.url('small'),
+<%= div_for activity, :class => 'root media' do %>
+  <div class="avatar pull-left">
+    <div class="media-object">
+      <%= link_to image_tag(activity.sender_subject.logo.url('small'),
         :alt => activity.sender_subject.name), activity.sender_subject %>
+    </div>
   </div>
-  <header>
+  <header class="media-heading">
     <%= activity.title(self) %>
 
     <% if activity.direct_object && can?(:destroy, activity.direct_object) %>
-    <div class="x"> 
+    <div class="x" style="float: right"> 
       <%= link_to ('X'), activity.direct_object , :confirm => t('confirm_delete', 
                     :scope => activity.direct_object.class.to_s.underscore), :method => :delete,  
                     :remote => true %> 
@@ -15,20 +17,21 @@
     <% end %>
   </header>
 
+  <div class="media-body">
+    <section class="objects">
+      <%= render activity.activity_objects %>
+    </section>
 
-  <section class="objects">
-    <%= render activity.activity_objects %>
-  </section>
+    <%= render :partial => 'activities/actions',
+               :locals => { :activity => activity } %>
 
-  <%= render :partial => 'activities/actions',
-             :locals => { :activity => activity } %>
+    <%= render :partial => 'activities/likes',
+               :locals => { :activity => activity } %>
 
-  <%= render :partial => 'activities/likes',
-             :locals => { :activity => activity } %>
+    <%= render :partial => 'activities/comments',
+               :locals => { :activity => activity } %>
 
-  <%= render :partial => 'activities/comments',
-             :locals => { :activity => activity } %>
-
-  <%= render :partial => 'comments/new',
-             :locals => { :activity => activity } %>
+    <%= render :partial => 'comments/new',
+               :locals => { :activity => activity } %>
+  </div>
 <% end %>
