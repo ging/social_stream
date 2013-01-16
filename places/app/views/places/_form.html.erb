@@ -1,0 +1,53 @@
+<% @place.build_address %>
+<%= form_for @place, :html => {:onkeypress => "return event.keyCode!=13"} do |f| %>
+  <%# @place.owner_id = current_subject.try(:actor_id) %>
+  <%# @place.relation_ids = Relation::Public.instance.id %>
+  <% @place.latitude = 0 %>
+  <% @place.longitude = 0 %>
+
+  <% if f.object.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(f.object.errors.count, "error") %> prohibited this activity from being saved:</h2>
+
+      <ul>
+      <% f.object.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="place_show_form">
+    <div class="place_show_info">
+      <div class="place_padding"><%= f.text_field :title, :class => "place_name name_width", :oninput =>"keyUpEvent();" %></div>
+      <div class="place_padding"><%= render :partial => 'shared/address_form', :locals => {:form => f} %></div>
+      <div class="place_padding">
+        <%= f.text_field :phone_number, :class => "place_phone_number phone_number_width" %>
+        <%= f.text_field :url, :class => "place_url url_width" %>
+      </div>
+    </div>
+  </div>
+
+
+  <%= f.hidden_field :latitude %>
+  <%= f.hidden_field :longitude %>
+
+
+  <div class="place_create">
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  </div>
+
+<% end %>
+
+<%= javascript_tag do %>
+  $(".place_name").watermark('<%= escape_javascript(I18n.t('place.name_title')) %>', {useNative: false, className: 'watermark'});
+  $(".place_phone_number").watermark('<%= escape_javascript(I18n.t('place.phone_title')) %>', {useNative: false, className: 'watermark'});
+  $(".place_url").watermark('<%= escape_javascript(I18n.t('place.url_title')) %>', {useNative: false, className: 'watermark'});
+<% end %>
+
+
+
+

@@ -1,0 +1,43 @@
+<div class="info">
+  <%= render partial: 'objects/counters', locals: { object: place } %>
+
+  <div class="description <%= 'blank' if place.description.blank? %>">
+    <h4>
+      <%= t 'place.info.description' %>
+    </h4>
+
+    <%= place.description %>
+  </div>
+
+  <div class="tags">
+    <h4>
+      <%= t 'place.info.tags' %>
+    </h4>
+
+    <%= tag_list place %>
+  </div>
+
+  <div class="autor">
+    <h4>
+      <%= t 'place.info.author' %>
+    </h4>
+
+    <%= link_to place.author_subject.name, place.author_subject %>
+  </div>
+
+  <div class="dates">
+    <h4>
+      <%= t('place.info.date.created_at') %>
+    </h4>
+    <div class="date">
+      <%= I18n.localize place.created_at, :format => :long %>
+    </div>
+
+    <h4>
+      <%= t('place.info.date.updated_at') %>
+    </h4>
+    <div class="date">
+      <%= I18n.localize place.updated_at, :format => :long %>
+    </div>      
+  </div>
+</div>

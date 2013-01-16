@@ -1,0 +1,7 @@
+<% if profile_subject %>
+  <% toolbar :profile, :subject => profile_subject %>
+<% elsif user_signed_in? %>
+  <% toolbar %>
+<% end %>
+
+<h1>All places</h1>

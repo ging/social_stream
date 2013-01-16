@@ -1,0 +1,22 @@
+/**************general for incons *************/
+
+[class^="icon_"],   [class*="icon_"] {
+  display: inline-block;
+  vertical-align: text-top;
+  background-repeat: no-repeat;
+  *margin-right: .3em;
+}
+
+
+/**************PLACES 70px *************/
+
+
+[class^="icon_place_70-"],   [class*="icon_place_70-"] {
+  width: 70px;
+  height: 70px;
+  background-image: url("icons/places_ico-50.png");
+}
+
+
+.icon_place_70-default { background-position: 3px  0;  }
+

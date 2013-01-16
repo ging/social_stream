@@ -1,0 +1,88 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  place:
+    actions:
+      delete: "Delete"
+      details: "Details"
+      edit: "Edit"
+    all: "All places"
+    confirm_delete: "Delete place?"
+    details:
+      info: "Info"
+    form:
+      title: "Place"
+    info:
+      author: "Author"
+      date:
+        created_at: "Created at"
+        updated_at: "Updated at"
+      description: "Description"
+      file:
+        title: "Upload"
+      size: "Size"
+      tags: "Tags"
+      title:
+        title: "Title"
+    mine: "My places"
+    name: "place"
+    name_title: "Place name"
+    phone_title: "Phone number"
+    url_title: "Website"
+    address:
+      street: "Address"
+      locality: "City"
+      region: "Region"
+      postalcode: "Postalcode"
+      country: "Country"
+    not_mine: "Places"
+    one: "a place"
+    simple_all: "All"
+    title: "Places"
+    like:
+      me: "I like"
+      other: "%{contact} likes"
+    search:
+      name: "Search for your fav places"
+      no_match: "Don't find your fav place?"
+      new: "+ Add new place"
+    comments:
+      contacts: "See only my contacts's comments"
+      all: "See all comments"
+    view:
+      list: "List view"
+      map: "Map view"
+    tabs:
+      mine: "My places"
+      friends: "Friends places"
+      recommended: "Recommended"
+  activity:
+    verb:
+      like:
+        Place:
+          title: "%{subject} likes %{activity_object}."
+          like: "I like too"
+          unlike: "I do not like anymore"
+    like_construction:
+      like_friends:
+        one: "%{friends} contact"
+        other: "%{friends} contacts"
+      like_and: " and "
+#      like_you: "you like this"
+      like_people:
+        one: "%{people} person"
+        other: "%{people} people"
+      like_others:
+        one: "%{people} other"
+        other: "%{people} others"
+      like_final:
+        one: " likes this"
+        other: " like this"
+        you: "like this"
+
+#  repository:
+#    order:
+#      by: "Order by"
+#      last_modified: "Last modified"
+#      most_popular: "Most popular"
