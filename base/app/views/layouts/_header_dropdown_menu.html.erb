@@ -5,7 +5,9 @@
     <% end %>
 
   <ul class="dropdown-menu">
-    <%= render :partial => 'layouts/header_dropdown_menu_sessions'%>
+    <li>
+      <%= render :partial => 'layouts/header_dropdown_menu_sessions'%>
+    </li>
     <li>
       <%= link_to t('settings.main'), settings_path, :id => "btn_menu_settings" %>
     </li>
@@ -21,4 +23,3 @@
     </li>
   </ul>
 </div>
-
