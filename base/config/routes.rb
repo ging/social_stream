@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   match 'home' => 'home#index', :as => :home
   match 'home' => 'home#index', :as => :user_root # devise after_sign_in_path_for
-  match 'explore' => 'explore#index', :as => :explore
+  match 'explore(/:section)' => 'explore#index', :as => :explore
   match 'search' => 'search#index', :as => :search
 
   # Social Stream subjects configured in config/initializers/social_stream.rb

@@ -215,6 +215,13 @@ es:
       forgot: "¿Olvidaste tu contraseña?"
       instructions: "Introduce el correo electrónico y te mandaremos instrucciones para cambiarlo"
       update: "Cambiar contraseña"
+  explore:
+    index: "Explorar"
+    participants: "Participantes"
+    files: "Recursos"
+    timeline: "Linea temporal"
+    tags: "Etiquetas"
+    search: "Buscar"
   follower:
     follower:
       title: "Seguidores"

@@ -217,6 +217,13 @@ en:
       forgot: "Forgot your password?"
       instructions: "Type the email address bound to your account and we will sent you instructions to change it:"
       update: "Change your password"
+  explore:
+    index: "Explore"
+    participants: "Participants"
+    files: "Files"
+    timeline: "Timeline"
+    tags: "Tags"
+    search: "Search"
   follower:
     follower:
       title: "Followers"
