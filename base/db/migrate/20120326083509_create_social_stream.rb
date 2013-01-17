@@ -119,18 +119,6 @@ class CreateSocialStream < ActiveRecord::Migration
 
     add_index "avatars", ["actor_id"], :name => "index_avatars_on_actor_id"
 
-    create_table "channels", :force => true do |t|
-      t.integer  "author_id"
-      t.integer  "owner_id"
-      t.integer  "user_author_id"
-      t.datetime "created_at",     :null => false
-      t.datetime "updated_at",     :null => false
-    end
-
-    add_index "channels", ["author_id"], :name => "index_channels_on_author_id"
-    add_index "channels", ["owner_id"], :name => "index_channels_on_owner_id"
-    add_index "channels", ["user_author_id"], :name => "index_channels_on_user_author_id"
-
     create_table "comments", :force => true do |t|
       t.integer  "activity_object_id"
       t.datetime "created_at"
@@ -285,10 +273,6 @@ class CreateSocialStream < ActiveRecord::Migration
     add_foreign_key "authentications", "users", :name => "authentications_on_user_id"
 
     add_foreign_key "avatars", "actors", :name => "avatars_on_actor_id"
-
-    add_foreign_key "channels", "actors", :name => "index_channels_on_author_id", :column => "author_id"
-    add_foreign_key "channels", "actors", :name => "index_channels_on_owner_id", :column => "owner_id"
-    add_foreign_key "channels", "actors", :name => "index_channels_on_user_author_id", :column => "user_author_id"
 
     add_foreign_key "comments", "activity_objects", :name => "comments_on_activity_object_id"
 
