@@ -27,15 +27,23 @@
   .right
     @include makeColumn(6, 0)
     display:inline-block
+      input
+        &[type="password"]
+          width: 96%
+      .btn
+        margin-right: 10px
 
 
 #header_search_form
   margin-bottom: 0px
 
 #search
-  width: 92%
+  width: 100%
   input
     &[type="text"],
-      width: 90%
+      width: 97%
   .thumbnail
     width: 100%
+
+#login_data
+  @include clearfix

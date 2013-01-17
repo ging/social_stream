@@ -27,8 +27,6 @@
     vertical-align: bottom
 .dropdown
   margin-top: 7px
-  a
-    margin-top: 3px
     
   .dropdown-toggle
     margin-right: 5px
@@ -36,3 +34,19 @@
     margin: 6px -142px 0
     ul
       margin: 0px
+      li
+      a 
+        &:hover,
+        &:focus,
+        &:active
+          color: white
+          background-color: #000
+          background-image: none
+
+  .dropdown-submenu
+    li
+    a 
+      &:hover
+        color: white
+        background-color: #000
+        background-image: none
