@@ -3,6 +3,21 @@ class PlacesController < ApplicationController
 
   before_filter :profile_subject!, :only => :index
 
+  def show
+    if (@place.latitude == 0 && @place.longitude == 0) 
+      if @place.geocode
+        @place.update_column(:latitude, @place.latitude)
+        @place.update_column(:longitude, @place.longitude)
+      end
+    end
+    show! do |format|
+      format.html {
+        @json = @place.to_gmaps4rails
+      }
+    end
+  end
+
+
   def create
     params[:place].merge!(:owner_id => current_subject.try(:actor_id), :relation_ids => Relation::Public.instance.id,
     	:author_id => current_subject.try(:actor_id), :user_author_id => current_user.id)

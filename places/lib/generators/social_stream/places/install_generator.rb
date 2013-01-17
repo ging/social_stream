@@ -1,5 +1,7 @@
 class SocialStream::Places::InstallGenerator < Rails::Generators::Base
   include Rails::Generators::Migration
+
+  hook_for :coordinates, :as => :config
   
   source_root File.expand_path('../templates', __FILE__)
 

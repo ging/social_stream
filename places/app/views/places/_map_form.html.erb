@@ -1,0 +1,7 @@
+<%= gmaps(:map_options => { :libraries => ["places"], :container_class => "map_container", :id => "map", :class => "gmaps4rails_map", :zoom => 1, :center_latitude => 20, :center_longitude => 0 })%>
+
+<%= yield :scripts %>
+
+<%= javascript_tag do %>
+  google.maps.event.addDomListener(window, 'load', initialize);
+<% end %>

@@ -9,7 +9,10 @@ class Place < ActiveRecord::Base
 
   before_save :format_website
 
-  #before_validation :geocode_address, :on => :create
+  geocoded_by :full_address   # can also be an IP address
+  before_validation :geocode  # auto-fetch coordinates
+
+  acts_as_gmappable :process_geocoding => false
 
   validates :title, :presence => true, :length => { :maximum => 50 }
   validates :latitude, :presence => true
@@ -26,9 +29,6 @@ class Place < ActiveRecord::Base
       self.address.save!
       self.address_id = address.id
     end
-    if (self.latitude == 0 && self.longitude == 0)
-      #geocode_address
-    end
     self.valid?
   end
 
@@ -37,6 +37,10 @@ class Place < ActiveRecord::Base
     if self.url.present? && !(self.url.start_with?("http://") || self.url.start_with?("https://"))
       self.url = "http://" + self.url
     end
+  end
+
+  def full_address
+    self.address.formatted
   end
 
 

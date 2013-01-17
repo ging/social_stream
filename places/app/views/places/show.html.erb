@@ -9,6 +9,10 @@
 
 		<%= render :partial => 'place_info' %>
 
+    <%= gmaps(:map_options => { :container_class => "map_container", :id => "map", :class => "gmaps4rails_map", :auto_zoom => false, :zoom => 16 }, :markers => {:data => @json} )%>
+          
+    <%= yield :scripts %>
+
 		<div class="tabbable">
 			<ul class="nav nav-tabs">
 		    <li class="active">

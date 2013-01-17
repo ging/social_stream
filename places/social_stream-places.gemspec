@@ -13,6 +13,8 @@ Gem::Specification.new do |s|
 
   # Gem dependencies
   s.add_runtime_dependency('social_stream-base', '~> 1.0.0')
+  s.add_runtime_dependency('gmaps4rails','~> 1.5.2')
+  s.add_runtime_dependency('geocoder','~> 1.1.6')
 
   # Development Gem dependencies
 end

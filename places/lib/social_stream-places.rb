@@ -1,5 +1,8 @@
 require 'social_stream-base'
 
+require 'gmaps4rails'
+require 'geocoder'
+
 module SocialStream
   module Views
   end
