@@ -215,6 +215,13 @@ es:
       forgot: "¿Olvidaste tu contraseña?"
       instructions: "Introduce el correo electrónico y te mandaremos instrucciones para cambiarlo"
       update: "Cambiar contraseña"
+  explore:
+    index: "Explorar"
+    participants: "Participantes"
+    files: "Recursos"
+    timeline: "Linea temporal"
+    tags: "Etiquetas"
+    search: "Buscar"
   follower:
     follower:
       title: "Seguidores"
@@ -497,8 +504,10 @@ es:
     confirm_delete: "¿Borrar este rol?"
     delete: "Borrar"
     edit: "Cambiar nombre"
+    list:
+      title: 'Roles'
     new: "+ Nuevo rol"
-    title: "Privacidad y roles"
+    title: "Privacidad"
   relation_public:
     name: "Público"
   representation:
