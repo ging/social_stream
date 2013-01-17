@@ -1,6 +1,6 @@
 require 'social_stream-base'
 
-require 'rack-oauth2'
+require 'rack/oauth2'
 
 module SocialStream
   module Oauth2Server
