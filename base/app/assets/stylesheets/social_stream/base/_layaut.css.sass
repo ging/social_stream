@@ -27,26 +27,35 @@
     vertical-align: bottom
 .dropdown
   margin-top: 7px
-    
-  .dropdown-toggle
-    margin-right: 5px
   .dropdown-menu
     margin: 6px -142px 0
     ul
       margin: 0px
-      li
+      .dropdown-submenu
+        a 
+          &:hover,
+          &:focus,
+          &:active
+            color: white
+            background-color: #2BC4D2
+            background-image: none
+    
+    .active
+      a,
+      &:focus
+        background-color: #2BC4D2
+
+    li
       a 
         &:hover,
         &:focus,
         &:active
           color: white
-          background-color: #000
+          background-color: #2BC4D2
           background-image: none
+    
+  .dropdown-toggle
+    margin-right: 5px
+  
 
-  .dropdown-submenu
-    li
-    a 
-      &:hover
-        color: white
-        background-color: #000
-        background-image: none
+  
