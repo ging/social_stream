@@ -3,7 +3,7 @@
 <%end%>
 
 <div id="welcome">
-  <div id="login" class="thumbnail">
+  <div id="relogin" class="right">
     <h2>
       <%= t('sign_in') %>
     </h2>
@@ -20,14 +20,16 @@
  
       <% if devise_mapping.rememberable? -%>
         <div id="remember">
-          <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+          <%= f.check_box :remember_me %> 
+          <%= f.label :remember_me %>
         </div>
       <% end -%>
-      <div id="devise_links">
-        <%= render :partial => "devise/shared/links" %>
-      </div>
-      <div class="btn_login">
-        <%= f.submit t('action.send'), :class =>"btn storePass" %>
+      
+      <%= f.submit t('action.send'), :class =>"btn storePass" %>
+      
+      <hr class="soften">
+      <div class="links">
+        <%= render :partial => "devise/shared/links" %>  
       </div>
     <% end %>
   </div>

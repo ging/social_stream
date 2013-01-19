@@ -4,36 +4,43 @@
 #wrapper_body
   @include grid-fluid(12, 0)
   margin:auto
-#frontpage, 
-  margin-left: 0px
-  margin-right: 0px
+#frontpage,
+#registration,
+#welcome
   .left
     @include makeColumn(6, 0)
     margin-left: 0px
     display: inline
     margin-top: 40px
+    padding-left: 30px
+    width: 430px
 
   .right
     @include makeColumn(5, 1)
     display:inline-block
-
-#registration
-  margin-left: 0px
-  margin-right: 0px
-  .left
-    @include makeColumn(6, 0)
-    margin-left: 0px
-    display: inline
-  .right
-    @include makeColumn(6, 0)
-    display:inline-block
       input
+        @include clearfix
         &[type="password"]
           width: 96%
-      .btn
-        margin-right: 10px
-
-
+    .btn
+      margin: 10px 25px 0 0 
+#welcome
+  .forgot
+    @include makeColumn(8, 4)
+    @include clearfix
+  .right
+    @include makeColumn(5, 5)
+#relogin
+  .btn
+    margin: -28px 25px 0 0 
+    float: right
+#remember
+  width: 150px
+  input
+    display: inline
+  label
+    display: inline-block
+    margin-top: 6px
 #header_search_form
   margin-bottom: 0px
 
@@ -47,3 +54,5 @@
 
 #login_data
   @include clearfix
+  .btn
+    margin-right: 20px
