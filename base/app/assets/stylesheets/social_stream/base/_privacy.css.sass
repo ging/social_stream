@@ -2,7 +2,6 @@
   .relation_list
     @include makeColumn(3, 0)
     padding-right: 5px
-    padding-top: 13px
     border-right: 1px solid #888
     input
       margin-right: 10px
@@ -50,8 +49,44 @@
       display: inline
     label
       display: inline-block
-  
-  .permission
+
+.postit 
+  text-align: center
+  width: 218px
+  min-height: 143px
+  padding: 0 20px 0 20px
+  position: relative
+  border: 1px solid #E8E8E8
+  border-top: 60px solid #fdfd86 !important
+  font-family: 'ArchitectsDaughter'
+  font-size: 20px
+  -webkit-border-bottom-right-radius: 60px 5px
+  -moz-border-bottom-right-radius: 60px 5px
+  -o-border-bottom-right-radius: 60px 5px
+  display: inline-block
+  background: rgb(255,255,136)
+  background: -moz-linear-gradient(-45deg, rgba(255,255,136,1) 77%, rgba(255,255,214,1) 100%)
+
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(77%,rgba(255,255,136,1)), color-stop(100%,rgba(255,255,214,1)))
+
+  background: -webkit-linear-gradient(-45deg, rgba(255,255,136,1) 77%,rgba(255,255,214,1) 100%)
+
+  background: -o-linear-gradient(-45deg, rgba(255,255,136,1) 77%,rgba(255,255,214,1) 100%)
+  background: -ms-linear-gradient(-45deg, rgba(255,255,136,1) 77%,rgba(255,255,214,1) 100%)
+
+  background: linear-gradient(-45deg, rgba(255,255,136,1) 77%,rgba(255,255,214,1) 100%)
+
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffff88', endColorstr='#ffff88',GradientType=0 )
+
+.rotate
+  -webkit-transform: rotate(-3deg)
+  -moz-transform: rotate(-3deg)
+  -o-transform: rotate(-3deg)
+  .rotate-int
+    -webkit-transform: rotate(-9deg)
+    -moz-transform: rotate(-9deg)
+    -o-transform: rotate(-9deg)
+
 
 .privacity-rules
   border-top: 1px solid #ccc

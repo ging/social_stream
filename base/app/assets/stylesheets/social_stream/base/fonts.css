@@ -9,3 +9,8 @@
   font-family:BreeSerif;
   src: url(social_stream/fonts/BreeSerif-Regular.ttf);
 }
+
+@font-face{
+  font-family:ArchitectsDaughter;
+  src: url(social_stream/fonts/ArchitectsDaughter.ttf);
+}
