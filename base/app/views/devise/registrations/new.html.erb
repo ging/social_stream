@@ -1,22 +1,14 @@
-<% content_for :headers do%>
-  <%= render :partial => 'layouts/devise_style' %>
-<%end%>
 
 <section id="registration"> 
   <article class="left">
-    <header>
-      <h2>
-        <% content_for :title do%>
-          <%= t('welcome', :site => t('site.name')) %>
-        <%end%>
-      </h2>
-    </header>
-    <%= render :partial => 'layouts/search' %>
-    <div class="thumbnail inline">
-      <header>
-        <h6>Busca usuarios, grupos, archivos...</h6>
-      </header>
-      <%= render :partial => 'frontpage/caracteristics' %>
+    <div class="welcome">
+    
+      <div class="message">
+        WELCOME
+        <span class="to">
+          TO
+        </span>
+      </div>
     </div>
   </article>
 
@@ -28,34 +20,34 @@
 
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
-    
-    <%= f.label :name %>
-    
-    <%= f.text_field :name, :class =>"form_tag"  %>
-    
-    <%= f.label :email %>
-    
-    <%= f.text_field :email, :class =>"form_tag"  %>
-    
-    <%= f.label :password %>
-    
-    <%= f.password_field :password, :class =>"form_tag", :id => "password"  %>
+    <div class="reg-labels">
+      <%= f.label :name %>
+      
+      <%= f.text_field :name, :class =>"form_tag"  %>
+      
+      <%= f.label :email %>
+      
+      <%= f.text_field :email, :class =>"form_tag"  %>
+      
+      <%= f.label :password %>
+      
+      <%= f.password_field :password, :class =>"form_tag", :id => "password"  %>
 
-    <div id="user_password_confirmation_label">
-      <%= f.label :password_confirmation %>
+      <div id="user_password_confirmation_label">
+        <%= f.label :password_confirmation %>
+      </div>
+      
+      <%= f.password_field :password_confirmation, :class =>"form_tag"  %>
+
+      <%= f.submit t('action.accept').capitalize,:class=>"btn pull-right"%>
     </div>
-    
-    <%= f.password_field :password_confirmation, :class =>"form_tag"  %>
-
-    <%= f.submit t('action.accept').capitalize,:class=>"btn pull-right"%>
-
     <hr class="soften">
 
     <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
       <%= link_to t('confirmation.not_received.long'), new_confirmation_path(resource_name) %><br />
       <% end -%>
     
-      <div id="devise_links">
+      <div class="options">
         <%= render :partial => "devise/shared/links" %>
       </div>
 

@@ -23,17 +23,17 @@
         &[type="password"]
           width: 96%
     .btn
-      margin: 10px 25px 0 0 
+      margin: 10px 25px 0 0
+      float: right 
 #welcome
   .forgot
     @include makeColumn(8, 4)
     @include clearfix
+    h2
+      margin-left: -20px
   .right
     @include makeColumn(5, 5)
-#relogin
-  .btn
-    margin: -28px 25px 0 0 
-    float: right
+
 #remember
   width: 150px
   input
@@ -52,6 +52,31 @@
   .thumbnail
     width: 100%
 
+#registration,
+#new_user,
+#welcome
+  .reg-labels,
+  .forgot-pass,
+  .sig-in
+    @include clearfix
+  .options
+    a
+      margin-right: 6px
+
+  .sig-in
+    .btn
+      margin-top: -20px
+#registration
+  .welcome
+    width: 300px
+    text-align: center
+    background-image: url(/assets/felpudo.png) no repeat center
+    .message
+      font-size: 50px
+      font-weight: bold
+      .to
+        font-size: 30px
+        margin-top: 10px
 #login_data
   @include clearfix
   .btn

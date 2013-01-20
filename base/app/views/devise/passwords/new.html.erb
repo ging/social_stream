@@ -15,17 +15,17 @@
   </article>
 
   <article class="right">
-      
-    <%= f.label :email %>
+    <div class="forgot-pass">
+      <%= f.label :email %>
 
-    <%= f.text_field :email, :class => "form_tag" %>
-      
-    <%= f.submit t('action.send'), :class =>"btn" %>
-
+      <%= f.text_field :email, :class => "form_tag" %>
+        
+      <%= f.submit t('action.send'), :class =>"btn" %>
+    </div>
     <hr class="soften">
-
-    <%= render :partial => "devise/shared/links" %>
-
+    <div class="options">
+      <%= render :partial => "devise/shared/links" %>
+    </div>
     <% end %>
   </article>
 </div>
