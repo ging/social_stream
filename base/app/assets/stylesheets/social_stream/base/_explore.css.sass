@@ -5,12 +5,12 @@
     button
       @include makeColumn(2, 0)
       font-size: 18px
-      color: #ccc
+      color: $grayLighter
       width: 157px
       &:hover
-        color: #888
+        color: $grayLight
     .active
-      color: #888
+      color: $grayLight
 
   section
     @include clearfix
@@ -45,7 +45,7 @@
                 font-size: 14px
                 font-weight: bold
             span
-              color: #ccc
+              color: $grayLighter
           .well-small
             width: 30px
             float: right

@@ -13,8 +13,8 @@ $black:                 #000 !default;
 $grayDarker:            #222 !default;
 $grayDark:              #333 !default;
 $gray:                  #555 !default;
-$grayLight:             #999 !default;
-$grayLighter:           #eee !default;
+$grayLight:             #888 !default;
+$grayLighter:           #ccc !default;
 $white:                 #fff !default;
 
 
@@ -38,7 +38,7 @@ $textColor:             $grayDark !default;
 
 // Links
 // -------------------------
-$linkColor:             #08c !default;
+$linkColor:             #0088cc !default;
 $linkColorHover:        darken($linkColor, 15%) !default;
 
 
