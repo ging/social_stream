@@ -12,4 +12,7 @@
     display: inline
   
 
-@mixin gradient-vertical($startColor: #fff, $endColor: #fff) 
+@mixin makeColumnoMargin($columns:1, $offset: 0) 
+  float: left
+  margin-left: 0px
+  width: ($gridColumnWidth * $columns) + ($gridGutterWidth * ($columns - 1))

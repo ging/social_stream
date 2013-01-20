@@ -79,13 +79,9 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffff88', endColorstr='#ffff88',GradientType=0 )
 
 .rotate
-  -webkit-transform: rotate(-3deg)
-  -moz-transform: rotate(-3deg)
-  -o-transform: rotate(-3deg)
+  @include rotate(-3deg)
   .rotate-int
-    -webkit-transform: rotate(-9deg)
-    -moz-transform: rotate(-9deg)
-    -o-transform: rotate(-9deg)
+    @include rotate(-9deg)
 
 
 .privacity-rules
