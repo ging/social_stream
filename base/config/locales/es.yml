@@ -494,6 +494,7 @@ es:
               negative: "NO PODRÁN leer las publicaciones que aparezcan en tu muro, salvo las que marques como públicas"
     of_relation:
       choose: "Permisos para <strong>%{name}</strong>"
+    postit: "Create new roles and manage your permissions"
   privacy:
     intro: "Los contactos en <strong>%{relation}</strong>:"
     rule:
