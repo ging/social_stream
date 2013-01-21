@@ -9,7 +9,7 @@
   .left
     @include makeColumnoMargin(6, 0)
     display: inline
-    margin-top: 40px 0 0 30px
+    margin: 40px 0 0 30px
     width: 430px
 
   .right
@@ -20,6 +20,7 @@
         &[type="password"]
           width: 96%
     .btn
+      @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25)) 
       margin: 10px 25px 0 0
       float: right 
 #welcome
@@ -67,10 +68,10 @@
   .welcome
     text-align: center
     .message
-      @include opacity (0.56)
+      @include opacity (1)
       font-size: 60px
       font-weight: bold
-      margin-top: -219px 30px 0
+      margin: -219px 30px 0
       .to
         font-size: 40px
         margin-top: 10px
@@ -82,4 +83,4 @@
 #login_data
   @include clearfix
   .btn
-    margin-right: 20px
+    @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25)) 

@@ -10,53 +10,45 @@
     //margin-left: -1px;
     @include border-radius(0)
 
-
   .fc-button.fc-state-active 
-    @extend .btn.active
+    @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25)) 
 
 
   .fc-button.fc-state-disabled 
     @extend .btn.disabled
+    @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25)) 
 
 
   .fc-button.fc-state-disabled:active 
     @include box-shadow(none)
 
 
+
   .fc-button.fc-corner-left 
     // .btn-group > .btn:first-child
     margin-left: 0
-    -webkit-border-top-left-radius: 4px
-    -moz-border-radius-topleft: 4px
-    border-top-left-radius: 4px
-    -webkit-border-bottom-left-radius: 4px
-    -moz-border-radius-bottomleft: 4px
-    border-bottom-left-radius: 4px
-
+    @include border-top-left-radius (4px)
+    @include border-bottom-left-radius (4px)
 
   .fc-button.fc-corner-right 
     // .btn-group > .btn:last-child, .btn-group > .dropdown-toggle
-    -webkit-border-top-right-radius: 4px
-    -moz-border-radius-topright: 4px
-    border-top-right-radius: 4px
-    -webkit-border-bottom-right-radius: 4px
-    -moz-border-radius-bottomright: 4px
-    border-bottom-right-radius: 4px
+    @include border-top-right-radius (4px)
+    @include border-bottom-right-radius (4px)
 
   .fc-event-inner
     background: $black
-    @include opacity (0.6)
 
-
+  .fc-event-inner,
   .fc-other-month 
-    @include opacity (1)
+    @include opacity (80)
 
   .fc-day-number
     float: right
-    pointer: cursor
+    pointer: pointer
     padding: 1px 3px 0 0
     min-height: 89px
-  
+
+
   .fc-header-right,
   .fc-header-left,
   .fc-header-center
@@ -107,7 +99,7 @@
       @include border-radius(5px)
       border: 1px solid $grayLighter
     .other_month
-      @include opacity (0.6)
+      @include opacity (70)
 
 #month_bottom
   text-align: center
@@ -117,3 +109,10 @@
   a 
     color: $gray
     text-decoration: none 
+.fc-content
+  .fc-cell-overlay,
+    @include opacity (40)
+    color: $blue
+
+.fc-state-highlight
+  background-color: rgba(4,156,219,0.2)

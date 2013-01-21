@@ -24,7 +24,7 @@
       margin-left: 32px
 
 #relation_custom_name
-  @include size (150px, auto) 
+  @include size (auto, 150px) 
   margin: 0 10px 0 15px
 
 
@@ -32,6 +32,11 @@
   a 
     float: right
     margin-right: 10px
+  .new_relation_custom
+    .btn
+      @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25)) 
+      float: right
+      margin: 10px 41px 0 0
     
 
 #new_relation_input_block

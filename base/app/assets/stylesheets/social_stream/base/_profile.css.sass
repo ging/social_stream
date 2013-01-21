@@ -76,12 +76,19 @@
   .comunication-info,
   .experience,
   .avatar
+    .btn
+      @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25)) 
+      float: right
+      margin: 10px 33px 0 0
     .update
       background-color: whitesmoke
-      padding: 2px 0px 1px 30px
+      padding: 2px 0px 40px 30px
       h6
         label
           display: inline
       textarea
         margin-top: 20px
+  .personal
+    .btn
+      margin-top: -8px
 

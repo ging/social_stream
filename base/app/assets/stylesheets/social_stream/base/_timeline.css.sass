@@ -52,11 +52,8 @@
         .post_time_ago
           display: inline-block
           font-size: 11px
-          color: #444
-        .to_comment
-          display: inline-block
-          font-size: 12px
-          margin-left: 5px
+          color: $gray
+        .to_comment,
         .to_like
           display: inline-block
           font-size: 12px
@@ -109,6 +106,11 @@
 
 #new_comment
   margin-left: 20px
+  div
+    .btb
+      @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25))
+      float: right
+      margin-right: 19px
 
 .new_comment
   .avatar
@@ -121,12 +123,7 @@
       width: 40px 
     h6
       margin-top: 69px
-
-    div
-      input
-        &[type="submit"]
-          float: right
-          margin-right: 19px
+    
 
 
 

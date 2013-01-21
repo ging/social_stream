@@ -6,12 +6,14 @@
 #cancel_account
   .settings_content
     @include border-radius(5px) 
-    padding: 10px 0px 10px 38px
+    padding: 10px 0px 46px 38px
     background: whiteSmoke
     form
       margin-bottom: 0px
     .btn
-      margin-left: 9px 0 0 368px
+      @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25))
+      float: right
+      margin-right: 37px
     .options
       @include border-radius(3px) 
       margin: 4px 0px

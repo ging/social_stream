@@ -20,8 +20,9 @@
   width: 220px
   display: inline-block
   .avatar
-    @include makeColumnoMargin(1, 0)
+    @include makeColumn(1, 0)
     display: inline
+    margin-left: -5px
     img
       @include border-radius(5px)
       width: 45px 
@@ -29,7 +30,7 @@
   .data
     @include makeColumn(2, 0)
     display: inline-block
-    margin-bottom: 0 0 16px -7px
+    margin: 0 0 16px -7px
     .name
       color: $black
       .x
