@@ -1,24 +1,16 @@
 @import "jplayer.blue.monday"
 
-
-
 div.jp-audio
-  @include makeColumn(6, 0)
+  @include makeColumnoMargin(6, 0)
   widht: auto
-  margin-left: 0px
-
-
-
 
 #jp_interface_audio_290
   height: 118px
   border: none
 
 div.jp-progress
-  top: 0px !important
-  left: 0px !important
-  width: 100% !important
-  height: 75px !important
+  @include size (100%, 75px) !important
+  @include centered
 
   div.jp-seek-bar
     background: none
