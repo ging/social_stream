@@ -1,17 +1,15 @@
 .wrapper
   @include grid-fluid(12, 0)
-  margin:auto
 #wrapper_body
   @include grid-fluid(12, 0)
-  margin:auto
+
 #frontpage,
 #registration,
 #welcome
   .left
     @include makeColumnoMargin(6, 0)
     display: inline
-    margin-top: 40px
-    padding-left: 30px
+    margin-top: 40px 0 0 30px
     width: 430px
 
   .right
@@ -69,12 +67,10 @@
   .welcome
     text-align: center
     .message
+      @include opacity (0.56)
       font-size: 60px
       font-weight: bold
-      margin-left: 30px
-      margin-right: 30px
-      margin-top: -219px
-      opacity: 0.56
+      margin-top: -219px 30px 0
       .to
         font-size: 40px
         margin-top: 10px

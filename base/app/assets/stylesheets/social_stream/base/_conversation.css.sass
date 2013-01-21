@@ -15,7 +15,6 @@
   @include makeColumnoMargin(7, 0)
   color: $gray
   display: inline-block
-
   margin-bottom: 15px
   .subject
     font-weight: normal
@@ -24,7 +23,7 @@
       font-size: 15px
       font-weight: bold
       &:hover
-        opacity: 0.4
+        @include opacity (0.4)
         text-decoration: none
   .briefing
     white-space: nowrap
@@ -36,13 +35,11 @@
     color: $gray
     font-size: 11px
     display: inline
-    margin-left: 4px
-    margin-right: 13px
+    margin: 0 13px 0 4px
 
   .action
     float: right
-    margin-top: -20px
-    margin-rigth: 10px
+    margin-top: -20px 10px 0 0
 
 #conversation
   .new_message
@@ -54,10 +51,10 @@
     width: 694px !important
 
 .conversation
-  opacity: 0.5
+  @include opacity (0.5)
 
 .unread
-  opacity: 1
+  @include opacity (1)
 
 .conversation_full
   h3

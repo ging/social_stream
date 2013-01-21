@@ -24,17 +24,17 @@
       margin-left: 32px
 
 #relation_custom_name
-  margin-left: 15px
-  width: 150px
-  margin-right: 10px
+  @include size (150px, auto) 
+  margin: 0 10px 0 15px
+
 
 #new_relation
   a 
     float: right
     margin-right: 10px
     
-#new_relation_input_block
 
+#new_relation_input_block
   .btn
     margin-left: 32px
 
@@ -50,33 +50,21 @@
     label
       display: inline-block
 
-.postit 
+.postit
+  @include gradient-directional(rgba(255,255,214,1), rgba(255,255,136,1), 94deg)
+  @include border-radius (60px)
+  @include size (154px, 225px) 
+  @include box-shadow (19px 12px 16px 0px rgba(50, 50, 50, 0.1))
   text-align: center
-  width: 218px
-  min-height: 143px
   padding: 0 20px 0 20px
   position: relative
   border: 1px solid #E8E8E8
   border-top: 60px solid #fdfd86 !important
-  font-family: 'ArchitectsDaughter'
+  font-family: $handwriteFontFamily
   font-size: 20px
-  -webkit-border-bottom-right-radius: 60px 5px
-  -moz-border-bottom-right-radius: 60px 5px
-  -o-border-bottom-right-radius: 60px 5px
   display: inline-block
-  background: rgb(255,255,136)
-  background: -moz-linear-gradient(-45deg, rgba(255,255,136,1) 77%, rgba(255,255,214,1) 100%)
-
-  background: -webkit-gradient(linear, left top, right bottom, color-stop(77%,rgba(255,255,136,1)), color-stop(100%,rgba(255,255,214,1)))
-
-  background: -webkit-linear-gradient(-45deg, rgba(255,255,136,1) 77%,rgba(255,255,214,1) 100%)
-
-  background: -o-linear-gradient(-45deg, rgba(255,255,136,1) 77%,rgba(255,255,214,1) 100%)
-  background: -ms-linear-gradient(-45deg, rgba(255,255,136,1) 77%,rgba(255,255,214,1) 100%)
-
-  background: linear-gradient(-45deg, rgba(255,255,136,1) 77%,rgba(255,255,214,1) 100%)
-
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffff88', endColorstr='#ffff88',GradientType=0 )
+  
+  
 
 .rotate
   @include rotate(-3deg)

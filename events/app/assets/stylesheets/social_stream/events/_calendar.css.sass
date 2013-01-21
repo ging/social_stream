@@ -44,12 +44,12 @@
     border-bottom-right-radius: 4px
 
   .fc-event-inner
-    background: black
-    opacity: 0.6
+    background: $black
+    @include opacity (0.6)
 
 
   .fc-other-month 
-    opacity: 1
+    @include opacity (1)
 
   .fc-day-number
     float: right
@@ -95,21 +95,19 @@
 
 #days
   padding: 5px
-
   tr
-  
     td
       padding-left: 7px
       padding-right: 7px
       text-align: right
       a
-        color: #666
+        color: $gray
     .busy
       font-weight: bold
       @include border-radius(5px)
-      border: 1px solid #ccc
+      border: 1px solid $grayLighter
     .other_month
-      opacity: 0.6
+      @include opacity (0.6)
 
 #month_bottom
   text-align: center
@@ -117,5 +115,5 @@
   border-top: 1px solid #f1f1f1  
   margin-top: 10px
   a 
-    color: #666
+    color: $gray
     text-decoration: none 

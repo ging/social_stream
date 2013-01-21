@@ -66,18 +66,17 @@
           font-size: 12px
           margin-left: 7px
           
-
         .tooltip
+          @include opacity (1)
+          @include border-radius(5px)
           background: $gray
           color: whitesmoke
-          @include border-radius(5px)
-          opacity: 1
-          margin-top: 26px
-          margin-left: 53px
+          margin-top: 26px 0px 0px 53px
         
         textarea
           resize: none
           width: 100%
+
       .media,
       .child
         @include border-radius(5px)
@@ -87,8 +86,6 @@
         a
           .avatar
             width: 40px !important
-
-     
 
       .hidden_comments
         float: right
@@ -103,8 +100,6 @@
     .likes
       margin-left: 66px !important
       font-size: 12px
-
-
         
 
 #comment_text

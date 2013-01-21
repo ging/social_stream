@@ -8,8 +8,7 @@
     padding: 5px 4px
     margin-right: 10px
   .avatar
-    @include makeColumn(1, 0)
-    margin-left: 0
+    @include makeColumnoMargin(1, 0)
     display: inline
     img
       @include border-radius(5px)
@@ -18,8 +17,7 @@
   .data
     @include makeColumn(2, 0)
     display: inline-block
-    margin-bottom: 16px
-    margin-left: -7px
+    margin: 0 0 16px -7px
     .name
       color: $black
       .x

@@ -17,7 +17,7 @@
         color: $grayLight
         background: none
         &:hover
-          color: #444
+          color: $gray
 
     .deleted
       background-color: rgb(249,255,255) !important
@@ -45,14 +45,10 @@
         font-size: 12px
         margin-bottom: 1px
         &:hover
+          @include box-shadow (0px 0px 4px rgba(0, 0, 0, 0.4))
           color: $gray
           background: none repeat scroll 0 0 rgb(239,255,255)
           border: solid 1px rgb(239,255,255)
-          box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4)
-          /*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
-          /*All filters must be placed together*/
-          -moz-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4)
-          -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4)
 
   .send
     float: right

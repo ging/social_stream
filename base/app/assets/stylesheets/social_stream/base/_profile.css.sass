@@ -7,11 +7,11 @@
       display: inline-block
 
     .briefing
-      color: #555
+      color: $gray
       .empty
+        @include border-radius (4px)
         background-color: #D9EDF7
         border: 1px solid #BCE8F1
-        border-radius: 4px 4px 4px 4px
         color: #3A87AD
         margin: 4px 0 10px 19px
         padding: 7px 15px 7px 14px
@@ -22,10 +22,10 @@
         font-size: 17px
         font-weight: bold
       p
+        @include border-radius (15px)
         margin: -15px 11px 0 5px
         background-color: #F9F9F9
         border: 0 solid #F9F9F9
-        border-radius: 15px 15px 15px 15px
         padding: 12px 10px 11px 27px
         widht: 325px
 
@@ -39,7 +39,7 @@
           ul
             width: auto !important
             li
-              @include border-radius(5px) 
+              @include border-radius(5px)
               background: none repeat scroll 0 0 $white
               width: auto
               color: $grayLight
@@ -48,14 +48,11 @@
               font-size: 12px
               margin-bottom: 1px
               &:hover
-                color: #444
+                @include box-shadow (0px 0px 4px rgba(0, 0, 0, 0.4)) 
+                color: $gray
                 background: none repeat scroll 0 0 rgb(239,255,255)
                 border: solid 1px rgb(239,255,255)
-                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4)
-                /*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
-                /*All filters must be placed together*/
-                -moz-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4)
-                -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4)
+             
         
         .maininput
           font-size: 12px
