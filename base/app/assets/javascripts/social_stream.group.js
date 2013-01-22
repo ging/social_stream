@@ -1,7 +1,6 @@
 //= require jqcloud-0.1.3
 //= require jquery.validate
 //= require jquery.ba-url
-//= require ajax.paginate
 
 SocialStream.Group = (function(SS, $, undefined){
 	var new_Callbacks = [];

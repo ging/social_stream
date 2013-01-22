@@ -1,5 +1,4 @@
 // require jquery.ba-url
-// require ajax.paginate
 
 SocialStream.Contact = (function($, SS, undefined) {
 	var indexCallbacks = [];
