@@ -47,6 +47,8 @@ require 'thinking-sphinx/social_stream'
 require 'sass-rails'
 # Bootstrap for Sass
 require 'bootstrap-sass'
+# Customize ERB views
+require 'deface'
 # Autolink text blocks
 require 'rails_autolink'
 # SocialCheesecake
