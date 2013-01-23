@@ -2,30 +2,30 @@
   <%= render :partial => 'layouts/devise_style' %>
 <%end%>
 <div id="welcome">
-  <div id="login" class="block">
+  <article class="forgot">
     <h2>
       <%= t('devise.passwords.forgot') %>
     </h2>
 
     <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
       <%= devise_error_messages! %>
-      <div class="instructions">
-        <%= t('devise.passwords.instructions') %>
-      </div>
+    <h4>
+      <%= t('devise.passwords.instructions') %>
+    </h4>
+  </article>
 
-      <div class="form_label"<%= f.label :email %>
-      </div>
-      
-      <div class="form_field">
-        <%= f.text_field :email, :class => "form_tag" %>
-      </div>
+  <article class="right">
+    <div class="forgot-pass">
+      <%= f.label :email %>
 
-      <div id="devise_links">
-        <%= render :partial => "devise/shared/links" %>
-      </div>
-
+      <%= f.text_field :email, :class => "form_tag" %>
+        
       <%= f.submit t('action.send'), :class =>"btn" %>
-
+    </div>
+    <hr class="soften">
+    <div class="options">
+      <%= render :partial => "devise/shared/links" %>
+    </div>
     <% end %>
-  </div>
+  </article>
 </div>

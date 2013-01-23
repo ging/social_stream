@@ -13,15 +13,15 @@ $black:                 #000 !default;
 $grayDarker:            #222 !default;
 $grayDark:              #333 !default;
 $gray:                  #555 !default;
-$grayLight:             #999 !default;
-$grayLighter:           #eee !default;
+$grayLight:             #888 !default;
+$grayLighter:           #ccc !default;
 $white:                 #fff !default;
 
 
 // Accent colors
 // -------------------------
 $blue:                  #049cdb !default;
-$blueDark:              #0064cd !default;
+$blueDark:              #0480be !default;
 $green:                 #46a546 !default;
 $red:                   #9d261d !default;
 $yellow:                #ffc40d !default;
@@ -38,7 +38,7 @@ $textColor:             $grayDark !default;
 
 // Links
 // -------------------------
-$linkColor:             #08c !default;
+$linkColor:             #0088cc !default;
 $linkColorHover:        darken($linkColor, 15%) !default;
 
 
@@ -46,7 +46,7 @@ $linkColorHover:        darken($linkColor, 15%) !default;
 // -------------------------
 $sansFontFamily:        "OpenSans", Arial, sans-serif;
 $serifFontFamily:       "BreeSerif", Times New Roman, Times, serif !default;
-$monoFontFamily:        "Courier New", monospace !default;
+$handwriteFontFamily:   "ArchitectsDaughter", Courier New, monospace !default;
 
 $baseFontSize:          14px !default;
 $baseFontFamily:        $sansFontFamily;

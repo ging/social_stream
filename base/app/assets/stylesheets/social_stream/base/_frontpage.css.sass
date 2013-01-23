@@ -1,39 +1,44 @@
 .wrapper
   @include grid-fluid(12, 0)
-  margin:auto
 #wrapper_body
   @include grid-fluid(12, 0)
-  margin:auto
-#frontpage, 
-  margin-left: 0px
-  margin-right: 0px
+
+#frontpage,
+#registration,
+#welcome
   .left
-    @include makeColumn(6, 0)
-    margin-left: 0px
+    @include makeColumnoMargin(6, 0)
     display: inline
-    margin-top: 40px
+    margin: 40px 0 0 30px
+    width: 430px
 
   .right
     @include makeColumn(5, 1)
     display:inline-block
-
-#registration
-  margin-left: 0px
-  margin-right: 0px
-  .left
-    @include makeColumn(6, 0)
-    margin-left: 0px
-    display: inline
-  .right
-    @include makeColumn(6, 0)
-    display:inline-block
       input
+        @include clearfix
         &[type="password"]
           width: 96%
-      .btn
-        margin-right: 10px
+    .btn
+      @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25)) 
+      margin: 10px 25px 0 0
+      float: right 
+#welcome
+  .forgot
+    @include makeColumn(8, 4)
+    @include clearfix
+    h2
+      margin-left: -20px
+  .right
+    @include makeColumn(5, 5)
 
-
+#remember
+  width: 150px
+  input
+    display: inline
+  label
+    display: inline-block
+    margin-top: 6px
 #header_search_form
   margin-bottom: 0px
 
@@ -45,5 +50,37 @@
   .thumbnail
     width: 100%
 
+#registration,
+#new_user,
+#welcome
+  .reg-labels,
+  .forgot-pass,
+  .sig-in
+    @include clearfix
+  .options
+    a
+      margin-right: 6px
+
+  .sig-in
+    .btn
+      margin-top: -20px
+#registration
+  .welcome
+    text-align: center
+    .message
+      @include opacity (1)
+      font-size: 60px
+      font-weight: bold
+      margin: -219px 30px 0
+      .to
+        font-size: 40px
+        margin-top: 10px
+        line-height: 94px
+  .right
+    margin-top: 160px
+  .left
+    margin-top: 4px
 #login_data
   @include clearfix
+  .btn
+    @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25)) 

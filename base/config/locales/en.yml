@@ -478,6 +478,7 @@ en:
               negative: "Activities WILL NOT BE notified to contacts at %{name}"
     of_relation:
       choose: "Permissions in <strong>%{name}</strong> role"
+    postit: "Manage the permissions of your contacts and create new roles"
   privacy:
     intro: "Contacts at <strong>%{relation}</strong> level are only allowed to:"
     rule:

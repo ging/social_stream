@@ -1,27 +1,24 @@
 .content-full
-  @include makeColumn(12, 0)
-  margin-left: 0
+  @include makeColumnoMargin(12, 0)
   .btn-group
-    clear: both
+    @include clearfix
     button
       @include makeColumn(2, 0)
       font-size: 18px
-      color: #ccc
+      color: $grayLighter
       width: 157px
       &:hover
-        color: #888
+        color: $grayLight
     .active
-      color: #888
+      color: $grayLight
 
   section
     @include clearfix
     .left
-      @include makeColumn(6, 0)
+      @include makeColumnoMargin(6, 0)
       display: inline
-      margin-left: 0px
     .center
-      @include makeColumn(12, 0)
-      margin-left: 0px
+      @include makeColumnoMargin(12, 0)
     .right
       @include makeColumn(5, 0)
       display: inline-block
@@ -48,7 +45,7 @@
                 font-size: 14px
                 font-weight: bold
             span
-              color: #ccc
+              color: $grayLighter
           .well-small
             width: 30px
             float: right

@@ -6,8 +6,7 @@
   .add-new
     width: 90px
     display: inline-block
-    margin-top: 3px
-    margin-left: -14px
+    margin: 3px 0 0 -14px
   .tab-content
     @include makeColumn(10, 0)
     padding-bottom: 100px
@@ -17,17 +16,15 @@
         @include makeColumn(3, 0)
         margin-left: 19px
         .thumb
-          @include makeColumn(1, 0)
+          @include makeColumnoMargin(1, 0)
           display: inline
           margin-top: 14px
-          margin-left: 0px
         .brifing
-          @include makeColumn(2, 0)
+          @include makeColumnoMargin(2, 0)
           display: inline-block
-          margin-left: 0px
         .author
           margin-top: -10px
           font-size: 13px
       .actions
-        color: #888
+        color: $gray
         font-size: 12px

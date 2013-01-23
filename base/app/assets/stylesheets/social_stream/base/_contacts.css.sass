@@ -1,9 +1,5 @@
 .loading
   width: auto
-  height: 83px
-  background-color: white
-  z-index: 2
-  position: relative
   
 #sent,
 #received
@@ -12,8 +8,7 @@
     padding: 5px 4px
     margin-right: 10px
   .avatar
-    @include makeColumn(1, 0)
-    margin-left: 0
+    @include makeColumnoMargin(1, 0)
     display: inline
     img
       @include border-radius(5px)
@@ -22,23 +17,21 @@
   .data
     @include makeColumn(2, 0)
     display: inline-block
-    margin-bottom: 16px
-    margin-left: -7px
+    margin: 0px 0px 16px -7px
     .name
-      color: #000
+      color: $black
       .x
         font-size: 12px
-        color: black
+        color: $black
         a
           float: right
           text-decoration: none
           margin-top: -19px
     .info
       font-size: 12px
-      color: #888
+      color: $grayLight
   .add
-    @include makeColumn(3, 0)
-    margin-left: 0
+    @include makeColumnoMargin(3, 0)
     font-size: 10px
     z-index: 1
     .edit_contact

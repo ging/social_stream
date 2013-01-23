@@ -3,27 +3,26 @@
 
   .wall_input
     @include border-radius(7px) 
-    background-color: #ccc
+    background-color: $grayLighter
     padding: 5px 33px 5px 33px
     margin-bottom: 20px
 
 
 
     input
-      @include makeColumn(6, 0)
+      @include makeColumnoMargin(6, 0)
       margin-top: 8px
-      margin-left: 0px
       display: block
       &[type="submit"]
-        width: auto
+        @include size (auto, auto)
+        @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25)) 
         padding: 3px 11px 4px 11px
         float: right
 
 
       &[type="checkbox"]
         width: 30px
-        margin-left: 0px
-        margin-top: 3px
+        margin: 3px 0px 0px 0px
         
 
     .new_document
@@ -41,11 +40,10 @@
             padding: 0px !important
             label
               margin-left: 0px
-              padding-left: 0px !important
-              padding-right: 16px
+              padding: 0px 16px 0px 0px!important
               &:hover
                 background: rgba(0,232,232,0.3)
-                color: white
+                color: $white
 #flash
   @include makeColumn(10, 0)
 

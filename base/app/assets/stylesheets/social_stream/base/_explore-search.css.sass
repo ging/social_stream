@@ -12,37 +12,31 @@
     .btn-large
       margin-top: -6px
     .advanced-options
-      @include makeColumn(2, 0)
+      @include makeColumnoMargin(2, 0)
       display: inline
-      margin-left: 0px
+      
       .menuv 
         @include border-radius(7px)
         border: 1px solid #f1f1f1 
         width: auto
         margin-left: none
-        padding-top: 10px
-        padding-left: 10px
-        padding-bottom: 10px
+        padding-top: 10px 0 10px 10px
         hr
           margin: 7px 5px 0px -5px
         ul 
           margin-top: 7px
           li 
             margin-left: 1px
-            padding-bottom: 0px
-            padding-top: 0px
+            padding: 0px 0px
             font-size: 14px
             ol 
               margin-left: 2px
-              padding-bottom: 0px
-              padding-top: 0px
-
+              padding: 0px 0px
               li
-                margin-top: -7px
-                margin-bottom: 8px
+                margin-top: -7px 0 8px 0
                 padding-bottom: 0px
                 a
-                  color: #ccc
+                  color: $grayLighter
 
         a 
           margin-top: 8px
@@ -52,13 +46,12 @@
           cursor: pointer
           &:hover 
             background: #F9F9F9
-            color: #0088cc
+            color: $linkColor
             font-size: 13px
       .advanced 
-        color: #0088cc
+        color: $linkColor
         font-size: 13px
-        margin-left: 0px !important
-        margin-top: 8px
+        margin-left: 8px 0 0 0px !important
         text-decoration: none
         display: block
         padding: 3px 6px
@@ -74,8 +67,8 @@
           margin-top: 20px
           a
             cursor: pointer
-            color: #ccc
+            color: $grayLighter
             &:hover
-              color: #0088cc
+              color: $linkColor
 
 

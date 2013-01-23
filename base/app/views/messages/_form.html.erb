@@ -34,8 +34,6 @@
 		<%= text_area_tag :body, nil,:rows =>6, :cols=> 53, :maxlength => 5000 %>
 	</div>
 	
-	<div class="send" >
-		<%= submit_tag t('mailboxer.send'), :name => :send_message, :class => "btn" %>
-	</div
+	<%= submit_tag t('mailboxer.send'), :name => :send_message, :class => "btn pull-right" %>
 
 <% end %>

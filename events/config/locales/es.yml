@@ -28,6 +28,8 @@ es:
       unfollow: "Desapuntar"
     calendar: "Calendario"
     confirm_delete: "¿Borrar evento?"
+    modal:
+      view_in_calendar: "Ver en el calendario"
     name: "evento"
     new:
       title: "Nuevo evento"

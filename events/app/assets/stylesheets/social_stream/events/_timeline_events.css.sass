@@ -3,8 +3,7 @@
     .date
       @include makeColumn(1, 0)
       display: inline
-      margin-top: 8px
-      margin-left: -3px
+      margin-top: 8px 0 0 -3px
       .day,
       .month,
       .hour
@@ -21,9 +20,8 @@
       .hour
         font-size: 15px
     .poster
-      @include makeColumn(2, 0)
+      @include makeColumnoMargin(2, 0)
       display: inline-block
-      margin-left: 0px
     .details
       @include makeColumn(4, 0)
       display: inline-block
@@ -35,7 +33,7 @@
       .frequency
         font-size: 12px
       .frequency
-        color: #999
+        color: $grayLight
       .follow
         margin-top: -10px
 

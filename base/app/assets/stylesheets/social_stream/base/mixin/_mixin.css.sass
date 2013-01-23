@@ -9,7 +9,14 @@
     margin-left: 4em
     display: inline
     li
-    display: inline
+      display: inline
   
 
-@mixin gradient-vertical($startColor: #fff, $endColor: #fff) 
+@mixin makeColumnoMargin($columns:1, $offset: 0) 
+  float: left
+  margin-left: 0px
+  width: ($gridColumnWidth * $columns) + ($gridGutterWidth * ($columns - 1))
+
+@mixin centered
+  margin-left: 0px
+  margin-right: 0px

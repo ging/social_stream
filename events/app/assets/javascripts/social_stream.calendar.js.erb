@@ -9,7 +9,7 @@ SocialStream.Calendar = (function(SS, $, undefined){
   var eventElementRegExp = new RegExp('day_(..?)_(..?)_(..?.?.?)');
 
   var eventElementMatch = function(el){
-    return eventElementRegExp.exec(el.id);
+    return eventElementRegExp.exec($(el).attr('id'));
   }
 
   var eventElementDate = function(el) {
@@ -67,30 +67,52 @@ SocialStream.Calendar = (function(SS, $, undefined){
         domEl.addClass("busy");
       }
 
-      element().find('.busy').each(function(i, el) {
-        $(el).popover({
-          // use 'inside left' to hoverable it
-          placement: 'left',
-          trigger: 'hover',
-          title: busyTitle,
-          content: busyContent
-        });
+      element().find('.busy').click(function(e) {
+        e.preventDefault();
+
+        showBusyModal($(this));
       });
     })
   }
 
-  var busyTitle = function(){
-    var date = eventElementDate(this);
+  var showBusyModal = function(el) {
+    if (! el.attr('data-loaded')) {
+      createBusyModal(el);
+    }
+
+    $('#modal-' + el.attr('id')).modal('show');
+  };
+
+  var createBusyModal = function(el) {
+    var modal = $('#modal-sidebar_calendar').clone();
+
+    modal.attr('id', 'modal-' + el.attr('id'));
+    modal.find(".modal-header h3").html(busyTitle(el));
+    modal.find("button.view-calendar").click(function() {
+      document.location.href = el.find('a').attr('href');
+    });
+
+    loadBusyContent(el);
+
+    modal.appendTo($('body'));
+
+    modal.modal();
+
+    el.attr('data-loaded', true);
+  };
+
+  var busyTitle = function(el){
+    var date = eventElementDate(el);
 
     return I18n.t('event.popover.title', { date: I18n.l('date.formats.long', date) } );
   };
 
-  var busyContent = function(){
-    var startDate = eventElementDate(this)
+  var loadBusyContent = function(el){
+    var startDate = eventElementDate(el)
     startDate.setHours(0);
     startDate.setMinutes(0);
     startDate.setSeconds(0);
-    var endDate   = eventElementDate(this)
+    var endDate   = eventElementDate(el)
 
     $.ajax({
       dataType: "script",
@@ -99,11 +121,9 @@ SocialStream.Calendar = (function(SS, $, undefined){
         // use UNIX timestamps
         start: Math.round(startDate.getTime() / 1000),
         end:   Math.round(endDate.getTime() / 1000),
-        tipsy: this.id
+        day: el.attr('id')
       }
     });
-
-    return '<div id="tipsy-' + this.id + '"><img src="<%= asset_path('loading.gif') %>"></div>';
   }
 
   return {

@@ -27,6 +27,8 @@ en:
       unfollow: "Unfollow"
     calendar: "Calendar"
     confirm_delete: "Delete event?"
+    modal:
+      view_in_calendar: "View in calendar"
     name: "event"
     new:
       title: "New event"

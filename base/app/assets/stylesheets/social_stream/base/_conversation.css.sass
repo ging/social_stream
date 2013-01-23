@@ -12,10 +12,9 @@
   header
     display: inline-block
 .content_right
-  @include makeColumn(7, 0)
-  color: #666666
+  @include makeColumnoMargin(7, 0)
+  color: $gray
   display: inline-block
-  margin-left: 0px
   margin-bottom: 15px
   .subject
     font-weight: normal
@@ -24,25 +23,23 @@
       font-size: 15px
       font-weight: bold
       &:hover
-        opacity: 0.4
+        @include opacity (0.4)
         text-decoration: none
   .briefing
     white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
-    color: #666666
+    color: $gray
   
   .date
-    color: #666666
+    color: $gray
     font-size: 11px
     display: inline
-    margin-left: 4px
-    margin-right: 13px
+    margin: 0 13px 0 4px
 
   .action
     float: right
-    margin-top: -20px
-    margin-rigth: 10px
+    margin-top: -20px 10px 0 0
 
 #conversation
   .new_message
@@ -52,12 +49,16 @@
   .cleditorMain
     @include border-radius(5px) 
     width: 694px !important
+.new_message
+  .btn
+    @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25))
+    margin: 15px 61px 0 0
 
 .conversation
-  opacity: 0.5
+  @include opacity (0.5)
 
 .unread
-  opacity: 1
+  @include opacity (1)
 
 .conversation_full
   h3
@@ -88,4 +89,4 @@
         display: inline
       .date
         display: inline-block
-        color: #ccc
+        color: $grayLighter
