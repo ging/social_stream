@@ -5,8 +5,7 @@ Gem::Specification.new do |s|
   s.version = SocialStream::VERSION.dup
   s.summary = "A core for building social network websites"
   s.description = "Social Stream is a Ruby on Rails engine for building social network websites. It supports contacts, posts, file uploads, private messages and much more."
-  s.authors = [ "GING - DIT - UPM",
-                "CISE - ESPOL" ]
+  s.authors = [ "GING - DIT - UPM" ]
   s.homepage = "http://social-stream.dit.upm.es/"
   s.files = `git ls-files`.split("\n")
 
