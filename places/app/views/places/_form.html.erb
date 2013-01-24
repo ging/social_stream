@@ -1,4 +1,3 @@
-<% @place.build_address %>
 <%= form_for @place, :html => {:onkeypress => "return event.keyCode!=13"} do |f| %>
   <%# @place.owner_id = current_subject.try(:actor_id) %>
   <%# @place.relation_ids = Relation::Public.instance.id %>
@@ -21,7 +20,19 @@
   <div class="place_show_form">
     <div class="place_show_info">
       <div class="place_padding"><%= f.text_field :title, :class => "place_name name_width", :oninput =>"keyUpEvent();" %></div>
-      <div class="place_padding"><%= render :partial => 'shared/address_form', :locals => {:form => f} %></div>
+        <%= f.text_field :streetAddress, :class => "street" %>
+        <%= f.text_field :postalCode, :class => "postalcode" %>
+        <%= f.text_field :locality, :class => "locality" %>
+        <%= f.text_field :region, :class => "region" %>
+        <%= f.text_field :country, :class => "country" %>
+
+        <%= javascript_tag do %>
+          $(".street").watermark("<%= escape_javascript(I18n.t('place.address.street')) %>", {useNative: false, className: 'watermark'});
+          $(".locality").watermark("<%= escape_javascript(I18n.t('place.address.locality')) %>", {useNative: false, className: 'watermark'});
+          $(".region").watermark("<%= escape_javascript(I18n.t('place.address.region')) %>", {useNative: false, className: 'watermark'});
+          $(".postalcode").watermark("<%= escape_javascript(I18n.t('place.address.postalcode')) %>", {useNative: false, className: 'watermark'});
+          $(".country").watermark("<%= escape_javascript(I18n.t('place.address.country')) %>", {useNative: false, className: 'watermark'});
+        <% end %>
       <div class="place_padding">
         <%= f.text_field :phone_number, :class => "place_phone_number phone_number_width" %>
         <%= f.text_field :url, :class => "place_url url_width" %>

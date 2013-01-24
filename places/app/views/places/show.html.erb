@@ -55,7 +55,7 @@
       </div>
       <% if can? :update, @place %>
         <div class="tab-pane <%= place_details_tab_class @place, :edit %>" id="place-edit">
-          <%= render partial: 'form', locals: { place: @place } %>
+          <%#<%= render partial: 'form', locals: { place: @place } %>
         </div>
       <% end %>
     </div>

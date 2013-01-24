@@ -5,10 +5,7 @@ class PlacesController < ApplicationController
 
   def show
     if (@place.latitude == 0 && @place.longitude == 0) 
-      if @place.geocode
-        @place.update_column(:latitude, @place.latitude)
-        @place.update_column(:longitude, @place.longitude)
-      end
+      @place.geocode
     end
     show! do |format|
       format.html {
@@ -30,6 +27,6 @@ class PlacesController < ApplicationController
     # since you'll be able to reuse the same permit list between create and update. Also, you
     # can specialize this method with per-user checking of permissible attributes.
     def place_params
-      params.require(:place).permit(:title, :latitude, :longitude, :phone_number, :url, :owner_id, :relation_ids, :author_id, :user_author_id, address_attributes: [:streetAddress, :postalCode, :locality, :region, :country])
+      params.require(:place).permit(:title, :latitude, :longitude, :altitude, :heading, :tilt, :phone_number, :url, :owner_id, :relation_ids, :author_id, :user_author_id, :streetAddress, :postalCode, :locality, :region, :country)
     end
 end
