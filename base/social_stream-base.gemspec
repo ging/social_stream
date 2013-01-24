@@ -6,8 +6,7 @@ Gem::Specification.new do |s|
   s.version = SocialStream::Base::VERSION.dup
   s.summary = "Basic features for Social Stream, the core for building social network websites"
   s.description = "Social Stream is a Ruby on Rails engine providing your application with social networking features and activity streams.\n\nThis gem packages the basic functionality, along with basic actors (user, group) and activity objects (post and comments)"
-  s.authors = [ "GING - DIT - UPM",
-                "CISE - ESPOL" ]
+  s.authors = [ "GING - DIT - UPM" ]
   s.homepage = "http://social-stream.dit.upm.es/"
   s.files = `git ls-files`.split("\n")
 
@@ -40,8 +39,8 @@ Gem::Specification.new do |s|
   # Pagination
   s.add_runtime_dependency('kaminari', '~> 0.13.0')
   # OAuth client
-  s.add_runtime_dependency('omniauth','~> 1.0.2')
-  s.add_runtime_dependency('omniauth-facebook','~> 1.2.0')
+  s.add_runtime_dependency('omniauth-social_stream')
+  s.add_runtime_dependency('omniauth-facebook','~> 1.4.1')
   s.add_runtime_dependency('omniauth-linkedin','~> 0.0.6')
   # Messages
   s.add_runtime_dependency('mailboxer','~> 0.6.5')
