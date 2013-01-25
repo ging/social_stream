@@ -191,7 +191,7 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   config.omniauth :linkedin, "ekxfXU8nueVSMQ9fc5KJAryBkyztUlCBYMW3DoQPzbE79WhivvzhQloRNHCHgPeB", "WYiHFT-KKFgjd45W3-pEAficmXRHmN6_6DGwj1C_ZILJlSO1gBvv6VNYXU9tybGY"
   config.omniauth :facebook, "129571360447856","eef39dce5e20e76f77495c59623bdb38"
-  config.omniauth :social_stream, "12", "34", {
+  config.omniauth :socialstream, "12", "34", {
     client_options: {
       site: 'http://localhost:3001',
       authorize_url: 'http://localhost:3001/oauth2/authorize',

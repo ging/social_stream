@@ -31,6 +31,7 @@ require 'avatars_for_rails'
 require 'kaminari'
 # Oauth
 require 'omniauth'
+require 'omniauth-socialstream'
 require 'omniauth-facebook'
 require 'omniauth-linkedin'
 #Tags
