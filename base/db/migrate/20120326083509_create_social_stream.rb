@@ -212,8 +212,9 @@ class CreateSocialStream < ActiveRecord::Migration
     add_index "relations", ["ancestry"], :name => "index_relations_on_ancestry"
 
     create_table :sites do |t|
+      t.string  :type
       t.integer :actor_id
-      t.text :config
+      t.text    :config
 
       t.timestamps
     end

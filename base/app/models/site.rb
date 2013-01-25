@@ -9,8 +9,7 @@ class Site < ActiveRecord::Base
 
   class << self
     def current
-      @current ||=
-        first || create!(name: "Social Stream powered site")
+      Current.instance
     end
   end
 end

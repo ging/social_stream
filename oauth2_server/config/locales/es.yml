@@ -1,2 +1,5 @@
 es:
-
+  site:
+    client:
+      new:
+        title: "Registrar nuevo sitio"

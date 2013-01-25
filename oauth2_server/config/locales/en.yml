@@ -1,2 +1,5 @@
 en:
-
+  site:
+    client:
+      new:
+        title: "Register new client site"

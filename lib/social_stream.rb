@@ -6,7 +6,7 @@ if Rails.env == 'development'
 end
 
 module SocialStream
-  Components = %w{ base documents events linkser presence ostatus }
+  Components = %w{ base documents events linkser presence ostatus oauth2_server }
 
   class Engine < ::Rails::Engine #:nodoc:
     config.app_generators.base       'social_stream:base'
