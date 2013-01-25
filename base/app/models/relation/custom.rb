@@ -6,7 +6,9 @@
 #
 class Relation::Custom < Relation
   # Default relations shipped with Social Stream
-  DEFAULT = {}
+  DEFAULT = {
+    'site' => {}
+  }
 
   # Default relations are re-defined in this configuration file
   CONFIG_FILE = File.join(::Rails.root, 'config', 'relations.yml')

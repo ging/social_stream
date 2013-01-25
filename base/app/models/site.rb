@@ -3,14 +3,14 @@
 #   Site.config[:host] = 'example.com'
 #   Site.save!
 class Site < ActiveRecord::Base
-  attr_accessible :config
+  include SocialStream::Models::Subject
 
   serialize :config, Hash
 
   class << self
     def current
       @current ||=
-        first || create!
+        first || create!(name: "Social Stream powered site")
     end
   end
 end
