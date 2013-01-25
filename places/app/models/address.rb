@@ -10,7 +10,7 @@ class Address < ActiveRecord::Base
   #validates :region, :presence => true
   #validates :postalCode, :presence => true
   validates :country, :presence => true
-  #validates_uniqueness_of :streetAddress, :scope => [:locality, :postalCode]
+  #validates_uniqueness_of :streetAddress, :scope => [:locality, :country]
 
 
   private
