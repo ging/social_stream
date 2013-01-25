@@ -3,9 +3,10 @@
 
 <%= div_for @place do %>
 	<div class="central">
-	  <h2>
-	    <%= @place.title %>
-	  </h2>
+	  <h2><%= @place.title %></h2>
+
+    <%= render :partial => 'form_poster' %>
+    <%= place_timeline_thumb(@place) %>
 
 		<%= render :partial => 'place_info' %>
 

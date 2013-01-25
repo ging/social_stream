@@ -6,7 +6,8 @@ require 'geocoder'
 module SocialStream
   module Places
   	module Models
-  		autoload  :ActivityObject,    'social_stream/places/models/activity_object'
+  		autoload  :ActivityObject,	'social_stream/places/models/activity_object'
+  		autoload  :Document, 				'social_stream/places/models/document'
   	end
   	
     SocialStream.objects.push(:place) unless SocialStream.objects.include?(:place)
