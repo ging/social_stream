@@ -17,43 +17,45 @@
   </article>
 
   <article class="right">
-    <h3 data-i18n="Log In">Log In</h3>
-    <div id="headerFront">
-      <div class="banner_top">
-        <% unless params[:controller].eql? 'devise/sessions' and params[:action].eql? 'new' %>
-        <div class="div_login">
-          <%= form_for User.new, :as => :user, :url => user_session_path do |f| -%>
-          <div id="login_data">
-            <div class="login_data_block">
-              <span><%= f.label :email %>
+    <div class="login">
+      <h3 data-i18n="Log In">Log In</h3>
+      <div id="headerFront">
+        <div class="banner_top">
+          <% unless params[:controller].eql? 'devise/sessions' and params[:action].eql? 'new' %>
+          <div class="div_login">
+            <%= form_for User.new, :as => :user, :url => user_session_path do |f| -%>
+            <div id="login_data">
+              <div class="login_data_block">
+                <span><%= f.label :email %>
+                </span>
+                <%= f.email_field :email, :class => "input_username" %>
+              </div>
+              <div class="login_data_block">
+                <span><%= f.label :password %>
+                </span>
+                <%= f.password_field :password, :class => "input_username" %>
+              </div>
+              
+              <div class="login_data_block">
+                <%= f.submit t(:sign_in), :class => 'btn pull-right'%>
+              </div>
+            </div>
+            <hr class="soften">
+            <div class="options">
+              <%= link_to t('sign_up'), new_user_registration_path, :class => "register_link" %>
+              <span>
+                |
               </span>
-              <%= f.email_field :email, :class => "input_username" %>
+              <%= link_to t('forgot_password'), new_user_password_path, :class => "register_link" %>
+              <%= render :partial => "frontpage/social_networks" %>
             </div>
-            <div class="login_data_block">
-              <span><%= f.label :password %>
-              </span>
-              <%= f.password_field :password, :class => "input_username" %>
-            </div>
-            
-            <div class="login_data_block">
-              <%= f.submit t(:sign_in), :class => 'btn pull-right'%>
-            </div>
+            <% end -%>
           </div>
-          <hr class="soften">
-          <div class="options">
-            <%= link_to t('sign_up'), new_user_registration_path, :class => "register_link" %>
-            <span>
-              |
-            </span>
-            <%= link_to t('forgot_password'), new_user_password_path, :class => "register_link" %>
-            <%= render :partial => "frontpage/social_networks" %>
-          </div>
-          <% end -%>
+          <% end %>
+          <br class="clearfloat" />
         </div>
-        <% end %>
-        <br class="clearfloat" />
-      </div>
-    </div> 
+      </div> 
+    </div>
   </article>
 </section>
 
