@@ -3,10 +3,11 @@
     <%= link_to(image_tag('header-logo.png', :alt => t('site.name')), root_path, class: 'brand') %>
 
     <!-- FIXME: search javascript functionality in 'layouts/search' -->
- 
-    <%= form_tag search_path, method: 'get', class: "navbar-search pull-left" do %>
-      <%= text_field_tag :q, nil, autocomplete: :off, class: 'search-query', placeholder: t('search.name') %>
-    <% end %>
+    <div class="search-nav">
+      <%= form_tag search_path, method: 'get', class: "navbar-search pull-left" do %>
+        <%= text_field_tag :q, nil, autocomplete: :off, class: 'search-query', placeholder: t('search.name') %>
+      <% end %>
+    </div>
     <div class="explore-nav">
       <%= link_to(raw("<i class='icon_navbar-home'></i> "), explore_path)%>
       or explore
