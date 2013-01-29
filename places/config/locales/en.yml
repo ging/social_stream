@@ -29,9 +29,9 @@ en:
     name: "place"
     name_title: "Place name"
     phone_title: "Phone number"
-    poster:
+    photo:
       button: "Upload"
-      update: "Upload poster"
+      update: "Upload photo"
     url_title: "Website"
     address:
       street: "Address"

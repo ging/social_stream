@@ -1,0 +1,6 @@
+<% unless @place.photos.empty? %>
+  <%#= thumb_for(@place.photos.first, '80x113#') %>
+  <% @place.photos.each do |p| %>
+  	<%= thumb_for(p, '80x113#') %>
+  <% end %>
+<% end %>

@@ -14,16 +14,31 @@ class Place < ActiveRecord::Base
   validates :latitude, :presence => true
   validates :longitude, :presence => true
 
-  def poster_object
-    object_properties.
-      where('activity_object_properties.type' => 'ActivityObjectProperty::Poster').
-      first
+  # def photo_object
+  #   object_properties.
+  #     where('activity_object_properties.type' => 'ActivityObjectProperty::Photo').
+  #     first
+  # end
+
+  # def photo
+  #   @photo ||=
+  #     photo_object.try(:document) ||
+  #     build_photo
+  # end
+
+  def photos
+    photo_objects = object_properties.
+      where('activity_object_properties.type' => 'ActivityObjectProperty::Photo')
+
+    objects = Array.new
+    photo_objects.each do |a|
+      objects << a.try(:document)
+    end
+    objects
   end
 
-  def poster
-    @poster ||=
-      poster_object.try(:document) ||
-      build_poster
+  def photo
+    @photo ||= build_photo
   end
 
   protected
@@ -37,7 +52,7 @@ class Place < ActiveRecord::Base
     [self.streetAddress, self.locality, self.postalCode, self.country].compact.join(', ')
   end
 
-  def build_poster
+  def build_photo
     Document.new(:place_property_object_id => activity_object_id,
                  :owner_id => owner_id)
   end

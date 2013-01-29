@@ -18,7 +18,7 @@ module SocialStream
           return if place_property_object_id.blank?
 
           activity_object_holders <<
-            ActivityObjectProperty::Poster.new(:activity_object_id => place_property_object_id)
+            ActivityObjectProperty::Photo.new(:activity_object_id => place_property_object_id)
         end
       end
     end
