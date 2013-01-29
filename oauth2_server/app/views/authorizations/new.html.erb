@@ -10,6 +10,7 @@
   <%= hidden_field_tag :client_id,     @client.id %>
   <%= hidden_field_tag :response_type, @response_type %>
   <%= hidden_field_tag :redirect_uri,  @redirect_uri %>
+  <%= hidden_field_tag :state,         @state %>
 
   <%= button_tag name: "cancel" do %>
     <%= t 'authorization.form.cancel' %>
