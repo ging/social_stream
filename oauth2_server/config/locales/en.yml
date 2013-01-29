@@ -1,4 +1,12 @@
 en:
+  activerecord:
+    attributes:
+      site/client:
+        callback_url: "Callback URL"
+        id: "Client ID"
+        name: "Name"
+        secret: "Client Secret"
+        url: "URL"
   site:
     client:
       new:
