@@ -1,0 +1,10 @@
+<div>
+	<%= form_for @place.photo do |f| %>
+	  <%= f.hidden_field :place_property_object_id %>
+	  <%= f.hidden_field :owner_id %>
+
+	  <%= f.file_field :file %>
+
+	  <%= f.submit t('place.photo.button') %>
+	<% end %>
+</div>

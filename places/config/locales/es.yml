@@ -23,9 +23,9 @@ es:
     name: "lugar"
     name_title: "Nombre del lugar"
     phone_title: "Teléfono"
-    poster:
+    photo:
       button: "Subir"
-      update: "Subir poster"
+      update: "Subir foto"
     url_title: "Website"
     address:
       street: "Dirección"

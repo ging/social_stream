@@ -5,10 +5,9 @@
 	<div class="central">
 	  <h2><%= @place.title %></h2>
 
-    <%= render :partial => 'form_poster' %>
-    <%= place_timeline_thumb(@place) %>
-
-		<%= render :partial => 'place_info' %>
+    <%#= place_timeline_thumb(@place) %>
+    <%= render :partial => 'place_info' %>
+    <%= render :partial => 'carousel' %>
 
     <%= gmaps(:map_options => { :container_class => "map_container", :id => "map", :class => "gmaps4rails_map", :auto_zoom => false, :zoom => 16 }, :markers => {:data => @json} )%>
           
@@ -56,6 +55,7 @@
       </div>
       <% if can? :update, @place %>
         <div class="tab-pane <%= place_details_tab_class @place, :edit %>" id="place-edit">
+          <%= render :partial => 'form_photo' %>
           <%#<%= render partial: 'form', locals: { place: @place } %>
         </div>
       <% end %>
