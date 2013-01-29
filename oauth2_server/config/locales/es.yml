@@ -7,6 +7,16 @@ es:
         name: "Nombre"
         secret: "Client Secret"
         url: "URL"
+  authorizations:
+    form:
+      accept: "Aceptar"
+      cancel: "Cancelar"
+    new:
+      title: "¿Autorizar %{client}?"
+      permission:
+        title: "El sitio %{client} será capaz de:"
+  permission:
+    public_info: "Acceder a tu información pública"
   site:
     client:
       new:

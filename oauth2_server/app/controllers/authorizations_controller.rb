@@ -20,6 +20,7 @@ class AuthorizationsController < ApplicationController
     ["WWW-Authenticate"].each do |key|
       headers[key] = header[key] if header[key].present?
     end
+
     if response.redirect?
       redirect_to header['Location']
     else
@@ -29,18 +30,18 @@ class AuthorizationsController < ApplicationController
 
   def authorize_endpoint(allow_approval = false)
     Rack::OAuth2::Server::Authorize.new do |req, res|
-      @site = Site.find(req.client_id) || req.bad_request!
+      @client = Site::Client.find(req.client_id) || req.bad_request!
 
-      res.redirect_uri = @redirect_uri = req.verify_redirect_uri!(@site.redirect_uri)
+      res.redirect_uri = @redirect_uri = req.verify_redirect_uri!(@client.callback_url)
 
       if allow_approval
-        if params[:approve]
+        if params[:accept]
           case req.response_type
           when :code
-            authorization_code = current_subject.authorization_codes.create(:site_id => @site.id, :redirect_uri => res.redirect_uri)
+            authorization_code = current_subject.authorization_codes.create(:site_id => @client.id, :redirect_uri => res.redirect_uri)
             res.code = authorization_code.token
           when :token
-            res.access_token = current_subject.access_tokens.create(:site_id => @site.id).to_bearer_token
+            res.access_token = current_subject.access_tokens.create(:site_id => @client.id).to_bearer_token
           end
           res.approve!
         else
