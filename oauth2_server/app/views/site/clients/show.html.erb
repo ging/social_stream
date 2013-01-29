@@ -1,6 +1,16 @@
 <h1><%= @client.name %></h1>
 
+<h3><%= Site::Client.human_attribute_name :url %></h3>
+<%= @client.url %>
 
+<h3><%= Site::Client.human_attribute_name :callback_url %></h3>
+<%= @client.callback_url %>
+
+<h3><%= Site::Client.human_attribute_name :id %></h3>
+<%= @client.id %>
+
+<h3><%= Site::Client.human_attribute_name :secret %></h3>
+<%= @client.secret %>
 
 <section>
   <article  class="media">
