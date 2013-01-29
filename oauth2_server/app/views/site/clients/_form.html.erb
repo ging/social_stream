@@ -1,25 +1,28 @@
-<%= form_for @client do |f| %>
+<article class="right">
+  <%= form_for @client do |f| %>
 
-  <% if @client.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client site from being saved:</h2>
+    <% if @client.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client site from being saved:</h2>
 
-      <ul>
-        <% @client.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
+        <ul>
+          <% @client.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+
+      </div>
+    <% end %>
+
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <%= f.label :url %>
+    <%= f.text_field :url %>
+
+    <%= f.label :callback_url %>
+    <%= f.text_field :callback_url %>
+
+    <%= f.submit :class => "btn pull-right" %>
   <% end %>
-
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-
-  <%= f.label :url %>
-  <%= f.text_field :url %>
-
-  <%= f.label :callback_url %>
-  <%= f.text_field :callback_url %>
-
-  <%= f.submit %>
-<% end %>
+</article>
