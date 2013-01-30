@@ -11,17 +11,27 @@
       </h3>
       <div class="url">
         <span class="title">
+          <%= Site::Client.human_attribute_name :url %>
         </span>
-        url de generic...
+        <%= @client.callback_url %>
       </div>
       <div class="callback">
         <span class="title">
+          <%= Site::Client.human_attribute_name :callback_url %>
         </span>
-        callback de generic...
-      </div><div class="description">
+        <%= @client.callback_url %>
+      </div>
+      <div class="description">
         <span class="title">
+          <%= Site::Client.human_attribute_name :id %>
         </span>
-        Descripción de generic...
+        <%= @client.id %>
+      </div>
+      <div class="description">
+        <span class="title">
+          <%= Site::Client.human_attribute_name :secret %>
+        </span>
+        <%= @client.secret %>
       </div>
     </div>
   </article>
