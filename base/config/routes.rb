@@ -24,7 +24,8 @@ Rails.application.routes.draw do
     end
   end
 
-  match 'profile' => 'profile#show'
+  # Get information about current_subject
+  match 'profile' => 'profiles#show'
 
   # Social Stream objects configured in config/initializers/social_stream.rb
   #
