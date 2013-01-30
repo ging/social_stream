@@ -9,6 +9,7 @@ class Profile < ActiveRecord::Base
   delegate :tag_list, :tag_list=,
            :name, :name=,
            :email, :email=,
+           :slug,
            to: :actor
    
   validates_presence_of :actor_id
@@ -81,6 +82,14 @@ class Profile < ActiveRecord::Base
   # True if the profile owner has tags attached
   def tags_present?
     actor.tag_list.count > 0
+  end
+
+  def as_json options = nil
+    {
+      nickName: slug,
+      displayName: name,
+      email: email,
+    }
   end
 
   private

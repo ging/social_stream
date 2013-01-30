@@ -7,7 +7,7 @@ source "http://rubygems.org"
 # gem 'mailboxer', :path => '../mailboxer'
 # gem 'avatars_for_rails', :path => '../avatars_for_rails'
 # gem 'rails-scheduler', path: '../rails-scheduler'
-# gem 'omniauth-social_stream', path: '../omniauth-social_stream'
+# gem 'omniauth-socialstream', path: '../omniauth-socialstream'
 
 # social_stream gems
 %w(base documents events linkser presence).each do |g|

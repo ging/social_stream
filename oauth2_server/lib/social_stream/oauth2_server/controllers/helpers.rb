@@ -21,9 +21,8 @@ module SocialStream
 
         def oauth2_token
           @oauth2_token ||=
-            Oauth2Token::AccessToken.valid.find_by_token request.env[Rack::OAuth2::Server::Resource::ACCESS_TOKEN]
+            request.env[Rack::OAuth2::Server::Resource::ACCESS_TOKEN]
         end
-
       end
     end
   end
