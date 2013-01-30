@@ -14,44 +14,45 @@
 
 
   <article class="right">
-    <h2>
-      <%= t('sign_up').capitalize %>
-    </h2>
+    <div class="div_registration">
+      <h3>
+        <%= t('sign_up').capitalize %>
+      </h3>
 
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-      <%= devise_error_messages! %>
-    <div class="reg-labels">
-      <%= f.label :name %>
-      
-      <%= f.text_field :name, :class =>"form_tag"  %>
-      
-      <%= f.label :email %>
-      
-      <%= f.text_field :email, :class =>"form_tag"  %>
-      
-      <%= f.label :password %>
-      
-      <%= f.password_field :password, :class =>"form_tag", :id => "password"  %>
+      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+      <div class="reg-labels">
+        <%= f.label :name %>
+        
+        <%= f.text_field :name, :class =>"form_tag"  %>
+        
+        <%= f.label :email %>
+        
+        <%= f.text_field :email, :class =>"form_tag"  %>
+        
+        <%= f.label :password %>
+        
+        <%= f.password_field :password, :class =>"form_tag", :id => "password"  %>
 
-      <div id="user_password_confirmation_label">
-        <%= f.label :password_confirmation %>
+        <div id="user_password_confirmation_label">
+          <%= f.label :password_confirmation %>
+        </div>
+        
+        <%= f.password_field :password_confirmation, :class =>"form_tag"  %>
+
+        <%= f.submit t('action.accept').capitalize,:class=>"btn pull-right"%>
       </div>
-      
-      <%= f.password_field :password_confirmation, :class =>"form_tag"  %>
+      <hr class="soften">
 
-      <%= f.submit t('action.accept').capitalize,:class=>"btn pull-right"%>
+      <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+        <%= link_to t('confirmation.not_received.long'), new_confirmation_path(resource_name) %><br />
+        <% end -%>
+      
+        <div class="options">
+          <%= render :partial => "devise/shared/links" %>
+        </div>
+      <% end %>
     </div>
-    <hr class="soften">
-
-    <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-      <%= link_to t('confirmation.not_received.long'), new_confirmation_path(resource_name) %><br />
-      <% end -%>
-    
-      <div class="options">
-        <%= render :partial => "devise/shared/links" %>
-      </div>
-
-    <% end %>
   </article>
 </section>
 

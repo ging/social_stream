@@ -15,16 +15,16 @@
   </article>
 
   <article class="right">
-    <div class="forgot-pass">
+    <div class="div_password">
       <%= f.label :email %>
 
       <%= f.text_field :email, :class => "form_tag" %>
         
       <%= f.submit t('action.send'), :class =>"btn" %>
-    </div>
-    <hr class="soften">
-    <div class="options">
-      <%= render :partial => "devise/shared/links" %>
+      <hr class="soften">
+      <div class="options">
+        <%= render :partial => "devise/shared/links" %>
+      </div>
     </div>
     <% end %>
   </article>
