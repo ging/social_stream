@@ -5,6 +5,12 @@ class ProfilesController < ApplicationController
 
   def show
     subject_profile
+
+    respond_to do |format|
+      format.html
+      format.js
+      format.json { render json: subject_profile.to_json }
+    end
   end
 
   def edit
@@ -33,7 +39,7 @@ class ProfilesController < ApplicationController
 
   def subject_profile
     @profile ||=
-      profile_subject!.profile
+      profile_or_current_subject!.profile
   end
 
   def current_profile

@@ -11,6 +11,18 @@ describe ProfilesController do
     end
 
     it "should render show" do
+      get :show
+
+      assert_response :success
+    end
+
+    it "should render show.json" do
+      get :show, format: :json
+
+      assert_response :success
+    end
+
+    it "should render show with user param" do
       get :show, :user_id => @user.to_param
 
       assert_response :success

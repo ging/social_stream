@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     end
   end
 
+  match 'profile' => 'profile#show'
+
   # Social Stream objects configured in config/initializers/social_stream.rb
   #
   # /posts
