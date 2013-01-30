@@ -1,14 +1,6 @@
 <div class="info">
   <%= render partial: 'objects/counters', locals: { object: place } %>
 
-  <div class="description <%= 'blank' if place.description.blank? %>">
-    <h4>
-      <%= t 'place.info.description' %>
-    </h4>
-
-    <%= place.description %>
-  </div>
-
   <div class="tags">
     <h4>
       <%= t 'place.info.tags' %>

@@ -1,0 +1,9 @@
+<div>
+	<h4><%= t('place.info.description.description') %></h4>
+	<%= form_for @place do |f| %>
+	  <%= f.hidden_field :owner_id %>
+	  <%= f.text_area :description, :size => "10x3", :class => "update-info" %>
+
+	  <%= f.submit t('place.info.description.update'), :class => "upload-photo" %>
+	<% end %>
+</div>

@@ -18,7 +18,9 @@ en:
       date:
         created_at: "Created at"
         updated_at: "Updated at"
-      description: "Description"
+      description:
+        description: "Description"
+        update: "Update description"
       file:
         title: "Upload"
       size: "Size"

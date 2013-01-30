@@ -13,6 +13,13 @@
           
     <%= yield :scripts %>
 
+    <% unless @place.description.blank? %>
+      <div class="description">
+        <h3><%= t('place.info.description.description') %></h3>
+        <%= @place.description %>
+      </div>
+    <% end %>
+
 		<div class="tabbable">
 			<ul class="nav nav-tabs">
 		    <li class="active">
@@ -56,6 +63,7 @@
       <% if can? :update, @place %>
         <div class="tab-pane <%= place_details_tab_class @place, :edit %>" id="place-edit">
           <%= render :partial => 'form_photo' %>
+          <%= render :partial => 'form_description' %>
           <%#<%= render partial: 'form', locals: { place: @place } %>
         </div>
       <% end %>
