@@ -3,35 +3,43 @@
 <section>
   <article  class="media box">
     <a class="pull-left" href="#">
-      <img class="media-object" data-src="holder.js/64x64" alt="market" style="width: 64px; height: 64px;" src="/user.png">
+      <img class="media-object" data-src="holder.js/64x64" alt="market" style="width: 64px; height: 64px;" src="assets/user.png">
     </a>
     <div class="media-body">
       <h3 class="media-heading">
         nombre del generic
       </h3>
       <div class="url">
-        <span class="title">
+        <h3>
           <%= Site::Client.human_attribute_name :url %>
-        </span>
-        <%= @client.callback_url %>
+        </h3>
+        <div class="result">
+          <%= @client.callback_url %>
+        </div>
       </div>
       <div class="callback">
-        <span class="title">
+        <h3>
           <%= Site::Client.human_attribute_name :callback_url %>
-        </span>
-        <%= @client.callback_url %>
+        </h3>
+        <div class="result">
+          <%= @client.callback_url %>
+        </div>
       </div>
-      <div class="description">
-        <span class="title">
+      <div class="id-client">
+        <h3>
           <%= Site::Client.human_attribute_name :id %>
-        </span>
-        <%= @client.id %>
+        </h3>
+        <div class="result">
+          <%= @client.id %>
+        </div>
       </div>
-      <div class="description">
-        <span class="title">
+      <div class="client-secret">
+        <h3>
           <%= Site::Client.human_attribute_name :secret %>
-        </span>
-        <%= @client.secret %>
+        </h3>
+        <div class="result">
+          <%= @client.secret %>
+        </div>
       </div>
     </div>
   </article>
