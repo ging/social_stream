@@ -15,7 +15,8 @@ module SocialStream
       :"170x127#" => ["170x127#"],
       # this one preserves A4 proportion: 210x297
       :"80x113#" => ["80x113#"],
-      :"500" => ["500>"]
+      :"500" => ["500>"],
+      :"540x220" => ["540x220>"]
     }
 
     mattr_accessor :audio_styles
