@@ -20,9 +20,8 @@ class Oauth2Token < ActiveRecord::Base
     (expires_at - Time.now.utc).to_i
   end
 
-  def expired!
-    self.expires_at = Time.now.utc
-    save!
+  def expire!
+    update_attribute(:expires_at, Time.now.utc) || raise(ActiveRecord::RecordInvalid)
   end
 
   protected
