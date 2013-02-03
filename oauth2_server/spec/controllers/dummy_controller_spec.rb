@@ -12,7 +12,7 @@ describe DummyController do
   let(:find) { stub :find, { find_by_token: token } }
 
   before do
-    Oauth2Token::AccessToken.stub(:valid) { find }
+    controller.request.env[Rack::OAuth2::Server::Resource::ACCESS_TOKEN] = token
   end
 
   describe "with user token" do
