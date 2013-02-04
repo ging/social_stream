@@ -6,7 +6,7 @@ describe DummyController do
   end
 
   let(:client) { double :client }
-  let(:user)   { double :user }
+  let(:user)   { double :user, language: :en }
 
   let(:token) { stub :token, client: client }
   let(:find) { stub :find, { find_by_token: token } }
