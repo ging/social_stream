@@ -1,0 +1,4 @@
+<% @clients.each do |client| %>
+  <%= link_to client.name, client.url %>
+  <%= client.description %>
+<% end %>

@@ -3,6 +3,10 @@ class Site::ClientsController < ApplicationController
 
   before_filter :set_author_ids, only: [ :create, :update ]
 
+  def index
+    @clients = Site::Client.all
+  end
+
   def show
     @client = Site::Client.find params[:id]
   end
