@@ -48,7 +48,7 @@ namespace :db do
       users_start = Time.now
 
       # Create demo user if not present
-      if User.find_by_name('demo').blank?
+      if Actor.find_by_slug('demo').blank?
         u = User.create! :name => '<Demo>',
                          :email => 'demo@social-stream.dit.upm.es',
                          :password => 'demonstration',
