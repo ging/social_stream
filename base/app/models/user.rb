@@ -52,7 +52,15 @@ class User < ActiveRecord::Base
         where(:id => candidates)
     end
   end
-  
+
+  def as_json options = nil
+    {
+      nickName: slug,
+      displayName: name,
+      email: email,
+    }
+  end
+ 
   protected
   
   # From devise

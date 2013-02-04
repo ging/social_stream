@@ -8,15 +8,19 @@ module SocialStream
         def current_subject
           super ||
             @current_subject ||=
-              current_subject_from_oauth_token
+              current_from_oauth_token(:client)
         end
 
-        def current_subject_from_oauth_token
+        def current_user
+          super ||
+            @current_user ||=
+              current_from_oauth_token(:user)
+        end
+
+        def current_from_oauth_token(type)
           return if oauth2_token.blank?
 
-          oauth2_token.user.present? ?
-            oauth2_token.user :
-            oauth2_token.client
+          oauth2_token.__send__(type)
         end
 
         def oauth2_token

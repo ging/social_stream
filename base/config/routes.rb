@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   end
 
   # Get information about current_subject
+  match 'user'    => 'users#current', format: :json
+
   match 'profile' => 'profiles#show'
 
   # Social Stream objects configured in config/initializers/social_stream.rb
