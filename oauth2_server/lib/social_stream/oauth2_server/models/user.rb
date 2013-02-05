@@ -25,7 +25,9 @@ module SocialStream
 
         # Create a new tie to {Site::Client}
         def client_authorize!(client)
-          contact_to!(client).relation_ids << Relation::Auth.instance.id
+          unless contact_to!(client).relation_ids.include?(Relation::Auth.instance.id)
+            contact_to!(client).relation_ids += [ Relation::Auth.instance.id ]
+          end
         end
       end
     end

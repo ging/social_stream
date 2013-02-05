@@ -143,7 +143,7 @@ class Tie < ActiveRecord::Base
   #
   # Create contact activity if this is the first tie
   def create_activity
-    return if contact.reload.ties_count != 1 || relation.is_a?(Relation::Reject)
+    return if !relation.class.create_activity? || contact.reload.ties_count != 1
 
     Activity.create! :author        => contact.sender,
                      :user_author   => contact.user_author,

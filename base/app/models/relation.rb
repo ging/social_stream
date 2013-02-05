@@ -169,6 +169,10 @@ class Relation < ActiveRecord::Base
 
       ids
     end
+
+    def create_activity?
+      true
+    end
   end
 
   # Relation class scoped in the same mode that this relation
