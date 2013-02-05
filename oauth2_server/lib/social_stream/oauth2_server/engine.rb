@@ -11,6 +11,11 @@ module SocialStream
           include SocialStream::Oauth2Server::Controllers::Helpers
         end
       end
+
+      initializer "social_stream-oauth2_server.add_filters" do |app|
+        app.config.filter_parameters += [:secret]
+        app.config.filter_parameters.uniq
+      end
     end
   end
 end
