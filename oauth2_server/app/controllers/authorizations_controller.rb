@@ -36,21 +36,32 @@ class AuthorizationsController < ApplicationController
 
       if allow_approval
         if params[:accept]
-          case req.response_type
-          when :code
-            authorization_code = current_user.authorization_codes.create!(:client => @client, :redirect_uri => res.redirect_uri)
-            res.code = authorization_code.token
-          when :token
-            res.access_token = current_subject.access_tokens.create!(:client => @client).to_bearer_token
-          end
-          res.approve!
+          current_user.client_authorize!(@client)
+
+          approve!(req, res, @client)
         else
           req.access_denied!
         end
       else
-        @response_type = req.response_type
-        @state = req.state
+        if current_user.client_authorized?(@client)
+          approve!(req, res, @client)
+        else
+          @response_type = req.response_type
+          @state = req.state
+        end
       end
     end
+  end
+
+  def approve!(req, res, client)
+    case req.response_type
+    when :code
+      authorization_code = current_user.authorization_codes.create!(:client => client, :redirect_uri => res.redirect_uri)
+      res.code = authorization_code.token
+    when :token
+      res.access_token = current_user.access_tokens.create!(:client => client).to_bearer_token
+    end
+
+    res.approve!
   end
 end

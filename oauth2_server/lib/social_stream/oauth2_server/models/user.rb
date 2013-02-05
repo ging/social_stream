@@ -17,6 +17,16 @@ module SocialStream
           has_many :refresh_tokens,
                    class_name: 'Oauth2Token::RefreshToken'
         end
+
+        # Is {#client} authorized by this {User}
+        def client_authorized?(client)
+          contact_to!(client).relation_ids.include? Relation::Auth.instance.id
+        end
+
+        # Create a new tie to {Site::Client}
+        def client_authorize!(client)
+          contact_to!(client).relation_ids << Relation::Auth.instance.id
+        end
       end
     end
   end
