@@ -7,7 +7,7 @@ module SocialStream
       def initialize(subject)
         
         #Download alias action
-        alias_action :download, :to => :show
+        alias_action :download, :to => :read
         
         # Activity Objects
         (SocialStream.objects - [ :actor, :comment ]).map{ |obj|
