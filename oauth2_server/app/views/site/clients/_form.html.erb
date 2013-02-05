@@ -20,31 +20,16 @@
 </a>
   <article  class="media">
     <div class="media-body">
-      <div class="url">
-        <h3>
-           <%= f.label :name %>
-        </h3>
-        <div class="result">
-          <%= f.text_field :name %>
-        </div>
-      </div>
-      <div class="callback">
-        <h3>
-          <%= f.label :url %>
-        </h3>
-        <div class="result">
-          <%= f.text_field :url %>
-        </div>
-      </div>
-      <div class="id-client">
-        <h3>
-          <%= f.label :callback_url %>
-        </h3>
-        <div class="result">
-          <%= f.text_field :callback_url %>
-        </div>
-      </div>
-      <%= f.submit :class => "btn-blue pull-right" %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :url %>
+      <%= f.text_field :url %>
+       
+      <%= f.label :callback_url %>
+      <%= f.text_field :callback_url %>
+ 
+      <%= f.submit :class => "btn pull-right" %>
     </div>
   </article>  
 

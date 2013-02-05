@@ -7,37 +7,26 @@
   </a>
   <article  class="media box">
     <div class="media-body">
-      <div class="url">
-        <h3>
-          <%= Site::Client.human_attribute_name :url %>
-        </h3>
-        <div class="result">
-          <%= @client.callback_url %>
-        </div>
+      <h3>
+        <%= Site::Client.human_attribute_name :url %>
+      </h3>
+      <div class="result">
+      <%= @client.callback_url %>
       </div>
-      <div class="callback">
-        <h3>
-          <%= Site::Client.human_attribute_name :callback_url %>
-        </h3>
-        <div class="result">
-          <%= @client.callback_url %>
-        </div>
+      <h3>
+      <%= Site::Client.human_attribute_name :callback_url %>
+     </h3>
+     <div class="result">
+      <%= @client.callback_url %>
       </div>
-      <div class="id-client">
-        <h3>
-          <%= Site::Client.human_attribute_name :id %>
-        </h3>
-        <div class="result">
-          <%= @client.id %>
-        </div>
-      </div>
-      <div class="client-secret">
-        <h3>
-          <%= Site::Client.human_attribute_name :secret %>
-        </h3>
-        <div class="result">
-          <%= @client.secret %>
-        </div>
+     <h3>
+      <%= Site::Client.human_attribute_name :id %>
+     </h3>
+     <h3>
+      <%= Site::Client.human_attribute_name :secret %>
+      </h3>
+      <div class="result">
+      <%= @client.secret %>
       </div>
     </div>
   </article>
