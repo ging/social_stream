@@ -4,7 +4,7 @@ require File.join(File.dirname(__FILE__), 'lib', 'social_stream', 'places', 'ver
 Gem::Specification.new do |s|
   s.name = "social_stream-places"
   s.version = SocialStream::Places::VERSION.dup
-  s.authors = ["Carolina García", "GING - DIT - UPM"]
+  s.authors = ["Carolina Garcia", "GING - DIT - UPM"]
   s.summary = "Places support for Social Stream, the core for building social network websites"
   s.description = "Social Stream is a Ruby on Rails engine providing your application with social networking features and activity streams.\n\nThis gem allow you to add places as a new social stream activity"
   s.email = "holacarol@gmail.com"
