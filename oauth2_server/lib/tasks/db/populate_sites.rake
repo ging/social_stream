@@ -13,6 +13,7 @@ namespace :db do
       aid = Actor.find_by_slug('demo').id
 
       s = Site::Client.create! name: 'Dummy',
+                               description: "Social Stream's spec/dummy application",
                                url: 'http://localhost:3000',
                                callback_url: 'http://localhost:3000/users/auth/socialstream/callback',
                                author_id: aid
@@ -22,6 +23,7 @@ namespace :db do
       9.times do
         domain = Forgery::Internet.domain_name 
         Site::Client.create! name: Forgery::Name.full_name,
+                             description: Forgery::LoremIpsum.sentence(random: true),
                              url: "https://#{ domain }",
                              callback_url: "https://#{ domain }/callback",
                              author: User.all[rand(User.all.size)]
