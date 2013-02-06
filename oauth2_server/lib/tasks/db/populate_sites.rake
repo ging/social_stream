@@ -1,11 +1,11 @@
 namespace :db do
   namespace :populate do
     desc "Create populate data with client sites"
-    task create: :create_client_sites
+    task create: :create_site_clients
 
     desc "Add client sites populate data"
-    task create_client_sites: :read_environment do
-      puts 'Client Site population (Dummy and 9 clients more)'
+    task create_site_clients: :read_environment do
+      puts 'Site Client population (Dummy and 9 clients more)'
 
       start = Time.now
 
