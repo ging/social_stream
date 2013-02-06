@@ -4,10 +4,10 @@
 
 <div id="welcome">
   <article class="right">
-    <div class="sig-in">
-      <h2>
+    <div class="div_sig-in">
+      <h3>
         <%= t('sign_in') %>
-      </h2>
+      </h3>
       <%= form_for(resource, :as => resource_name, :url => user_session_path) do |f| %>
         <%= devise_error_messages! %>
        
@@ -27,10 +27,11 @@
         <% end -%>
         
         <%= f.submit t('action.send'), :class =>"btn storePass" %>
-      </div>  
-      <hr class="soften">
-      <div class="options">
-        <%= render :partial => "devise/shared/links" %>  
+   
+        <hr class="soften">
+        <div class="options">
+          <%= render :partial => "devise/shared/links" %>  
+        </div> 
       </div>
     <% end %>
   </article>
