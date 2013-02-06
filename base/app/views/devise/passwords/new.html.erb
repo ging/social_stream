@@ -1,8 +1,8 @@
 <% content_for :headers do%>
   <%= render :partial => 'layouts/devise_style' %>
 <%end%>
-<div id="welcome">
-  <article class="forgot">
+<div id="forgot-pass">
+  <header class="forgot">
     <h2>
       <%= t('devise.passwords.forgot') %>
     </h2>
@@ -12,7 +12,7 @@
     <h4>
       <%= t('devise.passwords.instructions') %>
     </h4>
-  </article>
+  </header>
 
   <article class="right">
     <div class="div_password">
