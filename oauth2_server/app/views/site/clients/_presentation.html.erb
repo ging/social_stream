@@ -1,13 +1,13 @@
-<article class="left">
-  <div class="pull-left">
-    <%= image_tag client.logo.url(:small) %>
-  </div>
+<article class="media">
+  <%= link_to client.url, class: 'pull-left' do %>
+    <%= image_tag client.logo.url(:small), style: "width: 70px; height: 70px;" %>
+  <% end %>
 
-  <h2>
-    <%= client.name %>
-  </h2>
+  <div class="media-body">
+    <h2 class="media-heading">
+      <%= client.name %>
+    </h2>
 
-  <div class="description">
     <%= client.description %>
   </div>
 </article>
