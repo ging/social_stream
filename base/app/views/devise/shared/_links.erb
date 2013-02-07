@@ -25,6 +25,6 @@
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to t('devise.links.sign_in_with', :provider => provider.to_s.titleize), omniauth_authorize_path(resource_name, provider) %>
+    <%= link_to image_tag("btn/#{ provider }.png"), omniauth_authorize_path(resource_name, provider) %>
   <% end -%>
 <% end -%>
