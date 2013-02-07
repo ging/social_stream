@@ -1,0 +1,8 @@
+<!-- surround_contents '#presentation' -->
+
+<% if redirect_to_site_client? %>
+  <%= render partial: 'site/clients/presentation',
+             locals: { client: redirecting_site_client } %>
+<% else %>
+  <%= render_original %>
+<% end %>
