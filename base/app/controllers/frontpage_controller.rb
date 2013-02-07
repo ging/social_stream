@@ -1,4 +1,6 @@
 class FrontpageController < ApplicationController
+  include SocialStream::Devise::Controllers::UserSignIn
+
   before_filter :redirect_user_to_home, :only => :index
 
   def index

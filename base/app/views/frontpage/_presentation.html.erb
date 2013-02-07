@@ -1,0 +1,18 @@
+<section id="presentation">
+  <header>
+  <h2>
+    <% content_for :title do%>
+      <%= t('welcome', :site => t('site.name')) %>
+    <%end%>
+  </h2>
+  </header>
+
+  <%= render :partial => 'layouts/search' %>
+
+  <div class="thumbnail inline">
+    <header>
+    <h6>Busca usuarios, grupos, archivos...</h6>
+    </header>
+    <%= render :partial => 'frontpage/caracteristics' %>
+  </div>
+</section>

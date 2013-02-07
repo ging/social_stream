@@ -26,6 +26,12 @@ module SocialStream
     autoload :Subjects, 'social_stream/controllers/subjects'
   end
 
+  module Devise
+    module Controllers
+      autoload :UserSignIn, 'social_stream/devise/controllers/user_sign_in'
+    end
+  end
+
   module Models
     autoload :Object,    'social_stream/models/object'
     autoload :Subject,   'social_stream/models/subject'
