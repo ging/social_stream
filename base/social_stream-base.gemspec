@@ -40,8 +40,7 @@ Gem::Specification.new do |s|
   # Pagination
   s.add_runtime_dependency('kaminari', '~> 0.13.0')
   # OAuth client
-  s.add_runtime_dependency('omniauth','~> 1.0.2')
-  s.add_runtime_dependency('omniauth-facebook','~> 1.2.0')
+  s.add_runtime_dependency('omniauth-facebook','~> 1.4.1')
   s.add_runtime_dependency('omniauth-linkedin','~> 0.0.6')
   # Messages
   s.add_runtime_dependency('mailboxer','~> 0.6.5')
