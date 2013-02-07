@@ -1,55 +1,9 @@
 <section id="frontpage">
   <article class="left">
-    <header>
-      <h2>
-        <% content_for :title do%>
-          <%= t('welcome', :site => t('site.name')) %>
-        <%end%>
-      </h2>
-    </header>
-    <%= render :partial => 'layouts/search' %>
-    <div class="thumbnail inline">
-      <header>
-        <h6>Busca usuarios, grupos, archivos...</h6>
-      </header>
-      <%= render :partial => 'frontpage/caracteristics' %>
-    </div>
+    <%= render partial: 'frontpage/presentation' %>
   </article>
 
   <article class="right">
-    <div class="div_login">
-      <h3 data-i18n="Log In">
-        Log In
-      </h3>
-      <% unless params[:controller].eql? 'devise/sessions' and params[:action].eql? 'new' %>
-      <%= form_for User.new, :as => :user, :url => user_session_path do |f| -%>
-      <div id="login_data">
-        <%= f.label :email %>
-
-        <%= f.email_field :email, :class => "input_username" %>
-
-        <%= f.label :password %>
-
-        <%= f.password_field :password, :class => "input_username" %>
-            
-        <%= f.submit t(:sign_in), :class => 'btn pull-right'%>
-        <hr class="soften">
-        <div class="options">
-          <%= link_to t('sign_up'), new_user_registration_path, :class => "register_link" %>
-          |
-          <%= link_to t('forgot_password'), new_user_password_path, :class => "register_link" %>
-          <%= render :partial => "frontpage/social_networks" %>
-        </div>
-        <% end -%>
-      </div>
-      <% end %>
-      <br class="clearfloat" />
-    </div>
+    <%= render partial: 'devise/sessions/form' %>
   </article>
 </section>
-
-
-
-
-
-
