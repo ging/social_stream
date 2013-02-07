@@ -1,21 +1,27 @@
-<h2><%= t 'authorization.new.title', client: @client.name %></h2>
+<article class="authorization">
+  <h2>
+    <%= t 'authorization.new.title', client: @client.name %>
+  </h2>
 
-<%= raw t('authorization.new.permission.title', client: link_to(@client.name, @client.url)) %>
+  <%= raw t('authorization.new.permission.title', client: link_to(@client.name, @client.url)) %>
 
-<ul>
-  <li><%= t 'permission.public_info' %></li>
-</ul>
+  <ul>
+    <li>
+      &#8226&#32<%= t 'permission.public_info' %>
+    </li>
+  </ul>
 
-<%= form_tag authorizations_path do %>
-  <%= hidden_field_tag :client_id,     @client.id %>
-  <%= hidden_field_tag :response_type, @response_type %>
-  <%= hidden_field_tag :redirect_uri,  @redirect_uri %>
-  <%= hidden_field_tag :state,         @state %>
+  <%= form_tag authorizations_path do %>
+    <%= hidden_field_tag :client_id,     @client.id %>
+    <%= hidden_field_tag :response_type, @response_type %>
+    <%= hidden_field_tag :redirect_uri,  @redirect_uri %>
+    <%= hidden_field_tag :state,         @state %>
 
-  <%= button_tag name: "cancel" do %>
-    <%= t 'authorization.form.cancel' %>
+    <%= button_tag class: "btn btn-danger", name: "cancel" do %>
+      <%= t 'authorization.form.cancel' %>
+    <% end %>
+    <%= button_tag class: "btn btn-success", name: "accept" do %>
+      <%= t 'authorization.form.accept' %>
+    <% end %>
   <% end %>
-  <%= button_tag name: "accept" do %>
-    <%= t 'authorization.form.accept' %>
-  <% end %>
-<% end %>
+</article>
