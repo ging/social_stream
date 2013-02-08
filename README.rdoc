@@ -43,20 +43,17 @@ Then:
 
 or use specific generators if you are using components.
 
-Do not forget to migrate your database
+Social Stream is not compatible with {default mass attributes protection shipped with Rails 3.2.3}[http://weblog.rubyonrails.org/2012/3/30/ann-rails-3-2-3-has-been-released/], but uses the {strong_parameters gem}[https://github.com/rails/strong_parameters] that will be the default in Rails 4. Set this in your config/application.rb before running the migration command:
+
+  config.active_record.whitelist_attributes = false
+
+Now migrate your database
 
   rake db:migrate
 
 Since {Social Stream}[http://github.com/ging/social_stream] depends on {Devise}[https://github.com/plataformatec/devise], make sure you follow {its setup instructions}[https://github.com/plataformatec/devise/tree/master/lib/generators/templates#readme]. Specifically, make sure you set the default URL options for your environments at <tt>config/environments/*.rb</tt> with something like:
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-
-Social Stream is not compatible with {default mass attributes protection shipped with Rails 3.2.3}[http://weblog.rubyonrails.org/2012/3/30/ann-rails-3-2-3-has-been-released/], but uses the {strong_parameters gem}[https://github.com/rails/strong_parameters] that will be the default in Rails 4.
-
-You must set 
-   
-   config.active_record.whitelist_attributes = false in config/application.rb
-
 
 = Documentation
 
