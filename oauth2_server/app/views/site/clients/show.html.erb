@@ -13,7 +13,7 @@
         <%= Site::Client.human_attribute_name :url %>
       </h3>
       <div class="result">
-        <%= @client.callback_url %>
+        <%= link_to @client.url, @client.url%>
       </div>
       <h3>
         <%= Site::Client.human_attribute_name :callback_url %>
