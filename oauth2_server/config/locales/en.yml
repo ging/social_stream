@@ -19,5 +19,9 @@ en:
     public_info: "Read your public information"
   site:
     client:
+      add: "Add site"
+      added: "Added sites"
+      index:
+        title: "Client sites"
       new:
         title: "Register new client site"
