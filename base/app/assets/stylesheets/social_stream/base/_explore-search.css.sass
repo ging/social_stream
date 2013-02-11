@@ -12,19 +12,21 @@
     .btn-large
       margin-top: -6px
     .advanced-options
-      @include makeColumnoMargin(2, 0)
       display: inline
+      width: 172px
+      float: left
       
       .menuv 
         @include border-radius(7px)
         border: 1px solid #f1f1f1 
         width: auto
         margin-left: none
-        padding-top: 10px 0 10px 10px
+        padding: 10px 0 10px 10px
         hr
           margin: 7px 5px 0px -5px
         ul 
           margin-top: 7px
+          margin-left: 18px
           li 
             margin-left: 1px
             padding: 0px 0px
@@ -32,6 +34,8 @@
             ol 
               margin-left: 2px
               padding: 0px 0px
+              margin-bottom: 13px
+              margin-top: -7px
               li
                 margin-top: -7px 0 8px 0
                 padding-bottom: 0px
@@ -54,14 +58,16 @@
         margin-left: 8px 0 0 0px !important
         text-decoration: none
         display: block
-        padding: 3px 6px
+        padding: 3px 0px
         font-size: 12px
         cursor: pointer
 
     .search-result 
+      margin-left: 51px
       .tags-list
         display: inline
-        @include makeColumn(10, 0)
+        width: 889px
+        float: left
         ul
           @include makeColumn(2, 0)
           margin-top: 20px
@@ -71,4 +77,18 @@
             &:hover
               color: $linkColor
 
-
+#tags
+  margin-top: 20px
+  .menuhor
+    @include menuHorizontal
+    @include border-radius (12px)
+    border: 1px solid #ccc
+    padding: 13px 10px 10px 10px
+    list-style-type: none
+    margin-left: 4em
+    display: inline
+    li
+      display: inline
+      padding: 0 5px
+      font-size: 20px
+      cursor: pointer
