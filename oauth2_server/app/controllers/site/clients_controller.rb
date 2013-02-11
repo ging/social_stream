@@ -4,7 +4,7 @@ class Site::ClientsController < ApplicationController
   before_filter :set_author_ids, only: [ :create, :update ]
 
   def index
-    @clients = Site::Client.all
+    @developer_clients = current_subject.developer_site_clients
   end
 
   def show

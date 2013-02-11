@@ -6,6 +6,12 @@ class Site::Client < Site
 
   after_create :set_admin
 
+  scope :administered_by, lambda { |actor|
+    joins(actor: :sent_ties).
+      merge(Contact.received_by(actor)).
+      merge(Tie.related_by(Relation::Admin.instance))
+  }
+
   %w{ url callback_url secret }.each do |m|
     define_method m do
       config[m]

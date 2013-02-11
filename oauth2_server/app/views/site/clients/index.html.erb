@@ -3,21 +3,23 @@
 <article class="first-img">
   <header>
     <h1>
-      Application
+      <%= t 'site.client.index.title' %>
     </h1>
-    Developers applications
+    <%= t 'site.client.added' %>
+
     <%= link_to t('site.client.add'), new_site_client_path %>
     <hr class="soften">
   </header>
 
-  <% @clients.each do |client| %>
+  <% @developer_clients.each do |client| %>
 
-    <img data-src="holder.js/40x40" alt="name application" style="width: 40px; height: 40px;" src="assets/user.png">
+    <img style="width: 40px; height: 40px;" src="assets/user.png">
+
     <div class="name">
       <%= link_to client.name, client %>
     </div>
     <div class="url">
-      <%= link_to client.url, client.url %>
+      <%= link_to client.url, client.url, target: '_blank' %>
     </div>
     <div class="users">
       <span>
