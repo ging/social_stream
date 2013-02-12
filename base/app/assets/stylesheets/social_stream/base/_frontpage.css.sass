@@ -6,12 +6,6 @@
 #frontpage,
 #registration,
 #forgot-pass
-  .left
-    @include makeColumnoMargin(6, 0)
-    display: inline
-    margin: 40px 0 0 30px
-    width: 430px
-
   .right
     @include makeColumn(5, 1)
     display:inline-block
@@ -22,13 +16,19 @@
     .btn
       margin: 10px 25px 0 0
       float: right 
-#welcome
+#welcome,
+  .left,
   .forgot
     @include makeColumn(7, 4)
     @include clearfix
     h2
       margin-left: -20px
-    
+
+#presentation
+  @include makeColumnoMargin(6, 0)
+  display: inline
+  margin: 40px 0 0 30px
+  width: 430px
 
 #remember
   width: 150px
@@ -66,10 +66,13 @@
   .welcome
     text-align: center
     .message
-      @include opacity (1)
+      @include opacity (60)
       font-size: 60px
       font-weight: bold
       margin: -219px 30px 0
+      width: 288px
+      margin-left: 80px
+
       .to
         font-size: 40px
         margin-top: 10px
@@ -80,4 +83,55 @@
     margin-top: 4px
 #login_data
   @include clearfix
+
+.right
+  @include makeColumn(5, 1)
+  display:inline-block
+  .div_login,
+  .div_registration,
+  .div_password,
+  .div_sign_in
+    @include makeColumn(4, 0)
+    @include box-shadow(0px 0px 13px rgba(50, 50, 50, 0.15))
+    @include border-radius(15px)
+    padding: 15px
+    margin-top: 50px
+    color: #8c8c8c
+    h3
+      text-align: right
+      font-size: 35px
+      line-height: 24px
+      margin-bottom: 20px
+      margin-top: 5px
+    .input_username
+      width: 96%
+    .btn
+      margin-bottom: 20px !important
+      margin-right: 0px !important
+    .soften
+      clear: both
+  .div_registration
+    margin-top: 30px
+
+#sign_in
+  @include makeColumn(4, 1)
+  display:inline-block
+  @include box-shadow(0px 0px 13px rgba(50, 50, 50, 0.15))
+  @include border-radius(15px)
+  padding: 15px
+  margin-top: 50px
+  color: #8c8c8c
+  h3
+    text-align: right
+    font-size: 35px
+    line-height: 24px
+    margin-bottom: 20px
+    margin-top: 5px
+  .input_username
+    width: 96%
+  .btn
+    margin-bottom: 20px !important
+    margin-right: 0px !important
+  .soften
+    clear: both
   
