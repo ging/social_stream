@@ -5,7 +5,7 @@ module SocialStream
         puts "#{ klass.name } population"
         start_time = Time.now
 
-        50.times do
+        10.times do
           author = Actor.all[rand(Actor.all.size)]
           owner = author
           relation_ids = [Relation::Public.instance.id]
