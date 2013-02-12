@@ -10,21 +10,23 @@
   .tab-content
     @include makeColumn(10, 0)
     padding-bottom: 100px
-    .documents
-      .document
-        display: inline
-        @include makeColumn(3, 0)
-        margin-left: 19px
-        .thumb
-          @include makeColumnoMargin(1, 0)
-          display: inline
-          margin-top: 14px
-        .brifing
-          @include makeColumnoMargin(2, 0)
-          display: inline-block
-        .author
-          margin-top: -10px
-          font-size: 13px
-      .actions
-        color: $gray
-        font-size: 12px
+    
+#search,
+.documents
+  .document
+    display: inline
+    @include makeColumn(3, 0)
+    margin-left: 19px
+    .thumb
+      @include makeColumnoMargin(1, 0)
+      display: inline
+      margin-top: 14px
+    .brifing
+      @include makeColumnoMargin(2, 0)
+      display: inline-block
+    .author
+      margin-top: -10px
+      font-size: 13px
+  .actions
+    color: $gray
+    font-size: 12px
