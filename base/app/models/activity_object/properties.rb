@@ -2,17 +2,23 @@ class ActivityObject
   # Manage all the relations between two {ActivityObject}
   #
   # By default, any {SocialStream::Models::Object object} is related with the others
-  # That means that there are the following methods:
+  # That means that the following methods are available:
   #
-  #   post.posts #=> returns all the posts that are properties of the given post
-  #   post.documents #=> returns all the documents associated with a given post
+  #   post.posts #=> returns all the posts that are properties of post
+  #   post.documents #=> returns all the documents associated with post
   #   document.holder_posts #=> all the posts that have this document as property
   #
-  # Currently there
+  # Currently, Rails does not support assigning objects directly,
+  # as in post.documents << d, but you can use
   #
+  #   post.property_objects << d.activity_object_id
   #
+  # There are convenience method to add properties to holders without affecting
+  # existing holders. For instance, if you can assign several documents to an event,
+  # you can use:
   #
-  # There are also
+  #   document.add_holder_event_id = event.id
+  #
   module Properties
     extend ActiveSupport::Concern
 
