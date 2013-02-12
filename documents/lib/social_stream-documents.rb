@@ -1,6 +1,12 @@
 require 'social_stream/documents/dependencies'
 
 module SocialStream
+  module Documents
+    module Models
+      autoload :ActivityObject, 'social_stream/documents/models/activity_object'
+    end
+  end
+
   module Views
     module Toolbar
       autoload :Documents, 'social_stream/views/toolbar/documents'
@@ -76,6 +82,11 @@ module SocialStream
     class << self
       def setup
         yield self
+      end
+
+      # The symbols for the STI classes of {Document}: [ :picture, :audio, :video ]
+      def subtypes
+        subtype_classes_mime_types.keys
       end
     end
 

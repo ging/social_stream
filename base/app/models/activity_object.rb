@@ -39,20 +39,6 @@ class ActivityObject < ActiveRecord::Base
            :class_name => "ActivityAction",
            :conditions => { :owner => true }
 
-  has_many :activity_object_properties,
-           :dependent => :destroy
-  has_many :object_properties,
-           :through => :activity_object_properties,
-           :source => :property
-  has_many :activity_object_holders,
-           :class_name  => "ActivityObjectProperty",
-           :foreign_key => :property_id,
-           :dependent   => :destroy
-  has_many :object_holders,
-           :through => :activity_object_holders,
-           :source  => :activity_object
-
-
   before_validation :fill_owner_id, :fill_user_author_id, :fill_relation_ids, :if => lambda { |obj| obj.object_type != "Actor" }
 
   validates_presence_of :object_type
@@ -263,4 +249,6 @@ class ActivityObject < ActiveRecord::Base
 
     a.save!
   end
+
+  include Properties
 end

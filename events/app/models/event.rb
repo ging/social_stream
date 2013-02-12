@@ -27,15 +27,9 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def poster_object
-    object_properties.
-      where('activity_object_properties.type' => 'ActivityObjectProperty::Poster').
-      first
-  end
-
   def poster
     @poster ||=
-      poster_object.try(:document) ||
+      main_document ||
       build_poster
   end
 
@@ -54,8 +48,8 @@ class Event < ActiveRecord::Base
   end
 
   def build_poster
-    Document.new(:event_property_object_id => activity_object_id,
-                 :owner_id => owner_id)
+    Document.new(add_holder_event_id: id,
+                 owner_id: owner_id)
   end
 
 
