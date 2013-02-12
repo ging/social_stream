@@ -5,23 +5,23 @@ module SocialStream
         extend ActiveSupport::Concern
 
         included do
-            has_one :geotag, :autosave => true
-            has_one :address, :through => :geotag, :autosave => true
+          has_one :geotag, :autosave => true
+          has_one :address, :through => :geotag, :autosave => true
 
-            delegate  :latitude, :latitude=, 
-                      :longitude, :longitude=,
-                      :altitude, :altitude=,
-                      :heading, :heading=,
-                      :tilt, :tilt=,
-                      :to => :geotag!
+          delegate  :latitude, :latitude=, 
+                    :longitude, :longitude=,
+                    :altitude, :altitude=,
+                    :heading, :heading=,
+                    :tilt, :tilt=,
+                    :to => :geotag!
 
-            delegate  :formatted, :formatted=, 
-                      :streetAddress, :streetAddress=,
-                      :locality, :locality=,
-                      :region, :region=,
-                      :postalCode, :postalCode=,
-                      :country, :country=,
-                      :to => :address!
+          delegate  :formatted, :formatted=, 
+                    :streetAddress, :streetAddress=,
+                    :locality, :locality=,
+                    :region, :region=,
+                    :postalCode, :postalCode=,
+                    :country, :country=,
+                    :to => :address!
         end
 
         def geotag!
