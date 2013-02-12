@@ -20,7 +20,22 @@ class ActivityObject
   #   document.add_holder_event_id = event.id
   #
   module Properties
+    module HolderMethods
+      def holder_methods objects
+        objects.each do |o|
+          module_eval <<-EOM
+            def add_holder_#{ o }_id= i
+              @add_holder_#{ o }_id = i
+
+              self.add_holder_object_id = #{ o.to_s.classify }.find(i).activity_object_id
+            end
+          EOM
+        end
+      end
+    end
+
     extend ActiveSupport::Concern
+    extend HolderMethods
 
     included do
       has_many :activity_object_properties,
@@ -56,39 +71,45 @@ class ActivityObject
                through: :main_activity_object_holds,
                source:  :activity_object
 
-      SocialStream.objects.each do |o|
-        attr_reader "add_holder_#{ o }_id" # attr_reader "add_holder_post_id"
+      property_reflections SocialStream.objects
+    end
 
-        has_many o.to_s.tableize,             # has_many posts,
-                 through: :property_objects,  #          through: :property_objects,
-                 source:  o                   #          source:  :post
+    module ClassMethods
+      def property_reflections objects, options = {}
+        objects.each do |o|
+          source = options[:source] || o
+          conditions = options[:conditions] && { type: o.to_s.classify } || nil
 
-        has_one  "main_#{ o }",                  # has_one :main_post,
-                 through: :main_property_object, #         through: :main_property_object,
-                 source: o                       #         source:  :post
+          attr_reader "add_holder_#{ o }_id" # attr_reader "add_holder_post_id"
 
-        has_many "holder_#{ o.to_s.tableize }",  # has_many :holder_posts,
-                 through: :holder_objects,       #          through: :holder_objects,
-                 source: o                       #          source:  :post
+          has_many o.to_s.tableize,             # has_many posts,
+                   through: :property_objects,  #          through: :property_objects,
+                   source:  source,             #          source:  :post
+                   conditions: conditions
 
-        has_many "main_holder_#{ o.to_s.tableize }", # has_many :main_holder_posts,
-                 through: :main_holder_objects,      #          through: :main_holder_objects,
-                 source:  o                          #          source:  :post
+          has_one  "main_#{ o }",                  # has_one :main_post,
+                   through: :main_property_object, #         through: :main_property_object,
+                   source: source,                 #         source:  :post
+                   conditions: conditions
+
+          has_many "holder_#{ o.to_s.tableize }",  # has_many :holder_posts,
+                   through: :holder_objects,       #          through: :holder_objects,
+                   source: source,                 #          source:  :post
+                   conditions: conditions
+
+          has_many "main_holder_#{ o.to_s.tableize }", # has_many :main_holder_posts,
+                   through: :main_holder_objects,      #          through: :main_holder_objects,
+                   source:  source,                    #          source:  :post
+                   conditions: conditions
+
+        end
       end
     end
 
-    SocialStream.objects.each do |o|
-      eval <<-EOM
-        def add_holder_object_id= i
-          self.holder_object_ids |= [i]
-        end
-
-        def add_holder_#{ o }_id= i
-          @add_holder_#{ o }_id = i
-
-          self.add_holder_object_id = #{ o.to_s.classify }.find(i).activity_object_id
-        end
-      EOM
+    def add_holder_object_id= i
+      self.holder_object_ids |= [i]
     end
+
+    holder_methods SocialStream.objects
   end
 end
