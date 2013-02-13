@@ -73,6 +73,12 @@ class ActivityObject < ActiveRecord::Base
       merge(ActivityAction.sent_by(subject).where(:follow => true))
   }
 
+  scope :not_actor, where('activity_objects.object_type != ?', "Actor")
+
+  scope :popular, order("activity_objects.like_count DESC")
+
+  scope :visited, order("activity_objects.visit_count DESC")
+
   scope :shared_with, lambda { |subject|
     joins(:activity_object_audiences).
       merge(ActivityObjectAudience.where(:relation_id => Relation.ids_shared_with(subject)))

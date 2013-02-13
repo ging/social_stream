@@ -216,12 +216,23 @@ es:
       instructions: "Introduce el correo electrónico y te mandaremos instrucciones para cambiarlo"
       update: "Cambiar contraseña"
   explore:
-    index: "Explorar"
-    participants: "Participantes"
-    files: "Recursos"
-    timeline: "Linea temporal"
-    tags: "Etiquetas"
-    search: "Buscar"
+    explore:
+      most_followed: "Más seguidos"
+      most_popular: "Más populares"
+    header:
+      index: "Explorar"
+      participants: "Participantes"
+      files: "Recursos"
+      timeline: "Linea temporal"
+      tags: "Etiquetas"
+      search: "Buscar"
+    participants:
+      last_active: "Últimos activos"
+      last_registered: "Últimos registrados"
+      most_members: "Más integrantes"
+      registered_since: "desde %{time}"
+    resources:
+      most_visited: "Más vistos"
   follower:
     follower:
       title: "Seguidores"

@@ -183,54 +183,46 @@ namespace :db do
       task :messages => :read_environment do
         puts 'Mailboxer population'
         mailboxer_start = Time.now
-        @available_actors = Actor.all
 
-        @available_actors.each do |a|
-          actors = @available_actors.dup - Array(a)
+        demo = SocialStream::Population::Actor.demo
+        @available_actors = Actor.all.sample(Actor.count / 3)
+        @available_actors |= [ demo ]
+
+
+        5.times do
+          actors = @available_actors.dup
 
           mult_recp = actors.uniq
-          if (demo = User.find_by_name('demo')) and !mult_recp.include? Actor.normalize(demo)
-            mult_recp << Actor.normalize(demo)
-          end
-          actor = mult_recp[(rand * mult_recp.size).to_i]
+
+          actor = mult_recp.sample
+
           mult_recp.delete(actor)
+
           mail = actor.send_message(mult_recp, "Hello all, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))
-          actor = mult_recp[(rand * mult_recp.size).to_i]
-          mail = actor.reply_to_all(mail, "Well, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
-          actor = mult_recp[(rand * mult_recp.size).to_i]
-          mail = actor.reply_to_all(mail, "Ok, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
-          actor = mult_recp[(rand * mult_recp.size).to_i]
-          mail = actor.reply_to_all(mail, "Pretty well, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
-          actor = mult_recp[(rand * mult_recp.size).to_i]
-          actor.reply_to_all(mail, "Finally, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
 
+          [ 'Well', 'Ok', 'Pretty well', 'Finally' ].inject(mail) do |st|
+            break if rand < 0.2
 
-          if (demo = User.find_by_name('demo'))
-            next if Actor.normalize(demo)==Actor.normalize(a)
+            actor = mult_recp.sample
+
+            mail = actor.reply_to_all(mail, "#{ st }, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
+
+            mail
+          end
+
+          if rand > 0.75
+            mail.conversation.move_to_trash(demo)
+          end
+
+          @available_actors = (Actor.all.sample(Actor.count / 3) - [ demo ])
+
+          @available_actors.each do |a|
             mail = a.send_message(demo, "Hello, #{demo.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))
             if rand > 0.5
               mail = demo.reply_to_sender(mail, "Pretty well #{a.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
               if rand > 0.5
                 a.reply_to_sender(mail, "Ok #{demo.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
               end
-            end
-            if rand > 0.75
-              mail.conversation.move_to_trash(demo)
-            end
-          end
-
-          Forgery::Basic.number(:at_most => actors.size).times do
-            actor = actors.delete_at((rand * actors.size).to_i)
-            next if Actor.normalize(actor)==Actor.normalize(a)
-            mail = a.send_message(actor, "Hello, #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))
-            if rand > 0.5
-              mail = actor.reply_to_sender(mail, "Pretty well #{a.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
-              if rand > 0.5
-                a.reply_to_sender(mail, "Ok #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
-              end
-            end
-            if rand > 0.75
-              mail.conversation.move_to_trash(actor)
             end
           end
         end

@@ -2,30 +2,31 @@
   <div class="left">
     <article class="article">
       <header>
-        Last activity
+        <%= t 'explore.participants.last_active' %>
       </header>
-      <%= render partial: 'explore/last-activity' %>
-      <%= render partial: 'explore/last-activity' %>
-      <%= render partial: 'explore/last-activity' %>
+      <% User.last_active.first(5).each do |u| %>
+        <%= render partial: 'explore/last_active', locals: { object: u } %>
+      <% end %>
     </article>
   </div>
 
   <div class="right">
     <article>
       <header>
-        Groups members
+        <%= t 'explore.participants.most_members' %>
       </header>
+
       <%= render partial: 'explore/members' %>
       <%= render partial: 'explore/members' %>
       <%= render partial: 'explore/members' %>
     </article>
     <article>
       <header>
-        Latest register
+        <%= t 'explore.participants.last_registered' %>
       </header>
-      <%= render partial: 'explore/last-register' %>
-      <%= render partial: 'explore/last-register' %>
-      <%= render partial: 'explore/last-register' %>
+      <% User.last_registered.first(3).each do |u| %>
+        <%= render partial: 'explore/last_registered', locals: { object: u } %>
+      <% end %>
     </article>
   </div>
 </section>
