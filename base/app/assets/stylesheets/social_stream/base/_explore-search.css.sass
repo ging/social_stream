@@ -81,3 +81,27 @@
 #tags
   margin-top: 20px
  
+#search
+  .events
+    display: inline-block
+    @include makeColumn(3, 0)
+    margin-left: 0px
+    .avatar
+      @include makeColumnoMargin(1, 0)
+      display: inline
+      img
+        height: 59px
+        margin-top: 7px
+        width: 45px
+    .data
+      @include makeColumnoMargin(2, 0)
+      display: inline-block
+      margin-top: 6px
+      
+      .date
+        font-size: 12px
+      .frequency
+        font-size: 12px
+        color: #888
+
+
