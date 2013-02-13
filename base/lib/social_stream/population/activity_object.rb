@@ -6,7 +6,7 @@ module SocialStream
         start_time = Time.now
 
         10.times do
-          author = Actor.all[rand(Actor.all.size)]
+          author = ::Actor.all.sample
           owner = author
           relation_ids = [Relation::Public.instance.id]
 
@@ -14,7 +14,8 @@ module SocialStream
         end
 
         if SocialStream.relation_model == :custom
-          PowerLaw.new(Tie.allowing('create', 'activity').all) do |t|
+          ties = Tie.allowing('create', 'activity').all
+          PowerLaw.new ties.sample(ties.count / 3) do |t|
 
             author = t.receiver
             owner  = t.sender
