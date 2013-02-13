@@ -2,22 +2,24 @@
   <div class="left">
     <article class="article">
       <header>
-        More downloaded
+        <%= t 'explore.resources.most_visited' %>
       </header>
-      <%= render partial: 'explore/files-more_download' %>
-      <%= render partial: 'explore/files-more_download' %>
-      <%= render partial: 'explore/files-more_download' %>
+
+      <% ActivityObject.not_actor.visited.first(3).each do |ao| %>
+        <%= render partial: 'explore/resources_most_visited', locals: { object: ao } %>
+      <% end %>
     </article>
   </div>
 
   <div class="right">
     <article>
       <header>
-        last upploaded
+        <%= t 'explore.resources.last_uploaded' %>
       </header>
-      <%= render partial: 'explore/files-last_uploads' %>
-      <%= render partial: 'explore/files-last_uploads' %>
-      <%= render partial: 'explore/files-last_uploads' %>
+
+      <% ActivityObject.not_actor.created.first(3).each do |ao| %>
+        <%= render partial: 'explore/resources_last_uploaded', locals: { object: ao } %>
+      <% end %>
     </article>
   </div>
 </section>

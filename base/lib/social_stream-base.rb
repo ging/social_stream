@@ -41,6 +41,7 @@ module SocialStream
 
   module Population
     autoload :ActivityObject, 'social_stream/population/activity_object'
+    autoload :Actor,          'social_stream/population/actor'
     autoload :PowerLaw,       'social_stream/population/power_law'
     autoload :Timestamps,     'social_stream/population/timestamps'
   end

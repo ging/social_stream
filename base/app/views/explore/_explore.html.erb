@@ -2,18 +2,18 @@
   <div class="left">
     <article class="article">
       <header>
-        Most popular
+        <%= t 'explore.explore.most_popular' %>
       </header>
-      <%= render partial: 'explore/trending' %>
-      <%= render partial: 'explore/trending' %>
-      <%= render partial: 'explore/trending' %>
+      <% ActivityObject.not_actor.popular.first(3).each do |ao| %>
+        <%= render partial: 'explore/trending', locals: { object: ao } %>
+      <% end %>
     </article>
   </div>
 
   <div class="right">
     <article>
       <header>
-        Most followed
+        <%= t 'explore.explore.most_followed' %>
       </header>
       <%= render partial: 'explore/last' %>
       <%= render partial: 'explore/last' %>
