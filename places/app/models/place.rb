@@ -22,6 +22,10 @@ class Place < ActiveRecord::Base
     @photo ||= build_photo
   end
 
+  def thumb_photo
+    main_picture
+  end
+
   protected
   def format_website
     if self.url.present? && !(self.url.start_with?("http://") || self.url.start_with?("https://"))
