@@ -3,7 +3,7 @@
     .date
       @include makeColumn(1, 0)
       display: inline
-      margin-top: 8px 0 0 -3px
+      margin: 3px 0 0 -2px
       .day,
       .month,
       .hour
@@ -20,20 +20,36 @@
       .hour
         font-size: 15px
     .poster
-      @include makeColumnoMargin(2, 0)
+      float: left
+      width: 80px
       display: inline-block
     .details
-      @include makeColumn(4, 0)
+      @include makeColumn(3, 0)
       display: inline-block
-      margin-left: -40px
+      margin-left: 20px
       .title
         font-size: 20px
         line-height: 26px
-      .description,
+      .follow,
       .frequency
         font-size: 12px
       .frequency
         color: $grayLight
+      .description
+        font-size: 13px
       .follow
         margin-top: -10px
+
+      input
+        &[type="submit"]
+        @include border-radius (7px)
+        @include size (22px, 110px)
+        border: 1px solid #888
+        color: #888
+        background: $white
+        padding: 0px
+        margin-top: 5px
+        &:hover
+          color: #fff
+          background: $red
 
