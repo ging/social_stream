@@ -473,13 +473,7 @@ class Actor < ActiveRecord::Base
   def wall(type, options = {})
     options[:for] = self if type == :home
 
-    wall =
-      Activity.
-        select("DISTINCT activities.*").
-        roots.
-        includes(:author, :user_author, :owner, :activity_objects, :activity_verb, :relations)
-
-    actor_ids =
+    from =
       case type
       when :home
         following_actor_and_self_ids
@@ -489,12 +483,7 @@ class Actor < ActiveRecord::Base
         raise "Unknown type of wall: #{ type }"
       end
 
-    wall = wall.authored_or_owned_by(actor_ids)
-
-    # Authentication
-    wall = wall.shared_with(options[:for])
-
-    wall = wall.order("created_at desc")
+    Activity.wall(from, options[:for])
   end
  
   def logo
