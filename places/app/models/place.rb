@@ -14,27 +14,8 @@ class Place < ActiveRecord::Base
   validates :latitude, :presence => true
   validates :longitude, :presence => true
 
-  # def photo_object
-  #   object_properties.
-  #     where('activity_object_properties.type' => 'ActivityObjectProperty::Photo').
-  #     first
-  # end
-
-  # def photo
-  #   @photo ||=
-  #     photo_object.try(:document) ||
-  #     build_photo
-  # end
-
   def photos
-    photo_objects = object_properties.
-      where('activity_object_properties.type' => 'ActivityObjectProperty::Photo')
-
-    objects = Array.new
-    photo_objects.each do |a|
-      objects << a.try(:document)
-    end
-    objects
+    pictures
   end
 
   def photo
@@ -53,8 +34,8 @@ class Place < ActiveRecord::Base
   end
 
   def build_photo
-    Document.new(:place_property_object_id => activity_object_id,
-                 :owner_id => owner_id)
+    Picture.new(:add_holder_place_id => id,
+                :owner_id => owner_id)
   end
 
 end
