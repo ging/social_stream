@@ -14,11 +14,12 @@
   <div class="right">
     <article>
       <header>
-        last upploaded
+        <%= t 'explore.resources.last_uploaded' %>
       </header>
-      <%= render partial: 'explore/files-last_uploads' %>
-      <%= render partial: 'explore/files-last_uploads' %>
-      <%= render partial: 'explore/files-last_uploads' %>
+
+      <% ActivityObject.not_actor.created.first(3).each do |ao| %>
+        <%= render partial: 'explore/resources_last_uploaded', locals: { object: ao } %>
+      <% end %>
     </article>
   </div>
 </section>

@@ -230,9 +230,11 @@ es:
       last_active: "Últimos activos"
       last_registered: "Últimos registrados"
       most_members: "Más integrantes"
-      registered_since: "desde %{time}"
+      registered_since: "desde el %{time}"
     resources:
+      last_uploaded: "Últimos subidos"
       most_visited: "Más vistos"
+      uploaded_since: "desde el %{time}"
   follower:
     follower:
       title: "Seguidores"

@@ -234,7 +234,9 @@ en:
       most_members: "Most members"
       registered_since: "since %{time}"
     resources:
+      last_uploaded: "Last uploaded"
       most_visited: "Most viewed"
+      uploaded_since: "since %{time}"
   follower:
     follower:
       title: "Followers"
