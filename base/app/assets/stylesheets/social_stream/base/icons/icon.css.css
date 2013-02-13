@@ -139,7 +139,7 @@ li{
 .icon_navbar-notification {background-position:-136px -38px;}
 .icon_navbar-tools {background-position:-177px -38px;}
 /* alarm*/
-.icon_navbar-notif_message {background-position:-55px -8px;}
+.icon_navbar-message-blue {background-position:-55px -9px;}
 .icon_navbar-notif_followers {background-position:-96px -8px;}
 .icon_navbar-notif_notification {background-position:-136px -8px;}
 
@@ -271,6 +271,6 @@ li{list-style-type:none}
 .icon_tool16-embed { background-position: -100px -52px;}
 .icon_tool16-branch{ background-position: -130px -52px;}
 .icon_tool16-rss{ background-position: -160px -52px;}
-.icon_tool16-info { background-position: -190px -52px;}
+.icon_tool16-info { background-position: -192px -110px;}
 .icon_tool16-span { background-position: -220px -52px;}
 

@@ -1,0 +1,34 @@
+.btn-blue
+  @include ie7-inline-block()
+  padding: 4px 12px
+  margin-bottom: 0
+  font-size: $baseFontSize
+  line-height: $baseLineHeight
+  vertical-align: middle
+  cursor: pointer
+  background-color: $white
+  border: 2px solid $blue 
+  *border: 0
+  color: $gray 
+  @include border-radius(7px)
+  @include ie7-restore-left-whitespace()
+  @include box-shadow(inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05))
+  @include transition(background 1s, color, 1s)
+  a
+    color: $gray
+  
+  &:hover
+    border: 2px solid $white
+    background-color: $blue !important
+    color: $white
+  
+  &:focus 
+    @include tab-focus()
+  
+  &.active
+    @include box-shadow(inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05))
+
+  &.disabled,
+  &[disabled] 
+    cursor: default
+    @include opacity(65)

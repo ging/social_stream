@@ -1,31 +1,46 @@
 #toolbar 
   @include makeColumnoMargin(2, 0)
   display: table-cell
+  h4
+    margin-top: 24px
+    border-bottom: 1px solid #ccc
 
   #avatar_profile
-    text-aling: center
+    font-size: 26px
+    line-height: 49px
+    text-overflow: ellipsis
+    overflow: hidden
     img
       @include border-radius(5px)
-      max-width: 139px
-      width: 139px
+      width: 150px
     h5 
       a
         text-decoration: none
         color: $black
         text-aling: center
+    .logo_caption
+      font-size: 15px
+      text-align: center
     input, select
       @include makeColumnoMargin(2, 0)
 
   .contact
     width: 140px
+    margin-left: 16px
+    padding-top: 0px
+    margin-top: -10px
     img
-      padding: 14px 10px 0 0
+      margin: 14px 10px 0 0
 
         
 .toolbar_menu
   @include border-radius(5px)
 
-    
+.btn-blue
+  img,
+  .icon_navbar-message-blue,
+  .icon_tool16-info
+    margin-right: 4px
 
        
 

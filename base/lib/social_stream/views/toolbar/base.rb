@@ -50,7 +50,7 @@ module SocialStream
               # Groups
               items << {
                 :key  => :groups,
-                :html => render(:partial => 'toolbar/groups', :locals => { :subject => subject })
+                :html => link_to(image_tag("btn/btn_group.png") + t('group.other'), '#', :id => "toolbar_menu-groups"),
                 :items => [
                   {
                   :key => :new_group ,
