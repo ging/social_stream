@@ -231,8 +231,10 @@ en:
     participants:
       last_active: "Last active"
       last_registered: "Last registered"
-      more_members: "More members"
+      most_members: "Most members"
       registered_since: "since %{time}"
+    resources:
+      most_visited: "Most viewed"
   follower:
     follower:
       title: "Followers"

@@ -77,6 +77,8 @@ class ActivityObject < ActiveRecord::Base
 
   scope :popular, order("activity_objects.like_count DESC")
 
+  scope :visited, order("activity_objects.visit_count DESC")
+
   scope :shared_with, lambda { |subject|
     joins(:activity_object_audiences).
       merge(ActivityObjectAudience.where(:relation_id => Relation.ids_shared_with(subject)))

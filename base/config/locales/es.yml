@@ -229,8 +229,10 @@ es:
     participants:
       last_active: "Últimos activos"
       last_registered: "Últimos registrados"
-      more_members: "Más integrantes"
+      most_members: "Más integrantes"
       registered_since: "desde %{time}"
+    resources:
+      most_visited: "Más vistos"
   follower:
     follower:
       title: "Seguidores"
