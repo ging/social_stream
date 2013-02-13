@@ -1,11 +1,9 @@
 <div class="content">
   <div class="case">
     <div class="first-line">
-      <a href="·">
-        nombre
-      </a>
+      <%= link_to object.name, object %>
       <span> 
-        registrado desde el 14 de Febrero de 2011 
+        <%= t 'explore.participants.registered_since', time: l(object.created_at) %>
       </span>
     </div>
   </div>

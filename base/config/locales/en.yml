@@ -232,6 +232,7 @@ en:
       last_active: "Last active"
       last_registered: "Last registered"
       more_members: "More members"
+      registered_since: "since %{time}"
   follower:
     follower:
       title: "Followers"

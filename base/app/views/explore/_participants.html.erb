@@ -15,6 +15,7 @@
       <header>
         <%= t 'explore.participants.more_members' %>
       </header>
+
       <%= render partial: 'explore/members' %>
       <%= render partial: 'explore/members' %>
       <%= render partial: 'explore/members' %>
@@ -23,9 +24,9 @@
       <header>
         <%= t 'explore.participants.last_registered' %>
       </header>
-      <%= render partial: 'explore/last-register' %>
-      <%= render partial: 'explore/last-register' %>
-      <%= render partial: 'explore/last-register' %>
+      <% User.last_registered.first(3).each do |u| %>
+        <%= render partial: 'explore/last_registered', locals: { object: u } %>
+      <% end %>
     </article>
   </div>
 </section>

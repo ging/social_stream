@@ -230,6 +230,7 @@ es:
       last_active: "Últimos activos"
       last_registered: "Últimos registrados"
       more_members: "Más integrantes"
+      registered_since: "desde %{time}"
   follower:
     follower:
       title: "Seguidores"

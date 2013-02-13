@@ -34,7 +34,8 @@ class User < ActiveRecord::Base
     v.validates_length_of       :password, :within => Devise.password_length, :allow_blank => true
   end
 
-  scope :last_active, order('users.updated_at DESC')
+  scope :last_registered, order('users.created_at DESC')
+  scope :last_active,     order('users.updated_at DESC')
   
   def recent_groups size = 5
     contact_subjects(:type => :group, :direction => :sent) { |q|
