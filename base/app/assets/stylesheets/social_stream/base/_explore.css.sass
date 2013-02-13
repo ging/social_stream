@@ -37,7 +37,9 @@
           border-top: 1px solid #f3f3f3
           padding-top: 7px
           .case
-            @include makeColumn(5, 0)
+            float: left
+            width: 361px
+            margin-left: 20px
             font-size: 12px
             word-wrap: break-word
             .first-line
@@ -47,9 +49,10 @@
             span
               color: $grayLighter
           .well-small
-            width: 30px
+            width: 50px
             float: right
             margin-bottom: 0px
+            text-align: right
          
     .right
       display: inline-block
