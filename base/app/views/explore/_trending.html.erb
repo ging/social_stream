@@ -1,19 +1,15 @@
 <div class="content">
   <div class="case">        
     <div class="first-line">
-      <a href="·">
-        nombre del archivo
-      </a> 
+      <%= link_to object.title, object.object %>
         / 
-      <a href="·">
-        nombre del usuario
-      </a>
+      <%= link_to object.author_subject.name, object.author_subject %>
     </div>
-    descripcion del archivodescripcion  
+    <%= object.description %>
   </div>
   <aside class="well well-small">
     <div class="top">
-      5 likes
+      <%= t 'like.n', count: object.like_count %>
     </div>
   </aside>
 </div>

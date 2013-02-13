@@ -218,12 +218,20 @@ en:
       instructions: "Type the email address bound to your account and we will sent you instructions to change it:"
       update: "Change your password"
   explore:
-    index: "Explore"
-    participants: "Participants"
-    files: "Files"
-    timeline: "Timeline"
-    tags: "Tags"
-    search: "Search"
+    explore:
+      most_followed: "Most followed"
+      most_popular: "Most popular"
+    header:
+      index: "Explore"
+      participants: "Participants"
+      files: "Files"
+      timeline: "Timeline"
+      tags: "Tags"
+      search: "Search"
+    participants:
+      last_active: "Last active"
+      last_registered: "Last registered"
+      more_members: "More members"
   follower:
     follower:
       title: "Followers"
@@ -309,8 +317,8 @@ en:
     text: "Write your own message"
   like:
     n:
-      one: "1 fan"
-      other: "%{count} fans"
+      one: "%{count} like"
+      other: "%{count} likes"
   location:
     message: "You are here > %{location}"
     base: "You are here"
