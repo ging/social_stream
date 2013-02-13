@@ -1,8 +1,7 @@
 <header class="navbar navbar">
   <nav class="navbar-inner">
-    <%= link_to(image_tag('header-logo.png', :alt => t('site.name')), root_path) %>
-    <div class="brand">
-    </div>
+    <%= link_to(image_tag('header-logo.png', class: "logo", :alt => t('site.name')), root_path) %>
+    <div class="brand"></div>
 
     <!-- FIXME: search javascript functionality in 'layouts/search' -->
     <div class="search-nav">
@@ -11,8 +10,11 @@
       <% end %>
     </div>
     <div class="explore-nav">
-      <%= link_to(raw("<i class='icon_navbar-home'></i> "), explore_path)%>
-      or explore
+      <%= link_to 'explore_path' do %>
+    
+        <%= t('or explore') %>
+      <% end %>
+
     </div>
      <ul class="nav pull-right">
       <li>
