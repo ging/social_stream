@@ -46,34 +46,11 @@ module SocialStream
           SocialStream::Views::List.new.tap do |items|
             case type
             when :home
-              #Contacts
-              items << {
-                :key => :contacts,
-                :html => link_to(raw("<i class='icon_navbar-followers'></i> ")+t('contact.other'), "#", :id => 'toolbar_menu-contacts'),
-                :items => [
-                  {
-                    :key => :current,
-                    :html => link_to(raw("<i class='icon_navbar-followers'></i> ")+t('contact.current'), contacts_path)
-                  },
-                  {
-                    :key => :contacts_graph,
-                    :html => link_to(raw("<i class='icon_navbar-followers'></i> ")+t('contact.graph.one'), ties_path)
-                  },
-                  {
-                    :key => :pending,
-                    :html => link_to(raw("<i class='icon_navbar-followers'></i> ")+t('contact.pending.other'), pending_contacts_path)
-                  },
-                  {
-                    :key => :invitations,
-                    :html => link_to(image_tag("btn/btn_invitation.png")+t('invitation.toolbar'), new_invitation_path)
-                  }
-                ]
-              }
 
               # Groups
               items << {
                 :key  => :groups,
-                :html => link_to(image_tag("btn/btn_group.png") + t('group.other'), '#', :id => "toolbar_menu-groups"),
+                :html => render(:partial => 'toolbar/groups', :locals => { :subject => subject })
                 :items => [
                   {
                   :key => :new_group ,
@@ -88,7 +65,7 @@ module SocialStream
               #Information button
               items << {
                 :key => :subject_info,
-                :html => link_to(raw("<i class='icon_tool-info'></i>")+t('menu.information'), [subject, :profile])
+                :html => render(:partial => 'toolbar/info-button', :locals => { :subject => subject })
               }
 
               if subject != current_subject
@@ -96,15 +73,13 @@ module SocialStream
                   #Relation button
                   items << {
                     :key => :subject_relation,
-                    :html => link_to(raw("<i class='icon_navbar-followers'></i> ") + current_subject.contact_to!(subject).status,
-                                     edit_contact_path(current_subject.contact_to!(subject)))
+                    :html => render(:partial => 'toolbar/add-contact', :locals => { :subject => subject })
                   }
 
                   #Send message button
                   items << {
                     :key => :send_message,
-                    :html => link_to(image_tag("btn/btn_send.png")+t('message.send'),
-                                     new_message_path(:receiver => subject.slug))
+                    :html => render(:partial => 'toolbar/send-message', :locals => { :subject => subject })
                   }
                 end
               end
