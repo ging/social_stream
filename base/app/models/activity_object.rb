@@ -66,6 +66,8 @@ class ActivityObject < ActiveRecord::Base
       merge(ActivityAction.sent_by(subject).where(:owner => true))
   }
 
+  scope :created, order("activity_objects.created_at DESC")
+
   scope :followed, order("activity_objects.follower_count DESC")
 
   scope :followed_by, lambda { |subject|
