@@ -1,10 +1,8 @@
-<!--//*<div class="recent_groups">
-<% if (groups = user.recent_groups).present? %>
-  <h2>
+<div class="recent_groups">
+  <% if (groups = user.recent_groups).present? %>
+    <h2>
       <%=t('group.last') %> (<span class="group_count"><%= groups.count %></span>)
-  </h2>
-
+    </h2>
   <%= render groups %>
 <% end %>
 </div>
-*// -->
