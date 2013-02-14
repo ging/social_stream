@@ -24,14 +24,12 @@ Gem::Specification.new do |s|
   s.add_development_dependency('capybara', '~> 0.3.9')
   # Testing database
   case ENV['DB']
-  when 'mysql'
-    s.add_development_dependency('mysql2')
   when 'postgres'
     # Freeze pg version to 0.12.0
     # https://t.co/zKY52Efr
     s.add_development_dependency('pg', '0.12.0')
   else
-    s.add_development_dependency('sqlite3')
+    s.add_development_dependency('mysql2')
   end
   # Debugging
   unless ENV["CI"]
