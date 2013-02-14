@@ -23,9 +23,6 @@
 
 <br class="clearfloat" />
 
-<%= render :partial => "users/groups",
-           :locals  => { :user => @user } %>
-
 <%= render :partial => "activities/index",
            :locals  => { :activities => @user.wall(:profile, :for => current_subject).
                                               page(params[:page]),
