@@ -1,4 +1,5 @@
 <div id="contact-form">
+  <h3>adjudica roles</h3>
   <%= form_for @contact do |f| %>
     <%= hidden_field_tag "contact[relation_ids][]", "0" %>
 
@@ -20,19 +21,19 @@
       <%= check_box_tag "contact[relation_ids][]", relation.id, f.object.relation_ids.include?(relation.id), :id => "contact_relation_ids_#{ relation.id }" %><%= label_tag "contact_relation_ids_#{ relation.id }", relation.name %>
       </li>
     <% end %>
-    </ul>
 
     <div id="relation-new">
       <%= link_to t('contact.type.new'), relation_customs_path %>
     </div>
+    </ul>
 
     <div id="contact-message">
-      <%= f.label :message %>
+      <%= f.label :message,:class =>"name_text_area" %>
       <%= f.text_area :message, :class =>"new_contact_text_area" %>
     </div>
 
     <div id="contact-submit">
-      <%= submit_tag t("contact.#{ f.object.action }.submit"), :class => "button" %>
+      <%= submit_tag t("contact.#{ f.object.action }.submit"), :class => "btn" %>
     </div>
   <% end %>
 </div>
