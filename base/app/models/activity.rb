@@ -60,15 +60,27 @@ class Activity < ActiveRecord::Base
     where(:owner_id => Actor.normalize_id(subject))
   }
   scope :authored_or_owned_by, lambda { |subjects|
-    ids = Actor.normalize_id(subjects)
+    if subjects.present?
+      ids = Actor.normalize_id(subjects)
 
-    where(arel_table[:author_id].in(ids).or(arel_table[:owner_id].in(ids)))
+      where(arel_table[:author_id].in(ids).or(arel_table[:owner_id].in(ids)))
+    end
   }
 
   scope :shared_with, lambda { |subject|
     joins(:audiences).
       merge(Audience.where(:relation_id => Relation.ids_shared_with(subject)))
   }
+
+  scope :wall, lambda { |senders = nil, receivers = nil|
+    select("DISTINCT activities.*").
+      roots.
+      includes(:author, :user_author, :owner, :activity_objects, :activity_verb, :relations).
+      authored_or_owned_by(senders).
+      shared_with(receivers).
+      order("created_at desc")
+  }
+
 
   after_create  :increment_like_count
   after_destroy :decrement_like_count, :delete_notifications

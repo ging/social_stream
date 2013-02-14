@@ -222,7 +222,7 @@ en:
       most_followed: "Most followed"
       most_popular: "Most popular"
     header:
-      index: "Explore"
+      explore: "Explore"
       participants: "Participants"
       files: "Files"
       timeline: "Timeline"

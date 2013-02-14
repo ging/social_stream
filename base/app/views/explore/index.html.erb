@@ -9,3 +9,9 @@
   </div>
 <% end %>
 </div>
+
+<%= javascript_tag do %>
+  $(function() {
+    SocialStream.Explore.index();
+  });
+<% end %>

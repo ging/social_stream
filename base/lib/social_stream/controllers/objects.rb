@@ -49,7 +49,7 @@ module SocialStream
         protected
 
         def whitelisted_params
-          return [] if request.present? and request.get?
+          return {} if request.present? and request.get?
 
           params.require(self.class.model_class.to_s.underscore.to_sym).permit( *all_allowed_params )
         end

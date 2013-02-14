@@ -220,7 +220,7 @@ es:
       most_followed: "Más seguidos"
       most_popular: "Más populares"
     header:
-      index: "Explorar"
+      explore: "Explorar"
       participants: "Participantes"
       files: "Recursos"
       timeline: "Linea temporal"

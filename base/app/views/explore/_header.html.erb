@@ -1,8 +1,13 @@
-<div class="btn-group" data-toggle="buttons-radio">
-  <button class="btn <%= explore_button_class 'explore' %>" data-target="#explore" data-toggle="tab"><%= t 'explore.header.index' %></button>
-  <button class="btn <%= explore_button_class 'participants' %>" data-target="#participants" data-toggle="tab"><%= t 'explore.header.participants' %></button>
-  <button class="btn <%= explore_button_class 'files' %>" data-target="#files" data-toggle="tab"><%= t 'explore.header.files' %></button>
-  <button class="btn <%= explore_button_class 'timeline' %>" data-target="#timeline" data-toggle="tab"><%= t 'explore.header.timeline' %></button>
-  <button class="btn <%= explore_button_class 'tags' %>" data-target="#tags" data-toggle="tab"><%= t 'explore.header.tags' %></button>
-  <button class="btn <%= explore_button_class 'search' %>" data-target="#search" data-toggle="tab"><%= t 'explore.header.search' %></button>
+<div id="explore-header" class="btn-group" data-toggle="buttons-radio">
+  <%= [
+        [ 'explore', explore_path ],
+        [ 'participants', explore_path('participants') ],
+        [ 'files', explore_path('files') ],
+        [ 'timeline', explore_path('timeline') ],
+        [ 'tags', explore_path('tags') ],
+        [ 'search', search_path ]
+      ].each do |e| %>
+
+        <button class="btn <%= explore_button_class e[0] %>" data-target="#<%= e[0] %>" data-toggle="tab" data-state="<%= e[1] %>"><%= t "explore.header.#{ e[0] }" %></button>
+  <% end %>
 </div>
