@@ -2,7 +2,7 @@ module ExploreHelper
   def current_explore_section? s
     case s
     when 'explore'
-      params[:section].blank?
+      params[:section].blank? && controller.controller_name == 'explore'
     when 'search'
       controller.controller_name == 'search'
     else 

@@ -2,8 +2,4 @@
 <%= t('search.name')%> <%= params[:q].present? ? ": #{params[:q]}" : ""%>
 <% end %>
 
-<% sidebar %>
-
-<% toolbar if user_signed_in? %>
-
-<%= render :partial => 'index' %>
+<%= render :partial => 'explore/index' %>
