@@ -1,0 +1,17 @@
+<%= render partial: 'explore/header' %>
+
+<div class="tab-content">
+<% %w( explore participants files timeline search).each do |section| %>
+  <div id="<%= section %>" class="tab-pane <%= explore_button_class(section) %>">
+    <% if true || current_explore_section?(section) %>
+      <%= render partial: "explore/#{ section }" %>
+    <% end %>
+  </div>
+<% end %>
+</div>
+
+<%= javascript_tag do %>
+  $(function() {
+    SocialStream.Explore.index();
+  });
+<% end %>
