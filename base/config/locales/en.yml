@@ -237,6 +237,9 @@ en:
       last_uploaded: "Last uploaded"
       most_visited: "Most viewed"
       uploaded_since: "since %{time}"
+    search:
+      placeholder: "looking for..."
+      submit: "Search"
   follower:
     follower:
       title: "Followers"

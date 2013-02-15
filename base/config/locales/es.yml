@@ -235,6 +235,9 @@ es:
       last_uploaded: "Últimos subidos"
       most_visited: "Más vistos"
       uploaded_since: "desde el %{time}"
+    search:
+      placeholder: "buscando..."
+      submit: "Buscar"
   follower:
     follower:
       title: "Seguidores"

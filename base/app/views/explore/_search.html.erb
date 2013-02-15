@@ -11,13 +11,15 @@
         <option>files</option>
         <option>events</option>
       </select>
-      <input class="input-xlarge" type="text" placeholder="looking for...">
-      <button class="btn btn-large">
-      	search
-      </button>
+
+      <%= form_tag search_path do %>
+        <%= text_field_tag :q, params[:q], class: "input-xlarge", placeholder: t('explore.search.placeholder') %>
+        <%= submit_tag t('explore.search.submit'), class: "btn btn-large" %>
+      <% end %>
     </article>
   </div>
 
+  <section id="search-results">
 
 
   <div class="contact">
@@ -123,4 +125,5 @@
   </div>
 
 
+  </section>
 </section>
