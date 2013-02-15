@@ -21,8 +21,6 @@
               
 <% toolbar :profile, :subject => @user %>
 
-<br class="clearfloat" />
-
 <%= render :partial => "activities/index",
            :locals  => { :activities => @user.wall(:profile, :for => current_subject).
                                               page(params[:page]),

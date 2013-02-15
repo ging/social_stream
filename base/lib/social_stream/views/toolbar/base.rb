@@ -50,7 +50,7 @@ module SocialStream
               # Groups
               items << {
                 :key  => :groups,
-                :html => link_to(image_tag("btn/btn_group.png") + t('group.other'), '#', :id => "toolbar_menu-groups"),
+                :html => link_to(image_tag("btn/btn_group.png") + t('group.other'), '#', :id => "toolbar_menu-groups", :class => "btn-blue"),
                 :items => [
                   {
                   :key => :new_group ,

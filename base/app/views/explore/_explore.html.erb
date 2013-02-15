@@ -4,7 +4,7 @@
       <header>
         <%= t 'explore.explore.most_popular' %>
       </header>
-      <% ActivityObject.not_actor.popular.first(3).each do |ao| %>
+      <% ActivityObject.not_actor.popular.first(6).each do |ao| %>
         <%= render partial: 'explore/trending', locals: { object: ao } %>
       <% end %>
     </article>

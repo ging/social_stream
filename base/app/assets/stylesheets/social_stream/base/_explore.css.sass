@@ -43,9 +43,13 @@
             font-size: 12px
             word-wrap: break-word
             .first-line
+              display: inline
+              width: 241px
+              float: left
               a
                 font-size: 14px
                 font-weight: bold
+                display: block
             span
               color: $grayLighter
           .well-small
@@ -58,3 +62,11 @@
       display: inline-block
       margin-left: 40px
 
+#explore-header
+  width: 100%
+  display: table
+  table-layout: fixed
+  .section
+    display: table-cell
+    height: 26px
+    

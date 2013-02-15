@@ -1,13 +1,12 @@
-<div id="explore-header" class="btn-group" data-toggle="buttons-radio">
-  <%= [
+<div id="explore-header" class="table" cellpadding="10" data-toggle="buttons-radio">
+  <% [
         [ 'explore', explore_path ],
         [ 'participants', explore_path('participants') ],
         [ 'files', explore_path('files') ],
         [ 'timeline', explore_path('timeline') ],
-        [ 'tags', explore_path('tags') ],
         [ 'search', search_path ]
       ].each do |e| %>
 
-        <button class="btn <%= explore_button_class e[0] %>" data-target="#<%= e[0] %>" data-toggle="tab" data-state="<%= e[1] %>"><%= t "explore.header.#{ e[0] }" %></button>
+        <div class="btn <%= explore_button_class e[0] %> section" data-target="#<%= e[0] %>" data-toggle="tab" data-state="<%= e[1] %>"><%= t "explore.header.#{ e[0] }" %></div>
   <% end %>
 </div>
