@@ -40,7 +40,17 @@
       margin-left: 0 
       widht: 100%
 
-
+.tab-content
+  ul
+    display: inline
+  input
+    &[type="text"]
+      @include makeColumn (2, 0)
+      float: right
+      margin-top: 6px
+      display: inline-block
+  .tab-content
+    clear: both
 #contact-form
   ul
     @include makeColumnoMargin(3, 0)

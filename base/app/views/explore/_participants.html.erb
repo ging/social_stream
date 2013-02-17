@@ -13,15 +13,6 @@
   <div class="right">
     <article>
       <header>
-        <%= t 'explore.participants.most_members' %>
-      </header>
-
-      <%= render partial: 'explore/members' %>
-      <%= render partial: 'explore/members' %>
-      <%= render partial: 'explore/members' %>
-    </article>
-    <article>
-      <header>
         <%= t 'explore.participants.last_registered' %>
       </header>
       <% User.last_registered.first(3).each do |u| %>
