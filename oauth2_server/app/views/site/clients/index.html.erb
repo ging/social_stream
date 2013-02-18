@@ -3,11 +3,12 @@
 <article class="first-img">
   <header>
     <h1>
-      <%= t 'site.client.index.title' %>
+      <%= t 'site.client.added' %>
     </h1>
-    <%= t 'site.client.added' %>
 
-    <%= link_to t('site.client.add'), new_site_client_path %>
+    <%= button_to(t('site.client.add'), new_site_client_path,
+          :method => "get", :class => "btn") %>
+
     <hr class="soften">
   </header>
 
