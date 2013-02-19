@@ -1,0 +1,18 @@
+<%= div_for document do %>
+  <div class="thumb">
+    <%= link_to icon(document, 50), document, :title => document.file_file_name %>
+  </div>
+  <div class="brifing">
+    <h5>
+      <%= link_to truncate(document.title, :length => 15), document %>
+    </h5>
+
+    <div class="author">
+      <%= raw t('document.by', author: link_to(document.author.name, document.author_subject)) %>
+    </div>
+
+    <%= render partial: 'objects/counters', locals: { object: document } %>
+
+  </div>
+<% end %>
+
