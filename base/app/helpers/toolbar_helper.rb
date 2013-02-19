@@ -41,8 +41,10 @@ module ToolbarHelper
   #   <% toolbar :profile, :subject => @group, :option => :contacts %>
   #
   def toolbar(type = :home, options = {})
+    options[:type] = type
+
     content =
-      render partial: "toolbar/#{ type }",
+      render partial: "toolbar/toolbar",
              locals:  options
 
     toolbar_init = "SocialStream.Toolbar.init({ option: '#{ options[:option] }' });".html_safe
