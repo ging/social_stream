@@ -11,6 +11,7 @@ es:
     name: "archivo de audio"
     not_mine: "Audios"
     one: "un archivo de audio"
+    other: "audios"
     processing: "Procesando fichero de audio. Espere, por favor..."
     title:
       one: "Audio"
@@ -48,6 +49,7 @@ es:
       attach: "Adjuntar fichero"
     not_mine: "Ficheros"
     one: "un fichero"
+    other: "ficheros"
     scope:
       network: "Red"
       own: "Propios"
@@ -62,6 +64,7 @@ es:
     name: "imagen"
     not_mine: "Imágenes"
     one: "una imagen"
+    other: "imagenes"
     title:
       one: "Imagen"
       other: "Imágenes"
@@ -83,6 +86,7 @@ es:
     name: "vídeo"
     not_mine: "Vídeos"
     one: "un vídeo"
+    other: "videos"
     processing: "Procesando vídeo. Espere, por favor..."
     title:
       one: "Vídeo"

@@ -2,17 +2,12 @@
   <div class="center">
     <article>
       <header>
-      	Advanced search
+        <%= t 'explore.search.title' %>
       </header>
-      <select>
-        <option>all</option>
-        <option>users</option>
-        <option>groups</option>
-        <option>files</option>
-        <option>events</option>
-      </select>
 
-      <%= form_tag search_path do %>
+      <%= form_tag search_path, method: :get do %>
+        <%= select_tag 'type', options_for_select(SocialStream::Search.options_for_type_select, params[:type]) %>
+
         <%= text_field_tag :q, params[:q], class: "input-xlarge", placeholder: t('explore.search.placeholder') %>
         <%= submit_tag t('explore.search.submit'), class: "btn btn-large" %>
       <% end %>

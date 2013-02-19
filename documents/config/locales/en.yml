@@ -12,6 +12,7 @@ en:
     name: "audio"
     not_mine: "Audios"
     one: "an audio"
+    other: "audios"
     processing: "Processing audio clip. Please wait..."
     title:
       one: "Audio"
@@ -51,6 +52,7 @@ en:
       attach: "Attach file"
     not_mine: "Files"
     one: "a file"
+    other: "files"
     scope:
       network: "Network"
       own: "Own"
@@ -65,6 +67,7 @@ en:
     name: "picture"
     not_mine: "Pictures"
     one: "a picture"
+    other: "pictures"
     title:
       one: "Picture"
       other: "Pictures"
@@ -86,6 +89,7 @@ en:
     name: "video" 
     not_mine: "Videos"
     one: "a video"
+    other: "videos"
     processing: "Processing video. Please, wait..."
     title:
       one: "Video"

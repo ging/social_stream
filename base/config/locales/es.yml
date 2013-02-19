@@ -137,6 +137,7 @@ es:
     confirm_delete: "¿Borrar commentario?"
     name: "comentario"
     one: "un comentario"
+    other: "comentarios"
     view_all: "Ver todos los comentarios"
     title:
       one: "Comentario"
@@ -238,6 +239,7 @@ es:
     search:
       placeholder: "buscando..."
       submit: "Buscar"
+      title: "Búsqueda avanzada"
   follower:
     follower:
       title: "Seguidores"
@@ -273,8 +275,8 @@ es:
       sentence2: "Comentarios, fotos, audio y vídeo"
     stats: "%{users} personas and %{groups} grupos registrados"
   group:
-    one: "Grupo"
-    other: "Grupos"
+    one: "grupo"
+    other: "grupos"
     all: "Todos los grupos"
     all_n: "Todos los grupos (%{count})"
     by: "Por grupos"
@@ -412,6 +414,7 @@ es:
     input: "Comparte tus ideas..."
     name: "publicación"
     one: "una publicación"
+    other: "publicaciones"
     title:
       one: "Texto"
       other: "Textos"
@@ -596,8 +599,8 @@ es:
     all: "Todos los usuarios"
     all_n: "Todos los usuarios (%{count})"
     by: "Por usuarios"
-    one: "Usuario"
-    other: "Usuarios"
+    one: "usuario"
+    other: "usuarios"
     title:
       one: "Usuario"
       other: "Usuarios"

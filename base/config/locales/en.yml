@@ -139,6 +139,7 @@ en:
     confirm_delete: "Delete comment?"
     name: "comment"
     one: "a comment"
+    other: "comments"
     title:
       one: "Comment"
       other: "Comments"
@@ -238,6 +239,7 @@ en:
       most_visited: "Most viewed"
       uploaded_since: "since %{time}"
     search:
+      title: "Advanced search"
       placeholder: "looking for..."
       submit: "Search"
   follower:
@@ -275,8 +277,8 @@ en:
       sentence2: "Posts, photos, audio and videos"
     stats: "%{users} users and %{groups} groups registered"
   group:
-    one: "Group"
-    other: "Groups"
+    one: "group"
+    other: "groups"
     all: "All groups"
     all_n: "All groups (%{count})"
     by: "By groups"    
@@ -414,6 +416,7 @@ en:
     input: "Share you thoughts here!"
     name: "post"
     one: "a post"
+    other: "posts"
     title:
       one: "Post"
       other: "Posts"
@@ -580,8 +583,8 @@ en:
     all: "All users"
     all_n: "All users (%{count})"
     by: "By Users"
-    one: "User"
-    other: "Users"
+    one: "user"
+    other: "users"
     title:
       one: "User"
       other: "Users"

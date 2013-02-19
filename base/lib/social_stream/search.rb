@@ -10,6 +10,12 @@ module SocialStream
         end
       end
 
+      def options_for_type_select
+        keys(:extended).map{ |k|
+          [ I18n.t("#{ k }", count: :other), k ]
+        }.unshift([ I18n.t("search.show_all"), "" ])
+      end
+
       def models(search_type, key = nil)
         case search_type
         when :quick
@@ -40,7 +46,6 @@ module SocialStream
       def count(query, subject, options = {})
         ThinkingSphinx.count *args_for_search(query, subject, options)
       end
-
 
       private
 
