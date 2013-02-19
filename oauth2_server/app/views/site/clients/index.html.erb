@@ -14,7 +14,7 @@
 
   <% @developer_clients.each do |client| %>
 
-    <img style="width: 40px; height: 40px;" src="assets/user.png">
+    <%= image_tag client.logo.url(:small), style: "width: 40px; height: 40px;" %>
 
     <div class="name">
       <%= link_to client.name, client %>
