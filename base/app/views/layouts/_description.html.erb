@@ -1,8 +1,8 @@
 <div class="description">
   <h3 class="big pull-right">
-    Social Stream es un núcleo para construir webs con características de red social
+    <%= t 'frontpage.main_title' %>
   </h3>
   <h4 class="lite pull-right">
-    1263 usuarios y 201 grupos registrados!
+    <%= t 'frontpage.stats', users: User.count, groups: Group.count %>
   </h4>
 </div>
