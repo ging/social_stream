@@ -1,0 +1,15 @@
+<div class="contact">
+  <div class="avatar">
+    <%= link_to image_tag(subject.logo.url(:small)), subject %>
+  </div>
+
+  <div class="data">
+    <div class="name">
+      <%= link_to truncate_name(subject.name), subject %>
+    </div>
+
+    <div class="info">
+      2 contactos en comun
+    </div>
+  </div>
+</div>

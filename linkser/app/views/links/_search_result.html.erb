@@ -1,0 +1,14 @@
+<div class="link">
+  <div class="brifing">
+    <h5>
+      <%= link_to truncate(link.title), link.url %>
+     </a>
+    </h5>
+
+    <%= link_to truncate(link.url), link.url %>
+
+    <div class="author">
+      <%= raw t('link.by', author: link_to(link.author.name, link.author_subject)) %>
+    </div>
+  </div>
+</div>
