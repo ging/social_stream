@@ -35,15 +35,15 @@
     <div class="wrapper container">
       <%= render :partial => "layouts/header" %>
 
+      <div id="flash">
+        <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
+      </div>
+
       <% if content_for?(:toolbar) %>
         <nav id="toolbar">
           <%= yield :toolbar %>
         </nav>
       <% end %>
-      
-      <div id="flash">
-        <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
-      </div>
 
       <section id="content" class="<%= content_section_class %>">
         <%= yield %>
