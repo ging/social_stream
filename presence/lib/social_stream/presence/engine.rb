@@ -6,12 +6,6 @@ module SocialStream
           include SocialStream::Views::Settings::Presence
         end
       end
-
-      initializer "social_stream-presence.views.toolbar" do
-        SocialStream::Views::Toolbar.module_eval do
-          include SocialStream::Views::Toolbar::Presence
-        end
-      end
     end
   end
 end

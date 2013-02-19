@@ -5,10 +5,6 @@ module SocialStream
     module Settings
       autoload :Presence, 'social_stream/views/settings/presence'
     end
-
-    module Toolbar
-      autoload :Presence, 'social_stream/views/toolbar/presence'
-    end
   end
 
   module Presence   

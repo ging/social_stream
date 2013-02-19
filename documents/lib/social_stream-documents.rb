@@ -7,12 +7,6 @@ module SocialStream
     end
   end
 
-  module Views
-    module Toolbar
-      autoload :Documents, 'social_stream/views/toolbar/documents'
-    end
-  end
-
   module Documents
     # Picture thumbnails
     mattr_accessor :picture_styles

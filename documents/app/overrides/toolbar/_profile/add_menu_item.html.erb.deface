@@ -1,0 +1,8 @@
+<!-- insert_after '.base_items' -->
+<div class="document_items">
+  <li>
+    <%= link_to [ subject, Document.new ] do %>
+      <%= image_tag 'icons/resources.png' %> <%= t 'document.title.other' %>
+    <% end %>
+  </li>
+</div>

@@ -61,12 +61,6 @@ module SocialStream
         SocialStream::ActivityStreams.register :audio
         SocialStream::ActivityStreams.register :video
       end
-
-      initializer "social_stream-documents.views.toolbar" do
-        SocialStream::Views::Toolbar.module_eval do
-          include SocialStream::Views::Toolbar::Documents
-        end
-      end
     end
   end
 end

@@ -67,10 +67,6 @@ module SocialStream
     module Sidebar
       autoload :Base, 'social_stream/views/sidebar/base'
     end
-
-    module Toolbar
-      autoload :Base, 'social_stream/views/toolbar/base'
-    end
   end
 
   module TestHelpers

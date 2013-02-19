@@ -1,9 +1,6 @@
 # The toolbar is the left-side bar in Social Stream's layout
 #
 module ToolbarHelper
-  # Configuration of toolbar items
-  include SocialStream::Views::Toolbar
-
   # This method define the toolbar content for your view. The toolbar is at the left
   # side of the screen in vanilla SocialStream distribution.
   #
@@ -44,9 +41,9 @@ module ToolbarHelper
   #   <% toolbar :profile, :subject => @group, :option => :contacts %>
   #
   def toolbar(type = :home, options = {})
-    content = toolbar_items(type, options).inject(ActiveSupport::SafeBuffer.new){ |result, item|
-      result + item[:html]
-    }
+    content =
+      render partial: "toolbar/#{ type }",
+             locals:  options
 
     toolbar_init = "SocialStream.Toolbar.init({ option: '#{ options[:option] }' });".html_safe
 
@@ -64,30 +61,5 @@ module ToolbarHelper
 
       content_for :javascript, toolbar_init
     end
-  end
-
-  def toolbar_menu(type, options = {})
-    ActiveSupport::SafeBuffer.new.tap do |menu|
-      menu << '<div class="toolbar_menu">'.html_safe
-
-      toolbar_menu_render(toolbar_menu_items(type, options), menu)
-
-      menu << '</div>'.html_safe
-    end
-  end
-
-  def toolbar_menu_render(items, menu)
-    menu << '<ul class="nav nav-pills nav-stacked">'.html_safe
-    items.each do |item|
-      menu << '<li>'.html_safe
-
-      menu << item[:html]
-      if item[:items].present?
-        toolbar_menu_render(item[:items], menu)
-      end
-
-      menu << '</li>'.html_safe
-    end
-    menu << '</ul>'.html_safe
   end
 end
