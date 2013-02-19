@@ -73,21 +73,21 @@ module SocialStream
       #   }
       #
       def parse_extended_search_models
-          SocialStream.extended_search_models.inject({}) do |hash, entry|
-            case entry
-            when Hash
-              hash.update entry.inject({}){ |h, e|
-                h[e.first] = Array.wrap(e.last).map{ |f| f.to_s.classify.constantize }
-                h
-              }
-            when Symbol
-              hash[entry] = Array.wrap(entry.to_s.classify.constantize)
-            else
-              raise "Unknown entry in config.extended_search_models #{ entry }"
-            end
-
-            hash
+        SocialStream.extended_search_models.inject({}) do |hash, entry|
+          case entry
+          when Hash
+            hash.update entry.inject({}){ |h, e|
+              h[e.first] = Array.wrap(e.last).map{ |f| f.to_s.classify.constantize }
+              h
+            }
+          when Symbol
+            hash[entry] = Array.wrap(entry.to_s.classify.constantize)
+          else
+            raise "Unknown entry in config.extended_search_models #{ entry }"
           end
+
+          hash
+        end
       end
 
       def args_for_search(query, subject, options = {})
