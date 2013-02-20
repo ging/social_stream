@@ -4,9 +4,10 @@
       <header>
         <%= t 'explore.explore.most_popular' %>
       </header>
-      <% ActivityObject.not_actor.popular.first(6).each do |ao| %>
-        <%= render partial: 'explore/trending', locals: { object: ao } %>
-      <% end %>
+
+      <%= render partial: 'explore/trending',
+                 collection: ActivityObject.not_actor.popular.first(6),
+                 as: :object %>
     </article>
   </div>
 
@@ -15,9 +16,10 @@
       <header>
         <%= t 'explore.explore.most_followed' %>
       </header>
-      <%= render partial: 'explore/last' %>
-      <%= render partial: 'explore/last' %>
-      <%= render partial: 'explore/last' %>
+
+      <%= render partial: 'explore/followed',
+                 collection: Actor.followed.first(6),
+                 as: :actor %>
     </article>
   </div>
 </section>
