@@ -42,6 +42,8 @@ module ToolbarHelper
   #
   def toolbar(type = :home, options = {})
     options[:type] = type
+    # The locals array is available in the 'toolbar/toolbar' partial
+    options[:locals] = options
 
     content =
       render partial: "toolbar/toolbar",

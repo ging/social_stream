@@ -2,28 +2,27 @@
            locals: { subject: subject } %>
 
 <%= content_for :toolbar_menu do %>
-  <div class="base_items">
+  <li>
+    <%= link_to [ subject, :profile ], class: "btn-blue" do  %>
+      <i class='icon_tool16-info'></i> <%= t 'menu.information' %>
+    <% end %>
+  </li>
+
+  <% if current_subject.present? && subject != current_subject %>
+
     <li>
-      <%= link_to [ subject, :profile ], class: "btn-blue" do  %>
-        <i class='icon_tool16-info'></i> <%= t 'menu.information' %>
+      <%= link_to edit_contact_path(current_subject.contact_to!(subject)), class: "btn-blue" do %>
+        <i class='icon_navbar-followers'></i> <%= current_subject.contact_to!(subject).status %>
       <% end %>
     </li>
 
-    <% if current_subject.present? && subject != current_subject %>
-
-      <li>
-        <%= link_to edit_contact_path(current_subject.contact_to!(subject)), class: "btn-blue" do %>
-          <i class='icon_navbar-followers'></i> <%= current_subject.contact_to!(subject).status %>
-        <% end %>
-      </li>
-
-      <li>
-        <%= link_to new_message_path(:receiver => subject.slug), class: "btn-blue" do %>
-          <i class='icon_navbar-message-blue'></i> <%= t 'send' %>
-        <% end %>
-      </li>
-    <% end %>
-  </div>
+    <li>
+      <%= link_to new_message_path(:receiver => subject.slug), class: "btn-blue" do %>
+        <i class='icon_navbar-message-blue'></i> <%= t 'send' %>
+      <% end %>
+    </li>
+  <% end %>
+  <div class="base_items"/>
 <% end %>
 
 <%= render partial: 'toolbar/menu' %>

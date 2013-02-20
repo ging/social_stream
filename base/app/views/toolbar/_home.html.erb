@@ -1,14 +1,13 @@
 <%= render partial: 'toolbar/subject' %>
 
 <% content_for :toolbar_menu do %>
-  <div class="base_items">
-    <li>
-      <%= link_to image_tag("btn/btn_group.png") + t('group.other'), '#', :id => "toolbar_menu-groups", :class => "btn-blue" %>
-    </li>
-    <li>
-      <%= link_to(image_tag("btn/btn_group.png")+t('group.new.action'), new_group_path) %>
-    </li>
-  </div>
+  <li>
+    <%= link_to image_tag("btn/btn_group.png") + t('group.other'), '#', :id => "toolbar_menu-groups", :class => "btn-blue" %>
+  </li>
+  <li>
+    <%= link_to(image_tag("btn/btn_group.png")+t('group.new.action'), new_group_path) %>
+  </li>
+  <div class="base_items"/>
 <% end %>
 
 <%= render partial: 'toolbar/menu' %>
