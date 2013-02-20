@@ -1,4 +1,4 @@
-<% if user_signed_in? %>
+<% if user_signed_in? && controller.controller_name != 'explore' %>
   <%= link_to image_tag("btn/#{ activity.public? ? 'public' : 'restricted' }.png", :class => 'menu_icon') + activity.audience_in_words(current_subject, :details => :summary),
     '#',
     :class => 'audience' %>
