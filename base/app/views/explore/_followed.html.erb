@@ -1,16 +1,14 @@
 <div class="content">
   <div class="case">
     <div class="first-line">
-      <a href="·">
-        nombre
-      </a>
+      <%= link_to actor.name, actor.subject %>
       <span> 
-        desde el 14 de Febrero de 2011 
+        <%= actor.description %>
       </span>
     </div>
     <aside class="well well-small">
     <div class="top">
-      0 fans
+      <%= t 'follower.n', count: actor.follower_count %>
     </div>
   </aside>
   </div>
