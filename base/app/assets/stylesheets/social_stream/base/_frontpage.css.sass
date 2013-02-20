@@ -1,35 +1,41 @@
-calle 13 2013
 .wrapper
   @include grid-fluid(12, 0)
 #wrapper_body
   @include grid-fluid(12, 0)
 
-#frontpage,
-#registration,
+.explanation
+  border-right: 12px solid $blue
+  height: 56px
+  padding-right: 11px
+  margin-top: 20px
+  padding-bottom: 16px
+  clear: both
+  .big
+    margin-top: -2px
+  .lite
+    color: #888
+    margin-top: -2px
+
+#frontpage
 #forgot-pass
-  .right
-    @include makeColumn(5, 1)
-    display:inline-block
-      input
-        @include clearfix
-        &[type="password"]
-          width: 96%
-    .btn
-      margin: 10px 25px 0 0
-      float: right 
-#welcome,
-  .left,
-  .forgot
-    @include makeColumn(7, 4)
-    @include clearfix
-    h2
-      margin-left: -20px
+#registration
+  .btn
+    margin: 10px 25px 0 0
+    float: right 
+.welcome
+  @include makeColumnoMargin(6, 0)
+.forgot
+  @include makeColumn(8, 4)
+  @include clearfix
+  margin-top: 40px
+  h2
+    margin-left: -20px
 
 #presentation
   @include makeColumnoMargin(6, 0)
   display: inline
-  margin: 40px 0 0 30px
-  width: 430px
+  margin: 45px 0 0 30px
+  width: 536px
 
 #remember
   width: 150px
@@ -51,7 +57,6 @@ calle 13 2013
 
 #registration,
 #new_user,
-#welcome
   .reg-labels,
   .forgot-pass,
   .sig-in
@@ -73,31 +78,25 @@ calle 13 2013
       margin: -219px 30px 0
       width: 288px
       margin-left: 80px
-
       .to
         font-size: 40px
         margin-top: 10px
         line-height: 94px
-  .right
-    margin-top: 160px
-  .left
-    margin-top: 4px
+
 #login_data
   @include clearfix
 
-.right
-  @include makeColumn(5, 1)
-  display:inline-block
 .div_login,
 .div_registration,
 .div_password,
 .div_sign_in
-  @include makeColumn(4, 0)
+  @include makeColumn(4, 1)
   @include box-shadow(0px 0px 13px rgba(50, 50, 50, 0.15))
   @include border-radius(15px)
   padding: 15px
   margin-top: 50px
   color: #8c8c8c
+  display:inline-block
   h3
     text-align: right
     font-size: 35px
@@ -113,7 +112,9 @@ calle 13 2013
     clear: both
 .div_registration
   margin-top: 30px
-
+.div_password
+  margin-left: 391px
+  margin-top: 20px
 #sign_in
   @include makeColumn(4, 1)
   display:inline-block
@@ -133,6 +134,11 @@ calle 13 2013
   .btn
     margin-bottom: 20px !important
     margin-right: 0px !important
+    float: left
   .soften
     clear: both
+
+.login_data
+  .btn
+    float: right
   

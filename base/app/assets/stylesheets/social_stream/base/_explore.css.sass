@@ -20,55 +20,54 @@
 
   section
     @include clearfix
-    .left
+    .sub-content-medium
       @include makeColumnoMargin(6, 0)
       display: inline
-    .center
+    .sub-content-full
       @include makeColumnoMargin(12, 0)
-    .right
+    .sub-content-small
       @include makeColumn(5, 0)
       display: inline-block
-    .left,
-    .center,
-    .right
+    .sub-content-medium,
+    .sub-content-full,
+    .sub-content-small
       margin-top: 20px
       header
         font-size: 18px
         line-height: 15px
-      article
+      .content
         margin-bottom: 20px
-        .content
-          @include clearfix
-          margin-top: 7px
-          border-top: 1px solid #e3e3e3
-          padding-top: 7px
-          .case
+        @include clearfix
+        margin-top: 7px
+        border-top: 1px solid #e3e3e3
+        padding-top: 7px
+        .case
+          float: left
+          width: 361px
+          margin-left: 20px
+          font-size: 12px
+          word-wrap: break-word
+          .first-line-large,
+          .first-line-mini,
+            display: inline
+            width: 380px
             float: left
-            width: 361px
-            margin-left: 20px
-            font-size: 12px
-            word-wrap: break-word
-            .first-line-large,
-            .first-line-mini,
+            a
+              font-size: 14px
+              font-weight: bold
               display: inline
-              width: 380px
-              float: left
-              a
-                font-size: 14px
-                font-weight: bold
-                display: inline
-            .first-line-mini
-              width: 241px
-            .second-line
-              dispaly block
-              color: #a3a3a3
-          .well-small
-            width: 50px
-            float: right
-            margin-bottom: 0px
-            text-align: right
+          .first-line-mini
+            width: 241px
+          .second-line
+            dispaly block
+            color: #a3a3a3
+        .well-small
+          width: 50px
+          float: right
+          margin-bottom: 0px
+          text-align: right
          
-    .right
+    .sub-content-small
       display: inline-block
       margin-left: 40px
 

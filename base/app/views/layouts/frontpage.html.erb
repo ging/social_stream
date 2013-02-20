@@ -21,7 +21,7 @@
     <%= yield :headers %>
   </head>
   <body>
-    <div class="wrapper container">
+    <section class="wrapper container">
 
       <%= render :partial => "layouts/header" %>
 
@@ -34,11 +34,11 @@
 
         <%= yield %>
       </div>
-      <br class="clearfloat" />
+
       
       <div class="push">
       </div>
-    </div>
+    </section>
     <footer class="footer">
       <%= render :partial => "layouts/footer" %>
     </footer>

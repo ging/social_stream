@@ -1,4 +1,4 @@
-<article id="sign_in">
+<section id="sign_in">
   <h3>
     <%= t('sign_in') %>
   </h3>
@@ -6,7 +6,7 @@
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
     <%= devise_error_messages! if controller.controller_name == 'sessions' %>
 
-    <div class="login_data">
+    <article class="login_data">
 
       <%= f.label :email %>
 
@@ -26,9 +26,9 @@
       <%= f.submit t('sign_in'), :class =>"btn" %>
 
       <hr class="soften">
-      <div class="options">
-        <%= render :partial => "devise/shared/links" %>  
-      </div> 
-    </div>
+
+      <%= render :partial => "devise/shared/links" %>  
+
+    </article>
   <% end %>
-</article>
+</section>

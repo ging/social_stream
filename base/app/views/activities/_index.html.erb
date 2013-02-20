@@ -1,12 +1,11 @@
-<article id="wrapper_activities">
+<section id="wrapper_activities">
   <header>
     <h2>
       <%= t 'activity.title' %>
     </h2>
   </header>
-    <%= render :partial => 'activities/new', :locals => { :receiver => owner } %>
+  <%= render :partial => 'activities/new', :locals => { :receiver => owner } %>
 
   <%= render :partial => 'activities/timeline',
              :locals  => { :activities => activities } %>
-
-</article>
+</section>

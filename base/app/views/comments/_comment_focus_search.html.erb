@@ -13,7 +13,7 @@
   </header>
 
 
-  <div class="objects">
+  <article class="objects">
     <%= link_to comment do%>
       <% text = excerpt(strip_tags(comment.text),get_search_query_words.first,:radius => 180) || "" %>
       <% if text.length < 400 %>
@@ -21,9 +21,9 @@
       <% end %>
       <%= highlight(text,get_search_query_words) %>
       <% end %>
-  </div>
+  </article>
   
-  <div class="actions">
+  <article class="actions">
     <div class="comment_time_ago">
       <%= t('time.ago', :time => time_ago_in_words(activity.created_at)) %>
     </div>
@@ -36,6 +36,6 @@
       <%= activity.audience_in_words(current_subject) %>
     </div>
     <% end %>
-  </div>
+  </article>
 <% end %> 
 

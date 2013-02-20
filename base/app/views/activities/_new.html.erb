@@ -1,5 +1,5 @@
 <% if can? :create, new_post(receiver) %>
-  <div class="wall_input">
+  <article class="wall_input">
     <%= form_for Post.new(owner_id: Actor.normalize_id(receiver)), remote: true do |f| %>
       <%= f.hidden_field :owner_id %>
     
@@ -15,7 +15,7 @@
       <%= f.select "relation_ids", options_for_select(current_subject.activity_relations_for(receiver).sort.map{ |r| [ r.name, r.id ] }), {}, { multiple: true } %> 
 
     <% end %>
-  </div>
+  </article>
  
 
   <%= javascript_tag do %>

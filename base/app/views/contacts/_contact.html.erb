@@ -1,23 +1,25 @@
-<%= div_for contact, 'data-contact_id' => contact.id do %>
-  <div class="avatar">
-    <%= link_to(image_tag(contact.receiver.logo.url(:small)), contact.receiver_subject) %>
-  </div>
+<article class="content">
+  <%= div_for contact, 'data-contact_id' => contact.id do %>
+    <div class="avatar">
+      <%= link_to(image_tag(contact.receiver.logo.url(:small)), contact.receiver_subject) %>
+    </div>
 
-  <div class="data">
-    <div class="name">
-      <%= link_to(truncate_name(contact.receiver_subject.name), contact.receiver_subject)%>
-      
-      <div class="x">
-        <%= link_to 'X', contact, :method => :delete, :remote => true %>
+    <div class="data">
+      <div class="name">
+        <%= link_to(truncate_name(contact.receiver_subject.name), contact.receiver_subject)%>
+        
+        <div class="x">
+          <%= link_to 'X', contact, :method => :delete, :remote => true %>
+        </div>
+      </div>
+
+      <div class="info">
+        <%= contact_brief(contact.receiver_subject) %>
+      </div>
+
+      <div class="add">
+        <%= contact_link(contact) %>
       </div>
     </div>
-
-    <div class="info">
-      <%= contact_brief(contact.receiver_subject) %>
-    </div>
-
-    <div class="add">
-      <%= contact_link(contact) %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+</article>

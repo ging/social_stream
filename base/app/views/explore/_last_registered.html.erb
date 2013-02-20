@@ -1,11 +1,11 @@
-<div class="content">
+<article class="content">
   <div class="case">
-    <div class="first-line-large">
+    <header class="first-line-large">
       <%= link_to object.name, object %>
-      <div class="second-line"> 
+    </header>
+    <article class="second-line"> 
         <%= t 'explore.participants.registered_since', time: l(object.created_at) %>
-      </div>
-    </div>
+    </article>
   </div>
-</div>
+</article>
 

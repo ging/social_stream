@@ -5,10 +5,8 @@
         <%=t('contact.suggestion.other') %>
       </h4>
     </header>
-    <div class="contents">
-      <article class="content">
-        <%= render :partial => "contacts/contact", :collection => sgs %>
-      </article>
-    </div>
+    <article class="contents">
+      <%= render :partial => "contacts/contact", :collection => sgs %>
+    </article>
   </section>
 <%end%>

@@ -1,23 +1,19 @@
-<section id="search">
-  <div class="center">
-    <article>
-      <header>
-        <%= t 'explore.search.title' %>
-      </header>
+<section id="search" class="sub-content-full">
+  <header>
+    <%= t 'explore.search.title' %>
+  </header>
 
-      <%= form_tag search_path, method: :get do %>
-        <%= select_tag 'type', options_for_select(SocialStream::Search.options_for_type_select, params[:type]) %>
+  <%= form_tag search_path, method: :get do %>
+     <%= select_tag 'type', options_for_select(SocialStream::Search.options_for_type_select, params[:type]) %>
 
-        <%= text_field_tag :q, params[:q], class: "input-xlarge", placeholder: t('explore.search.placeholder') %>
-        <%= submit_tag t('explore.search.submit'), class: "btn btn-large" %>
-      <% end %>
-    </article>
-  </div>
+     <%= text_field_tag :q, params[:q], class: "input-xlarge", placeholder: t('explore.search.placeholder') %>
+     <%= submit_tag t('explore.search.submit'), class: "btn btn-large" %>
+  <% end %>
 
-  <section id="search-results">
+  <article id="search-results">
     <% @search_result.each do |r| %>
       <%= render partial: "#{ r.class.to_s.tableize }/search_result",
                  locals:  { r.class.to_s.underscore.to_sym => r }  %>
     <% end %>
-  </section>
+  </article>
 </section>

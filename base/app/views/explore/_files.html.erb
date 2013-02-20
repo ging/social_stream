@@ -1,27 +1,23 @@
 <section id="files">
-  <div class="left">
-    <article class="article">
-      <header>
-        <%= t 'explore.resources.most_visited' %>
-      </header>
+  <article class="sub-content-medium">
+    <header>
+      <%= t 'explore.resources.most_visited' %>
+    </header>
 
-      <% ActivityObject.not_actor.visited.first(3).each do |ao| %>
-        <%= render partial: 'explore/resources_most_visited', locals: { object: ao } %>
-      <% end %>
-    </article>
-  </div>
+    <% ActivityObject.not_actor.visited.first(3).each do |ao| %>
+      <%= render partial: 'explore/resources_most_visited', locals: { object: ao } %>
+    <% end %>
+  </article>
 
-  <div class="right">
-    <article>
-      <header>
-        <%= t 'explore.resources.last_uploaded' %>
-      </header>
+  <article class="sub-content-small">
+    <header>
+      <%= t 'explore.resources.last_uploaded' %>
+    </header>
 
-      <% ActivityObject.not_actor.created.first(3).each do |ao| %>
-        <%= render partial: 'explore/resources_last_uploaded', locals: { object: ao } %>
-      <% end %>
-    </article>
-  </div>
+    <% ActivityObject.not_actor.created.first(3).each do |ao| %>
+      <%= render partial: 'explore/resources_last_uploaded', locals: { object: ao } %>
+    <% end %>
+  </article>
 </section>
 
 

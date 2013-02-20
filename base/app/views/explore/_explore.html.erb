@@ -1,25 +1,21 @@
 <section id="explore">
-  <div class="left">
-    <article class="article">
-      <header>
-        <%= t 'explore.explore.most_popular' %>
-      </header>
+  <article class="sub-content-medium">
+    <header>
+      <%= t 'explore.explore.most_popular' %>
+    </header>
 
-      <%= render partial: 'explore/trending',
-                 collection: ActivityObject.not_actor.popular.first(6),
-                 as: :object %>
-    </article>
-  </div>
+    <%= render partial: 'explore/trending',
+               collection: ActivityObject.not_actor.popular.first(6),
+               as: :object %>
+  </article>
 
-  <div class="right">
-    <article>
-      <header>
-        <%= t 'explore.explore.most_followed' %>
-      </header>
+  <article class="sub-content-small">
+    <header>
+      <%= t 'explore.explore.most_followed' %>
+    </header>
 
-      <%= render partial: 'explore/followed',
-                 collection: Actor.followed.first(6),
-                 as: :actor %>
-    </article>
-  </div>
+    <%= render partial: 'explore/followed',
+               collection: Actor.followed.first(6),
+               as: :actor %>
+  </article>
 </section>
