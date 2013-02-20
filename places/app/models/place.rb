@@ -39,8 +39,7 @@ class Place < ActiveRecord::Base
 
   def build_photo
     Picture.new(:add_holder_place_id => id,
-                :owner_id => owner_id,
-                :relation_ids => Relation::Public.instance.id)
+                :owner_id => owner_id)
   end
 
 end
