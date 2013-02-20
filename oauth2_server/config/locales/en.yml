@@ -1,4 +1,6 @@
 en:
+  account:
+    applications: "Applications"
   activerecord:
     attributes:
       site/client:

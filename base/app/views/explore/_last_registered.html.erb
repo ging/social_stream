@@ -1,10 +1,10 @@
 <div class="content">
   <div class="case">
-    <div class="first-line">
+    <div class="first-line-large">
       <%= link_to object.name, object %>
-      <span> 
+      <div class="second-line"> 
         <%= t 'explore.participants.registered_since', time: l(object.created_at) %>
-      </span>
+      </div>
     </div>
   </div>
 </div>

@@ -40,7 +40,7 @@
         .content
           @include clearfix
           margin-top: 7px
-          border-top: 1px solid #f3f3f3
+          border-top: 1px solid #e3e3e3
           padding-top: 7px
           .case
             float: left
@@ -48,16 +48,20 @@
             margin-left: 20px
             font-size: 12px
             word-wrap: break-word
-            .first-line
+            .first-line-large,
+            .first-line-mini,
               display: inline
-              width: 241px
+              width: 380px
               float: left
               a
                 font-size: 14px
                 font-weight: bold
-                display: block
-            span
-              color: $grayLighter
+                display: inline
+            .first-line-mini
+              width: 241px
+            .second-line
+              dispaly block
+              color: #a3a3a3
           .well-small
             width: 50px
             float: right
