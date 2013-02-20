@@ -1,9 +1,9 @@
-SocialStream.Flash = (function(SS, $, undefined) {
+SocialStream.Flash = (function(Flashy, undefined) {
   var error = function(message) {
-  // TODO
+    Flashy.message('error', message);
   };
 
   return {
     error: error
   };
-})(SocialStream, jQuery);
+})(Flashy);

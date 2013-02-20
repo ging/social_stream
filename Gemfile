@@ -8,6 +8,7 @@ source "http://rubygems.org"
 # gem 'avatars_for_rails', :path => '../avatars_for_rails'
 # gem 'rails-scheduler', path: '../rails-scheduler'
 # gem 'omniauth-socialstream', path: '../omniauth-socialstream'
+# gem 'flashy', path: '../flashy'
 
 # social_stream gems
 %w(base documents events linkser presence).each do |g|

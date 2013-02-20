@@ -59,4 +59,6 @@ require 'i18n-js'
 require 'i18n-js/social_stream-base'
 # Strong parameters
 require 'strong_parameters'
+# Flash messages
+require 'flashy'
 

@@ -1,25 +1,14 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  def facebook
-    @user = User.find_or_create_for_facebook_oauth(env['omniauth.auth'],current_user)
 
-    if @user.persisted?
-      sign_in_and_redirect @user, :event => :authentication
-    end
-  end
+  PROVIDERS = Devise.omniauth_providers
 
-  def linkedin
-    @user = User.find_or_create_for_linkedin_oauth(env['omniauth.auth'],current_user)
+  PROVIDERS.each do |provider|
+    define_method(provider) do
+      @user = User.find_or_create_for_facebook_oauth(env['omniauth.auth'],current_user)
 
-    if @user.persisted?
-      sign_in_and_redirect @user, :event => :authentication
-    end
-  end
-
-  def socialstream
-    @user = User.find_or_create_for_linkedin_oauth(env['omniauth.auth'],current_user)
-
-    if @user.persisted?
-      sign_in_and_redirect @user, :event => :authentication
+      if @user.persisted?
+        sign_in_and_redirect @user, :event => :authentication
+      end
     end
   end
 end

@@ -9,6 +9,7 @@
 //= require jquery.screw
 //= require i18n
 //= require i18n/translations
+//= require flashy
 //
 //= require avatars_for_rails
 //= require social_cheesecake

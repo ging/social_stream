@@ -3,6 +3,7 @@
   <%= form_for @place.photo do |f| %>
     <%= f.hidden_field :add_holder_place_id %>
     <%= f.hidden_field :owner_id %>
+    <%= f.hidden_field :relation_ids, :value => Relation::Public.instance.id %>
 
     <%= f.file_field :file, :class => "upload-photo" %>
 
