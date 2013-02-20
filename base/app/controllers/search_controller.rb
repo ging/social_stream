@@ -15,8 +15,12 @@ class SearchController < ApplicationController
 
     respond_to do |format|
       format.html {
-        if params[:mode] == "header_search"
-          render :partial => "header_search"
+        if request.xhr?
+          if params[:mode] == "header_search"
+            render :partial => "header_search"
+          else
+            render partial: 'index'
+          end
         end
       }
 
