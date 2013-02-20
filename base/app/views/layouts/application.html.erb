@@ -35,9 +35,7 @@
     <div class="wrapper container">
       <%= render :partial => "layouts/header" %>
 
-      <div id="flash">
-        <%= render :partial => "layouts/flash", :locals => {:flash => flash} %>
-      </div>
+      <%= flashy %>
 
       <% if content_for?(:toolbar) %>
         <nav id="toolbar">

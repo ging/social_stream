@@ -66,6 +66,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('i18n-js','~>2.1.2')
   # Strong Parameters
   s.add_runtime_dependency('strong_parameters','~> 0.1.5')
+  # Flash messages
+  s.add_runtime_dependency('flashy','~> 0.0.1')
 
   # Development gem dependencies
   #
