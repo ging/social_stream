@@ -5,6 +5,8 @@
   <div id="<%= section %>" class="tab-pane <%= explore_button_class(section) %>">
     <% if current_explore_section?(section) %>
       <%= render partial: "explore/#{ section }" %>
+    <% else %>
+      <%= render partial: 'layouts/loading' %>
     <% end %>
   </div>
 <% end %>
