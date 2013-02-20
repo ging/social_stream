@@ -1,0 +1,4 @@
+<!-- insert_after "code[erb-loud]:contains('header_dropdown_menu_sessions')" -->
+<li>
+  <%= link_to t('account.applications'), site_clients_path %>
+</li>
