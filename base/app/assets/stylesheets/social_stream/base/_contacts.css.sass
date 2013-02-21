@@ -70,3 +70,95 @@
     &[type="submit"]
       float: right
       margin-right: 74px
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#relation_customs,
+  .relation_list
+    @include makeColumn(3, 0)
+    padding-right: 5px
+    border-right: 1px solid $grayLight
+    input
+      margin-right: 10px
+    label
+      display: inline-block
+
+    .actions
+      display: inline-block
+      float: right
+      margin-right: 10px
+
+    .edit_name
+      margin-top: -22px
+      .edit_relation_custom
+        margin-bottom: 0px
+        .icon_tool16-ok
+          margin-top: -6px
+
+    .btn
+      margin-left: 32px
+
+#relation_custom_name
+  @include size (auto, 150px) 
+  margin: 0 10px 0 15px
+
+
+#new_relation
+  a 
+    float: right
+    margin-right: 10px
+  .new_relation_custom
+    .btn
+      @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25)) 
+      float: right
+      margin: 10px 41px 0 0
+    
+
+#new_relation_input_block
+  .btn
+    margin-left: 32px
+
+
+#permissions
+  @include makeColumn(6, 0)
+  h4
+    text-align: left
+  li
+    margin-left: -17px
+    input
+      display: inline
+    label
+      display: inline-block
+
+.postit
+  padding: 100px 0 0 30px
+  width: 250px
+  height: 157px
+  background-image: url(nota.png)
+  
+  
+
+.rotate
+  @include rotate(-3deg)
+
+
+.privacity-rules
+  border-top: 1px solid $grayLighter
+  p
+    word-wrap: break-word
+    padding-left: 10px
+  .btn
+    float: right

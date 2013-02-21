@@ -1,3 +1,10 @@
+#content-full
+  @include makeColumnoMargin(12, 0)
+  @include centered
+
+.content-short 
+  @include makeColumn(7, 0)
+
 .content-large
   @include makeColumn(10, 0)
   h1
@@ -82,4 +89,38 @@ header
     margin-right: 5px
   
 
+
+
+
+
+
+  .footer,
+.footerFront
+  @include makeColumn(12, 0)
+  @include menuHorizontal
+  margin: 20px auto 30px
+  height: 40px
+  padding: 0
+  text-align: center
+  float: none
+  .f1
+    display: inline
+    li
+      display: inline
+  .f2
+    display: inline-block
   
+* 
+  margin: 0
+
+html, body 
+  height: 100%
+
+#wrapper,
+.wrapper
+  min-height: 100%
+
+  height: 100%
+  margin: 0 auto -80px
+
+

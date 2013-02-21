@@ -79,3 +79,124 @@
     display: table-cell
     height: 26px
     
+
+
+
+
+
+
+
+
+
+    .content-full
+  .center
+    header
+      font-size: 18px
+      line-height: 24px
+      margin-bottom: 20px
+    select
+      display: block
+    .input-xlarge
+      padding: 10px
+      margin-top: 6px
+    .btn-large
+      margin-top: -6px
+    .advanced-options
+      display: inline
+      width: 172px
+      float: left
+      
+      .menuv 
+        @include border-radius(7px)
+        border: 1px solid #f1f1f1 
+        width: auto
+        margin-left: none
+        padding: 10px 0 10px 10px
+        hr
+          margin: 7px 5px 0px -5px
+        ul 
+          margin-top: 7px
+          margin-left: 18px
+          li 
+            margin-left: 1px
+            padding: 0px 0px
+            font-size: 14px
+            ol 
+              margin-left: 2px
+              padding: 0px 0px
+              margin-bottom: 13px
+              margin-top: -7px
+              li
+                margin-top: -7px 0 8px 0
+                padding-bottom: 0px
+                a
+                  color: $grayLighter
+
+        a 
+          margin-top: 8px
+          display: block
+          padding: 3px 6px 
+          font-size: 12px
+          cursor: pointer
+          &:hover 
+            background: #F9F9F9
+            color: $linkColor
+            font-size: 13px
+      .advanced 
+        color: $linkColor
+        font-size: 13px
+        margin-left: 8px 0 0 0px !important
+        text-decoration: none
+        display: block
+        padding: 3px 0px
+        font-size: 12px
+        cursor: pointer
+
+    .search-result 
+      .tags-list
+        display: inline
+        width: 889px
+        float: left
+        font-size: 16px
+        ul
+          @include makeColumn(2, 0)
+          margin-top: 20px
+          margin-left: 8px
+          a
+            cursor: pointer
+            color: $grayLighter
+            &:hover
+              color: $linkColor
+
+#tags
+  margin-top: 20px
+ 
+#search
+  .events
+    display: inline-block
+    @include makeColumn(3, 0)
+    margin-left: 0px
+    .avatar
+      @include makeColumnoMargin(1, 0)
+      display: inline
+      img
+        height: 59px
+        margin-top: 7px
+        width: 45px
+    .data
+      @include makeColumnoMargin(2, 0)
+      display: inline-block
+      margin-top: 9px
+      
+      .date
+        font-size: 12px
+      .frequency
+        font-size: 12px
+        color: #888
+  .link
+    display: inline-block
+    @include makeColumn(3, 0)
+    margin-left: 0px
+    h5
+      margin-bottom: 2px
+
