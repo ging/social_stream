@@ -63,6 +63,6 @@ Furthermore, {Social Stream's code documentation is available at rdoc.info}[http
 
 = Discussion and contribution
 
-If you have any questions or issues regarding Social Stream usage, {Social Stream's Google group}[http://groups.google.com/group/social-stream] is a perfect place to share them. Other experienced users of Social Stream will be willing to help you.
+If you have any questions or issues regarding Social Stream usage, {Social Stream's Google group}[http://groups.google.com/group/social-stream] is a perfect place to share them. Other experienced users of Social Stream will be willing to help you. There exist also a {social-stream tag in StackOverflow}[http://stackoverflow.com/questions/tagged/social-stream]
 
 {Social Stream's issue tracker}[https://github.com/ging/social_stream/issues] is reserved to discuss defects and contributions. Please do not post questions in the issue tracker.
