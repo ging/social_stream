@@ -61,6 +61,8 @@ Since {Social Stream}[http://github.com/ging/social_stream] depends on {Devise}[
 
 Furthermore, {Social Stream's code documentation is available at rdoc.info}[http://rubydoc.info/gems/social_stream/frames]. Most of the stuff is in {the base gem}[http://rubydoc.info/gems/social_stream-base/frames].
 
-= Discussion
+= Discussion and contribution
 
-Feel free to add an issue at github[https://github.com/ging/social_stream/issues] or drop a message at {Social Stream's Google group}[http://groups.google.com/group/social-stream].
+If you have any questions or issues regarding Social Stream usage, {Social Stream's Google group}[http://groups.google.com/group/social-stream] is a perfect place to share them. Other experienced users of Social Stream will be willing to help you. There exist also a {social-stream tag in StackOverflow}[http://stackoverflow.com/questions/tagged/social-stream]
+
+{Social Stream's issue tracker}[https://github.com/ging/social_stream/issues] is reserved to discuss defects and contributions. Please do not post questions in the issue tracker.

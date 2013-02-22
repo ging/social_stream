@@ -2,12 +2,17 @@
 //
 //= require social_stream.timeline
 //= require social_stream.objects
-
 SocialStream.Comments = (function(SS, $, undefined){
-  var newElementsToHide = [
-    ".avatar",
+  var elAlwaysHidden = [
     "input[type=submit]"
   ];
+
+  var elSometimesShown = [
+    ".avatar",
+    "textarea"
+  ];
+
+  var elAll = elAlwaysHidden.concat(elSometimesShown);
 
   var initNew = function(){
     initNewElements();
@@ -20,7 +25,7 @@ SocialStream.Comments = (function(SS, $, undefined){
     if (root === undefined)
       root = "div.new_comment";
 
-    $.each(newElementsToHide, function(i, selector) {
+    $.each(elAlwaysHidden, function(i, selector) {
       var e = $(root).find(selector);
       e.hide();
     });
@@ -30,7 +35,7 @@ SocialStream.Comments = (function(SS, $, undefined){
     if (root === undefined)
       root = "div.new_comment";
 
-    $.each(newElementsToHide, function(i, selector) {
+    $.each(elAll, function(i, selector) {
       $(root).find(selector).show();
     });
   };
@@ -46,11 +51,12 @@ SocialStream.Comments = (function(SS, $, undefined){
       var newDiv = $(this).find('div.new_comment');
 
       if ($.trim(commentsDiv.text()) === ""){
-        newDiv.find('textarea').hide();
+        $.each(elSometimesShown, function(i, selector) {
+          newDiv.find(selector).hide();
+        });
       }
     });
   };
-
 
   var hideNewActivityCommentElements = function(activityId){
     var newDiv = $('#' + activityId).closest('.root').find('div.new_comment');
