@@ -1,11 +1,8 @@
 .content-full
-  @include makeColumnoMargin(12, 0)
   .timeline
     .media
       .media-heading
         font-size: 20px
-
-
   .btn-group
     @include clearfix
     button
@@ -82,13 +79,11 @@
 
 
 
+/////////////////////////////////////// EXPLORE SEARCH
+///////////// 
 
 
-
-
-
-
-    .content-full
+.content-full
   .center
     header
       font-size: 18px
@@ -115,17 +110,14 @@
         hr
           margin: 7px 5px 0px -5px
         ul 
-          margin-top: 7px
-          margin-left: 18px
+          margin: 7px 0 0 18px
           li 
             margin-left: 1px
             padding: 0px 0px
             font-size: 14px
             ol 
-              margin-left: 2px
               padding: 0px 0px
-              margin-bottom: 13px
-              margin-top: -7px
+              margin: -7px 0 13px 2px
               li
                 margin-top: -7px 0 8px 0
                 padding-bottom: 0px
@@ -145,7 +137,7 @@
       .advanced 
         color: $linkColor
         font-size: 13px
-        margin-left: 8px 0 0 0px !important
+        margin: 8px 0 0 0px !important
         text-decoration: none
         display: block
         padding: 3px 0px
@@ -160,8 +152,7 @@
         font-size: 16px
         ul
           @include makeColumn(2, 0)
-          margin-top: 20px
-          margin-left: 8px
+          margin: 20px 0 0 8px
           a
             cursor: pointer
             color: $grayLighter
@@ -174,8 +165,7 @@
 #search
   .events
     display: inline-block
-    @include makeColumn(3, 0)
-    margin-left: 0px
+    @include makeColumnoMargin(3, 0)
     .avatar
       @include makeColumnoMargin(1, 0)
       display: inline
