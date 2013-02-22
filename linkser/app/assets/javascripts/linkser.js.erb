@@ -16,7 +16,7 @@ SocialStream.Linkser.Wall = (function(SS, $) {
       SS.Wall.changeRelationSelect('link');
 
       if(this.currentValue != this.lastValue) {
-        $("#link_preview").html($('<img>').attr('src', '<%= asset_path('loading.gif') %>').addClass('loading'));
+        showLoading();
 
         this.lastValue = this.currentValue;
         var url = this.currentValue;
@@ -58,8 +58,12 @@ SocialStream.Linkser.Wall = (function(SS, $) {
     }
   };
 
+  var showLoading = function() {
+    $('#link_preview').html($('#link_preview_loading').html());
+  }
+
   var init = function(){
-    $.preloadImages("<%= asset_path('loading.gif') %>");
+    $('#link_preview_loading').hide();
 
     if ($("#new_post").length) {
       $("#post_text").change(urlDetect).keyup(urlDetect);
