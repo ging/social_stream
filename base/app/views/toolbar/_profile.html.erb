@@ -10,11 +10,11 @@
 
   <% if current_subject.present? && subject != current_subject %>
 
-    <li>
-      <%= link_to edit_contact_path(current_subject.contact_to!(subject)), class: "btn-blue" do %>
+    <!---- <li>
+     <%= link_to edit_contact_path(current_subject.contact_to!(subject)), class: "btn-blue" do %>
         <i class='icon_navbar-followers'></i> <%= current_subject.contact_to!(subject).status %>
       <% end %>
-    </li>
+    </li> -->
 
     <li>
       <%= link_to new_message_path(:receiver => subject.slug), class: "btn-blue" do %>

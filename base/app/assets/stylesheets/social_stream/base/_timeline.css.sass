@@ -8,7 +8,7 @@
     .avatar
       @include border-radius (5px)
       img
-        width: 60px !important
+        width: 60px
     .media-body
       color: $grayLight
       word-wrap: break-word
@@ -105,6 +105,9 @@
   width: 357px
 
 
+/////////////////////////////////////// is possible erase one .new_commet
+///////////// 
+
 #new_comment
   margin-left: 20px
   div
@@ -114,35 +117,28 @@
       margin-right: 19px
 
 .new_comment
+  @include border-bottom-radius (5px) 
+  border: 1px solid #ccc
+  margin-top: -10px
+  width: 84%
+  margin-left: 82px
   .avatar
     float: left
-    margin-left: 16px
+    margin-left: -11px
     margin-right: 6px
-    margin-top: -10px
+    margin-top: -2px
     img
-      margin-top: 6px
-      width: 40px 
-    h6
-      margin-top: 69px
-    
+      margin-left: 9px
+      width: 50px !important 
+    form
+      .new_comment
+        border: none
+        margin-top: 0px
+        width: auto
+        margin-left: auto
 
-.timeline,
-.comments
-  .media,
-  .root,
-  .child
-    .media-body
-      color: $grayLight
-      word-wrap: break-word
-      .actions
-        display: inline-block
-        margin-bottom: -3px
-
-
-
-
-
-@import 'chosen'
+/////////////////////////////////////// is possible erase one .new_commet
+/////////////     
 
 .activity_avatar
   @include border-radius(5px) 
@@ -177,17 +173,6 @@
   textarea
     resize: none
     width: 100%
-
-.activity_objects
-  margin-left: 56px
-  .attachment_thumb
-    @include makeColumnoMargin(1, 0)
-    background: black
-    .attachment_text_link
-      font-size: 14px
-      .post 
-        p 
-          margin: 0 0 4px
 
     
 .activity_options

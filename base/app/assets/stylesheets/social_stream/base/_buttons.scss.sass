@@ -32,3 +32,31 @@
   &[disabled] 
     cursor: default
     @include opacity(65)
+
+
+.btn-see-more
+  width: 98%
+  background-color: #eee
+  margin-bottom: 5px
+  display: inline-block
+  border: 1px solid
+  border-right: #edeaf2
+  border-bottom: #e3e0e8
+  border-color: #fff
+  padding: 2px 10px 2px 4px
+  @include border-radius (5px)
+  color: #000
+  text-align: center
+
+  &:hover
+    background-color: #555
+    color: #fff
+    text-decoration: none
+
+  &:focus 
+    @include tab-focus()
+  
+  &.disabled,
+  &[disabled] 
+    cursor: default
+    @include opacity(65)

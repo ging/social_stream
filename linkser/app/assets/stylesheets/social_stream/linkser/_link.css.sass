@@ -11,7 +11,7 @@
 
 .link_height
   background-color: $black
-  
+
 .activity_objects
   margin-left: 56px
   .attachment_thumb
@@ -22,3 +22,14 @@
       .post 
         p 
           margin: 0 0 4px
+
+.link
+  display: inline
+  margin-left: 19px
+  .thumb
+    @include makeColumnoMargin(1, 0)
+    display: inline
+    margin-top: 14px
+  .text
+    @include makeColumnoMargin(3, 0)
+    display: inline-block
