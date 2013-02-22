@@ -20,25 +20,24 @@
     </script>
     <%= yield :headers %>
   </head>
+  
   <body>
-    <section class="wrapper container">
+    <article class="wrapper container">
 
       <%= render :partial => "layouts/header" %>
 
       <div id="wrapper_body">
+
         <%= flashy %>
 
-        <%= render :partial => "layouts/description" %>
-
         <%= yield %>
-      </div>
 
-      
+      </div>
       <div class="push">
       </div>
-    </section>
-    <footer class="footer">
-      <%= render :partial => "layouts/footer" %>
-    </footer>
+    </article>
+
+    <%= render :partial => "layouts/footer" %>
+
   </body>
 </html>

@@ -1,17 +1,21 @@
-<footer class="footer">
-  <div class="container">
-    <div class="f1">
-      <ul>
-        <li><%= Date.today.year %> © </li>
-        <li id="trade_mark"><%= link_to t('site.name'), 'http://social-stream.dit.upm.es/' %></li>
-      </ul>
-    </div>
-    <div class="f2">
+<footer class="container">
+  <ul>
+    <li>
+      <%= Date.today.year %> © 
+    </li>
+    <li id="trade_mark">
+      <%= link_to t('site.name'), 'http://social-stream.dit.upm.es/' %>
+    </li>
+    <li>
       <%= link_to(image_tag('HTML5.png'), 'http://validator.w3.org/check?uri=referer') %>
+    </li>
+    <li>
       <%= link_to(image_tag('HTML5_Styling.png'),'http://jigsaw.w3.org/css-validator/check/referer') %>
+    </li>
+    <li>
       <%= link_to(image_tag('HTML5_Semantics.png'),'http://jigsaw.w3.org/css-validator/check/referer') %>
-     </div>
-  </div>
+    </li>
+  </ul>
 </footer>
 
 

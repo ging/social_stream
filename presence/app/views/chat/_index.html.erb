@@ -1,77 +1,76 @@
 <% if current_user and current_user.chat_enabled and current_subject.subject_type=="User" %>
-	
+
 <div id="chat_wrapper"> 
 
   <div id="chat_partial">    
   </div>
-	
-	<div id="chat_divs">  
-	  <div id="chat_div"></div>
-	</div>
-	
-	<div id="chat_connecting">
-	  <div class="block">
-      <div class="header">
-        <%=image_tag("btn/btn_friend.png", :class => "header_icon")%>
-        <div class="header_text">
-          <%=t('chat.connecting')%>
-        </div>
-      </div>
+  
+  <div id="chat_divs">  
+    <div id="chat_div">
     </div>
-	</div>
-	
-  <div id="chat_connection_off">
-    <div class="block">
-      <div class="header">
-        <%=image_tag("btn/btn_friend.png", :class => "header_icon")%>
-        <div class="header_text">
-          <p id="chat_header_title"><%=t('chat.disconnected')%></p>
-        </div>
+  </div>
+  
+  <section id="chat_connecting">
+    <header> 
+      <%=image_tag("btn/btn_friend.png", :class => "header_icon")%>
+      
+      <%=t('chat.connecting')%>
+    </header>
+  </section>
+  
+  <article id="chat_connection_off">
+    <header>
+      <%=image_tag("btn/btn_friend.png", :class => "header_icon")%>
+      <div class="header_text">
+        <p id="chat_header_title">
+          <%=t('chat.disconnected')%>
+        </p>
       </div>
-    </div>
+    </header>
+
     <div class="chat_off">
       <div id="passwordFormChat">
         <label for="user_password" class="chatPasswordTitle"><%=t('chat.password')%></label>
         <input id="user_password" class="chat_password" type="password"></input>
       </div>
       <input class="connectChatButton storePass" value="Connect">
-    </div>	
-	</div>
-	
-	<div id="chat_widgets">
-		<div class="block">
+    </div>  
+  </article>
+  
+  <div id="chat_widgets">
+    <div class="block">
       <div class="header">
         <%=image_tag("btn/btn_friend.png", :class => "header_icon")%>
         <div class="header_text">
           <%=t('chat.title')%>
         </div>
       </div>
-    
-	    <div id="status" class="dropdown">
-	      <dt><a href=""><span><%=t('chat.status.choose')%></span></a></dt>
-	      <dd>
-	        <ul id="statusList">
-	          <li><a id="available" href="#" class="option"><img class="flag" src="<%=image_path("status/available.png")%>" alt=""/> <%=t('chat.status.available')%> <span class="value">available</span></a></li>
-	          <li><a id="away" href="#" class="option"><img class="flag" src="<%=image_path("status/away.png")%>" alt=""/> <%=t('chat.status.away')%> <span class="value">away</span></a></li>
-	          <li><a id="dnd" href="#" class="option"><img class="flag" src="<%=image_path("status/dnd.png")%>" alt=""/> <%=t('chat.status.dnd')%> <span class="value">dnd</span></a></li>
-	          <li><a id="offline" href="#" class="option"><img class="flag" src="<%=image_path("status/offline.png")%>" alt=""/> <%=t('chat.status.offline')%> <span class="value">offline</span></a></li>
-	        </ul>
-	      </dd>
-	    </div>
-						
-			<div class="searchChatContacts">
-			    <select id="search_chat_contact" class="flexselect">
-			      <option value="">""</option>
-			    </select>
-			</div>
-			
+      
+      <div id="status" class="dropdown">
+        <dt><a href=""><span><%=t('chat.status.choose')%></span></a></dt>
+        <dd>
+          <ul id="statusList">
+            <li><a id="available" href="#" class="option"><img class="flag" src="<%=image_path("status/available.png")%>" alt=""/> <%=t('chat.status.available')%> <span class="value">available</span></a></li>
+            <li><a id="away" href="#" class="option"><img class="flag" src="<%=image_path("status/away.png")%>" alt=""/> <%=t('chat.status.away')%> <span class="value">away</span></a></li>
+            <li><a id="dnd" href="#" class="option"><img class="flag" src="<%=image_path("status/dnd.png")%>" alt=""/> <%=t('chat.status.dnd')%> <span class="value">dnd</span></a></li>
+            <li><a id="offline" href="#" class="option"><img class="flag" src="<%=image_path("status/offline.png")%>" alt=""/> <%=t('chat.status.offline')%> <span class="value">offline</span></a></li>
+          </ul>
+        </dd>
+      </div>
+      
+      <div class="searchChatContacts">
+        <select id="search_chat_contact" class="flexselect">
+          <option value="">""</option>
+        </select>
+      </div>
+      
     </div>
-	</div>
-	
-	<div>
-		<div id="publisherID"></div>
-	</div>
-	
+  </div>
+  
+  <div>
+    <div id="publisherID"></div>
+  </div>
+  
 </div>
 
 
@@ -79,45 +78,45 @@
 
   //Global variables
   var cookie = "AuthenticationByCookie>>" + "<%=cookies[Rails.application.config.session_options[:key]]%>";
-	var BOSH_SERVICE = '<%= SocialStream::Presence.bosh_service || root_url + "http-bind/" %>';
-	var user_name = '<%=current_user.name%>';
+  var BOSH_SERVICE = '<%= SocialStream::Presence.bosh_service || root_url + "http-bind/" %>';
+  var user_name = '<%=current_user.name%>';
   var user_slug = '<%=current_user.slug%>';
   var user_jid = PRESENCE.XMPPClient.getJidFromSlug('<%=current_user.slug%>');
-	
+  
 
   $(document).ready(function () {
-			
-		//Inicial field
-		$("#chat_partial").html($("#chat_connecting").html())
-	
-    if((PRESENCE.PERSISTENCE.getRestoreUserChatStatus()!="offline")&&(cookie)){
-			PRESENCE.XMPPClient.connectToChat(user_jid,cookie);
-      initialTimer = setTimeout("PRESENCE.UIMANAGER.updateChatWindow()", 10000);
-    } else {
-      PRESENCE.UIMANAGER.updateChatWindow();
-    }
-      
-	  PRESENCE.CORE.init();
-  });
+    
+        //Inicial field
+        $("#chat_partial").html($("#chat_connecting").html())
+        
+        if((PRESENCE.PERSISTENCE.getRestoreUserChatStatus()!="offline")&&(cookie)){
+          PRESENCE.XMPPClient.connectToChat(user_jid,cookie);
+          initialTimer = setTimeout("PRESENCE.UIMANAGER.updateChatWindow()", 10000);
+        } else {
+          PRESENCE.UIMANAGER.updateChatWindow();
+        }
+        
+        PRESENCE.CORE.init();
+      });
   
-</script>
-
-<% if defined?(flow)!=nil and flow %>
-  <script type="text/javascript">
-	  $(document).ready(function () {
-		  PRESENCE.WINDOW.createMainChatBox();
-			PRESENCE.WINDOW.addContentToMainChatBox(PRESENCE.WINDOW.modifyChatPartialIfMainBox($("#chat_partial")));
-			$("#chat_wrapper").find("#chat_partial").remove();
-		});
-	</script>
-<% end %>
-
-
-<% if defined?(group)!=nil and group %>
-  <script type="text/javascript">
-  	var current_group_slug = '<%=group.slug%>';
   </script>
-<% end %>
+
+  <% if defined?(flow)!=nil and flow %>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    PRESENCE.WINDOW.createMainChatBox();
+    PRESENCE.WINDOW.addContentToMainChatBox(PRESENCE.WINDOW.modifyChatPartialIfMainBox($("#chat_partial")));
+    $("#chat_wrapper").find("#chat_partial").remove();
+  });
+  </script>
+  <% end %>
 
 
-<% end %>
+  <% if defined?(group)!=nil and group %>
+  <script type="text/javascript">
+  var current_group_slug = '<%=group.slug%>';
+  </script>
+  <% end %>
+
+
+  <% end %>
