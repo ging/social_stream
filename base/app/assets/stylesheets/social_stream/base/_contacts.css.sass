@@ -1,56 +1,55 @@
 .loading
   width: auto
-  
-#sent,
-#received
-  margin-left: 0px 
-  .contact
-    padding: 5px 4px
-    margin-right: 10px
-  .avatar
-    @include makeColumnoMargin(1, 0)
-    display: inline
-    img
-      @include border-radius(5px)
-      width: 45px 
-   
-  .data
-    @include makeColumn(2, 0)
-    display: inline-block
-    margin: 0px 0px 16px -7px
-    .name
-      color: $black
-      .x
-        font-size: 12px
-        color: $black
-        a
-          float: right
-          text-decoration: none
-          margin-top: -19px
-    .info
-      font-size: 12px
-      color: $grayLight
-  .add
-    @include makeColumnoMargin(3, 0)
-    font-size: 10px
-    z-index: 1
-    .edit_contact
-      margin-bottom: 0px
-    .dropdown-toggle
-      margin-left: 0 
-      widht: 100%
-
-.tab-content
-  ul
-    display: inline
+.contacts
+  .btn-group
+    max-width: 400px
   input
     &[type="text"]
-      @include makeColumn (2, 0)
+      margin-left: 0px
+      width: 120px
       float: right
-      margin-top: 6px
+      
+#sent,
+#received
+  margin: 30px 0 0 20px
+  .content
+    @include makeColumnoMargin(3, 0)
+    .contact
+      padding: 5px 4px
+      margin-right: 10px
+    .avatar
+      @include makeColumnoMargin(1, 0)
+      display: inline
+      img
+        @include border-radius(5px)
+        width: 45px 
+     
+    .data
+      @include makeColumn(2, 0)
       display: inline-block
-  .tab-content
-    clear: both
+      margin: 0px 0px 16px -7px
+      .name
+        color: $black
+        .x
+          font-size: 12px
+          color: $black
+          a
+            float: right
+            text-decoration: none
+            margin-top: -19px
+      .info
+        font-size: 12px
+        color: $grayLight
+    .add
+      @include makeColumnoMargin(3, 0)
+      font-size: 10px
+      z-index: 1
+      .edit_contact
+        margin-bottom: 0px
+      .dropdown-toggle
+        margin-left: 0 
+        widht: 100%
+
 #contact-form
   ul
     @include makeColumnoMargin(3, 0)
@@ -73,17 +72,8 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+/////////////////////////////////////// PRIVACITY - roles
+///////////// 
 
 
 #relation_customs,
@@ -112,8 +102,10 @@
       margin-left: 32px
 
 #relation_custom_name
-  @include size (auto, 150px) 
-  margin: 0 10px 0 15px
+  width: 215px
+  height: auto
+  margin: 3px 0 0 0
+
 
 
 #new_relation
@@ -124,7 +116,7 @@
     .btn
       @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25)) 
       float: right
-      margin: 10px 41px 0 0
+      margin: 7px 13px 0 0
     
 
 #new_relation_input_block

@@ -1,31 +1,33 @@
-.document_show
-  @include makeColumn(1, 0)
-  display: inline
-
-
 #document_info
   @include makeColumn(6, 0)
   display: inline-block
-
-
-.content-large
-  .filter
-    @include makeColumn(9, 0)
-    margin-left: 0px
+.filter
+  @include makeColumn(3, 4)
+  display: inline
+  margin-top: 3px
+#documents
+  .document_show
+    @include makeColumn(1, 0)
     display: inline
-  .add-new
-    width: 90px
-    display: inline-block
-    margin: 3px 0 0 -14px
-  .tab-content
-    @include makeColumn(10, 0)
-    padding-bottom: 100px
+  input
+    &[type="text"]
+      @extend .filter
+    .btn
+      float: right
+      width: 90px
+      display: inline-block
+      margin: 3px 0 0 -14px
+    .tab-content
+      @include makeColumn(10, 0)
+      padding-bottom: 100px
 
-    
+  .documents
+    clear: both  
 #search,
 .documents,
 #document-list-net
-  .document
+  .document,
+  .picture
     display: inline
     @include makeColumn(3, 0)
     margin-left: 19px

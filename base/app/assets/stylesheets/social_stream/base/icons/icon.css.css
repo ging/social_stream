@@ -75,7 +75,7 @@
 
 
 [class^="file_50-"],   [class*="file_50-"] {
-  width: 50px;
+  width: 51px;
   height: 55px;
   line-height: 32px;
   background-image: url("icons/files_ico-50.png");
@@ -110,7 +110,7 @@
 .icon_file_50-xcf     { background-position: -70px -260px;  }
 .icon_file_50-jpeg     { background-position: -130px -250px;  }
 .icon_file_50-gif     { background-position: -190px -260px;  }
-.icon_file_50-png     { background-position: -260px -260px;  }
+.icon_file_50-png     { background-position: -250px -255px;  }
 .icon_file_50-tiff     { background-position: -310px -260px;  }
 .icon_file_50-mp3     { background-position: -10px -310px;  }
 .icon_file_50-wav     { background-position: -70px -310px;  }

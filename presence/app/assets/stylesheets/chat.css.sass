@@ -3,3 +3,36 @@
 .chat_wrapper
   @include @makeRow
   @include @makeColumn(2, 0)
+
+#status
+  dt
+    font-size: 15px
+    border-bottom: 1px solid #ccc
+    margin-bottom: 7px
+#statusList
+  background-color: $gray
+  margin-left: -11px !important
+  li
+    a
+      padding: 4px 6px
+      text-decoration: none
+      &:hover
+        background-color: $white
+      span
+        @include size(12px, 12px)
+        padding: 0px
+    .available
+      background-color: $green
+    .away
+      background-color: $orange
+    .dnd
+      background-color: $red
+    .offline
+      background-color: $blue
+
+#search_chat_contact,
+#search_chat_contact,
+  width: 100%
+
+.connectChatButton
+  @extend .btn

@@ -1,37 +1,48 @@
-<%= form_for(document) do |f| %>
-  <div class="error">
-    <ul>
-      <% document.errors.full_messages.each do |msg| %>
+<article id="new_file">
+  <%= form_for(document) do |f| %>
+    <div class="error">
+      <ul>
+        <h4>
+          <% document.errors.full_messages.each do |msg| %>
+        </h4>
         <li>
-          <%= msg %>
+          <h5>
+            <%= msg %>
+          </h5>
         </li>
-      <% end %>
-    </ul>
-  </div>
+        <% end %>
+      </ul>
+    </div>
+    <section class="upload">
+      <%= f.label :file, t('document.info.file') %>
+      <%= f.file_field :file %>
+    </section>
+    <section class="title">
+      <%= f.label :title, t('document.info.title') %>
+      <%= f.text_field :title %>
+    </section>
+    <section class="description">
+      <%= f.label :description, t('document.info.description') %>
+      <%= f.text_area :description %>
+    </section>
+    <section class="tags">
+      <%= f.label :tag_list, t('document.info.tags') %>
 
-  <%= f.label :file, t('document.info.file') %>
-  <%= f.file_field :file %>
+      <div class="fcbk">
+        <%= f.select :tag_list, [] %>
+      </div>
+    </section>
 
-  <%= f.label :title, t('document.info.title') %>
-  <%= f.text_field :title %>
+    <%= f.submit :class => "btn" %>
+  <% end %>
 
-  <%= f.label :description, t('document.info.description') %>
-  <%= f.text_area :description %>
-
-  <%= f.label :tag_list, t('document.info.tags') %>
-  <div class="fcbk">
-    <%= f.select :tag_list, [] %>
-  </div>
-
-  <%= f.submit :class => "btn" %>
-<% end %>
-
-<%= javascript_tag do %>
-  $(function() {
-    SocialStream.Document.edit({
-      tags: {
-        path: "<%= tags_path %>"
-      }
-    })
-  });
-<% end %>
+  <%= javascript_tag do %>
+    $(function() {
+      SocialStream.Document.edit({
+        tags: {
+          path: "<%= tags_path %>"
+        }
+      })
+    });
+  <% end %>
+</article>

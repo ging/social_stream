@@ -50,7 +50,7 @@
       .actions
         width: 100%
         display: inline-block
-        margin-bottom: -3px
+        margin-bottom: 20px
         .post_time_ago
           display: inline-block
           font-size: 11px
@@ -98,30 +98,18 @@
 
     .likes
       font-size: 12px
-        
-
-#comment_text
-  float: right
-  width: 357px
-
 
 /////////////////////////////////////// is possible erase one .new_commet
 ///////////// 
 
 #new_comment
-  margin-left: 20px
-  div
-    .btb
-      @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25))
-      float: right
-      margin-right: 19px
+  margin-left: 76px
+  .btn
+    @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25))
+    float: right
+    margin-right: 19px
 
 .new_comment
-  @include border-bottom-radius (5px) 
-  border: 1px solid #ccc
-  margin-top: -10px
-  width: 84%
-  margin-left: 82px
   .avatar
     float: left
     margin-left: -11px
@@ -130,12 +118,31 @@
     img
       margin-left: 9px
       width: 50px !important 
+  .new_comment
+    @include border-bottom-radius (5px) 
+    border: 1px solid #f9f9f9
+    margin-top: -20px
+    width: 85%
+    margin-left: 82px
+
+#wrapper_activities
+  .new_comment
+    .avatar
+      margin: 8px 0 0 77px
     form
-      .new_comment
-        border: none
-        margin-top: 0px
-        width: auto
-        margin-left: auto
+      margin: -18px 0 20px 81px
+      padding: 10px 0 7px 0 
+      height: 66px
+      width: 84%
+      background-color: #f9f9f9
+      textarea
+        width: 81%
+        float: right
+        margin-right: 5px
+      input
+        &[type="submit"]
+          margin: -4px 6px 0 0
+
 
 /////////////////////////////////////// is possible erase one .new_commet
 /////////////     
@@ -158,7 +165,6 @@
     &:hover
       text-decoration: none
   .x
-
     margin-left: 0px
     font-size: 12px
     color: black

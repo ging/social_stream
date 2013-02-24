@@ -1,8 +1,10 @@
 .content-full
   .timeline
     .media
+      margin: 0 0 20px
       .media-heading
         font-size: 20px
+        margin-top: 4px
   .btn-group
     @include clearfix
     button
@@ -14,6 +16,22 @@
         color: $grayLight
     .active
       color: $grayLight
+  .new_comment
+    .avatar
+      margin: 8px 0 0 77px
+    form
+      margin: -18px 0 20px 81px
+      padding: 10px 0 7px 0 
+      height: 66px
+      width: 92%
+      background-color: #f9f9f9
+      textarea
+        width: 89%
+        float: left
+      input
+        &[type="submit"]
+          margin: -3px 0 0 12px
+
 
   section
     @include clearfix
@@ -163,6 +181,42 @@
   margin-top: 20px
  
 #search
+  h4
+    margin: 0 0 10px
+    border-bottom: 1px solid #ccc
+  .btn-group
+    padding-bottom: 10px
+    margin-bottom: 10px
+    border-bottom: 1px dashed #ccc
+    .btn 
+      font-size: 13px !important
+      width: 116px !important
+      margin: 0 auto 0
+  select
+    display: none
+  .input-xlarge
+    width: 37% !important
+    height: 34px
+    margin-bottom: 0px
+    padding-left: 23px
+    clear: both
+    display: inline
+
+.content-full
+  .media,
+  .root  
+    .text,
+    .description,
+    .follow
+      font-size: 14px !important
+      h6
+        font-size: 16px !important 
+
+/////////////////////////////////////// EXPLORE SEARCH RESULT
+///////////// in events, linkser, documents
+
+
+#search-result
   .events
     display: inline-block
     @include makeColumnoMargin(3, 0)

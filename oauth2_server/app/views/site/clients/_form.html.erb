@@ -13,32 +13,32 @@
 
       </div>
     <% end %>
-    <hr class="soften">
-    <a class="pull-left" href="#">
-  <img class="media-object upload" data-src="holder.js/64x64" alt="market" style="width: 100px; height: 100px;" src="assets/user.png">
-  upload avatar
-</a>
-  <article  class="media">
-    <div class="media-body">
-      <%= f.label :name %>
-      <%= f.text_field :name %>
+    <article id="new_application">
+      <section class="upload">
+        <%= f.label :file, t('avatar.upload') %>
+        <%= f.file_field :file %>
+      </section>
 
-      <%= f.label :description %>
-      <%= f.text_area :description %>
+      <section class="title">
+        <%= f.label :title, t('application.info.title') %>
+        <%= f.text_field :title %>
+      </section>
 
-      <%= f.label :url %>
-      <%= f.text_field :url %>
-       
-      <%= f.label :callback_url %>
-      <%= f.text_field :callback_url %>
- 
+      <section class="description">
+        <%= f.label :description, t('application.info.description') %>
+        <%= f.text_area :description %>
+      </section>
+
+      <section class="url">
+        <%= f.label :url, t('application.info.url') %>
+        <%= f.text_area :url %>
+      </section>
+
+      <section class="callback_url">
+        <%= f.label :callback_url, t('application.callback_url')  %>
+        <%= f.text_area :callback_url %>
+      </section>
       <%= f.submit :class => "btn pull-right" %>
-    </div>
-  </article>  
-
-
-    <% end %>
-      </div>
-  
-
+    </article>  
+  <% end %>
 </article>

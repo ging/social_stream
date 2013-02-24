@@ -1,29 +1,44 @@
-#new_site_client
-  width: 570px
-  margin-left: auto
-  margin-right: auto
-  h1
-    float: none !important
-    text-align: right
-  .media-object
-    margin: 12px 10px 10px 10px
-    @include size (100px, 100px)
-    background: $blue
-  .media
-    padding-left: 20px
-    .media-body
-      label
-        margin-bottom: 8px
-        width: 300px
-      input
-        &[type="text"]
-          @include border-radius(3px)
-          color: #999
-          background-color: $white
-          padding: 8px 5px 5px 8px
-      textarea
-        height: 100px
-        color: #999
+#new_application
+  border: 2px dashed #ccc
+  form
+    margin: 0 0 40px
+  section
+    border-bottom: 1px dashed #ccc
+    padding-top: 15px
+    label
+      @include makeColumnoMargin(3,0)
+      font-size: 30px
+      font-weight: bold
+      color: #ccc
+      padding: 2px 0 0 14px
+  .upload,
+  .title,
+  .url,
+  .callback_url
+    height: 50px
+  .title
+    input
+
+      @include size(26px, 578px)
+  .url,
+  .callback_url
+    textarea
+      display: inline
+      @include size(26px, 578px)
+
+  .description
+    height: 100px
+    textarea
+      display: inline-block
+      @include size (70px, 578px)
+  input
+    &[type="submit"]
+      float: right
+      margin-top: 5px
+      margin-right: 20px
+
+
+
 
 .first-img
   h1
@@ -35,9 +50,12 @@
     a
       font-size: 14px
       float: right
+    .button_to
+      float: right
     .soften
       margin: 9px 0 10px 0
       @include opacity (100)
+      clear: both
   img
     display: inline
     @include size (40px, 40px)
@@ -62,49 +80,3 @@
     margin-top: 7px
     span
       color: $blue
-  .soften
-    margin: 10px 0
-    @include opacity (70)
-      
-#oauth2_server
-  h1
-    float: none !important
-    text-align: left
-  .media-object
-    margin: 1px 10px 10px 10px
-    @include size (100px, 100px)
-  .media
-    padding-left: 20px
-    .media-body
-      h3
-        margin-bottom: 8px
-        width: 300px
-      .result
-        @include border-radius(3px)
-        color: #999
-        background-color: $white
-        padding: 8px 5px 5px 8px
-  
-.authorization
-  width: 322px !important
-  margin-left: auto
-  margin-right: auto
-  h2
-    margin-top: -3px
-    border-bottom: 1px solid #ccc
-    color: $blue
-    font-family: $sansFontFamily
-  form
-    text-align: right
-    margin-bottom: -5px
-    margin-top: 14px
-    border-top: 1px solid #f1f1f1
-    padding-top: 10px
-
-  ul
-    margin-top: 5px
-    margin-left: 10px
-    li
-      padding-bottom: 5px
-      padding-top: 5px
-

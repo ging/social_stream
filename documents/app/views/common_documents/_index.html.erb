@@ -4,43 +4,30 @@
 
 <% if profile_subject %>
   <% toolbar :profile, :subject => profile_subject %>
-<% elsif user_signed_in? %>
-  <% toolbar %>
+  <% elsif user_signed_in? %>
+    <% toolbar %>
 <% end %>
 
-<br class="clearfloat" />
-
-<div class="document-tabs tabbable">
-  <ul class="nav nav-tabs">
-    <li class="active">
-      <%= link_to t('document.scope.own'), "#document-list-own", "data-toggle" => "tab" %>
-    </li>
-    <li class="">
-      <%= link_to t('document.scope.network'), "#document-list-net", "data-toggle" => "tab" %>
-    </li>
-  </ul> 
-</div>
 <%= render partial: 'common_documents/filter' %>
+
 <% if user_signed_in? && profile_subject_is_current? %>
-<div class="add-new">  
-  <%= link_to t('document.new.link'), new_document_path %>
-</div>
+
+<%= link_to t('document.new.link'), new_document_path, class: "btn"  %>
+
 <% end %>
 
-<div class="tab-content">
-  <div id="document-list-own" class="tab-pane active">
-    <div class="documents">
-      <%= render partial: 'common_documents/list',
-                 locals: { documents: collection } %>
-    </div>
-  </div>
-  
-  <div id="document-list-net" class="tab-pane">
-    <%= render partial: 'common_documents/list',
-                 locals: { documents: collection } %>
+<div class="documents">
+  <%= render partial: 'common_documents/list',
+             locals: { documents: collection } %>
+</div>
 
-    <div class="documents">
-    </div>
+  
+<div id="document-list-net" class="tab-pane">
+  <%= render partial: 'common_documents/list',
+             locals: { documents: collection } %>
+
+  <div class="documents">
+    <%= render :partial => 'activities/see-more' %>
   </div>
 </div>
 

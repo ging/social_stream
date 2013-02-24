@@ -1,0 +1,37 @@
+#new_file
+  border: 2px dashed #ccc
+  form
+    margin: 0 0 40px
+  .error
+    h4
+      color: ¢grayLighter
+    h5
+      color: ¢gray
+  section
+    border-bottom: 1px dashed #ccc
+    padding-top: 15px
+    label
+      @include makeColumnoMargin(3,0)
+      font-size: 30px
+      font-weight: bold
+      color: #ccc
+      padding: 2px 0 0 14px
+  .upload,
+  .title,
+  .tags
+    height: 50px
+  .title
+    input
+      &[type="text"]
+        display: inline
+        width: 578px
+  .description
+    height: 100px
+    textarea
+      display: inline-block
+      @include size (70px, 578px)
+  input
+    &[type="submit"]
+      float: right
+      margin-top: 5px
+      margin-right: 20px
