@@ -73,8 +73,6 @@ en:
         make-friend: "%{author} also added %{activity_object} as contact"
         post: "%{author} posted %{activity_object}"
         updated: "%{author} posted %{activity_object}"
-    timeline:
-      more: "See more.."
     title: "Activities"
     to_comment: "Comment"
     unlike: "I do not like anymore"
@@ -327,6 +325,8 @@ en:
     toolbar: "Invite"
     success: "Your invitations have successfully been sent"
     text: "Write your own message"
+  layout:
+    more: "See more.."
   like:
     n:
       one: "%{count} like"

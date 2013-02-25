@@ -1,11 +1,6 @@
-<div class="tabbable">
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#"><%= t('message.' + @box) %></a></li>
-  </ul>
-</div>
 <div class="conversations">
   <%= render @conversations %>
 
-  <%= render :partial => 'activities/see-more' %>
-
+  <%= render partial: 'layouts/more',
+              locals: { path: conversations_path } %>
 </div>

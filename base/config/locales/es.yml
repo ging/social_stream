@@ -73,8 +73,6 @@ es:
         make-friend: "%{author} también añadió a %{activity_object} como contacto"
         post: "%{author} publicó %{activity_object}"
         updated: "%{author} actualizó %{activity_object}"
-    timeline:
-      more: "Ver más..."
     title: "Actividades"
     to_comment: "Comentar"
     unlike: "Ya no me gusta"
@@ -325,6 +323,8 @@ es:
     toolbar: "Invitar"
     success: "Se han enviado tus invitaciones"
     text: "Escribe tu mensaje"
+  layout:
+    more: "Ver más..."
   like:
     n:
       one: "1 fan"
