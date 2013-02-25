@@ -3,15 +3,15 @@
     <%= t 'explore.search.title' %>
   </h4>
   <div class="btn-group" data-toggle="buttons-checkbox">
-      <button type="button" class="btn btn-primary">todo</button>
-      <button type="button" class="btn btn-primary">usuarios</button>
-      <button type="button" class="btn btn-primary">instituciones</button>
-      <button type="button" class="btn btn-primary">publicaciones</button>
-      <button type="button" class="btn btn-primary">comentarios</button>
-      <button type="button" class="btn btn-primary">imagenes</button>
-      <button type="button" class="btn btn-primary">videos</button>
-      <button type="button" class="btn btn-primary">audios</button>
-      <button type="button" class="btn btn-primary">ficheros</button>
+      <button type="button" class="btn">todo</button>
+      <button type="button" class="btn">usuarios</button>
+      <button type="button" class="btn">instituciones</button>
+      <button type="button" class="btn">publicaciones</button>
+      <button type="button" class="btn">comentarios</button>
+      <button type="button" class="btn">imagenes</button>
+      <button type="button" class="btn">videos</button>
+      <button type="button" class="btn">audios</button>
+      <button type="button" class="btn">ficheros</button>
     </div>
   <%= form_tag search_path, method: :get do %>
      <%= select_tag 'type', options_for_select(SocialStream::Search.options_for_type_select, params[:type]) %>
