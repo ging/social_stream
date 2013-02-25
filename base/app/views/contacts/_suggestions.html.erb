@@ -1,5 +1,5 @@
 <% if (sgs = current_subject.suggestions(2)).present? %>
-  <section id="suggestions">
+  <section id="suggestions" data-path="<%= suggestion_contacts_path %>">
     <header>
       <h4>
         <%=t('contact.suggestion.other') %>

@@ -1,5 +1,5 @@
 <% if current_subject.pending_contacts? %>
-<section id="pendings">
+<section id="pendings" data-path="<%= pending_contacts_path %>">
   <header>
     <h4>
       <%= t 'contact.pending.other' %>

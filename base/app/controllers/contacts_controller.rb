@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :exclude_reflexive, :except => [ :index, :pending ]
+  before_filter :exclude_reflexive, :except => [ :index, :suggestion, :pending ]
 
   def index
     params[:d] ||= 'sent'
@@ -61,20 +61,22 @@ class ContactsController < ApplicationController
     end
   end
 
-  def pending
-    total_contacts
-
-    @contacts = current_subject.pending_contacts
+  # Return a suggestion for this contact
+  def suggestion
+    @contact = current_subject.suggestions.first
 
     respond_to do |format|
-      format.html {
-        @contacts = Kaminari.paginate_array(@contacts).page(params[:page]).per(10)
-        render :action => :index
-      }
-      format.js {
-        @contacts = Kaminari.paginate_array(@contacts).page(params[:page]).per(10)
-        render :action => :index
-      }
+      format.html { @contact.present? ? render(partial: @contact) : raise(ActiveRecord::RecordNotFound) }
+      format.json { render json: @contact }
+    end
+  end
+
+  def pending
+    @contact = current_subject.pending_contacts.last
+
+    respond_to do |format|
+      format.html { @contact.present? ? render(partial: @contact) : raise(ActiveRecord::RecordNotFound) }
+      format.json { render json: @contact }
     end
   end
 
