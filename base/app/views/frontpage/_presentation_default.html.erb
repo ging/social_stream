@@ -1,17 +1,24 @@
-<header>
-<h2>
-  <% content_for :title do%>
-    <%= t('welcome', :site => t('site.name')) %>
-  <%end%>
-</h2>
-</header>
-
-<%= render :partial => 'layouts/search' %>
-
-<div class="thumbnail inline">
+<section class="modular">
   <header>
-  <h6>Busca usuarios, grupos, archivos...</h6>
+    modular
   </header>
-  <%= render :partial => 'frontpage/caracteristics' %>
-</div>
-
+  <p>
+    diferentes gemas que aportan diferentes caracteríasticas
+  </p>
+</section>
+<section class="flexibility">
+  <header>
+    flexible
+  </header>
+  <p>
+    posibilidar de cambiar el estilo de las vistas mediante SASS
+  </p>
+</section>
+<section class="power">
+  <header>
+    potencia
+  </header>
+  <p>
+    herramienta open source con gran comunidad de desarrolladores
+  </p>
+</section>

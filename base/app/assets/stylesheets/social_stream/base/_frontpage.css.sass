@@ -1,15 +1,59 @@
 .explanation
+  margin-top: 30px
   border-right: 12px solid $blue
-  height: 56px
+  height: 110px
   padding-right: 11px
-  margin-top: 20px
   padding-bottom: 16px
   clear: both
   .big
+    letter-spacing: 0px
+    font-size: 21px
+    font-weight: bold
     margin-top: -2px
   .lite
-    color: #888
     margin-top: -2px
+    font-size: 19px
+    color: $gray
+    margin: -5px 21px 20px 0
+  .btn
+    clear: both
+    font-size: 15px
+    padding: 7px 30px
+  .big,
+  .lite,
+  .btn
+    margin-right: 21px
+    float: right
+ 
+#frontpage
+  .modular,
+  .flexibility,
+  .power
+    width: 196px
+    float: left
+    padding: 10px
+    margin: 10px 0 0 20px
+    border: 1px solid #ccc
+    @include border-radius (5px)
+    &:hover
+      background-color: $blue
+      @include transition(background 1s, color, 1s)
+      header
+        color: $white
+      p
+        @include transition(background 1s, color, 1s)
+        @include border-radius (4px)
+        background-color: $white
+        color: $gray
+    header
+      font-size: 33px
+      color: $gray
+      margin: 10px 0
+    p
+      font-size: 16px
+      color: #ccc
+      padding: 12px 21px 16px 15px
+
 
 #frontpage
 #forgot-pass
@@ -27,12 +71,6 @@
   margin-top: 40px
   h2
     margin-left: -20px
-
-#presentation
-  @include makeColumnoMargin(6, 0)
-  display: inline
-  margin: 45px 0 0 30px
-  width: 536px
 
 #remember
   width: 150px
@@ -107,16 +145,24 @@
     margin-right: 0px !important
   .soften
     clear: both
+#presentation
+  @include makeColumnoMargin(7, 0)
+  width: 714px
+  display: inline
+  margin: 45px 0 0 5px
+
 .div_registration
   margin-top: 30px
+
 .div_password
   margin-left: 1px
   margin-top: 20px
 #sign_in
-  @include makeColumn(4, 1)
+  @include makeColumn(3, 1)
   display:inline-block
   @include box-shadow(0px 0px 13px rgba(50, 50, 50, 0.15))
   @include border-radius(15px)
+  margin-left: 60px
   padding: 15px
   margin-top: 50px
   color: #8c8c8c
