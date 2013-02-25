@@ -95,7 +95,7 @@ SocialStream.Comments = (function(SS, $, undefined){
     });
   };
 
-  SocialStream.Timeline.addInitCallback(initNew);
+  SocialStream.Timeline.addShowCallback(initNew);
 
   SocialStream.Timeline.addCreateCallback(hideNewActivityCommentElements);
   SocialStream.Timeline.addCreateCallback(newCommentAutoSize);

@@ -1,1 +1,1 @@
-<a href="#" class="btn-see-more">Ver más...</a>
+<%= link_to t('activity.timeline.more'), "#", :class => "btn-see-more", "data-path" => polymorphic_path([ section, Activity.new ]) %>

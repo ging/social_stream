@@ -87,6 +87,8 @@ Rails.application.routes.draw do
     resource :like
   end
 
+  get 'home/activities' => 'activities#index', as: :home_activities, defaults: { section: 'home' }
+
   get 'audience/index', :as => :audience
   
   match 'cheesecake' => 'cheesecake#index', :as => :cheesecake  

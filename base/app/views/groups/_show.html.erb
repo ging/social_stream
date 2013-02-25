@@ -16,14 +16,11 @@
 
 <% sidebar %>
 
-<%= location(link_to(t('group.one')+": "+truncate_name(sanitize @group.name)))%>
-                      
 <% toolbar :profile, :subject => @group %>
 
 <br class="clearfloat" />
 
 
 <%= render :partial => "activities/index",
-           :locals  => { :activities => @group.wall(:profile, :for => current_subject).
-                                               page(params[:page]),
-                         :owner => @group } %>
+           :locals  => { section: @group,
+                         owner:   @group } %>

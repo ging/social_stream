@@ -456,36 +456,7 @@ class Actor < ActiveRecord::Base
   def common_contacts_count(subject)
     (sent_active_contact_ids & subject.sent_active_contact_ids).size
   end
-  
-  # The set of {Activity activities} in the wall of this {Actor}.
-  #
-  # There are two types of walls:
-  # home:: includes all the {Activity activities} from this {Actor} and their followed {Actor actors}
-  #             See {Permission permissions} for more information on the following support
-  # profile:: The set of activities in the wall profile of this {Actor}, it includes only the
-  #           activities from the ties of this actor that can be read by the subject
-  #
-  # Options:
-  # :for:: the subject that is accessing the wall
-  # :relation:: show only activities that are attached at this relation level. For example,
-  #             the wall for members of the group.
-  #             
-  def wall(type, options = {})
-    options[:for] = self if type == :home
 
-    from =
-      case type
-      when :home
-        following_actor_and_self_ids
-      when :profile
-        id
-      else
-        raise "Unknown type of wall: #{ type }"
-      end
-
-    Activity.wall(from, options[:for])
-  end
- 
   def logo
     avatar!.logo
   end

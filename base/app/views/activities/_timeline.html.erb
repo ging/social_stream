@@ -1,11 +1,15 @@
+<% section ||= nil %>
+
 <section class="timeline">
-  <%= render activities  %>
-  <%= render :partial => 'activities/see-more' %>
+  <%= render Activity.timeline(section, current_subject).page(params[:page]) %>
+
+  <%= render partial: 'activities/see-more',
+             locals: { section: section } %>
 </section>
 
 <%= javascript_tag do %>
   $(function(){  
-    SocialStream.Timeline.init();  
+    SocialStream.Timeline.show();  
   });
 <% end %>
 

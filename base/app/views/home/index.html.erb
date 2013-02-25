@@ -1,9 +1,7 @@
 <% sidebar %>
 
-<%= location(link_to(t('home')+": "+ truncate_name(sanitize current_subject.name)))%>
-                      
 <% toolbar %>
 
 <%= render :partial => "activities/index",
-           :locals => { :activities => current_subject.wall(:home).page(params[:page]),
-                        :owner => current_subject } %>
+           :locals => { section: :home,
+                        owner: current_subject } %>

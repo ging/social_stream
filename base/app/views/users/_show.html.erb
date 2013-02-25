@@ -17,11 +17,8 @@
 
 <% sidebar %>
 
-<%= location(link_to(t('profile.one')+": "+truncate_name(sanitize @user.name)))%>
-              
 <% toolbar :profile, :subject => @user %>
 
 <%= render :partial => "activities/index",
-           :locals  => { :activities => @user.wall(:profile, :for => current_subject).
-                                              page(params[:page]),
-                         :owner => @user } %>
+           :locals  => { section: @user,
+                         owner:   @user } %>

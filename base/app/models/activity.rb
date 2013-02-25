@@ -72,10 +72,14 @@ class Activity < ActiveRecord::Base
       merge(Audience.where(:relation_id => Relation.ids_shared_with(subject)))
   }
 
-  scope :wall, lambda { |senders = nil, receivers = nil|
+  scope :timeline, lambda { |senders = nil, receivers = nil|
+    if senders == :home
+      senders = receivers.following_actor_and_self_ids
+    end
+
     select("DISTINCT activities.*").
       roots.
-      includes(:author, :user_author, :owner, :activity_objects, :activity_verb, :relations).
+      includes(:author, :user_author, :owner, :activity_objects, :activity_verb, :relations)
       authored_or_owned_by(senders).
       shared_with(receivers).
       order("created_at desc")

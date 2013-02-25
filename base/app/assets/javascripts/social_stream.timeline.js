@@ -1,29 +1,34 @@
 SocialStream.Timeline = (function(SS, $, undefined){
 	// FIXME: DRY!!
-	var initCallbacks = [];
+	var showCallbacks = [];
 	var createCallbacks = [];
 
-	var addInitCallback = function(callback){
-		initCallbacks.push(callback);
-	}
+	var addShowCallback = function(callback){
+		showCallbacks.push(callback);
+	};
 
 	var addCreateCallback = function(callback){
 		createCallbacks.push(callback);
-	}
+	};
 
-	var init = function(){
-		$.each(initCallbacks, function(i, callback){ callback(); });
-	}
+	var show = function(){
+		$.each(showCallbacks, function(i, callback){ callback(); });
+	};
+
+  var init = function() {
+    console.log("SocialStream.Timeline.init() is deprecated. Please, use SocialStream.Timeline.show()");
+    show();
+  };
 
 	var create = function(activityId){
 		$.each(createCallbacks, function(i, callback){ callback(activityId); });
-	}
+	};
 
 	var initPrivacyTooltips = function(activityId) {
 		var summaryId = '.audience';
 		var fullId = '.audience-tooltip';
 
-		if (activityId != undefined) {
+		if (activityId !== undefined) {
 			fullId = '#' + activityId + ' ' + fullId;
 			summaryId = '#' + activityId + ' ' + summaryId;
 		}
@@ -60,23 +65,49 @@ SocialStream.Timeline = (function(SS, $, undefined){
 		$("#"+id).children(".hidden_comments").hide();
 	};
 
+  var initMoreButton = function() {
+    $(".btn-see-more").each(function(i, btn) {
+      $(btn).attr('data-page', "2");
+    });
+
+    $(".btn-see-more").click(function(event) {
+      event.preventDefault();
+
+      $.ajax({
+        url: $(this).attr('data-path'),
+        dataType: 'html',
+        data: { page: $(this).attr('data-page') },
+        type: 'GET',
+        success: function(data) {
+          $(event.target).before(data);
+          show();
+
+          $(event.target).attr('data-page', parseInt($(event.target).attr('data-page'), 10) + 1);
+        }
+      });
+    });
+  };
+
   var resetWallInput = function(){
     $('#post_text').val('');
   };
 
 
-	addInitCallback(initPrivacyTooltips);
-	addInitCallback(initComments);
+	addShowCallback(initPrivacyTooltips);
+	addShowCallback(initComments);
+	addShowCallback(initMoreButton);
 
 	addCreateCallback(initPrivacyTooltips);
 	addCreateCallback(resetWallInput);
 
 	return {
-		addInitCallback: addInitCallback,
 		init: init,
 		addCreateCallback: addCreateCallback,
+		addInitCallback: addShowCallback,
+		addShowCallback: addShowCallback,
 		create: create,
 		initPrivacyTooltips: initPrivacyTooltips,
-		showAllComments: showAllComments
+		showAllComments: showAllComments,
+    show: show
 	};
 }) (SocialStream, jQuery);
