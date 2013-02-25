@@ -141,11 +141,39 @@ SocialStream.Contact = (function($, SS, undefined) {
     $('button', contacts).button('reset');
   };
 
+  var replaceContact = function(options) {
+    $('[data-contact_id="' + options.id + '"]').each(function(i, el) {
+      $.each([ 'suggestions', 'pendings' ], function(i, section) {
+        var sectionId = '#' + section;
+
+        if ($(el).closest(sectionId).length > 0) {
+          updateTemplate(el, $(sectionId).attr('data-path'));
+        }
+      });
+    });
+  };
+
+  var updateTemplate = function(el, path) {
+    $.ajax({
+      url: path,
+      dataType: 'html',
+      type: 'GET',
+      success: function(data) {
+        $(el).fadeOut('slow', function() {
+          $(data).replaceAll(el).fadeIn();
+
+          initContactButtons();
+        });
+      }
+    });
+  };
+
   addIndexCallback(initTabs);
   addIndexCallback(initContactButtons);
 
   addUpdateCallback(updateForm);
   addUpdateCallback(clearLoading);
+  addUpdateCallback(replaceContact);
 
   // FIXME There is probably a more efficient way to do this..
   $(function() {

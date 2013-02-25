@@ -40,13 +40,14 @@ Rails.application.routes.draw do
 
   resources :comments
 
-  constraints SocialStream::Routing::Constraints::Custom.new do
-    resources :contacts do
-      collection do
-        get 'pending'
-      end
+  resources :contacts do
+    collection do
+      get 'suggestion'
+      get 'pending'
     end
+  end
 
+  constraints SocialStream::Routing::Constraints::Custom.new do
     namespace "relation" do
       resources :customs
     end
@@ -58,12 +59,6 @@ Rails.application.routes.draw do
     match 'followings' => 'followers#index', :as => :followings, :defaults => { :direction => 'sent' }
     match 'followers' => 'followers#index', :as => :followers, :defaults => { :direction => 'received' }
     resources :followers
-
-    resources :contacts do
-      collection do
-        get 'pending'
-      end
-    end
   end
 
   resources :activity_actions
