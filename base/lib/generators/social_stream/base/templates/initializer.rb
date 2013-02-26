@@ -29,6 +29,10 @@ SocialStream.setup do |config|
   #
   # config.relation_model = :custom
 
+  # Configure the type of actors that are suggested in the sidebar
+  #
+  # config.suggested_models = [ :user, :group ]
+
   # Expose resque interface to manage background tasks at /resque
   #
   # config.resque_access = true

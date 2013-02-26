@@ -349,9 +349,15 @@ class Actor < ActiveRecord::Base
   
   # By now, it returns a suggested {Contact} to another {Actor} without any current {Tie}
   #
+  # Suggested actor types can be configured in SocialStream.suggestion_models in 
+  # config/initializers/social_stream.rb
+  #
   # @return [Contact]
   def suggestions(size = 1)
-    candidates = Actor.where(Actor.arel_table[:id].not_in(sent_active_contact_ids + [id]))
+    candidates =
+      Actor.
+        where(subject_type: SocialStream.suggested_models.map{ |m| m.to_s.classify }).
+        where(Actor.arel_table[:id].not_in(sent_active_contact_ids + [id]))
 
     size.times.map {
       candidates.delete_at rand(candidates.size)
