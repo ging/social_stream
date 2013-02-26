@@ -1,1 +1,3 @@
-<%= link_to t('activity.timeline.more'), "#", :class => "btn-see-more", "data-path" => polymorphic_path([ section, Activity.new ]) %>
+<%= render partial: 'layouts/loading' %>
+
+<%= link_to t('activity.timeline.more'), "#", :class => "btn-see-more progress-see_more", "data-path" => polymorphic_path([ section, Activity.new ]) %>

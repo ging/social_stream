@@ -2,7 +2,7 @@
   <%= form_for @client do |f| %>
 
     <% if @client.errors.any? %>
-      <div id="error_explanation">
+      <div id="error_explanation" class="alert alert-error">
         <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client site from being saved:</h2>
 
         <ul>

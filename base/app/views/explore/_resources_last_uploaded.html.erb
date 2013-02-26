@@ -1,11 +1,11 @@
-<article class="content">
+<section class="content">
   <div class="case">
     <nav class="first-line-large">
       <%= link_to object.title, object.object %>
     </nav>
-    <article class="second-line">
+    <section class="second-line">
       <%= t 'explore.resources.uploaded_since', time: l(object.created_at) %>
-    </article>
+    </section>
   </div>
-</article>
+</section>
 

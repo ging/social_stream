@@ -32,59 +32,77 @@
         &[type="submit"]
           margin: -3px 0 0 12px
 
+/////////////////////////////////////// Explore Screen & any class more for participants, files.
+///////////// 
 
-  section
-    @include clearfix
-    .sub-content-medium
-      @include makeColumnoMargin(6, 0)
-      display: inline
-    .sub-content-full
-      @include makeColumnoMargin(12, 0)
-    .sub-content-small
-      @include makeColumn(5, 0)
-      display: inline-block
-    .sub-content-medium,
-    .sub-content-full,
-    .sub-content-small
-      margin-top: 20px
-      header
-        font-size: 18px
-        line-height: 15px
-      .content
-        margin-bottom: 20px
-        @include clearfix
-        margin-top: 7px
-        border-top: 1px solid #e3e3e3
-        padding-top: 7px
-        .case
+#explore-content
+  .sub-content-full
+    @include makeColumnoMargin(12, 0)
+  .sub-content-medium
+    @include makeColumnoMargin(6, 0)
+    display: inline
+  .sub-content-medium-offset
+    @include makeColumnoMargin(6, 1)
+    display: inline
+  .sub-content-small
+    @include makeColumn(5, 0)
+    display: inline-block
+  .sub-content-small-offset
+    @include makeColumn(5, 1)
+    display: inline-block
+  .sub-content-mini
+    @include makeColumn(3, 0)
+    display: inline-block
+  .sub-content-mini-offset
+    @include makeColumn(3, 1)
+    display: inline-block
+  .sub-content-medium,
+  .sub-content-full,
+  .sub-content-small,
+  .sub-content-mini,
+  .sub-content-medium-offset,
+  .sub-content-full-offset,
+  .sub-content-small-offset,
+  .sub-content-mini-offset
+    margin-top: 20px
+    header
+      font-size: 18px
+      line-height: 15px
+    .content
+      margin-bottom: 20px
+      @include clearfix
+      margin-top: 7px
+      border-top: 1px solid #e3e3e3
+      padding-top: 7px
+      .case
+        float: left
+        width: 361px
+        margin-left: 20px
+        font-size: 12px
+        word-wrap: break-word
+        .first-line-large,
+        .first-line-mini,
+          display: inline
+          width: 380px
           float: left
-          width: 361px
-          margin-left: 20px
-          font-size: 12px
-          word-wrap: break-word
-          .first-line-large,
-          .first-line-mini,
+          a
+            font-size: 14px
+            font-weight: bold
             display: inline
-            width: 380px
-            float: left
-            a
-              font-size: 14px
-              font-weight: bold
-              display: inline
-          .first-line-mini
-            width: 241px
-          .second-line
-            dispaly block
-            color: #a3a3a3
-        .well-small
-          width: 50px
-          float: right
-          margin-bottom: 0px
-          text-align: right
-         
-    .sub-content-small
-      display: inline-block
-      margin-left: 40px
+        .first-line-mini
+          width: 241px
+        .second-line
+          dispaly block
+          color: #a3a3a3
+      .well-small
+        width: 50px
+        float: right
+        margin-bottom: 0px
+        text-align: right
+       
+  .sub-content-small
+    display: inline-block
+    margin-left: 40px
 
 #explore-header
   width: 100%

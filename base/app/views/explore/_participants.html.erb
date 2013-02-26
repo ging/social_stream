@@ -1,21 +1,17 @@
-<section id="participants">
-  <article class="sub-content-medium">
-    <header>
-      <%= t 'explore.participants.last_active' %>
-    </header>
-    <% User.last_active.first(5).each do |u| %>
-      <%= render partial: 'explore/last_active', locals: { object: u } %>
-    <% end %>
-  </article>
-
-  <article class="sub-content-small">
-    <header>
-      <%= t 'explore.participants.last_registered' %>
-    </header>
-    <% User.last_registered.first(3).each do |u| %>
-      <%= render partial: 'explore/last_registered', locals: { object: u } %>
-    <% end %>
-  </article>
+<section class="sub-content-mini">
+  <header>
+    <%= t 'explore.participants.last_active' %>
+  </header>
+  <% User.last_active.first(5).each do |u| %>
+    <%= render partial: 'explore/last_active', locals: { object: u } %>
+  <% end %>
 </section>
 
-
+<section class="sub-content-small-offset">
+  <header>
+    <%= t 'explore.participants.last_registered' %>
+  </header>
+  <% User.last_registered.first(3).each do |u| %>
+    <%= render partial: 'explore/last_registered', locals: { object: u } %>
+  <% end %>
+</section>

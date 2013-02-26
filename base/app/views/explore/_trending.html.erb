@@ -1,18 +1,18 @@
-<article class="content">
+<section class="content">
   <div class="case">        
     <nav class="first-line-large">
       <%= link_to object.object.title, object.object %>
         / 
       <%= link_to object.author_subject.name, object.author_subject %>
     </nav>
-    <article class="second-line">
+    <section class="second-line">
       <%= object.description %>
-    </article>
+    </section>
   </div>
   <aside class="well well-small">
     <div class="top">
       <%= t 'like.n', count: object.like_count %>
     </div>
   </aside>
-</article>
+</section>
 
