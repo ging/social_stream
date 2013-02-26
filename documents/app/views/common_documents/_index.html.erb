@@ -27,14 +27,17 @@
              locals: { documents: collection } %>
 
   <div class="documents">
-    <%= render :partial => 'activities/see-more' %>
+    <%= render partial: 'layouts/more',
+               locals: { path: [ profile_subject, Document.new ] } %>
   </div>
 </div>
 
 
 
 <%= javascript_tag do %>
-$(document).ready(function() {
+$(function() {
+  SocialStream.Document.index();
+
   var last_search = "";
   
   
