@@ -1,9 +1,9 @@
 en:
   chat:
-    connecting: "Chat Connecting"
-    reconnecting: "Chat Reconnecting"
-    disconnected: "Chat Disconnected"
-    unableconnect: "Chat Out of Service"
+    connecting: "Connecting"
+    reconnecting: "Reconnecting"
+    disconnected: "Disconnected"
+    unableconnect: "Out of Service"
     title: "Chat"
     password: "Password"
     zerousers: "No users connected"

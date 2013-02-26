@@ -1,4 +1,4 @@
-<% if current_user and current_user.chat_enabled and current_subject.subject_type=="User" %>
+<% if current_user && current_user.chat_enabled %>
 
 <div id="chat_wrapper"> 
 
@@ -34,7 +34,7 @@
         <input id="user_password" class="chat_password" type="password">
         </input>
       </div>
-      <input class="btn storePass" value="Connect">
+      <input type="submit" class="btn storePass connectChatButton" value="Connect">
     </div>  
   </article>
   
@@ -115,6 +115,10 @@
   $(document).ready(function () {
     
         //Inicial field
+        $("#chat_connecting").hide();
+        $("#chat_connection_off").hide();
+        $("#chat_widgets").hide();
+        $("#statusList").hide();
         $("#chat_partial").html($("#chat_connecting").html())
         
         if((PRESENCE.PERSISTENCE.getRestoreUserChatStatus()!="offline")&&(cookie)){
