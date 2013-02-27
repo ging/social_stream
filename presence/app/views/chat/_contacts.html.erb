@@ -2,7 +2,7 @@
 
 <div class="users_connected">
   <%@all_contacts.each do |contact| %>
-    <% if contact.user.connected %>
+    <% if true || contact.user.connected %>
       <div class="user_presence" name='<%=contact.name%>' slug='<%=contact.slug%>' connected='true'>
     <% else %>
       <div class="user_presence" name='<%=contact.name%>' slug='<%=contact.slug%>' connected='false'>

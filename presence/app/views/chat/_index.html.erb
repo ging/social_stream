@@ -122,7 +122,11 @@
         $("#chat_partial").html($("#chat_connecting").html())
         
         if((PRESENCE.PERSISTENCE.getRestoreUserChatStatus()!="offline")&&(cookie)){
-          PRESENCE.XMPPClient.connectToChat(user_jid,cookie);
+          if (PRESENCE.XMPPClient.authByCookie()) {
+            PRESENCE.XMPPClient.connectToChat(user_jid,cookie);
+          } else {
+            PRESENCE.XMPPClient.connectToChat(user_jid);
+          }
           initialTimer = setTimeout("PRESENCE.UIMANAGER.updateChatWindow()", 10000);
         } else {
           PRESENCE.UIMANAGER.updateChatWindow();

@@ -290,7 +290,11 @@ PRESENCE.XMPPClient = (function(P,$,undefined){
 	      
 	      PRESENCE.UIMANAGER.changeChatHeaderTitle(I18n.t('chat.reconnecting'))
 	      
-	      connectToChat(user_jid,cookie,null);
+	      if (authByCookie()){
+                connectToChat(user_jid,cookie);
+              } else {
+                connectToChat(user_jid);
+              }
 	      
 	      reconnectTimer = setTimeout ("PRESENCE.XMPPClient.onReconnect()", 9000);
 	      
