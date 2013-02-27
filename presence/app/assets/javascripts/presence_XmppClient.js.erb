@@ -236,7 +236,7 @@ PRESENCE.XMPPClient = (function(P,$,undefined){
 	  } else if (status == Strophe.Status.AUTHFAIL) {
 	    PRESENCE.UTILITIES.log('Strophe authentication fail.');
 	      if ((window.sessionStorage)&&(sessionStorage.getItem("ss_user_pass") != null)){
-	        sessionStorage.setItem("ss_user_pass",null);
+	        sessionStorage.removeItem("ss_user_pass");
 	      }
 	      disconnectionFlag = true;
 	  } else if (status == Strophe.Status.ERROR) {

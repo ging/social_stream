@@ -1,9 +1,9 @@
 es:
   chat:
-    connecting: "Chat Conectando"
-    reconnecting: "Chat Reconectando"
-    disconnected: "Chat Desconectado"
-    unableconnect: "Chat Fuera de servicio"
+    connecting: "Conectando"
+    reconnecting: "Reconectando"
+    disconnected: "Desconectado"
+    unableconnect: "Fuera de servicio"
     title: "Chat"
     password: "Contraseña"
     zerousers: "No hay contactos conectados"

@@ -42,4 +42,3 @@ SocialStream::Presence.setup do |config|
   #config.games = true
 
 end if Rails.env == "development"
-puts Rails.env.inspect
