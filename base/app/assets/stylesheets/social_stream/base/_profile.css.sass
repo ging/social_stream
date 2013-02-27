@@ -9,7 +9,7 @@
     .briefing
       color: $gray
       .empty
-        @include border-radius (4px)
+        @extend .border-radius-4
         background-color: #D9EDF7
         border: 1px solid #BCE8F1
         color: #3A87AD
@@ -22,12 +22,12 @@
         font-size: 17px
         font-weight: bold
       p
-        @include border-radius (15px)
+        @extend .border-radius-15
         margin: -15px 11px 0 5px
         background-color: #F9F9F9
         border: 0 solid #F9F9F9
         padding: 12px 10px 11px 27px
-        widht: 325px
+        width: 325px
 
     .update
       margin-left: 22px
@@ -39,7 +39,7 @@
           ul
             width: auto !important
             li
-              @include border-radius(5px)
+              @extend .border-radius-5
               background: none repeat scroll 0 0 $white
               width: auto
               color: $grayLight

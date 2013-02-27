@@ -4,7 +4,7 @@
   ul.holder
     width: 90%
     padding-right: 7px
-    @include border-radius(5px) 
+    @extend .border-radius-5 
     li.bit-box
       margin: 3px
       background: none repeat scroll 0 0 rgba(0, 232, 232, 0.1)
@@ -36,7 +36,7 @@
     ul
       width: auto !important
       li
-        @include border-radius(5px) 
+        @extend .border-radius-5
         background: none repeat scroll 0 0 $white
         width: auto
         color: $grayLight

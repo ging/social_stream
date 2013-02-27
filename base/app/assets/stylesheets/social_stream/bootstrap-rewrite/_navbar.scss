@@ -29,13 +29,15 @@
 // -------------------------
 .navbar-search {
   .search-query {
-  	margin-top: 6px;
     padding: 1px 11px 0;
     @include font-sans-serif(12px, normal, 1);
     @include border-radius(5px); // redeclare because of specificity of the type attribute
   }
 }
 
+.navbar-search {
+  margin: 15px 0 0 28px;
+}
 .navbar .nav {
   margin: 0;
 }

@@ -1,4 +1,10 @@
 ActiveRecord::Base.connection.tables.each do |t|
+  ActiveRecord::Base.connection.foreign_keys(t).each do |fk|
+    ActiveRecord::Base.connection.remove_foreign_key t, fk.options
+  end
+end
+
+ActiveRecord::Base.connection.tables.each do |t|
   ActiveRecord::Base.connection.drop_table t
 end
 

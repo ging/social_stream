@@ -2,10 +2,18 @@
   <%=t('message.other')%>
 <% end %>
 
-<% content_for :javascript do %>
-  $('.pagination a').attr('data-remote', 'true');
-<% end %>
-
 <% toolbar :messages %>
 
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#"><%= t('message.' + @box) %></a></li>
+  </ul>
+</div>
+
 <%= render :partial => 'index' %>
+
+<%= javascript_tag do %>
+  $(function() {
+    SocialStream.Conversation.index();
+  });
+<% end %>

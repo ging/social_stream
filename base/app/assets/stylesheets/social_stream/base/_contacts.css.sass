@@ -3,6 +3,27 @@
 .contacts
   .btn-group
     max-width: 400px
+    .btn
+      @extend .btn-blue
+      &:hover
+        .caret
+          @include transition (border 1s, color, 1s)
+          border-top-color: $white
+          border-bottom-color: $white
+      .caret
+        margin-left: 6px
+        border-top-color: $blue
+        border-bottom-color: $blue
+        &:hover
+          border-top-color: $white
+          border-bottom-color: $white
+  .open
+    .btn
+      .caret
+        border-top-color: $blue
+        border-bottom-color: $blue
+
+
   input
     &[type="text"]
       margin-left: 0px
@@ -46,6 +67,10 @@
       z-index: 1
       .edit_contact
         margin-bottom: 0px
+        .open
+          .active
+            label
+              color: $white
       .dropdown-toggle
         margin-left: 0 
         widht: 100%

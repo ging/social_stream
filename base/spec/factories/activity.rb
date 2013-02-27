@@ -1,11 +1,11 @@
 # Helpers for building the post activity
 #
 class ActivityObjectSpecHelper < ActiveRecord::Base
-  set_table_name "activity_objects"
+  self.table_name = "activity_objects"
 end
 
 class PostSpecHelper < ActiveRecord::Base
-  set_table_name "posts"
+  self.table_name = "posts"
 
   belongs_to :activity_object_spec_helper, :foreign_key => "activity_object_id"
 end

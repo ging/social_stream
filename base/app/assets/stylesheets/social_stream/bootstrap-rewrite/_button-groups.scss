@@ -35,7 +35,7 @@
 // Float them, remove border radius, then re-add to first and last elements
 .btn-group > .btn-blue {
   position: relative;
-  @include border-radius(0);
+  @extend .border-radius-0;
 }
 .btn-group > .btn-blue + .btn-blue {
   margin-left: -1px;
@@ -117,11 +117,16 @@
 
 
 .btn-group.open {
-  .btn-blue.dropdown-toggle {
-    background-color: $btnPrimaryBackgroundHighlight;
+  .btn.dropdown-toggle {
+    background-color: $blueDark;
+    color: $white;
   }
+  .btn.dropdown-toggle.caret{
+    @include transition (border 1s, color, 1s);
+    border-top-color: $white;
+    border-bottom-color: $white;
 }
-
+}
 
 // Reposition the caret
 .btn .caret {

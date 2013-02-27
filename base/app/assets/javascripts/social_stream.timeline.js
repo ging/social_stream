@@ -1,3 +1,5 @@
+//= require social_stream.pagination
+
 SocialStream.Timeline = (function(SS, $, undefined){
 	// FIXME: DRY!!
 	var showCallbacks = [];
@@ -65,37 +67,18 @@ SocialStream.Timeline = (function(SS, $, undefined){
 		$("#"+id).children(".hidden_comments").hide();
 	};
 
-  var initMoreButton = function() {
-    $(".btn-see-more").each(function(i, btn) {
-      $(btn).attr('data-page', "2");
-    });
-
-    $(".btn-see-more").click(function(event) {
-      event.preventDefault();
-
-      $.ajax({
-        url: $(this).attr('data-path'),
-        dataType: 'html',
-        data: { page: $(this).attr('data-page') },
-        type: 'GET',
-        success: function(data) {
-          $(event.target).before(data);
-          show();
-
-          $(event.target).attr('data-page', parseInt($(event.target).attr('data-page'), 10) + 1);
-        }
-      });
-    });
-  };
-
   var resetWallInput = function(){
     $('#post_text').val('');
   };
 
 
+  var initPagination = function() {
+    SS.Pagination.show(show);
+  };
+
 	addShowCallback(initPrivacyTooltips);
 	addShowCallback(initComments);
-	addShowCallback(initMoreButton);
+	addShowCallback(initPagination);
 
 	addCreateCallback(initPrivacyTooltips);
 	addCreateCallback(resetWallInput);

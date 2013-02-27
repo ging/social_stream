@@ -1,6 +1,6 @@
 SocialStream.FullCalendar = (function(SS, $, Scheduler, undefined){
   var current;
-  var eventColor = 'black';
+  var eventColor = 'gray';
 
   var showCallbacks = [];
 

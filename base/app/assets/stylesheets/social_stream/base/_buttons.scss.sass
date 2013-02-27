@@ -26,7 +26,6 @@
     @include tab-focus()
   
   &.active
-    @include box-shadow(inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05))
     border: 1px solid $white
     background-color: $blue !important
     color: $white
@@ -34,7 +33,10 @@
   &.disabled,
   &[disabled] 
     cursor: default
-    @include opacity(65)
+    @include opacity(85)
+    background-color: $blue
+    color: $white
+
 
 
 .btn-see-more

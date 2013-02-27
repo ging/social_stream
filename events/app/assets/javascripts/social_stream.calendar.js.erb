@@ -35,7 +35,7 @@ SocialStream.Calendar = (function(SS, $, undefined){
     eventElement(now).addClass('today');
 
 
-    cal.find('.days td').each(function(index, domEl){
+    cal.find('#days td').each(function(index, domEl){
       var d = eventElementDate(domEl)
 
       if(d < now) $(domEl).addClass('past');

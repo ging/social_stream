@@ -2,8 +2,7 @@
   margin-top: 30px
   border-right: 12px solid $blue
   height: 110px
-  padding-right: 11px
-  padding-bottom: 16px
+  padding: 0 11px 16px 0
   clear: both
   .big
     letter-spacing: 0px
@@ -11,7 +10,6 @@
     font-weight: bold
     margin-top: -2px
   .lite
-    margin-top: -2px
     font-size: 19px
     color: $gray
     margin: -5px 21px 20px 0
@@ -34,7 +32,7 @@
     padding: 10px
     margin: 10px 0 0 20px
     border: 1px solid #ccc
-    @include border-radius (5px)
+    @extend .border-radius-5
     &:hover
       background-color: $blue
       @include transition(background 1s, color, 1s)
@@ -42,7 +40,7 @@
         color: $white
       p
         @include transition(background 1s, color, 1s)
-        @include border-radius (4px)
+        @extend .border-radius-4
         background-color: $white
         color: $gray
     header
@@ -85,7 +83,7 @@
 #search
   width: 100%
   input
-    &[type="text"],
+    &[type="text"]
       width: 97%
   .thumbnail
     width: 100%
@@ -127,7 +125,7 @@
 .div_sign_in
   @include makeColumn(4, 1)
   @include box-shadow(0px 0px 13px rgba(50, 50, 50, 0.15))
-  @include border-radius(15px)
+  @extend .border-radius-15
   padding: 15px
   margin-top: 50px
   color: #8c8c8c
@@ -136,13 +134,11 @@
     text-align: right
     font-size: 35px
     line-height: 24px
-    margin-bottom: 20px
-    margin-top: 5px
+    margin: 5px 0 20px
   .input_username
     width: 96%
   .btn
-    margin-bottom: 20px !important
-    margin-right: 0px !important
+    margin: 0 0 20px!important
   .soften
     clear: both
 #presentation
@@ -155,28 +151,24 @@
   margin-top: 30px
 
 .div_password
-  margin-left: 1px
-  margin-top: 20px
+  margin: 20px 0 0 1px
 #sign_in
   @include makeColumn(3, 1)
-  display:inline-block
   @include box-shadow(0px 0px 13px rgba(50, 50, 50, 0.15))
-  @include border-radius(15px)
-  margin-left: 60px
+  @extend .border-radius-15
+  display: inline-block
   padding: 15px
-  margin-top: 50px
+  margin: 50px 0 0 60px
   color: #8c8c8c
   h3
     text-align: right
     font-size: 35px
     line-height: 24px
-    margin-bottom: 20px
-    margin-top: 5px
+    margin: 5px 0 20px
   .input_username
     width: 96%
   .btn
-    margin-bottom: 20px !important
-    margin-right: 0px !important
+    margin: 0 0 20px !important
     float: left
   .soften
     clear: both

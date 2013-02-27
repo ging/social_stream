@@ -10,43 +10,46 @@ describe Activity do
 
       describe "sender home" do
         it "should include activity" do
-          @activity.sender.wall(:home).should include(@activity)
+          Activity.timeline(:home, @activity.sender).should include(@activity)
         end
       end
 
       describe "receiver home" do
         it "should include activity" do
-          @activity.receiver.wall(:home).should include(@activity)
+          Activity.timeline(:home, @activity.receiver).should include(@activity)
         end
       end
 
       describe "alien home" do
         it "should not include activity" do
-          Factory(:user).wall(:home).should_not include(@activity)
+          Activity.timeline(:home, Factory(:user)).should_not include(@activity)
         end
       end
 
       describe "friend's profile" do
         it "should not include activity" do
           friend = Factory(:friend, :contact => Factory(:contact, :sender => @activity.sender)).receiver
-          friend.wall(:profile, :for => @activity.sender).should_not include(@activity)
+          Activity.timeline(friend, @activity.sender).should_not include(@activity)
         end
       end
 
       describe "sender profile" do
         context "for sender" do
           it "should include activity" do
-            @activity.sender.wall(:profile, :for => @activity.sender).should include(@activity)
+            Activity.timeline(@activity.sender, @activity.sender).should include(@activity)
           end
         end
 
         context "for receiver" do
           it "should include activity" do
-            @activity.sender.wall(:profile, :for => @activity.receiver).should include(@activity)
-            @activity.sender.wall(:profile,
-                                  :for => @activity.receiver,
-                                  :relation => @activity.relations.first).should include(@activity)
+            Activity.timeline(@activity.sender, @activity.receiver).should include(@activity)
           end
+        end
+      end
+
+      describe "public timeline" do
+        it "should not include activity" do
+          Activity.timeline.should_not include(@activity)
         end
       end
     end
@@ -59,7 +62,13 @@ describe Activity do
       describe "friend's profile" do
         it "should not include activity" do
           friend = Factory(:friend, :contact => Factory(:contact, :sender => @activity.sender)).receiver
-          friend.wall(:profile, :for => @activity.sender).should_not include(@activity)
+          Activity.timeline(friend, @activity.sender).should_not include(@activity)
+        end
+      end
+
+      describe "public timeline" do
+        it "should not include activity" do
+          Activity.timeline.should_not include(@activity)
         end
       end
     end
@@ -71,38 +80,38 @@ describe Activity do
 
       describe "sender home" do
         it "should include activity" do
-          @activity.sender.wall(:home).should include(@activity)
+          Activity.timeline(:home, @activity.sender).should include(@activity)
         end
       end
 
       describe "receiver home" do
         it "should include activity" do
-          @activity.receiver.wall(:home).should include(@activity)
+          Activity.timeline(:home, @activity.receiver).should include(@activity)
         end
       end
 
       describe "alien home" do
         it "should not include activity" do
-          Factory(:user).wall(:home).should_not include(@activity)
+          Activity.timeline(:home, Factory(:user)).should_not include(@activity)
         end
       end
 
       describe "sender profile" do
         context "for sender" do
           it "should include activity" do
-            @activity.sender.wall(:profile, :for => @activity.sender).should include(@activity)
+            Activity.timeline(@activity.sender, @activity.sender).should include(@activity)
           end
         end
 
         context "for receiver" do
           it "should include activity" do
-            @activity.sender.wall(:profile, :for => @activity.receiver).should include(@activity)
+            Activity.timeline(@activity.sender, @activity.receiver).should include(@activity)
           end
         end
 
         context "for Anonymous" do
           it "should include activity" do
-            @activity.sender.wall(:profile, :for => nil).should include(@activity)
+            Activity.timeline(@activity.sender, nil).should include(@activity)
           end
         end
       end
@@ -110,20 +119,26 @@ describe Activity do
       describe "receiver profile" do
         context "for sender" do
           it "should include activity" do
-            @activity.receiver.wall(:profile, :for => @activity.sender).should include(@activity)
+            Activity.timeline(@activity.receiver, @activity.sender).should include(@activity)
           end
         end
 
         context "for receiver" do
           it "should include activity" do
-            @activity.receiver.wall(:profile, :for => @activity.receiver).should include(@activity)
+            Activity.timeline(@activity.receiver, @activity.receiver).should include(@activity)
           end
         end
 
         context "for Anonymous" do
           it "should include activity" do
-            @activity.receiver.wall(:profile, :for => nil).should include(@activity)
+            Activity.timeline(@activity.receiver, nil).should include(@activity)
           end
+        end
+      end
+
+      describe "public timeline" do
+        it "should include activity" do
+          Activity.timeline.should include(@activity)
         end
       end
     end

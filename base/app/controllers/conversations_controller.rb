@@ -1,8 +1,8 @@
 class ConversationsController < ApplicationController
-
   before_filter :authenticate_user!
   before_filter :get_mailbox, :get_box, :get_actor
   before_filter :check_current_subject_in_conversation, :only => [:show, :update, :destroy]
+
   def index
     if @box.eql? "inbox"
       @conversations = @mailbox.inbox.page(params[:page]).per(9)
@@ -10,6 +10,10 @@ class ConversationsController < ApplicationController
       @conversations = @mailbox.sentbox.page(params[:page]).per(9)
     else
       @conversations = @mailbox.trash.page(params[:page]).per(9)
+    end
+
+    respond_to do |format|
+      format.html { render @conversations if request.xhr? }
     end
   end
 

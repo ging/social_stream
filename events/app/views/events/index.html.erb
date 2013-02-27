@@ -4,7 +4,7 @@
 
 <% toolbar :profile, :subject => profile_subject %>
 
-<div id="calendar" class="table-bordered" data-events_path="<%= polymorphic_path [profile_subject, Event.new] %>" data-date="<%= params[:date] %>" data-view="<%= params[:view] %>" <%= 'data-can-create="true"' if can?(:create, new_post(profile_subject)) %>></div>
+<div id="calendar" class="table-striped" data-events_path="<%= polymorphic_path [profile_subject, Event.new] %>" data-date="<%= params[:date] %>" data-view="<%= params[:view] %>" <%= 'data-can-create="true"' if can?(:create, new_post(profile_subject)) %>></div>
 
 <div id="calendar_form" class="modal hide fade">
   

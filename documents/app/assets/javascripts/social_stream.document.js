@@ -1,4 +1,14 @@
 SocialStream.Document = (function(SS, $, undefined){
+	var indexCallbacks = [];
+
+	var addIndexCallback = function(callback){
+		indexCallbacks.push(callback);
+	};
+
+	var index = function(options){
+		$.each(indexCallbacks, function(i, callback){ callback(options); });
+	};
+
 	var editCallbacks = [];
 
 	var addEditCallback = function(callback){
@@ -70,12 +80,19 @@ SocialStream.Document = (function(SS, $, undefined){
 
   };
 
+  var initPagination = function() {
+    SS.Pagination.show();
+  };
+
+  addIndexCallback(initPagination);
+
   addEditCallback(initTagsForm);
 
   SS.Wall.addShowCallback(initNewActivity);
 
 	return {
-		edit: edit
+		edit: edit,
+    index: index
   };
 
 })(SocialStream, jQuery);

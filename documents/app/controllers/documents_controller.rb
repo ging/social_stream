@@ -7,6 +7,8 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       format.html {
         collection
+
+        render collection if request.xhr?
       }
 
       format.json { render :json => collection }
