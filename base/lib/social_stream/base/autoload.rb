@@ -56,10 +56,6 @@ module SocialStream
     autoload :List,     'social_stream/views/list'
     autoload :Location, 'social_stream/views/location'
 
-    module Settings
-      autoload :Base, 'social_stream/views/settings/base'
-    end
-
     module Sidebar
       autoload :Base, 'social_stream/views/sidebar/base'
     end

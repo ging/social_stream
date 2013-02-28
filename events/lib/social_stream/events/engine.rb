@@ -11,12 +11,6 @@ module SocialStream
         SocialStream::ActivityStreams.register :event
       end
 
-      initializer "social_stream-events.views.settings" do
-        SocialStream::Views::Settings.module_eval do
-          include SocialStream::Views::Settings::Events
-        end
-      end
-
       initializer "social_stream-events.views.sidebar" do
         SocialStream::Views::Sidebar.module_eval do
           include SocialStream::Views::Sidebar::Events

@@ -1,0 +1,6 @@
+<!-- insert_before "code[erb-loud]:contains('notifications')" -->
+
+<% if current_subject.is_a?(Group) %>
+  <%= render partial: 'settings/rooms' %>
+<% end %>
+

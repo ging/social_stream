@@ -4,10 +4,6 @@ require 'rails-scheduler'
 
 module SocialStream
   module Views
-    module Settings
-      autoload :Events, 'social_stream/views/settings/events'
-    end
-
     module Sidebar
       autoload :Events, 'social_stream/views/sidebar/events'
     end
