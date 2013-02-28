@@ -26,11 +26,11 @@
   <%= render partial: 'common_documents/list',
              locals: { documents: collection } %>
 
-  <div class="documents">
+  <nav class="documents">
     <%= render partial: 'layouts/more',
                locals: { path: [ profile_subject, Document.new ] } %>
     <%= render partial: 'layouts/loading' %>
-  </div>
+  </nav>
 </div>
 
 

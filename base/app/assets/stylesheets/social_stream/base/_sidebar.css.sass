@@ -2,18 +2,12 @@
   @include makeColumn(3, 0)
   padding-top: 6px  
 
-#suggestions
-  h4
-    color: $black
-    font-family: $serifFontFamily
-    margin-left: 10px
-
+#suggestions,
 #pendings
   h4
     color: $black
     font-family: $serifFontFamily
     margin-left: 10px
-
 
 .contact
   padding: 5px 4px
@@ -47,6 +41,27 @@
     @include makeColumnoMargin(3, 0)
     font-size: 10px
     z-index: 1
+    .btn-group
+      max-width: 400px
+      .btn
+        @extend .btn-blue
+        &:hover
+          .caret
+            @include transition (border 1s, color, 1s)
+            border-top-color: $white
+            border-bottom-color: $white
+        .caret
+          margin-left: 6px
+          border-top-color: $blue
+          border-bottom-color: $blue
+          &:hover
+            border-top-color: $white
+            border-bottom-color: $white
+    .open
+      .btn
+        .caret
+          border-top-color: $blue
+          border-bottom-color: $blue
     .edit_contact
       margin-bottom: 0px
     .dropdown-toggle

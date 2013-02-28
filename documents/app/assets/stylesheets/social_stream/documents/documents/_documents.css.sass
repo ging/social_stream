@@ -2,7 +2,7 @@
   @include makeColumn(6, 0)
   display: inline-block
 .filter
-  @include makeColumn(3, 4)
+  @include makeColumn(3, 0)
   display: inline
   margin-top: 3px
 #documents
@@ -12,17 +12,18 @@
   input
     &[type="text"]
       @extend .filter
-    .btn
-      float: right
-      width: 90px
-      display: inline-block
-      margin: 3px 0 0 -14px
-    .tab-content
-      @include makeColumn(10, 0)
-      padding-bottom: 100px
+  .btn
+    float: right
+    width: 90px
+    display: inline-block
+    margin: 3px 0 0 -14px
+  .tab-content
+    @include makeColumn(10, 0)
+    padding-bottom: 100px
 
-  .documents
+  nav.documents
     clear: both
+    margin-top: 10px
     .btn-see-more
       position: absolute
       z-index: 100
@@ -30,3 +31,5 @@
     .loading
       z-index: 200
       position: relative
+.documents
+  clear: both
