@@ -1,12 +1,6 @@
 require 'social_stream-base'
 
 module SocialStream
-  module Views
-    module Settings
-      autoload :Presence, 'social_stream/views/settings/presence'
-    end
-  end
-
   module Presence   
     autoload :VERSION, 'social_stream/presence/version'
 

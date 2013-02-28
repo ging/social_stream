@@ -1,0 +1,6 @@
+<!-- insert_before "code[erb-loud]:contains('notifications')" -->
+
+<% if SocialStream::Presence.enable && current_subject == current_user %>
+  <%= render partial: "settings/chat" %>
+<% end %>
+

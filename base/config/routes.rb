@@ -105,7 +105,6 @@ Rails.application.routes.draw do
   match 'api/me/home/' => 'api#activity_atom_feed', :format => 'atom', :as => :api_my_home
 
   match 'api/me/contacts' => 'contacts#index', :format => 'json', :as => :api_contacts
-  match 'api/subjects/:s/contacts' => 'contacts#index', :format => 'json', :as => :api_subject_contacts
   ##/API##
  
   #Background tasks

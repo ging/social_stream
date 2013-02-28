@@ -1,3 +1,23 @@
 <h2><%= t('settings.for')%> <%= current_subject.name %></h2>
 
-<%= render_settings %>
+<% if current_subject == current_user %>
+  <%= render partial: "devise/registrations/edit_user",
+             locals: { resource: current_user,
+                       resource_name: :user } %>
+
+  <%= render partial: "language" %>
+<% end %>
+
+<%= render partial: "notifications" %>
+
+<% if current_subject.respond_to? :authentication_token %>
+  <%= render partial: 'api_key' %>
+<% end %>
+
+<% if current_subject == current_user %>
+  <%= render partial: "devise/registrations/delete_account",
+             locals: { resource: current_user,
+                       resource_name: :user } %>
+<% else %>
+  <%= render partial: 'destroy' %>
+<% end %>
