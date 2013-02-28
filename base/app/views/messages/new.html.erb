@@ -4,32 +4,10 @@
 
 <% toolbar :messages %>
 
-<%= location(
-  link_to(t('message.other'), conversations_path,:remote => true),
-  link_to(t('message.new'), new_message_path, :remote => true)
-) %>
-
-<% content_for :javascript do %>
-
-	var recipients = $("#_recipients").fcbkcomplete({
-                json_url: "<%= contacts_path(:form => true, :format => :json) %>",
-		cache: true,
-		filter_hide: true,
-		newel: false,
-		height: 6
-	});	
-	
-	$("#body").cleditor({
-	  width:493,
-	  controls:  "<%= SocialStream.cleditor_controls %>"   
-	});
-
-	<% unless @recipient.nil? %>
-		$("#_recipients").trigger("addItem",[{"title": "<%= truncate_name @recipient.name %>", "value": "<%= @recipient.id %>"}]);
-	<% end %>
-
-  $(".new_message").validate({errorClass: "validation_error"});
-
-<% end %>
-
 <%= render :partial => 'new' %>
+
+<%= javascript_tag do %>
+  $(function() {
+    SocialStream.Message.new_();
+  });
+<% end %>

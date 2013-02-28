@@ -14,6 +14,7 @@ SocialStream.Group = (function(SS, $, undefined){
 	};
 
   var initFcbk = function() {
+  /*
     var url = $("#group__participants").attr('data-path');
 
     $("#group__participants").fcbkcomplete({
@@ -34,6 +35,7 @@ SocialStream.Group = (function(SS, $, undefined){
       newel: false,
       height: 6
     });
+    */
   };
 
 	var initValidate = function(options){

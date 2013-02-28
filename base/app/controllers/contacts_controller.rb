@@ -17,13 +17,14 @@ class ContactsController < ApplicationController
     @contacts =
       @contacts.
         positive.
-        merge(Actor.name_search(params[:search])).
-        related_by_param(params[:relation])
+        merge(Actor.name_search(params[:q])).
+        related_by_param(params[:relation]).
+        page(params[:page])
 
     respond_to do |format|
       format.html
       format.js
-      format.json { render :text => to_json(@contacts) }
+      format.json { render json: @contacts.map(&:receiver), helper: self }
     end
   end
 
@@ -88,25 +89,6 @@ class ContactsController < ApplicationController
     if @contact.reflexive?
       redirect_to home_path
     end
-  end
-
-  def to_json(contacts)
-    contacts.map{ |c|
-      if params[:form].present?
-        {
-          'key' => c.receiver_id.to_s,
-          'value' => self.class.helpers.truncate_name(c.receiver.name)
-        }
-      else
-        {
-          'name'  => c.receiver.name,
-          'url'   => polymorphic_url(c.receiver_subject),
-          'image' => {
-            'url' => root_url + c.receiver.logo.url
-          }
-        }
-      end
-    }.to_json
   end
 
   def total_contacts

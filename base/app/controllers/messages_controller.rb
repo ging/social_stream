@@ -36,14 +36,13 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.xml
   def create
-    @recipients = Array.new
-    if params[:_recipients].present?
-      params[:_recipients].each do |recp_id|
-        recp = Actor.find_by_id(recp_id)
-        next if recp.nil?
-        @recipients << recp
+    @recipients = 
+      if params[:_recipients].present?
+        @recipients = params[:_recipients].split(',').map{ |r| Actor.find(r) }
+      else
+        []
       end
-    end
+
     @receipt = @actor.send_message(@recipients, params[:body], params[:subject])
     if (@receipt.errors.blank?)
       @conversation = @receipt.conversation

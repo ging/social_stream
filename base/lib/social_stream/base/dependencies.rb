@@ -8,6 +8,8 @@ require 'rails_engine_decorators'
 require 'foreigner'
 # jQuery
 require 'jquery-rails'
+# Select2 javascript library
+require 'select2-rails'
 # Permalinks:
 require 'stringex'
 # Hierarchical relationships in Activity and Relation:

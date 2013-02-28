@@ -1,4 +1,4 @@
-//= require jquery.fcbkcomplete
+//= require select2
 
 SocialStream.Profile = (function(SS, $, undefined){
 	var showCallbacks = [];
@@ -32,6 +32,7 @@ SocialStream.Profile = (function(SS, $, undefined){
   };
 
   var initTagsForm = function(options){
+  /*
     if (options.tags === undefined)
       return;
 
@@ -47,6 +48,7 @@ SocialStream.Profile = (function(SS, $, undefined){
     $.each(options.tags.present, function(i, tag) {
       $('#profile_tag_list').trigger("addItem", { title: tag, value: tag });
     });
+    */
   };
 
   addShowCallback(initEditButtons);

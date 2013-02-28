@@ -34,6 +34,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('avatars_for_rails', '~> 0.2.8')
   # jQuery
   s.add_runtime_dependency('jquery-rails', '>= 1.0.9')
+  # Select2 javascript library
+  s.add_runtime_dependency('select2-rails', '~> 3.3.0')
   # Authorization
   s.add_runtime_dependency('cancan', '~> 1.6.7')
   # Pagination
