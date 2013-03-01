@@ -1,6 +1,6 @@
 <% @activity.audience.each do |a| %>
   <div class="audience_logo">
-    <%= link_to image_tag(a.logo.url(:contact),
+    <%= link_to image_tag(a.logo.url(:small),
                           :alt => a.name),
                  a.subject,
                  :title => a.name %>
