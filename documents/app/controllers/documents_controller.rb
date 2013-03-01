@@ -20,14 +20,18 @@ class DocumentsController < ApplicationController
       format.json { render :json => resource }
       format.js
       format.all {
-        redirect = 
-          ( request.referer.present? ?
-            ( request.referer =~ /new$/ ?
-              resource :
-              request.referer ) :
-            home_path )
+        if resource.new_record?
+          render action: :new
+        else
+          redirect = 
+            ( request.referer.present? ?
+              ( request.referer =~ /new$/ ?
+                resource :
+                request.referer ) :
+              home_path )
 
-        redirect_to redirect
+          redirect_to redirect
+        end
       }
     end
   end

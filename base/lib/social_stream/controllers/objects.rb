@@ -10,7 +10,8 @@ module SocialStream
         :owner_id,
         :user_author_id,
         :_activity_parent_id,
-        :relation_ids
+        :relation_ids,
+        :tag_list
       ]
 
       extend ActiveSupport::Concern

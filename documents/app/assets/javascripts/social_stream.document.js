@@ -19,15 +19,8 @@ SocialStream.Document = (function(SS, $, undefined){
     $.each(editCallbacks, function(i, callback){ callback(options); });
   };
 
-  var initTagsForm = function(options) {
-    $('select[name*="[tag_list]"]').fcbkcomplete({
-        json_url: options.tags.path,
-        cache: false,
-        filter_case: true,
-        filter_hide: true,
-        newel: false,
-        height: 6
-    });
+  var initTagsForm = function() {
+    SS.Tag.select2("#document_tag_list");
   };
 
   var initNewActivity = function() {

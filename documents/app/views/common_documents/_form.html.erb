@@ -27,10 +27,7 @@
     </section>
     <section class="tags">
       <%= f.label :tag_list, t('document.info.tags') %>
-
-      <div class="fcbk">
-        <%= f.select :tag_list, [] %>
-      </div>
+      <%= f.text_field :tag_list, 'data-path' => tags_path(format: 'json') %>
     </section>
 
     <%= f.submit :class => "btn" %>
@@ -38,11 +35,7 @@
 
   <%= javascript_tag do %>
     $(function() {
-      SocialStream.Document.edit({
-        tags: {
-          path: "<%= tags_path %>"
-        }
-      })
+      SocialStream.Document.edit();
     });
   <% end %>
 </article>
