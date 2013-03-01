@@ -48,6 +48,8 @@ class Group < ActiveRecord::Base
   
   # Creates the ties from the group to the participants
   def create_ties_to_participants
+    @_participants ||= ""
+
     participant_ids = ([ author_id, user_author_id ] | @_participants.split(',').map(&:to_i)).uniq
 
     participant_ids.each do |a|
