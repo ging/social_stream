@@ -21,9 +21,7 @@
   <%= f.hidden_field :_participants, 'data-path' => contacts_path(format: :json) %>
 
   <%= f.label :tags_list, t('group.tags')%>
-  <div class="fcbk">
-    <%= f.select :tag_list, [], {}, 'data-path' => tags_path(format: :json) %>
-  </div>
+  <%= f.text_field :tag_list, 'data-path' => tags_path(format: :json) %>
 
   <%= f.label :description %>
   <%= f.text_area :description %>

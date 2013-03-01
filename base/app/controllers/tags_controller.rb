@@ -2,8 +2,6 @@ class TagsController < ApplicationController
   before_filter :authenticate_user!
   
   def index
-    params[:limit] ||= 10
-
     @tags =
       case params[:mode]
       when "popular"
@@ -12,15 +10,13 @@ class TagsController < ApplicationController
         match_tag
       end
 
-    if @tags.blank? && params[:tag].present?
-      @tags = [ ActsAsTaggableOn::Tag.new(name: params[:tag]) ]
+    if @tags.blank? && params[:q].present?
+      @tags = [ ActsAsTaggableOn::Tag.new(name: params[:q]) ]
     end
 
     respond_to do |format|
       format.json {
-        response = @tags.map{ |t| { 'key' => t.name, 'value' => t.name } }.to_json
-
-        render :text => response
+        render json: @tags
       }
     end
   end
@@ -28,10 +24,10 @@ class TagsController < ApplicationController
   private
 
   def match_tag
-    ActsAsTaggableOn::Tag.where('name like ?',"%#{ params[:tag] }%").limit(params[:limit])
+    ActsAsTaggableOn::Tag.where('name LIKE ?',"%#{ params[:q] }%").page(params[:page])
   end
 
   def most_popular
-    ActivityObject.tag_counts(:limit => params[:limit], :order => "count desc")
+    ActivityObject.tag_counts(:order => "count desc").page(params[:page])
   end
 end

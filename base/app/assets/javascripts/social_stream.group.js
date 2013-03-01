@@ -4,34 +4,22 @@
 //= require jquery.ba-url
 
 SocialStream.Group = (function(SS, $, undefined){
-	var new_Callbacks = [];
+  var new_Callbacks = [];
 
-	var addNew_Callback = function(callback){
-		new_Callbacks.push(callback);
-	};
+  var addNew_Callback = function(callback){
+    new_Callbacks.push(callback);
+  };
 
-	var new_ = function(options){
-		$.each(new_Callbacks, function(i, callback){ callback(options); });
-	};
+  var new_ = function(options){
+    $.each(new_Callbacks, function(i, callback){ callback(options); });
+  };
 
   var initParticipants = function() {
     SS.Contact.select2("#group__participants");
   };
 
   var initTags = function() {
-
-    /*
-    url = $("#group_tag_list").attr('data-path');
-
-    $("#group_tag_list").fcbkcomplete({
-      json_url: url,
-      cache: false,
-      filter_case: true,
-      filter_hide: true,
-      newel: false,
-      height: 6
-    });
-    */
+    SS.Tag.select2("#group_tag_list");
   };
 
   var initValidate = function(options){
@@ -41,6 +29,7 @@ SocialStream.Group = (function(SS, $, undefined){
   };
 
   addNew_Callback(initParticipants);
+  addNew_Callback(initTags);
   addNew_Callback(initValidate);
 
   return {
