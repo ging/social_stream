@@ -503,6 +503,18 @@ class Actor < ActiveRecord::Base
   def to_param
     slug
   end
+
+  def as_json(options)
+    {
+      id: id,
+      slug: slug,
+      name: name,
+      url: options[:helper].polymorphic_url(subject),
+      image: {
+        url: options[:helper].root_url + logo.url(:small)
+      }
+    }
+  end
   
   # JSON compatible with SocialCheesecake
   def cheesecake_json

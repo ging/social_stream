@@ -5,7 +5,6 @@
 //= require modernizr
 //= require bootstrap
 //= require bootstrap-multiselect
-//= require jquery.lightbox-with-resize-plugin
 //= require jquery.screw
 //= require i18n
 //= require i18n/translations

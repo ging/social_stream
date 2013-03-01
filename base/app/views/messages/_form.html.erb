@@ -1,39 +1,37 @@
 <h2>
-	<%= t('mailbox.message.new') %>
+  <%= t('mailbox.message.new') %>
 </h2>
 
 <%= form_tag messages_path, :method => :post , :class => "new_message" do %>
-	<% if @receipt and @receipt.errors.any? %>
-		<div class="error">
-			<h2>
-				<%= pluralize(@receipt.errors.count, "error") %> prohibited this message from being sent:
-			</h2>
-			<ul>
-				<% @receipt.errors.full_messages.each do |msg| %>
-					<li>
-						<%= msg %>
-					</li>
-				<% end %>
-			</ul>
-		</div>
-	<% end %>
+  <% if @receipt and @receipt.errors.any? %>
+    <div class="error">
+      <h2>
+        <%= pluralize(@receipt.errors.count, "error") %> prohibited this message from being sent:
+      </h2>
+      <ul>
+        <% @receipt.errors.full_messages.each do |msg| %>
+          <li>
+          <%= msg %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <%= label_tag t('mailboxer.form.recipients') %>
 
-  <div class="fcbk">
-		<%= select_tag :_recipients, "" %>
-	</div>
-	
-	<%= label_tag t('mailboxer.form.subject') %>
+  <%= hidden_field_tag :_recipients, @recipient.try(:id), "data-path" => contacts_path(format: :json), "data-recipient-name" => @recipient.try(:name) %>
 
-	<%= text_field_tag :subject,nil %>
-	
+  <%= label_tag t('mailboxer.form.subject') %>
+
+  <%= text_field_tag :subject,nil %>
+
   <%= label_tag t('mailboxer.form.body') %>
 
-	<div id="ck_editor" >
-		<%= text_area_tag :body, nil,:rows =>6, :cols=> 53, :maxlength => 5000 %>
-	</div>
-	
-	<%= submit_tag t('mailboxer.send'), :name => :send_message, :class => "btn pull-right" %>
+  <div id="ck_editor" >
+    <%= text_area_tag :body, nil,:rows =>6, :cols=> 53, :maxlength => 5000 %>
+  </div>
+
+  <%= submit_tag t('mailboxer.send'), :name => :send_message, :class => "btn pull-right" %>
 
 <% end %>
