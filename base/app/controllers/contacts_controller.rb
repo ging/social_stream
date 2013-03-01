@@ -1,17 +1,19 @@
 class ContactsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [ :index ]
   before_filter :exclude_reflexive, :except => [ :index, :suggestion, :pending ]
 
   def index
+    subject = profile_or_current_subject!
+
     params[:d] ||= 'sent'
 
     @contacts = Contact
 
     @contacts =
     if params[:d] == 'received'
-      @contacts.received_by(current_subject).joins(:sender)
+      @contacts.received_by(subject).joins(:sender)
     else
-      @contacts.sent_by(current_subject).joins(:receiver)
+      @contacts.sent_by(subject).joins(:receiver)
     end
 
     @contacts =
