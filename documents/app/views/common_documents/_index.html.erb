@@ -12,7 +12,9 @@
 
 <% if user_signed_in? && profile_subject_is_current? %>
 
-<%= link_to t('document.new.link'), new_document_path, class: "btn"  %>
+  <%= link_to t('document.new.link'), new_document_path, class: "btn new_document-modal-link", 'data-toggle' => 'modal'  %>
+
+  <%= render partial: 'common_documents/new.modal' %>
 
 <% end %>
 

@@ -77,7 +77,12 @@ SocialStream.Document = (function(SS, $, undefined){
     SS.Pagination.show();
   };
 
+  var initNewModal = function() {
+    $('.new_document-modal-link').attr('href', '#new_document-modal');
+  };
+
   addIndexCallback(initPagination);
+  addIndexCallback(initNewModal);
 
   addEditCallback(initTagsForm);
 
