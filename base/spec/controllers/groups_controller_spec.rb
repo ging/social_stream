@@ -106,7 +106,7 @@ describe GroupsController do
           count = Group.count
           post :create,
                :group => { :name => "Test group",
-                           :_participants => [ @user_participant.actor_id, @group_participant.actor_id ] }
+                           :_participants => [ @user_participant.actor_id, @group_participant.actor_id ].join(',') }
 
           group = assigns(:group)
 
