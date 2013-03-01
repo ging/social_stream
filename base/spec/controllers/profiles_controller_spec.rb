@@ -28,22 +28,6 @@ describe ProfilesController do
       assert_response :success
     end
 
-    it "should render edit" do
-      get :edit, :user_id => @user.to_param
-
-      assert_response :success
-    end
-
-    it "should not render others edit" do
-      begin
-        get :edit, :user_id => Factory(:user).to_param
-
-        assert false
-      rescue CanCan::AccessDenied
-        assert true
-      end
-    end
-
     it "should update" do
       put :update, :user_id => @user.to_param, :profile => { :organization => "Social Stream" }
 
@@ -83,22 +67,6 @@ describe ProfilesController do
       get :show, :group_id => @group.to_param
 
       assert_response :success
-    end
-
-    it "should render edit" do
-      get :edit, :group_id => @group.to_param
-
-      assert_response :success
-    end
-
-    it "should not render others edit" do
-      begin
-        get :edit, :group_id => Factory(:group).to_param
-
-        assert false
-      rescue CanCan::AccessDenied
-        assert true
-      end
     end
 
     it "should update" do
