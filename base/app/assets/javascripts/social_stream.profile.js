@@ -1,15 +1,15 @@
 //= require select2
 
 SocialStream.Profile = (function(SS, $, undefined){
-	var showCallbacks = [];
+  var showCallbacks = [];
 
-	var addShowCallback = function(callback){
-		showCallbacks.push(callback);
-	};
+  var addShowCallback = function(callback){
+    showCallbacks.push(callback);
+  };
 
-	var show = function(options){
-		$.each(showCallbacks, function(i, callback){ callback(options); });
-	};
+  var show = function(options){
+    $.each(showCallbacks, function(i, callback){ callback(options); });
+  };
 
   var initEditButtons = function(options) {
     $("#profile-info .update").hide();
