@@ -30,8 +30,7 @@
 
   <nav class="documents">
     <%= render partial: 'layouts/more',
-               locals: { path: [ profile_subject, Document.new ] } %>
-    <%= render partial: 'layouts/loading' %>
+               locals: { path: polymorphic_path([profile_subject, Document.new ]) } %>
   </nav>
 </div>
 
