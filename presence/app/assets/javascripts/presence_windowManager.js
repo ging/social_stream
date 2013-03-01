@@ -259,7 +259,7 @@ PRESENCE.WINDOW = (function(P,$,undefined){
 	
 	var modifyChatPartialIfMainBox = function(chatPartial){
 	  if (mainChatBox != null) {
-	    p = $(chatPartial)
+	    p = $('<div/>').append(chatPartial);
 	    $(p).find(".header").remove();
 	    $(p).find(".dropdown dd ul").css("min-width",147);
 	    return $(p); 
