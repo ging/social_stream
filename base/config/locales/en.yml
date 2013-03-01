@@ -163,6 +163,10 @@ en:
     in_common:
       one: "1 contact in common"
       other: "%{count} contacts in common"
+    more: "See more..."
+    n:
+      one: "%{count} contact"
+      other: "%{count} contacts"
     new:
       button:
         zero: "Add"

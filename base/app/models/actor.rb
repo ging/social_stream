@@ -287,6 +287,11 @@ class Actor < ActiveRecord::Base
     as.map(&:subject)
   end
 
+  # The actors this one has established positive ties with
+  def positive_sent_contact_actors
+    sent_contacts.joins(ties: :relation).merge(Relation.positive)
+  end
+
   # Return a contact to subject.
   def contact_to(subject)
     sent_contacts.received_by(subject).first
