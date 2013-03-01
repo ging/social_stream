@@ -1,3 +1,4 @@
+//= require select2
 //= require jqcloud-0.1.3
 //= require jquery.validate
 //= require jquery.ba-url
@@ -13,18 +14,13 @@ SocialStream.Group = (function(SS, $, undefined){
 		$.each(new_Callbacks, function(i, callback){ callback(options); });
 	};
 
-  var initFcbk = function() {
-  /*
-    var url = $("#group__participants").attr('data-path');
+  var initParticipants = function() {
+    SS.Contact.select2("#group__participants");
+  };
 
-    $("#group__participants").fcbkcomplete({
-      json_url: url,
-      cache: true,
-      filter_hide: true,
-      newel: false,
-      height: 6
-    });
+  var initTags = function() {
 
+    /*
     url = $("#group_tag_list").attr('data-path');
 
     $("#group_tag_list").fcbkcomplete({
@@ -38,16 +34,16 @@ SocialStream.Group = (function(SS, $, undefined){
     */
   };
 
-	var initValidate = function(options){
-		$.each(options.validate, function(i, opt){
-			$(opt.form).validate({errorClass: opt.errorClass});
-		});
-	};
+  var initValidate = function(options){
+    $.each(options.validate, function(i, opt){
+      $(opt.form).validate({errorClass: opt.errorClass});
+    });
+  };
 
-  addNew_Callback(initFcbk);
+  addNew_Callback(initParticipants);
   addNew_Callback(initValidate);
 
-	return {
-		new_: new_
-	};
+  return {
+    new_: new_
+  };
 })(SocialStream, jQuery);

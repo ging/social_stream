@@ -18,9 +18,7 @@
   <%= f.text_field :name %>
 
   <%= f.label :_participants, t('group.new.participants') %>
-  <div class="fcbk">
-    <%= f.select :_participants, [], {}, 'data-path' => contacts_path(form: true, format: :json) %>
-  </div>
+  <%= f.hidden_field :_participants, 'data-path' => contacts_path(format: :json) %>
 
   <%= f.label :tags_list, t('group.tags')%>
   <div class="fcbk">
