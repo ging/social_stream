@@ -18,9 +18,7 @@
   <% if can?(:update, @profile) %>
     <div class="update">
       <%= form_for(@profile, :url => [ @profile.subject, :profile ]) do |f| %>
-        <div class="fcbk">
-          <%= f.select :tag_list, [] %>
-        </div>
+        <%= f.text_field :tag_list, "data-path" => tags_path(format: :json) %>
         <%= f.submit :class => "btn" %>
       <% end %>
     </div>

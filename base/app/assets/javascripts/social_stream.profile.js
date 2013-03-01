@@ -32,23 +32,7 @@ SocialStream.Profile = (function(SS, $, undefined){
   };
 
   var initTagsForm = function(options){
-  /*
-    if (options.tags === undefined)
-      return;
-
-    $('#profile_tag_list').fcbkcomplete({
-      json_url: options.tags.path,
-      cache: false,
-      filter_case: true,
-      filter_hide: true,
-      newel: false,
-      height: 6
-    });
-
-    $.each(options.tags.present, function(i, tag) {
-      $('#profile_tag_list').trigger("addItem", { title: tag, value: tag });
-    });
-    */
+    SS.Tag.select2("#profile_tag_list");
   };
 
   addShowCallback(initEditButtons);
