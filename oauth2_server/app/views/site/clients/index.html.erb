@@ -1,13 +1,14 @@
 <% toolbar %>
 
-<article class="first-img">
+<article id="site_clients" class="first-img">
   <header>
     <h1>
       <%= t 'site.client.added' %>
     </h1>
 
-    <%= button_to(t('site.client.add'), new_site_client_path,
-          :method => "get", :class => "btn") %>
+    <%= link_to t('site.client.new.link'), new_site_client_path, class: "btn new_site_client-modal-link", 'data-toggle' => 'modal'  %>
+
+    <%= render partial: 'new.modal' %>
 
     <hr class="soften">
   </header>
@@ -29,5 +30,10 @@
       users
     </div>
   <hr class="soften">
+  <% end %>
 
-<% end %>
+  <%= javascript_tag do %>
+    SocialStream.SiteClient.index();
+  <% end %>
+
+</article>

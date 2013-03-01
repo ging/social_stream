@@ -1,12 +1,12 @@
 <article>
-  <%= form_for @client do |f| %>
+  <%= form_for(@client || Site::Client.new) do |f| %>
 
-    <% if @client.errors.any? %>
+    <% if f.object.errors.any? %>
       <div id="error_explanation" class="alert alert-error">
-        <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client site from being saved:</h2>
+        <h2><%= pluralize(f.object.errors.count, "error") %> prohibited this client site from being saved:</h2>
 
         <ul>
-          <% @client.errors.full_messages.each do |msg| %>
+          <% f.object.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
           <% end %>
         </ul>

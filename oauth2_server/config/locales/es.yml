@@ -21,9 +21,9 @@ es:
     public_info: "Acceder a tu información pública"
   site:
     client:
-      add: "Añadir sitio"
       added: "Sitios añadidos"
       index:
         title: "Sitios"
       new:
+        link: "Añadir sitio"
         title: "Registrar nuevo sitio"
