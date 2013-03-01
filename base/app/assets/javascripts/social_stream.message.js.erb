@@ -36,6 +36,7 @@ SocialStream.Message = (function(SS, $, undefined){
           return { results: data };
         }
       },
+      id: function(object) { return object.id.toString(); },
       formatResult: recipientsFormatResult,
       formatSelection: recipientsFormatSelection,
       initSelection: recipientsInitSelection,
