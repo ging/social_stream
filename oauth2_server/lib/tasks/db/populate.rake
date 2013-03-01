@@ -23,7 +23,7 @@ namespace :db do
 
         9.times do
           domain = Forgery::Internet.domain_name 
-          Site::Client.create! name: Forgery::Name.full_name,
+          Site::Client.create! name: Forgery::Name.company_name,
                                description: Forgery::LoremIpsum.sentence(random: true),
                                url: "https://#{ domain }",
                                callback_url: "https://#{ domain }/callback",
