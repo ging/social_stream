@@ -39,9 +39,9 @@
       <%= flashy %>
 
       <% if content_for?(:toolbar) %>
-        <nav id="toolbar">
+        <div id="toolbar">
           <%= yield :toolbar %>
-        </nav>
+        </div>
       <% end %>
 
       <section id="content" class="<%= content_section_class %>">

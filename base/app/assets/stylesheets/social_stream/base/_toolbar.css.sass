@@ -38,8 +38,16 @@
       margin: 14px 10px 0 0
 
         
-.toolbar_menu
-  @extend .border-radius-5
+  .toolbar_menu
+    ul.nav
+      margin-top: 20px
+      li
+        padding: 5px
+        margin-bottom: 10px
+        a
+          &:hover
+            background-color: transparent
+
 
 .btn-blue
   img,
