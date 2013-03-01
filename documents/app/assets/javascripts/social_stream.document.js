@@ -1,23 +1,23 @@
 SocialStream.Document = (function(SS, $, undefined){
-	var indexCallbacks = [];
+  var indexCallbacks = [];
 
-	var addIndexCallback = function(callback){
-		indexCallbacks.push(callback);
-	};
+  var addIndexCallback = function(callback){
+    indexCallbacks.push(callback);
+  };
 
-	var index = function(options){
-		$.each(indexCallbacks, function(i, callback){ callback(options); });
-	};
+  var index = function(options){
+    $.each(indexCallbacks, function(i, callback){ callback(options); });
+  };
 
-	var editCallbacks = [];
+  var editCallbacks = [];
 
-	var addEditCallback = function(callback){
-		editCallbacks.push(callback);
-	};
+  var addEditCallback = function(callback){
+    editCallbacks.push(callback);
+  };
 
-	var edit = function(options){
-		$.each(editCallbacks, function(i, callback){ callback(options); });
-	};
+  var edit = function(options){
+    $.each(editCallbacks, function(i, callback){ callback(options); });
+  };
 
   var initTagsForm = function(options) {
     $('select[name*="[tag_list]"]').fcbkcomplete({
@@ -90,8 +90,8 @@ SocialStream.Document = (function(SS, $, undefined){
 
   SS.Wall.addShowCallback(initNewActivity);
 
-	return {
-		edit: edit,
+  return {
+    edit: edit,
     index: index
   };
 
