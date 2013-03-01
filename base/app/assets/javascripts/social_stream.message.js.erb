@@ -30,7 +30,7 @@ SocialStream.Message = (function(SS, $, undefined){
         url: $('#_recipients').attr('data-path'),
         dataType: 'json',
         data: function(term, page) {
-          return { q: term };
+          return { q: term, page: page };
         },
         results: function(data, page) {
           return { results: data };
