@@ -4,17 +4,17 @@
       <%= f.hidden_field :owner_id %>
     
       <%= f.text_field :text, placeholder: t('post.input') %>
+      <section class="wall_input-actions">
+        <%= f.submit t('activity.share'), class: "btn" %>
 
-      <%= f.submit t('activity.share'), class: "btn" %>
+        <% SocialStream.activity_forms.each do |element| %>
+          <%= render partial: "#{ element.to_s.pluralize }/new_activity",
+                     locals: { f: f, receiver: receiver } %>
+        <% end %>
 
-      <% SocialStream.activity_forms.each do |element| %>
-        <%= render partial: "#{ element.to_s.pluralize }/new_activity",
-                   locals: { f: f, receiver: receiver } %>
+        <%= f.select "relation_ids", options_for_select(current_subject.activity_relations_for(receiver).sort.map{ |r| [ r.name, r.id ] }), {}, { multiple: true } %> 
+      </section>
       <% end %>
-
-      <%= f.select "relation_ids", options_for_select(current_subject.activity_relations_for(receiver).sort.map{ |r| [ r.name, r.id ] }), {}, { multiple: true } %> 
-
-    <% end %>
   </article>
  
 

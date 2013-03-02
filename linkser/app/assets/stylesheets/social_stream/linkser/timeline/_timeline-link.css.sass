@@ -1,11 +1,22 @@
 #link_preview
-  .info 
-    input
-      &[type="text"]
+  background-color: #f4f4f4
+  padding: 9px
+  border-radius-bottom: 5px
+  img
+    display: inline
+    margin-right: 2px
+  .info
+    .title,
+    .description 
+      input,
+      textarea
         @include border-radius(5px)
+        padding: 5px
+  .link_error
+    display: inline-block
+    color: #9d261d
   
 #link_description
-  @include makeColumnoMargin(6, 0)
   @include border-radius(5px)
   resize: none
 

@@ -10,17 +10,21 @@
     padding: 5px 33px 5px 33px
     margin-bottom: 20px
     input
-      @include makeColumnoMargin(6, 0)
       margin-top: 8px
       display: block
       &[type="submit"]
         @include size (auto, auto)
         @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25)) 
         padding: 3px 11px 4px 11px
+        margin-top: 0px
         float: right
       &[type="checkbox"]
         width: 30px
         margin: 3px 0px 0px 0px
+      &[type="text"]
+        padding: 5px
+    .wall_input-actions
+      margin-top: 10px
     .new_document
       display: inline
       padding: 1px 6px 4px 6px
@@ -39,6 +43,6 @@
               &:hover
                 background: rgba(0,232,232,0.3)
                 color: $white
-#flash
-  @include makeColumnoMargin(12, 0)
 
+#post_text
+  margin-bottom: 0px
