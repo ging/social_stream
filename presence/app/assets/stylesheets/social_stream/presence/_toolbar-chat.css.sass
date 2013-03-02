@@ -1,3 +1,5 @@
+#chat_partial
+  margin-top: 30px
 .chat_wrapper
   @include makeColumn(2, 0)
 
@@ -6,26 +8,25 @@
     font-size: 15px
     border-bottom: 1px solid #ccc
     margin-bottom: 7px
-#statusList
-  background-color: $gray
-  margin-left: -11px !important
-  li
     a
       padding: 4px 6px
       text-decoration: none
       &:hover
         background-color: $white
-      span
+      .badge
         @include size(12px, 12px)
         padding: 0px
-    .available
-      background-color: $green
-    .away
-      background-color: $orange
-    .dnd
-      background-color: $red
-    .offline
-      background-color: $blue
+      .available
+        background-color: $green
+      .away
+        background-color: $orange
+      .dnd
+        background-color: $red
+      .offline
+        background-color: $blue
+#statusList
+  background-color: $gray
+  margin-left: -11px !important
 
 #search_chat_contact,
 #search_chat_contact,
@@ -33,3 +34,8 @@
 
 .connectChatButton
   @extend .btn
+
+.searchChatContacts
+  input
+    &[type="text"]
+      width: 91%

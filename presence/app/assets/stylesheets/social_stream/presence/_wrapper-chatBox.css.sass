@@ -1,3 +1,24 @@
 @import "jquery.ui.chatbox"
 
-.chat_box
+.ui-chatbox
+  @include border-top-left-radius (5px)
+  @mixin box-shadow($gray)
+  background: #f2f2f2
+  border: 1px solid $grayLighter
+  right: 1px
+  width: 98%
+
+.ui-chatbox-titlebar,
+.ui-widget-content
+  width: 98%
+
+.ui-chatbox-titlebar
+  a
+    .icon_tool16-less
+      margin-right: 6px
+
+.ui-chatbox-input
+  border: none
+  textarea
+    border: 1px solid $grayLight
+    height: 22px

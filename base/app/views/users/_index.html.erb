@@ -1,19 +1,16 @@
 <div id="list_users_ajax" class="tab_content block">
   <% cont=0; %>
-
-  <% @users.each do |user| %>
-
-  <% if (cont%2) == 0 %>
-  <% cont+=1; %>
-  <div class="row">
+    <% @users.each do |user| %>
+      <% if (cont%2) == 0 %>
+        <% cont+=1; %>
+      <% end %>
+      <div class="label">
+        <%= model_with_details user %>
+      </div>
     <% end %>
-    <div class="label">
-      <%= model_with_details user %>
-    </div>
+    <% if ((cont%2) != 0)     %> 
+      <div class="label">
+      </div>
     <% end %>
-
-    <% if ((cont%2) != 0)     %> <div class="label"></div>
-  </div>
-  <% end %>
-<%= paginate @users %>
+  <%= paginate @users %>
 </div>
