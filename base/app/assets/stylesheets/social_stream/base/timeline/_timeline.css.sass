@@ -66,11 +66,18 @@
           margin-left: 7px
           
         .tooltip
-          @include opacity (60)
+          @include opacity (90)
           @extend .border-radius-5
+          width: 28%
           background: $gray
           color: whitesmoke
           margin-top: 26px 0px 0px 53px
+          .audience_logo
+            display: inline-block
+            width: auto
+            padding: 4px
+            img
+              @extend .border-radius-5
         
         textarea
           resize: none
