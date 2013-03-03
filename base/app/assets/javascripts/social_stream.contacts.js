@@ -1,35 +1,35 @@
 // require jquery.ba-url
 
 SocialStream.Contact = (function($, SS, undefined) {
-	var indexCallbacks = [];
+  var indexCallbacks = [];
 
-	var addIndexCallback = function(callback){
-		indexCallbacks.push(callback);
-	};
+  var addIndexCallback = function(callback){
+    indexCallbacks.push(callback);
+  };
 
-	var index = function(){
-		$.each(indexCallbacks, function(i, callback){ callback(); });
-	};
+  var index = function(){
+    $.each(indexCallbacks, function(i, callback){ callback(); });
+  };
 
-	var showCallbacks = [];
+  var showCallbacks = [];
 
-	var addShowCallback = function(callback){
-		showCallbacks.push(callback);
-	};
+  var addShowCallback = function(callback){
+    showCallbacks.push(callback);
+  };
 
-	var show = function(){
-		$.each(showCallbacks, function(i, callback){ callback(); });
-	};
+  var show = function(){
+    $.each(showCallbacks, function(i, callback){ callback(); });
+  };
 
-	var updateCallbacks = [];
+  var updateCallbacks = [];
 
-	var addUpdateCallback = function(callback){
-		updateCallbacks.push(callback);
-	};
+  var addUpdateCallback = function(callback){
+    updateCallbacks.push(callback);
+  };
 
-	var update = function(options){
-		$.each(updateCallbacks, function(i, callback){ callback(options); });
-	};
+  var update = function(options){
+    $.each(updateCallbacks, function(i, callback){ callback(options); });
+  };
 
   var initTabs = function() {
     $('.contacts ul.nav-tabs a').click(function() {
@@ -80,13 +80,13 @@ SocialStream.Contact = (function($, SS, undefined) {
 
       var contacts = $('[data-contact_id="' + contactId + '"]');
       /*
-      contacts.each(function(i, el) {
-        if ($(el).children('.loading').length === 0)
-          $(el).append('<div class="loading"></div>');
-      });
+         contacts.each(function(i, el) {
+         if ($(el).children('.loading').length === 0)
+         $(el).append('<div class="loading"></div>');
+         });
 
-      $('[data-contact_id="' + contactId + '"] .loading').show();
-      */
+         $('[data-contact_id="' + contactId + '"] .loading').show();
+         */
 
       $('button', contacts).data('resetText', relationSelectText($('option:selected', el)) + ' <b class="caret"></b>');
       $('button', contacts).attr('data-loading-text', I18n.t('contact.saving'));
@@ -116,10 +116,10 @@ SocialStream.Contact = (function($, SS, undefined) {
   // Dictate if some form has changed its status
   var getInputValues = function(form) {
     return $('ul.dropdown-menu input[type="checkbox"]', form).
-             map(function() {
-               if ($(this).is(':checked'))
-                 return $(this).val();
-             });
+      map(function() {
+      if ($(this).is(':checked'))
+        return $(this).val();
+    });
   };
 
   var initContactFormsHtmlListener = function() {
@@ -128,7 +128,7 @@ SocialStream.Contact = (function($, SS, undefined) {
 
   var updateForm = function(options) {
     var form = $('[data-contact_id="' + options.id + '"] form.edit_contact');
-    
+
     form.removeAttr('data-status');
     storeContactFormValues(form);
   };
@@ -136,7 +136,7 @@ SocialStream.Contact = (function($, SS, undefined) {
   var clearLoading = function(options) {
     var contacts = $('[data-contact_id="' + options.id + '"]');
 
-  //  $('.loading', contacts).hide();
+    //  $('.loading', contacts).hide();
 
     $('button', contacts).button('reset');
   };
@@ -185,7 +185,7 @@ SocialStream.Contact = (function($, SS, undefined) {
       id: function(object) { return object.id.toString(); },
       formatResult: select2FormatResult,
       formatSelection: select2FormatSelection,
-      initSelection: select2InitSelection,
+      initSelection: select2InitSelection
     });
   };
 
