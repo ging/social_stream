@@ -69,17 +69,14 @@ SocialStream.Linkser.Wall = (function(SS, $) {
       $("#post_text").change(urlDetect).keyup(urlDetect);
 
       $("#post_text").after(
-        $('<input>', {
-          type: 'hidden',
+        $('<input type="hidden">', {
           name: 'link[owner_id]'
         }).val($("#post_owner_id").val()),
-        $('<input>', {
-          type: 'hidden',
+        $('<input type="hidden">', {
           name: 'link[url]',
           id:   'link_url'
         }),
-        $('<input>', {
-          type: 'hidden',
+        $('<input type="hidden">', {
           name: 'link[loaded]',
           id:   'link_loaded'
         }).val(false),
