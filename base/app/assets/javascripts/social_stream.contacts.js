@@ -47,8 +47,8 @@ SocialStream.Contact = (function($, SS, undefined) {
 
   var initContactButtons = function() {
     $('.edit_contact select[name*="relation_ids"]').multiselect({
-      'button': 'btn btn-small',
-      'text': relationSelectText
+      buttonClass: 'btn btn-small',
+      buttonText: relationSelectText
     });
 
     // Forms
@@ -64,13 +64,16 @@ SocialStream.Contact = (function($, SS, undefined) {
   };
 
   var relationSelectText = function(options) {
+    var msg;
+
     if (options.length === 0) {
-      return I18n.t('contact.new.button.zero');
+      msg = I18n.t('contact.new.button.zero');
     }
     else {
-      return I18n.t('contact.new.button', { count: options.length });
+      msg = I18n.t('contact.new.button', { count: options.length });
     }
 
+    return msg + '<b class="caret"></b>';
   };
 
   var sendContactForms = function() {
@@ -88,7 +91,7 @@ SocialStream.Contact = (function($, SS, undefined) {
          $('[data-contact_id="' + contactId + '"] .loading').show();
          */
 
-      $('button', contacts).data('resetText', relationSelectText($('option:selected', el)) + ' <b class="caret"></b>');
+      $('button', contacts).data('resetText', relationSelectText($('option:selected', el)));
       $('button', contacts).attr('data-loading-text', I18n.t('contact.saving'));
       $('button', contacts).button('loading');
       $('form.edit_contact', contact).submit();
