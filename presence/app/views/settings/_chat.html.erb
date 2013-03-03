@@ -1,12 +1,7 @@
 <div id="chat_settings">
-  <header>
-    <%=t('chat.title')%>
-  </header>      
-  <%= link_to (image_tag('btn/edit.png')),  "javascript:showSettings(\"chat_settings\");" %>
-
-  <div id="chat_settings_briefing" class="settings_briefing content">        
-    <%=t('chat.settings.title')%>
-  </div>
+  <header>      
+    <%= link_to t('chat.title'),  "javascript:showSettings(\"chat_settings\");" %>
+  </header>
 
   <div class="content settings_content" id="chat_settings_content" style="display:none;">
 	  <%= form_tag(:controller => "Xmpp", :action => "updateSettings", :method => "get") do %>

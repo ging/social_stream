@@ -1,8 +1,6 @@
 <div id="notifications_settings">
   <header>
-    <h5>
-      <%= link_to ('notifications'),  "javascript:showSettings(\"notifications_settings\");" %>
-    </h5>
+    <%= link_to ('notifications'),  "javascript:showSettings(\"notifications_settings\");" %>
   </header>
 
   <div class="content settings_content" id="notifications_settings_content" style="display:none;">
@@ -17,7 +15,7 @@
   
    
     <%= hidden_field_tag :settings_section, :notifications %>
-    <%= submit_tag "Update Settings", :class => "btn btn_notifications" %>
+    <%= submit_tag "Update Settings", :class => "btn" %>
     <% end %>
   </div>
 </div>
