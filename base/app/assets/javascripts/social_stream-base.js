@@ -1,7 +1,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require jquery-migrate
 //= require modernizr
 //= require bootstrap
 //= require bootstrap-multiselect
