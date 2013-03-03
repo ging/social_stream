@@ -1,13 +1,24 @@
 #chat_partial
   margin-top: 30px
+  .users_connected
+    display: block
+    padding-left: 17px
+    .user_presence
+      display: inline-block
+      img
+        width: 40px
+      .presence_status
+        width: 20px
 .chat_wrapper
   @include makeColumn(2, 0)
 
-#status
-  dt
+#status,
+#statusList
+  dt,
+  li
     font-size: 15px
     border-bottom: 1px solid #ccc
-    margin-bottom: 7px
+    padding-bottom: 7px
     a
       padding: 4px 6px
       text-decoration: none
@@ -25,8 +36,15 @@
       .offline
         background-color: $blue
 #statusList
-  background-color: $gray
+  @include box-shadow (0px 4px 6px #c4c4c4)
   margin-left: -11px !important
+  background-color: $white
+  li
+    margin: 4px 0px 4px 6px
+    a
+      &:hover
+        text-decoration: none
+
 
 #search_chat_contact,
 #search_chat_contact,

@@ -1,26 +1,323 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>The page you were looking for doesn't exist (404)</title>
-  <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
-    }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
-  </style>
-</head>
+  <head>
+    <title>
+      The page you were looking for doesn't exist (404)
+    </title>
 
-<body>
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
-  </div>
-</body>
+    <script>
+      // animation globals
+      var t=0; 
+      var frameInterval = 2; // in ms
+      var canvas = null; // canvas DOM object
+      var context = null; // canvas context
+       
+      // ball globals
+      var ballRadius = 10;
+       
+      // physics globals
+      var collisionDamper = 0.3;
+      var floorFriction = 0.0005 * frameInterval;
+      var mouseForceMultiplier = 1 * frameInterval;
+      var restoreForce =0.002 * frameInterval;
+       
+      var mouseX = 99;
+      var mouseY = 99;
+       
+      var balls = null;
+       
+      function Ball(x,y,vx,vy,color) {
+        this.x=x;
+        this.y=y;
+        this.vx=vx;
+        this.vy=vy;
+        this.color=color;
+       
+        this.origX = x;
+        this.origY = y;
+      }
+       
+      function init() {
+        canvas=document.getElementById("myCanvas");
+        context=canvas.getContext("2d");
+        initStageObjects();
+        setInterval(updateStage, frameInterval);
+      }
+       
+      function updateStage() {
+        t+=frameInterval; 
+        clearCanvas();
+        updateStageObjects();
+        drawStageObjects(); 
+      }
+       
+      function initStageObjects() {
+        balls = new Array();
+       
+        var blue = "#049cdb";
+        var red="#EF2B36";
+        var yellow = "#FFC636";
+        var green="#02A817";
+       
+          // 4
+        balls.push(new Ball(410,229,0,0,blue));
+        balls.push(new Ball(410,249,0,0,blue));
+        balls.push(new Ball(410,269,0,0,blue));
+        balls.push(new Ball(370,269,0,0,blue));
+        balls.push(new Ball(390,249,0,0,blue));
+        balls.push(new Ball(410,289,0,0,blue));
+        balls.push(new Ball(330,309,0,0,blue));
+        balls.push(new Ball(410,309,0,0,blue));
+        balls.push(new Ball(330,329,0,0,blue));
+        balls.push(new Ball(410,329,0,0,blue));
+        balls.push(new Ball(350,289,0,0,blue));
+        balls.push(new Ball(430,329,0,0,blue));
+        balls.push(new Ball(390,329,0,0,blue));
+        balls.push(new Ball(370,329,0,0,blue));
+        balls.push(new Ball(350,329,0,0,blue));
+        balls.push(new Ball(410,349,0,0,blue));
+        balls.push(new Ball(410,369,0,0,blue));
+
+        // 0
+        balls.push(new Ball(490,229,0,0,blue));
+        balls.push(new Ball(510,229,0,0,blue));
+        balls.push(new Ball(530,229,0,0,blue));
+        balls.push(new Ball(550,229,0,0,blue));
+        balls.push(new Ball(570,249,0,0,blue));
+        balls.push(new Ball(570,269,0,0,blue));
+        balls.push(new Ball(570,289,0,0,blue));
+        balls.push(new Ball(570,309,0,0,blue));
+        balls.push(new Ball(570,329,0,0,blue));
+        balls.push(new Ball(570,349,0,0,blue));
+        balls.push(new Ball(470,249,0,0,blue));
+        balls.push(new Ball(470,269,0,0,blue));
+        balls.push(new Ball(470,289,0,0,blue));
+        balls.push(new Ball(470,309,0,0,blue));
+        balls.push(new Ball(470,329,0,0,blue));
+        balls.push(new Ball(470,349,0,0,blue));
+        balls.push(new Ball(490,369,0,0,blue));
+        balls.push(new Ball(510,369,0,0,blue));
+        balls.push(new Ball(530,369,0,0,blue));
+        balls.push(new Ball(550,369,0,0,blue));
+       
+        // 4
+        balls.push(new Ball(690,229,0,0,blue));
+        balls.push(new Ball(690,249,0,0,blue));
+        balls.push(new Ball(690,269,0,0,blue));
+        balls.push(new Ball(650,269,0,0,blue));
+        balls.push(new Ball(670,249,0,0,blue));
+        balls.push(new Ball(690,289,0,0,blue));
+        balls.push(new Ball(610,309,0,0,blue));
+        balls.push(new Ball(690,309,0,0,blue));
+        balls.push(new Ball(610,329,0,0,blue));
+        balls.push(new Ball(690,329,0,0,blue));
+        balls.push(new Ball(630,289,0,0,blue));
+        balls.push(new Ball(710,329,0,0,blue));
+        balls.push(new Ball(670,329,0,0,blue));
+        balls.push(new Ball(650,329,0,0,blue));
+        balls.push(new Ball(630,329,0,0,blue));
+        balls.push(new Ball(690,349,0,0,blue));
+        balls.push(new Ball(690,369,0,0,blue));
+
+        // e
+        balls.push(new Ball(380,50,0,0,blue));
+        balls.push(new Ball(360,50,0,0,blue));
+        balls.push(new Ball(340,70,0,0,blue));
+        balls.push(new Ball(400,70,0,0,blue));
+        balls.push(new Ball(400,90,0,0,blue));
+        balls.push(new Ball(380,90,0,0,blue));
+        balls.push(new Ball(360,90,0,0,blue));
+        balls.push(new Ball(340,90,0,0,blue));
+        balls.push(new Ball(340,110,0,0,blue));
+        balls.push(new Ball(360,130,0,0,blue));
+        balls.push(new Ball(380,130,0,0,blue));
+
+        // r
+        balls.push(new Ball(480,50,0,0,blue));
+        balls.push(new Ball(440,50,0,0,blue));
+        balls.push(new Ball(460,70,0,0,blue));
+        balls.push(new Ball(440,70,0,0,blue));
+        balls.push(new Ball(440,90,0,0,blue));
+        balls.push(new Ball(440,90,0,0,blue));
+        balls.push(new Ball(440,110,0,0,blue));
+        balls.push(new Ball(440,130,0,0,blue));
+
+        // r
+        balls.push(new Ball(560,50,0,0,blue));
+        balls.push(new Ball(520,50,0,0,blue));
+        balls.push(new Ball(540,70,0,0,blue));
+        balls.push(new Ball(520,70,0,0,blue));
+        balls.push(new Ball(520,90,0,0,blue));
+        balls.push(new Ball(520,90,0,0,blue));
+        balls.push(new Ball(520,110,0,0,blue));
+        balls.push(new Ball(520,130,0,0,blue));
+
+        // o
+        balls.push(new Ball(620,50,0,0,blue));
+        balls.push(new Ball(600,50,0,0,blue));
+        balls.push(new Ball(580,70,0,0,blue));
+        balls.push(new Ball(640,70,0,0,blue));
+        balls.push(new Ball(580,90,0,0,blue));
+        balls.push(new Ball(640,90,0,0,blue));
+        balls.push(new Ball(580,110,0,0,blue));
+        balls.push(new Ball(640,110,0,0,blue));
+        balls.push(new Ball(620,130,0,0,blue));
+        balls.push(new Ball(600,130,0,0,blue));
+
+        // r
+        balls.push(new Ball(720,50,0,0,blue));
+        balls.push(new Ball(680,50,0,0,blue));
+        balls.push(new Ball(700,70,0,0,blue));
+        balls.push(new Ball(680,70,0,0,blue));
+        balls.push(new Ball(680,90,0,0,blue));
+        balls.push(new Ball(680,90,0,0,blue));
+        balls.push(new Ball(680,110,0,0,blue));
+        balls.push(new Ball(680,130,0,0,blue));
+      }
+       
+      function drawStageObjects() {
+        for (var n=0; n<balls.length; n++) {  
+          context.beginPath();
+          context.arc(balls[n].x,balls[n].y,ballRadius,
+            0,2*Math.PI,false);
+          context.fillStyle=balls[n].color;
+          context.fill();
+        }
+      }
+       
+      function updateStageObjects() {
+        for (var n=0; n<balls.length; n++) {
+       
+          // set ball position based on velocity
+          balls[n].y+=balls[n].vy;
+          balls[n].x+=balls[n].vx;
+       
+          // restore forces
+          if (balls[n].x > balls[n].origX) {
+            balls[n].vx -= restoreForce;
+          }
+          else {
+            balls[n].vx += restoreForce;
+          }
+          if (balls[n].y > balls[n].origY) {
+            balls[n].vy -= restoreForce;
+          }
+          else {
+            balls[n].vy += restoreForce;
+          }
+       
+          // mouse forces
+          var distX = balls[n].x - mouseX;
+          var distY = balls[n].y - mouseY;
+       
+          var radius = Math.sqrt(Math.pow(distX,2) + 
+            Math.pow(distY,2));
+       
+          var totalDist = Math.abs(distX) + Math.abs(distY);
+       
+          var forceX = (Math.abs(distX) / totalDist) * 
+            (1/radius) * mouseForceMultiplier;
+          var forceY = (Math.abs(distY) / totalDist) * 
+            (1/radius) * mouseForceMultiplier;
+       
+          if (distX>0) { // mouse is left of ball
+            balls[n].vx += forceX;
+          }
+          else {
+            balls[n].vx -= forceX;
+          }
+          if (distY>0) { // mouse is on top of ball
+            balls[n].vy += forceY;
+          }
+          else {
+            balls[n].vy -= forceY;
+          }
+       
+          // floor friction
+          if (balls[n].vx>0) {
+            balls[n].vx-=floorFriction;
+          }
+          else if (balls[n].vx<0) {
+            balls[n].vx+=floorFriction;
+          }
+          if (balls[n].vy>0) {
+            balls[n].vy-=floorFriction;
+          }
+          else if (balls[n].vy<0) {
+            balls[n].vy+=floorFriction;
+          }
+       
+          // floor condition
+          if (balls[n].y > (canvas.height-ballRadius)) {
+            balls[n].y=canvas.height-ballRadius-2;
+            balls[n].vy*=-1; 
+            balls[n].vy*=(1-collisionDamper);
+          }
+       
+          // ceiling condition
+          if (balls[n].y < (ballRadius)) {
+            balls[n].y=ballRadius+2;
+            balls[n].vy*=-1; 
+            balls[n].vy*=(1-collisionDamper);
+          }
+       
+          // right wall condition
+          if (balls[n].x > (canvas.width-ballRadius)) {
+            balls[n].x=canvas.width-ballRadius-2;
+            balls[n].vx*=-1;
+            balls[n].vx*=(1-collisionDamper);
+          }
+       
+          // left wall condition
+          if (balls[n].x < (ballRadius)) {
+            balls[n].x=ballRadius+2;
+            balls[n].vx*=-1;
+            balls[n].vx*=(1-collisionDamper);
+          } 
+        }
+      }
+       
+      function clearCanvas() {
+        context.clearRect(0,0,canvas.width, canvas.height);
+      }
+       
+      function handleMouseMove(evt) {
+        mouseX = evt.clientX - canvas.offsetLeft;
+        mouseY = evt.clientY - canvas.offsetTop;  
+      }
+       
+      function handleMouseOut() {
+        mouseX = 99999;
+        mouseY = 99999;
+      }
+    </script>
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+    <style type="text/css">
+      body {font-family:'Open Sans'; text-align:center; background-color:#f9f9f9; color:#999;}.bkgspc {margin-top:10px;}
+      header {color:#c4c4c4; font-size:45px; font-weight:bolder; vertical-align: top; padding:5px; display: inline; }
+      p { padding:5px; }
+      .canvas{width:1024px; height:700px;}
+      section.dialog {padding: 0 4em; margin: 12px auto 0 auto; border: 1px solid #ccc; border-right-color: #999; border-bottom-color: #999; background-color:white;}
+    </style>
+  </head>
+  <body onload="init()">
+    <div class="container">
+      <header>
+        We have a problem my friend
+      </header>
+      <section class="dialog">
+        <h1>
+          The page you were looking for doesn't exist.
+        </h1>
+        <p>
+          You may have mistyped the address or the page may have moved.
+        </p>
+      </section>
+      <canvas id="myCanvas" class="canvas"width="1024px" height="700" onmousemove="handleMouseMove(event)"
+            onmouseout="handleMouseOut()">
+      </canvas>
+    </div>
+  </body>
 </html>
