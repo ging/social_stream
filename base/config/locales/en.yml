@@ -163,7 +163,6 @@ en:
     in_common:
       one: "1 contact in common"
       other: "%{count} contacts in common"
-    more: "See more..."
     n:
       one: "%{count} contact"
       other: "%{count} contacts"
@@ -199,6 +198,7 @@ en:
     type:
       new: "+ New type"
     unfollow: "Unfollow"
+    view_all: "View all..."
   copyright: "2013 Copyright - All rights reserved"
   counter:
     like:
