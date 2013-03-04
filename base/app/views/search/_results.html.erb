@@ -1,0 +1,4 @@
+<% @search_result.each do |r| %>
+  <%= render partial: "#{ r.class.to_s.tableize }/search_result",
+             locals:  { r.class.to_s.underscore.to_sym => r }  %>
+<% end %>

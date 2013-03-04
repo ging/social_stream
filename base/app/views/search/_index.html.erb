@@ -21,10 +21,13 @@
   <% end %>
 
   <article id="search-results">
-    <% @search_result.each do |r| %>
-      <%= render partial: "#{ r.class.to_s.tableize }/search_result",
-                 locals:  { r.class.to_s.underscore.to_sym => r }  %>
-      <%= render :partial => 'activities/see-more' %>
+    <%= render partial: 'search/results' %>
+
+    <%= render partial: 'layouts/more',
+               locals: { path: search_path(q: params[:q], type: params[:type]) } %>
+
+    <%= javascript_tag do %>
+      SocialStream.Search.show();
     <% end %>
   </article>
 </section>

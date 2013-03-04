@@ -1,6 +1,20 @@
 //= require jquery.watermark
 
 SocialStream.Search = (function(SS, $, undefined){
+  var showCallbacks = [];
+
+  var addShowCallback = function(callback){
+    showCallbacks.push(callback);
+  };
+
+  var show = function(){
+    $.each(showCallbacks, function(i, callback){ callback(); });
+  };
+
+  var initPagination = function() {
+    SS.Pagination.show();
+  };
+
   function init(){
     $.preloadImages ("<%= asset_path "mini-loading.gif" %>");
 
@@ -19,11 +33,13 @@ SocialStream.Search = (function(SS, $, undefined){
       return true;
     });
 
-    $("#global_search_input").watermark(I18n.t('search.write'));
   }
 
+  addShowCallback(initPagination);
+
   return {
-    init: init
+    init: init,
+    show: show
   }
 
 }) (SocialStream, jQuery);
