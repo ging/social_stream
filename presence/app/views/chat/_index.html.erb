@@ -137,7 +137,6 @@
   
   </script>
 
-  <% if defined?(flow)!=nil and flow %>
   <script type="text/javascript">
   $(document).ready(function () {
     PRESENCE.WINDOW.createMainChatBox();
@@ -145,8 +144,6 @@
     $("#chat_wrapper").find("#chat_partial").remove();
   });
   </script>
-  <% end %>
-
 
   <% if defined?(group)!=nil and group %>
   <script type="text/javascript">

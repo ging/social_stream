@@ -1,4 +1,4 @@
 <!-- insert_after "code[erb-loud]:contains('toolbar/contacts')" -->
 
 <%= render partial: 'chat/index',
-           locals: { flow: true, group: @group } %>
+           locals: { group: @group } %>

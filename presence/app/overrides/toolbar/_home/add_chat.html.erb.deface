@@ -1,4 +1,3 @@
 <!-- insert_after "code[erb-loud]:contains('toolbar/menu')" -->
 
-<%= render partial: 'chat/index',
-           locals: { flow: false } %>
+<%= render partial: 'chat/index' %>
