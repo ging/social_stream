@@ -19,7 +19,11 @@ class SearchController < ApplicationController
           if params[:mode] == "header_search"
             render :partial => "header_search"
           else
-            render partial: 'results'
+            if params[:q].present?
+              render partial: 'results'
+            else
+              render partial: 'index'
+            end
           end
         end
       }
