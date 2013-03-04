@@ -11,8 +11,20 @@ SocialStream.Explore = (function(SS, $, undefined){
 
   var headerPushState = function() {
     $('#explore-header div').on('shown', function(e) {
-      window.history.pushState({}, {}, $(this).attr('data-path'));
+      if ($(this).attr('data-onpop')) {
+        $(this).removeAttr('data-onpop');
+      } else {
+        window.history.pushState({ target: $(this).attr('data-target') }, {}, $(this).attr('data-path'));
+      }
     });
+
+    window.onpopstate = function(event) {
+      if (event.state && event.state.target) {
+        var btn = $('#explore-header div[data-target="' + event.state.target + '"]');
+        btn.attr('data-onpop', 'true');
+        btn.click();
+      }
+    };
   };
 
   var initTabLoading = function() {
