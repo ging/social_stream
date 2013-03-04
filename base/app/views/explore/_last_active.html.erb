@@ -3,8 +3,9 @@
     <header class="first-line-large">
       <%= link_to object.name, object %>
     </header>
+
     <section class="second-line">
-      <%= object.description %>
+      <%= t 'time.ago', time: time_ago_in_words(object.updated_at) %>
     </section>
   </div>
 </section>
