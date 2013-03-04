@@ -17,25 +17,29 @@ SocialStream.Wall = (function(SS, $, undefined){
 
   var initRelationSelect = function(options){
     $('.wall_input select[name*="relation_ids"]').multiselect({
-      'button': 'btn btn-small',
-      'text': relationSelectText
+      'buttonClass': 'btn btn-small',
+      'buttonText': relationSelectText
     });
   };
 
   var relationSelectText = function(options) {
+    var text;
+
     if (options.length == 0) {
-      return showOptions.wallInput.blankText;
+      text = showOptions.wallInput.blankText;
     }
     else if (options.length > 3) {
-      return I18n.t('activity.privacy.relation', { count: options.length });
+      text = I18n.t('activity.privacy.relation', { count: options.length });
     } else {
       var selected = '';
       options.each(function() {
         selected += $(this).text() + ', ';
       });
 
-      return selected.substr(0, selected.length - 2);
+      text = selected.substr(0, selected.length - 2);
     }
+
+    return text + ' <b class="caret"></b>';
   };
 
   var changeRelationSelect = function(type) {
