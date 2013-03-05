@@ -68,22 +68,41 @@
     display: inline
   .participants
     padding: 7px 10px 9px 10px
-    @include border-radius(5px)
     border: 1px solid #f1f1f1
+    @extend .border-radius-5
+    background-color: #f1f1f1
     img
       padding: 4px 1px 2px 2px
       width: 40px
+      @extend .border-radius-5
   .action
     display: inline-block
+    float: right
+  .soften
+    margin-bottom: 0px
+
   .cont_conversation
+    .answer
+      font-size: 16px
+      color: $gray
     .cleditorMain
       @include border-radius(5px) 
+      width: 100% !important
     .actions
       margin-top: 10px
+      @extend .pull-right
+
 
   .message
+    padding: 15px 0 10px
+    border-bottom: 1px solid #f1f1f1
+    background-color: $white
+    @extend .border-bottom-left-radius-15
     .media
       margin-left: 20px
+      .pull-left
+        img
+          @extend .border-radius-5
       .name
         display: inline
       .date

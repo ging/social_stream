@@ -13,6 +13,15 @@
         <% end %>
       </ul>
     </div>
+    
+    <div class="fileinputs">
+      <input type="file" class="file">
+        <div class="fakefile">
+          <input>
+          <img class="btn-input" src="assets/images/browse.png">
+        </div>
+    </div>
+
     <section class="upload">
       <%= f.label :file, t('document.info.file') %>
       <%= f.file_field :file %>
