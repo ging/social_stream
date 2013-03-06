@@ -14,38 +14,12 @@
   .icon_navbar-message-blue,
   .icon_tool16-info
     margin-right: 4px
-
-  #avatar_profile
-    font-size: 26px
-    line-height: 49px
-    text-overflow: ellipsis
-    overflow: hidden
-    img
-      @extend .border-radius-5
-      width: 150px
-    h5 
-      a
-        text-decoration: none
-        color: $black
-        text-aling: center
-    .logo_caption
-      font-size: 15px
-      text-align: center
-    input, select
-      @include makeColumnoMargin(2, 0)
-
-  .contact
-    width: 140px
-    padding-top: 0px
-    margin-top: -10p 0 0 16px
-    img
-      margin: 14px 10px 0 0
-
-        
+    
+.toolbar-messages
   .toolbar_menu
-    ul.nav
+    ul
       margin-top: 20px
-      li.conversations
+      li
         padding: 5px
         margin-bottom: 10px
         a
@@ -55,6 +29,33 @@
             color: $blue
         a.active
           color: $blue
+
+#avatar_profile
+  font-size: 26px
+  line-height: 49px
+  text-overflow: ellipsis
+  overflow: hidden
+  img
+    @extend .border-radius-5
+    width: 150px
+  h5 
+    a
+      text-decoration: none
+      color: $black
+      text-aling: center
+  .logo_caption
+    font-size: 15px
+    text-align: center
+  input, select
+    @include makeColumnoMargin(2, 0)
+
+  .contact
+    width: 140px
+    padding-top: 0px
+    margin-top: -10p 0 0 16px
+    img
+      margin: 14px 10px 0 0
+
 
 
 .btn-blue

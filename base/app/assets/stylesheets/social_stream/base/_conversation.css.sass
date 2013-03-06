@@ -79,7 +79,8 @@
     display: inline-block
     float: right
   .soften
-    margin-bottom: 0px
+    margin: 0px
+    border-color: $white
 
   .cont_conversation
     .answer
@@ -88,9 +89,14 @@
     .cleditorMain
       @include border-radius(5px) 
       width: 100% !important
+      border-color: #c5c5c5
     .actions
       margin-top: 10px
-      @extend .pull-right
+      input
+        &[type="submit"]
+        @extend .border-radius-5
+        @extend .btn-blue
+        width: 100%
 
 
   .message
@@ -103,6 +109,8 @@
       .pull-left
         img
           @extend .border-radius-5
+      .media-body
+        margin-top: 4px
       .name
         display: inline
       .date
