@@ -1,0 +1,60 @@
+@import "fullcalendar"
+
+#sidebar
+  .calendar
+    padding: 5px
+    display: block
+      
+#month_top,
+#month_bottom
+  padding: 5px
+  text-align: center
+  a 
+    color: $gray 
+    text-decoration: none
+
+.current
+  a
+    color: $blue !important
+
+#month_top
+  border-bottom: 1px solid #dbdbdb
+  margin-bottom: 10px
+
+#month_bottom
+  border-top: 1px solid #dbdbdb
+  margin-bottom: 10px
+
+#month_top.past
+  @include opacity (70)
+
+
+#days
+  padding: 5px
+  tr
+    td
+      padding-left: 7px
+      padding-right: 7px
+      text-align: right
+      a
+        color: $gray
+    .today
+      @include border-radius(15px)
+      border: 1px solid black
+    .busy
+      font-weight: bold
+      @include border-radius(5px)
+      border: 1px solid #c4c4c4
+      background-color: $white
+    .past
+      @include opacity (70)
+    .other_month
+      @include opacity (70)
+
+.fc-content
+  .fc-cell-overlay,
+    @include opacity (40)
+    color: $blue
+
+.fc-state-highlight
+  background-color: rgba(4,156,219,0.2)
