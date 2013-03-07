@@ -5,7 +5,6 @@ describe 'profiles/show' do
                                   email: "test-user@test.com",
                                   language: 'en',
                                   to_param: "test",
-                                  logo: double(:logo, url: { profile: "" }),
                                   actor: stub_model(Actor)
                                  })
              }
