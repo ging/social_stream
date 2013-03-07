@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   # Slug generation
   s.add_runtime_dependency('stringex', '~> 1.5.1')
   # Avatar attachments
-  s.add_runtime_dependency('avatars_for_rails', '~> 1.0.0')
+  s.add_runtime_dependency('avatars_for_rails', '~> 1.0.1')
   # jQuery
   s.add_runtime_dependency('jquery-rails', '>= 1.0.9')
   # Select2 javascript library
