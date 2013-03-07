@@ -26,10 +26,7 @@
   <%= javascript_tag do %>
     $(function() {
       SocialStream.Profile.show({
-        tags: {
-          path: "<%= tags_path(format: :json) %>",
-          present: JSON.parse("<%= escape_javascript sanitize(@profile.tag_list.to_json) %>")
-        }
+        section: "<%= params[:section ] %>"
       });
     });
   <% end %>

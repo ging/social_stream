@@ -24,9 +24,7 @@ class Actor < ActiveRecord::Base
 
   include SocialStream::Models::Object
   
-  validates_presence_of :name, :message => ''
-  validates_presence_of :subject_type
-  
+  acts_as_avatarable
   acts_as_messageable
 
   acts_as_url :name, :url_attribute => :slug
@@ -35,13 +33,6 @@ class Actor < ActiveRecord::Base
           dependent: :destroy,
           inverse_of: :actor
 
-  has_many :avatars,
-           :validate => true,
-           :autosave => true,
-           :dependent => :destroy
-  has_one  :avatar,
-           :conditions => { :active => true }
-  		  
   has_many :sent_contacts,
            :class_name  => 'Contact',
            :foreign_key => 'sender_id',
@@ -96,6 +87,9 @@ class Actor < ActiveRecord::Base
            :foreign_key => :owner_id,
            :dependent   => :destroy
 
+  validates_presence_of :name, :message => ''
+  validates_presence_of :subject_type
+ 
   scope :alphabetic, order('actors.name')
 
   scope :letter, lambda { |param|
@@ -467,15 +461,7 @@ class Actor < ActiveRecord::Base
   def common_contacts_count(subject)
     (sent_active_contact_ids & subject.sent_active_contact_ids).size
   end
-
-  def logo
-    avatar!.logo
-  end
-
-  def avatar!
-    avatar || avatars.build
-  end
-  
+ 
   # The 'like' qualifications emmited to this actor
   def likes
     Activity.joins(:activity_verb).where('activity_verbs.name' => "like").
