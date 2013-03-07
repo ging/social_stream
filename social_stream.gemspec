@@ -33,11 +33,7 @@ Gem::Specification.new do |s|
   end
   # Debugging
   unless ENV["CI"]
-    if RUBY_VERSION < '1.9'
-      s.add_development_dependency('ruby-debug')
-    else
-      s.add_development_dependency('debugger')
-    end
+    s.add_development_dependency('debugger')
   end
   # Specs
   s.add_development_dependency('rspec-rails', '~> 2.8.0')
