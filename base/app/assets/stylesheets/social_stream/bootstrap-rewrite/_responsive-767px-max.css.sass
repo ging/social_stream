@@ -1,0 +1,38 @@
+//
+// Responsive: Landscape phone to desktop/tablet
+// --------------------------------------------------
+
+
+@media (max-width: 767px)
+  #home
+    #toolbar
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      .logo_home
+        float: left
+      .toolbar_menu
+        display: inline-block
+        margin-left: 2%
+    .activities
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin-left: 2%
+    #sidebar
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin-left: 2%
+
+
+
+// UP TO LANDSCAPE PHONE
+// ---------------------
+
+@media (max-width: 480px)
+  #home
+    .activities
+      .activity
+        .avatar
+          .media-object
+            float: left
+            margin-right: 3%
+
+  #sidebar
+    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    margin-left: 2%

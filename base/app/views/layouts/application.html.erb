@@ -33,26 +33,13 @@
   </head>
   
   <body>
-    <div class="wrapper container">
+    <div class="wrapper container-fluid">
       <%= render :partial => "layouts/header" %>
 
       <%= flashy %>
 
-      <% if content_for?(:toolbar) %>
-       <%= yield :toolbar %>
-      <% end %>
-
-      <section id="content" class="<%= content_section_class %>">
-        <%= yield %>
-      </section>
+      <%= yield %>
   
-      <% if content_for?(:sidebar) %>
-        <aside id="sidebar">
-          <div id="sidebarContent">
-            <%= yield :sidebar %>
-          </div>
-        </aside>
-      <% end %>
     </div>
     
     <%= render :partial => "layouts/footer" %>

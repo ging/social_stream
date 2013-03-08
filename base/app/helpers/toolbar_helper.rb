@@ -59,11 +59,9 @@ module ToolbarHelper
 
       response.html_safe
     else
-      content_for(:toolbar) do
-        content
-      end
-
       content_for :javascript, toolbar_init
+      
+      content
     end
   end
 end

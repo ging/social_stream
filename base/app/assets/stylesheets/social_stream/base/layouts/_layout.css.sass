@@ -1,14 +1,19 @@
 body
   background: #f9f9f9 url(../images/pattern.png) repeat top left
-#content-full
-  @include makeColumnoMargin(12, 0)
-  @include centered
 
-.content-short 
-  @include makeColumn(7, 0)
+#wrapper
+  @include grid-core($gridColumnWidth, $gridGutterWidth)
 
-.content-large
-  @include makeColumn(10, 0)
-  h1
-    border-bottom: 1px solid #ccc
-    margin-top: 0px
+#toolbar
+  @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  float: left
+
+#sidebar
+  @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  float: right
+  margin-left: 2%
+#home
+  .activities
+    @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    float: left
+    margin-left: 2%

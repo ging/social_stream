@@ -2,13 +2,10 @@
   <%=t('message.other')%>
 <% end %>
 
-<% toolbar :messages %>
+<section id="converstions">
 
-<div class="tabbable">
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#"><%= t('message.' + @box) %></a></li>
-  </ul>
-</div>
+<%= toolbar :messages %>
+
 
 <%= render :partial => 'index' %>
 
@@ -17,3 +14,5 @@
     SocialStream.Conversation.index();
   });
 <% end %>
+
+</section>
