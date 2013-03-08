@@ -1,21 +1,15 @@
 namespace :social_stream do
   namespace :avatars do
-    desc "Fix avatar's attachment path from paperclip < 3.0"
+    desc "Fix avatar's attachment path from Social Stream < 2.0"
     task :fix => :environment do
-      dir = "#{ Rails.root }/public/system/logos/"
+      old_dir = "#{ Rails.root }/public/system/avatars/logos"
+      new_dir = "#{ Rails.root }/public/system/actors"
 
-      Avatar.all.each do |a|
-        old_logo_dir = "#{ dir }#{ a.id }/"
+      FileUtils.mkdir_p new_dir
 
-        old_logo_contents = Dir["#{ old_logo_dir }*"]
+      puts "Moving #{ old_logo_dir } to #{ new_logo_dir }"
 
-        new_logo_dir = "#{ Rails.root }/public#{ a.logo.to_s.split('original').first }"
-
-        puts "Moving #{ old_logo_dir } to #{ new_logo_dir }"
-
-        FileUtils.mkdir_p new_logo_dir
-        FileUtils.mv old_logo_contents, new_logo_dir
-      end
+      FileUtils.mv old_dir, new_dir
     end
   end
 end
