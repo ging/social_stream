@@ -4,10 +4,15 @@
 
 
 @media (max-width: 767px)
-  #home
+
+
+
+  #home,
+  #user
     #toolbar
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      .logo_home
+      .logo_home,
+      #avatar_profile
         float: left
       .toolbar_menu
         display: inline-block
@@ -18,6 +23,9 @@
     #sidebar
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 2%
+
+
+
 
 
   #converstions
@@ -41,7 +49,10 @@
 // ---------------------
 
 @media (max-width: 480px)
-  #home
+
+
+  #home,
+  #user
     .activities
       .activity
         .avatar
