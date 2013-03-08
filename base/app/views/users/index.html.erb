@@ -2,16 +2,13 @@
   <%= t('user.other') %>
 <%end%>
 
-<% toolbar if user_signed_in? %>
+<section id="users">
 
-<% sidebar %>
+<% if user_signed_in? %>
+  <%= render partial: 'toolbar/home' %>
+<% end %>
 
-<%= location(t('browse') +": "+
-             content_tag(:b ,content_tag(:span, t('user.other'), :id=>'name_group')) + ", "+ 
-             link_to(t('group.by'),groups_path))%>
-
-
-<div id="my_conferences">
+<section class="users">
   <div id="contacts" class="block">
     <div class="search_field_wrapper">
       <input type="text" value="Search by name" id="search_field" class="search_input" />
@@ -28,6 +25,8 @@
     <%= render :partial => "users/index"%>
   
   </div>
-</div>
+</section>
 
 
+  <%= render partial: 'sidebar/show' %>
+</section>

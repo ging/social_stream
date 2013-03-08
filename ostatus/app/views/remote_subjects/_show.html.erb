@@ -1,5 +1,7 @@
-<% toolbar :profile, subject: @remote_subject %>
+<section id="remote_subjects">
+  <%= render partial: 'toolbar/profile', locals: { subject: @remote_subject } %>
 
-<%= render partial: "activities/index",
-           locals:  { section: @remote_subject,
-                      owner:  @remote_subject } %>
+  <%= render partial: "activities/index",
+             locals:  { section: @remote_subject,
+                        owner:  @remote_subject } %>
+</section>

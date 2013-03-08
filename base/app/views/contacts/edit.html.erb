@@ -1,6 +1,0 @@
-<% toolbar :profile, :subject => @contact.receiver_subject, :option => 'contacts' %>
-
-<% location link_to(t("contact.#{ @contact.action }.title", :name => @contact.receiver.name),
-                     edit_contact_path(@contact.to_param)) %>
-
-<%= render :partial => 'form' %>

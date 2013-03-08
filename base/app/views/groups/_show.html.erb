@@ -1,26 +1,9 @@
-<% content_for :title do %>
-  <%= @group.name+" | "+t('site.name') %>
-<% end %>
+<section id="group">
+  <%= render partial: 'toolbar/profile', locals: { subject: @group } %>
 
-<% content_for :description do %>
-  <% if @group.profile.description? %>
-    <%= @group.profile.description%>
-  <% else %>
-    <%= @group.name+" "+t('profile.is_on') + " "+ t('site.name') %>
-  <% end %>
-<% end %>
+  <%= render :partial => "activities/index",
+             :locals  => { section: @group,
+                           owner:   @group } %>
 
-<% content_for :keywords do %>
-  <%= @group.profile.subject.tag_list%>
-<% end %>
-
-<% sidebar %>
-
-<% toolbar :profile, :subject => @group %>
-
-<br class="clearfloat" />
-
-
-<%= render :partial => "activities/index",
-           :locals  => { section: @group,
-                         owner:   @group } %>
+  <%= render partial: 'sidebar/show' %>
+</section>

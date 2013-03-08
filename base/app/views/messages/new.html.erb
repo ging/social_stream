@@ -2,12 +2,15 @@
   <%=t('message.other')%>
 <% end %>
 
-<% toolbar :messages %>
+<section id="new_message">
 
-<%= render :partial => 'new' %>
+  <%= render partial: 'toolbar/messages' %>
 
-<%= javascript_tag do %>
-  $(function() {
-    SocialStream.Message.new_();
-  });
-<% end %>
+  <%= render :partial => 'new' %>
+
+  <%= javascript_tag do %>
+    $(function() {
+      SocialStream.Message.new_();
+    });
+  <% end %>
+</section>

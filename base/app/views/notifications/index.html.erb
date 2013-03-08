@@ -2,12 +2,11 @@
   <%= current_subject.name %>
 <% end %>
 
-<% sidebar %>
+<section id="notifications">
 
-<%= location(
-    link_to(t('notification.other'), notifications_path,:remote => true) +' ('+@mailbox.notifications.not_trashed.unread.count.to_s+')'
-) %>
+  <%= render partial: 'toolbar/home'  %>
 
-<% toolbar  %>
+  <%= render :partial => 'index' %>
 
-<%= render :partial => 'index' %>
+  <%= render partial: 'sidebar/show' %>
+</section>

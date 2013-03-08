@@ -26,14 +26,6 @@ describe ContactsController do
     response.should be_success
   end
 
-  it "should render edit" do
-    sign_in @user
-
-    get :edit, :id => @tie.contact_id
-
-    assert_response :success
-  end
-
   it "should render update" do
     sign_in @user
 

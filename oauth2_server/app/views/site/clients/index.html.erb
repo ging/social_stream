@@ -1,39 +1,42 @@
-<% toolbar %>
+<section id="site_clients" class="first-img">
 
-<article id="site_clients" class="first-img">
-  <header>
-    <h1>
-      <%= t 'site.client.added' %>
-    </h1>
+  <%= render partial: 'toolbar/home' %>
 
-    <%= link_to t('site.client.new.link'), new_site_client_path, class: "btn new_site_client-modal-link", 'data-toggle' => 'modal'  %>
+  <section class="site_clients">
+    <header>
+      <h1>
+        <%= t 'site.client.added' %>
+      </h1>
 
-    <%= render partial: 'new.modal' %>
+      <%= link_to t('site.client.new.link'), new_site_client_path, class: "btn new_site_client-modal-link", 'data-toggle' => 'modal'  %>
 
+      <%= render partial: 'new.modal' %>
+
+      <hr class="soften">
+    </header>
+
+    <% @developer_clients.each do |client| %>
+
+      <%= image_tag client.logo.url(:small), style: "width: 40px; height: 40px;" %>
+
+      <div class="name">
+        <%= link_to client.name, client %>
+      </div>
+      <div class="url">
+        <%= link_to client.url, client.url, target: '_blank' %>
+      </div>
+      <div class="users">
+        <span>
+          5
+        </span>
+        users
+      </div>
     <hr class="soften">
-  </header>
+    <% end %>
 
-  <% @developer_clients.each do |client| %>
+    <%= javascript_tag do %>
+      SocialStream.SiteClient.index();
+    <% end %>
 
-    <%= image_tag client.logo.url(:small), style: "width: 40px; height: 40px;" %>
-
-    <div class="name">
-      <%= link_to client.name, client %>
-    </div>
-    <div class="url">
-      <%= link_to client.url, client.url, target: '_blank' %>
-    </div>
-    <div class="users">
-      <span>
-        5
-      </span>
-      users
-    </div>
-  <hr class="soften">
-  <% end %>
-
-  <%= javascript_tag do %>
-    SocialStream.SiteClient.index();
-  <% end %>
-
-</article>
+  </section>
+</section>

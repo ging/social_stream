@@ -2,10 +2,8 @@
   <%= "#{ profile_subject && profile_subject.name + ': ' }#{ t('repository.title') }" %>
 <% end %>
 
-<% if profile_subject %>
-  <% toolbar :profile, :subject => profile_subject %>
-  <% elsif user_signed_in? %>
-    <% toolbar %>
+<% if profile_or_current_subject %>
+  <%= render partial: 'toolbar/profile', locals: { :subject => profile_or_current_subject } %>
 <% end %>
 
 <%= render partial: 'common_documents/filter' %>
@@ -18,10 +16,10 @@
 
 <% end %>
 
-<div class="documents">
+<section class="documents">
   <%= render partial: 'common_documents/list',
              locals: { documents: collection } %>
-</div>
+</section>
 
   
 <div id="document-list-net" class="tab-pane">

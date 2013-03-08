@@ -1,1 +1,17 @@
+<% content_for :title do %>
+  <%= "#{ @group.name } | #{ t 'site.name' }" %>
+<% end %>
+
+<% content_for :description do %>
+  <% if @group.profile.description? %>
+    <%= @group.profile.description%>
+  <% else %>
+    <%= "#{ @group.name } #{ t 'profile.is_on' } #{ t 'site.name' }" %>
+  <% end %>
+<% end %>
+
+<% content_for :keywords do %>
+  <%= @group.profile.subject.tag_list%>
+<% end %>
+
 <%= render :partial => 'show' %>

@@ -1,35 +1,37 @@
-<% toolbar :profile, :subject => profile_or_current_subject %>
+<section id="contacts">
+  <%= render partial: 'toolbar/profile', locals: { :subject => profile_or_current_subject } %>
 
-<div class="contacts tabbable">
-  <ul class="nav nav-tabs">
-      <li class="<%= 'active' if params[:d] == 'sent' %>">
-      <a data-toggle="tab" href="#sent" data-path="<%= contacts_path %>"<%= raw ' data-loaded="true"' if params[:d] == 'sent' %>><%= t 'contact.sent' %></a>
-      </li>
-      <li class="<%= 'active' if params[:d] == 'received' %>">
-      <a data-toggle="tab" href="#received" data-path="<%= contacts_path %>"<%= raw ' data-loaded="true"' if params[:d] == 'received' %>><%= t 'contact.received' %></a>
-      </li>
-    </ul>
-  <div class="tab-content">
-   
+  <div class="contacts tabbable">
+    <ul class="nav nav-tabs">
+        <li class="<%= 'active' if params[:d] == 'sent' %>">
+        <a data-toggle="tab" href="#sent" data-path="<%= contacts_path %>"<%= raw ' data-loaded="true"' if params[:d] == 'sent' %>><%= t 'contact.sent' %></a>
+        </li>
+        <li class="<%= 'active' if params[:d] == 'received' %>">
+        <a data-toggle="tab" href="#received" data-path="<%= contacts_path %>"<%= raw ' data-loaded="true"' if params[:d] == 'received' %>><%= t 'contact.received' %></a>
+        </li>
+      </ul>
+    <div class="tab-content">
+     
 
 
-    <input type="text" class="pull-right" placeholder="filter">
+      <input type="text" class="pull-right" placeholder="filter">
 
-  
-      <div id="sent" class="tab-pane <%= 'active' if params[:d] == 'sent' %>">
-        <%= render partial: 'index',
-                   locals: { d: 'sent' } %>
-      </div>
-      <div id="received" class="tab-pane <%= 'active' if params[:d] == 'received' %>">
-        <%= render partial: 'index',
-                   locals: { d: 'received' } %>
-      </div>
+    
+        <div id="sent" class="tab-pane <%= 'active' if params[:d] == 'sent' %>">
+          <%= render partial: 'index',
+                     locals: { d: 'sent' } %>
+        </div>
+        <div id="received" class="tab-pane <%= 'active' if params[:d] == 'received' %>">
+          <%= render partial: 'index',
+                     locals: { d: 'received' } %>
+        </div>
 
+    </div>
   </div>
-</div>
 
-<%= javascript_tag do %>
-  $(function() {
-    SocialStream.Contact.index();
-  });
-<% end %>
+  <%= javascript_tag do %>
+    $(function() {
+      SocialStream.Contact.index();
+    });
+  <% end %>
+</section>

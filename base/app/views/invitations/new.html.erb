@@ -1,9 +1,7 @@
-<% toolbar  %>
+<section id="new_invitation">
+  <%= render partial: 'toolbar/home' %>
 
-<% sidebar %>
+  <%= render :partial => 'new' %>
 
-<%= location(
-  link_to(t('invitation.other'), new_invitation_path)
-) %>
-
-<%= render :partial => 'new' %>
+  <%= render partial: 'sidebar/show' %>
+</section>

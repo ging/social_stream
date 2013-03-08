@@ -2,6 +2,8 @@
   <%=t('settings.one')%>
 <% end %>
 
-<% toolbar :profile, subject: current_subject %>
+<section id="settings">
+  <%= render partial: 'toolbar/profile', locals: { subject: current_subject } %>
 
-<%= render :partial => 'index' %>
+  <%= render :partial => 'index' %>
+</section>

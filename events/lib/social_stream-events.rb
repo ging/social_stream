@@ -3,12 +3,6 @@ require 'social_stream-base'
 require 'rails-scheduler'
 
 module SocialStream
-  module Views
-    module Sidebar
-      autoload :Events, 'social_stream/views/sidebar/events'
-    end
-  end
-
   module Events
     autoload :Ability, 'social_stream/events/ability'
 

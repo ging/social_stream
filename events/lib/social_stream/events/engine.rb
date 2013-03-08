@@ -10,12 +10,6 @@ module SocialStream
       initializer "social_stream-events.models.register_activity_streams" do
         SocialStream::ActivityStreams.register :event
       end
-
-      initializer "social_stream-events.views.sidebar" do
-        SocialStream::Views::Sidebar.module_eval do
-          include SocialStream::Views::Sidebar::Events
-        end
-      end
     end
   end
 end

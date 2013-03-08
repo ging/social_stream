@@ -1,4 +1,4 @@
-<% toolbar :profile, :subject => object.owner_subject %>
+<%= render partial: 'toolbar/profile', locals: { :subject => object.owner_subject } %>
 
 <%= javascript_tag do %>
   $(function() {

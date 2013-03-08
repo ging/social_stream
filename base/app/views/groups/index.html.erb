@@ -1,12 +1,14 @@
-<% content_for :title do%>
-  <%= t('group.other') %>
-<%end%>
+<section id="groups">
+  <% content_for :title do%>
+    <%= t('group.other') %>
+  <%end%>
 
-<% toolbar if user_signed_in? %>
+  <% if user_signed_in? %>
+    <%= render partial: 'toolbar/home' %>
+  <% end %>
 
-<% sidebar :group_index %>
 
-<div id="my_conferences" class="block">
+<section id="groups">
   <div id="tab" class="widget">
     <ul class="tab">
       <li>
@@ -36,8 +38,7 @@
       </div>
     </div>
   </div>
-</div>	
+</section>	
 
- 
-<br class="clearfloat" />
-
+  <%= render partial: 'sidebar/groups' %>
+</section>

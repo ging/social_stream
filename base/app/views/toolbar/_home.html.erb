@@ -1,7 +1,9 @@
-<%= render partial: 'toolbar/subject' %>
+<section id="toolbar" class="toolbar-home">
+  <%= render partial: 'toolbar/subject' %>
 
-<% content_for :toolbar_menu do %>
-  <div class="base_items"/>
-<% end %>
+  <% content_for :toolbar_menu do %>
+    <div class="base_items"/>
+  <% end %>
 
-<%= render partial: 'toolbar/menu' %>
+  <%= render partial: 'toolbar/menu' %>
+</section>

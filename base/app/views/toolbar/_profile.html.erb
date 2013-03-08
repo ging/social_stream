@@ -1,30 +1,32 @@
-<%= render partial: 'toolbar/logo',
-           locals: { subject: subject } %>
+<section id="toolbar" class="toolbar-home">
+  <%= render partial: 'toolbar/logo',
+             locals: { subject: subject } %>
 
-<%= content_for :toolbar_menu do %>
-  <li>
-    <%= link_to [ subject, :profile ], class: "btn-blue" do  %>
-      <i class='icon_tool16-info'></i> <%= t 'menu.information' %>
-    <% end %>
-  </li>
-
-  <% if current_subject.present? && subject != current_subject %>
-
-    <!---- <li>
-     <%= link_to edit_contact_path(current_subject.contact_to!(subject)), class: "btn-blue" do %>
-        <i class='icon_navbar-followers'></i> <%= current_subject.contact_to!(subject).status %>
-      <% end %>
-    </li> -->
-
+  <%= content_for :toolbar_menu do %>
     <li>
-      <%= link_to new_message_path(:receiver => subject.slug), class: "btn-blue" do %>
-        <i class='icon_navbar-message-blue'></i> <%= t 'send' %>
+      <%= link_to [ subject, :profile ], class: "btn-blue" do  %>
+        <i class='icon_tool16-info'></i> <%= t 'menu.information' %>
       <% end %>
     </li>
+
+    <% if current_subject.present? && subject != current_subject %>
+
+      <!---- <li>
+       <%= link_to edit_contact_path(current_subject.contact_to!(subject)), class: "btn-blue" do %>
+          <i class='icon_navbar-followers'></i> <%= current_subject.contact_to!(subject).status %>
+        <% end %>
+      </li> -->
+
+      <li>
+        <%= link_to new_message_path(:receiver => subject.slug), class: "btn-blue" do %>
+          <i class='icon_navbar-message-blue'></i> <%= t 'send' %>
+        <% end %>
+      </li>
+    <% end %>
+    <div class="base_items"/>
   <% end %>
-  <div class="base_items"/>
-<% end %>
 
-<%= render partial: 'toolbar/menu' %>
+  <%= render partial: 'toolbar/menu' %>
 
-<%= render partial: 'toolbar/contacts', locals: { subject: subject } %>
+  <%= render partial: 'toolbar/contacts', locals: { subject: subject } %>
+</section>

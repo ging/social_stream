@@ -12,8 +12,11 @@
   <%= @profile.subject.tag_list%>
 <% end %>
 
-<% sidebar %>
+<section id="profile">
 
-<% toolbar :profile, :subject => @profile.subject %>
+  <%= render partial: 'toolbar/profile', locals: { :subject => @profile.subject } %>
 
-<%= render :partial => "profile" %>
+  <%= render :partial => "profile" %>
+
+  <%= render partial: 'sidebar/show' %>
+</section>

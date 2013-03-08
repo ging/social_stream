@@ -4,15 +4,14 @@
 
 <section id="converstions">
 
-<%= toolbar :messages %>
+  <%= render partial: 'toolbar/messages' %>
 
+  <%= render :partial => 'index' %>
 
-<%= render :partial => 'index' %>
-
-<%= javascript_tag do %>
-  $(function() {
-    SocialStream.Conversation.index();
-  });
-<% end %>
+  <%= javascript_tag do %>
+    $(function() {
+      SocialStream.Conversation.index();
+    });
+  <% end %>
 
 </section>

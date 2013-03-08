@@ -1,22 +1,24 @@
-<% toolbar :profile, :subject => current_subject, :option => 'contacts' %>
+<section id="relation_customs">   
+  <%= render partial: 'toolbar/profile', locals: { :subject => current_subject } %>
 
-<div id="relation_customs">   
-  <h2><%= t 'relation_custom.title' %></h2>
+  <section class="relation_customs">
+    <h2><%= t 'relation_custom.title' %></h2>
 
-    <%= render :partial => 'relation/customs/list', :object => @customs %>
+      <%= render :partial => 'relation/customs/list', :object => @customs %>
 
-    <div id="permissions">
-      <div class="postit rotate">
-        <span class="rotate-int">
-          <%= t 'permission.postit' %>
-        </span>
+      <div id="permissions">
+        <div class="postit rotate">
+          <span class="rotate-int">
+            <%= t 'permission.postit' %>
+          </span>
+        </div>
+        <%= render partial: 'layouts/loading' %>
       </div>
-      <%= render partial: 'layouts/loading' %>
-    </div>
 
-    <%= javascript_tag do %>
-      $(function() {
-        SocialStream.RelationCustom.index();
-      })
-    <% end %>
-</div> 
+      <%= javascript_tag do %>
+        $(function() {
+          SocialStream.RelationCustom.index();
+        })
+      <% end %>
+  </section> 
+</section> 

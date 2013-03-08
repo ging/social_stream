@@ -1,0 +1,5 @@
+<aside id="sidebar" class="sidebar-show">
+  <% if user_signed_in? %>
+    <%= render partial: 'sidebar/suggestions_and_pendings' %>
+  <% end %>
+</aside>

@@ -1,7 +1,9 @@
-<% content_for :title do%>
-  <%= t('group.new.action')%>
-<%end%>
+<section id="new_group">
+  <% content_for :title do%>
+    <%= t('group.new.action')%>
+  <%end%>
 
-<% toolbar :home, :option => 'groups' %>
+  <%= render partial: 'toolbar/home' %>
 
-<%= render :partial => 'new' %>
+  <%= render :partial => 'new' %>
+</section>

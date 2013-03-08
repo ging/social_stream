@@ -2,9 +2,12 @@
   <%=t('message.other')%>
 <% end %>
 
-<% toolbar :messages %>
+<section id="conversation">
+  <%= render partial: 'toolbar/messages' %>
 
-<% content_for :javascript do %>
+  <%= render :partial => 'show' %>
+
+  <%= javascript_tag do %>
 $('.cont_conversation').validate({errorClass: "validation_error"});
 <% unless @box.eql?'trash' %>
   $("#body").cleditor({
@@ -27,5 +30,4 @@ $('.cont_conversation').validate({errorClass: "validation_error"});
 		}
 <% end %>
 <% end %>
-
-<%= render :partial => 'show' %>
+</section>

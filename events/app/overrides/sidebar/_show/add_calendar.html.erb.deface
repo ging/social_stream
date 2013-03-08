@@ -1,0 +1,5 @@
+<!-- insert_top "#sidebar" -->
+
+<% if profile_or_current_subject %>
+  <%= render partial: 'sidebar/calendar' %>
+<% end %>
