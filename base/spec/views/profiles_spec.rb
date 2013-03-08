@@ -39,6 +39,7 @@ describe 'profiles/show' do
       view.stub(:profile_or_current_subject).and_return(user)
       view.stub(:user_signed_in?).and_return(true)
       view.stub(:can?).and_return(true)
+      view.stub(:contact_to).and_return("")
     end
 
     it "should render" do
