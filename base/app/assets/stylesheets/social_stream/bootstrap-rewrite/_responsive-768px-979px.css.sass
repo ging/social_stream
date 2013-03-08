@@ -3,15 +3,19 @@
 // --------------------------------------------------
 
 
-@media (min-width: 768px) and (max-width: 979px)
+@media (min-width: 768px) and (max-width: 1199px)
 
   #converstions
+    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    .toolbar-messages
+      @include grid-core-span(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
     div.conversations
-      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      @include grid-core-span(11, $fluidGridColumnWidth, $fluidGridGutterWidth)
       float: left
       margin-top: 26px
       .conversation
+        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
         .content_left
-          @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
         .content_right
-          @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          @include grid-core-span(9, $fluidGridColumnWidth, $fluidGridGutterWidth)

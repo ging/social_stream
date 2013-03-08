@@ -1,22 +1,22 @@
 <%= content_for :toolbar_menu do %>
   <li>
     <%= link_to new_message_path do %>
-      <i class='icon_message-new'></i> <%= t 'message.new' %>
+      <i class='icon_message-new'></i>
     <% end %>
   </li>
   <li>
     <%= link_to conversations_path(box: :inbox) do %>
-      <i class='icon_message-inbox'></i> <%= t 'message.inbox' %> (<%= current_subject.unread_messages_count %>)
+      <i class='icon_message-inbox'></i> (<%= current_subject.unread_messages_count %>)
     <% end %>
   </li>
   <li>
     <%= link_to conversations_path(box: :sentbox) do %>
-      <i class='icon_message-sentbox'></i> <%= t 'message.sentbox' %>
+      <i class='icon_message-sentbox'></i>
     <% end %>
   </li>
   <li>
     <%= link_to conversations_path(box: :trash) do %>
-      <i class='icon_message-trash'></i> <%= t 'message.trash' %>
+      <i class='icon_message-trash'></i>
     <% end %>
   </li>
 <% end %>

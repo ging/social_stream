@@ -20,6 +20,22 @@
       margin-left: 2%
 
 
+  #converstions
+    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    .toolbar-messages
+      @include grid-core-span(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    div.conversations
+      @include grid-core-span(11, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+      margin-top: 26px
+      .conversation
+        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        .content_left
+          @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        .content_right
+          @include grid-core-span(9, $fluidGridColumnWidth, $fluidGridGutterWidth)
+
+
 
 // UP TO LANDSCAPE PHONE
 // ---------------------
@@ -36,3 +52,32 @@
   #sidebar
     @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
     margin-left: 2%
+
+
+  #converstions
+    .toolbar-messages
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      ul
+        background-color: $white
+        @extend.border-radius-5
+        padding: 34px
+        li
+          @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          display: inline
+          margin-bottom: 0px
+          float: left
+          margin-top: -15px
+          a
+            width: 10px
+
+  .conversation_full
+    margin: 0 auto
+    h3
+      font-size: 23px
+      white-space: normal
+    .messages
+      .media
+        .pull-left
+          float: left
+    .action
+      margin-top: -30px
