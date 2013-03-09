@@ -1,9 +1,17 @@
+//= require jquery.inview
+
 SocialStream.Pagination = (function(SS, $, undefined){
 
   var show = function(callback) {
     $(".btn-see-more").each(function(i, btn) {
       $(btn).attr('data-page', "2");
       $(btn).closest('nav.more').find('.loading').hide();
+    });
+
+    $(".btn-see-more").bind('inview', function(event, isInview) {
+      if (isInview) {
+        $(this).click();
+      }
     });
 
     $(".btn-see-more").click(function(event) {
