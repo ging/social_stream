@@ -7,8 +7,8 @@
     </div>        
   <% else %>
     <%= link_to image_tag(subject.logo.url, :alt => subject.name , :size => "150x150"), subject %>
-   <span class:"hidden-tablet hidden-phone">
+   <div class= "hidden-tablet hidden-phone">
      <%= subject.name %>
-   <span>
+   </div>
   <% end %>
 </div>

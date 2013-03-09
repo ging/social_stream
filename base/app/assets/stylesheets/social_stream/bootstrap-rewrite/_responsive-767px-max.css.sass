@@ -29,21 +29,38 @@
 
 
   #converstions
-    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
     .toolbar-messages
       @include grid-core-span(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    div.conversations
-      @include grid-core-span(11, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      ul
+        background-color: $white
+        @extend.border-radius-5
+        padding: 34px
+        li
+          @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          display: inline
+          margin-bottom: 0px
+          float: left
+          margin-top: -15px
+          a
+            width: 10px
+    .conversations
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       float: left
+      width: 97%
       margin-top: 26px
       .conversation
         @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
         .content_left
           @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          margin-right: 20px
+          margin-left: 0px
         .content_right
           @include grid-core-span(9, $fluidGridColumnWidth, $fluidGridGutterWidth)
 
-
+  #contacts
+    .toolbar-home
+      @extend .hidden-phone
+      @extend .hidden-tablet
 
 // UP TO LANDSCAPE PHONE
 // ---------------------
@@ -68,7 +85,7 @@
   #converstions
     .toolbar-messages
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      ul
+      ul.nav
         background-color: $white
         @extend.border-radius-5
         padding: 34px
@@ -80,6 +97,10 @@
           margin-top: -15px
           a
             width: 10px
+    .content_right 
+      .action
+        float: right
+        margin: -42px -18px 0 0
 
   .conversation_full
     margin: 0 auto

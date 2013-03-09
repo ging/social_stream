@@ -1,16 +1,17 @@
-<% if (cs = subject.contact_subjects(:direction => :sent).first(6)).present? %>
-  <h4>
-    <%= t('contact.n', :count => subject.positive_sent_contact_actors.count) %>
-  </h4>
-  <div class ="content">
-    <div class="contact">
-      <% cs.each do |contact| %>
-        <%= link_to(image_tag(contact.logo.url(:small), :alt => contact.name, :title => contact.name, :size => "small"), contact) %>
-      <% end %>
+<section class="hidden-phone"
+  <% if (cs = subject.contact_subjects(:direction => :sent).first(6)).present? %>
+    <h4>
+      <%= t('contact.n', :count => subject.positive_sent_contact_actors.count) %>
+    </h4>
+    <div class ="content">
+      <div class="contact">
+        <% cs.each do |contact| %>
+          <%= link_to(image_tag(contact.logo.url(:small), :alt => contact.name, :title => contact.name, :size => "small"), contact) %>
+        <% end %>
+      </div>
+      <div class="contacts-more">
+        <%= link_to t("contact.view_all"), [ profile_subject, Contact.new ] %>
+      </div>
     </div>
-    <div class="contacts-more">
-      <%= link_to t("contact.view_all"), [ profile_subject, Contact.new ] %>
-    </div>
-  </div>
-<% end %>
-
+  <% end %>
+</section>

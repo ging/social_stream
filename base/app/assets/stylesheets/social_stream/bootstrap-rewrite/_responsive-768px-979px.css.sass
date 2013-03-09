@@ -2,10 +2,17 @@
 // Responsive: Tablet to desktop
 // --------------------------------------------------
 
+#contacts
+  .toolbar-home
+    @extend .hidden-tablet
+  .contacts
+    @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    float: left
+    margin-left: 20px
 
-@media (min-width: 768px) and (max-width: 1199px)
+@media (min-width: 768px) and (max-width: 1119px)
 
-// --------------------- CONVERSATIONS
+
   #converstions
     @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
     .toolbar-messages
@@ -20,3 +27,12 @@
           @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
         .content_right
           @include grid-core-span(9, $fluidGridColumnWidth, $fluidGridGutterWidth)
+
+  #contacts
+    .toolbar-home
+      @extend .hidden-tablet
+    .contacts
+      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+      margin-left: 20px
+ 

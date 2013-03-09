@@ -3,12 +3,17 @@
              locals: { subject: subject } %>
 
   <%= content_for :toolbar_menu do %>
+    <div class= "hidden-desktop">
+      <%= subject.name %>
+    </div>
     <li>
       <%= link_to [ subject, :profile ], class: "btn-blue" do  %>
         <i class='icon_tool16-info'></i> <%= t 'menu.information' %>
       <% end %>
     </li>
-
+    <li>
+      <%= render partial: 'toolbar/groups' %>
+    </li>
     <% if current_subject.present? && subject != current_subject %>
 
       <!---- <li>
