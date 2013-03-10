@@ -2,16 +2,8 @@
 // Responsive: Tablet to desktop
 // --------------------------------------------------
 
-#contacts
-  .toolbar-home
-    @extend .hidden-tablet
-  .contacts
-    @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    float: left
-    margin-left: 20px
 
 @media (min-width: 768px) and (max-width: 1119px)
-
 
   #converstions
     @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
@@ -28,6 +20,64 @@
         .content_right
           @include grid-core-span(9, $fluidGridColumnWidth, $fluidGridGutterWidth)
 
+
+
+
+  .relation_customs
+    @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    float: left
+    margin-top: 20px
+    .relation_list
+      @include grid-core-span(4, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    #permissions
+      @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
+
+
+
+
+  #settings
+    #toolbar
+      @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin-left: 20px
+      float: left
+    .settings
+      @include grid-core-span(9, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      @include grid-core-offset(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      border-left: 1px solid #c4c4c4
+      border-right: 1px solid #c4c4c4
+      border-bottom: 1px solid #c4c4c4
+      border-radius: 10px
+      float: right
+      margin-left: 20px
+      h2
+        background-color: #c4c4c4
+        color: $white
+        font-weight: bold
+        padding-left: 10px
+        border-top-left-radius: 10px
+        border-top-right-radius: 10px
+        margin: 0px !important
+      header
+        border-bottom: 1px solid #c4c4c4
+        padding-left: 20px
+      .guion
+        @extend .hidden-desktop
+      .edit_user
+        .email_form_content
+          .form_label
+            @include grid-core-offset(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+
+
+
+
+  #site_clients
+    #toolbar
+      @extend .hidden-desktop
+      background-color: black
+
+
+
+
   #contacts
     .toolbar-home
       @extend .hidden-tablet
@@ -35,4 +85,12 @@
       @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
       float: left
       margin-left: 20px
+
+
+
+
+  #documents
+    #toolbar
+      @extend .hidden-desktop
+      background-color: black
  

@@ -5,15 +5,16 @@
 #api_key_settings,
 #chat_settings,
 #room_settings,
-#cancel_account
+#cancel_account,
+#notifications_settings
   .settings_content
     @extend .border-radius-5 
-    padding: 10px 0px 46px 38px
+    padding: 10px 17px 43px
     background: whiteSmoke
     form
       margin-bottom: 0px
     .btn
-      @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25))
+      @extend .btn-blue
       float: right
       margin-right: 37px
     .options
@@ -22,9 +23,11 @@
       padding: 4px 4px 0px 2px
       &[type="radio"]
         margin: -1px 10px 0 0
-
     .btn_notifications
       margin-left: 331px
+  .email_form_content
+    .form_label
+      
 
 #notify_by_email_never
   margin-left: 10px

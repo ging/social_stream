@@ -6,19 +6,13 @@
     border-bottom: 1px dashed #ccc
     padding-top: 15px
     label
-      @include makeColumnoMargin(3,0)
-      font-size: 30px
+      font-size: 22px
       font-weight: bold
       color: #ccc
-      padding: 2px 0 0 14px
-  .upload,
-  .title,
-  .url,
-  .callback_url
-    height: 50px
+      padding-left: 14px
+
   .title
     input
-
       @include size(26px, 578px)
   .url,
   .callback_url
@@ -30,7 +24,7 @@
     height: 100px
     textarea
       display: inline-block
-      @include size (70px, 578px)
+      @include size (55px, 578px)
   input
     &[type="submit"]
       float: right
