@@ -1,5 +1,5 @@
 <% if user_signed_in? && controller.controller_name != 'explore' %>
-  <%= link_to  '#', :class => 'audience' do %>
+  <%= link_to  'javascript:void(0)', :class => 'audience' do %>
     <i class="icon_tool16-<%= activity.public? ? 'public' : 'private' %>"></i>
     <%= activity.audience_in_words(current_subject, :details => :summary) %>
   <% end %>
