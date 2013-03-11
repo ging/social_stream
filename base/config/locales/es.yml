@@ -227,7 +227,7 @@ es:
     header:
       explore: "Explorar"
       participants: "Participantes"
-      files: "Recursos"
+      resources: "Recursos"
       timeline: "Linea temporal"
       tags: "Etiquetas"
       search: "Buscar"
