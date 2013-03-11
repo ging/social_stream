@@ -48,33 +48,4 @@ describe Actor do
 
     Actor.find_by_id(a.id).should be_nil
   end
-
-  context "cheesecake" do
-    before do
-      @user = Factory(:user)
-    end
-
-    it "should build json" do
-      hash = {
-        :sectors => @user.relation_customs.map do |r|
-          { :id => r.id, :name => r.name,
-            :subsectors => [ { :id => r.id, :name => r.name, :actors => [] } ]
-          }
-        end
-      }
-
-      @user.cheesecake_json.should eq(hash.to_json)
-    end
-
-    context "with tie" do
-      before do
-        @tie =
-          Factory(:friend, :contact => Factory(:contact, :sender => @user.actor))
-      end
-
-      it "should render json" do
-        @user.cheesecake_json.should include(@tie.receiver.id.to_s)
-      end
-    end
-  end
 end
