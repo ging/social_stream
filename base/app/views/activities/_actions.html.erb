@@ -2,13 +2,17 @@
   <%= render :partial => 'activities/time_ago',
              :locals => { :activity => activity } %>   
 
-  <%= render :partial => 'activities/comment',
-             :locals => { :activity => activity } %>   
+  <% if activity.direct_object.present? %>
 
-  <%= render :partial => 'activities/like',
-             :locals => { :activity => activity } %>   
+    <%= render :partial => 'activities/comment',
+               :locals => { :activity => activity } %>   
 
-  <%= render :partial => 'activities/audience',
-             :locals => { :activity => activity } %>   
+    <%= render :partial => 'activities/like',
+               :locals => { :activity => activity } %>   
+
+    <%= render :partial => 'activities/audience',
+               :locals => { :activity => activity } %>   
+
+  <% end %>
 
 </article>

@@ -21,7 +21,7 @@ en:
   activerecord:
     attributes:
       contact:
-        relation_ids: "Contact type"
+        relation_ids: "Roles"
       relation/custom:
         name: "Name"
       user:
@@ -146,7 +146,7 @@ en:
     view_all: "View all comments"
   contact:
     all_n: "All contacts (%{count})"
-    confirm_delete: "Delete contact?"
+    confirm_delete: "Remove contact?"
     current: "Current"
     delete: "Delete"
     edit:
@@ -229,7 +229,7 @@ en:
     header:
       explore: "Explore"
       participants: "Participants"
-      files: "Files"
+      resources: "Resources"
       timeline: "Timeline"
       tags: "Tags"
       search: "Search"

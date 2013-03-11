@@ -21,7 +21,7 @@ es:
   activerecord:
     attributes:
       contact:
-        relation_ids: "El tipo de contacto"
+        relation_ids: "Los roles"
       relation/custom:
         name: "Nombre"
       user:
@@ -227,7 +227,7 @@ es:
     header:
       explore: "Explorar"
       participants: "Participantes"
-      files: "Recursos"
+      resources: "Recursos"
       timeline: "Linea temporal"
       tags: "Etiquetas"
       search: "Buscar"

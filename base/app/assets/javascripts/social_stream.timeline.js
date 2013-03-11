@@ -38,6 +38,7 @@ SocialStream.Timeline = (function(SS, $, undefined){
     $(fullId).hide();
     $(summaryId).tooltip({
       html: true,
+      trigger: 'click hover',
       title: function(){
         return $(this).siblings(fullId).html();
       }

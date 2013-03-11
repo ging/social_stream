@@ -1,7 +1,7 @@
 <%= render partial: 'explore/header' %>
 
 <div id="explore-content" class="tab-content">
-<% %w( explore participants files timeline search).each do |section| %>
+<% %w( explore participants resources timeline search).each do |section| %>
   <div id="<%= section %>" class="tab-pane <%= explore_button_class(section) %>">
     <% if current_explore_section?(section) %>
       <%= render partial: "explore/#{ section }" %>

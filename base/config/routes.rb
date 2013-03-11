@@ -92,9 +92,6 @@ Rails.application.routes.draw do
 
   get 'audience/index', :as => :audience
   
-  match 'cheesecake' => 'cheesecake#index', :as => :cheesecake  
-  match 'update_cheesecake' => 'cheesecake#update', :as => :update_cheesecake  
-  
   match 'ties' => 'ties#index', :as => :ties
   
   match 'tags' => 'tags#index', :as => 'tags'
