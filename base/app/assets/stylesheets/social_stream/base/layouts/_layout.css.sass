@@ -4,17 +4,3 @@ body
 #wrapper
   @include grid-core($gridColumnWidth, $gridGutterWidth)
 
-#toolbar
-  @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
-  float: left
-
-#sidebar
-  @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
-  float: right
-  margin-left: 2%
-#home,
-#user
-  .activities
-    @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    float: left
-    margin-left: 2%

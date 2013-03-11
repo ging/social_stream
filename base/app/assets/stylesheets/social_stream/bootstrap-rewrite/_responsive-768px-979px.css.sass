@@ -5,21 +5,50 @@
 
 @media (min-width: 768px) and (max-width: 1119px)
 
-  #conversations
+  header.navbar
+    ul
+      margin-top: 13px
+      li
+        a
+          padding: 0px 12px 10px !important
+
+
+  #converstions
     @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    .toolbar-messages
-      @include grid-core-span(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    div.conversations
-      @include grid-core-span(11, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    #toolbar
+      @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
       float: left
-      margin-top: 26px
+    div.conversations
+      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
       .conversation
         @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
         .content_left
           @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          margin-left: 10px
         .content_right
-          @include grid-core-span(9, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
 
+
+  #new_message
+    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    #toolbar
+      @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+    #conversation
+      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+      margin-left: 0px
+  
+  #conversation
+    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    #toolbar
+      @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+    #conversation_full
+      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+      margin-left: 0px
 
 
 
@@ -75,6 +104,24 @@
       @extend .hidden-desktop
       background-color: black
 
+
+  #user
+    #toolbar
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      .logo_home,
+      #avatar_profile
+        float: left
+      .toolbar_menu
+        display: inline-block
+        margin-left: 2%
+    .activities
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin-left: 0
+      .wall_input
+        padding: 5px 13px
+    #sidebar
+      @extend .hidden-phone
+      @extend .hidden-tablet
 
 
 

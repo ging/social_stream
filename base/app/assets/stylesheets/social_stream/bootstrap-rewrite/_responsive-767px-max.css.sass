@@ -7,9 +7,10 @@
 
   header.navbar
     ul
+      margin-top: 13px
       li
         a
-          padding: 10px 8px
+          padding: 0px 8px 10px !important
 
   #home
     #toolbar
@@ -181,17 +182,18 @@
       margin-left: 0
     .conversations
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      float: left
-      width: 97%
       margin-top: 26px
       .conversation
         @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
         .content_left
-          @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
-          margin-right: 20px
+          @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          margin-right: 13px
           margin-left: 0px
         .content_right
           @include grid-core-span(9, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          .action
+            float: right
+            margin: -42px -18px 0 0
     .conversation_full
       h3
         float: left
@@ -203,7 +205,7 @@
 
 
   #contacts
-    .toolbar-home
+    #toolbar
       @extend .hidden-phone
       @extend .hidden-tablet
 
@@ -333,11 +335,16 @@
           margin-bottom: 0px
           float: left
           margin-top: 17px
+    .conversations      
+      .conversation
+        margin-top: 26px
+        .content_left
+          margin-right: 2px
+        .content_right 
+          .action
+            float: right
+            margin: -42px -18px 0 0
 
-    .content_right 
-      .action
-        float: right
-        margin: -42px -18px 0 0
 
   .conversation_full
     margin: 0 auto
