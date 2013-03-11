@@ -4,6 +4,13 @@
 
 
 @media (max-width: 767px)
+
+  header.navbar
+    ul
+      li
+        a
+          padding: 10px 8px
+
   #home
     #toolbar
       @extend .hidden-phone
@@ -151,21 +158,24 @@
   #conversation,
   #new_message
     @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    @include centered
     .toolbar-home
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      background-color: $white
+      @extend.border-radius-5
       ul
-        background-color: $white
-        @extend.border-radius-5
-        padding: 34px
+        @include grid-core-span(8, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        height: 60px
+        margin-left: auto
+        margin-right: auto
         li
-          @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
           display: inline
           margin-bottom: 0px
           float: left
-          margin-top: -15px
+          margin-top: 12px
           a
-            width: 10px
+            width: auto
+            text-align: center
     form.new_message
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 0
@@ -231,13 +241,10 @@
       form.new_user
         padding: 0 10px
         .login_data
-          input
-            &[type="password"]
-              width: 96%
-          input
-            &[type="email"]
-              width: 96%
-  
+          #user_mail,
+          #user_password
+            width: 96%
+        
 
 
   #registration
@@ -321,17 +328,12 @@
     .toolbar-home
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       ul.nav
-        background-color: $white
-        @extend.border-radius-5
-        padding: 34px
         li
-          @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
           display: inline
           margin-bottom: 0px
           float: left
-          margin-top: -15px
-          a
-            width: 10px
+          margin-top: 17px
+
     .content_right 
       .action
         float: right

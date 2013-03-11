@@ -29,7 +29,13 @@
         <%= link_to(raw("<i class='icon_navbar-home'></i> "), root_path)%>
       </li>   
       <li>
-        <%= link_to(raw("<i class='icon_navbar-followers'></i> "), contacts_path) %>
+        <%= link_to(raw("<i class='icon_navbar-contacts'></i> "), contacts_path) %>
+      </li>
+      <li class="hidden-desktop">
+        <%= link_to(raw("<i class='icon_navbar-calendar'></i> "), contacts_path) %>
+      </li>
+      <li>
+        <%= link_to(raw("<i class='icon_navbar-resources'></i> "), documents_path) %>
       </li>
       <li>
         <%= link_to(raw("<i class='icon_navbar-message'></i> "), conversations_path) %> 
