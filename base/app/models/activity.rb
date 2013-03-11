@@ -79,7 +79,7 @@ class Activity < ActiveRecord::Base
 
     select("DISTINCT activities.*").
       roots.
-      includes(:author, :user_author, :owner, :activity_objects, :activity_verb, :relations)
+      includes(:author, :user_author, :owner, :activity_objects, :activity_verb, :relations).
       authored_or_owned_by(senders).
       shared_with(receivers).
       order("created_at desc")
