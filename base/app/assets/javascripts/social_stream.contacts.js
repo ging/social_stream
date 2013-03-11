@@ -78,23 +78,15 @@ SocialStream.Contact = (function($, SS, undefined) {
 
   var sendContactForms = function() {
     $('form.edit_contact[data-status="changed"]').each(function(i, el) {
-      var contact = $(el).closest('div.contact');
-      var contactId = $(contact).attr('data-contact_id');
+      var form = $(el).closest('form.edit_contact');
+      var contactId = $(form).attr('data-contact_id');
 
-      var contacts = $('[data-contact_id="' + contactId + '"]');
-      /*
-         contacts.each(function(i, el) {
-         if ($(el).children('.loading').length === 0)
-         $(el).append('<div class="loading"></div>');
-         });
-
-         $('[data-contact_id="' + contactId + '"] .loading').show();
-         */
+      var contacts = $('form[data-contact_id="' + contactId + '"]');
 
       $('button', contacts).data('resetText', relationSelectText($('option:selected', el)));
       $('button', contacts).attr('data-loading-text', I18n.t('contact.saving'));
       $('button', contacts).button('loading');
-      $('form.edit_contact', contact).submit();
+      form.submit();
     });
   };
 

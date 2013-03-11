@@ -1,29 +1,33 @@
-<section id="toolbar" class="toolbar-home">
+<section id="toolbar" class="toolbar-profile">
   <%= render partial: 'toolbar/logo',
              locals: { subject: subject } %>
 
-  <%= contact_to subject %>
+  <div class="contact-button">
+    <%= contact_to subject %>
+
+    <%= javascript_tag do %>
+      $(function() {
+        SocialStream.Contact.show();
+      });
+    <% end %>
+  </div>
 
   <%= content_for :toolbar_menu do %>
     <div class= "hidden-desktop">
       <%= subject.name %>
     </div>
+
     <li>
       <%= link_to [ subject, :profile ], class: "btn-blue" do  %>
         <i class='icon_tool16-info'></i> <%= t 'menu.information' %>
       <% end %>
     </li>
+
     <li>
       <%= render partial: 'toolbar/groups' %>
     </li>
+
     <% if current_subject.present? && subject != current_subject %>
-
-      <!---- <li>
-       <%= link_to edit_contact_path(current_subject.contact_to!(subject)), class: "btn-blue" do %>
-          <i class='icon_navbar-followers'></i> <%= current_subject.contact_to!(subject).status %>
-        <% end %>
-      </li> -->
-
       <li>
         <%= link_to new_message_path(:receiver => subject.slug), class: "btn-blue" do %>
           <i class='icon_navbar-message-blue'></i> <%= t 'send' %>
