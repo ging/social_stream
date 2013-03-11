@@ -30,9 +30,6 @@ class ContactsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
     # Record who is manipulating the contact, mainly in groups
     @contact.user_author = current_user

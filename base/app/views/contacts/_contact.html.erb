@@ -9,7 +9,7 @@
         <%= link_to(truncate_name(contact.receiver_subject.name), contact.receiver_subject)%>
         
         <div class="x">
-          <%= link_to 'X', contact, :method => :delete, :remote => true %>
+          <%= link_to 'X', contact, method: :delete, remote: true, confirm: t('contact.confirm_delete') %>
         </div>
       </div>
 

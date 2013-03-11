@@ -77,16 +77,19 @@ SocialStream.Contact = (function($, SS, undefined) {
   };
 
   var sendContactForms = function() {
-    $('form.edit_contact[data-status="changed"]').each(function(i, el) {
-      var form = $(el).closest('form.edit_contact');
+    $('form.edit_contact[data-status="changed"]').each(function(i, form) {
       var contactId = $(form).attr('data-contact_id');
-
       var contacts = $('form[data-contact_id="' + contactId + '"]');
 
-      $('button', contacts).data('resetText', relationSelectText($('option:selected', el)));
+      $('button', contacts).data('resetText', relationSelectText($('option:selected', form)));
       $('button', contacts).attr('data-loading-text', I18n.t('contact.saving'));
       $('button', contacts).button('loading');
-      form.submit();
+
+      if ($('option:selected', form).length > 0) {
+        form.submit();
+      } else {
+        
+      }
     });
   };
 
@@ -122,7 +125,7 @@ SocialStream.Contact = (function($, SS, undefined) {
   };
 
   var updateForm = function(options) {
-    var form = $('[data-contact_id="' + options.id + '"] form.edit_contact');
+    var form = $('form[data-contact_id="' + options.id + '"]');
 
     form.removeAttr('data-status');
     storeContactFormValues(form);
@@ -131,11 +134,10 @@ SocialStream.Contact = (function($, SS, undefined) {
   var clearLoading = function(options) {
     var contacts = $('[data-contact_id="' + options.id + '"]');
 
-    //  $('.loading', contacts).hide();
-
     $('button', contacts).button('reset');
   };
 
+  // Replace contact in suggestions and pendings
   var replaceContact = function(options) {
     $('[data-contact_id="' + options.id + '"]').each(function(i, el) {
       $.each([ 'suggestions', 'pendings' ], function(i, section) {
