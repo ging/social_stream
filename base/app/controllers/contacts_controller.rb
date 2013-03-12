@@ -54,7 +54,13 @@ class ContactsController < ApplicationController
   end
 
   def destroy
-    @contact.relation_ids = [Relation::Reject.instance.id]
+    relation_ids = []
+
+    if params[:reject].present?
+      relation_ids << Relation::Reject.instance.id
+    end
+
+    @contact.relation_ids = []
 
     respond_to do |format|
       format.js
@@ -66,7 +72,7 @@ class ContactsController < ApplicationController
     @contact = current_subject.suggestions.first
 
     respond_to do |format|
-      format.html { @contact.present? ? render(partial: @contact) : raise(ActiveRecord::RecordNotFound) }
+      format.html { @contact.present? ? render(partial: @contact) : render(text: "") }
       format.json { render json: @contact }
     end
   end
@@ -75,7 +81,7 @@ class ContactsController < ApplicationController
     @contact = current_subject.pending_contacts.last
 
     respond_to do |format|
-      format.html { @contact.present? ? render(partial: @contact) : raise(ActiveRecord::RecordNotFound) }
+      format.html { @contact.present? ? render(partial: @contact) : render(text: "") }
       format.json { render json: @contact }
     end
   end

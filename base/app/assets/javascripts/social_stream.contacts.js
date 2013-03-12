@@ -31,6 +31,16 @@ SocialStream.Contact = (function($, SS, undefined) {
     $.each(updateCallbacks, function(i, callback){ callback(options); });
   };
 
+  var destroyCallbacks = [];
+
+  var addDestroyCallback = function(callback){
+    destroyCallbacks.push(callback);
+  };
+
+  var destroy = function(options){
+    $.each(destroyCallbacks, function(i, callback){ callback(options); });
+  };
+
   var getForms = function(id) {
     return $('[data-contact_id="' + id + '"]');
   };
@@ -156,7 +166,7 @@ SocialStream.Contact = (function($, SS, undefined) {
     var forms = getForms(options.id);
 
     storeFormValues(forms);
-    $('button', contacts).data('resetText', relationSelectText($('option:selected', forms)));
+    $('button', forms).data('resetText', relationSelectText($('option:selected', forms)));
     forms.removeAttr('data-status');
     $('button', forms).button('reset');
   };
@@ -166,7 +176,7 @@ SocialStream.Contact = (function($, SS, undefined) {
 
     restoreFormValues(forms);
     forms.removeAttr('data-status');
-    $('button', contacts).data('resetText', relationSelectText($('option:selected', forms)));
+    $('button', forms).data('resetText', relationSelectText($('option:selected', forms)));
     $('button', forms).button('reset');
   };
 
@@ -184,19 +194,34 @@ SocialStream.Contact = (function($, SS, undefined) {
   };
 
   var updateTemplate = function(el, path) {
+    var contact = $(el).closest('.contact');
+
     $.ajax({
       url: path,
       dataType: 'html',
       type: 'GET',
       success: function(data) {
-        $(el).fadeOut('slow', function() {
-          $(data).replaceAll(el).fadeIn();
+        $(contact).fadeOut('slow', function() {
+          $(data).replaceAll(contact).fadeIn();
 
           initContactButtons();
         });
       }
     });
   };
+
+  var checkAndHideContact = function(options) {
+    var forms = getForms(options.id);
+
+    if ($('option:selected', forms).length === 0) {
+      forms.closest('.contact').hide('slow');
+    }
+  };
+
+  var hideContact = function(options) {
+    getForms(options.id).closest('.contact').hide('slow');
+  };
+
 
   // Select2
   var select2 = function(selector) {
@@ -236,6 +261,9 @@ SocialStream.Contact = (function($, SS, undefined) {
 
   addUpdateCallback(updateForms);
   addUpdateCallback(replaceContact);
+  addUpdateCallback(checkAndHideContact);
+
+  addDestroyCallback(hideContact);
 
   // FIXME There is probably a more efficient way to do this..
   $(function() {
@@ -247,6 +275,7 @@ SocialStream.Contact = (function($, SS, undefined) {
     index: index,
     show: show,
     update: update,
-    select2: select2
+    select2: select2,
+    destroy: destroy
   };
 })(jQuery, SocialStream);
