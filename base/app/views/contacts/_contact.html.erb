@@ -1,5 +1,5 @@
 <section class="content">
-  <%= div_for contact, 'data-contact_id' => contact.id do %>
+  <%= div_for contact do %>
     <div class="avatar">
       <%= link_to(image_tag(contact.receiver.logo.url(:small)), contact.receiver_subject) %>
     </div>

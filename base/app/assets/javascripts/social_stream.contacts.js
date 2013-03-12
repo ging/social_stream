@@ -31,6 +31,10 @@ SocialStream.Contact = (function($, SS, undefined) {
     $.each(updateCallbacks, function(i, callback){ callback(options); });
   };
 
+  var getForms = function(id) {
+    return $('[data-contact_id="' + id + '"]');
+  };
+
   var initTabs = function() {
     $('.contacts ul.nav-tabs a').click(function() {
       if ($(this).attr('data-loaded'))
@@ -52,15 +56,13 @@ SocialStream.Contact = (function($, SS, undefined) {
     });
 
     // Forms
-    $('form.edit_contact').each(function(i, el) {
-      storeContactFormValues(el);
-    });
+    storeFormValues($('form.edit_contact'));
 
     $('form.edit_contact ul.dropdown-menu input[type="checkbox"]').change(function() {
       evalFormStatus(this);
     });
 
-    $('form.edit_contact button.dropdown-toggle').on('click.dropdown.data-api', sendContactForms);
+    $('form.edit_contact button.dropdown-toggle').on('click.dropdown.data-api', saveForms);
   };
 
   var relationSelectText = function(options) {
@@ -76,25 +78,42 @@ SocialStream.Contact = (function($, SS, undefined) {
     return msg + '<b class="caret"></b>';
   };
 
-  var sendContactForms = function() {
+  var saveForms = function() {
     $('form.edit_contact[data-status="changed"]').each(function(i, form) {
       var contactId = $(form).attr('data-contact_id');
       var contacts = $('form[data-contact_id="' + contactId + '"]');
 
-      $('button', contacts).data('resetText', relationSelectText($('option:selected', form)));
       $('button', contacts).attr('data-loading-text', I18n.t('contact.saving'));
       $('button', contacts).button('loading');
 
       if ($('option:selected', form).length > 0) {
-        form.submit();
+        $(form).submit();
       } else {
-        
+        if ( confirm(I18n.t('contact.confirm_delete')) ) {
+          $(form).submit();
+        } else {
+          resetForms({ id: contactId });
+        }
       }
     });
   };
 
-  var storeContactFormValues = function(el) {
-    $(el).data('relations', getInputValues(el));
+  var storeFormValues = function(el) {
+    $(el).each(function() {
+      $(this).data('relations', getInputValues($(this)));
+    });
+  };
+
+  var restoreFormValues = function(el) {
+    var values = $(el).data('relations');
+    var select = $('select[name*="relation_ids"]', el);
+    
+    $('option', select).each(function() {
+      $(this).attr('selected', $.inArray($(this).val(), values) >= 0);
+
+    });
+
+    select.multiselect('refresh');
   };
 
   // Dictate if some form has changed its status
@@ -120,21 +139,35 @@ SocialStream.Contact = (function($, SS, undefined) {
     });
   };
 
+  // Dictate if some form has changed its status
+  var setInputValues = function(form) {
+    return $('ul.dropdown-menu input[type="checkbox"]', form).
+      map(function() {
+      if ($(this).is(':checked'))
+        return $(this).val();
+    });
+  };
+
   var initContactFormsHtmlListener = function() {
-    $('html').on('click.dropdown.data-api', sendContactForms);
+    $('html').on('click.dropdown.data-api', saveForms);
   };
 
-  var updateForm = function(options) {
-    var form = $('form[data-contact_id="' + options.id + '"]');
+  var updateForms = function(options) {
+    var forms = getForms(options.id);
 
-    form.removeAttr('data-status');
-    storeContactFormValues(form);
+    storeFormValues(forms);
+    $('button', contacts).data('resetText', relationSelectText($('option:selected', forms)));
+    forms.removeAttr('data-status');
+    $('button', forms).button('reset');
   };
 
-  var clearLoading = function(options) {
-    var contacts = $('[data-contact_id="' + options.id + '"]');
+  var resetForms = function(options) {
+    var forms = getForms(options.id);
 
-    $('button', contacts).button('reset');
+    restoreFormValues(forms);
+    forms.removeAttr('data-status');
+    $('button', contacts).data('resetText', relationSelectText($('option:selected', forms)));
+    $('button', forms).button('reset');
   };
 
   // Replace contact in suggestions and pendings
@@ -201,8 +234,7 @@ SocialStream.Contact = (function($, SS, undefined) {
   addIndexCallback(initTabs);
   addIndexCallback(initContactButtons);
 
-  addUpdateCallback(updateForm);
-  addUpdateCallback(clearLoading);
+  addUpdateCallback(updateForms);
   addUpdateCallback(replaceContact);
 
   // FIXME There is probably a more efficient way to do this..
