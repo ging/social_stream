@@ -3,7 +3,7 @@
 // --------------------------------------------------
 
 
-@media (min-width: 768px) and (max-width: 1119px)
+@media (min-width: 768px) and (max-width: 979px)
 
   header.navbar
     ul
@@ -12,6 +12,35 @@
         a
           padding: 0px 12px 10px !important
 
+
+
+  footer
+    z-index: 10
+    background-color: $white
+    position: fixed
+    width: 100% !important
+    margin-left: -20px !important
+    padding-top: 20px !important
+
+
+
+  #home
+    #toolbar
+      @extend .hidden-phone
+      @extend .hidden-tablet
+      #avatar_profile
+        float: left
+      .toolbar_menu
+        display: inline-block
+        margin-left: 2%
+    .activities
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin-left: 0
+      .wall_input
+        padding: 5px 13px
+    #sidebar
+      @extend .hidden-phone
+      @extend .hidden-tablet
 
   #converstions
     @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)

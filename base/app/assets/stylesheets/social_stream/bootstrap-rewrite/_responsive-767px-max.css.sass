@@ -6,11 +6,19 @@
 @media (max-width: 767px)
 
   header.navbar
-    ul
+    ul.nav
       margin-top: 13px
       li
         a
           padding: 0px 8px 10px !important
+  footer
+    z-index: 10
+    background-color: $white
+    position: fixed
+    width: 100% !important
+    margin-left: -20px !important
+    padding-top: 20px !important
+
 
   #home
     #toolbar
@@ -110,6 +118,8 @@
       border-bottom: 1px solid #c4c4c4
       text-align: center
 
+
+
   #conversation
     h2
       @extend .hidden-phone
@@ -126,6 +136,8 @@
     #toolbar
       @extend .hidden-phone
       @extend .hidden-tablet
+
+
 
   #new_site_client
     #toolbar
@@ -149,9 +161,6 @@
           textarea
             @include grid-core-span(11, $fluidGridColumnWidth, $fluidGridGutterWidth)
             margin-left: 2.9%
-
-
-
 
 
 
@@ -271,6 +280,9 @@
 
 
   #forgot-pass
+    .forgot-img
+      @extend .hidden-phone
+      @extend .hidden-tablet
     .forgot
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 0
@@ -278,9 +290,6 @@
       padding: 0 10px
       h3
         margin: 17px 12px 20px 0
-      .forgot-img
-        @extend .hidden-phone
-        @extend .hidden-tablet
 
       .div_password
         @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
@@ -307,11 +316,17 @@
   #home,
   #user
     .activities
-      .activity
-        .avatar
-          .media-object
-            float: left
-            margin-right: 3%
+      .wall_input
+        #new_post
+          input
+            &[type="text"] 
+              padding-left: 5%
+              padding-right: 5%
+              width: 89%
+          .wall_input-actions
+            .btn-group
+              margin-top: 10px
+
 
   #sidebar
     @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
