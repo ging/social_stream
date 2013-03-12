@@ -86,14 +86,6 @@ describe ContactsController do
       @contact = @user.ego_contact
     end
 
-    it "should redirect edit" do
-      sign_in @user
-
-      get :edit, :id => @contact
-
-      response.should redirect_to(home_path)
-    end
-
     it "should render update" do
       sign_in @user
 
