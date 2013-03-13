@@ -12,15 +12,21 @@
 
     <div class="tab-content">
 
-      <input type="text" class="pull-right" placeholder="filter">
+      <div id="contacts-loading">
+        <%= render partial: 'layouts/loading' %>
+      </div>
     
       <% profile_or_current_subject.class.contact_index_models.each do |type| %>
         <div id="<%= type %>" class="tab-pane <%= 'active' if current_contact_section?(type) %>">
-          <% if current_contact_section?(type) %>
-            <%= render @contacts %>
-          <% else %>
-            <%= render partial: 'layouts/loading' %>
-          <% end %>
+          <%= text_field_tag "contact-filter-#{ type }", (current_contact_section?(type) ? params[:q] : ""), class: "pull-right contact-filter", placeholder: "filter", autocomplete: "off" %>
+
+          <div class="contact-list">
+            <% if current_contact_section?(type) %>
+              <%= render @contacts %>
+            <% else %>
+              <%= render partial: 'layouts/loading' %>
+            <% end %>
+          </div>
         </div>
       <% end %>
     </div>

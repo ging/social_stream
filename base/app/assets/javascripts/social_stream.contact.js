@@ -57,11 +57,14 @@ SocialStream.Contact = (function($, SS, undefined) {
 
     $.ajax({
       url: tab.attr('data-path'),
-      data: { type: tab.attr('href').replace('#', '') },
+      data: {
+        type: tab.attr('href').replace('#', ''),
+        q: $('#contact-filter').val()
+      },
       dataType: 'html',
       type: 'GET',
       success: function(data) {
-        $(tab.attr('href')).html(data);
+        $(tab.attr('href')).find('.contact-list').html(data);
         tab.attr('data-loaded', 'true');
         index();
       }
@@ -167,6 +170,37 @@ SocialStream.Contact = (function($, SS, undefined) {
     });
   };
 
+  var initFilter = function() {
+    $('.contact-filter').on('input', filter);
+  };
+    
+  var filter = function() {
+    var q = $(this).val();
+    var currentTab = $('.contacts .tab-pane.active');
+
+    console.log(currentTab.attr('id'));
+
+    $('#contacts-loading').show();
+
+    $.ajax({
+      data: {
+        q: q,
+        type: currentTab.attr('id')
+      },
+      dataType: 'html',
+      type: 'GET',
+      success: function(data) {
+        $('#contacts-loading').hide();
+         currentTab.find('.contact-list').html(data);
+        index();
+      }
+    });
+  };
+
+  var hideLoading = function() {
+    $('#contacts-loading').hide();
+  };
+
   var initContactFormsHtmlListener = function() {
     $('html').on('click.dropdown.data-api', saveForms);
   };
@@ -267,6 +301,8 @@ SocialStream.Contact = (function($, SS, undefined) {
 
   addIndexCallback(initTabs);
   addIndexCallback(initContactButtons);
+  addIndexCallback(initFilter);
+  addIndexCallback(hideLoading);
 
   addUpdateCallback(updateForms);
   addUpdateCallback(replaceContact);
