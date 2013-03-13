@@ -171,12 +171,51 @@
 
 
   #contacts
-    .toolbar-home
-      @extend .hidden-tablet
+    #toolbar
+      @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+      .user
+        .logo_home,
+        #avatar_profile
+      ul.buttons
+        margin-left: 0
+        li
+          a
+            @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
     .contacts
       @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
       float: left
-      margin-left: 20px
+      margin-left: 2%
+      .tab-content
+        .contact
+          @include grid-core-span(4, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          float: left
+          .avatar
+            width: 55px !important
+          .data
+            width: 150px
+            margin: 4px 0px 2px -7px
+          .info
+            font-size: 11px
+            color: #ccc
+            z-index: 1
+            margin-top: 4px
+          .add
+            margin-top: 5px
+
+
+
+
+    #sidebar
+      @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      #suggestions,
+      #pendings
+        .avatar
+          width: 45px
+          margin-left: -5px
+        .data
+          width: 143px
+          margin: 0px
 
 
 
