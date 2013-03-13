@@ -4,3 +4,20 @@
 
 
 @media (min-width: 1200px)
+  #user
+    #sidebar
+      #sidebar_calendar
+        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        #month_top, 
+        #month_bottom
+          font-size: 17px
+        #days 
+          tr
+            height: 32px 
+            td
+              padding-left: 9px
+              padding-right: 9px
+              font-size: 17px
+      #suggestions,
+      #pendings
+        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)

@@ -1,28 +1,27 @@
 <section id="toolbar" class="toolbar-profile">
-  <%= render partial: 'toolbar/logo',
-             locals: { subject: subject } %>
+  <div class="user">
+    <%= render partial: 'toolbar/logo',
+               locals: { subject: subject } %>
 
-  <div class="contact-button">
-    <%= contact_to subject %>
+    <div class="contact-button">
+      <%= contact_to subject %>
 
-    <%= javascript_tag do %>
-      $(function() {
-        SocialStream.Contact.show();
-      });
-    <% end %>
-  </div>
-
-  <%= content_for :toolbar_menu do %>
-    <div class= "hidden-desktop">
-      <%= subject.name %>
+      <%= javascript_tag do %>
+        $(function() {
+          SocialStream.Contact.show();
+        });
+      <% end %>
     </div>
 
+    <%= content_for :toolbar_menu do %>
+    
+  </div>
+  <ul class="buttons">
     <li>
       <%= link_to [ subject, :profile ], class: "btn-blue" do  %>
         <i class='icon_tool16-info'></i> <%= t 'menu.information' %>
       <% end %>
     </li>
-
     <li>
       <%= render partial: 'toolbar/groups' %>
     </li>
@@ -34,10 +33,16 @@
         <% end %>
       </li>
     <% end %>
-    <div class="base_items"/>
-  <% end %>
+    <li>
+      <%= link_to [ subject, :profile ], class: "btn-blue" do  %>
+        <i class='icon_navbar-contacts'></i> <%= t 'menu.contacts' %>
+      <% end %>
+    </li>
+  </ul>
+  <div class="base_items"/>
+<% end %>
 
-  <%= render partial: 'toolbar/menu' %>
+<%= render partial: 'toolbar/menu' %>
 
-  <%= render partial: 'toolbar/contacts', locals: { subject: subject } %>
+<%= render partial: 'toolbar/contacts', locals: { subject: subject } %>
 </section>

@@ -20,20 +20,19 @@
     padding-top: 20px !important
 
 
+
+
   #home
     #toolbar
       @extend .hidden-phone
       @extend .hidden-tablet
-      #avatar_profile
-        float: left
-      .toolbar_menu
-        display: inline-block
-        margin-left: 2%
+        
     .activities
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 0
       .wall_input
         padding: 5px 13px
+
     #sidebar
       @extend .hidden-phone
       @extend .hidden-tablet
@@ -44,12 +43,23 @@
   #user
     #toolbar
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      .logo_home,
-      #avatar_profile
+      .user
+        @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
         float: left
-      .toolbar_menu
+        .logo_home,
+        #avatar_profile
+          float: left
+      ul.buttons
+        @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
         display: inline-block
+        float: left
         margin-left: 2%
+        li
+          a
+            @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      .contacts-toolbar
+        @extend .hidden-phone
+
     .activities
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 0
@@ -139,6 +149,7 @@
 
 
 
+
   #new_site_client
     #toolbar
       @extend .hidden-phone
@@ -161,6 +172,7 @@
           textarea
             @include grid-core-span(11, $fluidGridColumnWidth, $fluidGridGutterWidth)
             margin-left: 2.9%
+
 
 
 
@@ -220,6 +232,7 @@
 
 
 
+
   #documents
     #toolbar
       @extend .hidden-phone
@@ -227,6 +240,7 @@
     input
       &[type="text"]
         float: right
+
 
 
 
@@ -256,6 +270,7 @@
           #user_password
             width: 96%
         
+
 
 
   #registration

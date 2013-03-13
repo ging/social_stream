@@ -42,6 +42,41 @@
       @extend .hidden-phone
       @extend .hidden-tablet
 
+
+
+
+  #user
+    #toolbar
+      @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+      .user
+        .logo_home,
+        #avatar_profile
+      ul.buttons
+        margin-left: 0
+        li
+          a
+            @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    .activities
+      @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin: 0 5%
+      .wall_input
+        padding: 5px 13px
+    #sidebar
+      @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      #suggestions,
+      #pendings
+        .avatar
+          width: 45px
+          margin-left: -5px
+        .data
+          width: 127px
+          margin-left: 3px
+
+
+
+
+
   #converstions
     @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
     #toolbar
@@ -132,25 +167,6 @@
     #toolbar
       @extend .hidden-desktop
       background-color: black
-
-
-  #user
-    #toolbar
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      .logo_home,
-      #avatar_profile
-        float: left
-      .toolbar_menu
-        display: inline-block
-        margin-left: 2%
-    .activities
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      margin-left: 0
-      .wall_input
-        padding: 5px 13px
-    #sidebar
-      @extend .hidden-phone
-      @extend .hidden-tablet
 
 
 

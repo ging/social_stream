@@ -1,4 +1,4 @@
-<section class="hidden-phone"
+<section class="contacts-toolbar"
   <% if (cs = subject.contact_subjects(:direction => :sent).first(6)).present? %>
     <h4>
       <%= t('contact.n', :count => subject.positive_sent_contact_actors.count) %>

@@ -4,7 +4,15 @@
 
 
 @media (min-width: 768px) and (max-width: 979px) 
+  #user
+    #sidebar
+      #sidebar_calendar
+        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        #days tr td
+          padding-left: 5px
+          padding-right: 5px
+      #suggestions,
+      #pendings
+        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
 
-  #days tr td
-    padding-left: 3px
-    padding-right: 3px
+      

@@ -27,6 +27,30 @@
 
 
 
+  #user
+    #toolbar
+      @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+      .user
+        .logo_home,
+        #avatar_profile
+      ul.buttons
+        margin-left: 0
+        li
+          a
+            @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    .activities
+      @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin-left: 2%
+      .wall_input
+        padding: 5px 13px
+    #sidebar
+      @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: right
+      
+
+
+
   #converstions
     .toolbar-messages
       @include grid-core-span(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
