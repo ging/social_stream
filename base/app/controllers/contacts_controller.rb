@@ -5,7 +5,8 @@ class ContactsController < ApplicationController
   def index
     subject = profile_or_current_subject!
 
-    params[:d] ||= 'sent'
+    params[:d]    ||= 'sent'
+    params[:type] ||= subject.class.contact_index_models.first.to_s
 
     @contacts = Contact
 
@@ -19,13 +20,13 @@ class ContactsController < ApplicationController
     @contacts =
       @contacts.
         positive.
+        merge(Actor.subject_type(params[:type])).
         merge(Actor.name_search(params[:q])).
         related_by_param(params[:relation]).
         page(params[:page])
 
     respond_to do |format|
-      format.html
-      format.js
+      format.html { render @contacts if request.xhr? }
       format.json { render json: @contacts.map(&:receiver), helper: self }
     end
   end

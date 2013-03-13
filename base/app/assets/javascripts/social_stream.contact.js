@@ -46,16 +46,25 @@ SocialStream.Contact = (function($, SS, undefined) {
   };
 
   var initTabs = function() {
-    $('.contacts ul.nav-tabs a').click(function() {
-      if ($(this).attr('data-loaded'))
-        return;
+    $('.contacts ul.nav-tabs a').click(loadTab);
+  };
 
-      $.ajax({
-        url: $(this).attr('data-path'),
-        data: { d: $(this).attr('href').replace('#', '') },
-        dataType: 'script',
-        type: 'GET'
-      });
+  var loadTab = function() {
+    var tab = $(this);
+
+    if (tab.attr('data-loaded'))
+      return;
+
+    $.ajax({
+      url: tab.attr('data-path'),
+      data: { type: tab.attr('href').replace('#', '') },
+      dataType: 'html',
+      type: 'GET',
+      success: function(data) {
+        $(tab.attr('href')).html(data);
+        tab.attr('data-loaded', 'true');
+        index();
+      }
     });
   };
 

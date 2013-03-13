@@ -28,6 +28,9 @@ module SocialStream
   mattr_accessor :suggested_models
   @@suggested_models = [ :user, :group ]
 
+  mattr_accessor :contact_index_models
+  @@contact_index_models = [ :user, :group ]
+
   mattr_accessor :resque_access
   @@resque_access = true
  
