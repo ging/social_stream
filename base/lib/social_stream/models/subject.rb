@@ -85,6 +85,13 @@ module SocialStream
           find_by_slug(perm) ||
             raise(ActiveRecord::RecordNotFound)
         end 
+
+        # The types of actors that appear in the contacts/index
+        #
+        # You can customize this in each class
+        def contact_index_models
+          SocialStream.contact_index_models
+        end
       end
 
       def to_param

@@ -27,4 +27,8 @@ module ContactsHelper
       end
     end
   end
+
+  def current_contact_section? section
+    params[:type] == section.to_s
+  end
 end

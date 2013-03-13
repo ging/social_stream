@@ -1,4 +1,6 @@
-<%= div_for contact do %>
+
+<% destroy_params ||=  {} %>
+<section class="contact" id="<%= dom_id contact %>">
   <div class="avatar">
     <%= link_to(image_tag(contact.receiver.logo.url(:small)), contact.receiver_subject) %>
   </div>
@@ -6,19 +8,19 @@
   <div class="data">
     <div class="name">
       <%= link_to(truncate_name(contact.receiver_subject.name), contact.receiver_subject)%>
-      
       <div class="x">
-        <%= link_to 'X', contact, method: :delete, remote: true, confirm: t('contact.confirm_delete') %>
+        <%= link_to 'X', contact_path(contact, destroy_params), method: :delete, remote: true, confirm: t('contact.confirm_delete') %>
       </div>
     </div>
-
-    <div class="info">
-      <%= contact_brief(contact.receiver_subject) %>
-    </div>
-
-    <div class="add">
-      <%= contact_link(contact) %>
-    </div>
   </div>
-<% end %>
+
+  <div class="info">
+    <%= contact_brief(contact.receiver_subject) %>
+  </div>
+
+  <div class="add">
+    <%= contact_link(contact) %>
+  </div>
+</section>
+
 

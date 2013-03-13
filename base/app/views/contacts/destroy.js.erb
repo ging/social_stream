@@ -1,6 +1,7 @@
-<% 
-  new_contact = @contact.replied? ? current_subject.pending_contacts.last : current_subject.suggestions.first
-  render_string = new_contact.present? ? render(new_contact) : ""
-%>
-
-$('#<%= dom_id(@contact) %>').replaceWith("<%= escape_javascript render_string %>");
+<% if @contact.errors.blank? %>
+SocialStream.Contact.destroy({
+  id: "<%= @contact.id %>"
+});
+<% else %>
+SocialStream.Flash.error("<%= @contact.errors.full_messages.to_sentence %>");
+<% end %>

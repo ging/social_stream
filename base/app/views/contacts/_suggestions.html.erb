@@ -6,7 +6,7 @@
       </h4>
     </header>
     <article class="contents">
-      <%= render :partial => "contacts/contact", :collection => sgs %>
+    <%= render :partial => "contacts/contact", :collection => sgs, :locals => { destroy_params: { reject: true } } %>
     </article>
   </section>
 <%end%>

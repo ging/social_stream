@@ -129,6 +129,12 @@ class Actor < ActiveRecord::Base
       merge(Permission.follow)
   }
 
+  scope :subject_type, lambda { |t|
+    if t.present?
+      where(subject_type: t)
+    end
+  }
+
   after_create :create_initial_relations
   
   after_create :save_or_create_profile

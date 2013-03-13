@@ -30,49 +30,48 @@
       width: 120px
       float: right
       
-#sent,
-#received
-  margin: 30px 0 0 20px
-  .content
-    @include makeColumnoMargin(3, 0)
-    .contact
-      padding: 5px 4px
-      margin-right: 10px
-    .avatar
-      @include makeColumnoMargin(1, 0)
-      display: inline
-      img
-        @include border-radius(5px)
-        width: 45px 
-     
-    .data
-      @include makeColumn(2, 0)
-      display: inline-block
-      margin: 0px 0px 16px -7px
-      .name
-        color: $black
-        .x
-          font-size: 12px
+  .tab-pane
+    margin: 30px 0 0 20px
+    .content
+      @include makeColumnoMargin(3, 0)
+      .contact
+        padding: 5px 4px
+        margin-right: 10px
+      .avatar
+        @include makeColumnoMargin(1, 0)
+        display: inline
+        img
+          @include border-radius(5px)
+          width: 45px 
+       
+      .data
+        @include makeColumn(2, 0)
+        display: inline-block
+        margin: 0px 0px 16px -7px
+        .name
           color: $black
-          a
-            float: right
-            text-decoration: none
-            margin-top: -19px
-      .info
-        font-size: 12px
-        color: $grayLight
-    .add
-      font-size: 10px
-      z-index: 1
-      .edit_contact
-        margin-bottom: 0px
-        .open
-          .active
-            label
-              color: $white
-      .dropdown-toggle
-        margin-left: 0 
-        widht: 100%
+          .x
+            font-size: 12px
+            color: $black
+            a
+              float: right
+              text-decoration: none
+              margin-top: -19px
+        .info
+          font-size: 12px
+          color: $grayLight
+      .add
+        font-size: 10px
+        z-index: 1
+        .edit_contact
+          margin-bottom: 0px
+          .open
+            .active
+              label
+                color: $white
+        .dropdown-toggle
+          margin-left: 0 
+          widht: 100%
 
 #contact-form
   ul

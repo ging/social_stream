@@ -28,6 +28,9 @@ module SocialStream
   mattr_accessor :suggested_models
   @@suggested_models = [ :user, :group ]
 
+  mattr_accessor :contact_index_models
+  @@contact_index_models = [ :user, :group ]
+
   mattr_accessor :resque_access
   @@resque_access = true
  
@@ -48,32 +51,6 @@ module SocialStream
     def objects
       @@objects.push(:actor) unless @@objects.include?(:actor)
       @@objects
-    end
-
-    # Load models for rewrite in application
-    #
-    # Use this method when you want to reopen some model in SocialStream in order
-    # to add or modify functionality
-    #
-    # Example, in app/models/user.rb
-    #   SocialStream.require_model('user')
-    #
-    #   class User
-    #     some_new_functionality
-    #   end
-    #
-    # Maybe Rails provides some method to do this, in this case, please tell!!
-    def require_model(m)
-      paths = $:.find_all{ |f| f =~ Regexp.new(File.join('social_stream.*', 'app', 'models')) }
-
-      raise "Can't find social_stream path" if paths.blank?
-
-      paths.each do |path|
-        if File.exists?(File.join(path, "#{m}.rb"))
-          require_dependency File.join(path, m)
-        end
-      end
-
     end
   end
 end
