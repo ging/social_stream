@@ -467,34 +467,6 @@ class Actor < ActiveRecord::Base
   def common_contacts_count(subject)
     (sent_active_contact_ids & subject.sent_active_contact_ids).size
   end
- 
-  # The 'like' qualifications emmited to this actor
-  def likes
-    Activity.joins(:activity_verb).where('activity_verbs.name' => "like").
-             joins(:activity_objects).where('activity_objects.id' => activity_object_id)
-  end
-  
-  def liked_by(subject) #:nodoc:
-    likes.authored_by(subject)
-  end
-  
-  # Does subject like this {Actor}?
-  def liked_by?(subject)
-    liked_by(subject).present?
-  end
-  
-  # Build a new activity where subject like this
-  def new_like(subject, user)
-    a = Activity.new :verb           => "like",
-                     :author_id      => Actor.normalize_id(subject),
-                     :user_author_id => Actor.normalize_id(user),
-                     :owner_id       => id,
-                     :relation_ids   => Array(Relation::Public.instance.id)
-    
-    a.activity_objects << activity_object           
-                    
-    a             
-  end
   
   # Use slug as parameter
   def to_param
