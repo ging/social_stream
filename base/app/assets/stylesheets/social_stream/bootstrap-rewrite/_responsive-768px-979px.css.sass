@@ -48,7 +48,8 @@
 
 
 
-  #user
+  #user,
+  #group
     #toolbar
       @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
       float: left
@@ -175,36 +176,22 @@
 
   #contacts
     #toolbar
-      @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      float: left
-      .user
-        .logo_home,
-        #avatar_profile
-      ul.buttons
-        margin-left: 0
-        li
-          a
-            @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      @extend .hidden-tablet
     .contacts
-      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       float: left
-      margin-left: 2%
+      margin-left: 0
       .tab-content
         .contact
-          @include grid-core-span(4, $fluidGridColumnWidth, $fluidGridGutterWidth)
-          float: left
+          margin: 4px 22px 4px 18px
           .avatar
-            width: 55px !important
-          .data
-            width: 150px
-            margin: 4px 0px 2px -7px
+            width: 45px !important
           .info
             font-size: 11px
             color: #ccc
             z-index: 1
-            margin-top: 4px
           .add
-            margin-top: 5px
+            margin-top: 2px
 
 
 

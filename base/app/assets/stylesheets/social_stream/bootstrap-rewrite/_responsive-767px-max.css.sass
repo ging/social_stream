@@ -40,7 +40,8 @@
 
 
 
-  #user
+  #user,
+  #group
     #toolbar
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       .user
@@ -229,6 +230,21 @@
     #toolbar
       @extend .hidden-phone
       @extend .hidden-tablet
+    .contacts
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+      margin-left: 0
+      .tab-content
+        .contact
+          margin: 4px 22px 4px 18px
+          .avatar
+            width: 45px !important
+          .info
+            font-size: 11px
+            color: #ccc
+            z-index: 1
+          .add
+            margin-top: 2px
 
 
 
@@ -329,7 +345,8 @@
           padding: 10px 7px 10px
 
   #home,
-  #user
+  #user,
+  #group
     .activities
       .wall_input
         #new_post
