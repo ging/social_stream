@@ -6,18 +6,27 @@
     display: inline-block
 header
   .navbar-inner
-    .logo
+    .logo,
+    .logo-responsive
       float: left
       padding-top: 4px
+    .logo
+      @extend .hidden-phone
+      @extend .hidden-tablet
+    .logo-responsive
+      @extend .hidden-desktop
     .search-mobile
+      @extend .hidden-desktop
       float: left
       margin-top: 17px
       margin-left: 4px
     .search-nav
+      @extend .hidden-phone
       float: left
       width: 152px
       margin-top: 5px 0 0 20px
     .explore-nav
+      @extend .hidden-phone
       height: 50px
       width: 94px
       float: left
@@ -27,7 +36,10 @@ header
   img
     width: 20px
   .name
+    @extend .hidden-phone
     vertical-align: bottom
+  .calendar_icon
+    @extend .hidden-desktop
 
 
 .dropdown
