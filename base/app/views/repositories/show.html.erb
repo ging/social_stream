@@ -1,0 +1,15 @@
+<section id="repository">
+  <% if profile_subject? %>
+    <%= render partial: 'toolbar/profile', locals: { subject: profile_subject } %>
+  <% else %>
+    <%= render partial: 'toolbar/home' %>
+  <% end %>
+
+  <section class="repository">
+    <%= render @collection %>
+  </section>
+
+  <%= javascript_tag do %>
+    SocialStream.Repository.show();
+  <% end %>
+</section>

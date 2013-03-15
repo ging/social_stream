@@ -31,6 +31,9 @@ module SocialStream
   mattr_accessor :contact_index_models
   @@contact_index_models = [ :user, :group ]
 
+  mattr_accessor :repository_models
+  @@repository_models = []
+
   mattr_accessor :resque_access
   @@resque_access = true
  

@@ -91,7 +91,7 @@ module SocialStream
     SocialStream.extended_search_models.push(o) unless SocialStream.extended_search_models.include?(o)
     end
     
-    %w(objects activity_forms).each do |m|
+    %w(objects activity_forms repository_models).each do |m|
       SocialStream.__send__(m).push(:document) unless SocialStream.__send__(m).include?(:document)
     end
   end

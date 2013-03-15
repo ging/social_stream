@@ -9,7 +9,7 @@ module SocialStream
       SocialStream.__send__(m).push(:link) unless SocialStream.__send__(m).include?(:link)
     end
 
-    %w(objects).each do |m|
+    %w(objects repository_models).each do |m|
       SocialStream.__send__(m).push(:link) unless SocialStream.__send__(m).include?(:link)
     end
     

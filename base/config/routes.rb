@@ -22,6 +22,11 @@ Rails.application.routes.draw do
           get 'search', :on => :collection
         end
       end
+
+      # Repository models are configured in config/initializers/social_stream.rb
+      if SocialStream.repository_models.present?
+        resource :repository
+      end
     end
   end
 
@@ -40,6 +45,11 @@ Rails.application.routes.draw do
   end
 
   resources :comments
+
+  # Repository models are configured in config/initializers/social_stream.rb
+  if SocialStream.repository_models.present?
+    resource :repository
+  end
 
   resources :contacts do
     collection do

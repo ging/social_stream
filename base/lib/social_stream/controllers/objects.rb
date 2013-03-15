@@ -63,29 +63,9 @@ module SocialStream
         end
 
         def build_collection
-          collection =
-            self.class.model_class # @posts = Post
-
-          # /users/demo/posts
-          if profile_subject?
-            # get posts posted to demo's wall
-            collection = collection.owned_by(profile_subject)
-
-            # if current_subject != demo, auth filter results
-            unless profile_subject_is_current?
-              collection = collection.shared_with(current_subject)
-            end
-          else
-            # auth filter results
-            collection = collection.shared_with(current_subject)
-
-            # if logged in, show the posts from the people following
-            if user_signed_in?
-              collection = collection.followed_by(current_subject)
-            end
-          end
-
-          collection = collection.page(params[:page])
+          self.class.model_class. # @posts = Post
+            collection(profile_subject, current_subject).
+            page(params[:page])
         end
       end
 

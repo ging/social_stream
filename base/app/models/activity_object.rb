@@ -66,6 +66,30 @@ class ActivityObject < ActiveRecord::Base
       merge(ActivityAction.sent_by(subject).where(:owner => true))
   }
 
+  scope :collection, lambda { |profile_subject = nil, current_subject = nil|
+    if profile_subject.present?
+      # /users/demo/posts
+      #
+      # get posts posted to demo's wall
+      collection = owned_by(profile_subject)
+
+      # if current_subject != demo, auth filter results
+      unless profile_subject != current_subject
+        collection = collection.shared_with(current_subject)
+      end
+    else
+      # auth filter results
+      collection = shared_with(current_subject)
+
+      # if logged in, show the posts from the people following
+      if current_subject.present?
+        collection = collection.followed_by(current_subject)
+      end
+    end
+
+    collection
+  }
+
   scope :created, order("activity_objects.created_at DESC")
 
   scope :followed, order("activity_objects.follower_count DESC")

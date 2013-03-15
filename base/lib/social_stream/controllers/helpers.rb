@@ -6,7 +6,7 @@ module SocialStream
 
       included do
         helper_method :current_subject,
-                      :profile_subject,
+                      :profile_subject, :profile_subject?,
                       :profile_or_current_subject,
                       :profile_subject_is_current?
       end
