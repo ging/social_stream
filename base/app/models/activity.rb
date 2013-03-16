@@ -31,6 +31,7 @@ class Activity < ActiveRecord::Base
   # This has to be declared before 'has_ancestry' to work around rails issue #670
   # See: https://github.com/rails/rails/issues/670
   before_destroy :destroy_children_comments
+  before_destroy :decrement_like_count, :delete_notifications
 
   has_ancestry
 
@@ -87,7 +88,6 @@ class Activity < ActiveRecord::Base
 
 
   after_create  :increment_like_count
-  after_destroy :decrement_like_count, :delete_notifications
 
   validates_presence_of :author_id, :user_author_id, :owner_id, :relations
  
