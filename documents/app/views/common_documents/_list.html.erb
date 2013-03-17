@@ -1,8 +1,2 @@
 <%= render partial: 'common_documents/document',
            collection: documents %>
-
-<%= javascript_tag do %>
-$(function(){
-  SocialStream.Repository.init();
-});
-<% end %>

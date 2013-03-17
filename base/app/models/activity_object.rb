@@ -74,7 +74,7 @@ class ActivityObject < ActiveRecord::Base
       collection = owned_by(profile_subject)
 
       # if current_subject != demo, auth filter results
-      unless profile_subject != current_subject
+      if profile_subject != current_subject
         collection = collection.shared_with(current_subject)
       end
     else

@@ -43,6 +43,11 @@ module SocialStream
             merge(ActivityObject.shared_with(subject))
         }
 
+        scope :collection, lambda { | profile_subject = nil, current_subject = nil|
+          joins(:activity_object).
+            merge(ActivityObject.collection(profile_subject, current_subject))
+        }
+
         scope :followed_by, lambda { |subject|
           joins(:activity_object).
             merge(ActivityObject.followed_by(subject))
