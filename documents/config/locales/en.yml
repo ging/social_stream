@@ -71,12 +71,6 @@ en:
     title:
       one: "Picture"
       other: "Pictures"
-  repository:
-    title: "Files"
-    order:
-      by: "Order by"
-      last_modified: "Last modified"
-      most_popular: "Most popular"
   resource:
     all: "All Resources"
     confirm_delete: "Delete resource?"

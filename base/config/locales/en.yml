@@ -520,6 +520,12 @@ en:
     title: "Privacy"
   relation_public:
     name: "Public"
+  repository:
+    title: "Repository"
+    order:
+      by: "Order by"
+      last_modified: "Last modified"
+      most_popular: "Most popular"
   representation:
     notice: "Your session has changed. Now you are acting on behalf of %{subject}. Use the top-right menu to return to your session"
     switch: "Switch session"

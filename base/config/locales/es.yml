@@ -536,6 +536,12 @@ es:
     title: "Privacidad"
   relation_public:
     name: "Público"
+  repository:
+    title: "Repositorio"
+    order:
+      by: "Ordenar por"
+      last_modified: "Última modificación"
+      most_popular: "Popularidad"
   representation:
     notice: "Tu sesión ha cambiado. Ahora actúas en nombre de %{subject}. Para regresar a tu sessión, utiliza el menú de arriba a la derecha"
     switch: "Cambiar sessión"

@@ -68,12 +68,6 @@ es:
     title:
       one: "Imagen"
       other: "Imágenes"
-  repository:
-    title: "Ficheros"
-    order:
-      by: "Ordenar por"
-      last_modified: "Última modificación"
-      most_popular: "Popularidad"
   resource:
     all: "Todos los recursos"
     confirm_delete: "¿Borrar recursos?"
