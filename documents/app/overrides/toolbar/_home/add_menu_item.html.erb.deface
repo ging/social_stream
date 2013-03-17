@@ -1,7 +1,0 @@
-<!-- insert_after '.base_items' -->
-<li class="btn-blue">
-  <%= link_to [ current_subject, Document.new ] do %>
-    <%= image_tag 'icons/resources.png' %> <%= t 'document.title.other' %>
-  <% end %>
-</li>
-<div class="document_items"/>
