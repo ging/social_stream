@@ -22,16 +22,10 @@
 </section>
 
   
-<div id="document-list-net" class="tab-pane">
-  <%= render partial: 'common_documents/list',
-             locals: { documents: collection } %>
-
-  <nav class="documents">
-    <%= render partial: 'layouts/more',
-               locals: { path: polymorphic_path([profile_subject, Document.new ]) } %>
-  </nav>
-</div>
-
+<nav class="documents">
+  <%= render partial: 'layouts/more',
+             locals: { path: polymorphic_path([profile_subject, Document.new ]) } %>
+</nav>
 
 
 <%= javascript_tag do %>

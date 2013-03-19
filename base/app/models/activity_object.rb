@@ -66,6 +66,30 @@ class ActivityObject < ActiveRecord::Base
       merge(ActivityAction.sent_by(subject).where(:owner => true))
   }
 
+  scope :collection, lambda { |profile_subject = nil, current_subject = nil|
+    if profile_subject.present?
+      # /users/demo/posts
+      #
+      # get posts posted to demo's wall
+      collection = owned_by(profile_subject)
+
+      # if current_subject != demo, auth filter results
+      if profile_subject != current_subject
+        collection = collection.shared_with(current_subject)
+      end
+    else
+      # auth filter results
+      collection = shared_with(current_subject)
+
+      # if logged in, show the posts from the people following
+      if current_subject.present?
+        collection = collection.followed_by(current_subject)
+      end
+    end
+
+    collection
+  }
+
   scope :created, order("activity_objects.created_at DESC")
 
   scope :followed, order("activity_objects.follower_count DESC")
@@ -256,6 +280,34 @@ class ActivityObject < ActiveRecord::Base
     a.activity_objects << self
 
     a.save!
+  end
+
+  # The 'like' qualifications emmited to this activity object
+  def likes
+    Activity.joins(:activity_verb).where('activity_verbs.name' => "like").
+             joins(:activity_objects).where('activity_objects.id' => id)
+  end
+
+  def liked_by(subject) #:nodoc:
+    likes.authored_by(subject)
+  end
+
+  # Does subject like this {ActivityObject}?
+  def liked_by?(subject)
+    liked_by(subject).present?
+  end
+
+  # Build a new activity where subject like this
+  def new_like(subject, user)
+    a = Activity.new :verb           => "like",
+     :author_id      => Actor.normalize_id(subject),
+     :user_author_id => Actor.normalize_id(user),
+     :owner_id       => object_type == "Actor" ? subtype_instance.id : owner_id,
+     :relation_ids   => Array(Relation::Public.instance.id)
+
+    a.activity_objects << self
+
+    a
   end
 
   include Properties

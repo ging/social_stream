@@ -51,7 +51,13 @@ describe DocumentsController do
         response.should be_success
         response.headers["Content-Type"].should include('text/html')
       end
-      
+
+      it "should render html new" do
+        get :new
+        response.should be_success
+        response.headers["Content-Type"].should include('text/html')
+      end
+     
       it "should render format pdf download" do
         get :download, :id => @public_document.to_param, :format => :pdf
         response.should be_success

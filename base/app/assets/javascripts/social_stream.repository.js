@@ -1,6 +1,4 @@
-//= require jquery.watermark
-
-SocialStream.Search = (function(SS, $, undefined){
+SocialStream.Repository = (function(SS, $, undefined){
   var showCallbacks = [];
 
   var addShowCallback = function(callback){
@@ -11,14 +9,8 @@ SocialStream.Search = (function(SS, $, undefined){
     $.each(showCallbacks, function(i, callback){ callback(); });
   };
 
-  var initPagination = function() {
-    SS.Pagination.show();
-  };
-
-  addShowCallback(initPagination);
-
   return {
     show: show
-  }
+  };
 
 }) (SocialStream, jQuery);

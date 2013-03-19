@@ -2,7 +2,7 @@
   <%= "#{ current_subject.name }: #{ t('document.new.title') }" %>
 <% end %>
 
-<% toolbar :profile, :subject => current_subject %>
+<%= render partial: 'toolbar/profile', locals: { subject: current_subject } %>
 
 <h1><%= t 'document.new.title' %></h1>
 

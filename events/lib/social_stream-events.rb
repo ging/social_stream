@@ -10,7 +10,9 @@ module SocialStream
       autoload  :Actor,    'social_stream/events/models/actor'
     end
 
-    SocialStream.objects.push(:event) unless SocialStream.objects.include?(:event)
+    %w( objects repository_models ).each do |m|
+      SocialStream.__send__(m).push(:event) unless SocialStream.__send__(m).include?(:event)
+    end
   end
 end
 

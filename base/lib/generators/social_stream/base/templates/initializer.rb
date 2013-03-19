@@ -32,6 +32,10 @@ SocialStream.setup do |config|
   # Configure the type of actors that are suggested in the sidebar
   #
   # config.suggested_models = [ :user, :group ]
+  
+  # Configure the models that will appear in the repository tab
+  #
+  # config.repository_models = [ :document, :event, :link, :place ]
 
   # Expose resque interface to manage background tasks at /resque
   #
