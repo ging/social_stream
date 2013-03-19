@@ -1,0 +1,13 @@
+<% if @search_result.present? %>
+  <ul>
+    <% @search_result.each do |model|%>
+      <li><%= render partial: "#{ model.class.to_s.tableize }/quick_search_result", object: model, as: model.class.to_s.underscore %></li>
+    <% end %>
+
+    <li class="more">
+      <%= link_to search_path(:q => params[:q]) do %>
+        <%= t('search.global.query', :query => truncate(h(params[:q]), :length => 20)) %>
+      <% end %>
+    </li>
+  </ul>
+<% end %>
