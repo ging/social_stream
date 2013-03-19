@@ -5,23 +5,70 @@
 
 @media (max-width: 767px) 
 
+  #home
+    .activities
+      .timeline
+        .event
+          .details 
+            margin-left: 10px
+            @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
+
+  #user,
+  #groups
+    .timeline
+      .event
+        .date
+          width: 60px
+        .poster
+          width: 80px
+        .details 
+          margin-left: 10px
+          @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  
 
 
-
-
+  #events
+    #toolbar
+      @extend .hidden-phone
+    td
+      .fc-button
+        padding: 3.5% !important
+        font-size: 12px !important
+      .fc-header-space
+        padding-left: 0px
+    .fc-header-center
+      h2
+        font-size: 17.5px
+    #calendar 
+      .fc-day-number
+        min-height: 32px
 // UP TO LANDSCAPE PHONE
 // ---------------------
 
 @media (max-width: 480px)
-.activities
-  .timeline
-    .event 
-      .details 
-        margin-left: 20px
-        width: 205px 
-#sidebarContent
-  #days
-    tr
-      td
-        font-size: 18px
-        padding: 3px 7px
+  
+  #home
+    .activities
+      .timeline
+        .avatar
+          float: left
+        .event
+          .details 
+            margin-left: 10px
+            @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
+
+  #user
+    .activities
+      .timeline
+        .avatar
+          float: left
+        .event
+          .details 
+            margin-left: 10px
+            @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  #sidebarContent
+    #days
+      tr
+        td
+          font-size: 18px
+          padding: 3px 7px

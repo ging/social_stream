@@ -4,7 +4,31 @@
 
 
 @media (min-width: 1200px)
+  #home
+    .activities
+      .timeline
+        .event
+          .date
+            width: 60px 
+          .poster
+            width: 80px 
+          .details
+            @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth) 
+            margin-left: 20px
+            width: 70%
+
   #user
+    .activities
+      .timeline
+        .event
+          .date
+            width: 60px 
+          .poster
+            width: 80px 
+          .details
+            @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth) 
+            margin-left: 20px
+            width: 70%
     #sidebar
       #sidebar_calendar
         @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)

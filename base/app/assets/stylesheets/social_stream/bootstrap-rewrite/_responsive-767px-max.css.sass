@@ -30,8 +30,7 @@
     .activities
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 0
-      .wall_input
-        padding: 5px 13px
+
 
     #sidebar
       @extend .hidden-phone
@@ -64,14 +63,16 @@
     .activities
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 0
-      .wall_input
-        padding: 5px 13px
+
     #sidebar
       @extend .hidden-phone
       @extend .hidden-tablet
 
-
-
+  #profile
+    #toolbar
+      @extend .hidden-phone 
+    #sidebar
+      @extend .hidden-phone  
 
   #relation_customs
     #toolbar

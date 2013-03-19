@@ -1,60 +1,67 @@
 @import "jquery.cleditor"
 
-.content-large
-  @include makeColumn(10, 0)
+#converstions
+  @include makeColumn(12, 0)
+  #toolbar
+    @include makeColumnoMargin(2, 0)
+  .conversations
+    @include makeColumnoMargin(10, 0)
+    .conversation
+      height: 85px
+      .content_left
+        @include makeColumn(2, 0)
+        display: inline
+        .avatar
+          display: inline
+        header
+          display: inline-block
 
-.content_left
-  @include makeColumn(3, 0)
-  display: inline
-  .avatar
-    display: inline
-  header
-    display: inline-block
-.content_right
-  @include makeColumnoMargin(7, 0)
-  color: $gray
-  display: inline-block
-  margin-bottom: 15px
-  .subject
-    font-weight: normal
-    font-size: 14px
-    a
-      font-size: 15px
-      font-weight: bold
-      &:hover
-        text-decoration: none
-  .briefing
-    white-space: nowrap
-    overflow: hidden
-    text-overflow: ellipsis
-    color: $gray
-  
-  .date
-    color: $gray
-    font-size: 11px
-    display: inline
-    margin: 0 13px 0 4px
+      .content_right
+        @include makeColumnoMargin(7, 0)
+        color: $gray
+        display: inline-block
+        margin-bottom: 15px
+        .subject
+          font-weight: normal
+          font-size: 14px
+          display: inline
+          a
+            font-size: 15px
+            font-weight: bold
+            &:hover
+              text-decoration: none
+        .briefing
+          white-space: nowrap
+          overflow: hidden
+          text-overflow: ellipsis
+          color: $gray
+        
+        .date
+          color: $gray
+          font-size: 11px
+          display: inline
+          margin: 0 13px 0 4px
 
-  .action
-    float: right
-    margin: -20px 10px 0 0
+        .action
+          float: right
+          display: inline-block
 
-#conversation
-  @include makeColumn(7, 0)
   form.new_message
     @include makeColumnoMargin(6, 0)
     margin-left: 20px
     .btn
       @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25))
       margin: 17px 10px 0 0
+
   
 #ck_editor
   .cleditorMain
     @include border-radius(5px) 
     width: 100%!important
-
-.conversation
-  @include opacity (100)
+.conversations
+  @include makeColumnoMargin(10, 0)
+  .conversation
+    @include opacity (100)
 
 .unread
   @include opacity (50)

@@ -31,17 +31,21 @@
 
 #days
   margin: 0 auto
-  padding: 5px
+  padding: 2.5%
+  width: 100%
   tr
     td
-      padding-left: 7px
-      padding-right: 7px
+      padding-left: 2.5%
+      padding-right: 2.5%
       text-align: right
       a
         color: $gray
+        text-decoration: none
     .today
       @include border-radius(15px)
-      border: 1px solid black
+      border: 1px solid $blue !important
+      a
+        color: $blue 
     .busy
       font-weight: bold
       @include border-radius(5px)

@@ -18,8 +18,7 @@
       margin-left: 30px
       margin-right: 30px
 
-      .wall_input
-        padding: 5px 13px
+
     #sidebar
       width: 21.85714%
       float: left
@@ -43,8 +42,7 @@
     .activities
       @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 2%
-      .wall_input
-        padding: 5px 13px
+
     #sidebar
       @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
       float: right
@@ -53,18 +51,35 @@
 
 
   #converstions
-    .toolbar-messages
-      @include grid-core-span(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    div.conversations
-      @include grid-core-span(11, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      float: left
-      margin-top: 26px
+    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    #toolbar
+      @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin-left: 0px !important
+    .conversations
+      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin-left: 0px !important
       .conversation
-        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-        .content_left
-          @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
-        .content_right
-          @include grid-core-span(9, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      height: 85px
+      margin-left: 0px !important
+      .content_left
+        @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        margin-left: 10px
+        float: left
+        .avatar
+          width: 45px
+          display: inline
+        header
+          display: inline-block
+      .content_right
+        @include grid-core-span(9, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        float: left
+        .subject
+          width: 95%
+          display: inline
+        .action
+          display: inline-block
+          float: right
   .conversation_full
     @include grid-core-span(8, $fluidGridColumnWidth, $fluidGridGutterWidth)
     margin: 0 auto

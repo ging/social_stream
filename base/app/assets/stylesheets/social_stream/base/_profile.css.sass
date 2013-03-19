@@ -1,6 +1,33 @@
 @import 'avatars_for_rails'
 
-#profile-info
+#profile
+  @include makeColumn(12, 0)
+  #toolbar
+    @include makeColumnoMargin(2, 0)
+  #profile-info
+    @include makeColumnoMargin(7, 0)
+    .tags,
+    .personal,
+    .comunication-info,
+    .experience,
+    .avatar
+      .btn
+        @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25)) 
+        width: 93%
+      .update
+        background-color: whitesmoke
+        padding: 2px 0px 40px 30px
+        h6
+          label
+            display: inline
+        input,
+        textarea
+          width: 94% !important
+
+    .personal
+      .btn
+        margin-top: -8px
+    
   section
     padding: 6px
     .edit_icon
@@ -49,26 +76,4 @@
   h4
     display: inline-block
 
-#profile-info
-  .tags,
-  .personal,
-  .comunication-info,
-  .experience,
-  .avatar
-    .btn
-      @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25)) 
-      width: 93%
-    .update
-      background-color: whitesmoke
-      padding: 2px 0px 40px 30px
-      h6
-        label
-          display: inline
-      input,
-      textarea
-        width: 94% !important
-
-  .personal
-    .btn
-      margin-top: -8px
 

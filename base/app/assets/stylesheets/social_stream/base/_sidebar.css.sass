@@ -1,75 +1,96 @@
 #sidebar
   padding-top: 6px  
-
-#suggestions,
-#pendings
-  h4
-    color: $black
-    font-family: $serifFontFamily
-    margin-left: 10px
-
   .contact
-    padding: 5px 4px
-    width: 220px
-    display: inline-block
+    margin: 4px 22px 4px 18px
     .avatar
-      @include makeColumn(1, 0)
-      display: inline
-      margin-left: -5px
-      img
-        @extend .border-radius-5
-        width: 45px 
-   
-  .data
-    @include makeColumn(2, 0)
-    display: inline-block
-    margin: 0 0 16px -7px
-    .name
-      color: $black
+      width: 45px !important
+      float: left
+    .data
+      a
+        display: inline
       .x
-        font-size: 12px
-        color: $black
         a
           float: right
+          display: inline-block
           text-decoration: none
-          margin-top: -19px
+          margin-top: -20px
     .info
-      font-size: 12px
-      color: $grayLight
-  .add
-    @include makeColumnoMargin(3, 0)
-    font-size: 10px
-    z-index: 1
-    .btn-group
-      max-width: 400px
-      .btn
-        @extend .btn-blue
-        &:hover
-          .caret
-            @include transition (border 1s, color, 1s)
-            border-top-color: $white
-            border-bottom-color: $white
-        .caret
-          margin-left: 6px
-          border-top-color: $blue
-          border-bottom-color: $blue
-          &:hover
-            border-top-color: $white
-            border-bottom-color: $white
-    .open
-      .btn
-        .caret
-          border-top-color: $blue
-          border-bottom-color: $blue
-    .edit_contact
-      margin-bottom: 0px
-    .dropdown-toggle
-      margin-left: 0px !important 
-      widht: 100%
+      font-size: 11px
+      color: #ccc
+      z-index: 1
+    .add
+      margin-top: 2px
+      width: auto
 
-  .see-more
-    font-size: 12px
-    line-height: 20px
-    a
-      text-decoration: none
-      color: $grayLight
+
+
+
+  #suggestions,
+  #pendings
+    h4
+      color: $black
+      font-family: $serifFontFamily
+      margin-left: 10px
+    
+    .contact
+      padding: 5px 4px
+      width: 220px
+      display: inline-block
+      .avatar
+        width: 45px
+        display: inline
+        float: left
+        margin-left: -5px
+        img
+          @extend .border-radius-5
+          width: 45px 
+     
+    .data
+      @include makeColumn(2, 0)
+      display: inline-block
+      margin: 0 0 3px 3px
+      float: none
+      .name
+        color: $black
+        .x
+          font-size: 12px
+          color: $black
+      .info
+        font-size: 11px
+        color: #ccc
+        z-index: 1
+    .add
+      font-size: 10px
+      z-index: 1
+      .btn-group
+        max-width: 400px
+        .btn
+          @extend .btn-blue
+          &:hover
+            .caret
+              @include transition (border 1s, color, 1s)
+              border-top-color: $white
+              border-bottom-color: $white
+          .caret
+            margin-left: 6px
+            border-top-color: $blue
+            border-bottom-color: $blue
+            &:hover
+              border-top-color: $white
+              border-bottom-color: $white
+      .open
+        .btn
+          .caret
+            border-top-color: $blue
+            border-bottom-color: $blue
+      .edit_contact
+        margin-bottom: 0px
+      .dropdown-toggle
+        margin-left: 0px !important 
+        widht: 100%
+    .see-more
+      font-size: 12px
+      line-height: 20px
+      a
+        text-decoration: none
+        color: $grayLight

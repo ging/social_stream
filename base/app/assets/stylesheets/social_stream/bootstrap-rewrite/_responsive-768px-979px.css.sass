@@ -91,11 +91,25 @@
       float: left
       .conversation
         @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        height: 85px
         .content_left
-          @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
           margin-left: 10px
+          float: left
+          .avatar
+            width: 45px
+            display: inline
+          header
+            display: inline-block
         .content_right
-          @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          @include grid-core-span(9, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          float: left
+          .subject
+            width: 95%
+            display: inline
+          .action
+            display: inline-block
+            float: right
 
 
   #new_message
@@ -186,6 +200,13 @@
           margin: 4px 22px 4px 18px
           .avatar
             width: 45px !important
+            float: left
+          .data
+            a
+              display: inline
+            .x
+              float: right
+              display: inline-block
           .info
             font-size: 11px
             color: #ccc
