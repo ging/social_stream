@@ -152,6 +152,17 @@
       @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
       float: left
       margin-left: 0px
+      label
+        margin-bottom: 0px
+        margin-top: 6px
+      .select2-container
+        width: 101%
+      input
+        &[type="text"]
+          width: 99%
+      .btn
+        @extend .btn-blue
+        @extend .pull-left
   
   #conversation
     @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)

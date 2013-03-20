@@ -163,6 +163,7 @@
 
 
 
+
   #site_clients
     #toolbar
       @extend .hidden-phone
@@ -244,8 +245,18 @@
   #conversation 
     .conversation_full
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-
-
+  #new_message
+    label
+      margin-bottom: 0px
+      margin-top: 6px
+    .select2-container
+      width: 100%
+    input
+      &[type="text"]
+        width: 98%
+    .btn
+      @extend .btn-blue
+      @extend .pull-left
 
 
 
@@ -427,6 +438,11 @@
           float: left
     .action
       margin-top: -30px
+
+#new_message
+  .select2-container
+    width: 102%
+
 
 
   #frontpage

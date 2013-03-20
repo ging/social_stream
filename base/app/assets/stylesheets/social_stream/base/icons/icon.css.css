@@ -218,17 +218,16 @@
   line-height:52px;
 }
 
-.icon_message-new     { background-position: -9px -10px;}
-.icon_message-sentbox { background-position: -68px -10px;}
-.icon_message-inbox   { background-position: -129px -10px;}
-.icon_message-trash   { background-position: -188px -10px;}
+.icon_message-new     { background-position: -9px -50px;}
+.icon_message-sentbox { background-position: -68px -49px;}
+.icon_message-inbox   { background-position: -129px -50px;}
+.icon_message-trash   { background-position: -188px -50px;}
 
 /*hover*/
-
-.icon_message-new:hover     { background-position: -9px -50px;}
-.icon_message-sentbox:hover { background-position: -68px -49px;}
-.icon_message-inbox:hover  { background-position: -129px -50px;}
-.icon_message-trash:hover  { background-position: -188px -50px;}
+.icon_message-new:hover     { background-position: -9px -10px;}
+.icon_message-sentbox:hover { background-position: -68px -10px;}
+.icon_message-inbox:hover  { background-position: -129px -10px;}
+.icon_message-trash:hover  { background-position: -188px -10px;}
 
 
 

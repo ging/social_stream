@@ -99,6 +99,7 @@
       @include border-radius(5px) 
       width: 100% !important
       border-color: #c5c5c5
+      padding: 0px
     .actions
       margin-top: 10px
       input
@@ -126,6 +127,18 @@
         display: inline-block
         color: $grayLighter
 
+#new_message
+  .toolbar_menu
+    ul.nav
+      li
+        .active
+          background-position: -9px -10px
+  #conversation
+    .select2-container
+      width: 101%
+    input
+      &[type="text"]
+        width: 99%
 
 
 #content
