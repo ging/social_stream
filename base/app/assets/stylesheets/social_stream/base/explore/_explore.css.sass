@@ -2,26 +2,36 @@
 ///////////// 
 
 #explore-content
+  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
   .sub-content-full
-    @include makeColumnoMargin(12, 0)
+    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
   .sub-content-medium
-    @include makeColumnoMargin(6, 0)
+    @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
     display: inline
+    float: left
   .sub-content-medium-offset
-    @include makeColumnoMargin(6, 1)
+    @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    @include grid-core-offset(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
     display: inline
+    float: left
   .sub-content-small
-    @include makeColumn(5, 0)
+    @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
     display: inline-block
+    float: left
   .sub-content-small-offset
-    @include makeColumn(5, 1)
+    @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    @include grid-core-offset(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
     display: inline-block
+    float: left
   .sub-content-mini
-    @include makeColumn(3, 0)
+    @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
     display: inline-block
+    float: left
   .sub-content-mini-offset
-    @include makeColumn(3, 1)
+    @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    @include grid-core-offset(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
     display: inline-block
+    float: left
   .sub-content-medium,
   .sub-content-full,
   .sub-content-small,
@@ -42,14 +52,14 @@
       padding-top: 7px
       .case
         float: left
-        width: 361px
+        width: 95%
         margin-left: 20px
         font-size: 12px
         word-wrap: break-word
         .first-line-large,
         .first-line-mini,
           display: inline
-          width: 380px
+          width: 100%
           float: left
           a
             font-size: 14px
@@ -65,11 +75,13 @@
         float: right
         margin-bottom: 0px
         text-align: right
-       
+  #resources
+    .sub-content-small
+      margin-left: 0px     
   .sub-content-small
     display: inline-block
     margin-left: 40px
-
+  
 #explore-header
   width: 100%
   display: table

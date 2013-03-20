@@ -71,6 +71,8 @@
       @extend .hidden-phone
       @extend .hidden-tablet
 
+
+
   #profile
     @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
     margin-left: 0px
@@ -92,6 +94,8 @@
 
     #sidebar
       @extend .hidden-phone  
+
+
 
   #relation_customs
     #toolbar
@@ -128,6 +132,7 @@
         margin-top: 20px
 
 
+
   #settings
     @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
     border-left: 1px solid #c4c4c4
@@ -148,6 +153,7 @@
     header
       border-bottom: 1px solid #c4c4c4
       text-align: center
+
 
 
 
@@ -365,7 +371,33 @@
             &[type="submit"]
               float: right
 
-
+  #explore-content
+    .sub-content-medium,
+    .sub-content-full,
+    .sub-content-small,
+    .sub-content-mini,
+    .sub-content-medium-offset,
+    .sub-content-full-offset,
+    .sub-content-small-offset,
+    .sub-content-mini-offset
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin: 0px !important
+      margin-bottom: 20px !important
+      .content
+        width: 96%
+        margin-bottom: 10px
+        .case
+          margin: 3px 0 0 8px
+    .timeline
+      .media
+        .avatar
+          float: left
+    #search
+      margin-top: 0px
+      width: 100%
+      .input-xlarge
+        width: 70% 
+        margin-left: 3px
 
 // UP TO LANDSCAPE PHONE
 // ---------------------
@@ -480,3 +512,8 @@
             width: 96%
         .btn
           @extend.btn-blue
+
+
+  #explore-content
+    #search
+      width: 99
