@@ -123,14 +123,24 @@
           header
             display: inline-block
         .content_right
-          @include grid-core-span(9, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          width: 66%
           float: left
           .subject
-            width: 95%
             display: inline
+            a
+              width: 100%
           .action
             display: inline-block
             float: right
+            margin: -19px -40px 0 0
+          .briefing
+            width: 100%
+  #conversation 
+    .conversation_full
+      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+      h3
+        width: 96%
 
 
   #new_message

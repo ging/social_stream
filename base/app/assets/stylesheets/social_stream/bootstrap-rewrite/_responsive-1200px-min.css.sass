@@ -59,6 +59,8 @@
       margin-left: 0px
     #profile-info
       @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+      margin-left: 2%
       .tags,
       .personal,
       .comunication-info,
@@ -84,30 +86,50 @@
       @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 0px !important
       .conversation
-      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      height: 85px
-      margin-left: 0px !important
-      .content_left
-        @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
-        margin-left: 10px
-        float: left
-        .avatar
-          width: 45px
+        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        height: 85px
+        margin-left: 0px !important
+        .content_left
+          @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          margin-left: 10px
+          float: left
           display: inline
-        header
+          .avatar
+            width: 45px
+            display: inline
+          header
+            display: inline-block
+            width: 74px
+        .content_right
+          width: 80%
+          float: left
           display: inline-block
-      .content_right
-        @include grid-core-span(9, $fluidGridColumnWidth, $fluidGridGutterWidth)
-        float: left
-        .subject
-          width: 95%
-          display: inline
-        .action
-          display: inline-block
-          float: right
-  .conversation_full
-    @include grid-core-span(8, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    margin: 0 auto
+          .subject
+            a
+              width: 97%
+          .briefing
+            width: 97%
+            display: inline
+          .action
+            display: inline-block
+            float: right
+  #conversation
+    .conversation_full
+      @include grid-core-span(8, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin: 0 auto
+      h3
+        font-size: 27.5px
+      .message
+        padding: 17px 0 18px
+        .media
+          .pull-left
+            margin-right: 18px
+          .name
+            font-size: 17px
+          .media-body
+            font-size: 16px
+            margin-top: 7px
+            line-height: 24px
 
 
   #contacts

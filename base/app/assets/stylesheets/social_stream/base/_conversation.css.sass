@@ -1,41 +1,45 @@
 @import "jquery.cleditor"
 
 #converstions
-  @include makeColumn(12, 0)
   #toolbar
-    @include makeColumnoMargin(2, 0)
   .conversations
-    @include makeColumnoMargin(10, 0)
     .conversation
       height: 85px
+      clear: both
       .content_left
-        @include makeColumn(2, 0)
         display: inline
+        float: left
         .avatar
           display: inline
         header
+          width: 48px
           display: inline-block
-
+          h5 
+            a
+              @include ellipsis
+              display: block
       .content_right
-        @include makeColumnoMargin(7, 0)
         color: $gray
         display: inline-block
         margin-bottom: 15px
+        float: left
+        margin-left: 30px
+        width: 81%
         .subject
           font-weight: normal
           font-size: 14px
           display: inline
           a
+            @include ellipsis
             font-size: 15px
             font-weight: bold
+            width: 96%
             &:hover
               text-decoration: none
         .briefing
-          white-space: nowrap
-          overflow: hidden
-          text-overflow: ellipsis
+          @include ellipsis
           color: $gray
-        
+          width: 96%
         .date
           color: $gray
           font-size: 11px
@@ -45,6 +49,7 @@
         .action
           float: right
           display: inline-block
+       
 
   form.new_message
     @include makeColumnoMargin(6, 0)
@@ -68,11 +73,7 @@
 
 .conversation_full
   h3
-    white-space: nowrap
-    width: 50%
-    overflow: hidden
-    text-overflow: ellipsis
-    display: inline
+    @include ellipsis
   .participants
     padding: 7px 10px 9px 10px
     border: 1px solid #f1f1f1
@@ -85,6 +86,7 @@
   .action
     display: inline-block
     float: right
+    margin-top: 18px
   .soften
     margin: 0px
     border-color: $white

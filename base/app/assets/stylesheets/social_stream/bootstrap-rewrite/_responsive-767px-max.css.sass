@@ -8,9 +8,11 @@
   header.navbar
     ul.nav
       margin-top: 13px
+      padding-left: 3%
       li
         a
           padding: 0px 8px 10px !important
+    
   footer
     @extend .hidden-phone
     z-index: 10
@@ -199,7 +201,9 @@
   #conversation,
   #new_message
     @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    .toolbar-home
+    margin-left: 0px
+    float: none
+    #toolbar
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       background-color: $white
       @extend.border-radius-5
@@ -208,6 +212,8 @@
         height: 60px
         margin-left: auto
         margin-right: auto
+        margin-top: 13px
+        padding-left: 3%
         li
           @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
           display: inline
@@ -226,20 +232,19 @@
       .conversation
         @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
         .content_left
-          @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          width: 60px
           margin-right: 13px
           margin-left: 0px
         .content_right
-          @include grid-core-span(9, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          width: 80%
           .action
             float: right
-            margin: -42px -18px 0 0
+            margin: -20px -45px 0 0
+    
+  #conversation 
     .conversation_full
-      h3
-        float: left
-        width: 96%
-      .action
-        margin-top: 14px
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+
 
 
 
@@ -406,9 +411,9 @@
         .content_left
           margin-right: 2px
         .content_right 
-          .action
-            float: right
-            margin: -42px -18px 0 0
+          width: 69%
+          .actions
+            margin: -20px -45px 0 0
 
 
   .conversation_full

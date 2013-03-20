@@ -27,3 +27,13 @@ body
 #sidebar
   width: 22.85714%
   float: left
+#converstions
+  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  .conversations
+    @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+
+#conversation
+  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  .conversation_full
+    @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    float: left
