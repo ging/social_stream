@@ -77,69 +77,16 @@
 
     #profile-info
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: none
+      margin: 0px auto 0px
       .tags,
       .personal,
       .comunication-info,
       .experience,
       .avatar
         @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-        margin-left: 0px
-        .briefing
-          background-color: white
-          padding: 1px 0px 16px
-          min-height: 32px
-          span
-            @include border-radius(5px)
-            background-color: #D9EDF7
-            border: 1px solid #BCE8F1
-            color: #3A87AD
-            margin-left: 11px
-            padding: 3px 8px 3px 7px
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5)
-          p
-            margin: -15px 26px 0 14px
-            padding: 3px 0px 5px 14px
-            border-top: 5px solid #f9f9f9
-            background-color: none
-            width: 100%
-        .empty
-          float: left
-          padding: 8px 27px 9px 27px
         .update
           @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-          margin-left: 0px
-          padding: 12px 0px 3px 0px !important
-          form.edit_profile
-            padding: 0 14px
-            input
-              &[type="submit"]
-                width: 100% !important
-                margin: 8px 0px 0px 1px
-            label,
-            h6 
-              margin: 13px 2px -6px 2px
-            select
-              margin: 10px 0 0 4px
-      .personal,
-      .comunication-info,
-      .experience
-        .update
-          input
-            &[type="text"],
-            &[type="tel"],
-            &[type="email"]
-              width: 95.5% !important
-              margin: 8px 4px 0px 4px
-          textarea
-            width: 95.5% !important
-            margin: 8px 4px 0px 4px
-      .experience
-        .briefing
-          p
-            margin: 10px 26px 0 14px
-      .tags
-        .briefing
-          padding: 12px 0px 0px
 
     #sidebar
       @extend .hidden-phone  
