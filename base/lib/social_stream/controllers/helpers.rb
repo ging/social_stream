@@ -5,7 +5,7 @@ module SocialStream
       extend ActiveSupport::Concern
 
       included do
-        helper_method :current_subject,
+        helper_method :current_subject, :current_actor,
                       :profile_subject, :profile_subject?,
                       :profile_or_current_subject,
                       :profile_subject_is_current?
@@ -38,7 +38,7 @@ module SocialStream
       end
         
       def current_actor
-        current_subject.actor
+        current_subject.try(:actor)
       end
 
       # Returns the {SocialStream::Models::Subject subject} that is in the path, or

@@ -8,13 +8,8 @@
 
 <%= render partial: 'common_documents/filter' %>
 
-<% if user_signed_in? && profile_subject_is_current? %>
-
-  <%= link_to t('document.new.link'), new_document_path, class: "btn new_document-modal-link", 'data-toggle' => 'modal'  %>
-
-  <%= render partial: 'common_documents/new.modal' %>
-
-<% end %>
+<%= render partial: 'common_documents/new_button',
+           locals: { owner: profile_subject } %>
 
 <section class="documents">
   <%= render partial: 'common_documents/list',

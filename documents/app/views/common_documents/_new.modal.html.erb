@@ -1,3 +1,5 @@
+<% document ||= Document.new %>
+
 <div id="new_document-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="new_document-modal-title" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -5,7 +7,7 @@
   </div>
   <div class="modal-body">
     <%= render partial: 'common_documents/form',
-               object: Document.new,
+               object: document,
                as: :document %>
   </div>
 </div>
