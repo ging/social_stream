@@ -63,11 +63,13 @@
           <i class="icon_navbar-calendar <%= current_header_icon_class(:events) %>"></i> 
         <% end %>
       </li>
+      <% if SocialStream.repository_models.present? %>
       <li>
-      <%= link_to documents_path do %>
+      <%= link_to repository_path do %>
         <i class='icon_navbar-resources <%= current_header_icon_class(:resources) %>'></i>
       <% end %>
       </li>
+      <% end %>
       <li>
         <%= link_to conversations_path do %> 
           <i class='icon_navbar-message <%= current_header_icon_class(:messages) %>'></i>
