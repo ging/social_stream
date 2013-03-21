@@ -178,8 +178,6 @@ SocialStream.Contact = (function($, SS, undefined) {
     var q = $(this).val();
     var currentTab = $('.contacts .tab-pane.active');
 
-    console.log(currentTab.attr('id'));
-
     $('#contacts-loading').show();
 
     $.ajax({
