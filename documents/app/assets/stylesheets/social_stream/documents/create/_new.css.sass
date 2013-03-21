@@ -1,5 +1,7 @@
 #new_file
-  border: 2px dashed #ccc
+  padding: 2%
+  border: 2px dashed #f9f9f9
+  background-color: #ccc
   form
     margin: 0 0 40px
   .error
@@ -11,27 +13,34 @@
     border-bottom: 1px dashed #ccc
     padding-top: 15px
     label
-      @include makeColumnoMargin(3,0)
-      font-size: 30px
+      font-size: 16px
       font-weight: bold
-      color: #ccc
+      color: $gray
       padding: 2px 0 0 14px
   .upload,
   .title,
   .tags
-    height: 50px
+    height: 58px
+  .upload
+    margin-top: 0px
+    input
+      &[type="file"]
+        display: inline
+        width: 96%
+        line-height: 0px
+        background-color: $white
+        @extend .border-radius-5
   .title
     input
       &[type="text"]
         display: inline
-        width: 578px
+        width: 94%
   .description
-    height: 100px
     textarea
       display: inline-block
-      @include size (70px, 578px)
+      @include size (70px, 94%)
   input
     &[type="submit"]
-      float: right
-      margin-top: 5px
-      margin-right: 20px
+      margin-top: 11px
+      width: 100%
+      @extend .btn-blue

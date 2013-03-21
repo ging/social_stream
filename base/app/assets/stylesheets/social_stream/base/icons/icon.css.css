@@ -192,7 +192,7 @@
 .icon_navbar-notification { background-position:-136px -38px;}
 .icon_navbar-resources    { background-position:-175px -38px;}
 .icon_navbar-calendar     { background-position:-214px -38px;}
-.icon_navbar-settings     { background-position:-259px -38px;}
+.icon_navbar-settings     { background-position:-252px -37px;}
 
 
 /*..................hover navbar.......................*/
@@ -203,7 +203,7 @@
 .icon_navbar-notification:hover { background-position:-136px -8px;}
 .icon_navbar-resources:hover    { background-position:-175px -8px;}
 .icon_navbar-calendar:hover     { background-position:-214px -8px;}
-.icon_navbar-settings:hover     { background-position:-259px -8px;}
+.icon_navbar-settings:hover     { background-position:-252px -7px;}
 
 
 

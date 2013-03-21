@@ -1,28 +1,40 @@
 .picture
-  @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
   .central
     @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    display:inline-block
+    float: left 
+    margin-left: 30px
+    padding-bottom: 40px
     .show
       padding: 10px
       @include border-radius(10px)
       border: 1px solid #f7f7f7
       background-color: #333333
       text-align: center
+      h6
+        color: $white
+        font-size: 15px
       .actions
+        width: 11%
+        border: 1px solid #ccc
+        @include centered
+        @include border-radius (3px)
         margin-top: 10px
     .tabbable
       margin-top: 10px
-      .comments
-        @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      .tab-content
+        overflow: initial
+ 
   .details
-    @include makeColumn(3, 0)
-    display:inline-block
+    @extend .hidden-phone
+    width: 21.8%
+    float: left 
+    margin-left: 30px
     margin-top: 20px
     h4
+      margin-bottom: 5px
       color: #00C3FF
     .tab-content
-      @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      
 
 
 #document-info
