@@ -151,10 +151,12 @@ class ActivityObject < ActiveRecord::Base
           try(:actor)                      #     try(:actor)
       end                                  # end
 
-      def #{ role }=(actor)           # def author=(actor)
-        self.#{ role }_id =           #   self.author_id =
-          Actor.normalize_id(actor)   #     Actor.normalize_id(actor)
-      end                             # end
+      def #{ role }=(actor)             # def author=(actor)
+        self.#{ role }_id =             #   self.author_id =
+          (actor.blank? ?               #     (actor.blank? ?
+             nil :                      #       nil :
+             Actor.normalize_id(actor)) #       Actor.normalize_id(actor))
+      end                               # end
 
       def #{ role }_subject # def author_subject
         #{ role }.subject   #   author.subject
