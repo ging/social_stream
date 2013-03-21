@@ -13,7 +13,11 @@
              locals: { owner: profile_or_current_subject } %>
 
   <section class="repository">
-    <%= render @collection %>
+    <%= render partial: 'layouts/loading' %>
+
+    <section class="repository-list">
+      <%= render @collection %>
+    </section>
   </section>
 
   <%= javascript_tag do %>

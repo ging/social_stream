@@ -537,6 +537,7 @@ es:
   relation_public:
     name: "Público"
   repository:
+    filter: "filtrar"
     title: "Repositorio"
     order:
       by: "Ordenar por"

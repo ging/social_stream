@@ -37,6 +37,8 @@ module SocialStream
           else
             extended_search_models.values.flatten
           end
+        when :repository
+          SocialStream.repository_models.map{ |m| m.to_s.classify.constantize }
         else
           raise "Unknown search type #{ search_type }"
         end

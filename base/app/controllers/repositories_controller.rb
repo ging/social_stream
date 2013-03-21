@@ -14,6 +14,10 @@ class RepositoriesController < ApplicationController
     end
   end
 
+  def search
+    render SocialStream::Search.search(params[:q], current_subject, mode: :repository)
+  end
+
   private
 
   def collection

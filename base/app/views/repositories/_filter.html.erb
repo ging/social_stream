@@ -1,0 +1,1 @@
+<%= text_field_tag :q, nil,:autocomplete => :off, :placeholder => t('repository.filter'), class: 'filter', 'data-path' => polymorphic_path([:search, profile_or_current_subject, :repository]) %>

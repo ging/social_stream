@@ -521,6 +521,7 @@ en:
   relation_public:
     name: "Public"
   repository:
+    filter: "filter"
     title: "Repository"
     order:
       by: "Order by"
