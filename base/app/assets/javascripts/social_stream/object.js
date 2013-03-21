@@ -1,7 +1,7 @@
-//= require social_stream.timeline
-//= require social_stream.wall
+//= require social_stream/timeline
+//= require social_stream/wall
 
-SocialStream.Objects = (function(SS, $, undefined){
+SocialStream.Object = (function(SS, $, undefined){
 	var initCallbacks = [];
 
 	var addInitCallback = function(callback){

@@ -1,4 +1,4 @@
-//= require social_stream.pagination
+//= require social_stream/pagination
 
 SocialStream.Timeline = (function(SS, $, undefined){
   // FIXME: DRY!!

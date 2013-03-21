@@ -1,4 +1,4 @@
-//= require social_stream.action
+//= require social_stream/action
 
 SocialStream.Events.Action = (function(SS, $, undefined){
 	var animateCalendar = function(action) {

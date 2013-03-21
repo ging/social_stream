@@ -1,8 +1,8 @@
 //= require jquery.autosize
 //
-//= require social_stream.timeline
-//= require social_stream.objects
-SocialStream.Comments = (function(SS, $, undefined){
+//= require social_stream/timeline
+//= require social_stream/object
+SocialStream.Comment = (function(SS, $, undefined){
   var elAlwaysHidden = [
     "input[type=submit]"
   ];
@@ -102,7 +102,7 @@ SocialStream.Comments = (function(SS, $, undefined){
   SocialStream.Timeline.addCreateCallback(newCommentClick);
   SocialStream.Timeline.addCreateCallback(newCommentLink);
 
-  SocialStream.Objects.addInitCallback(initNew);
+  SocialStream.Object.addInitCallback(initNew);
 
   return {
     initNew: initNew

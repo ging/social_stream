@@ -1,4 +1,4 @@
-//= require social_stream.timeline
+//= require social_stream/timeline
 
 SocialStream.Event = (function(SS, $, undefined) {
 	var indexCallbacks = [];
