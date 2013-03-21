@@ -12,7 +12,7 @@
     </div>
     <div class="search-nav hidden-phone">
       <%= form_tag search_path, method: 'get', class: "navbar-search pull-left" do %>
-        <%= text_field_tag :q, nil, autocomplete: :off, class: 'search-query input-small', placeholder: t('search.name') %>
+        <%= text_field_tag :q, nil, autocomplete: :off, class: 'search-query input-small', placeholder: t('search.name'), "data-min_query" => SocialStream::Search::MIN_QUERY %>
       <% end %>
       <%= javascript_tag do %>
         $(function() {
@@ -21,6 +21,14 @@
       <% end %>
       <div class="mat">
         <%= render partial: 'layouts/loading' %>
+
+        <div class="query_too_short">
+          <%= t 'search.at_least', count: SocialStream::Search::MIN_QUERY %>
+        </div>
+
+        <div class="no_results">
+          <%= t 'search.nothing' %>
+        </div>
 
         <div class="results">
         </div>

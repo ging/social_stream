@@ -2,10 +2,9 @@ class SearchController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
 
   RESULTS_SEARCH_PER_PAGE=16
-  MIN_QUERY=2
   def index
     @search_result =
-      if params[:q].blank? || params[:q].strip.size < MIN_QUERY
+      if params[:q].blank? || params[:q].strip.size < SocialStream::Search::MIN_QUERY
         []
       elsif params[:mode] == "quick"
         search :quick

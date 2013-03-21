@@ -1,5 +1,8 @@
 module SocialStream
   module Search
+    #TODO: sync with ThinkingSphinx min_infix_len and min_prefix_len options
+    MIN_QUERY = 3
+
     class << self
       def keys(search_type)
         case search_type
