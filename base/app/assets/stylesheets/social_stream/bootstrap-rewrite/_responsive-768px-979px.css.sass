@@ -6,9 +6,6 @@
 @media (min-width: 768px) and (max-width: 979px)
 
   header.navbar
-    .search-mobile 
-      @extend .hidden-desktop 
-      @extend .hidden-tablet
     ul
       margin-top: 13px
       li
@@ -29,8 +26,6 @@
 
   #home
     #toolbar
-      @extend .hidden-phone
-      @extend .hidden-tablet
       #avatar_profile
         float: left
       .toolbar_menu
@@ -41,9 +36,6 @@
       margin-left: 0
       .wall_input
         padding: 5px 13px
-    #sidebar
-      @extend .hidden-phone
-      @extend .hidden-tablet
 
 
 
@@ -53,13 +45,7 @@
     #toolbar
       @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
       float: left
-      .user
-        .logo_home,
-        #avatar_profile
-          .logo_caption
-            @extend .hidden-tablet
-        .contact-button
-          @extend .hidden-tablet
+        
       ul.buttons
         margin-left: 0
         li
@@ -83,8 +69,6 @@
 
   #profile
     @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    #toolbar
-      @extend .hidden-tablet
 
     #profile-info
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
@@ -99,10 +83,6 @@
         .update
           @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
           
-
-    #sidebar
-      @extend .hidden-tablet
-
 
 
 
@@ -164,9 +144,7 @@
       input
         &[type="text"]
           width: 99%
-      .btn
-        @extend .btn-blue
-        @extend .pull-left
+  
   
   #conversation
     @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
@@ -217,8 +195,6 @@
       header
         border-bottom: 1px solid #c4c4c4
         padding-left: 20px
-      .guion
-        @extend .hidden-desktop
       .edit_user
         .email_form_content
           .form_label
@@ -229,14 +205,11 @@
 
   #site_clients
     #toolbar
-      @extend .hidden-desktop
       background-color: black
 
 
 
   #contacts
-    #toolbar
-      @extend .hidden-tablet
     .contacts
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       float: left
@@ -274,13 +247,6 @@
           width: 143px
           margin: 0px
 
-
-
-
-  #documents
-    #toolbar
-      @extend .hidden-desktop
-      background-color: black
  
 
 
@@ -293,9 +259,7 @@
       h4
         font-size: 13px
         text-align: right
-    #presentation
-      @extend .hidden-phone
-      @extend .hidden-tablet
+
     #sign_in
       @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 12%

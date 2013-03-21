@@ -22,6 +22,10 @@
   .btn
     margin-right: 21px
     float: right
+
+#presentation
+  @extend .hidden-phone
+  @extend .hidden-tablet
  
 #frontpage
   .modular,
@@ -59,10 +63,13 @@
   .btn
     margin: 10px 25px 0 0
     float: right 
+    @extend.btn-blue
 .welcome,
 .forgot-img
   @include makeColumnoMargin(5, 0)
   margin-left: 20px
+  @extend .hidden-phone
+  @extend .hidden-tablet
 .forgot
   @include makeColumn(6, 0)
   @include clearfix

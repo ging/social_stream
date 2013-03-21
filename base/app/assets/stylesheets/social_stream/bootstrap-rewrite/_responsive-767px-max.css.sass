@@ -14,7 +14,6 @@
           padding: 0px 8px 10px !important
     
   footer
-    @extend .hidden-phone
     z-index: 10
     background-color: $white
     position: fixed
@@ -27,8 +26,6 @@
 
   #home
     #toolbar
-      @extend .hidden-phone
-      @extend .hidden-tablet
       .send-message
         margin-top: 10px
         a
@@ -38,11 +35,6 @@
     .activities
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 0
-
-
-    #sidebar
-      @extend .hidden-phone
-      @extend .hidden-tablet
 
 
 
@@ -58,30 +50,9 @@
         a
           padding: 4px 27px
           @include border-radius(5px)
-      .contact-button
-        .btn-group
-          width: 100%
-          margin-top: 6px
-          .btn
-            width: 100% !important
-            &:hover
-              .caret
-                border-top-color: $white
-                border-bottom-color: $white
-                @include transition(border 1s, color, 1s)
-            .caret 
-              border-top-color: $gray
-              border-bottom-color: $gray
-              margin-left: 14px
-              &:hover
-                border-top-color: $white
-                border-bottom-color: $white
-                @include transition(background 1s, color, 1s)
         .logo_home,
         #avatar_profile
           float: left
-          .logo_caption
-            @extend .hidden-phone
       ul.buttons
         @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
         display: inline-block
@@ -97,24 +68,16 @@
             &:hover
               text-decoration: none
 
-      .contacts-toolbar
-        @extend .hidden-phone
-
     .activities
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 0
 
-    #sidebar
-      @extend .hidden-phone
-      @extend .hidden-tablet
 
 
 
   #profile
     @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
     margin-left: 0px
-    #toolbar
-      @extend .hidden-phone
 
     #profile-info
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
@@ -129,15 +92,10 @@
         .update
           @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
 
-    #sidebar
-      @extend .hidden-phone  
-
 
 
   #relation_customs
     #toolbar
-      @extend .hidden-phone
-      @extend .hidden-tablet
     h2
       background-color: #c4c4c4
       color: $white
@@ -177,8 +135,6 @@
     border-bottom: 1px solid #c4c4c4
     border-radius: 10px
     #toolbar
-      @extend .hidden-phone
-      @extend .hidden-tablet
     h2
       background-color: #c4c4c4
       color: $white
@@ -196,47 +152,9 @@
 
   #conversation
     h2
-      @extend .hidden-phone
-      @extend .hidden-tablet
     input
       &[type="submit"]
-        @extend .btn-blue
         @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-
-
-
-
-
-  #site_clients
-    #toolbar
-      @extend .hidden-phone
-      @extend .hidden-tablet
-
-
-
-
-  #new_site_client
-    #toolbar
-      @extend .hidden-phone
-      @extend .hidden-tablet
-    .new_site_client
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      h1
-        @extend .hidden-phone
-        @extend .hidden-tablet
-      #error_explanation
-        h2
-          font-size: 20px
-      #new_application
-        section
-          input
-            &[type="file"],
-            &[type="text"]
-              @include grid-core-span(11, $fluidGridColumnWidth, $fluidGridGutterWidth)
-              margin-left: 2.9%
-          textarea
-            @include grid-core-span(11, $fluidGridColumnWidth, $fluidGridGutterWidth)
-            margin-left: 2.9%
 
 
 
@@ -250,7 +168,7 @@
     #toolbar
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       background-color: $white
-      @extend.border-radius-5
+      @include border-radius(5px)
       ul
         @include grid-core-span(8, $fluidGridColumnWidth, $fluidGridGutterWidth)
         height: 60px
@@ -297,16 +215,11 @@
     input
       &[type="text"]
         width: 98%
-    .btn
-      @extend .btn-blue
-      @extend .pull-left
+    
 
 
 
   #contacts
-    #toolbar
-      @extend .hidden-phone
-      @extend .hidden-tablet
     .contacts
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       float: left
@@ -327,9 +240,6 @@
 
 
   #documents
-    #toolbar
-      @extend .hidden-phone
-      @extend .hidden-tablet
     input
       &[type="text"]
         float: right
@@ -346,9 +256,7 @@
       h4
         font-size: 13px
         text-align: right
-    #presentation
-      @extend .hidden-phone
-      @extend .hidden-tablet
+    
     #sign_in
       @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 12%
@@ -388,9 +296,6 @@
 
 
   #forgot-pass
-    .forgot-img
-      @extend .hidden-phone
-      @extend .hidden-tablet
     .forgot
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 0
@@ -561,8 +466,6 @@
         input
           &[type="email"]
             width: 96%
-        .btn
-          @extend.btn-blue
 
 
   #explore-content

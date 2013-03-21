@@ -134,11 +134,18 @@
         .active
           background-position: -9px -10px
   #conversation
+    h2
+      @extend .hidden-phone
+      @extend .hidden-tablet
     .select2-container
       width: 101%
     input
       &[type="text"]
         width: 99%
+    input
+      &[type="submit"]
+        @extend .btn-blue
+        @extend .pull-left
 
 
 #content

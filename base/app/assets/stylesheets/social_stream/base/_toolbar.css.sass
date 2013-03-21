@@ -45,6 +45,8 @@
       a
         &:hover
           color: $white
+  .contacts-toolbar
+    @extend .hidden-phone
     
 .toolbar-messages
   .toolbar_menu
@@ -82,6 +84,7 @@
   .logo_caption
     font-size: 15px
     text-align: center
+    @extend .hidden-phone
   input, select
     @include makeColumnoMargin(2, 0)
 
