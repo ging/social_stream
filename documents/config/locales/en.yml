@@ -46,7 +46,7 @@ en:
     mine: "My files"
     name: "file"
     new:
-      link: "Add new"
+      link: "Add file"
       title: "New file"
     new_activity:
       attach: "Attach file"
