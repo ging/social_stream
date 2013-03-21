@@ -1,5 +1,7 @@
 <article id="new_file">
   <%= form_for(document) do |f| %>
+    <%= f.hidden_field :owner_id %>
+
     <div class="error">
       <ul>
         <h4>

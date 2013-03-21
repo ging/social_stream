@@ -9,6 +9,17 @@ SocialStream.Document = (function(SS, $, undefined){
     $.each(indexCallbacks, function(i, callback){ callback(options); });
   };
 
+  var newCallbacks = [];
+
+  var addNewCallback = function(callback){
+    newCallbacks.push(callback);
+  };
+
+  var new_ = function(options){
+    $.each(newCallbacks, function(i, callback){ callback(options); });
+  };
+
+
   var editCallbacks = [];
 
   var addEditCallback = function(callback){
@@ -82,13 +93,15 @@ SocialStream.Document = (function(SS, $, undefined){
   };
 
   addIndexCallback(initPagination);
-  addIndexCallback(initNewModal);
+
+  addNewCallback(initNewModal);
 
   addEditCallback(initTagsForm);
 
   SS.Wall.addShowCallback(initNewActivity);
 
   return {
+    new_: new_,
     edit: edit,
     index: index
   };

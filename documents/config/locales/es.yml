@@ -43,7 +43,7 @@ es:
     mine: "Mis ficheros"
     name: "fichero"
     new:
-      link: "Añadir nuevo"
+      link: "Añadir fichero"
       title: "Nuevo fichero"
     new_activity:
       attach: "Adjuntar fichero"

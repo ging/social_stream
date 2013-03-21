@@ -1,6 +1,8 @@
 <div class="event">
   <div class="avatar">
-    <%= link_to icon(event, 50), event, :title => event.title %>
+    <%= link_to event, :title => event.title do %>
+      <i class="icon_50-event"></i>
+    <% end %>
   </div>
 
   <div class="data">

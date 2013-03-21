@@ -5,7 +5,7 @@
 //= require jquery.browser
 //= require jquery.cleditor.min
 
-//= require social_stream.pagination
+//= require social_stream/pagination
 
 SocialStream.Conversation = (function(SS, $, undefined) {
 	var indexCallbacks = [];

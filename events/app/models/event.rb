@@ -9,6 +9,10 @@ class Event < ActiveRecord::Base
 
   validate :room_belongs_to_receiver
 
+  define_index do
+    activity_object_index
+  end
+
   def to_json(options = {})
     if recurrence
       st = options[:start].try(:to_date)

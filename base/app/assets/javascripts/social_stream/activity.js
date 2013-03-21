@@ -1,4 +1,4 @@
-//= require social_stream.objects
+//= require social_stream/object
 
 SocialStream.Activity = (function(SS, $, undefined){
 	var scrollToActivity = function(){
@@ -9,7 +9,7 @@ SocialStream.Activity = (function(SS, $, undefined){
 
 	}
 
-	SS.Objects.addInitCallback(scrollToActivity);
+	SS.Object.addInitCallback(scrollToActivity);
 
 	return {
 	}

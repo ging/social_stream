@@ -33,6 +33,7 @@ en:
     new:
       title: "New event"
     one: "an event"
+    other: "events"
     popover:
       title: "Events on %{date}"
     poster:

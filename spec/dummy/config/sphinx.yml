@@ -1,0 +1,12 @@
+development:
+  enable_star: 1
+  min_infix_len: 1
+  expand_keywords: 1
+test:
+  enable_star: 1
+  min_infix_len: 1
+  expand_keywords: 1
+production:
+  enable_star: 1
+  min_infix_len: 1
+  expand_keywords: 1

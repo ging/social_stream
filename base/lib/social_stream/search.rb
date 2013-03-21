@@ -1,5 +1,8 @@
 module SocialStream
   module Search
+    #TODO: sync with ThinkingSphinx min_infix_len and min_prefix_len options
+    MIN_QUERY = 3
+
     class << self
       def keys(search_type)
         case search_type
@@ -34,6 +37,8 @@ module SocialStream
           else
             extended_search_models.values.flatten
           end
+        when :repository
+          SocialStream.repository_models.map{ |m| m.to_s.classify.constantize }
         else
           raise "Unknown search type #{ search_type }"
         end

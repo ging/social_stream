@@ -12,6 +12,6 @@
 //= require social_cheesecake
 //
 //= require_self
-//= require_tree .
+//= require_tree ./social_stream
 
 var SocialStream = SocialStream || {};
