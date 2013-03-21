@@ -1,0 +1,35 @@
+//
+// Responsive: Landscape phone to desktop/tablet
+// --------------------------------------------------
+
+
+@media (max-width: 767px)
+
+  #new_site_client
+    .new_site_client
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      h1
+        @extend .hidden-phone
+        @extend .hidden-tablet
+      #error_explanation
+        h2
+          font-size: 20px
+      #new_application
+        section
+          input
+            &[type="file"],
+            &[type="text"]
+              @include grid-core-span(11, $fluidGridColumnWidth, $fluidGridGutterWidth)
+              margin-left: 2.9%
+          textarea
+            @include grid-core-span(11, $fluidGridColumnWidth, $fluidGridGutterWidth)
+            margin-left: 2.9%
+
+
+  
+// UP TO LANDSCAPE PHONE
+// ---------------------
+
+@media (max-width: 480px)
+
+  

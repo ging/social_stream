@@ -38,6 +38,47 @@
     color: $white
 
 
+.btn-blue-invert
+  @include ie7-inline-block()
+  padding: 4px 12px
+  margin-bottom: 0
+  font-size: $baseFontSize
+  line-height: $baseLineHeight
+  vertical-align: middle
+  cursor: pointer
+  background-color: $blue
+  border: 1px solid $white 
+  *border: 0
+  color: $white
+  background-image: none
+  @include ie7-restore-left-whitespace()
+  @include box-shadow(inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05))
+  @include transition(background 1s, color, 1s)
+  a
+    color: $gray
+  
+  &:hover
+    border: 1px solid $blue
+    background-color: $white !important
+    color: $blue
+  
+  &:focus 
+    @include tab-focus()
+  
+  &.active
+    border: 1px solid $blue
+    background-color: $white !important
+    color: $blue
+
+  &.disabled,
+  &[disabled] 
+    cursor: default
+    @include opacity(85)
+    background-color: $white
+    color: $gray
+
+
+
 
 .btn-see-more
   width: 98%

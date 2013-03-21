@@ -1,13 +1,13 @@
 #document_info
-  @include makeColumn(6, 0)
+  @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
   display: inline-block
 .filter
-  @include makeColumn(3, 0)
+  @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
   display: inline
   margin-top: 3px
 #documents
   .document_show
-    @include makeColumn(1, 0)
+    @include grid-core-span(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
     display: inline
   input
     &[type="text"]
@@ -18,7 +18,7 @@
     display: inline-block
     margin: 3px 0 0 -14px
   .tab-content
-    @include makeColumn(10, 0)
+    @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
     padding-bottom: 100px
 
   nav.more
