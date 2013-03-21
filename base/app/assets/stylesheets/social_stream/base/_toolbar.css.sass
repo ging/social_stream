@@ -10,12 +10,41 @@
       margin-top: 6px
   .contact-button
     .btn-group
-      button
+      width: 100%
+      margin-top: 6px
+      .btn
+        width: 100% !important
         @extend .btn-blue
         @extend .border-radius-5
+        &:hover
+          .caret
+            border-top-color: $white
+            border-bottom-color: $white
+            @include transition(border 1s, color, 1s)
+        .caret 
+          border-top-color: $gray
+          border-bottom-color: $gray
+          margin-left: 14px
+          &:hover
+            border-top-color: $white
+            border-bottom-color: $white
+            @include transition(background 1s, color, 1s)
+
   .icon_navbar-message-blue,
   .icon_tool16-info
     margin-right: 4px
+  ul.buttons
+    background: $white
+    li
+      @extend .btn-blue
+      @include border-radius(5px)
+      &:hover
+        a
+          color: $white
+          @include transition(color 1s)
+      a
+        &:hover
+          color: $white
     
 .toolbar-messages
   .toolbar_menu

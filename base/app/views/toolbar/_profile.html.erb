@@ -2,7 +2,9 @@
   <div class="user">
     <%= render partial: 'toolbar/logo',
                locals: { subject: subject } %>
-
+    <% if current_subject.present? && subject != current_subject %>
+    
+    <% end %>
     <div class="contact-button">
       <%= contact_to subject %>
 
@@ -18,7 +20,7 @@
   </div>
   <ul class="buttons">
     <li>
-      <%= link_to [ subject, :profile ], class: "btn-blue" do  %>
+      <%= link_to [ subject, :profile ] do  %>
         <i class='icon_tool16-info'></i> <%= t 'menu.information' %>
       <% end %>
     </li>
@@ -26,26 +28,24 @@
       <%= render partial: 'toolbar/groups' %>
     </li>
 
-    <% if current_subject.present? && subject != current_subject %>
-      <li>
-        <%= link_to new_message_path(:receiver => subject.slug), class: "btn-blue" do %>
-          <i class='icon_navbar-message-blue'></i> <%= t 'send' %>
-        <% end %>
-      </li>
-    <% end %>
     <li>
-      <%= link_to [ subject, :profile ], class: "btn-blue" do  %>
+      <%= link_to [ subject, :profile ] do  %>
         <i class='icon_navbar-contacts'></i> <%= t 'menu.contacts' %>
       <% end %>
     </li>
 
     <% if SocialStream.repository_models.present? %>
       <li>
-        <%= link_to [ subject, :repository ], class: "btn-blue"  do %>
+        <%= link_to [ subject, :repository ] do %>
           <%= image_tag 'icons/resources.png' %> <%= t 'repository.title' %>
         <% end %>
       </li>
     <% end %>
+    <li>
+      <%= link_to new_message_path(:receiver => subject.slug) do %>
+        <%= t 'send message' %>
+      <% end %>
+    </li>
 
     <div class="base_items"/>
   </ul>

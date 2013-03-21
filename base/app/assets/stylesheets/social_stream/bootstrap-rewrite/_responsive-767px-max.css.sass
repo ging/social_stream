@@ -29,6 +29,11 @@
     #toolbar
       @extend .hidden-phone
       @extend .hidden-tablet
+      .send-message
+        margin-top: 10px
+        a
+          padding: 4px 27px
+          @include border-radius(5px)
         
     .activities
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
@@ -47,19 +52,51 @@
     #toolbar
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       .user
-        @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
         float: left
+      .send-message
+        margin-top: 10px
+        a
+          padding: 4px 27px
+          @include border-radius(5px)
+      .contact-button
+        .btn-group
+          width: 100%
+          margin-top: 6px
+          .btn
+            width: 100% !important
+            &:hover
+              .caret
+                border-top-color: $white
+                border-bottom-color: $white
+                @include transition(border 1s, color, 1s)
+            .caret 
+              border-top-color: $gray
+              border-bottom-color: $gray
+              margin-left: 14px
+              &:hover
+                border-top-color: $white
+                border-bottom-color: $white
+                @include transition(background 1s, color, 1s)
         .logo_home,
         #avatar_profile
           float: left
+          .logo_caption
+            @extend .hidden-phone
       ul.buttons
-        @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
         display: inline-block
         float: left
-        margin-left: 2%
+        margin-left: 8%
+        margin-top: 4px
+        background: $white
         li
+          margin-bottom: 7px
+          margin-left: 0px
           a
             @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
+            &:hover
+              text-decoration: none
+
       .contacts-toolbar
         @extend .hidden-phone
 
@@ -413,6 +450,20 @@
   #home,
   #user,
   #group
+    #toolbar
+      .send-message
+        margin-top: 10px
+        a
+          padding: 4px 27px
+          @include border-radius(5px)
+      .contact-button
+        .btn-group
+          width: 100%
+          margin-top: 6px
+          .btn
+            width: 100% !important
+      ul.buttons
+        @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
     .activities
       .wall_input
         #new_post
