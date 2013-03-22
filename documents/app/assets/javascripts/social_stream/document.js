@@ -31,7 +31,7 @@ SocialStream.Document = (function(SS, $, undefined){
   };
 
   var initTagsForm = function() {
-    SS.Tag.select2("#document_tag_list");
+    SS.Tag.select2('input[name$="[tag_list]"]');
   };
 
   var initNewActivity = function() {
