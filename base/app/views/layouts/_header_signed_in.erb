@@ -58,11 +58,7 @@
           <i class='icon_navbar-contacts <%= current_header_icon_class(:contacts) %>'></i>
         <% end %>
       </li>
-      <li class="hidden-desktop">
-        <%= link_to events_path do %>
-          <i class="icon_navbar-calendar <%= current_header_icon_class(:events) %>"></i> 
-        <% end %>
-      </li>
+    
       <% if SocialStream.repository_models.present? %>
       <li>
       <%= link_to repository_path do %>
