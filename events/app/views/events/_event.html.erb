@@ -1,8 +1,21 @@
-<%= div_for event do %>
+<div class="event">
+  <div class="avatar">
+    <%= link_to event, :title => event.title do %>
+      <i class="icon_50-event"></i>
+    <% end %>
+  </div>
 
-  <%= render :partial => "events/date", :locals => { :event => event } %>
+  <div class="data">
+    <div class="name">
+      <%= link_to truncate(event.title, :length => 15), event %>
+    </div>
 
-  <%= render :partial => "events/poster", :locals => { :event => event } %>
+    <div class="date">
+      <%= event.start_at.to_formatted_s(:rfc822) %>
+    </div>
 
-  <%= render :partial => "events/details", :locals => { :event => event } %>
-<% end %>
+    <div class="frequency">
+      <%= event.frequency_description %>
+    </div>
+  </div>
+</div>

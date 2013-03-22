@@ -1,7 +1,1 @@
-<% if activity_object.acts_as_actor? %>
-  <div class="block">
-    <%= model_with_details activity_object.object %>
-  </div>
-<% else %>
-  <%= render activity_object.object %>
-<% end %>
+<%= render activity_object.object %>

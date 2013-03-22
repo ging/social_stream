@@ -1,0 +1,8 @@
+<%= div_for event do %>
+
+  <%= render :partial => "events/date", :locals => { :event => event } %>
+
+  <%= render :partial => "events/poster", :locals => { :event => event } %>
+
+  <%= render :partial => "events/details", :locals => { :event => event } %>
+<% end %>

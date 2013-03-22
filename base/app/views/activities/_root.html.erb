@@ -19,7 +19,9 @@
 
   <div class="media-body">
     <section class="objects">
-      <%= render activity.activity_objects %>
+      <%= render partial: 'activity_objects/timeline', 
+                 collection: activity.activity_objects,
+                 as: :object %>
     </section>
 
     <%= render :partial => 'activities/actions',

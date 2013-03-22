@@ -1,11 +1,2 @@
-<%= div_for audio do %>
-
-  <% if audio.file_processing %>
-    <%= render :partial => 'audios/audio_processing', :locals => {:audio => audio}%>
-  <% else %>
-    <%= render :partial => 'audios/audio_processed', :locals => {:audio => audio}%>  
-  <% end %>
-
-<% end %>
-
-<div class="clearfloat"></div>
+<%= render partial: 'common_documents/document',
+           object: audio %>
