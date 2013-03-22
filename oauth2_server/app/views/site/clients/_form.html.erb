@@ -14,28 +14,23 @@
       </div>
     <% end %>
     <article id="new_application">
-      <section class="upload">
-        <%= f.label :file, t('avatar.upload') %>
-        <%= f.file_field :file %>
-      </section>
-
-      <section class="title">
-        <%= f.label :title, t('application.info.title') %>
-        <%= f.text_field :title %>
+      <section class="name">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
       </section>
 
       <section class="description">
-        <%= f.label :description, t('application.info.description') %>
+        <%= f.label :description %>
         <%= f.text_area :description %>
       </section>
 
       <section class="url">
-        <%= f.label :url, t('application.info.url') %>
+        <%= f.label :url %>
         <%= f.text_area :url %>
       </section>
 
       <section class="callback_url">
-        <%= f.label :callback_url, t('application.callback_url')  %>
+        <%= f.label :callback_url %>
         <%= f.text_area :callback_url %>
       </section>
       <%= f.submit :class => "btn pull-right" %>
