@@ -1,7 +1,7 @@
 <!-- insert_before "code[erb-silent]:contains('SocialStream.repository_models')" -->
 
 <li class="hidden-desktop">
-  <%= link_to events_path do %>
+  <%= link_to [ current_subject, Event.new ] do %>
     <i class="icon_navbar-calendar <%= current_header_icon_class(:events) %>"></i> 
   <% end %>
 </li>
