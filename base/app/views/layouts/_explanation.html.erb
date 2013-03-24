@@ -5,7 +5,6 @@
   <h4 class="lite">
     <%= t 'frontpage.stats', users: User.count, groups: Group.count %>
   </h4>
-  <a class="btn">
-    explore
-  </a>
+
+  <%= link_to t('explore.link'), explore_path, class: 'btn' %>
 </section>

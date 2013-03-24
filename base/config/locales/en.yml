@@ -233,6 +233,7 @@ en:
       timeline: "Timeline"
       tags: "Tags"
       search: "Search"
+    link: "Explore"
     participants:
       last_active: "Last active"
       last_registered: "Last registered"

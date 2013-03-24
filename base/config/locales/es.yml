@@ -231,6 +231,7 @@ es:
       timeline: "Linea temporal"
       tags: "Etiquetas"
       search: "Buscar"
+    link: "Explora"
     participants:
       last_active: "Últimos activos"
       last_registered: "Últimos registrados"
