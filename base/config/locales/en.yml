@@ -256,29 +256,17 @@ en:
       other: "%{count} followers"
   forgot_password: "Forgot you password?"
   frontpage:
-    collaborate:
-      default: "Collaborate"
-      sentence1: "Organize your projects and activities"
-      sentence2: "Participate in conferences and events"
-      sentence3: "Create your own group and conferences"
-    elements:
-      comments: "Comments"
-      conferences: "Conferences"
-      networks: "Social Networks"
-      organizers: "Organizers"
-      participants: "Participants"
-      groups: "Groups"
-      tags: "Tags"
-    main_title: "Social Stream is a core for building social network websites."
-    meet:
-      default: "Meet"
-      sentence1: "Meet interesting people and groups"
-      sentence2: "Find last activity of your contacts"
-    register: "Register now!"
-    share:
-      default: "Share"
-      sentence1: "Your proyects and activities"
-      sentence2: "Posts, photos, audio and videos"
+    main_title: "Social Stream, the core for building distributed social network websites."
+    presentation:
+      modular:
+        header: "Modular"
+        p: "Available <a href=\"https://github.com/ging/social_stream#social-stream-components\">Social Stream components</a> provide your application only with the features you need in your social network. Just add your desired gems to your Gemfile"
+      flexible:
+        header: "Flexible"
+        p: "Completely customize your social network <a href=\"https://github.com/ging/social_stream/wiki/How-to-change-controllers%2C-models%2C-views%2C-assets-and-locales\">changing any Social Stream component</a>, <a href=\"https://github.com/ging/social_stream/wiki/How-to-add-new-activity-objects\">adding new activity objects</a> or changing the CSS using <a href=\"http://sass-lang.com/\">Sass</a>"
+      community:
+        header: "Community"
+        p: "Social Stream enjoys a growing community of developers. Feel free to drop a message at <a href=\"http://groups.google.com/group/social-stream\">Social Stream's Google group</a> or <a href=\"http://stackoverflow.com/questions/tagged/social-stream\">StackOverflow</a> if you have problems. <a href=\"https://github.com/ging/social_stream/issues/new\">Open an issue</a> if you find a defect. Pull request are very welcomed!"
     stats: "%{users} users and %{groups} groups registered"
   group:
     one: "group"
