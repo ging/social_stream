@@ -3,7 +3,7 @@
     <%= form_for Post.new(owner_id: Actor.normalize_id(receiver)), remote: true do |f| %>
       <%= f.hidden_field :owner_id %>
     
-      <%= f.text_field :text, placeholder: t('post.input') %>
+      <%= f.text_area :text, placeholder: t('post.input'), maxlength: Post::MAXIMUM_LENGTH %>
       <section class="wall_input-actions">
         <%= f.submit t('activity.share'), class: "btn" %>
 
