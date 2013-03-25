@@ -1,3 +1,5 @@
 <section id="toolbar" class="toolbar-home">
   <%= render partial: 'toolbar/subject' %>
+
+  <%= render partial: 'toolbar/groups', locals: { subject: current_subject } %>
 </section>

@@ -64,6 +64,10 @@ module SocialStream
             __send__ m
           end
         }
+
+        scope :recent, -> {
+          order('groups.updated_at DESC')
+        }
   
         define_index do
           indexes actor.name, :sortable => true

@@ -285,6 +285,9 @@ en:
     input: "What is the name of the group?"
     last: "Last groups"
     my: "My groups"
+    n:
+      one: "%{count} group"
+      other: "%{count} groups"
     new:
       action: "New group"
       name: "Name"
@@ -298,6 +301,7 @@ en:
     title:
       one: "Group"
       other: "Groups"
+    view_all: "View all..."
   help: "Help"
   helpers:
     submit:

@@ -16,13 +16,6 @@ class Group < ActiveRecord::Base
     actor!.profile || actor!.build_profile
   end
  
-  def recent_groups
-    contact_subjects(:type => :group, :direction => :sent) do |q|
-      q.select("contacts.created_at").
-        merge(Contact.recent)
-    end
-  end
-
   private
 
   # Creates ties from founder to the group, based on _relation_ids,
