@@ -1,5 +1,6 @@
 //= require jquery.autosize
 //
+//= require social_stream/callback
 //= require social_stream/timeline
 //= require social_stream/object
 SocialStream.Comment = (function(SS, $, undefined){
