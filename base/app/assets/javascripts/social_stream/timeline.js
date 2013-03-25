@@ -72,6 +72,46 @@ SocialStream.Timeline = (function(SS, $, undefined){
     $('#post_text').val('');
   };
 
+  var initModalCarousel = function() {
+    var elements = $('.timeline [data-modal-carousel-id="false"]');
+
+    elements.each(addToModalCarousel);
+
+    elements.click(showModalCarousel);
+  };
+
+  var addToModalCarousel = function(i, el) {
+    var timeline = $(el).closest('.timeline'),
+        carousel = $('#modal-carousel', timeline),
+        carouselInner = $('.carousel-inner', carousel),
+        carouselIndicators = $('.carousel-indicators', carousel),
+        inEl,
+        order;
+
+    inEl = $('<div/>', { class: 'item' }).
+      append($(el).attr('data-modal-carousel-content')).
+      appendTo(carouselInner);
+
+    order = carouselInner.children('div').length - 1;
+
+    if (order === 0) {
+      inEl.addClass('active');
+    }
+
+    $('<li/>', { "data-target": "#modal-carousel", "data-slide-to" : order }).
+      appendTo(carouselIndicators);
+
+    $(el).attr('data-modal-carousel-id', order);
+  };
+
+  var showModalCarousel = function(event) {
+    var timeline = $(event.target).closest('.timeline');
+
+    $('#modal-carousel', timeline).
+      carousel(parseInt($(event.target).attr('data-modal-carousel-id'), 10)).
+      carousel('pause');
+    $('.timeline-modal-carousel', timeline).modal('show');
+  };
 
   var initPagination = function() {
     SS.Pagination.show(show);
@@ -79,6 +119,7 @@ SocialStream.Timeline = (function(SS, $, undefined){
 
   addShowCallback(initPrivacyTooltips);
   addShowCallback(initComments);
+  addShowCallback(initModalCarousel);
   addShowCallback(initPagination);
 
   addCreateCallback(initPrivacyTooltips);
