@@ -1,5 +1,5 @@
 <section class="groups">
-  <% if (gs = subject.contact_subjects(direction: :sent, type: :group) { |as| as.merge(Group.recent).first(6) }).present? %>
+  <% if (gs = subject.contact_subjects(direction: :sent, type: :group) { |as| as.recent.first(6) }).present? %>
     <h4>
       <%= t('group.n', :count => subject.contact_subjects(:direction => :sent, type: :group).count) %>
     </h4>
