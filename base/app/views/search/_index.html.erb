@@ -2,6 +2,7 @@
   <h4>
     <%= t 'explore.search.title' %>
   </h4>
+  <!-- TODO
   <div class="btn-group" data-toggle="buttons-checkbox">
       <button type="button" class="btn">todo</button>
       <button type="button" class="btn">usuarios</button>
@@ -13,6 +14,7 @@
       <button type="button" class="btn">audios</button>
       <button type="button" class="btn">ficheros</button>
     </div>
+  -->
   <%= form_tag search_path, method: :get do %>
      <%= select_tag 'type', options_for_select(SocialStream::Search.options_for_type_select, params[:type]) %>
 
