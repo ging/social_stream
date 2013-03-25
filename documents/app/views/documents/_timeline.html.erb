@@ -8,8 +8,8 @@
       <%= document.title %>
     </h6>
 
-    <div class="description">
-      <%= simple_format "#{ auto_link(document.description) } #{ link_to t('details.msg'), document_path(document), :class => 'view_more' }" %>
-    </div>
+    <%= render partial: 'objects/timeline_description',
+               object: document,
+               as: :obj %>
   </div>
 <% end %>

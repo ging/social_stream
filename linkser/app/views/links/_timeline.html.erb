@@ -26,10 +26,9 @@
     <div class="url">
       <%= link_to link.url, link.url, :target => "_blank" %>
     </div>
-    <% if link.description %>
-      <div class="description">
-        <%= auto_link(link.description) %>
-      </div>
-    <% end %>
+
+    <%= render partial: 'objects/timeline_description',
+               object: link,
+               as: :obj %>
   </div>
 <% end %>

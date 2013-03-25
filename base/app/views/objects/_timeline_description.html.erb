@@ -1,0 +1,3 @@
+<div class="description">
+  <%= simple_format "#{ auto_link truncate(obj.description, length: Post::MAXIMUM_LENGTH) } #{ link_to t('details.msg'), obj, :class => 'view_more' }" %>
+</div>

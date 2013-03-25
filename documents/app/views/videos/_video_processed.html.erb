@@ -9,9 +9,9 @@
     <%= video.title %>
   </h6>
 
-  <div class="description">
-    <%= simple_format "#{ auto_link(video.description) } #{ link_to t('details.msg'),video, :class => 'view_more' }" %>
-  </div>
+  <%= render partial: 'objects/timeline_description',
+             object: video,
+             as: :obj %>
 
   <div class="format-links">
     <%= link_to "WebM", video_path(video, :format => :webm), :class => "video-webm" %>

@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
   include SocialStream::Models::Object
 
-  MAXIMUM_LENGTH = 144
+  MAXIMUM_LENGTH = 140
 
   alias_attribute :text, :description
   validates :text,
