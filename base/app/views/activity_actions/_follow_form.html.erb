@@ -1,3 +1,4 @@
+<% if user_signed_in? %>
 <%= form_for toggle_follow_action(activity_object),
              :html => { :class => "follow_form-#{ dom_id activity_object }" },
              :remote => true do |f| %>
@@ -7,4 +8,5 @@
   <%= f.hidden_field :follow %>
 
   <%= f.submit t("#{ activity_object.object_type.underscore }.activity_action.#{ f.object.follow ? 'follow' : 'unfollow' }", class: "btn", :default => "activity_action.#{ f.object.follow ? 'follow' : 'unfollow' }") %>
+<% end %>
 <% end %>

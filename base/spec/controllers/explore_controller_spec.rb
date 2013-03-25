@@ -19,12 +19,23 @@ describe ExploreController do
     end
   end
 
-  describe 'files' do
+  describe 'resources' do
     it "should render" do
-      get :index, section: :files
+      get :index, section: :resources
 
       response.should be_success
     end
   end
 
+  describe 'timeline' do
+    before do
+      Factory(:public_activity)
+    end
+
+    it "should render" do
+      get :index, section: 'timeline'
+
+      response.should be_success
+    end
+  end
 end
