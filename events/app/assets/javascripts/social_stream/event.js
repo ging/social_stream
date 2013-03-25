@@ -1,19 +1,12 @@
-//= require social_stream/timeline
+//= require social_stream/callback
+//= require social_stream/events.poster
 
 SocialStream.Event = (function(SS, $, undefined) {
-	var indexCallbacks = [];
+  var callback = new SS.Callback();
 
-	var addIndexCallback = function(callback){
-		indexCallbacks.push(callback);
-	}
-
-	var index = function(){
-		$.each(indexCallbacks, function(i, callback){ callback(); });
-	}
-
-	var color = function(){
-		SocialStream.Events.current.eventColor;
-	}
+  var color = function(){
+    return SS.Events.current.eventColor;
+  };
 
   var fixDates = function(){
     $(".event").each(function(){
@@ -38,16 +31,13 @@ SocialStream.Event = (function(SS, $, undefined) {
         hourEl.text(date.getHours() + ':' + minutes);
       }
     });
-  }
+  };
 
-	addIndexCallback(fixDates);
+  callback.register('index', fixDates);
+  callback.register('index', SocialStream.Events.Poster.show);
 
-  SocialStream.Timeline.addInitCallback(index);
-
-	return {
-		addIndexCallback: addIndexCallback,
-		color: color,
-		index: index
-	}
+  return callback.extend({
+    color: color,
+  });
 
 })(SocialStream, jQuery);
