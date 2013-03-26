@@ -4,17 +4,11 @@
 //= require jquery.browser
 //= require jquery.cleditor.min
 //= require jquery.ae.image.resize
+//
+//= require social_stream/callback
 
 SocialStream.Message = (function(SS, $, undefined){
-  var new_Callbacks = [];
-
-  var addNew_Callback = function(callback){
-    new_Callbacks.push(callback);
-  };
-
-  var new_ = function(options){
-    $.each(new_Callbacks, function(i, callback){ callback(options); });
-  };
+  var callback = new SS.Callback();
 
   var initCleditor = function() {
     $('#body').cleditor({
@@ -27,10 +21,10 @@ SocialStream.Message = (function(SS, $, undefined){
     SocialStream.Contact.select2('#_recipients');
   };
 
-  addNew_Callback(initCleditor);
-  addNew_Callback(initRecipients);
+  callback.register('new_',
+                    initCleditor,
+                    initRecipients);
 
-  return {
-    new_: new_
-  };
+  return callback.extend({
+  });
 })(SocialStream, jQuery);

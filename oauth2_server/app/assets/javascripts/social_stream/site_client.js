@@ -1,22 +1,15 @@
+//= require social_stream/callback
+
 SocialStream.SiteClient = (function(SS, $, undefined) {
-  var indexCallbacks = [];
-
-  var addIndexCallback = function(callback){
-    indexCallbacks.push(callback);
-  };
-
-  var index = function(options){
-    $.each(indexCallbacks, function(i, callback){ callback(options); });
-  };
+  var callback = new SS.Callback();
 
   var initNewModal = function() {
     $('.new_site_client-modal-link').attr('href', '#new_site_client-modal');
   };
 
-  addIndexCallback(initNewModal);
+  callback.register('index', initNewModal);
 
-  return {
-    index: index
-  };
+  return callback.extend({
+  });
 
 })(SocialStream, jQuery);

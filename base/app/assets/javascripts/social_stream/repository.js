@@ -1,13 +1,7 @@
+//= require social_stream/callback
+
 SocialStream.Repository = (function(SS, $, undefined){
-  var showCallbacks = [];
-
-  var addShowCallback = function(callback){
-    showCallbacks.push(callback);
-  };
-
-  var show = function(){
-    $.each(showCallbacks, function(i, callback){ callback(); });
-  };
+  var callback = new SS.Callback();
 
   var initFilter = function() {
     $('.repository .loading').hide();
@@ -35,10 +29,9 @@ SocialStream.Repository = (function(SS, $, undefined){
   };
 
 
-  addShowCallback(initFilter);
+  callback.register('show', initFilter);
 
-  return {
-    show: show
-  };
+  return callback.extend({
+  });
 
 }) (SocialStream, jQuery);

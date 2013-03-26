@@ -1,22 +1,14 @@
-//= require social_stream/timeline
-//= require social_stream/wall
+//= require social_stream/audience
+//= require social_stream/comment
 
 SocialStream.Object = (function(SS, $, undefined){
-	var initCallbacks = [];
+  var callback = new SS.Callback();
 
-	var addInitCallback = function(callback){
-		initCallbacks.push(callback);
-	}
+  callback.register('show',
+                    SS.Comment.index,
+                    SS.Audience.index);
 
-	var init = function(){
-		$.each(initCallbacks, function(i, callback){ callback(); });
-	}
-
-	addInitCallback(SocialStream.Timeline.initPrivacyTooltips);
-
-	return {
-		addInitCallback: addInitCallback,
-		init: init
-	}
+  return callback.extend({
+  });
 
 })(SocialStream, jQuery);

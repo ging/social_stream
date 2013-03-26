@@ -1,13 +1,7 @@
+//= require social_stream/callback
+
 SocialStream.SearchHeader = (function(SS, $, undefined){
-  var showCallbacks = [];
-
-  var addShowCallback = function(callback){
-    showCallbacks.push(callback);
-  };
-
-  var show = function(){
-    $.each(showCallbacks, function(i, callback){ callback(); });
-  };
+  var callback = new SS.Callback();
 
   var initMat = function() {
     var searchNav = $('.search-nav');
@@ -50,9 +44,8 @@ SocialStream.SearchHeader = (function(SS, $, undefined){
     });
   };
 
-  addShowCallback(initMat);
+  callback.register('show', initMat);
 
-  return {
-    show: show
-  };
+  return callback.extend({
+  });
 }) (SocialStream, jQuery);

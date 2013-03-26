@@ -1,6 +1,8 @@
-//= require social_stream/timeline
+//= require social_stream/callback
 
 SocialStream.Audio = (function(SS, $, undefined){
+  var callback = new SS.Callback();
+
   var initJplayer = function(){
     $(".jp-audio .jp-jplayer").each(function() {
       $(this).jPlayer({
@@ -19,7 +21,9 @@ SocialStream.Audio = (function(SS, $, undefined){
     $(".format-links").hide();
   }
 
-  SocialStream.Timeline.addInitCallback(initJplayer);
+  callback.register('show', initJplayer);
 
+  return callback.extend({
+  });
 
 })(SocialStream, jQuery);

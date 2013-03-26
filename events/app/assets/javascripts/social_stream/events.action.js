@@ -1,31 +1,33 @@
 //= require social_stream/action
 
 SocialStream.Events.Action = (function(SS, $, undefined){
-	var animateCalendar = function(action) {
-		if (action.activity_object.type != "Event") {
-			return;
-		}
+  var animateCalendar = function(action) {
+    if (action.activity_object.type != "Event") {
+      return;
+    }
 
-		if (!action.follow) {
-			return;
-		}
+    if (!action.follow) {
+      return;
+    }
 
-		var fromEl = SS.Action.followForms(action).closest(".event").find("time");
-		var fromDate = new Date(fromEl.attr('datetime'));
+    var el = SS.Action.followForms(action).closest(".event");
+    var eventDate = new Date(el.find("time").attr('datetime'));
 
-		var toEl = SS.Calendar.eventElement(fromDate) || SS.Calendar.element;
+    var calEl = SS.Calendar.eventElement(eventDate) || SS.Calendar.element;
 
-		if (action.follow.following) {
-			fromEl.effect("transfer", {to: toEl}, 1000);
-			toEl.addClass("busy");
-		} else {
-			toEl.effect("pulsate");
-		}
-	}
 
-	SocialStream.Action.addUpdateCallback(animateCalendar);
+    if (action.follow.following) {
+      el.find('.poster').effect("transfer", {to: calEl});
+      calEl.addClass("busy");
+    } else {
+      calEl.effect("transfer", {to: el.find('.poster')});
+      calEl.effect("pulsate");
+    }
+  };
 
-	return {
-	}
+  SS.Action.callbackRegister('update', animateCalendar);
+
+  return {
+  };
 
 })(SocialStream, jQuery);

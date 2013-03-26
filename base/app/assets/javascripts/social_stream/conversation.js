@@ -5,26 +5,18 @@
 //= require jquery.browser
 //= require jquery.cleditor.min
 
+//= require social_stream/callback
 //= require social_stream/pagination
 
 SocialStream.Conversation = (function(SS, $, undefined) {
-	var indexCallbacks = [];
-
-	var addIndexCallback = function(callback){
-		indexCallbacks.push(callback);
-	};
-
-	var index = function(){
-		$.each(indexCallbacks, function(i, callback){ callback(); });
-	};
+  var callback = new SS.Callback();
 
   var initPagination = function() {
     SS.Pagination.show();
   };
 
-  addIndexCallback(initPagination);
+  callback.register('index', initPagination);
 
-  return {
-    index: index
-  };
+  return callback.extend({
+  });
 })(SocialStream, jQuery);

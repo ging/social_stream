@@ -2,17 +2,11 @@
 //= require jqcloud-0.1.3
 //= require jquery.validate
 //= require jquery.ba-url
+//
+//= require social_stream/callback
 
 SocialStream.Group = (function(SS, $, undefined){
-  var new_Callbacks = [];
-
-  var addNew_Callback = function(callback){
-    new_Callbacks.push(callback);
-  };
-
-  var new_ = function(options){
-    $.each(new_Callbacks, function(i, callback){ callback(options); });
-  };
+  var callback = new SS.Callback();
 
   var initParticipants = function() {
     SS.Contact.select2("#group__participants");
@@ -28,11 +22,11 @@ SocialStream.Group = (function(SS, $, undefined){
     });
   };
 
-  addNew_Callback(initParticipants);
-  addNew_Callback(initTags);
-  addNew_Callback(initValidate);
+  callback.register('new_',
+                    initParticipants,
+                    initTags,
+                    initValidate);
 
-  return {
-    new_: new_
-  };
+  return callback.extend({
+  });
 })(SocialStream, jQuery);

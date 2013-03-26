@@ -101,7 +101,7 @@ SocialStream.Linkser.Wall = (function(SS, $) {
     resetWallInput({ postText: true });
   };
 
-  SocialStream.Wall.addShowCallback(init);
+  SocialStream.Wall.callbackRegister('show', init);
 
   return {
     create: create,

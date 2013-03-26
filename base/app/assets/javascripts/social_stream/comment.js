@@ -1,8 +1,9 @@
 //= require jquery.autosize
 //
-//= require social_stream/timeline
-//= require social_stream/object
+//= require social_stream/callback
 SocialStream.Comment = (function(SS, $, undefined){
+  var callback = new SS.Callback();
+
   var elAlwaysHidden = [
     "input[type=submit]"
   ];
@@ -13,13 +14,6 @@ SocialStream.Comment = (function(SS, $, undefined){
   ];
 
   var elAll = elAlwaysHidden.concat(elSometimesShown);
-
-  var initNew = function(){
-    initNewElements();
-    newCommentAutoSize();
-    newCommentClick();
-    newCommentLink();
-  };
 
   var hideNewCommentElements = function(root) {
     if (root === undefined)
@@ -95,17 +89,51 @@ SocialStream.Comment = (function(SS, $, undefined){
     });
   };
 
-  SocialStream.Timeline.addShowCallback(initNew);
+  var squeeze = function(){
+    //if there are 4 or more commments we only show the last 2 and a link to show the rest
+    $(".comments").each(function(){
+      var comments = $(this).children(".child");
 
-  SocialStream.Timeline.addCreateCallback(hideNewActivityCommentElements);
-  SocialStream.Timeline.addCreateCallback(newCommentAutoSize);
-  SocialStream.Timeline.addCreateCallback(newCommentClick);
-  SocialStream.Timeline.addCreateCallback(newCommentLink);
+      //check if there are more than 3 comments
+      if (comments.size() > 3){
+        $(this).prepend("<div class='hidden_comments'><a href='#' onclick='SocialStream.Comment.showAll(\"" + 
+                        $(this).attr('id') +"\"); return false;'>" + I18n.t('comment.view_all') + " (" +
+                        comments.size() + ")</a></div>");
 
-  SocialStream.Object.addInitCallback(initNew);
-
-  return {
-    initNew: initNew
+        comments.slice(0, comments.size() - 2).hide();
+      }
+    });
   };
+
+  var showAll = function(id){
+    $("#"+id).children().show('show');
+    //and hide the hide_show_comments
+    $("#"+id).children(".hidden_comments").hide();
+  };
+
+  var scrollToActivity = function(){
+    var activity_hash = window.location.hash.match(/^.*activity_(\d+).*$/);
+
+    if (activity_hash && activity_hash > 0){
+      $.scrollTo('#activity_' + activity_hash[1] ,1500,{axis:'y'});
+    }
+  };
+
+  callback.register('index',
+                    initNewElements,
+                    newCommentAutoSize,
+                    newCommentClick,
+                    newCommentLink,
+                    scrollToActivity);
+
+  callback.register('create',
+                    hideNewActivityCommentElements,
+                    newCommentAutoSize,
+                    newCommentClick,
+                    newCommentLink);
+
+  return callback.extend({
+    showAll: showAll
+  });
 
 })(SocialStream, jQuery);

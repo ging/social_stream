@@ -1,21 +1,23 @@
+//= require social_stream/callback
+
 SocialStream.Events.Poster = (function(SS, $, undefined){
-	var init = function(){
-		$('.event .poster .update').hide();
+  var callback = new SS.Callback();
 
-		$('.event .poster').hover(
-			function(){
-				$(this).find(".update").fadeIn("slow");
-			},
-			function(){
-				$(this).find(".update").fadeOut("slow");
-			});
-	};
+  var init = function(){
+    $('.event .poster .update').hide();
 
-	SS.Timeline.addInitCallback(init);
-	SS.Event.addIndexCallback(init);
+    $('.event .poster').hover(
+      function(){
+      $(this).find(".update").fadeIn("slow");
+    },
+    function(){
+      $(this).find(".update").fadeOut("slow");
+    });
+  };
 
-	return {
-		init: init
-	};
+  callback.register('show', init);
+
+  return callback.extend({
+  });
 
 })(SocialStream, jQuery);

@@ -1,44 +1,6 @@
+//= require social_stream/callback
 SocialStream.RelationCustom = (function(SS, $, undefined){
-	// FIXME: DRY!!
-	var indexCallbacks = [];
-
-	var addIndexCallback = function(callback){
-		indexCallbacks.push(callback);
-	};
-
-	var index = function(){
-		$.each(indexCallbacks, function(i, callback){ callback(); });
-	};
-
-	var createCallbacks = [];
-
-	var addCreateCallback = function(callback){
-		createCallbacks.push(callback);
-	};
-
-	var create = function(options){
-		$.each(createCallbacks, function(i, callback){ callback(options); });
-	};
-
-	var updateCallbacks = [];
-
-	var addUpdateCallback = function(callback){
-		updateCallbacks.push(callback);
-	};
-
-	var update = function(options){
-		$.each(updateCallbacks, function(i, callback){ callback(options); });
-	};
-
-	var destroyCallbacks = [];
-
-	var addDestroyCallback = function(callback){
-		destroyCallbacks.push(callback);
-	};
-
-	var destroy = function(options){
-		$.each(destroyCallbacks, function(i, callback){ callback(options); });
-	};
+  var callback = new SS.Callback();
 
   var getListEl = function() {
     return $('#relation_customs .relation_list');
@@ -195,21 +157,19 @@ SocialStream.RelationCustom = (function(SS, $, undefined){
     $('#relation_' + options.relation.id + '_permissions').hide();
   };
 
-  addIndexCallback(initList);
-  addIndexCallback(initPermission);
+  callback.register('index',
+                    initList,
+                    initPermission);
 
-  addCreateCallback(addToList);
+  callback.register('create', addToList);
 
-  addUpdateCallback(resetNameForm);
-  addUpdateCallback(resetPermissionForm);
+  callback.register('update',
+                    resetNameForm,
+                    resetPermissionForm);
 
-  addDestroyCallback(hideElement);
+  callback.register('destroy', hideElement);
 
-  return {
-    index: index,
-    create: create,
-    update: update,
-    destroy: destroy
-  };
+  return callback.extend({
+  });
 
 })(SocialStream, jQuery);
