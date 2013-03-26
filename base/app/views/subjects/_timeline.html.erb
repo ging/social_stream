@@ -1,0 +1,8 @@
+<%= div_for subject do %>
+  <div class="avatar">
+    <%=link_to(image_tag(subject.logo.url(:small), :class => 'btn_subject', :alt => subject.name, :title => subject.name), subject) %>
+  </div>
+  <div class="group_name">
+    <%=link_to(truncate_name(subject.name), subject)%>
+  </div>
+<% end %>

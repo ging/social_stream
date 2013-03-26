@@ -231,6 +231,7 @@ es:
       timeline: "Linea temporal"
       tags: "Etiquetas"
       search: "Buscar"
+    link: "Explora"
     participants:
       last_active: "Últimos activos"
       last_registered: "Últimos registrados"
@@ -254,29 +255,17 @@ es:
       other: "%{count} seguidores"
   forgot_password: "¿Olvidaste tu contraseña?"
   frontpage:
-    collaborate:
-      default: "Colabora"
-      sentence1: "Organice sus proyectos y actividades"
-      sentence2: "Participe en grupos y conferencias"
-      sentence3: "Cree sus propios grupos y conferencias"
-    elements:
-      comments: "Comentarios"
-      conferences: "Conferencias"
-      networks: "Redes sociales"
-      organizers: "Organizadores"
-      participants: "Participantes"
-      groups: "Grupos"
-      tags: "Etiquetas"
-    main_title: "Social Stream es un núcleo para construir webs con características de red social"
-    meet:
-      default: "Encuentra"
-      sentence1: "Descubre grupos y gente interesante"
-      sentence2: "Encuentra la última actividad de tus contactos"
-    register: "¡Regístrate ahora!"
-    share:
-      default: "Comparte"
-      sentence1: "Tus proyectos y actividades"
-      sentence2: "Comentarios, fotos, audio y vídeo"
+    main_title: "Social Stream, el núcleo para construir webs con características de red social distribuída"
+    presentation:
+      modular:
+        header: "Modular"
+        p: "Los <a href=\"https://github.com/ging/social_stream#social-stream-components\">componentes de Social Stream</a> disponibles aportan solo las características que necesitas para tu red social. Simplemente añade las gemas que necesites a tu Gemfile"
+      flexible:
+        header: "Flexible"
+        p: "Personaliza completamente tu red social <a href=\"https://github.com/ging/social_stream/wiki/How-to-change-controllers%2C-models%2C-views%2C-assets-and-locales\">cambiando cualquier componente de Social Stream</a>, <a href=\"https://github.com/ging/social_stream/wiki/How-to-add-new-activity-objects\">añadiendo nuevas actividades</a> o cambiando el CSS con <a href=\"http://sass-lang.com/\">SASS</a>"
+      community:
+        header: "Comunidad"
+        p: "Social Stream disfruta de una comunidad creciente de desarrolladores. No dudes en dejar un mensaje en <a href=\"http://groups.google.com/group/social-stream\">el Google group de Social Stream</a> o <a href=\"http://stackoverflow.com/questions/tagged/social-stream\">StackOverflow</a> si te encuentras con problemas. <a href=\"https://github.com/ging/social_stream/issues/new\">Abre un reporte</a> si encutras algún fallo. ¡Los pull request son muy bienvenidos!"
     stats: "%{users} personas and %{groups} grupos registrados"
   group:
     one: "grupo"
@@ -294,6 +283,9 @@ es:
     input: "¿Cuál es el nombre del grupo?"
     last: "Últimos grupos"
     my: "Mis grupos"
+    n:
+      one: "%{count} grupo"
+      other: "%{count} groupos"
     new:
       action: "Nuevo grupo"
       name: "Nombre"
@@ -307,6 +299,7 @@ es:
     title:
       one: "Grupo"
       other: "Grupos"
+    view_all: "Ver todos..."
   help: "Ayuda"
   helpers:
     submit:

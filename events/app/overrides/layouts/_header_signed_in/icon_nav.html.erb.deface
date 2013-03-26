@@ -1,5 +1,6 @@
 <!-- insert_before "code[erb-silent]:contains('SocialStream.repository_models')" -->
 
+
 <li class="event">
   <%= link_to events_path do %>
     <i class="icon_navbar-calendar <%= current_header_icon_class(:events) %>"></i> 

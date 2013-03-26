@@ -135,6 +135,8 @@ class Actor < ActiveRecord::Base
     end
   }
 
+  scope :recent, -> { order('actors.updated_at DESC') }
+
   after_create :create_initial_relations
   
   after_create :save_or_create_profile

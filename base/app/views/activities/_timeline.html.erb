@@ -1,6 +1,8 @@
 <% section ||= nil %>
 
 <section class="timeline">
+  <%= render partial: 'activities/timeline_modal' %>
+
   <%= render Activity.timeline(section, current_subject).page(params[:page]) %>
 
   <%= render partial: 'layouts/more',

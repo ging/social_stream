@@ -7,9 +7,9 @@
     <%= event.frequency_description %>
   </div>
 
-  <div class="description">
-    <%= simple_format auto_link(event.description) %>
-  </div>
+  <%= render partial: 'objects/timeline_description',
+             object: event,
+             as: :obj %>
 
   <div class="follow">
     <div class="follow_sentence">

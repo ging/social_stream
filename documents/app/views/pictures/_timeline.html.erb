@@ -1,0 +1,18 @@
+<%= div_for picture do %>
+    <%= '<bla>' %>
+  <div class="thumb">
+    <%= image_tag thumb_file_for(picture, "170x127#"), "data-modal-carousel-id" => "false", "data-modal-carousel-content" => "#{ thumb_for(picture, 500) }" %>
+  </div>
+
+  <div class="text">
+    <h6>
+      <%= picture.title %>
+    </h6>
+
+    <%= render partial: 'objects/timeline_description',
+               object: picture,
+               as: :obj %>
+  </div>
+<% end %>
+
+<div class="clearfloat"></div>

@@ -1,5 +1,9 @@
 <div class="poster">
-  <%= event_timeline_thumb(event) %>
+  <% if event.poster.new_record? %>
+    <%= image_tag("poster.png") %>
+  <% else %>
+    <%= image_tag thumb_file_for(event.poster, '80x113#'), "data-modal-carousel-id" => "false", "data-modal-carousel-content" => "#{ thumb_for(event.poster, 500) }" %>
+  <% end %>
 
   <% if can? :update, event %>
     <div class="update">

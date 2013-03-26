@@ -1,0 +1,34 @@
+<%= div_for link do %>
+  <% if link.image %>
+    <div class="thumb">
+      <% if link.callback_url %>
+        <%= link_to image_tag(link.image),"javascript:void(0)" %>
+        <%= link_to image_tag("btn/btn_play.png", :class => "play_button"),"javascript:void(0)" %>
+        <%= javascript_tag do %>
+          $("#link_<%= link.id.to_s %> img").each(function(){
+            $(this).click(function(){
+              SocialStream.Linkser.Wall.openCallback("link_<%= link.id.to_s %>", "<%= link.callback_url %>", "<%= link.width %>", "<%= link.height %>");
+            });
+          });
+          
+        <% end %>
+      <% else %>
+        <%= link_to image_tag(link.image),link.url, :target => "_blank" %>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="text">
+    <% if link.title %>
+      <h6>
+        <%= link.title %>
+      </h6>
+    <% end %>
+    <div class="url">
+      <%= link_to link.url, link.url, :target => "_blank" %>
+    </div>
+
+    <%= render partial: 'objects/timeline_description',
+               object: link,
+               as: :obj %>
+  </div>
+<% end %>

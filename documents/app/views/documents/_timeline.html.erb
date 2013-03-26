@@ -1,0 +1,15 @@
+<%= div_for document do %>
+  <div class="thumb">
+    <%= link_to icon(document, 70), document %>
+  </div>
+
+  <div class="text">
+    <h6>
+      <%= document.title %>
+    </h6>
+
+    <%= render partial: 'objects/timeline_description',
+               object: document,
+               as: :obj %>
+  </div>
+<% end %>
