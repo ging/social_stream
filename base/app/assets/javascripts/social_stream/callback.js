@@ -51,7 +51,7 @@ SocialStream.Callback.prototype = (function(SS, $, undefined) {
       var args = Array.prototype.slice.call(arguments),
           name = args.shift();
 
-      callback.register(arguments);
+      callback.register.apply(callback, arguments);
 
       // Add future handlers
       if (this[name] === undefined) {

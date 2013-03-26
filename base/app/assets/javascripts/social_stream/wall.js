@@ -1,19 +1,9 @@
 //= require jquery.autosize
 //
-//= require social_stream/timeline
+//= require social_stream/callback
 
 SocialStream.Wall = (function(SS, $, undefined){
-  var showCallbacks = [];
-  var showOptions;
-
-  var addShowCallback = function(callback){
-    showCallbacks.push(callback);
-  };
-
-  var show = function(options){
-    showOptions = options;
-    $.each(showCallbacks, function(i, callback){ callback(options); });
-  };
+  var callback = new SS.Callback();
 
   var initRelationSelect = function(options){
     $('.wall_input select[name*="relation_ids"]').multiselect({
@@ -25,8 +15,8 @@ SocialStream.Wall = (function(SS, $, undefined){
   var relationSelectText = function(options) {
     var text;
 
-    if (options.length == 0) {
-      text = showOptions.wallInput.blankText;
+    if (options.length === 0) {
+      text = $(".wall_input").attr('data-relation-text');
     }
     else if (options.length > 3) {
       text = I18n.t('activity.privacy.relation', { count: options.length });
@@ -51,12 +41,18 @@ SocialStream.Wall = (function(SS, $, undefined){
     $('.wall_input [name="post[text]"]').autosize();
   };
 
-  addShowCallback(initInputAutosize);
-  addShowCallback(initRelationSelect);
-
-  return {
-    show: show,
-    addShowCallback: addShowCallback,
-    changeRelationSelect: changeRelationSelect 
+  var resetWallInput = function(){
+    $('#post_text').val('');
   };
-}) (SocialStream, jQuery)
+
+  callback.register('show',
+                    initInputAutosize,
+                    initRelationSelect);
+
+  callback.register('new_',
+                    resetWallInput);
+
+  return callback.extend({
+    changeRelationSelect: changeRelationSelect 
+  });
+}) (SocialStream, jQuery);

@@ -1,23 +1,28 @@
+//= require social_stream/callback
+
 SocialStream.Follow = (function(SS, $, undefined){
-	var initButtons = function(){
-		$(".following-button").mouseenter(function(){
-			$(this).hide();
-			$(this).siblings(".unfollow-button").show();
-		});
+  var callback = new SS.Callback();
 
-		$(".unfollow-button").mouseleave(function(){
-			$(this).hide();
-			$(this).siblings(".following-button").show();
-		});
+  var initButtons = function(){
+    $(".following-button").mouseenter(function(){
+      $(this).hide();
+      $(this).siblings(".unfollow-button").show();
+    });
 
-		$(".unfollow-button").hide();
-	}
+    $(".unfollow-button").mouseleave(function(){
+      $(this).hide();
+      $(this).siblings(".following-button").show();
+    });
 
-	$(function(){
-		SocialStream.Follow.initButtons();
-	});
+    $(".unfollow-button").hide();
+  }
 
-	return {
-		initButtons: initButtons
-	};
+  callback.register('index', initButtons);
+
+  $(function(){
+    SocialStream.Follow.index();
+  });
+
+  return callback.extend({
+  });
 })(SocialStream, jQuery);

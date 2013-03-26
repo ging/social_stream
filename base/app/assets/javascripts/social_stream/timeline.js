@@ -2,13 +2,10 @@
 //= require social_stream/audience
 //= require social_stream/comment
 //= require social_stream/pagination
+//= require social_stream/wall
 
 SocialStream.Timeline = (function(SS, $, undefined){
   var callback = new SS.Callback();
-
-  var resetWallInput = function(){
-    $('#post_text').val('');
-  };
 
   var initModalCarousel = function() {
     var elements = $('.timeline [data-modal-carousel-id="false"]');
@@ -64,7 +61,7 @@ SocialStream.Timeline = (function(SS, $, undefined){
   callback.register('create',
                     SS.Audience.index,
                     SS.Comment.index,
-                    resetWallInput);
+                    SS.Wall.new_);
 
   return callback.extend({
   });

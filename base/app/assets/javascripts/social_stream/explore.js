@@ -1,13 +1,7 @@
+//= require social_stream/callback
+
 SocialStream.Explore = (function(SS, $, undefined){
-  var indexCallbacks = [];
-
-  var addIndexCallback = function(callback){
-    indexCallbacks.push(callback);
-  };
-
-  var index = function(options){
-    $.each(indexCallbacks, function(i, callback){ callback(index); });
-  };
+  var callback = new SS.Callback();
 
   var headerPushState = function() {
     $('#explore-header div').on('shown', function(e) {
@@ -47,12 +41,12 @@ SocialStream.Explore = (function(SS, $, undefined){
     });
   };
 
-  addIndexCallback(headerPushState);
-  addIndexCallback(initTabLoading);
+  callback.register('index',
+                    headerPushState,
+                    initTabLoading);
 
-  return {
-    index: index
-  };
+  return callback.extend({
+  });
 
 })(SocialStream, jQuery);
 

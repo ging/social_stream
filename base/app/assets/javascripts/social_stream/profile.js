@@ -1,15 +1,9 @@
 //= require select2
+//
+//= require social_stream/callback
 
 SocialStream.Profile = (function(SS, $, undefined){
-  var showCallbacks = [];
-
-  var addShowCallback = function(callback){
-    showCallbacks.push(callback);
-  };
-
-  var show = function(options){
-    $.each(showCallbacks, function(i, callback){ callback(options); });
-  };
+  var callback = new SS.Callback();
 
   var initEditButtons = function(options) {
     $("#profile-info .update").filter(function(i, el) {
@@ -38,11 +32,11 @@ SocialStream.Profile = (function(SS, $, undefined){
     SS.Tag.select2("#profile_tag_list");
   };
 
-  addShowCallback(initEditButtons);
-  addShowCallback(initTagsForm);
+  callback.register('show',
+                    initEditButtons,
+                    initTagsForm);
 
-  return {
-    show: show
-  };
+  return callback.extend({
+  });
 
 })(SocialStream, jQuery);

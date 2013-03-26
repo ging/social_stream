@@ -1,26 +1,9 @@
+//= require social_stream/callback
+
 SocialStream.FullCalendar = (function(SS, $, Scheduler, undefined){
-  var current;
-  var eventColor = 'gray';
-
-  var showCallbacks = [];
-
-  var addShowCallback = function(callback){
-    showCallbacks.push(callback);
-  };
-
-  var show = function(options){
-    $.each(showCallbacks, function(i, callback){ callback(options); });
-  };
-
-  var createCallbacks = [];
-
-  var addCreateCallback = function(callback){
-    createCallbacks.push(callback);
-  };
-
-  var create = function(options){
-    $.each(createCallbacks, function(i, callback){ callback(options); });
-  };
+  var callback = new SS.Callback(),
+      current,
+      eventColor = 'gray';
 
   var getCurrent = function() {
     return current;
@@ -134,17 +117,17 @@ SocialStream.FullCalendar = (function(SS, $, Scheduler, undefined){
     Scheduler.form.reset(form.find('.scheduler_form'));
   };
 
-  addShowCallback(initFullCalendar);
-  addShowCallback(initFormModal);
+  callback.register('show',
+                    initFullCalendar,
+                    initFormModal);
 
-  addCreateCallback(addEvent);
-  addCreateCallback(resetForm);
+  callback.register('create',
+                    addEvent,
+                    resetForm);
 
-  return {
-    create: create,
+  return callback.extend({
     current: getCurrent,
-    getFormEl: getFormEl,
-    show: show
-  };
+    getFormEl: getFormEl
+  });
 
 })(SocialStream, jQuery, Scheduler);

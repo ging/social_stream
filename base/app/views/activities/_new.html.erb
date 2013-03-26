@@ -1,5 +1,5 @@
 <% if can? :create, new_post(receiver) %>
-  <article class="wall_input">
+  <article class="wall_input" data-relation-text="<%= t "activity.privacy.contact.#{ receiver == current_subject ? :myself : :outside }.#{ receiver.class.to_s.underscore }", receiver: receiver.name %>">
     <%= form_for Post.new(owner_id: Actor.normalize_id(receiver)), remote: true do |f| %>
       <%= f.hidden_field :owner_id %>
     
@@ -20,11 +20,7 @@
 
   <%= javascript_tag do %>
     $(function(){  
-      SocialStream.Wall.show({
-        wallInput: {
-          blankText: "<%= t "activity.privacy.contact.#{ receiver == current_subject ? :myself : :outside }.#{ receiver.class.to_s.underscore }", receiver: receiver.name %>"
-        }
-      });  
+      SocialStream.Wall.show();  
     });
   <% end %>
 <% end %>
