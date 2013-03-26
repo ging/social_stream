@@ -33,8 +33,9 @@ SocialStream.Event = (function(SS, $, undefined) {
     });
   };
 
-  callback.register('index', fixDates);
-  callback.register('index', SocialStream.Events.Poster.show);
+  callback.register('index',
+                    fixDates,
+                    SocialStream.Events.Poster.show);
 
   return callback.extend({
     color: color,

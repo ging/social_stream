@@ -55,14 +55,16 @@ SocialStream.Timeline = (function(SS, $, undefined){
     SS.Pagination.show(callback.handlers.show);
   };
 
-  callback.register('show', SS.Audience.index);
-  callback.register('show', SS.Comment.index);
-  callback.register('show', initModalCarousel);
-  callback.register('show', initPagination);
+  callback.register('show',
+                    SS.Audience.index,
+                    SS.Comment.index,
+                    initModalCarousel,
+                    initPagination);
 
-  callback.register('create', SS.Audience.index);
-  callback.register('create', SS.Comment.index);
-  callback.register('create', resetWallInput);
+  callback.register('create',
+                    SS.Audience.index,
+                    SS.Comment.index,
+                    resetWallInput);
 
   return callback.extend({
   });

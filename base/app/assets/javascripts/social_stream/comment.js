@@ -119,16 +119,18 @@ SocialStream.Comment = (function(SS, $, undefined){
     }
   };
 
-  callback.register('index', initNewElements);
-  callback.register('index', newCommentAutoSize);
-  callback.register('index', newCommentClick);
-  callback.register('index', newCommentLink);
-  callback.register('index', scrollToActivity );
+  callback.register('index',
+                    initNewElements,
+                    newCommentAutoSize,
+                    newCommentClick,
+                    newCommentLink,
+                    scrollToActivity);
 
-  callback.register('create', hideNewActivityCommentElements);
-  callback.register('create', newCommentAutoSize);
-  callback.register('create', newCommentClick);
-  callback.register('create', newCommentLink);
+  callback.register('create',
+                    hideNewActivityCommentElements,
+                    newCommentAutoSize,
+                    newCommentClick,
+                    newCommentLink);
 
   return callback.extend({
     showAll: showAll

@@ -19,20 +19,22 @@ SocialStream.Callback = function() {
 };
 
 SocialStream.Callback.prototype = (function(SS, $, undefined) {
-  var register = function(name, func) {
-    var callback = this;
+  var register = function() {
+    var callback = this,
+        funcs    = Array.prototype.slice.call(arguments),
+        name     = funcs.shift();
 
     if (this.registry[name] === undefined) {
       this.registry[name] = [];
 
       this.handlers[name] = function(options) {
-        $.each(callback.registry[name], function(i, func) {
-          func(options);
+        $.each(callback.registry[name], function(i, f) {
+          f(options);
         });
       };
     }
 
-    this.registry[name].push(func);
+    this.registry[name].push.apply(this.registry[name], funcs);
   };
 
   var extend = function(obj) {
@@ -45,8 +47,11 @@ SocialStream.Callback.prototype = (function(SS, $, undefined) {
       }
     }
 
-    obj.callbackRegister = function(name, func) {
-      callback.register(name, func);
+    obj.callbackRegister = function() {
+      var args = Array.prototype.slice.call(arguments),
+          name = args.shift();
+
+      callback.register(arguments);
 
       // Add future handlers
       if (this[name] === undefined) {
