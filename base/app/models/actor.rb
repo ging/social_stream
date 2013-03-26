@@ -24,7 +24,7 @@ class Actor < ActiveRecord::Base
 
   include SocialStream::Models::Object
   
-  acts_as_avatarable
+  acts_as_avatarable :default_url => "/assets/:attachment/:style/:subtype_class.png"
   acts_as_messageable
 
   acts_as_url :name, :url_attribute => :slug
