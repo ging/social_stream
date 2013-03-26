@@ -1,5 +1,5 @@
 .repository
-  @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
   display: inline-block
 .filter
   @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
@@ -32,5 +32,10 @@
     .loading
       z-index: 200
       position: relative
+  #toolbar
+    display: hidden
+    @include hidden-desktop
+    @include hidden-tablet
+    @include hidden-phone
 .documents
   clear: both

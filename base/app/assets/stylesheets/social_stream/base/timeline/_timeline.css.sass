@@ -1,7 +1,6 @@
 @import 'chosen'
-.content-full,
 .timeline,
-.comments
+  .comments
   .media,
   .root
     border-bottom: 1px solid #efefef
@@ -30,6 +29,7 @@
               color: $red
       .objects
         word-wrap: break-word
+        min-height: 22px
         .thumb
           float: left
           width: auto
@@ -51,7 +51,7 @@
       .actions
         width: 100%
         display: inline-block
-        margin-bottom: 20px
+        margin-bottom: 10px
         .post_time_ago
           display: inline-block
           font-size: 11px
@@ -83,26 +83,31 @@
         textarea
           resize: none
           width: 100%
+        div .new_comment
+          margin-top: 24px
+          margin-left: 89px
 
-      .media,
-      .child
-        @extend .border-radius-5
-        background: #efefef
-        padding: 9px 6px 11px 12px
-        margin-bottom: 19px
-        a
-          .avatar
-            width: 40px !important
+      .comments
+        .child
+          @extend .border-radius-5
+          background: #efefef
+          padding: 9px 6px 11px 12px
+          margin-bottom: 19px
+          a
+            .avatar
+              width: 40px !important
+          .actions
+          margin-bottom: 0px
 
-      .hidden_comments
-        float: right
-        margin: 2px 6px -2px 0 
-        a
-          font-size: 11px
-          text-decoration: none
-          color: $gray
-          &:hover
-            color: $linkColor
+        .hidden_comments
+          text-align: right
+          margin: 0px 2px -6px 0 
+          a
+            font-size: 11px
+            text-decoration: none
+            color: $gray
+            &:hover
+              color: $linkColor
 
     .likes
       font-size: 12px
@@ -115,6 +120,8 @@
     margin-right: 19px
 
 .new_comment
+  margin-left: 88px
+  margin-top: 25px
   .avatar
     float: left
     margin: -2px 6px 0 -11px

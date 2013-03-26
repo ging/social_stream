@@ -2,18 +2,20 @@ body
   background: #f9f9f9 url(../images/pattern.png) repeat top left
 
 #wrapper
-
+  @include grid-core($gridColumnWidth, $gridGutterWidth)
 
 
 #toolbar
   @extend .hidden-phone
   @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
   float: left
-    
-.contacts.tabbable
-  @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
-  float: left
-  margin-left: 25px
+#contacts
+  #toolbar
+    @extend .hidden-tablet
+  .contacts.tabbable
+    @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    float: left
+    margin-left: 25px
 
 .activities,
 #profile-info
@@ -47,5 +49,8 @@ body
     @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
     float: left
 #repository
-  @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
   float: left
+  #toolbar
+    @extend .hidden-phone
+    @extend .hidden-tablet
