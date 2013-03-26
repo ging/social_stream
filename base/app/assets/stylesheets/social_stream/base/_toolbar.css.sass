@@ -1,13 +1,4 @@
 #toolbar 
-  h4
-    margin-top: 24px
-    border-bottom: 1px solid #ccc
-  .content
-    img
-      
-    .contacts-more
-      @extend .pull-right
-      margin-top: 6px
   .contact-button
     .btn-group
       width: 100%
@@ -47,7 +38,23 @@
           color: $white
   .contacts-toolbar
     @extend .hidden-phone
-    
+    margin-top: 20px
+    h4
+      display: inline
+    .line
+      display: inline-block
+      border-bottom: 1px solid #888
+      @include size (2px, 49%)
+    .content
+      margin-top: 8px
+      .contact
+        padding: 1px 7px 3px 7px
+        a
+          margin-left: 6%
+          margin-right: 5%
+      .contacts-more
+        @extend .pull-right
+        margin-top: 6px
 .toolbar-messages
   .toolbar_menu
     ul

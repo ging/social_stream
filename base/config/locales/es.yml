@@ -551,7 +551,7 @@ es:
     all_subject_results: "Ver todos %{subject} (%{count})"
     at_least:
       one: "Escribe al menos %{count} letra"
-      more: "Escribe al menos %{count} letras"
+      other: "Escribe al menos %{count} letras"
     global: 
       name: "Búsqueda global"
       first_result:

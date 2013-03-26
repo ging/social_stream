@@ -23,11 +23,7 @@
 
   #home
     #toolbar
-      #avatar_profile
-        float: left
-      .toolbar_menu
-        display: inline-block
-        margin-left: 2%
+      @include hidden-tablet
     .activities
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 0
@@ -40,8 +36,7 @@
   #user,
   #group
     #toolbar
-      @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      float: left
+      @include hidden-tablet
         
       ul.buttons
         margin-left: 0
@@ -49,8 +44,7 @@
           a
             @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
     .activities
-      @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      margin: 0 5%
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       .wall_input
         padding: 5px 13px
     #sidebar

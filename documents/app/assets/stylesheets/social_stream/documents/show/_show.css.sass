@@ -8,17 +8,18 @@
       padding: 10px
       @include border-radius(10px)
       border: 1px solid #f7f7f7
-      background-color: #333333
+      @include gradient-radial ($innerColor: #666, $outerColor: #333)
       text-align: center
       h6
         color: $white
         font-size: 15px
       .actions
         width: 11%
-        border: 1px solid #ccc
-        @include centered
+        border: 1px solid #333
         @include border-radius (3px)
-        margin-top: 10px
+        margin: 10px auto -7px
+        border-bottom-color: #444
+        background-color: rgba(50, 50, 50, 0.3)
     .tabbable
       margin-top: 10px
       .tab-content
@@ -29,11 +30,21 @@
     width: 21.8%
     float: left 
     margin-left: 30px
-    margin-top: 20px
     h4
       margin-bottom: 5px
-      color: #00C3FF
+      color: $blue
+    .tabbable
+      ul
+        margin-bottom: 0px
+        li.active
+          a
+            background-color: #f3f3f3 
     .tab-content
+      color: #777
+      border-left: 1px solid #dddddd
+      background-color: #f3f3f3
+      padding-bottom: 20px
+      padding-top: 10px
       
 
 

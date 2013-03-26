@@ -34,6 +34,7 @@ es:
     new:
       title: "Nuevo evento"
     one: "un evento"
+    other: "eventos"
     popover:
       title: "Eventos el %{date}"
     poster:

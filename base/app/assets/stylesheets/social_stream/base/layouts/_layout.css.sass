@@ -2,12 +2,11 @@ body
   background: #f9f9f9 url(../images/pattern.png) repeat top left
 
 #wrapper
-  @include grid-core($gridColumnWidth, $gridGutterWidth)
+
 
 
 #toolbar
   @extend .hidden-phone
-  @extend .hidden-tablet
   @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
   float: left
     
@@ -31,6 +30,7 @@ body
   @extend .hidden-tablet
   width: 22.85714%
   float: left
+
 #converstions
   @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
   .conversations
@@ -46,3 +46,6 @@ body
   #conversation
     @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
     float: left
+#repository
+  @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  float: left
