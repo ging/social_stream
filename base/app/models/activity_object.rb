@@ -71,23 +71,23 @@ class ActivityObject < ActiveRecord::Base
       # /users/demo/posts
       #
       # get posts posted to demo's wall
-      collection = owned_by(profile_subject)
+      col = owned_by(profile_subject)
 
       # if current_subject != demo, auth filter results
       if profile_subject != current_subject
-        collection = collection.shared_with(current_subject)
+        col = col.shared_with(current_subject)
       end
     else
       # auth filter results
-      collection = shared_with(current_subject)
+      col = shared_with(current_subject)
 
       # if logged in, show the posts from the people following
       if current_subject.present?
-        collection = collection.followed_by(current_subject)
+        col = col.followed_by(current_subject)
       end
     end
 
-    collection
+    col
   }
 
   scope :created, order("activity_objects.created_at DESC")
