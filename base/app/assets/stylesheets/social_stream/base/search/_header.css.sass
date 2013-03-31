@@ -1,0 +1,29 @@
+header
+  .search-nav
+    .mat
+      @include border-bottom-radius (5px)
+      border: 1px solid #ccc
+      background-color: white
+      .results
+        ul
+          li
+            .contact
+              background-color: #f9f9f9
+              &:hover
+                background-color: #fff
+                .avatar,
+                .data
+                  @include opacity(100)
+                
+              .avatar
+                @include opacity(70) 
+              .data
+                @include opacity(70)
+                .name
+                  @include ellipsis
+                .info
+                  font-size: 9px
+        li.more
+          background-color: #f9f9f9
+          font-size: 12px
+          border-top: 1px solid #c9c9c9
