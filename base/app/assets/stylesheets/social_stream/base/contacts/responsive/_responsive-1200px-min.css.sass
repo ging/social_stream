@@ -1,0 +1,39 @@
+//
+// Responsive: Large desktop and up
+// --------------------------------------------------
+
+
+@media (min-width: 1200px)
+
+  #contacts
+    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    #toolbar
+      display: none
+    .contacts
+      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      @include grid-core-offset(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      .contacts
+        width: 100% !important
+        margin-left: 0 !important
+        .tab-content
+          .contact-list
+            clear: both
+            min-height: 700px
+            padding-bottom: 50px
+          .contact
+            width: 16.5% !important
+            .avatar
+              width: 45px !important
+              float: left
+            .data
+              a
+                display: inline
+              .x
+                float: right
+                display: inline-block
+            .info
+              font-size: 11px
+              color: #ccc
+              z-index: 1
+            .add
+              margin-top: 2px
