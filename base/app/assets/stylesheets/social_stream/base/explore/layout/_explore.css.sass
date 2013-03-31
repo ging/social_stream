@@ -1,0 +1,81 @@
+/////////////////////////////////////// Explore Screen & any class more for participants, resources.
+///////////// 
+
+#explore-content
+  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  .sub-content-full
+    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  .sub-content-medium
+    @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    display: inline
+    float: left
+  .sub-content-medium-offset
+    @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    @include grid-core-offset(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    display: inline
+    float: left
+  .sub-content-small
+    @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    display: inline-block
+    float: left
+  .sub-content-small-offset
+    @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    @include grid-core-offset(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    display: inline-block
+    float: left
+  .sub-content-mini
+    @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    display: inline-block
+    float: left
+  .sub-content-mini-offset
+    @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    @include grid-core-offset(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    display: inline-block
+    float: left
+  .sub-content-medium,
+  .sub-content-full,
+  .sub-content-small,
+  .sub-content-mini,
+  .sub-content-medium-offset,
+  .sub-content-full-offset,
+  .sub-content-small-offset,
+  .sub-content-mini-offset
+    margin-top: 20px
+    .content
+      margin-bottom: 20px
+      @include clearfix
+      margin-top: 7px
+      padding-top: 7px
+      .case
+        float: left
+        width: 95%
+        margin-left: 20px
+        .first-line-large,
+        .first-line-mini,
+          display: inline
+          width: 100%
+          float: left
+          a
+            display: inline
+        .first-line-mini
+          width: 241px
+        .second-line
+          display: block
+      .well-small
+        width: 50px
+        margin-bottom: 0px
+
+  #resources
+    .sub-content-small
+      margin-left: 0px     
+  .sub-content-small
+    display: inline-block
+    margin-left: 40px
+  
+#explore-header
+  width: 100%
+  display: table
+  table-layout: fixed
+  .section
+    display: table-cell
+    height: 26px

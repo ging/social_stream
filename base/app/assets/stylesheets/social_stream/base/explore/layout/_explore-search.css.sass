@@ -1,0 +1,125 @@
+/////////////////////////////////////// EXPLORE SEARCH
+///////////// 
+
+
+  .menuv 
+    width: auto
+    margin-left: none
+    padding: 10px 0 10px 10px
+    hr
+      margin: 7px 5px 0px -5px
+    ul 
+      margin: 7px 0 0 18px
+      li 
+        margin-left: 1px
+        padding: 0px 0px
+        ol 
+          padding: 0px 0px
+          margin: -7px 0 13px 2px
+          li
+            margin-top: -7px 0 8px 0
+            padding-bottom: 0px
+
+    .advanced 
+      margin: 8px 0 0 0px !important
+      display: block
+      padding: 3px 0px
+
+
+
+#tags
+  margin-top: 20px
+  .search-result 
+    .tags-list
+      display: inline
+      width: 889px
+      float: left
+      ul
+        @include makeColumn(2, 0)
+
+
+
+#search
+  h4
+    margin: 0 0 10px
+  .btn-group
+    padding-bottom: 10px
+    margin-bottom: 10px
+    width: 100%
+    padding-left: 5px
+    .btn 
+      width: 11% !important
+      margin: 0 auto 0
+  select
+    display: none
+  .input-xlarge
+    width: 37% !important
+    height: 34px
+    margin-bottom: 0px
+    padding-left: 23px
+    clear: both
+    display: inline
+    margin-left: 5px
+
+
+
+/////////////////////////////////////// EXPLORE SEARCH RESULT
+///////////// in events, linkser, post, comments
+
+#explore-content
+  #search
+    #search-results
+
+      .contact
+        @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        display: inline
+        min-height: 80px
+        float: left
+
+        .avatar
+          @include grid-core-span(4, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          display: inline
+          width: 45px
+          float: left
+          padding: 0
+          img
+            width: 100%
+            width: 45px 
+            vertical-align: top
+
+        .data
+          display: inline-block
+          float: left
+          margin: 0 0 3px 3px
+          width: 65%
+        .info
+          @include ellipsis
+          z-index: 1
+          padding-left: 2%
+
+
+    .events
+      @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      display: inline-block
+
+      .avatar
+        @include grid-core-span(4, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        display: inline
+        img
+          height: 59px
+          margin-top: 7px
+          width: 45px
+
+      .data
+        display: inline-block
+        margin-top: 9px
+        width: 65%
+        
+
+
+    .link
+      display: inline-block
+      @include makeColumn(3, 0)
+      margin-left: 0px
+      h5
+        margin-bottom: 2px
