@@ -62,20 +62,12 @@
       padding: 10px
       margin: 10px 0 0 20px
       @extend .border-radius-5
-      &:hover
-        background-color: $blue
-        @include transition(background 1s, color, 1s)
-        header
-          color: $white
-        p
-          @include transition(background 1s, color, 1s)
-          @extend .border-radius-4
-          background-color: $white
-          color: $gray
       header
         font-size: 19px
+        text-align: center
         color: $gray
         margin: 5px 0
+        border-bottom: 1px solid #ccc
       p
         font-size: 13px
         color: #ccc
