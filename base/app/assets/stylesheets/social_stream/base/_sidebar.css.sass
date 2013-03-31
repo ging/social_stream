@@ -1,7 +1,7 @@
 #sidebar
   padding-top: 6px  
   .contact
-    margin: 4px 22px 4px 18px
+    margin: 4px 0
     .avatar
       width: 45px !important
       float: left
@@ -30,26 +30,23 @@
     h4
       color: $black
       font-family: $serifFontFamily
-      margin-left: 10px
     
     .contact
-      padding: 5px 4px
-      width: 220px
+      padding: 5px 2%
       display: inline-block
       .avatar
         width: 45px
         display: inline
         float: left
-        margin-left: -5px
         img
           @extend .border-radius-5
           width: 45px 
      
     .data
-      @include makeColumn(2, 0)
       display: inline-block
       margin: 0 0 3px 3px
-      float: none
+      float: left
+      width: 65%
       .name
         color: $black
         .x
@@ -62,6 +59,7 @@
     .add
       font-size: 10px
       z-index: 1
+      float: left
       .btn-group
         max-width: 400px
         .btn

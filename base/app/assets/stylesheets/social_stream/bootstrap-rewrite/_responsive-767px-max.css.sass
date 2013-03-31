@@ -14,14 +14,7 @@
           padding: 7px 8px 7px !important
     
   footer
-    z-index: 10
-    background-color: $white
-    position: fixed
-    width: 100% !important
-    margin-left: -20px !important
-    padding-top: 20px !important
-
-
+    @include hidden-phone
 
 
   #home
@@ -221,12 +214,12 @@
 
   #contacts
     .contacts
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       float: left
       margin-left: 0
-      .tab-content
+      .tabbable
+        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
         .contact
-          margin: 4px 22px 4px 18px
+          @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
           .avatar
             width: 45px !important
           .info
@@ -258,9 +251,8 @@
         text-align: right
     
     #sign_in
-      @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      margin-left: 12%
-      margin-top: 18px
+      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin: 18px auto 0
       padding: 0
       h3
         margin: 17px 12px 20px 0
@@ -275,43 +267,52 @@
 
 
   #registration
-    .div_registration
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      margin-left: 0
-      margin-top: 18px
+    .registration
+      width: 100%
+      margin: 18px 0 0 
+      float: none
       padding: 0
       h3
-        margin: 17px 12px 20px 0
+        margin: 0px 12px 10px 0
       #new_user
-        .reg-labels
-          padding: 0 10px
-          .login_data
-            input
-              &[type="password"]
-                width: 96% !important
-            input
-              &[type="text"]
-                width: 96% !importantv
+        padding: 0 10px
+        .login_data
+          input
+            &[type="password"]
+              width: 96% !important
+          input
+            &[type="text"]
+              width: 96% !important
 
 
 
   #forgot-pass
+    margin-left: 0
     .forgot
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      margin-left: 0
-      margin-top: 18px
-      padding: 0 10px
-      h3
-        margin: 17px 12px 20px 0
+      margin-top: 0px
+      padding: 0 
+      h2
+        margin: 0
+        font-size: 25.5px
+      
+      #new_user
+        margin: 0
+        width: 96% !important
+        padding-left: 4%
 
-      .div_password
-        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-        padding: 0px
-        .form_tag
-          width: 96% !important
-          input
-            &[type="submit"]
-              float: right
+      .password
+        width: 90%
+        padding: 1% 5%
+        margin: 2% 0 0 0
+        float: none
+        form
+          margin: 0
+        input
+          &[type="submit"]
+            float: right
+
+
 
   #explore-content
     .sub-content-medium,
@@ -427,45 +428,31 @@
     .action
       margin-top: -30px
 
-#new_message
-  .select2-container
-    width: 102%
+  #new_message
+    .select2-container
+      width: 102%
 
 
 
   #frontpage
+    .explanation
+      @include hidden-phone
     #sign_in
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 0
       padding: 0
       h3
-        margin: 17px 12px 20px 0
-      form.new_user
-        padding: 0 10px
-        .login_data
-          input
-            &[type="password"]
-              width: 96%
-          input
-            &[type="text"]
-              width: 96%
+        margin: 0px 12px 10px 0
+      #remember
+        width: 36%
+        float: left
+    #presentation
+      .caracteristics
+        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        margin-left: 0
+        padding: 0
 
 
-
-  #registration
-    .div_registration
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      margin-top: 18px
-      padding: 0
-
-    #new_user
-      .reg-labels
-        padding: 0 10px
-        .form_tag
-          width: 96%
-        input
-          &[type="email"]
-            width: 96%
 
 
   #explore-content

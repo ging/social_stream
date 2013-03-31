@@ -1,8 +1,62 @@
 body
-  background: #f9f9f9 url(../images/pattern.png) repeat top left
+  background-color: #f9f9f9
 
 #wrapper
   @include grid-core($gridColumnWidth, $gridGutterWidth)
+
+#frontpage
+  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  .explanation
+    @extend .hidden-phone
+    width: 54.14286%
+    float: left
+    margin-left: 4%
+  #presentation
+    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    @include centered
+    float: left
+    .caracteristics
+      width: 27%
+      margin-left: 2.9%
+  #sign_in
+    width: 27%
+    float: right
+    margin-right: 2%
+
+#registration
+  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  .welcome
+    @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    float: left
+    margin-left: 4%
+  .registration
+    @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    float: right
+    margin-right: 2%
+    form #new_user
+      width: 100%
+
+#forgot-pass
+  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  .forgot-img
+    @extend .hidden-phone
+    @extend .hidden-tablet
+    width: 40%
+    float: left
+    margin-left: 4%
+    img
+      width: 100%
+  .forgot
+    width: 60%
+    display: inline
+    header
+      #new_user
+        margin-left: 46%
+        @extend .hidden-phone
+    .password
+      width: 27%
+      float: right
+      margin-right: 20%
 
 
 #toolbar
@@ -16,13 +70,15 @@ body
     @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
     float: left
     margin-left: 25px
+    .contact-list
+      .contact
+        @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
 
 .activities,
 #profile-info
   @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
   float: left
-  margin-left: 25px
-  margin-right: 25px
+  margin-left: 3%
 
   .wall_input
     padding: 5px 13px
@@ -31,7 +87,7 @@ body
   @extend .hidden-phone
   @extend .hidden-tablet
   width: 22.85714%
-  float: left
+  float: right
 
 #converstions
   @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
@@ -54,3 +110,10 @@ body
   #toolbar
     @extend .hidden-phone
     @extend .hidden-tablet
+
+footer
+  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  @extend .hidden-phone
+  @include menuHorizontal
+  float: none
+  clear: both

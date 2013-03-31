@@ -36,25 +36,29 @@
       a
         &:hover
           color: $white
+
   .contacts-toolbar
     @extend .hidden-phone
     margin-top: 20px
     h4
-      display: inline
+      margin-bottom: 0px
     .line
-      display: inline-block
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      display: block
       border-bottom: 1px solid #888
-      @include size (2px, 49%)
-    .content
-      margin-top: 8px
-      .contact
-        padding: 1px 7px 3px 7px
-        a
-          margin-left: 6%
-          margin-right: 5%
-      .contacts-more
-        @extend .pull-right
-        margin-top: 6px
+    ul
+      margin: 8px 0 0
+      li
+        @include grid-core-span(4, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        @include grid-core-offset(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        float: left
+        img
+          margin: 8px 0
+    .contacts-more
+      @extend .pull-right
+      margin-top: 6px
+      clear: both
+
 .toolbar-messages
   .toolbar_menu
     ul
@@ -78,7 +82,7 @@
   overflow: hidden
   img
     @extend .border-radius-5
-    width: 150px
+    width: 100%
   h5 
     a
       text-decoration: none
