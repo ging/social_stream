@@ -1,54 +1,36 @@
-.site_clients
-  .btn
-    @extend .btn-blue
-  .first-img
-    h1
-      text-align: left
-      @include clearfix
+#site_clients
+  .site_clients
     header
       font-size: 21px
       color: $gray
       a
         font-size: 14px
-        float: right
-      .button_to
-        float: right
+      .btn
+        @extend .btn-blue
       .soften
-        margin: 9px 0 10px 0
         @include opacity (100)
-        clear: both
-    img
-      display: inline
-      @include size (40px, 40px)
+
     .name,
     .url,
     .users
-      display: inline-block
       color: $gray
-    .name,
-    .url
-      margin-left: 20px
+
     .name
       font-size: 16px
+
     .url
       a
         color: $gray
         &:hover
           color: $blue
+
     .users
       font-size: 16px
-      float: right
-      margin-top: 7px
       span
         color: $blue
 
   #new_site_client-modal
     .modal-body
-      max-height: 520px  
-      padding: 0 15px 15px 15px
-      .new_site_client
-        margin-left: 0px
-        width: 100%
       input
         &[type="file"]
           line-height: 0px

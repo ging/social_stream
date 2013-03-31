@@ -1,36 +1,42 @@
 #new_application
-  padding: 5px 7px
-  form
-    margin: 0 0 40px
   section
     border-bottom: 1px dashed #ccc
-    padding-top: 15px
     label
       font-size: 22px
       font-weight: bold
       color: #ccc
-      padding-left: 14px
-  input
-    &[type="file"]
-      line-height: 0px
-  .title
-    input
-      @include size(26px, 97%)
-  .url,
-  .callback_url
-    textarea
-      display: inline
-      @include size(21px, 97%)
-      padding-top: 7px
 
-  .description
-    height: 100px
-    textarea
-      display: inline-block
-      @include size (52px, 97%)
-      padding-top: 7px
-  input
-    &[type="submit"]
-      float: right
-      margin-top: 14px
-      margin-right: 1px
+
+#oauth2_server 
+  h1
+    text-align: left
+  .content
+    @include gradient-vertical($startColor: #ccc, $endColor: #f9f9f9)
+    .media
+    .media-body
+      .name,
+      .url,
+      .users
+        color: $gray
+      .name
+        font-size: 16px
+      .url
+        a
+          color: $gray
+          &:hover
+            color: $blue
+      .result,
+      .client_secret
+        background-color: #f9f9f9
+        @extend border-radius-5
+        font-size: 15px
+
+      .client_secret
+        border: 1px solid ccc
+        overflow-y: hidden
+        overflow-x: scroll
+
+    .users
+      font-size: 16px
+      span
+        color: $blue

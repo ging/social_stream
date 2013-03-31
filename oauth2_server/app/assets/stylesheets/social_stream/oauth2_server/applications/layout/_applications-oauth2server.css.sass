@@ -1,0 +1,51 @@
+#site_clients
+  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  #toolbar
+    display: none !important
+  .site_clients
+    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    header
+      a
+        float: right
+      .button_to
+        float: right
+      .soften
+        margin: 9px 0 10px 0
+        clear: both
+    img
+      display: inline
+      @include size (40px, 40px)
+      float: left
+
+    .name,
+    .url,
+    .users
+      display: inline-block
+
+    .name,
+    .url
+      margin-left: 20px
+      @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
+
+    .users
+      @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: right
+      margin-top: -8px
+      text-align: right
+
+
+  #new_site_client-modal
+    .modal-body
+      max-height: 520px  
+      padding: 0 15px 15px 15px
+      form.new_site_client
+        margin-left: 0px
+        width: 100%
+        .name,
+        .url
+          margin-left: 0px
+          width: 100%
+      input
+        &[type="file"]
+          line-height: 0px
+

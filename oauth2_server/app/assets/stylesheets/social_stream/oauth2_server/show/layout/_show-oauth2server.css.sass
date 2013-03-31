@@ -1,0 +1,71 @@
+#new_application
+  padding: 5px 7px
+  form
+    margin: 0 0 40px
+  section
+    padding-top: 15px
+    label
+      padding-left: 14px
+  .title
+    input
+      @include size(26px, 97%)
+  .url,
+  .callback_url
+    textarea
+      display: inline
+      @include size(21px, 97%)
+      padding-top: 7px
+
+  .description
+    height: 100px
+    textarea
+      display: inline-block
+      @include size (52px, 97%)
+      padding-top: 7px
+  input
+    &[type="submit"]
+      float: right
+      margin-top: 14px
+      margin-right: 1px
+
+
+#oauth2_server 
+  width: 80%
+  margin-left: 2.85%
+  display: inline-block
+  h1
+    @include clearfix
+    margin-bottom: 4px
+  .soften
+    margin-bottom: 0px
+  .content
+    padding: 14px
+    .media
+      margin-top: 0
+    .media-body
+      margin-left: 2.85%
+      img
+        display: inline
+        @include size (40px, 40px)
+      h4
+        margin-bottom: 0px
+      .name,
+      .url,
+      .users
+        display: inline-block
+      .name,
+      .url
+        margin-left: 20px
+
+      .result,
+      .client_secret
+        padding: 7px
+        margin-bottom: 20px
+
+      .client_secret
+        height: 23px
+        p
+          width: 250%
+    .users
+      float: right
+      margin-top: 7px

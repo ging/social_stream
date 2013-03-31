@@ -6,35 +6,39 @@
   </h1>
 
   <hr class="soften">
-  <a class="pull-left" href="#">
-      <img class="media-object" data-src="holder.js/64x64" alt="market" style="width: 100px; height: 100px;" src="assets/user.png">
-  </a>
-  <article  class="media box">
-    <div class="media-body">
-      <h3>
-        <%= Site::Client.human_attribute_name :url %>
-      </h3>
-      <div class="result">
-        <%= link_to @client.url, @client.url%>
+  <div class="content">
+    <a class="pull-left" href="#">
+        <img class="media-object" alt="application image" style="width: 100px; height: 100px;" src="assets/user.png">
+    </a>
+    <article  class="media box">
+      <div class="media-body">
+        <h4>
+          <%= Site::Client.human_attribute_name :url %>
+        </h4>
+        <div class="result">
+          <%= link_to @client.url, @client.url%>
+        </div>
+        <h4>
+          <%= Site::Client.human_attribute_name :callback_url %>
+        </h4>
+        <div class="result">
+          <%= @client.callback_url %>
+        </div>
+        <h4>
+          <%= Site::Client.human_attribute_name :id %>
+        </h4>
+        <div class="result">
+          <%= @client.id %>
+        </div>
+        <h4>
+          <%= Site::Client.human_attribute_name :secret %>
+        </h4>
+        <div class="result client_secret">
+          <p>
+            <%= @client.secret %>
+          </p>
+        </div>
       </div>
-      <h3>
-        <%= Site::Client.human_attribute_name :callback_url %>
-      </h3>
-      <div class="result">
-        <%= @client.callback_url %>
-      </div>
-      <h3>
-        <%= Site::Client.human_attribute_name :id %>
-      </h3>
-      <div class="result">
-        <%= @client.id %>
-      </div>
-      <h3>
-        <%= Site::Client.human_attribute_name :secret %>
-      </h3>
-      <div class="result">
-        <%= @client.secret %>
-      </div>
-    </div>
-  </article>
+    </article>
+  </div>
 </section>
