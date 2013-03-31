@@ -1,77 +1,47 @@
 #frontpage
+
   .explanation
     background-color: $white
-    margin-top: 63px
     border-left: 12px solid $blue
-    height: 110px
-    padding: 26px 0px 69px 36px
-    clear: both
     .big
       font-size: 18px
       font-weight: bold
       line-height: 28px
     .lite
       color: $gray
-      margin: 3px 0px 23px 0
     .btn
-      clear: both
       font-size: 15px
-      padding: 7px 30px
-      margin-right: 21px
 
   #sign_in
     @include box-shadow(0px 0px 13px rgba(50, 50, 50, 0.15))
     @extend .border-radius-15
     background-color: $white
-    display: inline-block
-    padding: 5px 15px
-    margin: 27px 0 0 14px
     color: #8c8c8c
     h3
       text-align: right
       font-size: 22px
-      margin-top: 0px
     input
       &[type="email"],
       &[type="password"]
         background-color: #f6f6f6
       &[type="mail"]
         background-color: #f6f6f6
-    #remember
-      margin-bottom: 10px 
-      input
-        display: inline
-      label
-        display: inline-block
-        margin-top: 6px
     input
       &[type="submit"]
-        float: right
         @extend .btn-blue
-        display: inline-block
-    .soften
-      clear: both
 
   #presentation
-    display: block
-    clear: both
     border-top: 1px solid #d3d3d3
-    margin-top: 35px
     .caracteristics
-      float: left
-      padding: 10px
-      margin: 10px 0 0 20px
       @extend .border-radius-5
       header
         font-size: 19px
         text-align: center
         color: $gray
-        margin: 5px 0
         border-bottom: 1px solid #ccc
       p
         font-size: 13px
-        color: #ccc
-        padding: 9px 0px 5px 0px
+        color: #888
 
 
 #registration
@@ -79,15 +49,11 @@
     @include box-shadow(0px 0px 13px rgba(50, 50, 50, 0.15))
     @extend .border-radius-15
     background-color: $white
-    display: inline-block
-    margin: 27px 0 0 14px
     color: #8c8c8c
     h3
       text-align: right
       font-size: 22px
-      margin: 0px 12px 10px 0
     #new_user
-      padding: 0 10px
       input
         &[type="password"]
           background-color: #f6f6f6
@@ -95,34 +61,20 @@
           background-color: #f6f6f6
         &[type="text"]
           background-color: #f6f6f6
-    #remember
-      display: inilne
-      float: left
     input
       &[type="submit"]
-        float: right
         @extend .btn-blue
-        display: inline-block
-    .soften
-      clear: both
 
 
 #forgot-pass
-  .forgot
-    h2
-      margin-left: -20px
   .password
     @include box-shadow(0px 0px 13px rgba(50, 50, 50, 0.15))
     @extend .border-radius-15
     background-color: $white
-    display: inline-block
-    padding: 5px 15px
-    margin: 27px 0 0 14px
     color: #8c8c8c
     h3
       text-align: right
       font-size: 22px
-      margin-top: 0px
     input
       &[type="password"]
         background-color: #f6f6f6
@@ -130,17 +82,9 @@
         background-color: #f6f6f6
       &[type="text"]
         background-color: #f6f6f6
-    #remember
-      display: inilne
-      float: left
     input
       &[type="submit"]
-        float: right
         @extend .btn-blue
-        display: inline-block
-    .soften
-      clear: both
-      margin: 39px 0 10px
 
 
 
@@ -148,52 +92,7 @@
   margin-bottom: 0px
 
 
-
-#registration,
-#new_user,
-  .reg-labels,
-  .forgot-pass,
-  .sig-in
-    @include clearfix
-  .options
-    a
-      margin-right: 6px
-
-  .sig-in
-    .btn
-      margin-top: -20px
-
-  
-
 #login_data
   @include clearfix
 
-.div_login,
-.div_password,
-.div_sign_in
-  @include makeColumn(4, 1)
-  @include box-shadow(0px 0px 13px rgba(50, 50, 50, 0.15))
-  @extend .border-radius-15
-  padding: 15px
-  margin-top: 50px
-  color: #8c8c8c
-  display:inline-block
-  h3
-    text-align: right
-    font-size: 35px
-    line-height: 24px
-    margin: 5px 0 20px
-  .input_username
-    width: 96%
-  .btn
-    margin: 0 0 20px!important
-  .soften
-    clear: both
-
-
-.registration
-  margin-top: 30px
-
-.div_password
-  margin: 20px 0 0 1px
   
