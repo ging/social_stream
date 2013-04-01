@@ -8,11 +8,12 @@ header
       .results
         ul
           li
-          
+            background-color: #f9f9f9
+            &:hover
+              background-color: #fff
+            
             .contact
-              background-color: #f9f9f9
               &:hover
-                background-color: #fff
                 .avatar,
                 .data
                   @include opacity(100)
@@ -27,9 +28,7 @@ header
                   font-size: 9px
 
             .post
-              background-color: #f9f9f9
               &:hover
-                background-color: #fff
                 span
                   @include opacity(100)
               span
@@ -42,4 +41,5 @@ header
           li.more
             background-color: #f9f9f9
             font-size: 12px
-            border-top: 1px solid #c9c9c9
+            border-top: 1px solid rgb(228, 228, 228)
+            text-align: center

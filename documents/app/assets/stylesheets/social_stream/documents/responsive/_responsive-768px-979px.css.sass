@@ -4,10 +4,16 @@
 
 
 @media (min-width: 768px) and (max-width: 979px)
-  #picture
+  #picture,
+  #audio,
+  #video,
+  #document
     #toolbar
       display: none
-    .picture
+    .picture,
+    .audio,
+    .video,
+    .document
       .central
         @include grid-core-span(8, $fluidGridColumnWidth, $fluidGridGutterWidth)
       .details
