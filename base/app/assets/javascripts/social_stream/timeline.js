@@ -1,8 +1,8 @@
-// require social_stream/callback
-// require social_stream/audience
-// require social_stream/comment
-// require social_stream/pagination
-// require social_stream/wall
+//= require social_stream/callback
+//= require social_stream/audience
+//= require social_stream/comment
+//= require social_stream/pagination
+//= require social_stream/wall
 
 SocialStream.Timeline = (function(SS, $, undefined){
   var callback = new SS.Callback();
