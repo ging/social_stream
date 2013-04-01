@@ -124,7 +124,8 @@ SocialStream.Comment = (function(SS, $, undefined){
                     newCommentAutoSize,
                     newCommentClick,
                     newCommentLink,
-                    scrollToActivity);
+                    scrollToActivity,
+                    squeeze);
 
   callback.register('create',
                     hideNewActivityCommentElements,
