@@ -4,9 +4,7 @@ class Post < ActiveRecord::Base
   MAXIMUM_LENGTH = 140
 
   alias_attribute :text, :description
-  validates :text,
-    presence: true,
-    length: { maximum: MAXIMUM_LENGTH }
+  validates :text, presence: true
 
   define_index do
     activity_object_index
