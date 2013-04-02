@@ -25,10 +25,12 @@
   <article id="search-results">
     <%= render partial: 'search/results' %>
 
-    <% if @search_result.size > SearchController::RESULTS_SEARCH_PER_PAGE %>
-      <%= render partial: 'layouts/more',
-                 locals: { path: search_path(q: params[:q], type: params[:type]) } %>
-    <% end %>
+    <%= render partial: 'layouts/more',
+               locals: {
+                 path: search_path(q: params[:q], type: params[:type]),
+                 per_page: SearchController::RESULTS_SEARCH_PER_PAGE,
+                 total: @search_result.total_count
+              } %>
 
     <%= javascript_tag do %>
       SocialStream.Search.show();

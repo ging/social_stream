@@ -323,7 +323,7 @@ en:
     success: "Your invitations have successfully been sent"
     text: "Write your own message"
   layout:
-    more: "See more.."
+    more: "See more (%{count})"
   like:
     n:
       one: "%{count} like"

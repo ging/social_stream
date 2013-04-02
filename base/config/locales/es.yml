@@ -321,7 +321,7 @@ es:
     success: "Se han enviado tus invitaciones"
     text: "Escribe tu mensaje"
   layout:
-    more: "Ver más..."
+    more: "Ver más (%{count})"
   like:
     n:
       one: "1 fan"

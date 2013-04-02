@@ -2,5 +2,9 @@
   <%= render @conversations %>
 
   <%= render partial: 'layouts/more',
-              locals: { path: conversations_path } %>
+             locals: {
+               path: conversations_path,
+               per_page: 9,
+               total: @converations.total_count
+            } %>
 </div>

@@ -19,7 +19,11 @@
   
 <nav class="documents">
   <%= render partial: 'layouts/more',
-             locals: { path: polymorphic_path([profile_subject, Document.new ]) } %>
+             locals: {
+               path: polymorphic_path([profile_subject, Document.new ]),
+               per_page: Document.default_per_page,
+               total: collection.total_count
+             } %>
 </nav>
 
 
