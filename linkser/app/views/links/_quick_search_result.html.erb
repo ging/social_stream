@@ -1,1 +1,7 @@
-<%= render link %>
+<div class="link">
+  <div class="brifing">
+    <h5>
+      <%= link_to truncate(link.title), link.url %>
+    </h5>
+  </div>
+</div>

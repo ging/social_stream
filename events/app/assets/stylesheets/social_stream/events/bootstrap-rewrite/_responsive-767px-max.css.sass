@@ -9,21 +9,18 @@
   #user,
   #groups
     .timeline
-      .event
+      .event,
+      .link
         .date
           width: 60px
         .poster
           width: 80px
-        .details 
+        .details,
+        .text 
           margin-left: 10px
-          @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          width: 50%
+          display: inline-block !important
 
-  
-  #explore-content
-    .timeline
-      .root
-        .media-body
-          width: 77%
 
 
   #events
@@ -42,6 +39,8 @@
       .fc-day-number
         min-height: 32px
 
+
+
         
 // UP TO LANDSCAPE PHONE
 // ---------------------
@@ -55,11 +54,16 @@
       .timeline
         .avatar
           float: left
-        .event
-          .details 
-            margin-left: 10px
+        .event,
+        .link
+          .poster
+            @include hidden-phone
+          .details,
+          .text 
+            width: 100% !important
+            margin-left: 7px
             @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
-
+        
   
   
   #sidebarContent
