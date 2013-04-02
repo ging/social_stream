@@ -6,8 +6,5 @@
     </h4>
   </header>
   <%= render :partial => 'contacts/contact', :collection => current_subject.pending_contacts.shuffle.first(2), :locals => { destroy_params: { reject: true } } %>
-
-  <div class="see-more">  <%= link_to t('contact.pending.all_n', :count => current_subject.pending_contacts_count), pending_contacts_path %>
-  </div>
 </section>
 <% end -%>
