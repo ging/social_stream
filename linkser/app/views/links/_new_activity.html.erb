@@ -1,6 +1,6 @@
 <%= hidden_field_tag 'link[owner_id]', Actor.normalize_id(receiver) %>
 <%= hidden_field_tag 'link[url]' %>
 <%= hidden_field_tag 'link[loaded]', false %>
-<div id="link_preview_loading">
+<div id="link_preview_loading" data-link_path="<%= links_path %>">
   <%= render partial: 'layouts/loading' %>
 </div>

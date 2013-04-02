@@ -31,8 +31,8 @@ SocialStream.Wall.callbackRegister('show', function(){
         style: 'display: none;'
       }).insertAfter('.wall_input textarea.document_description');
 
+      SocialStream.Wall.changeAction($(this).attr('data-path'));
       $('.wall_input form').
-        attr('action', $(this).attr('data-path')).
         attr('enctype', 'multipart/form-data'); // this is ignored if done after creating the file input
 
       $('.wall_input input[name="post[owner_id]"]').attr('name', 'document[owner_id');

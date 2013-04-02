@@ -13,7 +13,7 @@ SocialStream.Linkser.Wall = (function(SS, $) {
     if (regexp.test($("#post_text").val())) {
       $("#link_url").val($("#post_text").val());
       $("#link_loaded").val(false);
-      $("#new_post").attr("action", "/links");
+      SS.Wall.changeAction($('#link_preview_loading').attr('data-link_path'));
       SS.Wall.changeRelationSelect('link');
 
       if(this.currentValue != this.lastValue) {
@@ -43,8 +43,7 @@ SocialStream.Linkser.Wall = (function(SS, $) {
 
       $("#link_preview").show();
     } else {
-      // reset should return to /documents when there is a file
-      // resetWallInput({ postText: false });
+      resetWallInput({ postText: false });
     }
   }
 
@@ -52,6 +51,7 @@ SocialStream.Linkser.Wall = (function(SS, $) {
     $("#new_post").attr("action", "/posts");
     $("#link_preview").hide().html('');
     $("#link_url").val("");
+    SS.Wall.changeAction();
     SS.Wall.changeRelationSelect('post');
 
     if (options.postText) {

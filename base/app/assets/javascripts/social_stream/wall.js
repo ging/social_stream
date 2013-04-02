@@ -45,6 +45,21 @@ SocialStream.Wall = (function(SS, $, undefined){
     $('#post_text').val('');
   };
 
+  var changeAction = function(path) {
+    var form = $('.wall_input form');
+
+    if (path === undefined) {
+      form.attr('action', form.data('actions').pop());
+    } else {
+      if (form.data('actions') === undefined) {
+        form.data('actions', []);
+      }
+
+      form.data('actions').push(form.attr('action'));
+      form.attr('action', path);
+    }
+  };
+
   callback.register('show',
                     initInputAutosize,
                     initRelationSelect);
@@ -53,6 +68,7 @@ SocialStream.Wall = (function(SS, $, undefined){
                     resetWallInput);
 
   return callback.extend({
+    changeAction: changeAction,
     changeRelationSelect: changeRelationSelect 
   });
 }) (SocialStream, jQuery);
