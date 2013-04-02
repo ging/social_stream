@@ -5,3 +5,7 @@
 SocialStream.Timeline.callbackRegister('show',
                                        SocialStream.Audio.show,
                                        SocialStream.Video.show);
+
+SocialStream.Timeline.callbackRegister('update',
+                                       SocialStream.Audio.show,
+                                       SocialStream.Video.show);

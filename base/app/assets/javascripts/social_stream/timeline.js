@@ -49,7 +49,7 @@ SocialStream.Timeline = (function(SS, $, undefined){
   };
 
   var initPagination = function() {
-    SS.Pagination.show(callback.handlers.show);
+    SS.Pagination.show(callback.handlers.update);
   };
 
   callback.register('show',
@@ -62,6 +62,12 @@ SocialStream.Timeline = (function(SS, $, undefined){
                     SS.Audience.index,
                     SS.Comment.index,
                     SS.Wall.new_);
+
+  callback.register('update',
+                    SS.Audience.index,
+                    SS.Comment.index,
+                    initModalCarousel);
+
 
   return callback.extend({
   });
