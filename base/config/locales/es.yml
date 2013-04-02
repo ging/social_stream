@@ -176,7 +176,7 @@ es:
     one: "Contacto"
     other: "Contactos"
     pending:
-      other: "Pendientes"
+      other: "Te añadieron"
       all: "Todos"
       all_n: "Ver todas los contactos pendientes (%{count})"
     received: "Recibidos"

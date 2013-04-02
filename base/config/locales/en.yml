@@ -178,7 +178,7 @@ en:
     one: "Contact"
     other: "Contacts"
     pending:
-      other: "Pending"
+      other: "Added you"
       all: "All"
       all_n: "See all pending requests (%{count})"
     received: "Received"
