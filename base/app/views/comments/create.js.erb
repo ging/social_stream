@@ -1,13 +1,11 @@
 <% if @comment.valid? %>
-  //Display the new comment
-  $("#comments_activity_<%= @comment.post_activity.parent.id %>").append("<%= escape_javascript(render @comment.post_activity) %>");
-  $(".activities_comment_btn").hide();
-  $(".input_new_comments").each(function() {
-    $(this).focus().val("").blur();   
+  SocialStream.Comment.create({
+    id: <%= @comment.id %>,
+    parentActivityId: <%= @comment.post_activity.parent.id %>,
+    html: "<%= j render(@comment.post_activity) %>"
   });
 
   SocialStream.Timeline.create("<%= escape_javascript dom_id(@comment.post_activity) %>");
 <% else %>
-  SocialStream.Timeline.create();
-  alert('<%= j @comment.errors.full_messages.to_sentence %>');
+  SocialStream.Flash.error("<%= j @comment.errors.full_messages.to_sentence %>");
 <% end %>

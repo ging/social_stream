@@ -15,6 +15,10 @@ SocialStream.Comment = (function(SS, $, undefined){
 
   var elAll = elAlwaysHidden.concat(elSometimesShown);
 
+  var appendNewHtml = function(options) {
+    $('#comments_activity_' + options.parentActivityId).append(options.html);
+  };
+
   var hideNewCommentElements = function(root) {
     if (root === undefined)
       root = "div.new_comment";
@@ -52,8 +56,8 @@ SocialStream.Comment = (function(SS, $, undefined){
     });
   };
 
-  var hideNewActivityCommentElements = function(activityId){
-    var newDiv = $('#' + activityId).closest('.root').find('div.new_comment');
+  var hideNewActivityCommentElements = function(options){
+    var newDiv = $('#activity_' + options.parentActivityId).find('div.new_comment');
 
     newDiv.find("textarea").val('');
 
@@ -128,6 +132,7 @@ SocialStream.Comment = (function(SS, $, undefined){
                     squeeze);
 
   callback.register('create',
+                    appendNewHtml,
                     hideNewActivityCommentElements,
                     newCommentAutoSize,
                     newCommentClick,
