@@ -71,7 +71,6 @@
     #search-results
 
       .contact
-        @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
         display: inline
         min-height: 80px
         float: left
@@ -98,24 +97,25 @@
           padding-left: 2%
 
 
-    .events
-      @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      display: inline-block
-
+    .event
+      @include makeColumn(3, 0)
+      display: inline
+      margin-left: 19px
       .avatar
-        @include grid-core-span(4, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        @include makeColumnoMargin(1, 0)
         display: inline
-        img
-          height: 59px
-          margin-top: 7px
-          width: 45px
-
+        margin-top: 14px
       .data
+        @include makeColumnoMargin(2, 0)
         display: inline-block
-        margin-top: 9px
-        width: 65%
-        
 
+
+    .comment
+      display: inline
+      @include makeColumn(3, 0)
+      margin-left: 19px
+      p
+        margin-bottom: 0
 
     .link
       display: inline-block

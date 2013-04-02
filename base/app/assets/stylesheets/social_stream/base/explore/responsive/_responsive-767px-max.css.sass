@@ -17,15 +17,20 @@
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin: 0px !important
       margin-bottom: 20px !important
+
       .content
         width: 96%
         margin-bottom: 10px
         .case
           margin: 3px 0 0 8px
+
+
     .timeline
       .media
         .avatar
           float: left
+
+
     #search
       margin-top: 0px
       width: 100%
@@ -33,8 +38,9 @@
         width: 68% !important
         margin-left: 3px
         font-size: 15px
+
       #search-results
-        margin-left: 9%
+
         .contact
           @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
           float: left
@@ -48,10 +54,39 @@
             .info
               font-size: 100%
 
+        .event
+          @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          .avatar
+            @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          .data
+            @include grid-core-span(9, $fluidGridColumnWidth, $fluidGridGutterWidth)
+            .date
+              font-size: 140%
+            .frequency
+              font-size: 100%
+
+        
+        
+        .comment
+          @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          p
+            margin-bottom: 0
+
+
+        .post
+          @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          p
+            margin-bottom: 0
+
 // UP TO LANDSCAPE PHONE
 // ---------------------
 
 @media (max-width: 480px)
+
+  #explore-header
+    .btn
+      padding-left: 4px
+      padding-right: 4px
 
   #explore-content
     #search
@@ -61,9 +96,14 @@
         width: 68% !important
         margin-left: 3px
         font-size: 15px
+
+
       #search-results
-        .contact
+
+        .contact,
+        .event
           @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          margin-bottom: 20px
           .avatar
             @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
           .data
@@ -71,5 +111,16 @@
             .name
               a
                 font-size: 140%
-            .info
+            .date
+              font-size: 140%
+            .info,
+            .frequency
               font-size: 80%
+
+
+        .comment,
+        .post
+          @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          margin-bottom: 20px
+          p
+            margin-bottom: 0
