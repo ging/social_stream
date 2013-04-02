@@ -6,8 +6,9 @@ SocialStream.Linkser.Wall = (function(SS, $) {
   var urlDetect = function() {
     this.currentValue = $("#post_text").val();
 
-    if(this.lastValue == null)
+    if (this.lastValue === null) {
       this.lastValue = "";
+    }
 
     if (regexp.test($("#post_text").val())) {
       $("#link_url").val($("#post_text").val());
@@ -69,17 +70,6 @@ SocialStream.Linkser.Wall = (function(SS, $) {
       $("#post_text").change(urlDetect).keyup(urlDetect);
 
       $("#post_text").after(
-        $('<input type="hidden">', {
-          name: 'link[owner_id]'
-        }).val($("#post_owner_id").val()),
-        $('<input type="hidden">', {
-          name: 'link[url]',
-          id:   'link_url'
-        }),
-        $('<input type="hidden">', {
-          name: 'link[loaded]',
-          id:   'link_loaded'
-        }).val(false),
         $('<div>', {
           id: 'link_preview'
         }).css('display', 'none')
