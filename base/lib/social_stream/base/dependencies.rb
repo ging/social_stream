@@ -16,6 +16,7 @@ require 'stringex'
 require 'ancestry'
 # Messages
 require 'mailboxer'
+require 'mailboxer/social_stream'
 # User authentication
 require 'devise'
 # Authorization

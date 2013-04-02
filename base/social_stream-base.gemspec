@@ -45,7 +45,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('omniauth-facebook','~> 1.4.1')
   s.add_runtime_dependency('omniauth-linkedin','~> 0.0.6')
   # Messages
-  s.add_runtime_dependency('mailboxer','~> 0.6.5')
+  s.add_runtime_dependency('mailboxer','~> 0.10.0')
   # Tagging
   s.add_runtime_dependency('acts-as-taggable-on','~> 2.2.2')
   # Background jobs
