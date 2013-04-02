@@ -67,6 +67,7 @@
 #registration
   @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
   .welcome
+    @extend .hidden-phone
     @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
     float: left
     margin-left: 4%
@@ -78,8 +79,8 @@
     h3
       margin: 0px 12px 10px 0
     #new_user
-      width: 100%
-      padding: 0 10px
+      width: 94%
+      padding: 0 3%
     #remember
       display: inilne
       float: left
