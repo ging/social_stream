@@ -138,7 +138,7 @@ es:
     name: "comentario"
     one: "un comentario"
     other: "comentarios"
-    view_all: "Ver todos los comentarios"
+    view_all: "Ver todos los comentarios (%{count})"
     title:
       one: "Comentario"
       other: "Comentarios"
