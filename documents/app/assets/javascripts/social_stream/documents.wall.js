@@ -36,7 +36,7 @@ SocialStream.Wall.callbackRegister('show', function(){
         attr('enctype', 'multipart/form-data'); // this is ignored if done after creating the file input
 
       $('.wall_input input[name="post[owner_id]"]').attr('name', 'document[owner_id');
-      SS.Wall.changeRelationSelect('document');
+      SocialStream.Wall.changeRelationSelect('document');
     }
 
     $('.wall_input input[type=file]').trigger('click');
