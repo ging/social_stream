@@ -1,0 +1,25 @@
+header
+  .search-nav
+    .mat
+      .results
+        ul
+          li
+            background-color: #f9f9f9
+            &:hover
+              background-color: #fff
+            .document,
+            .picture,
+            .audio,
+            .video
+              &:hover
+                .thumb,
+                .brifing
+                  @include opacity(100)
+              .thumb
+                @include opacity(70) 
+              .brifing
+                @include opacity(70)
+                .author
+                  @include ellipsis
+                .counters
+                  font-size: 9px

@@ -4,47 +4,98 @@
     margin-top: 4px
   .brand
     display: inline-block
+
+
+
 header
   .navbar-inner
     .logo,
     .logo-responsive
       float: left
       padding-top: 4px
+
     .logo
       @extend .hidden-phone
       @extend .hidden-tablet
+
     .logo-responsive
       @extend .hidden-desktop
+
     .search-mobile
       @extend .hidden-desktop
       float: left
       margin-top: 17px
       margin-left: 4px
+
     .search-nav
       float: left
-      width: 152px
-      margin-top: 5px 0 0 20px
+      width: 16.9%
+      margin-top: 5px 0 0 0
+      padding-left: 30px
+      .mat
+        width: 15.7%
+        margin-top: 18px
+        position: absolute
+        z-index: 2
+        .results
+          ul
+            margin: 20px 0 0 0 
+            padding: 2px 5px
+          li
+            .contact,
+            .audio
+              padding: 6px
+              margin: 2px -5px
+              .avatar
+                padding: 0 2% 6px 0
+                float: left
+                width: 25%
+              .data
+                display: inline-block
+                width: 72%
+                .info
+                  @include ellipsis
+
+            .post
+              padding: 6px
+              margin: 2px -5px
+              p
+                font-size: 15px
+
+
+
+          li.more
+            clear: both
+            margin-top: 13px
+            padding-left: 5px
+            padding-top: 5px
+            padding-bottom: 5px
+
+        
+
+
     .explore-nav
       @extend .hidden-phone
       height: 50px
-      width: 94px
-      float: left
+      width: 70px
+      display: inline-block
+      padding-left: 10px
       margin-top: 19px
-
-.nav
-  img
-    width: 20px
-  .name
-    @extend .hidden-phone
-    vertical-align: bottom
-  .calendar_icon
-    @extend .hidden-desktop
-
-
-.dropdown
-  margin-top: 7px
-  .dropdown-menu
-    margin: 6px -142px 0
     
-  .dropdown-toggle
-    margin-right: 5px
+    ul.nav
+      display: inline-table
+      img
+        width: 20px
+      .name
+        @extend .hidden-phone
+        vertical-align: bottom
+      .calendar_icon
+        @extend .hidden-desktop
+
+    .dropdown
+      margin-top: 7px
+      .dropdown-menu
+        margin: 6px -142px 0
+        
+      .dropdown-toggle
+        margin-right: 5px

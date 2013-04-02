@@ -1,0 +1,116 @@
+//
+// Responsive: Landscape phone to desktop/tablet
+// --------------------------------------------------
+
+
+@media (max-width: 767px)
+
+  #conversation
+    h2
+    input
+      &[type="submit"]
+        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+
+
+  #converstions,
+  #conversation,
+  #new_message
+    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    margin-left: 0px
+    float: none
+    #toolbar
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      background-color: $white
+      @include border-radius(5px)
+      ul
+        @include grid-core-span(8, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        height: 60px
+        margin-left: auto
+        margin-right: auto
+        margin-top: 13px
+        padding-left: 3%
+        li
+          @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          display: inline
+          margin-bottom: 0px
+          float: left
+          margin-top: 12px
+          a
+            width: auto
+            text-align: center
+    form.new_message
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin-left: 0
+    .conversations
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin-top: 26px
+      .conversation
+        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        .content_left
+          width: 60px
+          margin-right: 13px
+          margin-left: 0px
+        .content_right
+          width: 80%
+          .action
+            float: right
+            margin: -20px -45px 0 0
+    
+  #conversation 
+    .conversation_full
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      
+  #new_message
+    label
+      margin-bottom: 0px
+      margin-top: 6px
+    .select2-container
+      width: 100%
+    input
+      &[type="text"]
+        width: 98%
+
+
+
+// UP TO LANDSCAPE PHONE
+// ---------------------
+
+@media (max-width: 480px)
+
+  #converstions,
+  #conversation
+    .toolbar-home
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      ul.nav
+        li
+          display: inline
+          margin-bottom: 0px
+          float: left
+          margin-top: 17px
+    .conversations      
+      .conversation
+        margin-top: 26px
+        .content_left
+          margin-right: 2px
+        .content_right 
+          width: 69%
+          .actions
+            margin: -20px -45px 0 0
+
+
+  .conversation_full
+    margin: 0 auto
+    h3
+      font-size: 23px
+      white-space: normal
+    .messages
+      .media
+        .pull-left
+          float: left
+    .action
+      margin-top: -30px
+
+  #new_message
+    .select2-container
+      width: 102%
+

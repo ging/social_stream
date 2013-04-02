@@ -15,6 +15,10 @@ SocialStream.Comment = (function(SS, $, undefined){
 
   var elAll = elAlwaysHidden.concat(elSometimesShown);
 
+  var appendNewHtml = function(options) {
+    $('#comments_activity_' + options.parentActivityId).append(options.html);
+  };
+
   var hideNewCommentElements = function(root) {
     if (root === undefined)
       root = "div.new_comment";
@@ -52,8 +56,8 @@ SocialStream.Comment = (function(SS, $, undefined){
     });
   };
 
-  var hideNewActivityCommentElements = function(activityId){
-    var newDiv = $('#' + activityId).closest('.root').find('div.new_comment');
+  var hideNewActivityCommentElements = function(options){
+    var newDiv = $('#activity_' + options.parentActivityId).find('div.new_comment');
 
     newDiv.find("textarea").val('');
 
@@ -92,13 +96,21 @@ SocialStream.Comment = (function(SS, $, undefined){
   var squeeze = function(){
     //if there are 4 or more commments we only show the last 2 and a link to show the rest
     $(".comments").each(function(){
-      var comments = $(this).children(".child");
+      var comments = $(this).children(".child"),
+          showDiv;
 
       //check if there are more than 3 comments
       if (comments.size() > 3){
-        $(this).prepend("<div class='hidden_comments'><a href='#' onclick='SocialStream.Comment.showAll(\"" + 
-                        $(this).attr('id') +"\"); return false;'>" + I18n.t('comment.view_all') + " (" +
-                        comments.size() + ")</a></div>");
+        showDiv = $(this).find('.hidden_comments');
+
+        if (showDiv.length) {
+          showDiv.html(I18n.t('comment.view_all', { count: comments.size() }));
+          showDiv.show();
+          
+        } else {
+          $(this).prepend("<div class='hidden_comments'><a href='#' onclick='SocialStream.Comment.showAll(\"" + 
+                          $(this).attr('id') +"\"); return false;'>" + I18n.t('comment.view_all', { count: comments.size() }) + "</a></div>");
+        }
 
         comments.slice(0, comments.size() - 2).hide();
       }
@@ -124,9 +136,11 @@ SocialStream.Comment = (function(SS, $, undefined){
                     newCommentAutoSize,
                     newCommentClick,
                     newCommentLink,
-                    scrollToActivity);
+                    scrollToActivity,
+                    squeeze);
 
   callback.register('create',
+                    appendNewHtml,
                     hideNewActivityCommentElements,
                     newCommentAutoSize,
                     newCommentClick,

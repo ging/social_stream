@@ -1,0 +1,41 @@
+//
+// Responsive: Large desktop and up
+// --------------------------------------------------
+
+
+@media (min-width: 1200px)
+
+  #explore-content
+    .sub-content-full
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    .sub-content-medium
+      @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      display: inline
+    .sub-content-medium-offset
+      @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      @include grid-core-offset(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      display: inline
+    .sub-content-small
+      @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      @include grid-core-offset(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      display: inline-block
+    .sub-content-small-offset
+      @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      @include grid-core-offset(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      display: inline-block
+    .sub-content-mini
+      @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      display: inline-block
+    .sub-content-mini-offset
+      @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      @include grid-core-offset(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      display: inline-block
+
+    .timeline
+      .media
+        .media-heading
+          font-size: 18px
+
+    #search
+      margin-top: 0px
+      width: 100%

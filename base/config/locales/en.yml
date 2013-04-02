@@ -143,7 +143,7 @@ en:
     title:
       one: "Comment"
       other: "Comments"
-    view_all: "View all comments"
+    view_all: "View all comments (%{count})"
   contact:
     all_n: "All contacts (%{count})"
     confirm_delete: "Remove contact?"
@@ -178,7 +178,7 @@ en:
     one: "Contact"
     other: "Contacts"
     pending:
-      other: "Pending"
+      other: "Added you"
       all: "All"
       all_n: "See all pending requests (%{count})"
     received: "Received"
@@ -323,7 +323,7 @@ en:
     success: "Your invitations have successfully been sent"
     text: "Write your own message"
   layout:
-    more: "See more.."
+    more: "See more (%{count})"
   like:
     n:
       one: "%{count} like"

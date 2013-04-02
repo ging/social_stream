@@ -3,15 +3,16 @@
     <h4>
       <%= t('group.n', :count => subject.contact_subjects(:direction => :sent, type: :group).count) %>
     </h4>
-    <div class ="content">
-      <div class="group-list">
-        <% gs.each do |g| %>
+    <span class="line"></span>
+    <ul>
+      <% gs.each do |g| %>
+        <li>
           <%= link_to(image_tag(g.logo.url(:small), :alt => g.name, :title => g.name, :size => "small"), g) %>
-        <% end %>
-      </div>
-      <div class="groups-more">
-        <%= link_to t("group.view_all"), polymorphic_path([ profile_subject, Contact.new ], type: :group) %>
-      </div>
-    </div>
+        </li>
+      <% end %>
+    </ul>
+    <nav class="groups-more">
+      <%= link_to t("group.view_all"), polymorphic_path([ profile_subject, Contact.new ], type: :group) %>
+    </nav>
   <% end %>
 </section>

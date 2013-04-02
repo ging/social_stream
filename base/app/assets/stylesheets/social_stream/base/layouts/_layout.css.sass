@@ -1,7 +1,10 @@
 body
-  background: #f9f9f9 url(../images/pattern.png) repeat top left
+  background-color: #f9f9f9
+
+
 
 #wrapper
+  @include grid-core($gridColumnWidth, $gridGutterWidth)
 
 
 
@@ -9,43 +12,27 @@ body
   @extend .hidden-phone
   @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
   float: left
-    
-.contacts.tabbable
-  @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
-  float: left
-  margin-left: 25px
+
 
 .activities,
 #profile-info
   @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
   float: left
-  margin-left: 25px
-  margin-right: 25px
+  margin-left: 3%
 
   .wall_input
     padding: 5px 13px
 
-#sidebar
-  @extend .hidden-phone
-  @extend .hidden-tablet
-  width: 22.85714%
-  float: left
 
-#converstions
-  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-  .conversations
-    @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
 
-#conversation
-  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-  .conversation_full
-    @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    float: left
+
 #new_message
   @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
   #conversation
     @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
     float: left
 #repository
-  @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
   float: left
+
+

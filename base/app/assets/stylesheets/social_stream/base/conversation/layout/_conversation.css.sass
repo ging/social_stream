@@ -1,0 +1,121 @@
+@import "jquery.cleditor"
+
+#converstions
+  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  .conversations
+    @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    .conversation
+      height: 85px
+      clear: both
+      .content_left
+        display: inline
+        float: left
+        .avatar
+          display: inline
+        header
+          width: 48px
+          display: inline-block
+          h5 
+            a
+              display: block
+      .content_right
+        display: inline-block
+        margin-bottom: 15px
+        float: left
+        margin-left: 30px
+        width: 81%
+        .subject
+          font-size: 14px
+          display: inline
+          a
+            width: 96%
+
+        .briefing
+          width: 96%
+        .date
+          display: inline
+          margin: 0 13px 0 4px
+
+        .action
+          float: right
+          display: inline-block
+       
+
+  form.new_message
+    @include makeColumnoMargin(6, 0)
+    margin-left: 20px
+    .btn
+      margin: 17px 10px 0 0
+
+  
+#ck_editor
+  .cleditorMain
+    width: 100%!important
+.conversations
+  @include makeColumnoMargin(10, 0)
+
+#conversation
+  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  .conversation_full
+    @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    float: left
+    .participants
+      padding: 7px 10px 9px 10px
+      border: 1px solid #f1f1f1
+      img
+        padding: 4px 1px 2px 2px
+        width: 40px
+    .action
+      display: inline-block
+      float: right
+      margin-top: 18px
+    .soften
+      margin: 0px
+
+    .cont_conversation
+      .cleditorMain
+        width: 100% !important
+        padding: 0px
+      .actions
+        margin-top: 10px
+        input
+          &[type="submit"]
+            width: 100%
+
+
+  .message
+    padding: 15px 0 10px
+    .media
+      margin-left: 20px
+
+      .media-body
+        margin-top: 4px
+      .name
+        display: inline
+      .date
+        display: inline-block
+
+#new_message
+  #conversation
+    h2
+      @extend .hidden-phone
+      @extend .hidden-tablet
+    .select2-container
+      width: 101%
+    input
+      &[type="text"]
+        width: 99%
+    input
+      &[type="submit"]
+        @extend .pull-left
+
+
+#content
+  .read_all
+    float: right
+    margin-top: -20px
+  .notifications
+    margin-top: 35px
+
+    .notification
+      margin-bottom: 20px

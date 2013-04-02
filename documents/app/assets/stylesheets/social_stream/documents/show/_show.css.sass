@@ -1,4 +1,7 @@
-.picture
+.picture,
+.audio,
+.video,
+.documents
   .central
     @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
     float: left 
@@ -22,9 +25,50 @@
         background-color: rgba(50, 50, 50, 0.3)
     .tabbable
       margin-top: 10px
+      .nav
+        margin-bottom: 0
       .tab-content
-        overflow: initial
- 
+        .media
+          background-color: $white
+          border-bottom: 1px solid #ddd
+          border-left: 1px solid #ddd
+          padding: 16px 0  9px 0
+          margin-top: 0
+          &:last-child
+            border-bottom: none
+          &:first-child
+            padding-top: 10px
+          .actions
+            width: 100%
+            display: inline-block
+            margin-bottom: 10px
+            .post_time_ago
+              display: inline-block
+              font-size: 11px
+              color: $gray
+            .to_comment,
+            .to_like
+              display: inline-block
+              font-size: 12px
+              margin-left: 5px
+            .audience
+              display: inline-block
+              font-size: 12px
+              margin-left: 7px
+            .tooltip
+              @include opacity (90)
+              @extend .border-radius-5
+              width: 28%
+              background: $gray
+              color: whitesmoke
+              margin-top: 26px 0px 0px 53px
+              .audience_logo
+                display: inline-block
+                width: auto
+                padding: 4px
+                img
+                  @extend .border-radius-5
+
   .details
     @extend .hidden-phone
     width: 21.8%
@@ -32,7 +76,8 @@
     margin-left: 30px
     h4
       margin-bottom: 5px
-      color: $blue
+      color: #999
+      font-size: 15px
     .tabbable
       ul
         margin-bottom: 0px
@@ -40,12 +85,11 @@
           a
             background-color: #f3f3f3 
     .tab-content
-      color: #777
+      color: $blue
       border-left: 1px solid #dddddd
       background-color: #f3f3f3
       padding-bottom: 20px
       padding-top: 10px
-      
 
 
 #document-info
@@ -79,26 +123,25 @@
 
 
 #comments
-  .new_comment
-    clear: both
-    @include border-bottom-radius (5px) 
-    border: 1px solid #f9f9f9
-    width: 88%
-    margin-left: 66px
-    background-color: #f9f9f9
+  div.new_comment
+    margin-top: 10px
+    min-height: 100px
+    height: auto
+    width: 90%
+    float: right
     .avatar
-      float: left
-      margin-left: -8px
-      margin-right: 6px
-      margin-top: -2px
-      img
-        margin-left: 9px
-        width: 50px !important 
-    form .new_comment
-      clear: none
-      border: none
-      background-color: transparent 
-      width: 88%
-      margin-left: 66px
-      margin-top: 0px
+      float: right
+      width: 11%
+    form.new_comment
+      float: right
+      margin-right: 4px
+      min-height: 80px
+      display: inline-block
+      width: 83.8%
+      margin-top: 3px
+      input
+        &[type="submit"]
+          @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25))
+          float: right
+          display: inline-block !important
      

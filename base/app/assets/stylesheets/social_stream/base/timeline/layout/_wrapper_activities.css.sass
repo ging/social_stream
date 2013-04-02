@@ -1,0 +1,51 @@
+.wrapper
+  @include grid-fluid(12, 0)
+#wrapper_body
+  @include grid-fluid(12, 0)
+
+.activities
+  .wall_input
+    padding: 5px 13px
+    background-color: $grayLighter
+    margin-bottom: 20px
+    @include border-radius (5px)
+    label
+      font-size: 14px
+    input
+      margin-top: 8px
+      display: block
+      &[type="submit"]
+        @include size (auto, auto)
+        @extend .btn-blue-invert
+        padding: 3px 11px 4px 11px
+        margin-top: 0px
+        float: right
+      &[type="checkbox"]
+        width: auto
+        margin: 4px 0px 5px 0px
+        display: inline
+      &[type="text"]
+        padding: 1% 2%
+    .wall_input-actions
+      margin-top: 10px
+    .new_document
+      display: inline
+      padding: 1px 6px 4px 6px
+    .btn-group,
+    open
+      display: inline-block
+      .dropdown-menu
+        li
+          margin-left: 0px
+          padding-left: 7px
+          a
+            padding: 0px !important
+            label
+              margin-left: 0px
+              padding: 0px 16px 0px 0px!important
+              &:hover
+                background: $blue
+                color: $white
+
+#post_text
+  margin-bottom: 0px

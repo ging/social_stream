@@ -93,7 +93,7 @@ describe GroupsController do
         Group.count.should eq(count + 1)
         assigns(:current_subject).should eq(group)
         response.should redirect_to(:home)
-        @user.receivers.should include(group.actor)
+        @user.senders.should include(group.actor)
       end
 
       context "with participants" do

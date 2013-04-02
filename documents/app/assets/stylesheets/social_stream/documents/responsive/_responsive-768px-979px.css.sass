@@ -4,38 +4,57 @@
 
 
 @media (min-width: 768px) and (max-width: 979px)
-  .picture
-    .central
-      @include grid-core-span(8, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    .details
-      width: 20% !important
-      float: left 
-      margin-left: 30px
-      section
-        border-bottom: 1px dashed #ccc
-        padding-top: 0px
-        label
-          font-size: 15px
-          padding: 2px 0 0 5px
-      .upload
-        margin-top: 0px
-        input
-          &[type="file"]
-            display: inline
-            width: 98% !important
-            line-height: 0px
-            background-color: $white
-            @extend .border-radius-5
-      .title
-        input
-          &[type="text"]
-            display: inline
-            width: 90% !important
-      #picture_tag_list
-        display: inline
-        width: 90% !important
-      .description
-        textarea
-          display: inline-block
-          @include size (70px, 90% !important)
+  #picture,
+  #audio,
+  #video,
+  #document
+    #toolbar
+      display: none
+    .picture,
+    .audio,
+    .video,
+    .document
+      .central
+        @include grid-core-span(8, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      .details
+        width: 26% !important
+        float: left 
+        margin-left: 20px !important
+        section
+          border-bottom: 1px dashed #ccc
+          padding-top: 0px
+          label
+            font-size: 15px
+            padding: 2px 0 0 5px
+        .upload
+          margin-top: 0px
+          input
+            &[type="file"]
+              display: inline
+              width: 98% !important
+              line-height: 0px
+              background-color: $white
+              @extend .border-radius-5
+        .title
+          input
+            &[type="text"]
+              display: inline
+              width: 90% !important
+        #picture_tag_list
+          display: inline
           width: 90% !important
+        .description
+          textarea
+            display: inline-block
+            @include size (70px, 90% !important)
+            width: 90% !important
+
+
+#search-results,
+.repository-list-net,
+.repository-list
+  .picture,
+  .audio,
+  .video,
+  .document
+    margin-bottom: 20px

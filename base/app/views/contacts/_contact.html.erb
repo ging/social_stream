@@ -8,19 +8,18 @@
   <div class="data">
     <div class="name">
       <%= link_to(truncate_name(contact.receiver_subject.name), contact.receiver_subject)%>
-      <div class="x">
-        <%= link_to 'X', contact_path(contact, destroy_params), method: :delete, remote: true, confirm: t('contact.confirm_delete') %>
-      </div>
+    </div>
+
+    <div class="info">
+      <%= contact_brief(contact.receiver_subject) %>
     </div>
   </div>
-
-  <div class="info">
-    <%= contact_brief(contact.receiver_subject) %>
-  </div>
-
   <div class="add">
     <%= contact_link(contact) %>
   </div>
+  <div class="x">
+        <%= link_to 'X', contact_path(contact, destroy_params), method: :delete, remote: true, confirm: t('contact.confirm_delete') %>
+      </div>
 </section>
 
 

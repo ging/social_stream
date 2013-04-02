@@ -14,18 +14,12 @@
           padding: 7px 8px 7px !important
     
   footer
-    z-index: 10
-    background-color: $white
-    position: fixed
-    width: 100% !important
-    margin-left: -20px !important
-    padding-top: 20px !important
-
-
+    @include hidden-phone
 
 
   #home
     #toolbar
+      @include hidden-phone
       .send-message
         margin-top: 10px
         a
@@ -150,92 +144,7 @@
 
 
 
-  #conversation
-    h2
-    input
-      &[type="submit"]
-        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-
-
-
-
-  #converstions,
-  #conversation,
-  #new_message
-    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    margin-left: 0px
-    float: none
-    #toolbar
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      background-color: $white
-      @include border-radius(5px)
-      ul
-        @include grid-core-span(8, $fluidGridColumnWidth, $fluidGridGutterWidth)
-        height: 60px
-        margin-left: auto
-        margin-right: auto
-        margin-top: 13px
-        padding-left: 3%
-        li
-          @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
-          display: inline
-          margin-bottom: 0px
-          float: left
-          margin-top: 12px
-          a
-            width: auto
-            text-align: center
-    form.new_message
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      margin-left: 0
-    .conversations
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      margin-top: 26px
-      .conversation
-        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-        .content_left
-          width: 60px
-          margin-right: 13px
-          margin-left: 0px
-        .content_right
-          width: 80%
-          .action
-            float: right
-            margin: -20px -45px 0 0
-    
-  #conversation 
-    .conversation_full
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-  #new_message
-    label
-      margin-bottom: 0px
-      margin-top: 6px
-    .select2-container
-      width: 100%
-    input
-      &[type="text"]
-        width: 98%
-    
-
-
-
-  #contacts
-    .contacts
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      float: left
-      margin-left: 0
-      .tab-content
-        .contact
-          margin: 4px 22px 4px 18px
-          .avatar
-            width: 45px !important
-          .info
-            font-size: 11px
-            color: #ccc
-            z-index: 1
-          .add
-            margin-top: 2px
-
+  
 
 
 
@@ -247,99 +156,7 @@
 
 
 
-  #frontpage
-    .explanation
-      h3
-        font-size: 15px
-        line-height: 24px
-        text-align: right
-      h4
-        font-size: 13px
-        text-align: right
-    
-    #sign_in
-      @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      margin-left: 12%
-      margin-top: 18px
-      padding: 0
-      h3
-        margin: 17px 12px 20px 0
-      form.new_user
-        padding: 0 10px
-        .login_data
-          #user_mail,
-          #user_password
-            width: 96%
-        
 
-
-
-  #registration
-    .div_registration
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      margin-left: 0
-      margin-top: 18px
-      padding: 0
-      h3
-        margin: 17px 12px 20px 0
-      #new_user
-        .reg-labels
-          padding: 0 10px
-          .login_data
-            input
-              &[type="password"]
-                width: 96% !important
-            input
-              &[type="text"]
-                width: 96% !importantv
-
-
-
-  #forgot-pass
-    .forgot
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      margin-left: 0
-      margin-top: 18px
-      padding: 0 10px
-      h3
-        margin: 17px 12px 20px 0
-
-      .div_password
-        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-        padding: 0px
-        .form_tag
-          width: 96% !important
-          input
-            &[type="submit"]
-              float: right
-
-  #explore-content
-    .sub-content-medium,
-    .sub-content-full,
-    .sub-content-small,
-    .sub-content-mini,
-    .sub-content-medium-offset,
-    .sub-content-full-offset,
-    .sub-content-small-offset,
-    .sub-content-mini-offset
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      margin: 0px !important
-      margin-bottom: 20px !important
-      .content
-        width: 96%
-        margin-bottom: 10px
-        .case
-          margin: 3px 0 0 8px
-    .timeline
-      .media
-        .avatar
-          float: left
-    #search
-      margin-top: 0px
-      width: 100%
-      .input-xlarge
-        width: 70% 
-        margin-left: 3px
 
 // UP TO LANDSCAPE PHONE
 // ---------------------
@@ -369,6 +186,7 @@
             width: 100% !important
       ul.buttons
         @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    
     .activities
       .wall_input
         #new_post
@@ -380,11 +198,9 @@
           .wall_input-actions
             .btn-group
               margin-top: 10px
-
-
-  #sidebar
-    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    margin-left: 2%
+      .timeline
+        .avatar
+          float: left
 
 
 
@@ -392,82 +208,3 @@
     .relation_list
       padding-left: 10px
 
-
-
-  #converstions,
-  #conversation
-    .toolbar-home
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      ul.nav
-        li
-          display: inline
-          margin-bottom: 0px
-          float: left
-          margin-top: 17px
-    .conversations      
-      .conversation
-        margin-top: 26px
-        .content_left
-          margin-right: 2px
-        .content_right 
-          width: 69%
-          .actions
-            margin: -20px -45px 0 0
-
-
-  .conversation_full
-    margin: 0 auto
-    h3
-      font-size: 23px
-      white-space: normal
-    .messages
-      .media
-        .pull-left
-          float: left
-    .action
-      margin-top: -30px
-
-#new_message
-  .select2-container
-    width: 102%
-
-
-
-  #frontpage
-    #sign_in
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      margin-left: 0
-      padding: 0
-      h3
-        margin: 17px 12px 20px 0
-      form.new_user
-        padding: 0 10px
-        .login_data
-          input
-            &[type="password"]
-              width: 96%
-          input
-            &[type="text"]
-              width: 96%
-
-
-
-  #registration
-    .div_registration
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      margin-top: 18px
-      padding: 0
-
-    #new_user
-      .reg-labels
-        padding: 0 10px
-        .form_tag
-          width: 96%
-        input
-          &[type="email"]
-            width: 96%
-
-
-  #explore-content
-    #search
-      width: 99

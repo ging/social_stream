@@ -5,80 +5,41 @@
   .menuv 
     @extend .border-radius-7
     border: 1px solid #f1f1f1 
-    width: auto
-    margin-left: none
-    padding: 10px 0 10px 10px
-    hr
-      margin: 7px 5px 0px -5px
-    ul 
-      margin: 7px 0 0 18px
+    ul
       li 
-        margin-left: 1px
-        padding: 0px 0px
         font-size: 14px
         ol 
-          padding: 0px 0px
-          margin: -7px 0 13px 2px
           li
-            margin-top: -7px 0 8px 0
-            padding-bottom: 0px
             a
               color: $grayLighter
 
       
     .advanced 
       color: $linkColor
-      font-size: 13px
-      margin: 8px 0 0 0px !important
       text-decoration: none
-      display: block
-      padding: 3px 0px
       font-size: 12px
       cursor: pointer
 
   .search-result 
     .tags-list
-      display: inline
-      width: 889px
-      float: left
       font-size: 16px
       ul
-        @include makeColumn(2, 0)
-        margin: 20px 0 0 8px
         a
           cursor: pointer
           color: $grayLighter
           &:hover
             color: $linkColor
-
-#tags
-  margin-top: 20px
  
 #search
   h4
-    margin: 0 0 10px
     border-bottom: 1px solid #ccc
   .btn-group
-    padding-bottom: 10px
-    margin-bottom: 10px
     border-bottom: 1px dashed #ccc
-    width: 100%
-    padding-left: 5px
     .btn 
       @extend .btn-blue
       font-size: 13px !important
-      width: 11% !important
-      margin: 0 auto 0
-  select
-    display: none
   .input-xlarge
-    width: 37% !important
-    height: 34px
-    margin-bottom: 0px
-    padding-left: 23px
-    clear: both
-    display: inline
-    margin-left: 5px
+    font-size: 15px
 
 .content-full
   .media,
@@ -90,36 +51,36 @@
       h6
         font-size: 16px !important 
 
+
+
 /////////////////////////////////////// EXPLORE SEARCH RESULT
-///////////// in events, linkser, post, comments
+///////////// users, groups, events, post, (documents, audios, images, videos. View: documents/app/assets/stylesheet/documents/explore/explore-documents
 
 
-#search-result
-  .events
-    display: inline-block
-    @include makeColumnoMargin(3, 0)
+#search-results
+  .contact
     .avatar
-      @include makeColumnoMargin(1, 0)
-      display: inline
-      img
-        height: 59px
-        margin-top: 7px
-        width: 45px
+      a
+        img
+          @extend .border-radius-5
     .data
-      @include makeColumnoMargin(2, 0)
-      display: inline-block
-      margin-top: 9px
-      
+      .name
+        color: $black
+      .info
+        font-size: 80%
+        color: #888
+
+  .event
+    .data
       .date
         font-size: 12px
       .frequency
         font-size: 12px
         color: #888
+  
+  .comment
+    p
 
 
-  .link
-    display: inline-block
-    @include makeColumn(3, 0)
-    margin-left: 0px
-    h5
-      margin-bottom: 2px
+  .post
+    p

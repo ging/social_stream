@@ -1,0 +1,33 @@
+header
+  .search-nav
+    .mat
+      .results
+        ul
+          li
+            .document,
+            .picture,
+            .audio,
+            .video
+              min-height: 80px
+              .thumb
+                @include opacity(70)
+                width: 38%
+                float: left
+                margin-top: 6px
+                .icon_file_50-default
+                  background-size: 315px 
+              .brifing
+                @include opacity(70)
+                width: 62%
+                float: left
+                h5
+                  @include ellipsis
+                  margin: 4px 0 0 0
+                  font-size: 13px
+                .author
+                  @include ellipsis
+                  font-size: 11px
+                .counters
+                  font-size: 9px
+                  .counter
+                    color: $blue

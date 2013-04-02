@@ -4,15 +4,15 @@
       <%= t('contacts') %>
     </h4>
     <span class="line"></span>
-    <div class ="content">
-      <div class="contact">
-        <% cs.each do |contact| %>
+    <ul>
+      <% cs.each do |contact| %>
+        <li>
           <%= link_to(image_tag(contact.logo.url(:small), :alt => contact.name, :title => contact.name, :size => "small"), contact) %>
-        <% end %>
-      </div>
-      <div class="contacts-more">
-        <%= link_to t("contact.view_all"), [ profile_subject, Contact.new ] %>
-      </div>
-    </div>
+        </li>
+      <% end %>
+    </ul>
+    <nav class="contacts-more">
+      <%= link_to t("contact.view_all"), [ profile_subject, Contact.new ] %>
+    </nav>    
   <% end %>
 </section>

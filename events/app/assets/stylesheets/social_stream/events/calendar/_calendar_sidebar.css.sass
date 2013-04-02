@@ -1,13 +1,17 @@
 @import "fullcalendar"
 
-#sidebar
-  .calendar
-    padding: 5px
-    display: block
+#events
+  #toolbar
+    display: none
+
+  #sidebar
+    .calendar
+      padding: 2%
+      display: block
       
 #month_top,
 #month_bottom
-  padding: 5px
+  padding: 2%
   text-align: center
   a 
     color: $gray 
@@ -19,11 +23,11 @@
 
 #month_top
   border-bottom: 1px solid #dbdbdb
-  margin-bottom: 10px
+  margin-bottom: 5%
 
 #month_bottom
   border-top: 1px solid #dbdbdb
-  margin-bottom: 10px
+  margin-top: 4%
 
 #month_top.past
   @include opacity (70)
@@ -33,28 +37,30 @@
   margin: 0 auto
   padding: 2.5%
   width: 100%
-  tr
-    td
-      padding-left: 2.5%
-      padding-right: 2.5%
-      text-align: right
-      a
-        color: $gray
-        text-decoration: none
-    .today
-      @include border-radius(15px)
-      border: 1px solid $blue !important
-      a
-        color: $blue 
-    .busy
-      font-weight: bold
-      @include border-radius(5px)
-      border: 1px solid #c4c4c4
-      background-color: $white
-    .past
-      @include opacity (70)
-    .other_month
-      @include opacity (70)
+  tbody
+    width: 100%
+    tr
+      td
+        padding-left: 2.5%
+        padding-right: 2.5%
+        text-align: right
+        a
+          color: $gray
+          text-decoration: none
+      .today
+        @include border-radius(15px)
+        border: 1px solid $blue !important
+        a
+          color: $blue 
+      .busy
+        font-weight: bold
+        @include border-radius(5px)
+        border: 1px solid #c4c4c4
+        background-color: $white
+      .past
+        @include opacity (70)
+      .other_month
+        @include opacity (70)
 
 .fc-content
   .fc-cell-overlay,

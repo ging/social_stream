@@ -1,0 +1,88 @@
+#frontpage
+
+  .explanation
+    background-color: $white
+    border-left: 12px solid $blue
+    .big
+      font-size: 18px
+      font-weight: bold
+      line-height: 28px
+    .lite
+      color: $gray
+    .btn
+      font-size: 15px
+
+  #sign_in
+    @include box-shadow(0px 0px 13px rgba(50, 50, 50, 0.15))
+    @extend .border-radius-15
+    background-color: $white
+    color: #8c8c8c
+    h3
+      text-align: right
+      font-size: 22px
+    input
+      &[type="email"],
+      &[type="password"]
+        background-color: #f6f6f6
+      &[type="mail"]
+        background-color: #f6f6f6
+    input
+      &[type="submit"]
+        @extend .btn-blue
+
+  #presentation
+    border-top: 1px solid #d3d3d3
+    .caracteristics
+      @extend .border-radius-5
+      header
+        font-size: 19px
+        text-align: center
+        color: $gray
+        border-bottom: 1px solid #ccc
+      p
+        font-size: 13px
+        color: #888
+
+
+#registration
+  .registration
+    @include box-shadow(0px 0px 13px rgba(50, 50, 50, 0.15))
+    @extend .border-radius-15
+    background-color: $white
+    color: #8c8c8c
+    h3
+      text-align: right
+      font-size: 22px
+    #new_user
+      input
+        &[type="password"]
+          background-color: #f6f6f6
+        &[type="email"]
+          background-color: #f6f6f6
+        &[type="text"]
+          background-color: #f6f6f6
+    input
+      &[type="submit"]
+        @extend .btn-blue
+
+
+#forgot-pass
+  .password
+    @include box-shadow(0px 0px 13px rgba(50, 50, 50, 0.15))
+    @extend .border-radius-15
+    background-color: $white
+    color: #8c8c8c
+    h3
+      text-align: right
+      font-size: 22px
+    input
+      &[type="password"]
+        background-color: #f6f6f6
+      &[type="email"]
+        background-color: #f6f6f6
+      &[type="text"]
+        background-color: #f6f6f6
+    input
+      &[type="submit"]
+        @extend .btn-blue
+

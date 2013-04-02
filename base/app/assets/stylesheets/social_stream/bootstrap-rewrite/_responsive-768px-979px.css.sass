@@ -12,12 +12,7 @@
 
 
   footer
-    z-index: 10
-    background-color: $white
-    position: fixed
-    width: 100% !important
-    margin-left: -20px !important
-    padding-top: 20px !important
+    @include hidden-tablet
 
 
 
@@ -36,8 +31,6 @@
   #user,
   #group
     #toolbar
-      @include hidden-tablet
-        
       ul.buttons
         margin-left: 0
         li
@@ -45,6 +38,7 @@
             @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
     .activities
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin-left: 0px
       .wall_input
         padding: 5px 13px
     #sidebar
@@ -74,79 +68,6 @@
         .update
           @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
           
-
-
-
-  #converstions
-    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    #toolbar
-      @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      float: left
-    div.conversations
-      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      float: left
-      .conversation
-        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-        height: 85px
-        .content_left
-          @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
-          margin-left: 10px
-          float: left
-          .avatar
-            width: 45px
-            display: inline
-          header
-            display: inline-block
-        .content_right
-          width: 66%
-          float: left
-          .subject
-            display: inline
-            a
-              width: 100%
-          .action
-            display: inline-block
-            float: right
-            margin: -19px -40px 0 0
-          .briefing
-            width: 100%
-  #conversation 
-    .conversation_full
-      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      float: left
-      h3
-        width: 96%
-
-
-  #new_message
-    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    #toolbar
-      @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      float: left
-    #conversation
-      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      float: left
-      margin-left: 0px
-      label
-        margin-bottom: 0px
-        margin-top: 6px
-      .select2-container
-        width: 101%
-      input
-        &[type="text"]
-          width: 99%
-  
-  
-  #conversation
-    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    #toolbar
-      @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      float: left
-    #conversation_full
-      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      float: left
-      margin-left: 0px
-
 
 
   .relation_customs
@@ -200,32 +121,6 @@
 
 
 
-  #contacts
-    .contacts
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      float: left
-      margin-left: 0
-      .tab-content
-        .contact
-          margin: 4px 22px 4px 18px
-          .avatar
-            width: 45px !important
-            float: left
-          .data
-            a
-              display: inline
-            .x
-              float: right
-              display: inline-block
-          .info
-            font-size: 11px
-            color: #ccc
-            z-index: 1
-          .add
-            margin-top: 2px
-
-
-
 
     #sidebar
       @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
@@ -239,29 +134,3 @@
           margin: 0px
 
  
-
-
-  #frontpage
-    .explanation
-      h3
-        font-size: 15px
-        line-height: 24px
-        text-align: right
-      h4
-        font-size: 13px
-        text-align: right
-
-    #sign_in
-      @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      margin-left: 12%
-      margin-top: 18px
-      padding: 0
-      h3
-        margin: 17px 12px 20px 0
-      form.new_user
-        padding: 0 10px
-        .login_data
-          #user_mail,
-          #user_password
-            width: 96%
-        

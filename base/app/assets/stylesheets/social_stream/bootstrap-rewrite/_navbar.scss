@@ -29,14 +29,17 @@
 // -------------------------
 .navbar-search {
   .search-query {
-    padding: 1px 11px 0;
+    padding: 1px 4px 0;
     @include font-sans-serif(12px, normal, 1);
     @include border-radius(5px); // redeclare because of specificity of the type attribute
   }
 }
 
 .navbar-search {
-  margin: 15px 0 0 28px;
+  margin: 15px 0 0 0;
+  width: 100%;
+  position: relative;
+  z-index: 4;
 }
 .navbar .nav {
   margin: 0;

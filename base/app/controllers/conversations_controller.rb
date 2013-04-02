@@ -84,7 +84,7 @@ class ConversationsController < ApplicationController
   private
 
   def get_mailbox
-    @mailbox = current_subject.mailbox
+    @mailbox = current_actor.mailbox
   end
 
   def get_actor

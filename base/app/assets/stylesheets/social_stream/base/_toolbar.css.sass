@@ -3,6 +3,7 @@
     .btn-group
       width: 100%
       margin-top: 6px
+      margin-left: 0px
       .btn
         width: 100% !important
         @extend .btn-blue
@@ -36,25 +37,48 @@
       a
         &:hover
           color: $white
+  
   .contacts-toolbar
+    ul
+      border-right: 1px solid #ddd
+      min-height: 191px
+      margin: 0
+      padding-top: 6px
+    .contacts-more
+      text-align: right
+      margin-top: -10px
+      clear: both
+      padding-right: 7px
+
+  section.groups
+    ul
+      border-right: 1px solid #ddd
+      min-height: 137px
+      margin: 0
+      padding-top: 6px
+    .groups-more
+      text-align: right
+      margin-top: -10px
+      clear: both
+      padding-right: 7px
+
+  .contacts-toolbar,
+  section.groups
     @extend .hidden-phone
     margin-top: 20px
+    clear: both
     h4
-      display: inline
-    .line
-      display: inline-block
-      border-bottom: 1px solid #888
-      @include size (2px, 49%)
-    .content
-      margin-top: 8px
-      .contact
-        padding: 1px 7px 3px 7px
-        a
-          margin-left: 6%
-          margin-right: 5%
-      .contacts-more
-        @extend .pull-right
-        margin-top: 6px
+      margin-bottom: 0px
+      border-bottom: 1px solid #ddd
+    ul
+      li
+        @include grid-core-span(4, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        @include grid-core-offset(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        float: left
+        img
+          margin: 8px 0
+
+
 .toolbar-messages
   .toolbar_menu
     ul
@@ -78,7 +102,7 @@
   overflow: hidden
   img
     @extend .border-radius-5
-    width: 150px
+    width: 100%
   h5 
     a
       text-decoration: none

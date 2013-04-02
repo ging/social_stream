@@ -138,7 +138,7 @@ es:
     name: "comentario"
     one: "un comentario"
     other: "comentarios"
-    view_all: "Ver todos los comentarios"
+    view_all: "Ver todos los comentarios (%{count})"
     title:
       one: "Comentario"
       other: "Comentarios"
@@ -176,7 +176,7 @@ es:
     one: "Contacto"
     other: "Contactos"
     pending:
-      other: "Pendientes"
+      other: "Te añadieron"
       all: "Todos"
       all_n: "Ver todas los contactos pendientes (%{count})"
     received: "Recibidos"
@@ -321,7 +321,7 @@ es:
     success: "Se han enviado tus invitaciones"
     text: "Escribe tu mensaje"
   layout:
-    more: "Ver más..."
+    more: "Ver más (%{count})"
   like:
     n:
       one: "1 fan"

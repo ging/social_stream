@@ -1,0 +1,30 @@
+//
+// Responsive: Large desktop and up
+// --------------------------------------------------
+
+
+@media (min-width: 1200px)
+
+  #contacts
+    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    .contacts
+      @include grid-core-span(9, $fluidGridColumnWidth, $fluidGridGutterWidth)
+
+      .contact-list
+        clear: both
+        min-height: 700px
+        padding-bottom: 50px
+      .contact
+        width: 15% !important
+        .avatar
+          width: 45px !important
+          float: left
+        .data
+          a
+            display: inline
+        .x
+          margin-right: 6px
+        .info
+          width: 65% !important
+        .add
+          margin-top: 2px
