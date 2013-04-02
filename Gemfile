@@ -4,7 +4,7 @@ source "http://rubygems.org"
 # use a local code of any of these gems
 
 # Gems before social_stream-base
-# gem 'mailboxer', :path => '../mailboxer'
+gem 'mailboxer', :path => '../mailboxer'
 # gem 'avatars_for_rails', :path => '../avatars_for_rails'
 # gem 'rails-scheduler', path: '../rails-scheduler'
 # gem 'omniauth-socialstream', path: '../omniauth-socialstream'

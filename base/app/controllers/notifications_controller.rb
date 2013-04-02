@@ -27,9 +27,9 @@ class NotificationsController < ApplicationController
   def update
     if params[:read].present?
       if params[:read].eql?("Read")
-        @actor.read @notification
+        @actor.mark_as_read @notification
       elsif params[:read].eql?("Unread")
-        @actor.unread @notification
+        @actor.mark_as_unread @notification
       end
     end
     @notifications = @mailbox.notifications.not_trashed.page(params[:page]).per(10)
@@ -38,7 +38,7 @@ class NotificationsController < ApplicationController
   
   def update_all
     @notifications= @mailbox.notifications.all
-    @actor.read @notifications
+    @actor.mark_as_read @notifications
     @notifications = @mailbox.notifications.not_trashed.page(params[:page]).per(10)
     render :action => :index
   end
@@ -52,7 +52,7 @@ class NotificationsController < ApplicationController
   private
 
   def get_mailbox
-    @mailbox = current_subject.mailbox
+    @mailbox = current_actor.mailbox
   end
 
   def get_actor
