@@ -2,3 +2,5 @@
 //= require social_stream/event
 
 SocialStream.Timeline.callbackRegister('show', SocialStream.Event.index);
+
+SocialStream.Timeline.callbackRegister('update', SocialStream.Event.index);
