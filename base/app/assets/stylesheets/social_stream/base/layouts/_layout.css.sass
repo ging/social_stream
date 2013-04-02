@@ -23,22 +23,9 @@ body
   .wall_input
     padding: 5px 13px
 
-#sidebar
-  @extend .hidden-phone
-  @extend .hidden-tablet
-  width: 22.85714%
-  float: right
 
-#converstions
-  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-  .conversations
-    @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
 
-#conversation
-  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-  .conversation_full
-    @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    float: left
+
 #new_message
   @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
   #conversation
@@ -51,9 +38,3 @@ body
     @extend .hidden-phone
     @extend .hidden-tablet
 
-footer
-  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-  @extend .hidden-phone
-  @include menuHorizontal
-  float: none
-  clear: both

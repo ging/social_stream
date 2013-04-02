@@ -1,0 +1,76 @@
+//
+// Responsive: Tablet to desktop
+// --------------------------------------------------
+
+
+@media (min-width: 768px) and (max-width: 979px)
+
+  #converstions
+    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    #toolbar
+      @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+    div.conversations
+      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+      .conversation
+        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        height: 85px
+        .content_left
+          @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+          margin-left: 10px
+          float: left
+          .avatar
+            width: 45px
+            display: inline
+          header
+            display: inline-block
+        .content_right
+          width: 66%
+          float: left
+          .subject
+            display: inline
+            a
+              width: 100%
+          .action
+            display: inline-block
+            float: right
+            margin: -19px -40px 0 0
+          .briefing
+            width: 100%
+  #conversation 
+    .conversation_full
+      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+      h3
+        width: 96%
+
+
+  #new_message
+    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    #toolbar
+      @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+    #conversation
+      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+      margin-left: 0px
+      label
+        margin-bottom: 0px
+        margin-top: 6px
+      .select2-container
+        width: 101%
+      input
+        &[type="text"]
+          width: 99%
+  
+  
+  #conversation
+    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    #toolbar
+      @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+    #conversation_full
+      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+      margin-left: 0px

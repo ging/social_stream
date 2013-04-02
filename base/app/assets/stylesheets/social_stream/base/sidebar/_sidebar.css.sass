@@ -1,28 +1,12 @@
-#sidebar
-  padding-top: 6px  
+#sidebar 
   .contact
-    margin: 4px 0
-    .avatar
-      width: 45px !important
-      float: left
     .data
-      a
-        display: inline
       .x
         a
-          float: right
-          display: inline-block
           text-decoration: none
-          margin-top: -20px
     .info
       font-size: 11px
       color: #ccc
-      z-index: 1
-    .add
-      margin-top: 2px
-      width: auto
-
-
 
 
   #suggestions,
@@ -32,21 +16,11 @@
       font-family: $serifFontFamily
     
     .contact
-      padding: 5px 2%
-      display: inline-block
       .avatar
-        width: 45px
-        display: inline
-        float: left
         img
           @extend .border-radius-5
-          width: 45px 
      
     .data
-      display: inline-block
-      margin: 0 0 3px 3px
-      float: left
-      width: 65%
       .name
         color: $black
         .x
@@ -55,13 +29,10 @@
       .info
         font-size: 11px
         color: #ccc
-        z-index: 1
+
     .add
       font-size: 10px
-      z-index: 1
-      float: left
       .btn-group
-        max-width: 400px
         .btn
           @extend .btn-blue
           &:hover
@@ -70,7 +41,6 @@
               border-top-color: $white
               border-bottom-color: $white
           .caret
-            margin-left: 6px
             border-top-color: $blue
             border-bottom-color: $blue
             &:hover
@@ -81,11 +51,7 @@
           .caret
             border-top-color: $blue
             border-bottom-color: $blue
-      .edit_contact
-        margin-bottom: 0px
-      .dropdown-toggle
-        margin-left: 0px !important 
-        widht: 100%
+
     .see-more
       font-size: 12px
       line-height: 20px

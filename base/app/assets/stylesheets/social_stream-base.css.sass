@@ -3,7 +3,7 @@
 @import "bootstrap"
 @import "bootstrap-responsive"
 
-@import "social_stream/base/mixin/mixin"
+@import "social_stream/base/mixin"
 
 @import "social_stream/bootstrap-rewrite/alerts"
 @import "social_stream/bootstrap-rewrite/forms"
@@ -16,8 +16,16 @@
 
 @import "social_stream/base/adjust"
 @import "social_stream/base/buttons"
-@import "social_stream/base/conversation"
-@import "social_stream/base/devise"
+
+
+
+@import "social_stream/base/conversation/conversation"
+
+@import "social_stream/base/conversation/layout/conversation"
+
+@import "social_stream/base/conversation/responsive/responsive-768px-979px"
+@import "social_stream/base/conversation/responsive/responsive-1200px-min"
+@import "social_stream/base/conversation/responsive/responsive-767px-max"
 
 
 
@@ -49,20 +57,33 @@
 
 @import "social_stream/fonts/fonts"
 
-@import "social_stream/base/frontpage/frontpage"
+@import "social_stream/base/frontpage_devise/frontpage"
+@import "social_stream/base/frontpage_devise/layout/frontpage"
+
+@import "social_stream/base/frontpage_devise/devise"
+@import "social_stream/base/frontpage_devise/layout/devise"
+
+@import "social_stream/base/frontpage_devise/responsive/responsive-768px-979px"
+@import "social_stream/base/frontpage_devise/responsive/responsive-1200px-min"
+@import "social_stream/base/frontpage_devise/responsive/responsive-767px-max"
 
 @import "social_stream/base/groups"
 
 @import "social_stream/base/jquery-ui"
 
+
 @import "social_stream/base/layouts/layout"
 @import "social_stream/base/layouts/header"
-@import "social_stream/base/layouts/footer"
-@import "social_stream/base/layouts/frontpage_and_devises"
+
+
 
 @import "social_stream/base/profile"
 
-@import "social_stream/base/sidebar"
+@import "social_stream/base/sidebar/sidebar"
+@import "social_stream/base/sidebar/layout/sidebar"
+
+
+@import "social_stream/base/footer/layout/footer"
 
 @import "social_stream/base/toolbar"
 

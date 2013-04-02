@@ -1,0 +1,109 @@
+//
+// Responsive: Landscape phone to desktop/tablet
+// --------------------------------------------------
+
+
+@media (max-width: 767px)
+
+
+  #frontpage
+    .explanation
+      h3
+        font-size: 15px
+        line-height: 24px
+        text-align: right
+      h4
+        font-size: 13px
+        text-align: right
+    
+    #sign_in
+      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin: 18px auto 0
+      padding: 0
+      h3
+        margin: 17px 12px 20px 0
+      form.new_user
+        padding: 0 10px
+        .login_data
+          #user_mail,
+          #user_password
+            width: 96%
+
+
+
+  #registration
+    .registration
+      width: 100%
+      margin: 18px 0 0 
+      float: none
+      padding: 0
+      h3
+        margin: 0px 12px 10px 0
+      #new_user
+        padding: 0 10px
+        .login_data
+          input
+            &[type="password"]
+              width: 96% !important
+          input
+            &[type="text"]
+              width: 96% !important
+
+
+
+  #forgot-pass
+    margin-left: 0
+    .forgot
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin-top: 0px
+      padding: 0 
+      h2
+        margin: 0
+        font-size: 25.5px
+      
+      #new_user
+        margin: 0
+        width: 96% !important
+        padding-left: 4%
+
+      .password
+        width: 90%
+        padding: 1% 5%
+        margin: 2% 0 0 0
+        float: none
+        form
+          margin: 0
+        input
+          &[type="submit"]
+            float: right
+
+
+
+
+
+// UP TO LANDSCAPE PHONE
+// ---------------------
+
+@media (max-width: 480px)
+
+
+  #frontpage
+    .explanation
+      @include hidden-phone
+    #sign_in
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin-left: 0
+      padding: 0
+      h3
+        margin: 0px 12px 10px 0
+      #remember
+        width: 36%
+        float: left
+    #presentation
+      .caracteristics
+        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        margin-left: 0
+        padding: 0
+
+
+

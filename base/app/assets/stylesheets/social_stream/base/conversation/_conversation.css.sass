@@ -4,67 +4,40 @@
   #toolbar
   .conversations
     .conversation
-      height: 85px
-      clear: both
       .content_left
-        display: inline
-        float: left
-        .avatar
-          display: inline
         header
-          width: 48px
-          display: inline-block
           h5 
             a
               @include ellipsis
-              display: block
       .content_right
         color: $gray
-        display: inline-block
-        margin-bottom: 15px
-        float: left
-        margin-left: 30px
-        width: 81%
         .subject
           font-weight: normal
           font-size: 14px
-          display: inline
           a
             @include ellipsis
             font-size: 15px
             font-weight: bold
-            width: 96%
             &:hover
               text-decoration: none
         .briefing
           @include ellipsis
           color: $gray
-          width: 96%
         .date
           color: $gray
           font-size: 11px
-          display: inline
-          margin: 0 13px 0 4px
 
-        .action
-          float: right
-          display: inline-block
        
 
   form.new_message
-    @include makeColumnoMargin(6, 0)
-    margin-left: 20px
     .btn
-      @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25))
-      margin: 17px 10px 0 0
+      @extend .btn-blue
 
   
 #ck_editor
   .cleditorMain
     @include border-radius(5px) 
-    width: 100%!important
 .conversations
-  @include makeColumnoMargin(10, 0)
   .conversation
     @include opacity (100)
 
@@ -75,20 +48,11 @@
   h3
     @include ellipsis
   .participants
-    padding: 7px 10px 9px 10px
-    border: 1px solid #f1f1f1
     @extend .border-radius-5
     background-color: #f1f1f1
     img
-      padding: 4px 1px 2px 2px
-      width: 40px
       @extend .border-radius-5
-  .action
-    display: inline-block
-    float: right
-    margin-top: 18px
   .soften
-    margin: 0px
     border-color: $white
 
   .cont_conversation
@@ -97,34 +61,25 @@
       color: $gray
     .cleditorMain
       @include border-radius(5px) 
-      width: 100% !important
       border-color: #c5c5c5
-      padding: 0px
     .actions
       margin-top: 10px
       input
         &[type="submit"]
-        @extend .border-radius-5
-        @extend .btn-blue
-        width: 100%
+          @extend .border-radius-5
+          @extend .btn-blue
+
 
 
   .message
-    padding: 15px 0 10px
     border-bottom: 1px solid #f1f1f1
     background-color: $white
     @extend .border-bottom-left-radius-15
     .media
-      margin-left: 20px
       .pull-left
         img
           @extend .border-radius-5
-      .media-body
-        margin-top: 4px
-      .name
-        display: inline
       .date
-        display: inline-block
         color: $grayLighter
 
 #new_message
@@ -134,14 +89,6 @@
         .active
           background-position: -9px -10px
   #conversation
-    h2
-      @extend .hidden-phone
-      @extend .hidden-tablet
-    .select2-container
-      width: 101%
-    input
-      &[type="text"]
-        width: 99%
     input
       &[type="submit"]
         @extend .btn-blue
@@ -149,15 +96,5 @@
 
 
 #content
-  .read_all
-    float: right
-    margin-top: -20px
-  .notifications
-    margin-top: 35px
-
-    .notification
-      margin-bottom: 20px
-      font-size: 13px
-      color: $gray
-      .date-ago
-        font-size: 11px
+  .notification
+    color: $gray
