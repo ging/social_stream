@@ -2,6 +2,7 @@ es:
   linkser:
     title: "Linkser"
   link:
+    by: "por %{author}"
     confirm_delete: "¿Borrar enlace?"
     errors:
       loading: "Error cargando"
@@ -10,5 +11,6 @@ es:
       title: "Enlace"
     input: "Escribe una dirección"
     name: "enlace"
-    one: "una enlace"
+    one: "un enlace"
+    other: "enlaces"
     title: "Enlaces"
