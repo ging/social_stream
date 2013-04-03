@@ -250,7 +250,7 @@ es:
       title: "Seguidores"
     following:
       title: "Siguiendo"
-  n:
+    n:
       one: "1 seguidor/a"
       other: "%{count} seguidores"
   forgot_password: "¿Olvidaste tu contraseña?"

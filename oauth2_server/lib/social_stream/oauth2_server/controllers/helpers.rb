@@ -5,7 +5,7 @@ module SocialStream
       module Helpers
         extend ActiveSupport::Concern
 
-        def authenticate_user!
+        def authenticate_user!(opts = {})
           oauth2_token? || super
         end
 

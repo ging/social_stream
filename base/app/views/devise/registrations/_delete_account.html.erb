@@ -1,11 +1,11 @@
-<div id="cancel_account">
-  <header>
+<div id="cancel_account" class="accordion-group">
+  <header class="accordion-heading">
     <h5>
-      <%= link_to ("cancel account"),  "javascript:showSettings(\"cancel_account\");" %>
+      <%= link_to t('settings.cancel_account.briefing'), "javascript:void(0);", class: 'accordion-toggle', "data-toggle" => 'collapse', "data-parent" => "#settings-accordion", "data-target" => "#cancel_account_content" %>
     </h5>
   </header>
   
-  <div class="content settings_content" id="cancel_account_content" style="display:none;">
+  <div class="content settings_content collapse" id="cancel_account_content">
     Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>
   </div>
 

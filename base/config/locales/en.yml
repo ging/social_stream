@@ -561,7 +561,7 @@ en:
     for: "Settings for"
     main: "Settings"
     manage:
-      name: "Admin Contacs"
+      name: "Admin Contacts"
       briefing: "Settings for contacts"
       explanation: "Change contacts permissions"
     notifications:

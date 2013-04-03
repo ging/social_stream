@@ -1,11 +1,11 @@
-<div id="language_settings">
-  <header>
+<div id="language_settings" class="accordion-group">
+  <header class="accordion-heading">
     <h5>
-      -&#32<%= link_to ("change languaje"),  "javascript:showSettings(\"language_settings\");" %>&#32-
+      <%= link_to t("settings.lang_change.briefing"),  "javascript:void(0);", class: 'accordion-toggle', "data-toggle" => 'collapse', "data-parent" => "#settings-accordion", "data-target" => "#language_settings_content" %>
     </h5>
   </header>
   
-  <div class="content settings_content" id="language_settings_content" style="display:none;">
+  <div class="content settings_content collapse" id="language_settings_content">
     <%= form_tag update_all_settings_path, :method => :put, :id => 'form_lang', :remote => false do %>
     <div class="form_label">
       <%= label_tag :language, t('settings.lang_change.name') %>

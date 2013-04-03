@@ -112,7 +112,7 @@
 
     .comment
       display: inline
-      @include makeColumn(3, 0)
+      width: 22%
       margin-left: 19px
       p
         margin-bottom: 0
@@ -123,3 +123,12 @@
       margin-left: 0px
       h5
         margin-bottom: 2px
+
+    .post
+      width: 22%
+      float: left
+      margin-left: 30px
+      background-color: $white
+      padding: 6px 4px
+      p
+        @include ellipsis
