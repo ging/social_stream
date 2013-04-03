@@ -1,11 +1,11 @@
-<div id="notifications_settings">
-  <header>
+<div id="notifications_settings" class="accordion-group">
+  <header class="accordion-heading">
     <h5>
-      -&#32<%= link_to ('notifications'),  "javascript:showSettings(\"notifications_settings\");" %>&#32-
+      <%= link_to t('settings.notifications.briefing'),  "javascript:void(0);", class: 'accordion-toggle', "data-toggle" => 'collapse', "data-parent" => "#settings-accordion", "data-target" => "#notifications_settings_content" %>
     </h5>
   </header>
 
-  <div class="content settings_content" id="notifications_settings_content" style="display:none;">
+  <div class="content settings_content collapse" id="notifications_settings_content">
     <%= form_tag update_all_settings_path, :method => :put do %>
     
     <%= t('settings.notifications.by_email.name')%>

@@ -1,9 +1,9 @@
-<div class="block" id="room_settings">
-  <header>
-    <%= link_to t('room.settings.title'),  "javascript:showSettings(\"room_settings\");" %>
+<div class="accordion-group" id="room_settings">
+  <header class="accordion-heading">
+    <%= link_to t('room.settings.title'),  "javascript:void(0);", class: 'accordion-toggle', "data-toggle" => 'collapse', "data-parent" => "#settings-accordion", "data-target" => "#room_settings_content" %>
   </header>
   
-  <div class="content settings_content" id="room_settings_content" style="display:none;">
+  <div class="content settings_content collapse" id="room_settings_content">
     <%= render :partial => 'rooms/index' %>
   
     <%= render :partial => 'rooms/form' %>
