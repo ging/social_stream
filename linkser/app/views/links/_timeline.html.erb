@@ -3,7 +3,7 @@
     <div class="thumb">
       <% if link.callback_url %>
         <%= image_tag(link.image) %>
-        <div class="play_over" data-url="<%= link.callback_url %>" data-width="<%= link.width %>" data-height="<%= link.height %>"></div>
+        <div class="play_over" data-url="<%= link.improved_callback_url %>" data-width="<%= link.width %>" data-height="<%= link.height %>"></div>
       <% else %>
         <%= link_to image_tag(link.image),link.url, :target => "_blank" %>
       <% end %>

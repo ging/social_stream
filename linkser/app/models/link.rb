@@ -41,4 +41,12 @@ class Link < ActiveRecord::Base
     rescue
     end
   end
+
+  def improved_callback_url
+    if callback_url =~ /youtube\.com\/v\/+*/
+      callback_url + '&autoplay=1'
+    else
+      callback_url
+    end
+  end
 end
