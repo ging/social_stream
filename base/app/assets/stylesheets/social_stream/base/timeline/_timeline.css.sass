@@ -5,14 +5,10 @@
 #time-line,
   .timeline
     .comments
-    .media,
-    .root
-      border-bottom: 1px solid #efefef
-      padding-bottom: 13px
+    .media
       .avatar
-        @extend .border-radius-5
-        img
-          width: 60px
+        @include border-radius (5px)
+
       .media-body
         color: $grayLight
         word-wrap: break-word
@@ -21,91 +17,57 @@
           a
             text-decoration: none
           .x
-            display: inline
             font-size: 12px
             color: $black
-            float: right
             a
-              float: right
               text-decoration: none
               color: $grayLight
               &:hover
                 color: $red
         .objects
           word-wrap: break-word
-          min-height: 22px
           .thumb
-            float: left
-            width: auto
-            margin-right: 10px
-            img
-              width: 170px
-            .play_button
-              width: auto
-              margin-left: -107px
+
           .text
             font-size: 12px
             h6
               font-size: 14px 
           .description
-            margin: 0 0 4px
             .view-more
               font-size: 12px
 
         .actions
-          width: 100%
-          display: inline-block
-          margin-bottom: 10px
           .post_time_ago
-            display: inline-block
             font-size: 11px
             color: $gray
           .to_comment,
           .to_like
-            display: inline-block
             font-size: 12px
             margin-left: 5px
           .audience
-            display: inline-block
             font-size: 12px
             margin-left: 7px
             
           .tooltip
             @include opacity (90)
-            @extend .border-radius-5
-            width: 28%
+            @include border-radius(5px)
             background: $gray
             color: whitesmoke
-            margin-top: 26px 0px 0px 53px
             .audience_logo
-              display: inline-block
-              width: auto
-              padding: 4px
               img
-                @extend .border-radius-5
+                @include border-radius(5px)
           
           textarea
             resize: none
-            width: 100%
-          div .new_comment
-            margin-top: 24px
-            margin-left: 89px
+
 
         .comments
           .child
-            @extend .border-radius-5
+            @include border-radius (5px)
             background: #efefef
-            padding: 9px 6px 11px 12px
-            margin-bottom: 19px
-            a
-              .avatar
-                width: 40px !important
-            .actions
-            margin-bottom: 0px
 
           .hidden_comments
             text-align: right
-            margin: 0px 2px -6px 0 
             a
               font-size: 11px
               text-decoration: none
@@ -116,57 +78,35 @@
       .likes
         font-size: 12px
 
+    nav
+      a
+        @include btn-see-more
+
   #new_comment
-    margin-left: 63px
     .btn
       @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25))
-      float: right
+
 
   .new_comment
-    margin-left: 0px
-    margin-top: 25px
     .avatar
-      float: left
-      margin: -2px 6px 0 -11px
-      img
-        margin-left: 9px
-        width: 50px !important 
+
     .new_comment
-      @extend .border-radius-5
+      @include border-radius (5px)
       border: 1px solid #f9f9f9
-      margin: -20px 0 0 82px
-      width: 84%
+
 
 #wrapper_activities
   .new_comment
-    .avatar
-      margin: 8px 0 0 77px
     form
-      margin: -18px 0 20px 81px
-      padding: 10px 0 7px 0 
-      height: 66px
-      width: 84%
       background-color: #f4f4f4
-      textarea
-        width: 81%
-        float: right
-        margin-right: 5px
-      input
-        &[type="submit"]
-          margin: -4px 6px 0 0
+        
 
    
-
 .activity_avatar
-  @extend .border-radius-5
-  @include makeColumn(1, 0)
-  display: inline
-  margin: 13px -10px 0px 4px
+  @include border-radius (5px)
+
 
 .activity_content 
-  @include makeColumn(7, 0)
-  display: inline-block
-  margin-left: 5px
 
   h5
     @include makeColumnoMargin(6, 0)
@@ -175,12 +115,9 @@
     &:hover
       text-decoration: none
   .x
-    margin-left: 0px
     font-size: 12px
     color: black
-    padding-top: 14px 5px 0px 0px
     a
-      float: right
       text-decoration: none
       color: $grayLight
       &:hover
@@ -188,27 +125,14 @@
         
   textarea
     resize: none
-    width: 100%
+
 
     
 .activity_options
-  @include makeColumn(6, 0)
-  margin-left: 56px 
   .post_time_ago
-    display: inline
     font-size: 12px
     color: $grayLight
-  .to_comment
-    display: inline-block
-    font-size: 14px
-  .to_like
-    display: inline-block
-    font-size: 14px
+  .to_comment,
+  .to_like,
   .audience
-    display: inline-block
     font-size: 14px
-    .audience_logo
-      a
-        img
-          display: inline
-

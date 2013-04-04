@@ -35,7 +35,7 @@
 // Float them, remove border radius, then re-add to first and last elements
 .btn-group > .btn-blue {
   position: relative;
-  @extend .border-radius-0;
+  @include border-radius(0px),
 }
 .btn-group > .btn-blue + .btn-blue {
   margin-left: -1px;

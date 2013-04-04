@@ -1,0 +1,65 @@
+#toolbar 
+  .contact-button
+    @include btn-add
+
+
+  ul.buttons
+    background: $white
+    li
+      @include btn-primary
+      @include border-radius(5px)
+      &:hover
+        a
+          color: $white
+          @include transition(color 1s)
+      a
+        &:hover
+          color: $white
+  
+
+  .contacts-toolbar,
+  section.groups
+    @extend .hidden-phone
+    h4
+      margin-bottom: 0px
+      border-bottom: 1px solid #ddd
+    ul
+      border-right: 1px solid #ddd
+    .contacts-more,
+    .groups-more
+      text-align: right
+
+
+
+  .toolbar-messages
+    .toolbar_menu
+      ul
+        li
+          a
+            color: $grayLighter
+            &:hover
+              background-color: transparent
+              color: $blue
+          a.active
+            color: $blue
+
+
+
+  #avatar_profile,
+  .logo_home
+    font-size: 26px
+    line-height: 49px
+    @include ellipsis
+    img
+      @include border-radius(5px)
+    h5 
+      a
+        text-decoration: none
+        color: $black
+        text-aling: center
+
+    .logo_caption
+      font-size: 15px
+      text-align: center
+
+

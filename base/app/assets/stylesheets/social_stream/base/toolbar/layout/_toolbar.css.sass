@@ -1,0 +1,91 @@
+#toolbar 
+  .contact-button
+    .btn-group
+      width: 100%
+      margin-top: 6px
+      margin-left: 0px
+      .btn
+        width: 100% !important
+        .caret 
+          margin-left: 14px
+
+
+  .icon_navbar-message-blue,
+  .icon_tool16-info
+    margin-right: 4px
+
+  
+  .contacts-toolbar,
+  section.groups
+    @extend .hidden-phone
+    margin-top: 20px
+    clear: both
+    h4
+      margin-bottom: 0px
+      border-bottom: 1px solid #ddd
+    ul
+      border-right: 1px solid #ddd
+      min-height: 191px
+      margin: 0
+      padding-top: 6px
+      li
+        @include grid-core-span(4, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        @include grid-core-offset(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        float: left
+        img
+          margin: 8px 0
+    .contacts-more,
+    .groups-more
+      margin-top: -10px
+      padding-right: 7px
+      clear: both
+
+  .contacts-toolbar
+    ul
+      min-height: 191px
+
+  section.groups
+    ul
+      min-height: 137px
+
+
+  .toolbar-messages
+    .toolbar_menu
+      ul
+        margin-top: 20px
+        li
+          padding: 5px
+          margin-bottom: 10px
+
+
+  #avatar_profile,
+  .logo_home
+    img
+      width: 100%
+
+    .subject-name
+      @extend .hidden-tablet 
+      @extend .hidden-phone
+
+   
+    .logo_caption
+      @extend .hidden-phone
+      @extend .hidden-tablet
+
+    input, select
+      @include makeColumnoMargin(2, 0)
+
+    .contact
+      width: 140px
+      padding-top: 0px
+      margin-top: -10p 0 0 16px
+      img
+        margin: 14px 10px 0 0
+
+
+  input
+    &[type="submit"]
+    img,
+    .icon_navbar-message-blue,
+    .icon_tool16-info
+      margin-right: 4px

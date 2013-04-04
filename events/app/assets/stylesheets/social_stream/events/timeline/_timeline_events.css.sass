@@ -1,68 +1,69 @@
-.media,
-.modal-body
-  .event
-    .date
-      @include makeColumn(1, 0)
-      display: inline
-      margin: 3px 0 0 -2px
-      .day,
-      .month,
-      .hour
-        text-align: center
-      .day,
-      .month
-        font-weight: bold
-      .day
-        font-size: 40px
-        line-height: 31px
-      .month
-        font-size: 25px
-        line-height: 26px
-      .hour
-        font-size: 15px
-    .poster
-      float: left
-      width: 80px
-      display: inline-block
-    .details
-      width: 56%
-      display: inline-block
-      margin-left: 20px
-      .title
-        font-size: 20px
-        line-height: 26px
-      .frequency
-        color: #c3c3c3
-        margin: 4px 0 6px
-        font-size: 15px
-      .description
-        font-size: 13px
-        p
-          a
-            display: block
-      .follow
-        margin-top: -3px
-        font-size: 12px
-      input
-        &[type="submit"]
-        @include border-radius (7px)
-        @include size (22px, 110px)
-        border: 1px solid #888
-        color: #888
-        background: $white
-        padding: 0px
-        margin-top: 5px
-        &:hover
-          color: #fff
-          background: $red
-.modal-body
-  .event
-    border-bottom: 1px solid #ccc
-    clear: both
-    .date
-      margin-top: 14px
-    .poster
-      margin-top: 15px
-    .details
-      @include makeColumn(4, 0)
-      margin-top: 10px
+.timeline
+  .media,
+  .modal-body
+    .event
+      .date
+        @include makeColumn(1, 0)
+        display: inline
+        margin: 3px 0 0 -2px
+        .day,
+        .month,
+        .hour
+          text-align: center
+        .day,
+        .month
+          font-weight: bold
+        .day
+          font-size: 40px
+          line-height: 31px
+        .month
+          font-size: 25px
+          line-height: 26px
+        .hour
+          font-size: 15px
+      .poster
+        float: left
+        width: 80px
+        display: inline-block
+      .details
+        width: 56%
+        display: inline-block
+        margin-left: 20px
+        .title
+          font-size: 20px
+          line-height: 26px
+        .frequency
+          color: #c3c3c3
+          margin: 4px 0 6px
+          font-size: 15px
+        .description
+          font-size: 13px
+          p
+            a
+              display: block
+        .follow
+          margin-top: -3px
+          font-size: 12px
+        input
+          &[type="submit"]
+          @include border-radius (7px)
+          @include size (22px, 110px)
+          border: 1px solid #888
+          color: #888
+          background: $white
+          padding: 0px
+          margin-top: 5px
+          &:hover
+            color: #fff
+            background: $red
+  .modal-body
+    .event
+      border-bottom: 1px solid #ccc
+      clear: both
+      .date
+        margin-top: 14px
+      .poster
+        margin-top: 15px
+      .details
+        @include makeColumn(4, 0)
+        margin-top: 10px

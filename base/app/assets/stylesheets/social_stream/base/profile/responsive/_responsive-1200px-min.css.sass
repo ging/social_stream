@@ -1,0 +1,30 @@
+//
+// Responsive: Large desktop and up
+// --------------------------------------------------
+
+
+@media (min-width: 1200px)
+
+
+  #profile
+    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    margin-left: 0px
+    #toolbar
+      @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+      margin-left: 0px
+    #profile-info
+      @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
+      margin-left: 2%
+      .tags,
+      .personal,
+      .comunication-info,
+      .experience,
+      .avatar
+        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        margin-left: 0px
+       
+     
+        .update
+          @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)

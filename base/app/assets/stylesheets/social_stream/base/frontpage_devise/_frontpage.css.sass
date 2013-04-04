@@ -14,7 +14,7 @@
 
   #sign_in
     @include box-shadow(0px 0px 13px rgba(50, 50, 50, 0.15))
-    @extend .border-radius-15
+    @include border-radius (15px)
     background-color: $white
     color: #8c8c8c
     h3
@@ -26,14 +26,12 @@
         background-color: #f6f6f6
       &[type="mail"]
         background-color: #f6f6f6
-    input
-      &[type="submit"]
-        @extend .btn-blue
+
 
   #presentation
     border-top: 1px solid #d3d3d3
     .caracteristics
-      @extend .border-radius-5
+      @include border-radius (5px)
       header
         font-size: 19px
         text-align: center
@@ -47,7 +45,7 @@
 #registration
   .registration
     @include box-shadow(0px 0px 13px rgba(50, 50, 50, 0.15))
-    @extend .border-radius-15
+    @include border-radius (15px)
     background-color: $white
     color: #8c8c8c
     h3
@@ -61,15 +59,12 @@
           background-color: #f6f6f6
         &[type="text"]
           background-color: #f6f6f6
-    input
-      &[type="submit"]
-        @extend .btn-blue
 
 
 #forgot-pass
   .password
     @include box-shadow(0px 0px 13px rgba(50, 50, 50, 0.15))
-    @extend .border-radius-15
+    @include border-radius (15px)
     background-color: $white
     color: #8c8c8c
     h3
@@ -82,7 +77,4 @@
         background-color: #f6f6f6
       &[type="text"]
         background-color: #f6f6f6
-    input
-      &[type="submit"]
-        @extend .btn-blue
 

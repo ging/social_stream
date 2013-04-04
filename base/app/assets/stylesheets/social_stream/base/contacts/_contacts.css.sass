@@ -1,37 +1,12 @@
 #contacts
   .contacts
-    .btn-group
-      .btn
-        @extend .btn-blue
-        &:hover
-          .caret
-            @include transition (border 1s, color, 1s)
-            border-top-color: $white
-            border-bottom-color: $white
-        .caret
-          border-top-color: $blue
-          border-bottom-color: $blue
-          &:hover
-            border-top-color: $white
-            border-bottom-color: $white
-    .open
-      .btn
-        .caret
-          border-top-color: $blue
-          border-bottom-color: $blue
+    .add
+      @include btn-add
 
 
       .tab-content
         .contact-list
           .contact
-            .add
-              font-size: 10px
-              z-index: 1
-              .edit_contact
-                .open
-                  .active
-                    label
-                      color: $white
             .x
               font-size: 12px
               color: $black

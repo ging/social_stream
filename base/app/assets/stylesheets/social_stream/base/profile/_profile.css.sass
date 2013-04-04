@@ -1,0 +1,37 @@
+@import 'avatars_for_rails'
+
+#profile
+  #profile-info
+    .tags,
+    .personal,
+    .comunication-info,
+    .experience,
+    .avatar
+      .briefing
+        background-color: white
+        color: $gray
+        span
+          @include border-radius(5px)
+          background-color: #D9EDF7
+          border: 1px solid #BCE8F1
+          color: #3A87AD
+          text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5)
+        p
+          border-top: 5px solid #f9f9f9
+          background-color: none
+
+      .update
+        background-color: #f9f9f9
+        form.edit_profile
+          input
+            &[type="submit"]
+              @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25)) 
+    
+    h5
+      color: $grayLighter
+      font-size: 17px
+      font-weight: bold
+    p
+      @include border-radius (15px)
+      background-color: #F9F9F9
+      border: 0 solid #F9F9F9

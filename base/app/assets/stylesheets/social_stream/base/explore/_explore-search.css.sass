@@ -3,7 +3,7 @@
 
 
   .menuv 
-    @extend .border-radius-7
+    @include border-radius(7px)
     border: 1px solid #f1f1f1 
     ul
       li 
@@ -36,7 +36,6 @@
   .btn-group
     border-bottom: 1px dashed #ccc
     .btn 
-      @extend .btn-blue
       font-size: 13px !important
   .input-xlarge
     font-size: 15px
@@ -62,7 +61,7 @@
     .avatar
       a
         img
-          @extend .border-radius-5
+          @include border-radius (5px)
     .data
       .name
         color: $black

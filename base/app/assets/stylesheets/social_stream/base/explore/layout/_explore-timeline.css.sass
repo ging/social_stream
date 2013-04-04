@@ -2,13 +2,12 @@
   .timeline
     .media
       margin: 0 0 20px
-      .media-heading
-        margin-top: 4px
-    .root
       border-bottom: 1px solid #efefef
       padding-bottom: 13px
+      .media-heading
+        margin-top: 4px
       .avatar
-        @extend .border-radius-5
+        @include border-radius (5px)
         img
           width: 60px
       .media-body
@@ -71,7 +70,7 @@
             
           .tooltip
             @include opacity (90)
-            @extend .border-radius-5
+            @include border-radius (5px)
             width: 28%
             background: $gray
             color: whitesmoke
@@ -81,7 +80,7 @@
               width: auto
               padding: 4px
               img
-                @extend .border-radius-5
+                @include border-radius (5px)
           
           textarea
             resize: none
@@ -106,13 +105,12 @@
             margin-top: 3px
             input
               &[type="submit"]
-                @extend .btn-blue
                 float: right
 
         
         .comments
           .child
-            @extend .border-radius-5
+            @include border-radius (5px)
             background: #efefef
             padding: 9px 6px 11px 12px
             margin-bottom: 19px
@@ -134,11 +132,6 @@
 
       .likes
         font-size: 12px
-
-
-
-
-
 
 
   .btn-group

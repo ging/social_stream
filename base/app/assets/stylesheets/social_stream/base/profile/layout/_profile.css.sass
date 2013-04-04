@@ -13,23 +13,14 @@
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 0px
       .briefing
-        background-color: white
         padding: 1px 0px 16px
         min-height: 32px
-        color: $gray
         span
-          @include border-radius(5px)
-          background-color: #D9EDF7
-          border: 1px solid #BCE8F1
-          color: #3A87AD
           margin-left: 11px
           padding: 3px 8px 3px 7px
-          text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5)
         p
           margin: -15px 26px 0 14px
           padding: 3px 0px 5px 14px
-          border-top: 5px solid #f9f9f9
-          background-color: none
           width: 100%
       .empty
         float: left
@@ -45,7 +36,6 @@
             &[type="submit"]
               width: 100% !important
               margin: 8px 0px 0px 1px
-              @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25)) 
           label,
           h6 
             margin: 13px 2px -6px 2px
@@ -83,14 +73,9 @@
     
     h5
       margin: 16px
-      color: $grayLighter
-      font-size: 17px
-      font-weight: bold
     p
-      @extend .border-radius-15
+      @include border-radius (15px)
       margin: -15px 11px 0 5px
-      background-color: #F9F9F9
-      border: 0 solid #F9F9F9
       padding: 12px 10px 11px 27px
       width: 325px
 

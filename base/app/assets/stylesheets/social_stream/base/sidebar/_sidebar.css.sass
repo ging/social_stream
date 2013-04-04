@@ -18,7 +18,7 @@
     .contact
       .avatar
         img
-          @extend .border-radius-5
+          @include border-radius(5px)
      
     .data
       .name
@@ -31,26 +31,8 @@
         color: #ccc
 
     .add
-      font-size: 10px
-      .btn-group
-        .btn
-          @extend .btn-blue
-          &:hover
-            .caret
-              @include transition (border 1s, color, 1s)
-              border-top-color: $white
-              border-bottom-color: $white
-          .caret
-            border-top-color: $blue
-            border-bottom-color: $blue
-            &:hover
-              border-top-color: $white
-              border-bottom-color: $white
-      .open
-        .btn
-          .caret
-            border-top-color: $blue
-            border-bottom-color: $blue
+      @include btn-add
+         
 
     .see-more
       font-size: 12px

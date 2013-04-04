@@ -16,7 +16,7 @@
       display: block
       &[type="submit"]
         @include size (auto, auto)
-        @extend .btn-blue-invert
+        @include btn-secundary
         padding: 3px 11px 4px 11px
         margin-top: 0px
         float: right
@@ -31,21 +31,11 @@
     .new_document
       display: inline
       padding: 1px 6px 4px 6px
-    .btn-group,
-    open
+    .add
+      width: 20%
       display: inline-block
-      .dropdown-menu
-        li
-          margin-left: 0px
-          padding-left: 7px
-          a
-            padding: 0px !important
-            label
-              margin-left: 0px
-              padding: 0px 16px 0px 0px!important
-              &:hover
-                background: $blue
-                color: $white
+      @include btn-add
+      
 
 #post_text
   margin-bottom: 0px

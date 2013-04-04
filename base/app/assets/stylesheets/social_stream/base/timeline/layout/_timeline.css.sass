@@ -5,34 +5,20 @@
 #time-line,
   .timeline
     .comments
-    .media,
-    .root
-      border-bottom: 1px solid #efefef
+    .media
       padding-bottom: 13px
       .avatar
-        @extend .border-radius-5
         img
           width: 60px
       .media-body
-        color: $grayLight
-        word-wrap: break-word
         .media-heading
-          font-size: 14px
-          a
-            text-decoration: none
           .x
             display: inline
-            font-size: 12px
-            color: $black
             float: right
             a
               float: right
-              text-decoration: none
-              color: $grayLight
-              &:hover
-                color: $red
+
         .objects
-          word-wrap: break-word
           min-height: 22px
           .thumb
             float: left
@@ -43,14 +29,9 @@
             .play_button
               width: auto
               margin-left: -107px
-          .text
-            font-size: 12px
-            h6
-              font-size: 14px 
+
           .description
             margin: 0 0 4px
-            .view-more
-              font-size: 12px
 
         .actions
           width: 100%
@@ -58,43 +39,27 @@
           margin-bottom: 10px
           .post_time_ago
             display: inline-block
-            font-size: 11px
-            color: $gray
           .to_comment,
           .to_like
             display: inline-block
-            font-size: 12px
-            margin-left: 5px
           .audience
             display: inline-block
-            font-size: 12px
-            margin-left: 7px
             
           .tooltip
-            @include opacity (90)
-            @extend .border-radius-5
             width: 28%
-            background: $gray
-            color: whitesmoke
             margin-top: 26px 0px 0px 53px
             .audience_logo
               display: inline-block
-              width: auto
-              padding: 4px
-              img
-                @extend .border-radius-5
-          
           textarea
-            resize: none
             width: 100%
+
+
           div .new_comment
             margin-top: 24px
             margin-left: 89px
 
         .comments
           .child
-            @extend .border-radius-5
-            background: #efefef
             padding: 9px 6px 11px 12px
             margin-bottom: 19px
             a
@@ -104,22 +69,12 @@
             margin-bottom: 0px
 
           .hidden_comments
-            text-align: right
             margin: 0px 2px -6px 0 
-            a
-              font-size: 11px
-              text-decoration: none
-              color: $gray
-              &:hover
-                color: $linkColor
 
-      .likes
-        font-size: 12px
 
   #new_comment
     margin-left: 63px
     .btn
-      @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25))
       float: right
 
   .new_comment
@@ -132,8 +87,7 @@
         margin-left: 9px
         width: 50px !important 
     .new_comment
-      @extend .border-radius-5
-      border: 1px solid #f9f9f9
+      @include border-radius (5px)
       margin: -20px 0 0 82px
       width: 84%
 
@@ -146,7 +100,6 @@
       padding: 10px 0 7px 0 
       height: 66px
       width: 84%
-      background-color: #f4f4f4
       textarea
         width: 81%
         float: right
@@ -158,7 +111,7 @@
    
 
 .activity_avatar
-  @extend .border-radius-5
+  @include border-radius (5px)
   @include makeColumn(1, 0)
   display: inline
   margin: 13px -10px 0px 4px
@@ -170,21 +123,12 @@
 
   h5
     @include makeColumnoMargin(6, 0)
-    font-size: 16px
-    text-decoration: none
-    &:hover
-      text-decoration: none
+
   .x
     margin-left: 0px
-    font-size: 12px
-    color: black
     padding-top: 14px 5px 0px 0px
     a
       float: right
-      text-decoration: none
-      color: $grayLight
-      &:hover
-        color: $red
         
   textarea
     resize: none
@@ -196,17 +140,14 @@
   margin-left: 56px 
   .post_time_ago
     display: inline
-    font-size: 12px
-    color: $grayLight
-  .to_comment
-    display: inline-block
-    font-size: 14px
-  .to_like
-    display: inline-block
-    font-size: 14px
+  .to_comment,
+  .to_like,
   .audience
     display: inline-block
     font-size: 14px
+
+
+  .audience
     .audience_logo
       a
         img
