@@ -150,6 +150,7 @@ es:
     edit:
       title: "Editar contacto con %{name}"
       submit: "Editar contacto"
+    empty: "Aún no has añadido a nadie. ¿Qué te parece <a href=\"%{explore}\">explorar</a>?"
     error_count:
       one: "1 error impidió que se guardara este contacto:"
       other: "%{count} errores impidieron que se guardara este contacto"
