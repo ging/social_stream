@@ -43,7 +43,7 @@ class Link < ActiveRecord::Base
   end
 
   def improved_callback_url
-    if callback_url =~ /youtube\.com\/v\/+*/
+    if callback_url =~ /youtube\.com\/v\/.+/
       callback_url + '&autoplay=1'
     else
       callback_url
