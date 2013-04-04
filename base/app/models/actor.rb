@@ -131,7 +131,7 @@ class Actor < ActiveRecord::Base
 
   scope :subject_type, lambda { |t|
     if t.present?
-      where(subject_type: t)
+      where(subject_type: t.classify)
     end
   }
 
