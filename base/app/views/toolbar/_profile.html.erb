@@ -24,11 +24,6 @@
         <i class='icon_tool16-info'></i> <%= t 'menu.information' %>
       <% end %>
     </li>
-    <li>
-      <%= link_to [ subject, :profile ] do  %>
-        <i class='icon_navbar-contacts'></i> <%= t 'menu.contacts' %>
-      <% end %>
-    </li>
 
     <% if SocialStream.repository_models.present? %>
       <li>
