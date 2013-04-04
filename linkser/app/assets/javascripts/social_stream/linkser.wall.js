@@ -77,15 +77,6 @@ SocialStream.Linkser.Wall = (function(SS, $) {
     }
   }
 
-  var openCallback = function(id,url,w,h){
-      var height='353';
-
-      if(w>0 && h>0) {
-          height=470*h/w;
-      }
-
-      $("#" + id).html($('<iframe>').attr('src',url).attr('width','470').attr('height',height));
-  }
 
   var create = function() {
     resetWallInput({ postText: true });
@@ -94,8 +85,7 @@ SocialStream.Linkser.Wall = (function(SS, $) {
   SocialStream.Wall.callbackRegister('show', init);
 
   return {
-    create: create,
-    openCallback: openCallback
+    create: create
   }
 
 })(SocialStream, jQuery);

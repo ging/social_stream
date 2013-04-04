@@ -2,14 +2,14 @@
 $(".user_edit").validate({errorClass: "validation_error"});
 <%end%>
 
-<div id="password_form">
-  <header>
+<div id="password_form" class="accordion-group">
+  <header class="accordion-heading">
     <h5>
-      <%= link_to ("change password"),  "javascript:showSettings(\"password_form\");" %>
+      <%= link_to t("settings.password_change.briefing"),  "javascript:void(0);", class: 'accordion-toggle', "data-toggle" => 'collapse', "data-parent" => "#settings-accordion", "data-target" => "#password_form_content" %>
     </h5>
   </header>
 
-  <div class="content settings_content" id="password_form_content" style="display:none;">
+  <div class="content settings_content collapse" id="password_form_content">
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
 
       <div class="form_label">
@@ -19,16 +19,12 @@ $(".user_edit").validate({errorClass: "validation_error"});
         <%= f.password_field :password, :class => "form_tag" %>
       </div>
 
-
-
       <div class="form_label">
         <%= f.label t('account.password.retype') %>
       </div>
       <div class="form_field">
         <%= f.password_field :password_confirmation, :class => "form_tag" %>
       </div>
-
-
 
       <div class="form_label">
         <%= f.label :current_password %>
@@ -37,23 +33,19 @@ $(".user_edit").validate({errorClass: "validation_error"});
         <%= f.password_field :current_password, :class => "form_tag" %>
       </div>
 
-
-
       <%= f.submit t('button.update'), :class => "btn" %>
-
     <% end%>
   </div>
 </div>
 
-
-<div id="email_form">
-  <header>
+<div id="email_form" class="accordion-group">
+  <header class="accordion-heading">
     <h5>
-      <%= link_to ("change email adrees"),  "javascript:showSettings(\"email_form\");" %>
+      <%= link_to t("settings.email_change.briefing"),  "javascript:void(0);", class: 'accordion-toggle', "data-toggle" => "collapse", "data-parent" => "#settings-accordion", 'data-target' => '#email_form_content' %>
     </h5>
   </header>
 
-  <div class="content settings_content" id="email_form_content" style="display:none;">
+  <div class="content settings_content collapse" id="email_form_content">
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
 
       <div class="form_label">
@@ -63,16 +55,12 @@ $(".user_edit").validate({errorClass: "validation_error"});
         <%= f.email_field :email, :class => "required form_tag" %>
       </div>
 
-
-
       <div class="form_label">
         <%= f.label :current_password %>
       </div>
       <div class="form_field">
         <%= f.password_field :current_password, :class => "required form_tag" %>
       </div>
-
-
 
       <%= f.submit t('button.update'), :class => "btn" %>
 

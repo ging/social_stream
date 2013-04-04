@@ -17,8 +17,7 @@ class SocialStream::Linkser::InstallGenerator < Rails::Generators::Base
   end
 
   def require_stylesheets
-    inject_into_file 'app/assets/stylesheets/application.css',
-                     " *= require social_stream-linkser\n",
-                     :before => ' *= require_tree .'
+    append_file 'app/assets/stylesheets/social_stream.css.sass',
+                "@import social_stream-linkser\n"
   end
 end

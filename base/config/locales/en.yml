@@ -152,6 +152,7 @@ en:
     edit:
       title: "Edit contact to %{name}"
       submit: "Edit contact"
+    empty: "You have not added anybody yet. What about <a href=\"%{explore}\">exploring</a>?"
     error_count:
       one: "1 error prohibited this contact from being saved:"
       other: "%{count} errors prohibited this contact from being saved:"
@@ -561,7 +562,7 @@ en:
     for: "Settings for"
     main: "Settings"
     manage:
-      name: "Admin Contacs"
+      name: "Admin Contacts"
       briefing: "Settings for contacts"
       explanation: "Change contacts permissions"
     notifications:

@@ -22,7 +22,11 @@
 
           <div class="contact-list">
             <% if current_contact_section?(type) %>
-              <%= render @contacts %>
+              <% if @contacts.any? %>
+                <%= render @contacts %>
+              <% else %>
+                <%= raw t("contact.empty", explore: explore_path) %>
+              <% end %>
             <% else %>
               <%= render partial: 'layouts/loading' %>
             <% end %>

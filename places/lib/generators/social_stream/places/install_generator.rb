@@ -19,8 +19,7 @@ class SocialStream::Places::InstallGenerator < Rails::Generators::Base
   end
 
   def require_stylesheets
-    inject_into_file 'app/assets/stylesheets/application.css',
-                     " *= require social_stream-places\n",
-                     :before => ' *= require_tree .'
+    append_file 'app/assets/stylesheets/social_stream.css.sass',
+                "@import social_stream-places\n"
   end
 end

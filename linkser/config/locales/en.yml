@@ -2,6 +2,7 @@ en:
   linkser:
     title: "Linkser"
   link:
+    by: "by %{author}"
     confirm_delete: "Delete link?"
     errors:
       loading: "Error loading"
@@ -11,4 +12,5 @@ en:
     input: "Write the web address"
     name: "link"
     one: "a link"
+    other: "links"
     title: "Links"  
