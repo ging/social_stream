@@ -31,15 +31,22 @@ class Link < ActiveRecord::Base
   end
 
   def check_loaded
-    if !self.loaded.eql? "true" and self.title.nil? and self.description.nil? and self.image.nil?
-      begin
-        o = Linkser.parse self.url, {:max_images => 1}
-        if o.is_a? Linkser::Objects::HTML
-          self.fill o
-        end
-      rescue
+    return if loaded.present?
+    begin
+      o = Linkser.parse self.url, {:max_images => 1}
+
+      if o.is_a? Linkser::Objects::HTML
+        self.fill o
       end
+    rescue
     end
   end
 
+  def improved_callback_url
+    if callback_url =~ /youtube\.com\/v\/.+/
+      callback_url + '&autoplay=1'
+    else
+      callback_url
+    end
+  end
 end
