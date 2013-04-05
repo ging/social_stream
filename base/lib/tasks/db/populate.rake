@@ -173,7 +173,7 @@ namespace :db do
       task :posts => :read_environment do
         SocialStream::Population::ActivityObject.new Post do |p|
           p.text =
-            "This post should be for #{ p.relations.map(&:name).join(", ") } of #{ p.owner.name }.\n#{ Forgery::LoremIpsum.paragraph(:random => true) }"
+            "This post should be for #{ p.relations.map(&:name).join(", ") } of #{ p.owner.name }.\n#{ Forgery::LoremIpsum.words(10,:random => true) }"
         end
       end
 
