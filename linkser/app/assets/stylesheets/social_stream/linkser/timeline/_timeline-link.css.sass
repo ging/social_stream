@@ -1,24 +1,14 @@
 #link_preview
   background-color: #f4f4f4
-  padding: 9px
-  border-radius-bottom: 5px
-  img
-    display: inline
-    margin-right: 2px
+  @include border-radius-bottom(5px)
   .info
     .title,
     .description 
       input,
       textarea
         @include border-radius(5px)
-        padding: 5px
-    .description
-      p
-        a
-          display: block
 
   .link_error
-    display: inline-block
     color: #9d261d
   
 #link_description
@@ -29,27 +19,7 @@
   background-color: $black
 
 .activity_objects
-  margin-left: 56px
   .attachment_thumb
-    @include makeColumnoMargin(1, 0)
     background: black
     .attachment_text_link
       font-size: 14px
-      .post 
-        p 
-          margin: 0 0 4px
-
-.link
-  display: inline
-  margin-left: 19px
-  .thumb
-    @include makeColumnoMargin(1, 0)
-    display: inline
-    margin-top: 14px
-  .text
-    width: 97%
-    display: inline-block
-    .description
-      p
-        a
-          display: block 

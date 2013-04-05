@@ -1,47 +1,20 @@
 #new_file
-  @extend .boder-radius-5
-  padding: 2%
+  @include boder-radius(5px)
   background-color: #ccc
-  form
-    margin: 0 0 40px
   .error
     h4
-      color: ¢grayLighter
+      color: $grayLighter
     h5
-      color: ¢gray
+      color: $gray
   section
     border-bottom: 1px dashed #ccc
-    padding-top: 15px
     label
       font-size: 16px
       font-weight: bold
       color: $gray
-      padding: 2px 0 0 14px
-  .upload,
-  .title,
-  .tags
-    height: 58px
+
   .upload
-    margin-top: 0px
-    padding-top: 0px
     input
       &[type="file"]
-        display: inline
-        width: 96%
-        line-height: 0px
         background-color: $white
-        @extend .border-radius-5
-  .title
-    input
-      &[type="text"]
-        display: inline
-        width: 94%
-  .description
-    textarea
-      display: inline-block
-      @include size (70px, 94%)
-  input
-    &[type="submit"]
-      margin-top: 11px
-      width: 100%
-      @extend .btn-blue
+        @include border-radius (5px)

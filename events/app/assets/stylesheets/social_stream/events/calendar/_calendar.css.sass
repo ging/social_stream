@@ -2,20 +2,15 @@
 
 #calendar
   .fc-button.fc-state-default 
-    @extend .btn-blue
+    @include btn-primary
     color: $blue
-
-    // .btn-group > .btn
-    position: relative
-    //float: left;
-    //margin-left: -1px;
     @include border-radius(0)
 
   .fc-button.fc-state-active 
-    @extend .btn-blue.active
+    @include btn-primary
     color: $white
   .fc-button.fc-state-disabled 
-    @extend .btn-blue.disabled
+    @include btn-primary
     background-color: $blue
     color: $white
 
@@ -23,8 +18,6 @@
     @include box-shadow(none)
 
   .fc-button.fc-corner-left 
-    // .btn-group > .btn:first-child
-    margin-left: 0
     @include border-top-left-radius (4px)
     @include border-bottom-left-radius (4px)
 
@@ -41,29 +34,22 @@
     @include opacity (80)
 
   .fc-day-number
-    float: right
     pointer: pointer
-    padding: 1px 3px 0 0
-    min-height: 89px
 
   .fc-header-right,
   .fc-header-left,
   .fc-header-center
     vertical-align: middle
     text-align: center
-    padding: 0 0 6px 6px
+
   .fc-header-right,
   .fc-header-left
     background-color: whitesmoke
   .fc-header-right
-    padding-right: 6px
-
     .fc-header-title
-      margin-top: 13px
       h2
         line-height: 32px
-      .btn
-        margin-right: 6px 
+
 
   .fc-widget-header
     background: whitesmoke

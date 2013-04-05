@@ -1,0 +1,30 @@
+#document_info
+  @include makeColumn(6, 0)
+  display: inline-block
+
+#documents
+  .document_show
+    @include makeColumn(1, 0)
+    display: inline
+  input
+    &[type="submit"]
+      float: right
+      width: 90px
+      display: inline-block
+      margin: 3px 0 0 -14px
+  .tab-content
+    @include makeColumn(10, 0)
+    padding-bottom: 100px
+
+  nav.more
+    clear: both
+    margin-top: 10px
+    .btn-see-more
+      position: absolute
+      z-index: 100
+      padding: 0px 10px 0px 4px
+    .loading
+      z-index: 200
+      position: relative
+.documents
+  clear: both

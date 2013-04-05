@@ -1,0 +1,34 @@
+#new_file
+  padding: 2%
+  form
+    margin: 0 0 40px
+
+  section
+    padding-top: 15px
+    label
+      padding: 2px 0 0 14px
+  .upload,
+  .title,
+  .tags
+    height: 58px
+  .upload
+    margin-top: 0px
+    padding-top: 0px
+    input
+      &[type="file"]
+        display: inline
+        width: 96%
+
+  .title
+    input
+      &[type="text"]
+        display: inline
+        width: 94%
+  .description
+    textarea
+      display: inline-block
+      @include size (70px, 94%)
+  input
+    &[type="submit"]
+      margin-top: 11px
+      width: 100%
