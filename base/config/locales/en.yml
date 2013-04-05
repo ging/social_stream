@@ -235,6 +235,7 @@ en:
       tags: "Tags"
       search: "Search"
     link: "Explore"
+    or: "or Explore"
     participants:
       last_active: "Last active"
       last_registered: "Last registered"
