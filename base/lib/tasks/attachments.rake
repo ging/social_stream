@@ -7,7 +7,7 @@ namespace :social_stream do
 
       FileUtils.mkdir_p new_dir
 
-      puts "Moving #{ old_logo_dir } to #{ new_logo_dir }"
+      puts "Moving #{ old_dir } to #{ new_dir }"
 
       FileUtils.mv old_dir, new_dir
     end
