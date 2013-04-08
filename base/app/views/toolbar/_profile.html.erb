@@ -2,9 +2,8 @@
   <div class="user">
     <%= render partial: 'toolbar/logo',
                locals: { subject: subject } %>
+
     <% if current_subject.present? && subject != current_subject %>
-    
-    <% end %>
     <div class="contact-button">
       <%= contact_to subject %>
 
@@ -14,11 +13,12 @@
         });
       <% end %>
     </div>
+    <% end %>
 
-    <%= content_for :toolbar_menu do %>
-    
   </div>
-  <ul class="buttons">
+
+  <nav class="toolbar_menu">
+    <ul class="nav">
     <li>
       <%= link_to [ subject, :profile ] do  %>
         <i class='icon_tool16-info'></i> <%= t 'menu.information' %>
@@ -39,12 +39,10 @@
     </li>
 
     <div class="base_items"/>
-  </ul>
-<% end %>
+    </ul>
+  </nav>
 
-<%= render partial: 'toolbar/menu' %>
+  <%= render partial: 'toolbar/contacts', locals: { subject: subject } %>
 
-<%= render partial: 'toolbar/contacts', locals: { subject: subject } %>
-
-<%= render partial: 'toolbar/groups', locals: { subject: subject } %>
+  <%= render partial: 'toolbar/groups', locals: { subject: subject } %>
 </section>
