@@ -71,12 +71,13 @@
     #search-results
 
       .contact
-        display: inline
-        min-height: 80px
+        width: 240px
         float: left
+        margin-left: 19px
+        min-height: 81px
+        margin-bottom: 14px
 
         .avatar
-          @include grid-core-span(4, $fluidGridColumnWidth, $fluidGridGutterWidth)
           display: inline
           width: 45px
           float: left
@@ -98,9 +99,11 @@
 
 
     .event
-      @include makeColumn(3, 0)
-      display: inline
+      width: 240px
+      float: left
       margin-left: 19px
+      min-height: 81px
+      margin-bottom: 14px
       .avatar
         @include makeColumnoMargin(1, 0)
         display: inline
@@ -110,25 +113,38 @@
         display: inline-block
 
 
-    .comment
-      display: inline
-      width: 22%
-      margin-left: 19px
-      p
-        margin-bottom: 0
-
     .link
-      display: inline-block
-      @include makeColumn(3, 0)
-      margin-left: 0px
-      h5
-        margin-bottom: 2px
-
-    .post
-      width: 22%
+      width: 240px
       float: left
-      margin-left: 30px
+      margin-left: 19px
+      min-height: 76px
+      margin-bottom: 14px
+      .thumb
+        float: left
+        margin-left: 0px
+        width: 60px
+        display: inline
+        margin-top: 14px
+      .brifing
+        float: left
+        margin-left: 0px
+        width: 175px
+        display: inline-block
+        h5
+          margin-bottom: 0px
+        .author
+          a
+            width: 85%
+
+
+    .post,
+    .comment
+      width: 224px
+      float: left
+      margin-left: 19px
+      min-height: 50px
+      margin-bottom: 14px
       background-color: $white
-      padding: 6px 4px
+      padding: 13px 8px
       p
         @include ellipsis
