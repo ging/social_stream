@@ -2,10 +2,11 @@ class SearchController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
 
   RESULTS_SEARCH_PER_PAGE=16
+
   def index
     @search_result =
       if params[:q].blank? || params[:q].strip.size < SocialStream::Search::MIN_QUERY
-        []
+        Kaminari.paginate_array([])
       elsif params[:mode] == "quick"
         search :quick
       else
