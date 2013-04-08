@@ -17,7 +17,8 @@
 
   </div>
 
-  <% content_for :toolbar_menu do %>
+  <nav class="toolbar_menu">
+    <ul class="nav">
     <li>
       <%= link_to [ subject, :profile ] do  %>
         <i class='icon_tool16-info'></i> <%= t 'menu.information' %>
@@ -38,9 +39,8 @@
     </li>
 
     <div class="base_items"/>
-  <% end %>
-
-  <%= render partial: 'toolbar/menu' %>
+    </ul>
+  </nav>
 
   <%= render partial: 'toolbar/contacts', locals: { subject: subject } %>
 

@@ -1,5 +1,6 @@
 <section id="toolbar" class="toolbar-home">
-  <% content_for :toolbar_menu do %>
+  <nav class="toolbar_menu">
+    <ul class="nav">
     <li>
       <%= link_to new_message_path do %>
         <i class='icon_message-new'></i>
@@ -20,7 +21,6 @@
         <i class='icon_message-trash'></i>
       <% end %>
     </li>
-  <% end %>
-
-  <%= render partial: 'toolbar/menu' %>
+    </ul>
+  </nav>
 </section>
