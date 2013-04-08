@@ -8,6 +8,7 @@
     float: left
     margin-left: 19px
     min-height: 81px
+    margin-bottom: 14px
     .thumb
       float: left
       margin-left: 0px
@@ -17,7 +18,10 @@
     .brifing
       float: left
       margin-left: 0px
-      width: 150px
+      width: 175px
       display: inline-block
       h5
         margin-bottom: 0px
+        @include ellipsis
+      a
+        @include ellipsis
