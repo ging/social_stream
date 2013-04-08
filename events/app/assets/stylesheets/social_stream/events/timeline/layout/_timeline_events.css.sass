@@ -1,42 +1,47 @@
 .timeline
-  .media,
-  .modal-body
-    .event
-      .date
-        @include makeColumn(1, 0)
-        display: inline
-        margin: 3px 0 0 -2px
+  .media
+    .media-body
+      .event
+        .date
+          width: 90px
+          display: inline
+          float: left
+          padding-top: 6px
+          padding-bottom: 6px
 
-      .poster
-        float: left
-        width: 80px
-        display: inline-block
-      .details
-        width: 56%
-        display: inline-block
-        margin-left: 20px
-        .frequency
-          margin: 4px 0 6px
-        .description
-          p
-            a
-              display: block
-        .follow
-          margin-top: -3px
+        .poster
+          float: left
+          width: 80px
+          display: inline-block
 
-        input
-          &[type="submit"]
-            @include size (22px, 110px)
-            padding: 0px
-            margin-top: 5px
+        .details
+          width: 52%
+          display: inline-block
+          margin-left: 20px
+          .frequency
+            margin: 4px 0 6px
+          .description
+            p
+              a
+                display: block
+          .follow
+            margin-top: -3px
 
-  .modal-body
-    .event
-      clear: both
-      .date
-        margin-top: 14px
-      .poster
-        margin-top: 15px
-      .details
-        @include makeColumn(4, 0)
-        margin-top: 10px
+          input
+            &[type="submit"]
+              @include size (22px, 110px)
+              @include btn-primary
+              @include border-radius(5px)
+              padding: 0px
+              margin-top: 5px
+
+    .modal-body
+      .event
+        clear: both
+        .date
+          margin-top: 14px
+        .poster
+          margin-top: 15px
+        .details
+          @include makeColumn(4, 0)
+          margin-top: 10px

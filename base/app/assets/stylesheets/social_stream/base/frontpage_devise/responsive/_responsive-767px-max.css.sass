@@ -6,7 +6,8 @@
 @media (max-width: 767px)
 
 
-  #frontpage
+  #frontpage,
+  #new_session
 
     .explanation
       h3
@@ -32,7 +33,7 @@
             width: 96%
 
     .caracteristics
-      width: 28% !important
+      width: 28%
       margin-left: 0 !important
 
 
@@ -65,6 +66,7 @@
       h2
         margin: 0
         font-size: 25.5px
+        margin-left: 2% !important
       
       #new_user
         margin: 0
@@ -92,7 +94,8 @@
 @media (max-width: 480px)
 
 
-  #frontpage
+  #frontpage,
+  #new_session
     .explanation
       @include hidden-phone
     #sign_in
@@ -106,7 +109,7 @@
         float: left
     #presentation
       .caracteristics
-        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        width: 100% !important
         margin-left: 0
         padding: 0
 

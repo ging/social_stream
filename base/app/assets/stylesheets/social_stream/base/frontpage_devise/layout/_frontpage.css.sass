@@ -1,4 +1,5 @@
-#frontpage
+#frontpage,
+#new_session
   @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
 
   .explanation
@@ -35,17 +36,19 @@
       margin-top: 0px
     #remember
       margin-bottom: 10px 
-      input
-        display: inline
+      display: inline !important
       label
         display: inline-block
         margin-top: 6px
     input
       &[type="submit"]
         float: right
-        display: inline-block
+        display: inline
+        margin-top: 10px
     .soften
       clear: both
+
+
 
 
 
@@ -88,6 +91,7 @@
       &[type="submit"]
         float: right
         display: inline-block
+        margin-bottom: 10px
     .soften
       clear: both
 
@@ -108,7 +112,7 @@
     display: inline
     header
       h2
-        margin-left: -20px
+        margin-left: 40%
       #new_user
         margin-left: 46%
         @extend .hidden-phone
@@ -131,7 +135,15 @@
         clear: both
         margin: 39px 0 10px
 
-
+#sign_in,
+#forgot-pass,
+#registration
+  .options
+    a
+      border-right: 1px solid #ccc
+      padding-right: 6px
+      &:last-child
+        border-right: none
 
 #header_search_form
   margin-bottom: 0px

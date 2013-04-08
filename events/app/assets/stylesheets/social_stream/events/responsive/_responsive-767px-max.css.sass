@@ -12,9 +12,7 @@
       .event,
       .link
         .date
-          width: 60px
-        .poster
-          width: 80px
+          width: 48px
         .details,
         .text 
           margin-left: 10px
@@ -56,13 +54,17 @@
           float: left
         .event,
         .link
+          .date
+            .day,
+            .month
+              font-weight: bold
+              font-size: 15px
           .poster
             @include hidden-phone
           .details,
           .text 
-            width: 100% !important
+            width: 40%
             margin-left: 7px
-            @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
         
   
   
