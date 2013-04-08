@@ -12,6 +12,9 @@
       <h5>
         <%= link_to truncate_name(conversation.last_sender.name), conversation.last_sender.subject %>
       </h5>
+      <div class="date">
+        <%= t('time.ago', :time => time_ago_in_words(conversation.updated_at)) %>
+      </div>
     </header>
 
   </div>
@@ -39,12 +42,5 @@
     <div class="briefing">
       <%= raw(truncate(strip_tags(conversation.last_message.body), :length => 50)) %>
     </div>
-
-    <div class="date">
-      <%= t('time.ago', :time => time_ago_in_words(conversation.updated_at)) %>
-    </div>
-
-    <div class="clearfloat">
-    </div> 
   </div>
 <% end %>

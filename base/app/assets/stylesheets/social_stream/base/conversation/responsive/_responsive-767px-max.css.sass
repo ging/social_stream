@@ -22,6 +22,7 @@
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       background-color: $white
       @include border-radius(5px)
+      display: block !important
       ul
         @include grid-core-span(8, $fluidGridColumnWidth, $fluidGridGutterWidth)
         height: 60px
@@ -38,6 +39,13 @@
           a
             width: auto
             text-align: center
+            .icon_message-new,
+            .icon_message-inbox,
+            .icon_message-sentbox,
+            .icon_message-trash
+              display: block
+              margin-left: auto
+              margin-right: auto
     form.new_message
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 0
@@ -50,11 +58,15 @@
           width: 60px
           margin-right: 13px
           margin-left: 0px
+          header
+            width: 54px
+          .date
+            @extend .hidden-phone
         .content_right
-          width: 80%
+          width: 77%
           .action
             float: right
-            margin: -20px -45px 0 0
+            margin: 0
     
   #conversation 
     .conversation_full
@@ -87,15 +99,21 @@
           margin-bottom: 0px
           float: left
           margin-top: 17px
-    .conversations      
+    .conversations   
+      margin-top: 0   
       .conversation
         margin-top: 26px
         .content_left
           margin-right: 2px
+          header
+            width: 54px
+          .date
+            @include ellipsis
         .content_right 
           width: 69%
-          .actions
-            margin: -20px -45px 0 0
+          margin-left: 10px
+          .action
+            margin: 0px -26px 0 0
 
 
   .conversation_full
