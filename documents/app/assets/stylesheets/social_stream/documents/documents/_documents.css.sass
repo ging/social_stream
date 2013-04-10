@@ -1,44 +1,4 @@
-.repository
-  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-  display: inline-block
-.filter
-  @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
-  display: inline
-  margin-top: 3px
 #repository
-  .repository_show
-    @include grid-core-span(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    display: inline
-  input
-    &[type="text"]
-      @extend .filter
   .btn
-    float: right
-    width: 90px
-    display: inline-block
-    margin: 3px 0 0 -14px
     @extend .btn-blue
-  .tab-content
-    @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
-    padding-bottom: 100px
 
-  nav.more
-    clear: both
-    margin-top: 10px
-    .btn-see-more
-      position: absolute
-      z-index: 100
-      padding: 0px 10px 0px 4px
-    .loading
-      z-index: 200
-      position: relative
-  #toolbar
-    display: hidden
-    @include hidden-desktop
-    @include hidden-tablet
-    @include hidden-phone
-  #comments
-    .new_comment
-      margin-left: 44px
-.documents
-  clear: both
