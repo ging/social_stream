@@ -111,6 +111,8 @@ es:
         one: "%{count} persona más"
         other: "%{count} personas más"
     unfollow: "Dejar de seguir"
+  ajax:
+    error: "Ha habido un error en el servidor remoto"
   browse: "Descubrir"
   button:
     cancel: "Cancelar"

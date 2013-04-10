@@ -93,9 +93,9 @@ class ConversationsController < ApplicationController
 
   def get_box
     if params[:box].blank? or !["inbox","sentbox","trash"].include?params[:box]
-      @box = "inbox"
-    return
+      params[:box] = 'inbox'
     end
+
     @box = params[:box]
   end
 

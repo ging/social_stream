@@ -113,6 +113,8 @@ en:
         one: "%{count} more person"
         other: "%{count} more people"
     unfollow: "Unfollow"
+  ajax:
+    error: "There was an error in the remote server"
   browse: "Browse"
   button:
     cancel: "Cancel"
