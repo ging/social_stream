@@ -13,7 +13,7 @@ module LayoutsHelper
       when :events
         'events'
       when :resources
-        'documents'
+        'repositories'
       when :messages
         [ 'messages', 'conversations' ]
       end
