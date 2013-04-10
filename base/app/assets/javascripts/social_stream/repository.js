@@ -24,6 +24,10 @@ SocialStream.Repository = (function(SS, $, undefined){
       success: function(data) {
         $('.repository .loading').hide();
         $('.repository-list').html(data);
+      },
+      error: function(data) {
+        $('.repository .loading').hide();
+        SS.Flash.error();
       }
     });
   };
