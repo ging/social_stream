@@ -3,22 +3,22 @@
     <ul class="nav">
     <li>
       <%= link_to new_message_path do %>
-        <i class='icon_message-new'></i>
+        <i class='icon_message-new <%= 'active' if controller.action_name == 'new' %>'></i>
       <% end %>
     </li>
     <li>
       <%= link_to conversations_path(box: :inbox) do %>
-        <i class='icon_message-inbox'></i> (<%= current_subject.unread_messages_count %>)
+        <i class='icon_message-inbox <%= 'active' if params[:box] == 'inbox' %>'></i> (<%= current_subject.unread_messages_count %>)
       <% end %>
     </li>
     <li>
       <%= link_to conversations_path(box: :sentbox) do %>
-        <i class='icon_message-sentbox'></i>
+        <i class='icon_message-sentbox <%= 'active' if params[:box] == 'sentbox' %>'></i>
       <% end %>
     </li>
     <li>
       <%= link_to conversations_path(box: :trash) do %>
-        <i class='icon_message-trash'></i>
+        <i class='icon_message-trash <%= 'active' if params[:box] == 'trash' %>'></i>
       <% end %>
     </li>
     </ul>
