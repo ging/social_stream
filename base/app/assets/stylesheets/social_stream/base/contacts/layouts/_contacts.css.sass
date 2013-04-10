@@ -1,8 +1,6 @@
 #contacts
   @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-  #toolbar
-    @extend .hidden-tablet
-    @extend .hidden-phone
+
   .contacts
     @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
     float: left
@@ -24,42 +22,47 @@
         clear: both
         min-height: 500px
         padding-bottom: 50px
+
         .contact
-          width: 35%
-          margin-top: 20px
-          height: 100%
+          width: 240px
           float: left
-          margin-right: 2.1%
-          .avatar
-            width: 24.5%
-            display: inline
-            float: left
-            padding: 0
-            margin-right: 6px
-            
-          .data
-            display: inline
-            margin-top: 9px
-            width: 43%
-            .name,
-            .info
-              @include ellipsis
-              width: 55%
-            .info
-              font-size: 12px
-              color: #888
-          .add
-            z-index: 1
-            float: left
-            .edit_contact
-              margin-bottom: 0px
-            .dropdown-toggle
-              margin-left: 0 
-              widht: 100%
-          .x
-            display: inline-block
-            float: right
-            margin-top: -40px
+          margin-left: 19px
+          min-height: 76px
+          margin-bottom: 14px
+
+        .avatar
+          float: left
+          margin-left: 0px
+          width: 50px
+          display: inline
+          margin-top: 10px
+          img
+            width: 45px 
+            vertical-align: top
+
+        .data
+          float: left
+          margin-left: 0px
+          width: 175px
+          display: inline-block
+          margin-top: 11px
+        .info
+          @include ellipsis
+          z-index: 1
+          padding-left: 2%
+      
+        .add
+          z-index: 1
+          float: left
+          .edit_contact
+            margin-bottom: 0px
+          .dropdown-toggle
+            margin-left: 0 
+            widht: 100%
+        .x
+          display: inline-block
+          float: right
+          margin-top: -40px
           
 
 #contact-form
