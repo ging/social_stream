@@ -21,7 +21,8 @@ class MoveAvatars < ActiveRecord::Migration
     add_attachment :actors, :logo
 
     ActorMigration.all.each do |a|
-      next if a.avatar.blank?
+      next if a.avatar.blank? ||
+        ! File.exists?(a.avatar.logo.path.gsub('/move_avatars/avatar_migrations/', '/avatars/'))
 
       %w( file_name file_size content_type updated_at ).each do |f|
         a.update_attribute "logo_#{ f }", a.avatar.send("logo_#{ f }")
