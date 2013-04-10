@@ -104,7 +104,7 @@ SocialStream.Comment = (function(SS, $, undefined){
         showDiv = $(this).find('.hidden_comments');
 
         if (showDiv.length) {
-          showDiv.html(I18n.t('comment.view_all', { count: comments.size() }));
+          showDiv.find('a').html(I18n.t('comment.view_all', { count: comments.size() }));
           showDiv.show();
           
         } else {
