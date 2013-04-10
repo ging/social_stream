@@ -20,4 +20,12 @@ module LayoutsHelper
 
     Array.wrap(controllers).include? controller.controller_name
   end
+
+  # Sets "out" class to header_signed_out in frontpage and devise's controllers
+  # and "in" class in the rest of the application
+  def header_logo_class
+    controller.controller_path =~ /frontpage|devise/ ?
+      'out' :
+      'in'
+  end
 end
