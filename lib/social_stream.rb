@@ -1,8 +1,11 @@
 if Rails.env == 'development'
-  # pry
-  require 'pry-rails'
-  # Rails panel
-  require 'meta_request'
+  begin
+    # pry
+    require 'pry-rails'
+    # Rails panel
+    require 'meta_request'
+  rescue LoadError => e
+  end
 end
 
 module SocialStream
