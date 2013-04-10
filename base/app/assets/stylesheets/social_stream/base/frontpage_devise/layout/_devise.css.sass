@@ -1,27 +1,67 @@
-#password_form,
-#email_form,
-#language_settings,
-#notifications_settings,
-#api_key_settings,
-#chat_settings,
-#room_settings,
-#cancel_account,
-#notifications_settings
-  .settings_content
-    padding: 10px 17px 43px
-    form
-      margin-bottom: 0px
-    .btn
+#registration
+  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  .welcome
+    @extend .hidden-phone
+    @include grid-core-span(6, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    float: left
+    margin-left: 4%
+  .registration
+    @include grid-core-span(5, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    float: right
+    display: inline-block
+    margin: 30px 2% 0 14px
+    h3
+      margin: 0px 12px 10px 0
+    #new_user
+      width: 94%
+      padding: 0 3%
+    #remember
+      display: inilne
+      float: left
+    input
+      &[type="submit"]
+        float: right
+        display: inline-block
+        margin-bottom: 10px
+    .soften
+      clear: both
+
+
+
+#forgot-pass
+  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  .forgot-img
+    @extend .hidden-phone
+    @extend .hidden-tablet
+    width: 40%
+    float: left
+    margin-left: 4%
+    img
+      width: 100%
+  .forgot
+    width: 60%
+    display: inline
+    header
+      h2
+        margin-left: 40%
+      #new_user
+        margin-left: 46%
+        @extend .hidden-phone
+    .password
+      width: 27%
       float: right
-      margin-right: 37px
-    .options
-      margin: 4px 0px
-      padding: 4px 4px 0px 2px
-      &[type="radio"]
-        margin: -1px 10px 0 0
-    .btn_notifications
-      margin-left: 331px
-
-#notify_by_email_never
-  margin-left: 10px
-
+      display: inline-block
+      padding: 5px 15px
+      margin: 27px 20% 0 14px
+      h3
+        margin-top: 0px
+      #remember
+        display: inilne
+        float: left
+      input
+        &[type="submit"]
+          float: right
+          display: inline-block
+      .soften
+        clear: both
+        margin: 39px 0 10px

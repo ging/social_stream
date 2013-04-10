@@ -1,0 +1,47 @@
+#settings
+  #toolbar
+    @include hidden-phone
+    @include hidden-tablet
+  h2
+    @include ellipsis
+  .settings
+    @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    float: left
+    margin-left: 2%
+    h2
+      @include ellipsis
+      margin-top: 0
+    .accordion
+      margin-bottom: 0
+      .settings_content
+        padding: 0px 15px 0px
+        @include gradient-vertical-three-colors($startColor: #e2e2e2, $midColor: #ededed, $colorStop: 3%, $endColor: #f1f1f1)
+        .accordion-toggle
+          @include ellipsis
+        form
+          margin-bottom: 0px
+          margin-top: 12px
+        input
+          &[type="submit"]
+            float: right
+            margin-bottom: 12px
+        .options
+          margin: 4px 0px
+          padding: 4px 4px 0px 2px
+          &[type="radio"]
+            margin: -1px 10px 0 0
+        .btn_notifications
+          margin-left: 331px
+      #chat_settings
+        input
+          &[type="checkbox"]
+            display: inline
+        label
+          display: inline-block
+      #api_key_settings
+        .settings_block
+          margin-top: 12px
+
+
+#notify_by_email_never
+  margin-left: 10px
