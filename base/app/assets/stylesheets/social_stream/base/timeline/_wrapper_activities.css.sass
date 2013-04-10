@@ -26,6 +26,25 @@
         display: inline
       &[type="text"]
         padding: 1% 2%
+    #link_preview
+      .link
+        margin-left: 0px
+
+    .thumbnail
+      @include center-block()
+      width: 43%
+      float: left
+      img
+        max-height: 134px
+        float: right
+    .info
+      width: 53%
+      display: inline-block
+      margin-left: 2%
+      .description
+        textarea
+          min-height: 80px
+
     .wall_input-actions
       margin-top: 10px
     .new_document
