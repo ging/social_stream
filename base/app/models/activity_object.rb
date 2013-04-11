@@ -257,11 +257,12 @@ class ActivityObject < ActiveRecord::Base
       owner.relations.allowing('read', 'activity') + 
       Relation::Single.allowing('read', 'activity')
 
-    if (relation_ids - allowed_rels.map(&:id)).any?
-      errors.add(:relation_ids, "not allowed: #{ relation_ids }, author_id: #{ author_id }, owner_id: #{ owner_id }")
+    not_allowed_ids = relation_ids - allowed_rels.map(&:id)
+
+    if not_allowed_ids.any?
+      errors.add(:relation_ids, "not allowed: #{ not_allowed_ids }, author_id: #{ author_id }, owner_id: #{ owner_id }")
     end
   end
-
 
   def create_post_activity
     create_activity "post"

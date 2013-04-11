@@ -1,16 +1,19 @@
 namespace :social_stream do
-  namespace :avatars do
-    desc "Fix avatar's attachment path from Social Stream < 2.0"
-    task :fix => :environment do
-      old_dir = "#{ Rails.root }/public/system/avatars/logos"
-      new_dir = "#{ Rails.root }/public/system/actors"
+  namespace :attachments do
+    desc "Set record timestamps to false"
+    task :freeze_timestamps => :environment do
+      %w(Actor Picture Audio Video).each do |k|
+        k.constantize.record_timestamps = false
+      end
 
-      FileUtils.mkdir_p new_dir
-
-      puts "Moving #{ old_dir } to #{ new_dir }"
-
-      FileUtils.mv old_dir, new_dir
+      ActivityObject.class_eval do
+        private
+        def allowed_relations; end
+      end
     end
+
+    desc "Fix avatar's attachment path from Social Stream < 2.0"
+    task :fix => [ :freeze_timestamps, 'paperclip:refresh:missing_styles' ]
   end
 end
 
