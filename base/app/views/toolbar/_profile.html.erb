@@ -28,13 +28,13 @@
     <% if SocialStream.repository_models.present? %>
       <li>
         <%= link_to [ subject, :repository ] do %>
-          <%= image_tag 'icons/resources.png' %> <%= t 'repository.title' %>
+          <i class='icon_navbar-resources'></i> <%= t 'repository.title' %>
         <% end %>
       </li>
     <% end %>
     <li>
-      <%= link_to new_message_path(:receiver => subject.slug) do %>
-        <%= t 'send message' %>
+      <%= link_to new_message_path() do %>
+        <i class='icon_navbar-message'> <%= t 'send message' %>
       <% end %>
     </li>
 

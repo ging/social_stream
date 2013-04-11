@@ -5,11 +5,24 @@
       li
         @include btn-primary
         @include border-radius(5px)
+        .icon_tool16-info
+          background-position: -192px -110px
+        .icon_navbar-resources
+          background-position: -175px -8px
+        .icon_navbar-message
+          background-position: -55px -8px
         &:hover
+          .icon_tool16-info
+            background-position: -192px -235px
+          .icon_navbar-resources
+            background-position: -175px -38px
+          .icon_navbar-message
+            background-position: -55px -38px
           a
             color: $white
             @include transition(color 1s)
             background: transparent
+
         a
           &:hover
             color: $white
