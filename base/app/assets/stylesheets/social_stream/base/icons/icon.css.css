@@ -17,7 +17,6 @@
 }
 
 
-.icon_file_70-default { background-position: -0  -42px;}
 .icon_file_70-xls     { background-position: -10px -10px;}
 .icon_file_70-doc     { background-position: -90px -10px;}
 .icon_file_70-ppt     { background-position: -170px -10px;}
@@ -34,7 +33,7 @@
 .icon_file_70-zip     { background-position: -90px -170px;}
 .icon_file_70-link    { background-position: -170px -170px;}
 .icon_file_70-embeb   { background-position: -250px -170px;}
-.icon_file_70-flv     { background-position: -330px -170px;}
+.icon_file_70-flv     { background-position: -330px -176px;}
 .icon_file_70-mp4     { background-position: -10px -250px;}
 .icon_file_70-wemb    { background-position: -90px -250px;}
 .icon_file_70-swf     { background-position: -170px -250px;}
@@ -51,6 +50,7 @@
 .icon_file_70-wav     { background-position: -90px -410px;}
 .icon_file_70-ogg     { background-position: -170px -410px;}
 .icon_file_70-aif     { background-position: -250px -410px;}
+.icon_file_70-default { background-position: -330px -407px;}
 
 
 
@@ -103,7 +103,6 @@
 }
 
 
-.icon_file_50-default { background-position: 0  -42px;}
 .icon_file_50-xls     { background-position: -10px -10px;}
 .icon_file_50-doc     { background-position: -70px -10px;}
 .icon_file_50-ppt     { background-position: -130px -10px;}
@@ -120,7 +119,7 @@
 .icon_file_50-zip     { background-position: -70px -130px;}
 .icon_file_50-link    { background-position: -130px -130px;}
 .icon_file_50-embeb   { background-position: -190px -130px;}
-.icon_file_50-flv     { background-position: -260px -130px;}
+.icon_file_50-flv     { background-position: -248px -131px;}
 .icon_file_50-mp4     { background-position: -10px -190px;}
 .icon_file_50-wemb    { background-position: -70px -190px;}
 .icon_file_50-swf     { background-position: -130px -190px;}
@@ -137,7 +136,8 @@
 .icon_file_50-wav     { background-position: -70px -310px;}
 .icon_file_50-ogg     { background-position: -130px -310px;}
 .icon_file_50-aif     { background-position: -190px -310px;}
-.icon_50-event   { background-position: -252px -307px;}
+.icon_50-event        { background-position: -252px -307px;}
+.icon_file_50-default { background-position: -310px  -311px;}
 
 
 [class^="file_40-"],   [class*="icon_file_40-"] {
@@ -149,7 +149,6 @@
 }
 
 
-.icon_file_40-default { background-position: 0  -42px;}
 .icon_file_40-xls     { background-position: -10px -8px;}
 .icon_file_40-doc     { background-position: -60px -8px;}
 .icon_file_40-ppt     { background-position: -112px -7px;}
@@ -183,6 +182,7 @@
 .icon_file_40-wav     { background-position: -60px -262px;}
 .icon_file_40-ogg     { background-position: -111px -262px;}
 .icon_file_40-aif     { background-position: -160px -262px;}
+.icon_file_40-default { background-position: -263px  -262px;}
 
 /*..................hover 50.......................
 .icon_file_50-default:hover { background-position: 0  -42px;}

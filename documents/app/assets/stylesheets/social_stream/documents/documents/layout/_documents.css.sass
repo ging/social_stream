@@ -19,10 +19,18 @@
     float: right
     width: 90px
     display: inline-block
-    margin: 3px 0 0 -14px
+    margin: 3px 16px 0 -14px
+    padding: 5px 12px
   .tab-content
     @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
     padding-bottom: 100px
+
+  .repository-list
+    .document,
+    .picture,
+    .audio,
+    .video
+      min-height: 81px
 
   nav.more
     clear: both
@@ -38,5 +46,6 @@
   #comments
     .new_comment
       margin-left: 44px
+
 .documents
   clear: both
