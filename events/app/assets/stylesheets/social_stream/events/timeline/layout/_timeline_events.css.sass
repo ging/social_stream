@@ -30,18 +30,41 @@
           input
             &[type="submit"]
               @include size (22px, 110px)
-              @include btn-primary
               @include border-radius(5px)
               padding: 0px
               margin-top: 5px
 
-    .modal-body
-      .event
-        clear: both
-        .date
-          margin-top: 14px
-        .poster
-          margin-top: 15px
-        .details
-          @include makeColumn(4, 0)
-          margin-top: 10px
+.modal
+  .modal-body
+    .event
+      clear: both
+      min-height: 152px
+      height: auto
+      .date
+        width: 90px
+        display: inline
+        float: left
+        padding-top: 6px
+        padding-bottom: 6px
+      .poster
+        float: left
+        width: 80px
+        display: inline-block
+      .details
+        width: 52%
+        display: inline-block
+        margin-left: 10px
+        .frequency
+          margin: 4px 0 6px
+        .description
+          p
+            a
+              display: block
+        .follow
+          margin-top: -3px
+
+        input
+          &[type="submit"]
+            @include size (22px, 110px)
+            padding: 0px
+            margin-top: 5px

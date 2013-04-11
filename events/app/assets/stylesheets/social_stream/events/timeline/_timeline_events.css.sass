@@ -31,10 +31,36 @@
               @include border-radius (7px)
               border: 1px solid #888
               color: #888
-              background: $white
-              &:hover
-                color: #fff
-                background: $red
+              @include btn-primary
+.modal
   .modal-body
     .event
       border-bottom: 1px solid #ccc
+      .date
+        background-color: white
+        text-align: center
+        .day,
+        .month
+          font-weight: bold
+          font-size: 22px
+        .day
+          display: inline
+        .month
+          display: inline-block
+        .hour
+          font-size: 15px
+
+      .details
+        .frequency
+          color: #c3c3c3
+          font-size: 13px
+        .description
+          font-size: 12px
+
+        .follow
+          font-size: 12px
+  .modal-footer
+    button
+      @include btn-primary
+      @include border-radius (5px)
+
