@@ -2,25 +2,80 @@
 <html>
 <head>
   <title>We're sorry, but something went wrong (500)</title>
+  <script type="text/javascript">
+    window.onload = function(){
+      var canvas = document.getElementById("canvas"),
+        ctx = canvas.getContext("2d"),
+        FPS = 24,
+        FRAME_MSEC = 1000 / FPS >> 0,
+        count = 0,
+        max = 500, // iterations before shade change
+        shade = 0;
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      ctx.moveTo(0, 0);
+      ctx.strokeStyle = 'white';
+
+      setInterval(intervalHandler, FRAME_MSEC);
+
+      function intervalHandler(){
+        count++;
+
+        if(count%max === 0){
+          shade = random(255);
+
+          // set new stroke color and start new path
+          ctx.strokeStyle = "rgb("+shade+","+shade+","+shade+")";
+          ctx.beginPath();
+        };
+
+        ctx.lineTo(canvas.width, random(canvas.height));
+        ctx.lineTo(random(canvas.width), canvas.height);
+        ctx.lineTo(0, random(canvas.height));
+        ctx.lineTo(random(canvas.width), 0);
+        
+        ctx.stroke();
+      };
+
+      // helper function for random numbers
+      // returns a random integer between 0 and n
+      function random(n){
+        return Math.floor(Math.random() * n);
+      };
+    };
+  </script>
+
   <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
-    }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
+    body {font-family:'Open Sans'; text-align:center; background-color:#f9f9f9; color:#999; margin: 0px;}
+    header {color:#f9f9f9; font-size:45px; font-weight:bolder; vertical-align: top; padding:5px; display: block; z-index: 4; position: absolute; width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      p { padding:5px; }
+    section.dialog {border: 1px solid #ccc; border-right-color: #999; border-bottom-color: #999; background-color:white; z-index: 3; position: absolute; width: 100%; margin-top: 72px;}
+    .error{position: absolute; text-align: center; width: 100%; font-size: 100px; font-weight: bold; margin-top: 226px; color: #111; z-index: 505;}
+    #canvas{background-color: black; width: 100%; position: absolute; left: 0; height: 100%;}
   </style>
 </head>
+  <body>
+    <!-- This file lives in public/500.html -->
+    <header>
+      We have a problem my friend
+    </header>
+    
+    <section class="dialog">
+      <h1>
+        We're sorry, but something went wrong.
+      </h1>
+      <p>
+        We've been notified about this issue and we'll take a look at it shortly.
+      </p>
+    </section>
+    
+    <div class="error">
+      - 500 -
+    </div>
 
-<body>
-  <!-- This file lives in public/500.html -->
-  <div class="dialog">
-    <h1>We're sorry, but something went wrong.</h1>
-    <p>We've been notified about this issue and we'll take a look at it shortly.</p>
-  </div>
-</body>
+    <canvas id="canvas">
+    </canvas>
+  </body>
 </html>
