@@ -1,20 +1,51 @@
+.toolbar-profile
+  .toolbar_menu
+    ul
+      background: $white
+      li
+        @include btn-primary
+        @include border-radius(5px)
+        &:hover
+          a
+            color: $white
+            @include transition(color 1s)
+            background: transparent
+        a
+          &:hover
+            color: $white
+.toolbar-conversations
+  nav
+    .nav
+      li
+        a
+          color: $grayLighter
+          background: transparent
+          &:hover
+            color: $blue
+            background: transparent
+            .icon_message-new
+              background-position: -9px -10px
+            .icon_message-inbox
+              background-position: -129px -10px
+            .icon_message-sentbox
+              background-position: -68px -10px
+            .icon_message-trash
+              background-position: -188px -10px
+          .icon_message-new.active
+            background-position: -9px -10px
+          .icon_message-inbox.active
+            background-position: -129px -10px
+          .icon_message-sentbox.active
+            background-position: -68px -10px
+          .icon_message-trash.active
+            background-position: -188px -10px
+
+
+
 #toolbar 
   .contact-button
     @include btn-add
 
-
-  ul.nav
-    background: $white
-    li
-      @include btn-primary
-      @include border-radius(5px)
-      &:hover
-        a
-          color: $white
-          @include transition(color 1s)
-      a
-        &:hover
-          color: $white
   
 
   .contacts-toolbar,
@@ -29,19 +60,6 @@
     .groups-more
       text-align: right
 
-
-
-  .toolbar-messages
-    .toolbar_menu
-      ul
-        li
-          a
-            color: $grayLighter
-            &:hover
-              background-color: transparent
-              color: $blue
-          a.active
-            color: $blue
 
 
 
