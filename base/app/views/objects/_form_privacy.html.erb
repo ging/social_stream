@@ -1,4 +1,4 @@
-<div class="form-privacy">
+<div class="form-privacy" data-relation-text="<%= t "activity.privacy.contact.#{ receiver == current_subject ? :myself : :outside }.#{ receiver.class.to_s.underscore }", receiver: receiver.name %>">
   <%= f.select "relation_ids", options_for_select(current_subject.activity_relations_for(receiver).sort.map{ |r| [ r.name, r.id ] }), {}, { multiple: true } %> 
 </div>
 
