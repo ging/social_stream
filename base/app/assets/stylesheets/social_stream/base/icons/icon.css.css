@@ -234,7 +234,7 @@
 .icon_navbar-home         { background-position: -16px -38px;}
 .icon_navbar-message      { background-position: -55px -38px;}
 .icon_navbar-contacts     { background-position: -96px -38px;}
-.icon_navbar-notification { background-position:-136px -38px;}
+.icon_navbar-notification { background-position:-136px -41px;}
 .icon_navbar-resources    { background-position:-175px -38px;}
 .icon_navbar-calendar     { background-position:-214px -38px;}
 .icon_navbar-settings     { background-position:-252px -37px;}
@@ -245,7 +245,7 @@
 .icon_navbar-home:hover         { background-position: -16px -8px;}
 .icon_navbar-message:hover      { background-position: -55px -8px;}
 .icon_navbar-contacts:hover     { background-position: -96px -8px;}
-.icon_navbar-notification:hover { background-position:-136px -8px;}
+/*.icon_navbar-notification:hover { background-position:-136px -11px;}*/
 .icon_navbar-resources:hover    { background-position:-175px -8px;}
 .icon_navbar-calendar:hover     { background-position:-214px -8px;}
 .icon_navbar-settings:hover     { background-position:-252px -7px;}

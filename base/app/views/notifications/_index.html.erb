@@ -1,14 +1,16 @@
-<h2><%= t('notification.other') %></h2>
+<div class="notifications">
+	<h2><%= t('notification.other') %></h2>
 
-<div class="read_all">
-  <%= link_to(t('notification.read_all'), update_all_notifications_path(:page => params[:page]),
-      :confirm => t('sure'),:method => :put, :remote => true) %>
-</div>
+	<div class="read_all">
+	  <%= link_to(t('notification.read_all'), update_all_notifications_path(:page => params[:page]),
+	      :confirm => t('sure'),:method => :put, :remote => true) %>
+	</div>
 
-<div class="notifications"> 
-  <% @notifications.each do |notification|%>
-    <% @notification = notification %>
-    <% read_class = notification.is_unread?(@actor) ? 'unread' : '' %>
-    <%= render :partial => 'notification', :object => notification, :locals => {:read_class => read_class} %>
-  <% end %>
+	<div class="list"> 
+	  <% @notifications.each do |notification|%>
+	    <% @notification = notification %>
+	    <% read_class = notification.is_unread?(@actor) ? 'unread' : '' %>
+	    <%= render :partial => 'notification', :object => notification, :locals => {:read_class => read_class} %>
+	  <% end %>
+	</div>
 </div>

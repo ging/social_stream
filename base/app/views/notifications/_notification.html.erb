@@ -1,15 +1,14 @@
 <%= div_for(notification, :class => read_class + ' conversation') do %>
 
-<article class="notification">
 <tr>
   <td>
     <%= div_for(notification) do %>
-      <i class="iconnav-notification"></i><!-- este icono debe de ser cambiado por la tipologia que le corresponda segun el contenido-->
+      <i class="icon_navbar-notification"></i><!-- este icono debe de ser cambiado por la tipologia que le corresponda segun el contenido-->
       <%= render :partial => "notifications/activities/#{ notification.notified_object.verb }",
                  :locals => {:activity => notification.notified_object} %>
       , <span class="date-ago"><%= t('time.ago', :time => time_ago_in_words(notification.created_at)) %></span>
     <% end %>
   </td>
 </tr>
-  </article>
+
 <% end %>

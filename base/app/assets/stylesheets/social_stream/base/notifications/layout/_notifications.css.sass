@@ -1,0 +1,35 @@
+#notifications
+  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  .notifications
+    @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    float: left
+    margin-left: 2.5%
+    h2
+      margin-top: 0px
+      margin-bottom: 0px
+    .read_all
+      text-align: right
+      border-bottom: 1px solid #e4e4e4
+      a
+        padding: 3px 0px 9px
+        color: #999
+        &:hover
+          color: $blue
+          text-decoration: none
+    .list
+      clear: both
+      margin-top: 12px
+      .notification
+        margin-top: 10px
+        padding-bottom: 10px
+        border-bottom: 1px solid #e4e4e4
+        .notification
+          margin-top: 0px
+          padding-bottom: 0px
+          border-bottom: none
+          .date-ago
+            float: right
+            color: #999
+            font-size: 12px
+            padding-top: 1px
+    
