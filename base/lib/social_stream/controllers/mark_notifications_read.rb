@@ -12,7 +12,7 @@ module SocialStream
       def mark_notifications_read
         return if params[:notification_id].blank? or !user_signed_in?
         n = Notification.find(params[:notification_id])
-        current_subject.read n
+        current_subject.mark_as_read n
       end
     end
   end
