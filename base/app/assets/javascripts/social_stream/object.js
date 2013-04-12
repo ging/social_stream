@@ -2,7 +2,9 @@
 //= require social_stream/comment
 
 SocialStream.Object = (function(SS, $, undefined){
-  var callback = new SS.Callback();
+  var callback = new SS.Callback(),
+      pIcon = '<i class="icon_tool16-private"></i>';
+
 
   var initRelationSelect = function(options){
     $('select[name*="relation_ids"]').multiselect({
@@ -37,10 +39,18 @@ SocialStream.Object = (function(SS, $, undefined){
   };
 
   var relationSelectText = function(options) {
-    var text;
+    var container = $(".form-privacy"),
+        publicId  = container.attr('data-public_id'),
+        visibility, icon, text;
+
+    if (options.length === 1 && $(options[0]).val() === publicId) {
+      icon = pIcon.replace('private', 'public');
+    } else {
+      icon = pIcon;
+    }
 
     if (options.length === 0) {
-      text = $(".form-privacy").attr('data-relation-text');
+      text = container.attr('data-relation-text');
     }
     else if (options.length > 3) {
       text = I18n.t('activity.privacy.relation', { count: options.length });
@@ -53,7 +63,7 @@ SocialStream.Object = (function(SS, $, undefined){
       text = selected.substr(0, selected.length - 2);
     }
 
-    return text + ' <b class="caret"></b>';
+    return icon + ' ' + text + ' <b class="caret"></b>';
   };
 
   var changeRelationSelect = function(type) {
