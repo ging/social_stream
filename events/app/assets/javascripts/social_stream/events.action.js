@@ -13,8 +13,11 @@ SocialStream.Events.Action = (function(SS, $, undefined){
     var el = SS.Action.followForms(action).closest(".event");
     var eventDate = new Date(el.find("time").attr('datetime'));
 
-    var calEl = SS.Calendar.eventElement(eventDate) || SS.Calendar.element;
+    var calEl = SS.Calendar.eventElement(eventDate);
 
+    if (calEl.length === 0) {
+      calEl = SS.Calendar.element();
+    }
 
     if (action.follow.following) {
       el.find('.poster').effect("transfer", {to: calEl});
