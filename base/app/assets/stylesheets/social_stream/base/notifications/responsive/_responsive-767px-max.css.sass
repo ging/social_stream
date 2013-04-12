@@ -9,7 +9,15 @@
     .notifications
       @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
       margin-left: 0
-    
+      .list
+        .notification
+          .notification
+            @include ellipsis
+          .date-ago
+            float: none
+            display: block
+
+  
 
 
  
@@ -23,6 +31,6 @@
 @media (max-width: 480px)
 
   #notifications
-    .notifications
-      h1
+  .notifications
+    h1
 
