@@ -1,10 +1,7 @@
 <header class="navbar">
   <nav class="navbar-inner">
-    <%= link_to(image_tag('header-logo.png', class: "logo hidden-phone hidden-tablet", :alt => t('site.name')), root_path) %>
-
-    <%= link_to(image_tag('logo-index.png', class: "logo hidden-desktop", :alt => t('site.name')), root_path) %>
+    <%= render partial: 'layouts/logo' %>
     <div class="brand"></div>
-
     <!-- FIXME: search javascript functionality in 'layouts/search' -->
 
     <div class="search-mobile">
