@@ -1,0 +1,4 @@
+<div class="form-privacy" data-relation-text="<%= t "activity.privacy.contact.#{ f.object.owner == current_actor ? :myself : :outside }.#{ f.object.owner.subject_type.underscore }", receiver: f.object.owner.name %>">
+  <%= f.select "relation_ids", options_for_select(current_subject.activity_relations_for(f.object.owner).sort.map{ |r| [ r.name, r.id ] }), {}, { multiple: true } %> 
+</div>
+

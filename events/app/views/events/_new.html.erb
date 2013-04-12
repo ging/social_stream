@@ -22,15 +22,16 @@
   <%= f.label :description %>
   <%= f.text_area :description %>
 
-
   <% if f.object.owner.rooms.any? %>
     <%= f.label :room %>
     <%= f.select :room_id, f.object.owner.rooms.map{ |r| [r.name, r.id] }, { include_blank: true } %>
   <% end %>
 
   <%= render :partial => 'scheduler/form',
-             :locals  => { :f => f }
-   %>
+             :locals  => { :f => f } %>
 
+  <%= render partial: 'objects/form_privacy',
+             locals: { f: f } %>
+  
   <%= f.submit nil, { class: "btn-blue" } %>
 <% end %>

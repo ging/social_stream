@@ -1,4 +1,5 @@
 //= require social_stream/callback
+//= require social_stream/object
 
 SocialStream.FullCalendar = (function(SS, $, Scheduler, undefined){
   var callback = new SS.Callback(),
@@ -119,7 +120,8 @@ SocialStream.FullCalendar = (function(SS, $, Scheduler, undefined){
 
   callback.register('show',
                     initFullCalendar,
-                    initFormModal);
+                    initFormModal,
+                    SS.Object.new_);
 
   callback.register('create',
                     addEvent,
