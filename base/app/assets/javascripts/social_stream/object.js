@@ -7,8 +7,33 @@ SocialStream.Object = (function(SS, $, undefined){
   var initRelationSelect = function(options){
     $('select[name*="relation_ids"]').multiselect({
       'buttonClass': 'btn btn-small',
-      'buttonText': relationSelectText
+      'buttonText': relationSelectText,
+      'onChange': relationChange
     });
+  };
+
+  var relationChange = function(option, checked) {
+    var opt      = $(option),
+        optId    = opt.val(),
+        select   = opt.closest('select'),
+        div      = opt.closest('.form-privacy'),
+        publicId = div.attr('data-public_id'),
+        inputs,
+        options;
+
+     if (optId === publicId) {
+       options = select.find('option[value!="' + publicId + '"]');
+       inputs = div.find('input[value!="' + publicId + '"]');
+       } else {
+       options = select.find('option[value="' + publicId + '"]');
+       inputs  = div.find('input[value="' + publicId + '"]');
+     }
+
+     options.prop('selected', false);
+     inputs.prop('checked', false);
+     inputs.closest('li').removeClass('active');
+
+     $('button', div).html(relationSelectText($('option:selected', select)));
   };
 
   var relationSelectText = function(options) {
