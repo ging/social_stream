@@ -1,0 +1,67 @@
+.cube {
+  -webkit-transform: rotate(10deg);
+  -moz-transform: rotate(10deg);
+}
+
+.cube:hover {
+  -webkit-animation: float 2s infinite ease-in-out;
+  -moz-animation: float 2s infinite ease-in-out;
+  -o-animation: float 2s infinite ease-in-out;
+  animation: float 2s infinite ease-in-out;
+  -webkit-transform: rotate(10deg);
+  -moz-transform: rotate(10deg);
+}
+
+@-webkit-keyframes float {
+  0% {
+    -webkit-transform: translate(0px, 3px);
+  }
+  50% {
+    -webkit-transform: translate(0px, 0px);
+    
+  }
+  100% {
+    -webkit-transform: translate(0px, 3px);
+  }
+}
+
+.face {
+  background-color: #ffffff; 
+  border: 3px solid #888; 
+  border-radius: 3px;
+}
+
+.cenit {
+  -webkit-transform: rotate(-45deg) skew(15deg, 15deg);
+  -moz-transform: rotate(-45deg) skew(15deg, 15deg);
+}
+
+.cenit-shape{ 
+  background: #08C; 
+  border: 4px solid #08C; 
+  border-radius: 3px;
+}
+
+.left {
+  -webkit-transform: rotate(15deg) skew(15deg, 15deg);
+  -moz-transform: rotate(15deg) skew(15deg, 15deg);
+}
+
+.left-shape{ 
+  background: #08C; 
+  border: 4px solid #08C; 
+  margin-left: 35px; 
+  border-radius: 3px;
+ }
+
+.demoright {
+  -webkit-transform: rotate(-15deg) skew(-15deg, -15deg);
+  -moz-transform: rotate(-15deg) skew(-15deg, -15deg);
+}
+
+.shadow{
+  box-shadow:  -5px -22px 11px 10px rgba(50, 50, 50, .5);
+    -webkit-box-shadow:  -5px -22px 11px 10px rgba(50, 50, 50, .5);
+    -webkit-transform: rotate(25deg) skew(-30deg, 10deg);
+    -moz-transform: rotate(25deg) skew(-30deg, 10deg)
+}

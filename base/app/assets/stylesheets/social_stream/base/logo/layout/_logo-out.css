@@ -1,0 +1,50 @@
+.cube {
+  position:relative;
+  left: -38px;
+  z-index: 2;
+  float: left;
+}
+
+.face {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+}
+
+.cenit {
+  margin-top: -4px;
+  margin-left: 68px;
+}
+
+.cenit-shape{ 
+  margin-top: -10px;
+  width: 28px;
+  height: 28px;
+
+} 
+.left {
+  margin-top: 23px;
+  margin-left: 53px;
+}
+
+.left-shape{ 
+  margin-left: 48px; 
+  margin-top: 26px;
+  width: 28px;
+  height: 28px;  
+ }
+
+.demoright {
+  margin-top: 24px;
+  margin-left: 83px;
+}
+
+.shadow{
+  z-index: 1;
+  width: 12px;
+  height: 9px;
+  position: relative;
+  float: left;
+  margin-top: 79px;
+  margin-left: 14px;
+}
