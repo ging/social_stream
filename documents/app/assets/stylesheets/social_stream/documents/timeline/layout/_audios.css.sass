@@ -1,8 +1,14 @@
 @import "jplayer.blue.monday"
 
 div.jp-audio
-  @include makeColumnoMargin(6, 0)
-  widht: auto
+  width: 100%
+  div.jp-type-single,
+  div.jp-progress 
+    top: 2px  !important
+    left: 8px  !important
+    width: 97%  !important
+    height: 60%   !important
+
 
 #jp_interface_audio_290
   height: 118px
@@ -12,11 +18,17 @@ div.jp-progress
   @include centered
 
   div.jp-seek-bar
+    width: 100%
     .waveform
       float: left
 
 .jp-interface
   height: 125px !important
+
+
+a.jp-play,
+a.jp-pause
+  left: 4px !important
 
 
 a.jp-play,
@@ -31,7 +43,7 @@ a.jp-unmute,
   top: 93px !important
   left: 45px !important
 
-jp-volume-bar
+.jp-volume-bar
   top: 98px !important
   left: 45px !important
 
