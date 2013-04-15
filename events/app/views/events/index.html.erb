@@ -7,21 +7,22 @@
 
   <div id="calendar" class="table-striped" data-events_path="<%= polymorphic_path [profile_subject, Event.new] %>" data-date="<%= params[:date] %>" data-view="<%= params[:view] %>" <%= 'data-can-create="true"' if can?(:create, new_post(profile_subject)) %>></div>
 
-  <div id="calendar_form" class="modal hide fade">
-    
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-        &times;
-      </button>
-      <h3>
-        <%= t('event.new.title') %>
-      </h3>
-    </div>
+  <% if can? :create, new_post(profile_subject) %>
+    <div id="calendar_form" class="modal hide fade">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h3>
+          <%= t('event.new.title') %>
+        </h3>
+      </div>
 
-    <div class="modal-body">
-      <%= render partial: 'new' %>
+      <div class="modal-body">
+        <%= render partial: 'new' %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </section>
 
 <%= javascript_tag do %>
