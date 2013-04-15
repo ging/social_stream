@@ -1,4 +1,4 @@
-.cube {
+.logo-header-out .cube {
   position:relative;
   left: -38px;
   z-index: 2;
@@ -7,7 +7,7 @@
     -moz-transform: rotate(10deg);
 }
 
-.cube:hover {
+.logo-header-out .cube:hover {
   -webkit-animation: float 2s infinite ease-in-out;
   -moz-animation: float 2s infinite ease-in-out;
   -o-animation: float 2s infinite ease-in-out;
@@ -29,7 +29,7 @@
   }
 }
 
-.face {
+.logo-header-out .face {
   position: absolute;
   width: 30px;
   height: 30px;
@@ -38,14 +38,14 @@
   border-radius: 3px;
 }
 
-.cenit {
+.logo-header-out .cenit {
   margin-top: -4px;
   margin-left: 68px;
     -webkit-transform: rotate(-45deg) skew(15deg, 15deg);
     -moz-transform: rotate(-45deg) skew(15deg, 15deg);
 }
 
-.cenit-shape{ 
+.logo-header-out .cenit-shape{ 
   background: #08C; 
   border: 4px solid #08C; 
   border-radius: 3px;
@@ -54,14 +54,14 @@
   height: 28px;
 
 } 
-.left {
+.logo-header-out .left {
   margin-top: 23px;
   margin-left: 53px;
     -webkit-transform: rotate(15deg) skew(15deg, 15deg);
     -moz-transform: rotate(15deg) skew(15deg, 15deg);
 }
 
-.left-shape{ 
+.logo-header-out .left-shape{ 
   background: #08C; 
   border: 4px solid #08C; 
   margin-left: 48px; 
@@ -71,14 +71,14 @@
   height: 28px;  
  }
 
-.demoright {
+.logo-header-out .demoright {
   margin-top: 24px;
   margin-left: 83px;
     -webkit-transform: rotate(-15deg) skew(-15deg, -15deg);
     -moz-transform: rotate(-15deg) skew(-15deg, -15deg);
 }
 
-.shadow{
+.logo-header-out .shadow{
   z-index: 1;
   width: 12px;
   height: 9px;
