@@ -39,8 +39,12 @@ class NotificationsController < ApplicationController
   def update_all
     @notifications= @mailbox.notifications.all
     @actor.mark_as_read @notifications
-    @notifications = @mailbox.notifications.not_trashed.page(params[:page]).per(10)
-    render :action => :index
+
+    if request.xhr?
+      render text: ''
+    else
+      redirect_to notifications_path
+    end
   end
 
   def destroy

@@ -3,7 +3,7 @@
 
 	<div class="read_all">
 	  <%= link_to(t('notification.read_all'), update_all_notifications_path(:page => params[:page]),
-	      :confirm => t('sure'),:method => :put, :remote => true) %>
+	      :method => :put, class: 'mark_as_read') %>
 	</div>
 
 	<div class="list"> 
@@ -13,4 +13,9 @@
 	    <%= render :partial => 'notification', :object => notification, :locals => {:read_class => read_class} %>
 	  <% end %>
 	</div>
+  <%= javascript_tag do %>
+    $(function() {
+      SocialStream.Notification.index();
+    });
+  <% end %>
 </div>
