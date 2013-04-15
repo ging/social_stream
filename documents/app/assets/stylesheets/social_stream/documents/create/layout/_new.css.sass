@@ -1,34 +1,32 @@
-#new_file
-  padding: 2%
-  form
-    margin: 0 0 40px
-
-  section
-    padding-top: 15px
-    label
-      padding: 2px 0 0 14px
-  .upload,
-  .title,
-  .tags
-    height: 58px
-  .upload
-    margin-top: 0px
-    padding-top: 0px
+#new_document-modal
+  .modal-body
+    max-height: 520px  
+    padding: 0 15px 15px 15px
+    form.new_site_client
+      margin-left: 0px
+      width: 100%
+      .name,
+      .url
+        margin-left: 0px
+        width: 100%
     input
       &[type="file"]
-        display: inline
-        width: 96%
-
-  .title
-    input
-      &[type="text"]
-        display: inline
-        width: 94%
-  .description
-    textarea
-      display: inline-block
-      @include size (70px, 94%)
-  input
-    &[type="submit"]
-      margin-top: 11px
-      width: 100%
+        line-height: 0px
+  #new_file
+    label 
+      font-size: 22px
+      font-weight: bold
+      color: #CCC
+    form.new_document
+      section
+        border-bottom: 1px dashed #CCC
+        padding-top: 15px
+        padding-bottom: 15px
+      #document_file
+        @include ellipsis
+      .description
+        textarea
+          height: 100px
+      input
+        &[type="submit"]
+          margin: 8px 0 0
