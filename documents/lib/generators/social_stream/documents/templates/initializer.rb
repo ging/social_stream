@@ -2,20 +2,30 @@ SocialStream::Documents.setup do |config|
   # Configure picture thumbnails
   #
   # config.picture_styles = {
-  #    :thumb48sq  => ["48x48"],
-  #    :thumbwall => ["130x97#"],
-  #    # midwall preserves A4 proportion: 210x297
-  #    :midwall => ["80x113#"],
-  #    :preview => ["500>"]
+  #   :"170x127#" => ["170x127#"],
+  #   # this one preserves A4 proportion: 210x297
+  #   :"80x113#" => ["80x113#"],
+  #   :"500" => ["500>"],
+  #   :"540x220" => ["540x220>"]
   #  }
 
   # Configure audio thumbnails
   #
   # config.audio_styles = {
-  #   webma: { format: 'webm'},
-  #   waveform: { format: :png,
-  #               convert_options: {}
-  #   }
+  #    webma: {
+  #      format: 'webm',
+  #      processors: [ :ffmpeg ]
+  #    },
+  #    waveform: {
+  #      format: :png,
+  #      convert_options: {
+  #        color: :transparent,
+  #        background_color: 'ffffff',
+  #        width: 460,
+  #        height: 75
+  #      },
+  #      processors: [ :waveform ]
+  #    }
   # }
 
   # Configure video thumbnails
@@ -24,9 +34,7 @@ SocialStream::Documents.setup do |config|
   #    :webm => { :format => 'webm' },
   #    :flv  => { :format => 'flv' },
   #    :mp4  => { :format => 'mp4' },
-  #    :poster  => { :format => 'png', :time => 5 },
-  #    :thumb48sq  => { :geometry => "48x48" , :format => 'png', :time => 5 },
-  #    :thumbwall => { :geometry => "130x97#", :format => 'png', :time => 5 }
+  #    :"170x127#" => { :geometry => "170x127#", :format => 'png', :time => 5 }
   #  }
 
   # List of mime types that have an icon defined
