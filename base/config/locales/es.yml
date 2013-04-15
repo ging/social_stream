@@ -389,7 +389,7 @@ es:
     like:
       group: "A %{sender} le gusta el %{thing} %{whose}." 
       user: "A %{sender} le gusta tu %{thing}."
-    look: "Echa un vistazo al muro de %{sender}"
+    look: "Echa un vistazo al perfil de %{sender}"
     makefriend:
       group: "%{sender} también añadió a %{who} como contacto."
       user: "%{sender} también te añadió como contacto."

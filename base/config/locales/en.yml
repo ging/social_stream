@@ -391,7 +391,7 @@ en:
     like:
       group: "%{sender} likes %{whose} %{thing}." 
       user: "%{sender} likes %{whose} %{thing}."
-    look: "Take a look at %{sender}'s wall"
+    look: "Take a look at %{sender}'s profile"
     makefriend:
       group: "%{sender} also added %{who} as contact."
       user: "%{sender} also added %{who} as contact."
