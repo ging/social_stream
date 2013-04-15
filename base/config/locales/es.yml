@@ -17,7 +17,6 @@ es:
       change: "Cambiar contraseña"
       new: "Nueva contraseña"
       retype: "Repetir nueva contraseña"
-    privacy: "Privacidad"
   activerecord:
     attributes:
       contact:
@@ -223,6 +222,10 @@ es:
       forgot: "¿Olvidaste tu contraseña?"
       instructions: "Introduce el correo electrónico y te mandaremos instrucciones para cambiarlo"
       update: "Cambiar contraseña"
+  dropdown:
+    notifications: "Notificaciones"
+    privacy: "Privacidad"
+    settings: "Ajustes"
   explore:
     explore:
       most_followed: "Más seguidos"

@@ -17,7 +17,6 @@ en:
       change: "Change password"
       new: "New password"
       retype: "Retype new password"
-    privacy: "Privacy"
   activerecord:
     attributes:
       contact:
@@ -225,6 +224,10 @@ en:
       forgot: "Forgot your password?"
       instructions: "Type the email address bound to your account and we will sent you instructions to change it:"
       update: "Change your password"
+  dropdown:
+    notifications: "Notifications"
+    privacy: "Privacy"
+    settings: "Settings"
   explore:
     explore:
       most_followed: "Most followed"
