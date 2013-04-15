@@ -34,7 +34,7 @@ describe NotificationsController do
     put :update_all
     @receipt.notification.is_unread?(@actor).should==false
     @receipt2.notification.is_unread?(@actor).should==false
-    assert_response :success
+    response.should redirect_to(notifications_path)
   end
   
   it "should send to trash" do
