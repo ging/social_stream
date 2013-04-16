@@ -1,4 +1,6 @@
-<%= render :partial => 'objects/show',
-           :locals  => { :object => @link } %>
+<section id="link">
+  <%= render :partial => 'objects/show',
+             :locals  => { :object => @link } %>
 
-<%= render @link.post_activity %>
+  <%= render @link.post_activity %>
+</section>

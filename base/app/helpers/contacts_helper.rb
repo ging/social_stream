@@ -1,6 +1,10 @@
 module ContactsHelper
   def contact_brief(subject)
-    t 'contact.in_common', :count => current_subject.common_contacts_count(subject)
+    if user_signed_in?
+      t 'contact.in_common', :count => current_subject.common_contacts_count(subject)
+    else
+      t 'contact.n', count: subject.sent_active_contact_count
+    end
   end
 
   def contact_link(c)

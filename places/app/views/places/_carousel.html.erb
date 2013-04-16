@@ -1,14 +1,14 @@
 <% photos = @place.photos %>
 <% unless photos.empty? %>
   <% if photos.length == 1 %>
-  <div class="no-carousel"><%= thumb_for(photos.first, '540x220') %></div>
+  <div class="no-carousel"><%= thumb_for(photos.first, '500') %></div>
   <% else %>
     <div id="myCarousel" class="carousel slide">
       <!-- Carousel items -->
       <div class="carousel-inner">
-        <div class="active item"><%= thumb_for(photos.first, '540x220') %></div>
+        <div class="active item"><%= thumb_for(photos.first, '500') %></div>
         <% photos[1..(photos.length() -1)].each do |p| %>
-          <div class="item"><%= thumb_for(p, '540x220') %></div>
+          <div class="item"><%= thumb_for(p, '500') %></div>
         <% end %>
       </div>
       <!-- Carousel nav -->
