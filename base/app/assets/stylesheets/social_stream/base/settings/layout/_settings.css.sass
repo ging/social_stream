@@ -2,20 +2,16 @@
   #toolbar
     @include hidden-phone
     @include hidden-tablet
-  h2
-    @include ellipsis
   .settings
     @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
     float: left
     margin-left: 2%
     h2
-      @include ellipsis
       margin-top: 0
     .accordion
       margin-bottom: 0
       .settings_content
         padding: 0px 15px 0px
-        @include gradient-vertical-three-colors($startColor: #e2e2e2, $midColor: #ededed, $colorStop: 3%, $endColor: #f1f1f1)
         .accordion-toggle
           @include ellipsis
         form

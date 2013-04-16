@@ -7,15 +7,21 @@
 div.jp-progress
   div.jp-seek-bar
     background: none
+    width: 100%
+    img
+      height: 100%
 
     div.jp-play-bar
       background: none black
 
 
-.jp-interface
+div.jp-interface
   border: none !important
+  @include gradient-radial ($innerColor: #666, $outerColor: #333)
 
 
 div.jp-playlist
   border: none
 
+div.jp.audio
+  color: #c9c9c9
