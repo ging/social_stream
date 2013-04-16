@@ -1,0 +1,78 @@
+.logo-header-in 
+  .cube
+    position: relative
+    left: -38px
+    z-index: 2
+    float: left
+    @include rotate(10deg)
+
+    &:hover
+      @include animation (float 2s infinite ease-in-out)
+      @include rotate(10deg)
+
+    @-webkit-keyframes float
+      0% 
+        -webkit-transform: translate(0px, 3px)
+      
+      50%
+        -webkit-transform: translate(0px, 0px)
+        
+      100% 
+        -webkit-transform: translate(0px, 3px)
+
+    .face
+      position: absolute
+      width: 14px
+      height: 14px
+      background-color: #ffffff
+      border: 3px solid #888
+      border-radius: 3px
+
+    .top-plane
+      margin-top: 1px
+      margin-left: 47px
+      @include skew(15deg, 15deg)
+      @include rotate(-45deg)
+
+    .top-plane-shape
+      background: #08C 
+      border: 4px solid #08C 
+      border-radius: 3px
+      margin-top: -5px
+      width: 12px
+      height: 12px
+
+    .left-plane
+      margin-top: 15px
+      margin-left: 39px
+      @include skew(15deg, 15deg)
+      @include rotate(15deg)
+
+    .left-shape 
+      background: #08C
+      border: 4px solid #08C
+      margin-left: 35px
+      border-radius: 3px
+      margin-top: 18px
+      width: 12px
+      height: 12px  
+     
+
+    .demoright
+      margin-top: 14px
+      margin-left: 55px
+      @include skew(15deg, 15deg)
+      @include rotate(15deg)
+
+
+  .shadow
+    z-index: 1
+    width: 0
+    height: 0px
+    position: relative
+    float: left
+    margin-top: 54px
+    margin-left: -1px
+    @include box-shadow (-5px -22px 11px 10px rgba(50, 50, 50, .5))
+    @include skew(25deg, -30deg)
+    @include rotate(10deg)

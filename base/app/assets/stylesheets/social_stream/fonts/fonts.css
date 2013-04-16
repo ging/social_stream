@@ -1,16 +1,29 @@
 /************* typography*******/
 
 @font-face{
-  font-family:OpenSans;
+  font-family:"OpenSans";
   src: url(social_stream/fonts/opensans-regular.ttf);
 }
 
 @font-face{
-  font-family:BreeSerif;
+  font-family:"BreeSerif";
   src: url(social_stream/fonts/BreeSerif-Regular.ttf);
 }
 
 @font-face{
-  font-family:Giveyouglory;
+  font-family:"Giveyouglory";
   src: url(social_stream/fonts/GiveYouGlory.ttf);
+}
+@font-face{
+  font-family: "Din OSP";
+  font-weight: normal;
+  font-style: normal;
+  src: url(social_stream/fonts/DIN_OSP-Original.ttf);
+}
+
+@font-face{
+  font-family: 'Din Overlay';
+  font-weight: normal;
+  font-style: normal;
+  src: url(social_stream/fonts/DIN_OSP-Overlay.ttf);
 }

@@ -1,0 +1,11 @@
+/************* typography COLORFONT PLUGING*******/
+
+.colorfont {
+  color: #aaa;
+  font-family: 'Din OSP' !important;
+}
+
+.colorfont-overlay {
+  color: #ccc;
+  font-family: 'Din Overlay' !important;
+}
