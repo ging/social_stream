@@ -8,13 +8,7 @@ class UsersController < ApplicationController
   respond_to :html, :xml, :js
   
   def index
-    @users = User.alphabetic.
-                  letter(params[:letter]).
-                  name_search(params[:search]).
-                  tagged_with(params[:tag]).
-                  page(params[:page]).per(10)
-
-
+    raise ActiveRecord::RecordNotFound
   end
 
   def current

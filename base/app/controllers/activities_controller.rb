@@ -8,7 +8,6 @@ class ActivitiesController < ApplicationController
 
     respond_to do |format|
       format.html { render @activities }
-      format.js
       format.atom
     end
   end
