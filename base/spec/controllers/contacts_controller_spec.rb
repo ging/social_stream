@@ -11,11 +11,24 @@ describe ContactsController do
     @user = @tie.sender_subject
   end
 
-  it "should render index" do
-    sign_in @user
+  context "anonymous" do
+    it "should render index" do
+      get 'index', user_id: @user.to_param
 
-    get 'index'
-    response.should be_success
+      response.should be_success
+    end
+  end
+
+  context "authenticated" do
+    before do
+      sign_in @user
+    end
+
+    it "should render index" do
+      get 'index'
+
+      response.should be_success
+    end
   end
 
   it "should render pending" do

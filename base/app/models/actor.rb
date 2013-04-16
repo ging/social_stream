@@ -349,6 +349,10 @@ class Actor < ActiveRecord::Base
       sent_actions.create!(:activity_object => ActivityObject.normalize(activity_object))
   end
 
+  def sent_active_contact_count
+    sent_contacts.active.count
+  end
+
   def sent_active_contact_ids
     @sent_active_contact_ids ||=
       load_sent_active_contact_ids
