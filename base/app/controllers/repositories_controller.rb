@@ -23,6 +23,7 @@ class RepositoriesController < ApplicationController
   def collection
     @collection ||=
       ActivityObject.
+        select("DISTINCT activity_objects.*").
         where(object_type: SocialStream.repository_models.map(&:to_s).map(&:classify)).
         includes(SocialStream.repository_models).
         collection(profile_subject, current_subject).
