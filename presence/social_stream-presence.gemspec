@@ -5,7 +5,7 @@ require "social_stream/presence/version"
 Gem::Specification.new do |s|
   s.name        = "social_stream-presence"
   s.version     = SocialStream::Presence::VERSION
-  s.authors     = ["Aldo Gordillo"]
+  s.authors     = ["Aldo Gordillo", "GING"]
   s.email       = ["agordillos@gmail.com"]
   s.homepage    = "https://github.com/ging/social_stream/wiki/Getting-Started-With-Social-Stream-Presence"
   s.summary = "Presence capabilities for Social Stream, the core for building social network websites."
@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   
   # Gem dependencies
-  s.add_runtime_dependency('social_stream-base', '~> 2.0.0')
+  s.add_runtime_dependency('social_stream-base', '~> 2.0.0.beta1')
   
   s.add_runtime_dependency "xmpp4r"
 
