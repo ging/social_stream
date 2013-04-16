@@ -55,8 +55,6 @@ require 'bootstrap-sass'
 require 'deface'
 # Autolink text blocks
 require 'rails_autolink'
-# SocialCheesecake
-require 'social_cheesecake'
 # I18n-js
 require 'i18n-js'
 require 'i18n-js/social_stream-base'
