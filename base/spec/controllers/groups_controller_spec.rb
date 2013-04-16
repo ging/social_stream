@@ -7,18 +7,6 @@ describe GroupsController do
   render_views
 
   describe "when Anonymous" do
-    it "should render index" do
-      get :index
-
-      assert_response :success
-    end
-
-    it "should render index with most followed" do
-      get :index, :most => 'followed'
-
-      response.should be_success
-    end
-
     it "should render show" do
       get :show, :id => Factory(:group).to_param
 
@@ -54,12 +42,6 @@ describe GroupsController do
       @user = Factory(:user)
 
       sign_in @user
-    end
-
-    it "should render index" do
-      get :index
-
-      assert_response :success
     end
 
     it "should render contact group" do
