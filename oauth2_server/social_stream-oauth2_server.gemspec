@@ -14,4 +14,6 @@ Gem::Specification.new do |s|
   # Gem dependencies
   s.add_runtime_dependency('social_stream-base', '~> 2.0.0.beta1')
   s.add_runtime_dependency('rack-oauth2', '~> 1.0.0')
+
+  s.add_development_dependency('rspec-rails', '~> 2.8.0')
 end
