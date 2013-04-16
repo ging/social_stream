@@ -1,26 +1,29 @@
 <section id="repository">
   <% if profile_subject? %>
     <%= render partial: 'toolbar/profile', locals: { subject: profile_subject } %>
-  <% else %>
+    <% else %>
     <%= render partial: 'toolbar/home' %>
   <% end %>
+  <div class="repository">
+    <h1 class="colorfont">
+      <%= t 'repository.title' %>
+    </h1>
 
-  <h1><%= t 'repository.title' %></h1>
+    <%= render partial: 'filter' %>
 
-  <%= render partial: 'filter' %>
+    <%= render partial: 'common_documents/new_button',
+               locals: { owner: profile_or_current_subject } %>
 
-  <%= render partial: 'common_documents/new_button',
-             locals: { owner: profile_or_current_subject } %>
+    <section class="repository">
+      <%= render partial: 'layouts/loading' %>
 
-  <section class="repository">
-    <%= render partial: 'layouts/loading' %>
-
-    <section class="repository-list">
-      <%= render @collection %>
+      <section class="repository-list">
+        <%= render @collection %>
+      </section>
     </section>
-  </section>
 
-  <%= javascript_tag do %>
-    SocialStream.Repository.show();
-  <% end %>
+    <%= javascript_tag do %>
+      SocialStream.Repository.show();
+    <% end %>
+  </div>
 </section>

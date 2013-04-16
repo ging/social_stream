@@ -1,18 +1,20 @@
 <div class="notifications">
-	<h2><%= t('notification.other') %></h2>
+  <h1 class="colorfont">
+    <%= t('notification.other') %>
+  </h1>
 
-	<div class="read_all">
-	  <%= link_to(t('notification.read_all'), update_all_notifications_path(:page => params[:page]),
-	      :method => :put, class: 'mark_as_read') %>
-	</div>
+  <div class="read_all">
+    <%= link_to(t('notification.read_all'), update_all_notifications_path(:page => params[:page]),
+        :method => :put, class: 'mark_as_read') %>
+  </div>
 
-	<div class="list"> 
-	  <% @notifications.each do |notification|%>
-	    <% @notification = notification %>
-	    <% read_class = notification.is_unread?(@actor) ? 'unread' : '' %>
-	    <%= render :partial => 'notification', :object => notification, :locals => {:read_class => read_class} %>
-	  <% end %>
-	</div>
+  <div class="list"> 
+    <% @notifications.each do |notification|%>
+      <% @notification = notification %>
+      <% read_class = notification.is_unread?(@actor) ? 'unread' : '' %>
+      <%= render :partial => 'notification', :object => notification, :locals => {:read_class => read_class} %>
+    <% end %>
+  </div>
   <%= javascript_tag do %>
     $(function() {
       SocialStream.Notification.index();
