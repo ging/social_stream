@@ -18,17 +18,14 @@
           <%= document.title %>
         </h6>
         <div class="actions">
+          <%= link_to raw("<i class='icon_tool16-save'></i> "), download_document_path(document), title: t('document.actions.download') %>
+
           <% if can? :destroy, document %>
-            
-            <%= link_to raw("<i class='icon_tool16-save'></i> "), download_document_path(document), title: t('document.actions.download') %>
-
-          <% end %>
-
-          <%= link_to raw("<i class='icon_tool16-trash'></i> "),  document,
+            <%= link_to raw("<i class='icon_tool16-trash'></i> "),  document,
                         confirm: t('confirm_delete', scope: document.class.to_s.underscore),
                         title: t('document.actions.delete'),
                         method: :delete %>
-          
+          <% end %>
           </div>
         </div>
 

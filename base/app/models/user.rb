@@ -127,33 +127,28 @@ class User < ActiveRecord::Base
       record
     end
 
-    def find_or_create_for_facebook_oauth(hash, signed_in_resource = nil)
-      puts hash.inspect
-      auth = Authentication.find_by_provider_and_uid(hash["provider"], hash["uid"])
-      user = User.find_by_email(hash["info"]["email"])
+    def find_or_create_for_oauth(info, signed_in_user = nil)
+      auth = Authentication.find_by_provider_and_uid(info["provider"], info["uid"])
 
-      if user.nil?
-        user = User.create!(:name => hash["info"]["name"], :email => hash["info"]["email"], :password => Devise.friendly_token[0,20])
+      if auth.present?
+        if signed_in_user.present? && auth.user != signed_in_user
+          raise "Authenticated users mismatch: signed_in: #{ signed_in_user.id }, auth: #{ auth.user_id }"
+        end
+
+        return auth.user
       end
 
-      if auth.nil?
-        auth = Authentication.create!(:user_id => user.id, :uid =>hash["uid"], :provider => hash["provider"])
-      end
+      user = signed_in_user ||
+        info["info"]["email"].present? && User.find_by_email(info["info"]["email"]) ||
+        User.create!(name: info["info"]["name"],
+                     email: info["info"]["email"] || "no-reply-#{ Devise.friendly_token }@demo-social-stream.dit.upm.es", # TODO: split credentails from validation
+                     password: Devise.friendly_token[0,20])
 
+
+      Authentication.create! user:     user,
+                             uid:      info["uid"],
+                             provider: info["provider"]
       user
     end
-    
-    def find_or_create_for_linkedin_oauth(hash,signed_in_resource=nil)
-      auth = Authentication.find_by_uid_and_provider(hash["uid"],hash["provider"])
-      if auth==nil
-        user = User.create!(:name => hash["info"]["name"], :email => 'demo@socialstream.com', :password => Devise.friendly_token[0,20])
-        auth = Authentication.create!(:user_id => user.id, :uid =>hash["uid"], :provider => hash["provider"])
-        user
-      else
-        user = User.find_by_id(auth.user_id)
-        user
-      end
-    end
-    
   end
 end
