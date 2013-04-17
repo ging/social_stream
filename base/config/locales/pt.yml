@@ -338,6 +338,7 @@ pt:
     name: "postagem"
     one: "uma postagem"
     title: "Postagens"
+    other: "%{count} postagens"
   preposition:
     and: "e"
     on: "em"
