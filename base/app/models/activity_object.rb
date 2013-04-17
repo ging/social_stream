@@ -95,8 +95,10 @@ class ActivityObject < ActiveRecord::Base
   scope :followed, order("activity_objects.follower_count DESC")
 
   scope :followed_by, lambda { |subject|
-    joins(:received_actions).
-      merge(ActivityAction.sent_by(subject).where(:follow => true))
+    if subject.present?
+      joins(:received_actions).
+        merge(ActivityAction.sent_by(subject).where(:follow => true))
+    end
   }
 
   scope :not_actor, where('activity_objects.object_type != ?', "Actor")
