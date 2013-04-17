@@ -11,7 +11,7 @@
   <h4>
     <%= t 'explore.participants.last_registered' %>
   </h4>
-  <% User.last_registered.first(3).each do |u| %>
+  <% User.last_registered.first(5).each do |u| %>
     <%= render partial: 'explore/last_registered', locals: { object: u } %>
   <% end %>
 </section>
