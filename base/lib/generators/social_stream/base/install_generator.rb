@@ -9,9 +9,7 @@ class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
 
   def devise_initializer_config
     inject_into_file "config/initializers/devise.rb",
-                     "\n  config.omniauth :linkedin, \"ekxfXU8nueVSMQ9fc5KJAryBkyztUlCBYMW3DoQPzbE79WhivvzhQloRNHCHgPeB\", \"WYiHFT-KKFgjd45W3-pEAficmXRHmN6_6DGwj1C_ZILJlSO1gBvv6VNYXU9tybGY\"
-                      \n  config.omniauth :facebook, \"129571360447856\",\"eef39dce5e20e76f77495c59623bdb38\"
-                      \n  #config.omniauth :twitter, \"wgTxO0fTpjTeSnjKC9ZHA\",\"JepulVWwLcuAnGfWjwCu47yEP0TcJJfKtvISPBsilI\"
+                     "  config.omniauth :socialstream, \"4\",\"00053446bc0361d60889b734d9e5f6132cccf3d08abb25a39bc79e23edde80d5900c37ec69aa0aaf7f969bb046858429ffb318de789b553b03ed672ff75859ab\"
                       \n  config.token_authentication_key = :auth_token
                       \n  config.skip_session_storage << :token_auth",
                       :after => "  # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'"
