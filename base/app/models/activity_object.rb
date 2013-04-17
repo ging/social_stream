@@ -112,6 +112,22 @@ class ActivityObject < ActiveRecord::Base
       merge(ActivityObjectAudience.where(:relation_id => Relation.ids_shared_with(subject)))
   }
 
+  scope :public, -> {
+    shared_with(nil)
+  }
+
+  scope :trending, -> {
+    not_actor.popular.public
+  }
+
+  scope :most_viewed, -> {
+    not_actor.visited.public
+  }
+
+  scope :last_uploaded, -> {
+    not_actor.created.public
+  }
+
   # Obtain the {ActivityAction} between this {ActivityObject}
   # and the {Actor} identified by actor_id
   def received_action_by(actor_id)
