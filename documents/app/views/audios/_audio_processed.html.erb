@@ -38,6 +38,11 @@
           
           <div class="jp-duration">
           </div>
+          <a class="jp-details">see details..
+          </a>
+          <%= render partial: 'objects/timeline_description',
+               object: audio,
+               as: :obj %>
         </div>
       </div>
       <div id="jp_playlist_<%= dom_id audio %>" class="jp-playlist"></div>
