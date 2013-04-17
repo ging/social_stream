@@ -3,7 +3,7 @@
     <%= t 'explore.resources.most_visited' %>
   </h4>
 
-  <% ActivityObject.not_actor.visited.first(3).each do |ao| %>
+  <% ActivityObject.not_actor.visited.first(5).each do |ao| %>
     <%= render partial: 'explore/resources_most_visited', locals: { object: ao } %>
   <% end %>
 </section>
@@ -13,7 +13,7 @@
     <%= t 'explore.resources.last_uploaded' %>
   </h4>
 
-  <% ActivityObject.not_actor.created.first(3).each do |ao| %>
+  <% ActivityObject.not_actor.created.first(5).each do |ao| %>
     <%= render partial: 'explore/resources_last_uploaded', locals: { object: ao } %>
   <% end %>
 </section>
