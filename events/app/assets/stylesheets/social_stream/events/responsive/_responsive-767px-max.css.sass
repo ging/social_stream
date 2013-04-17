@@ -19,11 +19,11 @@
           width: 50%
           display: inline-block !important
 
-
-
+  #calendar 
+    @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    margin-left: 0
   #events
-    #toolbar
-      @extend .hidden-phone
+
     td
       .fc-button
         padding: 3.5% !important
