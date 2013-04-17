@@ -5,15 +5,27 @@
   border: none
 
 div.jp-progress
+  width: 98.5% !important
+  border-bottom: 2px solid #ddd
+  border-right: 2px solid #666
   div.jp-seek-bar
     background: none
     width: 100%
+    border: 2px solid #555
     img
       height: 100%
+      width: 100%
 
     div.jp-play-bar
-      background: none black
-
+      background: none $blue
+div.down
+  div.jp-current-time
+    width: 123px !important
+    background-color: rgba(0, 0, 0, .1)
+    @include border-radius(8px)
+    color: rgba(245, 245, 245, 0.3)
+    padding: 0 3px
+    border-top: 1px solid #333
 
 div.jp-interface
   border: none !important
@@ -25,3 +37,15 @@ div.jp-playlist
 
 div.jp.audio
   color: #c9c9c9
+
+div.jp.controls
+  jp.play,
+  jp.pause,
+  jp.mute,
+  jp.unmute
+    margin-left: 10px
+
+div.jp.volume-bar
+  margin-left: 6px
+  margin-top: 5px
+  div.jp-duration

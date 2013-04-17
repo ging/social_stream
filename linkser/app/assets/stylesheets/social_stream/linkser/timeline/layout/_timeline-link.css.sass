@@ -29,21 +29,7 @@
         p 
           margin: 0 0 4px
 
-.link
-  display: inline
-  margin-left: 19px
-  width: 100%
-  .thumb
-    @include makeColumnoMargin(1, 0)
-    display: inline
-  .text
-    width: 97%
-    display: inline-block
-    .description
-      p
-        a
-          display: block 
-#link
+.activity
   .link
     display: inline
     margin-left: 19px
@@ -51,8 +37,9 @@
     .thumb
       @include makeColumnoMargin(2, 0)
       display: inline
-    .text-ev
-      width: 87%
+      margin-right: 16px
+    .text
+      width: 62%
       display: inline-block
       .description
         p
@@ -77,3 +64,19 @@
         display: inline-block
     textarea
       width: 100%
+
+  #link
+    .link
+      display: inline
+      margin-left: 19px
+      width: 100%
+      .thumb
+        @include makeColumnoMargin(1, 0)
+        display: inline
+      .text
+        width: 97%
+        display: inline-block
+        .description
+          p
+            a
+              display: block 
