@@ -4,14 +4,39 @@
 
 
 @media (min-width: 1200px)
+  body
+    font-size: 17px
+    line-height: 22px
+  label
+    margin-bottom: 0
+    font-size: 17px
+    line-height: 32px
 
+  h1 
+    font-size: 41px
+  h2 
+    font-size: 35px
+  h3
+    font-size: 27px
+  h4
+    font-size: 22px
+  h5
+    font-size: 17px
+  h5
+    font-size: 14px
+
+  header
+    .navbar-inner
+      .explore-nav
+        width: 105px
+    .dropdown-menu
+      li
+        a
+          padding: 8px 20px
   #home
     margin-left: auto
     margin-right: auto
-    #toolbar
-      width: 12.28571%
-      float: left
-      margin-left: 3.25%
+
     .activities
       @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
       float: left
@@ -29,8 +54,6 @@
   #user,
   #groups
     #toolbar
-      @include grid-core-span(2, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      float: left
       .user
         .logo_home,
         #avatar_profile
@@ -45,11 +68,30 @@
       margin-rigth: 2%
 
     #sidebar
-      @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      width: 20%
       float: right
       
-
-
+  .timeline
+    .objects
+      .text
+        h6
+          font-size: 18px !important
+      .url
+        a
+          font-size: 14px !important
+      .description
+        p
+          font-size: 16px
+    .actions
+      .post_time_ago,
+      .to_comment,
+      .to_like,
+      .audience
+        font-size: 14px !important
+    .comments
+      h6
+        a
+          font-size: 16px !important
 
   #profile
     @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)

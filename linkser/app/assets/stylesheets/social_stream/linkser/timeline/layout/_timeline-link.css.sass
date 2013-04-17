@@ -32,6 +32,7 @@
 .link
   display: inline
   margin-left: 19px
+  width: 100%
   .thumb
     @include makeColumnoMargin(1, 0)
     display: inline
@@ -42,3 +43,37 @@
       p
         a
           display: block 
+#link
+  .link
+    display: inline
+    margin-left: 19px
+    width: 100%
+    .thumb
+      @include makeColumnoMargin(2, 0)
+      display: inline
+    .text-ev
+      width: 87%
+      display: inline-block
+      .description
+        p
+          a
+            display: block 
+  .actions
+    width: 100%
+    display: inline-block
+    margin-bottom: 10px
+    .post_time_ago
+      display: inline-block
+    .to_comment,
+    .to_like
+      display: inline-block
+    .audience
+      display: inline-block
+      
+    .tooltip
+      width: 28%
+      margin-top: 26px 0px 0px 53px
+      .audience_logo
+        display: inline-block
+    textarea
+      width: 100%

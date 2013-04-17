@@ -1,7 +1,7 @@
 <section class="sub-content-medium">
-  <header>
+  <h4>
     <%= t 'explore.explore.most_popular' %>
-  </header>
+  </h4>
 
   <%= render partial: 'explore/trending',
              collection: ActivityObject.not_actor.popular.first(6),
@@ -9,9 +9,9 @@
 </section>
 
 <section class="sub-content-small">
-  <header>
+  <h4>
     <%= t 'explore.explore.most_followed' %>
-  </header>
+  </h4>
 
   <%= render partial: 'explore/followed',
              collection: Actor.followed.first(6),

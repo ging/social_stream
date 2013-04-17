@@ -1,7 +1,7 @@
 <section class="sub-content-small">
-  <header>
+  <h4>
     <%= t 'explore.resources.most_visited' %>
-  </header>
+  </h4>
 
   <% ActivityObject.not_actor.visited.first(3).each do |ao| %>
     <%= render partial: 'explore/resources_most_visited', locals: { object: ao } %>
@@ -9,9 +9,9 @@
 </section>
 
 <section class="sub-content-small-offset">
-  <header>
+  <h4>
     <%= t 'explore.resources.last_uploaded' %>
-  </header>
+  </h4>
 
   <% ActivityObject.not_actor.created.first(3).each do |ao| %>
     <%= render partial: 'explore/resources_last_uploaded', locals: { object: ao } %>

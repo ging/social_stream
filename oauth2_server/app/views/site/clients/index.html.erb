@@ -4,11 +4,11 @@
 
   <section class="site_clients">
     <header>
-      <h1>
+      <h1 class="colorfont">
         <%= t 'site.client.added' %>
       </h1>
 
-      <%= link_to t('site.client.new.link'), new_site_client_path, class: "btn new_site_client-modal-link", 'data-toggle' => 'modal'  %>
+      <%= link_to t('site.client.new.link'), new_site_client_path, class: "new_site_client-modal-link", 'data-toggle' => 'modal'  %>
 
       <%= render partial: 'new.modal' %>
 

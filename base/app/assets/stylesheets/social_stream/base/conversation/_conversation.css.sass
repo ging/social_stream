@@ -88,9 +88,16 @@
         .active
           background-position: -9px -10px
   #conversation
-    input
-      &[type="submit"]
-        float: left
+    h2
+      @include colorfont-big-size
+    form.new_message
+      margin-top: 30px
+      input
+        &[type="submit"]
+          float: right
+          margin-top: 10px
+  #subject
+    width: 96.8% !important
 
 
 #content

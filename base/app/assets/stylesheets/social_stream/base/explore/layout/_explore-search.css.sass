@@ -60,8 +60,14 @@
     clear: both
     display: inline
     margin-left: 5px
+  input
+    &[type="submit"]
+      height: 40px
 
-
+#explore-header
+  .btn
+    @include btn-primary
+    font-size: 16px
 
 /////////////////////////////////////// EXPLORE SEARCH RESULT
 ///////////// in events, linkser, post, comments
@@ -69,6 +75,7 @@
 #explore-content
   #search
     #search-results
+      min-height: 360px
 
       .contact
         width: 240px

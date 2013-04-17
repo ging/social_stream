@@ -90,7 +90,10 @@
 ///////////// 
 
 
-#relation_customs,
+#relation_customs
+  .relation_customs
+    @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    float: left
   .relation_list
     @include makeColumn(3, 0)
     padding-right: 5px

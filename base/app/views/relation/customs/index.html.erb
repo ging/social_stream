@@ -2,7 +2,9 @@
   <%= render partial: 'toolbar/profile', locals: { :subject => current_subject } %>
 
   <section class="relation_customs">
-    <h2><%= t 'relation_custom.title' %></h2>
+    <h2 class="colorfont">
+      <%= t 'relation_custom.title' %>
+    </h2>
 
       <%= render :partial => 'relation/customs/list', :object => @customs %>
 

@@ -13,7 +13,6 @@
   .icon_navbar-message-blue,
   .icon_tool16-info
     margin-right: 4px
-
   
   .contacts-toolbar,
   section.groups
@@ -60,12 +59,14 @@
 
   #avatar_profile,
   .logo_home
-    img
-      width: 100%
 
     .subject-name
-      @extend .hidden-tablet 
+      @include ellipsis
       @extend .hidden-phone
+    .subject-name-phone
+      @include ellipsis
+      display: none
+      @extend .visible-phone
 
    
     .logo_caption

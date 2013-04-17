@@ -1,12 +1,13 @@
 #site_clients
   .site_clients
     header
-      font-size: 21px
-      color: $gray
+      h1
+        @include colorfont-big-size
+        float: left
       a
-        font-size: 14px
-      .btn
-        @extend .btn-blue
+        @include btn-primary
+        @include border-radius(5px)
+        margin: 12px 0
       .soften
         @include opacity (100)
 

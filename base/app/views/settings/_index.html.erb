@@ -1,5 +1,7 @@
 <section class="settings">
-  <h2><%= t('settings.for')%> <%= current_subject.name %></h2>
+  <h2 class="colorfont">
+    <%= t('settings.for')%> <%= current_subject.name %>
+  </h2>
 
   <div class="accordion" id="settings-accordion">
     <% if current_subject == current_user %>

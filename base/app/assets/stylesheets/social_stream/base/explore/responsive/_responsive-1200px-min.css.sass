@@ -30,7 +30,26 @@
       @include grid-core-span(3, $fluidGridColumnWidth, $fluidGridGutterWidth)
       @include grid-core-offset(1, $fluidGridColumnWidth, $fluidGridGutterWidth)
       display: inline-block
+    .sub-content-medium,
+    .sub-content-full,
+    .sub-content-small,
+    .sub-content-mini,
+    .sub-content-medium-offset,
+    .sub-content-full-offset,
+    .sub-content-small-offset,
+    .sub-content-mini-offset
+      .content
+        .case
+          font-size: 13px
+          .first-line-large,
+          .first-line-mini,
+            a
+              font-size: 17px
+              margin-bottom: 10px
+          .second-line
 
+            margin-top: 10px
+    
     .timeline
       .media
         .media-heading

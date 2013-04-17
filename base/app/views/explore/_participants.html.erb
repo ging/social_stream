@@ -1,16 +1,16 @@
 <section class="sub-content-mini">
-  <header>
+  <h4>
     <%= t 'explore.participants.last_active' %>
-  </header>
+  </h4>
   <% User.last_active.first(5).each do |u| %>
     <%= render partial: 'explore/last_active', locals: { object: u } %>
   <% end %>
 </section>
 
 <section class="sub-content-small-offset">
-  <header>
+  <h4>
     <%= t 'explore.participants.last_registered' %>
-  </header>
+  </h4>
   <% User.last_registered.first(3).each do |u| %>
     <%= render partial: 'explore/last_registered', locals: { object: u } %>
   <% end %>

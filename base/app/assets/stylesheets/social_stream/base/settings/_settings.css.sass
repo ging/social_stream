@@ -2,6 +2,12 @@
   .settings
     h2
       @include ellipsis
+      @include colorfont-big-size
+      line-height: 32px
+      widht: 100%
+      .colorfont-overlay
+        color: #f2f2f2
+
     .accordion
       .settings_content
         @include gradient-vertical-three-colors($startColor: #e2e2e2, $midColor: #ededed, $colorStop: 3%, $endColor: #f1f1f1)
