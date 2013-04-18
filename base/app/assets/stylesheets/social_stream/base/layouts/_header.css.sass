@@ -32,7 +32,9 @@ header
       margin-top: 16px
       margin-left: 39px
       position: absolute
-      z-index: 40
+      z-index: 4
+      &:hover
+        z-index: 60
       .icon_tool16-searcher
         background-position: -220px -181px
 
@@ -55,7 +57,7 @@ header
           padding: 2px 11px
 
       input
-        &:focus
+        &:hover
           width: 69% !important
           outline: none
           @include box-shadow (1px 1px 9px rgba(55,55,55,0.5))
@@ -126,7 +128,7 @@ header
       display: inline-table
       margin-right: -13px
       position: relative
-      z-index: 2
+      z-index: 6
       li
         a
           padding: 7px 7px 7px !important
