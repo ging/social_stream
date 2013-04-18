@@ -17,8 +17,6 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-Bundler::GemHelper.install_tasks
-
 # Modify this gem's tags
 class Bundler::GemHelper
   def version_tag
