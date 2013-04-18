@@ -51,6 +51,9 @@
 .icon_file_70-ogg     { background-position: -170px -410px;}
 .icon_file_70-aif     { background-position: -250px -410px;}
 .icon_file_70-default { background-position: -330px -407px;}
+.icon_file_70-audio   { background-position: -91px -986px;}
+.icon_file_70-video   { background-position: -9px -992px;}
+.icon_file_70-image   { background-position: -178px -995px;}
 
 
 
@@ -89,6 +92,9 @@
 .icon_file_70-wav:hover     { background-position: -90px -890px;}
 .icon_file_70-ogg:hover     { background-position: -170px -890px;}
 .icon_file_70-aif:hover     { background-position: -250px -890px;}
+.icon_file_70-audio:hover   { background-position: -170px -410px;}
+.icon_file_70-video:hover   { background-position: -250px -410px;}
+.icon_file_70-image:hover  { background-position: -330px -407px;}
 
 */
 
@@ -138,7 +144,9 @@
 .icon_file_50-aif     { background-position: -190px -310px;}
 .icon_50-event        { background-position: -252px -307px;}
 .icon_file_50-default { background-position: -310px  -311px;}
-
+.icon_file_50-audio   { background-position: -68px -731px;}
+.icon_file_50-video   { background-position: -10px -738px;}
+.icon_file_50-image  { background-position: -130px -738px;}
 
 [class^="file_40-"],   [class*="icon_file_40-"] {
   width: 42px;
@@ -183,6 +191,9 @@
 .icon_file_40-ogg     { background-position: -111px -262px;}
 .icon_file_40-aif     { background-position: -160px -262px;}
 .icon_file_40-default { background-position: -263px  -262px;}
+.icon_file_40-audio   { background-position: -60px -621px;}
+.icon_file_40-video   { background-position: -9px -625px;}
+.icon_file_40-image   { background-position: -112px  -626px;}
 
 /*..................hover 50.......................
 .icon_file_50-default:hover { background-position: 0  -42px;}
@@ -219,6 +230,9 @@
 .icon_file_50-wav:hover     { background-position: -70px -360px;}
 .icon_file_50-ogg:hover     { background-position: -130px -360px;}
 .icon_file_50-aif:hover     { background-position: -190px -360px;}
+.icon_file_50-audio:hover   { background-position: -70px -360px;}
+.icon_file_50-video:hover   { background-position: -130px -360px;}
+.icon_file_50-image:hover   { background-position: -190px -360px;}
 
 ....*/
 
