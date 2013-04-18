@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   include SocialStream::Controllers::Objects
 
-  before_filter :profile_subject!, :only => :index
+  before_filter :profile_or_current_subject!, :only => :index
 
   def index
     index! do |format|

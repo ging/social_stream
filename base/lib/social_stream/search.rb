@@ -104,12 +104,21 @@ module SocialStream
         options[:mode] ||= :extended
 
         models = models(options[:mode], options[:key])
-        relation_ids = Relation.ids_shared_with(subject)
+
+        with = {}
+
+        if options[:owner].present?
+          with[:owner_id] = Actor.normalize_id(options[:owner])
+        end
+
+        if subject != options[:owner] || options[:owner].blank?
+          with[:relation_ids] = Relation.ids_shared_with(subject)
+        end
 
         [
           query,
           :classes => models,
-          :with => { :relation_ids => relation_ids }
+          :with => with
         ]
       end
     end

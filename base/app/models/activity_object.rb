@@ -67,24 +67,23 @@ class ActivityObject < ActiveRecord::Base
   }
 
   scope :collection, lambda { |profile_subject = nil, current_subject = nil|
+    col = self
+
+    # /users/demo/posts
+    #
+    # get posts posted to demo's wall
     if profile_subject.present?
-      # /users/demo/posts
-      #
-      # get posts posted to demo's wall
-      col = owned_by(profile_subject)
+      col = col.owned_by(profile_subject)
+    end
 
-      # if current_subject != demo, auth filter results
-      if profile_subject != current_subject
-        col = col.shared_with(current_subject)
-      end
-    else
-      # auth filter results
-      col = shared_with(current_subject)
+    # Auth filter results
+    if current_subject != profile_subject || current_subject.blank?
+      col = col.shared_with(current_subject)
+    end
 
-      # if logged in, show the posts from the people following
-      if current_subject.present?
-        col = col.followed_by(current_subject)
-      end
+    # Show the posts from the people following
+    if profile_subject.blank? && current_subject.present?
+      col = col.followed_by(current_subject)
     end
 
     col
