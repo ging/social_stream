@@ -44,6 +44,9 @@ es:
       one: "Evento"
       other: "Eventos"
     wall_post: "Publicó un evento: %{title}"
+  header:
+    icon:
+      calendar: "Calendar"
   room:
     confirm_delete: "¿Borrar espacio?"
     delete: "Borrar"

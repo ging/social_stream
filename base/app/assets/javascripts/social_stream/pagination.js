@@ -1,12 +1,15 @@
 SocialStream.Pagination = (function(SS, $, undefined){
 
   var show = function(callback) {
-    $(".btn-see-more").each(function(i, btn) {
+    var nav = $('nav.more');
+
+    $('a', nav).each(function(i, btn) {
       $(btn).attr('data-page', "2");
-      $(btn).closest('nav.more').find('.loading').hide();
     });
 
-    $(".btn-see-more").click(function(event) {
+    $('.loading', nav).hide();
+
+    $('a', nav).click(function(event) {
       event.preventDefault();
 
       $(event.target).hide();
