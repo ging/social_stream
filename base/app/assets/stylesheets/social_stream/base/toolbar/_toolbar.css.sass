@@ -1,17 +1,18 @@
 .toolbar-profile
   .toolbar_menu
     ul
-      background: $white
+      background: #f9f9f9
       li
         @include btn-primary
         @include border-radius(5px)
         padding: 4px 7px
+        margin-bottom: 5px
         .icon_tool16-info
           background-position: -192px -110px
         .icon_navbar-resources
-          background-position: -175px -8px
+          background-position: -175px -12px
         .icon_navbar-message
-          background-position: -55px -8px
+          background-position: -55px -11px
         &:hover
           .icon_tool16-info
             background-position: -192px -235px
@@ -89,11 +90,12 @@
     @include ellipsis
     img
       @include border-radius(5px)
-    h5 
-      a
-        text-decoration: none
-        color: $black
-        text-aling: center
+    .subject-name-phone
+      position: relative
+      margin-top: 7px
+      margin-bottom: 16px
+      font-size: 16px
+      @include ellipsis
 
     .logo_caption
       font-size: 15px
