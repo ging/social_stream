@@ -23,8 +23,11 @@
       background-color: $white
       @include border-radius(5px)
       display: block !important
+      .toolbar_menu
+        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)  
+        margin-left: 0px
       ul
-        @include grid-core-span(8, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
         height: 60px
         margin-left: auto
         margin-right: auto

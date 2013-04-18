@@ -19,15 +19,15 @@
   src: url(social_stream/fonts/GiveYouGlory.ttf);
 }
 @font-face{
-  font-family: "Din OSP";
+  font-family: "Josefin OSP";
   font-weight: normal;
   font-style: normal;
-  src: url(social_stream/fonts/DIN_OSP-Original.ttf);
+  src: url(social_stream/fonts/JosefinSlabRegular.ttf);
 }
 
 @font-face{
-  font-family: 'Din Overlay';
+  font-family: 'Josefin Overlay';
   font-weight: normal;
   font-style: normal;
-  src: url(social_stream/fonts/DIN_OSP-Overlay.ttf);
+  src: url(social_stream/fonts/JosefinSlabOverlay.ttf);
 }
