@@ -27,19 +27,14 @@ header
 
     .search-mobile
       @extend .hidden-desktop
+      @extend .hidden-tablet
       float: left
-      margin-top: 23px
+      margin-top: 16px
       margin-left: 39px
       position: absolute
       z-index: 40
-
-      label
-        font-size: 0.75em
-        font-weight: bold
-        color: #333
-        text-indent: -9999em
-        display: block
-        float: left
+      .icon_tool16-searcher
+        background-position: -220px -181px
 
       input
         &[type="text"]
@@ -48,32 +43,24 @@ header
           padding: 0 0 0 22px
           width: 0
           height: 22px
-          background: url(http://www.ian-thomas.net/examples/search-icon.png)2px 2px no-repeat, -webkit-linear-gradient(top, rgba(100,100,100,1) 0%, rgba(80,80,80,1) 10%, rgba(22,22,22,1)100%)
-          background: url(http://www.ian-thomas.net/examples/search-icon.png)1px 2px no-repeat, -moz-linear-gradient(top, rgba(100,100,100,1) 0%, rgba(80,80,80,1) 10%, rgba(22,22,22,1)100%)
-          border: 1px solid #333
+          border: 1px solid #eee
           color: #999
           line-height: 20px
           font-weight: bold
-          -moz-text-shadow: 1px 1px 1px rgba(0,0,0,0.05)
-          -webkit-text-shadow: 1px 1px 1px rgba(0,0,0,0.05)
-          text-shadow: 1px 1px 1px rgba(0,0,0,0.05)
-          -webkit-border-radius: 6px
-          -webkit-box-shadow: 1px 1px 0 rgba(0,0,0,0.125) 
-          -webkit-transition: width 0.5s ease-in-out
-          -moz-border-radius: 6px
-          -moz-box-shadow: 1px 1px 0 rgba(0,0,0,0.125) 
-          -moz-transition: width 0.5s ease-in-out
+          @include border-radius (6px)
+
+          @include transition (width 0.5s ease-in-out)
+
           cursor: pointer 
+          padding: 2px 11px
 
       input
         &:focus
-          width: 200px !important
+          width: 69% !important
           outline: none
-          background: url(http://www.ian-thomas.net/examples/search-icon.png)2px 2px no-repeat, -webkit-linear-gradient(bottom,rgba(100,100,100,1) 0%, rgba(40,40,40,1) 2%, rgba(22,22,22,1)100%)
-          background: url(http://www.ian-thomas.net/examples/search-icon.png)1px 2px no-repeat, -moz-linear-gradient(bottom,rgba(100,100,100,1) 0%, rgba(40,40,40,1) 2%, rgba(22,22,22,1)100%)
-          -webkit-box-shadow: 1px 1px 0 rgba(255,255,255,0.125)
-          -moz-box-shadow: 1px 1px 0 rgba(255,255,255,0.125)
+          @include box-shadow (1px 1px 9px rgba(55,55,55,0.5))
           cursor: text
+          padding-left: 22px
 
 
 
