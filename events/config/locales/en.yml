@@ -43,6 +43,9 @@ en:
       one: "Event"
       other: "Events"
     wall_post: "Published an event: %{title}"
+  header:
+    icon:
+      calendar: "Calendar"
   room:
     confirm_delete: "Delete room?"
     delete: "Delete"

@@ -307,6 +307,12 @@ es:
       one: "Grupo"
       other: "Grupos"
     view_all: "Ver todos..."
+  header:
+    icon:
+      contacts: "Contactos"
+      home: "Inicio"
+      messages: "Mensajes"
+      repository: "Repositorio"
   help: "Ayuda"
   helpers:
     submit:

@@ -309,6 +309,12 @@ en:
       one: "Group"
       other: "Groups"
     view_all: "View all..."
+  header:
+    icon:
+      contacts: "Contacts"
+      home: "Home"
+      messages: "Messages"
+      repository: "Repository"
   help: "Help"
   helpers:
     submit:
