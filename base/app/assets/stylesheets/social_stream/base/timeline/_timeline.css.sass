@@ -8,22 +8,22 @@
     .media
       .avatar
         @include border-radius (5px)
-
+      .media-heading
+          font-size: 12px
+          color: #919191
       .media-body
         color: $grayLight
         word-wrap: break-word
-        .media-heading
-          font-size: 14px
+        a
+          text-decoration: none
+        .x
+          font-size: 12px
+          color: $black
           a
             text-decoration: none
-          .x
-            font-size: 12px
-            color: $black
-            a
-              text-decoration: none
-              color: $grayLight
-              &:hover
-                color: $red
+            color: $grayLight
+            &:hover
+              color: $red
         .objects
           word-wrap: break-word
           .thumb
