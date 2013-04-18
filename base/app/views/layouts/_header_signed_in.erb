@@ -4,9 +4,11 @@
     <div class="brand"></div>
     <!-- FIXME: search javascript functionality in 'layouts/search' -->
 
-    <div class="search-mobile">
-      <i class='icon_tool16-searcher'></i>
-    </div>
+    <form class="search-mobile" method="post" action="">
+      <label for="search-box">Search:</label>
+      <input id="search-box" type="text"> <i class='icon_tool16-searcher'></i>
+    </form>
+    
     <div class="search-nav hidden-phone">
       <%= form_tag search_path, method: 'get', class: "navbar-search pull-left" do %>
         <%= text_field_tag :q, nil, autocomplete: :off, class: 'search-query input-small', placeholder: t('search.name'), "data-min_query" => SocialStream::Search::MIN_QUERY %>
