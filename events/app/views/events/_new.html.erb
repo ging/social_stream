@@ -1,4 +1,4 @@
-<%= form_for @event || Event.new(:owner_id => profile_subject.actor_id, :interval => 1), :remote => true do |f| %>
+<%= form_for @event || Event.new(:owner_id => profile_or_current_subject.actor_id, :interval => 1), :remote => true do |f| %>
   <%= f.hidden_field :owner_id  %>
   <%= f.hidden_field :start_at %>
   <%= f.hidden_field :end_at %>

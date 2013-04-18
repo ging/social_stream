@@ -2,7 +2,7 @@
 
 
 <li class="event">
-  <%= link_to polymorphic_path([current_subject, Event.new ]) do %>
+  <%= link_to events_path do %>
     <i class="icon_navbar-calendar <%= current_header_icon_class(:events) %>" title="<%= t 'header.icon.calendar' %>"></i> 
   <% end %>
 </li>
