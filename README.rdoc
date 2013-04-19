@@ -19,6 +19,7 @@ network with the functionalities they need for each case. Current Social Stream 
 * {Linkser}[https://github.com/ging/social_stream/tree/master/linkser], advanced management of links to other webpages
 * {Presence}[https://github.com/ging/social_stream/tree/master/presence], XMPP based chat support 
 * {Ostatus}[https://github.com/ging/social_stream/tree/master/ostatus], support for social network federation
+* {Oauth2Server}[https://github.com/ging/social_stream/tree/master/oauth2_server], authentication and authorization service based on {OAuth2}[http://oauth.net/2/]
  
 = Installation
 
