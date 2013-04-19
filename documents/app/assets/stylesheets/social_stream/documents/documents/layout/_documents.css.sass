@@ -22,7 +22,7 @@ section.repository
   .btn
     @include btn-secundary
     float: right
-    width: 90px
+    width: auto
     display: inline-block
     margin: 3px 16px 0 -14px
     padding: 5px 12px
@@ -54,3 +54,9 @@ section.repository
 
 .documents
   clear: both
+#new_document-modal
+  .modal-body
+    input
+      &[type="text"]
+        width: 94% !important
+        float: none

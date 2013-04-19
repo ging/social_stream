@@ -59,7 +59,18 @@
 
 
 
-#toolbar 
+#toolbar
+  h5
+    position: relative
+    margin-top: 7px
+    margin-bottom: 16px
+    font-size: 16px
+    @include ellipsis
+    a
+      color: #666
+      &:hover
+        text-decoration: none
+        color: #444
   .contact-button
     @include btn-add
 
@@ -96,6 +107,11 @@
       margin-bottom: 16px
       font-size: 16px
       @include ellipsis
+      a
+        color: #666
+        &:hover
+          text-decoration: none
+          color: #444
 
     .logo_caption
       font-size: 15px
