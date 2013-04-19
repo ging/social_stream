@@ -38,17 +38,21 @@
             margin-right: 10px
             img
               width: 170px
-            .play_button
-              width: auto
-              margin-left: -107px
+            img.video
+              z-index: 20
+              position: absolute
           .text
             font-size: 12px
+            float: left
             h6
               font-size: 14px 
+              margin: 1px 0 3px
+              @include ellipsis
           .description
             margin: 0 0 4px
-            .view-more
-              font-size: 12px
+            p
+              a
+                display: block
 
         .actions
           width: 100%
