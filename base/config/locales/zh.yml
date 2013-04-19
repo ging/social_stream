@@ -54,14 +54,14 @@ zh:
     privacy:
       contact:
         myself:
-          group: All members
-          user: Your contacts
+          group: 所有成员All members
+          user: 您的联系人Your contacts
         outside:
-          group: Members of %{receiver}
-          user: Contacts of %{receiver}
+          group: 来自%{receiver}的成员Members of 
+          user: 来自%{receiver}的联系人Contacts of 
       relation:
-        one: '%{count} group'
-        other: '%{count} groups'
+        one: '%{count} 小组group'
+        other: '%{count} 多个小组groups'
     sending: 传送中
     stream:
       atom_title: '%{subject}的活动流'
@@ -100,8 +100,8 @@ zh:
         title:
           other_wall: '%{sender} → %{receiver}'
       join:
-        one: '%{sender} joined the %{title} %{thing}.'
-    share: Share
+        one: '%{sender} 加入了joined the %{title} %{thing}.'
+    share: 分享Share
   activity_action:
     follow: 关注
     sentence:
@@ -142,7 +142,7 @@ zh:
       one: 评论
       other: 所有评论
     view_all: '查看所有评论 '
-    other: comments
+    other: 评论comments
   contact:
     all_n: 所有联系(%{count})
     confirm_delete: 刪除联系?
@@ -168,9 +168,9 @@ zh:
       menu: 加入联络
       submit: 加入联络
       button:
-        zero: Add
-        one: '%{count} role'
-        other: '%{count} roles'
+        zero: 添加Add
+        one: '%{count} 关系role'
+        other: '%{count} 多个关系roles'
     one: 联络
     other: 联系
     pending:
@@ -191,14 +191,14 @@ zh:
     type:
       new: + 新类别
     unfollow: 不再关注
-    empty: You have not added anybody yet. What about <a href="%{explore}">exploring</a>?
+    empty: 您还没有添加任何人。You have not added anybody yet. What about <a href="%{explore}">随便看看exploring</a>怎么样?
     n:
-      one: '%{count} contact'
-      other: '%{count} contacts'
-    received: Received
-    saving: Saving...
-    sent: Added
-    view_all: View all...
+      one: '%{count} 联系人contact'
+      other: '%{count} 多个联系人contacts'
+    received: 已收到Received
+    saving: 保存中...Saving...
+    sent: 已经添加Added
+    view_all: 查看所有...View all...
   copyright: 2010 版权 - 版权所有
   delete:
     confirm: 刪除 %{element}}?
@@ -229,22 +229,20 @@ zh:
     stats: '%{users} 用户 和 %{groups} 已注册的群组'
     presentation:
       modular:
-        header: Modular
-        p: Available <a href="https://github.com/ging/social_stream#social-stream-components">Social
-          Stream components</a> provide your application only with the features you
+        header: 模块Modular
+        p: 可用的Available <a href="https://github.com/ging/social_stream#social-stream-components">Social Stream配件Social
+          Stream components</a> 只为您提供您社交网络所需要的功能。只需添加您喜欢的Gems到您的Gemfile.provide your application only with the features you
           need in your social network. Just add your desired gems to your Gemfile
       flexible:
-        header: Flexible
-        p: Completely customize your social network <a href="https://github.com/ging/social_stream/wiki/How-to-change-controllers%2C-models%2C-views%2C-assets-and-locales">changing
-          any Social Stream component</a>, <a href="https://github.com/ging/social_stream/wiki/How-to-add-new-activity-objects">adding
-          new activity objects</a> or changing the CSS using <a href="http://sass-lang.com/">Sass</a>
+        header: 灵活灵便Flexible
+        p: 完全地个性化定制您的社交网络Completely customize your social network <a href="https://github.com/ging/social_stream/wiki/How-to-change-controllers%2C-models%2C-views%2C-assets-and-locales">更改任何一个Scial Stream组建changing
+          any Social Stream component</a>, <a href="https://github.com/ging/social_stream/wiki/How-to-add-new-activity-objects">添加新的活动对象adding
+          new activity objects</a> 或者使用CSS更改Sass.or changing the CSS using <a href="http://sass-lang.com/">Sass</a>
       community:
-        header: Community
-        p: Social Stream enjoys a growing community of developers. Feel free to drop
-          a message at <a href="http://groups.google.com/group/social-stream">Social
-          Stream's Google group</a> or <a href="http://stackoverflow.com/questions/tagged/social-stream">StackOverflow</a>
-          if you have problems. <a href="https://github.com/ging/social_stream/issues/new">Open
-          an issue</a> if you find a defect. Pull request are very welcomed!
+        header: 社区Community
+        p: Social Stream的开发者社区正在茁壮成长。如果您有什么问题，可以在<a href="http://groups.google.com/group/social-stream">Social
+          Stream's Google group</a> 或者 <a href="http://stackoverflow.com/questions/tagged/social-stream">StackOverflow</a>给我们留言。
+          如果您发现有缺陷<a href="https://github.com/ging/social_stream/issues/new">提交一个问题</a>. 随时欢迎各种请求Pull request are very welcomed!
   group:
     one: 群组
     other: 群组
@@ -275,9 +273,9 @@ zh:
       one: 群组
       other: 群组们
     n:
-      one: '%{count} group'
-      other: '%{count} groups'
-    view_all: View all...
+      one: '%{count} 群group'
+      other: '%{count} 多个群groups'
+    view_all: 查看所有...View all...
   help: 帮助
   helpers:
     submit:
@@ -392,7 +390,7 @@ zh:
     title:
       one: 近況
       other: 近況
-    other: posts
+    other: 多个状态posts
   preposition:
     and: 和
     true: 在上
@@ -470,7 +468,7 @@ zh:
               negative: 活动将不会通知 %{name} 的联系
     of_relation:
       choose: 2. <strong>%{name}</strong>圈內的权限
-    postit: Manage the permissions of your contacts and create new roles
+    postit: 管理您联系人的权限和创建新的关系Manage the permissions of your contacts and create new roles
   privacy:
     intro: '拥有 <strong>%{relation}</strong>级别的联系只容许作出以下行为:'
     rule:
@@ -484,7 +482,7 @@ zh:
     new: + 新圈子
     title: 私隐和內容
     list:
-      title: Roles
+      title: 关系Roles
   relation_public:
     name: 公众
   representation:
@@ -494,8 +492,8 @@ zh:
   search:
     all_results: 查找所有 %{subject} (%{count})
     at_least:
-      one: Write at least %{count} character
-      other: Write at least %{count} characters
+      one: 至少填写Write at least %{count}个字符 character
+      other: 至少填写Write at least %{count}个字符 characters
     global:
       name: 全球搜查
       first_result:
@@ -542,7 +540,7 @@ zh:
     password_change:
       briefing: 更改密码
     success: 您的设定已成功更改
-  share: Share
+  share: 分享Share
   sign_in: 登录
   sign_out: 退出
   sign_up: 注册
@@ -568,56 +566,56 @@ zh:
     browser: 自动搜查浏览器语言
     none: 语言自主內容
   ajax:
-    error: There was an error in the remote server
+    error: 远程服务器中存在错误There was an error in the remote server
   counter:
     like:
-      one: <span class="counter">%{count}</span> like
-      other: <span class="counter">%{count}</span> likes
+      one: <span class="counter">%{count}</span> 喜欢like
+      other: <span class="counter">%{count}</span> 喜欢likes
     view:
       one: <span class="counter">%{count}</span> view
       other: <span class="counter">%{count}</span> views
   dropdown:
-    notifications: Notifications
-    privacy: Privacy
-    settings: Settings
+    notifications: 通知Notifications
+    privacy: 隐私Privacy
+    settings: 设置Settings
   explore:
     explore:
-      most_followed: Most followed
-      most_popular: Most popular
+      most_followed: 最多关注Most followed
+      most_popular: 最流行Most popular
     header:
-      explore: Explore
-      participants: Participants
-      resources: Resources
-      timeline: Timeline
-      tags: Tags
-      search: Search
-    link: Explore
-    or: or Explore
+      explore: 浏览Explore
+      participants: 参与者Participants
+      resources: 资源Resources
+      timeline: 时间轴Timeline
+      tags: 标签Tags
+      search: 搜索Search
+    link: 浏览Explore
+    or: 或者浏览or Explore
     participants:
-      last_active: Last active
-      last_registered: Last registered
-      most_members: Most members
-      registered_since: since %{time}
+      last_active: 最近上线Last active
+      last_registered: 最新注册Last registered
+      most_members: 最多成员Most members
+      registered_since: 从since %{time} 开始
     resources:
-      last_uploaded: Last uploaded
-      most_visited: Most viewed
-      uploaded_since: since %{time}
+      last_uploaded: 最新上传Last uploaded
+      most_visited: 最多查看Most viewed
+      uploaded_since: 从since %{time} 开始
     search:
-      title: Advanced search
-      placeholder: looking for...
-      submit: Search
+      title: 高级搜索Advanced search
+      placeholder: 寻找...looking for...
+      submit: 搜索Search
   header:
     icon:
-      contacts: Contacts
-      home: Home
-      messages: Messages
-      repository: Repository
+      contacts: 联系人Contacts
+      home: 主页Home
+      messages: 消息Messages
+      repository: 栈UnsureRepository
   layout:
-    more: See more (%{count})
+    more: 查看更多See more (%{count})
   repository:
-    filter: filter
-    title: Repository
+    filter: 过滤器filter
+    title: 栈UnsureRepository
     order:
-      by: Order by
-      last_modified: Last modified
-      most_popular: Most popular
+      by: 排序Order by
+      last_modified: 最近更新Last modified
+      most_popular: 最流行Most popular
