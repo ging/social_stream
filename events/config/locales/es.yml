@@ -1,57 +1,57 @@
+---
 es:
   activerecord:
     attributes:
       event:
-        title: "Título"
-        room: "Espacio"
-        frequency: "Repetición"
+        title: Título
+        room: Espacio
+        frequency: Repetición
       room:
-        name: "Nombre"
+        name: Nombre
     errors:
       models:
         room:
           attributes:
             name:
-              taken: "está repetido"
+              taken: está repetido
     models:
-      event: "evento"
-      room: "espacio"
+      event: evento
+      room: espacio
   boxy:
-    close_text: "[cerrar]"
+    close_text: '[cerrar]'
   event:
     activity_action:
-      follow: "Me lo apunto"
+      follow: Me lo apunto
       sentence:
-        follow:
-          one: "%{followers} se ha apuntado esto"
-          other: "%{followers} se han apuntado esto"
-      unfollow: "Desapuntar"
-    calendar: "Calendario"
-    confirm_delete: "¿Borrar evento?"
+        one: '%{followers} follows this'
+        other: '%{followers} follow this'
+      unfollow: Desapuntar
+    calendar: Calendario
+    confirm_delete: ¿Borrar evento?
     modal:
-      view_in_calendar: "Ver en el calendario"
-    name: "evento"
+      view_in_calendar: Ver en el calendario
+    name: evento
     new:
-      title: "Nuevo evento"
-    one: "un evento"
-    other: "eventos"
+      title: Nuevo evento
+    one: un evento
+    other: eventos
     popover:
-      title: "Eventos el %{date}"
+      title: Eventos el %{date}
     poster:
-      button: "Subir"
-      update: "Subir cartel"
+      button: Subir
+      update: Subir cartel
     title:
-      one: "Evento"
-      other: "Eventos"
-    wall_post: "Publicó un evento: %{title}"
+      one: Evento
+      other: Eventos
+    wall_post: 'Publicó un evento: %{title}'
   header:
     icon:
-      calendar: "Calendar"
+      calendar: Calendar
   room:
-    confirm_delete: "¿Borrar espacio?"
-    delete: "Borrar"
+    confirm_delete: ¿Borrar espacio?
+    delete: Borrar
     settings:
-      title: "Espacios"
-      description: "Salas disponibles para la realización de eventos"
+      title: Espacios
+      description: Salas disponibles para la realización de eventos
     watermark:
-      name: "Nuevo espacio"
+      name: Nuevo espacio

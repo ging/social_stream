@@ -1,16 +1,17 @@
+---
 en:
   linkser:
-    title: "Linkser"
+    title: Linkser
   link:
-    by: "by %{author}"
-    confirm_delete: "Delete link?"
+    by: by %{author}
+    confirm_delete: Delete link?
     errors:
-      loading: "Error loading"
-      only_webs: "Only webpages are supported"
+      loading: Error loading
+      only_webs: Only webpages are supported
     form:
-      title: "Link"
-    input: "Write the web address"
-    name: "link"
-    one: "a link"
-    other: "links"
-    title: "Links"  
+      title: Link
+    input: Write the web address
+    name: link
+    one: a link
+    other: links
+    title: Links

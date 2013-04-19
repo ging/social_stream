@@ -1,87 +1,90 @@
+---
 es:
   activerecord:
     attributes:
       document:
-        title: "Título"
+        title: Título
     models:
-      document: "Fichero"
+      document: Fichero
   audio:
-    confirm_delete: "¿Borrar audios?"
-    mine: "Mis audios"
-    name: "archivo de audio"
-    not_mine: "Audios"
-    one: "un archivo de audio"
-    other: "audios"
-    processing: "Procesando fichero de audio. Espere, por favor..."
+    confirm_delete: ¿Borrar audios?
+    mine: Mis audios
+    name: archivo de audio
+    not_mine: Audios
+    one: un archivo de audio
+    other: audios
+    processing: Procesando fichero de audio. Espere, por favor...
     title:
-      one: "Audio"
-      other: "Audios"
+      one: Audio
+      other: Audios
   details:
-    msg: "Ver detalles..."
+    msg: Ver detalles...
   document:
     actions:
-      delete: "Borrar"
-      details: "Detalles"
-      download: "Descargar"
-      edit: "Editar"
-    all: "Todos los ficheros"
-    by: "por %{author}"
-    confirm_delete: "¿Borrar fichero?"
+      delete: Borrar
+      details: Detalles
+      download: Descargar
+      edit: Editar
+    all: Todos los ficheros
+    by: por %{author}
+    confirm_delete: ¿Borrar fichero?
     description:
-      input: "Añade una descripción aquí"
-    filter: "filtrar"
+      input: Añade una descripción aquí
+    filter: filtrar
     form:
-      title: "Fichero"
+      title: Fichero
     info:
-      author: "Autor"
+      author: Autor
       date:
-        created_at: "Creado"
-        updated_at: "Última modificación"
-      description: "Descripción"
-      file: "Fichero"
-      title: "Título"
-    mine: "Mis ficheros"
-    name: "fichero"
+        created_at: Creado
+        updated_at: Última modificación
+      description: Descripción
+      file: Fichero
+      title: Título
+      size: Size
+      tags: Tags
+    mine: Mis ficheros
+    name: fichero
     new:
-      link: "Añadir fichero"
-      title: "Nuevo fichero"
+      link: Añadir fichero
+      title: Nuevo fichero
     new_activity:
-      attach: "Adjuntar fichero"
-    not_mine: "Ficheros"
-    one: "un fichero"
-    other: "ficheros"
+      attach: Adjuntar fichero
+    not_mine: Ficheros
+    one: un fichero
+    other: ficheros
     scope:
-      network: "Red"
-      own: "Propios"
-    simple_all: "Todos"
+      network: Red
+      own: Propios
+    simple_all: Todos
     title:
-      input: "Título del fichero"
-      one: "Fichero"
-      other: "Ficheros"
+      input: Título del fichero
+      one: Fichero
+      other: Ficheros
   picture:
-    confirm_delete: "¿Borrar imagen?"
-    mine: "Mis imágenes"
-    name: "imagen"
-    not_mine: "Imágenes"
-    one: "una imagen"
-    other: "imagenes"
+    confirm_delete: ¿Borrar imagen?
+    mine: Mis imágenes
+    name: imagen
+    not_mine: Imágenes
+    one: una imagen
+    other: imagenes
     title:
-      one: "Imagen"
-      other: "Imágenes"
+      one: Imagen
+      other: Imágenes
   resource:
-    all: "Todos los recursos"
-    confirm_delete: "¿Borrar recursos?"
-    title: "Recursos"
-    mine: "Mis recursos"
-    not_mine: "Recursos"
+    all: Todos los recursos
+    confirm_delete: ¿Borrar recursos?
+    title: Recursos
+    mine: Mis recursos
+    not_mine: Recursos
   video:
-    confirm_delete: "¿Borrar vídeo?"
-    mine: "Mis vídeos"  
-    name: "vídeo"
-    not_mine: "Vídeos"
-    one: "un vídeo"
-    other: "videos"
-    processing: "Procesando vídeo. Espere, por favor..."
+    confirm_delete: ¿Borrar vídeo?
+    mine: Mis vídeos
+    name: vídeo
+    not_mine: Vídeos
+    one: un vídeo
+    other: videos
+    processing: Procesando vídeo. Espere, por favor...
     title:
-      one: "Vídeo"
-      other: "Vídeos"
+      one: Vídeo
+      other: Vídeos

@@ -1,56 +1,57 @@
+---
 en:
   activerecord:
     attributes:
       event:
-        title: "Title"
-        room: "Room"
-        frequency: "Frequency"
+        title: Title
+        room: Room
+        frequency: Frequency
       room:
-        name: "Name"
+        name: Name
     errors:
       models:
         room:
           attributes:
             name:
-              taken: "is taken"
+              taken: is taken
     models:
-      event: "event"
-      room: "room"
+      event: event
+      room: room
   boxy:
-    close_text: "[close]"
+    close_text: '[close]'
   event:
     activity_action:
-      follow: "Follow"
+      follow: Follow
       sentence:
-        one: "%{followers} follows this"
-        other: "%{followers} follow this"
-      unfollow: "Unfollow"
-    calendar: "Calendar"
-    confirm_delete: "Delete event?"
+        one: '%{followers} follows this'
+        other: '%{followers} follow this'
+      unfollow: Unfollow
+    calendar: Calendar
+    confirm_delete: Delete event?
     modal:
-      view_in_calendar: "View in calendar"
-    name: "event"
+      view_in_calendar: View in calendar
+    name: event
     new:
-      title: "New event"
-    one: "an event"
-    other: "events"
+      title: New event
+    one: an event
+    other: events
     popover:
-      title: "Events on %{date}"
+      title: Events on %{date}
     poster:
-      button: "Upload"
-      update: "Upload poster"
+      button: Upload
+      update: Upload poster
     title:
-      one: "Event"
-      other: "Events"
-    wall_post: "Published an event: %{title}"
+      one: Event
+      other: Events
+    wall_post: 'Published an event: %{title}'
   header:
     icon:
-      calendar: "Calendar"
+      calendar: Calendar
   room:
-    confirm_delete: "Delete room?"
-    delete: "Delete"
+    confirm_delete: Delete room?
+    delete: Delete
     settings:
-      title: "Rooms"
-      description: "Rooms available for event celebration"
+      title: Rooms
+      description: Rooms available for event celebration
     watermark:
-      name: "New room"
+      name: New room
