@@ -1,11 +1,11 @@
 /************* typography COLORFONT PLUGING*******/
 
 .colorfont {
-  color: #e2e2e2;
+  color: #e6e6e6;
   font-family: 'Josefin OSP' !important;
 }
 
 .colorfont-overlay {
-  color: #ccc;
+  color: #ddd;
   font-family: 'Josefin Overlay' !important;
 }

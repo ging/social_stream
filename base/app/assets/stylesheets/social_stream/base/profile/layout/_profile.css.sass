@@ -20,14 +20,14 @@
           padding: 3px 8px 3px 7px
         p
           margin: -15px 26px 0 14px
-          padding: 3px 0px 5px 14px
+          padding: 20px 0px 5px 0px
           width: 100%
       .empty
         float: left
         padding: 8px 27px 9px 27px
       .update
         @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-        background-color: #f9f9f9
+        background-color: $white
         margin-left: 0px
         padding: 12px 0px 3px 0px !important
         form.edit_profile
@@ -39,7 +39,7 @@
           label,
           h6 
             margin: 13px 2px -6px 2px
-            display: inline
+            display: block
           select
             margin: 10px 0 0 4px
     .personal,
@@ -88,8 +88,8 @@
 #profile_birthday_3i,
 #profile_birthday_2i,
 #profile_birthday_1i
-  width: auto
-  margin-right: 4px
+  width: auto !important
+  margin-right: 4px !important
 .avatar
   padding: 4px
   .edit_icon
