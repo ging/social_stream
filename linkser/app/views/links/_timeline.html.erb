@@ -1,6 +1,6 @@
 <%= div_for link do %>
   <% if link.image %>
-    <div class="thumb">
+    <div class="thumb <%= 'thumb-play' if link.callback_url %>">
       <% if link.callback_url %>
         <%= image_tag(link.image) %>
         <div class="play_over" data-url="<%= link.improved_callback_url %>" data-width="<%= link.width %>" data-height="<%= link.height %>"></div>

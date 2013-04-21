@@ -1,27 +1,28 @@
+---
 es:
   chat:
-    connecting: "Conectando"
-    reconnecting: "Reconectando"
-    disconnected: "Desconectado"
-    unableconnect: "Fuera de servicio"
-    title: "Chat"
-    password: "Contraseña"
-    zerousers: "No hay contactos conectados"
-    search: "Buscar contactos"
-    zerocontacts: "No se encontró ningún contacto"
+    connecting: Conectando
+    reconnecting: Reconectando
+    disconnected: Desconectado
+    unableconnect: Fuera de servicio
+    title: Chat
+    password: Contraseña
+    zerousers: No hay contactos conectados
+    search: Buscar contactos
+    zerocontacts: No se encontró ningún contacto
     status:
-      choose: "Establecer estado"
-      available: "Disponible"
-      away: "Ausente"
-      dnd: "No molestar"
-      offline: "Desconectado"
+      choose: Establecer estado
+      available: Disponible
+      away: Ausente
+      dnd: No molestar
+      offline: Desconectado
     settings:
-      title: "Activación y configuración del chat de Social Stream"
-      checkbox: "Activar o desactivar chat"  
-      update: "Guardar configuración"
+      title: Activación y configuración del chat de Social Stream
+      checkbox: Activar o desactivar chat
+      update: Guardar configuración
     notify:
-      offline: "Estás desconectado"
-      guestOffline: "{{name}} está desconectado"
+      offline: Estás desconectado
+      guestOffline: '{{name}} está desconectado'
     videochat:
       disconnected: Videochat desconectado
       disconnecting: Videochat desconectando...
@@ -32,36 +33,37 @@ es:
       establishing: Estableciendo conexión...
       connnected: Videochat conectado
       unable: Imposible iniciar videochat
-      serverIssue: "Error del servidor: Respuesta inválida"
-      call: "{{name}} quiere iniciar una videollamada"
-      rejected: "{{name}} ha rechazado tu llamada"
-      rejectedBusy: "{{name}} está ocupado"
+      serverIssue: 'Error del servidor: Respuesta inválida'
+      call: '{{name}} quiere iniciar una videollamada'
+      rejected: '{{name}} ha rechazado tu llamada'
+      rejectedBusy: '{{name}} está ocupado'
       accept: Aceptar
       deny: Rechazar
-      clientIssue: "El cliente de {{name}} no soporta videochat"
-      guestOffline: "Imposible conectar. {{name}} está desconectado"
-      offline: "Imposible conectar. Estás desconectado"
-      cancel: "{{name}} canceló la videollamada"
-      requirements: No tienes los requisitos minimos para iniciar la aplicación de videoconferencia. Por favor, actualiza a la última versión de Flash.
+      clientIssue: El cliente de {{name}} no soporta videochat
+      guestOffline: Imposible conectar. {{name}} está desconectado
+      offline: Imposible conectar. Estás desconectado
+      cancel: '{{name}} canceló la videollamada'
+      requirements: No tienes los requisitos minimos para iniciar la aplicación de
+        videoconferencia. Por favor, actualiza a la última versión de Flash.
     muc:
-       group: "Grupo {{group}}"
-       join: "{{nick}} ha entrado en la sala."
-       leave: "{{nick}} se ha ido de la sala."
-       occupants: "Miembros"
-       joining: "Accediendo..."
-       joinError: "No se pudo acceder a la sala.  \n {{errorMsg}}"
-       offline: "Estás desconectado"
+      group: Grupo {{group}}
+      join: '{{nick}} ha entrado en la sala.'
+      leave: '{{nick}} se ha ido de la sala.'
+      occupants: Miembros
+      joining: Accediendo...
+      joinError: "No se pudo acceder a la sala.  \n {{errorMsg}}"
+      offline: Estás desconectado
     game:
-      call: "{{name}} quiere iniciar una partida de {{game}}"
+      call: '{{name}} quiere iniciar una partida de {{game}}'
       accept: Aceptar
       deny: Rechazar
-      offline: "Imposible conectar. Estás desconectado"
-      guestOffline: "Imposible conectar. {{name}} está desconectado"
+      offline: Imposible conectar. Estás desconectado
+      guestOffline: Imposible conectar. {{name}} está desconectado
       unable: Imposible iniciar partida.
-      rejected: "{{name}} ha rechazado tu invitación"
-      rejectedBusy: "{{name}} está ocupado"
-      cancel: "{{name}} canceló la partida"
-      finish: "{{name}} ha cerrado el juego"
+      rejected: '{{name}} ha rechazado tu invitación'
+      rejectedBusy: '{{name}} está ocupado'
+      cancel: '{{name}} canceló la partida'
+      finish: '{{name}} ha cerrado el juego'
       waiting: Esperando respuesta...
       unknown: Respuesta desconocida
-      clientIssue: "El cliente de {{name}} no tiene juegos"
+      clientIssue: El cliente de {{name}} no tiene juegos

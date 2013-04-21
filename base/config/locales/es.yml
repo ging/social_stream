@@ -1,632 +1,634 @@
+---
 es:
-  language_name: "Español"
+  language_name: Español
   actor:
-    name: "Nombre"
+    name: Nombre
   action:
-    send: "Enviar"
-    accept: "Aceptar"
+    send: Enviar
+    accept: Aceptar
   account:
-    cancel: "Cancelar lar cuenta"
-    edit: "Editar cuenta"
-    email: 
-      change: "Cambiar dirección de correo"
-    lang: 
-      change: "Cambiar idioma"
-    one: "Cuenta"
+    cancel: Cancelar lar cuenta
+    edit: Editar cuenta
+    email:
+      change: Cambiar dirección de correo
+    lang:
+      change: Cambiar idioma
+    one: Cuenta
     password:
-      change: "Cambiar contraseña"
-      new: "Nueva contraseña"
-      retype: "Repetir nueva contraseña"
+      change: Cambiar contraseña
+      new: Nueva contraseña
+      retype: Repetir nueva contraseña
   activerecord:
     attributes:
       contact:
-        relation_ids: "Los roles"
+        relation_ids: Los roles
       relation/custom:
-        name: "Nombre"
+        name: Nombre
       user:
-        email: "Correo"
-        name: "Nombre"
-        password: "Contraseña"
-        password_confirmation: "Confirmar contraseña"
-        remember_me: "Recuérdame"
+        email: Correo
+        name: Nombre
+        password: Contraseña
+        password_confirmation: Confirmar contraseña
+        remember_me: Recuérdame
   activity:
     audience:
       hidden:
-        summary: "Restringido"
-        full: "Compartido con contactos de %{audience}"
+        summary: Restringido
+        full: Compartido con contactos de %{audience}
       public:
-        summary: "Público"
-        full: "Accesible por toda Internet"
-      show: "Mostrar"
+        summary: Público
+        full: Accesible por toda Internet
+      show: Mostrar
       visible:
-        summary: "Restringido"
-        full: "Compartido con %{audience}"
-    confirm_delete: "¿Borrar actividad?"
-    delete: "Borrar"
-    last: "Últimas actividades"
-    like: "Me gusta"
+        summary: Restringido
+        full: Compartido con %{audience}
+    confirm_delete: ¿Borrar actividad?
+    delete: Borrar
+    last: Últimas actividades
+    like: Me gusta
     like_sentence:
-      one: "A %{likers} le gusta esto"
-      other: "A %{likers} les gusta esto"
-    one: "Actividad"
-    other: "Actividades"
+      one: A %{likers} le gusta esto
+      other: A %{likers} les gusta esto
+      more: 
+    one: Actividad
+    other: Actividades
     privacy:
       contact:
         myself:
-          group: "Todos los integrantes"
-          user: "Tus contactos"
+          group: Todos los integrantes
+          user: Tus contactos
         outside:
-          group: "Integrantes de %{receiver}"
-          user: "Contactos de %{receiver}"
+          group: Integrantes de %{receiver}
+          user: Contactos de %{receiver}
       relation:
-        one: "%{count} grupo"
-        other: "%{count} grupos"
-    sending: "Enviando"
-    share: "Compartir"
+        one: '%{count} grupo'
+        other: '%{count} grupos'
+    sending: Enviando
+    share: Compartir
     stream:
-      atom_title: "Actividades de %{subject}"
+      atom_title: Actividades de %{subject}
       title:
-        follow: "%{author} añadió a %{activity_object} como contacto"
-        unfollow: "%{author} eliminó a %{activity_object} como contacto"
-        like: "A %{author} le gusta %{activity_object}"
-        make-friend: "%{author} también añadió a %{activity_object} como contacto"
-        post: "%{author} publicó %{activity_object}"
-        updated: "%{author} actualizó %{activity_object}"
-    title: "Actividades"
-    to_comment: "Comentar"
-    unlike: "Ya no me gusta"
+        follow: '%{author} añadió a %{activity_object} como contacto'
+        like: A %{author} le gusta %{activity_object}
+        make-friend: '%{author} también añadió a %{activity_object} como contacto'
+        post: '%{author} publicó %{activity_object}'
+        updated: '%{author} actualizó %{activity_object}'
+    title: Actividades
+    to_comment: Comentar
+    unlike: Ya no me gusta
     verb:
       follow:
         User:
-          title: "%{subject} añadió %{contact} como contacto."
-          message: "%{name} te añadió como contacto."
+          title: '%{subject} añadió %{contact} como contacto.'
+          message: '%{name} te añadió como contacto.'
         Group:
-          title: "%{subject} se unió al grupo %{contact}."
-          message: "%{name} te añadió como contacto."
+          title: '%{subject} se unió al grupo %{contact}.'
+          message: '%{name} te añadió como contacto.'
       like:
         User:
-          title: "%{subject} es fan de %{contact}."
-          message: "%{name} es tu fan."
+          title: '%{subject} es fan de %{contact}.'
+          message: '%{name} es tu fan.'
         Group:
-          title: "%{subject} es fan de %{contact}."
-          message: "%{name} es tu fan."
+          title: '%{subject} es fan de %{contact}.'
+          message: '%{name} es tu fan.'
       make-friend:
         User:
-          title: "%{subject} y %{contact} ahora están conectados."
-          message: "%{name} también te añadió como su contacto."
+          title: '%{subject} y %{contact} ahora están conectados.'
+          message: '%{name} también te añadió como su contacto.'
         Group:
-          title: "%{subject} añadió a %{contact}."
-          message: "%{name} te añadió."           
+          title: '%{subject} añadió a %{contact}.'
+          message: '%{name} te añadió.'
       post:
         title:
-          other_wall: "%{sender} → %{receiver}"
+          other_wall: '%{sender} → %{receiver}'
+      join:
+        one: '%{sender} joined the %{title} %{thing}.'
   activity_action:
-    follow: "Seguir"
+    follow: Seguir
     sentence:
       follow:
-        one: "%{count} sigue esto"
-        other: "%{count} siguen esto"
+        one: '%{count} sigue esto'
+        other: '%{count} siguen esto'
       more:
-        one: "%{count} persona más"
-        other: "%{count} personas más"
-    unfollow: "Dejar de seguir"
+        one: '%{count} persona más'
+        other: '%{count} personas más'
+    unfollow: Dejar de seguir
   ajax:
-    error: "Ha habido un error en el servidor remoto"
-  browse: "Descubrir"
+    error: Ha habido un error en el servidor remoto
+  browse: Descubrir
   button:
-    cancel: "Cancelar"
-    create: "Crear"
-    save: "Guardar"
-    update: "Actualizar"
+    cancel: Cancelar
+    create: Crear
+    save: Guardar
+    update: Actualizar
   cheesecake:
     changes:
-      details: "Cambios detallados"
-      none: "Sin cambios"
-      save: "Guardar cambios"
-      saving: "Guardando..."      
+      details: Cambios detallados
+      none: Sin cambios
+      save: Guardar cambios
+      saving: Guardando...
     form:
-      editing: "Editando"
+      editing: Editando
       fields:
-        color: "Color"
-        name: "Nombre"
-        permissions: "Permisos"
-        subsector: "Subsector"
+        color: Color
+        name: Nombre
+        permissions: Permisos
+        subsector: Subsector
     select:
-      hint: "Selecciona haciendo click en los retratos"
+      hint: Selecciona haciendo click en los retratos
   comment:
-    input: "Comentar..."
-    confirm_delete: "¿Borrar commentario?"
-    name: "comentario"
-    one: "un comentario"
-    other: "comentarios"
-    view_all: "Ver todos los comentarios (%{count})"
+    input: Comentar...
+    confirm_delete: ¿Borrar commentario?
+    name: comentario
+    one: un comentario
+    other: comentarios
+    view_all: Ver todos los comentarios (%{count})
     title:
-      one: "Comentario"
-      other: "Comentarios"
+      one: Comentario
+      other: Comentarios
   contact:
-    all_n: "Todos los contactos (%{count})"
-    confirm_delete: "¿Borrar contacto?"
-    current: "Actuales"
-    delete: "Borrar"
+    all_n: Todos los contactos (%{count})
+    confirm_delete: ¿Borrar contacto?
+    current: Actuales
+    delete: Borrar
     edit:
-      title: "Editar contacto con %{name}"
-      submit: "Editar contacto"
-    empty: "Aún no has añadido a nadie. ¿Qué te parece <a href=\"%{explore}\">explorar</a>?"
+      title: Editar contacto con %{name}
+      submit: Editar contacto
+    empty: Aún no has añadido a nadie. ¿Qué te parece <a href="%{explore}">explorar</a>?
     error_count:
-      one: "1 error impidió que se guardara este contacto:"
-      other: "%{count} errores impidieron que se guardara este contacto"
-    follow: "Seguir"
-    following: "Siguiendo"
+      one: '1 error impidió que se guardara este contacto:'
+      other: '%{count} errores impidieron que se guardara este contacto'
+    follow: Seguir
+    following: Siguiendo
     graph:
-      one: "Gráfico"
-      empty: "Lo sentimos pero aún no tienes contactos, pero ¡puedes probar a buscar en la caja de búsqueda!"
+      one: Gráfico
+      empty: Lo sentimos pero aún no tienes contactos, pero ¡puedes probar a buscar
+        en la caja de búsqueda!
     in_common:
-      one: "1 contacto en común"
-      other: "%{count} contactos en común"
+      one: 1 contacto en común
+      other: '%{count} contactos en común'
     n:
-      one: "%{count} contacto"
-      other: "%{count} contactos"
+      one: '%{count} contacto'
+      other: '%{count} contactos'
     new:
       button:
-        zero: "Añadir"
-        one: "%{count} rol"
-        other: "%{count} roles"
-      link: "+ Añadir contacto"
-      title: "Añadir a %{name} como contacto"
-      menu: "Añadir contacto"
-      submit: "Añadir"
-    one: "Contacto"
-    other: "Contactos"
+        zero: Añadir
+        one: '%{count} rol'
+        other: '%{count} roles'
+      link: + Añadir contacto
+      title: Añadir a %{name} como contacto
+      menu: Añadir contacto
+      submit: Añadir
+    one: Contacto
+    other: Contactos
     pending:
-      other: "Te añadieron"
-      all: "Todos"
-      all_n: "Ver todas los contactos pendientes (%{count})"
-    received: "Recibidos"
+      other: Te añadieron
+      all: Todos
+      all_n: Ver todas los contactos pendientes (%{count})
+    received: Recibidos
     relation:
-      one: "Tipo de contacto"
-      new: "Nuevo tipo"
+      one: Tipo de contacto
+      new: Nuevo tipo
     reply:
-      link: "+ Responder contacto"
-      title: "Responder contacto con %{name}"
-      submit: "Responder contacto"
-    saving: "Guardando..."
-    sent: "Añadidos"
+      link: + Responder contacto
+      title: Responder contacto con %{name}
+      submit: Responder contacto
+    saving: Guardando...
+    sent: Añadidos
     suggestion:
-      one: "Sugerencia"
-      other: "Sugerencias"
-      all: "Todas"
+      one: Sugerencia
+      other: Sugerencias
+      all: Todas
     type:
-      new: "+ Nuevo tipo"
-    unfollow: "Dejar de seguir"
-    view_all: "Ver todos..."
-  copyright: "2013 Copyright - Derechos reservados"
+      new: + Nuevo tipo
+    unfollow: Dejar de seguir
+    view_all: Ver todos...
+  copyright: 2013 Copyright - Derechos reservados
   counter:
     like:
-      one: "<span class=\"counter\">%{count}</span> fan"
-      other: "<span class=\"counter\">%{count}</span> fans"
+      one: <span class="counter">%{count}</span> fan
+      other: <span class="counter">%{count}</span> fans
     view:
-      one: "<span class=\"counter\">%{count}</span> vista"
-      other: "<span class=\"counter\">%{count}</span> vistas"
+      one: <span class="counter">%{count}</span> vista
+      other: <span class="counter">%{count}</span> vistas
   delete:
-    confirm: "¿Borrar %{element}}?"
+    confirm: ¿Borrar %{element}}?
   devise:
     links:
-      sign_in: "Entrar"
-      sign_up: "Registrarse"
-      forgot_password: "¿Olvidaste tu contraseña?"
-      confirmation_instructions: "¿No recibiste instrucciones de confirmación?"
-      unlock_instructions: "¿No recibiste instrucciones de desbloqueo?"
-      sign_in_with: "Entrar con %{provider}"
+      sign_in: Entrar
+      sign_up: Registrarse
+      forgot_password: ¿Olvidaste tu contraseña?
+      confirmation_instructions: ¿No recibiste instrucciones de confirmación?
+      unlock_instructions: ¿No recibiste instrucciones de desbloqueo?
+      sign_in_with: Entrar con %{provider}
     passwords:
-      confirm: "Confirmar contraseña"
-      forgot: "¿Olvidaste tu contraseña?"
-      instructions: "Introduce el correo electrónico y te mandaremos instrucciones para cambiarlo"
-      update: "Cambiar contraseña"
+      confirm: Confirmar contraseña
+      forgot: ¿Olvidaste tu contraseña?
+      instructions: Introduce el correo electrónico y te mandaremos instrucciones
+        para cambiarlo
+      update: Cambiar contraseña
   dropdown:
-    notifications: "Notificaciones"
-    privacy: "Privacidad"
-    settings: "Ajustes"
+    notifications: Notificaciones
+    privacy: Privacidad
+    settings: Ajustes
   explore:
     explore:
-      most_followed: "Más seguidos"
-      most_popular: "Más populares"
+      most_followed: Más seguidos
+      most_popular: Más populares
     header:
-      explore: "Explorar"
-      participants: "Participantes"
-      resources: "Recursos"
-      timeline: "Linea temporal"
-      tags: "Etiquetas"
-      search: "Buscar"
-    link: "Explora"
-    or: "o Explora"
+      explore: Explorar
+      participants: Participantes
+      resources: Recursos
+      timeline: Linea temporal
+      tags: Etiquetas
+      search: Buscar
+    link: Explora
+    or: o Explora
     participants:
-      last_active: "Últimos activos"
-      last_registered: "Últimos registrados"
-      most_members: "Más integrantes"
-      registered_since: "desde el %{time}"
+      last_active: Últimos activos
+      last_registered: Últimos registrados
+      most_members: Más integrantes
+      registered_since: desde el %{time}
     resources:
-      last_uploaded: "Últimos subidos"
-      most_visited: "Más vistos"
-      uploaded_since: "desde el %{time}"
+      last_uploaded: Últimos subidos
+      most_visited: Más vistos
+      uploaded_since: desde el %{time}
     search:
-      placeholder: "buscando..."
-      submit: "Buscar"
-      title: "Búsqueda avanzada"
+      placeholder: buscando...
+      submit: Buscar
+      title: Búsqueda avanzada
   follower:
     follower:
-      title: "Seguidores"
+      title: Seguidores
     following:
-      title: "Siguiendo"
+      title: Siguiendo
     n:
-      one: "1 seguidor/a"
-      other: "%{count} seguidores"
-  forgot_password: "¿Olvidaste tu contraseña?"
+      one: 1 seguidor/a
+      other: '%{count} seguidores'
+  forgot_password: ¿Olvidaste tu contraseña?
   frontpage:
-    main_title: "Social Stream, el núcleo para construir webs con características de red social distribuída"
+    main_title: Social Stream, el núcleo para construir webs con características de
+      red social distribuída
     presentation:
       modular:
-        header: "Modular"
-        p: "Los <a href=\"https://github.com/ging/social_stream#social-stream-components\">componentes de Social Stream</a> disponibles aportan solo las características que necesitas para tu red social. Simplemente añade las gemas que necesites a tu Gemfile"
+        header: Modular
+        p: Los <a href="https://github.com/ging/social_stream#social-stream-components">componentes
+          de Social Stream</a> disponibles aportan solo las características que necesitas
+          para tu red social. Simplemente añade las gemas que necesites a tu Gemfile
       flexible:
-        header: "Flexible"
-        p: "Personaliza completamente tu red social <a href=\"https://github.com/ging/social_stream/wiki/How-to-change-controllers%2C-models%2C-views%2C-assets-and-locales\">cambiando cualquier componente de Social Stream</a>, <a href=\"https://github.com/ging/social_stream/wiki/How-to-add-new-activity-objects\">añadiendo nuevas actividades</a> o cambiando el CSS con <a href=\"http://sass-lang.com/\">SASS</a>"
+        header: Flexible
+        p: Personaliza completamente tu red social <a href="https://github.com/ging/social_stream/wiki/How-to-change-controllers%2C-models%2C-views%2C-assets-and-locales">cambiando
+          cualquier componente de Social Stream</a>, <a href="https://github.com/ging/social_stream/wiki/How-to-add-new-activity-objects">añadiendo
+          nuevas actividades</a> o cambiando el CSS con <a href="http://sass-lang.com/">SASS</a>
       community:
-        header: "Comunidad"
-        p: "Social Stream disfruta de una comunidad creciente de desarrolladores. No dudes en dejar un mensaje en <a href=\"http://groups.google.com/group/social-stream\">el Google group de Social Stream</a> o <a href=\"http://stackoverflow.com/questions/tagged/social-stream\">StackOverflow</a> si te encuentras con problemas. <a href=\"https://github.com/ging/social_stream/issues/new\">Abre un reporte</a> si encutras algún fallo. ¡Los pull request son muy bienvenidos!"
-    stats: "%{users} personas and %{groups} grupos registrados"
+        header: Comunidad
+        p: Social Stream disfruta de una comunidad creciente de desarrolladores. No
+          dudes en dejar un mensaje en <a href="http://groups.google.com/group/social-stream">el
+          Google group de Social Stream</a> o <a href="http://stackoverflow.com/questions/tagged/social-stream">StackOverflow</a>
+          si te encuentras con problemas. <a href="https://github.com/ging/social_stream/issues/new">Abre
+          un reporte</a> si encutras algún fallo. ¡Los pull request son muy bienvenidos!
+    stats: '%{users} personas and %{groups} grupos registrados'
   group:
-    one: "grupo"
-    other: "grupos"
-    all: "Todos los grupos"
-    all_n: "Todos los grupos (%{count})"
-    by: "Por grupos"
+    one: grupo
+    other: grupos
+    all: Todos los grupos
+    all_n: Todos los grupos (%{count})
+    by: Por grupos
     destroy:
-      one: "Destruir grupo"
-      explanation: "¡Todas las actividades, información y contactos de este grupo serán destruídos!"
-      go_ahead: "Sí, estoy seguro/a. ¡Destruirlo todo!"
-      last_confirm: "Es tu última oportunidad. ¿Realmente estás seguro/a?"
+      one: Destruir grupo
+      explanation: ¡Todas las actividades, información y contactos de este grupo serán
+        destruídos!
+      go_ahead: Sí, estoy seguro/a. ¡Destruirlo todo!
+      last_confirm: Es tu última oportunidad. ¿Realmente estás seguro/a?
     form:
-      title: "Grupo"
-    input: "¿Cuál es el nombre del grupo?"
-    last: "Últimos grupos"
-    my: "Mis grupos"
+      title: Grupo
+    input: ¿Cuál es el nombre del grupo?
+    last: Últimos grupos
+    my: Mis grupos
     n:
-      one: "%{count} grupo"
-      other: "%{count} groupos"
+      one: '%{count} grupo'
+      other: '%{count} groupos'
     new:
-      action: "Nuevo grupo"
-      name: "Nombre"
-      description: "Descripción"
-      participants: "Participantes"
-    cloud: "Nube de etiquetas de grupos"
+      action: Nuevo grupo
+      name: Nombre
+      description: Descripción
+      participants: Participantes
+    cloud: Nube de etiquetas de grupos
     most:
-      followed: "Más seguidos"
-      liked: "Más populares"
-    tags: "Etiquetas"
+      followed: Más seguidos
+      liked: Más populares
+    tags: Etiquetas
     title:
-      one: "Grupo"
-      other: "Grupos"
-    view_all: "Ver todos..."
+      one: Grupo
+      other: Grupos
+    view_all: Ver todos...
   header:
     icon:
-      contacts: "Contactos"
-      home: "Inicio"
-      messages: "Mensajes"
-      repository: "Repositorio"
-  help: "Ayuda"
+      contacts: Contactos
+      home: Inicio
+      messages: Mensajes
+      repository: Repositorio
+  help: Ayuda
   helpers:
     submit:
       relation_custom:
-        create: "Guardar"
-        update: "Guardar"
-  home: "Inicio"
+        create: Guardar
+        update: Guardar
+  home: Inicio
   inbox:
-    one: "Entrada"
+    one: Entrada
   invitation:
-    e-mails: "Correo electrónico"
-    error: "No se pudo atender a la petición. Asegurate de haber escrito una dirección de correo correcta"
-    invited: "%{sender} te ha invitado a %{site}"
-    join: "¡Invita a otras personas a unirse a %{site}!"
-    join_me: "¡Únete a mi en %{site}!"
-    one: "Invitación"
-    other: "Invitaciones"
-    toolbar: "Invitar"
-    success: "Se han enviado tus invitaciones"
-    text: "Escribe tu mensaje"
+    e-mails: Correo electrónico
+    error: No se pudo atender a la petición. Asegurate de haber escrito una dirección
+      de correo correcta
+    invited: '%{sender} te ha invitado a %{site}'
+    join: ¡Invita a otras personas a unirse a %{site}!
+    join_me: ¡Únete a mi en %{site}!
+    one: Invitación
+    other: Invitaciones
+    toolbar: Invitar
+    success: Se han enviado tus invitaciones
+    text: Escribe tu mensaje
   layout:
-    more: "Ver más (%{count})"
+    more: Ver más (%{count})
   like:
     n:
-      one: "1 fan"
-      other: "%{count} fans"
+      one: 1 fan
+      other: '%{count} fans'
   location:
-    message: "Estás aquí > %{location}"
-    base: "Estás aquí"
-    separator: " > "
+    message: Estás aquí > %{location}
+    base: Estás aquí
+    separator: ' > '
   mailboxer:
-    delete: "Borrar"
-    delete_confirm: "¿Quieres enviar '%{object}' a la papelera?"
+    delete: Borrar
+    delete_confirm: ¿Quieres enviar '%{object}' a la papelera?
     form:
-      body: "Mensaje"
-      recipients: "Para"
-      subject: "Asunto"
-    mark_as_read: "Marcar como leido"
+      body: Mensaje
+      recipients: Para
+      subject: Asunto
+    mark_as_read: Marcar como leido
     message_mailer:
-      has_sent_new: 
-        event: "ha mandado un nuevo mensaje a %{receiver}"
-        group: "ha mandado un nuevo mensaje a %{receiver}"
-        user: "te ha mandado un nuevo mensaje"
-      has_sent_reply: 
-        event: "ha mandado una respuesta a %{receiver}"
-        group: "ha mandado una respuesta a %{receiver}"
-        user: "te ha mandado una respuesta"
-      subject_new: "%{subject}"
-      subject_reply: "%{subject}"
+      has_sent_new:
+        event: ha mandado un nuevo mensaje a %{receiver}
+        group: ha mandado un nuevo mensaje a %{receiver}
+        user: te ha mandado un nuevo mensaje
+      has_sent_reply:
+        event: ha mandado una respuesta a %{receiver}
+        group: ha mandado una respuesta a %{receiver}
+        user: te ha mandado una respuesta
+      subject_new: '%{subject}'
+      subject_reply: '%{subject}'
     notification_mailer:
-      subject: "%{subject}"    
-    reply: "Contestar"
-    send: "Enviar mensaje"
-    sent: "Tu mensaje fue enviado"
+      subject: '%{subject}'
+    reply: Contestar
+    send: Enviar mensaje
+    sent: Tu mensaje fue enviado
   menu:
-    options: "Opciones"
-    information: "Información"
-    wall: "Muro"
+    options: Opciones
+    information: Información
+    wall: Muro
   message:
-    answer: "Responder"
-    inbox: "Entrada"
-    look: "Échale un vistazo a esta conversación"
-    new: "Nuevo mensaje"
-    one: "Mensaje"
-    other: "Mensajes"
-    participants: "Participantes"
-    send: "Enviar un mensaje"
-    sentbox: "Salida"
-    trash: "Papelera"
+    answer: Responder
+    inbox: Entrada
+    look: Échale un vistazo a esta conversación
+    new: Nuevo mensaje
+    one: Mensaje
+    other: Mensajes
+    participants: Participantes
+    send: Enviar un mensaje
+    sentbox: Salida
+    trash: Papelera
   notification:
-    all_text: "Lee el texto entero en %{url}"
-    confirm: "¿Confirmar contacto con %{sender}?"
-    default: "Tienes una nueva notificación"
-    destroy_sure: "¿Borrar notificación?"
-    fan: "%{sender} es ahora fan %{whose}."
+    all_text: Lee el texto entero en %{url}
+    confirm: ¿Confirmar contacto con %{sender}?
+    default: Tienes una nueva notificación
+    destroy_sure: ¿Borrar notificación?
+    fan: '%{sender} es ahora fan %{whose}.'
     follow:
-      group: "%{sender} añadió a %{who} como contacto."
-      user: "%{sender} te añadió como contacto."
-    hello: "Hola %{receiver},"
+      group: '%{sender} añadió a %{who} como contacto.'
+      user: '%{sender} te añadió como contacto.'
+    hello: Hola %{receiver},
     like:
-      group: "A %{sender} le gusta el %{thing} %{whose}." 
-      user: "A %{sender} le gusta tu %{thing}."
-    look: "Echa un vistazo al perfil de %{sender}"
+      group: A %{sender} le gusta el %{thing} %{whose}.
+      user: A %{sender} le gusta tu %{thing}.
+    look: Echa un vistazo al perfil de %{sender}
     makefriend:
-      group: "%{sender} también añadió a %{who} como contacto."
-      user: "%{sender} también te añadió como contacto."
-    one: "Notificación"
-    other: "Notificaciones"
+      group: '%{sender} también añadió a %{who} como contacto.'
+      user: '%{sender} también te añadió como contacto.'
+    one: Notificación
+    other: Notificaciones
     post:
-      group: "%{title} -- por %{sender} en el muro %{whose}"
-      user: "%{title} -- por %{sender} en tu muro"
-    read: "Marcar como leída"
-    read_all: "Marcar todas como leídas"
-    unread: "Marcar como no leídas"
+      group: '%{title} -- por %{sender} en el muro %{whose}'
+      user: '%{title} -- por %{sender} en tu muro'
+    read: Marcar como leída
+    read_all: Marcar todas como leídas
+    unread: Marcar como no leídas
     update:
-      group: "%{sender} actualizó %{thing} en el muro %{whose}."
-      user: "%{sender} actualizó %{thing} en tu muro."
-    visit: "Visita %{url} y comprueba todas tus notificaciones."
-    watch: "Échale un vistazo en %{url}"
-    watch_it: "¡Échale un vistazo!"
+      group: '%{sender} actualizó %{thing} en el muro %{whose}.'
+      user: '%{sender} actualizó %{thing} en tu muro.'
+    visit: Visita %{url} y comprueba todas tus notificaciones.
+    watch: Échale un vistazo en %{url}
+    watch_it: ¡Échale un vistazo!
     who:
-      group: "%{name}"
-      user: "tú"
-    whose: 
-      group: "de %{receiver}"
-      user: "tuyo"
+      group: '%{name}'
+      user: tú
+    whose:
+      group: de %{receiver}
+      user: tuyo
   post:
-    confirm_delete: "¿Borrar texto?"
+    confirm_delete: ¿Borrar texto?
     form:
-      title: "Texto"
-    input: "Comparte tus ideas..."
-    name: "publicación"
-    one: "una publicación"
-    other: "publicaciones"
+      title: Texto
+    input: Comparte tus ideas...
+    name: publicación
+    one: una publicación
+    other: publicaciones
     title:
-      one: "Texto"
-      other: "Textos"
+      one: Texto
+      other: Textos
   preposition:
-    and: "y"
+    and: y
+    true: 'on'
   profile:
-    one: "Perfil"
-    age: "Edad"
-    is_on: "esta en"
-    must_be_signed_id: "Debes identificarte"
+    one: Perfil
+    age: Edad
+    is_on: esta en
+    must_be_signed_id: Debes identificarte
     group:
-      about: "Sobre nosotros/as"
-      birthday: "Aniversario"
-      experience: "Temas que se trabajan"
-      info: "Información sobre el grupo"
-      tags: "Etiquetas del grupo"
+      about: Sobre nosotros/as
+      birthday: Aniversario
+      experience: Temas que se trabajan
+      info: Información sobre el grupo
+      tags: Etiquetas del grupo
     user:
-      about: "Sobre mí"
-      birthday: "Cumpleaños"
-      experience: "Intereses"
-      info: "Información personal"
-      tags: "Etiquetas"
-    actualcity: "Ciudad actual"
-    address: "Dirección"
-    contact: "Información de contacto"
-    country: "País"
-    email: "Correo electrónico"
-    empty: "Estos campos están vacíos. ¡Actualízalos!"
-    fax: "Fax"
-    mobile: "Móvil"
-    organization: "Organización"
-    phone: "Teléfono"
-    profile: "Editar perfil"
+      about: Sobre mí
+      birthday: Cumpleaños
+      experience: Intereses
+      info: Información personal
+      tags: Etiquetas
+    actualcity: Ciudad actual
+    address: Dirección
+    contact: Información de contacto
+    country: País
+    email: Correo electrónico
+    empty: Estos campos están vacíos. ¡Actualízalos!
+    fax: Fax
+    mobile: Móvil
+    organization: Organización
+    phone: Teléfono
+    profile: Editar perfil
     tags:
-      default: "social, stream,"
-      other: "Etiquetas"
-    website: "Sitio web" 
+      default: social, stream,
+      other: Etiquetas
+    website: Sitio web
     update:
-      error: "Por favor, comprueba el formato de tu perfil:"
-      success: "Tu perfil se ha actualizado"
+      error: 'Por favor, comprueba el formato de tu perfil:'
+      success: Tu perfil se ha actualizado
   public:
-    other: "Todo el mundo"
+    other: Todo el mundo
   permission:
     description:
       default:
         brief:
-          create: 
-            activity: "Publicar en vuestro muro"
+          create:
+            activity: Publicar en vuestro muro
           follow:
-            nil: "Seguir su actividad"
+            nil: Seguir su actividad
           read:
-            activity: "Leer vuestro muro"
+            activity: Leer vuestro muro
           represent:
-            nil: "Administrar"
+            nil: Administrar
           notify:
-            nil: "Notificar"
+            nil: Notificar
         detailed:
           create:
             activity:
-              positive: "PODRÁN publicar actividades en vuestro muro"
-              negative: "NO PODRÁN publicar actividades en vuestro muro"
+              positive: PODRÁN publicar actividades en vuestro muro
+              negative: NO PODRÁN publicar actividades en vuestro muro
           follow:
             nil:
-              positive: "Las actividades de los contactos en %{relation} APARECERÁN en vuestra página de inicio"
-              negative: "Las actividades de los contactos en %{relation} NO APARECERÁN en vuestra página de inicio"
+              positive: Las actividades de los contactos en %{relation} APARECERÁN
+                en vuestra página de inicio
+              negative: Las actividades de los contactos en %{relation} NO APARECERÁN
+                en vuestra página de inicio
           read:
             activity:
-              positive: "PODRÁN leer las publicaciones que aparezcan en vuestro muro, salvo las que compartas solo ciertas personas"
-              negative: "NO PODRÁN leer las publicaciones que aparezcan en vuestro muro, salvo las que marques como públicas"
+              positive: PODRÁN leer las publicaciones que aparezcan en vuestro muro,
+                salvo las que compartas solo ciertas personas
+              negative: NO PODRÁN leer las publicaciones que aparezcan en vuestro
+                muro, salvo las que marques como públicas
           represent:
             nil:
-              positive: "PODRÁN cambiar sesión para actuar en nombre de %{name}"
-              negative: "NO PODRÁN cambiar sesión para actuar en nombre de %{name}"
+              positive: PODRÁN cambiar sesión para actuar en nombre de %{name}
+              negative: NO PODRÁN cambiar sesión para actuar en nombre de %{name}
           notify:
             nil:
-              positive: "Las actividades SE NOTIFICARÁN a los contactos en %{relation}"
-              negative: "Las actividades NO SE NOTIFICARÁN a los contactos en %{relation}"
-      user:
-        brief:
-          create: 
-            activity: "Publicar en tu muro"
-          read:
-            activity: "Leer tu muro"
-        detailed:
-          create:
-            activity:
-              positive: "PODRÁN publicar actividades en tu muro"
-              negative: "NO PODRÁN publicar actividades en tu muro"
-          follow:
-            nil:
-              positive: "Las actividades de los contactos en %{relation} APARECERÁN en tu página de inicio"
-              negative: "Las actividades de los contactos en %{relation} NO APARECERÁN en tu página de inicio"
-          read:
-            activity:
-              positive: "PODRÁN leer las publicaciones que aparezcan en tu muro, salvo las que compartas solo con ciertas personas"
-              negative: "NO PODRÁN leer las publicaciones que aparezcan en tu muro, salvo las que marques como públicas"
+              positive: Las actividades SE NOTIFICARÁN a los contactos en %{relation}
+              negative: Las actividades NO SE NOTIFICARÁN a los contactos en %{relation}
     of_relation:
-      choose: "Permisos para <strong>%{name}</strong>"
-    postit: "Gestiona los permisos de tus contactos y crea nuevos roles"
+      choose: Permisos para <strong>%{name}</strong>
+    postit: Gestiona los permisos de tus contactos y crea nuevos roles
   privacy:
-    intro: "Los contactos en <strong>%{relation}</strong>:"
+    intro: 'Los contactos en <strong>%{relation}</strong>:'
     rule:
-      add: "Añadir"
-      title: "Reglas de privacidad"
-      saved: "Reglas de privacidad guardadas"
+      add: Añadir
+      title: Reglas de privacidad
+      saved: Reglas de privacidad guardadas
   relation_custom:
-    confirm_delete: "¿Borrar este rol?"
-    delete: "Borrar"
-    edit: "Cambiar nombre"
+    confirm_delete: ¿Borrar este rol?
+    delete: Borrar
+    edit: Cambiar nombre
     list:
-      title: 'Roles'
-    new: "+ Nuevo rol"
-    title: "Privacidad"
+      title: Roles
+    new: + Nuevo rol
+    title: Privacidad
   relation_public:
-    name: "Público"
+    name: Público
   repository:
-    filter: "filtrar"
-    title: "Repositorio"
+    filter: filtrar
+    title: Repositorio
     order:
-      by: "Ordenar por"
-      last_modified: "Última modificación"
-      most_popular: "Popularidad"
+      by: Ordenar por
+      last_modified: Última modificación
+      most_popular: Popularidad
   representation:
-    notice: "Tu sesión ha cambiado. Ahora actúas en nombre de %{subject}. Para regresar a tu sessión, utiliza el menú de arriba a la derecha"
-    switch: "Cambiar sessión"
-  required: "(*) Estos campos son obligatorios"
+    notice: Tu sesión ha cambiado. Ahora actúas en nombre de %{subject}. Para regresar
+      a tu sessión, utiliza el menú de arriba a la derecha
+    switch: Cambiar sessión
+  required: (*) Estos campos son obligatorios
   search:
-    all_subject_results: "Ver todos %{subject} (%{count})"
     at_least:
-      one: "Escribe al menos %{count} letra"
-      other: "Escribe al menos %{count} letras"
-    global: 
-      name: "Búsqueda global"
+      one: Escribe al menos %{count} letra
+      other: Escribe al menos %{count} letras
+    global:
+      name: Búsqueda global
       first_result:
-        more: "Mostrando los primeros %{count} resultados."
-        one: "Mostrando el primer resultado"
-      query: "Más resultados para %{query} >"
-    name: "Buscar"
-    no_subject_found: "No se encontró a %{subject}."
-    nothing: "No se ha econtrado nada."
-    searching: "Buscando: %{query}"
-    show_all: "Todos"
-    write: "Escribe tu búsqueda..."
-    wrong: "Parece que hay un problema con el motor de búsqueda"
+        more: Mostrando los primeros %{count} resultados.
+        one: Mostrando el primer resultado
+      query: Más resultados para %{query} >
+    name: Buscar
+    no_subject_found: No se encontró a %{subject}.
+    nothing: No se ha econtrado nada.
+    searching: 'Buscando: %{query}'
+    show_all: Todos
+    write: Escribe tu búsqueda...
+    wrong: Parece que hay un problema con el motor de búsqueda
+    all_results: Search all %{subject} (%{count})
   settings:
     api_key:
-      briefing: "Gestiona tu clave API"
-      confirm: "¿Estás seguro?"
-      empty: "Token vacío"
-      explanation: "Ésta es tu clave API"
-      name: "Clave API"
-      regenerate: "Regenerar clave API"
+      briefing: Gestiona tu clave API
+      confirm: ¿Estás seguro?
+      empty: Token vacío
+      explanation: Ésta es tu clave API
+      name: Clave API
+      regenerate: Regenerar clave API
     cancel_account:
-      briefing: "Te permite cancelar tu cuenta"
+      briefing: Te permite cancelar tu cuenta
     email_change:
-      briefing: "Cambia tu email"
+      briefing: Cambia tu email
     lang_change:
-      briefing: "Cambia tu idioma"
-      name: "Cambia tu idioma"
-    error: "Hubo errores al guardar los cambios"
-    for: "Ajustes para"
-    main: "Ajustes"
+      briefing: Cambia tu idioma
+      name: Cambia tu idioma
+    error: Hubo errores al guardar los cambios
+    for: Ajustes para
+    main: Ajustes
     manage:
-      name: "Administrar contactos"
-      briefing: "Ajustes de contactos"
-      explanation: "Cambiar los permisos de contactos"
+      name: Administrar contactos
+      briefing: Ajustes de contactos
+      explanation: Cambiar los permisos de contactos
     notifications:
-      briefing: "Ajustes sobre notificaciones y alertas por correo"
-      name: "Notificaciones"
+      briefing: Ajustes sobre notificaciones y alertas por correo
+      name: Notificaciones
       by_email:
-        name: "Mandarme un correo cuando me llega una notificación"
-        always: "Siempre"
-        never: "Nunca"
-    one: "Ajustes"
+        name: Mandarme un correo cuando me llega una notificación
+        always: Siempre
+        never: Nunca
+    one: Ajustes
     password_change:
-      briefing: "Cambia tu contraseña"
-    success: "Ajustes guardados con éxito"
-  share: "Compartir"
-  sign_in: "Ingresar"
-  sign_out: "Salir"
-  sign_up: "Registrarse"
+      briefing: Cambia tu contraseña
+    success: Ajustes guardados con éxito
+  share: Compartir
+  sign_in: Ingresar
+  sign_out: Salir
+  sign_up: Registrarse
   site:
-    name: "Social Stream"
+    name: Social Stream
   subject:
-    this_is_you: "¡Eres tú!"
-  sure: "¿Confirmar?"
+    this_is_you: ¡Eres tú!
+  sure: ¿Confirmar?
   time:
-    ago: "hace %{time}"
-  unknown: "Desconocido"
+    ago: hace %{time}
+  unknown: Desconocido
   user:
-    all: "Todos los usuarios"
-    all_n: "Todos los usuarios (%{count})"
-    by: "Por usuarios"
-    one: "usuario"
-    other: "usuarios"
+    all: Todos los usuarios
+    all_n: Todos los usuarios (%{count})
+    by: Por usuarios
+    one: usuario
+    other: usuarios
     title:
-      one: "Usuario"
-      other: "Usuarios"
-  welcome: "¡Bienvenid@ a %{site}!"
+      one: Usuario
+      other: Usuarios
+  welcome: ¡Bienvenid@ a %{site}!
   lang:
-    browser: "Autodetectar el idioma del navegador"
-    none: "Contenido independiente del idioma"
-
+    browser: Autodetectar el idioma del navegador
+    none: Contenido independiente del idioma

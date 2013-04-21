@@ -1,16 +1,17 @@
+---
 es:
   linkser:
-    title: "Linkser"
+    title: Linkser
   link:
-    by: "por %{author}"
-    confirm_delete: "¿Borrar enlace?"
+    by: por %{author}
+    confirm_delete: ¿Borrar enlace?
     errors:
-      loading: "Error cargando"
-      only_webs: "Solo puedes compartir págnas web"
+      loading: Error cargando
+      only_webs: Solo puedes compartir págnas web
     form:
-      title: "Enlace"
-    input: "Escribe una dirección"
-    name: "enlace"
-    one: "un enlace"
-    other: "enlaces"
-    title: "Enlaces"
+      title: Enlace
+    input: Escribe una dirección
+    name: enlace
+    one: un enlace
+    other: enlaces
+    title: Enlaces

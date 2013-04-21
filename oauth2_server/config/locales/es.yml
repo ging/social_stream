@@ -1,29 +1,30 @@
+---
 es:
   account:
-    applications: "Aplicaciones"
+    applications: Aplicaciones
   activerecord:
     attributes:
       site/client:
-        callback_url: "Callback URL"
-        id: "Client ID"
-        name: "Nombre"
-        secret: "Client Secret"
-        url: "URL"
-  authorizations:
-    form:
-      accept: "Aceptar"
-      cancel: "Cancelar"
-    new:
-      title: "¿Autorizar %{client}?"
-      permission:
-        title: "El sitio %{client} será capaz de:"
+        callback_url: Callback URL
+        id: Client ID
+        name: Nombre
+        secret: Client Secret
+        url: URL
   permission:
-    public_info: "Acceder a tu información pública"
+    public_info: Acceder a tu información pública
   site:
     client:
-      added: "Sitios añadidos"
+      added: Sitios añadidos
       index:
-        title: "Sitios"
+        title: Sitios
       new:
-        link: "Añadir sitio"
-        title: "Registrar nuevo sitio"
+        link: Añadir sitio
+        title: Registrar nuevo sitio
+  authorization:
+    form:
+      accept: Accept
+      cancel: Cancel
+    new:
+      title: Authorize %{client}?
+      permission:
+        title: 'The site %{client} will be able to:'

@@ -24,3 +24,5 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('README.rdoc')
   rdoc.rdoc_files.include('lib/**/*.rb', 'app/**/*.rb')
 end
+
+import 'lib/tasks/i18n.rake'

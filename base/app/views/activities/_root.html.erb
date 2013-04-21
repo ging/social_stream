@@ -8,7 +8,7 @@
   <header class="media-heading">
     <%= activity.title(self) %>
 
-    <% if activity.direct_object && can?(:destroy, activity.direct_object) %>
+    <% if activity.direct_object && !activity.direct_object.acts_as_actor? && can?(:destroy, activity.direct_object) %>
     <div class="x" style="float: right"> 
       <%= link_to ('X'), activity.direct_object , :confirm => t('confirm_delete', 
                     :scope => activity.direct_object.class.to_s.underscore), :method => :delete,  
