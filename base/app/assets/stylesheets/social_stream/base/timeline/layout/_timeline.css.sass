@@ -4,6 +4,7 @@
 #home,
 #time-line,
   .timeline
+    @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
     .comments
     .media
       padding-bottom: 13px
@@ -160,6 +161,9 @@
           display: inline
 
 .timeline
+  .more
+    a
+      width: 53%
   .modal
     top: 4% !important
     .modal-body

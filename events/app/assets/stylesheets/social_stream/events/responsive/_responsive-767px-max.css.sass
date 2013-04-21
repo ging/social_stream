@@ -12,12 +12,15 @@
       .event,
       .link
         .date
-          width: 48px
-        .details,
-        .text 
-          margin-left: 10px
-          width: 50%
+          width: 70px
+          margin-left: 0
+        .details
           display: inline-block !important
+          width: 100%
+          .text 
+            width: 100%
+            margin-left: 0px
+          
 
   #calendar 
     @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
@@ -55,16 +58,16 @@
         .event,
         .link
           .date
+            width: 70px
+            margin-left: 0
             .day,
             .month
               font-weight: bold
               font-size: 15px
           .poster
             @include hidden-phone
-          .details,
-          .text 
-            width: 40%
-            margin-left: 7px
+        
+
         
   
   
