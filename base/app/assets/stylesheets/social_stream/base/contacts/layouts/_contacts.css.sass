@@ -92,8 +92,9 @@
 
 #relation_customs
   .relation_customs
-    @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+    width: 80%
     float: left
+    margin-left: 2.5%
   .relation_list
     @include makeColumn(3, 0)
     padding-right: 5px
@@ -130,9 +131,9 @@
     margin-right: 10px
   .new_relation_custom
     .btn
-      @include buttonBackground($blueDark, $blue, $textColor: #fff, $textShadow: 0 -1px 0 rgba(0,0,0,.25)) 
+      @include btn-secundary 
       float: right
-      margin: 7px 13px 0 0
+      margin: 7px 0px 0 0
     
 
 #new_relation_input_block
@@ -141,7 +142,7 @@
 
 
 #permissions
-  @include makeColumn(5, 0)
+  @include makeColumn(4, 0)
   h4
     text-align: left
   li
