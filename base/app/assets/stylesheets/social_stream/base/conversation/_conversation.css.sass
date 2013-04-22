@@ -48,7 +48,7 @@
   h3
     @include ellipsis
   .participants
-    @extend .border-radius-5
+    @include border-radius(5px)
     background-color: #f1f1f1
     img
       @include border-radius (5px)
@@ -73,7 +73,6 @@
   .message
     border-bottom: 1px solid #f1f1f1
     background-color: $white
-    @extend .border-bottom-left-radius-15
     .media
       .pull-left
         img
