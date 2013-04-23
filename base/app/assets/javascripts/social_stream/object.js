@@ -70,6 +70,10 @@ SocialStream.Object = (function(SS, $, undefined){
     $('[name$="[relation_ids][]"]').attr('name', type + '[relation_ids][]');
   };
 
+  var changeOwner = function(type) {
+    $('[name$="[owner_id]"]').attr('name', type + '[owner_id]');
+  };
+
   callback.register('show',
                     SS.Comment.index,
                     SS.Audience.index);
@@ -78,6 +82,7 @@ SocialStream.Object = (function(SS, $, undefined){
                     initRelationSelect);
 
   return callback.extend({
+    changeOwner: changeOwner,
     changeRelationSelect: changeRelationSelect
   });
 

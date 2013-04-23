@@ -27,9 +27,6 @@ class Profile < ActiveRecord::Base
   validate :validate_birthday
   
   def birthday=(value)
-    
-    puts "He entrado en el metodo birthday con un :" + value.class.to_s 
-          
     if value.blank?
       @birthday_formatted_invalid = false    
       super value
@@ -42,7 +39,6 @@ class Profile < ActiveRecord::Base
         @birthday_formatted_invalid = true
       end
     end
-
   end
   
   def age

@@ -11,11 +11,11 @@
     </div>
 
     <div class="info">
-      <%= contact_brief(contact.receiver_subject) %>
+      <%= contact_count(contact.receiver) %>
     </div>
   </div>
   <div class="add">
-    <%= contact_link(contact) %>
+    <%= contact_button(contact) %>
   </div>
   <div class="x">
         <%= link_to 'X', contact_path(contact, destroy_params), method: :delete, remote: true, confirm: t('contact.confirm_delete') %>

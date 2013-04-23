@@ -39,6 +39,7 @@ SocialStream.Wall = (function(SS, $, undefined){
 
   return callback.extend({
     changeAction: changeAction,
+    changeOwner: SS.Object.changeOwner, 
     changeRelationSelect: SS.Object.changeRelationSelect 
   });
 }) (SocialStream, jQuery);
