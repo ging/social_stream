@@ -19,10 +19,8 @@
       .comunication-info,
       .experience,
       .avatar
-        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-        .update
-          @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-
+        width: 97% !important
+    
 
 
 
@@ -31,4 +29,14 @@
 
 @media (max-width: 480px)
 
+  #profile
+    #profile-info
+      .tags,
+      .personal,
+      .comunication-info,
+      .experience,
+      .avatar
+        width: 96% !important
+        .accordion-heading
+          min-height: 40px
   
