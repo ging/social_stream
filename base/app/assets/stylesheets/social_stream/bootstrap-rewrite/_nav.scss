@@ -22,3 +22,7 @@
   text-decoration: none;
   text-shadow: 0 1px 0 white;
 }
+
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover, .nav-tabs > .active > a:focus {
+  @include gradient-vertical($startColor: $white, $endColor: rgba(255, 255, 255, 0.3));
+}
