@@ -78,16 +78,6 @@ namespace :db do
         puts 'Groups population (' + @GROUPS.to_s + ' groups)'
         groups_start = Time.now
 
-        def set_tags(klass)
-          klass.all.each do |el|
-            el.tag_list = Forgery::LoremIpsum.words(1,:random => true)+", "+
-                          Forgery::LoremIpsum.words(1,:random => true)+", "+
-                          Forgery::LoremIpsum.words(1,:random => true)
-            el.save!
-          end
-        end
-
-
         @GROUPS.times do
           founder = @available_actors[rand(@available_actors.size)]
 
@@ -97,8 +87,6 @@ namespace :db do
                         :user_author_id => founder.id
         end
 
-        set_tags(Group)
-
         # Reload actors to include groups
         @available_actors = Actor.all
 
@@ -106,6 +94,60 @@ namespace :db do
         puts '   -> ' +  (groups_end - groups_start).round(4).to_s + 's'
       end
 
+      desc "Populate profiles"
+
+      task :profiles => :read_environment do
+        puts "Profiles population"
+        time = Time.now
+
+        SocialStream::Population::Actor.available.each do |a|
+          p = a.profile
+
+          if rand < 0.2
+            a.tag_list = Forgery::LoremIpsum.words(3, random: true).gsub(' ', ',')
+          end
+
+          if rand < 0.2
+            p.organization = Forgery::Name.company_name
+          end
+
+          if rand < 0.2
+            p.birthday = Time.at(Time.now.to_i - (18.years + rand(60.years)))
+          end
+
+          if rand < 0.2
+            p.city = Forgery::Address.city
+          end
+
+          if rand < 0.2
+            p.country = Forgery::Address.country
+          end
+
+          if rand < 0.2
+            p.description = Forgery::LoremIpsum.sentences(2, random: true)
+          end
+
+          if rand < 0.2
+            p.phone = Forgery::Address.phone
+          end
+
+          if rand < 0.2
+            p.address = Forgery::Address.street_address
+          end
+
+          if rand < 0.2
+            p.website = "http://#{ Forgery::Internet.domain_name }"
+          end
+
+          if rand < 0.2
+            p.experience = Forgery::LoremIpsum.sentences(3, random: true)
+          end
+
+          p.save!
+        end
+
+        puts '   -> ' + (Time.now - time).round(4).to_s + 's'
+      end
 
       # TIES
       desc "Create ties"
@@ -113,8 +155,7 @@ namespace :db do
         puts 'Ties population'
         ties_start = Time.now
 
-        @available_actors.each do |a|
-          actors = @available_actors.dup
+        SocialStream::Population::Actor.available.each do |a|
           actors.delete(a)
 
           relations = a.relation_customs + [ Relation::Reject.instance ]
@@ -145,8 +186,8 @@ namespace :db do
         puts 'Ties population (Cheesecake version)'
         ties_start = Time.now
 
-        @available_actors.each do |a|
-          actors = @available_actors.dup - Array(a)
+        SocialStream::Population::Actor.available.each do |a|
+          actors = SocialStream::Population::Actor.available - Array(a)
           relations = a.relation_customs + Array.wrap(Relation::Reject.instance)
           break if actors.size==0
           actor = Actor.first
