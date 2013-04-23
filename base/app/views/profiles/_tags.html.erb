@@ -1,26 +1,22 @@
-<section class="tags">
-  <header>
-    <%= render partial: 'edit_icon' %>
-    <h4>
+<section class="tags accordion-group">
+  <div class="accordion-heading">
+    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
       <%= t('profile.tags.other') %>
-    </h4>
-  </header>
-
-
-  <div class="briefing">
+    </a>    
     <% if @profile.subject.tag_list.count > 0 %>
       <%= tag_list @profile.subject %>
     <% else %>
       <%= render partial: 'empty' %>
     <% end %>
+    <% if can?(:update, @profile) %>
   </div>
-
-  <% if can?(:update, @profile) %>
-    <div class="update">
+  <div id="collapseOne" class="update accordion-body collapse">
+    <div class="accordion-inner">
       <%= form_for(@profile, :url => [ @profile.subject, :profile ]) do |f| %>
         <%= f.text_field :tag_list, "data-path" => tags_path(format: :json) %>
         <%= f.submit :class => "btn" %>
       <% end %>
     </div>
   <% end %>
+  </div>
 </section>

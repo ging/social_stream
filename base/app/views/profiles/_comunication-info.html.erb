@@ -1,12 +1,9 @@
-<section class="comunication-info">
-  <header>
-    <%= render partial: 'edit_icon' %>
-    <h4>
+<section class="accordion-group comunication-info">
+  <div class="accordion-heading">
+    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTree">
       <%= t('profile.contact') %>
-    </h4>
-  </header>
+    </a>
 
-  <div class="briefing">
     <% if @profile.contact_present? %>
       <% if @profile.phone? %>
         <h5>
@@ -56,9 +53,11 @@
       <%= render partial: 'empty' %>
     <% end %>
   </div>
+ 
 
   <% if can? :update, @profile %>
-    <div class="update">
+  <div id="collapseTree" class="accordion-body collapse">
+    <div class="accordion-inner">
       <%= form_for(@profile, :url => [current_subject, :profile]) do |f| %>
         <h6>
           <%= f.label :phone, t('profile.phone') %>
@@ -95,4 +94,5 @@
       <% end %>
     </div>
   <% end %>
+  </div>
 </section>

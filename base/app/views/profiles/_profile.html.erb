@@ -2,32 +2,39 @@
   <h2 class="colorfont">
     <%= t('profile.one') %>
   </h2>
+  <div class="accordion" id="accordion2">
+    <div class="accordion-group">
+      <% if can?(:update, @profile) || @profile.tags_present? %>
+        <%= render partial: "tags" %>
+      <% end %>
+    </div>
+    <div class="accordion-group">
+      <% if can?(:update, @profile) || @profile.personal_present? %>
+        <%= render partial: "personal" %>
+      <% end %>
+    </div>
+    <div class="accordion-group">
+      <% if can?(:update, @profile) || @profile.contact_present? %>
+        <%= render :partial => "comunication-info" %>
+      <% end %>
+    </div>
+    <div class="accordion-group">
+      <% if can?(:update, @profile) || @profile.experience? %>
+        <%= render :partial => "experience" %>
+      <% end %>
+    </div>
+    <div class="accordion-group">
+      <% if can?(:update, @profile) || @profile.personal_present? %>
+        <%= render :partial => "avatar" %>
+      <% end %>
+    </div>
 
-  <% if can?(:update, @profile) || @profile.tags_present? %>
-    <%= render partial: "tags" %>
-  <% end %>
-
-  <% if can?(:update, @profile) || @profile.personal_present? %>
-    <%= render partial: "personal" %>
-  <% end %>
-
-  <% if can?(:update, @profile) || @profile.contact_present? %>
-    <%= render :partial => "comunication-info" %>
-  <% end %>
-
-  <% if can?(:update, @profile) || @profile.experience? %>
-    <%= render :partial => "experience" %>
-  <% end %>
-
-  <% if can?(:update, @profile) || @profile.personal_present? %>
-    <%= render :partial => "avatar" %>
-  <% end %>
-
-  <%= javascript_tag do %>
-    $(function() {
-      SocialStream.Profile.show({
-        section: "<%= params[:section ] %>"
+    <%= javascript_tag do %>
+      $(function() {
+        SocialStream.Profile.show({
+          section: "<%= params[:section ] %>"
+        });
       });
-    });
-  <% end %>
+    <% end %>
+  </div>
 </div>

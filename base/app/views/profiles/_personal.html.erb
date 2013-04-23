@@ -1,12 +1,9 @@
-<section class="personal">
-  <header>
-    <%= render partial: 'edit_icon' %>
-    <h4>
+<section class="accordion-group personal">
+  <div class="accordion-heading">
+    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
       <%= t("profile.#{ @profile.subject.class.to_s.downcase }.info") %>
-    </h4>
-  </header>
-
-  <div class="briefing">
+    </a>
+  
     <% if @profile.personal_present? %>
       <% if @profile.organization? %>
         <h5>
@@ -64,12 +61,15 @@
     <% end %>
   </div>
 
-  <% if can? :update, @profile %>
-    <div class="update">
+  <div id="collapseTwo" class="accordion-body collapse">
+    <div class="accordion-inner">
+      <% if can? :update, @profile %>
+
       <%= form_for(@profile, :url => [current_subject, :profile]) do |f| %>
         <h6>
-          <%= f.label t('actor.name') %>
           <span class="required">*</span>
+          <%= f.label t('*actor.name') %>
+      
         </h6>
 
         <%= f.text_field :name, :class => "required" %>
@@ -102,6 +102,7 @@
         </p>
         <%= f.submit :class => "btn" %>
       <% end %>
+    <% end %>
     </div>
-  <% end %>
+  </div>
 </section>

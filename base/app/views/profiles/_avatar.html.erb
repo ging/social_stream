@@ -1,16 +1,16 @@
-<section class="avatar">
-  <header>
-    <%= render partial: 'edit_icon' %>
-    <h4>
+<section class="accordion-group avatar">
+  <div class="accordion-heading">
+    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion5" href="#collapseFive">
       <%= t('avatar.profile_change') %>
-    </h4>
-  </header>
-  
+    </a>
+  </div>
   <% if can? :update, @profile %>
-  <div class="update">
+  <div id="collapseFive" class="accordion-body collapse">
+    <div class="accordion-inner">
     <%= render partial: 'avatars/form',
                object: @profile.actor,
                as: :avatarable %>
-  </div>
+    </div>
   <% end %>
+  </div>
 </section>
