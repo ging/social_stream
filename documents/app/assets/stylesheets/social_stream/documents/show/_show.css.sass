@@ -16,6 +16,35 @@
         @include border-radius (3px)
         border-bottom-color: #444
         background-color: rgba(50, 50, 50, 0.3)
+      .video
+        .video-container
+          @include centered
+          width: 100%
+          .jp-type-single
+            .jp-player
+              width: 100%
+              background-color: #222 !important
+            .jp-interface
+              min-height: 60px
+              .jp.controls
+                .jp-play,
+                .jp-pause
+                  left: -2px !important
+                  top: 21px !important
+                .jp-stop
+                  left: 38px !important
+                  top: 28px !important
+                .jp-mute,
+                .jp-unmute
+                  left: 73px !important
+                  top: 35px !important
+              .jp-volume-bar
+                left: 95px !important
+                top: 40px !important
+              .jp-current-time
+                left: 137px !important
+                  top: 32px !important
+
     .tabbable
       .tab-content
         .media
