@@ -1,48 +1,53 @@
 //= require social_stream/wall
 
-SocialStream.Wall.callbackRegister('show', function(){
-  $('.wall_input button.new_document').click(function(event){
-    event.preventDefault();
+SocialStream.Documents.Wall = (function(SS, $, undefined) {
+  var initWall = function() {
+    $('<label/>', {
+      "for": 'new_document_title',
+      style: 'display: none;',
+      text: I18n.t('activerecord.attributes.document.title')
+    }).insertBefore($('#post_text'));
 
-    $(this).addClass("selected");
+    $('<textarea/>', {
+      name: 'document[description]',
+      id: 'new_document_description',
+      'class': 'document_description',
+      style: 'display: none;',
+      placeholder: I18n.t('document.description.input')
+    }).insertAfter($('#post_text'));
 
-    // build document form
-    if ($('.wall_input input[name^=document]').length === 0) {
-      $('<label/>', {
-        "for": 'document_title',
-        text: I18n.t('activerecord.attributes.document.title')
-        }).insertBefore($('#post_text'));
+    $('.wall_input form').
+      attr('enctype', 'multipart/form-data'); // this is ignored if done after creating the file input
 
-      $('<textarea/>', {
-        name: 'document[description]',
-        'class': 'document_description',
-        placeholder: I18n.t('document.description.input')
-      }).insertAfter($('#post_text'));
+    $('<input>', {
+      name: 'document[file]',
+      type: 'file',
+      style: 'visibility: hidden;'
+    }).insertAfter('.wall_input textarea.document_description');
 
-      $('.wall_input textarea.document_description').val($('#post_text').val());
+    $('.wall_input button.new_document').click(function(event){
+      event.preventDefault();
+
+      $('label[for="new_document_title"]').show();
 
       $('#post_text').
         attr('name', 'document[title]').
         attr('placeholder', I18n.t('document.title.input'));
 
-      $('<input>', {
-        name: 'document[file]',
-        type: 'file',
-        style: 'visibility: hidden;'
-      }).insertAfter('.wall_input textarea.document_description');
+      $('#new_document_description').show().val($('#post_text').val());
 
       SocialStream.Wall.changeAction($(this).attr('data-path'));
-      $('.wall_input form').
-        attr('enctype', 'multipart/form-data'); // this is ignored if done after creating the file input
 
-      $('.wall_input input[name="post[owner_id]"]').attr('name', 'document[owner_id');
+      SocialStream.Wall.changeOwner('document');
       SocialStream.Wall.changeRelationSelect('document');
-    }
 
-    $('.wall_input input[type=file]').trigger('click');
+      $('.wall_input input[type=file]').trigger('click');
+    });
 
     $('.wall_input input[type=file]').change(function(){
       $("#post_text").val($(this).val().replace(/C:\\fakepath\\/i, ''));
     });
-  });
-});
+  };
+
+  SS.Wall.callbackRegister('show', initWall);
+})(SocialStream, jQuery);
