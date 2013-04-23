@@ -5,7 +5,7 @@
 
     <% if current_subject.present? && subject != current_subject %>
     <div class="contact-button">
-      <%= contact_to subject %>
+      <%= contact_button subject %>
 
       <%= javascript_tag do %>
         $(function() {

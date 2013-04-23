@@ -7,7 +7,27 @@ module ContactsHelper
     end
   end
 
-  def contact_link(c)
+  # Add contact button
+  def contact_button(contact_or_actor)
+    if user_signed_in?
+      current_actor_contact_button contact_or_actor
+    else
+      anonymous_contact_button
+    end
+  end
+
+  def current_actor_contact_button contact_or_actor
+    c =
+      if contact_or_actor.is_a?(Contact)
+        if contact_or_actor.sender == current_actor
+          contact_or_actor
+        else
+          current_actor.contact_to!(contact_or_actor.receiver)
+        end
+      else
+        current_actor.contact_to!(contact_or_actor)
+      end
+
     if c.reflexive?
       t('subject.this_is_you')
     else
@@ -15,19 +35,13 @@ module ContactsHelper
     end
   end
 
-  # Show current ties from current user to actor, if they exist, or provide a link
-  # to create new ties to actor
-  def contact_to(a)
-    if user_signed_in?
-      contact_link current_subject.contact_to!(a)
-    else
-      if SocialStream.relation_model == :follow
-        form_tag new_user_session_path do |f|
-          submit_tag t('contact.follow')
-        end
-      else
-        link_to t("contact.new.link"), new_user_session_path
+  def anonymous_contact_button
+    if SocialStream.relation_model == :follow
+      form_tag new_user_session_path do |f|
+        submit_tag t('contact.follow')
       end
+    else
+      link_to t("contact.new.link"), new_user_session_path
     end
   end
 
