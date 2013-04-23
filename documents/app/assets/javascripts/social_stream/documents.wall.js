@@ -28,7 +28,7 @@ SocialStream.Wall.callbackRegister('show', function(){
       $('<input>', {
         name: 'document[file]',
         type: 'file',
-        style: 'display: none;'
+        style: 'visibility: hidden;'
       }).insertAfter('.wall_input textarea.document_description');
 
       SocialStream.Wall.changeAction($(this).attr('data-path'));
