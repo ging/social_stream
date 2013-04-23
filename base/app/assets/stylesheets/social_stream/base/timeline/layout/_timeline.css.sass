@@ -162,8 +162,15 @@
 
 .timeline
   .more
+    @include see-more
     a
-      width: 53%
+      width: 54%
+      position: absolute
+      z-index: 2
+      float: left
+    .loading
+      z-index: 200
+      position: relative
   .modal
     top: 4% !important
     .modal-body
