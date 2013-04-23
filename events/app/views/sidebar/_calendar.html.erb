@@ -1,6 +1,6 @@
 <% bow = (Time.now - 6.days).beginning_of_week %>
 
-<div class="calendar" id="sidebar_calendar" data-path="<%= polymorphic_path([@current_subject, Event.new])%>" data-start="<%= bow.to_i %>" data-end="<%= (bow + 28.days).to_i %>">
+<div class="calendar" id="sidebar_calendar" data-path="<%= polymorphic_path([profile_or_current_subject, Event.new])%>" data-start="<%= bow.to_i %>" data-end="<%= (bow + 28.days).to_i %>">
 
   <%= render partial: 'events/calendar_month',
              locals: {
