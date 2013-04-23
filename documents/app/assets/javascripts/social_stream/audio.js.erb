@@ -5,20 +5,20 @@ SocialStream.Audio = (function(SS, $, undefined){
 
   var initJplayer = function(){
     $(".jp-audio .jp-jplayer").each(function() {
+      var container = $(this).closest('.audio-container');
+
       $(this).jPlayer({
         ready: function () {
           $(this).jPlayer("setMedia", {
-            webma: $(this).closest(".audio").find(".audio-webma").attr("href"), // Defines the webm url
+            webma: container.attr("data-url-webma")
           });
         },
       preload: "none",
       supplied: "webma",
-      swfPath: "<%= asset_path "" %>",
-      cssSelectorAncestor: "#" + $(this).closest(".audio-full").attr("id")
+      swfPath: container.attr('data-url-swfplayer'),
+      cssSelectorAncestor: "#" + container.attr("id")
       })
     });
-
-    $(".format-links").hide();
   }
 
   callback.register('show', initJplayer);

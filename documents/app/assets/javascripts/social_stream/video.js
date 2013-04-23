@@ -6,7 +6,6 @@ SocialStream.Video = (function(SS, $, undefined){
   var initJplayer = function(){
     $(".jp-video .jp-jplayer").each(function() {
       var container = $(this).closest('.video-container');
-      
 
       $(this).jPlayer({
         ready: function () {
