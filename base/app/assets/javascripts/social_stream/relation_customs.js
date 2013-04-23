@@ -50,7 +50,7 @@ SocialStream.RelationCustom = (function(SS, $, undefined){
   };
 
   var editFormsListener = function(event) {
-    if (event && $(event.srcElement).closest('.relation_custom').length > 0) {
+    if (event && $(event.target).closest('.relation_custom').length) {
       return;
     }
 
