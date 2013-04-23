@@ -17,17 +17,24 @@
       span
         text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5)
         color: #999
-
-      .update
-        background-color: #f9f9f9
-        form.edit_profile
-          input
-            &[type="submit"]
-              @include btn-secundary
         p
           background-color: none
           padding-top: 20px
           padding-left: 1px
+
+      form.edit_profile
+        input
+          &[type="submit"]
+            @include btn-secundary
+    .avatar
+      form.edit_actor
+        background-color: #f9f9f9
+        padding-left: 10px
+        padding-top: 14px
+        input
+          &[type="file"]
+
+
     
     h5
       color: $grayLighter

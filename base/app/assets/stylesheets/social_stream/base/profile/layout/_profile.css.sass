@@ -10,16 +10,22 @@
     .comunication-info,
     .experience,
     .avatar
+      input,
+      textarea
+        width: 100%
       .accordion-heading
         .accordion-toggle
           display: inline !important
       .accordion-body
         width: 100%
         .accordion-inner
+          padding: 9px 15px 37px
+          label,
+          h6
+            margin-bottom: 0px
           input
             &[type="submit"]
               float: right
-              margin-right: 9px
               margin-top: 10px
       span
         display: inline-block
@@ -29,24 +35,25 @@
     .personal,
     .comunication-info,
     .experience
-      .update
-        input
-          &[type="text"],
-          &[type="tel"],
-          &[type="email"]
-            width: 95% !important
-            margin: 8px 4px 0px 4px
-        textarea
+      input
+        &[type="text"],
+        &[type="tel"],
+        &[type="email"]
           width: 95.5% !important
-          margin: 8px 4px 0px 4px
+
+
+      textarea
+        width: 95.5% !important
+
     .personal
       .accordion-body
         .accordion-inner
+          form
+            margin: 0 0 10px
           input
             &[type="submit"]
               float: right
-              margin-right: 9px
-              margin-top: -10px
+              margin-top: 2px
     .experience
       .briefing
         p
@@ -67,13 +74,10 @@
       margin: 16px
     p
       @include border-radius (15px)
-      margin: -15px 11px 0 5px
-      padding: 12px 10px 11px 27px
+      margin: -15px 11px 0 0px
+      padding: 12px 10px 11px 0px
       width: 325px
-
-    .update
-      margin-left: 22px
-
+  
              
 
 
