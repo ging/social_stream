@@ -19,7 +19,7 @@ SocialStream::Documents.setup do |config|
   #      format: :png,
   #      convert_options: {
   #        color: :transparent,
-  #        background_color: 'ffffff',
+  #        background_color: '#333333',
   #        width: 460,
   #        height: 75
   #      },
