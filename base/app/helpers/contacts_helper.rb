@@ -1,9 +1,9 @@
 module ContactsHelper
-  def contact_brief(subject)
+  def contact_count(actor)
     if user_signed_in?
-      t 'contact.in_common', :count => current_subject.common_contacts_count(subject)
+      t 'contact.in_common', :count => current_subject.common_contacts_count(actor)
     else
-      t 'contact.n', count: subject.sent_active_contact_count
+      t 'contact.n', count: actor.sent_active_contact_count
     end
   end
 
@@ -13,7 +13,6 @@ module ContactsHelper
     else
       render :partial => "contacts/link_#{ SocialStream.relation_model }", :locals => { :contact => c }
     end
-
   end
 
   # Show current ties from current user to actor, if they exist, or provide a link
