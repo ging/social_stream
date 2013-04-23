@@ -30,7 +30,8 @@ SocialStream.FullCalendar = (function(SS, $, Scheduler, undefined){
       ignoreTimezone: false,
       firstDay: 1,
       eventColor: eventColor,
-      events: getEvents
+      events: getEvents,
+      eventClick: eventClick
     };
 
     if (calendar.attr('data-can-create')) {
@@ -79,7 +80,7 @@ SocialStream.FullCalendar = (function(SS, $, Scheduler, undefined){
 
   var getEvents = function(start, end, callback) {
     $.ajax({
-      url: getCalendarEl().attr('data-events-path'),
+      url: getCalendarEl().attr('data-events_path'),
       dataType: 'json',
       data: {
         // our hypothetical feed requires UNIX timestamps
@@ -116,6 +117,17 @@ SocialStream.FullCalendar = (function(SS, $, Scheduler, undefined){
     form.find('#event_description').val('');
     
     Scheduler.form.reset(form.find('.scheduler_form'));
+  };
+
+  // After clicking an event a modal is shown
+  var eventClick = function(e) {
+    $.ajax({
+      url: getCalendarEl().attr('data-events_path') + '/' + e.id,
+      dataType: 'html',
+      success: function(data) {
+        $(data).modal();
+      }
+    });
   };
 
   callback.register('show',

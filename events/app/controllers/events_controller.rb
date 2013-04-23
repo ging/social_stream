@@ -21,7 +21,13 @@ class EventsController < ApplicationController
 
   def show
     show! do |format|
-      format.html { redirect_to polymorphic_path([ @event.post_activity.receiver_subject, Event.new ], :at => @event.start_at.to_i) }
+      format.html { 
+        if request.xhr?
+          render partial: 'show_modal'
+        else
+          redirect_to polymorphic_path([ @event.post_activity.receiver_subject, Event.new ], :at => @event.start_at.to_i)
+        end
+      }
     end
   end
 
