@@ -15,7 +15,8 @@ describe 'profiles/show' do
                                         language: 'en',
                                         to_param: "other-user",
                                         actor: stub_model(Actor, { contact_to!: stub_model(Contact, { id: 3 })}),
-                                        contact_to!: stub_model(Contact, { id: 3 })
+                                        contact_to!: stub_model(Contact, { id: 3 }),
+                                        suggestions: []
                                  })
              }
 
@@ -28,8 +29,6 @@ describe 'profiles/show' do
                                    to_param: "test-group" } ) }
 
   before do
-    view.stub(:sidebar)
-
     assign :profile, profile
   end
 
