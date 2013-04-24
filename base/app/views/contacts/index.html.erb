@@ -19,7 +19,9 @@
       <% profile_or_current_subject.class.contact_index_models.each do |type| %>
         <div id="<%= type %>" class="tab-pane <%= 'active' if current_contact_section?(type) %>">
           <%= text_field_tag "contact-filter-#{ type }", (current_contact_section?(type) ? params[:q] : ""), class: "pull-right contact-filter", placeholder: "filter", autocomplete: "off" %>
-
+        <button class="add-group"> 
+          add group 
+        </button>
           <div class="contact-list">
             <% if current_contact_section?(type) %>
               <% if @contacts.any? %>
