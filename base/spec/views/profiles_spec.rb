@@ -14,6 +14,7 @@ describe 'profiles/show' do
                                         email: "other-user@test.com",
                                         language: 'en',
                                         to_param: "other-user",
+                                        actor: stub_model(Actor, { contact_to!: stub_model(Contact, { id: 3 })}),
                                         contact_to!: stub_model(Contact, { id: 3 })
                                  })
              }
@@ -59,6 +60,7 @@ describe 'profiles/show' do
       before do
         view.stub(:current_subject).and_return(other_user)
         view.stub(:current_user).and_return(other_user)
+        view.stub(:current_actor).and_return(other_user.actor)
         view.stub(:profile_or_current_subject).and_return(other_user)
         view.stub(:user_signed_in?).and_return(true)
         view.stub(:can?).and_return(false)
@@ -76,6 +78,7 @@ describe 'profiles/show' do
       before do
         view.stub(:current_subject).and_return(other_user)
         view.stub(:current_user).and_return(other_user)
+        view.stub(:current_actor).and_return(other_user.actor)
         view.stub(:profile_or_current_subject).and_return(other_user)
         view.stub(:user_signed_in?).and_return(true)
         view.stub(:can?).and_return(false)
