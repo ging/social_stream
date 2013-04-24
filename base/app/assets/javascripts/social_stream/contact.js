@@ -30,7 +30,7 @@ SocialStream.Contact = (function($, SS, undefined) {
       success: function(data) {
         $(tab.attr('href')).find('.contact-list').html(data);
         tab.attr('data-loaded', 'true');
-        index();
+        callback.handlers.index();
       }
     });
   };
@@ -154,13 +154,17 @@ SocialStream.Contact = (function($, SS, undefined) {
       success: function(data) {
         $('#contacts-loading').hide();
          currentTab.find('.contact-list').html(data);
-        index();
+        callback.handlers.index();
       }
     });
   };
 
   var hideLoading = function() {
     $('#contacts-loading').hide();
+  };
+
+  var initNewGroupModal = function() {
+    $('.new_group-modal-link').attr('href', '#new_group-modal');
   };
 
   var initContactFormsHtmlListener = function() {
@@ -265,6 +269,7 @@ SocialStream.Contact = (function($, SS, undefined) {
                     initTabs,
                     initContactButtons,
                     initFilter,
+                    initNewGroupModal,
                     hideLoading);
 
   callback.register('update',

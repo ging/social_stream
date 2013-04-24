@@ -1,0 +1,11 @@
+<div id="new_group-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="new_group-modal-title" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="new_group-modal-title"><%= t 'group.new.title' %></h3>
+  </div>
+  <div class="modal-body">
+    <%= render partial: 'groups/form',
+               object: Group.new,
+               as: :group %>
+  </div>
+</div>
