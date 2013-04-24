@@ -1,14 +1,13 @@
 <div id="avatar_profile">
-  <% if subject == current_subject %>
+  <%= link_to image_tag(subject.logo.url(:medium), :alt => subject.name , :size => "150x150"), subject %>
 
-    <%= link_to image_tag(subject.logo.url(:medium), :alt => subject.name , :size => "150x150", :id => "current_avatar_img"), subject %>    
+  <% if subject == current_subject %>
     <div class="logo_menu logo_caption">    
-      <%= link_to t('avatar.profile_change'), polymorphic_path([subject, :profile], section: :avatar)  %>       
+      <%= link_to t('avatar.profile_change'), polymorphic_path([subject, :profile], section: :avatar)  %>
     </div>        
-  <% else %>
-    <%= link_to image_tag(subject.logo.url, :alt => subject.name , :size => "150x150"), subject %>
   <% end %>
 </div>
+
 <div class= "subject-name-phone">
-     <%= subject.name %>
-   </div>
+  <%= subject.name %>
+</div>
