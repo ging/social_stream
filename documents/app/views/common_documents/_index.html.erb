@@ -1,5 +1,5 @@
 <% content_for :title do %>
-  <%= "#{ profile_or_current_subject.name ': ' }#{ t('repository.title') }" %>
+  <%= "#{ profile_or_current_subject.name } : #{ t('repository.title') }" %>
 <% end %>
 
 <%= render partial: 'toolbar/profile', locals: { :subject => profile_or_current_subject } %>
