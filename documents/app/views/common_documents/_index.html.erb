@@ -1,15 +1,13 @@
 <% content_for :title do %>
-  <%= "#{ profile_subject && profile_subject.name + ': ' }#{ t('repository.title') }" %>
+  <%= "#{ profile_or_current_subject.name ': ' }#{ t('repository.title') }" %>
 <% end %>
 
-<% if profile_or_current_subject %>
-  <%= render partial: 'toolbar/profile', locals: { :subject => profile_or_current_subject } %>
-<% end %>
+<%= render partial: 'toolbar/profile', locals: { :subject => profile_or_current_subject } %>
 
 <%= render partial: 'common_documents/filter' %>
 
 <%= render partial: 'common_documents/new_button',
-           locals: { owner: profile_subject } %>
+           locals: { owner: profile_or_current_subject } %>
 
 <section class="documents">
   <%= render partial: 'common_documents/list',
