@@ -309,10 +309,11 @@ es:
       one: '%{count} grupo'
       other: '%{count} groupos'
     new:
-      action: Nuevo grupo
+      link: Nuevo grupo
       name: Nombre
       description: Descripción
       participants: Participantes
+      title: Nuevo grupo
     cloud: Nube de etiquetas de grupos
     most:
       followed: Más seguidos

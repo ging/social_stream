@@ -22,7 +22,7 @@ SocialStream.Documents.Wall = (function(SS, $, undefined) {
     $('<input>', {
       name: 'document[file]',
       type: 'file',
-      style: 'visibility: hidden;'
+      style: 'visibility: hidden; position: absolute'
     }).insertAfter('.wall_input textarea.document_description');
 
     $('.wall_input button.new_document').click(function(event){

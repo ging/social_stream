@@ -308,10 +308,11 @@ en:
       one: '%{count} group'
       other: '%{count} groups'
     new:
-      action: New group
+      link: New group
       name: Name
       description: Description
       participants: Participants
+      title: New group
     cloud: Group tag cloud
     most:
       followed: Most followed

@@ -1,9 +1,9 @@
-<%= form_for @group do |f| %>
-  <% if @group.errors.any? %>
+<%= form_for group do |f| %>
+  <% if group.errors.any? %>
     <div class="error">
-      <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
+      <h2><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h2>
       <ul>
-        <% @group.errors.full_messages.each do |msg| %>
+        <% group.errors.full_messages.each do |msg| %>
           <li>
           <%= msg %>
           </li>
@@ -11,8 +11,6 @@
       </ul>
     </div>
   <% end %>
-
-  <h2><%= t('group.new.action') %></h2>
 
   <%= f.label :name, t('group.new.name') %>
   <%= f.text_field :name %>
@@ -44,4 +42,3 @@
     );
   });
 <% end %>
-

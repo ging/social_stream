@@ -1,45 +1,9 @@
 // require jquery.ba-url
+//
+//= require social_stream/callback
 
 SocialStream.Contact = (function($, SS, undefined) {
-  var indexCallbacks = [];
-
-  var addIndexCallback = function(callback){
-    indexCallbacks.push(callback);
-  };
-
-  var index = function(){
-    $.each(indexCallbacks, function(i, callback){ callback(); });
-  };
-
-  var showCallbacks = [];
-
-  var addShowCallback = function(callback){
-    showCallbacks.push(callback);
-  };
-
-  var show = function(){
-    $.each(showCallbacks, function(i, callback){ callback(); });
-  };
-
-  var updateCallbacks = [];
-
-  var addUpdateCallback = function(callback){
-    updateCallbacks.push(callback);
-  };
-
-  var update = function(options){
-    $.each(updateCallbacks, function(i, callback){ callback(options); });
-  };
-
-  var destroyCallbacks = [];
-
-  var addDestroyCallback = function(callback){
-    destroyCallbacks.push(callback);
-  };
-
-  var destroy = function(options){
-    $.each(destroyCallbacks, function(i, callback){ callback(options); });
-  };
+  var callback = new SS.Callback();
 
   var getForms = function(id) {
     return $('[data-contact_id="' + id + '"]');
@@ -66,7 +30,7 @@ SocialStream.Contact = (function($, SS, undefined) {
       success: function(data) {
         $(tab.attr('href')).find('.contact-list').html(data);
         tab.attr('data-loaded', 'true');
-        index();
+        callback.handlers.index();
       }
     });
   };
@@ -190,13 +154,17 @@ SocialStream.Contact = (function($, SS, undefined) {
       success: function(data) {
         $('#contacts-loading').hide();
          currentTab.find('.contact-list').html(data);
-        index();
+        callback.handlers.index();
       }
     });
   };
 
   var hideLoading = function() {
     $('#contacts-loading').hide();
+  };
+
+  var initNewGroupModal = function() {
+    $('.new_group-modal-link').attr('href', '#new_group-modal');
   };
 
   var initContactFormsHtmlListener = function() {
@@ -297,16 +265,19 @@ SocialStream.Contact = (function($, SS, undefined) {
     callback([ { id: element.val(), name: element.attr('data-recipient-name') } ]);
   };
 
-  addIndexCallback(initTabs);
-  addIndexCallback(initContactButtons);
-  addIndexCallback(initFilter);
-  addIndexCallback(hideLoading);
+  callback.register('index',
+                    initTabs,
+                    initContactButtons,
+                    initFilter,
+                    initNewGroupModal,
+                    hideLoading);
 
-  addUpdateCallback(updateForms);
-  addUpdateCallback(replaceContact);
-  addUpdateCallback(checkAndHideContact);
+  callback.register('update',
+                    updateForms,
+                    replaceContact,
+                    checkAndHideContact);
 
-  addDestroyCallback(hideContact);
+  callback.register('destroy', hideContact);
 
   // FIXME There is probably a more efficient way to do this..
   $(function() {
@@ -314,11 +285,7 @@ SocialStream.Contact = (function($, SS, undefined) {
     initContactFormsHtmlListener();
   });
 
-  return {
-    index: index,
-    show: show,
-    update: update,
-    select2: select2,
-    destroy: destroy
-  };
+  return callback.extend({
+    select2: select2
+  });
 })(jQuery, SocialStream);

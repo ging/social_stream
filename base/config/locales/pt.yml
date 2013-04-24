@@ -255,10 +255,11 @@ pt:
     last: Últimos grupos
     my: Meus grupos
     new:
-      action: Novo grupo
+      link: Novo grupo
       name: Nome
       description: Descrição
       participants: Participantes
+      title: Novo grupo
     cloud: Nuvem de tags de grupos
     most:
       followed: Mais seguidos

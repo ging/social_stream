@@ -260,10 +260,11 @@ zh:
     last: 最後的群组
     my: 我的群组
     new:
-      action: 新群组
+      link: 新群组
       name: 名称
       description: 描述
       participants: 参与者
+      title: 新群组
     cloud: 群组标记云
     most:
       followed: 最多人关注
