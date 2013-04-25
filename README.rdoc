@@ -9,12 +9,12 @@ with {social networking}[http://en.wikipedia.org/wiki/Social_network] features a
 = Social Stream components
 
 Social Stream is divided into components. Developers can customize their social
-network with the functionalities they need for each case. Current Social Stream distribution include the following components:
+network with the functionalities they need for each case. Current Social Stream distribution includes the following components:
 
 * {Base}[https://github.com/ging/social_stream/tree/master/base], basic functionalities of contacts, streams and walls,
-  along with users, group, post and comments
+  along with users, groups, post and comments
 * {Documents}[https://github.com/ging/social_stream/tree/master/documents], support for
-  activities on files: pictures, audio and video with a HTML5 player
+  activities on files: pictures, audios and videos with a HTML5 player
 * {Events}[https://github.com/ging/social_stream/tree/master/events], sheduled events with calendar
 * {Linkser}[https://github.com/ging/social_stream/tree/master/linkser], advanced management of links to other webpages
 * {Presence}[https://github.com/ging/social_stream/tree/master/presence], XMPP based chat support 
@@ -23,7 +23,7 @@ network with the functionalities they need for each case. Current Social Stream 
  
 = Installation
 
-Add the following to the Gemfile of the your Rails application:
+Add the following to the Gemfile of your Rails application:
 
   gem 'social_stream', '>= 1.0.0'
 
