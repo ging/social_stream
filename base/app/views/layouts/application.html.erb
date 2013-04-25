@@ -33,16 +33,15 @@
   </head>
   
   <body>
-    <div class="wrapper container-fluid">
-      <%= render :partial => "layouts/header" %>
+    <div class="container-fluid">
+      <div class="wrapper">
+        <%= render :partial => "layouts/header" %>
 
-      <%= flashy %>
+        <%= flashy %>
 
-      <%= yield %>
-  
+        <%= yield %>
+      </div>  
+      <%= render :partial => "layouts/footer" %>
     </div>
-    
-    <%= render :partial => "layouts/footer" %>
-
   </body>
 </html>
