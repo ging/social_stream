@@ -9,11 +9,7 @@ module DocumentsHelper
 
     format = style.respond_to?('[]') && style[:format] || document.format
 
-    if style
-      polymorphic_path document, format: format, style: size
-    else
-      icon document, size
-    end
+    polymorphic_path(document, format: format, style: size)
   end
 
   # Return the right icon based on {#document}'s mime type
