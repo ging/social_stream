@@ -13,9 +13,8 @@ SocialStream.setup do |config|
 
   # Type of activities managed by actors
   # Remember you must add an "activity_object_id" foreign key column to your migration!
-  # Be sure to add the other modules of Social Stream you might be using (e.g. :document, :event, :link ).
   #
-  # config.objects = [ :post, :comment ]
+  # config.objects += [ :foo, :bar ]
 
   # Form for activity objects to be loaded
   # You can write your own activity objects
@@ -50,6 +49,3 @@ SocialStream.setup do |config|
   # Cleditor controls. It is used in new message editor, for example
   # config.cleditor_controls = "bold italic underline strikethrough subscript superscript | size style | bullets | image link unlink"
 end
-
-# You can customize toolbar, sidebar and location bar from here
-# See https://github.com/ging/social_stream/wiki/How-to-customize-the-toolbar,-sidebar-and-location
