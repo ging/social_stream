@@ -32,13 +32,12 @@ SocialStream.Tag = (function(SS, $, undefined) {
   };
 
   var select2InitSelection = function(element, callback) {
-    var selection = $(element).val().split(",").map(function(el) {
+    var selection = $(element).val().split(", ").map(function(el) {
       return { id: el, text: el };
     });
 
     callback(selection);
   };
-
 
   return {
     select2: select2
