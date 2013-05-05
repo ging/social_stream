@@ -10,13 +10,12 @@
     @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
 
     #profile-info
-      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
-      float: left !important
-      margin: 0 0 0 2.5% !important
-      width: 80% !important
+      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
       .tags,
       .personal,
       .comunication-info,
       .experience,
       .avatar
-        width: 97.5% !important
+        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        .update
+          @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)

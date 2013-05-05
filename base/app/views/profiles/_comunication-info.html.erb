@@ -1,9 +1,11 @@
-<section class="accordion-group comunication-info">
-  <div class="accordion-heading">
-    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTree">
+<section class="comunication-info">
+  <header>
+    <%= render partial: 'edit_icon' %>
+    <h4>
       <%= t('profile.contact') %>
-    </a>
-
+    </h4>
+  </header>
+  <div class="briefing">
     <% if @profile.contact_present? %>
       <% if @profile.phone? %>
         <h5>
@@ -54,45 +56,43 @@
     <% end %>
   </div>
  
-
   <% if can? :update, @profile %>
-  <div id="collapseTree" class="accordion-body collapse">
-    <div class="accordion-inner">
-      <%= form_for(@profile, :url => [current_subject, :profile]) do |f| %>
-        <h6>
-          <%= f.label :phone, t('profile.phone') %>
-        </h6>
-        <%= f.phone_field :phone %>
+  <div class="update">
 
-        <h6>
-          <%= f.label :mobile, t('profile.mobile') %>
-        </h6>
-        <%= f.phone_field :mobile %>
+    <%= form_for(@profile, :url => [current_subject, :profile]) do |f| %>
+      <h6>
+        <%= f.label :phone, t('profile.phone') %>
+      </h6>
+      <%= f.phone_field :phone %>
 
-        <h6>
-          <%= f.label :fax, t('profile.fax') %>
-        </h6>
-        <%= f.phone_field :fax %>
+      <h6>
+        <%= f.label :mobile, t('profile.mobile') %>
+      </h6>
+      <%= f.phone_field :mobile %>
 
-        <h6>
-          <%= f.label :address, t('profile.address') %>
-        </h6>
-        <%= f.text_field :address %>
+      <h6>
+        <%= f.label :fax, t('profile.fax') %>
+      </h6>
+      <%= f.phone_field :fax %>
 
-        <h6>
-          <%= f.label :email, t('profile.email') %>
-        </h6>
+      <h6>
+        <%= f.label :address, t('profile.address') %>
+      </h6>
+      <%= f.text_field :address %>
 
-        <%= f.email_field :email, :class => "email" %>
+      <h6>
+        <%= f.label :email, t('profile.email') %>
+      </h6>
 
-        <h6>
-          <%= f.label :website, t('profile.website') %>
-        </h6>
-        <%= f.text_field :website, :class => "url" %>
+      <%= f.email_field :email, :class => "email" %>
 
-        <%= f.submit :class => "btn" %>
-      <% end %>
-    </div>
+      <h6>
+        <%= f.label :website, t('profile.website') %>
+      </h6>
+      <%= f.text_field :website, :class => "url" %>
+
+      <%= f.submit :class => "btn" %>
+    <% end %>
   <% end %>
   </div>
 </section>

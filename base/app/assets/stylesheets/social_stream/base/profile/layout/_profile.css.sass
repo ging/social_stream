@@ -1,6 +1,9 @@
 @import 'avatars_for_rails'
 
 #profile
+  @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+  float: left
+    margin-left: 2%
   #profile-info
     @include grid-core-span(7, $fluidGridColumnWidth, $fluidGridGutterWidth)
     float: left
@@ -10,25 +13,34 @@
     .comunication-info,
     .experience,
     .avatar
-      input,
-      textarea
-      .accordion-heading
-        .accordion-toggle
-          display: inline !important
-      .accordion-body
-        .accordion-inner
-          padding: 9px 15px 37px
-          label,
-          h6
-            margin-bottom: 0px
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      margin-left: 0px
+      .briefing
+        padding: 1px 0px 16px
+        min-height: 32px
+        span
+          margin-left: 11px
+          padding: 3px 8px 3px 7px
+        p
+          margin: -15px 26px 0 14px
+          padding: 20px 0px 5px 0px
+          width: 100%
+      .empty
+        float: left
+        padding: 8px 27px 9px 27px
+      .update
+        @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+        background-color: $white
+        margin-left: 0px
+        padding: 12px 0px 3px 0px !important
+        form.edit_profile
+          padding: 0 14px
           input
             &[type="submit"]
               float: right
-              margin-top: 10px
-      span
-        display: inline-block
-        padding: 0px 27px 9px 27px
-        float: right
+              margin-top: -10px
+              margin-right: 9px
+      
 
     .personal,
     .comunication-info,
@@ -37,21 +49,13 @@
         &[type="text"],
         &[type="tel"],
         &[type="email"]
-          width: 95.5% !important
+          width: 95% !important
 
 
       textarea
-        width: 95.5% !important
+        width: 95% !important
 
-    .personal
-      .accordion-body
-        .accordion-inner
-          form
-            margin: 0 0 10px
-          input
-            &[type="submit"]
-              float: right
-              margin-top: 2px
+    
     .experience
       .briefing
         p
@@ -72,12 +76,13 @@
       margin: 16px
     p
       @include border-radius (15px)
-      margin: -15px 11px 0 0px
-      padding: 12px 10px 11px 0px
+      margin: -15px 11px 0 5px
+      padding: 12px 10px 11px 27px
       width: 325px
+      .update
+        margin-left: 22px
 
-    .accordion
-      margin-top: 20px
+
 
 
 #profile_birthday_3i,
@@ -91,5 +96,11 @@
     display: inline
   h4
     display: inline-block
+  .update
+    .jcrop-holder
+      width: 100% !important
+      img
+        max-width: 90%
+        max-height: 90%
 
 
