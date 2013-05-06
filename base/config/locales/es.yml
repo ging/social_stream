@@ -504,8 +504,8 @@ es:
         detailed:
           create:
             activity:
-              positive: PODRÁN publicar actividades en vuestro muro
-              negative: NO PODRÁN publicar actividades en vuestro muro
+              positive: Los contactos en %{relation} PODRÁN publicar actividades en vuestro muro
+              negative: Los contactos en %{relation} NO PODRÁN publicar actividades en vuestro muro
           follow:
             nil:
               positive: Las actividades de los contactos en %{relation} APARECERÁN
@@ -514,18 +514,49 @@ es:
                 en vuestra página de inicio
           read:
             activity:
-              positive: PODRÁN leer las publicaciones que aparezcan en vuestro muro,
-                salvo las que compartas solo ciertas personas
-              negative: NO PODRÁN leer las publicaciones que aparezcan en vuestro
+              positive: Los contactos en %{relation} PODRÁN leer las publicaciones que aparezcan en vuestro muro,
+                salvo las que compartáis solo con otros roles
+              negative: Los contactos en %{relation} NO PODRÁN leer las publicaciones que aparezcan en vuestro
                 muro, salvo las que marques como públicas
           represent:
             nil:
-              positive: PODRÁN cambiar sesión para actuar en nombre de %{name}
-              negative: NO PODRÁN cambiar sesión para actuar en nombre de %{name}
+              positive: Los contactos en %{relation} PODRÁN cambiar sesión para actuar en nombre de %{name}
+              negative: Los contactos en %{relation} NO PODRÁN cambiar sesión para actuar en nombre de %{name}
           notify:
             nil:
               positive: Las actividades SE NOTIFICARÁN a los contactos en %{relation}
               negative: Las actividades NO SE NOTIFICARÁN a los contactos en %{relation}
+      user: 
+        brief:
+          create:
+            activity: Publicar en tu muro
+          read:
+            activity: Leer tu muro
+          represent:
+            nil: Administrarte
+          notify:
+            nil: Notificarles
+        detailed:
+          create:
+            activity:
+              positive: Los contactos en %{relation} PODRÁN publicar actividades en tu muro
+              negative: Los contactos en %{relation} NO PODRÁN publicar actividades en tu muro
+          follow:
+            nil:
+              positive: Las actividades de los contactos en %{relation} APARECERÁN
+                en tu página de inicio
+              negative: Las actividades de los contactos en %{relation} NO APARECERÁN
+                en tu página de inicio
+          read:
+            activity:
+              positive: Los contactos en %{relation} PODRÁN leer las publicaciones que aparezcan en tu muro,
+                salvo las que compartáis solo con otros roles
+              negative: Los contactos en %{relation} NO PODRÁN leer las publicaciones que aparezcan en tu
+                muro, salvo las que marques como públicas
+          represent:
+            nil:
+              positive: Los contactos en %{relation} PODRÁN cambiar sesión para actuar en tu nombre
+              negative: Los contactos en %{relation} NO PODRÁN cambiar sesión para actuar en tu nombre
     of_relation:
       choose: Permisos para <strong>%{name}</strong>
     postit: Gestiona los permisos de tus contactos y crea nuevos roles

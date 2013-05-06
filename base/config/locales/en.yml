@@ -518,8 +518,8 @@ en:
                 marked as public
           represent:
             nil:
-              positive: They WILL BE ABLE to change session and act as %{subject}
-              negative: They WILL NOT BE ABLE to change session and act as %{subject}
+              positive: They WILL BE ABLE to change session and act as %{name}
+              negative: They WILL NOT BE ABLE to change session and act as %{name}
           notify:
             nil:
               positive: Activities WILL BE notified to contacts at %{name}
