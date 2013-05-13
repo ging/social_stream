@@ -57,15 +57,17 @@ module SocialStream
 
         private
 
+        # Memoize pattern to retrieve objects collection
         def collection
           collection_variable_get ||
             collection_variable_set(build_collection)
         end
 
+        # Uses the {ActivityObject#collection} method to retrieve the objects collection
         def build_collection
-          self.class.model_class. # @posts = Post
-            collection(profile_subject, current_subject).
-            page(params[:page])
+          self.class.model_class.                          # @posts = Post.
+            collection(profile_subject, current_subject).  #   collection(profile_subject, current_subject).
+            page(params[:page])                            #   page(params[:page])
         end
       end
 
