@@ -156,6 +156,7 @@ namespace :db do
         ties_start = Time.now
 
         SocialStream::Population::Actor.available.each do |a|
+          actors = SocialStream::Population::Actor.available
           actors.delete(a)
 
           relations = a.relation_customs + [ Relation::Reject.instance ]
