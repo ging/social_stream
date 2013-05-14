@@ -605,7 +605,7 @@ en:
     one: Settings
     password_change:
       briefing: Change your password
-    success: Your settings where correctly changed
+    success: Your settings were correctly changed
   share: Share
   sign_in: Sign in
   sign_out: Sign out
