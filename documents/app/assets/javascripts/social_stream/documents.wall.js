@@ -37,9 +37,7 @@ SocialStream.Documents.Wall = (function(SS, $, undefined) {
       $('#new_document_description').show().val($('#post_text').val());
 
       SocialStream.Wall.changeAction($(this).attr('data-path'));
-
-      SocialStream.Wall.changeOwner('document');
-      SocialStream.Wall.changeRelationSelect('document');
+      SocialStream.Wall.changeParams('document');
 
       $('.wall_input input[type=file]').trigger('click');
     });

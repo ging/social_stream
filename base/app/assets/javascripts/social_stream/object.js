@@ -66,12 +66,12 @@ SocialStream.Object = (function(SS, $, undefined){
     return icon + ' ' + text + ' <b class="caret"></b>';
   };
 
-  var changeRelationSelect = function(type) {
-    $('[name$="[relation_ids][]"]').attr('name', type + '[relation_ids][]');
+  var changeRelationSelect = function(type, selector) {
+    $('[name$="[relation_ids][]"]', selector).attr('name', type + '[relation_ids][]');
   };
 
-  var changeOwner = function(type) {
-    $('[name$="[owner_id]"]').attr('name', type + '[owner_id]');
+  var changeOwner = function(type, selector) {
+    $('[name$="[owner_id]"]', selector).attr('name', type + '[owner_id]');
   };
 
   callback.register('show',
