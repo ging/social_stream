@@ -9,52 +9,11 @@ with {social networking}[http://en.wikipedia.org/wiki/Social_network] features a
 = Social Stream components
 
 Social Stream is divided into components. Developers can customize their social
-network with the functionalities they need for each case. Current Social Stream distribution includes the following components:
+network with the functionalities they need for each case. Check {current Social Stream components in Social Stream's website}[http://social-stream.dit.upm.es/started#components]
 
-* {Base}[https://github.com/ging/social_stream/tree/master/base], basic functionalities of contacts, streams and walls,
-  along with users, groups, post and comments
-* {Documents}[https://github.com/ging/social_stream/tree/master/documents], support for
-  activities on files: pictures, audios and videos with a HTML5 player
-* {Events}[https://github.com/ging/social_stream/tree/master/events], sheduled events with calendar
-* {Linkser}[https://github.com/ging/social_stream/tree/master/linkser], advanced management of links to other webpages
-* {Presence}[https://github.com/ging/social_stream/tree/master/presence], XMPP based chat support 
-* {Ostatus}[https://github.com/ging/social_stream/tree/master/ostatus], support for social network federation
-* {Oauth2Server}[https://github.com/ging/social_stream/tree/master/oauth2_server], authentication and authorization service based on {OAuth2}[http://oauth.net/2/]
- 
 = Installation
 
-Add the following to the Gemfile of your Rails application:
-
-  gem 'social_stream', '>= 1.0.0'
-
-In the case you do not want some functionality, include your desired components instead.
-For instance, the Gemfile in an application using documents and links only would contain the following:
-
-  gem 'social_stream-documents'
-  gem 'social_stream-linkser'
-
-
-Then run:
-
-  bundle
-
-Then:
-
-  rails generate social_stream:install
-
-or use specific generators if you are using components.
-
-Social Stream is not compatible with {default mass attributes protection shipped with Rails 3.2.3}[http://weblog.rubyonrails.org/2012/3/30/ann-rails-3-2-3-has-been-released/], but uses the {strong_parameters gem}[https://github.com/rails/strong_parameters] that will be the default in Rails 4. Set this in your config/application.rb before running the migration command:
-
-  config.active_record.whitelist_attributes = false
-
-Now migrate your database
-
-  rake db:migrate
-
-Since {Social Stream}[http://github.com/ging/social_stream] depends on {Devise}[https://github.com/plataformatec/devise], make sure you follow {its setup instructions}[https://github.com/plataformatec/devise/tree/master/lib/generators/templates#readme]. Specifically, make sure you set the default URL options for your environments at <tt>config/environments/*.rb</tt> with something like:
-
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+There is a {detailed guide in Social Stream's website}[http://social-stream.dit.upm.es/started] on how to get started, install Social Stream in your Rails application and customize it.
 
 = Documentation
 
