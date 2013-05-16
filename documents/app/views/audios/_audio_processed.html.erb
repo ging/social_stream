@@ -1,4 +1,8 @@
 <%= div_for audio do %>
+  <h5>
+    <%= link_to truncate(audio.title, :length => 15), audio %>
+  </h5>
+
   <%= render partial: 'audios/player',
            object: audio,
            as: :audio %>
