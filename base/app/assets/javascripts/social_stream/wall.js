@@ -30,6 +30,11 @@ SocialStream.Wall = (function(SS, $, undefined){
     }
   };
 
+  var changeParams = function(type) {
+    SS.Object.changeOwner(type, $('.wall_input form'));
+    SS.Object.changeRelationSelect(type, $('.wall_input form'));
+  };
+
   callback.register('show',
                     initInputAutosize,
                     SS.Object.new_);
@@ -39,7 +44,6 @@ SocialStream.Wall = (function(SS, $, undefined){
 
   return callback.extend({
     changeAction: changeAction,
-    changeOwner: SS.Object.changeOwner, 
-    changeRelationSelect: SS.Object.changeRelationSelect 
+    changeParams: changeParams 
   });
 }) (SocialStream, jQuery);

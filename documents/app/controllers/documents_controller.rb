@@ -45,8 +45,8 @@ class DocumentsController < ApplicationController
 
   def show
     respond_to do |format|
-      format.json {render :json => resource }
       format.html {render :action => :show}
+      format.json {render :json => resource }
       format.any {
         path = resource.file.path(params[:style] || params[:format])
 

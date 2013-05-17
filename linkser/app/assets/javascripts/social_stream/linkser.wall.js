@@ -16,8 +16,7 @@ SocialStream.Linkser.Wall = (function(SS, $) {
       $("#link_url").val($("#post_text").val());
       $("#link_loaded").val(false);
       SS.Wall.changeAction($('#link_preview_loading').attr('data-link_path'));
-      SS.Wall.changeOwner('link');
-      SS.Wall.changeRelationSelect('link');
+      SS.Wall.changeParams('link');
 
       if(this.currentValue != this.lastValue) {
         showLoading();
@@ -57,8 +56,7 @@ SocialStream.Linkser.Wall = (function(SS, $) {
     $("#link_preview").hide().html('');
     $("#link_url").val("");
     SS.Wall.changeAction();
-    SS.Wall.changeOwner('post');
-    SS.Wall.changeRelationSelect('post');
+    SS.Wall.changeParams('post');
 
     if (options.postText) {
       $('#post_text').val('');
