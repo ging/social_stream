@@ -14,9 +14,9 @@
     .avatar
       input,
       textarea
-        background-color: #f9f9f9
+        background-color: $whiteSmoke
       .briefing
-        background-color: white
+        background-color: $white
         color: $gray
         span
           @include border-radius(5px)
@@ -25,7 +25,7 @@
           color: #3A87AD
           text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5)
         p
-          border-top: 5px solid #f9f9f9
+          border-top: 5px solid $whiteSmoke
           background-color: none
       
 
@@ -35,11 +35,13 @@
             @include btn-secundary
     .avatar
       form.edit_actor
-        background-color: #f9f9f9
+        background-color: $white
         padding-left: 10px
         padding-top: 14px
         input
-          &[type="file"]
+          &[type="submit"]
+            float: right
+            margin: -10px 24px 0 0px
         
     h5
       color: $grayLighter

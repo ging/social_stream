@@ -6,8 +6,8 @@
   line-height: $baseLineHeight
   vertical-align: middle
   cursor: pointer
-  background-color: $white
-  border: 1px solid $blue 
+  background-color: $principal-btnColorbackground
+  border: 1px solid $principal-btnColorborder
   *border: 0
   color: $gray
   background-image: none
@@ -18,34 +18,34 @@
     color: $gray
   
   &:hover
-    border: 1px solid $white
-    background-color: $blue !important
-    color: $white
+    border: 1px solid $principal-btnColorbackground
+    background-color: $principal-color !important
+    color: $auxiliarcolor
     .caret
       @include transition (border 1s, color, 1s)
-      border-top-color: $white
-      border-bottom-color: $white
+      border-top-color: $principal-btnColorbackground
+      border-bottom-color: $principal-btnColorbackground
   .caret
-    border-top-color: $blue
-    border-bottom-color: $blue
+    border-top-color: $principal-btnColorborder
+    border-bottom-color: $principal-btnColorborder
     &:hover
-      border-top-color: $white
-      border-bottom-color: $white
+      border-top-color: $principal-btnColorbackground
+      border-bottom-color: $principal-btnColorbackground
   
   &:focus 
     @include tab-focus()
   
   &.active
-    border: 1px solid $white
-    background-color: $blue !important
-    color: $white
+    border: 1px solid $auxiliar-color
+    background-color: $principal-color !important
+    color: $auxiliar-color
 
   &.disabled,
   &[disabled] 
     cursor: default
     @include opacity(85)
-    background-color: $blue
-    color: $white
+    background-color: $principal-color
+    color: $auxiliar-color
 
 
 
@@ -57,10 +57,10 @@
   line-height: $baseLineHeight
   vertical-align: middle
   cursor: pointer
-  background-color: $blue
-  border: 1px solid $white 
+  background-color: $secundary-btnColorbackground
+  border: 1px solid $secundary-btnColorborder 
   *border: 0
-  color: $white
+  color: $auxiliar-color
   background-image: none
   @include ie7-restore-left-whitespace()
   @include box-shadow(inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05))
@@ -69,23 +69,23 @@
     color: $gray
   
   &:hover
-    border: 1px solid $blue
-    background-color: $white !important
-    color: $blue
+    border: 1px solid $secundary-btnColorbackground
+    background-color: $secundary-btnColorborder !important
+    color: $principal-color
   
   &:focus 
     @include tab-focus()
   
   &.active
-    border: 1px solid $blue
-    background-color: $white !important
-    color: $blue
+    border: 1px solid $secundary-btnColorborder
+    background-color: $secundary-btnColorbackground !important
+    color: $principal-color
 
   &.disabled,
   &[disabled] 
     cursor: default
     @include opacity(85)
-    background-color: $white
+    background-color: $secundary-btnColorbackground
     color: $gray
 
 
@@ -102,15 +102,15 @@
     border: 1px solid
     border-right: #edeaf2
     border-bottom: #e3e0e8
-    border-color: #fff
+    border-color: $auxiliarcolor
     @include border-radius (5px)
-    color: #000
+    color: $black
     text-align: center
     padding: 0px 10px 0px 4px
 
   &:hover
     background-color: #555
-    color: #fff
+    color: $auxiliarcolor
     text-decoration: none
 
   &:focus 
@@ -133,17 +133,17 @@
       &:hover
         .caret
           @include transition (border 1s, color, 1s)
-          border-top-color: $white
-          border-bottom-color: $white
+          border-top-color: $auxiliarcolor
+          border-bottom-color: $auxiliarcolor
       .caret
-        border-top-color: $blue
-        border-bottom-color: $blue
+        border-top-color: $principal-btnColorborder
+        border-bottom-color: $principal-btnColorborder
         &:hover
-          border-top-color: $white
-          border-bottom-color: $white
+          border-top-color: $auxiliarcolor
+          border-bottom-color: $auxiliarcolor
 
   .open
     .btn
       .caret
-        border-top-color: $blue
-        border-bottom-color: $blue
+        border-top-color: $principal-btnColorborder
+        border-bottom-color: $principal-btnColorborder

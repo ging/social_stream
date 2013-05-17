@@ -2,32 +2,31 @@
 
 @font-face{
   font-family:"OpenSans";
-  src: url(social_stream/fonts/opensans-regular.ttf);
+  src: url(social_stream/fonts/opensans/opensans-regular.ttf);
+  src: url(social_stream/fonts/opensans/opensans-regular.eot);
+  src: url(social_stream/fonts/opensans/opensans-regular.wof);
+  src: url(social_stream/fonts/opensans/opensans-regular.svg);
 }
 @font-face{
   font-family:"OpenSansLight";
-  src: url(social_stream/fonts/OpenSans-Light.ttf);
-}
-
-@font-face{
-  font-family:"BreeSerif";
-  src: url(social_stream/fonts/BreeSerif-Regular.ttf);
+  src: url(social_stream/fonts/opensans/OpenSans-Light.ttf);
 }
 
 @font-face{
   font-family:"Giveyouglory";
   src: url(social_stream/fonts/GiveYouGlory.ttf);
 }
+
 @font-face{
   font-family: "Josefin OSP";
   font-weight: normal;
   font-style: normal;
-  src: url(social_stream/fonts/JosefinSlabRegular.ttf);
+  src: url(social_stream/fonts/josefinslab/JosefinSlabRegular.ttf);
 }
 
 @font-face{
   font-family: 'Josefin Overlay';
   font-weight: normal;
   font-style: normal;
-  src: url(social_stream/fonts/JosefinSlabOverlay.ttf);
+  src: url(social_stream/fonts/josefinslab/JosefinSlabOverlay.ttf);
 }
