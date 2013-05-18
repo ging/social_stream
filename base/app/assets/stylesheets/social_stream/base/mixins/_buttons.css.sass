@@ -102,14 +102,14 @@
     border: 1px solid
     border-right: #edeaf2
     border-bottom: #e3e0e8
-    border-color: $auxiliarcolor
+    border-color: $auxiliar-color
     @include border-radius (5px)
     color: $black
     text-align: center
     padding: 0px 10px 0px 4px
 
   &:hover
-    background-color: #555
+    background-color: $gray
     color: $auxiliarcolor
     text-decoration: none
 
@@ -133,14 +133,14 @@
       &:hover
         .caret
           @include transition (border 1s, color, 1s)
-          border-top-color: $auxiliarcolor
-          border-bottom-color: $auxiliarcolor
+          border-top-color: $auxiliar-color
+          border-bottom-color: $auxiliar-color
       .caret
         border-top-color: $principal-btnColorborder
         border-bottom-color: $principal-btnColorborder
         &:hover
-          border-top-color: $auxiliarcolor
-          border-bottom-color: $auxiliarcolor
+          border-top-color: $auxiliar-color
+          border-bottom-color: $auxiliar-color
 
   .open
     .btn
