@@ -56,22 +56,20 @@ def auth(username,domain,password)
   begin
     response = RestClient.post accessByPasswordUrl, :user => { :email => username , :password => password }
 
-    if response.code == 201
-      return true
-    else
-      return false
-    end
-  
+    return response.code == 201
+
   rescue => e
-    
-    unless e.class.name == "RestClient::Unauthorized" and e.message == "401 Unauthorized"
-	$logger.error "#{Process.pid}: Exception in auth(username, password)"
-    	$logger.error "#{Process.pid}: #{e.class.name}: #{e.message}"
+    if e.class.name == "RestClient::Found" &&
+      e.http_code == 302 &&
+      e.http_body =~ /home/
+      return true
     end
+
+    $logger.error "#{Process.pid}: Exception in auth(username, password)"
+    $logger.error "#{Process.pid}: #{e.class.name}: #{e.message}"
 
     return false
   end
-  
 end
 
 
