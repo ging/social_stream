@@ -15,6 +15,8 @@ SocialStream::Documents.setup do |config|
   #      format: 'webm',
   #      processors: [ :ffmpeg ]
   #    },
+  #    # You need to add the `paperclip_waveform` gem to your Gemfile
+  #    # to get pngs with the audio wave form
   #    waveform: {
   #      format: :png,
   #      convert_options: {

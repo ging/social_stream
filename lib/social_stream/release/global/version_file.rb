@@ -28,7 +28,7 @@ module SocialStream
 
         def new_number
           @new_number ||= old_number.sub(NUMBER_PATTERN) do
-            respond_to?(target) ? send(target, $1, $2, $3) : target
+            respond_to?(target, true) ? send(target, $1, $2, $3) : target
           end
         end
 

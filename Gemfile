@@ -8,8 +8,10 @@ source "http://rubygems.org"
 # gem 'avatars_for_rails', :path => '../avatars_for_rails'
 # gem 'rails-scheduler', path: '../rails-scheduler'
 # gem 'omniauth-socialstream', path: '../omniauth-socialstream'
-# gem 'paperclip_waveform', path: '../paperclip_waveform'
 # gem 'flashy', path: '../flashy'
+
+# Needs the libsndfile package
+gem 'paperclip_waveform'
 
 # social_stream gems
 %w(base documents events linkser presence).each do |g|

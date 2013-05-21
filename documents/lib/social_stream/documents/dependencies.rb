@@ -1,6 +1,5 @@
 require 'social_stream-base'
 require 'paperclip'
 require 'paperclip-ffmpeg'
-require 'paperclip_waveform'
 require 'delayed_paperclip'
 require 'delayed_paperclip/social_stream-documents'
