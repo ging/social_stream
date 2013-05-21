@@ -67,10 +67,10 @@ $headingsColor:         inherit !default; // empty to use BS default, $textColor
 
 // buttons
 // -------------------------
-$principal-btnColorbackground: $auxiliar-color
-$principal-btnColorborder: $principal-color
-$secundary-btnColorbackground: $principal-color
-$secundary-btnColorborder: $auxiliar-color
+$principal-btnColorbackground: $auxiliar-color;
+$principal-btnColorborder: $principal-color;
+$secundary-btnColorbackground: $principal-color;
+$secundary-btnColorborder: $auxiliar-color;
 
 // Component sizing
 // -------------------------
