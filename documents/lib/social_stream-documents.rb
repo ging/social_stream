@@ -22,8 +22,13 @@ module SocialStream
       webma: {
         format: 'webm',
         processors: [ :ffmpeg ]
-      },
-      waveform: {
+      }
+    }
+
+    # Install the paperclip_waveform gem to create pngs with
+    # the audio wave form
+    if defined? PaperclipWaveform
+      @@audio_styles[:waveform] = {
         format: :png,
         convert_options: {
           color: :transparent,
@@ -33,7 +38,7 @@ module SocialStream
         },
         processors: [ :waveform ]
       }
-    }
+    end
 
     mattr_accessor :video_styles
     @@video_styles = {
