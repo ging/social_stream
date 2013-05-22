@@ -438,7 +438,7 @@ en:
     confirm_delete: Delete post?
     form:
       title: Post
-    input: Share you thoughts here!
+    input: Share your thoughts here!
     name: post
     one: a post
     other: posts
