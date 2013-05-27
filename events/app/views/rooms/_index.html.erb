@@ -1,6 +1,6 @@
 <div id="rooms">
   <% current_subject.rooms.each do |room| %>
     <%= room.name %>
-    <%= link_to image_tag("btn/delete.png", :class => "menu_icon", :title => t('room.delete')), room, :class => "room_delete_link", :method => :delete, :confirm => t('room.confirm_delete'), :remote => true %>
+    <%= link_to <i class='icon_tool16-trash' :title => t('room.delete')), room, :class => "room_delete_link", :method => :delete, :confirm => t('room.confirm_delete'), :remote => true %>></i>
   <% end %>
 </div>
