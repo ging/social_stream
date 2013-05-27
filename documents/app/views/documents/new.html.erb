@@ -2,8 +2,10 @@
   <%= "#{ current_subject.name }: #{ t('document.new.title') }" %>
 <% end %>
 
-<%= render partial: 'toolbar/profile', locals: { subject: current_subject } %>
+<section id="new_document">
+  <%= render partial: 'toolbar/profile', locals: { subject: current_subject } %>
 
-<h1><%= t 'document.new.title' %></h1>
+  <h1><%= t 'document.new.title' %></h1>
 
-<%= render partial: 'common_documents/form', locals: { document: @document } %>
+  <%= render partial: 'common_documents/form', locals: { document: @document } %>
+</section>
