@@ -1,0 +1,4 @@
+<!-- insert_after "code[erb-loud]:contains('text_field_tag')" -->
+
+<%= render partial: 'common_documents/new_button',
+           locals: { owner: profile_or_current_subject } %>
