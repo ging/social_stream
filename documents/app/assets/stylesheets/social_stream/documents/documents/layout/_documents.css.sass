@@ -1,4 +1,5 @@
-div.repository
+div.repository,
+.documents
   @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
   float: left
   margin-left: 2.5%
@@ -28,7 +29,7 @@ section.repository
   .tab-content
     @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
     padding-bottom: 100px
-
+  
   .repository-list
     .document,
     .picture,
@@ -52,7 +53,20 @@ section.repository
       margin-left: 44px
 
 .documents
-  clear: both
+
+  input
+    &[type="text"]
+      width: 24% !important
+      display: inline
+      margin-top: 20px
+      float: left
+      margin-left: 20px
+  .btn
+    float: right
+    width: auto
+    display: inline-block
+    margin: 23px 16px 0 -14px
+
 #new_document-modal
   .modal-body
     input

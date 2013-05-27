@@ -1,3 +1,7 @@
+input#group_name
+  margin-left: 0px
+  width: 93% !important 
+
 #contacts
   @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
 
@@ -11,12 +15,11 @@
         .caret
           margin-left: 6px
 
-    input
-      &[type="text"]
-        margin-left: 0px
-        width: 20% !important
-        float: left
-        margin-botom: 0 !important
+    .contact-filter
+      margin-left: 0px
+      width: 22% !important 
+      float: left
+      margin-botom: 0 !important
     .new_group-modal-link
       float: right
 
@@ -66,7 +69,8 @@
           display: inline-block
           float: right
           margin-top: -40px
-          
+
+        
 
 #contact-form
   ul

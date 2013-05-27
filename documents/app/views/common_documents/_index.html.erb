@@ -3,27 +3,31 @@
 <% end %>
 
 <%= render partial: 'toolbar/profile', locals: { :subject => profile_or_current_subject } %>
+<div class="documents">
+  <h1 class="colorfont">
+    <%= t 'document.title.other' %>
+  </h1>
 
-<%= render partial: 'common_documents/filter' %>
+  <%= render partial: 'common_documents/filter' %>
 
-<%= render partial: 'common_documents/new_button',
-           locals: { owner: profile_or_current_subject } %>
+  <%= render partial: 'common_documents/new_button',
+             locals: { owner: profile_or_current_subject } %>
 
-<section class="documents">
-  <%= render partial: 'common_documents/list',
-             locals: { documents: collection } %>
-</section>
+  <section class="documents">
+    <%= render partial: 'common_documents/list',
+               locals: { documents: collection } %>
+  </section>
 
-  
-<nav class="documents">
-  <%= render partial: 'layouts/more',
-             locals: {
-               path: polymorphic_path([profile_subject, Document.new ]),
-               per_page: Document.default_per_page,
-               total: collection.total_count
-             } %>
-</nav>
-
+    
+  <nav class="documents">
+    <%= render partial: 'layouts/more',
+               locals: {
+                 path: polymorphic_path([profile_subject, Document.new ]),
+                 per_page: Document.default_per_page,
+                 total: collection.total_count
+               } %>
+  </nav>
+</div>
 
 <%= javascript_tag do %>
 $(function() {
