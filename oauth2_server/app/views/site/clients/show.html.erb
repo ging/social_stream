@@ -1,50 +1,52 @@
-<%= render partial: 'toolbar/home' %>
+<div class="oauth2_server"> 
+  <%= render partial: 'toolbar/home' %>
 
-<section id="oauth2_server">  
-  <h1>
-    <%= @client.name %>
-  </h1>
-  <a class="pull-right" href="#">
-    ir a tus demás aplicaciones
-    </a>
-  <hr class="soften">
-  <div class="content">
-    <a class="pull-left" href="#">
+  <section id="oauth2_server">  
+    <h1>
+      <%= @client.name %>
+    </h1>
+    <a class="pull-right" href="#">
+      ir a tus demás aplicaciones
+      </a>
+    <hr class="soften">
+    <div class="content">
+      <a class="pull-left" href="#">
 
-      <%= image_tag('logos/app-default.png', class: "media-object") %>
+        <%= image_tag('logos/app-default.png', class: "media-object") %>
 
 
-      
-    </a>
-    <article  class="media box">
-      <div class="media-body">
-        <h4>
-          <%= Site::Client.human_attribute_name :url %>
-        </h4>
-        <div class="result">
-          <%= link_to @client.url, @client.url%>
+        
+      </a>
+      <article  class="media box">
+        <div class="media-body">
+          <h4>
+            <%= Site::Client.human_attribute_name :url %>
+          </h4>
+          <div class="result">
+            <%= link_to @client.url, @client.url%>
+          </div>
+          <h4>
+            <%= Site::Client.human_attribute_name :callback_url %>
+          </h4>
+          <div class="result">
+            <%= @client.callback_url %>
+          </div>
+          <h4>
+            <%= Site::Client.human_attribute_name :id %>
+          </h4>
+          <div class="result">
+            <%= @client.id %>
+          </div>
+          <h4>
+            <%= Site::Client.human_attribute_name :secret %>
+          </h4>
+          <div class="result client_secret">
+            <p>
+              <%= @client.secret %>
+            </p>
+          </div>
         </div>
-        <h4>
-          <%= Site::Client.human_attribute_name :callback_url %>
-        </h4>
-        <div class="result">
-          <%= @client.callback_url %>
-        </div>
-        <h4>
-          <%= Site::Client.human_attribute_name :id %>
-        </h4>
-        <div class="result">
-          <%= @client.id %>
-        </div>
-        <h4>
-          <%= Site::Client.human_attribute_name :secret %>
-        </h4>
-        <div class="result client_secret">
-          <p>
-            <%= @client.secret %>
-          </p>
-        </div>
-      </div>
-    </article>
-  </div>
-</section>
+      </article>
+    </div>
+  </section>
+</div>

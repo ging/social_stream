@@ -32,9 +32,9 @@ $pink:                  #c3325f !default;
 $purple:                #7a43b6 !default;
 
 // -----------
-$principal-color:        $blue !default;
-$secundary-color:        $blueLight !default;
-$auxiliar-color:         $white !default;
+$principalColor:        $blue !default;
+$secundaryColor:        $blueLight !default;
+$auxiliarColor:         $white !default;
 
 // Scaffolding
 // -------------------------
@@ -67,10 +67,10 @@ $headingsColor:         inherit !default; // empty to use BS default, $textColor
 
 // buttons
 // -------------------------
-$principal-btnColorbackground: $auxiliar-color;
-$principal-btnColorborder: $principal-color;
-$secundary-btnColorbackground: $principal-color;
-$secundary-btnColorborder: $auxiliar-color;
+$principal-btnColorbackground: $auxiliarColor;
+$principal-btnColorborder: $principalColor;
+$secundary-btnColorbackground: $principalColor;
+$secundary-btnColorborder: $auxiliarColor;
 
 // Component sizing
 // -------------------------
