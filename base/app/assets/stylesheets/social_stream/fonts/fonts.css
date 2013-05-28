@@ -3,9 +3,9 @@
 @font-face{
   font-family:"OpenSans";
   src: url(social_stream/fonts/opensans/opensans-regular.ttf);
-  src: url(social_stream/fonts/opensans/opensans-regular.eot);
-  src: url(social_stream/fonts/opensans/opensans-regular.wof);
-  src: url(social_stream/fonts/opensans/opensans-regular.svg);
+  src: url(social_stream/fonts/opensans/opensans-regular-webfont.eot);
+  src: url(social_stream/fonts/opensans/opensans-regular-webfont.woff);
+  src: url(social_stream/fonts/opensans/opensans-regular-webfont.svg);
 }
 @font-face{
   font-family:"OpenSansLight";
