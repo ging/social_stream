@@ -28,6 +28,8 @@ en:
     mine: My places
     name: place
     name_title: Place name
+    one: a place
+    other: places
     phone_title: Phone number
     photo:
       button: Upload

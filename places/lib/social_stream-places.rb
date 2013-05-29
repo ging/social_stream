@@ -9,7 +9,10 @@ module SocialStream
       autoload  :ActivityObject,  'social_stream/places/models/activity_object'
     end
     
-    SocialStream.objects.push(:place) unless SocialStream.objects.include?(:place)
+    %w( objects quick_search_models extended_search_models repository_models ).each do |m|
+      SocialStream.__send__(m).push(:place) unless SocialStream.__send__(m).include?(:place)
+    end
+
   end
 end
 
