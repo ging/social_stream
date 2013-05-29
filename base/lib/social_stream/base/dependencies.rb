@@ -8,6 +8,8 @@ require 'rails_engine_decorators'
 require 'foreigner'
 # jQuery
 require 'jquery-rails'
+# jQuery UI
+require 'jquery-ui-rails'
 # Select2 javascript library
 require 'select2-rails'
 # Permalinks:
