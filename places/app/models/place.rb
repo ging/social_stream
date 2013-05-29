@@ -14,6 +14,10 @@ class Place < ActiveRecord::Base
   validates :latitude, :presence => true
   validates :longitude, :presence => true
 
+  define_index do
+    activity_object_index
+  end
+
   def photos
     pictures
   end

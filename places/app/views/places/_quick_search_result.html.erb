@@ -1,0 +1,17 @@
+<%= div_for place do %>
+  <div class="thumb">
+    <%#= link_to icon(document, 40), document, :title => document.file_file_name %>
+    <%= link_to raw("<i class='icon_place_70-default'></i> "), place, :title => place.title %>
+    <%#= link_to(raw("<i class='icon_place_70-default'></i> "), place)%>
+  </div>
+  <div class="brifing">
+    <h5>
+      <%= link_to truncate(place.title, :length => 15), place %>
+    </h5>
+
+    <%= render partial: 'objects/counters', locals: { object: place } %>
+
+  </div>
+<% end %>
+
+

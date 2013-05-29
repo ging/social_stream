@@ -1,0 +1,11 @@
+<%= div_for place do %>
+  <div class="thumb">
+    <%= link_to(raw("<i class='icon_place_70-default'></i> "), place)%>
+  </div>
+
+  <div class="text">
+    <h6>
+      <%= link_to place.title, place %>
+    </h6>
+  </div>
+<% end %>
