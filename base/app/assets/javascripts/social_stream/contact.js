@@ -116,16 +116,14 @@ SocialStream.Contact = (function($, SS, undefined) {
     }
   };
 
-  // Dictate if some form has changed its status
   var getInputValues = function(form) {
     return $('ul.dropdown-menu input[type="checkbox"]', form).
       map(function() {
       if ($(this).is(':checked'))
         return $(this).val();
-    });
+      });
   };
 
-  // Dictate if some form has changed its status
   var setInputValues = function(form) {
     return $('ul.dropdown-menu input[type="checkbox"]', form).
       map(function() {
