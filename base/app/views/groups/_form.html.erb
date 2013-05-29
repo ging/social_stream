@@ -11,19 +11,22 @@
       </ul>
     </div>
   <% end %>
-
+<section>
   <%= f.label :name, t('group.new.name') %>
   <%= f.text_field :name %>
-
+</section>
+<section>
   <%= f.label :_participants, t('group.new.participants') %>
   <%= f.hidden_field :_participants, 'data-path' => contacts_path(format: :json) %>
-
+</section>
+<section>
   <%= f.label :tags_list, t('group.tags')%>
   <%= f.text_field :tag_list, 'data-path' => tags_path(format: :json) %>
-
+</section>
+<section>
   <%= f.label :description %>
   <%= f.text_area :description %>
-
+</section>
   <%= f.submit :class => "btn" %>
 <% end %>
 

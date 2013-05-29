@@ -1,0 +1,88 @@
+//
+// Responsive: Landscape phone to desktop/tablet
+// --------------------------------------------------
+
+
+@media (max-width: 767px)
+
+  #contacts
+    .contacts
+      width: 100% !important
+      margin-left: 0
+
+  #relation_customs
+    .relation_customs
+      @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      @include gradient-vertical($startColor: #fff, $endColor: rgba(250, 250, 250, .01))
+      @include border-radius(5px)
+      margin-top: 20px
+      margin-left: 0
+      h2.colorfont
+        padding-bottom: 1px
+        color: #d9d9d9
+        margin-top: 0px
+        padding-top: 16px
+        height: 23px
+      span.colorfont-overlay
+        top: 17px !important
+        margin-left: 10px
+        color: #f1f1f1
+    .relation_list
+      padding-left: 10px !important
+      width: 41% !important
+      input
+        &[type="radio"]
+          margin-right: 0px
+      label
+        @include ellipsis
+        width: 50%
+    #permissions
+      .permissions ul li
+        label
+          @include ellipsis
+          width: 84%
+// UP TO LANDSCAPE PHONE
+// ---------------------
+
+@media (max-width: 480px)
+
+  #contacts
+    .contacts
+      width: 100% !important
+      margin-left: 0
+      input
+        &[type="text"]
+          width: 94% !important
+      .contact
+        width: 96% !important
+        margin-left: 0 !important
+        .avatar
+          padding-right: 0px
+          width: 30% !important
+          img
+            width: 84%  !important
+        .data
+          width: 64% !important
+          margin-left: 0 !important
+          .name
+            font-size: 140%
+            margin-top: 7px
+        .info
+          font-size: 11px
+          color: #ccc
+          z-index: 1
+          font-size: 100%
+          padding-left: 9px
+          margin-bottom: 9px
+        .add
+          margin-top: 2px
+        .x
+          margin-top: -45px
+          font-size: 18px
+  #relation_customs
+    .relation_list
+      padding-left: 10px !important
+      .edit_name
+        .edit_relation_custom
+          #relation_custom_name
+            width: 54% !important
