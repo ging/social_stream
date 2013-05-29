@@ -19,3 +19,4 @@ spec/dummy/log/*.log
 spec/dummy/tmp/
 .code_swarm
 .sass-cache/
+.yardoc/
