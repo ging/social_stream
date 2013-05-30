@@ -82,6 +82,10 @@ module SocialStream
 
       config.to_prepare do
         ApplicationController.rescue_handlers += [["CanCan::AccessDenied", :rescue_from_access_denied]]
+
+        # Load Relation::Public, so it is registered as descendant of Relation::Single
+        # and used in ActivityObject#allowed_relations
+        Relation::Public
       end
     end
   end
