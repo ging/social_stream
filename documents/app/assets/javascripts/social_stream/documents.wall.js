@@ -28,22 +28,37 @@ SocialStream.Documents.Wall = (function(SS, $, undefined) {
     $('.wall_input button.new_document').click(function(event){
       event.preventDefault();
 
-      $('label[for="new_document_title"]').show();
-
-      $('#post_text').
-        attr('name', 'document[title]').
-        attr('placeholder', I18n.t('document.title.input'));
-
-      $('#new_document_description').show().val($('#post_text').val());
-
-      SocialStream.Wall.changeAction($(this).attr('data-path'));
-      SocialStream.Wall.changeParams('document');
-
       $('.wall_input input[type=file]').trigger('click');
     });
 
     $('.wall_input input[type=file]').change(function(){
-      $("#post_text").val($(this).val().replace(/C:\\fakepath\\/i, ''));
+      if ($(this).val()) {
+        $('label[for="new_document_title"]').show();
+
+        $('#post_text').
+          attr('name', 'document[title]').
+          attr('placeholder', I18n.t('document.title.input'));
+
+        $('#new_document_description').show().val($('#post_text').val());
+
+        SocialStream.Wall.changeAction($(this).closest('form').find('button.new_document').attr('data-path'));
+        SocialStream.Wall.changeParams('document');
+
+        $("#post_text").val($(this).val().replace(/C:\\fakepath\\/i, ''));
+      } else {
+        $('label[for="new_document_title"]').hide();
+
+        $('#post_text').
+          attr('name', 'post[text]').
+          attr('placeholder', I18n.t('post.input'));
+
+        $('#new_document_description').hide();
+
+        SocialStream.Wall.changeAction();
+        SocialStream.Wall.changeParams();
+
+        $("#post_text").val($('#new_document_description').val());
+      }
     });
   };
 
