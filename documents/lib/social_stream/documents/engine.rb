@@ -37,6 +37,10 @@ module SocialStream
         end
         unless defined? Mime::BMP
           Mime::Type.register "image/bmp",  :bmp, [ "image/x-ms-bmp" ]
+        else
+          # Manually register synonym
+          Mime::BMP.instance_variable_get("@synonyms") << "image/x-ms-bmp"
+          Mime::LOOKUP["image/x-ms-bmp"] = Mime::BMP
         end
 
         # Audio
