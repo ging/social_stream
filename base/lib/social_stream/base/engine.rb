@@ -85,7 +85,7 @@ module SocialStream
 
         # Load Relation::Public, so it is registered as descendant of Relation::Single
         # and used in ActivityObject#allowed_relations
-        Relation::Public
+        ::Relation::Public
       end
     end
   end
