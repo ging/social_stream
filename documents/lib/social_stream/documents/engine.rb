@@ -36,7 +36,7 @@ module SocialStream
           Mime::Type.register "image/png",  :png,  [ "image/x-png" ]
         end
         unless defined? Mime::BMP
-          Mime::Type.register "image/bmp",  :bmp
+          Mime::Type.register "image/bmp",  :bmp, [ "image/x-ms-bmp" ]
         end
 
         # Audio
