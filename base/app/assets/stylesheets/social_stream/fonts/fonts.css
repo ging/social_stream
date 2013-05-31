@@ -21,12 +21,12 @@
   font-family: "Josefin OSP";
   font-weight: normal;
   font-style: normal;
-  src: url(social_stream/fonts/josefinslab/JosefinSlabRegular.ttf);
+  src: url(social_stream/fonts/josefinSlab/JosefinSlabRegular.ttf);
 }
 
 @font-face{
   font-family: 'Josefin Overlay';
   font-weight: normal;
   font-style: normal;
-  src: url(social_stream/fonts/josefinslab/JosefinSlabOverlay.ttf);
+  src: url(social_stream/fonts/josefinSlab/JosefinSlabOverlay.ttf);
 }
