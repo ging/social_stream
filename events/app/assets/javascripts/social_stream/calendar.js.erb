@@ -96,7 +96,7 @@ SocialStream.Calendar = (function(SS, $, undefined){
 
     modal.appendTo($('body'));
 
-    modal.modal();
+    modal.modal({ dynamic: true });
 
     el.attr('data-loaded', true);
   };
