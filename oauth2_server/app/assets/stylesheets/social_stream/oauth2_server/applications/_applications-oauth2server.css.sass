@@ -1,40 +1,40 @@
-#site_clients
-  .site_clients
-    header
-      h1
-        @include colorfont-big-size
-        float: left
-      a
-        @include btn-primary
-        @include border-radius(5px)
-        margin: 12px 0
-      .soften
-        @include opacity (100)
 
-    .name,
-    .url,
-    .users
+.site_clients
+  header
+    h1
+      @include colorfont-big-size
+      float: left
+    a
+      @include btn-primary
+      @include border-radius(5px)
+      margin: 12px 0
+    .soften
+      @include opacity (100)
+
+  .name,
+  .url,
+  .users
+    color: $gray
+
+  .name
+    font-size: 16px
+
+  .url
+    a
       color: $gray
-
-    .name
-      font-size: 16px
-
-    .url
-      a
-        color: $gray
-        &:hover
-          color: $blue
-
-    .users
-      font-size: 16px
-      span
+      &:hover
         color: $blue
 
-  #new_site_client-modal
-    .modal-body
-      input
-        &[type="file"]
-          line-height: 0px
+  .users
+    font-size: 16px
+    span
+      color: $blue
+
+#new_site_client-modal
+  .modal-body
+    input
+      &[type="file"]
+        line-height: 0px
 
 .field_with_errors
   input
