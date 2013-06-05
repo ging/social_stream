@@ -1,5 +1,5 @@
 <% if can? :create, document = Document.new(author: current_actor, owner: Actor.normalize(owner)) %>
-  <%= link_to t('document.new.link'), new_document_path, class: "btn new_document-modal-link", 'data-toggle' => 'modal'  %>
+  <%= link_to t('document.new.link'), new_document_path, class: "btn new_document-modal-link", 'data-toggle' => 'modal', 'data-dynamic' => true %>
 
   <%= render partial: 'common_documents/new.modal',
              locals: { document: document } %>

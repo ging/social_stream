@@ -4,6 +4,7 @@
 //= require modernizr
 //= require bootstrap
 //= require bootstrap-multiselect
+//= require bootstrap-scroll-modal
 //= require i18n
 //= require i18n/translations
 //= require flashy
