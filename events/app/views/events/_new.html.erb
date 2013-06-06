@@ -15,16 +15,19 @@
       </ul>
     </div>
   <% end %>
-
+<section>
   <%= f.label :title %>
   <%= f.text_field :title %>
-
+</section>
+<section>
   <%= f.label :description %>
   <%= f.text_area :description %>
-
+</section>
   <% if f.object.owner.rooms.any? %>
+    <section>
     <%= f.label :room %>
     <%= f.select :room_id, f.object.owner.rooms.map{ |r| [r.name, r.id] }, { include_blank: true } %>
+    </section>
   <% end %>
 
   <%= render :partial => 'scheduler/form',
@@ -33,5 +36,5 @@
   <%= render partial: 'objects/form_privacy',
              locals: { f: f } %>
   
-  <%= f.submit nil, { class: "btn-blue" } %>
+  <%= f.submit nil %>
 <% end %>
