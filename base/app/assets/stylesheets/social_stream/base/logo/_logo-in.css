@@ -1,10 +1,11 @@
 .logo-header-in .cube {
   position:relative;
-  left: -38px;
+  left: -44px;
+  margin-top: 7px;
   z-index: 2;
   float: left;
-    -webkit-transform: rotate(10deg);
-    -moz-transform: rotate(10deg);
+    -webkit-transform: rotate(6deg);
+    -moz-transform: rotate(6deg);
 }
 
 .logo-header-in .cube:hover {
@@ -12,20 +13,20 @@
   -moz-animation: float 2s infinite ease-in-out;
   -o-animation: float 2s infinite ease-in-out;
   animation: float 2s infinite ease-in-out;
-  -webkit-transform: rotate(10deg);
-  -moz-transform: rotate(10deg);
+
+  margin-top: 4px;
 }
 
 @-webkit-keyframes float {
   0% {
-    -webkit-transform: translate(0px, 3px);
+    -webkit-transform: translate(0px, 2px);
   }
   50% {
     -webkit-transform: translate(0px, 0px);
     
   }
   100% {
-    -webkit-transform: translate(0px, 3px);
+    -webkit-transform: translate(0px, 2px);
   }
 }
 
