@@ -225,7 +225,6 @@ zh:
       other: '%{count} 粉丝'
   forgot_password: 忘了您的密码吗?
   frontpage:
-    main_title: 社交视频互动是我们建立社交网的核心.
     stats: '%{users} 用户 和 %{groups} 已注册的群组'
     presentation:
       modular:
@@ -546,7 +545,10 @@ zh:
   sign_out: 退出
   sign_up: 注册
   site:
-    name: Gocess.com
+    current:
+      description: 社交视频互动是我们建立社交网的核心.
+      keywords: social stream,social software,framework,ruby on rails
+      title: Social Stream
   subject:
     this_is_you: 这是您!
   sure: 您肯定吗?

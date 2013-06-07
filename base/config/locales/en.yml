@@ -610,7 +610,10 @@ en:
   sign_out: Sign out
   sign_up: Sign up
   site:
-    name: Social Stream
+    current:
+      description: A framework for building distributed social network websites
+      keywords: social stream,social software,framework,ruby on rails
+      title: Social Stream
   subject:
     this_is_you: This is you!
   sure: Are you sure?

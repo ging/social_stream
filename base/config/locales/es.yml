@@ -267,8 +267,6 @@ es:
       other: '%{count} seguidores'
   forgot_password: ¿Olvidaste tu contraseña?
   frontpage:
-    main_title: Social Stream, el núcleo para construir webs con características de
-      red social distribuída
     presentation:
       modular:
         header: Modular
@@ -644,7 +642,10 @@ es:
   sign_out: Salir
   sign_up: Registrarse
   site:
-    name: Social Stream
+    current:
+      description: Un marco para construir para construir webs con características de red social distribuída
+      keywords: social stream,social software,framework,ruby on rails
+      title: Social Stream
   subject:
     this_is_you: ¡Eres tú!
   sure: ¿Confirmar?
