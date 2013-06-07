@@ -27,7 +27,7 @@ class Oauth2Token < ActiveRecord::Base
   protected
 
   def setup
-    self.token = SecureRandom.base64(64)
+    self.token = SecureRandom.urlsafe_base64(64)
     self.expires_at ||= default_lifetime.from_now
   end
 end
