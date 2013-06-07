@@ -545,8 +545,6 @@ pt:
   sign_in: Entrar
   sign_out: Sair
   sign_up: Cadastrar-se
-  site:
-    name: Social Stream
   subject:
     this_is_you: Este é você!
   sure: Você tem certeza?
@@ -635,3 +633,5 @@ pt:
       description: A base para a construção de sites de rede social.
       keywords: social stream,social software,framework,ruby on rails
       title: Social Stream
+    name: Social Stream
+

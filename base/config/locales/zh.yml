@@ -549,6 +549,7 @@ zh:
       description: 社交视频互动是我们建立社交网的核心.
       keywords: social stream,social software,framework,ruby on rails
       title: Social Stream
+    name: Social Stream
   subject:
     this_is_you: 这是您!
   sure: 您肯定吗?
