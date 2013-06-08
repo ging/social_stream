@@ -218,7 +218,6 @@ pt:
       title: Followings
   forgot_password: Esqueceu sua senha?
   frontpage:
-    main_title: Social Stream é a base para a construção de sites de rede social.
     stats: '%{users} usuários e %{groups} grupos registrados'
     presentation:
       modular:
@@ -546,8 +545,6 @@ pt:
   sign_in: Entrar
   sign_out: Sair
   sign_up: Cadastrar-se
-  site:
-    name: Social Stream
   subject:
     this_is_you: Este é você!
   sure: Você tem certeza?
@@ -631,3 +628,10 @@ pt:
       by: Order by
       last_modified: Last modified
       most_popular: Most popular
+  site:
+    current:
+      description: A base para a construção de sites de rede social.
+      keywords: social stream,social software,framework,ruby on rails
+      title: Social Stream
+    name: Social Stream
+

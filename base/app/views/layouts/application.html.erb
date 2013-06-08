@@ -3,9 +3,9 @@
 <html lang="<%= I18n.locale.to_s %>">
   <head>
     <meta charset="utf-8">
-    <title><%= yield(:title).empty? ? t('site.name') : yield(:title)%></title>
-    <meta name="keywords" content="<%= t('profile.tags.default') %><%= yield(:keywords) %>" >
-    <meta name="description" content= "<%= yield(:description).empty? ? t('frontpage.main_title') : yield(:description) %>" >
+    <title><%= content_for?(:title) ? yield(:title) : t('site.current.title') %></title>
+    <meta name="keywords" content="<%= content_for?(:keywords) ? yield(:keywords) : t('site.current.keywords') %>" >
+    <meta name="description" content= "<%= content_for?(:description) ? yield(:description) : t('site.current.description') %>" >
     <meta name="generator" content="Social Stream" />
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
 

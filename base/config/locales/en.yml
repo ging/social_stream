@@ -266,7 +266,7 @@ en:
       other: '%{count} followers'
   forgot_password: Forgot you password?
   frontpage:
-    main_title: Social Stream, the core for building distributed social network websites.
+    main_title: Social Stream, a framework for building distributed social network websites.
     presentation:
       modular:
         header: Modular
@@ -610,6 +610,10 @@ en:
   sign_out: Sign out
   sign_up: Sign up
   site:
+    current:
+      description: A framework for building distributed social network websites
+      keywords: social stream,social software,framework,ruby on rails
+      title: Social Stream
     name: Social Stream
   subject:
     this_is_you: This is you!
