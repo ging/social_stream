@@ -32,13 +32,15 @@
         @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
         background-color: $white
         margin-left: 0px
-        padding: 12px 0px 3px 0px !important
+        padding: 12px 0px 32px 0px !important
         form.edit_profile
           padding: 0 14px
           input
             &[type="submit"]
+              @include btn-primary
+              @include border-radius(5px)
               float: right
-              margin-top: -10px
+              margin-top: 10px
               margin-right: 9px
       
 

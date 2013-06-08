@@ -1,22 +1,22 @@
 <div class="oauth2_server"> 
   <%= render partial: 'toolbar/home' %>
 
-  <section id="oauth2_server">  
-    <h1>
-      <%= @client.name %>
-    </h1>
-    <a class="pull-right" href="#">
-      ir a tus demás aplicaciones
+  <section id="oauth2_server">
+    <header>  
+      <h1>
+        <%= @client.name %>
+      </h1>
+
+      <a class="pull-right" href="#">
+        ir a tus demás aplicaciones
       </a>
-    <hr class="soften">
+
+      <%= image_tag('logos/app-default.png', class: "media-object logo-app pull-right") %>
+
+    </header>
+
     <div class="content">
-      <a class="pull-left" href="#">
-
-        <%= image_tag('logos/app-default.png', class: "media-object") %>
-
-
-        
-      </a>
+      
       <article  class="media box">
         <div class="media-body">
           <h4>

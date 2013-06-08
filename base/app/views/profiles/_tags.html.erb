@@ -16,7 +16,7 @@
     <div class="update">
       <%= form_for(@profile, :url => [ @profile.subject, :profile ]) do |f| %>
         <%= f.text_field :tag_list, "data-path" => tags_path(format: :json) %>
-        <%= f.submit :class => "btn" %>
+        <%= f.submit %>
       <% end %>
     </div>
   <% end %>
