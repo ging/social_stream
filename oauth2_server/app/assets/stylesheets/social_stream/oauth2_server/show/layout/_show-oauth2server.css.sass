@@ -30,23 +30,27 @@
 
 
 #oauth2_server 
-  width: 80%
+  width: 75%
   margin-left: 2.85%
+  padding-left: 2.5%
+  padding-right: 2.5%
   display: inline-block
   h1
     @include clearfix
     margin-bottom: 4px
+    margin-left: -2.5%
+    a
+      font-size: 13px
   .soften
     margin-bottom: 0px
   .content
     padding: 14px
-    .media
-      margin-top: 0
-    .media-body
-      margin-left: 2.85%
-      img
-        display: inline
-        @include size (40px, 40px)
+    img
+      display: inline
+      @include size (40px, 40px)
+    .gereral-info
+      @include grid-core-span(10, $fluidGridColumnWidth, $fluidGridGutterWidth)
+      float: left
       h4
         margin-bottom: 0px
       .name,
@@ -57,15 +61,29 @@
       .url
         margin-left: 20px
 
-      .result,
-      .client_secret
-        padding: 7px
-        margin-bottom: 20px
+      .result
+        margin-bottom: 18px
+        margin-left: 20px
+        padding-top: 5px
+        border-top: 1px solid #C1C1C1
+    .btn-group
+      @include btn-primary
+      @include border-radius(5px)
+      @include btn-add
+      .dropdown-menu
+        width: 300px
+        margin-left: -196px
+        li
+          word-break: break-all
+          overflow-y: hidden
+          overflow-x: scroll
+          h6
+            border-bottom: 1px solid #CCC
+            a
+              color: principalColor
 
-      .client_secret
-        height: 23px
-        p
-          width: 250%
-    .users
-      float: right
-      margin-top: 7px
+
+     
+  .users
+    float: right
+    margin-top: 7px

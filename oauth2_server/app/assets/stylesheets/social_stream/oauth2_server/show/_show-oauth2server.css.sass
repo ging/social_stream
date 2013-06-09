@@ -12,33 +12,28 @@
   h1
     text-align: left
   .content
-    @include gradient-vertical($startColor: #ccc, $endColor: #f9f9f9)
     a
       img
         background-color: #f9f9f9
-    .media
-    .media-body
-      .name,
-      .url,
-      .users
+    
+    .name,
+    .url,
+    .users
+      color: $gray
+    .name
+      font-size: 16px 
+    .url
+      a
         color: $gray
-      .name
-        font-size: 16px 
-      .url
-        a
-          color: $gray
-          &:hover
-            color: $blue
-      .result,
-      .client_secret
-        background-color: #f9f9f9
-        @include border-radius(5px)
-        font-size: 15px
+        &:hover
+          color: $blue
+    .result
+      font-size: 15px
 
-      .client_secret
-        border: 1px solid ccc
-        overflow-y: hidden
-        overflow-x: scroll
+    .client_secret
+      border: 1px solid ccc
+      overflow-y: hidden
+      overflow-x: scroll
 
     .users
       font-size: 16px
