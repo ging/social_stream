@@ -7,6 +7,15 @@
   </header>
   <div class="briefing">
     <% if @profile.personal_present? %>
+      <% if @profile.description? %>
+        <h5>
+          <%= t("profile.#{ @profile.subject.class.to_s.downcase }.about") %>:
+        </h5>
+
+        <%= simple_format @profile.description %>
+      <% end %>
+
+
       <% if @profile.organization? %>
         <h5>
           <%= t('profile.organization') %>
@@ -50,13 +59,7 @@
         </p>       
       <% end %>
 
-      <% if @profile.description? %>
-        <h5>
-          <%= t("profile.#{ @profile.subject.class.to_s.downcase }.about") %>:
-        </h5>
-
-        <%= simple_format @profile.description %>
-      <% end %>
+      
 
     <% else %>
       <%= render partial: 'empty' %>
@@ -72,6 +75,12 @@
         </h6>
 
         <%= f.text_field :name, :class => "required" %>
+        
+        <h6>
+          <%= f.label :description, t("profile.#{ current_subject.class.to_s.downcase }.about") %>
+        </h6>
+
+        <%= f.text_area :description, :maxlength => 200, :rows => 10 %>
 
         <h6>
           <%= f.label :organization, t('profile.organization') %>
@@ -93,9 +102,6 @@
 
         <%= f.text_field :country %>
 
-        <%= f.label :description, t("profile.#{ current_subject.class.to_s.downcase }.about") %>
-
-        <%= f.text_area :description, :maxlength => 200, :rows => 10 %>
         <p>
           <%= t('required') %>
         </p>
