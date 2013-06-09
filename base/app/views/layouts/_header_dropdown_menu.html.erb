@@ -7,16 +7,16 @@
   <ul class="dropdown-menu">
     <%= render :partial => 'layouts/header_dropdown_menu_sessions'%>
 
-    <li>
+    <li class="notifications-menu">
       <%= link_to t('dropdown.notifications'), notifications_path, :id => "btn_menu_settings" %>
     </li>
 
-    <li>
+    <li class="settings-menu">
       <%= link_to t('dropdown.settings'), settings_path, :id => "btn_menu_settings" %>
     </li>
 
     <% if SocialStream.relation_model == :custom %>
-      <li>
+      <li  class="privacity-menu">
         <%= link_to t('dropdown.privacy'), relation_customs_path %>
       </li>
     <% end %>
