@@ -1,7 +1,7 @@
-<div class="oauth2_server"> 
+<section id="site_client">
   <%= render partial: 'toolbar/home' %>
 
-  <section id="oauth2_server">
+  <section class="site_client" id="<%= dom_id @client %>">
     <header>  
       <h1>
         <%= @client.name %>
@@ -63,4 +63,4 @@
       </div>   
     </div>
   </section>
-</div>
+</section>
