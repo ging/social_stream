@@ -3,7 +3,8 @@
     <%= t 'relation_custom.list.title' %>
   </h4>
 
-  <%= render list %>
+  <%= render partial: 'relation/customs/custom',
+             collection: list %>
    
   <div id="new_relation">
     <%= link_to t('relation_custom.new'), '#', class: 'new' %>

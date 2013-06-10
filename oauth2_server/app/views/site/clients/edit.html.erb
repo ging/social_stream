@@ -5,6 +5,10 @@
   <section class="edit_site_client" id="edit_<%= dom_id @client %>">
     <%= render partial: 'form' %>
     
+    <section class="site_client_roles">
+      <%= render partial: 'relation/customs/index',
+                 locals: { list: @client.relations } %>
+    </section>
   </section>
 </section>
 

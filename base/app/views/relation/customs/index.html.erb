@@ -6,21 +6,7 @@
       <%= t 'relation_custom.title' %>
     </h2>
 
-      <%= render :partial => 'relation/customs/list', :object => @customs %>
-
-      <div id="permissions">
-        <div class="postit rotate">
-          <span class="rotate-int">
-            <%= t 'permission.postit' %>
-          </span>
-        </div>
-        <%= render partial: 'layouts/loading' %>
-      </div>
-
-      <%= javascript_tag do %>
-        $(function() {
-          SocialStream.RelationCustom.index();
-        })
-      <% end %>
+    <%= render partial: 'relation/customs/index',
+               locals: { list: @customs } %>
   </section> 
 </section> 
