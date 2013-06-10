@@ -1,9 +1,10 @@
 //= require social_stream/callback
+
 SocialStream.RelationCustom = (function(SS, $, undefined){
   var callback = new SS.Callback();
 
   var getListEl = function() {
-    return $('#relation_customs .relation_list');
+    return $('.relation_list');
   };
 
   var getPermissionsPath = function() {
