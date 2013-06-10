@@ -19,7 +19,9 @@ module SocialStream
 
             res.access_token = code.access_token.to_bearer_token(:with_refresh_token)
           when :password
-            user = User.find_for_authentication(email: req.username, password: req.password) || req.invalid_grant!
+            user = User.find_for_authentication(email: req.username) || req.invalid_grant!
+            user.valid_password?(req.password) || req.invalid_grant!
+
             res.access_token = user.access_tokens.create(:client => client).to_bearer_token(:with_refresh_token)
           when :client_credentials
             # NOTE: client is already authenticated here.
