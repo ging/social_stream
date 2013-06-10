@@ -56,6 +56,9 @@
         margin-top: -50px
         h4
           margin-bottom: 0px
+          font-size: 18px
+          color: $principalColor
+          font-family: $serifFontFamily 
         .name,
         .url,
         .users
@@ -69,21 +72,27 @@
           margin-left: 20px
           padding-top: 5px
           border-top: 1px solid #C1C1C1
+          color: #929292
+          font-size: 17px
       .btn-group
         @include btn-primary
         @include border-radius(5px)
         @include btn-add
+        float: right
         .dropdown-menu
           width: 300px
           margin-left: -196px
+          padding: 10px 14px
+          color: $gray
           li
-            word-break: break-all
-            overflow-y: hidden
-            overflow-x: scroll
             h6
               border-bottom: 1px solid #CCC
               a
-                color: principalColor
+                color: $principalColor !important
+          li.client-secret
+            p
+              word-break: break-all
+              overflow-x: scroll
 
 
      

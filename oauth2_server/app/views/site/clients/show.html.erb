@@ -20,7 +20,7 @@
           <%= Site::Client.human_attribute_name :description %>
         </h4>
         <div class="result">
-          <%= link_to @client.description, @client.description%>
+          <%= @client.description%>
         </div>
 
         <h4>
@@ -49,15 +49,19 @@
             <%= Site::Client.human_attribute_name :id %>
             <a href="#" class="pull-right">refresh</a>
             </h6>
-            <%= @client.id %>
+            <p>
+              <%= @client.id %>
+            </p>
           </li>
 
-          <li>
+          <li class="client-secret">
             <h6>
               <%= Site::Client.human_attribute_name :secret %>
               <a href="#" class="pull-right">refresh</a>
             </h6>
-            <%= @client.secret %>
+            <p>
+              <%= @client.secret %>
+            </p>
           </li>
         </ul>  
       </div>   
