@@ -10,6 +10,11 @@ es:
         name: Nombre
         secret: Client Secret
         url: URL
+  helpers:
+    submit:
+      site_client:
+        create: "Siguiente"
+        update: "Guardar"
   permission:
     public_info: Acceder a tu información pública
   site:

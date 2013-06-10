@@ -18,6 +18,11 @@ en:
       title: Authorize %{client}?
       permission:
         title: 'The site %{client} will be able to:'
+  helpers:
+    submit:
+      site_client:
+        create: "Next"
+        update: "Save"
   permission:
     public_info: Read your public information
   site:

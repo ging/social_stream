@@ -1,0 +1,39 @@
+<%= form_for(@client || Site::Client.new) do |f| %>
+
+  <% if f.object.errors.any? %>
+    <div id="error_explanation" class="alert alert-error">
+      <h2><%= pluralize(f.object.errors.count, "error") %> prohibited this client site from being saved:</h2>
+
+      <ul>
+        <% f.object.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+
+    </div>
+  <% end %>
+
+  <section id="site_client_form">
+    <section class="name">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </section>
+
+    <section class="description">
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </section>
+
+    <section class="url">
+      <%= f.label :url %>
+      <%= f.text_area :url %>
+    </section>
+
+    <section class="callback_url">
+      <%= f.label :callback_url %>
+      <%= f.text_area :callback_url %>
+    </section>
+
+    <%= f.submit %>
+  </section>
+<% end %>

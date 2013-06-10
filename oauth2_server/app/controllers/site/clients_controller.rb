@@ -29,6 +29,24 @@ class Site::ClientsController < ApplicationController
     end
   end
 
+  def edit
+    @client = Site::Client.find params[:id]
+  end
+
+  def update
+    @client = Site::Client.find params[:id]
+
+    if @client.update_attributes params[:client]
+      respond_to do |format|
+        format.html { redirect_to @client }
+      end
+    else
+      respond_to do |format|
+        format.html { render :edit }
+      end
+    end
+  end
+
   private
 
   def set_author_ids
