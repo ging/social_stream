@@ -17,6 +17,8 @@ es:
         update: "Guardar"
   permission:
     public_info: Acceder a tu información pública
+  relation_admin:
+    name: "Administrador de Sitio"
   site:
     client:
       added: Sitios añadidos
