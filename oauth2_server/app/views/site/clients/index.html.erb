@@ -40,13 +40,14 @@
         </div>
       </div>
 
+
       <div class="tab-content">
         <div class="tab-pane active" id="tab1">
-          <%= render partial: 'clients/list' %>
+          <%= render partial: 'list',
+               object: @developer_clients %>
         </div>
 
         <div class="tab-pane" id="tab2">
-          <%= render partial: 'clients/list' %>
         </div>
       </div>
     </div>
