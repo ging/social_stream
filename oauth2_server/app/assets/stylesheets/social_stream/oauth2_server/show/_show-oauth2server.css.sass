@@ -8,35 +8,35 @@
 
 
 #site_client
-
-  @include principal-box 
   h1
     text-align: left
-  .content
-    a
-      img
-        background-color: #f9f9f9
-    
-    .name,
-    .url,
-    .users
-      color: $gray
-    .name
-      font-size: 16px 
-    .url
+  .site_client
+    @include principal-box   
+    .content
       a
+        img
+          background-color: #f9f9f9
+      
+      .name,
+      .url,
+      .users
         color: $gray
-        &:hover
+      .name
+        font-size: 16px 
+      .url
+        a
+          color: $gray
+          &:hover
+            color: $blue
+      .result
+        font-size: 15px
+
+      .client_secret
+        border: 1px solid ccc
+        overflow-y: hidden
+        overflow-x: scroll
+
+      .users
+        font-size: 16px
+        span
           color: $blue
-    .result
-      font-size: 15px
-
-    .client_secret
-      border: 1px solid ccc
-      overflow-y: hidden
-      overflow-x: scroll
-
-    .users
-      font-size: 16px
-      span
-        color: $blue
