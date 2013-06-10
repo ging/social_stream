@@ -25,6 +25,8 @@ en:
         update: "Save"
   permission:
     public_info: Read your public information
+  relation_admin:
+    name: "Site Client Admin"
   site:
     client:
       added: Added sites
