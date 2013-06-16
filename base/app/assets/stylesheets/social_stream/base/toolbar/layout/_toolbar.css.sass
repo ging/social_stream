@@ -1,4 +1,9 @@
-#toolbar 
+#toolbar
+  h5
+    position: relative
+    margin-top: 7px
+    margin-bottom: 16px
+
   .contact-button
     .btn-group
       width: 100%
@@ -9,7 +14,7 @@
         .caret 
           margin-left: 14px
 
-
+ 
   .icon_navbar-message-blue,
   .icon_tool16-info
     margin-right: 4px
@@ -61,11 +66,12 @@
   .logo_home
 
     .subject-name
-      @include ellipsis
       @extend .hidden-phone
     .subject-name-phone
-      @include ellipsis
       display: none
+      position: relative
+      margin-top: 7px
+      margin-bottom: 16px
       @extend .visible-phone
 
    
@@ -90,3 +96,10 @@
     .icon_navbar-message-blue,
     .icon_tool16-info
       margin-right: 4px
+
+.toolbar-profile
+  .toolbar_menu
+    ul
+      li
+        padding: 4px 7px
+        margin-bottom: 5px

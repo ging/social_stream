@@ -5,8 +5,6 @@
       li
         @include btn-primary
         @include border-radius(5px)
-        padding: 4px 7px
-        margin-bottom: 5px
         a
           @include ellipsis
         .icon_tool16-info
@@ -63,9 +61,6 @@
 
 #toolbar
   h5
-    position: relative
-    margin-top: 7px
-    margin-bottom: 16px
     font-size: 16px
     @include ellipsis
     a
@@ -80,11 +75,8 @@
 
   .contacts-toolbar,
   section.groups
-    @extend .hidden-phone
     h4
-      margin-bottom: 0px
       font-family: $sansFontFamilyLight
-      border-bottom: 1px solid #ddd
     ul
       border-right: 1px solid #ddd
       img
@@ -103,10 +95,9 @@
     @include ellipsis
     img
       @include border-radius(5px)
+    .subject-name
+      @include ellipsis
     .subject-name-phone
-      position: relative
-      margin-top: 7px
-      margin-bottom: 16px
       font-size: 16px
       @include ellipsis
       a

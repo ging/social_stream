@@ -1,24 +1,27 @@
 <section class="site_clients_list">
-  <% list.each do |client| %>
+  <ul>
+    <% list.each do |client| %>
+      <li>
+        <%= image_tag client.logo.url(:small), style: "width: 40px; height: 40px;" %>
 
-    <%= image_tag client.logo.url(:small), style: "width: 40px; height: 40px;" %>
-
-    <div class="name">
-      <%= link_to client.name, client %>
-    </div>
-    <div class="url">
-      <%= link_to client.url, client.url, target: '_blank' %>
-    </div>
-    <div class="users">
-      <span>
-        5
-      </span>
-      users
-    </div>
-  <hr class="soften">
-  <% end %>
+        <div class="name">
+          <%= link_to client.name, client %>
+        </div>
+        <div class="url">
+          <%= link_to client.url, client.url, target: '_blank' %>
+        </div>
+        <div class="users">
+          <span>
+            5
+          </span>
+          users
+        </div>
+        <hr class="soften">
+      </li>
+    <% end %>
 
   <%= javascript_tag do %>
     SocialStream.SiteClient.index();
   <% end %>
+  </ul>
 </section>
