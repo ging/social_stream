@@ -1,0 +1,17 @@
+@mixin docs-style
+  .author
+    font-size: 13px
+@mixin docs-layout
+  display: inline
+  @include makeColumn(3, 0)
+  margin-left: 19px
+  margin-bottom: 14px
+  .thumb
+    @include makeColumnoMargin(1, 0)
+    display: inline
+    margin-top: 14px
+  .brifing
+    @include makeColumnoMargin(2, 0)
+    display: inline-block
+  .author
+    margin-top: -10px
