@@ -1,0 +1,15 @@
+<section class="avatar">
+  <% if can? :update, @profile %>
+    <header>
+      <%= render partial: 'edit_icon' %>
+      <h4>
+        <%= t('avatar.profile_change') %>
+      </h4>
+    </header>
+    <div class="update">
+      <%= render partial: 'avatars/form',
+                 object: @profile.actor,
+                 as: :avatarable %>
+    </div>
+  <% end %>
+</section>
