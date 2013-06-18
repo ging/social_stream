@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   
   # Gem dependencies
-  s.add_runtime_dependency('social_stream-base', '~> 2.0.2')
+  s.add_runtime_dependency('social_stream-base', '~> 2.0.4')
   
   s.add_runtime_dependency "xmpp4r"
 
