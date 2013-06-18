@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   # Authentication
   s.add_runtime_dependency('devise', '~> 2.2.3')
   # CRUD controllers
-  s.add_runtime_dependency('inherited_resources', '~> 1.3.0')
+  s.add_runtime_dependency('inherited_resources', '~> 1.4.0')
   # Slug generation
   s.add_runtime_dependency('stringex', '~> 1.5.1')
   # Avatar attachments
