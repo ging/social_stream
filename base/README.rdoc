@@ -5,7 +5,7 @@ Social Stream Base provides the basic functionality for
 network websites. The features of this gem are limited, for a complete social
 network environment see https://github.com/ging/social_stream
 
-{<img src="https://badge.fury.io/rb/social_stream-base.png" />}[https://badge.fury.io/rb/social_stream-base.png"]
+{<img src="https://badge.fury.io/rb/social_stream-base.png" />}[http://rubygems.org/gems/social_stream-base]
 
 == Features
 
