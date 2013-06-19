@@ -18,6 +18,6 @@ gem 'paperclip_waveform'
   gem "social_stream-#{ g }", :path => g
 end
 
-# gem 'social2social', :path => '../social2social'
+gem 'pry'
 
 gemspec
