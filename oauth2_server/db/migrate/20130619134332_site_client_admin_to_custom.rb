@@ -7,15 +7,19 @@ class SiteClientAdminToCustom < ActiveRecord::Migration
       Relation::Custom.defaults_for c.actor
     end
 
-    rt = Tie.record_timestamps
-    Tie.record_timestamps = false
+    admin = Relation::Admin.first
 
-    Relation::Admin.first.ties.each do |t|
-      t.relation = t.sender.relation_customs.sort.first
-      t.save!
+    if admin.present?
+      rt = Tie.record_timestamps
+      Tie.record_timestamps = false
+
+      admin.ties.each do |t|
+        t.relation = t.sender.relation_customs.sort.first
+        t.save!
+      end
+
+      Tie.record_timestamps = rt
     end
-
-    Tie.record_timestamps = rt
   end
 
   def down
