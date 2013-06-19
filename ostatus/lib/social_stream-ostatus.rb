@@ -40,10 +40,6 @@ module SocialStream
       module Object
         autoload :ClassMethods, 'social_stream/ostatus/models/object'
       end
-
-      module Relation
-        autoload :Custom, 'social_stream/ostatus/models/relation/custom'
-      end
     end
     
     module Controllers

@@ -7,9 +7,9 @@ class Site::Client < Site
   after_create :set_admin
 
   scope :administered_by, lambda { |actor|
-    joins(actor: :sent_ties).
+    joins(actor: :sent_permissions).
       merge(Contact.received_by(actor)).
-      merge(Tie.related_by(Relation::Admin.instance))
+      merge(Permission.where(action: 'update', object: nil))
   }
 
   %w{ url callback_url secret }.each do |m|
@@ -33,6 +33,9 @@ class Site::Client < Site
   end
 
   def set_admin
-    contact_to!(author).relation_ids = [ Relation::Admin.instance.id ]
+    c = sent_contacts.create! receiver_id: author.id,
+                              user_author: author
+
+    c.relation_ids = [ relation_customs.sort.first.id ]
   end
 end

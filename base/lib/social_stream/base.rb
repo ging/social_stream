@@ -25,6 +25,52 @@ module SocialStream
   mattr_accessor :single_relations
   @@single_relations = [ :public, :follow, :reject ]
 
+  mattr_accessor :custom_relations
+  @@custom_relations = {
+    'user' => {
+      'friend' => {
+        'name' => 'friend',
+        'permissions' => [
+          [ 'follow' ],
+          [ 'create',  'activity' ],
+          [ 'read',    'activity' ]
+        ]
+      },
+      'acquaintance' => {
+        'name' => 'acquaintance',
+        'permissions' => [
+          [ 'read', 'activity' ]
+        ]
+      },
+      'colleague' => {
+        'name' => 'colleague',
+        'permissions' => [
+          [ 'follow' ],
+          [ 'create',  'activity' ],
+          [ 'read',    'activity' ]
+        ]
+      }
+    },
+    'group' => {
+      'member' => {
+        'name' => 'member',
+        'permissions' => [
+          [ 'represent' ],
+          [ 'create', 'activity' ],
+          [ 'read',   'activity' ],
+          [ 'read',   'tie' ]
+        ]
+      },
+      'partner' => {
+        'name' => 'partner',
+        'permissions' => [
+          [ 'read', 'activity' ]
+        ]
+      }
+    },
+    'site/custom' => {}
+  }
+
   mattr_accessor :suggested_models
   @@suggested_models = [ :user, :group ]
 

@@ -12,6 +12,8 @@ module SocialStream
       autoload :Actor, 'social_stream/oauth2_server/models/actor'
       autoload :User, 'social_stream/oauth2_server/models/user'
     end
+
+    autoload :Ability,       'social_stream/oauth2_server/ability'
     autoload :TokenEndpoint, 'social_stream/oauth2_server/token_endpoint'
   end
 end

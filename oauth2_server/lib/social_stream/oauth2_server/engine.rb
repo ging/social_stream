@@ -5,6 +5,23 @@ module SocialStream
         Oauth2Token::AccessToken.valid.find_by_token(req.access_token) || req.invalid_token!
       end
 
+      initializer "social_stream-oauth2_server.ability" do
+        SocialStream::Ability.module_eval do
+          include SocialStream::Oauth2Server::Ability
+        end
+      end
+
+      initializer "social_stream-oauth2_server.custom_relations" do
+        SocialStream.custom_relations['site/client'] = {
+          'admin' => {
+            'name' => "Admin",
+            'permissions' => [
+              [ 'update' ]
+            ]
+          }
+        }
+      end
+
       initializer "social_stream-oauth2_server.controller.helpers",
                   after: "social_stream-base.controller.helpers" do
         ActiveSupport.on_load(:action_controller) do
