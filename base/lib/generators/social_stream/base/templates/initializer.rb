@@ -41,7 +41,7 @@ SocialStream.setup do |config|
   #        [ 'read',   'tie' ]
   #      ]
   #    },
-  #  'site/custom' => {}
+  #  'site/current' => {}
   # }
 
   # Configure the type of actors that are suggested in the sidebar

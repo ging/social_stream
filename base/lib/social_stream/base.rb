@@ -68,7 +68,7 @@ module SocialStream
         ]
       }
     },
-    'site/custom' => {}
+    'site/current' => {}
   }
 
   mattr_accessor :suggested_models
