@@ -4,7 +4,7 @@ class Site::Client < Site
   before_validation :set_secret,
                     on: :create
 
-  after_create :set_admin
+  after_create :set_owner
 
   scope :administered_by, lambda { |actor|
     joins(actor: :sent_permissions).
@@ -32,10 +32,10 @@ class Site::Client < Site
     self.secret = SecureRandom.hex(64)
   end
 
-  def set_admin
+  def set_owner
     c = sent_contacts.create! receiver_id: author.id,
                               user_author: author
 
-    c.relation_ids = [ relation_customs.sort.first.id ]
+    c.relation_ids = [ ::Relation::Owner.instance.id ]
   end
 end

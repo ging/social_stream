@@ -12,14 +12,7 @@ module SocialStream
       end
 
       initializer "social_stream-oauth2_server.custom_relations" do
-        SocialStream.custom_relations['site/client'] = {
-          'admin' => {
-            'name' => "Admin",
-            'permissions' => [
-              [ 'update' ]
-            ]
-          }
-        }
+        SocialStream.custom_relations['site/client'] = {}
       end
 
       initializer "social_stream-oauth2_server.controller.helpers",

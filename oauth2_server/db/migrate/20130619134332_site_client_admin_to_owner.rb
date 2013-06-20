@@ -1,12 +1,8 @@
-class SiteClientAdminToCustom < ActiveRecord::Migration
+class SiteClientAdminToOwner < ActiveRecord::Migration
 
   class Relation::Admin < Relation; end
 
   def up
-    Site::Client.all.each do |c|
-      Relation::Custom.defaults_for c.actor
-    end
-
     admin = Relation::Admin.first
 
     if admin.present?
@@ -14,7 +10,7 @@ class SiteClientAdminToCustom < ActiveRecord::Migration
       Tie.record_timestamps = false
 
       admin.ties.each do |t|
-        t.relation = t.sender.relation_customs.sort.first
+        t.relation = Relation::Owner.instance
         t.save!
       end
 
