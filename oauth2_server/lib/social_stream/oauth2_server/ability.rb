@@ -5,7 +5,7 @@ module SocialStream
         super
 
         can [:update, :destroy], Site::Client do |c|
-          c.allow? subject, 'update'
+          c.allow? subject, 'manage'
         end
       end
     end

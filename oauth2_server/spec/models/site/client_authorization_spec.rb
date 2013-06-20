@@ -11,10 +11,10 @@ describe Site::Client do
   end
 
   it "should allow update to author" do
-    assert @client.allow? @user, 'update'
+    Ability.new(@user).should be_able_to(:update, @client)
   end
 
   it "should not allow update to other" do
-    assert !@client.allow?(Factory(:user), 'update')
+    Ability.new(Factory(:user)).should_not be_able_to(:update, @client)
   end
 end

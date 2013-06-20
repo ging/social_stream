@@ -2,7 +2,8 @@
 class Relation::Owner < Relation::Single
   PERMISSIONS =
     [
-      [ 'update', nil ]
+      [ 'manage', nil ],
+      [ 'manage', 'relation/custom' ]
     ]
 
   class << self
