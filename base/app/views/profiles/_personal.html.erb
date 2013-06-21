@@ -71,7 +71,7 @@
       <%= form_for(@profile, :url => [current_subject, :profile]) do |f| %>
         <h6>
           <span class="required">*</span>
-          <%= f.label t('*actor.name') %>
+          <%= f.label t('actor.name') %>
         </h6>
 
         <%= f.text_field :name, :class => "required" %>
@@ -105,7 +105,7 @@
         <p>
           <%= t('required') %>
         </p>
-        <%= f.submit :class => "btn" %>
+        <%= f.submit %>
       <% end %>
     <% end %>
   </div>

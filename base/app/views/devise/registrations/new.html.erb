@@ -13,21 +13,19 @@
     <div class="reg-labels">
       <%= f.label :name %>
       
-      <%= f.text_field :name, :class =>"form_tag"  %>
+      <%= f.text_field :name, :class =>"form_tag", :placeholder => "Homo Sapiens apiens"  %>
       
       <%= f.label :email %>
       
-      <%= f.text_field :email, :class =>"form_tag"  %>
+      <%= f.text_field :email, :class =>"form_tag", :placeholder => "user@email.soc"  %>
       
       <%= f.label :password %>
       
-      <%= f.password_field :password, :class =>"form_tag", :id => "password"  %>
+      <%= f.password_field :password, :class =>"form_tag", :id => "password", :placeholder => "********"  %>
 
-      <div id="user_password_confirmation_label">
-        <%= f.label :password_confirmation %>
-      </div>
+      <%= f.label :password_confirmation %>
       
-      <%= f.password_field :password_confirmation, :class =>"form_tag"  %>
+      <%= f.password_field :password_confirmation, :class =>"form_tag", :placeholder => "********"  %>
 
       <%= f.submit t('action.accept').capitalize,:class=>"btn pull-right"%>
     </div>
