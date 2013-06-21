@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n")
 
   # Gem dependencies
-  s.add_runtime_dependency('social_stream-base', '~> 2.0.3')
+  s.add_runtime_dependency('social_stream-base', '~> 2.0.4')
 
   s.add_runtime_dependency('paperclip','~> 3.3.0')
   s.add_runtime_dependency('paperclip-ffmpeg', '~> 0.9.0')

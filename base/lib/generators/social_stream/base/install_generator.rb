@@ -23,10 +23,6 @@ class SocialStream::Base::InstallGenerator < Rails::Generators::Base #:nodoc:
     copy_file 'initializer.rb', 'config/initializers/social_stream.rb'
   end
 
-  def create_config_relations_file
-    copy_file 'relations.yml', 'config/relations.yml'
-  end
-
   def create_config_sphinx_file
     copy_file 'sphinx.yml', 'config/sphinx.yml'
   end

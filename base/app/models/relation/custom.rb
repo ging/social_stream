@@ -5,14 +5,6 @@
 # Default relations are defined at config/relations.yml
 #
 class Relation::Custom < Relation
-  # Default relations shipped with Social Stream
-  DEFAULT = {
-    'site' => {}
-  }
-
-  # Default relations are re-defined in this configuration file
-  CONFIG_FILE = File.join(::Rails.root, 'config', 'relations.yml')
-
   # This is weird. We must call #inspect before has_ancestry for Relation::Custom
   # to recognize STI
   inspect
@@ -24,16 +16,12 @@ class Relation::Custom < Relation
   validates_uniqueness_of :name, :scope => :actor_id
 
   class << self
-    # Relations configuration
-    def config
-      @config ||= build_config
-    end
-
     def defaults_for(actor)
-      cfg_rels = config[actor.subject_type.underscore]
+      subject_type = actor.subject.class.to_s.underscore
+      cfg_rels = SocialStream.custom_relations[subject_type]
 
       if cfg_rels.nil?
-        raise "Undefined relations for subject type #{ actor.subject_type }. Please, add an entry to #{ CONFIG_FILE }"
+        raise "Undefined relations for subject type #{ subject_type }. Please, add an entry to config/initializers/social_stream.rb"
       end
 
       rels = {}
@@ -66,14 +54,6 @@ class Relation::Custom < Relation
     # A relation in the top of a strength hierarchy
     def strongest
       roots
-    end
-
-    private
-    
-    # Gets the default relations defined in DEFAULT and updates the values
-    # from the CONFIG_FILE configuration file
-    def build_config
-      DEFAULT.merge YAML.load_file(CONFIG_FILE)
     end
   end
 

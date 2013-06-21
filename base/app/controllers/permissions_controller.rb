@@ -15,6 +15,8 @@ class PermissionsController < ApplicationController
   private
 
   def relation!
-    @relation = current_subject.relations.find(params[:relation_id])
+    @relation = Relation.find(params[:relation_id])
+
+    authorize! :read, @relation
   end
 end

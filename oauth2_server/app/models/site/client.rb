@@ -4,12 +4,12 @@ class Site::Client < Site
   before_validation :set_secret,
                     on: :create
 
-  after_create :set_admin
+  after_create :set_owner
 
   scope :administered_by, lambda { |actor|
-    joins(actor: :sent_ties).
+    joins(actor: :sent_permissions).
       merge(Contact.received_by(actor)).
-      merge(Tie.related_by(Relation::Admin.instance))
+      merge(Permission.where(action: 'update', object: nil))
   }
 
   %w{ url callback_url secret }.each do |m|
@@ -32,7 +32,10 @@ class Site::Client < Site
     self.secret = SecureRandom.hex(64)
   end
 
-  def set_admin
-    contact_to!(author).relation_ids = [ Relation::Admin.instance.id ]
+  def set_owner
+    c = sent_contacts.create! receiver_id: author.id,
+                              user_author: author
+
+    c.relation_ids = [ ::Relation::Owner.instance.id ]
   end
 end

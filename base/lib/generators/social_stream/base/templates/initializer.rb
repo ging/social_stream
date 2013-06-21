@@ -20,6 +20,30 @@ SocialStream.setup do |config|
   #
   # config.relation_model = :custom
 
+  # Config the default relations that will be created and customized by actors
+  # config.custom_relations = {
+  #  user: {
+  #    friend: {
+  #      name: "friend",
+  #      permissions: [
+  #        [ 'follow' ],
+  #        [ 'create',  'activity' ],
+  #        [ 'read',    'activity' ]
+  #      ]
+  #    },
+  #  group: {
+  #    member: {
+  #      name: "member",
+  #      permissions: [
+  #        [ 'represent' ],
+  #        [ 'create', 'activity' ],
+  #        [ 'read',   'activity' ],
+  #        [ 'read',   'tie' ]
+  #      ]
+  #    },
+  #  'site/current' => {}
+  # }
+
   # Configure the type of actors that are suggested in the sidebar
   #
   # config.suggested_models = [ :user, :group ]

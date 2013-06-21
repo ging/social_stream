@@ -51,10 +51,22 @@ class Actor < ActiveRecord::Base
            :through => :received_contacts,
            :source  => :ties
 
+  has_many :sent_relations,
+           :through => :sent_ties,
+           :source  => :relation
+
   has_many :received_relations,
            :through => :received_ties,
            :source  => :relation
-  
+
+  has_many :sent_permissions,
+           :through => :sent_relations,
+           :source  => :permissions
+
+  has_many :received_permissions,
+           :through => :received_relations,
+           :source  => :permissions
+ 
   has_many :senders,
            :through => :received_contacts,
            :uniq => true
@@ -334,7 +346,7 @@ class Actor < ActiveRecord::Base
   end
 
   # Does this {Actor} allow subject to perform action on object?
-  def allow?(subject, action, object)
+  def allow?(subject, action, object = nil)
     ties_to(subject).with_permissions(action, object).any?
   end
 

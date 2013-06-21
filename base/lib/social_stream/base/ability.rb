@@ -90,7 +90,12 @@ module SocialStream
         end
 
         # Privacy
-        can [:create, :read, :update, :destroy], ::Relation::Custom, :actor_id => subject.try(:actor_id)
+        can :manage, ::Relation::Custom do |r|
+          subject.present? && (
+            r.actor_id == subject.actor_id ||
+            r.actor.allow?(subject, 'manage', 'relation/custom')
+          )
+        end
       end
     end
   end
