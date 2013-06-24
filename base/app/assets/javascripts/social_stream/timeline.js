@@ -60,8 +60,7 @@ SocialStream.Timeline = (function(SS, $, undefined){
 
   callback.register('create',
                     SS.Audience.index,
-                    SS.Comment.index,
-                    SS.Wall.new_);
+                    SS.Comment.index);
 
   callback.register('update',
                     SS.Audience.index,

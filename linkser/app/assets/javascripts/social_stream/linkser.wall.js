@@ -1,6 +1,8 @@
+//= require social_stream/callback
 //= require social_stream/wall
 
 SocialStream.Linkser.Wall = (function(SS, $) {
+  var callback = new SS.Callback();
   var regexp = /^(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&;:\/~+#-]*[\w@?^=%&;\/~+#-])?$/
 
   var urlDetect = function() {
@@ -47,20 +49,16 @@ SocialStream.Linkser.Wall = (function(SS, $) {
     } else {
       if ($('#post_text').data('link')) {
         $('#post_text').data('link', false);
-        resetWallInput({ postText: false });
+        resetWallInput();
       }
     }
   };
 
-  var resetWallInput = function(options) {
+  var resetWallInput = function() {
     $("#link_preview").hide().html('');
     $("#link_url").val("");
     SS.Wall.changeAction();
     SS.Wall.changeParams('post');
-
-    if (options.postText) {
-      $('#post_text').val('');
-    }
   };
 
   var showLoading = function() {
@@ -82,14 +80,13 @@ SocialStream.Linkser.Wall = (function(SS, $) {
   };
 
 
-  var create = function() {
-    resetWallInput({ postText: true });
-  };
+  SS.Wall.callbackRegister('show', init);
 
-  SocialStream.Wall.callbackRegister('show', init);
-
-  return {
-    create: create
-  };
+  callback.register('new_',
+                    SS.Wall.new_,
+                    resetWallInput);
+  
+  return callback.extend({
+  });
 
 })(SocialStream, jQuery);
