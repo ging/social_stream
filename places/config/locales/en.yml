@@ -42,7 +42,6 @@ en:
       postalcode: Postalcode
       country: Country
     not_mine: Places
-    one: a place
     simple_all: All
     title: Places
     like:

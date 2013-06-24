@@ -28,3 +28,10 @@ zh:
       new:
         link: Add site
         title: Register new client site
+  helpers:
+    submit:
+      site_client:
+        create: Next
+        update: Save
+  relation_admin:
+    name: Site Client Admin

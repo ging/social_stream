@@ -21,12 +21,12 @@ en:
   helpers:
     submit:
       site_client:
-        create: "Next"
-        update: "Save"
+        create: Next
+        update: Save
   permission:
     public_info: Read your public information
   relation_admin:
-    name: "Site Client Admin"
+    name: Site Client Admin
   site:
     client:
       added: Added sites
