@@ -30,13 +30,9 @@ describe PermissionsController do
       end
 
       it "should not render index" do
-        begin
+        expect {
           get :index, :relation_id => @relation.id, :format => "html"
-
-          assert false
-        rescue ActiveRecord::RecordNotFound
-          assigns(:permissions).should be_nil
-        end
+        }.to raise_error(CanCan::AccessDenied)
       end
     end
   end
