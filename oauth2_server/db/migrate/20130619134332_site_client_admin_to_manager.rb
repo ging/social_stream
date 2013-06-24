@@ -1,4 +1,4 @@
-class SiteClientAdminToOwner < ActiveRecord::Migration
+class SiteClientAdminToManager < ActiveRecord::Migration
 
   class Relation::Admin < Relation; end
 
@@ -10,7 +10,7 @@ class SiteClientAdminToOwner < ActiveRecord::Migration
       Tie.record_timestamps = false
 
       admin.ties.each do |t|
-        t.relation = Relation::Owner.instance
+        t.relation = Relation::Manager.instance
         t.save!
       end
 

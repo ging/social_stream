@@ -1,5 +1,5 @@
 # Owner of client sites
-class Relation::Owner < Relation::Single
+class Relation::Manager < Relation::Single
   PERMISSIONS =
     [
       [ 'manage', nil ],
