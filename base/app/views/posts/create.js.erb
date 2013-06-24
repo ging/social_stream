@@ -6,4 +6,5 @@
   SocialStream.Wall.new_();
 <% else %>
   SocialStream.Flash.error('<%= j @post.errors.full_messages.to_sentence %>');
+  SocialStream.Wall.new_();
 <% end %>

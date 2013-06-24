@@ -6,7 +6,7 @@
       <%= f.text_area :text, rows: 1, placeholder: t('post.input') %>
 
       <section class="wall_input-actions">
-        <%= f.submit t('activity.share'), class: "btn" %>
+      <%= f.submit t('activity.share'), class: "btn", 'data-loading-text' => t('activity.share_loading') %>
 
         <% SocialStream.activity_forms.each do |element| %>
           <%= render partial: "#{ element.to_s.pluralize }/new_activity",

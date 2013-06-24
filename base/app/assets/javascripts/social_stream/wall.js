@@ -11,8 +11,18 @@ SocialStream.Wall = (function(SS, $, undefined){
     $('.wall_input [name="post[text]"]').autosize();
   };
 
+  // Prevent sending the same post several times
+  var initShareButton = function() {
+    $('.wall_input input[type="submit"]').on('click', loadingShareButton);
+  };
+
+  var loadingShareButton = function() {
+    $(this).button('loading');
+  };
+
   var resetWallInput = function(){
     $('#post_text').val('');
+    $('.wall_input input[type="submit"]').button('reset');
   };
 
   var changeAction = function(path) {
@@ -37,6 +47,7 @@ SocialStream.Wall = (function(SS, $, undefined){
 
   callback.register('show',
                     initInputAutosize,
+                    initShareButton,
                     SS.Object.new_);
 
   callback.register('new_',

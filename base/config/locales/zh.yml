@@ -49,6 +49,7 @@ zh:
     like_sentence:
       one: '%{likers} 喜欢这个'
       other: '%{likers} 喜欢这个'
+      more: 
     one: 一个活动
     other: 很多活动
     privacy:
@@ -57,8 +58,8 @@ zh:
           group: 所有成员All members
           user: 您的联系人Your contacts
         outside:
-          group: 来自%{receiver}的成员Members of 
-          user: 来自%{receiver}的联系人Contacts of 
+          group: 来自%{receiver}的成员Members of
+          user: 来自%{receiver}的联系人Contacts of
       relation:
         one: '%{count} 小组group'
         other: '%{count} 多个小组groups'
@@ -102,6 +103,7 @@ zh:
       join:
         one: '%{sender} 加入了joined the %{title} %{thing}.'
     share: 分享Share
+    share_loading: Sharing...
   activity_action:
     follow: 关注
     sentence:
@@ -229,19 +231,23 @@ zh:
     presentation:
       modular:
         header: 模块Modular
-        p: 可用的Available <a href="https://github.com/ging/social_stream#social-stream-components">Social Stream配件Social
-          Stream components</a> 只为您提供您社交网络所需要的功能。只需添加您喜欢的Gems到您的Gemfile.provide your application only with the features you
-          need in your social network. Just add your desired gems to your Gemfile
+        p: 可用的Available <a href="https://github.com/ging/social_stream#social-stream-components">Social
+          Stream配件Social Stream components</a> 只为您提供您社交网络所需要的功能。只需添加您喜欢的Gems到您的Gemfile.provide
+          your application only with the features you need in your social network.
+          Just add your desired gems to your Gemfile
       flexible:
         header: 灵活灵便Flexible
-        p: 完全地个性化定制您的社交网络Completely customize your social network <a href="https://github.com/ging/social_stream/wiki/How-to-change-controllers%2C-models%2C-views%2C-assets-and-locales">更改任何一个Scial Stream组建changing
-          any Social Stream component</a>, <a href="https://github.com/ging/social_stream/wiki/How-to-add-new-activity-objects">添加新的活动对象adding
+        p: 完全地个性化定制您的社交网络Completely customize your social network <a href="https://github.com/ging/social_stream/wiki/How-to-change-controllers%2C-models%2C-views%2C-assets-and-locales">更改任何一个Scial
+          Stream组建changing any Social Stream component</a>, <a href="https://github.com/ging/social_stream/wiki/How-to-add-new-activity-objects">添加新的活动对象adding
           new activity objects</a> 或者使用CSS更改Sass.or changing the CSS using <a href="http://sass-lang.com/">Sass</a>
       community:
         header: 社区Community
         p: Social Stream的开发者社区正在茁壮成长。如果您有什么问题，可以在<a href="http://groups.google.com/group/social-stream">Social
           Stream's Google group</a> 或者 <a href="http://stackoverflow.com/questions/tagged/social-stream">StackOverflow</a>给我们留言。
-          如果您发现有缺陷<a href="https://github.com/ging/social_stream/issues/new">提交一个问题</a>. 随时欢迎各种请求Pull request are very welcomed!
+          如果您发现有缺陷<a href="https://github.com/ging/social_stream/issues/new">提交一个问题</a>.
+          随时欢迎各种请求Pull request are very welcomed!
+    main_title: Social Stream, a framework for building distributed social network
+      websites.
   group:
     one: 群组
     other: 群组
@@ -468,7 +474,8 @@ zh:
               negative: 活动将不会通知 %{name} 的联系
     of_relation:
       choose: 2. <strong>%{name}</strong>圈內的权限
-    postit: 管理您联系人的权限和创建新的关系Manage the permissions of your contacts and create new roles
+    postit: 管理您联系人的权限和创建新的关系Manage the permissions of your contacts and create new
+      roles
   privacy:
     intro: '拥有 <strong>%{relation}</strong>级别的联系只容许作出以下行为:'
     rule:
