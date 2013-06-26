@@ -15,6 +15,12 @@ class Relation::Custom < Relation
   validates_presence_of :name, :actor_id
   validates_uniqueness_of :name, :scope => :actor_id
 
+  scope :actor, lambda { |a|
+    where(:actor_id => Actor.normalize_id(a))
+  }
+
+  before_create :initialize_sender_type
+
   class << self
     def defaults_for(actor)
       subject_type = actor.subject.class.to_s.underscore
@@ -57,6 +63,11 @@ class Relation::Custom < Relation
     end
   end
 
+  # The subject who defined of this relation
+  def subject
+    actor.subject
+  end
+
   # Compare two relations
   def <=> rel
     return -1 if rel.is_a?(Public)
@@ -89,6 +100,17 @@ class Relation::Custom < Relation
   def stronger_or_equal
     path
   end
-end
 
-ActiveSupport.run_load_hooks(:relation_custom, Relation::Custom)
+  def available_permissions
+    Permission.instances SocialStream.available_permissions[subject.class.to_s.underscore]
+  end
+
+  private
+
+  # Before create callback
+  def initialize_sender_type
+    return if actor.blank?
+
+    self.sender_type = actor.subject_type
+  end
+end

@@ -43,9 +43,29 @@ class Permission < ActiveRecord::Base
     scope p, where(:action => p) # scope :represent, where(:action => 'represent')
   end
 
+  class << self
+    # Finds or creates in the database the instances of the permissions described in
+    # {ary} by arrays of [ action, object ]
+    def instances ary
+      ary.map{ |p| find_or_create_by_action_and_object *p }
+    end
+  end
+
+  # The permission title
+  def title(options = {})
+    i18n_description :brief, options
+  end
+
+  # The permission description
+  def description(options = {})
+    i18n_description :detailed, options
+  end
+
+  private
+
   # An explanation of the permissions. Type can be brief or detailed.
   # If detailed, description includes more information about the relation
-  def description(type, options = {})
+  def i18n_description(type, options = {})
     unless options[:subject].present?
       raise "Now we need subject for permission description"
     end

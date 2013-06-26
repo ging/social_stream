@@ -548,6 +548,8 @@ es:
       title: Roles
     new: + Nuevo rol
     title: Privacidad
+  relation_manager:
+    name: Admin
   relation_public:
     name: Público
   repository:

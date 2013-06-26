@@ -7,6 +7,8 @@ module SocialStream
         can [:update, :destroy], Site::Client do |c|
           c.allow? subject, 'manage'
         end
+
+        can :read, Relation::Manager
       end
     end
   end

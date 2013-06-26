@@ -636,3 +636,5 @@ pt:
       keywords: social stream,social software,framework,ruby on rails
       title: Social Stream
     name: Social Stream
+  relation_manager:
+    name: Manager

@@ -11,10 +11,6 @@ module SocialStream
         end
       end
 
-      initializer "social_stream-oauth2_server.custom_relations" do
-        SocialStream.custom_relations['site/client'] = {}
-      end
-
       initializer "social_stream-oauth2_server.controller.helpers",
                   after: "social_stream-base.controller.helpers" do
         ActiveSupport.on_load(:action_controller) do

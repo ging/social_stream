@@ -11,4 +11,8 @@ class Relation::Manager < Relation::Single
       false
     end
   end
+
+  def available_permissions
+    Permission.instances PERMISSIONS
+  end
 end

@@ -630,3 +630,5 @@ zh:
       by: 排序Order by
       last_modified: 最近更新Last modified
       most_popular: 最流行Most popular
+  relation_manager:
+    name: Manager
