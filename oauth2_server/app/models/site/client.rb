@@ -7,7 +7,8 @@ class Site::Client < Site
   after_create :set_manager
 
   scope :managed_by, lambda { |actor|
-    joins(actor: :sent_permissions).
+    select("DISTINCT sites.*").
+      joins(actor: :sent_permissions).
       merge(Contact.received_by(actor)).
       merge(Permission.where(action: 'manage', object: nil))
   }
