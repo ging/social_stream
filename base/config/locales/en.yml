@@ -510,7 +510,7 @@ en:
             nil:
               positive: Activities of the contacts at %{relation} WILL APPEAR in your
                 home wall
-              negative: Activities of the contacts at %{relation} WILL APPEAR in your
+              negative: Activities of the contacts at %{relation} WILL NOT APPEAR in your
                 home wall
           read:
             activity:
