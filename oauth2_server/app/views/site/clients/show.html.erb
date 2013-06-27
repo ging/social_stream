@@ -73,9 +73,9 @@
 
   <div class="tabbable"> <!-- Only required for left/right tabs -->
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#tab1" data-toggle="tab">Users</a></li>
-      <li><a href="#tab2" data-toggle="tab">Organizations</a></li>
-      <li><a href="#tab3" data-toggle="tab">Stats</a></li>
+      <li class="active"><a href="#authorized" data-toggle="tab">Authorized</a></li>
+      <li><a href="#registered" data-toggle="tab">Registered</a></li>
+      <li><a href="#stats" data-toggle="tab">Stats</a></li>
     </ul>
     <div class="search-nav hidden-phone">
       <%= form_tag search_path, method: 'get', class: "navbar-search pull-left" do %>
@@ -86,6 +86,7 @@
           SocialStream.SearchHeader.show();
         });
       <% end %>
+
       <div class="mat">
         <%= render partial: 'layouts/loading' %>
 
@@ -104,16 +105,13 @@
 
 
     <div class="tab-content">
-      <div class="tab-pane active" id="tab1">
-        <ul class="nav nav-pills">
-          <li class="active">
-            <a href="#">added</a>
-          </li>
-          <li><a href="#">registered</a></li>
-        </ul>
+      <div class="tab-pane active" id="authorized">
       </div>
 
-      <div class="tab-pane" id="tab2">
+      <div class="tab-pane" id="registered">
+      </div>
+
+      <div class="tab-pane" id="stats">
       </div>
     </div>
   </div>
