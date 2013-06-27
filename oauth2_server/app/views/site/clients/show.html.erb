@@ -30,41 +30,44 @@
           <%= link_to @client.url, @client.url%>
         </div>
 
-        <h4>
-          <%= Site::Client.human_attribute_name :callback_url %>
-        </h4>
-        <div class="result">
-          <%= @client.callback_url %>
-        </div>
+        <% if can? :update, @client %>
+          <h4>
+            <%= Site::Client.human_attribute_name :callback_url %>
+          </h4>
+          <div class="result">
+            <%= @client.callback_url %>
+          </div>
+        <% end %>
       </div>
         
-      <div class="btn-group">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          Credentials
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <h6>
-            <%= Site::Client.human_attribute_name :id %>
-            <a href="#" class="pull-right">refresh</a>
-            </h6>
-            <p>
-              <%= @client.id %>
-            </p>
-          </li>
+      <% if can? :update, @client %>
+        <div class="btn-group">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            Credentials
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <h6>
+              <%= Site::Client.human_attribute_name :id %>
+              </h6>
+              <p>
+                <%= @client.id %>
+              </p>
+            </li>
 
-          <li class="client-secret">
-            <h6>
-              <%= Site::Client.human_attribute_name :secret %>
-              <a href="#" class="pull-right">refresh</a>
-            </h6>
-            <p>
-              <%= @client.secret %>
-            </p>
-          </li>
-        </ul>  
-      </div>   
+            <li class="client-secret">
+              <h6>
+                <%= Site::Client.human_attribute_name :secret %>
+                <a href="#" class="pull-right">refresh</a>
+              </h6>
+              <p>
+                <%= @client.secret %>
+              </p>
+            </li>
+          </ul>  
+        </div>   
+      <% end %>
     </div>
   </section>
 
