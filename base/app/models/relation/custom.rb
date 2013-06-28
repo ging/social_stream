@@ -24,7 +24,8 @@ class Relation::Custom < Relation
   class << self
     def defaults_for(actor)
       subject_type = actor.subject.class.to_s.underscore
-      cfg_rels = SocialStream.custom_relations[subject_type]
+      cfg_rels = SocialStream.custom_relations[subject_type] ||
+        SocialStream.custom_relations[subject_type.to_sym]
 
       if cfg_rels.nil?
         raise "Undefined relations for subject type #{ subject_type }. Please, add an entry to config/initializers/social_stream.rb"
