@@ -60,38 +60,32 @@
   <div class="update">
 
     <%= form_for(@profile, :url => [current_subject, :profile]) do |f| %>
-      <h6>
-        <%= f.label :phone, t('profile.phone') %>
-      </h6>
+
+      <%= f.label :phone, t('profile.phone') %>
+
       <%= f.phone_field :phone %>
 
-      <h6>
-        <%= f.label :mobile, t('profile.mobile') %>
-      </h6>
+      <%= f.label :mobile, t('profile.mobile') %>
+
       <%= f.phone_field :mobile %>
 
-      <h6>
-        <%= f.label :fax, t('profile.fax') %>
-      </h6>
+      <%= f.label :fax, t('profile.fax') %>
+
       <%= f.phone_field :fax %>
 
-      <h6>
-        <%= f.label :address, t('profile.address') %>
-      </h6>
+      <%= f.label :address, t('profile.address') %>
+
       <%= f.text_field :address %>
 
-      <h6>
-        <%= f.label :email, t('profile.email') %>
-      </h6>
+      <%= f.label :email, t('profile.email') %>
 
       <%= f.email_field :email, :class => "email" %>
 
-      <h6>
-        <%= f.label :website, t('profile.website') %>
-      </h6>
+      <%= f.label :website, t('profile.website') %>
+
       <%= f.text_field :website, :class => "url" %>
 
-      <%= f.submit :class => "btn" %>
+      <%= f.submit %>
     <% end %>
   <% end %>
   </div>

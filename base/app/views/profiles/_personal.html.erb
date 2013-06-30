@@ -69,28 +69,21 @@
   <div class="update">
     <% if can? :update, @profile %>
       <%= form_for(@profile, :url => [current_subject, :profile]) do |f| %>
-        <h6>
-          <span class="required">*</span>
-          <%= f.label t('actor.name') %>
-        </h6>
+        <span class="required">*</span>
+        <%= f.label t('user.name') %>
+
 
         <%= f.text_field :name, :class => "required" %>
         
-        <h6>
-          <%= f.label :description, t("profile.#{ current_subject.class.to_s.downcase }.about") %>
-        </h6>
+        <%= f.label :description, t("profile.#{ current_subject.class.to_s.downcase }.about") %>
 
         <%= f.text_area :description, :maxlength => 200, :rows => 10 %>
 
-        <h6>
-          <%= f.label :organization, t('profile.organization') %>
-        </h6>
+        <%= f.label :organization, t('profile.organization') %>
 
         <%= f.text_field :organization %>
 
-        <h6>
-          <%= f.label :birthday, t('profile.' + current_subject.class.to_s.downcase + '.birthday') %>
-        </h6>
+        <%= f.label :birthday, t('profile.' + current_subject.class.to_s.downcase + '.birthday') %>
 
         <%= date_select "profile", "birthday", :order => [:day, :month, :year], :end_year => Date.today.year, :start_year => (Date.today.year - 100), :prompt => {:day => 'Day', :month => 'Month', :year => 'Year'} %>
 

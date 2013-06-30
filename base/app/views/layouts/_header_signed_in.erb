@@ -6,7 +6,7 @@
 
     
       <%= form_tag search_path, method: 'get', id: "search-box", class: "navbar-search pull-left search-mobile" do %>
-        <%= text_field_tag :q, nil, autocomplete: :off, class: "search-query input-small icon_tool16-searcher", placeholder: t('search.name'), "data-min_query" => SocialStream::Search::MIN_QUERY %>
+        <%= text_field_tag :q, nil, autocomplete: :off, class: "search-query-mobile input-small icon_tool16-searcher", placeholder: t('search.name'), "data-min_query" => SocialStream::Search::MIN_QUERY %>
       <% end %>
       <%= javascript_tag do %>
         $(function() {
@@ -16,7 +16,7 @@
 
   
     
-    <div class="search-nav hidden-phone">
+    <div class="search-nav hidden-phone hidden-tablet">
       <%= form_tag search_path, method: 'get', class: "navbar-search pull-left" do %>
         <%= text_field_tag :q, nil, autocomplete: :off, class: 'search-query input-small', placeholder: t('search.name'), "data-min_query" => SocialStream::Search::MIN_QUERY %>
       <% end %>
@@ -50,7 +50,7 @@
      <ul class="nav pull-right">
       <li>
         <%= link_to current_subject do %>
-          <%= image_tag current_subject.logo.url(:small) %>
+          <%= image_tag current_subject.logo.url(:small), :class=>"user" %>
           <span class="name hidden-phone"><%= truncate_name(current_subject.name, length: 15) %></span>
         <% end %>
       </li>
