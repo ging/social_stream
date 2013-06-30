@@ -1,18 +1,18 @@
-<article class="permissions">
+<section class="permissions">
   <h4>
     <%= raw t('permission.of_relation.choose', :name => h(@relation.name)) %>
   </h4>
 
-  <%= form_for @relation, url: polymorphic_path(@relation, section: 'permissions'), remote: true do |f| %>
-    <%= hidden_field_tag 'relation_custom[permission_ids][]', "" %>
+  <% if can? :update, @relation %>
 
-    <ul>
-      <% default_permissions.each do |p| %>
-        <li>
-        <%= check_box_tag 'relation_custom[permission_ids][]', p.id, @relation.permission_ids.include?(p.id), id: "checkbox_relation_#{ @relation.id }_permission_#{ p.id }" %>
-        <%= label_tag "checkbox_relation_#{ @relation.id }_permission_#{ p.id }", p.description(:brief, subject: current_subject), title: p.description(:detailed, subject: current_subject, state: (@relation.permission_ids.include?(p.id) ? 'positive' : 'negative'), relation: @relation.name) %>
-        </li>
-      <% end %>
-    </ul>
+    <%= form_for @relation, url: polymorphic_path(@relation, section: 'permissions'), remote: true do |f| %>
+      <%= hidden_field_tag 'relation_custom[permission_ids][]', "" %>
+
+      <%= render partial: 'permissions/list',
+                 locals: { relation: @relation } %>
+    <% end %>
+  <% else %>
+    <%= render partial: 'permissions/list',
+               locals: { relation: @relation } %>
   <% end %>
-</article>
+</section>

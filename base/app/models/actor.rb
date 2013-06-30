@@ -212,6 +212,14 @@ class Actor < ActiveRecord::Base
     relations.joins(:relation_permissions => :permission).where('permissions.action' => 'notify')
   end
 
+  # The relations that will appear in privacy forms
+  #
+  # They usually include {Relation::Custom} but may also include other system-defined
+  # relations that are not editable but appear in add contact buttons
+  def relations_list
+    Relation.extra_list(subject) + relation_customs
+  end
+
   # All the {Actor Actors} this one has ties with:
   # 
   #   actor.contact_actors #=> array of actors that sent and receive ties from actor

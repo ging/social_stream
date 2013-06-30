@@ -13,6 +13,12 @@ module SocialStream
           model_class.to_s.underscore.to_sym
       end
 
+      # :client for Site::ClientsController
+      def demodulized_model_sym
+        @demodulized_model_sym ||=
+          model_class.to_s.demodulize.underscore.to_sym
+      end
+
       # Factory.attributes_for(:post) for PostsController
       def model_attributes
         @model_attributes ||=
@@ -42,7 +48,7 @@ module SocialStream
           count = model_count
           post :create, attributes
 
-          resource = assigns(model_sym)
+          resource = assigns(demodulized_model_sym)
 
           model_count.should eq(count + 1)
           resource.should be_valid
@@ -58,7 +64,7 @@ module SocialStream
           rescue CanCan::AccessDenied
           end
 
-          resource = assigns(model_sym)
+          resource = assigns(demodulized_model_sym)
 
           model_count.should eq(count)
           resource.should be_new_record
@@ -88,7 +94,7 @@ module SocialStream
         it "should update" do
           put :update, updating_attributes
 
-          resource = assigns(model_sym)
+          resource = assigns(demodulized_model_sym)
 
           resource.should_receive(:update_attributes).with(attributes)
           assert resource.valid?
@@ -103,7 +109,7 @@ module SocialStream
           rescue CanCan::AccessDenied
           end
 
-          resource = assigns(model_sym)
+          resource = assigns(demodulized_model_sym)
 
           resource.should_not_receive(:update_attributes)
         end
@@ -114,7 +120,7 @@ module SocialStream
           count = model_count
           delete :destroy, :id => @current_model.to_param
 
-          resource = assigns(model_sym)
+          resource = assigns(demodulized_model_sym)
 
           model_count.should eq(count - 1)
         end
@@ -128,7 +134,7 @@ module SocialStream
           rescue CanCan::AccessDenied
           end
 
-          resource = assigns(model_sym)
+          resource = assigns(demodulized_model_sym)
 
           model_count.should eq(count)
         end

@@ -1,0 +1,10 @@
+<ul>
+  <% relation.available_permissions.each do |p| %>
+    <li>
+    <%= check_box_tag 'relation_custom[permission_ids][]', p.id, relation.permission_ids.include?(p.id), id: "checkbox_relation_#{ relation.id }_permission_#{ p.id }" %>
+    <%= label_tag "checkbox_relation_#{ relation.id }_permission_#{ p.id }",
+                  p.title(subject: current_subject),
+                  title: p.description(subject: current_subject, state: (relation.permission_ids.include?(p.id) ? 'positive' : 'negative'), relation: relation.name) %>
+    </li>
+  <% end %>
+</ul>

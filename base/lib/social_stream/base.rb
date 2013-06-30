@@ -71,6 +71,30 @@ module SocialStream
     'site/current' => {}
   }
 
+  mattr_accessor :list_relations
+  @@list_relations = {
+    user: [],
+    group: []
+  }
+
+  mattr_accessor :available_permissions
+  @@available_permissions = {
+    'user' => [
+      [ "read",    "activity" ],
+      [ "create",  "activity" ],
+      [ "follow", nil ],
+      [ "represent", nil ],
+      [ "notify", nil ]
+    ],
+    'group' => [
+      [ "read",    "activity" ],
+      [ "create",  "activity" ],
+      [ "follow", nil ],
+      [ "represent", nil ],
+      [ "notify", nil ]
+    ]
+  }
+
   mattr_accessor :suggested_models
   @@suggested_models = [ :user, :group ]
 

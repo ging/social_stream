@@ -93,7 +93,6 @@ pt:
     like_sentence:
       one: '%{likers} likes this'
       other: '%{likers} like this'
-      more: 
     share: Share
     stream:
       atom_title: Activity Stream from %{subject}
@@ -103,6 +102,7 @@ pt:
         make-friend: '%{author} also added %{activity_object} as contact'
         post: '%{author} posted %{activity_object}'
         updated: '%{author} posted %{activity_object}'
+    share_loading: Sharing...
   browse: Browse
   button:
     cancel: Cancelar
@@ -237,6 +237,8 @@ pt:
           Stream's Google group</a> or <a href="http://stackoverflow.com/questions/tagged/social-stream">StackOverflow</a>
           if you have problems. <a href="https://github.com/ging/social_stream/issues/new">Open
           an issue</a> if you find a defect. Pull request are very welcomed!
+    main_title: Social Stream, a framework for building distributed social network
+      websites.
   group:
     one: Grupo
     other: Grupos
@@ -634,4 +636,5 @@ pt:
       keywords: social stream,social software,framework,ruby on rails
       title: Social Stream
     name: Social Stream
-
+  relation_manager:
+    name: Manager

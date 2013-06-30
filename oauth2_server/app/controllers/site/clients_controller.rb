@@ -1,18 +1,12 @@
 class Site::ClientsController < ApplicationController
   before_filter :authenticate_user!
 
-  before_filter :set_author_ids, only: [ :create, :update ]
+  before_filter :set_author_ids, only: [ :new, :create, :update ]
+
+  load_and_authorize_resource
 
   def index
-    @developer_clients = current_subject.developer_site_clients
-  end
-
-  def show
-    @client = Site::Client.find params[:id]
-  end
-
-  def new
-    @client = Site::Client.new
+    @clients = current_subject.managed_site_clients
   end
 
   def create
@@ -47,9 +41,16 @@ class Site::ClientsController < ApplicationController
     end
   end
 
+  def destroy
+    @client.destroy
+
+    redirect_to home_path
+  end
+
   private
 
   def set_author_ids
+    params[:site_client] ||= HashWithIndifferentAccess.new
     params[:site_client][:author_id]      = current_subject.actor_id
     params[:site_client][:user_author_id] = current_user.actor_id
     params[:site_client][:owner_id]       = current_subject.actor_id

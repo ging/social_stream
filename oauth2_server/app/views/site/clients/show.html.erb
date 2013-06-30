@@ -30,49 +30,52 @@
           <%= link_to @client.url, @client.url%>
         </div>
 
-        <h4>
-          <%= Site::Client.human_attribute_name :callback_url %>
-        </h4>
-        <div class="result">
-          <%= @client.callback_url %>
-        </div>
+        <% if can? :update, @client %>
+          <h4>
+            <%= Site::Client.human_attribute_name :callback_url %>
+          </h4>
+          <div class="result">
+            <%= @client.callback_url %>
+          </div>
+        <% end %>
       </div>
         
-      <div class="btn-group">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          Credentials
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <h6>
-            <%= Site::Client.human_attribute_name :id %>
-            <a href="#" class="pull-right">refresh</a>
-            </h6>
-            <p>
-              <%= @client.id %>
-            </p>
-          </li>
+      <% if can? :update, @client %>
+        <div class="btn-group">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            Credentials
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <h6>
+              <%= Site::Client.human_attribute_name :id %>
+              </h6>
+              <p>
+                <%= @client.id %>
+              </p>
+            </li>
 
-          <li class="client-secret">
-            <h6>
-              <%= Site::Client.human_attribute_name :secret %>
-              <a href="#" class="pull-right">refresh</a>
-            </h6>
-            <p>
-              <%= @client.secret %>
-            </p>
-          </li>
-        </ul>  
-      </div>   
+            <li class="client-secret">
+              <h6>
+                <%= Site::Client.human_attribute_name :secret %>
+                <a href="#" class="pull-right">refresh</a>
+              </h6>
+              <p>
+                <%= @client.secret %>
+              </p>
+            </li>
+          </ul>  
+        </div>   
+      <% end %>
     </div>
   </section>
 
   <div class="tabbable"> <!-- Only required for left/right tabs -->
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#tab1" data-toggle="tab">Users</a></li>
-      <li><a href="#tab2" data-toggle="tab">Organizations</a></li>
-      <li><a href="#tab3" data-toggle="tab">Stats</a></li>
+      <li class="active"><a href="#authorized" data-toggle="tab">Authorized</a></li>
+      <li><a href="#registered" data-toggle="tab">Registered</a></li>
+      <li><a href="#stats" data-toggle="tab">Stats</a></li>
     </ul>
     <div class="search-nav hidden-phone">
       <%= form_tag search_path, method: 'get', class: "navbar-search pull-left" do %>
@@ -83,6 +86,7 @@
           SocialStream.SearchHeader.show();
         });
       <% end %>
+
       <div class="mat">
         <%= render partial: 'layouts/loading' %>
 
@@ -101,16 +105,13 @@
 
 
     <div class="tab-content">
-      <div class="tab-pane active" id="tab1">
-        <ul class="nav nav-pills">
-          <li class="active">
-            <a href="#">added</a>
-          </li>
-          <li><a href="#">registered</a></li>
-        </ul>
+      <div class="tab-pane active" id="authorized">
       </div>
 
-      <div class="tab-pane" id="tab2">
+      <div class="tab-pane" id="registered">
+      </div>
+
+      <div class="tab-pane" id="stats">
       </div>
     </div>
   </div>

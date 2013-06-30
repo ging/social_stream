@@ -1,15 +1,1 @@
-$('#permissions').html("<%= escape_javascript render(:partial => 'index') %>");
-
-<% default_permissions.each do |p| %>
-  <% if @relation.permission_ids.include? p.id %>
-    $('#<%= dom_id p %>').attr('checked', 'checked');
-  <% else %>
-    $('label[for="relation_custom_permission_ids_' + <%= p.id %> + '"]').parent().hide();
-  <% end %>
-<% end %>
-
-$('#permissions_list input.permission').change(function(){
-  selectPermission(this);
-});
-
-$('#permissions').show();
+$('#permissions').html("<%= escape_javascript render(partial: 'index') %>");

@@ -59,7 +59,7 @@ Gem::Specification.new do |s|
   # Syntactically Awesome Stylesheets
   s.add_runtime_dependency('sass-rails', '>= 3.1.0')
   # Bootstrap for Sass
-  s.add_runtime_dependency('bootstrap-sass', '~> 2.3.1.0')
+  s.add_runtime_dependency('bootstrap-sass', '~> 2.3.2.0')
   # Customize ERB views
   s.add_runtime_dependency('deface', '~> 0.9.1')
   # Autolink text blocks

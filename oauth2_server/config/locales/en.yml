@@ -21,12 +21,29 @@ en:
   helpers:
     submit:
       site_client:
-        create: "Next"
-        update: "Save"
+        create: Next
+        update: Save
   permission:
+    description:
+      default:
+        brief:
+          manage:
+            nil: Manage the site
+            relation/custom: Manage roles
+        detailed:
+          manage:
+            nil:
+              positive: They WILL BE ABLE to update the details of the client site
+              negative: They WILL NOT BE ABLE to update the details of the client
+                site
+            relation/custom:
+              positive: They WILL BE ABLE to create, update and delete the roles of
+                the client site
+              negative: They WILL NOT BE ABLE to create, update and delete the roles
+                of the client site
     public_info: Read your public information
   relation_admin:
-    name: "Site Client Admin"
+    name: Site Client Admin
   site:
     client:
       added: Added sites

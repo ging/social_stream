@@ -1,0 +1,33 @@
+<%= div_for relation do %>
+  <%= radio_button_tag :relation,
+    relation.id,
+    false,
+    :id => "input_#{ dom_id relation }" %>
+  <%= label_tag "input_#{ dom_id relation }", relation.name %>
+
+  <div class="actions">
+    <% if can? :edit, relation %>
+      <%= link_to 'javascript:void(0);', class: "edit" do %>
+        <i class="icon_tool16-edit"></i>
+      <% end %>
+    <% end %>
+
+    <% if can? :delete, relation %>
+      <%= link_to relation, class: "delete", method: :delete, confirm: t('relation_custom.confirm_delete'), remote: true do %>
+        <i class="icon_tool16-trash"></i>
+      <% end %>
+    <% end %>
+  </div>
+
+  <% if can? :edit, relation %>
+    <div class="edit_name">
+      <%= form_for relation, url: polymorphic_path(relation, section: 'name'), :remote => true do |f| %>
+        <%= f.text_field :name %>
+
+        <%= link_to '#', class: "submit" do %>
+          <i class="icon_tool16-ok"></i>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

@@ -5,9 +5,7 @@ module SocialStream
     module Models
       autoload :ActivityObject, 'social_stream/documents/models/activity_object'
     end
-  end
 
-  module Documents
     # Picture thumbnails
     mattr_accessor :picture_styles
     @@picture_styles = {

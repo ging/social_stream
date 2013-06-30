@@ -65,6 +65,7 @@ en:
         other: '%{count} groups'
     sending: Sending
     share: Share
+    share_loading: Sharing...
     stream:
       atom_title: Activity Stream from %{subject}
       title:
@@ -224,7 +225,8 @@ en:
     passwords:
       confirm: Confirm password
       forgot: Forgot your password?
-      instructions: 'Enter your email address and we will send you instructions to change it:'
+      instructions: 'Enter your email address and we will send you instructions to
+        change it:'
       update: Change your password
   dropdown:
     notifications: Notifications
@@ -266,7 +268,8 @@ en:
       other: '%{count} followers'
   forgot_password: Forgot you password?
   frontpage:
-    main_title: Social Stream, a framework for building distributed social network websites.
+    main_title: Social Stream, a framework for building distributed social network
+      websites.
     presentation:
       modular:
         header: Modular
@@ -507,7 +510,7 @@ en:
             nil:
               positive: Activities of the contacts at %{relation} WILL APPEAR in your
                 home wall
-              negative: Activities of the contacts at %{relation} WILL APPEAR in your
+              negative: Activities of the contacts at %{relation} WILL NOT APPEAR in your
                 home wall
           read:
             activity:
@@ -540,6 +543,8 @@ en:
       title: Roles
     new: + New role
     title: Privacy
+  relation_manager:
+    name: Manager
   relation_public:
     name: Public
   repository:

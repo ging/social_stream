@@ -1,5 +1,5 @@
 # Owner of client sites
-class Relation::Owner < Relation::Single
+class Relation::Manager < Relation::Single
   PERMISSIONS =
     [
       [ 'manage', nil ],
@@ -10,5 +10,9 @@ class Relation::Owner < Relation::Single
     def create_activity?
       false
     end
+  end
+
+  def available_permissions
+    Permission.instances PERMISSIONS
   end
 end

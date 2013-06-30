@@ -20,6 +20,23 @@ zh:
         title: 'The site %{client} will be able to:'
   permission:
     public_info: Read your public information
+    description:
+      default:
+        brief:
+          manage:
+            nil: Manage the site
+            relation/custom: Manage roles
+        detailed:
+          manage:
+            nil:
+              positive: They WILL BE ABLE to update the details of the client site
+              negative: They WILL NOT BE ABLE to update the details of the client
+                site
+            relation/custom:
+              positive: They WILL BE ABLE to create, update and delete the roles of
+                the client site
+              negative: They WILL NOT BE ABLE to create, update and delete the roles
+                of the client site
   site:
     client:
       added: Added sites
@@ -28,3 +45,10 @@ zh:
       new:
         link: Add site
         title: Register new client site
+  helpers:
+    submit:
+      site_client:
+        create: Next
+        update: Save
+  relation_admin:
+    name: Site Client Admin

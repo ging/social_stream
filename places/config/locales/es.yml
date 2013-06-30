@@ -26,7 +26,7 @@ es:
     mine: Mis lugares
     name: lugar
     name_title: Nombre del lugar
-    one:
+    one: un lugar
     phone_title: Teléfono
     photo:
       button: Subir
@@ -39,7 +39,6 @@ es:
       postalcode: Código postal
       country: País
     not_mine: Lugares
-    one: un lugar
     other: lugares
     simple_all: Todos
     title: Lugares

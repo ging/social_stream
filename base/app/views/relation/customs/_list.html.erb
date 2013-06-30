@@ -3,12 +3,13 @@
     <%= t 'relation_custom.list.title' %>
   </h4>
 
-  <%= render partial: 'relation/customs/custom',
-             collection: list %>
+  <%= render partial: 'relations/relation',
+             collection: subject.relations_list %>
    
   <div id="new_relation">
-    <%= link_to t('relation_custom.new'), '#', class: 'new' %>
+    <%= link_to t('relation_custom.new'), 'javascript:void(0);', class: 'new' %>
 
-    <%= render :partial => 'relation/customs/form' %>
+    <%= render partial: 'relation/customs/form',
+               locals:  { subject: subject }%>
   </div> 
 </section>

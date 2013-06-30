@@ -10,23 +10,6 @@ es:
         name: Nombre
         secret: Client Secret
         url: URL
-  helpers:
-    submit:
-      site_client:
-        create: "Siguiente"
-        update: "Guardar"
-  permission:
-    public_info: Acceder a tu información pública
-  relation_admin:
-    name: "Administrador de Sitio"
-  site:
-    client:
-      added: Sitios añadidos
-      index:
-        title: Sitios
-      new:
-        link: Añadir sitio
-        title: Registrar nuevo sitio
   authorization:
     form:
       accept: Accept
@@ -35,3 +18,34 @@ es:
       title: Authorize %{client}?
       permission:
         title: 'The site %{client} will be able to:'
+  helpers:
+    submit:
+      site_client:
+        create: Siguiente
+        update: Guardar
+  permission:
+    description:
+      default:
+        brief:
+          manage:
+            nil: Gestionar el sitio
+            relation/custom: Gestionar los roles
+        detailed:
+          manage:
+            nil:
+              positive: PODRÁN actualizar los detalles del sitio
+              negative: NO PODRÁN actualizar los detalles del sitio
+            relation/custom:
+              positive: PODRÁN crear, actualizar y borrar los roles del sitio
+              negative: NO PODRÁN crear, actualizar y borrar los roles del sitio
+    public_info: Acceder a tu información pública
+  relation_admin:
+    name: Administrador de Sitio
+  site:
+    client:
+      added: Sitios añadidos
+      index:
+        title: Sitios
+      new:
+        link: Añadir sitio
+        title: Registrar nuevo sitio
