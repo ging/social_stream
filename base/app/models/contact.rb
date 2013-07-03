@@ -48,6 +48,14 @@ class Contact < ActiveRecord::Base
           or(arel_table[:receiver_id].eq(Actor.normalize_id(a))))
   }
 
+  scope :in_direction_with, lambda { |subject, d = 'sent'|
+    if d == 'sent'
+      sent_by(subject).joins(:receiver)
+    else
+      received_by(subject).joins(:sender)
+    end
+  }
+
   scope :recent, order("contacts.created_at DESC")
 
   scope :active, where(arel_table[:ties_count].gt(0))
@@ -70,6 +78,15 @@ class Contact < ActiveRecord::Base
     if p.present?
       joins(:ties).merge(Tie.where(:relation_id => p))
     end
+  }
+
+  scope :index, lambda { |params|
+    in_direction_with(params[:subject], params[:d]).
+      positive.
+      merge(Actor.subject_type(params[:type])).
+      merge(Actor.name_search(params[:q])).
+      related_by_param(params[:relation]).
+      page(params[:page])
   }
 
   validates_presence_of :sender_id, :receiver_id

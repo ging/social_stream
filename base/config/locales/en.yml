@@ -176,7 +176,7 @@ en:
         zero: Add
         one: '%{count} role'
         other: '%{count} roles'
-      link: + Add contact
+      link: Add contact
       title: Add %{name} to your contacts
       menu: Add contact
       submit: Add Contact
