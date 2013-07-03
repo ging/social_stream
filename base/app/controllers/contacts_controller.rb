@@ -78,7 +78,7 @@ class ContactsController < ApplicationController
 
   def current_subject_contacts_to(contacts)
     contacts.map{ |c|
-      c.sender == current_actor ?
+      current_actor.blank? || c.sender == current_actor ?
         c :
         current_actor.contact_to!(c.receiver)
     }
