@@ -26,6 +26,7 @@ zh:
           manage:
             nil: Manage the site
             relation/custom: Manage roles
+            contact: Manage authorizations
         detailed:
           manage:
             nil:

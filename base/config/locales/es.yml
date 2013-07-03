@@ -49,6 +49,7 @@ es:
     like_sentence:
       one: A %{likers} le gusta esto
       other: A %{likers} les gusta esto
+      more: 
     one: Actividad
     other: Actividades
     privacy:

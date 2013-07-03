@@ -59,6 +59,13 @@ module SocialStream
             a.audience.include?(subject.actor) 
         end
 
+        can :read, Contact
+
+        can :manage, Contact do |c|
+          c.sender == subject.actor ||
+            c.sender.allow?(subject, 'manage', 'contact')
+        end
+
         # Users
         can :read, User
 

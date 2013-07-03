@@ -29,7 +29,7 @@
           <div class="contact-list">
             <% if current_contact_section?(type) %>
               <% if @contacts.any? %>
-                <%= render @contacts %>
+                <%= render current_subject_contacts_to(@contacts) %>
               <% else %>
                 <%= raw t("contact.empty", explore: explore_path) %>
               <% end %>

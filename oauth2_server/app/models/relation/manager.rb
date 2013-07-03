@@ -3,7 +3,8 @@ class Relation::Manager < Relation::Single
   PERMISSIONS =
     [
       [ 'manage', nil ],
-      [ 'manage', 'relation/custom' ]
+      [ 'manage', 'relation/custom' ],
+      [ 'manage', 'contact' ]
     ]
 
   class << self

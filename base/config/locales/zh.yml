@@ -49,7 +49,6 @@ zh:
     like_sentence:
       one: '%{likers} 喜欢这个'
       other: '%{likers} 喜欢这个'
-      more: 
     one: 一个活动
     other: 很多活动
     privacy:

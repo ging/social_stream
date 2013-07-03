@@ -106,6 +106,8 @@
 
     <div class="tab-content">
       <div class="tab-pane active" id="authorized">
+        <%= render partial: 'contacts/contact',
+                   collection: @client.sent_contacts.first(12) %>
       </div>
 
       <div class="tab-pane" id="registered">

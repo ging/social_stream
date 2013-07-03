@@ -93,6 +93,7 @@ pt:
     like_sentence:
       one: '%{likers} likes this'
       other: '%{likers} like this'
+      more: 
     share: Share
     stream:
       atom_title: Activity Stream from %{subject}

@@ -1,6 +1,9 @@
 class ContactsController < ApplicationController
   before_filter :authenticate_user!, except: [ :index ]
+  load_and_authorize_resource except: [ :index, :suggestion, :pending ]
   before_filter :exclude_reflexive,  except: [ :index, :suggestion, :pending ]
+
+  helper_method :current_subject_contacts_to
 
   def index
     params[:subject] = subject = profile_or_current_subject!
@@ -10,7 +13,7 @@ class ContactsController < ApplicationController
     @contacts = Contact.index(params)
 
     respond_to do |format|
-      format.html { render @contacts if request.xhr? }
+      format.html { render current_subject_contacts_to(@contacts) if request.xhr? }
       format.json { render json: @contacts.map(&:receiver), helper: self }
     end
   end
@@ -71,11 +74,19 @@ class ContactsController < ApplicationController
     end
   end
 
+  protected
+
+  def current_subject_contacts_to(contacts)
+    contacts.map{ |c|
+      c.sender == current_actor ?
+        c :
+        current_actor.contact_to!(c.receiver)
+    }
+  end
+
   private
 
   def exclude_reflexive
-    @contact = current_subject.sent_contacts.find params[:id]
-
     if @contact.reflexive?
       redirect_to home_path
     end
