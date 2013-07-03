@@ -19,11 +19,7 @@ module ContactsHelper
   def signed_in_contact_button contact_or_actor
     c =
       if contact_or_actor.is_a?(Contact)
-        if contact_or_actor.sender == current_actor
-          contact_or_actor
-        else
-          current_actor.contact_to!(contact_or_actor.receiver)
-        end
+        contact_or_actor
       else
         current_actor.contact_to!(contact_or_actor)
       end
