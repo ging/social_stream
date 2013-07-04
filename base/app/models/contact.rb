@@ -181,8 +181,8 @@ class Contact < ActiveRecord::Base
   end
 
   # Return an array of options suitable for the contact add button
-  def options_for_select
-    sender.relation_customs.map{ |r| [ r.name, r.id ] }
+  def options_for_button
+    sender.relations_for_button.map{ |r| [ r.name, r.id ] }
   end
 
   private

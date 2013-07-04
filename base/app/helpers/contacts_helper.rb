@@ -26,9 +26,11 @@ module ContactsHelper
 
     if c.reflexive?
       t('subject.this_is_you')
-    else
+    elsif can? :update, c
       render partial: "contacts/button",
              locals: { contact: c }
+    else
+      ""
     end
   end
 

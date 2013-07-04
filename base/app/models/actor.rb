@@ -220,6 +220,12 @@ class Actor < ActiveRecord::Base
     Relation.extra_list(subject) + relation_customs
   end
 
+  # The relations offered in the "Add contact" button when subjects
+  # add new contacts
+  def relations_for_button
+    relations_list
+  end
+
   # All the {Actor Actors} this one has ties with:
   # 
   #   actor.contact_actors #=> array of actors that sent and receive ties from actor
