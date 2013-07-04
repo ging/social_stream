@@ -30,6 +30,7 @@ es:
           manage:
             nil: Gestionar el sitio
             relation/custom: Gestionar los roles
+            contact: Manage authorizations
         detailed:
           manage:
             nil:

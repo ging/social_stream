@@ -28,6 +28,7 @@ en:
       default:
         brief:
           manage:
+            contact: Manage authorizations
             nil: Manage the site
             relation/custom: Manage roles
         detailed:

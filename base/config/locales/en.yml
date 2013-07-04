@@ -176,7 +176,7 @@ en:
         zero: Add
         one: '%{count} role'
         other: '%{count} roles'
-      link: + Add contact
+      link: Add contact
       title: Add %{name} to your contacts
       menu: Add contact
       submit: Add Contact
@@ -510,8 +510,8 @@ en:
             nil:
               positive: Activities of the contacts at %{relation} WILL APPEAR in your
                 home wall
-              negative: Activities of the contacts at %{relation} WILL NOT APPEAR in your
-                home wall
+              negative: Activities of the contacts at %{relation} WILL NOT APPEAR
+                in your home wall
           read:
             activity:
               positive: They WILL BE ABLE to read posts in your wall, except those
