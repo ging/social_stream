@@ -25,7 +25,8 @@ module SocialStream
 
   SocialStream.available_permissions['site/client'] = [
     [ 'manage', nil ],
-    [ 'manage', 'relation/custom' ]
+    [ 'manage', 'relation/custom' ],
+    [ 'manage', 'contact' ]
   ]
 end
 

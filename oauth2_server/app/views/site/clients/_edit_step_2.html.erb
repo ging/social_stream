@@ -1,0 +1,11 @@
+<%= image_tag 'step_2.png' %>
+
+<section class="new_app">
+<h1>Set the application's logo</h1>
+
+<%= render partial: 'avatars/form',
+           object: @client,
+           as: :avatarable %>
+
+<%= link_to "Next", edit_site_client_path(@client, step: 3) %>
+</section>
