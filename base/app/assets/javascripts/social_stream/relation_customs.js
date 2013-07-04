@@ -152,7 +152,7 @@ SocialStream.RelationCustom = (function(SS, $, undefined){
   };
 
   var selectNewItem = function(options) {
-    $('input[name="relation_custom"][value="' + options.relation.id + '"]').click();
+    $('input[name^="relation"][value="' + options.relation.id + '"]').click();
   };
 
   var hideElement = function(options) {
