@@ -25,4 +25,10 @@ class Relation::Single < Relation
   def name
     I18n.t("relation_#{ self.class.name.split("::").last.underscore }.name")
   end
+
+  # The available permissions for {Relation::Single} match with the permissions
+  # described in the variable
+  def available_permissions
+    Permission.instances PERMISSIONS
+  end
 end

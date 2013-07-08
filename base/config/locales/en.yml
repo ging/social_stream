@@ -543,8 +543,8 @@ en:
       title: Roles
     new: + New role
     title: Privacy
-  relation_manager:
-    name: Manager
+  relation_owner:
+    name: Owner
   relation_public:
     name: Public
   repository:

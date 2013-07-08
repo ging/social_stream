@@ -53,3 +53,5 @@ zh:
         update: Save
   relation_admin:
     name: Site Client Admin
+  relation_manager:
+    name: Manager

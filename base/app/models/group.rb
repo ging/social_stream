@@ -6,7 +6,7 @@
 class Group < ActiveRecord::Base
   include SocialStream::Models::Subject
 
-  attr_accessor :_participants
+  attr_accessor :owners
 
   delegate :description, :description=, :to => :profile!
 
@@ -19,14 +19,14 @@ class Group < ActiveRecord::Base
   private
 
   # Creates ties from founder to the group, based on _relation_ids,
-  # and ties from the group to founder and participants.
+  # and ties from the group to founder and owners.
   def create_ties
-    create_ties_from_founder
-    create_ties_to_participants
+    create_ties_from_author
+    create_ties_to_owners
   end
 
   # Creates the ties from the founder to the group
-  def create_ties_from_founder
+  def create_ties_from_author
 =begin
     # FIXME: need to define a proper relation for this case. Maybe a system defined relation
     author.sent_contacts.create! :receiver_id  => actor_id,
@@ -39,18 +39,20 @@ class Group < ActiveRecord::Base
 =end
   end
   
-  # Creates the ties from the group to the participants
-  def create_ties_to_participants
-    @_participants ||= ""
+  # Creates the ties from the group to the owners added in the group creation form
+  #
+  # The system-defined Relation::Owner is used for the ties
+  def create_ties_to_owners
+    @owners ||= ""
 
-    participant_ids = ([ author_id, user_author_id ] | @_participants.split(',').map(&:to_i)).uniq
+    owner_ids = ([ author_id, user_author_id ] | @owners.split(',').map(&:to_i)).uniq
 
-    participant_ids.each do |a|
+    owner_ids.each do |a|
       c =
         sent_contacts.create! :receiver_id  => a,
                               :user_author  => user_author
       
-      c.relation_ids = Array.wrap(relation_customs.sort.first.id)
+      c.relation_ids = Array.wrap(::Relation::Owner.instance.id)
     end
   end
 end

@@ -9,7 +9,7 @@ SocialStream.Group = (function(SS, $, undefined){
   var callback = new SS.Callback();
 
   var initParticipants = function(options) {
-    SS.Contact.select2(options.form + ' input[name$="[_participants]"]');
+    SS.Contact.select2(options.form + ' input[name$="[owners]"]');
   };
 
   var initTags = function(options) {

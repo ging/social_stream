@@ -181,6 +181,13 @@ class Relation < ActiveRecord::Base
     Relation.mode(sender_type, receiver_type)
   end
 
+  # Compare two relations
+  def <=> rel
+    return -1 if rel.is_a?(Public)
+
+    permissions.count <=> rel.permissions.count
+  end
+
   # Is this {Relation} a Positive one?
   def positive?
     self.class.positive_names.include?(self.class.to_s)
