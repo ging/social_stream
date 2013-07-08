@@ -57,49 +57,11 @@ class Relation::Custom < Relation
 
       rels.values
     end
-
-    # A relation in the top of a strength hierarchy
-    def strongest
-      roots
-    end
   end
 
   # The subject who defined of this relation
   def subject
     actor.subject
-  end
-
-  # Compare two relations
-  def <=> rel
-    return -1 if rel.is_a?(Public)
-
-    if ancestor_ids.include?(rel.id)
-      1
-    elsif rel.ancestor_ids.include?(id)
-      -1
-    else
-      0
-    end
-  end
-
-  # Other relations below in the same hierarchy that this relation
-  def weaker
-    descendants
-  end
-
-  # Relations below or at the same level of this relation
-  def weaker_or_equal
-    subtree
-  end
-
-  # Other relations above in the same hierarchy that this relation
-  def stronger
-    ancestors
-  end
-
-  # Relations above or at the same level of this relation
-  def stronger_or_equal
-    path
   end
 
   def available_permissions
