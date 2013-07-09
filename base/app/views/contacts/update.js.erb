@@ -1,7 +1,8 @@
 <% if @contact.errors.blank? %>
-SocialStream.Contact.update({
-  id: "<%= @contact.id %>"
-});
+  <% if @contact.options_for_select.count == 1 %>
+    $('.contact-button-single-<%= @contact.id %>').replaceWith("<%= j render(partial: 'contacts/button_simple', object: @contact.reload, as: :contact) %>");
+  <% end %>
+  SocialStream.Contact.update({ id: "<%= @contact.id %>" });
 <% else %>
-SocialStream.Flash.error("<%= @contact.errors.full_messages.to_sentence %>");
+  SocialStream.Flash.error("<%= @contact.errors.full_messages.to_sentence %>");
 <% end %>

@@ -1,3 +1,7 @@
-<%= form_for contact, remote: true, html: { 'data-contact_id' => contact.id } do |f| %>
-  <%= f.select :relation_ids, contact.options_for_select, {}, { multiple: true } %>
-<% end %>
+<%=
+    type = ( contact.options_for_select.count == 1 ? 'simple' : 'multiple' )
+
+    render partial: "contacts/button_#{ type }",
+           object:  contact,
+           as:      :contact
+%>

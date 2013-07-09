@@ -35,7 +35,7 @@ SocialStream.Contact = (function($, SS, undefined) {
     });
   };
 
-  var initContactButtons = function() {
+  var initMultipleButtons = function() {
     $('.edit_contact select[name*="relation_ids"]').multiselect({
       buttonClass: 'btn btn-small',
       buttonText: relationSelectText
@@ -211,7 +211,7 @@ SocialStream.Contact = (function($, SS, undefined) {
         $(contact).fadeOut('slow', function() {
           $(data).replaceAll(contact).fadeIn();
 
-          initContactButtons();
+          initMultipleButtons();
         });
       }
     });
@@ -263,9 +263,24 @@ SocialStream.Contact = (function($, SS, undefined) {
     callback([ { id: element.val(), name: element.attr('data-recipient-name') } ]);
   };
 
+  var initSimpleButtons = function(){
+    $(".following-button").mouseenter(function(){
+      $(this).hide();
+      $(this).siblings(".unfollow-button").show();
+    });
+
+    $(".unfollow-button").mouseleave(function(){
+      $(this).hide();
+      $(this).siblings(".following-button").show();
+    });
+
+    $(".unfollow-button").hide();
+  };
+
   callback.register('index',
                     initTabs,
-                    initContactButtons,
+                    initMultipleButtons,
+                    initSimpleButtons,
                     initFilter,
                     initNewGroupModal,
                     hideLoading);
@@ -273,13 +288,17 @@ SocialStream.Contact = (function($, SS, undefined) {
   callback.register('update',
                     updateForms,
                     replaceContact,
+                    initSimpleButtons,
                     checkAndHideContact);
 
-  callback.register('destroy', hideContact);
+  callback.register('destroy',
+                    initSimpleButtons,
+                    hideContact);
 
   // FIXME There is probably a more efficient way to do this..
   $(function() {
-    initContactButtons();
+    initMultipleButtons();
+    initSimpleButtons();
     initContactFormsHtmlListener();
   });
 
