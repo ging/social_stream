@@ -41,7 +41,7 @@
 # It sets the {Audience} that has access to it, and the {Permission Permissions} that rule that access.
 #
 class Relation < ActiveRecord::Base
-  Positive = %w{ custom public follow }
+  Positive = %w{ custom public follow owner }
   Negative = %w{ reject }
 
   has_many :relation_permissions, :dependent => :destroy

@@ -293,7 +293,7 @@ class Actor < ActiveRecord::Base
     if options[:relations].present?
       as = as.merge(Tie.related_by(options[:relations]))
     else
-      as = as.merge(Relation.where(:type => ['Relation::Custom', 'Relation::Public']))
+      as = as.merge(Relation.positive)
     end
     
     as

@@ -78,17 +78,17 @@ describe GroupsController do
         @user.senders.should include(group.actor)
       end
 
-      context "with participants" do
+      context "with owners" do
         before do
-          @user_participant = Factory(:user)
-          @group_participant = Factory(:group)
+          @user_owner = Factory(:user)
+          @group_owner = Factory(:group)
         end
 
         it "should allow creating" do
           count = Group.count
           post :create,
                :group => { :name => "Test group",
-                           :_participants => [ @user_participant.actor_id, @group_participant.actor_id ].join(',') }
+                           :owners => [ @user_owner.actor_id, @group_owner.actor_id ].join(',') }
 
           group = assigns(:group)
 
@@ -96,10 +96,10 @@ describe GroupsController do
           Group.count.should eq(count + 1)
           assigns(:current_subject).should eq(group)
 
-          participants = group.contact_subjects(:direction => :sent)
+          owners = group.contact_subjects(:direction => :sent)
 
-          participants.should include(@user_participant)
-          participants.should include(@group_participant)
+          owners.should include(@user_owner)
+          owners.should include(@group_owner)
 
           group.contact_subjects(:direction => :received)
           response.should redirect_to(:home)
