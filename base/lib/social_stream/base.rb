@@ -74,7 +74,7 @@ module SocialStream
   mattr_accessor :list_relations
   @@list_relations = {
     user: [],
-    group: [ 'relation/owner' ]
+    group: [ :owner ]
   }
 
   mattr_accessor :available_permissions

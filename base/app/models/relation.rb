@@ -169,10 +169,13 @@ class Relation < ActiveRecord::Base
     # Default extra relations that are displayed in {Actor}'s relation list,
     # typically in /relation/customs
     def extra_list subject
-      l = SocialStream.list_relations[subject.class.to_s.underscore]
-      return [] if l.blank?
+      name = subject.class.to_s.underscore
+      list = SocialStream.list_relations[name] ||
+        SocialStream.list_relations[name.to_sym]
+      
+      return [] if list.blank?
 
-      l.map{ |r| "Relation::#{ r.to_s.classify }".constantize.instance }
+      list.map{ |r| "Relation::#{ r.to_s.classify }".constantize.instance }
     end
   end
 
