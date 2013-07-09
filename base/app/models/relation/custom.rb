@@ -2,7 +2,7 @@
 # of relations is created for him. Afterwards, the {SocialStream::Models::Subject subject}
 # can customize them and adapt them to his own preferences.
 #
-# Default relations are defined at config/relations.yml
+# Default relations are defined at config/initializers/social_stream.rb
 #
 class Relation::Custom < Relation
   # This is weird. We must call #inspect before has_ancestry for Relation::Custom
