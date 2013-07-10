@@ -132,6 +132,12 @@ class Actor < ActiveRecord::Base
     joins(:received_contacts).merge(Contact.active.sent_by(a))
   }
 
+  scope :not_contacted_from, lambda { |a|
+    if a.present?
+      where(arel_table[:id].not_in(a.sent_active_contact_ids + [a.id]))
+    end
+  }
+
   scope :followed, joins(:activity_object).merge(ActivityObject.followed)
 
   scope :followed_by, lambda { |a|

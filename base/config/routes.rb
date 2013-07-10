@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :actors, only: [ :index ]
+
   # Get information about current_subject
   match 'user'    => 'users#current', format: :json
 

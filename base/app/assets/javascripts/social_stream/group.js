@@ -4,12 +4,13 @@
 //= require jquery.ba-url
 //
 //= require social_stream/callback
+//= require social_stream/actor
 
 SocialStream.Group = (function(SS, $, undefined){
   var callback = new SS.Callback();
 
   var initParticipants = function(options) {
-    SS.Contact.select2(options.form + ' input[name$="[owners]"]');
+    SS.Actor.select2(options.form + ' input[name$="[owners]"]');
   };
 
   var initTags = function(options) {
