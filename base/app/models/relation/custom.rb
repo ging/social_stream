@@ -65,7 +65,7 @@ class Relation::Custom < Relation
   end
 
   def available_permissions
-    Permission.instances SocialStream.available_permissions[subject.class.to_s.underscore]
+    Permission.available(subject)
   end
 
   private

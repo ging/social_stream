@@ -44,6 +44,36 @@ class Permission < ActiveRecord::Base
   end
 
   class << self
+    # Obtains the available permissions for subject, as they are configured
+    # in config.available_permissions entry in config/initializers/social_stream.rb
+    #
+    # It takes STI into account, so it will try to load the permissions of the base_class
+    # if the class is not found
+    def available(subject)
+      class_name = subject.class.to_s.underscore
+      base_class_name = subject.class.base_class.to_s.underscore
+
+      candidates = [ class_name, class_name.to_sym ]
+
+      if class_name != base_class_name
+        candidates += [ base_class_name, base_class_name.to_sym ]
+      end
+
+      list = nil
+
+      candidates.each do |n|
+        list = SocialStream.available_permissions[n]
+
+        break if list.present?
+      end
+
+      if list.blank?
+        raise "You need to configure SocialStream.available_permissions[#{ class_name }] in config/initializers/social_stream.rb"
+      end
+
+      instances list
+    end
+
     # Finds or creates in the database the instances of the permissions described in
     # {ary} by arrays of [ action, object ]
     def instances ary
