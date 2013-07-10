@@ -19,9 +19,6 @@ module SocialStream
   mattr_accessor :activity_forms
   @@activity_forms = []
 
-  mattr_accessor :relation_model
-  @@relation_model = :custom
-
   mattr_accessor :single_relations
   @@single_relations = [ :public, :follow, :reject ]
 
@@ -71,8 +68,8 @@ module SocialStream
     'site/current' => {}
   }
 
-  mattr_accessor :list_relations
-  @@list_relations = {
+  mattr_accessor :system_relations
+  @@system_relations = {
     user: [],
     group: [ :owner ]
   }

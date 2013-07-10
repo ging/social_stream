@@ -217,7 +217,7 @@ class Actor < ActiveRecord::Base
   # They usually include {Relation::Custom} but may also include other system-defined
   # relations that are not editable but appear in add contact buttons
   def relations_list
-    Relation.extra_list(subject) + relation_customs
+    Relation.system_list(subject) + relation_customs
   end
 
   # The relations offered in the "Add contact" button when subjects
@@ -434,11 +434,21 @@ class Actor < ActiveRecord::Base
 
   # The default {Relation Relations} for sharing an {Activity} owned
   # by this {Actor}
+  #
+  # Activities are shared with all the contacts by default.
+  #
+  # You can change this behaviour with a decorator, overwriting this method.
+  # For example, if you want the activities shared publicly by default, create
+  # a decorator in app/decorators/actor_decorator.rb with
+  #   Actor.class_eval do
+  #     def activity_relations
+  #       [ Relation::Public.instance ]
+  #     end
+  #   end
+  #
   def activity_relations
-    SocialStream.relation_model == :custom ?
-      relations.
-        allowing('read', 'activity') :
-      [ Relation::Public.instance ]
+    relations.
+      allowing('read', 'activity')
   end
 
   # The ids of the default {Relation Relations} for sharing an {Activity}

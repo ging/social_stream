@@ -152,7 +152,7 @@ class Relation < ActiveRecord::Base
     def ids_shared_with(subject)
       ids = [Relation::Public.instance.id]
 
-      if SocialStream.relation_model == :custom && subject.present?
+      if subject.present?
         # Subject own defined custom relations
         ids += subject.relation_ids
         # From Ties sent by other subject
@@ -168,10 +168,10 @@ class Relation < ActiveRecord::Base
 
     # Default extra relations that are displayed in {Actor}'s relation list,
     # typically in /relation/customs
-    def extra_list subject
+    def system_list subject
       name = subject.class.to_s.underscore
-      list = SocialStream.list_relations[name] ||
-        SocialStream.list_relations[name.to_sym]
+      list = SocialStream.system_relations[name] ||
+        SocialStream.system_relations[name.to_sym]
       
       return [] if list.blank?
 

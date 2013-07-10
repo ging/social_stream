@@ -21,7 +21,7 @@ module SocialStream
   SocialStream.custom_relations['site/client'] = {}
 
   # Relations that appear in the Site::Client list
-  SocialStream.list_relations['site/client'] = [ :manager ]
+  SocialStream.system_relations['site/client'] = [ :manager ]
 
   SocialStream.available_permissions['site/client'] = [
     [ 'manage', nil ],

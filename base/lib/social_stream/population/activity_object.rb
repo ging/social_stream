@@ -13,16 +13,14 @@ module SocialStream
           populate klass, author, owner, relation_ids, &block
         end
 
-        if SocialStream.relation_model == :custom
-          ties = Tie.allowing('create', 'activity').all
-          PowerLaw.new ties.sample(ties.count / 3) do |t|
+        ties = Tie.allowing('create', 'activity').all
+        PowerLaw.new ties.sample(ties.count / 3) do |t|
 
-            author = t.receiver
-            owner  = t.sender
-            relation_ids = Array(t.relation_id)
+          author = t.receiver
+          owner  = t.sender
+          relation_ids = Array(t.relation_id)
 
-            populate klass, author, owner, relation_ids, &block
-          end
+          populate klass, author, owner, relation_ids, &block
         end
 
         end_time = Time.now
