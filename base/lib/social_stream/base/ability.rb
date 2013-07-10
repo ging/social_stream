@@ -97,6 +97,8 @@ module SocialStream
         end
 
         # Privacy
+        can :read, Relation::Owner
+
         can :manage, ::Relation::Custom do |r|
           subject.present? && (
             r.actor_id == subject.actor_id ||
