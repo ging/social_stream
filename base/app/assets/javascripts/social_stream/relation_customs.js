@@ -78,7 +78,6 @@ SocialStream.RelationCustom = (function(SS, $, undefined){
     $('#permissions').find('.relation_permissions').hide();
 
     if (radioInput.attr('data-loaded')) {
-      console.log('#relation_' + relVal + '_permissions');
       $('#relation_' + relVal + '_permissions').show();
 
       return;
