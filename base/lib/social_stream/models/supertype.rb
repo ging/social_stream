@@ -35,6 +35,8 @@ module SocialStream #:nodoc:
           case a
           when Integer
             a
+          when String
+            a.to_i
           when Array
             a.map{ |e| normalize_id(e) }
           else

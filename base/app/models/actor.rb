@@ -334,7 +334,7 @@ class Actor < ActiveRecord::Base
   # Return a contact to subject. Create it if it does not exist
   def contact_to!(subject)
     contact_to(subject) ||
-      sent_contacts.create!(:receiver => Actor.normalize(subject))
+      sent_contacts.create!(receiver_id: Actor.normalize_id(subject))
   end
 
   # The {Contact} of this {Actor} to self (totally close!)
