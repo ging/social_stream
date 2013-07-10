@@ -14,11 +14,8 @@ class Relation::Single < Relation
     end
 
     def permissions
-      self::PERMISSIONS.map{ |p|
-        Permission.find_or_create_by_action_and_object p.first, p.last
-      }
+      Permission.instances self::PERMISSIONS
     end
-
   end
 
   # The name of public relation
@@ -29,6 +26,6 @@ class Relation::Single < Relation
   # The available permissions for {Relation::Single} match with the permissions
   # described in the variable
   def available_permissions
-    Permission.instances PERMISSIONS
+    self.class.permissions
   end
 end
