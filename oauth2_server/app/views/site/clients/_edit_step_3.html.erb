@@ -1,0 +1,10 @@
+<%= image_tag 'step_3.png' %>
+
+<h1>Manage roles and permissions</h1>
+
+<section class="site_client_roles">
+  <%= render partial: 'relation/customs/index',
+             locals: { subject: @client } %>
+</section>
+
+<%= link_to 'Finish', @client %>

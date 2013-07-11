@@ -41,7 +41,7 @@
 # It sets the {Audience} that has access to it, and the {Permission Permissions} that rule that access.
 #
 class Relation < ActiveRecord::Base
-  Positive = %w{ custom public follow }
+  Positive = %w{ custom public follow owner }
   Negative = %w{ reject }
 
   has_many :relation_permissions, :dependent => :destroy
@@ -152,7 +152,7 @@ class Relation < ActiveRecord::Base
     def ids_shared_with(subject)
       ids = [Relation::Public.instance.id]
 
-      if SocialStream.relation_model == :custom && subject.present?
+      if subject.present?
         # Subject own defined custom relations
         ids += subject.relation_ids
         # From Ties sent by other subject
@@ -168,17 +168,27 @@ class Relation < ActiveRecord::Base
 
     # Default extra relations that are displayed in {Actor}'s relation list,
     # typically in /relation/customs
-    def extra_list subject
-      l = SocialStream.list_relations[subject.class.to_s.underscore]
-      return [] if l.blank?
+    def system_list subject
+      name = subject.class.to_s.underscore
+      list = SocialStream.system_relations[name] ||
+        SocialStream.system_relations[name.to_sym]
+      
+      return [] if list.blank?
 
-      l.map{ |r| "Relation::#{ r.to_s.classify }".constantize.instance }
+      list.map{ |r| "Relation::#{ r.to_s.classify }".constantize.instance }
     end
   end
 
   # Relation class scoped in the same mode that this relation
   def mode
     Relation.mode(sender_type, receiver_type)
+  end
+
+  # Compare two relations
+  def <=> rel
+    return -1 if rel.is_a?(Public)
+
+    permissions.count <=> rel.permissions.count
   end
 
   # Is this {Relation} a Positive one?

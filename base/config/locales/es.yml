@@ -49,7 +49,6 @@ es:
     like_sentence:
       one: A %{likers} le gusta esto
       other: A %{likers} les gusta esto
-      more: 
     one: Actividad
     other: Actividades
     privacy:
@@ -159,8 +158,8 @@ es:
     error_count:
       one: '1 error impidió que se guardara este contacto:'
       other: '%{count} errores impidieron que se guardara este contacto'
-    follow: Seguir
-    following: Siguiendo
+    follow: Añadir
+    following: Añadid@
     graph:
       one: Gráfico
       empty: Lo sentimos pero aún no tienes contactos, pero ¡puedes probar a buscar
@@ -202,7 +201,7 @@ es:
       all: Todas
     type:
       new: + Nuevo tipo
-    unfollow: Dejar de seguir
+    unfollow: Quitar
     view_all: Ver todos...
   copyright: 2013 Copyright - Derechos reservados
   counter:
@@ -549,7 +548,7 @@ es:
       title: Roles
     new: + Nuevo rol
     title: Privacidad
-  relation_manager:
+  relation_owner:
     name: Admin
   relation_public:
     name: Público
@@ -646,3 +645,4 @@ es:
   lang:
     browser: Autodetectar el idioma del navegador
     none: Contenido independiente del idioma
+

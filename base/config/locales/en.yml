@@ -159,8 +159,8 @@ en:
     error_count:
       one: '1 error prohibited this contact from being saved:'
       other: '%{count} errors prohibited this contact from being saved:'
-    follow: Follow
-    following: Following
+    follow: Add
+    following: Added
     graph:
       one: Graph
       empty: We're sorry but you don't have any contacts yet. You can try the search
@@ -202,7 +202,7 @@ en:
       all: All
     type:
       new: + New type
-    unfollow: Unfollow
+    unfollow: Remove
     view_all: View all...
   copyright: 2013 Copyright - All rights reserved
   counter:
@@ -543,8 +543,8 @@ en:
       title: Roles
     new: + New role
     title: Privacy
-  relation_manager:
-    name: Manager
+  relation_owner:
+    name: Owner
   relation_public:
     name: Public
   repository:

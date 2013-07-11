@@ -4,20 +4,21 @@
 //= require jquery.ba-url
 //
 //= require social_stream/callback
+//= require social_stream/actor
 
 SocialStream.Group = (function(SS, $, undefined){
   var callback = new SS.Callback();
 
-  var initParticipants = function() {
-    SS.Contact.select2("#group__participants");
+  var initParticipants = function(options) {
+    SS.Actor.select2(options.form + ' input[name$="[owners]"]');
   };
 
-  var initTags = function() {
-    SS.Tag.select2("#group_tag_list");
+  var initTags = function(options) {
+    SS.Tag.select2(options.form + ' input[name$="[tag_list]"]');
   };
 
   var initValidate = function(options){
-    $.each(options.validate, function(i, opt){
+    $.each($(options.form), function(i, opt){
       $(opt.form).validate({errorClass: opt.errorClass});
     });
   };

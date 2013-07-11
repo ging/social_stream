@@ -45,6 +45,8 @@ en:
     public_info: Read your public information
   relation_admin:
     name: Site Client Admin
+  relation_manager:
+    name: Manager
   site:
     client:
       added: Added sites

@@ -1,4 +1,4 @@
-<%= form_for group do |f| %>
+<%= form_for group, html: { class: 'ss_group_form' } do |f| %>
   <% if group.errors.any? %>
     <div class="error">
       <h2><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h2>
@@ -11,34 +11,34 @@
       </ul>
     </div>
   <% end %>
-<section>
-  <%= f.label :name, t('group.new.name') %>
-  <%= f.text_field :name %>
-</section>
-<section>
-  <%= f.label :_participants, t('group.new.participants') %>
-  <%= f.hidden_field :_participants, 'data-path' => contacts_path(format: :json) %>
-</section>
-<section>
-  <%= f.label :tags_list, t('group.tags')%>
-  <%= f.text_field :tag_list, 'data-path' => tags_path(format: :json) %>
-</section>
-<section>
-  <%= f.label :description %>
-  <%= f.text_area :description %>
-</section>
-  <%= f.submit :class => "btn" %>
+
+  <section>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </section>
+  <section>
+    <%= f.label :owners %>
+    <%= f.hidden_field :owners, 'data-path' => actors_path(format: :json) %>
+  </section>
+  <section>
+    <%= f.label :tags_list %>
+    <%= f.text_field :tag_list, 'data-path' => tags_path(format: :json) %>
+  </section>
+  <section>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </section>
+    <%= f.submit :class => "btn" %>
 <% end %>
 
 <%= javascript_tag do %>
   $(function() {
     SocialStream.Group.new_(
       {
+        form: '.ss_group_form',
         validate: [
           {
-            form: ".new_group",
             errorClass: "validation_error"
-
           }
         ]
       }

@@ -15,11 +15,9 @@
       <%= link_to t('dropdown.settings'), settings_path, :id => "btn_menu_settings" %>
     </li>
 
-    <% if SocialStream.relation_model == :custom %>
-      <li  class="privacity-menu">
-        <%= link_to t('dropdown.privacy'), relation_customs_path %>
-      </li>
-    <% end %>
+    <li class="privacy-menu">
+      <%= link_to t('dropdown.privacy'), relation_customs_path %>
+    </li>
 
     <li class="divider">
     </li>

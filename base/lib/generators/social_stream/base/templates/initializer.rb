@@ -13,13 +13,6 @@ SocialStream.setup do |config|
   #                         :recoverable, :rememberable, :trackable,
   #                         :omniauthable, :token_authenticatable
   
-  # Config the relation model of your network
-  #
-  # :custom - users define their own relation types, and post with privacy, like Google+
-  # :follow - user just follow other users, like Twitter
-  #
-  # config.relation_model = :custom
-
   # Config the default relations that will be created and customized by actors
   # config.custom_relations = {
   #  user: {

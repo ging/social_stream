@@ -1,0 +1,17 @@
+<div class="contact-button-single-<%= contact.id %>">
+  <% if contact.sent? %>
+    <div class="following-button">
+      <%= t 'contact.following' %>
+    </div>
+    <div class="unfollow-button">
+      <%= form_for contact, method: :delete, remote: true do |f| %>
+        <%= f.submit t('contact.unfollow') %>
+      <% end %>
+    </div>
+  <% else %>
+    <%= form_for contact, remote: true do |f| %>
+      <%= f.hidden_field :relation_ids, value: contact.options_for_select.first.last %>
+      <%= f.submit t('contact.follow') %>
+    <% end %>
+  <% end %>
+</div>

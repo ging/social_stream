@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :actors, only: [ :index ]
+
   # Get information about current_subject
   match 'user'    => 'users#current', format: :json
 
@@ -62,19 +64,11 @@ Rails.application.routes.draw do
     end
   end
 
-  constraints SocialStream::Routing::Constraints::Custom.new do
-    namespace "relation" do
-      resources :customs
-    end
-
-    resources :permissions
+  namespace "relation" do
+    resources :customs
   end
 
-  constraints SocialStream::Routing::Constraints::Follow.new do
-    match 'followings' => 'followers#index', :as => :followings, :defaults => { :direction => 'sent' }
-    match 'followers' => 'followers#index', :as => :followers, :defaults => { :direction => 'received' }
-    resources :followers
-  end
+  resources :permissions
 
   resources :activity_actions
 

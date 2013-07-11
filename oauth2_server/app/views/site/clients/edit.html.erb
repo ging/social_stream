@@ -3,12 +3,11 @@
   <%= render partial: 'toolbar/home' %>
 
   <section class="edit_site_client" id="edit_<%= dom_id @client %>">
-    <%= render partial: 'form' %>
-    
-    <section class="site_client_roles">
-      <%= render partial: 'relation/customs/index',
-                 locals: { subject: @client } %>
-    </section>
+    <% if params[:step].present? %>
+      <%= render partial: "edit_step_#{ params[:step] }" %>
+    <% else %>
+      <%= render partial: 'edit' %>
+    <% end %>
   </section>
 </section>
 

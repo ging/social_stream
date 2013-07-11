@@ -42,6 +42,8 @@ es:
     public_info: Acceder a tu información pública
   relation_admin:
     name: Administrador de Sitio
+  relation_manager:
+    name: Admin
   site:
     client:
       added: Sitios añadidos

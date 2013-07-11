@@ -1,7 +1,8 @@
 class ContactsController < ApplicationController
   before_filter :authenticate_user!, except: [ :index ]
-  load_and_authorize_resource except: [ :index, :suggestion, :pending ]
-  before_filter :exclude_reflexive,  except: [ :index, :suggestion, :pending ]
+  load_and_authorize_resource except: [ :index, :create, :suggestion, :pending ]
+  before_filter :exclude_reflexive,  except: [ :index, :create, :suggestion, :pending ]
+  before_filter :create_filled_params, only: [ :create ]
 
   helper_method :current_subject_contacts_to
 
@@ -16,6 +17,16 @@ class ContactsController < ApplicationController
       format.html { render current_subject_contacts_to(@contacts) if request.xhr? }
       format.json { render json: @contacts.map(&:receiver), helper: self }
     end
+  end
+
+  def create
+    relation_ids = params[:relations].map(&:to_i)
+
+    params[:actors].split(',').each do |a|
+      current_subject.contact_to!(a).relation_ids = relation_ids
+    end
+
+    redirect_to action: :index
   end
 
   def update
@@ -92,11 +103,18 @@ class ContactsController < ApplicationController
     end
   end
 
-  def total_contacts
-    @total_contacts ||=
-      Contact.sent_by(current_subject).
-              joins(:receiver).merge(Actor.alphabetic).
-              positive.
-              select("actors.name")
+  def create_filled_params
+    errors = []
+
+    %w( actors relations ).each do |p|
+      if params[p].blank?
+        errors << "#{ p } cannot be blank"
+      end
+    end
+
+    if errors.present?
+      flash[:error] = errors.to_sentence
+      redirect_to action: :index
+    end
   end
 end

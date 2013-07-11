@@ -14,7 +14,9 @@ class Site::ClientsController < ApplicationController
 
     if @client.save
       respond_to do |format|
-        format.html { redirect_to @client }
+        format.html { 
+          redirect_to edit_site_client_path(@client, step: 2)
+        }
       end
     else
       respond_to do |format|

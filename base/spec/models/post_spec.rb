@@ -31,78 +31,32 @@ describe Post do
     end
   end
 
-  context "without relations" do
-    before :all do
-      @ss_relation_model = SocialStream.relation_model
+  describe 'with default SocialStream.custom_relations' do
+
+    it "should allow create to friend" do
+      tie = Factory(:friend)
+
+      post = Post.new :text => "testing",
+        :author_id => tie.receiver.id,
+        :owner_id => tie.sender.id,
+        :user_author_id => tie.receiver.id
+
+      ability = Ability.new(tie.receiver_subject)
+
+      ability.should be_able_to(:create, post)
     end
 
-    after :all do
-      SocialStream.relation_model = @ss_relation_model
-    end
+    it "should fill relation" do
+      tie = Factory(:friend)
 
-    context "in follow relation model" do
-      before do
-        SocialStream.relation_model = :follow
-      end
+      post = Post.new :text => "testing",
+        :author_id => tie.receiver.id,
+        :owner_id => tie.sender.id,
+        :user_author_id => tie.receiver.id
 
-      it "should allow create to follower" do
-        tie = Factory(:follow)
+      post.save!
 
-        post = Post.new :text => "testing",
-                        :author_id => tie.receiver.id,
-                        :owner_id => tie.sender.id,
-                        :user_author_id => tie.receiver.id
-
-        ability = Ability.new(tie.receiver_subject)
-
-        ability.should be_able_to(:create, post)
-      end
-
-      it "should fill relation" do
-        tie = Factory(:follow)
-
-        post = Post.new :text => "testing",
-          :author_id => tie.receiver.id,
-          :owner_id => tie.sender.id,
-          :user_author_id => tie.receiver.id
-
-        post.save!
-
-        post.post_activity.relations.should include(Relation::Public.instance)
-      end
-
-    end
-
-    context "in custom relation model" do
-      before do
-        SocialStream.relation_model = :custom
-      end
-
-      it "should allow create to friend" do
-        tie = Factory(:friend)
-
-        post = Post.new :text => "testing",
-          :author_id => tie.receiver.id,
-          :owner_id => tie.sender.id,
-          :user_author_id => tie.receiver.id
-
-        ability = Ability.new(tie.receiver_subject)
-
-        ability.should be_able_to(:create, post)
-      end
-
-      it "should fill relation" do
-        tie = Factory(:friend)
-
-        post = Post.new :text => "testing",
-          :author_id => tie.receiver.id,
-          :owner_id => tie.sender.id,
-          :user_author_id => tie.receiver.id
-
-        post.save!
-
-        post.post_activity.relations.should include(tie.relation)
-      end
+      post.post_activity.relations.should include(tie.relation)
     end
 
     describe "a new post" do

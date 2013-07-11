@@ -93,7 +93,6 @@ pt:
     like_sentence:
       one: '%{likers} likes this'
       other: '%{likers} like this'
-      more: 
     share: Share
     stream:
       atom_title: Activity Stream from %{subject}
@@ -637,5 +636,5 @@ pt:
       keywords: social stream,social software,framework,ruby on rails
       title: Social Stream
     name: Social Stream
-  relation_manager:
-    name: Manager
+  relation_owner:
+    name: Owner
