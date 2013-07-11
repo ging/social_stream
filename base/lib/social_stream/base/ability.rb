@@ -81,11 +81,7 @@ module SocialStream
             g.author_id == Actor.normalize_id(subject)
         end
 
-        can :update, Group do |g|
-          g.represented_by?(subject)
-        end
-
-        can :destroy, Group do |g|
+        can [ :update, :destroy, :represent ], Group do |g|
           g.represented_by?(subject)
         end
 
