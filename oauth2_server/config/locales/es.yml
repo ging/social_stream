@@ -47,8 +47,16 @@ es:
   site:
     client:
       added: Sitios añadidos
+      button:
+        edit: Editar
+      go_to_other: Ver tus otros sitios
       index:
         title: Sitios
       new:
         link: Añadir sitio
         title: Registrar nuevo sitio
+      oauth:
+        credentials: Credenciales
+        secret:
+          refresh: regenerar
+          refreshed: Token secreto de OAuth2 regenerado

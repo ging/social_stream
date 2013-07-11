@@ -43,11 +43,21 @@ class Site::ClientsController < ApplicationController
     end
   end
 
+  # Refresh the site client token
+  def update_secret
+    @client.refresh_secret!
+
+    respond_to do |format|
+      format.json { render json: { secret: @client.secret } }
+    end
+  end
+
   def destroy
     @client.destroy
 
     redirect_to home_path
   end
+
 
   private
 

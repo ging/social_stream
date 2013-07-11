@@ -5,9 +5,10 @@
     <header>  
       <h1>
         <%= @client.name %>
-        <a class="go-more" href="#">
-          ir a tus demás aplicaciones
-        </a>
+
+        <% if can?(:update, @client) %>
+          <%= link_to t('site.client.button.edit'), edit_site_client_path(@client), class: "edit-phanton" %>
+        <% end %>
       </h1>
 
       <%= image_tag('logos/app-default.png', class: "logo-app pull-right") %>
@@ -40,10 +41,10 @@
         <% end %>
       </div>
         
-      <% if can? :update, @client %>
-        <div class="btn-group">
+      <% if can? :update_secret, @client %>
+        <div class="btn-group dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            Credentials
+            <%= t 'site.client.oauth.credentials' %>
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
@@ -59,10 +60,12 @@
             <li class="client-secret">
               <h6>
                 <%= Site::Client.human_attribute_name :secret %>
-                <a href="#" class="pull-right">refresh</a>
+                <%= form_tag update_secret_site_client_path(@client, format: :json), class: "site-client-secret" do %>
+                  <%= submit_tag t('site.client.oauth.secret.refresh'), class: 'pull-right' %>
+                <% end %>
               </h6>
               <p>
-                <%= @client.secret %>
+                <span class="site-client-secret"><%= @client.secret %></span>
               </p>
             </li>
           </ul>  
@@ -118,4 +121,7 @@
     </div>
   </div>
 
+  <%= javascript_tag do %>
+    SocialStream.SiteClient.show();
+  <% end %>
 </section>

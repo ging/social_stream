@@ -7,7 +7,12 @@ SocialStream.Flash = (function(Flashy, undefined) {
     Flashy.message('error', message);
   };
 
+  var success = function(message) {
+    Flashy.message('success', message);
+  };
+
   return {
-    error: error
+    error: error,
+    success: success
   };
 })(Flashy);
