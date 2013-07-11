@@ -17,9 +17,9 @@ module SocialStream
       extend ActiveSupport::Concern
 
       included do
-        inherit_resources
+        include SocialStream::Controllers::Authorship
 
-        before_filter :set_author_ids, :only => [ :new, :create, :update ]
+        inherit_resources
 
         before_filter :authenticate_user!, :only => [:new, :edit, :create, :update, :destroy]
 
@@ -73,12 +73,6 @@ module SocialStream
 
       def increment_visit_count
         resource.activity_object.increment!(:visit_count) if request.format == 'html'
-      end
-
-      def set_author_ids
-        resource_params.first[:author_id] = current_subject.try(:actor_id)
-        resource_params.first[:user_author_id] = current_user.try(:actor_id)
-        resource_params.first[:owner_id] ||= current_subject.try(:actor_id)
       end
 
       def collection_variable_get
