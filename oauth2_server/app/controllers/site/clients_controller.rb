@@ -32,7 +32,7 @@ class Site::ClientsController < ApplicationController
   def update
     @client = Site::Client.find params[:id]
 
-    if @client.update_attributes params[:client]
+    if @client.update_attributes params[:site_client]
       respond_to do |format|
         format.html { redirect_to @client }
       end
