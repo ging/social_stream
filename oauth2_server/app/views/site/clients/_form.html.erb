@@ -1,4 +1,4 @@
-<%= form_for(@client || Site::Client.new) do |f| %>
+<%= form_for(resource || resource_class.new) do |f| %>
 
   <% if f.object.errors.any? %>
     <div id="error_explanation" class="alert alert-error">

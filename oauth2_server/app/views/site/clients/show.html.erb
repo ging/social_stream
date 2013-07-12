@@ -1,13 +1,13 @@
 <section id="site_client">
   <%= render partial: 'toolbar/home' %>
 
-  <section class="site_client" id="<%= dom_id @client %>">
+  <section class="site_client" id="<%= dom_id resource %>">
     <header>  
       <h1>
-        <%= @client.name %>
+        <%= resource.name %>
 
-        <% if can?(:update, @client) %>
-          <%= link_to t('site.client.button.edit'), edit_site_client_path(@client), class: "edit-phanton" %>
+        <% if can?(:update, resource) %>
+          <%= link_to t('site.client.button.edit'), edit_site_client_path(resource), class: "edit-phanton" %>
         <% end %>
       </h1>
 
@@ -21,27 +21,27 @@
           <%= Site::Client.human_attribute_name :description %>
         </h4>
         <div class="result">
-          <%= @client.description%>
+          <%= resource.description%>
         </div>
 
         <h4>
           <%= Site::Client.human_attribute_name :url %>
         </h4>
         <div class="result">
-          <%= link_to @client.url, @client.url%>
+          <%= link_to resource.url, resource.url%>
         </div>
 
-        <% if can? :update, @client %>
+        <% if can? :update, resource %>
           <h4>
             <%= Site::Client.human_attribute_name :callback_url %>
           </h4>
           <div class="result">
-            <%= @client.callback_url %>
+            <%= resource.callback_url %>
           </div>
         <% end %>
       </div>
         
-      <% if can? :update_secret, @client %>
+      <% if can? :update_secret, resource %>
         <div class="btn-group dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <%= t 'site.client.oauth.credentials' %>
@@ -53,19 +53,19 @@
               <%= Site::Client.human_attribute_name :id %>
               </h6>
               <p>
-                <%= @client.id %>
+                <%= resource.id %>
               </p>
             </li>
 
             <li class="client-secret">
               <h6>
                 <%= Site::Client.human_attribute_name :secret %>
-                <%= form_tag update_secret_site_client_path(@client, format: :json), class: "site-client-secret" do %>
+                <%= form_tag update_secret_site_client_path(resource, format: :json), class: "site-client-secret" do %>
                   <%= submit_tag t('site.client.oauth.secret.refresh'), class: 'pull-right' %>
                 <% end %>
               </h6>
               <p>
-                <span class="site-client-secret"><%= @client.secret %></span>
+                <span class="site-client-secret"><%= resource.secret %></span>
               </p>
             </li>
           </ul>  
@@ -110,7 +110,7 @@
     <div class="tab-content">
       <div class="tab-pane active" id="authorized">
         <%= render partial: 'contacts/contact',
-                   collection: @client.sent_contacts.first(12) %>
+                   collection: resource.sent_contacts.first(12) %>
       </div>
 
       <div class="tab-pane" id="registered">
