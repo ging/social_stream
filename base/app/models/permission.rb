@@ -68,7 +68,7 @@ class Permission < ActiveRecord::Base
       end
 
       if list.blank?
-        raise "You need to configure SocialStream.available_permissions[#{ class_name }] in config/initializers/social_stream.rb"
+        raise "You need to configure SocialStream.available_permissions[:#{ class_name }] in config/initializers/social_stream.rb"
       end
 
       instances list
