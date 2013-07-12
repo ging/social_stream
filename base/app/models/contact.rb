@@ -49,10 +49,10 @@ class Contact < ActiveRecord::Base
   }
 
   scope :in_direction_with, lambda { |subject, d = 'sent'|
-    if d == 'sent'
-      sent_by(subject).joins(:receiver)
-    else
+    if d == 'received'
       received_by(subject).joins(:sender)
+    else
+      sent_by(subject).joins(:receiver)
     end
   }
 
