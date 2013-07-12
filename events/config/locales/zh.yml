@@ -3,9 +3,9 @@ zh:
   activerecord:
     attributes:
       event:
-        title: Title
-        room: Room
         frequency: Frequency
+        room: Room
+        title: Title
       room:
         name: Name
     errors:
@@ -51,7 +51,7 @@ zh:
     confirm_delete: Delete room?
     delete: Delete
     settings:
-      title: Rooms
       description: Rooms available for event celebration
+      title: Rooms
     watermark:
       name: New room

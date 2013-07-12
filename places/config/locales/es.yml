@@ -1,85 +1,85 @@
 ---
 es:
+  activity:
+    like_construction:
+      like_and: ' y '
+      like_final:
+        one: ' le gusta esto'
+        other: ' les gusta esto'
+        you: le gusta esto
+      like_friends:
+        one: A %{friends} contacto
+        other: A %{friends} contactos
+      like_others:
+        one: '%{people} otro'
+        other: '%{people} otros'
+      like_people:
+        one: a %{people} persona
+        other: a %{people} personas
+    verb:
+      like:
+        Place:
+          like: También me gusta
+          title: A %{subject} le gusta %{activity_object}.
+          unlike: Ya no me gusta
   place:
     actions:
       delete: Borrar
       details: Detalles
       edit: Editar
+    address:
+      country: País
+      locality: Ciudad
+      postalcode: Código postal
+      region: Región
+      street: Dirección
     all: Todos los lugares
+    comments:
+      all: Ver todos los comentarios
+      contacts: Ver sólo los comentarios de mis contactos
     confirm_delete: ¿Borrar lugar?
+    details:
+      info: Info
     form:
       title: Lugar
     info:
+      author: Author
       date:
         created_at: Creado el
         updated_at: Actualizado el
-      file:
-        title: Cargar
-      title:
-        title: Título
-      author: Author
       description:
         description: Description
         update: Update description
+      file:
+        title: Cargar
       size: Size
       tags: Tags
+      title:
+        title: Título
+    like:
+      me: que me gustan
+      other: que gustan a %{contact}
     mine: Mis lugares
     name: lugar
     name_title: Nombre del lugar
+    not_mine: Lugares
     one: un lugar
+    other: lugares
     phone_title: Teléfono
     photo:
       button: Subir
       update: Subir foto
-    url_title: Website
-    address:
-      street: Dirección
-      locality: Ciudad
-      region: Región
-      postalcode: Código postal
-      country: País
-    not_mine: Lugares
-    other: lugares
-    simple_all: Todos
-    title: Lugares
-    like:
-      me: que me gustan
-      other: que gustan a %{contact}
     search:
       name: Busca tus lugares favoritos
-      no_match: ¿No encuentras el lugar?
       new: + Añade un lugar nuevo
-    comments:
-      contacts: Ver sólo los comentarios de mis contactos
-      all: Ver todos los comentarios
+      no_match: ¿No encuentras el lugar?
+    simple_all: Todos
+    tabs:
+      friends: De amigos
+      mine: Mis lugares
+      recommended: Recomendados
+    title: Lugares
+    url_title: Website
     view:
       list: Lista
       map: Mapa
-    tabs:
-      mine: Mis lugares
-      friends: De amigos
-      recommended: Recomendados
-    details:
-      info: Info
-  activity:
-    verb:
-      like:
-        Place:
-          title: A %{subject} le gusta %{activity_object}.
-          like: También me gusta
-          unlike: Ya no me gusta
-    like_construction:
-      like_friends:
-        one: A %{friends} contacto
-        other: A %{friends} contactos
-      like_and: ' y '
-      like_people:
-        one: a %{people} persona
-        other: a %{people} personas
-      like_others:
-        one: '%{people} otro'
-        other: '%{people} otros'
-      like_final:
-        one: ' le gusta esto'
-        other: ' les gusta esto'
-        you: le gusta esto

@@ -8,15 +8,15 @@ zh:
       document: File
   audio:
     confirm_delete: Delete audio?
-    title:
-      one: Audio
-      other: Audios
     mine: My audios
     name: audio
     not_mine: Audios
     one: an audio
     other: audios
     processing: Processing audio clip. Please wait...
+    title:
+      one: Audio
+      other: Audios
   details:
     msg: See details...
   document:
@@ -74,9 +74,9 @@ zh:
   resource:
     all: All Resources
     confirm_delete: Delete resource?
-    title: Resources
     mine: My resources
     not_mine: Resources
+    title: Resources
   video:
     confirm_delete: Delete video?
     mine: My videos

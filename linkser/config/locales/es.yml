@@ -1,7 +1,5 @@
 ---
 es:
-  linkser:
-    title: Linkser
   link:
     by: por %{author}
     confirm_delete: ¿Borrar enlace?
@@ -15,3 +13,5 @@ es:
     one: un enlace
     other: enlaces
     title: Enlaces
+  linkser:
+    title: Linkser

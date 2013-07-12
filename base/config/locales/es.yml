@@ -1,11 +1,6 @@
 ---
 es:
   language_name: Español
-  actor:
-    name: Nombre
-  action:
-    send: Enviar
-    accept: Aceptar
   account:
     cancel: Cancelar lar cuenta
     edit: Editar cuenta
@@ -18,6 +13,9 @@ es:
       change: Cambiar contraseña
       new: Nueva contraseña
       retype: Repetir nueva contraseña
+  action:
+    accept: Aceptar
+    send: Enviar
   activerecord:
     attributes:
       contact:
@@ -33,20 +31,21 @@ es:
   activity:
     audience:
       hidden:
-        summary: Restringido
         full: Compartido con contactos de %{audience}
+        summary: Restringido
       public:
-        summary: Público
         full: Accesible por toda Internet
+        summary: Público
       show: Mostrar
       visible:
-        summary: Restringido
         full: Compartido con %{audience}
+        summary: Restringido
     confirm_delete: ¿Borrar actividad?
     delete: Borrar
     last: Últimas actividades
     like: Me gusta
     like_sentence:
+      more: 
       one: A %{likers} le gusta esto
       other: A %{likers} les gusta esto
     one: Actividad
@@ -78,31 +77,31 @@ es:
     unlike: Ya no me gusta
     verb:
       follow:
-        User:
-          title: '%{subject} añadió %{contact} como contacto.'
-          message: '%{name} te añadió como contacto.'
         Group:
+          message: '%{name} te añadió como contacto.'
           title: '%{subject} se unió al grupo %{contact}.'
+        User:
           message: '%{name} te añadió como contacto.'
+          title: '%{subject} añadió %{contact} como contacto.'
+      join:
+        one: '%{sender} joined the %{title} %{thing}.'
       like:
-        User:
-          title: '%{subject} es fan de %{contact}.'
-          message: '%{name} es tu fan.'
         Group:
-          title: '%{subject} es fan de %{contact}.'
           message: '%{name} es tu fan.'
+          title: '%{subject} es fan de %{contact}.'
+        User:
+          message: '%{name} es tu fan.'
+          title: '%{subject} es fan de %{contact}.'
       make-friend:
-        User:
-          title: '%{subject} y %{contact} ahora están conectados.'
-          message: '%{name} también te añadió como su contacto.'
         Group:
-          title: '%{subject} añadió a %{contact}.'
           message: '%{name} te añadió.'
+          title: '%{subject} añadió a %{contact}.'
+        User:
+          message: '%{name} también te añadió como su contacto.'
+          title: '%{subject} y %{contact} ahora están conectados.'
       post:
         title:
           other_wall: '%{sender} → %{receiver}'
-      join:
-        one: '%{sender} joined the %{title} %{thing}.'
   activity_action:
     follow: Seguir
     sentence:
@@ -113,6 +112,8 @@ es:
         one: '%{count} persona más'
         other: '%{count} personas más'
     unfollow: Dejar de seguir
+  actor:
+    name: Nombre
   ajax:
     error: Ha habido un error en el servidor remoto
   browse: Descubrir
@@ -137,23 +138,23 @@ es:
     select:
       hint: Selecciona haciendo click en los retratos
   comment:
-    input: Comentar...
     confirm_delete: ¿Borrar commentario?
+    input: Comentar...
     name: comentario
     one: un comentario
     other: comentarios
-    view_all: Ver todos los comentarios (%{count})
     title:
       one: Comentario
       other: Comentarios
+    view_all: Ver todos los comentarios (%{count})
   contact:
     all_n: Todos los contactos (%{count})
     confirm_delete: ¿Borrar contacto?
     current: Actuales
     delete: Borrar
     edit:
-      title: Editar contacto con %{name}
       submit: Editar contacto
+      title: Editar contacto con %{name}
     empty: Aún no has añadido a nadie. ¿Qué te parece <a href="%{explore}">explorar</a>?
     error_count:
       one: '1 error impidió que se guardara este contacto:'
@@ -161,9 +162,9 @@ es:
     follow: Añadir
     following: Añadid@
     graph:
-      one: Gráfico
       empty: Lo sentimos pero aún no tienes contactos, pero ¡puedes probar a buscar
         en la caja de búsqueda!
+      one: Gráfico
     in_common:
       one: 1 contacto en común
       other: '%{count} contactos en común'
@@ -172,33 +173,33 @@ es:
       other: '%{count} contactos'
     new:
       button:
-        zero: Añadir
         one: '%{count} rol'
         other: '%{count} roles'
+        zero: Añadir
       link: + Añadir contacto
-      title: Añadir a %{name} como contacto
       menu: Añadir contacto
       submit: Añadir
+      title: Añadir a %{name} como contacto
     one: Contacto
     other: Contactos
     pending:
-      other: Te añadieron
       all: Todos
       all_n: Ver todas los contactos pendientes (%{count})
+      other: Te añadieron
     received: Recibidos
     relation:
-      one: Tipo de contacto
       new: Nuevo tipo
+      one: Tipo de contacto
     reply:
       link: + Responder contacto
-      title: Responder contacto con %{name}
       submit: Responder contacto
+      title: Responder contacto con %{name}
     saving: Guardando...
     sent: Añadidos
     suggestion:
+      all: Todas
       one: Sugerencia
       other: Sugerencias
-      all: Todas
     type:
       new: + Nuevo tipo
     unfollow: Quitar
@@ -215,12 +216,12 @@ es:
     confirm: ¿Borrar %{element}}?
   devise:
     links:
-      sign_in: Entrar
-      sign_up: Registrarse
-      forgot_password: ¿Olvidaste tu contraseña?
       confirmation_instructions: ¿No recibiste instrucciones de confirmación?
-      unlock_instructions: ¿No recibiste instrucciones de desbloqueo?
+      forgot_password: ¿Olvidaste tu contraseña?
+      sign_in: Entrar
       sign_in_with: Entrar con %{provider}
+      sign_up: Registrarse
+      unlock_instructions: ¿No recibiste instrucciones de desbloqueo?
     passwords:
       confirm: Confirmar contraseña
       forgot: ¿Olvidaste tu contraseña?
@@ -239,9 +240,9 @@ es:
       explore: Explorar
       participants: Participantes
       resources: Recursos
-      timeline: Linea temporal
-      tags: Etiquetas
       search: Buscar
+      tags: Etiquetas
+      timeline: Linea temporal
     link: Explora
     or: o Explora
     participants:
@@ -267,17 +268,9 @@ es:
       other: '%{count} seguidores'
   forgot_password: ¿Olvidaste tu contraseña?
   frontpage:
+    main_title: Social Stream, a framework for building distributed social network
+      websites.
     presentation:
-      modular:
-        header: Modular
-        p: Los <a href="https://github.com/ging/social_stream#social-stream-components">componentes
-          de Social Stream</a> disponibles aportan solo las características que necesitas
-          para tu red social. Simplemente añade las gemas que necesites a tu Gemfile
-      flexible:
-        header: Flexible
-        p: Personaliza completamente tu red social <a href="https://github.com/ging/social_stream/wiki/How-to-change-controllers%2C-models%2C-views%2C-assets-and-locales">cambiando
-          cualquier componente de Social Stream</a>, <a href="https://github.com/ging/social_stream/wiki/How-to-add-new-activity-objects">añadiendo
-          nuevas actividades</a> o cambiando el CSS con <a href="http://sass-lang.com/">SASS</a>
       community:
         header: Comunidad
         p: Social Stream disfruta de una comunidad creciente de desarrolladores. No
@@ -285,39 +278,47 @@ es:
           Google group de Social Stream</a> o <a href="http://stackoverflow.com/questions/tagged/social-stream">StackOverflow</a>
           si te encuentras con problemas. <a href="https://github.com/ging/social_stream/issues/new">Abre
           un reporte</a> si encutras algún fallo. ¡Los pull request son muy bienvenidos!
+      flexible:
+        header: Flexible
+        p: Personaliza completamente tu red social <a href="https://github.com/ging/social_stream/wiki/How-to-change-controllers%2C-models%2C-views%2C-assets-and-locales">cambiando
+          cualquier componente de Social Stream</a>, <a href="https://github.com/ging/social_stream/wiki/How-to-add-new-activity-objects">añadiendo
+          nuevas actividades</a> o cambiando el CSS con <a href="http://sass-lang.com/">SASS</a>
+      modular:
+        header: Modular
+        p: Los <a href="https://github.com/ging/social_stream#social-stream-components">componentes
+          de Social Stream</a> disponibles aportan solo las características que necesitas
+          para tu red social. Simplemente añade las gemas que necesites a tu Gemfile
     stats: '%{users} personas and %{groups} grupos registrados'
-    main_title: Social Stream, a framework for building distributed social network
-      websites.
   group:
-    one: grupo
-    other: grupos
     all: Todos los grupos
     all_n: Todos los grupos (%{count})
     by: Por grupos
+    cloud: Nube de etiquetas de grupos
     destroy:
-      one: Destruir grupo
       explanation: ¡Todas las actividades, información y contactos de este grupo serán
         destruídos!
       go_ahead: Sí, estoy seguro/a. ¡Destruirlo todo!
       last_confirm: Es tu última oportunidad. ¿Realmente estás seguro/a?
+      one: Destruir grupo
     form:
       title: Grupo
     input: ¿Cuál es el nombre del grupo?
     last: Últimos grupos
+    most:
+      followed: Más seguidos
+      liked: Más populares
     my: Mis grupos
     n:
       one: '%{count} grupo'
       other: '%{count} groupos'
     new:
+      description: Descripción
       link: Nuevo grupo
       name: Nombre
-      description: Descripción
       participants: Participantes
       title: Nuevo grupo
-    cloud: Nube de etiquetas de grupos
-    most:
-      followed: Más seguidos
-      liked: Más populares
+    one: grupo
+    other: grupos
     tags: Etiquetas
     title:
       one: Grupo
@@ -347,9 +348,12 @@ es:
     join_me: ¡Únete a mi en %{site}!
     one: Invitación
     other: Invitaciones
-    toolbar: Invitar
     success: Se han enviado tus invitaciones
     text: Escribe tu mensaje
+    toolbar: Invitar
+  lang:
+    browser: Autodetectar el idioma del navegador
+    none: Contenido independiente del idioma
   layout:
     more: Ver más (%{count})
   like:
@@ -357,8 +361,8 @@ es:
       one: 1 fan
       other: '%{count} fans'
   location:
-    message: Estás aquí > %{location}
     base: Estás aquí
+    message: Estás aquí > %{location}
     separator: ' > '
   mailboxer:
     delete: Borrar
@@ -385,8 +389,8 @@ es:
     send: Enviar mensaje
     sent: Tu mensaje fue enviado
   menu:
-    options: Opciones
     information: Información
+    options: Opciones
     wall: Muro
   message:
     answer: Responder
@@ -436,6 +440,53 @@ es:
     whose:
       group: de %{receiver}
       user: tuyo
+  permission:
+    description:
+      default:
+        brief:
+          create:
+            activity: Publicar en vuestro muro
+          follow:
+            nil: Seguir su actividad
+          notify:
+            nil: Notificar
+          read:
+            activity: Leer vuestro muro
+          represent:
+            nil: Administrar
+        detailed:
+          create:
+            activity:
+              negative: Los contactos en %{relation} NO PODRÁN publicar actividades
+                en vuestro muro
+              positive: Los contactos en %{relation} PODRÁN publicar actividades en
+                vuestro muro
+          follow:
+            nil:
+              negative: Las actividades de los contactos en %{relation} NO APARECERÁN
+                en vuestra página de inicio
+              positive: Las actividades de los contactos en %{relation} APARECERÁN
+                en vuestra página de inicio
+          notify:
+            nil:
+              negative: Las actividades NO SE NOTIFICARÁN a los contactos en %{relation}
+              positive: Las actividades SE NOTIFICARÁN a los contactos en %{relation}
+          read:
+            activity:
+              negative: Los contactos en %{relation} NO PODRÁN leer las publicaciones
+                que aparezcan en vuestro muro, salvo las que marques como públicas
+              positive: Los contactos en %{relation} PODRÁN leer las publicaciones
+                que aparezcan en vuestro muro, salvo las que compartáis solo con otros
+                roles
+          represent:
+            nil:
+              negative: Los contactos en %{relation} NO PODRÁN cambiar sesión para
+                actuar en nombre de %{name}
+              positive: Los contactos en %{relation} PODRÁN cambiar sesión para actuar
+                en nombre de %{name}
+    of_relation:
+      choose: Permisos para <strong>%{name}</strong>
+    postit: Gestiona los permisos de tus contactos y crea nuevos roles
   post:
     confirm_delete: ¿Borrar texto?
     form:
@@ -447,99 +498,49 @@ es:
     title:
       one: Texto
       other: Textos
-  preposition:
-    and: y
-    true: 'on'
+  privacy:
+    intro: 'Los contactos en <strong>%{relation}</strong>:'
+    rule:
+      add: Añadir
+      saved: Reglas de privacidad guardadas
+      title: Reglas de privacidad
   profile:
-    one: Perfil
+    actualcity: Ciudad actual
+    address: Dirección
     age: Edad
-    is_on: esta en
-    must_be_signed_id: Debes identificarte
+    contact: Información de contacto
+    country: País
+    email: Correo electrónico
+    empty: Estos campos están vacíos. ¡Actualízalos!
+    fax: Fax
     group:
       about: Sobre nosotros/as
       birthday: Aniversario
       experience: Temas que se trabajan
       info: Información sobre el grupo
       tags: Etiquetas del grupo
-    user:
-      about: Sobre mí
-      birthday: Cumpleaños
-      experience: Intereses
-      info: Información personal
-      tags: Etiquetas
-    actualcity: Ciudad actual
-    address: Dirección
-    contact: Información de contacto
-    country: País
-    email: Correo electrónico
-    empty: Estos campos están vacíos. ¡Actualízalos!
-    fax: Fax
+    is_on: esta en
     mobile: Móvil
+    must_be_signed_id: Debes identificarte
+    one: Perfil
     organization: Organización
     phone: Teléfono
     profile: Editar perfil
     tags:
       default: social, stream,
       other: Etiquetas
-    website: Sitio web
     update:
       error: 'Por favor, comprueba el formato de tu perfil:'
       success: Tu perfil se ha actualizado
+    user:
+      about: Sobre mí
+      birthday: Cumpleaños
+      experience: Intereses
+      info: Información personal
+      tags: Etiquetas
+    website: Sitio web
   public:
     other: Todo el mundo
-  permission:
-    description:
-      default:
-        brief:
-          create:
-            activity: Publicar en vuestro muro
-          follow:
-            nil: Seguir su actividad
-          read:
-            activity: Leer vuestro muro
-          represent:
-            nil: Administrar
-          notify:
-            nil: Notificar
-        detailed:
-          create:
-            activity:
-              positive: Los contactos en %{relation} PODRÁN publicar actividades en
-                vuestro muro
-              negative: Los contactos en %{relation} NO PODRÁN publicar actividades
-                en vuestro muro
-          follow:
-            nil:
-              positive: Las actividades de los contactos en %{relation} APARECERÁN
-                en vuestra página de inicio
-              negative: Las actividades de los contactos en %{relation} NO APARECERÁN
-                en vuestra página de inicio
-          read:
-            activity:
-              positive: Los contactos en %{relation} PODRÁN leer las publicaciones
-                que aparezcan en vuestro muro, salvo las que compartáis solo con otros
-                roles
-              negative: Los contactos en %{relation} NO PODRÁN leer las publicaciones
-                que aparezcan en vuestro muro, salvo las que marques como públicas
-          represent:
-            nil:
-              positive: Los contactos en %{relation} PODRÁN cambiar sesión para actuar
-                en nombre de %{name}
-              negative: Los contactos en %{relation} NO PODRÁN cambiar sesión para
-                actuar en nombre de %{name}
-          notify:
-            nil:
-              positive: Las actividades SE NOTIFICARÁN a los contactos en %{relation}
-              negative: Las actividades NO SE NOTIFICARÁN a los contactos en %{relation}
-    of_relation:
-      choose: Permisos para <strong>%{name}</strong>
-    postit: Gestiona los permisos de tus contactos y crea nuevos roles
-  privacy:
-    intro: 'Los contactos en <strong>%{relation}</strong>:'
-    rule:
-      add: Añadir
-      title: Reglas de privacidad
-      saved: Reglas de privacidad guardadas
   relation_custom:
     confirm_delete: ¿Borrar este rol?
     delete: Borrar
@@ -554,25 +555,26 @@ es:
     name: Público
   repository:
     filter: filtrar
-    title: Repositorio
     order:
       by: Ordenar por
       last_modified: Última modificación
       most_popular: Popularidad
+    title: Repositorio
   representation:
     notice: Tu sesión ha cambiado. Ahora actúas en nombre de %{subject}. Para regresar
       a tu sessión, utiliza el menú de arriba a la derecha
     switch: Cambiar sessión
   required: (*) Estos campos son obligatorios
   search:
+    all_results: Search all %{subject} (%{count})
     at_least:
       one: Escribe al menos %{count} letra
       other: Escribe al menos %{count} letras
     global:
-      name: Búsqueda global
       first_result:
         more: Mostrando los primeros %{count} resultados.
         one: Mostrando el primer resultado
+      name: Búsqueda global
       query: Más resultados para %{query} >
     name: Buscar
     no_subject_found: No se encontró a %{subject}.
@@ -581,7 +583,6 @@ es:
     show_all: Todos
     write: Escribe tu búsqueda...
     wrong: Parece que hay un problema con el motor de búsqueda
-    all_results: Search all %{subject} (%{count})
   settings:
     api_key:
       briefing: Gestiona tu clave API
@@ -594,23 +595,23 @@ es:
       briefing: Te permite cancelar tu cuenta
     email_change:
       briefing: Cambia tu email
+    error: Hubo errores al guardar los cambios
+    for: Ajustes para
     lang_change:
       briefing: Cambia tu idioma
       name: Cambia tu idioma
-    error: Hubo errores al guardar los cambios
-    for: Ajustes para
     main: Ajustes
     manage:
-      name: Administrar contactos
       briefing: Ajustes de contactos
       explanation: Cambiar los permisos de contactos
+      name: Administrar contactos
     notifications:
       briefing: Ajustes sobre notificaciones y alertas por correo
-      name: Notificaciones
       by_email:
-        name: Mandarme un correo cuando me llega una notificación
         always: Siempre
+        name: Mandarme un correo cuando me llega una notificación
         never: Nunca
+      name: Notificaciones
     one: Ajustes
     password_change:
       briefing: Cambia tu contraseña
@@ -642,7 +643,3 @@ es:
       one: Usuario
       other: Usuarios
   welcome: ¡Bienvenid@ a %{site}!
-  lang:
-    browser: Autodetectar el idioma del navegador
-    none: Contenido independiente del idioma
-
