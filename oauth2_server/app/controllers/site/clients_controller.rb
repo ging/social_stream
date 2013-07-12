@@ -25,9 +25,7 @@ class Site::ClientsController < ApplicationController
   end
 
   def destroy
-    destroy! do
-      redirect_to home_path
-    end
+    destroy! { :home }
   end
 
   protected
