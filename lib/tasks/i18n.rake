@@ -9,7 +9,6 @@ namespace :i18n do
         en_hash = h.dup
 
         each_key do |self_key|
-#          require 'debugger'; debugger
           en_val = en_hash.delete(self_key)
 
           case en_val
@@ -36,9 +35,12 @@ namespace :i18n do
 
     SocialStream::ALL_COMPONENTS.each do |c|
       path = "#{ c }/config/locales/"
+
       files = Dir[path + '*'].select{ |f| f =~ /\/\w+\.yml$/ }
+
       en = files.find{ |f| f =~ /\/en.yml$/ }
       files.delete(en)
+
       en_h = Psych.load_file(en)
 
       files.each do |f|
