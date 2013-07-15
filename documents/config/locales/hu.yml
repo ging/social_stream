@@ -1,0 +1,77 @@
+hu:
+  activerecord:
+    attributes:
+      document:
+        title: "Cím"
+  audio:
+    confirm_delete: "Kikapcsolod a hangot?"
+    title: "Hangok"
+    mine: "Saját hangok"
+    name: "hang"
+    not_mine: "Hangok"
+    one: "egy hang"
+    processing: "Audió klip feldolgozása. Kérlek, várj…"
+    title:
+      one: "Hang"
+      other: "Hangok"
+  details:
+    msg: "Részletek..."
+  document:
+    actions:
+      delete: "Törlés"
+      details: "Részletek"
+      download: "Letöltés"
+      edit: "Szekesztés"
+    all: "Minden fájl"
+    confirm_delete: "Törlöd a fájlt?"
+    form:
+      title: "Fájl"
+    info:
+      date:
+        created_at: "Létrehozva"
+        updated_at: "Frissítve"
+      description:
+        title: "Leírás"
+      file:
+        title: "Feltöltés"
+      title:
+        title: "Cím"
+    mine: "Saját fájljaim"
+    name: "fájl"
+    not_mine: "Fájlok"
+    one: "egy fájl"
+    simple_all: "Összes"  
+    title:
+      one: "Fájl"
+      other: "Fájlok"
+  picture:
+    confirm_delete: "Törlöd a képet?"
+    mine: "Saját képeim"  
+    name: "kép"
+    not_mine: "Képek"
+    one: "egy kép"
+    title:
+      one: "Kép"
+      other: "Képek"
+  repository:
+    title: "Fájlok"
+    order:
+      by: "Rendezve"
+      last_modified: "Utoljára módosítva"
+      most_popular: "Legnépszerűbb"
+  resource:
+    all: "Összes erőforrás"
+    confirm_delete: "Törlöd az erőforrást?"
+    title: "Erőforrások"
+    mine: "Saját erőforrásaim"
+    not_mine: "Erőforrások"
+  video:
+    confirm_delete: "Törlöd a videót?"
+    mine: "Saját vieóim"  
+    name: "videó" 
+    not_mine: "Videók"
+    one: "egy videó"
+    processing: "A videó feldolgozás alatt van. Kérjük, várj..."
+    title:
+      one: "Videó"
+      other: "Videók"

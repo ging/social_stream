@@ -1,0 +1,551 @@
+nl:
+  language_name: "Nederlands"
+  actor:
+    name: "Naam"
+  action:
+    send: "Verzenden"
+    accept: "Accepteren"
+  account:
+    cancel: "Account annuleren"
+    edit: "Account bewerken"
+    email: 
+      change: "Emailadres wijzigen"
+    lang: 
+      change: "Taal wijzigen"
+    one: "Account"
+    password:
+      change: "Wachtwoord wijzigen"
+      new: "Nieuw wachtwoord"
+      retype: "Typ nieuw wachtwoord nogmaals"
+    privacy: "Privacy"
+  activerecord:
+    attributes:
+      contact:
+        relation_ids: "Soort contact"
+      relation/custom:
+        name: "Naam"
+      user:
+        email: "Email"
+        name: "Naam"
+        password: "Wachtwoord"
+        password_confirmation: "Bevestiging wachtwoord"
+        remember_me: "Onthoud mij"
+  activity:
+    audience:
+      hidden:
+        summary: "Beperkt"
+        full: "Gedeeld met contacten van %{audience}"
+      public:
+        summary: "Publiek"
+        full: "Gedeeld met het hele internet"
+      show: "Laat zien"
+      visible:
+        summary: "Beperkt"
+        full: "Gedeeld met %{audience}"
+    confirm_delete: "Activiteit verwijderen?"
+    delete: "Verwijder"
+    last: "Laatste Activiteiten"
+    like: "Vind ik leuk"
+    like_sentence:
+      one: "%{likers} vindt dit leuk"
+      other: "%{likers} vinden dit leuk"
+      more:
+    one: "Activiteit"
+    other: "Activiteiten"
+    privacy:
+      myself:
+        contacts:
+          group: "Alle leden"
+          user: "Uw contacten"
+      outside:
+        contacts:
+          group: "Leden van %{receiver}"
+          user: "Contacten van %{receiver}"
+    sending: "Bezig met verzenden"
+    stream:
+      atom_title: "Activiteit Stream van %{subject}"
+      title:
+        follow: "%{author} toegevoegd %{activity_object} als contact"
+        like: "%{author} vindt %{activity_object}leuk"
+        make-friend: "%{author} ook toegevoegd %{activity_object} als contact"
+        post: "%{author} plaatste %{activity_object}"
+        updated: "%{author} plaatste %{activity_object}"
+    title: "Activiteiten"
+    to_comment: "Opmerking maken"
+    unlike: "Ik vind het niet meer leuk"
+    verb:
+      follow:
+        User:
+          title: "%{subject} heeft %{contact} toegevoegd als contact."
+          message: "%{name} heeft u toegevoegd als contact."
+        Group:
+          title: "%{subject} heeft %{contact} toegevoegd als contact."
+          message: "%{name} heeft u toegevoegd als contact."
+      like:
+        User:
+          title: "%{subject} is fan van %{contact}."
+          message: "%{name} is nu uw fan."
+        Group:
+          title: "%{subject} is fan van %{contact}."
+          message: "%{name} is nu uw fan."
+      join: 
+        one: "%{sender} heeft zich aangesloten bij de %{title} %{thing}."
+      make-friend:
+        User:
+          title: "%{subject} en %{contact} zijn nu verbonden."
+          message: "%{name} heeft u ook toegevoegd als contact."
+        Group:
+          title: "%{subject} heeft %{contact} toegevoegd als contact."
+          message: "%{name} heeft u toegevoegd als contact."           
+      post:
+        title:
+          other_wall: "%{sender} â†’ %{receiver}"
+  activity_action:
+    follow: "Volgen"
+    sentence:
+      follow:
+        one: "%{followers} volgt dit"
+        other: "%{followers} volgen dit"
+      more:
+        one: "%{count} persoon meer"
+        other: "%{count} meer personen"
+    unfollow: "Ontvolgen"
+  browse: "Browsen"
+  button:
+    cancel: "Annuleren"
+    create: "Aanmaken"
+    save: "Opslaan"
+    update: "Updaten"
+  cheesecake:
+    changes:
+      details: "Gegevens wijzigen"
+      none: "Geen wijzigingen"
+      save: "Wijzigingen opslaan"
+      saving: "Bezig met opslaan..."
+    form:
+      editing: "Bewerken"
+      fields:
+        color: "Kleur"
+        name: "Naam"
+        permissions: "Toestemmingen"
+        subsector: "Subsector"
+    select:
+      hint: "Selecteer door op de portretten te klikken"
+  comment:
+    input: "Schrijf een opmerking..."
+    confirm_delete: "Opmerking verwijderen?"
+    name: "opmerking"
+    one: "een opmerking"
+    title:
+      one: "Opmerking"
+      other: "Opmerkingen"
+    view_all: "Bekijk alle opmerkingen"
+  contact:
+    addressbook: "Adresboek"
+    all_n: "Alle contacten (%{count})"
+    confirm_delete: "Contact verwijderen?"
+    current: "Dit contact"
+    delete: "Verwijder"
+    edit:
+      title: "Bewerk contact tot %{name}"
+      submit: "Bewerk contact"
+    error_count:
+      one: "1 fout verhinderde dat dit contact opgeslagen werd:"
+      other: "%{count} fouten verhinderden dat dit contact opgeslagen werd:"
+    follow: "Volgen"
+    following: "Bezig met volgen"
+    graph:
+      one: "Grafiek"
+      empty: "Het spijt ons, maar u hebt nog geen contacten. U kunt het zoekvenster proberen om iemand te zoeken!"
+    in_common:
+      one: "1 gemeenschappelijk contact"
+      other: "%{count} gemeenschappelijke contacten"
+    new:
+      link: "+ Contact toevoegen"
+      title: "%{name} toevoegen aan uw contacten"
+      menu: "Contact toevoegen"
+      submit: "Contact toevoegen"
+    one: "Contact"
+    other: "Contacten"
+    pending:
+      other: "In behandeling"
+      all: "Alle"
+      all_n: "Alle in behandeling zijnde verzoeken bekijken (%{count})"
+    relation:
+      one: "Soort contact"
+      new: "Nieuw soort"
+    reply:
+      link: "+ Contact antwoorden"
+      title: "Beantwoord contactverzoek aan %{name}"
+      submit: "Antwoord contact"
+    suggestion:
+      one: "Suggestie"
+      other: "Suggesties"
+      all: "Alle"
+    type:
+      new: "+ Nieuw soort"
+    unfollow: "Ontvolgen"
+  copyright: "2010 Copyright – Alle rechten voorbehouden"
+  delete:
+    confirm: Delete %{element}}?
+  devise:
+    links:
+      sign_in: "Inloggen"
+      sign_up: "Aanmelden"
+      forgot_password: "Wachtwoord vergeten?"
+      confirmation_instructions: "Geen bevestigingsinstructies ontvangen?"
+      unlock_instructions: "Geen deblokkeringsinstructies ontvangen?"
+      sign_in_with: "Inloggen met %{provider}"
+    passwords:
+      confirm: "Bevestig wachtwoord"
+      forgot: "Uw wachtwoord vergeten?"
+      instructions: "Typ het emailadres dat verbonden is met uw account en wij sturen u instructies om het te wijzigen:"
+      update: "Wijzig uw wachtwoord"
+  follower:
+    follower:
+      title: "Volgers"
+    following:
+      title: "Gevolgden"
+    n:
+      one: "1 volger"
+      other: "%{count} volgers"
+  forgot_password: "Uw wachtwoord vergeten?"
+  frontpage:
+    collaborate:
+      default: "Samenwerken"
+      sentence1: "Uw projecten en activiteiten organiseren"
+      sentence2: "Deelnemen aan conferenties en evenementen"
+      sentence3: "Uw eigen groep en conferenties creëren"
+    elements:
+      comments: "Opmerkingen"
+      conferences: "Conferenties"
+      networks: "Sociale Netwerken"
+      organizers: "Organisatoren"
+      participants: "Deelnemers"
+      groups: "Groepen"
+      tags: "Tags"
+    main_title: "Social Stream is een wezenlijk onderdeel voor het bouwen van sociale netwerk websites."
+    meet:
+      default: "Ontmoeten"
+      sentence1: "Ontmoet interessante personen en groepen"
+      sentence2: "Zoek de laatste activiteit van uw contacten"
+    register: "Nu registreren!"
+    share:
+      default: "Delen"
+      sentence1: "Uw projecten en activiteiten"
+      sentence2: "Posts, foto’s, audio en video’s"
+    stats: "%{users} gebruikers en %{groups} groepen hebben zich geregistreerd"
+  group:
+    one: "Groep"
+    other: "Groepen"
+    all: "Alle groepen"
+    all_n: "Alle groepen (%{count})"
+    by : "Door groepen"    
+    destroy:
+      one: "Groep verwijderen"
+      explanation: "Alle activiteiten, informatie en contacten van deze groep worden verwijderd!"
+      go_ahead: "Ja, ik weet het zeker. Alles verwijderen!"
+      last_confirm: "Dit is uw laatste kans. Weet u het echt zeker?"
+    form:
+      title: "Groep"
+    input: "Wat is de naam van de groep?"
+    last: "Laatste groepen"
+    my: "Mijn groepen"
+    new:
+      action: "Nieuwe groep"
+      name: "Naam"
+      description: "Beschrijving"
+      participants: "Deelnemers"
+    cloud: "Tag cloud van de groep"
+    most:
+      followed: "Meest gevolgd"
+      liked: "Meest leuk gevonden"
+    tags: "Tags"
+    title:
+      one: "Groep"
+      other: "Groepen"
+  help: "Hulp"
+  helpers:
+    submit:
+      relation_custom:
+        create: "Opslaan"
+        update: "Updaten"
+  home: "Home"
+  inbox:
+    one: "Inbox"
+  invitation:
+    e-mails: "Emailadressen"
+    error: "Uw verzoek kon niet verwerkt worden. Zorg ervoor dat u emailadressen correct schrijft."
+    invited: "%{sender} heeft u uitgenodigd op %{site}!"
+    join: "Nodig andere personen uit om zich aan te sluiten bij %{site}!"
+    join_me: "Sluit u bij mij aan op %{site}!"
+    one: "Uitnodiging"
+    other: "Uitnodigingen"
+    toolbar: "Uitnodigen"
+    success: "Uw uitnodigingen zijn succesvol verzonden"
+    text: "Uw eigen bericht schrijven"
+  like:
+    n:
+      one: "1 fan"
+      other: "%{count} fans"
+  location:
+    message: "U bent hier > %{location}"
+    base: "U bent hier"
+    separator: " > "
+  mailboxer:
+    delete: "Verwijderen"
+    delete_confirm: "Wilt u '%{object}' naar de prullenbak verplaatsen?"
+    form:
+      body: "Corpus"
+      recipients: "Ontvangers"
+      subject: "Onderwerp"
+    mark_as_read: "Markeren als gelezen"
+    message_mailer:
+      has_sent_new: 
+        event: "heeft een nieuw bericht gestuurd naar %{receiver}"
+        group: "heeft een nieuw bericht gestuurd naar %{receiver}"
+        user: "heeft u een nieuw bericht gestuurd"
+      has_sent_reply: 
+        event: "heeft een antwoord gestuurd naar %{receiver}"
+        group: "heeft een antwoord gestuurd naar %{receiver}"
+        user: "heeft u een antwoord gestuurd"
+      subject_new: "%{subject}"
+      subject_reply: "%{subject}"
+    notification_mailer:
+      subject: "%{subject}"
+    reply: "Antwoorden"
+    send: "Bericht verzenden"
+    sent: "Uw bericht is verzonden"
+  menu:
+    options: "Menu-opties"
+    information: "Informatie"
+    wall: "Prikbord"
+  message:
+    answer: "Schrijf uw antwoord"
+    inbox: "Inbox"
+    look: "Bekijk dit gesprek eens"
+    new: "Nieuw Bericht"
+    one: "Bericht"
+    other: "Berichten"
+    participants: "Deelnemers"
+    send: "Een bericht verzenden"
+    sentbox: "Verzonden berichten"
+    trash: "Prullenbak"
+  notification:
+    all_text: "De hele tekst lezen op %{url}"
+    confirm: "%{sender} bevestigen als contact?"
+    default: "U hebt een nieuw bericht"
+    destroy_sure: "Wilt u dit bericht verwijderen?"
+    fan: "%{sender} is nu fan van %{whose}."
+    follow:
+      group: "%{sender} heeft %{who} als contact toegevoegd."
+      user: "%{sender} heeft %{who} als contact toegevoegd."
+    hello: "Hallo %{receiver},"
+    like:
+      group: "%{sender} vindt %{thing} van %{whose}leuk." 
+      user: "%{sender} vindt %{thing} van %{whose} leuk."
+    look: "Bekijk het prikbord van %{sender}eens"
+    makefriend:
+      group: "%{sender} heeft %{who} ook toegevoegd als contact."
+      user: "%{sender} heeft  %{who} ook toegevoegd als contact."
+    one: "Bericht"
+    other: "Berichten"
+    post:
+      group: "%{title} -- door %{sender} op prikbord van %{whose}."
+      user: "%{title} -- door %{sender} op prikbord van %{whose}."
+    read: "Markeer als gelezen"
+    read_all: "Markeer alles als gelezen"
+    unread: "Markeer als ongelezen"
+    update:
+      group: "%{sender} heeft %{thing} geüpdatet op prikbord van %{whose}."
+      user: "%{sender} heeft %{thing} geüpdatet op prikbord van %{whose}."
+    visit: "Ga naar %{url} gaan en bekijk al uw berichten."
+    watch: "Kijk ernaar op %{url}"
+    watch_it: "Kijk ernaar!"
+    who:
+      group: "%{name}"
+      user: "u"
+    whose: 
+      group: "van %{receiver}"
+      user: "your"
+  post:
+    confirm_delete: "Bericht verwijderen?"
+    form:
+      title: "Bericht"
+    input: "Wat doet u?"
+    name: "bericht"
+    one: "een bericht"
+    title:
+      one: "Bericht"
+      other: "Berichten"
+  preposition:
+    and: "en"
+    on: "op"
+  profile:
+    one: "Profiel"
+    age: "Leeftijd"
+    is_on: "is op"
+    must_be_signed_in: "U moet ingelogd zijn"
+    group:
+      about: "Over ons"
+      birthday: "Verjaardag"
+      experience: "Expertise gebied"
+      info: "Groep informatie"
+      tags: "Groep tags"
+    user:
+      about: "Over mij"
+      birthday: "Verjaardag"
+      experience: "Ervaring"
+      info: "Persoonlijke informatie"
+      tags: "Gebruikerstags"
+    actualcity: "Huidige woonplaats"
+    address: "Adres"
+    contact: "Contactinformatie"
+    country: "Land"
+    email: "Email"
+    empty: "Deze velden zijn leeg. Update ze, alstublieft."
+    fax: "Fax"
+    mobile: "Mobiel"
+    organization: "Organisatie"
+    phone: "Telefoon"
+    profile: "Profiel bewerken"
+    tags:
+      default: "social, stream,"
+      other: "Tags"
+    website: "Website" 
+    update:
+      error: "Controleer het formaat van uw profiel:"
+      success: "Uw profiel is geüpdatet"     
+  public:
+    other: "Iedereen"
+  permission:
+    description:
+      default:
+        brief:
+          create: 
+            activity: "Op uw prikbord plaatsen"
+          follow:
+            nil: "Hun activiteit"
+          read:
+            activity: "Lees uw prikbord"
+          represent:
+            nil: "Administreren"
+          notify:
+            nil: "Berichten"
+        detailed:
+          create:
+            activity:
+              positive: "Zij ZULLEN nieuwe activiteiten op uw prikbord KUNNEN plaatsen"
+              negative: "Zij ZULLEN NIET nieuwe activiteiten op uw prikbord KUNNEN plaatsen"
+          follow:
+            nil:
+              positive: "Activiteiten van de contacten bij %{relation} ZULLEN op uw home-prikbord VERSCHIJNEN"
+              negative: "Activiteiten van de contacten bij %{relation} ZULLEN op uw home-prikbord VERSCHIJNEN"
+          read:
+            activity:
+              positive: "Zij ZULLEN berichten KUNNEN lezen op uw prikbord, behalve die welke gedeeld worden met specifieke contacten"
+              negative: "Zij ZULLEN berichten op uw prikbord NIET KUNNEN lezen, behalve die welke gemarkeerd zijn als openbaar"
+          represent:
+            nil:
+              positive: "Zij ZULLEN de sessie KUNNEN wijzigen en optreden als %{subject}"
+              negative: "Zij ZULLEN de sessie NIET KUNNEN wijzigen en optreden als %{subject}"
+          notify:
+            nil:
+              positive: "Activiteiten ZULLEN bericht WORDEN aan contacten bij %{name}"
+              negative: "Activiteiten ZULLEN NIET bericht WORDEN aan contacten bij %{name}"
+    of_relation:
+      choose: "2. Toestemmingen in de sfeer van <strong>%{name}</strong> "
+  privacy:
+    intro: "Contacten op het niveau van  <strong>%{relation}</strong> mogen alleen:"
+    rule:
+      add: "Toevoegen"
+      title: "Privacyreglement"
+      saved: "Privacyreglement opgeslagen"
+  relation_custom:
+    choose: "1. Sfeer kiezen"
+    confirm_delete: "Deze sfeer verwijderen?"
+    delete: "Verwijderen"
+    edit: "Naam wijzigen"
+    new: "+ Nieuwe sfeer"
+    title: "Privacy & context"
+  relation_public:
+    name: "Openbaar"
+  representation:
+    notice: "Uw sessie is gewijzigd. Nu handelt u namens %{subject}. Het menu bovenaan rechts gebruiken om terug te keren naar uw sessie"
+    switch: "Van sessie veranderen "
+  required: "(*) Deze velden zijn verplicht"
+  search:
+    all_results: "Alle %{subject} (%{count}) zoeken"
+    at_least: "Minstens twee lettertekens schrijven"
+    global: 
+      name: "Mondiale zoekactie"
+      first_result:
+        more: "Toont de eerste %{count} resultaten."
+        one: "Toont het eerste resultaat."
+      query: "Bekijk meer resultaten voor %{query} >"
+    name: "Zoekactie"
+    no_subject_found: "Er is geen %{subject} gevonden."
+    nothing: "Niets gevonden"
+    searching: "Bezig met zoeken naar: %{query}"
+    show_all: "Alle"
+    write: "Schrijf uw vraag op ..."
+    wrong: "Er schijnt een probleem te zijn met de zoekmachine"
+  settings:
+    api_key:
+      briefing: "Gebruik uw API-key"
+      confirm: "Weet u dat zeker?"
+      empty: "Leeg Token"
+      explanation: "Dit is uw API-key"
+      name: "API Key"
+      regenerate: "Herstel API-key"
+    cancel_account:
+      briefing: "Laten we uw account annuleren"
+    email_change:
+      briefing: "Wijzig uw email"
+    lang_change:
+      briefing: "Wijzig uw taal"
+      name: "Wijzig uw taal"
+    error: "Er zijn enkele fouten ontstaan bij het opslaan van uw wijzigingen"
+    for: "Instellingen voor"
+    main: "Instellingen"
+    manage:
+      name: "Administratie Contacten"
+      briefing: "Instellingen voor contacten"
+      explanation: "Toestemmingen van contacten wijzigen"
+    notifications:
+      briefing: "Instellingen over handelwijzen bij berichten en mail alerts"
+      name: "Berichten"
+      by_email:
+        name: "Stuur mij een email wanneer ik een bericht krijg"
+        always: "Altijd"
+        never: "Nooit"
+    one: "Instellingen"
+    password_change:
+      briefing: "Wijzig uw wachtwoord"
+    success: "Uw instellingen zijn correct gewijzigd"
+  share: "Delen"
+  sign_in: "Inloggen"
+  sign_out: "Uitloggen"
+  sign_up: "Aanmelden"
+  site:
+    name: "Social Stream"
+  subject:
+    this_is_you: "Dit bent u!"
+  sure: "Weet u dat zeker?"
+  time:
+    ago: "%{time} geleden"
+  unknown: "Onbekend"
+  user:
+    all: "Alle gebruikers"
+    all_n: "Alle gebruikers (%{count})"
+    by: "Door gebruikers"
+    one: "Gebruiker"
+    other: "Gebruikers"
+    title:
+      one: "Gebruiker"
+      other: "Gebruikers"
+  welcome: "Welkom op %{site}!"
+  lang:
+    browser: "Autodetect browser taal"
+    none: "Taalonafhankelijke inhoud"
+
