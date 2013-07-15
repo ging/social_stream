@@ -1,0 +1,78 @@
+nl:
+  activerecord:
+    attributes:
+      document:
+        title: "Titel"
+  audio:
+    confirm_delete: "Audio verwijderen?"
+    title: "Audio’s"
+    mine: "Mijn audio’s"
+    name: "audio"
+    not_mine: "Audio’s"
+    one: "een audio"
+    processing: "Bezig met bewerken audioclip. Wachten..."
+    title:
+      one: "Audio"
+      other: "Audio’s"
+  details:
+    msg: "Zie bijzonderheden..."
+  document:
+    actions:
+      delete: "Verwijderen"
+      details: "Bijzonderheden"
+      download: "Downloaden"
+      edit: "Bewerken"
+    all: "Alle bestanden"
+    confirm_delete: "Bestand verwijderen?"
+    form:
+      title: "Bestand"
+    info:
+      date:
+        created_at: "Gecreëerd op"
+        updated_at: "Geüpdatet op"
+      description:
+        title: "Beschrijving"
+      file:
+        title: "Uploaden"
+      title:
+        title: "Titel"
+    mine: "Mijn bestanden"
+    name: "bestand"
+    not_mine: "Bestanden"
+    one: "een bestand"
+    simple_all: "Alle"  
+    title:
+      one: "Bestand"
+      other: "Bestanden"
+  picture:
+    confirm_delete: "Afbeelding verwijderen?"
+    mine: "Mijn afbeeldingen"  
+    name: "afbeelding"
+    not_mine: "Afbeeldingen"
+    one: "een afbeelding"
+    title:
+      one: "Afbeelding"
+      other: "Afbeeldingen"
+  repository:
+    title: "Bestanden"
+    order:
+      by: "Rangschikken naar"
+      last_modified: "Laatst gewijzigd"
+      most_popular: "Meest populair"
+  resource:
+    all: "Alle Leermiddelen"
+    confirm_delete: "Leermiddel verwijderen?"
+    title: "Leermiddelen"
+    mine: "Mijn leermiddelen"
+    not_mine: "Leermiddelen"
+  video:
+    confirm_delete: "Video verwijderen?"
+    mine: "Mijn video’s"  
+    name: "video" 
+    not_mine: "Video’s"
+    one: "een video"
+    processing: "Bezig met bewerken van video. Wachten..."
+    title:
+      one: "Video"
+      other: "Video’s"
+

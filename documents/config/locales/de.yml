@@ -1,0 +1,78 @@
+de:
+  activerecord:
+    attributes:
+      document:
+        title: "Titel"
+  audio:
+    confirm_delete: "Audio löschen?"
+    title: "Audios"
+    mine: "Meine Audios"
+    name: "Audio"
+    not_mine: "Audios"
+    one: "Ein Audio"
+    processing: "Audio clip wird verarbeitet. Bitte warten..."
+    title:
+      one: "Audio"
+      other: "Audios"
+  details:
+    msg: "Siehe Details..."
+  document:
+    actions:
+      delete: "Löschen"
+      details: "Details"
+      download: "Download"
+      edit: "Bearbeiten"
+    all: "Alle Files"
+    confirm_delete: "File löschen?"
+    form:
+      title: "File"
+    info:
+      date:
+        created_at: "Erstellt am"
+        updated_at: "Aktualisiert am"
+      description:
+        title: "Beschreibung"
+      file:
+        title: "Upload"
+      title:
+        title: "Titel"
+    mine: "Meine Files"
+    name: "File"
+    not_mine: "Files"
+    one: "Ein File"
+    simple_all: "Alle"  
+    title:
+      one: "File"
+      other: "Files"
+  picture:
+    confirm_delete: "Bild löschen?"
+    mine: "Meine Bilder"  
+    name: "Bild"
+    not_mine: "Bilder"
+    one: "Ein Bild"
+    title:
+      one: "Bild"
+      other: "Bilder"
+  repository:
+    title: "Files"
+    order:
+      by: "Sortiert nach"
+      last_modified: "Zuletzt geändert"
+      most_popular: "Am beliebtesten"
+  resource:
+    all: "Alle Ressourcen"
+    confirm_delete: "Ressource löschen?"
+    title: "Ressourcen"
+    mine: "Meine Ressourcen"
+    not_mine: "Ressourcen"
+  video:
+    confirm_delete: "Video löschen?"
+    mine: "Meine Videos"  
+    name: "Video" 
+    not_mine: "Videos"
+    one: "Ein Video"
+    processing: "Video wird verarbeitet. Bitte warten..."
+    title:
+      one: "Video"
+      other: "Videos"
+
