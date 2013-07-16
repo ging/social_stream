@@ -2,68 +2,68 @@
 es:
   chat:
     connecting: Conectando
-    reconnecting: Reconectando
     disconnected: Desconectado
-    unableconnect: Fuera de servicio
-    title: Chat
-    password: Contraseña
-    zerousers: No hay contactos conectados
-    search: Buscar contactos
-    zerocontacts: No se encontró ningún contacto
-    status:
-      choose: Establecer estado
-      available: Disponible
-      away: Ausente
-      dnd: No molestar
-      offline: Desconectado
-    settings:
-      title: Activación y configuración del chat de Social Stream
-      checkbox: Activar o desactivar chat
-      update: Guardar configuración
-    notify:
-      offline: Estás desconectado
-      guestOffline: '{{name}} está desconectado'
-    videochat:
-      disconnected: Videochat desconectado
-      disconnecting: Videochat desconectando...
-      negotiating: Negociando...
-      connectingWait: Conectando...
-      connecting: Conectando con el servidor...
-      waiting: Esperando respuesta...
-      establishing: Estableciendo conexión...
-      connnected: Videochat conectado
-      unable: Imposible iniciar videochat
-      serverIssue: 'Error del servidor: Respuesta inválida'
-      call: '{{name}} quiere iniciar una videollamada'
-      rejected: '{{name}} ha rechazado tu llamada'
-      rejectedBusy: '{{name}} está ocupado'
+    game:
       accept: Aceptar
+      call: '{{name}} quiere iniciar una partida de {{game}}'
+      cancel: '{{name}} canceló la partida'
+      clientIssue: El cliente de {{name}} no tiene juegos
       deny: Rechazar
-      clientIssue: El cliente de {{name}} no soporta videochat
+      finish: '{{name}} ha cerrado el juego'
       guestOffline: Imposible conectar. {{name}} está desconectado
       offline: Imposible conectar. Estás desconectado
-      cancel: '{{name}} canceló la videollamada'
-      requirements: No tienes los requisitos minimos para iniciar la aplicación de
-        videoconferencia. Por favor, actualiza a la última versión de Flash.
+      rejected: '{{name}} ha rechazado tu invitación'
+      rejectedBusy: '{{name}} está ocupado'
+      unable: Imposible iniciar partida.
+      unknown: Respuesta desconocida
+      waiting: Esperando respuesta...
     muc:
       group: Grupo {{group}}
       join: '{{nick}} ha entrado en la sala.'
+      joinError: "No se pudo acceder a la sala.  \n {{errorMsg}}"
+      joining: Accediendo...
       leave: '{{nick}} se ha ido de la sala.'
       occupants: Miembros
-      joining: Accediendo...
-      joinError: "No se pudo acceder a la sala.  \n {{errorMsg}}"
       offline: Estás desconectado
-    game:
-      call: '{{name}} quiere iniciar una partida de {{game}}'
+    notify:
+      guestOffline: '{{name}} está desconectado'
+      offline: Estás desconectado
+    password: Contraseña
+    reconnecting: Reconectando
+    search: Buscar contactos
+    settings:
+      checkbox: Activar o desactivar chat
+      title: Activación y configuración del chat de Social Stream
+      update: Guardar configuración
+    status:
+      available: Disponible
+      away: Ausente
+      choose: Establecer estado
+      dnd: No molestar
+      offline: Desconectado
+    title: Chat
+    unableconnect: Fuera de servicio
+    videochat:
       accept: Aceptar
+      call: '{{name}} quiere iniciar una videollamada'
+      cancel: '{{name}} canceló la videollamada'
+      clientIssue: El cliente de {{name}} no soporta videochat
+      connecting: Conectando con el servidor...
+      connectingWait: Conectando...
+      connnected: Videochat conectado
       deny: Rechazar
-      offline: Imposible conectar. Estás desconectado
+      disconnected: Videochat desconectado
+      disconnecting: Videochat desconectando...
+      establishing: Estableciendo conexión...
       guestOffline: Imposible conectar. {{name}} está desconectado
-      unable: Imposible iniciar partida.
-      rejected: '{{name}} ha rechazado tu invitación'
+      negotiating: Negociando...
+      offline: Imposible conectar. Estás desconectado
+      rejected: '{{name}} ha rechazado tu llamada'
       rejectedBusy: '{{name}} está ocupado'
-      cancel: '{{name}} canceló la partida'
-      finish: '{{name}} ha cerrado el juego'
+      requirements: No tienes los requisitos minimos para iniciar la aplicación de
+        videoconferencia. Por favor, actualiza a la última versión de Flash.
+      serverIssue: 'Error del servidor: Respuesta inválida'
+      unable: Imposible iniciar videochat
       waiting: Esperando respuesta...
-      unknown: Respuesta desconocida
-      clientIssue: El cliente de {{name}} no tiene juegos
+    zerocontacts: No se encontró ningún contacto
+    zerousers: No hay contactos conectados

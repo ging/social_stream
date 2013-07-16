@@ -27,6 +27,12 @@ class Site::Client < Site
     id
   end
 
+  # Generate a new OAuth secret for this site client
+  def refresh_secret!
+    set_secret
+    save!
+  end
+
   private
 
   def set_secret

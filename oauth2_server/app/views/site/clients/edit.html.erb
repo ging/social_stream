@@ -2,7 +2,7 @@
 
   <%= render partial: 'toolbar/home' %>
 
-  <section class="edit_site_client" id="edit_<%= dom_id @client %>">
+  <section class="edit_site_client" id="edit_<%= dom_id resource %>">
     <% if params[:step].present? %>
       <%= render partial: "edit_step_#{ params[:step] }" %>
     <% else %>

@@ -447,9 +447,6 @@ en:
     title:
       one: Post
       other: Posts
-  preposition:
-    and: and
-    true: 'on'
   profile:
     one: Profile
     age: Age

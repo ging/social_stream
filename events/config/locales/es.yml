@@ -3,9 +3,9 @@ es:
   activerecord:
     attributes:
       event:
-        title: Título
-        room: Espacio
         frequency: Repetición
+        room: Espacio
+        title: Título
       room:
         name: Nombre
     errors:
@@ -51,7 +51,7 @@ es:
     confirm_delete: ¿Borrar espacio?
     delete: Borrar
     settings:
-      title: Espacios
       description: Salas disponibles para la realización de eventos
+      title: Espacios
     watermark:
       name: Nuevo espacio

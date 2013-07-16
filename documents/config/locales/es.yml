@@ -40,9 +40,9 @@ es:
         updated_at: Última modificación
       description: Descripción
       file: Fichero
-      title: Título
       size: Size
       tags: Tags
+      title: Título
     mine: Mis ficheros
     name: fichero
     new:
@@ -74,9 +74,9 @@ es:
   resource:
     all: Todos los recursos
     confirm_delete: ¿Borrar recursos?
-    title: Recursos
     mine: Mis recursos
     not_mine: Recursos
+    title: Recursos
   video:
     confirm_delete: ¿Borrar vídeo?
     mine: Mis vídeos

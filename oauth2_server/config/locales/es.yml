@@ -15,9 +15,9 @@ es:
       accept: Accept
       cancel: Cancel
     new:
-      title: Authorize %{client}?
       permission:
         title: 'The site %{client} will be able to:'
+      title: Authorize %{client}?
   helpers:
     submit:
       site_client:
@@ -28,17 +28,17 @@ es:
       default:
         brief:
           manage:
+            contact: Manage authorizations
             nil: Gestionar el sitio
             relation/custom: Gestionar los roles
-            contact: Manage authorizations
         detailed:
           manage:
             nil:
-              positive: PODRÁN actualizar los detalles del sitio
               negative: NO PODRÁN actualizar los detalles del sitio
+              positive: PODRÁN actualizar los detalles del sitio
             relation/custom:
-              positive: PODRÁN crear, actualizar y borrar los roles del sitio
               negative: NO PODRÁN crear, actualizar y borrar los roles del sitio
+              positive: PODRÁN crear, actualizar y borrar los roles del sitio
     public_info: Acceder a tu información pública
   relation_admin:
     name: Administrador de Sitio
@@ -47,8 +47,16 @@ es:
   site:
     client:
       added: Sitios añadidos
+      button:
+        edit: Editar
+      go_to_other: Ver tus otros sitios
       index:
         title: Sitios
       new:
         link: Añadir sitio
         title: Registrar nuevo sitio
+      oauth:
+        credentials: Credenciales
+        secret:
+          refresh: regenerar
+          refreshed: Token secreto de OAuth2 regenerado

@@ -2,68 +2,68 @@
 zh:
   chat:
     connecting: Connecting
-    reconnecting: Reconnecting
     disconnected: Disconnected
-    unableconnect: Out of Service
-    title: Chat
-    password: Password
-    zerousers: No users connected
-    search: Search contacts
-    zerocontacts: No contacts found
-    status:
-      choose: Choose status
-      available: Available
-      away: Away
-      dnd: Busy
-      offline: Offline
-    settings:
-      title: Enable and configure Social Stream Chat
-      checkbox: Enable or disable Social Stream Chat
-      update: Update Settings
-    notify:
-      offline: You are offline
-      guestOffline: '{{name}} is offline'
-    videochat:
-      disconnected: Videochat disconnected
-      disconnecting: Videochat disconnecting...
-      negotiating: Negotiating...
-      connectingWait: Connecting...
-      connecting: Connecting to the server...
-      waiting: Waiting for response...
-      establishing: Establishing...
-      connnected: Videochat connected.
-      unable: Unable to init videochat.
-      serverIssue: 'Server Error: Invalid response'
-      call: '{{name}} wants to start a video call'
-      rejected: '{{name}} has rejected your call'
-      rejectedBusy: '{{name}} is busy'
+    game:
       accept: Accept
+      call: '{{name}} wants to play a {{game}} game'
+      cancel: '{{name}} cancel the invitation'
+      clientIssue: '{{name}}''s client not support games'
       deny: Deny
-      clientIssue: '{{name}}''s client not support videochat'
+      finish: '{{name}} close the game'
       guestOffline: Unable to connect. {{name}} is offline
       offline: Unable to connect. You are offline
-      cancel: '{{name}} cancel the videocall'
-      requirements: You don't have the minimum requirements to run videocall application.
-        Please upgrade to the latest version of Flash.
+      rejected: '{{name}} has rejected your invitation'
+      rejectedBusy: '{{name}} is busy'
+      unable: Unable to init game.
+      unknown: Unknown response
+      waiting: Waiting for response...
     muc:
       group: '{{group}} group'
       join: '{{nick}} joined in the room.'
+      joinError: "You can't join in the room \n {{errorMsg}}"
+      joining: Joining...
       leave: '{{nick}} has left the room.'
       occupants: Occupants
-      joining: Joining...
-      joinError: "You can't join in the room \n {{errorMsg}}"
       offline: You are offline
-    game:
-      call: '{{name}} wants to play a {{game}} game'
+    notify:
+      guestOffline: '{{name}} is offline'
+      offline: You are offline
+    password: Password
+    reconnecting: Reconnecting
+    search: Search contacts
+    settings:
+      checkbox: Enable or disable Social Stream Chat
+      title: Enable and configure Social Stream Chat
+      update: Update Settings
+    status:
+      available: Available
+      away: Away
+      choose: Choose status
+      dnd: Busy
+      offline: Offline
+    title: Chat
+    unableconnect: Out of Service
+    videochat:
       accept: Accept
+      call: '{{name}} wants to start a video call'
+      cancel: '{{name}} cancel the videocall'
+      clientIssue: '{{name}}''s client not support videochat'
+      connecting: Connecting to the server...
+      connectingWait: Connecting...
+      connnected: Videochat connected.
       deny: Deny
-      offline: Unable to connect. You are offline
+      disconnected: Videochat disconnected
+      disconnecting: Videochat disconnecting...
+      establishing: Establishing...
       guestOffline: Unable to connect. {{name}} is offline
-      unable: Unable to init game.
-      rejected: '{{name}} has rejected your invitation'
+      negotiating: Negotiating...
+      offline: Unable to connect. You are offline
+      rejected: '{{name}} has rejected your call'
       rejectedBusy: '{{name}} is busy'
-      cancel: '{{name}} cancel the invitation'
-      finish: '{{name}} close the game'
+      requirements: You don't have the minimum requirements to run videocall application.
+        Please upgrade to the latest version of Flash.
+      serverIssue: 'Server Error: Invalid response'
+      unable: Unable to init videochat.
       waiting: Waiting for response...
-      unknown: Unknown response
-      clientIssue: '{{name}}''s client not support games'
+    zerocontacts: No contacts found
+    zerousers: No users connected

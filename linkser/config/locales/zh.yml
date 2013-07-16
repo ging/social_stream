@@ -1,7 +1,5 @@
 ---
 zh:
-  linkser:
-    title: Linkser
   link:
     by: by %{author}
     confirm_delete: Delete link?
@@ -15,3 +13,5 @@ zh:
     one: a link
     other: links
     title: Links
+  linkser:
+    title: Linkser

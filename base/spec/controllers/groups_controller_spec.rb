@@ -115,7 +115,18 @@ describe GroupsController do
         model_attributes[:user_author_id] = user.actor_id
       end
 
-      it_should_behave_like "Deny Creating"
+      it "should create but own" do
+        count = model_count
+        post :create, attributes
+
+        resource = assigns(demodulized_model_sym)
+
+        model_count.should eq(count + 1)
+        resource.should be_valid
+        resource.author.should eq(@user.actor)
+        resource.user_author.should eq(@user.actor)
+        response.should redirect_to(:home)
+      end
     end
 
     context "a external group" do

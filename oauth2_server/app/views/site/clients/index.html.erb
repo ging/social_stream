@@ -5,7 +5,7 @@
   <section class="site_clients">
     <header>
       <h3>
-        <%= link_to t('site.client.new.link'), new_site_client_path, class: "new_site_client-modal-link", 'data-toggle' => 'modal'  %>
+        <%= link_to t('site.client.new.link'), polymorphic_path(resource_class.new, action: 'new'), class: "new_site_client-modal-link", 'data-toggle' => 'modal'  %>
         
         <%= t 'site.client.added' %>
       </h3>
@@ -44,7 +44,7 @@
       <div class="tab-content">
         <div class="tab-pane active" id="tab1">
           <%= render partial: 'list',
-               object: @clients %>
+               object: collection %>
         </div>
     </div>
 

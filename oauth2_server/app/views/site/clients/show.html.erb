@@ -1,13 +1,14 @@
 <section id="site_client">
   <%= render partial: 'toolbar/home' %>
 
-  <section class="site_client" id="<%= dom_id @client %>">
+  <section class="site_client" id="<%= dom_id resource %>">
     <header>  
       <h4>
-        <%= @client.name %>
-        <a class="edit-phanton" href="#">
-          edit
-        </a>
+        <%= resource.name %>
+
+        <% if can?(:update, resource) %>
+          <%= link_to t('site.client.button.edit'), edit_site_client_path(resource), class: "edit-phanton" %>
+        <% end %>
       </h4>
 
       <%= image_tag('logos/app-default.png', class: "logo-app pull-right") %>
@@ -20,30 +21,30 @@
           <%= Site::Client.human_attribute_name :description %>
         </h4>
         <div class="result">
-          <%= @client.description%>
+          <%= resource.description%>
         </div>
 
         <h4>
           <%= Site::Client.human_attribute_name :url %>
         </h4>
         <div class="result">
-          <%= link_to @client.url, @client.url%>
+          <%= link_to resource.url, resource.url%>
         </div>
 
-        <% if can? :update, @client %>
+        <% if can? :update, resource %>
           <h4>
             <%= Site::Client.human_attribute_name :callback_url %>
           </h4>
           <div class="result">
-            <%= @client.callback_url %>
+            <%= resource.callback_url %>
           </div>
         <% end %>
       </div>
         
-      <% if can? :update, @client %>
-        <div class="btn-group">
+      <% if can? :update_secret, resource %>
+        <div class="btn-group dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            Credentials
+            <%= t 'site.client.oauth.credentials' %>
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
@@ -52,17 +53,19 @@
               <%= Site::Client.human_attribute_name :id %>
               </h6>
               <p>
-                <%= @client.id %>
+                <%= resource.id %>
               </p>
             </li>
 
             <li class="client-secret">
               <h6>
                 <%= Site::Client.human_attribute_name :secret %>
-                <a href="#" class="pull-right">refresh</a>
+                <%= form_tag update_secret_site_client_path(resource, format: :json), class: "site-client-secret" do %>
+                  <%= submit_tag t('site.client.oauth.secret.refresh'), class: 'pull-right' %>
+                <% end %>
               </h6>
               <p>
-                <%= @client.secret %>
+                <span class="site-client-secret"><%= resource.secret %></span>
               </p>
             </li>
           </ul>  
@@ -106,7 +109,7 @@
     <div class="tab-content">
       <div class="tab-pane active" id="authorized">
         <%= render partial: 'contacts/contact',
-                   collection: @client.sent_contacts.first(12) %>
+                   collection: resource.sent_contacts.first(12) %>
       </div>
 
       <div class="tab-pane" id="registered">
@@ -114,4 +117,7 @@
     </div>
   </div>
 
+  <%= javascript_tag do %>
+    SocialStream.SiteClient.show();
+  <% end %>
 </section>

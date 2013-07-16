@@ -4,8 +4,6 @@ module SocialStream
       extend ActiveSupport::Concern
 
       included do
-        include SocialStream::Controllers::Helpers
-
         inherit_resources
       end
 

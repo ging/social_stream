@@ -15,43 +15,51 @@ zh:
       accept: Accept
       cancel: Cancel
     new:
-      title: Authorize %{client}?
       permission:
         title: 'The site %{client} will be able to:'
-  permission:
-    public_info: Read your public information
-    description:
-      default:
-        brief:
-          manage:
-            nil: Manage the site
-            relation/custom: Manage roles
-            contact: Manage authorizations
-        detailed:
-          manage:
-            nil:
-              positive: They WILL BE ABLE to update the details of the client site
-              negative: They WILL NOT BE ABLE to update the details of the client
-                site
-            relation/custom:
-              positive: They WILL BE ABLE to create, update and delete the roles of
-                the client site
-              negative: They WILL NOT BE ABLE to create, update and delete the roles
-                of the client site
-  site:
-    client:
-      added: Added sites
-      index:
-        title: Client sites
-      new:
-        link: Add site
-        title: Register new client site
+      title: Authorize %{client}?
   helpers:
     submit:
       site_client:
         create: Next
         update: Save
+  permission:
+    description:
+      default:
+        brief:
+          manage:
+            contact: Manage authorizations
+            nil: Manage the site
+            relation/custom: Manage roles
+        detailed:
+          manage:
+            nil:
+              negative: They WILL NOT BE ABLE to update the details of the client
+                site
+              positive: They WILL BE ABLE to update the details of the client site
+            relation/custom:
+              negative: They WILL NOT BE ABLE to create, update and delete the roles
+                of the client site
+              positive: They WILL BE ABLE to create, update and delete the roles of
+                the client site
+    public_info: Read your public information
   relation_admin:
     name: Site Client Admin
   relation_manager:
     name: Manager
+  site:
+    client:
+      added: Added sites
+      button:
+        edit: Edit
+      go_to_other: See your other site clients
+      index:
+        title: Client sites
+      new:
+        link: Add site
+        title: Register new client site
+      oauth:
+        credentials: Credentials
+        secret:
+          refresh: refresh
+          refreshed: OAuth2 client secret regenerated

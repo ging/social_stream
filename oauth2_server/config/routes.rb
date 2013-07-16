@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :authorizations, only: :create
 
   namespace "site" do
-    resources :clients
+    resources :clients do
+      post :update_secret, on: :member
+    end
   end
 end

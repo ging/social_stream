@@ -11,7 +11,7 @@ module SocialStream
             c.author_id == subject.actor_id
         end
 
-        can [:update, :destroy], Site::Client do |c|
+        can [:update, :update_secret, :destroy], Site::Client do |c|
           c.allow? subject, 'manage'
         end
 

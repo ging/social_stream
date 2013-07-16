@@ -9,7 +9,6 @@ namespace :i18n do
         en_hash = h.dup
 
         each_key do |self_key|
-#          require 'debugger'; debugger
           en_val = en_hash.delete(self_key)
 
           case en_val
@@ -30,21 +29,42 @@ namespace :i18n do
           end
         end
 
+        # Merge missing keys
         merge! en_hash
+
+        # Order alphabetically
+        replace sort_by{ |k, v| k }.inject({}){ |h, a| h[a.first] = a.last; h }
       end
     end
 
     SocialStream::ALL_COMPONENTS.each do |c|
       path = "#{ c }/config/locales/"
+
       files = Dir[path + '*'].select{ |f| f =~ /\/\w+\.yml$/ }
+
       en = files.find{ |f| f =~ /\/en.yml$/ }
       files.delete(en)
+
       en_h = Psych.load_file(en)
 
       files.each do |f|
         h = Psych.load_file(f)
 
-        h.first.last.sync en_h.first.last
+        # Leave language_name at the begining of the hash
+        if c == "base"
+          orig_h = h.first.last
+          orig_en_h = en_h.first.last.dup
+
+          language_name = orig_h.delete('language_name')
+          language_name_en = orig_en_h.delete('language_name')
+          language_name ||= language_name_en 
+
+          orig_h.sync orig_en_h
+
+          h.first.last.replace({ 'language_name' => language_name }.merge!(orig_h))
+        else
+          h.first.last.sync en_h.first.last
+        end
 
         Psych.dump h, File.open(f, 'w')
       end
