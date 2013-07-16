@@ -3,12 +3,12 @@
 
   <section class="site_client" id="<%= dom_id @client %>">
     <header>  
-      <h1>
+      <h4>
         <%= @client.name %>
-        <a class="go-more" href="#">
-          ir a tus demás aplicaciones
+        <a class="edit-phanton" href="#">
+          edit
         </a>
-      </h1>
+      </h4>
 
       <%= image_tag('logos/app-default.png', class: "logo-app pull-right") %>
 
@@ -74,8 +74,7 @@
   <div class="tabbable"> <!-- Only required for left/right tabs -->
     <ul class="nav nav-tabs">
       <li class="active"><a href="#authorized" data-toggle="tab">Authorized</a></li>
-      <li><a href="#registered" data-toggle="tab">Registered</a></li>
-      <li><a href="#stats" data-toggle="tab">Stats</a></li>
+      <li><a href="#registered" data-toggle="tab">Users</a></li>
     </ul>
     <div class="search-nav hidden-phone">
       <%= form_tag search_path, method: 'get', class: "navbar-search pull-left" do %>
@@ -111,9 +110,6 @@
       </div>
 
       <div class="tab-pane" id="registered">
-      </div>
-
-      <div class="tab-pane" id="stats">
       </div>
     </div>
   </div>

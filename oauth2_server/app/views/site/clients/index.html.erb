@@ -11,10 +11,6 @@
       </h3>
     </header>
     <div class="tabbable"> <!-- Only required for left/right tabs -->
-      <ul class="nav nav-tabs">
-        <li class="active"><a href="#tab1" data-toggle="tab">Mine</a></li>
-        <li><a href="#tab2" data-toggle="tab">Others</a></li>
-      </ul>
       <div class="search-nav hidden-phone">
         <%= form_tag search_path, method: 'get', class: "navbar-search pull-left" do %>
           <%= text_field_tag :q, nil, autocomplete: :off, class: 'search-query input-small', placeholder: t('search.name'), "data-min_query" => SocialStream::Search::MIN_QUERY %>
@@ -39,6 +35,10 @@
           </div>
         </div>
       </div>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab1" data-toggle="tab">Mine</a></li>
+      </ul>  
+    </div>
 
 
       <div class="tab-content">
@@ -46,10 +46,6 @@
           <%= render partial: 'list',
                object: @clients %>
         </div>
-
-        <div class="tab-pane" id="tab2">
-        </div>
-      </div>
     </div>
 
     <%= render partial: 'new.modal' %>
