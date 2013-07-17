@@ -7,7 +7,7 @@
       <h3>
         <%= link_to t('site.client.new.link'), polymorphic_path(resource_class.new, action: 'new'), class: "new_site_client-modal-link", 'data-toggle' => 'modal'  %>
         
-        <%= t 'site.client.added' %>
+        Applications
       </h3>
     </header>
     <div class="tabbable"> <!-- Only required for left/right tabs -->
@@ -47,9 +47,6 @@
                object: collection %>
         </div>
     </div>
-
     <%= render partial: 'new.modal' %>
-
-    <hr class="soften">
   </section>
 </section>
