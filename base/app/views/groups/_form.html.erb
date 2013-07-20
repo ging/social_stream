@@ -20,7 +20,7 @@
     <%= f.label :owners %>
     <%= f.hidden_field :owners, 'data-path' => actors_path(format: :json) %>
   </section>
-  <section>
+  <section class="tags">
     <%= f.label :tags_list %>
     <%= f.text_field :tag_list, 'data-path' => tags_path(format: :json) %>
   </section>
