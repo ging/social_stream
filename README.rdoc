@@ -3,7 +3,6 @@
 Social Stream is an engine for Ruby on Rails. It provides a robust and flexible framework
 with {social networking}[http://en.wikipedia.org/wiki/Social_network] features and {activity streams}[http://activitystrea.ms/] for building websites.
 
-
 {<img src="https://secure.travis-ci.org/ging/social_stream.png" />}[http://travis-ci.org/ging/social_stream]
 {<img src="https://codeclimate.com/badge.png" />}[https://codeclimate.com/github/ging/social_stream]
 
