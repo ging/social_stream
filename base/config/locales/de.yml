@@ -1,552 +1,639 @@
+---
 de:
-  language_name: "German"
-  actor:
-    name: "Name"
-  action:
-    send: "Senden"
-    accept: "Akzeptieren"
+  language_name: German
   account:
-    cancel: "Profil löschen"
-    edit: "Profil ändern"
-    email: 
-      change: "Email Adresse ändern"
-    lang: 
-      change: "Sprache ändern"
-    one: "Profil"
+    cancel: Profil löschen
+    edit: Profil ändern
+    email:
+      change: Email Adresse ändern
+    lang:
+      change: Sprache ändern
+    one: Profil
     password:
-      change: "Passwort ändern"
-      new: "Neues Passwort"
-      retype: "Passwort wiederholen"
-    privacy: "Privatsphäre"
+      change: Passwort ändern
+      new: Neues Passwort
+      retype: Passwort wiederholen
+  action:
+    accept: Akzeptieren
+    send: Senden
   activerecord:
     attributes:
       contact:
-        relation_ids: "Kontakttyp"
+        relation_ids: Kontakttyp
       relation/custom:
-        name: "Name"
+        name: Name
       user:
-        email: "Email"
-        name: "Name"
-        password: "Passwort"
-        password_confirmation: "Passwort bestätigen"
-        remember_me: "Erinnerung"
+        email: Email
+        name: Name
+        password: Passwort
+        password_confirmation: Passwort bestätigen
+        remember_me: Erinnerung
   activity:
     audience:
       hidden:
-        summary: "Eigeschränkt"
-        full: "Zugänglich nur für folgende Kontakte: %{audience}"
+        full: 'Zugänglich nur für folgende Kontakte: %{audience}'
+        summary: Eigeschränkt
       public:
-        summary: "Öffentlich"
-        full: "Zugänglich für alle am Internet"
-      show: "Zeigen"
+        full: Zugänglich für alle am Internet
+        summary: Öffentlich
+      show: Zeigen
       visible:
-        summary: "Eingeschränkt"
-        full: "Zugänglich für %{audience}"
-    confirm_delete: "Aktivität löschen?"
-    delete: "Löschen"
-    last: "Letzte Aktivität"
-    like: "Gefällt mir"
+        full: Zugänglich für %{audience}
+        summary: Eingeschränkt
+    confirm_delete: Aktivität löschen?
+    delete: Löschen
+    last: Letzte Aktivität
+    like: Gefällt mir
     like_sentence:
-      one: "%{likers} gefällt das"
-      other: "%{likers} gefällt das"
-      more:
-    one: "Aktivität"
-    other: "Aktivitäten"
+      one: '%{likers} gefällt das'
+      other: '%{likers} gefällt das'
+    one: Aktivität
+    other: Aktivitäten
     privacy:
-      myself:
-        contacts:
-          group: "Alle Mitglieder"
-          user: "Deine Kontakte"
-      outside:
-        contacts:
-          group: "Mitglieder von %{receiver}"
-          user: "Kontakte von %{receiver}"
-    sending: "Senden"
+      contact:
+        myself:
+          group: All members
+          user: Your contacts
+        outside:
+          group: Members of %{receiver}
+          user: Contacts of %{receiver}
+      relation:
+        one: '%{count} group'
+        other: '%{count} groups'
+    sending: Senden
+    share: Share
+    share_loading: Sharing...
     stream:
-      atom_title: "Aktivitäten von %{subject}"
+      atom_title: Aktivitäten von %{subject}
       title:
-        follow: "%{author} hat %{activity_object} als Kontakt hinzugefügt"
-        like: "%{author} gefällt %{activity_object}"
-        make-friend: "%{author} hat auch %{activity_object} als Kontakt hinzugefügt"
-        post: "%{author} hat %{activity_object} gepostet"
-        updated: "%{author} hat %{activity_object} gepostet"
-    title: "Aktivitäten"
-    to_comment: "Kommentieren"
-    unlike: "Gefällt mir nicht mehr"
+        follow: '%{author} hat %{activity_object} als Kontakt hinzugefügt'
+        like: '%{author} gefällt %{activity_object}'
+        make-friend: '%{author} hat auch %{activity_object} als Kontakt hinzugefügt'
+        post: '%{author} hat %{activity_object} gepostet'
+        updated: '%{author} hat %{activity_object} gepostet'
+    title: Aktivitäten
+    to_comment: Kommentieren
+    unlike: Gefällt mir nicht mehr
     verb:
       follow:
-        User:
-          title: "%{subject} hat %{contact} als Kontakt hinzugefügt."
-          message: "%{name} hat dich als Kontakt hinzugefügt."
         Group:
-          title: "%{subject} hat %{contact} als Kontakt hinzugefügt."
-          message: "%{name} hat dich als Kontakt hinzugefügt."
+          message: '%{name} hat dich als Kontakt hinzugefügt.'
+          title: '%{subject} hat %{contact} als Kontakt hinzugefügt.'
+        User:
+          message: '%{name} hat dich als Kontakt hinzugefügt.'
+          title: '%{subject} hat %{contact} als Kontakt hinzugefügt.'
+      join:
+        one: '%{sender} ist %{title} %{thing} beigetreten.'
       like:
-        User:
-          title: "%{subject} ist ein Fan von %{contact}."
-          message: "%{name} ist dein Fan."
         Group:
-          title: "%{subject} ist ein Fan von %{contact}."
-          message: "%{name} ist dein Fan."
-      join: 
-        one: "%{sender} ist %{title} %{thing} beigetreten."
+          message: '%{name} ist dein Fan.'
+          title: '%{subject} ist ein Fan von %{contact}.'
+        User:
+          message: '%{name} ist dein Fan.'
+          title: '%{subject} ist ein Fan von %{contact}.'
       make-friend:
-        User:
-          title: "%{subject} und %{contact} sind verbunden."
-          message: "%{name} hat dich als Kontakt hinzugefügt."
         Group:
-          title: "%{subject} hat %{contact} als Kontakt hinzugefügt."
-          message: "%{name} hat dich als Kontakt hinzugefügt."           
+          message: '%{name} hat dich als Kontakt hinzugefügt.'
+          title: '%{subject} hat %{contact} als Kontakt hinzugefügt.'
+        User:
+          message: '%{name} hat dich als Kontakt hinzugefügt.'
+          title: '%{subject} und %{contact} sind verbunden.'
       post:
         title:
-          other_wall: "%{sender} â†’ %{receiver}"
+          other_wall: '%{sender} â†’ %{receiver}'
   activity_action:
-    follow: "Folgen"
+    follow: Folgen
     sentence:
       follow:
-        one: "%{followers} folgt hier"
-        other: "%{followers} folgen hier"
+        one: '%{followers} folgt hier'
+        other: '%{followers} folgen hier'
       more:
-        one: "%{count} Person mehr"
-        other: "%{count} Personen mehr"
-    unfollow: "Nicht mehr folgen"
-  browse: "Browsen"
+        one: '%{count} Person mehr'
+        other: '%{count} Personen mehr'
+    unfollow: Nicht mehr folgen
+  actor:
+    name: Name
+  ajax:
+    error: There was an error in the remote server
+  browse: Browsen
   button:
-    cancel: "Löschen"
-    create: "Erstellen"
-    save: "Speichern"
-    update: "Aktualisieren"
+    cancel: Löschen
+    create: Erstellen
+    save: Speichern
+    update: Aktualisieren
   cheesecake:
     changes:
-      details: "Details ändern"
-      none: "Keine Änderungen"
-      save: "Änderungen speichern"
-      saving: "Speichert..."
+      details: Details ändern
+      none: Keine Änderungen
+      save: Änderungen speichern
+      saving: Speichert...
     form:
-      editing: "Bearbeiten"
+      editing: Bearbeiten
       fields:
-        color: "Farbe"
-        name: "Name"
-        permissions: "Zugriffsrechte"
-        subsector: "Unterbereich"
+        color: Farbe
+        name: Name
+        permissions: Zugriffsrechte
+        subsector: Unterbereich
     select:
-      hint: "Auswahl durch Anklicken des Portraits"
+      hint: Auswahl durch Anklicken des Portraits
   comment:
-    input: "Kommentieren..."
-    confirm_delete: "Kommentar löschen?"
-    name: "Kommentar"
-    one: "Kommentar"
+    confirm_delete: Kommentar löschen?
+    input: Kommentieren...
+    name: Kommentar
+    one: Kommentar
+    other: comments
     title:
-      one: "Kommentar"
-      other: "Kommentare"
-    view_all: "Alle Kommentare anzeigen"
+      one: Kommentar
+      other: Kommentare
+    view_all: Alle Kommentare anzeigen
   contact:
-    addressbook: "Adressbuch"
-    all_n: "Alle Kontakte (%{count})"
-    confirm_delete: "Kontakt löschen?"
-    current: "Aktuell"
-    delete: "Löschen"
+    all_n: Alle Kontakte (%{count})
+    confirm_delete: Kontakt löschen?
+    current: Aktuell
+    delete: Löschen
     edit:
-      title: "Kontakt für %{name} bearbeiten"
-      submit: "Kontakt bearbeiten"
+      submit: Kontakt bearbeiten
+      title: Kontakt für %{name} bearbeiten
+    empty: You have not added anybody yet. What about <a href="%{explore}">exploring</a>?
     error_count:
-      one: "1 Fehler verhindert, dass dieser Kontakt gespeichert werden kann:"
-      other: "%{count} Fehler verhindern, dass dieser Kontakt gespeichert werden kann:"
-    follow: "Folgen"
-    following: "Folgt"
+      one: '1 Fehler verhindert, dass dieser Kontakt gespeichert werden kann:'
+      other: '%{count} Fehler verhindern, dass dieser Kontakt gespeichert werden kann:'
+    follow: Folgen
+    following: Folgt
     graph:
-      one: "Diagramm"
-      empty: "Du hast leider noch keine Kontakte ausgewählt. Im Suchfeld kannst du nach Kontakten suchen!"
+      empty: Du hast leider noch keine Kontakte ausgewählt. Im Suchfeld kannst du
+        nach Kontakten suchen!
+      one: Diagramm
     in_common:
-      one: "1 gemeinsamer Kontakt"
-      other: "%{count} gemeinsame Kontakte"
+      one: 1 gemeinsamer Kontakt
+      other: '%{count} gemeinsame Kontakte'
+    n:
+      one: '%{count} contact'
+      other: '%{count} contacts'
     new:
-      link: "+ Kontakt hinzufügen"
-      title: "%{name} zu Kontakten hinzufügen"
-      menu: "Kontakt hinzufügen"
-      submit: "Kontakt hinzufügen"
-    one: "Kontakt"
-    other: "Kontakte"
+      button:
+        one: '%{count} role'
+        other: '%{count} roles'
+        zero: Add
+      link: + Kontakt hinzufügen
+      menu: Kontakt hinzufügen
+      submit: Kontakt hinzufügen
+      title: '%{name} zu Kontakten hinzufügen'
+    one: Kontakt
+    other: Kontakte
     pending:
-      other: "Unbestätigt"
-      all: "Alle"
-      all_n: "Alle unbestätigten Anfragen anzeigen (%{count})"
+      all: Alle
+      all_n: Alle unbestätigten Anfragen anzeigen (%{count})
+      other: Unbestätigt
+    received: Received
     relation:
-      one: "Kontakttyp"
-      new: "Neuer Typ"
+      new: Neuer Typ
+      one: Kontakttyp
     reply:
-      link: "+ Kontakt antworten"
-      title: "Kontaktanfrage von %{name} antworten"
-      submit: "Kontakt antworten"
+      link: + Kontakt antworten
+      submit: Kontakt antworten
+      title: Kontaktanfrage von %{name} antworten
+    saving: Saving...
+    sent: Added
     suggestion:
-      one: "Vorschlag"
-      other: "Vorschläge"
-      all: "Alle"
+      all: Alle
+      one: Vorschlag
+      other: Vorschläge
     type:
-      new: "+ Neuer Typ"
-    unfollow: "Nicht mehr folgen"
-  copyright: "2010 Copyright – Alle Rechte vorbehalten"
+      new: + Neuer Typ
+    unfollow: Nicht mehr folgen
+    view_all: View all...
+  copyright: 2010 Copyright – Alle Rechte vorbehalten
+  counter:
+    like:
+      one: <span class="counter">%{count}</span> like
+      other: <span class="counter">%{count}</span> likes
+    view:
+      one: <span class="counter">%{count}</span> view
+      other: <span class="counter">%{count}</span> views
   delete:
     confirm: Löschen %{element}}?
   devise:
     links:
-      sign_in: "Einsteigen"
-      sign_up: "Anmelden"
-      forgot_password: "Passwort vergessen?"
-      confirmation_instructions: "Keine Anweisungen zur Bestätigung bekommen?"
-      unlock_instructions: "Keine Anweisungen zum Freischalten bekommen?"
-      sign_in_with: "Einsteigen mit %{provider}"
+      confirmation_instructions: Keine Anweisungen zur Bestätigung bekommen?
+      forgot_password: Passwort vergessen?
+      sign_in: Einsteigen
+      sign_in_with: Einsteigen mit %{provider}
+      sign_up: Anmelden
+      unlock_instructions: Keine Anweisungen zum Freischalten bekommen?
     passwords:
-      confirm: "Passwort bestätigen"
-      forgot: "Passwort vergessen?"
-      instructions: "Gib bitte die e-mail Adresse ein, unter der du dich angemeldet hast, und wir schicken dir Anweisungen, wie du dein Passwort ändern kannst"
+      confirm: Passwort bestätigen
+      forgot: Passwort vergessen?
+      instructions: Gib bitte die e-mail Adresse ein, unter der du dich angemeldet
+        hast, und wir schicken dir Anweisungen, wie du dein Passwort ändern kannst
+      update: Change your password
+  dropdown:
+    notifications: Notifications
+    privacy: Privacy
+    settings: Settings
+  explore:
+    explore:
+      most_followed: Most followed
+      most_popular: Most popular
+    header:
+      explore: Explore
+      participants: Participants
+      resources: Resources
+      search: Search
+      tags: Tags
+      timeline: Timeline
+    link: Explore
+    or: or Explore
+    participants:
+      last_active: Last active
+      last_registered: Last registered
+      most_members: Most members
+      registered_since: since %{time}
+    resources:
+      last_uploaded: Last uploaded
+      most_visited: Most viewed
+      uploaded_since: since %{time}
+    search:
+      placeholder: looking for...
+      submit: Search
+      title: Advanced search
   follower:
     follower:
-      title: "Followers"
+      title: Followers
     following:
-      title: "Folgt"
+      title: Folgt
     n:
-      one: "1 Follower"
-      other: "%{count} Followers"
-  forgot_password: "Passwort vergessen?"
+      one: 1 Follower
+      other: '%{count} Followers'
+  forgot_password: Passwort vergessen?
   frontpage:
-    collaborate:
-      default: "Zusammenarbeiten"
-      sentence1: "Deine Projekte und Aktivitäten organisieren"
-      sentence2: "An Konferenzen und Events teilnehmen"
-      sentence3: "Eigene Gruppen und Konferenzen anlegen"
-    elements:
-      comments: "Kommentare"
-      conferences: "Konferenzen"
-      networks: "Soziale Netzwerke"
-      organizers: "Organisatoren"
-      participants: "Teilnehmer"
-      groups: "Gruppen"
-      tags: "Tags"
-    main_title: "Social Stream ist ein Kernelement, um soziale Netzwerkseiten zu erstellen."
-    meet:
-      default: "Treffen"
-      sentence1: "Interessante Personen und Gruppen treffen"
-      sentence2: "Finde die jüngsten Aktivitäten deiner Kontakte"
-    register: "Register now!"
-    share:
-      default: "Teilen"
-      sentence1: "Deine Projekte und Aktivitäten"
-      sentence2: "Beiträge, Fotos, Audio und Videos"
-    stats: "%{users} Nutzer und %{groups} Gruppen registriert"
+    main_title: Social Stream ist ein Kernelement, um soziale Netzwerkseiten zu erstellen.
+    presentation:
+      community:
+        header: Community
+        p: Social Stream enjoys a growing community of developers. Feel free to drop
+          a message at <a href="http://groups.google.com/group/social-stream">Social
+          Stream's Google group</a> or <a href="http://stackoverflow.com/questions/tagged/social-stream">StackOverflow</a>
+          if you have problems. <a href="https://github.com/ging/social_stream/issues/new">Open
+          an issue</a> if you find a defect. Pull request are very welcomed!
+      flexible:
+        header: Flexible
+        p: Completely customize your social network <a href="https://github.com/ging/social_stream/wiki/How-to-change-controllers%2C-models%2C-views%2C-assets-and-locales">changing
+          any Social Stream component</a>, <a href="https://github.com/ging/social_stream/wiki/How-to-add-new-activity-objects">adding
+          new activity objects</a> or changing the CSS using <a href="http://sass-lang.com/">Sass</a>
+      modular:
+        header: Modular
+        p: Available <a href="https://github.com/ging/social_stream#social-stream-components">Social
+          Stream components</a> provide your application only with the features you
+          need in your social network. Just add your desired gems to your Gemfile
+    stats: '%{users} Nutzer und %{groups} Gruppen registriert'
   group:
-    one: "Gruppe"
-    other: "Gruppen"
-    all: "Alle Gruppen"
-    all_n: "Alle Gruppen (%{count})"
-    by: "Nach Gruppe"    
+    all: Alle Gruppen
+    all_n: Alle Gruppen (%{count})
+    by: Nach Gruppe
+    cloud: Tag Cloud der Gruppe
     destroy:
-      one: "Gruppe auflösen"
-      explanation: "Alle Aktivitäten, Informationen und Kontakte dieser Gruppe werden gelöscht!"
-      go_ahead: "Ja, ich bin sicher. Alles löschen!"
-      last_confirm: "Das ist deine lezte Chance. Bist du wirklich sicher?"
+      explanation: Alle Aktivitäten, Informationen und Kontakte dieser Gruppe werden
+        gelöscht!
+      go_ahead: Ja, ich bin sicher. Alles löschen!
+      last_confirm: Das ist deine lezte Chance. Bist du wirklich sicher?
+      one: Gruppe auflösen
     form:
-      title: "Gruppe"
-    input: "Name der Gruppe?"
-    last: "Letzte Gruppe"
-    my: "Meine Gruppen"
-    new:
-      action: "Neue Gruppe"
-      name: "Name"
-      description: "Beschreibung"
-      participants: "Teilnehmer"
-    cloud: "Tag Cloud der Gruppe"
+      title: Gruppe
+    input: Name der Gruppe?
+    last: Letzte Gruppe
     most:
-      followed: "Am moisten gefolgt"
-      liked: "Am moisten gefällt"
-    tags: "Tags"
+      followed: Am moisten gefolgt
+      liked: Am moisten gefällt
+    my: Meine Gruppen
+    n:
+      one: '%{count} group'
+      other: '%{count} groups'
+    new:
+      description: Beschreibung
+      link: New group
+      name: Name
+      participants: Teilnehmer
+      title: New group
+    one: Gruppe
+    other: Gruppen
+    tags: Tags
     title:
-      one: "Gruppe"
-      other: "Gruppen"
-  help: "Hilfe"
+      one: Gruppe
+      other: Gruppen
+    view_all: View all...
+  header:
+    icon:
+      contacts: Contacts
+      home: Home
+      messages: Messages
+      repository: Repository
+  help: Hilfe
   helpers:
     submit:
       relation_custom:
-        create: "Speichern"
-        update: "Aktualisieren"
-  home: "Home"
+        create: Speichern
+        update: Aktualisieren
+  home: Home
   inbox:
-    one: "Inbox"
+    one: Inbox
   invitation:
-    e-mails: "E-mail Adressen"
-    error: "Deine Anfrage konnte nicht bearbeitet werden. Bitte überprüfe, ob die E-mail Addressen korrekt sind."
-    invited: "%{sender} hat dich eingeladen zu %{site}!"
-    join: "Lade andere Personen zu %{site} ein!"
-    join_me: "Mach mit bei %{site}!"
-    one: "Einladung"
-    other: "Einladungen"
-    toolbar: "Einladen"
-    success: "Deine Einladungen wurden erfolgreich versandt"
-    text: "Schreibe deine eigene Nachricht"
+    e-mails: E-mail Adressen
+    error: Deine Anfrage konnte nicht bearbeitet werden. Bitte überprüfe, ob die E-mail
+      Addressen korrekt sind.
+    invited: '%{sender} hat dich eingeladen zu %{site}!'
+    join: Lade andere Personen zu %{site} ein!
+    join_me: Mach mit bei %{site}!
+    one: Einladung
+    other: Einladungen
+    success: Deine Einladungen wurden erfolgreich versandt
+    text: Schreibe deine eigene Nachricht
+    toolbar: Einladen
+  lang:
+    browser: Sprache des Browsers automatisch erkennen
+    none: Sprachunabhängiger Inhalt
+  layout:
+    more: See more (%{count})
   like:
     n:
-      one: "1 Fan"
-      other: "%{count} Fans"
+      one: 1 Fan
+      other: '%{count} Fans'
   location:
-    message: "Du bist hier > %{location}"
-    base: "Du bist hier"
-    separator: " > "
+    base: Du bist hier
+    message: Du bist hier > %{location}
+    separator: ' > '
   mailboxer:
-    delete: "Löschen"
-    delete_confirm: "Möchtest du '%{object}' in den Papierkorb verschieben?"
+    delete: Löschen
+    delete_confirm: Möchtest du '%{object}' in den Papierkorb verschieben?
     form:
-      body: "Text"
-      recipients: "Empfänger"
-      subject: "Titel"
-    mark_as_read: "Als gelesen markieren"
+      body: Text
+      recipients: Empfänger
+      subject: Titel
+    mark_as_read: Als gelesen markieren
     message_mailer:
-      has_sent_new: 
-        event: "hat eine neue Nachricht an %{receiver} geschickt"
-        group: "hat eine neue Nachricht an %{receiver} geschickt"
-        user: "hat dir eine neue Nachricht geschickt"
-      has_sent_reply: 
-        event: "hat eine Antwort an %{receiver} geschickt"
-        group: "hat eine Antwort an %{receiver} geschickt"
-        user: "hat dir eine Antwort geschickt"
-      subject_new: "%{subject}"
-      subject_reply: "%{subject}"
+      has_sent_new:
+        event: hat eine neue Nachricht an %{receiver} geschickt
+        group: hat eine neue Nachricht an %{receiver} geschickt
+        user: hat dir eine neue Nachricht geschickt
+      has_sent_reply:
+        event: hat eine Antwort an %{receiver} geschickt
+        group: hat eine Antwort an %{receiver} geschickt
+        user: hat dir eine Antwort geschickt
+      subject_new: '%{subject}'
+      subject_reply: '%{subject}'
     notification_mailer:
-      subject: "%{subject}"
-    reply: "Antwort"
-    send: "Nachricht senden"
-    sent: "Deine Nachricht wurde versandt"
+      subject: '%{subject}'
+    reply: Antwort
+    send: Nachricht senden
+    sent: Deine Nachricht wurde versandt
   menu:
-    options: "Menü Optionen"
-    information: "Information"
-    wall: "Wall"
+    information: Information
+    options: Menü Optionen
+    wall: Wall
   message:
-    answer: "Schreibe deine Antwort"
-    inbox: "Inbox"
-    look: "Diese Konversation anschauen"
-    new: "Neue Nachricht"
-    one: "Nachricht"
-    other: "Nachrichten"
-    participants: "Teilnehmer"
-    send: "Eine Nachricht senden"
-    sentbox: "gesendete Nachrichten"
-    trash: "Papierkorb"
+    answer: Schreibe deine Antwort
+    inbox: Inbox
+    look: Diese Konversation anschauen
+    new: Neue Nachricht
+    one: Nachricht
+    other: Nachrichten
+    participants: Teilnehmer
+    send: Eine Nachricht senden
+    sentbox: gesendete Nachrichten
+    trash: Papierkorb
   notification:
-    all_text: "Den gesamten Text unter %{url} lesen"
-    confirm: " %{sender} als Kontakt bestätigen?"
-    default: "Du hast eine Benachrichtigung"
-    destroy_sure: "Willst du diese Benachrichtigung löschen?"
-    fan: "%{sender} ist %{whose} Fan."
+    all_text: Den gesamten Text unter %{url} lesen
+    confirm: ' %{sender} als Kontakt bestätigen?'
+    default: Du hast eine Benachrichtigung
+    destroy_sure: Willst du diese Benachrichtigung löschen?
+    fan: '%{sender} ist %{whose} Fan.'
     follow:
-      group: "%{sender} hat %{who} als Kontakt hinzugefügt."
-      user: "%{sender} hat %{who} als Kontakt hinzugefügt."
-    hello: "Hallo %{receiver},"
+      group: '%{sender} hat %{who} als Kontakt hinzugefügt.'
+      user: '%{sender} hat %{who} als Kontakt hinzugefügt.'
+    hello: Hallo %{receiver},
     like:
-      group: "%{sender} gefällt %{whose} %{thing}." 
-      user: "%{sender} gefällt %{whose} %{thing}."
-    look: "Schau dir doch %{sender}'s Wall an"
+      group: '%{sender} gefällt %{whose} %{thing}.'
+      user: '%{sender} gefällt %{whose} %{thing}.'
+    look: Schau dir doch %{sender}'s Wall an
     makefriend:
-      group: "%{sender} hat auch %{who} als Kontakt hinzugefügt."
-      user: "%{sender} hat auch %{who} als Kontakt hinzugefügt."
-    one: "Benachrichtigung"
-    other: "Benachrichtigungen"
+      group: '%{sender} hat auch %{who} als Kontakt hinzugefügt.'
+      user: '%{sender} hat auch %{who} als Kontakt hinzugefügt.'
+    one: Benachrichtigung
+    other: Benachrichtigungen
     post:
-      group: "%{title} -- von %{sender} in %{whose} Wall"
-      user: "%{title} -- von %{sender} in %{whose} Wall"
-    read: "Als gelesen markieren"
-    read_all: "Alle als gelesen markieren"
-    unread: "Als ungelesen markieren"
+      group: '%{title} -- von %{sender} in %{whose} Wall'
+      user: '%{title} -- von %{sender} in %{whose} Wall'
+    read: Als gelesen markieren
+    read_all: Alle als gelesen markieren
+    unread: Als ungelesen markieren
     update:
-      group: "%{sender} hat %{thing} in %{whose} Wall aktualisiert."
-      user: "%{sender} hat %{thing} in %{whose} Wall aktualisiert."
-    visit: "Gehe auf %{url} und überprüfe alle deine Benachrichtigungen."
-    watch: "Unter %{url} anschauen"
-    watch_it: "Anschauen!"
+      group: '%{sender} hat %{thing} in %{whose} Wall aktualisiert.'
+      user: '%{sender} hat %{thing} in %{whose} Wall aktualisiert.'
+    visit: Gehe auf %{url} und überprüfe alle deine Benachrichtigungen.
+    watch: Unter %{url} anschauen
+    watch_it: Anschauen!
     who:
-      group: "%{name}"
-      user: "Du"
-    whose: 
-      group: "%{receiver}'s"
-      user: "Dein"
-  post:
-    confirm_delete: "Beitrag löschen?"
-    form:
-      title: "Beitrag"
-    input: "Was machst du gerade?"
-    name: "Beitrag"
-    one: "ein Beitrag"
-    title:
-      one: "Beitrag"
-      other: "Beiträge"
-  preposition:
-    and: "und"
-    on: "auf"
-  profile:
-    one: "Profil"
-    age: "Alter"
-    is_on: "ist auf"
-    must_be_signed_id: "Du musst angemeldet sein"
-    group:
-      about: "Über uns"
-      birthday: "Jahrestag"
-      experience: "Fachliche Expertise"
-      info: "Information über Gruppe"
-      tags: "Tags der Gruppe"
-    user:
-      about: "Über mich"
-      birthday: "Geburtstag"
-      experience: "Erfahrung"
-      info: "Persönliche Information"
-      tags: "Tags des Benutzers"
-    actualcity: "Derzeitiger Wohnort"
-    address: "Adresse"
-    contact: "Kontakt Information"
-    country: "Land"
-    email: "E-mail"
-    empty: "Diese Felder sind leer. Kannst du sie bitte ergänzen."
-    fax: "Fax"
-    mobile: "Mobiltelefonnummer"
-    organization: "Organisation"
-    phone: "Telefonnummer"
-    profile: "Profile editieren"
-    tags:
-      default: "sozial, Stream,"
-      other: "Tags"
-    website: "Webseite" 
-    update:
-      error: "Überprüfe bitte das Format in deinem Profil:"
-      success: "Dein Profil wurde aktualisiert"     
-  public:
-    other: "Alle"
+      group: '%{name}'
+      user: Du
+    whose:
+      group: '%{receiver}''s'
+      user: Dein
   permission:
     description:
       default:
         brief:
-          create: 
-            activity: "Beitrag auf deine Wall stellen"
+          create:
+            activity: Beitrag auf deine Wall stellen
           follow:
-            nil: "Ihren Aktiviäten folgen"
-          read:
-            activity: "Deine Wall ansehen"
-          represent:
-            nil: "Verwalten"
+            nil: Ihren Aktiviäten folgen
           notify:
-            nil: "Benachritigen"
+            nil: Benachritigen
+          read:
+            activity: Deine Wall ansehen
+          represent:
+            nil: Verwalten
         detailed:
           create:
             activity:
-              positive: "Sie können neue Aktivitäten auf deine Wall posten"
-              negative: "Sie können KEINE Aktivitäten auf deine Wall posten"
+              negative: Sie können KEINE Aktivitäten auf deine Wall posten
+              positive: Sie können neue Aktivitäten auf deine Wall posten
           follow:
             nil:
-              positive: "Aktivitäten der Kontakte in %{relation} werden auf deiner Wall angezeigt"
-              negative: "Aktivitäten der Kontakte in %{relation} werden NICHT auf deiner Wall angezeigt"
-          read:
-            activity:
-              positive: "Sie können die Beiträge auf deiner Wall ansehen, außer jene Beiträge, die nur für bestimmte Kontakte freigeschaltet sind"
-              negative: "Sie können KEINE Beiträge auf deiner Wall ansehen, außer jene, die als öffentlich gekennzeichnet sind"
-          represent:
-            nil:
-              positive: "Sie können die Session ändern und als %{subject} agieren"
-              negative: "Sie können die Session NICHT ändern und auch NICHT als %{subject} agieren"
+              negative: Aktivitäten der Kontakte in %{relation} werden NICHT auf deiner
+                Wall angezeigt
+              positive: Aktivitäten der Kontakte in %{relation} werden auf deiner
+                Wall angezeigt
           notify:
             nil:
-              positive: "Aktivitäten werden den Kontakten unter %{name} angezeigt"
-              negative: "Aktivitäten warden den Kontakten unter %{name} NICHT angezeigt"
+              negative: Aktivitäten warden den Kontakten unter %{name} NICHT angezeigt
+              positive: Aktivitäten werden den Kontakten unter %{name} angezeigt
+          read:
+            activity:
+              negative: Sie können KEINE Beiträge auf deiner Wall ansehen, außer jene,
+                die als öffentlich gekennzeichnet sind
+              positive: Sie können die Beiträge auf deiner Wall ansehen, außer jene
+                Beiträge, die nur für bestimmte Kontakte freigeschaltet sind
+          represent:
+            nil:
+              negative: Sie können die Session NICHT ändern und auch NICHT als %{subject}
+                agieren
+              positive: Sie können die Session ändern und als %{subject} agieren
     of_relation:
-      choose: "2. Berechtigung in <strong>%{name}</strong> Sphäre"
+      choose: 2. Berechtigung in <strong>%{name}</strong> Sphäre
+    postit: Manage the permissions of your contacts and create new roles
+  post:
+    confirm_delete: Beitrag löschen?
+    form:
+      title: Beitrag
+    input: Was machst du gerade?
+    name: Beitrag
+    one: ein Beitrag
+    other: posts
+    title:
+      one: Beitrag
+      other: Beiträge
   privacy:
-    intro: "Kontakte unter <strong>%{relation}</strong> haben nur die Berechtigung zu:"
+    intro: 'Kontakte unter <strong>%{relation}</strong> haben nur die Berechtigung
+      zu:'
     rule:
-      add: "Dazufügen"
-      title: "Regeln zur Privatsphäre"
-      saved: " Regeln zur Privatsphäre gespeichert"
+      add: Dazufügen
+      saved: ' Regeln zur Privatsphäre gespeichert'
+      title: Regeln zur Privatsphäre
+  profile:
+    actualcity: Derzeitiger Wohnort
+    address: Adresse
+    age: Alter
+    contact: Kontakt Information
+    country: Land
+    email: E-mail
+    empty: Diese Felder sind leer. Kannst du sie bitte ergänzen.
+    fax: Fax
+    group:
+      about: Über uns
+      birthday: Jahrestag
+      experience: Fachliche Expertise
+      info: Information über Gruppe
+      tags: Tags der Gruppe
+    is_on: ist auf
+    mobile: Mobiltelefonnummer
+    must_be_signed_id: Du musst angemeldet sein
+    one: Profil
+    organization: Organisation
+    phone: Telefonnummer
+    profile: Profile editieren
+    tags:
+      default: sozial, Stream,
+      other: Tags
+    update:
+      error: 'Überprüfe bitte das Format in deinem Profil:'
+      success: Dein Profil wurde aktualisiert
+    user:
+      about: Über mich
+      birthday: Geburtstag
+      experience: Erfahrung
+      info: Persönliche Information
+      tags: Tags des Benutzers
+    website: Webseite
+  public:
+    other: Alle
   relation_custom:
-    choose: "1. Bereich auswählen"
-    confirm_delete: "Diesen Bereich löschen?"
-    delete: "Löschen"
-    edit: "Name ändern"
-    new: "+ Neuer Bereich"
-    title: "Privatsphäre & Kontext"
+    confirm_delete: Diesen Bereich löschen?
+    delete: Löschen
+    edit: Name ändern
+    list:
+      title: Roles
+    new: + Neuer Bereich
+    title: Privatsphäre & Kontext
+  relation_owner:
+    name: Owner
   relation_public:
-    name: "Öffentlich"
+    name: Öffentlich
+  repository:
+    filter: filter
+    order:
+      by: Order by
+      last_modified: Last modified
+      most_popular: Most popular
+    title: Repository
   representation:
-    notice: "Deine Session hat sich geändert. Jetzt bist du als %{subject} aktiv. Benutze das Menü rechts oben, um zu deiner Session zurückzukehren"
-    switch: "Session wechseln"
-  required: "(*) Diese Felder sind erforderlich"
+    notice: Deine Session hat sich geändert. Jetzt bist du als %{subject} aktiv. Benutze
+      das Menü rechts oben, um zu deiner Session zurückzukehren
+    switch: Session wechseln
+  required: (*) Diese Felder sind erforderlich
   search:
-    all_results: "Alles suchen %{subject} (%{count})"
-    at_least: "Bitte mindestens zwei Buchstaben schreiben"
-    global: 
-      name: "Allgemeine Suche"
+    all_results: Alles suchen %{subject} (%{count})
+    at_least:
+      one: Write at least %{count} character
+      other: Write at least %{count} characters
+    global:
       first_result:
-        more: "Die ersten %{count} Ergebnisse anzeigen."
-        one: "Das erste Ergebnis anzeigen."
-      query: "Mehr Ergebnisse für %{query} ansehen>"
-    name: "Search"
-    no_subject_found: "Es wurde kein %{subject} gefunden."
-    nothing: "Leider nichts gefunden"
-    searching: "Suche: %{query}"
-    show_all: "Alle"
-    write: "Formuliere deine Suche ..."
-    wrong: "Es scheint ein Problem mit der Suchmaschine aufgetreten zu sein"
+        more: Die ersten %{count} Ergebnisse anzeigen.
+        one: Das erste Ergebnis anzeigen.
+      name: Allgemeine Suche
+      query: Mehr Ergebnisse für %{query} ansehen>
+    name: Search
+    no_subject_found: Es wurde kein %{subject} gefunden.
+    nothing: Leider nichts gefunden
+    searching: 'Suche: %{query}'
+    show_all: Alle
+    write: Formuliere deine Suche ...
+    wrong: Es scheint ein Problem mit der Suchmaschine aufgetreten zu sein
   settings:
     api_key:
-      briefing: "Veralte deinen API Schlüssel"
-      confirm: "Bist du sicher?"
-      empty: "Leerer Token"
-      explanation: "das ist dein API Schüssel"
-      name: "API Schlüssel"
-      regenerate: "API Schlüssel neu generieren"
+      briefing: Veralte deinen API Schlüssel
+      confirm: Bist du sicher?
+      empty: Leerer Token
+      explanation: das ist dein API Schüssel
+      name: API Schlüssel
+      regenerate: API Schlüssel neu generieren
     cancel_account:
-      briefing: "Dein Benutzerkonto löschen"
+      briefing: Dein Benutzerkonto löschen
     email_change:
-      briefing: "Deine e-mail ändern"
+      briefing: Deine e-mail ändern
+    error: Beim Speichern deiner Änderungen sind Fehler aufgetreten
+    for: Einstellungen für
     lang_change:
-      briefing: "Deine Sprache ändern"
-      name: "Sprache ändern"
-    error: "Beim Speichern deiner Änderungen sind Fehler aufgetreten"
-    for: "Einstellungen für"
-    main: "Einstellungen"
+      briefing: Deine Sprache ändern
+      name: Sprache ändern
+    main: Einstellungen
     manage:
-      name: "Administrator Kontakt"
-      briefing: "Einstellungen für Kontakte"
-      explanation: "Zugriffsrechte der Kontakte ändern"
+      briefing: Einstellungen für Kontakte
+      explanation: Zugriffsrechte der Kontakte ändern
+      name: Administrator Kontakt
     notifications:
-      briefing: "Einstellungen zu Benachrichtigungen und e-mail Verständigungen"
-      name: "Benachrichtigungen"
+      briefing: Einstellungen zu Benachrichtigungen und e-mail Verständigungen
       by_email:
-        name: "Bei Benachrichtigung e-mail schicken"
-        always: "Immer"
-        never: "Nie"
-    one: "Einstellungen"
+        always: Immer
+        name: Bei Benachrichtigung e-mail schicken
+        never: Nie
+      name: Benachrichtigungen
+    one: Einstellungen
     password_change:
-      briefing: "Passwort ändern"
-    success: "Deine Einstellungen wurden geändert"
-  share: "Teilen"
-  sign_in: "Einsteigen"
-  sign_out: "Aussteigen"
-  sign_up: "Anmelden"
+      briefing: Passwort ändern
+    success: Deine Einstellungen wurden geändert
+  share: Teilen
+  sign_in: Einsteigen
+  sign_out: Aussteigen
+  sign_up: Anmelden
   site:
-    name: "Social Stream"
+    current:
+      description: A framework for building distributed social network websites
+      keywords: social stream,social software,framework,ruby on rails
+      title: Social Stream
+    name: Social Stream
   subject:
-    this_is_you: "Das bist du!"
-  sure: "Bist du sicher?"
+    this_is_you: Das bist du!
+  sure: Bist du sicher?
   time:
-    ago: "vor %{time}"
-  unknown: "Unbekannt"
+    ago: vor %{time}
+  unknown: Unbekannt
   user:
-    all: "Alle Benutzer"
-    all_n: "Alle Benutzer (%{count})"
-    by: "Nach Benutzer"
-    one: "Benutzer"
-    other: "Benutzer"
+    all: Alle Benutzer
+    all_n: Alle Benutzer (%{count})
+    by: Nach Benutzer
+    one: Benutzer
+    other: Benutzer
     title:
-      one: "Benutzer"
-      other: "Benutzer"
-  welcome: "Willkommen bei %{site}!"
-  lang:
-    browser: "Sprache des Browsers automatisch erkennen"
-    none: "Sprachunabhängiger Inhalt"
-
-
-  
+      one: Benutzer
+      other: Benutzer
+  welcome: Willkommen bei %{site}!

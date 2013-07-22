@@ -1,14 +1,17 @@
+---
 fr:
-  linkser:
-    title: "Linkser"
   link:
-    confirm_delete: "Supprimer le lien ?"
+    by: by %{author}
+    confirm_delete: Supprimer le lien ?
     errors:
-      loading: "Erreur de chargement"
-      only_webs: "Seules les pages Web sont prises en charge"
+      loading: Erreur de chargement
+      only_webs: Seules les pages Web sont prises en charge
     form:
-      title: "Lien"
-    input: "Saisir l'adresse Web"
-    name: "lien"
-    one: "un lien"
-    title: "Liens"
+      title: Lien
+    input: Saisir l'adresse Web
+    name: lien
+    one: un lien
+    other: links
+    title: Liens
+  linkser:
+    title: Linkser

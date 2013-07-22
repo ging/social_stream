@@ -1,78 +1,93 @@
+---
 nl:
   activerecord:
     attributes:
       document:
-        title: "Titel"
+        title: Titel
+    models:
+      document: File
   audio:
-    confirm_delete: "Audio verwijderen?"
-    title: "Audio’s"
-    mine: "Mijn audio’s"
-    name: "audio"
-    not_mine: "Audio’s"
-    one: "een audio"
-    processing: "Bezig met bewerken audioclip. Wachten..."
+    confirm_delete: Audio verwijderen?
+    mine: Mijn audio’s
+    name: audio
+    not_mine: Audio’s
+    one: een audio
+    other: audios
+    processing: Bezig met bewerken audioclip. Wachten...
     title:
-      one: "Audio"
-      other: "Audio’s"
+      one: Audio
+      other: Audio’s
   details:
-    msg: "Zie bijzonderheden..."
+    msg: Zie bijzonderheden...
   document:
     actions:
-      delete: "Verwijderen"
-      details: "Bijzonderheden"
-      download: "Downloaden"
-      edit: "Bewerken"
-    all: "Alle bestanden"
-    confirm_delete: "Bestand verwijderen?"
+      delete: Verwijderen
+      details: Bijzonderheden
+      download: Downloaden
+      edit: Bewerken
+    all: Alle bestanden
+    by: by %{author}
+    confirm_delete: Bestand verwijderen?
+    description:
+      input: Add a description here
+    filter: filter
     form:
-      title: "Bestand"
+      title: Bestand
     info:
+      author: Author
       date:
-        created_at: "Gecreëerd op"
-        updated_at: "Geüpdatet op"
+        created_at: Gecreëerd op
+        updated_at: Geüpdatet op
       description:
-        title: "Beschrijving"
+        title: Beschrijving
       file:
-        title: "Uploaden"
+        title: Uploaden
+      size: Size
+      tags: Tags
       title:
-        title: "Titel"
-    mine: "Mijn bestanden"
-    name: "bestand"
-    not_mine: "Bestanden"
-    one: "een bestand"
-    simple_all: "Alle"  
+        title: Titel
+    mine: Mijn bestanden
+    name: bestand
+    new:
+      link: Add file
+      title: New file
+    new_activity:
+      attach: Attach file
+    not_mine: Bestanden
+    one: een bestand
+    other: files
+    scope:
+      network: Network
+      own: Own
+    simple_all: Alle
     title:
-      one: "Bestand"
-      other: "Bestanden"
+      input: File title
+      one: Bestand
+      other: Bestanden
   picture:
-    confirm_delete: "Afbeelding verwijderen?"
-    mine: "Mijn afbeeldingen"  
-    name: "afbeelding"
-    not_mine: "Afbeeldingen"
-    one: "een afbeelding"
+    confirm_delete: Afbeelding verwijderen?
+    mine: Mijn afbeeldingen
+    name: afbeelding
+    not_mine: Afbeeldingen
+    one: een afbeelding
+    other: pictures
     title:
-      one: "Afbeelding"
-      other: "Afbeeldingen"
-  repository:
-    title: "Bestanden"
-    order:
-      by: "Rangschikken naar"
-      last_modified: "Laatst gewijzigd"
-      most_popular: "Meest populair"
+      one: Afbeelding
+      other: Afbeeldingen
   resource:
-    all: "Alle Leermiddelen"
-    confirm_delete: "Leermiddel verwijderen?"
-    title: "Leermiddelen"
-    mine: "Mijn leermiddelen"
-    not_mine: "Leermiddelen"
+    all: Alle Leermiddelen
+    confirm_delete: Leermiddel verwijderen?
+    mine: Mijn leermiddelen
+    not_mine: Leermiddelen
+    title: Leermiddelen
   video:
-    confirm_delete: "Video verwijderen?"
-    mine: "Mijn video’s"  
-    name: "video" 
-    not_mine: "Video’s"
-    one: "een video"
-    processing: "Bezig met bewerken van video. Wachten..."
+    confirm_delete: Video verwijderen?
+    mine: Mijn video’s
+    name: video
+    not_mine: Video’s
+    one: een video
+    other: videos
+    processing: Bezig met bewerken van video. Wachten...
     title:
-      one: "Video"
-      other: "Video’s"
-
+      one: Video
+      other: Video’s

@@ -1,78 +1,93 @@
+---
 de:
   activerecord:
     attributes:
       document:
-        title: "Titel"
+        title: Titel
+    models:
+      document: File
   audio:
-    confirm_delete: "Audio löschen?"
-    title: "Audios"
-    mine: "Meine Audios"
-    name: "Audio"
-    not_mine: "Audios"
-    one: "Ein Audio"
-    processing: "Audio clip wird verarbeitet. Bitte warten..."
+    confirm_delete: Audio löschen?
+    mine: Meine Audios
+    name: Audio
+    not_mine: Audios
+    one: Ein Audio
+    other: audios
+    processing: Audio clip wird verarbeitet. Bitte warten...
     title:
-      one: "Audio"
-      other: "Audios"
+      one: Audio
+      other: Audios
   details:
-    msg: "Siehe Details..."
+    msg: Siehe Details...
   document:
     actions:
-      delete: "Löschen"
-      details: "Details"
-      download: "Download"
-      edit: "Bearbeiten"
-    all: "Alle Files"
-    confirm_delete: "File löschen?"
+      delete: Löschen
+      details: Details
+      download: Download
+      edit: Bearbeiten
+    all: Alle Files
+    by: by %{author}
+    confirm_delete: File löschen?
+    description:
+      input: Add a description here
+    filter: filter
     form:
-      title: "File"
+      title: File
     info:
+      author: Author
       date:
-        created_at: "Erstellt am"
-        updated_at: "Aktualisiert am"
+        created_at: Erstellt am
+        updated_at: Aktualisiert am
       description:
-        title: "Beschreibung"
+        title: Beschreibung
       file:
-        title: "Upload"
+        title: Upload
+      size: Size
+      tags: Tags
       title:
-        title: "Titel"
-    mine: "Meine Files"
-    name: "File"
-    not_mine: "Files"
-    one: "Ein File"
-    simple_all: "Alle"  
+        title: Titel
+    mine: Meine Files
+    name: File
+    new:
+      link: Add file
+      title: New file
+    new_activity:
+      attach: Attach file
+    not_mine: Files
+    one: Ein File
+    other: files
+    scope:
+      network: Network
+      own: Own
+    simple_all: Alle
     title:
-      one: "File"
-      other: "Files"
+      input: File title
+      one: File
+      other: Files
   picture:
-    confirm_delete: "Bild löschen?"
-    mine: "Meine Bilder"  
-    name: "Bild"
-    not_mine: "Bilder"
-    one: "Ein Bild"
+    confirm_delete: Bild löschen?
+    mine: Meine Bilder
+    name: Bild
+    not_mine: Bilder
+    one: Ein Bild
+    other: pictures
     title:
-      one: "Bild"
-      other: "Bilder"
-  repository:
-    title: "Files"
-    order:
-      by: "Sortiert nach"
-      last_modified: "Zuletzt geändert"
-      most_popular: "Am beliebtesten"
+      one: Bild
+      other: Bilder
   resource:
-    all: "Alle Ressourcen"
-    confirm_delete: "Ressource löschen?"
-    title: "Ressourcen"
-    mine: "Meine Ressourcen"
-    not_mine: "Ressourcen"
+    all: Alle Ressourcen
+    confirm_delete: Ressource löschen?
+    mine: Meine Ressourcen
+    not_mine: Ressourcen
+    title: Ressourcen
   video:
-    confirm_delete: "Video löschen?"
-    mine: "Meine Videos"  
-    name: "Video" 
-    not_mine: "Videos"
-    one: "Ein Video"
-    processing: "Video wird verarbeitet. Bitte warten..."
+    confirm_delete: Video löschen?
+    mine: Meine Videos
+    name: Video
+    not_mine: Videos
+    one: Ein Video
+    other: videos
+    processing: Video wird verarbeitet. Bitte warten...
     title:
-      one: "Video"
-      other: "Videos"
-
+      one: Video
+      other: Videos
