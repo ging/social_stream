@@ -28,7 +28,13 @@ class Actor < ActiveRecord::Base
   acts_as_messageable
 
   acts_as_url :name, :url_attribute => :slug
-  
+
+  serialize :notification_settings
+  def notification_settings
+    self.update_attribute(:notification_settings, SocialStream.default_notification_settings) unless super
+    super
+  end
+
   has_one :profile,
           dependent: :destroy,
           inverse_of: :actor

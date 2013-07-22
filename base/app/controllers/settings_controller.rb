@@ -1,7 +1,7 @@
 class SettingsController < ApplicationController
-    
+
   before_filter :authenticate_user!
-  
+
   def index
   end
 
@@ -19,6 +19,16 @@ class SettingsController < ApplicationController
           notify_by_email = params[:notify_by_email].to_s
           current_subject.notify_by_email = false if notify_by_email.eql? "never"
           current_subject.notify_by_email = true if notify_by_email.eql? "always"
+        end
+
+        # Custom notification settings
+        if params[:notification_settings].present?
+          notification_settings = {}
+          params[:notification_settings].each_pair do |key, setting|
+            notification_settings[key.to_sym] = false if setting.eql? "never"
+            notification_settings[key.to_sym] = true if setting.eql? "always"
+          end
+          current_subject.update_attribute(:notification_settings, notification_settings)
         end
       end
 

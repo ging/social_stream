@@ -49,6 +49,15 @@ SocialStream.setup do |config|
 
   # Cleditor controls. It is used in new message editor, for example
   # config.cleditor_controls = "bold italic underline strikethrough subscript superscript | size style | bullets | image link unlink"
+
+  # Default notification email settings for new users
+  # config.default_notification_settings = {
+  #   someone_adds_me_as_a_contact: true,
+  #   someone_confirms_my_contact_request: true,
+  #   someone_likes_my_post: true,
+  #   someone_comments_on_my_post: true
+  # }
+
 end
 
 # You can customize toolbar, sidebar and location bar from here

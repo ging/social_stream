@@ -578,6 +578,12 @@ en:
         name: "Send me an email when I receive a notification"
         always: "Always"
         never: "Never"
+    notification_settings:
+      prefix: "Send me an email"
+      someone_adds_me_as_a_contact: "when someone adds me as a contact"
+      someone_confirms_my_contact_request: "when someone confirms my contact request"
+      someone_likes_my_post: "when someone likes my post"
+      someone_comments_on_my_post: "when someone comments on my post"
     one: "Settings"
     password_change:
       briefing: "Change your password"

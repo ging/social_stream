@@ -45,7 +45,15 @@ module SocialStream
 
   mattr_accessor :cleditor_controls
   @@cleditor_controls = "bold italic underline strikethrough subscript superscript | size style | bullets | image link unlink"
- 
+
+  mattr_accessor :default_notification_settings
+  @@default_notification_settings = {
+      someone_adds_me_as_a_contact: true,
+      someone_confirms_my_contact_request: true,
+      someone_likes_my_post: true,
+      someone_comments_on_my_post: true
+  }
+
   class << self
     def setup
       yield self
