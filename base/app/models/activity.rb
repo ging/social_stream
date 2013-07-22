@@ -260,12 +260,25 @@ class Activity < ActiveRecord::Base
     return true unless notificable?
     #Avaible verbs: follow, like, make-friend, post, update, join
 
-    if direct_object.is_a? Comment
-      participants.each do |p|
-        p.notify(notification_subject, "Youre not supposed to see this", self) unless p == sender
-      end
-    elsif ['like','follow','make-friend','post','update', 'join'].include? verb and !reflexive?
-      receiver.notify(notification_subject, "Youre not supposed to see this", self)
+    case
+      when direct_object.is_a?(Comment)
+        participants.each do |p|
+          send_mail = p.subject.notification_settings[:someone_comments_on_my_post]
+          p.notify(notification_subject, "Youre not supposed to see this", self, true, nil, send_mail) unless p == sender
+        end
+      when reflexive?
+        return true
+      when ['like'].include?(verb)
+        send_mail = receiver.subject.notification_settings[:someone_likes_my_post]
+        receiver.notify(notification_subject, "Youre not supposed to see this", self, true, nil, send_mail)
+      when ['follow'].include?(verb)
+        send_mail = receiver.subject.notification_settings[:someone_adds_me_as_a_contact]
+        receiver.notify(notification_subject, "Youre not supposed to see this", self, true, nil, send_mail)
+      when ['make-friend'].include?(verb)
+        send_mail = receiver.subject.notification_settings[:someone_confirms_my_contact_request]
+        receiver.notify(notification_subject, "Youre not supposed to see this", self, true, nil, send_mail)
+      when ['post', 'update', 'join'].include?(verb)
+        receiver.notify(notification_subject, "Youre not supposed to see this", self)
     end
     true
   end

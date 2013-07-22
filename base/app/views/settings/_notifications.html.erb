@@ -7,15 +7,23 @@
 
   <div class="content settings_content collapse" id="notifications_settings_content">
     <%= form_tag update_all_settings_path, :method => :put do %>
-    
+
     <%= t('settings.notifications.by_email.name')%>
 
-    <div class="options">          
+    <div class="options">
       <%= radio_button_tag :notify_by_email, 'always', current_subject.notify_by_email %> <%= t('settings.notifications.by_email.always') %>
       <%= radio_button_tag :notify_by_email, 'never', !current_subject.notify_by_email %> <%= t('settings.notifications.by_email.never') %>
     </div>
-  
-   
+
+    <% SocialStream.default_notification_settings.keys.each do |key| %>
+        <%= [t("settings.notification_settings.prefix"), t("settings.notification_settings.#{key}")].join " " %>
+
+        <div class="options">
+          <%= radio_button_tag "notification_settings[#{key}]", 'always', current_subject.notification_settings[key] %> <%= t('settings.notifications.by_email.always') %>
+          <%= radio_button_tag "notification_settings[#{key}]", 'never', !current_subject.notification_settings[key] %> <%= t('settings.notifications.by_email.never') %>
+        </div>
+    <% end %>
+
     <%= hidden_field_tag :settings_section, :notifications %>
     <%= submit_tag "Update Settings", :class => "btn" %>
     <% end %>
