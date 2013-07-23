@@ -1,6 +1,19 @@
-<%= render partial: 'form' %>
+<section class="edit_form">
+  <%= render partial: 'form' %>
+</section>
 
 <section class="site_client_roles">
   <%= render partial: 'relation/customs/index',
              locals: { subject: resource } %>
 </section>
+
+<section class="delete">
+  <% if current_subject == current_user %>
+    <%= render partial: "devise/registrations/delete_account",
+               locals: { resource: current_user,
+                         resource_name: :user } %>
+  <% else %>
+    <%= render partial: 'destroy' %>
+  <% end %>
+</section>
+

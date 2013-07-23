@@ -8,15 +8,6 @@
     <% else %>
       <%= render partial: 'edit' %>
     <% end %>
-
-    <% if current_subject == current_user %>
-      <%= render partial: "devise/registrations/delete_account",
-                 locals: { resource: current_user,
-                           resource_name: :user } %>
-    <% else %>
-      <%= render partial: 'destroy' %>
-    <% end %>
-    
   </section>
 </section>
 
