@@ -4,7 +4,7 @@ source "http://rubygems.org"
 # use a local code of any of these gems
 
 # Travis' bundler does not properly resolve dependencies for railties
-gem 'rails', '~> 3.0'
+gem 'railties', '~> 3.0'
 
 # Gems before social_stream-base
 # gem 'mailboxer', :path => '../mailboxer'
