@@ -45,7 +45,6 @@ pt:
     last: Últimas Atividades
     like: Curtir
     like_sentence:
-      more: 
       one: '%{likers} likes this'
       other: '%{likers} like this'
     one: Atividade

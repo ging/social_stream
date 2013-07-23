@@ -1,0 +1,17 @@
+---
+de:
+  link:
+    by: by %{author}
+    confirm_delete: Link löschen?
+    errors:
+      loading: Fehler beim Laden
+      only_webs: Nur Webseiten werden unterstützt
+    form:
+      title: Link
+    input: Gib die Web Addresse ein
+    name: Link
+    one: Ein Link
+    other: links
+    title: Links
+  linkser:
+    title: Linkser

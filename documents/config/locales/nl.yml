@@ -1,0 +1,93 @@
+---
+nl:
+  activerecord:
+    attributes:
+      document:
+        title: Titel
+    models:
+      document: File
+  audio:
+    confirm_delete: Audio verwijderen?
+    mine: Mijn audio’s
+    name: audio
+    not_mine: Audio’s
+    one: een audio
+    other: audios
+    processing: Bezig met bewerken audioclip. Wachten...
+    title:
+      one: Audio
+      other: Audio’s
+  details:
+    msg: Zie bijzonderheden...
+  document:
+    actions:
+      delete: Verwijderen
+      details: Bijzonderheden
+      download: Downloaden
+      edit: Bewerken
+    all: Alle bestanden
+    by: by %{author}
+    confirm_delete: Bestand verwijderen?
+    description:
+      input: Add a description here
+    filter: filter
+    form:
+      title: Bestand
+    info:
+      author: Author
+      date:
+        created_at: Gecreëerd op
+        updated_at: Geüpdatet op
+      description:
+        title: Beschrijving
+      file:
+        title: Uploaden
+      size: Size
+      tags: Tags
+      title:
+        title: Titel
+    mine: Mijn bestanden
+    name: bestand
+    new:
+      link: Add file
+      title: New file
+    new_activity:
+      attach: Attach file
+    not_mine: Bestanden
+    one: een bestand
+    other: files
+    scope:
+      network: Network
+      own: Own
+    simple_all: Alle
+    title:
+      input: File title
+      one: Bestand
+      other: Bestanden
+  picture:
+    confirm_delete: Afbeelding verwijderen?
+    mine: Mijn afbeeldingen
+    name: afbeelding
+    not_mine: Afbeeldingen
+    one: een afbeelding
+    other: pictures
+    title:
+      one: Afbeelding
+      other: Afbeeldingen
+  resource:
+    all: Alle Leermiddelen
+    confirm_delete: Leermiddel verwijderen?
+    mine: Mijn leermiddelen
+    not_mine: Leermiddelen
+    title: Leermiddelen
+  video:
+    confirm_delete: Video verwijderen?
+    mine: Mijn video’s
+    name: video
+    not_mine: Video’s
+    one: een video
+    other: videos
+    processing: Bezig met bewerken van video. Wachten...
+    title:
+      one: Video
+      other: Video’s

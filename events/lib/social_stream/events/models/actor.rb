@@ -5,7 +5,8 @@ module SocialStream
         extend ActiveSupport::Concern
 
         included do
-          has_many :rooms
+          has_many :rooms,
+                   dependent: :destroy
         end
 
         def events

@@ -1,0 +1,93 @@
+---
+fr:
+  activerecord:
+    attributes:
+      document:
+        title: Titre
+    models:
+      document: File
+  audio:
+    confirm_delete: Supprimer les clips audio ?
+    mine: Mes clips audio
+    name: clip audio
+    not_mine: Clips audio
+    one: un clip audio
+    other: audios
+    processing: Traitement du clip audio en cours. Veuillez patienter...
+    title:
+      one: Clip audio
+      other: Clips audio
+  details:
+    msg: Plus d'infos...
+  document:
+    actions:
+      delete: Supprimer
+      details: Détails
+      download: Télécharger
+      edit: Éditer
+    all: Tous les fichiers
+    by: by %{author}
+    confirm_delete: Supprimer le fichier ?
+    description:
+      input: Add a description here
+    filter: filter
+    form:
+      title: Fichier
+    info:
+      author: Author
+      date:
+        created_at: Publication créée à
+        updated_at: Publication mise à jour à
+      description:
+        title: Description
+      file:
+        title: Publier
+      size: Size
+      tags: Tags
+      title:
+        title: Titre
+    mine: Mes fichiers
+    name: fichier
+    new:
+      link: Add file
+      title: New file
+    new_activity:
+      attach: Attach file
+    not_mine: Fichiers
+    one: un fichier
+    other: files
+    scope:
+      network: Network
+      own: Own
+    simple_all: Tous
+    title:
+      input: File title
+      one: Fichier
+      other: Fichiers
+  picture:
+    confirm_delete: Supprimer la photo ?
+    mine: Mes photos
+    name: photo
+    not_mine: Photos
+    one: une photo
+    other: pictures
+    title:
+      one: Photo
+      other: Photos
+  resource:
+    all: Toutes les ressources
+    confirm_delete: Supprimer la ressource ?
+    mine: Mes ressources
+    not_mine: Ressources
+    title: Ressources
+  video:
+    confirm_delete: Supprimer la vidéo ?
+    mine: Mes vidéos
+    name: vidéo
+    not_mine: Vidéos
+    one: une vidéo
+    other: videos
+    processing: Traitement de la vidéo en cours. Veuillez patienter...
+    title:
+      one: Vidéo
+      other: Vidéos

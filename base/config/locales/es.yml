@@ -45,7 +45,6 @@ es:
     last: Últimas actividades
     like: Me gusta
     like_sentence:
-      more: 
       one: A %{likers} le gusta esto
       other: A %{likers} les gusta esto
     one: Actividad

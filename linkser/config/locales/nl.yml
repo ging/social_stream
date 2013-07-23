@@ -1,0 +1,17 @@
+---
+nl:
+  link:
+    by: by %{author}
+    confirm_delete: Link verwijderen?
+    errors:
+      loading: Fout bij het laden
+      only_webs: Alleen webpagina’s worden ondersteund
+    form:
+      title: Link
+    input: Het webadres schrijven
+    name: link
+    one: een link
+    other: links
+    title: Links
+  linkser:
+    title: Linkser

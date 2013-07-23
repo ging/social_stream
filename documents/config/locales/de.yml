@@ -1,0 +1,93 @@
+---
+de:
+  activerecord:
+    attributes:
+      document:
+        title: Titel
+    models:
+      document: File
+  audio:
+    confirm_delete: Audio löschen?
+    mine: Meine Audios
+    name: Audio
+    not_mine: Audios
+    one: Ein Audio
+    other: audios
+    processing: Audio clip wird verarbeitet. Bitte warten...
+    title:
+      one: Audio
+      other: Audios
+  details:
+    msg: Siehe Details...
+  document:
+    actions:
+      delete: Löschen
+      details: Details
+      download: Download
+      edit: Bearbeiten
+    all: Alle Files
+    by: by %{author}
+    confirm_delete: File löschen?
+    description:
+      input: Add a description here
+    filter: filter
+    form:
+      title: File
+    info:
+      author: Author
+      date:
+        created_at: Erstellt am
+        updated_at: Aktualisiert am
+      description:
+        title: Beschreibung
+      file:
+        title: Upload
+      size: Size
+      tags: Tags
+      title:
+        title: Titel
+    mine: Meine Files
+    name: File
+    new:
+      link: Add file
+      title: New file
+    new_activity:
+      attach: Attach file
+    not_mine: Files
+    one: Ein File
+    other: files
+    scope:
+      network: Network
+      own: Own
+    simple_all: Alle
+    title:
+      input: File title
+      one: File
+      other: Files
+  picture:
+    confirm_delete: Bild löschen?
+    mine: Meine Bilder
+    name: Bild
+    not_mine: Bilder
+    one: Ein Bild
+    other: pictures
+    title:
+      one: Bild
+      other: Bilder
+  resource:
+    all: Alle Ressourcen
+    confirm_delete: Ressource löschen?
+    mine: Meine Ressourcen
+    not_mine: Ressourcen
+    title: Ressourcen
+  video:
+    confirm_delete: Video löschen?
+    mine: Meine Videos
+    name: Video
+    not_mine: Videos
+    one: Ein Video
+    other: videos
+    processing: Video wird verarbeitet. Bitte warten...
+    title:
+      one: Video
+      other: Videos

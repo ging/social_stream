@@ -49,7 +49,6 @@ en:
     like_sentence:
       one: '%{likers} likes this'
       other: '%{likers} like this'
-      more: 
     one: Activity
     other: Activities
     privacy:
