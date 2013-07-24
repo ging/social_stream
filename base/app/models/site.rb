@@ -9,7 +9,7 @@ class Site < ActiveRecord::Base
 
   class << self
     def current
-      Current.instance
+      ::Site::Current.instance
     end
   end
 end
