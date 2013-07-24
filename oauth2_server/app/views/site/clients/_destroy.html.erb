@@ -1,0 +1,11 @@
+<div id="destroy_site_client" class="accordion-group">
+  <header class="accordion-heading">
+    <h5>
+      <%= link_to t("site.client.destroy.title"), "javascript:void(0);", class: 'accordion-toggle', "data-toggle" => 'collapse', "data-parent" => "#site_client-accordion", "data-target" => "#destroy_site_client-content" %>
+    </h5>
+  </header>
+  
+  <div class="content collapse" id="destroy_site_client-content">
+    <%= link_to t("site.client.destroy.link"), resource, confirm: t("site.client.destroy.confirm"), method: :delete %>
+  </div>
+</div>
