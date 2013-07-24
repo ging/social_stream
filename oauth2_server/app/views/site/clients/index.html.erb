@@ -11,41 +11,17 @@
       </h3>
     </header>
     <div class="tabbable"> <!-- Only required for left/right tabs -->
-      <div class="search-nav hidden-phone">
-        <%= form_tag search_path, method: 'get', class: "navbar-search pull-left" do %>
-          <%= text_field_tag :q, nil, autocomplete: :off, class: 'search-query input-small', placeholder: t('search.name'), "data-min_query" => SocialStream::Search::MIN_QUERY %>
-        <% end %>
-        <%= javascript_tag do %>
-          $(function() {
-            SocialStream.SearchHeader.show();
-          });
-        <% end %>
-        <div class="mat">
-          <%= render partial: 'layouts/loading' %>
-
-          <div class="query_too_short">
-            <%= t 'search.at_least', count: SocialStream::Search::MIN_QUERY %>
-          </div>
-
-          <div class="no_results">
-            <%= t 'search.nothing' %>
-          </div>
-
-          <div class="results">
-          </div>
-        </div>
-      </div>
       <ul class="nav nav-tabs">
         <li class="active"><a href="#tab1" data-toggle="tab">Managing</a></li>
       </ul>  
     </div>
 
 
-      <div class="tab-content">
-        <div class="tab-pane active" id="tab1">
-          <%= render partial: 'list',
-               object: collection %>
-        </div>
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab1">
+        <%= render partial: 'list',
+                   object: collection %>
+      </div>
     </div>
     <%= render partial: 'new.modal' %>
   </section>

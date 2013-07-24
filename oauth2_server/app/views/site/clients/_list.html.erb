@@ -2,7 +2,10 @@
   <ul>
     <% list.each do |client| %>
       <li>
-        <%= image_tag client.logo.url(:small), style: "width: 40px; height: 40px;" %>
+        <%= link_to client do %>
+          <%= image_tag client.logo.url(:small) %>
+        <% end %>
+
         <div class="data">
           <div class="name">
             <%= link_to client.name, client %>

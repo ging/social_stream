@@ -42,34 +42,42 @@
       </div>
         
       <% if can? :update_secret, resource %>
-        <div class="btn-group dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <%= t 'site.client.oauth.credentials' %>
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <h6>
-              <%= Site::Client.human_attribute_name :id %>
-              </h6>
-              <p>
-                <%= resource.id %>
-              </p>
-            </li>
-
-            <li class="client-secret">
-              <h6>
-                <%= Site::Client.human_attribute_name :secret %>
-                <%= form_tag update_secret_site_client_path(resource, format: :json), class: "site-client-secret" do %>
-                  <%= submit_tag t('site.client.oauth.secret.refresh'), class: 'pull-right' %>
-                <% end %>
-              </h6>
-              <p>
-                <span class="site-client-secret"><%= resource.secret %></span>
-              </p>
-            </li>
-          </ul>  
-        </div>   
+        <div class="accordion" id="accordion2">
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                <%= t 'site.client.oauth.credentials' %>
+              </a>
+            </div>
+            <div id="collapseOne" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <div class="content settings_content collapse in">
+                  <div class="result">
+                    <div class="client-id">
+                      <h6>
+                        <%= Site::Client.human_attribute_name :id %>
+                      </h6>
+                      <p>
+                        <%= resource.id %>
+                      </p>
+                    </div>
+                    <div class="client-secret">
+                      <h6>
+                        <%= Site::Client.human_attribute_name :secret %>
+                        <%= form_tag update_secret_site_client_path(resource, format: :json), class: "site-client-secret" do %>
+                          <%= submit_tag t('site.client.oauth.secret.refresh'), class: 'pull-right' %>
+                        <% end %>
+                      </h6>
+                      <p>
+                        <span class="site-client-secret"><%= resource.secret %></span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       <% end %>
     </div>
   </section>
