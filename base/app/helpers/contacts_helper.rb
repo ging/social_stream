@@ -43,4 +43,12 @@ module ContactsHelper
   def current_contact_section? section
     params[:type] == section.to_s
   end
+
+  def contact_select_options options
+    if !options.empty? && options.first.respond_to?(:last) && Array === options.first.last
+      grouped_options_for_select(options)
+    else
+      options_for_select(options)
+    end
+  end
 end
