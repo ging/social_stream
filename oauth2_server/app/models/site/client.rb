@@ -23,10 +23,6 @@ class Site::Client < Site
     end
   end
 
-  def to_param
-    id
-  end
-
   # Generate a new OAuth secret for this site client
   def refresh_secret!
     set_secret

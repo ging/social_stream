@@ -49,6 +49,12 @@ es:
       added: Sitios añadidos
       button:
         edit: Editar
+      contact:
+        add: Add
+      destroy:
+        confirm: Are you sure? This operation cannot be reverted!
+        link: Remove the site client and all its data
+        title: Destroy site client
       go_to_other: Ver tus otros sitios
       index:
         title: Sitios

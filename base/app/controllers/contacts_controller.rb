@@ -2,6 +2,7 @@ class ContactsController < ApplicationController
   before_filter :authenticate_user!, except: [ :index ]
   load_and_authorize_resource except: [ :index, :create, :suggestion, :pending ]
   before_filter :exclude_reflexive,  except: [ :index, :create, :suggestion, :pending ]
+  before_filter :create_authorization, only: [ :create ]
   before_filter :create_filled_params, only: [ :create ]
 
   helper_method :current_subject_contacts_to
@@ -23,10 +24,14 @@ class ContactsController < ApplicationController
     relation_ids = params[:relations].map(&:to_i)
 
     params[:actors].split(',').each do |a|
-      current_subject.contact_to!(a).relation_ids = relation_ids
+      profile_or_current_subject.contact_to!(a).relation_ids = relation_ids
     end
 
-    redirect_to action: :index
+    flash[:success] = t "contact.new.added.other",
+                        actors: params[:actors].split(',').map{ |a| Actor.find(a).name }.to_sentence,
+                        relations: relation_ids.map{ |r| Relation.find(r).name }.to_sentence
+
+    redirect_to request.referrer || { action: :index }
   end
 
   def update
@@ -101,6 +106,10 @@ class ContactsController < ApplicationController
     if @contact.reflexive?
       redirect_to home_path
     end
+  end
+
+  def create_authorization
+    authorize! :create, Contact.new(sender: Actor.normalize(profile_or_current_subject!))
   end
 
   def create_filled_params

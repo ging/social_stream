@@ -113,6 +113,8 @@ de:
     unfollow: Nicht mehr folgen
   actor:
     name: Name
+    title:
+      other: Actors
   ajax:
     error: There was an error in the remote server
   browse: Browsen
@@ -171,12 +173,17 @@ de:
       one: '%{count} contact'
       other: '%{count} contacts'
     new:
+      added:
+        other: '%{actors} successfully added as %{relations}'
       button:
         one: '%{count} role'
         other: '%{count} roles'
         zero: Add
       link: + Kontakt hinzufügen
       menu: Kontakt hinzufügen
+      modal:
+        button: Add
+        title: Add contacts
       submit: Kontakt hinzufügen
       title: '%{name} zu Kontakten hinzufügen'
     one: Kontakt
@@ -600,6 +607,12 @@ de:
       briefing: Einstellungen für Kontakte
       explanation: Zugriffsrechte der Kontakte ändern
       name: Administrator Kontakt
+    notification_settings:
+      prefix: Send me an email
+      someone_adds_me_as_a_contact: when someone adds me as a contact
+      someone_confirms_my_contact_request: when someone confirms my contact request
+      someone_likes_my_post: when someone likes my post
+      someone_comments_on_my_post: when someone comments on my post
     notifications:
       briefing: Einstellungen zu Benachrichtigungen und e-mail Verständigungen
       by_email:

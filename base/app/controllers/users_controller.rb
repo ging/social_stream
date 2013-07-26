@@ -21,12 +21,4 @@ class UsersController < ApplicationController
   def new; end; def create; end
   # Not supported yet
   def destroy; end
-
-  protected
-
-  # Overwrite resource method to support slug
-  # See InheritedResources::BaseHelpers#resource
-  def resource
-    @user ||= end_of_association_chain.find_by_slug!(params[:id])
-  end
 end

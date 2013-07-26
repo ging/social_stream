@@ -5,6 +5,10 @@ SocialStream.setup do |config|
   # Remember you must add an "actor_id" foreign key column to your migration!
   #
   # config.subjects = [:user, :group ]
+  
+  # List of subjects that can be accessed by the client browser or the API
+  #
+  # config.routed_subjects = [:user, :group ]
 
   # Include devise modules in User. See devise documentation for details.
   # Others available are:

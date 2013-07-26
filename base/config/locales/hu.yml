@@ -113,6 +113,8 @@ hu:
     unfollow: Nemkövetés
   actor:
     name: Név
+    title:
+      other: Actors
   ajax:
     error: There was an error in the remote server
   browse: Böngészés
@@ -170,12 +172,17 @@ hu:
       one: '%{count} contact'
       other: '%{count} contacts'
     new:
+      added:
+        other: '%{actors} successfully added as %{relations}'
       button:
         one: '%{count} role'
         other: '%{count} roles'
         zero: Add
       link: + Kapcsolat hozzáadása
       menu: Kapcsolat hozzáadása
+      modal:
+        button: Add
+        title: Add contacts
       submit: Kapcsolat hozzáadása
       title: '%{name} hozzáadása kapcsolataidhoz'
     one: Kapcsolat
@@ -599,6 +606,12 @@ hu:
       briefing: Beállítások a kapcsolatokhoz
       explanation: Kapcsolati engedélyezések módosítása
       name: Az adminisztrátor elérhetősége
+    notification_settings:
+      prefix: Send me an email
+      someone_adds_me_as_a_contact: when someone adds me as a contact
+      someone_confirms_my_contact_request: when someone confirms my contact request
+      someone_likes_my_post: when someone likes my post
+      someone_comments_on_my_post: when someone comments on my post
     notifications:
       briefing: Értesítési és levelezési riasztások beállításai
       by_email:

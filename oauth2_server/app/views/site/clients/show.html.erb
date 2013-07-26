@@ -113,6 +113,12 @@
       </div>
     </div>
 
+    <%= render partial: 'contacts/add_button',
+               locals: {
+                 sender: resource,
+                 type: [ :user, :group ]
+               }
+    %>
 
     <div class="tab-content">
       <div class="tab-pane active" id="authorized">

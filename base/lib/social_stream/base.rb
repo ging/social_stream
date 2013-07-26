@@ -9,6 +9,8 @@ module SocialStream
   mattr_accessor :subjects
   @@subjects = [ :user, :group, :site ]
 
+  mattr_writer :routed_subjects
+
   mattr_accessor :devise_modules
   @@devise_modules = [ :database_authenticatable, :registerable, :recoverable,
                        :rememberable, :trackable, :omniauthable, :token_authenticatable]
@@ -124,6 +126,12 @@ module SocialStream
   class << self
     def setup
       yield self
+    end
+
+    # All the subjects that appear in routes and can be accessed
+    # through the browser / API
+    def routed_subjects
+      @@routed_subjects ||= subjects.dup
     end
 
     def objects

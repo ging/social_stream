@@ -169,6 +169,18 @@ SocialStream.Contact = (function($, SS, undefined) {
     $('html').on('click.dropdown.data-api', saveForms);
   };
 
+  // new_ callbacks
+  
+  var initActorSelect2 = function() {
+    SS.Actor.select2('input[name="actors"]');
+  };
+
+  var initRelationSelect2 = function() {
+    $('select[name="relations[]"]').select2();
+  };
+
+  // update callbacks
+
   var updateForms = function(options) {
     var forms = getForms(options.id);
 
@@ -284,6 +296,10 @@ SocialStream.Contact = (function($, SS, undefined) {
                     initFilter,
                     initNewGroupModal,
                     hideLoading);
+
+  callback.register('new_',
+                    initActorSelect2,
+                    initRelationSelect2);
 
   callback.register('update',
                     updateForms,

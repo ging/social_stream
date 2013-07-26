@@ -52,6 +52,8 @@ en:
       added: Added sites
       button:
         edit: Edit
+      contact:
+        add: Add
       destroy:
         confirm: Are you sure? This operation cannot be reverted!
         link: Remove the site client and all its data

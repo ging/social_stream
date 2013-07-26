@@ -122,7 +122,7 @@ module SocialStream
       end
 
       def find_profile_subject
-        SocialStream.subjects.each do |type|
+        SocialStream.routed_subjects.each do |type|
           id = params["#{ type }_id"]
 
           next if id.blank?

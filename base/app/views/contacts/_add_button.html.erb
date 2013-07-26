@@ -1,0 +1,9 @@
+<% if can? :create, Contact.new(sender: Actor.normalize(sender)) %>
+  <%= link_to t('site.client.contact.add'), '#add-contact-modal', id: 'add-contact-link', 'data-toggle' => 'modal' %>
+  <%= render partial: 'contacts/new_modal',
+             locals: {
+               sender: sender,
+               type: type
+             } %>
+<% end %>
+

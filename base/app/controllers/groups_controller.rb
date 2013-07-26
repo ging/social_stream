@@ -29,12 +29,4 @@ class GroupsController < ApplicationController
       }
     end
   end
-
-  protected
-
-  # Overwrite resource method to support slug
-  # See InheritedResources::BaseHelpers#resource
-  def method_for_find
-    :find_by_slug!
-  end
 end

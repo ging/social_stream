@@ -113,6 +113,8 @@ zh:
     unfollow: 不再关注
   actor:
     name: 姓名
+    title:
+      other: Actors
   ajax:
     error: 远程服务器中存在错误There was an error in the remote server
   browse: 浏览
@@ -170,12 +172,17 @@ zh:
       one: '%{count} 联系人contact'
       other: '%{count} 多个联系人contacts'
     new:
+      added:
+        other: '%{actors} successfully added as %{relations}'
       button:
         one: '%{count} 关系role'
         other: '%{count} 多个关系roles'
         zero: 添加Add
       link: + 加入联络
       menu: 加入联络
+      modal:
+        button: Add
+        title: Add contacts
       submit: 加入联络
       title: 加入 %{name} 到您的联系人列表
     one: 联络
@@ -591,6 +598,12 @@ zh:
       briefing: 联系设定
       explanation: 更改联系允许
       name: 行政联络
+    notification_settings:
+      prefix: Send me an email
+      someone_adds_me_as_a_contact: when someone adds me as a contact
+      someone_confirms_my_contact_request: when someone confirms my contact request
+      someone_likes_my_post: when someone likes my post
+      someone_comments_on_my_post: when someone comments on my post
     notifications:
       briefing: 关于通知行为和邮件提示的设定
       by_email:

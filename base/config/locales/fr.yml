@@ -113,6 +113,8 @@ fr:
     unfollow: Se désabonner
   actor:
     name: Prénom
+    title:
+      other: Actors
   ajax:
     error: There was an error in the remote server
   browse: Parcourir
@@ -171,12 +173,17 @@ fr:
       one: '%{count} contact'
       other: '%{count} contacts'
     new:
+      added:
+        other: '%{actors} successfully added as %{relations}'
       button:
         one: '%{count} role'
         other: '%{count} roles'
         zero: Add
       link: + Ajouter un contact
       menu: Ajouter le contact
+      modal:
+        button: Add
+        title: Add contacts
       submit: Ajouter le contact
       title: Ajouter %{name} à vos contacts
     one: Contact
@@ -601,6 +608,12 @@ fr:
       briefing: Paramètres pour les contacts
       explanation: Modifier les autorisations des contacts
       name: Administrer les contacts
+    notification_settings:
+      prefix: Send me an email
+      someone_adds_me_as_a_contact: when someone adds me as a contact
+      someone_confirms_my_contact_request: when someone confirms my contact request
+      someone_likes_my_post: when someone likes my post
+      someone_comments_on_my_post: when someone comments on my post
     notifications:
       briefing: Paramètres relatifs au comportement des notifications et aux messages
         d'alertes

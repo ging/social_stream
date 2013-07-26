@@ -3,6 +3,8 @@ en:
   language_name: English
   actor:
     name: Name
+    title:
+      other: Actors
   action:
     send: Send
     accept: Accept
@@ -171,11 +173,16 @@ en:
       one: '%{count} contact'
       other: '%{count} contacts'
     new:
+      added:
+        other: '%{actors} successfully added as %{relations}'
       button:
         zero: Add
         one: '%{count} role'
         other: '%{count} roles'
       link: Add contact
+      modal:
+        button: Add
+        title: Add contacts
       title: Add %{name} to your contacts
       menu: Add contact
       submit: Add Contact

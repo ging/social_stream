@@ -113,6 +113,8 @@ es:
     unfollow: Dejar de seguir
   actor:
     name: Nombre
+    title:
+      other: Actores
   ajax:
     error: Ha habido un error en el servidor remoto
   browse: Descubrir
@@ -171,12 +173,17 @@ es:
       one: '%{count} contacto'
       other: '%{count} contactos'
     new:
+      added:
+        other: '%{actors} añadidos como %{relations}'
       button:
         one: '%{count} rol'
         other: '%{count} roles'
         zero: Añadir
       link: + Añadir contacto
       menu: Añadir contacto
+      modal:
+        button: Añadir
+        title: Añadir contactos
       submit: Añadir
       title: Añadir a %{name} como contacto
     one: Contacto
@@ -604,6 +611,12 @@ es:
       briefing: Ajustes de contactos
       explanation: Cambiar los permisos de contactos
       name: Administrar contactos
+    notification_settings:
+      prefix: Send me an email
+      someone_adds_me_as_a_contact: when someone adds me as a contact
+      someone_confirms_my_contact_request: when someone confirms my contact request
+      someone_likes_my_post: when someone likes my post
+      someone_comments_on_my_post: when someone comments on my post
     notifications:
       briefing: Ajustes sobre notificaciones y alertas por correo
       by_email:
