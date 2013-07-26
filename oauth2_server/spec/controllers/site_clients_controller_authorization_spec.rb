@@ -38,6 +38,13 @@ describe Site::ClientsController do
       sign_in @user
     end
 
+    it "should render index" do
+      @client = Factory(:"site/client", author: @user.actor )
+      get :index
+
+      response.should be_success
+    end
+
     it "should render client" do
       @client = Factory(:"site/client", author: @user.actor )
       get :show, :id => @client.to_param

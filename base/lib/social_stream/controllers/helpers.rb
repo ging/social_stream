@@ -17,7 +17,7 @@ module SocialStream
         #   Post #=> in PostsController
         #
         def model_class
-          controller_name.classify.constantize
+          self.name.sub(/Controller/, '').singularize.constantize
         end
       end
 

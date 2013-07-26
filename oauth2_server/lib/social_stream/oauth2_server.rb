@@ -17,6 +17,9 @@ module SocialStream
     autoload :TokenEndpoint, 'social_stream/oauth2_server/token_endpoint'
   end
 
+  # Include site/client in routes
+  SocialStream.routed_subjects << :site_client
+
   # Define default custom relations for Site::Client
   SocialStream.custom_relations['site/client'] = {}
 
