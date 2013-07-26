@@ -1,7 +1,3 @@
-<%=
-    type = ( contact.options_for_select.count == 1 ? 'simple' : 'multiple' )
-
-    render partial: "contacts/button_#{ type }",
+<%= render partial: "contacts/button_#{ contact.options_for_select_type }",
            object:  contact,
-           as:      :contact
-%>
+           as:      :contact %>

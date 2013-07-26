@@ -234,8 +234,18 @@ class Actor < ActiveRecord::Base
 
   # The relations offered in the "Add contact" button when subjects
   # add new contacts
-  def relations_for_button
+  def relations_for_select
     relations_list
+  end
+
+  # Return an object of choices suitable for the contact add button or modal
+  def options_for_contact_select
+    relations_for_select.map{ |r| [ r.name, r.id ] }
+  end
+
+  # Options for contact select are simple or multiple
+  def options_for_contact_select_type
+    relations_list.count == 1 ? :simple : :multiple
   end
 
   # All the {Actor Actors} this one has ties with:

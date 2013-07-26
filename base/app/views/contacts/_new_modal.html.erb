@@ -9,7 +9,7 @@
       <%= text_field_tag 'actors', '', 'data-path' => actors_path(stranger: true), 'data-type' => Array.wrap(type).compact.join(',') %>
 
       <%= label_tag 'relations', t('activerecord.attributes.contact.relation_ids') %>
-      <%= select_tag 'relations', options_from_collection_for_select(sender.relations_for_button, :id, :name), multiple: true %>
+      <%= select_tag 'relations', sender.options_for_contact_select, multiple: true %>
     </div>
     <div class="modal-footer">
       <%= submit_tag t('contact.new.modal.button') %>
