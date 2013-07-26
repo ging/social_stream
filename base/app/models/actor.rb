@@ -243,9 +243,14 @@ class Actor < ActiveRecord::Base
     relations_for_select.map{ |r| [ r.name, r.id ] }
   end
 
-  # Options for contact select are simple or multiple
+  # Options for contact select are simple
+  def options_for_contact_select_simple?
+    relations_list.count == 1
+  end
+
+  # Returns the type for contact select, :simple or :multiple
   def options_for_contact_select_type
-    relations_list.count == 1 ? :simple : :multiple
+    options_for_contact_select_simple? ? :simple : :multiple
   end
 
   # All the {Actor Actors} this one has ties with:
