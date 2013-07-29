@@ -134,6 +134,13 @@ module SocialStream
       @@routed_subjects ||= subjects.dup
     end
 
+    # An array of the keys that must be tried when searching for a
+    # profile subject
+    def profile_subject_keys
+      @profile_subject_keys ||=
+        routed_subjects.map{ |s| s.to_s.split('/').last }
+    end
+
     def objects
       @@objects.push(:actor) unless @@objects.include?(:actor)
       @@objects

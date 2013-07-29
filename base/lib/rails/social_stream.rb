@@ -21,3 +21,5 @@ class ActionDispatch::Http::UploadedFile
 
   alias_method_chain :initialize, :magic
 end
+
+require 'social_stream/routing/mapper'

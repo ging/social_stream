@@ -122,13 +122,27 @@ module SocialStream
       end
 
       def find_profile_subject
-        SocialStream.routed_subjects.each do |type|
+        SocialStream.profile_subject_keys.each do |type|
           id = params["#{ type }_id"]
 
           next if id.blank?
 
-          subject_class = type.to_s.classify.constantize
+          subject_class = 
+            begin
+              type.to_s.classify.constantize
+            rescue NameError => e
+              # Try with namespace
+              ns = params[:controller].split('/')
+              ns.pop
 
+              if ns.blank?
+                raise e
+              end
+
+              ns.push(type)
+              ns.join('/').classify.constantize
+            end
+              
           return subject_class.find_by_slug! id
         end
 

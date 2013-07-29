@@ -18,7 +18,7 @@ module SocialStream
   end
 
   # Include site/client in routes
-  SocialStream.routed_subjects << :site_client
+  SocialStream.routed_subjects << :"site/client"
 
   # Define default custom relations for Site::Client
   SocialStream.custom_relations['site/client'] = {}
