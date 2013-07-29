@@ -87,38 +87,20 @@
       <li class="active"><a href="#authorized" data-toggle="tab">Authorized</a></li>
       <li><a href="#registered" data-toggle="tab">Users</a></li>
     </ul>
-    <div class="search-nav hidden-phone">
-      <%= form_tag search_path, method: 'get', class: "navbar-search pull-left" do %>
-        <%= text_field_tag :q, nil, autocomplete: :off, class: 'search-query input-small', placeholder: t('search.name'), "data-min_query" => SocialStream::Search::MIN_QUERY %>
-      <% end %>
-      <%= javascript_tag do %>
-        $(function() {
-          SocialStream.SearchHeader.show();
-        });
-      <% end %>
-
-      <div class="mat">
-        <%= render partial: 'layouts/loading' %>
-
-        <div class="query_too_short">
-          <%= t 'search.at_least', count: SocialStream::Search::MIN_QUERY %>
-        </div>
-
-        <div class="no_results">
-          <%= t 'search.nothing' %>
-        </div>
-
-        <div class="results">
-        </div>
-      </div>
-    </div>
-
+    
     <%= render partial: 'contacts/add_button',
                locals: {
                  sender: resource,
                  type: [ :user, :group ]
                }
     %>
+
+    <div class="btn-group" data-toggle="buttons">
+      <button type="radio" name="options" id="option1">user</button>
+      <button type="radio" name="options" id="option2"">organization</button>
+    </div>
+
+     <%= text_field_tag "contact-filter", "", placeholder: "filter", autocomplete: "off" %>
 
     <div class="tab-content">
       <div class="tab-pane active" id="authorized">
