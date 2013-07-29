@@ -7,11 +7,19 @@ class ActorsController < ApplicationController
       subject_type(params[:type])
 
     if params[:stranger].present?
-      @actors = @actors.not_contacted_from(current_subject)
+      @actors = @actors.not_contacted_from(sender)
     end
 
     @actors = @actors.page(params[:page])
 
     render json: @actors, helper: self
+  end
+
+  private
+
+  def sender
+    @sender ||=
+      params[:sender_id] && Actor.find(params[:sender_id]) ||
+        current_subject
   end
 end
