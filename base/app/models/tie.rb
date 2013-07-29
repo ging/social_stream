@@ -69,7 +69,7 @@ class Tie < ActiveRecord::Base
 
   validates_presence_of :contact_id, :relation_id
 
-  validate :relation_belongs_to_sender
+  validate :relation_must_belong_to_sender
 
   after_create  :create_activity
   after_create  :set_follow_action
@@ -137,6 +137,11 @@ class Tie < ActiveRecord::Base
     action.update_attribute(:follow, false)
   end
 
+  def relation_belongs_to_sender?
+      relation.is_a?(Relation::Single) ||
+        contact.sender_id == relation.actor_id
+  end
+
   private
 
   # before_create callback
@@ -152,9 +157,8 @@ class Tie < ActiveRecord::Base
                      :activity_verb => ActivityVerb[contact.verb]
   end
 
-  def relation_belongs_to_sender
+  def relation_must_belong_to_sender
     errors.add(:relation, "must belong to sender") unless
-      relation.is_a?(Relation::Single) ||
-        contact.sender_id == relation.actor_id
+      relation_belongs_to_sender?
   end
 end
