@@ -24,7 +24,10 @@ class ContactsController < ApplicationController
     relation_ids = params[:relations].map(&:to_i)
 
     params[:actors].split(',').each do |a|
-      profile_or_current_subject.contact_to!(a).relation_ids = relation_ids
+      c = profile_or_current_subject.contact_to!(a)
+      # Record who is manipulating the contact, mainly in groups
+      c.user_author = current_user
+      c.relation_ids = relation_ids
     end
 
     flash[:success] = t "contact.new.added.other",

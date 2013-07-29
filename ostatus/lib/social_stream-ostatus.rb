@@ -45,6 +45,9 @@ module SocialStream
     module Controllers
       autoload :DebugRequests, 'social_stream/ostatus/controllers/debug_requests'
     end
+
+    # Include route_subject in routes
+    SocialStream.routed_subjects << :remote_subject
   end
 end
 

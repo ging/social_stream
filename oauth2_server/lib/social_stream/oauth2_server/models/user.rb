@@ -16,6 +16,8 @@ module SocialStream
 
           has_many :refresh_tokens,
                    class_name: 'Oauth2Token::RefreshToken'
+
+          alias_method_chain :as_json, :client
         end
 
         # Is {#client} authorized by this {User}
@@ -28,6 +30,22 @@ module SocialStream
           unless contact_to!(client).relation_ids.include?(Relation::Auth.instance.id)
             contact_to!(client).relation_ids += [ Relation::Auth.instance.id ]
           end
+        end
+
+        # Include application role information in the json
+        def as_json_with_client options = {}
+          hash = as_json_without_client options
+
+          if options[:client] && !options[:client].is_a?(User)
+            hash['roles'] = options[:client].contact_to!(self).relations.map{ |r|
+              { 
+                id: r.id,
+                name: r.name
+              }
+            }
+          end
+
+          hash
         end
       end
     end

@@ -77,12 +77,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency('capybara', '~> 0.3.9')
   # Testing database
   s.add_development_dependency('sqlite3-ruby')
-  # Debugging
-  if RUBY_VERSION < '1.9'
-    s.add_development_dependency('ruby-debug')
-  else
-    s.add_development_dependency('debugger')
-  end
   # Specs
   s.add_development_dependency('rspec-rails', '~> 2.6.1')
   # Fixtures
@@ -93,4 +87,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('ci_reporter', '~> 1.6.4')
   # Scaffold generator
   s.add_development_dependency('nifty-generators','~> 0.4.5')
+  # pry
+  s.add_development_dependency('pry-rails','~> 0.4.5')
+
 end
