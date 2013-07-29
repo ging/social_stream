@@ -12,11 +12,11 @@
     </div>
   <% end %>
 
-  <section>
+  <section class="name">
     <%= f.label :name %>
     <%= f.text_field :name %>
   </section>
-  <section>
+  <section class="owners">
     <%= f.label :owners %>
     <%= f.hidden_field :owners, 'data-path' => actors_path(format: :json) %>
   </section>
@@ -24,7 +24,7 @@
     <%= f.label :tags_list %>
     <%= f.text_field :tag_list, 'data-path' => tags_path(format: :json) %>
   </section>
-  <section>
+  <section class="description">
     <%= f.label :description %>
     <%= f.text_area :description %>
   </section>

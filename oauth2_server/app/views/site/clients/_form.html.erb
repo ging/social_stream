@@ -14,26 +14,26 @@
   <% end %>
 
   <section id="site_client_form">
-    <section class="name">
+    <div class="name">
       <%= f.label :name %>
       <%= f.text_field :name %>
-    </section>
+    </div>
 
-    <section class="description">
+    <div class="description">
       <%= f.label :description %>
       <%= f.text_area :description %>
-    </section>
+    </div>
 
-    <section class="url">
+    <div class="url">
       <%= f.label :url %>
       <%= f.text_area :url %>
-    </section>
+    </div>
 
-    <section class="callback_url">
+    <div class="callback_url">
       <%= f.label :callback_url %>
       <%= f.text_area :callback_url %>
-    </section>
-
-    <%= f.submit :class => "btn-secundary pull-right" %>
+    </div>
   </section>
+  <%= f.submit :class => "next-step" %>
+
 <% end %>
