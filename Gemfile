@@ -21,6 +21,4 @@ gem 'paperclip_waveform'
   gem "social_stream-#{ g }", :path => g
 end
 
-gem 'pry'
-
 gemspec
