@@ -1,32 +1,38 @@
-<%= form_for(@profile, :url => [current_subject, :profile]) do |f| %>
-  <span class="required">*</span>
-  <%= f.label t('user.name') %>
+<section class="personal">
+  <header>
+    <h4>
+      Personal
+    </h4>
+  </header>
+  <%= form_for(@profile, :url => [current_subject, :profile]) do |f| %>
+    <span class="required">*</span>
+    <%= f.label t('user.name') %>
 
+    <%= f.text_field :name, :class => "required" %>
 
-  <%= f.text_field :name, :class => "required" %>
+    <%= f.label :description, t("profile.#{ current_subject.class.to_s.downcase }.about") %>
 
-  <%= f.label :description, t("profile.#{ current_subject.class.to_s.downcase }.about") %>
+    <%= f.text_area :description, :maxlength => 200, :rows => 10 %>
 
-  <%= f.text_area :description, :maxlength => 200, :rows => 10 %>
+    <%= f.label :organization, t('profile.organization') %>
 
-  <%= f.label :organization, t('profile.organization') %>
+    <%= f.text_field :organization %>
 
-  <%= f.text_field :organization %>
+    <%= f.label :birthday, t('profile.' + current_subject.class.to_s.downcase + '.birthday') %>
 
-  <%= f.label :birthday, t('profile.' + current_subject.class.to_s.downcase + '.birthday') %>
+    <%= date_select "profile", "birthday", :order => [:day, :month, :year], :end_year => Date.today.year, :start_year => (Date.today.year - 100), :prompt => {:day => 'Day', :month => 'Month', :year => 'Year'} %>
 
-  <%= date_select "profile", "birthday", :order => [:day, :month, :year], :end_year => Date.today.year, :start_year => (Date.today.year - 100), :prompt => {:day => 'Day', :month => 'Month', :year => 'Year'} %>
+    <%= f.label :city, t('profile.actualcity') %>
 
-  <%= f.label :city, t('profile.actualcity') %>
+    <%= f.text_field :city %>
 
-  <%= f.text_field :city %>
+    <%= f.label :country, t('profile.country') %>
 
-  <%= f.label :country, t('profile.country') %>
+    <%= f.text_field :country %>
 
-  <%= f.text_field :country %>
-
-  <p>
-    <%= t('required') %>
-  </p>
-  <%= f.submit %>
-<% end %>
+    <p>
+      <%= t('required') %>
+    </p>
+    <%= f.submit %>
+  <% end %>
+</section>
