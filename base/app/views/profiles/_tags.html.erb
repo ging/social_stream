@@ -14,10 +14,7 @@
   </div>
     <% if can?(:update, @profile) %>
     <div class="update">
-      <%= form_for(@profile, :url => [ @profile.subject, :profile ]) do |f| %>
-        <%= f.text_field :tag_list, "data-path" => tags_path(format: :json) %>
-        <%= f.submit %>
-      <% end %>
+      <%= render partial: 'personal_edit' %>
     </div>
   <% end %>
 </section>

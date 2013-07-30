@@ -58,35 +58,7 @@
  
   <% if can? :update, @profile %>
   <div class="update">
-
-    <%= form_for(@profile, :url => [current_subject, :profile]) do |f| %>
-
-      <%= f.label :phone, t('profile.phone') %>
-
-      <%= f.phone_field :phone %>
-
-      <%= f.label :mobile, t('profile.mobile') %>
-
-      <%= f.phone_field :mobile %>
-
-      <%= f.label :fax, t('profile.fax') %>
-
-      <%= f.phone_field :fax %>
-
-      <%= f.label :address, t('profile.address') %>
-
-      <%= f.text_field :address %>
-
-      <%= f.label :email, t('profile.email') %>
-
-      <%= f.email_field :email, :class => "email" %>
-
-      <%= f.label :website, t('profile.website') %>
-
-      <%= f.text_field :website, :class => "url" %>
-
-      <%= f.submit %>
-    <% end %>
-  <% end %>
+    <%= render partial: 'comunication-info_edit' %>
   </div>
+  <% end %>
 </section>

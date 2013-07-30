@@ -13,6 +13,10 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def edit
+    current_profile
+  end
+
   def update
     current_profile.update_attributes profile_params
 
