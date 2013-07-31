@@ -16,6 +16,8 @@ gem 'rails', '3.2.14'
 # Needs the libsndfile package
 gem 'paperclip_waveform'
 
+gem 'pry-rails'
+
 # social_stream gems
 %w(base documents events linkser presence).each do |g|
   gem "social_stream-#{ g }", :path => g
