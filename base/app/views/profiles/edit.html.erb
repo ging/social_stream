@@ -1,7 +1,24 @@
 <div id="profile-info_edit">
-  <%= render partial: "personal_edit" %>
+  <section class="personal">
+    <header>
+      <%= render partial: 'edit_icon' %>
+      <h4>
+        <%= t("profile.#{ @profile.subject.class.to_s.downcase }.info") %>
+      </h4>
+    </header>
 
-  <%= render :partial => "comunication-info_edit" %>
- 
+    <%= render partial: "personal_edit" %>
+  </section>
+
+  <section class="comunication-info">
+    <header>
+      <h4>
+        <%= t('profile.contact') %>
+      </h4>
+    </header>
+
+    <%= render :partial => "comunication-info_edit" %>
+  </section>
+
   <%= render :partial => "avatar" %>
 </div>
