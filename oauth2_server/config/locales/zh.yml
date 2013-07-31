@@ -33,6 +33,9 @@ zh:
             relation/custom: Manage roles
         detailed:
           manage:
+            contact:
+              negative: They WILL NOT BE ABLE to assign roles to users
+              positive: They WILL BE ABLE to assign roles to users
             nil:
               negative: They WILL NOT BE ABLE to update the details of the client
                 site

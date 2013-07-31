@@ -33,6 +33,9 @@ es:
             relation/custom: Gestionar los roles
         detailed:
           manage:
+            contact:
+              negative: NO PODRÁN asignar roles a usuarios
+              positive: PODRÁN asignar roles a usuarios
             nil:
               negative: NO PODRÁN actualizar los detalles del sitio
               positive: PODRÁN actualizar los detalles del sitio
