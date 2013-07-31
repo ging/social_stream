@@ -18,6 +18,7 @@ module SocialStream
     config.app_generators.linkser    'social_stream:linkser'
     config.app_generators.chat       'social_stream:presence'
     config.app_generators.federation 'social_stream:ostatus'
+    config.app_generators.oauth2_server 'social_stream:oauth2_server'
   end
 end
 
