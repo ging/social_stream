@@ -33,6 +33,10 @@ en:
             relation/custom: Manage roles
         detailed:
           manage:
+            contact:
+              negative: They WILL NOT BE ABLE to assign roles to users
+              positive: They WILL BE ABLE to assign roles to users
+
             nil:
               positive: They WILL BE ABLE to update the details of the client site
               negative: They WILL NOT BE ABLE to update the details of the client
