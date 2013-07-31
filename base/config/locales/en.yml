@@ -459,14 +459,12 @@ en:
     is_on: is on
     must_be_signed_id: You must be signed in
     group:
-      subject.name: Name
       about: About us
       birthday: Anniversary
       experience: Area of expertise
       info: Group information
       tags: Group tags
     user:
-      name: Name
       about: About me
       birthday: Birthday
       experience: Experience
