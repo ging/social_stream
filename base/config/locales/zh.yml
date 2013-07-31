@@ -20,6 +20,8 @@ zh:
     attributes:
       contact:
         relation_ids: 联系方式
+      profile:
+        name: Name
       relation/custom:
         name: 姓名
       user:
@@ -601,9 +603,9 @@ zh:
     notification_settings:
       prefix: Send me an email
       someone_adds_me_as_a_contact: when someone adds me as a contact
+      someone_comments_on_my_post: when someone comments on my post
       someone_confirms_my_contact_request: when someone confirms my contact request
       someone_likes_my_post: when someone likes my post
-      someone_comments_on_my_post: when someone comments on my post
     notifications:
       briefing: 关于通知行为和邮件提示的设定
       by_email:

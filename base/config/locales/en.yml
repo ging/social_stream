@@ -24,6 +24,8 @@ en:
     attributes:
       contact:
         relation_ids: Roles
+      profile:
+        name: Name
       relation/custom:
         name: Name
       user:

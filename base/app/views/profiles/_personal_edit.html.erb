@@ -6,7 +6,7 @@
   </header>
   <%= form_for(@profile, :url => [current_subject, :profile]) do |f| %>
     <span class="required">*</span>
-    <%= f.label t('user.name') %>
+    <%= f.label :name %>
 
     <%= f.text_field :name, :class => "required" %>
 

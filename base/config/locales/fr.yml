@@ -20,6 +20,8 @@ fr:
     attributes:
       contact:
         relation_ids: Type de contact
+      profile:
+        name: Name
       relation/custom:
         name: Prénom
       user:
@@ -611,9 +613,9 @@ fr:
     notification_settings:
       prefix: Send me an email
       someone_adds_me_as_a_contact: when someone adds me as a contact
+      someone_comments_on_my_post: when someone comments on my post
       someone_confirms_my_contact_request: when someone confirms my contact request
       someone_likes_my_post: when someone likes my post
-      someone_comments_on_my_post: when someone comments on my post
     notifications:
       briefing: Paramètres relatifs au comportement des notifications et aux messages
         d'alertes
