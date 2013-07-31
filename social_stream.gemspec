@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('social_stream-linkser', '~> 2.1.0')
   s.add_runtime_dependency('social_stream-presence', '~> 2.1.0')
   s.add_runtime_dependency('social_stream-ostatus', '~> 2.1.0')
-  s.add_runtime_dependency('social_stream-oauth2_server', '~> 2.1.0')
+  s.add_runtime_dependency('social_stream-oauth2_server', '~> 2.1.1')
  
   # Development Gem dependencies
   #
