@@ -1,6 +1,8 @@
 class ProfilesController < ApplicationController
   before_filter :authenticate_user!, :except => [ :show ]
 
+  before_filter :authorize_update, except: [ :show ]
+
   respond_to :html, :js
 
   def show
@@ -14,7 +16,6 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-    subject_profile
   end
 
   def update
@@ -52,5 +53,9 @@ class ProfilesController < ApplicationController
     end
 
     current_subject.profile
+  end
+
+  def authorize_update
+    authorize! :update, subject_profile
   end
 end
