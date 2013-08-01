@@ -65,7 +65,7 @@ es:
         link: Añadir sitio
         title: Registrar nuevo sitio
       oauth:
-        credentials: Credenciales
+        credentials: Credenciales OAuth2
         secret:
           refresh: regenerar
           refreshed: Token secreto de OAuth2 regenerado
