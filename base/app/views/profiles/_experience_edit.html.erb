@@ -1,4 +1,4 @@
-<%= form_for(@profile, :url => [current_subject, :profile]) do |f| %>
+<%= form_for(@profile, :url => [@profile.subject, :profile]) do |f| %>
   <%= f.text_area :experience, :maxlength => 246, :rows => 5 %>
 
   <%= f.submit :class => "btn" %>

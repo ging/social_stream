@@ -14,11 +14,11 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-    current_profile
+    subject_profile
   end
 
   def update
-    current_profile.update_attributes profile_params
+    subject_profile.update_attributes profile_params
 
     respond_to do |format|
       format.html{ redirect_to [profile_subject, :profile] }
