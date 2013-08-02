@@ -50,6 +50,8 @@ class User < ActiveRecord::Base
 
   def as_json options = nil
     {
+      id: id,
+      actorId: actor_id,
       nickName: slug,
       displayName: name,
       email: email,
