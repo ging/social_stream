@@ -3,6 +3,7 @@ SocialStream.Actor = (function(SS, $, undefined) {
   var select2 = function(selector) {
     $(selector).select2({
       multiple: true,
+      minimumInputLength: 1,
       ajax: {
         url: $(selector).attr('data-path'),
         dataType: 'json',
