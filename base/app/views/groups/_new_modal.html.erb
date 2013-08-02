@@ -5,7 +5,7 @@
   </div>
   <div class="modal-body">
     <%= render partial: 'groups/form',
-               object: Group.new,
+               object: resource_class.new(owners: current_subject.actor_id),
                as: :group %>
   </div>
 </div>

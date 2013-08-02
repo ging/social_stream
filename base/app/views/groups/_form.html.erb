@@ -18,7 +18,7 @@
   </section>
   <section class="owners">
     <%= f.label :owners %>
-    <%= f.hidden_field :owners, 'data-path' => actors_path(format: :json) %>
+    <%= f.hidden_field :owners, 'data-path' => actors_path(format: :json), "data-actor_name" => current_subject.name %>
   </section>
   <section class="tags">
     <%= f.label :tags_list %>

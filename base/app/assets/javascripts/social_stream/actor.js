@@ -16,7 +16,8 @@ SocialStream.Actor = (function(SS, $, undefined) {
       },
       id: function(object) { return object.id.toString(); },
       formatResult: select2FormatResult,
-      formatSelection: select2FormatSelection
+      formatSelection: select2FormatSelection,
+      initSelection: select2InitSelection
     });
   };
 
@@ -26,6 +27,10 @@ SocialStream.Actor = (function(SS, $, undefined) {
 
   var select2FormatResult = function(object, container) {
     return '<img src="' + object.image.url + '"> ' + object.name;
+  };
+
+  var select2InitSelection = function(element, callback) {
+    callback([ { id: element.val(), name: element.attr('data-actor_name'), locked: true } ]);
   };
 
   return {

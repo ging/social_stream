@@ -8,6 +8,6 @@
   <h2><%= t('group.new.title') %></h2>
 
   <%= render partial: 'form',
-             object: @group,
+             object: resource_class.new(owners: current_subject.actor_id),
              as: :group %>
 </section>
