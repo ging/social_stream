@@ -33,4 +33,18 @@ class Site::ClientsController < ApplicationController
   def collection
     current_subject.managed_site_clients
   end
+
+  def permitted_params
+    params.permit resource_request_name => resource_permitted_params,
+                  resource_instance_name => resource_permitted_params
+  end
+
+  def resource_permitted_params
+    [
+      :name,
+      :description,
+      :url,
+      :callback_url
+    ]
+  end
 end
