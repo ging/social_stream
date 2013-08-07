@@ -10,15 +10,13 @@ module SocialStream
         end
 
         def current_subject
-          super ||
-            @current_subject ||=
-              current_from_oauth_token(:client)
+          @current_subject ||=
+            current_from_oauth_token(:client) || super
         end
 
         def current_user
-          super ||
-            @current_user ||=
-              current_from_oauth_token(:user)
+          @current_user ||=
+            current_from_oauth_token(:user) || super
         end
 
         def current_from_oauth_token(type)

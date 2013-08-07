@@ -30,7 +30,7 @@ class Site::ClientsController < ApplicationController
 
   protected
 
-  def collection
+  def end_of_association_chain
     current_subject.managed_site_clients
   end
 
