@@ -1,4 +1,4 @@
-<%= form_for(@profile, :url => [current_subject, :profile]) do |f| %>
+<%= form_for(@profile, :url => [@profile.subject, :profile]) do |f| %>
   <%= f.label :phone, t('profile.phone') %>
 
   <%= f.phone_field :phone %>

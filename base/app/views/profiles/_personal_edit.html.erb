@@ -1,10 +1,10 @@
-<%= form_for(@profile, :url => [current_subject, :profile]) do |f| %>
+<%= form_for(@profile, :url => [@profile.subject, :profile]) do |f| %>
   <span class="required">*</span>
   <%= f.label :name %>
 
   <%= f.text_field :name, :class => "required" %>
 
-  <%= f.label :description, t("profile.#{ current_subject.class.to_s.downcase }.about") %>
+  <%= f.label :description, t("profile.#{ f.object.subject.class.to_s.downcase }.about") %>
 
   <%= f.text_area :description, :maxlength => 200, :rows => 10 %>
 
@@ -12,7 +12,7 @@
 
   <%= f.text_field :organization %>
 
-  <%= f.label :birthday, t('profile.' + current_subject.class.to_s.downcase + '.birthday') %>
+  <%= f.label :birthday, t('profile.' + f.object.subject.class.to_s.downcase + '.birthday') %>
 
   <%= date_select "profile", "birthday", :order => [:day, :month, :year], :end_year => Date.today.year, :start_year => (Date.today.year - 100), :prompt => {:day => 'Day', :month => 'Month', :year => 'Year'} %>
 

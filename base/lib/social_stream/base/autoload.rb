@@ -1,17 +1,16 @@
 module SocialStream
+
   autoload :Ability, 'social_stream/ability'
   autoload :ActivityStreams, 'social_stream/activity_streams'
+
   module ActivityStreams
     autoload :Supertype, 'social_stream/activity_streams/supertype'
     autoload :Subtype,   'social_stream/activity_streams/subtype'
   end
+
   module Base
     autoload :Ability,   'social_stream/base/ability'
   end
-  autoload :D3,        'social_stream/d3'
-  autoload :Populate,  'social_stream/populate'
-  autoload :Relations, 'social_stream/relations'
-  autoload :TestHelpers, 'social_stream/test_helpers'
 
   module Controllers
     autoload :Authorship,              'social_stream/controllers/authorship'
@@ -22,6 +21,8 @@ module SocialStream
     autoload :Objects,  'social_stream/controllers/objects'
     autoload :Subjects, 'social_stream/controllers/subjects'
   end
+
+  autoload :D3,          'social_stream/d3'
 
   module Devise
     module Controllers
@@ -36,12 +37,16 @@ module SocialStream
     autoload :Supertype, 'social_stream/models/supertype'
   end
 
+  autoload :Population,  'social_stream/population'
+
   module Population
     autoload :ActivityObject, 'social_stream/population/activity_object'
     autoload :Actor,          'social_stream/population/actor'
     autoload :PowerLaw,       'social_stream/population/power_law'
     autoload :Timestamps,     'social_stream/population/timestamps'
   end
+
+  autoload :Relations,   'social_stream/relations'
 
   module Routing
     module Constraints
@@ -53,12 +58,14 @@ module SocialStream
 
   autoload :Search, 'social_stream/search'
 
-  module Views
-    autoload :List,     'social_stream/views/list'
-    autoload :Location, 'social_stream/views/location'
-  end
+  autoload :TestHelpers, 'social_stream/test_helpers'
 
   module TestHelpers
     autoload :Controllers, 'social_stream/test_helpers/controllers'
+  end
+
+  module Views
+    autoload :List,     'social_stream/views/list'
+    autoload :Location, 'social_stream/views/location'
   end
 end

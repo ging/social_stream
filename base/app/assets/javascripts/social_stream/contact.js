@@ -171,6 +171,13 @@ SocialStream.Contact = (function($, SS, undefined) {
 
   // new_ callbacks
   
+  var initHideModal = function() {
+    $('#add-contact-modal').on('hide', function () {
+      $('input[name="actors"]').select2('close');
+      $('select[name="relations[]"]').select2('close');
+    });
+  };
+
   var initActorSelect2 = function() {
     SS.Actor.select2('input[name="actors"]');
   };
@@ -298,6 +305,7 @@ SocialStream.Contact = (function($, SS, undefined) {
                     hideLoading);
 
   callback.register('new_',
+                    initHideModal,
                     initActorSelect2,
                     initRelationSelect2);
 

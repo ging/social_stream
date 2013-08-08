@@ -586,7 +586,7 @@ es:
       query: Más resultados para %{query} >
     name: Buscar
     no_subject_found: No se encontró a %{subject}.
-    nothing: No se ha econtrado nada.
+    nothing: No se ha encontrado nada.
     searching: 'Buscando: %{query}'
     show_all: Todos
     write: Escribe tu búsqueda...

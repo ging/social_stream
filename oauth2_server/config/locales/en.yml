@@ -64,11 +64,12 @@ en:
       go_to_other: See your other site clients
       index:
         title: Client sites
+      managing: Managing
       new:
         link: Add site
         title: Register new client site
       oauth:
-        credentials: Credentials
+        credentials: OAuth2 Credentials
         secret:
           refresh: refresh
           refreshed: OAuth2 client secret regenerated

@@ -1,15 +1,1 @@
-<%= location(t('account.one'), 
-  link_to(t('settings.main'), settings_path)
-) %>
-
-<h2>
-	<%= t('settings.for')%> <%= current_subject.name %>
-</h2>
-
-<%= render :partial => "edit_user"%>
-<%= render :partial => "settings/language" %>
-<%= render :partial => "settings/notifications" %>
-<% if current_subject.respond_to? :authentication_token%>
-  <%= render :partial => "settings/api_key" %>
-<% end %>
-<%= render :partial => "delete_account"%>
+<%= render template: 'settings/index' %>

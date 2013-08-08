@@ -184,6 +184,9 @@ en:
       link: Add contact
       modal:
         button: Add
+        placeholder:
+          actors: Type names
+          relations: Type names
         title: Add contacts
       title: Add %{name} to your contacts
       menu: Add contact
