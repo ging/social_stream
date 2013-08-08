@@ -12,10 +12,10 @@
     </header>
     <div class="tabbable"> <!-- Only required for left/right tabs -->
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#tab1" data-toggle="tab">Managing</a></li>
+        <li class="active"><a href="#tab1" data-toggle="tab">Owned</a></li>
+        <li class="active"><a href="#tab2" data-toggle="tab">Purchased</a></li>
       </ul>  
     </div>
-
 
     <div class="tab-content">
       <div class="tab-pane active" id="tab1">
@@ -23,6 +23,14 @@
                    object: collection %>
       </div>
     </div>
+
+    <div class="tab-content">
+      <div class="tab-pane" id="tab2">
+        <%= render partial: 'list',
+                   object: collection %>
+      </div>
+    </div>
+
     <%= render partial: 'new.modal' %>
   </section>
 </section>
