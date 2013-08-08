@@ -1,4 +1,8 @@
 SocialStream.Flash = (function(Flashy, undefined) {
+  var notice = function(message) {
+    Flashy.message('notice', message);
+  };
+
   var error = function(message) {
     if (message === undefined) {
       message = I18n.t('ajax.error');
@@ -11,8 +15,14 @@ SocialStream.Flash = (function(Flashy, undefined) {
     Flashy.message('success', message);
   };
 
+  var warning = function(message) {
+    Flashy.message('warning', message);
+  };
+
   return {
+    notice: notice,
     error: error,
-    success: success
+    success: success,
+    warning: warning
   };
 })(Flashy);
