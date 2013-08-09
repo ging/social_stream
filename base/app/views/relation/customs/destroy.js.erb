@@ -5,4 +5,5 @@
     }
   });
 <% else %>
+  SocialStream.Flash.error('<%= @custom.errors.full_messages.to_sentence %>');
 <% end %>

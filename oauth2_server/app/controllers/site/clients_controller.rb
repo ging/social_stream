@@ -4,7 +4,7 @@ class Site::ClientsController < ApplicationController
 
   before_filter :authenticate_user!
 
-  load_and_authorize_resource
+  load_and_authorize_resource except: :index
 
   def create
     create! do |success, error|
@@ -28,9 +28,14 @@ class Site::ClientsController < ApplicationController
     destroy! { :home }
   end
 
+  def collection
+    get_collection_ivar ||
+      set_collection_ivar(build_collection)
+  end
+    
   protected
 
-  def end_of_association_chain
+  def build_collection
     current_subject.managed_site_clients
   end
 
