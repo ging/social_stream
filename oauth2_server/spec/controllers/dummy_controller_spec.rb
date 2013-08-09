@@ -20,11 +20,18 @@ describe DummyController do
       token.stub(:user).and_return(user)
     end
 
-    it "should have user as current_subject" do
+    it "should have user as current_user" do
+      get :index
+
+      assigns(:current_user).should be_present
+      assigns(:current_user).should eq(user)
+    end
+
+    it "should have client as current_subject" do
       get :index
 
       assigns(:current_subject).should be_present
-      assigns(:current_subject).should eq(user)
+      assigns(:current_subject).should eq(client)
     end
   end
 
