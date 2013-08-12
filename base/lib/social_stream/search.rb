@@ -117,8 +117,10 @@ module SocialStream
 
         [
           query,
-          :classes => models,
-          :with => with
+          classes: models,
+          with: with,
+          limit: options[:limit],
+          page: options[:page]
         ]
       end
     end

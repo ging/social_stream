@@ -45,17 +45,15 @@ class SearchController < ApplicationController
   private
 
   def search mode
-    result = SocialStream::Search.search(params[:q],
-                                         current_subject,
-                                         :mode => mode,
-                                         :key  => params[:type])
+    page =  ( mode == "quick" ? 1 : params[:page] )
+    limit = ( mode == "quick" ? 7 : RESULTS_SEARCH_PER_PAGE )
 
-    if mode.to_s.eql? "quick"
-      result = Kaminari.paginate_array(result).page(1).per(7)
-    else
-      result = Kaminari.paginate_array(result).page(params[:page]).per(RESULTS_SEARCH_PER_PAGE)
-    end
+    SocialStream::Search.search(params[:q],
+                                current_subject,
+                                mode:  mode,
+                                key:   params[:type],
+                                page:  page,
+                                limit: limit)
 
-    result
   end
 end
