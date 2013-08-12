@@ -85,30 +85,29 @@
   <div class="tabbable"> <!-- Only required for left/right tabs -->
     <ul class="nav nav-tabs">
       <li class="active"><a href="#authorized" data-toggle="tab">Authorized</a></li>
-      <li><a href="#registered" data-toggle="tab">Users</a></li>
     </ul>
     
-    <%= render partial: 'contacts/add_button',
-               locals: {
-                 sender: resource,
-                 type: [ :user, :group ]
-               }
-    %>
-
+  <!--
     <div class="btn-group" data-toggle="buttons">
       <button type="radio" name="options" id="option1">user</button>
       <button type="radio" name="options" id="option2"">organization</button>
     </div>
 
      <%= text_field_tag "contact-filter", "", placeholder: "filter", autocomplete: "off" %>
+    -->
 
     <div class="tab-content">
       <div class="tab-pane active" id="authorized">
+
+        <%= render partial: 'contacts/add_button',
+                   locals: {
+                     sender: resource,
+                     type: [ :user, :group ]
+                   }
+        %>
+
         <%= render partial: 'contacts/contact',
                    collection: resource.sent_contacts.first(12) %>
-      </div>
-
-      <div class="tab-pane" id="registered">
       </div>
     </div>
   </div>
