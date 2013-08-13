@@ -51,18 +51,19 @@ class Permission < ActiveRecord::Base
     # if the class is not found
     def available(subject)
       class_name = subject.class.to_s.underscore
+      # TODO add further classes
       base_class_name = subject.class.base_class.to_s.underscore
 
-      candidates = [ class_name, class_name.to_sym ]
+      candidates = [ class_name ]
 
       if class_name != base_class_name
-        candidates += [ base_class_name, base_class_name.to_sym ]
+        candidates += [ base_class_name ]
       end
 
       list = nil
 
       candidates.each do |n|
-        list = SocialStream.available_permissions[n]
+        list = SocialStream.available_permissions.with_indifferent_access[n]
 
         break if list.present?
       end
