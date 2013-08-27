@@ -28,7 +28,8 @@
 
 
 
-#forgot-pass
+#forgot-pass,
+#confirmation
   @include grid-core-span(12, $fluidGridColumnWidth, $fluidGridGutterWidth)
   .forgot-img
     @extend .hidden-phone
@@ -38,7 +39,8 @@
     margin-left: 4%
     img
       width: 100%
-  .forgot
+  .forgot,
+  .instructions
     width: 60%
     display: inline
     header
@@ -47,7 +49,8 @@
       #new_user
         margin-left: 46%
         @extend .hidden-phone
-    .password
+    .password,
+    .confirmation
       width: 27%
       float: right
       display: inline-block
