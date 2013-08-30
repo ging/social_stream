@@ -1,9 +1,12 @@
 <section id="forgot-pass">
   <section class="forgot">
     <header>
-      <h2>
+      <h3>
         <%= t('devise.passwords.forgot') %>
-      </h2>
+      </h3>
+      <p>
+        Write down the email address you associated to your account and you will receive an email with instructions about how to reset your password in a few minutes
+      </p>
 
       <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
         <%= devise_error_messages! %>

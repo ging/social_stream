@@ -30,10 +30,6 @@
       <%= f.submit t('action.accept').capitalize,:class=>"btn pull-right"%>
     </div>
     <hr class="soften">
-
-    <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-      <%= link_to t('confirmation.not_received.long'), new_confirmation_path(resource_name) %><br />
-    <% end -%>
       
     <%= render :partial => "devise/shared/links" %>
       

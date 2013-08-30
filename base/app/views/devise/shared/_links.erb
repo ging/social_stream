@@ -1,7 +1,5 @@
 <article class="options">
-  <%- if controller_name != 'sessions' && ! respond_to?(:sign_in_controller?) %>
-    <%= link_to t('devise.links.sign_in'), new_user_session_path %>
-  <% end -%>
+
 
   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
     <%= link_to t('devise.links.sign_up'), new_registration_path(resource_name) %>
