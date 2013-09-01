@@ -62,7 +62,7 @@ es:
       index:
         title: Sitios
       new:
-        link: Añadir sitio
+        link: Registrar sitio
         title: Registrar nuevo sitio
       oauth:
         credentials: Credenciales OAuth2
