@@ -6,7 +6,6 @@
   <section class="site_client_roles">
     <%= render partial: 'relation/customs/index',
                locals: { subject: resource } %>
+    <%= link_to 'Finish', resource, class: "next-step" %>
   </section>
-
-  <%= link_to 'Finish', resource, class: "next-step" %>
 </section>
