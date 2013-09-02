@@ -5,7 +5,7 @@
     <%= link_to t('representation.switch'), "#", tabindex: "-1" %>
     <ul class="dropdown-menu dropdown-menu-header">
       <% representations.each do |representation| %>
-      <li data-toggle="tooltip" data-placement="left" title="" data-original-title="Tooltip on left">
+      <li>
         <%= link_to :s => representation.slug do %>
           <%= image_tag representation.logo.url(:small) %>
           <%= truncate_name(representation.name, :length => 15) %>
@@ -15,5 +15,6 @@
     </ul>
   </li>
 <% end %> 
-
+<!-- TOOLTIP REFERENCE
 <a href="#" data-toggle="tooltip" data-placement="left" title="" data-original-title="Tooltip on left">Tooltip on left</a>
+-->

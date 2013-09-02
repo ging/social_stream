@@ -1,6 +1,6 @@
 <%= form_for(@profile, :url => [@profile.subject, :profile]) do |f| %>
-  <span class="required">*</span>
-  <%= f.label :name %>
+  
+  <%= f.label :name :class => "name-required" %> <span class="required">*</span>
 
   <%= f.text_field :name, :class => "required" %>
 
