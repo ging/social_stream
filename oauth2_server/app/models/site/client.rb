@@ -1,6 +1,22 @@
 class Site::Client < Site
   validates_presence_of :url, :callback_url, :secret
 
+  has_many :oauth2_tokens,
+           foreign_key: 'site_id',
+           dependent: :destroy
+
+  has_many :authorization_codes,
+           foreign_key: 'site_id',
+           class_name: 'Oauth2Token::AuthorizationCode'
+
+  has_many :access_tokens,
+           foreign_key: 'site_id',
+           class_name: 'Oauth2Token::AccessToken'
+
+  has_many :refresh_tokens,
+           foreign_key: 'site_id',
+           class_name: 'Oauth2Token::RefreshToken'
+
   before_validation :set_secret,
                     on: :create
 
