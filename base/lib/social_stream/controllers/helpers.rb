@@ -106,9 +106,9 @@ module SocialStream
         end
 
         if subject != current_user
-          flash[:notice] ||= ""
-          flash[:notice] += t('representation.notice',
-                              :subject => subject.name)
+          flash.now[:notice] ||= ""
+          flash.now[:notice] += t('representation.notice',
+                                  :subject => subject.name)
         end
 
         self.current_subject = subject
