@@ -5,10 +5,10 @@
       <h3><%= t 'contact.new.modal.title' %></h3>
     </div>
     <div class="modal-body">
-      <%= label_tag 'actors', t('actor.title.other') %>
+      <%= label_tag 'actors', Array.wrap(type).map{ |t| t('title.other', scope: t) }.to_sentence %>
       <%= text_field_tag 'actors', '', 'data-path' => actors_path(stranger: true, sender_id: Actor.normalize_id(sender)), 'data-type' => Array.wrap(type).compact.join(','), placeholder: t('contact.new.modal.placeholder.actors') %>
 
-      <%= label_tag 'relations', t('activerecord.attributes.contact.relation_ids') %>
+      <%= label_tag 'relations', t('contact.new_modal.label.relations') %>
       <%= select_tag 'relations', contact_select_options(sender.options_for_contact_select), multiple: true, "data-placeholder" => t('contact.new.modal.placeholder.actors') %>
     </div>
     <div class="modal-footer">

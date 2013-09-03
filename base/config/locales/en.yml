@@ -191,6 +191,9 @@ en:
       title: Add %{name} to your contacts
       menu: Add contact
       submit: Add Contact
+    new_modal:
+      label:
+        relations: Initially assigned roles
     one: Contact
     other: Contacts
     pending:
