@@ -1,5 +1,0 @@
-$('#timeline').replaceWith("<%= escape_javascript render(:partial => 'activities/timeline', :locals => { :activities => current_subject.wall(:home).page(params[:page]) }) %>");
-
-setActivityPrivacyTooltips();
-
-$.scrollTo('#timeline', 1500,{axis:'y'});
