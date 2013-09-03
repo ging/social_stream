@@ -16,6 +16,10 @@ class GroupsController < ApplicationController
     create! do |success, failure|
       success.html {
         self.current_subject = resource
+
+        flash[:notice] += t('representation.notice',
+                             :subject => resource.name)
+
         redirect_to :home
       }
     end
