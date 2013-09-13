@@ -1,0 +1,61 @@
+
+nl:
+  errors:
+    messages:
+      expired: "ist abgelaufen. Bitte neu anfordern"
+      not_found: "nicht gefunden"
+      already_confirmed: "wurde bereits bestätigt. Bitte  versuchen einzusteigen"
+      not_locked: "wurde nicht gesperrt"
+      not_saved:
+        one: "1 Fehler verhindert %{resource} zu speichern:"
+        other: "%{count} Fehler verhindern %{resource} zu speichern:"
+
+  devise:
+    suggestion: "Beliebte tags"
+    email: "Email"
+    name: "Name"
+    password: "Passwort"
+    passwordconfirmation: "Passwort Bestätigung" 
+    tags: "Interessensgebiete" 
+    failure:
+      already_authenticated: 'Du bist bereits angemeldet.'
+      unauthenticated: 'Du muss einsteigen oder dich anmelden bevor du weitermachen kannst.'
+      unconfirmed: 'Du musst dein Benutzerkonto bestätigen bevor du weitermachen kannst.'
+      locked: 'Dein Benutzerkonto wurde gesperrt.'
+      invalid: 'E-mail oder Passwort ist ungültig.'
+      invalid_token: 'Ungültiger Token zur Authentifizierung.'
+      timeout: 'Deine Session is abgelaufen. Bitte steig noch einmal ein, um weiterzumachen.'
+      inactive: 'DEin BEnutzerkonto wurde bisher nicht aktiviert.'
+    sessions:
+      signed_in: 'Einstieg erfolgreich.'
+      signed_out: 'Ausstieg erfolgreich.'
+    passwords:
+      send_instructions: 'In wenigen Minuten bekommst du eine e-mail mit Anweisungen, wie du dein Passwort zurücksetzen kannst.'
+      updated: 'Dein Passwort wurde erfolgreich geändert. Du bist jetzt angemeldet.'
+      updated_not_active: 'Dein Passwort wurde erfolgreich geändert.'
+      send_paranoid_instructions: "Falls wir deine e-mail bereits in unserer Datenbank haben, bekommst du eine Benachrichtigung mit einem link zu deinem Passwort"
+    confirmations:
+      send_instructions: 'In wenigen Minuten bekommst du eine e-mail mit Anweisungen zur Bestätigung deines Benutzerkontos.'
+      send_paranoid_instructions: 'Falls wir deine e-mail bereits in unserer Datenbank haben, bekommst du in wenigen Minuten eine Benachrichtigung mit Anweisungen zur Bestätigung deines Benutzerkontos.'
+      confirmed: 'Dein Benutzerkonto wurde erfolgreich bestätigt. Du bist jetzt angemeldet.'
+    registrations:
+      signed_up: 'Willkommen! Du hast dich erfolgreich angemeldet.'
+      signed_up_but_unconfirmed: 'Ein Link zur Bestätigung wurde an deine e-mail Adresse geschickt. Bitte öffne diesen Link,um dein Benutzerkonto zu aktivieren.'
+      signed_up_but_inactive: 'Du hast dich erfolgreich angemeldet. Du musst dein Benutzerkonto allerdings erst aktivieren bevor du einsteigen kannst.'
+      signed_up_but_locked: 'Du hast dich erfolgreich angemeldet. Leider kannst du nicht einsteigen, weil dein Benutzerkonto gesperrt ist.'
+      updated: 'Dein Benutzerkonto wurde erfolgreich aktualisiert.'
+      destroyed: 'Auf Wiedersehen! Dein Benutzerkonto wurde erfolgreich gelöscht. Wir hoffen, du kommst wieder zurück.'
+    unlocks:
+      send_instructions: 'In wenigen Minuten erhälst du eine e-mail mit Anweisungen, um dein Benutzerkonto zu entsperren.'
+      unlocked: 'Dein Benutzerkonto wurde erfolgreich entsperrt. Du bist angemeldet.'
+      send_paranoid_instructions: 'Falls dein Benutzerkonto existiert, bekommst du in wenigen Minuten eine e-mail mit Anweisungen,wie du dein Benutzerkonto entsperren kannst.'
+    omniauth_callbacks:
+      success: 'Authorisierung von %{kind} Benutzerkonto erfolgreich.'
+      failure: 'Authorisierung von %{kind} Benutzerkonto war nicht erfolgreich, weil "%{reason}".'
+    mailer:
+      confirmation_instructions:
+        subject: 'Anweisungen zur Bestätigung'
+      reset_password_instructions:
+        subject: 'Anweisungen zum Zurücksetzen des Passworts'
+      unlock_instructions:
+        subject: 'Anweisungen zum Entsperren'

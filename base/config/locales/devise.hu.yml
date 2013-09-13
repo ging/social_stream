@@ -1,0 +1,60 @@
+hu:
+  errors:
+    messages:
+      expired: "lejárt, kérjük, hogy kérj egy újat"
+      not_found: "nem található"
+      already_confirmed: "már megerősítésre került, próbálj belépni"
+      not_locked: "nincs bezárve"
+      not_saved:
+        one: "1 hiba miatt a %{resource} nem menthető:"
+        other: "%{count} számú hiba miatt a %{resource} a %{resource} nem menthető:"
+
+  devise:
+    suggestion: "Népszerű címkék"
+    email: "Email"
+    name: "Név"
+    password: "Jelszó"
+    passwordconfirmation: "Jelszó megerősítése" 
+    tags: "Érdeklődési kör" 
+    failure:
+      already_authenticated: 'Már bejelentkeztél'
+      unauthenticated: 'A folytatáshoz be kell jelentkezned vagy regisztrálnod kell magad.'
+      unconfirmed: 'A folytatáshoz meg kell erősítened belépési adataidat.'
+      locked: 'Fiókod zárolásra került.'
+      invalid: 'Érvénytelen email vagy jelszó.'
+      invalid_token: 'Érvénytelen autentikáció'
+      timeout: 'A munkamenet lejárt, jelentkezz be újra a folytatáshoz.'
+      inactive: 'Fiókod nem került aktiválásra'
+    sessions:
+      signed_in: 'Sikeres belépés'
+      signed_out: 'Sikeres kilépés'
+    passwords:
+      send_instructions: 'Kapni fogsz egy levelet arról, hogy miként tudod jelszavadat pár percen belül újrabeállítani.'
+      updated: 'Jelszavad sikeresen módosult. Most már beléphetsz.'
+      updated_not_active: ' Jelszavad sikeresen módosult.'
+      send_paranoid_instructions: "Ha e-mail címedet tartalmazza adatbázisunk, akkor rövidesen kapsz egy linket jelszavad eléréséhez."
+    confirmations:
+      send_instructions: 'Kapni fogsz egy levelet, amelyben utasításokat találsz fiókod beállításainak megerősítéséhez.'
+      send_paranoid_instructions: 'Amennyiben e-mail címed szerepel adatbázisunkban, kapni fogsz egy levelet, amelyben utasításokat találsz fiókod beállításainak megerősítéséhez.'
+      confirmed: 'Fókod beállításai sikeres megerősítésre kerülte. Most bár bejelentkezhetsz.'
+    registrations:
+      signed_up: 'Üdvözlünk! Sikeresen regisztráltál!'
+      signed_up_but_unconfirmed: 'A megerősítéshez szükséges linket tartalmazó üzenetet elküldtük az e-mail címedre. Kérjük, hogy fiókod aktiválásához nyisd meg ezt a linket.'
+      signed_up_but_inactive: 'Sikeresen regisztráltál, de még nem tudsz bejelentkezni, mert fiókod még nem lett aktiválva.'
+      signed_up_but_locked: 'Sikeresen regisztráltál, de még nem tudsz bejelentkezni, mert fiókod zárolásra került.'
+      updated: 'Fiókod sikeresen frissítésre került.'
+      destroyed: 'Szia! Fiókod sikeresen törlésre került. Reméljük, nemsokára visszatérsz.'
+    unlocks:
+      send_instructions: 'Rövidesen kapni fogsz egy e-mailt, amelyben utasításokat talász arról, hogy miképpen tudod feloldani fiókod zárlatát.'
+      unlocked: 'Fiókod zárlatát sikeresen feloldottuk. Most már bejelentkezhetsz.'
+      send_paranoid_instructions: 'Ha fiókod létezik, kapni fogsz egy utasításokat tartalmazó levelet arról, hogy miképpen oldhatod fel annak zárlatát.'
+    omniauth_callbacks:
+      success: 'A %{kind} fiók engedéylezése sikeres volt.'
+      failure: 'A %{kind} fiók engedélyezése nem sikerült, mert "%{reason}".'
+    mailer:
+      confirmation_instructions:
+        subject: 'Megerősítési utasítások'
+      reset_password_instructions:
+        subject: 'Jelszó-törlési utasítások'
+      unlock_instructions:
+        subject: 'Utasítások zárolásának feloldása'

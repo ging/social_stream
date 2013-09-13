@@ -1,0 +1,61 @@
+
+fr:
+  errors:
+    messages:
+      expired: "a expiré, veuillez en demander un nouveau"
+      not_found: "introuvable"
+      already_confirmed: "a déjà été confirmé, veuillez essayer de vous connecter"
+      not_locked: "n'a pas été verrouillé"
+      not_saved:
+        one: "1 erreur a empêché l'enregistrement de ce(tte) %{resource} :"
+        other: "%{count} erreurs ont empêché l'enregistrement de ce(tte) %{resource} :"
+
+  devise:
+    suggestion: "Mots-clés populaires"
+    email: "Adresse électronique"
+    name: "Nom"
+    password: "Mot de passe"
+    passwordconfirmation: "Confirmation du mot de passe" 
+    tags: "Centres d'intérêt" 
+    failure:
+      already_authenticated: 'Vous êtes déjà connecté(e).'
+      unauthenticated: 'Vous devez vous connecter ou vous inscrire avant de continuer.'
+      unconfirmed: 'Vous devez confirmer votre compte avant de continuer'
+      locked: 'Votre compte a été verrouillé.'
+      invalid: 'Adresse électronique ou mot de passe invalide.'
+      invalid_token: "Jeton d'authentification invalide."
+      timeout: 'Votre session a expiré, veuillez vous reconnecter pour continuer.'
+      inactive: "Votre compte n'a pas encore a été activé."
+    sessions:
+      signed_in: 'Connexion réussie.'
+      signed_out: 'Déconnexion réussie.'
+    passwords:
+      send_instructions: 'Vous recevrez un message électronique comportant des instructions pour réinitialiser votre mot de passe dans quelques minutes.'
+      updated: 'Votre mot de passe a été modifié avec succès. Vous êtes maintenant connecté(e).'
+      updated_not_active: 'Votre mot de passe a été modifié avec succès.'
+      send_paranoid_instructions: "Si votre adresse électronique figure dans notre base de données, vous recevrez un message comportant un lien de récupération du mot de passe."
+    confirmations:
+      send_instructions: 'Vous recevrez un message électronique comportant des instructions pour confirmer votre compte dans quelques minutes.'
+      send_paranoid_instructions: 'Si votre adresse électronique figure dans notre base de données, vous recevrez un message électronique comportant des instructions pour confirmer votre compte dans quelques minutes.'
+      confirmed: 'Votre compte a été confirmé avec succès. Vous êtes maintenant connecté(e).'
+    registrations:
+      signed_up: 'Bienvenue ! Votre inscription a été effectuée avec succès.'
+      signed_up_but_unconfirmed: 'Un message comportant un lien de confirmation a été envoyé à votre adresse électronique. Veuillez ouvrir le lien pour activer votre compte.'
+      signed_up_but_inactive: "Votre inscription a été effectuée avec succès. Cependant, nous n'avons pas pu vous connecter, car votre compte n'a pas encore été activé."
+      signed_up_but_locked: "Votre inscription a été effectuée avec succès. Cependant, nous n'avons pas pu vous connecter, car votre compte est verrouillé."
+      updated: "La mise à jour de votre compte a été réalisée avec succès."
+      destroyed: "Au revoir ! Votre compte a bien été annulé. Nous espérons vous revoir bientôt."
+    unlocks:
+      send_instructions: "Vous recevrez un message électronique comportant des instructions pour déverrouiller votre compte dans quelques minutes."
+      unlocked: "Votre compte a été déverrouillé avec succès. Vous êtes maintenant connecté(e).'
+      send_paranoid_instructions: "Si votre compte existe, vous recevrez un message électronique comportant des instructions pour le déverrouiller dans quelques minutes."
+    omniauth_callbacks:
+      success: 'Vous avez été autorisé(e) avec succès par le compte %{kind}.'
+      failure: "Vous n'avez pas pu être autorisé(e) par %{kind} car '%{reason}'."
+    mailer:
+      confirmation_instructions:
+        subject: 'Instructions de confirmation'
+      reset_password_instructions:
+        subject: 'Instructions de réinitialisation du mot de passe'
+      unlock_instructions:
+        subject: 'Instructions de déverrouillage'

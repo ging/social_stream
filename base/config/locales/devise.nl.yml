@@ -1,0 +1,60 @@
+nl:
+  errors:
+    messages:
+      expired: "is verlopen, vraag een nieuwe a.u.b."
+      not_found: "niet gevonden"
+      already_confirmed: "is al bevestigd, probeer in te loggen"
+      not_locked: "was niet geblokkeerd"
+      not_saved:
+        one: "1 fout verhinderde dat dit %{resource} werd opgeslagen:"
+        other: "%{count} fouten verhinderden dat dit %{resource} werd opgeslagen:"
+
+  devise:
+    suggestion: "Populaire tags"
+    email: "Email"
+    name: "Naam"
+    password: "Wachtwoord"
+    passwordconfirmation: "Bevestiging wachtwoord" 
+    tags: "Aandachtsvelden" 
+    failure:
+      already_authenticated: 'U bent al ingelogd.'
+      unauthenticated: 'U moet inloggen of zich aanmelden voordat u verder gaat.'
+      unconfirmed: 'U moet uw account bevestigen voordat u verder gaat.'
+      locked: 'Uw account is geblokkeerd.'
+      invalid: 'Ongeldige email of wachtwoord.'
+      invalid_token: 'Ongeldig authenticatie-token.'
+      timeout: 'Uw sessie is verlopen, log opnieuw in om verder te gaan.'
+      inactive: 'Uw account is nog niet geactiveerd.'
+    sessions:
+      signed_in: 'Succesvol ingelogd.'
+      signed_out: 'Succesvol uitgelogd.'
+    passwords:
+      send_instructions: 'U ontvangt over enkele minuten een email met instructies over hoe u uw wachtwoord kunt resetten.'
+      updated: 'Uw wachtwoord is succesvol gewijzigd. U bent nu ingelogd.'
+      updated_not_active: 'Uw wachtwoord is succesvol gewijzigd.'
+      send_paranoid_instructions: "Als uw email voorkomt in onze database, ontvangt u via email een link waarmee u uw wachtwoord kunt herstellen"
+    confirmations:
+      send_instructions: 'U ontvangt over enkele minuten een email met instructies over hoe u uw account kunt bevestigen.'
+      send_paranoid_instructions: 'Als uw email voorkomt in onze database, ontvangt u over enkele minuten een email met instructies over hoe u uw account kunt bevestigen.'
+      confirmed: 'Uw account is succesvol bevestigd. U bent nu ingelogd.'
+    registrations:
+      signed_up: 'Welkom! U hebt zich succesvol aangemeld.'
+      signed_up_but_unconfirmed: 'Een bericht met een bevestigingslink is naar uw emailadres verzonden. Open de link om uw account te activeren.'
+      signed_up_but_inactive: 'U hebt zich succesvol aangemeld. Wij konden u echter nog niet inloggen omdat uw account nog niet geactiveerd is.'
+      signed_up_but_locked: 'U hebt zich succesvol aangemeld. We konden u echter nog niet inloggen omdat uw account geblokkeerd is.'
+      updated: 'U hebt uw account succesvol geüpdatet.'
+      destroyed: 'Tot ziens! Uw account is succesvol geannuleerd. Wij hopen u spoedig weer te zien.'
+    unlocks:
+      send_instructions: 'U ontvangt over enkele minuten een email met instructies over hoe u uw account kunt deblokkeren.'
+      unlocked: 'Uw account is succesvol gedeblokkeerd. U bent nu ingelogd.'
+      send_paranoid_instructions: 'Als uw account bestaat, ontvangt u over enkele minuten een email met instructies over hoe u het kunt deblokkeren.'
+    omniauth_callbacks:
+      success: 'Succesvol geautoriseerd vanuit %{kind} account.'
+      failure: 'Kon u niet autoriseren vanuit %{kind} omdat "%{reason}".'
+    mailer:
+      confirmation_instructions:
+        subject: 'Bevestigingsinstructies'
+      reset_password_instructions:
+        subject: 'Wachtwoord instructies resetten'
+      unlock_instructions:
+        subject: 'Instructies deblokkeren'

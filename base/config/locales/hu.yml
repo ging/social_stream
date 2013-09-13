@@ -1,653 +1,552 @@
 ---
 hu:
-  language_name: Magyar
-  account:
-    cancel: Fiók törlése
-    edit: Fiók szerkesztése
-    email:
-      change: Email cím megváltoztatása
-    lang:
-      change: Nyelvváltás
-    one: Fiók
-    password:
-      change: Jelszó megváltoztatása
-      new: Új jelszó
-      retype: Jelszó újra
+  language_name: "Magyar"
+  actor:
+    name: "Név"
   action:
-    accept: Elfogad
-    send: Elküld
+    send: "Elküld"
+    accept: "Elfogadás"
+  account:
+    cancel: "Fiók törlése"
+    edit: "Fiók szerkesztése"
+    email: 
+      change: "Email cím megváltoztatása"
+    lang: 
+      change: "Nyelvváltás"
+    one: "Fiók"
+    password:
+      change: "Jelszó megváltoztatása"
+      new: "Új jelszó"
+      retype: "Jelszó újra"
+    privacy: "Adatvédelem"
   activerecord:
     attributes:
       contact:
-        relation_ids: Kapcsolat típusa
-      profile:
-        name: Name
+        relation_ids: "Kapcsolat típusa"
       relation/custom:
-        name: Név
+        name: "Név"
       user:
-        email: Email
-        name: Név
-        password: Jelszó
-        password_confirmation: Jelszó megerősítése
-        remember_me: Emlékeztető
+        email: "Email"
+        name: "Név"
+        password: "Jelszó"
+        password_confirmation: "Jelszó megerősítése"
+        remember_me: "Emlékeztető"
   activity:
     audience:
       hidden:
-        full: Megosztva az %{audience} kapcsolatokkal
-        summary: Korlátozott
+        summary: "Korlátozott"
+        full: "Megosztva az %{audience} kapcsolatokkal"
       public:
-        full: Megosztva a teljes interneten
-        summary: Nyilvános
-      show: Bemutatás
+        summary: "Nyilvános"
+        full: "Megosztva a teljes interneten"
+      show: "Bemutatás"
       visible:
-        full: ' Megosztva az %{audience}-szel'
-        summary: Korlátozott
-    confirm_delete: Törlöd a tevékenységet?
-    delete: Törlés
-    last: Legújabb tevékenységek
-    like: Tetszik
+        summary: "Korlátozott"
+        full: " Megosztva az %{audience}-el"
+    confirm_delete: "Törlöd a tevékenységet?"
+    delete: "Törlés"
+    last: "Legújabb tevékenységek"
+    like: "Tetszik"
     like_sentence:
-      one: '%{likers}-nek tetszik'
-      other: '%{likers}-nek tetszik'
-    one: Tevékenység
-    other: Tevékenységek
+      one: "%{likers}-nek tetszik"
+      other: "%{likers}-nek tetszik"
+      more:
+    one: "Tevékenység"
+    other: "Tevékenységek"
     privacy:
-      contact:
-        myself:
-          group: All members
-          user: Your contacts
-        outside:
-          group: Members of %{receiver}
-          user: Contacts of %{receiver}
-      relation:
-        one: '%{count} group'
-        other: '%{count} groups'
-    sending: Küldés
-    share: Share
-    share_loading: Sharing...
+      myself:
+        contacts:
+          group: "Minden tag"
+          user: "Elérhetőséged"
+      outside:
+        contacts:
+          group: "A %{receiver} tagjai"
+          user: "A %{receiver} elérhetőségei"
+    sending: "Küldés"
     stream:
-      atom_title: Tevékenység folyam a %{subject}-tól
+      atom_title: "Tevékenység folyam a %{subject}-tól"
       title:
-        follow: '%{author} hozzáadott egy %{activity_object}-t mint kapcsolatot'
-        like: '%{author}-nak tetszik a %{activity_object}'
-        make-friend: '%{author} még hozzáadott egy %{activity_object} mint kapcsolatot'
-        post: A %{author} közzétette a %{activity_object}
-        updated: '%{author} közzétette a %{activity_object}'
-    title: Tevékenységek
-    to_comment: Megjegyzés
-    unlike: Semmi nem tetszik
+        follow: "%{author} hozzáadott egy %{activity_object}-t mint kapcsolatot"
+        like: "%{author}-nak tetszik a %{activity_object}"
+        make-friend: "%{author} még hozzáadott egy %{activity_object} mint kapcsolatot"
+        post: "A %{author} közzétette a %{activity_object}"
+        updated: "%{author} közzétette a %{activity_object}"
+    title: "Tevékenységek"
+    to_comment: "Megjegyzés"
+    unlike: "Semmi nem tetszik"
     verb:
       follow:
-        Group:
-          message: '%{name} hozzáadott téged a kapcsolataihoz.'
-          title: '%{subject}-t hozzáadta %{contact}-t, mint kapcsolatot.'
         User:
-          message: '%{name} hozzáadott téged a kapcsolataihoz.'
-          title: '%{subject}-t hozzáadta %{contact}-t, mint kapcsolatot.'
-      join:
-        one: '%{sender} csatlakozott a %{title} %{thing}-hoz.'
+          title: "%{subject} hozzáadta %{contact}-t, mint kapcsolatot."
+          message: "%{name} hozzáadott téged a kapcsolataihoz."
+        Group:
+          title: "%{subject} hozzáadta %{contact}-t, mint kapcsolatot."
+          message: "%{name} hozzáadott téged a kapcsolataihoz."
       like:
-        Group:
-          message: '%{name} mostantól a rajongód.'
-          title: '%{subject} egy rajongója %{contact}-nak.'
         User:
-          message: '%{name} mostantól a rajongód.'
-          title: '%{subject} egy rajongója %{contact}-nak.'
+          title: "%{subject} egy rajongója %{contact}-nak."
+          message: "%{name} mostantól a rajongód."
+        Group:
+          title: "%{subject} egy rajongója %{contact}-nak."
+          message: "%{name} mostantól a rajongód."
+      join: 
+        one: "%{sender} csatlakozott a %{title} %{thing}-hoz."
       make-friend:
-        Group:
-          message: '%{name} hozzáadott téged a kapcsolataihoz.'
-          title: '%{subject}-t hozzáadta %{contact}-t, mint kapcsolatot.'
         User:
-          message: '%{name} hozzáadott téged a kapcsolataihoz.'
-          title: '%{subject} és %{contact} mostantól kapcsolatban állnak egymással.'
+          title: "%{subject} és %{contact} mostantól kapcsolatban állnak egymással."
+          message: "%{name} hozzáadott téged a kapcsolataihoz."
+        Group:
+          title: "%{subject} hozzáadta %{contact}-t, mint kapcsolatot."
+          message: "%{name} hozzáadott téged a kapcsolataihoz."           
       post:
         title:
-          other_wall: '%{sender} â†’ %{receiver}'
+          other_wall: "%{sender} â†’ %{receiver}"
   activity_action:
-    follow: Követés
+    follow: "Követés"
     sentence:
       follow:
-        one: '%{followers} ezt követik'
-        other: '%{followers} ezt követik'
+        one: "%{followers} ezt követik"
+        other: "%{followers} ezt követik"
       more:
-        one: '%{count}-vel több személy'
-        other: '%{count}–vel több személy'
-    unfollow: Nemkövetés
-  actor:
-    name: Név
-    title:
-      other: Actors
-  ajax:
-    error: There was an error in the remote server
-  browse: Böngészés
+        one: "%{count}-vel több személy"
+        other: "%{count}–vel több személy"
+    unfollow: "Követés megszüntetése"
+  browse: "Böngészés"
   button:
-    cancel: Mégse
-    create: Létrehozás
-    save: Mentés
-    update: Frissítés
+    cancel: "Mégse"
+    create: "Létrehozás"
+    save: "Mentés"
+    update: "Frissítés"
   cheesecake:
     changes:
-      details: Részletek változtatása
-      none: Nincs változás
-      save: Változások mentése
-      saving: Mentés...
+      details: "Részletek változtatása"
+      none: "Nincs változás"
+      save: "Változások mentése"
+      saving: "Mentés..."
     form:
-      editing: Szerkesztés
+      editing: "Szerkesztés"
       fields:
-        color: Szín
-        name: Név
-        permissions: Jogosultságok
-        subsector: Alszektor
+        color: "Szín"
+        name: "Név"
+        permissions: "Jogosultságok"
+        subsector: "Alszektor"
     select:
-      hint: Kattints a kiválasztott arcra
+      hint: "Kattints a kiválasztott arcra"
   comment:
-    confirm_delete: Törlöd a megjegyzést?
-    input: Írj megjegyzést...
-    name: megjegyzés
-    one: megjegyzés
-    other: comments
+    input: "Írj megjegyzést..."
+    confirm_delete: "Törlöd a megjegyzést?"
+    name: "megjegyzés"
+    one: "megjegyzés"
     title:
-      one: Megjegyzés
-      other: Megjegyzések
-    view_all: Az összes megjegyzés megtekintése
+      one: "Megjegyzés"
+      other: "Megjegyzések"
+    view_all: "Az összes megjegyzés megtekintése"
   contact:
-    all_n: Az összes névjegy (%{count})
-    confirm_delete: Törlöd a névjegyet?
-    current: Jelenlegi
-    delete: Törlés
+    addressbook: "Címjegyzék"
+    all_n: "Az összes névjegy (%{count})"
+    confirm_delete: "Törlöd a névjegyet?"
+    current: "Jelenlegi"
+    delete: "Törlés"
     edit:
-      submit: Névjegy szerkesztése
-      title: '%{name} névjegyének szekesztése '
-    empty: You have not added anybody yet. What about <a href="%{explore}">exploring</a>?
+      title: "%{name} névjegyének szekesztése "
+      submit: "Névjegy szerkesztése"
     error_count:
-      one: Egy hiba akadályozza a névjegy mentését
-      other: '%{count} hiba akadályozza a névjegy mentését'
-    follow: Kövesd
-    following: Követés
+      one: "Egy hiba akadályozza a névjegy mentését"
+      other: "%{count} hiba akadályozza a névjegy mentését"
+    follow: "Kövesd"
+    following: "Követett"
     graph:
-      empty: Sajnos jelenleg még nincsenek névjegyeid. Próbáld meg a keresőt használni!
-      one: Gráf
+      one: "Gráf"
+      empty: "Sajnos jelenleg még nincsenek névjegyeid. Próbáld meg a keresőt használni!"
     in_common:
-      one: 1 közös kapcsolat
-      other: '%{count} közös kapcsolat'
-    n:
-      one: '%{count} contact'
-      other: '%{count} contacts'
+      one: "1 közös kapcsolat"
+      other: "%{count} közös kapcsolat"
     new:
-      added:
-        other: '%{actors} successfully added as %{relations}'
-      button:
-        one: '%{count} role'
-        other: '%{count} roles'
-        zero: Add
-      link: + Kapcsolat hozzáadása
-      menu: Kapcsolat hozzáadása
-      modal:
-        button: Add
-        title: Add contacts
-      submit: Kapcsolat hozzáadása
-      title: '%{name} hozzáadása kapcsolataidhoz'
-    one: Kapcsolat
-    other: Kapcsolatok
+      link: "+ Kapcsolat hozzáadása"
+      title: "%{name} hozzáadása kapcsolataidhoz"
+      menu: "Kapcsolat hozzáadása"
+      submit: "Kapcsolat hozzáadása"
+    one: "Kapcsolat"
+    other: "Kapcsolatok"
     pending:
-      all: Minden
-      all_n: Függőben lévő kérések száma (%{count})
-      other: Függő
-    received: Received
+      other: "Függő"
+      all: "Minden"
+      all_n: "Függőben lévő kérések száma (%{count})"
     relation:
-      new: Új típus
-      one: Kapcsolat típusa
+      one: "Kapcsolat típusa"
+      new: "Új típus"
     reply:
-      link: + Viszontválasz
-      submit: Viszontválasz
-      title: Viszontválasz %{name} kérésére
-    saving: Saving...
-    sent: Added
+      link: "+ Viszontválasz"
+      title: "Viszontválasz %{name} kérésére"
+      submit: "Viszontválasz"
     suggestion:
-      all: Minden
-      one: Javaslat
-      other: Javaslatok
+      one: "Javaslat"
+      other: "Javaslatok"
+      all: "Minden"
     type:
-      new: + Új típus
-    unfollow: Nemkövetett
-    view_all: View all...
-  copyright: 2010 Copyright – Minden jog fenntartva
-  counter:
-    like:
-      one: <span class="counter">%{count}</span> like
-      other: <span class="counter">%{count}</span> likes
-    view:
-      one: <span class="counter">%{count}</span> view
-      other: <span class="counter">%{count}</span> views
+      new: "+ Új típus"
+    unfollow: "Követés megszüntetése"
+  copyright: "2010 Copyright – Minden jog fenntartva"
   delete:
     confirm: Törli a %{element}}-t?
   devise:
     links:
-      confirmation_instructions: Nem kaptad meg a megerősítési utasításokat?
-      forgot_password: Elfelejtetted a jelszavadat?
-      sign_in: Bejelentkezés
-      sign_in_with: Lépj be a %{provider}-val
-      sign_up: Kijelentkezés
-      unlock_instructions: Kaptál zárolt utasításokat?
+      sign_in: "Bejelentkezés"
+      sign_up: "Kijelentkezés"
+      forgot_password: "Elfelejtetted a jelszavadat?"
+      confirmation_instructions: "Nem kaptad meg a megerősítési utasításokat?"
+      unlock_instructions: "Kaptál zárolt utasításokat?"
+      sign_in_with: "Lépj be a %{provider}-val"
     passwords:
-      confirm: Jelszó megerősítése
-      forgot: Elfelejtetted a jelszavadat?
-      instructions: 'Írd be a felhasználói fiókodhoz tartozó e-mail címedet, és mi
-        megadjuk neked, hogy miképpen tudod azt megváltoztatni:'
-      update: Módosítsd a jelszavadat
-  dropdown:
-    notifications: Notifications
-    privacy: Privacy
-    settings: Settings
-  explore:
-    explore:
-      most_followed: Most followed
-      most_popular: Most popular
-    header:
-      explore: Explore
-      participants: Participants
-      resources: Resources
-      search: Search
-      tags: Tags
-      timeline: Timeline
-    link: Explore
-    or: or Explore
-    participants:
-      last_active: Last active
-      last_registered: Last registered
-      most_members: Most members
-      registered_since: since %{time}
-    resources:
-      last_uploaded: Last uploaded
-      most_visited: Most viewed
-      uploaded_since: since %{time}
-    search:
-      placeholder: looking for...
-      submit: Search
-      title: Advanced search
+      confirm: "Jelszó megerősítése"
+      forgot: "Elfelejtetted a jelszavadat?"
+      instructions: "Írd be a felhasználói fiókodhoz tartozó e-mail címedet, és mi megadjuk neked, hogy miképpen tudod azt megváltoztatni:"
+      update: "Módosítsd a jelszavadat"
   follower:
     follower:
-      title: Követők
+      title: "Követők"
     following:
-      title: Követések
+      title: "Követések"
     n:
-      one: 1 követő
-      other: '%{count} követő'
-  forgot_password: Elfelejtetted a jelszavadat?
+      one: "1 követő"
+      other: "%{count} követő"
+  forgot_password: "Elfelejtetted a jelszavadat?"
   frontpage:
-    main_title: A Közösségi folyam jelenti a közösségi hálózat typusú weboldalak alapvető
-      elemét.
-    presentation:
-      community:
-        header: Community
-        p: Social Stream enjoys a growing community of developers. Feel free to drop
-          a message at <a href="http://groups.google.com/group/social-stream">Social
-          Stream's Google group</a> or <a href="http://stackoverflow.com/questions/tagged/social-stream">StackOverflow</a>
-          if you have problems. <a href="https://github.com/ging/social_stream/issues/new">Open
-          an issue</a> if you find a defect. Pull request are very welcomed!
-      flexible:
-        header: Flexible
-        p: Completely customize your social network <a href="https://github.com/ging/social_stream/wiki/How-to-change-controllers%2C-models%2C-views%2C-assets-and-locales">changing
-          any Social Stream component</a>, <a href="https://github.com/ging/social_stream/wiki/How-to-add-new-activity-objects">adding
-          new activity objects</a> or changing the CSS using <a href="http://sass-lang.com/">Sass</a>
-      modular:
-        header: Modular
-        p: Available <a href="https://github.com/ging/social_stream#social-stream-components">Social
-          Stream components</a> provide your application only with the features you
-          need in your social network. Just add your desired gems to your Gemfile
-    stats: '%{users} felhasználó és %{groups} csoport van regisztrálva'
+    collaborate:
+      default: "Együttműködés"
+      sentence1: "Projektjeid és tevékenységeid szervezése"
+      sentence2: "Konferenciákon és más eseményeken való részvétel"
+      sentence3: "Hozz létre saját csoportot és konferenciákat"
+    elements:
+      comments: "Megjegyzés"
+      conferences: "Konferenciák"
+      networks: "Közösségi hálózat"
+      organizers: "Szervezők"
+      participants: "Részvevők"
+      groups: "Csoportok"
+      tags: "Tags"
+    main_title: "A Közösségi folyam jelenti a közösségi hálózat typusú weboldalak alapvető elemét."
+    meet:
+      default: "Találkozás"
+      sentence1: "Találkozás érdekes emberekkel és csoportokkal"
+      sentence2: "Kapcsolataid legújabb tevékenységenek keresése"
+    register: "Regisztrálj most!"
+    share:
+      default: "Megosztás"
+      sentence1: "Projektjeid és tevékenységeid"
+      sentence2: "Üzenet, fotó, zene és videó"
+    stats: "%{users} felhasználó és %{groups} csoport van regisztrálva"
   group:
-    all: Az összes csoport
-    all_n: (%{count}) csoport
-    by: Csoportok szerint
-    cloud: Csoport címke felhő
+    one: "Csoport"
+    other: "Csoportok"
+    all: "Az összes csoport"
+    all_n: "(%{count}) csoport"
+    by: "Csoportok szerint"    
     destroy:
-      explanation: A csoporthoz kapcsolódó minden tevékenység, információ és kapcsolat
-        meg fog semmisülni.
-      go_ahead: Igen, biztosan akarom. Legyen minden megsemmisítve!
-      last_confirm: Ez az utolsó lehetőség. Biztos vagy benne?
-      one: Csoport megszüntetése
+      one: "Csoport megszüntetése"
+      explanation: "A csoporthoz kapcsolódó minden tevékenység, információ és kapcsolat meg fog semmisülni."
+      go_ahead: "Igen, biztosan akarom. Legyen minden megsemmisítve!"
+      last_confirm: "Ez az utolsó lehetőség. Biztos vagy benne?"
     form:
-      title: Csoport
-    input: Mi a csoport neve?
-    last: Utolsó
-    most:
-      followed: Legjobban követett
-      liked: Legkedveltebb
-    my: Csoportjaim
-    n:
-      one: '%{count} group'
-      other: '%{count} groups'
+      title: "Csoport"
+    input: "Mi a csoport neve?"
+    last: "Utolsó"
+    my: "Csoportjaim"
     new:
-      description: Leírás
-      link: New group
-      name: Név
-      participants: Részvevők
-      title: New group
-    one: Csoport
-    other: Csoportok
-    tags: Címkék
+      action: "Új csoport"
+      name: "Név"
+      description: "Leírás"
+      participants: "Részvevők"
+    cloud: "Csoport címke felhő"
+    most:
+      followed: "Legjobban követett"
+      liked: "Legkedveltebb"
+    tags: "Címkék"
     title:
-      one: Csoport
-      other: Csoportok
-    view_all: View all...
-  header:
-    icon:
-      contacts: Contacts
-      home: Home
-      messages: Messages
-      repository: Repository
-  help: Súgó
+      one: "Csoport"
+      other: "Csoportok"
+  help: "Súgó"
   helpers:
     submit:
       relation_custom:
-        create: Mentés
-        update: Frissítés
-  home: Otthon
+        create: "Mentés"
+        update: "Frissítés"
+  home: "Otthon"
   inbox:
-    one: Beérkezett üzenetek
+    one: "Beérkezett üzenetek"
   invitation:
-    e-mails: Email címek
-    error: Kérésedet nem sikerül feldolgozni. Bizonyosodj meg arról, hogy helyes email
-      címet írjál.
-    invited: '%{sender} meghívott téged a %{site}-ra!'
-    join: Mások meghívása a %{site}-ra!
-    join_me: Tarts velem a %{site}-on!
-    one: Meghívó
-    other: Meghívók
-    success: Meghívóid sikeresen célhoz értek
-    text: Írj saját üzenetet
-    toolbar: Meghívó
-  lang:
-    browser: Automatikusan felismert böngésző nyelv
-    none: Nyelv-független tartalom
-  layout:
-    more: See more (%{count})
+    e-mails: "Email címek"
+    error: "Kérésedet nem sikerül feldolgozni. Bizonyosodj meg arról, hogy helyes email címet írjál."
+    invited: "%{sender} meghívott téged a %{site}-ra!"
+    join: "Mások meghívása a %{site}-ra!"
+    join_me: "Tarts velem a %{site}-on!"
+    one: "Meghívó"
+    other: "Meghívók"
+    toolbar: "Meghívó"
+    success: "Meghívóid sikeresen célhoz értek"
+    text: "Írj saját üzenetet"
   like:
     n:
-      one: 1 rajongó
-      other: '%{count} rajongó'
+      one: "1 rajongó"
+      other: "%{count} rajongó"
   location:
-    base: Te itt vagy
-    message: Te itt vagy > %{location}
-    separator: ' > '
+    message: "Te itt vagy > %{location}"
+    base: "Te itt vagy"
+    separator: " > "
   mailboxer:
-    delete: Törlés
-    delete_confirm: A lomtárba akarod tenni a '%{object}'-t?
+    delete: "Törlés"
+    delete_confirm: "A lomtárba akarod tenni a '%{object}'-t?"
     form:
-      body: Üzenettörzs
-      recipients: Címzettek
-      subject: Tárgy
-    mark_as_read: Jelezd olvasottként
+      body: "Üzenet"
+      recipients: "Címzettek"
+      subject: "Tárgy"
+    mark_as_read: "Jelezd olvasottként"
     message_mailer:
-      has_sent_new:
-        event: üzenetet küldött %{receiver}-nek
-        group: üzenetet küldött %{receiver}-nek
-        user: küldött neked egy új üzenetet
-      has_sent_reply:
-        event: választ küldött a %{receiver}-nak
-        group: választ küldött a %{receiver}-nak
-        user: választ küldött neked
-      subject_new: '%{subject}'
-      subject_reply: '%{subject}'
+      has_sent_new: 
+        event: "üzenetet küldött %{receiver}-nek"
+        group: "üzenetet küldött %{receiver}-nek"
+        user: "küldött neked egy új üzenetet"
+      has_sent_reply: 
+        event: "választ küldött a %{receiver}-nak"
+        group: "választ küldött a %{receiver}-nak"
+        user: "választ küldött neked"
+      subject_new: "%{subject}"
+      subject_reply: "%{subject}"
     notification_mailer:
-      subject: '%{subject}'
-    reply: Válasz
-    send: Üzenet küldése
-    sent: Elküldtük üzenetedet
+      subject: "%{subject}"
+    reply: "Válasz"
+    send: "Üzenet küldése"
+    sent: "Elküldtük üzenetedet"
   menu:
-    information: Információ
-    options: Menü Beállítások
-    wall: Üzenőfal
+    options: "Menü Beállítások"
+    information: "Információ"
+    wall: "Üzenőfal"
   message:
-    answer: Írj választ
-    inbox: Bejövő üzenetek
-    look: Kövesd ezt a beszélgetést
-    new: Új üzenet
-    one: Üzenet
-    other: Üzenetek
-    participants: Részvevők
-    send: Üzenet küldése
-    sentbox: Elküldött üzenetek
-    trash: Szemetes kosár
+    answer: "Írj választ"
+    inbox: "Bejövő üzenetek"
+    look: "Kövesd ezt a beszélgetést"
+    new: "Új üzenet"
+    one: "Üzenet"
+    other: "Üzenetek"
+    participants: "Részvevők"
+    send: "Üzenet küldése"
+    sentbox: "Elküldött üzenetek"
+    trash: "Szemetes kosár"
   notification:
-    all_text: 'Olvasd el a teljes szöveget itt: %{url}'
-    confirm: Megerősíti %{sender}-t mint kapcsolatot?
-    default: Új értesítést kaptál.
-    destroy_sure: Törölni akarod ezt az értesítést?
-    fan: '%{sender} mostantól %{whose} rajongója.'
+    all_text: "Olvasd el a teljes szöveget itt: %{url}"
+    confirm: "Megerősíti %{sender}-t mint kapcsolatot?"
+    default: "Új értesítést kaptál."
+    destroy_sure: "Törölni akarod ezt az értesítést?"
+    fan: "%{sender} mostantól %{whose} rajongója."
     follow:
-      group: '%{sender} hozzáadta kapcsolati listájához %{who}-t.'
-      user: '%{sender} added %{who} as contact.'
-    hello: Szia %{receiver},
+      group: "%{sender} hozzáadta kapcsolati listájához %{who}-t."
+      user: "%{sender} added %{who} as contact."
+    hello: "Szia %{receiver},"
     like:
-      group: '%{sender}-nak tetszik %{whose} %{thing}-je.'
-      user: '%{sender}-nak tetszik %{whose} %{thing}-je.'
-    look: Nézd meg %{sender} üzenőfalát
+      group: "%{sender}-nak tetszik %{whose} %{thing}-je." 
+      user: "%{sender}-nak tetszik %{whose} %{thing}-je."
+    look: "Nézd meg %{sender} üzenőfalát"
     makefriend:
-      group: '%{sender} hozzáadta kapcsolataihoz %{who}-t.'
-      user: '%{sender} hozzáadta kapcsolataihoz %{who}-t.'
-    one: Értesítés
-    other: Értesítések
+      group: "%{sender} hozzáadta kapcsolataihoz %{who}-t."
+      user: "%{sender} hozzáadta kapcsolataihoz %{who}-t."
+    one: "Értesítés"
+    other: "Értesítések"
     post:
-      group: '%{title} -- %{sender} %{whose} üzenőfaláról'
-      user: '%{title} -- %{sender} %{whose} üzenőfaláról'
-    read: Olvasottként megjelölve
-    read_all: Az összes olvasottként megjelölve
-    unread: Olvasatlanként megjelölve
+      group: "%{title} -- %{sender} %{whose} üzenőfaláról"
+      user: "%{title} -- %{sender} %{whose} üzenőfaláról"
+    read: "Olvasottként megjelölve"
+    read_all: "Az összes olvasottként megjelölve"
+    unread: "Olvasatlanként megjelölve"
     update:
-      group: '%{sender} frissítette %{thing} %{whose} üzenőfalán.'
-      user: '%{sender} frissítette %{thing} %{whose} üzenőfalán.'
-    visit: Keresd fel ezt a helyet %{url} és ellenőrizz minden értesítést.
-    watch: Nézd meg itt:%{url}
-    watch_it: Nézd meg!
+      group: "%{sender} frissítette %{thing} %{whose} üzenőfalán."
+      user: "%{sender} frissítette %{thing} %{whose} üzenőfalán."
+    visit: "Keresd fel ezt a helyet %{url} és ellenőrizz minden értesítést."
+    watch: "Nézd meg itt:%{url}"
+    watch_it: "Nézd meg!"
     who:
-      group: '%{name}'
-      user: te
-    whose:
-      group: '%{receiver}-nak'
-      user: a tied
+      group: "%{name}"
+      user: "te"
+    whose: 
+      group: "%{receiver}-nak"
+      user: "a tied"
+  post:
+    confirm_delete: "Törlöd az üzenetet?"
+    form:
+      title: "Üzenet"
+    input: "Mit csinálsz?"
+    name: "üzenet"
+    one: "egy üzenet "
+    title:
+      one: " Üzenet"
+      other: " Üzenetek"
+  preposition:
+    and: "és"
+    on: "rajta"
+  profile:
+    one: "Profil"
+    age: "Korosztály"
+    is_on: "rajta van"
+    must_be_signed_id: "Alá kell írnod"
+    group:
+      about: "Rólunk"
+      birthday: "Évforduló"
+      experience: "Szakterület"
+      info: "Csoport információ"
+      tags: "Csoprt címkék"
+    user:
+      about: "Rólam"
+      birthday: "Születésnap"
+      experience: "Szakmai tapasztalat"
+      info: "Személyes információk"
+      tags: "Felhasználói címkék"
+    actualcity: "Jelenlegi lakhely"
+    address: "Cím"
+    contact: "Elérhetőség"
+    country: "Ország"
+    email: "Email"
+    empty: "Ezek a mezők üresek. Légy szíves frissítsd!"
+    fax: "Fax"
+    mobile: "Mobil"
+    organization: "Szervezet"
+    phone: "Vonalas telefon"
+    profile: "Profil szerkesztése"
+    tags:
+      default: "közösségi, folyam,"
+      other: "Címkék"
+    website: "Weboldal" 
+    update:
+      error: "Kérlek, ellenőrizd a profilodat:"
+      success: "Profilod frissült."     
+  public:
+    other: "Mindenki"
   permission:
     description:
       default:
         brief:
-          create:
-            activity: Posztolj az üzenőfaladra
+          create: 
+            activity: "Írj az üzenőfaladra"
           follow:
-            nil: Kövesd a tevékenységüket
-          notify:
-            nil: Értesítés
+            nil: "Kövesd a tevékenységüket"
           read:
-            activity: Olvasd el az üzenőfaladat
+            activity: "Olvasd el az üzenőfaladat"
           represent:
-            nil: Adminisztrálás
+            nil: "Adminisztrálás"
+          notify:
+            nil: "Értesítés"
         detailed:
           create:
             activity:
-              negative: Új tevékenységeket tudnak posztolni az üzenőfaladra
-              positive: Új tevékenységeket tudnak posztolni az üzenőfaladra
+              positive: "Új tevékenységeket tudnak posztolni az üzenőfaladra"
+              negative: "Új tevékenységeket tudnak posztolni az üzenőfaladra"          
           follow:
             nil:
-              negative: A %{relation} kapcsolataid tevékenységei meg fognak jelenni
-                az üzenőfaladon
-              positive: A %{relation} kapcsolataid tevékenységei meg fognak jelenni
-                az üzenőfaladon
-          notify:
-            nil:
-              negative: A tevékenységekről nem fog értesítést kapni %{name}
-              positive: A tevékenységekről értesítést kap %{name}
+              positive: "A %{relation} kapcsolataid tevékenységei meg fognak jelenni az üzenőfaladon"
+              negative: "A %{relation} kapcsolataid tevékenységei meg fognak jelenni az üzenőfaladon"
           read:
             activity:
-              negative: Nem olvashatják az üzeneteket az üzenőfaladon, kivéve azokat,
-                amelyek nyilvánosként vannak jelölve
-              positive: Olvashatják az üzeneteket az üzenőfaladon, kivéve azokat,
-                amelyeket csak adott kapcsolataid között osztottál meg
+              positive: "Olvashatják az üzeneteket az üzenőfaladon, kivéve azokat, amelyeket csak adott kapcsolataid között osztottál meg"
+              negative: "Nem olvashatják az üzeneteket az üzenőfaladon, kivéve azokat, amelyek nyilvánosként vannak jelölve"
           represent:
             nil:
-              negative: Nem változtathatják meg a munkamenetet és nem tudnak %{subject}}-ként
-                viselkedni
-              positive: Megváltoztathatják a munkamenetet és %{subject}-ként viselkedhetnek
+              positive: "Megváltoztathatják a munkamenetet és %{subject}-ként viselkedhetnek"
+              negative: "Nem változtathatják meg a munkamenetet és nem tudnak %{subject}}-ként viselkedni"
+          notify:
+            nil:
+              positive: "A tevékenységekről értesítést kap %{name}"
+              negative: "A tevékenységekről nem fog értesítést kapni %{name}"
     of_relation:
-      choose: 2. Engedélyek a <strong>%{name}</strong> kör
-    postit: Manage the permissions of your contacts and create new roles
-  post:
-    confirm_delete: Törlöd az üzenetet?
-    form:
-      title: Üzenet
-    input: Mit csinálsz?
-    name: üzenet
-    one: 'egy üzenet '
-    other: posts
-    title:
-      one: ' Üzenet'
-      other: ' Üzenetek'
+      choose: "2. Engedélyek a <strong>%{name}</strong> kör"
   privacy:
-    intro: 'A <strong>%{relation}</strong> szintű kapcsolatok megengedettek:'
+    intro: "A <strong>%{relation}</strong> szintű kapcsolatok megengedettek:"
     rule:
-      add: Hozzáadás
-      saved: Adatvédelmi szabályok mentésre kerültek
-      title: Adatvédelmi szabályok
-  profile:
-    actualcity: Jelenlegi lakhely
-    address: Cím
-    age: Kor
-    contact: Elérhetőség
-    country: Ország
-    email: Email
-    empty: Ezek a mezők üresek. Légy szíves frissítsd ezeket.
-    fax: Fax
-    group:
-      about: Rólunk
-      birthday: Évforduló
-      experience: Szakterület
-      info: Csoport információ
-      tags: Csoprt címkék
-    is_on: rajta van
-    mobile: Mobil
-    must_be_signed_id: Alá kell írnod
-    one: Profil
-    organization: Szervezet
-    phone: Vonalas telefon
-    profile: Profil szerkesztése
-    tags:
-      default: közösségi, folyam,
-      other: Címkék
-    update:
-      error: 'Kérlek, ellenőrizd a profilodat:'
-      success: Profilod frissült.
-    user:
-      about: Rólam
-      birthday: Születésnap
-      experience: Szakmai tapasztalat
-      info: Személyes információk
-      tags: Felhasználói címkék
-    website: Website
-  public:
-    other: Mindenki
+      add: "Hozzáadás"
+      title: "Adatvédelmi szabályok"
+      saved: "Adatvédelmi szabályok mentésre kerültek"
   relation_custom:
-    confirm_delete: Törlöd ezt a felületet?
-    delete: Törlés
-    edit: Név módosítása
-    list:
-      title: Roles
-    new: + Új felület
-    title: Adatvédelem & tartalom
-  relation_owner:
-    name: Owner
+    choose: "1. Válassz felületet"
+    confirm_delete: "Törlöd ezt a felületet?"
+    delete: "Törlés"
+    edit: "Név módosítása"
+    new: "+ Új felület"
+    title: "Adatvédelem & tartalom"
   relation_public:
-    name: Nyilvános
-  repository:
-    filter: filter
-    order:
-      by: Order by
-      last_modified: Last modified
-      most_popular: Most popular
-    title: Repository
+    name: "Nyilvános"
   representation:
-    notice: A munkamenet megváltozott. Most %{subject}-ként vagy jelen. Használd a
-      jobb felső menüt, hogy visszatérj az előző munkamenetbe.
-    switch: Munkamenet csere
-  required: (*) Ezek a mezők szükségesek
+    notice: "A munkamenet megváltozott. Most %{subject}-ként vagy jelen. Használd a jobb felső menüt, hogy visszatérj az előző munkamenetbe."
+    switch: "Munkamenet csere"
+  required: "(*) Ezek a mezők szükségesek"
   search:
-    all_results: Keress minden%{subject} (%{count})
-    at_least:
-      one: Write at least %{count} character
-      other: Write at least %{count} characters
-    global:
+    all_results: "Keress minden%{subject} (%{count})"
+    at_least: "Legalább két karaktert írj"
+    global: 
+      name: "Globális keresés"
       first_result:
-        more: Az első %{count} eredmény bemutatása
-        one: Az első eredmény bemutatása
-      name: Globális keresés
-      query: Tekintsd meg a %{query} még több eredményét>
-    name: Keresés
-    no_subject_found: 'Nics találat %{subject}-ra '
-    nothing: Nincs találat
-    searching: 'Keresés: %{query}'
-    show_all: Összes
-    write: Írd le kérdésedet…
-    wrong: Úgy tűnik, hogy a kereső motorral vannak gondok
+        more: "Az első %{count} eredmény bemutatása"
+        one: "Az első eredmény bemutatása"
+      query: "Tekintsd meg a %{query} még több eredményét>"
+    name: "Keresés"
+    no_subject_found: "Nics találat %{subject}-ra "
+    nothing: "Nincs találat"
+    searching: "Keresés: %{query}"
+    show_all: "Összes"
+    write: "Írd le kérdésedet…"
+    wrong: "Úgy tűnik, hogy a kereső motorral vannak gondok"
   settings:
     api_key:
-      briefing: Kezeld az API kulcsodat
-      confirm: Biztos vagy benne?
-      empty: Üres igazolás
-      explanation: Ez a te API kulcsod
-      name: API kulcs
-      regenerate: API kulcs újragenerálása
+      briefing: "Kezeld az API kulcsodat"
+      confirm: "Biztos vagy benne?"
+      empty: "Üres igazolás"
+      explanation: "Ez a te API kulcsod"
+      name: "API kulcs"
+      regenerate: "API kulcs újragenerálása"
     cancel_account:
-      briefing: Érvénytelenítsd a fiókodat
+      briefing: "Érvénytelenítsd a fiókodat"
     email_change:
-      briefing: Módosítsd az e-mailedet
-    error: Hibák merültek fel a módosítások mentése során
-    for: Beállítások
+      briefing: "Módosítsd az e-mailedet"
     lang_change:
-      briefing: Módosítsd a nyelvet
-      name: ' Módosítsd a nyelvet'
-    main: Beállítások
+      briefing: "Módosítsd a nyelvet"
+      name: " Módosítsd a nyelvet"
+    error: "Hibák merültek fel a módosítások mentése során"
+    for: "Beállítások"
+    main: "Beállítások"
     manage:
-      briefing: Beállítások a kapcsolatokhoz
-      explanation: Kapcsolati engedélyezések módosítása
-      name: Az adminisztrátor elérhetősége
-    notification_settings:
-      prefix: Send me an email
-      someone_adds_me_as_a_contact: when someone adds me as a contact
-      someone_comments_on_my_post: when someone comments on my post
-      someone_confirms_my_contact_request: when someone confirms my contact request
-      someone_likes_my_post: when someone likes my post
+      name: "Az adminisztrátor elérhetősége"
+      briefing: "Beállítások a kapcsolatokhoz"
+      explanation: "Kapcsolati engedélyezések módosítása"
     notifications:
-      briefing: Értesítési és levelezési riasztások beállításai
+      briefing: "Értesítési és levelezési riasztások beállításai"
+      name: "Notifications"
       by_email:
-        always: Mindig
-        name: Küldj levelet, ha értesítést kaptam
-        never: Soha
-      name: Notifications
-    one: Beállítások
+        name: "Küldj levelet, ha értesítést kaptam"
+        always: "Mindig"
+        never: "Soha"
+    one: "Beállítások"
     password_change:
-      briefing: Módosítsd a jelszavadat
-    success: Beállításaid sikeresen módosultak
-  share: Megosztás
-  sign_in: Bejelentkezés
-  sign_out: Kijelentkezés
-  sign_up: Regisztráció
+      briefing: "Módosítsd a jelszavadat"
+    success: "Beállításaid sikeresen módosultak"
+  share: "Megosztás"
+  sign_in: "Bejelentkezés"
+  sign_out: "Kijelentkezés"
+  sign_up: "Regisztráció"
   site:
-    current:
-      description: A framework for building distributed social network websites
-      keywords: social stream,social software,framework,ruby on rails
-      title: Social Stream
-    name: Közösségi folyam
+    name: "Közösségi folyam"
   subject:
-    this_is_you: Ez te vagy!
-  sure: Biztos vagy benne?
+    this_is_you: "Ez te vagy!"
+  sure: "Biztos vagy benne?"
   time:
-    ago: '%{time}-vel ezelőtt '
-  unknown: Ismeretlen
+    ago: "%{time}ja"
+  unknown: "Ismeretlen"
   user:
-    all: Az összes felhasználó
-    all_n: Az összes felhasználó (%{count})
-    by: Felhasználónként
-    one: Felhasználó
-    other: Felhasználók
+    all: "Az összes felhasználó"
+    all_n: "Az összes felhasználó (%{count})"
+    by: "Felhasználónként"
+    one: "Felhasználó"
+    other: "Felhasználók"
     title:
-      one: Felhasználó
-      other: Felhasználók
-  welcome: Üdvözöljük a %{site}-on!
+      one: "Felhasználó"
+      other: "Felhasználók"
+  welcome: "Üdvözöljük a %{site}-on!"
+  lang:
+    browser: "Automatikusan felismert böngésző nyelv"
+    none: "Nyelv független tartalom"
+
