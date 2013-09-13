@@ -48,9 +48,9 @@ fr:
     unlocks:
       send_instructions: "Vous recevrez un message électronique comportant des instructions pour déverrouiller votre compte dans quelques minutes."
       unlocked: "Votre compte a été déverrouillé avec succès. Vous êtes maintenant connecté(e).'
-      send_paranoid_instructions: "Si votre compte existe, vous recevrez un message électronique comportant des instructions pour le déverrouiller dans quelques minutes."
+      send_paranoid_instructions: 'Si votre compte existe, vous recevrez un message électronique comportant des instructions pour le déverrouiller dans quelques minutes.'
     omniauth_callbacks:
-      success: 'Vous avez été autorisé(e) avec succès par le compte %{kind}.'
+      success: "Vous avez été autorisé(e) avec succès par le compte %{kind}."
       failure: "Vous n'avez pas pu être autorisé(e) par %{kind} car '%{reason}'."
     mailer:
       confirmation_instructions:

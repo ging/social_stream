@@ -20,7 +20,7 @@ namespace :db do
       @SS_BASE_PATH = Gem::Specification.find_by_name('social_stream-base').full_gem_path
       @LOGOS_PATH = File.join(@SS_BASE_PATH, 'lib', 'logos')
       @LOGOS_TOTAL = (ENV["LOGOS_TOTAL"] || 12).to_i
-      @USERS = (ENV["USERS"] || 9).to_i
+      @USERS = (ENV["USERS"] || 25).to_i
       @GROUPS = (ENV["GROUPS"] || 10).to_i
       if ENV["HARDCORE"].present?
         @USERS = 999
@@ -45,126 +45,170 @@ namespace :db do
       # USERS
       desc "Create users"
       task :users => :read_environment do
-        SocialStream::Population.task "User population (Demo and #{ @USERS } users more)" do
+        puts 'User population (Demo and ' + @USERS.to_s + ' users more)'
+        users_start = Time.now
 
-          # Create demo user if not present
-          if Actor.find_by_slug('demo').blank?
-            u = User.create! :name => '<Demo>',
-                             :email => 'demo@social-stream.dit.upm.es',
-                             :password => 'demonstration',
-                             :password_confirmation => 'demonstration'
-            u.actor!.update_attribute :slug, 'demo'
-          end
-
-          @USERS.times do
-            User.create! :name => Forgery::Name.full_name,
-                         :email => Forgery::Internet.email_address,
-                         :password => 'demonstration',
-                         :password_confirmation => 'demonstration'
-          end
-
-          # Reload actors to include new users
-          @available_actors = Actor.all
+        # Create demo user if not present
+        if Actor.find_by_slug('demo').blank?
+          u = User.create! :name => '<Demo>',
+                           :email => 'demo@social-stream.dit.upm.es',
+                           :password => 'demonstration',
+                           :password_confirmation => 'demonstration'
+          u.actor!.update_attribute :slug, 'demo'
         end
+
+        @USERS.times do
+          User.create! :name => "kike" + Forgery::Name.full_name,
+                       :email => Forgery::Internet.email_address,
+                       :password => 'demonstration',
+                       :password_confirmation => 'demonstration'
+        end
+
+        # Reload actors to include new users
+        @available_actors = Actor.all
+
+        users_end = Time.now
+        puts '   -> ' + (users_end - users_start).round(4).to_s + 's'
       end
 
 
       # GROUPS
       desc "Create groups"
       task :groups => :read_environment do
-        SocialStream::Population.task "Groups population (#{ @GROUPS } groups)" do
-          @GROUPS.times do
-            founder = @available_actors[rand(@available_actors.size)]
+        puts 'Groups population (' + @GROUPS.to_s + ' groups)'
+        groups_start = Time.now
 
-            Group.create! :name  => Forgery::Name.company_name,
-                          :email => Forgery::Internet.email_address,
-                          :author_id => founder.id,
-                          :user_author_id => founder.id
-          end
+        @GROUPS.times do
+          founder = @available_actors[rand(@available_actors.size)]
 
-          # Reload actors to include groups
-          @available_actors = Actor.all
+          Group.create! :name  => Forgery::Name.company_name,
+                        :email => Forgery::Internet.email_address,
+                        :author_id => founder.id,
+                        :user_author_id => founder.id
         end
+
+        # Reload actors to include groups
+        @available_actors = Actor.all
+
+        groups_end = Time.now
+        puts '   -> ' +  (groups_end - groups_start).round(4).to_s + 's'
       end
 
       desc "Populate profiles"
 
       task :profiles => :read_environment do
-        SocialStream::Population.task "Profiles population" do
-          SocialStream::Population::Actor.available.each do |a|
-            p = a.profile
+        puts "Profiles population"
+        time = Time.now
 
-            if rand < 0.2
-              a.tag_list = Forgery::LoremIpsum.words(3, random: true).gsub(' ', ',')
-            end
+        SocialStream::Population::Actor.available.each do |a|
+          p = a.profile
 
-            if rand < 0.2
-              p.organization = Forgery::Name.company_name
-            end
-
-            if rand < 0.2
-              p.birthday = Time.at(Time.now.to_i - (18.years + rand(60.years)))
-            end
-
-            if rand < 0.2
-              p.city = Forgery::Address.city
-            end
-
-            if rand < 0.2
-              p.country = Forgery::Address.country
-            end
-
-            if rand < 0.2
-              p.description = Forgery::LoremIpsum.sentences(2, random: true)
-            end
-
-            if rand < 0.2
-              p.phone = Forgery::Address.phone
-            end
-
-            if rand < 0.2
-              p.address = Forgery::Address.street_address
-            end
-
-            if rand < 0.2
-              p.website = "http://#{ Forgery::Internet.domain_name }"
-            end
-
-            if rand < 0.2
-              p.experience = Forgery::LoremIpsum.sentences(3, random: true)
-            end
-
-            p.save!
+          if rand < 0.2
+            a.tag_list = Forgery::LoremIpsum.words(3, random: true).gsub(' ', ',')
           end
+
+          if rand < 0.2
+            p.organization = Forgery::Name.company_name
+          end
+
+          if rand < 0.2
+            p.birthday = Time.at(Time.now.to_i - (18.years + rand(60.years)))
+          end
+
+          if rand < 0.2
+            p.city = Forgery::Address.city
+          end
+
+          if rand < 0.2
+            p.country = Forgery::Address.country
+          end
+
+          if rand < 0.2
+            p.description = Forgery::LoremIpsum.sentences(2, random: true)
+          end
+
+          if rand < 0.2
+            p.phone = Forgery::Address.phone
+          end
+
+          if rand < 0.2
+            p.address = Forgery::Address.street_address
+          end
+
+          if rand < 0.2
+            p.website = "http://#{ Forgery::Internet.domain_name }"
+          end
+
+          if rand < 0.2
+            p.experience = Forgery::LoremIpsum.sentences(3, random: true)
+          end
+
+          p.save!
         end
+
+        puts '   -> ' + (Time.now - time).round(4).to_s + 's'
       end
 
       # TIES
       desc "Create ties"
       task :ties => :read_environment do
-        SocialStream::Population.task 'Ties population' do
-          SocialStream::Population::Actor.available.each do |a|
-            actors = SocialStream::Population::Actor.available
-            actors.delete(a)
+        puts 'Ties population'
+        ties_start = Time.now
 
-            relations = a.relation_customs + [ Relation::Reject.instance ]
+        SocialStream::Population::Actor.available.each do |a|
+          actors = SocialStream::Population::Actor.available
+          actors.delete(a)
 
-            Forgery::Basic.number(:at_most => actors.size).times do
-              actor = actors.delete_at((rand * actors.size).to_i)
-              contact = a.contact_to!(actor)
-              contact.user_author = a.user_author if a.subject_type != "User"
-              contact.relation_ids = [ Forgery::Extensions::Array.new(relations).random.id ]
-            end
-          end
+          relations = a.relation_customs + [ Relation::Reject.instance ]
 
-          Activity.includes(:activity_verb).merge(ActivityVerb.verb_name(["follow", "make-friend"])).each do |a|
-            t = SocialStream::Population::Timestamps.new
-
-            a.update_attributes :created_at => t.created,
-                                :updated_at => t.updated
+          Forgery::Basic.number(:at_most => actors.size).times do
+            actor = actors.delete_at((rand * actors.size).to_i)
+            contact = a.contact_to!(actor)
+            contact.user_author = a.user_author if a.subject_type != "User"
+            contact.relation_ids = [ Forgery::Extensions::Array.new(relations).random.id ]
           end
         end
+
+        Activity.includes(:activity_verb).merge(ActivityVerb.verb_name(["follow", "make-friend"])).each do |a|
+          t = SocialStream::Population::Timestamps.new
+
+          a.update_attributes :created_at => t.created,
+                              :updated_at => t.updated
+        end
+
+        ties_end = Time.now
+        puts '   -> ' +  (ties_end - ties_start).round(4).to_s + 's'
       end
+
+
+      # TIES, special version for cheesecake testing
+      desc "Create cheesecake ties"
+      task :cheesecake_ties => :read_environment do
+        puts 'Ties population (Cheesecake version)'
+        ties_start = Time.now
+
+        SocialStream::Population::Actor.available.each do |a|
+          actors = SocialStream::Population::Actor.available - Array(a)
+          relations = a.relation_customs + Array.wrap(Relation::Reject.instance)
+          break if actors.size==0
+          actor = Actor.first
+          unless a==actor
+            puts a.name + " connecting with " + actor.name
+            # DRY! :-S
+            contact = a.contact_to!(actor)
+            contact.user_author = a.user_author if a.subject_type != "User"
+            contact.relation_ids = Array(Forgery::Extensions::Array.new(a.relation_customs).random.id)
+
+            contact = actor.contact_to!(a)
+            contact.user_author = actor.user_author if actor.subject_type != "User"
+            contact.relation_ids = Array(Forgery::Extensions::Array.new(actor.relation_customs).random.id)
+          end
+        end
+
+        ties_end = Time.now
+        puts '   -> ' +  (ties_end - ties_start).round(4).to_s + 's'
+      end
+
 
       # POSTS
       desc "Create posts"
@@ -179,51 +223,57 @@ namespace :db do
       # MESSAGES
       desc "Create messages using mailboxer"
       task :messages => :read_environment do
-        SocialStream::Population.task 'Mailboxer population' do
-          demo = SocialStream::Population::Actor.demo
-          @available_actors = Actor.all.sample(Actor.count / 3)
-          @available_actors |= [ demo ]
+        puts 'Mailboxer population'
+        mailboxer_start = Time.now
+
+        demo = SocialStream::Population::Actor.demo
+        @available_actors = Actor.all.sample(Actor.count / 3)
+        @available_actors |= [ demo ]
 
 
-          5.times do
-            actors = @available_actors.dup
+        5.times do
+          actors = @available_actors.dup
 
-            mult_recp = actors.uniq
+          mult_recp = actors.uniq
+
+          actor = mult_recp.sample
+
+          mult_recp.delete(actor)
+
+          mail = actor.send_message(mult_recp, "Hello all, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))
+
+          [ 'Well', 'Ok', 'Pretty well', 'Finally' ].inject(mail) do |st|
+            break if rand < 0.2
 
             actor = mult_recp.sample
 
-            mult_recp.delete(actor)
+            mail = actor.reply_to_all(mail, "#{ st }, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
 
-            mail = actor.send_message(mult_recp, "Hello all, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))
+            mail
+          end
 
-            [ 'Well', 'Ok', 'Pretty well', 'Finally' ].inject(mail) do |st|
-              break if rand < 0.2
+          if rand > 0.75
+            mail.conversation.move_to_trash(demo)
+          end
 
-              actor = mult_recp.sample
+          @available_actors = (Actor.all.sample(Actor.count / 3) - [ demo ])
 
-              mail = actor.reply_to_all(mail, "#{ st }, I am #{actor.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
-
-              mail
-            end
-
-            if rand > 0.75
-              mail.conversation.move_to_trash(demo)
-            end
-
-            @available_actors = (Actor.all.sample(Actor.count / 3) - [ demo ])
-
-            @available_actors.each do |a|
-              mail = a.send_message(demo, "Hello, #{demo.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))
+          @available_actors.each do |a|
+            mail = a.send_message(demo, "Hello, #{demo.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}", Forgery::LoremIpsum.words(10,:random => true))
+            if rand > 0.5
+              mail = demo.reply_to_sender(mail, "Pretty well #{a.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
               if rand > 0.5
-                mail = demo.reply_to_sender(mail, "Pretty well #{a.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
-                if rand > 0.5
-                  a.reply_to_sender(mail, "Ok #{demo.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
-                end
+                a.reply_to_sender(mail, "Ok #{demo.name}. #{Forgery::LoremIpsum.sentences(2,:random => true)}")
               end
             end
           end
         end
+
+        mailboxer_end = Time.now
+        puts '   -> ' +  (mailboxer_end - mailboxer_start).round(4).to_s + 's'
+
       end
+
 
       # AVATARS
       desc "Create avatars"
@@ -245,9 +295,11 @@ namespace :db do
           end
         end
 
-        SocialStream::Population.task 'Avatar population' do
-          SocialStream.subjects.each {|a| set_logos(Kernel.const_get(a.to_s.classify)) }
-        end
+        puts 'Avatar population'
+        avatar_start = Time.now
+        SocialStream.subjects.each {|a| set_logos(Kernel.const_get(a.to_s.classify)) }
+        avatar_end = Time.now
+        puts '   -> ' +  (avatar_end - avatar_start).round(4).to_s + 's'
       end
     end
   end
