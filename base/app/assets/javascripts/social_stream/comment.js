@@ -57,7 +57,7 @@ SocialStream.Comment = (function(SS, $, undefined){
   };
 
   var hideNewActivityCommentElements = function(options){
-    var newDiv = $('#activity_' + options.parentActivityId).find('div.new_comment');
+    var newDiv = $('#comments_activity_' + options.parentActivityId).siblings('div.new_comment');
 
     newDiv.find("textarea").val('');
 
