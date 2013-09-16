@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/ging/social_stream/wiki/Getting-Started-With-Social-Stream-Presence"
   s.summary = "Presence capabilities for Social Stream, the core for building social network websites."
   s.description = "Social Stream Presence provides everything you need for including presence, instant messaging and video chat services in your social network website, including a complete chat fully integrated with Social Stream."
+  s.license = 'MIT'
 
   s.rubyforge_project = "social_stream-presence"
 

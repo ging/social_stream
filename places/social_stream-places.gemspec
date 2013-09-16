@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.email = "holacarol@gmail.com"
   s.homepage = "http://github.com/ging/social_stream-places"
   s.files = `git ls-files`.split("\n")
+  s.license = 'MIT'
 
   # Gem dependencies
   s.add_runtime_dependency('social_stream-base', '~> 2.0.0')

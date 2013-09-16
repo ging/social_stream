@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.authors = [ "GING - DIT - UPM" ]
   s.homepage = "http://social-stream.dit.upm.es/"
   s.files = `git ls-files`.split("\n")
+  s.license = 'MIT'
 
   # Runtime gem dependencies
   #
