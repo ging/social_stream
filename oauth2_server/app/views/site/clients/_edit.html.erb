@@ -7,6 +7,12 @@
              locals: { subject: resource } %>
 </section>
 
+<section class="logo">
+<%= render partial: 'avatars/form',
+           object: resource.actor,
+           as: :avatarable %>
+</section>
+
 <section class="delete">
   <%= render partial: 'destroy' %>
 </section>
