@@ -3,14 +3,18 @@
 SocialStream.SearchHeader = (function(SS, $, undefined){
   var callback = new SS.Callback();
 
+  var nav, mat;
+
   var initMat = function() {
-    var searchNav = $('.search-nav');
-    $('input.search-query', searchNav).on('input', searchQuery);
-    $('.mat div', searchNav).hide();
+    nav = $('.search-nav');
+    $('input.search-query', nav).focus(focusMat);
+    $('input.search-query', nav).on('input', searchQuery);
+
+    mat = $('.mat', nav);
+    $('div', mat).hide();
   };
 
   var searchQuery = function() {
-    var nav = $('.search-nav');
     var input = $('input.search-query', nav);
     var mat = $('.mat', nav);
     var minQuery = input.attr('data-min_query');
@@ -44,6 +48,24 @@ SocialStream.SearchHeader = (function(SS, $, undefined){
     });
   };
 
+  var focusMat = function() {
+    mat.show();
+
+    $('html').on('click.close-search-header', closeMat);
+  };
+
+  var closeMat = function(e) {
+    eventMat = $(e.target).closest('.quick-search');
+    
+    if (eventMat.length > 0) {
+      return;
+    }
+
+    mat.hide();
+
+    $('html').off('click.close-search-header');
+  };
+  
   callback.register('show', initMat);
 
   return callback.extend({

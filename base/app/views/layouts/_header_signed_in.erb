@@ -4,42 +4,38 @@
     <div class="brand"></div>
     <!-- FIXME: search javascript functionality in 'layouts/search' -->
 
-    
+    <section class="quick-search">
       <%= form_tag search_path, method: 'get', id: "search-box", class: "navbar-search pull-left search-mobile" do %>
         <%= text_field_tag :q, nil, autocomplete: :off, class: "search-query-mobile input-small icon_tool16-searcher", placeholder: t('search.name'), "data-min_query" => SocialStream::Search::MIN_QUERY %>
       <% end %>
-      <%= javascript_tag do %>
-        $(function() {
-          SocialStream.SearchHeader.show();
-        });
-      <% end %>
-
   
-    
-    <div class="search-nav hidden-phone hidden-tablet">
-      <%= form_tag search_path, method: 'get', class: "navbar-search pull-left" do %>
-        <%= text_field_tag :q, nil, autocomplete: :off, class: 'search-query input-small', placeholder: t('search.name'), "data-min_query" => SocialStream::Search::MIN_QUERY %>
-      <% end %>
-      <%= javascript_tag do %>
-        $(function() {
-          SocialStream.SearchHeader.show();
-        });
-      <% end %>
-      <div class="mat">
-        <%= render partial: 'layouts/loading' %>
+      <div class="search-nav hidden-phone hidden-tablet">
+        <%= form_tag search_path, method: 'get', class: "navbar-search pull-left" do %>
+          <%= text_field_tag :q, nil, autocomplete: :off, class: 'search-query input-small', placeholder: t('search.name'), "data-min_query" => SocialStream::Search::MIN_QUERY %>
+        <% end %>
+        <div class="mat">
+          <%= render partial: 'layouts/loading' %>
 
-        <div class="query_too_short">
-          <%= t 'search.at_least', count: SocialStream::Search::MIN_QUERY %>
-        </div>
+          <div class="query_too_short">
+            <%= t 'search.at_least', count: SocialStream::Search::MIN_QUERY %>
+          </div>
 
-        <div class="no_results">
-          <%= t 'search.nothing' %>
-        </div>
+          <div class="no_results">
+            <%= t 'search.nothing' %>
+          </div>
 
-        <div class="results">
+          <div class="results">
+          </div>
         </div>
       </div>
-    </div>
+
+      <%= javascript_tag do %>
+        $(function() {
+          SocialStream.SearchHeader.show();
+        });
+      <% end %>
+    </section>
+
     <div class="explore-nav hidden-phone">
       <%= link_to explore_path do %>
     
