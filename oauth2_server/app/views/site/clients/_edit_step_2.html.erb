@@ -4,7 +4,7 @@
   <h4>Set the application's logo</h4>
 
   <%= render partial: 'avatars/form',
-             object: resource,
+             object: resource.actor,
              as: :avatarable %>
 
   <%= link_to "Next", polymorphic_path(resource, action: 'edit', step: 3), class: "next-step" %>
