@@ -23,6 +23,8 @@ module SocialStream
 
         before_filter :authenticate_user!, :only => [:new, :edit, :create, :update, :destroy]
 
+        before_filter :set_post_activity, only: :destroy
+
         after_filter :increment_visit_count, :only => :show
 
         load_and_authorize_resource :except => [ :new, :index, :search ]
@@ -40,13 +42,7 @@ module SocialStream
 
           render :layout => false
         end
-
-        def destroy
-          @post_activity = resource.post_activity
-
-          destroy!
-        end
-        
+       
         protected
 
         def permitted_params
@@ -99,6 +95,9 @@ module SocialStream
           allowed_params
       end
 
+      def set_post_activity
+        @post_activity = resource.post_activity
+      end
 
       private
       

@@ -14,7 +14,24 @@ class DocumentsController < ApplicationController
       format.json { render :json => collection.to_json(helper: self) }
     end
   end
-  
+
+  def show
+    respond_to do |format|
+      format.html {render :action => :show}
+      format.json {render :json => resource.to_json(helper: self) }
+      format.any {
+        path = resource.file.path(params[:style] || params[:format])
+
+        head(:not_found) and return unless File.exist?(path)
+
+        send_file path,
+                 :filename => resource.file_file_name,
+                 :disposition => "inline",
+                 :type => request.format
+      }
+    end
+  end
+
   def create
     super do |format|
       format.json { render :json => resource.to_json(helper: self) }
@@ -43,20 +60,13 @@ class DocumentsController < ApplicationController
     end
   end
 
-  def show
-    respond_to do |format|
-      format.html {render :action => :show}
-      format.json {render :json => resource.to_json(helper: self) }
-      format.any {
-        path = resource.file.path(params[:style] || params[:format])
-
-        head(:not_found) and return unless File.exist?(path)
-
-        send_file path,
-                 :filename => resource.file_file_name,
-                 :disposition => "inline",
-                 :type => request.format
+  def destroy
+    super do |format|
+      format.html {
+        redirect_to :home
       }
+
+      format.js
     end
   end
 
