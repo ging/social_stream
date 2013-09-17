@@ -13,6 +13,7 @@ es:
       change: Cambiar contraseña
       new: Nueva contraseña
       retype: Repetir nueva contraseña
+      current: Contraseña actual
   action:
     accept: Aceptar
     send: Enviar

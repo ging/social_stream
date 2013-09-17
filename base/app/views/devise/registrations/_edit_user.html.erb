@@ -27,7 +27,7 @@ $(".user_edit").validate({errorClass: "validation_error"});
       </div>
 
       <div class="form_label">
-        <%= f.label :current_password %>
+        <%= f.label t('account.password.current') %>
       </div>
       <div class="form_field">
         <%= f.password_field :current_password, :class => "form_tag" %>

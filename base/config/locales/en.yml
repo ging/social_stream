@@ -20,6 +20,7 @@ en:
       change: Change password
       new: New password
       retype: Retype new password
+      current: Current password
   activerecord:
     attributes:
       contact:
@@ -597,7 +598,7 @@ en:
       name: API Key
       regenerate: Regenerate API key
     cancel_account:
-      briefing: Lets you cancel your account
+      briefing: Cancel account
     email_change:
       briefing: Change your email
     lang_change:
