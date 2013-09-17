@@ -600,7 +600,7 @@ es:
       name: Clave API
       regenerate: Regenerar clave API
     cancel_account:
-      briefing: Te permite cancelar tu cuenta
+      briefing: Cancelar cuenta
     email_change:
       briefing: Cambia tu email
     error: Hubo errores al guardar los cambios
