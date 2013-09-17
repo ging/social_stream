@@ -62,12 +62,13 @@ class Document < ActiveRecord::Base
   end
 
  # JSON, generic version for most documents
-  def as_json(options = nil)
-    {:id => id,
+  def as_json(options)
+    {
+     :id => id,
      :title => title,
      :description => description,
      :author => author.name,
-     :src => file.to_s
+     :src => URI.join(options[:helper].root_url, file.url).to_s 
     }
   end
   

@@ -35,7 +35,7 @@ class SearchController < ApplicationController
           @search_result
         )
 
-        render :json => json_obj
+        render :json => json_obj.as_json(helper: self)
       }
 
       format.js

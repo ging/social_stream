@@ -11,13 +11,13 @@ class DocumentsController < ApplicationController
         render collection if request.xhr?
       }
 
-      format.json { render :json => collection }
+      format.json { render :json => collection.to_json(helper: self) }
     end
   end
   
   def create
     super do |format|
-      format.json { render :json => resource }
+      format.json { render :json => resource.to_json(helper: self) }
       format.js
       format.all {
         if resource.new_record?
@@ -46,7 +46,7 @@ class DocumentsController < ApplicationController
   def show
     respond_to do |format|
       format.html {render :action => :show}
-      format.json {render :json => resource }
+      format.json {render :json => resource.to_json(helper: self) }
       format.any {
         path = resource.file.path(params[:style] || params[:format])
 

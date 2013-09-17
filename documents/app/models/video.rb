@@ -16,15 +16,17 @@ class Video < Document
                       
  # JSON, special edition for video files
   def as_json(options = nil)
-    {:id => id,
-     :title => title,
-     :description => description,
-     :author => author.name,
-     :poster => file(:poster).to_s,
-     :sources => [ { :type => Mime::WEBM.to_s,  :src => file(:webm).to_s },
-                   { :type => Mime::MP4.to_s,   :src => file(:mp4).to_s },
-                   { :type => Mime::FLV.to_s, :src => file(:flv).to_s }
-                 ]
+    {
+      :id => id,
+      :title => title,
+      :description => description,
+      :author => author.name,
+      :poster => URI.join(options[:helper].root_url, file.url(:poster)).to_s,
+      :sources => [
+        { type: Mime::WEBM.to_s, src: URI.join(options[:helper].root_url, file.url(:webm)).to_s },
+        { type: Mime::MP4.to_s,  src: URI.join(options[:helper].root_url, file.url(:mp4)).to_s },
+        { type: Mime::FLV.to_s,  src: URI.join(options[:helper].root_url, file.url(:flv)).to_s }
+      ]
     }
   end
   
