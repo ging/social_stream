@@ -2,7 +2,12 @@ namespace :i18n do
   desc "Synchronize i18n files"
   task "sync" do
     require 'yaml'
-    require 'social_stream/components'
+    begin
+      require 'social_stream/components'
+    rescue
+      # Use this task from social_stream global gem,
+      # as well as from any application using social_stream-base
+    end
 
     Hash.class_eval do
       def sync(h)
@@ -37,7 +42,13 @@ namespace :i18n do
       end
     end
 
-    ( [ '.' ] + SocialStream::ALL_COMPONENTS ).each do |c|
+    engines = [ '.' ]
+
+    if defined? SocialStream::ALL_COMPONENTS
+      engines += SocialStream::ALL_COMPONENTS
+    end
+
+    engines.each do |c|
       path = "#{ c }/config/locales/"
 
       files = Dir[path + '*'].select{ |f| f =~ /\/\w+\.yml$/ }
