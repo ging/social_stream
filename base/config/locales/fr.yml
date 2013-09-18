@@ -11,6 +11,7 @@ fr:
     one: Compte
     password:
       change: Modifier le mot de passe
+      current: Current password
       new: Nouveau mot de passe
       retype: Confirmer le nouveau mot de passe
   action:

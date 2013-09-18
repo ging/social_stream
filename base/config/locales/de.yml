@@ -11,6 +11,7 @@ de:
     one: Profil
     password:
       change: Passwort ändern
+      current: Current password
       new: Neues Passwort
       retype: Passwort wiederholen
   action:

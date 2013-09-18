@@ -11,6 +11,7 @@ pt:
     one: Conta
     password:
       change: Mudar senha
+      current: Current password
       new: Nova senha
       retype: Repetir nova senha
   action:

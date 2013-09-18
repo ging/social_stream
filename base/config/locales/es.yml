@@ -11,9 +11,9 @@ es:
     one: Cuenta
     password:
       change: Cambiar contraseña
+      current: Contraseña actual
       new: Nueva contraseña
       retype: Repetir nueva contraseña
-      current: Contraseña actual
   action:
     accept: Aceptar
     send: Enviar

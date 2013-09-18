@@ -11,6 +11,7 @@ zh:
     one: 帐号
     password:
       change: 修改密码
+      current: Current password
       new: 新密码
       retype: 再次输入新密码
   action:

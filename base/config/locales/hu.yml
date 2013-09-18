@@ -11,6 +11,7 @@ hu:
     one: Fiók
     password:
       change: Jelszó megváltoztatása
+      current: Current password
       new: Új jelszó
       retype: Jelszó újra
   action:
@@ -177,9 +178,9 @@ hu:
       added:
         other: '%{actors} successfully added as %{relations}'
       button:
-        zero: Add
         one: '%{count} role'
         other: '%{count} roles'
+        zero: Add
       link: + Kapcsolat hozzáadása
       menu: Kapcsolat hozzáadása
       modal:
@@ -253,9 +254,9 @@ hu:
       explore: Explore
       participants: Participants
       resources: Resources
-      timeline: Timeline
-      tags: Tags
       search: Search
+      tags: Tags
+      timeline: Timeline
     link: Explore
     or: or Explore
     participants:
@@ -268,9 +269,9 @@ hu:
       most_visited: Most viewed
       uploaded_since: since %{time}
     search:
-      title: Advanced search
       placeholder: looking for...
       submit: Search
+      title: Advanced search
   follower:
     follower:
       title: Követők
@@ -284,16 +285,6 @@ hu:
     main_title: A Közösségi folyam jelenti a közösségi hálózat typusú weboldalak alapvető
       elemét.
     presentation:
-      modular:
-        header: Modular
-        p: Available <a href="https://github.com/ging/social_stream#social-stream-components">Social
-          Stream components</a> provide your application only with the features you
-          need in your social network. Just add your desired gems to your Gemfile
-      flexible:
-        header: Flexible
-        p: Completely customize your social network <a href="https://github.com/ging/social_stream/wiki/How-to-change-controllers%2C-models%2C-views%2C-assets-and-locales">changing
-          any Social Stream component</a>, <a href="https://github.com/ging/social_stream/wiki/How-to-add-new-activity-objects">adding
-          new activity objects</a> or changing the CSS using <a href="http://sass-lang.com/">Sass</a>
       community:
         header: Community
         p: Social Stream enjoys a growing community of developers. Feel free to drop
@@ -301,6 +292,16 @@ hu:
           Stream's Google group</a> or <a href="http://stackoverflow.com/questions/tagged/social-stream">StackOverflow</a>
           if you have problems. <a href="https://github.com/ging/social_stream/issues/new">Open
           an issue</a> if you find a defect. Pull request are very welcomed!
+      flexible:
+        header: Flexible
+        p: Completely customize your social network <a href="https://github.com/ging/social_stream/wiki/How-to-change-controllers%2C-models%2C-views%2C-assets-and-locales">changing
+          any Social Stream component</a>, <a href="https://github.com/ging/social_stream/wiki/How-to-add-new-activity-objects">adding
+          new activity objects</a> or changing the CSS using <a href="http://sass-lang.com/">Sass</a>
+      modular:
+        header: Modular
+        p: Available <a href="https://github.com/ging/social_stream#social-stream-components">Social
+          Stream components</a> provide your application only with the features you
+          need in your social network. Just add your desired gems to your Gemfile
     stats: '%{users} felhasználó és %{groups} csoport van regisztrálva'
   group:
     all: Az összes csoport
@@ -564,11 +565,11 @@ hu:
     name: Nyilvános
   repository:
     filter: filter
-    title: Repository
     order:
       by: Order by
       last_modified: Last modified
       most_popular: Most popular
+    title: Repository
   representation:
     notice: A munkamenet megváltozott. Most %{subject}-ként vagy jelen. Használd a
       jobb felső menüt, hogy visszatérj az előző munkamenetbe.
@@ -617,9 +618,9 @@ hu:
     notification_settings:
       prefix: Send me an email
       someone_adds_me_as_a_contact: when someone adds me as a contact
+      someone_comments_on_my_post: when someone comments on my post
       someone_confirms_my_contact_request: when someone confirms my contact request
       someone_likes_my_post: when someone likes my post
-      someone_comments_on_my_post: when someone comments on my post
     notifications:
       briefing: Értesítési és levelezési riasztások beállításai
       by_email:

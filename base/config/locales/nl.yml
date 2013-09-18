@@ -11,6 +11,7 @@ nl:
     one: Account
     password:
       change: Wachtwoord wijzigen
+      current: Current password
       new: Nieuw wachtwoord
       retype: Typ nieuw wachtwoord nogmaals
   action:
