@@ -37,7 +37,7 @@ namespace :i18n do
       end
     end
 
-    SocialStream::ALL_COMPONENTS.each do |c|
+    ( [ '.' ] + SocialStream::ALL_COMPONENTS ).each do |c|
       path = "#{ c }/config/locales/"
 
       files = Dir[path + '*'].select{ |f| f =~ /\/\w+\.yml$/ }

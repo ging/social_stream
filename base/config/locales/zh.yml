@@ -184,9 +184,15 @@ zh:
       menu: 加入联络
       modal:
         button: Add
+        placeholder:
+          actors: Type names
+          relations: Type names
         title: Add contacts
       submit: 加入联络
       title: 加入 %{name} 到您的联系人列表
+    new_modal:
+      label:
+        relations: Initially assigned roles
     one: 联络
     other: 联系
     pending:

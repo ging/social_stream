@@ -3,76 +3,91 @@ hu:
   activerecord:
     attributes:
       document:
-        title: "Cím"
+        title: Cím
+    models:
+      document: File
   audio:
-    confirm_delete: "Kikapcsolod a hangot?"
-    title: "Hangok"
-    mine: "Saját hangok"
-    name: "hang"
-    not_mine: "Hangok"
-    one: "egy hang"
-    processing: "Audió klip feldolgozása. Kérlek, várj…"
+    confirm_delete: Kikapcsolod a hangot?
+    mine: Saját hangok
+    name: hang
+    not_mine: Hangok
+    one: egy hang
+    other: audios
+    processing: Audió klip feldolgozása. Kérlek, várj…
     title:
-      one: "Hang"
-      other: "Hangok"
+      one: Hang
+      other: Hangok
   details:
-    msg: "Részletek..."
+    msg: Részletek...
   document:
     actions:
-      delete: "Törlés"
-      details: "Részletek"
-      download: "Letöltés"
-      edit: "Szekesztés"
-    all: "Minden fájl"
-    confirm_delete: "Törlöd a fájlt?"
+      delete: Törlés
+      details: Részletek
+      download: Letöltés
+      edit: Szekesztés
+    all: Minden fájl
+    by: by %{author}
+    confirm_delete: Törlöd a fájlt?
+    description:
+      input: Add a description here
+    filter: filter
     form:
-      title: "Fájl"
+      title: Fájl
     info:
+      author: Author
       date:
-        created_at: "Létrehozva"
-        updated_at: "Frissítve"
+        created_at: Létrehozva
+        updated_at: Frissítve
       description:
-        title: "Leírás"
+        title: Leírás
       file:
-        title: "Feltöltés"
+        title: Feltöltés
+      size: Size
+      tags: Tags
       title:
-        title: "Cím"
-    mine: "Saját fájljaim"
-    name: "fájl"
-    not_mine: "Fájlok"
-    one: "egy fájl"
-    simple_all: "Összes"  
+        title: Cím
+    mine: Saját fájljaim
+    name: fájl
+    new:
+      link: Add file
+      title: New file
+    new_activity:
+      attach: Attach file
+    not_mine: Fájlok
+    one: egy fájl
+    other: files
+    scope:
+      network: Network
+      own: Own
+    simple_all: Összes
     title:
-      one: "Fájl"
-      other: "Fájlok"
+      input: File title
+      one: Fájl
+      other: Fájlok
   picture:
-    confirm_delete: "Törlöd a képet?"
-    mine: "Saját képeim"  
-    name: "kép"
-    not_mine: "Képek"
-    one: "egy kép"
+    confirm_delete: Törlöd a képet?
+    mine: Saját képeim
+    name: kép
+    not_mine: Képek
+    one: egy kép
+    other: pictures
     title:
-      one: "Kép"
-      other: "Képek"
-  repository:
-    title: "Fájlok"
-    order:
-      by: "Rendezve"
-      last_modified: "Utoljára módosítva"
-      most_popular: "Legnépszerűbb"
+      one: Kép
+      other: Képek
   resource:
-    all: "Összes erőforrás"
-    confirm_delete: "Törlöd az erőforrást?"
-    title: "Erőforrások"
-    mine: "Saját erőforrásaim"
-    not_mine: "Erőforrások"
+    all: Összes erőforrás
+    confirm_delete: Törlöd az erőforrást?
+    mine: Saját erőforrásaim
+    not_mine: Erőforrások
+    title: Erőforrások
   video:
-    confirm_delete: "Törlöd a videót?"
-    mine: "Saját vieóim"  
-    name: "videó" 
-    not_mine: "Videók"
-    one: "egy videó"
-    processing: "A videó feldolgozás alatt van. Kérjük, várj..."
+    confirm_delete: Törlöd a videót?
+    mine: Saját vieóim
+    name: videó
+    not_mine: Videók
+    one: egy videó
+    other: videos
+    processing: A videó feldolgozás alatt van. Kérjük, várj...
     title:
-      one: "Videó"
-      other: "Videók"
+      one: Videó
+      other: Videók

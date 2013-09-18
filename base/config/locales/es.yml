@@ -186,9 +186,15 @@ es:
       menu: Añadir contacto
       modal:
         button: Añadir
+        placeholder:
+          actors: Type names
+          relations: Type names
         title: Añadir contactos
       submit: Añadir
       title: Añadir a %{name} como contacto
+    new_modal:
+      label:
+        relations: Initially assigned roles
     one: Contacto
     other: Contactos
     pending:

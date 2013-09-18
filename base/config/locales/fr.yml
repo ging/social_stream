@@ -185,9 +185,15 @@ fr:
       menu: Ajouter le contact
       modal:
         button: Add
+        placeholder:
+          actors: Type names
+          relations: Type names
         title: Add contacts
       submit: Ajouter le contact
       title: Ajouter %{name} à vos contacts
+    new_modal:
+      label:
+        relations: Initially assigned roles
     one: Contact
     other: Contacts
     pending:

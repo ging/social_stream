@@ -1,15 +1,17 @@
 ---
 hu:
-  linkser:
-    title: "Hivatkozás megosztása"
   link:
-    confirm_delete: "Törlöd a linket?"
+    by: by %{author}
+    confirm_delete: Törlöd a linket?
     errors:
-      loading: "Töltési hiba"
-      only_webs: "Csak a weboldalak támogatottak"
+      loading: Töltési hiba
+      only_webs: Csak a weboldalak támogatottak
     form:
-      title: "Link"
-    input: "Írd be a web címet"
-    name: "link"
-    one: "egy link"
-    title: "Linkek"
+      title: Link
+    input: Írd be a web címet
+    name: link
+    one: egy link
+    other: links
+    title: Linkek
+  linkser:
+    title: Hivatkozás megosztása
