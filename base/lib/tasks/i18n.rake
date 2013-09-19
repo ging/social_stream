@@ -1,14 +1,23 @@
 namespace :i18n do
-  desc "Synchronize i18n files"
-  task "sync" do
+  task "common" do
     require 'yaml'
     begin
       require 'social_stream/components'
-    rescue
-      # Use this task from social_stream global gem,
+    rescue LoadError
+      # Use this task from social_stream global gem
+      # (which defines social_stream/components),
       # as well as from any application using social_stream-base
     end
 
+    @engines = [ '.' ]
+
+    if defined? SocialStream::ALL_COMPONENTS
+      @engines += SocialStream::ALL_COMPONENTS
+    end
+  end
+
+  desc "Synchronize i18n files"
+  task "sync" => "common" do
     Hash.class_eval do
       def sync(h)
         en_hash = h.dup
@@ -30,7 +39,7 @@ namespace :i18n do
               self[self_key] = en_val
             end
           else
-            raise "Unkown key type #{ en_val.inspect }"
+            raise "Unknown key type #{ en_val.inspect }"
           end
         end
 
@@ -42,13 +51,8 @@ namespace :i18n do
       end
     end
 
-    engines = [ '.' ]
 
-    if defined? SocialStream::ALL_COMPONENTS
-      engines += SocialStream::ALL_COMPONENTS
-    end
-
-    engines.each do |c|
+    @engines.each do |c|
       path = "#{ c }/config/locales/"
 
       files = Dir[path + '*'].select{ |f| f =~ /\/\w+\.yml$/ }
@@ -81,6 +85,64 @@ namespace :i18n do
       end
 
       Psych.dump en_h, File.open(en, 'w')
+    end
+  end
+
+  desc "Write missing keys of i18n files"
+  task "diff" => "common" do
+    Hash.class_eval do
+      def diff(en_hash)
+        diff_hash = {}
+        
+        en_hash.each_key do |en_key|
+          en_val   = en_hash[en_key]
+          self_val = self[en_key]
+
+          case en_val
+          when NilClass
+            # Do nothing
+          when Hash
+            if self_val.is_a?(Hash)
+              diff = self_val.diff(en_val)
+
+              if !diff.empty?
+                diff_hash[en_key] = diff
+              end
+            else
+              diff_hash[en_key] = en_val
+            end
+          when String
+            if self_val.nil? || self_val == en_val
+              diff_hash[en_key] = en_val
+            end
+          else
+            raise "Unknown key type #{ en_val.inspect }"
+          end
+        end
+
+        diff_hash
+      end
+    end
+
+    @engines.each do |c|
+      path = "#{ c }/config/locales/"
+
+      files = Dir[path + '*'].select{ |f| f =~ /\/\w+\.yml$/ }
+
+      en = files.find{ |f| f =~ /\/en.yml$/ }
+      files.delete(en)
+
+      en_h = Psych.load_file(en)
+
+      files.each do |f|
+        h = Psych.load_file(f)
+
+        diff_hash = h.first.last.diff en_h.first.last
+
+        if !diff_hash.empty?
+          Psych.dump diff_hash, File.open("#{ f }.diff", 'w')
+        end
+      end
     end
   end
 end
