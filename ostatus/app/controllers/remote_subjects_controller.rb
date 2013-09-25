@@ -1,6 +1,6 @@
 class RemoteSubjectsController < ApplicationController
   def index
-    raise ActiveRecord::NotFound if params[:q].blank?
+    raise ActiveRecord::RecordNotFound if params[:q].blank?
 
     @remote_subject =
       RemoteSubject.find_or_create_by_webfinger_uri!(params[:q])
