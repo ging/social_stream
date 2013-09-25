@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.license = 'MIT'
 
   # Gem dependencies
-  s.add_runtime_dependency('social_stream-base', '~> 2.2.0')
+  s.add_runtime_dependency('social_stream-base', '~> 2.2.2')
   s.add_runtime_dependency('rails-scheduler', '~> 0.1.2')
 
   # Development Gem dependencies

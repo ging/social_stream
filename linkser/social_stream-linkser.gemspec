@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.license = 'MIT'
 
   # Gem dependencies
-  s.add_runtime_dependency('social_stream-base', '~> 2.2.0')
+  s.add_runtime_dependency('social_stream-base', '~> 2.2.2')
   s.add_runtime_dependency('linkser', '~> 0.0.12')
   # Development Gem dependencies
   s.add_development_dependency('sqlite3-ruby')

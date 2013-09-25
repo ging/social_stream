@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.license = 'MIT'
 
   # Gem dependencies
-  s.add_runtime_dependency('social_stream-base', '~> 2.2.1')
+  s.add_runtime_dependency('social_stream-base', '~> 2.2.2')
   s.add_runtime_dependency('rack-oauth2', '~> 1.0.0')
 
   s.add_development_dependency('rspec-rails', '~> 2.8.0')
