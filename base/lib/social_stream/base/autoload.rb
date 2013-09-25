@@ -14,6 +14,7 @@ module SocialStream
 
   module Controllers
     autoload :Authorship,              'social_stream/controllers/authorship'
+    autoload :Avatars,                 'social_stream/controllers/avatars'
     autoload :MarkNotificationsRead,   'social_stream/controllers/mark_notifications_read'
     autoload :I18nIntegration,         'social_stream/controllers/i18n_integration'
     autoload :CancanDeviseIntegration, 'social_stream/controllers/cancan_devise_integration'
