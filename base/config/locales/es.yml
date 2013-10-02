@@ -325,7 +325,7 @@ es:
     my: Mis grupos
     n:
       one: '%{count} grupo'
-      other: '%{count} groupos'
+      other: '%{count} grupos'
     new:
       description: Descripción
       link: Nuevo grupo
