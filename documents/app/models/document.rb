@@ -3,7 +3,7 @@ class Document < ActiveRecord::Base
 
   has_attached_file :file, 
                     :url => '/:class/:id.:content_type_extension',
-                    :path => ':rails_root/documents/:class/:id_partition/:style/:filename.:extension'
+                    :path => ':rails_root/documents/:class/:id_partition/original/:filename.:extension'
 
   paginates_per 20
   
