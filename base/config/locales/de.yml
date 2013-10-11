@@ -516,9 +516,9 @@ de:
       saved: ' Regeln zur Privatsphäre gespeichert'
       title: Regeln zur Privatsphäre
   profile:
-    actualcity: Derzeitiger Wohnort
     address: Adresse
     age: Alter
+    city: Derzeitiger Wohnort
     contact: Kontakt Information
     country: Land
     email: E-mail

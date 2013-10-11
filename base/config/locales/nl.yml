@@ -518,9 +518,9 @@ nl:
       saved: Privacyreglement opgeslagen
       title: Privacyreglement
   profile:
-    actualcity: Huidige woonplaats
     address: Adres
     age: Leeftijd
+    city: Huidige woonplaats
     contact: Contactinformatie
     country: Land
     email: Email

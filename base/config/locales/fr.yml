@@ -517,9 +517,9 @@ fr:
       saved: Règles de confidentialité enregistrées
       title: Règles de confidentialité
   profile:
-    actualcity: Ville actuelle
     address: Adresse
     age: Age
+    city: Ville
     contact: Informations de contact
     country: Pays
     email: Adresse électronique

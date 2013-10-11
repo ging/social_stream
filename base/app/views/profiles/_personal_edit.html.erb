@@ -16,7 +16,7 @@
 
   <%= date_select "profile", "birthday", :order => [:day, :month, :year], :end_year => Date.today.year, :start_year => (Date.today.year - 100), :prompt => {:day => 'Day', :month => 'Month', :year => 'Year'} %>
 
-  <%= f.label :city, t('profile.actualcity') %>
+  <%= f.label :city, t('profile.city') %>
 
   <%= f.text_field :city %>
 

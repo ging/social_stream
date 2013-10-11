@@ -514,9 +514,9 @@ pt:
       saved: Regras de privacidade salvas
       title: Regras de privacidade
   profile:
-    actualcity: Cidade atual
     address: Enderesso
     age: Idade
+    city: Cidade
     contact: Informção de contato
     country: País
     email: E-mail

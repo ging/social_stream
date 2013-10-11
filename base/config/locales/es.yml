@@ -520,9 +520,9 @@ es:
       saved: Reglas de privacidad guardadas
       title: Reglas de privacidad
   profile:
-    actualcity: Ciudad actual
     address: Dirección
     age: Edad
+    city: Ciudad
     contact: Información de contacto
     country: País
     email: Correo electrónico

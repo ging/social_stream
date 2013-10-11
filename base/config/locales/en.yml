@@ -118,6 +118,9 @@ en:
         one: '%{count} more person'
         other: '%{count} more people'
     unfollow: Unfollow
+  administrators:
+    index:
+      title: Administrators
   ajax:
     error: There was an error in the remote server
   browse: Browse
@@ -479,8 +482,8 @@ en:
       experience: Experience
       info: Personal information
       tags: User tags
-    actualcity: Actual City
     address: Address
+    city: City
     contact: Contact information
     country: Country
     email: E-mail
