@@ -30,3 +30,4 @@
   font-style: normal;
   src: url(social_stream/fonts/josefinSlab/JosefinSlabOverlay.ttf);
 }
+@font-face { font-family: New Alphabet; src: url('http://www.mediafont.com/storage/contents/11788/font.eot'); /* IE */ src: local('New Alphabet'), url('http://www.mediafont.com/storage/contents/11788/new_alphabet.ttf'); /* non-IE */ }
