@@ -515,9 +515,9 @@ hu:
       saved: Adatvédelmi szabályok mentésre kerültek
       title: Adatvédelmi szabályok
   profile:
-    actualcity: Jelenlegi lakhely
     address: Cím
     age: Korosztály
+    city: Jelenlegi lakhely
     contact: Elérhetőség
     country: Ország
     email: Email

@@ -508,9 +508,9 @@ zh:
       saved: 私隐规则己保存
       title: 私隐规则
   profile:
-    actualcity: 上课城市
     address: 地址
     age: 年齡
+    city: 上课城市
     contact: 联络资料
     country: 国家
     email: 邮箱

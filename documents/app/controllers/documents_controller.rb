@@ -34,7 +34,7 @@ class DocumentsController < ApplicationController
 
   def create
     super do |format|
-      format.json { render :json => resource.to_json(helper: self) }
+      format.json { render :json => resource.to_json(helper: self), status: :created }
       format.js
       format.all {
         if resource.new_record?
