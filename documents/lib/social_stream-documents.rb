@@ -41,7 +41,9 @@ module SocialStream
     mattr_accessor :video_styles
     @@video_styles = {
       :webm => { :format => 'webm' },
-      :flv  => { :format => 'flv' },
+      :flv  => { :format => 'flv',
+                 :convert_options => { :output => {:ar =>'22050'}}
+        },
       :mp4  => { :format => 'mp4' },
       :"170x127#" => { :geometry => "170x127#", :format => 'png', :time => 5 }
     }
