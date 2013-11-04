@@ -68,7 +68,7 @@ class Document < ActiveRecord::Base
      :title => title,
      :description => description,
      :author => author.name,
-     :src => URI.join(options[:helper].root_url, file.url).to_s 
+     :src => options[:helper].polymorphic_url(self, action: :download)
     }
   end
   
