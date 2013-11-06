@@ -558,6 +558,8 @@ en:
       title: Roles
     new: + New role
     title: Privacy
+  relation_local_admin:
+    name: Administrator
   relation_owner:
     name: Owner
   relation_public:

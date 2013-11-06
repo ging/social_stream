@@ -564,6 +564,8 @@ es:
       title: Roles
     new: + Nuevo rol
     title: Privacidad
+  relation_local_admin:
+    name: Admin
   relation_owner:
     name: Admin
   relation_public:

@@ -9,7 +9,8 @@ module SocialStream
   mattr_accessor :subjects
   @@subjects = [ :user, :group, :site ]
 
-  mattr_writer :routed_subjects
+  mattr_accessor :routed_subjects
+  @@routed_subjects = [ :user, :group, :"site/current" ]
 
   mattr_accessor :devise_modules
   @@devise_modules = [ :database_authenticatable, :registerable, :recoverable,
@@ -73,7 +74,8 @@ module SocialStream
   mattr_accessor :system_relations
   @@system_relations = {
     user: [],
-    group: [ :owner ]
+    group: [ :owner ],
+    'site/current' => [ :local_admin ]
   }
 
   mattr_accessor :available_permissions
@@ -91,6 +93,10 @@ module SocialStream
       [ "follow", nil ],
       [ "represent", nil ],
       [ "notify", nil ]
+    ],
+    'site/current' => [
+      [ 'manage', nil ],
+      [ 'manage', 'contact' ]
     ]
   }
 
@@ -126,12 +132,6 @@ module SocialStream
   class << self
     def setup
       yield self
-    end
-
-    # All the subjects that appear in routes and can be accessed
-    # through the browser / API
-    def routed_subjects
-      @@routed_subjects ||= subjects.dup
     end
 
     # An array of the keys that must be tried when searching for a

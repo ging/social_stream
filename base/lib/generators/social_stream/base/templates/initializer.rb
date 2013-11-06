@@ -4,11 +4,11 @@ SocialStream.setup do |config|
   # List the models that are social entities. These will have ties between them.
   # Remember you must add an "actor_id" foreign key column to your migration!
   #
-  # config.subjects = [:user, :group ]
+  # config.subjects = [:user, :group, :site ]
   
   # List of subjects that can be accessed by the client browser or the API
   #
-  # config.routed_subjects = [:user, :group ]
+  # config.routed_subjects = [:user, :group, :'site/current' ]
 
   # Include devise modules in User. See devise documentation for details.
   # Others available are:

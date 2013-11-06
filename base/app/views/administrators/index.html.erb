@@ -1,13 +1,21 @@
-<section id="administrators">
-  <% content_for :title do%>
-    <%= t('organization.new.action')%>
-  <%end%>
-<header>
-  <h3>Administrators</h3>
+<% content_for :title do%>
+  <%= t('administrators.index.title') %>
+<% end %>
 
-  <a class="btn"></a>
-</header>
-<div class="administrators">
-	<%= render partial: 'contacts/contact' %>
-</div>
+<section id="administrators">
+  <header>
+    <h3><%= t('administrators.index.title') %></h3>
+
+  </header>
+  <div class="administrators">
+    <%= render partial: 'contacts/add_button',
+               locals: {
+                 sender: Site.current,
+                 type: [ :user ]
+               }
+    %>
+
+    <%= render partial:    'contacts/contact',
+               collection: Site.current.sent_contacts.reload.first(12) %>
+  </div>
 </section>

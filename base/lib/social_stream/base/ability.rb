@@ -101,6 +101,10 @@ module SocialStream
             r.actor.allow?(subject, 'manage', 'relation/custom')
           )
         end
+
+        can :update, Site::Current do |c|
+          c.allow? subject, 'manage'
+        end
       end
     end
   end

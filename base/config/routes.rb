@@ -101,6 +101,8 @@ Rails.application.routes.draw do
   match 'ties' => 'ties#index', :as => :ties
   
   match 'tags' => 'tags#index', :as => 'tags'
+
+  match 'administrators' => 'administrators#index'
   
   ##API###
   match 'api/keygen' => 'api#create_key', :as => :api_keygen
