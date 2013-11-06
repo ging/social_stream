@@ -117,7 +117,7 @@ namespace :i18n do
             end
           else
             raise "Unknown key type #{ en_val.inspect }"
-          end
+          end          
         end
 
         diff_hash
@@ -135,12 +135,13 @@ namespace :i18n do
       en_h = Psych.load_file(en)
 
       files.each do |f|
-        h = Psych.load_file(f)
-
+        h = Psych.load_file(f)        
+        puts "START WITH LOCALE " + f
         diff_hash = h.first.last.diff en_h.first.last
 
         if !diff_hash.empty?
-          Psych.dump diff_hash, File.open("#{ f }.diff", 'w')
+          puts "DIFFERENCES IN LOCALE, WRITTING TO FILE "+ f + ".diff"
+          Psych.dump diff_hash, File.open("#{ f }.diff", 'wb')
         end
       end
     end
