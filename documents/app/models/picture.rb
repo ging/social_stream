@@ -9,4 +9,10 @@ class Picture < Document
 
     indexes file_file_name, :as => :file_name
   end    
+
+  def as_json(options)
+    super.merge!({
+      :src => options[:helper].polymorphic_url(self, format: format)
+    })
+  end
 end
