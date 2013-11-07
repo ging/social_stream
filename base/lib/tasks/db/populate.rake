@@ -11,7 +11,7 @@ namespace :db do
     task :cheesecake => [ 'db:reset', :read_environment, 'create:users', 'create:groups', 'create:cheesecake_ties', 'create:avatars' ]
 
     desc "Create populate data"
-    task :create => [ :read_environment, 'db:seed', 'create:users', 'create:groups', 'create:ties', 'create:posts', 'create:messages', 'create:avatars' ]
+    task :create => [ :read_environment, 'db:seed', 'create:users', 'create:groups', 'create:ties', 'create:posts', 'create:messages', 'create:avatars', 'create:local_admin' ]
 
     desc "INTERNAL: read needed environment data and setup variables"
     task :read_environment => :environment do
@@ -247,6 +247,17 @@ namespace :db do
 
         SocialStream::Population.task 'Avatar population' do
           SocialStream.subjects.each {|a| set_logos(Kernel.const_get(a.to_s.classify)) }
+        end
+      end
+
+      desc "Create local admin"
+      task :local_admin => :read_environment do
+        SocialStream::Population.task "Add <Demo> as local admin" do
+
+          demo = SocialStream::Population::Actor.demo
+          contact = Site.current.contact_to!(demo)
+          contact.user_author = demo.user
+          contact.relation_ids = [ Relation::LocalAdmin.instance.id ]
         end
       end
     end
