@@ -12,7 +12,7 @@ namespace :db do
 
         SocialStream::Population::ActivityObject.new Document do |d|
           d.file  = File.open(doc_files.random, "r")
-          d.title = Forgery::LoremIpsum.words(rand(4), :random => true)
+          d.title = "kikedoc" + Forgery::LoremIpsum.words(rand(4), :random => true)
           d.description = Forgery::LoremIpsum.sentences(rand(4), :random => true)
         end
       end
