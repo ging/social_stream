@@ -57,7 +57,7 @@ namespace :db do
           end
 
           @USERS.times do
-            User.create! :name => "kike" + Forgery::Name.full_name,
+            User.create! :name => Forgery::Name.full_name,
                          :email => Forgery::Internet.email_address,
                          :password => 'demonstration',
                          :password_confirmation => 'demonstration'
