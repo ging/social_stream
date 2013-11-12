@@ -39,7 +39,9 @@ module SocialStream
     end
 
     mattr_accessor :video_styles
-    @@video_styles = {
+    @@video_styles = {      
+      :wmv => { :format => 'wmv'},
+      :mov => { :format => 'mov'},
       :webm => { :format => 'webm' },
       :flv  => { :format => 'flv',
                  :convert_options => { :output => {:ar =>'22050'}}
@@ -71,7 +73,7 @@ module SocialStream
     @@subtype_classes_mime_types = {
       picture: [ :jpeg, :gif, :png, :bmp, :xcf ],
       audio:   [ :wav, :ogg, :webma, :mp3 ],
-      video:   [ :flv, :webm, :mp4, :mpeg ]
+      video:   [ :flv, :webm, :mp4, :mpeg, :mov, :wmv ]
     }
 
     class << self
