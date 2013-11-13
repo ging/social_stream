@@ -23,6 +23,9 @@ module SocialStream
           Mime::Type.register "application/pdf", :pdf
         end
 
+        #flash
+        Mime::Type.register "application/x-shockwave-flash", :swf
+
         # Picture
         Mime::Type.register "image/x-xcf", :xcf
         # These are already defined in Rails 3.2
