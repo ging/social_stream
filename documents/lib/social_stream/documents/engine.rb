@@ -62,6 +62,7 @@ module SocialStream
         Mime::Type.register "video/mp4", :mp4
         Mime::Type.register "video/quicktime", :mov
         Mime::Type.register "video/x-ms-asf", :wmv
+        Mime::Type.register "video/x-m4v", :m4v
       end
 
       initializer "social_stream-documents.model.register_activity_streams" do

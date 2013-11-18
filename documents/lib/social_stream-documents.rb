@@ -39,9 +39,7 @@ module SocialStream
     end
 
     mattr_accessor :video_styles
-    @@video_styles = {      
-      :wmv => { :format => 'wmv'},
-      :mov => { :format => 'mov'},
+    @@video_styles = {
       :webm => { :format => 'webm' },
       :flv  => { :format => 'flv',
                  :convert_options => { :output => {:ar =>'22050'}}
