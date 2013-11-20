@@ -63,6 +63,10 @@ module SocialStream
         Mime::Type.register "video/quicktime", :mov
         Mime::Type.register "video/x-ms-asf", :wmv
         Mime::Type.register "video/x-m4v", :m4v
+        Mime::Type.register "video/3gpp", :gpp #mimetype for .3gp videos
+        Mime::Type.register "video/3gpp2", :gpp2 #mimetype for .3gp2 videos
+        Mime::Type.register "video/ogg", :ogv
+
       end
 
       initializer "social_stream-documents.model.register_activity_streams" do
