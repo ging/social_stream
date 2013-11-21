@@ -71,7 +71,7 @@ module SocialStream
     @@subtype_classes_mime_types = {
       picture: [ :jpeg, :gif, :png, :bmp, :xcf ],
       audio:   [ :wav, :ogg, :webma, :mp3 ],
-      video:   [ :flv, :webm, :mp4, :mpeg ]
+      video:   [ :flv, :webm, :mp4, :mpeg, :mov, :wmv ]
     }
 
     class << self

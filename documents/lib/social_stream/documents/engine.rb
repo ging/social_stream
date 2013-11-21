@@ -23,6 +23,9 @@ module SocialStream
           Mime::Type.register "application/pdf", :pdf
         end
 
+        #flash
+        Mime::Type.register "application/x-shockwave-flash", :swf
+
         # Picture
         Mime::Type.register "image/x-xcf", :xcf
         # These are already defined in Rails 3.2
@@ -57,6 +60,13 @@ module SocialStream
         Mime::Type.register "video/x-flv", :flv
         Mime::Type.register "video/webm", :webm
         Mime::Type.register "video/mp4", :mp4
+        Mime::Type.register "video/quicktime", :mov
+        Mime::Type.register "video/x-ms-asf", :wmv
+        Mime::Type.register "video/x-m4v", :m4v
+        Mime::Type.register "video/3gpp", :gpp #mimetype for .3gp videos
+        Mime::Type.register "video/3gpp2", :gpp2 #mimetype for .3gp2 videos
+        Mime::Type.register "video/ogg", :ogv
+
       end
 
       initializer "social_stream-documents.model.register_activity_streams" do
