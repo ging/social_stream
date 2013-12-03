@@ -120,7 +120,8 @@ module SocialStream
           classes: models,
           with: with,
           limit: options[:limit],
-          page: options[:page]
+          page: options[:page],
+          order:  options[:order]   #example: 'popularity DESC'
         ]
       end
     end

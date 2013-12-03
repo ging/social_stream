@@ -79,53 +79,7 @@ namespace :workers do
     def group_running?
       Process.exists?(group_master_pid)
     end
-
-    def kill_worker(pid)
-      %w{QUIT TERM KILL}.each do |signal|
-        if Signal.list.has_key?(signal)
-          begin
-            Process.kill(signal, pid)
-          rescue Errno::EINVAL
-            next
-          end
-
-          puts "Killed worker with PID #{pid}"
-          break
-        end
-      end
-    rescue Errno::ESRCH => e
-      puts " STALE worker with PID #{pid}"
-    end
-
-    def kill_workers
-      @pids.each { |pid| kill_worker(pid) }
-    end
-
-    def kill_workers_and_remove_pids_for_group
-      Dir.glob(pid_directory_for_group.join('worker_*.pid').to_s) do |pidfile|
-        begin
-          pid = pidfile[/(\d+)\.pid/, 1].to_i
-          kill_worker(pid)
-        ensure
-          FileUtils.rm pidfile, :force => true
-        end
-      end
-      if group_master_pid
-        FileUtils.rm    pid_directory.join("#{queue_pathname}.pid").to_s
-        FileUtils.rm_rf pid_directory_for_group.to_s
-      end
-    end
-
-    def shutdown
-      puts "\n*** Exiting"
-      if group?
-        kill_workers_and_remove_pids_for_group
-      else
-        kill_workers
-      end
-      exit(0)
-    end
-
+ 
     # Clean up after dead group from before -- and become one
     unless group_running?
       puts "--- Cleaning up after previous group (PID: #{group_master_pid})"
@@ -175,13 +129,59 @@ namespace :workers do
   end
 
   desc "Kill ALL workers on this machine"
-  task :kilall do
+  task :killall do
     require 'resque'
     Resque::Worker.all.each do |worker|
       puts "Shutting down worker #{worker}"
       host, pid, queues = worker.id.split(':')
       kill_worker(pid.to_i)
     end
+  end
+
+  def kill_worker(pid)
+    %w{QUIT TERM KILL}.each do |signal|
+      if Signal.list.has_key?(signal)
+        begin
+          Process.kill(signal, pid)
+        rescue Errno::EINVAL
+          next
+        end
+
+        puts "Killed worker with PID #{pid}"
+        break
+      end
+    end
+  rescue Errno::ESRCH => e
+    puts " STALE worker with PID #{pid}"
+  end
+
+  def kill_workers
+    @pids.each { |pid| kill_worker(pid) }
+  end
+
+  def kill_workers_and_remove_pids_for_group
+    Dir.glob(pid_directory_for_group.join('worker_*.pid').to_s) do |pidfile|
+      begin
+        pid = pidfile[/(\d+)\.pid/, 1].to_i
+        kill_worker(pid)
+      ensure
+        FileUtils.rm pidfile, :force => true
+      end
+    end
+    if group_master_pid
+      FileUtils.rm    pid_directory.join("#{queue_pathname}.pid").to_s
+      FileUtils.rm_rf pid_directory_for_group.to_s
+    end
+  end
+
+  def shutdown
+    puts "\n*** Exiting"
+    if group?
+      kill_workers_and_remove_pids_for_group
+    else
+      kill_workers
+    end
+    exit(0)
   end
 
 end
