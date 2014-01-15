@@ -41,6 +41,7 @@ SocialStream.Comment = (function(SS, $, undefined){
 
   var initNewElements = function(){
     hideNewCommentElements();
+    initCommentButton();
 
     // show only the text fields for new comment
     // if there are any comment to the post
@@ -131,6 +132,19 @@ SocialStream.Comment = (function(SS, $, undefined){
     }
   };
 
+  // Prevent sending the same post several times
+  var initCommentButton = function() {
+    $('div.new_comment input[type="submit"]').on('click', loadingCommentButton);
+  };
+
+  var loadingCommentButton = function() {
+    $(this).button('loading');
+  };
+
+  var resetCommentButton = function(){
+    $('div.new_comment input[type="submit"]').button('reset');
+  };
+
   callback.register('index',
                     initNewElements,
                     newCommentAutoSize,
@@ -144,7 +158,8 @@ SocialStream.Comment = (function(SS, $, undefined){
                     hideNewActivityCommentElements,
                     newCommentAutoSize,
                     newCommentClick,
-                    newCommentLink);
+                    newCommentLink,
+                    resetCommentButton);
 
   return callback.extend({
     showAll: showAll
