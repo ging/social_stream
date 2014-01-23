@@ -60,7 +60,7 @@ module SocialStream
         :odt, :odp, :ods, :doc, :ppt, :xls, :rtf,
         :rar, :zip,
         :jpeg, :gif, :png, :bmp, :xcf,
-        :wav, :ogg, :webma, :mp3,
+        :wav, :ogg, :webma, :mp3, :gppa, :gpa,
         :flv, :webm, :mp4
       ]
     }
@@ -70,7 +70,7 @@ module SocialStream
     mattr_accessor :subtype_classes_mime_types
     @@subtype_classes_mime_types = {
       picture: [ :jpeg, :gif, :png, :bmp, :xcf ],
-      audio:   [ :wav, :ogg, :webma, :mp3 ],
+      audio:   [ :aac, :gppa, :gpa, :wav, :ogg, :webma, :mp3 ],
       video:   [ :flv, :webm, :mp4, :mpeg, :mov, :wmv ]
     }
 

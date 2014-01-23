@@ -55,6 +55,9 @@ module SocialStream
         unless defined? Mime::MP3
           Mime::Type.register "audio/mpeg", :mp3
         end
+        Mime::Type.register "audio/3gpp", :gppa
+        Mime::Type.register "audio/3gpp", :gpa
+        Mime::Type.register "audio/aac", :aac
 
         # Video
         Mime::Type.register "video/x-flv", :flv
