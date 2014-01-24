@@ -16,6 +16,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('social_stream-base', '~> 2.2.2')
 
   s.add_runtime_dependency('paperclip','~> 3.5.1')
-  s.add_runtime_dependency('paperclip-ffmpeg', '~> 0.11.0')
+  s.add_runtime_dependency('paperclip-ffmpeg', '~> 1.0.1')
   s.add_runtime_dependency('delayed_paperclip','>= 2.6.1')
 end

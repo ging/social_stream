@@ -4,7 +4,7 @@ class Video < Document
                     :default_url => 'missing_:style.png',
                     :path => ':rails_root/documents/:class/:id_partition/:style',
                     :styles => SocialStream::Documents.video_styles,
-                    :processors => [:ffmpeg]
+                    :processors => [:ffmpeg, :qtfaststart]
                     
   process_in_background :file
   
