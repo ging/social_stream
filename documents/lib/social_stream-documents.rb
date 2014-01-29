@@ -44,7 +44,7 @@ module SocialStream
       :flv  => { :format => 'flv',
                  :convert_options => { :output => {:ar =>'22050'}}
         },
-      :mp4  => { :format => 'mp4', :streaming => true},
+      :mp4  => { :format => 'mp4',:convert_options => { :output => {:vcodec =>'libx264', :acodec =>"aac", :strict => "-2"}}, :streaming => true},
       :"170x127#" => { :geometry => "170x127#", :format => 'png', :time => 5 }
     }
 
