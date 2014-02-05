@@ -109,11 +109,19 @@ namespace :i18n do
                 diff_hash[en_key] = diff
               end
             else
+              en_val.each do |key, value|
+                if value.class == Hash
+                  puts "hola"
+                else
+                  value += "foo \nbar"
+                end
+                en_val[key] = value
+              end
               diff_hash[en_key] = en_val
             end
           when String
             if self_val.nil? || self_val == en_val
-              diff_hash[en_key] = en_val
+              diff_hash[en_key] = en_val + "foo \nbar"
             end
           else
             raise "Unknown key type #{ en_val.inspect }"
@@ -141,7 +149,7 @@ namespace :i18n do
 
         if !diff_hash.empty?
           puts "DIFFERENCES IN LOCALE, WRITTING TO FILE "+ f + ".diff"
-          Psych.dump diff_hash, File.open("#{ f }.diff", 'wb')
+          Psych.dump(diff_hash, File.open("#{ f }.diff", 'wb'), line_width: -1)
         end
       end
     end

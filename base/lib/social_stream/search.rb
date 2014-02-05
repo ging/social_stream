@@ -120,6 +120,7 @@ module SocialStream
           classes: models,
           with: with,
           limit: options[:limit],
+          :match_mode => :extended,
           page: options[:page],
           order:  options[:order]   #example: 'popularity DESC'
         ]
