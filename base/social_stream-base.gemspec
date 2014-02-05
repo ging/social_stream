@@ -56,7 +56,7 @@ Gem::Specification.new do |s|
   # Modernizr.js javascript library
   s.add_runtime_dependency('modernizr-rails', '~> 2.0.6')
   # Sphinx search engine
-  s.add_runtime_dependency('thinking-sphinx', '~> 3.1.0')
+  s.add_runtime_dependency('thinking-sphinx', '~> 2.0.8')
   # Syntactically Awesome Stylesheets
   s.add_runtime_dependency('sass-rails', '>= 3.1.0')
   # Bootstrap for Sass
