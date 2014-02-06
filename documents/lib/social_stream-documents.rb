@@ -20,7 +20,15 @@ module SocialStream
       webma: {
         format: 'webm',
         processors: [ :ffmpeg ]
-      }
+      },
+     mp3: {
+      format: 'mp3',
+      processors: [ :ffmpeg]
+     },
+     wav: {
+      format: 'wav',
+      processors: [ :ffmpeg]
+     }
     }
 
     # Install the paperclip_waveform gem to create pngs with
