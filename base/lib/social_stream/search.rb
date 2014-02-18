@@ -121,6 +121,8 @@ module SocialStream
           with: with,
           limit: options[:limit],
           :match_mode => :extended,
+          :ranker => :wordcount,
+          :field_weights => { :title => 20, :tags => 10},
           page: options[:page],
           order:  options[:order]   #example: 'popularity DESC'
         ]

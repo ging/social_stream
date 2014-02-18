@@ -13,6 +13,9 @@ module SocialStream
         Mime::Type.register "application/vnd.ms-word", :doc, [ "application/msword" ]
         Mime::Type.register "application/vnd.ms-powerpoint", :ppt, [ "application/mspowerpoint" ]
         Mime::Type.register "application/vnd.ms-excel", :xls, [ "application/msexcel" ]
+        Mime::Type.register "application/vnd.openxmlformats-officedocument.wordprocessingml.document", :docx, [ "application/msword" ]
+        Mime::Type.register "application/vnd.openxmlformats-officedocument.presentationml.presentation", :pptx, [ "application/mspowerpoint" ]
+        Mime::Type.register "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", :xlsx, [ "application/msexcel" ]
         Mime::Type.register "application/rtf", :rtf
         Mime::Type.register "application/vnd.scribus", :sla
         # These are already defined in Rails 3.2
@@ -53,7 +56,9 @@ module SocialStream
         # These are already defined in Rails 3.2
         # MPEG is currently reserved to 'video/mpeg'
 
-        Mime::Type.register "audio/mpeg", :mp3
+        unless defined? Mime::MP3
+          Mime::Type.register "audio/mpeg", :mp3
+        end
         
         Mime::Type.register "audio/3gpp", :gppa
         Mime::Type.register "audio/3gpp2", :gpa
