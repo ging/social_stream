@@ -8,6 +8,7 @@ module SocialStream
         
         #Download alias action
         alias_action :download, :to => :read
+        alias_action :original, :to => :read
         
         # Activity Objects
         (SocialStream.objects - [ :actor, :comment ]).map{ |obj|

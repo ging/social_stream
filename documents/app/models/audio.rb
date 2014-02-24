@@ -22,7 +22,7 @@ class Audio < Document
       :title => title,
       :description => description,
       :author => author.name,
-      :original_source => options[:helper].polymorphic_url(self, format: self.format),
+      :src => options[:helper].original_url(self, self.format),
       :sources => [
         { type: Mime::MP3.to_s, src: options[:helper].polymorphic_url(self, format: :mp3) },
         { type: Mime::WAV.to_s,  src: options[:helper].polymorphic_url(self, format: :wav) },

@@ -68,8 +68,8 @@ class Document < ActiveRecord::Base
      :title => title,
      :description => description,
      :author => author.name,
-     #:src => options[:helper].download_document_url(self)
-     :src => options[:helper].polymorphic_url(self, format: self.format)
+     #:src => options[:helper].original_document_url(self)
+     :src => options[:helper].original_url(self, self.format)
     }
   end
   

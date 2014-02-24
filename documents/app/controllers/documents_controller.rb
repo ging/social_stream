@@ -32,6 +32,22 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def original
+    respond_to do |format|
+      format.any {
+        path = resource.file.path(params[:style])
+
+        head(:not_found) and return unless File.exist?(path)
+
+        send_file path,
+                 :filename => resource.file_file_name,
+                 :disposition => "inline",
+                 :type => resource.format
+      }
+    end
+
+  end
+
   def create
     super do |format|
       format.json { render :json => resource.to_json(helper: self), status: :created }

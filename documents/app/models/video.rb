@@ -15,7 +15,7 @@ class Video < Document
   end
                       
  # JSON, special edition for video files
-  def as_json(options = nil)
+  def as_json(options = nil)   
     {
       :id => id,
       :type => "video",
@@ -23,6 +23,7 @@ class Video < Document
       :description => description,
       :author => author.name,
       :poster => options[:helper].polymorphic_url(self, style: '170x127#', format: :png),
+      :src => options[:helper].original_url(self, self.format),
       :sources => [
         { type: Mime::WEBM.to_s, src: options[:helper].polymorphic_url(self, format: :webm) },
         { type: Mime::MP4.to_s,  src: options[:helper].polymorphic_url(self, format: :mp4) },
