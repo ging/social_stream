@@ -12,5 +12,22 @@ class Audio < Document
 
     indexes file_file_name, :as => :file_name
   end 
-              
+             
+
+  # JSON, special edition for video files
+  def as_json(options = nil)
+    {
+      :id => id,
+      :type => "audio",
+      :title => title,
+      :description => description,
+      :author => author.name,
+      :original_source => options[:helper].polymorphic_url(self, format: self.format),
+      :sources => [
+        { type: Mime::MP3.to_s, src: options[:helper].polymorphic_url(self, format: :mp3) },
+        { type: Mime::WAV.to_s,  src: options[:helper].polymorphic_url(self, format: :wav) },
+        { type: Mime::WEBMA.to_s,  src: options[:helper].polymorphic_url(self, format: :webma) }
+      ]
+    }
+  end 
 end

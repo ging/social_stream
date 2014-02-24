@@ -18,6 +18,7 @@ class Video < Document
   def as_json(options = nil)
     {
       :id => id,
+      :type => "video",
       :title => title,
       :description => description,
       :author => author.name,
