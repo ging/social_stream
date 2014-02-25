@@ -50,7 +50,8 @@ module SocialStream
         end
 
         can :destroy, Comment do |c|
-          can? :destroy, c.parent_post
+          #can? :destroy, c.parent_post
+          c.authored_or_owned_by?(subject)
         end
 
         # Activities
