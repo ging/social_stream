@@ -56,9 +56,9 @@ class SettingsController < ApplicationController
 
     #Flashing and redirecting
     if success
-      flash[:success] = t('settings.success')
+      flash.now[:success] = t('settings.success')
     else
-      flash[:error] = t('settings.error')
+      flash.now[:error] = t('settings.error')
     end
     # render :action => :index
 

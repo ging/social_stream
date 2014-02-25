@@ -30,7 +30,7 @@ class ContactsController < ApplicationController
       c.relation_ids = relation_ids
     end
 
-    flash[:success] = t "contact.new.added.other",
+    flash.now[:success] = t "contact.new.added.other",
                         actors: params[:actors].split(',').map{ |a| Actor.find(a).name }.to_sentence,
                         relations: relation_ids.map{ |r| Relation.find(r).name }.to_sentence
 
@@ -125,7 +125,7 @@ class ContactsController < ApplicationController
     end
 
     if errors.present?
-      flash[:error] = errors.to_sentence
+      flash.now[:error] = errors.to_sentence
       redirect_to action: :index
     end
   end
