@@ -49,4 +49,15 @@ class Link < ActiveRecord::Base
       callback_url
     end
   end
+
+  def as_json
+    {
+     :id => id,
+     :title => title,
+     :description => description,
+     :author => author.name,
+     #:src => options[:helper].original_document_url(self)
+     :src => options[:helper].original_url(self, self.format)
+    }
+  end
 end
