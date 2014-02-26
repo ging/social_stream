@@ -4,7 +4,7 @@ module TagsHelper
       taggable.tags.
         map(&:name).
         map{ |t| 
-          safe_string << '<span rel="tag">'.html_safe
+          safe_string << '<span class="ss_tag" rel="tag">'.html_safe
           safe_string << t
           safe_string << '</span>'.html_safe
         }
