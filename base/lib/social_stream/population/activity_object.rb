@@ -6,7 +6,7 @@ module SocialStream
         start_time = Time.now
 
         10.times do
-          author = ::Actor.all.sample
+          author = ::Actor.all.take(10).sample
           owner = author
           relation_ids = [Relation::Public.instance.id]
 
