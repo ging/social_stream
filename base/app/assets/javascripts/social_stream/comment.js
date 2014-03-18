@@ -58,7 +58,7 @@ SocialStream.Comment = (function(SS, $, undefined){
   };
 
   var hideNewActivityCommentElements = function(options){
-    var newDiv = $('#comments_activity_' + options.parentActivityId).siblings('div.new_comment');
+    var newDiv = $('#comments_activity_' + options.parentActivityId).parent().find('div.new_comment');
 
     newDiv.find("textarea").val('');
 
@@ -95,13 +95,13 @@ SocialStream.Comment = (function(SS, $, undefined){
   };
 
   var squeeze = function(){
-    //if there are 4 or more commments we only show the last 2 and a link to show the rest
+    //if there are 6 or more commments we only show the last 4 and a link to show the rest
     $(".comments").each(function(){
       var comments = $(this).children(".child"),
           showDiv;
 
-      //check if there are more than 3 comments
-      if (comments.size() > 3){
+      //check if there are more than 5 comments
+      if (comments.size() > 5){
         showDiv = $(this).find('.hidden_comments');
 
         if (showDiv.length) {
@@ -113,7 +113,7 @@ SocialStream.Comment = (function(SS, $, undefined){
                           $(this).attr('id') +"\"); return false;'>" + I18n.t('comment.view_all', { count: comments.size() }) + "</a></div>");
         }
 
-        comments.slice(0, comments.size() - 2).hide();
+        comments.slice(0, comments.size() - 4).hide();
       }
     });
   };
