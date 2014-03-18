@@ -31,6 +31,16 @@ class EventsController < ApplicationController
     end
   end
 
+  def destroy
+    super do |format|
+      format.html {
+        redirect_to :home
+      }
+
+      format.js
+    end
+  end
+
   private
 
   def allowed_params
