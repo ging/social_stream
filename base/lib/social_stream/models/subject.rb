@@ -75,6 +75,7 @@ module SocialStream
           indexes actor.slug
           
           has created_at
+          has updated_at
           has Relation::Public.instance.id.to_s, :type => :integer, :as => :relation_ids
           
         end

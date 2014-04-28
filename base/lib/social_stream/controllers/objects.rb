@@ -68,7 +68,14 @@ module SocialStream
       protected
 
       def increment_visit_count
-        resource.activity_object.increment!(:visit_count) if request.format == 'html'
+        if request.format == 'html'
+            ActiveRecord::Base.record_timestamps = false
+            begin
+              resource.activity_object.increment!(:visit_count)
+            ensure
+              ActiveRecord::Base.record_timestamps = true  # don't forget to enable it again!
+            end
+        end
       end
 
       def collection_variable_get
