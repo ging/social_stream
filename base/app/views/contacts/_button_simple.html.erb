@@ -3,7 +3,7 @@
     <div class="following-button">
       <%= t 'contact.following' %>
     </div>
-    <div class="unfollow-button">
+    <div class="unfollow-button" style="display:none">
       <%= form_for contact, method: :delete, remote: true do |f| %>
         <%= f.submit t('contact.unfollow') %>
       <% end %>

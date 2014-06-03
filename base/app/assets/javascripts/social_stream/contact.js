@@ -283,15 +283,15 @@ SocialStream.Contact = (function($, SS, undefined) {
   };
 
   var initSimpleButtons = function(){
-    $(".following-button").mouseenter(function(){
+    $(document).on("mouseenter",".following-button", function(){
       $(this).hide();
       $(this).siblings(".unfollow-button").show();
     });
-
-    $(".unfollow-button").mouseleave(function(){
+    $(document).on("mouseleave", ".unfollowing-button", function(){
       $(this).hide();
       $(this).siblings(".following-button").show();
     });
+    
 
     $(".unfollow-button").hide();
   };
