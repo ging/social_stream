@@ -287,7 +287,7 @@ SocialStream.Contact = (function($, SS, undefined) {
       $(this).hide();
       $(this).siblings(".unfollow-button").show();
     });
-    $(document).on("mouseleave", ".unfollowing-button", function(){
+    $(document).on("mouseleave", ".unfollow-button", function(){
       $(this).hide();
       $(this).siblings(".following-button").show();
     });
