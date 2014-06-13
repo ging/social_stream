@@ -31,7 +31,12 @@ class Like
   end
 
   def save
-    @like.save
+    ActivityObject.record_timestamps = false
+    begin
+      @like.save
+    ensure
+      ActivityObject.record_timestamps = true
+    end
   end
   
   # The object that is liked. It can be an activity
@@ -49,6 +54,11 @@ class Like
   end
   
   def destroy
-    @like.destroy
+    ActivityObject.record_timestamps = false
+    begin
+      @like.destroy
+    ensure
+      ActivityObject.record_timestamps = true
+    end
   end
 end
