@@ -240,6 +240,16 @@ class ActivityObject < ActiveRecord::Base
     @_activity_parent_id = id
   end
 
+  def increment_download_count
+    ActivityObject.record_timestamps = false
+    begin
+      self.increment!(:download_count)
+    ensure
+      ActivityObject.record_timestamps = true
+    end
+  end
+
+
   private
 
   def fill_owner_id

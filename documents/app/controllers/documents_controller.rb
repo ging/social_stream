@@ -97,6 +97,9 @@ class DocumentsController < ApplicationController
       :type => @document.file_content_type
     }
 
+    #Update download count
+    resource.increment_download_count
+
     send_file(path, send_file_options)
   end
 
