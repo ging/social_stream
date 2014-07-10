@@ -1,7 +1,9 @@
 <% if @search_result.present? %>
   <ul>
     <% @search_result.each do |model|%>
-      <li><%= render partial: "#{ model.class.to_s.tableize }/quick_search_result", object: model, as: model.class.to_s.underscore %></li>
+      <%unless model.nil?%>
+        <li><%= render partial: "#{ model.class.to_s.tableize }/quick_search_result", object: model, as: model.class.to_s.underscore %></li>
+      <%end%>
     <% end %>
 
     <li class="more">

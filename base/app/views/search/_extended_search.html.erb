@@ -3,16 +3,18 @@
     <%= I18n.t('search.nothing') %>
   </div>
 <% else %>
-  <% @search_result.each do |model|%>
-    <% if params[:type].blank? %>
-      <div class="subject_search_results block left">
-        <%= render_global_search_for model %>
-      </div>
-    <% else %>
-      <div class="subject_search_results block left <%= model.class.name.downcase %>">
-        <%= render_focus_search_for model %>
-      </div>
-    <% end %>
+  <% @search_result.each do |model| %>
+    <%unless model.nil?%>
+      <% if params[:type].blank? %>
+        <div class="subject_search_results block left">
+          <%= render_global_search_for model %>
+        </div>
+      <% else %>
+        <div class="subject_search_results block left <%= model.class.name.downcase %>">
+          <%= render_focus_search_for model %>
+        </div>
+      <% end %>
+    <%end%>
   <% end %>
   <br class="clearfloat">
   <%= paginate @search_result %>
