@@ -44,7 +44,7 @@ class ActivityObject < ActiveRecord::Base
   validates_presence_of :object_type
   validate :allowed_relations, :if => lambda { |obj| obj.object_type != "Actor" }
 
-  after_save :update_object_timestamps
+  after_update :update_object_timestamps
 
   # TODO: This is currently defined in lib/social_stream/models/object.rb
   #
