@@ -11,7 +11,8 @@ namespace :db do
     task :cheesecake => [ 'db:reset', :read_environment, 'create:users', 'create:groups', 'create:cheesecake_ties', 'create:avatars' ]
 
     desc "Create populate data"
-    task :create => [ :read_environment, 'db:seed', 'create:users', 'create:groups', 'create:ties', 'create:posts', 'create:messages', 'create:avatars', 'create:local_admin' ]
+    task :create => [ :read_environment, 'db:seed', 'create:users', 'create:groups', 'create:ties', 'create:posts', 'create:messages', 'create:avatars' ]
+    # Other creation tasks: ['create:local_admin']
 
     desc "INTERNAL: read needed environment data and setup variables"
     task :read_environment => :environment do
@@ -88,7 +89,6 @@ namespace :db do
       end
 
       desc "Populate profiles"
-
       task :profiles => :read_environment do
         SocialStream::Population.task "Profiles population" do
           SocialStream::Population::Actor.available.each do |a|
