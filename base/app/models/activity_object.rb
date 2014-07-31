@@ -344,8 +344,10 @@ class ActivityObject < ActiveRecord::Base
 
   #Keep "update_at" consistency between the activity_object and the object
   def update_object_timestamps
-    unless self.object.nil?
-      self.object.update_column :updated_at, self.updated_at
+    unless self.object.nil? or ActivityObject.record_timestamps==false or self.object.class.record_timestamps==false
+      if self.updated_at > self.object.updated_at
+        self.object.update_column :updated_at, self.updated_at
+      end
     end
   end
 
