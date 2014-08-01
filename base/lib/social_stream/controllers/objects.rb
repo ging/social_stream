@@ -68,7 +68,7 @@ module SocialStream
       protected
 
       def increment_visit_count
-        if request.format == 'html'
+        if request.format == 'html' and resource.public_scope?
             ActivityObject.record_timestamps = false
             begin
               resource.activity_object.increment!(:visit_count)
