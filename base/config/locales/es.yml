@@ -84,7 +84,7 @@ es:
           title: '%{subject} se unió al grupo %{contact}.'
         User:
           message: '%{name} te añadió como contacto.'
-          title: '%{subject} añadió %{contact} como contacto.'
+          title: '%{subject} añadió a %{contact} como contacto.'
       join:
         one: '%{sender} joined the %{title} %{thing}.'
       like:

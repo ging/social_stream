@@ -344,50 +344,59 @@ class Activity < ActiveRecord::Base
   def notification_subject
     sender_name= sender.name.truncate(30, :separator => ' ')
     receiver_name= receiver.name.truncate(30, :separator => ' ')
+
+    subjectLocale = (receiver.subject.language.nil? ? I18n.default_locale : receiver.subject.language.to_sym)
+
     case verb 
       when 'like'
         if direct_object.acts_as_actor?
           I18n.t('notification.fan', 
                 :sender => sender_name,
                 :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
-                            :receiver => receiver_name))
+                            :receiver => receiver_name, :locale => subjectLocale),
+                :locale => subjectLocale)
         else
           I18n.t('notification.like.'+ receiver.subject.class.to_s.underscore, 
                 :sender => sender_name,
                 :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
-                            :receiver => receiver_name),
-                :thing => I18n.t(direct_object.class.to_s.underscore+'.name'))
+                            :receiver => receiver_name, :locale => subjectLocale),
+                :thing => I18n.t(direct_object.class.to_s.underscore+'.name', :locale => subjectLocale),
+                :locale => subjectLocale)
         end
       when 'follow'
         I18n.t('notification.follow.'+ receiver.subject.class.to_s.underscore, 
               :sender => sender_name,
               :who => I18n.t('notification.who.'+ receiver.subject.class.to_s.underscore,
-                             :name => receiver_name))
+                             :name => receiver_name, :locale => subjectLocale),
+              :locale => subjectLocale)
       when 'make-friend'
         I18n.t('notification.makefriend.'+ receiver.subject.class.to_s.underscore, 
               :sender => sender_name,
               :who => I18n.t('notification.who.'+ receiver.subject.class.to_s.underscore,
-                              :name => receiver_name))
+                              :name => receiver_name, :locale => subjectLocale),
+              :locale => subjectLocale)
       when 'post'
         I18n.t('notification.post.'+ receiver.subject.class.to_s.underscore, 
             :sender => sender_name,
             :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
-                              :receiver => receiver_name),
-	    :title => title_of(direct_object))
+                              :receiver => receiver_name, :locale => subjectLocale),
+            :title => title_of(direct_object),
+            :locale => subjectLocale)
       when 'update'
         I18n.t('notification.update.'+ receiver.subject.class.to_s.underscore, 
               :sender => sender_name,
               :whose => I18n.t('notification.whose.'+ receiver.subject.class.to_s.underscore,
-                               :receiver => receiver_name),
-              :thing => I18n.t(direct_object.class.to_s.underscore+'.one'))
+                               :receiver => receiver_name, :locale => subjectLocale),
+              :thing => I18n.t(direct_object.class.to_s.underscore+'.one', :locale => subjectLocale),
+              :locale => subjectLocale)
       when 'join'
         I18n.t('notification.join.one'  , 
             :sender => sender_name,
-            :thing => I18n.t(direct_object.class.to_s.underscore+'.title.one'),
-            :title => title_of(direct_object))
-      
+            :thing => I18n.t(direct_object.class.to_s.underscore+'.title.one', :locale => subjectLocale),
+            :title => title_of(direct_object),
+            :locale => subjectLocale)
       else
-        t('notification.default')
+        t('notification.default', :locale => subjectLocale)
       end
   end
   
