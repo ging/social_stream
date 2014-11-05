@@ -50,7 +50,7 @@ Gem::Specification.new do |s|
   # Messages
   s.add_runtime_dependency('mailboxer','~> 0.10.3')
   # Tagging
-  s.add_runtime_dependency('acts-as-taggable-on','~> 2.2.2')
+  s.add_runtime_dependency('acts-as-taggable-on','~> 2.4.1')
   # Background jobs
   s.add_runtime_dependency('resque','~> 1.23.0')
   # Modernizr.js javascript library
