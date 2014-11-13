@@ -36,6 +36,19 @@ module SocialStream #:nodoc:
 
         # Load the supertype to ensure it is saved along with this instance
         before_validation :supertype! # before_validation :actor!
+
+        after_update :update_activity_object_timestamps
+      end
+
+      #Keep "update_at" consistency between the activity_object and the object
+      def update_activity_object_timestamps
+        unless self.activity_object.nil? or ActivityObject.record_timestamps==false or self.class.record_timestamps==false
+          if self.updated_at > self.activity_object.updated_at
+            self.activity_object.update_column :updated_at, self.updated_at
+          else
+            self.update_column :updated_at, self.activity_object.updated_at
+          end
+        end
       end
 
       module ClassMethods

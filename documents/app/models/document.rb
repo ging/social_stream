@@ -72,6 +72,10 @@ class Document < ActiveRecord::Base
      :src => options[:helper].original_url(self, self.format)
     }
   end
+
+  def increment_download_count
+    self.activity_object.increment_download_count
+  end
   
   protected
 

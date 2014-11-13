@@ -44,6 +44,8 @@ class ActivityObject < ActiveRecord::Base
   validates_presence_of :object_type
   validate :allowed_relations, :if => lambda { |obj| obj.object_type != "Actor" }
 
+  after_update :update_object_timestamps
+
   # TODO: This is currently defined in lib/social_stream/models/object.rb
   #
   # Need to fix activity_object_spec_helper before activating it
@@ -240,6 +242,16 @@ class ActivityObject < ActiveRecord::Base
     @_activity_parent_id = id
   end
 
+  def increment_download_count
+    ActivityObject.record_timestamps = false
+    begin
+      self.increment!(:download_count)
+    ensure
+      ActivityObject.record_timestamps = true
+    end
+  end
+
+
   private
 
   def fill_owner_id
@@ -328,6 +340,15 @@ class ActivityObject < ActiveRecord::Base
     a.activity_objects << self
 
     a
+  end
+
+  #Keep "update_at" consistency between the activity_object and the object
+  def update_object_timestamps
+    unless self.object.nil? or ActivityObject.record_timestamps==false or self.object.class.record_timestamps==false
+      if self.updated_at > self.object.updated_at
+        self.object.update_column :updated_at, self.updated_at
+      end
+    end
   end
 
   include Properties
