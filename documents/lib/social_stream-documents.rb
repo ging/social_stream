@@ -31,6 +31,9 @@ module SocialStream
      }
     }
 
+    mattr_accessor :audio_processors
+    @@audio_processors = []
+
     # Install the paperclip_waveform gem to create pngs with
     # the audio wave form
     if defined? PaperclipWaveform
@@ -55,6 +58,9 @@ module SocialStream
       :mp4  => { :format => 'mp4',:convert_options => { :output => {:vcodec =>'libx264', :acodec =>"aac", :strict => "-2"}}, :streaming => true},
       :"170x127#" => { :geometry => "170x127#", :format => 'png', :time => 5 }
     }
+
+    mattr_accessor :video_processors
+    @@video_processors = []
 
     # List of mime types that have an icon defined
     mattr_accessor :icon_mime_types

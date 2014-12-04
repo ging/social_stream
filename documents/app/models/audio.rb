@@ -5,8 +5,10 @@ class Audio < Document
                     :styles => SocialStream::Documents.audio_styles,
                     :processors => [ :ffmpeg, :waveform ]
   
-  process_in_background :file    
-  
+  if Vish::Application.config.APP_CONFIG["services"].include? "MediaConversion"
+    process_in_background :file    
+  end
+
   define_index do
     activity_object_index
 

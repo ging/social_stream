@@ -4,9 +4,11 @@ class Video < Document
                     :default_url => 'missing_:style.png',
                     :path => ':rails_root/documents/:class/:id_partition/:style',
                     :styles => SocialStream::Documents.video_styles,
-                    :processors => [:ffmpeg, :qtfaststart]
+                    :processors => SocialStream::Documents.video_processors
                     
-  process_in_background :file
+  if Vish::Application.config.APP_CONFIG["services"].include? "MediaConversion"
+    process_in_background :file    
+  end
   
   define_index do
     activity_object_index
