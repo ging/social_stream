@@ -112,8 +112,11 @@
   var user_jid = PRESENCE.XMPPClient.getJidFromSlug('<%=current_user.slug%>');
   
 
-  $(document).ready(function () {
-    
+
+  
+  </script>
+
+  <%content_for :javascript do%>
         //Inicial field
         $("#chat_connecting").hide();
         $("#chat_connection_off").hide();
@@ -133,17 +136,13 @@
         }
         
         PRESENCE.CORE.init();
-      });
-  
-  </script>
 
-  <script type="text/javascript">
-  $(document).ready(function () {
-    PRESENCE.WINDOW.createMainChatBox();
-    PRESENCE.WINDOW.addContentToMainChatBox(PRESENCE.WINDOW.modifyChatPartialIfMainBox($("#chat_partial")));
-    $("#chat_wrapper").find("#chat_partial").remove();
-  });
-  </script>
+        PRESENCE.WINDOW.createMainChatBox();
+        PRESENCE.WINDOW.addContentToMainChatBox(PRESENCE.WINDOW.modifyChatPartialIfMainBox($("#chat_partial")));
+        $("#chat_wrapper").find("#chat_partial").remove();
+<%end%>
+
+
 
   <% if defined?(group)!=nil and group %>
   <script type="text/javascript">

@@ -53,8 +53,7 @@
   <%end %>
 </div>
 
-<%= javascript_tag do %>
-$(document).ready(function(){  
+<%content_for :javascript do%> 
   $(".message .body img").each(function(){
     var link = '<a href=\"' + $(this).attr('src') + '\" class=\"img_link\"><img src=\"' + $(this).attr('src') + '\"></a>';
     $(this).after(link);

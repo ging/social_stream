@@ -4,7 +4,7 @@
 
   <%= render :partial => 'index' %>
 
-  <%= javascript_tag do %>
+  <%content_for :javascript do%>
     $(function() {
       SocialStream.Conversation.index();
     });

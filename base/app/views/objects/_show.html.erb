@@ -1,7 +1,5 @@
 <%= render partial: 'toolbar/profile', locals: { :subject => object.owner_subject } %>
 
-<%= javascript_tag do %>
-  $(function() {
-    SocialStream.Object.show();
-  });
+<%content_for :javascript do%>
+  SocialStream.Object.show();
 <% end %>

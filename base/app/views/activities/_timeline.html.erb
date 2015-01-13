@@ -13,7 +13,7 @@
              } %>
 </section>
 
-<%= javascript_tag do %>
+<%content_for :javascript do%>
   $(function(){  
     SocialStream.Timeline.show();  
   });

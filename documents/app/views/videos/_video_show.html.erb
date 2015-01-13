@@ -10,7 +10,7 @@
   <% end %>
 <% end %> 
 
-<%= javascript_tag do %>
+<%content_for :javascript do%>
   $(function() {
     <% unless video.file_processing %>
       SocialStream.Video.show();
