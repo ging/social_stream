@@ -15,8 +15,9 @@
 		{text: "<%= tag.name %>", weight: <%= weight %>, url: "?tag=<%= tag.name %>"},    
 	<% end %>
 	{text: "", weight:0, url:""}
-  );
-  $(document).ready(function() {
-    $("#wordcloud").jQCloud(word_list);
-  });
+  );  
 </script>
+
+<%content_for :javascript do%>
+  $("#wordcloud").jQCloud(word_list);
+<%end%>

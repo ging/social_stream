@@ -20,7 +20,7 @@
   </article>
  
 
-  <%= javascript_tag do %>
+  <%content_for :javascript do%>
     $(function(){  
       SocialStream.Wall.show();  
     });

@@ -54,7 +54,7 @@ Gem::Specification.new do |s|
   # Background jobs
   s.add_runtime_dependency('resque','~> 1.23.0')
   # Modernizr.js javascript library
-  s.add_runtime_dependency('modernizr-rails', '~> 2.0.6')
+  s.add_runtime_dependency('modernizr-rails', '~> 2.7.1')
   # Sphinx search engine
   s.add_runtime_dependency('thinking-sphinx', '~> 2.0.8')
   # Syntactically Awesome Stylesheets
