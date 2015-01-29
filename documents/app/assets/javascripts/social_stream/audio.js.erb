@@ -10,11 +10,13 @@ SocialStream.Audio = (function(SS, $, undefined){
       $(this).jPlayer({
         ready: function () {
           $(this).jPlayer("setMedia", {
-            webma: container.attr("data-url-webma")
+            webma: container.attr("data-url-webma"),
+            mp3: container.attr("data-url-mp3"),
+            wav: container.attr("data-url-wav")
           });
         },
       preload: "none",
-      supplied: "webma",
+      supplied: "webma, mp3, wav",
       swfPath: container.attr('data-url-swfplayer'),
       cssSelectorAncestor: "#" + container.attr("id")
       })
