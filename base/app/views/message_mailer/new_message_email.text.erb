@@ -3,7 +3,7 @@
 <%=truncate_name(@message.sender.name)%> <%= t('mailboxer.message_mailer.has_sent_new.' + @receiver.subject.class.to_s.downcase, :receiver => @receiver.name) %>
 
 -----------------------------------------------
-<%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>
+"<%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>"
 -----------------------------------------------
 
 <%=t('message.look')%> at <%= t('site.name')%>: <%=conversation_url(@message.conversation)%>.
