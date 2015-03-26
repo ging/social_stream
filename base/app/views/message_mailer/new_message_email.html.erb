@@ -6,7 +6,7 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1><%=truncate_name(@message.sender.name)%> <%= t('mailboxer.message_mailer.has_sent_new.' + @receiver.subject.class.to_s.downcase, :receiver => @receiver.name) %></h1>
+    <h3><%=truncate_name(@message.sender.name)%> <%= t('mailboxer.message_mailer.has_sent_new.' + @receiver.subject.class.to_s.downcase, :receiver => @receiver.name) %></h3>
     <blockquote>
       <p>
         <%= raw @message.body %>
