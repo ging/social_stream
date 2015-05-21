@@ -1,6 +1,6 @@
 <% self.class.send :include, SubjectsHelper, NotificationsHelper %>
 <% locale_as @receiver.subject %>
-<%= truncate_name(@message.sender.name)%> <%= t('mailboxer.message_mailer.has_sent_reply.' + @receiver.subject.class.to_s.downcase, :receiver => @receiver.name) %>
+<%=truncate_name(@message.sender.name)%> <%= t('mailboxer.message_mailer.has_sent_reply.' + @receiver.subject.class.to_s.downcase, :receiver => @receiver.name) %>
 
 -----------------------------------------------
 "<%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>"

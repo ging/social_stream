@@ -1,0 +1,19 @@
+<% self.class.send :include, SubjectsHelper, NotificationsHelper %>
+<% locale_as @receiver.subject %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h3><%=truncate_name(@message.sender.name)%> <%= t('mailboxer.message_mailer.has_sent_reply.' + @receiver.subject.class.to_s.downcase, :receiver => @receiver.name) %></h3>
+    <blockquote>
+      <p>
+        <%= raw @message.body %>
+      </p>
+    </blockquote>
+    <p>
+      <%=t('message.look')%> at <%= t('site.name')%>: <%=conversation_url(@message.conversation)%>.
+    </p>
+  </body>
+</html>
