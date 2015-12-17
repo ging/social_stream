@@ -62,7 +62,12 @@ class User < ActiveRecord::Base
   
   # From devise
   def password_required?
-    !persisted? || !password.nil? || !password_confirmation.nil?
+    if SocialStream.devise_modules.include?(:cas_authenticatable)
+      #for CAS
+      return false
+    else
+      !persisted? || !password.nil? || !password_confirmation.nil?
+    end    
   end
 
   private
@@ -89,7 +94,7 @@ class User < ActiveRecord::Base
    # Overwrite devise default find method to support login with email,
     # presence ID and login
     def find_for_authentication(conditions)
-      if ( login = conditions[:email] ).present?
+      if ( login = (conditions[:email] || conditions["email"]) ).present?
         if login =~ /@/
           find_by_email(login)
         else
