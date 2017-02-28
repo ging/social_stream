@@ -95,9 +95,9 @@ namespace :workers do
       warn "SIGQUIT not supported"
     end
 
-    trap('TERM') { shutdown }
-    trap('KILL') { shutdown }
-    trap('SIGKILL') { shutdown }
+    #trap('TERM') { shutdown }
+    #trap('KILL') { shutdown }
+    #trap('SIGKILL') { shutdown }
 
     puts "=== Launching #{ENV['COUNT']} worker(s) on '#{ENV['QUEUE']}' queue(s) with PID #{Process.pid}"
 

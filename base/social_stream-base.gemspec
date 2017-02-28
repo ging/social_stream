@@ -52,7 +52,7 @@ Gem::Specification.new do |s|
   # Tagging
   s.add_runtime_dependency('acts-as-taggable-on','~> 2.4.1')
   # Background jobs
-  s.add_runtime_dependency('resque','~> 1.23.0')
+  s.add_runtime_dependency('resque','~> 1.27.0')
   # Modernizr.js javascript library
   s.add_runtime_dependency('modernizr-rails', '~> 2.7.1')
   # Sphinx search engine
