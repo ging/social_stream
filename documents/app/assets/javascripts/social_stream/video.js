@@ -10,15 +10,15 @@ SocialStream.Video = (function(SS, $, undefined){
       $(this).jPlayer({
         ready: function () {
           $(this).jPlayer("setMedia", {
-            webmv: container.attr("data-url-webm"),
+            //webmv: container.attr("data-url-webm"),
+            m4v:   container.attr("data-url-mp4"),
             flv:   container.attr("data-url-flv"),
-            mp4:   container.attr("data-url-mp4"),
             poster: container.attr("data-url-poster")
           });
         },
-      solution:"flash, html",
+      solution:"html, flash",
       preload: "none",
-      supplied: "webmv, flv, mp4",
+      supplied: "m4v, flv",
       swfPath: container.attr('data-url-swfplayer'),
       cssSelectorAncestor: "#" + container.attr("id")
       })
