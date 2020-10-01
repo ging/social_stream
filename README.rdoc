@@ -22,6 +22,8 @@ There is a {detailed guide in Social Stream's website}[http://social-stream.dit.
 
 Furthermore, {Social Stream's code documentation is available at rdoc.info}[http://rubydoc.info/gems/social_stream/frames]. Most of the stuff is in {the base gem}[http://rubydoc.info/gems/social_stream-base/frames].
 
+There is also a very good link which can help you understand Social Stream in more depth:  Link [https://ieeexplore.ieee.org/document/6476557/;jsessionid=FWXlWULGsT6KEcpA6F_vFB3HQeXIyAd8S7KXRf51OUzdG5G0Nz19!1796626962]
+
 = Discussion and contribution
 
 If you have any questions or issues regarding Social Stream usage, {Social Stream's Google group}[http://groups.google.com/group/social-stream] is a perfect place to share them. Other experienced users of Social Stream will be willing to help you. There exist also a {social-stream tag in StackOverflow}[http://stackoverflow.com/questions/tagged/social-stream]
